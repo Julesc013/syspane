@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.example.invalid/syspane/0.1.0/settings.schema.json",
+  "title": "SysPane settings experimental 0.1",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "revision": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]{0,19})$",
+      "description": "Unsigned decimal; semantic validator also enforces <= 18446744073709551615."
+    },
+    "sampling": {
+      "type": "object",
+      "properties": {
+        "resources_ms": {
+          "type": "integer",
+          "minimum": 100,
+          "maximum": 60000
+        },
+        "reconcile_ms": {
+          "type": "integer",
+          "minimum": 1000,
+          "maximum": 3600000
+        },
+        "max_workers": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 32
+        }
+      },
+      "required": [
+        "resources_ms",
+        "reconcile_ms",
+        "max_workers"
+      ],
+      "additionalProperties": false
+    },
+    "history": {
+      "type": "object",
+      "properties": {
+        "persistent": {
+          "type": "boolean"
+        },
+        "segment_bytes": {
+          "type": "integer",
+          "minimum": 4096,
+          "maximum": 1073741824
+        },
+        "segments": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100
+        }
+      },
+      "required": [
+        "persistent",
+        "segment_bytes",
+        "segments"
+      ],
+      "additionalProperties": false
+    },
+    "display": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "theme_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+        },
+        "reduced_motion": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "enabled",
+        "theme_id",
+        "reduced_motion"
+      ],
+      "additionalProperties": false
+    },
+    "privacy": {
+      "type": "object",
+      "properties": {
+        "remote_probes": {
+          "type": "boolean"
+        },
+        "export_enabled": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "remote_probes",
+        "export_enabled"
+      ],
+      "additionalProperties": false
+    },
+    "extensions": {
+      "type": "object",
+      "maxProperties": 64,
+      "propertyNames": {
+        "pattern": "^[a-z][a-z0-9_.-]{0,127}$"
+      }
+    }
+  },
+  "required": [
+    "schema_version",
+    "revision",
+    "sampling",
+    "history",
+    "display",
+    "privacy"
+  ],
+  "additionalProperties": false
+}

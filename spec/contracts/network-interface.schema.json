@@ -1,0 +1,272 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.example.invalid/syspane/0.1.0/network-interface.schema.json",
+  "title": "SysPane network-interface experimental 0.1",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "entity_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+    },
+    "kind": {
+      "enum": [
+        "physical",
+        "virtual",
+        "loopback",
+        "tunnel",
+        "unknown"
+      ]
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1024
+    },
+    "administrative": {
+      "enum": [
+        "enabled",
+        "disabled",
+        "unknown"
+      ]
+    },
+    "media": {
+      "enum": [
+        "connected",
+        "disconnected",
+        "unknown"
+      ]
+    },
+    "operational": {
+      "enum": [
+        "up",
+        "down",
+        "dormant",
+        "lower_layer_down",
+        "testing",
+        "not_present",
+        "unknown"
+      ]
+    },
+    "addresses": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "family": {
+                "const": "ipv4"
+              },
+              "address": {
+                "type": "string",
+                "format": "ipv4"
+              },
+              "prefix_length": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 32
+              },
+              "readiness": {
+                "enum": [
+                  "preferred",
+                  "tentative",
+                  "deprecated",
+                  "duplicate",
+                  "unknown"
+                ]
+              },
+              "zone": {
+                "type": "null"
+              }
+            },
+            "required": [
+              "family",
+              "address",
+              "prefix_length",
+              "readiness",
+              "zone"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "family": {
+                "const": "ipv6"
+              },
+              "address": {
+                "type": "string",
+                "format": "ipv6"
+              },
+              "prefix_length": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 128
+              },
+              "readiness": {
+                "enum": [
+                  "preferred",
+                  "tentative",
+                  "deprecated",
+                  "duplicate",
+                  "unknown"
+                ]
+              },
+              "zone": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 256,
+                    "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "family",
+              "address",
+              "prefix_length",
+              "readiness",
+              "zone"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      },
+      "maxItems": 1024
+    },
+    "gateways": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 256
+      },
+      "maxItems": 256
+    },
+    "resolvers": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 256
+      },
+      "maxItems": 256
+    },
+    "assessments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "family": {
+            "enum": [
+              "ipv4",
+              "ipv6"
+            ]
+          },
+          "source_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+          },
+          "classification": {
+            "enum": [
+              "disconnected",
+              "link_local",
+              "local",
+              "internet",
+              "unknown"
+            ]
+          },
+          "observed_at": {
+            "type": "string",
+            "format": "date-time",
+            "maxLength": 64
+          }
+        },
+        "required": [
+          "family",
+          "source_id",
+          "classification",
+          "observed_at"
+        ],
+        "additionalProperties": false
+      },
+      "maxItems": 32
+    },
+    "transmit_bps": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]{0,19})$",
+          "description": "Unsigned decimal; semantic validator also enforces <= 18446744073709551615."
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "receive_bps": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]{0,19})$",
+          "description": "Unsigned decimal; semantic validator also enforces <= 18446744073709551615."
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "source_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 256,
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+      },
+      "maxItems": 32
+    },
+    "generation": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]{0,19})$",
+      "description": "Unsigned decimal; semantic validator also enforces <= 18446744073709551615."
+    },
+    "extensions": {
+      "type": "object",
+      "maxProperties": 64,
+      "propertyNames": {
+        "pattern": "^[a-z][a-z0-9_.-]{0,127}$"
+      }
+    }
+  },
+  "required": [
+    "schema_version",
+    "entity_id",
+    "kind",
+    "name",
+    "administrative",
+    "media",
+    "operational",
+    "addresses",
+    "gateways",
+    "resolvers",
+    "assessments",
+    "transmit_bps",
+    "receive_bps",
+    "source_ids",
+    "generation"
+  ],
+  "additionalProperties": false
+}

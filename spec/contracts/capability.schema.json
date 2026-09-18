@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.example.invalid/syspane/0.1.0/capability.schema.json",
+  "title": "SysPane capability experimental 0.1",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "profile_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+    },
+    "capabilities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+          },
+          "implemented": {
+            "type": "boolean"
+          },
+          "qualification": {
+            "enum": [
+              "not_qualified",
+              "qualified",
+              "failed",
+              "inconclusive"
+            ]
+          },
+          "availability": {
+            "enum": [
+              "available",
+              "unavailable",
+              "denied",
+              "unknown"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "maxLength": 2048
+          }
+        },
+        "required": [
+          "id",
+          "implemented",
+          "qualification",
+          "availability",
+          "reason"
+        ],
+        "additionalProperties": false
+      },
+      "maxItems": 2048
+    },
+    "environment": {
+      "type": "object",
+      "maxProperties": 64,
+      "additionalProperties": {
+        "type": "string",
+        "maxLength": 2048
+      }
+    },
+    "extensions": {
+      "type": "object",
+      "maxProperties": 64,
+      "propertyNames": {
+        "pattern": "^[a-z][a-z0-9_.-]{0,127}$"
+      }
+    }
+  },
+  "required": [
+    "schema_version",
+    "profile_id",
+    "capabilities",
+    "environment"
+  ],
+  "additionalProperties": false
+}

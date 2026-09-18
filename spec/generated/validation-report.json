@@ -1,0 +1,716 @@
+{
+  "format": "syspane-delivery-validation/0.1.0",
+  "status": "pass",
+  "started_at": "2026-09-17T12:18:46.261680+00:00",
+  "finished_at": "2026-09-17T12:18:50.677875+00:00",
+  "scope": "specification_tooling_synthetic_contracts_and_header_syntax_only",
+  "environment": {
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.41",
+    "python": "3.13.5 (main, Jul 15 2026, 20:25:40) [GCC 14.2.0]",
+    "dependencies": {
+      "jsonschema": "4.26.0",
+      "referencing": "0.37.0",
+      "attrs": "26.1.0",
+      "jsonschema-specifications": "2025.9.1",
+      "rpds-py": "2026.5.1",
+      "PyYAML": "6.0.3"
+    }
+  },
+  "tool_tests": {
+    "run": 42,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "records": [
+      {
+        "test": "test_specctl.BundleTests.test_bootstrap_apply_idempotent",
+        "outcome": "pass"
+      },
+      {
+        "test": "test_specctl.BundleTests.test_bootstrap_conflict_no_partial_writes",
+        "outcome": "pass"
+      },
+      {
+        "test": "test_specctl.BundleTests.test_bootstrap_preview_no_writes",
+        "outcome": "pass"
+      },
+      {
+        "test": "test_specctl.BundleTests.test_bootstrap_symlink_parent_refused",
+        "outcome": "pass"
+      },
+      {
+        "test": "test_specctl.BundleTests.test_broken_link_fails",
+        "outcome": "pass"
+      },
+      {
+        "test": "test_specctl.BundleTests.test_bundle_structural_validation",
+        "outcome": "pass"
+      },
+      {
+        "test": "test_specctl.BundleTests.test_cli_invalid_root_nonzero",
+        "outcome": "pass"
+      },
+      {
+        "test": "test_specctl.BundleTests.test_context_budget_and_hashes",
+        "outcome": "pass"
+      },
+      {
+        "test": "test_specctl.BundleTests.test_context_changed_source_changes_packet",
+        "outcome": "pass"
+      },
+      {
+        "test": "test_specctl.BundleTests.test_context_mandatory_not_truncated",
+        "outcome": "pass"
+      },
+      {
+        "test": "test_specctl.BundleTests.test_context_unknown_topic",
+        "outcome": "pass"
+      },
+      {
+        "test": "test_specctl.BundleTests.test_duplicate_concept_id_fails",
+        "outcome": "pass"
+      },
+      {
+        "test": "test_specctl.BundleTests.test_fake_native_result_in_plan_fails",
+        "outcome": "pass"
+      },
+      {
+        "test": "test_specctl.BundleTests.test_full_fixture_conformance",
+        "outcome": "pass"
+      },
+      {
+        "test": "test_specctl.BundleTests.test_generated_detects_drift",
+        "outcome": "pass"
+      },
+      {
+        "test": "test_specctl.BundleTests.test_generated_is_deterministic",
+        "outcome": "pass"
+      },
+      {
+        "test": "test_specctl.BundleTests.test_impact_candidates",
+        "outcome": "pass"
+      },
+      {
+        "test": "test_specctl.BundleTests.test_integrity_success_and_tamper",
+        "outcome": "pass"
+      },
+      {
+        "test": "test_specctl.BundleTests.test_integrity_unexpected_file",
+        "outcome": "pass"
+      },
+      {
+        "test": "test_specctl.BundleTests.test_missing_requirement_test_fails",
+        "outcome": "pass"
+      },
+      {
+        "test": "test_specctl.BundleTests.test_output_cannot_overwrite_spec",
+        "outcome": "pass"
+      },
+      {
+        "test": "test_specctl.BundleTests.test_output_refuses_different_existing_file",
+        "outcome": "pass"
+      },
+      {
+        "test": "test_specctl.BundleTests.test_paths_reject_escape_and_windows_devices",
+        "outcome": "pass"
+      },
+      {
+        "test": "test_specctl.BundleTests.test_ready_is_not_authorized",
+        "outcome": "pass"
+      },
+      {
+        "test": "test_specctl.BundleTests.test_schema_unknown_ref_fails_offline",
+        "outcome": "pass"
+      },
+      {
+        "test": "test_specctl.BundleTests.test_symlink_rejected",
+        "outcome": "pass"
+      },
+      {
+        "test": "test_specctl.BundleTests.test_work_dependency_cycle_fails",
+        "outcome": "pass"
+      },
+      {
+        "test": "test_specctl.PureFunctions.test_dag_cycle_rejected",
+        "outcome": "pass"
+      },
+      {
+        "test": "test_specctl.PureFunctions.test_dag_unknown_rejected",
+        "outcome": "pass"
+      },
+      {
+        "test": "test_specctl.PureFunctions.test_dag_valid",
+        "outcome": "pass"
+      },
+      {
+        "test": "test_specctl.PureFunctions.test_evidence_pass_requires_execution",
+        "outcome": "pass"
+      },
+      {
+        "test": "test_specctl.PureFunctions.test_frontmatter_duplicate_rejected",
+        "outcome": "pass"
+      },
+      {
+        "test": "test_specctl.PureFunctions.test_frontmatter_json_flow",
+        "outcome": "pass"
+      },
+      {
+        "test": "test_specctl.PureFunctions.test_general_yaml_not_falsely_accepted",
+        "outcome": "pass"
+      },
+      {
+        "test": "test_specctl.PureFunctions.test_heading_anchors",
+        "outcome": "pass"
+      },
+      {
+        "test": "test_specctl.PureFunctions.test_json_duplicate_keys_rejected",
+        "outcome": "pass"
+      },
+      {
+        "test": "test_specctl.PureFunctions.test_metadata_unknown_extension_preserved",
+        "outcome": "pass"
+      },
+      {
+        "test": "test_specctl.PureFunctions.test_nested_duplicate_keys_rejected",
+        "outcome": "pass"
+      },
+      {
+        "test": "test_specctl.PureFunctions.test_nonfinite_rejected",
+        "outcome": "pass"
+      },
+      {
+        "test": "test_specctl.PureFunctions.test_uint64_maximum",
+        "outcome": "pass"
+      },
+      {
+        "test": "test_specctl.PureFunctions.test_uint64_overflow",
+        "outcome": "pass"
+      },
+      {
+        "test": "test_specctl.PureFunctions.test_unimplemented_capability_not_qualified",
+        "outcome": "pass"
+      }
+    ],
+    "log": "generated/tooling-tests.txt"
+  },
+  "structural_and_schema_validation": {
+    "status": "pass",
+    "scope": "specification_and_tooling_only",
+    "counts": {
+      "files": 143,
+      "concepts": 55,
+      "requirements": 112,
+      "planned_tests": 42,
+      "work_units": 24
+    },
+    "errors": [],
+    "warnings": [
+      "Specification checks do not qualify native SysPane behaviour or activate AIDE."
+    ],
+    "full_schemas": "executed",
+    "schema_results": {
+      "status": "pass",
+      "schema_count": 12,
+      "fixture_count": 31,
+      "results": [
+        {
+          "path": "fixtures/valid/observation-connected.json",
+          "expected": "valid",
+          "actual": "valid",
+          "pass": true,
+          "diagnostics": []
+        },
+        {
+          "path": "fixtures/valid/observation-retained-denied.json",
+          "expected": "valid",
+          "actual": "valid",
+          "pass": true,
+          "diagnostics": []
+        },
+        {
+          "path": "fixtures/valid/observation-unsupported.json",
+          "expected": "valid",
+          "actual": "valid",
+          "pass": true,
+          "diagnostics": []
+        },
+        {
+          "path": "fixtures/valid/observation-large-counter.json",
+          "expected": "valid",
+          "actual": "valid",
+          "pass": true,
+          "diagnostics": []
+        },
+        {
+          "path": "fixtures/invalid/counter-as-json-number.json",
+          "expected": "invalid",
+          "actual": "invalid",
+          "pass": true,
+          "diagnostics": [
+            "{'kind': 'uint64', 'data': 18446744073709551615} is not valid under any of the given schemas"
+          ]
+        },
+        {
+          "path": "fixtures/invalid/counter-overflow.json",
+          "expected": "invalid",
+          "actual": "invalid",
+          "pass": true,
+          "diagnostics": [
+            "uint64 overflow"
+          ]
+        },
+        {
+          "path": "fixtures/invalid/denied-without-error.json",
+          "expected": "invalid",
+          "actual": "invalid",
+          "pass": true,
+          "diagnostics": [
+            "None is not of type 'object'"
+          ]
+        },
+        {
+          "path": "fixtures/invalid/timestamp-without-offset.json",
+          "expected": "invalid",
+          "actual": "invalid",
+          "pass": true,
+          "diagnostics": [
+            "'2026-09-17T12:00:00' is not valid under any of the given schemas"
+          ]
+        },
+        {
+          "path": "fixtures/valid/snapshot.json",
+          "expected": "valid",
+          "actual": "valid",
+          "pass": true,
+          "diagnostics": []
+        },
+        {
+          "path": "fixtures/invalid/duplicate-entity.json",
+          "expected": "invalid",
+          "actual": "invalid",
+          "pass": true,
+          "diagnostics": [
+            "duplicate entity id"
+          ]
+        },
+        {
+          "path": "fixtures/invalid/dangling-relationship.json",
+          "expected": "invalid",
+          "actual": "invalid",
+          "pass": true,
+          "diagnostics": [
+            "dangling relationship"
+          ]
+        },
+        {
+          "path": "fixtures/invalid/unknown-observation-source.json",
+          "expected": "invalid",
+          "actual": "invalid",
+          "pass": true,
+          "diagnostics": [
+            "unknown observation source"
+          ]
+        },
+        {
+          "path": "fixtures/valid/settings.json",
+          "expected": "valid",
+          "actual": "valid",
+          "pass": true,
+          "diagnostics": []
+        },
+        {
+          "path": "fixtures/invalid/zero-interval.json",
+          "expected": "invalid",
+          "actual": "invalid",
+          "pass": true,
+          "diagnostics": [
+            "0 is less than the minimum of 100"
+          ]
+        },
+        {
+          "path": "fixtures/valid/scene.json",
+          "expected": "valid",
+          "actual": "valid",
+          "pass": true,
+          "diagnostics": []
+        },
+        {
+          "path": "fixtures/invalid/duplicate-widget.json",
+          "expected": "invalid",
+          "actual": "invalid",
+          "pass": true,
+          "diagnostics": [
+            "duplicate widget id"
+          ]
+        },
+        {
+          "path": "fixtures/invalid/negative-widget-width.json",
+          "expected": "invalid",
+          "actual": "invalid",
+          "pass": true,
+          "diagnostics": [
+            "-1 is less than the minimum of 32"
+          ]
+        },
+        {
+          "path": "fixtures/valid/theme.json",
+          "expected": "valid",
+          "actual": "valid",
+          "pass": true,
+          "diagnostics": []
+        },
+        {
+          "path": "fixtures/invalid/invalid-colour.json",
+          "expected": "invalid",
+          "actual": "invalid",
+          "pass": true,
+          "diagnostics": [
+            "'red' does not match '^#[0-9a-fA-F]{8}$'"
+          ]
+        },
+        {
+          "path": "fixtures/valid/command-preview.json",
+          "expected": "valid",
+          "actual": "valid",
+          "pass": true,
+          "diagnostics": []
+        },
+        {
+          "path": "fixtures/invalid/unknown-operation.json",
+          "expected": "invalid",
+          "actual": "invalid",
+          "pass": true,
+          "diagnostics": [
+            "{'op': 'shell.execute', 'target': 'widget:network', 'x': 48, 'y': 32} is not valid under any of the given schemas"
+          ]
+        },
+        {
+          "path": "fixtures/invalid/caller-forged-approval.json",
+          "expected": "invalid",
+          "actual": "invalid",
+          "pass": true,
+          "diagnostics": [
+            "Additional properties are not allowed ('approved' was unexpected)"
+          ]
+        },
+        {
+          "path": "fixtures/valid/capability-unqualified.json",
+          "expected": "valid",
+          "actual": "valid",
+          "pass": true,
+          "diagnostics": []
+        },
+        {
+          "path": "fixtures/valid/gap-event.json",
+          "expected": "valid",
+          "actual": "valid",
+          "pass": true,
+          "diagnostics": []
+        },
+        {
+          "path": "fixtures/invalid/gap-without-reason.json",
+          "expected": "invalid",
+          "actual": "invalid",
+          "pass": true,
+          "diagnostics": [
+            "'reason' is a required property",
+            "'lost_count' is a required property"
+          ]
+        },
+        {
+          "path": "fixtures/valid/evidence-not-run.json",
+          "expected": "valid",
+          "actual": "valid",
+          "pass": true,
+          "diagnostics": []
+        },
+        {
+          "path": "fixtures/valid/handoff.json",
+          "expected": "valid",
+          "actual": "valid",
+          "pass": true,
+          "diagnostics": []
+        },
+        {
+          "path": "fixtures/valid/network-multi-address.json",
+          "expected": "valid",
+          "actual": "valid",
+          "pass": true,
+          "diagnostics": []
+        },
+        {
+          "path": "fixtures/invalid/ipv4-invalid-prefix.json",
+          "expected": "invalid",
+          "actual": "invalid",
+          "pass": true,
+          "diagnostics": [
+            "{'family': 'ipv4', 'address': '192.0.2.10', 'prefix_length': 64, 'readiness': 'preferred', 'zone': None} is not valid under any of the given schemas"
+          ]
+        },
+        {
+          "path": "fixtures/valid/command-typed-setting.json",
+          "expected": "valid",
+          "actual": "valid",
+          "pass": true,
+          "diagnostics": []
+        },
+        {
+          "path": "fixtures/invalid/command-setting-wrong-type.json",
+          "expected": "invalid",
+          "actual": "invalid",
+          "pass": true,
+          "diagnostics": [
+            "{'op': 'settings.set', 'path': 'sampling.resources_ms', 'value': 'banana'} is not valid under any of the given schemas"
+          ]
+        }
+      ]
+    },
+    "native_tests_executed": 0
+  },
+  "context_route_smoke": [
+    {
+      "topic": "start",
+      "status": "pass",
+      "budget_characters": 42000,
+      "actual_characters": 33320,
+      "files_included": 8,
+      "omitted_optional": []
+    },
+    {
+      "topic": "network",
+      "status": "pass",
+      "budget_characters": 42000,
+      "actual_characters": 41389,
+      "files_included": 8,
+      "omitted_optional": [
+        "desktop/contract.md"
+      ]
+    },
+    {
+      "topic": "desktop",
+      "status": "pass",
+      "budget_characters": 42000,
+      "actual_characters": 40884,
+      "files_included": 9,
+      "omitted_optional": []
+    },
+    {
+      "topic": "windows",
+      "status": "pass",
+      "budget_characters": 42000,
+      "actual_characters": 37646,
+      "files_included": 8,
+      "omitted_optional": []
+    },
+    {
+      "topic": "linux",
+      "status": "pass",
+      "budget_characters": 42000,
+      "actual_characters": 34339,
+      "files_included": 8,
+      "omitted_optional": []
+    },
+    {
+      "topic": "macos",
+      "status": "pass",
+      "budget_characters": 42000,
+      "actual_characters": 34458,
+      "files_included": 8,
+      "omitted_optional": []
+    },
+    {
+      "topic": "editor",
+      "status": "pass",
+      "budget_characters": 42000,
+      "actual_characters": 36594,
+      "files_included": 8,
+      "omitted_optional": []
+    },
+    {
+      "topic": "aide",
+      "status": "pass",
+      "budget_characters": 42000,
+      "actual_characters": 36240,
+      "files_included": 8,
+      "omitted_optional": []
+    },
+    {
+      "topic": "security",
+      "status": "pass",
+      "budget_characters": 42000,
+      "actual_characters": 35090,
+      "files_included": 8,
+      "omitted_optional": []
+    },
+    {
+      "topic": "release",
+      "status": "pass",
+      "budget_characters": 42000,
+      "actual_characters": 32591,
+      "files_included": 8,
+      "omitted_optional": []
+    },
+    {
+      "topic": "telemetry",
+      "status": "pass",
+      "budget_characters": 42000,
+      "actual_characters": 38991,
+      "files_included": 8,
+      "omitted_optional": [
+        "telemetry/workshop.md"
+      ]
+    }
+  ],
+  "frontmatter_cross_parser": {
+    "parser": "PyYAML 6.0.3",
+    "concepts": 55,
+    "outcome": "pass",
+    "scope": "same metadata parsed with general YAML; not a full independent OKF conformance certification"
+  },
+  "header_syntax": [
+    {
+      "language": "c",
+      "standard": "c99",
+      "compiler": "cc (Debian 14.2.0-19) 14.2.0",
+      "outcome": "pass",
+      "scope": "declaration syntax only; no native runtime, linking or ABI qualification"
+    },
+    {
+      "language": "c++",
+      "standard": "c++17",
+      "compiler": "c++ (Debian 14.2.0-19) 14.2.0",
+      "outcome": "pass",
+      "scope": "declaration syntax only; no native runtime, linking or ABI qualification"
+    }
+  ],
+  "tested_input_sha256": {
+    "README.md": "ff180e4d0eaf86a8f116656ce73e7dda0b7e3c6eba0d5265fd49833a4b9b6480",
+    "architecture/processes.md": "e4c45012a3e35a0b1eaba9a95441bfec0d2a86d8325ce2236d2f91fa52a88889",
+    "architecture/scheduling.md": "c2120b66c70f65baa99c6ed2e4e81e7c40c991c759fe77c82c3f2cd7b5ddb364",
+    "architecture/state.md": "109d5426e5a240bac26e0bb811cc8bb70978e49fbbd6582b4df974fca7bfa5fb",
+    "architecture/system.md": "16358f23f897018a1e27eb31e17ec8a2d13ce5a56e0b1c5dd759ccb016d7f090",
+    "assurance/desktop-oracle.md": "859db6edc12102caa5f9eca35736bf477745a5f7bbf51db79870b8deff70ba55",
+    "assurance/performance.md": "c4e5f0c530dc87b069b5a9118f5714ce2b14bfcfa6e6fb5053f6742cc419aabe",
+    "assurance/release.md": "e2fe9b02f9caa2ba2334ef3e81c45433a0af544b742ff731275a844c5233ef1d",
+    "assurance/security.md": "fddda97fe13e1441274f68f01e4c24ed7d638cbe7764e8c327118518ec4a1d96",
+    "assurance/testing.md": "1ef250b8c08cc42da623e5cf2b8fbb6e5ec748f12c112611701821f6a3fa6724",
+    "assurance/tests.json": "4dcfc5c428e13b4a2634645ed3270b008ac73887583621aff58c44236ec085bc",
+    "bootstrap/files.json": "296bd63fc09985a28bc6af3268eefb45f295adb3bc2b56bf711d0364c243cbdc",
+    "contracts/capability.schema.json": "b2100d0d19e64560156810c65caf97041f70f22894b068356e3ba1f27e9cd7ac",
+    "contracts/command.schema.json": "5fe5cfa40185ea5bec1a06169954461ee2296324a613ceda2f21ddb6c4460f3b",
+    "contracts/commands.md": "881b0cd5c317cd8860a854398c49a7e5db32b88bcb5c55cae6b018e5c59edb9d",
+    "contracts/common.schema.json": "2ce55216670abacfa570da8a910e0c7baecfe6288794507ec87f8e7852c5aa07",
+    "contracts/event.schema.json": "4f65ae6390ba91ffab387c07893cda76ca6bc59d2c139b97d762e54953d2fcb1",
+    "contracts/evidence.schema.json": "5605221f3a8d8a6d8a2b0355015131b843762ffb2a14c7e6e2735a75742a183e",
+    "contracts/handoff.schema.json": "8fc3569c159d9efd52378f76f9ab59451f2158ebf81d77d35b6f9e82fd9570d2",
+    "contracts/network-domain.md": "3e0e012acb9dd51e490c6971d344451267d7ecfa522553da6af26d3f50f949c2",
+    "contracts/network-interface.schema.json": "67d2feeb73e5971e0fc421ce1cea7cc35fd8a005ec3fa9a7ffe5cc41a05cb57d",
+    "contracts/observation.schema.json": "00477462eb4807e2d7ea87995064fca7c6f90c35a3efe11b53d289812750fe4e",
+    "contracts/protocol.md": "2a8686a3df1a948297f765808c2ce3e6a42577c9aed8cb3b8d59ab981af4a565",
+    "contracts/scene.schema.json": "7d8696af5a5a17c96ea67a9aa333b6a3cba5de0b770a3c1be91783ab9b3ea0fd",
+    "contracts/sdk.md": "a7a675c37fff617338da37f33fbd66088d836987e1444cbe288b6115bfd0be30",
+    "contracts/settings.schema.json": "974ca9b20f03d58368ea3272a77f2902900476a91db698e732b068a90784905d",
+    "contracts/snapshot.schema.json": "2f1a13d327a86a63cb82c63d50832528e074333ac3222a7caa38c12b85f94c7a",
+    "contracts/syspane-api.h": "8cf079da9a1cbe94da480756d1d24335a58b124e5a66ce668e7ac682bd7e3474",
+    "contracts/theme.schema.json": "df532cad29ce30193f43f6495ff4457a1e1ca1dd74533d914b73109dd16ad93d",
+    "decisions/001-native-product.md": "f6059b312a4c2242c0d1f9c1bf55d6fb427836d33ac6a0dc149bfe87d9b9daa5",
+    "decisions/002-canonical-bundle.md": "6dd871ee3a48fdae8f6a687875c34cf428f02974548b375d24f274e9754f47bc",
+    "decisions/003-okf-profile.md": "ab8ef08d14ec68869793b6ab5b9c65051d4785c8a44c7c548b685aba950399f0",
+    "decisions/004-native-adapters.md": "13f7ddf4f5949ae5ba5cbc613f3d3e14e3c3227fd30834295b0b6ff4ce39a11f",
+    "decisions/005-surface-isolation.md": "d9f447bd773e39d9582ee4741459b82d4182e14f1a4ee466003535cc28300a9b",
+    "decisions/006-transactions.md": "3d20a9e9effac887eb66ff643eabd5ad9af8edca854a32a6982eaa2d6254c032",
+    "decisions/007-evidence.md": "d22fc0752024bdc0dd86ef2552a8c2e89f87291e4c77dd30a320d1da5e23f901",
+    "decisions/008-aide-boundary.md": "6c983a1ae8e602f57ceb9b7c67c940689baa5f9a4bbfa5396229d7cf9ef3b936",
+    "delivery/current-state.md": "b707ae0a4ec87c94396d9b8eb56e7e39d327dfe1e71c936ec38ea09a89552bfb",
+    "delivery/open-questions.md": "622e8d36f23816d36ce612d83d58c1b9ee15762085e262cf0b86369d22a1b8a5",
+    "delivery/roadmap.md": "76a41a003480accb4718258f622b9819e5b3f8da6f892e0b0eb0c38476a5c699",
+    "delivery/work-units.json": "b3c3235ecf4fc7cedd21db47f1ef3565b9c071cf3f977f465953b18d0dc19d11",
+    "desktop/contract.md": "4e75695d427c6061035d2acb88278470bd6c8dcb9af2257af38c11ccdcfe6762",
+    "desktop/linux.md": "179576004b0b709f238231bd829f1e7fd620d7fcfa449f579b5907d38337ae5f",
+    "desktop/macos.md": "3d95e4d52d1dd985b6baf8a1bb5584a118a2da69536bf0e2c0c7d1b8abbecc9d",
+    "desktop/rendering.md": "406d557c4e614e1d47d14b501503ebc84852f1863c982157b545277dcc3517f4",
+    "desktop/windows.md": "c1d344bfdc9e5c43e075c53b2283e37d74a6733c5d186c74ab35a7b33ac25797",
+    "experience/accessibility.md": "35266fae318c996acc37b9c484180f91dadcdd64d4956022422eb52409b9e3b3",
+    "experience/control-surfaces.md": "f632daca9aabf4a10497995fe482db3f1ceb06e90421f7079fc8d061c2130e49",
+    "experience/editor.md": "3fdda7b467cc8a1f9c9e9dde4a74dce0289321dd2bdf9cc5c7fb800f8d0860bb",
+    "experience/scene-theme.md": "ee3b9ef799bfa9989040a07be9b357ff45ad69ff21e721a6bd11b25f19eca14a",
+    "experience/settings-registry.json": "aa20a086ba76298869031bbe3653a644c475c41c2da2e5fa6956126ce2f52550",
+    "experience/settings.md": "d54a9212b40df9ae04ca3b93ba4a7808c5625a1b6f7b51a5f1b79e8db230157e",
+    "fixtures/catalog.json": "ba848bbb482bd58d020035666d1f50a1c933e404240e8b19dc14b2929a29dae8",
+    "fixtures/invalid/caller-forged-approval.json": "7ea7869ad39099e04d7cbad0a2c438e0ca9cd5382767aa06fba46143749021ae",
+    "fixtures/invalid/command-setting-wrong-type.json": "3cca278dd626ebed39cc9addd2e59dedcc23f67dcdaf019712ac5bbe2c2673bb",
+    "fixtures/invalid/counter-as-json-number.json": "7ea80b0972cc72616bad14bb618372a2eb071d1f928b3c1ab9b0b56a54e4446e",
+    "fixtures/invalid/counter-overflow.json": "5b8738df02d7cbd8bd4a87ed9e68b3c77231de010755d8694cbf4cabcd4cd2bc",
+    "fixtures/invalid/dangling-relationship.json": "04df66d4ca480ee7fcdcb2667be09e1c6040bce6a4fc4076504f72a2c1001e15",
+    "fixtures/invalid/denied-without-error.json": "1a20eb9c0a1cedbca8d92ed13bc02e2d9a9ab516f880ca0ac86e4858fb14cb5c",
+    "fixtures/invalid/duplicate-entity.json": "3d386f3b282243f352bb25f3e4b98c17059d4cbbc2e12656ca2f34c4ea3e253f",
+    "fixtures/invalid/duplicate-widget.json": "5e9341f8713562c1d0f3527ce3b83fb193f6f360b84a37a79cc245723185a7ce",
+    "fixtures/invalid/gap-without-reason.json": "0b0413ab89d4ded20ad951f48bc2b63e7420c145fb8248a7ce845f85aa66e81d",
+    "fixtures/invalid/invalid-colour.json": "c7624981a633eaf240d5e6054b3e5b7a778a0df1fdb38927eea1a37fbda91b9f",
+    "fixtures/invalid/ipv4-invalid-prefix.json": "22df8bc7c16d56f7f9a39dd23e13c7fbbb2795949e7a88e196a8e3c42e82b9cd",
+    "fixtures/invalid/negative-widget-width.json": "4502ab96d2f51de223274e5fa7c0b358fed45e3bb4a20f33d5a1dbe8301deccc",
+    "fixtures/invalid/timestamp-without-offset.json": "b9a7ee7465e58a16dfcefa69a3ecb3e5c7d402a232bf861aa4d7e222bb0f4872",
+    "fixtures/invalid/unknown-observation-source.json": "8215a7ba197d852084b97137a3581176e564f6dec5275cb8ddcbd5a595a6e535",
+    "fixtures/invalid/unknown-operation.json": "20a7a446c901814962bc3cb1a0a43d3b241ecda58be94ae6332287f8fe3e441d",
+    "fixtures/invalid/zero-interval.json": "53643eafdcd4e66a97f132e727d5221a4ca4ff95a8ed57a5f5724f2892232fcf",
+    "fixtures/replay/network.ndjson": "d59b69cc7724cc717ca9872459aaeacb89aeb4e8070e67bc7bc6e0dd6d09c0ba",
+    "fixtures/valid/capability-unqualified.json": "935b029a79e846766c7544059904e24bb0895a0b1705aefc5c42510f777761d6",
+    "fixtures/valid/command-preview.json": "33b2cbb4f58846b7e351a2e0181c89167c1ff9591b38c1cd4307928c5a4b89e6",
+    "fixtures/valid/command-typed-setting.json": "3fd26c24941d59e3ea187e9d01a6ff7b3601ac13151f837ac5d5cc344cccf8fc",
+    "fixtures/valid/evidence-not-run.json": "b1973bb9ba1a4827599f6eaf94ebc3be920e4d1220190035369c6006dab09cbe",
+    "fixtures/valid/gap-event.json": "9cb556ff82e9907d0b2a77d714aeb5e221d206f23a2560ca2adbc7735b4dee94",
+    "fixtures/valid/handoff.json": "fa3e9666f7c6e52a55d2fa7280df684203e6b7e241d025ce306473f772598e73",
+    "fixtures/valid/network-multi-address.json": "9c1db20855948bb82361ebbebfb49cf19bc0fb7ec491ef6ad9a7f094f149929a",
+    "fixtures/valid/observation-connected.json": "489f42b54135367496571ffb1cbbcc6a700575753833064b1e0cdcb6c490badb",
+    "fixtures/valid/observation-large-counter.json": "0293717d3e640e03ee8069b77925cebc1910003fe0e6d6bb4caca3a80d6e55c4",
+    "fixtures/valid/observation-retained-denied.json": "1a1d8a8197f13d710a54c9d246da4f56c4ab8b36e33710d16a8a182e4386acb5",
+    "fixtures/valid/observation-unsupported.json": "be11f71d2e94c5dc611adc872d2e7796f7b736c892d14bd7587687b986d52c25",
+    "fixtures/valid/scene.json": "91a3f911019e08369238ab00b766c88313fbdb2f20dc3476a5eb9baff0b0d4ac",
+    "fixtures/valid/settings.json": "cda7f33db59deee5adacf15ce1ad3129c3cc64e4c64c278a2ef2379d5eb5bb54",
+    "fixtures/valid/snapshot.json": "f60782cc583b94840a0dd89f8670e5298fa5c208a74774f280bcaaf078cca585",
+    "fixtures/valid/theme.json": "e749703c39e7e5f6a7109a39463565cf6c894cb64799ba27bd4e293cf7b200fb",
+    "foundation/authority.md": "18184c4974aab4095587b8269ca639f02fd5741060139b284e83906eb94f9e5f",
+    "foundation/okf-profile.md": "fd21de84e727ca860f3e3cd42bd8514ce88d2fe306d6fff3e9442ea0c06eba1d",
+    "foundation/repository.md": "d12f747aa0bb554b9fc433a6a27e97df4dd01920103ef6a168f3b2819580bd27",
+    "foundation/terminology.md": "1166ab27efcb2484739a835a38cac0441c18c843d903fcd05b4f54647c35b343",
+    "governance/agents.md": "0082995be113d88af7aacc0931c73055df8f155e3eea731b051e919f5d84a2c8",
+    "governance/aide-binding.proposed.json": "cd78bed5dad508636128e996423fe80dfe6fd3b0446bca9fb361ff4f473a125f",
+    "governance/aide.md": "467e627a7dbe9b859c15fe79d148d8bd63dadfb31d22877d7a7c0f88709588be",
+    "governance/change-control.md": "fe7e459b094b4aa22b7a6016497a4bc19e1104b6ded40f6d580b32c013108b74",
+    "governance/context.md": "ede6b9096f1ecb9a66d2f00d4681c54caa40d416d54c2c06495805187a9913dd",
+    "governance/docs-map.json": "9e7ede08d27cf7f7b50a0221e2045d43a9a9caeddf608583700a8f3937c153ae",
+    "governance/documentation.md": "1ad4d7540a38cb6f7300b66b93f3659949a5a2e58c835f0171c5f831594d276c",
+    "log.md": "455532ba48f197fe283ecb61d257972f0c83db684a2a92dbc6a309cda2b12d2b",
+    "manifest.json": "99def690c64440c5952de54df5217549bd69794781176e8b8851dc95ea33f73d",
+    "product/charter.md": "12e5c9c472bf5a3453f433f6562077bdfd9bdfb99ccbd078c3d1c45295a1dda5",
+    "product/intake.json": "acc4a964629157c97a39e84c7b2b164cac41f30880479debdce241c304773b5a",
+    "product/platforms.md": "946b17abcedbdce33306e60d2b8b74e2f390b18a69ca528422ebbc8116fb9f3e",
+    "references/design-brief.md": "5249dc1d61fb6a74332b71a5bf87f9d8b28d642b04181fbb7f5b38f05105b2f0",
+    "references/disposition.md": "6c6ba601cb2c3fca501ba521c130476c8d5475b2d0600398f53219c94ff1c266",
+    "references/sources.json": "9183566da07bf00a7d20b814f6e3a0a143d05d235cedef7aea3046dc7ebff19b",
+    "requirements/catalog.json": "e7b894a073c6104d029390e391e5d639b65216d6e59144e4afc140ef6f9b6018",
+    "telemetry/devices.md": "6e206443e77d04d3574915e84623e1ffd6f000b27aacb5a230c9864014f8f913",
+    "telemetry/history.md": "c0c63dd7bb6cedf64d0f95a1a2aaaf99389acf1bc01bd24ae4971e4bd26264ea",
+    "telemetry/network.md": "58d50a7c0084edc97317299fe18f59849a0878b802efebeddace34c8f1ff8569",
+    "telemetry/resources.md": "619a3222470cfbb441a7500e67b1231a506be6593ee220e7d5ed72d54bc92898",
+    "telemetry/storage.md": "fe04a967975ebe916a9f8957b8d49fe2b22e8d9a825e6869781b912cb5c681bc",
+    "telemetry/workshop.md": "7e45c2de0ca9b99009b31a2fc1a933ba676b6921aebd67a603022b113d31a4f7",
+    "tools/requirements.txt": "e9c4dccbd1071c2a9048819de9fbde7f4a90555ea0b77641ab441e3837b86fad",
+    "tools/routes.json": "23cace8b99e953d4e94a38679037444275d217f3d2962558ce23b8ad7276080a",
+    "tools/specctl.py": "a8b606654bdbe9d730f9efbf9cc3a5c306b3f175ed57229e641b5bd0216495ee",
+    "tools/tests/test_specctl.py": "58a72bd90052a06f5b0117b8c080f9c8321068da0159d50a48af778ae94cba44",
+    "tools/usage.md": "d4a21ff03438344249cb571e3fbe3ffaaf2a75f393ba85e4da12afb595df94f2"
+  },
+  "native_syspane_tests_executed": 0,
+  "github_mutations": 0,
+  "human_review_attested": false,
+  "aide_consumer_admitted": false,
+  "limitations": [
+    "No SysPane application implementation or native desktop, compatibility, performance or accessibility qualification.",
+    "Test plans are not execution evidence. Metadata/schemas remain proposed experimental 0.1 contracts.",
+    "Tooling exercised in the stated Linux/Python environment, not on every Python/OS combination.",
+    "Context budgets count characters, not provider tokens.",
+    "Integrity hashes detect changes but do not authenticate author identity.",
+    "Bootstrap targets a trusted quiescent repository and is not a hostile-filesystem security boundary."
+  ]
+}

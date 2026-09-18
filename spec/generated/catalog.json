@@ -1,0 +1,579 @@
+{
+  "version": "0.1.0",
+  "generated": true,
+  "owner": "tools/specctl.py generate",
+  "concepts": [
+    {
+      "id": "SP-START",
+      "path": "README.md",
+      "title": "SysPane specification bundle",
+      "description": "Start here to adopt, validate and use this repository-native specification.",
+      "requires": [],
+      "sha256": "ff180e4d0eaf86a8f116656ce73e7dda0b7e3c6eba0d5265fd49833a4b9b6480"
+    },
+    {
+      "id": "SP-PROCESSES",
+      "path": "architecture/processes.md",
+      "title": "Process composition and failure containment",
+      "description": "Separate the Windows desktop surface where shell and graphics behaviour require isolation.",
+      "requires": [
+        "SP-ARCHITECTURE"
+      ],
+      "sha256": "e4c45012a3e35a0b1eaba9a95441bfec0d2a86d8325ce2236d2f91fa52a88889"
+    },
+    {
+      "id": "SP-SCHEDULER",
+      "path": "architecture/scheduling.md",
+      "title": "Acquisition planning, reconciliation and backpressure",
+      "description": "Share collection work, use notifications where suitable and report evidence loss.",
+      "requires": [
+        "SP-ARCHITECTURE"
+      ],
+      "sha256": "c2120b66c70f65baa99c6ed2e4e81e7c40c991c759fe77c82c3f2cd7b5ddb364"
+    },
+    {
+      "id": "SP-STATE",
+      "path": "architecture/state.md",
+      "title": "State store, identity and observation semantics",
+      "description": "Represent typed facts with orthogonal support, acquisition, freshness and presence.",
+      "requires": [
+        "SP-SCHEDULER"
+      ],
+      "sha256": "109d5426e5a240bac26e0bb811cc8bb70978e49fbbd6582b4df974fca7bfa5fb"
+    },
+    {
+      "id": "SP-ARCHITECTURE",
+      "path": "architecture/system.md",
+      "title": "System architecture and dependency contracts",
+      "description": "Compose a portable semantic engine with native collection, interfaces and desktop hosts.",
+      "requires": [
+        "SP-CHARTER",
+        "SP-AUTHORITY"
+      ],
+      "sha256": "16358f23f897018a1e27eb31e17ec8a2d13ce5a56e0b1c5dd759ccb016d7f090"
+    },
+    {
+      "id": "SP-ORACLE",
+      "path": "assurance/desktop-oracle.md",
+      "title": "Independent desktop persistence oracle",
+      "description": "Observe real pixels over time instead of trusting window flags.",
+      "requires": [
+        "SP-DESKTOP",
+        "SP-TESTING"
+      ],
+      "sha256": "859db6edc12102caa5f9eca35736bf477745a5f7bbf51db79870b8deff70ba55"
+    },
+    {
+      "id": "SP-PERFORMANCE",
+      "path": "assurance/performance.md",
+      "title": "Performance, energy and freshness budgets",
+      "description": "Measure useful work and end-to-end latency without zero-overhead claims.",
+      "requires": [
+        "SP-SCHEDULER",
+        "SP-RENDERING",
+        "SP-TESTING"
+      ],
+      "sha256": "c4e5f0c530dc87b069b5a9118f5714ce2b14bfcfa6e6fb5053f6742cc419aabe"
+    },
+    {
+      "id": "SP-RELEASE",
+      "path": "assurance/release.md",
+      "title": "Build, release, servicing and deployment",
+      "description": "Make releases reproducible, attributable and honest about support.",
+      "requires": [
+        "SP-TESTING",
+        "SP-SECURITY"
+      ],
+      "sha256": "e2fe9b02f9caa2ba2334ef3e81c45433a0af544b742ff731275a844c5233ef1d"
+    },
+    {
+      "id": "SP-SECURITY",
+      "path": "assurance/security.md",
+      "title": "Security, privacy and operational safety",
+      "description": "Constrain collection and automation according to actual trust boundaries.",
+      "requires": [
+        "SP-AUTHORITY"
+      ],
+      "sha256": "fddda97fe13e1441274f68f01e4c24ed7d638cbe7764e8c327118518ec4a1d96"
+    },
+    {
+      "id": "SP-TESTING",
+      "path": "assurance/testing.md",
+      "title": "Testing and evidence model",
+      "description": "Distinguish planned tests, executed checks and release acceptance.",
+      "requires": [
+        "SP-AUTHORITY",
+        "SP-PROTOCOL"
+      ],
+      "sha256": "1ef250b8c08cc42da623e5cf2b8fbb6e5ec748f12c112611701821f6a3fa6724"
+    },
+    {
+      "id": "SP-COMMANDS",
+      "path": "contracts/commands.md",
+      "title": "Commands, transactions and activation",
+      "description": "Unify editing, native settings, CLI and policy through validated operations.",
+      "requires": [
+        "SP-STATE"
+      ],
+      "sha256": "881b0cd5c317cd8860a854398c49a7e5db32b88bcb5c55cae6b018e5c59edb9d"
+    },
+    {
+      "id": "SP-NETWORK-CONTRACT",
+      "path": "contracts/network-domain.md",
+      "title": "Network domain record and schema extension process",
+      "description": "Make multiple addresses and assessments explicit without flattening provenance.",
+      "requires": [
+        "SP-NETWORK",
+        "SP-PROTOCOL"
+      ],
+      "sha256": "3e0e012acb9dd51e490c6971d344451267d7ecfa522553da6af26d3f50f949c2"
+    },
+    {
+      "id": "SP-PROTOCOL",
+      "path": "contracts/protocol.md",
+      "title": "Protocol, schema ownership and wire rules",
+      "description": "Define bounded language-independent records without forcing a runtime dependency.",
+      "requires": [
+        "SP-STATE",
+        "SP-COMMANDS"
+      ],
+      "sha256": "2a8686a3df1a948297f765808c2ce3e6a42577c9aed8cb3b8d59ab981af4a565"
+    },
+    {
+      "id": "SP-SDK",
+      "path": "contracts/sdk.md",
+      "title": "Extension SDK and embedding boundaries",
+      "description": "Make extensions useful without making the trusted application an arbitrary code host.",
+      "requires": [
+        "SP-PROTOCOL",
+        "SP-SECURITY"
+      ],
+      "sha256": "a7a675c37fff617338da37f33fbd66088d836987e1444cbe288b6115bfd0be30"
+    },
+    {
+      "id": "SP-ADR-001",
+      "path": "decisions/001-native-product.md",
+      "title": "Own the complete native vertical stack",
+      "description": "Decision proposal: No Desktop Info or other display engine is a required component.",
+      "requires": [
+        "SP-CHARTER",
+        "SP-DESKTOP"
+      ],
+      "sha256": "f6059b312a4c2242c0d1f9c1bf55d6fb427836d33ac6a0dc149bfe87d9b9daa5"
+    },
+    {
+      "id": "SP-ADR-002",
+      "path": "decisions/002-canonical-bundle.md",
+      "title": "Keep spec, docs and source distinct",
+      "description": "Decision proposal: Root spec/ owns intent/contracts; docs/ owns audience-oriented explanation; source/ owns implementation.",
+      "requires": [
+        "SP-REPOSITORY",
+        "SP-DOCS"
+      ],
+      "sha256": "6dd871ee3a48fdae8f6a687875c34cf428f02974548b375d24f274e9754f47bc"
+    },
+    {
+      "id": "SP-ADR-003",
+      "path": "decisions/003-okf-profile.md",
+      "title": "Use pinned OKF v0.2 with a local authoring profile",
+      "description": "Decision proposal: Use Markdown, YAML-frontmatter JSON-flow values and stable sp_id metadata.",
+      "requires": [
+        "SP-OKF",
+        "SP-AIDE"
+      ],
+      "sha256": "ab8ef08d14ec68869793b6ab5b9c65051d4785c8a44c7c548b685aba950399f0"
+    },
+    {
+      "id": "SP-ADR-004",
+      "path": "decisions/004-native-adapters.md",
+      "title": "Share meaning and operations, not every binary or pixel",
+      "description": "Decision proposal: Portable C++17 engine with native platform adapters and reduced profiles where justified.",
+      "requires": [
+        "SP-ARCHITECTURE",
+        "SP-PLATFORMS"
+      ],
+      "sha256": "13f7ddf4f5949ae5ba5cbc613f3d3e14e3c3227fd30834295b0b6ff4ce39a11f"
+    },
+    {
+      "id": "SP-ADR-005",
+      "path": "decisions/005-surface-isolation.md",
+      "title": "Isolate the Windows surface process",
+      "description": "Decision proposal: Controller state/history/inspector survive a failed desktop host or renderer.",
+      "requires": [
+        "SP-PROCESSES",
+        "SP-WINDOWS"
+      ],
+      "sha256": "d9f447bd773e39d9582ee4741459b82d4182e14f1a4ee466003535cc28300a9b"
+    },
+    {
+      "id": "SP-ADR-006",
+      "path": "decisions/006-transactions.md",
+      "title": "Use one validated operation system",
+      "description": "Decision proposal: GUI, desktop editor, CLI and API submit the same typed revisioned transactions.",
+      "requires": [
+        "SP-COMMANDS",
+        "SP-EDITOR"
+      ],
+      "sha256": "3d20a9e9effac887eb66ff643eabd5ad9af8edca854a32a6982eaa2d6254c032"
+    },
+    {
+      "id": "SP-ADR-007",
+      "path": "decisions/007-evidence.md",
+      "title": "Separate specification success from product qualification",
+      "description": "Decision proposal: Planning and schema checks never produce a native compatibility pass.",
+      "requires": [
+        "SP-TESTING",
+        "SP-ORACLE"
+      ],
+      "sha256": "d22fc0752024bdc0dd86ef2552a8c2e89f87291e4c77dd30a320d1da5e23f901"
+    },
+    {
+      "id": "SP-ADR-008",
+      "path": "decisions/008-aide-boundary.md",
+      "title": "Treat AIDE as a replaceable development control plane",
+      "description": "Decision proposal: Pin real upstream contracts before admitting a consumer adapter.",
+      "requires": [
+        "SP-AIDE",
+        "SP-AGENTS"
+      ],
+      "sha256": "6c983a1ae8e602f57ceb9b7c67c940689baa5f9a4bbfa5396229d7cf9ef3b936"
+    },
+    {
+      "id": "SP-CURRENT",
+      "path": "delivery/current-state.md",
+      "title": "Current state and next admitted boundary",
+      "description": "An honest resumption point for the initial greenfield specification.",
+      "requires": [
+        "SP-START"
+      ],
+      "sha256": "b707ae0a4ec87c94396d9b8eb56e7e39d327dfe1e71c936ec38ea09a89552bfb"
+    },
+    {
+      "id": "SP-RISKS",
+      "path": "delivery/open-questions.md",
+      "title": "Open decisions, risks and resolving experiments",
+      "description": "Keep unresolved choices discoverable without blocking unrelated work.",
+      "requires": [
+        "SP-ROADMAP"
+      ],
+      "sha256": "622e8d36f23816d36ce612d83d58c1b9ee15762085e262cf0b86369d22a1b8a5"
+    },
+    {
+      "id": "SP-ROADMAP",
+      "path": "delivery/roadmap.md",
+      "title": "Greenfield implementation campaign",
+      "description": "Build native vertical slices and contracts together in risk order.",
+      "requires": [
+        "SP-CURRENT",
+        "SP-PLATFORMS",
+        "SP-TESTING"
+      ],
+      "sha256": "76a41a003480accb4718258f622b9819e5b3f8da6f892e0b0eb0c38476a5c699"
+    },
+    {
+      "id": "SP-DESKTOP",
+      "path": "desktop/contract.md",
+      "title": "Persistent desktop host contract",
+      "description": "Define visible behaviour independently of a shell attachment technique.",
+      "requires": [
+        "SP-PROCESSES"
+      ],
+      "sha256": "4e75695d427c6061035d2acb88278470bd6c8dcb9af2257af38c11ccdcfe6762"
+    },
+    {
+      "id": "SP-LINUX",
+      "path": "desktop/linux.md",
+      "title": "Linux desktop and distribution profiles",
+      "description": "Separate kernel collection, packaging, UI toolkit and compositor integration.",
+      "requires": [
+        "SP-DESKTOP"
+      ],
+      "sha256": "179576004b0b709f238231bd829f1e7fd620d7fcfa449f579b5907d38337ae5f"
+    },
+    {
+      "id": "SP-MACOS",
+      "path": "desktop/macos.md",
+      "title": "macOS and OS X native profiles",
+      "description": "Preserve an AppKit path for modern systems and older Intel OS X.",
+      "requires": [
+        "SP-DESKTOP"
+      ],
+      "sha256": "3d95e4d52d1dd985b6baf8a1bb5584a118a2da69536bf0e2c0c7d1b8abbecc9d"
+    },
+    {
+      "id": "SP-RENDERING",
+      "path": "desktop/rendering.md",
+      "title": "Rendering, text, layout and display recovery",
+      "description": "Render only necessary changes and keep authored intent separate from pixels.",
+      "requires": [
+        "SP-DESKTOP",
+        "SP-STATE"
+      ],
+      "sha256": "406d557c4e614e1d47d14b501503ebc84852f1863c982157b545277dcc3517f4"
+    },
+    {
+      "id": "SP-WINDOWS",
+      "path": "desktop/windows.md",
+      "title": "Windows native host and presentation profiles",
+      "description": "Investigate contemporary and XP/7 hosts in parallel without assuming a universal shell trick.",
+      "requires": [
+        "SP-DESKTOP"
+      ],
+      "sha256": "c1d344bfdc9e5c43e075c53b2283e37d74a6733c5d186c74ab35a7b33ac25797"
+    },
+    {
+      "id": "SP-ACCESSIBILITY",
+      "path": "experience/accessibility.md",
+      "title": "Accessibility, localization and cognitive load",
+      "description": "Make all operational information available without relying on sight, colour or drag gestures.",
+      "requires": [
+        "SP-EDITOR",
+        "SP-SETTINGS"
+      ],
+      "sha256": "35266fae318c996acc37b9c484180f91dadcdd64d4956022422eb52409b9e3b3"
+    },
+    {
+      "id": "SP-CONTROL",
+      "path": "experience/control-surfaces.md",
+      "title": "CLI, native launch and local automation",
+      "description": "Present one user-facing application with explicit modes and shared commands.",
+      "requires": [
+        "SP-COMMANDS",
+        "SP-SECURITY"
+      ],
+      "sha256": "f632daca9aabf4a10497995fe482db3f1ceb06e90421f7079fc8d061c2130e49"
+    },
+    {
+      "id": "SP-EDITOR",
+      "path": "experience/editor.md",
+      "title": "Direct desktop editing",
+      "description": "Provide reversible WYSIWYG editing without making the passive wall an input hazard.",
+      "requires": [
+        "SP-RENDERING",
+        "SP-COMMANDS"
+      ],
+      "sha256": "3fdda7b467cc8a1f9c9e9dde4a74dce0289321dd2bdf9cc5c7fb800f8d0860bb"
+    },
+    {
+      "id": "SP-SCENE",
+      "path": "experience/scene-theme.md",
+      "title": "Scene, theme and binding model",
+      "description": "Keep visual customization portable, bounded and independent from collection.",
+      "requires": [
+        "SP-STATE",
+        "SP-RENDERING"
+      ],
+      "sha256": "ee3b9ef799bfa9989040a07be9b357ff45ad69ff21e721a6bd11b25f19eca14a"
+    },
+    {
+      "id": "SP-SETTINGS",
+      "path": "experience/settings.md",
+      "title": "Native settings and complete user operation coverage",
+      "description": "Every supported user-configurable capability has a native discoverable operation.",
+      "requires": [
+        "SP-COMMANDS"
+      ],
+      "sha256": "d54a9212b40df9ae04ca3b93ba4a7808c5625a1b6f7b51a5f1b79e8db230157e"
+    },
+    {
+      "id": "SP-AUTHORITY",
+      "path": "foundation/authority.md",
+      "title": "Authority, provenance and conflicting records",
+      "description": "Separate intended behaviour, implemented behaviour, evidence and execution permission.",
+      "requires": [],
+      "sha256": "18184c4974aab4095587b8269ca639f02fd5741060139b284e83906eb94f9e5f"
+    },
+    {
+      "id": "SP-OKF",
+      "path": "foundation/okf-profile.md",
+      "title": "OKF and the SysPane specification profile",
+      "description": "Use upstream OKF without inventing a new universal knowledge format.",
+      "requires": [],
+      "sha256": "fd21de84e727ca860f3e3cd42bd8514ce88d2fe306d6fff3e9442ea0c06eba1d"
+    },
+    {
+      "id": "SP-REPOSITORY",
+      "path": "foundation/repository.md",
+      "title": "Repository architecture and ownership",
+      "description": "Keep product source, specification, publication and control-plane records distinct.",
+      "requires": [],
+      "sha256": "d12f747aa0bb554b9fc433a6a27e97df4dd01920103ef6a168f3b2819580bd27"
+    },
+    {
+      "id": "SP-GLOSSARY",
+      "path": "foundation/terminology.md",
+      "title": "Terminology and measurable definitions",
+      "description": "Use precise nouns and distinguish observation, presentation and development state.",
+      "requires": [],
+      "sha256": "1166ab27efcb2484739a835a38cac0441c18c843d903fcd05b4f54647c35b343"
+    },
+    {
+      "id": "SP-AGENTS",
+      "path": "governance/agents.md",
+      "title": "Human and agent collaboration contract",
+      "description": "Make tool adapters thin while preserving one repository-native operating policy.",
+      "requires": [
+        "SP-AUTHORITY",
+        "SP-AIDE"
+      ],
+      "sha256": "0082995be113d88af7aacc0931c73055df8f155e3eea731b051e919f5d84a2c8"
+    },
+    {
+      "id": "SP-AIDE",
+      "path": "governance/aide.md",
+      "title": "AIDE consumer integration and authority",
+      "description": "Use AIDE as the development control plane without coupling the product to a particular model.",
+      "requires": [
+        "SP-AUTHORITY",
+        "SP-TESTING"
+      ],
+      "sha256": "467e627a7dbe9b859c15fe79d148d8bd63dadfb31d22877d7a7c0f88709588be"
+    },
+    {
+      "id": "SP-CHANGES",
+      "path": "governance/change-control.md",
+      "title": "Change control, compatibility and evidence reuse",
+      "description": "Make safe refactoring inexpensive without hiding semantic changes.",
+      "requires": [
+        "SP-TESTING",
+        "SP-AUTHORITY"
+      ],
+      "sha256": "fe7e459b094b4aa22b7a6016497a4bc19e1104b6ded40f6d580b32c013108b74"
+    },
+    {
+      "id": "SP-CONTEXT",
+      "path": "governance/context.md",
+      "title": "Progressive context and chat-mode continuity",
+      "description": "Retrieve the smallest complete task context and keep results tied to repository state.",
+      "requires": [
+        "SP-AGENTS",
+        "SP-OKF"
+      ],
+      "sha256": "ede6b9096f1ecb9a66d2f00d4681c54caa40d416d54c2c06495805187a9913dd"
+    },
+    {
+      "id": "SP-DOCS",
+      "path": "governance/documentation.md",
+      "title": "Documentation publishing and editorial ownership",
+      "description": "Keep a readable public product story without duplicating specification authority.",
+      "requires": [
+        "SP-REPOSITORY",
+        "SP-AUTHORITY"
+      ],
+      "sha256": "1ad4d7540a38cb6f7300b66b93f3659949a5a2e58c835f0171c5f831594d276c"
+    },
+    {
+      "id": "SP-CHARTER",
+      "path": "product/charter.md",
+      "title": "Product charter and non-negotiable boundaries",
+      "description": "Define the complete native operational-desktop product family.",
+      "requires": [],
+      "sha256": "12e5c9c472bf5a3453f433f6562077bdfd9bdfb99ccbd078c3d1c45295a1dda5"
+    },
+    {
+      "id": "SP-PLATFORMS",
+      "path": "product/platforms.md",
+      "title": "Platform and capability admission matrix",
+      "description": "Keep broad native ambition without advertising untested parity.",
+      "requires": [
+        "SP-ARCHITECTURE",
+        "SP-DESKTOP"
+      ],
+      "sha256": "946b17abcedbdce33306e60d2b8b74e2f390b18a69ca528422ebbc8116fb9f3e"
+    },
+    {
+      "id": "SP-BRIEF",
+      "path": "references/design-brief.md",
+      "title": "Durable design brief from the conversation",
+      "description": "Preserve the user direction needed to resume without recovering old chat context.",
+      "requires": [
+        "SP-CHARTER",
+        "SP-AUTHORITY"
+      ],
+      "sha256": "5249dc1d61fb6a74332b71a5bf87f9d8b28d642b04181fbb7f5b38f05105b2f0"
+    },
+    {
+      "id": "SP-DISPOSITION",
+      "path": "references/disposition.md",
+      "title": "Source disposition and superseded guidance",
+      "description": "Preserve design lineage without reintroducing rejected assumptions.",
+      "requires": [
+        "SP-AUTHORITY"
+      ],
+      "sha256": "6c6ba601cb2c3fca501ba521c130476c8d5475b2d0600398f53219c94ff1c266"
+    },
+    {
+      "id": "SP-DEVICES",
+      "path": "telemetry/devices.md",
+      "title": "Device, dock, serial and software inventory",
+      "description": "Keep operational observation non-invasive and source-specific.",
+      "requires": [
+        "SP-STATE"
+      ],
+      "sha256": "6e206443e77d04d3574915e84623e1ffd6f000b27aacb5a230c9864014f8f913"
+    },
+    {
+      "id": "SP-HISTORY",
+      "path": "telemetry/history.md",
+      "title": "History, durability and replay",
+      "description": "Keep bounded evidence separate from current state and make gaps impossible to hide.",
+      "requires": [
+        "SP-STATE"
+      ],
+      "sha256": "c0c63dd7bb6cedf64d0f95a1a2aaaf99389acf1bc01bd24ae4971e4bd26264ea"
+    },
+    {
+      "id": "SP-NETWORK",
+      "path": "telemetry/network.md",
+      "title": "Network telemetry and diagnostic presentation",
+      "description": "Join device, interface, protocol, connectivity and history without flattening their meanings.",
+      "requires": [
+        "SP-STATE",
+        "SP-SCHEDULER"
+      ],
+      "sha256": "58d50a7c0084edc97317299fe18f59849a0878b802efebeddace34c8f1ff8569"
+    },
+    {
+      "id": "SP-RESOURCES",
+      "path": "telemetry/resources.md",
+      "title": "Processor, memory and GPU semantics",
+      "description": "Define denominators, units and support rather than importing ambiguous dashboard labels.",
+      "requires": [
+        "SP-STATE"
+      ],
+      "sha256": "619a3222470cfbb441a7500e67b1231a506be6593ee220e7d5ed72d54bc92898"
+    },
+    {
+      "id": "SP-STORAGE",
+      "path": "telemetry/storage.md",
+      "title": "Storage, volumes, partitions and filesystem identity",
+      "description": "Model storage topology without opening or mutating devices unnecessarily.",
+      "requires": [
+        "SP-STATE"
+      ],
+      "sha256": "fe04a967975ebe916a9f8957b8d49fe2b22e8d9a825e6869781b912cb5c681bc"
+    },
+    {
+      "id": "SP-WORKSHOP",
+      "path": "telemetry/workshop.md",
+      "title": "Authorized workshop assets and active probes",
+      "description": "Keep remote equipment observation explicitly configured and separate from local telemetry.",
+      "requires": [
+        "SP-STATE"
+      ],
+      "sha256": "7e45c2de0ca9b99009b31a2fc1a933ba676b6921aebd67a603022b113d31a4f7"
+    },
+    {
+      "id": "SP-TOOLS",
+      "path": "tools/usage.md",
+      "title": "Specification tooling and validation scope",
+      "description": "Run deterministic checks, context export and safe integration without AIDE.",
+      "requires": [
+        "SP-OKF",
+        "SP-CONTEXT",
+        "SP-TESTING"
+      ],
+      "sha256": "d4a21ff03438344249cb571e3fbe3ffaaf2a75f393ba85e4da12afb595df94f2"
+    }
+  ]
+}

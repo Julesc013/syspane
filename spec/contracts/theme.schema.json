@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.example.invalid/syspane/0.1.0/theme.schema.json",
+  "title": "SysPane theme experimental 0.1",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "theme_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "tokens": {
+      "type": "object",
+      "properties": {
+        "foreground": {
+          "type": "string",
+          "pattern": "^#[0-9a-fA-F]{8}$"
+        },
+        "background": {
+          "type": "string",
+          "pattern": "^#[0-9a-fA-F]{8}$"
+        },
+        "warning": {
+          "type": "string",
+          "pattern": "^#[0-9a-fA-F]{8}$"
+        },
+        "error": {
+          "type": "string",
+          "pattern": "^#[0-9a-fA-F]{8}$"
+        },
+        "muted": {
+          "type": "string",
+          "pattern": "^#[0-9a-fA-F]{8}$"
+        }
+      },
+      "required": [
+        "foreground",
+        "background",
+        "warning",
+        "error",
+        "muted"
+      ],
+      "additionalProperties": false
+    },
+    "font": {
+      "type": "object",
+      "properties": {
+        "family": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "size_dip": {
+          "type": "number",
+          "minimum": 9,
+          "maximum": 72
+        }
+      },
+      "required": [
+        "family",
+        "size_dip"
+      ],
+      "additionalProperties": false
+    },
+    "motion": {
+      "enum": [
+        "none",
+        "reduced",
+        "normal"
+      ]
+    },
+    "extensions": {
+      "type": "object",
+      "maxProperties": 64,
+      "propertyNames": {
+        "pattern": "^[a-z][a-z0-9_.-]{0,127}$"
+      }
+    }
+  },
+  "required": [
+    "schema_version",
+    "theme_id",
+    "name",
+    "tokens",
+    "font",
+    "motion"
+  ],
+  "additionalProperties": false
+}

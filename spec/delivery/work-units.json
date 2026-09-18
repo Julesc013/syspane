@@ -1,0 +1,602 @@
+{
+  "version": "0.1.0",
+  "mode": "campaign-baseline-not-live-scheduler",
+  "work_units": [
+    {
+      "id": "W-00",
+      "title": "Adopt the baseline and root integration",
+      "depends_on": [],
+      "specs": [
+        "SP-OKF",
+        "SP-AGENTS",
+        "SP-CONTEXT",
+        "SP-DOCS"
+      ],
+      "acceptance_tests": [
+        "T-SPEC",
+        "T-CONTEXT",
+        "T-BOOTSTRAP",
+        "T-DOCS"
+      ],
+      "planned_outputs": [
+        "AGENTS.md",
+        "docs/README.md",
+        "spec/"
+      ],
+      "status": "planned",
+      "authority_class": "spec_tooling",
+      "execution_grant": null,
+      "notes": "Dependency-ready is not execution authority. Native work may produce a failed/inconclusive probe without a support claim; independent tracks can continue."
+    },
+    {
+      "id": "W-01",
+      "title": "Build portable targets and model fixtures",
+      "depends_on": [
+        "W-00"
+      ],
+      "specs": [
+        "SP-ARCHITECTURE",
+        "SP-STATE"
+      ],
+      "acceptance_tests": [
+        "T-STATE",
+        "T-VALIDITY",
+        "T-CLOCK"
+      ],
+      "planned_outputs": [
+        "source/model/",
+        "source/application/",
+        "CMakeLists.txt",
+        "CMakePresets.json"
+      ],
+      "status": "planned",
+      "authority_class": "development",
+      "execution_grant": null,
+      "notes": "Dependency-ready is not execution authority. Native work may produce a failed/inconclusive probe without a support claim; independent tracks can continue."
+    },
+    {
+      "id": "W-02",
+      "title": "Build the independent desktop harness",
+      "depends_on": [
+        "W-01"
+      ],
+      "specs": [
+        "SP-ORACLE",
+        "SP-TESTING"
+      ],
+      "acceptance_tests": [
+        "T-DESKTOP-REVEAL",
+        "T-ICON-INPUT",
+        "T-WALLPAPER"
+      ],
+      "planned_outputs": [
+        "tests/desktop/",
+        "source/diagnostics/"
+      ],
+      "status": "planned",
+      "authority_class": "native_lab",
+      "execution_grant": null,
+      "notes": "Dependency-ready is not execution authority. Native work may produce a failed/inconclusive probe without a support claim; independent tracks can continue."
+    },
+    {
+      "id": "W-03",
+      "title": "Probe contemporary Windows desktop host",
+      "depends_on": [
+        "W-01",
+        "W-02"
+      ],
+      "specs": [
+        "SP-WINDOWS",
+        "SP-PROCESSES",
+        "SP-DESKTOP"
+      ],
+      "acceptance_tests": [
+        "T-DESKTOP-REVEAL",
+        "T-ICON-INPUT",
+        "T-SHELL-RECOVERY"
+      ],
+      "planned_outputs": [
+        "source/desktop/windows/",
+        "source/platform/windows/"
+      ],
+      "status": "planned",
+      "authority_class": "native_lab",
+      "execution_grant": null,
+      "notes": "Dependency-ready is not execution authority. Native work may produce a failed/inconclusive probe without a support claim; independent tracks can continue."
+    },
+    {
+      "id": "W-04",
+      "title": "Probe XP and Windows 7 native profiles",
+      "depends_on": [
+        "W-01",
+        "W-02"
+      ],
+      "specs": [
+        "SP-WINDOWS",
+        "SP-PLATFORMS"
+      ],
+      "acceptance_tests": [
+        "T-PLATFORM",
+        "T-DESKTOP-REVEAL",
+        "T-WALLPAPER"
+      ],
+      "planned_outputs": [
+        "build-support/windows/",
+        "source/desktop/windows/"
+      ],
+      "status": "planned",
+      "authority_class": "native_lab",
+      "execution_grant": null,
+      "notes": "Dependency-ready is not execution authority. Native work may produce a failed/inconclusive probe without a support claim; independent tracks can continue."
+    },
+    {
+      "id": "W-05",
+      "title": "Probe Linux shell and native UI paths",
+      "depends_on": [
+        "W-01",
+        "W-02"
+      ],
+      "specs": [
+        "SP-LINUX",
+        "SP-PLATFORMS"
+      ],
+      "acceptance_tests": [
+        "T-PLATFORM",
+        "T-DESKTOP-REVEAL",
+        "T-ICON-INPUT"
+      ],
+      "planned_outputs": [
+        "source/desktop/x11/",
+        "source/desktop/wayland/",
+        "source/desktop/gnome/",
+        "source/interfaces/gnome/",
+        "source/interfaces/kde/"
+      ],
+      "status": "planned",
+      "authority_class": "native_lab",
+      "execution_grant": null,
+      "notes": "Dependency-ready is not execution authority. Native work may produce a failed/inconclusive probe without a support claim; independent tracks can continue."
+    },
+    {
+      "id": "W-06",
+      "title": "Probe macOS and older OS X profiles",
+      "depends_on": [
+        "W-01",
+        "W-02"
+      ],
+      "specs": [
+        "SP-MACOS",
+        "SP-PLATFORMS"
+      ],
+      "acceptance_tests": [
+        "T-PLATFORM",
+        "T-DESKTOP-REVEAL",
+        "T-ICON-INPUT"
+      ],
+      "planned_outputs": [
+        "source/platform/macos/",
+        "source/desktop/macos/",
+        "source/interfaces/macos/"
+      ],
+      "status": "planned",
+      "authority_class": "native_lab",
+      "execution_grant": null,
+      "notes": "Dependency-ready is not execution authority. Native work may produce a failed/inconclusive probe without a support claim; independent tracks can continue."
+    },
+    {
+      "id": "W-07",
+      "title": "Implement demand scheduler and reconciliation",
+      "depends_on": [
+        "W-01"
+      ],
+      "specs": [
+        "SP-SCHEDULER",
+        "SP-STATE"
+      ],
+      "acceptance_tests": [
+        "T-SCHED",
+        "T-DEMAND",
+        "T-CLOCK"
+      ],
+      "planned_outputs": [
+        "source/runtime/"
+      ],
+      "status": "planned",
+      "authority_class": "development",
+      "execution_grant": null,
+      "notes": "Dependency-ready is not execution authority. Native work may produce a failed/inconclusive probe without a support claim; independent tracks can continue."
+    },
+    {
+      "id": "W-08",
+      "title": "Implement provisional commands and protocol",
+      "depends_on": [
+        "W-01"
+      ],
+      "specs": [
+        "SP-COMMANDS",
+        "SP-PROTOCOL"
+      ],
+      "acceptance_tests": [
+        "T-TRANSACTION",
+        "T-PROTOCOL"
+      ],
+      "planned_outputs": [
+        "source/commands/",
+        "source/protocol/",
+        "source/configuration/"
+      ],
+      "status": "planned",
+      "authority_class": "development",
+      "execution_grant": null,
+      "notes": "Dependency-ready is not execution authority. Native work may produce a failed/inconclusive probe without a support claim; independent tracks can continue."
+    },
+    {
+      "id": "W-09",
+      "title": "Implement scene projection and renderer contracts",
+      "depends_on": [
+        "W-01"
+      ],
+      "specs": [
+        "SP-RENDERING",
+        "SP-SCENE"
+      ],
+      "acceptance_tests": [
+        "T-LAYOUT",
+        "T-THEME",
+        "T-GRAPHICS"
+      ],
+      "planned_outputs": [
+        "source/scene/",
+        "source/presentation/"
+      ],
+      "status": "planned",
+      "authority_class": "development",
+      "execution_grant": null,
+      "notes": "Dependency-ready is not execution authority. Native work may produce a failed/inconclusive probe without a support claim; independent tracks can continue."
+    },
+    {
+      "id": "W-10",
+      "title": "Implement direct desktop editor",
+      "depends_on": [
+        "W-08",
+        "W-09"
+      ],
+      "specs": [
+        "SP-EDITOR"
+      ],
+      "acceptance_tests": [
+        "T-EDITOR",
+        "T-EDIT-CONFLICT",
+        "T-TRANSACTION"
+      ],
+      "planned_outputs": [
+        "source/interfaces/",
+        "source/commands/"
+      ],
+      "status": "planned",
+      "authority_class": "development",
+      "execution_grant": null,
+      "notes": "Dependency-ready is not execution authority. Native work may produce a failed/inconclusive probe without a support claim; independent tracks can continue."
+    },
+    {
+      "id": "W-11",
+      "title": "Implement native inspector and settings",
+      "depends_on": [
+        "W-08",
+        "W-09"
+      ],
+      "specs": [
+        "SP-SETTINGS",
+        "SP-CONTROL",
+        "SP-ACCESSIBILITY"
+      ],
+      "acceptance_tests": [
+        "T-SETTINGS",
+        "T-ACCESSIBILITY",
+        "T-TRANSACTION"
+      ],
+      "planned_outputs": [
+        "source/interfaces/",
+        "source/configuration/"
+      ],
+      "status": "planned",
+      "authority_class": "development",
+      "execution_grant": null,
+      "notes": "Dependency-ready is not execution authority. Native work may produce a failed/inconclusive probe without a support claim; independent tracks can continue."
+    },
+    {
+      "id": "W-12",
+      "title": "Implement native network providers",
+      "depends_on": [
+        "W-07"
+      ],
+      "specs": [
+        "SP-NETWORK"
+      ],
+      "acceptance_tests": [
+        "T-NETWORK",
+        "T-DNS",
+        "T-CONNECTIVITY"
+      ],
+      "planned_outputs": [
+        "source/collectors/windows/network/",
+        "source/collectors/linux/network/",
+        "source/collectors/macos/network/"
+      ],
+      "status": "planned",
+      "authority_class": "native_lab",
+      "execution_grant": null,
+      "notes": "Dependency-ready is not execution authority. Native work may produce a failed/inconclusive probe without a support claim; independent tracks can continue."
+    },
+    {
+      "id": "W-13",
+      "title": "Integrate first complete native experience",
+      "depends_on": [
+        "W-03",
+        "W-05",
+        "W-06",
+        "W-10",
+        "W-11",
+        "W-12"
+      ],
+      "specs": [
+        "SP-CHARTER",
+        "SP-DESKTOP",
+        "SP-RENDERING"
+      ],
+      "acceptance_tests": [
+        "T-DESKTOP-REVEAL",
+        "T-EDITOR",
+        "T-SETTINGS",
+        "T-DISPLAY",
+        "T-WALLPAPER"
+      ],
+      "planned_outputs": [
+        "source/application/",
+        "tests/integration/"
+      ],
+      "status": "planned",
+      "authority_class": "native_lab",
+      "execution_grant": null,
+      "notes": "Dependency-ready is not execution authority. Native work may produce a failed/inconclusive probe without a support claim; independent tracks can continue."
+    },
+    {
+      "id": "W-14",
+      "title": "Implement resources and metric definitions",
+      "depends_on": [
+        "W-07"
+      ],
+      "specs": [
+        "SP-RESOURCES"
+      ],
+      "acceptance_tests": [
+        "T-RATES",
+        "T-MEMORY"
+      ],
+      "planned_outputs": [
+        "source/collectors/"
+      ],
+      "status": "planned",
+      "authority_class": "native_lab",
+      "execution_grant": null,
+      "notes": "Dependency-ready is not execution authority. Native work may produce a failed/inconclusive probe without a support claim; independent tracks can continue."
+    },
+    {
+      "id": "W-15",
+      "title": "Implement storage and device graphs",
+      "depends_on": [
+        "W-07"
+      ],
+      "specs": [
+        "SP-STORAGE",
+        "SP-DEVICES"
+      ],
+      "acceptance_tests": [
+        "T-STORAGE",
+        "T-DEVICES",
+        "T-SOFTWARE"
+      ],
+      "planned_outputs": [
+        "source/collectors/"
+      ],
+      "status": "planned",
+      "authority_class": "native_lab",
+      "execution_grant": null,
+      "notes": "Dependency-ready is not execution authority. Native work may produce a failed/inconclusive probe without a support claim; independent tracks can continue."
+    },
+    {
+      "id": "W-16",
+      "title": "Implement history and replay",
+      "depends_on": [
+        "W-07",
+        "W-08"
+      ],
+      "specs": [
+        "SP-HISTORY"
+      ],
+      "acceptance_tests": [
+        "T-HISTORY",
+        "T-REPLAY"
+      ],
+      "planned_outputs": [
+        "source/history/",
+        "tests/replay/"
+      ],
+      "status": "planned",
+      "authority_class": "development",
+      "execution_grant": null,
+      "notes": "Dependency-ready is not execution authority. Native work may produce a failed/inconclusive probe without a support claim; independent tracks can continue."
+    },
+    {
+      "id": "W-17",
+      "title": "Implement policy and local IPC security",
+      "depends_on": [
+        "W-08"
+      ],
+      "specs": [
+        "SP-SECURITY",
+        "SP-CONTROL"
+      ],
+      "acceptance_tests": [
+        "T-IPC",
+        "T-PRIVACY",
+        "T-PROTOCOL"
+      ],
+      "planned_outputs": [
+        "source/configuration/",
+        "source/platform/",
+        "source/protocol/"
+      ],
+      "status": "planned",
+      "authority_class": "security_review",
+      "execution_grant": null,
+      "notes": "Dependency-ready is not execution authority. Native work may produce a failed/inconclusive probe without a support claim; independent tracks can continue."
+    },
+    {
+      "id": "W-18",
+      "title": "Admit optional workshop probe provider",
+      "depends_on": [
+        "W-17",
+        "W-12"
+      ],
+      "specs": [
+        "SP-WORKSHOP"
+      ],
+      "acceptance_tests": [
+        "T-PROBES",
+        "T-PRIVACY"
+      ],
+      "planned_outputs": [
+        "source/collectors/workshop/"
+      ],
+      "status": "planned",
+      "authority_class": "native_lab",
+      "execution_grant": null,
+      "notes": "Dependency-ready is not execution authority. Native work may produce a failed/inconclusive probe without a support claim; independent tracks can continue."
+    },
+    {
+      "id": "W-19",
+      "title": "Exercise external SDK consumer",
+      "depends_on": [
+        "W-17",
+        "W-16"
+      ],
+      "specs": [
+        "SP-SDK"
+      ],
+      "acceptance_tests": [
+        "T-SDK",
+        "T-PROTOCOL"
+      ],
+      "planned_outputs": [
+        "source/api/",
+        "sdk/",
+        "tests/contract/"
+      ],
+      "status": "planned",
+      "authority_class": "security_review",
+      "execution_grant": null,
+      "notes": "Dependency-ready is not execution authority. Native work may produce a failed/inconclusive probe without a support claim; independent tracks can continue."
+    },
+    {
+      "id": "W-20",
+      "title": "Qualify latency, recovery and accessibility",
+      "depends_on": [
+        "W-13",
+        "W-14",
+        "W-15",
+        "W-16",
+        "W-17"
+      ],
+      "specs": [
+        "SP-PERFORMANCE",
+        "SP-ACCESSIBILITY",
+        "SP-TESTING"
+      ],
+      "acceptance_tests": [
+        "T-PERFORMANCE",
+        "T-DISPLAY",
+        "T-GRAPHICS",
+        "T-ACCESSIBILITY"
+      ],
+      "planned_outputs": [
+        "tests/performance/",
+        "tests/accessibility/",
+        "tests/fault/"
+      ],
+      "status": "planned",
+      "authority_class": "native_lab",
+      "execution_grant": null,
+      "notes": "Dependency-ready is not execution authority. Native work may produce a failed/inconclusive probe without a support claim; independent tracks can continue."
+    },
+    {
+      "id": "W-21",
+      "title": "Build native packages and release candidate",
+      "depends_on": [
+        "W-20"
+      ],
+      "specs": [
+        "SP-RELEASE"
+      ],
+      "acceptance_tests": [
+        "T-DEPLOY",
+        "T-REPRO"
+      ],
+      "planned_outputs": [
+        "packaging/",
+        "build-support/",
+        "docs/"
+      ],
+      "status": "planned",
+      "authority_class": "release",
+      "execution_grant": null,
+      "notes": "Dependency-ready is not execution authority. Native work may produce a failed/inconclusive probe without a support claim; independent tracks can continue."
+    },
+    {
+      "id": "W-22",
+      "title": "Verify and bind actual AIDE consumer",
+      "depends_on": [
+        "W-00"
+      ],
+      "specs": [
+        "SP-AIDE",
+        "SP-AGENTS"
+      ],
+      "acceptance_tests": [
+        "T-AIDE"
+      ],
+      "planned_outputs": [
+        ".aide/",
+        "tools/aide/"
+      ],
+      "status": "planned",
+      "authority_class": "control_plane",
+      "execution_grant": null,
+      "notes": "Dependency-ready is not execution authority. Native work may produce a failed/inconclusive probe without a support claim; independent tracks can continue."
+    },
+    {
+      "id": "W-23",
+      "title": "Admit further native historical profiles",
+      "depends_on": [
+        "W-04",
+        "W-13"
+      ],
+      "specs": [
+        "SP-PLATFORMS"
+      ],
+      "acceptance_tests": [
+        "T-PLATFORM",
+        "T-PROTOCOL"
+      ],
+      "planned_outputs": [
+        "source/platform/",
+        "source/interfaces/",
+        "build-support/"
+      ],
+      "status": "planned",
+      "authority_class": "native_lab",
+      "execution_grant": null,
+      "notes": "Dependency-ready is not execution authority. Native work may produce a failed/inconclusive probe without a support claim; independent tracks can continue."
+    }
+  ]
+}

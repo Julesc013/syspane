@@ -1,0 +1,139 @@
+{
+  "version": "0.1.0",
+  "reviewed_on": "2026-09-17",
+  "sources": [
+    {
+      "id": "SRC-CONVERSATION",
+      "title": "Current SysPane design conversation",
+      "kind": "user-provided",
+      "locator": "Current conversation through the spec archive request on 2026-09-17",
+      "note": "The current user decisions take precedence over older assistant proposals; synthesis is not a verbatim transcript."
+    },
+    {
+      "id": "SRC-OKF",
+      "title": "Open Knowledge Format v0.2",
+      "kind": "primary",
+      "locator": "https://github.com/GoogleCloudPlatform/open-knowledge-format/blob/ad30107c31c06aec8a7d5636e0d1058118604e6f/SPEC.md",
+      "note": "Inspected upstream SPEC.md; blob c06e3eede0c910d0ecf12524c34204156f8795ac. Version 0.2; minimal type field, reserved index/log, optional provenance/lifecycle."
+    },
+    {
+      "id": "SRC-OKF-INTRO",
+      "title": "OKF v0.1 introduction",
+      "kind": "primary",
+      "locator": "https://cloud.google.com/blog/products/data-analytics/how-the-open-knowledge-format-can-improve-data-sharing",
+      "note": "Historical v0.1 introduction dated 2026-06-12; not the latest specification."
+    },
+    {
+      "id": "SRC-AIDE",
+      "title": "AIDE README and OKF decision",
+      "kind": "primary-repository",
+      "locator": "https://github.com/Julesc013/aide/blob/aec53b1d3675f02e2fdd17cc718fdcff6cd4e9f3/README.md",
+      "note": "README and .aide/knowledge/okf/decisions/okf-as-knowledge-plane.md inspected. AIDE doctrine separates knowledge projection from protocol/evidence. Not an audit or execution of every branch."
+    },
+    {
+      "id": "SRC-AGENTS",
+      "title": "AGENTS.md format",
+      "kind": "primary",
+      "locator": "https://agents.md/",
+      "note": "Guidance file convention; not an access-control mechanism."
+    },
+    {
+      "id": "SRC-CODEX",
+      "title": "Codex AGENTS.md documentation",
+      "kind": "primary",
+      "locator": "https://developers.openai.com/codex/guides/agents-md/",
+      "note": "Official URL redirects to ChatGPT Learn agent configuration documentation. Loader behaviour needs tool/version qualification."
+    },
+    {
+      "id": "SRC-CLAUDE",
+      "title": "Claude Code project memory",
+      "kind": "primary",
+      "locator": "https://code.claude.com/docs/en/memory",
+      "note": "Documents CLAUDE.md imports and distinction between contextual instructions and enforced controls."
+    },
+    {
+      "id": "SRC-SCHEMA",
+      "title": "JSON Schema Draft 2020-12",
+      "kind": "primary",
+      "locator": "https://json-schema.org/draft/2020-12",
+      "note": "Selected schema dialect; structural validation does not prove runtime behaviour."
+    },
+    {
+      "id": "SRC-JSON",
+      "title": "RFC 8259 JSON",
+      "kind": "primary",
+      "locator": "https://www.rfc-editor.org/rfc/rfc8259",
+      "note": "Interoperability guidance for duplicate keys, encoding and numeric precision."
+    },
+    {
+      "id": "SRC-SEMVER",
+      "title": "Semantic Versioning 2.0.0",
+      "kind": "primary",
+      "locator": "https://semver.org/spec/v2.0.0.html",
+      "note": "Versioning requires an explicitly declared public API."
+    },
+    {
+      "id": "SRC-GIT",
+      "title": "Git worktree documentation",
+      "kind": "primary",
+      "locator": "https://git-scm.com/docs/git-worktree",
+      "note": "Linked worktrees share repository administration and refs; not security sandboxes."
+    },
+    {
+      "id": "SRC-REPRO",
+      "title": "Reproducible Builds definition",
+      "kind": "primary",
+      "locator": "https://reproducible-builds.org/docs/definition/",
+      "note": "Reproducible payload and controlled build environment; signing is a separate transformation."
+    },
+    {
+      "id": "SRC-SETPARENT",
+      "title": "Win32 SetParent",
+      "kind": "primary",
+      "locator": "https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setparent",
+      "note": "Cross-process DPI effects justify a separate surface-process investigation."
+    },
+    {
+      "id": "SRC-WINDOWS",
+      "title": "Win32 window features",
+      "kind": "primary",
+      "locator": "https://learn.microsoft.com/en-us/windows/win32/winmsg/window-features",
+      "note": "Layered child windows begin with Windows 8; message-only windows do not receive broadcasts."
+    },
+    {
+      "id": "SRC-ATTACH-1",
+      "title": "SysPane-Project-Discussion.txt",
+      "kind": "historical-user-file",
+      "locator": "SysPane-Project-Discussion.txt",
+      "note": "Read in supplied context. Historical material contains superseded decisions and unsupported performance/compatibility claims. Not normative. SHA-256 b6389778bc2ff30e3f56973d982ed8d7595fd7d3ebcd5a2ba2c08769ea8c380e"
+    },
+    {
+      "id": "SRC-ATTACH-2",
+      "title": "SysPane-Desktop-Info.md",
+      "kind": "historical-user-file",
+      "locator": "SysPane-Desktop-Info.md",
+      "note": "Read in supplied context. Historical material contains superseded decisions and unsupported performance/compatibility claims. Not normative. SHA-256 c294eae6f64a7cb718ad1836f2ad2e35df605ddcb23e49ae01ef2e4f4d149bdb"
+    },
+    {
+      "id": "SRC-ATTACH-3",
+      "title": "SysPane-Competitive-Analysis.md",
+      "kind": "historical-user-file",
+      "locator": "SysPane-Competitive-Analysis.md",
+      "note": "Read in supplied context. Historical material contains superseded decisions and unsupported performance/compatibility claims. Not normative. SHA-256 d109319e45622ae6d144f22202c819a680060d9232ac1e7ee84f37d3c7bbed50"
+    },
+    {
+      "id": "SRC-ATTACH-4",
+      "title": "SysPane-Architecture-Old.md",
+      "kind": "historical-user-file",
+      "locator": "SysPane-Architecture-Old.md",
+      "note": "Read in supplied context. Historical material contains superseded decisions and unsupported performance/compatibility claims. Not normative. SHA-256 07674371a134f262e89069b8dcb79dd6c02ba60be7f98454e72910666d6fa172"
+    },
+    {
+      "id": "SRC-CHECKOUT",
+      "title": "GitHub checkout immutable template pin",
+      "kind": "primary-repository",
+      "locator": "https://github.com/actions/checkout/commit/11bd71901bbe5b1630ceea73d27597364c9af683",
+      "note": "Verified commit identifies v4.2.2; not a claim of latest release or security certification."
+    }
+  ]
+}

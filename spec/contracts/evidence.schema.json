@@ -1,0 +1,130 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.example.invalid/syspane/0.1.0/evidence.schema.json",
+  "title": "SysPane evidence experimental 0.1",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "evidence_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+    },
+    "test_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+    },
+    "outcome": {
+      "enum": [
+        "pass",
+        "fail",
+        "not_run",
+        "blocked",
+        "inconclusive"
+      ]
+    },
+    "scope": {
+      "enum": [
+        "spec_tooling",
+        "synthetic_contract",
+        "native_component",
+        "native_desktop",
+        "release"
+      ]
+    },
+    "source_ref": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "artifact_sha256": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "environment": {
+      "type": "object",
+      "maxProperties": 64,
+      "additionalProperties": {
+        "type": "string",
+        "maxLength": 2048
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 2048
+      },
+      "maxItems": 128
+    },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        },
+        "required": [
+          "path",
+          "sha256"
+        ],
+        "additionalProperties": false
+      },
+      "maxItems": 128
+    },
+    "executed_at": {
+      "anyOf": [
+        {
+          "type": "string",
+          "format": "date-time",
+          "maxLength": 64
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "evidence_id",
+    "test_id",
+    "outcome",
+    "scope",
+    "source_ref",
+    "artifact_sha256",
+    "environment",
+    "limitations",
+    "artifacts",
+    "executed_at"
+  ],
+  "additionalProperties": false
+}

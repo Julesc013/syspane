@@ -1,0 +1,50 @@
+{
+  "schema_version": "0.1.0",
+  "entity_id": "host:demo/nic:1",
+  "kind": "physical",
+  "name": "Synthetic Ethernet",
+  "administrative": "enabled",
+  "media": "connected",
+  "operational": "up",
+  "addresses": [
+    {
+      "family": "ipv4",
+      "address": "192.0.2.10",
+      "prefix_length": 24,
+      "readiness": "preferred",
+      "zone": null
+    },
+    {
+      "family": "ipv6",
+      "address": "2001:db8::10",
+      "prefix_length": 64,
+      "readiness": "preferred",
+      "zone": null
+    },
+    {
+      "family": "ipv6",
+      "address": "fe80::10",
+      "prefix_length": 64,
+      "readiness": "preferred",
+      "zone": "interface:1"
+    }
+  ],
+  "gateways": [],
+  "resolvers": [
+    "192.0.2.53"
+  ],
+  "assessments": [
+    {
+      "family": "ipv4",
+      "source_id": "source:synthetic",
+      "classification": "local",
+      "observed_at": "2026-09-17T12:00:00+10:00"
+    }
+  ],
+  "transmit_bps": "1000000000",
+  "receive_bps": "1000000000",
+  "source_ids": [
+    "source:synthetic"
+  ],
+  "generation": "1"
+}

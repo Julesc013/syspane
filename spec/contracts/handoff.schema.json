@@ -1,0 +1,140 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.example.invalid/syspane/0.1.0/handoff.schema.json",
+  "title": "SysPane handoff experimental 0.1",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "work_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+    },
+    "source_ref": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "objective": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096
+    },
+    "changed_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 1024
+      },
+      "maxItems": 1024
+    },
+    "decisions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 2048
+      },
+      "maxItems": 128
+    },
+    "checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "outcome": {
+            "enum": [
+              "pass",
+              "fail",
+              "not_run",
+              "blocked",
+              "inconclusive"
+            ]
+          },
+          "evidence": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1024
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "name",
+          "outcome",
+          "evidence"
+        ],
+        "additionalProperties": false
+      },
+      "maxItems": 256
+    },
+    "open_questions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 2048
+      },
+      "maxItems": 128
+    },
+    "next_step": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "authority_used": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 1024
+      },
+      "maxItems": 64
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 2048
+      },
+      "maxItems": 128
+    }
+  },
+  "required": [
+    "schema_version",
+    "work_id",
+    "source_ref",
+    "objective",
+    "changed_files",
+    "decisions",
+    "checks",
+    "open_questions",
+    "next_step",
+    "authority_used",
+    "limitations"
+  ],
+  "additionalProperties": false
+}

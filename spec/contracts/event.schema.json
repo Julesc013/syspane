@@ -1,0 +1,120 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.example.invalid/syspane/0.1.0/event.schema.json",
+  "title": "SysPane event experimental 0.1",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "producer_epoch": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+    },
+    "sequence": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]{0,19})$",
+      "description": "Unsigned decimal; semantic validator also enforces <= 18446744073709551615."
+    },
+    "recorded_at": {
+      "type": "string",
+      "format": "date-time",
+      "maxLength": 64
+    },
+    "monotonic_ns": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]{0,19})$",
+      "description": "Unsigned decimal; semantic validator also enforces <= 18446744073709551615."
+    },
+    "kind": {
+      "enum": [
+        "indication",
+        "transition",
+        "source_health",
+        "config_activation",
+        "host_health",
+        "bookmark",
+        "gap"
+      ]
+    },
+    "entity_id": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "payload": {
+      "type": "object",
+      "maxProperties": 64
+    },
+    "extensions": {
+      "type": "object",
+      "maxProperties": 64,
+      "propertyNames": {
+        "pattern": "^[a-z][a-z0-9_.-]{0,127}$"
+      }
+    }
+  },
+  "required": [
+    "schema_version",
+    "producer_epoch",
+    "sequence",
+    "recorded_at",
+    "monotonic_ns",
+    "kind",
+    "entity_id",
+    "payload"
+  ],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "gap"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "payload": {
+            "type": "object",
+            "properties": {
+              "reason": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 512
+              },
+              "lost_count": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "pattern": "^(0|[1-9][0-9]{0,19})$",
+                    "description": "Unsigned decimal; semantic validator also enforces <= 18446744073709551615."
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "reason",
+              "lost_count"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    }
+  ]
+}

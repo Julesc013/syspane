@@ -1,0 +1,222 @@
+{
+  "version": "0.1.0",
+  "fixtures": [
+    {
+      "path": "fixtures/valid/observation-connected.json",
+      "schema": "observation",
+      "expected": "valid",
+      "semantic": false,
+      "reason": ""
+    },
+    {
+      "path": "fixtures/valid/observation-retained-denied.json",
+      "schema": "observation",
+      "expected": "valid",
+      "semantic": false,
+      "reason": ""
+    },
+    {
+      "path": "fixtures/valid/observation-unsupported.json",
+      "schema": "observation",
+      "expected": "valid",
+      "semantic": false,
+      "reason": ""
+    },
+    {
+      "path": "fixtures/valid/observation-large-counter.json",
+      "schema": "observation",
+      "expected": "valid",
+      "semantic": false,
+      "reason": ""
+    },
+    {
+      "path": "fixtures/invalid/counter-as-json-number.json",
+      "schema": "observation",
+      "expected": "invalid",
+      "semantic": false,
+      "reason": "Lossless counters must use decimal strings."
+    },
+    {
+      "path": "fixtures/invalid/counter-overflow.json",
+      "schema": "observation",
+      "expected": "invalid",
+      "semantic": true,
+      "reason": "Above uint64 maximum."
+    },
+    {
+      "path": "fixtures/invalid/denied-without-error.json",
+      "schema": "observation",
+      "expected": "invalid",
+      "semantic": false,
+      "reason": "Denied acquisition requires an error."
+    },
+    {
+      "path": "fixtures/invalid/timestamp-without-offset.json",
+      "schema": "observation",
+      "expected": "invalid",
+      "semantic": false,
+      "reason": "Unambiguous zoned timestamp required."
+    },
+    {
+      "path": "fixtures/valid/snapshot.json",
+      "schema": "snapshot",
+      "expected": "valid",
+      "semantic": false,
+      "reason": ""
+    },
+    {
+      "path": "fixtures/invalid/duplicate-entity.json",
+      "schema": "snapshot",
+      "expected": "invalid",
+      "semantic": true,
+      "reason": "Entity IDs must be unique."
+    },
+    {
+      "path": "fixtures/invalid/dangling-relationship.json",
+      "schema": "snapshot",
+      "expected": "invalid",
+      "semantic": true,
+      "reason": "Snapshot edge endpoint is missing."
+    },
+    {
+      "path": "fixtures/invalid/unknown-observation-source.json",
+      "schema": "snapshot",
+      "expected": "invalid",
+      "semantic": true,
+      "reason": "Observation source must be declared."
+    },
+    {
+      "path": "fixtures/valid/settings.json",
+      "schema": "settings",
+      "expected": "valid",
+      "semantic": false,
+      "reason": ""
+    },
+    {
+      "path": "fixtures/invalid/zero-interval.json",
+      "schema": "settings",
+      "expected": "invalid",
+      "semantic": false,
+      "reason": "Bounded nonzero sampling interval."
+    },
+    {
+      "path": "fixtures/valid/scene.json",
+      "schema": "scene",
+      "expected": "valid",
+      "semantic": false,
+      "reason": ""
+    },
+    {
+      "path": "fixtures/invalid/duplicate-widget.json",
+      "schema": "scene",
+      "expected": "invalid",
+      "semantic": true,
+      "reason": "Widget identity unique within scene."
+    },
+    {
+      "path": "fixtures/invalid/negative-widget-width.json",
+      "schema": "scene",
+      "expected": "invalid",
+      "semantic": false,
+      "reason": "Positive readable width."
+    },
+    {
+      "path": "fixtures/valid/theme.json",
+      "schema": "theme",
+      "expected": "valid",
+      "semantic": false,
+      "reason": ""
+    },
+    {
+      "path": "fixtures/invalid/invalid-colour.json",
+      "schema": "theme",
+      "expected": "invalid",
+      "semantic": false,
+      "reason": "Explicit RGBA encoding."
+    },
+    {
+      "path": "fixtures/valid/command-preview.json",
+      "schema": "command",
+      "expected": "valid",
+      "semantic": false,
+      "reason": ""
+    },
+    {
+      "path": "fixtures/invalid/unknown-operation.json",
+      "schema": "command",
+      "expected": "invalid",
+      "semantic": false,
+      "reason": "No arbitrary command execution."
+    },
+    {
+      "path": "fixtures/invalid/caller-forged-approval.json",
+      "schema": "command",
+      "expected": "invalid",
+      "semantic": false,
+      "reason": "Authority is not caller-supplied."
+    },
+    {
+      "path": "fixtures/valid/capability-unqualified.json",
+      "schema": "capability",
+      "expected": "valid",
+      "semantic": false,
+      "reason": ""
+    },
+    {
+      "path": "fixtures/valid/gap-event.json",
+      "schema": "event",
+      "expected": "valid",
+      "semantic": false,
+      "reason": ""
+    },
+    {
+      "path": "fixtures/invalid/gap-without-reason.json",
+      "schema": "event",
+      "expected": "invalid",
+      "semantic": false,
+      "reason": "Gaps require a reason."
+    },
+    {
+      "path": "fixtures/valid/evidence-not-run.json",
+      "schema": "evidence",
+      "expected": "valid",
+      "semantic": false,
+      "reason": ""
+    },
+    {
+      "path": "fixtures/valid/handoff.json",
+      "schema": "handoff",
+      "expected": "valid",
+      "semantic": false,
+      "reason": ""
+    },
+    {
+      "path": "fixtures/valid/network-multi-address.json",
+      "schema": "network-interface",
+      "expected": "valid",
+      "semantic": false,
+      "reason": ""
+    },
+    {
+      "path": "fixtures/invalid/ipv4-invalid-prefix.json",
+      "schema": "network-interface",
+      "expected": "invalid",
+      "semantic": false,
+      "reason": "IPv4 prefixes cannot exceed 32 bits."
+    },
+    {
+      "path": "fixtures/valid/command-typed-setting.json",
+      "schema": "command",
+      "expected": "valid",
+      "semantic": false,
+      "reason": ""
+    },
+    {
+      "path": "fixtures/invalid/command-setting-wrong-type.json",
+      "schema": "command",
+      "expected": "invalid",
+      "semantic": false,
+      "reason": "Setting operations derive their argument type from the canonical settings schema."
+    }
+  ]
+}

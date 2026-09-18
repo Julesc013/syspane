@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.example.invalid/syspane/0.1.0/common.schema.json",
+  "title": "SysPane common experimental 0.1",
+  "$defs": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+    },
+    "uint64": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]{0,19})$",
+      "description": "Unsigned decimal; semantic validator also enforces <= 18446744073709551615."
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "maxLength": 64
+    },
+    "value": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "string"
+            },
+            "data": {
+              "type": "string",
+              "maxLength": 16384
+            }
+          },
+          "required": [
+            "kind",
+            "data"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "boolean"
+            },
+            "data": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "kind",
+            "data"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "number"
+            },
+            "data": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "kind",
+            "data"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "uint64"
+            },
+            "data": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]{0,19})$",
+              "description": "Unsigned decimal; semantic validator also enforces <= 18446744073709551615."
+            }
+          },
+          "required": [
+            "kind",
+            "data"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "error": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+        },
+        "message": {
+          "type": "string",
+          "maxLength": 2048
+        },
+        "retryable": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "code",
+        "message",
+        "retryable"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "description": "Definitions only; this URL is a non-resolving identifier. Validation uses local schemas."
+}

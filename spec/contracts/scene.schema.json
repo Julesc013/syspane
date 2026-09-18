@@ -1,0 +1,161 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.example.invalid/syspane/0.1.0/scene.schema.json",
+  "title": "SysPane scene experimental 0.1",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "revision": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]{0,19})$",
+      "description": "Unsigned decimal; semantic validator also enforces <= 18446744073709551615."
+    },
+    "scene_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+    },
+    "theme_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+    },
+    "widgets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+          },
+          "kind": {
+            "enum": [
+              "text",
+              "value",
+              "table",
+              "chart",
+              "status",
+              "group",
+              "image"
+            ]
+          },
+          "title": {
+            "type": "string",
+            "maxLength": 512
+          },
+          "display_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+          },
+          "layout": {
+            "type": "object",
+            "properties": {
+              "x": {
+                "type": "number",
+                "minimum": -100000,
+                "maximum": 100000
+              },
+              "y": {
+                "type": "number",
+                "minimum": -100000,
+                "maximum": 100000
+              },
+              "width": {
+                "type": "number",
+                "minimum": 32,
+                "maximum": 32768
+              },
+              "height": {
+                "type": "number",
+                "minimum": 16,
+                "maximum": 32768
+              }
+            },
+            "required": [
+              "x",
+              "y",
+              "width",
+              "height"
+            ],
+            "additionalProperties": false
+          },
+          "bindings": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "entity_id": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 256,
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+                },
+                "field": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 256,
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+                }
+              },
+              "required": [
+                "entity_id",
+                "field"
+              ],
+              "additionalProperties": false
+            },
+            "maxItems": 256
+          },
+          "priority": {
+            "enum": [
+              "essential",
+              "normal",
+              "secondary"
+            ]
+          },
+          "extensions": {
+            "type": "object",
+            "maxProperties": 64,
+            "propertyNames": {
+              "pattern": "^[a-z][a-z0-9_.-]{0,127}$"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "kind",
+          "title",
+          "display_id",
+          "layout",
+          "bindings",
+          "priority"
+        ],
+        "additionalProperties": false
+      },
+      "maxItems": 256
+    },
+    "extensions": {
+      "type": "object",
+      "maxProperties": 64,
+      "propertyNames": {
+        "pattern": "^[a-z][a-z0-9_.-]{0,127}$"
+      }
+    }
+  },
+  "required": [
+    "schema_version",
+    "revision",
+    "scene_id",
+    "theme_id",
+    "widgets"
+  ],
+  "additionalProperties": false
+}

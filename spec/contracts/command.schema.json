@@ -1,0 +1,518 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.example.invalid/syspane/0.1.0/command.schema.json",
+  "title": "SysPane command experimental 0.1",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "request_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+    },
+    "expected_revision": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]{0,19})$",
+      "description": "Unsigned decimal; semantic validator also enforces <= 18446744073709551615."
+    },
+    "policy_generation": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]{0,19})$",
+      "description": "Unsigned decimal; semantic validator also enforces <= 18446744073709551615."
+    },
+    "intent": {
+      "enum": [
+        "preview",
+        "commit"
+      ]
+    },
+    "operations": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 128,
+      "items": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "op": {
+                "const": "settings.set"
+              },
+              "path": {
+                "const": "sampling.resources_ms"
+              },
+              "value": {
+                "type": "integer",
+                "minimum": 100,
+                "maximum": 60000
+              }
+            },
+            "required": [
+              "op",
+              "path",
+              "value"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "op": {
+                "const": "settings.set"
+              },
+              "path": {
+                "const": "sampling.reconcile_ms"
+              },
+              "value": {
+                "type": "integer",
+                "minimum": 1000,
+                "maximum": 3600000
+              }
+            },
+            "required": [
+              "op",
+              "path",
+              "value"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "op": {
+                "const": "settings.set"
+              },
+              "path": {
+                "const": "sampling.max_workers"
+              },
+              "value": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 32
+              }
+            },
+            "required": [
+              "op",
+              "path",
+              "value"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "op": {
+                "const": "settings.set"
+              },
+              "path": {
+                "const": "history.persistent"
+              },
+              "value": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "op",
+              "path",
+              "value"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "op": {
+                "const": "settings.set"
+              },
+              "path": {
+                "const": "history.segment_bytes"
+              },
+              "value": {
+                "type": "integer",
+                "minimum": 4096,
+                "maximum": 1073741824
+              }
+            },
+            "required": [
+              "op",
+              "path",
+              "value"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "op": {
+                "const": "settings.set"
+              },
+              "path": {
+                "const": "history.segments"
+              },
+              "value": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 100
+              }
+            },
+            "required": [
+              "op",
+              "path",
+              "value"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "op": {
+                "const": "settings.set"
+              },
+              "path": {
+                "const": "display.enabled"
+              },
+              "value": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "op",
+              "path",
+              "value"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "op": {
+                "const": "settings.set"
+              },
+              "path": {
+                "const": "display.theme_id"
+              },
+              "value": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 256,
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+              }
+            },
+            "required": [
+              "op",
+              "path",
+              "value"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "op": {
+                "const": "settings.set"
+              },
+              "path": {
+                "const": "display.reduced_motion"
+              },
+              "value": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "op",
+              "path",
+              "value"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "op": {
+                "const": "settings.set"
+              },
+              "path": {
+                "const": "privacy.remote_probes"
+              },
+              "value": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "op",
+              "path",
+              "value"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "op": {
+                "const": "settings.set"
+              },
+              "path": {
+                "const": "privacy.export_enabled"
+              },
+              "value": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "op",
+              "path",
+              "value"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "op": {
+                "const": "widget.move"
+              },
+              "target": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 256,
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+              },
+              "x": {
+                "type": "number",
+                "minimum": -100000,
+                "maximum": 100000
+              },
+              "y": {
+                "type": "number",
+                "minimum": -100000,
+                "maximum": 100000
+              }
+            },
+            "required": [
+              "op",
+              "target",
+              "x",
+              "y"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "op": {
+                "const": "widget.resize"
+              },
+              "target": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 256,
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+              },
+              "width": {
+                "type": "number",
+                "minimum": 32,
+                "maximum": 32768
+              },
+              "height": {
+                "type": "number",
+                "minimum": 16,
+                "maximum": 32768
+              }
+            },
+            "required": [
+              "op",
+              "target",
+              "width",
+              "height"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "op": {
+                "const": "widget.add"
+              },
+              "widget": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 256,
+                    "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+                  },
+                  "kind": {
+                    "enum": [
+                      "text",
+                      "value",
+                      "table",
+                      "chart",
+                      "status",
+                      "group",
+                      "image"
+                    ]
+                  },
+                  "title": {
+                    "type": "string",
+                    "maxLength": 512
+                  },
+                  "display_id": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 256,
+                    "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+                  },
+                  "layout": {
+                    "type": "object",
+                    "properties": {
+                      "x": {
+                        "type": "number",
+                        "minimum": -100000,
+                        "maximum": 100000
+                      },
+                      "y": {
+                        "type": "number",
+                        "minimum": -100000,
+                        "maximum": 100000
+                      },
+                      "width": {
+                        "type": "number",
+                        "minimum": 32,
+                        "maximum": 32768
+                      },
+                      "height": {
+                        "type": "number",
+                        "minimum": 16,
+                        "maximum": 32768
+                      }
+                    },
+                    "required": [
+                      "x",
+                      "y",
+                      "width",
+                      "height"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "bindings": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "entity_id": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 256,
+                          "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+                        },
+                        "field": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 256,
+                          "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+                        }
+                      },
+                      "required": [
+                        "entity_id",
+                        "field"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "maxItems": 256
+                  },
+                  "priority": {
+                    "enum": [
+                      "essential",
+                      "normal",
+                      "secondary"
+                    ]
+                  },
+                  "extensions": {
+                    "type": "object",
+                    "maxProperties": 64,
+                    "propertyNames": {
+                      "pattern": "^[a-z][a-z0-9_.-]{0,127}$"
+                    }
+                  }
+                },
+                "required": [
+                  "id",
+                  "kind",
+                  "title",
+                  "display_id",
+                  "layout",
+                  "bindings",
+                  "priority"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "op",
+              "widget"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "op": {
+                "const": "widget.remove"
+              },
+              "target": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 256,
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+              }
+            },
+            "required": [
+              "op",
+              "target"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "op": {
+                "const": "theme.apply"
+              },
+              "theme_id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 256,
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+              }
+            },
+            "required": [
+              "op",
+              "theme_id"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      }
+    },
+    "extensions": {
+      "type": "object",
+      "maxProperties": 64,
+      "propertyNames": {
+        "pattern": "^[a-z][a-z0-9_.-]{0,127}$"
+      }
+    }
+  },
+  "required": [
+    "schema_version",
+    "request_id",
+    "expected_revision",
+    "policy_generation",
+    "intent",
+    "operations"
+  ],
+  "additionalProperties": false
+}

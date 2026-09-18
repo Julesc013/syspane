@@ -1,0 +1,179 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.example.invalid/syspane/0.1.0/snapshot.schema.json",
+  "title": "SysPane snapshot experimental 0.1",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "producer_epoch": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+    },
+    "generation": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]{0,19})$",
+      "description": "Unsigned decimal; semantic validator also enforces <= 18446744073709551615."
+    },
+    "captured_at": {
+      "type": "string",
+      "format": "date-time",
+      "maxLength": 64
+    },
+    "entities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+          },
+          "kind": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+          },
+          "display_name": {
+            "type": "string",
+            "maxLength": 2048
+          },
+          "identity": {
+            "type": "object",
+            "maxProperties": 64,
+            "additionalProperties": {
+              "type": "string",
+              "maxLength": 2048
+            }
+          },
+          "generation": {
+            "type": "string",
+            "pattern": "^(0|[1-9][0-9]{0,19})$",
+            "description": "Unsigned decimal; semantic validator also enforces <= 18446744073709551615."
+          },
+          "extensions": {
+            "type": "object",
+            "maxProperties": 64,
+            "propertyNames": {
+              "pattern": "^[a-z][a-z0-9_.-]{0,127}$"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "kind",
+          "display_name",
+          "identity",
+          "generation"
+        ],
+        "additionalProperties": false
+      },
+      "maxItems": 8192
+    },
+    "relationships": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "source": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+          },
+          "target": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+          },
+          "kind": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+          }
+        },
+        "required": [
+          "source",
+          "target",
+          "kind"
+        ],
+        "additionalProperties": false
+      },
+      "maxItems": 16384
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+          },
+          "kind": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+          },
+          "scope": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+          }
+        },
+        "required": [
+          "id",
+          "kind",
+          "scope"
+        ],
+        "additionalProperties": false
+      },
+      "maxItems": 1024
+    },
+    "observations": {
+      "type": "array",
+      "items": {
+        "$ref": "https://schemas.example.invalid/syspane/0.1.0/observation.schema.json"
+      },
+      "maxItems": 65536
+    },
+    "completeness": {
+      "enum": [
+        "complete",
+        "partial",
+        "gap"
+      ]
+    },
+    "extensions": {
+      "type": "object",
+      "maxProperties": 64,
+      "propertyNames": {
+        "pattern": "^[a-z][a-z0-9_.-]{0,127}$"
+      }
+    }
+  },
+  "required": [
+    "schema_version",
+    "producer_epoch",
+    "generation",
+    "captured_at",
+    "entities",
+    "relationships",
+    "sources",
+    "observations",
+    "completeness"
+  ],
+  "additionalProperties": false
+}

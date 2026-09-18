@@ -1,0 +1,42 @@
+{
+  "version": "0.1.0",
+  "note": "Review before apply. These are proposed root integration files, not automatically installed policy. No overwrite, commit, push, dependency install or workflow run is performed by bootstrap.",
+  "files": [
+    {
+      "path": "AGENTS.md",
+      "content": "# SysPane repository guide for humans and agents\n\nSysPane (System Panel) is a native operational-desktop product family.\n\nStart with `spec/README.md`, `spec/delivery/current-state.md` and the relevant\nroute in `spec/tools/routes.json`. Read `spec/foundation/authority.md` before\nacting. `spec/` owns intended behaviour/contracts; `source/` owns implementation;\n`docs/` owns audience-oriented publication. Use `source/`, never a parallel `src/`.\n\nDo not load the entire specification into every subagent. Generate bounded\ncontext with `python spec/tools/specctl.py context --topic TOPIC --out PATH`.\nVerify actual repository/ref, dirty state, work scope and execution grant.\n\nValidation from repo root:\n```\npython spec/tools/specctl.py validate --schemas\npython spec/tools/specctl.py generate --check\npython -m unittest discover -s spec/tools/tests -v\n```\nDevelopment-only schema dependencies: `spec/tools/requirements.txt`.\nAfter a reviewed specification change, regenerate and explicitly reseal;\n`verify-integrity` checks the sealed delivery bytes, not product correctness.\n\nPreserve the greenfield owned renderer, behind-icon reveal persistence,\nwallpaper preservation, native GUI/editor and early cross-platform campaign.\nDo not reintroduce Desktop Info or claim a fallback window passes Desktop.\nNo native/platform test passes are implied by specification validation.\n\nKeep the README a product homepage. Make scoped edits, preserve authored voice,\nand place engineering evidence in the proper records. Do not weaken tests,\nmove published tags, deploy, install services, access signing keys or expand\nnetwork/model budgets without corresponding authority. A task admission can\nallow routine reversible work without repeated approval prompts.\n\nBefore handing off, record changed files, exact refs, actual tests/outcomes,\nunexecuted checks, decisions, open questions and the next useful step.\nDo not store credentials or private reasoning. Follow `spec/governance/agents.md`.\n"
+    },
+    {
+      "path": "CLAUDE.md",
+      "content": "@AGENTS.md\n\nUse task-specific specification routes instead of importing the whole bundle.\nInstruction imports do not grant execution or publication permissions.\n"
+    },
+    {
+      "path": ".github/copilot-instructions.md",
+      "content": "# SysPane shared repository instructions\n\nRead the root `AGENTS.md` and follow its specification routes.\nThe canonical project instructions live there and in `spec/governance/agents.md`;\ndo not maintain a second policy copy in this adapter. Verify the active tool's\ninstruction-loader behavior rather than assuming all nested files are loaded.\n"
+    },
+    {
+      "path": "README.md",
+      "content": "# SysPane — System Panel\n\nA native operational desktop for seeing host identity, network connections,\nresources and connected devices at a glance, without replacing your wallpaper.\n\nSysPane is being designed as a native product family with an owned persistent\nWindows desktop surface, native Linux and macOS/OS X editions, a diagnostic\ninspector and direct desktop editing. Native settings, editor, CLI and automation\nshare one operation system. Historical targets use explicit capability profiles.\n\n**Current stage: specification and greenfield implementation planning.**\nNo working native application or supported-platform release is provided yet.\n\n[Read the specification](spec/README.md) · [Current state](spec/delivery/current-state.md)\n· [Implementation campaign](spec/delivery/roadmap.md) · [Documentation](docs/README.md)\n\nThe project keeps specification in `spec/`, implementation in `source/` and\npublication-oriented guides in `docs/`. The specification package includes\nlocal validation, context and non-overwriting bootstrap tools.\n\nLicense and contribution policy must be selected before public code distribution.\nNo Microsoft endorsement or upstream acceptance is implied.\n"
+    },
+    {
+      "path": "docs/README.md",
+      "content": "# SysPane documentation\n\nThis directory owns publication-ready user and developer Markdown, not a second\ncopy of normative requirements. SysPane is currently at specification stage.\n\nStart with the [product specification](../spec/README.md),\n[current state](../spec/delivery/current-state.md), and\n[documentation policy](../spec/governance/documentation.md).\nThe [publication map](../spec/governance/docs-map.json) identifies planned guides\nand their source specifications. Create task-oriented pages as real features\nbecome usable; do not publish unimplemented features as shipped functionality.\n\nThe optional website/wiki is generated from reviewed repository documents.\n"
+    },
+    {
+      "path": ".editorconfig",
+      "content": "root = true\n\n[*]\ncharset = utf-8\nend_of_line = lf\ninsert_final_newline = true\nindent_style = space\nindent_size = 4\ntrim_trailing_whitespace = true\n\n[*.{json,yml,yaml}]\nindent_size = 2\n\n[*.md]\ntrim_trailing_whitespace = false\n"
+    },
+    {
+      "path": ".gitattributes",
+      "content": "* text=auto\n*.md text eol=lf\n*.json text eol=lf\n*.py text eol=lf\n*.yml text eol=lf\n*.yaml text eol=lf\n*.sh text eol=lf\n*.bat text eol=crlf\n*.cmd text eol=crlf\n"
+    },
+    {
+      "path": ".gitignore",
+      "content": "# Local execution/cache/build state; authored records remain versioned.\n.aide.local/\n.venv/\n__pycache__/\n*.py[cod]\n.pytest_cache/\n.cache/\nbuild/\nout/\ndist/\ncoverage/\nCMakeUserPresets.json\n.DS_Store\nThumbs.db\n"
+    },
+    {
+      "path": ".github/workflows/spec.yml",
+      "content": "name: Specification validation\non:\n  push:\n  pull_request:\npermissions:\n  contents: read\njobs:\n  spec:\n    runs-on: ubuntu-latest\n    timeout-minutes: 10\n    steps:\n      # Immutable v4.2.2 identity checked when this template was prepared.\n      # Review/update the pin through dependency maintenance; not a latest-version claim.\n      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683\n        with:\n          persist-credentials: false\n      - name: Isolated development dependencies\n        run: |\n          python3 -m venv .venv\n          .venv/bin/python -m pip install -r spec/tools/requirements.txt\n      - name: Validate specifications and fixtures\n        run: .venv/bin/python spec/tools/specctl.py validate --schemas\n      - name: Check generated projections\n        run: .venv/bin/python spec/tools/specctl.py generate --check\n      - name: Test specification tooling\n        run: .venv/bin/python -m unittest discover -s spec/tools/tests -v\n      # Native desktop, privileged lab and signing jobs are deliberately absent.\n"
+    }
+  ]
+}
