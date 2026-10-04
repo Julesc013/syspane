@@ -10,8 +10,9 @@ sp_profile: "syspane-spec/0.1.0"
 sp_authority: "informative"
 sp_requires: ["SP-OKF", "SP-CONTEXT", "SP-TESTING"]
 sp_review: "unreviewed"
-sp_sources: ["SRC-CONVERSATION"]
+sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
+updated: {"by": "codex", "at": "2026-10-04T19:32:52+11:00", "scope": "October audit amendments; no human review attested"}
 ---
 
 # Specification tooling and validation scope
@@ -50,3 +51,16 @@ The CI template is optional and requires review before copying/pushing it. It us
 ## Updating the bundle
 
 Edit canonical inputs, run `validate --schemas` and tooling tests, regenerate indices, inspect changes and explicitly reseal when publishing a new bundle. Resealing changes only hashes; it cannot update a native test outcome or fabricate human review. `generated/validation-report.json` describes the delivery test run and must not be silently presented as evidence for later modifications.
+
+## October validation changes
+
+The eleven setting descriptors own defaults, constraints and UI metadata. `generate`
+projects overlapping settings/command constraints; `validate` rejects inconsistent
+defaults, dependencies or projection drift. Full checks include versioned scene
+hierarchy, layout bounds, selector/package metadata and typed preset/policy values.
+Native behaviour, full archive decoding and provider qualification remain unexecuted.
+
+Date-time checks no longer silently depend on an optional format package: explicit
+offsets and seconds 00..59 are enforced locally. Tool tests use UTF-8 explicitly.
+On Windows, unavailable symlink creation permission is an explicit test skip; do
+not weaken symlink refusal assertions or report a skipped assertion as passed.

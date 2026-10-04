@@ -10,8 +10,9 @@ sp_profile: "syspane-spec/0.1.0"
 sp_authority: "normative-proposal"
 sp_requires: ["SP-PROTOCOL", "SP-SECURITY"]
 sp_review: "unreviewed"
-sp_sources: ["SRC-CONVERSATION"]
+sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
+updated: {"by": "codex", "at": "2026-10-04T19:32:52+11:00", "scope": "October audit amendments; no human review attested"}
 ---
 
 # Extension SDK and embedding boundaries
@@ -41,3 +42,19 @@ An extension manifest declares identity, version, contract ranges, architecture,
 ## Acceptance
 
 Test provider crash/hang, restart, malformed messages, stale results, spoofed identity, permission escalation attempts, incompatible versions, size limits, untrusted assets and deterministic declarative rendering. At least one independent consumer and multiple native implementations should exercise contracts before a stable public SDK promise.
+
+## Result-buffer and admission contract
+
+The experimental header explicitly returns `SYSPANE_BUFFER_TOO_SMALL` when a
+caller-owned output is insufficient. A request can already have committed; retrieve
+its retained result through `syspane_read_result`, which never executes the operation.
+Reserve result storage before mutation or return busy. Results remain pinned until
+explicit release/context destruction; process loss requires durable reconciliation.
+The synchronous sketch permits one caller per context and no reentry. Actual export,
+calling convention, allocator, concurrency and cancellation qualification precede ABI
+stability; no native implementation is claimed by these declarations.
+
+[Extension manifests](extension-manifest.schema.json) and [content admission](../experience/presets.md)
+now define initial metadata. Package importer, full asset closure and independent
+installed-SDK consumer tests remain pending. The header stays here as a design sketch
+until a recorded ownership move to `source/api/`.

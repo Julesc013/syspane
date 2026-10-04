@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0",
+  "version": "0.2.0",
   "generated": true,
   "owner": "tools/specctl.py generate",
   "concepts": [
@@ -9,7 +9,40 @@
       "title": "SysPane specification bundle",
       "description": "Start here to adopt, validate and use this repository-native specification.",
       "requires": [],
-      "sha256": "ff180e4d0eaf86a8f116656ce73e7dda0b7e3c6eba0d5265fd49833a4b9b6480"
+      "sha256": "2ef68e442770c58c36257432248695e6953184daeb1b7f53fd46c94d6611622f"
+    },
+    {
+      "id": "SP-COMPOSITION",
+      "path": "architecture/composition.md",
+      "title": "Roles and component composition",
+      "description": "Define dependency direction and optional runtime roles without product forks.",
+      "requires": [
+        "SP-ARCHITECTURE",
+        "SP-REPOSITORY"
+      ],
+      "sha256": "1986eeefe02ac7c124f415ffd164d34bb3559d2c2c163891c5b1f9a39b7eeafe"
+    },
+    {
+      "id": "SP-PERSISTENCE",
+      "path": "architecture/persistence.md",
+      "title": "Configuration persistence and recovery",
+      "description": "Make accepted, durable and activated configuration generations distinct.",
+      "requires": [
+        "SP-COMMANDS",
+        "SP-SETTINGS"
+      ],
+      "sha256": "2e0296ff28e1058dfb3e09f20909721901b0133d79c0ee07276b76dced58aa5e"
+    },
+    {
+      "id": "SP-PORTABILITY",
+      "path": "architecture/portability.md",
+      "title": "Language and portability boundary",
+      "description": "Separate shared semantics from compiler, ABI and runtime compatibility.",
+      "requires": [
+        "SP-PLATFORMS",
+        "SP-COMPOSITION"
+      ],
+      "sha256": "39aad0fa3956a4cbcc95c6c76b980b011fc7519825aa8eee90672636cb5189e3"
     },
     {
       "id": "SP-PROCESSES",
@@ -19,7 +52,18 @@
       "requires": [
         "SP-ARCHITECTURE"
       ],
-      "sha256": "e4c45012a3e35a0b1eaba9a95441bfec0d2a86d8325ce2236d2f91fa52a88889"
+      "sha256": "49d8a7e73e878f4afb69483b98f19be3748455d2cca01742d590ccab17dadba8"
+    },
+    {
+      "id": "SP-RECOVERY",
+      "path": "architecture/recovery.md",
+      "title": "Independent recovery and bounded failure",
+      "description": "Preserve diagnostic usefulness and independently expire retained presentation.",
+      "requires": [
+        "SP-PROCESSES",
+        "SP-PERFORMANCE"
+      ],
+      "sha256": "ac08954beda679c57ec709adb3500c67b328d45553d049f16c58b190f815854b"
     },
     {
       "id": "SP-SCHEDULER",
@@ -29,7 +73,7 @@
       "requires": [
         "SP-ARCHITECTURE"
       ],
-      "sha256": "c2120b66c70f65baa99c6ed2e4e81e7c40c991c759fe77c82c3f2cd7b5ddb364"
+      "sha256": "01c440c62356f4f23f53336913240429bf2618db6157b1f8cafe1a121def380e"
     },
     {
       "id": "SP-STATE",
@@ -39,7 +83,7 @@
       "requires": [
         "SP-SCHEDULER"
       ],
-      "sha256": "109d5426e5a240bac26e0bb811cc8bb70978e49fbbd6582b4df974fca7bfa5fb"
+      "sha256": "13c8ece417362abea7134c58643f7a3081f9a5927a8f774fe220c9f4decabf66"
     },
     {
       "id": "SP-ARCHITECTURE",
@@ -50,7 +94,7 @@
         "SP-CHARTER",
         "SP-AUTHORITY"
       ],
-      "sha256": "16358f23f897018a1e27eb31e17ec8a2d13ce5a56e0b1c5dd759ccb016d7f090"
+      "sha256": "be203321db74a27e9e16fb2e4657203d636725fe31028bd247dae1733510c56c"
     },
     {
       "id": "SP-ORACLE",
@@ -61,7 +105,7 @@
         "SP-DESKTOP",
         "SP-TESTING"
       ],
-      "sha256": "859db6edc12102caa5f9eca35736bf477745a5f7bbf51db79870b8deff70ba55"
+      "sha256": "055e57d9d4796abcb60f040a8ad15a7b788e6bc1a70c710230001f1fde76388c"
     },
     {
       "id": "SP-PERFORMANCE",
@@ -73,7 +117,7 @@
         "SP-RENDERING",
         "SP-TESTING"
       ],
-      "sha256": "c4e5f0c530dc87b069b5a9118f5714ce2b14bfcfa6e6fb5053f6742cc419aabe"
+      "sha256": "04dc9b44b77886a5f650394a33100b9ced60a345423273803692946285375f4f"
     },
     {
       "id": "SP-RELEASE",
@@ -84,7 +128,7 @@
         "SP-TESTING",
         "SP-SECURITY"
       ],
-      "sha256": "e2fe9b02f9caa2ba2334ef3e81c45433a0af544b742ff731275a844c5233ef1d"
+      "sha256": "f66175bfa31411b4a6781140afc0e0460551d6ac12837002ff1994d615ff2c7a"
     },
     {
       "id": "SP-SECURITY",
@@ -94,7 +138,7 @@
       "requires": [
         "SP-AUTHORITY"
       ],
-      "sha256": "fddda97fe13e1441274f68f01e4c24ed7d638cbe7764e8c327118518ec4a1d96"
+      "sha256": "45cbdb4e01cddf4f0c0756063d3dfd1352db69f406b5a0ddf68b8f73b7a4571d"
     },
     {
       "id": "SP-TESTING",
@@ -105,7 +149,7 @@
         "SP-AUTHORITY",
         "SP-PROTOCOL"
       ],
-      "sha256": "1ef250b8c08cc42da623e5cf2b8fbb6e5ec748f12c112611701821f6a3fa6724"
+      "sha256": "0cca39e3f8e910dcef4e30f2225c0d8025d881efcb7616718d3c6177a715921a"
     },
     {
       "id": "SP-COMMANDS",
@@ -115,7 +159,7 @@
       "requires": [
         "SP-STATE"
       ],
-      "sha256": "881b0cd5c317cd8860a854398c49a7e5db32b88bcb5c55cae6b018e5c59edb9d"
+      "sha256": "c9e2ac2396c3c0ffff7084d53e2870711bab6cbfdeeaaf81a744bd7bf81ce1fc"
     },
     {
       "id": "SP-NETWORK-CONTRACT",
@@ -137,7 +181,7 @@
         "SP-STATE",
         "SP-COMMANDS"
       ],
-      "sha256": "2a8686a3df1a948297f765808c2ce3e6a42577c9aed8cb3b8d59ab981af4a565"
+      "sha256": "b6bb4914d0f2bc1663575a0e2b96e7b93b2889ca41c00a0d17968b65190eba31"
     },
     {
       "id": "SP-SDK",
@@ -148,7 +192,29 @@
         "SP-PROTOCOL",
         "SP-SECURITY"
       ],
-      "sha256": "a7a675c37fff617338da37f33fbd66088d836987e1444cbe288b6115bfd0be30"
+      "sha256": "4d3b55828316909f6f023442a2dfe3d70c3418caf07f7fe7314121a7b4cd0013"
+    },
+    {
+      "id": "SP-TRANSPORT",
+      "path": "contracts/transport.md",
+      "title": "Local transport and request lifecycle",
+      "description": "Define experimental framing, negotiation and bounded result retrieval.",
+      "requires": [
+        "SP-PROTOCOL",
+        "SP-COMMANDS"
+      ],
+      "sha256": "a370667bec2101093311585a3e56cf4557b7cd055f63d68c5067ac160d0e392e"
+    },
+    {
+      "id": "SP-VERSIONS",
+      "path": "contracts/versions.md",
+      "title": "Contract versions and migration",
+      "description": "Keep bundle, documents, wire, ABI, content and provider identities independent.",
+      "requires": [
+        "SP-PROTOCOL",
+        "SP-CHANGES"
+      ],
+      "sha256": "305dad599d4a98b70b8c166aa1c79f62b5688ebc8c14f48cfdd3728695d2622c"
     },
     {
       "id": "SP-ADR-001",
@@ -239,6 +305,27 @@
       "sha256": "6c983a1ae8e602f57ceb9b7c67c940689baa5f9a4bbfa5396229d7cf9ef3b936"
     },
     {
+      "id": "SP-ARTIFACTS",
+      "path": "delivery/artifacts.md",
+      "title": "Binaries, packages and release identity",
+      "description": "Choose stable binary roles and exact offline payload closure.",
+      "requires": [
+        "SP-COMPOSITION",
+        "SP-TARGETS"
+      ],
+      "sha256": "ddceed68791c536b61310e078c775678edda856d6728745f03f5f09ba50847a1"
+    },
+    {
+      "id": "SP-AUDIT-OCTOBER",
+      "path": "delivery/audit-2026-10-04.md",
+      "title": "October audit disposition",
+      "description": "Map supplied recommendations to amended owners without treating review text as authority.",
+      "requires": [
+        "SP-CURRENT"
+      ],
+      "sha256": "4502c5fd48ad4b17d10aa05a17a3a4a5244dab10292f242a2c5ccf8711eca402"
+    },
+    {
       "id": "SP-CURRENT",
       "path": "delivery/current-state.md",
       "title": "Current state and next admitted boundary",
@@ -246,7 +333,17 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "b707ae0a4ec87c94396d9b8eb56e7e39d327dfe1e71c936ec38ea09a89552bfb"
+      "sha256": "e9563de654c5814007b41249e0d61cfd2c6c1d0a2911c6f805bbd57242dfb3b6"
+    },
+    {
+      "id": "SP-READINESS",
+      "path": "delivery/implementation-readiness.md",
+      "title": "Implementation readiness and gates",
+      "description": "Distinguish implemented specification checks from pending native and release work.",
+      "requires": [
+        "SP-CURRENT"
+      ],
+      "sha256": "ed3f62755eeb5b70d7f149f8910f19ea33276a5d901a101acf76da300d6cbc0a"
     },
     {
       "id": "SP-RISKS",
@@ -256,7 +353,7 @@
       "requires": [
         "SP-ROADMAP"
       ],
-      "sha256": "622e8d36f23816d36ce612d83d58c1b9ee15762085e262cf0b86369d22a1b8a5"
+      "sha256": "58432869c6cc2649a11a7af8661cb965ea821a99b0418d0b255eda76e6786523"
     },
     {
       "id": "SP-ROADMAP",
@@ -268,7 +365,18 @@
         "SP-PLATFORMS",
         "SP-TESTING"
       ],
-      "sha256": "76a41a003480accb4718258f622b9819e5b3f8da6f892e0b0eb0c38476a5c699"
+      "sha256": "04d0ad1e3f73100e63318a5474356399cfb2156267606638f8c791177de70da2"
+    },
+    {
+      "id": "SP-TARGETS",
+      "path": "delivery/target-profiles.md",
+      "title": "Build targets and qualification profiles",
+      "description": "Bind concrete runtime floors to evidence instead of inferring support from platform names.",
+      "requires": [
+        "SP-PLATFORMS",
+        "SP-RELEASE"
+      ],
+      "sha256": "a890534307701cb122436112809bfcfe4c05edaccded4a7313748087b3c0a173"
     },
     {
       "id": "SP-DESKTOP",
@@ -278,7 +386,7 @@
       "requires": [
         "SP-PROCESSES"
       ],
-      "sha256": "4e75695d427c6061035d2acb88278470bd6c8dcb9af2257af38c11ccdcfe6762"
+      "sha256": "fbd182d042da95f4fd5fb9da54e021ed3db9202a9e1480cc37e4bc0757cc52d6"
     },
     {
       "id": "SP-LINUX",
@@ -288,7 +396,7 @@
       "requires": [
         "SP-DESKTOP"
       ],
-      "sha256": "179576004b0b709f238231bd829f1e7fd620d7fcfa449f579b5907d38337ae5f"
+      "sha256": "7337983dfeadf764c2c92634e2c12a01ffb13f0fbd716d2ff3161341807ddbba"
     },
     {
       "id": "SP-MACOS",
@@ -298,7 +406,7 @@
       "requires": [
         "SP-DESKTOP"
       ],
-      "sha256": "3d95e4d52d1dd985b6baf8a1bb5584a118a2da69536bf0e2c0c7d1b8abbecc9d"
+      "sha256": "6ac70da1f6e96d56eceb73e8c50a3d343efc66e357ef43124b8290608c9a9342"
     },
     {
       "id": "SP-RENDERING",
@@ -309,7 +417,18 @@
         "SP-DESKTOP",
         "SP-STATE"
       ],
-      "sha256": "406d557c4e614e1d47d14b501503ebc84852f1863c982157b545277dcc3517f4"
+      "sha256": "b4084ce1daf46dbd4ecf865a913db3e63d419675e2b4420b70dad5afcdee8c10"
+    },
+    {
+      "id": "SP-SCREENSAVER",
+      "path": "desktop/screensaver.md",
+      "title": "Native screensaver composition",
+      "description": "Share scene meaning while separating saver hosting, lifecycle and disclosure.",
+      "requires": [
+        "SP-COMPOSITION",
+        "SP-POLICY"
+      ],
+      "sha256": "5b21845d74b1d6e17294041b0ee5d73b80525f6a1de0c1bbb49dccba4253519a"
     },
     {
       "id": "SP-WINDOWS",
@@ -319,7 +438,7 @@
       "requires": [
         "SP-DESKTOP"
       ],
-      "sha256": "c1d344bfdc9e5c43e075c53b2283e37d74a6733c5d186c74ab35a7b33ac25797"
+      "sha256": "c265adac733519f1bf959144addf2200e6cb8c140492c1dbd9ed6a1c73f786b0"
     },
     {
       "id": "SP-ACCESSIBILITY",
@@ -330,7 +449,18 @@
         "SP-EDITOR",
         "SP-SETTINGS"
       ],
-      "sha256": "35266fae318c996acc37b9c484180f91dadcdd64d4956022422eb52409b9e3b3"
+      "sha256": "0329367df22da4413d3a9950d1b81721dbb67c8f202ce05d3bb62af3613b4e45"
+    },
+    {
+      "id": "SP-CONFIG-RESOLUTION",
+      "path": "experience/configuration-resolution.md",
+      "title": "Configuration resolution and provenance",
+      "description": "Define deterministic precedence, reset semantics and mandatory policy constraints.",
+      "requires": [
+        "SP-SETTINGS",
+        "SP-COMMANDS"
+      ],
+      "sha256": "614c16104c181a03b4857c205b632ce69b98e0ffe1ded1d10631b7aeefde33cc"
     },
     {
       "id": "SP-CONTROL",
@@ -341,7 +471,7 @@
         "SP-COMMANDS",
         "SP-SECURITY"
       ],
-      "sha256": "f632daca9aabf4a10497995fe482db3f1ceb06e90421f7079fc8d061c2130e49"
+      "sha256": "c3c456a63e74ef6c4e57c76cf776d591419da578dfe35785496376d00d81821f"
     },
     {
       "id": "SP-EDITOR",
@@ -352,7 +482,40 @@
         "SP-RENDERING",
         "SP-COMMANDS"
       ],
-      "sha256": "3fdda7b467cc8a1f9c9e9dde4a74dce0289321dd2bdf9cc5c7fb800f8d0860bb"
+      "sha256": "c8dd24a24277d7ea02b8d62bd6ff09d1f05f5707947f1dc9b6319de826f4f51f"
+    },
+    {
+      "id": "SP-POLICY",
+      "path": "experience/policy.md",
+      "title": "Policy and information disclosure",
+      "description": "Constrain collection, retention and every presentation channel independently.",
+      "requires": [
+        "SP-SECURITY",
+        "SP-CONFIG-RESOLUTION"
+      ],
+      "sha256": "b86b3ce3263827f16b07921a3d17ae385a2980b3f3612fa7f68bdf12c3b3ee6c"
+    },
+    {
+      "id": "SP-PRESETS",
+      "path": "experience/presets.md",
+      "title": "Preset and content admission",
+      "description": "Compose versioned documents without granting authority or losing local edits.",
+      "requires": [
+        "SP-CONFIG-RESOLUTION",
+        "SP-SDK"
+      ],
+      "sha256": "eae803bd91344161b95573694141988894a773899e7b7d6b281dc9b502c4349a"
+    },
+    {
+      "id": "SP-BINDINGS",
+      "path": "experience/scene-bindings.md",
+      "title": "Portable scene structure and binding",
+      "description": "Separate authored hierarchy and selectors from resolved geometry and live identity.",
+      "requires": [
+        "SP-SCENE",
+        "SP-STATE"
+      ],
+      "sha256": "4d892a64edae758a82cdcdb96945f52c0f4e28deeb43be4a61b29c1dce6044cc"
     },
     {
       "id": "SP-SCENE",
@@ -363,7 +526,7 @@
         "SP-STATE",
         "SP-RENDERING"
       ],
-      "sha256": "ee3b9ef799bfa9989040a07be9b357ff45ad69ff21e721a6bd11b25f19eca14a"
+      "sha256": "1dc6afcb0896151698d367fb063bfffae500f7c0626ecfd3645cdae3528b5714"
     },
     {
       "id": "SP-SETTINGS",
@@ -373,7 +536,7 @@
       "requires": [
         "SP-COMMANDS"
       ],
-      "sha256": "d54a9212b40df9ae04ca3b93ba4a7808c5625a1b6f7b51a5f1b79e8db230157e"
+      "sha256": "63bab09a1fac486d2500f9b405cc08a079ade1f944f8d47c03a673536d203104"
     },
     {
       "id": "SP-AUTHORITY",
@@ -389,7 +552,7 @@
       "title": "OKF and the SysPane specification profile",
       "description": "Use upstream OKF without inventing a new universal knowledge format.",
       "requires": [],
-      "sha256": "fd21de84e727ca860f3e3cd42bd8514ce88d2fe306d6fff3e9442ea0c06eba1d"
+      "sha256": "9a7abc95b82caa9f73303dece16abd4dabd45a3b23aa4fb866daf6846f4f9381"
     },
     {
       "id": "SP-REPOSITORY",
@@ -397,7 +560,7 @@
       "title": "Repository architecture and ownership",
       "description": "Keep product source, specification, publication and control-plane records distinct.",
       "requires": [],
-      "sha256": "d12f747aa0bb554b9fc433a6a27e97df4dd01920103ef6a168f3b2819580bd27"
+      "sha256": "d6f0d3f5267986a24d2f856d8c3b81134301d7ebeb10557da4c4f29da36bdf95"
     },
     {
       "id": "SP-GLOSSARY",
@@ -416,7 +579,7 @@
         "SP-AUTHORITY",
         "SP-AIDE"
       ],
-      "sha256": "0082995be113d88af7aacc0931c73055df8f155e3eea731b051e919f5d84a2c8"
+      "sha256": "bab7ceaf92cf2d2a3e4fe56edd9a7b8f5a9e0e3361460e4382009c11f680dbf2"
     },
     {
       "id": "SP-AIDE",
@@ -427,7 +590,7 @@
         "SP-AUTHORITY",
         "SP-TESTING"
       ],
-      "sha256": "467e627a7dbe9b859c15fe79d148d8bd63dadfb31d22877d7a7c0f88709588be"
+      "sha256": "41f5d37ab3391da79d51a64c2062956bab3bd111b4a2ba8c26fbb9f6b31ede24"
     },
     {
       "id": "SP-CHANGES",
@@ -438,7 +601,7 @@
         "SP-TESTING",
         "SP-AUTHORITY"
       ],
-      "sha256": "fe7e459b094b4aa22b7a6016497a4bc19e1104b6ded40f6d580b32c013108b74"
+      "sha256": "3f002507b4562242d49a748168c5ec7b193f5f48bace81c73b0f43bf0491994f"
     },
     {
       "id": "SP-CONTEXT",
@@ -460,7 +623,7 @@
         "SP-REPOSITORY",
         "SP-AUTHORITY"
       ],
-      "sha256": "1ad4d7540a38cb6f7300b66b93f3659949a5a2e58c835f0171c5f831594d276c"
+      "sha256": "470d13b54b1ec12c8d119c330d5afd262a2cea934c0d09eff29f75216023a103"
     },
     {
       "id": "SP-CHARTER",
@@ -468,7 +631,7 @@
       "title": "Product charter and non-negotiable boundaries",
       "description": "Define the complete native operational-desktop product family.",
       "requires": [],
-      "sha256": "12e5c9c472bf5a3453f433f6562077bdfd9bdfb99ccbd078c3d1c45295a1dda5"
+      "sha256": "3d1d7e4b27eca9153bfdad430c7763959ddbf05d35bc30f512f7751d88c9a705"
     },
     {
       "id": "SP-PLATFORMS",
@@ -479,7 +642,7 @@
         "SP-ARCHITECTURE",
         "SP-DESKTOP"
       ],
-      "sha256": "946b17abcedbdce33306e60d2b8b74e2f390b18a69ca528422ebbc8116fb9f3e"
+      "sha256": "a7f7960fa16465848ae32b4f301872a66b20f85e1c1a4f9338a8498adab05344"
     },
     {
       "id": "SP-BRIEF",
@@ -503,6 +666,38 @@
       "sha256": "6c6ba601cb2c3fca501ba521c130476c8d5475b2d0600398f53219c94ff1c266"
     },
     {
+      "id": "SP-SETUP",
+      "path": "setup/contract.md",
+      "title": "Universal Setup consumer boundary",
+      "description": "Keep provider qualification and maintenance authority outside normal startup.",
+      "requires": [
+        "SP-COMPOSITION",
+        "SP-RELEASE"
+      ],
+      "sha256": "cf272685d72085ca3e21bf3bf190d474fbcefbb7c02314e8a5989984e1f7da2f"
+    },
+    {
+      "id": "SP-SETUP-LIFECYCLE",
+      "path": "setup/lifecycle.md",
+      "title": "Maintenance, recovery and update trust",
+      "description": "Define repair and interruption outcomes before enabling managed mutations.",
+      "requires": [
+        "SP-INSTALL-OWNERSHIP",
+        "SP-ARTIFACTS"
+      ],
+      "sha256": "f425b8f6f5b0770a46a2850ca7e8f697e47c8cd2197f0238759ca59cd8c5c44f"
+    },
+    {
+      "id": "SP-INSTALL-OWNERSHIP",
+      "path": "setup/ownership.md",
+      "title": "Installation paths and mutation ownership",
+      "description": "Separate immutable payload, user state and maintenance receipts across deployment modes.",
+      "requires": [
+        "SP-SETUP"
+      ],
+      "sha256": "cac879b9ee7246d4dc02c7a55f559e4e1000520e53a144575c1252f64eee6ca7"
+    },
+    {
       "id": "SP-DEVICES",
       "path": "telemetry/devices.md",
       "title": "Device, dock, serial and software inventory",
@@ -520,7 +715,18 @@
       "requires": [
         "SP-STATE"
       ],
-      "sha256": "c0c63dd7bb6cedf64d0f95a1a2aaaf99389acf1bc01bd24ae4971e4bd26264ea"
+      "sha256": "b1d2d2136507f77b80309f8c3eddc9b6a54e30ab34ea83d28dabf9aa948988e4"
+    },
+    {
+      "id": "SP-METRICS",
+      "path": "telemetry/metric-registry.md",
+      "title": "Metric and provider descriptors",
+      "description": "Describe units, source semantics, cost and sensitivity once for every advertised field.",
+      "requires": [
+        "SP-STATE",
+        "SP-SCHEDULER"
+      ],
+      "sha256": "521766a51118333e556ab5c8801f60c09f584499e49036ea457b358977a0b707"
     },
     {
       "id": "SP-NETWORK",
@@ -561,7 +767,7 @@
       "requires": [
         "SP-STATE"
       ],
-      "sha256": "7e45c2de0ca9b99009b31a2fc1a933ba676b6921aebd67a603022b113d31a4f7"
+      "sha256": "6db460285587c3cb654428df6c930a425c9597d2347e699aa8c2898de79c1468"
     },
     {
       "id": "SP-TOOLS",
@@ -573,7 +779,7 @@
         "SP-CONTEXT",
         "SP-TESTING"
       ],
-      "sha256": "d4a21ff03438344249cb571e3fbe3ffaaf2a75f393ba85e4da12afb595df94f2"
+      "sha256": "f9a204cad8592403d9c057e0741b80f75bae441256a27bd0a13ea804087757d0"
     }
   ]
 }

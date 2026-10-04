@@ -23,23 +23,28 @@
       "properties": {
         "foreground": {
           "type": "string",
-          "pattern": "^#[0-9a-fA-F]{8}$"
+          "pattern": "^#[0-9a-fA-F]{8}$",
+          "description": "sRGB red, green, blue, alpha bytes in that order; straight alpha."
         },
         "background": {
           "type": "string",
-          "pattern": "^#[0-9a-fA-F]{8}$"
+          "pattern": "^#[0-9a-fA-F]{8}$",
+          "description": "sRGB red, green, blue, alpha bytes in that order; straight alpha."
         },
         "warning": {
           "type": "string",
-          "pattern": "^#[0-9a-fA-F]{8}$"
+          "pattern": "^#[0-9a-fA-F]{8}$",
+          "description": "sRGB red, green, blue, alpha bytes in that order; straight alpha."
         },
         "error": {
           "type": "string",
-          "pattern": "^#[0-9a-fA-F]{8}$"
+          "pattern": "^#[0-9a-fA-F]{8}$",
+          "description": "sRGB red, green, blue, alpha bytes in that order; straight alpha."
         },
         "muted": {
           "type": "string",
-          "pattern": "^#[0-9a-fA-F]{8}$"
+          "pattern": "^#[0-9a-fA-F]{8}$",
+          "description": "sRGB red, green, blue, alpha bytes in that order; straight alpha."
         }
       },
       "required": [
@@ -94,5 +99,6 @@
     "font",
     "motion"
   ],
-  "additionalProperties": false
+  "additionalProperties": false,
+  "description": "Authored colors are sRGB #RRGGBBAA, straight alpha; native premultiplication is a rendering conversion. See configuration-resolution.md for theme/motion precedence."
 }

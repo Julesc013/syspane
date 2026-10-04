@@ -10,8 +10,9 @@ sp_profile: "syspane-spec/0.1.0"
 sp_authority: "normative-proposal"
 sp_requires: ["SP-TESTING", "SP-SECURITY"]
 sp_review: "unreviewed"
-sp_sources: ["SRC-CONVERSATION", "SRC-REPRO"]
+sp_sources: ["SRC-CONVERSATION", "SRC-REPRO", "SRC-AUDIT-2026-10-04"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}, {"id": "SRC-REPRO", "resource": "https://reproducible-builds.org/docs/definition/", "title": "Reproducible Builds definition"}]
+updated: {"by": "codex", "at": "2026-10-04T19:32:52+11:00", "scope": "October audit amendments; no human review attested"}
 ---
 
 # Build, release, servicing and deployment
@@ -41,3 +42,18 @@ A stable release requires mandatory native profile tests, security and accessibi
 Maintain vulnerability intake, supported-version policy, deprecation/migration windows and dependency monitoring. License choice and contribution/IP policy need an explicit owner decision before public code distribution; this archive does not fabricate a project license or Microsoft endorsement.
 
 [^SRC-REPRO]: Reproducible Builds definition.
+
+## Concrete delivery contracts
+
+[Targets](../delivery/target-profiles.md) own exact build floors;
+[artifacts](../delivery/artifacts.md) own binary names and package closure;
+[USK binding](../setup/contract.md), [ownership](../setup/ownership.md) and
+[lifecycle](../setup/lifecycle.md) own installation authority and recovery.
+Portable and managed forms package the same identified payload, not divergent builds.
+Native package managers keep ownership of their resources. Online acquisition has
+a separate trust/expiry/rollback gate and stays disabled initially.
+
+Before publication choose code/docs/assets licenses and contribution provenance,
+audit redistribution/notices, establish security intake and supported-version/hotfix
+ownership, and record signing/publication authority. No license or release consent
+is inferred from the audit text or successful specification checks.

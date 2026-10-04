@@ -217,6 +217,237 @@
       "expected": "invalid",
       "semantic": false,
       "reason": "Setting operations derive their argument type from the canonical settings schema."
+    },
+    {
+      "path": "fixtures/valid/binding-selector.json",
+      "schema": "binding",
+      "expected": "valid",
+      "semantic": false,
+      "reason": ""
+    },
+    {
+      "path": "fixtures/invalid/binding-unbounded.json",
+      "schema": "binding",
+      "expected": "invalid",
+      "semantic": false,
+      "reason": "A selector needs a positive bounded result limit."
+    },
+    {
+      "path": "fixtures/valid/layout-flow.json",
+      "schema": "layout",
+      "expected": "valid",
+      "semantic": false,
+      "reason": ""
+    },
+    {
+      "path": "fixtures/invalid/layout-inverted-bounds.json",
+      "schema": "layout",
+      "expected": "invalid",
+      "semantic": true,
+      "reason": "Minimum cannot exceed preferred or maximum."
+    },
+    {
+      "path": "fixtures/valid/scene-portable.json",
+      "schema": "scene-v0.2",
+      "expected": "valid",
+      "semantic": false,
+      "reason": ""
+    },
+    {
+      "path": "fixtures/invalid/scene-cycle.json",
+      "schema": "scene-v0.2",
+      "expected": "invalid",
+      "semantic": true,
+      "reason": "Graph must be acyclic and singly owned."
+    },
+    {
+      "path": "fixtures/invalid/scene-dangling-child.json",
+      "schema": "scene-v0.2",
+      "expected": "invalid",
+      "semantic": true,
+      "reason": "Every child reference resolves."
+    },
+    {
+      "path": "fixtures/invalid/scene-multiple-parents.json",
+      "schema": "scene-v0.2",
+      "expected": "invalid",
+      "semantic": true,
+      "reason": "Roots and children own each widget once."
+    },
+    {
+      "path": "fixtures/invalid/scene-leaf-children.json",
+      "schema": "scene-v0.2",
+      "expected": "invalid",
+      "semantic": false,
+      "reason": ""
+    },
+    {
+      "path": "fixtures/valid/command-scene-replace.json",
+      "schema": "command-v0.2",
+      "expected": "valid",
+      "semantic": false,
+      "reason": ""
+    },
+    {
+      "path": "fixtures/invalid/command-invalid-scene.json",
+      "schema": "command-v0.2",
+      "expected": "invalid",
+      "semantic": true,
+      "reason": ""
+    },
+    {
+      "path": "fixtures/valid/target-profile.json",
+      "schema": "target-profile",
+      "expected": "valid",
+      "semantic": false,
+      "reason": ""
+    },
+    {
+      "path": "fixtures/invalid/target-self-qualified.json",
+      "schema": "target-profile",
+      "expected": "invalid",
+      "semantic": false,
+      "reason": ""
+    },
+    {
+      "path": "fixtures/valid/capability-target.json",
+      "schema": "capability-v0.2",
+      "expected": "valid",
+      "semantic": false,
+      "reason": ""
+    },
+    {
+      "path": "fixtures/invalid/capability-no-evidence.json",
+      "schema": "capability-v0.2",
+      "expected": "invalid",
+      "semantic": false,
+      "reason": ""
+    },
+    {
+      "path": "fixtures/valid/preset.json",
+      "schema": "preset",
+      "expected": "valid",
+      "semantic": false,
+      "reason": ""
+    },
+    {
+      "path": "fixtures/invalid/preset-setting-wrong-type.json",
+      "schema": "preset",
+      "expected": "invalid",
+      "semantic": true,
+      "reason": ""
+    },
+    {
+      "path": "fixtures/invalid/preset-self-parent.json",
+      "schema": "preset",
+      "expected": "invalid",
+      "semantic": true,
+      "reason": ""
+    },
+    {
+      "path": "fixtures/valid/content-package.json",
+      "schema": "content-package",
+      "expected": "valid",
+      "semantic": false,
+      "reason": ""
+    },
+    {
+      "path": "fixtures/invalid/content-path-escape.json",
+      "schema": "content-package",
+      "expected": "invalid",
+      "semantic": false,
+      "reason": ""
+    },
+    {
+      "path": "fixtures/invalid/content-case-collision.json",
+      "schema": "content-package",
+      "expected": "invalid",
+      "semantic": true,
+      "reason": ""
+    },
+    {
+      "path": "fixtures/valid/extension-manifest.json",
+      "schema": "extension-manifest",
+      "expected": "valid",
+      "semantic": false,
+      "reason": ""
+    },
+    {
+      "path": "fixtures/invalid/extension-auto-enabled.json",
+      "schema": "extension-manifest",
+      "expected": "invalid",
+      "semantic": false,
+      "reason": ""
+    },
+    {
+      "path": "fixtures/valid/policy.json",
+      "schema": "policy",
+      "expected": "valid",
+      "semantic": false,
+      "reason": ""
+    },
+    {
+      "path": "fixtures/invalid/policy-user-authority.json",
+      "schema": "policy",
+      "expected": "invalid",
+      "semantic": false,
+      "reason": ""
+    },
+    {
+      "path": "fixtures/invalid/policy-setting-wrong-type.json",
+      "schema": "policy",
+      "expected": "invalid",
+      "semantic": true,
+      "reason": ""
+    },
+    {
+      "path": "fixtures/valid/handshake.json",
+      "schema": "handshake",
+      "expected": "valid",
+      "semantic": false,
+      "reason": ""
+    },
+    {
+      "path": "fixtures/invalid/handshake-over-limit.json",
+      "schema": "handshake",
+      "expected": "invalid",
+      "semantic": false,
+      "reason": ""
+    },
+    {
+      "path": "fixtures/valid/command-result.json",
+      "schema": "command-result",
+      "expected": "valid",
+      "semantic": false,
+      "reason": ""
+    },
+    {
+      "path": "fixtures/invalid/result-durable-without-store.json",
+      "schema": "command-result",
+      "expected": "invalid",
+      "semantic": true,
+      "reason": ""
+    },
+    {
+      "path": "fixtures/valid/metric-descriptor.json",
+      "schema": "metric-descriptor",
+      "expected": "valid",
+      "semantic": false,
+      "reason": ""
+    },
+    {
+      "path": "fixtures/invalid/metric-invalid-freshness.json",
+      "schema": "metric-descriptor",
+      "expected": "invalid",
+      "semantic": false,
+      "reason": ""
+    },
+    {
+      "path": "fixtures/valid/scene-migrated-0.1.json",
+      "schema": "scene-v0.2",
+      "expected": "valid",
+      "semantic": true,
+      "reason": "Paired with scene.json: preserves IDs, rectangles, theme and unresolved local entity bindings."
     }
   ]
 }

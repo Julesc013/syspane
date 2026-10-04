@@ -10,8 +10,9 @@ sp_profile: "syspane-spec/0.1.0"
 sp_authority: "normative-proposal"
 sp_requires: ["SP-ARCHITECTURE"]
 sp_review: "unreviewed"
-sp_sources: ["SRC-CONVERSATION"]
+sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
+updated: {"by": "codex", "at": "2026-10-04T19:32:52+11:00", "scope": "October audit amendments; no human review attested"}
 ---
 
 # Acquisition planning, reconciliation and backpressure
@@ -43,3 +44,14 @@ Use monotonic elapsed time for rates, deadlines and durations. Record UTC with e
 ## Suspension
 
 Drawing, sampling and recording have independent policies. Display off or lock suspends unnecessary presentation. An explicitly admitted overnight recording may continue. Resumption forces reconciliation and publishes any gap. Timer resolution is not raised merely to draw one-second statistics; timestamp precision and wake frequency are distinct choices.
+
+## Demand leases and profile budgets
+
+Desktop, inspector, saver and recorder requests have independent leases and share
+source acquisition. Saver exit does not stop an enabled recorder. Descriptors expose
+minimum sample interval, cost, permission and cancellation scope. Bound queue bytes,
+entity/string work, concurrency, deadlines and retries before enabling a source.
+Reserve progress for policy revocation, health and final-state publication during
+sustained storms; explicit evidence gaps survive coalescing. A stuck unkillable
+operation cannot spawn unlimited replacement workers. See [recovery](recovery.md)
+and [metric descriptors](../telemetry/metric-registry.md).

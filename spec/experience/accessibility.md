@@ -10,8 +10,9 @@ sp_profile: "syspane-spec/0.1.0"
 sp_authority: "normative-proposal"
 sp_requires: ["SP-EDITOR", "SP-SETTINGS"]
 sp_review: "unreviewed"
-sp_sources: ["SRC-CONVERSATION"]
+sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
+updated: {"by": "codex", "at": "2026-10-04T19:32:52+11:00", "scope": "October audit amendments; no human review attested"}
 ---
 
 # Accessibility, localization and cognitive load
@@ -37,3 +38,11 @@ Do not infer language from a performance-counter display name. Native collectors
 ## Acceptance
 
 Perform keyboard-only settings/editor tasks, accessibility-tree assertions, focus retention under telemetry updates, high-contrast/reduced-motion tests and representative screen-reader review on named platforms. Include long translated labels, right-to-left content and mixed-direction device identifiers. A screenshot existence check cannot count as accessibility qualification.
+
+## Disclosure and theme constraints
+
+Theme fallback never changes authored font intent. High contrast, reduced motion
+and mandatory failure/replay labels constrain custom styling. Masked fields must
+also be restricted in tooltips, accessibility names, clipboard and exports under
+[policy](policy.md). Native coverage tests include search/help, RTL, scaling,
+keyboard-only editing, focus restoration and saver configuration roles.

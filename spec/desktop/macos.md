@@ -10,8 +10,9 @@ sp_profile: "syspane-spec/0.1.0"
 sp_authority: "normative-proposal"
 sp_requires: ["SP-DESKTOP"]
 sp_review: "unreviewed"
-sp_sources: ["SRC-CONVERSATION"]
+sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
+updated: {"by": "codex", "at": "2026-10-04T19:32:52+11:00", "scope": "October audit amendments; no human review attested"}
 ---
 
 # macOS and OS X native profiles
@@ -43,3 +44,10 @@ An application bundle is the native deployable unit; it may contain helpers and 
 ## Acceptance
 
 Same document/command semantics as Windows/Linux; platform-specific visual baselines and text layout tolerances. Exercise native menu shortcuts, keyboard editing, accessible property values, input pass-through and configuration migrations on both admitted profiles.
+
+## Profile-specific admission
+
+Use [typed target profiles](../delivery/target-profiles.md) for exact build, native
+host, dependency and isolation identity. Keep renderer success separate from shell
+placement/input/reveal evidence. [Screensaver roles](screensaver.md) require their
+own preview/configuration, architecture, power and privacy qualification.

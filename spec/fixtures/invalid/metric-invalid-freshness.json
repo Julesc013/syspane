@@ -1,0 +1,19 @@
+{
+  "schema_version": "0.1.0",
+  "metric_id": "network.receive_bytes",
+  "value_kind": "uint64",
+  "unit": "byte",
+  "scope": "network_interface",
+  "temporality": "counter",
+  "denominator": "none",
+  "reset_rule": "New epoch or counter reset invalidates the rate interval; unknown wrap is a gap.",
+  "derivation": "Native cumulative receive counter; rate uses actual elapsed sample time; first sample pending.",
+  "sample_interval_ms": 1000,
+  "freshness_ms": 1,
+  "source_coverage": [
+    "provider:native-network"
+  ],
+  "permissions": [],
+  "sensitivity": "operational",
+  "cost": "cheap"
+}

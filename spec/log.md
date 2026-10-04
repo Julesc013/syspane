@@ -1,5 +1,12 @@
 # SysPane specification update log
 
+## 2026-10-04
+- **Scope**: Applied the user-requested audit synthesis to specs, docs, README and TODO; attached recommendations did not grant runtime execution.
+- **Contracts**: Added composition, recovery, persistence, resolution, selectors/layout, policy, saver, target and setup ownership contracts; retained 0.1 migration inputs and added scene/command/capability 0.2.
+- **Tooling**: Enforced setting descriptor consistency and generated constraints; added bounded semantic fixtures and explicit date-time/UTF-8 checking.
+- **Delivery**: Split native vertical/provider/qualification/package work by profile; retained original aggregate IDs and early security/recovery/smoke gates.
+- **Evidence**: Kept historical validation separately and recorded fresh tooling results; native implementation, provider admission and human review remain unclaimed.
+
 ## 2026-09-17
 - **Creation**: Consolidated the current greenfield native product design into a root OKF specification bundle.
 - **Decision**: Recorded separation of specification, source, publication docs, execution authority and evidence.

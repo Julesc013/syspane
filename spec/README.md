@@ -10,8 +10,9 @@ sp_profile: "syspane-spec/0.1.0"
 sp_authority: "informative"
 sp_requires: []
 sp_review: "unreviewed"
-sp_sources: ["SRC-CONVERSATION"]
+sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
+updated: {"by": "codex", "at": "2026-10-04T19:32:52+11:00", "scope": "October audit amendments; no human review attested"}
 ---
 
 # SysPane specification bundle
@@ -22,7 +23,7 @@ This is a **greenfield design baseline**, not a working SysPane application. It 
 
 ## Adoption
 
-Place this directory at `julesc013/syspane/spec/`. Do not nest it under `docs/`, and do not copy the specification bodies into another canonical tree. Start with [the navigation index](index.md), [current state](delivery/current-state.md), [the reading routes](governance/context.md) and [the implementation campaign](delivery/roadmap.md).
+This bundle is already imported at `Julesc013/syspane/spec/`. The October 0.2.0 amendment retains the 0.1.0 authoring profile and old document fixtures; see [audit disposition](delivery/audit-2026-10-04.md). Do not nest it under `docs/`, and do not copy the specification bodies into another canonical tree. Start with [the navigation index](index.md), [current state](delivery/current-state.md), [the reading routes](governance/context.md) and [the implementation campaign](delivery/roadmap.md).
 
 From the repository root, run:
 
@@ -40,7 +41,7 @@ python -m pip install -r spec/tools/requirements.txt
 python spec/tools/specctl.py validate --schemas
 ```
 
-Python is a **development tool**, not an endpoint runtime requirement. `python` means an available Python 3.11+ interpreter; `python3` or `py -3` may be the appropriate launcher. The package was tested in the delivery environment recorded under `generated/`; it is not a claim of Windows execution.
+Python is a **development tool**, not an endpoint runtime requirement. `python` means an available Python 3.11+ interpreter; `python3` or `py -3` may be the appropriate launcher. The reports under `generated/` identify their actual specification-tool execution environments. Windows tooling execution is not native SysPane or desktop qualification.
 
 ## Root integration without overwriting files
 
@@ -72,3 +73,11 @@ The bundled registry statements, detailed specifications, schemas and fixtures h
 `docs/` is for polished, audience-specific documentation. `source/` is implementation. This `spec/` is the canonical design and contract bundle. `.aide/` will carry admitted development-control records after an actual AIDE binding is verified; it does not replace product truth. The wiki is a generated navigation surface, never a competing specification.
 
 The [source register](references/sources.json) records the supplied materials and verification boundaries. Original transcripts are not bulk-copied into the public repository: they contain obsolete guidance, unnecessary private workshop context and non-authoritative assistant text. The [disposition register](references/disposition.md) preserves why those alternatives are not current.
+
+## October implementation boundaries
+
+New contracts cover composition, configuration resolution, portable scene/binding
+0.2, persistence/recovery, policy, screensavers, target identity and setup ownership.
+Descriptor-derived constraints and new synthetic fixtures are executable spec checks.
+[Readiness](delivery/implementation-readiness.md) and the work graph identify what
+still needs runtime implementation, native evidence or an owner decision.

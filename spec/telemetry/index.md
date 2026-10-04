@@ -4,6 +4,8 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 
 - [Device, dock, serial and software inventory](devices.md) — Keep operational observation non-invasive and source-specific.
 - [History, durability and replay](history.md) — Keep bounded evidence separate from current state and make gaps impossible to hide.
+- [Metric and provider descriptors](metric-registry.md) — Describe units, source semantics, cost and sensitivity once for every advertised field.
+- [metrics.json](metrics.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [Network telemetry and diagnostic presentation](network.md) — Join device, interface, protocol, connectivity and history without flattening their meanings.
 - [Processor, memory and GPU semantics](resources.md) — Define denominators, units and support rather than importing ambiguous dashboard labels.
 - [Storage, volumes, partitions and filesystem identity](storage.md) — Model storage topology without opening or mutating devices unnecessarily.

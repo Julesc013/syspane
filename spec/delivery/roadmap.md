@@ -10,36 +10,53 @@ sp_profile: "syspane-spec/0.1.0"
 sp_authority: "normative-proposal"
 sp_requires: ["SP-CURRENT", "SP-PLATFORMS", "SP-TESTING"]
 sp_review: "unreviewed"
-sp_sources: ["SRC-CONVERSATION"]
+sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
+updated: {"by": "codex", "at": "2026-10-04T19:32:52+11:00", "scope": "October audit amendments; no human review attested"}
 ---
 
-# Greenfield implementation campaign
+# Implementation campaign and parallel tracks
 
-## Campaign principle
+## First useful journey
 
-Establish the smallest complete native experience on initial platform families: launch, inspect host/network state, enter Edit Desktop, move/resize/theme a pane, apply, reveal the desktop, observe a real change and reopen with the same authored layout. This is neither a collector-only release nor a multi-year universal framework prerequisite.
+Launch a target-native package, inspect truthful host/network state, enter Edit
+Desktop, move/resize/theme a pane, apply, reveal the desktop, observe a real change,
+reopen the same authored state and obtain independent diagnostics after a failure.
+This is a complete native vertical, not a collector-only substitute.
 
-## Parallel tracks
+## Campaign sequence
 
-Foundation creates the source targets, provisional typed state/command path and synthetic fixtures. Host investigations consume a changing fixture early: contemporary Windows, XP/7, Linux shell paths and macOS/older OS X. These experiments inform interface refinement before freezing a public SDK.
+1. Admit minimum contracts and bootstrap actual CMake/component/target ownership.
+   Build settings/scene/command, policy/IPC and recovery contracts without freezing
+   every future API. The October documentation change supplies experiments' inputs;
+   it does not mark runtime work complete.
+2. Probe contemporary Windows, XP/7, Linux shell paths and AppKit/older OS X using
+   changing fixtures. Build small smoke packages on actual targets immediately.
+3. Integrate each profile independently with real network acquisition, native UI,
+   editing, persistence, authorization and independent reveal/recovery tests.
+4. Qualify each announced profile's exact payload, accessibility, disclosure,
+   performance and recovery. Cross-platform document conformance is a separate
+   milestone; one blocked lab cannot block another honestly scoped preview.
+5. Package offline qualified payloads. Exercise USK read-only and synthetic consumer
+   tests before enabling any qualified managed operation. Portable use stays independent.
+6. Add resource/device/history breadth, companion saver, provider SDK, enterprise
+   adapters and more historical targets through explicit capability gates.
 
-The semantic engine, acquisition scheduler, network providers, projection/layout, editor/transactions and native settings progress as bounded units. They meet in a real network vertical slice with an independent desktop observer. Resource/device/history coverage grows after that path works; policy and safety controls are not bolted on after release.
+## Work graph interpretation
 
-## Dependency gates
+W-27 through W-30 are independent native verticals, including XP/7. W-34 through
+W-37 split native network work by the same families. W-24/W-25 establish early
+authorization and recovery; W-26 supplies smoke packaging. W-40 through W-47 qualify
+and package individual profiles. W-13, W-12, W-20 and W-21 remain aggregate tracking
+identities, not prerequisites for those per-profile outputs. Their scope refinement
+is recorded rather than silently deleting old references.
 
-The machine-readable work graph contains IDs, dependencies, acceptance references, output paths and authority class. Dependency-ready means prerequisites are complete; it does not mean execution is authorized. A maintainer admits a unit's scope and environment. Ordinary reversible work can then proceed autonomously within that grant.
+W-10/W-11 establish shared operation/UI contract facilities; platform-specific native
+control completion is accepted in the corresponding vertical. Runtime instances of
+profile work bind an exact target, not a family-wide compatibility badge.
 
-Native host experiments can report failed strategies honestly and still produce useful diagnostic evidence. They cannot mark the product wall supported until the temporal acceptance criteria pass. A provider implementation can progress while a particular compositor host is blocked.
-
-## Product expansion
-
-After the first usable slice, add resource metrics, storage/device graphs, history/replay, diagnostics, policy, packaging and sustained qualification. Admit external SDK providers after core lifecycle/protocol tests. Broader historical targets have separate feasibility profiles with shared semantics and reduced native functionality where appropriate.
-
-## Deliverable discipline
-
-Every unit outputs code/spec changes, tests, actual results, unexecuted checks and a handoff. Integration references exact source and artifact identities. No benchmark or platform checkbox is filled from reasoning. Reuse valid evidence rather than repeating whole campaigns for unrelated edits.
-
-## Completion
-
-A first release is not “all operating systems forever.” It is a useful qualified native product on named profiles with honest capability reporting and a reproducible path for new profiles. Long-term portability is built by preserving contract meaning and testability while replacing implementations when requirements change.
+Dependency-ready means prerequisites complete, not execution authorized. Work records
+carry code/tests, actual outcomes, unexecuted checks, exact source/artifacts and handoff.
+Policy and recovery precede exposed cross-process functionality. Conventional windows
+never satisfy the persistent-wall oracle. Reuse evidence only when relevant inputs
+remain valid. [Readiness](implementation-readiness.md) lists remaining gates.

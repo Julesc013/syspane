@@ -1,6 +1,6 @@
 {
   "version": "0.1.0",
-  "note": "Initial schema settings only. Registry expands with advertised user capabilities; no GUI is implemented by this table.",
+  "note": "Canonical initial descriptors. Schema/command constraints are generated; native bindings/help remain planned.",
   "settings": [
     {
       "id": "sampling.resources_ms",
@@ -11,7 +11,23 @@
       "native_page": "Sources",
       "ui_status": "planned",
       "documentation_owner": "SP-SETTINGS",
-      "policy_enforced": true
+      "policy_enforced": true,
+      "constraints": {
+        "type": "integer",
+        "minimum": 100,
+        "maximum": 60000
+      },
+      "units": "ms",
+      "scope": "user",
+      "dependencies": [],
+      "activation": "source_plan",
+      "restart_required": false,
+      "preview": true,
+      "policy_class": "preference",
+      "label_id": "setting.sampling.resources_ms.label",
+      "help_id": "setting.sampling.resources_ms.help",
+      "classification": "user",
+      "sensitivity": "operational"
     },
     {
       "id": "sampling.reconcile_ms",
@@ -22,7 +38,23 @@
       "native_page": "Sources",
       "ui_status": "planned",
       "documentation_owner": "SP-SETTINGS",
-      "policy_enforced": true
+      "policy_enforced": true,
+      "constraints": {
+        "type": "integer",
+        "minimum": 1000,
+        "maximum": 3600000
+      },
+      "units": "ms",
+      "scope": "user",
+      "dependencies": [],
+      "activation": "source_plan",
+      "restart_required": false,
+      "preview": true,
+      "policy_class": "preference",
+      "label_id": "setting.sampling.reconcile_ms.label",
+      "help_id": "setting.sampling.reconcile_ms.help",
+      "classification": "user",
+      "sensitivity": "operational"
     },
     {
       "id": "sampling.max_workers",
@@ -33,7 +65,23 @@
       "native_page": "Sources",
       "ui_status": "planned",
       "documentation_owner": "SP-SETTINGS",
-      "policy_enforced": true
+      "policy_enforced": true,
+      "constraints": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 32
+      },
+      "units": "count",
+      "scope": "user",
+      "dependencies": [],
+      "activation": "source_plan",
+      "restart_required": false,
+      "preview": true,
+      "policy_class": "preference",
+      "label_id": "setting.sampling.max_workers.label",
+      "help_id": "setting.sampling.max_workers.help",
+      "classification": "user",
+      "sensitivity": "operational"
     },
     {
       "id": "history.persistent",
@@ -44,7 +92,21 @@
       "native_page": "History",
       "ui_status": "planned",
       "documentation_owner": "SP-SETTINGS",
-      "policy_enforced": true
+      "policy_enforced": true,
+      "constraints": {
+        "type": "boolean"
+      },
+      "units": "none",
+      "scope": "user",
+      "dependencies": [],
+      "activation": "recorder",
+      "restart_required": false,
+      "preview": true,
+      "policy_class": "preference",
+      "label_id": "setting.history.persistent.label",
+      "help_id": "setting.history.persistent.help",
+      "classification": "user",
+      "sensitivity": "operational"
     },
     {
       "id": "history.segment_bytes",
@@ -55,7 +117,23 @@
       "native_page": "History",
       "ui_status": "planned",
       "documentation_owner": "SP-SETTINGS",
-      "policy_enforced": true
+      "policy_enforced": true,
+      "constraints": {
+        "type": "integer",
+        "minimum": 4096,
+        "maximum": 1073741824
+      },
+      "units": "bytes",
+      "scope": "user",
+      "dependencies": [],
+      "activation": "recorder",
+      "restart_required": false,
+      "preview": true,
+      "policy_class": "preference",
+      "label_id": "setting.history.segment_bytes.label",
+      "help_id": "setting.history.segment_bytes.help",
+      "classification": "user",
+      "sensitivity": "operational"
     },
     {
       "id": "history.segments",
@@ -66,7 +144,23 @@
       "native_page": "History",
       "ui_status": "planned",
       "documentation_owner": "SP-SETTINGS",
-      "policy_enforced": true
+      "policy_enforced": true,
+      "constraints": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 100
+      },
+      "units": "count",
+      "scope": "user",
+      "dependencies": [],
+      "activation": "recorder",
+      "restart_required": false,
+      "preview": true,
+      "policy_class": "preference",
+      "label_id": "setting.history.segments.label",
+      "help_id": "setting.history.segments.help",
+      "classification": "user",
+      "sensitivity": "operational"
     },
     {
       "id": "display.enabled",
@@ -77,7 +171,21 @@
       "native_page": "Appearance",
       "ui_status": "planned",
       "documentation_owner": "SP-SETTINGS",
-      "policy_enforced": true
+      "policy_enforced": true,
+      "constraints": {
+        "type": "boolean"
+      },
+      "units": "none",
+      "scope": "user",
+      "dependencies": [],
+      "activation": "projection",
+      "restart_required": false,
+      "preview": true,
+      "policy_class": "preference",
+      "label_id": "setting.display.enabled.label",
+      "help_id": "setting.display.enabled.help",
+      "classification": "user",
+      "sensitivity": "operational"
     },
     {
       "id": "display.theme_id",
@@ -88,7 +196,24 @@
       "native_page": "Appearance",
       "ui_status": "planned",
       "documentation_owner": "SP-SETTINGS",
-      "policy_enforced": true
+      "policy_enforced": true,
+      "constraints": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 256,
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+      },
+      "units": "none",
+      "scope": "user",
+      "dependencies": [],
+      "activation": "projection",
+      "restart_required": false,
+      "preview": true,
+      "policy_class": "preference",
+      "label_id": "setting.display.theme_id.label",
+      "help_id": "setting.display.theme_id.help",
+      "classification": "user",
+      "sensitivity": "operational"
     },
     {
       "id": "display.reduced_motion",
@@ -99,7 +224,21 @@
       "native_page": "Appearance",
       "ui_status": "planned",
       "documentation_owner": "SP-SETTINGS",
-      "policy_enforced": true
+      "policy_enforced": true,
+      "constraints": {
+        "type": "boolean"
+      },
+      "units": "none",
+      "scope": "user",
+      "dependencies": [],
+      "activation": "projection",
+      "restart_required": false,
+      "preview": true,
+      "policy_class": "preference",
+      "label_id": "setting.display.reduced_motion.label",
+      "help_id": "setting.display.reduced_motion.help",
+      "classification": "user",
+      "sensitivity": "operational"
     },
     {
       "id": "privacy.remote_probes",
@@ -110,7 +249,21 @@
       "native_page": "Privacy",
       "ui_status": "planned",
       "documentation_owner": "SP-SETTINGS",
-      "policy_enforced": true
+      "policy_enforced": true,
+      "constraints": {
+        "type": "boolean"
+      },
+      "units": "none",
+      "scope": "user",
+      "dependencies": [],
+      "activation": "authorization",
+      "restart_required": false,
+      "preview": true,
+      "policy_class": "permission",
+      "label_id": "setting.privacy.remote_probes.label",
+      "help_id": "setting.privacy.remote_probes.help",
+      "classification": "user",
+      "sensitivity": "operational"
     },
     {
       "id": "privacy.export_enabled",
@@ -121,7 +274,22 @@
       "native_page": "Privacy",
       "ui_status": "planned",
       "documentation_owner": "SP-SETTINGS",
-      "policy_enforced": true
+      "policy_enforced": true,
+      "constraints": {
+        "type": "boolean"
+      },
+      "units": "none",
+      "scope": "user",
+      "dependencies": [],
+      "activation": "authorization",
+      "restart_required": false,
+      "preview": true,
+      "policy_class": "permission",
+      "label_id": "setting.privacy.export_enabled.label",
+      "help_id": "setting.privacy.export_enabled.help",
+      "classification": "user",
+      "sensitivity": "operational"
     }
-  ]
+  ],
+  "revision": "2026-10-04"
 }

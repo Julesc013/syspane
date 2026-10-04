@@ -10,8 +10,9 @@ sp_profile: "syspane-spec/0.1.0"
 sp_authority: "informative"
 sp_requires: ["SP-ROADMAP"]
 sp_review: "unreviewed"
-sp_sources: ["SRC-CONVERSATION"]
+sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
+updated: {"by": "codex", "at": "2026-10-04T19:32:52+11:00", "scope": "October audit amendments; no human review attested"}
 ---
 
 # Open decisions, risks and resolving experiments
@@ -43,3 +44,20 @@ Known uncertainty is not a reason to remove the user's requirement. A platform c
 ## Review cadence
 
 Revisit a risk when its dependency changes: OS update, new toolchain, new AIDE contract, new provider or observed failure. Avoid arbitrary recurring full re-research. Source references contain dates and scope; mark stale source facts without changing stable product intent automatically.
+
+## October gates with resolving work
+
+| ID | Question | Resolving work/evidence | Blocks |
+|---|---|---|---|
+| R-14 | Filesystem commit and crash recovery | W-08; staged/pointer/activation interruption tests | Durable settings claims |
+| R-15 | USK public binding and per-operation qualification | W-32; inspect pinned SDK/contracts and consumer harness | Managed apply |
+| R-16 | Saver host and disclosure | W-31; native preview/config/fullscreen and lock tests | Saver package |
+| R-17 | Full theme tokens and expression AST | W-09/W-33; versioned schemas and bounded evaluation fixtures | Rich theme/expression features |
+| R-18 | Controlled public contract namespace and stable ABI | W-19/W-33; aliases and independent consumers | Stable public SDK |
+| R-19 | Online update metadata trust | W-39; pinned design and rotation/expiry/rollback tests | Automatic acquisition |
+| R-20 | Release/component/setup machine manifests | W-01/W-26/W-32; actual build/provider closure | Publishable packages |
+
+R-01..R-06 resolve in their platform/profile work; R-07/R-11 in W-38; R-08 in W-16;
+R-09 in W-22; R-10/R-12 in per-profile W-40..W-43; R-13 in W-34..W-37. These are
+owned planned experiments, not inferred outcomes. The minimum October metadata and
+fixture work does not complete native algorithms or every later schema.

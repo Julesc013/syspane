@@ -1,0 +1,44 @@
+{
+  "version": "0.1.0",
+  "status": "experimental_descriptors_not_live_providers",
+  "metrics": [
+    {
+      "schema_version": "0.1.0",
+      "metric_id": "network.receive_bytes",
+      "value_kind": "uint64",
+      "unit": "byte",
+      "scope": "network_interface",
+      "temporality": "counter",
+      "denominator": "none",
+      "reset_rule": "New epoch or counter reset invalidates the rate interval; unknown wrap is a gap.",
+      "derivation": "Native cumulative receive counter; rate uses actual elapsed sample time; first sample pending.",
+      "sample_interval_ms": 1000,
+      "freshness_ms": 3000,
+      "source_coverage": [
+        "provider:native-network"
+      ],
+      "permissions": [],
+      "sensitivity": "operational",
+      "cost": "cheap"
+    },
+    {
+      "schema_version": "0.1.0",
+      "metric_id": "memory.commit_bytes",
+      "value_kind": "uint64",
+      "unit": "byte",
+      "scope": "host",
+      "temporality": "gauge",
+      "denominator": "Native committed virtual memory; not pagefile occupancy.",
+      "reset_rule": "No counter delta; unavailable remains unavailable.",
+      "derivation": "Native memory accounting with platform semantics preserved.",
+      "sample_interval_ms": 1000,
+      "freshness_ms": 3000,
+      "source_coverage": [
+        "provider:native-resources"
+      ],
+      "permissions": [],
+      "sensitivity": "operational",
+      "cost": "cheap"
+    }
+  ]
+}

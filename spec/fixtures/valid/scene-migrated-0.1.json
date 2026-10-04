@@ -1,0 +1,38 @@
+{
+  "schema_version": "0.2.0",
+  "revision": "1",
+  "scene_id": "scene:workshop",
+  "theme_id": "theme:native",
+  "widgets": [
+    {
+      "id": "widget:network",
+      "kind": "table",
+      "title": "Network connections",
+      "layout": {
+        "base": {
+          "kind": "fixed",
+          "x": 24,
+          "y": 24,
+          "width": 640,
+          "height": 240
+        }
+      },
+      "bindings": [
+        {
+          "kind": "unresolved_pin",
+          "source_schema_version": "0.1.0",
+          "entity_id": "host:demo/nic:1",
+          "field": "network.media",
+          "reason": "producer_context_required"
+        }
+      ],
+      "priority": "essential",
+      "display": {
+        "local_id": "display:primary"
+      }
+    }
+  ],
+  "roots": [
+    "widget:network"
+  ]
+}

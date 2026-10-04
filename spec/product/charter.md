@@ -10,8 +10,9 @@ sp_profile: "syspane-spec/0.1.0"
 sp_authority: "normative-proposal"
 sp_requires: []
 sp_review: "unreviewed"
-sp_sources: ["SRC-CONVERSATION"]
+sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
+updated: {"by": "codex", "at": "2026-10-04T19:32:52+11:00", "scope": "October audit amendments; no human review attested"}
 ---
 
 # Product charter and non-negotiable boundaries
@@ -41,3 +42,12 @@ The product is a diagnostic observer, not a partition editor, firmware flasher, 
 ## Quality claim discipline
 
 “Native”, “portable”, “small” and “Microsoft-grade” are goals with measurable criteria, not certifications. Potential upstream adoption is an aspiration. Do not imply endorsement, promise perfect behaviour on unknown future shells, or fabricate microsecond latency and universal memory figures. Publish exact capabilities, profiles and limitations.
+
+## Authority and recovery
+
+Observation, SysPane configuration, maintenance and any future OS management action
+have distinct authority. Ordinary launch performs no installation. Denied telemetry
+leaves unrelated information usable; optional failures preserve an independent
+diagnostic path within OS/session limits. The [role contract](../architecture/composition.md)
+adds a companion saver, preview/configuration and maintenance without a product fork.
+No saver role owns credentials or replaces OS locking.

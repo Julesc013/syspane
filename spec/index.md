@@ -21,6 +21,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [product](product/index.md) — browse this responsibility.
 - [references](references/index.md) — browse this responsibility.
 - [requirements](requirements/index.md) — browse this responsibility.
+- [setup](setup/index.md) — browse this responsibility.
 - [telemetry](telemetry/index.md) — browse this responsibility.
 - [tools](tools/index.md) — browse this responsibility.
 - [SysPane specification bundle](README.md) — Start here to adopt, validate and use this repository-native specification.

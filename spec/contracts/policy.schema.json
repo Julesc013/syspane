@@ -1,0 +1,149 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.example.invalid/syspane/0.1.0/policy.schema.json",
+  "title": "SysPane policy experimental 0.1.0",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "policy_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+    },
+    "revision": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]{0,19})$"
+    },
+    "scope": {
+      "enum": [
+        "machine",
+        "organization"
+      ]
+    },
+    "forced_settings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+          },
+          "value": {
+            "type": [
+              "string",
+              "integer",
+              "boolean"
+            ],
+            "maxLength": 256
+          }
+        },
+        "required": [
+          "path",
+          "value"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0,
+      "maxItems": 64
+    },
+    "denied_capabilities": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 256,
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+      },
+      "minItems": 0,
+      "maxItems": 128,
+      "uniqueItems": true
+    },
+    "disclosure": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "role": {
+            "enum": [
+              "desktop",
+              "console",
+              "collector",
+              "saver",
+              "preview",
+              "saver_settings",
+              "diagnostic",
+              "maintenance"
+            ]
+          },
+          "channel": {
+            "enum": [
+              "desktop",
+              "inspector",
+              "saver",
+              "preview",
+              "accessibility",
+              "tooltip",
+              "clipboard",
+              "history",
+              "logs",
+              "support_bundle",
+              "extension",
+              "export"
+            ]
+          },
+          "allow_classifications": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "public",
+                "operational",
+                "sensitive"
+              ]
+            },
+            "minItems": 0,
+            "maxItems": 3,
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "role",
+          "channel",
+          "allow_classifications"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0,
+      "maxItems": 128
+    },
+    "retained_data_on_revocation": {
+      "enum": [
+        "restrict",
+        "purge_with_authority"
+      ]
+    },
+    "extensions": {
+      "type": "object",
+      "maxProperties": 64,
+      "propertyNames": {
+        "pattern": "^[a-z][a-z0-9_.-]{0,127}$"
+      }
+    }
+  },
+  "required": [
+    "schema_version",
+    "policy_id",
+    "revision",
+    "scope",
+    "forced_settings",
+    "denied_capabilities",
+    "disclosure",
+    "retained_data_on_revocation"
+  ],
+  "additionalProperties": false
+}

@@ -10,8 +10,9 @@ sp_profile: "syspane-spec/0.1.0"
 sp_authority: "normative-proposal"
 sp_requires: ["SP-STATE"]
 sp_review: "unreviewed"
-sp_sources: ["SRC-CONVERSATION"]
+sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
+updated: {"by": "codex", "at": "2026-10-04T19:32:52+11:00", "scope": "October audit amendments; no human review attested"}
 ---
 
 # Commands, transactions and activation
@@ -45,3 +46,24 @@ The provided 0.1 schemas and fixtures are experimental contracts. Publish a comp
 ## Acceptance
 
 Exercise concurrent editor/CLI edits, malformed input, unknown operations, denied changes, partial activation, duplicate requests, restart after commit, rollback/undo and policy changes during a draft. Operation-equivalence tests compare canonical authored state, not the order in which native controls happened to fire callbacks.
+
+## Concrete initial 0.2 operations
+
+Command 0.1 is preserved. [Command 0.2](command-v0.2.schema.json) supports the same
+descriptor-generated `settings.set` operations and `scene.replace` carrying a scene
+0.2 draft at the expected revision. Replacing a scene is atomic authored-state work;
+it does not replace telemetry or bypass policy. Fine-grained hierarchy/binding/reset
+operations require a future versioned contract; GUI prototypes may produce the same
+validated whole-scene replacement.
+
+The transaction coordinator owns the expected generation for affected settings and
+scene documents; drafts carry that base revision, then successful commit assigns a
+new revision. Only one scene replacement per request is admitted. Validate the
+complete candidate, including hierarchy and policy, before publication.
+[Persistence](../architecture/persistence.md) owns generation recovery;
+[transport](transport.md) and [command results](command-result.schema.json) distinguish
+accepted/stored/durable/activated/visible, cancellation and result retrieval.
+
+Settings defaults and overlapping command constraints derive from the initial
+registry. Check current policy during prepare, commit and activation. Tightening
+policy revokes prohibited work/disclosure independently of slow cosmetic activation.

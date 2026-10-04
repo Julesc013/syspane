@@ -10,8 +10,9 @@ sp_profile: "syspane-spec/0.1.0"
 sp_authority: "normative-proposal"
 sp_requires: []
 sp_review: "unreviewed"
-sp_sources: ["SRC-OKF", "SRC-AIDE"]
+sp_sources: ["SRC-OKF", "SRC-AIDE", "SRC-AUDIT-2026-10-04"]
 sources: [{"id": "SRC-OKF", "resource": "https://github.com/GoogleCloudPlatform/open-knowledge-format/blob/ad30107c31c06aec8a7d5636e0d1058118604e6f/SPEC.md", "title": "Open Knowledge Format v0.2"}, {"id": "SRC-AIDE", "resource": "https://github.com/Julesc013/aide/blob/aec53b1d3675f02e2fdd17cc718fdcff6cd4e9f3/README.md", "title": "AIDE README and OKF decision"}]
+updated: {"by": "codex", "at": "2026-10-04T19:32:52+11:00", "scope": "October audit amendments; no human review attested"}
 ---
 
 # OKF and the SysPane specification profile
@@ -39,7 +40,7 @@ Every concept is UTF-8 Markdown with YAML frontmatter. This project's stricter a
 | `sp_review` | `unreviewed` until an accountable reviewer acts |
 | `sp_sources` | IDs in the compact source register |
 
-A file move changes its OKF concept path; retain its `sp_id`, update links and record old-to-new paths in `foundation/path-aliases.json`. Internal IDs are not invented public resolvable URLs. Do not put an unowned domain into `$id` fields; the schemas use versioned URNs and an offline registry.
+A file move changes its OKF concept path; retain its `sp_id`, update links and record old-to-new paths in `foundation/path-aliases.json`. Internal IDs are not invented public resolvable URLs. Schema IDs use the reserved, non-resolving `https://schemas.example.invalid/syspane/` namespace and an offline registry, not URNs. See [version policy](../contracts/versions.md). Select controlled public identifiers before stable SDK publication; unknown references never trigger network retrieval.
 
 ## Prose and structured records
 

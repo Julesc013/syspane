@@ -10,8 +10,9 @@ sp_profile: "syspane-spec/0.1.0"
 sp_authority: "normative-proposal"
 sp_requires: ["SP-AUTHORITY"]
 sp_review: "unreviewed"
-sp_sources: ["SRC-CONVERSATION"]
+sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
+updated: {"by": "codex", "at": "2026-10-04T19:32:52+11:00", "scope": "October audit amendments; no human review attested"}
 ---
 
 # Security, privacy and operational safety
@@ -43,3 +44,12 @@ AIDE worktrees isolate file organization, not privilege. Execute untrusted chang
 ## Acceptance
 
 Threat-model each new trust boundary; map threats to negative tests and mitigations. Test oversized inputs, path escapes, forged peers, event storms, permission changes, provider crashes and denied operations. Document residual risks and update/vulnerability response policy. A syntax pass or a signature does not certify security.
+
+## Contract additions and early gates
+
+[Policy](../experience/policy.md) defines role/channel disclosure and live revocation;
+[transport](../contracts/transport.md) requires native peer/session authentication,
+bounded framing and control progress before cross-process use. [Recovery](../architecture/recovery.md)
+cannot bypass mandatory policy. [Content admission](../experience/presets.md) separates
+declarative imports from executable-provider admission and actual sandbox controls.
+These are first-slice gates, not optional hardening after a public preview.

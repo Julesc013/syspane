@@ -60,6 +60,13 @@ class BundleTests(unittest.TestCase):
         self.temp.cleanup()
     def write_json(self,rel,value):
         (self.root/rel).write_bytes(s.json_bytes(value))
+    def directory_symlink(self, link, target):
+        try:
+            link.symlink_to(target, target_is_directory=True)
+        except OSError as exc:
+            if getattr(exc, 'winerror', None) == 1314:
+                self.skipTest('Windows identity lacks symlink creation privilege; assertion not executed')
+            raise
     def test_bundle_structural_validation(self):
         result=s.validate_bundle(self.root)
         self.assertEqual(result['status'],'pass',result['errors'])
@@ -69,11 +76,11 @@ class BundleTests(unittest.TestCase):
             with self.subTest(path=path),self.assertRaises(s.SpecError):s.safe_path(self.root,path)
     def test_symlink_rejected(self):
         outside=self.base/'outside';outside.mkdir()
-        (self.root/'escape').symlink_to(outside,target_is_directory=True)
+        self.directory_symlink(self.root/'escape', outside)
         with self.assertRaises(s.SpecError):s.safe_path(self.root,'escape/data.json')
         self.assertEqual(s.validate_bundle(self.root)['status'],'fail')
     def test_broken_link_fails(self):
-        p=self.root/'product/charter.md';p.write_text(p.read_text()+'\n[bad](missing.md)\n')
+        p=self.root/'product/charter.md';p.write_text(p.read_text(encoding='utf-8')+'\n[bad](missing.md)\n',encoding='utf-8')
         self.assertEqual(s.validate_bundle(self.root)['status'],'fail')
     def test_duplicate_concept_id_fails(self):
         shutil.copyfile(self.root/'product/charter.md',self.root/'product/duplicate.md')
@@ -98,7 +105,7 @@ class BundleTests(unittest.TestCase):
         self.assertEqual(s.generate(self.root,True)['status'],'pass')
     def test_generated_detects_drift(self):
         s.generate(self.root)
-        p=self.root/'product/charter.md';p.write_text(p.read_text()+'\nChanged explanatory note.\n')
+        p=self.root/'product/charter.md';p.write_text(p.read_text(encoding='utf-8')+'\nChanged explanatory note.\n',encoding='utf-8')
         self.assertEqual(s.generate(self.root,True)['status'],'fail')
     def test_context_mandatory_not_truncated(self):
         with self.assertRaisesRegex(s.SpecError,'nothing was silently truncated'):
@@ -115,7 +122,7 @@ class BundleTests(unittest.TestCase):
         with self.assertRaises(s.SpecError):s.context_packet(self.root,'nonexistent',65000)
     def test_context_changed_source_changes_packet(self):
         a,_=s.context_packet(self.root,'network',65000)
-        p=self.root/'telemetry/network.md';p.write_text(p.read_text()+'\nNew source note.\n')
+        p=self.root/'telemetry/network.md';p.write_text(p.read_text(encoding='utf-8')+'\nNew source note.\n',encoding='utf-8')
         b,_=s.context_packet(self.root,'network',65000)
         self.assertNotEqual(a,b)
     def test_output_cannot_overwrite_spec(self):
@@ -158,7 +165,7 @@ class BundleTests(unittest.TestCase):
         self.assertEqual((repo/'README.md').read_text(),'owned by user')
     def test_bootstrap_symlink_parent_refused(self):
         repo=self.base/'repo';repo.mkdir();outside=self.base/'outside';outside.mkdir()
-        (repo/'docs').symlink_to(outside,target_is_directory=True)
+        self.directory_symlink(repo/'docs', outside)
         with self.assertRaises(s.SpecError):s.bootstrap(self.root,repo,True)
         self.assertEqual(list(outside.iterdir()),[])
         self.assertFalse((repo/'AGENTS.md').exists())
@@ -177,5 +184,87 @@ class BundleTests(unittest.TestCase):
         p.write_bytes(s.json_bytes(x))
         with self.assertRaisesRegex(s.SpecError,'nonlocal'):
             s.schema_validators(self.root)
+    def test_setting_default_wrong_type_rejected(self):
+        value=s.read_json(self.root/'experience/settings-registry.json')
+        value['settings'][0]['default']='1000'
+        self.write_json('experience/settings-registry.json', value)
+        self.assertTrue(any('wrong type' in e for e in s.validate_settings(self.root)))
+    def test_boolean_is_not_integer_setting(self):
+        self.assertTrue(s.setting_value_errors(True, {'type':'integer','minimum':1,'maximum':32}))
+    def test_setting_default_outside_bounds_rejected(self):
+        value=s.read_json(self.root/'experience/settings-registry.json')
+        value['settings'][0]['default']=1
+        self.write_json('experience/settings-registry.json', value)
+        self.assertTrue(any('outside bounds' in e for e in s.validate_settings(self.root)))
+    def test_descriptor_enum_member_type_rejected(self):
+        value=s.read_json(self.root/'experience/settings-registry.json')
+        value['settings'][0]['constraints']['enum']=[1000,'fast']
+        self.write_json('experience/settings-registry.json', value)
+        self.assertTrue(any('invalid enum member' in e for e in s.validate_settings(self.root)))
+    def test_descriptor_dependency_cycle_rejected(self):
+        value=s.read_json(self.root/'experience/settings-registry.json')
+        row=value['settings'][0]; row['dependencies']=[row['id']]
+        self.write_json('experience/settings-registry.json', value)
+        with self.assertRaises(s.SpecError): s.validate_settings(self.root)
+    def test_setting_schema_drift_rejected_and_regenerated(self):
+        value=s.read_json(self.root/'contracts/settings.schema.json')
+        value['properties']['sampling']['properties']['resources_ms']['minimum']=1
+        self.write_json('contracts/settings.schema.json', value)
+        self.assertTrue(any('projection drift' in e for e in s.validate_settings(self.root)))
+        s.generate(self.root)
+        self.assertEqual(s.validate_settings(self.root), [])
+    def test_command_constraint_drift_rejected(self):
+        value=s.read_json(self.root/'contracts/command-v0.2.schema.json')
+        value['properties']['operations']['items']['oneOf'][0]['properties']['value']['type']='string'
+        self.write_json('contracts/command-v0.2.schema.json', value)
+        self.assertTrue(any('projection drift' in e for e in s.validate_settings(self.root)))
+    def test_scene_nesting_bound(self):
+        value=s.read_json(self.root/'fixtures/valid/scene-portable.json')
+        group=value['widgets'][0]
+        value['roots']=['g0'];value['widgets']=[]
+        for n in range(17):
+            value['widgets'].append({**group,'id':f'g{n}','children':[f'g{n+1}'] if n<16 else []})
+        self.assertIn('scene nesting exceeds 16',s.semantic_errors(value,'scene-v0.2',self.root))
+    def test_scene_duplicate_owner_rejected(self):
+        value=s.read_json(self.root/'fixtures/valid/scene-portable.json')
+        value['roots'].append('widget:adapters')
+        self.assertTrue(s.semantic_errors(value,'scene-v0.2',self.root))
+    def test_migration_fixture_preserves_authored_intent(self):
+        old=s.read_json(self.root/'fixtures/valid/scene.json')
+        new=s.read_json(self.root/'fixtures/valid/scene-migrated-0.1.json')
+        self.assertEqual((old['scene_id'],old['revision'],old['theme_id']),
+                         (new['scene_id'],new['revision'],new['theme_id']))
+        self.assertEqual(new['roots'],[w['id'] for w in old['widgets']])
+        for before,after in zip(old['widgets'],new['widgets'],strict=True):
+            self.assertEqual(before['id'],after['id'])
+            self.assertEqual(before['display_id'],after['display']['local_id'])
+            self.assertEqual(before['layout'],{k:v for k,v in after['layout']['base'].items() if k!='kind'})
+            self.assertEqual(before['bindings'],[{'entity_id':b['entity_id'],'field':b['field']} for b in after['bindings']])
+            self.assertTrue(all(b['kind']=='unresolved_pin' for b in after['bindings']))
+    def test_native_verticals_are_independent_with_early_safety(self):
+        work=s.registries(self.root)[2]
+        def ancestors(wid):
+            result=set(work[wid]['depends_on'])
+            for parent in work[wid]['depends_on']: result.update(ancestors(parent))
+            return result
+        for vertical,host in [('W-27','W-03'),('W-28','W-04'),('W-29','W-05'),('W-30','W-06')]:
+            dependencies=ancestors(vertical)
+            self.assertTrue({host,'W-24','W-25','W-26'} <= dependencies)
+            self.assertFalse(dependencies & ({'W-03','W-04','W-05','W-06'}-{host}))
+            self.assertFalse(dependencies & {'W-12','W-13','W-20','W-21'})
+    @unittest.skipUnless(HAVE_SCHEMAS,'full schema dependencies not installed')
+    def test_timestamp_offset_required_without_optional_format_package(self):
+        validator=s.schema_validators(self.root)['observation']
+        value=s.read_json(self.root/'fixtures/invalid/timestamp-without-offset.json')
+        self.assertTrue(list(validator.iter_errors(value)))
+    @unittest.skipUnless(HAVE_SCHEMAS,'full schema dependencies not installed')
+    def test_scene_versions_remain_distinct(self):
+        validators=s.schema_validators(self.root)
+        legacy=s.read_json(self.root/'fixtures/valid/scene.json')
+        portable=s.read_json(self.root/'fixtures/valid/scene-portable.json')
+        self.assertFalse(list(validators['scene'].iter_errors(legacy)))
+        self.assertFalse(list(validators['scene-v0.2'].iter_errors(portable)))
+        self.assertTrue(list(validators['scene'].iter_errors(portable)))
+        self.assertTrue(list(validators['scene-v0.2'].iter_errors(legacy)))
 
 if __name__=='__main__':unittest.main()

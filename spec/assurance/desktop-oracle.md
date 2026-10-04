@@ -10,8 +10,9 @@ sp_profile: "syspane-spec/0.1.0"
 sp_authority: "normative-proposal"
 sp_requires: ["SP-DESKTOP", "SP-TESTING"]
 sp_review: "unreviewed"
-sp_sources: ["SRC-CONVERSATION"]
+sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
+updated: {"by": "codex", "at": "2026-10-04T19:32:52+11:00", "scope": "October audit amendments; no human review attested"}
 ---
 
 # Independent desktop persistence oracle
@@ -39,3 +40,11 @@ Test monitor/DPI changes, sessions, sleep/resume and device reset using controll
 ## Result
 
 Store structural findings, instrumented generation flow and external observations separately with cross-references. The oracle reports pass/fail/inconclusive and the exact profile. No application-emitted success bit can override a missing marker. Performance evidence also records capture overhead so it is not falsely attributed entirely to SysPane.
+
+## Additional failure and role stimuli
+
+Freeze the controller while leaving the surface alive, then verify visible lease
+expiry independently. Stall rendering while IPC remains responsive and observe
+progress failure separately. Qualify native saver preview/fullscreen/configuration,
+session lock ownership and coexistence under [the saver contract](../desktop/screensaver.md);
+desktop-host evidence cannot stand in for those tests.

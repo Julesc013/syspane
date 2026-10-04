@@ -10,8 +10,9 @@ sp_profile: "syspane-spec/0.1.0"
 sp_authority: "normative-proposal"
 sp_requires: ["SP-STATE", "SP-COMMANDS"]
 sp_review: "unreviewed"
-sp_sources: ["SRC-CONVERSATION", "SRC-JSON", "SRC-SCHEMA"]
+sp_sources: ["SRC-CONVERSATION", "SRC-JSON", "SRC-SCHEMA", "SRC-AUDIT-2026-10-04"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}, {"id": "SRC-SCHEMA", "resource": "https://json-schema.org/draft/2020-12", "title": "JSON Schema Draft 2020-12"}, {"id": "SRC-JSON", "resource": "https://www.rfc-editor.org/rfc/rfc8259", "title": "RFC 8259 JSON"}]
+updated: {"by": "codex", "at": "2026-10-04T19:32:52+11:00", "scope": "October audit amendments; no human review attested"}
 ---
 
 # Protocol, schema ownership and wire rules
@@ -20,7 +21,7 @@ sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through t
 
 All canonical JSON schemas live in this directory. Do not create another manually maintained `schemas/` root with copies. SDK packages and docs may project these files, carrying input digests. Product implementation reads the same versioned contracts or generated bindings.
 
-The fixture schemas cover observation, snapshot, event, settings, scene, theme, command, capability, evidence and handoff records. They are experimental minimum contracts for a complete initial vertical slice, not a claim that every future telemetry field is frozen. Domain-specific additions require registry/fixture updates and compatibility review.
+The fixture schemas cover observation, snapshot, event, settings, scene, theme, command, capability, evidence and handoff records. They are experimental contracts, not proof of a complete native vertical slice. Scene/command/capability 0.2 coexist with preserved 0.1 migration inputs; [version policy](versions.md) identifies their separate compatibility obligations. Domain-specific additions require registry/fixture updates and compatibility review.
 
 ## Numeric and text rules
 
@@ -30,7 +31,7 @@ Timestamps use explicit UTC offsets and durations specify units. Monotonic times
 
 ## Framing and limits
 
-A local stream transport uses a negotiated version and length-bounded records; the framing format must specify endianness and maximum size. NDJSON export uses one JSON record per line, UTF-8, LF, and a maximum line length. An incomplete final line is not a valid event. Large exports page or stream bounded chunks rather than allocate the entire history.
+The experimental [local transport](transport.md) fixes four-byte big-endian length framing, a 1 MiB hard payload ceiling, handshake/version rules, authenticated roles, deadlines and bounded request retention. NDJSON export uses one JSON record per line, UTF-8, LF, and a maximum line length. An incomplete final line is not a valid event. Large exports page or stream bounded chunks rather than allocate the entire history.
 
 An initial full snapshot plus deltas includes producer epoch and sequence/generation. On gaps, epoch changes or failed validation, request resynchronization. Unknown optional additions do not mean a client can execute an unknown command. Consumers reject unsupported mandatory feature versions.
 
@@ -44,3 +45,10 @@ Draft 2020-12 schemas provide shape validation; the bundled tooling validates po
 
 [^SRC-JSON]: RFC 8259, JSON interoperability and numeric precision.
 [^SRC-SCHEMA]: JSON Schema Draft 2020-12, selected dialect.
+
+## Strict local checking
+
+The checker enforces offset-bearing date-time values even when optional format
+packages are absent. This profile accepts seconds 00 through 59; leap seconds must
+be normalized with source provenance before interchange. Unknown schema references
+fail locally. Transport/runtime conformance remains separate from JSON fixtures.

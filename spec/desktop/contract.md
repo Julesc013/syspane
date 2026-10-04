@@ -10,8 +10,9 @@ sp_profile: "syspane-spec/0.1.0"
 sp_authority: "normative-proposal"
 sp_requires: ["SP-PROCESSES"]
 sp_review: "unreviewed"
-sp_sources: ["SRC-CONVERSATION"]
+sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
+updated: {"by": "codex", "at": "2026-10-04T19:32:52+11:00", "scope": "October audit amendments; no human review attested"}
 ---
 
 # Persistent desktop host contract
@@ -43,3 +44,11 @@ A conventional inspector remains useful on an unsupported desktop. An ordinary f
 ## Acceptance
 
 Use an independent temporal observer with a synthetic marker changing while desktop reveal is active. Verify both its visibility and value. Test icon interaction, wallpaper preservation, ordinary applications, full-screen transitions, shell restart, session reconnect, display/DPI changes and host-handle reuse. A successful graphics submission or visible HWND flag is not sufficient evidence.
+
+## Capability granularity and freshness
+
+Placement, input transparency, reveal persistence, display/DPI adaptation, shell
+recovery and renderer capability are independent profile results. Surface-local
+producer expiry and an external render-progress oracle detect live-but-frozen
+components. [Saver hosting](screensaver.md) is a separate role and does not inherit
+desktop qualification. Fallback inspector/window availability never becomes a wall pass.

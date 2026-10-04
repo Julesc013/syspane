@@ -10,8 +10,9 @@ sp_profile: "syspane-spec/0.1.0"
 sp_authority: "normative-proposal"
 sp_requires: ["SP-SCHEDULER"]
 sp_review: "unreviewed"
-sp_sources: ["SRC-CONVERSATION"]
+sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
+updated: {"by": "codex", "at": "2026-10-04T19:32:52+11:00", "scope": "October audit amendments; no human review attested"}
 ---
 
 # State store, identity and observation semantics
@@ -41,3 +42,11 @@ Source generations are monotonically increasing within a producer epoch. Deltas 
 Errors have stable project codes plus native domain/code and a bounded, sanitized explanation. Native raw text is not safe HTML/terminal markup. A failure does not erase useful historical values, but the UI cannot show them as current. A provider returning malformed data is disabled or quarantined according to policy; its error cannot crash the store.
 
 A source transition timestamp is retained only when the source actually supplied it. Otherwise label the event as first observed at reconciliation. Current snapshots are coalescible; evidence history separately describes indications, transitions and gaps. See [history](../telemetry/history.md) for durability boundaries.
+
+## Descriptor and binding boundary
+
+[Metric descriptors](../telemetry/metric-registry.md) declare field units, denominator,
+temporality, freshness, source coverage, sensitivity and cost. [Portable selectors](../experience/scene-bindings.md)
+resolve saved intent separately from producer/epoch-scoped observation identity.
+Ambiguous or missing pins cannot silently bind replacement hardware. Source liveness
+does not renew each field's measurement freshness.

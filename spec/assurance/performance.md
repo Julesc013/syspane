@@ -10,8 +10,9 @@ sp_profile: "syspane-spec/0.1.0"
 sp_authority: "normative-proposal"
 sp_requires: ["SP-SCHEDULER", "SP-RENDERING", "SP-TESTING"]
 sp_review: "unreviewed"
-sp_sources: ["SRC-CONVERSATION"]
+sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
+updated: {"by": "codex", "at": "2026-10-04T19:32:52+11:00", "scope": "October audit amendments; no human review attested"}
 ---
 
 # Performance, energy and freshness budgets
@@ -37,3 +38,16 @@ Store measured baselines and allowed regression bands in release evidence, not t
 ## Scenarios
 
 Measure idle static wall, one-second resource widgets, network/device storms, large adapter/address lists, long history, multi-display mixed DPI, editor interaction, lock/display-off, source timeout and replay. Include collector-only and renderer-only isolation runs. Publish tail latency and failures as well as averages.
+
+## Profile budgets and comparison evidence
+
+Record bounded queue/frame bytes, entity/text/asset count, graphics allocation,
+worker concurrency/deadlines, wakeups, disk writes, history and package-cache
+retention per profile. Fixed protocol limits are safety constraints, not measured
+performance. Existing latency numbers remain objectives until observed. Count the
+controller, surface, providers and attributable compositor work together.
+
+Measure idle, event storm, hotplug, editor, recorder, saver and display-off conditions,
+including stimulus-to-visible tails and independent recovery. Compare alternatives
+under matched tasks and environments before any superiority claim. Report losses
+and unavailable cases as well as passes; a feature list is not benchmark evidence.

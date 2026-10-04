@@ -10,8 +10,9 @@ sp_profile: "syspane-spec/0.1.0"
 sp_authority: "normative-proposal"
 sp_requires: ["SP-RENDERING", "SP-COMMANDS"]
 sp_review: "unreviewed"
-sp_sources: ["SRC-CONVERSATION"]
+sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
+updated: {"by": "codex", "at": "2026-10-04T19:32:52+11:00", "scope": "October audit amendments; no human review attested"}
 ---
 
 # Direct desktop editing
@@ -43,3 +44,11 @@ Removing a monitor during editing preserves the authored monitor association and
 ## Acceptance
 
 Test mouse and keyboard equivalence, repeated Apply, Cancel after many operations, undo/redo order, concurrent edits, crash/restart, monitor removal, long text, theme changes, stale values, accessibility and safe exit. The same transaction fixture applied by editor and CLI must produce the same authored document, apart from declared operation metadata.
+
+## Portable authoring and role constraints
+
+Edit authored hierarchy, layout variants and selectors from [scene bindings](scene-bindings.md).
+Apply through command 0.2 `scene.replace` while fine-grained future operations remain
+unadmitted. Telemetry changes do not move the selected item; missing monitors retain
+intent. Cancellation/crash releases any input-blocking editing surface. Saver scene
+editing is an unlocked interactive role, separate from a read-only saver or preview.

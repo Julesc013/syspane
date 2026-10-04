@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.example.invalid/syspane/0.1.0/handshake.schema.json",
+  "title": "SysPane handshake experimental 0.1.0",
+  "type": "object",
+  "properties": {
+    "wire_major": {
+      "const": 0
+    },
+    "wire_minor": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 65535
+    },
+    "role": {
+      "enum": [
+        "desktop",
+        "console",
+        "collector",
+        "saver",
+        "preview",
+        "saver_settings",
+        "diagnostic",
+        "maintenance"
+      ]
+    },
+    "producer_epoch": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+    },
+    "max_frame_bytes": {
+      "type": "integer",
+      "minimum": 1024,
+      "maximum": 1048576
+    },
+    "document_versions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "document": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+          },
+          "version": {
+            "type": "string",
+            "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[A-Za-z0-9.-]+)?$",
+            "maxLength": 64
+          }
+        },
+        "required": [
+          "document",
+          "version"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1,
+      "maxItems": 32
+    },
+    "required_features": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 256,
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+      },
+      "minItems": 0,
+      "maxItems": 64,
+      "uniqueItems": true
+    },
+    "optional_features": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 256,
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+      },
+      "minItems": 0,
+      "maxItems": 64,
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "wire_major",
+    "wire_minor",
+    "role",
+    "producer_epoch",
+    "max_frame_bytes",
+    "document_versions",
+    "required_features",
+    "optional_features"
+  ],
+  "additionalProperties": false
+}

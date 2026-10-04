@@ -1,0 +1,123 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.example.invalid/syspane/0.1.0/metric-descriptor.schema.json",
+  "title": "SysPane metric-descriptor experimental 0.1.0",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "metric_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+    },
+    "value_kind": {
+      "enum": [
+        "bool",
+        "int64",
+        "uint64",
+        "float64",
+        "text"
+      ]
+    },
+    "unit": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "scope": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "temporality": {
+      "enum": [
+        "gauge",
+        "counter",
+        "rate"
+      ]
+    },
+    "denominator": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "reset_rule": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1024
+    },
+    "derivation": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1024
+    },
+    "sample_interval_ms": {
+      "type": "integer",
+      "minimum": 100,
+      "maximum": 3600000
+    },
+    "freshness_ms": {
+      "type": "integer",
+      "minimum": 100,
+      "maximum": 3600000
+    },
+    "source_coverage": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 256,
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+      },
+      "minItems": 1,
+      "maxItems": 64
+    },
+    "permissions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 256,
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+      },
+      "minItems": 0,
+      "maxItems": 64
+    },
+    "sensitivity": {
+      "enum": [
+        "public",
+        "operational",
+        "sensitive",
+        "secret"
+      ]
+    },
+    "cost": {
+      "enum": [
+        "cheap",
+        "bounded_io",
+        "potentially_blocking"
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "metric_id",
+    "value_kind",
+    "unit",
+    "scope",
+    "temporality",
+    "denominator",
+    "reset_rule",
+    "derivation",
+    "sample_interval_ms",
+    "freshness_ms",
+    "source_coverage",
+    "permissions",
+    "sensitivity",
+    "cost"
+  ],
+  "additionalProperties": false
+}

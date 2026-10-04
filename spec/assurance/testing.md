@@ -10,8 +10,9 @@ sp_profile: "syspane-spec/0.1.0"
 sp_authority: "normative-proposal"
 sp_requires: ["SP-AUTHORITY", "SP-PROTOCOL"]
 sp_review: "unreviewed"
-sp_sources: ["SRC-CONVERSATION"]
+sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
+updated: {"by": "codex", "at": "2026-10-04T19:32:52+11:00", "scope": "October audit amendments; no human review attested"}
 ---
 
 # Testing and evidence model
@@ -39,3 +40,16 @@ Inject clocks, sources and failures. Use explicit seeds and retain failing minim
 ## Completion policy
 
 A work unit is complete when its required outputs exist, checks were actually executed or explicitly blocked, evidence is recorded and an authorized integration decision is made. A release additionally requires all mandatory profile gates. Untested future profiles remain unqualified; they do not block unrelated development but cannot appear in the release support claim.
+
+## October acceptance expansion
+
+The catalogs add scene/selector semantics, descriptor consistency, resolution,
+persistence, leases/recovery, role privacy, target/artifact identity, setup ownership,
+screensaver lifecycle and result-buffer retrieval. Tool tests and fixtures execute
+only specification logic; catalogued product tests remain `not_run`.
+
+Evidence keys include source/generated inputs, dependencies, test code and oracle,
+toolchain, platform/driver/display/session, policy and package bytes. Reuse only
+unchanged relevant inputs or a recorded reviewed equivalence; never edit old evidence
+to promote a new artifact. Qualify the final selected package independently. Missing
+labs block affected claims, not unrelated deterministic work or another native profile.

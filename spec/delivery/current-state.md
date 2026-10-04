@@ -10,34 +10,54 @@ sp_profile: "syspane-spec/0.1.0"
 sp_authority: "informative"
 sp_requires: ["SP-START"]
 sp_review: "unreviewed"
-sp_sources: ["SRC-CONVERSATION"]
+sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
+updated: {"by": "codex", "at": "2026-10-04T19:32:52+11:00", "scope": "October audit amendments; no human review attested"}
 ---
 
 # Current state and next admitted boundary
 
-## Baseline
+## Accepted repository checkpoint — 2026-10-04
 
-The repository `Julesc013/syspane` was observed as public and empty during preparation. No GitHub file, branch, issue, setting, tag or release was modified. This bundle is an importable specification, experimental contracts, synthetic fixtures and development-only tools.
+The imported baseline is `Julesc013/syspane` commit
+`91e10b8b7a8a5da5ab2d93e8cdcbaade6aa0fbd9` (`init: spec`). The original archive's
+empty-repository observation belongs to its September preparation history, not the
+current checkout. This October change updates specs, root README/TODO and published
+guides under the user's explicit commit-and-sync request. Git history identifies the
+resulting commit; no self-referential future hash is invented here.
 
-The existing conversation establishes the full native greenfield direction, persistent desktop requirement, cross-platform/native ambitions, unified GUI/editor/CLI operations, `source/` naming and separation of specification from publication docs. Generated implementation details remain draft proposals until admitted.
+## Present in this revision
 
-## Implemented in this delivery
+Canonical 0.2.0 documentation bundle, unchanged 0.1 authoring profile, preserved old
+fixtures, new experimental scene/command/capability 0.2 and admission descriptors.
+The initial settings registry has enforced metadata/default consistency and generated
+overlapping schema/command constraints. Specification tooling validates links, IDs,
+work dependencies, fixtures, bounded semantic rules, generated outputs and integrity.
+README and docs describe the product honestly; TODO points to pending work.
 
-Specification tooling provides structural/reference validation, optional full JSON Schema fixture checks, deterministic indices, traceability, context packets, impact candidates, work-plan reading, checksums and non-overwriting root integration. Its executed results are recorded in `generated/validation-report.json` at packaging. The report—not this sentence—records which checks actually passed.
+The [audit disposition](audit-2026-10-04.md) maps supplied recommendations to their
+owners and gates. Historical September validation is retained separately; the
+current [validation report](../generated/validation-report.json) records actual
+commands/environment, outcomes and skipped checks for this amendment.
 
 ## Not implemented or qualified
 
-No SysPane controller, renderer, provider, native GUI, persistent desktop host, privileged helper, native SDK implementation or installer is delivered here. No Windows/Linux/macOS/OS X/historical OS runtime tests, real desktop persistence tests, performance benchmarks, security certification, accessibility qualification or upstream AIDE consumer acceptance were executed.
+No native controller, renderer, collector, GUI/editor, saver, diagnostic executable,
+SDK, setup adapter or product package exists. No native OS/desktop/saver/performance/
+accessibility/setup qualification ran. Test definitions stay `not_run`; concepts stay
+draft/unreviewed and experimental contracts stay experimental. AIDE's binding remains
+inactive with no grants. USK and ScreenSave are not adopted runtime dependencies.
+License, contribution and release-identity decisions remain open.
 
-The requirements/test/work registers are design artifacts. Planned native tests remain `not_run`. All concept content lacks human-review attestation. Successful specification checks do not promote any product/platform to implemented or supported.
+## Next work
 
-## Immediate work
+Admit build/component/target bootstrap and the minimum command/IPC/policy/recovery
+slice. Probe contemporary Windows, XP/7, Linux and AppKit/older OS X independently.
+Package smoke builds early; each profile's usable vertical includes live network,
+native settings, direct editing, save/reload and externally observed desktop reveal.
+Do not wait for a universal SDK, every historical profile or another platform's lab.
 
-First inspect/validate the archive and adopt bounded baseline scope. Use the ready work list: foundation and native host probes begin together once common fixtures/interfaces exist. Windows XP/7 investigations, Linux and macOS/OS X are not deferred until after a large Windows-only framework. GUI/edit operation proof is part of the first usable slice.
-
-The next worker records actual toolchain and lab availability. Do not fabricate an old SDK download, min-OS, license decision or execution grant. Missing lab access blocks only relevant claims; work on deterministic components can continue.
-
-## Resumption protocol
-
-Read this file at the exact ref, inspect `delivery/work-units.json`, resolve the relevant route, and check evidence/dirty state before changing code. Update this resumption page when accepted repository state changes, not after every speculative thought. After AIDE adoption it becomes a generated or reviewed projection of the real control/evidence store, with ownership documented.
+Read [readiness](implementation-readiness.md), [roadmap](roadmap.md) and
+[work units](work-units.json) at the exact ref before resuming. Check actual dirty
+state, toolchains/labs and scope. A dependency-ready row is not a native execution
+grant. Missing lab access blocks only the corresponding claims.

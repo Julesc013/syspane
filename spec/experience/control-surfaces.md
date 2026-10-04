@@ -10,8 +10,9 @@ sp_profile: "syspane-spec/0.1.0"
 sp_authority: "normative-proposal"
 sp_requires: ["SP-COMMANDS", "SP-SECURITY"]
 sp_review: "unreviewed"
-sp_sources: ["SRC-CONVERSATION"]
+sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
+updated: {"by": "codex", "at": "2026-10-04T19:32:52+11:00", "scope": "October audit amendments; no human review attested"}
 ---
 
 # CLI, native launch and local automation
@@ -37,3 +38,11 @@ A future remote control endpoint is a distinct feature with its own threat model
 ## Acceptance
 
 Test GUI/CLI/API transaction equivalence, pipe disconnect, client/server version mismatch, oversized frames, duplicate requests, denied clients, invalid output modes, headless launch and Unicode paths. A diagnostic command can read host state without launching an interactive editor or altering desktop placement.
+
+## CLI and diagnostic composition
+
+The selected planned CLI is `spctl` (`spctl.exe` on Windows); machine-readable UTF-8
+stdout and diagnostic stderr are distinct. Version/capability inspection cannot
+implicitly start a permanent collector. Exit/cancel/result retrieval use the common
+operation contract, with no permission bypass. [Artifacts](../delivery/artifacts.md)
+owns names; [recovery](../architecture/recovery.md) owns standalone diagnosis.

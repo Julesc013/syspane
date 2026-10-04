@@ -14,15 +14,33 @@ extern "C" {
 typedef struct syspane_context syspane_context;
 typedef struct { const char *data; size_t size; } syspane_utf8_view;
 typedef enum { SYSPANE_OK=0, SYSPANE_INVALID=1, SYSPANE_DENIED=2,
- SYSPANE_CONFLICT=3, SYSPANE_UNAVAILABLE=4, SYSPANE_FAILED=5 } syspane_result;
+ SYSPANE_CONFLICT=3, SYSPANE_UNAVAILABLE=4, SYSPANE_FAILED=5,
+ SYSPANE_BUFFER_TOO_SMALL=6, SYSPANE_RESULT_EXPIRED=7,
+ SYSPANE_BUSY=8 } syspane_result;
 typedef struct { uint32_t struct_size; uint32_t api_version;
  size_t max_record_bytes; } syspane_options;
 syspane_result syspane_create(const syspane_options *options, syspane_context **out);
 void syspane_destroy(syspane_context *context);
-/* Reentrant/threading/async cancellation contracts must be qualified before v1.
- * JSON response is caller-owned; required_size is set on insufficient capacity. */
+/* Experimental synchronous sketch: one caller at a time per context; no reentry.
+ * Input slices are borrowed for this call. Output is caller-owned UTF-8 bytes,
+ * not NUL-terminated; required_size excludes any terminator and is always set.
+ * The request may commit before BUFFER_TOO_SMALL is returned. Its terminal result
+ * is retained under request_id until release_result or context destruction.
+ * A null output with capacity zero is allowed, but is NOT a mutation-free preview.
+ * Insufficient capacity writes no partial response. Retrieve via read_result;
+ * never submit a fresh mutation simply to obtain a larger response buffer.
+ * Admission returns BUSY before mutation if result retention cannot be reserved.
+ * Destroying a context does not undo committed changes. Reconcile durable request
+ * records after process loss; RESULT_EXPIRED is not permission for blind replay.
+ * Export/calling-convention and asynchronous cancellation remain target admission
+ * decisions; this header does not establish a stable binary interface. */
 syspane_result syspane_request(syspane_context *context, syspane_utf8_view request,
  char *response, size_t capacity, size_t *required_size);
+/* Read-only result retrieval never executes the original operation. */
+syspane_result syspane_read_result(syspane_context *context, syspane_utf8_view request_id,
+ char *response, size_t capacity, size_t *required_size);
+/* Ends the retrieval guarantee, not the transaction or its durable audit record. */
+syspane_result syspane_release_result(syspane_context *context, syspane_utf8_view request_id);
 #ifdef __cplusplus
 }
 #endif

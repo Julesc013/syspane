@@ -10,8 +10,9 @@ sp_profile: "syspane-spec/0.1.0"
 sp_authority: "normative-proposal"
 sp_requires: ["SP-DESKTOP", "SP-STATE"]
 sp_review: "unreviewed"
-sp_sources: ["SRC-CONVERSATION"]
+sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
+updated: {"by": "codex", "at": "2026-10-04T19:32:52+11:00", "scope": "October audit amendments; no human review attested"}
 ---
 
 # Rendering, text, layout and display recovery
@@ -43,3 +44,11 @@ A backend must state alpha format, blending, text antialiasing and transfer cost
 ## Acceptance
 
 Golden synthetic scenes cover multilingual text, malformed labels, long identifiers, high contrast, themes, empty/error/stale states, 1024×768 through large/multi-display profiles and DPI changes. Assert semantic layout invariants across platforms; use per-platform images for raster comparison. Independently measure visible generation and resource costs.
+
+## Authored versus resolved state
+
+Use [scene 0.2 layout](../experience/scene-bindings.md); resolved rectangles and native
+font substitutions are derived output. Decode authored sRGB RRGGBBAA straight-alpha
+tokens consistently before backend conversion. Missing fonts, high contrast and
+reduced motion cannot hide mandatory states or rewrite source documents. Rendering
+progress and producer/metric freshness have separate timers and evidence.

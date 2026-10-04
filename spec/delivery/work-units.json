@@ -19,14 +19,15 @@
         "T-DOCS"
       ],
       "planned_outputs": [
-        "AGENTS.md",
-        "docs/README.md",
+        "README.md",
+        "TODO.md",
+        "docs/",
         "spec/"
       ],
       "status": "planned",
       "authority_class": "spec_tooling",
       "execution_grant": null,
-      "notes": "Dependency-ready is not execution authority. Native work may produce a failed/inconclusive probe without a support claim; independent tracks can continue."
+      "notes": "October documentation and spec tooling updated under explicit user request; broader runtime/bootstrap admission remains planned. No native execution grant inherited."
     },
     {
       "id": "W-01",
@@ -36,18 +37,25 @@
       ],
       "specs": [
         "SP-ARCHITECTURE",
-        "SP-STATE"
+        "SP-STATE",
+        "SP-COMPOSITION",
+        "SP-PORTABILITY",
+        "SP-TARGETS"
       ],
       "acceptance_tests": [
         "T-STATE",
         "T-VALIDITY",
-        "T-CLOCK"
+        "T-CLOCK",
+        "T-COMPOSITION",
+        "T-TARGETS"
       ],
       "planned_outputs": [
         "source/model/",
         "source/application/",
         "CMakeLists.txt",
-        "CMakePresets.json"
+        "CMakePresets.json",
+        "build-support/targets/",
+        "build-support/components.json"
       ],
       "status": "planned",
       "authority_class": "development",
@@ -83,7 +91,8 @@
       "title": "Probe contemporary Windows desktop host",
       "depends_on": [
         "W-01",
-        "W-02"
+        "W-02",
+        "W-24"
       ],
       "specs": [
         "SP-WINDOWS",
@@ -109,7 +118,8 @@
       "title": "Probe XP and Windows 7 native profiles",
       "depends_on": [
         "W-01",
-        "W-02"
+        "W-02",
+        "W-24"
       ],
       "specs": [
         "SP-WINDOWS",
@@ -134,7 +144,8 @@
       "title": "Probe Linux shell and native UI paths",
       "depends_on": [
         "W-01",
-        "W-02"
+        "W-02",
+        "W-24"
       ],
       "specs": [
         "SP-LINUX",
@@ -162,7 +173,8 @@
       "title": "Probe macOS and older OS X profiles",
       "depends_on": [
         "W-01",
-        "W-02"
+        "W-02",
+        "W-24"
       ],
       "specs": [
         "SP-MACOS",
@@ -210,15 +222,22 @@
       "id": "W-08",
       "title": "Implement provisional commands and protocol",
       "depends_on": [
-        "W-01"
+        "W-01",
+        "W-24"
       ],
       "specs": [
         "SP-COMMANDS",
-        "SP-PROTOCOL"
+        "SP-PROTOCOL",
+        "SP-TRANSPORT",
+        "SP-PERSISTENCE",
+        "SP-CONFIG-RESOLUTION"
       ],
       "acceptance_tests": [
         "T-TRANSACTION",
-        "T-PROTOCOL"
+        "T-PROTOCOL",
+        "T-PERSISTENCE",
+        "T-RESOLUTION",
+        "T-DESCRIPTORS"
       ],
       "planned_outputs": [
         "source/commands/",
@@ -238,12 +257,14 @@
       ],
       "specs": [
         "SP-RENDERING",
-        "SP-SCENE"
+        "SP-SCENE",
+        "SP-BINDINGS"
       ],
       "acceptance_tests": [
         "T-LAYOUT",
         "T-THEME",
-        "T-GRAPHICS"
+        "T-GRAPHICS",
+        "T-SCENE-02"
       ],
       "planned_outputs": [
         "source/scene/",
@@ -308,7 +329,10 @@
       "id": "W-12",
       "title": "Implement native network providers",
       "depends_on": [
-        "W-07"
+        "W-34",
+        "W-35",
+        "W-36",
+        "W-37"
       ],
       "specs": [
         "SP-NETWORK"
@@ -326,18 +350,17 @@
       "status": "planned",
       "authority_class": "native_lab",
       "execution_grant": null,
-      "notes": "Dependency-ready is not execution authority. Native work may produce a failed/inconclusive probe without a support claim; independent tracks can continue."
+      "notes": "October refinement preserves this original aggregate identity. Independent per-profile units carry delivery acceptance; this join is not a gate for them.",
+      "aggregate_only": true
     },
     {
       "id": "W-13",
       "title": "Integrate first complete native experience",
       "depends_on": [
-        "W-03",
-        "W-05",
-        "W-06",
-        "W-10",
-        "W-11",
-        "W-12"
+        "W-27",
+        "W-28",
+        "W-29",
+        "W-30"
       ],
       "specs": [
         "SP-CHARTER",
@@ -358,7 +381,8 @@
       "status": "planned",
       "authority_class": "native_lab",
       "execution_grant": null,
-      "notes": "Dependency-ready is not execution authority. Native work may produce a failed/inconclusive probe without a support claim; independent tracks can continue."
+      "notes": "October refinement preserves this original aggregate identity. Independent per-profile units carry delivery acceptance; this join is not a gate for them.",
+      "aggregate_only": true
     },
     {
       "id": "W-14",
@@ -435,12 +459,14 @@
       ],
       "specs": [
         "SP-SECURITY",
-        "SP-CONTROL"
+        "SP-CONTROL",
+        "SP-POLICY"
       ],
       "acceptance_tests": [
         "T-IPC",
         "T-PRIVACY",
-        "T-PROTOCOL"
+        "T-PROTOCOL",
+        "T-DISCLOSURE"
       ],
       "planned_outputs": [
         "source/configuration/",
@@ -456,8 +482,7 @@
       "id": "W-18",
       "title": "Admit optional workshop probe provider",
       "depends_on": [
-        "W-17",
-        "W-12"
+        "W-17"
       ],
       "specs": [
         "SP-WORKSHOP"
@@ -472,7 +497,7 @@
       "status": "planned",
       "authority_class": "native_lab",
       "execution_grant": null,
-      "notes": "Dependency-ready is not execution authority. Native work may produce a failed/inconclusive probe without a support claim; independent tracks can continue."
+      "notes": "Requires the selected target network provider at admission; no all-platform provider join."
     },
     {
       "id": "W-19",
@@ -482,11 +507,15 @@
         "W-16"
       ],
       "specs": [
-        "SP-SDK"
+        "SP-SDK",
+        "SP-PRESETS",
+        "SP-VERSIONS"
       ],
       "acceptance_tests": [
         "T-SDK",
-        "T-PROTOCOL"
+        "T-PROTOCOL",
+        "T-ABI-RESULT",
+        "T-CONTENT"
       ],
       "planned_outputs": [
         "source/api/",
@@ -502,11 +531,10 @@
       "id": "W-20",
       "title": "Qualify latency, recovery and accessibility",
       "depends_on": [
-        "W-13",
-        "W-14",
-        "W-15",
-        "W-16",
-        "W-17"
+        "W-40",
+        "W-41",
+        "W-42",
+        "W-43"
       ],
       "specs": [
         "SP-PERFORMANCE",
@@ -527,13 +555,17 @@
       "status": "planned",
       "authority_class": "native_lab",
       "execution_grant": null,
-      "notes": "Dependency-ready is not execution authority. Native work may produce a failed/inconclusive probe without a support claim; independent tracks can continue."
+      "notes": "October refinement preserves this original aggregate identity. Independent per-profile units carry delivery acceptance; this join is not a gate for them.",
+      "aggregate_only": true
     },
     {
       "id": "W-21",
       "title": "Build native packages and release candidate",
       "depends_on": [
-        "W-20"
+        "W-44",
+        "W-45",
+        "W-46",
+        "W-47"
       ],
       "specs": [
         "SP-RELEASE"
@@ -550,7 +582,8 @@
       "status": "planned",
       "authority_class": "release",
       "execution_grant": null,
-      "notes": "Dependency-ready is not execution authority. Native work may produce a failed/inconclusive probe without a support claim; independent tracks can continue."
+      "notes": "October refinement preserves this original aggregate identity. Independent per-profile units carry delivery acceptance; this join is not a gate for them.",
+      "aggregate_only": true
     },
     {
       "id": "W-22",
@@ -578,8 +611,8 @@
       "id": "W-23",
       "title": "Admit further native historical profiles",
       "depends_on": [
-        "W-04",
-        "W-13"
+        "W-01",
+        "W-24"
       ],
       "specs": [
         "SP-PLATFORMS"
@@ -596,7 +629,705 @@
       "status": "planned",
       "authority_class": "native_lab",
       "execution_grant": null,
-      "notes": "Dependency-ready is not execution authority. Native work may produce a failed/inconclusive probe without a support claim; independent tracks can continue."
+      "notes": "Additional target feasibility is independent; applicable native vertical and qualification gates precede any support claim."
+    },
+    {
+      "id": "W-24",
+      "title": "Implement minimal authenticated IPC and policy boundary",
+      "depends_on": [
+        "W-01"
+      ],
+      "specs": [
+        "SP-TRANSPORT",
+        "SP-POLICY"
+      ],
+      "acceptance_tests": [
+        "T-IPC",
+        "T-PROTOCOL",
+        "T-DISCLOSURE"
+      ],
+      "planned_outputs": [
+        "source/protocol/",
+        "source/platform/",
+        "source/configuration/"
+      ],
+      "status": "planned",
+      "authority_class": "development",
+      "execution_grant": null,
+      "notes": "Implementation and evidence pending; dependency-ready is not an execution grant."
+    },
+    {
+      "id": "W-25",
+      "title": "Implement independent recovery and producer leases",
+      "depends_on": [
+        "W-01",
+        "W-24"
+      ],
+      "specs": [
+        "SP-RECOVERY"
+      ],
+      "acceptance_tests": [
+        "T-RECOVERY",
+        "T-VALIDITY"
+      ],
+      "planned_outputs": [
+        "source/diagnostics/",
+        "tests/fault/"
+      ],
+      "status": "planned",
+      "authority_class": "development",
+      "execution_grant": null,
+      "notes": "Implementation and evidence pending; dependency-ready is not an execution grant."
+    },
+    {
+      "id": "W-26",
+      "title": "Build early per-target smoke-package machinery",
+      "depends_on": [
+        "W-01"
+      ],
+      "specs": [
+        "SP-ARTIFACTS",
+        "SP-TARGETS"
+      ],
+      "acceptance_tests": [
+        "T-ARTIFACTS",
+        "T-TARGETS"
+      ],
+      "planned_outputs": [
+        "packaging/",
+        "build-support/"
+      ],
+      "status": "planned",
+      "authority_class": "development",
+      "execution_grant": null,
+      "notes": "Implementation and evidence pending; dependency-ready is not an execution grant."
+    },
+    {
+      "id": "W-27",
+      "title": "Integrate Windows contemporary native vertical",
+      "depends_on": [
+        "W-03",
+        "W-10",
+        "W-11",
+        "W-34",
+        "W-17",
+        "W-25",
+        "W-26"
+      ],
+      "specs": [
+        "SP-CHARTER",
+        "SP-DESKTOP",
+        "SP-SETTINGS",
+        "SP-BINDINGS"
+      ],
+      "acceptance_tests": [
+        "T-DESKTOP-REVEAL",
+        "T-EDITOR",
+        "T-SETTINGS",
+        "T-WALLPAPER",
+        "T-SELECTORS",
+        "T-RESOLUTION",
+        "T-PERSISTENCE",
+        "T-RECOVERY"
+      ],
+      "planned_outputs": [
+        "source/application/",
+        "source/interfaces/windows/",
+        "tests/integration/"
+      ],
+      "status": "planned",
+      "authority_class": "native_lab",
+      "execution_grant": null,
+      "notes": "Instantiate for an exact target. Finish native controls, actual package launch and independent oracle here; no other family is a prerequisite."
+    },
+    {
+      "id": "W-28",
+      "title": "Integrate Windows XP/7 native vertical",
+      "depends_on": [
+        "W-04",
+        "W-10",
+        "W-11",
+        "W-35",
+        "W-17",
+        "W-25",
+        "W-26"
+      ],
+      "specs": [
+        "SP-CHARTER",
+        "SP-DESKTOP",
+        "SP-SETTINGS",
+        "SP-BINDINGS"
+      ],
+      "acceptance_tests": [
+        "T-DESKTOP-REVEAL",
+        "T-EDITOR",
+        "T-SETTINGS",
+        "T-WALLPAPER",
+        "T-SELECTORS",
+        "T-RESOLUTION",
+        "T-PERSISTENCE",
+        "T-RECOVERY"
+      ],
+      "planned_outputs": [
+        "source/application/",
+        "source/interfaces/windows/",
+        "tests/integration/"
+      ],
+      "status": "planned",
+      "authority_class": "native_lab",
+      "execution_grant": null,
+      "notes": "Instantiate for an exact target. Finish native controls, actual package launch and independent oracle here; no other family is a prerequisite."
+    },
+    {
+      "id": "W-29",
+      "title": "Integrate Linux native vertical",
+      "depends_on": [
+        "W-05",
+        "W-10",
+        "W-11",
+        "W-36",
+        "W-17",
+        "W-25",
+        "W-26"
+      ],
+      "specs": [
+        "SP-CHARTER",
+        "SP-DESKTOP",
+        "SP-SETTINGS",
+        "SP-BINDINGS"
+      ],
+      "acceptance_tests": [
+        "T-DESKTOP-REVEAL",
+        "T-EDITOR",
+        "T-SETTINGS",
+        "T-WALLPAPER",
+        "T-SELECTORS",
+        "T-RESOLUTION",
+        "T-PERSISTENCE",
+        "T-RECOVERY"
+      ],
+      "planned_outputs": [
+        "source/application/",
+        "source/interfaces/linux/",
+        "tests/integration/"
+      ],
+      "status": "planned",
+      "authority_class": "native_lab",
+      "execution_grant": null,
+      "notes": "Instantiate for an exact target. Finish native controls, actual package launch and independent oracle here; no other family is a prerequisite."
+    },
+    {
+      "id": "W-30",
+      "title": "Integrate macOS/older OS X native vertical",
+      "depends_on": [
+        "W-06",
+        "W-10",
+        "W-11",
+        "W-37",
+        "W-17",
+        "W-25",
+        "W-26"
+      ],
+      "specs": [
+        "SP-CHARTER",
+        "SP-DESKTOP",
+        "SP-SETTINGS",
+        "SP-BINDINGS"
+      ],
+      "acceptance_tests": [
+        "T-DESKTOP-REVEAL",
+        "T-EDITOR",
+        "T-SETTINGS",
+        "T-WALLPAPER",
+        "T-SELECTORS",
+        "T-RESOLUTION",
+        "T-PERSISTENCE",
+        "T-RECOVERY"
+      ],
+      "planned_outputs": [
+        "source/application/",
+        "source/interfaces/macos/",
+        "tests/integration/"
+      ],
+      "status": "planned",
+      "authority_class": "native_lab",
+      "execution_grant": null,
+      "notes": "Instantiate for an exact target. Finish native controls, actual package launch and independent oracle here; no other family is a prerequisite."
+    },
+    {
+      "id": "W-31",
+      "title": "Implement and qualify native saver roles",
+      "depends_on": [
+        "W-09",
+        "W-11",
+        "W-17",
+        "W-25"
+      ],
+      "specs": [
+        "SP-SCREENSAVER",
+        "SP-POLICY"
+      ],
+      "acceptance_tests": [
+        "T-SAVER",
+        "T-DISCLOSURE",
+        "T-OWNERSHIP"
+      ],
+      "planned_outputs": [
+        "source/application/",
+        "source/interfaces/",
+        "packaging/"
+      ],
+      "status": "planned",
+      "authority_class": "native_lab",
+      "execution_grant": null,
+      "notes": "Implementation and evidence pending; dependency-ready is not an execution grant."
+    },
+    {
+      "id": "W-32",
+      "title": "Bind and qualify USK lifecycle operations",
+      "depends_on": [
+        "W-26",
+        "W-17"
+      ],
+      "specs": [
+        "SP-SETUP",
+        "SP-INSTALL-OWNERSHIP",
+        "SP-SETUP-LIFECYCLE"
+      ],
+      "acceptance_tests": [
+        "T-SETUP-BINDING",
+        "T-OWNERSHIP",
+        "T-MAINTENANCE"
+      ],
+      "planned_outputs": [
+        "source/integrations/universal-setup/",
+        "packaging/",
+        "tests/setup/"
+      ],
+      "status": "planned",
+      "authority_class": "native_lab",
+      "execution_grant": null,
+      "notes": "Implementation and evidence pending; dependency-ready is not an execution grant."
+    },
+    {
+      "id": "W-33",
+      "title": "Implement content admission and extended document contracts",
+      "depends_on": [
+        "W-08",
+        "W-09",
+        "W-17"
+      ],
+      "specs": [
+        "SP-PRESETS",
+        "SP-BINDINGS",
+        "SP-VERSIONS",
+        "SP-SDK"
+      ],
+      "acceptance_tests": [
+        "T-CONTENT",
+        "T-SCENE-02",
+        "T-RESOLUTION",
+        "T-ABI-RESULT"
+      ],
+      "planned_outputs": [
+        "source/configuration/",
+        "source/scene/",
+        "spec/contracts/"
+      ],
+      "status": "planned",
+      "authority_class": "development",
+      "execution_grant": null,
+      "notes": "Complete bounded import/merge/migration and full theme/AST contracts before their features; no stable SDK claim from fixtures."
+    },
+    {
+      "id": "W-34",
+      "title": "Implement Windows contemporary network providers",
+      "depends_on": [
+        "W-07",
+        "W-24"
+      ],
+      "specs": [
+        "SP-NETWORK",
+        "SP-METRICS"
+      ],
+      "acceptance_tests": [
+        "T-NETWORK",
+        "T-DNS",
+        "T-CONNECTIVITY",
+        "T-SELECTORS"
+      ],
+      "planned_outputs": [
+        "source/collectors/windows/network/"
+      ],
+      "status": "planned",
+      "authority_class": "native_lab",
+      "execution_grant": null,
+      "notes": "Implementation and evidence pending; dependency-ready is not an execution grant."
+    },
+    {
+      "id": "W-35",
+      "title": "Implement Windows XP/7 network providers",
+      "depends_on": [
+        "W-07",
+        "W-24"
+      ],
+      "specs": [
+        "SP-NETWORK",
+        "SP-METRICS"
+      ],
+      "acceptance_tests": [
+        "T-NETWORK",
+        "T-DNS",
+        "T-CONNECTIVITY",
+        "T-SELECTORS"
+      ],
+      "planned_outputs": [
+        "source/collectors/windows/network/"
+      ],
+      "status": "planned",
+      "authority_class": "native_lab",
+      "execution_grant": null,
+      "notes": "Implementation and evidence pending; dependency-ready is not an execution grant."
+    },
+    {
+      "id": "W-36",
+      "title": "Implement Linux network providers",
+      "depends_on": [
+        "W-07",
+        "W-24"
+      ],
+      "specs": [
+        "SP-NETWORK",
+        "SP-METRICS"
+      ],
+      "acceptance_tests": [
+        "T-NETWORK",
+        "T-DNS",
+        "T-CONNECTIVITY",
+        "T-SELECTORS"
+      ],
+      "planned_outputs": [
+        "source/collectors/linux/network/"
+      ],
+      "status": "planned",
+      "authority_class": "native_lab",
+      "execution_grant": null,
+      "notes": "Implementation and evidence pending; dependency-ready is not an execution grant."
+    },
+    {
+      "id": "W-37",
+      "title": "Implement macOS/older OS X network providers",
+      "depends_on": [
+        "W-07",
+        "W-24"
+      ],
+      "specs": [
+        "SP-NETWORK",
+        "SP-METRICS"
+      ],
+      "acceptance_tests": [
+        "T-NETWORK",
+        "T-DNS",
+        "T-CONNECTIVITY",
+        "T-SELECTORS"
+      ],
+      "planned_outputs": [
+        "source/collectors/macos/network/"
+      ],
+      "status": "planned",
+      "authority_class": "native_lab",
+      "execution_grant": null,
+      "notes": "Implementation and evidence pending; dependency-ready is not an execution grant."
+    },
+    {
+      "id": "W-38",
+      "title": "Resolve license, contribution and release ownership",
+      "depends_on": [
+        "W-00"
+      ],
+      "specs": [
+        "SP-RELEASE"
+      ],
+      "acceptance_tests": [
+        "T-LICENSE"
+      ],
+      "planned_outputs": [
+        "LICENSE",
+        "CONTRIBUTING.md",
+        "SECURITY.md",
+        "SUPPORT.md"
+      ],
+      "status": "planned",
+      "authority_class": "release",
+      "execution_grant": null,
+      "notes": "Requires actual owner choices; do not invent license terms, addresses or signing consent."
+    },
+    {
+      "id": "W-39",
+      "title": "Specify and qualify online acquisition trust",
+      "depends_on": [
+        "W-32",
+        "W-38"
+      ],
+      "specs": [
+        "SP-SETUP-LIFECYCLE"
+      ],
+      "acceptance_tests": [
+        "T-UPDATE-TRUST"
+      ],
+      "planned_outputs": [
+        "spec/setup/",
+        "source/integrations/",
+        "tests/setup/"
+      ],
+      "status": "planned",
+      "authority_class": "security_review",
+      "execution_grant": null,
+      "notes": "Implementation and evidence pending; dependency-ready is not an execution grant."
+    },
+    {
+      "id": "W-40",
+      "title": "Qualify Windows contemporary selected payload",
+      "depends_on": [
+        "W-27"
+      ],
+      "specs": [
+        "SP-PERFORMANCE",
+        "SP-ACCESSIBILITY",
+        "SP-POLICY",
+        "SP-TESTING"
+      ],
+      "acceptance_tests": [
+        "T-PERFORMANCE",
+        "T-DISPLAY",
+        "T-GRAPHICS",
+        "T-ACCESSIBILITY",
+        "T-DISCLOSURE",
+        "T-RECOVERY"
+      ],
+      "planned_outputs": [
+        "tests/performance/",
+        "tests/accessibility/",
+        "tests/fault/"
+      ],
+      "status": "planned",
+      "authority_class": "native_lab",
+      "execution_grant": null,
+      "notes": "Qualify all enabled components on the selected exact target; optional breadth is not a prerequisite until enabled."
+    },
+    {
+      "id": "W-41",
+      "title": "Qualify Windows XP/7 selected payload",
+      "depends_on": [
+        "W-28"
+      ],
+      "specs": [
+        "SP-PERFORMANCE",
+        "SP-ACCESSIBILITY",
+        "SP-POLICY",
+        "SP-TESTING"
+      ],
+      "acceptance_tests": [
+        "T-PERFORMANCE",
+        "T-DISPLAY",
+        "T-GRAPHICS",
+        "T-ACCESSIBILITY",
+        "T-DISCLOSURE",
+        "T-RECOVERY"
+      ],
+      "planned_outputs": [
+        "tests/performance/",
+        "tests/accessibility/",
+        "tests/fault/"
+      ],
+      "status": "planned",
+      "authority_class": "native_lab",
+      "execution_grant": null,
+      "notes": "Qualify all enabled components on the selected exact target; optional breadth is not a prerequisite until enabled."
+    },
+    {
+      "id": "W-42",
+      "title": "Qualify Linux selected payload",
+      "depends_on": [
+        "W-29"
+      ],
+      "specs": [
+        "SP-PERFORMANCE",
+        "SP-ACCESSIBILITY",
+        "SP-POLICY",
+        "SP-TESTING"
+      ],
+      "acceptance_tests": [
+        "T-PERFORMANCE",
+        "T-DISPLAY",
+        "T-GRAPHICS",
+        "T-ACCESSIBILITY",
+        "T-DISCLOSURE",
+        "T-RECOVERY"
+      ],
+      "planned_outputs": [
+        "tests/performance/",
+        "tests/accessibility/",
+        "tests/fault/"
+      ],
+      "status": "planned",
+      "authority_class": "native_lab",
+      "execution_grant": null,
+      "notes": "Qualify all enabled components on the selected exact target; optional breadth is not a prerequisite until enabled."
+    },
+    {
+      "id": "W-43",
+      "title": "Qualify macOS/older OS X selected payload",
+      "depends_on": [
+        "W-30"
+      ],
+      "specs": [
+        "SP-PERFORMANCE",
+        "SP-ACCESSIBILITY",
+        "SP-POLICY",
+        "SP-TESTING"
+      ],
+      "acceptance_tests": [
+        "T-PERFORMANCE",
+        "T-DISPLAY",
+        "T-GRAPHICS",
+        "T-ACCESSIBILITY",
+        "T-DISCLOSURE",
+        "T-RECOVERY"
+      ],
+      "planned_outputs": [
+        "tests/performance/",
+        "tests/accessibility/",
+        "tests/fault/"
+      ],
+      "status": "planned",
+      "authority_class": "native_lab",
+      "execution_grant": null,
+      "notes": "Qualify all enabled components on the selected exact target; optional breadth is not a prerequisite until enabled."
+    },
+    {
+      "id": "W-44",
+      "title": "Package Windows contemporary qualified release candidate",
+      "depends_on": [
+        "W-40",
+        "W-38"
+      ],
+      "specs": [
+        "SP-RELEASE",
+        "SP-ARTIFACTS"
+      ],
+      "acceptance_tests": [
+        "T-DEPLOY",
+        "T-REPRO",
+        "T-ARTIFACTS"
+      ],
+      "planned_outputs": [
+        "packaging/",
+        "docs/"
+      ],
+      "status": "planned",
+      "authority_class": "release",
+      "execution_grant": null,
+      "notes": "Portable release can proceed without USK. Managed mutation additionally requires W-32 and its exact provider/profile/operation evidence; publication authority remains separate."
+    },
+    {
+      "id": "W-45",
+      "title": "Package Windows XP/7 qualified release candidate",
+      "depends_on": [
+        "W-41",
+        "W-38"
+      ],
+      "specs": [
+        "SP-RELEASE",
+        "SP-ARTIFACTS"
+      ],
+      "acceptance_tests": [
+        "T-DEPLOY",
+        "T-REPRO",
+        "T-ARTIFACTS"
+      ],
+      "planned_outputs": [
+        "packaging/",
+        "docs/"
+      ],
+      "status": "planned",
+      "authority_class": "release",
+      "execution_grant": null,
+      "notes": "Portable release can proceed without USK. Managed mutation additionally requires W-32 and its exact provider/profile/operation evidence; publication authority remains separate."
+    },
+    {
+      "id": "W-46",
+      "title": "Package Linux qualified release candidate",
+      "depends_on": [
+        "W-42",
+        "W-38"
+      ],
+      "specs": [
+        "SP-RELEASE",
+        "SP-ARTIFACTS"
+      ],
+      "acceptance_tests": [
+        "T-DEPLOY",
+        "T-REPRO",
+        "T-ARTIFACTS"
+      ],
+      "planned_outputs": [
+        "packaging/",
+        "docs/"
+      ],
+      "status": "planned",
+      "authority_class": "release",
+      "execution_grant": null,
+      "notes": "Portable release can proceed without USK. Managed mutation additionally requires W-32 and its exact provider/profile/operation evidence; publication authority remains separate."
+    },
+    {
+      "id": "W-47",
+      "title": "Package macOS/older OS X qualified release candidate",
+      "depends_on": [
+        "W-43",
+        "W-38"
+      ],
+      "specs": [
+        "SP-RELEASE",
+        "SP-ARTIFACTS"
+      ],
+      "acceptance_tests": [
+        "T-DEPLOY",
+        "T-REPRO",
+        "T-ARTIFACTS"
+      ],
+      "planned_outputs": [
+        "packaging/",
+        "docs/"
+      ],
+      "status": "planned",
+      "authority_class": "release",
+      "execution_grant": null,
+      "notes": "Portable release can proceed without USK. Managed mutation additionally requires W-32 and its exact provider/profile/operation evidence; publication authority remains separate."
+    },
+    {
+      "id": "W-48",
+      "title": "Cross-platform document conformance",
+      "depends_on": [
+        "W-27",
+        "W-28",
+        "W-29",
+        "W-30"
+      ],
+      "specs": [
+        "SP-VERSIONS",
+        "SP-CONFIG-RESOLUTION"
+      ],
+      "acceptance_tests": [
+        "T-DOCUMENT-CONFORMANCE"
+      ],
+      "planned_outputs": [
+        "tests/contract/"
+      ],
+      "status": "planned",
+      "authority_class": "native_lab",
+      "execution_grant": null,
+      "notes": "A cross-platform milestone, never a prerequisite for one honestly scoped profile preview."
     }
   ]
 }

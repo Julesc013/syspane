@@ -1,0 +1,281 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.example.invalid/syspane/0.1.0/target-profile.schema.json",
+  "title": "SysPane target-profile experimental 0.1.0",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "profile_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+    },
+    "revision": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]{0,19})$"
+    },
+    "example_only": {
+      "type": "boolean"
+    },
+    "os": {
+      "type": "object",
+      "properties": {
+        "family": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+        },
+        "minimum_version": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "api_floor": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "family",
+        "minimum_version",
+        "api_floor"
+      ],
+      "additionalProperties": false
+    },
+    "cpu": {
+      "type": "object",
+      "properties": {
+        "architecture": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+        },
+        "isa_floor": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "word_bits": {
+          "enum": [
+            16,
+            32,
+            64
+          ]
+        },
+        "endianness": {
+          "enum": [
+            "little",
+            "big"
+          ]
+        }
+      },
+      "required": [
+        "architecture",
+        "isa_floor",
+        "word_bits",
+        "endianness"
+      ],
+      "additionalProperties": false
+    },
+    "abi": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "runtime": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "runtime_version": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "name",
+        "runtime",
+        "runtime_version"
+      ],
+      "additionalProperties": false
+    },
+    "toolchain": {
+      "type": "object",
+      "properties": {
+        "compiler": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "sdk": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "recipe": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1024
+        },
+        "flags": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024
+          },
+          "minItems": 0,
+          "maxItems": 128
+        }
+      },
+      "required": [
+        "compiler",
+        "version",
+        "sdk",
+        "recipe",
+        "flags"
+      ],
+      "additionalProperties": false
+    },
+    "dependencies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+          },
+          "version": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "license": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          }
+        },
+        "required": [
+          "id",
+          "version",
+          "sha256",
+          "license"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0,
+      "maxItems": 256
+    },
+    "ui": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "shell_host": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "renderer": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "roles": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "desktop",
+          "console",
+          "collector",
+          "saver",
+          "preview",
+          "saver_settings",
+          "diagnostic",
+          "maintenance"
+        ]
+      },
+      "minItems": 1,
+      "maxItems": 8,
+      "uniqueItems": true
+    },
+    "isolation": {
+      "type": "object",
+      "properties": {
+        "tier": {
+          "enum": [
+            "none",
+            "process",
+            "os_enforced"
+          ]
+        },
+        "controls": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "minItems": 0,
+          "maxItems": 64
+        }
+      },
+      "required": [
+        "tier",
+        "controls"
+      ],
+      "additionalProperties": false
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 2048
+      },
+      "minItems": 0,
+      "maxItems": 64
+    }
+  },
+  "required": [
+    "schema_version",
+    "profile_id",
+    "revision",
+    "example_only",
+    "os",
+    "cpu",
+    "abi",
+    "toolchain",
+    "dependencies",
+    "ui",
+    "shell_host",
+    "renderer",
+    "roles",
+    "isolation",
+    "limitations"
+  ],
+  "additionalProperties": false
+}

@@ -10,8 +10,9 @@ sp_profile: "syspane-spec/0.1.0"
 sp_authority: "normative-proposal"
 sp_requires: ["SP-STATE"]
 sp_review: "unreviewed"
-sp_sources: ["SRC-CONVERSATION"]
+sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
+updated: {"by": "codex", "at": "2026-10-04T19:32:52+11:00", "scope": "October audit amendments; no human review attested"}
 ---
 
 # History, durability and replay
@@ -41,3 +42,12 @@ Exports use a versioned schema, redaction policy and provenance manifest. Redact
 ## Acceptance
 
 Test rotation at boundaries, out-of-space, permission loss, partial writes, corruption, sequence gaps, duplicate delivery, clock changes, crash recovery and replay/real-source separation. Timing tests use a fake monotonic clock. Native durability guarantees require filesystem-specific qualification, not just a successful Python fixture.
+
+## Durability qualification and policy
+
+Choose journal flush/checkpoint/retention policy through corruption and write-load
+experiments. Truncated tails, full disks and rotation produce explicit gaps without
+blocking live state. Observation time differs from event time. Replay is visibly
+historical and cannot trigger live active probes. Recorder journals are distinct
+from configuration commits, setup receipts and AIDE evidence. Retained sensitive
+records follow [policy](../experience/policy.md), not merely display masking.

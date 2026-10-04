@@ -20,7 +20,7 @@ from urllib.parse import unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 MAX_BYTES = 8 * 1024 * 1024
-VERSION = '0.1.0'
+VERSION = '0.2.0'
 BASE = 'https://schemas.example.invalid/syspane/0.1.0/'
 IGNORED_DIRS = {'__pycache__', '.git'}
 
@@ -193,7 +193,81 @@ def registries(root: Path) -> tuple[dict, dict, dict]:
     work = id_map(read_json(root/'delivery/work-units.json')['work_units'], 'work')
     return req, tests, work
 
-def semantic_errors(value: Any, schema_name: str) -> list[str]:
+def setting_value_errors(value: Any, constraints: dict[str, Any]) -> list[str]:
+    """Check the small descriptor vocabulary without optional schema packages."""
+    kind = constraints.get('type')
+    valid_type = ((kind == 'integer' and type(value) is int) or
+                  (kind == 'boolean' and type(value) is bool) or
+                  (kind == 'string' and isinstance(value, str)))
+    if not valid_type:
+        return ['setting value has wrong type']
+    errors = []
+    if kind == 'integer':
+        if value < constraints.get('minimum', value) or value > constraints.get('maximum', value):
+            errors.append('setting value outside bounds')
+    if kind == 'string':
+        if not constraints.get('minLength', 0) <= len(value) <= constraints.get('maxLength', MAX_BYTES):
+            errors.append('setting string outside bounds')
+        if 'pattern' in constraints and not re.search(constraints['pattern'], value):
+            errors.append('setting string does not match pattern')
+    if 'enum' in constraints and value not in constraints['enum']:
+        errors.append('setting value outside enum')
+    return errors
+
+def settings_projections(root: Path) -> dict[str, Any]:
+    """Only descriptor-owned constraints are generated; envelopes remain authored."""
+    rows = read_json(root/'experience/settings-registry.json')['settings']
+    settings = read_json(root/'contracts/settings.schema.json')
+    for row in rows:
+        section, key = row['id'].split('.')
+        settings['properties'][section]['properties'][key] = row['constraints']
+    result = {'contracts/settings.schema.json': settings}
+    for name in ('command', 'command-v0.2'):
+        path = f'contracts/{name}.schema.json'
+        command = read_json(root/path)
+        operations = command['properties']['operations']['items']['oneOf']
+        other = [op for op in operations if op['properties']['op']['const'] != 'settings.set']
+        generated = [{'type':'object', 'properties':{'op':{'const':'settings.set'},
+                      'path':{'const':row['id']}, 'value':row['constraints']},
+                      'required':['op','path','value'], 'additionalProperties':False} for row in rows]
+        command['properties']['operations']['items']['oneOf'] = generated + other
+        result[path] = command
+    return result
+
+def validate_settings(root: Path) -> list[str]:
+    errors = []
+    rows = id_map(read_json(root/'experience/settings-registry.json')['settings'], 'setting')
+    types = {'int':'integer', 'bool':'boolean', 'str':'string'}
+    for ident, row in rows.items():
+        constraints = row.get('constraints', {})
+        if types.get(row.get('type')) != constraints.get('type'):
+            errors.append(ident+': descriptor type disagrees with constraints')
+        errors += [ident+': '+error for error in setting_value_errors(row.get('default'), constraints)]
+        allowed = {'type','minimum','maximum','minLength','maxLength','pattern','enum'}
+        if not set(constraints) <= allowed:
+            errors.append(ident+': unsupported descriptor constraint')
+        for low, high in (('minimum','maximum'), ('minLength','maxLength')):
+            if low in constraints and high in constraints and constraints[low] > constraints[high]:
+                errors.append(ident+': inverted descriptor bounds')
+        for option in constraints.get('enum', []):
+            errors += [ident+': invalid enum member: '+e for e in setting_value_errors(option, constraints)]
+        for key in ('units','scope','activation','policy_class','label_id','help_id','classification','sensitivity'):
+            if not isinstance(row.get(key), str) or not row[key]:
+                errors.append(ident+': missing descriptor metadata '+key)
+        for key in ('restart_required','preview','policy_enforced','user_editable'):
+            if type(row.get(key)) is not bool:
+                errors.append(ident+': invalid descriptor boolean '+key)
+        if row.get('classification') not in ('user','internal') or row.get('user_editable') != (row.get('classification') == 'user'):
+            errors.append(ident+': setting classification disagrees with editability')
+        if row.get('user_editable') and (not row.get('native_page') or row.get('command') != 'settings.set'):
+            errors.append('incomplete native setting operation mapping')
+    check_dag({ident:row.get('dependencies', []) for ident,row in rows.items()})
+    for path, expected in settings_projections(root).items():
+        if read_json(root/path) != expected:
+            errors.append('settings descriptor projection drift: '+path)
+    return errors
+
+def semantic_errors(value: Any, schema_name: str, root: Path=ROOT) -> list[str]:
     """Selected semantic invariants. Native runtime conformance requires more tests."""
     errors = []
     def check_uint(n: Any) -> None:
@@ -234,6 +308,100 @@ def semantic_errors(value: Any, schema_name: str) -> list[str]:
         ids = [w['id'] for w in value['widgets']]
         if len(ids) != len(set(ids)):
             errors.append('duplicate widget id')
+    if schema_name == 'layout':
+        variants = [value['base']] + [b['layout'] for b in value.get('breakpoints', [])]
+        widths = [b['min_width_dip'] for b in value.get('breakpoints', [])]
+        if widths != sorted(set(widths)):
+            errors.append('breakpoints must have strictly increasing widths')
+        for layout in variants:
+            if layout['kind'] == 'flow':
+                for axis in ('width','height'):
+                    bounds = layout[axis]
+                    if not bounds['min'] <= bounds['preferred'] <= bounds['max']:
+                        errors.append('layout bounds must satisfy min <= preferred <= max')
+    if schema_name == 'scene-v0.2':
+        widgets = value['widgets']
+        ids = [w['id'] for w in widgets]
+        if len(ids) != len(set(ids)):
+            errors.append('duplicate widget id')
+        graph = {w['id']:w.get('children', []) for w in widgets}
+        owners = list(value['roots']) + [child for w in widgets for child in w.get('children', [])]
+        valid_ownership = set(owners) == set(ids) and len(owners) == len(set(owners))
+        if not valid_ownership:
+            errors.append('every widget requires exactly one root or parent owner')
+        try:
+            check_dag(graph)
+        except SpecError as exc:
+            errors.append(str(exc))
+        else:
+            def depth(ident: str, level: int) -> None:
+                if level > 16:
+                    errors.append('scene nesting exceeds 16'); return
+                for child in graph[ident]: depth(child, level+1)
+            # Traverse only a valid tree; invalid shared children must not create
+            # exponential repeated work before the ownership error is returned.
+            if valid_ownership:
+                for ident in value['roots']:
+                    if ident in graph: depth(ident, 1)
+        for widget in widgets:
+            errors += semantic_errors(widget['layout'], 'layout', root)
+            variants = [widget['layout']['base']] + [b['layout'] for b in widget['layout'].get('breakpoints', [])]
+            for variant in variants:
+                allowed_layouts = ('canvas','stack','grid','fixed') if widget['kind'] == 'group' else ('fixed','flow')
+                if variant['kind'] not in allowed_layouts:
+                    errors.append('container layout and widget kind disagree')
+    if schema_name == 'command-v0.2':
+        if sum(op['op'] == 'scene.replace' for op in value['operations']) > 1:
+            errors.append('only one scene replacement per request is admitted')
+        for operation in value['operations']:
+            if operation['op'] == 'scene.replace':
+                errors += semantic_errors(operation['scene'], 'scene-v0.2', root)
+                if operation['scene']['revision'] != value['expected_revision']:
+                    errors.append('scene draft revision must match expected revision')
+    if schema_name in ('preset','policy'):
+        rows = id_map(read_json(root/'experience/settings-registry.json')['settings'], 'setting')
+        settings = value['settings'] if schema_name == 'preset' else value['forced_settings']
+        paths = []
+        for setting in settings:
+            paths.append(setting['path'])
+            if setting['path'] not in rows:
+                errors.append('unknown setting path')
+            else:
+                errors += setting_value_errors(setting['value'], rows[setting['path']]['constraints'])
+        if len(paths) != len(set(paths)):
+            errors.append('duplicate setting override')
+        if schema_name == 'preset' and value['parent'] and value['parent']['id'] == value['preset_id']:
+            errors.append('preset cannot inherit itself')
+    if schema_name in ('content-package','extension-manifest'):
+        paths = [asset['path'] for asset in value['assets']]
+        if len({path.casefold() for path in paths}) != len(paths):
+            errors.append('case-insensitive asset collision')
+        for path in paths + ([value['entry_point']] if schema_name == 'extension-manifest' else []):
+            try: safe_path(root, path)
+            except SpecError as exc: errors.append(str(exc))
+        if schema_name == 'content-package':
+            if sum(a['bytes'] for a in value['assets']) != value['total_unpacked_bytes']:
+                errors.append('asset total differs from declared unpacked bytes')
+            if any(d['id'] == value['package_id'] for d in value['dependencies']):
+                errors.append('content package cannot depend on itself')
+        elif value['entry_point'] not in paths:
+            errors.append('extension entry point missing from asset closure')
+    if schema_name == 'command-result':
+        if value['durable'] and not value['stored']:
+            errors.append('durable result requires stored generation')
+        if value['outcome'] != 'accepted' and (value['stored'] or value['durable'] or value['visible']):
+            errors.append('non-accepted outcome cannot claim committed effects')
+    if schema_name == 'metric-descriptor' and value['freshness_ms'] < value['sample_interval_ms']:
+        errors.append('freshness interval cannot be shorter than sampling interval')
+    if schema_name == 'capability-v0.2':
+        if value['profile_id'] != value['target']['profile_id']:
+            errors.append('capability target identity mismatch')
+        for capability in value['capabilities']:
+            if capability['qualification'] == 'qualified':
+                if value['target']['example_only'] or not value['artifact_sha256']:
+                    errors.append('qualified capability needs a real target and artifact')
+                if any(e['artifact_sha256'] != value['artifact_sha256'] for e in capability['evidence']):
+                    errors.append('qualification evidence artifact mismatch')
     if schema_name == 'capability':
         for c in value['capabilities']:
             if c['qualification'] == 'qualified' and not c['implemented']:
@@ -259,7 +427,10 @@ def schema_validators(root: Path) -> dict[str, Any]:
             Draft202012Validator.check_schema(data)
         except Exception as exc:
             raise SpecError(f'invalid schema {p.name}: {exc}') from exc
-        if data.get('$id') != BASE + p.name:
+        versioned = p.name.endswith('-v0.2.schema.json')
+        expected_id = (BASE.replace('/0.1.0/', '/0.2.0/') + p.name.replace('-v0.2', '')
+                       if versioned else BASE + p.name)
+        if data.get('$id') != expected_id:
             raise SpecError(f'unexpected schema identity: {p.name}')
         all_schemas[p.name.removesuffix('.schema.json')] = data
     ids={d['$id'] for d in all_schemas.values()}
@@ -273,7 +444,19 @@ def schema_validators(root: Path) -> dict[str, Any]:
     for data in all_schemas.values(): check_refs(data)
     # No retriever is provided: unknown references fail rather than access a network.
     registry = Registry().with_resources([(d['$id'], Resource.from_contents(d)) for d in all_schemas.values()])
-    return {n: Draft202012Validator(d, registry=registry, format_checker=FormatChecker()) for n, d in all_schemas.items()}
+    checker = FormatChecker()
+    # jsonschema's date-time checker is otherwise silently optional. Keep it local
+    # and deterministic; this profile uses explicit offsets and seconds 00..59.
+    @checker.checks('date-time')
+    def zoned_timestamp(value: Any) -> bool:
+        if not isinstance(value, str): return True
+        if not re.fullmatch(r'\d{4}-\d{2}-\d{2}[Tt]\d{2}:\d{2}:[0-5]\d(?:\.\d+)?(?:[Zz]|[+-](?:[01]\d|2[0-3]):[0-5]\d)', value):
+            return False
+        try:
+            return datetime.fromisoformat(value.upper().replace('Z', '+00:00')).tzinfo is not None
+        except ValueError:
+            return False
+    return {n: Draft202012Validator(d, registry=registry, format_checker=checker) for n, d in all_schemas.items()}
 
 def validate_fixtures(root: Path) -> dict[str, Any]:
     validators = schema_validators(root)
@@ -283,7 +466,7 @@ def validate_fixtures(root: Path) -> dict[str, Any]:
         validator = validators[f['schema']]
         errors = [e.message[:4096] for e in validator.iter_errors(value)]
         if not errors:
-            errors += semantic_errors(value, f['schema'])
+            errors += semantic_errors(value, f['schema'], root)
         actual = 'invalid' if errors else 'valid'
         results.append({'path':f['path'],'expected':f['expected'],'actual':actual,'pass':actual == f['expected'],'diagnostics':errors[:8]})
     return {'status':'pass' if all(r['pass'] for r in results) else 'fail','schema_count':len(validators),'fixture_count':len(results),'results':results}
@@ -396,9 +579,7 @@ def validate_bundle(root: Path, full_schemas: bool=False) -> dict[str, Any]:
         setting_rows=id_map(read_json(root/'experience/settings-registry.json')['settings'],'setting')
         if set(setting_rows)!=expected_settings:
             errors.append('native setting registry differs from schema properties')
-        for row in setting_rows.values():
-            if row.get('user_editable') and (not row.get('native_page') or row.get('command')!='settings.set'):
-                errors.append('incomplete native setting operation mapping')
+        errors += validate_settings(root)
         bootstrap_files=read_json(root/'bootstrap/files.json')['files']
         for f in bootstrap_files:
             safe_path(root,f['path'])
@@ -409,6 +590,12 @@ def validate_bundle(root: Path, full_schemas: bool=False) -> dict[str, Any]:
             schema_result=validate_fixtures(root)
             if schema_result['status']!='pass':
                 errors.append('schema fixture expectations failed')
+            validators = schema_validators(root)
+            metric_rows = read_json(root/'telemetry/metrics.json')['metrics']
+            id_map([{'id':r['metric_id']} for r in metric_rows], 'metric')
+            for row in metric_rows:
+                errors += [e.message for e in validators['metric-descriptor'].iter_errors(row)]
+                errors += semantic_errors(row, 'metric-descriptor', root)
     except (SpecError,ValueError,KeyError,TypeError,OSError,RecursionError) as exc:
         errors.append(str(exc))
     return {'status':'pass' if not errors else 'fail','scope':'specification_and_tooling_only','counts':count,'errors':errors,'warnings':warnings,'full_schemas':'executed' if schema_result else 'not_run','schema_results':schema_result,'native_tests_executed':0}
@@ -424,6 +611,7 @@ def generated_payloads(root: Path) -> dict[str, bytes]:
         {'id':r['id'],'owner':r['owner'],'path':by_id[r['owner']],'tests':r['tests'],'work_units':r['work_units']}
         for r in req.values()]}
     result={'generated/catalog.json':json_bytes(catalog),'generated/traceability.json':json_bytes(trace)}
+    result.update({path:json_bytes(value) for path,value in settings_projections(root).items()})
     paths={p.relative_to(root).as_posix() for p in files(root) if p.name!='index.md'} | set(result)
     directories={''}
     for path in paths:

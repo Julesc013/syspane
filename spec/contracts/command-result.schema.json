@@ -1,0 +1,181 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.example.invalid/syspane/0.1.0/command-result.schema.json",
+  "title": "SysPane command-result experimental 0.1.0",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "request_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+    },
+    "producer_epoch": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+    },
+    "outcome": {
+      "enum": [
+        "preview",
+        "accepted",
+        "conflict",
+        "denied",
+        "invalid",
+        "busy",
+        "cancelled",
+        "unknown"
+      ]
+    },
+    "revision": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]{0,19})$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "stored": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "durable": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "visible": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "activation": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "component": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+          },
+          "state": {
+            "enum": [
+              "not_started",
+              "pending",
+              "active",
+              "degraded",
+              "failed"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "maxLength": 2048
+          }
+        },
+        "required": [
+          "component",
+          "state",
+          "reason"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0,
+      "maxItems": 64
+    },
+    "error": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "code": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+            },
+            "message": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 2048
+            },
+            "retryable": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "code",
+            "message",
+            "retryable"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "request_id",
+    "producer_epoch",
+    "outcome",
+    "revision",
+    "stored",
+    "durable",
+    "visible",
+    "activation",
+    "error"
+  ],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "outcome": {
+            "const": "unknown"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "stored": {
+            "type": "null"
+          },
+          "durable": {
+            "type": "null"
+          },
+          "visible": {
+            "type": "null"
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "stored": {
+            "type": "boolean"
+          },
+          "durable": {
+            "type": "boolean"
+          },
+          "visible": {
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  ]
+}

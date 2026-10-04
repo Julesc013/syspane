@@ -10,8 +10,9 @@ sp_profile: "syspane-spec/0.1.0"
 sp_authority: "normative-proposal"
 sp_requires: ["SP-STATE"]
 sp_review: "unreviewed"
-sp_sources: ["SRC-CONVERSATION"]
+sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
+updated: {"by": "codex", "at": "2026-10-04T19:32:52+11:00", "scope": "October audit amendments; no human review attested"}
 ---
 
 # Authorized workshop assets and active probes
@@ -37,3 +38,11 @@ Optional remote agents negotiate schema/capabilities and authenticate; identity 
 ## Growth path
 
 Later adapters may read authorized management endpoints, hardware test logs and explicit inventory exports. Correlation can connect a bench event to local interface changes without claiming causation. Before/after inventory comparisons, test bookmarks and redacted bundles are product extensions, not an excuse to build a fleet platform before the local wall works.
+
+## Presets and authority
+
+An imported workshop preset can request a view but cannot enable a probe, exporter,
+privileged provider or OS action. Current [policy](../experience/policy.md) constrains
+collection and every disclosure channel. Advanced process/service, power/thermal,
+virtualization and hardware comparisons enter through [metric descriptors](metric-registry.md)
+and separately qualified providers; inferred causes remain distinguishable from facts.

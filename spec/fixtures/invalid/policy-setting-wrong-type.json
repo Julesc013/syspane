@@ -1,0 +1,25 @@
+{
+  "schema_version": "0.1.0",
+  "policy_id": "policy:fixture",
+  "revision": "0",
+  "scope": "machine",
+  "forced_settings": [
+    {
+      "path": "privacy.remote_probes",
+      "value": "false"
+    }
+  ],
+  "denied_capabilities": [
+    "network.probe"
+  ],
+  "disclosure": [
+    {
+      "role": "saver",
+      "channel": "saver",
+      "allow_classifications": [
+        "public"
+      ]
+    }
+  ],
+  "retained_data_on_revocation": "restrict"
+}

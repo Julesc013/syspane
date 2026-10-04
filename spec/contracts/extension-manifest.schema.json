@@ -1,0 +1,221 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.example.invalid/syspane/0.1.0/extension-manifest.schema.json",
+  "title": "SysPane extension-manifest experimental 0.1.0",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "extension_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[A-Za-z0-9.-]+)?$",
+      "maxLength": 64
+    },
+    "source": {
+      "type": "object",
+      "properties": {
+        "repository": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1024
+        },
+        "revision": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "artifact_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "repository",
+        "revision",
+        "artifact_sha256"
+      ],
+      "additionalProperties": false
+    },
+    "target_profile": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+    },
+    "entry_point": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 512,
+      "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*[\\\\:])[A-Za-z0-9_. /-]+$"
+    },
+    "contracts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+          },
+          "minimum": {
+            "type": "string",
+            "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[A-Za-z0-9.-]+)?$",
+            "maxLength": 64
+          },
+          "maximum_exclusive": {
+            "type": "string",
+            "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[A-Za-z0-9.-]+)?$",
+            "maxLength": 64
+          }
+        },
+        "required": [
+          "id",
+          "minimum",
+          "maximum_exclusive"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1,
+      "maxItems": 32
+    },
+    "requested_permissions": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "local_observation",
+          "local_files_read",
+          "network_probe",
+          "export"
+        ]
+      },
+      "minItems": 0,
+      "maxItems": 16,
+      "uniqueItems": true
+    },
+    "data_classification": {
+      "enum": [
+        "public",
+        "operational",
+        "sensitive"
+      ]
+    },
+    "default_enabled": {
+      "const": false
+    },
+    "quotas": {
+      "type": "object",
+      "properties": {
+        "memory_bytes": {
+          "type": "integer",
+          "minimum": 1048576,
+          "maximum": 1073741824
+        },
+        "workers": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 32
+        },
+        "message_bytes": {
+          "type": "integer",
+          "minimum": 1024,
+          "maximum": 1048576
+        },
+        "deadline_ms": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 60000
+        }
+      },
+      "required": [
+        "memory_bytes",
+        "workers",
+        "message_bytes",
+        "deadline_ms"
+      ],
+      "additionalProperties": false
+    },
+    "assets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 512,
+            "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*[\\\\:])[A-Za-z0-9_. /-]+$"
+          },
+          "media_type": {
+            "enum": [
+              "application/json",
+              "image/png",
+              "image/jpeg",
+              "image/svg+xml",
+              "font/woff2",
+              "application/octet-stream"
+            ]
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "bytes": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 16777216
+          }
+        },
+        "required": [
+          "path",
+          "media_type",
+          "sha256",
+          "bytes"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0,
+      "maxItems": 256
+    },
+    "update": {
+      "type": "object",
+      "properties": {
+        "permission_expansion": {
+          "const": "readmit"
+        },
+        "revocation": {
+          "const": "stop_and_mark_unavailable"
+        }
+      },
+      "required": [
+        "permission_expansion",
+        "revocation"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "schema_version",
+    "extension_id",
+    "version",
+    "source",
+    "target_profile",
+    "entry_point",
+    "contracts",
+    "requested_permissions",
+    "data_classification",
+    "default_enabled",
+    "quotas",
+    "assets",
+    "update"
+  ],
+  "additionalProperties": false
+}

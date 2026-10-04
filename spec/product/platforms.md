@@ -10,8 +10,9 @@ sp_profile: "syspane-spec/0.1.0"
 sp_authority: "normative-proposal"
 sp_requires: ["SP-ARCHITECTURE", "SP-DESKTOP"]
 sp_review: "unreviewed"
-sp_sources: ["SRC-CONVERSATION"]
+sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
+updated: {"by": "codex", "at": "2026-10-04T19:32:52+11:00", "scope": "October audit amendments; no human review attested"}
 ---
 
 # Platform and capability admission matrix
@@ -46,3 +47,12 @@ Historical security support and application compatibility are separate. No obsol
 ## Gate
 
 Each new profile has a work unit, explicit build recipe and independent behavioural evidence. Reuse common fixtures; do not copy source into `modern/legacy` trees. Unqualified profiles appear in roadmap, not the public supported-platform list.
+
+## Typed identity and additional roles
+
+[Target profiles](../delivery/target-profiles.md) separate authored build requirements
+from evidence-bound qualification. [Composition](../architecture/composition.md) adds
+diagnostic, maintenance, saver, preview and saver-settings roles. A graphics fallback
+does not qualify shell placement. A conventional window never passes persistent-wall
+acceptance. Artifact selection cannot infer x86/x64/ARM64 or historical support from
+another profile's pass. No concrete native profile is released by this update.

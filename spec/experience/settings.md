@@ -10,8 +10,9 @@ sp_profile: "syspane-spec/0.1.0"
 sp_authority: "normative-proposal"
 sp_requires: ["SP-COMMANDS"]
 sp_review: "unreviewed"
-sp_sources: ["SRC-CONVERSATION"]
+sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
+updated: {"by": "codex", "at": "2026-10-04T19:32:52+11:00", "scope": "October audit amendments; no human review attested"}
 ---
 
 # Native settings and complete user operation coverage
@@ -41,3 +42,16 @@ First launch displays a useful conservative host/network scene, not an empty das
 ## Acceptance
 
 A machine-readable settings coverage report maps every user setting to native UI, control API and CLI operations or an explicit non-user/internal classification. Missing native editing is a release defect for advertised user functionality. Test search, keyboard navigation, reset, policy locks, invalid input, effective-value explanation and persistence across all initial platforms.
+
+## October contract ownership
+
+The eleven initial descriptors now carry structural constraints, units, scope,
+dependencies, activation, policy classification, localization/help IDs and native
+coverage status. `specctl generate` projects their setting constraints into settings
+and both command schemas; validation rejects bad defaults and projection drift.
+Native bindings/help generation and actual GUI coverage remain implementation work.
+
+[Resolution](configuration-resolution.md) owns precedence, reset/delete/list semantics,
+theme selection and provenance. [Presets](presets.md), [policy](policy.md) and
+[generation persistence](../architecture/persistence.md) own import, restrictions and
+crash behaviour. Portable paths follow [installation ownership](../setup/ownership.md).

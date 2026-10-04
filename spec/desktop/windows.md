@@ -10,8 +10,9 @@ sp_profile: "syspane-spec/0.1.0"
 sp_authority: "normative-proposal"
 sp_requires: ["SP-DESKTOP"]
 sp_review: "unreviewed"
-sp_sources: ["SRC-CONVERSATION", "SRC-SETPARENT", "SRC-WINDOWS"]
+sp_sources: ["SRC-CONVERSATION", "SRC-SETPARENT", "SRC-WINDOWS", "SRC-AUDIT-2026-10-04"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}, {"id": "SRC-SETPARENT", "resource": "https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setparent", "title": "Win32 SetParent"}, {"id": "SRC-WINDOWS", "resource": "https://learn.microsoft.com/en-us/windows/win32/winmsg/window-features", "title": "Win32 window features"}]
+updated: {"by": "codex", "at": "2026-10-04T19:32:52+11:00", "scope": "October audit amendments; no human review attested"}
 ---
 
 # Windows native host and presentation profiles
@@ -42,3 +43,10 @@ Include x86/x64 where required, ARM64 where admitted, composition mode, multiple
 
 [^SRC-SETPARENT]: Microsoft SetParent documentation, especially cross-process DPI behaviour.
 [^SRC-WINDOWS]: Microsoft Window Features documentation, layered children and message-only windows.
+
+## Profile-specific admission
+
+Use [typed target profiles](../delivery/target-profiles.md) for exact build, native
+host, dependency and isolation identity. Keep renderer success separate from shell
+placement/input/reveal evidence. [Screensaver roles](screensaver.md) require their
+own preview/configuration, architecture, power and privacy qualification.

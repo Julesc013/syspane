@@ -10,8 +10,9 @@ sp_profile: "syspane-spec/0.1.0"
 sp_authority: "normative-proposal"
 sp_requires: ["SP-DESKTOP"]
 sp_review: "unreviewed"
-sp_sources: ["SRC-CONVERSATION"]
+sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
+updated: {"by": "codex", "at": "2026-10-04T19:32:52+11:00", "scope": "October audit amendments; no human review attested"}
 ---
 
 # Linux desktop and distribution profiles
@@ -41,3 +42,10 @@ Record libc/libstdc++ baseline, architecture, toolkit versions, desktop protocol
 ## Acceptance
 
 Run the same changing-scene, edit/apply/cancel, icon-input, display-change and desktop-reveal tests on each admitted environment. Cover shell/bridge reload, absent protocol, denied permissions, multi-monitor scaling and hot-plug. A headless collector can be admitted separately; a top-level preview window cannot stand in for a persistent wall qualification.
+
+## Profile-specific admission
+
+Use [typed target profiles](../delivery/target-profiles.md) for exact build, native
+host, dependency and isolation identity. Keep renderer success separate from shell
+placement/input/reveal evidence. [Screensaver roles](screensaver.md) require their
+own preview/configuration, architecture, power and privacy qualification.

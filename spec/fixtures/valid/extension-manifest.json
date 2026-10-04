@@ -1,0 +1,42 @@
+{
+  "schema_version": "0.1.0",
+  "extension_id": "provider:fixture",
+  "version": "0.1.0",
+  "source": {
+    "repository": "fixture:source",
+    "revision": "fixture-revision",
+    "artifact_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  "target_profile": "fixture:target",
+  "entry_point": "provider.bin",
+  "contracts": [
+    {
+      "id": "provider-wire",
+      "minimum": "0.1.0",
+      "maximum_exclusive": "0.2.0"
+    }
+  ],
+  "requested_permissions": [
+    "local_observation"
+  ],
+  "data_classification": "operational",
+  "default_enabled": false,
+  "quotas": {
+    "memory_bytes": 16777216,
+    "workers": 1,
+    "message_bytes": 1048576,
+    "deadline_ms": 5000
+  },
+  "assets": [
+    {
+      "path": "provider.bin",
+      "media_type": "application/octet-stream",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "bytes": 100
+    }
+  ],
+  "update": {
+    "permission_expansion": "readmit",
+    "revocation": "stop_and_mark_unavailable"
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "schema_version": "0.2.0",
+  "profile_id": "fixture:target",
+  "capabilities": [
+    {
+      "id": "desktop.wall",
+      "implemented": false,
+      "qualification": "not_qualified",
+      "availability": "unknown",
+      "reason": "No native implementation.",
+      "authorized": false,
+      "evidence": []
+    }
+  ],
+  "environment": {},
+  "target": {
+    "schema_version": "0.1.0",
+    "profile_id": "fixture:target",
+    "revision": "0",
+    "example_only": true,
+    "os": {
+      "family": "fixture-os",
+      "minimum_version": "1.0",
+      "api_floor": "fixture-api-1"
+    },
+    "cpu": {
+      "architecture": "x86_64",
+      "isa_floor": "baseline",
+      "word_bits": 64,
+      "endianness": "little"
+    },
+    "abi": {
+      "name": "fixture-abi",
+      "runtime": "fixture-runtime",
+      "runtime_version": "1.0"
+    },
+    "toolchain": {
+      "compiler": "fixture-compiler",
+      "version": "1.0",
+      "sdk": "fixture-sdk-1",
+      "recipe": "build-support/targets/fixture-only",
+      "flags": []
+    },
+    "dependencies": [],
+    "ui": "fixture-native",
+    "shell_host": "fixture-host",
+    "renderer": "fixture-software",
+    "roles": [
+      "desktop",
+      "diagnostic"
+    ],
+    "isolation": {
+      "tier": "process",
+      "controls": [
+        "process-address-space"
+      ]
+    },
+    "limitations": [
+      "Synthetic descriptor; no build or native test executed."
+    ]
+  },
+  "artifact_sha256": null
+}

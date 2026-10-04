@@ -10,8 +10,9 @@ sp_profile: "syspane-spec/0.1.0"
 sp_authority: "normative-proposal"
 sp_requires: ["SP-STATE", "SP-RENDERING"]
 sp_review: "unreviewed"
-sp_sources: ["SRC-CONVERSATION"]
+sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
+updated: {"by": "codex", "at": "2026-10-04T19:32:52+11:00", "scope": "October audit amendments; no human review attested"}
 ---
 
 # Scene, theme and binding model
@@ -41,3 +42,17 @@ Preserve unknown optional extension data during round trips. Reject unknown mand
 ## Acceptance
 
 Fixtures cover shared bindings, invalid fields, unknown widgets, unit mismatch, expression limits, malicious asset paths, missing fonts, high contrast, responsive reflow and downgrade loss reports. Native screenshots can differ; the authored document and state meaning remain consistent.
+
+## Initial executable contract scope
+
+[Scene/binding 0.2](scene-bindings.md) supplies ordered container membership, bounded
+layout variants, monitor roles and portable selectors. The 0.1 rectangle schema is
+retained for migration, not silently reinterpreted. General expression evaluation
+remains gated until a typed AST, units and resource fixtures are specified.
+
+Authored colors are sRGB `#RRGGBBAA` with straight alpha; backend premultiplication
+is a deliberate conversion. [Resolution](configuration-resolution.md) defines default
+versus scene theme and most-restrictive motion/accessibility precedence. The current
+theme schema still represents five semantic colors, one font and motion. Expanded
+typography roles, spacing/density, chart styles and contrast variants require a
+versioned schema and native tests before enablement; they are not hidden in extensions.

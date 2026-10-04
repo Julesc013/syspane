@@ -10,8 +10,9 @@ sp_profile: "syspane-spec/0.1.0"
 sp_authority: "normative-proposal"
 sp_requires: ["SP-REPOSITORY", "SP-AUTHORITY"]
 sp_review: "unreviewed"
-sp_sources: ["SRC-CONVERSATION"]
+sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
+updated: {"by": "codex", "at": "2026-10-04T19:32:52+11:00", "scope": "October audit amendments; no human review attested"}
 ---
 
 # Documentation publishing and editorial ownership
@@ -37,3 +38,11 @@ Use ordinary Markdown and relative links with stable headings. Include alt text 
 Documentation changes are reviewed alongside changed behaviour. Keep migration/deprecation guides for public contracts. A link rot repair does not rewrite technical meaning. Source citations record inspection date and scope; private workshop transcripts are not automatically published.
 
 AIDE may generate a documentation patch, but deterministic checks establish only links/coverage, not human editorial acceptance. Required editorial review is recorded separately. A source-derived page cites its evidence and distinguishes proposed features from shipped ones.
+
+## Published starting guides
+
+Root README is now the product homepage and TODO is an implementation route. Initial
+user, operator and developer pages explicitly distinguish planned controls/packages
+from runnable specification tooling. Keep generated setting constraints/reference
+data bound to descriptors and authored explanations bound through the publication map.
+The wiki remains a navigation projection. Raw review transcripts are not published.

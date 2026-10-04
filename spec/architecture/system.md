@@ -10,8 +10,9 @@ sp_profile: "syspane-spec/0.1.0"
 sp_authority: "normative-proposal"
 sp_requires: ["SP-CHARTER", "SP-AUTHORITY"]
 sp_review: "unreviewed"
-sp_sources: ["SRC-CONVERSATION"]
+sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
+updated: {"by": "codex", "at": "2026-10-04T19:32:52+11:00", "scope": "October audit amendments; no human review attested"}
 ---
 
 # System architecture and dependency contracts
@@ -67,3 +68,15 @@ Initial components can be libraries linked into native binaries. An internal mod
 ## Portability acceptance
 
 A second platform should exercise the semantic contracts early. Keep source acquisition and shell-host facts native. Do not encode Windows NCSI as a portable truth about Internet access or impose Windows processor-group semantics on every OS. Exporters may map to external standards through versioned adapters without surrendering internal meaning.
+
+## Completed boundary definitions
+
+The observation/presentation path, authored-state transaction path and installation
+path have separate authority. [Roles and composition](composition.md) define selected
+components; [recovery](recovery.md) keeps a minimal diagnostic path independent;
+[persistence](persistence.md) binds document generations without mixed recovery.
+
+Settings, scenes, themes, presets, policy and extension manifests are separately
+versioned. [Configuration resolution](../experience/configuration-resolution.md)
+owns precedence. [USK](../setup/contract.md) is a maintenance-only provider binding;
+ordinary controller, surface, collector and saver startup must not depend on it.

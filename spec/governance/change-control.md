@@ -10,8 +10,9 @@ sp_profile: "syspane-spec/0.1.0"
 sp_authority: "normative-proposal"
 sp_requires: ["SP-TESTING", "SP-AUTHORITY"]
 sp_review: "unreviewed"
-sp_sources: ["SRC-CONVERSATION", "SRC-SEMVER"]
+sp_sources: ["SRC-CONVERSATION", "SRC-SEMVER", "SRC-AUDIT-2026-10-04"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}, {"id": "SRC-SEMVER", "resource": "https://semver.org/spec/v2.0.0.html", "title": "Semantic Versioning 2.0.0"}]
+updated: {"by": "codex", "at": "2026-10-04T19:32:52+11:00", "scope": "October audit amendments; no human review attested"}
 ---
 
 # Change control, compatibility and evidence reuse
@@ -43,3 +44,11 @@ Use short-lived bounded task branches/worktrees with ownership and cleanup. `mai
 Record rejected alternatives, failed experiments and rationale in concise decision/evidence records. Search them before restarting a known failed path. A changed environment can justify reopening a decision; record the changed assumptions rather than pretending the earlier work never happened.
 
 [^SRC-SEMVER]: Semantic Versioning 2.0.0.
+
+## October version and evidence policy
+
+[Version policy](../contracts/versions.md) separates bundle, document, protocol, ABI,
+content, target and provider versions. Preserve 0.1 scene/command fixtures and use
+copy-on-migrate previews for 0.2. This update does not freeze the SDK, attest human
+review or transfer native results. Changed core/host/renderer/oracle dependencies
+invalidate corresponding evidence; unrelated prose changes do not trigger every lab.

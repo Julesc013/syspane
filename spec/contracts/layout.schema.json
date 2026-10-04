@@ -1,0 +1,249 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.example.invalid/syspane/0.1.0/layout.schema.json",
+  "title": "SysPane layout experimental 0.1.0",
+  "type": "object",
+  "properties": {
+    "base": {
+      "$ref": "#/$defs/base"
+    },
+    "breakpoints": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "min_width_dip": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 32768
+          },
+          "layout": {
+            "$ref": "#/$defs/base"
+          }
+        },
+        "required": [
+          "min_width_dip",
+          "layout"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0,
+      "maxItems": 8
+    }
+  },
+  "required": [
+    "base"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "base": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "fixed"
+            },
+            "x": {
+              "type": "number",
+              "minimum": -100000,
+              "maximum": 100000
+            },
+            "y": {
+              "type": "number",
+              "minimum": -100000,
+              "maximum": 100000
+            },
+            "width": {
+              "type": "number",
+              "minimum": 32,
+              "maximum": 32768
+            },
+            "height": {
+              "type": "number",
+              "minimum": 16,
+              "maximum": 32768
+            }
+          },
+          "required": [
+            "kind",
+            "x",
+            "y",
+            "width",
+            "height"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "flow"
+            },
+            "width": {
+              "type": "object",
+              "properties": {
+                "min": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 32768
+                },
+                "preferred": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 32768
+                },
+                "max": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 32768
+                }
+              },
+              "required": [
+                "min",
+                "preferred",
+                "max"
+              ],
+              "additionalProperties": false
+            },
+            "height": {
+              "type": "object",
+              "properties": {
+                "min": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 32768
+                },
+                "preferred": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 32768
+                },
+                "max": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 32768
+                }
+              },
+              "required": [
+                "min",
+                "preferred",
+                "max"
+              ],
+              "additionalProperties": false
+            },
+            "anchor": {
+              "enum": [
+                "start",
+                "center",
+                "end",
+                "stretch"
+              ]
+            }
+          },
+          "required": [
+            "kind",
+            "width",
+            "height",
+            "anchor"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "canvas"
+            },
+            "width": {
+              "type": "number",
+              "minimum": 32,
+              "maximum": 32768
+            },
+            "height": {
+              "type": "number",
+              "minimum": 16,
+              "maximum": 32768
+            },
+            "overflow": {
+              "enum": [
+                "scroll",
+                "diagnose"
+              ]
+            }
+          },
+          "required": [
+            "kind",
+            "width",
+            "height",
+            "overflow"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "stack"
+            },
+            "axis": {
+              "enum": [
+                "horizontal",
+                "vertical"
+              ]
+            },
+            "gap_dip": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 256
+            },
+            "overflow": {
+              "enum": [
+                "scroll",
+                "diagnose"
+              ]
+            }
+          },
+          "required": [
+            "kind",
+            "axis",
+            "gap_dip",
+            "overflow"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "grid"
+            },
+            "columns": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 32
+            },
+            "gap_dip": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 256
+            },
+            "overflow": {
+              "enum": [
+                "scroll",
+                "diagnose"
+              ]
+            }
+          },
+          "required": [
+            "kind",
+            "columns",
+            "gap_dip",
+            "overflow"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    }
+  }
+}

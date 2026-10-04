@@ -2,20 +2,35 @@
 
 Generated navigation; edit the referenced source documents, then run `specctl.py generate`.
 
+- [binding.schema.json](binding.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
+- [capability-v0.2.schema.json](capability-v0.2.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [capability.schema.json](capability.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
+- [command-result.schema.json](command-result.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
+- [command-v0.2.schema.json](command-v0.2.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [command.schema.json](command.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [Commands, transactions and activation](commands.md) — Unify editing, native settings, CLI and policy through validated operations.
 - [common.schema.json](common.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
+- [content-package.schema.json](content-package.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [event.schema.json](event.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [evidence.schema.json](evidence.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
+- [extension-manifest.schema.json](extension-manifest.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [handoff.schema.json](handoff.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
+- [handshake.schema.json](handshake.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
+- [layout.schema.json](layout.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
+- [metric-descriptor.schema.json](metric-descriptor.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [Network domain record and schema extension process](network-domain.md) — Make multiple addresses and assessments explicit without flattening provenance.
 - [network-interface.schema.json](network-interface.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [observation.schema.json](observation.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
+- [policy.schema.json](policy.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
+- [preset.schema.json](preset.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [Protocol, schema ownership and wire rules](protocol.md) — Define bounded language-independent records without forcing a runtime dependency.
+- [scene-v0.2.schema.json](scene-v0.2.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [scene.schema.json](scene.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [Extension SDK and embedding boundaries](sdk.md) — Make extensions useful without making the trusted application an arbitrary code host.
 - [settings.schema.json](settings.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [snapshot.schema.json](snapshot.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [syspane-api.h](syspane-api.h) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
+- [target-profile.schema.json](target-profile.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [theme.schema.json](theme.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
+- [Local transport and request lifecycle](transport.md) — Define experimental framing, negotiation and bounded result retrieval.
+- [Contract versions and migration](versions.md) — Keep bundle, documents, wire, ABI, content and provider identities independent.

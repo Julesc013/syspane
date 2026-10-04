@@ -10,8 +10,9 @@ sp_profile: "syspane-spec/0.1.0"
 sp_authority: "normative-proposal"
 sp_requires: []
 sp_review: "unreviewed"
-sp_sources: ["SRC-CONVERSATION"]
+sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
+updated: {"by": "codex", "at": "2026-10-04T19:32:52+11:00", "scope": "October audit amendments; no human review attested"}
 ---
 
 # Repository architecture and ownership
@@ -51,6 +52,18 @@ Ignore `out/`, local caches, `.aide.local/`, private recordings and `dist/`; do 
 
 ## Branches and history
 
-Proposed roles: `main` for integrated accepted state, `dev` for active integration, `task/<work-id>-<slug>` for bounded changes; release/hotfix branches only when operationally needed. For the empty repository, initialize the baseline on `main` under the user's own Git workflow, then establish `dev`. Tooling supplied here does not create branches or commits.
+Proposed roles: `main` for integrated accepted state, `dev` for active integration, `task/<work-id>-<slug>` for bounded changes; release/hotfix branches only when operationally needed. The baseline was imported on `main` at `91e10b8b7a8a5da5ab2d93e8cdcbaade6aa0fbd9`. A `dev` branch is optional and has not been adopted by this documentation update; the user explicitly requested committing and syncing these amendments to `main`. Tooling supplied here does not create branches or commits.
 
 Path identity must survive refactoring through aliases, release notes and compatibility tests. AIDE may plan a reorganization but cannot move a tree merely to match a fashionable template. Preserve authored README structure and keep volatile implementation progress elsewhere.
+
+## October ownership decisions
+
+Root `README.md` is the product homepage; `TODO.md` routes pending work rather than
+duplicating the machine work graph. Keep `source/application/` and `source/desktop/`
+as the established composition/host paths. [Composition](../architecture/composition.md)
+defines dependency direction and the planned component manifest.
+
+Use explicit checkout, build, cache and task roots with ownership markers, quotas,
+retention and cleanup obligations. No recursive repository copies, unowned worktree
+farms or invented drive-root output directories. Cleanup resolves and checks its
+owned targets first. Builds and checks remain usable without AIDE.

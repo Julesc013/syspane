@@ -10,8 +10,9 @@ sp_profile: "syspane-spec/0.1.0"
 sp_authority: "normative-proposal"
 sp_requires: ["SP-AUTHORITY", "SP-TESTING"]
 sp_review: "unreviewed"
-sp_sources: ["SRC-CONVERSATION", "SRC-AIDE", "SRC-GIT"]
+sp_sources: ["SRC-CONVERSATION", "SRC-AIDE", "SRC-GIT", "SRC-AUDIT-2026-10-04"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}, {"id": "SRC-AIDE", "resource": "https://github.com/Julesc013/aide/blob/aec53b1d3675f02e2fdd17cc718fdcff6cd4e9f3/README.md", "title": "AIDE README and OKF decision"}, {"id": "SRC-GIT", "resource": "https://git-scm.com/docs/git-worktree", "title": "Git worktree documentation"}]
+updated: {"by": "codex", "at": "2026-10-04T19:32:52+11:00", "scope": "October audit amendments; no human review attested"}
 ---
 
 # AIDE consumer integration and authority
@@ -46,3 +47,13 @@ Destination contribution/license/AI-provenance rules are checked before submissi
 
 [^SRC-AIDE]: Pinned AIDE README and OKF knowledge-plane decision, inspected during preparation.
 [^SRC-GIT]: Git worktree documentation.
+
+## October source checkpoint
+
+The supplied reviews cite AIDE README at
+`3d186d0584bb40f18402a626c9fe099260fae3d4` as a newer foundations checkpoint.
+That is attributed review input, not a locally verified consumer binding. Preserve
+the existing inspected-ref record and inactive grants; inspect actual selected
+upstream schemas/provider interfaces and test mappings before replacing the pin.
+No two-line-skeleton characterization is current here. Track workspace roots, quotas,
+model/budget and integration/publication authority independently when binding.

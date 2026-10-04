@@ -10,8 +10,9 @@ sp_profile: "syspane-spec/0.1.0"
 sp_authority: "normative-proposal"
 sp_requires: ["SP-ARCHITECTURE"]
 sp_review: "unreviewed"
-sp_sources: ["SRC-CONVERSATION", "SRC-SETPARENT"]
+sp_sources: ["SRC-CONVERSATION", "SRC-SETPARENT", "SRC-AUDIT-2026-10-04"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}, {"id": "SRC-SETPARENT", "resource": "https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setparent", "title": "Win32 SetParent"}]
+updated: {"by": "codex", "at": "2026-10-04T19:32:52+11:00", "scope": "October audit amendments; no human review attested"}
 ---
 
 # Process composition and failure containment
@@ -45,3 +46,15 @@ Use bounded, versioned messages over access-controlled native local IPC. Peers a
 No listener is bound to an external interface by default. Multi-user hosts have per-session surface state and explicitly scoped machine collectors; do not let one user's preferences control another user's UI or disclose their private fields.
 
 [^SRC-SETPARENT]: [Win32 SetParent documentation](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setparent).
+
+## Leases, recovery and roles
+
+[Recovery](recovery.md) specifies independent producer-lease expiry, rendering
+progress checks, safe startup and failure responses. [Transport](../contracts/transport.md)
+defines framing, authentication, request retention and backpressure before cross-process
+implementation. Policy/health/shutdown progress cannot be starved by telemetry.
+
+The [screensaver](../desktop/screensaver.md) selects preview/configuration/live role
+before startup, has separate instance identity and releases only its own demand.
+The independent diagnostic and maintenance compositions have distinct dependencies;
+neither is silently initialized during ordinary observation.
