@@ -357,7 +357,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "3617edbdb30f74e7f2dce88a71a8dcdf14781c74686a66b69fdd7c35f8189071"
+      "sha256": "3a8a7e192c3f3468b2b189052a341fef4fa0bc36e4c8fad61d511e9ee0e573ad"
     },
     {
       "id": "SP-DIAGNOSTIC-HANDOFF",
@@ -389,7 +389,7 @@
       "requires": [
         "SP-CURRENT"
       ],
-      "sha256": "6f6ced24b958e0b88d13ea6e629d8ee7c5239b3de475a67a39469c6ac9e1a761"
+      "sha256": "e95982ffbe3376c1327dd6079c731a5d9d626a94b2bd73c84808bdc5cbc19ece"
     },
     {
       "id": "SP-NATIVE-TRANSPORT-HANDOFF",
@@ -449,7 +449,19 @@
         "SP-DESKTOP",
         "SP-TESTING"
       ],
-      "sha256": "17298929b33e2805da85f8bfbac604e43c47c749cb7ebbd8372c9b1b42449852"
+      "sha256": "02086132205bcb49baf13eb724bb88c4a2129d1794ded3c7c41d116c4a980459"
+    },
+    {
+      "id": "SP-W05-PACKAGE",
+      "path": "delivery/packages/w-05-x11-investigation.md",
+      "title": "W-05 bounded X11 host investigation",
+      "description": "Observe desktop-type placement and native reveal under a real window and icon manager in an owned lab.",
+      "requires": [
+        "SP-WORK-PACKAGES",
+        "SP-W02-PACKAGE",
+        "SP-LINUX"
+      ],
+      "sha256": "acb4e2484a9dfe75704ddb87048db644704e6da81aa4a8749c7a07aa17d2d72b"
     },
     {
       "id": "SP-W24-PACKAGE",
@@ -554,6 +566,17 @@
         "SP-TESTING"
       ],
       "sha256": "5d21d4d4ef8500b69be48b78e6123ef899756e97f53a14046b5708fb07c03e86"
+    },
+    {
+      "id": "SP-X11-HOST-HANDOFF",
+      "path": "delivery/x11-host-handoff.md",
+      "title": "Initial X11 desktop-host investigation",
+      "description": "Bind real Openbox reveal and PCManFM placement failures to independent pixels, with image-background startup failures preserved.",
+      "requires": [
+        "SP-CAMPAIGN-ADMISSION",
+        "SP-W05-PACKAGE"
+      ],
+      "sha256": "0e628df8b6abdaa1b98b4f0dddfee821a06ac6cd9098dd9fbe792800da925eb6"
     },
     {
       "id": "SP-DESKTOP",

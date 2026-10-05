@@ -1,0 +1,50 @@
+{
+  "version": "0.1.0",
+  "source_base": "db57e8b9ea3b0293cf482f01b444093d69477557",
+  "native_attempts": [
+    {
+      "record": "w-05-x11-attempt-1.json",
+      "sha256": "7ebe4c36fd461991ff7e34f22dff34595ea1c08044f52b50de95066732850546",
+      "note": "Initial image lab: frame border shifted candidate to (33,33); PCManFM BadDrawable also present."
+    },
+    {
+      "record": "w-05-x11-attempt-2.json",
+      "sha256": "fc6ad7691c8082eaa6aa2c03d6a5cf87096a47b8dee4ede960ebec9210f3a64a",
+      "note": "Window-manager startup sequencing and border fixed; image lab still exits BadDrawable."
+    },
+    {
+      "record": "w-05-x11-attempt-3.json",
+      "sha256": "824a40ec8edf68a237b2cc70d7071b3b91395ec58d472b8bc7d5687df725d1ab",
+      "note": "GTK image backing diagnostic variant still exits BadDrawable, now in MIT-SHM."
+    },
+    {
+      "record": "w-05-x11-attempt-4.json",
+      "sha256": "8f4450230e4b32bfd76514580bc3c18b9f7b80ea0da5f3b91ecbf7ce3e47aafc",
+      "note": "Initial color-control native observations; superseded by final report with raw icon-count verification and loader identities."
+    }
+  ],
+  "pre_native_failures": [
+    {
+      "phase": "package preparation",
+      "evidence_kind": "Observed command output transcribed; before persistent attempt reports existed",
+      "result": "FileNotFoundError for xfonts-encodings_1.0.5-0ubuntu2_all.deb after successful apt download",
+      "correction": "Find exactly one archive matching the pinned content hash and size; normalize the apt epoch-bearing output name."
+    },
+    {
+      "phase": "package preparation",
+      "evidence_kind": "Observed command output transcribed",
+      "result": "apt-get download libheif1=1.17.6-1ubuntu4.8 exited 100, HTTP 404 from Ubuntu archive",
+      "correction": "Refresh metadata only in owned x11-lab/apt-lists; pin available 1.17.6-1ubuntu4.9 and its matching plugin before extraction."
+    },
+    {
+      "phase": "experiment provenance",
+      "evidence_kind": "Observed command output transcribed",
+      "result": "git rev-parse HEAD exited 128 due mounted checkout ownership under the unprivileged WSL identity",
+      "correction": "Use exact per-command safe.directory for this admitted checkout; no global trust/authentication change."
+    }
+  ],
+  "limitations": [
+    "Historical native reports retain their original dirty-source digests; intermediate source snapshots were not independently archived. Final report source inputs match the containing commit.",
+    "No temporal tolerance or acceptance criterion was relaxed after a failure. The image profile remains failed; color is a distinct diagnostic laboratory."
+  ]
+}

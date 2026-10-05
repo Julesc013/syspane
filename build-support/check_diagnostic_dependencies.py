@@ -9,6 +9,8 @@ EXPECTED = {
     'libglib2.0-dev': '2.80.0-6ubuntu3.8',
     'libx11-dev': '2:1.8.7-1build1',
     'libx11-6': '2:1.8.7-1build1',
+    'libxext-dev': '2:1.3.4-1build2',
+    'libxext6': '2:1.3.4-1build2',
     'xvfb': '2:21.1.12-1ubuntu1.6',
 }
 for package, version in EXPECTED.items():
@@ -23,3 +25,5 @@ if hashlib.sha256(Path('/usr/bin/Xvfb').read_bytes()).hexdigest() != '2c7f5a9534
 if hashlib.sha256(Path('/usr/lib/x86_64-linux-gnu/libX11.so.6').read_bytes()).hexdigest() != 'c5b5d782bd9cab3420a62df88f5c991507edf3331a89f98464ddbc538c37b879':
     raise ValueError('native UI/oracle X11 runtime fingerprint differs')
 print('diagnostic toolkit verified: GTK 3.24.41 / Ubuntu 3.24.41-4ubuntu1.3')
+if hashlib.sha256(Path('/usr/lib/x86_64-linux-gnu/libXext.so.6').read_bytes()).hexdigest() != '2907e6a996465de5b32a0dd10534d4416b87f1dee5670aaa7b19301a1fc93f44':
+    raise ValueError('X11 candidate Xext runtime fingerprint differs')

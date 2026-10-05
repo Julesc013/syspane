@@ -240,7 +240,7 @@ def main():
     if output.parent!=executable.parent or output.name!='native-evidence':raise ValueError('owned output required')
     output.mkdir(exist_ok=True);token=uuid.uuid4().hex
     workspace=executable.parent/('oracle-case-'+token);workspace.mkdir(mode=0o700)
-    inputs=[Path(__file__),ROOT/'tests/desktop/oracle.py',ROOT/'tests/fault/native_diagnostic.py',ROOT/'source/diagnostics/oracle_probe_x11.cpp',ROOT/'spec/delivery/packages/w-02-desktop-oracle.md']
+    inputs=[Path(__file__),ROOT/'tests/desktop/oracle.py',ROOT/'tests/fault/native_diagnostic.py',ROOT/'source/diagnostics/oracle_probe_x11.cpp',ROOT/'source/desktop/x11/desktop_candidate.cpp',ROOT/'source/desktop/x11/desktop_candidate.hpp',ROOT/'spec/delivery/packages/w-02-desktop-oracle.md']
     report={'family':'ORACLE-01','outcome':'fail','profile':'linux-x64-gcc13','executed_at':datetime.now(timezone.utc).isoformat(),
             'executable_sha256':sha(executable),'source_inputs':{p.relative_to(ROOT).as_posix():sha(p) for p in inputs},
             'environment':{'display':'owned authenticated Xvfb, abstract local only','xvfb_sha256':sha(Path('/usr/bin/Xvfb'))},

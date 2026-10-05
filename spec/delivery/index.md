@@ -20,3 +20,4 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Portable transport and policy checkpoint](transport-handoff.md) — Resume W-24 from executable portable contracts without claiming native authentication.
 - [Implementation work-package closure](work-packages.md) — Make each admitted package implementable, verifiable and resumable from the repository.
 - [work-units.json](work-units.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
+- [Initial X11 desktop-host investigation](x11-host-handoff.md) — Bind real Openbox reveal and PCManFM placement failures to independent pixels, with image-background startup failures preserved.

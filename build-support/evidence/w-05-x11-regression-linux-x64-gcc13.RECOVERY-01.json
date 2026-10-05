@@ -1,0 +1,1040 @@
+{
+  "family": "RECOVERY-01",
+  "outcome": "pass",
+  "started_at": "2026-10-05T16:59:41.224178+00:00",
+  "executable_sha256": "e1dbb9b3e03d4f96193f3156d3835c0e29f8c75c38d8213a450fd1321ed7ebd7",
+  "cases": [
+    {
+      "case": "RECOVERY-01.CHILD-GRACEFUL",
+      "outcome": "pass",
+      "command": [
+        "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/SysPane.RecoveryProbe",
+        "supervisor",
+        "/home/ir4runner/.cache/syspane/recovery-w25/c-dbe907afec/s",
+        "graceful"
+      ],
+      "child_observations": [
+        {
+          "pid": 539,
+          "observed_alive": true,
+          "observed_exited": true
+        }
+      ],
+      "process": {
+        "pid": 537,
+        "exit_code": 0,
+        "events": [
+          {
+            "endpoint_controls": true,
+            "event": "ready",
+            "observed_ms": 76968,
+            "unprivileged": true
+          },
+          {
+            "attempt": 0,
+            "event": "spawned",
+            "observed_ms": 76969,
+            "pid": 539,
+            "role": "desktop"
+          },
+          {
+            "epoch": "supervisor:537:0",
+            "event": "authenticated",
+            "observed_ms": 77220,
+            "peer_pid": 539,
+            "pid": 539,
+            "role": "desktop"
+          },
+          {
+            "event": "challenge",
+            "generation": 1,
+            "observed_ms": 77220,
+            "pid": 539
+          },
+          {
+            "event": "heartbeat",
+            "observed_ms": 77221,
+            "pid": 539,
+            "sequence": 0
+          },
+          {
+            "event": "progress",
+            "generation": 1,
+            "observed_ms": 77322,
+            "pid": 539
+          },
+          {
+            "event": "challenge",
+            "generation": 2,
+            "observed_ms": 78223,
+            "pid": 539
+          },
+          {
+            "event": "heartbeat",
+            "observed_ms": 78223,
+            "pid": 539,
+            "sequence": 1
+          },
+          {
+            "event": "progress",
+            "generation": 2,
+            "observed_ms": 78324,
+            "pid": 539
+          },
+          {
+            "event": "challenge",
+            "generation": 3,
+            "observed_ms": 79225,
+            "pid": 539
+          },
+          {
+            "event": "heartbeat",
+            "observed_ms": 79226,
+            "pid": 539,
+            "sequence": 2
+          },
+          {
+            "code": 0,
+            "event": "stopped",
+            "forced": false,
+            "observed_ms": 79236,
+            "os_confirmed": true,
+            "pid": 539,
+            "signaled": false
+          },
+          {
+            "completions": 2,
+            "event": "complete",
+            "heartbeats": 3,
+            "launches": 1,
+            "observed_ms": 79236
+          }
+        ]
+      },
+      "elapsed_seconds": 2.318
+    },
+    {
+      "case": "RECOVERY-01.PRODUCER-HANG",
+      "outcome": "pass",
+      "command": [
+        "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/SysPane.RecoveryProbe",
+        "supervisor",
+        "/home/ir4runner/.cache/syspane/recovery-w25/c-bc5a2fa884/s",
+        "producer-hang"
+      ],
+      "child_observations": [
+        {
+          "pid": 543,
+          "observed_alive": true,
+          "observed_exited": true
+        },
+        {
+          "pid": 545,
+          "observed_alive": true,
+          "observed_exited": true
+        }
+      ],
+      "process": {
+        "pid": 541,
+        "exit_code": 0,
+        "events": [
+          {
+            "endpoint_controls": true,
+            "event": "ready",
+            "observed_ms": 79287,
+            "unprivileged": true
+          },
+          {
+            "attempt": 0,
+            "event": "spawned",
+            "observed_ms": 79288,
+            "pid": 543,
+            "role": "collector"
+          },
+          {
+            "epoch": "supervisor:541:0",
+            "event": "authenticated",
+            "observed_ms": 79539,
+            "peer_pid": 543,
+            "pid": 543,
+            "role": "collector"
+          },
+          {
+            "event": "heartbeat",
+            "observed_ms": 79540,
+            "pid": 543,
+            "sequence": 0
+          },
+          {
+            "event": "heartbeat",
+            "observed_ms": 80542,
+            "pid": 543,
+            "sequence": 1
+          },
+          {
+            "alive": true,
+            "backoff_ms": 1000,
+            "completions": 0,
+            "event": "fault",
+            "heartbeats": 2,
+            "observed_ms": 83548,
+            "pid": 543,
+            "reason": "producer.expired",
+            "since_challenge_ms": 0,
+            "since_heartbeat_ms": 3006
+          },
+          {
+            "code": 9,
+            "event": "stopped",
+            "forced": true,
+            "observed_ms": 83811,
+            "os_confirmed": true,
+            "pid": 543,
+            "signaled": true
+          },
+          {
+            "attempt": 1,
+            "event": "spawned",
+            "observed_ms": 84550,
+            "pid": 545,
+            "role": "collector"
+          },
+          {
+            "epoch": "supervisor:541:1",
+            "event": "authenticated",
+            "observed_ms": 84801,
+            "peer_pid": 545,
+            "pid": 545,
+            "role": "collector"
+          },
+          {
+            "event": "heartbeat",
+            "observed_ms": 84802,
+            "pid": 545,
+            "sequence": 0
+          },
+          {
+            "event": "heartbeat",
+            "observed_ms": 85804,
+            "pid": 545,
+            "sequence": 1
+          },
+          {
+            "event": "heartbeat",
+            "observed_ms": 86807,
+            "pid": 545,
+            "sequence": 2
+          },
+          {
+            "code": 0,
+            "event": "stopped",
+            "forced": false,
+            "observed_ms": 86817,
+            "os_confirmed": true,
+            "pid": 545,
+            "signaled": false
+          },
+          {
+            "completions": 0,
+            "event": "complete",
+            "heartbeats": 3,
+            "launches": 2,
+            "observed_ms": 86817
+          }
+        ]
+      },
+      "elapsed_seconds": 7.58
+    },
+    {
+      "case": "RECOVERY-01.RENDER-STALL",
+      "outcome": "pass",
+      "command": [
+        "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/SysPane.RecoveryProbe",
+        "supervisor",
+        "/home/ir4runner/.cache/syspane/recovery-w25/c-745e3506d3/s",
+        "render-stall"
+      ],
+      "child_observations": [
+        {
+          "pid": 549,
+          "observed_alive": true,
+          "observed_exited": true
+        },
+        {
+          "pid": 551,
+          "observed_alive": true,
+          "observed_exited": true
+        }
+      ],
+      "process": {
+        "pid": 547,
+        "exit_code": 0,
+        "events": [
+          {
+            "endpoint_controls": true,
+            "event": "ready",
+            "observed_ms": 86869,
+            "unprivileged": true
+          },
+          {
+            "attempt": 0,
+            "event": "spawned",
+            "observed_ms": 86869,
+            "pid": 549,
+            "role": "desktop"
+          },
+          {
+            "epoch": "supervisor:547:0",
+            "event": "authenticated",
+            "observed_ms": 87120,
+            "peer_pid": 549,
+            "pid": 549,
+            "role": "desktop"
+          },
+          {
+            "event": "challenge",
+            "generation": 1,
+            "observed_ms": 87121,
+            "pid": 549
+          },
+          {
+            "event": "heartbeat",
+            "observed_ms": 87121,
+            "pid": 549,
+            "sequence": 0
+          },
+          {
+            "event": "heartbeat",
+            "observed_ms": 88124,
+            "pid": 549,
+            "sequence": 1
+          },
+          {
+            "event": "heartbeat",
+            "observed_ms": 89126,
+            "pid": 549,
+            "sequence": 2
+          },
+          {
+            "alive": true,
+            "backoff_ms": 1000,
+            "completions": 0,
+            "event": "fault",
+            "heartbeats": 3,
+            "observed_ms": 90128,
+            "pid": 549,
+            "reason": "render.stalled",
+            "since_challenge_ms": 3008,
+            "since_heartbeat_ms": 1002
+          },
+          {
+            "code": 0,
+            "event": "stopped",
+            "forced": false,
+            "observed_ms": 90138,
+            "os_confirmed": true,
+            "pid": 549,
+            "signaled": false
+          },
+          {
+            "attempt": 1,
+            "event": "spawned",
+            "observed_ms": 91131,
+            "pid": 551,
+            "role": "desktop"
+          },
+          {
+            "epoch": "supervisor:547:1",
+            "event": "authenticated",
+            "observed_ms": 91382,
+            "peer_pid": 551,
+            "pid": 551,
+            "role": "desktop"
+          },
+          {
+            "event": "challenge",
+            "generation": 1,
+            "observed_ms": 91382,
+            "pid": 551
+          },
+          {
+            "event": "heartbeat",
+            "observed_ms": 91383,
+            "pid": 551,
+            "sequence": 0
+          },
+          {
+            "event": "progress",
+            "generation": 1,
+            "observed_ms": 91483,
+            "pid": 551
+          },
+          {
+            "event": "challenge",
+            "generation": 2,
+            "observed_ms": 92385,
+            "pid": 551
+          },
+          {
+            "event": "heartbeat",
+            "observed_ms": 92385,
+            "pid": 551,
+            "sequence": 1
+          },
+          {
+            "event": "progress",
+            "generation": 2,
+            "observed_ms": 92485,
+            "pid": 551
+          },
+          {
+            "event": "challenge",
+            "generation": 3,
+            "observed_ms": 93387,
+            "pid": 551
+          },
+          {
+            "event": "heartbeat",
+            "observed_ms": 93387,
+            "pid": 551,
+            "sequence": 2
+          },
+          {
+            "code": 0,
+            "event": "stopped",
+            "forced": false,
+            "observed_ms": 93397,
+            "os_confirmed": true,
+            "pid": 551,
+            "signaled": false
+          },
+          {
+            "completions": 2,
+            "event": "complete",
+            "heartbeats": 3,
+            "launches": 2,
+            "observed_ms": 93397
+          }
+        ]
+      },
+      "elapsed_seconds": 6.58
+    },
+    {
+      "case": "RECOVERY-01.CRASH-CIRCUIT",
+      "outcome": "pass",
+      "command": [
+        "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/SysPane.RecoveryProbe",
+        "supervisor",
+        "/home/ir4runner/.cache/syspane/recovery-w25/c-1108ef31c3/s",
+        "crash-circuit"
+      ],
+      "child_observations": [
+        {
+          "pid": 555,
+          "observed_alive": true,
+          "observed_exited": true
+        },
+        {
+          "pid": 557,
+          "observed_alive": true,
+          "observed_exited": true
+        },
+        {
+          "pid": 559,
+          "observed_alive": true,
+          "observed_exited": true
+        },
+        {
+          "pid": 561,
+          "observed_alive": true,
+          "observed_exited": true
+        }
+      ],
+      "process": {
+        "pid": 553,
+        "exit_code": 0,
+        "events": [
+          {
+            "endpoint_controls": true,
+            "event": "ready",
+            "observed_ms": 93449,
+            "unprivileged": true
+          },
+          {
+            "attempt": 0,
+            "event": "spawned",
+            "observed_ms": 93449,
+            "pid": 555,
+            "role": "collector"
+          },
+          {
+            "epoch": "supervisor:553:0",
+            "event": "authenticated",
+            "observed_ms": 93701,
+            "peer_pid": 555,
+            "pid": 555,
+            "role": "collector"
+          },
+          {
+            "alive": false,
+            "backoff_ms": 1000,
+            "completions": 0,
+            "event": "fault",
+            "heartbeats": 0,
+            "observed_ms": 94202,
+            "pid": 555,
+            "reason": "io.read",
+            "since_challenge_ms": 0,
+            "since_heartbeat_ms": 502
+          },
+          {
+            "code": 73,
+            "event": "stopped",
+            "forced": false,
+            "observed_ms": 94202,
+            "os_confirmed": true,
+            "pid": 555,
+            "signaled": false
+          },
+          {
+            "attempt": 1,
+            "event": "spawned",
+            "observed_ms": 95205,
+            "pid": 557,
+            "role": "collector"
+          },
+          {
+            "epoch": "supervisor:553:1",
+            "event": "authenticated",
+            "observed_ms": 95456,
+            "peer_pid": 557,
+            "pid": 557,
+            "role": "collector"
+          },
+          {
+            "alive": false,
+            "backoff_ms": 2000,
+            "completions": 0,
+            "event": "fault",
+            "heartbeats": 0,
+            "observed_ms": 95957,
+            "pid": 557,
+            "reason": "io.read",
+            "since_challenge_ms": 0,
+            "since_heartbeat_ms": 502
+          },
+          {
+            "code": 73,
+            "event": "stopped",
+            "forced": false,
+            "observed_ms": 95957,
+            "os_confirmed": true,
+            "pid": 557,
+            "signaled": false
+          },
+          {
+            "attempt": 2,
+            "event": "spawned",
+            "observed_ms": 97963,
+            "pid": 559,
+            "role": "collector"
+          },
+          {
+            "epoch": "supervisor:553:2",
+            "event": "authenticated",
+            "observed_ms": 98214,
+            "peer_pid": 559,
+            "pid": 559,
+            "role": "collector"
+          },
+          {
+            "alive": false,
+            "backoff_ms": 4000,
+            "completions": 0,
+            "event": "fault",
+            "heartbeats": 0,
+            "observed_ms": 98716,
+            "pid": 559,
+            "reason": "io.read",
+            "since_challenge_ms": 0,
+            "since_heartbeat_ms": 502
+          },
+          {
+            "code": 73,
+            "event": "stopped",
+            "forced": false,
+            "observed_ms": 98716,
+            "os_confirmed": true,
+            "pid": 559,
+            "signaled": false
+          },
+          {
+            "attempt": 3,
+            "event": "spawned",
+            "observed_ms": 102718,
+            "pid": 561,
+            "role": "collector"
+          },
+          {
+            "epoch": "supervisor:553:3",
+            "event": "authenticated",
+            "observed_ms": 102969,
+            "peer_pid": 561,
+            "pid": 561,
+            "role": "collector"
+          },
+          {
+            "alive": false,
+            "backoff_ms": 4000,
+            "completions": 0,
+            "event": "fault",
+            "heartbeats": 0,
+            "observed_ms": 103470,
+            "pid": 561,
+            "reason": "io.read",
+            "since_challenge_ms": 0,
+            "since_heartbeat_ms": 502
+          },
+          {
+            "code": 73,
+            "event": "stopped",
+            "forced": false,
+            "observed_ms": 103470,
+            "os_confirmed": true,
+            "pid": 561,
+            "signaled": false
+          },
+          {
+            "event": "circuit_open",
+            "launches": 4,
+            "observed_ms": 103976,
+            "observed_ms_after_open": 506
+          }
+        ]
+      },
+      "elapsed_seconds": 10.578
+    },
+    {
+      "case": "RECOVERY-01.QUARANTINE",
+      "outcome": "pass",
+      "command": [
+        "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/SysPane.RecoveryProbe",
+        "supervisor",
+        "/home/ir4runner/.cache/syspane/recovery-w25/c-2defdf4b76/s",
+        "quarantine"
+      ],
+      "child_observations": [
+        {
+          "pid": 565,
+          "observed_alive": true,
+          "observed_exited": true
+        },
+        {
+          "pid": 567,
+          "observed_alive": true,
+          "observed_exited": true
+        }
+      ],
+      "process": {
+        "pid": 563,
+        "exit_code": 0,
+        "events": [
+          {
+            "endpoint_controls": true,
+            "event": "ready",
+            "observed_ms": 104028,
+            "unprivileged": true
+          },
+          {
+            "attempt": 0,
+            "event": "spawned",
+            "observed_ms": 104028,
+            "pid": 565,
+            "role": "collector"
+          },
+          {
+            "epoch": "supervisor:563:0",
+            "event": "authenticated",
+            "observed_ms": 104280,
+            "peer_pid": 565,
+            "pid": 565,
+            "role": "collector"
+          },
+          {
+            "event": "heartbeat",
+            "observed_ms": 104281,
+            "pid": 565,
+            "sequence": 0
+          },
+          {
+            "event": "heartbeat",
+            "observed_ms": 105282,
+            "pid": 565,
+            "sequence": 1
+          },
+          {
+            "alive": true,
+            "backoff_ms": 1000,
+            "completions": 0,
+            "event": "fault",
+            "heartbeats": 2,
+            "observed_ms": 105282,
+            "pid": 565,
+            "reason": "worker.unconfirmed",
+            "since_challenge_ms": 0,
+            "since_heartbeat_ms": 0
+          },
+          {
+            "child_alive": true,
+            "elapsed_ms": 254,
+            "event": "quarantined",
+            "observed_ms": 105536,
+            "pid": 565,
+            "reset_denied": true,
+            "start_denied": true
+          },
+          {
+            "code": 0,
+            "event": "stopped",
+            "forced": false,
+            "observed_ms": 105546,
+            "os_confirmed": true,
+            "pid": 565,
+            "signaled": false
+          },
+          {
+            "attempt": 1,
+            "event": "spawned",
+            "observed_ms": 106285,
+            "pid": 567,
+            "role": "collector"
+          },
+          {
+            "epoch": "supervisor:563:1",
+            "event": "authenticated",
+            "observed_ms": 106537,
+            "peer_pid": 567,
+            "pid": 567,
+            "role": "collector"
+          },
+          {
+            "event": "heartbeat",
+            "observed_ms": 106538,
+            "pid": 567,
+            "sequence": 0
+          },
+          {
+            "event": "heartbeat",
+            "observed_ms": 107540,
+            "pid": 567,
+            "sequence": 1
+          },
+          {
+            "event": "heartbeat",
+            "observed_ms": 108542,
+            "pid": 567,
+            "sequence": 2
+          },
+          {
+            "code": 0,
+            "event": "stopped",
+            "forced": false,
+            "observed_ms": 108552,
+            "os_confirmed": true,
+            "pid": 567,
+            "signaled": false
+          },
+          {
+            "completions": 0,
+            "event": "complete",
+            "heartbeats": 3,
+            "launches": 2,
+            "observed_ms": 108552
+          }
+        ]
+      },
+      "elapsed_seconds": 4.575
+    },
+    {
+      "case": "RECOVERY-01.PARENT-LOSS",
+      "outcome": "pass",
+      "command": [
+        "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/SysPane.RecoveryProbe",
+        "supervisor",
+        "/home/ir4runner/.cache/syspane/recovery-w25/c-a24ce44734/s",
+        "parent-loss"
+      ],
+      "child_observations": [
+        {
+          "pid": 571,
+          "observed_alive": true,
+          "observed_exited": true
+        }
+      ],
+      "parent_loss_exit_ms": 0,
+      "process": {
+        "pid": 569,
+        "exit_code": -9,
+        "events": [
+          {
+            "endpoint_controls": true,
+            "event": "ready",
+            "observed_ms": 108604,
+            "unprivileged": true
+          },
+          {
+            "attempt": 0,
+            "event": "spawned",
+            "observed_ms": 108604,
+            "pid": 571,
+            "role": "collector"
+          },
+          {
+            "epoch": "supervisor:569:0",
+            "event": "authenticated",
+            "observed_ms": 108855,
+            "peer_pid": 571,
+            "pid": 571,
+            "role": "collector"
+          }
+        ]
+      },
+      "elapsed_seconds": 0.253
+    },
+    {
+      "case": "RECOVERY-01.ROLE-DENIAL",
+      "outcome": "pass",
+      "command": [
+        "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/SysPane.RecoveryProbe",
+        "supervisor",
+        "/home/ir4runner/.cache/syspane/recovery-w25/c-7790401b9f/s",
+        "role-denial"
+      ],
+      "child_observations": [
+        {
+          "pid": 575,
+          "observed_alive": true,
+          "observed_exited": true
+        }
+      ],
+      "process": {
+        "pid": 573,
+        "exit_code": 0,
+        "events": [
+          {
+            "endpoint_controls": true,
+            "event": "ready",
+            "observed_ms": 108857,
+            "unprivileged": true
+          },
+          {
+            "attempt": 0,
+            "event": "spawned",
+            "observed_ms": 108857,
+            "pid": 575,
+            "role": "collector"
+          },
+          {
+            "alive": true,
+            "backoff_ms": 1000,
+            "completions": 0,
+            "event": "fault",
+            "heartbeats": 0,
+            "observed_ms": 109108,
+            "pid": 575,
+            "reason": "handshake.role_denied",
+            "since_challenge_ms": 0,
+            "since_heartbeat_ms": 109108
+          },
+          {
+            "code": 9,
+            "event": "stopped",
+            "forced": true,
+            "observed_ms": 109372,
+            "os_confirmed": true,
+            "pid": 575,
+            "signaled": true
+          },
+          {
+            "event": "rejected",
+            "heartbeats": 0,
+            "launches": 1,
+            "observed_ms": 109372,
+            "reason": "handshake.role_denied"
+          }
+        ]
+      },
+      "elapsed_seconds": 0.566
+    },
+    {
+      "case": "RECOVERY-01.WRONG-EPOCH",
+      "outcome": "pass",
+      "command": [
+        "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/SysPane.RecoveryProbe",
+        "supervisor",
+        "/home/ir4runner/.cache/syspane/recovery-w25/c-99be58026a/s",
+        "wrong-epoch"
+      ],
+      "child_observations": [
+        {
+          "pid": 579,
+          "observed_alive": true,
+          "observed_exited": true
+        }
+      ],
+      "process": {
+        "pid": 577,
+        "exit_code": 0,
+        "events": [
+          {
+            "endpoint_controls": true,
+            "event": "ready",
+            "observed_ms": 109424,
+            "unprivileged": true
+          },
+          {
+            "attempt": 0,
+            "event": "spawned",
+            "observed_ms": 109424,
+            "pid": 579,
+            "role": "collector"
+          },
+          {
+            "epoch": "supervisor:577:0",
+            "event": "authenticated",
+            "observed_ms": 109675,
+            "peer_pid": 579,
+            "pid": 579,
+            "role": "collector"
+          },
+          {
+            "alive": true,
+            "backoff_ms": 1000,
+            "completions": 0,
+            "event": "fault",
+            "heartbeats": 0,
+            "observed_ms": 109676,
+            "pid": 579,
+            "reason": "health.identity",
+            "since_challenge_ms": 0,
+            "since_heartbeat_ms": 2
+          },
+          {
+            "code": 9,
+            "event": "stopped",
+            "forced": true,
+            "observed_ms": 109939,
+            "os_confirmed": true,
+            "pid": 579,
+            "signaled": true
+          },
+          {
+            "event": "rejected",
+            "heartbeats": 0,
+            "launches": 1,
+            "observed_ms": 109939,
+            "reason": "health.identity"
+          }
+        ]
+      },
+      "elapsed_seconds": 0.567
+    },
+    {
+      "case": "RECOVERY-01.PROGRESS-DENIAL",
+      "outcome": "pass",
+      "command": [
+        "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/SysPane.RecoveryProbe",
+        "supervisor",
+        "/home/ir4runner/.cache/syspane/recovery-w25/c-1a27bdd560/s",
+        "progress-denial"
+      ],
+      "child_observations": [
+        {
+          "pid": 583,
+          "observed_alive": true,
+          "observed_exited": true
+        }
+      ],
+      "process": {
+        "pid": 581,
+        "exit_code": 0,
+        "events": [
+          {
+            "endpoint_controls": true,
+            "event": "ready",
+            "observed_ms": 109991,
+            "unprivileged": true
+          },
+          {
+            "attempt": 0,
+            "event": "spawned",
+            "observed_ms": 109992,
+            "pid": 583,
+            "role": "desktop"
+          },
+          {
+            "epoch": "supervisor:581:0",
+            "event": "authenticated",
+            "observed_ms": 110243,
+            "peer_pid": 583,
+            "pid": 583,
+            "role": "desktop"
+          },
+          {
+            "event": "challenge",
+            "generation": 1,
+            "observed_ms": 110243,
+            "pid": 583
+          },
+          {
+            "event": "heartbeat",
+            "observed_ms": 110244,
+            "pid": 583,
+            "sequence": 0
+          },
+          {
+            "alive": true,
+            "backoff_ms": 1000,
+            "completions": 0,
+            "event": "fault",
+            "heartbeats": 1,
+            "observed_ms": 110244,
+            "pid": 583,
+            "reason": "health.progress_order",
+            "since_challenge_ms": 1,
+            "since_heartbeat_ms": 0
+          },
+          {
+            "code": 9,
+            "event": "stopped",
+            "forced": true,
+            "observed_ms": 110508,
+            "os_confirmed": true,
+            "pid": 583,
+            "signaled": true
+          },
+          {
+            "event": "rejected",
+            "heartbeats": 1,
+            "launches": 1,
+            "observed_ms": 110508,
+            "reason": "health.progress_order"
+          }
+        ]
+      },
+      "elapsed_seconds": 0.567
+    }
+  ],
+  "qualification": "Native synthetic child/health supervision only; no pixels, diagnostic entry, policy erasure or desktop support.",
+  "source_inputs": {
+    "source/application/recovery_probe.cpp": "d91d931a33f60eaf8b08d026fe595d8b0ee6bad58eee316fd251814b23a53917",
+    "source/platform/child.hpp": "266297cb253ba93b1c73c6a6a28218721e3277c21ffc725c84cd8866012be5aa",
+    "source/platform/child_linux.cpp": "46d26731c0c2ddf873265c008f0b25a17aef8f0cdf3f52ac16e2db6458686bfc",
+    "source/platform/child_windows.cpp": "3385dc40dd91341951a2039cb5f722f2ce069a7b824e2eb91059b9a180fcb864",
+    "source/diagnostics/health_link.hpp": "c8437a20eea17d8d8462095ea9909e04ee3d2f94d087d776a7988663a42801fd",
+    "source/diagnostics/health_link.cpp": "7104dce7d62220344372ae3c52d8916fd1511c54933b689b487195fe0c894d6b",
+    "source/protocol/wire.cpp": "0168904f2c00cea6f28bbe5996c42889df2e33b8df063fc08e159e7502446330",
+    "tests/fault/native_recovery.py": "c3dbf013c12f10104d10c61f299f727fec4b3e96a1934c0fe5a371d4086d3af8",
+    "spec/delivery/packages/w-25-recovery.md": "1a8ce52c2bb7e3e169b99b1fda8dd50b6da218bd02062636ebad8d860bf16881"
+  }
+}

@@ -1,6 +1,7 @@
 # SysPane specification update log
 
 ## 2026-10-06
+- **Native X11 investigation**: Added the Openbox/PCManFM lab, real Show Desktop input and pixel-derived icon concealment. EWMH above/below candidates fail placement; image-wallpaper startup failures remain preserved. Linux 54-entry regression and affected Windows composition checks pass; W-02/W-05 remain open.
 - **W-02 oracle calibration**: Added a bounded external marker/time decoder, sixteen fixed cases and independent native X11 root capture. Five fault calibrations preserve expected failed/inconclusive observations separately from suite success. Profiles pass 53 Windows/54 Linux CTest entries; named shell/reveal, real icon input/wallpaper and Windows capture remain pending.
 - **W-25 diagnostic entry**: Added independent JSON reporting and Win32/GTK inspectors with bounded policy decoding/read-only protected sources. Both profiles pass 52 CTest entries, including hidden native close and damaged-input startup. Preserved the Windows resource-macro build failure. Preservation, recent-failure metadata, positive policy deployment and full visible/editor recovery remain pending.
 - **W-25 native supervision**: Added exact owned-child lifetime adapters and negotiated health/render-progress links. Nine native fault cases independently observe child exit on Windows/Linux; both full suites pass 49 CTest entries. Preserved the initial callback compile failure. Diagnostic entry, real renderer/telemetry recovery and visible/native-exit integration remain pending.

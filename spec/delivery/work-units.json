@@ -92,7 +92,7 @@
       "status": "in_progress",
       "authority_class": "native_lab",
       "execution_grant": "user:foundation-native-campaign-2026-10-05",
-      "notes": "Portable external marker/time oracle and native X11 calibration implemented. Windows runs 53 CTest entries and Linux 54; five native calibrations preserve observed pass/fail/inconclusive separately from test outcome. Native reveal, real icon input/focus, wallpaper policy/file and Windows desktop capture adapters remain required; no host qualification follows.",
+      "notes": "Independent marker/time calibration plus real Openbox Show Desktop adapter and PCManFM icon-concealment observation implemented. Linux has 54 regression entries; W-05 records failed EWMH placement and a separate image-wallpaper lab failure. Full native icon input/focus, wallpaper and Windows capture scenarios remain required; no wall qualification.",
       "package": "delivery/packages/w-02-desktop-oracle.md",
       "evidence": "delivery/oracle-handoff.md"
     },
@@ -159,7 +159,8 @@
       ],
       "specs": [
         "SP-LINUX",
-        "SP-PLATFORMS"
+        "SP-PLATFORMS",
+        "SP-W05-PACKAGE"
       ],
       "acceptance_tests": [
         "T-PLATFORM",
@@ -173,10 +174,12 @@
         "source/interfaces/gnome/",
         "source/interfaces/kde/"
       ],
-      "status": "planned",
+      "status": "in_progress",
       "authority_class": "native_lab",
-      "execution_grant": null,
-      "notes": "Dependency-ready is not execution authority. Native work may produce a failed/inconclusive probe without a support claim; independent tracks can continue."
+      "execution_grant": "user:foundation-native-campaign-2026-10-05",
+      "notes": "Initial real Openbox/PCManFM X11 investigation executed: ordinary-window reveal negative control, above/below EWMH placement failures and unchanged configured-color evidence. Image-wallpaper startup fails before candidate execution; raw failures are preserved. No wall qualification. Input/focus, shell recovery and Wayland/GNOME/Plasma tracks remain required.",
+      "package": "delivery/packages/w-05-x11-investigation.md",
+      "evidence": "delivery/x11-host-handoff.md"
     },
     {
       "id": "W-06",

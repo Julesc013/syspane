@@ -1,0 +1,116 @@
+{
+  "family": "X11-HOST-01",
+  "execution": "failed",
+  "executed_at": "2026-10-05T16:47:14.382495+00:00",
+  "profile": "linux-x64-gcc13 / Openbox 3.6.1 / PCManFM 1.3.2 / owned Xvfb 800x600x24",
+  "qualification": "Bounded X11 candidate investigation; no production or other desktop support claim.",
+  "source_base": "db57e8b9ea3b0293cf482f01b444093d69477557",
+  "source_inputs": {
+    "tests/desktop/native_x11_host.py": "a45542cc723fa3de8852496adcbb2c39262a9ec39b51bcaae77ee50057b221a6",
+    "tests/desktop/native_oracle.py": "fb68f9d9b4663ef3c271b40d055214e4f2418bcd2dd6d0aec2e1a85d84bf1288",
+    "tests/desktop/oracle.py": "7de6458b9b98be4c7f75f4856a9d6c97d69b38578376cba886f3ee19c12f9b82",
+    "tests/fault/native_diagnostic.py": "357bfab4999a60e171b5eeeb1168b85d3fc92f894116d753891e4f763b6a911f",
+    "source/diagnostics/oracle_probe_x11.cpp": "fbef9a7c76e0c291e88905dfdcc1e5ff12380bdbe68c9aba87360cb1b97649b8",
+    "source/desktop/x11/desktop_candidate.cpp": "fc36197818557ed6979c7a1a4db792f8f63752f9371f91f186377d62ad8db179",
+    "source/desktop/x11/desktop_candidate.hpp": "16643e4d8cf657c2350e6cf65dff5bf604c0878585c6440a944079340687974d",
+    "build-support/x11-lab-packages.json": "ca98875e8e6d29b56cc08dde7edb5c6b3abf09d51936778171ff0facc810830b",
+    "spec/delivery/packages/w-05-x11-investigation.md": "ff3c0abe1792b3d86c5c4f2b525dbe9d9d3cf4fe0f638f6669cf71f26b2281bd"
+  },
+  "artifact_sha256": "7eff166b456ae30e7d52347422cdb657b12f263b74268d1095538d4e64e56c15",
+  "lab_identity_sha256": "18a54204023f05e0adfc9ecb8671e4909bab4399abf6982af7b7d062341ca0f4",
+  "system_binaries": {
+    "/usr/bin/Xvfb": "2c7f5a9534410fed5092d782a69ca7ffd9fce80e98b81ffe4944d703dd11d3b1",
+    "/usr/bin/dbus-daemon": "8c479f1fcddfd6693c736ce541da0955f6752834bdeeef4b928e27f5e974c247",
+    "/usr/lib/x86_64-linux-gnu/libXtst.so.6": "b236448961631bb13464c878e68535f5335b5fa10a5d8411f3ad1a56ff430ec2"
+  },
+  "cases": [
+    {
+      "candidate": "live",
+      "execution": "failed",
+      "workspace": "native-evidence/x11-live-c25f460f406c4149a4252128e3773981",
+      "ready": true,
+      "desktop_window": 4194307,
+      "before": {
+        "client_order_bottom_to_top": [
+          4194307
+        ],
+        "focus": 2097439,
+        "showing_desktop": [
+          0
+        ],
+        "active_window": [],
+        "candidate": 0,
+        "clients": [
+          {
+            "window": 4194307,
+            "class": [
+              "pcmanfm",
+              "Pcmanfm"
+            ],
+            "pid": [
+              878
+            ],
+            "type": [
+              310
+            ]
+          }
+        ]
+      },
+      "baseline_icon_region": {
+        "bytes": 36864,
+        "sha256": "0ca09e93bb6a07cc2c721411aae21cd4623faffc44b276603941990b2366985f",
+        "rgb_zlib_base64": "eJzt0DERACEUQ0FLSKBEwpVIwH+FAeoj/NmZCHjZ/q1+Whvzyo4xPyztb1oPf/78+fPnz58//xr+HDL/pvXw58+fP3/+/Pnz58+fP3/+/Pnz58+fP3/+/Pnz58+fP3/+/Pnz58+f/yt/03r48+fPnz9//vz58+fPnz9//vz58+fPn0ONv2k9/Pnz58+fP3/+/Pnz58+fP3/+/Pnz58+fP3/+/Pnz58+fP3/+/Pnz5//K37Qe/vz58+fPnz9//vz58+fPnz9//vz58+dQ429aD3/+/Pnz58+fP/8a/hvgNAKk"
+      },
+      "wallpaper_region": {
+        "bytes": 36864,
+        "sha256": "1739e1b3e5d957a27dcfeef38b43ecd4a1cd4e3732857af04664f5b7f3dfef52",
+        "rgb_zlib_base64": "eJzt0DERwDAQA0FKhpAyEFwGgvlXYfDt6z07IwC6Xe+3Ovbs07KW2KI37Q9//vz58+fPnz9//vz58+fPnz9//vz58+fPnz9//vz58+fPnz9//vz5T+lN+8OfP3/+/Pnz58+fP3/+/Pnz58+fP3/+U3o51L1pf/jz58+fP3/+/Pnz58+fP3/+/Pnz58+fP3/+/Pnz58+fP3/+/Pnz589/Sm/aH/78+fPnz58/f/78+fPnz58/f/78+fOf0suh7k37w58/f/78+fPnz58/f/78+fPnz58/f/787/D/AdOC0pU="
+      },
+      "preserved_before": {
+        "wallpaper.ppm": {
+          "sha256": "63be7aa2b287c2638bd86a2848a2678c5e5b239d0385b5ebafaf922f05778f24",
+          "bytes": 1440015
+        },
+        "config/pcmanfm/syspane-lab/desktop-items-0.conf": {
+          "sha256": "88d75ede145221e68a6a638212baf85cc1cf38f60f2361c3317877b93c4397ce",
+          "bytes": 467
+        }
+      },
+      "error": "RuntimeError: ValueError: candidate not in fixed observation region: (33, 33)",
+      "observer_exit": 0,
+      "cleanup": [
+        {
+          "process": "candidate",
+          "pid": 890,
+          "exit": -15
+        },
+        {
+          "process": "pcmanfm",
+          "pid": 878,
+          "exit": 1
+        },
+        {
+          "process": "openbox",
+          "pid": 877,
+          "exit": 0
+        },
+        {
+          "process": "bus",
+          "pid": 876,
+          "exit": 0
+        },
+        {
+          "process": "Xvfb",
+          "pid": 875,
+          "exit": 0
+        }
+      ],
+      "logs": {
+        "bus.log": "",
+        "openbox.log": "",
+        "pcmanfm.log": "** Message: 03:47:14.665: x-terminal-emulator has very limited support, consider choosing another terminal\n\n** (pcmanfm:878): WARNING **: 03:47:14.666: The directory '~/Templates' doesn't exist, ignoring it\n\n** (pcmanfm:878): WARNING **: 03:47:14.791: modules directory is not accessible\n\n** (pcmanfm:878): WARNING **: 03:47:14.791: modules directory is not accessible\n\n(pcmanfm:878): Gdk-WARNING **: 03:47:14.798: The program 'pcmanfm' received an X Window System error.\nThis probably reflects a bug in the program.\nThe error was 'BadDrawable (invalid Pixmap or Window parameter)'.\n  (Details: serial 305 error_code 9 request_code 62 (core protocol) minor_code 0)\n  (Note to programmers: normally, X errors are reported asynchronously;\n   that is, you will receive the error a while after causing it.\n   To debug your program, run it with the GDK_SYNCHRONIZE environment\n   variable to change this behavior. You can then get a meaningful\n   backtrace from your debugger if you break on the gdk_x_error() function.)\n",
+        "candidate.log": ""
+      }
+    }
+  ]
+}

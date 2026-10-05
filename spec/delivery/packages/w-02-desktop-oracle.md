@@ -38,6 +38,11 @@ synthetic capture source; it is not a GNOME/Plasma/Wayland or real icon-manager 
 Windows external desktop capture remains unexecuted until an admitted synthetic
 desktop is available; portable decoding/time checks still run there.
 
+The subsequent [W-05 X11 investigation](w-05-x11-investigation.md) adds a real
+Openbox reveal-action adapter and PCManFM placement/configuration observations.
+Its file-wallpaper and solid-color profiles remain separate. That bounded experiment
+does not close the remaining native icon-input, platform and recovery dimensions.
+
 ## Marker 0.1
 
 The marker is exactly 128 by 96 RGB8 pixels, a 16 by 12 grid of 8-pixel cells.

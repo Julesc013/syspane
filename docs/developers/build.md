@@ -152,6 +152,41 @@ and Windows external desktop capture remain required. A synthetic Xvfb window is
 never a behind-icons desktop qualification. The standalone `tests/desktop/oracle.py`
 accepts one bounded trace JSON and exits 0/pass, 1/fail, 3/inconclusive or 2/invalid.
 
+The optional W-05 X11 investigation uses an extracted Openbox/PCManFM lab. From
+the admitted Linux checkout, with the owned build directory as `<build>`:
+
+```sh
+python3 build-support/prepare_x11_lab.py <build> --refresh-metadata
+python3 tests/desktop/native_x11_host.py <build>
+python3 tests/desktop/native_x11_host.py <build> --wallpaper-mode color
+```
+
+Preparation downloads only the exact archives in `build-support/x11-lab-packages.json`
+and verifies their sizes/digests before extraction. Metadata refresh uses a task-local
+APT list directory. No system installation or maintainer script runs. The ordinary
+configure/build/test commands neither prepare nor launch this optional desktop lab.
+The existing 54-entry Linux regression suite still runs without it. Revision 8 adds
+the separately owned `syspane_x11_candidate` library and pinned Xext dependency.
+
+Default file-wallpaper startup currently fails in PCManFM with `BadDrawable`; that
+failure must remain visible. `--gtk-rendering image` is a separately recorded GTK
+software-backing experiment. The color control runs the same reveal/pixel criteria
+without image initialization and does not qualify the failed image profile. The
+runner exits zero for a completed investigation even when every host candidate fails
+placement. Inspect `execution`, `observation`, `placement` and wallpaper scope in
+the unique `X11-HOST-01-<id>.json` report instead of treating exit zero as a wall pass.
+
+The observer uses only the owned Xvfb desktop with real icon-manager content and
+native Super+D actions. It captures through reveal/restore, measures actual icon
+concealment, preserves frame journals and checks owned-process cleanup. Input/focus
+qualification, image-wallpaper preservation and other shell profiles remain open.
+Use `record_x11_host.py --build-dir <build> --report <exact-color-report>
+--failed-image-report <exact-default-report> --output <record>` to bind evidence and
+recompute pixel outcomes. See [the handoff](../../spec/delivery/x11-host-handoff.md).
+`python3 tests/desktop/test_x11_record.py <build> <exact-color-report> -v` checks
+valid evidence and rejects corrupted pixels, false temporal/placement passes,
+promoted image-wallpaper claims and unexecuted icon-input claims.
+
 Specification tooling separately uses Python 3.11+ in an isolated environment:
 
 ```powershell

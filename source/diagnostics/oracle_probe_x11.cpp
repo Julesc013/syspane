@@ -8,6 +8,7 @@
 #include <string>
 #include <poll.h>
 #include <unistd.h>
+#include "../desktop/x11/desktop_candidate.hpp"
 
 namespace {
 std::array<unsigned char, 17> payload(std::uint64_t generation) {
@@ -43,7 +44,8 @@ void paint(Display* display, Window window, Pixmap buffer, GC gc, std::uint64_t 
 }
 }
 int main(int argc, char** argv) {
-    if (argc != 2 || (std::string(argv[1]) != "live" && std::string(argv[1]) != "hide" && std::string(argv[1]) != "freeze")) return 64;
+    if (argc != 2 || (std::string(argv[1]) != "live" && std::string(argv[1]) != "hide" && std::string(argv[1]) != "freeze" &&
+                      std::string(argv[1]) != "desktop" && std::string(argv[1]) != "desktop-below")) return 64;
     const std::string mode = argv[1];
     auto display = XOpenDisplay(nullptr);
     if (!display) return 69;
@@ -66,10 +68,15 @@ int main(int argc, char** argv) {
     const auto protocols = XInternAtom(display, "WM_PROTOCOLS", False);
     auto close = XInternAtom(display, "WM_DELETE_WINDOW", False);
     XSetWMProtocols(display, window, &close, 1);
+    if ((mode == "desktop" || mode == "desktop-below") &&
+        !syspane::desktop::x11::configure_candidate(display, window, mode == "desktop-below")) {
+        XDestroyWindow(display, window); XCloseDisplay(display); return 69;
+    }
     XSelectInput(display, window, ExposureMask | StructureNotifyMask);
     const auto gc = XCreateGC(display, window, 0, nullptr);
     const auto buffer = XCreatePixmap(display, window, 128, 96, 24);
     XMapWindow(display, window);
+    if (mode == "desktop-below") XLowerWindow(display, window);
     XFlush(display);
     std::cout << "{\"window\":" << window << ",\"pid\":" << getpid() << ",\"claims_visible\":true}\n" << std::flush;
     const auto start = std::chrono::steady_clock::now();

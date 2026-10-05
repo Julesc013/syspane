@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-06T03:24:33+11:00", "scope": "Independent temporal oracle and native X11 calibration; real desktop scenarios remain pending"}
+updated: {"by": "codex", "at": "2026-10-06T04:04:34+11:00", "scope": "Initial real X11 reveal and icon-placement investigation; failed candidates and image lab preserved"}
 ---
 
 # Current state and next admitted boundary
@@ -71,6 +71,13 @@ including sixteen fixed portable cases and five native pixel/fault cases. Expect
 fail/inconclusive observations are verified negative calibrations. Named shell reveal,
 icon input/focus, real wallpaper and Windows desktop capture remain unexecuted.
 
+The subsequent [X11 host investigation](x11-host-handoff.md) runs real Openbox Show
+Desktop actions with PCManFM and records placement failures from actual icon/marker
+pixels. The normal-window control disappears, a desktop-type window persists above
+icon pixels, and its below variant is hidden. File-wallpaper startup fails separately;
+the solid-color control does not qualify it. Linux's 54-entry regression suite and
+the two affected Windows component checks pass. No desktop host becomes qualified.
+
 Canonical 0.2.0 documentation bundle, unchanged 0.1 authoring profile, preserved old
 fixtures, new experimental scene/command/capability 0.2 and admission descriptors.
 The initial settings registry has enforced metadata/default consistency and generated
@@ -107,8 +114,12 @@ License, contribution and release-identity decisions remain open.
 
 ## Next work
 
-Continue the admitted campaign: extend W-02's calibrated observer with native reveal,
-icon-input/focus and real wallpaper adapters in admitted synthetic desktop labs.
+Continue the admitted campaign: extend W-02's real X11 reveal adapter with native
+icon-input/focus checks, investigate the separate image-wallpaper lab failure and
+close the other platform capture/reveal boundaries in admitted synthetic desktops.
+W-05 needs a composition strategy that actually preserves icon pixels; its initial
+EWMH window stacking candidates fail that requirement. Continue other native tracks
+independently of this negative result.
 Extend W-25 diagnostics with bounded recent-failure metadata and explicit configuration
 preservation. Close those input/ownership contracts and full-snapshot/data recovery
 before enabling the associated features. Qualify protected policy in an admitted lab.

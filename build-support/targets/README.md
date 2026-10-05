@@ -109,3 +109,12 @@ compressed raw frames and preserves failed/inconclusive temporal observations as
 calibration evidence. No input reaches the user's display. Named shell actions,
 icons, Windows capture, real wallpaper policy/files and wall qualification remain
 pending. These native captures establish pixels only for this synthetic laboratory.
+
+Linux revision 8 adds the separate EWMH/XShape candidate library and Xext
+2:1.3.4-1build2 runtime/development pin. Windows stays revision 7. The optional
+Openbox/PCManFM investigation uses 35 explicitly pinned Ubuntu archives extracted
+inside the owned build cache, isolated XDG paths and a private session bus. It is
+separate from the offline 54-entry regression suite. Its real Show Desktop action
+exposes placement failures; the color control does not qualify the separately
+failing image-wallpaper lab. See `spec/delivery/x11-host-handoff.md` and the developer
+commands. No product role or supported desktop profile is enabled by these probes.

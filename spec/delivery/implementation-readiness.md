@@ -12,7 +12,7 @@ sp_requires: ["SP-CURRENT"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-AUDIT-2026-10-04", "resource": "User-supplied October 2026 audit inputs", "title": "October review inputs"}]
-updated: {"by": "codex", "at": "2026-10-06T03:24:33+11:00", "scope": "Calibrated independent pixel/time observer; W-02 native desktop adapters remain incomplete"}
+updated: {"by": "codex", "at": "2026-10-06T04:04:34+11:00", "scope": "Initial real X11 reveal and icon-placement investigation; failed candidates and image lab preserved"}
 ---
 
 # Implementation readiness and gates
@@ -63,6 +63,10 @@ positive protected-policy deployment and visible/editor recovery remain open.
 The [oracle checkpoint](oracle-handoff.md) calibrates independent pixel/time evaluation
 against native X11 disappearance, freeze, obstruction and capture-gap cases. It does
 not yet qualify a named shell/reveal or icon-manager scenario.
+The later [X11 investigation](x11-host-handoff.md) executes a real Openbox reveal
+action and PCManFM placement observation. Its EWMH candidates fail placement, and
+the default image-background lab fails before candidate startup. The solid-color
+control supplies useful negative host evidence without qualifying either profile.
 
 W-24 implements native peer authentication, bounded I/O and real client/server
 integration under its [package](packages/w-24-transport.md). The initial preview

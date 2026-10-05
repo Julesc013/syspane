@@ -281,7 +281,8 @@
         "source/diagnostics/oracle_probe_x11.cpp"
       ],
       "allowed_dependencies": [
-        "X11::X11"
+        "X11::X11",
+        "syspane_x11_candidate"
       ],
       "target_requirements": [
         "cxx17",
@@ -290,6 +291,20 @@
       "roles": [
         "development_test"
       ],
+      "installed_files": []
+    },
+    {
+      "id": "x11-host-candidate",
+      "target": "syspane_x11_candidate",
+      "type": "STATIC_LIBRARY",
+      "profiles": ["linux-x64-gcc13"],
+      "source_owner": "source/desktop/x11/",
+      "public_interfaces": [],
+      "private_interfaces": ["source/desktop/x11/desktop_candidate.hpp"],
+      "sources": ["source/desktop/x11/desktop_candidate.cpp"],
+      "allowed_dependencies": ["X11::X11", "X11::Xext"],
+      "target_requirements": ["cxx17", "x11", "xshape-1.1"],
+      "roles": ["development_test"],
       "installed_files": []
     }
   ]

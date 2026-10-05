@@ -31,7 +31,8 @@ behaviour has been implemented. See [audit disposition](spec/delivery/audit-2026
 - [x] W-25 diagnostic entry: build independent JSON reporting and Win32/GTK inspectors with bounded policy decoding, protected-source readers and native close checks; see the [handoff](spec/delivery/diagnostic-handoff.md).
 - [ ] W-25 completion: add bounded recent-failure metadata, explicit configuration preservation, telemetry/renderer recovery, policy-driven payload erasure and native editor-exit/visible recovery. Qualify installed protected policy in an admitted lab.
 - [x] W-02 initial boundary: decode external marker pixels and temporal coverage; calibrate against live, disappearing, frozen, obstructed and capture-gap cases on an owned X11 test server. See the [handoff](spec/delivery/oracle-handoff.md).
-- [ ] W-02 completion: add named reveal-action, icon-input/focus and real wallpaper adapters, including Windows external capture in an admitted synthetic desktop.
+- [x] W-02/W-05 initial X11 investigation: drive Openbox Show Desktop under real PCManFM, observe temporal pixels and icon concealment, preserve file-wallpaper startup failures. See the [handoff](spec/delivery/x11-host-handoff.md); no candidate qualifies as a wall.
+- [ ] W-02 completion: finish icon-input/focus and image-wallpaper adapters, additional platform reveal scenarios and Windows external capture in an admitted synthetic desktop.
 - [ ] W-03–W-06: run changing-scene host probes for contemporary Windows, XP/7, Linux and macOS/older OS X.
 - [ ] W-07–W-11: implement demand, commands, configuration recovery, portable scenes, editor and native settings facilities.
 - [x] W-26 initial slice: produce local Windows/Linux model smoke archives and prove relocated execution; product package/lifecycle qualification remains pending.
