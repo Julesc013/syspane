@@ -196,7 +196,7 @@ def registries(root: Path) -> tuple[dict, dict, dict]:
 def setting_value_errors(value: Any, constraints: dict[str, Any]) -> list[str]:
     """Check the small descriptor vocabulary without optional schema packages."""
     kind = constraints.get('type')
-    valid_type = ((kind == 'integer' and type(value) is int) or
+    valid_type = ((kind == 'integer' and (type(value) is int or (type(value) is float and value.is_integer()))) or
                   (kind == 'boolean' and type(value) is bool) or
                   (kind == 'string' and isinstance(value, str)))
     if not valid_type:
@@ -372,6 +372,10 @@ def semantic_errors(value: Any, schema_name: str, root: Path=ROOT) -> list[str]:
             errors.append('duplicate setting override')
         if schema_name == 'preset' and value['parent'] and value['parent']['id'] == value['preset_id']:
             errors.append('preset cannot inherit itself')
+        if schema_name == 'policy':
+            projections = [(rule['role'], rule['channel']) for rule in value['disclosure']]
+            if len(projections) != len(set(projections)):
+                errors.append('duplicate policy role/channel rule')
     if schema_name in ('content-package','extension-manifest'):
         paths = [asset['path'] for asset in value['assets']]
         if len({path.casefold() for path in paths}) != len(paths):

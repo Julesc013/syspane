@@ -1,7 +1,7 @@
 {
   "schema_version": "0.1.0",
   "profile_id": "windows-x64-gcc15",
-  "revision": "5",
+  "revision": "6",
   "example_only": false,
   "os": {
     "family": "windows",
@@ -48,11 +48,12 @@
       "license": "MIT"
     }
   ],
-  "ui": "none",
+  "ui": "Win32 standard controls (diagnostic only)",
   "shell_host": "none",
   "renderer": "none",
   "roles": [
-    "console"
+    "console",
+    "diagnostic"
   ],
   "isolation": {
     "tier": "none",
@@ -65,7 +66,7 @@
     "Runtime floors are restricted to the observed host environment, not inferred backward compatibility.",
     "Native IPC is exercised without elevation; cross-user/logon and desktop-session qualification require separate laboratories.",
     "Initial IPC probe permits one live connection and at most two sequential clients; telemetry subscriptions and persistent commits are disabled.",
-    "Portable lease, render-watch and restart-budget guards only; independent native recovery/diagnostic entry and visible expiry remain pending in W-25.",
-    "Self-child native supervision and synthetic health/render-worker faults only; no real renderer pixels, independent diagnostic entry or desktop qualification."
+    "Native self-child supervision and read-only independent diagnostic inspector; no actual renderer pixels or desktop qualification.",
+    "Protected-policy adapters perform read-only checks; positive installed machine-policy qualification needs an admitted administrative lab. Diagnostic preservation, recent-failure metadata and recovery controls remain pending."
   ]
 }

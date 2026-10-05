@@ -1,0 +1,116 @@
+{
+  "family": "DIAG-01",
+  "outcome": "fail",
+  "executed_at": "2026-10-05T15:48:40.216682+00:00",
+  "executable_sha256": "41656b719688e9aaa79805cb31f571b3ff8f05b42e57283fabb5598e7ca8506d",
+  "profile": "linux-x64-gcc13",
+  "cases": [
+    {
+      "case": "DIAG-01.REPORT",
+      "outcome": "pass",
+      "policy_state": "unavailable",
+      "relocated": true,
+      "elapsed_ms": 11
+    },
+    {
+      "case": "DIAG-01.DAMAGED",
+      "outcome": "pass",
+      "elapsed_ms": 16
+    },
+    {
+      "case": "DIAG-01.ARGUMENTS",
+      "outcome": "pass",
+      "elapsed_ms": 23
+    },
+    {
+      "case": "DIAG-01.NATIVE-CLOSE",
+      "outcome": "fail",
+      "elapsed_ms": 5006
+    }
+  ],
+  "qualification": "Development diagnostic entry and hidden native close only; no pixels, protected-policy deployment or desktop/editor recovery qualification.",
+  "source_inputs": {
+    "source/application/diagnostic.cpp": "eac71e4eeb2459b1efd03fedd630f8e267ca334fd990a68c8b7918cc87a086a5",
+    "source/application/ipc_probe.cpp": "542f0120ce61069f0b8564cda9aef04e196333b5dce68be17481a5fef2104419",
+    "source/application/model_smoke.cpp": "5752a655511f83b1635d4e77c00274f0952145680d5a540d8bfec0b6e4386137",
+    "source/application/recovery_probe.cpp": "d91d931a33f60eaf8b08d026fe595d8b0ee6bad58eee316fd251814b23a53917",
+    "source/diagnostics/entry.cpp": "f9586bc7c9ed31c6694293c2c30ba301e28dd4302a113e44cfc742f8d3985a22",
+    "source/diagnostics/entry.hpp": "72e0846e27dd1be3994659b53da78d5fa1c789c170cabde4e90edd2aa486bcf5",
+    "source/diagnostics/health_link.cpp": "7104dce7d62220344372ae3c52d8916fd1511c54933b689b487195fe0c894d6b",
+    "source/diagnostics/health_link.hpp": "c8437a20eea17d8d8462095ea9909e04ee3d2f94d087d776a7988663a42801fd",
+    "source/diagnostics/recovery.cpp": "33f725661262c9888920892c1e77060999682b79d1f5b24e14e8cbfc57fdaaa6",
+    "source/diagnostics/recovery.hpp": "746295ce4ecaede329e6c6f44f378a9e96e92217b808ec0279bea9f0cfb14301",
+    "source/interfaces/diagnostic_inspector.hpp": "09476078b3f58792c95abc4f34b13c75ad80c3dda58f8e58891f34c00b7a20cf",
+    "source/interfaces/diagnostic_inspector_linux.cpp": "c5bd4f8f228b7e13541b7086a3cbc7d14bd52426438b91375f9fbaf828af57a9",
+    "source/interfaces/diagnostic_inspector_windows.cpp": "fc503ce39637fa5879c1c0ad8237ee5dc3debe292390d4e1aa4852ab3cc97f3a",
+    "source/platform/child.hpp": "266297cb253ba93b1c73c6a6a28218721e3277c21ffc725c84cd8866012be5aa",
+    "source/platform/child_linux.cpp": "46d26731c0c2ddf873265c008f0b25a17aef8f0cdf3f52ac16e2db6458686bfc",
+    "source/platform/child_windows.cpp": "3385dc40dd91341951a2039cb5f722f2ce069a7b824e2eb91059b9a180fcb864",
+    "source/platform/local_ipc.hpp": "ef8a2fc5719f92b04e308a7766d3ee2d8994f2a926a78acb2cd766e25128c4cd",
+    "source/platform/local_ipc_linux.cpp": "d045fee05d8bbed3db0e7e773f735e595f9a951779564f39248ebc5cb558537e",
+    "source/platform/local_ipc_windows.cpp": "fb8f5ee68f2c605583509275438723ed0613a8affbaa250bd00aa0d5fd07c593",
+    "source/platform/machine_policy.hpp": "e12c51cdaeb3806e4813098fbfb8db7a181beb338b6623492c29165c0c0da5bb",
+    "source/platform/machine_policy_linux.cpp": "34925aa2d0173782a0a132413b3bddf2c4db25098575699b0f94193154094c16",
+    "source/platform/machine_policy_windows.cpp": "3ec13d9fe46b5e39a3c077de9620e051879155f9eba782e542de558e90b53653",
+    "source/configuration/policy.cpp": "28e53f88449cb2ff4c85e0a26c0a2dbe4fa85ca7d037a3df6a299cf2cb03df87",
+    "source/configuration/policy.hpp": "966822971245eedbde662b08987da8519cd71011b5620bb385a47b161e93e36a",
+    "source/configuration/session.cpp": "4fd0960477b8774abf6d8e11d2d39b55685038bf90e1906357b6e15f04880262",
+    "source/configuration/session.hpp": "dd6c99d7ba5686ed6d41811a7df4a23cd0afcd60f99b35e77e45d5ad2c9a9db7",
+    "tests/fault/native_diagnostic.py": "fbc0c068da84766b4a634fa13dfaae28d71512e3a7a6db74441063f9f5b29203",
+    "spec/delivery/packages/w-25-recovery.md": "aa9b489554d317eb078312ae5ca3adfa85c7c2db7b5ebdcf19a354952153b7d6"
+  },
+  "error": "TimeoutError: owned Xvfb startup exceeded five-second bound",
+  "attempts": [
+    {
+      "arguments": [
+        "--report"
+      ],
+      "exit": 0,
+      "stdout": "{\"build_version\":\"0.0.1\",\"component\":\"diagnostic\",\"policy_state\":\"unavailable\",\"product\":\"SysPane\",\"profile\":\"linux-x64-gcc13\",\"recovery_controls\":\"not_implemented\",\"schema_version\":\"0.1.0\"}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "--report"
+      ],
+      "exit": 0,
+      "stdout": "{\"build_version\":\"0.0.1\",\"component\":\"diagnostic\",\"policy_state\":\"unavailable\",\"product\":\"SysPane\",\"profile\":\"linux-x64-gcc13\",\"recovery_controls\":\"not_implemented\",\"schema_version\":\"0.1.0\"}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "--unknown"
+      ],
+      "exit": 64,
+      "stdout": "",
+      "stderr": "diagnostic.arguments\n"
+    },
+    {
+      "arguments": [
+        "--report",
+        "--inspect"
+      ],
+      "exit": 64,
+      "stdout": "",
+      "stderr": "diagnostic.arguments\n"
+    },
+    {
+      "arguments": [
+        "--policy",
+        "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/diagnostic-case-cdc7e9be7f614bd5b1eacb19f3ca72b1/policy.json"
+      ],
+      "exit": 64,
+      "stdout": "",
+      "stderr": "diagnostic.arguments\n"
+    },
+    {
+      "arguments": [
+        "--report",
+        "--trusted"
+      ],
+      "exit": 64,
+      "stdout": "",
+      "stderr": "diagnostic.arguments\n"
+    }
+  ]
+}

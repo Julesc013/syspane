@@ -12,12 +12,12 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-06T02:15:05+11:00", "scope": "Native W-25 owned-child supervision checkpoint; diagnostic and visible recovery remain pending"}
+updated: {"by": "codex", "at": "2026-10-06T02:42:44+11:00", "scope": "Independent diagnostic entry checkpoint; preservation and visible recovery remain pending"}
 ---
 
 # Current state and next admitted boundary
 
-## Repository checkpoint â€” 2026-10-05
+## Repository checkpoint: 2026-10-05
 
 The imported baseline is `Julesc013/syspane` commit
 `91e10b8b7a8a5da5ab2d93e8cdcbaade6aa0fbd9` (`init: spec`). The original archive's
@@ -59,6 +59,12 @@ cases with independent OS exit observations. Independent diagnostic entry,
 telemetry/real-renderer recovery, policy and visible/native-exit integration still
 keep W-25 open; a health-only worker does not supply a synchronized telemetry view.
 
+The [diagnostic checkpoint](diagnostic-handoff.md) adds independent public JSON
+reporting, Win32/GTK inspectors and bounded protected-policy readers. Both profiles
+pass 52 CTest entries. Native tests close only owned hidden windows and prove startup
+beside damaged optional inputs; positive policy deployment, preservation controls,
+recent-failure metadata and complete visible/editor recovery remain pending.
+
 Canonical 0.2.0 documentation bundle, unchanged 0.1 authoring profile, preserved old
 fixtures, new experimental scene/command/capability 0.2 and admission descriptors.
 The initial settings registry has enforced metadata/default consistency and generated
@@ -85,8 +91,9 @@ traces remain unexecuted.
 
 ## Not implemented or qualified
 
-No native controller, renderer, collector, GUI/editor, saver, diagnostic executable,
-SDK, setup adapter or complete product package exists. No native desktop/saver/performance/
+No native controller, renderer, collector, product settings/editor, saver, SDK,
+setup adapter or complete product package exists. The independent read-only diagnostic
+executable/inspector is implemented on the two development profiles. No native desktop/saver/performance/
 accessibility/setup qualification ran. Test definitions stay `not_run`; concepts stay
 draft/unreviewed and experimental contracts stay experimental. AIDE's binding remains
 inactive with no grants. USK and ScreenSave are not adopted runtime dependencies.
@@ -95,9 +102,9 @@ License, contribution and release-identity decisions remain open.
 ## Next work
 
 Continue the admitted campaign: implement W-02's independent desktop oracle and
-extend W-25's tested native supervision into the independent diagnostic path using
-W-24. Close bounded metadata, native inspector, current-policy and full-snapshot
-contracts before enabling those features.
+extend W-25 diagnostics with bounded recent-failure metadata and explicit configuration
+preservation. Close those input/ownership contracts and full-snapshot/data recovery
+before enabling the associated features. Qualify protected policy in an admitted lab.
 Connect the build/component/target consumers and minimum command/IPC/policy/recovery
 slice. Probe contemporary Windows, XP/7, Linux and AppKit/older OS X independently.
 Package smoke builds early; each profile's usable vertical includes live network,

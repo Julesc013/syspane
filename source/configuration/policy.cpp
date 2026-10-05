@@ -2,6 +2,7 @@
 #include "settings_descriptors.hpp"
 #include <algorithm>
 #include <cmath>
+#include <regex>
 
 namespace syspane::configuration {
 namespace {
@@ -25,6 +26,62 @@ bool valid_value(const Descriptor& descriptor, const Json& value) {
 std::optional<std::uint64_t> revision(const Json& value) {
     return value.is_string() ? protocol::decimal(value.get_ref<const std::string&>()) : std::nullopt;
 }
+}
+Policy decode_policy(std::string_view bytes) {
+    if (bytes.empty() || bytes.size() > 65536) throw protocol::Error("policy.size");
+    const auto first = bytes.find_first_not_of(" \t\r\n"), last = bytes.find_last_not_of(" \t\r\n");
+    if (first == std::string_view::npos) throw protocol::Error("policy.shape");
+    auto value = protocol::parse(bytes.substr(first, last - first + 1));
+    if (value.is_object() && value.contains("extensions")) {
+        const auto& extensions = value["extensions"];
+        if (!extensions.is_object() || extensions.size() > 64) throw protocol::Error("policy.extensions");
+        for (auto it = extensions.begin(); it != extensions.end(); ++it)
+            if (!std::regex_match(it.key(), std::regex("[a-z][a-z0-9_.-]{0,127}"))) throw protocol::Error("policy.extensions");
+        value.erase("extensions");
+    }
+    if (!protocol::members(value, {"schema_version", "policy_id", "revision", "scope", "forced_settings",
+            "denied_capabilities", "disclosure", "retained_data_on_revocation"}) ||
+        value["schema_version"] != "0.1.0" || !value["policy_id"].is_string() ||
+        !protocol::identifier(value["policy_id"].get_ref<const std::string&>()) ||
+        (value["scope"] != "machine" && value["scope"] != "organization") ||
+        (value["retained_data_on_revocation"] != "restrict" && value["retained_data_on_revocation"] != "purge_with_authority"))
+        throw protocol::Error("policy.shape");
+    const auto generation = revision(value["revision"]);
+    if (!generation) throw protocol::Error("policy.revision");
+    Policy result;
+    result.revision = *generation;
+    const auto& forced = value["forced_settings"];
+    if (!forced.is_array() || forced.size() > 64) throw protocol::Error("policy.settings");
+    for (const auto& row : forced) {
+        if (!protocol::members(row, {"path", "value"}) || !row["path"].is_string()) throw protocol::Error("policy.setting");
+        const auto path = row["path"].get<std::string>();
+        const auto descriptor = std::find_if(descriptors.begin(), descriptors.end(), [&](const Descriptor& item) { return path == item.path; });
+        if (descriptor == descriptors.end() || !valid_value(*descriptor, row["value"]) ||
+            !result.forced.emplace(path, row["value"]).second) throw protocol::Error("policy.setting");
+    }
+    const auto& denied = value["denied_capabilities"];
+    if (!denied.is_array() || denied.size() > 128) throw protocol::Error("policy.capabilities");
+    for (const auto& item : denied)
+        if (!item.is_string() || !protocol::identifier(item.get_ref<const std::string&>()) ||
+            !result.denied_capabilities.insert(item.get<std::string>()).second) throw protocol::Error("policy.capability");
+    const std::set<std::string> roles = {"desktop", "console", "collector", "saver", "preview", "saver_settings", "diagnostic", "maintenance"};
+    const std::set<std::string> channels = {"desktop", "inspector", "saver", "preview", "accessibility", "tooltip", "clipboard", "history", "logs", "support_bundle", "extension", "export"};
+    const std::set<std::string> classes = {"public", "operational", "sensitive"};
+    const auto& disclosure = value["disclosure"];
+    if (!disclosure.is_array() || disclosure.size() > 128) throw protocol::Error("policy.disclosure");
+    for (const auto& row : disclosure) {
+        if (!protocol::members(row, {"role", "channel", "allow_classifications"}) || !row["role"].is_string() || !row["channel"].is_string() ||
+            !roles.count(row["role"].get<std::string>()) || !channels.count(row["channel"].get<std::string>())) throw protocol::Error("policy.disclosure");
+        const auto& allowed = row["allow_classifications"];
+        if (!allowed.is_array() || allowed.size() > 3) throw protocol::Error("policy.classification");
+        std::set<std::string> values;
+        for (const auto& item : allowed)
+            if (!item.is_string() || !classes.count(item.get<std::string>()) || !values.insert(item.get<std::string>()).second)
+                throw protocol::Error("policy.classification");
+        if (!result.disclosure.emplace(std::make_pair(row["role"].get<std::string>(), row["channel"].get<std::string>()), values).second)
+            throw protocol::Error("policy.duplicate_disclosure");
+    }
+    return result;
 }
 Decision preview(const Json& command, const Authority& authority, const Policy& policy, std::uint64_t current_revision) {
     if (!protocol::members(command, {"schema_version", "request_id", "expected_revision", "policy_generation", "intent", "operations"}) ||

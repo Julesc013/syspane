@@ -148,6 +148,124 @@
       "source_owner": "tests/model/", "public_interfaces": [], "private_interfaces": [],
       "sources": ["tests/model/model_tests.cpp"], "allowed_dependencies": ["syspane_model"],
       "target_requirements": ["cxx17"], "roles": ["development_test"], "installed_files": []
+    },
+    {
+      "id": "diagnostic",
+      "target": "syspane_diagnostic",
+      "type": "STATIC_LIBRARY",
+      "source_owner": "source/diagnostics/",
+      "public_interfaces": [
+        "source/diagnostics/entry.hpp"
+      ],
+      "private_interfaces": [],
+      "sources": [
+        "source/diagnostics/entry.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_configuration"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "diagnostic"
+      ],
+      "installed_files": []
+    },
+    {
+      "id": "machine-policy",
+      "target": "syspane_machine_policy",
+      "type": "STATIC_LIBRARY",
+      "source_owner": "source/platform/",
+      "public_interfaces": [
+        "source/platform/machine_policy.hpp"
+      ],
+      "private_interfaces": [],
+      "sources": [
+        "source/platform/machine_policy_linux.cpp",
+        "source/platform/machine_policy_windows.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_configuration",
+        "advapi32"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "diagnostic"
+      ],
+      "installed_files": []
+    },
+    {
+      "id": "diagnostic-inspector",
+      "target": "syspane_diagnostic_inspector",
+      "type": "STATIC_LIBRARY",
+      "source_owner": "source/interfaces/",
+      "public_interfaces": [
+        "source/interfaces/diagnostic_inspector.hpp"
+      ],
+      "private_interfaces": [],
+      "sources": [
+        "source/interfaces/diagnostic_inspector_linux.cpp",
+        "source/interfaces/diagnostic_inspector_windows.cpp"
+      ],
+      "allowed_dependencies": [
+        "user32",
+        "gdi32",
+        "PkgConfig::GTK3"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "diagnostic"
+      ],
+      "installed_files": []
+    },
+    {
+      "id": "diag",
+      "target": "syspane_diag",
+      "type": "EXECUTABLE",
+      "source_owner": "source/application/",
+      "public_interfaces": [],
+      "private_interfaces": [],
+      "sources": [
+        "source/application/diagnostic.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_diagnostic",
+        "syspane_machine_policy",
+        "syspane_diagnostic_inspector"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "diagnostic"
+      ],
+      "installed_files": []
+    },
+    {
+      "id": "diagnostic-tests",
+      "target": "syspane_diagnostic_tests",
+      "type": "EXECUTABLE",
+      "source_owner": "tests/fault/",
+      "public_interfaces": [],
+      "private_interfaces": [],
+      "sources": [
+        "tests/fault/diagnostic_tests.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_diagnostic"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": []
     }
   ]
 }

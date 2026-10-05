@@ -20,6 +20,8 @@ struct Policy {
     std::set<std::string> denied_capabilities;
     std::map<std::pair<std::string, std::string>, std::set<std::string>> disclosure;
 };
+// Decode bounded, untrusted bytes. Availability remains false until native provenance is checked.
+Policy decode_policy(std::string_view bytes);
 struct Decision {
     std::string outcome, code;
 };

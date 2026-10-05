@@ -75,3 +75,22 @@ owned child; Linux requires pidfds, procfs and the measured libc spawn/closefrom
 support. The launcher executes only itself and passes no unrelated handles or
 standard streams. The inherited development environment is trusted input. This
 is not hostile-code isolation or a product/historical-platform qualification.
+
+Profile revision 6 adds independent diagnostic reporting and Win32/GTK inspectors,
+bounded policy decoding and read-only protected policy sources (52 CTest entries).
+Windows adds USER32/GDI32 native controls. Linux pins GTK 3.24.41 with Ubuntu
+`libgtk-3-dev`/`libgtk-3-0t64` 3.24.41-4ubuntu1.3, GLib development 2.80.0-6ubuntu3.8
+and X11 development 2:1.8.7-1build1. Configure checks those package versions and the
+GTK shared-library SHA-256 through `check_diagnostic_dependencies.py`; it does not
+install packages. The installed GTK copyright file records LGPL-2+, LGPL-2.1+ and
+Expat terms; no GTK redistribution package or full transitive closure is claimed.
+The native close check uses hidden Win32 and owned Xvfb/X11 windows owned by the harness.
+Report mode requires no display initialization, but the Linux ELF still requires
+its installed GTK loader closure. Wayland, policy deployment, preservation controls
+and complete diagnostic/desktop qualification remain separate pending gates.
+
+The test-only Xvfb package is 2:21.1.12-1ubuntu1.6; configure verifies its executable
+fingerprint. Tests enable only an authenticated abstract Unix socket with a random
+high display, check its server PID and stop the owned server. The WSLg display and
+its filesystem socket directory are not modified. Initial WSLg/Xvfb failures remain
+in the diagnostic attempts record; Xvfb success is not desktop qualification.

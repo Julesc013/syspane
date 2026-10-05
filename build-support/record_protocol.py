@@ -27,7 +27,10 @@ def main():
     parser.add_argument('--native', action='store_true', help='Require both real local-IPC families and their concrete case records')
     parser.add_argument('--recovery', action='store_true', help='Record W-25 portable guards; requires native regression cases as well')
     parser.add_argument('--supervision', action='store_true', help='Require the native owned-child supervision family')
+    parser.add_argument('--diagnostic', action='store_true', help='Require independent diagnostic entry and native close checks')
     args = parser.parse_args()
+    if args.diagnostic:
+        args.supervision = True
     if args.supervision:
         args.recovery = True
     if args.recovery:
@@ -49,6 +52,8 @@ def main():
         expected |= {f'recovery.{case}' for case in RECOVERY_CASES}
     if args.supervision:
         expected.add('native.RECOVERY-01')
+    if args.diagnostic:
+        expected |= {'diagnostic.DIAG-POLICY', 'diagnostic.DIAG-PROJECTION', 'native.DIAG-01'}
     if len(cases) != len(expected) or {case['case'] for case in cases} != expected or any(case['outcome'] != 'pass' for case in cases):
         raise ValueError('missing, repeated, unexpected or failing case; preserve log before rerun')
     suffix = '.exe' if platform.system() == 'Windows' else ''
@@ -72,6 +77,13 @@ def main():
             for name in ('SysPane.RecoveryProbe'+suffix, 'libsyspane_child.a', 'libsyspane_health.a'):
                 artifacts[name] = {'sha256': sha(build/name), 'bytes': (build/name).stat().st_size}
             required['RECOVERY-01'] = {'CHILD-GRACEFUL','PRODUCER-HANG','RENDER-STALL','CRASH-CIRCUIT','QUARANTINE','PARENT-LOSS','ROLE-DENIAL','WRONG-EPOCH','PROGRESS-DENIAL'}
+        if args.diagnostic:
+            for name in (('SysPane.Diag.exe' if suffix else 'syspane-diag'), 'syspane_diagnostic_tests'+suffix,
+                         'libsyspane_diagnostic.a', 'libsyspane_machine_policy.a', 'libsyspane_diagnostic_inspector.a'):
+                artifacts[name] = {'sha256': sha(build/name), 'bytes': (build/name).stat().st_size}
+            required['DIAG-01'] = {'REPORT', 'DAMAGED', 'ARGUMENTS', 'NATIVE-CLOSE'}
+            if not suffix:
+                required['DIAG-01'].add('NO-DISPLAY')
         seen = set()
         for name in re.findall(r'^Native evidence: (.+)$', raw, re.M):
             path = Path(name.strip()).resolve()
@@ -85,15 +97,21 @@ def main():
             expected_cases = {family+'.'+case for case in required[family]}
             if native['outcome'] != 'pass' or len(native['cases']) != len(expected_cases) or {case['case'] for case in native['cases']} != expected_cases or any(case['outcome'] != 'pass' for case in native['cases']):
                 raise ValueError('native case missing or failed; preserve original report')
-            if family == 'RECOVERY-01':
-                if native['executable_sha256'] != sha(build/('SysPane.RecoveryProbe'+suffix)):
-                    raise ValueError('recovery probe changed after native run')
+            if family in ('RECOVERY-01', 'DIAG-01'):
+                executable = 'SysPane.RecoveryProbe'+suffix if family == 'RECOVERY-01' else ('SysPane.Diag.exe' if suffix else 'syspane-diag')
+                if native['executable_sha256'] != sha(build/executable):
+                    raise ValueError('native executable changed after run')
                 for source, digest in native['source_inputs'].items():
                     if sha(ROOT/source) != digest:
                         raise ValueError('recovery input changed after native run: '+source)
-                for case in native['cases']:
-                    if not case['child_observations'] or not all(c['observed_alive'] and c['observed_exited'] for c in case['child_observations']):
-                        raise ValueError('native child observation missing')
+                if family == 'RECOVERY-01':
+                    for case in native['cases']:
+                        if not case['child_observations'] or not all(c['observed_alive'] and c['observed_exited'] for c in case['child_observations']):
+                            raise ValueError('native child observation missing')
+                else:
+                    close = next(case for case in native['cases'] if case['case'] == 'DIAG-01.NATIVE-CLOSE')
+                    if native['profile'] != args.profile or not close['pid_verified'] or not close['title_verified'] or not close['class_verified'] or close['exit'] != 0:
+                        raise ValueError('diagnostic native close identity/exit evidence missing')
             destination = args.output.with_suffix('.'+family+'.json')
             destination.parent.mkdir(parents=True, exist_ok=True)
             destination.write_bytes(path.read_bytes())
@@ -102,7 +120,8 @@ def main():
         if seen != set(required):
             raise ValueError('required native family has no bound report in this CTest log')
         inspector = 'objdump' if suffix else 'readelf'
-        command = [inspector, '-p' if suffix else '-d', str(build/(('SysPane.RecoveryProbe' if args.supervision else 'SysPane.IpcProbe')+suffix))]
+        executable = ('SysPane.Diag.exe' if suffix else 'syspane-diag') if args.diagnostic else (('SysPane.RecoveryProbe' if args.supervision else 'SysPane.IpcProbe')+suffix)
+        command = [inspector, '-p' if suffix else '-d', str(build/executable)]
         inspected = subprocess.check_output(command, text=True, encoding='utf-8')
         imports = re.findall(r'DLL Name:\s*(\S+)', inspected) if suffix else re.findall(r'\(NEEDED\).*?\[([^]]+)\]', inspected)
         if not imports:
@@ -161,6 +180,17 @@ def main():
             'No full snapshot/delta, diagnostic entry/inspector, native editor exit or policy-driven payload erasure is implemented by this boundary.',
             'W-25 and the full campaign remain incomplete. Historical/Mac and cross-user/logon qualification remain pending or blocked.',
             'No privileged operation, public release or human review is attested.'
+        ]
+    if args.diagnostic:
+        report['slice'] = 'independent read-only diagnostic entry, native inspector and protected-policy reader'
+        report['bindings']['diagnostic_cases'] = 'tests/fault/diagnostic_tests.cpp'
+        report['bindings']['native_diagnostic_cases'] = 'tests/fault/native_diagnostic.py'
+        report['limits'] = [
+            'Only public built-in profile/build metadata is read; recent-failure metadata, preservation and recovery controls remain pending.',
+            'Native window-close checks are hidden; no visible pixels, accessibility qualification, editor-exit recovery or desktop host is attested.',
+            'Installed protected machine policy was not created or changed; positive provenance/revocation deployment needs a separately admitted administrative lab.',
+            'GTK dependency identities cover selected installed packages/runtime, not complete transitive redistribution or Wayland qualification.',
+            'W-25 and the campaign remain incomplete. No privileged operation, public release or human review is attested.'
         ]
     args.output.parent.mkdir(parents=True, exist_ok=True)
     log_output.write_text(raw.replace(str(build), '<build>').replace(str(ROOT), '<source>'), encoding='utf-8', newline='\n')

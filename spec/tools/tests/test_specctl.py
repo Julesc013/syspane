@@ -204,6 +204,15 @@ class BundleTests(unittest.TestCase):
         self.assertTrue(any('wrong type' in e for e in s.validate_settings(self.root)))
     def test_boolean_is_not_integer_setting(self):
         self.assertTrue(s.setting_value_errors(True, {'type':'integer','minimum':1,'maximum':32}))
+    def test_mathematical_integer_setting_matches_json_schema(self):
+        rule = {'type':'integer','minimum':1,'maximum':32}
+        self.assertEqual(s.setting_value_errors(1.0, rule), [])
+        for invalid in (1.5, float('inf'), float('nan'), 33.0):
+            self.assertTrue(s.setting_value_errors(invalid, rule))
+    def test_duplicate_policy_projection_rejected(self):
+        value = s.read_json(self.root/'fixtures/valid/policy.json')
+        value['disclosure'].append(dict(value['disclosure'][0], allow_classifications=[]))
+        self.assertIn('duplicate policy role/channel rule', s.semantic_errors(value, 'policy', self.root))
     def test_setting_default_outside_bounds_rejected(self):
         value=s.read_json(self.root/'experience/settings-registry.json')
         value['settings'][0]['default']=1

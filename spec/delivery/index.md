@@ -7,6 +7,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [October audit disposition](audit-2026-10-04.md) — Map supplied recommendations to amended owners without treating review text as authority.
 - [Foundation and native-experiment campaign admission](campaign-admission.md) — Record the user-admitted implementation scope and the first package's closed boundaries.
 - [Current state and next admitted boundary](current-state.md) — An honest resumption point for the initial greenfield specification.
+- [Independent diagnostic implementation checkpoint](diagnostic-handoff.md) — Bind independent public reporting and native inspector startup to scoped Windows/Linux evidence.
 - [Foundation implementation handoff](foundation-handoff.md) — Resume the admitted campaign from tested model builds and local smoke packages.
 - [Implementation readiness and gates](implementation-readiness.md) — Distinguish implemented specification checks from pending native and release work.
 - [Native local IPC implementation handoff](native-transport-handoff.md) — Bind W-24's Windows and Linux adapter gate to real process and stream evidence.

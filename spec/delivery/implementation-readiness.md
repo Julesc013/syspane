@@ -12,7 +12,7 @@ sp_requires: ["SP-CURRENT"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-AUDIT-2026-10-04", "resource": "User-supplied October 2026 audit inputs", "title": "October review inputs"}]
-updated: {"by": "codex", "at": "2026-10-06T02:15:05+11:00", "scope": "Native W-25 owned-child supervision checkpoint; diagnostic and visible recovery remain pending"}
+updated: {"by": "codex", "at": "2026-10-06T02:42:44+11:00", "scope": "Independent diagnostic entry checkpoint; incomplete W-25 gates retained"}
 ---
 
 # Implementation readiness and gates
@@ -25,7 +25,7 @@ new versioned schemas or explicit work-scope refinement.
 | Gate | Present as specification/checks | Pending implementation/evidence |
 |---|---|---|
 | Initial authoring | Setting descriptors, scene/binding/layout 0.2, frame/handshake/preview checks over real local IPC | Runtime merge/resolution, migration, persistence and native controls |
-| Recovery/security | Lease/render/restart guards, native owned-child fault supervision, policy checks and native user/session/peer identity evidence | Independent diagnostics, actual telemetry/renderer recovery, cross-user/logon qualification, data-path revocation and measured budgets |
+| Recovery/security | Lease/render/restart guards, native owned-child fault supervision, independent public diagnostics/native inspector, policy checks and native peer identity evidence | Diagnostic preservation, protected-policy deployment, actual telemetry/renderer recovery, cross-user/logon qualification, data-path revocation and measured budgets |
 | Native profiles | Windows/Linux model, protocol and native IPC build profiles, component ownership and executable checks | External desktop oracle, native recovery, desktop builds and target qualification |
 | Content/SDK | Preset/package/extension metadata and buffer-result sketch | Bounded importer, dependency closure, extended theme/AST, installed SDK/ABI consumers |
 | Saver | Role/lifecycle/privacy/ownership contracts | Native host adapters and preview/fullscreen/configuration qualification |
@@ -57,7 +57,9 @@ now adds real Windows/Linux stream cases and records blocked cross-user/logon qu
 The [recovery checkpoint](recovery-handoff.md) adds eleven portable W-25 cases;
 its native process/diagnostic/visible-recovery gates were still open at that point.
 The later [supervision checkpoint](supervision-handoff.md) executes nine native
-child/health/render-worker fault cases. Diagnostic entry and visible recovery remain open.
+child/health/render-worker fault cases. The [diagnostic checkpoint](diagnostic-handoff.md)
+adds independent reporting and native inspector startup/close checks. Preservation,
+positive protected-policy deployment and visible/editor recovery remain open.
 
 W-24 implements native peer authentication, bounded I/O and real client/server
 integration under its [package](packages/w-24-transport.md). The initial preview

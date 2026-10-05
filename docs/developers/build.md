@@ -82,7 +82,7 @@ family with `ctest --preset windows-x64-gcc15 -R '^native.RECOVERY-01$' --output
 It takes approximately 35 seconds; the full suite takes approximately 65 seconds.
 The Linux wrapper uses the same test family in its owned build root.
 
-Current records are `build-support/evidence/w-25-supervision-<profile>.json`.
+Supervision checkpoint records are `build-support/evidence/w-25-supervision-<profile>.json`.
 Use the recorder's `--supervision` option to require the complete 49-entry run and
 its nine native recovery cases. Per-attempt reports remain in `native-evidence/`;
 the recorder binds the exact files named by CTest, checks the probe/source digests
@@ -91,9 +91,36 @@ in private case directories below `~/.cache/syspane/recovery-w25/`; cleanup neve
 recursively deletes a tree. The parent-loss case removes only its owned socket.
 
 See the [native supervision handoff](../../spec/delivery/supervision-handoff.md).
-The diagnostic executable/inspector, telemetry and actual renderer recovery,
-current-policy data erasure and independent desktop/native-exit evidence remain
-required. The health feature does not enable snapshot/delta or stored commands.
+Telemetry and actual renderer recovery, current-policy data erasure and independent
+desktop/native-editor-exit evidence remain required. The health feature does not
+enable snapshot/delta or stored commands.
+
+Profile revision 6 adds `SysPane.Diag.exe` / `syspane-diag`, a separate native
+diagnostic composition, for 52 CTest entries. `--report` writes public JSON;
+no arguments or `--inspect` opens standard Win32/GTK controls. The native harness
+copies the executable to an owned unrelated directory, adds damaged optional files,
+checks policy-override rejection and closes only its own hidden native window.
+Linux also checks reporting without DISPLAY/WAYLAND_DISPLAY. Hidden-window tests
+do not qualify visible desktop behavior or full accessibility. Run this boundary
+with `ctest --preset windows-x64-gcc15 -R 'diagnostic|DIAG-01' --output-on-failure`.
+
+Linux configure verifies GTK 3.24.41 and the installed package/runtime identities
+in `build-support/check_diagnostic_dependencies.py`. It installs nothing. GTK is
+dynamically linked; the report skips toolkit initialization but still needs its
+installed loader dependencies. The measured native close test uses owned authenticated Xvfb/X11;
+Wayland and full transitive packaging remain unqualified.
+
+The policy reader has fixed protected system locations and no path/environment
+override. Tests do not write HKLM or `/etc`. Positive protected-policy deployment
+and native revocation qualification need an admitted administrative lab. Portable
+fixtures test parsing/projection semantics, not policy provenance. Diagnostic
+preservation, recent-failure metadata and recovery actions remain pending.
+
+Current records are `build-support/evidence/w-25-diagnostic-<profile>.json`.
+`record_protocol.py --diagnostic --profile <profile> --build-dir <build> --output
+<record>` requires the exact 52-entry suite and its IPC, supervision and diagnostic
+reports, checking source and executable identity. See the
+[diagnostic handoff](../../spec/delivery/diagnostic-handoff.md).
 
 Specification tooling separately uses Python 3.11+ in an isolated environment:
 

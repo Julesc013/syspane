@@ -296,3 +296,115 @@ Native lifetime references: [CreateProcessW](https://learn.microsoft.com/en-us/w
 [spawn](https://man7.org/linux/man-pages/man3/posix_spawn.3.html) and
 [parent-death signal](https://man7.org/linux/man-pages/man2/PR_SET_PDEATHSIG.2const.html).
 These establish API semantics; measured SysPane cases establish implementation evidence.
+
+## Initial independent diagnostic entry closure
+
+This increment owns `SysPane.Diag.exe` / `syspane-diag`, built-in public build/profile
+facts and a conservative Win32/GTK 3 inspector. It opens no scene, theme, history,
+provider, user configuration or controller endpoint. It has no child/process-control,
+network, renderer, recovery reset, file preservation or clipboard interface yet.
+Recent-failure metadata and explicit preservation of damaged configuration remain
+required follow-up boundaries; absence of those features keeps W-25 in progress.
+The native toolkit is a declared dependency, not the application's custom renderer.
+
+No arguments or `--inspect` opens the inspector. `--report` emits one UTF-8 JSON
+object and LF, with exact fields `schema_version: "0.1.0"`, `product: "SysPane"`,
+`component: "diagnostic"`, `build_version: "0.0.1"`, `profile` (compiled profile ID),
+`policy_state` (`available` or `unavailable`) and `recovery_controls: "not_implemented"`.
+No user/machine identity, path, raw policy or arbitrary failure text is exported.
+`--help` emits fixed usage; every other argument combination exits 64. Exit 0 means
+normal completion, 69 unavailable native UI, 70 internal failure, and 77 denied
+report disclosure. Errors use fixed ASCII codes on stderr, never untrusted content.
+`--inspect-hidden` creates the same native controls without mapping/showing the
+window, for owned-window verification only; a 20-second watchdog exits 70 if the
+external test does not close it. This is not visible-desktop qualification.
+
+### Policy document and provenance
+
+`decode_policy` accepts at most 65,536 UTF-8 bytes, including whitespace. It strips
+only surrounding JSON whitespace before using the existing strict parser (depth 32,
+16,384 nodes, duplicate-key rejection and no BOM). It enforces policy 0.1 schema
+and semantic rules: uint64 revision, unique setting paths/capabilities/role-channel
+pairs/classifications, known settings with registry types/ranges, and bounded
+extension names/count. Integer settings accept mathematical JSON integers such as
+`1.0`, consistently with the command boundary and JSON Schema; fractions and bools
+are not integers. Unknown extension contents are bounded but ignored. Unknown
+capability identifiers remain meaningful future denials; unknown settings fail.
+Parsing returns `available=false`: document contents cannot authenticate provenance.
+Only the protected native source marks a completely validated snapshot available.
+
+Windows reads only the 64-bit HKLM `SOFTWARE\Policies\SysPane` key, `PolicyJson`
+REG_BINARY. Open each path component without following registry links, retain the
+handles and check owner/DACL before and after the bounded value read. This initial
+adapter accepts only SYSTEM or built-in Administrators ownership and grants of
+mutation rights; other owners/unsupported ACE forms fail closed. Ignore inherit-only
+ACEs for the current key; deny ACEs cannot grant access. Effective allow ACEs granting
+set/create/link/delete/DACL/owner/generic-write/all rights to another SID make the
+source unavailable. A null/absent DACL or registry link is unavailable. This narrow
+adapter does not yet qualify additional enterprise policy owners or ACL forms.
+
+Linux opens `/`, `etc`, `syspane`, then `policy.json` relative to retained directory
+descriptors, with no symlink following. Each component must be root-owned and not
+group/world writable; the leaf must be a single-link regular file, at most 65,536
+bytes. Nonblocking open prevents a substituted FIFO from blocking the diagnostic.
+Recheck file identity, size and modification/change times after the bounded read;
+detectable concurrent change makes it unavailable. Administrators are trusted policy
+writers on both platforms; no hostile-admin or kernel-I/O-latency guarantee follows.
+
+Missing, unreadable, malformed, unsupported or untrusted mandatory policy yields an
+unavailable snapshot and permits only existing public fallback projections. There is
+no environment, CLI, current-directory, user-registry or user-file policy override.
+The adapter performs no installation, elevation or policy write. Positive native
+protected-policy deployment needs a separately admitted lab; portable document and
+projection fixtures do not prove native provenance.
+
+### Projection and inspector lifetime
+
+The diagnostic composition grants itself only the local diagnostic role; it does
+not grant remote peers this role. Report output requires the current public/export
+decision. Inspector content requires both public/inspector and public/accessibility
+decisions, since native control text is also an accessibility projection. Denial
+replaces all metadata with a fixed restriction notice and leaves Close usable.
+Native labels are not selectable and no copy/export button bypasses channel policy.
+The inspector reloads policy before initial presentation and every 1,000 ms while
+runnable; on the first poll observing revocation it replaces prior metadata. Poll
+latency is explicit, not an instantaneous revocation guarantee. The CLI takes one
+snapshot immediately before output and retains no data afterwards. No nonpublic
+data is ever read or cached by this increment. Previously exported output is not
+revocable. Escape, Close and the native window-close event exit without the controller.
+
+### Fixed acceptance for this increment
+
+| ID | Required observable result |
+|---|---|
+| DIAG-POLICY | Valid schema fixtures decode without granting provenance; duplicate keys/settings/rules, bad roles/classes/types/ranges/revisions, BOM, excess depth/nodes/size and unknown core fields fail. |
+| DIAG-PROJECTION | Unavailable policy permits only public metadata; current export denial yields no report; inspector or accessibility denial removes all profile text; a replacement permitted snapshot restores it. |
+| DIAG-01.REPORT | A copied diagnostic executable emits the exact report from an unrelated owned working directory without other SysPane binaries or configuration. |
+| DIAG-01.DAMAGED | Malformed optional scenes/themes/history/policy lookalikes in that directory and forged environment policy variables do not alter the report or grant authority; file bytes remain unchanged. |
+| DIAG-01.ARGUMENTS | Unknown, extra and policy-override arguments exit 64 without JSON output. |
+| DIAG-01.NATIVE-CLOSE | An external harness finds only its child's hidden native window, verifies its PID/class/title, sends its native close event and observes exit 0 within five seconds. No pixels or unrelated windows are captured. |
+| DIAG-01.NO-DISPLAY | Linux report works with DISPLAY/WAYLAND_DISPLAY unset; native inspector fails with 69 rather than hanging. Windows records this display-server case as not applicable. |
+
+The native report records source/executable/profile identities and original failures.
+No installed protected policy is created or changed by tests. If existing policy
+denies the required report, record the lab limitation rather than overriding it.
+GTK is pinned to the installed development package/runtime identity. Ordinary
+configure/build/CTest commands remain the runner; native UI checks are isolated
+from the outstanding W-02 external visibility/native-editor-recovery oracle.
+
+Linux hidden-control checks use an owned Xvfb 21.1.12 server with a private random
+MIT-MAGIC-COOKIE-1 credential, no TCP listener and no pixel capture. The test chooses
+a random high display (30,000..49,999), refuses existing lock/socket paths and enables
+only the Linux abstract local transport. This avoids the WSLg-owned filesystem socket
+directory without changing it. It waits at most five seconds for the listening socket,
+verifies its SO_PEERCRED PID against the retained server process and always stops
+that process. Bind collisions fail without replacing an endpoint. An isolated observer has a six-second
+hard bound around potentially blocking Xlib calls, while window discovery and
+post-close exit retain their five-second bounds. The existing WSLg server is not
+restarted or modified. A WSLg connection-opening timeout is preserved as a laboratory
+failure; Xvfb success qualifies only this hidden native-control boundary.
+
+API references: [registry opening](https://learn.microsoft.com/en-us/windows/win32/api/winreg/nf-winreg-regopenkeyexw),
+[key security](https://learn.microsoft.com/en-us/windows/win32/api/winreg/nf-winreg-reggetkeysecurity),
+[registry access rights](https://learn.microsoft.com/en-us/windows/win32/sysinfo/registry-key-security-and-access-rights)
+and [GTK display initialization](https://docs.gtk.org/gtk3/func.init_check.html).

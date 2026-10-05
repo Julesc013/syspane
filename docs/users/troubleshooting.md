@@ -1,8 +1,18 @@
 # Troubleshooting and recovery design
 
-No diagnostic executable is shipped yet. The planned independent diagnostic
-entry must start without the main controller, custom scenes/themes, third-party
-providers, GPU initialization, persistent history or the setup provider.
+Development builds now contain `SysPane.Diag.exe` (Windows) or `syspane-diag`
+(Linux). Run it without arguments for a native inspector, or with `--report` for
+a small JSON report of the compiled build/profile and policy availability. It starts
+without the main controller, scenes/themes, providers, custom renderer, persistent
+history or setup provider. No downloadable product release is available yet.
+
+The current inspector has Close and Escape; it reads no application configuration
+and offers no repair, reset, preservation or support-bundle action yet. Missing or
+unusable mandatory policy permits public diagnostic facts only. Available policy
+can restrict report or inspector disclosure. The Linux report works without a
+display server; the native inspector needs the development profile's GTK/display.
+
+The following product recovery behavior remains under implementation:
 
 | Condition | Intended response |
 |---|---|
