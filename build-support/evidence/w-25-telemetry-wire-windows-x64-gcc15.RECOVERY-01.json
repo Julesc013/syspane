@@ -1,0 +1,1194 @@
+{
+  "family": "RECOVERY-01",
+  "outcome": "pass",
+  "started_at": "2026-10-05T20:17:29.981528+00:00",
+  "executable_sha256": "6101cba806cd0379951c938ca0d11c58cdc4c25f1e0382a6e833b6baeafb164d",
+  "cases": [
+    {
+      "case": "RECOVERY-01.CHILD-GRACEFUL",
+      "outcome": "pass",
+      "command": [
+        "D:\\Projects\\SysPane\\syspane\\out\\build\\windows-x64-gcc15\\SysPane.RecoveryProbe.exe",
+        "supervisor",
+        "\\\\.\\pipe\\SysPane.Dev.e34820dcafc84a788576771e0cada2f5",
+        "graceful",
+        "D:\\Projects\\SysPane\\syspane\\out\\build\\windows-x64-gcc15\\native-evidence\\failure-CHILD-GRACEFUL-e68e1b6fd1b6.jsonl"
+      ],
+      "child_observations": [
+        {
+          "pid": 34536,
+          "observed_alive": true,
+          "observed_exited": true
+        }
+      ],
+      "failure_metadata": {
+        "record": "failure-CHILD-GRACEFUL-e68e1b6fd1b6.jsonl",
+        "sha256": "b7adc6ab9e3e2c4848cffe57e8234e153351d8b47a7273f3f0f1109b4ab5d532",
+        "text": "SYSPANE-FAILURES 0.1\n"
+      },
+      "process": {
+        "pid": 36924,
+        "exit_code": 0,
+        "events": [
+          {
+            "endpoint_controls": true,
+            "event": "ready",
+            "observed_ms": 221991370,
+            "unprivileged": true
+          },
+          {
+            "event": "failure_recording",
+            "observed_ms": 221991418,
+            "ready": true
+          },
+          {
+            "attempt": 0,
+            "event": "spawned",
+            "observed_ms": 221991421,
+            "pid": 34536,
+            "role": "desktop"
+          },
+          {
+            "epoch": "supervisor:36924:0",
+            "event": "authenticated",
+            "observed_ms": 221991682,
+            "peer_pid": 34536,
+            "pid": 34536,
+            "role": "desktop"
+          },
+          {
+            "event": "challenge",
+            "generation": 1,
+            "observed_ms": 221991682,
+            "pid": 34536
+          },
+          {
+            "event": "heartbeat",
+            "observed_ms": 221991682,
+            "pid": 34536,
+            "sequence": 0
+          },
+          {
+            "event": "progress",
+            "generation": 1,
+            "observed_ms": 221991790,
+            "pid": 34536
+          },
+          {
+            "event": "challenge",
+            "generation": 2,
+            "observed_ms": 221992766,
+            "pid": 34536
+          },
+          {
+            "event": "heartbeat",
+            "observed_ms": 221992766,
+            "pid": 34536,
+            "sequence": 1
+          },
+          {
+            "event": "progress",
+            "generation": 2,
+            "observed_ms": 221992874,
+            "pid": 34536
+          },
+          {
+            "event": "challenge",
+            "generation": 3,
+            "observed_ms": 221993852,
+            "pid": 34536
+          },
+          {
+            "event": "heartbeat",
+            "observed_ms": 221993852,
+            "pid": 34536,
+            "sequence": 2
+          },
+          {
+            "code": 0,
+            "event": "stopped",
+            "forced": false,
+            "observed_ms": 221993867,
+            "os_confirmed": true,
+            "pid": 34536,
+            "signaled": false
+          },
+          {
+            "completions": 2,
+            "event": "complete",
+            "heartbeats": 3,
+            "launches": 1,
+            "observed_ms": 221993867
+          }
+        ]
+      },
+      "elapsed_seconds": 2.603
+    },
+    {
+      "case": "RECOVERY-01.PRODUCER-HANG",
+      "outcome": "pass",
+      "command": [
+        "D:\\Projects\\SysPane\\syspane\\out\\build\\windows-x64-gcc15\\SysPane.RecoveryProbe.exe",
+        "supervisor",
+        "\\\\.\\pipe\\SysPane.Dev.14ce221f722f4682a05673f35efa7973",
+        "producer-hang",
+        "D:\\Projects\\SysPane\\syspane\\out\\build\\windows-x64-gcc15\\native-evidence\\failure-PRODUCER-HANG-f05ec1b9d16b.jsonl"
+      ],
+      "child_observations": [
+        {
+          "pid": 39444,
+          "observed_alive": true,
+          "observed_exited": true
+        },
+        {
+          "pid": 34412,
+          "observed_alive": true,
+          "observed_exited": true
+        }
+      ],
+      "failure_metadata": {
+        "record": "failure-PRODUCER-HANG-f05ec1b9d16b.jsonl",
+        "sha256": "492970a74f7ce708a036a8366277363111939c734639d05d95146df5cdc49928",
+        "text": "SYSPANE-FAILURES 0.1\n{\"elapsed_ms\":\"4422\",\"reason\":\"producer_expired\",\"role\":\"collector\",\"sequence\":\"1\",\"stop_confirmed\":false}\n"
+      },
+      "process": {
+        "pid": 38852,
+        "exit_code": 0,
+        "events": [
+          {
+            "endpoint_controls": true,
+            "event": "ready",
+            "observed_ms": 221993957,
+            "unprivileged": true
+          },
+          {
+            "event": "failure_recording",
+            "observed_ms": 221993993,
+            "ready": true
+          },
+          {
+            "attempt": 0,
+            "event": "spawned",
+            "observed_ms": 221993996,
+            "pid": 39444,
+            "role": "collector"
+          },
+          {
+            "epoch": "supervisor:38852:0",
+            "event": "authenticated",
+            "observed_ms": 221994255,
+            "peer_pid": 39444,
+            "pid": 39444,
+            "role": "collector"
+          },
+          {
+            "event": "heartbeat",
+            "observed_ms": 221994255,
+            "pid": 39444,
+            "sequence": 0
+          },
+          {
+            "event": "heartbeat",
+            "observed_ms": 221995340,
+            "pid": 39444,
+            "sequence": 1
+          },
+          {
+            "alive": true,
+            "backoff_ms": 1000,
+            "completions": 0,
+            "event": "fault",
+            "heartbeats": 2,
+            "observed_ms": 221998379,
+            "pid": 39444,
+            "reason": "producer.expired",
+            "since_challenge_ms": 0,
+            "since_heartbeat_ms": 3039
+          },
+          {
+            "code": 137,
+            "event": "stopped",
+            "forced": true,
+            "observed_ms": 221998658,
+            "os_confirmed": true,
+            "pid": 39444,
+            "signaled": false
+          },
+          {
+            "event": "failure_recorded",
+            "observed_ms": 221998694,
+            "stored": true
+          },
+          {
+            "attempt": 1,
+            "event": "spawned",
+            "observed_ms": 221999391,
+            "pid": 34412,
+            "role": "collector"
+          },
+          {
+            "epoch": "supervisor:38852:1",
+            "event": "authenticated",
+            "observed_ms": 221999652,
+            "peer_pid": 34412,
+            "pid": 34412,
+            "role": "collector"
+          },
+          {
+            "event": "heartbeat",
+            "observed_ms": 221999652,
+            "pid": 34412,
+            "sequence": 0
+          },
+          {
+            "event": "heartbeat",
+            "observed_ms": 222000737,
+            "pid": 34412,
+            "sequence": 1
+          },
+          {
+            "event": "heartbeat",
+            "observed_ms": 222001822,
+            "pid": 34412,
+            "sequence": 2
+          },
+          {
+            "code": 0,
+            "event": "stopped",
+            "forced": false,
+            "observed_ms": 222001837,
+            "os_confirmed": true,
+            "pid": 34412,
+            "signaled": false
+          },
+          {
+            "completions": 0,
+            "event": "complete",
+            "heartbeats": 3,
+            "launches": 2,
+            "observed_ms": 222001837
+          }
+        ]
+      },
+      "elapsed_seconds": 7.966
+    },
+    {
+      "case": "RECOVERY-01.RENDER-STALL",
+      "outcome": "pass",
+      "command": [
+        "D:\\Projects\\SysPane\\syspane\\out\\build\\windows-x64-gcc15\\SysPane.RecoveryProbe.exe",
+        "supervisor",
+        "\\\\.\\pipe\\SysPane.Dev.f75d3057df8c4bf4bbd048b5dc208b75",
+        "render-stall",
+        "D:\\Projects\\SysPane\\syspane\\out\\build\\windows-x64-gcc15\\native-evidence\\failure-RENDER-STALL-ad7267217f90.jsonl"
+      ],
+      "child_observations": [
+        {
+          "pid": 37896,
+          "observed_alive": true,
+          "observed_exited": true
+        },
+        {
+          "pid": 23316,
+          "observed_alive": true,
+          "observed_exited": true
+        }
+      ],
+      "failure_metadata": {
+        "record": "failure-RENDER-STALL-ad7267217f90.jsonl",
+        "sha256": "1076092fe3354e1c0d18b5d062cb33c9c6512a3c50d9ad4c7617cb7985a37ab4",
+        "text": "SYSPANE-FAILURES 0.1\n{\"elapsed_ms\":\"3335\",\"reason\":\"render_stalled\",\"role\":\"desktop\",\"sequence\":\"1\",\"stop_confirmed\":false}\n"
+      },
+      "process": {
+        "pid": 15328,
+        "exit_code": 0,
+        "events": [
+          {
+            "endpoint_controls": true,
+            "event": "ready",
+            "observed_ms": 222001929,
+            "unprivileged": true
+          },
+          {
+            "event": "failure_recording",
+            "observed_ms": 222001969,
+            "ready": true
+          },
+          {
+            "attempt": 0,
+            "event": "spawned",
+            "observed_ms": 222001972,
+            "pid": 37896,
+            "role": "desktop"
+          },
+          {
+            "epoch": "supervisor:15328:0",
+            "event": "authenticated",
+            "observed_ms": 222002226,
+            "peer_pid": 37896,
+            "pid": 37896,
+            "role": "desktop"
+          },
+          {
+            "event": "challenge",
+            "generation": 1,
+            "observed_ms": 222002226,
+            "pid": 37896
+          },
+          {
+            "event": "heartbeat",
+            "observed_ms": 222002226,
+            "pid": 37896,
+            "sequence": 0
+          },
+          {
+            "event": "heartbeat",
+            "observed_ms": 222003311,
+            "pid": 37896,
+            "sequence": 1
+          },
+          {
+            "event": "heartbeat",
+            "observed_ms": 222004396,
+            "pid": 37896,
+            "sequence": 2
+          },
+          {
+            "alive": true,
+            "backoff_ms": 1000,
+            "completions": 0,
+            "event": "fault",
+            "heartbeats": 3,
+            "observed_ms": 222005264,
+            "pid": 37896,
+            "reason": "render.stalled",
+            "since_challenge_ms": 3038,
+            "since_heartbeat_ms": 868
+          },
+          {
+            "code": 0,
+            "event": "stopped",
+            "forced": false,
+            "observed_ms": 222005280,
+            "os_confirmed": true,
+            "pid": 37896,
+            "signaled": false
+          },
+          {
+            "event": "failure_recorded",
+            "observed_ms": 222005319,
+            "stored": true
+          },
+          {
+            "attempt": 1,
+            "event": "spawned",
+            "observed_ms": 222006277,
+            "pid": 23316,
+            "role": "desktop"
+          },
+          {
+            "epoch": "supervisor:15328:1",
+            "event": "authenticated",
+            "observed_ms": 222006536,
+            "peer_pid": 23316,
+            "pid": 23316,
+            "role": "desktop"
+          },
+          {
+            "event": "challenge",
+            "generation": 1,
+            "observed_ms": 222006536,
+            "pid": 23316
+          },
+          {
+            "event": "heartbeat",
+            "observed_ms": 222006537,
+            "pid": 23316,
+            "sequence": 0
+          },
+          {
+            "event": "progress",
+            "generation": 1,
+            "observed_ms": 222006643,
+            "pid": 23316
+          },
+          {
+            "event": "challenge",
+            "generation": 2,
+            "observed_ms": 222007620,
+            "pid": 23316
+          },
+          {
+            "event": "heartbeat",
+            "observed_ms": 222007620,
+            "pid": 23316,
+            "sequence": 1
+          },
+          {
+            "event": "progress",
+            "generation": 2,
+            "observed_ms": 222007728,
+            "pid": 23316
+          },
+          {
+            "event": "challenge",
+            "generation": 3,
+            "observed_ms": 222008643,
+            "pid": 23316
+          },
+          {
+            "event": "heartbeat",
+            "observed_ms": 222008643,
+            "pid": 23316,
+            "sequence": 2
+          },
+          {
+            "code": 0,
+            "event": "stopped",
+            "forced": false,
+            "observed_ms": 222008658,
+            "os_confirmed": true,
+            "pid": 23316,
+            "signaled": false
+          },
+          {
+            "completions": 2,
+            "event": "complete",
+            "heartbeats": 3,
+            "launches": 2,
+            "observed_ms": 222008658
+          }
+        ]
+      },
+      "elapsed_seconds": 6.817
+    },
+    {
+      "case": "RECOVERY-01.CRASH-CIRCUIT",
+      "outcome": "pass",
+      "command": [
+        "D:\\Projects\\SysPane\\syspane\\out\\build\\windows-x64-gcc15\\SysPane.RecoveryProbe.exe",
+        "supervisor",
+        "\\\\.\\pipe\\SysPane.Dev.745fcf7e727148aeb7a7db333d301e5f",
+        "crash-circuit",
+        "D:\\Projects\\SysPane\\syspane\\out\\build\\windows-x64-gcc15\\native-evidence\\failure-CRASH-CIRCUIT-1b5b0acc93e8.jsonl"
+      ],
+      "child_observations": [
+        {
+          "pid": 38880,
+          "observed_alive": true,
+          "observed_exited": true
+        },
+        {
+          "pid": 27012,
+          "observed_alive": true,
+          "observed_exited": true
+        },
+        {
+          "pid": 40440,
+          "observed_alive": true,
+          "observed_exited": true
+        },
+        {
+          "pid": 35364,
+          "observed_alive": true,
+          "observed_exited": true
+        }
+      ],
+      "failure_metadata": {
+        "record": "failure-CRASH-CIRCUIT-1b5b0acc93e8.jsonl",
+        "sha256": "798cfc0891c026a10377abe16b24bf5e698743942a33b546cb32b0201fd68645",
+        "text": "SYSPANE-FAILURES 0.1\n{\"elapsed_ms\":\"822\",\"reason\":\"crashed\",\"role\":\"collector\",\"sequence\":\"1\",\"stop_confirmed\":true}\n{\"elapsed_ms\":\"2622\",\"reason\":\"crashed\",\"role\":\"collector\",\"sequence\":\"2\",\"stop_confirmed\":true}\n{\"elapsed_ms\":\"5416\",\"reason\":\"crashed\",\"role\":\"collector\",\"sequence\":\"3\",\"stop_confirmed\":true}\n{\"elapsed_ms\":\"10222\",\"reason\":\"crashed\",\"role\":\"collector\",\"sequence\":\"4\",\"stop_confirmed\":true}\n"
+      },
+      "process": {
+        "pid": 37820,
+        "exit_code": 0,
+        "events": [
+          {
+            "endpoint_controls": true,
+            "event": "ready",
+            "observed_ms": 222008750,
+            "unprivileged": true
+          },
+          {
+            "event": "failure_recording",
+            "observed_ms": 222008787,
+            "ready": true
+          },
+          {
+            "attempt": 0,
+            "event": "spawned",
+            "observed_ms": 222008790,
+            "pid": 38880,
+            "role": "collector"
+          },
+          {
+            "epoch": "supervisor:37820:0",
+            "event": "authenticated",
+            "observed_ms": 222009046,
+            "peer_pid": 38880,
+            "pid": 38880,
+            "role": "collector"
+          },
+          {
+            "alive": false,
+            "backoff_ms": 1000,
+            "completions": 0,
+            "event": "fault",
+            "heartbeats": 0,
+            "observed_ms": 222009572,
+            "pid": 38880,
+            "reason": "health.eof",
+            "since_challenge_ms": 0,
+            "since_heartbeat_ms": 526
+          },
+          {
+            "code": 73,
+            "event": "stopped",
+            "forced": false,
+            "observed_ms": 222009572,
+            "os_confirmed": true,
+            "pid": 38880,
+            "signaled": false
+          },
+          {
+            "event": "failure_recorded",
+            "observed_ms": 222009612,
+            "stored": true
+          },
+          {
+            "attempt": 1,
+            "event": "spawned",
+            "observed_ms": 222010583,
+            "pid": 27012,
+            "role": "collector"
+          },
+          {
+            "epoch": "supervisor:37820:1",
+            "event": "authenticated",
+            "observed_ms": 222010846,
+            "peer_pid": 27012,
+            "pid": 27012,
+            "role": "collector"
+          },
+          {
+            "alive": false,
+            "backoff_ms": 2000,
+            "completions": 0,
+            "event": "fault",
+            "heartbeats": 0,
+            "observed_ms": 222011372,
+            "pid": 27012,
+            "reason": "health.eof",
+            "since_challenge_ms": 0,
+            "since_heartbeat_ms": 527
+          },
+          {
+            "code": 73,
+            "event": "stopped",
+            "forced": false,
+            "observed_ms": 222011372,
+            "os_confirmed": true,
+            "pid": 27012,
+            "signaled": false
+          },
+          {
+            "event": "failure_recorded",
+            "observed_ms": 222011412,
+            "stored": true
+          },
+          {
+            "attempt": 2,
+            "event": "spawned",
+            "observed_ms": 222013376,
+            "pid": 40440,
+            "role": "collector"
+          },
+          {
+            "epoch": "supervisor:37820:2",
+            "event": "authenticated",
+            "observed_ms": 222013639,
+            "peer_pid": 40440,
+            "pid": 40440,
+            "role": "collector"
+          },
+          {
+            "alive": false,
+            "backoff_ms": 4000,
+            "completions": 0,
+            "event": "fault",
+            "heartbeats": 0,
+            "observed_ms": 222014166,
+            "pid": 40440,
+            "reason": "health.eof",
+            "since_challenge_ms": 0,
+            "since_heartbeat_ms": 528
+          },
+          {
+            "code": 73,
+            "event": "stopped",
+            "forced": false,
+            "observed_ms": 222014166,
+            "os_confirmed": true,
+            "pid": 40440,
+            "signaled": false
+          },
+          {
+            "event": "failure_recorded",
+            "observed_ms": 222014204,
+            "stored": true
+          },
+          {
+            "attempt": 3,
+            "event": "spawned",
+            "observed_ms": 222018168,
+            "pid": 35364,
+            "role": "collector"
+          },
+          {
+            "epoch": "supervisor:37820:3",
+            "event": "authenticated",
+            "observed_ms": 222018430,
+            "peer_pid": 35364,
+            "pid": 35364,
+            "role": "collector"
+          },
+          {
+            "alive": false,
+            "backoff_ms": 4000,
+            "completions": 0,
+            "event": "fault",
+            "heartbeats": 0,
+            "observed_ms": 222018972,
+            "pid": 35364,
+            "reason": "health.eof",
+            "since_challenge_ms": 0,
+            "since_heartbeat_ms": 542
+          },
+          {
+            "code": 73,
+            "event": "stopped",
+            "forced": false,
+            "observed_ms": 222018972,
+            "os_confirmed": true,
+            "pid": 35364,
+            "signaled": false
+          },
+          {
+            "event": "failure_recorded",
+            "observed_ms": 222019013,
+            "stored": true
+          },
+          {
+            "event": "circuit_open",
+            "launches": 4,
+            "observed_ms": 222019515,
+            "observed_ms_after_open": 502
+          }
+        ]
+      },
+      "elapsed_seconds": 10.853
+    },
+    {
+      "case": "RECOVERY-01.QUARANTINE",
+      "outcome": "pass",
+      "command": [
+        "D:\\Projects\\SysPane\\syspane\\out\\build\\windows-x64-gcc15\\SysPane.RecoveryProbe.exe",
+        "supervisor",
+        "\\\\.\\pipe\\SysPane.Dev.3a9b7e5f88b84fe1a7200eaac7d24897",
+        "quarantine",
+        "D:\\Projects\\SysPane\\syspane\\out\\build\\windows-x64-gcc15\\native-evidence\\failure-QUARANTINE-4d8b197df1db.jsonl"
+      ],
+      "child_observations": [
+        {
+          "pid": 37828,
+          "observed_alive": true,
+          "observed_exited": true
+        },
+        {
+          "pid": 40096,
+          "observed_alive": true,
+          "observed_exited": true
+        }
+      ],
+      "failure_metadata": {
+        "record": "failure-QUARANTINE-4d8b197df1db.jsonl",
+        "sha256": "f2b8ebcaeed8eb55229075652124c33bd4d73f76ba4b61b55521f672804da443",
+        "text": "SYSPANE-FAILURES 0.1\n{\"elapsed_ms\":\"1413\",\"reason\":\"operation_timeout\",\"role\":\"collector\",\"sequence\":\"1\",\"stop_confirmed\":false}\n"
+      },
+      "process": {
+        "pid": 38536,
+        "exit_code": 0,
+        "events": [
+          {
+            "endpoint_controls": true,
+            "event": "ready",
+            "observed_ms": 222019606,
+            "unprivileged": true
+          },
+          {
+            "event": "failure_recording",
+            "observed_ms": 222019671,
+            "ready": true
+          },
+          {
+            "attempt": 0,
+            "event": "spawned",
+            "observed_ms": 222019675,
+            "pid": 37828,
+            "role": "collector"
+          },
+          {
+            "epoch": "supervisor:38536:0",
+            "event": "authenticated",
+            "observed_ms": 222019934,
+            "peer_pid": 37828,
+            "pid": 37828,
+            "role": "collector"
+          },
+          {
+            "event": "heartbeat",
+            "observed_ms": 222019935,
+            "pid": 37828,
+            "sequence": 0
+          },
+          {
+            "event": "heartbeat",
+            "observed_ms": 222021019,
+            "pid": 37828,
+            "sequence": 1
+          },
+          {
+            "alive": true,
+            "backoff_ms": 1000,
+            "completions": 0,
+            "event": "fault",
+            "heartbeats": 2,
+            "observed_ms": 222021019,
+            "pid": 37828,
+            "reason": "worker.unconfirmed",
+            "since_challenge_ms": 0,
+            "since_heartbeat_ms": 0
+          },
+          {
+            "child_alive": true,
+            "elapsed_ms": 263,
+            "event": "quarantined",
+            "observed_ms": 222021283,
+            "pid": 37828,
+            "reset_denied": true,
+            "start_denied": true
+          },
+          {
+            "code": 0,
+            "event": "stopped",
+            "forced": false,
+            "observed_ms": 222021299,
+            "os_confirmed": true,
+            "pid": 37828,
+            "signaled": false
+          },
+          {
+            "event": "failure_recorded",
+            "observed_ms": 222021338,
+            "stored": true
+          },
+          {
+            "attempt": 1,
+            "event": "spawned",
+            "observed_ms": 222022030,
+            "pid": 40096,
+            "role": "collector"
+          },
+          {
+            "epoch": "supervisor:38536:1",
+            "event": "authenticated",
+            "observed_ms": 222022291,
+            "peer_pid": 40096,
+            "pid": 40096,
+            "role": "collector"
+          },
+          {
+            "event": "heartbeat",
+            "observed_ms": 222022292,
+            "pid": 40096,
+            "sequence": 0
+          },
+          {
+            "event": "heartbeat",
+            "observed_ms": 222023376,
+            "pid": 40096,
+            "sequence": 1
+          },
+          {
+            "event": "heartbeat",
+            "observed_ms": 222024462,
+            "pid": 40096,
+            "sequence": 2
+          },
+          {
+            "code": 0,
+            "event": "stopped",
+            "forced": false,
+            "observed_ms": 222024477,
+            "os_confirmed": true,
+            "pid": 40096,
+            "signaled": false
+          },
+          {
+            "completions": 0,
+            "event": "complete",
+            "heartbeats": 3,
+            "launches": 2,
+            "observed_ms": 222024477
+          }
+        ]
+      },
+      "elapsed_seconds": 4.958
+    },
+    {
+      "case": "RECOVERY-01.PARENT-LOSS",
+      "outcome": "pass",
+      "command": [
+        "D:\\Projects\\SysPane\\syspane\\out\\build\\windows-x64-gcc15\\SysPane.RecoveryProbe.exe",
+        "supervisor",
+        "\\\\.\\pipe\\SysPane.Dev.f8d9044acc8a42b49faebac2bf695db1",
+        "parent-loss",
+        "D:\\Projects\\SysPane\\syspane\\out\\build\\windows-x64-gcc15\\native-evidence\\failure-PARENT-LOSS-e10de0b62a5f.jsonl"
+      ],
+      "child_observations": [
+        {
+          "pid": 40516,
+          "observed_alive": true,
+          "observed_exited": true
+        }
+      ],
+      "parent_loss_exit_ms": 4,
+      "failure_metadata": {
+        "record": "failure-PARENT-LOSS-e10de0b62a5f.jsonl",
+        "sha256": "b7adc6ab9e3e2c4848cffe57e8234e153351d8b47a7273f3f0f1109b4ab5d532",
+        "text": "SYSPANE-FAILURES 0.1\n"
+      },
+      "process": {
+        "pid": 35024,
+        "exit_code": 1,
+        "events": [
+          {
+            "endpoint_controls": true,
+            "event": "ready",
+            "observed_ms": 222024567,
+            "unprivileged": true
+          },
+          {
+            "event": "failure_recording",
+            "observed_ms": 222024605,
+            "ready": true
+          },
+          {
+            "attempt": 0,
+            "event": "spawned",
+            "observed_ms": 222024609,
+            "pid": 40516,
+            "role": "collector"
+          },
+          {
+            "epoch": "supervisor:35024:0",
+            "event": "authenticated",
+            "observed_ms": 222024865,
+            "peer_pid": 40516,
+            "pid": 40516,
+            "role": "collector"
+          }
+        ]
+      },
+      "elapsed_seconds": 0.326
+    },
+    {
+      "case": "RECOVERY-01.ROLE-DENIAL",
+      "outcome": "pass",
+      "command": [
+        "D:\\Projects\\SysPane\\syspane\\out\\build\\windows-x64-gcc15\\SysPane.RecoveryProbe.exe",
+        "supervisor",
+        "\\\\.\\pipe\\SysPane.Dev.ef1453c34653450fae778cc6e1d8a86a",
+        "role-denial",
+        "D:\\Projects\\SysPane\\syspane\\out\\build\\windows-x64-gcc15\\native-evidence\\failure-ROLE-DENIAL-fd041496f300.jsonl"
+      ],
+      "child_observations": [
+        {
+          "pid": 4540,
+          "observed_alive": true,
+          "observed_exited": true
+        }
+      ],
+      "failure_metadata": {
+        "record": "failure-ROLE-DENIAL-fd041496f300.jsonl",
+        "sha256": "949f7bc8df2384f8aa8a02024c6185e31297d3b3c2c244be7120f5064dcb240c",
+        "text": "SYSPANE-FAILURES 0.1\n{\"elapsed_ms\":\"308\",\"reason\":\"protocol_rejected\",\"role\":\"collector\",\"sequence\":\"1\",\"stop_confirmed\":false}\n"
+      },
+      "process": {
+        "pid": 37960,
+        "exit_code": 0,
+        "events": [
+          {
+            "endpoint_controls": true,
+            "event": "ready",
+            "observed_ms": 222024898,
+            "unprivileged": true
+          },
+          {
+            "event": "failure_recording",
+            "observed_ms": 222024939,
+            "ready": true
+          },
+          {
+            "attempt": 0,
+            "event": "spawned",
+            "observed_ms": 222024942,
+            "pid": 4540,
+            "role": "collector"
+          },
+          {
+            "alive": true,
+            "backoff_ms": 1000,
+            "completions": 0,
+            "event": "fault",
+            "heartbeats": 0,
+            "observed_ms": 222025206,
+            "pid": 4540,
+            "reason": "handshake.role_denied",
+            "since_challenge_ms": 0,
+            "since_heartbeat_ms": 222025206
+          },
+          {
+            "code": 137,
+            "event": "stopped",
+            "forced": true,
+            "observed_ms": 222025485,
+            "os_confirmed": true,
+            "pid": 4540,
+            "signaled": false
+          },
+          {
+            "event": "failure_recorded",
+            "observed_ms": 222025597,
+            "stored": true
+          },
+          {
+            "event": "rejected",
+            "heartbeats": 0,
+            "launches": 1,
+            "observed_ms": 222025597,
+            "reason": "handshake.role_denied"
+          }
+        ]
+      },
+      "elapsed_seconds": 0.783
+    },
+    {
+      "case": "RECOVERY-01.WRONG-EPOCH",
+      "outcome": "pass",
+      "command": [
+        "D:\\Projects\\SysPane\\syspane\\out\\build\\windows-x64-gcc15\\SysPane.RecoveryProbe.exe",
+        "supervisor",
+        "\\\\.\\pipe\\SysPane.Dev.4f6b3385bf4e4fad9e74c33e4d298565",
+        "wrong-epoch",
+        "D:\\Projects\\SysPane\\syspane\\out\\build\\windows-x64-gcc15\\native-evidence\\failure-WRONG-EPOCH-136382f9ba40.jsonl"
+      ],
+      "child_observations": [
+        {
+          "pid": 34668,
+          "observed_alive": true,
+          "observed_exited": true
+        }
+      ],
+      "failure_metadata": {
+        "record": "failure-WRONG-EPOCH-136382f9ba40.jsonl",
+        "sha256": "a8e156e50b714314388fa0f3a850616728ec77bb02d7e17f49a9b0f0bcb17d22",
+        "text": "SYSPANE-FAILURES 0.1\n{\"elapsed_ms\":\"298\",\"reason\":\"protocol_rejected\",\"role\":\"collector\",\"sequence\":\"1\",\"stop_confirmed\":false}\n"
+      },
+      "process": {
+        "pid": 34992,
+        "exit_code": 0,
+        "events": [
+          {
+            "endpoint_controls": true,
+            "event": "ready",
+            "observed_ms": 222025685,
+            "unprivileged": true
+          },
+          {
+            "event": "failure_recording",
+            "observed_ms": 222025722,
+            "ready": true
+          },
+          {
+            "attempt": 0,
+            "event": "spawned",
+            "observed_ms": 222025726,
+            "pid": 34668,
+            "role": "collector"
+          },
+          {
+            "epoch": "supervisor:34992:0",
+            "event": "authenticated",
+            "observed_ms": 222025982,
+            "peer_pid": 34668,
+            "pid": 34668,
+            "role": "collector"
+          },
+          {
+            "alive": true,
+            "backoff_ms": 1000,
+            "completions": 0,
+            "event": "fault",
+            "heartbeats": 0,
+            "observed_ms": 222025983,
+            "pid": 34668,
+            "reason": "health.identity",
+            "since_challenge_ms": 0,
+            "since_heartbeat_ms": 1
+          },
+          {
+            "code": 137,
+            "event": "stopped",
+            "forced": true,
+            "observed_ms": 222026261,
+            "os_confirmed": true,
+            "pid": 34668,
+            "signaled": false
+          },
+          {
+            "event": "failure_recorded",
+            "observed_ms": 222026381,
+            "stored": true
+          },
+          {
+            "event": "rejected",
+            "heartbeats": 0,
+            "launches": 1,
+            "observed_ms": 222026381,
+            "reason": "health.identity"
+          }
+        ]
+      },
+      "elapsed_seconds": 0.771
+    },
+    {
+      "case": "RECOVERY-01.PROGRESS-DENIAL",
+      "outcome": "pass",
+      "command": [
+        "D:\\Projects\\SysPane\\syspane\\out\\build\\windows-x64-gcc15\\SysPane.RecoveryProbe.exe",
+        "supervisor",
+        "\\\\.\\pipe\\SysPane.Dev.44993dc0767447369b87a34af89f6467",
+        "progress-denial",
+        "D:\\Projects\\SysPane\\syspane\\out\\build\\windows-x64-gcc15\\native-evidence\\failure-PROGRESS-DENIAL-a2b418e5559c.jsonl"
+      ],
+      "child_observations": [
+        {
+          "pid": 32016,
+          "observed_alive": true,
+          "observed_exited": true
+        }
+      ],
+      "failure_metadata": {
+        "record": "failure-PROGRESS-DENIAL-a2b418e5559c.jsonl",
+        "sha256": "62942b48fca329107e7016d3e20a6bbb04d20c7c3a5c440a697bd0b9d03cf527",
+        "text": "SYSPANE-FAILURES 0.1\n{\"elapsed_ms\":\"299\",\"reason\":\"protocol_rejected\",\"role\":\"desktop\",\"sequence\":\"1\",\"stop_confirmed\":false}\n"
+      },
+      "process": {
+        "pid": 40288,
+        "exit_code": 0,
+        "events": [
+          {
+            "endpoint_controls": true,
+            "event": "ready",
+            "observed_ms": 222026460,
+            "unprivileged": true
+          },
+          {
+            "event": "failure_recording",
+            "observed_ms": 222026497,
+            "ready": true
+          },
+          {
+            "attempt": 0,
+            "event": "spawned",
+            "observed_ms": 222026501,
+            "pid": 32016,
+            "role": "desktop"
+          },
+          {
+            "epoch": "supervisor:40288:0",
+            "event": "authenticated",
+            "observed_ms": 222026758,
+            "peer_pid": 32016,
+            "pid": 32016,
+            "role": "desktop"
+          },
+          {
+            "event": "challenge",
+            "generation": 1,
+            "observed_ms": 222026758,
+            "pid": 32016
+          },
+          {
+            "event": "heartbeat",
+            "observed_ms": 222026758,
+            "pid": 32016,
+            "sequence": 0
+          },
+          {
+            "alive": true,
+            "backoff_ms": 1000,
+            "completions": 0,
+            "event": "fault",
+            "heartbeats": 1,
+            "observed_ms": 222026759,
+            "pid": 32016,
+            "reason": "health.progress_order",
+            "since_challenge_ms": 1,
+            "since_heartbeat_ms": 1
+          },
+          {
+            "code": 137,
+            "event": "stopped",
+            "forced": true,
+            "observed_ms": 222027037,
+            "os_confirmed": true,
+            "pid": 32016,
+            "signaled": false
+          },
+          {
+            "event": "failure_recorded",
+            "observed_ms": 222027156,
+            "stored": true
+          },
+          {
+            "event": "rejected",
+            "heartbeats": 1,
+            "launches": 1,
+            "observed_ms": 222027156,
+            "reason": "health.progress_order"
+          }
+        ]
+      },
+      "elapsed_seconds": 0.772
+    }
+  ],
+  "qualification": "Native synthetic child/health supervision only; no pixels, diagnostic entry, policy erasure or desktop support.",
+  "source_inputs": {
+    "source/application/recovery_probe.cpp": "beb4c4cc09813afcd8afbe56ec46dde9c523386d0eb20bb6e41d20ded51f6249",
+    "source/platform/child.hpp": "266297cb253ba93b1c73c6a6a28218721e3277c21ffc725c84cd8866012be5aa",
+    "source/platform/child_linux.cpp": "46d26731c0c2ddf873265c008f0b25a17aef8f0cdf3f52ac16e2db6458686bfc",
+    "source/platform/child_windows.cpp": "3385dc40dd91341951a2039cb5f722f2ce069a7b824e2eb91059b9a180fcb864",
+    "source/diagnostics/health_link.hpp": "c8437a20eea17d8d8462095ea9909e04ee3d2f94d087d776a7988663a42801fd",
+    "source/diagnostics/health_link.cpp": "7104dce7d62220344372ae3c52d8916fd1511c54933b689b487195fe0c894d6b",
+    "source/protocol/wire.cpp": "0168904f2c00cea6f28bbe5996c42889df2e33b8df063fc08e159e7502446330",
+    "tests/fault/native_recovery.py": "6a9cffe9309042356edf1a3b1f04b16a21ba1f79d6d1922be170b65641caa85c",
+    "spec/delivery/packages/w-25-recovery.md": "33d78a71380ae4049ddb3da0e9ab21b381ec4867a712d78595547edb3ae85b7b",
+    "source/platform/failure_store.cpp": "18055cbb3c6cb134599478e4e1bb30e672d9e9bbbe0ef3092e382c289b92b837",
+    "source/platform/failure_store.hpp": "b9cf5b5c7394c036a054cff3604facf688935f69a6f256540a40f953e4e12cf6",
+    "source/diagnostics/failure_history.cpp": "2c099d7400f966e7f55b2689f34acabb3fbd2eb1ca6579c9b7b45330d5ab06fc",
+    "source/diagnostics/failure_history.hpp": "d25874b43474b2d0138ff3e7c77897f9d36f698673439ba13e5fe3ecbc01f879",
+    "spec/delivery/packages/w-25-failure-metadata.md": "16754f609c01c4da6dbcdbaea9dd05c300e1e64a09a35bc88b01d23af3f5b28c"
+  }
+}

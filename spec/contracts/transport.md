@@ -114,3 +114,10 @@ Stored, durable, activated and visible are independent response facts. Errors ca
 stable code, bounded safe text and retryability. Native implementations still need
 fragmented/coalesced frame, timeout, saturation, reconnect and cancellation tests;
 JSON shape fixtures alone do not execute this transport.
+
+The [W-25 telemetry document boundary](../delivery/packages/w-25-telemetry-wire.md)
+now defines versioned subscribe/unsubscribe and full replacement snapshot/delta
+shapes, bounded native decoding and exact body replay preservation. The
+[telemetry schema](telemetry.schema.json) reuses snapshot/observation 0.1.
+Native subscription/complete-state import gates remain open; preview and health
+sessions still do not advertise this feature.

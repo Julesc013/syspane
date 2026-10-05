@@ -1,0 +1,63 @@
+{
+  "type": "delta",
+  "connection_id": "connection:1",
+  "producer_epoch": "fixture:epoch-1",
+  "body": {
+    "schema_version": "0.1.0",
+    "subscription_id": "subscription:1",
+    "producer_id": "producer:1",
+    "policy_revision": "7",
+    "record_id": "publication:1",
+    "snapshot": {
+      "schema_version": "0.1.0",
+      "producer_epoch": "fixture:epoch-1",
+      "generation": "1",
+      "captured_at": "2026-09-17T12:00:00+10:00",
+      "entities": [
+        {
+          "id": "host:demo/nic:1",
+          "kind": "network.interface",
+          "display_name": "Synthetic Ethernet",
+          "identity": {
+            "fixture": "true"
+          },
+          "generation": "1"
+        }
+      ],
+      "relationships": [],
+      "sources": [
+        {
+          "id": "source:synthetic",
+          "kind": "fixture",
+          "scope": "host:demo"
+        }
+      ],
+      "observations": [
+        {
+          "schema_version": "0.1.0",
+          "entity_id": "host:demo/nic:1",
+          "field": "network.media",
+          "value": {
+            "kind": "string",
+            "data": "connected"
+          },
+          "unit": "none",
+          "origin": "observed",
+          "support": "supported",
+          "acquisition": "success",
+          "freshness": "current",
+          "presence": "present",
+          "source_id": "source:synthetic",
+          "observed_at": "2026-09-17T12:00:00+10:00",
+          "attempted_at": "2026-09-17T12:00:00+10:00",
+          "producer_epoch": "fixture:epoch-1",
+          "generation": "1",
+          "sample_interval_ns": null,
+          "error": null
+        }
+      ],
+      "completeness": "complete"
+    },
+    "base_generation": "0"
+  }
+}

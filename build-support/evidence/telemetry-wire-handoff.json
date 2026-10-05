@@ -1,0 +1,139 @@
+{
+  "schema_version": "0.1.0",
+  "work_id": "W-25",
+  "source_ref": "00a551af82d564282f1f07d9b42c483df73c0aa1",
+  "objective": "Close bounded telemetry delivery documents and preserve reported state/replay bytes before native subscription and full-state import.",
+  "changed_files": [
+    "CMakeLists.txt",
+    "README.md",
+    "TODO.md",
+    "build-support/check_legacy_artifacts.py",
+    "build-support/components.json",
+    "build-support/evidence/telemetry-cache-archive.json",
+    "build-support/evidence/telemetry-original-import-failure.json",
+    "build-support/evidence/telemetry-wire-handoff.json",
+    "build-support/evidence/w-25-telemetry-wire-attempts.json",
+    "build-support/evidence/w-25-telemetry-wire-linux-x64-gcc13.DIAG-01.json",
+    "build-support/evidence/w-25-telemetry-wire-linux-x64-gcc13.FAILURE-STORE.json",
+    "build-support/evidence/w-25-telemetry-wire-linux-x64-gcc13.NATIVE-01.json",
+    "build-support/evidence/w-25-telemetry-wire-linux-x64-gcc13.NATIVE-02.json",
+    "build-support/evidence/w-25-telemetry-wire-linux-x64-gcc13.ORACLE-01.json",
+    "build-support/evidence/w-25-telemetry-wire-linux-x64-gcc13.PRESERVE.json",
+    "build-support/evidence/w-25-telemetry-wire-linux-x64-gcc13.RECOVERY-01.json",
+    "build-support/evidence/w-25-telemetry-wire-linux-x64-gcc13.ctest.txt",
+    "build-support/evidence/w-25-telemetry-wire-linux-x64-gcc13.json",
+    "build-support/evidence/w-25-telemetry-wire-linux-x64-gcc13.smoke.json",
+    "build-support/evidence/w-25-telemetry-wire-verification.json",
+    "build-support/evidence/w-25-telemetry-wire-windows-x64-gcc15.DIAG-01.json",
+    "build-support/evidence/w-25-telemetry-wire-windows-x64-gcc15.FAILURE-STORE.json",
+    "build-support/evidence/w-25-telemetry-wire-windows-x64-gcc15.NATIVE-01.json",
+    "build-support/evidence/w-25-telemetry-wire-windows-x64-gcc15.NATIVE-02.json",
+    "build-support/evidence/w-25-telemetry-wire-windows-x64-gcc15.PRESERVE.json",
+    "build-support/evidence/w-25-telemetry-wire-windows-x64-gcc15.RECOVERY-01.json",
+    "build-support/evidence/w-25-telemetry-wire-windows-x64-gcc15.ctest.txt",
+    "build-support/evidence/w-25-telemetry-wire-windows-x64-gcc15.json",
+    "build-support/evidence/w-25-telemetry-wire-windows-x64-gcc15.smoke.json",
+    "build-support/evidence/w-25-telemetry-wire-windows-x86-v141-xp.ctest.txt",
+    "build-support/evidence/w-25-telemetry-wire-windows-x86-v141-xp.json",
+    "build-support/evidence/w-25-telemetry-wire-windows-x86-v141-xp.smoke.json",
+    "build-support/record_legacy_build.py",
+    "build-support/record_protocol.py",
+    "build-support/targets/README.md",
+    "build-support/targets/linux-x64-gcc13.json",
+    "build-support/targets/windows-x64-gcc15.json",
+    "build-support/targets/windows-x86-v141-xp.imports.json",
+    "build-support/targets/windows-x86-v141-xp.json",
+    "docs/developers/build.md",
+    "source/protocol/telemetry.cpp",
+    "source/protocol/telemetry.hpp",
+    "spec/checksums.json",
+    "spec/contracts/index.md",
+    "spec/contracts/telemetry.schema.json",
+    "spec/contracts/transport.md",
+    "spec/delivery/current-state.md",
+    "spec/delivery/implementation-readiness.md",
+    "spec/delivery/index.md",
+    "spec/delivery/packages/index.md",
+    "spec/delivery/packages/w-25-telemetry-wire.md",
+    "spec/delivery/telemetry-wire-handoff.md",
+    "spec/delivery/work-units.json",
+    "spec/fixtures/catalog.json",
+    "spec/fixtures/invalid/index.md",
+    "spec/fixtures/invalid/telemetry-base.json",
+    "spec/fixtures/invalid/telemetry-forged-approval.json",
+    "spec/fixtures/invalid/telemetry-future-observation.json",
+    "spec/fixtures/invalid/telemetry-observation-epoch.json",
+    "spec/fixtures/invalid/telemetry-policy-overflow.json",
+    "spec/fixtures/invalid/telemetry-snapshot-epoch.json",
+    "spec/fixtures/valid/index.md",
+    "spec/fixtures/valid/telemetry-delta.json",
+    "spec/fixtures/valid/telemetry-snapshot.json",
+    "spec/fixtures/valid/telemetry-subscribe.json",
+    "spec/fixtures/valid/telemetry-unsubscribe.json",
+    "spec/generated/catalog.json",
+    "spec/log.md",
+    "spec/tools/specctl.py",
+    "tests/protocol/telemetry_tests.cpp"
+  ],
+  "decisions": [
+    "Reuse snapshot/observation 0.1 inside telemetry 0.1 full-replacement delivery; no field-patch language or implicit version upgrade.",
+    "Bind document decoding to locally supplied negotiated connection/epoch/producer/subscription/policy/channel/class without granting authority.",
+    "Retain complete JSON, identity metadata, partial/gap status, reported retained observations, exact timestamps/extensions and original body replay bytes.",
+    "Keep native subscriptions disabled until complete-state import, demand/policy lifetimes and producer-clock mapping are implemented.",
+    "Add only the observed SetEndOfFile import after checking the documented XP API floor; preserve original failure and guest qualification gate.",
+    "Archive owned APT metadata losslessly and verify every member hash before deleting original cache files; keep binaries/evidence unchanged."
+  ],
+  "checks": [
+    {
+      "name": "Windows 71-entry full CTest suite",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-25-telemetry-wire-windows-x64-gcc15.json"
+    },
+    {
+      "name": "Linux 72-entry full CTest suite",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-25-telemetry-wire-linux-x64-gcc13.json"
+    },
+    {
+      "name": "Historical-toolset 67 host checks, seven PE/import audits and relocated model smoke",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-25-telemetry-wire-windows-x86-v141-xp.json"
+    },
+    {
+      "name": "Windows/Linux relocated model smoke packages",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-25-telemetry-wire-attempts.json"
+    },
+    {
+      "name": "Schema/fixture, generated index, tooling and integrity checks",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-25-telemetry-wire-verification.json"
+    },
+    {
+      "name": "Original historical import-audit failure preserved",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/telemetry-original-import-failure.json"
+    },
+    {
+      "name": "Native telemetry, full-state model import and producer-clock mapping",
+      "outcome": "not_run",
+      "evidence": "spec/delivery/telemetry-wire-handoff.md"
+    }
+  ],
+  "open_questions": [
+    "How complete remote state is imported while preserving identity metadata, retained values, completeness and observation generations is the next contract gate.",
+    "Native subscription/demand ownership, current-policy queue invalidation, resync/replay and producer-monotonic freshness mapping remain required.",
+    "Actual collector/renderer recovery, product failure retention and independent editor/visible recovery remain open.",
+    "Linux placement still fails; Windows/macOS capture remains unqualified; guest test scope is pending."
+  ],
+  "next_step": "Implement a closed complete-state import boundary and native subscription lifecycle with policy-bound queues and explicit producer-clock provenance, then connect independently supervised actual data production.",
+  "authority_used": [
+    "user:foundation-native-campaign-2026-10-05"
+  ],
+  "limitations": [
+    "W-25 and the campaign remain in progress; codec success is not subscription admission or native telemetry qualification.",
+    "Model acquisition-update semantics are not silently used as received full-state import; no data owner or lease is updated by the codec.",
+    "Historical tests run on Windows 10/WOW64; no XP/7 guest or desktop qualification follows from the documented API floor.",
+    "No protected policy, user configuration or existing guest VM was changed; no privileged operation, public release, AIDE activation or human review is attested."
+  ]
+}

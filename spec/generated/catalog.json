@@ -216,7 +216,7 @@
         "SP-PROTOCOL",
         "SP-COMMANDS"
       ],
-      "sha256": "78addcf091fe32c5b58a7321e71dae9f171fc14de8b16c77480ed61ebe469f4a"
+      "sha256": "987d3000b8afa425e1db45c4b56b241e539c479db6f7444e6f27ec04649a94d5"
     },
     {
       "id": "SP-VERSIONS",
@@ -357,7 +357,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "e6edafb46725ec80324d22532f99fa099b081f0e3a89d3c30a2032cc78928a13"
+      "sha256": "aac917f04562c28f86891a615e51aeb14d3f3a749fa055aa9e779ed10f0328e9"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -422,7 +422,7 @@
       "requires": [
         "SP-CURRENT"
       ],
-      "sha256": "a936b9cb180997f9b569fdf8163ff39a0a8aadfe2a2e9a5e7530421fa75d662a"
+      "sha256": "ed27f1a644126e13610aee3ad93a0ea25a4b2b7e6f905fa01a8a546ccee1ae3a"
     },
     {
       "id": "SP-NATIVE-TRANSPORT-HANDOFF",
@@ -571,6 +571,19 @@
       "sha256": "33d78a71380ae4049ddb3da0e9ab21b381ec4867a712d78595547edb3ae85b7b"
     },
     {
+      "id": "SP-W25-TELEMETRY-WIRE",
+      "path": "delivery/packages/w-25-telemetry-wire.md",
+      "title": "W-25 bounded telemetry delivery document",
+      "description": "Close versioned subscription and snapshot delivery shapes without treating decoded documents as admitted native subscriptions.",
+      "requires": [
+        "SP-W25-DATA-VIEW",
+        "SP-W24-PACKAGE",
+        "SP-PROTOCOL",
+        "SP-STATE"
+      ],
+      "sha256": "d17e3eb396c4161c0c21cf3a2ca91898ad15cd02656b728ba5ea3e46d0c61e5c"
+    },
+    {
       "id": "SP-W26-PACKAGE",
       "path": "delivery/packages/w-26-smoke.md",
       "title": "W-26 early local smoke package",
@@ -637,6 +650,17 @@
         "SP-RELEASE"
       ],
       "sha256": "355869d3b66be1c68b6d25572b80f9514a2ad311e289153b999432a7c8c2dc0c"
+    },
+    {
+      "id": "SP-TELEMETRY-WIRE-HANDOFF",
+      "path": "delivery/telemetry-wire-handoff.md",
+      "title": "Bounded telemetry document checkpoint",
+      "description": "Bind versioned delivery decoding and exact replay preservation to native-compiled portable cases without claiming a live subscription.",
+      "requires": [
+        "SP-W25-TELEMETRY-WIRE",
+        "SP-CAMPAIGN-ADMISSION"
+      ],
+      "sha256": "93cd442117769a1c72fbc72c3481a2da32fb5551c7a014a1e7efe7750c3ce682"
     },
     {
       "id": "SP-TRANSPORT-HANDOFF",

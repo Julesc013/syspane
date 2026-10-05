@@ -1,0 +1,217 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.example.invalid/syspane/0.1.0/telemetry.schema.json",
+  "title": "SysPane telemetry delivery experimental 0.1",
+  "description": "Bounded full replacement delivery, not native admission or a field-patch language. Native binding/resource checks remain required.",
+  "oneOf": [
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "subscribe"
+        },
+        "connection_id": {
+          "$ref": "https://schemas.example.invalid/syspane/0.1.0/common.schema.json#/$defs/id"
+        },
+        "producer_epoch": {
+          "$ref": "https://schemas.example.invalid/syspane/0.1.0/common.schema.json#/$defs/id"
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "schema_version": {
+              "const": "0.1.0"
+            },
+            "subscription_id": {
+              "$ref": "https://schemas.example.invalid/syspane/0.1.0/common.schema.json#/$defs/id"
+            },
+            "producer_id": {
+              "$ref": "https://schemas.example.invalid/syspane/0.1.0/common.schema.json#/$defs/id"
+            },
+            "policy_revision": {
+              "$ref": "https://schemas.example.invalid/syspane/0.1.0/common.schema.json#/$defs/uint64"
+            },
+            "channel": {
+              "enum": [
+                "desktop",
+                "inspector",
+                "saver",
+                "preview"
+              ]
+            },
+            "classification": {
+              "enum": [
+                "public",
+                "operational",
+                "sensitive"
+              ]
+            }
+          },
+          "required": [
+            "schema_version",
+            "subscription_id",
+            "producer_id",
+            "policy_revision",
+            "channel",
+            "classification"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "type",
+        "connection_id",
+        "producer_epoch",
+        "body"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "unsubscribe"
+        },
+        "connection_id": {
+          "$ref": "https://schemas.example.invalid/syspane/0.1.0/common.schema.json#/$defs/id"
+        },
+        "producer_epoch": {
+          "$ref": "https://schemas.example.invalid/syspane/0.1.0/common.schema.json#/$defs/id"
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "schema_version": {
+              "const": "0.1.0"
+            },
+            "subscription_id": {
+              "$ref": "https://schemas.example.invalid/syspane/0.1.0/common.schema.json#/$defs/id"
+            }
+          },
+          "required": [
+            "schema_version",
+            "subscription_id"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "type",
+        "connection_id",
+        "producer_epoch",
+        "body"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "snapshot"
+        },
+        "connection_id": {
+          "$ref": "https://schemas.example.invalid/syspane/0.1.0/common.schema.json#/$defs/id"
+        },
+        "producer_epoch": {
+          "$ref": "https://schemas.example.invalid/syspane/0.1.0/common.schema.json#/$defs/id"
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "schema_version": {
+              "const": "0.1.0"
+            },
+            "subscription_id": {
+              "$ref": "https://schemas.example.invalid/syspane/0.1.0/common.schema.json#/$defs/id"
+            },
+            "producer_id": {
+              "$ref": "https://schemas.example.invalid/syspane/0.1.0/common.schema.json#/$defs/id"
+            },
+            "policy_revision": {
+              "$ref": "https://schemas.example.invalid/syspane/0.1.0/common.schema.json#/$defs/uint64"
+            },
+            "record_id": {
+              "$ref": "https://schemas.example.invalid/syspane/0.1.0/common.schema.json#/$defs/id"
+            },
+            "snapshot": {
+              "$ref": "https://schemas.example.invalid/syspane/0.1.0/snapshot.schema.json"
+            }
+          },
+          "required": [
+            "schema_version",
+            "subscription_id",
+            "producer_id",
+            "policy_revision",
+            "record_id",
+            "snapshot"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "type",
+        "connection_id",
+        "producer_epoch",
+        "body"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "delta"
+        },
+        "connection_id": {
+          "$ref": "https://schemas.example.invalid/syspane/0.1.0/common.schema.json#/$defs/id"
+        },
+        "producer_epoch": {
+          "$ref": "https://schemas.example.invalid/syspane/0.1.0/common.schema.json#/$defs/id"
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "schema_version": {
+              "const": "0.1.0"
+            },
+            "subscription_id": {
+              "$ref": "https://schemas.example.invalid/syspane/0.1.0/common.schema.json#/$defs/id"
+            },
+            "producer_id": {
+              "$ref": "https://schemas.example.invalid/syspane/0.1.0/common.schema.json#/$defs/id"
+            },
+            "policy_revision": {
+              "$ref": "https://schemas.example.invalid/syspane/0.1.0/common.schema.json#/$defs/uint64"
+            },
+            "record_id": {
+              "$ref": "https://schemas.example.invalid/syspane/0.1.0/common.schema.json#/$defs/id"
+            },
+            "snapshot": {
+              "$ref": "https://schemas.example.invalid/syspane/0.1.0/snapshot.schema.json"
+            },
+            "base_generation": {
+              "$ref": "https://schemas.example.invalid/syspane/0.1.0/common.schema.json#/$defs/uint64"
+            }
+          },
+          "required": [
+            "schema_version",
+            "subscription_id",
+            "producer_id",
+            "policy_revision",
+            "record_id",
+            "snapshot",
+            "base_generation"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "type",
+        "connection_id",
+        "producer_epoch",
+        "body"
+      ],
+      "additionalProperties": false
+    }
+  ]
+}

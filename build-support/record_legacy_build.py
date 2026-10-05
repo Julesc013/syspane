@@ -22,7 +22,10 @@ def main():
     parser.add_argument('--failure-metadata', action='store_true', help='Include the shared failure-history codec/projection cases')
     parser.add_argument('--preservation', action='store_true', help='Include the portable preservation policy boundary only')
     parser.add_argument('--data-view', action='store_true', help='Include portable synchronized data view cases')
+    parser.add_argument('--telemetry', action='store_true', help='Include bounded telemetry document cases')
     args = parser.parse_args()
+    if args.telemetry:
+        args.data_view = True
     if args.data_view:
         args.preservation = True
     if args.preservation:
@@ -46,6 +49,8 @@ def main():
         expected.add('diagnostic.PRESERVE-POLICY')
     if args.data_view:
         expected |= {'data.'+case for case in ('VIEW-ATOMIC','VIEW-REPLAY','VIEW-RECONNECT','VIEW-LEASE','VIEW-POLICY','VIEW-FAULT')}
+    if args.telemetry:
+        expected |= {'telemetry.TELEMETRY-'+case for case in ('SNAPSHOT','MESSAGES','GRAPH','TIME','BOUNDS','PRESERVE')}
     if len(cases) != len(expected) or {c['case'] for c in cases} != expected or any(c['outcome'] != 'pass' for c in cases):
         raise ValueError('incomplete, duplicated or failed historical-toolset host run')
     artifacts = {}
@@ -69,6 +74,10 @@ def main():
         sources.append(ROOT/'spec/delivery/packages/w-25-preservation.md')
     if args.data_view:
         sources.append(ROOT/'spec/delivery/packages/w-25-data-view.md')
+    if args.telemetry:
+        sources.append(ROOT/'spec/delivery/packages/w-25-telemetry-wire.md')
+        for folder in ('spec/contracts', 'spec/fixtures'):
+            sources.extend(p for p in (ROOT/folder).rglob('*') if p.is_file())
     for folder in ('source', 'tests/model', 'tests/protocol', 'tests/fault', 'tests/desktop', 'build-support'):
         sources.extend(p for p in (ROOT/folder).rglob('*') if p.is_file() and 'evidence' not in p.parts and '__pycache__' not in p.parts)
     record = {'version': '0.1.0', 'work_ids': ['W-04', 'W-25', 'W-26'] if args.failure_metadata else ['W-04', 'W-26'], 'profile': PROFILE, 'outcome': 'pass',

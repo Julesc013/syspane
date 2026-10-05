@@ -23,7 +23,9 @@ The diagnostic now offers explicit private file preservation through native cont
 and CLI; see the [preservation checkpoint](spec/delivery/preservation-handoff.md).
 A [synchronized data view](spec/delivery/data-view-handoff.md) now joins model
 validation, producer leases and policy-bound presentation. Native telemetry/renderer
-recovery, product retention and desktop integration remain pending.
+recovery, product retention and desktop integration remain pending. A
+[bounded telemetry codec](spec/delivery/telemetry-wire-handoff.md) now preserves
+versioned snapshot documents and exact replay bytes; native subscriptions stay disabled.
 An external pixel/time oracle is calibrated against live, hidden, frozen and
 obstructed synthetic X11 surfaces. A real Openbox/PCManFM Show Desktop experiment
 now exposes the basic X11 candidate's placement failure: above the desktop it

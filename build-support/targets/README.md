@@ -1,6 +1,10 @@
 # Foundation development profiles
 
-Current revisions are Windows x64 10, Linux x64 11 and historical x86 4. The
+Current revisions are Windows x64 11, Linux x64 12 and historical x86 5. The
+[telemetry checkpoint](../../spec/delivery/telemetry-wire-handoff.md) passes 71/72
+modern and 67 historical host checks. The historical fixture-reading test adds the
+documented XP Kernel32 import `SetEndOfFile`; its original audit failure is retained.
+The previous revisions were Windows x64 10, Linux x64 11 and historical x86 4. The
 [data-view checkpoint](../../spec/delivery/data-view-handoff.md) passes 65/66 modern
 and 61 historical host checks, including six typed synchronization/policy cases.
 The previous revisions were Windows x64 9, Linux x64 10 and historical x86 3. The

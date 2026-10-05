@@ -304,6 +304,26 @@ def semantic_errors(value: Any, schema_name: str, root: Path=ROOT) -> list[str]:
             observed.append((observation['entity_id'],observation['field']))
         if len(observed) != len(set(observed)):
             errors.append('duplicate observation field')
+    if schema_name == 'telemetry':
+        body = value['body']
+        if 'policy_revision' in body:
+            check_uint(body['policy_revision'])
+        if value['type'] in ('snapshot', 'delta'):
+            snapshot = body['snapshot']
+            errors += semantic_errors(snapshot, 'snapshot', root)
+            generation = int(snapshot['generation'])
+            if snapshot['producer_epoch'] != value['producer_epoch']:
+                errors.append('telemetry snapshot epoch mismatch')
+            for entity in snapshot['entities']:
+                if int(entity['generation']) > generation:
+                    errors.append('telemetry future entity generation')
+            for observation in snapshot['observations']:
+                if observation['producer_epoch'] != snapshot['producer_epoch'] or int(observation['generation']) > generation:
+                    errors.append('telemetry observation epoch/generation mismatch')
+            if value['type'] == 'delta':
+                check_uint(body['base_generation'])
+                if int(body['base_generation']) >= generation:
+                    errors.append('telemetry base must precede replacement generation')
     if schema_name == 'scene':
         ids = [w['id'] for w in value['widgets']]
         if len(ids) != len(set(ids)):

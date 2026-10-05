@@ -33,7 +33,10 @@ def main():
     parser.add_argument('--failure-metadata', action='store_true', help='Require bounded failure metadata and all current native regression families')
     parser.add_argument('--preservation', action='store_true', help='Require explicit private file preservation and native UI bindings')
     parser.add_argument('--data-view', action='store_true', help='Require synchronized model/lease/policy view cases')
+    parser.add_argument('--telemetry', action='store_true', help='Require bounded telemetry document cases; no native subscription claim')
     args = parser.parse_args()
+    if args.telemetry:
+        args.data_view = True
     if args.data_view:
         args.preservation = True
     if args.preservation:
@@ -77,12 +80,17 @@ def main():
         expected |= {'diagnostic.PRESERVE-POLICY', 'native.PRESERVE'}
     if args.data_view:
         expected |= {'data.'+case for case in ('VIEW-ATOMIC', 'VIEW-REPLAY', 'VIEW-RECONNECT', 'VIEW-LEASE', 'VIEW-POLICY', 'VIEW-FAULT')}
+    if args.telemetry:
+        expected |= {'telemetry.TELEMETRY-'+case for case in ('SNAPSHOT', 'MESSAGES', 'GRAPH', 'TIME', 'BOUNDS', 'PRESERVE')}
     if len(cases) != len(expected) or {case['case'] for case in cases} != expected or any(case['outcome'] != 'pass' for case in cases):
         raise ValueError('missing, repeated, unexpected or failing case; preserve log before rerun')
     suffix = '.exe' if platform.system() == 'Windows' else ''
     artifacts = {name: {'sha256': sha(build/name), 'bytes': (build/name).stat().st_size}
                  for name in ('syspane_protocol_tests'+suffix, 'libsyspane_protocol.a', 'libsyspane_configuration.a', 'generated/settings_descriptors.hpp')}
     native_records = []
+    if args.telemetry:
+        name = 'syspane_telemetry_tests'+suffix
+        artifacts[name] = {'sha256': sha(build/name), 'bytes': (build/name).stat().st_size}
     if args.data_view:
         for name in ('syspane_data_view_tests'+suffix, 'libsyspane_data_view.a', 'libsyspane_model.a'):
             artifacts[name] = {'sha256': sha(build/name), 'bytes': (build/name).stat().st_size}
@@ -218,6 +226,9 @@ def main():
         paths.append(ROOT/'spec/delivery/packages/w-25-preservation.md')
     if args.data_view:
         paths.append(ROOT/'spec/delivery/packages/w-25-data-view.md')
+    if args.telemetry:
+        paths.append(ROOT/'spec/delivery/packages/w-25-telemetry-wire.md')
+        paths.extend(sorted((ROOT/'spec/fixtures').rglob('*')))
     for directory in ('source', 'tests', 'build-support', 'spec/contracts'):
         paths.extend(sorted((ROOT/directory).rglob('*')))
     inputs = {p.relative_to(ROOT).as_posix(): sha(p) for p in paths
@@ -316,6 +327,10 @@ def main():
         report.update(work_id='W-25', slice='synchronized model, independent producer lease and policy-bound data lifetime', work_status='in_progress')
         report['bindings']['data_view'] = 'spec/delivery/packages/w-25-data-view.md'
         report['limits'].insert(0, 'Data view cases use typed in-process candidates; no wire subscription, collector, renderer, native data-erasure or visible-recovery qualification follows.')
+    if args.telemetry:
+        report['slice'] = 'bounded telemetry document decoding and exact replay preservation'
+        report['bindings']['telemetry'] = 'spec/delivery/packages/w-25-telemetry-wire.md'
+        report['limits'].insert(0, 'Telemetry codec checks preserve complete documents, including partial/gap and reported retained values; no native subscription, model-state import or policy grant is enabled.')
     args.output.parent.mkdir(parents=True, exist_ok=True)
     log_output.write_text(raw.replace(str(build), '<build>').replace(str(ROOT), '<source>'), encoding='utf-8', newline='\n')
     args.output.write_text(json.dumps(report, indent=2)+'\n', encoding='utf-8', newline='\n')

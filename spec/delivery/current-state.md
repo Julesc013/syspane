@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-06T06:58:29+11:00", "scope": "Typed synchronized data-view checkpoint; native telemetry and renderer recovery remain open"}
+updated: {"by": "codex", "at": "2026-10-06T07:20:37+11:00", "scope": "Bounded telemetry document checkpoint; native subscription and full-state import remain open"}
 ---
 
 # Current state and next admitted boundary
@@ -104,10 +104,17 @@ visible recovery remain open. No configuration is parsed, repaired or activated.
 
 The [data-view checkpoint](data-view-handoff.md) joins model validation, full
 resynchronization, lease state and policy-bound payload lifetime in one typed owner.
-Current suites pass 65 Windows, 66 Linux and 61 historical-toolset host checks.
+That checkpoint passes 65 Windows, 66 Linux and 61 historical-toolset host checks.
 A confirming full snapshot preserves replay/tombstone history; policy replacement
 drops this owner's data and invalidates its attachment. Native subscriptions,
 collectors, renderers and cross-component erasure remain unimplemented/unqualified.
+
+The [telemetry document checkpoint](telemetry-wire-handoff.md) adds bounded
+subscription/full/delta codecs preserving identity metadata, reported retained values,
+partial/gap status, timestamps, extensions and exact replay bytes. Current suites pass
+71 Windows, 72 Linux and 67 historical-toolset host checks. Complete-state import,
+native demand/subscription lifetime and producer-clock mapping remain required before
+feature advertisement. No native telemetry or visible recovery is qualified.
 
 Canonical 0.2.0 documentation bundle, unchanged 0.1 authoring profile, preserved old
 fixtures, new experimental scene/command/capability 0.2 and admission descriptors.
@@ -152,8 +159,10 @@ historical guest execution once guest test scope and usability are established.
 W-05 needs a composition strategy that actually preserves icon pixels; its initial
 EWMH window stacking candidates fail that requirement. Continue other native tracks
 independently of this negative result.
-Continue W-25 by closing wire snapshot/subscription contracts and connecting the
-typed data owner to authenticated native transport, real collectors and renderers.
+Continue W-25 by closing complete-state import and native subscription/demand
+ownership, preserving wire identity metadata, retained acquisition state and partial
+coverage. Define producer-clock mapping before freshness inference. Then connect
+the typed data owner to authenticated native transport, real collectors and renderers.
 Close product failure-log ownership/retention and remaining payload-erasure contracts
 before enabling the associated features. Qualify protected policy in an admitted lab.
 Connect the build/component/target consumers and minimum command/IPC/policy/recovery

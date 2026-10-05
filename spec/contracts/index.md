@@ -31,6 +31,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [snapshot.schema.json](snapshot.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [syspane-api.h](syspane-api.h) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [target-profile.schema.json](target-profile.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
+- [telemetry.schema.json](telemetry.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [theme.schema.json](theme.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [Local transport and request lifecycle](transport.md) — Define experimental framing, negotiation and bounded result retrieval.
 - [Contract versions and migration](versions.md) — Keep bundle, documents, wire, ABI, content and provider identities independent.
