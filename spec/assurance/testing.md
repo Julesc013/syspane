@@ -10,9 +10,9 @@ sp_profile: "syspane-spec/0.1.0"
 sp_authority: "normative-proposal"
 sp_requires: ["SP-AUTHORITY", "SP-PROTOCOL"]
 sp_review: "unreviewed"
-sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04"]
+sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-04T19:32:52+11:00", "scope": "October audit amendments; no human review attested"}
+updated: {"by": "codex", "at": "2026-10-05T19:48:29+11:00", "scope": "Implementation closure review; no native execution or human review attested"}
 ---
 
 # Testing and evidence model
@@ -39,7 +39,13 @@ Inject clocks, sources and failures. Use explicit seeds and retain failing minim
 
 ## Completion policy
 
-A work unit is complete when its required outputs exist, checks were actually executed or explicitly blocked, evidence is recorded and an authorized integration decision is made. A release additionally requires all mandatory profile gates. Untested future profiles remain unqualified; they do not block unrelated development but cannot appear in the release support claim.
+A package reaches the implemented gate when its required outputs exist and mandatory executable implementation checks ran and passed, with source-bound evidence and an authorized integration decision. A blocked mandatory implementation check leaves that gate incomplete. Missing native qualification can remain separately blocked while code is implemented on an identified development profile. A release additionally requires all mandatory profile gates. Untested future profiles remain unqualified; they do not block unrelated development but cannot appear in the release support claim.
+
+[Work-package closure](../delivery/work-packages.md) distinguishes investigation,
+implementation, qualification and release gates. Parent test families remain plans;
+completed packages link concrete case bindings and actual results. The initial
+[acceptance traces](acceptance-traces.md) specify model, request-budget, persistence
+and cold-start cases. None is an executed native result in this revision.
 
 ## October acceptance expansion
 

@@ -9,6 +9,7 @@ The [specification](../spec/README.md) remains the canonical contract.
 - [Troubleshooting and recovery design](users/troubleshooting.md)
 - [Deployment and maintenance design](operators/deployment.md)
 - [Developer setup and checks](developers/build.md)
+- [Implementation and resumption workflow](developers/agent-workflow.md)
 - [Architecture and component ownership](developers/architecture.md)
 - [Provider and SDK boundaries](developers/providers.md)
 

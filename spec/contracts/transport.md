@@ -10,9 +10,9 @@ sp_profile: "syspane-spec/0.1.0"
 sp_authority: "normative-proposal"
 sp_requires: ["SP-PROTOCOL", "SP-COMMANDS"]
 sp_review: "unreviewed"
-sp_sources: ["SRC-AUDIT-2026-10-04"]
+sp_sources: ["SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-AUDIT-2026-10-04", "resource": "User-supplied SysPane audits and design reviews, 2026-10-04", "title": "October specification review inputs"}]
-updated: {"by": "codex", "at": "2026-10-04T19:32:52+11:00", "scope": "October audit amendments; no human review attested"}
+updated: {"by": "codex", "at": "2026-10-05T19:48:29+11:00", "scope": "Implementation closure review; no native execution or human review attested"}
 ---
 
 # Local transport and request lifecycle
@@ -36,7 +36,7 @@ access controls before any subscription. Claimed role/epoch never authenticates 
 peer or grants privileges. No network listener is enabled by this contract.
 
 Handshake and incomplete-frame deadlines are five seconds in the experimental
-profile. A connection has bounded queues and at most 128 outstanding requests;
+profile. A connection has bounded queues and at most 128 in-flight requests;
 reserve control capacity for policy, health, cancellation and shutdown. A stalled
 reader is disconnected with an explicit subscription gap. Native profiles can
 tighten limits and must record any future versioned alternative.
@@ -61,10 +61,36 @@ Role-specific native tests must prove access control and progress under saturati
 
 Request IDs are scoped to authenticated principal, installation/session and producer
 epoch. Identical replay returns the recorded result; changed bytes under the same
-ID are a conflict. Deduplication retains terminal results for at least ten minutes
-within the 128-request admission limit. When retention cannot be guaranteed, reject
-new mutations with a busy outcome before executing them, rather than evict a live
-deduplication entry. Committed request identities persist with their generation.
+ID are a conflict. Committed request identities persist with their generation.
+
+The experimental 128-request admission bound has two explicit counters:
+
+| Resource | Scope and lifetime |
+|---|---|
+| In-flight requests | At most 128 on one connection, from admission until terminal outcome; finishing releases this active slot |
+| Mutation deduplication reservations | At most 128 across connections for an authenticated principal, installation/session and producer epoch; admitted unfinished mutations plus unexpired retained terminal results share this capacity |
+
+A new mutation reserves both resources before execution. Completion converts its
+deduplication reservation to a retained terminal record; it does not free that
+reservation. Retain each record for 600 seconds from its terminal outcome using
+the controller's monotonic clock, then reclaim it when needed. A profile may retain
+longer but must declare that alternative and its admission consequences. Neither
+replay nor result retrieval consumes a new mutation reservation or extends expiry.
+
+If either required resource is full, return busy before executing the new mutation.
+Do not evict an unexpired record. Disconnect/reconnect does not clear principal
+reservations. Replay and authorized result retrieval remain possible while new
+mutations are busy. Thus 128 rapid completed changes can exhaust this conservative
+experimental window even when no request is in flight; a different capacity is an
+explicit profile/contract change, not an implementation optimisation.
+
+Result retrieval, cancellation, policy/health and shutdown need separately reserved
+bounded control capacity. W-24 must record controller-wide connection/memory limits,
+control queue sizes and saturation outcomes before implementation; multiplying
+per-connection limits is not a global resource bound. The durable committed-request
+journal is separate from the ordinary result cache and follows the storage
+retention/reconciliation contract. The [request budget cases](../assurance/acceptance-traces.md#request-budget-cases)
+test these distinctions without claiming complete transport conformance.
 
 Cancel before commit may abort preparation. After commit it cannot undo the accepted
 generation; return the committed result with activation status. A lost connection

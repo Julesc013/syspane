@@ -10,9 +10,9 @@ sp_profile: "syspane-spec/0.1.0"
 sp_authority: "normative-proposal"
 sp_requires: ["SP-PLATFORMS", "SP-RELEASE"]
 sp_review: "unreviewed"
-sp_sources: ["SRC-AUDIT-2026-10-04"]
+sp_sources: ["SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-AUDIT-2026-10-04", "resource": "User-supplied SysPane audits and design reviews, 2026-10-04", "title": "October specification review inputs"}]
-updated: {"by": "codex", "at": "2026-10-04T19:32:52+11:00", "scope": "October audit amendments; no human review attested"}
+updated: {"by": "codex", "at": "2026-10-05T19:48:29+11:00", "scope": "Implementation closure review; no native execution or human review attested"}
 ---
 
 # Build targets and qualification profiles
@@ -46,3 +46,10 @@ No profile containing unknown minima, unowned dependencies or missing mandatory
 evidence is publishable. A failed/blocked lab remains visible; unrelated profile
 integration proceeds under its own acceptance. Resource budgets are profile-specific
 measurements, separate from fixed protocol safety bounds.
+
+A development-only profile is allowed before product support is qualified. It
+records an actual toolchain, host/runtime floor and concrete configure/build/test/
+smoke commands, expected outputs and reproduction limitations. It may deliberately
+support only its measured host; it must not infer older OS support. W-01 populates
+the initial records under its [package contract](packages/w-01-foundation.md).
+Personal paths belong in local presets/environment, not the checked-in recipe.

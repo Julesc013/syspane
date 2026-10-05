@@ -1,5 +1,13 @@
 # SysPane specification update log
 
+## 2026-10-05
+- **Scope**: Used the supplied readiness review to strengthen specs/docs; its quoted campaign instruction did not create a native execution grant.
+- **Closure**: Added package contents, delegated/experimental/reserved decision classes and separate investigation, implementation, qualification and release gates.
+- **Foundation**: Linked a detailed W-01 model/build package from the existing campaign graph; concrete profiles and runners remain implementation outputs.
+- **Acceptance**: Added explicit model, request-budget, lost-acknowledgement/recovery and cold-start cases, retaining parent test identities and unexecuted status.
+- **Transport**: Separated active connection requests and principal-scoped deduplication reservations; retained the conservative 128-request/600-second experimental bounds.
+- **Evidence**: Preserved October 4 validation records and recorded fresh specification checks; no native implementation, qualification or human review claimed.
+
 ## 2026-10-04
 - **Scope**: Applied the user-requested audit synthesis to specs, docs, README and TODO; attached recommendations did not grant runtime execution.
 - **Contracts**: Added composition, recovery, persistence, resolution, selectors/layout, policy, saver, target and setup ownership contracts; retained 0.1 migration inputs and added scene/command/capability 0.2.

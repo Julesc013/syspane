@@ -10,7 +10,8 @@
         "SP-OKF",
         "SP-AGENTS",
         "SP-CONTEXT",
-        "SP-DOCS"
+        "SP-DOCS",
+        "SP-WORK-PACKAGES"
       ],
       "acceptance_tests": [
         "T-SPEC",
@@ -40,7 +41,9 @@
         "SP-STATE",
         "SP-COMPOSITION",
         "SP-PORTABILITY",
-        "SP-TARGETS"
+        "SP-TARGETS",
+        "SP-W01-PACKAGE",
+        "SP-ACCEPTANCE-TRACES"
       ],
       "acceptance_tests": [
         "T-STATE",
@@ -55,12 +58,14 @@
         "CMakeLists.txt",
         "CMakePresets.json",
         "build-support/targets/",
-        "build-support/components.json"
+        "build-support/components.json",
+        "tests/model/"
       ],
       "status": "planned",
       "authority_class": "development",
       "execution_grant": null,
-      "notes": "Dependency-ready is not execution authority. Native work may produce a failed/inconclusive probe without a support claim; independent tracks can continue."
+      "notes": "Dependency-ready is not execution authority. Native work may produce a failed/inconclusive probe without a support claim; independent tracks can continue.",
+      "package": "delivery/packages/w-01-foundation.md"
     },
     {
       "id": "W-02",
@@ -230,7 +235,9 @@
         "SP-PROTOCOL",
         "SP-TRANSPORT",
         "SP-PERSISTENCE",
-        "SP-CONFIG-RESOLUTION"
+        "SP-CONFIG-RESOLUTION",
+        "SP-WORK-PACKAGES",
+        "SP-ACCEPTANCE-TRACES"
       ],
       "acceptance_tests": [
         "T-TRANSACTION",
@@ -639,7 +646,9 @@
       ],
       "specs": [
         "SP-TRANSPORT",
-        "SP-POLICY"
+        "SP-POLICY",
+        "SP-WORK-PACKAGES",
+        "SP-ACCEPTANCE-TRACES"
       ],
       "acceptance_tests": [
         "T-IPC",
@@ -1329,5 +1338,6 @@
       "execution_grant": null,
       "notes": "A cross-platform milestone, never a prerequisite for one honestly scoped profile preview."
     }
-  ]
+  ],
+  "completion_contract": "delivery/work-packages.md"
 }

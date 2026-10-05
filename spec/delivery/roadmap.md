@@ -10,9 +10,9 @@ sp_profile: "syspane-spec/0.1.0"
 sp_authority: "normative-proposal"
 sp_requires: ["SP-CURRENT", "SP-PLATFORMS", "SP-TESTING"]
 sp_review: "unreviewed"
-sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04"]
+sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-04T19:32:52+11:00", "scope": "October audit amendments; no human review attested"}
+updated: {"by": "codex", "at": "2026-10-05T19:48:29+11:00", "scope": "Implementation closure review; no native execution or human review attested"}
 ---
 
 # Implementation campaign and parallel tracks
@@ -60,3 +60,9 @@ carry code/tests, actual outcomes, unexecuted checks, exact source/artifacts and
 Policy and recovery precede exposed cross-process functionality. Conventional windows
 never satisfy the persistent-wall oracle. Reuse evidence only when relevant inputs
 remain valid. [Readiness](implementation-readiness.md) lists remaining gates.
+
+Detailed packages follow [implementation closure](work-packages.md). Begin with
+the linked [W-01 package](packages/w-01-foundation.md), then close W-02, W-24 and
+W-26 against the actual foundation outputs. W-25 also requires W-24. Preserve
+these dependencies when investigating native tracks; readiness prose does not
+override the graph. A failed experiment is evidence, not an implicit scope cut.

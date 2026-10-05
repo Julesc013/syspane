@@ -26,11 +26,18 @@ path when optional components fail.
 - [Documentation](docs/README.md)
 - [Implementation checklist](TODO.md) and [campaign](spec/delivery/roadmap.md)
 - [Current state](spec/delivery/current-state.md)
+- [Implementation readiness](spec/delivery/implementation-readiness.md) and [first foundation package](spec/delivery/packages/w-01-foundation.md)
 - [October audit disposition](spec/delivery/audit-2026-10-04.md)
 
 `spec/` owns design and contracts, `source/` will own implementation, and `docs/`
 owns audience-oriented guides. Python is used only for development tooling.
 See [developer checks](docs/developers/build.md) for validation commands.
+
+The next step is a bounded build foundation and native experiments. Each package
+must connect specified behaviour to runnable checks and a source-bound handoff;
+see [the developer workflow](docs/developers/agent-workflow.md). Specification
+validation does not establish that an entire edition can be built or released
+without further experiments and contract decisions.
 
 Code, documentation and asset licensing and contribution policy still require
 an owner decision. Public visibility does not grant a project license. No

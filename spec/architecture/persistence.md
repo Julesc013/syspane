@@ -10,9 +10,9 @@ sp_profile: "syspane-spec/0.1.0"
 sp_authority: "normative-proposal"
 sp_requires: ["SP-COMMANDS", "SP-SETTINGS"]
 sp_review: "unreviewed"
-sp_sources: ["SRC-AUDIT-2026-10-04"]
+sp_sources: ["SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-AUDIT-2026-10-04", "resource": "User-supplied SysPane audits and design reviews, 2026-10-04", "title": "October specification review inputs"}]
-updated: {"by": "codex", "at": "2026-10-04T19:32:52+11:00", "scope": "October audit amendments; no human review attested"}
+updated: {"by": "codex", "at": "2026-10-05T19:48:29+11:00", "scope": "Implementation closure review; no native execution or human review attested"}
 ---
 
 # Configuration persistence and recovery
@@ -57,3 +57,9 @@ The exact filesystem primitive sequence remains a per-target experiment. Inject
 interruption at every transition, including after pointer publication and before
 activation. Accept only an old or new coherent bundle, never a mixed one. This
 document specifies recovery behaviour, not a proven fsync implementation.
+
+The [committed-change trace](../assurance/acceptance-traces.md#committed-change-with-lost-acknowledgement)
+fixes expected revision/request outcomes across a lost acknowledgement and restart.
+It includes revoked policy, unavailable media, corrupt selecting records, renderer
+failure and result-cache expiry. W-08 must supply its concrete fixtures and fault
+runner; these expectations are not evidence that recovery has been implemented.

@@ -31,7 +31,7 @@
         "SP-COMMANDS",
         "SP-SETTINGS"
       ],
-      "sha256": "2e0296ff28e1058dfb3e09f20909721901b0133d79c0ee07276b76dced58aa5e"
+      "sha256": "b0866706d03d2e8038745340787e4d71ac2ae74eaca24d5268ac092a1fe041aa"
     },
     {
       "id": "SP-PORTABILITY",
@@ -97,6 +97,19 @@
       "sha256": "be203321db74a27e9e16fb2e4657203d636725fe31028bd247dae1733510c56c"
     },
     {
+      "id": "SP-ACCEPTANCE-TRACES",
+      "path": "assurance/acceptance-traces.md",
+      "title": "Concrete implementation acceptance traces",
+      "description": "Specify independent expected outcomes for the first model, request and recovery cases.",
+      "requires": [
+        "SP-STATE",
+        "SP-TRANSPORT",
+        "SP-PERSISTENCE",
+        "SP-TESTING"
+      ],
+      "sha256": "8fc06e7296e8ca22faadaa1a58d5280eace7f49fb463ce3d97dc45f317f30717"
+    },
+    {
       "id": "SP-ORACLE",
       "path": "assurance/desktop-oracle.md",
       "title": "Independent desktop persistence oracle",
@@ -128,7 +141,7 @@
         "SP-TESTING",
         "SP-SECURITY"
       ],
-      "sha256": "f66175bfa31411b4a6781140afc0e0460551d6ac12837002ff1994d615ff2c7a"
+      "sha256": "21d356f865e813911d48d6fcdba5842ee1c8c55ba5bdf0b72edd90bf4b33ea6e"
     },
     {
       "id": "SP-SECURITY",
@@ -149,7 +162,7 @@
         "SP-AUTHORITY",
         "SP-PROTOCOL"
       ],
-      "sha256": "0cca39e3f8e910dcef4e30f2225c0d8025d881efcb7616718d3c6177a715921a"
+      "sha256": "cb0f365e62609e001c4fe302a7cfac6b9fad401dd85caac34cf2a089e0cf9502"
     },
     {
       "id": "SP-COMMANDS",
@@ -203,7 +216,7 @@
         "SP-PROTOCOL",
         "SP-COMMANDS"
       ],
-      "sha256": "a370667bec2101093311585a3e56cf4557b7cd055f63d68c5067ac160d0e392e"
+      "sha256": "b99ec21b677ddbdf5d0eb32e0d9c13a183c6625f6ac5679df9840372b219904e"
     },
     {
       "id": "SP-VERSIONS",
@@ -333,7 +346,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "e9563de654c5814007b41249e0d61cfd2c6c1d0a2911c6f805bbd57242dfb3b6"
+      "sha256": "3a890d2e94ce5e2ff3e00d494ad0defd15a0f32b19d6232eaebafda789cae761"
     },
     {
       "id": "SP-READINESS",
@@ -343,7 +356,7 @@
       "requires": [
         "SP-CURRENT"
       ],
-      "sha256": "ed3f62755eeb5b70d7f149f8910f19ea33276a5d901a101acf76da300d6cbc0a"
+      "sha256": "63709733ee93202a8e34074deeb0d5942044508f191c34aa8383376dc2579908"
     },
     {
       "id": "SP-RISKS",
@@ -356,6 +369,21 @@
       "sha256": "58432869c6cc2649a11a7af8661cb965ea821a99b0418d0b255eda76e6786523"
     },
     {
+      "id": "SP-W01-PACKAGE",
+      "path": "delivery/packages/w-01-foundation.md",
+      "title": "W-01 portable build and model foundation",
+      "description": "Define the first useful program, model cases and build evidence without claiming a desktop implementation.",
+      "requires": [
+        "SP-WORK-PACKAGES",
+        "SP-COMPOSITION",
+        "SP-PORTABILITY",
+        "SP-STATE",
+        "SP-TARGETS",
+        "SP-ACCEPTANCE-TRACES"
+      ],
+      "sha256": "13fa3eaf1f860beb73b82be46bc6c27256f6a44e971d49adab235d22f7d2a312"
+    },
+    {
       "id": "SP-ROADMAP",
       "path": "delivery/roadmap.md",
       "title": "Greenfield implementation campaign",
@@ -365,7 +393,7 @@
         "SP-PLATFORMS",
         "SP-TESTING"
       ],
-      "sha256": "04d0ad1e3f73100e63318a5474356399cfb2156267606638f8c791177de70da2"
+      "sha256": "a810e9b3bd8620436b24cdde1e0c9e9fb009817568e768381e2887db9669c6ea"
     },
     {
       "id": "SP-TARGETS",
@@ -376,7 +404,18 @@
         "SP-PLATFORMS",
         "SP-RELEASE"
       ],
-      "sha256": "a890534307701cb122436112809bfcfe4c05edaccded4a7313748087b3c0a173"
+      "sha256": "d3efb73a46f4b581c7e71901a6b68cc42c5750152be80ac8dfaa532f3cacce5d"
+    },
+    {
+      "id": "SP-WORK-PACKAGES",
+      "path": "delivery/work-packages.md",
+      "title": "Implementation work-package closure",
+      "description": "Make each admitted package implementable, verifiable and resumable from the repository.",
+      "requires": [
+        "SP-AUTHORITY",
+        "SP-TESTING"
+      ],
+      "sha256": "5d21d4d4ef8500b69be48b78e6123ef899756e97f53a14046b5708fb07c03e86"
     },
     {
       "id": "SP-DESKTOP",

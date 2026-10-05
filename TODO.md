@@ -14,6 +14,7 @@ profile is implemented or qualified**. This checklist routes work; the
 - [x] Add experimental portable scene/binding/layout contracts and retain 0.1 fixtures.
 - [x] Define saver roles, target identity, binary names, installation ownership and maintenance gates.
 - [x] Separate native profile delivery and trace audit recommendations to contracts and work.
+- [x] Define work-package gates, a detailed W-01 foundation package and concrete model/request/recovery acceptance traces.
 
 These checks mean documentation/contract work is present, not that its runtime
 behaviour has been implemented. See [audit disposition](spec/delivery/audit-2026-10-04.md).
@@ -21,6 +22,8 @@ behaviour has been implemented. See [audit disposition](spec/delivery/audit-2026
 ## First native campaign
 
 - [ ] W-00/W-01: admit runtime scope; create real CMake targets, component ownership and pinned build profiles.
+- [ ] W-01: bind every mandatory model case to runnable tests and deliver a nonempty fixture smoke program; see the [package](spec/delivery/packages/w-01-foundation.md).
+- [ ] W-24: close message bodies/roles/states, mutable ownership and global/control queue budgets before implementing the transport.
 - [ ] W-24/W-25: implement authenticated local IPC, current-policy enforcement, bounded recovery and independent diagnostics.
 - [ ] W-02–W-06: run changing-scene host probes for contemporary Windows, XP/7, Linux and macOS/older OS X.
 - [ ] W-07–W-11: implement demand, commands, configuration recovery, portable scenes, editor and native settings facilities.
@@ -29,6 +32,7 @@ behaviour has been implemented. See [audit disposition](spec/delivery/audit-2026
 - [ ] W-27–W-30: complete each profile's live editable persistent desktop, save/reload and failure journey.
 - [ ] W-40–W-43: qualify each selected payload's accessibility, privacy, performance and recovery.
 - [ ] W-48: verify document conformance across independent native implementations.
+- [ ] Run the admitted [cold-start exercise](spec/assurance/acceptance-traces.md#cold-start-exercise) and classify consequential assumptions before claiming repository-only implementation closure.
 
 One blocked native lab does not block another profile's honestly scoped preview.
 W-12/W-13/W-20/W-21 are aggregate tracking milestones, not prerequisite joins for
@@ -46,6 +50,7 @@ the independent units. Scope every execution and support claim to an exact profi
 
 ## Distribution and owner decisions
 
+- [ ] Populate a finite release scope with exact profiles, capabilities, document versions, packages, mandatory tests and explicit deferrals.
 - [ ] W-38: choose code/docs/assets licensing, contribution/IP terms, security intake and supported-release ownership.
 - [ ] W-26/W-32: instantiate component, release and setup manifests from real build closure and inspected provider contracts.
 - [ ] W-32: pin USK source/artifact/SDK and qualify each enabled operation/profile; keep normal startup independent.

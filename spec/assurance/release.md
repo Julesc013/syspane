@@ -10,9 +10,9 @@ sp_profile: "syspane-spec/0.1.0"
 sp_authority: "normative-proposal"
 sp_requires: ["SP-TESTING", "SP-SECURITY"]
 sp_review: "unreviewed"
-sp_sources: ["SRC-CONVERSATION", "SRC-REPRO", "SRC-AUDIT-2026-10-04"]
+sp_sources: ["SRC-CONVERSATION", "SRC-REPRO", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}, {"id": "SRC-REPRO", "resource": "https://reproducible-builds.org/docs/definition/", "title": "Reproducible Builds definition"}]
-updated: {"by": "codex", "at": "2026-10-04T19:32:52+11:00", "scope": "October audit amendments; no human review attested"}
+updated: {"by": "codex", "at": "2026-10-05T19:48:29+11:00", "scope": "Implementation closure review; no native execution or human review attested"}
 ---
 
 # Build, release, servicing and deployment
@@ -57,3 +57,9 @@ Before publication choose code/docs/assets licenses and contribution provenance,
 audit redistribution/notices, establish security intake and supported-version/hotfix
 ownership, and record signing/publication authority. No license or release consent
 is inferred from the audit text or successful specification checks.
+
+Each release needs the finite scope record defined by
+[work-package closure](../delivery/work-packages.md#finite-release-closure).
+Required profiles, capabilities, document versions, package forms and case bindings
+must be concrete. A model/console smoke artifact cannot satisfy the first complete
+desktop edition's native controls, editing, telemetry, persistence and recovery.

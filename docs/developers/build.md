@@ -33,3 +33,10 @@ same commands; AIDE is neither an endpoint dependency nor a build prerequisite.
 Start with [TODO](../../TODO.md), [architecture](architecture.md) and
 [target profiles](../../spec/delivery/target-profiles.md). License/contribution
 terms remain an owner decision; this guide does not invent them.
+
+The [W-01 foundation package](../../spec/delivery/packages/w-01-foundation.md)
+defines the first model program and required cases. Populate its concrete profile
+and recipe before building; the placeholder commands in that package are design
+requirements, not available targets. Buildable, implemented, qualified and
+releasable are separate claims. See [the workflow](agent-workflow.md) for case
+bindings and evidence needed to resume from a fresh checkout.

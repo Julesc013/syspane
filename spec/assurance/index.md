@@ -2,6 +2,7 @@
 
 Generated navigation; edit the referenced source documents, then run `specctl.py generate`.
 
+- [Concrete implementation acceptance traces](acceptance-traces.md) — Specify independent expected outcomes for the first model, request and recovery cases.
 - [Independent desktop persistence oracle](desktop-oracle.md) — Observe real pixels over time instead of trusting window flags.
 - [Performance, energy and freshness budgets](performance.md) — Measure useful work and end-to-end latency without zero-overhead claims.
 - [Build, release, servicing and deployment](release.md) — Make releases reproducible, attributable and honest about support.
