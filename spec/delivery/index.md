@@ -19,6 +19,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Explicit private preservation checkpoint](preservation-handoff.md) — Bind opaque configuration copies, native controls and interrupted publication to measured development evidence.
 - [Portable recovery implementation checkpoint](recovery-handoff.md) — Record lease, render-progress and restart decisions while preserving native recovery gates.
 - [Greenfield implementation campaign](roadmap.md) — Build native vertical slices and contracts together in risk order.
+- [Complete remote state import checkpoint](state-import-handoff.md) — Connect bounded telemetry documents to a revocable complete model without changing reported retention or inventing measurement freshness.
 - [Native child supervision implementation checkpoint](supervision-handoff.md) — Bind owned-child lifetime and independent health decisions to Windows/Linux fault evidence.
 - [Build targets and qualification profiles](target-profiles.md) — Bind concrete runtime floors to evidence instead of inferring support from platform names.
 - [Bounded telemetry document checkpoint](telemetry-wire-handoff.md) — Bind versioned delivery decoding and exact replay preservation to native-compiled portable cases without claiming a live subscription.

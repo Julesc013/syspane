@@ -12,7 +12,7 @@ sp_requires: ["SP-CURRENT"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-AUDIT-2026-10-04", "resource": "User-supplied October 2026 audit inputs", "title": "October review inputs"}]
-updated: {"by": "codex", "at": "2026-10-06T07:20:37+11:00", "scope": "Bounded telemetry document checkpoint; native subscription and full-state import remain open"}
+updated: {"by": "codex", "at": "2026-10-06T07:50:25+11:00", "scope": "Complete remote state import checkpoint; native demand/policy/clock admission remains open"}
 ---
 
 # Implementation readiness and gates
@@ -25,7 +25,7 @@ new versioned schemas or explicit work-scope refinement.
 | Gate | Present as specification/checks | Pending implementation/evidence |
 |---|---|---|
 | Initial authoring | Setting descriptors, scene/binding/layout 0.2, frame/handshake/preview checks over real local IPC | Runtime merge/resolution, migration, persistence and native controls |
-| Recovery/security | Lease/render/restart guards, native owned-child fault supervision, independent public diagnostics/native inspector, private preservation/native controls, typed synchronized data ownership, bounded telemetry document codec, policy checks and native peer identity evidence | Preservation edge-case qualification, protected-policy deployment, actual telemetry/renderer recovery, cross-user/logon qualification, data-path revocation and measured budgets |
+| Recovery/security | Lease/render/restart guards, native owned-child fault supervision, independent public diagnostics/native inspector, private preservation/native controls, typed synchronized data ownership, bounded telemetry document codec and complete-state import, policy checks and native peer identity evidence | Preservation edge-case qualification, protected-policy deployment, actual telemetry/renderer recovery, cross-user/logon qualification, data-path revocation and measured budgets |
 | Native profiles | Windows/Linux model, protocol and native IPC build profiles, component ownership, calibrated external pixel/time observer and executable checks | Native reveal/input/wallpaper adapters, native recovery, desktop builds and target qualification |
 | Content/SDK | Preset/package/extension metadata and buffer-result sketch | Bounded importer, dependency closure, extended theme/AST, installed SDK/ABI consumers |
 | Saver | Role/lifecycle/privacy/ownership contracts | Native host adapters and preview/fullscreen/configuration qualification |
@@ -85,6 +85,13 @@ slice closes role/state/ownership, queue and reservation limits; disabled featur
 still require their own closure before advertisement. For W-08/W-09/W-33, add exact merge, scene/layout, selector, preset and
 recovery examples as those boundaries are admitted. Existing framing, persistence
 and architecture decisions remain the starting point.
+
+The [complete-state import checkpoint](state-import-handoff.md) now passes 77 Windows,
+78 Linux and 73 historical-toolset host checks. Six import families bind the codec
+to the revocable model owner, preserve reported retention/metadata/replay identity,
+and reject partial replacement. Native subscription/demand ownership, queue
+revocation and producer-clock mapping remain open; no collector or renderer is
+connected and no desktop support follows from these checks.
 
 Use the proposed cold-start exercise to detect missing observable contracts.
 Private implementation differences are permissible. Missing laboratories remain

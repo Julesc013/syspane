@@ -25,7 +25,10 @@ A [synchronized data view](spec/delivery/data-view-handoff.md) now joins model
 validation, producer leases and policy-bound presentation. Native telemetry/renderer
 recovery, product retention and desktop integration remain pending. A
 [bounded telemetry codec](spec/delivery/telemetry-wire-handoff.md) now preserves
-versioned snapshot documents and exact replay bytes; native subscriptions stay disabled.
+versioned snapshot documents and exact replay bytes. The new
+[complete-state import](spec/delivery/state-import-handoff.md) connects decoded
+state to that owner while preserving remote retention and identity metadata.
+Native subscriptions stay disabled pending their demand/policy/clock contracts.
 An external pixel/time oracle is calibrated against live, hidden, frozen and
 obstructed synthetic X11 surfaces. A real Openbox/PCManFM Show Desktop experiment
 now exposes the basic X11 candidate's placement failure: above the desktop it

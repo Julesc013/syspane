@@ -17,19 +17,28 @@ bool safe_text(const std::string& value, std::size_t max) {
     // UI adapters still own escaping. Reject controls, including terminal escape.
     return value.size() <= max && std::none_of(value.begin(), value.end(), [](unsigned char c) { return c < 32 || c == 127; });
 }
-bool valid_time(const UtcTime& time) { return time.nanoseconds < 1000000000; }
+bool valid_time(const UtcTime& time) {
+    return time.nanoseconds < 1000000000 && time.subnanoseconds.size() <= 34 &&
+        (time.subnanoseconds.empty() || (time.subnanoseconds.back() != '0' &&
+         std::all_of(time.subnanoseconds.begin(), time.subnanoseconds.end(), [](char c) { return c >= '0' && c <= '9'; })));
+}
 auto key(const Observation& o) { return std::tie(o.entity_id, o.source_id, o.field); }
 std::size_t observation_bytes(const Observation& o) {
     return sizeof(o) + o.entity_id.size() + o.field.size() + o.source_id.size() + o.unit.size() +
         (std::holds_alternative<std::string>(o.value) ? std::get<std::string>(o.value).size() : 0) +
         (o.measured_at ? o.measured_at->epoch.size() : 0) +
-        (o.error ? o.error->code.size() + o.error->message.size() : 0);
+        (o.error ? o.error->code.size() + o.error->message.size() : 0) + o.attempted_at.subnanoseconds.size() +
+        (o.observed_at ? o.observed_at->subnanoseconds.size() : 0);
 }
 std::optional<std::size_t> accounted_bytes(const Publication& p, std::size_t limit) {
     std::size_t size = 0;
     const auto add = [&](std::size_t n) { if (n > limit - size) return false; size += n; return true; };
     if (!add(sizeof(p)) || !add(p.record_id.size()) || !add(p.next.producer.size()) || !add(p.next.epoch.size())) return {};
+    if (!add(p.replay_bytes.size()) || !add(p.next.reported_document.size()) ||
+        (p.next.captured_at && !add(p.next.captured_at->subnanoseconds.size()))) return {};
     for (const auto& e : p.next.entities) if (!add(sizeof(e)) || !add(e.id.size()) || !add(e.kind.size()) || !add(e.display_name.size())) return {};
+    for (const auto& e : p.next.entities) for (const auto& item : e.identity)
+        if (!add(sizeof(item)) || !add(item.first.size()) || !add(item.second.size())) return {};
     for (const auto& s : p.next.sources) if (!add(sizeof(s)) || !add(s.id.size()) || !add(s.kind.size()) || !add(s.scope.size())) return {};
     for (const auto& r : p.next.relationships) if (!add(sizeof(r)) || !add(r.source.size()) || !add(r.target.size()) || !add(r.kind.size())) return {};
     for (const auto& o : p.next.observations) if (!add(observation_bytes(o))) return {};
@@ -38,14 +47,14 @@ std::optional<std::size_t> accounted_bytes(const Publication& p, std::size_t lim
 } // namespace
 
 bool Observation::operator==(const Observation& b) const {
-    return std::tie(entity_id, field, source_id, value, unit, origin, support, acquisition, freshness, presence, observed_at, attempted_at, measured_at, sample_interval_ns, error) ==
-        std::tie(b.entity_id, b.field, b.source_id, b.value, b.unit, b.origin, b.support, b.acquisition, b.freshness, b.presence, b.observed_at, b.attempted_at, b.measured_at, b.sample_interval_ns, b.error);
+    return std::tie(entity_id, field, source_id, value, unit, origin, support, acquisition, freshness, presence, observed_at, attempted_at, measured_at, sample_interval_ns, error, generation) ==
+        std::tie(b.entity_id, b.field, b.source_id, b.value, b.unit, b.origin, b.support, b.acquisition, b.freshness, b.presence, b.observed_at, b.attempted_at, b.measured_at, b.sample_interval_ns, b.error, b.generation);
 }
 bool Snapshot::operator==(const Snapshot& b) const {
-    return std::tie(producer, epoch, generation, entities, sources, relationships, observations) == std::tie(b.producer, b.epoch, b.generation, b.entities, b.sources, b.relationships, b.observations);
+    return std::tie(producer, epoch, generation, entities, sources, relationships, observations, captured_at, reported_document) == std::tie(b.producer, b.epoch, b.generation, b.entities, b.sources, b.relationships, b.observations, b.captured_at, b.reported_document);
 }
 bool Publication::operator==(const Publication& b) const {
-    return std::tie(record_id, expected_base, next) == std::tie(b.record_id, b.expected_base, b.next);
+    return std::tie(record_id, expected_base, next, replay_bytes) == std::tie(b.record_id, b.expected_base, b.next, b.replay_bytes);
 }
 
 Store::Store(std::string producer, std::string epoch, std::vector<Metric> metrics, Limits limits)
@@ -69,8 +78,17 @@ Result Store::resynchronize(const Publication& candidate) {
     try { return publish_checked(candidate, true); }
     catch (const std::bad_alloc&) { return {Code::capacity}; }
 }
-Result Store::publish_checked(const Publication& candidate, bool resynchronize) {
+Result Store::import_state(const Publication& candidate) {
+    try { return publish_checked(candidate, !candidate.expected_base, true); }
+    catch (const std::bad_alloc&) { return {Code::capacity}; }
+}
+Result Store::publish_checked(const Publication& candidate, bool resynchronize, bool reported) {
     const auto& next = candidate.next;
+    if ((reported_ && *reported_ != reported) ||
+        (reported && (next.reported_document.empty() || candidate.replay_bytes.empty() || !next.captured_at)) ||
+        (!reported && (!next.reported_document.empty() || !candidate.replay_bytes.empty()))) return {Code::invalid_mode};
+    if (next.reported_document.size() > 1048576 || candidate.replay_bytes.size() > 1048576) return {Code::capacity};
+    if (next.captured_at && !valid_time(*next.captured_at)) return {Code::invalid_observation};
     if (!identifier(candidate.record_id)) return {Code::invalid_identity};
     if (next.producer != producer_ || next.epoch != epoch_) return {Code::wrong_epoch, true};
     // Bound before comparing or copying potentially large input containers.
@@ -88,6 +106,8 @@ Result Store::publish_checked(const Publication& candidate, bool resynchronize) 
     std::set<std::string> entities, sources;
     for (const auto& e : next.entities) {
         if (!identifier(e.id) || !identifier(e.kind) || !safe_text(e.display_name, 2048) || e.generation > next.generation) return {Code::invalid_identity};
+        if (e.identity.size() > 64) return {Code::capacity};
+        for (const auto& item : e.identity) if (item.first.size() > 256 || item.second.size() > 2048) return {Code::invalid_identity};
         if (!entities.insert(e.id).second) return {Code::duplicate_entity};
         if (retired_.count(e.id)) return {Code::retired_identity};
     }
@@ -110,6 +130,7 @@ Result Store::publish_checked(const Publication& candidate, bool resynchronize) 
         if (!entities.count(o.entity_id) || !sources.count(o.source_id) || !identifier(o.field) ||
             !valid_time(o.attempted_at) || (o.observed_at && !valid_time(*o.observed_at)) ||
             (o.measured_at && o.measured_at->epoch != epoch_)) return {Code::invalid_observation};
+        if ((o.generation && *o.generation > next.generation) || (reported && (!o.generation || o.measured_at))) return {Code::invalid_observation};
         if (!observation_keys.insert(key(o)).second) return {Code::duplicate_observation};
         const auto metric = std::find_if(metrics_.begin(), metrics_.end(), [&](const Metric& m) { return m.field == o.field; });
         if (metric == metrics_.end() || metric->unit != o.unit ||
@@ -118,6 +139,20 @@ Result Store::publish_checked(const Publication& candidate, bool resynchronize) 
             (std::holds_alternative<std::string>(o.value) && std::get<std::string>(o.value).size() > 16384)) return {Code::invalid_observation};
         if (o.error && (!identifier(o.error->code) || !safe_text(o.error->message, 2048))) return {Code::invalid_observation};
         if ((o.acquisition == Acquisition::failed || o.acquisition == Acquisition::denied) && !o.error) return {Code::invalid_observation};
+        if (reported) {
+            // A full remote state reports its own retained measurement. It is not
+            // a local acquisition attempt and cannot inherit older local values.
+            if (o.value.index() == 0 && (o.observed_at || o.measured_at)) return {Code::invalid_observation};
+            if (o.support == Support::unsupported) {
+                if (o.value.index() != 0 || o.acquisition == Acquisition::success || o.freshness != Freshness::not_applicable) return {Code::invalid_observation};
+            } else if (o.acquisition == Acquisition::success) {
+                if (o.support != Support::supported || o.value.index() == 0 || !o.observed_at || o.error) return {Code::invalid_observation};
+            } else if (o.value.index() != 0) {
+                if (o.support != Support::supported || !o.observed_at || o.freshness != Freshness::stale) return {Code::invalid_observation};
+            } else if (o.freshness != Freshness::unknown) return {Code::invalid_observation};
+            if (o.presence == Presence::absent && o.value.index() != 0 && o.freshness != Freshness::stale) return {Code::invalid_observation};
+            continue;
+        }
         if (o.support == Support::unsupported) {
             if (o.value.index() != 0 || o.acquisition == Acquisition::success) return {Code::invalid_observation};
             o.freshness = Freshness::not_applicable;
@@ -141,7 +176,7 @@ Result Store::publish_checked(const Publication& candidate, bool resynchronize) 
     }
     // Retained values can make normalized state larger than the incoming attempt.
     if (current_ && next.generation == current_->generation && !(normalized == *current_)) return {Code::conflict};
-    Publication normalized_size{candidate.record_id, candidate.expected_base, normalized};
+    Publication normalized_size{candidate.record_id, candidate.expected_base, normalized, candidate.replay_bytes};
     if (!accounted_bytes(normalized_size, limits_.candidate_bytes)) return {Code::capacity};
 
     auto retired = retired_;
@@ -171,6 +206,7 @@ Result Store::publish_checked(const Publication& candidate, bool resynchronize) 
     records_.swap(records);
     retired_.swap(retired);
     retained_bytes_ = retained_bytes;
+    reported_ = reported;
     return {Code::accepted};
 }
 
@@ -209,6 +245,7 @@ const char* code_name(Code code) {
     case Code::invalid_observation: return "invalid_observation";
     case Code::duplicate_observation: return "duplicate_observation";
     case Code::capacity: return "capacity";
+    case Code::invalid_mode: return "invalid_mode";
     }
     return "unknown";
 }

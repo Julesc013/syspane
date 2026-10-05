@@ -719,9 +719,12 @@
       "public_interfaces": [
         "source/diagnostics/data_view.hpp"
       ],
-      "private_interfaces": [],
+      "private_interfaces": [
+        "source/diagnostics/reported_state.hpp"
+      ],
       "sources": [
-        "source/diagnostics/data_view.cpp"
+        "source/diagnostics/data_view.cpp",
+        "source/diagnostics/reported_state.cpp"
       ],
       "allowed_dependencies": [
         "syspane_model",
@@ -780,6 +783,32 @@
       ],
       "allowed_dependencies": [
         "syspane_protocol"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "windows-x64-gcc15",
+        "linux-x64-gcc13",
+        "windows-x86-v141-xp"
+      ]
+    },
+    {
+      "id": "state-import-tests",
+      "target": "syspane_state_import_tests",
+      "type": "EXECUTABLE",
+      "source_owner": "tests/fault/",
+      "public_interfaces": [],
+      "private_interfaces": [],
+      "sources": [
+        "tests/fault/state_import_tests.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_data_view"
       ],
       "target_requirements": [
         "cxx17"

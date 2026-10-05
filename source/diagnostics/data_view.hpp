@@ -2,6 +2,7 @@
 #include "state.hpp"
 #include "recovery.hpp"
 #include "policy.hpp"
+#include "telemetry.hpp"
 #include <functional>
 #include <memory>
 
@@ -25,6 +26,8 @@ public:
     DataView(const DataView&) = delete;
     DataView& operator=(const DataView&) = delete;
     DataAttachment attach(const std::string& producer, const std::string& epoch, std::uint64_t now);
+    DataAttachment attach_wire(const protocol::TelemetryBinding& binding, std::uint64_t now);
+    DataResult receive(std::uint64_t token, std::uint64_t revision, std::string_view payload, std::uint64_t now);
     DataResult full(std::uint64_t token, std::uint64_t policy_revision, const model::Publication& publication, std::uint64_t now);
     DataResult delta(std::uint64_t token, std::uint64_t policy_revision, const model::Publication& publication, std::uint64_t now);
     DataCode heartbeat(std::uint64_t token, std::uint64_t revision, std::uint64_t sequence, std::uint64_t now);
@@ -39,7 +42,7 @@ private:
     bool advance_lifetime();
     void drop(std::uint64_t now);
     DataCode check(std::uint64_t token, std::uint64_t revision, std::uint64_t now);
-    DataResult publish(bool full, std::uint64_t token, std::uint64_t revision, const model::Publication&, std::uint64_t now);
+    DataResult publish(bool full, std::uint64_t token, std::uint64_t revision, const model::Publication&, std::uint64_t now, bool reported = false);
     configuration::Authority authority_;
     configuration::Policy policy_;
     std::string channel_, classification_, producer_, epoch_;
@@ -50,5 +53,6 @@ private:
     bool borrowed_ = false, lifetime_fault_ = false;
     ProducerLease lease_;
     std::unique_ptr<model::Store> store_;
+    std::unique_ptr<protocol::TelemetryBinding> wire_binding_;
 };
 }

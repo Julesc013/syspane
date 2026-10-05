@@ -1,4 +1,5 @@
 #include "data_view.hpp"
+#include "reported_state.hpp"
 #include <limits>
 #include <stdexcept>
 
@@ -43,7 +44,7 @@ bool DataView::advance_lifetime() {
     ++lifetime_; return true;
 }
 void DataView::drop(std::uint64_t now) {
-    store_.reset(); producer_.clear(); epoch_.clear();
+    store_.reset(); wire_binding_.reset(); producer_.clear(); epoch_.clear();
     if (token_) lease_.disconnect(token_, now);
     lease_.forget(now); token_ = 0;
 }
@@ -57,7 +58,43 @@ DataAttachment DataView::attach(const std::string& producer, const std::string& 
     if (attached.code != Code::accepted) return {translated(attached.code)};
     if (!advance_lifetime()) { drop(now); return {DataCode::closed}; }
     producer_.swap(next_producer); epoch_.swap(next_epoch); token_ = attached.token;
+    wire_binding_.reset();
     return {DataCode::accepted, token_};
+}
+DataAttachment DataView::attach_wire(const protocol::TelemetryBinding& binding, std::uint64_t now) {
+    require_owner();
+    if (!permitted()) return {DataCode::denied};
+    if (binding.policy_revision != policy_.revision) return {DataCode::policy_changed};
+    if (binding.channel != channel_ || binding.classification != classification_ ||
+        binding.direction != protocol::TelemetryDirection::producer_to_consumer) return {DataCode::invalid};
+    try {
+        protocol::validate_telemetry_binding(binding);
+        auto prepared = std::make_unique<protocol::TelemetryBinding>(binding);
+        const auto attached = attach(binding.producer,binding.epoch,now);
+        if (attached.code == DataCode::accepted) wire_binding_.swap(prepared);
+        return attached;
+    } catch (const protocol::Error&) { return {DataCode::invalid}; }
+    catch (const std::bad_alloc&) { return {DataCode::capacity}; }
+}
+DataResult DataView::receive(std::uint64_t token, std::uint64_t revision, std::string_view payload, std::uint64_t now) {
+    const auto checked = check(token,revision,now);
+    if (checked != DataCode::accepted) return {checked};
+    if (!wire_binding_) { lease_.gap(token_,now); return {DataCode::invalid,model::Code::invalid_mode}; }
+    try {
+        const auto message = protocol::decode_telemetry(payload,*wire_binding_);
+        if (message.body["snapshot"]["completeness"] != "complete") {
+            lease_.gap(token_,now); return {DataCode::snapshot_required};
+        }
+        const auto candidate = detail::reported_state(message);
+        return publish(message.type == "snapshot",token,revision,candidate,now,true);
+    } catch (const protocol::Error& error) {
+        if (std::string_view(error.what()) == "telemetry.capacity") {
+            lease_.gap(token_,now); return {DataCode::capacity,model::Code::capacity};
+        }
+        lease_.disconnect(token_,now); return {DataCode::invalid};
+    } catch (const std::bad_alloc&) {
+        lease_.gap(token_,now); return {DataCode::capacity,model::Code::capacity};
+    }
 }
 DataCode DataView::check(std::uint64_t token, std::uint64_t revision, std::uint64_t now) {
     require_owner();
@@ -73,9 +110,12 @@ DataResult DataView::full(std::uint64_t token, std::uint64_t revision, const mod
 DataResult DataView::delta(std::uint64_t token, std::uint64_t revision, const model::Publication& candidate, std::uint64_t now) {
     return publish(false, token, revision, candidate, now);
 }
-DataResult DataView::publish(bool full, std::uint64_t token, std::uint64_t revision, const model::Publication& candidate, std::uint64_t now) {
+DataResult DataView::publish(bool full, std::uint64_t token, std::uint64_t revision, const model::Publication& candidate, std::uint64_t now, bool reported) {
     const auto checked = check(token, revision, now);
     if (checked != DataCode::accepted) return {checked};
+    if (reported != static_cast<bool>(wire_binding_)) {
+        lease_.gap(token_,now); return {DataCode::invalid,model::Code::invalid_mode};
+    }
     if (!full && lease_.view().snapshot_required) return {DataCode::snapshot_required};
     if (candidate.next.producer != producer_ || candidate.next.epoch != epoch_) {
         lease_.disconnect(token_, now);
@@ -90,7 +130,7 @@ DataResult DataView::publish(bool full, std::uint64_t token, std::uint64_t revis
         const bool same_scope = old && old->producer == producer_ && old->epoch == epoch_;
         auto prepared = same_scope ? std::make_unique<model::Store>(*store_) :
             std::make_unique<model::Store>(producer_, epoch_, metrics_, limits_);
-        const auto validated = full ? prepared->resynchronize(candidate) : prepared->publish(candidate);
+        const auto validated = reported ? prepared->import_state(candidate) : (full ? prepared->resynchronize(candidate) : prepared->publish(candidate));
         if (!validated.accepted()) {
             lease_.gap(token_, now);
             return {validated.code == model::Code::capacity ? DataCode::capacity :

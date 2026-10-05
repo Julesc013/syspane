@@ -23,7 +23,8 @@ enum class Presence { present, absent, unknown };
 struct UtcTime {
     std::int64_t seconds = 0;
     std::uint32_t nanoseconds = 0;
-    bool operator==(const UtcTime& b) const { return std::tie(seconds, nanoseconds) == std::tie(b.seconds, b.nanoseconds); }
+    std::string subnanoseconds = {};
+    bool operator==(const UtcTime& b) const { return std::tie(seconds, nanoseconds, subnanoseconds) == std::tie(b.seconds, b.nanoseconds, b.subnanoseconds); }
 };
 
 struct Tick {
@@ -44,7 +45,8 @@ struct Entity {
     std::string kind;
     std::string display_name;
     std::uint64_t generation = 0;
-    bool operator==(const Entity& b) const { return std::tie(id, kind, display_name, generation) == std::tie(b.id, b.kind, b.display_name, b.generation); }
+    std::map<std::string, std::string> identity = {};
+    bool operator==(const Entity& b) const { return std::tie(id, kind, display_name, generation, identity) == std::tie(b.id, b.kind, b.display_name, b.generation, b.identity); }
 };
 
 struct Source {
@@ -77,6 +79,7 @@ struct Observation {
     std::optional<Tick> measured_at;
     std::optional<std::uint64_t> sample_interval_ns;
     std::optional<Error> error;
+    std::optional<std::uint64_t> generation = {};
     bool operator==(const Observation& b) const;
 };
 
@@ -88,6 +91,9 @@ struct Snapshot {
     std::vector<Source> sources;
     std::vector<Relationship> relationships;
     std::vector<Observation> observations;
+    std::optional<UtcTime> captured_at = {};
+    // Adapter-validated complete state, opaque to the JSON-independent model.
+    std::string reported_document = {};
     bool operator==(const Snapshot& b) const;
 };
 
@@ -95,6 +101,7 @@ struct Publication {
     std::string record_id;
     std::optional<std::uint64_t> expected_base;
     Snapshot next;
+    std::string replay_bytes = {};
     bool operator==(const Publication& b) const;
 };
 
@@ -118,7 +125,7 @@ struct Limits {
 enum class Code {
     accepted, duplicate, conflict, wrong_epoch, missing_base, generation_order,
     invalid_identity, duplicate_entity, duplicate_source, retired_identity,
-    dangling_relationship, invalid_observation, duplicate_observation, capacity
+    dangling_relationship, invalid_observation, duplicate_observation, capacity, invalid_mode
 };
 
 struct Result {
@@ -136,9 +143,10 @@ public:
     // Consumer-only full resynchronization: a new record may confirm the identical
     // normalized current generation. It reserves replay capacity and never resets history.
     Result resynchronize(const Publication& candidate);
+    Result import_state(const Publication& candidate);
     std::vector<Observation> retired_observations(const std::string& entity_id) const;
 private:
-    Result publish_checked(const Publication& candidate, bool resynchronize = false);
+    Result publish_checked(const Publication& candidate, bool resynchronize = false, bool reported = false);
     std::string producer_;
     std::string epoch_;
     std::vector<Metric> metrics_;
@@ -147,6 +155,7 @@ private:
     std::map<std::string, std::shared_ptr<const Publication>> records_;
     std::map<std::string, std::vector<Observation>> retired_;
     std::size_t retained_bytes_ = 0;
+    std::optional<bool> reported_;
 };
 
 std::optional<std::uint64_t> interval_ns(const Tick& before, const Tick& after);

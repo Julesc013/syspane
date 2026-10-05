@@ -115,12 +115,8 @@ void snapshot(const Json& s, const std::string& epoch) {
     }
 }
 Message checked(std::string_view payload, const TelemetryBinding& b) {
-    need(b.negotiated.max_frame_bytes >= 1024 && b.negotiated.max_frame_bytes <= frame_limit &&
-         !payload.empty() && payload.size() <= b.negotiated.max_frame_bytes, "telemetry.capacity");
-    need(b.negotiated.features.count("telemetry.snapshot") && b.negotiated.documents.count({"telemetry","0.1.0"}) &&
-         b.negotiated.documents.count({"snapshot","0.1.0"}) && b.negotiated.documents.count({"observation","0.1.0"}), "telemetry.feature");
-    need(identifier(b.connection) && identifier(b.epoch) && identifier(b.producer) && identifier(b.subscription) &&
-         one(Json(b.channel), {"desktop","inspector","saver","preview"}) && one(Json(b.classification), {"public","operational","sensitive"}), "telemetry.binding");
+    validate_telemetry_binding(b);
+    need(!payload.empty() && payload.size() <= b.negotiated.max_frame_bytes, "telemetry.capacity");
     auto message = decode(payload);
     need(message.connection_id == b.connection && message.producer_epoch == b.epoch, "telemetry.binding");
     const auto& body = message.body;
@@ -143,6 +139,14 @@ Message checked(std::string_view payload, const TelemetryBinding& b) {
     return message;
 }
 } // namespace
+void validate_telemetry_binding(const TelemetryBinding& b) {
+    need(b.negotiated.max_frame_bytes >= 1024 && b.negotiated.max_frame_bytes <= frame_limit, "telemetry.capacity");
+    need(b.negotiated.features.count("telemetry.snapshot") && b.negotiated.documents.count({"telemetry","0.1.0"}) &&
+         b.negotiated.documents.count({"snapshot","0.1.0"}) && b.negotiated.documents.count({"observation","0.1.0"}), "telemetry.feature");
+    need(identifier(b.connection) && identifier(b.epoch) && identifier(b.producer) && identifier(b.subscription) &&
+         (b.channel == "desktop" || b.channel == "inspector" || b.channel == "saver" || b.channel == "preview") &&
+         (b.classification == "public" || b.classification == "operational" || b.classification == "sensitive"), "telemetry.binding");
+}
 Message decode_telemetry(std::string_view payload, const TelemetryBinding& binding) {
     try { return checked(payload, binding); }
     catch (const Json::exception&) { throw Error("telemetry.body"); }

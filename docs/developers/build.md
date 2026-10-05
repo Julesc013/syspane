@@ -1,6 +1,14 @@
 # Developer setup and checks
 
-The latest [telemetry document checkpoint](../../spec/delivery/telemetry-wire-handoff.md)
+The latest [complete-state import checkpoint](../../spec/delivery/state-import-handoff.md)
+passes 77 Windows, 78 Linux and 73 historical-toolset host CTest entries. Run the six
+import families with `ctest --preset windows-x64-gcc15 -R "^import\." --output-on-failure`;
+Linux uses the ordinary wrapper. Both recorders accept `--state-import`, which also
+requires the preceding telemetry/data-view and applicable native regression cases.
+The receive boundary is in-process; native subscription/demand and producer-clock
+mapping remain pending.
+
+The earlier [telemetry document checkpoint](../../spec/delivery/telemetry-wire-handoff.md)
 passes 71 Windows, 72 Linux and 67 historical-toolset host CTest entries. Run the
 six codec families with `ctest --preset windows-x64-gcc15 -R "^telemetry\."
 --output-on-failure` (one command); Linux uses the ordinary wrapper. Record the full
@@ -11,7 +19,7 @@ The earlier [data-view checkpoint](../../spec/delivery/data-view-handoff.md) pas
 cases exercise the typed model/lease/policy owner. Run them with
 `ctest --preset windows-x64-gcc15 -R "^data\." --output-on-failure`; Linux uses the
 ordinary wrapper. Record complete suites with the recorder's `--data-view` option.
-Native subscriptions/codecs, real collectors and renderer integration remain pending.
+Native subscriptions, real collectors and renderer integration remain pending.
 Earlier counts below describe their named historical checkpoints.
 
 The modern diagnostic's native source/destination fields and

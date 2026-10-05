@@ -12,7 +12,7 @@ sp_requires: ["SP-PROCESSES", "SP-PERFORMANCE"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-AUDIT-2026-10-04"]
 sources: [{"id": "SRC-AUDIT-2026-10-04", "resource": "User-supplied SysPane audits and design reviews, 2026-10-04", "title": "October specification review inputs"}]
-updated: {"by": "codex", "at": "2026-10-06T06:58:29+11:00", "scope": "Typed synchronized data-view checkpoint; native telemetry and renderer recovery remain open"}
+updated: {"by": "codex", "at": "2026-10-06T07:50:25+11:00", "scope": "Link complete reported-state import and remaining native demand/clock boundaries"}
 ---
 
 # Independent recovery and bounded failure
@@ -90,3 +90,12 @@ Its [checkpoint](../delivery/data-view-handoff.md) preserves same-epoch replay a
 retired identities through full resynchronization. Policy replacement clears this
 consumer lifetime; it does not erase another component's copies or qualify native
 subscriptions, telemetry, rendering or visible recovery.
+
+The [complete-state import boundary](../delivery/packages/w-25-state-import.md)
+connects validated delivery documents to this owner. Reported retained values are
+imported as state, without inheriting older acquisition values. Partial/gap delivery
+retains the coherent model and requires a full resynchronization. The owner fixes
+locally admitted wire identity/policy bindings, preserves exact replay bytes and
+metadata, and drops them with payload on policy replacement. UTC normalization
+does not supply a producer-monotonic measurement or establish local TTL freshness.
+Native demand, transport queues and cross-component revocation still need closure.

@@ -8,7 +8,7 @@ import re
 import subprocess
 
 from check_legacy_artifacts import EXECUTABLES, build_inputs, verify
-from record_protocol import EXPECTED, RECOVERY_CASES, sha
+from record_protocol import EXPECTED, RECOVERY_CASES, IMPORT_CASES, sha
 
 ROOT = Path(__file__).resolve().parents[1]
 PROFILE = 'windows-x86-v141-xp'
@@ -23,7 +23,10 @@ def main():
     parser.add_argument('--preservation', action='store_true', help='Include the portable preservation policy boundary only')
     parser.add_argument('--data-view', action='store_true', help='Include portable synchronized data view cases')
     parser.add_argument('--telemetry', action='store_true', help='Include bounded telemetry document cases')
+    parser.add_argument('--state-import', action='store_true', help='Include complete remote state import cases')
     args = parser.parse_args()
+    if args.state_import:
+        args.telemetry = True
     if args.telemetry:
         args.data_view = True
     if args.data_view:
@@ -51,6 +54,8 @@ def main():
         expected |= {'data.'+case for case in ('VIEW-ATOMIC','VIEW-REPLAY','VIEW-RECONNECT','VIEW-LEASE','VIEW-POLICY','VIEW-FAULT')}
     if args.telemetry:
         expected |= {'telemetry.TELEMETRY-'+case for case in ('SNAPSHOT','MESSAGES','GRAPH','TIME','BOUNDS','PRESERVE')}
+    if args.state_import:
+        expected |= {'import.IMPORT-'+case for case in IMPORT_CASES}
     if len(cases) != len(expected) or {c['case'] for c in cases} != expected or any(c['outcome'] != 'pass' for c in cases):
         raise ValueError('incomplete, duplicated or failed historical-toolset host run')
     artifacts = {}
@@ -74,6 +79,8 @@ def main():
         sources.append(ROOT/'spec/delivery/packages/w-25-preservation.md')
     if args.data_view:
         sources.append(ROOT/'spec/delivery/packages/w-25-data-view.md')
+    if args.state_import:
+        sources.append(ROOT/'spec/delivery/packages/w-25-state-import.md')
     if args.telemetry:
         sources.append(ROOT/'spec/delivery/packages/w-25-telemetry-wire.md')
         for folder in ('spec/contracts', 'spec/fixtures'):

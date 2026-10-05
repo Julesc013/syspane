@@ -11,6 +11,7 @@ struct TelemetryBinding {
     std::uint64_t policy_revision;
     TelemetryDirection direction;
 };
+void validate_telemetry_binding(const TelemetryBinding& binding);
 Message decode_telemetry(std::string_view payload, const TelemetryBinding& binding);
 // Original body bytes are retained for exact request/publication replay identity.
 // Callers still own current authorization, bounded output and connection lifetime.

@@ -11,5 +11,6 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [W-25 bounded recent-failure metadata](w-25-failure-metadata.md) — Connect recorded failures to independent diagnosis without treating a local file as live health or policy authority.
 - [W-25 explicit private configuration preservation](w-25-preservation.md) — Preserve opaque damaged input without replacing source bytes, weakening policy or claiming a configuration commit.
 - [W-25 independent recovery and producer leases](w-25-recovery.md) — Close bounded recovery state before connecting native processes and diagnostic entry.
+- [W-25 complete remote state import](w-25-state-import.md) — Connect bounded telemetry documents to the revocable model owner without reinterpreting reported state as a local acquisition.
 - [W-25 bounded telemetry delivery document](w-25-telemetry-wire.md) — Close versioned subscription and snapshot delivery shapes without treating decoded documents as admitted native subscriptions.
 - [W-26 early local smoke package](w-26-smoke.md) — Bind foundation payload bytes to a local archive and independently check relocated execution.

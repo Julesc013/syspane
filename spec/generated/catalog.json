@@ -63,7 +63,7 @@
         "SP-PROCESSES",
         "SP-PERFORMANCE"
       ],
-      "sha256": "d761201aaaad3066d7a9e6ce6e5297e5b9387b4aaa2873525a908f08c03c6363"
+      "sha256": "97d7dcda14e76a1ac2d060df95bbf90b84e251916ee7f643f3f4a8754acc2499"
     },
     {
       "id": "SP-SCHEDULER",
@@ -357,7 +357,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "aac917f04562c28f86891a615e51aeb14d3f3a749fa055aa9e779ed10f0328e9"
+      "sha256": "6b31d323a4c6427bc3284204e06a7ac9b3ef3f87d888a03bc08300dffc9afea4"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -422,7 +422,7 @@
       "requires": [
         "SP-CURRENT"
       ],
-      "sha256": "ed27f1a644126e13610aee3ad93a0ea25a4b2b7e6f905fa01a8a546ccee1ae3a"
+      "sha256": "a82c7343e0f8616432d1157b5d5f7356c80f3631621f19d6a3096a23c4dcd119"
     },
     {
       "id": "SP-NATIVE-TRANSPORT-HANDOFF",
@@ -571,6 +571,19 @@
       "sha256": "33d78a71380ae4049ddb3da0e9ab21b381ec4867a712d78595547edb3ae85b7b"
     },
     {
+      "id": "SP-W25-STATE-IMPORT",
+      "path": "delivery/packages/w-25-state-import.md",
+      "title": "W-25 complete remote state import",
+      "description": "Connect bounded telemetry documents to the revocable model owner without reinterpreting reported state as a local acquisition.",
+      "requires": [
+        "SP-W25-TELEMETRY-WIRE",
+        "SP-W25-DATA-VIEW",
+        "SP-STATE",
+        "SP-POLICY"
+      ],
+      "sha256": "96debe40bc555f727e7b6f8fd53e436c5080f90b528b961fec593df9082ad80d"
+    },
+    {
       "id": "SP-W25-TELEMETRY-WIRE",
       "path": "delivery/packages/w-25-telemetry-wire.md",
       "title": "W-25 bounded telemetry delivery document",
@@ -628,6 +641,17 @@
         "SP-TESTING"
       ],
       "sha256": "a810e9b3bd8620436b24cdde1e0c9e9fb009817568e768381e2887db9669c6ea"
+    },
+    {
+      "id": "SP-STATE-IMPORT-HANDOFF",
+      "path": "delivery/state-import-handoff.md",
+      "title": "Complete remote state import checkpoint",
+      "description": "Connect bounded telemetry documents to a revocable complete model without changing reported retention or inventing measurement freshness.",
+      "requires": [
+        "SP-W25-STATE-IMPORT",
+        "SP-CAMPAIGN-ADMISSION"
+      ],
+      "sha256": "d1864812c09c8a71b85f11d76c0a460f69bba18788937d11e26980f6dd810ca0"
     },
     {
       "id": "SP-SUPERVISION-HANDOFF",

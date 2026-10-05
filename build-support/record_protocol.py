@@ -13,6 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 MODEL_CASES = 'STATE-01 STATE-02 STATE-03 STATE-04 STATE-05 VALIDITY-01 VALIDITY-02 CLOCK-01 CLOCK-02 BOUNDS-01 BOUNDS-02 BOUNDS-03 OBSERVATION-01 EPOCH-01 FRESHNESS-01 smoke'.split()
 PROTOCOL_CASES = 'FRAME-01 FRAME-02 FRAME-03 JSON-01 WIRE-01 NEGOTIATE-01 IPC-BUDGET-01 IPC-BUDGET-02 IPC-BUDGET-03 IPC-BUDGET-04 LEDGER-01 POLICY-01 POLICY-02 DISCLOSURE-01 QUEUE-01 SESSION-01 dependencies'.split()
 RECOVERY_CASES = 'LEASE-01 LEASE-02 LEASE-03 LEASE-04 LEASE-05 RENDER-01 RENDER-02 RETRY-01 RETRY-02 RETRY-03 RECOVERY-CLOCK'.split()
+IMPORT_CASES = 'STATE RETAIN COVERAGE REPLAY TIME LIFETIME'.split()
 EXPECTED = {f'model.{case}' for case in MODEL_CASES} | {f'protocol.{case}' for case in PROTOCOL_CASES} | {'composition.graph', 'composition.reject_forbidden'}
 
 
@@ -34,7 +35,10 @@ def main():
     parser.add_argument('--preservation', action='store_true', help='Require explicit private file preservation and native UI bindings')
     parser.add_argument('--data-view', action='store_true', help='Require synchronized model/lease/policy view cases')
     parser.add_argument('--telemetry', action='store_true', help='Require bounded telemetry document cases; no native subscription claim')
+    parser.add_argument('--state-import', action='store_true', help='Require complete remote state import through the wire-bound data owner')
     args = parser.parse_args()
+    if args.state_import:
+        args.telemetry = True
     if args.telemetry:
         args.data_view = True
     if args.data_view:
@@ -82,12 +86,17 @@ def main():
         expected |= {'data.'+case for case in ('VIEW-ATOMIC', 'VIEW-REPLAY', 'VIEW-RECONNECT', 'VIEW-LEASE', 'VIEW-POLICY', 'VIEW-FAULT')}
     if args.telemetry:
         expected |= {'telemetry.TELEMETRY-'+case for case in ('SNAPSHOT', 'MESSAGES', 'GRAPH', 'TIME', 'BOUNDS', 'PRESERVE')}
+    if args.state_import:
+        expected |= {'import.IMPORT-'+case for case in IMPORT_CASES}
     if len(cases) != len(expected) or {case['case'] for case in cases} != expected or any(case['outcome'] != 'pass' for case in cases):
         raise ValueError('missing, repeated, unexpected or failing case; preserve log before rerun')
     suffix = '.exe' if platform.system() == 'Windows' else ''
     artifacts = {name: {'sha256': sha(build/name), 'bytes': (build/name).stat().st_size}
                  for name in ('syspane_protocol_tests'+suffix, 'libsyspane_protocol.a', 'libsyspane_configuration.a', 'generated/settings_descriptors.hpp')}
     native_records = []
+    if args.state_import:
+        name = 'syspane_state_import_tests'+suffix
+        artifacts[name] = {'sha256': sha(build/name), 'bytes': (build/name).stat().st_size}
     if args.telemetry:
         name = 'syspane_telemetry_tests'+suffix
         artifacts[name] = {'sha256': sha(build/name), 'bytes': (build/name).stat().st_size}
@@ -229,6 +238,8 @@ def main():
     if args.telemetry:
         paths.append(ROOT/'spec/delivery/packages/w-25-telemetry-wire.md')
         paths.extend(sorted((ROOT/'spec/fixtures').rglob('*')))
+    if args.state_import:
+        paths.append(ROOT/'spec/delivery/packages/w-25-state-import.md')
     for directory in ('source', 'tests', 'build-support', 'spec/contracts'):
         paths.extend(sorted((ROOT/directory).rglob('*')))
     inputs = {p.relative_to(ROOT).as_posix(): sha(p) for p in paths
@@ -331,6 +342,17 @@ def main():
         report['slice'] = 'bounded telemetry document decoding and exact replay preservation'
         report['bindings']['telemetry'] = 'spec/delivery/packages/w-25-telemetry-wire.md'
         report['limits'].insert(0, 'Telemetry codec checks preserve complete documents, including partial/gap and reported retained values; no native subscription, model-state import or policy grant is enabled.')
+    if args.state_import:
+        report['slice'] = 'complete remote state import through a policy-bound data owner'
+        report['bindings']['state_import'] = 'spec/delivery/packages/w-25-state-import.md'
+        report['limits'] = [
+            'In-process receive checks preserve reported state, metadata and exact replay identity; partial/gap data cannot replace a complete model.',
+            'Bindings and policy authority are locally supplied fixtures; no native subscription/demand scheduler, actual collector or renderer is connected.',
+            'UTC conversion preserves subnanosecond precision but creates no measured tick; producer-clock mapping remains required for local TTL freshness.',
+            'Native regression families retain their existing IPC, synthetic supervision, diagnostic/preservation and private-X11 calibration scope.',
+            'Protected-policy deployment, cross-component payload erasure, real visible recovery, historical guests and desktop-host qualification remain open.',
+            'W-25 and the campaign remain incomplete; no privileged action, public release or human review is attested.'
+        ]
     args.output.parent.mkdir(parents=True, exist_ok=True)
     log_output.write_text(raw.replace(str(build), '<build>').replace(str(ROOT), '<source>'), encoding='utf-8', newline='\n')
     args.output.write_text(json.dumps(report, indent=2)+'\n', encoding='utf-8', newline='\n')
