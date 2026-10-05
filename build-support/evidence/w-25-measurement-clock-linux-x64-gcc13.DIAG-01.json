@@ -1,0 +1,242 @@
+{
+  "family": "DIAG-01",
+  "outcome": "pass",
+  "executed_at": "2026-10-05T21:36:28.660497+00:00",
+  "executable_sha256": "f76678d6d4a11fef14f072cd646185df2e1373c35623be0bdc84b6b95cef4cba",
+  "profile": "linux-x64-gcc13",
+  "cases": [
+    {
+      "case": "DIAG-01.REPORT",
+      "outcome": "pass",
+      "policy_state": "unavailable",
+      "relocated": true,
+      "elapsed_ms": 6
+    },
+    {
+      "case": "DIAG-01.DAMAGED",
+      "outcome": "pass",
+      "elapsed_ms": 19
+    },
+    {
+      "case": "DIAG-01.FAILURE-METADATA",
+      "outcome": "pass",
+      "policy_state": "unavailable",
+      "scope": "Restricted native projection; positive policy/read-spy cases are portable typed fixtures.",
+      "elapsed_ms": 13
+    },
+    {
+      "case": "DIAG-01.ARGUMENTS",
+      "outcome": "pass",
+      "elapsed_ms": 47
+    },
+    {
+      "case": "DIAG-01.NATIVE-CLOSE",
+      "outcome": "pass",
+      "native_api": "GTK/X11 WM_DELETE_WINDOW",
+      "pid_verified": true,
+      "title_verified": true,
+      "class_verified": true,
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "display_server": {
+        "kind": "owned authenticated Xvfb",
+        "sha256": "2c7f5a9534410fed5092d782a69ca7ffd9fce80e98b81ffe4944d703dd11d3b1",
+        "pixels_captured": false
+      },
+      "elapsed_ms": 137
+    },
+    {
+      "case": "DIAG-01.NO-DISPLAY",
+      "outcome": "pass",
+      "elapsed_ms": 13
+    }
+  ],
+  "qualification": "Development diagnostic entry and hidden native close only; no pixels, protected-policy deployment or desktop/editor recovery qualification.",
+  "source_inputs": {
+    "source/application/diagnostic.cpp": "639b873786d2a4ae745f0c16567ba13da9feb6b4929bc1f7746eac831ce39512",
+    "source/application/ipc_probe.cpp": "542f0120ce61069f0b8564cda9aef04e196333b5dce68be17481a5fef2104419",
+    "source/application/model_smoke.cpp": "5752a655511f83b1635d4e77c00274f0952145680d5a540d8bfec0b6e4386137",
+    "source/application/recovery_probe.cpp": "beb4c4cc09813afcd8afbe56ec46dde9c523386d0eb20bb6e41d20ded51f6249",
+    "source/application/telemetry_probe.cpp": "9aeb7f84e6920b744758eed960771924bc74723ef06a765789298dda1f44dafc",
+    "source/diagnostics/data_view.cpp": "0bededb041624e9b7da438878fd34d311f80d9bc5a85f261bcc285b44ec8c501",
+    "source/diagnostics/data_view.hpp": "54e241b064d3a0d615358785b035a7174b4531e8ab47e9b74463ef56a4aec948",
+    "source/diagnostics/entry.cpp": "802e0ae85f122aa8c7717935757780abb362aa73eb073a0fe8ec6f84a894d179",
+    "source/diagnostics/entry.hpp": "91f6afb3a8491ac90ce3e35596b22d4979f6ba65688de4acaaaa16a77078b01b",
+    "source/diagnostics/failure_history.cpp": "2c099d7400f966e7f55b2689f34acabb3fbd2eb1ca6579c9b7b45330d5ab06fc",
+    "source/diagnostics/failure_history.hpp": "d25874b43474b2d0138ff3e7c77897f9d36f698673439ba13e5fe3ecbc01f879",
+    "source/diagnostics/health_link.cpp": "7104dce7d62220344372ae3c52d8916fd1511c54933b689b487195fe0c894d6b",
+    "source/diagnostics/health_link.hpp": "c8437a20eea17d8d8462095ea9909e04ee3d2f94d087d776a7988663a42801fd",
+    "source/diagnostics/oracle_probe_x11.cpp": "fbef9a7c76e0c291e88905dfdcc1e5ff12380bdbe68c9aba87360cb1b97649b8",
+    "source/diagnostics/preservation_job.cpp": "432c9f6dc5def54e20ba4576fcf7b998812e120d3dd669dcfbac360077049476",
+    "source/diagnostics/preservation_job.hpp": "6d90739d0ce70c28a3bb815e7292f2623d9e7441ff746f7813819e2722705454",
+    "source/diagnostics/recovery.cpp": "33f725661262c9888920892c1e77060999682b79d1f5b24e14e8cbfc57fdaaa6",
+    "source/diagnostics/recovery.hpp": "746295ce4ecaede329e6c6f44f378a9e96e92217b808ec0279bea9f0cfb14301",
+    "source/diagnostics/reported_state.cpp": "62e0acd0f6c6b99751f80175529421845d5d3d53e18795744fc844004b8fbc6b",
+    "source/diagnostics/reported_state.hpp": "8b03d0fe00d5a89cef6a4dbfcbf571ef4585d1551bb3ccba8ab8fbab04ae37b3",
+    "source/interfaces/diagnostic_inspector.hpp": "d5ca073d485ae2b5caef308669dd30111aa7b963f6e5f0b5b63edd49183561ce",
+    "source/interfaces/diagnostic_inspector_linux.cpp": "78b5e2af65a1523a11167a1847ac59d8f6dc780a94533569bb2495638fd7afd3",
+    "source/interfaces/diagnostic_inspector_windows.cpp": "1e2545082854f23cf8e1c1311e2923ed736a71ddce0e9f1eb7cd0d9267c32a20",
+    "source/platform/child.hpp": "266297cb253ba93b1c73c6a6a28218721e3277c21ffc725c84cd8866012be5aa",
+    "source/platform/child_linux.cpp": "46d26731c0c2ddf873265c008f0b25a17aef8f0cdf3f52ac16e2db6458686bfc",
+    "source/platform/child_windows.cpp": "3385dc40dd91341951a2039cb5f722f2ce069a7b824e2eb91059b9a180fcb864",
+    "source/platform/failure_store.cpp": "18055cbb3c6cb134599478e4e1bb30e672d9e9bbbe0ef3092e382c289b92b837",
+    "source/platform/failure_store.hpp": "b9cf5b5c7394c036a054cff3604facf688935f69a6f256540a40f953e4e12cf6",
+    "source/platform/local_ipc.hpp": "4dc6f89eaa66f53755b445757aba884b3cb89c627bbfa0292cd531f9396a67c4",
+    "source/platform/local_ipc_linux.cpp": "150d0e6d76ceadb79c92677081dddfed3e49cb16fcd5efa5409f30eb08cfc782",
+    "source/platform/local_ipc_windows.cpp": "47410a8cf786399178bebddff1f01ac54b6bc07172a5424266a5a78611752d37",
+    "source/platform/machine_policy.hpp": "e12c51cdaeb3806e4813098fbfb8db7a181beb338b6623492c29165c0c0da5bb",
+    "source/platform/machine_policy_linux.cpp": "34925aa2d0173782a0a132413b3bddf2c4db25098575699b0f94193154094c16",
+    "source/platform/machine_policy_windows.cpp": "3ec13d9fe46b5e39a3c077de9620e051879155f9eba782e542de558e90b53653",
+    "source/platform/preservation.hpp": "1d4525eaec593c5dd1dbbfcd4abf347596422ffb01b27312b666f04a4afc7600",
+    "source/configuration/policy.cpp": "28e53f88449cb2ff4c85e0a26c0a2dbe4fa85ca7d037a3df6a299cf2cb03df87",
+    "source/configuration/policy.hpp": "966822971245eedbde662b08987da8519cd71011b5620bb385a47b161e93e36a",
+    "source/configuration/session.cpp": "c13da60c28c6906c08286ad87f6e7700c0eebc762f97c052d73df9bdc7273c29",
+    "source/configuration/session.hpp": "0981785992b54fc689163d55ccf72c160411488230e22f12d1fae37a571be3d4",
+    "tests/fault/native_diagnostic.py": "aab3f07a8a823412ab78fb49ae31d45ac764c85554c7580d07e01838e8bfcb72",
+    "spec/delivery/packages/w-25-recovery.md": "33d78a71380ae4049ddb3da0e9ab21b381ec4867a712d78595547edb3ae85b7b",
+    "spec/delivery/packages/w-25-failure-metadata.md": "16754f609c01c4da6dbcdbaea9dd05c300e1e64a09a35bc88b01d23af3f5b28c"
+  },
+  "attempts": [
+    {
+      "arguments": [
+        "--report"
+      ],
+      "exit": 0,
+      "stdout": "{\"build_version\":\"0.0.1\",\"component\":\"diagnostic\",\"policy_state\":\"unavailable\",\"product\":\"SysPane\",\"profile\":\"linux-x64-gcc13\",\"recovery_controls\":\"not_implemented\",\"schema_version\":\"0.1.0\"}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "--report"
+      ],
+      "exit": 0,
+      "stdout": "{\"build_version\":\"0.0.1\",\"component\":\"diagnostic\",\"policy_state\":\"unavailable\",\"product\":\"SysPane\",\"profile\":\"linux-x64-gcc13\",\"recovery_controls\":\"not_implemented\",\"schema_version\":\"0.1.0\"}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "--report",
+        "--failures",
+        "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/diagnostic-case-7549297c677b4681ab0fed8a1cb2b4fb/policy.json"
+      ],
+      "exit": 0,
+      "stdout": "{\"build_version\":\"0.0.1\",\"component\":\"diagnostic\",\"failure_history\":{\"live_health\":false,\"records\":[],\"status\":\"restricted\",\"trust\":\"unverified_local_metadata\"},\"policy_state\":\"unavailable\",\"product\":\"SysPane\",\"profile\":\"linux-x64-gcc13\",\"recovery_controls\":\"not_implemented\",\"schema_version\":\"0.1.0\"}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "--report",
+        "--failures",
+        "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/diagnostic-case-7549297c677b4681ab0fed8a1cb2b4fb/missing-\u03bb.jsonl"
+      ],
+      "exit": 0,
+      "stdout": "{\"build_version\":\"0.0.1\",\"component\":\"diagnostic\",\"failure_history\":{\"live_health\":false,\"records\":[],\"status\":\"restricted\",\"trust\":\"unverified_local_metadata\"},\"policy_state\":\"unavailable\",\"product\":\"SysPane\",\"profile\":\"linux-x64-gcc13\",\"recovery_controls\":\"not_implemented\",\"schema_version\":\"0.1.0\"}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "--unknown"
+      ],
+      "exit": 64,
+      "stdout": "",
+      "stderr": "diagnostic.arguments\n"
+    },
+    {
+      "arguments": [
+        "--report",
+        "--inspect"
+      ],
+      "exit": 64,
+      "stdout": "",
+      "stderr": "diagnostic.arguments\n"
+    },
+    {
+      "arguments": [
+        "--policy",
+        "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/diagnostic-case-7549297c677b4681ab0fed8a1cb2b4fb/policy.json"
+      ],
+      "exit": 64,
+      "stdout": "",
+      "stderr": "diagnostic.arguments\n"
+    },
+    {
+      "arguments": [
+        "--report",
+        "--trusted"
+      ],
+      "exit": 64,
+      "stdout": "",
+      "stderr": "diagnostic.arguments\n"
+    },
+    {
+      "arguments": [
+        "--report",
+        "--failures"
+      ],
+      "exit": 64,
+      "stdout": "",
+      "stderr": "diagnostic.arguments\n"
+    },
+    {
+      "arguments": [
+        "--report",
+        "--failures",
+        "relative.jsonl"
+      ],
+      "exit": 64,
+      "stdout": "",
+      "stderr": "diagnostic.arguments\n"
+    },
+    {
+      "arguments": [
+        "--help",
+        "--failures",
+        "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/diagnostic-case-7549297c677b4681ab0fed8a1cb2b4fb/policy.json"
+      ],
+      "exit": 64,
+      "stdout": "",
+      "stderr": "diagnostic.arguments\n"
+    },
+    {
+      "arguments": [
+        "--report",
+        "--extra",
+        "--extra",
+        "--extra",
+        "--extra",
+        "--extra",
+        "--extra",
+        "--extra",
+        "--extra",
+        "--extra",
+        "--extra",
+        "--extra",
+        "--extra",
+        "--extra",
+        "--extra",
+        "--extra",
+        "--extra"
+      ],
+      "exit": 64,
+      "stdout": "",
+      "stderr": "diagnostic.arguments\n"
+    },
+    {
+      "arguments": [
+        "--report"
+      ],
+      "exit": 0,
+      "stdout": "{\"build_version\":\"0.0.1\",\"component\":\"diagnostic\",\"policy_state\":\"unavailable\",\"product\":\"SysPane\",\"profile\":\"linux-x64-gcc13\",\"recovery_controls\":\"not_implemented\",\"schema_version\":\"0.1.0\"}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "--inspect"
+      ],
+      "exit": 69,
+      "stdout": "",
+      "stderr": "diagnostic.ui_unavailable\n"
+    }
+  ]
+}

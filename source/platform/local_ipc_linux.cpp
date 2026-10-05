@@ -7,11 +7,14 @@
 #include <filesystem>
 #include <fcntl.h>
 #include <linux/capability.h>
+#include <limits>
+#include <optional>
 #include <poll.h>
 #include <sys/socket.h>
 #include <sys/stat.h>
 #include <sys/syscall.h>
 #include <sys/un.h>
+#include <time.h>
 #include <unistd.h>
 #include <utility>
 
@@ -79,6 +82,14 @@ bool alive(int fd) {
     do { result = ::poll(&item, 1, 0); } while (result < 0 && errno == EINTR);
     return result == 0;
 }
+bool measurement_peer_alive(int fd) {
+    pollfd item{fd, POLLIN, 0};
+    int result;
+    do { result = ::poll(&item, 1, 0); } while (result < 0 && errno == EINTR);
+    if (result < 0 || (result > 0 && (!(item.revents & (POLLIN | POLLHUP)) || (item.revents & (POLLNVAL | POLLERR)))))
+        throw IpcError("clock.peer_unavailable");
+    return result == 0;
+}
 Peer identify(int socket, Fd& peer_handle, std::uint64_t expected_process) {
     ucred credentials{};
     socklen_t size = sizeof(credentials);
@@ -109,6 +120,9 @@ bool unprivileged_context() {
 }
 struct Stream::Impl {
     Fd socket, peer_handle;
+    Fd measurement_namespace;
+    std::optional<std::uint64_t> measurement_last;
+    bool measurement_fault = false;
     Peer peer;
     std::uint64_t connected;
     Impl(Fd value, std::uint64_t expected) : socket(std::move(value)), peer{}, connected(monotonic_ms()) {
@@ -133,6 +147,48 @@ Stream::Stream(Stream&&) noexcept = default;
 Stream& Stream::operator=(Stream&&) noexcept = default;
 const Peer& Stream::peer() const { return impl_->peer; }
 std::uint64_t Stream::connected_ms() const { return impl_->connected; }
+MeasurementClock Stream::measurement_clock() {
+    if (impl_->measurement_fault) throw IpcError("clock.unavailable");
+    try {
+        if (!measurement_peer_alive(impl_->peer_handle.value)) throw IpcError("clock.peer_exited");
+        const auto namespace_of = [](const std::string& path) {
+            Fd fd(::open(path.c_str(), O_RDONLY | O_CLOEXEC));
+            if (fd.value < 0) throw IpcError("clock.namespace_unavailable");
+            return fd;
+        };
+        const auto same_namespace = [](int a, int b) {
+            struct stat left{}, right{};
+            if (::fstat(a, &left) || ::fstat(b, &right)) throw IpcError("clock.namespace_unavailable");
+            if (left.st_dev != right.st_dev || left.st_ino != right.st_ino) throw IpcError("clock.namespace");
+        };
+        const auto peer_path = "/proc/" + std::to_string(impl_->peer.process_id) + "/ns/time";
+        auto own = namespace_of("/proc/thread-self/ns/time"), peer = namespace_of(peer_path);
+        same_namespace(own.value, peer.value);
+        if (impl_->measurement_namespace.value >= 0) same_namespace(own.value, impl_->measurement_namespace.value);
+        timespec tick{};
+        if (::clock_gettime(CLOCK_BOOTTIME, &tick)) throw IpcError("clock.read");
+        constexpr std::uint64_t billion = 1000000000;
+        if (tick.tv_sec < 0 || tick.tv_nsec < 0 || tick.tv_nsec >= static_cast<long>(billion) ||
+            static_cast<std::uint64_t>(tick.tv_sec) > (std::numeric_limits<std::uint64_t>::max() - tick.tv_nsec) / billion)
+            throw IpcError("clock.range");
+        const auto count = static_cast<std::uint64_t>(tick.tv_sec) * billion + tick.tv_nsec;
+        // Reopen after sampling: held descriptors preserve identity but cannot
+        // alone detect a process reassociating itself with another namespace.
+        auto own_after = namespace_of("/proc/thread-self/ns/time"), peer_after = namespace_of(peer_path);
+        same_namespace(own.value, own_after.value); same_namespace(own.value, peer_after.value);
+        if (!measurement_peer_alive(impl_->peer_handle.value)) throw IpcError("clock.peer_exited");
+        if (impl_->measurement_last && count < *impl_->measurement_last) throw IpcError("clock.regressed");
+        if (impl_->measurement_namespace.value < 0) impl_->measurement_namespace = std::move(own);
+        impl_->measurement_last = count;
+        return {"linux.boottime", count, 1};
+    } catch (...) {
+        impl_->measurement_fault = true;
+        // Prefer the held peer's terminal fact if its proc entries disappeared
+        // during the checks. Never reinterpret PID reuse as the original peer.
+        if (!measurement_peer_alive(impl_->peer_handle.value)) throw IpcError("clock.peer_exited");
+        throw;
+    }
+}
 Stream Stream::connect(const std::string& endpoint, std::uint64_t expected) {
     auto dir = directory(endpoint);
     struct stat node{};

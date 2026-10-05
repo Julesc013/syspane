@@ -22,6 +22,11 @@ struct Read {
     bool eof, timeout;
     std::uint64_t observed_ms;
 };
+struct MeasurementClock {
+    const char* clock_id;
+    std::uint64_t nanoseconds;
+    std::uint32_t representation_unit_ns; // Not hardware resolution or accuracy.
+};
 class Listener;
 class Stream {
 public:
@@ -35,6 +40,9 @@ public:
     void write(std::string_view bytes, unsigned wait_ms = 5000);
     const Peer& peer() const;
     std::uint64_t connected_ms() const;
+    // Serialized owner only. Native provenance is checked per call; any failure
+    // permanently disables this stream's measurement facility, not inventory I/O.
+    MeasurementClock measurement_clock();
 private:
     struct Impl;
     std::unique_ptr<Impl> impl_;

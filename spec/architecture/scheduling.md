@@ -61,3 +61,9 @@ connects one fixed inventory source per authenticated connection to bounded dema
 and current-policy queues. Its [native checkpoint](../delivery/subscriptions-handoff.md)
 uses synthetic inventory; general demand aggregation, measured-field clock mapping
 and independently supervised real collection/rendering remain required.
+
+The [native measurement-clock package](../delivery/packages/w-25-measurement-clock.md)
+investigates a shared time domain independently of demand and producer leases.
+An API's timestamp unit is not a timer wake frequency or accuracy guarantee.
+No receipt/heartbeat time may stand in for acquisition time when measured telemetry
+is later enabled; retained/replayed age and resume behavior need executable oracles.

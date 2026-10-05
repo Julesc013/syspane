@@ -16,6 +16,30 @@ using p::Json;
 namespace {
 void emit(Json value) { std::cout<<value.dump()<<std::endl; }
 void need(bool ok,const char* code) { if (!ok) throw p::Error(code); }
+void clock_event(n::Stream& stream,const char* phase) {
+    const auto clock=stream.measurement_clock();
+    emit({{"event","clock"},{"phase",phase},{"clock_id",clock.clock_id},
+        {"nanoseconds",std::to_string(clock.nanoseconds)},{"representation_unit_ns",clock.representation_unit_ns}});
+}
+bool clock_scenario(const std::string& scenario) { return scenario=="clock-roundtrip" || scenario=="clock-peer-exit"; }
+void observe_clock_exit(n::Stream& stream) {
+    const auto started=n::monotonic_ms();
+    for (;;) {
+        need(n::monotonic_ms()-started<2000,"probe.clock_exit_timeout");
+        try { stream.measurement_clock(); }
+        catch (const n::IpcError& error) {
+            need(std::string(error.what())=="clock.peer_exited","probe.clock_exit");
+            emit({{"event","clock_rejected"},{"code",error.what()},{"peer_pid",stream.peer().process_id}});
+            try { stream.measurement_clock(); throw p::Error("probe.clock_not_latched"); }
+            catch (const n::IpcError& second) {
+                need(std::string(second.what())=="clock.unavailable","probe.clock_latch");
+                emit({{"event","clock_rejected"},{"code",second.what()},{"peer_pid",stream.peer().process_id}});
+            }
+            return;
+        }
+        std::this_thread::sleep_for(std::chrono::milliseconds(10));
+    }
+}
 c::Policy policy(std::uint64_t revision=7) {
     c::Policy value; value.available=true; value.revision=revision;
     value.disclosure[{"desktop","desktop"}]={"operational"}; value.disclosure[{"desktop","accessibility"}]={"operational"}; return value;
@@ -37,11 +61,13 @@ Json state(Json fixture,std::uint64_t generation) {
 }
 class Client {
 public:
-    explicit Client(n::Stream stream):stream_(std::move(stream)) {
+    explicit Client(n::Stream stream,bool clock=false):stream_(std::move(stream)) {
         emit({{"event","authenticated"},{"peer_pid",stream_.peer().process_id},{"user_session_verified",true}});
+        if (clock) clock_event(stream_,"before");
         auto bytes=p::frame(hello().dump()); stream_.write(std::string_view(bytes).substr(0,1));
         std::this_thread::sleep_for(std::chrono::milliseconds(20)); stream_.write(std::string_view(bytes).substr(1));
         auto welcome=p::decode(next()); need(welcome.type=="welcome","probe.welcome");
+        if (clock) clock_event(stream_,"after");
         selected_=p::negotiate(p::handshake(hello()["body"]),p::handshake(welcome.body),{"console"});
         id_=welcome.connection_id; epoch_=welcome.producer_epoch; decoder_.restrict_limit(selected_.max_frame_bytes);
     }
@@ -81,7 +107,7 @@ void projection(r::DataView& view,const char* event) {
 void client(const std::string& endpoint,const std::string& scenario,std::uint64_t expected) {
     r::DataView view({true,"desktop",{"desktop"}},policy(),"desktop","operational",{{"network.media","none",syspane::model::ValueKind::string}});
     for (unsigned ordinal=0;ordinal<(scenario=="journey"?2U:1U);++ordinal) {
-        Client client(n::Stream::connect(endpoint,expected));
+        Client client(n::Stream::connect(endpoint,expected),clock_scenario(scenario));
         const auto attached=view.attach_wire(client.binding(),n::monotonic_ms()); need(attached.code==r::DataCode::accepted,"probe.attach");
         client.subscribe(scenario=="wrong-producer");
         const auto receive=[&] {
@@ -131,7 +157,9 @@ void server(const std::string& endpoint,const std::string& scenario,std::uint64_
                 const auto read=stream.read(buffer.data(),buffer.size());
                 if (read.eof) { decoder.eof(); reason="peer.eof"; break; }
                 if (read.bytes) decoder.feed(std::string_view(buffer.data(),read.bytes),read.observed_ms,[&](auto payload) {
-                    const auto message=p::decode(payload); sessions.receive(id,payload,n::monotonic_ms()); decoder.restrict_limit(sessions.frame_bound(id));
+                    const auto message=p::decode(payload);
+                    if (clock_scenario(scenario) && message.type=="hello") clock_event(stream,"middle");
+                    sessions.receive(id,payload,n::monotonic_ms()); decoder.restrict_limit(sessions.frame_bound(id));
                     const auto sub=sessions.subscription(id); if (!sub) return;
                     const auto offer=[&](std::optional<std::uint64_t> base) {
                         return sessions.offer(id,sub->ticket,"native:"+std::to_string(++record),state(fixture,generation),base,n::monotonic_ms());
@@ -156,6 +184,7 @@ void server(const std::string& endpoint,const std::string& scenario,std::uint64_
         } catch (const p::Error& e) { reason=e.what(); }
           catch (const n::IpcError& e) { reason=e.what(); }
         sessions.disconnect(id); emit({{"event","closed"},{"reason",reason},{"demand",sessions.demand_count()},{"elapsed_ms",n::monotonic_ms()-started}});
+        if (scenario=="clock-peer-exit") observe_clock_exit(stream);
     }
 }
 }
@@ -165,7 +194,7 @@ int main(int argc,char** argv) {
         need(n::unprivileged_context(),"probe.privileged_context");
         const auto expected=p::decimal(argv[4]); need(expected.has_value(),"probe.pid");
         const std::string role=argv[1],scenario=argv[3];
-        need(scenario=="journey" || scenario=="overflow" || scenario=="revoke" || scenario=="expiry" || scenario=="wrong-producer","probe.scenario");
+        need(scenario=="journey" || scenario=="overflow" || scenario=="revoke" || scenario=="expiry" || scenario=="wrong-producer" || clock_scenario(scenario),"probe.scenario");
         if (role=="server") server(argv[2],scenario,*expected,argv[5]);
         else if (role=="client") client(argv[2],scenario,*expected); else return 2;
         return 0;

@@ -105,3 +105,10 @@ connects one fixed inventory source per authenticated connection to bounded dema
 and current-policy queues. Its [native checkpoint](../delivery/subscriptions-handoff.md)
 uses synthetic inventory; general demand aggregation, measured-field clock mapping
 and independently supervised real collection/rendering remain required.
+
+The [native clock investigation](../delivery/packages/w-25-measurement-clock.md)
+tests a common local OS time domain and held-peer exit rejection. Its readings do
+not authorize remote timestamps, refresh retained values or renew producer leases.
+Measured telemetry still requires an explicit versioned epoch/domain binding and
+freshness/replay/reconnect cases; suspend and namespace-change qualification remain
+separate from the live-process [checkpoint](../delivery/measurement-clock-handoff.md).

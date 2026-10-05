@@ -9,6 +9,7 @@
 #include <sddl.h>
 #include <algorithm>
 #include <chrono>
+#include <limits>
 #include <optional>
 #include <utility>
 #include <vector>
@@ -171,6 +172,8 @@ struct Stream::Impl {
     Peer peer{};
     std::uint64_t connected = 0, first_observed = 0;
     std::optional<char> first_byte;
+    std::optional<std::uint64_t> measurement_last;
+    bool measurement_fault = false;
     HANDLE handle() const { return server ? server->pipe.value : client.value; }
     ~Impl() {
         if (server) { ::DisconnectNamedPipe(server->pipe.value); server->busy = false; }
@@ -187,6 +190,25 @@ Stream::Stream(Stream&&) noexcept = default;
 Stream& Stream::operator=(Stream&&) noexcept = default;
 const Peer& Stream::peer() const { return impl_->peer; }
 std::uint64_t Stream::connected_ms() const { return impl_->connected; }
+MeasurementClock Stream::measurement_clock() {
+    if (impl_->measurement_fault) throw IpcError("clock.unavailable");
+    try {
+        const auto require_peer = [&] {
+            const auto state = ::WaitForSingleObject(impl_->peer_handle.value, 0);
+            if (state == WAIT_OBJECT_0) throw IpcError("clock.peer_exited");
+            if (state != WAIT_TIMEOUT) throw IpcError("clock.peer_unavailable");
+        };
+        require_peer();
+        ULONGLONG tick = 0;
+        ::QueryInterruptTimePrecise(&tick);
+        if (tick > std::numeric_limits<std::uint64_t>::max() / 100) throw IpcError("clock.range");
+        const auto count = static_cast<std::uint64_t>(tick) * 100;
+        require_peer();
+        if (impl_->measurement_last && count < *impl_->measurement_last) throw IpcError("clock.regressed");
+        impl_->measurement_last = count;
+        return {"windows.interrupt-precise", count, 100};
+    } catch (...) { impl_->measurement_fault = true; throw; }
+}
 Stream Stream::connect(const std::string& endpoint, std::uint64_t expected) {
     const auto name = pipe_name(endpoint);
     const auto own = process_identity(::GetCurrentProcess());

@@ -38,7 +38,10 @@ def main():
     parser.add_argument('--telemetry', action='store_true', help='Require bounded telemetry document cases; no native subscription claim')
     parser.add_argument('--state-import', action='store_true', help='Require complete remote state import through the wire-bound data owner')
     parser.add_argument('--subscriptions', action='store_true', help='Require bounded subscription and native synthetic inventory cases')
+    parser.add_argument('--measurement-clock', action='store_true', help='Require native causal clock brackets and held-peer exit rejection')
     args = parser.parse_args()
+    if args.measurement_clock:
+        args.subscriptions = True
     if args.subscriptions:
         args.state_import = True
     if args.state_import:
@@ -94,6 +97,8 @@ def main():
         expected |= {'import.IMPORT-'+case for case in IMPORT_CASES}
     if args.subscriptions:
         expected |= {'subscription.'+case for case in SUBSCRIPTION_CASES} | {'native.NATIVE-SUB'}
+    if args.measurement_clock:
+        expected.add('native.NATIVE-CLOCK')
     if len(cases) != len(expected) or {case['case'] for case in cases} != expected or any(case['outcome'] != 'pass' for case in cases):
         raise ValueError('missing, repeated, unexpected or failing case; preserve log before rerun')
     suffix = '.exe' if platform.system() == 'Windows' else ''
@@ -149,6 +154,8 @@ def main():
         seen = set()
         if args.subscriptions:
             required['NATIVE-SUB'] = {'JOURNEY','OVERFLOW','REVOKE','EXPIRY','WRONG-PRODUCER'}
+        if args.measurement_clock:
+            required['NATIVE-CLOCK'] = {'ROUNDTRIP','PEER-EXIT'}
         if args.preservation:
             for name in ('syspane_preservation_tests'+suffix, 'libsyspane_preservation_job.a'):
                 artifacts[name] = {'sha256': sha(build/name), 'bytes': (build/name).stat().st_size}
@@ -180,8 +187,8 @@ def main():
                     raise ValueError('Windows reparse case must execute or retain its exact privilege limitation')
             if native['outcome'] != 'pass' or len(native['cases']) != len(expected_cases) or {case['case'] for case in native['cases']} != expected_cases or any(case['outcome'] != 'pass' for case in native['cases']):
                 raise ValueError('native case missing or failed; preserve original report')
-            if family in ('RECOVERY-01', 'DIAG-01', 'ORACLE-01', 'FAILURE-STORE', 'PRESERVE', 'NATIVE-SUB'):
-                executable = {'RECOVERY-01':'SysPane.RecoveryProbe'+suffix, 'DIAG-01':'SysPane.Diag.exe' if suffix else 'syspane-diag', 'ORACLE-01':'SysPane.OracleProbe', 'FAILURE-STORE':'syspane_failure_store_tests'+suffix, 'PRESERVE':'syspane_preservation_tests'+suffix, 'NATIVE-SUB':'SysPane.TelemetryProbe'+suffix}[family]
+            if family in ('RECOVERY-01', 'DIAG-01', 'ORACLE-01', 'FAILURE-STORE', 'PRESERVE', 'NATIVE-SUB', 'NATIVE-CLOCK'):
+                executable = {'RECOVERY-01':'SysPane.RecoveryProbe'+suffix, 'DIAG-01':'SysPane.Diag.exe' if suffix else 'syspane-diag', 'ORACLE-01':'SysPane.OracleProbe', 'FAILURE-STORE':'syspane_failure_store_tests'+suffix, 'PRESERVE':'syspane_preservation_tests'+suffix, 'NATIVE-SUB':'SysPane.TelemetryProbe'+suffix, 'NATIVE-CLOCK':'SysPane.TelemetryProbe'+suffix}[family]
                 if family == 'PRESERVE' and native['diagnostic_sha256'] != sha(build/('SysPane.Diag.exe' if suffix else 'syspane-diag')):
                     raise ValueError('preservation CLI artifact changed after run')
                 if native['executable_sha256'] != sha(build/executable):
@@ -253,6 +260,8 @@ def main():
         paths.append(ROOT/'spec/delivery/packages/w-25-state-import.md')
     if args.subscriptions:
         paths.append(ROOT/'spec/delivery/packages/w-25-subscriptions.md')
+    if args.measurement_clock:
+        paths.append(ROOT/'spec/delivery/packages/w-25-measurement-clock.md')
     for directory in ('source', 'tests', 'build-support', 'spec/contracts'):
         paths.extend(sorted((ROOT/directory).rglob('*')))
     inputs = {p.relative_to(ROOT).as_posix(): sha(p) for p in paths
@@ -377,6 +386,19 @@ def main():
             'Real collectors/renderers, product policy distribution, cross-component erasure, visible recovery and historical guests remain unqualified.',
             'W-25 and the campaign remain incomplete; no desktop support, privileged action or public release is attested.'
         ]
+    if args.measurement_clock:
+        report['slice'] = 'native measurement-clock provenance investigation across authenticated local processes'
+        report['bindings']['measurement_clock'] = 'spec/delivery/packages/w-25-measurement-clock.md'
+        report['bindings']['native_clock_oracle'] = 'tests/protocol/native_clock.py'
+        report['limits'].insert(0, 'Native clock brackets and held-peer exit rejection ran; suspend/resume, namespace mismatch/change/denial and native overflow/regression remain unexecuted. No measured telemetry or TTL/rate mapping is enabled.')
+        command = ['objdump' if suffix else 'readelf', '-p' if suffix else '-d', str(build/('SysPane.TelemetryProbe'+suffix))]
+        inspected = subprocess.check_output(command, text=True, encoding='utf-8')
+        if suffix and 'QueryInterruptTimePrecise' not in inspected:
+            raise ValueError('measurement-clock API import missing from tested probe')
+        report['measurement_clock_imports'] = {'command': command,
+            'direct_dependencies': re.findall(r'DLL Name:\s*(\S+)', inspected) if suffix else re.findall(r'\(NEEDED\).*?\[([^]]+)\]', inspected),
+            'windows_precise_interrupt_import': bool(suffix),
+            'scope': 'Observed probe imports on the named development profile; no inferred historical loader or suspend qualification.'}
     args.output.parent.mkdir(parents=True, exist_ok=True)
     log_output.write_text(raw.replace(str(build), '<build>').replace(str(ROOT), '<source>'), encoding='utf-8', newline='\n')
     args.output.write_text(json.dumps(report, indent=2)+'\n', encoding='utf-8', newline='\n')

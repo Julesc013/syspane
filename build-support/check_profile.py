@@ -19,12 +19,14 @@ def compiler_file(compiler, name):
         raise ValueError('compiler cannot resolve ' + name)
     return Path(value).resolve()
 
-def fingerprints(compiler):
+def fingerprints(compiler, extra_archives=()):
     files = {name: Path(shutil.which(name) or '') for name in ('cmake', 'ninja')}
     files['compiler'] = Path(shutil.which(compiler) or compiler).resolve()
     files['cc1plus'] = Path(output(compiler, '-print-prog-name=cc1plus')).resolve()
     files['libstdc++.a'] = compiler_file(compiler, 'libstdc++.a')
     files['libgcc.a'] = compiler_file(compiler, 'libgcc.a')
+    for name in extra_archives:
+        files[name] = compiler_file(compiler, name)
     return {name: hashlib.sha256(path.read_bytes()).hexdigest() for name, path in files.items()}
 
 def main():
@@ -40,7 +42,7 @@ def main():
             'host_family': platform.system(),
             'compiler_version': output(compiler, '-dumpfullversion'),
             'compiler_target': output(compiler, '-dumpmachine'),
-            'fingerprints': fingerprints(compiler)
+            'fingerprints': fingerprints(compiler, ('libmincore.a',) if profile == 'windows-x64-gcc15' else ())
         }
     if actual != lock['identity']:
         raise ValueError('installed tools differ from pinned profile; record and review an explicit profile revision')

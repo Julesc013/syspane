@@ -1,6 +1,15 @@
 # Developer setup and checks
 
-The latest [subscription checkpoint](../../spec/delivery/subscriptions-handoff.md)
+The latest [native clock checkpoint](../../spec/delivery/measurement-clock-handoff.md)
+passes 82 Windows, 83 Linux and 76 historical-toolset host checks. Modern suites
+add `native.NATIVE-CLOCK`: two separate-process causal-bracket/peer-exit cases.
+Record complete modern suites using `record_protocol.py --measurement-clock` with
+the existing profile/build/output arguments; historical recording still uses
+`record_legacy_build.py --subscriptions`. The Windows lock now also verifies the
+installed `libmincore.a` archive. These checks enable no measured telemetry or
+suspend/namespace-mismatch qualification.
+
+The preceding [subscription checkpoint](../../spec/delivery/subscriptions-handoff.md)
 passes 81 Windows, 82 Linux and 76 historical-toolset host checks. Three
 `subscription.SUB-*` families run everywhere; `native.NATIVE-SUB` executes five
 separate-process synthetic inventory scenarios on modern Windows/Linux. Record
@@ -12,7 +21,7 @@ Before a build, test or package launch, run the Windows coordinator
 `package` as appropriate); require exit zero. Run it afterward with `--action inspect`.
 The combined checkout/native-Linux allocation is 2 GiB with growth reservations;
 this is a preflight check, not an OS quota. The original 1 GiB overrun is preserved
-in the checkpoint. Do not remove or overwrite another task's files to gain space.
+in the subscription checkpoint. Do not remove or overwrite another task's files to gain space.
 
 The earlier [complete-state import checkpoint](../../spec/delivery/state-import-handoff.md)
 passes 77 Windows, 78 Linux and 73 historical-toolset host CTest entries. Run the six

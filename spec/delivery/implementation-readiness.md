@@ -99,6 +99,12 @@ families and five native scenarios. Current suites pass 81/82/76 entries on the 
 modern profiles and historical-toolset host. General demand planning, measured-field
 clock mapping, real collectors/renderers and product policy distribution remain open.
 
+The [native clock checkpoint](measurement-clock-handoff.md) adds live-process causal
+brackets and held-peer exit rejection on both modern profiles. Current suites pass
+82/83/76 entries. It provides a candidate native clock source; versioned measured
+telemetry and deterministic freshness/replay/reconnect cases still precede real
+collector enablement. Suspend/resume and namespace mismatch/change are unexecuted.
+
 Use the proposed cold-start exercise to detect missing observable contracts.
 Private implementation differences are permissible. Missing laboratories remain
 blocked qualification. A finite release scope must identify exact profiles,

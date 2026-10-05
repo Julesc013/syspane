@@ -30,6 +30,8 @@ versioned snapshot documents and exact replay bytes. The new
 state to that owner while preserving remote retention and identity metadata.
 A [native subscription probe](spec/delivery/subscriptions-handoff.md) now exchanges
 synthetic inventory with demand expiry, policy revocation and reconnect recovery.
+The [native clock investigation](spec/delivery/measurement-clock-handoff.md) verifies
+comparable readings across live local processes and rejects sampling after peer exit.
 Real collectors, measured-field clock mapping and product subscriptions remain pending.
 An external pixel/time oracle is calibrated against live, hidden, frozen and
 obstructed synthetic X11 surfaces. A real Openbox/PCManFM Show Desktop experiment

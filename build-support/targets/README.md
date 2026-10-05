@@ -1,6 +1,13 @@
 # Foundation development profiles
 
-Current revisions are Windows x64 11, Linux x64 12 and historical x86 5. The
+Current revisions are Windows x64 14, Linux x64 15 and historical x86 7. The
+[native clock checkpoint](../../spec/delivery/measurement-clock-handoff.md) passes
+82/83 modern and 76 historical host checks. Windows lock revision 2 additionally
+pins the installed `libmincore.a` used for `QueryInterruptTimePrecise`; the first
+unresolved-import attempt is retained. Configure verifies the archive without
+downloading or changing it. Native adapters remain disabled in the XP build.
+
+Earlier revisions were Windows x64 11, Linux x64 12 and historical x86 5. The
 [telemetry checkpoint](../../spec/delivery/telemetry-wire-handoff.md) passes 71/72
 modern and 67 historical host checks. The historical fixture-reading test adds the
 documented XP Kernel32 import `SetEndOfFile`; its original audit failure is retained.

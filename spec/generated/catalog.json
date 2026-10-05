@@ -63,7 +63,7 @@
         "SP-PROCESSES",
         "SP-PERFORMANCE"
       ],
-      "sha256": "93ae1eaa3e7a7e5f7df2287a80a33f7fbe1abb81084731a8d02e1e48330fddd0"
+      "sha256": "867a925a4230504dd8c4e044677fb75c00e3f7b23247cc2ae9914001ae154829"
     },
     {
       "id": "SP-SCHEDULER",
@@ -73,7 +73,7 @@
       "requires": [
         "SP-ARCHITECTURE"
       ],
-      "sha256": "75a82562580ccb0304ee6925b2b2be9bb3d3dcd8fa927fff4039ea57c3539214"
+      "sha256": "1e0075e9cfea7ae4aa8ba5279007695826a917941fe6a88093fac43d5d2ef947"
     },
     {
       "id": "SP-STATE",
@@ -357,7 +357,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "016f2b0ff1b32c4a0724934349838a2a5b5d763646a953a317c9c3d695e69620"
+      "sha256": "9725e22d957d57eae0e34581ed09438f25c006e8de7cdc23093c182e5a4043a0"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -422,7 +422,18 @@
       "requires": [
         "SP-CURRENT"
       ],
-      "sha256": "348977c6ecb2ff10cbd7c56d1c4bd78313a37720b7f0281de000c8a88278141a"
+      "sha256": "12df7ff0c6ab843aeb25947046f97272a48d27a7ff461677fc0e11fffa20df37"
+    },
+    {
+      "id": "SP-MEASUREMENT-CLOCK-HANDOFF",
+      "path": "delivery/measurement-clock-handoff.md",
+      "title": "Native measurement-clock checkpoint",
+      "description": "Record causal clock brackets and peer-exit rejection without claiming measured telemetry or suspend qualification.",
+      "requires": [
+        "SP-W25-MEASUREMENT-CLOCK",
+        "SP-CAMPAIGN-ADMISSION"
+      ],
+      "sha256": "f9386a3daffe403b7db5415086bec91e1bed65ef4cbeb19067aabaaff31c17a7"
     },
     {
       "id": "SP-NATIVE-TRANSPORT-HANDOFF",
@@ -543,6 +554,18 @@
         "SP-POLICY"
       ],
       "sha256": "16754f609c01c4da6dbcdbaea9dd05c300e1e64a09a35bc88b01d23af3f5b28c"
+    },
+    {
+      "id": "SP-W25-MEASUREMENT-CLOCK",
+      "path": "delivery/packages/w-25-measurement-clock.md",
+      "title": "W-25 native measurement-clock investigation",
+      "description": "Test a shared native time domain across authenticated local processes before admitting measured telemetry.",
+      "requires": [
+        "SP-W25-SUBSCRIPTIONS",
+        "SP-W25-STATE-IMPORT",
+        "SP-W24-PACKAGE"
+      ],
+      "sha256": "c0ae198358da1fd5c39092beae83323a4f759d60236c19502feb7665bcadbac8"
     },
     {
       "id": "SP-W25-PRESERVATION",
