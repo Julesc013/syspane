@@ -1,6 +1,13 @@
 # Foundation development profiles
 
-Current revisions are Windows x64 17, Linux x64 18 and historical x86 9. The
+Current revisions are Windows x64 18, Linux x64 19 and historical x86 10. The
+[network publication checkpoint](../../spec/delivery/network-publication-handoff.md)
+passes 96/101 modern and 88 historical host checks. All profiles build measured
+counter/rate projection; Linux also builds the finite supervised collector probe.
+Historical import checks cover twelve executables, with native readers disabled.
+Installed services/policy, full network fields and desktop support remain unqualified.
+
+Earlier revisions were Windows x64 17, Linux x64 18 and historical x86 9. The
 [network reconciliation checkpoint](../../spec/delivery/network-reconciliation-handoff.md)
 passes 93/97 modern and 85 historical host checks. All profiles build the shared
 lifetime/counter-interval owner. Linux also exercises a held link subscription;

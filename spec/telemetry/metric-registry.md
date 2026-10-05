@@ -22,9 +22,11 @@ Every implemented metric has a stable ID, value kind, unit, entity/scope, gauge 
 counter temporality, denominator, reset/wrap rules, derivation, sample interval,
 freshness, source coverage, required permissions, sensitivity and acquisition cost.
 The initial [descriptor schema](../contracts/metric-descriptor.schema.json) provides
-that shape; [metrics.json](metrics.json) contains experimental examples, not live
-provider support. Expand it with implemented fields rather than invent all future
-metrics before a first slice.
+that shape; [metrics.json](metrics.json) contains experimental descriptors whose
+support must be backed by per-profile evidence. The four network counter/rate fields
+now have a [Linux collector experiment](../delivery/packages/w-25-network-publication.md);
+the memory example still does not claim provider support. Expand the registry with
+implemented fields rather than invent all future metrics before a first slice.
 
 Counters encode uint64 decimal strings. The first rate sample is pending. A reset,
 unknown wrap or changed producer epoch invalidates the interval; never infer a

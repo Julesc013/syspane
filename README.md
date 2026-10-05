@@ -38,8 +38,11 @@ A [native network reader](spec/delivery/network-acquisition-handoff.md) now acqu
 real interface counters on Windows/Linux. The [network reconciliation checkpoint](spec/delivery/network-reconciliation-handoff.md)
 adds stable observation lifetimes, obsolete-result rejection and exact counter
 intervals, plus a Linux link subscription held across repeated acquisition.
-Windows notification coverage, supervised publication, product subscriptions and
-native suspend qualification remain pending.
+A [supervised Linux collector experiment](spec/delivery/network-publication-handoff.md)
+now delivers real counters and interval rates through that measured path, preserving
+failed samples and recovering a hung child after confirmed exit. Windows notification
+coverage, product service/subscription integration and native suspend qualification
+remain pending.
 An external pixel/time oracle is calibrated against live, hidden, frozen and
 obstructed synthetic X11 surfaces. A real Openbox/PCManFM Show Desktop experiment
 now exposes the basic X11 candidate's placement failure: above the desktop it

@@ -701,7 +701,8 @@
         "SP-W25-MEASUREMENT-CLOCK",
         "SP-W25-MEASURED-TIME",
         "SP-W25-NETWORK-ACQUISITION",
-        "SP-W25-NETWORK-RECONCILIATION"
+        "SP-W25-NETWORK-RECONCILIATION",
+        "SP-W25-NETWORK-PUBLICATION"
       ],
       "acceptance_tests": [
         "T-RECOVERY",
@@ -718,14 +719,16 @@
         "source/platform/network.hpp",
         "source/application/network_probe.cpp",
         "source/runtime/network_state.hpp",
-        "source/platform/network_watch.hpp"
+        "source/platform/network_watch.hpp",
+        "source/runtime/network_publication.hpp",
+        "source/application/collector_probe.cpp"
       ],
       "status": "in_progress",
       "authority_class": "development",
       "execution_grant": "user:foundation-native-campaign-2026-10-05",
-      "notes": "Shared network lifetimes, obsolete/dirty rejection, retained timestamps and exact counter intervals are implemented. Linux independently observes a held link subscription before repeated acquisition. Current suites: 93 Windows, 97 Linux and 85 historical-toolset host checks. Windows notification coverage, supervised measured publication, actual native topology/namespace/suspend faults, product demand/policy, rendering, retention and visible/editor recovery remain required.",
+      "notes": "Real Linux counters/rates now pass measured publication, exact replay, retained injected failure, independent child hang/crash/restart, demand/watch release, typed revocation and parent-loss tests. Shared projection runs on all profiles. Suites: 96 Windows, 101 Linux and 88 historical-toolset host checks. Product controller/demand/policy, real renderer and visible/editor recovery, full network fields, Windows notification coverage, native topology/namespace/suspend faults and retention remain required.",
       "package": "delivery/packages/w-25-recovery.md",
-      "evidence": "delivery/network-reconciliation-handoff.md"
+      "evidence": "delivery/network-publication-handoff.md"
     },
     {
       "id": "W-26",
@@ -1063,7 +1066,7 @@
       "status": "planned",
       "authority_class": "native_lab",
       "execution_grant": null,
-      "notes": "Implementation and evidence pending; dependency-ready is not an execution grant."
+      "notes": "W-25 supplies a real Linux counter/rate acquisition and supervised publication prerequisite; see delivery/network-publication-handoff.md. This full provider package still requires W-07 demand integration, device/address/route/DNS/connectivity coverage, native topology fault qualification and its own completion evidence."
     },
     {
       "id": "W-37",

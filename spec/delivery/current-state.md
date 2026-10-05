@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-05T22:49:24Z", "scope": "Network lifetime and Linux watch checkpoint; supervised publication remains open"}
+updated: {"by": "codex", "at": "2026-10-05T23:30:07Z", "scope": "Supervised real Linux network publication; product and native qualification gates remain open"}
 ---
 
 # Current state and next admitted boundary
@@ -153,6 +153,13 @@ before repeated acquisition. Current suites pass 93 Windows, 97 Linux and 85
 historical-toolset host checks. Windows notification coverage, actual topology faults
 and supervised measured publication remain required; no complete collector is claimed.
 
+The [supervised network publication checkpoint](network-publication-handoff.md)
+now delivers real Linux counters/rates into the measured data owner, with independent
+child expiry/restart, failure retention, exact replay, demand release, typed
+revocation and parent-loss exit evidence. Full suites pass 96 Windows, 101 Linux and
+88 historical-toolset host checks. This finite composition is not an installed
+product service, complete network view or qualified desktop renderer.
+
 Canonical 0.2.0 documentation bundle, unchanged 0.1 authoring profile, preserved old
 fixtures, new experimental scene/command/capability 0.2 and admission descriptors.
 The initial settings registry has enforced metadata/default consistency and generated
@@ -179,7 +186,7 @@ traces remain unexecuted.
 
 ## Not implemented or qualified
 
-No native controller, renderer, collector, product settings/editor, saver, SDK,
+No product controller, renderer, complete collector, settings/editor, saver, SDK,
 setup adapter or complete product package exists. The independent diagnostic
 executable/inspector, with explicit policy-gated private preservation, is implemented on the two development profiles. No native desktop/saver/performance/
 accessibility/setup qualification ran. Test definitions stay `not_run`; concepts stay
@@ -196,13 +203,12 @@ historical guest execution once guest test scope and usability are established.
 W-05 needs a composition strategy that actually preserves icon pixels; its initial
 EWMH window stacking candidates fail that requirement. Continue other native tracks
 independently of this negative result.
-W-25's [network reconciliation prerequisite](network-reconciliation-handoff.md)
-adds shared lifetimes, acquisition brackets, removal/index-reuse, obsolete-demand
-rejection and exact integer counter intervals. Linux holds its link subscription
-before enumeration; actual native topology faults and Windows full-table notification
-coverage remain unqualified. Connect these readers and the serialized identity owner
-through independently supervised collection to the measured receive path,
-then complete renderer supervision and product policy distribution. The native
+W-25's [supervised network checkpoint](network-publication-handoff.md) connects
+real Linux acquisition, source lifetimes and measured receipt under independent
+child supervision. Continue native-host/visible recovery tracks and connect this
+tested boundary to product controller demand, renderer supervision and policy
+distribution. Actual native topology faults and Windows full-table notification
+coverage remain unqualified. The native
 inventory probe now connects bounded subscription/demand and queue revocation to
 complete-state receipt. W-07 must add field/entity/age/priority/recording demand
 aggregation; the one-source experiment does not complete that planner.

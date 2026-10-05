@@ -1070,6 +1070,90 @@
         "linux-x64-gcc13",
         "windows-x86-v141-xp"
       ]
+    },
+    {
+      "id": "network-publication",
+      "target": "syspane_network_publication",
+      "type": "STATIC_LIBRARY",
+      "source_owner": "source/runtime/",
+      "public_interfaces": [
+        "source/runtime/network_publication.hpp"
+      ],
+      "private_interfaces": [],
+      "sources": [
+        "source/runtime/network_publication.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_network_state",
+        "syspane_protocol"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "windows-x64-gcc15",
+        "linux-x64-gcc13",
+        "windows-x86-v141-xp"
+      ]
+    },
+    {
+      "id": "network-publication-tests",
+      "target": "syspane_network_publication_tests",
+      "type": "EXECUTABLE",
+      "source_owner": "tests/fault/",
+      "public_interfaces": [],
+      "private_interfaces": [],
+      "sources": [
+        "tests/fault/network_publication_tests.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_network_publication",
+        "syspane_data_view"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "windows-x64-gcc15",
+        "linux-x64-gcc13",
+        "windows-x86-v141-xp"
+      ]
+    },
+    {
+      "id": "collector-probe",
+      "target": "syspane_collector_probe",
+      "type": "EXECUTABLE",
+      "source_owner": "source/application/",
+      "public_interfaces": [],
+      "private_interfaces": [],
+      "sources": [
+        "source/application/collector_probe.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_network_publication",
+        "syspane_network",
+        "syspane_data_view",
+        "syspane_health",
+        "syspane_child"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
     }
   ]
 }

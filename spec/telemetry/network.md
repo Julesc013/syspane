@@ -22,6 +22,12 @@ now defines and implements the bounded raw table/counter boundary. Its
 from the notification, identity, measured-publication and complete network-view
 requirements below. Raw interface keys must not become persistent selectors.
 
+The [supervised publication experiment](../delivery/network-publication-handoff.md)
+now sends real Linux counters and interval rates through measured telemetry, with
+source lifetimes, retained failures and independent child recovery. This covers a
+bounded part of the network view; the topology, address, routing, resolver, device
+and connectivity requirements below remain open.
+
 ## Required view
 
 Represent the complete dynamic adapter inventory, including disconnected/disabled physical and virtual adapters where the native source permits. Join device presence and problem state, interface administrative/media/operational state, IPv4/IPv6 addresses, routes/gateways, configured resolver information, network profile and source-specific connectivity assessment. Do not cap the inventory at sixteen entries or store only one address per family.

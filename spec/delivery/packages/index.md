@@ -12,6 +12,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [W-25 measured telemetry and consumer freshness](w-25-measured-time.md) — Version measurement time and bind received values to a qualified consumer clock without refreshing replayed data.
 - [W-25 native measurement-clock investigation](w-25-measurement-clock.md) — Test a shared native time domain across authenticated local processes before admitting measured telemetry.
 - [W-25 native network acquisition prerequisite](w-25-network-acquisition.md) — Bound real interface-counter reads before admitting identity reconciliation and supervised measured publication.
+- [W-25 supervised measured network publication](w-25-network-publication.md) — Connect real network counters to measured state with independent child recovery and current policy.
 - [W-25 network lifetimes and watched acquisition](w-25-network-reconciliation.md) — Reject obsolete acquisitions and native-key reuse before real network values enter measured publication.
 - [W-25 explicit private configuration preservation](w-25-preservation.md) — Preserve opaque damaged input without replacing source bytes, weakening policy or claiming a configuration commit.
 - [W-25 independent recovery and producer leases](w-25-recovery.md) — Close bounded recovery state before connecting native processes and diagnostic entry.

@@ -12,17 +12,17 @@ sp_requires: ["SP-CURRENT"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-AUDIT-2026-10-04", "resource": "User-supplied October 2026 audit inputs", "title": "October review inputs"}]
-updated: {"by": "codex", "at": "2026-10-05T22:49:24Z", "scope": "Network lifetime and Linux watch checkpoint; supervised publication remains open"}
+updated: {"by": "codex", "at": "2026-10-05T23:30:07Z", "scope": "Supervised real Linux network publication; product and native qualification gates remain open"}
 ---
 
 # Implementation readiness and gates
 
-The [network reconciliation checkpoint](network-reconciliation-handoff.md) adds
-shared observation lifetimes, acquisition-time brackets, obsolete-demand rejection
-and exact counter intervals to the preceding native interface/counter readers.
-Linux holds an observed link subscription before enumeration. Supervised measured
-publication, Windows notification coverage and actual native topology/namespace
-fault qualification remain required. A native key is not a persistent identity.
+The [supervised network publication checkpoint](network-publication-handoff.md)
+connects real Linux counters/rates, source lifetimes and measured receipt to
+independent child recovery. Demand release and typed revocation close the watch;
+replay and failure preserve sample age. Product controller/renderer/policy integration,
+Windows notification coverage and actual native topology/namespace qualification
+remain required. A native key is not a persistent identity.
 
 
 The October revision closes bounded contract and documentation gaps. It does not

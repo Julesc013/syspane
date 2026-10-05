@@ -1,6 +1,14 @@
 # Developer setup and checks
 
-The [network reconciliation checkpoint](../../spec/delivery/network-reconciliation-handoff.md)
+The [supervised network publication checkpoint](../../spec/delivery/network-publication-handoff.md)
+passes 96 Windows, 101 Linux and 88 historical-toolset host checks. All profiles run
+three `network.PUBLICATION-*` families; Linux adds `native.NATIVE-COLLECTOR` with
+eight real collection/lifecycle cases. Both recorders accept `--network-publication`,
+which includes preceding regression scopes. The native collector target exists only
+on Linux; typed development policy does not qualify installed policy or product
+service wiring. Twelve historical executables receive the PE/import audit.
+
+The earlier [network reconciliation checkpoint](../../spec/delivery/network-reconciliation-handoff.md)
 passes 93 Windows, 97 Linux and 85 historical-toolset host checks. Four
 `network.RECONCILE-*` families run on all profiles. Linux adds
 `network.NETWORK-WATCH-DECODE` and a fifth native network case which independently

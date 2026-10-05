@@ -43,7 +43,10 @@ def main():
     parser.add_argument('--measured-time', action='store_true', help='Require measured telemetry, freshness and native delivery cases')
     parser.add_argument('--network', action='store_true', help='Require real raw native network acquisition and complete measured-time regressions')
     parser.add_argument('--network-reconciliation', action='store_true', help='Require portable network lifetimes and Linux watched acquisition')
+    parser.add_argument('--network-publication', action='store_true', help='Require network projection and Linux supervised real collection')
     args = parser.parse_args()
+    if args.network_publication:
+        args.network_reconciliation = True
     if args.network_reconciliation:
         args.network = True
     if args.network:
@@ -119,12 +122,21 @@ def main():
         expected |= {'network.RECONCILE-'+case for case in ('IDENTITY', 'CLOCK-RATE', 'CANCEL-FAILURE', 'CAPACITY')}
         if platform.system() == 'Linux':
             expected.add('network.NETWORK-WATCH-DECODE')
+    if args.network_publication:
+        expected |= {'network.PUBLICATION-'+case for case in ('VALUES', 'FAILURE', 'BOUNDARY')}
+        if platform.system() == 'Linux':
+            expected.add('native.NATIVE-COLLECTOR')
     if len(cases) != len(expected) or {case['case'] for case in cases} != expected or any(case['outcome'] != 'pass' for case in cases):
         raise ValueError('missing, repeated, unexpected or failing case; preserve log before rerun')
     suffix = '.exe' if platform.system() == 'Windows' else ''
     artifacts = {name: {'sha256': sha(build/name), 'bytes': (build/name).stat().st_size}
                  for name in ('syspane_protocol_tests'+suffix, 'libsyspane_protocol.a', 'libsyspane_configuration.a', 'generated/settings_descriptors.hpp')}
     native_records = []
+    if args.network_publication:
+        for name in ('syspane_network_publication_tests'+suffix, 'libsyspane_network_publication.a'):
+            artifacts[name] = {'sha256': sha(build/name), 'bytes': (build/name).stat().st_size}
+        if not suffix:
+            artifacts['SysPane.CollectorProbe'] = {'sha256': sha(build/'SysPane.CollectorProbe'), 'bytes': (build/'SysPane.CollectorProbe').stat().st_size}
     if args.network_reconciliation:
         for name in ('syspane_network_state_tests'+suffix, 'libsyspane_network_state.a'):
             artifacts[name] = {'sha256': sha(build/name), 'bytes': (build/name).stat().st_size}
@@ -191,6 +203,8 @@ def main():
             required['NATIVE-NETWORK'] = {'NETWORK-READ','NETWORK-CANCEL','NETWORK-DEADLINE','NETWORK-CAPACITY'}
             if args.network_reconciliation and not suffix:
                 required['NATIVE-NETWORK'].add('NETWORK-WATCH')
+        if args.network_publication and not suffix:
+            required['NATIVE-COLLECTOR'] = {'LIVE', 'FAILURE', 'REPLAY', 'HANG', 'CRASH', 'UNSUBSCRIBE', 'REVOKE', 'PARENT-LOSS'}
         if args.preservation:
             for name in ('syspane_preservation_tests'+suffix, 'libsyspane_preservation_job.a'):
                 artifacts[name] = {'sha256': sha(build/name), 'bytes': (build/name).stat().st_size}
@@ -222,8 +236,8 @@ def main():
                     raise ValueError('Windows reparse case must execute or retain its exact privilege limitation')
             if native['outcome'] != 'pass' or len(native['cases']) != len(expected_cases) or {case['case'] for case in native['cases']} != expected_cases or any(case['outcome'] != 'pass' for case in native['cases']):
                 raise ValueError('native case missing or failed; preserve original report')
-            if family in ('RECOVERY-01', 'DIAG-01', 'ORACLE-01', 'FAILURE-STORE', 'PRESERVE', 'NATIVE-SUB', 'NATIVE-CLOCK', 'NATIVE-MEASURED', 'NATIVE-NETWORK'):
-                executable = {'RECOVERY-01':'SysPane.RecoveryProbe'+suffix, 'DIAG-01':'SysPane.Diag.exe' if suffix else 'syspane-diag', 'ORACLE-01':'SysPane.OracleProbe', 'FAILURE-STORE':'syspane_failure_store_tests'+suffix, 'PRESERVE':'syspane_preservation_tests'+suffix, 'NATIVE-SUB':'SysPane.TelemetryProbe'+suffix, 'NATIVE-CLOCK':'SysPane.TelemetryProbe'+suffix, 'NATIVE-MEASURED':'SysPane.TelemetryProbe'+suffix, 'NATIVE-NETWORK':'SysPane.NetworkProbe'+suffix}[family]
+            if family in ('RECOVERY-01', 'DIAG-01', 'ORACLE-01', 'FAILURE-STORE', 'PRESERVE', 'NATIVE-SUB', 'NATIVE-CLOCK', 'NATIVE-MEASURED', 'NATIVE-NETWORK', 'NATIVE-COLLECTOR'):
+                executable = {'RECOVERY-01':'SysPane.RecoveryProbe'+suffix, 'DIAG-01':'SysPane.Diag.exe' if suffix else 'syspane-diag', 'ORACLE-01':'SysPane.OracleProbe', 'FAILURE-STORE':'syspane_failure_store_tests'+suffix, 'PRESERVE':'syspane_preservation_tests'+suffix, 'NATIVE-SUB':'SysPane.TelemetryProbe'+suffix, 'NATIVE-CLOCK':'SysPane.TelemetryProbe'+suffix, 'NATIVE-MEASURED':'SysPane.TelemetryProbe'+suffix, 'NATIVE-NETWORK':'SysPane.NetworkProbe'+suffix, 'NATIVE-COLLECTOR':'SysPane.CollectorProbe'}[family]
                 if family == 'PRESERVE' and native['diagnostic_sha256'] != sha(build/('SysPane.Diag.exe' if suffix else 'syspane-diag')):
                     raise ValueError('preservation CLI artifact changed after run')
                 if native['executable_sha256'] != sha(build/executable):
@@ -231,7 +245,14 @@ def main():
                 for source, digest in native['source_inputs'].items():
                     if sha(ROOT/source) != digest:
                         raise ValueError('recovery input changed after native run: '+source)
-                if family == 'RECOVERY-01':
+                if family == 'NATIVE-COLLECTOR':
+                    for case in native['cases']:
+                        observed = case['child_observations']
+                        if len(observed) != case['launches'] or not all(row['observer'] == 'pidfd' and row['observed_alive'] and row['observed_exited'] for row in observed):
+                            raise ValueError('collector held-child observation missing')
+                        if {row['pid'] for row in observed} != {row['pid'] for row in case['lifecycle'] if row['event'] == 'spawned'}:
+                            raise ValueError('collector observed child differs from launched identity')
+                elif family == 'RECOVERY-01':
                     for case in native['cases']:
                         if not case['child_observations'] or not all(c['observed_alive'] and c['observed_exited'] for c in case['child_observations']):
                             raise ValueError('native child observation missing')
@@ -303,6 +324,8 @@ def main():
         paths.append(ROOT/'spec/delivery/packages/w-25-network-acquisition.md')
     if args.network_reconciliation:
         paths.append(ROOT/'spec/delivery/packages/w-25-network-reconciliation.md')
+    if args.network_publication:
+        paths.extend([ROOT/'spec/delivery/packages/w-25-network-publication.md', ROOT/'spec/telemetry/metrics.json'])
     for directory in ('source', 'tests', 'build-support', 'spec/contracts'):
         paths.extend(sorted((ROOT/directory).rglob('*')))
     inputs = {p.relative_to(ROOT).as_posix(): sha(p) for p in paths
@@ -464,6 +487,11 @@ def main():
         report['slice'] = 'portable network lifetimes and Linux watched acquisition before supervised publication'
         report['bindings']['network_reconciliation'] = 'spec/delivery/packages/w-25-network-reconciliation.md'
         report['limits'][0] = 'Portable tests cover atomic lifetimes, obsolete demand, dirty revisions, retained failures and exact counter intervals. Linux additionally observes the owned route-netlink registration before two successful dumps. Actual interface mutation, native overflow and namespace migration were not induced. Windows full-table notification coverage and supervised measured publication remain open. Public evidence excludes native keys and counters.'
+    if args.network_publication:
+        report['slice'] = 'measured network projection and Linux owned collector publication/recovery'
+        report['bindings']['network_publication'] = 'spec/delivery/packages/w-25-network-publication.md'
+        report['bindings']['collector_oracle'] = 'tests/protocol/native_collector.py'
+        report['limits'][0] = 'Portable projection covers counters, rates, failure retention, byte bounds and actual codec/data-view import. Linux additionally runs real collection, exact replay, injected failure, hang/crash/restart, demand release, typed revocation and parent loss. Installed service/policy, full network fields, actual kernel topology faults and Windows notification/publication remain unqualified. Native operational values are excluded from public evidence.'
     args.output.parent.mkdir(parents=True, exist_ok=True)
     log_output.write_text(raw.replace(str(build), '<build>').replace(str(ROOT), '<source>'), encoding='utf-8', newline='\n')
     args.output.write_text(json.dumps(report, indent=2)+'\n', encoding='utf-8', newline='\n')

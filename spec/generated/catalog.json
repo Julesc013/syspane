@@ -357,7 +357,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "d26261afb42e542f328400d990b51a98da285aa7a93ae8d9fe6f0845fd09dfcb"
+      "sha256": "f6de22e581e50f20e7242588e9596779d279ea59f1075fb10c8db89b3cd9c060"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -422,7 +422,7 @@
       "requires": [
         "SP-CURRENT"
       ],
-      "sha256": "fa603ae373171fdaab0c04ed3643f5776c86440b025ccc281a5c750580c22180"
+      "sha256": "6f458b66c370b407071353d85827e7d692846bdbc619dd8fbb213cf7a3f84849"
     },
     {
       "id": "SP-MEASURED-TIME-HANDOFF",
@@ -467,6 +467,17 @@
         "SP-CAMPAIGN-ADMISSION"
       ],
       "sha256": "46c4e9553a2761388ec3b82dcc36f5b2067815c8231a4381e3b219e49cd7ab28"
+    },
+    {
+      "id": "SP-NETWORK-PUBLICATION-HANDOFF",
+      "path": "delivery/network-publication-handoff.md",
+      "title": "Supervised real network publication checkpoint",
+      "description": "Publish real Linux counters and rates through measured telemetry with independent child recovery.",
+      "requires": [
+        "SP-W25-NETWORK-PUBLICATION",
+        "SP-CAMPAIGN-ADMISSION"
+      ],
+      "sha256": "3d3374240c829c47496e9f76634d998962b1e93210e4ec643a1a158c06df5fc7"
     },
     {
       "id": "SP-NETWORK-RECONCILIATION-HANDOFF",
@@ -624,6 +635,20 @@
         "SP-W25-PACKAGE"
       ],
       "sha256": "0d280e3d8771a2a0e569a84a2f846b8344db3696ad96384f70ec4872aa0922df"
+    },
+    {
+      "id": "SP-W25-NETWORK-PUBLICATION",
+      "path": "delivery/packages/w-25-network-publication.md",
+      "title": "W-25 supervised measured network publication",
+      "description": "Connect real network counters to measured state with independent child recovery and current policy.",
+      "requires": [
+        "SP-W25-NETWORK-RECONCILIATION",
+        "SP-W25-MEASURED-TIME",
+        "SP-W25-SUBSCRIPTIONS",
+        "SP-W25-PACKAGE",
+        "SP-NETWORK"
+      ],
+      "sha256": "1b29289f399e51742627a243b7841ed3df0e00515d507c0cc6fc2e1b98e43cc1"
     },
     {
       "id": "SP-W25-NETWORK-RECONCILIATION",
@@ -1194,7 +1219,7 @@
         "SP-STATE",
         "SP-SCHEDULER"
       ],
-      "sha256": "521766a51118333e556ab5c8801f60c09f584499e49036ea457b358977a0b707"
+      "sha256": "3142a1b952655c9d0820971b0cf30012b560726244ffcee7810a92c1b9fcec72"
     },
     {
       "id": "SP-NETWORK",
@@ -1205,7 +1230,7 @@
         "SP-STATE",
         "SP-SCHEDULER"
       ],
-      "sha256": "dc3fb7f6a5b88be5a2f412cdd8d1c1528fa06ca990b609aeac03bb2065cd13b5"
+      "sha256": "de11375cc11e2b23e98236a6b9f2df03c32669c59a193076976a3bc7f7428a1a"
     },
     {
       "id": "SP-RESOURCES",
