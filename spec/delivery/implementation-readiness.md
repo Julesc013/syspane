@@ -12,7 +12,7 @@ sp_requires: ["SP-CURRENT"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-AUDIT-2026-10-04", "resource": "User-supplied October 2026 audit inputs", "title": "October review inputs"}]
-updated: {"by": "codex", "at": "2026-10-05T19:48:29+11:00", "scope": "Implementation closure review; no native execution or human review attested"}
+updated: {"by": "codex", "at": "2026-10-05T23:39:47+11:00", "scope": "Admitted model foundation; executed development checks, no desktop qualification or human review attested"}
 ---
 
 # Implementation readiness and gates
@@ -26,7 +26,7 @@ new versioned schemas or explicit work-scope refinement.
 |---|---|---|
 | Initial authoring | Rich initial settings descriptors, scene/binding/layout 0.2, result and handshake shapes | Runtime merge/resolution, migration, transport framing, persistence and native controls |
 | Recovery/security | Independent diagnostic, lease, policy/disclosure and quota contracts | Fault harness, native peer authorization, revocation, measured budgets |
-| Native profiles | Typed target/capability metadata and independent work units | Exact compiler/dependency profiles, component manifest, native builds and external desktop oracle |
+| Native profiles | Typed target/capability metadata, Windows/Linux model build profiles, component manifest and executable foundation checks | External desktop oracle, transport/recovery, native desktop builds and target qualification |
 | Content/SDK | Preset/package/extension metadata and buffer-result sketch | Bounded importer, dependency closure, extended theme/AST, installed SDK/ABI consumers |
 | Saver | Role/lifecycle/privacy/ownership contracts | Native host adapters and preview/fullscreen/configuration qualification |
 | Packages/setup | Names, paths, one-owner and recovery contracts | Actual release/component/setup manifests bound to inspected provider, offline packages and lifecycle tests |
@@ -48,9 +48,10 @@ retain engineering choices and native experiments where evidence is required.
 [Work-package closure](work-packages.md) defines the required scope, interfaces,
 failure/resource rules, decision authority, commands and completion evidence.
 [W-01](packages/w-01-foundation.md) is the first detailed package, with concrete
-model cases. It still requires runtime admission and populated development build
-profiles. [Acceptance traces](../assurance/acceptance-traces.md) fix selected expected
-outcomes before test code exists; no runner or product pass is claimed.
+model cases. Its runtime scope is now admitted and both development builds passed
+their foundation cases; see [the handoff](foundation-handoff.md).
+[Acceptance traces](../assurance/acceptance-traces.md) keep the original expectations;
+only the linked executed model cases are claimed. Other runners remain pending.
 
 For W-24, finish exact message bodies, sender/receiver/connection-state coverage,
 mutable ownership, disconnect/revocation/shutdown transitions and global/control

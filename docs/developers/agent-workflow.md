@@ -21,8 +21,9 @@ repeated permission. AIDE is optional development infrastructure, currently inac
 The [work-package contract](../../spec/delivery/work-packages.md) is canonical.
 [W-01](../../spec/delivery/packages/w-01-foundation.md) defines the first useful
 model program. Its [case traces](../../spec/assurance/acceptance-traces.md) are
-expected behaviour, not tests that have already run. The current repository still
-has no native product build or qualification.
+expected behaviour. Model cases now have executed CTest bindings on Windows and
+Linux; request/recovery and cold-start cases remain unexecuted. Read the current
+handoff and exact artifact evidence before carrying a result forward.
 
 An implemented package has passed its mandatory implementation checks. A missing
 native lab blocks the named qualification, and mandatory release gates still apply.

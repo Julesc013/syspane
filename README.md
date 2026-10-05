@@ -10,11 +10,10 @@ themes and presets describe user intent; native adapters supply each platform's
 data, controls and desktop integration. A companion screensaver reuses the
 presentation components under its own lifecycle and privacy policy.
 
-**Current stage: specification and implementation planning.** This repository
-contains experimental contracts, synthetic fixtures and working specification
-tools. It does not yet contain a native SysPane application or downloadable
-release. No operating-system, desktop, screensaver or installer profile is
-qualified.
+**Current stage: foundation implementation.** The C++17 model, explicit CMake
+targets and development smoke program build on pinned Windows and Linux profiles.
+There is no usable SysPane desktop application or downloadable release yet.
+Desktop, screensaver and installer profiles remain unqualified.
 
 The first implementation campaign includes contemporary Windows, Windows XP/7
 investigations, Linux and macOS/older OS X. Each profile must prove its own
@@ -33,7 +32,7 @@ path when optional components fail.
 owns audience-oriented guides. Python is used only for development tooling.
 See [developer checks](docs/developers/build.md) for validation commands.
 
-The next step is a bounded build foundation and native experiments. Each package
+The active campaign covers the foundation and native experiments. Each package
 must connect specified behaviour to runnable checks and a source-bound handoff;
 see [the developer workflow](docs/developers/agent-workflow.md). Specification
 validation does not establish that an entire edition can be built or released

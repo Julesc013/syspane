@@ -1,6 +1,7 @@
 # SysPane specification update log
 
 ## 2026-10-05
+- **Campaign**: The user explicitly admitted foundation/native experiments. W-01 now builds a typed C++17 model and smoke program on pinned Windows/Linux development profiles; 18 checks passed on each, and both local smoke archives passed relocation. The foundation handoff preserves failures and pending native work.
 - **Scope**: Used the supplied readiness review to strengthen specs/docs; its quoted campaign instruction did not create a native execution grant.
 - **Closure**: Added package contents, delegated/experimental/reserved decision classes and separate investigation, implementation, qualification and release gates.
 - **Foundation**: Linked a detailed W-01 model/build package from the existing campaign graph; concrete profiles and runners remain implementation outputs.

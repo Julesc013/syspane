@@ -1,7 +1,7 @@
 # SysPane documentation
 
-SysPane is at specification stage. These guides explain the intended product
-and the checks available today; product commands and packages are not shipped.
+SysPane has a buildable model foundation. These guides explain the intended product
+and the checks available today; usable desktop commands and releases are not shipped.
 The [specification](../spec/README.md) remains the canonical contract.
 
 - [Getting started and current availability](users/getting-started.md)

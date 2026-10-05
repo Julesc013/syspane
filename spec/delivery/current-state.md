@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-05T19:48:29+11:00", "scope": "Implementation closure review; no native execution or human review attested"}
+updated: {"by": "codex", "at": "2026-10-05T23:39:47+11:00", "scope": "Admitted model foundation; executed development checks, no desktop qualification or human review attested"}
 ---
 
 # Current state and next admitted boundary
@@ -33,6 +33,13 @@ to begin implementation or delegate work are not recorded as execution grants.
 
 ## Present in this revision
 
+The user has explicitly admitted the full foundation/native-experiment campaign;
+see [admission](campaign-admission.md). W-00/W-01 now provide actual CMake targets,
+pinned Windows/Linux development profiles, the C++17 model and a nonempty smoke
+program. Eighteen checks passed on each profile. W-26's initial local archives
+passed relocated execution. [The handoff](foundation-handoff.md) identifies exact
+artifact/case records, failures and the next packages. No desktop claim follows.
+
 Canonical 0.2.0 documentation bundle, unchanged 0.1 authoring profile, preserved old
 fixtures, new experimental scene/command/capability 0.2 and admission descriptors.
 The initial settings registry has enforced metadata/default consistency and generated
@@ -43,20 +50,22 @@ README and docs describe the product honestly; TODO points to pending work.
 The [audit disposition](audit-2026-10-04.md) maps supplied recommendations to their
 owners and gates. Historical September validation is retained separately; the
 October 4 [validation record](../generated/amendment-2026-10-04-validation.json)
-is also retained separately. The current [validation report](../generated/validation-report.json)
-records actual commands/environment, outcomes and skipped checks for this follow-up.
+is also retained separately. The [documentation validation report](../generated/validation-report.json)
+records the earlier identified documentation run; it does not attest subsequent
+native implementation. Current campaign checks and build results are recorded
+separately under `build-support/evidence/`.
 
 [Work-package closure](work-packages.md), the [W-01 package](packages/w-01-foundation.md)
 and [acceptance traces](../assurance/acceptance-traces.md) now define completion gates,
 selected model/request/recovery expectations and a proposed cold-start exercise.
 The transport distinguishes in-flight requests from retained-result reservations.
-These are specification additions; no concrete native build profile or product
-runner has been added, and remaining W-24 interface/budget closure is explicit.
+Model traces now have executable bindings. Remaining W-24 interface/budget closure
+is explicit, and request/recovery/cold-start traces remain unexecuted.
 
 ## Not implemented or qualified
 
 No native controller, renderer, collector, GUI/editor, saver, diagnostic executable,
-SDK, setup adapter or product package exists. No native OS/desktop/saver/performance/
+SDK, setup adapter or complete product package exists. No native desktop/saver/performance/
 accessibility/setup qualification ran. Test definitions stay `not_run`; concepts stay
 draft/unreviewed and experimental contracts stay experimental. AIDE's binding remains
 inactive with no grants. USK and ScreenSave are not adopted runtime dependencies.
@@ -64,9 +73,9 @@ License, contribution and release-identity decisions remain open.
 
 ## Next work
 
-Admit W-01's bounded runtime scope and populate its development profile and commands.
-Implement its nonempty model program and mandatory case bindings. Then close the
-build/component/target consumers and the minimum command/IPC/policy/recovery
+Continue the admitted campaign: close W-24's exact transport/policy boundaries and
+W-02's independent oracle, then implement them. W-25 additionally requires W-24.
+Connect the build/component/target consumers and minimum command/IPC/policy/recovery
 slice. Probe contemporary Windows, XP/7, Linux and AppKit/older OS X independently.
 Package smoke builds early; each profile's usable vertical includes live network,
 native settings, direct editing, save/reload and externally observed desktop reveal.

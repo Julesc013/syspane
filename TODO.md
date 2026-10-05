@@ -1,8 +1,9 @@
 # SysPane implementation checklist
 
 The October 2026 audit is incorporated into the specification and documentation.
-SysPane remains a specification-stage project: **no native application or release
-profile is implemented or qualified**. This checklist routes work; the
+The model/build foundation is implemented on Windows and Linux development
+profiles; **the native desktop application and release qualification remain pending**.
+This checklist routes work; the
 [work-unit catalog](spec/delivery/work-units.json) owns dependencies and acceptance.
 
 ## Completed specification work
@@ -21,13 +22,13 @@ behaviour has been implemented. See [audit disposition](spec/delivery/audit-2026
 
 ## First native campaign
 
-- [ ] W-00/W-01: admit runtime scope; create real CMake targets, component ownership and pinned build profiles.
-- [ ] W-01: bind every mandatory model case to runnable tests and deliver a nonempty fixture smoke program; see the [package](spec/delivery/packages/w-01-foundation.md).
+- [x] W-00/W-01: admit runtime scope; create real CMake targets, component ownership and pinned Windows/Linux development profiles.
+- [x] W-01: bind mandatory model cases to runnable tests and deliver a nonempty fixture smoke program; see the [handoff](spec/delivery/foundation-handoff.md).
 - [ ] W-24: close message bodies/roles/states, mutable ownership and global/control queue budgets before implementing the transport.
 - [ ] W-24/W-25: implement authenticated local IPC, current-policy enforcement, bounded recovery and independent diagnostics.
 - [ ] W-02–W-06: run changing-scene host probes for contemporary Windows, XP/7, Linux and macOS/older OS X.
 - [ ] W-07–W-11: implement demand, commands, configuration recovery, portable scenes, editor and native settings facilities.
-- [ ] W-26: produce early offline smoke packages and launch them on their actual targets.
+- [x] W-26 initial slice: produce local Windows/Linux model smoke archives and prove relocated execution; product package/lifecycle qualification remains pending.
 - [ ] W-34–W-37: implement native network providers independently for each family.
 - [ ] W-27–W-30: complete each profile's live editable persistent desktop, save/reload and failure journey.
 - [ ] W-40–W-43: qualify each selected payload's accessibility, privacy, performance and recovery.

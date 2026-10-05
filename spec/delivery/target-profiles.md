@@ -12,7 +12,7 @@ sp_requires: ["SP-PLATFORMS", "SP-RELEASE"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-AUDIT-2026-10-04", "resource": "User-supplied SysPane audits and design reviews, 2026-10-04", "title": "October specification review inputs"}]
-updated: {"by": "codex", "at": "2026-10-05T19:48:29+11:00", "scope": "Implementation closure review; no native execution or human review attested"}
+updated: {"by": "codex", "at": "2026-10-05T23:39:47+11:00", "scope": "Admitted model foundation; executed development checks, no desktop qualification or human review attested"}
 ---
 
 # Build targets and qualification profiles
@@ -21,8 +21,9 @@ updated: {"by": "codex", "at": "2026-10-05T19:48:29+11:00", "scope": "Implementa
 The [target-profile schema](../contracts/target-profile.schema.json) describes exact
 OS/API minimum, architecture/ISA/word width/endianness, ABI/libc/runtime, compiler/SDK,
 dependencies, native toolkit, renderer, shell host, roles and isolation. Authored
-build profiles will live in `build-support/targets/`; no concrete supported product
-profile exists yet. Synthetic fixtures are explicitly examples, never download rows.
+build profiles live in `build-support/targets/`. Windows/Linux foundation development
+profiles are populated and exercised; no supported desktop product profile exists
+yet. Synthetic fixtures remain explicitly examples, never download rows.
 
 Build intent is separate from runtime availability and executed qualification.
 Qualification binds the exact target revision, source, artifact hashes, harness,

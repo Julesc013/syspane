@@ -1,0 +1,759 @@
+{
+  "recorded_at": "2026-10-05T23:46:03+11:00",
+  "scope": "specification-and-tooling-only",
+  "source_inputs": {
+    "spec/architecture/composition.md": "1986eeefe02ac7c124f415ffd164d34bb3559d2c2c163891c5b1f9a39b7eeafe",
+    "spec/architecture/persistence.md": "b0866706d03d2e8038745340787e4d71ac2ae74eaca24d5268ac092a1fe041aa",
+    "spec/architecture/portability.md": "39aad0fa3956a4cbcc95c6c76b980b011fc7519825aa8eee90672636cb5189e3",
+    "spec/architecture/processes.md": "49d8a7e73e878f4afb69483b98f19be3748455d2cca01742d590ccab17dadba8",
+    "spec/architecture/recovery.md": "ac08954beda679c57ec709adb3500c67b328d45553d049f16c58b190f815854b",
+    "spec/architecture/scheduling.md": "01c440c62356f4f23f53336913240429bf2618db6157b1f8cafe1a121def380e",
+    "spec/architecture/state.md": "13c8ece417362abea7134c58643f7a3081f9a5927a8f774fe220c9f4decabf66",
+    "spec/architecture/system.md": "be203321db74a27e9e16fb2e4657203d636725fe31028bd247dae1733510c56c",
+    "spec/assurance/acceptance-traces.md": "6780c85ee4e018ff11cb0bc543b1405958976f23c753919c7fcc53e6a2ce8cc5",
+    "spec/assurance/desktop-oracle.md": "055e57d9d4796abcb60f040a8ad15a7b788e6bc1a70c710230001f1fde76388c",
+    "spec/assurance/performance.md": "04dc9b44b77886a5f650394a33100b9ced60a345423273803692946285375f4f",
+    "spec/assurance/release.md": "21d356f865e813911d48d6fcdba5842ee1c8c55ba5bdf0b72edd90bf4b33ea6e",
+    "spec/assurance/security.md": "45cbdb4e01cddf4f0c0756063d3dfd1352db69f406b5a0ddf68b8f73b7a4571d",
+    "spec/assurance/testing.md": "cb0f365e62609e001c4fe302a7cfac6b9fad401dd85caac34cf2a089e0cf9502",
+    "spec/assurance/tests.json": "ca0b9863cfc1b257c3c00b3bcf830a3548a62441fce9846e9de3f5b5e3ed206f",
+    "spec/bootstrap/files.json": "27781ef6c1f233e2c9cc439ef8bbb773e3c8d5e257b53089b9ccd8df5f66ef62",
+    "spec/contracts/binding.schema.json": "1c5063762b63540ca68dfcbcc9ad425061fbdc64f28210716ad093738aba183b",
+    "spec/contracts/capability-v0.2.schema.json": "a7dc0b867ab0b689535f0c59018de856bc72011f368882a1941e29df665e29f5",
+    "spec/contracts/capability.schema.json": "b2100d0d19e64560156810c65caf97041f70f22894b068356e3ba1f27e9cd7ac",
+    "spec/contracts/command-result.schema.json": "baf5d7227b53f900388257d2a76ddca0eee3cb16dabd7e610092fe2d98a68fc9",
+    "spec/contracts/command-v0.2.schema.json": "cfc5e9d4be524ef52905d4c0858b674b3ab889eef9057ef0235c6c7d135d4833",
+    "spec/contracts/command.schema.json": "6c7bafa1a8817516a22a3f0ab62390006d0a7d98814accf3b04fce95012a3526",
+    "spec/contracts/commands.md": "c9e2ac2396c3c0ffff7084d53e2870711bab6cbfdeeaaf81a744bd7bf81ce1fc",
+    "spec/contracts/common.schema.json": "2ce55216670abacfa570da8a910e0c7baecfe6288794507ec87f8e7852c5aa07",
+    "spec/contracts/content-package.schema.json": "10d251beb791c0755c36b6e797f860f95cb06307fff7c3e02267eb83f7355f1f",
+    "spec/contracts/event.schema.json": "4f65ae6390ba91ffab387c07893cda76ca6bc59d2c139b97d762e54953d2fcb1",
+    "spec/contracts/evidence.schema.json": "5605221f3a8d8a6d8a2b0355015131b843762ffb2a14c7e6e2735a75742a183e",
+    "spec/contracts/extension-manifest.schema.json": "a42f609115447c3d28acf0083e49a2296e4191ea18b38a91515d69da6af0240a",
+    "spec/contracts/handoff.schema.json": "8fc3569c159d9efd52378f76f9ab59451f2158ebf81d77d35b6f9e82fd9570d2",
+    "spec/contracts/handshake.schema.json": "070d1705c69469984df391515946637cc3b90c44a8b15601ad02e96b4bd0daad",
+    "spec/contracts/layout.schema.json": "604285e32ccd763855788925609dfb7658f537d1cb493e9066458b4a2f2640ee",
+    "spec/contracts/metric-descriptor.schema.json": "ee45ceb1f7a792ee9bfa92e2ff4b60e0ba4062528772e002758249e3a34fc942",
+    "spec/contracts/network-domain.md": "3e0e012acb9dd51e490c6971d344451267d7ecfa522553da6af26d3f50f949c2",
+    "spec/contracts/network-interface.schema.json": "67d2feeb73e5971e0fc421ce1cea7cc35fd8a005ec3fa9a7ffe5cc41a05cb57d",
+    "spec/contracts/observation.schema.json": "00477462eb4807e2d7ea87995064fca7c6f90c35a3efe11b53d289812750fe4e",
+    "spec/contracts/policy.schema.json": "81ae7c734956940fc69f3c443cac8c49f3efd3abeb319f166c927c7536c24d1e",
+    "spec/contracts/preset.schema.json": "2905bc83acbe7a2bba5e296aa94ce7b762e234326ef8119ddce5e87df0224855",
+    "spec/contracts/protocol.md": "b6bb4914d0f2bc1663575a0e2b96e7b93b2889ca41c00a0d17968b65190eba31",
+    "spec/contracts/scene-v0.2.schema.json": "9773b8dbc75c73dea2d89d6d579f182441f0cf4342c94ee1e7973c6ab77358b7",
+    "spec/contracts/scene.schema.json": "7d8696af5a5a17c96ea67a9aa333b6a3cba5de0b770a3c1be91783ab9b3ea0fd",
+    "spec/contracts/sdk.md": "4d3b55828316909f6f023442a2dfe3d70c3418caf07f7fe7314121a7b4cd0013",
+    "spec/contracts/settings.schema.json": "0d7289a58e394c6cf74b738a6101a681c4377817bc8048d4b741d66cc2d2880e",
+    "spec/contracts/snapshot.schema.json": "2f1a13d327a86a63cb82c63d50832528e074333ac3222a7caa38c12b85f94c7a",
+    "spec/contracts/syspane-api.h": "2b6bd73c82db1118011f6160b98ae962fe3ecbd8e4313a0e026fdb4b6410d5d7",
+    "spec/contracts/target-profile.schema.json": "6597cc1e7b94718a0e79d50621eafd5918a7264fd6054dc9a9e07519917ec7cf",
+    "spec/contracts/theme.schema.json": "16a306f1a7a1ab0e74ca28fd4e2a63f7712255136868329afcc141d5c88f8aac",
+    "spec/contracts/transport.md": "b99ec21b677ddbdf5d0eb32e0d9c13a183c6625f6ac5679df9840372b219904e",
+    "spec/contracts/versions.md": "305dad599d4a98b70b8c166aa1c79f62b5688ebc8c14f48cfdd3728695d2622c",
+    "spec/decisions/001-native-product.md": "f6059b312a4c2242c0d1f9c1bf55d6fb427836d33ac6a0dc149bfe87d9b9daa5",
+    "spec/decisions/002-canonical-bundle.md": "6dd871ee3a48fdae8f6a687875c34cf428f02974548b375d24f274e9754f47bc",
+    "spec/decisions/003-okf-profile.md": "ab8ef08d14ec68869793b6ab5b9c65051d4785c8a44c7c548b685aba950399f0",
+    "spec/decisions/004-native-adapters.md": "13f7ddf4f5949ae5ba5cbc613f3d3e14e3c3227fd30834295b0b6ff4ce39a11f",
+    "spec/decisions/005-surface-isolation.md": "d9f447bd773e39d9582ee4741459b82d4182e14f1a4ee466003535cc28300a9b",
+    "spec/decisions/006-transactions.md": "3d20a9e9effac887eb66ff643eabd5ad9af8edca854a32a6982eaa2d6254c032",
+    "spec/decisions/007-evidence.md": "d22fc0752024bdc0dd86ef2552a8c2e89f87291e4c77dd30a320d1da5e23f901",
+    "spec/decisions/008-aide-boundary.md": "6c983a1ae8e602f57ceb9b7c67c940689baa5f9a4bbfa5396229d7cf9ef3b936",
+    "spec/delivery/artifacts.md": "ddceed68791c536b61310e078c775678edda856d6728745f03f5f09ba50847a1",
+    "spec/delivery/audit-2026-10-04.md": "4502c5fd48ad4b17d10aa05a17a3a4a5244dab10292f242a2c5ccf8711eca402",
+    "spec/delivery/campaign-admission.md": "9470802300241b7a1fed9f62ae7784655dfc2f9935cdff2c73de7cfe00e1ac88",
+    "spec/delivery/current-state.md": "5bf13e35de9aa61dfdebf3494cd2979a9179d771ea620c9b37c17873df01a1ad",
+    "spec/delivery/foundation-handoff.md": "a2652a69852d9eaeb38751adcd62547443df6b0ed0d5cc54e4f5b07d5b968c2b",
+    "spec/delivery/implementation-readiness.md": "90bacf658aba09c64895b920437f7d7a96f28380cacd9111910962d178fa2bd6",
+    "spec/delivery/open-questions.md": "58432869c6cc2649a11a7af8661cb965ea821a99b0418d0b255eda76e6786523",
+    "spec/delivery/packages/w-01-foundation.md": "2517a738ae26015f68e9027599f39b13cb4473718772f83e3db46d4f077718e2",
+    "spec/delivery/packages/w-26-smoke.md": "53c14367f0447ad326d0b418ca6c74924845811bdf8b0dffe9c72188a89ce713",
+    "spec/delivery/roadmap.md": "a810e9b3bd8620436b24cdde1e0c9e9fb009817568e768381e2887db9669c6ea",
+    "spec/delivery/target-profiles.md": "355869d3b66be1c68b6d25572b80f9514a2ad311e289153b999432a7c8c2dc0c",
+    "spec/delivery/work-packages.md": "5d21d4d4ef8500b69be48b78e6123ef899756e97f53a14046b5708fb07c03e86",
+    "spec/delivery/work-units.json": "5fd592f2c44392e2b9b30cbf6f0e93cb2da7b4ba9d6f1b439981f9857ba88f51",
+    "spec/desktop/contract.md": "fbd182d042da95f4fd5fb9da54e021ed3db9202a9e1480cc37e4bc0757cc52d6",
+    "spec/desktop/linux.md": "7337983dfeadf764c2c92634e2c12a01ffb13f0fbd716d2ff3161341807ddbba",
+    "spec/desktop/macos.md": "6ac70da1f6e96d56eceb73e8c50a3d343efc66e357ef43124b8290608c9a9342",
+    "spec/desktop/rendering.md": "b4084ce1daf46dbd4ecf865a913db3e63d419675e2b4420b70dad5afcdee8c10",
+    "spec/desktop/screensaver.md": "5b21845d74b1d6e17294041b0ee5d73b80525f6a1de0c1bbb49dccba4253519a",
+    "spec/desktop/windows.md": "c265adac733519f1bf959144addf2200e6cb8c140492c1dbd9ed6a1c73f786b0",
+    "spec/experience/accessibility.md": "0329367df22da4413d3a9950d1b81721dbb67c8f202ce05d3bb62af3613b4e45",
+    "spec/experience/configuration-resolution.md": "614c16104c181a03b4857c205b632ce69b98e0ffe1ded1d10631b7aeefde33cc",
+    "spec/experience/control-surfaces.md": "c3c456a63e74ef6c4e57c76cf776d591419da578dfe35785496376d00d81821f",
+    "spec/experience/editor.md": "c8dd24a24277d7ea02b8d62bd6ff09d1f05f5707947f1dc9b6319de826f4f51f",
+    "spec/experience/policy.md": "b86b3ce3263827f16b07921a3d17ae385a2980b3f3612fa7f68bdf12c3b3ee6c",
+    "spec/experience/presets.md": "eae803bd91344161b95573694141988894a773899e7b7d6b281dc9b502c4349a",
+    "spec/experience/scene-bindings.md": "4d892a64edae758a82cdcdb96945f52c0f4e28deeb43be4a61b29c1dce6044cc",
+    "spec/experience/scene-theme.md": "1dc6afcb0896151698d367fb063bfffae500f7c0626ecfd3645cdae3528b5714",
+    "spec/experience/settings-registry.json": "5f7406a4e6163c84497313bc9d9846d204f8edab5bc972b81a4222b44e612979",
+    "spec/experience/settings.md": "63bab09a1fac486d2500f9b405cc08a079ade1f944f8d47c03a673536d203104",
+    "spec/fixtures/catalog.json": "4e0594250abfbeee1e27690a3722c74fd7bad108fb6f9985fdf164be8425f7ea",
+    "spec/fixtures/invalid/binding-unbounded.json": "4d00e4d79d54928ddc5f884a278f87518ead0f93030a8c0f21cff3da42aed006",
+    "spec/fixtures/invalid/caller-forged-approval.json": "7ea7869ad39099e04d7cbad0a2c438e0ca9cd5382767aa06fba46143749021ae",
+    "spec/fixtures/invalid/capability-no-evidence.json": "f16d18956de8b82ae3291f0c0743997dbbb48f11f277c41c7aace83ce9542e93",
+    "spec/fixtures/invalid/command-invalid-scene.json": "21c82defa1c277a295d6279e3342b0718b937f7d9860ab5516321ad7315fbbe8",
+    "spec/fixtures/invalid/command-setting-wrong-type.json": "3cca278dd626ebed39cc9addd2e59dedcc23f67dcdaf019712ac5bbe2c2673bb",
+    "spec/fixtures/invalid/content-case-collision.json": "acefe692a310bbc6a0b5f3422db2ef335cd8fe075f23fc75bcd2f93bb34e3fbe",
+    "spec/fixtures/invalid/content-path-escape.json": "2d778c9e4b802f4e88a3a7782b271c1e05e32d460fbfbc4fd435272eeb90d253",
+    "spec/fixtures/invalid/counter-as-json-number.json": "7ea80b0972cc72616bad14bb618372a2eb071d1f928b3c1ab9b0b56a54e4446e",
+    "spec/fixtures/invalid/counter-overflow.json": "5b8738df02d7cbd8bd4a87ed9e68b3c77231de010755d8694cbf4cabcd4cd2bc",
+    "spec/fixtures/invalid/dangling-relationship.json": "04df66d4ca480ee7fcdcb2667be09e1c6040bce6a4fc4076504f72a2c1001e15",
+    "spec/fixtures/invalid/denied-without-error.json": "1a20eb9c0a1cedbca8d92ed13bc02e2d9a9ab516f880ca0ac86e4858fb14cb5c",
+    "spec/fixtures/invalid/duplicate-entity.json": "3d386f3b282243f352bb25f3e4b98c17059d4cbbc2e12656ca2f34c4ea3e253f",
+    "spec/fixtures/invalid/duplicate-widget.json": "5e9341f8713562c1d0f3527ce3b83fb193f6f360b84a37a79cc245723185a7ce",
+    "spec/fixtures/invalid/extension-auto-enabled.json": "ad98e37a55695840bc788a2035e802eca9fdc81ff3ba428b0097cec3e747d699",
+    "spec/fixtures/invalid/gap-without-reason.json": "0b0413ab89d4ded20ad951f48bc2b63e7420c145fb8248a7ce845f85aa66e81d",
+    "spec/fixtures/invalid/handshake-over-limit.json": "ffa81833cffccb492600379561c6702b5ffd40af3ce9505e6d0376efd94d47fd",
+    "spec/fixtures/invalid/invalid-colour.json": "c7624981a633eaf240d5e6054b3e5b7a778a0df1fdb38927eea1a37fbda91b9f",
+    "spec/fixtures/invalid/ipv4-invalid-prefix.json": "22df8bc7c16d56f7f9a39dd23e13c7fbbb2795949e7a88e196a8e3c42e82b9cd",
+    "spec/fixtures/invalid/layout-inverted-bounds.json": "212340bbe6c49217aaa2fc5459e0c15e2e1009fcdf7d30effc87b29788aff2cf",
+    "spec/fixtures/invalid/metric-invalid-freshness.json": "ac220e29491db714eaeeb1ec58731c66de3d0ce95093c87d0cd916a337263fd2",
+    "spec/fixtures/invalid/negative-widget-width.json": "4502ab96d2f51de223274e5fa7c0b358fed45e3bb4a20f33d5a1dbe8301deccc",
+    "spec/fixtures/invalid/policy-setting-wrong-type.json": "4e37f9f1761778b1043d4db4dd6edd52e99cb5726295b8a1e2c96b15678010e2",
+    "spec/fixtures/invalid/policy-user-authority.json": "123e83bacde8967dbaca2703e3bf4da40f83d4835200e28f6b7d3962001e0c8a",
+    "spec/fixtures/invalid/preset-self-parent.json": "9d1b2ccb93b96f688015504a6f44c71e70c6f49696d39df8aa16e69946e5b9dd",
+    "spec/fixtures/invalid/preset-setting-wrong-type.json": "6b07d60762b3d71b639ac10de3082564730d9c505cd06a8044a9a40c304aa140",
+    "spec/fixtures/invalid/result-durable-without-store.json": "353aa43fa6a2a636b0d67209f29ab4583f4304f62a6f1843a83fbf0355f484e2",
+    "spec/fixtures/invalid/scene-cycle.json": "2086f9710b517a8420f7e8dc274e0b90620e80743f46a005adc30e2930dfa704",
+    "spec/fixtures/invalid/scene-dangling-child.json": "e98cddb236f7b543b8deb265711cd32a3fa1d58e06815c6154625f3a87bedf65",
+    "spec/fixtures/invalid/scene-leaf-children.json": "43e119cb10616483909842ab55549a98b3fae0588315b31741929542aa13195f",
+    "spec/fixtures/invalid/scene-multiple-parents.json": "2fd9f63d1e7420a6464240cdf826c3688a013757075417cdc48f3f8b27f5e600",
+    "spec/fixtures/invalid/target-self-qualified.json": "92d84ae1340e3d0e7ec233f502572ff9cab5c75ff1f0ddac9cbececb6ba6452a",
+    "spec/fixtures/invalid/timestamp-without-offset.json": "b9a7ee7465e58a16dfcefa69a3ecb3e5c7d402a232bf861aa4d7e222bb0f4872",
+    "spec/fixtures/invalid/unknown-observation-source.json": "8215a7ba197d852084b97137a3581176e564f6dec5275cb8ddcbd5a595a6e535",
+    "spec/fixtures/invalid/unknown-operation.json": "20a7a446c901814962bc3cb1a0a43d3b241ecda58be94ae6332287f8fe3e441d",
+    "spec/fixtures/invalid/zero-interval.json": "53643eafdcd4e66a97f132e727d5221a4ca4ff95a8ed57a5f5724f2892232fcf",
+    "spec/fixtures/replay/network.ndjson": "d59b69cc7724cc717ca9872459aaeacb89aeb4e8070e67bc7bc6e0dd6d09c0ba",
+    "spec/fixtures/valid/binding-selector.json": "29cd5aeafda28f6215b8c1516b0f50b6e3f3e3200a1f65360c8e8c4cdb1a2f69",
+    "spec/fixtures/valid/capability-target.json": "c2cfe6e31b1dfb58ef42fb5d7e867f993c05a3c4741390763f9165378b5966e8",
+    "spec/fixtures/valid/capability-unqualified.json": "935b029a79e846766c7544059904e24bb0895a0b1705aefc5c42510f777761d6",
+    "spec/fixtures/valid/command-preview.json": "33b2cbb4f58846b7e351a2e0181c89167c1ff9591b38c1cd4307928c5a4b89e6",
+    "spec/fixtures/valid/command-result.json": "7e39b553965832cfc244b60453e76f875796b4574c20fa3ecbef248fa5456ad2",
+    "spec/fixtures/valid/command-scene-replace.json": "23f217607126d054c07f67e20fde2d8f14794831ec1b8012af2736748ad2c346",
+    "spec/fixtures/valid/command-typed-setting.json": "3fd26c24941d59e3ea187e9d01a6ff7b3601ac13151f837ac5d5cc344cccf8fc",
+    "spec/fixtures/valid/content-package.json": "e591c9e6c168f41c02d853f47d951d725cadae28f27ea03d3954a9b414e9d62e",
+    "spec/fixtures/valid/evidence-not-run.json": "b1973bb9ba1a4827599f6eaf94ebc3be920e4d1220190035369c6006dab09cbe",
+    "spec/fixtures/valid/extension-manifest.json": "5afd8aec3be86ea12bfee336f7e26d9ddbbaef35b4a0dcf383a71cac6b0ec3f7",
+    "spec/fixtures/valid/gap-event.json": "9cb556ff82e9907d0b2a77d714aeb5e221d206f23a2560ca2adbc7735b4dee94",
+    "spec/fixtures/valid/handoff.json": "fa3e9666f7c6e52a55d2fa7280df684203e6b7e241d025ce306473f772598e73",
+    "spec/fixtures/valid/handshake.json": "329f6ed7bb28d6ffafc28cf3b4d87bb7cdde855ecac61d051581de9027827356",
+    "spec/fixtures/valid/layout-flow.json": "669adb59cd0bfd7a8595e47fba79cf7664718e75d2475d5bd0fbb093e6e9eb4f",
+    "spec/fixtures/valid/metric-descriptor.json": "3059c7bfdc821e3b2b3cf6f09c09663284ea77dc7bdc662b27d34d60b6dafb7e",
+    "spec/fixtures/valid/network-multi-address.json": "9c1db20855948bb82361ebbebfb49cf19bc0fb7ec491ef6ad9a7f094f149929a",
+    "spec/fixtures/valid/observation-connected.json": "489f42b54135367496571ffb1cbbcc6a700575753833064b1e0cdcb6c490badb",
+    "spec/fixtures/valid/observation-large-counter.json": "0293717d3e640e03ee8069b77925cebc1910003fe0e6d6bb4caca3a80d6e55c4",
+    "spec/fixtures/valid/observation-retained-denied.json": "1a1d8a8197f13d710a54c9d246da4f56c4ab8b36e33710d16a8a182e4386acb5",
+    "spec/fixtures/valid/observation-unsupported.json": "be11f71d2e94c5dc611adc872d2e7796f7b736c892d14bd7587687b986d52c25",
+    "spec/fixtures/valid/policy.json": "c755babd884f8ed11e8aa518c18f110b09962c211a81752dac8ba1e8d48cbd3f",
+    "spec/fixtures/valid/preset.json": "bdc092a9177800b189b77c9dea96f3412a467a9f63c89454a19eb4be3dcee159",
+    "spec/fixtures/valid/scene-migrated-0.1.json": "bba9664b97e97cf728ea7eadaea001e0d5dbf4bb48fbbf905cfc364368878e58",
+    "spec/fixtures/valid/scene-portable.json": "4c06f420950a27246db8c8ebe9bd3dba1865229a0737190194335a724ff34eb9",
+    "spec/fixtures/valid/scene.json": "91a3f911019e08369238ab00b766c88313fbdb2f20dc3476a5eb9baff0b0d4ac",
+    "spec/fixtures/valid/settings.json": "cda7f33db59deee5adacf15ce1ad3129c3cc64e4c64c278a2ef2379d5eb5bb54",
+    "spec/fixtures/valid/snapshot.json": "f60782cc583b94840a0dd89f8670e5298fa5c208a74774f280bcaaf078cca585",
+    "spec/fixtures/valid/target-profile.json": "34c589c67b1926e5892a17102a8108305da78e61786fc250e3ad1f22f660da5f",
+    "spec/fixtures/valid/theme.json": "e749703c39e7e5f6a7109a39463565cf6c894cb64799ba27bd4e293cf7b200fb",
+    "spec/foundation/authority.md": "18184c4974aab4095587b8269ca639f02fd5741060139b284e83906eb94f9e5f",
+    "spec/foundation/okf-profile.md": "9a7abc95b82caa9f73303dece16abd4dabd45a3b23aa4fb866daf6846f4f9381",
+    "spec/foundation/repository.md": "d6f0d3f5267986a24d2f856d8c3b81134301d7ebeb10557da4c4f29da36bdf95",
+    "spec/foundation/terminology.md": "1166ab27efcb2484739a835a38cac0441c18c843d903fcd05b4f54647c35b343",
+    "spec/governance/agents.md": "ad184fc4eab0da86ed6674fe54494cd7fa52d01a56976ebf859856893e17921e",
+    "spec/governance/aide-binding.proposed.json": "cd78bed5dad508636128e996423fe80dfe6fd3b0446bca9fb361ff4f473a125f",
+    "spec/governance/aide.md": "41f5d37ab3391da79d51a64c2062956bab3bd111b4a2ba8c26fbb9f6b31ede24",
+    "spec/governance/change-control.md": "3f002507b4562242d49a748168c5ec7b193f5f48bace81c73b0f43bf0491994f",
+    "spec/governance/context.md": "ede6b9096f1ecb9a66d2f00d4681c54caa40d416d54c2c06495805187a9913dd",
+    "spec/governance/docs-map.json": "f772a9ad71321c58ad3219bd602086b88638e306b42ec1791b0c2046f0d2c99a",
+    "spec/governance/documentation.md": "470d13b54b1ec12c8d119c330d5afd262a2cea934c0d09eff29f75216023a103",
+    "spec/log.md": "57bced327a0ab7ad3d88ac84307d4feaaf1d0d6721e28ee92657d48f36523a6f",
+    "spec/manifest.json": "9f95e40a7f0a3537561ab8bc1f666e8142f31d37797ba507cf0bb84f3f423276",
+    "spec/product/charter.md": "3d1d7e4b27eca9153bfdad430c7763959ddbf05d35bc30f512f7751d88c9a705",
+    "spec/product/intake.json": "acc4a964629157c97a39e84c7b2b164cac41f30880479debdce241c304773b5a",
+    "spec/product/platforms.md": "a7f7960fa16465848ae32b4f301872a66b20f85e1c1a4f9338a8498adab05344",
+    "spec/README.md": "4b92bba3949f788f080d3258ea8948dc8bedab8a93e5a5f3fd0075aa2ca19144",
+    "spec/references/audit-inputs.json": "6315860b814b3e0271ce5218d0d5a00c460fc67cb7d34a07f2843799ad7f600e",
+    "spec/references/design-brief.md": "5249dc1d61fb6a74332b71a5bf87f9d8b28d642b04181fbb7f5b38f05105b2f0",
+    "spec/references/disposition.md": "6c6ba601cb2c3fca501ba521c130476c8d5475b2d0600398f53219c94ff1c266",
+    "spec/references/sources.json": "64123262c1ad5199661c62e5eea40a5099ed273b2d604cff71cdf49677e8a045",
+    "spec/requirements/catalog.json": "f5c3d3fdb21096e32565e7d9ffe35e2c173376d60efca4e6ab21f497a510c688",
+    "spec/setup/contract.md": "cf272685d72085ca3e21bf3bf190d474fbcefbb7c02314e8a5989984e1f7da2f",
+    "spec/setup/lifecycle.md": "f425b8f6f5b0770a46a2850ca7e8f697e47c8cd2197f0238759ca59cd8c5c44f",
+    "spec/setup/ownership.md": "cac879b9ee7246d4dc02c7a55f559e4e1000520e53a144575c1252f64eee6ca7",
+    "spec/telemetry/devices.md": "6e206443e77d04d3574915e84623e1ffd6f000b27aacb5a230c9864014f8f913",
+    "spec/telemetry/history.md": "b1d2d2136507f77b80309f8c3eddc9b6a54e30ab34ea83d28dabf9aa948988e4",
+    "spec/telemetry/metric-registry.md": "521766a51118333e556ab5c8801f60c09f584499e49036ea457b358977a0b707",
+    "spec/telemetry/metrics.json": "da83f2b260c5561f077366c8c89f90dcf1dab5e04cac0d2bbc112ee0b15ce149",
+    "spec/telemetry/network.md": "58d50a7c0084edc97317299fe18f59849a0878b802efebeddace34c8f1ff8569",
+    "spec/telemetry/resources.md": "619a3222470cfbb441a7500e67b1231a506be6593ee220e7d5ed72d54bc92898",
+    "spec/telemetry/storage.md": "fe04a967975ebe916a9f8957b8d49fe2b22e8d9a825e6869781b912cb5c681bc",
+    "spec/telemetry/workshop.md": "6db460285587c3cb654428df6c930a425c9597d2347e699aa8c2898de79c1468",
+    "spec/tools/requirements.txt": "e9c4dccbd1071c2a9048819de9fbde7f4a90555ea0b77641ab441e3837b86fad",
+    "spec/tools/routes.json": "d854f724d3a37b486474c29c8e26ecc8f026326eae0e99b2258cd5ac7d1bc745",
+    "spec/tools/specctl.py": "125d993516d2f8869314b0bda37b31b0d94246aadd3ecbaa753a1fcf4e8413a6",
+    "spec/tools/tests/test_specctl.py": "3b149c1ae164783fe5760bfc446a32cf81ec21305096b7a1e0e3b3291a1a98da",
+    "spec/tools/usage.md": "f9a204cad8592403d9c057e0741b80f75bae441256a27bd0a13ea804087757d0"
+  },
+  "validation": {
+    "status": "pass",
+    "scope": "specification_and_tooling_only",
+    "counts": {
+      "files": 222,
+      "concepts": 80,
+      "requirements": 131,
+      "planned_tests": 61,
+      "work_units": 49
+    },
+    "errors": [],
+    "warnings": [
+      "Specification checks do not qualify native SysPane behaviour or activate AIDE."
+    ],
+    "full_schemas": "executed",
+    "schema_results": {
+      "status": "pass",
+      "schema_count": 25,
+      "fixture_count": 64,
+      "results": [
+        {
+          "path": "fixtures/valid/observation-connected.json",
+          "expected": "valid",
+          "actual": "valid",
+          "pass": true,
+          "diagnostics": []
+        },
+        {
+          "path": "fixtures/valid/observation-retained-denied.json",
+          "expected": "valid",
+          "actual": "valid",
+          "pass": true,
+          "diagnostics": []
+        },
+        {
+          "path": "fixtures/valid/observation-unsupported.json",
+          "expected": "valid",
+          "actual": "valid",
+          "pass": true,
+          "diagnostics": []
+        },
+        {
+          "path": "fixtures/valid/observation-large-counter.json",
+          "expected": "valid",
+          "actual": "valid",
+          "pass": true,
+          "diagnostics": []
+        },
+        {
+          "path": "fixtures/invalid/counter-as-json-number.json",
+          "expected": "invalid",
+          "actual": "invalid",
+          "pass": true,
+          "diagnostics": [
+            "{'kind': 'uint64', 'data': 18446744073709551615} is not valid under any of the given schemas"
+          ]
+        },
+        {
+          "path": "fixtures/invalid/counter-overflow.json",
+          "expected": "invalid",
+          "actual": "invalid",
+          "pass": true,
+          "diagnostics": [
+            "uint64 overflow"
+          ]
+        },
+        {
+          "path": "fixtures/invalid/denied-without-error.json",
+          "expected": "invalid",
+          "actual": "invalid",
+          "pass": true,
+          "diagnostics": [
+            "None is not of type 'object'"
+          ]
+        },
+        {
+          "path": "fixtures/invalid/timestamp-without-offset.json",
+          "expected": "invalid",
+          "actual": "invalid",
+          "pass": true,
+          "diagnostics": [
+            "'2026-09-17T12:00:00' is not valid under any of the given schemas"
+          ]
+        },
+        {
+          "path": "fixtures/valid/snapshot.json",
+          "expected": "valid",
+          "actual": "valid",
+          "pass": true,
+          "diagnostics": []
+        },
+        {
+          "path": "fixtures/invalid/duplicate-entity.json",
+          "expected": "invalid",
+          "actual": "invalid",
+          "pass": true,
+          "diagnostics": [
+            "duplicate entity id"
+          ]
+        },
+        {
+          "path": "fixtures/invalid/dangling-relationship.json",
+          "expected": "invalid",
+          "actual": "invalid",
+          "pass": true,
+          "diagnostics": [
+            "dangling relationship"
+          ]
+        },
+        {
+          "path": "fixtures/invalid/unknown-observation-source.json",
+          "expected": "invalid",
+          "actual": "invalid",
+          "pass": true,
+          "diagnostics": [
+            "unknown observation source"
+          ]
+        },
+        {
+          "path": "fixtures/valid/settings.json",
+          "expected": "valid",
+          "actual": "valid",
+          "pass": true,
+          "diagnostics": []
+        },
+        {
+          "path": "fixtures/invalid/zero-interval.json",
+          "expected": "invalid",
+          "actual": "invalid",
+          "pass": true,
+          "diagnostics": [
+            "0 is less than the minimum of 100"
+          ]
+        },
+        {
+          "path": "fixtures/valid/scene.json",
+          "expected": "valid",
+          "actual": "valid",
+          "pass": true,
+          "diagnostics": []
+        },
+        {
+          "path": "fixtures/invalid/duplicate-widget.json",
+          "expected": "invalid",
+          "actual": "invalid",
+          "pass": true,
+          "diagnostics": [
+            "duplicate widget id"
+          ]
+        },
+        {
+          "path": "fixtures/invalid/negative-widget-width.json",
+          "expected": "invalid",
+          "actual": "invalid",
+          "pass": true,
+          "diagnostics": [
+            "-1 is less than the minimum of 32"
+          ]
+        },
+        {
+          "path": "fixtures/valid/theme.json",
+          "expected": "valid",
+          "actual": "valid",
+          "pass": true,
+          "diagnostics": []
+        },
+        {
+          "path": "fixtures/invalid/invalid-colour.json",
+          "expected": "invalid",
+          "actual": "invalid",
+          "pass": true,
+          "diagnostics": [
+            "'red' does not match '^#[0-9a-fA-F]{8}$'"
+          ]
+        },
+        {
+          "path": "fixtures/valid/command-preview.json",
+          "expected": "valid",
+          "actual": "valid",
+          "pass": true,
+          "diagnostics": []
+        },
+        {
+          "path": "fixtures/invalid/unknown-operation.json",
+          "expected": "invalid",
+          "actual": "invalid",
+          "pass": true,
+          "diagnostics": [
+            "{'op': 'shell.execute', 'target': 'widget:network', 'x': 48, 'y': 32} is not valid under any of the given schemas"
+          ]
+        },
+        {
+          "path": "fixtures/invalid/caller-forged-approval.json",
+          "expected": "invalid",
+          "actual": "invalid",
+          "pass": true,
+          "diagnostics": [
+            "Additional properties are not allowed ('approved' was unexpected)"
+          ]
+        },
+        {
+          "path": "fixtures/valid/capability-unqualified.json",
+          "expected": "valid",
+          "actual": "valid",
+          "pass": true,
+          "diagnostics": []
+        },
+        {
+          "path": "fixtures/valid/gap-event.json",
+          "expected": "valid",
+          "actual": "valid",
+          "pass": true,
+          "diagnostics": []
+        },
+        {
+          "path": "fixtures/invalid/gap-without-reason.json",
+          "expected": "invalid",
+          "actual": "invalid",
+          "pass": true,
+          "diagnostics": [
+            "'reason' is a required property",
+            "'lost_count' is a required property"
+          ]
+        },
+        {
+          "path": "fixtures/valid/evidence-not-run.json",
+          "expected": "valid",
+          "actual": "valid",
+          "pass": true,
+          "diagnostics": []
+        },
+        {
+          "path": "fixtures/valid/handoff.json",
+          "expected": "valid",
+          "actual": "valid",
+          "pass": true,
+          "diagnostics": []
+        },
+        {
+          "path": "fixtures/valid/network-multi-address.json",
+          "expected": "valid",
+          "actual": "valid",
+          "pass": true,
+          "diagnostics": []
+        },
+        {
+          "path": "fixtures/invalid/ipv4-invalid-prefix.json",
+          "expected": "invalid",
+          "actual": "invalid",
+          "pass": true,
+          "diagnostics": [
+            "{'family': 'ipv4', 'address': '192.0.2.10', 'prefix_length': 64, 'readiness': 'preferred', 'zone': None} is not valid under any of the given schemas"
+          ]
+        },
+        {
+          "path": "fixtures/valid/command-typed-setting.json",
+          "expected": "valid",
+          "actual": "valid",
+          "pass": true,
+          "diagnostics": []
+        },
+        {
+          "path": "fixtures/invalid/command-setting-wrong-type.json",
+          "expected": "invalid",
+          "actual": "invalid",
+          "pass": true,
+          "diagnostics": [
+            "{'op': 'settings.set', 'path': 'sampling.resources_ms', 'value': 'banana'} is not valid under any of the given schemas"
+          ]
+        },
+        {
+          "path": "fixtures/valid/binding-selector.json",
+          "expected": "valid",
+          "actual": "valid",
+          "pass": true,
+          "diagnostics": []
+        },
+        {
+          "path": "fixtures/invalid/binding-unbounded.json",
+          "expected": "invalid",
+          "actual": "invalid",
+          "pass": true,
+          "diagnostics": [
+            "{'kind': 'selector', 'scope': {'kind': 'local_host'}, 'entity_type': 'network_interface', 'mode': 'collection', 'predicates': [{'field': 'physical', 'op': 'eq', 'value': True}], 'sort': [{'field': 'name', 'direction': 'ascending'}], 'limit': 0, 'field': 'operational_state'} is not valid under any of the given schemas"
+          ]
+        },
+        {
+          "path": "fixtures/valid/layout-flow.json",
+          "expected": "valid",
+          "actual": "valid",
+          "pass": true,
+          "diagnostics": []
+        },
+        {
+          "path": "fixtures/invalid/layout-inverted-bounds.json",
+          "expected": "invalid",
+          "actual": "invalid",
+          "pass": true,
+          "diagnostics": [
+            "layout bounds must satisfy min <= preferred <= max"
+          ]
+        },
+        {
+          "path": "fixtures/valid/scene-portable.json",
+          "expected": "valid",
+          "actual": "valid",
+          "pass": true,
+          "diagnostics": []
+        },
+        {
+          "path": "fixtures/invalid/scene-cycle.json",
+          "expected": "invalid",
+          "actual": "invalid",
+          "pass": true,
+          "diagnostics": [
+            "every widget requires exactly one root or parent owner",
+            "dependency cycle: group:network"
+          ]
+        },
+        {
+          "path": "fixtures/invalid/scene-dangling-child.json",
+          "expected": "invalid",
+          "actual": "invalid",
+          "pass": true,
+          "diagnostics": [
+            "every widget requires exactly one root or parent owner",
+            "unknown dependency for group:network: ['widget:missing']"
+          ]
+        },
+        {
+          "path": "fixtures/invalid/scene-multiple-parents.json",
+          "expected": "invalid",
+          "actual": "invalid",
+          "pass": true,
+          "diagnostics": [
+            "every widget requires exactly one root or parent owner"
+          ]
+        },
+        {
+          "path": "fixtures/invalid/scene-leaf-children.json",
+          "expected": "invalid",
+          "actual": "invalid",
+          "pass": true,
+          "diagnostics": [
+            "{'id': 'widget:adapters', 'kind': 'table', 'title': 'Physical adapters', 'display': {'role': 'primary'}, 'layout': {'base': {'kind': 'flow', 'width': {'min': 100, 'preferred': 240, 'max': 640}, 'height': {'min': 32, 'preferred': 80, 'max': 256}, 'anchor': 'end'}}, 'bindings': [{'kind': 'selector', 'scope': {'kind': 'local_host'}, 'entity_type': 'network_interface', 'mode': 'collection', 'predicates': [{'field': 'physical', 'op': 'eq', 'value': True}], 'sort': [{'field': 'name', 'direction': 'ascending'}], 'limit': 64, 'field': 'operational_state'}], 'priority': 'normal', 'children': []} should not be valid under {'required': ['children']}"
+          ]
+        },
+        {
+          "path": "fixtures/valid/command-scene-replace.json",
+          "expected": "valid",
+          "actual": "valid",
+          "pass": true,
+          "diagnostics": []
+        },
+        {
+          "path": "fixtures/invalid/command-invalid-scene.json",
+          "expected": "invalid",
+          "actual": "invalid",
+          "pass": true,
+          "diagnostics": [
+            "every widget requires exactly one root or parent owner",
+            "unknown dependency for group:network: ['missing']"
+          ]
+        },
+        {
+          "path": "fixtures/valid/target-profile.json",
+          "expected": "valid",
+          "actual": "valid",
+          "pass": true,
+          "diagnostics": []
+        },
+        {
+          "path": "fixtures/invalid/target-self-qualified.json",
+          "expected": "invalid",
+          "actual": "invalid",
+          "pass": true,
+          "diagnostics": [
+            "Additional properties are not allowed ('qualified' was unexpected)"
+          ]
+        },
+        {
+          "path": "fixtures/valid/capability-target.json",
+          "expected": "valid",
+          "actual": "valid",
+          "pass": true,
+          "diagnostics": []
+        },
+        {
+          "path": "fixtures/invalid/capability-no-evidence.json",
+          "expected": "invalid",
+          "actual": "invalid",
+          "pass": true,
+          "diagnostics": [
+            "[] should be non-empty"
+          ]
+        },
+        {
+          "path": "fixtures/valid/preset.json",
+          "expected": "valid",
+          "actual": "valid",
+          "pass": true,
+          "diagnostics": []
+        },
+        {
+          "path": "fixtures/invalid/preset-setting-wrong-type.json",
+          "expected": "invalid",
+          "actual": "invalid",
+          "pass": true,
+          "diagnostics": [
+            "setting value has wrong type"
+          ]
+        },
+        {
+          "path": "fixtures/invalid/preset-self-parent.json",
+          "expected": "invalid",
+          "actual": "invalid",
+          "pass": true,
+          "diagnostics": [
+            "preset cannot inherit itself"
+          ]
+        },
+        {
+          "path": "fixtures/valid/content-package.json",
+          "expected": "valid",
+          "actual": "valid",
+          "pass": true,
+          "diagnostics": []
+        },
+        {
+          "path": "fixtures/invalid/content-path-escape.json",
+          "expected": "invalid",
+          "actual": "invalid",
+          "pass": true,
+          "diagnostics": [
+            "'../outside.json' does not match '^(?!/)(?!.*(?:^|/)\\\\.\\\\.(?:/|$))(?!.*[\\\\\\\\:])[A-Za-z0-9_. /-]+$'"
+          ]
+        },
+        {
+          "path": "fixtures/invalid/content-case-collision.json",
+          "expected": "invalid",
+          "actual": "invalid",
+          "pass": true,
+          "diagnostics": [
+            "case-insensitive asset collision"
+          ]
+        },
+        {
+          "path": "fixtures/valid/extension-manifest.json",
+          "expected": "valid",
+          "actual": "valid",
+          "pass": true,
+          "diagnostics": []
+        },
+        {
+          "path": "fixtures/invalid/extension-auto-enabled.json",
+          "expected": "invalid",
+          "actual": "invalid",
+          "pass": true,
+          "diagnostics": [
+            "False was expected"
+          ]
+        },
+        {
+          "path": "fixtures/valid/policy.json",
+          "expected": "valid",
+          "actual": "valid",
+          "pass": true,
+          "diagnostics": []
+        },
+        {
+          "path": "fixtures/invalid/policy-user-authority.json",
+          "expected": "invalid",
+          "actual": "invalid",
+          "pass": true,
+          "diagnostics": [
+            "'user' is not one of ['machine', 'organization']"
+          ]
+        },
+        {
+          "path": "fixtures/invalid/policy-setting-wrong-type.json",
+          "expected": "invalid",
+          "actual": "invalid",
+          "pass": true,
+          "diagnostics": [
+            "setting value has wrong type"
+          ]
+        },
+        {
+          "path": "fixtures/valid/handshake.json",
+          "expected": "valid",
+          "actual": "valid",
+          "pass": true,
+          "diagnostics": []
+        },
+        {
+          "path": "fixtures/invalid/handshake-over-limit.json",
+          "expected": "invalid",
+          "actual": "invalid",
+          "pass": true,
+          "diagnostics": [
+            "1048577 is greater than the maximum of 1048576"
+          ]
+        },
+        {
+          "path": "fixtures/valid/command-result.json",
+          "expected": "valid",
+          "actual": "valid",
+          "pass": true,
+          "diagnostics": []
+        },
+        {
+          "path": "fixtures/invalid/result-durable-without-store.json",
+          "expected": "invalid",
+          "actual": "invalid",
+          "pass": true,
+          "diagnostics": [
+            "durable result requires stored generation"
+          ]
+        },
+        {
+          "path": "fixtures/valid/metric-descriptor.json",
+          "expected": "valid",
+          "actual": "valid",
+          "pass": true,
+          "diagnostics": []
+        },
+        {
+          "path": "fixtures/invalid/metric-invalid-freshness.json",
+          "expected": "invalid",
+          "actual": "invalid",
+          "pass": true,
+          "diagnostics": [
+            "1 is less than the minimum of 100"
+          ]
+        },
+        {
+          "path": "fixtures/valid/scene-migrated-0.1.json",
+          "expected": "valid",
+          "actual": "valid",
+          "pass": true,
+          "diagnostics": []
+        }
+      ]
+    },
+    "native_tests_executed": 0
+  },
+  "generated": {
+    "status": "pass",
+    "mode": "check",
+    "generated_files": 29,
+    "differences": []
+  },
+  "docs_links": "pass",
+  "tooling_tests": {
+    "total": 55,
+    "passed": 53,
+    "skipped": 2,
+    "failures": 0,
+    "log": "spec-tests.txt"
+  },
+  "actual_target_profiles_schema_validated": [
+    "windows-x64-gcc15",
+    "linux-x64-gcc13"
+  ]
+}

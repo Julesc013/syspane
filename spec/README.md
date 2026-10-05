@@ -12,14 +12,14 @@ sp_requires: []
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-04T19:32:52+11:00", "scope": "October audit amendments; no human review attested"}
+updated: {"by": "codex", "at": "2026-10-05T23:39:47+11:00", "scope": "Admitted model foundation; executed development checks, no desktop qualification or human review attested"}
 ---
 
 # SysPane specification bundle
 
 **SysPane — System Panel** is a native operational-desktop product family. Its flagship Windows surface remains visible behind desktop icons when the ordinary desktop is revealed, without changing the configured wallpaper. Native Linux and macOS/OS X editions, and early Windows XP/7 investigations, are part of the first implementation campaign.
 
-This is a **greenfield design baseline**, not a working SysPane application. It includes runnable specification tooling and synthetic contract fixtures. No native desktop, operating-system compatibility, performance, security certification or upstream AIDE integration has been qualified by this package.
+This is an **experimental design and implementation baseline**. The repository now builds a typed model and development smoke program on identified Windows/Linux toolchains. It includes runnable specification tooling and synthetic contract fixtures. No usable desktop edition, historical operating-system compatibility, performance, security certification or upstream AIDE integration has been qualified.
 
 ## Adoption
 

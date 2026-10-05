@@ -1,0 +1,33 @@
+{
+  "version": 6,
+  "cmakeMinimumRequired": {"major": 3, "minor": 28, "patch": 0},
+  "configurePresets": [
+    {
+      "name": "foundation-base", "hidden": true, "generator": "Ninja",
+      "binaryDir": "${sourceDir}/out/build/${presetName}",
+      "cacheVariables": {"CMAKE_BUILD_TYPE": "Debug", "CMAKE_CXX_COMPILER": "g++", "BUILD_TESTING": "ON"}
+    },
+    {
+      "name": "windows-x64-gcc15", "inherits": "foundation-base",
+      "condition": {"type": "equals", "lhs": "${hostSystemName}", "rhs": "Windows"},
+      "cacheVariables": {"SYSPANE_PROFILE": "windows-x64-gcc15"}
+    },
+    {
+      "name": "linux-x64-gcc13", "inherits": "foundation-base",
+      "binaryDir": "$env{SYSPANE_LINUX_BUILD_ROOT}/linux-x64-gcc13",
+      "condition": {"type": "allOf", "conditions": [
+        {"type": "equals", "lhs": "${hostSystemName}", "rhs": "Linux"},
+        {"type": "notEquals", "lhs": "$env{SYSPANE_LINUX_BUILD_ROOT}", "rhs": ""}
+      ]},
+      "cacheVariables": {"SYSPANE_PROFILE": "linux-x64-gcc13"}
+    }
+  ],
+  "buildPresets": [
+    {"name": "windows-x64-gcc15", "configurePreset": "windows-x64-gcc15", "jobs": 4},
+    {"name": "linux-x64-gcc13", "configurePreset": "linux-x64-gcc13", "jobs": 4}
+  ],
+  "testPresets": [
+    {"name": "windows-x64-gcc15", "configurePreset": "windows-x64-gcc15", "output": {"outputOnFailure": true}, "execution": {"noTestsAction": "error", "stopOnFailure": false, "timeout": 20}},
+    {"name": "linux-x64-gcc13", "configurePreset": "linux-x64-gcc13", "output": {"outputOnFailure": true}, "execution": {"noTestsAction": "error", "stopOnFailure": false, "timeout": 20}}
+  ]
+}

@@ -136,9 +136,22 @@ class BundleTests(unittest.TestCase):
         self.assertIn('T-NETWORK',x['candidate_tests'])
         self.assertTrue(any(r.startswith('R-NETWORK-') for r in x['candidate_requirements']))
     def test_ready_is_not_authorized(self):
+        # Exercise readiness with a controlled fixture, independent of actual
+        # campaign progress. Completed work must not make this test stale.
+        fixture={'work_units':[
+            {'id':'prerequisite','status':'in_progress','depends_on':[],'execution_grant':'fixture-only'},
+            {'id':'dependent','status':'planned','depends_on':['prerequisite'],'execution_grant':None},
+            {'id':'independent','status':'planned','depends_on':[],'execution_grant':None}]}
+        self.write_json('delivery/work-units.json',fixture)
         ready=s.work_ready(self.root)
-        self.assertEqual([w['id'] for w in ready],['W-00'])
+        self.assertEqual([w['id'] for w in ready],['independent'])
         self.assertIsNone(ready[0]['execution_grant'])
+        fixture['work_units'][0]['status']='complete'
+        self.write_json('delivery/work-units.json',fixture)
+        ready=s.work_ready(self.root)
+        self.assertEqual([w['id'] for w in ready],['dependent','independent'])
+        self.assertTrue(all(w['execution_grant'] is None for w in ready))
+        self.assertEqual(s.read_json(self.root/'delivery/work-units.json'),fixture)
     def test_integrity_success_and_tamper(self):
         (self.root/'checksums.json').write_bytes(s.json_bytes(s.integrity_payload(self.root)))
         self.assertEqual(s.verify_integrity(self.root)['status'],'pass')

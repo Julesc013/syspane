@@ -9,7 +9,7 @@
       "title": "SysPane specification bundle",
       "description": "Start here to adopt, validate and use this repository-native specification.",
       "requires": [],
-      "sha256": "2ef68e442770c58c36257432248695e6953184daeb1b7f53fd46c94d6611622f"
+      "sha256": "4b92bba3949f788f080d3258ea8948dc8bedab8a93e5a5f3fd0075aa2ca19144"
     },
     {
       "id": "SP-COMPOSITION",
@@ -107,7 +107,7 @@
         "SP-PERSISTENCE",
         "SP-TESTING"
       ],
-      "sha256": "8fc06e7296e8ca22faadaa1a58d5280eace7f49fb463ce3d97dc45f317f30717"
+      "sha256": "6780c85ee4e018ff11cb0bc543b1405958976f23c753919c7fcc53e6a2ce8cc5"
     },
     {
       "id": "SP-ORACLE",
@@ -339,6 +339,17 @@
       "sha256": "4502c5fd48ad4b17d10aa05a17a3a4a5244dab10292f242a2c5ccf8711eca402"
     },
     {
+      "id": "SP-CAMPAIGN-ADMISSION",
+      "path": "delivery/campaign-admission.md",
+      "title": "Foundation and native-experiment campaign admission",
+      "description": "Record the user-admitted implementation scope and the first package's closed boundaries.",
+      "requires": [
+        "SP-WORK-PACKAGES",
+        "SP-W01-PACKAGE"
+      ],
+      "sha256": "9470802300241b7a1fed9f62ae7784655dfc2f9935cdff2c73de7cfe00e1ac88"
+    },
+    {
       "id": "SP-CURRENT",
       "path": "delivery/current-state.md",
       "title": "Current state and next admitted boundary",
@@ -346,7 +357,18 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "3a890d2e94ce5e2ff3e00d494ad0defd15a0f32b19d6232eaebafda789cae761"
+      "sha256": "5bf13e35de9aa61dfdebf3494cd2979a9179d771ea620c9b37c17873df01a1ad"
+    },
+    {
+      "id": "SP-FOUNDATION-HANDOFF",
+      "path": "delivery/foundation-handoff.md",
+      "title": "Foundation implementation handoff",
+      "description": "Resume the admitted campaign from tested model builds and local smoke packages.",
+      "requires": [
+        "SP-CAMPAIGN-ADMISSION",
+        "SP-W26-PACKAGE"
+      ],
+      "sha256": "a2652a69852d9eaeb38751adcd62547443df6b0ed0d5cc54e4f5b07d5b968c2b"
     },
     {
       "id": "SP-READINESS",
@@ -356,7 +378,7 @@
       "requires": [
         "SP-CURRENT"
       ],
-      "sha256": "63709733ee93202a8e34074deeb0d5942044508f191c34aa8383376dc2579908"
+      "sha256": "90bacf658aba09c64895b920437f7d7a96f28380cacd9111910962d178fa2bd6"
     },
     {
       "id": "SP-RISKS",
@@ -381,7 +403,19 @@
         "SP-TARGETS",
         "SP-ACCEPTANCE-TRACES"
       ],
-      "sha256": "13fa3eaf1f860beb73b82be46bc6c27256f6a44e971d49adab235d22f7d2a312"
+      "sha256": "2517a738ae26015f68e9027599f39b13cb4473718772f83e3db46d4f077718e2"
+    },
+    {
+      "id": "SP-W26-PACKAGE",
+      "path": "delivery/packages/w-26-smoke.md",
+      "title": "W-26 early local smoke package",
+      "description": "Bind foundation payload bytes to a local archive and independently check relocated execution.",
+      "requires": [
+        "SP-WORK-PACKAGES",
+        "SP-ARTIFACTS",
+        "SP-TARGETS"
+      ],
+      "sha256": "53c14367f0447ad326d0b418ca6c74924845811bdf8b0dffe9c72188a89ce713"
     },
     {
       "id": "SP-ROADMAP",
@@ -404,7 +438,7 @@
         "SP-PLATFORMS",
         "SP-RELEASE"
       ],
-      "sha256": "d3efb73a46f4b581c7e71901a6b68cc42c5750152be80ac8dfaa532f3cacce5d"
+      "sha256": "355869d3b66be1c68b6d25572b80f9514a2ad311e289153b999432a7c8c2dc0c"
     },
     {
       "id": "SP-WORK-PACKAGES",
@@ -618,7 +652,7 @@
         "SP-AUTHORITY",
         "SP-AIDE"
       ],
-      "sha256": "bab7ceaf92cf2d2a3e4fe56edd9a7b8f5a9e0e3361460e4382009c11f680dbf2"
+      "sha256": "ad184fc4eab0da86ed6674fe54494cd7fa52d01a56976ebf859856893e17921e"
     },
     {
       "id": "SP-AIDE",

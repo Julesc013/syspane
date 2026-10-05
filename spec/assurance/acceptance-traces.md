@@ -12,16 +12,18 @@ sp_requires: ["SP-STATE", "SP-TRANSPORT", "SP-PERSISTENCE", "SP-TESTING"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-READINESS-2026-10-05", "resource": "User-supplied readiness review, 2026-10-05", "title": "Implementation closure review"}]
+updated: {"by": "codex", "at": "2026-10-05T23:39:47+11:00", "scope": "Admitted model foundation; executed development checks, no desktop qualification or human review attested"}
 ---
 
 # Concrete implementation acceptance traces
 
-These are versioned expected behaviours, **not executed product tests**. They refine
+These are versioned expected behaviours, **not execution result records**. They refine
 existing families in [tests.json](tests.json); they do not replace the families or
 create a second result register. Each implementing package binds its mandatory
 cases to real test code/commands and records outcomes separately. Case IDs below
 are child IDs within their stated parent families. Retain the input/oracle revision
-when changing a case.
+when changing a case. The [foundation handoff](../delivery/foundation-handoff.md)
+links executed model cases; request/recovery/cold-start cases remain unexecuted.
 
 ## Model foundation cases
 

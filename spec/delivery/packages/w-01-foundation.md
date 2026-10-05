@@ -12,14 +12,16 @@ sp_requires: ["SP-WORK-PACKAGES", "SP-COMPOSITION", "SP-PORTABILITY", "SP-STATE"
 sp_review: "unreviewed"
 sp_sources: ["SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-READINESS-2026-10-05", "resource": "User-supplied readiness review, 2026-10-05", "title": "Implementation closure review"}]
+updated: {"by": "codex", "at": "2026-10-05T23:39:47+11:00", "scope": "Admitted model foundation; executed development checks, no desktop qualification or human review attested"}
 ---
 
 # W-01 portable build and model foundation
 
 This is the detailed contract for W-01 in [the campaign index](../work-units.json).
-It is a proposed package, not an execution grant or an implemented build. W-00
-must record adoption of this bounded runtime scope before the implementation
-gate. Its documentation work alone does not establish that gate.
+The [campaign admission](../campaign-admission.md) records the user's implementation
+instruction and closes the internal publication/resource boundary. The
+[foundation handoff](../foundation-handoff.md) records implemented outputs and
+actual development checks. This package does not itself grant release authority.
 
 ## Outcome and boundaries
 
@@ -81,15 +83,15 @@ names and the preset names to the implementer, then document the actual names in
 the checked-in recipe. The required command interface from repository root is:
 
 ```text
-cmake --preset <recorded-configure-preset>
-cmake --build --preset <recorded-build-preset>
-ctest --preset <recorded-test-preset> --output-on-failure
-<recorded-smoke-program-path> <recorded-fixture-arguments>
+cmake --preset windows-x64-gcc15
+cmake --build --preset windows-x64-gcc15
+ctest --preset windows-x64-gcc15 --output-on-failure
+out/build/windows-x64-gcc15/SysPane.ModelSmoke.exe
 ```
 
-These are recipe requirements, not commands that exist in this revision. Replace
-every placeholder with a concrete value in the profile and developer build guide
-before claiming implementation. Tests must return nonzero on any failed required
+These Windows commands exist. The Linux preset is `linux-x64-gcc13`, with its native
+cache root set as documented in `build-support/targets/README.md`; the optional
+`build-support/run_foundation.sh` wrapper runs the same commands. Tests return nonzero on any failed required
 assertion; a runner with zero discovered cases is a failure. Expected smoke output
 includes the accepted epoch/generation and explicit unavailable/stale observations.
 Version the exact output fixture with the implementation before accepting it.

@@ -1,0 +1,60 @@
+{
+  "schema_version": "0.1.0",
+  "profile_id": "windows-x64-gcc15",
+  "revision": "1",
+  "example_only": false,
+  "os": {
+    "family": "windows",
+    "minimum_version": "10.0.19045",
+    "api_floor": "Win32-Windows-10-UCRT"
+  },
+  "cpu": {
+    "architecture": "x86_64",
+    "isa_floor": "x86-64 baseline, SSE2; no host tuning",
+    "word_bits": 64,
+    "endianness": "little"
+  },
+  "abi": {
+    "name": "MinGW-w64-UCRT-POSIX-SEH",
+    "runtime": "Windows UCRT; GCC/libstdc++/winpthread statically linked",
+    "runtime_version": "Windows 10.0.19045; GCC 15.2.0, MinGW-w64 13.0.0 r6"
+  },
+  "toolchain": {
+    "compiler": "GNU C++",
+    "version": "15.2.0",
+    "sdk": "WinLibs gcc-15.2.0-mingw-w64ucrt-13.0.0-r6",
+    "recipe": "build-support/targets/README.md",
+    "flags": [
+      "-std=c++17",
+      "-g",
+      "-Wall",
+      "-Wextra",
+      "-Wpedantic",
+      "-Werror",
+      "-march=x86-64",
+      "-mtune=generic",
+      "-DWINVER=0x0A00",
+      "-D_WIN32_WINNT=0x0A00",
+      "-static",
+      "-static-libgcc",
+      "-static-libstdc++"
+    ]
+  },
+  "dependencies": [],
+  "ui": "none",
+  "shell_host": "none",
+  "renderer": "none",
+  "roles": [
+    "console"
+  ],
+  "isolation": {
+    "tier": "none",
+    "controls": []
+  },
+  "limitations": [
+    "Development model/smoke only; not a supported product or desktop profile.",
+    "Exceptions and RTTI enabled; single-writer model, no concurrent publication or native clock adapter.",
+    "Compiler/tool/archive fingerprints pin this installed environment; complete vendor archive and all header hashes are not available, so bit-for-bit reproduction is unproven.",
+    "Runtime floors are restricted to the observed host environment, not inferred backward compatibility."
+  ]
+}

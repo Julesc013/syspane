@@ -1,0 +1,25 @@
+{
+  "version": "0.1.0",
+  "components": [
+    {
+      "id": "model", "target": "syspane_model", "type": "STATIC_LIBRARY",
+      "source_owner": "source/model/", "public_interfaces": ["source/model/state.hpp"],
+      "private_interfaces": [], "sources": ["source/model/state.cpp"],
+      "allowed_dependencies": [], "target_requirements": ["cxx17", "uint64", "exceptions", "rtti"],
+      "roles": ["console"], "installed_files": []
+    },
+    {
+      "id": "model-smoke", "target": "syspane_model_smoke", "type": "EXECUTABLE",
+      "source_owner": "source/application/", "public_interfaces": [], "private_interfaces": [],
+      "sources": ["source/application/model_smoke.cpp"], "allowed_dependencies": ["syspane_model"],
+      "target_requirements": ["cxx17"], "roles": ["development_smoke"],
+      "installed_files": ["bin/SysPane.ModelSmoke{exe}"]
+    },
+    {
+      "id": "model-tests", "target": "syspane_model_tests", "type": "EXECUTABLE",
+      "source_owner": "tests/model/", "public_interfaces": [], "private_interfaces": [],
+      "sources": ["tests/model/model_tests.cpp"], "allowed_dependencies": ["syspane_model"],
+      "target_requirements": ["cxx17"], "roles": ["development_test"], "installed_files": []
+    }
+  ]
+}
