@@ -63,7 +63,7 @@
         "SP-PROCESSES",
         "SP-PERFORMANCE"
       ],
-      "sha256": "ca6eee391af138c5361aec96e9a90a2d9065a8e1d36622263f91023a3f25db6d"
+      "sha256": "00c481e39816562e43290abc44561cc8e065fe0cd0650ef513748967f367368d"
     },
     {
       "id": "SP-SCHEDULER",
@@ -357,7 +357,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "77a6eb28f0a2302fc5761f7de75b3a11098d3d9f82188a2efb318a1215cafc7c"
+      "sha256": "e72774d3a4901b33e23429ea1d3636d74a57c737d63da056dbefcafb64c14b0e"
     },
     {
       "id": "SP-DIAGNOSTIC-HANDOFF",
@@ -411,7 +411,7 @@
       "requires": [
         "SP-CURRENT"
       ],
-      "sha256": "3894701da60bcdfe89f1110d6ee75ebbc287f6cd8bcc60959be0e519b8eb9dc3"
+      "sha256": "f4547e583e0fb9e945fc038926219403677e428545cb3e660065aef936986676"
     },
     {
       "id": "SP-NATIVE-TRANSPORT-HANDOFF",
@@ -521,6 +521,19 @@
       "sha256": "16754f609c01c4da6dbcdbaea9dd05c300e1e64a09a35bc88b01d23af3f5b28c"
     },
     {
+      "id": "SP-W25-PRESERVATION",
+      "path": "delivery/packages/w-25-preservation.md",
+      "title": "W-25 explicit private configuration preservation",
+      "description": "Preserve opaque damaged input without replacing source bytes, weakening policy or claiming a configuration commit.",
+      "requires": [
+        "SP-W25-PACKAGE",
+        "SP-W25-FAILURE-METADATA",
+        "SP-POLICY",
+        "SP-PERSISTENCE"
+      ],
+      "sha256": "72d5878c1fb2f44b66edb0c26b2766903035b47e632aa63fce55ead7878717a2"
+    },
+    {
       "id": "SP-W25-PACKAGE",
       "path": "delivery/packages/w-25-recovery.md",
       "title": "W-25 independent recovery and producer leases",
@@ -544,6 +557,17 @@
         "SP-TARGETS"
       ],
       "sha256": "53c14367f0447ad326d0b418ca6c74924845811bdf8b0dffe9c72188a89ce713"
+    },
+    {
+      "id": "SP-PRESERVATION-HANDOFF",
+      "path": "delivery/preservation-handoff.md",
+      "title": "Explicit private preservation checkpoint",
+      "description": "Bind opaque configuration copies, native controls and interrupted publication to measured development evidence.",
+      "requires": [
+        "SP-W25-PRESERVATION",
+        "SP-CAMPAIGN-ADMISSION"
+      ],
+      "sha256": "335e51950e394cd4e8a3defc57952f573d62842b19aee1de2a3d2ff85ab89de7"
     },
     {
       "id": "SP-RECOVERY-HANDOFF",

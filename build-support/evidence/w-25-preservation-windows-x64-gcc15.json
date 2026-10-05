@@ -1,0 +1,647 @@
+{
+  "work_id": "W-25",
+  "slice": "explicit private configuration preservation and native controls",
+  "work_status": "in_progress",
+  "profile": "windows-x64-gcc15",
+  "outcome": "pass",
+  "recorded_at": "2026-10-06T06:38:07+11:00",
+  "execution_times": [
+    "Start testing: Oct 06 06:36 AUS Eastern Daylight Time",
+    "End testing: Oct 06 06:37 AUS Eastern Daylight Time"
+  ],
+  "source_base": "ee2ac9617ded2959efc9bf0499b72ccd8be1e6ee",
+  "source_inputs": {
+    "CMakeLists.txt": "ed0ac88729586c308ac3e0d360c05eaa1e1fcc5141a6d5fe460e5915f596d373",
+    "CMakePresets.json": "8e6383925b266ee71f5e173c4938a02cde2d7d18e630d520df8a4d8fd8212738",
+    "spec/experience/settings-registry.json": "5f7406a4e6163c84497313bc9d9846d204f8edab5bc972b81a4222b44e612979",
+    "spec/delivery/packages/w-24-transport.md": "2d88899f08dd04a985b5576246d8ad051a6630e59440346e897f0fbe5352a03f",
+    "spec/assurance/acceptance-traces.md": "501ee8c2cb3606ef30ebf4db484ec764afbb3d53d5eeb8a1f7c0a4b272bd622e",
+    "spec/delivery/packages/w-25-recovery.md": "33d78a71380ae4049ddb3da0e9ab21b381ec4867a712d78595547edb3ae85b7b",
+    "spec/architecture/recovery.md": "00c481e39816562e43290abc44561cc8e065fe0cd0650ef513748967f367368d",
+    "spec/delivery/packages/w-02-desktop-oracle.md": "02086132205bcb49baf13eb724bb88c4a2129d1794ded3c7c41d116c4a980459",
+    "spec/assurance/desktop-oracle.md": "055e57d9d4796abcb60f040a8ad15a7b788e6bc1a70c710230001f1fde76388c",
+    "spec/delivery/packages/w-25-failure-metadata.md": "16754f609c01c4da6dbcdbaea9dd05c300e1e64a09a35bc88b01d23af3f5b28c",
+    "spec/delivery/packages/w-25-preservation.md": "72d5878c1fb2f44b66edb0c26b2766903035b47e632aa63fce55ead7878717a2",
+    "source/application/diagnostic.cpp": "639b873786d2a4ae745f0c16567ba13da9feb6b4929bc1f7746eac831ce39512",
+    "source/application/ipc_probe.cpp": "542f0120ce61069f0b8564cda9aef04e196333b5dce68be17481a5fef2104419",
+    "source/application/model_smoke.cpp": "5752a655511f83b1635d4e77c00274f0952145680d5a540d8bfec0b6e4386137",
+    "source/application/recovery_probe.cpp": "beb4c4cc09813afcd8afbe56ec46dde9c523386d0eb20bb6e41d20ded51f6249",
+    "source/configuration/policy.cpp": "28e53f88449cb2ff4c85e0a26c0a2dbe4fa85ca7d037a3df6a299cf2cb03df87",
+    "source/configuration/policy.hpp": "966822971245eedbde662b08987da8519cd71011b5620bb385a47b161e93e36a",
+    "source/configuration/session.cpp": "4fd0960477b8774abf6d8e11d2d39b55685038bf90e1906357b6e15f04880262",
+    "source/configuration/session.hpp": "dd6c99d7ba5686ed6d41811a7df4a23cd0afcd60f99b35e77e45d5ad2c9a9db7",
+    "source/desktop/x11/desktop_candidate.cpp": "fc36197818557ed6979c7a1a4db792f8f63752f9371f91f186377d62ad8db179",
+    "source/desktop/x11/desktop_candidate.hpp": "16643e4d8cf657c2350e6cf65dff5bf604c0878585c6440a944079340687974d",
+    "source/diagnostics/entry.cpp": "802e0ae85f122aa8c7717935757780abb362aa73eb073a0fe8ec6f84a894d179",
+    "source/diagnostics/entry.hpp": "91f6afb3a8491ac90ce3e35596b22d4979f6ba65688de4acaaaa16a77078b01b",
+    "source/diagnostics/failure_history.cpp": "2c099d7400f966e7f55b2689f34acabb3fbd2eb1ca6579c9b7b45330d5ab06fc",
+    "source/diagnostics/failure_history.hpp": "d25874b43474b2d0138ff3e7c77897f9d36f698673439ba13e5fe3ecbc01f879",
+    "source/diagnostics/health_link.cpp": "7104dce7d62220344372ae3c52d8916fd1511c54933b689b487195fe0c894d6b",
+    "source/diagnostics/health_link.hpp": "c8437a20eea17d8d8462095ea9909e04ee3d2f94d087d776a7988663a42801fd",
+    "source/diagnostics/oracle_probe_x11.cpp": "fbef9a7c76e0c291e88905dfdcc1e5ff12380bdbe68c9aba87360cb1b97649b8",
+    "source/diagnostics/preservation_job.cpp": "432c9f6dc5def54e20ba4576fcf7b998812e120d3dd669dcfbac360077049476",
+    "source/diagnostics/preservation_job.hpp": "6d90739d0ce70c28a3bb815e7292f2623d9e7441ff746f7813819e2722705454",
+    "source/diagnostics/recovery.cpp": "33f725661262c9888920892c1e77060999682b79d1f5b24e14e8cbfc57fdaaa6",
+    "source/diagnostics/recovery.hpp": "746295ce4ecaede329e6c6f44f378a9e96e92217b808ec0279bea9f0cfb14301",
+    "source/interfaces/diagnostic_inspector.hpp": "d5ca073d485ae2b5caef308669dd30111aa7b963f6e5f0b5b63edd49183561ce",
+    "source/interfaces/diagnostic_inspector_linux.cpp": "78b5e2af65a1523a11167a1847ac59d8f6dc780a94533569bb2495638fd7afd3",
+    "source/interfaces/diagnostic_inspector_windows.cpp": "1e2545082854f23cf8e1c1311e2923ed736a71ddce0e9f1eb7cd0d9267c32a20",
+    "source/model/state.cpp": "790ed3bec6a9f81022b230cbf355787db5a32b9596483aacd223ab462a271f9f",
+    "source/model/state.hpp": "bdf6e115dc6e893ed5ed622736479201c3dd32f06dcafe74b5de170e2ba7e0a9",
+    "source/platform/child.hpp": "266297cb253ba93b1c73c6a6a28218721e3277c21ffc725c84cd8866012be5aa",
+    "source/platform/child_linux.cpp": "46d26731c0c2ddf873265c008f0b25a17aef8f0cdf3f52ac16e2db6458686bfc",
+    "source/platform/child_windows.cpp": "3385dc40dd91341951a2039cb5f722f2ce069a7b824e2eb91059b9a180fcb864",
+    "source/platform/failure_store.cpp": "18055cbb3c6cb134599478e4e1bb30e672d9e9bbbe0ef3092e382c289b92b837",
+    "source/platform/failure_store.hpp": "b9cf5b5c7394c036a054cff3604facf688935f69a6f256540a40f953e4e12cf6",
+    "source/platform/local_ipc.hpp": "ef8a2fc5719f92b04e308a7766d3ee2d8994f2a926a78acb2cd766e25128c4cd",
+    "source/platform/local_ipc_linux.cpp": "d045fee05d8bbed3db0e7e773f735e595f9a951779564f39248ebc5cb558537e",
+    "source/platform/local_ipc_windows.cpp": "fb8f5ee68f2c605583509275438723ed0613a8affbaa250bd00aa0d5fd07c593",
+    "source/platform/machine_policy.hpp": "e12c51cdaeb3806e4813098fbfb8db7a181beb338b6623492c29165c0c0da5bb",
+    "source/platform/machine_policy_linux.cpp": "34925aa2d0173782a0a132413b3bddf2c4db25098575699b0f94193154094c16",
+    "source/platform/machine_policy_windows.cpp": "3ec13d9fe46b5e39a3c077de9620e051879155f9eba782e542de558e90b53653",
+    "source/platform/preservation.hpp": "1d4525eaec593c5dd1dbbfcd4abf347596422ffb01b27312b666f04a4afc7600",
+    "source/protocol/ledger.cpp": "f756277e0ad6dec26f3b72ffc243758c5acccd1124172f0290bee66c7e785421",
+    "source/protocol/ledger.hpp": "ac320df68d58abc9e3cd9697f3ff9ef3bbb2798a79974d5650816599e08ce2c0",
+    "source/protocol/outbox.cpp": "08cab6a370cc1a0c556d7d196afc6ce26eda6dec271ac0356f946ac6f47ca8b7",
+    "source/protocol/outbox.hpp": "c49588efcdad74054ce01e78b5f77aeca91578945b652bee29022c5858c6e5ba",
+    "source/protocol/wire.cpp": "0168904f2c00cea6f28bbe5996c42889df2e33b8df063fc08e159e7502446330",
+    "source/protocol/wire.hpp": "68ada918d121c3e861fd9e13a084c9ea1c7b4acf55ff4ba543c913d71a74523e",
+    "source/third_party/nlohmann/json.hpp": "aaf127c04cb31c406e5b04a63f1ae89369fccde6d8fa7cdda1ed4f32dfc5de63",
+    "source/third_party/nlohmann/LICENSE.MIT": "46a65cffd1ea955132d95a8dd921640714a8d6b537d2e4e482d31145ae95b603",
+    "tests/desktop/fixtures/duplicate-trace.json": "e0228b08f656c6e0eebbd754067d7b54d2e960df2d940e50bad4e4a83596c027",
+    "tests/desktop/fixtures/marker-golden.json": "0552c60a4628e68f7c515d8bee1adfd0a6dc365f8a036e63ed029b28b04d6793",
+    "tests/desktop/native_oracle.py": "975958fe693d18ae517ee9397fd086b75a794115ec9f04214a8460a02f7c5ad3",
+    "tests/desktop/native_x11_host.py": "97a2a8ca5f0bf5c0a3e12bff07bd3f38ffdebed28440866e4432c3597603f249",
+    "tests/desktop/oracle.py": "7de6458b9b98be4c7f75f4856a9d6c97d69b38578376cba886f3ee19c12f9b82",
+    "tests/desktop/test_oracle.py": "788ffc602c72cffc35e34ad12261f33ef9107f8149973488b868a0be38a42d8a",
+    "tests/desktop/test_x11_record.py": "137cc816d157cb711401c1f7313cf46cbbd56413d09f4b2a4ecad4365511ba31",
+    "tests/desktop/x11_input.py": "cb70db7166d69520d7192edc957c84b4c8a00a0a008106effe6612c50587e071",
+    "tests/fault/diagnostic_tests.cpp": "88931457bf507fffb76b766019558f3f1a8f33b7d3293a39d61d4af870fbfcce",
+    "tests/fault/failure_store_tests.cpp": "e965216fc283b40fabeb972eea11b6e1d994ee2756d4e8fe29689434df5746bb",
+    "tests/fault/native_diagnostic.py": "aab3f07a8a823412ab78fb49ae31d45ac764c85554c7580d07e01838e8bfcb72",
+    "tests/fault/native_failure_store.py": "8100b236a2344733b5eaa6898975b0dfa9c546ad0ff8e2d6a150561edc03630b",
+    "tests/fault/native_preservation.py": "571437ed404f312c52fab7371b74d0efe0a9c8360d33f176a936696b000edb96",
+    "tests/fault/native_recovery.py": "6a9cffe9309042356edf1a3b1f04b16a21ba1f79d6d1922be170b65641caa85c",
+    "tests/fault/preservation_tests.cpp": "60ed1b77962cd6eee27a5756dd037733a8270e62a26f120c404ca398d723fdd3",
+    "tests/fault/recovery_tests.cpp": "81385c57695df15a366daa8b4a662cf68d11d52d5b74a7a2f51c158a022e7763",
+    "tests/model/check_smoke.py": "0421270f4cc3ac6aa001693db300fe89838ae0c1423266f2afa2ff2b50cfb369",
+    "tests/model/model_tests.cpp": "06279bb75148104d374c740ca7c73f5aa2458aaf28ce2d2a86a789f721725b4d",
+    "tests/model/smoke.expected.json": "e51a93a177c660ac403d8fb835a4deded97dea618d10f0526cef9897bfee845c",
+    "tests/model/test_legacy_artifacts.py": "f9e6f9f545ee9b610b6fcaeff03565eeaf945ceb32dfb01fa127d1bfccf028b2",
+    "tests/protocol/native_ipc.py": "f9312aa97ec01b1f8357f939baf0671114c8558c89fae08df1626854477563bb",
+    "tests/protocol/protocol_tests.cpp": "749089d6224e5d15232da569286616b9003db66766a83d0ec4e5159a38f85919",
+    "build-support/check_components.py": "9a14e927c65b428368d4a59e396ddb75ebc6f737ca251a3c141fc2b4c6343cbd",
+    "build-support/check_dependencies.py": "03677c0b324e3ba4cd1b5e608b04a67b502561de464901ec1fb1b92fad19f9e9",
+    "build-support/check_diagnostic_dependencies.py": "ab1cca1fb5872ca2216493986f6a5b8b6497e0256a6155e6d6160eb3f2ff82c8",
+    "build-support/check_legacy_artifacts.py": "61ce677e11d74a1724005645d1ac6993c2dccb45d584a01966891d5bf8d7baa0",
+    "build-support/check_profile.py": "9495c65a54ff542480cf260a4d566a2df36937faa502930f8d7279a92e0d8f23",
+    "build-support/components.json": "75ab67ba3f9c82c43fea0cbf200cfcc46ff5b118eb1887a682e627fac12939de",
+    "build-support/dependencies.json": "28c58c1ac4345a75744dba9c5b0ace821ee1c3da96007e57a93f4b41cf0f3487",
+    "build-support/generate_settings.py": "36b2e367d3e53336f20f5e054464679d5f527762e3c7caa1528ed880ef8f7ab8",
+    "build-support/package_smoke.py": "0b15c28bfde09e928d5e18a51783c07bae284745def533c876c99ca9126dbbe4",
+    "build-support/prepare_x11_lab.py": "4f4b741d85f35938e8b1c5f7083e6bfc65baa9b39f5fae8c0ee124f4fa4194c6",
+    "build-support/record_foundation.py": "d54ef968ea29ec75743336ba4e02067145e9b7cb2fb6640bb35e76de3217a1e9",
+    "build-support/record_legacy_build.py": "85bd8fa0d4528a5248b1adfbecee363b0ab372e37f79ff7086e01b9c3316ce02",
+    "build-support/record_protocol.py": "bf93386304f2b00a3cd6bbda845a9832dbdcb791343ebe85dd575901215c49f4",
+    "build-support/record_x11_host.py": "b04816b42ee93992ac19dc7399e9cc713e9ee84e61633adf1337c2d48449b111",
+    "build-support/run_foundation.sh": "d77de0e8adf6c5411c794fba0bb06b5558c8d5c33ffcca53c0d77d00467653fa",
+    "build-support/targets/linux-x64-gcc13.json": "98a1c8cb7a3719825df59d0557f42cb1d59c21806c87b88055bd40f0ea50a922",
+    "build-support/targets/linux-x64-gcc13.lock.json": "1037d6d76f48552eacf4ed2d049d0f8ff3153fa15fdb49f8bb8f3e0a686202bd",
+    "build-support/targets/README.md": "728d687d0d580ebd41625e9ec56612caf9bb1a2ae402d68c630f3e034c967ac8",
+    "build-support/targets/windows-x64-gcc15.json": "b2c7298e0c02f2ccb39865c32c81e465e17d02d2cf42dd6e9820434d65327060",
+    "build-support/targets/windows-x64-gcc15.lock.json": "9c877c22326769714987b79896b1d04bd5e6b9e48612ecb49927379900e4a555",
+    "build-support/targets/windows-x86-v141-xp.imports.json": "19c90f1591e56faee1e866544ec23950dcc0ece709a347e9f227b0c4769f0627",
+    "build-support/targets/windows-x86-v141-xp.json": "7afc37a1b99f7e6dfd2eaf700edcae39c31ec8a45e89066a5b82ceed79940778",
+    "build-support/targets/windows-x86-v141-xp.lock.json": "86fd83ebfdcd2e6536be676a02f21f43bc0663f9852ea0bcdfba96176efde0ed",
+    "build-support/x11-input-runtime.json": "e5ced8557ba5d2b44257a1ccfca3a9d9ac2df24a4c8465c2899d197076a1a45a",
+    "build-support/x11-lab-packages.json": "ca98875e8e6d29b56cc08dde7edb5c6b3abf09d51936778171ff0facc810830b",
+    "spec/contracts/binding.schema.json": "1c5063762b63540ca68dfcbcc9ad425061fbdc64f28210716ad093738aba183b",
+    "spec/contracts/capability-v0.2.schema.json": "a7dc0b867ab0b689535f0c59018de856bc72011f368882a1941e29df665e29f5",
+    "spec/contracts/capability.schema.json": "b2100d0d19e64560156810c65caf97041f70f22894b068356e3ba1f27e9cd7ac",
+    "spec/contracts/command-result.schema.json": "baf5d7227b53f900388257d2a76ddca0eee3cb16dabd7e610092fe2d98a68fc9",
+    "spec/contracts/command-v0.2.schema.json": "cfc5e9d4be524ef52905d4c0858b674b3ab889eef9057ef0235c6c7d135d4833",
+    "spec/contracts/command.schema.json": "6c7bafa1a8817516a22a3f0ab62390006d0a7d98814accf3b04fce95012a3526",
+    "spec/contracts/commands.md": "c9e2ac2396c3c0ffff7084d53e2870711bab6cbfdeeaaf81a744bd7bf81ce1fc",
+    "spec/contracts/common.schema.json": "2ce55216670abacfa570da8a910e0c7baecfe6288794507ec87f8e7852c5aa07",
+    "spec/contracts/content-package.schema.json": "10d251beb791c0755c36b6e797f860f95cb06307fff7c3e02267eb83f7355f1f",
+    "spec/contracts/event.schema.json": "4f65ae6390ba91ffab387c07893cda76ca6bc59d2c139b97d762e54953d2fcb1",
+    "spec/contracts/evidence.schema.json": "5605221f3a8d8a6d8a2b0355015131b843762ffb2a14c7e6e2735a75742a183e",
+    "spec/contracts/extension-manifest.schema.json": "a42f609115447c3d28acf0083e49a2296e4191ea18b38a91515d69da6af0240a",
+    "spec/contracts/handoff.schema.json": "8fc3569c159d9efd52378f76f9ab59451f2158ebf81d77d35b6f9e82fd9570d2",
+    "spec/contracts/handshake.schema.json": "070d1705c69469984df391515946637cc3b90c44a8b15601ad02e96b4bd0daad",
+    "spec/contracts/index.md": "d39bd62fef82001b36e3c11012cde4b1bdf723caf7bd51ea72427830c730a781",
+    "spec/contracts/layout.schema.json": "604285e32ccd763855788925609dfb7658f537d1cb493e9066458b4a2f2640ee",
+    "spec/contracts/metric-descriptor.schema.json": "ee45ceb1f7a792ee9bfa92e2ff4b60e0ba4062528772e002758249e3a34fc942",
+    "spec/contracts/network-domain.md": "3e0e012acb9dd51e490c6971d344451267d7ecfa522553da6af26d3f50f949c2",
+    "spec/contracts/network-interface.schema.json": "67d2feeb73e5971e0fc421ce1cea7cc35fd8a005ec3fa9a7ffe5cc41a05cb57d",
+    "spec/contracts/observation.schema.json": "00477462eb4807e2d7ea87995064fca7c6f90c35a3efe11b53d289812750fe4e",
+    "spec/contracts/policy.schema.json": "81ae7c734956940fc69f3c443cac8c49f3efd3abeb319f166c927c7536c24d1e",
+    "spec/contracts/preset.schema.json": "2905bc83acbe7a2bba5e296aa94ce7b762e234326ef8119ddce5e87df0224855",
+    "spec/contracts/protocol.md": "b6bb4914d0f2bc1663575a0e2b96e7b93b2889ca41c00a0d17968b65190eba31",
+    "spec/contracts/scene-v0.2.schema.json": "9773b8dbc75c73dea2d89d6d579f182441f0cf4342c94ee1e7973c6ab77358b7",
+    "spec/contracts/scene.schema.json": "7d8696af5a5a17c96ea67a9aa333b6a3cba5de0b770a3c1be91783ab9b3ea0fd",
+    "spec/contracts/sdk.md": "4d3b55828316909f6f023442a2dfe3d70c3418caf07f7fe7314121a7b4cd0013",
+    "spec/contracts/settings.schema.json": "0d7289a58e394c6cf74b738a6101a681c4377817bc8048d4b741d66cc2d2880e",
+    "spec/contracts/snapshot.schema.json": "2f1a13d327a86a63cb82c63d50832528e074333ac3222a7caa38c12b85f94c7a",
+    "spec/contracts/syspane-api.h": "2b6bd73c82db1118011f6160b98ae962fe3ecbd8e4313a0e026fdb4b6410d5d7",
+    "spec/contracts/target-profile.schema.json": "6597cc1e7b94718a0e79d50621eafd5918a7264fd6054dc9a9e07519917ec7cf",
+    "spec/contracts/theme.schema.json": "16a306f1a7a1ab0e74ca28fd4e2a63f7712255136868329afcc141d5c88f8aac",
+    "spec/contracts/transport.md": "78addcf091fe32c5b58a7321e71dae9f171fc14de8b16c77480ed61ebe469f4a",
+    "spec/contracts/versions.md": "305dad599d4a98b70b8c166aa1c79f62b5688ebc8c14f48cfdd3728695d2622c"
+  },
+  "artifacts": {
+    "syspane_protocol_tests.exe": {
+      "sha256": "91de60f79be0a38bf4b36f8af68970b397ea9dfd8cd08a954a298290c1822f05",
+      "bytes": 21184642
+    },
+    "libsyspane_protocol.a": {
+      "sha256": "13feb9e1d23b4679797ae6a5dba389b477e72de457b8d0aa96ac83a6840649aa",
+      "bytes": 10482976
+    },
+    "libsyspane_configuration.a": {
+      "sha256": "90ad124b494df849de75f33414542c3001f0fa59d0c452335066c845e9bc0cdc",
+      "bytes": 16545882
+    },
+    "generated/settings_descriptors.hpp": {
+      "sha256": "4f17db387d142cfa5d20a5b6770c4a4794759cedcbaa98156a43848ad9af9c97",
+      "bytes": 1137
+    },
+    "syspane_recovery_tests.exe": {
+      "sha256": "fb993604b40a1b521db7870b14b11b42d59c3a5b5a23691c2fa4c2f204039339",
+      "bytes": 6774287
+    },
+    "libsyspane_recovery.a": {
+      "sha256": "d10528ed54648577988f0a5c73764d261bc7eed9b6aba905d14fbe4dbb30fb3c",
+      "bytes": 288194
+    },
+    "component-graph.txt": {
+      "sha256": "1ac32374f44332b9bedc1b345b4396f93e657ad15810e00f4ed0e609fd7b39ec",
+      "bytes": 2562
+    },
+    "SysPane.IpcProbe.exe": {
+      "sha256": "38e4da8aa0662c222b1d882575f1fac2ba185e325c6010bda00812b045ec3414",
+      "bytes": 20676383
+    },
+    "libsyspane_local_ipc.a": {
+      "sha256": "4e2a3be769d6500b5dae53eac15123dd4f6ec7add155660b64ea072c92983926",
+      "bytes": 710404
+    },
+    "SysPane.RecoveryProbe.exe": {
+      "sha256": "026c205d149a42a7033706ee78145182876c964dbce141281a742d21bf3cbf62",
+      "bytes": 18670876
+    },
+    "libsyspane_child.a": {
+      "sha256": "b33b78cb1e0fa2eae1cc7d78662ebe2dd90afa7305347194e0215528f0f0e679",
+      "bytes": 408706
+    },
+    "libsyspane_health.a": {
+      "sha256": "382819ee1ec5a48f14f86e7d226a014c68124a584a2469a98a2705d594c4e3e4",
+      "bytes": 5785884
+    },
+    "SysPane.Diag.exe": {
+      "sha256": "e38b9dda4762ab53d495ae84b3400b48db62ec227415ca3a387e870b31acc3db",
+      "bytes": 21522846
+    },
+    "syspane_diagnostic_tests.exe": {
+      "sha256": "fb34072c4da65992255a1ad4c223f8eb616c35defe919cd08eef8759af08da45",
+      "bytes": 21250536
+    },
+    "libsyspane_diagnostic.a": {
+      "sha256": "434fecbd33b4e6505ca99e99fd34bdef2c5fd43a73d5da79c503ddbbfa8b1b30",
+      "bytes": 10354300
+    },
+    "libsyspane_machine_policy.a": {
+      "sha256": "d5f1a9ef6cf885dec685033e338119562be3ff6441d6558b3b0865356fc94517",
+      "bytes": 1168164
+    },
+    "libsyspane_diagnostic_inspector.a": {
+      "sha256": "539ae92223838c6b420ee1cd2855a9936f9188d4a3bd7f1115823db359178713",
+      "bytes": 264258
+    },
+    "syspane_failure_store_tests.exe": {
+      "sha256": "a8cca3594478cadefaa0526a80eb00e66b9b944482f9b7d0ebc82946c06eead2",
+      "bytes": 13300426
+    },
+    "libsyspane_failure_store.a": {
+      "sha256": "5a2a5ec724ec2e5d13cdbfd2ac6c39f0a2f8653daef97c6af7d650efcfa9ae2d",
+      "bytes": 2351952
+    },
+    "syspane_preservation_tests.exe": {
+      "sha256": "e3e33324a6e316329a1376bbe03cac68ca2716eb2ceae000556361d0754ce43a",
+      "bytes": 21417702
+    },
+    "libsyspane_preservation_job.a": {
+      "sha256": "946e83b1a8bb5fe70adde53d51626bf5d4c0c680c47a3cb614c9655e3a27c972",
+      "bytes": 1391640
+    }
+  },
+  "cases": [
+    {
+      "case": "desktop.ORACLE-UNIT",
+      "outcome": "pass",
+      "command": "ctest --preset windows-x64-gcc15 -R ^desktop\\.ORACLE\\-UNIT$ --output-on-failure"
+    },
+    {
+      "case": "model.STATE-01",
+      "outcome": "pass",
+      "command": "ctest --preset windows-x64-gcc15 -R ^model\\.STATE\\-01$ --output-on-failure"
+    },
+    {
+      "case": "model.STATE-02",
+      "outcome": "pass",
+      "command": "ctest --preset windows-x64-gcc15 -R ^model\\.STATE\\-02$ --output-on-failure"
+    },
+    {
+      "case": "model.STATE-03",
+      "outcome": "pass",
+      "command": "ctest --preset windows-x64-gcc15 -R ^model\\.STATE\\-03$ --output-on-failure"
+    },
+    {
+      "case": "model.STATE-04",
+      "outcome": "pass",
+      "command": "ctest --preset windows-x64-gcc15 -R ^model\\.STATE\\-04$ --output-on-failure"
+    },
+    {
+      "case": "model.STATE-05",
+      "outcome": "pass",
+      "command": "ctest --preset windows-x64-gcc15 -R ^model\\.STATE\\-05$ --output-on-failure"
+    },
+    {
+      "case": "model.VALIDITY-01",
+      "outcome": "pass",
+      "command": "ctest --preset windows-x64-gcc15 -R ^model\\.VALIDITY\\-01$ --output-on-failure"
+    },
+    {
+      "case": "model.VALIDITY-02",
+      "outcome": "pass",
+      "command": "ctest --preset windows-x64-gcc15 -R ^model\\.VALIDITY\\-02$ --output-on-failure"
+    },
+    {
+      "case": "model.CLOCK-01",
+      "outcome": "pass",
+      "command": "ctest --preset windows-x64-gcc15 -R ^model\\.CLOCK\\-01$ --output-on-failure"
+    },
+    {
+      "case": "model.CLOCK-02",
+      "outcome": "pass",
+      "command": "ctest --preset windows-x64-gcc15 -R ^model\\.CLOCK\\-02$ --output-on-failure"
+    },
+    {
+      "case": "model.BOUNDS-01",
+      "outcome": "pass",
+      "command": "ctest --preset windows-x64-gcc15 -R ^model\\.BOUNDS\\-01$ --output-on-failure"
+    },
+    {
+      "case": "model.BOUNDS-02",
+      "outcome": "pass",
+      "command": "ctest --preset windows-x64-gcc15 -R ^model\\.BOUNDS\\-02$ --output-on-failure"
+    },
+    {
+      "case": "model.BOUNDS-03",
+      "outcome": "pass",
+      "command": "ctest --preset windows-x64-gcc15 -R ^model\\.BOUNDS\\-03$ --output-on-failure"
+    },
+    {
+      "case": "model.OBSERVATION-01",
+      "outcome": "pass",
+      "command": "ctest --preset windows-x64-gcc15 -R ^model\\.OBSERVATION\\-01$ --output-on-failure"
+    },
+    {
+      "case": "model.EPOCH-01",
+      "outcome": "pass",
+      "command": "ctest --preset windows-x64-gcc15 -R ^model\\.EPOCH\\-01$ --output-on-failure"
+    },
+    {
+      "case": "model.FRESHNESS-01",
+      "outcome": "pass",
+      "command": "ctest --preset windows-x64-gcc15 -R ^model\\.FRESHNESS\\-01$ --output-on-failure"
+    },
+    {
+      "case": "model.smoke",
+      "outcome": "pass",
+      "command": "ctest --preset windows-x64-gcc15 -R ^model\\.smoke$ --output-on-failure"
+    },
+    {
+      "case": "composition.graph",
+      "outcome": "pass",
+      "command": "ctest --preset windows-x64-gcc15 -R ^composition\\.graph$ --output-on-failure"
+    },
+    {
+      "case": "composition.reject_forbidden",
+      "outcome": "pass",
+      "command": "ctest --preset windows-x64-gcc15 -R ^composition\\.reject_forbidden$ --output-on-failure"
+    },
+    {
+      "case": "protocol.FRAME-01",
+      "outcome": "pass",
+      "command": "ctest --preset windows-x64-gcc15 -R ^protocol\\.FRAME\\-01$ --output-on-failure"
+    },
+    {
+      "case": "protocol.FRAME-02",
+      "outcome": "pass",
+      "command": "ctest --preset windows-x64-gcc15 -R ^protocol\\.FRAME\\-02$ --output-on-failure"
+    },
+    {
+      "case": "protocol.FRAME-03",
+      "outcome": "pass",
+      "command": "ctest --preset windows-x64-gcc15 -R ^protocol\\.FRAME\\-03$ --output-on-failure"
+    },
+    {
+      "case": "protocol.JSON-01",
+      "outcome": "pass",
+      "command": "ctest --preset windows-x64-gcc15 -R ^protocol\\.JSON\\-01$ --output-on-failure"
+    },
+    {
+      "case": "protocol.WIRE-01",
+      "outcome": "pass",
+      "command": "ctest --preset windows-x64-gcc15 -R ^protocol\\.WIRE\\-01$ --output-on-failure"
+    },
+    {
+      "case": "protocol.NEGOTIATE-01",
+      "outcome": "pass",
+      "command": "ctest --preset windows-x64-gcc15 -R ^protocol\\.NEGOTIATE\\-01$ --output-on-failure"
+    },
+    {
+      "case": "protocol.IPC-BUDGET-01",
+      "outcome": "pass",
+      "command": "ctest --preset windows-x64-gcc15 -R ^protocol\\.IPC\\-BUDGET\\-01$ --output-on-failure"
+    },
+    {
+      "case": "protocol.IPC-BUDGET-02",
+      "outcome": "pass",
+      "command": "ctest --preset windows-x64-gcc15 -R ^protocol\\.IPC\\-BUDGET\\-02$ --output-on-failure"
+    },
+    {
+      "case": "protocol.IPC-BUDGET-03",
+      "outcome": "pass",
+      "command": "ctest --preset windows-x64-gcc15 -R ^protocol\\.IPC\\-BUDGET\\-03$ --output-on-failure"
+    },
+    {
+      "case": "protocol.IPC-BUDGET-04",
+      "outcome": "pass",
+      "command": "ctest --preset windows-x64-gcc15 -R ^protocol\\.IPC\\-BUDGET\\-04$ --output-on-failure"
+    },
+    {
+      "case": "protocol.LEDGER-01",
+      "outcome": "pass",
+      "command": "ctest --preset windows-x64-gcc15 -R ^protocol\\.LEDGER\\-01$ --output-on-failure"
+    },
+    {
+      "case": "protocol.POLICY-01",
+      "outcome": "pass",
+      "command": "ctest --preset windows-x64-gcc15 -R ^protocol\\.POLICY\\-01$ --output-on-failure"
+    },
+    {
+      "case": "protocol.POLICY-02",
+      "outcome": "pass",
+      "command": "ctest --preset windows-x64-gcc15 -R ^protocol\\.POLICY\\-02$ --output-on-failure"
+    },
+    {
+      "case": "protocol.DISCLOSURE-01",
+      "outcome": "pass",
+      "command": "ctest --preset windows-x64-gcc15 -R ^protocol\\.DISCLOSURE\\-01$ --output-on-failure"
+    },
+    {
+      "case": "protocol.QUEUE-01",
+      "outcome": "pass",
+      "command": "ctest --preset windows-x64-gcc15 -R ^protocol\\.QUEUE\\-01$ --output-on-failure"
+    },
+    {
+      "case": "protocol.SESSION-01",
+      "outcome": "pass",
+      "command": "ctest --preset windows-x64-gcc15 -R ^protocol\\.SESSION\\-01$ --output-on-failure"
+    },
+    {
+      "case": "protocol.dependencies",
+      "outcome": "pass",
+      "command": "ctest --preset windows-x64-gcc15 -R ^protocol\\.dependencies$ --output-on-failure"
+    },
+    {
+      "case": "recovery.LEASE-01",
+      "outcome": "pass",
+      "command": "ctest --preset windows-x64-gcc15 -R ^recovery\\.LEASE\\-01$ --output-on-failure"
+    },
+    {
+      "case": "recovery.LEASE-02",
+      "outcome": "pass",
+      "command": "ctest --preset windows-x64-gcc15 -R ^recovery\\.LEASE\\-02$ --output-on-failure"
+    },
+    {
+      "case": "recovery.LEASE-03",
+      "outcome": "pass",
+      "command": "ctest --preset windows-x64-gcc15 -R ^recovery\\.LEASE\\-03$ --output-on-failure"
+    },
+    {
+      "case": "recovery.LEASE-04",
+      "outcome": "pass",
+      "command": "ctest --preset windows-x64-gcc15 -R ^recovery\\.LEASE\\-04$ --output-on-failure"
+    },
+    {
+      "case": "recovery.LEASE-05",
+      "outcome": "pass",
+      "command": "ctest --preset windows-x64-gcc15 -R ^recovery\\.LEASE\\-05$ --output-on-failure"
+    },
+    {
+      "case": "recovery.RENDER-01",
+      "outcome": "pass",
+      "command": "ctest --preset windows-x64-gcc15 -R ^recovery\\.RENDER\\-01$ --output-on-failure"
+    },
+    {
+      "case": "recovery.RENDER-02",
+      "outcome": "pass",
+      "command": "ctest --preset windows-x64-gcc15 -R ^recovery\\.RENDER\\-02$ --output-on-failure"
+    },
+    {
+      "case": "recovery.RETRY-01",
+      "outcome": "pass",
+      "command": "ctest --preset windows-x64-gcc15 -R ^recovery\\.RETRY\\-01$ --output-on-failure"
+    },
+    {
+      "case": "recovery.RETRY-02",
+      "outcome": "pass",
+      "command": "ctest --preset windows-x64-gcc15 -R ^recovery\\.RETRY\\-02$ --output-on-failure"
+    },
+    {
+      "case": "recovery.RETRY-03",
+      "outcome": "pass",
+      "command": "ctest --preset windows-x64-gcc15 -R ^recovery\\.RETRY\\-03$ --output-on-failure"
+    },
+    {
+      "case": "recovery.RECOVERY-CLOCK",
+      "outcome": "pass",
+      "command": "ctest --preset windows-x64-gcc15 -R ^recovery\\.RECOVERY\\-CLOCK$ --output-on-failure"
+    },
+    {
+      "case": "native.NATIVE-01",
+      "outcome": "pass",
+      "command": "ctest --preset windows-x64-gcc15 -R ^native\\.NATIVE\\-01$ --output-on-failure"
+    },
+    {
+      "case": "native.NATIVE-02",
+      "outcome": "pass",
+      "command": "ctest --preset windows-x64-gcc15 -R ^native\\.NATIVE\\-02$ --output-on-failure"
+    },
+    {
+      "case": "native.RECOVERY-01",
+      "outcome": "pass",
+      "command": "ctest --preset windows-x64-gcc15 -R ^native\\.RECOVERY\\-01$ --output-on-failure"
+    },
+    {
+      "case": "diagnostic.DIAG-POLICY",
+      "outcome": "pass",
+      "command": "ctest --preset windows-x64-gcc15 -R ^diagnostic\\.DIAG\\-POLICY$ --output-on-failure"
+    },
+    {
+      "case": "diagnostic.DIAG-PROJECTION",
+      "outcome": "pass",
+      "command": "ctest --preset windows-x64-gcc15 -R ^diagnostic\\.DIAG\\-PROJECTION$ --output-on-failure"
+    },
+    {
+      "case": "diagnostic.FAILURE-CODEC",
+      "outcome": "pass",
+      "command": "ctest --preset windows-x64-gcc15 -R ^diagnostic\\.FAILURE\\-CODEC$ --output-on-failure"
+    },
+    {
+      "case": "diagnostic.FAILURE-INTERRUPT",
+      "outcome": "pass",
+      "command": "ctest --preset windows-x64-gcc15 -R ^diagnostic\\.FAILURE\\-INTERRUPT$ --output-on-failure"
+    },
+    {
+      "case": "diagnostic.FAILURE-PROJECTION",
+      "outcome": "pass",
+      "command": "ctest --preset windows-x64-gcc15 -R ^diagnostic\\.FAILURE\\-PROJECTION$ --output-on-failure"
+    },
+    {
+      "case": "diagnostic.PRESERVE-POLICY",
+      "outcome": "pass",
+      "command": "ctest --preset windows-x64-gcc15 -R ^diagnostic\\.PRESERVE\\-POLICY$ --output-on-failure"
+    },
+    {
+      "case": "native.PRESERVE",
+      "outcome": "pass",
+      "command": "ctest --preset windows-x64-gcc15 -R ^native\\.PRESERVE$ --output-on-failure"
+    },
+    {
+      "case": "native.FAILURE-STORE",
+      "outcome": "pass",
+      "command": "ctest --preset windows-x64-gcc15 -R ^native\\.FAILURE\\-STORE$ --output-on-failure"
+    },
+    {
+      "case": "native.DIAG-01",
+      "outcome": "pass",
+      "command": "ctest --preset windows-x64-gcc15 -R ^native\\.DIAG\\-01$ --output-on-failure"
+    }
+  ],
+  "bindings": {
+    "portable_cases": "tests/protocol/protocol_tests.cpp",
+    "contract": "spec/delivery/packages/w-24-transport.md",
+    "request_oracles": "spec/assurance/acceptance-traces.md",
+    "descriptor_input": "spec/experience/settings-registry.json",
+    "recovery_cases": "tests/fault/recovery_tests.cpp",
+    "recovery_contract": "spec/delivery/packages/w-25-recovery.md",
+    "native_recovery_cases": "tests/fault/native_recovery.py",
+    "diagnostic_cases": "tests/fault/diagnostic_tests.cpp",
+    "native_diagnostic_cases": "tests/fault/native_diagnostic.py",
+    "oracle": "tests/desktop/oracle.py",
+    "oracle_contract": "spec/delivery/packages/w-02-desktop-oracle.md",
+    "oracle_cases": "tests/desktop/test_oracle.py",
+    "native_oracle_cases": "tests/desktop/native_oracle.py",
+    "failure_metadata": "spec/delivery/packages/w-25-failure-metadata.md",
+    "preservation": "spec/delivery/packages/w-25-preservation.md"
+  },
+  "environment": {
+    "os": "Windows",
+    "release": "10",
+    "machine": "AMD64",
+    "execution": "native Windows process",
+    "preset_environment": {}
+  },
+  "original_ctest_log_sha256": "e89888796cb0ca25eb743d3f0b9d31f6db1275c2871c8202250306f3b7251756",
+  "normalized_ctest_log": "w-25-preservation-windows-x64-gcc15.ctest.txt",
+  "native_records": [
+    {
+      "family": "NATIVE-01",
+      "record": "w-25-preservation-windows-x64-gcc15.NATIVE-01.json",
+      "sha256": "33197581cd647e1d5d3791d3038792fd9348564b2199ae38d0f3914fdc44c85d",
+      "cases": 9,
+      "qualification": {
+        "cross_user": "blocked: no admitted second-user laboratory",
+        "cross_logon_or_desktop_session": "blocked: no admitted Windows second logon or Linux desktop-session laboratory"
+      }
+    },
+    {
+      "family": "NATIVE-02",
+      "record": "w-25-preservation-windows-x64-gcc15.NATIVE-02.json",
+      "sha256": "2d29ac338564ce37d1252076684a65ce370f7564e1f8b85ed8f364eccf8093a4",
+      "cases": 6,
+      "qualification": {
+        "cross_user": "blocked: no admitted second-user laboratory",
+        "cross_logon_or_desktop_session": "blocked: no admitted Windows second logon or Linux desktop-session laboratory"
+      }
+    },
+    {
+      "family": "RECOVERY-01",
+      "record": "w-25-preservation-windows-x64-gcc15.RECOVERY-01.json",
+      "sha256": "e99df723020daaa432bcd7745ab04d32c7956a7f292fe98dd0abb3c9c8b5c1e3",
+      "cases": 9,
+      "qualification": "Native synthetic child/health supervision only; no pixels, diagnostic entry, policy erasure or desktop support."
+    },
+    {
+      "family": "PRESERVE",
+      "record": "w-25-preservation-windows-x64-gcc15.PRESERVE.json",
+      "sha256": "b99216befd9aabf243b5e9e01c4ac3fd2e5e1243e7f2fd7fb10f46e3386663d1",
+      "cases": 17,
+      "qualification": "Native opaque file preservation and programmatic native UI binding under typed policy fixtures only."
+    },
+    {
+      "family": "FAILURE-STORE",
+      "record": "w-25-preservation-windows-x64-gcc15.FAILURE-STORE.json",
+      "sha256": "27e9ad04979854eb50c8c3d2546c373da4a000a093a1950378dbee77981cff17",
+      "cases": 10,
+      "qualification": "Native private advisory metadata files only; no product retention, protected policy or historical OS qualification."
+    },
+    {
+      "family": "DIAG-01",
+      "record": "w-25-preservation-windows-x64-gcc15.DIAG-01.json",
+      "sha256": "afb4c6afc8b6d3dc09be4c6032910e871f4d78d99c0e31e3e259398b4c3f85c2",
+      "cases": 5,
+      "qualification": "Development diagnostic entry and hidden native close only; no pixels, protected-policy deployment or desktop/editor recovery qualification."
+    }
+  ],
+  "import_audit": {
+    "command": [
+      "objdump",
+      "-p",
+      "D:\\Projects\\SysPane\\syspane\\out\\build\\windows-x64-gcc15\\SysPane.Diag.exe"
+    ],
+    "tool": "GNU objdump (Binutils for MinGW-W64 x86_64, built by Brecht Sanders, r6) 2.46.0.20260210",
+    "direct_dependencies": [
+      "ADVAPI32.dll",
+      "GDI32.dll",
+      "KERNEL32.dll",
+      "api-ms-win-crt-convert-l1-1-0.dll",
+      "api-ms-win-crt-environment-l1-1-0.dll",
+      "api-ms-win-crt-filesystem-l1-1-0.dll",
+      "api-ms-win-crt-heap-l1-1-0.dll",
+      "api-ms-win-crt-locale-l1-1-0.dll",
+      "api-ms-win-crt-math-l1-1-0.dll",
+      "api-ms-win-crt-private-l1-1-0.dll",
+      "api-ms-win-crt-runtime-l1-1-0.dll",
+      "api-ms-win-crt-stdio-l1-1-0.dll",
+      "api-ms-win-crt-string-l1-1-0.dll",
+      "api-ms-win-crt-time-l1-1-0.dll",
+      "api-ms-win-crt-utility-l1-1-0.dll",
+      "SHELL32.dll",
+      "USER32.dll"
+    ],
+    "scope": "Observed direct imports only; no inferred historical OS or loader qualification."
+  },
+  "limits": [
+    "Opaque preservation never repairs, activates or restores configuration; file flush/readback is not power-loss durability.",
+    "Native UI success/revocation/cancellation uses typed policy fixtures and programmatic widgets; installed positive policy and external accessibility/input qualification remain pending.",
+    "Foreign-owner and unsupported-filesystem execution remain unqualified; Windows leaf-link privilege limitations are preserved explicitly.",
+    "Actual unavailable-policy CLI denies without creating copy/partial files; no protected policy was installed or changed.",
+    "W-25 product retention, live telemetry/renderer recovery, payload revocation and independent editor exit remain open.",
+    "No desktop host, historical OS, privileged action or public release is attested."
+  ]
+}

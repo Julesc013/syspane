@@ -10,6 +10,12 @@ protocol::Json facts(const configuration::Policy& policy, const std::string& pro
         {"recovery_controls", "not_implemented"}};
 }
 }
+bool preservation_permitted(const configuration::Policy& policy, std::uint64_t revision, bool inspector) {
+    if (!policy.available || policy.revision != revision || policy.denied_capabilities.count("diagnostic.preserve_configuration")) return false;
+    return inspector ? configuration::permits(authority, policy, "inspector", "operational") &&
+        configuration::permits(authority, policy, "accessibility", "operational") :
+        configuration::permits(authority, policy, "export", "public");
+}
 std::optional<protocol::Json> report(const configuration::Policy& policy, const std::string& profile, const FailureReader& failures) {
     if (!configuration::permits(authority, policy, "export", "public")) return {};
     auto value = facts(policy, profile);
@@ -23,7 +29,7 @@ std::string inspector_text(const configuration::Policy& policy, const std::strin
     const auto value = facts(policy, profile);
     auto text = "SysPane diagnostic 0.0.1\nDevelopment profile: " + profile +
         "\nMandatory policy: " + value["policy_state"].get<std::string>() +
-        "\nRecovery controls are not implemented.\nApplication configuration is not opened.";
+        "\nLive recovery controls are not implemented.\nAutomatic configuration loading is disabled.";
     if (failures) {
         const auto history = failure_projection(configuration::permits(authority, policy, "inspector", "operational") &&
             configuration::permits(authority, policy, "accessibility", "operational") ? failures() : FailureHistory{"restricted", {}});

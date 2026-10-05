@@ -1,0 +1,77 @@
+{
+  "family": "PRESERVE",
+  "outcome": "fail",
+  "started_at": "2026-10-05T19:28:06.488847+00:00",
+  "executable_sha256": "442ab589686848975c6108a232b30b3bf233d7614162c431c103a5e88f1d0dc7",
+  "diagnostic_sha256": "c3977a9db6143960d2304c53aa5a28a42c4337ddb9d340312034af8744186839",
+  "cases": [],
+  "attempts": [
+    {
+      "command": [
+        "D:\\Projects\\SysPane\\syspane\\out\\build\\windows-x64-gcc15\\syspane_preservation_tests.exe",
+        "copy",
+        "D:\\Projects\\SysPane\\syspane\\out\\build\\windows-x64-gcc15\\native-evidence\\preservation-6a88c8122ca8\\broken-\u03bb.bin",
+        "D:\\Projects\\SysPane\\syspane\\out\\build\\windows-x64-gcc15\\native-evidence\\preservation-6a88c8122ca8\\copy-\u03bb.bin"
+      ],
+      "exit": 0,
+      "stdout": "{\"durable\":false,\"outcome\":\"source_unavailable\",\"partial\":false}\r\n",
+      "stderr": ""
+    }
+  ],
+  "qualification": "Native opaque file preservation and programmatic native UI binding under typed policy fixtures only.",
+  "limitations": [
+    "No installed positive policy deployment, power-loss durability, hostile same-user parent swapping, or external input/accessibility qualification.",
+    "Foreign-owner source rejection needs a separately admitted identity laboratory; no such source was created."
+  ],
+  "source_inputs": {
+    "source/diagnostics/entry.cpp": "2dbda8959581cf2b35f0515b5053903f572ff0b9eb00e762c70386549c5baacc",
+    "source/diagnostics/entry.hpp": "91f6afb3a8491ac90ce3e35596b22d4979f6ba65688de4acaaaa16a77078b01b",
+    "source/diagnostics/failure_history.cpp": "2c099d7400f966e7f55b2689f34acabb3fbd2eb1ca6579c9b7b45330d5ab06fc",
+    "source/diagnostics/failure_history.hpp": "d25874b43474b2d0138ff3e7c77897f9d36f698673439ba13e5fe3ecbc01f879",
+    "source/diagnostics/health_link.cpp": "7104dce7d62220344372ae3c52d8916fd1511c54933b689b487195fe0c894d6b",
+    "source/diagnostics/health_link.hpp": "c8437a20eea17d8d8462095ea9909e04ee3d2f94d087d776a7988663a42801fd",
+    "source/diagnostics/oracle_probe_x11.cpp": "fbef9a7c76e0c291e88905dfdcc1e5ff12380bdbe68c9aba87360cb1b97649b8",
+    "source/diagnostics/preservation_job.cpp": "432c9f6dc5def54e20ba4576fcf7b998812e120d3dd669dcfbac360077049476",
+    "source/diagnostics/preservation_job.hpp": "6d90739d0ce70c28a3bb815e7292f2623d9e7441ff746f7813819e2722705454",
+    "source/diagnostics/recovery.cpp": "33f725661262c9888920892c1e77060999682b79d1f5b24e14e8cbfc57fdaaa6",
+    "source/diagnostics/recovery.hpp": "746295ce4ecaede329e6c6f44f378a9e96e92217b808ec0279bea9f0cfb14301",
+    "source/platform/child.hpp": "266297cb253ba93b1c73c6a6a28218721e3277c21ffc725c84cd8866012be5aa",
+    "source/platform/child_linux.cpp": "46d26731c0c2ddf873265c008f0b25a17aef8f0cdf3f52ac16e2db6458686bfc",
+    "source/platform/child_windows.cpp": "3385dc40dd91341951a2039cb5f722f2ce069a7b824e2eb91059b9a180fcb864",
+    "source/platform/failure_store.cpp": "40d6423341dc8ef0733592049532d1033805aaf1d85a486f323cdc23e062233d",
+    "source/platform/failure_store.hpp": "b9cf5b5c7394c036a054cff3604facf688935f69a6f256540a40f953e4e12cf6",
+    "source/platform/local_ipc.hpp": "ef8a2fc5719f92b04e308a7766d3ee2d8994f2a926a78acb2cd766e25128c4cd",
+    "source/platform/local_ipc_linux.cpp": "d045fee05d8bbed3db0e7e773f735e595f9a951779564f39248ebc5cb558537e",
+    "source/platform/local_ipc_windows.cpp": "fb8f5ee68f2c605583509275438723ed0613a8affbaa250bd00aa0d5fd07c593",
+    "source/platform/machine_policy.hpp": "e12c51cdaeb3806e4813098fbfb8db7a181beb338b6623492c29165c0c0da5bb",
+    "source/platform/machine_policy_linux.cpp": "34925aa2d0173782a0a132413b3bddf2c4db25098575699b0f94193154094c16",
+    "source/platform/machine_policy_windows.cpp": "3ec13d9fe46b5e39a3c077de9620e051879155f9eba782e542de558e90b53653",
+    "source/platform/preservation.hpp": "1d4525eaec593c5dd1dbbfcd4abf347596422ffb01b27312b666f04a4afc7600",
+    "source/interfaces/diagnostic_inspector.hpp": "d5ca073d485ae2b5caef308669dd30111aa7b963f6e5f0b5b63edd49183561ce",
+    "source/interfaces/diagnostic_inspector_linux.cpp": "78b5e2af65a1523a11167a1847ac59d8f6dc780a94533569bb2495638fd7afd3",
+    "source/interfaces/diagnostic_inspector_windows.cpp": "1e2545082854f23cf8e1c1311e2923ed736a71ddce0e9f1eb7cd0d9267c32a20",
+    "source/configuration/policy.cpp": "28e53f88449cb2ff4c85e0a26c0a2dbe4fa85ca7d037a3df6a299cf2cb03df87",
+    "source/configuration/policy.hpp": "966822971245eedbde662b08987da8519cd71011b5620bb385a47b161e93e36a",
+    "source/configuration/session.cpp": "4fd0960477b8774abf6d8e11d2d39b55685038bf90e1906357b6e15f04880262",
+    "source/configuration/session.hpp": "dd6c99d7ba5686ed6d41811a7df4a23cd0afcd60f99b35e77e45d5ad2c9a9db7",
+    "source/application/diagnostic.cpp": "81b62b18db1c41c7be82c66f08085f2ae49c0784d0a72dd918f3600ee2668653",
+    "source/application/ipc_probe.cpp": "542f0120ce61069f0b8564cda9aef04e196333b5dce68be17481a5fef2104419",
+    "source/application/model_smoke.cpp": "5752a655511f83b1635d4e77c00274f0952145680d5a540d8bfec0b6e4386137",
+    "source/application/recovery_probe.cpp": "beb4c4cc09813afcd8afbe56ec46dde9c523386d0eb20bb6e41d20ded51f6249",
+    "tests/fault/native_preservation.py": "96d91d6eb5e56a4d7de7f1eb583925872beba2ad7bd5f43d435629002f45c363",
+    "tests/fault/preservation_tests.cpp": "e808386ce2e5b5a4d84c98540ece4ebaeaea8354d9bbf6eea0b8a6b7129e981c",
+    "tests/fault/native_diagnostic.py": "aab3f07a8a823412ab78fb49ae31d45ac764c85554c7580d07e01838e8bfcb72",
+    "spec/delivery/packages/w-25-preservation.md": "65486cb1ffecf047fae8f54f7ae7064d990df3a21b8fa9a71bb37e9df0d6467b"
+  },
+  "failure": "AssertionError: {'command': ['D:\\\\Projects\\\\SysPane\\\\syspane\\\\out\\\\build\\\\windows-x64-gcc15\\\\syspane_preservation_tests.exe', 'copy', 'D:\\\\Projects\\\\SysPane\\\\syspane\\\\out\\\\build\\\\windows-x64-gcc15\\\\native-evidence\\\\preservation-6a88c8122ca8\\\\broken-\u03bb.bin', 'D:\\\\Projects\\\\SysPane\\\\syspane\\\\out\\\\build\\\\windows-x64-gcc15\\\\native-evidence\\\\preservation-6a88c8122ca8\\\\copy-\u03bb.bin'], 'exit': 0, 'stdout': '{\"durable\":false,\"outcome\":\"source_unavailable\",\"partial\":false}\\r\\n', 'stderr': ''}",
+  "fixture_files": {
+    ".syspane-owner.json": {
+      "bytes": 31,
+      "sha256": "2bcb134bd587f0d5d04a735af53e31690fc3657bc7c50da42388904a8df85761"
+    },
+    "broken-\u03bb.bin": {
+      "bytes": 131100,
+      "sha256": "df3f3d34700e389546674e39b19be6fea17f0976b62143d3a8f4ceeada563a67"
+    }
+  }
+}

@@ -1,5 +1,30 @@
 # Developer setup and checks
 
+The latest [preservation checkpoint](../../spec/delivery/preservation-handoff.md)
+passes 59 Windows, 60 Linux and 55 historical-toolset host CTest entries. Earlier
+counts below describe their named historical checkpoints.
+
+The modern diagnostic's native source/destination fields and
+`--preserve <absolute-source> <absolute-destination>` request an explicit private
+opaque copy. Mandatory policy must be available and permit
+`diagnostic.preserve_configuration`; CLI acknowledgement requires public/export,
+and path controls require operational inspector/accessibility permission. No local
+switch installs or overrides policy. An unavailable policy disables these controls.
+The source is never parsed or activated. Existing destination/`.partial` names are
+conflicts, failed partials are retained, and the acknowledgement always reports
+`durable:false`. See the [contract](../../spec/delivery/packages/w-25-preservation.md)
+for limits and exit codes. This is not a configuration restore or support export.
+
+Run `ctest --preset windows-x64-gcc15 -R 'PRESERVE' --output-on-failure` for the
+portable policy predicate and native file/UI family. Linux's ordinary `test` action
+runs the same cases. Native UI tests use typed policy fixtures in a separate test
+executable; they programmatically activate the same Win32/GTK controls without
+changing machine policy. Linux uses an owned authenticated Xvfb server. Preserve
+failures and unexecuted privilege/filesystem cases. Record a complete final run with
+`build-support/record_protocol.py --preservation --profile <profile> --build-dir
+<build> --output <record>`. Historical recording accepts `--preservation` for the
+portable predicate only; its file/UI adapters stay disabled.
+
 The repository builds the C++17 model, portable protocol/configuration libraries
 and a deterministic development smoke program. A usable desktop application
 remains pending. Use the pinned tools in

@@ -502,7 +502,8 @@
         "syspane_diagnostic",
         "syspane_machine_policy",
         "syspane_diagnostic_inspector",
-        "syspane_failure_store"
+        "syspane_failure_store",
+        "syspane_preservation_job"
       ],
       "target_requirements": [
         "cxx17"
@@ -603,7 +604,8 @@
       "type": "STATIC_LIBRARY",
       "source_owner": "source/platform/",
       "public_interfaces": [
-        "source/platform/failure_store.hpp"
+        "source/platform/failure_store.hpp",
+        "source/platform/preservation.hpp"
       ],
       "private_interfaces": [],
       "sources": [
@@ -639,6 +641,61 @@
       ],
       "allowed_dependencies": [
         "syspane_failure_store"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "windows-x64-gcc15",
+        "linux-x64-gcc13"
+      ]
+    },
+    {
+      "id": "preservation-job",
+      "target": "syspane_preservation_job",
+      "type": "STATIC_LIBRARY",
+      "source_owner": "source/diagnostics/",
+      "public_interfaces": [
+        "source/diagnostics/preservation_job.hpp"
+      ],
+      "private_interfaces": [],
+      "sources": [
+        "source/diagnostics/preservation_job.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_failure_store",
+        "Threads::Threads"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "diagnostic"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "windows-x64-gcc15",
+        "linux-x64-gcc13"
+      ]
+    },
+    {
+      "id": "preservation-tests",
+      "target": "syspane_preservation_tests",
+      "type": "EXECUTABLE",
+      "source_owner": "tests/fault/",
+      "public_interfaces": [],
+      "private_interfaces": [],
+      "sources": [
+        "tests/fault/preservation_tests.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_preservation_job",
+        "syspane_diagnostic_inspector",
+        "PkgConfig::GTK3"
       ],
       "target_requirements": [
         "cxx17"

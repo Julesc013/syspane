@@ -12,7 +12,7 @@ sp_requires: ["SP-PROCESSES", "SP-PERFORMANCE"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-AUDIT-2026-10-04"]
 sources: [{"id": "SRC-AUDIT-2026-10-04", "resource": "User-supplied SysPane audits and design reviews, 2026-10-04", "title": "October specification review inputs"}]
-updated: {"by": "codex", "at": "2026-10-06T05:56:27+11:00", "scope": "Bounded recent-failure metadata checkpoint; preservation and visible recovery remain open"}
+updated: {"by": "codex", "at": "2026-10-06T06:33:18+11:00", "scope": "Explicit private preservation checkpoint; native qualification and visible recovery remain open"}
 ---
 
 # Independent recovery and bounded failure
@@ -74,7 +74,10 @@ The [recent-failure boundary](../delivery/packages/w-25-failure-metadata.md) def
 bounded advisory records, explicit file ownership, interrupted input and current
 operational disclosure for the independent diagnostic path. Its native probe
 integration does not define product retention, grant process-control authority or
-replace the still-required configuration-preservation and visible-recovery work.
+replace visible-recovery work. The [preservation boundary](../delivery/packages/w-25-preservation.md)
+now defines explicit opaque private copies, policy/cancellation, source consistency
+and no-replace publication. Its [checkpoint](../delivery/preservation-handoff.md)
+does not establish configuration repair, activation or power-loss durability.
 
 Tests freeze the producer, stall rendering, corrupt optional content, remove storage,
 revoke policy and exhaust optional work. Recovery reports measure elapsed time and

@@ -31,7 +31,10 @@ def main():
     parser.add_argument('--diagnostic', action='store_true', help='Require independent diagnostic entry and native close checks')
     parser.add_argument('--oracle', action='store_true', help='Require portable temporal oracle and Linux native pixel calibration')
     parser.add_argument('--failure-metadata', action='store_true', help='Require bounded failure metadata and all current native regression families')
+    parser.add_argument('--preservation', action='store_true', help='Require explicit private file preservation and native UI bindings')
     args = parser.parse_args()
+    if args.preservation:
+        args.failure_metadata = True
     if args.failure_metadata:
         args.oracle = True
     if args.oracle:
@@ -67,6 +70,8 @@ def main():
             expected.add('native.ORACLE-01')
     if args.failure_metadata:
         expected |= {'diagnostic.FAILURE-CODEC', 'diagnostic.FAILURE-INTERRUPT', 'diagnostic.FAILURE-PROJECTION', 'native.FAILURE-STORE'}
+    if args.preservation:
+        expected |= {'diagnostic.PRESERVE-POLICY', 'native.PRESERVE'}
     if len(cases) != len(expected) or {case['case'] for case in cases} != expected or any(case['outcome'] != 'pass' for case in cases):
         raise ValueError('missing, repeated, unexpected or failing case; preserve log before rerun')
     suffix = '.exe' if platform.system() == 'Windows' else ''
@@ -108,6 +113,15 @@ def main():
                                          'INTERRUPTED-INVALID', 'OVERSIZE', 'HARDLINK', 'PATH-TYPE',
                                          'WINDOWS-PRIVATE-DACL' if suffix else 'POSIX-PERMISSIONS-LINK-FIFO'}
         seen = set()
+        if args.preservation:
+            for name in ('syspane_preservation_tests'+suffix, 'libsyspane_preservation_job.a'):
+                artifacts[name] = {'sha256': sha(build/name), 'bytes': (build/name).stat().st_size}
+            required['PRESERVE'] = {'BINARY-UNICODE-PRIVATE', 'EXACT-NAMES', 'EMPTY', 'EXISTING-NAMES', 'PATH-TYPE', 'POLICY-CANCEL-PHASES',
+                'PUBLICATION-COLLISION', 'STAGING-COLLISION', 'HARDLINK', 'EXTERNAL-TERMINATION', 'REAL-CLI-DENIAL',
+                'UI-COPY', 'UI-CLOSE', 'UI-REVOKE', 'UI-CANCEL', 'SIZE-BOUNDARY',
+                'WRITER-SHARING-DACL' if suffix else 'SOURCE-CHANGE-PERMISSIONS-FIFO'}
+            if not suffix:
+                required['PRESERVE'].add('LEAF-LINKS')
         for name in re.findall(r'^Native evidence: (.+)$', raw, re.M):
             path = Path(name.strip()).resolve()
             if not path.is_relative_to(build/'native-evidence'):
@@ -118,6 +132,11 @@ def main():
                 raise ValueError('unknown/repeated native family')
             seen.add(family)
             expected_cases = {family+'.'+case for case in required[family]}
+            if family == 'PRESERVE' and suffix:
+                if any(case['case'] == 'PRESERVE.LEAF-LINKS' for case in native['cases']):
+                    expected_cases.add('PRESERVE.LEAF-LINKS')
+                elif 'Windows symlink creation privilege unavailable; source/dangling reparse cases not executed.' not in native['limitations']:
+                    raise ValueError('Windows preservation link case needs execution or its exact privilege limitation')
             if args.failure_metadata and family == 'FAILURE-STORE' and suffix:
                 if any(case['case'] == 'FAILURE-STORE.WINDOWS-REPARSE' for case in native['cases']):
                     expected_cases.add('FAILURE-STORE.WINDOWS-REPARSE')
@@ -125,8 +144,10 @@ def main():
                     raise ValueError('Windows reparse case must execute or retain its exact privilege limitation')
             if native['outcome'] != 'pass' or len(native['cases']) != len(expected_cases) or {case['case'] for case in native['cases']} != expected_cases or any(case['outcome'] != 'pass' for case in native['cases']):
                 raise ValueError('native case missing or failed; preserve original report')
-            if family in ('RECOVERY-01', 'DIAG-01', 'ORACLE-01', 'FAILURE-STORE'):
-                executable = {'RECOVERY-01':'SysPane.RecoveryProbe'+suffix, 'DIAG-01':'SysPane.Diag.exe' if suffix else 'syspane-diag', 'ORACLE-01':'SysPane.OracleProbe', 'FAILURE-STORE':'syspane_failure_store_tests'+suffix}[family]
+            if family in ('RECOVERY-01', 'DIAG-01', 'ORACLE-01', 'FAILURE-STORE', 'PRESERVE'):
+                executable = {'RECOVERY-01':'SysPane.RecoveryProbe'+suffix, 'DIAG-01':'SysPane.Diag.exe' if suffix else 'syspane-diag', 'ORACLE-01':'SysPane.OracleProbe', 'FAILURE-STORE':'syspane_failure_store_tests'+suffix, 'PRESERVE':'syspane_preservation_tests'+suffix}[family]
+                if family == 'PRESERVE' and native['diagnostic_sha256'] != sha(build/('SysPane.Diag.exe' if suffix else 'syspane-diag')):
+                    raise ValueError('preservation CLI artifact changed after run')
                 if native['executable_sha256'] != sha(build/executable):
                     raise ValueError('native executable changed after run')
                 for source, digest in native['source_inputs'].items():
@@ -185,6 +206,8 @@ def main():
         paths.extend([ROOT/'spec/delivery/packages/w-02-desktop-oracle.md', ROOT/'spec/assurance/desktop-oracle.md'])
     if args.failure_metadata:
         paths.append(ROOT/'spec/delivery/packages/w-25-failure-metadata.md')
+    if args.preservation:
+        paths.append(ROOT/'spec/delivery/packages/w-25-preservation.md')
     for directory in ('source', 'tests', 'build-support', 'spec/contracts'):
         paths.extend(sorted((ROOT/directory).rglob('*')))
     inputs = {p.relative_to(ROOT).as_posix(): sha(p) for p in paths
@@ -267,6 +290,17 @@ def main():
             'Windows symlink/reparse creation may remain unexecuted under current privileges; the native report preserves the exact limitation.',
             'Configuration preservation, real renderer/data recovery and independent editor exit remain required W-25 work.',
             'Oracle captures remain owned Xvfb calibration; no new desktop or historical OS qualification, privileged action or public release is attested.'
+        ]
+    if args.preservation:
+        report.update(work_id='W-25', slice='explicit private configuration preservation and native controls', work_status='in_progress')
+        report['bindings']['preservation'] = 'spec/delivery/packages/w-25-preservation.md'
+        report['limits'] = [
+            'Opaque preservation never repairs, activates or restores configuration; file flush/readback is not power-loss durability.',
+            'Native UI success/revocation/cancellation uses typed policy fixtures and programmatic widgets; installed positive policy and external accessibility/input qualification remain pending.',
+            'Foreign-owner and unsupported-filesystem execution remain unqualified; Windows leaf-link privilege limitations are preserved explicitly.',
+            'Actual unavailable-policy CLI denies without creating copy/partial files; no protected policy was installed or changed.',
+            'W-25 product retention, live telemetry/renderer recovery, payload revocation and independent editor exit remain open.',
+            'No desktop host, historical OS, privileged action or public release is attested.'
         ]
     args.output.parent.mkdir(parents=True, exist_ok=True)
     log_output.write_text(raw.replace(str(build), '<build>').replace(str(ROOT), '<source>'), encoding='utf-8', newline='\n')

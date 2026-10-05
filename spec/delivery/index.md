@@ -15,6 +15,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Native local IPC implementation handoff](native-transport-handoff.md) — Bind W-24's Windows and Linux adapter gate to real process and stream evidence.
 - [Open decisions, risks and resolving experiments](open-questions.md) — Keep unresolved choices discoverable without blocking unrelated work.
 - [Independent temporal oracle implementation checkpoint](oracle-handoff.md) — Bind external marker/time evaluation and native X11 fault calibration to source and raw capture evidence.
+- [Explicit private preservation checkpoint](preservation-handoff.md) — Bind opaque configuration copies, native controls and interrupted publication to measured development evidence.
 - [Portable recovery implementation checkpoint](recovery-handoff.md) — Record lease, render-progress and restart decisions while preserving native recovery gates.
 - [Greenfield implementation campaign](roadmap.md) — Build native vertical slices and contracts together in risk order.
 - [Native child supervision implementation checkpoint](supervision-handoff.md) — Bind owned-child lifetime and independent health decisions to Windows/Linux fault evidence.

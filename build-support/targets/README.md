@@ -1,5 +1,11 @@
 # Foundation development profiles
 
+Current revisions are Windows x64 9, Linux x64 10 and historical x86 3. The
+[preservation checkpoint](../../spec/delivery/preservation-handoff.md) records
+59/60 modern checks and 55 historical host checks. Native opaque copy/UI adapters
+are enabled only in modern profiles; historical evidence covers the portable
+policy predicate. Earlier revision/count statements below remain historical.
+
 These profiles build the typed model and development smoke program. They do not
 qualify a desktop host or release. Exact installed compiler, frontend, static
 runtime archives, CMake and Ninja fingerprints are in the corresponding lock.

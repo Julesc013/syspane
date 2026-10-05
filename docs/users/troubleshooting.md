@@ -6,9 +6,18 @@ a small JSON report of the compiled build/profile and policy availability. It st
 without the main controller, scenes/themes, providers, custom renderer, persistent
 history or setup provider. No downloadable product release is available yet.
 
-The current inspector has Close and Escape; it reads no application configuration
-and offers no repair, reset, preservation or support-bundle action yet. Missing or
-unusable mandatory policy permits public diagnostic facts only. Available policy
+The inspector offers source and new-copy path fields, Preserve copy, Cancel copy,
+Close and Escape. Preservation copies the selected file privately without parsing,
+repairing or activating it. Select a new destination in an existing directory;
+existing files and partial copies are never replaced. Interrupted copies may leave
+a `.partial` file, which is not reported as a completed copy. Copies can contain
+the original file's private data. This feature has no power-loss durability claim.
+
+Missing or unusable mandatory policy permits public diagnostic facts only and
+disables preservation. Available policy must allow preservation and display of the
+selected paths. The CLI equivalent is `--preserve <absolute-source> <absolute-destination>`;
+it returns a fixed outcome without printing paths or file contents. No repair,
+reset, restore or support-bundle action is implemented yet. Available policy
 can restrict report or inspector disclosure. The Linux report works without a
 display server; the native inspector needs the development profile's GTK/display.
 

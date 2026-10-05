@@ -154,6 +154,22 @@ void failure_policy() {
     p.denied_capabilities.insert("projection.export");
     require(!diag::report(p, "linux-x64-gcc13", loader) && reads == 2);
 }
+void preserve_policy() {
+    cfg::Policy p;
+    require(!diag::preservation_permitted(p, 0, false) && !diag::preservation_permitted(p, 0, true));
+    p.available = true; p.revision = 17;
+    require(diag::preservation_permitted(p, 17, false) && !diag::preservation_permitted(p, 17, true));
+    p.disclosure[{"diagnostic", "inspector"}] = {"public", "operational"};
+    require(!diag::preservation_permitted(p, 17, true));
+    p.disclosure[{"diagnostic", "accessibility"}] = {"public", "operational"};
+    require(diag::preservation_permitted(p, 17, true) && !diag::preservation_permitted(p, 16, true));
+    p.denied_capabilities.insert("diagnostic.preserve_configuration");
+    require(!diag::preservation_permitted(p, 17, true) && !diag::preservation_permitted(p, 17, false));
+    p.denied_capabilities.clear(); p.disclosure[{"diagnostic", "export"}] = {};
+    require(!diag::preservation_permitted(p, 17, false) && diag::preservation_permitted(p, 17, true));
+    p.denied_capabilities.insert("projection.accessibility");
+    require(!diag::preservation_permitted(p, 17, true));
+}
 int main(int argc, char** argv) {
     try {
         if (argc != 2) return 2;
@@ -163,6 +179,7 @@ int main(int argc, char** argv) {
         else if (name == "FAILURE-CODEC") failure_codec();
         else if (name == "FAILURE-INTERRUPT") failure_interrupt();
         else if (name == "FAILURE-PROJECTION") failure_policy();
+        else if (name == "PRESERVE-POLICY") preserve_policy();
         else return 2;
         std::cout << name << ": pass\n";
         return 0;

@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-06T05:56:27+11:00", "scope": "Bounded recent-failure metadata checkpoint; preservation and visible recovery remain open"}
+updated: {"by": "codex", "at": "2026-10-06T06:33:18+11:00", "scope": "Explicit private preservation checkpoint; native qualification and visible recovery remain open"}
 ---
 
 # Current state and next admitted boundary
@@ -92,9 +92,15 @@ their test scope/usability and actual XP/7 execution remain unproven.
 
 The [recent-failure checkpoint](failure-metadata-handoff.md) now connects the real
 recovery probe to bounded private metadata and independent policy-gated diagnosis.
-Current suites pass 57 Windows, 58 Linux and 54 historical-toolset host entries.
-The historical native file adapter remains disabled. Configuration preservation,
-product retention, protected-policy deployment and real visible recovery stay open.
+That checkpoint passes 57 Windows, 58 Linux and 54 historical-toolset host entries.
+The historical native file adapter remains disabled.
+
+The [preservation checkpoint](preservation-handoff.md) adds explicit private opaque
+copies, current-policy checks, cancellation, no-replace publication and Win32/GTK
+controls. Current suites pass 59 Windows, 60 Linux and 55 historical host entries.
+Positive native UI policy uses typed fixtures; protected-policy deployment,
+foreign-owner/unsupported-filesystem qualification, product retention and real
+visible recovery remain open. No configuration is parsed, repaired or activated.
 
 Canonical 0.2.0 documentation bundle, unchanged 0.1 authoring profile, preserved old
 fixtures, new experimental scene/command/capability 0.2 and admission descriptors.
@@ -123,8 +129,8 @@ traces remain unexecuted.
 ## Not implemented or qualified
 
 No native controller, renderer, collector, product settings/editor, saver, SDK,
-setup adapter or complete product package exists. The independent read-only diagnostic
-executable/inspector is implemented on the two development profiles. No native desktop/saver/performance/
+setup adapter or complete product package exists. The independent diagnostic
+executable/inspector, with explicit policy-gated private preservation, is implemented on the two development profiles. No native desktop/saver/performance/
 accessibility/setup qualification ran. Test definitions stay `not_run`; concepts stay
 draft/unreviewed and experimental contracts stay experimental. AIDE's binding remains
 inactive with no grants. USK and ScreenSave are not adopted runtime dependencies.
@@ -139,8 +145,8 @@ historical guest execution once guest test scope and usability are established.
 W-05 needs a composition strategy that actually preserves icon pixels; its initial
 EWMH window stacking candidates fail that requirement. Continue other native tracks
 independently of this negative result.
-Extend W-25 diagnostics with explicit configuration preservation and product
-failure-log retention. Close those input/ownership contracts and full-snapshot/data recovery
+Extend W-25 with product failure-log retention and full-snapshot/data recovery.
+Close those input/ownership contracts
 before enabling the associated features. Qualify protected policy in an admitted lab.
 Connect the build/component/target consumers and minimum command/IPC/policy/recovery
 slice. Probe contemporary Windows, XP/7, Linux and AppKit/older OS X independently.

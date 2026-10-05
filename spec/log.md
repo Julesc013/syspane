@@ -37,3 +37,5 @@
 - **Provenance**: Marked historical Desktop Info and unsupported universal-performance claims superseded.
 - **Tooling**: Added local validation, schemas/fixtures, traceability, context routes and non-overwriting bootstrap.
 - **Boundary**: Native SysPane implementation and platform qualification remain unexecuted.
+
+- 2026-10-06: Added W-25 explicit private configuration preservation/native controls, bounded worker cancellation and exact-name/no-replace checks; preserved Windows rename/permission and Linux fixture failures. Current modern suites 59/60 and historical host suite 55; deployment, unsupported-filesystem and visible-recovery qualifications remain open.

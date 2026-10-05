@@ -1,0 +1,125 @@
+{
+  "schema_version": "0.1.0",
+  "work_id": "W-25",
+  "source_ref": "ee2ac9617ded2959efc9bf0499b72ccd8be1e6ee",
+  "objective": "Preserve explicitly selected damaged configuration as a private opaque file with current policy, bounded cancellation and no replacement of existing names.",
+  "changed_files": [
+    "CMakeLists.txt",
+    "README.md",
+    "TODO.md",
+    "build-support/components.json",
+    "build-support/evidence/preservation-handoff.json",
+    "build-support/evidence/w-25-preservation-attempts.json",
+    "build-support/evidence/w-25-preservation-failed-owner-rights.json",
+    "build-support/evidence/w-25-preservation-failed-rename-name.json",
+    "build-support/evidence/w-25-preservation-linux-x64-gcc13.DIAG-01.json",
+    "build-support/evidence/w-25-preservation-linux-x64-gcc13.FAILURE-STORE.json",
+    "build-support/evidence/w-25-preservation-linux-x64-gcc13.NATIVE-01.json",
+    "build-support/evidence/w-25-preservation-linux-x64-gcc13.NATIVE-02.json",
+    "build-support/evidence/w-25-preservation-linux-x64-gcc13.ORACLE-01.json",
+    "build-support/evidence/w-25-preservation-linux-x64-gcc13.PRESERVE.json",
+    "build-support/evidence/w-25-preservation-linux-x64-gcc13.RECOVERY-01.json",
+    "build-support/evidence/w-25-preservation-linux-x64-gcc13.ctest.txt",
+    "build-support/evidence/w-25-preservation-linux-x64-gcc13.json",
+    "build-support/evidence/w-25-preservation-verification.json",
+    "build-support/evidence/w-25-preservation-windows-x64-gcc15.DIAG-01.json",
+    "build-support/evidence/w-25-preservation-windows-x64-gcc15.FAILURE-STORE.json",
+    "build-support/evidence/w-25-preservation-windows-x64-gcc15.NATIVE-01.json",
+    "build-support/evidence/w-25-preservation-windows-x64-gcc15.NATIVE-02.json",
+    "build-support/evidence/w-25-preservation-windows-x64-gcc15.PRESERVE.json",
+    "build-support/evidence/w-25-preservation-windows-x64-gcc15.RECOVERY-01.json",
+    "build-support/evidence/w-25-preservation-windows-x64-gcc15.ctest.txt",
+    "build-support/evidence/w-25-preservation-windows-x64-gcc15.json",
+    "build-support/evidence/w-25-preservation-windows-x86-v141-xp.ctest.txt",
+    "build-support/evidence/w-25-preservation-windows-x86-v141-xp.json",
+    "build-support/evidence/w-25-preservation-windows-x86-v141-xp.smoke.json",
+    "build-support/record_legacy_build.py",
+    "build-support/record_protocol.py",
+    "build-support/targets/README.md",
+    "build-support/targets/linux-x64-gcc13.json",
+    "build-support/targets/windows-x64-gcc15.json",
+    "build-support/targets/windows-x86-v141-xp.json",
+    "docs/developers/build.md",
+    "docs/users/troubleshooting.md",
+    "source/application/diagnostic.cpp",
+    "source/diagnostics/entry.cpp",
+    "source/diagnostics/entry.hpp",
+    "source/diagnostics/preservation_job.cpp",
+    "source/diagnostics/preservation_job.hpp",
+    "source/interfaces/diagnostic_inspector.hpp",
+    "source/interfaces/diagnostic_inspector_linux.cpp",
+    "source/interfaces/diagnostic_inspector_windows.cpp",
+    "source/platform/failure_store.cpp",
+    "source/platform/preservation.hpp",
+    "spec/architecture/recovery.md",
+    "spec/checksums.json",
+    "spec/delivery/current-state.md",
+    "spec/delivery/implementation-readiness.md",
+    "spec/delivery/index.md",
+    "spec/delivery/packages/index.md",
+    "spec/delivery/packages/w-25-preservation.md",
+    "spec/delivery/preservation-handoff.md",
+    "spec/delivery/work-units.json",
+    "spec/generated/catalog.json",
+    "spec/log.md",
+    "tests/fault/diagnostic_tests.cpp",
+    "tests/fault/native_preservation.py",
+    "tests/fault/preservation_tests.cpp"
+  ],
+  "decisions": [
+    "Opaque same-user input limited to 8 MiB; read-only foreign access is allowed, foreign non-administrative write access is rejected.",
+    "Pin available policy revision and recheck capability/disclosure during bounded transfers and immediately before publication.",
+    "Exclusive owner-private partial, flush/readback/source verification and atomic no-replace publication; retain failed partials without claiming power-loss durability.",
+    "Native path controls own one worker; policy revocation clears fields, Cancel/Close remain usable, and process exit bounds blocked storage work.",
+    "Keep positive native UI policy in the test composition only; actual CLI uses protected policy with no override.",
+    "Preserve failed owner-rights/rename and Linux compiler-fixture observations; add exact-name cases without weakening collision/byte oracles."
+  ],
+  "checks": [
+    {
+      "name": "Windows complete suite: 59 CTest entries, 17 native preservation cases",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-25-preservation-windows-x64-gcc15.json"
+    },
+    {
+      "name": "Linux complete suite: 60 CTest entries, 18 native preservation cases",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-25-preservation-linux-x64-gcc13.json"
+    },
+    {
+      "name": "Historical-toolset host regression: 55 checks, unchanged PE/import closure and relocated model smoke",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-25-preservation-windows-x86-v141-xp.json"
+    },
+    {
+      "name": "Specification generation, schemas, tooling and integrity",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-25-preservation-verification.json"
+    },
+    {
+      "name": "Original failed attempts and native reports preserved",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-25-preservation-attempts.json"
+    },
+    {
+      "name": "Foreign-owner/unsupported-filesystem and unavailable Windows symlink privilege qualification",
+      "outcome": "not_run",
+      "evidence": "build-support/evidence/w-25-preservation-windows-x64-gcc15.PRESERVE.json"
+    }
+  ],
+  "open_questions": [
+    "Product failure-log data-root/retention and telemetry/full-snapshot/renderer recovery remain open.",
+    "Positive installed protected-policy deployment and foreign-owner/unsupported-filesystem execution need separately admitted laboratories.",
+    "External accessibility/input and independent native-editor exit/visible recovery remain unqualified.",
+    "Guest test scope/usability and Windows/macOS capture are unresolved; Linux desktop composition still fails its placement oracle."
+  ],
+  "next_step": "Close product retention and full-snapshot/data-recovery boundaries, implement dependency-ready pieces, and continue independently admitted native-host experiments without promoting blocked platform claims.",
+  "authority_used": [
+    "user:foundation-native-campaign-2026-10-05"
+  ],
+  "limitations": [
+    "W-25 and the campaign remain in progress; no complete product, desktop host or historical runtime is qualified.",
+    "Opaque preservation does not parse, repair, restore or activate configuration; durable remains false.",
+    "Native tests use owned synthetic files and hidden controls or a private authenticated Xvfb server; positive UI policy is a typed fixture.",
+    "No user configuration, existing guest VM or installed protected policy was changed; no privileged operation, public release, AIDE activation or human review is attested."
+  ]
+}
