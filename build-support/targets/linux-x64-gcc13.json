@@ -1,12 +1,12 @@
 {
   "schema_version": "0.1.0",
   "profile_id": "linux-x64-gcc13",
-  "revision": "2",
+  "revision": "3",
   "example_only": false,
   "os": {
     "family": "linux",
     "minimum_version": "Ubuntu-24.04-WSL2-kernel-6.18.40.1",
-    "api_floor": "glibc-2.39-Linux-x86_64"
+    "api_floor": "glibc-2.39-Linux-x86_64-SO_PEERPIDFD-procfs"
   },
   "cpu": {
     "architecture": "x86_64",
@@ -54,9 +54,12 @@
     "controls": []
   },
   "limitations": [
-    "Development model and portable protocol/policy checks only; native IPC, desktop and supported product qualification pending.",
-    "Exceptions and RTTI enabled; single-writer model, no concurrent publication or native clock adapter.",
+    "Development model, protocol/policy and native single-connection IPC probe only; desktop and supported product qualification pending.",
+    "Exceptions and RTTI enabled; single-writer model and controller; native monotonic deadline checks do not qualify telemetry clock semantics.",
     "Compiler/tool/archive fingerprints pin this installed environment; complete vendor archive and all header hashes are not available, so bit-for-bit reproduction is unproven.",
-    "Runtime floors are restricted to the observed host environment, not inferred backward compatibility."
+    "Runtime floors are restricted to the observed host environment, not inferred backward compatibility.",
+    "Native IPC is exercised without elevation; cross-user/logon and desktop-session qualification require separate laboratories.",
+    "Initial IPC probe permits one live connection and at most two sequential clients; telemetry subscriptions and persistent commits are disabled.",
+    "SO_PEERPIDFD is required; peer POSIX-session identity is a launched-process boundary, not a desktop-login-session claim."
   ]
 }

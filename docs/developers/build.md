@@ -26,12 +26,26 @@ Create a local Windows smoke archive and check relocation with:
 python build-support/package_smoke.py --profile windows-x64-gcc15 --build-dir out/build/windows-x64-gcc15
 ```
 
-Both profiles now run 35 checks: the original 18 model/smoke/component checks and
-17 portable protocol/policy checks. Run only the latter with
+Both profiles now run 37 CTest entries: the original 18 model/smoke/component checks,
+17 portable protocol/policy checks and two native IPC families. Run portable cases with
 `ctest --preset windows-x64-gcc15 -R '^protocol\.' --output-on-failure`.
 The original W-01 results remain historical; current case/artifact records are
-`build-support/evidence/w-24-portable-<profile>.json`. Native IPC authentication,
-desktop hosting, actual clock adapters and older OS qualification remain pending.
+`build-support/evidence/w-24-native-<profile>.json`. The two native families contain
+15 concrete Windows cases and 16 Linux cases, with raw process transcripts. Run
+them alone with `ctest --preset windows-x64-gcc15 -R '^native\.' --output-on-failure`.
+`SysPane.IpcProbe` is a finite development probe; it is not the SysPane product.
+Native tests take about 30 seconds because they execute real five-second deadlines.
+They open only private local endpoints, check unelevated execution, and use synthetic
+commands. Cross-user/Windows cross-logon qualification, desktop hosting, persistent
+commits and older OS qualification remain pending or blocked as recorded.
+
+Linux IPC tests require the measured kernel's SO_PEERPIDFD support and procfs. They
+create private directories below `~/.cache/syspane/ipc-w24/`, remove only their own
+socket and empty directory, and preserve unexpected entries for investigation.
+The real separate-POSIX-session denial case is not a desktop login-session claim.
+Per-attempt native JSON reports remain in the owned build's `native-evidence/`.
+The recorder's `--native` mode binds the exact reports named in the complete CTest
+log; it does not choose an arbitrary latest passing file.
 
 The protocol boundary vendors nlohmann/json 3.12.0 under its upstream MIT license.
 [Dependency identities](../../build-support/dependencies.json) pin the header and

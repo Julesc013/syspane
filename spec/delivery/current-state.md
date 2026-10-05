@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-06T00:26:58+11:00", "scope": "Portable W-24 implementation checkpoint; native IPC authentication and desktop qualification pending"}
+updated: {"by": "codex", "at": "2026-10-06T01:04:36+11:00", "scope": "Native W-24 implementation gate; cross-user/logon and desktop qualification not claimed"}
 ---
 
 # Current state and next admitted boundary
@@ -40,11 +40,11 @@ program. Eighteen checks passed on each profile. W-26's initial local archives
 passed relocated execution. [The handoff](foundation-handoff.md) identifies exact
 artifact/case records, failures and the next packages. No desktop claim follows.
 
-The next [portable transport checkpoint](transport-handoff.md) adds W-24 framing,
-strict JSON/negotiation, request replay/reservations, settings-preview policy,
-disclosure, output queues and connection state. Both development profiles now run
-35 checks. W-24 remains in progress: no native IPC adapter or OS authentication
-evidence exists yet. Its dependent units are not released by portable tests alone.
+The [native transport handoff](native-transport-handoff.md) completes W-24's initial
+development adapter gate after the [portable checkpoint](transport-handoff.md).
+Both profiles pass 37 CTest entries, including real local client/server families
+and OS peer checks. Cross-user/logon and desktop-session qualification remain
+blocked separately. Persistent commits and telemetry subscriptions stay disabled.
 
 Canonical 0.2.0 documentation bundle, unchanged 0.1 authoring profile, preserved old
 fixtures, new experimental scene/command/capability 0.2 and admission descriptors.
@@ -67,7 +67,7 @@ selected model/request/recovery expectations and a proposed cold-start exercise.
 The transport distinguishes in-flight requests from retained-result reservations.
 Model and request-budget traces now have executable bindings. W-24's
 [package](packages/w-24-transport.md) closes the portable preview boundary and
-records native integration still required. Persistent recovery and cold-start
+records its enabled native boundary and blocked qualification. Persistent recovery and cold-start
 traces remain unexecuted.
 
 ## Not implemented or qualified
@@ -81,8 +81,8 @@ License, contribution and release-identity decisions remain open.
 
 ## Next work
 
-Continue the admitted campaign: close and implement W-24's native local adapters
-and W-02's independent oracle. W-25 additionally requires W-24.
+Continue the admitted campaign: close and implement W-02's independent desktop
+oracle and W-25's producer leases, recovery and diagnostic path using W-24.
 Connect the build/component/target consumers and minimum command/IPC/policy/recovery
 slice. Probe contemporary Windows, XP/7, Linux and AppKit/older OS X independently.
 Package smoke builds early; each profile's usable vertical includes live network,

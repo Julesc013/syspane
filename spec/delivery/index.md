@@ -9,6 +9,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Current state and next admitted boundary](current-state.md) — An honest resumption point for the initial greenfield specification.
 - [Foundation implementation handoff](foundation-handoff.md) — Resume the admitted campaign from tested model builds and local smoke packages.
 - [Implementation readiness and gates](implementation-readiness.md) — Distinguish implemented specification checks from pending native and release work.
+- [Native local IPC implementation handoff](native-transport-handoff.md) — Bind W-24's Windows and Linux adapter gate to real process and stream evidence.
 - [Open decisions, risks and resolving experiments](open-questions.md) — Keep unresolved choices discoverable without blocking unrelated work.
 - [Greenfield implementation campaign](roadmap.md) — Build native vertical slices and contracts together in risk order.
 - [Build targets and qualification profiles](target-profiles.md) — Bind concrete runtime floors to evidence instead of inferring support from platform names.

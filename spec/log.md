@@ -1,6 +1,7 @@
 # SysPane specification update log
 
 ## 2026-10-06
+- **Native W-24 gate**: Added unelevated Windows/Linux local IPC adapters and a finite probe with independent process harness. Both profiles passed 37 CTest entries, including 15 Windows and 16 Linux concrete native cases; actual Linux POSIX-session denial is separate from blocked cross-user/logon/desktop-session qualification. W-02/W-25 and host experiments remain pending.
 - **W-24 checkpoint**: Closed and implemented portable framing, strict JSON, negotiation, request reservations, settings preview, disclosure, queues and connection states. Both Windows/Linux development profiles passed 35 checks; native IPC remains pending and W-24 stays in progress.
 - **Dependency**: Pinned nlohmann/json 3.12.0 with upstream MIT license and verified digests; model remains JSON-independent. Settings constraints project from the canonical registry.
 - **Evidence**: Added a source-bound transport handoff and separate per-profile results. No persistent commit, telemetry subscription, OS peer authentication, desktop qualification, project license or release is claimed.

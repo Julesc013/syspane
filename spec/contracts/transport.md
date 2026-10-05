@@ -12,7 +12,7 @@ sp_requires: ["SP-PROTOCOL", "SP-COMMANDS"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-AUDIT-2026-10-04", "resource": "User-supplied SysPane audits and design reviews, 2026-10-04", "title": "October specification review inputs"}]
-updated: {"by": "codex", "at": "2026-10-06T00:26:58+11:00", "scope": "Portable W-24 implementation checkpoint; native IPC authentication and desktop qualification pending"}
+updated: {"by": "codex", "at": "2026-10-06T01:04:36+11:00", "scope": "Native W-24 implementation gate; cross-user/logon and desktop qualification not claimed"}
 ---
 
 # Local transport and request lifecycle
@@ -94,8 +94,9 @@ test these distinctions without claiming complete transport conformance.
 
 The [W-24 package](../delivery/packages/w-24-transport.md) now records the initial
 preview profile's concrete global/queue budgets and message/state coverage. Its
-portable helpers are implemented; native peer and stream integration are still
-required. This preview slice conservatively retains preview IDs within the same
+portable helpers and initial Windows/Linux peer/stream integration now have
+executed development cases in the [native handoff](../delivery/native-transport-handoff.md).
+This preview slice conservatively retains preview IDs within the same
 reservation budget, with current-policy checks on retrieval and replay.
 
 Cancel before commit may abort preparation. After commit it cannot undo the accepted

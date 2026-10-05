@@ -54,3 +54,11 @@ configure experiment. The cache holds build products only, never a second source
 checkout. Configure checks containment under `~/.cache/syspane/`, writes an ownership
 marker and enforces the 1 GiB output budget. Preserve failure logs before cleaning
 an identified owned build root. The source and acceptance oracles are shared.
+
+Profile revision 3 adds `syspane_local_ipc` and `SysPane.IpcProbe`, with real
+Windows named-pipe and Linux Unix-socket tests. Windows adds ADVAPI32 imports for
+token/ACL inspection. Linux requires SO_PEERPIDFD and procfs in the measured WSL2
+environment; it does not infer an older kernel floor. Both profiles run 37 CTest
+entries. The probe is single-connection, synthetic and unelevated; cross-user/logon
+and desktop qualification are distinct blocked/pending claims. No product support
+or isolation tier is promoted by this development profile revision.

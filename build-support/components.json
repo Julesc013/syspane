@@ -2,6 +2,19 @@
   "version": "0.1.0",
   "components": [
     {
+      "id": "ipc-probe", "target": "syspane_ipc_probe", "type": "EXECUTABLE",
+      "source_owner": "source/application/", "public_interfaces": [], "private_interfaces": [],
+      "sources": ["source/application/ipc_probe.cpp"], "allowed_dependencies": ["syspane_local_ipc", "syspane_configuration", "syspane_protocol"],
+      "target_requirements": ["cxx17", "native_local_ipc"], "roles": ["development_test"], "installed_files": []
+    },
+    {
+      "id": "local-ipc", "target": "syspane_local_ipc", "type": "STATIC_LIBRARY",
+      "source_owner": "source/platform/", "public_interfaces": ["source/platform/local_ipc.hpp"],
+      "private_interfaces": [], "sources": ["source/platform/local_ipc_linux.cpp", "source/platform/local_ipc_windows.cpp"],
+      "allowed_dependencies": ["advapi32"], "target_requirements": ["cxx17", "native_local_ipc"],
+      "roles": ["development_test"], "installed_files": []
+    },
+    {
       "id": "json", "target": "syspane_json", "type": "INTERFACE_LIBRARY",
       "source_owner": "source/third_party/", "public_interfaces": ["source/third_party/nlohmann/json.hpp"],
       "private_interfaces": [], "sources": ["source/third_party/nlohmann/json.hpp"],

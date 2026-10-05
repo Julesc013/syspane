@@ -663,14 +663,15 @@
         "source/platform/",
         "source/configuration/",
         "tests/protocol/",
-        "build-support/dependencies.json"
+        "build-support/dependencies.json",
+        "source/application/ipc_probe.cpp"
       ],
-      "status": "in_progress",
+      "status": "complete",
       "authority_class": "development",
       "execution_grant": "user:foundation-native-campaign-2026-10-05",
-      "notes": "Portable frame/JSON/negotiation, request ledger, policy/preview, queue and connection-state checks implemented on Windows/Linux. Native IPC authentication/stream cases remain required; dependent W-25/host units are not released.",
+      "notes": "Initial Windows/Linux native local IPC and preview/policy gate implemented: 37 CTest entries per profile, including 15 Windows and 16 Linux concrete native cases. Cross-user/logon qualification remains blocked; durable commands/telemetry subscriptions stay disabled. W-25 and W-02/native-host integration remain separate work.",
       "package": "delivery/packages/w-24-transport.md",
-      "evidence": "delivery/transport-handoff.md"
+      "evidence": "delivery/native-transport-handoff.md"
     },
     {
       "id": "W-25",

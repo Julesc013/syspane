@@ -1,7 +1,7 @@
 {
   "schema_version": "0.1.0",
   "profile_id": "windows-x64-gcc15",
-  "revision": "2",
+  "revision": "3",
   "example_only": false,
   "os": {
     "family": "windows",
@@ -59,9 +59,11 @@
     "controls": []
   },
   "limitations": [
-    "Development model and portable protocol/policy checks only; native IPC, desktop and supported product qualification pending.",
-    "Exceptions and RTTI enabled; single-writer model, no concurrent publication or native clock adapter.",
+    "Development model, protocol/policy and native single-connection IPC probe only; desktop and supported product qualification pending.",
+    "Exceptions and RTTI enabled; single-writer model and controller; native monotonic deadline checks do not qualify telemetry clock semantics.",
     "Compiler/tool/archive fingerprints pin this installed environment; complete vendor archive and all header hashes are not available, so bit-for-bit reproduction is unproven.",
-    "Runtime floors are restricted to the observed host environment, not inferred backward compatibility."
+    "Runtime floors are restricted to the observed host environment, not inferred backward compatibility.",
+    "Native IPC is exercised without elevation; cross-user/logon and desktop-session qualification require separate laboratories.",
+    "Initial IPC probe permits one live connection and at most two sequential clients; telemetry subscriptions and persistent commits are disabled."
   ]
 }

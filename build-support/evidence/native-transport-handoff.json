@@ -1,0 +1,91 @@
+{
+  "schema_version": "0.1.0",
+  "work_id": "W-24",
+  "source_ref": "47cc01fdbbb02dcd5a9726dde1fd63ae068a4d1c",
+  "objective": "Complete the initial Windows/Linux local IPC and preview/policy implementation gate within the active foundation/native-experiment campaign.",
+  "changed_files": [
+    "CMakeLists.txt",
+    "README.md",
+    "TODO.md",
+    "build-support/components.json",
+    "build-support/evidence/native-transport-handoff.json",
+    "build-support/evidence/w-24-native-attempts.json",
+    "build-support/evidence/w-24-native-linux-x64-gcc13.NATIVE-01.json",
+    "build-support/evidence/w-24-native-linux-x64-gcc13.NATIVE-02.json",
+    "build-support/evidence/w-24-native-linux-x64-gcc13.ctest.txt",
+    "build-support/evidence/w-24-native-linux-x64-gcc13.json",
+    "build-support/evidence/w-24-native-spec-tests.txt",
+    "build-support/evidence/w-24-native-spec-validation.json",
+    "build-support/evidence/w-24-native-windows-x64-gcc15.NATIVE-01.json",
+    "build-support/evidence/w-24-native-windows-x64-gcc15.NATIVE-02.json",
+    "build-support/evidence/w-24-native-windows-x64-gcc15.ctest.txt",
+    "build-support/evidence/w-24-native-windows-x64-gcc15.json",
+    "build-support/record_protocol.py",
+    "build-support/targets/README.md",
+    "build-support/targets/linux-x64-gcc13.json",
+    "build-support/targets/windows-x64-gcc15.json",
+    "docs/developers/build.md",
+    "source/application/ipc_probe.cpp",
+    "source/platform/local_ipc.hpp",
+    "source/platform/local_ipc_linux.cpp",
+    "source/platform/local_ipc_windows.cpp",
+    "spec/checksums.json",
+    "spec/contracts/transport.md",
+    "spec/delivery/current-state.md",
+    "spec/delivery/implementation-readiness.md",
+    "spec/delivery/index.md",
+    "spec/delivery/native-transport-handoff.md",
+    "spec/delivery/packages/w-24-transport.md",
+    "spec/delivery/work-units.json",
+    "spec/generated/catalog.json",
+    "spec/log.md",
+    "tests/protocol/native_ipc.py"
+  ],
+  "decisions": [
+    "Native adapters authenticate OS user/session identity before protocol admission; expected-process restrictions are launcher inputs, not JSON authority.",
+    "Use a protected logon-SID Windows pipe ACL and Linux private pathname socket with SO_PEERCRED/SO_PEERPIDFD.",
+    "Use a finite single-connection probe with independent process harness; preserve full desktop and recovery requirements for their owning work units.",
+    "Cross-user and Windows cross-logon qualification remain blocked separately from executed development adapter cases."
+  ],
+  "checks": [
+    {
+      "name": "Windows development checks: 37 CTest entries, 15 concrete native cases",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-24-native-windows-x64-gcc15.json"
+    },
+    {
+      "name": "Linux development checks: 37 CTest entries, 16 concrete native cases",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-24-native-linux-x64-gcc13.json"
+    },
+    {
+      "name": "Specification schemas and fixtures",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-24-native-spec-validation.json"
+    },
+    {
+      "name": "Specification tools: 53 pass, 2 symlink privilege skips",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-24-native-spec-tests.txt"
+    },
+    {
+      "name": "Cross-user, Windows second logon and desktop-session qualification",
+      "outcome": "blocked",
+      "evidence": "spec/delivery/native-transport-handoff.md"
+    }
+  ],
+  "open_questions": [
+    "W-25 must close independent recovery, producer/surface leases and new role/feature admission before implementation.",
+    "W-02 must supply an external desktop oracle before native host acceptance; historical and Mac laboratories remain unresolved."
+  ],
+  "next_step": "Implement W-02/W-25 from their closed package boundaries, then run native host tracks independently; preserve unavailable-lab qualification as blocked.",
+  "authority_used": [
+    "user:foundation-native-campaign-2026-10-05"
+  ],
+  "limitations": [
+    "Synthetic preview commands only; no durable commit or telemetry subscription is enabled.",
+    "Native evidence is limited to the named Windows 10 and Ubuntu WSL2 development profiles; POSIX sessions are not desktop login sessions.",
+    "No native desktop/editor/collector/recovery product or public release is delivered by W-24.",
+    "Original Windows macro compile failure is preserved; no oracle was relaxed or privilege enabled."
+  ]
+}

@@ -12,16 +12,19 @@ sp_requires: ["SP-WORK-PACKAGES", "SP-TRANSPORT", "SP-POLICY"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-READINESS-2026-10-05", "SRC-JSON"]
 sources: [{"id": "SRC-READINESS-2026-10-05", "resource": "User-supplied readiness review, 2026-10-05", "title": "Implementation closure review"}]
+updated: {"by": "codex", "at": "2026-10-06T01:04:36+11:00", "scope": "Native W-24 implementation gate; cross-user/logon and desktop qualification not claimed"}
 ---
 
 # W-24 authenticated transport and policy boundary
 
 W-01's Windows/Linux model evidence is the prerequisite. The
 [campaign admission](../campaign-admission.md) covers ordinary implementation.
-W-24 remains incomplete until native peer checks, stream/state handling and policy
-integration pass, including the mandatory cases below. Portable helpers alone do
+W-24's implemented gate requires passing native peer, stream/state and policy
+integration checks, including the mandatory cases below. Portable helpers alone do
 not satisfy W-24 or release its dependent work. No service, external listener,
 elevation, privileged policy installation or release is admitted here.
+The [native handoff](../native-transport-handoff.md) records the current development
+gate and separates blocked cross-user/logon qualification from executed cases.
 
 ## Scope and ownership
 
@@ -155,6 +158,89 @@ must cancel uncommitted work, clear queued projections and revoke connection dem
 it does not erase committed generations or authorize purging retained files.
 
 ## Execution and acceptance
+
+### Native adapter closure
+
+The initial native test composition is `SysPane.IpcProbe`, not a product service.
+It runs one connection at a time and at most two sequential clients per invocation;
+the portable controller retains its 16-connection bound for later composition.
+The one-connection native limit is a declared development-profile tightening.
+The listener remains owned across reconnects; an existing endpoint is never removed
+or adopted. All native handles/descriptors are non-inheritable and RAII-owned.
+No thread mutates a live stream concurrently. Authentication failures close the
+stream before a protocol session/subscription or request record exists.
+
+Windows creates a byte-mode named pipe under `\\.\pipe\SysPane.Dev.<case-id>`
+with `FILE_FLAG_FIRST_PIPE_INSTANCE`, `PIPE_REJECT_REMOTE_CLIENTS`, one instance,
+overlapped I/O, and an explicit protected DACL for the current logon SID. The DACL
+grants only individual read/write/synchronize/query rights; client write access
+does not include `FILE_CREATE_PIPE_INSTANCE`. The first listener retains the object
+and disconnects/reuses it after each client. Client opens request identification
+SQOS, never delegation/impersonation authority. The server reads at most the first
+frame-prefix byte before identifying the pipe client token, immediately reverts
+the thread, and preserves that byte for the frame decoder. Failure to revert or
+drain cancelled kernel I/O is fatal to the probe process, not permission to continue
+with unsafe token/buffer lifetime. No privilege is enabled or account switched.
+
+Both Windows peers compare OS token user SID, token session ID and authentication
+LUID to their own context. Process IDs come from the named-pipe API, not the hello;
+a held process handle and identity query bind any expected-process restriction.
+Server-side client-token identification also checks the actual pipe security
+context, including impersonated client threads. The client verifies the server
+process token before writing. Any expected PID is supplied by the trusted launcher,
+and requested protocol roles can only narrow that launcher's role grants.
+
+Linux creates an AF_UNIX/SOCK_STREAM socket named `s` in a new private mode-0700
+directory under `~/.cache/syspane/ipc-w24/`; the socket is mode 0600 before listen.
+The harness owns that bounded directory. Native code verifies ownership, modes,
+absolute canonical paths and no final directory/socket symlink. It binds/cleans
+relative to a held directory descriptor and removes only the socket inode it
+created, never an existing entry. The public endpoint path must fit `sun_path`.
+Nonblocking I/O uses poll and MSG_NOSIGNAL, retrying EINTR within the same deadline.
+Both peers compare SO_PEERCRED UID and the peer POSIX session to their own. The
+current development profile requires SO_PEERPIDFD: keep that peer handle and check
+it is live around the session query so a recycled numeric PID cannot authenticate
+a different process. Missing support is an explicit unavailable adapter, not a
+fallback to caller-supplied credentials. This raises no claim for older Linux.
+
+Connect, accept/authentication and each complete write have absolute five-second
+deadlines; writes tighten the stalled-progress rule to a total operation bound.
+Read polling is at most 100 ms, and does not reset the frame or handshake clock.
+The server preserves connection/first-byte monotonic times through authentication.
+The decoder adopts the negotiated frame limit before consuming a coalesced next
+prefix. EOF and timeouts close only the current session; principal request records
+remain for a later authenticated reconnect within the controller epoch. Windows
+cancelled overlapped operations must finish before their buffers/events are freed;
+a one-second cancellation-drain guard terminates the probe if the OS fails to drain.
+An independent harness imposes a further process deadline and records termination.
+
+The native runner checks an unelevated Windows token or a non-root Linux identity
+with no effective capabilities before opening the probe endpoint. This is a
+read-only context check; it does not remove, enable or switch privileges.
+The native runner launches hidden finite probe processes, uses synthetic commands
+only, records exit codes and exact observed replies, and removes only its empty
+runtime directory after socket cleanup. It must retain failure logs before cleanup.
+NATIVE-01 covers real fragmented/coalesced hello/preview, reconnect/result retrieval
+including a client that closes before reading the preview result,
+partial EOF, malformed frame, handshake/frame/write timeouts and negotiated bounds.
+Its saturation case completes 128 distinct previews, requires the 129th to return
+busy, then retrieves/cancels the first retained request and exchanges a heartbeat
+without another reservation. Thus native control progress is tested while new
+requests are blocked, in addition to testing a stalled kernel writer.
+NATIVE-02 covers kernel-derived identity on both peers, endpoint collision without
+replacement, expected-process mismatch and protocol role/authority spoof rejection.
+Linux additionally launches a same-UID client in a new POSIX session and requires
+actual session denial. Windows validates the created DACL and current user/logon/
+session checks; another user's/logon session's execution needs its own laboratory
+and must remain blocked if unavailable. A synthetic mismatch is not that evidence.
+Cross-user/logon and desktop-session qualification must remain separate from the
+implemented adapter gate; do not report them passed from same-user tests.
+
+API basis: [Microsoft named-pipe access rights](https://learn.microsoft.com/en-us/windows/win32/ipc/named-pipe-security-and-access-rights),
+[pipe client identification](https://learn.microsoft.com/en-us/windows/win32/api/namedpipeapi/nf-namedpipeapi-impersonatenamedpipeclient),
+[overlapped cancellation lifetime](https://learn.microsoft.com/en-us/windows/win32/api/ioapiset/nf-ioapiset-cancelioex),
+and [Linux Unix-domain sockets](https://man7.org/linux/man-pages/man7/unix.7.html).
+These are implementation inputs, not executed SysPane evidence.
 
 Use the existing Windows/Linux development configure/build/CTest commands in the
 W-01 package. New cases use the `protocol.` CTest prefix. The model cases must still
