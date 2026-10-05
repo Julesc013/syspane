@@ -357,7 +357,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "f6de22e581e50f20e7242588e9596779d279ea59f1075fb10c8db89b3cd9c060"
+      "sha256": "df135ded3e347f2df8227ac7ad8da1e0c847627986617caa205bbc3f175093c5"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -422,7 +422,7 @@
       "requires": [
         "SP-CURRENT"
       ],
-      "sha256": "6f458b66c370b407071353d85827e7d692846bdbc619dd8fbb213cf7a3f84849"
+      "sha256": "ecc684acca0658ac9fabb2635d730cbbf21335c24c6b1ec5cdfe6c861ea07221"
     },
     {
       "id": "SP-MEASURED-TIME-HANDOFF",
@@ -550,6 +550,18 @@
         "SP-W02-PACKAGE"
       ],
       "sha256": "0b5f0cbdc1af240ccc281928fbb9dd201bb5840057891711309f739ca30979ed"
+    },
+    {
+      "id": "SP-W05-SHELL-RECOVERY",
+      "path": "delivery/packages/w-05-shell-recovery.md",
+      "title": "W-05 owned X11 window-manager recovery",
+      "description": "Measure native manager replacement and candidate continuity without promoting failed placement.",
+      "requires": [
+        "SP-W05-PACKAGE",
+        "SP-W02-PACKAGE",
+        "SP-ORACLE"
+      ],
+      "sha256": "e0c3d8258ec064bc6f4d8c68300fbf3edf6392b66c4ecac48f2c1d4785e4d888"
     },
     {
       "id": "SP-W05-PACKAGE",
@@ -870,6 +882,17 @@
         "SP-W05-PACKAGE"
       ],
       "sha256": "4ccc013587e86d884228a222faee5c85cb5146dde29a2ad7e8b7d6cd336df15a"
+    },
+    {
+      "id": "SP-X11-RECOVERY-HANDOFF",
+      "path": "delivery/x11-recovery-handoff.md",
+      "title": "Owned X11 window-manager recovery checkpoint",
+      "description": "Separate observed manager recovery from continuing candidate placement failures.",
+      "requires": [
+        "SP-W05-SHELL-RECOVERY",
+        "SP-CAMPAIGN-ADMISSION"
+      ],
+      "sha256": "7b7d4937f8bb09c5e60af4fab5ab5ac813028721fac3987d4a79f33a02466891"
     },
     {
       "id": "SP-DESKTOP",

@@ -126,6 +126,90 @@ def input_evidence(row, build):
         raise ValueError('input restoration did not preserve icon pixels')
 
 
+def recovery_evidence(row, build, before, mask, wallpaper):
+    recovery = row['recovery_observation']
+    journal = row['recovery_journal']
+    raw = journal['raw_utf8'].encode('utf-8')
+    if len(raw) > 8 * 1024**2 or len(raw) != journal['bytes'] or hashlib.sha256(raw).hexdigest() != journal['sha256']:
+        raise ValueError('recovery journal identity')
+    stored = (build / journal['path']).resolve(strict=True)
+    if not stored.is_relative_to(build) or sha(stored) != journal['sha256']:
+        raise ValueError('recovery journal differs from owned capture')
+    entries = [json.loads(line) for line in journal['raw_utf8'].splitlines()]
+    if not entries or len(entries) > 400 or entries[0]['kind'] != 'identity' or entries[-1]['kind'] != 'result':
+        raise ValueError('recovery journal bounds/closure')
+    for kind, key in [('event', 'events'), ('frame', 'frames'), ('sample', 'samples')]:
+        if [e['value'] for e in entries if e['kind'] == kind] != recovery[key]:
+            raise ValueError('recovery journal observation mismatch')
+    merged = {**entries[0]['value'], **entries[-1]['value'], **{key: recovery[key] for key in ('frames', 'samples', 'events')}}
+    if merged != recovery:
+        raise ValueError('recovery journal result mismatch')
+    original = next(p for p in row['cleanup'] if p['process'] == 'openbox')
+    replacement = next(p for p in row['cleanup'] if p['process'] == 'openbox-replacement')
+    candidate = next(p for p in row['cleanup'] if p['process'] == 'candidate')
+    old = recovery['old_manager']
+    if original['exit'] != -9 or old['pid'] != [original['pid']] or old['self'] != [old['window']] or old['pid_origin'] != 'XResQueryClientIds':
+        raise ValueError('recovery original manager identity/exit')
+    if recovery['candidate_pid'] != candidate['pid'] or recovery['candidate_window'] != row['structures'][0]['candidate']:
+        raise ValueError('recovery candidate identity')
+    events = recovery['events']
+    if [e['event'] for e in events] != ['stimulus', 'stop_requested', 'exit_observed', 'stimulus', 'replacement_started', 'manager_ready', 'stimulus']:
+        raise ValueError('recovery event order')
+    end = recovery['end_us']
+    if recovery['start_us'] != 0 or not oracle.integer(end) or not 0 < end <= 8_000_000:
+        raise ValueError('recovery interval')
+    times = [e['at_us'] for e in events]
+    if any(not oracle.integer(t) or not 0 <= t <= end for t in times) or times != sorted(times):
+        raise ValueError('recovery event time')
+    if [events[i]['generation'] for i in (0, 3, 6)] != [4, 5, 6] or times[1] < 250_000 or end - times[6] < 700_000:
+        raise ValueError('recovery stimulus/coverage schedule')
+    if (events[1]['pid'] != original['pid'] or events[2] != {'event': 'exit_observed', 'at_us': times[2], 'pid': original['pid'], 'exit': -9, 'observer': 'pidfd'} or
+            events[4]['pid'] != replacement['pid'] or replacement['pid'] == original['pid'] or times[4] - times[2] < 350_000):
+        raise ValueError('recovery independent exit/replacement order')
+    ready = events[5]
+    if ready['pid'] != [replacement['pid']] or ready['self'] != [ready['window']] or ready['pid_origin'] != 'XResQueryClientIds' or times[5] - times[1] > 5_000_000:
+        raise ValueError('recovery replacement native identity/deadline')
+    if any(identity['window'] & ~identity['resource_mask'] != identity['resource_base'] for identity in (old, ready)):
+        raise ValueError('recovery resource owner binding')
+    frames, samples = recovery['frames'], recovery['samples']
+    if not 3 <= len(frames) <= 160 or len(samples) != len(frames):
+        raise ValueError('recovery frame/sample coverage')
+    previous = 0
+    gaps, durations, decoded, images = [], [], [], []
+    for frame, sample in zip(frames, samples):
+        image = oracle.unpack_frame(frame)
+        begin, finish = frame['start_us'], frame['end_us']
+        if (not oracle.integer(begin) or not oracle.integer(finish) or not previous <= begin <= finish <= end or frame['origin'] != 'display_server_root'):
+            raise ValueError('recovery frame time/origin')
+        gaps.append(begin - previous)
+        durations.append(finish - begin)
+        previous = finish
+        decoded.append(oracle.decode(image))
+        images.append(image)
+        wall = sample['wallpaper_frame']
+        wb, we = wall['start_us'], wall['end_us']
+        if not all(oracle.integer(t) for t in (wb, we, sample['at_us'])) or not finish <= wb <= sample['at_us'] <= we <= end or wall['origin'] != 'display_server_root':
+            raise ValueError('recovery wallpaper capture time/origin')
+        durations.append(we - wb)
+        if sample['wallpaper_unchanged'] != (oracle.unpack_frame(wall) == wallpaper):
+            raise ValueError('recovery wallpaper pixel claim')
+        if sample['accepted'] not in (3, 4, 5, 6) or sample['accepted'] > max(e['generation'] for e in events if e['event'] == 'stimulus' and e['at_us'] <= sample['at_us']):
+            raise ValueError('recovery acknowledged unissued generation')
+    gaps.append(end - previous)
+    max_gap, max_capture = max(gaps), max(durations)
+    coverage = max_gap <= 150_000 and max_capture <= 50_000
+    post = [i for i, f in enumerate(frames) if f['start_us'] >= times[6] + 200_000]
+    defect = any(decoded[i] != 6 or any(images[i][n:n+3] != before[n:n+3] for n in mask) for i in post)
+    continuity = any(s['accepted'] == 5 and s['at_us'] < times[5] for s in samples) and any(s['accepted'] == 6 for s in samples)
+    expected = {'manager_recovery': 'pass', 'candidate_progress': 'pass' if continuity else 'fail',
+                'coverage': 'pass' if coverage else 'inconclusive',
+                'surface_recovery': 'fail' if defect else ('pass' if coverage and len(post) >= 3 else 'inconclusive'),
+                'wallpaper_pixels': 'pass' if all(s['wallpaper_unchanged'] for s in samples) else 'fail'}
+    first = next((f['end_us'] for f, generation in zip(frames, decoded) if generation == 6), None)
+    if recovery['outcomes'] != expected or recovery['maximum_gap_us'] != max_gap or recovery['maximum_capture_us'] != max_capture or recovery['first_final_generation_us'] != first:
+        raise ValueError('recovery outcomes do not reproduce')
+
+
 def validate(report, build, completed):
     if report['family'] != 'X11-HOST-01' or report['artifact_sha256'] != sha(build / 'SysPane.OracleProbe'):
         raise ValueError('native family/artifact identity')
@@ -151,7 +235,7 @@ def validate(report, build, completed):
             raise ValueError('execution/cleanup or qualification overclaim')
         if not report.get('icon_input_requested') and row['icon_input'] != 'not_run':
             raise ValueError('unexecuted icon input promoted to a result')
-        processes = {'candidate', 'pcmanfm', 'openbox', 'bus', 'Xvfb'} | ({'registry'} if report.get('icon_input_requested') else set())
+        processes = {'candidate', 'pcmanfm', 'openbox', 'bus', 'Xvfb'} | ({'registry'} if report.get('icon_input_requested') else set()) | ({'openbox-replacement'} if report.get('window_manager_restart_requested') else set())
         if {p['process'] for p in row['cleanup']} != processes or any(p['exit'] is None for p in row['cleanup']):
             raise ValueError('owned process cleanup evidence')
         if next(p for p in row['cleanup'] if p['process'] == 'candidate')['exit'] != 0:
@@ -188,6 +272,12 @@ def validate(report, build, completed):
         changed = sum(first[n:n+3] != before[n:n+3] for n in mask)
         if len(mask) < 100 or row['icon_pixels']['baseline_non_background'] != len(mask) or row['icon_pixels']['changed_under_candidate'] != changed:
             raise ValueError('icon-concealment evidence differs from pixels')
+        if report.get('window_manager_restart_requested'):
+            if report['recovery_runtime'] != json.loads((ROOT / 'build-support/x11-recovery-runtime.json').read_text(encoding='utf-8')):
+                raise ValueError('native recovery runtime identity')
+            recovery_evidence(row, build, before, mask, wallpaper_region)
+        elif row.get('recovery_observation', {}).get('outcomes', {}).get('manager_recovery', 'not_run') != 'not_run':
+            raise ValueError('unexecuted recovery claim')
         placement = 'fail' if changed or oracle.decode(first) is None else 'inconclusive'
         if row['placement'] != placement:
             raise ValueError('placement overclaim')
@@ -234,6 +324,7 @@ def main():
         record['reports'].append({'record': destination.name, 'sha256': sha(destination), 'execution': report['execution'],
                                   'gtk_rendering': report['gtk_rendering'], 'wallpaper_mode': report['wallpaper_mode'],
                                   'delayed_wallpaper_setup': report.get('delayed_wallpaper_setup', False),
+                                  'window_manager_restart_requested': report.get('window_manager_restart_requested', False),
                                   'icon_input_requested': report.get('icon_input_requested', False)})
     identity_copy = args.output.with_suffix('.lab-identity.json')
     shutil.copyfile(build / 'x11-lab/identity.json', identity_copy)
@@ -241,7 +332,7 @@ def main():
     record['source_base'] = report['source_base']
     record['limitations'] = ['Both EWMH candidates fail placement; no wall qualification.',
                              'Image-wallpaper startup is a preserved lab failure; color evidence does not replace it.',
-                             'Input results apply only to the named synthetic X11 profile; shell recovery and other desktop profiles remain unexecuted.']
+                             'Input/restart results apply only to explicitly requested dimensions in the named synthetic X11 profile; product recovery and other desktop profiles remain unqualified.']
     args.output.write_text(json.dumps(record, indent=2) + '\n', encoding='utf-8', newline='\n')
     print('X11 evidence verified and recorded:', args.output)
 

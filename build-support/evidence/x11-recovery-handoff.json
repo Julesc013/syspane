@@ -1,0 +1,104 @@
+{
+  "schema_version": "0.1.0",
+  "work_id": "W-05",
+  "source_ref": "fad7e2e0fed1205f28647282cb5119f60ead9766",
+  "objective": "Observe owned X11 window-manager recovery and candidate continuity independently of visible placement, preserving original failures and platform gates.",
+  "changed_files": [
+    "README.md",
+    "TODO.md",
+    "build-support/evidence/w-05-shell-recovery-attempt-color-31b39ba525.json",
+    "build-support/evidence/w-05-shell-recovery-attempt-color-4eddac11b7.json",
+    "build-support/evidence/w-05-shell-recovery-attempt-color-afc5c12365.json",
+    "build-support/evidence/w-05-shell-recovery-attempt-color-afe50840e4.json",
+    "build-support/evidence/w-05-shell-recovery-attempts.json",
+    "build-support/evidence/w-05-shell-recovery-color.X11-HOST-01.json",
+    "build-support/evidence/w-05-shell-recovery-color.json",
+    "build-support/evidence/w-05-shell-recovery-color.lab-identity.json",
+    "build-support/evidence/w-05-shell-recovery-image.X11-HOST-01.json",
+    "build-support/evidence/w-05-shell-recovery-image.json",
+    "build-support/evidence/w-05-shell-recovery-image.lab-identity.json",
+    "build-support/evidence/w-05-shell-recovery-input.X11-HOST-01.json",
+    "build-support/evidence/w-05-shell-recovery-input.json",
+    "build-support/evidence/w-05-shell-recovery-input.lab-identity.json",
+    "build-support/evidence/w-05-shell-recovery-verification.json",
+    "build-support/evidence/x11-recovery-handoff.json",
+    "build-support/record_x11_host.py",
+    "build-support/x11-recovery-runtime.json",
+    "docs/developers/build.md",
+    "spec/checksums.json",
+    "spec/delivery/current-state.md",
+    "spec/delivery/implementation-readiness.md",
+    "spec/delivery/index.md",
+    "spec/delivery/packages/index.md",
+    "spec/delivery/packages/w-05-shell-recovery.md",
+    "spec/delivery/work-units.json",
+    "spec/delivery/x11-recovery-handoff.md",
+    "spec/generated/catalog.json",
+    "tests/desktop/native_x11_host.py",
+    "tests/desktop/test_x11_recovery_record.py",
+    "tests/desktop/x11_recovery.py"
+  ],
+  "decisions": [
+    "Reuse the existing optional X11 runner, lab, marker renderer and pixel oracle; keep recovery outside the unchanged reveal interval.",
+    "Require pidfd-confirmed old-process exit before one replacement, then bind its supporting resource through the X server to its actual PID.",
+    "Treat an XID as reusable, not a process lifetime; preserve the failed optional-property and full-XID equality assumptions.",
+    "Keep manager recovery, candidate progress, capture coverage, wallpaper and visible recovery as distinct results."
+  ],
+  "checks": [
+    {
+      "name": "Three color-profile owned manager restarts with verified native identity and pixel evidence",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-05-shell-recovery-color.json"
+    },
+    {
+      "name": "Three delayed-image-profile owned manager restarts with unchanged wallpaper",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-05-shell-recovery-image.json"
+    },
+    {
+      "name": "Visible recovery of the current window-stacking candidates",
+      "outcome": "fail",
+      "evidence": "build-support/evidence/w-05-shell-recovery-image.X11-HOST-01.json"
+    },
+    {
+      "name": "Existing native input/image regression across three candidates",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-05-shell-recovery-input.json"
+    },
+    {
+      "name": "Nine recovery evidence checks per restart profile and fifteen input evidence checks",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-05-shell-recovery-attempts.json"
+    },
+    {
+      "name": "Three original failed observer attempts retained with source archives",
+      "outcome": "fail",
+      "evidence": "build-support/evidence/w-05-shell-recovery-attempts.json"
+    },
+    {
+      "name": "Specification schemas/fixtures, generated indexes, integrity and tooling checks",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-05-shell-recovery-verification.json"
+    },
+    {
+      "name": "Product renderer/collector continuity and other native platform qualification",
+      "outcome": "not_run",
+      "evidence": "spec/delivery/x11-recovery-handoff.md"
+    }
+  ],
+  "open_questions": [
+    "Conforming native composition still needs a strategy that preserves wallpaper and icon pixels while displaying the scene.",
+    "Icon-manager/compositor crashes, full renderer/controller/collector recovery and post-recovery input remain unqualified.",
+    "Windows needs an admitted synthetic interactive display; existing guest scope and Mac laboratory availability remain open."
+  ],
+  "next_step": "Investigate conforming composition using separate reveal, icon, wallpaper and recovery evidence; continue independent native tracks where their laboratories are admitted.",
+  "authority_used": [
+    "user:foundation-native-campaign-2026-10-05"
+  ],
+  "limitations": [
+    "The full campaign and W-02/W-05/W-25 remain incomplete; no desktop profile or product release is qualified.",
+    "Only owned synthetic Xvfb content and exact retained Openbox children were controlled; user desktop, shell, wallpaper and VMs were untouched.",
+    "The private Windows window-station finding is documentation-based, not an executed capture experiment.",
+    "C++ artifacts and build profiles did not change; prior CTest and smoke records retain their original checkpoint identities."
+  ]
+}

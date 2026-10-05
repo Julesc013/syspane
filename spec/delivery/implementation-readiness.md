@@ -12,7 +12,7 @@ sp_requires: ["SP-CURRENT"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-AUDIT-2026-10-04", "resource": "User-supplied October 2026 audit inputs", "title": "October review inputs"}]
-updated: {"by": "codex", "at": "2026-10-05T23:30:07Z", "scope": "Supervised real Linux network publication; product and native qualification gates remain open"}
+updated: {"by": "codex", "at": "2026-10-05T23:51:30Z", "scope": "Owned X11 manager recovery; visible placement and product recovery remain unqualified"}
 ---
 
 # Implementation readiness and gates
@@ -24,6 +24,9 @@ replay and failure preserve sample age. Product controller/renderer/policy integ
 Windows notification coverage and actual native topology/namespace qualification
 remain required. A native key is not a persistent identity.
 
+The [owned X11 manager-recovery experiment](x11-recovery-handoff.md) adds independent
+exit/ownership, continuing-generation and wallpaper evidence. It preserves the
+existing candidates' failed visible placement; product desktop recovery remains open.
 
 The October revision closes bounded contract and documentation gaps. It does not
 implement the native product. Existing stable identities remain; new meanings have

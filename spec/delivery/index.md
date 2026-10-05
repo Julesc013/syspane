@@ -34,3 +34,4 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [work-units.json](work-units.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [Initial X11 desktop-host investigation](x11-host-handoff.md) — Bind real Openbox reveal and PCManFM placement failures to independent pixels, with image-background startup failures preserved.
 - [X11 native input and image-wallpaper checkpoint](x11-input-handoff.md) — Bind native pointer routing and delayed image setup to independent clipboard, accessibility, focus and pixel evidence.
+- [Owned X11 window-manager recovery checkpoint](x11-recovery-handoff.md) — Separate observed manager recovery from continuing candidate placement failures.

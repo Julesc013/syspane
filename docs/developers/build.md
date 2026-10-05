@@ -262,13 +262,15 @@ python3 build-support/prepare_x11_lab.py <build> --refresh-metadata
 python3 tests/desktop/native_x11_host.py <build>
 python3 tests/desktop/native_x11_host.py <build> --wallpaper-mode color
 python3 tests/desktop/native_x11_host.py <build> --delayed-wallpaper --icon-input
+python3 tests/desktop/native_x11_host.py <build> --wallpaper-mode color --restart-window-manager
+python3 tests/desktop/native_x11_host.py <build> --delayed-wallpaper --restart-window-manager
 ```
 
 Preparation downloads only the exact archives in `build-support/x11-lab-packages.json`
 and verifies their sizes/digests before extraction. Metadata refresh uses a task-local
 APT list directory. No system installation or maintainer script runs. The ordinary
 configure/build/test commands neither prepare nor launch this optional desktop lab.
-The existing 54-entry Linux regression suite still runs without it. Revision 8 adds
+The ordinary Linux regression suite still runs without it. Revision 8 introduced
 the separately owned `syspane_x11_candidate` library and pinned Xext dependency.
 
 Default file-wallpaper startup currently fails in PCManFM with `BadDrawable`; that
@@ -299,7 +301,18 @@ See the [input/image checkpoint](../../spec/delivery/x11-input-handoff.md).
 evidence checks, including wrong URI, stale clipboard, hidden menu, title-only folder,
 focus, journal and fixture overclaims. The hidden candidate passes input here; the
 visible desktop candidate blocks selection, and neither passes placement. Other
-profiles, shell recovery and wallpaper policy remain unqualified.
+profiles, product shell recovery and wallpaper policy remain unqualified.
+
+`--restart-window-manager` adds a separate recovery interval after the unchanged
+reveal trace. It stops only the owned Openbox child, requires independent pidfd exit
+proof, starts one replacement and binds its supporting window through X-Resource.
+The optional runtime is pinned in `build-support/x11-recovery-runtime.json`.
+It cannot be combined with `--icon-input` under the current lifetime contract.
+Inspect `recovery_observation.outcomes`: manager recovery and continuing generations
+can pass while visible recovery fails. Every captured frame/journal is preserved.
+Use the same recorder, then run
+`python3 tests/desktop/test_x11_recovery_record.py <build> <exact-restart-report> -v`
+for nine independent evidence checks. See the [recovery checkpoint](../../spec/delivery/x11-recovery-handoff.md).
 
 For the historical shared-subset experiment, the existing Visual Studio 2017 XP
 toolset has its own preset. It compiles the same model, protocol/policy, recovery

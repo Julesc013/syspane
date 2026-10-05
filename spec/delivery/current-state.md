@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-05T23:30:07Z", "scope": "Supervised real Linux network publication; product and native qualification gates remain open"}
+updated: {"by": "codex", "at": "2026-10-05T23:51:30Z", "scope": "Owned X11 manager recovery; visible placement and product recovery remain unqualified"}
 ---
 
 # Current state and next admitted boundary
@@ -160,6 +160,12 @@ revocation and parent-loss exit evidence. Full suites pass 96 Windows, 101 Linux
 88 historical-toolset host checks. This finite composition is not an installed
 product service, complete network view or qualified desktop renderer.
 
+The [owned X11 recovery checkpoint](x11-recovery-handoff.md) now observes Openbox
+exit and replacement while the same candidate continues processing generations.
+Color and delayed-image profiles preserve wallpaper and capture coverage. All
+candidates still fail visible recovery/placement. Native process ownership, including
+reused XIDs, is independently bound through X-Resource and held exit proof.
+
 Canonical 0.2.0 documentation bundle, unchanged 0.1 authoring profile, preserved old
 fixtures, new experimental scene/command/capability 0.2 and admission descriptors.
 The initial settings registry has enforced metadata/default consistency and generated
@@ -201,7 +207,9 @@ to investigate conforming composition, and close the other platform capture/reve
 boundaries in admitted synthetic desktops. W-04 has build artifacts ready for
 historical guest execution once guest test scope and usability are established.
 W-05 needs a composition strategy that actually preserves icon pixels; its initial
-EWMH window stacking candidates fail that requirement. Continue other native tracks
+EWMH window stacking candidates fail that requirement even after the observed
+Openbox recovery. Product renderer/collector continuity, icon-manager/compositor
+restart and post-recovery input remain open. Continue other native tracks
 independently of this negative result.
 W-25's [supervised network checkpoint](network-publication-handoff.md) connects
 real Linux acquisition, source lifetimes and measured receipt under independent

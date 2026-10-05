@@ -49,7 +49,10 @@ now exposes the basic X11 candidate's placement failure: above the desktop it
 covers icons and blocks the tested icon click; below it the marker is hidden.
 The hidden variant passes the native input sequence. Delayed image setup passes
 pixel checks; the original image-at-startup failure remains separate. See the
-[X11 input checkpoint](spec/delivery/x11-input-handoff.md). No desktop profile is qualified.
+[X11 input checkpoint](spec/delivery/x11-input-handoff.md). An
+[owned Openbox restart](spec/delivery/x11-recovery-handoff.md) now proves manager
+recovery and continuing marker progress, while independently retaining the candidates'
+visible-placement failures. No desktop profile is qualified.
 There is no usable SysPane desktop application or downloadable release yet.
 Desktop, screensaver and installer profiles remain unqualified.
 

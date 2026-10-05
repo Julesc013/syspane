@@ -91,7 +91,7 @@ class DesktopDisplay(Display):
         self.x.XFlush(self.handle)
 
 
-def observe(environment, channel, workspace, wallpaper_mode, icon_input=False):
+def observe(environment, channel, workspace, wallpaper_mode, icon_input=False, restart_window_manager=False):
     os.environ.update(environment)
     display = None
     try:
@@ -221,7 +221,12 @@ def observe(environment, channel, workspace, wallpaper_mode, icon_input=False):
                         inputs.close()
                 finally:
                     faulthandler.cancel_dump_traceback_later()
+        recovery_result = {'outcomes': {'manager_recovery': 'not_run'}}
+        if restart_window_manager:
+            from x11_recovery import observe_recovery
+            recovery_result = observe_recovery(display, channel, workspace, command, baseline, icon_mask, wallpaper)
         channel.send({'trace': trace, 'observation': result, 'actions': actions, 'structures': structures,
+                      'recovery_observation': recovery_result,
                       'input_observation': input_result,
                       'reveal_action_confirmed': action_confirmed, 'candidate_relative_to_icons': sorted(set(relation)),
                       'baseline_generation': decode(first_pixels), 'baseline_matches_icon_manager': first_pixels == baseline,
@@ -300,7 +305,7 @@ def receive(channel, logs, timeout=8):
     raise TimeoutError('bounded native observer timeout')
 
 
-def run_case(build, sysroot, output, mode, rendering, wallpaper_mode, delayed_wallpaper=False, icon_input=False):
+def run_case(build, sysroot, output, mode, rendering, wallpaper_mode, delayed_wallpaper=False, icon_input=False, restart_window_manager=False):
     workspace = output / ('x11-' + mode + '-' + uuid.uuid4().hex)
     workspace.mkdir(mode=0o700)
     row = {'candidate': mode, 'execution': 'failed', 'workspace': str(workspace.relative_to(build))}
@@ -343,10 +348,11 @@ def run_case(build, sysroot, output, mode, rendering, wallpaper_mode, delayed_wa
                 time.sleep(.05)
             else:
                 raise TimeoutError('owned accessibility registry did not acquire its bus name')
-        launch('openbox', [str(sysroot / 'usr/bin/openbox'), '--config-file', str(workspace / 'config/openbox.xml')])
+        wm_command = [str(sysroot / 'usr/bin/openbox'), '--config-file', str(workspace / 'config/openbox.xml')]
+        wm = launch('openbox', wm_command)
         context = mp.get_context('spawn')
         channel, remote = context.Pipe()
-        worker = context.Process(target=observe, args=(environment, remote, workspace, wallpaper_mode, icon_input))
+        worker = context.Process(target=observe, args=(environment, remote, workspace, wallpaper_mode, icon_input, restart_window_manager))
         worker.start()
         remote.close()
         row.update(receive(channel, logs))
@@ -379,7 +385,19 @@ def run_case(build, sysroot, output, mode, rendering, wallpaper_mode, delayed_wa
         info = json.loads(bootstrap)
         if set(info) != {'window', 'pid', 'claims_visible'} or info['pid'] != candidate.pid:
             raise ValueError('candidate bootstrap identity')
-        channel.send({**info, 'manager_pid': manager.pid})
+        channel.send({**info, 'manager_pid': manager.pid, 'window_manager_pid': wm.pid})
+        if restart_window_manager:
+            request = receive(channel, logs)
+            if request != {'restart_requested': 'openbox', 'pid': wm.pid} or wm.poll() is not None:
+                raise ValueError('owned window-manager restart request')
+            wm.kill()
+            wm.wait(timeout=2)
+            channel.send({'manager_stopped': wm.pid, 'exit': wm.returncode})
+            if receive(channel, logs, 2) != {'exit_observed': wm.pid}:
+                raise ValueError('independent window-manager exit acknowledgement')
+            time.sleep(.4)
+            replacement = launch('openbox-replacement', wm_command)
+            channel.send({'replacement_started': replacement.pid})
         row.update(receive(channel, logs, 14 if icon_input else 8))
         candidate.wait(timeout=3)
         if candidate.returncode != 0:
@@ -402,7 +420,8 @@ def run_case(build, sysroot, output, mode, rendering, wallpaper_mode, delayed_wa
         if mode == 'live' and icon_input and (row['icon_input'] != 'fail' or
                 [(s['step'], s['outcome']) for s in row['input_observation']['steps']] != [('baseline-clear', 'pass'), ('select', 'fail')]):
             raise RuntimeError('ordinary-window negative input control did not detect blocked selection')
-        if any(process.poll() is not None for name, process in processes if name != 'candidate'):
+        expected_stopped = {'candidate'} | ({'openbox'} if restart_window_manager else set())
+        if any(process.poll() is not None for name, process in processes if name not in expected_stopped):
             raise RuntimeError('lab service exited before observations completed')
         row['execution'] = 'completed'
     except Exception as error:
@@ -462,7 +481,7 @@ def run_case(build, sysroot, output, mode, rendering, wallpaper_mode, delayed_wa
         journal = workspace / 'frames.jsonl'
         if journal.exists():
             row['capture_journal'] = {'path': str(journal.relative_to(build)), 'sha256': sha(journal), 'bytes': journal.stat().st_size}
-        for name, key in (('input.jsonl', 'input_journal'), ('input-timeout.log', 'input_timeout')):
+        for name, key in (('input.jsonl', 'input_journal'), ('input-timeout.log', 'input_timeout'), ('recovery.jsonl', 'recovery_journal')):
             path = workspace / name
             if path.exists():
                 if path.stat().st_size > 8 * 1024**2:
@@ -483,7 +502,10 @@ def main():
     parser.add_argument('--wallpaper-mode', choices=['tile', 'color'], default='tile', help='Color is a diagnostic control, never file-wallpaper qualification')
     parser.add_argument('--delayed-wallpaper', action='store_true', help='Configure the synthetic image only after icon-manager initialization')
     parser.add_argument('--icon-input', action='store_true', help='Use native pointer input and an explicitly owned read-only accessibility observer')
+    parser.add_argument('--restart-window-manager', action='store_true', help='Observe one owned Openbox crash/replacement after the reveal interval')
     args = parser.parse_args()
+    if args.restart_window_manager and args.icon_input:
+        parser.error('Combined input/recovery lifetime is not yet closed; run the independent experiments')
     build = args.build_dir.resolve(strict=True)
     if os.geteuid() == 0 or json.loads((build / '.syspane-owner.json').read_text())['profile'] != 'linux-x64-gcc13':
         raise ValueError('owned unprivileged Linux build required')
@@ -502,7 +524,9 @@ def main():
               ROOT / 'source/desktop/x11/desktop_candidate.cpp', ROOT / 'source/desktop/x11/desktop_candidate.hpp',
               ROOT / 'build-support/x11-lab-packages.json', ROOT / 'spec/delivery/packages/w-05-x11-investigation.md',
               ROOT / 'tests/desktop/x11_input.py', ROOT / 'build-support/x11-input-runtime.json',
-              ROOT / 'build-support/record_x11_host.py', ROOT / 'tests/desktop/test_x11_record.py']
+              ROOT / 'build-support/record_x11_host.py', ROOT / 'tests/desktop/test_x11_record.py',
+              ROOT / 'tests/desktop/x11_recovery.py', ROOT / 'spec/delivery/packages/w-05-shell-recovery.md',
+              ROOT / 'build-support/x11-recovery-runtime.json', ROOT / 'tests/desktop/test_x11_recovery_record.py']
     report = {'family': 'X11-HOST-01', 'execution': 'failed', 'executed_at': datetime.now(timezone.utc).isoformat(),
               'profile': 'linux-x64-gcc13 / Openbox 3.6.1 / PCManFM 1.3.2 / owned Xvfb 800x600x24',
               'qualification': 'Bounded X11 candidate investigation; no production or other desktop support claim.',
@@ -510,6 +534,7 @@ def main():
               'wallpaper_mode': args.wallpaper_mode,
               'delayed_wallpaper_setup': args.delayed_wallpaper,
               'icon_input_requested': args.icon_input,
+              'window_manager_restart_requested': args.restart_window_manager,
               'source_base': subprocess.check_output(['git', '-c', 'safe.directory=' + str(ROOT), 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
               'source_inputs': {p.relative_to(ROOT).as_posix(): sha(p) for p in inputs},
               'artifact_sha256': sha(build / 'SysPane.OracleProbe'), 'lab_identity_sha256': sha(lab / 'identity.json'),
@@ -518,6 +543,14 @@ def main():
               'cases': []}
     loader_environment = {**os.environ, 'LD_LIBRARY_PATH': str(sysroot / 'usr/lib/x86_64-linux-gnu')}
     binaries = [sysroot / 'usr/bin/openbox', sysroot / 'usr/bin/pcmanfm', build / 'SysPane.OracleProbe']
+    if args.restart_window_manager:
+        runtime = json.loads((ROOT / 'build-support/x11-recovery-runtime.json').read_text(encoding='utf-8'))
+        versions = dict(line.split('\t') for line in subprocess.check_output(['dpkg-query', '-W', *runtime['packages']], text=True, timeout=3).splitlines())
+        if versions != runtime['packages'] or any(sha(Path(p)) != digest for p, digest in runtime['files'].items()):
+            raise ValueError('optional native recovery runtime differs from its pinned identity')
+        report['recovery_runtime'] = runtime
+        report['system_binaries'].update(runtime['files'])
+        binaries.extend(Path(p) for p in runtime['files'])
     if args.icon_input:
         runtime = json.loads((ROOT / 'build-support/x11-input-runtime.json').read_text(encoding='utf-8'))
         versions = dict(line.split('\t') for line in subprocess.check_output(
@@ -539,7 +572,7 @@ def main():
     try:
         for mode in ('live', 'desktop', 'desktop-below'):
             print('X11 host investigation:', mode, flush=True)
-            row = run_case(build, sysroot, output, mode, args.gtk_rendering, args.wallpaper_mode, args.delayed_wallpaper, args.icon_input)
+            row = run_case(build, sysroot, output, mode, args.gtk_rendering, args.wallpaper_mode, args.delayed_wallpaper, args.icon_input, args.restart_window_manager)
             report['cases'].append(row)
             print('Execution:', row['execution'], '; observation:', row.get('observation', {}).get('outcome'), flush=True)
             if row['execution'] != 'completed':
