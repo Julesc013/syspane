@@ -147,8 +147,8 @@ and checks confirmed cleanup/root restoration. Current records are
 [package](../../spec/delivery/packages/w-02-desktop-oracle.md).
 
 These checks establish observer calibration on the named development environment.
-Real shell reveal actions, icon-manager input/focus, wallpaper-file/policy evidence
-and Windows external desktop capture remain required. A synthetic Xvfb window is
+The optional lab below supplies scoped reveal, input and image-file observations;
+wallpaper policy and Windows external desktop capture remain required. A synthetic Xvfb window is
 never a behind-icons desktop qualification. The standalone `tests/desktop/oracle.py`
 accepts one bounded trace JSON and exits 0/pass, 1/fail, 3/inconclusive or 2/invalid.
 
@@ -159,6 +159,7 @@ the admitted Linux checkout, with the owned build directory as `<build>`:
 python3 build-support/prepare_x11_lab.py <build> --refresh-metadata
 python3 tests/desktop/native_x11_host.py <build>
 python3 tests/desktop/native_x11_host.py <build> --wallpaper-mode color
+python3 tests/desktop/native_x11_host.py <build> --delayed-wallpaper --icon-input
 ```
 
 Preparation downloads only the exact archives in `build-support/x11-lab-packages.json`
@@ -178,14 +179,25 @@ the unique `X11-HOST-01-<id>.json` report instead of treating exit zero as a wal
 
 The observer uses only the owned Xvfb desktop with real icon-manager content and
 native Super+D actions. It captures through reveal/restore, measures actual icon
-concealment, preserves frame journals and checks owned-process cleanup. Input/focus
-qualification, image-wallpaper preservation and other shell profiles remain open.
-Use `record_x11_host.py --build-dir <build> --report <exact-color-report>
---failed-image-report <exact-default-report> --output <record>` to bind evidence and
-recompute pixel outcomes. See [the handoff](../../spec/delivery/x11-host-handoff.md).
-`python3 tests/desktop/test_x11_record.py <build> <exact-color-report> -v` checks
-valid evidence and rejects corrupted pixels, false temporal/placement passes,
-promoted image-wallpaper claims and unexecuted icon-input claims.
+concealment, preserves frame journals and checks owned-process cleanup.
+`--delayed-wallpaper` configures the fixture after PCManFM initializes and requires
+captured image pixels to match the PPM exactly. `--icon-input` checks the installed
+runtime against `build-support/x11-input-runtime.json`, starts an owned accessibility
+registry and observes native pointer/keyboard routing through exact private clipboard
+URIs, AT-SPI, focus and root pixels. It never uses the user's clipboard or desktop.
+Missing/mismatched optional runtime is a lab limitation, not an installation request.
+
+Use `python3 build-support/record_x11_host.py --build-dir <build>
+--report <exact-report> --output <record>` to bind evidence and recompute outcomes.
+The optional `--failed-image-report <exact-default-report>` accepts a failure from
+the same source/runtime checkpoint. Historical reports retain their original source
+identity and must not be silently rebound to current code.
+See the [input/image checkpoint](../../spec/delivery/x11-input-handoff.md).
+`python3 tests/desktop/test_x11_record.py <build> <exact-input-report> -v` runs fifteen
+evidence checks, including wrong URI, stale clipboard, hidden menu, title-only folder,
+focus, journal and fixture overclaims. The hidden candidate passes input here; the
+visible desktop candidate blocks selection, and neither passes placement. Other
+profiles, shell recovery and wallpaper policy remain unqualified.
 
 Specification tooling separately uses Python 3.11+ in an isolated environment:
 

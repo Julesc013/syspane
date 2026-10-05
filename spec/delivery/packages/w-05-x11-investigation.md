@@ -66,6 +66,79 @@ failed default profile. A color control can establish configured-color preservat
 the unchanged PPM file is then not displayed and provides no image-wallpaper pass.
 Record the variant explicitly and preserve the original native startup failures.
 
+An additional setup-sequence experiment may initialize PCManFM with the synthetic
+color, wait for its native desktop, then use that exact instance's ordinary
+`--set-wallpaper`/`--wallpaper-mode` command before any candidate or observation.
+Record `delayed_wallpaper_setup` separately from startup configuration. A returned
+command status is insufficient: the independently captured unobstructed region must
+exactly match the corresponding pixels in the fixed 800x600 PPM fixture, and the
+configured image/file must remain unchanged through the candidate interval. A working
+delayed setup does not retroactively qualify the original failed startup sequence.
+
+## Native icon-input closure
+
+Input stimuli use XTEST only on the owned display; accessibility actions may not
+select, activate or open objects as a substitute for pointer/keyboard routing.
+Enable an explicitly owned AT-SPI registry on the private session bus, with its bus
+address passed explicitly to the observer and GTK icon manager. Use the installed
+AT-SPI 2.52 and GI bindings with recorded binary/package identity. No service-activation
+directory, user accessibility bus or global settings change is required. Retain and
+stop the registry like every other lab process.
+
+The observer reads PCManFM's native accessibility tree, bound to the exact retained
+manager PID, along with root pixels and native focus/client state. Limit tree scans
+to 256 nodes, 32 children per node, depth 12, names of 256 characters and a three-second
+operation deadline. Reject missing/truncated/ambiguous observations as inconclusive;
+never infer a successful input operation from XShape flags or a sent event alone.
+Accessibility is evidence of native menu/folder state, not a visibility oracle.
+This PCManFM build exposes no icon children through AT-SPI. An empty tree therefore
+cannot establish empty selection; preserve earlier tree-only attempts as observer
+errors. Observe selection through the private display's native clipboard: establish
+an owned empty selection, send Ctrl+C through XTEST, then request `text/uri-list` if
+the selection owner changes. Allow 500 ms for each phase, at most 4096 bytes and two
+URIs, each naming an exact fixture folder. Remove at most one final GTK buffer NUL;
+reject any embedded NUL. Reject incremental transfers, unexpected
+paths, malformed replies or reply timeouts. Unchanged ownership denotes no selected
+files only in these fixed clear scenarios, with PCManFM retaining native focus and
+both positive selection controls passing. It cannot establish a standalone pass.
+The private display's clipboard is independent of the user's display/clipboard.
+
+The owned runtime directory may use a short `/proc/<parent-pid>/fd/<directory-fd>`
+alias to remain within Unix socket path limits. Retain the directory descriptor
+until all children stop; it resolves to the same workspace, not a shared temp root.
+Confirm the registry's bus-owner PID before starting the manager. Read AT-SPI through
+explicit private-bus calls with 250 ms deadlines and service activation disabled;
+do not use libatspi's implicit peer-connection path, whose observed timeout is retained
+as a laboratory failure. Journal stimuli and completed observations as they occur.
+
+The fixture contains `Probe Folder`, `Second Folder` and `Probe Folder/Sentinel.txt`.
+The image and icon geometry are fixed by this exact laboratory. Begin with no
+selected icons, then require these externally stimulated results:
+
+| Stimulus | Independent expected result |
+|---|---|
+| Click Probe Folder at (60,40) | Exactly Probe Folder selected in PCManFM; candidate never becomes native focus owner. |
+| Click blank desktop at (700,550) | No icons selected. |
+| Drag-select from (10,5) to (115,200) | Exactly both fixture folders selected; neither folder is moved or renamed. |
+| Clear, then right-click Probe Folder at (60,40) | PCManFM exposes a showing native popup with its Open in New Window item; candidate does not own focus. Escape dismisses it. |
+| Clear, then double-click Probe Folder | A new PCManFM normal window named Probe Folder opens and receives native focus. Native Ctrl+A then Ctrl+C yields exactly Probe Folder/Sentinel.txt through the private clipboard. |
+| Close that owned folder window, then click blank desktop | Folder window disappears; icon selection clears; original icon/background pixels are recoverable. |
+
+Capture stage pixels and the matching semantic/native observations. Report each
+step independently; a failed prerequisite leaves later dependent steps not-run.
+The draft observer originally expected a showing `Open` item. The preserved native
+capture/tree demonstrate that this fixture's folder menu hides that action and shows
+`Open in New Window`; this laboratory expectation correction does not change the
+product requirement that native context menus remain usable.
+The opened folder uses a custom item view that also omits file children from its
+accessibility tree. Its title, independently owned/focused normal window and exact
+clipboard URI after native selection establish folder opening/content; a missing
+Sentinel accessibility node is an observer limitation, not a candidate failure.
+The ordinary opaque window is also the negative input control: an overlapping click
+must fail icon selection while it blocks the icon. EWMH candidates may pass input
+while failing placement; neither outcome overrides the other. Keep the original
+reveal observation interval separate from user-created menu/folder occlusion.
+
 ## Candidate and observations
 
 The native diagnostic probe reuses Marker 0.1 and its generation protocol. The X11

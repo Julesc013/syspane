@@ -1,0 +1,87 @@
+{
+  "schema_version": "0.1.0",
+  "work_id": "W-05",
+  "source_ref": "ca05f1b989686dbe5af7652205a4770f347db416",
+  "objective": "Close the scoped native X11 input and delayed-image observation boundary without qualifying failed desktop placement.",
+  "changed_files": [
+    "README.md",
+    "TODO.md",
+    "build-support/evidence/w-05-input-attempt-28a15ce5.json",
+    "build-support/evidence/w-05-input-attempt-403b40b2.json",
+    "build-support/evidence/w-05-input-attempt-4e34734a.json",
+    "build-support/evidence/w-05-input-attempt-57b19513.json",
+    "build-support/evidence/w-05-input-attempt-5f1361cd.json",
+    "build-support/evidence/w-05-input-attempt-7617e80f.json",
+    "build-support/evidence/w-05-input-attempt-9934d64c.json",
+    "build-support/evidence/w-05-input-attempt-a0a24765.json",
+    "build-support/evidence/w-05-input-attempt-b3fdc70a.json",
+    "build-support/evidence/w-05-input-attempt-e699f105.json",
+    "build-support/evidence/w-05-input-attempt-f6ab915d.json",
+    "build-support/evidence/w-05-input-attempts.json",
+    "build-support/evidence/w-05-input-diagnostic-prefixes.json",
+    "build-support/evidence/w-05-x11-input-verification.json",
+    "build-support/evidence/w-05-x11-input.X11-HOST-01.json",
+    "build-support/evidence/w-05-x11-input.json",
+    "build-support/evidence/w-05-x11-input.lab-identity.json",
+    "build-support/evidence/x11-input-handoff.json",
+    "build-support/record_x11_host.py",
+    "build-support/x11-input-runtime.json",
+    "docs/developers/build.md",
+    "spec/checksums.json",
+    "spec/delivery/current-state.md",
+    "spec/delivery/implementation-readiness.md",
+    "spec/delivery/index.md",
+    "spec/delivery/packages/w-05-x11-investigation.md",
+    "spec/delivery/work-units.json",
+    "spec/delivery/x11-input-handoff.md",
+    "spec/generated/catalog.json",
+    "spec/log.md",
+    "tests/desktop/native_x11_host.py",
+    "tests/desktop/test_x11_record.py",
+    "tests/desktop/x11_input.py"
+  ],
+  "decisions": [
+    "Use exact private clipboard file URIs plus AT-SPI/focus/pixels to observe native input; missing custom accessibility children cannot establish selection or folder contents.",
+    "Read accessibility over the explicitly owned bus with deadlines and registry PID verification, avoiding the observed implicit peer-connection timeout.",
+    "Treat delayed native wallpaper setup as a separate named sequence, with exact PPM pixel verification; preserve original startup failures.",
+    "Keep visible-candidate input failure, hidden-candidate input success and placement failures independent; retain all draft observer failures with their corrections."
+  ],
+  "checks": [
+    {
+      "name": "Owned X11 input/image investigation completed; input pass below, blocked selection above, no conformant wall",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-05-x11-input.json"
+    },
+    {
+      "name": "Fifteen independent evidence/overclaim rejection checks",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-05-x11-input-verification.json"
+    },
+    {
+      "name": "Specification generation, validation, integrity and 57 tools tests (55 pass, 2 existing skips)",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-05-x11-input-verification.json"
+    },
+    {
+      "name": "Earlier native and observer attempts retained without promotion",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-05-input-attempts.json"
+    }
+  ],
+  "open_questions": [
+    "Usable composition between wallpaper and actual icons remains unresolved on this X11 profile.",
+    "The initial image-at-startup failure remains unqualified; delayed setup does not establish that sequence.",
+    "Shell recovery, wallpaper policy and other native profile tracks remain open.",
+    "W-25 recent-failure metadata, explicit configuration preservation and real renderer/data/editor recovery remain required."
+  ],
+  "next_step": "Investigate a conforming native composition strategy, or advance independent W-25/relevant profile work without treating this negative X11 placement result as a universal blocker.",
+  "authority_used": [
+    "user:foundation-native-campaign-2026-10-05"
+  ],
+  "limitations": [
+    "W-02/W-05 and the foundation/native campaign remain in progress; no desktop profile, product edition or release is qualified.",
+    "All input and captures were limited to owned synthetic Xvfb desktops and their private clipboard; user desktop/clipboard and system installation were untouched.",
+    "Eleven intermediate raw reports retain source digests, but complete intermediate source snapshots were not archived.",
+    "C++ targets and ordinary regression entries did not change; previous Linux 54-entry and Windows composition results remain historical."
+  ]
+}

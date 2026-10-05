@@ -12,7 +12,7 @@ sp_requires: ["SP-CURRENT"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-AUDIT-2026-10-04", "resource": "User-supplied October 2026 audit inputs", "title": "October review inputs"}]
-updated: {"by": "codex", "at": "2026-10-06T04:04:34+11:00", "scope": "Initial real X11 reveal and icon-placement investigation; failed candidates and image lab preserved"}
+updated: {"by": "codex", "at": "2026-10-06T04:53:25+11:00", "scope": "Native X11 input and exact delayed-wallpaper evidence; placement and observer failures preserved"}
 ---
 
 # Implementation readiness and gates
@@ -67,6 +67,10 @@ The later [X11 investigation](x11-host-handoff.md) executes a real Openbox revea
 action and PCManFM placement observation. Its EWMH candidates fail placement, and
 the default image-background lab fails before candidate startup. The solid-color
 control supplies useful negative host evidence without qualifying either profile.
+The [input/image checkpoint](x11-input-handoff.md) subsequently executes the native
+input sequence on the hidden below-window candidate and verifies delayed image
+setup against exact fixture bytes. The visible candidate blocks the tested icon
+click; no composition or broader desktop qualification follows from these results.
 
 W-24 implements native peer authentication, bounded I/O and real client/server
 integration under its [package](packages/w-24-transport.md). The initial preview

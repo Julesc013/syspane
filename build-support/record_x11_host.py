@@ -7,6 +7,7 @@ import json
 from pathlib import Path
 import shutil
 import zlib
+from urllib.parse import unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 module = importlib.util.spec_from_file_location('pixel_oracle', ROOT / 'tests/desktop/oracle.py')
@@ -28,6 +29,101 @@ def pixels(record, count):
     if hashlib.sha256(data).hexdigest() != record['sha256']:
         raise ValueError('image digest')
     return data
+
+
+def input_evidence(row, build):
+    observation = row['input_observation']
+    manager = next(p['pid'] for p in row['cleanup'] if p['process'] == 'pcmanfm')
+    registry = next(p['pid'] for p in row['cleanup'] if p['process'] == 'registry')
+    if row['registry_identity_confirmed'] != registry:
+        raise ValueError('accessibility registry identity')
+    journal = row['input_journal']
+    raw = journal['raw_utf8'].encode('utf-8')
+    if len(raw) > 8 * 1024**2 or len(raw) != journal['bytes'] or hashlib.sha256(raw).hexdigest() != journal['sha256']:
+        raise ValueError('input journal identity')
+    entries = [json.loads(line) for line in journal['raw_utf8'].splitlines()]
+    if not entries or len(entries) > 1024 or any(a['at_us'] > b['at_us'] for a, b in zip(entries, entries[1:])):
+        raise ValueError('input journal bounds/order')
+    if entries[0]['kind'] != 'initialize' or entries[0]['value'] != {'manager_pid': manager, 'desktop': row['desktop_window']}:
+        raise ValueError('input observer identity')
+    ready = [e['value']['clipboard_window'] for e in entries if e['kind'] == 'ready']
+    if len(ready) != 1:
+        raise ValueError('private clipboard owner identity')
+    steps = observation['steps']
+    if [e['value'] for e in entries if e['kind'] == 'check-finish'] != steps:
+        raise ValueError('input stage record differs from journal')
+    order = ['baseline-clear', 'select', 'clear', 'drag-select', 'context-menu', 'double-click-open', 'restore-clear']
+    if not steps or [s['step'] for s in steps] != order[:len(steps)]:
+        raise ValueError('input step order/completeness')
+    selections = {'baseline-clear': [], 'select': ['Probe Folder'], 'clear': [],
+                  'drag-select': ['Probe Folder', 'Second Folder'], 'restore-clear': []}
+    opened = None
+    for index, step in enumerate(steps):
+        pixels(step['desktop_pixels'], 800 * 600 * 3)
+        name, structure = step['step'], step['structure']
+        candidate = structure['candidate']
+        if candidate != row['structures'][0]['candidate']:
+            raise ValueError('input candidate identity')
+        candidate_clear = structure['focus'] != candidate and structure['active_window'] != [candidate]
+        focus_expected = candidate_clear and (name not in selections or structure['active_window'] == [row['desktop_window']])
+        if step['candidate_did_not_own_focus'] != candidate_clear or step['native_focus_expected'] != focus_expected:
+            raise ValueError('input focus claim')
+        tree = step['tree']
+        if len(tree) > 256 or any(len(t['name']) > 256 or len(t['path']) > 12 for t in tree):
+            raise ValueError('input semantic observation bounds')
+        clipboard = step['clipboard']
+        names = []
+        if clipboard is not None:
+            if clipboard['owner_changed']:
+                value = clipboard['raw_utf8']
+                if len(value.encode('utf-8')) > 4096 or clipboard['owner'] == ready[0]:
+                    raise ValueError('clipboard buffer/owner')
+                content = value[:-1] if value.endswith('\0') else value
+                if '\0' in content:
+                    raise ValueError('embedded clipboard NUL')
+                uris = content.splitlines()
+                if not 1 <= len(uris) <= 2 or len(set(uris)) != len(uris) or uris != clipboard['uris']:
+                    raise ValueError('clipboard URI count/content')
+                allowed = {str(build / row['workspace'] / 'Desktop' / n): n for n in ('Probe Folder', 'Second Folder')}
+                if name == 'double-click-open':
+                    allowed = {str(build / row['workspace'] / 'Desktop/Probe Folder/Sentinel.txt'): 'Sentinel.txt'}
+                for uri in uris:
+                    parsed = urlsplit(uri)
+                    path = unquote(parsed.path, errors='strict')
+                    if parsed.scheme != 'file' or parsed.netloc or parsed.query or parsed.fragment or path not in allowed:
+                        raise ValueError('clipboard file outside exact fixture')
+                    names.append(allowed[path])
+            elif clipboard['owner'] != ready[0] or clipboard['uris'] or clipboard.get('raw_utf8'):
+                raise ValueError('empty clipboard ownership')
+            if sorted(names) != clipboard['names']:
+                raise ValueError('clipboard names differ from raw URI bytes')
+        if name in selections:
+            matched = clipboard is not None and sorted(names) == selections[name]
+            if name == 'restore-clear' and opened is not None and opened in structure['client_order_bottom_to_top']:
+                raise ValueError('opened folder did not close')
+        elif name == 'context-menu':
+            matched = any(t['role'] == 'menu item' and t['name'] == 'Open in New Window' and t['showing'] for t in tree)
+        else:
+            before = steps[index - 1]['structure']['client_order_bottom_to_top']
+            new = [c for c in structure['clients'] if c['window'] not in before and c['pid'] == [manager] and c['class'] == ['pcmanfm', 'Pcmanfm']]
+            matched = (len(new) == 1 and step['opened_window'] == new[0]['window'] and
+                       structure['active_window'] == [new[0]['window']] and names == ['Sentinel.txt'] and
+                       any(t['role'] == 'frame' and t['name'] == 'Probe Folder' and t['showing'] for t in tree))
+            opened = step['opened_window']
+        verdict = 'pass' if matched and focus_expected else 'fail'
+        if step['outcome'] != verdict or (verdict == 'fail' and index != len(steps) - 1):
+            raise ValueError('native input verdict/failed prerequisite')
+    expected = 'inconclusive' if observation.get('error') else ('fail' if steps[-1]['outcome'] == 'fail' else 'pass')
+    if expected == 'pass' and len(steps) != len(order):
+        raise ValueError('partial input sequence promoted to pass')
+    if row['icon_input'] != expected or observation['outcome'] != expected:
+        raise ValueError('input outcome does not reproduce')
+    if row['candidate'] == 'live' and [(s['step'], s['outcome']) for s in steps] != [('baseline-clear', 'pass'), ('select', 'fail')]:
+        raise ValueError('ordinary-window negative input control')
+    if row['fixture_before'] != row['fixture_after']:
+        raise ValueError('native fixture was changed')
+    if expected == 'pass' and not row['icon_region_restored']:
+        raise ValueError('input restoration did not preserve icon pixels')
 
 
 def validate(report, build, completed):
@@ -53,9 +149,10 @@ def validate(report, build, completed):
     for row in report['cases']:
         if row['execution'] != 'completed' or row['observer_exit'] != 0 or row['remaining_owned_group_members'] or row['wall_conformant']:
             raise ValueError('execution/cleanup or qualification overclaim')
-        if row['icon_input'] != 'not_run':
+        if not report.get('icon_input_requested') and row['icon_input'] != 'not_run':
             raise ValueError('unexecuted icon input promoted to a result')
-        if {p['process'] for p in row['cleanup']} != {'candidate', 'pcmanfm', 'openbox', 'bus', 'Xvfb'} or any(p['exit'] is None for p in row['cleanup']):
+        processes = {'candidate', 'pcmanfm', 'openbox', 'bus', 'Xvfb'} | ({'registry'} if report.get('icon_input_requested') else set())
+        if {p['process'] for p in row['cleanup']} != processes or any(p['exit'] is None for p in row['cleanup']):
             raise ValueError('owned process cleanup evidence')
         if next(p for p in row['cleanup'] if p['process'] == 'candidate')['exit'] != 0:
             raise ValueError('candidate exit')
@@ -66,7 +163,24 @@ def validate(report, build, completed):
             raise ValueError('ordinary-window negative control did not detect disappearance')
         before = pixels(row['baseline_icon_region'], oracle.RGB_BYTES)
         pixels(row['baseline_desktop'], 800 * 600 * 3)
-        pixels(row['wallpaper_region'], oracle.RGB_BYTES)
+        wallpaper_region = pixels(row['wallpaper_region'], oracle.RGB_BYTES)
+        if report.get('delayed_wallpaper_setup'):
+            if row['wallpaper_setup']['exit'] != 0 or not row['wallpaper_fixture_display_verified']:
+                raise ValueError('native wallpaper setup not verified')
+            fixture = pixels(row['configured_wallpaper_rgb'], 800 * 600 * 3)
+            expected = bytes(channel for y in range(600) for x in range(800)
+                             for channel in ((48, 72, 96) if (x // 40 + y // 40) % 2 else (64, 88, 112)))
+            region = b''.join(expected[(y*800+600)*3:(y*800+728)*3] for y in range(400, 496))
+            if report['wallpaper_mode'] == 'color':
+                region = bytes((48, 72, 96)) * 128 * 96
+            if fixture != expected or wallpaper_region != region:
+                raise ValueError('configured wallpaper fixture differs from captured pixels')
+            if row['preserved_before']['wallpaper.ppm']['sha256'] != hashlib.sha256(b'P6\n800 600\n255\n' + fixture).hexdigest():
+                raise ValueError('configured wallpaper file identity')
+        if report.get('icon_input_requested'):
+            if report['input_runtime'] != json.loads((ROOT / 'build-support/x11-input-runtime.json').read_text(encoding='utf-8')):
+                raise ValueError('native input runtime identity')
+            input_evidence(row, build)
         background = bytes(channel for y in range(32, 128) for x in range(32, 160)
                            for channel in ((48, 72, 96) if report['wallpaper_mode'] == 'color' or (x // 40 + y // 40) % 2 else (64, 88, 112)))
         mask = [n for n in range(0, len(before), 3) if before[n:n+3] != background[n:n+3]]
@@ -97,7 +211,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--build-dir', type=Path, required=True)
     parser.add_argument('--report', type=Path, required=True)
-    parser.add_argument('--failed-image-report', type=Path, required=True)
+    parser.add_argument('--failed-image-report', type=Path)
     parser.add_argument('--output', type=Path, required=True)
     args = parser.parse_args()
     build = args.build_dir.resolve(strict=True)
@@ -106,7 +220,10 @@ def main():
     record = {'version': '0.1.0', 'work_ids': ['W-02', 'W-05'], 'wall_conformant': False, 'reports': [],
               'verification': 'Recomputed all temporal results and icon-concealment counts from preserved RGB bytes; checked native action states, wallpaper scope, cleanup and source/artifact/runtime identity.'}
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    for source, label, completed in [(args.report, 'X11-HOST-01', True), (args.failed_image_report, 'X11-IMAGE-FAILURE', False)]:
+    sources = [(args.report, 'X11-HOST-01', True)]
+    if args.failed_image_report:
+        sources.append((args.failed_image_report, 'X11-IMAGE-FAILURE', False))
+    for source, label, completed in sources:
         source = source.resolve(strict=True)
         if not source.is_relative_to(build / 'native-evidence') or source.stat().st_size > 32 * 1024**2:
             raise ValueError('bounded owned native report required')
@@ -115,14 +232,16 @@ def main():
         destination = args.output.with_suffix('.' + label + '.json')
         shutil.copyfile(source, destination)
         record['reports'].append({'record': destination.name, 'sha256': sha(destination), 'execution': report['execution'],
-                                  'gtk_rendering': report['gtk_rendering'], 'wallpaper_mode': report['wallpaper_mode']})
+                                  'gtk_rendering': report['gtk_rendering'], 'wallpaper_mode': report['wallpaper_mode'],
+                                  'delayed_wallpaper_setup': report.get('delayed_wallpaper_setup', False),
+                                  'icon_input_requested': report.get('icon_input_requested', False)})
     identity_copy = args.output.with_suffix('.lab-identity.json')
     shutil.copyfile(build / 'x11-lab/identity.json', identity_copy)
     record['lab_identity'] = {'record': identity_copy.name, 'sha256': sha(identity_copy)}
     record['source_base'] = report['source_base']
     record['limitations'] = ['Both EWMH candidates fail placement; no wall qualification.',
                              'Image-wallpaper startup is a preserved lab failure; color evidence does not replace it.',
-                             'Icon selection, launch, drag, menus, shell recovery and other desktop profiles remain unexecuted.']
+                             'Input results apply only to the named synthetic X11 profile; shell recovery and other desktop profiles remain unexecuted.']
     args.output.write_text(json.dumps(record, indent=2) + '\n', encoding='utf-8', newline='\n')
     print('X11 evidence verified and recorded:', args.output)
 

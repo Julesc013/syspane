@@ -22,8 +22,10 @@ integration remain pending.
 An external pixel/time oracle is calibrated against live, hidden, frozen and
 obstructed synthetic X11 surfaces. A real Openbox/PCManFM Show Desktop experiment
 now exposes the basic X11 candidate's placement failure: above the desktop it
-covers icons; below it the marker is hidden. File-wallpaper startup fails separately
-in this lab. Native icon input and other desktop profiles remain unqualified.
+covers icons and blocks the tested icon click; below it the marker is hidden.
+The hidden variant passes the native input sequence. Delayed image setup passes
+pixel checks; the original image-at-startup failure remains separate. See the
+[X11 input checkpoint](spec/delivery/x11-input-handoff.md). No desktop profile is qualified.
 There is no usable SysPane desktop application or downloadable release yet.
 Desktop, screensaver and installer profiles remain unqualified.
 

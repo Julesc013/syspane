@@ -1,0 +1,198 @@
+{
+  "family": "X11-HOST-01",
+  "execution": "failed",
+  "executed_at": "2026-10-05T17:35:30.048606+00:00",
+  "profile": "linux-x64-gcc13 / Openbox 3.6.1 / PCManFM 1.3.2 / owned Xvfb 800x600x24",
+  "qualification": "Bounded X11 candidate investigation; no production or other desktop support claim.",
+  "gtk_rendering": "similar",
+  "wallpaper_mode": "tile",
+  "delayed_wallpaper_setup": true,
+  "icon_input_requested": true,
+  "source_base": "ca05f1b989686dbe5af7652205a4770f347db416",
+  "source_inputs": {
+    "tests/desktop/native_x11_host.py": "cd2422f39ba9788b9d5b7eba15bf022703048b72a6c3efb3a01cbde72de0b9c5",
+    "tests/desktop/native_oracle.py": "975958fe693d18ae517ee9397fd086b75a794115ec9f04214a8460a02f7c5ad3",
+    "tests/desktop/oracle.py": "7de6458b9b98be4c7f75f4856a9d6c97d69b38578376cba886f3ee19c12f9b82",
+    "tests/fault/native_diagnostic.py": "357bfab4999a60e171b5eeeb1168b85d3fc92f894116d753891e4f763b6a911f",
+    "source/diagnostics/oracle_probe_x11.cpp": "fbef9a7c76e0c291e88905dfdcc1e5ff12380bdbe68c9aba87360cb1b97649b8",
+    "source/desktop/x11/desktop_candidate.cpp": "fc36197818557ed6979c7a1a4db792f8f63752f9371f91f186377d62ad8db179",
+    "source/desktop/x11/desktop_candidate.hpp": "16643e4d8cf657c2350e6cf65dff5bf604c0878585c6440a944079340687974d",
+    "build-support/x11-lab-packages.json": "ca98875e8e6d29b56cc08dde7edb5c6b3abf09d51936778171ff0facc810830b",
+    "spec/delivery/packages/w-05-x11-investigation.md": "ca4a3563e85fb56ba6f58640848906ea7e9f10d7e6e269513df2c5d3abcc4269",
+    "tests/desktop/x11_input.py": "0c9aa06c62ce4aca808615c3f6d76479e832cf21f3a63afdcb31370d1f6f3582"
+  },
+  "artifact_sha256": "dafe28fb40d59d412393e5c82f0b4dda1c5bb563013a8d2609bf709753a87524",
+  "lab_identity_sha256": "18a54204023f05e0adfc9ecb8671e4909bab4399abf6982af7b7d062341ca0f4",
+  "system_binaries": {
+    "/usr/bin/Xvfb": "2c7f5a9534410fed5092d782a69ca7ffd9fce80e98b81ffe4944d703dd11d3b1",
+    "/usr/bin/dbus-daemon": "8c479f1fcddfd6693c736ce541da0955f6752834bdeeef4b928e27f5e974c247",
+    "/usr/lib/x86_64-linux-gnu/libXtst.so.6": "b236448961631bb13464c878e68535f5335b5fa10a5d8411f3ad1a56ff430ec2"
+  },
+  "environment": {
+    "uid": 1000,
+    "uname": [
+      "Linux",
+      "BlackGlass-Win10",
+      "6.18.40.1-microsoft-standard-WSL2",
+      "#1 SMP PREEMPT_DYNAMIC Fri Jul 31 22:12:15 UTC 2026",
+      "x86_64",
+      "x86_64"
+    ],
+    "os_release_sha256": "01af466feb100306498c86aa6bad1815e33036019aa34d4362c20f374ea5c829"
+  },
+  "cases": [
+    {
+      "candidate": "live",
+      "execution": "failed",
+      "workspace": "native-evidence/x11-live-de26cc3ad7aa4810b3851e3ba62b25d5",
+      "wm_ready": true,
+      "error": "RuntimeError: TimeoutError: native window/icon manager did not become ready: {'client_order_bottom_to_top': [], 'focus': 2097439, 'showing_desktop': [0], 'active_window': [], 'candidate': 0, 'clients': []}",
+      "observer_exit": 0,
+      "cleanup": [
+        {
+          "process": "pcmanfm",
+          "pid": 431,
+          "exit": 0
+        },
+        {
+          "process": "openbox",
+          "pid": 424,
+          "exit": 0
+        },
+        {
+          "process": "registry",
+          "pid": 423,
+          "exit": -15
+        },
+        {
+          "process": "bus",
+          "pid": 422,
+          "exit": 0
+        },
+        {
+          "process": "Xvfb",
+          "pid": 421,
+          "exit": 0
+        }
+      ],
+      "remaining_owned_group_members": [],
+      "logs": {
+        "bus.log": "",
+        "registry.log": "SpiRegistry daemon is running with well-known name - org.a11y.atspi.Registry\n",
+        "openbox.log": "",
+        "pcmanfm.log": "** Message: 04:35:30.581: x-terminal-emulator has very limited support, consider choosing another terminal\n\n** (pcmanfm:431): WARNING **: 04:35:30.604: modules directory is not accessible\n\n** (pcmanfm:431): WARNING **: 04:35:30.604: modules directory is not accessible\n"
+      },
+      "log_identity": {
+        "bus.log": {
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        },
+        "registry.log": {
+          "sha256": "9d307ed556499f37fcb1517732638144b4ee8125619c1a443295c570b34c6bae",
+          "bytes": 77
+        },
+        "openbox.log": {
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        },
+        "pcmanfm.log": {
+          "sha256": "a0cf2f686479cbf2057e491a0c55274d641c7fadbf55ebb917444aef2111e69e",
+          "bytes": 269
+        }
+      }
+    }
+  ],
+  "resolved_loader_files": {
+    "/usr/lib/x86_64-linux-gnu/libXinerama.so.1.0.0": "dceff724f4f74c420116fa6a11ece62894af4fc0e74a2254c923ccc215e1a041",
+    "/usr/lib/x86_64-linux-gnu/libXrandr.so.2.2.0": "bc6120a734d52e7f5e3611334e9f3cff0b3ce1b129bb20b6412ce8f0f62c049d",
+    "/usr/lib/x86_64-linux-gnu/libglib-2.0.so.0.8000.0": "42467d0dbcc0a6c9e0a31f05a5944095504ce98f093c3fe0825f0a1533fa8207",
+    "/usr/lib/x86_64-linux-gnu/libSM.so.6.0.1": "c9301f0ff852c0edcfc766f91c5df4f73b1b300c0303ac188524154588892fd0",
+    "/usr/lib/x86_64-linux-gnu/libICE.so.6.3.0": "899ff245d50d4f1a7bb114d13b6200f42f93696ad93f38020c6ed7c84a5a943e",
+    "/usr/lib/x86_64-linux-gnu/libX11.so.6.4.0": "c5b5d782bd9cab3420a62df88f5c991507edf3331a89f98464ddbc538c37b879",
+    "/usr/lib/x86_64-linux-gnu/libXext.so.6.4.0": "2907e6a996465de5b32a0dd10534d4416b87f1dee5670aaa7b19301a1fc93f44",
+    "/usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2": "09bd5941a53ee7fb06898fa066709cf098df8e33a45042e065d2f8461d92672c",
+    "/usr/lib/x86_64-linux-gnu/libstartup-notification-1.so.0.0.0": "c7e370bca1c0a0806bedfeb1229bd821fa855eb3eb139172395a973ac5e5cfde",
+    "/usr/lib/x86_64-linux-gnu/libXi.so.6.1.0": "a51348c921ce1a35123fa7c99dc59bfd3e815be6829874fe15ae55172901d3e4",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/x11-lab/sysroot/usr/lib/x86_64-linux-gnu/libobrender.so.32.0.0": "b7560717b1b9cac8902398fc68974cb3ed3c2a9d845b72d1cd4384069b3d0f1b",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/x11-lab/sysroot/usr/lib/x86_64-linux-gnu/libobt.so.2.0.2": "684cfb041de0e3aa8c2bce0528fe1abd935009154a171370ed5d05a2defa9ec1",
+    "/usr/lib/x86_64-linux-gnu/libc.so.6": "8db37cf3f2169f59a0f07ef1fea308c35656668c64c8ff294e1860f4121eb161",
+    "/usr/lib/x86_64-linux-gnu/libXrender.so.1.3.0": "250977e0e004b6c0556144c3e683487063b4582dc83d205196ec3aa65d54e2c6",
+    "/usr/lib/x86_64-linux-gnu/libm.so.6": "e9c4b28d340e415b8137480ec442662f981e1399386c5931dae0e886e3639e91",
+    "/usr/lib/x86_64-linux-gnu/libpcre2-8.so.0.11.2": "e00576d71d81d3ba0cfa4903c835a44a8723aac96f72f79ff75200b4cff9071b",
+    "/usr/lib/x86_64-linux-gnu/libuuid.so.1.3.0": "a0fe32d24d125186cf332570770ae749822b5b529d4d4f59222e1aedbc63b58d",
+    "/usr/lib/x86_64-linux-gnu/libbsd.so.0.12.1": "e86cd4f0019f42c2ba5e60602e0edc8694d2948377d98c3654d0f6bddb5254bb",
+    "/usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0": "7958a0136b121bdc4c708968569ad152a9ed208ab026e2537b1005dde64ca440",
+    "/usr/lib/x86_64-linux-gnu/libXfixes.so.3.1.0": "89e5897f438456013d2297850a7558cd28c9ad1f6978447197568949fb6a0fd9",
+    "/usr/lib/x86_64-linux-gnu/libxcb-util.so.1.0.0": "53a59cf786fc63d7e5968392fc70098e8d922b311015b7ccd711c44ca352bd39",
+    "/usr/lib/x86_64-linux-gnu/libX11-xcb.so.1.0.0": "966fc171a949852a606efdf44d255f6f91b35c16328f5405c1b24743b6708ea7",
+    "/usr/lib/x86_64-linux-gnu/libpangoxft-1.0.so.0.5200.1": "a753764c5013887d9a5ed0eaf926522d8c31349ca5f6c02ccf1e28358d4ef118",
+    "/usr/lib/x86_64-linux-gnu/libpango-1.0.so.0.5200.1": "44fbb30ec8f9b2621095bad0d27cc15cec39245133124a44e8abc45193cbb493",
+    "/usr/lib/x86_64-linux-gnu/libXft.so.2.3.6": "368eee2879589cb6716f03ba23dee35b97faa0a4102c715776c7224bef8e3164",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/x11-lab/sysroot/usr/lib/x86_64-linux-gnu/libImlib2.so.1.12.1": "56e1452e4fabc60aa4d26518d9d386f538b6633a168734a32b79fb0dc47bb58b",
+    "/usr/lib/x86_64-linux-gnu/librsvg-2.so.2.50.0": "5d7825eb908cfb6aebf9a0c4962307865875bfb8ad3b5cda5e9503d328be4a1b",
+    "/usr/lib/x86_64-linux-gnu/libgobject-2.0.so.0.8000.0": "99bf0727e0ca4faf12ab09b753b3d03294562c29c559b970c4dad435f9ec2bc6",
+    "/usr/lib/x86_64-linux-gnu/libcairo.so.2.11800.0": "3144bd5935aee427d6c191b6b6d0ebf9010fb6320295a7f73edd276bc6993f2d",
+    "/usr/lib/x86_64-linux-gnu/libxml2.so.2.9.14": "8b6f68c242929aebe49eb28f800dc3e8ee7147298c94bdabc834f61eff1ac177",
+    "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2": "cd4df4f3c7b83673d61189bf2eaebd33ca4f2853ab9772b8a25e025ef99b1e81",
+    "/usr/lib/x86_64-linux-gnu/libmd.so.0.1.0": "423e18586b6ea740f4465afd64f7a9a4cb7264ed979c8e7256f9085af5345fef",
+    "/usr/lib/x86_64-linux-gnu/libXau.so.6.0.0": "8040da3f8516c1acfe39f04ff022480cdb273705ba5e7a4ca70bbdb1527cd67a",
+    "/usr/lib/x86_64-linux-gnu/libXdmcp.so.6.0.0": "667d97d6da16016400ab10de9f83ef4ab209ceb6adf68ff9650225ec13e723b0",
+    "/usr/lib/x86_64-linux-gnu/libpangoft2-1.0.so.0.5200.1": "cfcd528cfb737212719b3273b433b7fe35b6528acbb08c2223a486449314d629",
+    "/usr/lib/x86_64-linux-gnu/libfontconfig.so.1.12.1": "a94b4059b27766f563894c8f7e61762b6f6b2e25c59ef36b730164d4b75c6c98",
+    "/usr/lib/x86_64-linux-gnu/libgio-2.0.so.0.8000.0": "d8c4cf698e9b8790584cc5ede813a86ec4f041c0d58daa452b72431572685a87",
+    "/usr/lib/x86_64-linux-gnu/libfribidi.so.0.4.0": "550020af7ff4f77e3f05500e71051b676ee76f530479c2a836dfe899fcaf8395",
+    "/usr/lib/x86_64-linux-gnu/libthai.so.0.3.1": "1a72e318418dc0ee6014401de9d9976516fe127358c07c305e1198b9814e2b31",
+    "/usr/lib/x86_64-linux-gnu/libharfbuzz.so.0.60830.0": "4562cfcfd18935324ba3ac74a944898b867ab87a56e925ab3e351ba773f1513e",
+    "/usr/lib/x86_64-linux-gnu/libfreetype.so.6.20.1": "c14c53c5baff12afafb610c6312fb879e9bb77e80dd42e27504d52d6d8bcd059",
+    "/usr/lib/x86_64-linux-gnu/libxcb-shm.so.0.0.0": "ad78a7b22409685ca82e54346c2b9465d697f303e69e74a9c1693bb206e319df",
+    "/usr/lib/x86_64-linux-gnu/libcairo-gobject.so.2.11800.0": "61b4b6cb475c8c2c4622fd1618981d466b716b11903255b68975830fa20d982c",
+    "/usr/lib/x86_64-linux-gnu/libgdk_pixbuf-2.0.so.0.4200.10": "f9f51980f9d8978507c3637fa5d4e89f9910d01d74c91905f27158efca27279d",
+    "/usr/lib/x86_64-linux-gnu/libpangocairo-1.0.so.0.5200.1": "229b50cdc7e7675000815e18338189db6f03fd564baaa4d0f257dbbe34f14652",
+    "/usr/lib/x86_64-linux-gnu/libgcc_s.so.1": "d93224d2b0dab4247598be683adca02f5cf00586f99c187579cd7e92058fb7cb",
+    "/usr/lib/x86_64-linux-gnu/libffi.so.8.1.4": "00f593fe192f2851b8ce23b25cec2488d769beb5a8f63e8c9e563071e1075153",
+    "/usr/lib/x86_64-linux-gnu/libz.so.1.3": "9b64150b28505a33d6bc3ecf709c279f6de97a1c184dbda65d06ee4537f6d286",
+    "/usr/lib/x86_64-linux-gnu/libpng16.so.16.43.0": "eac265b3506df0d9110dd9143e1d0503e2daabafe1d98b23fac8ca17b71d1f6b",
+    "/usr/lib/x86_64-linux-gnu/libxcb-render.so.0.0.0": "35fdef7a90d7f44a0ad9cb259c9ee22f04a48cb064ceb1fc7d17be815acab327",
+    "/usr/lib/x86_64-linux-gnu/libpixman-1.so.0.42.2": "73aa0daeedb7228754d798b194e2ff69c8b82a689b9aa4f1d8ab32a8763b0cc5",
+    "/usr/lib/x86_64-linux-gnu/libicuuc.so.74.2": "7560aadde38e5f4237a47a1ddd5891f9b36768a77a60faae30beee003ac01901",
+    "/usr/lib/x86_64-linux-gnu/liblzma.so.5.4.5": "696e868dd0700a19a6d65fc01608ec2d70d3cb91f65710e89180cd2e688f30cb",
+    "/usr/lib/x86_64-linux-gnu/libexpat.so.1.9.1": "c42ff317838b4b4639e2ea801905f0317177c6df7e31b2f0d0240e3c3ac0cfde",
+    "/usr/lib/x86_64-linux-gnu/libgmodule-2.0.so.0.8000.0": "f8445c01952fd3ff0bb4f17f73be821af3e4b9b61546ff517392e9baeb8f2126",
+    "/usr/lib/x86_64-linux-gnu/libmount.so.1.1.0": "43831ab1f85948e5599c5c0295d87ad6d03e3d58b801534abdf4cd5d266388de",
+    "/usr/lib/x86_64-linux-gnu/libselinux.so.1": "0ec0843463f90e227b0e138e1f379774f50b5514bd7f5dbd4c8a87aca0aa6670",
+    "/usr/lib/x86_64-linux-gnu/libdatrie.so.1.4.0": "507f33edbbc19b80637d6d66f8e3f62fac097d0b4e9ee6f6f23f535ecea26a61",
+    "/usr/lib/x86_64-linux-gnu/libgraphite2.so.3.2.1": "fcfaf843b25b58b88319ced52f826fc8213a661f3693c916f88641eddffe05b8",
+    "/usr/lib/x86_64-linux-gnu/libbz2.so.1.0.4": "218c4abdabce31161f3c2778762986d1fe06633705c7eb004a740946a5ccdfff",
+    "/usr/lib/x86_64-linux-gnu/libbrotlidec.so.1.1.0": "64d8a5019d4c294b89fde1193343ea324bbd8603652554e5545f0a01595fa2c5",
+    "/usr/lib/x86_64-linux-gnu/libjpeg.so.8.2.2": "ac09f2cd6f8a3b8e3cb123999ce275f9bcbe31c6cf9e20212c8f297772591d15",
+    "/usr/lib/x86_64-linux-gnu/libicudata.so.74.2": "ddbb3718b8bd9cbd780e5ab08b4503c30a6c4fa0706ebe5d074ed6b596c1714e",
+    "/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.33": "1fd75fe70354a416d75aef22bcae68c47bd25d20e2d0568c30b1a9838cf62f11",
+    "/usr/lib/x86_64-linux-gnu/libblkid.so.1.1.0": "f3d6283f6b58de134f0f13094deac9c3af6764923c62e85f08a5780ad4ebe039",
+    "/usr/lib/x86_64-linux-gnu/libbrotlicommon.so.1.1.0": "a91ead095d2c80520c55a89057bbe10b031a075340442e63f44b310f93883a1b",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/x11-lab/sysroot/usr/lib/x86_64-linux-gnu/libfm-gtk3.so.4.1.3": "6382624160e6c1b18fd4585b8762d7f61c30a8f02591ffcc092146d381371d82",
+    "/usr/lib/x86_64-linux-gnu/libgtk-3.so.0.2409.32": "0611fd19d1354a39a7cfafceffa3bdf4289d4c497c7f69ff337f86e99cf37d93",
+    "/usr/lib/x86_64-linux-gnu/libgdk-3.so.0.2409.32": "0b52fb8111e4baf38d469d1fa0b0c49f166faa41bbcde1494221232302829dea",
+    "/usr/lib/x86_64-linux-gnu/libatk-1.0.so.0.25209.1": "d312f3dbed8f19037bf4d8581f0e41ddfe53796dc7abbc9b7f253495d472a923",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/x11-lab/sysroot/usr/lib/x86_64-linux-gnu/libfm.so.4.1.3": "45067837e3b8d67030ecd5347f99266358b6f0cd94707e76b945b3638c5ebc92",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/x11-lab/sysroot/usr/lib/x86_64-linux-gnu/libmenu-cache.so.3.2.0": "5f59de04fc0862be188dbe580cc92c9dbc5900cc9746f483500a3d735b35568f",
+    "/usr/lib/x86_64-linux-gnu/libepoxy.so.0.0.0": "5fc7dd1ea433bfe5f1fd9854e66246bdb44e0cbf148707121c5f4c99fe11be29",
+    "/usr/lib/x86_64-linux-gnu/libatk-bridge-2.0.so.0.0.0": "366fcd2f2cd9a77767855a7c25b00ffce57e6b55109a2bf800872f0337a28415",
+    "/usr/lib/x86_64-linux-gnu/libxkbcommon.so.0.0.0": "3eb6c7315985803a7c72cb81aa3293b763e6cfc907b70b7b2f641c2827cd90f9",
+    "/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0": "1c22abb422953442aa12822ea51ac76d1c8be92ed143e0159e0f830776cde2b2",
+    "/usr/lib/x86_64-linux-gnu/libwayland-cursor.so.0.22.0": "bcb52f21ed9a07af67795de01143fc5562939e584b5945ebbec60c054660e9f5",
+    "/usr/lib/x86_64-linux-gnu/libwayland-egl.so.1.22.0": "f62e5dae4e63cb43e0210f08ef74dd379f0cd87eafbe569998fe6e1c4a820a10",
+    "/usr/lib/x86_64-linux-gnu/libXdamage.so.1.1.0": "6ff910fbde851ede163b9066671e1740e374df414591015d90770b99d5b3de4a",
+    "/usr/lib/x86_64-linux-gnu/libXcomposite.so.1.0.0": "675c78d8d5b088a59ad4f8eb15419d0842b17caca3317a5e9f68573171ec5d61",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/x11-lab/sysroot/usr/lib/x86_64-linux-gnu/libdbus-glib-1.so.2.3.5": "5833ca1171113d2e83a0ebf3cced225212ed680f663517467a552f6da2ff7040",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/x11-lab/sysroot/usr/lib/x86_64-linux-gnu/libexif.so.12.3.4": "564b13e255ba65655883a1ac2ce184e2631f4167cc6218255bb5230fcd55efba",
+    "/usr/lib/x86_64-linux-gnu/libatspi.so.0.0.1": "4af877d2d235b7eaab015abe6d81b82c82fe506a5d71403b9bbdfcbce99e8141",
+    "/usr/lib/x86_64-linux-gnu/libdbus-1.so.3.32.4": "a6ae7b4ef48562b40d7b9ba8efd2e49f6528b7cc6364bea382dcee4b473b5413",
+    "/usr/lib/x86_64-linux-gnu/libsystemd.so.0.38.0": "bdf59c828b547bcdbe7b3576c0810d9d9d2e982d8b61b365812542da6a4c4a99",
+    "/usr/lib/x86_64-linux-gnu/libcap.so.2.66": "6ac6abc86ac891c6e13486470e26f1d939f47fda9e6b5d5508a7f5ec881adc84",
+    "/usr/lib/x86_64-linux-gnu/libgcrypt.so.20.4.3": "9f872b8956edfa11a3ad093f509cf312e8d135dd801ca548c990daa214c03bd4",
+    "/usr/lib/x86_64-linux-gnu/liblz4.so.1.9.4": "40bffd0a098387368b16b992abd5f7cf43c0fa2f05cabe5a6d483719554adfda",
+    "/usr/lib/x86_64-linux-gnu/libzstd.so.1.5.5": "0a2128bc10841fb29e76d08d945864dfb0b6a66da5df6df5d8299197439e54bb",
+    "/usr/lib/x86_64-linux-gnu/libgpg-error.so.0.34.0": "6cb18a007bfcb623029f4528a36b46578fea7dc34c2b505b8e6e0d99e6348cd1",
+    "/usr/lib/x86_64-linux-gnu/libXtst.so.6.1.0": "b236448961631bb13464c878e68535f5335b5fa10a5d8411f3ad1a56ff430ec2"
+  }
+}

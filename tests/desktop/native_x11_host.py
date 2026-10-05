@@ -31,6 +31,19 @@ def rgb_record(pixels):
             'rgb_zlib_base64': base64.b64encode(zlib.compress(pixels)).decode('ascii')}
 
 
+def fixture_identity(workspace):
+    desktop = workspace / 'Desktop'
+    names = sorted(p.name for p in desktop.iterdir())
+    if names != ['Probe Folder', 'Second Folder'] or any((desktop / n).is_symlink() for n in names):
+        raise ValueError('synthetic desktop fixture changed')
+    if sorted(p.name for p in (desktop / 'Probe Folder').iterdir()) != ['Sentinel.txt'] or list((desktop / 'Second Folder').iterdir()):
+        raise ValueError('synthetic folder contents changed')
+    sentinel = desktop / 'Probe Folder/Sentinel.txt'
+    if sentinel.is_symlink():
+        raise ValueError('synthetic sentinel became a symlink')
+    return {'folders': names, 'Probe Folder/Sentinel.txt': {'bytes': sentinel.stat().st_size, 'sha256': sha(sentinel)}}
+
+
 class DesktopDisplay(Display):
     def __init__(self):
         super().__init__()
@@ -78,7 +91,7 @@ class DesktopDisplay(Display):
         self.x.XFlush(self.handle)
 
 
-def observe(environment, channel, workspace, wallpaper_mode):
+def observe(environment, channel, workspace, wallpaper_mode, icon_input=False):
     os.environ.update(environment)
     display = None
     try:
@@ -104,8 +117,21 @@ def observe(environment, channel, workspace, wallpaper_mode):
         else:
             raise TimeoutError('native window/icon manager did not become ready: ' + str(state))
         time.sleep(.3)
+        channel.send({'icon_manager_ready': True})
+        if channel.recv() != {'wallpaper_setup_complete': True}:
+            raise ValueError('wallpaper setup sequence')
+        time.sleep(.3)
         baseline = display.capture()
         wallpaper = display.capture(600, 400, 128, 96)
+        ppm = (workspace / 'wallpaper.ppm').read_bytes()
+        header = b'P6\n800 600\n255\n'
+        if not ppm.startswith(header) or len(ppm) != len(header) + 800*600*3:
+            raise ValueError('configured PPM fixture shape')
+        wallpaper_rgb = ppm[len(header):]
+        expected_region = (bytes((48, 72, 96))*128*96 if wallpaper_mode == 'color' else
+                           b''.join(wallpaper_rgb[(y*800+600)*3:(y*800+728)*3] for y in range(400, 496)))
+        if wallpaper != expected_region:
+            raise ValueError('configured wallpaper pixels do not match the independently read fixture')
         expected_background = bytes(channel for y in range(32, 128) for x in range(32, 160)
                                     for channel in ((48, 72, 96) if wallpaper_mode == 'color' or (x // 40 + y // 40) % 2
                                                     else (64, 88, 112)))
@@ -114,7 +140,8 @@ def observe(environment, channel, workspace, wallpaper_mode):
             raise RuntimeError('known icon observation region has no sufficient icon content')
         channel.send({'ready': True, 'desktop_window': desktop, 'before': state,
                       'baseline_icon_region': rgb_record(baseline), 'wallpaper_region': rgb_record(wallpaper),
-                      'baseline_desktop': rgb_record(display.capture(0, 0, 800, 600))})
+                      'baseline_desktop': rgb_record(display.capture(0, 0, 800, 600)),
+                      'configured_wallpaper_rgb': rgb_record(wallpaper_rgb), 'wallpaper_fixture_display_verified': True})
         command = channel.recv()
         window, pid = command['window'], command['pid']
         display.verify(window, pid)
@@ -180,7 +207,22 @@ def observe(environment, channel, workspace, wallpaper_mode):
             order = s['client_order_bottom_to_top']
             relation.append('above' if window in order and desktop in order and order.index(window) > order.index(desktop)
                             else 'below' if window in order and desktop in order else 'unavailable')
+        input_result = {'outcome': 'not_run', 'steps': []}
+        if icon_input:
+            from x11_input import InputObserver
+            import faulthandler
+            with (workspace / 'input-timeout.log').open('x', encoding='utf-8') as timeout_log:
+                faulthandler.dump_traceback_later(8, file=timeout_log)
+                try:
+                    inputs = InputObserver(display, command['manager_pid'], workspace, desktop)
+                    try:
+                        input_result = inputs.run(window, rgb_record)
+                    finally:
+                        inputs.close()
+                finally:
+                    faulthandler.cancel_dump_traceback_later()
         channel.send({'trace': trace, 'observation': result, 'actions': actions, 'structures': structures,
+                      'input_observation': input_result,
                       'reveal_action_confirmed': action_confirmed, 'candidate_relative_to_icons': sorted(set(relation)),
                       'baseline_generation': decode(first_pixels), 'baseline_matches_icon_manager': first_pixels == baseline,
                       'icon_pixels': {'baseline_non_background': len(icon_mask), 'changed_under_candidate': hidden_icon_pixels,
@@ -206,6 +248,7 @@ def configure(workspace, sysroot, rendering, wallpaper_mode):
         (workspace / name).mkdir(mode=0o700)
     (workspace / 'Desktop/Probe Folder').mkdir()
     (workspace / 'Desktop/Second Folder').mkdir()
+    (workspace / 'Desktop/Probe Folder/Sentinel.txt').write_text('Synthetic native folder-open sentinel.\n', encoding='utf-8')
     config = workspace / 'config'
     (config / 'pcmanfm/syspane-lab').mkdir(parents=True)
     (config / 'gtk-3.0').mkdir()
@@ -232,7 +275,7 @@ def configure(workspace, sysroot, rendering, wallpaper_mode):
     # address has EXTERNAL same-uid authentication and no filesystem socket.
     bus_address = 'unix:abstract=syspane-x11-' + uuid.uuid4().hex
     (config / 'bus.xml').write_text('<busconfig><type>session</type><listen>' + bus_address + '</listen>'
-                                  '<policy context="default"><allow send_destination="*"/><allow own="*"/></policy></busconfig>', encoding='utf-8')
+                                  '<policy context="default"><allow send_destination="*"/><allow receive_sender="*"/><allow own="*"/></policy></busconfig>', encoding='utf-8')
     environment = {'XDG_CONFIG_HOME': str(config), 'XDG_DATA_HOME': str(workspace / 'data'),
                    'XDG_CACHE_HOME': str(workspace / 'cache'), 'XDG_RUNTIME_DIR': str(workspace / 'run'),
                    'XDG_CONFIG_DIRS': str(sysroot / 'etc/xdg'),
@@ -257,18 +300,24 @@ def receive(channel, logs, timeout=8):
     raise TimeoutError('bounded native observer timeout')
 
 
-def run_case(build, sysroot, output, mode, rendering, wallpaper_mode):
+def run_case(build, sysroot, output, mode, rendering, wallpaper_mode, delayed_wallpaper=False, icon_input=False):
     workspace = output / ('x11-' + mode + '-' + uuid.uuid4().hex)
     workspace.mkdir(mode=0o700)
     row = {'candidate': mode, 'execution': 'failed', 'workspace': str(workspace.relative_to(build))}
-    server = worker = channel = None
+    server = worker = channel = runtime_fd = None
     processes, logs, handles = [], [], []
     try:
-        additions, preserved = configure(workspace, sysroot, rendering, wallpaper_mode)
+        additions, preserved = configure(workspace, sysroot, rendering, 'color' if delayed_wallpaper else wallpaper_mode)
         server, environment = launch_xvfb(workspace)
         environment.update(additions)
         environment.pop('WAYLAND_DISPLAY', None)
         environment.pop('SESSION_MANAGER', None)
+        if icon_input:
+            runtime_fd = os.open(workspace / 'run', os.O_RDONLY | os.O_DIRECTORY)
+            environment['XDG_RUNTIME_DIR'] = '/proc/' + str(os.getpid()) + '/fd/' + str(runtime_fd)
+            environment.pop('NO_AT_BRIDGE', None)
+            environment['AT_SPI_BUS_ADDRESS'] = environment['DBUS_SESSION_BUS_ADDRESS']
+            environment['GTK_MODULES'] = 'atk-bridge'
         def launch(name, command, stdout=None):
             log = workspace / (name + '.log')
             handle = log.open('xb')
@@ -279,19 +328,45 @@ def run_case(build, sysroot, output, mode, rendering, wallpaper_mode):
             processes.append((name, process))
             return process
         launch('bus', ['/usr/bin/dbus-daemon', '--nofork', '--nopidfile', '--nosyslog', '--config-file=' + str(workspace / 'config/bus.xml')])
+        if icon_input:
+            # Explicitly owned registry; no inherited accessibility service or activation.
+            registry = launch('registry', ['/usr/libexec/at-spi2-registryd'])
+            deadline = time.monotonic() + 3
+            while time.monotonic() < deadline:
+                ready = subprocess.run(['/usr/bin/gdbus', 'call', '--address', environment['DBUS_SESSION_BUS_ADDRESS'],
+                                        '--dest', 'org.freedesktop.DBus', '--object-path', '/org/freedesktop/DBus',
+                                        '--method', 'org.freedesktop.DBus.GetConnectionUnixProcessID', 'org.a11y.atspi.Registry'],
+                                       env=environment, capture_output=True, text=True, timeout=1)
+                if ready.returncode == 0 and ready.stdout.strip() == '(uint32 ' + str(registry.pid) + ',)':
+                    row['registry_identity_confirmed'] = registry.pid
+                    break
+                time.sleep(.05)
+            else:
+                raise TimeoutError('owned accessibility registry did not acquire its bus name')
         launch('openbox', [str(sysroot / 'usr/bin/openbox'), '--config-file', str(workspace / 'config/openbox.xml')])
         context = mp.get_context('spawn')
         channel, remote = context.Pipe()
-        worker = context.Process(target=observe, args=(environment, remote, workspace, wallpaper_mode))
+        worker = context.Process(target=observe, args=(environment, remote, workspace, wallpaper_mode, icon_input))
         worker.start()
         remote.close()
         row.update(receive(channel, logs))
-        launch('pcmanfm', [str(sysroot / 'usr/bin/pcmanfm'), '--profile=syspane-lab', '--desktop'])
+        manager = launch('pcmanfm', [str(sysroot / 'usr/bin/pcmanfm'), '--profile=syspane-lab', '--desktop'])
         channel.send({'desktop_started': True})
+        row.update(receive(channel, logs))
+        if delayed_wallpaper:
+            setup = subprocess.run([str(sysroot / 'usr/bin/pcmanfm'), '--profile=syspane-lab',
+                                    '--set-wallpaper=' + str(workspace / 'wallpaper.ppm'), '--wallpaper-mode=' + wallpaper_mode],
+                                   cwd=workspace, env=environment, stdin=subprocess.DEVNULL, capture_output=True, timeout=3)
+            row['wallpaper_setup'] = {'exit': setup.returncode, 'stdout': setup.stdout.decode('utf-8', errors='replace'),
+                                      'stderr': setup.stderr.decode('utf-8', errors='replace')}
+            if setup.returncode:
+                raise RuntimeError('native wallpaper setup failed')
+        channel.send({'wallpaper_setup_complete': True})
         row.update(receive(channel, logs))
         if any(process.poll() is not None for _, process in processes):
             raise RuntimeError('lab service exited before candidate startup')
         row['preserved_before'] = {p.relative_to(workspace).as_posix(): {'sha256': sha(p), 'bytes': p.stat().st_size} for p in preserved}
+        row['fixture_before'] = fixture_identity(workspace)
         candidate = launch('candidate', [str(build / 'SysPane.OracleProbe'), mode], subprocess.PIPE)
         bootstrap = b''
         deadline = time.monotonic() + 3
@@ -304,23 +379,29 @@ def run_case(build, sysroot, output, mode, rendering, wallpaper_mode):
         info = json.loads(bootstrap)
         if set(info) != {'window', 'pid', 'claims_visible'} or info['pid'] != candidate.pid:
             raise ValueError('candidate bootstrap identity')
-        channel.send(info)
-        row.update(receive(channel, logs))
+        channel.send({**info, 'manager_pid': manager.pid})
+        row.update(receive(channel, logs, 14 if icon_input else 8))
         candidate.wait(timeout=3)
         if candidate.returncode != 0:
             raise RuntimeError('candidate did not exit cleanly')
         channel.send({'candidate_exited': True})
         row.update(receive(channel, logs))
         row['preserved_after'] = {p.relative_to(workspace).as_posix(): {'sha256': sha(p), 'bytes': p.stat().st_size} for p in preserved}
+        row['fixture_after'] = fixture_identity(workspace)
+        if row['fixture_before'] != row['fixture_after']:
+            raise RuntimeError('synthetic folder fixture changed during native input')
         row['wallpaper_preservation'] = 'pass' if row['preserved_before'] == row['preserved_after'] and row['wallpaper_pixels_unchanged_during'] and row['wallpaper_pixels_unchanged_after'] else 'fail'
         row['wallpaper_preservation_scope'] = 'Configured solid color; file unchanged but not displayed' if wallpaper_mode == 'color' else 'Configured image file and observed wallpaper region'
         row['placement'] = 'fail' if row['icon_pixels']['changed_under_candidate'] or row['baseline_generation'] is None else 'inconclusive'
-        row['icon_input'] = 'not_run'
+        row['icon_input'] = row['input_observation']['outcome']
         row['wall_conformant'] = False
         if not row['reveal_action_confirmed']:
             raise RuntimeError('named reveal/restore action not independently confirmed')
         if mode == 'live' and row['observation']['outcome'] != 'fail':
             raise RuntimeError('ordinary-window negative control did not fail reveal')
+        if mode == 'live' and icon_input and (row['icon_input'] != 'fail' or
+                [(s['step'], s['outcome']) for s in row['input_observation']['steps']] != [('baseline-clear', 'pass'), ('select', 'fail')]):
+            raise RuntimeError('ordinary-window negative input control did not detect blocked selection')
         if any(process.poll() is not None for name, process in processes if name != 'candidate'):
             raise RuntimeError('lab service exited before observations completed')
         row['execution'] = 'completed'
@@ -371,6 +452,8 @@ def run_case(build, sysroot, output, mode, rendering, wallpaper_mode):
         row['remaining_owned_group_members'] = remaining
         for handle in handles:
             handle.close()
+        if runtime_fd is not None:
+            os.close(runtime_fd)
         auth = workspace / 'xauthority'
         if auth.exists() and not auth.is_symlink():
             auth.unlink()
@@ -379,6 +462,15 @@ def run_case(build, sysroot, output, mode, rendering, wallpaper_mode):
         journal = workspace / 'frames.jsonl'
         if journal.exists():
             row['capture_journal'] = {'path': str(journal.relative_to(build)), 'sha256': sha(journal), 'bytes': journal.stat().st_size}
+        for name, key in (('input.jsonl', 'input_journal'), ('input-timeout.log', 'input_timeout')):
+            path = workspace / name
+            if path.exists():
+                if path.stat().st_size > 8 * 1024**2:
+                    row['execution'] = 'failed'
+                    row['error'] = 'native input journal exceeded 8 MiB budget'
+                else:
+                    row[key] = {'path': str(path.relative_to(build)), 'sha256': sha(path), 'bytes': path.stat().st_size,
+                                'raw_utf8': path.read_text(encoding='utf-8')}
         if row.get('observer_exit') != 0 or remaining or any(p['exit'] is None for p in cleanup):
             row['execution'] = 'failed'
     return row
@@ -389,6 +481,8 @@ def main():
     parser.add_argument('build_dir', type=Path)
     parser.add_argument('--gtk-rendering', choices=['similar', 'image'], default='similar', help='Record a separate GTK rendering laboratory variant')
     parser.add_argument('--wallpaper-mode', choices=['tile', 'color'], default='tile', help='Color is a diagnostic control, never file-wallpaper qualification')
+    parser.add_argument('--delayed-wallpaper', action='store_true', help='Configure the synthetic image only after icon-manager initialization')
+    parser.add_argument('--icon-input', action='store_true', help='Use native pointer input and an explicitly owned read-only accessibility observer')
     args = parser.parse_args()
     build = args.build_dir.resolve(strict=True)
     if os.geteuid() == 0 or json.loads((build / '.syspane-owner.json').read_text())['profile'] != 'linux-x64-gcc13':
@@ -406,12 +500,16 @@ def main():
     inputs = [Path(__file__), ROOT / 'tests/desktop/native_oracle.py', ROOT / 'tests/desktop/oracle.py',
               ROOT / 'tests/fault/native_diagnostic.py', ROOT / 'source/diagnostics/oracle_probe_x11.cpp',
               ROOT / 'source/desktop/x11/desktop_candidate.cpp', ROOT / 'source/desktop/x11/desktop_candidate.hpp',
-              ROOT / 'build-support/x11-lab-packages.json', ROOT / 'spec/delivery/packages/w-05-x11-investigation.md']
+              ROOT / 'build-support/x11-lab-packages.json', ROOT / 'spec/delivery/packages/w-05-x11-investigation.md',
+              ROOT / 'tests/desktop/x11_input.py', ROOT / 'build-support/x11-input-runtime.json',
+              ROOT / 'build-support/record_x11_host.py', ROOT / 'tests/desktop/test_x11_record.py']
     report = {'family': 'X11-HOST-01', 'execution': 'failed', 'executed_at': datetime.now(timezone.utc).isoformat(),
               'profile': 'linux-x64-gcc13 / Openbox 3.6.1 / PCManFM 1.3.2 / owned Xvfb 800x600x24',
               'qualification': 'Bounded X11 candidate investigation; no production or other desktop support claim.',
               'gtk_rendering': args.gtk_rendering,
               'wallpaper_mode': args.wallpaper_mode,
+              'delayed_wallpaper_setup': args.delayed_wallpaper,
+              'icon_input_requested': args.icon_input,
               'source_base': subprocess.check_output(['git', '-c', 'safe.directory=' + str(ROOT), 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
               'source_inputs': {p.relative_to(ROOT).as_posix(): sha(p) for p in inputs},
               'artifact_sha256': sha(build / 'SysPane.OracleProbe'), 'lab_identity_sha256': sha(lab / 'identity.json'),
@@ -419,8 +517,18 @@ def main():
               'environment': {'uid': os.geteuid(), 'uname': list(platform.uname()), 'os_release_sha256': sha(Path('/etc/os-release'))},
               'cases': []}
     loader_environment = {**os.environ, 'LD_LIBRARY_PATH': str(sysroot / 'usr/lib/x86_64-linux-gnu')}
+    binaries = [sysroot / 'usr/bin/openbox', sysroot / 'usr/bin/pcmanfm', build / 'SysPane.OracleProbe']
+    if args.icon_input:
+        runtime = json.loads((ROOT / 'build-support/x11-input-runtime.json').read_text(encoding='utf-8'))
+        versions = dict(line.split('\t') for line in subprocess.check_output(
+            ['dpkg-query', '-W', *runtime['packages']], text=True, timeout=3).splitlines())
+        if versions != runtime['packages'] or any(sha(Path(p)) != digest for p, digest in runtime['files'].items()):
+            raise ValueError('optional native input runtime differs from its pinned identity')
+        report['input_runtime'] = runtime
+        report['system_binaries'].update(runtime['files'])
+        binaries.extend(Path(p) for p in runtime['files'] if not p.endswith('.typelib'))
     dependencies = {}
-    for binary in (sysroot / 'usr/bin/openbox', sysroot / 'usr/bin/pcmanfm', build / 'SysPane.OracleProbe'):
+    for binary in binaries:
         listing = subprocess.check_output(['ldd', str(binary)], env=loader_environment, text=True, timeout=5)
         if 'not found' in listing:
             raise ValueError('lab loader dependency missing: ' + listing)
@@ -431,7 +539,7 @@ def main():
     try:
         for mode in ('live', 'desktop', 'desktop-below'):
             print('X11 host investigation:', mode, flush=True)
-            row = run_case(build, sysroot, output, mode, args.gtk_rendering, args.wallpaper_mode)
+            row = run_case(build, sysroot, output, mode, args.gtk_rendering, args.wallpaper_mode, args.delayed_wallpaper, args.icon_input)
             report['cases'].append(row)
             print('Execution:', row['execution'], '; observation:', row.get('observation', {}).get('outcome'), flush=True)
             if row['execution'] != 'completed':

@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-06T04:04:34+11:00", "scope": "Initial real X11 reveal and icon-placement investigation; failed candidates and image lab preserved"}
+updated: {"by": "codex", "at": "2026-10-06T04:53:25+11:00", "scope": "Native X11 input and exact delayed-wallpaper evidence; placement and observer failures preserved"}
 ---
 
 # Current state and next admitted boundary
@@ -77,6 +77,12 @@ pixels. The normal-window control disappears, a desktop-type window persists abo
 icon pixels, and its below variant is hidden. File-wallpaper startup fails separately;
 the solid-color control does not qualify it. Linux's 54-entry regression suite and
 the two affected Windows component checks pass. No desktop host becomes qualified.
+
+The [X11 input checkpoint](x11-input-handoff.md) adds independently observed native
+selection, drag, menus and folder opening, plus exact PPM pixels after delayed image
+setup. The hidden below-window candidate passes the input sequence; the visible
+desktop-type window blocks the tested icon click. Both still fail placement. Fifteen
+evidence checks pass. Earlier observer/laboratory failures are preserved separately.
 
 Canonical 0.2.0 documentation bundle, unchanged 0.1 authoring profile, preserved old
 fixtures, new experimental scene/command/capability 0.2 and admission descriptors.
