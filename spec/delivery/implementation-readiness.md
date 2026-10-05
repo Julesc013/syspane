@@ -12,7 +12,7 @@ sp_requires: ["SP-CURRENT"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-AUDIT-2026-10-04", "resource": "User-supplied October 2026 audit inputs", "title": "October review inputs"}]
-updated: {"by": "codex", "at": "2026-10-05T23:39:47+11:00", "scope": "Admitted model foundation; executed development checks, no desktop qualification or human review attested"}
+updated: {"by": "codex", "at": "2026-10-06T00:26:58+11:00", "scope": "Portable W-24 implementation checkpoint; native IPC authentication and desktop qualification pending"}
 ---
 
 # Implementation readiness and gates
@@ -24,9 +24,9 @@ new versioned schemas or explicit work-scope refinement.
 
 | Gate | Present as specification/checks | Pending implementation/evidence |
 |---|---|---|
-| Initial authoring | Rich initial settings descriptors, scene/binding/layout 0.2, result and handshake shapes | Runtime merge/resolution, migration, transport framing, persistence and native controls |
-| Recovery/security | Independent diagnostic, lease, policy/disclosure and quota contracts | Fault harness, native peer authorization, revocation, measured budgets |
-| Native profiles | Typed target/capability metadata, Windows/Linux model build profiles, component manifest and executable foundation checks | External desktop oracle, transport/recovery, native desktop builds and target qualification |
+| Initial authoring | Setting descriptors, scene/binding/layout 0.2, portable frame/handshake/preview checks | Runtime merge/resolution, migration, native transport integration, persistence and native controls |
+| Recovery/security | Diagnostic/lease contracts and portable policy/disclosure/revocation/queue checks | Fault harness, native peer authorization, actual data-path revocation, measured budgets |
+| Native profiles | Windows/Linux model and portable protocol build profiles, component ownership and executable checks | External desktop oracle, native transport/recovery, desktop builds and target qualification |
 | Content/SDK | Preset/package/extension metadata and buffer-result sketch | Bounded importer, dependency closure, extended theme/AST, installed SDK/ABI consumers |
 | Saver | Role/lifecycle/privacy/ownership contracts | Native host adapters and preview/fullscreen/configuration qualification |
 | Packages/setup | Names, paths, one-owner and recovery contracts | Actual release/component/setup manifests bound to inspected provider, offline packages and lifecycle tests |
@@ -51,12 +51,13 @@ failure/resource rules, decision authority, commands and completion evidence.
 model cases. Its runtime scope is now admitted and both development builds passed
 their foundation cases; see [the handoff](foundation-handoff.md).
 [Acceptance traces](../assurance/acceptance-traces.md) keep the original expectations;
-only the linked executed model cases are claimed. Other runners remain pending.
+only linked executed cases are claimed. [W-24's portable checkpoint](transport-handoff.md)
+adds request-budget and protocol/policy cases. Native stream runners remain pending.
 
-For W-24, finish exact message bodies, sender/receiver/connection-state coverage,
-mutable ownership, disconnect/revocation/shutdown transitions and global/control
-queue bounds. The transport now separates active requests from retained-result
-reservations. For W-08/W-09/W-33, add exact merge, scene/layout, selector, preset and
+For W-24, finish native peer authentication, bounded I/O and real client/server
+integration under its [package](packages/w-24-transport.md). The portable preview
+slice closes role/state/ownership, queue and reservation limits; disabled features
+still require their own closure before advertisement. For W-08/W-09/W-33, add exact merge, scene/layout, selector, preset and
 recovery examples as those boundaries are admitted. Existing framing, persistence
 and architecture decisions remain the starting point.
 

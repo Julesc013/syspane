@@ -12,7 +12,7 @@ sp_requires: ["SP-STATE", "SP-TRANSPORT", "SP-PERSISTENCE", "SP-TESTING"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-READINESS-2026-10-05", "resource": "User-supplied readiness review, 2026-10-05", "title": "Implementation closure review"}]
-updated: {"by": "codex", "at": "2026-10-05T23:39:47+11:00", "scope": "Admitted model foundation; executed development checks, no desktop qualification or human review attested"}
+updated: {"by": "codex", "at": "2026-10-06T00:26:58+11:00", "scope": "Portable W-24 implementation checkpoint; native IPC authentication and desktop qualification pending"}
 ---
 
 # Concrete implementation acceptance traces
@@ -63,8 +63,9 @@ These cases belong to T-IPC and T-PROTOCOL in W-24/W-08.
 | IPC-BUDGET-03 | Disconnect/reconnect after IPC-BUDGET-02 at t=599 s; submit a new mutation, then retrieve an earlier result. | Reconnection does not reset principal-scoped retention capacity. New mutation stays busy; authorized result retrieval returns the retained result without executing a mutation. |
 | IPC-BUDGET-04 | Resend an identical retained request, then reuse its ID with a changed body. | Identical replay returns its existing result without another reservation or revision. Changed body returns conflict; retained record and authored revision are unchanged. |
 
-Exact role/connection-state message schemas, controller-wide memory/connection
-limits and reserved control queue budgets remain W-24 closure items. These cases
+The [W-24 package](../delivery/packages/w-24-transport.md) closes the initial preview
+message/state and resource boundaries. IPC-BUDGET-01 through IPC-BUDGET-04 now bind
+to `tests/protocol/protocol_tests.cpp` via matching `protocol.` CTest cases. These cases
 do not claim complete wire conformance or establish production throughput.
 
 ## Committed change with lost acknowledgement

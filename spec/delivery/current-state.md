@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-05T23:39:47+11:00", "scope": "Admitted model foundation; executed development checks, no desktop qualification or human review attested"}
+updated: {"by": "codex", "at": "2026-10-06T00:26:58+11:00", "scope": "Portable W-24 implementation checkpoint; native IPC authentication and desktop qualification pending"}
 ---
 
 # Current state and next admitted boundary
@@ -40,6 +40,12 @@ program. Eighteen checks passed on each profile. W-26's initial local archives
 passed relocated execution. [The handoff](foundation-handoff.md) identifies exact
 artifact/case records, failures and the next packages. No desktop claim follows.
 
+The next [portable transport checkpoint](transport-handoff.md) adds W-24 framing,
+strict JSON/negotiation, request replay/reservations, settings-preview policy,
+disclosure, output queues and connection state. Both development profiles now run
+35 checks. W-24 remains in progress: no native IPC adapter or OS authentication
+evidence exists yet. Its dependent units are not released by portable tests alone.
+
 Canonical 0.2.0 documentation bundle, unchanged 0.1 authoring profile, preserved old
 fixtures, new experimental scene/command/capability 0.2 and admission descriptors.
 The initial settings registry has enforced metadata/default consistency and generated
@@ -59,8 +65,10 @@ separately under `build-support/evidence/`.
 and [acceptance traces](../assurance/acceptance-traces.md) now define completion gates,
 selected model/request/recovery expectations and a proposed cold-start exercise.
 The transport distinguishes in-flight requests from retained-result reservations.
-Model traces now have executable bindings. Remaining W-24 interface/budget closure
-is explicit, and request/recovery/cold-start traces remain unexecuted.
+Model and request-budget traces now have executable bindings. W-24's
+[package](packages/w-24-transport.md) closes the portable preview boundary and
+records native integration still required. Persistent recovery and cold-start
+traces remain unexecuted.
 
 ## Not implemented or qualified
 
@@ -73,8 +81,8 @@ License, contribution and release-identity decisions remain open.
 
 ## Next work
 
-Continue the admitted campaign: close W-24's exact transport/policy boundaries and
-W-02's independent oracle, then implement them. W-25 additionally requires W-24.
+Continue the admitted campaign: close and implement W-24's native local adapters
+and W-02's independent oracle. W-25 additionally requires W-24.
 Connect the build/component/target consumers and minimum command/IPC/policy/recovery
 slice. Probe contemporary Windows, XP/7, Linux and AppKit/older OS X independently.
 Package smoke builds early; each profile's usable vertical includes live network,

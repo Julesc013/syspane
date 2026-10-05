@@ -107,7 +107,7 @@
         "SP-PERSISTENCE",
         "SP-TESTING"
       ],
-      "sha256": "6780c85ee4e018ff11cb0bc543b1405958976f23c753919c7fcc53e6a2ce8cc5"
+      "sha256": "501ee8c2cb3606ef30ebf4db484ec764afbb3d53d5eeb8a1f7c0a4b272bd622e"
     },
     {
       "id": "SP-ORACLE",
@@ -216,7 +216,7 @@
         "SP-PROTOCOL",
         "SP-COMMANDS"
       ],
-      "sha256": "b99ec21b677ddbdf5d0eb32e0d9c13a183c6625f6ac5679df9840372b219904e"
+      "sha256": "ad0ee55d14baa4b1d7a90c06835716abdf8adcd2dbf361511846d68e685197fb"
     },
     {
       "id": "SP-VERSIONS",
@@ -357,7 +357,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "5bf13e35de9aa61dfdebf3494cd2979a9179d771ea620c9b37c17873df01a1ad"
+      "sha256": "db95582bc402c1150c034d39ef99ef35034aeae8c873846e3570ec1efcd1d26e"
     },
     {
       "id": "SP-FOUNDATION-HANDOFF",
@@ -378,7 +378,7 @@
       "requires": [
         "SP-CURRENT"
       ],
-      "sha256": "90bacf658aba09c64895b920437f7d7a96f28380cacd9111910962d178fa2bd6"
+      "sha256": "beb4b785236e0a500632cf2f7ebcf516218fed6623f6d20c9eab28acfc28597a"
     },
     {
       "id": "SP-RISKS",
@@ -404,6 +404,18 @@
         "SP-ACCEPTANCE-TRACES"
       ],
       "sha256": "2517a738ae26015f68e9027599f39b13cb4473718772f83e3db46d4f077718e2"
+    },
+    {
+      "id": "SP-W24-PACKAGE",
+      "path": "delivery/packages/w-24-transport.md",
+      "title": "W-24 authenticated transport and policy boundary",
+      "description": "Close the initial local protocol, admission and preview boundary before native integration.",
+      "requires": [
+        "SP-WORK-PACKAGES",
+        "SP-TRANSPORT",
+        "SP-POLICY"
+      ],
+      "sha256": "71475e3495f2d912a3854c50070e8eb1d85f780c180823a4c0b48c679c0f361e"
     },
     {
       "id": "SP-W26-PACKAGE",
@@ -439,6 +451,17 @@
         "SP-RELEASE"
       ],
       "sha256": "355869d3b66be1c68b6d25572b80f9514a2ad311e289153b999432a7c8c2dc0c"
+    },
+    {
+      "id": "SP-TRANSPORT-HANDOFF",
+      "path": "delivery/transport-handoff.md",
+      "title": "Portable transport and policy checkpoint",
+      "description": "Resume W-24 from executable portable contracts without claiming native authentication.",
+      "requires": [
+        "SP-CAMPAIGN-ADMISSION",
+        "SP-W24-PACKAGE"
+      ],
+      "sha256": "99ee6d276ecf61b6baf9da7e7c710aefb8d29f90bc79d5e39d7e7d2ed9e01900"
     },
     {
       "id": "SP-WORK-PACKAGES",

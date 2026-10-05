@@ -1,0 +1,99 @@
+{
+  "schema_version": "0.1.0",
+  "work_id": "W-24",
+  "source_ref": "a3597f9c165dc7691950faf90138c959296db367",
+  "objective": "Portable transport/policy checkpoint within the active foundation/native-experiment campaign; W-24 remains incomplete until native integration passes.",
+  "changed_files": [
+    ".gitattributes",
+    "CMakeLists.txt",
+    "README.md",
+    "TODO.md",
+    "build-support/check_dependencies.py",
+    "build-support/components.json",
+    "build-support/dependencies.json",
+    "build-support/evidence/transport-handoff.json",
+    "build-support/evidence/w-24-portable-linux-x64-gcc13.ctest.txt",
+    "build-support/evidence/w-24-portable-linux-x64-gcc13.json",
+    "build-support/evidence/w-24-portable-windows-x64-gcc15.ctest.txt",
+    "build-support/evidence/w-24-portable-windows-x64-gcc15.json",
+    "build-support/evidence/w-24-spec-tests.txt",
+    "build-support/evidence/w-24-spec-validation.json",
+    "build-support/generate_settings.py",
+    "build-support/record_protocol.py",
+    "build-support/targets/README.md",
+    "build-support/targets/linux-x64-gcc13.json",
+    "build-support/targets/windows-x64-gcc15.json",
+    "docs/developers/build.md",
+    "source/configuration/policy.cpp",
+    "source/configuration/policy.hpp",
+    "source/configuration/session.cpp",
+    "source/configuration/session.hpp",
+    "source/protocol/ledger.cpp",
+    "source/protocol/ledger.hpp",
+    "source/protocol/outbox.cpp",
+    "source/protocol/outbox.hpp",
+    "source/protocol/wire.cpp",
+    "source/protocol/wire.hpp",
+    "source/third_party/nlohmann/LICENSE.MIT",
+    "source/third_party/nlohmann/json.hpp",
+    "spec/assurance/acceptance-traces.md",
+    "spec/checksums.json",
+    "spec/contracts/transport.md",
+    "spec/delivery/current-state.md",
+    "spec/delivery/implementation-readiness.md",
+    "spec/delivery/index.md",
+    "spec/delivery/packages/index.md",
+    "spec/delivery/packages/w-24-transport.md",
+    "spec/delivery/transport-handoff.md",
+    "spec/delivery/work-units.json",
+    "spec/generated/catalog.json",
+    "spec/log.md",
+    "tests/protocol/protocol_tests.cpp"
+  ],
+  "decisions": [
+    "Preserve wire 0.1, command 0.2 and command-result 0.1 identities; enable only settings preview in this slice.",
+    "Keep model independent of JSON; pin nlohmann/json 3.12.0 header and MIT license without changing project licensing.",
+    "Generate descriptor constraints from the existing registry; retain exact raw command-body bytes for replay.",
+    "Bound principal/global admission and reserve result/control capacity before command execution; current policy applies to cache retrieval."
+  ],
+  "checks": [
+    {
+      "name": "Windows portable and foundation checks: 35 cases",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-24-portable-windows-x64-gcc15.json"
+    },
+    {
+      "name": "Linux portable and foundation checks: 35 cases",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-24-portable-linux-x64-gcc13.json"
+    },
+    {
+      "name": "Specification schemas and fixtures",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-24-spec-validation.json"
+    },
+    {
+      "name": "Specification tooling: 53 pass, 2 symlink privilege skips",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-24-spec-tests.txt"
+    },
+    {
+      "name": "OS peer identity and native IPC integration",
+      "outcome": "not_run",
+      "evidence": "spec/delivery/transport-handoff.md"
+    }
+  ],
+  "open_questions": [
+    "Native adapter and real client/server acceptance details must be closed before that implementation.",
+    "Historical Windows, Linux desktop shell and macOS laboratory qualification remain unresolved as recorded in the foundation handoff."
+  ],
+  "next_step": "Close and implement W-24 native Windows/Linux local IPC adapters and NATIVE-01/NATIVE-02; continue W-02 independently, then W-25 after W-24 gate completion.",
+  "authority_used": [
+    "user:foundation-native-campaign-2026-10-05"
+  ],
+  "limitations": [
+    "No native peer authentication evidence; typed authority in tests is a fixture.",
+    "No durable commit, telemetry subscription, native GUI, desktop host or independent recovery is implemented.",
+    "No public release, privileged operation, human review or project-license decision is attested."
+  ]
+}

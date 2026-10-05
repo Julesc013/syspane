@@ -2,6 +2,33 @@
   "version": "0.1.0",
   "components": [
     {
+      "id": "json", "target": "syspane_json", "type": "INTERFACE_LIBRARY",
+      "source_owner": "source/third_party/", "public_interfaces": ["source/third_party/nlohmann/json.hpp"],
+      "private_interfaces": [], "sources": ["source/third_party/nlohmann/json.hpp"],
+      "allowed_dependencies": [], "target_requirements": ["cxx17", "exceptions"],
+      "roles": ["development_test"], "installed_files": []
+    },
+    {
+      "id": "protocol", "target": "syspane_protocol", "type": "STATIC_LIBRARY",
+      "source_owner": "source/protocol/", "public_interfaces": ["source/protocol/wire.hpp", "source/protocol/ledger.hpp", "source/protocol/outbox.hpp"],
+      "private_interfaces": [], "sources": ["source/protocol/wire.cpp", "source/protocol/ledger.cpp", "source/protocol/outbox.cpp"],
+      "allowed_dependencies": ["syspane_json"], "target_requirements": ["cxx17", "exceptions"],
+      "roles": ["development_test"], "installed_files": []
+    },
+    {
+      "id": "configuration", "target": "syspane_configuration", "type": "STATIC_LIBRARY",
+      "source_owner": "source/configuration/", "public_interfaces": ["source/configuration/policy.hpp", "source/configuration/session.hpp"],
+      "private_interfaces": [], "sources": ["source/configuration/policy.cpp", "source/configuration/session.cpp"],
+      "allowed_dependencies": ["syspane_protocol"], "target_requirements": ["cxx17"],
+      "roles": ["development_test"], "installed_files": []
+    },
+    {
+      "id": "protocol-tests", "target": "syspane_protocol_tests", "type": "EXECUTABLE",
+      "source_owner": "tests/protocol/", "public_interfaces": [], "private_interfaces": [],
+      "sources": ["tests/protocol/protocol_tests.cpp"], "allowed_dependencies": ["syspane_protocol", "syspane_configuration"],
+      "target_requirements": ["cxx17"], "roles": ["development_test"], "installed_files": []
+    },
+    {
       "id": "model", "target": "syspane_model", "type": "STATIC_LIBRARY",
       "source_owner": "source/model/", "public_interfaces": ["source/model/state.hpp"],
       "private_interfaces": [], "sources": ["source/model/state.cpp"],

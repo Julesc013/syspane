@@ -41,6 +41,13 @@ journey succeeds and prints one JSON object checked against
 cases is an error. The test executable requires one known case ID and rejects
 unknown IDs. All outputs remain local development artifacts.
 
+Profile revision 2 adds the portable `syspane_protocol` and
+`syspane_configuration` static libraries and `syspane_protocol_tests`, for 35 total
+CTest checks. The protocol boundary uses the vendored nlohmann/json 3.12.0 header;
+`build-support/dependencies.json` pins its header and MIT-license digests. No native
+IPC or desktop capability follows from these added libraries. Existing W-01 and
+model smoke-package evidence remains tied to the earlier recorded source/profile.
+
 Linux build products use the explicitly set native cache root instead of the
 mounted Windows drive: unprivileged `chmod` on that mount failed during the first
 configure experiment. The cache holds build products only, never a second source

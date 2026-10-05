@@ -12,6 +12,8 @@ presentation components under its own lifecycle and privacy policy.
 
 **Current stage: foundation implementation.** The C++17 model, explicit CMake
 targets and development smoke program build on pinned Windows and Linux profiles.
+Portable framing, request replay, settings-preview policy and connection-state
+checks are also implemented; native IPC authentication is still pending.
 There is no usable SysPane desktop application or downloadable release yet.
 Desktop, screensaver and installer profiles remain unqualified.
 
@@ -28,7 +30,7 @@ path when optional components fail.
 - [Implementation readiness](spec/delivery/implementation-readiness.md) and [first foundation package](spec/delivery/packages/w-01-foundation.md)
 - [October audit disposition](spec/delivery/audit-2026-10-04.md)
 
-`spec/` owns design and contracts, `source/` will own implementation, and `docs/`
+`spec/` owns design and contracts, `source/` owns implementation, and `docs/`
 owns audience-oriented guides. Python is used only for development tooling.
 See [developer checks](docs/developers/build.md) for validation commands.
 

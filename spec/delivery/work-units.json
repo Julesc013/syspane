@@ -650,7 +650,8 @@
         "SP-TRANSPORT",
         "SP-POLICY",
         "SP-WORK-PACKAGES",
-        "SP-ACCEPTANCE-TRACES"
+        "SP-ACCEPTANCE-TRACES",
+        "SP-W24-PACKAGE"
       ],
       "acceptance_tests": [
         "T-IPC",
@@ -660,12 +661,16 @@
       "planned_outputs": [
         "source/protocol/",
         "source/platform/",
-        "source/configuration/"
+        "source/configuration/",
+        "tests/protocol/",
+        "build-support/dependencies.json"
       ],
-      "status": "planned",
+      "status": "in_progress",
       "authority_class": "development",
-      "execution_grant": null,
-      "notes": "Implementation and evidence pending; dependency-ready is not an execution grant."
+      "execution_grant": "user:foundation-native-campaign-2026-10-05",
+      "notes": "Portable frame/JSON/negotiation, request ledger, policy/preview, queue and connection-state checks implemented on Windows/Linux. Native IPC authentication/stream cases remain required; dependent W-25/host units are not released.",
+      "package": "delivery/packages/w-24-transport.md",
+      "evidence": "delivery/transport-handoff.md"
     },
     {
       "id": "W-25",

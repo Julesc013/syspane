@@ -24,7 +24,8 @@ behaviour has been implemented. See [audit disposition](spec/delivery/audit-2026
 
 - [x] W-00/W-01: admit runtime scope; create real CMake targets, component ownership and pinned Windows/Linux development profiles.
 - [x] W-01: bind mandatory model cases to runnable tests and deliver a nonempty fixture smoke program; see the [handoff](spec/delivery/foundation-handoff.md).
-- [ ] W-24: close message bodies/roles/states, mutable ownership and global/control queue budgets before implementing the transport.
+- [x] W-24 portable slice: close and test framing, negotiation, request reservations, settings preview, policy/disclosure, queues and connection states; see the [package](spec/delivery/packages/w-24-transport.md).
+- [ ] W-24 native slice: implement OS peer authentication, bounded stream I/O and actual Windows/Linux client/server cases; keep W-24 in progress until its required evidence exists.
 - [ ] W-24/W-25: implement authenticated local IPC, current-policy enforcement, bounded recovery and independent diagnostics.
 - [ ] W-02–W-06: run changing-scene host probes for contemporary Windows, XP/7, Linux and macOS/older OS X.
 - [ ] W-07–W-11: implement demand, commands, configuration recovery, portable scenes, editor and native settings facilities.

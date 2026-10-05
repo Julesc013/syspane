@@ -1,5 +1,10 @@
 # SysPane specification update log
 
+## 2026-10-06
+- **W-24 checkpoint**: Closed and implemented portable framing, strict JSON, negotiation, request reservations, settings preview, disclosure, queues and connection states. Both Windows/Linux development profiles passed 35 checks; native IPC remains pending and W-24 stays in progress.
+- **Dependency**: Pinned nlohmann/json 3.12.0 with upstream MIT license and verified digests; model remains JSON-independent. Settings constraints project from the canonical registry.
+- **Evidence**: Added a source-bound transport handoff and separate per-profile results. No persistent commit, telemetry subscription, OS peer authentication, desktop qualification, project license or release is claimed.
+
 ## 2026-10-05
 - **Campaign**: The user explicitly admitted foundation/native experiments. W-01 now builds a typed C++17 model and smoke program on pinned Windows/Linux development profiles; 18 checks passed on each, and both local smoke archives passed relocation. The foundation handoff preserves failures and pending native work.
 - **Scope**: Used the supplied readiness review to strengthen specs/docs; its quoted campaign instruction did not create a native execution grant.

@@ -1,7 +1,8 @@
 # Developer setup and checks
 
-The repository builds the C++17 model and a deterministic development smoke
-program. A usable desktop application remains pending. Use the pinned tools in
+The repository builds the C++17 model, portable protocol/configuration libraries
+and a deterministic development smoke program. A usable desktop application
+remains pending. Use the pinned tools in
 [the development profiles](../../build-support/targets/README.md). From the repository
 root on Windows:
 
@@ -25,10 +26,20 @@ Create a local Windows smoke archive and check relocation with:
 python build-support/package_smoke.py --profile windows-x64-gcc15 --build-dir out/build/windows-x64-gcc15
 ```
 
-Both profiles run 18 model/smoke/component checks. Artifacts and case bindings are
-recorded under [build evidence](../../build-support/evidence/w-01-windows-x64-gcc15.json)
-and [Linux evidence](../../build-support/evidence/w-01-linux-x64-gcc13.json).
-These results do not qualify desktop hosting, actual clock adapters or older OSes.
+Both profiles now run 35 checks: the original 18 model/smoke/component checks and
+17 portable protocol/policy checks. Run only the latter with
+`ctest --preset windows-x64-gcc15 -R '^protocol\.' --output-on-failure`.
+The original W-01 results remain historical; current case/artifact records are
+`build-support/evidence/w-24-portable-<profile>.json`. Native IPC authentication,
+desktop hosting, actual clock adapters and older OS qualification remain pending.
+
+The protocol boundary vendors nlohmann/json 3.12.0 under its upstream MIT license.
+[Dependency identities](../../build-support/dependencies.json) pin the header and
+license digests; configure verifies them offline. The model has no JSON dependency.
+`generate_settings.py` projects the canonical eleven-descriptor registry into the
+build directory and rejects constraints it cannot implement. Never hand-edit that
+generated table. Preview validation changes no stored configuration; commit and
+scene replacement return an explicit unsupported result.
 
 Specification tooling separately uses Python 3.11+ in an isolated environment:
 
