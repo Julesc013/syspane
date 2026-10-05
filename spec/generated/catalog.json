@@ -357,7 +357,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "0a010826724921e7b0176b4b3a4bfbc721876e495820cae9c98f50f24b3f8e42"
+      "sha256": "d26261afb42e542f328400d990b51a98da285aa7a93ae8d9fe6f0845fd09dfcb"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -422,7 +422,7 @@
       "requires": [
         "SP-CURRENT"
       ],
-      "sha256": "e1cc8fc33aad16fe579f17a8baf860155daece5cb2698baca3b482a3c9788405"
+      "sha256": "fa603ae373171fdaab0c04ed3643f5776c86440b025ccc281a5c750580c22180"
     },
     {
       "id": "SP-MEASURED-TIME-HANDOFF",
@@ -467,6 +467,17 @@
         "SP-CAMPAIGN-ADMISSION"
       ],
       "sha256": "46c4e9553a2761388ec3b82dcc36f5b2067815c8231a4381e3b219e49cd7ab28"
+    },
+    {
+      "id": "SP-NETWORK-RECONCILIATION-HANDOFF",
+      "path": "delivery/network-reconciliation-handoff.md",
+      "title": "Network lifetimes and Linux watched acquisition checkpoint",
+      "description": "Preserve observation identity and measurement age before supervised native publication.",
+      "requires": [
+        "SP-W25-NETWORK-RECONCILIATION",
+        "SP-CAMPAIGN-ADMISSION"
+      ],
+      "sha256": "a4c23c4a76e38064153b8aa1a8fd906f2013942639f2d84645f64cdac11e1ae2"
     },
     {
       "id": "SP-RISKS",
@@ -613,6 +624,18 @@
         "SP-W25-PACKAGE"
       ],
       "sha256": "0d280e3d8771a2a0e569a84a2f846b8344db3696ad96384f70ec4872aa0922df"
+    },
+    {
+      "id": "SP-W25-NETWORK-RECONCILIATION",
+      "path": "delivery/packages/w-25-network-reconciliation.md",
+      "title": "W-25 network lifetimes and watched acquisition",
+      "description": "Reject obsolete acquisitions and native-key reuse before real network values enter measured publication.",
+      "requires": [
+        "SP-W25-NETWORK-ACQUISITION",
+        "SP-W25-MEASURED-TIME",
+        "SP-SCHEDULER"
+      ],
+      "sha256": "62cca74b9161a8fb10407186909ba388ac76d5d4c8f2895da16192516a603019"
     },
     {
       "id": "SP-W25-PRESERVATION",

@@ -42,7 +42,10 @@ def main():
     parser.add_argument('--measurement-clock', action='store_true', help='Require native causal clock brackets and held-peer exit rejection')
     parser.add_argument('--measured-time', action='store_true', help='Require measured telemetry, freshness and native delivery cases')
     parser.add_argument('--network', action='store_true', help='Require real raw native network acquisition and complete measured-time regressions')
+    parser.add_argument('--network-reconciliation', action='store_true', help='Require portable network lifetimes and Linux watched acquisition')
     args = parser.parse_args()
+    if args.network_reconciliation:
+        args.network = True
     if args.network:
         args.measured_time = True
     if args.measured_time:
@@ -112,12 +115,19 @@ def main():
         expected.add('native.NATIVE-NETWORK')
         if platform.system() == 'Linux':
             expected |= {'network.NETWORK-NETLINK', 'network.NETWORK-NETLINK-REJECT'}
+    if args.network_reconciliation:
+        expected |= {'network.RECONCILE-'+case for case in ('IDENTITY', 'CLOCK-RATE', 'CANCEL-FAILURE', 'CAPACITY')}
+        if platform.system() == 'Linux':
+            expected.add('network.NETWORK-WATCH-DECODE')
     if len(cases) != len(expected) or {case['case'] for case in cases} != expected or any(case['outcome'] != 'pass' for case in cases):
         raise ValueError('missing, repeated, unexpected or failing case; preserve log before rerun')
     suffix = '.exe' if platform.system() == 'Windows' else ''
     artifacts = {name: {'sha256': sha(build/name), 'bytes': (build/name).stat().st_size}
                  for name in ('syspane_protocol_tests'+suffix, 'libsyspane_protocol.a', 'libsyspane_configuration.a', 'generated/settings_descriptors.hpp')}
     native_records = []
+    if args.network_reconciliation:
+        for name in ('syspane_network_state_tests'+suffix, 'libsyspane_network_state.a'):
+            artifacts[name] = {'sha256': sha(build/name), 'bytes': (build/name).stat().st_size}
     if args.network:
         for name in ('SysPane.NetworkProbe'+suffix, 'libsyspane_network.a') + (() if suffix else ('syspane_network_netlink_tests',)):
             artifacts[name] = {'sha256': sha(build/name), 'bytes': (build/name).stat().st_size}
@@ -179,6 +189,8 @@ def main():
             required['NATIVE-MEASURED'] = {'FRESH','DELAYED','FUTURE'}
         if args.network:
             required['NATIVE-NETWORK'] = {'NETWORK-READ','NETWORK-CANCEL','NETWORK-DEADLINE','NETWORK-CAPACITY'}
+            if args.network_reconciliation and not suffix:
+                required['NATIVE-NETWORK'].add('NETWORK-WATCH')
         if args.preservation:
             for name in ('syspane_preservation_tests'+suffix, 'libsyspane_preservation_job.a'):
                 artifacts[name] = {'sha256': sha(build/name), 'bytes': (build/name).stat().st_size}
@@ -289,6 +301,8 @@ def main():
         paths.append(ROOT/'spec/delivery/packages/w-25-measured-time.md')
     if args.network:
         paths.append(ROOT/'spec/delivery/packages/w-25-network-acquisition.md')
+    if args.network_reconciliation:
+        paths.append(ROOT/'spec/delivery/packages/w-25-network-reconciliation.md')
     for directory in ('source', 'tests', 'build-support', 'spec/contracts'):
         paths.extend(sorted((ROOT/directory).rglob('*')))
     inputs = {p.relative_to(ROOT).as_posix(): sha(p) for p in paths
@@ -446,6 +460,10 @@ def main():
             raise ValueError('native network import missing from tested probe')
         report['network_imports'] = {'command': command, 'direct_dependencies': re.findall(r'DLL Name:\s*(\S+)', inspected) if suffix else re.findall(r'\(NEEDED\).*?\[([^]]+)\]', inspected),
             'scope': 'Observed raw reader imports only; no historical loader or complete collector qualification.'}
+    if args.network_reconciliation:
+        report['slice'] = 'portable network lifetimes and Linux watched acquisition before supervised publication'
+        report['bindings']['network_reconciliation'] = 'spec/delivery/packages/w-25-network-reconciliation.md'
+        report['limits'][0] = 'Portable tests cover atomic lifetimes, obsolete demand, dirty revisions, retained failures and exact counter intervals. Linux additionally observes the owned route-netlink registration before two successful dumps. Actual interface mutation, native overflow and namespace migration were not induced. Windows full-table notification coverage and supervised measured publication remain open. Public evidence excludes native keys and counters.'
     args.output.parent.mkdir(parents=True, exist_ok=True)
     log_output.write_text(raw.replace(str(build), '<build>').replace(str(ROOT), '<source>'), encoding='utf-8', newline='\n')
     args.output.write_text(json.dumps(report, indent=2)+'\n', encoding='utf-8', newline='\n')

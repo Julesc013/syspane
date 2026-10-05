@@ -908,7 +908,7 @@
       "type": "STATIC_LIBRARY",
       "source_owner": "source/platform/",
       "public_interfaces": [
-        "source/platform/network.hpp"
+        "source/platform/network_watch.hpp"
       ],
       "private_interfaces": [
         "source/platform/network_netlink.hpp"
@@ -917,10 +917,12 @@
         "source/platform/network.cpp",
         "source/platform/network_linux.cpp",
         "source/platform/network_windows.cpp",
-        "source/platform/network_netlink.cpp"
+        "source/platform/network_netlink.cpp",
+        "source/platform/network_watch_linux.cpp"
       ],
       "allowed_dependencies": [
-        "iphlpapi"
+        "iphlpapi",
+        "syspane_network_contract"
       ],
       "target_requirements": [
         "cxx17",
@@ -986,6 +988,87 @@
       "installed_files": [],
       "profiles": [
         "linux-x64-gcc13"
+      ]
+    },
+    {
+      "id": "network-contract",
+      "target": "syspane_network_contract",
+      "type": "INTERFACE_LIBRARY",
+      "source_owner": "source/platform/",
+      "public_interfaces": [
+        "source/platform/network.hpp"
+      ],
+      "private_interfaces": [],
+      "sources": [
+        "source/platform/network.hpp"
+      ],
+      "allowed_dependencies": [],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "windows-x64-gcc15",
+        "linux-x64-gcc13",
+        "windows-x86-v141-xp"
+      ]
+    },
+    {
+      "id": "network-state",
+      "target": "syspane_network_state",
+      "type": "STATIC_LIBRARY",
+      "source_owner": "source/runtime/",
+      "public_interfaces": [
+        "source/runtime/network_state.hpp"
+      ],
+      "private_interfaces": [],
+      "sources": [
+        "source/runtime/network_state.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_model",
+        "syspane_network_contract"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "windows-x64-gcc15",
+        "linux-x64-gcc13",
+        "windows-x86-v141-xp"
+      ]
+    },
+    {
+      "id": "network-state-tests",
+      "target": "syspane_network_state_tests",
+      "type": "EXECUTABLE",
+      "source_owner": "tests/fault/",
+      "public_interfaces": [],
+      "private_interfaces": [],
+      "sources": [
+        "tests/fault/network_state_tests.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_network_state"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "windows-x64-gcc15",
+        "linux-x64-gcc13",
+        "windows-x86-v141-xp"
       ]
     }
   ]

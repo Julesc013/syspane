@@ -700,7 +700,8 @@
         "SP-W25-SUBSCRIPTIONS",
         "SP-W25-MEASUREMENT-CLOCK",
         "SP-W25-MEASURED-TIME",
-        "SP-W25-NETWORK-ACQUISITION"
+        "SP-W25-NETWORK-ACQUISITION",
+        "SP-W25-NETWORK-RECONCILIATION"
       ],
       "acceptance_tests": [
         "T-RECOVERY",
@@ -715,14 +716,16 @@
         "source/platform/machine_policy.hpp",
         "source/interfaces/diagnostic_inspector.hpp",
         "source/platform/network.hpp",
-        "source/application/network_probe.cpp"
+        "source/application/network_probe.cpp",
+        "source/runtime/network_state.hpp",
+        "source/platform/network_watch.hpp"
       ],
       "status": "in_progress",
       "authority_class": "development",
       "execution_grant": "user:foundation-native-campaign-2026-10-05",
-      "notes": "Real bounded raw Windows/Linux network readers now pass independent OS counter brackets; exact measured-time transport remains synthetic until notification-backed identity and supervised acquisition are integrated. Current suites: 89 Windows, 92 Linux and 81 historical-toolset host checks. Complete collectors/renderers, product demand/policy, retention, native fault/suspend qualification and visible/editor recovery remain required.",
+      "notes": "Shared network lifetimes, obsolete/dirty rejection, retained timestamps and exact counter intervals are implemented. Linux independently observes a held link subscription before repeated acquisition. Current suites: 93 Windows, 97 Linux and 85 historical-toolset host checks. Windows notification coverage, supervised measured publication, actual native topology/namespace/suspend faults, product demand/policy, rendering, retention and visible/editor recovery remain required.",
       "package": "delivery/packages/w-25-recovery.md",
-      "evidence": "delivery/network-acquisition-handoff.md"
+      "evidence": "delivery/network-reconciliation-handoff.md"
     },
     {
       "id": "W-26",

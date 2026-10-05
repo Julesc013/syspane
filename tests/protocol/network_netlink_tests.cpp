@@ -65,8 +65,20 @@ void rejected() {
     p::detail::LinkDump too_big(7,19,2); too_big.feed(std::string(65537,'x')); check(too_big.finish().code==p::NetworkCode::capacity);
     p::detail::LinkDump count(7,19,2); for(unsigned i=0;i<129;++i)count.feed(message(NLMSG_NOOP,"")); check(count.finish().code==p::NetworkCode::capacity);
 }
+void watch_decode(){
+    const auto update=message(RTM_NEWLINK,link(4,false),0,0,0);
+    const auto remove=message(RTM_DELLINK,link(7,false),0,0,0);
+    const auto reply=message(RTM_NEWLINK,link(4));
+    const auto split=p::detail::split_link_messages(update+reply+remove+done());
+    check(split.code==p::NetworkCode::success&&split.replies==reply+done()&&split.indications.size()==2);
+    check(split.indications[0].key==4&&!split.indications[0].removed&&split.indications[1].key==7&&split.indications[1].removed);
+    p::detail::LinkDump dump(7,19,2);dump.feed(split.replies);check(dump.finish().code==p::NetworkCode::success);
+    for(const auto& malformed:std::vector<std::string>{update.substr(0,update.size()-1),message(RTM_NEWLINK,link(4),0,0,9),
+        message(RTM_NEWLINK,"bad",0,0,0),message(NLMSG_OVERRUN,"",0,0,0),message(RTM_NEWLINK,link(0),0,0,0)}){
+        const auto result=p::detail::split_link_messages(malformed);check(result.code!=p::NetworkCode::success&&result.indications.empty()&&result.replies.empty());}
+}
 int main(int argc,char** argv) {
-    try { check(argc==2); const std::string mode=argv[1]; if(mode=="NETWORK-NETLINK")valid(); else if(mode=="NETWORK-NETLINK-REJECT")rejected(); else return 2;
+    try { check(argc==2); const std::string mode=argv[1]; if(mode=="NETWORK-NETLINK")valid(); else if(mode=="NETWORK-NETLINK-REJECT")rejected(); else if(mode=="NETWORK-WATCH-DECODE")watch_decode(); else return 2;
         std::cout<<mode<<": pass\n"; return 0;
     } catch(const std::exception& error) {std::cerr<<error.what()<<'\n';return 1;}
 }

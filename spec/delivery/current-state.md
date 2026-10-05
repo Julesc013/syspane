@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-06T09:26:25+11:00", "scope": "Real raw network acquisition checkpoint; reconciliation and supervised publication remain open"}
+updated: {"by": "codex", "at": "2026-10-05T22:49:24Z", "scope": "Network lifetime and Linux watch checkpoint; supervised publication remains open"}
 ---
 
 # Current state and next admitted boundary
@@ -146,6 +146,13 @@ host checks. The original whole-envelope test mistake and contract-based body-by
 assertion correction are preserved. Real sources and suspend/namespace qualification
 remain open.
 
+The [network reconciliation checkpoint](network-reconciliation-handoff.md) adds
+stable source lifetimes, obsolete/dirty result rejection, retained failure timestamps
+and exact counter intervals. Linux independently observes subscription registration
+before repeated acquisition. Current suites pass 93 Windows, 97 Linux and 85
+historical-toolset host checks. Windows notification coverage, actual topology faults
+and supervised measured publication remain required; no complete collector is claimed.
+
 Canonical 0.2.0 documentation bundle, unchanged 0.1 authoring profile, preserved old
 fixtures, new experimental scene/command/capability 0.2 and admission descriptors.
 The initial settings registry has enforced metadata/default consistency and generated
@@ -189,11 +196,12 @@ historical guest execution once guest test scope and usability are established.
 W-05 needs a composition strategy that actually preserves icon pixels; its initial
 EWMH window stacking candidates fail that requirement. Continue other native tracks
 independently of this negative result.
-W-25's [native network acquisition prerequisite](network-acquisition-handoff.md)
-now reads actual Windows/Linux interface counters with explicit bounded failure and
-local evidence-disclosure rules. Complete notification-backed identity reconciliation,
-acquisition-time brackets, removal/index-reuse and demand-cancellation contracts. Connect
-these readers through independently supervised collection to the measured receive path,
+W-25's [network reconciliation prerequisite](network-reconciliation-handoff.md)
+adds shared lifetimes, acquisition brackets, removal/index-reuse, obsolete-demand
+rejection and exact integer counter intervals. Linux holds its link subscription
+before enumeration; actual native topology faults and Windows full-table notification
+coverage remain unqualified. Connect these readers and the serialized identity owner
+through independently supervised collection to the measured receive path,
 then complete renderer supervision and product policy distribution. The native
 inventory probe now connects bounded subscription/demand and queue revocation to
 complete-state receipt. W-07 must add field/entity/age/priority/recording demand

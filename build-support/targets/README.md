@@ -1,6 +1,13 @@
 # Foundation development profiles
 
-Current revisions are Windows x64 16, Linux x64 17 and historical x86 8. The
+Current revisions are Windows x64 17, Linux x64 18 and historical x86 9. The
+[network reconciliation checkpoint](../../spec/delivery/network-reconciliation-handoff.md)
+passes 93/97 modern and 85 historical host checks. All profiles build the shared
+lifetime/counter-interval owner. Linux also exercises a held link subscription;
+Windows notification coverage and supervised measured publication remain open.
+The historical audit covers eleven executables; native readers remain disabled.
+
+Earlier revisions were Windows x64 16, Linux x64 17 and historical x86 8. The
 [native network checkpoint](../../spec/delivery/network-acquisition-handoff.md)
 passes 89/92 modern and 81 historical host checks. Windows lock revision 3 pins
 the installed `libiphlpapi.a`; configure verifies it alongside existing archives.

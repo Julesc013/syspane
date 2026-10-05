@@ -11,6 +11,40 @@ namespace {
 template<class T> T copied(const char* bytes) { T value{}; std::memcpy(&value,bytes,sizeof(value)); return value; }
 std::size_t aligned(std::size_t n) { return (n+3)&~std::size_t(3); }
 }
+LinkMessages split_link_messages(std::string_view bytes) {
+    const auto invalid=[](NetworkCode code=NetworkCode::malformed){LinkMessages r;r.code=code;return r;};
+    if(bytes.empty()||bytes.size()>65536)return invalid(NetworkCode::capacity);
+    LinkMessages result;std::size_t position=0;
+    while(position<bytes.size()) {
+        if(bytes.size()-position<sizeof(nlmsghdr))return invalid();
+        const auto header=copied<nlmsghdr>(bytes.data()+position);
+        if(header.nlmsg_len<sizeof(header)||header.nlmsg_len>bytes.size()-position)return invalid();
+        const auto step=aligned(header.nlmsg_len);
+        if(step>bytes.size()-position&&header.nlmsg_len!=bytes.size()-position)return invalid();
+        const auto record=bytes.substr(position,std::min(step,bytes.size()-position));
+        if(header.nlmsg_seq)result.replies.append(record);
+        else {
+            if(header.nlmsg_pid || header.nlmsg_flags&NLM_F_DUMP_INTR)return invalid();
+            if(header.nlmsg_type!=RTM_NEWLINK&&header.nlmsg_type!=RTM_DELLINK)return invalid();
+            const auto body=record.substr(sizeof(header),header.nlmsg_len-sizeof(header));
+            if(body.size()<sizeof(ifinfomsg))return invalid();
+            const auto link=copied<ifinfomsg>(body.data());if(link.ifi_index<=0)return invalid();
+            auto offset=aligned(sizeof(link));
+            while(offset<body.size()) {
+                if(body.size()-offset<sizeof(rtattr))return invalid();
+                const auto attribute=copied<rtattr>(body.data()+offset);
+                if(attribute.rta_len<sizeof(attribute)||attribute.rta_len>body.size()-offset)return invalid();
+                const auto advance=aligned(attribute.rta_len);
+                if(advance>body.size()-offset&&attribute.rta_len!=body.size()-offset)return invalid();
+                offset+=advance;
+            }
+            if(result.indications.size()>=1024)return invalid(NetworkCode::capacity);
+            result.indications.push_back({static_cast<std::uint64_t>(link.ifi_index),header.nlmsg_type==RTM_DELLINK});
+        }
+        position+=step;
+    }
+    return result;
+}
 LinkDump::LinkDump(std::uint32_t sequence,std::uint32_t port,std::size_t limit):sequence_(sequence),port_(port),limit_(limit) {
     if (!sequence || !port || limit>8192) fail(NetworkCode::malformed);
 }

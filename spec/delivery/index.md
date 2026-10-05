@@ -17,6 +17,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Native measurement-clock checkpoint](measurement-clock-handoff.md) — Record causal clock brackets and peer-exit rejection without claiming measured telemetry or suspend qualification.
 - [Native local IPC implementation handoff](native-transport-handoff.md) — Bind W-24's Windows and Linux adapter gate to real process and stream evidence.
 - [Real native network acquisition checkpoint](network-acquisition-handoff.md) — Read bounded interface counters on Windows and Linux without claiming reconciled model identity or complete collection.
+- [Network lifetimes and Linux watched acquisition checkpoint](network-reconciliation-handoff.md) — Preserve observation identity and measurement age before supervised native publication.
 - [Open decisions, risks and resolving experiments](open-questions.md) — Keep unresolved choices discoverable without blocking unrelated work.
 - [Independent temporal oracle implementation checkpoint](oracle-handoff.md) — Bind external marker/time evaluation and native X11 fault calibration to source and raw capture evidence.
 - [Explicit private preservation checkpoint](preservation-handoff.md) — Bind opaque configuration copies, native controls and interrupted publication to measured development evidence.

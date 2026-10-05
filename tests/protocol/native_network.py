@@ -3,11 +3,13 @@ from datetime import datetime, timezone
 import ctypes as c
 import hashlib
 import json
+import os
 from pathlib import Path
 import platform
 import subprocess
 import sys
 import uuid
+from native_ipc import Process
 
 ROOT=Path(__file__).resolve().parents[2]
 def sha(path): return hashlib.sha256(path.read_bytes()).hexdigest()
@@ -61,6 +63,8 @@ def main():
         'disclosure':'Committed results exclude all native keys, interface names and counter values. Failed raw exchanges remain local ignored evidence only.'}
     package='spec/delivery/packages/w-25-network-acquisition.md'
     report['source_inputs'][package]=sha(ROOT/package)
+    package='spec/delivery/packages/w-25-network-reconciliation.md'
+    report['source_inputs'][package]=sha(ROOT/package)
     exchanges=[]
     try:
         read=windows_rows if platform.system()=='Windows' else linux_rows
@@ -91,6 +95,41 @@ def main():
                 if mode=='capacity': assert before,'capacity fixture requires a native interface'
                 assert value['status']=={'cancel':'cancelled','deadline':'timed_out','capacity':'capacity'}[mode] and value['rows']==[],'terminal result is empty'
             case['outcome']='pass'; print(case['case']+': pass',flush=True)
+        if platform.system()=='Linux':
+            case={'case':'NATIVE-NETWORK.NETWORK-WATCH','outcome':'fail'};report['cases'].append(case)
+            before=read();process=Process([str(executable),'watch'])
+            try:
+                try:ready=process.event('watch_ready')
+                except Exception:raise RuntimeError('watched readiness failure') from None
+                assert ready['pid']==process.process.pid and ready['registered'],'owned watch readiness'
+                sockets={os.readlink(path)[8:-1] for path in Path(f'/proc/{process.process.pid}/fd').iterdir() if os.readlink(path).startswith('socket:[')}
+                netlink=Path(f'/proc/{process.process.pid}/net/netlink').read_text().splitlines()
+                columns=netlink[0].split();records=[dict(zip(columns,line.split())) for line in netlink[1:]]
+                owned=[item for item in records if item['Inode'] in sockets and item['Eth']=='0' and int(item['Groups'],16)&1]
+                assert len(owned)==1,'independent route/link multicast registration'
+                assert process.finish(5)==0,'watched process exit'
+                values=[item for item in process.lines if item.get('event')=='watched_result']
+                assert len(values)==1,'watched result count';value=values[0]
+                after=read()
+            finally:
+                process.stop();exchanges.append({'mode':'watch','process':process.record(),'before':before})
+            exchanges[-1]['after']=after
+            assert value['registered'] and value['active_after_cancel'] and value['active_after_expiry'],'held registration after pre-call stops'
+            assert value['cancelled']=={'status':'cancelled','native_error':0,'rows':[]} and value['expired']=={'status':'timed_out','native_error':0,'rows':[]},'pre-call stop results'
+            assert len(value['calls'])==2,'two watched acquisitions'
+            revision=0
+            for call in value['calls']:
+                assert call['status']=='success' and call['native_error']==0 and call['continuity'],'complete continuous watched acquisition'
+                assert int(call['before'])==int(call['after'])==revision+len(call['indications']),'indication revision coverage'
+                revision=int(call['after'])
+                assert len(call['rows'])==len(before) and set(before)==set(after)=={row['key'] for row in call['rows']},'watched native key set'
+                for row in call['rows']:
+                    low,high=before[row['key']],after[row['key']]
+                    assert row['index']==low['index']==high['index'] and row['native_type']==low['native_type']==high['native_type'],'watched native index/type'
+                    for field in ('receive','transmit'):assert low[field]<=int(row[field])<=high[field],'watched native counter bracket'
+            case.update(outcome='pass',rows_compared=len(before),acquisitions=2,indications_observed=revision,registration_independently_observed=True,process_exit_observed=True,
+                qualification='Real registration and repeated acquisition; no interface change was induced.')
+            print(case['case']+': pass',flush=True)
         report['outcome']='pass'
     except Exception as error:
         # Fixed assertions exclude row values; no repr of native exceptions/rows.

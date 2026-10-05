@@ -12,15 +12,17 @@ sp_requires: ["SP-CURRENT"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-AUDIT-2026-10-04", "resource": "User-supplied October 2026 audit inputs", "title": "October review inputs"}]
-updated: {"by": "codex", "at": "2026-10-06T08:15:42+11:00", "scope": "Native inventory lifecycle evidence with separate real source and measured freshness gates"}
+updated: {"by": "codex", "at": "2026-10-05T22:49:24Z", "scope": "Network lifetime and Linux watch checkpoint; supervised publication remains open"}
 ---
 
 # Implementation readiness and gates
 
-The [native network acquisition checkpoint](network-acquisition-handoff.md) now
-supplies real raw interface/counter reads. Notification-backed entity lifetimes,
-measurement-time brackets, demand cancellation and supervised publication are the
-next required integration boundary; a raw native key is not a persistent identity.
+The [network reconciliation checkpoint](network-reconciliation-handoff.md) adds
+shared observation lifetimes, acquisition-time brackets, obsolete-demand rejection
+and exact counter intervals to the preceding native interface/counter readers.
+Linux holds an observed link subscription before enumeration. Supervised measured
+publication, Windows notification coverage and actual native topology/namespace
+fault qualification remain required. A native key is not a persistent identity.
 
 
 The October revision closes bounded contract and documentation gaps. It does not

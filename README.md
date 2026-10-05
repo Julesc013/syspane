@@ -35,8 +35,11 @@ comparable readings across live local processes and rejects sampling after peer 
 The [measured telemetry path](spec/delivery/measured-time-handoff.md) now preserves
 sample age through delay, replay and reconnect, with explicit clock scope and TTL checks.
 A [native network reader](spec/delivery/network-acquisition-handoff.md) now acquires
-real interface counters on Windows/Linux. Reconciled identity, supervised publication,
-product subscriptions and native suspend qualification remain pending.
+real interface counters on Windows/Linux. The [network reconciliation checkpoint](spec/delivery/network-reconciliation-handoff.md)
+adds stable observation lifetimes, obsolete-result rejection and exact counter
+intervals, plus a Linux link subscription held across repeated acquisition.
+Windows notification coverage, supervised publication, product subscriptions and
+native suspend qualification remain pending.
 An external pixel/time oracle is calibrated against live, hidden, frozen and
 obstructed synthetic X11 surfaces. A real Openbox/PCManFM Show Desktop experiment
 now exposes the basic X11 candidate's placement failure: above the desktop it

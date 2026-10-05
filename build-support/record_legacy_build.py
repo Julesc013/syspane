@@ -26,7 +26,10 @@ def main():
     parser.add_argument('--state-import', action='store_true', help='Include complete remote state import cases')
     parser.add_argument('--subscriptions', action='store_true', help='Include bounded portable subscription cases')
     parser.add_argument('--measured-time', action='store_true', help='Include measured telemetry and portable freshness cases; native adapter disabled')
+    parser.add_argument('--network-reconciliation', action='store_true', help='Include portable network lifetime and counter interval cases; native readers disabled')
     args = parser.parse_args()
+    if args.network_reconciliation:
+        args.measured_time = True
     if args.measured_time:
         args.subscriptions = True
     if args.subscriptions:
@@ -66,6 +69,8 @@ def main():
         expected |= {'subscription.'+case for case in SUBSCRIPTION_CASES}
     if args.measured_time:
         expected |= {'measured.'+case for case in MEASURED_CASES}
+    if args.network_reconciliation:
+        expected |= {'network.RECONCILE-'+case for case in ('IDENTITY', 'CLOCK-RATE', 'CANCEL-FAILURE', 'CAPACITY')}
     if len(cases) != len(expected) or {c['case'] for c in cases} != expected or any(c['outcome'] != 'pass' for c in cases):
         raise ValueError('incomplete, duplicated or failed historical-toolset host run')
     artifacts = {}
@@ -95,6 +100,8 @@ def main():
         sources.append(ROOT/'spec/delivery/packages/w-25-subscriptions.md')
     if args.measured_time:
         sources.append(ROOT/'spec/delivery/packages/w-25-measured-time.md')
+    if args.network_reconciliation:
+        sources.append(ROOT/'spec/delivery/packages/w-25-network-reconciliation.md')
     if args.telemetry:
         sources.append(ROOT/'spec/delivery/packages/w-25-telemetry-wire.md')
         for folder in ('spec/contracts', 'spec/fixtures'):

@@ -1,10 +1,18 @@
 #pragma once
 #if defined(__linux__)
 #include "network.hpp"
+#include "network_watch.hpp"
 #include <set>
+#include <string>
 #include <string_view>
 
 namespace syspane::platform::detail {
+struct LinkMessages {
+    NetworkCode code=NetworkCode::success;
+    std::string replies={};
+    std::vector<NetworkIndication> indications={};
+};
+LinkMessages split_link_messages(std::string_view datagram);
 // Private native decoder. No candidate escapes before successful DONE.
 class LinkDump {
 public:

@@ -1,0 +1,133 @@
+{
+  "schema_version": "0.1.0",
+  "work_id": "W-25",
+  "source_ref": "3a7776175ab89e7e1627a5ec31054662bf2a491e",
+  "objective": "Implement portable network observation lifetimes, acquisition-time counter intervals and held Linux link subscription before supervised measured publication.",
+  "changed_files": [
+    "CMakeLists.txt",
+    "README.md",
+    "TODO.md",
+    "build-support/check_legacy_artifacts.py",
+    "build-support/components.json",
+    "build-support/evidence/network-reconciliation-handoff.json",
+    "build-support/evidence/w-25-network-reconciliation-attempts.json",
+    "build-support/evidence/w-25-network-reconciliation-linux-x64-gcc13.DIAG-01.json",
+    "build-support/evidence/w-25-network-reconciliation-linux-x64-gcc13.FAILURE-STORE.json",
+    "build-support/evidence/w-25-network-reconciliation-linux-x64-gcc13.NATIVE-01.json",
+    "build-support/evidence/w-25-network-reconciliation-linux-x64-gcc13.NATIVE-02.json",
+    "build-support/evidence/w-25-network-reconciliation-linux-x64-gcc13.NATIVE-CLOCK.json",
+    "build-support/evidence/w-25-network-reconciliation-linux-x64-gcc13.NATIVE-MEASURED.json",
+    "build-support/evidence/w-25-network-reconciliation-linux-x64-gcc13.NATIVE-NETWORK.json",
+    "build-support/evidence/w-25-network-reconciliation-linux-x64-gcc13.NATIVE-SUB.json",
+    "build-support/evidence/w-25-network-reconciliation-linux-x64-gcc13.ORACLE-01.json",
+    "build-support/evidence/w-25-network-reconciliation-linux-x64-gcc13.PRESERVE.json",
+    "build-support/evidence/w-25-network-reconciliation-linux-x64-gcc13.RECOVERY-01.json",
+    "build-support/evidence/w-25-network-reconciliation-linux-x64-gcc13.ctest.txt",
+    "build-support/evidence/w-25-network-reconciliation-linux-x64-gcc13.json",
+    "build-support/evidence/w-25-network-reconciliation-linux-x64-gcc13.smoke.json",
+    "build-support/evidence/w-25-network-reconciliation-package-failure.json",
+    "build-support/evidence/w-25-network-reconciliation-verification.json",
+    "build-support/evidence/w-25-network-reconciliation-windows-x64-gcc15.DIAG-01.json",
+    "build-support/evidence/w-25-network-reconciliation-windows-x64-gcc15.FAILURE-STORE.json",
+    "build-support/evidence/w-25-network-reconciliation-windows-x64-gcc15.NATIVE-01.json",
+    "build-support/evidence/w-25-network-reconciliation-windows-x64-gcc15.NATIVE-02.json",
+    "build-support/evidence/w-25-network-reconciliation-windows-x64-gcc15.NATIVE-CLOCK.json",
+    "build-support/evidence/w-25-network-reconciliation-windows-x64-gcc15.NATIVE-MEASURED.json",
+    "build-support/evidence/w-25-network-reconciliation-windows-x64-gcc15.NATIVE-NETWORK.json",
+    "build-support/evidence/w-25-network-reconciliation-windows-x64-gcc15.NATIVE-SUB.json",
+    "build-support/evidence/w-25-network-reconciliation-windows-x64-gcc15.PRESERVE.json",
+    "build-support/evidence/w-25-network-reconciliation-windows-x64-gcc15.RECOVERY-01.json",
+    "build-support/evidence/w-25-network-reconciliation-windows-x64-gcc15.ctest.txt",
+    "build-support/evidence/w-25-network-reconciliation-windows-x64-gcc15.json",
+    "build-support/evidence/w-25-network-reconciliation-windows-x64-gcc15.smoke.json",
+    "build-support/evidence/w-25-network-reconciliation-windows-x86-v141-xp.ctest.txt",
+    "build-support/evidence/w-25-network-reconciliation-windows-x86-v141-xp.json",
+    "build-support/evidence/w-25-network-reconciliation-windows-x86-v141-xp.smoke.json",
+    "build-support/record_legacy_build.py",
+    "build-support/record_protocol.py",
+    "build-support/targets/README.md",
+    "build-support/targets/linux-x64-gcc13.json",
+    "build-support/targets/windows-x64-gcc15.json",
+    "build-support/targets/windows-x86-v141-xp.json",
+    "docs/developers/build.md",
+    "source/application/network_probe.cpp",
+    "source/platform/network_netlink.cpp",
+    "source/platform/network_netlink.hpp",
+    "source/platform/network_watch.hpp",
+    "source/platform/network_watch_linux.cpp",
+    "source/runtime/network_state.cpp",
+    "source/runtime/network_state.hpp",
+    "spec/checksums.json",
+    "spec/delivery/current-state.md",
+    "spec/delivery/implementation-readiness.md",
+    "spec/delivery/index.md",
+    "spec/delivery/network-reconciliation-handoff.md",
+    "spec/delivery/packages/index.md",
+    "spec/delivery/packages/w-25-network-reconciliation.md",
+    "spec/delivery/work-units.json",
+    "spec/generated/catalog.json",
+    "tests/fault/network_state_tests.cpp",
+    "tests/protocol/native_network.py",
+    "tests/protocol/network_netlink_tests.cpp"
+  ],
+  "decisions": [
+    "Preserve surviving source lifetimes and retire removed/replaced mappings without ID reuse.",
+    "Reject obsolete or dirty candidates and preserve old values and timestamps as non-current on failure.",
+    "Use paired integer counter deltas over the actual start-to-start interval; reset or replacement invalidates the interval.",
+    "Hold and independently observe Linux link subscription before enumeration; latch unknown continuity loss.",
+    "Keep Windows notification coverage and supervised publication open; no IP-only callback is assumed to cover every raw interface."
+  ],
+  "checks": [
+    {
+      "name": "Windows full 93-entry CTest suite",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-25-network-reconciliation-windows-x64-gcc15.json"
+    },
+    {
+      "name": "Linux full 97-entry CTest suite including observed watch registration and repeated acquisition",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-25-network-reconciliation-linux-x64-gcc13.json"
+    },
+    {
+      "name": "Historical-toolset 85 host checks and eleven PE/import audits",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-25-network-reconciliation-windows-x86-v141-xp.json"
+    },
+    {
+      "name": "Direct Linux package invocation missing build-root environment",
+      "outcome": "fail",
+      "evidence": "build-support/evidence/w-25-network-reconciliation-package-failure.json"
+    },
+    {
+      "name": "Final builds and three fresh relocated model smoke packages",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-25-network-reconciliation-attempts.json"
+    },
+    {
+      "name": "Schemas, fixtures, generated indexes, tooling and integrity",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-25-network-reconciliation-verification.json"
+    },
+    {
+      "name": "Actual native topology faults, Windows notification coverage and supervised measured publication",
+      "outcome": "not_run",
+      "evidence": "spec/delivery/network-reconciliation-handoff.md"
+    }
+  ],
+  "open_questions": [
+    "Close the source-lifetime to model-entity/metric mapping before measured publication.",
+    "Connect bounded demand and current policy, retained failures, independent producer leases and OS-confirmed child exit before restart.",
+    "Qualify Windows full-table notification coverage independently of Linux progress.",
+    "Native topology/suspend/namespace faults, historical guests, Mac endpoint, conforming desktop hosts and complete product integration remain open."
+  ],
+  "next_step": "Close and implement supervised real network publication through measured subscriptions, retaining source timestamps and identity across failure/replay.",
+  "authority_used": [
+    "user:foundation-native-campaign-2026-10-05"
+  ],
+  "limitations": [
+    "The campaign and W-25 remain incomplete; the source owner and Linux watch are not a complete collector or desktop product.",
+    "Linux observed registration and successful reads; live removal, overflow and namespace migration were not induced.",
+    "No privileged action, interface mutation, guest change, public release or AIDE activation occurred.",
+    "Historical tests ran on Windows 10/WOW64; native network readers are excluded."
+  ]
+}

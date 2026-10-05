@@ -1,6 +1,16 @@
 # Developer setup and checks
 
-The [native network acquisition checkpoint](../../spec/delivery/network-acquisition-handoff.md)
+The [network reconciliation checkpoint](../../spec/delivery/network-reconciliation-handoff.md)
+passes 93 Windows, 97 Linux and 85 historical-toolset host checks. Four
+`network.RECONCILE-*` families run on all profiles. Linux adds
+`network.NETWORK-WATCH-DECODE` and a fifth native network case which independently
+observes subscription registration before two real acquisitions. Both recorders now
+accept `--network-reconciliation` with their existing arguments; it includes all
+preceding regression scopes. Actual native topology faults, Windows notification
+coverage and supervised publication remain separate gates. Historical native
+readers remain disabled; eleven executables receive the PE/import audit.
+
+The earlier [native network acquisition checkpoint](../../spec/delivery/network-acquisition-handoff.md)
 passes 89 Windows, 92 Linux and 81 historical-toolset host checks. Modern profiles
 add `native.NATIVE-NETWORK` (four fixed cases); Linux adds two `network.NETWORK-*`
 native-layout decoder cases. Use `record_protocol.py --network` with the ordinary
