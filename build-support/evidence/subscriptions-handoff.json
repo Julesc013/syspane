@@ -1,0 +1,133 @@
+{
+  "schema_version": "0.1.0",
+  "work_id": "W-25",
+  "source_ref": "dc44b697b72a5a40a88db4d1dee8c760fcf55f22",
+  "objective": "Connect bounded inventory subscription/demand, policy-bound queues and complete-state receipt through authenticated native process experiments.",
+  "changed_files": [
+    "CMakeLists.txt",
+    "README.md",
+    "TODO.md",
+    "build-support/campaign-workspace.json",
+    "build-support/check_legacy_artifacts.py",
+    "build-support/check_workspace_budget.py",
+    "build-support/components.json",
+    "build-support/evidence/subscription-lab-archive.json",
+    "build-support/evidence/subscription-workspace-overrun.json",
+    "build-support/evidence/subscriptions-handoff.json",
+    "build-support/evidence/w-25-subscriptions-attempts.json",
+    "build-support/evidence/w-25-subscriptions-linux-x64-gcc13.DIAG-01.json",
+    "build-support/evidence/w-25-subscriptions-linux-x64-gcc13.FAILURE-STORE.json",
+    "build-support/evidence/w-25-subscriptions-linux-x64-gcc13.NATIVE-01.json",
+    "build-support/evidence/w-25-subscriptions-linux-x64-gcc13.NATIVE-02.json",
+    "build-support/evidence/w-25-subscriptions-linux-x64-gcc13.NATIVE-SUB.json",
+    "build-support/evidence/w-25-subscriptions-linux-x64-gcc13.ORACLE-01.json",
+    "build-support/evidence/w-25-subscriptions-linux-x64-gcc13.PRESERVE.json",
+    "build-support/evidence/w-25-subscriptions-linux-x64-gcc13.RECOVERY-01.json",
+    "build-support/evidence/w-25-subscriptions-linux-x64-gcc13.ctest.txt",
+    "build-support/evidence/w-25-subscriptions-linux-x64-gcc13.json",
+    "build-support/evidence/w-25-subscriptions-linux-x64-gcc13.smoke.json",
+    "build-support/evidence/w-25-subscriptions-verification.json",
+    "build-support/evidence/w-25-subscriptions-windows-x64-gcc15.DIAG-01.json",
+    "build-support/evidence/w-25-subscriptions-windows-x64-gcc15.FAILURE-STORE.json",
+    "build-support/evidence/w-25-subscriptions-windows-x64-gcc15.NATIVE-01.json",
+    "build-support/evidence/w-25-subscriptions-windows-x64-gcc15.NATIVE-02.json",
+    "build-support/evidence/w-25-subscriptions-windows-x64-gcc15.NATIVE-SUB.json",
+    "build-support/evidence/w-25-subscriptions-windows-x64-gcc15.PRESERVE.json",
+    "build-support/evidence/w-25-subscriptions-windows-x64-gcc15.RECOVERY-01.json",
+    "build-support/evidence/w-25-subscriptions-windows-x64-gcc15.ctest.txt",
+    "build-support/evidence/w-25-subscriptions-windows-x64-gcc15.json",
+    "build-support/evidence/w-25-subscriptions-windows-x64-gcc15.smoke.json",
+    "build-support/evidence/w-25-subscriptions-windows-x86-v141-xp.ctest.txt",
+    "build-support/evidence/w-25-subscriptions-windows-x86-v141-xp.json",
+    "build-support/evidence/w-25-subscriptions-windows-x86-v141-xp.smoke.json",
+    "build-support/package_smoke.py",
+    "build-support/record_legacy_build.py",
+    "build-support/record_protocol.py",
+    "build-support/targets/linux-x64-gcc13.json",
+    "build-support/targets/windows-x64-gcc15.json",
+    "build-support/targets/windows-x86-v141-xp.json",
+    "docs/developers/build.md",
+    "source/application/telemetry_probe.cpp",
+    "source/configuration/session.cpp",
+    "source/configuration/session.hpp",
+    "source/protocol/outbox.cpp",
+    "source/protocol/outbox.hpp",
+    "spec/architecture/recovery.md",
+    "spec/architecture/scheduling.md",
+    "spec/checksums.json",
+    "spec/delivery/campaign-admission.md",
+    "spec/delivery/current-state.md",
+    "spec/delivery/implementation-readiness.md",
+    "spec/delivery/index.md",
+    "spec/delivery/packages/index.md",
+    "spec/delivery/packages/w-25-subscriptions.md",
+    "spec/delivery/packages/w-25-telemetry-wire.md",
+    "spec/delivery/subscriptions-handoff.md",
+    "spec/delivery/work-units.json",
+    "spec/generated/catalog.json",
+    "tests/protocol/native_subscription.py",
+    "tests/protocol/subscription_tests.cpp"
+  ],
+  "decisions": [
+    "Extend the existing session owner/outbox; keep preview-only negotiation unchanged unless a local fixed inventory source is configured.",
+    "Use one subscription identity per connection, non-repeating local callback tickets and a three-second demand lease renewed only by increasing heartbeats.",
+    "Clear demand and all queued frames before policy revision/time checks; preserve fail-closed behavior on invalid updates and regressed time.",
+    "Exercise actual native Windows/Linux full/delta/resync/unsubscribe/reconnect, overflow, revocation, expiry and wrong producer rejection.",
+    "Keep synthetic inventory scope explicit; real measured fields still need producer-clock provenance/mapping and full product demand planning.",
+    "Preserve the 1 GiB workspace overrun, then revise reversible development allocation to 2 GiB with preflight growth reservations; product limits unchanged."
+  ],
+  "checks": [
+    {
+      "name": "Windows 81-entry full CTest suite including five native subscription scenarios",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-25-subscriptions-windows-x64-gcc15.json"
+    },
+    {
+      "name": "Linux 82-entry full CTest suite including five native subscription scenarios",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-25-subscriptions-linux-x64-gcc13.json"
+    },
+    {
+      "name": "Historical-toolset 76 host checks and nine PE/import audits",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-25-subscriptions-windows-x86-v141-xp.json"
+    },
+    {
+      "name": "All profiles relocated model smoke packages and exact attempts",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-25-subscriptions-attempts.json"
+    },
+    {
+      "name": "Schema/fixture, generated index, tooling and integrity checks",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-25-subscriptions-verification.json"
+    },
+    {
+      "name": "Original workspace allocation overrun preserved",
+      "outcome": "fail",
+      "evidence": "build-support/evidence/subscription-workspace-overrun.json"
+    },
+    {
+      "name": "Real collectors, measured-field freshness and product policy distribution",
+      "outcome": "not_run",
+      "evidence": "spec/delivery/subscriptions-handoff.md"
+    }
+  ],
+  "open_questions": [
+    "Measured fields need explicit producer-monotonic provenance and conservative consumer mapping before freshness/rate claims.",
+    "Product demand aggregation, policy distribution, actual collector/renderer recovery and failure retention remain open.",
+    "Cross-component erasure, native editor exit and external visible recovery remain required.",
+    "Linux composition still fails; Windows/macOS capture is unqualified; historical guest scope is pending."
+  ],
+  "next_step": "Close producer-clock provenance/mapping and attach real independently supervised data production, then complete product demand/policy distribution and render recovery.",
+  "authority_used": [
+    "user:foundation-native-campaign-2026-10-05"
+  ],
+  "limitations": [
+    "W-25 and the campaign remain incomplete; a synthetic inventory exchange does not qualify a real collector, renderer or desktop.",
+    "Typed development policy and fixed native roles are supplied by the probe; no protected policy deployment or general product subscription is enabled.",
+    "Historical checks run on Windows 10/WOW64 only; no existing guest VM was started or changed.",
+    "The allocation revision does not retroactively pass the original overrun; the workspace checker reserves growth but is not an OS quota.",
+    "No privileged operation, public release, AIDE activation or human review is attested."
+  ]
+}

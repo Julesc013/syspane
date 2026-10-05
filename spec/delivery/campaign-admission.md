@@ -11,6 +11,7 @@ sp_authority: "informative"
 sp_requires: ["SP-WORK-PACKAGES", "SP-W01-PACKAGE"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION"]
+updated: {"by": "codex", "at": "2026-10-06T08:15:42+11:00", "scope": "Record original workspace overrun and bounded 2 GiB development allocation with preflight reservations"}
 ---
 
 # Foundation and native-experiment campaign admission
@@ -35,9 +36,25 @@ captures and packages use `out/campaign/`. Linux uses an explicitly declared
 probe demonstrated that this account cannot set permissions on the Windows mount;
 the native cache avoids requiring privilege changes. Keep an ownership marker,
 record artifact sizes and stop a task
-before its owned outputs exceed 1 GiB. Do not delete unrelated files or create a
+before its owned outputs exceed the current bounded campaign allocation. Do not delete unrelated files or create a
 second checkout. Run Linux tools through the existing unprivileged WSL account;
 the distribution's default root identity is not needed for building.
+
+The initial allocation was 1 GiB. The subscription checkpoint measured 1,108,437,093
+bytes after expanding all three debug/toolset builds; that overrun is preserved,
+not described as compliance with the old ceiling. The current allocation is 2 GiB
+combined, recorded in `build-support/campaign-workspace.json`. This is a reversible
+development-workspace allocation within the admitted campaign, not a product memory
+limit or relaxed acceptance condition. The checkout drive had 68,639,891,456 free
+bytes at this decision. Retain the exact debug artifacts and original evidence.
+
+Before each build, test or package launch, run the Windows coordinator
+`python build-support/check_workspace_budget.py --action build|test|package` with
+one action selected. It reserves respectively 256, 64 or 32 MiB of growth under
+the combined ceiling; inspect again afterward. Stop on a failed check and preserve
+it before archiving verified owned outputs or explicitly revising the allocation.
+This is a preflight reservation, not an OS quota; a new package whose predicted
+growth exceeds the reservation needs a measured allocation decision before launch.
 
 ## W-01 closure before implementation
 

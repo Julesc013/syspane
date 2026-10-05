@@ -1,6 +1,20 @@
 # Developer setup and checks
 
-The latest [complete-state import checkpoint](../../spec/delivery/state-import-handoff.md)
+The latest [subscription checkpoint](../../spec/delivery/subscriptions-handoff.md)
+passes 81 Windows, 82 Linux and 76 historical-toolset host checks. Three
+`subscription.SUB-*` families run everywhere; `native.NATIVE-SUB` executes five
+separate-process synthetic inventory scenarios on modern Windows/Linux. Record
+complete suites using `--subscriptions`. Product demand, real collectors and
+measured-field freshness remain unqualified.
+
+Before a build, test or package launch, run the Windows coordinator
+`python build-support/check_workspace_budget.py --action build` (select `test` or
+`package` as appropriate); require exit zero. Run it afterward with `--action inspect`.
+The combined checkout/native-Linux allocation is 2 GiB with growth reservations;
+this is a preflight check, not an OS quota. The original 1 GiB overrun is preserved
+in the checkpoint. Do not remove or overwrite another task's files to gain space.
+
+The earlier [complete-state import checkpoint](../../spec/delivery/state-import-handoff.md)
 passes 77 Windows, 78 Linux and 73 historical-toolset host CTest entries. Run the six
 import families with `ctest --preset windows-x64-gcc15 -R "^import\." --output-on-failure`;
 Linux uses the ordinary wrapper. Both recorders accept `--state-import`, which also

@@ -11,6 +11,7 @@ sp_authority: "normative-proposal"
 sp_requires: ["SP-W25-DATA-VIEW", "SP-W24-PACKAGE", "SP-PROTOCOL", "SP-STATE"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION"]
+updated: {"by": "codex", "at": "2026-10-06T08:15:42+11:00", "scope": "Link admitted native inventory experiment while retaining measured-field clock gates"}
 ---
 
 # W-25 bounded telemetry delivery document
@@ -99,6 +100,11 @@ Do not truncate an oversized coherent snapshot or call it complete. Paging/chunk
 needs a versioned atomic assembly contract before it is enabled. These remaining
 native lifecycle gates, real collector/renderer recovery and independent visibility
 remain W-25 work, with no desktop or historical-runtime claim from this codec.
+
+The later [inventory subscription boundary](w-25-subscriptions.md) admits a bounded
+native synthetic-inventory experiment with no TTL/rate claim. It closes that scope
+only; producer-clock provenance/mapping and real-source/product admission remain
+mandatory before measured-field or general subscription advertisement.
 
 ## Fixed acceptance
 

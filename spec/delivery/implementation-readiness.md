@@ -12,7 +12,7 @@ sp_requires: ["SP-CURRENT"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-AUDIT-2026-10-04", "resource": "User-supplied October 2026 audit inputs", "title": "October review inputs"}]
-updated: {"by": "codex", "at": "2026-10-06T07:50:25+11:00", "scope": "Complete remote state import checkpoint; native demand/policy/clock admission remains open"}
+updated: {"by": "codex", "at": "2026-10-06T08:15:42+11:00", "scope": "Native inventory lifecycle evidence with separate real source and measured freshness gates"}
 ---
 
 # Implementation readiness and gates
@@ -25,7 +25,7 @@ new versioned schemas or explicit work-scope refinement.
 | Gate | Present as specification/checks | Pending implementation/evidence |
 |---|---|---|
 | Initial authoring | Setting descriptors, scene/binding/layout 0.2, frame/handshake/preview checks over real local IPC | Runtime merge/resolution, migration, persistence and native controls |
-| Recovery/security | Lease/render/restart guards, native owned-child fault supervision, independent public diagnostics/native inspector, private preservation/native controls, typed synchronized data ownership, bounded telemetry document codec and complete-state import, policy checks and native peer identity evidence | Preservation edge-case qualification, protected-policy deployment, actual telemetry/renderer recovery, cross-user/logon qualification, data-path revocation and measured budgets |
+| Recovery/security | Lease/render/restart guards, native owned-child fault supervision, independent public diagnostics/native inspector, private preservation/native controls, typed synchronized data ownership, bounded telemetry documents/import and native synthetic inventory subscription, policy checks and native peer identity evidence | Preservation edge-case qualification, protected-policy deployment, actual telemetry/renderer recovery, cross-user/logon qualification, data-path revocation and measured budgets |
 | Native profiles | Windows/Linux model, protocol and native IPC build profiles, component ownership, calibrated external pixel/time observer and executable checks | Native reveal/input/wallpaper adapters, native recovery, desktop builds and target qualification |
 | Content/SDK | Preset/package/extension metadata and buffer-result sketch | Bounded importer, dependency closure, extended theme/AST, installed SDK/ABI consumers |
 | Saver | Role/lifecycle/privacy/ownership contracts | Native host adapters and preview/fullscreen/configuration qualification |
@@ -92,6 +92,12 @@ to the revocable model owner, preserve reported retention/metadata/replay identi
 and reject partial replacement. Native subscription/demand ownership, queue
 revocation and producer-clock mapping remain open; no collector or renderer is
 connected and no desktop support follows from these checks.
+
+The later [subscription checkpoint](subscriptions-handoff.md) connects real local
+IPC to inventory receipt on Windows/Linux, with three portable demand/queue/lifetime
+families and five native scenarios. Current suites pass 81/82/76 entries on the two
+modern profiles and historical-toolset host. General demand planning, measured-field
+clock mapping, real collectors/renderers and product policy distribution remain open.
 
 Use the proposed cold-start exercise to detect missing observable contracts.
 Private implementation differences are permissible. Missing laboratories remain

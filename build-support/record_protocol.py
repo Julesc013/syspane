@@ -14,6 +14,7 @@ MODEL_CASES = 'STATE-01 STATE-02 STATE-03 STATE-04 STATE-05 VALIDITY-01 VALIDITY
 PROTOCOL_CASES = 'FRAME-01 FRAME-02 FRAME-03 JSON-01 WIRE-01 NEGOTIATE-01 IPC-BUDGET-01 IPC-BUDGET-02 IPC-BUDGET-03 IPC-BUDGET-04 LEDGER-01 POLICY-01 POLICY-02 DISCLOSURE-01 QUEUE-01 SESSION-01 dependencies'.split()
 RECOVERY_CASES = 'LEASE-01 LEASE-02 LEASE-03 LEASE-04 LEASE-05 RENDER-01 RENDER-02 RETRY-01 RETRY-02 RETRY-03 RECOVERY-CLOCK'.split()
 IMPORT_CASES = 'STATE RETAIN COVERAGE REPLAY TIME LIFETIME'.split()
+SUBSCRIPTION_CASES = 'SUB-ADMIT SUB-QUEUE SUB-LIFETIME'.split()
 EXPECTED = {f'model.{case}' for case in MODEL_CASES} | {f'protocol.{case}' for case in PROTOCOL_CASES} | {'composition.graph', 'composition.reject_forbidden'}
 
 
@@ -36,7 +37,10 @@ def main():
     parser.add_argument('--data-view', action='store_true', help='Require synchronized model/lease/policy view cases')
     parser.add_argument('--telemetry', action='store_true', help='Require bounded telemetry document cases; no native subscription claim')
     parser.add_argument('--state-import', action='store_true', help='Require complete remote state import through the wire-bound data owner')
+    parser.add_argument('--subscriptions', action='store_true', help='Require bounded subscription and native synthetic inventory cases')
     args = parser.parse_args()
+    if args.subscriptions:
+        args.state_import = True
     if args.state_import:
         args.telemetry = True
     if args.telemetry:
@@ -88,12 +92,17 @@ def main():
         expected |= {'telemetry.TELEMETRY-'+case for case in ('SNAPSHOT', 'MESSAGES', 'GRAPH', 'TIME', 'BOUNDS', 'PRESERVE')}
     if args.state_import:
         expected |= {'import.IMPORT-'+case for case in IMPORT_CASES}
+    if args.subscriptions:
+        expected |= {'subscription.'+case for case in SUBSCRIPTION_CASES} | {'native.NATIVE-SUB'}
     if len(cases) != len(expected) or {case['case'] for case in cases} != expected or any(case['outcome'] != 'pass' for case in cases):
         raise ValueError('missing, repeated, unexpected or failing case; preserve log before rerun')
     suffix = '.exe' if platform.system() == 'Windows' else ''
     artifacts = {name: {'sha256': sha(build/name), 'bytes': (build/name).stat().st_size}
                  for name in ('syspane_protocol_tests'+suffix, 'libsyspane_protocol.a', 'libsyspane_configuration.a', 'generated/settings_descriptors.hpp')}
     native_records = []
+    if args.subscriptions:
+        for name in ('syspane_subscription_tests'+suffix,'SysPane.TelemetryProbe'+suffix):
+            artifacts[name] = {'sha256': sha(build/name), 'bytes': (build/name).stat().st_size}
     if args.state_import:
         name = 'syspane_state_import_tests'+suffix
         artifacts[name] = {'sha256': sha(build/name), 'bytes': (build/name).stat().st_size}
@@ -138,6 +147,8 @@ def main():
                                          'INTERRUPTED-INVALID', 'OVERSIZE', 'HARDLINK', 'PATH-TYPE',
                                          'WINDOWS-PRIVATE-DACL' if suffix else 'POSIX-PERMISSIONS-LINK-FIFO'}
         seen = set()
+        if args.subscriptions:
+            required['NATIVE-SUB'] = {'JOURNEY','OVERFLOW','REVOKE','EXPIRY','WRONG-PRODUCER'}
         if args.preservation:
             for name in ('syspane_preservation_tests'+suffix, 'libsyspane_preservation_job.a'):
                 artifacts[name] = {'sha256': sha(build/name), 'bytes': (build/name).stat().st_size}
@@ -169,8 +180,8 @@ def main():
                     raise ValueError('Windows reparse case must execute or retain its exact privilege limitation')
             if native['outcome'] != 'pass' or len(native['cases']) != len(expected_cases) or {case['case'] for case in native['cases']} != expected_cases or any(case['outcome'] != 'pass' for case in native['cases']):
                 raise ValueError('native case missing or failed; preserve original report')
-            if family in ('RECOVERY-01', 'DIAG-01', 'ORACLE-01', 'FAILURE-STORE', 'PRESERVE'):
-                executable = {'RECOVERY-01':'SysPane.RecoveryProbe'+suffix, 'DIAG-01':'SysPane.Diag.exe' if suffix else 'syspane-diag', 'ORACLE-01':'SysPane.OracleProbe', 'FAILURE-STORE':'syspane_failure_store_tests'+suffix, 'PRESERVE':'syspane_preservation_tests'+suffix}[family]
+            if family in ('RECOVERY-01', 'DIAG-01', 'ORACLE-01', 'FAILURE-STORE', 'PRESERVE', 'NATIVE-SUB'):
+                executable = {'RECOVERY-01':'SysPane.RecoveryProbe'+suffix, 'DIAG-01':'SysPane.Diag.exe' if suffix else 'syspane-diag', 'ORACLE-01':'SysPane.OracleProbe', 'FAILURE-STORE':'syspane_failure_store_tests'+suffix, 'PRESERVE':'syspane_preservation_tests'+suffix, 'NATIVE-SUB':'SysPane.TelemetryProbe'+suffix}[family]
                 if family == 'PRESERVE' and native['diagnostic_sha256'] != sha(build/('SysPane.Diag.exe' if suffix else 'syspane-diag')):
                     raise ValueError('preservation CLI artifact changed after run')
                 if native['executable_sha256'] != sha(build/executable):
@@ -240,6 +251,8 @@ def main():
         paths.extend(sorted((ROOT/'spec/fixtures').rglob('*')))
     if args.state_import:
         paths.append(ROOT/'spec/delivery/packages/w-25-state-import.md')
+    if args.subscriptions:
+        paths.append(ROOT/'spec/delivery/packages/w-25-subscriptions.md')
     for directory in ('source', 'tests', 'build-support', 'spec/contracts'):
         paths.extend(sorted((ROOT/directory).rglob('*')))
     inputs = {p.relative_to(ROOT).as_posix(): sha(p) for p in paths
@@ -352,6 +365,17 @@ def main():
             'Native regression families retain their existing IPC, synthetic supervision, diagnostic/preservation and private-X11 calibration scope.',
             'Protected-policy deployment, cross-component payload erasure, real visible recovery, historical guests and desktop-host qualification remain open.',
             'W-25 and the campaign remain incomplete; no privileged action, public release or human review is attested.'
+        ]
+    if args.subscriptions:
+        report['slice'] = 'bounded demand, policy-bound queues and native synthetic inventory receipt'
+        report['bindings']['subscriptions'] = 'spec/delivery/packages/w-25-subscriptions.md'
+        report['limits'] = [
+            'The native probe uses a fixed synthetic inventory source and typed development policy; no protected policy is installed or real host telemetry read.',
+            'One subscription identity per connection and one fixed source are initial limits, not the complete W-07 demand planner.',
+            'Monotonic clocks govern local demand/producer leases; no remote measured tick or local TTL/rate freshness mapping is supplied.',
+            'Queued data/demand is revoked, including on invalid policy/time; already written bytes still require consumer current-policy enforcement.',
+            'Real collectors/renderers, product policy distribution, cross-component erasure, visible recovery and historical guests remain unqualified.',
+            'W-25 and the campaign remain incomplete; no desktop support, privileged action or public release is attested.'
         ]
     args.output.parent.mkdir(parents=True, exist_ok=True)
     log_output.write_text(raw.replace(str(build), '<build>').replace(str(ROOT), '<source>'), encoding='utf-8', newline='\n')

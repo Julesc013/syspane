@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-06T07:50:25+11:00", "scope": "Complete remote state import checkpoint; native subscription and producer-clock mapping remain open"}
+updated: {"by": "codex", "at": "2026-10-06T08:15:42+11:00", "scope": "Native synthetic inventory subscription checkpoint; real source/clock/product demand work remains open"}
 ---
 
 # Current state and next admitted boundary
@@ -117,10 +117,17 @@ passes 71 Windows, 72 Linux and 67 historical-toolset host checks.
 The [complete-state import checkpoint](state-import-handoff.md) now connects those
 documents to the data owner. It preserves remote retained values, identity/capture/
 observation metadata and subnanosecond timestamps, refuses partial/gap replacement,
-and retains replay/tombstone reservations across reconnects. Current suites pass
-77 Windows, 78 Linux and 73 historical-toolset host checks. Native demand/subscription
-lifetime and producer-clock mapping remain required before feature advertisement.
-No native telemetry or visible recovery is qualified.
+and retains replay/tombstone reservations across reconnects. That checkpoint passes
+77 Windows, 78 Linux and 73 historical-toolset host checks.
+
+The [subscription checkpoint](subscriptions-handoff.md) adds bounded demand,
+current-policy queues and actual Windows/Linux synthetic inventory exchanges.
+Five native scenarios cover full/delta/resync/unsubscribe/reconnect, overflow,
+revocation, expiry and wrong producer rejection. Current suites pass 81 Windows,
+82 Linux and 76 historical-toolset host checks. General product demand, real
+collectors/renderers and measured-field producer-clock mapping remain open. No
+desktop or visible recovery is qualified. The checkpoint preserves an initial
+workspace-budget overrun and the subsequent bounded allocation revision.
 
 Canonical 0.2.0 documentation bundle, unchanged 0.1 authoring profile, preserved old
 fixtures, new experimental scene/command/capability 0.2 and admission descriptors.
@@ -165,11 +172,11 @@ historical guest execution once guest test scope and usability are established.
 W-05 needs a composition strategy that actually preserves icon pixels; its initial
 EWMH window stacking candidates fail that requirement. Continue other native tracks
 independently of this negative result.
-Continue W-25 by closing native subscription/demand ownership and policy-bound
-queue invalidation. The complete-state receive boundary now preserves metadata and
-reported retention; partial/gap delivery still requires a complete full snapshot.
-Define producer-clock provenance/mapping before local TTL freshness inference, then
-connect this owner to authenticated native transport, real collectors and renderers.
+Continue W-25 with producer-clock provenance/mapping for measured fields, actual
+collector/renderer supervision, and product policy distribution. The native
+inventory probe now connects bounded subscription/demand and queue revocation to
+complete-state receipt. W-07 must add field/entity/age/priority/recording demand
+aggregation; the one-source experiment does not complete that planner.
 Close product failure-log ownership/retention and remaining payload-erasure contracts
 before enabling the associated features. Qualify protected policy in an admitted lab.
 Connect the build/component/target consumers and minimum command/IPC/policy/recovery

@@ -63,7 +63,7 @@
         "SP-PROCESSES",
         "SP-PERFORMANCE"
       ],
-      "sha256": "97d7dcda14e76a1ac2d060df95bbf90b84e251916ee7f643f3f4a8754acc2499"
+      "sha256": "93ae1eaa3e7a7e5f7df2287a80a33f7fbe1abb81084731a8d02e1e48330fddd0"
     },
     {
       "id": "SP-SCHEDULER",
@@ -73,7 +73,7 @@
       "requires": [
         "SP-ARCHITECTURE"
       ],
-      "sha256": "01c440c62356f4f23f53336913240429bf2618db6157b1f8cafe1a121def380e"
+      "sha256": "75a82562580ccb0304ee6925b2b2be9bb3d3dcd8fa927fff4039ea57c3539214"
     },
     {
       "id": "SP-STATE",
@@ -347,7 +347,7 @@
         "SP-WORK-PACKAGES",
         "SP-W01-PACKAGE"
       ],
-      "sha256": "9470802300241b7a1fed9f62ae7784655dfc2f9935cdff2c73de7cfe00e1ac88"
+      "sha256": "44091be0d45edc5de6d3e7e05730a46d3d6cee5d918d93d3131a828e8292b5f9"
     },
     {
       "id": "SP-CURRENT",
@@ -357,7 +357,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "6b31d323a4c6427bc3284204e06a7ac9b3ef3f87d888a03bc08300dffc9afea4"
+      "sha256": "016f2b0ff1b32c4a0724934349838a2a5b5d763646a953a317c9c3d695e69620"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -422,7 +422,7 @@
       "requires": [
         "SP-CURRENT"
       ],
-      "sha256": "a82c7343e0f8616432d1157b5d5f7356c80f3631621f19d6a3096a23c4dcd119"
+      "sha256": "348977c6ecb2ff10cbd7c56d1c4bd78313a37720b7f0281de000c8a88278141a"
     },
     {
       "id": "SP-NATIVE-TRANSPORT-HANDOFF",
@@ -584,6 +584,18 @@
       "sha256": "96debe40bc555f727e7b6f8fd53e436c5080f90b528b961fec593df9082ad80d"
     },
     {
+      "id": "SP-W25-SUBSCRIPTIONS",
+      "path": "delivery/packages/w-25-subscriptions.md",
+      "title": "W-25 bounded subscription lifetime and native inventory experiment",
+      "description": "Admit one fixed inventory stream per authenticated connection, with demand expiry, policy-bound queues and complete-state receipt.",
+      "requires": [
+        "SP-W25-STATE-IMPORT",
+        "SP-W24-PACKAGE",
+        "SP-SCHEDULER"
+      ],
+      "sha256": "a9dd66367e9016139543756b0d5a838cb726d440dc650363d08f5ea91f0f41d6"
+    },
+    {
       "id": "SP-W25-TELEMETRY-WIRE",
       "path": "delivery/packages/w-25-telemetry-wire.md",
       "title": "W-25 bounded telemetry delivery document",
@@ -594,7 +606,7 @@
         "SP-PROTOCOL",
         "SP-STATE"
       ],
-      "sha256": "d17e3eb396c4161c0c21cf3a2ca91898ad15cd02656b728ba5ea3e46d0c61e5c"
+      "sha256": "f4bbdc89d7832fbaba2197128a655f56002c8173994d785c86fef967f7acfa61"
     },
     {
       "id": "SP-W26-PACKAGE",
@@ -652,6 +664,17 @@
         "SP-CAMPAIGN-ADMISSION"
       ],
       "sha256": "d1864812c09c8a71b85f11d76c0a460f69bba18788937d11e26980f6dd810ca0"
+    },
+    {
+      "id": "SP-SUBSCRIPTIONS-HANDOFF",
+      "path": "delivery/subscriptions-handoff.md",
+      "title": "Native inventory subscription checkpoint",
+      "description": "Bind demand expiry, policy-bound queues and complete-state receipt to authenticated native process experiments.",
+      "requires": [
+        "SP-W25-SUBSCRIPTIONS",
+        "SP-CAMPAIGN-ADMISSION"
+      ],
+      "sha256": "ec5997ac0d86aac448c6930e3236911a97affe99326b4dfb008d742bc3f87ede"
     },
     {
       "id": "SP-SUPERVISION-HANDOFF",

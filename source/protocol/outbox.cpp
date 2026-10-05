@@ -28,9 +28,10 @@ bool Outbox::data(std::string payload, std::string gap) {
     return true;
 }
 void Outbox::revoke(std::string gap) {
-    data_.clear(); data_bytes_ = 0;
+    discard_data();
     control(std::move(gap));
 }
+void Outbox::discard_data() { data_.clear(); data_bytes_ = 0; }
 std::optional<std::string> Outbox::pop() {
     auto& queue = control_.empty() ? data_ : control_;
     auto& bytes = control_.empty() ? data_bytes_ : control_bytes_;

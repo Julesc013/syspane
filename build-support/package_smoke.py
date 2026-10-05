@@ -66,7 +66,8 @@ def main():
     if not output_root.resolve().is_relative_to(ROOT.resolve()):
         raise ValueError('output escapes checkout')
     output_root.mkdir(parents=True, exist_ok=True)
-    if sum(p.stat().st_size for p in (ROOT/'out').rglob('*') if p.is_file()) + len(payload) * 4 > 1024**3:
+    maximum = json.loads((ROOT/'build-support/campaign-workspace.json').read_text(encoding='utf-8'))['maximum_bytes']
+    if sum(p.stat().st_size for p in (ROOT/'out').rglob('*') if p.is_file()) + len(payload) * 4 > maximum:
         raise ValueError('campaign output budget exceeded')
     attempt = Path(tempfile.mkdtemp(prefix='smoke-', dir=output_root)).resolve()
     if not attempt.is_relative_to(output_root.resolve()):

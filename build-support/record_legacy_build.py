@@ -8,7 +8,7 @@ import re
 import subprocess
 
 from check_legacy_artifacts import EXECUTABLES, build_inputs, verify
-from record_protocol import EXPECTED, RECOVERY_CASES, IMPORT_CASES, sha
+from record_protocol import EXPECTED, RECOVERY_CASES, IMPORT_CASES, SUBSCRIPTION_CASES, sha
 
 ROOT = Path(__file__).resolve().parents[1]
 PROFILE = 'windows-x86-v141-xp'
@@ -24,7 +24,10 @@ def main():
     parser.add_argument('--data-view', action='store_true', help='Include portable synchronized data view cases')
     parser.add_argument('--telemetry', action='store_true', help='Include bounded telemetry document cases')
     parser.add_argument('--state-import', action='store_true', help='Include complete remote state import cases')
+    parser.add_argument('--subscriptions', action='store_true', help='Include bounded portable subscription cases')
     args = parser.parse_args()
+    if args.subscriptions:
+        args.state_import = True
     if args.state_import:
         args.telemetry = True
     if args.telemetry:
@@ -56,6 +59,8 @@ def main():
         expected |= {'telemetry.TELEMETRY-'+case for case in ('SNAPSHOT','MESSAGES','GRAPH','TIME','BOUNDS','PRESERVE')}
     if args.state_import:
         expected |= {'import.IMPORT-'+case for case in IMPORT_CASES}
+    if args.subscriptions:
+        expected |= {'subscription.'+case for case in SUBSCRIPTION_CASES}
     if len(cases) != len(expected) or {c['case'] for c in cases} != expected or any(c['outcome'] != 'pass' for c in cases):
         raise ValueError('incomplete, duplicated or failed historical-toolset host run')
     artifacts = {}
@@ -81,6 +86,8 @@ def main():
         sources.append(ROOT/'spec/delivery/packages/w-25-data-view.md')
     if args.state_import:
         sources.append(ROOT/'spec/delivery/packages/w-25-state-import.md')
+    if args.subscriptions:
+        sources.append(ROOT/'spec/delivery/packages/w-25-subscriptions.md')
     if args.telemetry:
         sources.append(ROOT/'spec/delivery/packages/w-25-telemetry-wire.md')
         for folder in ('spec/contracts', 'spec/fixtures'):

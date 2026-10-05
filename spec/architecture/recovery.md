@@ -12,7 +12,7 @@ sp_requires: ["SP-PROCESSES", "SP-PERFORMANCE"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-AUDIT-2026-10-04"]
 sources: [{"id": "SRC-AUDIT-2026-10-04", "resource": "User-supplied SysPane audits and design reviews, 2026-10-04", "title": "October specification review inputs"}]
-updated: {"by": "codex", "at": "2026-10-06T07:50:25+11:00", "scope": "Link complete reported-state import and remaining native demand/clock boundaries"}
+updated: {"by": "codex", "at": "2026-10-06T08:15:42+11:00", "scope": "Link bounded native inventory subscription and remaining product demand/clock work"}
 ---
 
 # Independent recovery and bounded failure
@@ -99,3 +99,9 @@ locally admitted wire identity/policy bindings, preserves exact replay bytes and
 metadata, and drops them with payload on policy replacement. UTC normalization
 does not supply a producer-monotonic measurement or establish local TTL freshness.
 Native demand, transport queues and cross-component revocation still need closure.
+
+The [initial subscription boundary](../delivery/packages/w-25-subscriptions.md) now
+connects one fixed inventory source per authenticated connection to bounded demand
+and current-policy queues. Its [native checkpoint](../delivery/subscriptions-handoff.md)
+uses synthetic inventory; general demand aggregation, measured-field clock mapping
+and independently supervised real collection/rendering remain required.

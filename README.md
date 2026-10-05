@@ -28,7 +28,9 @@ recovery, product retention and desktop integration remain pending. A
 versioned snapshot documents and exact replay bytes. The new
 [complete-state import](spec/delivery/state-import-handoff.md) connects decoded
 state to that owner while preserving remote retention and identity metadata.
-Native subscriptions stay disabled pending their demand/policy/clock contracts.
+A [native subscription probe](spec/delivery/subscriptions-handoff.md) now exchanges
+synthetic inventory with demand expiry, policy revocation and reconnect recovery.
+Real collectors, measured-field clock mapping and product subscriptions remain pending.
 An external pixel/time oracle is calibrated against live, hidden, frozen and
 obstructed synthetic X11 surfaces. A real Openbox/PCManFM Show Desktop experiment
 now exposes the basic X11 candidate's placement failure: above the desktop it

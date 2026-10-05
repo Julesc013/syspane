@@ -12,6 +12,7 @@ public:
     bool control(std::string payload);
     bool data(std::string payload, std::string encoded_gap);
     void revoke(std::string encoded_gap);
+    void discard_data();
     std::optional<std::string> pop();
     void close();
     bool closed() const { return closed_; }
