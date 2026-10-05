@@ -681,7 +681,8 @@
         "W-24"
       ],
       "specs": [
-        "SP-RECOVERY"
+        "SP-RECOVERY",
+        "SP-W25-PACKAGE"
       ],
       "acceptance_tests": [
         "T-RECOVERY",
@@ -691,10 +692,12 @@
         "source/diagnostics/",
         "tests/fault/"
       ],
-      "status": "planned",
+      "status": "in_progress",
       "authority_class": "development",
-      "execution_grant": null,
-      "notes": "Implementation and evidence pending; dependency-ready is not an execution grant."
+      "execution_grant": "user:foundation-native-campaign-2026-10-05",
+      "notes": "Portable producer-lease, render-progress and restart/quarantine guards implemented with 11 fixed cases; full suite has 48 passing CTest entries per Windows/Linux development profile. Native fault supervision, independent diagnostic entry, policy integration and visible/native-exit recovery remain mandatory; W-25 stays in progress.",
+      "package": "delivery/packages/w-25-recovery.md",
+      "evidence": "delivery/recovery-handoff.md"
     },
     {
       "id": "W-26",

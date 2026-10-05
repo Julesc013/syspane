@@ -12,7 +12,7 @@ sp_requires: ["SP-CURRENT"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-AUDIT-2026-10-04", "resource": "User-supplied October 2026 audit inputs", "title": "October review inputs"}]
-updated: {"by": "codex", "at": "2026-10-06T01:04:36+11:00", "scope": "Native W-24 implementation gate; cross-user/logon and desktop qualification not claimed"}
+updated: {"by": "codex", "at": "2026-10-06T01:39:51+11:00", "scope": "W-25 portable recovery checkpoint; native and visible recovery remain pending"}
 ---
 
 # Implementation readiness and gates
@@ -25,8 +25,8 @@ new versioned schemas or explicit work-scope refinement.
 | Gate | Present as specification/checks | Pending implementation/evidence |
 |---|---|---|
 | Initial authoring | Setting descriptors, scene/binding/layout 0.2, frame/handshake/preview checks over real local IPC | Runtime merge/resolution, migration, persistence and native controls |
-| Recovery/security | Policy/disclosure/queue checks and native user/session/peer identity evidence on development profiles | Independent recovery/diagnostics, cross-user/logon qualification, actual telemetry data-path revocation, measured budgets |
-| Native profiles | Windows/Linux model and portable protocol build profiles, component ownership and executable checks | External desktop oracle, native transport/recovery, desktop builds and target qualification |
+| Recovery/security | Portable lease/render/restart guards, policy/disclosure/queue checks and native user/session/peer identity evidence | Independent native recovery/diagnostics, cross-user/logon qualification, actual telemetry data-path revocation, measured budgets |
+| Native profiles | Windows/Linux model, protocol and native IPC build profiles, component ownership and executable checks | External desktop oracle, native recovery, desktop builds and target qualification |
 | Content/SDK | Preset/package/extension metadata and buffer-result sketch | Bounded importer, dependency closure, extended theme/AST, installed SDK/ABI consumers |
 | Saver | Role/lifecycle/privacy/ownership contracts | Native host adapters and preview/fullscreen/configuration qualification |
 | Packages/setup | Names, paths, one-owner and recovery contracts | Actual release/component/setup manifests bound to inspected provider, offline packages and lifecycle tests |
@@ -54,6 +54,8 @@ their foundation cases; see [the handoff](foundation-handoff.md).
 only linked executed cases are claimed. [W-24's portable checkpoint](transport-handoff.md)
 adds request-budget and protocol/policy cases. The [native checkpoint](native-transport-handoff.md)
 now adds real Windows/Linux stream cases and records blocked cross-user/logon qualification.
+The [recovery checkpoint](recovery-handoff.md) adds eleven portable W-25 cases;
+its native process/diagnostic/visible-recovery gates remain open.
 
 W-24 implements native peer authentication, bounded I/O and real client/server
 integration under its [package](packages/w-24-transport.md). The initial preview

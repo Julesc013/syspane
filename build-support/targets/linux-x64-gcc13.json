@@ -1,7 +1,7 @@
 {
   "schema_version": "0.1.0",
   "profile_id": "linux-x64-gcc13",
-  "revision": "3",
+  "revision": "4",
   "example_only": false,
   "os": {
     "family": "linux",
@@ -60,6 +60,7 @@
     "Runtime floors are restricted to the observed host environment, not inferred backward compatibility.",
     "Native IPC is exercised without elevation; cross-user/logon and desktop-session qualification require separate laboratories.",
     "Initial IPC probe permits one live connection and at most two sequential clients; telemetry subscriptions and persistent commits are disabled.",
-    "SO_PEERPIDFD is required; peer POSIX-session identity is a launched-process boundary, not a desktop-login-session claim."
+    "SO_PEERPIDFD is required; peer POSIX-session identity is a launched-process boundary, not a desktop-login-session claim.",
+    "Portable lease, render-watch and restart-budget guards only; independent native recovery/diagnostic entry and visible expiry remain pending in W-25."
   ]
 }

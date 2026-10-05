@@ -26,7 +26,8 @@ behaviour has been implemented. See [audit disposition](spec/delivery/audit-2026
 - [x] W-01: bind mandatory model cases to runnable tests and deliver a nonempty fixture smoke program; see the [handoff](spec/delivery/foundation-handoff.md).
 - [x] W-24 portable slice: close and test framing, negotiation, request reservations, settings preview, policy/disclosure, queues and connection states; see the [package](spec/delivery/packages/w-24-transport.md).
 - [x] W-24 native slice: implement OS peer authentication and bounded stream I/O; 37 CTest entries pass per Windows/Linux profile, with cross-user/logon qualification still blocked. See the [native handoff](spec/delivery/native-transport-handoff.md).
-- [ ] W-25: implement producer leases, bounded recovery and independent diagnostics on the authenticated IPC foundation.
+- [x] W-25 portable boundary: implement producer leases, render-progress challenges and bounded restart/quarantine decisions; see the [package](spec/delivery/packages/w-25-recovery.md).
+- [ ] W-25 completion: connect native fault supervision, current policy, independent diagnostics/inspector and native exit/visible recovery. Portable guards alone do not complete W-25.
 - [ ] W-02–W-06: run changing-scene host probes for contemporary Windows, XP/7, Linux and macOS/older OS X.
 - [ ] W-07–W-11: implement demand, commands, configuration recovery, portable scenes, editor and native settings facilities.
 - [x] W-26 initial slice: produce local Windows/Linux model smoke archives and prove relocated execution; product package/lifecycle qualification remains pending.

@@ -12,7 +12,7 @@ sp_requires: ["SP-PROCESSES", "SP-PERFORMANCE"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-AUDIT-2026-10-04"]
 sources: [{"id": "SRC-AUDIT-2026-10-04", "resource": "User-supplied SysPane audits and design reviews, 2026-10-04", "title": "October specification review inputs"}]
-updated: {"by": "codex", "at": "2026-10-04T19:32:52+11:00", "scope": "October audit amendments; no human review attested"}
+updated: {"by": "codex", "at": "2026-10-06T01:39:51+11:00", "scope": "W-25 portable recovery checkpoint; native and visible recovery remain pending"}
 ---
 
 # Independent recovery and bounded failure
@@ -62,6 +62,13 @@ concurrency, timeouts, restart counts/window/backoff, recorder retention and gra
 budgets before a provider is enabled. Health, policy revocation and shutdown have
 reserved capacity. Repeated timeouts cannot grow an unlimited replacement pool;
 a timeout does not establish that an OS operation stopped.
+
+The [W-25 package](../delivery/packages/w-25-recovery.md) closes the initial portable
+lease, rendering-challenge and single-child restart decisions, including exact
+deadline equality, stale callbacks, clock regression, bounded backoff and quarantine
+until confirmed termination. These guards precede native supervision and independent
+diagnostic entry; they do not by themselves establish visible recovery or native
+process-stop evidence.
 
 Tests freeze the producer, stall rendering, corrupt optional content, remove storage,
 revoke policy and exhaust optional work. Recovery reports measure elapsed time and

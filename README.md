@@ -13,8 +13,9 @@ presentation components under its own lifecycle and privacy policy.
 **Current stage: foundation implementation.** The C++17 model, explicit CMake
 targets and development smoke program build on pinned Windows and Linux profiles.
 Portable framing, request replay, settings-preview policy and connection handling
-now run over tested Windows/Linux local IPC adapters. Desktop integration and
-independent recovery remain pending.
+now run over tested Windows/Linux local IPC adapters. Portable producer-lease,
+render-progress and restart-budget guards also have executable tests. Their native
+recovery integration, independent diagnostic entry and desktop integration remain pending.
 There is no usable SysPane desktop application or downloadable release yet.
 Desktop, screensaver and installer profiles remain unqualified.
 

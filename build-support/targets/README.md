@@ -62,3 +62,8 @@ environment; it does not infer an older kernel floor. Both profiles run 37 CTest
 entries. The probe is single-connection, synthetic and unelevated; cross-user/logon
 and desktop qualification are distinct blocked/pending claims. No product support
 or isolation tier is promoted by this development profile revision.
+
+Profile revision 4 adds the dependency-independent `syspane_recovery` library and
+`syspane_recovery_tests`, for 48 CTest entries. Eleven portable cases use injected
+monotonic time to prove lease/render/restart decisions. No native diagnostic entry,
+independent process supervision or visible expiry is qualified by those cases.

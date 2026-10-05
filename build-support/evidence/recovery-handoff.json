@@ -1,0 +1,84 @@
+{
+  "schema_version": "0.1.0",
+  "work_id": "W-25",
+  "source_ref": "3ac41bfe5d8923741623387be01d56d57650fa31",
+  "objective": "Implement the portable recovery boundary while preserving all native supervision, diagnostic and visible-recovery requirements of the active campaign.",
+  "changed_files": [
+    "CMakeLists.txt",
+    "README.md",
+    "TODO.md",
+    "build-support/components.json",
+    "build-support/evidence/recovery-handoff.json",
+    "build-support/evidence/w-25-portable-linux-x64-gcc13.NATIVE-01.json",
+    "build-support/evidence/w-25-portable-linux-x64-gcc13.NATIVE-02.json",
+    "build-support/evidence/w-25-portable-linux-x64-gcc13.ctest.txt",
+    "build-support/evidence/w-25-portable-linux-x64-gcc13.json",
+    "build-support/evidence/w-25-portable-spec-tests.txt",
+    "build-support/evidence/w-25-portable-spec-validation.json",
+    "build-support/evidence/w-25-portable-windows-x64-gcc15.NATIVE-01.json",
+    "build-support/evidence/w-25-portable-windows-x64-gcc15.NATIVE-02.json",
+    "build-support/evidence/w-25-portable-windows-x64-gcc15.ctest.txt",
+    "build-support/evidence/w-25-portable-windows-x64-gcc15.json",
+    "build-support/record_protocol.py",
+    "build-support/targets/README.md",
+    "build-support/targets/linux-x64-gcc13.json",
+    "build-support/targets/windows-x64-gcc15.json",
+    "docs/developers/build.md",
+    "source/diagnostics/recovery.cpp",
+    "source/diagnostics/recovery.hpp",
+    "spec/architecture/recovery.md",
+    "spec/checksums.json",
+    "spec/delivery/current-state.md",
+    "spec/delivery/implementation-readiness.md",
+    "spec/delivery/index.md",
+    "spec/delivery/packages/index.md",
+    "spec/delivery/packages/w-25-recovery.md",
+    "spec/delivery/recovery-handoff.md",
+    "spec/delivery/work-units.json",
+    "spec/generated/catalog.json",
+    "spec/log.md",
+    "tests/fault/recovery_tests.cpp"
+  ],
+  "decisions": [
+    "Use independent single-owner lease, render-watch and single-child restart guards with no native/JSON/model dependencies.",
+    "Heartbeats renew producer liveness only; resynchronization, metric freshness, policy and external visibility remain distinct.",
+    "Quarantine unconfirmed child termination, bound replacement starts and preserve the last error across explicit circuit reset.",
+    "Keep W-25 in progress until native fault supervision, diagnostic entry/inspector, policy and visible/native-exit cases pass."
+  ],
+  "checks": [
+    {
+      "name": "Windows full suite: 48 CTest entries including eleven portable recovery cases",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-25-portable-windows-x64-gcc15.json"
+    },
+    {
+      "name": "Linux full suite: 48 CTest entries including eleven portable recovery cases",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-25-portable-linux-x64-gcc13.json"
+    },
+    {
+      "name": "Specification schemas and fixtures",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-25-portable-spec-validation.json"
+    },
+    {
+      "name": "Specification tools: 53 passes, 2 Windows symlink privilege skips",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-25-portable-spec-tests.txt"
+    }
+  ],
+  "open_questions": [
+    "Close trusted native launch/handle lifetime and producer/surface role, full-snapshot and render-challenge message bodies before enabling them.",
+    "Implement independently startable policy-aware diagnostics/inspector and native exit; W-02 must observe actual pixels and visible recovery."
+  ],
+  "next_step": "Integrate W-25 guards with native process supervision and independent diagnostics; implement W-02 external oracle, then initial host tracks without dropping missing-lab qualification.",
+  "authority_used": [
+    "user:foundation-native-campaign-2026-10-05"
+  ],
+  "limitations": [
+    "Injected-time portable tests prove decisions, not actual producer freezes, renderer stalls, process termination, scheduling latency or visible expiry.",
+    "No independent diagnostic binary, inspector or native editor-exit path exists yet; W-25 remains incomplete.",
+    "W-24 native regression evidence retains its original measured-profile scope and blocked cross-user/logon qualification.",
+    "No privileged operation, public release or project-license decision is attested."
+  ]
+}

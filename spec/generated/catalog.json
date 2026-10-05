@@ -63,7 +63,7 @@
         "SP-PROCESSES",
         "SP-PERFORMANCE"
       ],
-      "sha256": "ac08954beda679c57ec709adb3500c67b328d45553d049f16c58b190f815854b"
+      "sha256": "35a13f12f698ccde2c8ef4f12fee5c64b97334cc5f6746e734e9ebc5ad077c8c"
     },
     {
       "id": "SP-SCHEDULER",
@@ -357,7 +357,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "3e866f43c563fdf4e01ec59591cd0bcacef6c75b2fef04406755d1f6ed73cba1"
+      "sha256": "40e78a7dd413377afbccc520e0b99c2719b1b615e8c4728a33ba81c7cb9a3b0e"
     },
     {
       "id": "SP-FOUNDATION-HANDOFF",
@@ -378,7 +378,7 @@
       "requires": [
         "SP-CURRENT"
       ],
-      "sha256": "c9ce2f81a952693669349ea2b202f7bdabcc90fd595739829c0cc3105fa3c240"
+      "sha256": "275fb557e4c45404c42f00b855c5c5313962eb165adfaa63bfcc2e0feb0fca43"
     },
     {
       "id": "SP-NATIVE-TRANSPORT-HANDOFF",
@@ -429,6 +429,19 @@
       "sha256": "2d88899f08dd04a985b5576246d8ad051a6630e59440346e897f0fbe5352a03f"
     },
     {
+      "id": "SP-W25-PACKAGE",
+      "path": "delivery/packages/w-25-recovery.md",
+      "title": "W-25 independent recovery and producer leases",
+      "description": "Close bounded recovery state before connecting native processes and diagnostic entry.",
+      "requires": [
+        "SP-WORK-PACKAGES",
+        "SP-RECOVERY",
+        "SP-TRANSPORT",
+        "SP-COMPOSITION"
+      ],
+      "sha256": "10250bdf5652b153ffb9bd8db26a3797f8dc5e0c14dd84bb6f378e35f56092e9"
+    },
+    {
       "id": "SP-W26-PACKAGE",
       "path": "delivery/packages/w-26-smoke.md",
       "title": "W-26 early local smoke package",
@@ -439,6 +452,17 @@
         "SP-TARGETS"
       ],
       "sha256": "53c14367f0447ad326d0b418ca6c74924845811bdf8b0dffe9c72188a89ce713"
+    },
+    {
+      "id": "SP-RECOVERY-HANDOFF",
+      "path": "delivery/recovery-handoff.md",
+      "title": "Portable recovery implementation checkpoint",
+      "description": "Record lease, render-progress and restart decisions while preserving native recovery gates.",
+      "requires": [
+        "SP-CAMPAIGN-ADMISSION",
+        "SP-W25-PACKAGE"
+      ],
+      "sha256": "31c429a04579385c92720dfe1f6fa2c0d8b110fb49f65e84af1c6c295f14187f"
     },
     {
       "id": "SP-ROADMAP",

@@ -2,6 +2,19 @@
   "version": "0.1.0",
   "components": [
     {
+      "id": "recovery", "target": "syspane_recovery", "type": "STATIC_LIBRARY",
+      "source_owner": "source/diagnostics/", "public_interfaces": ["source/diagnostics/recovery.hpp"],
+      "private_interfaces": [], "sources": ["source/diagnostics/recovery.cpp"],
+      "allowed_dependencies": [], "target_requirements": ["cxx17"],
+      "roles": ["development_test"], "installed_files": []
+    },
+    {
+      "id": "recovery-tests", "target": "syspane_recovery_tests", "type": "EXECUTABLE",
+      "source_owner": "tests/fault/", "public_interfaces": [], "private_interfaces": [],
+      "sources": ["tests/fault/recovery_tests.cpp"], "allowed_dependencies": ["syspane_recovery", "syspane_model"],
+      "target_requirements": ["cxx17"], "roles": ["development_test"], "installed_files": []
+    },
+    {
       "id": "ipc-probe", "target": "syspane_ipc_probe", "type": "EXECUTABLE",
       "source_owner": "source/application/", "public_interfaces": [], "private_interfaces": [],
       "sources": ["source/application/ipc_probe.cpp"], "allowed_dependencies": ["syspane_local_ipc", "syspane_configuration", "syspane_protocol"],

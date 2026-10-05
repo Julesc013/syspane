@@ -55,6 +55,24 @@ build directory and rejects constraints it cannot implement. Never hand-edit tha
 generated table. Preview validation changes no stored configuration; commit and
 scene replacement return an explicit unsupported result.
 
+Profile revision 4 adds eleven portable recovery cases and the `syspane_recovery`
+static library, for 48 total CTest entries. The library has no model, JSON, GUI or
+native-handle dependency. Tests link the model separately to verify that producer
+heartbeats leave observation freshness unchanged. Run just these cases with
+`ctest --preset windows-x64-gcc15 -R '^recovery\.' --output-on-failure`.
+The Linux wrapper's `test` action runs the full suite in its owned native build root.
+Current records are `build-support/evidence/w-25-portable-<profile>.json`.
+
+The [W-25 package](../../spec/delivery/packages/w-25-recovery.md) defines the time,
+ownership, expiry and restart boundaries. Guard objects are single-owner and cannot
+be copied/moved. Their time inputs are local invocation times; views do not sample
+a clock. The caller must advance time and apply current policy before presentation.
+`build-support/record_protocol.py --recovery --profile <profile> --build-dir <build>
+--output <record>` records a completed full run, requiring all 48 cases and the
+native IPC reports named in its log. It labels recovery evidence as portable only.
+W-25 still requires independent native supervision, diagnostic startup/inspector,
+policy integration and visible/native-exit recovery.
+
 Specification tooling separately uses Python 3.11+ in an isolated environment:
 
 ```powershell

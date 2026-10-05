@@ -12,12 +12,12 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-06T01:04:36+11:00", "scope": "Native W-24 implementation gate; cross-user/logon and desktop qualification not claimed"}
+updated: {"by": "codex", "at": "2026-10-06T01:39:51+11:00", "scope": "W-25 portable recovery checkpoint; native and visible recovery remain pending"}
 ---
 
 # Current state and next admitted boundary
 
-## Repository checkpoint — 2026-10-05
+## Repository checkpoint â€” 2026-10-05
 
 The imported baseline is `Julesc013/syspane` commit
 `91e10b8b7a8a5da5ab2d93e8cdcbaade6aa0fbd9` (`init: spec`). The original archive's
@@ -45,6 +45,12 @@ development adapter gate after the [portable checkpoint](transport-handoff.md).
 Both profiles pass 37 CTest entries, including real local client/server families
 and OS peer checks. Cross-user/logon and desktop-session qualification remain
 blocked separately. Persistent commits and telemetry subscriptions stay disabled.
+
+W-25's [portable recovery checkpoint](recovery-handoff.md) adds lease expiry,
+independent render-progress challenges and bounded restart/quarantine decisions.
+Both profiles pass 48 CTest entries, including eleven portable recovery cases.
+W-25 remains in progress: native supervision, independent diagnostic entry,
+current-policy integration and visible/native-exit recovery remain required.
 
 Canonical 0.2.0 documentation bundle, unchanged 0.1 authoring profile, preserved old
 fixtures, new experimental scene/command/capability 0.2 and admission descriptors.
@@ -81,8 +87,9 @@ License, contribution and release-identity decisions remain open.
 
 ## Next work
 
-Continue the admitted campaign: close and implement W-02's independent desktop
-oracle and W-25's producer leases, recovery and diagnostic path using W-24.
+Continue the admitted campaign: implement W-02's independent desktop oracle and
+connect W-25's portable guards to native supervision and the diagnostic path using
+W-24. Close the native launch, role/message and inspector contracts before enabling them.
 Connect the build/component/target consumers and minimum command/IPC/policy/recovery
 slice. Probe contemporary Windows, XP/7, Linux and AppKit/older OS X independently.
 Package smoke builds early; each profile's usable vertical includes live network,

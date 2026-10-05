@@ -11,6 +11,7 @@ import subprocess
 ROOT = Path(__file__).resolve().parents[1]
 MODEL_CASES = 'STATE-01 STATE-02 STATE-03 STATE-04 STATE-05 VALIDITY-01 VALIDITY-02 CLOCK-01 CLOCK-02 BOUNDS-01 BOUNDS-02 BOUNDS-03 OBSERVATION-01 EPOCH-01 FRESHNESS-01 smoke'.split()
 PROTOCOL_CASES = 'FRAME-01 FRAME-02 FRAME-03 JSON-01 WIRE-01 NEGOTIATE-01 IPC-BUDGET-01 IPC-BUDGET-02 IPC-BUDGET-03 IPC-BUDGET-04 LEDGER-01 POLICY-01 POLICY-02 DISCLOSURE-01 QUEUE-01 SESSION-01 dependencies'.split()
+RECOVERY_CASES = 'LEASE-01 LEASE-02 LEASE-03 LEASE-04 LEASE-05 RENDER-01 RENDER-02 RETRY-01 RETRY-02 RETRY-03 RECOVERY-CLOCK'.split()
 EXPECTED = {f'model.{case}' for case in MODEL_CASES} | {f'protocol.{case}' for case in PROTOCOL_CASES} | {'composition.graph', 'composition.reject_forbidden'}
 
 
@@ -24,7 +25,10 @@ def main():
     parser.add_argument('--build-dir', type=Path, required=True)
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--native', action='store_true', help='Require both real local-IPC families and their concrete case records')
+    parser.add_argument('--recovery', action='store_true', help='Record W-25 portable guards; requires native regression cases as well')
     args = parser.parse_args()
+    if args.recovery:
+        args.native = True
     build = args.build_dir.resolve()
     if json.loads((build/'.syspane-owner.json').read_text())['profile'] != args.profile:
         raise ValueError('build ownership/profile mismatch')
@@ -38,6 +42,8 @@ def main():
             cases.append({'case': name, 'outcome': 'pass' if 'Test Passed.' in block else 'fail',
                           'command': 'ctest --preset ' + args.profile + ' -R ^' + re.escape(name) + '$ --output-on-failure'})
     expected = EXPECTED | ({'native.NATIVE-01', 'native.NATIVE-02'} if args.native else set())
+    if args.recovery:
+        expected |= {f'recovery.{case}' for case in RECOVERY_CASES}
     if len(cases) != len(expected) or {case['case'] for case in cases} != expected or any(case['outcome'] != 'pass' for case in cases):
         raise ValueError('missing, repeated, unexpected or failing case; preserve log before rerun')
     suffix = '.exe' if platform.system() == 'Windows' else ''
@@ -45,6 +51,9 @@ def main():
                  for name in ('syspane_protocol_tests'+suffix, 'libsyspane_protocol.a', 'libsyspane_configuration.a', 'generated/settings_descriptors.hpp')}
     native_records = []
     import_audit = None
+    if args.recovery:
+        for name in ('syspane_recovery_tests'+suffix, 'libsyspane_recovery.a', 'component-graph.txt'):
+            artifacts[name] = {'sha256': sha(build/name), 'bytes': (build/name).stat().st_size}
     if args.native:
         for name in ('SysPane.IpcProbe'+suffix, 'libsyspane_local_ipc.a'):
             artifacts[name] = {'sha256': sha(build/name), 'bytes': (build/name).stat().st_size}
@@ -84,6 +93,8 @@ def main():
                         'direct_dependencies': imports, 'scope': 'Observed direct imports only; no inferred historical OS or loader qualification.'}
     paths = [ROOT/'CMakeLists.txt', ROOT/'CMakePresets.json', ROOT/'spec/experience/settings-registry.json',
              ROOT/'spec/delivery/packages/w-24-transport.md', ROOT/'spec/assurance/acceptance-traces.md']
+    if args.recovery:
+        paths.extend([ROOT/'spec/delivery/packages/w-25-recovery.md', ROOT/'spec/architecture/recovery.md'])
     for directory in ('source', 'tests', 'build-support', 'spec/contracts'):
         paths.extend(sorted((ROOT/directory).rglob('*')))
     inputs = {p.relative_to(ROOT).as_posix(): sha(p) for p in paths
@@ -98,7 +109,8 @@ def main():
               'bindings': {'portable_cases': 'tests/protocol/protocol_tests.cpp', 'contract': 'spec/delivery/packages/w-24-transport.md',
                            'request_oracles': 'spec/assurance/acceptance-traces.md', 'descriptor_input': 'spec/experience/settings-registry.json'},
               'environment': {'os': platform.system(), 'release': platform.release(), 'machine': platform.machine(),
-                              'execution': 'native Windows process' if suffix else 'Linux ELF process under WSL2'},
+                              'execution': 'native Windows process' if suffix else 'Linux ELF process under WSL2',
+                              'preset_environment': {} if suffix else {'SYSPANE_LINUX_BUILD_ROOT': str(build.parent)}},
               'original_ctest_log_sha256': sha(log), 'normalized_ctest_log': log_output.name, 'native_records': native_records,
               'import_audit': import_audit,
               'limits': ['Typed authentication contexts in tests are fixtures, not OS peer-authentication evidence.',
@@ -111,10 +123,22 @@ def main():
                             'Linux requires SO_PEERPIDFD and the measured WSL2 environment; POSIX session is not a desktop login session.',
                             'No persistent commit, telemetry subscription, GUI, independent recovery or desktop qualification.',
                             'No public release, privileged operation, human review or project-license decision is attested.']
+    if args.recovery:
+        report.update(work_id='W-25', slice='portable producer lease, render progress and restart budget', work_status='in_progress')
+        report['bindings']['recovery_cases'] = 'tests/fault/recovery_tests.cpp'
+        report['bindings']['recovery_contract'] = 'spec/delivery/packages/w-25-recovery.md'
+        report['limits'] = [
+            'Recovery cases use injected local monotonic time and typed events; no real producer freeze, render stall or process termination is attested.',
+            'Guard decisions do not prove native scheduling latency, process ownership, policy data erasure or visible recovery.',
+            'Independent native diagnostic entry, conservative inspector and keyboard/exit recovery remain mandatory W-25 work.',
+            'Native local IPC regression cases retain their original development-only scope and blocked cross-user/logon qualification.',
+            'W-25 and the full campaign remain incomplete; no desktop support, public release or privileged operation is claimed.'
+        ]
     args.output.parent.mkdir(parents=True, exist_ok=True)
     log_output.write_text(raw.replace(str(build), '<build>').replace(str(ROOT), '<source>'), encoding='utf-8', newline='\n')
     args.output.write_text(json.dumps(report, indent=2)+'\n', encoding='utf-8', newline='\n')
-    print(json.dumps({'profile': args.profile, 'cases': len(cases), 'outcome': 'pass', 'native_ipc': 'executed' if args.native else 'not_run'}))
+    print(json.dumps({'profile': args.profile, 'cases': len(cases), 'outcome': 'pass', 'native_ipc': 'executed' if args.native else 'not_run',
+                      'recovery': 'portable_only' if args.recovery else 'not_recorded'}))
 
 
 if __name__ == '__main__':

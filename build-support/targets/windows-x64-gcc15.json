@@ -1,7 +1,7 @@
 {
   "schema_version": "0.1.0",
   "profile_id": "windows-x64-gcc15",
-  "revision": "3",
+  "revision": "4",
   "example_only": false,
   "os": {
     "family": "windows",
@@ -64,6 +64,7 @@
     "Compiler/tool/archive fingerprints pin this installed environment; complete vendor archive and all header hashes are not available, so bit-for-bit reproduction is unproven.",
     "Runtime floors are restricted to the observed host environment, not inferred backward compatibility.",
     "Native IPC is exercised without elevation; cross-user/logon and desktop-session qualification require separate laboratories.",
-    "Initial IPC probe permits one live connection and at most two sequential clients; telemetry subscriptions and persistent commits are disabled."
+    "Initial IPC probe permits one live connection and at most two sequential clients; telemetry subscriptions and persistent commits are disabled.",
+    "Portable lease, render-watch and restart-budget guards only; independent native recovery/diagnostic entry and visible expiry remain pending in W-25."
   ]
 }
