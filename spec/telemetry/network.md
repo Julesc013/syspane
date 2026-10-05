@@ -16,6 +16,12 @@ sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through t
 
 # Network telemetry and diagnostic presentation
 
+The [native acquisition prerequisite](../delivery/packages/w-25-network-acquisition.md)
+now defines and implements the bounded raw table/counter boundary. Its
+[handoff](../delivery/network-acquisition-handoff.md) separates actual native reads
+from the notification, identity, measured-publication and complete network-view
+requirements below. Raw interface keys must not become persistent selectors.
+
 ## Required view
 
 Represent the complete dynamic adapter inventory, including disconnected/disabled physical and virtual adapters where the native source permits. Join device presence and problem state, interface administrative/media/operational state, IPv4/IPv6 addresses, routes/gateways, configured resolver information, network profile and source-specific connectivity assessment. Do not cap the inventory at sixteen entries or store only one address per family.

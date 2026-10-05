@@ -357,7 +357,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "0dc0d281c7c884248fbbc00adc53a39bf1c4db1fb1a4b6d201f3cea0a996961c"
+      "sha256": "0a010826724921e7b0176b4b3a4bfbc721876e495820cae9c98f50f24b3f8e42"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -422,7 +422,7 @@
       "requires": [
         "SP-CURRENT"
       ],
-      "sha256": "a0df49e98f48682f98557a29215c6cdec6685bc3e5ad5264ec82d4bc06e59bcf"
+      "sha256": "e1cc8fc33aad16fe579f17a8baf860155daece5cb2698baca3b482a3c9788405"
     },
     {
       "id": "SP-MEASURED-TIME-HANDOFF",
@@ -456,6 +456,17 @@
         "SP-W24-PACKAGE"
       ],
       "sha256": "2f4672ce16b3ab882561183aace91729c0230b79bbe674129083157d5d008d62"
+    },
+    {
+      "id": "SP-NETWORK-ACQUISITION-HANDOFF",
+      "path": "delivery/network-acquisition-handoff.md",
+      "title": "Real native network acquisition checkpoint",
+      "description": "Read bounded interface counters on Windows and Linux without claiming reconciled model identity or complete collection.",
+      "requires": [
+        "SP-W25-NETWORK-ACQUISITION",
+        "SP-CAMPAIGN-ADMISSION"
+      ],
+      "sha256": "46c4e9553a2761388ec3b82dcc36f5b2067815c8231a4381e3b219e49cd7ab28"
     },
     {
       "id": "SP-RISKS",
@@ -589,6 +600,19 @@
         "SP-W24-PACKAGE"
       ],
       "sha256": "c0ae198358da1fd5c39092beae83323a4f759d60236c19502feb7665bcadbac8"
+    },
+    {
+      "id": "SP-W25-NETWORK-ACQUISITION",
+      "path": "delivery/packages/w-25-network-acquisition.md",
+      "title": "W-25 native network acquisition prerequisite",
+      "description": "Bound real interface-counter reads before admitting identity reconciliation and supervised measured publication.",
+      "requires": [
+        "SP-NETWORK",
+        "SP-SCHEDULER",
+        "SP-W25-MEASURED-TIME",
+        "SP-W25-PACKAGE"
+      ],
+      "sha256": "0d280e3d8771a2a0e569a84a2f846b8344db3696ad96384f70ec4872aa0922df"
     },
     {
       "id": "SP-W25-PRESERVATION",
@@ -1158,7 +1182,7 @@
         "SP-STATE",
         "SP-SCHEDULER"
       ],
-      "sha256": "58d50a7c0084edc97317299fe18f59849a0878b802efebeddace34c8f1ff8569"
+      "sha256": "dc3fb7f6a5b88be5a2f412cdd8d1c1528fa06ca990b609aeac03bb2065cd13b5"
     },
     {
       "id": "SP-RESOURCES",

@@ -41,7 +41,10 @@ def main():
     parser.add_argument('--subscriptions', action='store_true', help='Require bounded subscription and native synthetic inventory cases')
     parser.add_argument('--measurement-clock', action='store_true', help='Require native causal clock brackets and held-peer exit rejection')
     parser.add_argument('--measured-time', action='store_true', help='Require measured telemetry, freshness and native delivery cases')
+    parser.add_argument('--network', action='store_true', help='Require real raw native network acquisition and complete measured-time regressions')
     args = parser.parse_args()
+    if args.network:
+        args.measured_time = True
     if args.measured_time:
         args.measurement_clock = True
     if args.measurement_clock:
@@ -105,12 +108,19 @@ def main():
         expected.add('native.NATIVE-CLOCK')
     if args.measured_time:
         expected |= {'measured.'+case for case in MEASURED_CASES} | {'native.NATIVE-MEASURED'}
+    if args.network:
+        expected.add('native.NATIVE-NETWORK')
+        if platform.system() == 'Linux':
+            expected |= {'network.NETWORK-NETLINK', 'network.NETWORK-NETLINK-REJECT'}
     if len(cases) != len(expected) or {case['case'] for case in cases} != expected or any(case['outcome'] != 'pass' for case in cases):
         raise ValueError('missing, repeated, unexpected or failing case; preserve log before rerun')
     suffix = '.exe' if platform.system() == 'Windows' else ''
     artifacts = {name: {'sha256': sha(build/name), 'bytes': (build/name).stat().st_size}
                  for name in ('syspane_protocol_tests'+suffix, 'libsyspane_protocol.a', 'libsyspane_configuration.a', 'generated/settings_descriptors.hpp')}
     native_records = []
+    if args.network:
+        for name in ('SysPane.NetworkProbe'+suffix, 'libsyspane_network.a') + (() if suffix else ('syspane_network_netlink_tests',)):
+            artifacts[name] = {'sha256': sha(build/name), 'bytes': (build/name).stat().st_size}
     if args.measured_time:
         name = 'syspane_measured_time_tests'+suffix
         artifacts[name] = {'sha256': sha(build/name), 'bytes': (build/name).stat().st_size}
@@ -167,6 +177,8 @@ def main():
             required['NATIVE-CLOCK'] = {'ROUNDTRIP','PEER-EXIT'}
         if args.measured_time:
             required['NATIVE-MEASURED'] = {'FRESH','DELAYED','FUTURE'}
+        if args.network:
+            required['NATIVE-NETWORK'] = {'NETWORK-READ','NETWORK-CANCEL','NETWORK-DEADLINE','NETWORK-CAPACITY'}
         if args.preservation:
             for name in ('syspane_preservation_tests'+suffix, 'libsyspane_preservation_job.a'):
                 artifacts[name] = {'sha256': sha(build/name), 'bytes': (build/name).stat().st_size}
@@ -198,8 +210,8 @@ def main():
                     raise ValueError('Windows reparse case must execute or retain its exact privilege limitation')
             if native['outcome'] != 'pass' or len(native['cases']) != len(expected_cases) or {case['case'] for case in native['cases']} != expected_cases or any(case['outcome'] != 'pass' for case in native['cases']):
                 raise ValueError('native case missing or failed; preserve original report')
-            if family in ('RECOVERY-01', 'DIAG-01', 'ORACLE-01', 'FAILURE-STORE', 'PRESERVE', 'NATIVE-SUB', 'NATIVE-CLOCK', 'NATIVE-MEASURED'):
-                executable = {'RECOVERY-01':'SysPane.RecoveryProbe'+suffix, 'DIAG-01':'SysPane.Diag.exe' if suffix else 'syspane-diag', 'ORACLE-01':'SysPane.OracleProbe', 'FAILURE-STORE':'syspane_failure_store_tests'+suffix, 'PRESERVE':'syspane_preservation_tests'+suffix, 'NATIVE-SUB':'SysPane.TelemetryProbe'+suffix, 'NATIVE-CLOCK':'SysPane.TelemetryProbe'+suffix, 'NATIVE-MEASURED':'SysPane.TelemetryProbe'+suffix}[family]
+            if family in ('RECOVERY-01', 'DIAG-01', 'ORACLE-01', 'FAILURE-STORE', 'PRESERVE', 'NATIVE-SUB', 'NATIVE-CLOCK', 'NATIVE-MEASURED', 'NATIVE-NETWORK'):
+                executable = {'RECOVERY-01':'SysPane.RecoveryProbe'+suffix, 'DIAG-01':'SysPane.Diag.exe' if suffix else 'syspane-diag', 'ORACLE-01':'SysPane.OracleProbe', 'FAILURE-STORE':'syspane_failure_store_tests'+suffix, 'PRESERVE':'syspane_preservation_tests'+suffix, 'NATIVE-SUB':'SysPane.TelemetryProbe'+suffix, 'NATIVE-CLOCK':'SysPane.TelemetryProbe'+suffix, 'NATIVE-MEASURED':'SysPane.TelemetryProbe'+suffix, 'NATIVE-NETWORK':'SysPane.NetworkProbe'+suffix}[family]
                 if family == 'PRESERVE' and native['diagnostic_sha256'] != sha(build/('SysPane.Diag.exe' if suffix else 'syspane-diag')):
                     raise ValueError('preservation CLI artifact changed after run')
                 if native['executable_sha256'] != sha(build/executable):
@@ -275,6 +287,8 @@ def main():
         paths.append(ROOT/'spec/delivery/packages/w-25-measurement-clock.md')
     if args.measured_time:
         paths.append(ROOT/'spec/delivery/packages/w-25-measured-time.md')
+    if args.network:
+        paths.append(ROOT/'spec/delivery/packages/w-25-network-acquisition.md')
     for directory in ('source', 'tests', 'build-support', 'spec/contracts'):
         paths.extend(sorted((ROOT/directory).rglob('*')))
     inputs = {p.relative_to(ROOT).as_posix(): sha(p) for p in paths
@@ -421,6 +435,17 @@ def main():
             'Real suspend/resume, namespace mismatch/change/denial, native read/query/overflow/regression faults and historical guest execution remain unqualified.',
             'Actual collection/rendering, product demand/policy distribution, retention and cross-component erasure/visible recovery remain open.',
             'W-25 and the campaign remain incomplete; no privileged action, release, desktop support or AIDE activation is attested.']
+    if args.network:
+        report['slice'] = 'real raw native network acquisition before reconciled supervised publication'
+        report['bindings']['network_acquisition'] = 'spec/delivery/packages/w-25-network-acquisition.md'
+        report['bindings']['native_network_oracle'] = 'tests/protocol/native_network.py'
+        report['limits'].insert(0, 'Raw OS interface/counter reads pass independent before/after brackets and pre-call cancellation/deadline/capacity checks; topology continuity, native-call cancellation, model identity and supervised measured collection remain open. Public evidence excludes native keys and counter values.')
+        command = ['objdump' if suffix else 'readelf', '-p' if suffix else '-d', str(build/('SysPane.NetworkProbe'+suffix))]
+        inspected = subprocess.check_output(command, text=True, encoding='utf-8')
+        if suffix and any(name not in inspected for name in ('GetIfTable2', 'FreeMibTable')):
+            raise ValueError('native network import missing from tested probe')
+        report['network_imports'] = {'command': command, 'direct_dependencies': re.findall(r'DLL Name:\s*(\S+)', inspected) if suffix else re.findall(r'\(NEEDED\).*?\[([^]]+)\]', inspected),
+            'scope': 'Observed raw reader imports only; no historical loader or complete collector qualification.'}
     args.output.parent.mkdir(parents=True, exist_ok=True)
     log_output.write_text(raw.replace(str(build), '<build>').replace(str(ROOT), '<source>'), encoding='utf-8', newline='\n')
     args.output.write_text(json.dumps(report, indent=2)+'\n', encoding='utf-8', newline='\n')

@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-06T09:04:00+11:00", "scope": "Measured telemetry checkpoint; real native acquisition and product integration remain open"}
+updated: {"by": "codex", "at": "2026-10-06T09:26:25+11:00", "scope": "Real raw network acquisition checkpoint; reconciliation and supervised publication remain open"}
 ---
 
 # Current state and next admitted boundary
@@ -189,9 +189,11 @@ historical guest execution once guest test scope and usability are established.
 W-05 needs a composition strategy that actually preserves icon pixels; its initial
 EWMH window stacking candidates fail that requirement. Continue other native tracks
 independently of this negative result.
-Continue W-25 by closing a real native source's identity, acquisition/counter, error,
-cancellation and bounded demand contracts, including evidence disclosure. Connect
-actual independently supervised collection to the now-tested measured receive path,
+W-25's [native network acquisition prerequisite](network-acquisition-handoff.md)
+now reads actual Windows/Linux interface counters with explicit bounded failure and
+local evidence-disclosure rules. Complete notification-backed identity reconciliation,
+acquisition-time brackets, removal/index-reuse and demand-cancellation contracts. Connect
+these readers through independently supervised collection to the measured receive path,
 then complete renderer supervision and product policy distribution. The native
 inventory probe now connects bounded subscription/demand and queue revocation to
 complete-state receipt. W-07 must add field/entity/age/priority/recording demand

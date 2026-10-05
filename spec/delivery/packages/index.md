@@ -11,6 +11,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [W-25 bounded recent-failure metadata](w-25-failure-metadata.md) — Connect recorded failures to independent diagnosis without treating a local file as live health or policy authority.
 - [W-25 measured telemetry and consumer freshness](w-25-measured-time.md) — Version measurement time and bind received values to a qualified consumer clock without refreshing replayed data.
 - [W-25 native measurement-clock investigation](w-25-measurement-clock.md) — Test a shared native time domain across authenticated local processes before admitting measured telemetry.
+- [W-25 native network acquisition prerequisite](w-25-network-acquisition.md) — Bound real interface-counter reads before admitting identity reconciliation and supervised measured publication.
 - [W-25 explicit private configuration preservation](w-25-preservation.md) — Preserve opaque damaged input without replacing source bytes, weakening policy or claiming a configuration commit.
 - [W-25 independent recovery and producer leases](w-25-recovery.md) — Close bounded recovery state before connecting native processes and diagnostic entry.
 - [W-25 complete remote state import](w-25-state-import.md) — Connect bounded telemetry documents to the revocable model owner without reinterpreting reported state as a local acquisition.

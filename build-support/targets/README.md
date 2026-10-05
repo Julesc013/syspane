@@ -1,6 +1,13 @@
 # Foundation development profiles
 
-Current revisions are Windows x64 15, Linux x64 16 and historical x86 8. The
+Current revisions are Windows x64 16, Linux x64 17 and historical x86 8. The
+[native network checkpoint](../../spec/delivery/network-acquisition-handoff.md)
+passes 89/92 modern and 81 historical host checks. Windows lock revision 3 pins
+the installed `libiphlpapi.a`; configure verifies it alongside existing archives.
+Real raw interface/counter reads are exercised without topology mutation; model
+identity, notification continuity and supervised publication remain pending.
+
+Earlier revisions were Windows x64 15, Linux x64 16 and historical x86 8. The
 [measured telemetry checkpoint](../../spec/delivery/measured-time-handoff.md) passes
 88/89 modern and 81 historical host checks. The historical audit now covers ten
 executables with unchanged permitted imports; its native adapters remain disabled.

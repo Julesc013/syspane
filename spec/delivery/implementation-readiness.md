@@ -17,6 +17,11 @@ updated: {"by": "codex", "at": "2026-10-06T08:15:42+11:00", "scope": "Native inv
 
 # Implementation readiness and gates
 
+The [native network acquisition checkpoint](network-acquisition-handoff.md) now
+supplies real raw interface/counter reads. Notification-backed entity lifetimes,
+measurement-time brackets, demand cancellation and supervised publication are the
+next required integration boundary; a raw native key is not a persistent identity.
+
 
 The October revision closes bounded contract and documentation gaps. It does not
 implement the native product. Existing stable identities remain; new meanings have

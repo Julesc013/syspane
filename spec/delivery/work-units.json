@@ -699,7 +699,8 @@
         "SP-W25-STATE-IMPORT",
         "SP-W25-SUBSCRIPTIONS",
         "SP-W25-MEASUREMENT-CLOCK",
-        "SP-W25-MEASURED-TIME"
+        "SP-W25-MEASURED-TIME",
+        "SP-W25-NETWORK-ACQUISITION"
       ],
       "acceptance_tests": [
         "T-RECOVERY",
@@ -712,14 +713,16 @@
         "tests/fault/",
         "source/application/diagnostic.cpp",
         "source/platform/machine_policy.hpp",
-        "source/interfaces/diagnostic_inspector.hpp"
+        "source/interfaces/diagnostic_inspector.hpp",
+        "source/platform/network.hpp",
+        "source/application/network_probe.cpp"
       ],
       "status": "in_progress",
       "authority_class": "development",
       "execution_grant": "user:foundation-native-campaign-2026-10-05",
-      "notes": "The existing native inventory/recovery path now supports an explicitly negotiated measured-time 0.2 triple with consumer-local clock scope, exact TTL/rate checks, replay/high-water history, reconnect and policy erasure. Current suites: 88 Windows, 89 Linux and 81 historical-toolset host checks, including native fresh/delayed/future synthetic delivery. Actual collectors/renderers, product demand/policy, retention, suspend/namespace/installed-policy qualification and visible/editor recovery remain required.",
+      "notes": "Real bounded raw Windows/Linux network readers now pass independent OS counter brackets; exact measured-time transport remains synthetic until notification-backed identity and supervised acquisition are integrated. Current suites: 89 Windows, 92 Linux and 81 historical-toolset host checks. Complete collectors/renderers, product demand/policy, retention, native fault/suspend qualification and visible/editor recovery remain required.",
       "package": "delivery/packages/w-25-recovery.md",
-      "evidence": "delivery/measured-time-handoff.md"
+      "evidence": "delivery/network-acquisition-handoff.md"
     },
     {
       "id": "W-26",

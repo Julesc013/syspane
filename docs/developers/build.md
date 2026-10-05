@@ -1,6 +1,16 @@
 # Developer setup and checks
 
-The latest [measured telemetry checkpoint](../../spec/delivery/measured-time-handoff.md)
+The [native network acquisition checkpoint](../../spec/delivery/network-acquisition-handoff.md)
+passes 89 Windows, 92 Linux and 81 historical-toolset host checks. Modern profiles
+add `native.NATIVE-NETWORK` (four fixed cases); Linux adds two `network.NETWORK-*`
+native-layout decoder cases. Use `record_protocol.py --network` with the ordinary
+profile/build/output arguments for the full modern suite. The historical recorder
+continues to use `--measured-time`; native network targets are absent there.
+`SysPane.NetworkProbe read` outputs operational native keys/counters for explicit
+local tests. CTest records only comparison outcomes/counts; do not publish raw
+probe stdout. Notification-backed identity and supervised publication are pending.
+
+The preceding [measured telemetry checkpoint](../../spec/delivery/measured-time-handoff.md)
 passes 88 Windows, 89 Linux and 81 historical-toolset host checks. Five
 `measured.MEASURED-*` families run on each profile; `native.NATIVE-MEASURED` exercises
 fresh, delayed and future synthetic measurements on modern Windows/Linux. Both

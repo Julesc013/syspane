@@ -42,7 +42,7 @@ def main():
             'host_family': platform.system(),
             'compiler_version': output(compiler, '-dumpfullversion'),
             'compiler_target': output(compiler, '-dumpmachine'),
-            'fingerprints': fingerprints(compiler, ('libmincore.a',) if profile == 'windows-x64-gcc15' else ())
+            'fingerprints': fingerprints(compiler, ('libmincore.a', 'libiphlpapi.a') if profile == 'windows-x64-gcc15' else ())
         }
     if actual != lock['identity']:
         raise ValueError('installed tools differ from pinned profile; record and review an explicit profile revision')

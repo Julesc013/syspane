@@ -1,0 +1,131 @@
+{
+  "schema_version": "0.1.0",
+  "work_id": "W-25",
+  "source_ref": "89f0c42fca4cb4babb8a72a28bd1cc17bfdeafc8",
+  "objective": "Implement real bounded native network acquisition as a prerequisite to notification-backed identity and independently supervised measured collection.",
+  "changed_files": [
+    "CMakeLists.txt",
+    "README.md",
+    "TODO.md",
+    "build-support/check_profile.py",
+    "build-support/components.json",
+    "build-support/evidence/network-acquisition-handoff.json",
+    "build-support/evidence/w-25-network-acquisition-attempts.json",
+    "build-support/evidence/w-25-network-acquisition-linux-x64-gcc13.DIAG-01.json",
+    "build-support/evidence/w-25-network-acquisition-linux-x64-gcc13.FAILURE-STORE.json",
+    "build-support/evidence/w-25-network-acquisition-linux-x64-gcc13.NATIVE-01.json",
+    "build-support/evidence/w-25-network-acquisition-linux-x64-gcc13.NATIVE-02.json",
+    "build-support/evidence/w-25-network-acquisition-linux-x64-gcc13.NATIVE-CLOCK.json",
+    "build-support/evidence/w-25-network-acquisition-linux-x64-gcc13.NATIVE-MEASURED.json",
+    "build-support/evidence/w-25-network-acquisition-linux-x64-gcc13.NATIVE-NETWORK.json",
+    "build-support/evidence/w-25-network-acquisition-linux-x64-gcc13.NATIVE-SUB.json",
+    "build-support/evidence/w-25-network-acquisition-linux-x64-gcc13.ORACLE-01.json",
+    "build-support/evidence/w-25-network-acquisition-linux-x64-gcc13.PRESERVE.json",
+    "build-support/evidence/w-25-network-acquisition-linux-x64-gcc13.RECOVERY-01.json",
+    "build-support/evidence/w-25-network-acquisition-linux-x64-gcc13.ctest.txt",
+    "build-support/evidence/w-25-network-acquisition-linux-x64-gcc13.json",
+    "build-support/evidence/w-25-network-acquisition-linux-x64-gcc13.smoke.json",
+    "build-support/evidence/w-25-network-acquisition-verification.json",
+    "build-support/evidence/w-25-network-acquisition-windows-x64-gcc15.DIAG-01.json",
+    "build-support/evidence/w-25-network-acquisition-windows-x64-gcc15.FAILURE-STORE.json",
+    "build-support/evidence/w-25-network-acquisition-windows-x64-gcc15.NATIVE-01.json",
+    "build-support/evidence/w-25-network-acquisition-windows-x64-gcc15.NATIVE-02.json",
+    "build-support/evidence/w-25-network-acquisition-windows-x64-gcc15.NATIVE-CLOCK.json",
+    "build-support/evidence/w-25-network-acquisition-windows-x64-gcc15.NATIVE-MEASURED.json",
+    "build-support/evidence/w-25-network-acquisition-windows-x64-gcc15.NATIVE-NETWORK.json",
+    "build-support/evidence/w-25-network-acquisition-windows-x64-gcc15.NATIVE-SUB.json",
+    "build-support/evidence/w-25-network-acquisition-windows-x64-gcc15.PRESERVE.json",
+    "build-support/evidence/w-25-network-acquisition-windows-x64-gcc15.RECOVERY-01.json",
+    "build-support/evidence/w-25-network-acquisition-windows-x64-gcc15.ctest.txt",
+    "build-support/evidence/w-25-network-acquisition-windows-x64-gcc15.json",
+    "build-support/evidence/w-25-network-acquisition-windows-x64-gcc15.smoke.json",
+    "build-support/evidence/w-25-network-acquisition-windows-x86-v141-xp.ctest.txt",
+    "build-support/evidence/w-25-network-acquisition-windows-x86-v141-xp.json",
+    "build-support/evidence/w-25-network-acquisition-windows-x86-v141-xp.smoke.json",
+    "build-support/record_protocol.py",
+    "build-support/targets/README.md",
+    "build-support/targets/linux-x64-gcc13.json",
+    "build-support/targets/windows-x64-gcc15.json",
+    "build-support/targets/windows-x64-gcc15.lock.json",
+    "docs/developers/build.md",
+    "source/application/network_probe.cpp",
+    "source/platform/network.cpp",
+    "source/platform/network.hpp",
+    "source/platform/network_linux.cpp",
+    "source/platform/network_netlink.cpp",
+    "source/platform/network_netlink.hpp",
+    "source/platform/network_windows.cpp",
+    "spec/checksums.json",
+    "spec/delivery/current-state.md",
+    "spec/delivery/implementation-readiness.md",
+    "spec/delivery/index.md",
+    "spec/delivery/network-acquisition-handoff.md",
+    "spec/delivery/packages/index.md",
+    "spec/delivery/packages/w-25-network-acquisition.md",
+    "spec/delivery/work-units.json",
+    "spec/generated/catalog.json",
+    "spec/telemetry/network.md",
+    "tests/protocol/native_network.py",
+    "tests/protocol/network_netlink_tests.cpp"
+  ],
+  "decisions": [
+    "Keep native key/type facts distinct from model identity and persistent selectors.",
+    "Read full native interface tables and paired uint64 counters without labels, addresses or packet content in the shared result.",
+    "Reject incomplete/interrupted/malformed/over-capacity acquisition as a whole; cooperative cancellation does not prove native-call termination.",
+    "Compare real values against independent fixed OS brackets and commit only outcomes/counts.",
+    "Keep the Windows potentially blocking API isolated from production until supervised collector integration; native targets remain disabled in the historical profile."
+  ],
+  "checks": [
+    {
+      "name": "Windows full 89-entry CTest suite including four native acquisition cases",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-25-network-acquisition-windows-x64-gcc15.json"
+    },
+    {
+      "name": "Linux full 92-entry CTest suite including native acquisition and native-layout decoder cases",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-25-network-acquisition-linux-x64-gcc13.json"
+    },
+    {
+      "name": "Historical-toolset 81 host checks and ten PE/import audits",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-25-network-acquisition-windows-x86-v141-xp.json"
+    },
+    {
+      "name": "First Windows missing modern network table declarations",
+      "outcome": "fail",
+      "evidence": "build-support/evidence/w-25-network-acquisition-attempts.json"
+    },
+    {
+      "name": "Final builds and three fresh relocated model smoke packages",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-25-network-acquisition-attempts.json"
+    },
+    {
+      "name": "Schemas, fixtures, generated indexes, tooling and integrity",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-25-network-acquisition-verification.json"
+    },
+    {
+      "name": "Reconciled identity, actual native faults and supervised measured network publication",
+      "outcome": "not_run",
+      "evidence": "spec/delivery/network-acquisition-handoff.md"
+    }
+  ],
+  "open_questions": [
+    "Notification ownership and dirty-generation reconciliation must prevent late results and native-index reuse from replacing identity.",
+    "Acquisition brackets and reset/replacement rules must precede measured rate publication.",
+    "Connect demand cancellation, retained failures, independent producer leases and OS-confirmed child exit before restart.",
+    "Native suspend/namespace faults, historical guests, Mac endpoint, conforming desktop hosts and complete product integration remain open."
+  ],
+  "next_step": "Close notification-backed network identity/reconciliation and acquisition-time contracts, then wire the real readers through independent child supervision into measured subscriptions.",
+  "authority_used": [
+    "user:foundation-native-campaign-2026-10-05"
+  ],
+  "limitations": [
+    "The campaign and W-25 remain incomplete; raw native acquisition is not a complete collector or desktop product.",
+    "Windows comparison uses an independent decoder of the same OS API; it does not establish kernel correctness.",
+    "No privileged action, interface mutation, guest change, public release or AIDE activation occurred.",
+    "Historical tests ran on Windows 10/WOW64; native network targets are excluded."
+  ]
+}
