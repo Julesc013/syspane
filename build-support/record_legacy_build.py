@@ -21,7 +21,10 @@ def main():
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--failure-metadata', action='store_true', help='Include the shared failure-history codec/projection cases')
     parser.add_argument('--preservation', action='store_true', help='Include the portable preservation policy boundary only')
+    parser.add_argument('--data-view', action='store_true', help='Include portable synchronized data view cases')
     args = parser.parse_args()
+    if args.data_view:
+        args.preservation = True
     if args.preservation:
         args.failure_metadata = True
     build, smoke_path = args.build_dir.resolve(strict=True), args.smoke_result.resolve(strict=True)
@@ -41,6 +44,8 @@ def main():
         expected |= {'diagnostic.FAILURE-CODEC', 'diagnostic.FAILURE-INTERRUPT', 'diagnostic.FAILURE-PROJECTION'}
     if args.preservation:
         expected.add('diagnostic.PRESERVE-POLICY')
+    if args.data_view:
+        expected |= {'data.'+case for case in ('VIEW-ATOMIC','VIEW-REPLAY','VIEW-RECONNECT','VIEW-LEASE','VIEW-POLICY','VIEW-FAULT')}
     if len(cases) != len(expected) or {c['case'] for c in cases} != expected or any(c['outcome'] != 'pass' for c in cases):
         raise ValueError('incomplete, duplicated or failed historical-toolset host run')
     artifacts = {}
@@ -62,6 +67,8 @@ def main():
         sources.append(ROOT/'spec/delivery/packages/w-25-failure-metadata.md')
     if args.preservation:
         sources.append(ROOT/'spec/delivery/packages/w-25-preservation.md')
+    if args.data_view:
+        sources.append(ROOT/'spec/delivery/packages/w-25-data-view.md')
     for folder in ('source', 'tests/model', 'tests/protocol', 'tests/fault', 'tests/desktop', 'build-support'):
         sources.extend(p for p in (ROOT/folder).rglob('*') if p.is_file() and 'evidence' not in p.parts and '__pycache__' not in p.parts)
     record = {'version': '0.1.0', 'work_ids': ['W-04', 'W-25', 'W-26'] if args.failure_metadata else ['W-04', 'W-26'], 'profile': PROFILE, 'outcome': 'pass',

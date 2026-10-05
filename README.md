@@ -21,7 +21,9 @@ Explicit recent-failure reporting now uses bounded private files and current
 operational disclosure policy; see the [checkpoint](spec/delivery/failure-metadata-handoff.md).
 The diagnostic now offers explicit private file preservation through native controls
 and CLI; see the [preservation checkpoint](spec/delivery/preservation-handoff.md).
-Telemetry/renderer recovery, product retention and desktop integration remain pending.
+A [synchronized data view](spec/delivery/data-view-handoff.md) now joins model
+validation, producer leases and policy-bound presentation. Native telemetry/renderer
+recovery, product retention and desktop integration remain pending.
 An external pixel/time oracle is calibrated against live, hidden, frozen and
 obstructed synthetic X11 surfaces. A real Openbox/PCManFM Show Desktop experiment
 now exposes the basic X11 candidate's placement failure: above the desktop it

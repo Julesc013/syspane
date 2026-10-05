@@ -7,6 +7,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [October audit disposition](audit-2026-10-04.md) — Map supplied recommendations to amended owners without treating review text as authority.
 - [Foundation and native-experiment campaign admission](campaign-admission.md) — Record the user-admitted implementation scope and the first package's closed boundaries.
 - [Current state and next admitted boundary](current-state.md) — An honest resumption point for the initial greenfield specification.
+- [Synchronized data owner checkpoint](data-view-handoff.md) — Bind atomic model admission, independent lease state and revocable presentation to portable execution evidence.
 - [Independent diagnostic implementation checkpoint](diagnostic-handoff.md) — Bind independent public reporting and native inspector startup to scoped Windows/Linux evidence.
 - [Independent recent-failure metadata checkpoint](failure-metadata-handoff.md) — Bind bounded native fault records, private file handling and policy-gated diagnostic projection to current evidence.
 - [Foundation implementation handoff](foundation-handoff.md) — Resume the admitted campaign from tested model builds and local smoke packages.

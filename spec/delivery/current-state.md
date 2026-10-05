@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-06T06:33:18+11:00", "scope": "Explicit private preservation checkpoint; native qualification and visible recovery remain open"}
+updated: {"by": "codex", "at": "2026-10-06T06:58:29+11:00", "scope": "Typed synchronized data-view checkpoint; native telemetry and renderer recovery remain open"}
 ---
 
 # Current state and next admitted boundary
@@ -97,10 +97,17 @@ The historical native file adapter remains disabled.
 
 The [preservation checkpoint](preservation-handoff.md) adds explicit private opaque
 copies, current-policy checks, cancellation, no-replace publication and Win32/GTK
-controls. Current suites pass 59 Windows, 60 Linux and 55 historical host entries.
+controls. That checkpoint passes 59 Windows, 60 Linux and 55 historical host entries.
 Positive native UI policy uses typed fixtures; protected-policy deployment,
 foreign-owner/unsupported-filesystem qualification, product retention and real
 visible recovery remain open. No configuration is parsed, repaired or activated.
+
+The [data-view checkpoint](data-view-handoff.md) joins model validation, full
+resynchronization, lease state and policy-bound payload lifetime in one typed owner.
+Current suites pass 65 Windows, 66 Linux and 61 historical-toolset host checks.
+A confirming full snapshot preserves replay/tombstone history; policy replacement
+drops this owner's data and invalidates its attachment. Native subscriptions,
+collectors, renderers and cross-component erasure remain unimplemented/unqualified.
 
 Canonical 0.2.0 documentation bundle, unchanged 0.1 authoring profile, preserved old
 fixtures, new experimental scene/command/capability 0.2 and admission descriptors.
@@ -145,8 +152,9 @@ historical guest execution once guest test scope and usability are established.
 W-05 needs a composition strategy that actually preserves icon pixels; its initial
 EWMH window stacking candidates fail that requirement. Continue other native tracks
 independently of this negative result.
-Extend W-25 with product failure-log retention and full-snapshot/data recovery.
-Close those input/ownership contracts
+Continue W-25 by closing wire snapshot/subscription contracts and connecting the
+typed data owner to authenticated native transport, real collectors and renderers.
+Close product failure-log ownership/retention and remaining payload-erasure contracts
 before enabling the associated features. Qualify protected policy in an admitted lab.
 Connect the build/component/target consumers and minimum command/IPC/policy/recovery
 slice. Probe contemporary Windows, XP/7, Linux and AppKit/older OS X independently.

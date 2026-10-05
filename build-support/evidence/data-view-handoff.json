@@ -1,0 +1,128 @@
+{
+  "schema_version": "0.1.0",
+  "work_id": "W-25",
+  "source_ref": "c676abe3f264a30a9ea519ba7a966ac4ad75dc49",
+  "objective": "Join typed model validation, independent producer leases and policy-bound payload lifetime without enabling an unspecified native telemetry subscription.",
+  "changed_files": [
+    "CMakeLists.txt",
+    "README.md",
+    "TODO.md",
+    "build-support/check_legacy_artifacts.py",
+    "build-support/components.json",
+    "build-support/evidence/data-view-handoff.json",
+    "build-support/evidence/w-25-data-view-attempts.json",
+    "build-support/evidence/w-25-data-view-linux-x64-gcc13.DIAG-01.json",
+    "build-support/evidence/w-25-data-view-linux-x64-gcc13.FAILURE-STORE.json",
+    "build-support/evidence/w-25-data-view-linux-x64-gcc13.NATIVE-01.json",
+    "build-support/evidence/w-25-data-view-linux-x64-gcc13.NATIVE-02.json",
+    "build-support/evidence/w-25-data-view-linux-x64-gcc13.ORACLE-01.json",
+    "build-support/evidence/w-25-data-view-linux-x64-gcc13.PRESERVE.json",
+    "build-support/evidence/w-25-data-view-linux-x64-gcc13.RECOVERY-01.json",
+    "build-support/evidence/w-25-data-view-linux-x64-gcc13.ctest.txt",
+    "build-support/evidence/w-25-data-view-linux-x64-gcc13.json",
+    "build-support/evidence/w-25-data-view-linux-x64-gcc13.smoke.json",
+    "build-support/evidence/w-25-data-view-verification.json",
+    "build-support/evidence/w-25-data-view-windows-x64-gcc15.DIAG-01.json",
+    "build-support/evidence/w-25-data-view-windows-x64-gcc15.FAILURE-STORE.json",
+    "build-support/evidence/w-25-data-view-windows-x64-gcc15.NATIVE-01.json",
+    "build-support/evidence/w-25-data-view-windows-x64-gcc15.NATIVE-02.json",
+    "build-support/evidence/w-25-data-view-windows-x64-gcc15.PRESERVE.json",
+    "build-support/evidence/w-25-data-view-windows-x64-gcc15.RECOVERY-01.json",
+    "build-support/evidence/w-25-data-view-windows-x64-gcc15.ctest.txt",
+    "build-support/evidence/w-25-data-view-windows-x64-gcc15.json",
+    "build-support/evidence/w-25-data-view-windows-x64-gcc15.smoke.json",
+    "build-support/evidence/w-25-data-view-windows-x86-v141-xp.ctest.txt",
+    "build-support/evidence/w-25-data-view-windows-x86-v141-xp.json",
+    "build-support/evidence/w-25-data-view-windows-x86-v141-xp.smoke.json",
+    "build-support/record_legacy_build.py",
+    "build-support/record_protocol.py",
+    "build-support/targets/README.md",
+    "build-support/targets/linux-x64-gcc13.json",
+    "build-support/targets/windows-x64-gcc15.json",
+    "build-support/targets/windows-x86-v141-xp.json",
+    "docs/developers/build.md",
+    "source/diagnostics/data_view.cpp",
+    "source/diagnostics/data_view.hpp",
+    "source/model/state.cpp",
+    "source/model/state.hpp",
+    "spec/architecture/recovery.md",
+    "spec/checksums.json",
+    "spec/delivery/current-state.md",
+    "spec/delivery/data-view-handoff.md",
+    "spec/delivery/implementation-readiness.md",
+    "spec/delivery/index.md",
+    "spec/delivery/packages/index.md",
+    "spec/delivery/packages/w-25-data-view.md",
+    "spec/delivery/work-units.json",
+    "spec/generated/catalog.json",
+    "spec/log.md",
+    "tests/fault/data_view_tests.cpp"
+  ],
+  "decisions": [
+    "Admit complete typed candidates through speculative model validation before publishing lease generation and payload together.",
+    "Keep replay and retired-identity reservations on same-epoch reconnect; retain explicitly old payload while a new epoch awaits a valid full snapshot.",
+    "Allow consumer-only full confirmation of identical normalized current data through Store::resynchronize, with ordinary replay/storage capacity and no change to producer publish ordering.",
+    "Reject obsolete attachment/revision callbacks before candidate inspection or clock advancement; data does not renew leases and heartbeats do not refresh metric timestamps.",
+    "Drop owner payload and invalidate attachment on every policy replacement; regrant requires authenticated reattachment and a full snapshot.",
+    "Use synchronous borrowed projection with reentry rejection; cross-component cache erasure, physical zeroization and native renderer integration remain outside this component."
+  ],
+  "checks": [
+    {
+      "name": "Windows complete suite: 65 CTest entries, including six data-owner families",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-25-data-view-windows-x64-gcc15.json"
+    },
+    {
+      "name": "Linux complete suite: 66 CTest entries, including six data-owner families",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-25-data-view-linux-x64-gcc13.json"
+    },
+    {
+      "name": "Historical-toolset host: 61 checks, six executable PE/import audits and relocated model smoke",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-25-data-view-windows-x86-v141-xp.json"
+    },
+    {
+      "name": "Windows relocated model smoke package",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-25-data-view-windows-x64-gcc15.smoke.json"
+    },
+    {
+      "name": "Linux relocated model smoke package",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-25-data-view-linux-x64-gcc13.smoke.json"
+    },
+    {
+      "name": "Specification generation, schemas, tooling and integrity",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-25-data-view-verification.json"
+    },
+    {
+      "name": "Source-bound attempts, package identities and owned output budget",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-25-data-view-attempts.json"
+    },
+    {
+      "name": "Native telemetry subscription, actual collector/renderer recovery and cross-component payload removal",
+      "outcome": "not_run",
+      "evidence": "spec/delivery/data-view-handoff.md"
+    }
+  ],
+  "open_questions": [
+    "Full snapshot/delta wire messages, bounded decoder, native subscription ownership and actual collector/renderer data recovery remain required.",
+    "Product failure-log retention and independent editor exit/visible recovery remain open.",
+    "Positive protected-policy deployment, foreign-owner/unsupported-filesystem and external accessibility/input qualification require their admitted environments.",
+    "Guest test scope remains pending; Windows/macOS capture is unqualified and Linux composition still fails its placement oracle."
+  ],
+  "next_step": "Close snapshot/delta subscription and bounded wire-decoding contracts, then connect the data owner to an independently supervised native producer; continue admitted host experiments without promoting blocked qualification.",
+  "authority_used": [
+    "user:foundation-native-campaign-2026-10-05"
+  ],
+  "limitations": [
+    "W-25 and the campaign remain in progress; no desktop host, complete product or historical guest runtime is qualified.",
+    "Typed data tests use injected clocks/authority/policy and literal publications; they do not attest OS policy deployment or native data recovery.",
+    "The model smoke archive is not a data-view application or complete desktop edition.",
+    "Existing native test scope and Windows symlink-privilege limitations are preserved in adjacent records.",
+    "No user configuration, existing guest VM or installed protected policy was changed; no privileged operation, public release, AIDE activation or human review is attested."
+  ]
+}

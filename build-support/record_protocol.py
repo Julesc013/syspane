@@ -32,7 +32,10 @@ def main():
     parser.add_argument('--oracle', action='store_true', help='Require portable temporal oracle and Linux native pixel calibration')
     parser.add_argument('--failure-metadata', action='store_true', help='Require bounded failure metadata and all current native regression families')
     parser.add_argument('--preservation', action='store_true', help='Require explicit private file preservation and native UI bindings')
+    parser.add_argument('--data-view', action='store_true', help='Require synchronized model/lease/policy view cases')
     args = parser.parse_args()
+    if args.data_view:
+        args.preservation = True
     if args.preservation:
         args.failure_metadata = True
     if args.failure_metadata:
@@ -72,12 +75,17 @@ def main():
         expected |= {'diagnostic.FAILURE-CODEC', 'diagnostic.FAILURE-INTERRUPT', 'diagnostic.FAILURE-PROJECTION', 'native.FAILURE-STORE'}
     if args.preservation:
         expected |= {'diagnostic.PRESERVE-POLICY', 'native.PRESERVE'}
+    if args.data_view:
+        expected |= {'data.'+case for case in ('VIEW-ATOMIC', 'VIEW-REPLAY', 'VIEW-RECONNECT', 'VIEW-LEASE', 'VIEW-POLICY', 'VIEW-FAULT')}
     if len(cases) != len(expected) or {case['case'] for case in cases} != expected or any(case['outcome'] != 'pass' for case in cases):
         raise ValueError('missing, repeated, unexpected or failing case; preserve log before rerun')
     suffix = '.exe' if platform.system() == 'Windows' else ''
     artifacts = {name: {'sha256': sha(build/name), 'bytes': (build/name).stat().st_size}
                  for name in ('syspane_protocol_tests'+suffix, 'libsyspane_protocol.a', 'libsyspane_configuration.a', 'generated/settings_descriptors.hpp')}
     native_records = []
+    if args.data_view:
+        for name in ('syspane_data_view_tests'+suffix, 'libsyspane_data_view.a', 'libsyspane_model.a'):
+            artifacts[name] = {'sha256': sha(build/name), 'bytes': (build/name).stat().st_size}
     import_audit = None
     if args.recovery:
         for name in ('syspane_recovery_tests'+suffix, 'libsyspane_recovery.a', 'component-graph.txt'):
@@ -208,6 +216,8 @@ def main():
         paths.append(ROOT/'spec/delivery/packages/w-25-failure-metadata.md')
     if args.preservation:
         paths.append(ROOT/'spec/delivery/packages/w-25-preservation.md')
+    if args.data_view:
+        paths.append(ROOT/'spec/delivery/packages/w-25-data-view.md')
     for directory in ('source', 'tests', 'build-support', 'spec/contracts'):
         paths.extend(sorted((ROOT/directory).rglob('*')))
     inputs = {p.relative_to(ROOT).as_posix(): sha(p) for p in paths
@@ -302,6 +312,10 @@ def main():
             'W-25 product retention, live telemetry/renderer recovery, payload revocation and independent editor exit remain open.',
             'No desktop host, historical OS, privileged action or public release is attested.'
         ]
+    if args.data_view:
+        report.update(work_id='W-25', slice='synchronized model, independent producer lease and policy-bound data lifetime', work_status='in_progress')
+        report['bindings']['data_view'] = 'spec/delivery/packages/w-25-data-view.md'
+        report['limits'].insert(0, 'Data view cases use typed in-process candidates; no wire subscription, collector, renderer, native data-erasure or visible-recovery qualification follows.')
     args.output.parent.mkdir(parents=True, exist_ok=True)
     log_output.write_text(raw.replace(str(build), '<build>').replace(str(ROOT), '<source>'), encoding='utf-8', newline='\n')
     args.output.write_text(json.dumps(report, indent=2)+'\n', encoding='utf-8', newline='\n')

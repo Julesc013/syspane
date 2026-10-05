@@ -63,7 +63,7 @@
         "SP-PROCESSES",
         "SP-PERFORMANCE"
       ],
-      "sha256": "00c481e39816562e43290abc44561cc8e065fe0cd0650ef513748967f367368d"
+      "sha256": "d761201aaaad3066d7a9e6ce6e5297e5b9387b4aaa2873525a908f08c03c6363"
     },
     {
       "id": "SP-SCHEDULER",
@@ -357,7 +357,18 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "e72774d3a4901b33e23429ea1d3636d74a57c737d63da056dbefcafb64c14b0e"
+      "sha256": "e6edafb46725ec80324d22532f99fa099b081f0e3a89d3c30a2032cc78928a13"
+    },
+    {
+      "id": "SP-DATA-VIEW-HANDOFF",
+      "path": "delivery/data-view-handoff.md",
+      "title": "Synchronized data owner checkpoint",
+      "description": "Bind atomic model admission, independent lease state and revocable presentation to portable execution evidence.",
+      "requires": [
+        "SP-W25-DATA-VIEW",
+        "SP-CAMPAIGN-ADMISSION"
+      ],
+      "sha256": "4ad1dfa8b8a5ff7fa2777d3188a61d1506a4442c33ea8cdaa28330459a5cd6c0"
     },
     {
       "id": "SP-DIAGNOSTIC-HANDOFF",
@@ -411,7 +422,7 @@
       "requires": [
         "SP-CURRENT"
       ],
-      "sha256": "f4547e583e0fb9e945fc038926219403677e428545cb3e660065aef936986676"
+      "sha256": "a936b9cb180997f9b569fdf8163ff39a0a8aadfe2a2e9a5e7530421fa75d662a"
     },
     {
       "id": "SP-NATIVE-TRANSPORT-HANDOFF",
@@ -508,6 +519,19 @@
         "SP-POLICY"
       ],
       "sha256": "2d88899f08dd04a985b5576246d8ad051a6630e59440346e897f0fbe5352a03f"
+    },
+    {
+      "id": "SP-W25-DATA-VIEW",
+      "path": "delivery/packages/w-25-data-view.md",
+      "title": "W-25 synchronized model view and policy lifetime",
+      "description": "Join model validation, producer leases and revocable presentation without enabling an unspecified wire subscription.",
+      "requires": [
+        "SP-W25-PACKAGE",
+        "SP-STATE",
+        "SP-POLICY",
+        "SP-CAMPAIGN-ADMISSION"
+      ],
+      "sha256": "6a37b7ba107ccfee99bab7c1d2176b57c33dbdbe8c3effa53ad03fd7b790025a"
     },
     {
       "id": "SP-W25-FAILURE-METADATA",

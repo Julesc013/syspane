@@ -64,7 +64,12 @@ Result Store::publish(const Publication& candidate) {
     catch (const std::bad_alloc&) { return {Code::capacity}; }
 }
 
-Result Store::publish_checked(const Publication& candidate) {
+Result Store::resynchronize(const Publication& candidate) {
+    if (candidate.expected_base) return {Code::missing_base, true};
+    try { return publish_checked(candidate, true); }
+    catch (const std::bad_alloc&) { return {Code::capacity}; }
+}
+Result Store::publish_checked(const Publication& candidate, bool resynchronize) {
     const auto& next = candidate.next;
     if (!identifier(candidate.record_id)) return {Code::invalid_identity};
     if (next.producer != producer_ || next.epoch != epoch_) return {Code::wrong_epoch, true};
@@ -77,7 +82,7 @@ Result Store::publish_checked(const Publication& candidate) {
     const auto replay = records_.find(candidate.record_id);
     if (replay != records_.end()) return {(*replay->second == candidate) ? Code::duplicate : Code::conflict};
     if (candidate.expected_base && (!current_ || *candidate.expected_base != current_->generation)) return {Code::missing_base, true};
-    if (current_ && next.generation <= current_->generation) return {Code::generation_order};
+    if (current_ && (next.generation < current_->generation || (next.generation == current_->generation && !resynchronize))) return {Code::generation_order};
     if (records_.size() >= limits_.replay_records || *bytes > limits_.retained_bytes - retained_bytes_) return {Code::capacity};
 
     std::set<std::string> entities, sources;
@@ -135,6 +140,7 @@ Result Store::publish_checked(const Publication& candidate) {
         if (o.presence == Presence::absent && o.value.index() != 0) o.freshness = Freshness::stale;
     }
     // Retained values can make normalized state larger than the incoming attempt.
+    if (current_ && next.generation == current_->generation && !(normalized == *current_)) return {Code::conflict};
     Publication normalized_size{candidate.record_id, candidate.expected_base, normalized};
     if (!accounted_bytes(normalized_size, limits_.candidate_bytes)) return {Code::capacity};
 

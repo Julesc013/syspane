@@ -12,7 +12,7 @@ sp_requires: ["SP-CURRENT"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-AUDIT-2026-10-04", "resource": "User-supplied October 2026 audit inputs", "title": "October review inputs"}]
-updated: {"by": "codex", "at": "2026-10-06T06:33:18+11:00", "scope": "Explicit private preservation checkpoint; native qualification and visible recovery remain open"}
+updated: {"by": "codex", "at": "2026-10-06T06:58:29+11:00", "scope": "Typed synchronized data-view checkpoint; native telemetry and renderer recovery remain open"}
 ---
 
 # Implementation readiness and gates
@@ -25,7 +25,7 @@ new versioned schemas or explicit work-scope refinement.
 | Gate | Present as specification/checks | Pending implementation/evidence |
 |---|---|---|
 | Initial authoring | Setting descriptors, scene/binding/layout 0.2, frame/handshake/preview checks over real local IPC | Runtime merge/resolution, migration, persistence and native controls |
-| Recovery/security | Lease/render/restart guards, native owned-child fault supervision, independent public diagnostics/native inspector, private preservation/native controls, policy checks and native peer identity evidence | Preservation edge-case qualification, protected-policy deployment, actual telemetry/renderer recovery, cross-user/logon qualification, data-path revocation and measured budgets |
+| Recovery/security | Lease/render/restart guards, native owned-child fault supervision, independent public diagnostics/native inspector, private preservation/native controls, typed synchronized data ownership, policy checks and native peer identity evidence | Preservation edge-case qualification, protected-policy deployment, actual telemetry/renderer recovery, cross-user/logon qualification, data-path revocation and measured budgets |
 | Native profiles | Windows/Linux model, protocol and native IPC build profiles, component ownership, calibrated external pixel/time observer and executable checks | Native reveal/input/wallpaper adapters, native recovery, desktop builds and target qualification |
 | Content/SDK | Preset/package/extension metadata and buffer-result sketch | Bounded importer, dependency closure, extended theme/AST, installed SDK/ABI consumers |
 | Saver | Role/lifecycle/privacy/ownership contracts | Native host adapters and preview/fullscreen/configuration qualification |

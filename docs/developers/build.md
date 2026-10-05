@@ -1,8 +1,12 @@
 # Developer setup and checks
 
-The latest [preservation checkpoint](../../spec/delivery/preservation-handoff.md)
-passes 59 Windows, 60 Linux and 55 historical-toolset host CTest entries. Earlier
-counts below describe their named historical checkpoints.
+The latest [data-view checkpoint](../../spec/delivery/data-view-handoff.md) passes
+65 Windows, 66 Linux and 61 historical-toolset host CTest entries. Six `data.VIEW-*`
+cases exercise the typed model/lease/policy owner. Run them with
+`ctest --preset windows-x64-gcc15 -R "^data\." --output-on-failure`; Linux uses the
+ordinary wrapper. Record complete suites with the recorder's `--data-view` option.
+Native subscriptions/codecs, real collectors and renderer integration remain pending.
+Earlier counts below describe their named historical checkpoints.
 
 The modern diagnostic's native source/destination fields and
 `--preserve <absolute-source> <absolute-destination>` request an explicit private

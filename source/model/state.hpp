@@ -133,9 +133,12 @@ public:
     Store(std::string producer, std::string epoch, std::vector<Metric> metrics, Limits limits = {});
     std::shared_ptr<const Snapshot> snapshot() const { return current_; }
     Result publish(const Publication& candidate);
+    // Consumer-only full resynchronization: a new record may confirm the identical
+    // normalized current generation. It reserves replay capacity and never resets history.
+    Result resynchronize(const Publication& candidate);
     std::vector<Observation> retired_observations(const std::string& entity_id) const;
 private:
-    Result publish_checked(const Publication& candidate);
+    Result publish_checked(const Publication& candidate, bool resynchronize = false);
     std::string producer_;
     std::string epoch_;
     std::vector<Metric> metrics_;

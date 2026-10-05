@@ -12,7 +12,7 @@ sp_requires: ["SP-PROCESSES", "SP-PERFORMANCE"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-AUDIT-2026-10-04"]
 sources: [{"id": "SRC-AUDIT-2026-10-04", "resource": "User-supplied SysPane audits and design reviews, 2026-10-04", "title": "October specification review inputs"}]
-updated: {"by": "codex", "at": "2026-10-06T06:33:18+11:00", "scope": "Explicit private preservation checkpoint; native qualification and visible recovery remain open"}
+updated: {"by": "codex", "at": "2026-10-06T06:58:29+11:00", "scope": "Typed synchronized data-view checkpoint; native telemetry and renderer recovery remain open"}
 ---
 
 # Independent recovery and bounded failure
@@ -83,3 +83,10 @@ Tests freeze the producer, stall rendering, corrupt optional content, remove sto
 revoke policy and exhaust optional work. Recovery reports measure elapsed time and
 all involved processes. Numerical resource ceilings are admitted per profile after
 measurement, not presented as universal performance claims.
+
+The [synchronized data-view boundary](../delivery/packages/w-25-data-view.md) connects
+validated model publications to producer leases and revocable borrowed presentation.
+Its [checkpoint](../delivery/data-view-handoff.md) preserves same-epoch replay and
+retired identities through full resynchronization. Policy replacement clears this
+consumer lifetime; it does not erase another component's copies or qualify native
+subscriptions, telemetry, rendering or visible recovery.

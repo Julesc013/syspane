@@ -7,7 +7,7 @@ import struct
 
 ROOT = Path(__file__).resolve().parents[1]
 EXECUTABLES = ('SysPane.ModelSmoke.exe', 'syspane_model_tests.exe', 'syspane_protocol_tests.exe',
-               'syspane_recovery_tests.exe', 'syspane_diagnostic_tests.exe')
+               'syspane_recovery_tests.exe', 'syspane_diagnostic_tests.exe', 'syspane_data_view_tests.exe')
 
 
 def build_inputs(build):
@@ -156,7 +156,7 @@ def main():
         result['artifacts'][name] = {'sha256': hashlib.sha256(data).hexdigest(), 'bytes': len(data), **verify(data)}
     if args.output:
         args.output.write_text(json.dumps(result, indent=2)+'\n', encoding='utf-8', newline='\n')
-    print('Historical PE/header/import audit: pass (5 artifacts; no runtime qualification)')
+    print(f'Historical PE/header/import audit: pass ({len(EXECUTABLES)} artifacts; no runtime qualification)')
 
 
 if __name__ == '__main__':

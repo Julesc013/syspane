@@ -39,3 +39,5 @@
 - **Boundary**: Native SysPane implementation and platform qualification remain unexecuted.
 
 - 2026-10-06: Added W-25 explicit private configuration preservation/native controls, bounded worker cancellation and exact-name/no-replace checks; preserved Windows rename/permission and Linux fixture failures. Current modern suites 59/60 and historical host suite 55; deployment, unsupported-filesystem and visible-recovery qualifications remain open.
+
+- 2026-10-06: Joined typed model validation, independent lease state and policy-bound data lifetime in W-25. Added full same-generation reconciliation without resetting replay/tombstones; six portable data-view cases pass within 65/66 modern and 61 historical host suites. Native wire/data/render integration remains open.
