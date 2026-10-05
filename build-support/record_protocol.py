@@ -15,6 +15,7 @@ PROTOCOL_CASES = 'FRAME-01 FRAME-02 FRAME-03 JSON-01 WIRE-01 NEGOTIATE-01 IPC-BU
 RECOVERY_CASES = 'LEASE-01 LEASE-02 LEASE-03 LEASE-04 LEASE-05 RENDER-01 RENDER-02 RETRY-01 RETRY-02 RETRY-03 RECOVERY-CLOCK'.split()
 IMPORT_CASES = 'STATE RETAIN COVERAGE REPLAY TIME LIFETIME'.split()
 SUBSCRIPTION_CASES = 'SUB-ADMIT SUB-QUEUE SUB-LIFETIME'.split()
+MEASURED_CASES = 'MEASURED-CODEC MEASURED-AGE MEASURED-REPLAY MEASURED-LIFETIME MEASURED-SESSION'.split()
 EXPECTED = {f'model.{case}' for case in MODEL_CASES} | {f'protocol.{case}' for case in PROTOCOL_CASES} | {'composition.graph', 'composition.reject_forbidden'}
 
 
@@ -39,7 +40,10 @@ def main():
     parser.add_argument('--state-import', action='store_true', help='Require complete remote state import through the wire-bound data owner')
     parser.add_argument('--subscriptions', action='store_true', help='Require bounded subscription and native synthetic inventory cases')
     parser.add_argument('--measurement-clock', action='store_true', help='Require native causal clock brackets and held-peer exit rejection')
+    parser.add_argument('--measured-time', action='store_true', help='Require measured telemetry, freshness and native delivery cases')
     args = parser.parse_args()
+    if args.measured_time:
+        args.measurement_clock = True
     if args.measurement_clock:
         args.subscriptions = True
     if args.subscriptions:
@@ -99,12 +103,17 @@ def main():
         expected |= {'subscription.'+case for case in SUBSCRIPTION_CASES} | {'native.NATIVE-SUB'}
     if args.measurement_clock:
         expected.add('native.NATIVE-CLOCK')
+    if args.measured_time:
+        expected |= {'measured.'+case for case in MEASURED_CASES} | {'native.NATIVE-MEASURED'}
     if len(cases) != len(expected) or {case['case'] for case in cases} != expected or any(case['outcome'] != 'pass' for case in cases):
         raise ValueError('missing, repeated, unexpected or failing case; preserve log before rerun')
     suffix = '.exe' if platform.system() == 'Windows' else ''
     artifacts = {name: {'sha256': sha(build/name), 'bytes': (build/name).stat().st_size}
                  for name in ('syspane_protocol_tests'+suffix, 'libsyspane_protocol.a', 'libsyspane_configuration.a', 'generated/settings_descriptors.hpp')}
     native_records = []
+    if args.measured_time:
+        name = 'syspane_measured_time_tests'+suffix
+        artifacts[name] = {'sha256': sha(build/name), 'bytes': (build/name).stat().st_size}
     if args.subscriptions:
         for name in ('syspane_subscription_tests'+suffix,'SysPane.TelemetryProbe'+suffix):
             artifacts[name] = {'sha256': sha(build/name), 'bytes': (build/name).stat().st_size}
@@ -156,6 +165,8 @@ def main():
             required['NATIVE-SUB'] = {'JOURNEY','OVERFLOW','REVOKE','EXPIRY','WRONG-PRODUCER'}
         if args.measurement_clock:
             required['NATIVE-CLOCK'] = {'ROUNDTRIP','PEER-EXIT'}
+        if args.measured_time:
+            required['NATIVE-MEASURED'] = {'FRESH','DELAYED','FUTURE'}
         if args.preservation:
             for name in ('syspane_preservation_tests'+suffix, 'libsyspane_preservation_job.a'):
                 artifacts[name] = {'sha256': sha(build/name), 'bytes': (build/name).stat().st_size}
@@ -187,8 +198,8 @@ def main():
                     raise ValueError('Windows reparse case must execute or retain its exact privilege limitation')
             if native['outcome'] != 'pass' or len(native['cases']) != len(expected_cases) or {case['case'] for case in native['cases']} != expected_cases or any(case['outcome'] != 'pass' for case in native['cases']):
                 raise ValueError('native case missing or failed; preserve original report')
-            if family in ('RECOVERY-01', 'DIAG-01', 'ORACLE-01', 'FAILURE-STORE', 'PRESERVE', 'NATIVE-SUB', 'NATIVE-CLOCK'):
-                executable = {'RECOVERY-01':'SysPane.RecoveryProbe'+suffix, 'DIAG-01':'SysPane.Diag.exe' if suffix else 'syspane-diag', 'ORACLE-01':'SysPane.OracleProbe', 'FAILURE-STORE':'syspane_failure_store_tests'+suffix, 'PRESERVE':'syspane_preservation_tests'+suffix, 'NATIVE-SUB':'SysPane.TelemetryProbe'+suffix, 'NATIVE-CLOCK':'SysPane.TelemetryProbe'+suffix}[family]
+            if family in ('RECOVERY-01', 'DIAG-01', 'ORACLE-01', 'FAILURE-STORE', 'PRESERVE', 'NATIVE-SUB', 'NATIVE-CLOCK', 'NATIVE-MEASURED'):
+                executable = {'RECOVERY-01':'SysPane.RecoveryProbe'+suffix, 'DIAG-01':'SysPane.Diag.exe' if suffix else 'syspane-diag', 'ORACLE-01':'SysPane.OracleProbe', 'FAILURE-STORE':'syspane_failure_store_tests'+suffix, 'PRESERVE':'syspane_preservation_tests'+suffix, 'NATIVE-SUB':'SysPane.TelemetryProbe'+suffix, 'NATIVE-CLOCK':'SysPane.TelemetryProbe'+suffix, 'NATIVE-MEASURED':'SysPane.TelemetryProbe'+suffix}[family]
                 if family == 'PRESERVE' and native['diagnostic_sha256'] != sha(build/('SysPane.Diag.exe' if suffix else 'syspane-diag')):
                     raise ValueError('preservation CLI artifact changed after run')
                 if native['executable_sha256'] != sha(build/executable):
@@ -262,6 +273,8 @@ def main():
         paths.append(ROOT/'spec/delivery/packages/w-25-subscriptions.md')
     if args.measurement_clock:
         paths.append(ROOT/'spec/delivery/packages/w-25-measurement-clock.md')
+    if args.measured_time:
+        paths.append(ROOT/'spec/delivery/packages/w-25-measured-time.md')
     for directory in ('source', 'tests', 'build-support', 'spec/contracts'):
         paths.extend(sorted((ROOT/directory).rglob('*')))
     inputs = {p.relative_to(ROOT).as_posix(): sha(p) for p in paths
@@ -399,6 +412,15 @@ def main():
             'direct_dependencies': re.findall(r'DLL Name:\s*(\S+)', inspected) if suffix else re.findall(r'\(NEEDED\).*?\[([^]]+)\]', inspected),
             'windows_precise_interrupt_import': bool(suffix),
             'scope': 'Observed probe imports on the named development profile; no inferred historical loader or suspend qualification.'}
+    if args.measured_time:
+        report['slice'] = 'versioned measured telemetry, consumer clock scope and retained/replayed freshness'
+        report['bindings']['measured_time'] = 'spec/delivery/packages/w-25-measured-time.md'
+        report['bindings']['native_measured_oracle'] = 'tests/protocol/native_measured.py'
+        report['limits'] = ['Measured 0.2 delivery uses qualified local shared-clock domains; the native values are synthetic and typed policy remains a fixture.',
+            'Portable cases cover clock mismatch/regression, exact TTL expiry, replay, high-water retention, reconnect and policy erasure; no physical accuracy claim follows.',
+            'Real suspend/resume, namespace mismatch/change/denial, native read/query/overflow/regression faults and historical guest execution remain unqualified.',
+            'Actual collection/rendering, product demand/policy distribution, retention and cross-component erasure/visible recovery remain open.',
+            'W-25 and the campaign remain incomplete; no privileged action, release, desktop support or AIDE activation is attested.']
     args.output.parent.mkdir(parents=True, exist_ok=True)
     log_output.write_text(raw.replace(str(build), '<build>').replace(str(ROOT), '<source>'), encoding='utf-8', newline='\n')
     args.output.write_text(json.dumps(report, indent=2)+'\n', encoding='utf-8', newline='\n')

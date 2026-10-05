@@ -276,16 +276,18 @@ def semantic_errors(value: Any, schema_name: str, root: Path=ROOT) -> list[str]:
     def walk(item: Any) -> None:
         if isinstance(item, dict):
             for key, val in item.items():
-                if key in ('generation','revision','sequence','monotonic_ns','sample_interval_ns','expected_revision','policy_generation','lost_count','transmit_bps','receive_bps'):
+                if key in ('generation','revision','sequence','monotonic_ns','nanoseconds','sample_interval_ns','expected_revision','policy_generation','lost_count','transmit_bps','receive_bps'):
                     check_uint(val)
                 walk(val)
             if item.get('kind') == 'uint64':
                 check_uint(item.get('data'))
+            if item.get('schema_version') == '0.2.0' and item.get('measured_at') is not None and 'measured_at' in item and item.get('value') is None:
+                errors.append('measurement without value')
         elif isinstance(item, list):
             for val in item:
                 walk(val)
     walk(value)
-    if schema_name == 'snapshot':
+    if schema_name in ('snapshot', 'snapshot-v0.2'):
         entities = [e['id'] for e in value['entities']]
         sources = [e['id'] for e in value['sources']]
         if len(entities) != len(set(entities)):
@@ -304,13 +306,18 @@ def semantic_errors(value: Any, schema_name: str, root: Path=ROOT) -> list[str]:
             observed.append((observation['entity_id'],observation['field']))
         if len(observed) != len(set(observed)):
             errors.append('duplicate observation field')
-    if schema_name == 'telemetry':
+        if schema_name == 'snapshot-v0.2':
+            if any(int(e['generation']) > int(value['generation']) for e in value['entities']):
+                errors.append('snapshot future entity generation')
+            if any(o['producer_epoch'] != value['producer_epoch'] or int(o['generation']) > int(value['generation']) for o in value['observations']):
+                errors.append('snapshot observation epoch/generation mismatch')
+    if schema_name in ('telemetry', 'telemetry-v0.2'):
         body = value['body']
         if 'policy_revision' in body:
             check_uint(body['policy_revision'])
         if value['type'] in ('snapshot', 'delta'):
             snapshot = body['snapshot']
-            errors += semantic_errors(snapshot, 'snapshot', root)
+            errors += semantic_errors(snapshot, 'snapshot-v0.2' if schema_name == 'telemetry-v0.2' else 'snapshot', root)
             generation = int(snapshot['generation'])
             if snapshot['producer_epoch'] != value['producer_epoch']:
                 errors.append('telemetry snapshot epoch mismatch')
@@ -320,6 +327,8 @@ def semantic_errors(value: Any, schema_name: str, root: Path=ROOT) -> list[str]:
             for observation in snapshot['observations']:
                 if observation['producer_epoch'] != snapshot['producer_epoch'] or int(observation['generation']) > generation:
                     errors.append('telemetry observation epoch/generation mismatch')
+                if schema_name == 'telemetry-v0.2' and observation['measured_at'] is not None and observation['measured_at']['clock_id'] != body['clock_id']:
+                    errors.append('telemetry measurement domain mismatch')
             if value['type'] == 'delta':
                 check_uint(body['base_generation'])
                 if int(body['base_generation']) >= generation:

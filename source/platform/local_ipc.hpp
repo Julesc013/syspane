@@ -26,6 +26,7 @@ struct MeasurementClock {
     const char* clock_id;
     std::uint64_t nanoseconds;
     std::uint32_t representation_unit_ns; // Not hardware resolution or accuracy.
+    std::string local_scope; // In-memory consumer provenance; never a wire field.
 };
 class Listener;
 class Stream {

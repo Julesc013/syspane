@@ -50,3 +50,14 @@ temporality, freshness, source coverage, sensitivity and cost. [Portable selecto
 resolve saved intent separately from producer/epoch-scoped observation identity.
 Ambiguous or missing pins cannot silently bind replacement hardware. Source liveness
 does not renew each field's measurement freshness.
+
+## Measured-time implementation boundary
+
+The [measured-time package](../delivery/packages/w-25-measured-time.md) supplies the
+versioned shared-clock receive path. Original measurement time, producer epoch and
+consumer-local clock scope survive retained state, replay and compatible reconnect.
+Finite-TTL freshness expires at equality; future counts and local clock faults do
+not publish a new model. The bounded per-field time high-water mark survives
+temporary absence, with its storage charged to the existing retained-byte limit.
+See the [checkpoint](../delivery/measured-time-handoff.md) for actual synthetic
+native evidence and the unexecuted source/suspend/namespace qualification.

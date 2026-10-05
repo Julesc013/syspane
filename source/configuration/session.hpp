@@ -6,11 +6,13 @@
 #include <limits>
 
 namespace syspane::configuration {
-// Local composition selects a fixed inventory source; received documents cannot.
-struct InventorySource {
+// Local composition selects one exact telemetry contract; received documents cannot.
+struct TelemetrySource {
     std::string producer, channel, classification;
     std::uint64_t ticket_limit = std::numeric_limits<std::uint64_t>::max();
+    std::string document_version = "0.1.0", clock_id = {}, clock_scope = {};
 };
+using InventorySource = TelemetrySource;
 struct Subscription {
     protocol::TelemetryBinding binding;
     std::uint64_t ticket;

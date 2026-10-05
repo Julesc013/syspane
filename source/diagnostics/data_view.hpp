@@ -27,7 +27,8 @@ public:
     DataView& operator=(const DataView&) = delete;
     DataAttachment attach(const std::string& producer, const std::string& epoch, std::uint64_t now);
     DataAttachment attach_wire(const protocol::TelemetryBinding& binding, std::uint64_t now);
-    DataResult receive(std::uint64_t token, std::uint64_t revision, std::string_view payload, std::uint64_t now);
+    DataResult receive(std::uint64_t token, std::uint64_t revision, std::string_view payload, std::uint64_t now,
+                       std::optional<model::Tick> measurement_now = {});
     DataResult full(std::uint64_t token, std::uint64_t policy_revision, const model::Publication& publication, std::uint64_t now);
     DataResult delta(std::uint64_t token, std::uint64_t policy_revision, const model::Publication& publication, std::uint64_t now);
     DataCode heartbeat(std::uint64_t token, std::uint64_t revision, std::uint64_t sequence, std::uint64_t now);
@@ -36,12 +37,15 @@ public:
     DataCode policy(configuration::Policy next, std::uint64_t now);
     DataStatus status(std::uint64_t now);
     bool project(std::uint64_t now, const std::function<void(const model::Snapshot&, const LeaseView&)>& borrow);
+    bool project_measured(std::uint64_t now, const model::Tick& measurement_now,
+        const std::function<void(const model::Snapshot&, const LeaseView&, const model::Tick&)>& borrow);
 private:
     void require_owner() const;
     bool permitted() const;
     bool advance_lifetime();
     void drop(std::uint64_t now);
     DataCode check(std::uint64_t token, std::uint64_t revision, std::uint64_t now);
+    DataCode observe_clock(const std::optional<model::Tick>& measurement_now, std::uint64_t now);
     DataResult publish(bool full, std::uint64_t token, std::uint64_t revision, const model::Publication&, std::uint64_t now, bool reported = false);
     configuration::Authority authority_;
     configuration::Policy policy_;
@@ -54,5 +58,7 @@ private:
     ProducerLease lease_;
     std::unique_ptr<model::Store> store_;
     std::unique_ptr<protocol::TelemetryBinding> wire_binding_;
+    std::optional<model::Tick> measurement_last_;
+    bool measurement_fault_ = false;
 };
 }

@@ -3,12 +3,14 @@
 namespace syspane::configuration {
 using protocol::Error;
 namespace {
-protocol::Handshake server_hello(const std::string& epoch, bool inventory) {
+protocol::Handshake server_hello(const std::string& epoch, const std::optional<InventorySource>& source) {
     protocol::Handshake hello{1, protocol::frame_limit, "console", epoch,
         {{"command", "0.2.0"}, {"command-result", "0.1.0"}}, {}, {"settings.preview", "result.get", "cancel"}};
-    if (inventory) {
-        hello.documents.insert({{"telemetry","0.1.0"},{"snapshot","0.1.0"},{"observation","0.1.0"}});
+    if (source) {
+        const auto& version = source->document_version;
+        hello.documents.insert({{"telemetry",version},{"snapshot",version},{"observation",version}});
         hello.optional.insert("telemetry.snapshot");
+        if (version=="0.2.0") hello.optional.insert("telemetry.measured-time");
     }
     return hello;
 }
@@ -29,9 +31,10 @@ Sessions::Sessions(std::string epoch, std::uint64_t revision, Policy policy, std
     : epoch_(std::move(epoch)), revision_(revision), policy_(std::move(policy)), source_(std::move(source)) {
     if (!protocol::identifier(epoch_)) throw Error("session.epoch");
     if (source_) {
-        protocol::validate_telemetry_binding({{1,protocol::frame_limit,{{"telemetry","0.1.0"},{"snapshot","0.1.0"},{"observation","0.1.0"}},
-            {"telemetry.snapshot"}},"validation",epoch_,source_->producer,"validation",source_->channel,source_->classification,
-            policy_.revision,protocol::TelemetryDirection::consumer_to_producer});
+        const auto hello=server_hello(epoch_,source_);
+        protocol::validate_telemetry_binding({{1,protocol::frame_limit,hello.documents,hello.optional},
+            "validation",epoch_,source_->producer,"validation",source_->channel,source_->classification,
+            policy_.revision,protocol::TelemetryDirection::consumer_to_producer,source_->document_version,source_->clock_id,source_->clock_scope});
     }
 }
 void Sessions::open(const std::string& id, std::string principal, Authority authority, std::uint64_t now) {
@@ -81,7 +84,7 @@ void Sessions::dispatch(Connection& c, const protocol::Message& message, std::ui
     if (!c.negotiated) {
         if (message.type != "hello") throw Error("session.expected_hello");
         const auto client = protocol::handshake(message.body);
-        c.selection = protocol::negotiate(server_hello(epoch_,source_.has_value()), client, c.authority.role_grants);
+        c.selection = protocol::negotiate(server_hello(epoch_,source_), client, c.authority.role_grants);
         c.authority.role = client.role;
         const bool has_commands = c.selection.documents.count({"command", "0.2.0"}) && c.selection.documents.count({"command-result", "0.1.0"});
         if (!has_commands) {
@@ -90,10 +93,12 @@ void Sessions::dispatch(Connection& c, const protocol::Message& message, std::ui
                 c.selection.features.erase(feature);
             }
         }
-        if (!c.selection.documents.count({"telemetry","0.1.0"}) || !c.selection.documents.count({"snapshot","0.1.0"}) ||
-            !c.selection.documents.count({"observation","0.1.0"})) {
-            if (client.required.count("telemetry.snapshot")) throw Error("handshake.document_version");
-            c.selection.features.erase("telemetry.snapshot");
+        const auto version = source_ ? source_->document_version : "0.1.0";
+        if (!c.selection.documents.count({"telemetry",version}) || !c.selection.documents.count({"snapshot",version}) ||
+            !c.selection.documents.count({"observation",version}) ||
+            (version=="0.2.0" && !c.selection.features.count("telemetry.measured-time"))) {
+            if (client.required.count("telemetry.snapshot") || client.required.count("telemetry.measured-time")) throw Error("handshake.document_version");
+            c.selection.features.erase("telemetry.snapshot"); c.selection.features.erase("telemetry.measured-time");
         }
         c.negotiated = true;
         queue(c, "welcome", welcome(epoch_, c.selection));
@@ -201,7 +206,8 @@ bool Sessions::may_subscribe(const Connection& c) const {
         permits(c.authority,policy_,source_->channel,source_->classification) && permits(c.authority,policy_,"accessibility",source_->classification);
 }
 protocol::TelemetryBinding Sessions::binding(const Connection& c, const std::string& subscription, protocol::TelemetryDirection direction) const {
-    return {c.selection,c.id,epoch_,source_->producer,subscription,source_->channel,source_->classification,policy_.revision,direction};
+    return {c.selection,c.id,epoch_,source_->producer,subscription,source_->channel,source_->classification,policy_.revision,direction,
+            source_->document_version,source_->clock_id,source_->clock_scope};
 }
 void Sessions::subscribe(Connection& c, const protocol::Message& message, std::uint64_t now) {
     if (!source_ || !c.selection.features.count("telemetry.snapshot")) throw Error("feature.unsupported");
@@ -243,8 +249,9 @@ bool Sessions::offer(const std::string& id, std::uint64_t ticket, const std::str
     if (!c.ticket) return false;
     if (!may_subscribe(c)) { shut(c,"policy.denied"); return false; }
     try {
-        Json body{{"schema_version","0.1.0"},{"subscription_id",c.subscription_id},{"producer_id",source_->producer},
+        Json body{{"schema_version",source_->document_version},{"subscription_id",c.subscription_id},{"producer_id",source_->producer},
             {"policy_revision",std::to_string(policy_.revision)},{"record_id",record},{"snapshot",snapshot}};
+        if (source_->document_version=="0.2.0") body["clock_id"]=source_->clock_id;
         if (base) body["base_generation"] = std::to_string(*base);
         const std::string type = base ? "delta" : "snapshot";
         protocol::Message message{type,id,epoch_,body.dump(),body};

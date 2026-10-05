@@ -20,6 +20,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [metric-descriptor.schema.json](metric-descriptor.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [Network domain record and schema extension process](network-domain.md) — Make multiple addresses and assessments explicit without flattening provenance.
 - [network-interface.schema.json](network-interface.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
+- [observation-v0.2.schema.json](observation-v0.2.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [observation.schema.json](observation.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [policy.schema.json](policy.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [preset.schema.json](preset.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
@@ -28,9 +29,11 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [scene.schema.json](scene.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [Extension SDK and embedding boundaries](sdk.md) — Make extensions useful without making the trusted application an arbitrary code host.
 - [settings.schema.json](settings.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
+- [snapshot-v0.2.schema.json](snapshot-v0.2.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [snapshot.schema.json](snapshot.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [syspane-api.h](syspane-api.h) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [target-profile.schema.json](target-profile.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
+- [telemetry-v0.2.schema.json](telemetry-v0.2.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [telemetry.schema.json](telemetry.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [theme.schema.json](theme.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [Local transport and request lifecycle](transport.md) — Define experimental framing, negotiation and bounded result retrieval.

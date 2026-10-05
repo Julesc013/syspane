@@ -22,6 +22,7 @@ void clock_event(n::Stream& stream,const char* phase) {
         {"nanoseconds",std::to_string(clock.nanoseconds)},{"representation_unit_ns",clock.representation_unit_ns}});
 }
 bool clock_scenario(const std::string& scenario) { return scenario=="clock-roundtrip" || scenario=="clock-peer-exit"; }
+bool measured_scenario(const std::string& scenario) { return scenario=="measured-fresh" || scenario=="measured-delayed" || scenario=="measured-future"; }
 void observe_clock_exit(n::Stream& stream) {
     const auto started=n::monotonic_ms();
     for (;;) {
@@ -44,10 +45,14 @@ c::Policy policy(std::uint64_t revision=7) {
     c::Policy value; value.available=true; value.revision=revision;
     value.disclosure[{"desktop","desktop"}]={"operational"}; value.disclosure[{"desktop","accessibility"}]={"operational"}; return value;
 }
-Json hello() { return {{"type","hello"},{"body",{{"wire_major",0},{"wire_minor",1},{"role","desktop"},{"producer_epoch","probe:client"},
-    {"max_frame_bytes",p::frame_limit},{"document_versions",Json::array({{{"document","telemetry"},{"version","0.1.0"}},
-    {{"document","snapshot"},{"version","0.1.0"}},{{"document","observation"},{"version","0.1.0"}}})},
-    {"required_features",{"telemetry.snapshot"}},{"optional_features",Json::array()}}}}; }
+Json hello(const std::string& version="0.1.0") {
+    Json result{{"type","hello"},{"body",{{"wire_major",0},{"wire_minor",1},{"role","desktop"},{"producer_epoch","probe:client"},
+    {"max_frame_bytes",p::frame_limit},{"document_versions",Json::array({{{"document","telemetry"},{"version",version}},
+    {{"document","snapshot"},{"version",version}},{{"document","observation"},{"version",version}}})},
+    {"required_features",{"telemetry.snapshot"}},{"optional_features",Json::array()}}}};
+    if (version=="0.2.0") result["body"]["required_features"].push_back("telemetry.measured-time");
+    return result;
+}
 Json read_fixture(const std::string& root) {
     std::ifstream stream(root+"/valid/snapshot.json",std::ios::binary); need(stream.good(),"probe.fixture");
     const std::string bytes{std::istreambuf_iterator<char>(stream),std::istreambuf_iterator<char>()};
@@ -61,17 +66,20 @@ Json state(Json fixture,std::uint64_t generation) {
 }
 class Client {
 public:
-    explicit Client(n::Stream stream,bool clock=false):stream_(std::move(stream)) {
+    explicit Client(n::Stream stream,bool clock=false,bool measured=false):stream_(std::move(stream)),version_(measured?"0.2.0":"0.1.0") {
         emit({{"event","authenticated"},{"peer_pid",stream_.peer().process_id},{"user_session_verified",true}});
         if (clock) clock_event(stream_,"before");
-        auto bytes=p::frame(hello().dump()); stream_.write(std::string_view(bytes).substr(0,1));
+        if (measured) local_clock_=stream_.measurement_clock();
+        auto bytes=p::frame(hello(version_).dump()); stream_.write(std::string_view(bytes).substr(0,1));
         std::this_thread::sleep_for(std::chrono::milliseconds(20)); stream_.write(std::string_view(bytes).substr(1));
         auto welcome=p::decode(next()); need(welcome.type=="welcome","probe.welcome");
         if (clock) clock_event(stream_,"after");
-        selected_=p::negotiate(p::handshake(hello()["body"]),p::handshake(welcome.body),{"console"});
+        selected_=p::negotiate(p::handshake(hello(version_)["body"]),p::handshake(welcome.body),{"console"});
         id_=welcome.connection_id; epoch_=welcome.producer_epoch; decoder_.restrict_limit(selected_.max_frame_bytes);
     }
-    p::TelemetryBinding binding() const { return {selected_,id_,epoch_,"producer:1","S","desktop","operational",7,p::TelemetryDirection::producer_to_consumer}; }
+    p::TelemetryBinding binding() const { return {selected_,id_,epoch_,"producer:1","S","desktop","operational",7,p::TelemetryDirection::producer_to_consumer,
+        version_,local_clock_?local_clock_->clock_id:"",local_clock_?local_clock_->local_scope:""}; }
+    syspane::model::Tick tick() { const auto clock=stream_.measurement_clock(); return {epoch_,clock.nanoseconds,clock.clock_id,clock.local_scope}; }
     std::string next() {
         const auto start=n::monotonic_ms(); std::array<char,4096> buffer{};
         while (pending_.empty()) {
@@ -88,12 +96,18 @@ public:
     void send(const char* type,Json body) {
         stream_.write(p::frame(Json{{"type",type},{"connection_id",id_},{"producer_epoch",epoch_},{"body",std::move(body)}}.dump(),selected_.max_frame_bytes));
     }
-    void subscribe(bool wrong=false) { send("subscribe",{{"schema_version","0.1.0"},{"subscription_id","S"},{"producer_id",wrong?"wrong":"producer:1"},
-        {"policy_revision","7"},{"channel","desktop"},{"classification","operational"}}); }
+    void subscribe(bool wrong=false) {
+        Json body{{"schema_version",version_},{"subscription_id","S"},{"producer_id",wrong?"wrong":"producer:1"},
+            {"policy_revision","7"},{"channel","desktop"},{"classification","operational"}};
+        if (local_clock_) body["clock_id"]=local_clock_->clock_id;
+        send("subscribe",std::move(body));
+    }
     void beat(unsigned seq) { send("heartbeat",{{"sequence",std::to_string(seq)}}); }
 private:
     n::Stream stream_; p::Framer decoder_; std::deque<std::string> pending_;
     p::Negotiated selected_{}; std::string id_,epoch_;
+    std::string version_;
+    std::optional<n::MeasurementClock> local_clock_;
 };
 void projection(r::DataView& view,const char* event) {
     Json result{{"event",event},{"payload",false}};
@@ -107,11 +121,22 @@ void projection(r::DataView& view,const char* event) {
 void client(const std::string& endpoint,const std::string& scenario,std::uint64_t expected) {
     r::DataView view({true,"desktop",{"desktop"}},policy(),"desktop","operational",{{"network.media","none",syspane::model::ValueKind::string}});
     for (unsigned ordinal=0;ordinal<(scenario=="journey"?2U:1U);++ordinal) {
-        Client client(n::Stream::connect(endpoint,expected),clock_scenario(scenario));
+        const bool measured=measured_scenario(scenario);
+        Client client(n::Stream::connect(endpoint,expected),clock_scenario(scenario),measured);
         const auto attached=view.attach_wire(client.binding(),n::monotonic_ms()); need(attached.code==r::DataCode::accepted,"probe.attach");
         client.subscribe(scenario=="wrong-producer");
+        if (scenario=="measured-future") {
+            const auto bytes=client.next();
+            need(view.receive(attached.token,7,bytes,n::monotonic_ms(),client.tick()).code==r::DataCode::invalid,"probe.future_rejection");
+            const auto status=view.status(n::monotonic_ms());
+            need(!status.payload_available && !status.alive,"probe.future_state");
+            emit({{"event","measurement_rejected"},{"payload",status.payload_available},{"alive",status.alive}});
+            client.send("shutdown",{{"reason","normal"}}); return;
+        }
         const auto receive=[&] {
-            const auto bytes=client.next(); const auto result=view.receive(attached.token,7,bytes,n::monotonic_ms());
+            const auto bytes=client.next();
+            const auto tick=measured?std::optional<syspane::model::Tick>(client.tick()):std::nullopt;
+            const auto result=view.receive(attached.token,7,bytes,n::monotonic_ms(),tick);
             need(result.code==r::DataCode::accepted || result.code==r::DataCode::duplicate,"probe.import"); projection(view,"imported");
         };
         if (scenario=="wrong-producer") {
@@ -123,6 +148,17 @@ void client(const std::string& endpoint,const std::string& scenario,std::uint64_
             need(p::decode(client.next()).body["reason"]=="queue_overflow","probe.gap");
             view.gap(attached.token,7,n::monotonic_ms()); client.subscribe(); receive();
         } else receive();
+        if (measured) {
+            const auto ttl=scenario=="measured-delayed"?100000000ULL:1000000000ULL;
+            need(view.project_measured(n::monotonic_ms(),client.tick(),[&](const auto& snapshot,const auto& lease,const auto& now) {
+                const auto& observation=snapshot.observations.at(0); need(observation.measured_at.has_value(),"probe.measurement_missing");
+                const auto freshness=syspane::model::freshness_at(observation,now,ttl);
+                need(lease.presentation==r::Presentation::active,"probe.measurement_lease");
+                emit({{"event","measurement"},{"clock_id",now.clock_id},{"scope",now.clock_scope},
+                    {"stamp",std::to_string(observation.measured_at->nanoseconds)},{"now",std::to_string(now.nanoseconds)},
+                    {"ttl",std::to_string(ttl)},{"current",freshness==syspane::model::Freshness::current}});
+            }),"probe.measurement_projection");
+        }
         if (scenario=="expiry") {
             try { client.next(); throw p::Error("probe.unexpected_reply"); }
             catch (const p::Error& e) { need(std::string(e.what())=="probe.eof","probe.expected_eof"); }
@@ -144,10 +180,19 @@ void client(const std::string& endpoint,const std::string& scenario,std::uint64_
 void server(const std::string& endpoint,const std::string& scenario,std::uint64_t expected,const std::string& root) {
     const auto fixture=read_fixture(root); n::Listener listener(endpoint);
     emit({{"event","ready"},{"access_controls_verified",listener.access_controls_verified()},{"unprivileged_context",true}});
-    c::Sessions sessions("fixture:epoch-1",0,policy(),c::InventorySource{"producer:1","desktop","operational"});
+    std::optional<c::Sessions> owner;
     std::uint64_t generation=1,record=0;
     for (unsigned ordinal=0;ordinal<(scenario=="journey"?2U:1U);++ordinal) {
         auto stream=listener.accept(expected); emit({{"event","authenticated"},{"peer_pid",stream.peer().process_id},{"user_session_verified",true}});
+        if (!owner) {
+            c::TelemetrySource source{"producer:1","desktop","operational"};
+            if (measured_scenario(scenario)) {
+                const auto clock=stream.measurement_clock(); source.document_version="0.2.0";
+                source.clock_id=clock.clock_id; source.clock_scope=clock.local_scope;
+            }
+            owner.emplace("fixture:epoch-1",0,policy(),std::move(source));
+        }
+        auto& sessions=*owner;
         const auto id="C"+std::to_string(ordinal); sessions.open(id,stream.peer().principal,{true,"desktop",{"desktop"}},stream.connected_ms());
         p::Framer decoder; std::array<char,4096> buffer{}; std::uint64_t offered=0; bool advanced=false,overflowed=false; std::string reason;
         const auto started=n::monotonic_ms();
@@ -162,7 +207,20 @@ void server(const std::string& endpoint,const std::string& scenario,std::uint64_
                     sessions.receive(id,payload,n::monotonic_ms()); decoder.restrict_limit(sessions.frame_bound(id));
                     const auto sub=sessions.subscription(id); if (!sub) return;
                     const auto offer=[&](std::optional<std::uint64_t> base) {
-                        return sessions.offer(id,sub->ticket,"native:"+std::to_string(++record),state(fixture,generation),base,n::monotonic_ms());
+                        auto snapshot=state(fixture,generation);
+                        if (measured_scenario(scenario)) {
+                            const auto clock=stream.measurement_clock();
+                            const auto stamp=clock.nanoseconds+(scenario=="measured-future"?60000000000ULL:0);
+                            snapshot["schema_version"]="0.2.0";
+                            for (auto& observation : snapshot["observations"]) {
+                                observation["schema_version"]="0.2.0";
+                                observation["measured_at"]={{"clock_id",clock.clock_id},{"nanoseconds",std::to_string(stamp)}};
+                            }
+                            emit({{"event","producer_measurement"},{"clock_id",clock.clock_id},{"stamp",std::to_string(stamp)},
+                                {"sampled",std::to_string(clock.nanoseconds)}});
+                            if (scenario=="measured-delayed") std::this_thread::sleep_for(std::chrono::milliseconds(200));
+                        }
+                        return sessions.offer(id,sub->ticket,"native:"+std::to_string(++record),snapshot,base,n::monotonic_ms());
                     };
                     if (sub->ticket!=offered) {
                         if (offered) ++generation;
@@ -194,7 +252,7 @@ int main(int argc,char** argv) {
         need(n::unprivileged_context(),"probe.privileged_context");
         const auto expected=p::decimal(argv[4]); need(expected.has_value(),"probe.pid");
         const std::string role=argv[1],scenario=argv[3];
-        need(scenario=="journey" || scenario=="overflow" || scenario=="revoke" || scenario=="expiry" || scenario=="wrong-producer" || clock_scenario(scenario),"probe.scenario");
+        need(scenario=="journey" || scenario=="overflow" || scenario=="revoke" || scenario=="expiry" || scenario=="wrong-producer" || clock_scenario(scenario) || measured_scenario(scenario),"probe.scenario");
         if (role=="server") server(argv[2],scenario,*expected,argv[5]);
         else if (role=="client") client(argv[2],scenario,*expected); else return 2;
         return 0;

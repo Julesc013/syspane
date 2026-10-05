@@ -518,6 +518,83 @@
       "expected": "invalid",
       "semantic": true,
       "reason": "Delivery generation/revision/epoch semantic constraint."
+    },
+    {
+      "path": "fixtures/valid/observation-measured-v0.2.json",
+      "schema": "observation-v0.2",
+      "expected": "valid",
+      "semantic": true,
+      "reason": ""
+    },
+    {
+      "path": "fixtures/valid/snapshot-measured-v0.2.json",
+      "schema": "snapshot-v0.2",
+      "expected": "valid",
+      "semantic": true,
+      "reason": ""
+    },
+    {
+      "path": "fixtures/valid/telemetry-subscribe-v0.2.json",
+      "schema": "telemetry-v0.2",
+      "expected": "valid",
+      "semantic": true,
+      "reason": ""
+    },
+    {
+      "path": "fixtures/valid/telemetry-unsubscribe-v0.2.json",
+      "schema": "telemetry-v0.2",
+      "expected": "valid",
+      "semantic": true,
+      "reason": ""
+    },
+    {
+      "path": "fixtures/valid/telemetry-snapshot-v0.2.json",
+      "schema": "telemetry-v0.2",
+      "expected": "valid",
+      "semantic": true,
+      "reason": ""
+    },
+    {
+      "path": "fixtures/valid/telemetry-delta-v0.2.json",
+      "schema": "telemetry-v0.2",
+      "expected": "valid",
+      "semantic": true,
+      "reason": ""
+    },
+    {
+      "path": "fixtures/invalid/measured-overflow.json",
+      "schema": "telemetry-v0.2",
+      "expected": "invalid",
+      "semantic": true,
+      "reason": "overflow"
+    },
+    {
+      "path": "fixtures/invalid/measured-null-value.json",
+      "schema": "telemetry-v0.2",
+      "expected": "invalid",
+      "semantic": true,
+      "reason": "null-value"
+    },
+    {
+      "path": "fixtures/invalid/measured-wrong-clock.json",
+      "schema": "telemetry-v0.2",
+      "expected": "invalid",
+      "semantic": true,
+      "reason": "wrong-clock"
+    },
+    {
+      "path": "fixtures/invalid/measured-mixed-version.json",
+      "schema": "telemetry-v0.2",
+      "expected": "invalid",
+      "semantic": true,
+      "reason": "mixed-version"
+    },
+    {
+      "path": "fixtures/invalid/measured-missing-tick.json",
+      "schema": "telemetry-v0.2",
+      "expected": "invalid",
+      "semantic": true,
+      "reason": "missing-tick"
     }
   ]
 }

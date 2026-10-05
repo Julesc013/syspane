@@ -206,7 +206,7 @@ MeasurementClock Stream::measurement_clock() {
         require_peer();
         if (impl_->measurement_last && count < *impl_->measurement_last) throw IpcError("clock.regressed");
         impl_->measurement_last = count;
-        return {"windows.interrupt-precise", count, 100};
+        return {"windows.interrupt-precise", count, 100, "windows:process:"+std::to_string(::GetCurrentProcessId())};
     } catch (...) { impl_->measurement_fault = true; throw; }
 }
 Stream Stream::connect(const std::string& endpoint, std::uint64_t expected) {

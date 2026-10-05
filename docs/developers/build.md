@@ -1,6 +1,14 @@
 # Developer setup and checks
 
-The latest [native clock checkpoint](../../spec/delivery/measurement-clock-handoff.md)
+The latest [measured telemetry checkpoint](../../spec/delivery/measured-time-handoff.md)
+passes 88 Windows, 89 Linux and 81 historical-toolset host checks. Five
+`measured.MEASURED-*` families run on each profile; `native.NATIVE-MEASURED` exercises
+fresh, delayed and future synthetic measurements on modern Windows/Linux. Both
+recorders accept `--measured-time` with their existing profile/build/smoke/output
+arguments. The native probe explicitly negotiates 0.2; original inventory cases
+continue to use 0.1. Real collectors, suspend and namespace migration are unqualified.
+
+The preceding [native clock checkpoint](../../spec/delivery/measurement-clock-handoff.md)
 passes 82 Windows, 83 Linux and 76 historical-toolset host checks. Modern suites
 add `native.NATIVE-CLOCK`: two separate-process causal-bracket/peer-exit cases.
 Record complete modern suites using `record_protocol.py --measurement-clock` with

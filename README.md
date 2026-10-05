@@ -32,7 +32,9 @@ A [native subscription probe](spec/delivery/subscriptions-handoff.md) now exchan
 synthetic inventory with demand expiry, policy revocation and reconnect recovery.
 The [native clock investigation](spec/delivery/measurement-clock-handoff.md) verifies
 comparable readings across live local processes and rejects sampling after peer exit.
-Real collectors, measured-field clock mapping and product subscriptions remain pending.
+The [measured telemetry path](spec/delivery/measured-time-handoff.md) now preserves
+sample age through delay, replay and reconnect, with explicit clock scope and TTL checks.
+Real collectors, product subscriptions and native suspend qualification remain pending.
 An external pixel/time oracle is calibrated against live, hidden, frozen and
 obstructed synthetic X11 surfaces. A real Openbox/PCManFM Show Desktop experiment
 now exposes the basic X11 candidate's placement failure: above the desktop it

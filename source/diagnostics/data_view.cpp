@@ -69,6 +69,11 @@ DataAttachment DataView::attach_wire(const protocol::TelemetryBinding& binding, 
         binding.direction != protocol::TelemetryDirection::producer_to_consumer) return {DataCode::invalid};
     try {
         protocol::validate_telemetry_binding(binding);
+        if (binding.document_version=="0.2.0" && measurement_fault_) return {DataCode::clock_fault};
+        const auto old = store_ ? store_->snapshot() : nullptr;
+        if (old && !old->reported_document.empty() && old->producer==binding.producer && old->epoch==binding.epoch &&
+            std::tie(old->reported_version,old->clock_id,old->clock_scope) !=
+            std::tie(binding.document_version,binding.clock_id,binding.clock_scope)) return {DataCode::invalid};
         auto prepared = std::make_unique<protocol::TelemetryBinding>(binding);
         const auto attached = attach(binding.producer,binding.epoch,now);
         if (attached.code == DataCode::accepted) wire_binding_.swap(prepared);
@@ -76,16 +81,24 @@ DataAttachment DataView::attach_wire(const protocol::TelemetryBinding& binding, 
     } catch (const protocol::Error&) { return {DataCode::invalid}; }
     catch (const std::bad_alloc&) { return {DataCode::capacity}; }
 }
-DataResult DataView::receive(std::uint64_t token, std::uint64_t revision, std::string_view payload, std::uint64_t now) {
+DataResult DataView::receive(std::uint64_t token, std::uint64_t revision, std::string_view payload, std::uint64_t now,
+                             std::optional<model::Tick> measurement_now) {
     const auto checked = check(token,revision,now);
     if (checked != DataCode::accepted) return {checked};
     if (!wire_binding_) { lease_.gap(token_,now); return {DataCode::invalid,model::Code::invalid_mode}; }
     try {
+        const auto clock = observe_clock(measurement_now,now);
+        if (clock != DataCode::accepted) return {clock};
         const auto message = protocol::decode_telemetry(payload,*wire_binding_);
+        if (measurement_now) for (const auto& observation : message.body["snapshot"]["observations"]) {
+            if (!observation["measured_at"].is_null() &&
+                *protocol::decimal(observation["measured_at"]["nanoseconds"].get_ref<const std::string&>()) > measurement_now->nanoseconds)
+                throw protocol::Error("telemetry.future_measurement");
+        }
         if (message.body["snapshot"]["completeness"] != "complete") {
             lease_.gap(token_,now); return {DataCode::snapshot_required};
         }
-        const auto candidate = detail::reported_state(message);
+        const auto candidate = detail::reported_state(message,*wire_binding_);
         return publish(message.type == "snapshot",token,revision,candidate,now,true);
     } catch (const protocol::Error& error) {
         if (std::string_view(error.what()) == "telemetry.capacity") {
@@ -95,6 +108,19 @@ DataResult DataView::receive(std::uint64_t token, std::uint64_t revision, std::s
     } catch (const std::bad_alloc&) {
         lease_.gap(token_,now); return {DataCode::capacity,model::Code::capacity};
     }
+}
+DataCode DataView::observe_clock(const std::optional<model::Tick>& tick, std::uint64_t now) {
+    if (!wire_binding_ || wire_binding_->document_version!="0.2.0") {
+        if (!tick) return DataCode::accepted;
+        lease_.disconnect(token_,now); return DataCode::invalid;
+    }
+    if (measurement_fault_ || !tick || tick->epoch!=epoch_ || tick->clock_id!=wire_binding_->clock_id ||
+        tick->clock_scope!=wire_binding_->clock_scope || (measurement_last_ &&
+        (tick->clock_id!=measurement_last_->clock_id || tick->clock_scope!=measurement_last_->clock_scope ||
+         tick->nanoseconds<measurement_last_->nanoseconds))) {
+        measurement_fault_=true; lease_.disconnect(token_,now); return DataCode::clock_fault;
+    }
+    measurement_last_=tick; return DataCode::accepted;
 }
 DataCode DataView::check(std::uint64_t token, std::uint64_t revision, std::uint64_t now) {
     require_owner();
@@ -191,5 +217,12 @@ bool DataView::project(std::uint64_t now, const std::function<void(const model::
     } guard(borrowed_);
     borrow(*snapshot, lease);
     return true;
+}
+bool DataView::project_measured(std::uint64_t now, const model::Tick& measurement_now,
+    const std::function<void(const model::Snapshot&, const LeaseView&, const model::Tick&)>& borrow) {
+    require_owner();
+    if (!wire_binding_ || wire_binding_->document_version!="0.2.0" || !permitted() || !store_ || !store_->snapshot()) return false;
+    if (observe_clock(measurement_now,now)!=DataCode::accepted) return false;
+    return project(now,[&](const model::Snapshot& snapshot,const LeaseView& lease) { borrow(snapshot,lease,measurement_now); });
 }
 }

@@ -1,6 +1,13 @@
 # Foundation development profiles
 
-Current revisions are Windows x64 14, Linux x64 15 and historical x86 7. The
+Current revisions are Windows x64 15, Linux x64 16 and historical x86 8. The
+[measured telemetry checkpoint](../../spec/delivery/measured-time-handoff.md) passes
+88/89 modern and 81 historical host checks. The historical audit now covers ten
+executables with unchanged permitted imports; its native adapters remain disabled.
+Five portable measured-time families and three modern native delivery cases add
+clock-scope, age/replay and exact-version evidence without qualifying a real collector.
+
+Earlier revisions were Windows x64 14, Linux x64 15 and historical x86 7. The
 [native clock checkpoint](../../spec/delivery/measurement-clock-handoff.md) passes
 82/83 modern and 76 historical host checks. Windows lock revision 2 additionally
 pins the installed `libmincore.a` used for `QueryInterruptTimePrecise`; the first

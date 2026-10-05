@@ -119,5 +119,9 @@ The [W-25 telemetry document boundary](../delivery/packages/w-25-telemetry-wire.
 now defines versioned subscribe/unsubscribe and full replacement snapshot/delta
 shapes, bounded native decoding and exact body replay preservation. The
 [telemetry schema](telemetry.schema.json) reuses snapshot/observation 0.1.
-Native subscription/complete-state import gates remain open; preview and health
-sessions still do not advertise this feature.
+The bounded subscription/complete-state adapter is now exercised by native
+inventory probes; preview-only and health compositions keep their feature set.
+The [measured-time extension](../delivery/packages/w-25-measured-time.md) explicitly
+selects the 0.2 triple and qualified clock domain without changing wire framing,
+queue limits or exact body replay identity. Product demand/collector/policy
+integration and native qualification remain separate gates.

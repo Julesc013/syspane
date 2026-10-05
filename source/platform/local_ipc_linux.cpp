@@ -179,8 +179,12 @@ MeasurementClock Stream::measurement_clock() {
         if (!measurement_peer_alive(impl_->peer_handle.value)) throw IpcError("clock.peer_exited");
         if (impl_->measurement_last && count < *impl_->measurement_last) throw IpcError("clock.regressed");
         if (impl_->measurement_namespace.value < 0) impl_->measurement_namespace = std::move(own);
+        struct stat provenance{};
+        if (::fstat(impl_->measurement_namespace.value,&provenance)) throw IpcError("clock.namespace_unavailable");
+        const auto scope = "linux:process:"+std::to_string(::getpid())+":time:"+
+            std::to_string(provenance.st_dev)+":"+std::to_string(provenance.st_ino);
         impl_->measurement_last = count;
-        return {"linux.boottime", count, 1};
+        return {"linux.boottime", count, 1, scope};
     } catch (...) {
         impl_->measurement_fault = true;
         // Prefer the held peer's terminal fact if its proc entries disappeared

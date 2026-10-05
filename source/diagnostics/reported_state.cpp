@@ -49,7 +49,7 @@ model::Value value(const Json& v) {
     return integer(data);
 }
 }
-model::Publication reported_state(const protocol::Message& message) {
+model::Publication reported_state(const protocol::Message& message, const protocol::TelemetryBinding& binding) {
     const auto& body=message.body; const auto& doc=body["snapshot"];
     model::Publication result;
     result.record_id=body["record_id"].get<std::string>(); result.replay_bytes=message.body_bytes;
@@ -57,6 +57,7 @@ model::Publication reported_state(const protocol::Message& message) {
     auto& s=result.next;
     s.producer=body["producer_id"].get<std::string>(); s.epoch=message.producer_epoch; s.generation=integer(doc["generation"]);
     s.captured_at=utc(doc["captured_at"]); s.reported_document=doc.dump();
+    s.reported_version=binding.document_version; s.clock_id=binding.clock_id; s.clock_scope=binding.clock_scope;
     for (const auto& e : doc["entities"]) s.entities.push_back({e["id"].get<std::string>(),e["kind"].get<std::string>(),
         e["display_name"].get<std::string>(),integer(e["generation"]),e["identity"].get<std::map<std::string,std::string>>()});
     for (const auto& src : doc["sources"]) s.sources.push_back({src["id"].get<std::string>(),src["kind"].get<std::string>(),src["scope"].get<std::string>()});
@@ -76,6 +77,8 @@ model::Publication reported_state(const protocol::Message& message) {
             const auto& e=input["error"]; o.error=model::Error{e["code"].get<std::string>(),e["message"].get<std::string>(),e["retryable"].get<bool>()};
         }
         o.generation=integer(input["generation"]);
+        if (binding.document_version=="0.2.0" && !input["measured_at"].is_null())
+            o.measured_at=model::Tick{s.epoch,integer(input["measured_at"]["nanoseconds"]),binding.clock_id,binding.clock_scope};
         s.observations.push_back(std::move(o));
     }
     return result;

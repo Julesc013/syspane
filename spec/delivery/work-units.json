@@ -698,7 +698,8 @@
         "SP-W25-TELEMETRY-WIRE",
         "SP-W25-STATE-IMPORT",
         "SP-W25-SUBSCRIPTIONS",
-        "SP-W25-MEASUREMENT-CLOCK"
+        "SP-W25-MEASUREMENT-CLOCK",
+        "SP-W25-MEASURED-TIME"
       ],
       "acceptance_tests": [
         "T-RECOVERY",
@@ -716,9 +717,9 @@
       "status": "in_progress",
       "authority_class": "development",
       "execution_grant": "user:foundation-native-campaign-2026-10-05",
-      "notes": "Existing guards, supervision, diagnostics, preservation, state import and bounded native inventory subscriptions remain implemented. The native clock investigation adds authenticated causal brackets and held-peer exit rejection. Current suites: 82 Windows, 83 Linux and 76 historical-toolset host checks. Measured-time documents/freshness oracles, suspend/namespace qualification, product demand/policy distribution, real collector/renderer recovery, retention, installed policy/erasure and visible/editor recovery remain required.",
+      "notes": "The existing native inventory/recovery path now supports an explicitly negotiated measured-time 0.2 triple with consumer-local clock scope, exact TTL/rate checks, replay/high-water history, reconnect and policy erasure. Current suites: 88 Windows, 89 Linux and 81 historical-toolset host checks, including native fresh/delayed/future synthetic delivery. Actual collectors/renderers, product demand/policy, retention, suspend/namespace/installed-policy qualification and visible/editor recovery remain required.",
       "package": "delivery/packages/w-25-recovery.md",
-      "evidence": "delivery/measurement-clock-handoff.md"
+      "evidence": "delivery/measured-time-handoff.md"
     },
     {
       "id": "W-26",

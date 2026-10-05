@@ -30,7 +30,8 @@ struct UtcTime {
 struct Tick {
     std::string epoch;
     std::uint64_t nanoseconds = 0;
-    bool operator==(const Tick& b) const { return std::tie(epoch, nanoseconds) == std::tie(b.epoch, b.nanoseconds); }
+    std::string clock_id = {}, clock_scope = {};
+    bool operator==(const Tick& b) const { return std::tie(epoch, nanoseconds, clock_id, clock_scope) == std::tie(b.epoch, b.nanoseconds, b.clock_id, b.clock_scope); }
 };
 
 struct Error {
@@ -94,6 +95,7 @@ struct Snapshot {
     std::optional<UtcTime> captured_at = {};
     // Adapter-validated complete state, opaque to the JSON-independent model.
     std::string reported_document = {};
+    std::string reported_version = {}, clock_id = {}, clock_scope = {};
     bool operator==(const Snapshot& b) const;
 };
 
@@ -154,6 +156,7 @@ private:
     std::shared_ptr<const Snapshot> current_;
     std::map<std::string, std::shared_ptr<const Publication>> records_;
     std::map<std::string, std::vector<Observation>> retired_;
+    std::map<std::tuple<std::string, std::string, std::string>, std::uint64_t> measurement_highwater_;
     std::size_t retained_bytes_ = 0;
     std::optional<bool> reported_;
 };

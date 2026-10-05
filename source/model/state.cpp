@@ -26,7 +26,7 @@ auto key(const Observation& o) { return std::tie(o.entity_id, o.source_id, o.fie
 std::size_t observation_bytes(const Observation& o) {
     return sizeof(o) + o.entity_id.size() + o.field.size() + o.source_id.size() + o.unit.size() +
         (std::holds_alternative<std::string>(o.value) ? std::get<std::string>(o.value).size() : 0) +
-        (o.measured_at ? o.measured_at->epoch.size() : 0) +
+        (o.measured_at ? o.measured_at->epoch.size() + o.measured_at->clock_id.size() + o.measured_at->clock_scope.size() : 0) +
         (o.error ? o.error->code.size() + o.error->message.size() : 0) + o.attempted_at.subnanoseconds.size() +
         (o.observed_at ? o.observed_at->subnanoseconds.size() : 0);
 }
@@ -35,6 +35,7 @@ std::optional<std::size_t> accounted_bytes(const Publication& p, std::size_t lim
     const auto add = [&](std::size_t n) { if (n > limit - size) return false; size += n; return true; };
     if (!add(sizeof(p)) || !add(p.record_id.size()) || !add(p.next.producer.size()) || !add(p.next.epoch.size())) return {};
     if (!add(p.replay_bytes.size()) || !add(p.next.reported_document.size()) ||
+        !add(p.next.reported_version.size()) || !add(p.next.clock_id.size()) || !add(p.next.clock_scope.size()) ||
         (p.next.captured_at && !add(p.next.captured_at->subnanoseconds.size()))) return {};
     for (const auto& e : p.next.entities) if (!add(sizeof(e)) || !add(e.id.size()) || !add(e.kind.size()) || !add(e.display_name.size())) return {};
     for (const auto& e : p.next.entities) for (const auto& item : e.identity)
@@ -51,7 +52,7 @@ bool Observation::operator==(const Observation& b) const {
         std::tie(b.entity_id, b.field, b.source_id, b.value, b.unit, b.origin, b.support, b.acquisition, b.freshness, b.presence, b.observed_at, b.attempted_at, b.measured_at, b.sample_interval_ns, b.error, b.generation);
 }
 bool Snapshot::operator==(const Snapshot& b) const {
-    return std::tie(producer, epoch, generation, entities, sources, relationships, observations, captured_at, reported_document) == std::tie(b.producer, b.epoch, b.generation, b.entities, b.sources, b.relationships, b.observations, b.captured_at, b.reported_document);
+    return std::tie(producer, epoch, generation, entities, sources, relationships, observations, captured_at, reported_document, reported_version, clock_id, clock_scope) == std::tie(b.producer, b.epoch, b.generation, b.entities, b.sources, b.relationships, b.observations, b.captured_at, b.reported_document, b.reported_version, b.clock_id, b.clock_scope);
 }
 bool Publication::operator==(const Publication& b) const {
     return std::tie(record_id, expected_base, next, replay_bytes) == std::tie(b.record_id, b.expected_base, b.next, b.replay_bytes);
@@ -86,11 +87,16 @@ Result Store::publish_checked(const Publication& candidate, bool resynchronize, 
     const auto& next = candidate.next;
     if ((reported_ && *reported_ != reported) ||
         (reported && (next.reported_document.empty() || candidate.replay_bytes.empty() || !next.captured_at)) ||
-        (!reported && (!next.reported_document.empty() || !candidate.replay_bytes.empty()))) return {Code::invalid_mode};
+        (!reported && (!next.reported_document.empty() || !candidate.replay_bytes.empty() ||
+                      !next.reported_version.empty() || !next.clock_id.empty() || !next.clock_scope.empty()))) return {Code::invalid_mode};
     if (next.reported_document.size() > 1048576 || candidate.replay_bytes.size() > 1048576) return {Code::capacity};
     if (next.captured_at && !valid_time(*next.captured_at)) return {Code::invalid_observation};
     if (!identifier(candidate.record_id)) return {Code::invalid_identity};
     if (next.producer != producer_ || next.epoch != epoch_) return {Code::wrong_epoch, true};
+    if (next.reported_version.size() > 32 || (!next.clock_id.empty() && !identifier(next.clock_id)) ||
+        (!next.clock_scope.empty() && !identifier(next.clock_scope))) return {Code::invalid_identity};
+    if (reported && current_ && std::tie(next.reported_version,next.clock_id,next.clock_scope) !=
+        std::tie(current_->reported_version,current_->clock_id,current_->clock_scope)) return {Code::invalid_mode};
     // Bound before comparing or copying potentially large input containers.
     if (next.entities.size() > limits_.entities || next.sources.size() > limits_.sources ||
         next.relationships.size() > limits_.relationships || next.observations.size() > limits_.observations)
@@ -119,6 +125,8 @@ Result Store::publish_checked(const Publication& candidate, bool resynchronize, 
         if (!entities.count(r.source) || !entities.count(r.target) || !identifier(r.kind)) return {Code::dangling_relationship};
 
     Snapshot normalized = next;
+    auto measurement_highwater = measurement_highwater_;
+    std::size_t clock_added = 0;
     std::set<std::tuple<std::string, std::string, std::string>> observation_keys;
     for (auto& o : normalized.observations) {
         if (o.origin < Origin::observed || o.origin > Origin::configured ||
@@ -130,7 +138,12 @@ Result Store::publish_checked(const Publication& candidate, bool resynchronize, 
         if (!entities.count(o.entity_id) || !sources.count(o.source_id) || !identifier(o.field) ||
             !valid_time(o.attempted_at) || (o.observed_at && !valid_time(*o.observed_at)) ||
             (o.measured_at && o.measured_at->epoch != epoch_)) return {Code::invalid_observation};
-        if ((o.generation && *o.generation > next.generation) || (reported && (!o.generation || o.measured_at))) return {Code::invalid_observation};
+        if ((o.generation && *o.generation > next.generation) || (reported && !o.generation)) return {Code::invalid_observation};
+        if (o.measured_at && ((!o.measured_at->clock_id.empty() && !identifier(o.measured_at->clock_id)) ||
+            (!o.measured_at->clock_scope.empty() && !identifier(o.measured_at->clock_scope)) ||
+            (reported && (!identifier(o.measured_at->clock_id) || !identifier(o.measured_at->clock_scope) ||
+                          o.measured_at->clock_id != next.clock_id || o.measured_at->clock_scope != next.clock_scope))))
+            return {Code::invalid_observation};
         if (!observation_keys.insert(key(o)).second) return {Code::duplicate_observation};
         const auto metric = std::find_if(metrics_.begin(), metrics_.end(), [&](const Metric& m) { return m.field == o.field; });
         if (metric == metrics_.end() || metric->unit != o.unit ||
@@ -140,6 +153,17 @@ Result Store::publish_checked(const Publication& candidate, bool resynchronize, 
         if (o.error && (!identifier(o.error->code) || !safe_text(o.error->message, 2048))) return {Code::invalid_observation};
         if ((o.acquisition == Acquisition::failed || o.acquisition == Acquisition::denied) && !o.error) return {Code::invalid_observation};
         if (reported) {
+            if (o.measured_at) {
+                const auto previous = measurement_highwater.find(key(o));
+                if (previous != measurement_highwater.end() && o.measured_at->nanoseconds < previous->second) return {Code::invalid_observation};
+                if (previous == measurement_highwater.end()) {
+                    const auto cost = sizeof(decltype(measurement_highwater)::value_type) + o.entity_id.size() + o.source_id.size() + o.field.size();
+                    if (measurement_highwater.size() >= limits_.observations || cost > limits_.retained_bytes-retained_bytes_-*bytes-clock_added)
+                        return {Code::capacity};
+                    clock_added += cost;
+                }
+                measurement_highwater[key(o)] = o.measured_at->nanoseconds;
+            }
             // A full remote state reports its own retained measurement. It is not
             // a local acquisition attempt and cannot inherit older local values.
             if (o.value.index() == 0 && (o.observed_at || o.measured_at)) return {Code::invalid_observation};
@@ -180,7 +204,7 @@ Result Store::publish_checked(const Publication& candidate, bool resynchronize, 
     if (!accounted_bytes(normalized_size, limits_.candidate_bytes)) return {Code::capacity};
 
     auto retired = retired_;
-    std::size_t retained_bytes = retained_bytes_ + *bytes;
+    std::size_t retained_bytes = retained_bytes_ + *bytes + clock_added;
     if (current_) for (const auto& e : current_->entities) {
         if (entities.count(e.id)) continue;
         if (retired.size() >= limits_.retired_entities) return {Code::capacity};
@@ -205,6 +229,7 @@ Result Store::publish_checked(const Publication& candidate, bool resynchronize, 
     current_.swap(published);
     records_.swap(records);
     retired_.swap(retired);
+    measurement_highwater_.swap(measurement_highwater);
     retained_bytes_ = retained_bytes;
     reported_ = reported;
     return {Code::accepted};
@@ -216,7 +241,8 @@ std::vector<Observation> Store::retired_observations(const std::string& entity_i
 }
 
 std::optional<std::uint64_t> interval_ns(const Tick& before, const Tick& after) {
-    if (before.epoch.empty() || before.epoch != after.epoch || after.nanoseconds <= before.nanoseconds) return {};
+    if (before.epoch.empty() || before.epoch != after.epoch || before.clock_id != after.clock_id ||
+        before.clock_scope != after.clock_scope || after.nanoseconds <= before.nanoseconds) return {};
     return after.nanoseconds - before.nanoseconds;
 }
 
@@ -225,7 +251,8 @@ Freshness freshness_at(const Observation& o, const Tick& now, std::optional<std:
     if (o.value.index() == 0) return Freshness::unknown;
     if (o.acquisition != Acquisition::success || o.presence == Presence::absent || o.freshness != Freshness::current) return Freshness::stale;
     if (!ttl_ns) return o.freshness;
-    if (!o.measured_at || o.measured_at->epoch != now.epoch || now.nanoseconds < o.measured_at->nanoseconds) return Freshness::stale;
+    if (!o.measured_at || o.measured_at->epoch != now.epoch || o.measured_at->clock_id != now.clock_id ||
+        o.measured_at->clock_scope != now.clock_scope || now.nanoseconds < o.measured_at->nanoseconds) return Freshness::stale;
     return now.nanoseconds - o.measured_at->nanoseconds >= *ttl_ns ? Freshness::stale : Freshness::current;
 }
 

@@ -83,7 +83,7 @@
       "requires": [
         "SP-SCHEDULER"
       ],
-      "sha256": "13c8ece417362abea7134c58643f7a3081f9a5927a8f774fe220c9f4decabf66"
+      "sha256": "fec92e0ab83dd465d8656ef94fc2e1358176b439f98541997327b32677222bbf"
     },
     {
       "id": "SP-ARCHITECTURE",
@@ -216,7 +216,7 @@
         "SP-PROTOCOL",
         "SP-COMMANDS"
       ],
-      "sha256": "987d3000b8afa425e1db45c4b56b241e539c479db6f7444e6f27ec04649a94d5"
+      "sha256": "2f9d941f60901febca85d73c6fce0cc5aa835447ccade9fdc518c6982b6df15c"
     },
     {
       "id": "SP-VERSIONS",
@@ -227,7 +227,7 @@
         "SP-PROTOCOL",
         "SP-CHANGES"
       ],
-      "sha256": "305dad599d4a98b70b8c166aa1c79f62b5688ebc8c14f48cfdd3728695d2622c"
+      "sha256": "741b2a53c8efd12507904409fecc51ff03343f0e5947f39c0297032d72f46026"
     },
     {
       "id": "SP-ADR-001",
@@ -357,7 +357,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "9725e22d957d57eae0e34581ed09438f25c006e8de7cdc23093c182e5a4043a0"
+      "sha256": "0dc0d281c7c884248fbbc00adc53a39bf1c4db1fb1a4b6d201f3cea0a996961c"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -422,7 +422,18 @@
       "requires": [
         "SP-CURRENT"
       ],
-      "sha256": "12df7ff0c6ab843aeb25947046f97272a48d27a7ff461677fc0e11fffa20df37"
+      "sha256": "a0df49e98f48682f98557a29215c6cdec6685bc3e5ad5264ec82d4bc06e59bcf"
+    },
+    {
+      "id": "SP-MEASURED-TIME-HANDOFF",
+      "path": "delivery/measured-time-handoff.md",
+      "title": "Measured telemetry and freshness checkpoint",
+      "description": "Bind versioned measurement times to consumer clock scope, replay history and native delayed-delivery evidence.",
+      "requires": [
+        "SP-W25-MEASURED-TIME",
+        "SP-CAMPAIGN-ADMISSION"
+      ],
+      "sha256": "918c95c7023be471ad73285f2ceb07b36eed200296ac08936464d22d9edf4c8b"
     },
     {
       "id": "SP-MEASUREMENT-CLOCK-HANDOFF",
@@ -554,6 +565,18 @@
         "SP-POLICY"
       ],
       "sha256": "16754f609c01c4da6dbcdbaea9dd05c300e1e64a09a35bc88b01d23af3f5b28c"
+    },
+    {
+      "id": "SP-W25-MEASURED-TIME",
+      "path": "delivery/packages/w-25-measured-time.md",
+      "title": "W-25 measured telemetry and consumer freshness",
+      "description": "Version measurement time and bind received values to a qualified consumer clock without refreshing replayed data.",
+      "requires": [
+        "SP-W25-MEASUREMENT-CLOCK",
+        "SP-W25-SUBSCRIPTIONS",
+        "SP-W25-STATE-IMPORT"
+      ],
+      "sha256": "e2f79c64e0068a966793dff0090dea1a9dcefc1ab22352b5be18299217667b7c"
     },
     {
       "id": "SP-W25-MEASUREMENT-CLOCK",

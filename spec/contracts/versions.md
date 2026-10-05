@@ -46,3 +46,10 @@ Publish old/new fixtures, compatibility tables and independent consumer results
 before claiming stable contracts. Experimental schemas do not imply installed SDK
 support or native implementation. Schema validation and native acceptance evidence
 remain separate.
+
+Experimental [measured telemetry](../delivery/packages/w-25-measured-time.md) adds
+observation/snapshot/telemetry 0.2 as one explicitly selected triple plus the
+`telemetry.measured-time` feature. It carries original measurement counts in a
+qualified shared native domain; consumer-local scope is never serialized. Version
+changes cannot silently discard same-epoch replay/tombstone history. Existing 0.1
+documents remain inventory-capable and do not acquire implicit measurement times.

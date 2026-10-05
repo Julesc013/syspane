@@ -19,9 +19,11 @@ bool one(const Json& v, std::initializer_list<const char*> choices) {
     const auto& s = v.get_ref<const std::string&>();
     return std::any_of(choices.begin(), choices.end(), [&](const char* c) { return s == c; });
 }
-void object(const Json& v, std::initializer_list<const char*> required, bool extensions = false) {
-    need(v.is_object() && (v.size() == required.size() || (extensions && v.size() == required.size()+1 && v.contains("extensions"))));
+void object(const Json& v, std::initializer_list<const char*> required, bool extensions = false, const char* extra = nullptr) {
+    const auto size = required.size() + (extra ? 1 : 0);
+    need(v.is_object() && (v.size() == size || (extensions && v.size() == size+1 && v.contains("extensions"))));
     for (const auto name : required) need(v.contains(name));
+    if (extra) need(v.contains(extra));
     if (extensions && v.contains("extensions")) {
         const auto& ext = v["extensions"]; need(ext.is_object() && ext.size() <= 64);
         for (auto it = ext.begin(); it != ext.end(); ++it) {
@@ -69,12 +71,17 @@ void value(const Json& v) {
     else if (kind == "uint64") (void)number(data);
     else need(false);
 }
-void observation(const Json& o, const std::string& epoch, std::uint64_t generation) {
+void observation(const Json& o, const TelemetryBinding& b, std::uint64_t generation) {
     object(o, {"schema_version","entity_id","field","value","unit","origin","support","acquisition","freshness","presence",
-               "source_id","observed_at","attempted_at","producer_epoch","generation","sample_interval_ns","error"}, true);
-    need(o["schema_version"] == "0.1.0");
+               "source_id","observed_at","attempted_at","producer_epoch","generation","sample_interval_ns","error"}, true, b.document_version == "0.2.0" ? "measured_at" : nullptr);
+    need(o["schema_version"] == b.document_version);
     (void)id(o["entity_id"]); (void)id(o["field"]); (void)id(o["source_id"]);
-    need(id(o["producer_epoch"]) == epoch && number(o["generation"]) <= generation, "telemetry.generation");
+    need(id(o["producer_epoch"]) == b.epoch && number(o["generation"]) <= generation, "telemetry.generation");
+    if (b.document_version == "0.2.0" && !o["measured_at"].is_null()) {
+        const auto& tick = o["measured_at"]; object(tick, {"clock_id","nanoseconds"});
+        need(id(tick["clock_id"]) == b.clock_id && !o["value"].is_null(), "telemetry.clock");
+        (void)number(tick["nanoseconds"]);
+    }
     value(o["value"]); need(!text(o["unit"], 64).empty());
     need(one(o["origin"], {"observed","derived","configured"}) && one(o["support"], {"supported","unsupported","unknown"}) &&
          one(o["acquisition"], {"success","pending","denied","failed","disabled"}) && one(o["freshness"], {"current","stale","unknown","not_applicable"}) &&
@@ -85,9 +92,9 @@ void observation(const Json& o, const std::string& epoch, std::uint64_t generati
     if (!e.is_null()) { object(e, {"code","message","retryable"}); (void)id(e["code"]); (void)text(e["message"], 2048); need(e["retryable"].is_boolean()); }
     need(!one(o["acquisition"], {"denied","failed"}) || !e.is_null());
 }
-void snapshot(const Json& s, const std::string& epoch) {
+void snapshot(const Json& s, const TelemetryBinding& b) {
     object(s, {"schema_version","producer_epoch","generation","captured_at","entities","relationships","sources","observations","completeness"}, true);
-    need(s["schema_version"] == "0.1.0" && id(s["producer_epoch"]) == epoch, "telemetry.binding");
+    need(s["schema_version"] == b.document_version && id(s["producer_epoch"]) == b.epoch, "telemetry.binding");
     const auto generation = number(s["generation"]); timestamp(s["captured_at"]);
     need(one(s["completeness"], {"complete","partial","gap"}));
     array(s["entities"], 8192); array(s["sources"], 1024); array(s["relationships"], 16384); array(s["observations"], 65536);
@@ -109,7 +116,7 @@ void snapshot(const Json& s, const std::string& epoch) {
     }
     std::set<std::pair<std::string,std::string>> observations;
     for (const auto& o : s["observations"]) {
-        observation(o, epoch, generation);
+        observation(o, b, generation);
         need(entities.count(id(o["entity_id"])) && sources.count(id(o["source_id"])) &&
              observations.emplace(id(o["entity_id"]), id(o["field"])).second, "telemetry.graph");
     }
@@ -124,16 +131,18 @@ Message checked(std::string_view payload, const TelemetryBinding& b) {
     const bool full = message.type == "snapshot", delta = message.type == "delta";
     need(subscribe || unsubscribe || full || delta, "telemetry.direction");
     need((subscribe || unsubscribe) ? b.direction == TelemetryDirection::consumer_to_producer : b.direction == TelemetryDirection::producer_to_consumer, "telemetry.direction");
-    if (subscribe) object(body, {"schema_version","subscription_id","producer_id","policy_revision","channel","classification"});
-    else if (unsubscribe) object(body, {"schema_version","subscription_id"});
-    else if (full) object(body, {"schema_version","subscription_id","producer_id","policy_revision","record_id","snapshot"});
-    else object(body, {"schema_version","subscription_id","producer_id","policy_revision","record_id","snapshot","base_generation"});
-    need(body["schema_version"] == "0.1.0");
+    const auto clock = b.document_version == "0.2.0" ? "clock_id" : nullptr;
+    if (subscribe) object(body, {"schema_version","subscription_id","producer_id","policy_revision","channel","classification"}, false, clock);
+    else if (unsubscribe) object(body, {"schema_version","subscription_id"}, false, clock);
+    else if (full) object(body, {"schema_version","subscription_id","producer_id","policy_revision","record_id","snapshot"}, false, clock);
+    else object(body, {"schema_version","subscription_id","producer_id","policy_revision","record_id","snapshot","base_generation"}, false, clock);
+    need(body["schema_version"] == b.document_version);
+    if (clock) need(id(body["clock_id"]) == b.clock_id, "telemetry.clock");
     need(id(body["subscription_id"]) == b.subscription, "telemetry.binding");
     if (!unsubscribe) need(id(body["producer_id"]) == b.producer && number(body["policy_revision"]) == b.policy_revision, "telemetry.binding");
     if (subscribe) need(body["channel"] == b.channel && body["classification"] == b.classification, "telemetry.binding");
     if (full || delta) {
-        (void)id(body["record_id"]); snapshot(body["snapshot"], b.epoch);
+        (void)id(body["record_id"]); snapshot(body["snapshot"], b);
         if (delta) need(number(body["base_generation"]) < number(body["snapshot"]["generation"]), "telemetry.generation");
     }
     return message;
@@ -141,8 +150,12 @@ Message checked(std::string_view payload, const TelemetryBinding& b) {
 } // namespace
 void validate_telemetry_binding(const TelemetryBinding& b) {
     need(b.negotiated.max_frame_bytes >= 1024 && b.negotiated.max_frame_bytes <= frame_limit, "telemetry.capacity");
-    need(b.negotiated.features.count("telemetry.snapshot") && b.negotiated.documents.count({"telemetry","0.1.0"}) &&
-         b.negotiated.documents.count({"snapshot","0.1.0"}) && b.negotiated.documents.count({"observation","0.1.0"}), "telemetry.feature");
+    need(b.document_version == "0.1.0" || b.document_version == "0.2.0", "telemetry.feature");
+    need(b.negotiated.features.count("telemetry.snapshot") && b.negotiated.documents.count({"telemetry",b.document_version}) &&
+         b.negotiated.documents.count({"snapshot",b.document_version}) && b.negotiated.documents.count({"observation",b.document_version}), "telemetry.feature");
+    if (b.document_version == "0.2.0") need(b.negotiated.features.count("telemetry.measured-time") &&
+        identifier(b.clock_id) && identifier(b.clock_scope), "telemetry.clock");
+    else need(b.clock_id.empty() && b.clock_scope.empty(), "telemetry.clock");
     need(identifier(b.connection) && identifier(b.epoch) && identifier(b.producer) && identifier(b.subscription) &&
          (b.channel == "desktop" || b.channel == "inspector" || b.channel == "saver" || b.channel == "preview") &&
          (b.classification == "public" || b.classification == "operational" || b.classification == "sensitive"), "telemetry.binding");

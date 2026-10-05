@@ -105,6 +105,13 @@ brackets and held-peer exit rejection on both modern profiles. Current suites pa
 telemetry and deterministic freshness/replay/reconnect cases still precede real
 collector enablement. Suspend/resume and namespace mismatch/change are unexecuted.
 
+The [measured telemetry checkpoint](measured-time-handoff.md) now closes the initial
+shared-clock versioned receive boundary. It covers exact TTL expiry, replay and
+field-time history, epoch/reconnect/policy lifetime, and three native synthetic
+delivery scenarios; suites pass 88/89/81 checks. Real source acquisition contracts
+and independently supervised production are the next boundary. Suspend, namespace
+change and product rendering remain unqualified.
+
 Use the proposed cold-start exercise to detect missing observable contracts.
 Private implementation differences are permissible. Missing laboratories remain
 blocked qualification. A finite release scope must identify exact profiles,

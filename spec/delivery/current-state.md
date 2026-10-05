@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-06T08:39:00+11:00", "scope": "Native clock investigation checkpoint; measured-time documents and real sources remain open"}
+updated: {"by": "codex", "at": "2026-10-06T09:04:00+11:00", "scope": "Measured telemetry checkpoint; real native acquisition and product integration remain open"}
 ---
 
 # Current state and next admitted boundary
@@ -137,6 +137,15 @@ namespace mismatch/change and suspend/resume remain unexecuted. Windows pins its
 precise-time import archive and preserves the first unresolved-link failure. No
 measured timestamp is added to the existing 0.1 telemetry documents.
 
+The [measured telemetry checkpoint](measured-time-handoff.md) adds an explicit 0.2
+triple and qualified local clock scope. It preserves original measurement time
+through replay/reconnect, rejects future or backwards measurements, and applies
+exact TTL/rate bounds independently of producer leases. Native fresh/delayed/future
+synthetic cases pass; current suites pass 88 Windows, 89 Linux and 81 historical
+host checks. The original whole-envelope test mistake and contract-based body-byte
+assertion correction are preserved. Real sources and suspend/namespace qualification
+remain open.
+
 Canonical 0.2.0 documentation bundle, unchanged 0.1 authoring profile, preserved old
 fixtures, new experimental scene/command/capability 0.2 and admission descriptors.
 The initial settings registry has enforced metadata/default consistency and generated
@@ -180,10 +189,10 @@ historical guest execution once guest test scope and usability are established.
 W-05 needs a composition strategy that actually preserves icon pixels; its initial
 EWMH window stacking candidates fail that requirement. Continue other native tracks
 independently of this negative result.
-Continue W-25 with versioned measured-time documents and exact freshness, retained/
-replay, epoch/domain, TTL, rate, reconnect and policy-change oracles. The native
-clock candidate is now exercised; it does not authorize a remote sample. Connect
-actual collector/renderer supervision and product policy distribution. The native
+Continue W-25 by closing a real native source's identity, acquisition/counter, error,
+cancellation and bounded demand contracts, including evidence disclosure. Connect
+actual independently supervised collection to the now-tested measured receive path,
+then complete renderer supervision and product policy distribution. The native
 inventory probe now connects bounded subscription/demand and queue revocation to
 complete-state receipt. W-07 must add field/entity/age/priority/recording demand
 aggregation; the one-source experiment does not complete that planner.
