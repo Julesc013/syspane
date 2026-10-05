@@ -19,6 +19,7 @@ def main():
     parser.add_argument('--build-dir', type=Path, required=True)
     parser.add_argument('--smoke-result', type=Path, required=True)
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--failure-metadata', action='store_true', help='Include the shared failure-history codec/projection cases')
     args = parser.parse_args()
     build, smoke_path = args.build_dir.resolve(strict=True), args.smoke_result.resolve(strict=True)
     if platform.system() != 'Windows' or not build.is_relative_to(ROOT/'out/build') or not smoke_path.is_relative_to(ROOT/'out/campaign'/PROFILE):
@@ -33,6 +34,8 @@ def main():
             cases.append({'case': match.group(1).strip(), 'outcome': 'pass' if 'Test Passed.' in block else 'fail'})
     expected = EXPECTED | {f'recovery.{case}' for case in RECOVERY_CASES} | {
         'diagnostic.DIAG-POLICY', 'diagnostic.DIAG-PROJECTION', 'desktop.ORACLE-UNIT', 'legacy.PE-IMPORTS', 'legacy.PE-REJECT'}
+    if args.failure_metadata:
+        expected |= {'diagnostic.FAILURE-CODEC', 'diagnostic.FAILURE-INTERRUPT', 'diagnostic.FAILURE-PROJECTION'}
     if len(cases) != len(expected) or {c['case'] for c in cases} != expected or any(c['outcome'] != 'pass' for c in cases):
         raise ValueError('incomplete, duplicated or failed historical-toolset host run')
     artifacts = {}
@@ -50,9 +53,11 @@ def main():
         if not resolved.is_relative_to(ROOT) or sha(resolved) != digest:
             raise ValueError('package source checkpoint changed: '+path)
     sources = [ROOT/'CMakeLists.txt', ROOT/'CMakePresets.json', ROOT/'spec/delivery/packages/w-04-historical-windows.md']
+    if args.failure_metadata:
+        sources.append(ROOT/'spec/delivery/packages/w-25-failure-metadata.md')
     for folder in ('source', 'tests/model', 'tests/protocol', 'tests/fault', 'tests/desktop', 'build-support'):
         sources.extend(p for p in (ROOT/folder).rglob('*') if p.is_file() and 'evidence' not in p.parts and '__pycache__' not in p.parts)
-    record = {'version': '0.1.0', 'work_ids': ['W-04', 'W-26'], 'profile': PROFILE, 'outcome': 'pass',
+    record = {'version': '0.1.0', 'work_ids': ['W-04', 'W-25', 'W-26'] if args.failure_metadata else ['W-04', 'W-26'], 'profile': PROFILE, 'outcome': 'pass',
               'recorded_at': datetime.now(timezone.utc).isoformat(),
               'execution_times': [line for line in raw.splitlines() if line.startswith(('Start testing:', 'End testing:'))],
               'source_base': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
@@ -76,7 +81,7 @@ def main():
                            'original_sha256': sha(build/'Testing/Temporary/LastTest.log'),
                            'normalization': 'UTF-8 text with LF line endings for canonical Git bytes'}
     args.output.write_text(json.dumps(record, indent=2)+'\n', encoding='utf-8', newline='\n')
-    print('Historical-toolset evidence recorded: 51 host checks; no guest qualification')
+    print(f'Historical-toolset evidence recorded: {len(cases)} host checks; no guest qualification')
 
 
 if __name__ == '__main__':

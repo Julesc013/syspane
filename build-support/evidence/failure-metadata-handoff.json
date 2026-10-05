@@ -1,0 +1,122 @@
+{
+  "schema_version": "0.1.0",
+  "work_id": "W-25",
+  "source_ref": "a67d5a4c1bd73031afa8df5c68233a46c811d827",
+  "objective": "Connect bounded recent-failure records to independent native diagnosis while preserving current policy, process cleanup and distinct qualification gates.",
+  "changed_files": [
+    "CMakeLists.txt",
+    "README.md",
+    "TODO.md",
+    "build-support/components.json",
+    "build-support/evidence/failure-metadata-handoff.json",
+    "build-support/evidence/w-25-failure-attempts.json",
+    "build-support/evidence/w-25-failure-first-diagnostic.json",
+    "build-support/evidence/w-25-failure-linux-x64-gcc13.DIAG-01.json",
+    "build-support/evidence/w-25-failure-linux-x64-gcc13.FAILURE-STORE.json",
+    "build-support/evidence/w-25-failure-linux-x64-gcc13.NATIVE-01.json",
+    "build-support/evidence/w-25-failure-linux-x64-gcc13.NATIVE-02.json",
+    "build-support/evidence/w-25-failure-linux-x64-gcc13.ORACLE-01.json",
+    "build-support/evidence/w-25-failure-linux-x64-gcc13.RECOVERY-01.json",
+    "build-support/evidence/w-25-failure-linux-x64-gcc13.ctest.txt",
+    "build-support/evidence/w-25-failure-linux-x64-gcc13.json",
+    "build-support/evidence/w-25-failure-verification.json",
+    "build-support/evidence/w-25-failure-windows-x64-gcc15.DIAG-01.json",
+    "build-support/evidence/w-25-failure-windows-x64-gcc15.FAILURE-STORE.json",
+    "build-support/evidence/w-25-failure-windows-x64-gcc15.NATIVE-01.json",
+    "build-support/evidence/w-25-failure-windows-x64-gcc15.NATIVE-02.json",
+    "build-support/evidence/w-25-failure-windows-x64-gcc15.RECOVERY-01.json",
+    "build-support/evidence/w-25-failure-windows-x64-gcc15.ctest.txt",
+    "build-support/evidence/w-25-failure-windows-x64-gcc15.json",
+    "build-support/evidence/w-25-failure-windows-x86-v141-xp.ctest.txt",
+    "build-support/evidence/w-25-failure-windows-x86-v141-xp.json",
+    "build-support/evidence/w-25-failure-windows-x86-v141-xp.smoke.json",
+    "build-support/record_legacy_build.py",
+    "build-support/record_protocol.py",
+    "build-support/targets/README.md",
+    "build-support/targets/linux-x64-gcc13.json",
+    "build-support/targets/windows-x64-gcc15.json",
+    "build-support/targets/windows-x86-v141-xp.json",
+    "docs/developers/build.md",
+    "source/application/diagnostic.cpp",
+    "source/application/recovery_probe.cpp",
+    "source/diagnostics/entry.cpp",
+    "source/diagnostics/entry.hpp",
+    "source/diagnostics/failure_history.cpp",
+    "source/diagnostics/failure_history.hpp",
+    "source/platform/failure_store.cpp",
+    "source/platform/failure_store.hpp",
+    "spec/architecture/recovery.md",
+    "spec/checksums.json",
+    "spec/delivery/current-state.md",
+    "spec/delivery/failure-metadata-handoff.md",
+    "spec/delivery/implementation-readiness.md",
+    "spec/delivery/index.md",
+    "spec/delivery/packages/index.md",
+    "spec/delivery/packages/w-04-historical-windows.md",
+    "spec/delivery/packages/w-25-failure-metadata.md",
+    "spec/delivery/packages/w-25-recovery.md",
+    "spec/delivery/work-units.json",
+    "spec/generated/catalog.json",
+    "spec/log.md",
+    "tests/fault/diagnostic_tests.cpp",
+    "tests/fault/failure_store_tests.cpp",
+    "tests/fault/native_diagnostic.py",
+    "tests/fault/native_failure_store.py",
+    "tests/fault/native_recovery.py"
+  ],
+  "decisions": [
+    "Keep one bounded advisory journal per explicitly selected probe invocation; no implicit discovery, overwrite, product retention or process authority.",
+    "Capture each fault snapshot, confirm owned failed-child cleanup, then perform optional journal I/O; record original observation time/stop fact.",
+    "Classify failure details as operational and prevent reader invocation under current export or inspector/accessibility denial.",
+    "Use the shared codec on all three profiles and native private-file adapters only on the modern Windows/Linux profiles.",
+    "Preserve compiler and observer failures; retain Windows reparse and protected-policy deployment as unexecuted qualification."
+  ],
+  "checks": [
+    {
+      "name": "Windows complete suite: 57 CTest entries, including native fault journals/private files/independent diagnosis",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-25-failure-windows-x64-gcc15.json"
+    },
+    {
+      "name": "Linux complete suite: 58 CTest entries, including native faults/files/diagnosis and independent X11 calibration",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-25-failure-linux-x64-gcc13.json"
+    },
+    {
+      "name": "Historical-toolset host regression: 54 CTest entries, PE/import audit and relocated model smoke",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-25-failure-windows-x86-v141-xp.json"
+    },
+    {
+      "name": "Specification generation/schemas/integrity and tooling tests",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-25-failure-verification.json"
+    },
+    {
+      "name": "Original failed build/Unicode observer reports and source-bound attempts preserved",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-25-failure-attempts.json"
+    },
+    {
+      "name": "Windows reparse rejection requires unavailable symlink creation privilege",
+      "outcome": "not_run",
+      "evidence": "build-support/evidence/w-25-failure-windows-x64-gcc15.FAILURE-STORE.json"
+    }
+  ],
+  "open_questions": [
+    "Explicit configuration preservation and product data-root/retention contracts remain required.",
+    "Positive protected-policy native deployment/revocation needs an admitted administrative lab; portable typed fixtures are not provenance evidence.",
+    "Actual telemetry/renderer recovery, policy payload removal and independent editor exit remain open.",
+    "Guest test scope/usability, XP/7 execution, Windows/macOS capture and usable Linux desktop composition remain open."
+  ],
+  "next_step": "Close explicit configuration-preservation selection, permissions, interruption, current-policy and no-overwrite contracts; implement native controls and byte-preservation checks while continuing independently available host tracks.",
+  "authority_used": [
+    "user:foundation-native-campaign-2026-10-05"
+  ],
+  "limitations": [
+    "W-25 and the full campaign remain in progress; no product edition, desktop host or historical OS support is qualified.",
+    "Native tests use owned synthetic files/processes and hidden diagnostic windows; no user configuration, guest VM or installed machine policy was changed.",
+    "Journals are unverified historical observations, not current health, configuration durability or authorization.",
+    "No privileged operation, public release, AIDE activation or human review is attested."
+  ]
+}

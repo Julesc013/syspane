@@ -1,6 +1,7 @@
 #include "child.hpp"
 #include "health_link.hpp"
 #include "recovery.hpp"
+#include "failure_store.hpp"
 #include <chrono>
 #include <condition_variable>
 #include <cstdlib>
@@ -99,7 +100,7 @@ void stopped_event(p::Child& child, const p::ChildExit& exit, bool forced) {
     emit({{"event", "stopped"}, {"pid", child.id()}, {"code", exit.code}, {"signaled", exit.signaled},
           {"forced", forced}, {"os_confirmed", true}});
 }
-void supervisor(const std::string& endpoint, const std::string& scenario) {
+void supervisor(const std::string& endpoint, const std::string& scenario, const std::string& failure_path) {
     const std::set<std::string> cases{"graceful", "producer-hang", "render-stall", "crash-circuit", "quarantine", "parent-loss", "role-denial", "wrong-epoch", "progress-denial"};
     require(cases.count(scenario), "probe.scenario");
     const bool desktop = scenario == "graceful" || scenario == "render-stall" || scenario == "progress-denial";
@@ -109,6 +110,11 @@ void supervisor(const std::string& endpoint, const std::string& scenario) {
     emit({{"event", "ready"}, {"unprivileged", true}, {"endpoint_controls", true}});
     r::RestartGate gate(0);
     const auto campaign_start = p::monotonic_ms();
+    std::unique_ptr<p::FailureWriter> journal;
+    if (!failure_path.empty()) {
+        journal = std::make_unique<p::FailureWriter>(failure_path);
+        emit({{"event", "failure_recording"}, {"ready", journal->ready()}});
+    }
     for (unsigned attempt = 0; attempt < 4; ++attempt) {
         for (;;) {
             require(p::monotonic_ms() - campaign_start < 40000, "probe.deadline");
@@ -178,6 +184,7 @@ void supervisor(const std::string& endpoint, const std::string& scenario) {
         if (!exit && (failure == "health.eof" || failure == "io.read")) exit = wait_child(child, gate, 100);
         if (exit) failure_kind = r::Failure::crashed;
         const auto fault_time = p::monotonic_ms();
+        const bool stopped_at_fault = exit.has_value();
         require(gate.failed(failure_kind, exit ? r::StopProof::confirmed : r::StopProof::unconfirmed, fault_time) == r::Code::accepted,
                 "probe.failure_gate");
         emit({{"event", "fault"}, {"pid", child.id()}, {"reason", failure}, {"alive", !exit.has_value()},
@@ -200,6 +207,15 @@ void supervisor(const std::string& endpoint, const std::string& scenario) {
             require(gate.confirm_stopped(p::monotonic_ms()) == r::Code::accepted, "probe.confirm_gate");
         }
         stopped_event(child, *exit, forced);
+        // Optional filesystem work must not precede cleanup of a live failed child.
+        // The record retains the original fault observation, not this later write time.
+        if (journal) {
+            const auto reason = scenario == "role-denial" || scenario == "wrong-epoch" || scenario == "progress-denial" ? "protocol_rejected" :
+                failure_kind == r::Failure::producer_expired ? "producer_expired" :
+                failure_kind == r::Failure::render_stalled ? "render_stalled" :
+                failure_kind == r::Failure::operation_timeout ? "operation_timeout" : "crashed";
+            emit({{"event", "failure_recorded"}, {"stored", journal->append(fault_time-campaign_start, role, reason, stopped_at_fault)}});
+        }
         if (scenario == "role-denial" || scenario == "wrong-epoch" || scenario == "progress-denial") {
             emit({{"event", "rejected"}, {"reason", failure}, {"heartbeats", received}, {"launches", attempt+1}}); return;
         }
@@ -217,10 +233,12 @@ void supervisor(const std::string& endpoint, const std::string& scenario) {
 int main(int argc, char** argv) {
     try {
         require(p::unprivileged_context(), "probe.privileged_context");
-        if (argc == 4 && std::string(argv[1]) == "supervisor") supervisor(argv[2], argv[3]);
-        else if (argc == 6 && std::string(argv[1]) == "worker") {
-            const auto parent = w::decimal(argv[5]); require(parent && *parent, "worker.parent");
-            worker(argv[2], argv[3], argv[4], *parent);
+        const auto arguments = p::native_arguments(argc, argv);
+        if ((arguments.size() == 4 || arguments.size() == 5) && arguments[1] == "supervisor")
+            supervisor(arguments[2], arguments[3], arguments.size() == 5 ? arguments[4] : "");
+        else if (arguments.size() == 6 && arguments[1] == "worker") {
+            const auto parent = w::decimal(arguments[5]); require(parent && *parent, "worker.parent");
+            worker(arguments[2], arguments[3], arguments[4], *parent);
         } else throw w::Error("probe.arguments");
         return 0;
     } catch (const std::exception& error) { emit({{"event", "error"}, {"reason", error.what()}}); return 1; }

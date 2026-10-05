@@ -12,7 +12,7 @@ sp_requires: ["SP-CURRENT"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-AUDIT-2026-10-04", "resource": "User-supplied October 2026 audit inputs", "title": "October review inputs"}]
-updated: {"by": "codex", "at": "2026-10-06T05:25:00+11:00", "scope": "Pinned historical shared-subset build and host checks; guest and desktop qualification remain pending"}
+updated: {"by": "codex", "at": "2026-10-06T05:56:27+11:00", "scope": "Bounded recent-failure metadata checkpoint; preservation and visible recovery remain open"}
 ---
 
 # Implementation readiness and gates
@@ -60,6 +60,9 @@ The later [supervision checkpoint](supervision-handoff.md) executes nine native
 child/health/render-worker fault cases. The [diagnostic checkpoint](diagnostic-handoff.md)
 adds independent reporting and native inspector startup/close checks. Preservation,
 positive protected-policy deployment and visible/editor recovery remain open.
+The [recent-failure checkpoint](failure-metadata-handoff.md) adds bounded private
+native journals, interruption handling and operational disclosure, with current
+57/58-entry Windows/Linux suites and 54 historical-toolset host checks.
 The [oracle checkpoint](oracle-handoff.md) calibrates independent pixel/time evaluation
 against native X11 disappearance, freeze, obstruction and capture-gap cases. It does
 not yet qualify a named shell/reveal or icon-manager scenario.

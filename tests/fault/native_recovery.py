@@ -133,9 +133,10 @@ def verify(process, case, observations):
         raise AssertionError('unknown oracle')
 
 
-def scenario(executable, case, mode):
+def scenario(executable, case, mode, evidence):
     address, owned = endpoint()
-    command = [str(executable), 'supervisor', address, mode]
+    journal = evidence/('failure-'+case+'-'+uuid.uuid4().hex[:12]+'.jsonl')
+    command = [str(executable), 'supervisor', address, mode, str(journal)]
     process = Process(command)
     observers = {}
     record = {'case': 'RECOVERY-01.'+case, 'outcome': 'fail', 'command': command, 'child_observations': []}
@@ -161,6 +162,22 @@ def scenario(executable, case, mode):
                     break
         process.finish(timeout=3)
         verify(process, case, observers)
+        raw = journal.read_bytes()
+        assert raw.startswith(b'SYSPANE-FAILURES 0.1\n') and len(raw) <= 8192
+        metadata = [json.loads(line) for line in raw.splitlines()[1:]]
+        faults = events(process, 'fault')
+        assert len(metadata) == len(faults) and all(row['stored'] for row in events(process, 'failure_recorded'))
+        for fault, recorded in zip(faults, events(process, 'failure_recorded')):
+            stopped = next(row for row in events(process, 'stopped') if row['pid'] == fault['pid'])
+            assert process.lines.index(stopped) < process.lines.index(recorded), 'optional journal write preceded confirmed child cleanup'
+        expected_reason = {'PRODUCER-HANG': 'producer_expired', 'RENDER-STALL': 'render_stalled', 'CRASH-CIRCUIT': 'crashed',
+                           'QUARANTINE': 'operation_timeout', 'ROLE-DENIAL': 'protocol_rejected', 'WRONG-EPOCH': 'protocol_rejected', 'PROGRESS-DENIAL': 'protocol_rejected'}
+        expected_role = 'desktop' if case in ('CHILD-GRACEFUL', 'RENDER-STALL', 'PROGRESS-DENIAL') else 'collector'
+        for i, (row, fault) in enumerate(zip(metadata, faults)):
+            assert set(row) == {'sequence', 'elapsed_ms', 'role', 'reason', 'stop_confirmed'}
+            assert row['sequence'] == str(i+1) and row['role'] == expected_role and row['reason'] == expected_reason[case]
+            assert row['stop_confirmed'] == (not fault['alive']) and 0 <= int(row['elapsed_ms']) <= 40000
+        record['failure_metadata'] = {'record': journal.name, 'sha256': hashlib.sha256(raw).hexdigest(), 'text': raw.decode('utf-8')}
         record['outcome'] = 'pass'
     except Exception as error:
         record['failure'] = str(error)
@@ -200,12 +217,15 @@ def main():
     inputs = ['source/application/recovery_probe.cpp', 'source/platform/child.hpp', 'source/platform/child_linux.cpp',
               'source/platform/child_windows.cpp', 'source/diagnostics/health_link.hpp', 'source/diagnostics/health_link.cpp',
               'source/protocol/wire.cpp', 'tests/fault/native_recovery.py', 'spec/delivery/packages/w-25-recovery.md']
+    inputs += ['source/platform/failure_store.cpp', 'source/platform/failure_store.hpp', 'source/diagnostics/failure_history.cpp',
+               'source/diagnostics/failure_history.hpp', 'spec/delivery/packages/w-25-failure-metadata.md']
     report['source_inputs'] = {p: hashlib.sha256((ROOT/p).read_bytes()).hexdigest() for p in inputs}
     try:
         for case, mode in [('CHILD-GRACEFUL','graceful'), ('PRODUCER-HANG','producer-hang'), ('RENDER-STALL','render-stall'),
                            ('CRASH-CIRCUIT','crash-circuit'), ('QUARANTINE','quarantine'), ('PARENT-LOSS','parent-loss'),
                            ('ROLE-DENIAL','role-denial'), ('WRONG-EPOCH','wrong-epoch'), ('PROGRESS-DENIAL','progress-denial')]:
-            report['cases'].append(scenario(args.executable.resolve(), case, mode))
+            args.evidence.mkdir(parents=True, exist_ok=True)
+            report['cases'].append(scenario(args.executable.resolve(), case, mode, args.evidence.resolve()))
         if all(case['outcome'] == 'pass' for case in report['cases']): report['outcome'] = 'pass'
     except Exception as error:
         report['harness_error'] = str(error)

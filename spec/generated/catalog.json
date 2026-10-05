@@ -63,7 +63,7 @@
         "SP-PROCESSES",
         "SP-PERFORMANCE"
       ],
-      "sha256": "35a13f12f698ccde2c8ef4f12fee5c64b97334cc5f6746e734e9ebc5ad077c8c"
+      "sha256": "ca6eee391af138c5361aec96e9a90a2d9065a8e1d36622263f91023a3f25db6d"
     },
     {
       "id": "SP-SCHEDULER",
@@ -357,7 +357,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "d8fdaffd43a6c62bb3efa5d3ca59feed87af71f39bf398852fd304db9c379928"
+      "sha256": "77a6eb28f0a2302fc5761f7de75b3a11098d3d9f82188a2efb318a1215cafc7c"
     },
     {
       "id": "SP-DIAGNOSTIC-HANDOFF",
@@ -369,6 +369,17 @@
         "SP-W25-PACKAGE"
       ],
       "sha256": "5461b39ac919832366c4e92ad6b9d9065321c7a9f6df2967c2951117a1c1badc"
+    },
+    {
+      "id": "SP-FAILURE-METADATA-HANDOFF",
+      "path": "delivery/failure-metadata-handoff.md",
+      "title": "Independent recent-failure metadata checkpoint",
+      "description": "Bind bounded native fault records, private file handling and policy-gated diagnostic projection to current evidence.",
+      "requires": [
+        "SP-W25-FAILURE-METADATA",
+        "SP-CAMPAIGN-ADMISSION"
+      ],
+      "sha256": "05e07d0b832cb58bb6e962184a3d140ee22e65db08c4a855cd818ec070f5bc71"
     },
     {
       "id": "SP-FOUNDATION-HANDOFF",
@@ -400,7 +411,7 @@
       "requires": [
         "SP-CURRENT"
       ],
-      "sha256": "6bbb23402a57d694216a0dcda5f500fd3a0a9d6d2b0b38b53af099d27ab0dc47"
+      "sha256": "3894701da60bcdfe89f1110d6ee75ebbc287f6cd8bcc60959be0e519b8eb9dc3"
     },
     {
       "id": "SP-NATIVE-TRANSPORT-HANDOFF",
@@ -472,7 +483,7 @@
         "SP-WINDOWS",
         "SP-W02-PACKAGE"
       ],
-      "sha256": "781d8843c9825319d1b42c9cde6bc523e43f092024ff539f25020d800d7e7f7b"
+      "sha256": "0b5f0cbdc1af240ccc281928fbb9dd201bb5840057891711309f739ca30979ed"
     },
     {
       "id": "SP-W05-PACKAGE",
@@ -499,6 +510,17 @@
       "sha256": "2d88899f08dd04a985b5576246d8ad051a6630e59440346e897f0fbe5352a03f"
     },
     {
+      "id": "SP-W25-FAILURE-METADATA",
+      "path": "delivery/packages/w-25-failure-metadata.md",
+      "title": "W-25 bounded recent-failure metadata",
+      "description": "Connect recorded failures to independent diagnosis without treating a local file as live health or policy authority.",
+      "requires": [
+        "SP-W25-PACKAGE",
+        "SP-POLICY"
+      ],
+      "sha256": "16754f609c01c4da6dbcdbaea9dd05c300e1e64a09a35bc88b01d23af3f5b28c"
+    },
+    {
       "id": "SP-W25-PACKAGE",
       "path": "delivery/packages/w-25-recovery.md",
       "title": "W-25 independent recovery and producer leases",
@@ -509,7 +531,7 @@
         "SP-TRANSPORT",
         "SP-COMPOSITION"
       ],
-      "sha256": "1a8ce52c2bb7e3e169b99b1fda8dd50b6da218bd02062636ebad8d860bf16881"
+      "sha256": "33d78a71380ae4049ddb3da0e9ab21b381ec4867a712d78595547edb3ae85b7b"
     },
     {
       "id": "SP-W26-PACKAGE",

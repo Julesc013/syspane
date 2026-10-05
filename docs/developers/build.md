@@ -210,15 +210,34 @@ ctest --preset windows-x86-v141-xp --output-on-failure
 python build-support/package_smoke.py --profile windows-x86-v141-xp --build-dir out/build/windows-x86-v141-xp
 ```
 
-This is an x86 Release/static-runtime build. Its 51 checks execute on the current
+This is an x86 Release/static-runtime build. Its current 54 checks execute on the current
 Windows host; historical guest execution and desktop qualification remain pending.
-Guest execution will cover 44 C++ case invocations and the model smoke binary;
+Guest execution will cover 47 C++ case invocations and the model smoke binary;
 the six build/tooling entries run on the modern host, without installing Python
 3.11 or current CMake in XP.
 The PE audit checks all five executables and resolved MSBuild runtime inputs.
 It does not infer XP compatibility from module names or subsystem version alone.
 See the [historical checkpoint](../../spec/delivery/historical-build-handoff.md).
 Existing guest machines need an established test scope before use or capture.
+
+The recent-failure boundary brings current full CTest totals to 57 on Windows and
+58 on Linux. `SysPane.Diag.exe --report --failures <absolute-path>` (or
+`syspane-diag` on Linux) opts into bounded advisory metadata. `--inspect --failures
+<absolute-path>` uses the same current policy checks for native/accessibility text.
+Unavailable operational permission returns `restricted` without reading the file;
+the filename never grants policy authority. Default startup opens no failure file.
+
+The development recovery probe accepts `supervisor <endpoint> <scenario>
+<new-absolute-failure-file>` to record its synthetic fault facts. It creates a
+private file exclusively and never overwrites one. This is not a product retention
+or configuration-preservation command. See the [closed boundary](../../spec/delivery/packages/w-25-failure-metadata.md).
+
+Collect current full runs with `build-support/record_protocol.py --failure-metadata
+--profile <profile> --build-dir <build> --output <record>`. That flag includes all
+existing native/oracle regression families and requires the new concrete records.
+For the historical build, use `record_legacy_build.py --failure-metadata` with its
+existing build/smoke/output arguments. Records retain source/artifact identities,
+raw failures and explicitly unexecuted Windows symlink qualification.
 
 Specification tooling separately uses Python 3.11+ in an isolated environment:
 

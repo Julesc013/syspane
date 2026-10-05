@@ -17,6 +17,8 @@ now run over tested Windows/Linux local IPC adapters. Portable producer-lease,
 render-progress and restart-budget guards now supervise real isolated test workers
 on both profiles. An independent diagnostic executable now provides a public JSON
 report and conservative Win32/GTK inspector with mandatory-policy checks.
+Explicit recent-failure reporting now uses bounded private files and current
+operational disclosure policy; see the [checkpoint](spec/delivery/failure-metadata-handoff.md).
 Telemetry/renderer recovery, diagnostic preservation controls and desktop
 integration remain pending.
 An external pixel/time oracle is calibrated against live, hidden, frozen and

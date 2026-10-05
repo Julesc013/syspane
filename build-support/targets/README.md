@@ -132,7 +132,7 @@ ctest --preset windows-x86-v141-xp --output-on-failure
 python build-support/package_smoke.py --profile windows-x86-v141-xp --build-dir out/build/windows-x86-v141-xp
 ```
 
-The profile has 51 host checks, including PE/header/import validation and nine
+The initial revision had 51 host checks, including PE/header/import validation and nine
 mutation cases. Binaries are under `out/build/windows-x86-v141-xp/Release/`.
 The intended XP SP3/Windows 7 runtime experiment is still unqualified; running the
 artifacts on this Windows 10 host is WOW64 evidence only. CMake's SDK-selection
@@ -140,3 +140,12 @@ banner is not the resolved library list: v141_xp selects SDK 7.1A and the explic
 pinned UCRT, which the audit verifies from MSBuild's actual input logs.
 MSB8051 is a preserved vendor deprecation warning; compiler warnings remain errors.
 See `spec/delivery/historical-build-handoff.md` for guest and desktop gates.
+
+The current recent-failure increment uses Windows revision 8 (57 CTest entries),
+Linux revision 9 (58) and historical revision 2 (54). Three shared diagnostic cases
+cover the bounded metadata codec, byte-by-byte interruption and policy read gating.
+The modern profiles additionally own `syspane_failure_store` and its native tests;
+Windows links system Advapi32/Shell32 for private ACLs and Unicode arguments.
+The historical profile includes only the portable codec/projection. Its current
+guest workload would be 47 C++ case invocations plus model smoke; six tooling
+entries stay on the modern host. Guest execution remains unqualified.

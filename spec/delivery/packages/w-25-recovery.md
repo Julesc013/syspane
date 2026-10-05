@@ -303,8 +303,9 @@ This increment owns `SysPane.Diag.exe` / `syspane-diag`, built-in public build/p
 facts and a conservative Win32/GTK 3 inspector. It opens no scene, theme, history,
 provider, user configuration or controller endpoint. It has no child/process-control,
 network, renderer, recovery reset, file preservation or clipboard interface yet.
-Recent-failure metadata and explicit preservation of damaged configuration remain
-required follow-up boundaries; absence of those features keeps W-25 in progress.
+The linked [recent-failure boundary](w-25-failure-metadata.md) extends this baseline
+with explicit bounded file selection and operational policy checks. Explicit
+preservation of damaged configuration remains required follow-up work.
 The native toolkit is a declared dependency, not the application's custom renderer.
 
 No arguments or `--inspect` opens the inspector. `--report` emits one UTF-8 JSON

@@ -12,7 +12,7 @@ sp_requires: ["SP-PROCESSES", "SP-PERFORMANCE"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-AUDIT-2026-10-04"]
 sources: [{"id": "SRC-AUDIT-2026-10-04", "resource": "User-supplied SysPane audits and design reviews, 2026-10-04", "title": "October specification review inputs"}]
-updated: {"by": "codex", "at": "2026-10-06T01:39:51+11:00", "scope": "W-25 portable recovery checkpoint; native and visible recovery remain pending"}
+updated: {"by": "codex", "at": "2026-10-06T05:56:27+11:00", "scope": "Bounded recent-failure metadata checkpoint; preservation and visible recovery remain open"}
 ---
 
 # Independent recovery and bounded failure
@@ -69,6 +69,12 @@ deadline equality, stale callbacks, clock regression, bounded backoff and quaran
 until confirmed termination. These guards precede native supervision and independent
 diagnostic entry; they do not by themselves establish visible recovery or native
 process-stop evidence.
+
+The [recent-failure boundary](../delivery/packages/w-25-failure-metadata.md) defines
+bounded advisory records, explicit file ownership, interrupted input and current
+operational disclosure for the independent diagnostic path. Its native probe
+integration does not define product retention, grant process-control authority or
+replace the still-required configuration-preservation and visible-recovery work.
 
 Tests freeze the producer, stall rendering, corrupt optional content, remove storage,
 revoke policy and exhaust optional work. Recovery reports measure elapsed time and

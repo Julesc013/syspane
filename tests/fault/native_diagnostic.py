@@ -206,9 +206,10 @@ def main():
               'source_inputs': {p.relative_to(ROOT).as_posix(): sha(p) for directory in ('source/application', 'source/diagnostics', 'source/interfaces', 'source/platform', 'source/configuration') for p in sorted((ROOT/directory).glob('*')) if p.is_file()}}
     report['source_inputs']['tests/fault/native_diagnostic.py'] = sha(Path(__file__))
     report['source_inputs']['spec/delivery/packages/w-25-recovery.md'] = sha(ROOT/'spec/delivery/packages/w-25-recovery.md')
+    report['source_inputs']['spec/delivery/packages/w-25-failure-metadata.md'] = sha(ROOT/'spec/delivery/packages/w-25-failure-metadata.md')
     attempts = []
     def run(*args, env=None):
-        print('Diagnostic invocation: ' + ' '.join(args), flush=True)
+        print('Diagnostic invocation: ' + json.dumps(list(args), ensure_ascii=True), flush=True)
         result = subprocess.run([str(copied), *args], cwd=workspace, env=env, stdin=subprocess.DEVNULL, capture_output=True, timeout=5, **FLAGS)
         attempts.append({'arguments': list(args), 'exit': result.returncode, 'stdout': result.stdout.decode('utf-8'), 'stderr': result.stderr.decode('utf-8')})
         return result
@@ -245,8 +246,21 @@ def main():
             assert result.returncode == 0 and json.loads(result.stdout) == baseline and not result.stderr
             assert before == {p.name: sha(p) for p in workspace.iterdir() if p.is_file()}
         case('DAMAGED', damaged)
+        def failure_metadata():
+            assert baseline['policy_state'] == 'unavailable', 'unavailable-policy native case requires that lab state; do not override installed policy'
+            before = sha(workspace/'policy.json')
+            for selected in (workspace/'policy.json', workspace/'missing-λ.jsonl'):
+                result = run('--report', '--failures', str(selected))
+                assert result.returncode == 0 and not result.stderr
+                expected = {**baseline, 'failure_history': {'status': 'restricted', 'trust': 'unverified_local_metadata', 'live_health': False, 'records': []}}
+                assert json.loads(result.stdout) == expected
+            assert sha(workspace/'policy.json') == before
+            return {'policy_state': 'unavailable', 'scope': 'Restricted native projection; positive policy/read-spy cases are portable typed fixtures.'}
+        case('FAILURE-METADATA', failure_metadata)
         def arguments():
-            for args in (('--unknown',), ('--report', '--inspect'), ('--policy', str(workspace/'policy.json')), ('--report', '--trusted')):
+            for args in (('--unknown',), ('--report', '--inspect'), ('--policy', str(workspace/'policy.json')), ('--report', '--trusted'),
+                         ('--report', '--failures'), ('--report', '--failures', 'relative.jsonl'), ('--help', '--failures', str(workspace/'policy.json')),
+                         tuple(['--report']+['--extra']*16)):
                 result = run(*args)
                 assert result.returncode == 64 and not result.stdout and result.stderr == b'diagnostic.arguments\n'
         case('ARGUMENTS', arguments)
@@ -256,7 +270,7 @@ def main():
             if not WINDOWS: server, env = launch_xvfb(workspace)
             process = None
             try:
-                process = subprocess.Popen([str(copied), '--inspect-hidden'], cwd=workspace, env=env, stdin=subprocess.DEVNULL, stdout=subprocess.PIPE, stderr=subprocess.PIPE, **FLAGS)
+                process = subprocess.Popen([str(copied), '--inspect-hidden', '--failures', str(workspace/'policy.json')], cwd=workspace, env=env, stdin=subprocess.DEVNULL, stdout=subprocess.PIPE, stderr=subprocess.PIPE, **FLAGS)
                 result = close_windows(process) if WINDOWS else bounded_close_x11(process, env)
                 stdout, stderr = process.communicate(timeout=5)
                 result.update(exit=process.returncode, stdout=stdout.decode('utf-8'), stderr=stderr.decode('utf-8'))

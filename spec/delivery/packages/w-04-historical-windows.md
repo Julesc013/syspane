@@ -68,8 +68,9 @@ requires actual native candidates, externally captured changing pixels, desktop
 reveal, icon input, wallpaper preservation and independent recovery on each OS.
 The W-02 oracle and behind-icons acceptance criteria remain unchanged.
 
-The modern build host runs CMake, Python and all 51 CTest entries. A historical
-guest must execute the four C++ test binaries with their 44 existing case IDs and
+The initial profile revision ran 51 CTest entries. Revision 2 adds three shared
+failure-metadata cases, for 54 entries on the modern CMake/Python build host. A historical
+guest must execute the four C++ test binaries with their 47 current case IDs and
 the model smoke binary with its literal output oracle. The six build/tooling CTest
 entries stay on the build host; do not require Python 3.11 or current CMake inside
 XP, or count host checks as guest execution. Close the transfer/launch/result

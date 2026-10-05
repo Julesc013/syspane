@@ -30,7 +30,10 @@ def main():
     parser.add_argument('--supervision', action='store_true', help='Require the native owned-child supervision family')
     parser.add_argument('--diagnostic', action='store_true', help='Require independent diagnostic entry and native close checks')
     parser.add_argument('--oracle', action='store_true', help='Require portable temporal oracle and Linux native pixel calibration')
+    parser.add_argument('--failure-metadata', action='store_true', help='Require bounded failure metadata and all current native regression families')
     args = parser.parse_args()
+    if args.failure_metadata:
+        args.oracle = True
     if args.oracle:
         args.diagnostic = True
     if args.diagnostic:
@@ -62,6 +65,8 @@ def main():
         expected.add('desktop.ORACLE-UNIT')
         if platform.system() != 'Windows':
             expected.add('native.ORACLE-01')
+    if args.failure_metadata:
+        expected |= {'diagnostic.FAILURE-CODEC', 'diagnostic.FAILURE-INTERRUPT', 'diagnostic.FAILURE-PROJECTION', 'native.FAILURE-STORE'}
     if len(cases) != len(expected) or {case['case'] for case in cases} != expected or any(case['outcome'] != 'pass' for case in cases):
         raise ValueError('missing, repeated, unexpected or failing case; preserve log before rerun')
     suffix = '.exe' if platform.system() == 'Windows' else ''
@@ -95,6 +100,13 @@ def main():
         if args.oracle and not suffix:
             artifacts['SysPane.OracleProbe'] = {'sha256': sha(build/'SysPane.OracleProbe'), 'bytes': (build/'SysPane.OracleProbe').stat().st_size}
             required['ORACLE-01'] = {'LIVE','DISAPPEAR','FREEZE','OCCLUDE','GAP'}
+        if args.failure_metadata:
+            for name in ('syspane_failure_store_tests'+suffix, 'libsyspane_failure_store.a'):
+                artifacts[name] = {'sha256': sha(build/name), 'bytes': (build/name).stat().st_size}
+            required['DIAG-01'].add('FAILURE-METADATA')
+            required['FAILURE-STORE'] = {'ROUNDTRIP-UNICODE', 'EXCLUSIVE', 'CAPACITY', 'REGRESSION-LATCH', 'OPEN-WRITER-READ',
+                                         'INTERRUPTED-INVALID', 'OVERSIZE', 'HARDLINK', 'PATH-TYPE',
+                                         'WINDOWS-PRIVATE-DACL' if suffix else 'POSIX-PERMISSIONS-LINK-FIFO'}
         seen = set()
         for name in re.findall(r'^Native evidence: (.+)$', raw, re.M):
             path = Path(name.strip()).resolve()
@@ -106,10 +118,15 @@ def main():
                 raise ValueError('unknown/repeated native family')
             seen.add(family)
             expected_cases = {family+'.'+case for case in required[family]}
+            if args.failure_metadata and family == 'FAILURE-STORE' and suffix:
+                if any(case['case'] == 'FAILURE-STORE.WINDOWS-REPARSE' for case in native['cases']):
+                    expected_cases.add('FAILURE-STORE.WINDOWS-REPARSE')
+                elif 'Windows symlink creation requires an unavailable privilege; reparse rejection case not executed.' not in native['limitations']:
+                    raise ValueError('Windows reparse case must execute or retain its exact privilege limitation')
             if native['outcome'] != 'pass' or len(native['cases']) != len(expected_cases) or {case['case'] for case in native['cases']} != expected_cases or any(case['outcome'] != 'pass' for case in native['cases']):
                 raise ValueError('native case missing or failed; preserve original report')
-            if family in ('RECOVERY-01', 'DIAG-01', 'ORACLE-01'):
-                executable = {'RECOVERY-01':'SysPane.RecoveryProbe'+suffix, 'DIAG-01':'SysPane.Diag.exe' if suffix else 'syspane-diag', 'ORACLE-01':'SysPane.OracleProbe'}[family]
+            if family in ('RECOVERY-01', 'DIAG-01', 'ORACLE-01', 'FAILURE-STORE'):
+                executable = {'RECOVERY-01':'SysPane.RecoveryProbe'+suffix, 'DIAG-01':'SysPane.Diag.exe' if suffix else 'syspane-diag', 'ORACLE-01':'SysPane.OracleProbe', 'FAILURE-STORE':'syspane_failure_store_tests'+suffix}[family]
                 if native['executable_sha256'] != sha(build/executable):
                     raise ValueError('native executable changed after run')
                 for source, digest in native['source_inputs'].items():
@@ -119,11 +136,16 @@ def main():
                     for case in native['cases']:
                         if not case['child_observations'] or not all(c['observed_alive'] and c['observed_exited'] for c in case['child_observations']):
                             raise ValueError('native child observation missing')
+                        if args.failure_metadata:
+                            metadata = case['failure_metadata']
+                            journal = (build/'native-evidence'/metadata['record']).resolve()
+                            if not journal.is_relative_to(build/'native-evidence') or sha(journal) != metadata['sha256'] or journal.read_text(encoding='utf-8') != metadata['text']:
+                                raise ValueError('failure journal source/bytes differ from observed native faults')
                 elif family == 'DIAG-01':
                     close = next(case for case in native['cases'] if case['case'] == 'DIAG-01.NATIVE-CLOSE')
                     if native['profile'] != args.profile or not close['pid_verified'] or not close['title_verified'] or not close['class_verified'] or close['exit'] != 0:
                         raise ValueError('diagnostic native close identity/exit evidence missing')
-                else:
+                elif family == 'ORACLE-01':
                     specification = importlib.util.spec_from_file_location('syspane_external_oracle', ROOT/'tests/desktop/oracle.py')
                     oracle = importlib.util.module_from_spec(specification)
                     specification.loader.exec_module(oracle)
@@ -161,6 +183,8 @@ def main():
         paths.extend([ROOT/'spec/delivery/packages/w-25-recovery.md', ROOT/'spec/architecture/recovery.md'])
     if args.oracle:
         paths.extend([ROOT/'spec/delivery/packages/w-02-desktop-oracle.md', ROOT/'spec/assurance/desktop-oracle.md'])
+    if args.failure_metadata:
+        paths.append(ROOT/'spec/delivery/packages/w-25-failure-metadata.md')
     for directory in ('source', 'tests', 'build-support', 'spec/contracts'):
         paths.extend(sorted((ROOT/directory).rglob('*')))
     inputs = {p.relative_to(ROOT).as_posix(): sha(p) for p in paths
@@ -233,6 +257,16 @@ def main():
             'No named shell reveal action, icon-manager input/focus, real wallpaper policy/file or Windows external desktop capture is qualified.',
             'X11 window PID properties are structural checks within the private trusted test server, not peer authentication for arbitrary clients.',
             'W-02, W-25 and the full campaign remain incomplete. No privileged action, shell restart, public release or human review is attested.'
+        ]
+    if args.failure_metadata:
+        report.update(work_id='W-25', slice='bounded recent-failure recording and independent policy-gated diagnosis', work_status='in_progress')
+        report['bindings']['failure_metadata'] = 'spec/delivery/packages/w-25-failure-metadata.md'
+        report['limits'] = [
+            'Failure files are unverified advisory records from synthetic owned-process faults; they do not establish live health, configuration durability or product retention.',
+            'Native unavailable-policy reporting and hidden Close ran; positive disclosure/revocation uses typed portable fixtures, not installed protected-policy deployment.',
+            'Windows symlink/reparse creation may remain unexecuted under current privileges; the native report preserves the exact limitation.',
+            'Configuration preservation, real renderer/data recovery and independent editor exit remain required W-25 work.',
+            'Oracle captures remain owned Xvfb calibration; no new desktop or historical OS qualification, privileged action or public release is attested.'
         ]
     args.output.parent.mkdir(parents=True, exist_ok=True)
     log_output.write_text(raw.replace(str(build), '<build>').replace(str(ROOT), '<source>'), encoding='utf-8', newline='\n')
