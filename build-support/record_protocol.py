@@ -26,7 +26,10 @@ def main():
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--native', action='store_true', help='Require both real local-IPC families and their concrete case records')
     parser.add_argument('--recovery', action='store_true', help='Record W-25 portable guards; requires native regression cases as well')
+    parser.add_argument('--supervision', action='store_true', help='Require the native owned-child supervision family')
     args = parser.parse_args()
+    if args.supervision:
+        args.recovery = True
     if args.recovery:
         args.native = True
     build = args.build_dir.resolve()
@@ -44,6 +47,8 @@ def main():
     expected = EXPECTED | ({'native.NATIVE-01', 'native.NATIVE-02'} if args.native else set())
     if args.recovery:
         expected |= {f'recovery.{case}' for case in RECOVERY_CASES}
+    if args.supervision:
+        expected.add('native.RECOVERY-01')
     if len(cases) != len(expected) or {case['case'] for case in cases} != expected or any(case['outcome'] != 'pass' for case in cases):
         raise ValueError('missing, repeated, unexpected or failing case; preserve log before rerun')
     suffix = '.exe' if platform.system() == 'Windows' else ''
@@ -63,6 +68,10 @@ def main():
         }
         if not suffix:
             required['NATIVE-02'].add('POSIX-SESSION-DENIAL')
+        if args.supervision:
+            for name in ('SysPane.RecoveryProbe'+suffix, 'libsyspane_child.a', 'libsyspane_health.a'):
+                artifacts[name] = {'sha256': sha(build/name), 'bytes': (build/name).stat().st_size}
+            required['RECOVERY-01'] = {'CHILD-GRACEFUL','PRODUCER-HANG','RENDER-STALL','CRASH-CIRCUIT','QUARANTINE','PARENT-LOSS','ROLE-DENIAL','WRONG-EPOCH','PROGRESS-DENIAL'}
         seen = set()
         for name in re.findall(r'^Native evidence: (.+)$', raw, re.M):
             path = Path(name.strip()).resolve()
@@ -76,6 +85,15 @@ def main():
             expected_cases = {family+'.'+case for case in required[family]}
             if native['outcome'] != 'pass' or len(native['cases']) != len(expected_cases) or {case['case'] for case in native['cases']} != expected_cases or any(case['outcome'] != 'pass' for case in native['cases']):
                 raise ValueError('native case missing or failed; preserve original report')
+            if family == 'RECOVERY-01':
+                if native['executable_sha256'] != sha(build/('SysPane.RecoveryProbe'+suffix)):
+                    raise ValueError('recovery probe changed after native run')
+                for source, digest in native['source_inputs'].items():
+                    if sha(ROOT/source) != digest:
+                        raise ValueError('recovery input changed after native run: '+source)
+                for case in native['cases']:
+                    if not case['child_observations'] or not all(c['observed_alive'] and c['observed_exited'] for c in case['child_observations']):
+                        raise ValueError('native child observation missing')
             destination = args.output.with_suffix('.'+family+'.json')
             destination.parent.mkdir(parents=True, exist_ok=True)
             destination.write_bytes(path.read_bytes())
@@ -84,7 +102,7 @@ def main():
         if seen != set(required):
             raise ValueError('required native family has no bound report in this CTest log')
         inspector = 'objdump' if suffix else 'readelf'
-        command = [inspector, '-p' if suffix else '-d', str(build/('SysPane.IpcProbe'+suffix))]
+        command = [inspector, '-p' if suffix else '-d', str(build/(('SysPane.RecoveryProbe' if args.supervision else 'SysPane.IpcProbe')+suffix))]
         inspected = subprocess.check_output(command, text=True, encoding='utf-8')
         imports = re.findall(r'DLL Name:\s*(\S+)', inspected) if suffix else re.findall(r'\(NEEDED\).*?\[([^]]+)\]', inspected)
         if not imports:
@@ -134,11 +152,21 @@ def main():
             'Native local IPC regression cases retain their original development-only scope and blocked cross-user/logon qualification.',
             'W-25 and the full campaign remain incomplete; no desktop support, public release or privileged operation is claimed.'
         ]
+    if args.supervision:
+        report['slice'] = 'native owned-child supervision and independent health/render-worker progress'
+        report['bindings']['native_recovery_cases'] = 'tests/fault/native_recovery.py'
+        report['limits'] = [
+            'Nine real native synthetic worker cases; render-worker completion draws no pixels and does not qualify a renderer or desktop host.',
+            'Only self-child launch is enabled; inherited environment is trusted development input, not a hostile-code isolation boundary.',
+            'No full snapshot/delta, diagnostic entry/inspector, native editor exit or policy-driven payload erasure is implemented by this boundary.',
+            'W-25 and the full campaign remain incomplete. Historical/Mac and cross-user/logon qualification remain pending or blocked.',
+            'No privileged operation, public release or human review is attested.'
+        ]
     args.output.parent.mkdir(parents=True, exist_ok=True)
     log_output.write_text(raw.replace(str(build), '<build>').replace(str(ROOT), '<source>'), encoding='utf-8', newline='\n')
     args.output.write_text(json.dumps(report, indent=2)+'\n', encoding='utf-8', newline='\n')
     print(json.dumps({'profile': args.profile, 'cases': len(cases), 'outcome': 'pass', 'native_ipc': 'executed' if args.native else 'not_run',
-                      'recovery': 'portable_only' if args.recovery else 'not_recorded'}))
+                      'recovery': 'native_supervision' if args.supervision else ('portable_only' if args.recovery else 'not_recorded')}))
 
 
 if __name__ == '__main__':

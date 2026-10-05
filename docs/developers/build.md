@@ -26,10 +26,10 @@ Create a local Windows smoke archive and check relocation with:
 python build-support/package_smoke.py --profile windows-x64-gcc15 --build-dir out/build/windows-x64-gcc15
 ```
 
-Both profiles now run 37 CTest entries: the original 18 model/smoke/component checks,
+The W-24 checkpoint ran 37 CTest entries: the original 18 model/smoke/component checks,
 17 portable protocol/policy checks and two native IPC families. Run portable cases with
 `ctest --preset windows-x64-gcc15 -R '^protocol\.' --output-on-failure`.
-The original W-01 results remain historical; current case/artifact records are
+The original W-01 results remain historical; W-24 case/artifact records are
 `build-support/evidence/w-24-native-<profile>.json`. The two native families contain
 15 concrete Windows cases and 16 Linux cases, with raw process transcripts. Run
 them alone with `ctest --preset windows-x64-gcc15 -R '^native\.' --output-on-failure`.
@@ -61,7 +61,7 @@ native-handle dependency. Tests link the model separately to verify that produce
 heartbeats leave observation freshness unchanged. Run just these cases with
 `ctest --preset windows-x64-gcc15 -R '^recovery\.' --output-on-failure`.
 The Linux wrapper's `test` action runs the full suite in its owned native build root.
-Current records are `build-support/evidence/w-25-portable-<profile>.json`.
+Portable checkpoint records are `build-support/evidence/w-25-portable-<profile>.json`.
 
 The [W-25 package](../../spec/delivery/packages/w-25-recovery.md) defines the time,
 ownership, expiry and restart boundaries. Guard objects are single-owner and cannot
@@ -70,8 +70,30 @@ a clock. The caller must advance time and apply current policy before presentati
 `build-support/record_protocol.py --recovery --profile <profile> --build-dir <build>
 --output <record>` records a completed full run, requiring all 48 cases and the
 native IPC reports named in its log. It labels recovery evidence as portable only.
-W-25 still requires independent native supervision, diagnostic startup/inspector,
-policy integration and visible/native-exit recovery.
+At that portable checkpoint, native supervision, diagnostic startup/inspector,
+policy integration and visible/native-exit recovery were still pending.
+
+Profile revision 5 adds native child supervision: both profiles run 49 CTest entries.
+`SysPane.RecoveryProbe` launches only its own isolated synthetic worker and uses
+authenticated health messages. It proves producer expiry, a stalled separate render
+worker with responsive IPC, confirmed child exit, bounded replacement/circuit and
+parent-loss cleanup. No pixels or user desktop are captured. Run the nine-case
+family with `ctest --preset windows-x64-gcc15 -R '^native.RECOVERY-01$' --output-on-failure`.
+It takes approximately 35 seconds; the full suite takes approximately 65 seconds.
+The Linux wrapper uses the same test family in its owned build root.
+
+Current records are `build-support/evidence/w-25-supervision-<profile>.json`.
+Use the recorder's `--supervision` option to require the complete 49-entry run and
+its nine native recovery cases. Per-attempt reports remain in `native-evidence/`;
+the recorder binds the exact files named by CTest, checks the probe/source digests
+and requires independent child-alive/exit observations. Linux runtime sockets live
+in private case directories below `~/.cache/syspane/recovery-w25/`; cleanup never
+recursively deletes a tree. The parent-loss case removes only its owned socket.
+
+See the [native supervision handoff](../../spec/delivery/supervision-handoff.md).
+The diagnostic executable/inspector, telemetry and actual renderer recovery,
+current-policy data erasure and independent desktop/native-exit evidence remain
+required. The health feature does not enable snapshot/delta or stored commands.
 
 Specification tooling separately uses Python 3.11+ in an isolated environment:
 

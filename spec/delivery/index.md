@@ -13,6 +13,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Open decisions, risks and resolving experiments](open-questions.md) — Keep unresolved choices discoverable without blocking unrelated work.
 - [Portable recovery implementation checkpoint](recovery-handoff.md) — Record lease, render-progress and restart decisions while preserving native recovery gates.
 - [Greenfield implementation campaign](roadmap.md) — Build native vertical slices and contracts together in risk order.
+- [Native child supervision implementation checkpoint](supervision-handoff.md) — Bind owned-child lifetime and independent health decisions to Windows/Linux fault evidence.
 - [Build targets and qualification profiles](target-profiles.md) — Bind concrete runtime floors to evidence instead of inferring support from platform names.
 - [Portable transport and policy checkpoint](transport-handoff.md) — Resume W-24 from executable portable contracts without claiming native authentication.
 - [Implementation work-package closure](work-packages.md) — Make each admitted package implementable, verifiable and resumable from the repository.

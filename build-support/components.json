@@ -2,6 +2,81 @@
   "version": "0.1.0",
   "components": [
     {
+      "id": "child",
+      "target": "syspane_child",
+      "type": "STATIC_LIBRARY",
+      "source_owner": "source/platform/",
+      "public_interfaces": [
+        "source/platform/child.hpp"
+      ],
+      "private_interfaces": [],
+      "sources": [
+        "source/platform/child_linux.cpp",
+        "source/platform/child_windows.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_local_ipc"
+      ],
+      "target_requirements": [
+        "cxx17",
+        "native_local_ipc"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": []
+    },
+    {
+      "id": "health",
+      "target": "syspane_health",
+      "type": "STATIC_LIBRARY",
+      "source_owner": "source/diagnostics/",
+      "public_interfaces": [
+        "source/diagnostics/health_link.hpp"
+      ],
+      "private_interfaces": [],
+      "sources": [
+        "source/diagnostics/health_link.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_protocol",
+        "syspane_local_ipc"
+      ],
+      "target_requirements": [
+        "cxx17",
+        "native_local_ipc"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": []
+    },
+    {
+      "id": "recovery-probe",
+      "target": "syspane_recovery_probe",
+      "type": "EXECUTABLE",
+      "source_owner": "source/application/",
+      "public_interfaces": [],
+      "private_interfaces": [],
+      "sources": [
+        "source/application/recovery_probe.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_child",
+        "syspane_health",
+        "syspane_recovery",
+        "Threads::Threads"
+      ],
+      "target_requirements": [
+        "cxx17",
+        "native_local_ipc"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": []
+    },
+    {
       "id": "recovery", "target": "syspane_recovery", "type": "STATIC_LIBRARY",
       "source_owner": "source/diagnostics/", "public_interfaces": ["source/diagnostics/recovery.hpp"],
       "private_interfaces": [], "sources": ["source/diagnostics/recovery.cpp"],

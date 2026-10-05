@@ -181,3 +181,118 @@ the independent diagnostic entry passes damaged optional input/current-policy
 tests; and its native exit/visible recovery integration is executed in an admitted
 desktop lab. Missing lab access blocks those claims without converting portable
 tests into native qualification. The next handoff must retain each unmet gate.
+
+## Initial native supervision closure
+
+This boundary adds `source/platform/child.hpp`, native implementations and a finite
+`SysPane.RecoveryProbe` composition. It launches only another instance of its own
+executable, with an explicit worker role; there is no arbitrary-program, shell,
+PID-attachment or remote launch API. One supervisor owns one child slot at a time,
+at most four launches per invocation and a 40-second scenario ceiling. Its only
+fault targets are these deliberately launched, unelevated synthetic workers.
+The finite probe allows a 250 ms observer-attachment interval after announcing each
+child, before the server welcomes it; the ordinary five-second hello deadline remains.
+No existing user application, shell, network device or privileged service is touched.
+
+The launcher accepts at most 16 printable ASCII arguments, 512 bytes each and
+4,096 bytes total, with no NUL. Native executable identity is obtained from the
+running module; PATH is not searched. Environment and working directory are inherited
+from the admitted development invocation. They are trusted launch inputs, not an
+isolation boundary. A production sibling-binary launcher needs its own artifact and
+environment closure. Child stdin/stdout/stderr and unrelated native handles are
+not inherited; health flows only through W-24's authenticated private local stream.
+
+Windows creates the same executable with an explicit `lpApplicationName`, quoted
+arguments, no window and initially suspended primary thread. A private non-inherited
+job has kill-on-close and a one-process limit; assignment precedes resume. The
+parent retains the returned process handle until signaled exit, then obtains its
+exit code. No PID lookup supplies termination authority. Linux uses `posix_spawn`
+on `/proc/self/exe`, closes descriptors above 2 and directs standard descriptors
+to `/dev/null`. The sole reaper retains a pidfd, signals through that pidfd and
+uses `waitid(P_PIDFD)` to observe/reap only its child. SIGCHLD must remain default
+without automatic reaping; other threads must not reap this owned child. Failure
+to acquire a pidfd cleans up the still-unreaped launch, never an arbitrary PID.
+
+Linux workers arm parent-death SIGKILL before IPC and check that their actual parent
+still matches the trusted launch argument; a pre-arming parent death exits the
+worker. The Windows job provides the corresponding parent-handle lifetime bound.
+These mechanisms are not a sandbox for hostile code; the Linux worker creates no
+descendants. Job/pidfd/procfs support and native user/session authentication remain
+requirements of the measured development profiles, not XP/7 or other-kernel claims.
+
+`Child::request_stop` is an asynchronous request, never stop proof. `wait(0..5000)`
+returns an optional cached exit record only after OS-confirmed exit. Stop waits use
+absolute elapsed monotonic time and preserve EINTR deadlines. A failed timeout
+keeps the restart gate quarantined. Scope cleanup requests stop and waits at most
+two seconds; inability to confirm cleanup terminates this finite supervisor with
+exit 125, allowing its parent-lifetime protection to apply and preventing further
+launches. It does not invent a successful cleanup or kernel-hang guarantee.
+Normal worker shutdown is a protocol shutdown followed by a confirmed exit; forced
+stop is reserved for the isolated worker after failed/expired progress or cleanup.
+
+### Health link and render-worker evidence
+
+`recovery-health` document 0.1.0 over existing wire 0.1 has a 4,096-byte frame limit
+and required feature `recovery.health`. The server declares console; its exact
+expected child PID and allowed client role come from the launch. Collector workers
+exchange health only. Desktop test workers additionally require
+`recovery.progress`. The handshake body and five-second deadline remain W-24's.
+Each launch assigns a new connection ID and producer epoch. Each direction checks
+the selected identity, role, version and required features; no second hello or
+welcome, command, data subscription or unsolicited message is admitted.
+
+| Message | Direction | Exact body and effect |
+|---|---|---|
+| heartbeat | Either negotiated peer | `{sequence: uint64-decimal-string}`; send once per second, including sequence zero after negotiation; only increasing receipt renews the independent lease. |
+| render.challenge | Supervisor to negotiated desktop worker only | `{generation: uint64-decimal-string}`; one pending challenge; the IPC loop passes it to the separate render worker. |
+| render.progress | Desktop worker to supervisor only | Same generation shape; only the actual worker completion can satisfy the outstanding challenge. Unsolicited/future or mismatched completion closes the link. |
+| shutdown | Either negotiated peer | Existing exact reason enum; stop this worker connection and cooperatively join its render worker. |
+
+Unknown/unnegotiated types and wrong connection/epoch close the link. These two
+new optional message types do not grant W-24 preview sessions a rendering feature.
+No full snapshot or delta is enabled by this health profile: it proves producer
+liveness while presentation remains waiting, not telemetry synchronization or pixels.
+The health owner reads with 100 ms waits, sends with a 100 ms operation bound and
+holds at most 16 decoded events per read. Framing still rejects incomplete/oversize
+input; the smaller health budget cannot starve a separate data queue.
+
+The synthetic desktop worker has a real separate thread, one pending generation
+and one completion value. A stall blocks that worker while the IPC owner continues
+one-second heartbeats. It draws no pixels. A producer-hang fault blocks the worker's
+health loop after two heartbeat sends; abrupt exit uses `_Exit(73)` after handshake.
+These are actual isolated process/thread faults, not an OS-wide freeze or a renderer
+qualification. On fault the supervisor records guard state, confirms process exit
+before replacement, keeps its own health loop running and applies the portable
+restart gate unchanged. Test jitter is explicitly zero.
+
+### Mandatory native cases for this boundary
+
+`tests/fault/native_recovery.py` observes the supervisor and independently holds
+OS handles/pidfds for its announced children before checking exit. Per-attempt
+non-overwriting reports preserve all process events, elapsed times and failures.
+CTest `native.RECOVERY-01` binds these nine cases, with a 180-second suite ceiling.
+
+| Case | Fixed oracle |
+|---|---|
+| CHILD-GRACEFUL | Three worker heartbeats and two separate-thread completions; protocol shutdown; OS-confirmed child exit 0; no restart. |
+| PRODUCER-HANG | Child remains alive while heartbeat progress stops; lease expires 3,000..4,000 ms after the last received heartbeat; stop confirmed, then one replacement after at least 1,000 ms; healthy replacement exits normally. |
+| RENDER-STALL | Worker heartbeats advance while no render completion occurs; challenge stalls in 3,000..4,000 ms; stop confirmed and one healthy replacement follows the same backoff. |
+| CRASH-CIRCUIT | Four actual abrupt child exits with code 73; replacement delays at least 1,000/2,000/4,000 ms; circuit opens, no fifth child in a further 500 ms observation. |
+| QUARANTINE | An actual live child remains unconfirmed for at least 250 ms; reset/start are denied and no replacement appears; later confirmed stop permits exactly one replacement. |
+| PARENT-LOSS | External harness terminates only its own supervisor after peer authentication; held OS child identity observes exit within 3,000 ms through parent-lifetime protection. |
+| ROLE-DENIAL | Child requests maintenance instead of its launch-assigned role; no heartbeat or render event is accepted; owned child is cleaned up. |
+| WRONG-EPOCH | A negotiated child sends an old epoch; no heartbeat is accepted and the link closes; owned child is cleaned up. |
+| PROGRESS-DENIAL | A negotiated desktop worker reports the next generation instead of the outstanding challenge; no render completion is accepted and the link closes; owned child is cleaned up. |
+
+Native scheduling tolerance is fixed before measurement; missing deadlines fail
+this development check, not a relaxed oracle. Native process supervision can be
+implemented independently of the diagnostic executable and W-02 pixel oracle.
+Those mandatory W-25 outputs and the full native-host campaign remain open.
+
+Native lifetime references: [CreateProcessW](https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-createprocessw),
+[job objects](https://learn.microsoft.com/en-us/windows/win32/procthread/job-objects),
+[asynchronous termination](https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-terminateprocess),
+[pidfd ownership](https://man7.org/linux/man-pages/man2/pidfd_open.2.html),
+[spawn](https://man7.org/linux/man-pages/man3/posix_spawn.3.html) and
+[parent-death signal](https://man7.org/linux/man-pages/man2/PR_SET_PDEATHSIG.2const.html).
+These establish API semantics; measured SysPane cases establish implementation evidence.

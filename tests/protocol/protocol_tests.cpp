@@ -396,6 +396,16 @@ void session01() {
     cfg::Sessions feature("E", 40, policy()); connect(feature, "C");
     feature.receive("C", packet("subscribe", Json::object()), 0);
     check(feature.closed("C"), "unadvertised feature accepted");
+    for (const auto type : {"render.challenge", "render.progress"}) {
+        cfg::Sessions rendering("E", 40, policy()); connect(rendering, "C");
+        auto valid = packet(type, {{"generation", "18446744073709551615"}});
+        check(decode(valid).type == type, "bounded render body not recognized");
+        rendering.receive("C", valid, 0);
+        check(rendering.closed("C") && rendering.close_reason("C") == "session.direction_or_feature", "preview inherited render feature");
+        fails([&] { decode(packet(type, {{"generation", 1}})); }, "body.invalid");
+        fails([&] { decode(packet(type, {{"generation", "18446744073709551616"}})); }, "body.invalid");
+        fails([&] { decode(packet(type, {{"generation", "1"}, {"approved", true}})); }, "body.invalid");
+    }
     cfg::Sessions spoof("E", 40, policy());
     spoof.open("C", "P", authority(), 0);
     auto claim = hello(); claim["role"] = "maintenance";

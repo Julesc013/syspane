@@ -67,3 +67,11 @@ Profile revision 4 adds the dependency-independent `syspane_recovery` library an
 `syspane_recovery_tests`, for 48 CTest entries. Eleven portable cases use injected
 monotonic time to prove lease/render/restart decisions. No native diagnostic entry,
 independent process supervision or visible expiry is qualified by those cases.
+
+Profile revision 5 adds `syspane_child`, `syspane_health` and
+`SysPane.RecoveryProbe`, with nine native supervision cases in one additional CTest
+family (49 entries total). Windows requires job assignment before resuming the
+owned child; Linux requires pidfds, procfs and the measured libc spawn/closefrom
+support. The launcher executes only itself and passes no unrelated handles or
+standard streams. The inherited development environment is trusted input. This
+is not hostile-code isolation or a product/historical-platform qualification.

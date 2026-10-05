@@ -1,6 +1,7 @@
 # SysPane specification update log
 
 ## 2026-10-06
+- **W-25 native supervision**: Added exact owned-child lifetime adapters and negotiated health/render-progress links. Nine native fault cases independently observe child exit on Windows/Linux; both full suites pass 49 CTest entries. Preserved the initial callback compile failure. Diagnostic entry, real renderer/telemetry recovery and visible/native-exit integration remain pending.
 - **W-25 portable checkpoint**: Closed and implemented producer-lease expiry, render-progress challenges and bounded single-child restart/quarantine decisions. Eleven new portable cases bring both development profiles to 48 CTest entries. Native supervision, independent diagnostic entry, current-policy integration and visible/native-exit recovery remain mandatory; W-25 stays in progress.
 - **Native W-24 gate**: Added unelevated Windows/Linux local IPC adapters and a finite probe with independent process harness. Both profiles passed 37 CTest entries, including 15 Windows and 16 Linux concrete native cases; actual Linux POSIX-session denial is separate from blocked cross-user/logon/desktop-session qualification. W-02/W-25 and host experiments remain pending.
 - **W-24 checkpoint**: Closed and implemented portable framing, strict JSON, negotiation, request reservations, settings preview, disclosure, queues and connection states. Both Windows/Linux development profiles passed 35 checks; native IPC remains pending and W-24 stays in progress.

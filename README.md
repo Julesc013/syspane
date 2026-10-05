@@ -14,8 +14,9 @@ presentation components under its own lifecycle and privacy policy.
 targets and development smoke program build on pinned Windows and Linux profiles.
 Portable framing, request replay, settings-preview policy and connection handling
 now run over tested Windows/Linux local IPC adapters. Portable producer-lease,
-render-progress and restart-budget guards also have executable tests. Their native
-recovery integration, independent diagnostic entry and desktop integration remain pending.
+render-progress and restart-budget guards now supervise real isolated test workers
+on both profiles. Independent diagnostic entry, telemetry/renderer recovery and
+desktop integration remain pending.
 There is no usable SysPane desktop application or downloadable release yet.
 Desktop, screensaver and installer profiles remain unqualified.
 

@@ -1,0 +1,24 @@
+{
+  "work_id": "W-25",
+  "scope": "native supervision",
+  "attempts": [
+    {
+      "profile": "windows-x64-gcc15",
+      "phase": "build",
+      "command": "cmake --build --preset windows-x64-gcc15",
+      "exit_code": 1,
+      "source": "source/diagnostics/health_link.cpp",
+      "source_sha256": "1088924ec91c5c3068fa94247131d4411990c80effcde8e19e38ed9d8ef8088c",
+      "diagnostic_excerpt": "health_link.cpp:55:91: error: expected 'template' keyword before dependent template name [-Werror=missing-template-keyword]",
+      "cause": "Generic lambda parameter made decode result dependent in this compiler; JSON get<string> needed disambiguation.",
+      "resolution": "Use the actual string_view callback parameter type. Warnings remain errors; no acceptance criterion changed."
+    },
+    {
+      "phase": "specification integrity",
+      "command": "specctl.py generate --check; seal --apply; verify-integrity",
+      "exit_code": 1,
+      "cause": "Informative frontmatter timestamps were changed after catalog generation; integrity sealing correctly refused stale generated content.",
+      "resolution": "Regenerate the catalog, validate and then reseal. No native source or acceptance oracle changed."
+    }
+  ]
+}

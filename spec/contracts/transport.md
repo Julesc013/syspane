@@ -12,7 +12,7 @@ sp_requires: ["SP-PROTOCOL", "SP-COMMANDS"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-AUDIT-2026-10-04", "resource": "User-supplied SysPane audits and design reviews, 2026-10-04", "title": "October specification review inputs"}]
-updated: {"by": "codex", "at": "2026-10-06T01:04:36+11:00", "scope": "Native W-24 implementation gate; cross-user/logon and desktop qualification not claimed"}
+updated: {"by": "codex", "at": "2026-10-06T02:15:05+11:00", "scope": "Native W-25 owned-child supervision checkpoint; diagnostic and visible recovery remain pending"}
 ---
 
 # Local transport and request lifecycle
@@ -49,6 +49,11 @@ subscribe, unsubscribe, snapshot, delta, gap, heartbeat, cancel, result.get and
 shutdown. Unknown types fail; optional annotations stay inert. Message-specific
 document versions are negotiated independently. Command bodies use the selected
 command schema; results use [command-result](command-result.schema.json).
+
+The [W-25 health profile](../delivery/packages/w-25-recovery.md#initial-native-supervision-closure)
+adds optional `render.challenge` and `render.progress` envelopes only under its
+negotiated `recovery.progress` feature. Preview command sessions do not enable them.
+That health profile carries no telemetry snapshot/delta or configuration mutation.
 
 Snapshot/delta sequence and producer epoch must agree. A gap, validation failure or
 new epoch invalidates incremental state and requires a coherent full snapshot.

@@ -1,0 +1,43 @@
+#pragma once
+#include <cstdint>
+#include <memory>
+#include <optional>
+#include <stdexcept>
+#include <string>
+#include <vector>
+
+namespace syspane::platform {
+class ChildError : public std::runtime_error {
+public:
+    explicit ChildError(const char* code) : std::runtime_error(code) {}
+};
+struct ChildExit { bool signaled; std::uint32_t code; };
+std::uint64_t current_process_id();
+void arm_parent_lifetime(std::uint64_t expected_parent);
+class Child {
+public:
+    static Child launch_self(const std::vector<std::string>& arguments);
+    ~Child();
+    Child(Child&&) noexcept;
+    Child& operator=(Child&&) = delete;
+    Child(const Child&) = delete;
+    Child& operator=(const Child&) = delete;
+    std::uint64_t id() const;
+    std::optional<ChildExit> wait(unsigned milliseconds = 0);
+    void request_stop(); // Does not assert termination. Only wait() supplies proof.
+private:
+    struct Impl;
+    std::unique_ptr<Impl> impl_;
+    explicit Child(std::unique_ptr<Impl> impl);
+};
+inline void check_child_arguments(const std::vector<std::string>& arguments) {
+    if (arguments.empty() || arguments.size() > 16) throw ChildError("child.arguments");
+    std::size_t total = 0;
+    for (const auto& argument : arguments) {
+        if (argument.size() > 512) throw ChildError("child.arguments");
+        for (unsigned char c : argument) if (c < 32 || c > 126) throw ChildError("child.arguments");
+        total += argument.size() + 1;
+    }
+    if (total > 4096) throw ChildError("child.arguments");
+}
+} // namespace syspane::platform

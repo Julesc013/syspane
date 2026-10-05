@@ -1,0 +1,94 @@
+{
+  "schema_version": "0.1.0",
+  "work_id": "W-25",
+  "source_ref": "8292b1cf7f0f5dcb96c75c0d3e6104134d36f94e",
+  "objective": "Implement and verify native owned-child supervision and independent health/render-worker progress within the active campaign.",
+  "changed_files": [
+    "CMakeLists.txt",
+    "README.md",
+    "TODO.md",
+    "build-support/components.json",
+    "build-support/evidence/supervision-handoff.json",
+    "build-support/evidence/w-25-supervision-attempts.json",
+    "build-support/evidence/w-25-supervision-linux-x64-gcc13.NATIVE-01.json",
+    "build-support/evidence/w-25-supervision-linux-x64-gcc13.NATIVE-02.json",
+    "build-support/evidence/w-25-supervision-linux-x64-gcc13.RECOVERY-01.json",
+    "build-support/evidence/w-25-supervision-linux-x64-gcc13.ctest.txt",
+    "build-support/evidence/w-25-supervision-linux-x64-gcc13.json",
+    "build-support/evidence/w-25-supervision-spec-tests.txt",
+    "build-support/evidence/w-25-supervision-spec-validation.json",
+    "build-support/evidence/w-25-supervision-windows-x64-gcc15.NATIVE-01.json",
+    "build-support/evidence/w-25-supervision-windows-x64-gcc15.NATIVE-02.json",
+    "build-support/evidence/w-25-supervision-windows-x64-gcc15.RECOVERY-01.json",
+    "build-support/evidence/w-25-supervision-windows-x64-gcc15.ctest.txt",
+    "build-support/evidence/w-25-supervision-windows-x64-gcc15.json",
+    "build-support/record_protocol.py",
+    "build-support/targets/README.md",
+    "build-support/targets/linux-x64-gcc13.json",
+    "build-support/targets/windows-x64-gcc15.json",
+    "docs/developers/build.md",
+    "source/application/recovery_probe.cpp",
+    "source/diagnostics/health_link.cpp",
+    "source/diagnostics/health_link.hpp",
+    "source/platform/child.hpp",
+    "source/platform/child_linux.cpp",
+    "source/platform/child_windows.cpp",
+    "source/protocol/wire.cpp",
+    "spec/checksums.json",
+    "spec/contracts/transport.md",
+    "spec/delivery/current-state.md",
+    "spec/delivery/implementation-readiness.md",
+    "spec/delivery/index.md",
+    "spec/delivery/packages/w-25-recovery.md",
+    "spec/delivery/supervision-handoff.md",
+    "spec/delivery/work-units.json",
+    "spec/generated/catalog.json",
+    "spec/log.md",
+    "tests/fault/native_recovery.py",
+    "tests/protocol/protocol_tests.cpp"
+  ],
+  "decisions": [
+    "Launch only self-worker children with native retained identity and confirmed exit before replacement.",
+    "Negotiate an isolated health/render-progress feature set without enabling data snapshots or stored commands.",
+    "Retain prior portable restart limits, quarantine and circuit behavior; native tests use zero jitter.",
+    "Keep W-25 incomplete until diagnostic entry, actual telemetry/renderer recovery, policy and visible/native-exit requirements are satisfied."
+  ],
+  "checks": [
+    {
+      "name": "Windows full suite: 49 CTest entries and nine native recovery cases",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-25-supervision-windows-x64-gcc15.json"
+    },
+    {
+      "name": "Linux full suite: 49 CTest entries and nine native recovery cases",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-25-supervision-linux-x64-gcc13.json"
+    },
+    {
+      "name": "Specification schema/fixture validation",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-25-supervision-spec-validation.json"
+    },
+    {
+      "name": "Specification tools: 53 pass, 2 existing Windows symlink skips",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-25-supervision-spec-tests.txt"
+    }
+  ],
+  "open_questions": [
+    "Close bounded safe diagnostic metadata, native inspector and mandatory-policy behavior before diagnostic startup implementation.",
+    "Full snapshot/telemetry and actual renderer recovery remain separate from health-only synthetic workers.",
+    "W-02 external pixel/native-exit oracle and available native host tracks remain required."
+  ],
+  "next_step": "Implement independent diagnostic entry and conservative native inspector; connect real data/renderer recovery and build the external desktop oracle while preserving profile-specific laboratory blocks.",
+  "authority_used": [
+    "user:foundation-native-campaign-2026-10-05"
+  ],
+  "limitations": [
+    "Render worker produces completion signals without pixels; no renderer or desktop qualification follows.",
+    "Self-child launch uses a trusted inherited development environment, not hostile-code isolation.",
+    "No diagnostic executable, native editor exit or policy-driven payload erasure is delivered here.",
+    "Initial Windows callback compile failure is preserved; acceptance thresholds were not weakened.",
+    "No privileged operation or public release occurred."
+  ]
+}
