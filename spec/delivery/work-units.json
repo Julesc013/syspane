@@ -133,7 +133,8 @@
       ],
       "specs": [
         "SP-WINDOWS",
-        "SP-PLATFORMS"
+        "SP-PLATFORMS",
+        "SP-W04-PACKAGE"
       ],
       "acceptance_tests": [
         "T-PLATFORM",
@@ -144,10 +145,12 @@
         "build-support/windows/",
         "source/desktop/windows/"
       ],
-      "status": "planned",
+      "status": "in_progress",
       "authority_class": "native_lab",
-      "execution_grant": null,
-      "notes": "Dependency-ready is not execution authority. Native work may produce a failed/inconclusive probe without a support claim; independent tracks can continue."
+      "execution_grant": "user:foundation-native-campaign-2026-10-05",
+      "notes": "The same shared C++ subset builds with pinned v141_xp/SDK 7.1A/static UCRT; 51 host checks, PE/import audit and relocated smoke pass on Windows 10/WOW64. Existing XP/7 VM registrations were discovered read-only; guest test scope/usability, actual historical execution and native desktop qualification remain pending. No original VM was changed.",
+      "package": "delivery/packages/w-04-historical-windows.md",
+      "evidence": "delivery/historical-build-handoff.md"
     },
     {
       "id": "W-05",

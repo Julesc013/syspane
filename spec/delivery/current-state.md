@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-06T04:53:25+11:00", "scope": "Native X11 input and exact delayed-wallpaper evidence; placement and observer failures preserved"}
+updated: {"by": "codex", "at": "2026-10-06T05:25:00+11:00", "scope": "Pinned historical shared-subset build and host checks; guest and desktop qualification remain pending"}
 ---
 
 # Current state and next admitted boundary
@@ -84,6 +84,12 @@ setup. The hidden below-window candidate passes the input sequence; the visible
 desktop-type window blocks the tested icon click. Both still fail placement. Fifteen
 evidence checks pass. Earlier observer/laboratory failures are preserved separately.
 
+W-04's [historical build checkpoint](historical-build-handoff.md) compiles the same
+shared C++ sources with pinned v141_xp/SDK 7.1A/static UCRT tools. All 51 host checks,
+import audits and relocated model smoke pass on Windows 10/WOW64. Modern Windows
+and Linux regressions pass 53 and 54 entries. Registered guest VMs were found, but
+their test scope/usability and actual XP/7 execution remain unproven.
+
 Canonical 0.2.0 documentation bundle, unchanged 0.1 authoring profile, preserved old
 fixtures, new experimental scene/command/capability 0.2 and admission descriptors.
 The initial settings registry has enforced metadata/default consistency and generated
@@ -120,9 +126,10 @@ License, contribution and release-identity decisions remain open.
 
 ## Next work
 
-Continue the admitted campaign: extend W-02's real X11 reveal adapter with native
-icon-input/focus checks, investigate the separate image-wallpaper lab failure and
-close the other platform capture/reveal boundaries in admitted synthetic desktops.
+Continue the admitted campaign: use W-02's measured X11 reveal/input/image adapters
+to investigate conforming composition, and close the other platform capture/reveal
+boundaries in admitted synthetic desktops. W-04 has build artifacts ready for
+historical guest execution once guest test scope and usability are established.
 W-05 needs a composition strategy that actually preserves icon pixels; its initial
 EWMH window stacking candidates fail that requirement. Continue other native tracks
 independently of this negative result.

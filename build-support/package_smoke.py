@@ -17,19 +17,26 @@ def digest(data):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--profile', required=True, choices=['windows-x64-gcc15', 'linux-x64-gcc13'])
+    parser.add_argument('--profile', required=True, choices=['windows-x64-gcc15', 'linux-x64-gcc13', 'windows-x86-v141-xp'])
     parser.add_argument('--build-dir', type=Path, required=True)
     args = parser.parse_args()
     windows = platform.system() == 'Windows'
     if windows != args.profile.startswith('windows-'):
         raise ValueError('package smoke must execute on its named development OS')
     name = 'SysPane.ModelSmoke' + ('.exe' if windows else '')
-    binary = args.build_dir.resolve() / name
+    legacy = args.profile == 'windows-x86-v141-xp'
+    binary = args.build_dir.resolve() / ('Release/' + name if legacy else name)
     marker = json.loads((args.build_dir / '.syspane-owner.json').read_text(encoding='utf-8'))
     if marker['profile'] != args.profile:
         raise ValueError('build ownership/profile mismatch')
-    imports_text = subprocess.check_output(['objdump', '-p', str(binary)], text=True, encoding='utf-8')
-    imports = re.findall(r'DLL Name:\s+(\S+)', imports_text) if windows else re.findall(r'NEEDED\s+(\S+)', imports_text)
+    pe_audit = None
+    if legacy:
+        from check_legacy_artifacts import verify
+        pe_audit = verify(binary.read_bytes())
+        imports = list(pe_audit['imports'])
+    else:
+        imports_text = subprocess.check_output(['objdump', '-p', str(binary)], text=True, encoding='utf-8')
+        imports = re.findall(r'DLL Name:\s+(\S+)', imports_text) if windows else re.findall(r'NEEDED\s+(\S+)', imports_text)
     if not imports:
         raise ValueError('dependency audit produced no imports')
     if windows:
@@ -53,6 +60,8 @@ def main():
         'qualification': 'model-smoke-only; no desktop or historical-platform claim',
         'publication': 'not authorized; license/notices and product release gates remain open'
     }
+    if pe_audit is not None:
+        manifest['pe_audit'] = pe_audit
     output_root = ROOT / 'out/campaign' / args.profile
     if not output_root.resolve().is_relative_to(ROOT.resolve()):
         raise ValueError('output escapes checkout')

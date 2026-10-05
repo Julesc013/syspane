@@ -25,7 +25,7 @@ updated: {"by": "codex", "at": "2026-10-04T19:32:52+11:00", "scope": "October au
 | R-02 | Current Explorer tree/private host drift | exact-build host diagnostics and external reveal tests | affected Windows Desktop profile |
 | R-03 | GNOME/Wayland/Plasma layering and bridge rules | protocol/extension review and native host experiment | affected Linux Desktop profile |
 | R-04 | Older OS X toolchain/dependency floor | pinned build/import/run evidence | claimed older OS X minimum |
-| R-05 | XP-compatible shared C++ subset | build/link/runtime proof with pinned compiler/CRT | shared binary composition on XP |
+| R-05 | XP-compatible shared C++ subset | v141_xp build/link/host checks now pass; exact XP guest runtime proof remains required | shared binary composition on XP |
 | R-06 | Windows RT authorized execution | legitimate deployment feasibility review | any RT native product claim |
 | R-07 | License and contribution/IP policy | owner decision, dependency review | public code licensing/distribution |
 | R-08 | Durable journal backend/flush policy | corruption/crash and write-load tests | durable-history guarantees |

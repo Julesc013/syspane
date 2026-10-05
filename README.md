@@ -29,6 +29,10 @@ pixel checks; the original image-at-startup failure remains separate. See the
 There is no usable SysPane desktop application or downloadable release yet.
 Desktop, screensaver and installer profiles remain unqualified.
 
+An experimental [XP-toolset build](spec/delivery/historical-build-handoff.md) now
+compiles the same shared C++ components and passes 51 checks on Windows 10/WOW64.
+XP/7 guest execution and desktop support remain unproven.
+
 The first implementation campaign includes contemporary Windows, Windows XP/7
 investigations, Linux and macOS/older OS X. Each profile must prove its own
 capabilities. Ordinary operation is intended to be native, unelevated and usable

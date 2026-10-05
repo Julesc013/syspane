@@ -30,12 +30,18 @@ def fingerprints(compiler):
 def main():
     profile, compiler = sys.argv[1:3]
     lock = json.loads((ROOT / 'targets' / (profile + '.lock.json')).read_text(encoding='utf-8'))
-    actual = {
-        'host_family': platform.system(),
-        'compiler_version': output(compiler, '-dumpfullversion'),
-        'compiler_target': output(compiler, '-dumpmachine'),
-        'fingerprints': fingerprints(compiler)
-    }
+    if profile == 'windows-x86-v141-xp':
+        actual = {'host_family': platform.system(), 'fingerprints': {name: hashlib.sha256(Path(path).read_bytes()).hexdigest()
+                  for name, path in lock['files'].items()}}
+        if Path(compiler).resolve() != Path(lock['files']['compiler']).resolve():
+            raise ValueError('historical compiler path differs from pinned toolset')
+    else:
+        actual = {
+            'host_family': platform.system(),
+            'compiler_version': output(compiler, '-dumpfullversion'),
+            'compiler_target': output(compiler, '-dumpmachine'),
+            'fingerprints': fingerprints(compiler)
+        }
     if actual != lock['identity']:
         raise ValueError('installed tools differ from pinned profile; record and review an explicit profile revision')
     if len(sys.argv) > 3:

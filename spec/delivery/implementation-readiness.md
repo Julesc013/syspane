@@ -12,7 +12,7 @@ sp_requires: ["SP-CURRENT"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-AUDIT-2026-10-04", "resource": "User-supplied October 2026 audit inputs", "title": "October review inputs"}]
-updated: {"by": "codex", "at": "2026-10-06T04:53:25+11:00", "scope": "Native X11 input and exact delayed-wallpaper evidence; placement and observer failures preserved"}
+updated: {"by": "codex", "at": "2026-10-06T05:25:00+11:00", "scope": "Pinned historical shared-subset build and host checks; guest and desktop qualification remain pending"}
 ---
 
 # Implementation readiness and gates
@@ -71,6 +71,10 @@ The [input/image checkpoint](x11-input-handoff.md) subsequently executes the nat
 input sequence on the hidden below-window candidate and verifies delayed image
 setup against exact fixture bytes. The visible candidate blocks the tested icon
 click; no composition or broader desktop qualification follows from these results.
+The [historical build experiment](historical-build-handoff.md) now tests the same
+shared C++ subset with the installed XP toolset: 51 host checks and relocated smoke
+pass. Its pinned PE/import/runtime inputs support a build claim only; guest runtime
+and native desktop evidence remain mandatory and independent for XP and Windows 7.
 
 W-24 implements native peer authentication, bounded I/O and real client/server
 integration under its [package](packages/w-24-transport.md). The initial preview

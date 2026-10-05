@@ -118,3 +118,25 @@ separate from the offline 54-entry regression suite. Its real Show Desktop actio
 exposes placement failures; the color control does not qualify the separately
 failing image-wallpaper lab. See `spec/delivery/x11-host-handoff.md` and the developer
 commands. No product role or supported desktop profile is enabled by these probes.
+
+The separate `windows-x86-v141-xp` experiment uses the installed Visual Studio 2017
+XP toolset, compiler 19.16.27054.0, SDK 7.1A and static UCRT 10.0.10240.0. Its lock
+pins 34 key installed files; the artifact audit also checks actual compiler flags
+and resolved linker inputs. It builds eleven existing portable components in x86
+Release/SSE2, without native modern adapters or a duplicated shared implementation.
+
+```powershell
+cmake --preset windows-x86-v141-xp
+cmake --build --preset windows-x86-v141-xp
+ctest --preset windows-x86-v141-xp --output-on-failure
+python build-support/package_smoke.py --profile windows-x86-v141-xp --build-dir out/build/windows-x86-v141-xp
+```
+
+The profile has 51 host checks, including PE/header/import validation and nine
+mutation cases. Binaries are under `out/build/windows-x86-v141-xp/Release/`.
+The intended XP SP3/Windows 7 runtime experiment is still unqualified; running the
+artifacts on this Windows 10 host is WOW64 evidence only. CMake's SDK-selection
+banner is not the resolved library list: v141_xp selects SDK 7.1A and the explicitly
+pinned UCRT, which the audit verifies from MSBuild's actual input logs.
+MSB8051 is a preserved vendor deprecation warning; compiler warnings remain errors.
+See `spec/delivery/historical-build-handoff.md` for guest and desktop gates.

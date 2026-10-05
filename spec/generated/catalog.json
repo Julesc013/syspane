@@ -357,7 +357,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "7584087fd72529a760b8ca14258319d081baeb496ccd60046cd3e9fcc8ea83c9"
+      "sha256": "d8fdaffd43a6c62bb3efa5d3ca59feed87af71f39bf398852fd304db9c379928"
     },
     {
       "id": "SP-DIAGNOSTIC-HANDOFF",
@@ -382,6 +382,17 @@
       "sha256": "a2652a69852d9eaeb38751adcd62547443df6b0ed0d5cc54e4f5b07d5b968c2b"
     },
     {
+      "id": "SP-HISTORICAL-BUILD-HANDOFF",
+      "path": "delivery/historical-build-handoff.md",
+      "title": "Historical Windows shared-subset build checkpoint",
+      "description": "Record the pinned v141_xp build, unchanged shared behavior, resolved runtime inputs and pending guest qualification.",
+      "requires": [
+        "SP-CAMPAIGN-ADMISSION",
+        "SP-W04-PACKAGE"
+      ],
+      "sha256": "bbbd85e5204a08250c06f150ccf87d1aac042374a6014a0f96a52b7399b6665b"
+    },
+    {
       "id": "SP-READINESS",
       "path": "delivery/implementation-readiness.md",
       "title": "Implementation readiness and gates",
@@ -389,7 +400,7 @@
       "requires": [
         "SP-CURRENT"
       ],
-      "sha256": "031be387f84991a2e67cd562df3b73265be391f2de4cdbe059e13aad6bf3fc6f"
+      "sha256": "6bbb23402a57d694216a0dcda5f500fd3a0a9d6d2b0b38b53af099d27ab0dc47"
     },
     {
       "id": "SP-NATIVE-TRANSPORT-HANDOFF",
@@ -410,7 +421,7 @@
       "requires": [
         "SP-ROADMAP"
       ],
-      "sha256": "58432869c6cc2649a11a7af8661cb965ea821a99b0418d0b255eda76e6786523"
+      "sha256": "031804f06cb259f9e630b309fa930898423020853b1690fc9402bda68555e52f"
     },
     {
       "id": "SP-ORACLE-HANDOFF",
@@ -450,6 +461,18 @@
         "SP-TESTING"
       ],
       "sha256": "02086132205bcb49baf13eb724bb88c4a2129d1794ded3c7c41d116c4a980459"
+    },
+    {
+      "id": "SP-W04-PACKAGE",
+      "path": "delivery/packages/w-04-historical-windows.md",
+      "title": "W-04 historical Windows build and host experiments",
+      "description": "Test the existing shared C++ subset with the installed XP toolset before claiming historical runtime or desktop support.",
+      "requires": [
+        "SP-WORK-PACKAGES",
+        "SP-WINDOWS",
+        "SP-W02-PACKAGE"
+      ],
+      "sha256": "781d8843c9825319d1b42c9cde6bc523e43f092024ff539f25020d800d7e7f7b"
     },
     {
       "id": "SP-W05-PACKAGE",

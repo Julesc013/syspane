@@ -199,6 +199,27 @@ focus, journal and fixture overclaims. The hidden candidate passes input here; t
 visible desktop candidate blocks selection, and neither passes placement. Other
 profiles, shell recovery and wallpaper policy remain unqualified.
 
+For the historical shared-subset experiment, the existing Visual Studio 2017 XP
+toolset has its own preset. It compiles the same model, protocol/policy, recovery
+and diagnostic projection sources; modern native adapters require separate closure.
+
+```powershell
+cmake --preset windows-x86-v141-xp
+cmake --build --preset windows-x86-v141-xp
+ctest --preset windows-x86-v141-xp --output-on-failure
+python build-support/package_smoke.py --profile windows-x86-v141-xp --build-dir out/build/windows-x86-v141-xp
+```
+
+This is an x86 Release/static-runtime build. Its 51 checks execute on the current
+Windows host; historical guest execution and desktop qualification remain pending.
+Guest execution will cover 44 C++ case invocations and the model smoke binary;
+the six build/tooling entries run on the modern host, without installing Python
+3.11 or current CMake in XP.
+The PE audit checks all five executables and resolved MSBuild runtime inputs.
+It does not infer XP compatibility from module names or subsystem version alone.
+See the [historical checkpoint](../../spec/delivery/historical-build-handoff.md).
+Existing guest machines need an established test scope before use or capture.
+
 Specification tooling separately uses Python 3.11+ in an isolated environment:
 
 ```powershell

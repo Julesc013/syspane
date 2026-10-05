@@ -1,33 +1,133 @@
 {
   "version": 6,
-  "cmakeMinimumRequired": {"major": 3, "minor": 28, "patch": 0},
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 28,
+    "patch": 0
+  },
   "configurePresets": [
     {
-      "name": "foundation-base", "hidden": true, "generator": "Ninja",
+      "name": "foundation-base",
+      "hidden": true,
+      "generator": "Ninja",
       "binaryDir": "${sourceDir}/out/build/${presetName}",
-      "cacheVariables": {"CMAKE_BUILD_TYPE": "Debug", "CMAKE_CXX_COMPILER": "g++", "BUILD_TESTING": "ON"}
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_CXX_COMPILER": "g++",
+        "BUILD_TESTING": "ON"
+      }
     },
     {
-      "name": "windows-x64-gcc15", "inherits": "foundation-base",
-      "condition": {"type": "equals", "lhs": "${hostSystemName}", "rhs": "Windows"},
-      "cacheVariables": {"SYSPANE_PROFILE": "windows-x64-gcc15"}
+      "name": "windows-x64-gcc15",
+      "inherits": "foundation-base",
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Windows"
+      },
+      "cacheVariables": {
+        "SYSPANE_PROFILE": "windows-x64-gcc15"
+      }
     },
     {
-      "name": "linux-x64-gcc13", "inherits": "foundation-base",
+      "name": "linux-x64-gcc13",
+      "inherits": "foundation-base",
       "binaryDir": "$env{SYSPANE_LINUX_BUILD_ROOT}/linux-x64-gcc13",
-      "condition": {"type": "allOf", "conditions": [
-        {"type": "equals", "lhs": "${hostSystemName}", "rhs": "Linux"},
-        {"type": "notEquals", "lhs": "$env{SYSPANE_LINUX_BUILD_ROOT}", "rhs": ""}
-      ]},
-      "cacheVariables": {"SYSPANE_PROFILE": "linux-x64-gcc13"}
+      "condition": {
+        "type": "allOf",
+        "conditions": [
+          {
+            "type": "equals",
+            "lhs": "${hostSystemName}",
+            "rhs": "Linux"
+          },
+          {
+            "type": "notEquals",
+            "lhs": "$env{SYSPANE_LINUX_BUILD_ROOT}",
+            "rhs": ""
+          }
+        ]
+      },
+      "cacheVariables": {
+        "SYSPANE_PROFILE": "linux-x64-gcc13"
+      }
+    },
+    {
+      "name": "windows-x86-v141-xp",
+      "generator": "Visual Studio 15 2017",
+      "architecture": "Win32",
+      "toolset": "v141_xp,host=x64",
+      "binaryDir": "${sourceDir}/out/build/${presetName}",
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Windows"
+      },
+      "cacheVariables": {
+        "SYSPANE_PROFILE": "windows-x86-v141-xp",
+        "BUILD_TESTING": "ON",
+        "CMAKE_CONFIGURATION_TYPES": "Release",
+        "CMAKE_GENERATOR_INSTANCE": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Enterprise",
+        "CMAKE_MSVC_RUNTIME_LIBRARY": "MultiThreaded",
+        "CMAKE_VS_GLOBALS": "TargetUniversalCRTVersion=10.0.10240.0;VCToolsVersion=14.16.27023"
+      }
     }
   ],
   "buildPresets": [
-    {"name": "windows-x64-gcc15", "configurePreset": "windows-x64-gcc15", "jobs": 4},
-    {"name": "linux-x64-gcc13", "configurePreset": "linux-x64-gcc13", "jobs": 4}
+    {
+      "name": "windows-x64-gcc15",
+      "configurePreset": "windows-x64-gcc15",
+      "jobs": 4
+    },
+    {
+      "name": "linux-x64-gcc13",
+      "configurePreset": "linux-x64-gcc13",
+      "jobs": 4
+    },
+    {
+      "name": "windows-x86-v141-xp",
+      "configurePreset": "windows-x86-v141-xp",
+      "configuration": "Release",
+      "jobs": 4
+    }
   ],
   "testPresets": [
-    {"name": "windows-x64-gcc15", "configurePreset": "windows-x64-gcc15", "output": {"outputOnFailure": true}, "execution": {"noTestsAction": "error", "stopOnFailure": false, "timeout": 20}},
-    {"name": "linux-x64-gcc13", "configurePreset": "linux-x64-gcc13", "output": {"outputOnFailure": true}, "execution": {"noTestsAction": "error", "stopOnFailure": false, "timeout": 20}}
+    {
+      "name": "windows-x64-gcc15",
+      "configurePreset": "windows-x64-gcc15",
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "noTestsAction": "error",
+        "stopOnFailure": false,
+        "timeout": 20
+      }
+    },
+    {
+      "name": "linux-x64-gcc13",
+      "configurePreset": "linux-x64-gcc13",
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "noTestsAction": "error",
+        "stopOnFailure": false,
+        "timeout": 20
+      }
+    },
+    {
+      "name": "windows-x86-v141-xp",
+      "configurePreset": "windows-x86-v141-xp",
+      "configuration": "Release",
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "noTestsAction": "error",
+        "stopOnFailure": false,
+        "timeout": 20
+      }
+    }
   ]
 }

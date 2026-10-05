@@ -1,6 +1,7 @@
 # SysPane specification update log
 
 ## 2026-10-06
+- **Historical shared-subset build**: Added the installed v141_xp/SDK 7.1A/static-UCRT profile to the root build. The same C++ implementation passes 51 host checks, PE/import audits and relocated smoke; modern Windows/Linux regressions pass 53/54. VM registrations were found read-only; guest scope, actual XP/7 execution and desktop qualification remain pending.
 - **X11 input/image adapter**: Observed native selection, drag, context menu and folder opening through private clipboard/AT-SPI/focus/pixels. Delayed wallpaper setup matches the fixed PPM; the visible candidate blocks icon selection, while the hidden below candidate passes input. Both still fail placement. Fifteen evidence checks pass; eleven prior attempts and observer corrections remain preserved. No desktop qualification.
 - **Native X11 investigation**: Added the Openbox/PCManFM lab, real Show Desktop input and pixel-derived icon concealment. EWMH above/below candidates fail placement; image-wallpaper startup failures remain preserved. Linux 54-entry regression and affected Windows composition checks pass; W-02/W-05 remain open.
 - **W-02 oracle calibration**: Added a bounded external marker/time decoder, sixteen fixed cases and independent native X11 root capture. Five fault calibrations preserve expected failed/inconclusive observations separately from suite success. Profiles pass 53 Windows/54 Linux CTest entries; named shell/reveal, real icon input/wallpaper and Windows capture remain pending.

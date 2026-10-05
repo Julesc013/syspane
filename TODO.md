@@ -35,6 +35,8 @@ behaviour has been implemented. See [audit disposition](spec/delivery/audit-2026
 - [x] W-02/W-05 scoped input/image adapter: observe native selection, drag, menu and folder opening on the hidden X11 candidate, verify delayed image setup against fixture pixels, and retain the visible candidate's input failure. See the [checkpoint](spec/delivery/x11-input-handoff.md).
 - [ ] W-02 completion: qualify usable desktop composition, shell recovery and wallpaper policy, additional platform reveal/input scenarios and Windows external capture in an admitted synthetic desktop.
 - [ ] W-03–W-06: run changing-scene host probes for contemporary Windows, XP/7, Linux and macOS/older OS X.
+- [x] W-04 build experiment: pin the installed v141_xp toolset, compile the existing shared subset, pass 51 host checks and relocate its smoke archive. See the [checkpoint](spec/delivery/historical-build-handoff.md).
+- [ ] W-04 runtime/host gate: establish guest test scope and usability, run the exact binaries on XP/7, then qualify actual native host behavior independently.
 - [ ] W-07–W-11: implement demand, commands, configuration recovery, portable scenes, editor and native settings facilities.
 - [x] W-26 initial slice: produce local Windows/Linux model smoke archives and prove relocated execution; product package/lifecycle qualification remains pending.
 - [ ] W-34–W-37: implement native network providers independently for each family.

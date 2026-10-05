@@ -1,0 +1,68 @@
+{
+  "schema_version": "0.1.0",
+  "profile_id": "windows-x86-v141-xp",
+  "revision": "1",
+  "example_only": false,
+  "os": {
+    "family": "windows",
+    "minimum_version": "5.1.2600 SP3 (intended experiment; guest runtime unqualified)",
+    "api_floor": "v141_xp / SDK 7.1A; portable subset only"
+  },
+  "cpu": {
+    "architecture": "x86",
+    "isa_floor": "SSE2; no host tuning",
+    "word_bits": 32,
+    "endianness": "little"
+  },
+  "abi": {
+    "name": "MSVC-v141-Win32-static-CRT",
+    "runtime": "Static MSVC CRT/STL and UCRT; no CRT sidecars",
+    "runtime_version": "MSVC 14.16.27023; UCRT 10.0.10240.0"
+  },
+  "toolchain": {
+    "compiler": "MSVC",
+    "version": "19.16.27054.0",
+    "sdk": "Windows SDK 7.1A; UCRT 10.0.10240.0",
+    "recipe": "build-support/targets/README.md",
+    "flags": [
+      "/std:c++17",
+      "/W4",
+      "/WX",
+      "/permissive-",
+      "/Zc:__cplusplus",
+      "/utf-8",
+      "/EHsc",
+      "/arch:SSE2",
+      "/MT",
+      "/DWINVER=0x0501",
+      "/D_WIN32_WINNT=0x0501",
+      "/D_USING_V110_SDK71_",
+      "/SUBSYSTEM:CONSOLE,5.01"
+    ]
+  },
+  "dependencies": [
+    {
+      "id": "nlohmann-json",
+      "version": "3.12.0",
+      "sha256": "aaf127c04cb31c406e5b04a63f1ae89369fccde6d8fa7cdda1ed4f32dfc5de63",
+      "license": "MIT"
+    }
+  ],
+  "ui": "none",
+  "shell_host": "none",
+  "renderer": "none",
+  "roles": [
+    "console"
+  ],
+  "isolation": {
+    "tier": "none",
+    "controls": []
+  },
+  "limitations": [
+    "Experimental shared model/protocol/policy/recovery/diagnostic projection build, not a supported historical product.",
+    "Tests run on Windows 10 x64 through WOW64 unless a separate exact guest record says otherwise. XP/7 execution and desktop qualification remain unproven.",
+    "Native IPC, supervision, protected policy and UI adapters remain disabled until their historical contracts/imports are closed.",
+    "Intended XP SP3 x86 SSE2 floor is a hypothesis. PE imports and toolset selection are necessary but insufficient runtime proof.",
+    "Key installed tool/runtime/header files are pinned; complete archive/header closure and bit-for-bit reproduction remain unproven."
+  ]
+}

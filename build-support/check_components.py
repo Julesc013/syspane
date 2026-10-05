@@ -6,12 +6,14 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 
 def check(graph, manifest, profile):
-    if profile not in {'windows-x64-gcc15', 'linux-x64-gcc13'}:
+    profiles = {'windows-x64-gcc15', 'linux-x64-gcc13', 'windows-x86-v141-xp'}
+    if profile not in profiles:
         raise ValueError('unknown component profile')
     for row in manifest['components']:
-        if 'profiles' in row and (not row['profiles'] or not set(row['profiles']) <= {'windows-x64-gcc15', 'linux-x64-gcc13'}):
+        if 'profiles' in row and (not row['profiles'] or not set(row['profiles']) <= profiles):
             raise ValueError('invalid component profile selector')
-    owners = {row['target']: row for row in manifest['components'] if profile in row.get('profiles', [profile])}
+    owners = {row['target']: row for row in manifest['components']
+              if profile in row.get('profiles', ['windows-x64-gcc15', 'linux-x64-gcc13'])}
     errors = []
     if set(graph) != set(owners):
         errors.append('configured component set differs from manifest')

@@ -1,0 +1,110 @@
+{
+  "schema_version": "0.1.0",
+  "work_id": "W-04",
+  "source_ref": "ce251955cab0d83c961ddf3d96708de743c52d5f",
+  "objective": "Build and verify the unchanged shared C++ subset with a pinned historical Windows toolset, preserving distinct guest and desktop qualification gates.",
+  "changed_files": [
+    "CMakeLists.txt",
+    "CMakePresets.json",
+    "README.md",
+    "TODO.md",
+    "build-support/check_components.py",
+    "build-support/check_legacy_artifacts.py",
+    "build-support/check_profile.py",
+    "build-support/components.json",
+    "build-support/evidence/historical-build-handoff.json",
+    "build-support/evidence/w-04-build-attempts.json",
+    "build-support/evidence/w-04-historical-build.ctest.txt",
+    "build-support/evidence/w-04-historical-build.json",
+    "build-support/evidence/w-04-historical-build.smoke.json",
+    "build-support/evidence/w-04-lab-inventory.json",
+    "build-support/evidence/w-04-regression-linux-x64-gcc13.DIAG-01.json",
+    "build-support/evidence/w-04-regression-linux-x64-gcc13.NATIVE-01.json",
+    "build-support/evidence/w-04-regression-linux-x64-gcc13.NATIVE-02.json",
+    "build-support/evidence/w-04-regression-linux-x64-gcc13.ORACLE-01.json",
+    "build-support/evidence/w-04-regression-linux-x64-gcc13.RECOVERY-01.json",
+    "build-support/evidence/w-04-regression-linux-x64-gcc13.ctest.txt",
+    "build-support/evidence/w-04-regression-linux-x64-gcc13.json",
+    "build-support/evidence/w-04-regression-windows-x64-gcc15.DIAG-01.json",
+    "build-support/evidence/w-04-regression-windows-x64-gcc15.NATIVE-01.json",
+    "build-support/evidence/w-04-regression-windows-x64-gcc15.NATIVE-02.json",
+    "build-support/evidence/w-04-regression-windows-x64-gcc15.RECOVERY-01.json",
+    "build-support/evidence/w-04-regression-windows-x64-gcc15.ctest.txt",
+    "build-support/evidence/w-04-regression-windows-x64-gcc15.json",
+    "build-support/evidence/w-04-verification.json",
+    "build-support/package_smoke.py",
+    "build-support/record_legacy_build.py",
+    "build-support/targets/README.md",
+    "build-support/targets/windows-x86-v141-xp.imports.json",
+    "build-support/targets/windows-x86-v141-xp.json",
+    "build-support/targets/windows-x86-v141-xp.lock.json",
+    "docs/developers/build.md",
+    "spec/checksums.json",
+    "spec/delivery/current-state.md",
+    "spec/delivery/historical-build-handoff.md",
+    "spec/delivery/implementation-readiness.md",
+    "spec/delivery/index.md",
+    "spec/delivery/open-questions.md",
+    "spec/delivery/packages/index.md",
+    "spec/delivery/packages/w-04-historical-windows.md",
+    "spec/delivery/work-units.json",
+    "spec/generated/catalog.json",
+    "spec/log.md",
+    "tests/model/test_legacy_artifacts.py"
+  ],
+  "decisions": [
+    "Add an explicit eleven-component v141_xp Win32 profile to the same source tree; existing modern native adapters keep their profiles.",
+    "Pin 34 installed inputs and audit actual MSBuild compiler commands and SDK/static CRT linker inputs, despite the misleading CMake SDK selection banner.",
+    "Check PE32/x86, OS/subsystem 5.01 and the declared named import closure without claiming guest export or dynamic fallback qualification.",
+    "Keep the 44 C++ case invocations plus model smoke separate from six modern-host tooling checks when preparing future guest execution.",
+    "Treat powered-off VM registrations as read-only inventory until their test scope and usability are established."
+  ],
+  "checks": [
+    {
+      "name": "Historical-toolset build and 51 host CTest checks, with five PE/runtime audits and relocated smoke",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-04-historical-build.json"
+    },
+    {
+      "name": "Modern Windows regression: 53 CTest entries",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-04-regression-windows-x64-gcc15.json"
+    },
+    {
+      "name": "Modern Linux regression: 54 CTest entries",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-04-regression-linux-x64-gcc13.json"
+    },
+    {
+      "name": "Specification generation, schemas, integrity and 57 tooling tests (55 pass, 2 privilege skips)",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-04-verification.json"
+    },
+    {
+      "name": "Initial/intermediate commands and vendor warning preserved",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-04-build-attempts.json"
+    },
+    {
+      "name": "Historical guest execution and native desktop qualification",
+      "outcome": "not_run",
+      "evidence": "build-support/evidence/w-04-lab-inventory.json"
+    }
+  ],
+  "open_questions": [
+    "Guest test scope is pending user clarification; registration/disk size does not prove an installed usable guest OS.",
+    "Actual XP/7 runtime behavior, dynamic CRT fallbacks and historical native adapter/API closure remain untested.",
+    "No Windows desktop capture or historical/macOS native host qualification has run.",
+    "W-25 failure metadata, configuration preservation and real renderer/data/editor recovery remain required."
+  ],
+  "next_step": "Advance independent W-25 work while guest scope is pending; once a usable guest is admitted, close transfer/launch/result collection and run the existing C++ cases before native host experiments.",
+  "authority_used": [
+    "user:foundation-native-campaign-2026-10-05"
+  ],
+  "limitations": [
+    "W-04 and the foundation/native campaign remain in progress; this is no XP/7 product or desktop support claim.",
+    "Runtime checks executed on Windows 10/WOW64. No VM was booted, snapshotted, modified or captured.",
+    "Only key installed files are pinned; full vendor/header closure and bit-for-bit reproduction are not established.",
+    "No privileged operation, license activation, public release or human review is attested."
+  ]
+}
