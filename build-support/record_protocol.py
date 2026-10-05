@@ -2,6 +2,7 @@
 import argparse
 from datetime import datetime
 import hashlib
+import importlib.util
 import json
 from pathlib import Path
 import platform
@@ -28,7 +29,10 @@ def main():
     parser.add_argument('--recovery', action='store_true', help='Record W-25 portable guards; requires native regression cases as well')
     parser.add_argument('--supervision', action='store_true', help='Require the native owned-child supervision family')
     parser.add_argument('--diagnostic', action='store_true', help='Require independent diagnostic entry and native close checks')
+    parser.add_argument('--oracle', action='store_true', help='Require portable temporal oracle and Linux native pixel calibration')
     args = parser.parse_args()
+    if args.oracle:
+        args.diagnostic = True
     if args.diagnostic:
         args.supervision = True
     if args.supervision:
@@ -54,6 +58,10 @@ def main():
         expected.add('native.RECOVERY-01')
     if args.diagnostic:
         expected |= {'diagnostic.DIAG-POLICY', 'diagnostic.DIAG-PROJECTION', 'native.DIAG-01'}
+    if args.oracle:
+        expected.add('desktop.ORACLE-UNIT')
+        if platform.system() != 'Windows':
+            expected.add('native.ORACLE-01')
     if len(cases) != len(expected) or {case['case'] for case in cases} != expected or any(case['outcome'] != 'pass' for case in cases):
         raise ValueError('missing, repeated, unexpected or failing case; preserve log before rerun')
     suffix = '.exe' if platform.system() == 'Windows' else ''
@@ -84,6 +92,9 @@ def main():
             required['DIAG-01'] = {'REPORT', 'DAMAGED', 'ARGUMENTS', 'NATIVE-CLOSE'}
             if not suffix:
                 required['DIAG-01'].add('NO-DISPLAY')
+        if args.oracle and not suffix:
+            artifacts['SysPane.OracleProbe'] = {'sha256': sha(build/'SysPane.OracleProbe'), 'bytes': (build/'SysPane.OracleProbe').stat().st_size}
+            required['ORACLE-01'] = {'LIVE','DISAPPEAR','FREEZE','OCCLUDE','GAP'}
         seen = set()
         for name in re.findall(r'^Native evidence: (.+)$', raw, re.M):
             path = Path(name.strip()).resolve()
@@ -97,8 +108,8 @@ def main():
             expected_cases = {family+'.'+case for case in required[family]}
             if native['outcome'] != 'pass' or len(native['cases']) != len(expected_cases) or {case['case'] for case in native['cases']} != expected_cases or any(case['outcome'] != 'pass' for case in native['cases']):
                 raise ValueError('native case missing or failed; preserve original report')
-            if family in ('RECOVERY-01', 'DIAG-01'):
-                executable = 'SysPane.RecoveryProbe'+suffix if family == 'RECOVERY-01' else ('SysPane.Diag.exe' if suffix else 'syspane-diag')
+            if family in ('RECOVERY-01', 'DIAG-01', 'ORACLE-01'):
+                executable = {'RECOVERY-01':'SysPane.RecoveryProbe'+suffix, 'DIAG-01':'SysPane.Diag.exe' if suffix else 'syspane-diag', 'ORACLE-01':'SysPane.OracleProbe'}[family]
                 if native['executable_sha256'] != sha(build/executable):
                     raise ValueError('native executable changed after run')
                 for source, digest in native['source_inputs'].items():
@@ -108,10 +119,24 @@ def main():
                     for case in native['cases']:
                         if not case['child_observations'] or not all(c['observed_alive'] and c['observed_exited'] for c in case['child_observations']):
                             raise ValueError('native child observation missing')
-                else:
+                elif family == 'DIAG-01':
                     close = next(case for case in native['cases'] if case['case'] == 'DIAG-01.NATIVE-CLOSE')
                     if native['profile'] != args.profile or not close['pid_verified'] or not close['title_verified'] or not close['class_verified'] or close['exit'] != 0:
                         raise ValueError('diagnostic native close identity/exit evidence missing')
+                else:
+                    specification = importlib.util.spec_from_file_location('syspane_external_oracle', ROOT/'tests/desktop/oracle.py')
+                    oracle = importlib.util.module_from_spec(specification)
+                    specification.loader.exec_module(oracle)
+                    outcomes = {'LIVE':'pass','DISAPPEAR':'fail','FREEZE':'fail','OCCLUDE':'fail','GAP':'inconclusive'}
+                    for case in native['cases']:
+                        computed = oracle.evaluate(case['trace'])
+                        if computed != case['observation'] or computed['outcome'] != outcomes[case['case'].split('.')[-1]]:
+                            raise ValueError('native pixel evidence does not reproduce the fixed oracle')
+                        if case['candidate_exit'] != 0 or case['observer_exit'] != 0 or case['server_exit'] is None or not case['root_restored'] or case['root_before_sha256'] != case['root_after_sha256'] or case['root_configuration_before'] != case['root_configuration_after']:
+                            raise ValueError('native calibration cleanup/root evidence missing')
+                        journal = (build/case['capture_journal']['path']).resolve()
+                        if not journal.is_relative_to(build) or sha(journal) != case['capture_journal']['sha256']:
+                            raise ValueError('capture journal identity/ownership differs')
             destination = args.output.with_suffix('.'+family+'.json')
             destination.parent.mkdir(parents=True, exist_ok=True)
             destination.write_bytes(path.read_bytes())
@@ -121,6 +146,8 @@ def main():
             raise ValueError('required native family has no bound report in this CTest log')
         inspector = 'objdump' if suffix else 'readelf'
         executable = ('SysPane.Diag.exe' if suffix else 'syspane-diag') if args.diagnostic else (('SysPane.RecoveryProbe' if args.supervision else 'SysPane.IpcProbe')+suffix)
+        if args.oracle and not suffix:
+            executable = 'SysPane.OracleProbe'
         command = [inspector, '-p' if suffix else '-d', str(build/executable)]
         inspected = subprocess.check_output(command, text=True, encoding='utf-8')
         imports = re.findall(r'DLL Name:\s*(\S+)', inspected) if suffix else re.findall(r'\(NEEDED\).*?\[([^]]+)\]', inspected)
@@ -132,6 +159,8 @@ def main():
              ROOT/'spec/delivery/packages/w-24-transport.md', ROOT/'spec/assurance/acceptance-traces.md']
     if args.recovery:
         paths.extend([ROOT/'spec/delivery/packages/w-25-recovery.md', ROOT/'spec/architecture/recovery.md'])
+    if args.oracle:
+        paths.extend([ROOT/'spec/delivery/packages/w-02-desktop-oracle.md', ROOT/'spec/assurance/desktop-oracle.md'])
     for directory in ('source', 'tests', 'build-support', 'spec/contracts'):
         paths.extend(sorted((ROOT/directory).rglob('*')))
     inputs = {p.relative_to(ROOT).as_posix(): sha(p) for p in paths
@@ -191,6 +220,19 @@ def main():
             'Installed protected machine policy was not created or changed; positive provenance/revocation deployment needs a separately admitted administrative lab.',
             'GTK dependency identities cover selected installed packages/runtime, not complete transitive redistribution or Wayland qualification.',
             'W-25 and the campaign remain incomplete. No privileged operation, public release or human review is attested.'
+        ]
+    if args.oracle:
+        report.update(work_id='W-02', slice='independent temporal pixel oracle and native X11 calibration', work_status='in_progress')
+        report['bindings']['oracle'] = 'tests/desktop/oracle.py'
+        report['bindings']['oracle_contract'] = 'spec/delivery/packages/w-02-desktop-oracle.md'
+        report['bindings']['oracle_cases'] = 'tests/desktop/test_oracle.py'
+        report['bindings']['native_oracle_cases'] = 'tests/desktop/native_oracle.py'
+        report['limits'] = [
+            'Calibration uses actual owned Xvfb root pixels on Linux and portable golden/time cases on Windows. No user desktop is captured.',
+            'Expected fail/inconclusive observations are successful negative calibrations, not product desktop passes.',
+            'No named shell reveal action, icon-manager input/focus, real wallpaper policy/file or Windows external desktop capture is qualified.',
+            'X11 window PID properties are structural checks within the private trusted test server, not peer authentication for arbitrary clients.',
+            'W-02, W-25 and the full campaign remain incomplete. No privileged action, shell restart, public release or human review is attested.'
         ]
     args.output.parent.mkdir(parents=True, exist_ok=True)
     log_output.write_text(raw.replace(str(build), '<build>').replace(str(ROOT), '<source>'), encoding='utf-8', newline='\n')

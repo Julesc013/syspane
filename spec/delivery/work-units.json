@@ -77,7 +77,8 @@
       ],
       "specs": [
         "SP-ORACLE",
-        "SP-TESTING"
+        "SP-TESTING",
+        "SP-W02-PACKAGE"
       ],
       "acceptance_tests": [
         "T-DESKTOP-REVEAL",
@@ -88,10 +89,12 @@
         "tests/desktop/",
         "source/diagnostics/"
       ],
-      "status": "planned",
+      "status": "in_progress",
       "authority_class": "native_lab",
-      "execution_grant": null,
-      "notes": "Dependency-ready is not execution authority. Native work may produce a failed/inconclusive probe without a support claim; independent tracks can continue."
+      "execution_grant": "user:foundation-native-campaign-2026-10-05",
+      "notes": "Portable external marker/time oracle and native X11 calibration implemented. Windows runs 53 CTest entries and Linux 54; five native calibrations preserve observed pass/fail/inconclusive separately from test outcome. Native reveal, real icon input/focus, wallpaper policy/file and Windows desktop capture adapters remain required; no host qualification follows.",
+      "package": "delivery/packages/w-02-desktop-oracle.md",
+      "evidence": "delivery/oracle-handoff.md"
     },
     {
       "id": "W-03",

@@ -30,7 +30,9 @@ behaviour has been implemented. See [audit disposition](spec/delivery/audit-2026
 - [x] W-25 native supervision: confirm owned-child lifetime, health expiry, render-worker stalls, restart/circuit behavior and parent-loss cleanup on Windows/Linux; see the [handoff](spec/delivery/supervision-handoff.md).
 - [x] W-25 diagnostic entry: build independent JSON reporting and Win32/GTK inspectors with bounded policy decoding, protected-source readers and native close checks; see the [handoff](spec/delivery/diagnostic-handoff.md).
 - [ ] W-25 completion: add bounded recent-failure metadata, explicit configuration preservation, telemetry/renderer recovery, policy-driven payload erasure and native editor-exit/visible recovery. Qualify installed protected policy in an admitted lab.
-- [ ] W-02–W-06: run changing-scene host probes for contemporary Windows, XP/7, Linux and macOS/older OS X.
+- [x] W-02 initial boundary: decode external marker pixels and temporal coverage; calibrate against live, disappearing, frozen, obstructed and capture-gap cases on an owned X11 test server. See the [handoff](spec/delivery/oracle-handoff.md).
+- [ ] W-02 completion: add named reveal-action, icon-input/focus and real wallpaper adapters, including Windows external capture in an admitted synthetic desktop.
+- [ ] W-03–W-06: run changing-scene host probes for contemporary Windows, XP/7, Linux and macOS/older OS X.
 - [ ] W-07–W-11: implement demand, commands, configuration recovery, portable scenes, editor and native settings facilities.
 - [x] W-26 initial slice: produce local Windows/Linux model smoke archives and prove relocated execution; product package/lifecycle qualification remains pending.
 - [ ] W-34–W-37: implement native network providers independently for each family.

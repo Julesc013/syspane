@@ -94,3 +94,18 @@ fingerprint. Tests enable only an authenticated abstract Unix socket with a rand
 high display, check its server PID and stop the owned server. The WSLg display and
 its filesystem socket directory are not modified. Initial WSLg/Xvfb failures remain
 in the diagnostic attempts record; Xvfb success is not desktop qualification.
+
+Profile revision 7 adds portable external marker/time evaluation on both profiles
+(53 CTest entries on Windows) and `SysPane.OracleProbe` plus independent root capture
+on Linux (54 entries). The Linux X11 development/runtime package is
+2:1.8.7-1build1; the runtime SHA-256 is checked alongside the existing native UI lab
+dependencies. The manifest's optional `profiles` selector restricts a component to
+named profiles; an absent selector means both current development profiles. The
+graph checker uses the build ownership marker and rejects a target set from the
+wrong profile. It does not invent a placeholder Windows capture executable.
+
+The Linux oracle uses 128x96 RGB markers on an owned 800x600 Xvfb display, retains
+compressed raw frames and preserves failed/inconclusive temporal observations as
+calibration evidence. No input reaches the user's display. Named shell actions,
+icons, Windows capture, real wallpaper policy/files and wall qualification remain
+pending. These native captures establish pixels only for this synthetic laboratory.

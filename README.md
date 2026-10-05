@@ -19,6 +19,9 @@ on both profiles. An independent diagnostic executable now provides a public JSO
 report and conservative Win32/GTK inspector with mandatory-policy checks.
 Telemetry/renderer recovery, diagnostic preservation controls and desktop
 integration remain pending.
+An external pixel/time oracle is calibrated against live, hidden, frozen and
+obstructed synthetic X11 surfaces. Named shell/reveal and icon-input qualification
+still remain to be executed on their own desktop profiles.
 There is no usable SysPane desktop application or downloadable release yet.
 Desktop, screensaver and installer profiles remain unqualified.
 

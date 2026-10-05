@@ -5,8 +5,13 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 
-def check(graph, manifest):
-    owners = {row['target']: row for row in manifest['components']}
+def check(graph, manifest, profile):
+    if profile not in {'windows-x64-gcc15', 'linux-x64-gcc13'}:
+        raise ValueError('unknown component profile')
+    for row in manifest['components']:
+        if 'profiles' in row and (not row['profiles'] or not set(row['profiles']) <= {'windows-x64-gcc15', 'linux-x64-gcc13'}):
+            raise ValueError('invalid component profile selector')
+    owners = {row['target']: row for row in manifest['components'] if profile in row.get('profiles', [profile])}
     errors = []
     if set(graph) != set(owners):
         errors.append('configured component set differs from manifest')
@@ -36,13 +41,16 @@ def main():
             raise ValueError('duplicate target')
         graph[name] = (kind, list(filter(None, dependencies.split(';'))), sources.split(';'))
     manifest = json.loads((ROOT / 'build-support/components.json').read_text(encoding='utf-8'))
-    errors = check(graph, manifest)
+    profile = json.loads((Path(sys.argv[1]).parent/'.syspane-owner.json').read_text(encoding='utf-8'))['profile']
+    errors = check(graph, manifest, profile)
     if errors:
         raise ValueError('; '.join(errors))
     if '--negative-test' in sys.argv:
         kind, dependencies, sources = graph['syspane_model']
         graph['syspane_model'] = (kind, dependencies + ['syspane_model_smoke'], sources)
-        assert 'syspane_model: forbidden dependency' in check(graph, manifest), 'forbidden edge went undetected'
+        assert 'syspane_model: forbidden dependency' in check(graph, manifest, profile), 'forbidden edge went undetected'
+        wrong_profile = 'linux-x64-gcc13' if profile == 'windows-x64-gcc15' else 'windows-x64-gcc15'
+        assert 'configured component set differs from manifest' in check(graph, manifest, wrong_profile), 'profile-specific component omission/addition went undetected'
     print('component graph: pass')
 
 if __name__ == '__main__':

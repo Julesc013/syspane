@@ -8,6 +8,7 @@ EXPECTED = {
     'libgtk-3-0t64': '3.24.41-4ubuntu1.3',
     'libglib2.0-dev': '2.80.0-6ubuntu3.8',
     'libx11-dev': '2:1.8.7-1build1',
+    'libx11-6': '2:1.8.7-1build1',
     'xvfb': '2:21.1.12-1ubuntu1.6',
 }
 for package, version in EXPECTED.items():
@@ -19,4 +20,6 @@ if hashlib.sha256(runtime.read_bytes()).hexdigest() != '0611fd19d1354a39a7cfafce
     raise ValueError('diagnostic GTK runtime fingerprint differs')
 if hashlib.sha256(Path('/usr/bin/Xvfb').read_bytes()).hexdigest() != '2c7f5a9534410fed5092d782a69ca7ffd9fce80e98b81ffe4944d703dd11d3b1':
     raise ValueError('diagnostic Xvfb test server fingerprint differs')
+if hashlib.sha256(Path('/usr/lib/x86_64-linux-gnu/libX11.so.6').read_bytes()).hexdigest() != 'c5b5d782bd9cab3420a62df88f5c991507edf3331a89f98464ddbc538c37b879':
+    raise ValueError('native UI/oracle X11 runtime fingerprint differs')
 print('diagnostic toolkit verified: GTK 3.24.41 / Ubuntu 3.24.41-4ubuntu1.3')

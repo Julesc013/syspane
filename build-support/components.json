@@ -266,6 +266,31 @@
         "development_test"
       ],
       "installed_files": []
+    },
+    {
+      "id": "oracle-probe",
+      "target": "syspane_oracle_probe",
+      "type": "EXECUTABLE",
+      "profiles": [
+        "linux-x64-gcc13"
+      ],
+      "source_owner": "source/diagnostics/",
+      "public_interfaces": [],
+      "private_interfaces": [],
+      "sources": [
+        "source/diagnostics/oracle_probe_x11.cpp"
+      ],
+      "allowed_dependencies": [
+        "X11::X11"
+      ],
+      "target_requirements": [
+        "cxx17",
+        "x11"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": []
     }
   ]
 }

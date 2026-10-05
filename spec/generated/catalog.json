@@ -357,7 +357,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "fd7744f64ee4550e258efe3242bbd2703e0e7dea6621d5c7c1b0b3f28bb87b0f"
+      "sha256": "3617edbdb30f74e7f2dce88a71a8dcdf14781c74686a66b69fdd7c35f8189071"
     },
     {
       "id": "SP-DIAGNOSTIC-HANDOFF",
@@ -389,7 +389,7 @@
       "requires": [
         "SP-CURRENT"
       ],
-      "sha256": "61f420c539b1430ad69d12dbac0fd12e8f1fdb0d3391b868a05c0f6a52b2e55f"
+      "sha256": "6f6ced24b958e0b88d13ea6e629d8ee7c5239b3de475a67a39469c6ac9e1a761"
     },
     {
       "id": "SP-NATIVE-TRANSPORT-HANDOFF",
@@ -413,6 +413,17 @@
       "sha256": "58432869c6cc2649a11a7af8661cb965ea821a99b0418d0b255eda76e6786523"
     },
     {
+      "id": "SP-ORACLE-HANDOFF",
+      "path": "delivery/oracle-handoff.md",
+      "title": "Independent temporal oracle implementation checkpoint",
+      "description": "Bind external marker/time evaluation and native X11 fault calibration to source and raw capture evidence.",
+      "requires": [
+        "SP-CAMPAIGN-ADMISSION",
+        "SP-W02-PACKAGE"
+      ],
+      "sha256": "f4c4160e1ffda3820df64d9fe63ea0e82152e5b67adffd2a559f6229d0f89777"
+    },
+    {
       "id": "SP-W01-PACKAGE",
       "path": "delivery/packages/w-01-foundation.md",
       "title": "W-01 portable build and model foundation",
@@ -426,6 +437,19 @@
         "SP-ACCEPTANCE-TRACES"
       ],
       "sha256": "2517a738ae26015f68e9027599f39b13cb4473718772f83e3db46d4f077718e2"
+    },
+    {
+      "id": "SP-W02-PACKAGE",
+      "path": "delivery/packages/w-02-desktop-oracle.md",
+      "title": "W-02 independent temporal desktop oracle",
+      "description": "Close externally captured marker decoding, time coverage and native calibration before desktop qualification.",
+      "requires": [
+        "SP-WORK-PACKAGES",
+        "SP-ORACLE",
+        "SP-DESKTOP",
+        "SP-TESTING"
+      ],
+      "sha256": "17298929b33e2805da85f8bfbac604e43c47c749cb7ebbd8372c9b1b42449852"
     },
     {
       "id": "SP-W24-PACKAGE",

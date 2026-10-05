@@ -116,11 +116,41 @@ and native revocation qualification need an admitted administrative lab. Portabl
 fixtures test parsing/projection semantics, not policy provenance. Diagnostic
 preservation, recent-failure metadata and recovery actions remain pending.
 
-Current records are `build-support/evidence/w-25-diagnostic-<profile>.json`.
+Diagnostic checkpoint records are `build-support/evidence/w-25-diagnostic-<profile>.json`.
 `record_protocol.py --diagnostic --profile <profile> --build-dir <build> --output
 <record>` requires the exact 52-entry suite and its IPC, supervision and diagnostic
 reports, checking source and executable identity. See the
 [diagnostic handoff](../../spec/delivery/diagnostic-handoff.md).
+
+Profile revision 7 adds the independent temporal pixel oracle in `tests/desktop/`.
+Windows runs 53 CTest entries, including 16 portable marker/time checks inside
+`desktop.ORACLE-UNIT`; Linux runs 54, adding five native calibration cases in
+`native.ORACLE-01`. Run the boundary with `ctest --preset windows-x64-gcc15 -R ORACLE
+--output-on-failure`, or the same regex in the configured Linux build directory.
+`SysPane.OracleProbe` exists only in the Linux profile; component metadata and the
+graph checker enforce that selector instead of declaring an unavailable Win32 target.
+
+The native observer drives generations independently and captures actual root pixels
+from its owned authenticated Xvfb server. Disappearance, freeze and obstruction must
+produce failed temporal observations; a deliberate capture gap must be inconclusive.
+The suite passes when those fixed calibration outcomes match. Candidate visibility
+flags or responsive event processing cannot replace changing pixels. No user's
+desktop or unrelated application is captured, and no shell is restarted.
+
+Raw RGB frames are bounded, losslessly compressed and embedded in each native report.
+Task-owned `oracle-case-<id>/` journals also preserve each flushed frame/stimulus,
+including an interrupted prefix. The recorder's `--oracle` mode recomputes every
+temporal result from the captured bytes, verifies journal/source/artifact identity
+and checks confirmed cleanup/root restoration. Current records are
+`build-support/evidence/w-02-oracle-<profile>.json`; see the
+[oracle handoff](../../spec/delivery/oracle-handoff.md) and
+[package](../../spec/delivery/packages/w-02-desktop-oracle.md).
+
+These checks establish observer calibration on the named development environment.
+Real shell reveal actions, icon-manager input/focus, wallpaper-file/policy evidence
+and Windows external desktop capture remain required. A synthetic Xvfb window is
+never a behind-icons desktop qualification. The standalone `tests/desktop/oracle.py`
+accepts one bounded trace JSON and exits 0/pass, 1/fail, 3/inconclusive or 2/invalid.
 
 Specification tooling separately uses Python 3.11+ in an isolated environment:
 

@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-06T02:42:44+11:00", "scope": "Independent diagnostic entry checkpoint; preservation and visible recovery remain pending"}
+updated: {"by": "codex", "at": "2026-10-06T03:24:33+11:00", "scope": "Independent temporal oracle and native X11 calibration; real desktop scenarios remain pending"}
 ---
 
 # Current state and next admitted boundary
@@ -65,6 +65,12 @@ pass 52 CTest entries. Native tests close only owned hidden windows and prove st
 beside damaged optional inputs; positive policy deployment, preservation controls,
 recent-failure metadata and complete visible/editor recovery remain pending.
 
+The [oracle checkpoint](oracle-handoff.md) adds independent external marker/time
+evaluation and native X11 calibration. Windows passes 53 CTest entries and Linux 54,
+including sixteen fixed portable cases and five native pixel/fault cases. Expected
+fail/inconclusive observations are verified negative calibrations. Named shell reveal,
+icon input/focus, real wallpaper and Windows desktop capture remain unexecuted.
+
 Canonical 0.2.0 documentation bundle, unchanged 0.1 authoring profile, preserved old
 fixtures, new experimental scene/command/capability 0.2 and admission descriptors.
 The initial settings registry has enforced metadata/default consistency and generated
@@ -101,8 +107,9 @@ License, contribution and release-identity decisions remain open.
 
 ## Next work
 
-Continue the admitted campaign: implement W-02's independent desktop oracle and
-extend W-25 diagnostics with bounded recent-failure metadata and explicit configuration
+Continue the admitted campaign: extend W-02's calibrated observer with native reveal,
+icon-input/focus and real wallpaper adapters in admitted synthetic desktop labs.
+Extend W-25 diagnostics with bounded recent-failure metadata and explicit configuration
 preservation. Close those input/ownership contracts and full-snapshot/data recovery
 before enabling the associated features. Qualify protected policy in an admitted lab.
 Connect the build/component/target consumers and minimum command/IPC/policy/recovery
