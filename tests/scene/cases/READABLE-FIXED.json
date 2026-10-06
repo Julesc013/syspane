@@ -1,0 +1,131 @@
+{
+  "scene": {
+    "schema_version": "0.2.0",
+    "revision": "40",
+    "scene_id": "scene:layout",
+    "theme_id": null,
+    "roots": [
+      "a"
+    ],
+    "widgets": [
+      {
+        "id": "a",
+        "kind": "text",
+        "title": "Readable label",
+        "display": {
+          "role": "primary"
+        },
+        "layout": {
+          "base": {
+            "kind": "fixed",
+            "x": 0,
+            "y": 0,
+            "width": 32,
+            "height": 16
+          }
+        },
+        "bindings": [],
+        "priority": "normal"
+      }
+    ]
+  },
+  "topology": {
+    "displays": [
+      {
+        "id": "main",
+        "bounds": [
+          0,
+          0,
+          320,
+          200
+        ],
+        "work": [
+          0,
+          0,
+          320,
+          200
+        ],
+        "safe": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "exclusions": [],
+        "pixel_origin": [
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      }
+    ],
+    "roles": {
+      "primary": [
+        "main"
+      ]
+    },
+    "fallback": "main"
+  },
+  "metrics": {
+    "a": {
+      "minimum": [
+        80,
+        40
+      ],
+      "preferred": [
+        80,
+        40
+      ]
+    }
+  },
+  "expected": {
+    "scene_id": "scene:layout",
+    "revision": "40",
+    "state": "degraded",
+    "nodes": [
+      {
+        "id": "a",
+        "parent": "",
+        "display": "main",
+        "kind": "text",
+        "variant": -1,
+        "box": [
+          0,
+          0,
+          5120,
+          2560
+        ],
+        "visible": [
+          0,
+          0,
+          5120,
+          2560
+        ],
+        "content": [
+          0,
+          0,
+          5120,
+          2560
+        ],
+        "pixels": [
+          0,
+          0,
+          80,
+          40
+        ],
+        "overflow": "none",
+        "clipped": false
+      }
+    ],
+    "diagnostics": [
+      {
+        "widget": "a",
+        "code": "layout.fixed_size",
+        "related": ""
+      }
+    ]
+  }
+}

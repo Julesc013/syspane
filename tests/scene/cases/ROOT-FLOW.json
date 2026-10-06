@@ -1,0 +1,132 @@
+{
+  "scene": {
+    "schema_version": "0.2.0",
+    "revision": "40",
+    "scene_id": "scene:layout",
+    "theme_id": null,
+    "roots": [
+      "a"
+    ],
+    "widgets": [
+      {
+        "id": "a",
+        "kind": "text",
+        "title": "Readable label",
+        "display": {
+          "role": "primary"
+        },
+        "layout": {
+          "base": {
+            "kind": "flow",
+            "width": {
+              "min": 32,
+              "preferred": 64,
+              "max": 512
+            },
+            "height": {
+              "min": 16,
+              "preferred": 32,
+              "max": 512
+            },
+            "anchor": "center"
+          }
+        },
+        "bindings": [],
+        "priority": "normal"
+      }
+    ]
+  },
+  "topology": {
+    "displays": [
+      {
+        "id": "main",
+        "bounds": [
+          0,
+          0,
+          320,
+          200
+        ],
+        "work": [
+          0,
+          0,
+          320,
+          200
+        ],
+        "safe": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "exclusions": [],
+        "pixel_origin": [
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      }
+    ],
+    "roles": {
+      "primary": [
+        "main"
+      ]
+    },
+    "fallback": "main"
+  },
+  "metrics": {
+    "a": {
+      "minimum": [
+        32,
+        16
+      ],
+      "preferred": [
+        32,
+        16
+      ]
+    }
+  },
+  "expected": {
+    "scene_id": "scene:layout",
+    "revision": "40",
+    "state": "ready",
+    "nodes": [
+      {
+        "id": "a",
+        "parent": "",
+        "display": "main",
+        "kind": "text",
+        "variant": -1,
+        "box": [
+          8192,
+          5376,
+          4096,
+          2048
+        ],
+        "visible": [
+          8192,
+          5376,
+          4096,
+          2048
+        ],
+        "content": [
+          8192,
+          5376,
+          4096,
+          2048
+        ],
+        "pixels": [
+          128,
+          84,
+          64,
+          32
+        ],
+        "overflow": "none",
+        "clipped": false
+      }
+    ],
+    "diagnostics": []
+  }
+}

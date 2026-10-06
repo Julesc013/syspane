@@ -26,6 +26,9 @@ behaviour has been implemented. See [audit disposition](spec/delivery/audit-2026
 
 ## First native campaign
 
+- [x] W-09 shared layout prerequisite: deterministic admitted layouts, display fallback, safe exclusions, breakpoints, readable minima, priority allocation and exact pixel bounds. See the [handoff](spec/delivery/layout-handoff.md).
+- [ ] W-09 native projection: connect real text metrics, live bindings, current resources/policy, primitive drawing and visible activation/recovery; qualify accessibility and native raster behavior.
+
 - [x] W-07 controller demand component: merge authorized field/entity/age/priority/recording leases, apply cadence/concurrency policy, age priorities and retain cancelled slots until confirmed stop. See the [handoff](spec/delivery/demand-owner-handoff.md).
 - [x] W-07/W-25 Linux demand integration: real bounded acquisition outside the IPC loop, native join before slot release, rejected late results and policy revocation while a worker remains alive. See the [handoff](spec/delivery/demand-executor-handoff.md).
 - [x] W-07/W-25 session demand adapter: bind controller-selected requests to authenticated roles, exact heartbeat/expiry rules and current policy; preserve independent leases and held native jobs. See the [handoff](spec/delivery/session-demand-handoff.md).

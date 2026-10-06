@@ -1,0 +1,143 @@
+{
+  "scene": {
+    "schema_version": "0.2.0",
+    "revision": "40",
+    "scene_id": "scene:layout",
+    "theme_id": null,
+    "roots": [
+      "g"
+    ],
+    "widgets": [
+      {
+        "id": "g",
+        "kind": "group",
+        "title": "Readable label",
+        "display": {
+          "role": "primary"
+        },
+        "layout": {
+          "base": {
+            "kind": "stack",
+            "axis": "vertical",
+            "gap_dip": 8,
+            "overflow": "diagnose"
+          }
+        },
+        "bindings": [],
+        "priority": "normal",
+        "children": [
+          "a"
+        ]
+      },
+      {
+        "id": "a",
+        "kind": "text",
+        "title": "Readable label",
+        "display": {
+          "local_id": "aux"
+        },
+        "layout": {
+          "base": {
+            "kind": "flow",
+            "width": {
+              "min": 32,
+              "preferred": 64,
+              "max": 512
+            },
+            "height": {
+              "min": 16,
+              "preferred": 32,
+              "max": 512
+            },
+            "anchor": "start"
+          }
+        },
+        "bindings": [],
+        "priority": "normal"
+      }
+    ]
+  },
+  "topology": {
+    "displays": [
+      {
+        "id": "main",
+        "bounds": [
+          0,
+          0,
+          320,
+          200
+        ],
+        "work": [
+          0,
+          0,
+          320,
+          200
+        ],
+        "safe": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "exclusions": [],
+        "pixel_origin": [
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "id": "aux",
+        "bounds": [
+          320,
+          0,
+          320,
+          200
+        ],
+        "work": [
+          320,
+          0,
+          320,
+          200
+        ],
+        "safe": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "exclusions": [],
+        "pixel_origin": [
+          320,
+          0
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      }
+    ],
+    "roles": {
+      "primary": [
+        "main"
+      ]
+    },
+    "fallback": "main"
+  },
+  "metrics": {
+    "a": {
+      "minimum": [
+        32,
+        16
+      ],
+      "preferred": [
+        32,
+        16
+      ]
+    }
+  },
+  "error": "layout.display_conflict"
+}

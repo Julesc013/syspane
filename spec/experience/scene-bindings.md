@@ -17,6 +17,10 @@ updated: {"by": "codex", "at": "2026-10-04T19:32:52+11:00", "scope": "October au
 
 # Portable scene structure and binding
 
+The executable [layout package](../delivery/packages/w-09-layout.md) closes the
+initial geometry algorithms, explicit monitor fallback, native readable metric
+inputs, clipping/overflow diagnostics and pixel conversion. It preserves the
+authored schema and does not qualify native text, drawing or activation.
 
 ## Versioned scene grammar
 

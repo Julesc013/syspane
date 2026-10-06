@@ -1,0 +1,256 @@
+{
+  "scene": {
+    "schema_version": "0.2.0",
+    "revision": "40",
+    "scene_id": "scene:layout",
+    "theme_id": null,
+    "roots": [
+      "g"
+    ],
+    "widgets": [
+      {
+        "id": "g",
+        "kind": "group",
+        "title": "Readable label",
+        "display": {
+          "role": "primary"
+        },
+        "layout": {
+          "base": {
+            "kind": "stack",
+            "axis": "horizontal",
+            "gap_dip": 4,
+            "overflow": "diagnose"
+          }
+        },
+        "bindings": [],
+        "priority": "normal",
+        "children": [
+          "a",
+          "b"
+        ]
+      },
+      {
+        "id": "a",
+        "kind": "text",
+        "title": "Readable label",
+        "display": {
+          "role": "primary"
+        },
+        "layout": {
+          "base": {
+            "kind": "flow",
+            "width": {
+              "min": 32,
+              "preferred": 64,
+              "max": 512
+            },
+            "height": {
+              "min": 16,
+              "preferred": 32,
+              "max": 512
+            },
+            "anchor": "start"
+          }
+        },
+        "bindings": [],
+        "priority": "normal"
+      },
+      {
+        "id": "b",
+        "kind": "text",
+        "title": "Readable label",
+        "display": {
+          "role": "primary"
+        },
+        "layout": {
+          "base": {
+            "kind": "flow",
+            "width": {
+              "min": 32,
+              "preferred": 64,
+              "max": 512
+            },
+            "height": {
+              "min": 16,
+              "preferred": 32,
+              "max": 512
+            },
+            "anchor": "end"
+          }
+        },
+        "bindings": [],
+        "priority": "normal"
+      }
+    ]
+  },
+  "topology": {
+    "displays": [
+      {
+        "id": "main",
+        "bounds": [
+          0,
+          0,
+          100,
+          80
+        ],
+        "work": [
+          0,
+          0,
+          100,
+          80
+        ],
+        "safe": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "exclusions": [],
+        "pixel_origin": [
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      }
+    ],
+    "roles": {
+      "primary": [
+        "main"
+      ]
+    },
+    "fallback": "main"
+  },
+  "metrics": {
+    "a": {
+      "minimum": [
+        32,
+        16
+      ],
+      "preferred": [
+        32,
+        16
+      ]
+    },
+    "b": {
+      "minimum": [
+        32,
+        16
+      ],
+      "preferred": [
+        32,
+        16
+      ]
+    }
+  },
+  "expected": {
+    "scene_id": "scene:layout",
+    "revision": "40",
+    "state": "ready",
+    "nodes": [
+      {
+        "id": "g",
+        "parent": "",
+        "display": "main",
+        "kind": "group",
+        "variant": -1,
+        "box": [
+          0,
+          0,
+          6400,
+          5120
+        ],
+        "visible": [
+          0,
+          0,
+          6400,
+          5120
+        ],
+        "content": [
+          0,
+          0,
+          6400,
+          5120
+        ],
+        "pixels": [
+          0,
+          0,
+          100,
+          80
+        ],
+        "overflow": "none",
+        "clipped": false
+      },
+      {
+        "id": "a",
+        "parent": "g",
+        "display": "main",
+        "kind": "text",
+        "variant": -1,
+        "box": [
+          0,
+          0,
+          3072,
+          2048
+        ],
+        "visible": [
+          0,
+          0,
+          3072,
+          2048
+        ],
+        "content": [
+          0,
+          0,
+          3072,
+          2048
+        ],
+        "pixels": [
+          0,
+          0,
+          48,
+          32
+        ],
+        "overflow": "none",
+        "clipped": false
+      },
+      {
+        "id": "b",
+        "parent": "g",
+        "display": "main",
+        "kind": "text",
+        "variant": -1,
+        "box": [
+          3328,
+          3072,
+          3072,
+          2048
+        ],
+        "visible": [
+          3328,
+          3072,
+          3072,
+          2048
+        ],
+        "content": [
+          3328,
+          3072,
+          3072,
+          2048
+        ],
+        "pixels": [
+          52,
+          48,
+          48,
+          32
+        ],
+        "overflow": "none",
+        "clipped": false
+      }
+    ],
+    "diagnostics": []
+  }
+}

@@ -1,0 +1,267 @@
+{
+  "scene": {
+    "schema_version": "0.2.0",
+    "revision": "40",
+    "scene_id": "scene:layout",
+    "theme_id": null,
+    "roots": [
+      "g"
+    ],
+    "widgets": [
+      {
+        "id": "g",
+        "kind": "group",
+        "title": "Readable label",
+        "display": {
+          "role": "primary"
+        },
+        "layout": {
+          "base": {
+            "kind": "grid",
+            "columns": 2,
+            "gap_dip": 4,
+            "overflow": "diagnose"
+          }
+        },
+        "bindings": [],
+        "priority": "normal",
+        "children": [
+          "a",
+          "b"
+        ]
+      },
+      {
+        "id": "a",
+        "kind": "text",
+        "title": "Readable label",
+        "display": {
+          "role": "primary"
+        },
+        "layout": {
+          "base": {
+            "kind": "flow",
+            "width": {
+              "min": 32,
+              "preferred": 64,
+              "max": 512
+            },
+            "height": {
+              "min": 16,
+              "preferred": 32,
+              "max": 512
+            },
+            "anchor": "start"
+          }
+        },
+        "bindings": [],
+        "priority": "normal"
+      },
+      {
+        "id": "b",
+        "kind": "text",
+        "title": "Readable label",
+        "display": {
+          "role": "primary"
+        },
+        "layout": {
+          "base": {
+            "kind": "flow",
+            "width": {
+              "min": 32,
+              "preferred": 64,
+              "max": 512
+            },
+            "height": {
+              "min": 16,
+              "preferred": 32,
+              "max": 512
+            },
+            "anchor": "start"
+          }
+        },
+        "bindings": [],
+        "priority": "normal"
+      }
+    ]
+  },
+  "topology": {
+    "displays": [
+      {
+        "id": "main",
+        "bounds": [
+          0,
+          0,
+          60,
+          100
+        ],
+        "work": [
+          0,
+          0,
+          60,
+          100
+        ],
+        "safe": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "exclusions": [],
+        "pixel_origin": [
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      }
+    ],
+    "roles": {
+      "primary": [
+        "main"
+      ]
+    },
+    "fallback": "main"
+  },
+  "metrics": {
+    "a": {
+      "minimum": [
+        32,
+        16
+      ],
+      "preferred": [
+        32,
+        16
+      ]
+    },
+    "b": {
+      "minimum": [
+        32,
+        16
+      ],
+      "preferred": [
+        32,
+        16
+      ]
+    }
+  },
+  "expected": {
+    "scene_id": "scene:layout",
+    "revision": "40",
+    "state": "alternative",
+    "nodes": [
+      {
+        "id": "g",
+        "parent": "",
+        "display": "main",
+        "kind": "group",
+        "variant": -1,
+        "box": [
+          0,
+          0,
+          3840,
+          6400
+        ],
+        "visible": [
+          0,
+          0,
+          3840,
+          6400
+        ],
+        "content": [
+          0,
+          0,
+          4352,
+          6400
+        ],
+        "pixels": [
+          0,
+          0,
+          60,
+          100
+        ],
+        "overflow": "diagnose",
+        "clipped": false
+      },
+      {
+        "id": "a",
+        "parent": "g",
+        "display": "main",
+        "kind": "text",
+        "variant": -1,
+        "box": [
+          0,
+          0,
+          2048,
+          2048
+        ],
+        "visible": [
+          0,
+          0,
+          2048,
+          2048
+        ],
+        "content": [
+          0,
+          0,
+          2048,
+          2048
+        ],
+        "pixels": [
+          0,
+          0,
+          32,
+          32
+        ],
+        "overflow": "none",
+        "clipped": false
+      },
+      {
+        "id": "b",
+        "parent": "g",
+        "display": "main",
+        "kind": "text",
+        "variant": -1,
+        "box": [
+          2304,
+          0,
+          2048,
+          2048
+        ],
+        "visible": [
+          2304,
+          0,
+          1536,
+          2048
+        ],
+        "content": [
+          2304,
+          0,
+          2048,
+          2048
+        ],
+        "pixels": [
+          36,
+          0,
+          24,
+          32
+        ],
+        "overflow": "diagnose",
+        "clipped": true
+      }
+    ],
+    "diagnostics": [
+      {
+        "widget": "b",
+        "code": "layout.overflow",
+        "related": ""
+      },
+      {
+        "widget": "g",
+        "code": "layout.overflow",
+        "related": ""
+      }
+    ]
+  }
+}

@@ -1,5 +1,19 @@
 # Developer setup and checks
 
+The [scene layout package](../../spec/delivery/packages/w-09-layout.md) adds
+`syspane_scene` and `syspane_scene_tests` on all three development profiles. Call
+`scene::resolve(scene, topology, metrics)` with immutable authored data, explicit
+display identities/role candidates/fallback and native readable minimum/preferred
+sizes for every leaf. Typed geometry uses 1/64 DIP; returned `pixels` use device
+pixels. Inspect plan state and diagnostics before using geometry. An alternative
+plan requires an exposed fallback presentation and proves no visible activation.
+
+After normal workspace preflight/configure/build, run `ctest --preset <profile>
+-R '^scene[.]' --output-on-failure`. The 31 fixed JSON cases in `tests/scene/cases/`
+contain independently specified exact rectangles. Additional limits and exhaustive
+exclusion checks run in the same executable. This engine performs no font, hardware
+or file I/O; native metric production and rendering are separate integration work.
+
 The [native content package](../../spec/delivery/packages/w-08-native-content.md)
 adds `make_resource_provider(store, capabilities, imports)` to the shared transaction
 component. The store must outlive the provider, invoked on its serialized worker.

@@ -1,0 +1,199 @@
+{
+  "scene": {
+    "schema_version": "0.2.0",
+    "revision": "40",
+    "scene_id": "scene:layout",
+    "theme_id": null,
+    "roots": [
+      "g"
+    ],
+    "widgets": [
+      {
+        "id": "g",
+        "kind": "group",
+        "title": "Readable label",
+        "display": {
+          "role": "primary"
+        },
+        "layout": {
+          "base": {
+            "kind": "fixed",
+            "x": 0,
+            "y": 0,
+            "width": 100,
+            "height": 80
+          }
+        },
+        "bindings": [],
+        "priority": "normal",
+        "children": [
+          "a"
+        ]
+      },
+      {
+        "id": "a",
+        "kind": "text",
+        "title": "Readable label",
+        "display": {
+          "role": "primary"
+        },
+        "layout": {
+          "base": {
+            "kind": "flow",
+            "width": {
+              "min": 32,
+              "preferred": 64,
+              "max": 512
+            },
+            "height": {
+              "min": 16,
+              "preferred": 32,
+              "max": 512
+            },
+            "anchor": "start"
+          },
+          "breakpoints": [
+            {
+              "min_width_dip": 200,
+              "layout": {
+                "kind": "fixed",
+                "x": 5,
+                "y": 0,
+                "width": 32,
+                "height": 16
+              }
+            }
+          ]
+        },
+        "bindings": [],
+        "priority": "normal"
+      }
+    ]
+  },
+  "topology": {
+    "displays": [
+      {
+        "id": "main",
+        "bounds": [
+          0,
+          0,
+          320,
+          200
+        ],
+        "work": [
+          0,
+          0,
+          320,
+          200
+        ],
+        "safe": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "exclusions": [],
+        "pixel_origin": [
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      }
+    ],
+    "roles": {
+      "primary": [
+        "main"
+      ]
+    },
+    "fallback": "main"
+  },
+  "metrics": {
+    "a": {
+      "minimum": [
+        32,
+        16
+      ],
+      "preferred": [
+        32,
+        16
+      ]
+    }
+  },
+  "expected": {
+    "scene_id": "scene:layout",
+    "revision": "40",
+    "state": "ready",
+    "nodes": [
+      {
+        "id": "g",
+        "parent": "",
+        "display": "main",
+        "kind": "group",
+        "variant": -1,
+        "box": [
+          0,
+          0,
+          6400,
+          5120
+        ],
+        "visible": [
+          0,
+          0,
+          6400,
+          5120
+        ],
+        "content": [
+          0,
+          0,
+          6400,
+          5120
+        ],
+        "pixels": [
+          0,
+          0,
+          100,
+          80
+        ],
+        "overflow": "none",
+        "clipped": false
+      },
+      {
+        "id": "a",
+        "parent": "g",
+        "display": "main",
+        "kind": "text",
+        "variant": 0,
+        "box": [
+          320,
+          0,
+          2048,
+          1024
+        ],
+        "visible": [
+          320,
+          0,
+          2048,
+          1024
+        ],
+        "content": [
+          320,
+          0,
+          2048,
+          1024
+        ],
+        "pixels": [
+          5,
+          0,
+          32,
+          16
+        ],
+        "overflow": "none",
+        "clipped": false
+      }
+    ],
+    "diagnostics": []
+  }
+}

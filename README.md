@@ -7,6 +7,11 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
+The [scene layout checkpoint](spec/delivery/layout-handoff.md) adds shared geometry
+for fixed, flow, canvas, stack and grid layouts. Explicit display maps, safe regions,
+breakpoints and readable text metrics determine placement without changing the
+authored scene. Overflow is reported; native drawing and editing remain open.
+
 The [native content checkpoint](spec/delivery/native-content-handoff.md) connects
 content commands to the supervised Linux controller. New edits can use the stored
 resource closure after the import directory disappears and the controller restarts.

@@ -1,0 +1,154 @@
+{
+  "scene": {
+    "schema_version": "0.2.0",
+    "revision": "40",
+    "scene_id": "scene:layout",
+    "theme_id": null,
+    "roots": [
+      "a"
+    ],
+    "widgets": [
+      {
+        "id": "a",
+        "kind": "text",
+        "title": "Readable label",
+        "display": {
+          "role": "primary"
+        },
+        "layout": {
+          "base": {
+            "kind": "flow",
+            "width": {
+              "min": 32,
+              "preferred": 64,
+              "max": 512
+            },
+            "height": {
+              "min": 16,
+              "preferred": 32,
+              "max": 512
+            },
+            "anchor": "start"
+          },
+          "breakpoints": [
+            {
+              "min_width_dip": 200,
+              "layout": {
+                "kind": "fixed",
+                "x": 10,
+                "y": 15,
+                "width": 80,
+                "height": 20
+              }
+            },
+            {
+              "min_width_dip": 600,
+              "layout": {
+                "kind": "fixed",
+                "x": 0,
+                "y": 0,
+                "width": 100,
+                "height": 30
+              }
+            }
+          ]
+        },
+        "bindings": [],
+        "priority": "normal"
+      }
+    ]
+  },
+  "topology": {
+    "displays": [
+      {
+        "id": "main",
+        "bounds": [
+          0,
+          0,
+          199,
+          100
+        ],
+        "work": [
+          0,
+          0,
+          199,
+          100
+        ],
+        "safe": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "exclusions": [],
+        "pixel_origin": [
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      }
+    ],
+    "roles": {
+      "primary": [
+        "main"
+      ]
+    },
+    "fallback": "main"
+  },
+  "metrics": {
+    "a": {
+      "minimum": [
+        32,
+        16
+      ],
+      "preferred": [
+        32,
+        16
+      ]
+    }
+  },
+  "expected": {
+    "scene_id": "scene:layout",
+    "revision": "40",
+    "state": "ready",
+    "nodes": [
+      {
+        "id": "a",
+        "parent": "",
+        "display": "main",
+        "kind": "text",
+        "variant": -1,
+        "box": [
+          0,
+          0,
+          4096,
+          2048
+        ],
+        "visible": [
+          0,
+          0,
+          4096,
+          2048
+        ],
+        "content": [
+          0,
+          0,
+          4096,
+          2048
+        ],
+        "pixels": [
+          0,
+          0,
+          64,
+          32
+        ],
+        "overflow": "none",
+        "clipped": false
+      }
+    ],
+    "diagnostics": []
+  }
+}

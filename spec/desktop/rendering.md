@@ -47,6 +47,12 @@ Golden synthetic scenes cover multilingual text, malformed labels, long identifi
 
 ## Authored versus resolved state
 
+The shared [layout implementation contract](../delivery/packages/w-09-layout.md)
+defines exact 1/64 DIP allocation, viewport breakpoints, safe-region choice and
+readable overflow for the existing scene grammar. Native adapters supply measured
+minimum/preferred sizes and must handle alternative/degraded plans explicitly.
+They cannot infer visible success from returned geometry alone.
+
 Use [scene 0.2 layout](../experience/scene-bindings.md); resolved rectangles and native
 font substitutions are derived output. Decode authored sRGB RRGGBBAA straight-alpha
 tokens consistently before backend conversion. Missing fonts, high contrast and

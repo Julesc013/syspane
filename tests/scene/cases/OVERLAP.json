@@ -1,0 +1,194 @@
+{
+  "scene": {
+    "schema_version": "0.2.0",
+    "revision": "40",
+    "scene_id": "scene:layout",
+    "theme_id": null,
+    "roots": [
+      "a",
+      "b"
+    ],
+    "widgets": [
+      {
+        "id": "a",
+        "kind": "text",
+        "title": "Readable label",
+        "display": {
+          "role": "primary"
+        },
+        "layout": {
+          "base": {
+            "kind": "fixed",
+            "x": 0,
+            "y": 0,
+            "width": 64,
+            "height": 32
+          }
+        },
+        "bindings": [],
+        "priority": "normal"
+      },
+      {
+        "id": "b",
+        "kind": "text",
+        "title": "Readable label",
+        "display": {
+          "role": "primary"
+        },
+        "layout": {
+          "base": {
+            "kind": "fixed",
+            "x": 20,
+            "y": 10,
+            "width": 64,
+            "height": 32
+          }
+        },
+        "bindings": [],
+        "priority": "normal"
+      }
+    ]
+  },
+  "topology": {
+    "displays": [
+      {
+        "id": "main",
+        "bounds": [
+          0,
+          0,
+          320,
+          200
+        ],
+        "work": [
+          0,
+          0,
+          320,
+          200
+        ],
+        "safe": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "exclusions": [],
+        "pixel_origin": [
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      }
+    ],
+    "roles": {
+      "primary": [
+        "main"
+      ]
+    },
+    "fallback": "main"
+  },
+  "metrics": {
+    "a": {
+      "minimum": [
+        32,
+        16
+      ],
+      "preferred": [
+        32,
+        16
+      ]
+    },
+    "b": {
+      "minimum": [
+        32,
+        16
+      ],
+      "preferred": [
+        32,
+        16
+      ]
+    }
+  },
+  "expected": {
+    "scene_id": "scene:layout",
+    "revision": "40",
+    "state": "degraded",
+    "nodes": [
+      {
+        "id": "a",
+        "parent": "",
+        "display": "main",
+        "kind": "text",
+        "variant": -1,
+        "box": [
+          0,
+          0,
+          4096,
+          2048
+        ],
+        "visible": [
+          0,
+          0,
+          4096,
+          2048
+        ],
+        "content": [
+          0,
+          0,
+          4096,
+          2048
+        ],
+        "pixels": [
+          0,
+          0,
+          64,
+          32
+        ],
+        "overflow": "none",
+        "clipped": false
+      },
+      {
+        "id": "b",
+        "parent": "",
+        "display": "main",
+        "kind": "text",
+        "variant": -1,
+        "box": [
+          1280,
+          640,
+          4096,
+          2048
+        ],
+        "visible": [
+          1280,
+          640,
+          4096,
+          2048
+        ],
+        "content": [
+          1280,
+          640,
+          4096,
+          2048
+        ],
+        "pixels": [
+          20,
+          10,
+          64,
+          32
+        ],
+        "overflow": "none",
+        "clipped": false
+      }
+    ],
+    "diagnostics": [
+      {
+        "widget": "a",
+        "code": "layout.overlap",
+        "related": "b"
+      }
+    ]
+  }
+}

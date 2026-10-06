@@ -1691,6 +1691,60 @@
       "profiles": [
         "linux-x64-gcc13"
       ]
+    },
+    {
+      "id": "scene",
+      "target": "syspane_scene",
+      "type": "STATIC_LIBRARY",
+      "source_owner": "source/scene/",
+      "public_interfaces": [
+        "source/scene/layout.hpp"
+      ],
+      "private_interfaces": [],
+      "sources": [
+        "source/scene/layout.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_authored"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "windows-x64-gcc15",
+        "linux-x64-gcc13",
+        "windows-x86-v141-xp"
+      ]
+    },
+    {
+      "id": "scene-tests",
+      "target": "syspane_scene_tests",
+      "type": "EXECUTABLE",
+      "source_owner": "tests/scene/",
+      "public_interfaces": [],
+      "private_interfaces": [],
+      "sources": [
+        "tests/scene/layout_tests.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_scene"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "windows-x64-gcc15",
+        "linux-x64-gcc13",
+        "windows-x86-v141-xp"
+      ]
     }
   ]
 }

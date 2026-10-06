@@ -43,6 +43,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Native GNOME wallpaper policy checkpoint](gnome-wallpaper-policy-handoff.md) — Native dconf locks, immutable policy identity and independent live composition have separate evidence.
 - [Historical Windows shared-subset build checkpoint](historical-build-handoff.md) — Record the pinned v141_xp build, unchanged shared behavior, resolved runtime inputs and pending guest qualification.
 - [Implementation readiness and gates](implementation-readiness.md) — Distinguish implemented specification checks from pending native and release work.
+- [Portable scene layout checkpoint](layout-handoff.md) — Exact authored geometry, safe display regions and explicit readable overflow across development toolchains.
 - [Live measured collector and asynchronous GJS session checkpoint](live-network-session-handoff.md) — Original real telemetry, native clock provenance and independent lifecycle evidence before operational shell pixels.
 - [Measured telemetry and freshness checkpoint](measured-time-handoff.md) — Bind versioned measurement times to consumer clock scope, replay history and native delayed-delivery evidence.
 - [Native measurement-clock checkpoint](measurement-clock-handoff.md) — Record causal clock brackets and peer-exit rejection without claiming measured telemetry or suspend qualification.

@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-06T18:53:49Z", "scope": "Supervised native content commands and retained edits after import loss and restart"}
+updated: {"by": "codex", "at": "2026-10-06T19:33:21Z", "scope": "Deterministic shared scene layout with exact topology, readable geometry and pixel-bound oracles"}
 ---
 
 # Current state and next admitted boundary
@@ -22,7 +22,13 @@ The active objective is now the [complete 0.1.0 release](release-0.1.0.md) for W
 required but is no longer the final completion boundary. Legacy version/architecture
 floors, native labs and complete desktop/package evidence remain unresolved.
 
-The latest [native content checkpoint](native-content-handoff.md) composes resource
+The latest [scene layout checkpoint](layout-handoff.md) implements shared geometry
+for every admitted layout kind, using explicit topology and readable metric inputs.
+Breakpoints, monitor fallback, safe exclusions, priority shrinking and clipped pixel
+bounds have exact cross-toolchain examples. Native text measurement, bindings,
+drawing, editing and visible activation remain required; W-09 remains in progress.
+
+The earlier [native content checkpoint](native-content-handoff.md) composes resource
 preparation with authenticated command 0.3 and independent native supervision.
 Edits to the exact current selection use only stored packages; new selections use
 configured imports. Further edits work after import removal and controller restart.

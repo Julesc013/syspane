@@ -1,0 +1,380 @@
+{
+  "scene": {
+    "schema_version": "0.2.0",
+    "revision": "40",
+    "scene_id": "scene:layout",
+    "theme_id": null,
+    "roots": [
+      "g"
+    ],
+    "widgets": [
+      {
+        "id": "g",
+        "kind": "group",
+        "title": "Readable label",
+        "display": {
+          "role": "primary"
+        },
+        "layout": {
+          "base": {
+            "kind": "stack",
+            "axis": "horizontal",
+            "gap_dip": 10,
+            "overflow": "diagnose"
+          }
+        },
+        "bindings": [],
+        "priority": "normal",
+        "children": [
+          "n",
+          "c"
+        ]
+      },
+      {
+        "id": "n",
+        "kind": "group",
+        "title": "Readable label",
+        "display": {
+          "role": "primary"
+        },
+        "layout": {
+          "base": {
+            "kind": "stack",
+            "axis": "vertical",
+            "gap_dip": 4,
+            "overflow": "diagnose"
+          }
+        },
+        "bindings": [],
+        "priority": "normal",
+        "children": [
+          "a",
+          "b"
+        ]
+      },
+      {
+        "id": "a",
+        "kind": "text",
+        "title": "Readable label",
+        "display": {
+          "role": "primary"
+        },
+        "layout": {
+          "base": {
+            "kind": "flow",
+            "width": {
+              "min": 32,
+              "preferred": 64,
+              "max": 512
+            },
+            "height": {
+              "min": 16,
+              "preferred": 32,
+              "max": 512
+            },
+            "anchor": "start"
+          }
+        },
+        "bindings": [],
+        "priority": "normal"
+      },
+      {
+        "id": "b",
+        "kind": "text",
+        "title": "Readable label",
+        "display": {
+          "role": "primary"
+        },
+        "layout": {
+          "base": {
+            "kind": "flow",
+            "width": {
+              "min": 32,
+              "preferred": 64,
+              "max": 512
+            },
+            "height": {
+              "min": 16,
+              "preferred": 32,
+              "max": 512
+            },
+            "anchor": "start"
+          }
+        },
+        "bindings": [],
+        "priority": "normal"
+      },
+      {
+        "id": "c",
+        "kind": "text",
+        "title": "Readable label",
+        "display": {
+          "role": "primary"
+        },
+        "layout": {
+          "base": {
+            "kind": "flow",
+            "width": {
+              "min": 32,
+              "preferred": 64,
+              "max": 512
+            },
+            "height": {
+              "min": 16,
+              "preferred": 32,
+              "max": 512
+            },
+            "anchor": "start"
+          }
+        },
+        "bindings": [],
+        "priority": "normal"
+      }
+    ]
+  },
+  "topology": {
+    "displays": [
+      {
+        "id": "main",
+        "bounds": [
+          0,
+          0,
+          200,
+          80
+        ],
+        "work": [
+          0,
+          0,
+          200,
+          80
+        ],
+        "safe": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "exclusions": [],
+        "pixel_origin": [
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      }
+    ],
+    "roles": {
+      "primary": [
+        "main"
+      ]
+    },
+    "fallback": "main"
+  },
+  "metrics": {
+    "a": {
+      "minimum": [
+        32,
+        16
+      ],
+      "preferred": [
+        32,
+        16
+      ]
+    },
+    "b": {
+      "minimum": [
+        32,
+        16
+      ],
+      "preferred": [
+        32,
+        16
+      ]
+    },
+    "c": {
+      "minimum": [
+        32,
+        16
+      ],
+      "preferred": [
+        32,
+        16
+      ]
+    }
+  },
+  "expected": {
+    "scene_id": "scene:layout",
+    "revision": "40",
+    "state": "ready",
+    "nodes": [
+      {
+        "id": "g",
+        "parent": "",
+        "display": "main",
+        "kind": "group",
+        "variant": -1,
+        "box": [
+          0,
+          0,
+          12800,
+          5120
+        ],
+        "visible": [
+          0,
+          0,
+          12800,
+          5120
+        ],
+        "content": [
+          0,
+          0,
+          12800,
+          5120
+        ],
+        "pixels": [
+          0,
+          0,
+          200,
+          80
+        ],
+        "overflow": "none",
+        "clipped": false
+      },
+      {
+        "id": "n",
+        "parent": "g",
+        "display": "main",
+        "kind": "group",
+        "variant": -1,
+        "box": [
+          0,
+          0,
+          4096,
+          5120
+        ],
+        "visible": [
+          0,
+          0,
+          4096,
+          5120
+        ],
+        "content": [
+          0,
+          0,
+          4096,
+          5120
+        ],
+        "pixels": [
+          0,
+          0,
+          64,
+          80
+        ],
+        "overflow": "none",
+        "clipped": false
+      },
+      {
+        "id": "a",
+        "parent": "n",
+        "display": "main",
+        "kind": "text",
+        "variant": -1,
+        "box": [
+          0,
+          0,
+          4096,
+          2048
+        ],
+        "visible": [
+          0,
+          0,
+          4096,
+          2048
+        ],
+        "content": [
+          0,
+          0,
+          4096,
+          2048
+        ],
+        "pixels": [
+          0,
+          0,
+          64,
+          32
+        ],
+        "overflow": "none",
+        "clipped": false
+      },
+      {
+        "id": "b",
+        "parent": "n",
+        "display": "main",
+        "kind": "text",
+        "variant": -1,
+        "box": [
+          0,
+          2304,
+          4096,
+          2048
+        ],
+        "visible": [
+          0,
+          2304,
+          4096,
+          2048
+        ],
+        "content": [
+          0,
+          2304,
+          4096,
+          2048
+        ],
+        "pixels": [
+          0,
+          36,
+          64,
+          32
+        ],
+        "overflow": "none",
+        "clipped": false
+      },
+      {
+        "id": "c",
+        "parent": "g",
+        "display": "main",
+        "kind": "text",
+        "variant": -1,
+        "box": [
+          4736,
+          0,
+          4096,
+          2048
+        ],
+        "visible": [
+          4736,
+          0,
+          4096,
+          2048
+        ],
+        "content": [
+          4736,
+          0,
+          4096,
+          2048
+        ],
+        "pixels": [
+          74,
+          0,
+          64,
+          32
+        ],
+        "overflow": "none",
+        "clipped": false
+      }
+    ],
+    "diagnostics": []
+  }
+}
