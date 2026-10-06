@@ -1,10 +1,14 @@
 #pragma once
 #include "authored.hpp"
 #include "ledger.hpp"
+#include <vector>
 
 namespace syspane::configuration {
 struct CommitIdentity {std::string principal,epoch,request,body;};
 struct Committed {Authored documents;std::optional<CommitIdentity> identity;};
+struct CommitReceipt {CommitIdentity identity;std::uint64_t revision;};
+// Pure formatting; the caller must authorize disclosure of the receipt first.
+Json committed_result(const std::string& request,const std::string& epoch,std::uint64_t revision);
 enum class Publication { unchanged, durable, unknown };
 // Native implementation owns its writer lock and immutable generations. A guard
 // rejection throws before changing the selecting record. unknown poisons this
@@ -13,6 +17,7 @@ class GenerationStore {
 public:
     virtual ~GenerationStore()=default;
     virtual Committed load()const=0;
+    virtual std::vector<CommitReceipt> receipts()const=0;
     virtual std::optional<Committed> reconcile(const std::string& principal,const std::string& epoch,const std::string& request)const=0;
     virtual Publication publish(const Committed& next,const std::function<void()>& guard)=0;
 };
@@ -27,6 +32,7 @@ public:
     bool faulted()const{return faulted_;}
 private:
     friend class AsyncCommands;
+    std::vector<CommitReceipt> receipts()const;
     Json submit_impl(const std::string&,const std::string&,std::string,const Authority&,
         const std::function<Policy()>&,std::uint64_t,const std::function<bool()>&,bool,const std::function<void()>&);
     Json reply(const std::string& request,const char* outcome,const char* code="",std::optional<std::uint64_t> committed={})const;

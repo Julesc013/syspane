@@ -294,7 +294,8 @@
         "SP-WORK-PACKAGES",
         "SP-ACCEPTANCE-TRACES",
         "SP-W08-AUTHORED",
-        "SP-W08-COMMAND-SESSIONS"
+        "SP-W08-COMMAND-SESSIONS",
+        "SP-W08-RECONCILIATION"
       ],
       "acceptance_tests": [
         "T-TRANSACTION",
@@ -311,14 +312,15 @@
         "source/configuration/transaction.hpp",
         "source/platform/generation_store_linux.cpp",
         "tests/configuration/",
-        "source/configuration/async_commands.hpp"
+        "source/configuration/async_commands.hpp",
+        "source/protocol/reconciliation.hpp"
       ],
       "status": "in_progress",
       "authority_class": "development",
       "execution_grant": "user:foundation-native-campaign-2026-10-05",
-      "notes": "Authored validation and coherent Linux storage now connect to asynchronous authenticated command sessions with one ledger, bounded reply reservations, cancellation at the commit permit, current-policy disclosure and same-epoch reconnect. Seven shared test families and six independent native IPC scenarios exercise the boundary; source-bound evidence and original failures are linked. Installed controller/store/policy ownership, hard worker supervision, original-epoch wire reconciliation, resource/preset closure, activation, undo, external edits, migrations and non-Linux storage remain open. The full five-family 0.1.0 release remains required.",
-      "package": "delivery/packages/w-08-command-sessions.md",
-      "evidence": "delivery/command-sessions-handoff.md"
+      "notes": "Authored asynchronous transactions now expose read-only original-epoch reconciliation over authenticated IPC. Four additional shared families and six independent native crash/restart scenarios check policy, exact scope, receipt retention, real worker lifetime and unchanged stored files. Source-bound evidence links earlier checkpoints. Installed controller/store/policy ownership, hard worker supervision, resource/preset closure, activation, undo, external edits, migrations and non-Linux storage remain open. The full five-family 0.1.0 release remains required.",
+      "package": "delivery/packages/w-08-reconciliation.md",
+      "evidence": "delivery/reconciliation-handoff.md"
     },
     {
       "id": "W-09",

@@ -13,6 +13,7 @@ public:
     virtual CommandAdmission submit(const std::string& principal,const std::string& connection,std::uint64_t lifetime,
         const Authority&,std::string body,bool transactions,std::uint64_t now)=0;
     virtual Json query(const std::string& principal,const Authority&,const std::string& request,bool cancel,std::uint64_t now)=0;
+    virtual Json reconcile(const std::string& principal,const Authority&,const Json& query,std::uint64_t now)=0;
     virtual std::optional<CommandDelivery> delivery(std::uint64_t now)=0;
     virtual void policy(Policy)=0;
     virtual void invalidate()=0;

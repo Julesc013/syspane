@@ -1,4 +1,5 @@
 #include "wire.hpp"
+#include "reconciliation.hpp"
 #include <algorithm>
 #include <cmath>
 #include <limits>
@@ -150,7 +151,7 @@ Message decode(std::string_view payload) {
     Message message;
     message.type = root["type"].get<std::string>();
     const std::set<std::string> types = {"hello", "welcome", "command", "result", "subscribe", "unsubscribe",
-        "snapshot", "delta", "gap", "heartbeat", "cancel", "result.get", "shutdown", "render.challenge", "render.progress"};
+        "snapshot", "delta", "gap", "heartbeat", "cancel", "result.get", "result.reconcile", "result.reconciled", "shutdown", "render.challenge", "render.progress"};
     if (!types.count(message.type)) throw Error("message.unknown");
     if (message.type == "hello") {
         if (!members(root, {"type", "body"})) throw Error("envelope.invalid");
@@ -167,6 +168,14 @@ Message decode(std::string_view payload) {
     message.body_bytes = std::string(payload.substr(first, end - first));
     message.body = body;
     if (message.type == "hello" || message.type == "welcome") handshake(body);
+    if(message.type=="result.reconcile"){
+        if(message.body_bytes.size()>2048)throw Error("reconciliation.size");
+        validate_reconciliation_request(body);
+    }
+    if(message.type=="result.reconciled"){
+        if(message.body_bytes.size()>5632)throw Error("reconciliation.size");
+        validate_reconciliation_result(body,message.producer_epoch);
+    }
     if (message.type == "cancel" || message.type == "result.get") {
         if (!members(body, {"request_id"}) || !id_value(body["request_id"])) throw Error("body.invalid");
     }
@@ -187,6 +196,43 @@ Message decode(std::string_view payload) {
         if (!allowed.count(reason)) throw Error("body.invalid");
     }
     return message;
+}
+void validate_reconciliation_request(const Json& value){
+    if(!members(value,{"schema_version","query_id","original_producer_epoch","request_id"})||value["schema_version"]!="0.1.0"||
+       !id_value(value["query_id"])||!id_value(value["original_producer_epoch"])||!id_value(value["request_id"])||value.dump().size()>2048)
+        throw Error("reconciliation.request");
+}
+void validate_reconciliation_result(const Json& value,const std::string& epoch){
+    if(!members(value,{"schema_version","query_id","original_producer_epoch","request_id","result"})||value.dump().size()>5632)
+        throw Error("reconciliation.result");
+    auto query=value;query.erase("result");validate_reconciliation_request(query);
+    const auto& r=value["result"];
+    if(!members(r,{"schema_version","request_id","producer_epoch","outcome","revision","stored","durable","visible","activation","error"})||
+       r["schema_version"]!="0.1.0"||r["request_id"]!=value["request_id"]||r["producer_epoch"]!=epoch||!identifier(epoch)||r.dump().size()>4096)
+        throw Error("reconciliation.result");
+    if(r["outcome"]=="accepted"){
+        if(!r["revision"].is_string()||!decimal(r["revision"].get_ref<const std::string&>())||r["stored"]!=true||r["durable"]!=true||r["visible"]!=false||
+           !r["error"].is_null()||!r["activation"].is_array()||r["activation"].size()!=1)throw Error("reconciliation.facts");
+        const auto& a=r["activation"][0];
+        if(!members(a,{"component","state","reason"})||a["component"]!="presentation"||a["state"]!="pending"||!a["reason"].is_string()||a["reason"].get_ref<const std::string&>().size()>2048)
+            throw Error("reconciliation.activation");
+    }else if(r["outcome"]=="unknown"){
+        if(!r["revision"].is_null()||!r["stored"].is_null()||!r["durable"].is_null()||!r["visible"].is_null()||
+           !r["activation"].is_array()||!r["activation"].empty())throw Error("reconciliation.facts");
+        const auto& e=r["error"];
+        if(!members(e,{"code","message","retryable"})||!id_value(e["code"])||!e["message"].is_string()||e["message"].get_ref<const std::string&>().empty()||
+           e["message"].get_ref<const std::string&>().size()>2048||!e["retryable"].is_boolean())throw Error("reconciliation.error");
+    }else throw Error("reconciliation.outcome");
+}
+Json consume_reconciliation(const Message& message,const Negotiated& selected,const Json& query,const std::string& connection,const std::string& epoch){
+    validate_reconciliation_request(query);
+    if(!selected.features.count("result.reconcile")||selected.max_frame_bytes<8192||
+       !selected.documents.count({"reconciliation-request","0.1.0"})||!selected.documents.count({"reconciliation-result","0.1.0"})||
+       !selected.documents.count({"command-result","0.1.0"}))throw Error("reconciliation.negotiation");
+    if(message.type!="result.reconciled"||message.connection_id!=connection||message.producer_epoch!=epoch)throw Error("reconciliation.scope");
+    validate_reconciliation_result(message.body,epoch);
+    auto echoed=message.body;echoed.erase("result");if(echoed!=query)throw Error("reconciliation.scope");
+    return message.body["result"];
 }
 Handshake handshake(const Json& body) {
     if (!members(body, {"wire_major", "wire_minor", "role", "producer_epoch", "max_frame_bytes",

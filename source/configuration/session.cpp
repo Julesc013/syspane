@@ -1,4 +1,5 @@
 #include "session.hpp"
+#include "reconciliation.hpp"
 
 namespace syspane::configuration {
 using protocol::Error;
@@ -6,7 +7,8 @@ namespace {
 protocol::Handshake server_hello(const std::string& epoch, const std::optional<InventorySource>& source,bool commands=false) {
     protocol::Handshake hello{1, protocol::frame_limit, "console", epoch,
         {{"command", "0.2.0"}, {"command-result", "0.1.0"}}, {}, {"settings.preview", "result.get", "cancel"}};
-    if(commands)hello.optional.insert("configuration.transactions");
+    if(commands){hello.optional.insert({"configuration.transactions","result.reconcile"});
+        hello.documents.insert({{"reconciliation-request","0.1.0"},{"reconciliation-result","0.1.0"}});}
     if (source) {
         const auto& version = source->document_version;
         hello.documents.insert({{"telemetry",version},{"snapshot",version},{"observation",version}});
@@ -108,10 +110,15 @@ void Sessions::dispatch(Connection& c, const protocol::Message& message, std::ui
             }
         }
         if(commands_&&c.selection.max_frame_bytes<8192){
-            for(const auto& feature:{"configuration.transactions","settings.preview"}){
+            for(const auto& feature:{"configuration.transactions","settings.preview","result.reconcile"}){
                 if(client.required.count(feature))throw Error("handshake.frame_floor");
                 c.selection.features.erase(feature);
             }
+        }
+        if(!c.selection.documents.count({"reconciliation-request","0.1.0"})||!c.selection.documents.count({"reconciliation-result","0.1.0"})||
+           !c.selection.documents.count({"command-result","0.1.0"})){
+            if(client.required.count("result.reconcile"))throw Error("handshake.document_version");
+            c.selection.features.erase("result.reconcile");
         }
         const auto version = source_ ? source_->document_version : "0.1.0";
         if (!c.selection.documents.count({"telemetry",version}) || !c.selection.documents.count({"snapshot",version}) ||
@@ -137,6 +144,11 @@ void Sessions::dispatch(Connection& c, const protocol::Message& message, std::ui
         queue(c, "heartbeat", message.body); return;
     }
     if (message.type == "subscribe" || message.type == "unsubscribe") { subscribe(c,message,now); return; }
+    if(message.type=="result.reconcile"){
+        if(!commands_||!c.selection.features.count("result.reconcile"))throw Error("feature.unsupported");
+        if(!c.outbox.can_control(protocol::reconciliation_frame_bound)){shut(c,"queue.control_full");return;}
+        queue(c,"result.reconciled",commands_->reconcile(c.principal,c.authority,message.body,now));return;
+    }
     if (message.type == "command") {
         if (!c.selection.features.count("settings.preview")&&!c.selection.features.count("configuration.transactions")) throw Error("feature.unsupported");
         const auto& body = message.body;

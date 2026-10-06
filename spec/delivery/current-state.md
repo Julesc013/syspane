@@ -22,13 +22,20 @@ The active objective is now the [complete 0.1.0 release](release-0.1.0.md) for W
 required but is no longer the final completion boundary. Legacy version/architecture
 floors, native labs and complete desktop/package evidence remain unresolved.
 
-The latest [command session checkpoint](command-sessions-handoff.md) connects
+The latest [reconciliation checkpoint](reconciliation-handoff.md) adds versioned
+read-only IPC lookup of original-epoch committed requests. Bounded verified receipts
+move from native worker to owner loop only after actual stop; current policy and
+full response-scope validation govern disclosure. Six independent Linux crash/
+restart cases preserve exact stored revisions without repeating the edit. Actual
+activation, installed ownership, supervised workers and the full release remain open.
+
+The earlier [command session checkpoint](command-sessions-handoff.md) connects
 authenticated IPC to one asynchronous transaction ledger and the existing native
 Linux generation store. Reserved replies preserve control capacity; cancellation,
 policy replacement and reused connection IDs cannot fabricate storage outcomes.
 The independent client checks actual worker lifetime, responsive control traffic,
 same-epoch lost-response retrieval and stored documents. Installed ownership,
-supervised workers, original-epoch wire reconciliation, asset closure, native
+supervised workers, asset closure, native
 settings/editor integration and visible activation remain required. This is a
 bounded implementation checkpoint; all five complete release tracks remain open.
 

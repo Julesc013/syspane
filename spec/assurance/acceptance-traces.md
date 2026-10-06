@@ -90,6 +90,16 @@ W-08 must bind the test to a concrete versioned command/document fixture and
 W-24's result/reconciliation messages before execution. This trace defines the
 required observation; it is not a second wire format.
 
+The [reconciliation checkpoint](../delivery/reconciliation-handoff.md) binds these
+messages to command 0.2, scene 0.2 and settings 0.1 in an owned Linux IPC/ext4
+experiment. `native.RECONCILIATION` checks the durable-stop/restart E1/R trace,
+revoked policy, before-publication interruption, selector fallback and pruned
+identity, using independently read documents and hashes. Portable RECON families
+add ordinary result-cache expiry and response-scope rejection. PERSIST-01 remains
+partially executed: actual presentation activation is absent. A before-publication
+crash is not a media-removal/full-disk test, fallback reporting does not qualify the
+independent diagnostic, and pending facts alone do not execute PERSIST-05.
+
 | Variant / parent | Changed stimulus | Required observable outcome |
 |---|---|---|
 | PERSIST-02 / T-PERSISTENCE | Revoke relevant disclosure policy before E2 starts. | Recover the same authored revision but apply current policy before disclosure; no replay/undo restores the revoked permission. |

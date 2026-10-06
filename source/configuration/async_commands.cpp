@@ -1,4 +1,5 @@
 #include "async_commands.hpp"
+#include "reconciliation.hpp"
 #include <limits>
 
 namespace syspane::configuration {
@@ -11,7 +12,7 @@ Decision decision(const std::string& code){
 }
 }
 AsyncCommands::AsyncCommands(GenerationStore& store,std::string epoch,std::function<void(const Authored&)> prepare)
-    :epoch_(std::move(epoch)),transactions_(store,epoch_,std::move(prepare)),revision_(authored_revision(transactions_.authored())){}
+    :epoch_(std::move(epoch)),transactions_(store,epoch_,std::move(prepare)),receipts_(transactions_.receipts()),revision_(authored_revision(transactions_.authored())){}
 void AsyncCommands::attach(const std::string& epoch,std::uint64_t revision,Policy policy){
     std::lock_guard<std::mutex> lock(mutex_);
     if(attached_||invalid_||epoch!=epoch_||revision!=revision_)throw Error("command.owner");
@@ -89,6 +90,26 @@ std::optional<std::uint64_t> AsyncCommands::take(){
     if(active_||jobs_.empty())return {};
     active_=jobs_.begin()->first;return active_;
 }
+Json AsyncCommands::reconcile(const std::string& principal,const Authority& authority,const Json& query,std::uint64_t now){
+    advance(now);protocol::validate_reconciliation_request(query);
+    const auto request=query["request_id"].get<std::string>(),original=query["original_producer_epoch"].get<std::string>();
+    const auto wrapped=[&](Json answer){auto value=query;value["result"]=std::move(answer);return value;};
+    const auto current_policy=snapshot();
+    if(!current_policy.available||!authority.authenticated||!authority.role_grants.count(authority.role)||
+       (authority.role!="console"&&authority.role!="desktop"&&authority.role!="saver_settings")||current_policy.denied_capabilities.count("result.reconcile"))
+        return wrapped(reply(request,"unknown","policy.denied"));
+    if(storage_fault_)return wrapped(reply(request,"unknown","storage.reconcile"));
+    for(const auto& row:receipts_)if(row.identity.principal==principal&&row.identity.epoch==original&&row.identity.request==request){
+        const auto authorized=authorize(row.identity.body,authority);
+        if(authorized.outcome!="preview")return wrapped(result({"unknown",authorized.code},request,epoch_,revision_));
+        return wrapped(committed_result(request,epoch_,row.revision));
+    }
+    if(original==epoch_)if(const auto record=ledger_.get(principal,request,now))if(!record->finished_ms){
+        const auto authorized=authorize(record->body,authority);
+        return wrapped(reply(request,"unknown",authorized.outcome=="preview"?"request.pending":authorized.code.c_str()));
+    }
+    return wrapped(reply(request,"unknown","request.reconcile"));
+}
 AsyncCommands::Completion AsyncCommands::run(std::uint64_t ticket){
     std::shared_ptr<Job> job;
     {
@@ -98,7 +119,7 @@ AsyncCommands::Completion AsyncCommands::run(std::uint64_t ticket){
         job=found->second;job->started=true;
     }
     const auto cancelled=[&]{std::lock_guard<std::mutex> lock(mutex_);return job->cancelled||invalid_;};
-    Json answer;
+    Json answer;std::vector<CommitReceipt> receipts;
     try{
         answer=transactions_.submit_impl(job->principal,job->connection,job->body,job->authority,[&]{return snapshot();},0,cancelled,false,[&]{
             std::lock_guard<std::mutex> lock(mutex_);
@@ -106,12 +127,13 @@ AsyncCommands::Completion AsyncCommands::run(std::uint64_t ticket){
             authorize_authored(protocol::parse(job->body),job->authority,policy_,authored_revision(transactions_.authored()));
             job->committing=true;
         });
+        if(!transactions_.faulted())receipts=transactions_.receipts();
     }catch(...){
         // A native exception may follow publication; never manufacture unsaved facts.
         answer=result({"unknown","storage.reconcile"},job->request,epoch_,0);
         return Completion(this,ticket,std::move(answer),authored_revision(transactions_.authored()),true);
     }
-    return Completion(this,ticket,std::move(answer),authored_revision(transactions_.authored()),transactions_.faulted());
+    return Completion(this,ticket,std::move(answer),authored_revision(transactions_.authored()),transactions_.faulted(),std::move(receipts));
 }
 bool AsyncCommands::finish(Completion&& done,std::uint64_t now,bool confirmed_stopped){
     if(!confirmed_stopped||done.owner!=this)return false;
@@ -123,6 +145,7 @@ bool AsyncCommands::finish(Completion&& done,std::uint64_t now,bool confirmed_st
     const auto& job=found->second;
     ledger_.finish(job->principal,job->request,done.reply.dump(),done.reply["outcome"]=="accepted",now);
     revision_=done.revision;storage_fault_=storage_fault_||done.fault;
+    receipts_=storage_fault_?std::vector<CommitReceipt>{}:std::move(done.receipts);
     ready_.push_back(job);jobs_.erase(found);active_=0;done.ticket=0;return true;
 }
 std::optional<CommandDelivery> AsyncCommands::delivery(std::uint64_t now){

@@ -108,7 +108,24 @@ The [asynchronous command profile](../delivery/packages/w-08-command-sessions.md
 negotiates `configuration.transactions` with command 0.2/result 0.1. Its one ledger,
 worker-stop ownership, connection lifetimes, reply reservations and commit permit
 make cancellation and policy ordering explicit. This is a finite development
-composition; installed ownership and original-epoch wire reconciliation remain open.
+composition; installed ownership and bounded native-worker supervision remain open.
+
+The [reconciliation profile](../delivery/packages/w-08-reconciliation.md) adds client
+`result.reconcile` and server `result.reconciled` in the authenticated connected
+state. Their bodies use [reconciliation-request](reconciliation-request.schema.json)
+and [reconciliation-result](reconciliation-result.schema.json). Negotiate both 0.1
+documents, command-result 0.1 and the `result.reconcile` feature with the existing
+8192-byte frame floor. Current connection/epoch envelopes echo the original request
+scope and query identity. The client validates the complete tuple before consumption.
+
+Read-only lookup uses at most two verified committed receipts cached by the command
+owner after actual worker stop. It never admits or retries a mutation. Current
+policy gates both retained commitment and pending-request disclosure; missing or
+pruned identities remain unknown. Accepted means the original revision committed,
+not that it is currently selected or visible. The linked package fixes body/result/
+queue bounds, owner transitions and denial/fault outcomes. Unnegotiated messages,
+malformed bodies, wrong directions and exhausted control capacity close the
+connection through existing session rules.
 
 Cancel before commit may abort preparation. After commit it cannot undo the accepted
 generation; return the committed result with activation status. A lost connection

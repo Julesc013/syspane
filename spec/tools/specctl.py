@@ -419,6 +419,10 @@ def semantic_errors(value: Any, schema_name: str, root: Path=ROOT) -> list[str]:
                 errors.append('content package cannot depend on itself')
         elif value['entry_point'] not in paths:
             errors.append('extension entry point missing from asset closure')
+    if schema_name == 'reconciliation-result':
+        if value['request_id'] != value['result']['request_id']:
+            errors.append('reconciliation request identity mismatch')
+        errors += semantic_errors(value['result'], 'command-result', root)
     if schema_name == 'command-result':
         if value['durable'] and not value['stored']:
             errors.append('durable result requires stored generation')

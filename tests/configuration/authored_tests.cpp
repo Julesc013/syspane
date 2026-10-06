@@ -23,6 +23,9 @@ Json command(const c::Authored& base,const char* intent="commit",const std::stri
 struct MemoryStore: c::GenerationStore {
     c::Committed current{initial(),{}},previous;unsigned writes=0;int failure=0;std::function<void()> before=[]{};
     c::Committed load()const override{return current;}
+    std::vector<c::CommitReceipt> receipts()const override{
+        std::vector<c::CommitReceipt> rows;for(const auto* r:{&current,&previous})if(r->identity)rows.push_back({*r->identity,c::authored_revision(r->documents)});return rows;
+    }
     std::optional<c::Committed> reconcile(const std::string& principal,const std::string& epoch,const std::string& request)const override{
         for(const auto* row:{&current,&previous})if(row->identity&&row->identity->principal==principal&&row->identity->epoch==epoch&&row->identity->request==request)return *row;
         return {};

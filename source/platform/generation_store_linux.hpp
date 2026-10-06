@@ -13,6 +13,7 @@ public:
     LinuxGenerationStore& operator=(const LinuxGenerationStore&)=delete;
     void initialize(const configuration::Authored& documents);
     configuration::Committed load()const override;
+    std::vector<configuration::CommitReceipt> receipts()const override;
     std::optional<configuration::Committed> reconcile(const std::string&,const std::string&,const std::string&)const override;
     configuration::Publication publish(const configuration::Committed&,const std::function<void()>&)override;
     bool recovered_previous()const;

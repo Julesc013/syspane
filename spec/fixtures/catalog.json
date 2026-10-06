@@ -595,6 +595,48 @@
       "expected": "invalid",
       "semantic": true,
       "reason": "missing-tick"
+    },
+    {
+      "path": "fixtures/valid/reconciliation-request.json",
+      "schema": "reconciliation-request",
+      "expected": "valid",
+      "semantic": false,
+      "reason": "Reconciliation requires original scope and truthful durable/unknown facts."
+    },
+    {
+      "path": "fixtures/valid/reconciliation-accepted.json",
+      "schema": "reconciliation-result",
+      "expected": "valid",
+      "semantic": true,
+      "reason": "Reconciliation requires original scope and truthful durable/unknown facts."
+    },
+    {
+      "path": "fixtures/valid/reconciliation-unknown.json",
+      "schema": "reconciliation-result",
+      "expected": "valid",
+      "semantic": true,
+      "reason": "Reconciliation requires original scope and truthful durable/unknown facts."
+    },
+    {
+      "path": "fixtures/invalid/reconciliation-wrong-request.json",
+      "schema": "reconciliation-result",
+      "expected": "invalid",
+      "semantic": true,
+      "reason": "Reconciliation requires original scope and truthful durable/unknown facts."
+    },
+    {
+      "path": "fixtures/invalid/reconciliation-unknown-false.json",
+      "schema": "reconciliation-result",
+      "expected": "invalid",
+      "semantic": false,
+      "reason": "Reconciliation requires original scope and truthful durable/unknown facts."
+    },
+    {
+      "path": "fixtures/invalid/reconciliation-authority.json",
+      "schema": "reconciliation-request",
+      "expected": "invalid",
+      "semantic": false,
+      "reason": "Reconciliation requires original scope and truthful durable/unknown facts."
     }
   ]
 }

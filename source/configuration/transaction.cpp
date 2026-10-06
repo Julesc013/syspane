@@ -20,12 +20,32 @@ Transactions::Transactions(GenerationStore& store,std::string epoch,std::functio
     require(protocol::identifier(epoch_)&&static_cast<bool>(prepare_resources_),"transaction.owner");validate_authored(current_.documents);
 }
 Json Transactions::reply(const std::string& request,const char* status,const char* code,std::optional<std::uint64_t> committed)const{
-    auto value=result({std::string(status)=="accepted"?"preview":status,code},request,epoch_,authored_revision(current_.documents));
-    if(committed){
-        value["outcome"]="accepted";value["revision"]=std::to_string(*committed);value["stored"]=true;value["durable"]=true;
-        value["activation"]=Json::array({{{"component","presentation"},{"state","pending"},{"reason","Activation has not been reported."}}});
-    }
+    if(committed)return committed_result(request,epoch_,*committed);
+    return result({status,code},request,epoch_,authored_revision(current_.documents));
+}
+Json committed_result(const std::string& request,const std::string& epoch,std::uint64_t revision){
+    auto value=result({"preview",""},request,epoch,revision);
+    value["outcome"]="accepted";value["stored"]=true;value["durable"]=true;
+    value["activation"]=Json::array({{{"component","presentation"},{"state","pending"},{"reason","Activation has not been reported."}}});
     return value;
+}
+std::vector<CommitReceipt> Transactions::receipts()const{
+    require(!faulted_,"storage.reconcile");const auto rows=store_.receipts();require(rows.size()<=2,"storage.receipts");
+    std::vector<CommitReceipt> checked;
+    for(const auto& row:rows){
+        const auto& id=row.identity;
+        require(protocol::identifier(id.principal)&&protocol::identifier(id.epoch)&&protocol::identifier(id.request)&&!id.body.empty()&&id.body.size()<=16384,"storage.receipts");
+        const auto command=protocol::parse(id.body);validate_command(command);
+        const auto expected=*protocol::decimal(command["expected_revision"].get<std::string>());
+        require(command["intent"]=="commit"&&command["request_id"]==id.request&&expected<std::numeric_limits<std::uint64_t>::max()&&
+            row.revision==expected+1&&row.revision<=authored_revision(current_.documents),"storage.receipts");
+        bool duplicate=false;
+        for(const auto& prior:checked)if(prior.identity.principal==id.principal&&prior.identity.epoch==id.epoch&&prior.identity.request==id.request){
+            require(prior.identity.body==id.body&&prior.revision==row.revision,"storage.receipts");duplicate=true;
+        }
+        if(!duplicate)checked.push_back(row);
+    }
+    return checked;
 }
 Json Transactions::submit(const std::string& principal,const std::string& connection,std::string body,const Authority& authority,
                          const std::function<Policy()>& policy,std::uint64_t now,const std::function<bool()>& cancelled){

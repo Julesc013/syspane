@@ -107,7 +107,7 @@
         "SP-PERSISTENCE",
         "SP-TESTING"
       ],
-      "sha256": "501ee8c2cb3606ef30ebf4db484ec764afbb3d53d5eeb8a1f7c0a4b272bd622e"
+      "sha256": "6868deded83694fdc6b03978ef07548bce2ab164a2b8c2d920ca2b3c4af29ddd"
     },
     {
       "id": "SP-ORACLE",
@@ -216,7 +216,7 @@
         "SP-PROTOCOL",
         "SP-COMMANDS"
       ],
-      "sha256": "cf6a152df3b4588ee6da81f37f8c86d6938ca71621bb3ab3f0c1c646b38320f1"
+      "sha256": "512b3a49941f8c5302e16ff0b3808e101959c91c9f4a5196d5bf03b405f2069d"
     },
     {
       "id": "SP-VERSIONS",
@@ -410,7 +410,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "a7e738db2d198c63bc65dd74bac45323f464acef0460c5e642f262648dbd1835"
+      "sha256": "306a349a3dc19569d776bd06a84deb066376b1ae8cab860d65279dc753d26853"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -1161,6 +1161,18 @@
       "sha256": "36fa1020cc5ae3afba5dfdf4cef25a3ee68eb5270c76c12d1398891c05c9a94d"
     },
     {
+      "id": "SP-W08-RECONCILIATION",
+      "path": "delivery/packages/w-08-reconciliation.md",
+      "title": "Committed request reconciliation across producer epochs",
+      "description": "Recover durable outcomes through authenticated read-only IPC without resubmitting mutations.",
+      "requires": [
+        "SP-W08-COMMAND-SESSIONS",
+        "SP-PERSISTENCE",
+        "SP-ACCEPTANCE-TRACES"
+      ],
+      "sha256": "df5a351611a330da28666ecff1279c820f4ce1997eecee1dbeca8ed0ab58cdc5"
+    },
+    {
       "id": "SP-W24-PACKAGE",
       "path": "delivery/packages/w-24-transport.md",
       "title": "W-24 authenticated transport and policy boundary",
@@ -1510,6 +1522,17 @@
         "SP-CAMPAIGN-ADMISSION"
       ],
       "sha256": "335e51950e394cd4e8a3defc57952f573d62842b19aee1de2a3d2ff85ab89de7"
+    },
+    {
+      "id": "SP-RECONCILIATION-HANDOFF",
+      "path": "delivery/reconciliation-handoff.md",
+      "title": "Original-epoch request reconciliation checkpoint",
+      "description": "Recover committed outcomes across controller restart without replaying mutations.",
+      "requires": [
+        "SP-W08-RECONCILIATION",
+        "SP-COMMAND-SESSIONS-HANDOFF"
+      ],
+      "sha256": "6e5cc05fc0f534228c5d3727a61358a04accb0a62f5fa14c239675c34a5348f9"
     },
     {
       "id": "SP-RECOVERY-HANDOFF",

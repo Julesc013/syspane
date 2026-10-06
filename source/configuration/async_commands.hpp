@@ -13,13 +13,16 @@ public:
         Completion& operator=(Completion&&)=default;
     private:
         friend class AsyncCommands;
-        Completion(const AsyncCommands* o,std::uint64_t t,Json r,std::uint64_t v,bool f):owner(o),ticket(t),reply(std::move(r)),revision(v),fault(f){}
+        Completion(const AsyncCommands* o,std::uint64_t t,Json r,std::uint64_t v,bool f,std::vector<CommitReceipt> receipts={})
+            :owner(o),ticket(t),reply(std::move(r)),revision(v),fault(f),receipts(std::move(receipts)){}
         const AsyncCommands* owner;std::uint64_t ticket;Json reply;std::uint64_t revision;bool fault;
+        std::vector<CommitReceipt> receipts;
     };
     AsyncCommands(GenerationStore&,std::string epoch,std::function<void(const Authored&)>);
     void attach(const std::string&,std::uint64_t,Policy)override;
     CommandAdmission submit(const std::string&,const std::string&,std::uint64_t,const Authority&,std::string,bool,std::uint64_t)override;
     Json query(const std::string&,const Authority&,const std::string&,bool,std::uint64_t)override;
+    Json reconcile(const std::string&,const Authority&,const Json&,std::uint64_t)override;
     std::optional<CommandDelivery> delivery(std::uint64_t)override;
     void policy(Policy)override;
     void invalidate()override;
@@ -41,6 +44,7 @@ private:
     Policy snapshot()const;
     std::string epoch_;
     Transactions transactions_; // Worker-exclusive after attachment.
+    std::vector<CommitReceipt> receipts_; // Owning-loop immutable view, replaced only after actual worker stop.
     std::uint64_t revision_,tickets_=0,active_=0;
     protocol::Ledger ledger_;
     std::optional<std::uint64_t> last_;

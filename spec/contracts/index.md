@@ -25,6 +25,8 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [policy.schema.json](policy.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [preset.schema.json](preset.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [Protocol, schema ownership and wire rules](protocol.md) — Define bounded language-independent records without forcing a runtime dependency.
+- [reconciliation-request.schema.json](reconciliation-request.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
+- [reconciliation-result.schema.json](reconciliation-result.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [scene-v0.2.schema.json](scene-v0.2.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [scene.schema.json](scene.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [Extension SDK and embedding boundaries](sdk.md) — Make extensions useful without making the trusted application an arbitrary code host.

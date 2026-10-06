@@ -166,6 +166,12 @@ void LinuxGenerationStore::initialize(const c::Authored& documents){
     need(impl_->publish({documents,std::nullopt},[] {})==c::Publication::durable,"storage.bootstrap");
 }
 c::Committed LinuxGenerationStore::load()const{need(!impl_->poisoned&&impl_->current.has_value(),"storage.unavailable");return *impl_->current;}
+std::vector<c::CommitReceipt> LinuxGenerationStore::receipts()const{
+    need(!impl_->poisoned,"storage.unavailable");std::vector<c::CommitReceipt> result;
+    for(const auto* record:{&impl_->current,&impl_->previous})if(*record&&(*record)->identity)
+        result.push_back({*(*record)->identity,c::authored_revision((*record)->documents)});
+    return result;
+}
 std::optional<c::Committed> LinuxGenerationStore::reconcile(const std::string& principal,const std::string& epoch,const std::string& request)const{
     need(!impl_->poisoned,"storage.unavailable");
     for(const auto* record:{&impl_->current,&impl_->previous})if(*record&&(*record)->identity){const auto& id=*(*record)->identity;if(id.principal==principal&&id.epoch==epoch&&id.request==request)return *record;}

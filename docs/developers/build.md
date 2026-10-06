@@ -1,5 +1,24 @@
 # Developer setup and checks
 
+The [reconciliation checkpoint](../../spec/delivery/reconciliation-handoff.md) adds
+`result.reconcile` / `result.reconciled`, negotiated with reconciliation-request and
+reconciliation-result 0.1 plus command-result 0.1. `consume_reconciliation` checks
+the complete connection/current epoch/query/original epoch/request tuple. Read-only
+lookup uses the owner-loop receipt snapshot; only the worker refreshes it, and
+`finish(..., true)` publishes it after actual join. It performs no store I/O,
+mutation admission or resource preparation on the connection loop.
+
+After normal preflight/configure/build, run `ctest --preset <profile> -R
+'^configuration[.]RECON-' --output-on-failure`. On Linux, also run
+`ctest --preset linux-x64-gcc13 -R '^native[.]RECONCILIATION$' --output-on-failure`
+with the existing native-cache environment. The independent client kills only its
+exact owned stopped probe, restarts with a distinct epoch, validates reply schemas
+and hashes stored files before/after lookup. Six cases cover durable/before-publish
+crashes, policy revocation, fallback, identity retention and responsive live-worker
+lookup. Reports are under `native-evidence/reconciliation-*`. The probe accepts
+optional epoch and allow/deny laboratory-policy arguments; these are test controls,
+not an installed policy source. Full activation and installed ownership remain open.
+
 The [command session checkpoint](../../spec/delivery/command-sessions-handoff.md)
 adds `syspane_async_commands` and seven portable command families on all three
 development profiles. The optional `configuration.transactions` feature uses existing
@@ -17,7 +36,8 @@ preparation/permit cancellation, policy revocation and same-epoch lost-response
 retrieval, then checks stored documents. Parent-pipe controls and bounded worker
 gates are test instrumentation. Reports remain under `native-evidence/commands-*`.
 This finite composition does not install a controller or qualify arbitrary resource
-preparers, a hard worker deadline, original-epoch wire reconciliation or activation.
+preparers, a hard worker deadline or activation. Original-epoch lookup is covered
+by the subsequent reconciliation checkpoint above.
 
 The latest [authored transaction checkpoint](../../spec/delivery/authored-transactions-handoff.md)
 adds `syspane_authored` on all three development profiles and the Linux-only

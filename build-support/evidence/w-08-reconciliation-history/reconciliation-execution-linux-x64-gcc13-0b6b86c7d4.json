@@ -1,0 +1,110 @@
+[
+  {
+    "step": "configure",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-06T17:10:14.675387+00:00",
+    "finished_at": "2026-10-06T17:10:24.608383+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 5368709120,\n  \"checkout_out_bytes\": 1556473550,\n  \"linux_campaign_bytes\": 3313021891,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "configure",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/reconciliation_step.py",
+      "linux-x64-gcc13",
+      "configure"
+    ],
+    "started_at": "2026-10-06T17:10:24.609032+00:00",
+    "finished_at": "2026-10-06T17:10:37.745471+00:00",
+    "exit": 0,
+    "stdout": "Preset CMake variables:\n\n  BUILD_TESTING=\"ON\"\n  CMAKE_BUILD_TYPE=\"Debug\"\n  CMAKE_CXX_COMPILER=\"g++\"\n  SYSPANE_PROFILE=\"linux-x64-gcc13\"\n\nprofile verified: linux-x64-gcc13\nvendored dependency digests: pass\ndiagnostic toolkit verified: GTK 3.24.41 / Ubuntu 3.24.41-4ubuntu1.3\nnative GJS clock build dependencies verified\n-- Configuring done (5.9s)\n-- Generating done (0.0s)\n-- Build files have been written to: /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-08-reconciliation/linux-x64-gcc13-configure-6bede34c01\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-06T17:10:37.745822+00:00",
+    "finished_at": "2026-10-06T17:10:38.299132+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 5368709120,\n  \"checkout_out_bytes\": 1557508730,\n  \"linux_campaign_bytes\": 3313018172,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/reconciliation_step.py",
+      "linux-x64-gcc13",
+      "build"
+    ],
+    "started_at": "2026-10-06T17:10:38.299444+00:00",
+    "finished_at": "2026-10-06T17:10:45.055937+00:00",
+    "exit": 0,
+    "stdout": "ninja: no work to do.\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-08-reconciliation/linux-x64-gcc13-build-67f430bb12\n",
+    "stderr": ""
+  },
+  {
+    "step": "focus",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-06T17:10:45.056324+00:00",
+    "finished_at": "2026-10-06T17:10:45.602596+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 5368709120,\n  \"checkout_out_bytes\": 1558542958,\n  \"linux_campaign_bytes\": 3313018172,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "focus",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/reconciliation_step.py",
+      "linux-x64-gcc13",
+      "focus"
+    ],
+    "started_at": "2026-10-06T17:10:45.602975+00:00",
+    "finished_at": "2026-10-06T17:11:05.193756+00:00",
+    "exit": 0,
+    "stdout": "Test project /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n      Start  1: configuration.COMMAND-COMMIT\n 1/41 Test  #1: configuration.COMMAND-COMMIT ......   Passed    0.09 sec\n      Start  2: configuration.COMMAND-CANCEL\n 2/41 Test  #2: configuration.COMMAND-CANCEL ......   Passed    0.07 sec\n      Start  3: configuration.COMMAND-POLICY\n 3/41 Test  #3: configuration.COMMAND-POLICY ......   Passed    0.06 sec\n      Start  4: configuration.COMMAND-LIFETIME\n 4/41 Test  #4: configuration.COMMAND-LIFETIME ....   Passed    0.04 sec\n      Start  5: configuration.COMMAND-CAPACITY\n 5/41 Test  #5: configuration.COMMAND-CAPACITY ....   Passed    1.36 sec\n      Start  6: configuration.COMMAND-FAULT\n 6/41 Test  #6: configuration.COMMAND-FAULT .......   Passed    0.07 sec\n      Start  7: configuration.COMMAND-NEGOTIATE\n 7/41 Test  #7: configuration.COMMAND-NEGOTIATE ...   Passed    0.02 sec\n      Start  8: configuration.RECON-RECEIPTS\n 8/41 Test  #8: configuration.RECON-RECEIPTS ......   Passed    0.06 sec\n      Start  9: configuration.RECON-POLICY\n 9/41 Test  #9: configuration.RECON-POLICY ........   Passed    0.03 sec\n      Start 10: configuration.RECON-CODEC\n10/41 Test #10: configuration.RECON-CODEC .........   Passed    0.00 sec\n      Start 11: configuration.RECON-BOUNDS\n11/41 Test #11: configuration.RECON-BOUNDS ........   Passed    0.05 sec\n      Start 12: configuration.AUTH-SCHEMA\n12/41 Test #12: configuration.AUTH-SCHEMA .........   Passed    0.07 sec\n      Start 13: configuration.TX-MIXED\n13/41 Test #13: configuration.TX-MIXED ............   Passed    0.04 sec\n      Start 14: configuration.TX-CONFLICT\n14/41 Test #14: configuration.TX-CONFLICT .........   Passed    0.04 sec\n      Start 15: configuration.TX-REPLAY\n15/41 Test #15: configuration.TX-REPLAY ...........   Passed    0.04 sec\n      Start 16: configuration.TX-INTERRUPT\n16/41 Test #16: configuration.TX-INTERRUPT ........   Passed    0.09 sec\n      Start 17: configuration.TX-BOUNDS\n17/41 Test #17: configuration.TX-BOUNDS ...........   Passed    0.05 sec\n      Start 18: configuration.TX-CAPACITY\n18/41 Test #18: configuration.TX-CAPACITY .........   Passed    1.52 sec\n      Start 19: configuration.DIGEST\n19/41 Test #19: configuration.DIGEST ..............   Passed    0.03 sec\n      Start 20: native.CONFIG-STORE\n20/41 Test #20: native.CONFIG-STORE ...............   Passed    5.03 sec\n      Start 21: native.COMMAND-IPC\n21/41 Test #21: native.COMMAND-IPC ................   Passed    1.18 sec\n      Start 22: native.RECONCILIATION\n22/41 Test #22: native.RECONCILIATION .............   Passed    1.56 sec\n      Start 48: composition.graph\n23/41 Test #48: composition.graph .................   Passed    0.11 sec\n      Start 49: composition.reject_forbidden\n24/41 Test #49: composition.reject_forbidden ......   Passed    0.20 sec\n      Start 53: protocol.FRAME-01\n25/41 Test #53: protocol.FRAME-01 .................   Passed    0.01 sec\n      Start 54: protocol.FRAME-02\n26/41 Test #54: protocol.FRAME-02 .................   Passed    0.00 sec\n      Start 55: protocol.FRAME-03\n27/41 Test #55: protocol.FRAME-03 .................   Passed    0.00 sec\n      Start 56: protocol.JSON-01\n28/41 Test #56: protocol.JSON-01 ..................   Passed    0.03 sec\n      Start 57: protocol.WIRE-01\n29/41 Test #57: protocol.WIRE-01 ..................   Passed    0.00 sec\n      Start 58: protocol.NEGOTIATE-01\n30/41 Test #58: protocol.NEGOTIATE-01 .............   Passed    0.01 sec\n      Start 59: protocol.IPC-BUDGET-01\n31/41 Test #59: protocol.IPC-BUDGET-01 ............   Passed    0.00 sec\n      Start 60: protocol.IPC-BUDGET-02\n32/41 Test #60: protocol.IPC-BUDGET-02 ............   Passed    0.00 sec\n      Start 61: protocol.IPC-BUDGET-03\n33/41 Test #61: protocol.IPC-BUDGET-03 ............   Passed    0.00 sec\n      Start 62: protocol.IPC-BUDGET-04\n34/41 Test #62: protocol.IPC-BUDGET-04 ............   Passed    0.00 sec\n      Start 63: protocol.LEDGER-01\n35/41 Test #63: protocol.LEDGER-01 ................   Passed    0.11 sec\n      Start 64: protocol.POLICY-01\n36/41 Test #64: protocol.POLICY-01 ................   Passed    0.00 sec\n      Start 65: protocol.POLICY-02\n37/41 Test #65: protocol.POLICY-02 ................   Passed    0.00 sec\n      Start 66: protocol.DISCLOSURE-01\n38/41 Test #66: protocol.DISCLOSURE-01 ............   Passed    0.00 sec\n      Start 67: protocol.QUEUE-01\n39/41 Test #67: protocol.QUEUE-01 .................   Passed    0.00 sec\n      Start 68: protocol.SESSION-01\n40/41 Test #68: protocol.SESSION-01 ...............   Passed    0.02 sec\n      Start 69: protocol.dependencies\n41/41 Test #69: protocol.dependencies .............   Passed    0.05 sec\n\n100% tests passed, 0 tests failed out of 41\n\nTotal Test time (real) =  12.09 sec\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-08-reconciliation/linux-x64-gcc13-focus-78093940ed\n",
+    "stderr": ""
+  }
+]

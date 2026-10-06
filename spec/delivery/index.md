@@ -54,6 +54,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Open decisions, risks and resolving experiments](open-questions.md) — Keep unresolved choices discoverable without blocking unrelated work.
 - [Independent temporal oracle implementation checkpoint](oracle-handoff.md) — Bind external marker/time evaluation and native X11 fault calibration to source and raw capture evidence.
 - [Explicit private preservation checkpoint](preservation-handoff.md) — Bind opaque configuration copies, native controls and interrupted publication to measured development evidence.
+- [Original-epoch request reconciliation checkpoint](reconciliation-handoff.md) — Recover committed outcomes across controller restart without replaying mutations.
 - [Portable recovery implementation checkpoint](recovery-handoff.md) — Record lease, render-progress and restart decisions while preserving native recovery gates.
 - [SysPane 0.1.0 release objective and unresolved admission](release-0.1.0.md) — Preserve the requested complete desktop release across Windows 9x, Windows NT, X11, Wayland and Mac OS X.
 - [Greenfield implementation campaign](roadmap.md) — Build native vertical slices and contracts together in risk order.

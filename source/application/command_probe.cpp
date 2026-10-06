@@ -5,6 +5,7 @@
 #include <array>
 #include <atomic>
 #include <condition_variable>
+#include <csignal>
 #include <iostream>
 #include <thread>
 #include <poll.h>
@@ -22,21 +23,28 @@ struct Gate {
     }
 };
 int main(int argc,char** argv){try{
-    if(argc!=5||!os::unprivileged_context())throw p::Error("probe.arguments");
+    if(argc<5||argc>7||!os::unprivileged_context())throw p::Error("probe.arguments");
     const std::string phase=argv[3];const auto expected=p::decimal(argv[4]);
-    if(!expected||!*expected||(phase!="preparing"&&phase!="permitted"))throw p::Error("probe.arguments");
+    const std::string epoch=argc>=6?argv[5]:"E1",permission=argc>=7?argv[6]:"allow";
+    if(!expected||!*expected||!p::identifier(epoch)||(permission!="allow"&&permission!="deny")||
+       (phase!="preparing"&&phase!="permitted"&&phase!="plain"&&phase!="crash-before"&&phase!="crash-durable"))throw p::Error("probe.arguments");
     Gate gate;
-    os::LinuxGenerationStore store(argv[2],[&](const char* step){if(phase=="permitted"&&std::string(step)=="authorized")gate.wait("permitted");});
-    auto owner=std::make_shared<c::AsyncCommands>(store,"E1",[&](const c::Authored& value){
+    os::LinuxGenerationStore store(argv[2],[&](const char* step){
+        if(phase=="permitted"&&std::string(step)=="authorized")gate.wait("permitted");
+        if((phase=="crash-before"&&std::string(step)=="selector_ready")||(phase=="crash-durable"&&std::string(step)=="durable")){
+            emit({{"event","held"},{"phase",phase}});std::raise(SIGSTOP);
+        }
+    });
+    auto owner=std::make_shared<c::AsyncCommands>(store,epoch,[&](const c::Authored& value){
         if(value.settings["display"]["theme_id"]!="theme:native"||(!value.scene["theme_id"].is_null()&&value.scene["theme_id"]!="theme:native"))throw p::Error("resource.unavailable");
         if(phase=="preparing")gate.wait("preparing");
     });
-    c::Policy policy;policy.available=true;policy.revision=7;
-    c::Sessions sessions("E1",c::authored_revision(store.load().documents),policy,{},owner);
+    c::Policy policy;policy.available=true;policy.revision=epoch=="E1"?7:8;if(permission=="deny")policy.denied_capabilities.insert("scene.replace");
+    c::Sessions sessions(epoch,c::authored_revision(store.load().documents),policy,{},owner);
     os::Listener listener(argv[1]);std::optional<os::Stream> stream;std::unique_ptr<p::Framer> decoder;
     std::thread worker;std::optional<c::AsyncCommands::Completion> completion;std::exception_ptr worker_error;std::atomic<bool> done{false};
     const auto stop=[&]{owner->invalidate();gate.release();if(worker.joinable())worker.join();};
-    emit({{"event","ready"},{"access_controls_verified",listener.access_controls_verified()}});
+    emit({{"event","ready"},{"access_controls_verified",listener.access_controls_verified()},{"recovered_previous",store.recovered_previous()}});
     const auto start=os::monotonic_ms();bool stopping=false;
     try{
         while(!stopping){

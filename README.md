@@ -11,8 +11,11 @@ The [command session checkpoint](spec/delivery/command-sessions-handoff.md) conn
 authenticated IPC to asynchronous scene/settings transactions and Linux generation
 storage. Heartbeats, cancellation and result retrieval continue while storage work
 runs. Reconnect retrieves the admitted outcome without repeating the edit. Installed
-ownership, worker supervision, cross-epoch wire reconciliation, asset resolution,
-native controls and visible activation remain required.
+ownership, worker supervision, asset resolution, native controls and visible
+activation remain required. The [reconciliation checkpoint](spec/delivery/reconciliation-handoff.md)
+adds read-only recovery of committed requests across controller restarts. Six native
+crash/reconnect cases verify exact revisions and current-policy disclosure without
+repeating a mutation; visible activation remains unproven.
 
 The [session demand integration](spec/delivery/session-demand-handoff.md) now binds
 authenticated subscriptions to controller-selected acquisition requests. Independent
