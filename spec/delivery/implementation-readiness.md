@@ -170,6 +170,14 @@ along with 73 input/reveal/composition/marker regression checks. Wallpaper polic
 other image/display profiles and shell recovery remain open. The separately failed
 focus-restoration acceptance is unchanged.
 
+The [native application-list checkpoint](gnome-switcher-handoff.md) closes the
+named GNOME Alt+Tab and overview running-app dash experiment. Complete visible
+native trees, PID/window ownership and exact icon pixels show only the two normal
+controls. An added normal application appears in both lists and fails absence;
+omitting the popup cannot pass. Thirty-four new verifier checks and 100 existing
+desktop checks pass. This leaves other taskbars, Show Desktop focus and native
+recovery open; ordinary switching/overview focus does not substitute for them.
+
 Use the proposed cold-start exercise to detect missing observable contracts.
 Private implementation differences are permissible. Missing laboratories remain
 blocked qualification. A finite release scope must identify exact profiles,

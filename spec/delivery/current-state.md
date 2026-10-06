@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-06T02:40:44Z", "scope": "Named GNOME/DING image wallpaper passes file/settings/pixel preservation with independent fault controls"}
+updated: {"by": "codex", "at": "2026-10-06T03:00:03Z", "scope": "Named GNOME/DING Alt+Tab and overview dash absence passes with real normal-window and omitted-popup controls"}
 ---
 
 # Current state and next admitted boundary
@@ -225,6 +225,16 @@ input/reveal/composition/marker checks pass. Thirteen native attempts, source
 archives, raw journals and image artifacts are preserved. Wallpaper policy, other
 image/display profiles and recovery remain unqualified; the focus failure remains.
 
+The [native application-list checkpoint](gnome-switcher-handoff.md) now observes
+the passive bridge's absence from GNOME Alt+Tab and the overview running-app dash.
+Two actual normal applications appear with independently matched native names and
+icon pixels. An added normal-window fault appears in both lists and fails absence;
+an omitted Alt+Tab chord fails the required visible-popup condition. Application
+switching, overview dismissal and final live composition preserve focus. Thirty-four
+new verifier checks and 100 existing desktop checks pass. The first overbroad tree
+traversal and preliminary calibration remain preserved. Show Desktop focus,
+other taskbar/shell profiles and recovery remain separate open gates.
+
 Canonical 0.2.0 documentation bundle, unchanged 0.1 authoring profile, preserved old
 fixtures, new experimental scene/command/capability 0.2 and admission descriptors.
 The initial settings registry has enforced metadata/default consistency and generated
@@ -264,12 +274,14 @@ License, contribution and release-identity decisions remain open.
 Continue the admitted campaign: use the calibrated GNOME/DING composition path and
 unchanged external marker oracle to resolve the independently reproduced DING/X11
 foreground-focus failure through a bounded integration contract informed by the
-observed native MRU selection. Continue taskbar/task-switcher behavior,
-wallpaper policy and shell/icon-manager recovery independently of that
+observed native MRU selection. Continue wallpaper policy and shell/icon-manager
+recovery independently of that
 failure. The named GNOME/DING/PCManFM icon-input experiment now passes; other profiles
 need their own evidence. The named single-display PNG preservation experiment now
-passes independently; other image/scaling/topology profiles remain open. Keep the
-earlier X11 failures and failed GNOME fixture/control attempts. Close other platform capture/reveal boundaries in admitted
+passes independently; other image/scaling/topology profiles remain open. The named
+GNOME Alt+Tab/overview dash evidence does not qualify other taskbar profiles.
+Keep earlier X11 failures and failed GNOME fixture/control attempts.
+Close other platform capture/reveal boundaries in admitted
 synthetic desktops. W-04 has build artifacts ready for
 historical guest execution once guest test scope and usability are established.
 W-05's GNOME bridge now preserves the tested icon pixels, but remains unqualified

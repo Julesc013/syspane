@@ -448,6 +448,27 @@ This uses only a private fixed 800x600 PNG and settings backend. It does not qua
 wallpaper policy or other image/display profiles, and it leaves the separate Show
 Desktop focus failure open. See the [wallpaper checkpoint](../../spec/delivery/gnome-wallpaper-handoff.md).
 
+The application-list experiment observes GNOME's actual Alt+Tab popup and overview
+running-app dash, using two private normal applications and their native icons:
+
+```text
+python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --switcher live
+python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --switcher ordinary-window
+python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --switcher no-switcher
+python3 build-support/record_gnome_switcher.py --build-dir <owned-build-directory> --reports <three-switcher-reports> --output <new-owned-record>
+python3 tests/desktop/test_gnome_switcher_record.py <owned-build-directory> <three-switcher-reports> -v
+```
+
+Complete the Windows coordinator's workspace-budget preflight before each run or
+verifier. These modes own their composition prerequisite and cannot combine with
+other optional experiment flags. The recorder requires identical source/runtime
+inputs, both normal controls and full visible native trees with independently
+matched icon pixels. The extra-window and omitted-popup cases must fail the
+corresponding acceptance conditions; their native exit 1 is expected. Preserve
+failed attempts and raw journals. GNOME's overview dash is the named running-app
+surface here; other taskbars require their own evidence. See the
+[application-list checkpoint](../../spec/delivery/gnome-switcher-handoff.md).
+
 For the historical shared-subset experiment, the existing Visual Studio 2017 XP
 toolset has its own preset. It compiles the same model, protocol/policy, recovery
 and diagnostic projection sources; modern native adapters require separate closure.

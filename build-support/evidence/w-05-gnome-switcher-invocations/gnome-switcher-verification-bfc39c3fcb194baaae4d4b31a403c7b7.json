@@ -1,0 +1,91 @@
+[
+  {
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "source_inputs": {
+      "build-support/check_workspace_budget.py": "3a9ec8bf7f4f205e1986d19b523d57b41288936e3343910f80b460d71474b700"
+    },
+    "started_at": "2026-10-06T02:57:08.537143+00:00",
+    "finished_at": "2026-10-06T02:57:12.009228+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 3221225472,\n  \"checkout_out_bytes\": 934606595,\n  \"linux_campaign_bytes\": 1690867501,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "build-support/record_gnome_switcher.py",
+      "--build-dir",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13",
+      "--reports",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-SWITCHER-01-446cdac7b65742d3875cb5f63d21f6a5.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-SWITCHER-01-cb5bf02a245e488aa19654bd4f0ec5e6.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-SWITCHER-01-23be2bed51584e52943a924c2231d099.json",
+      "--output",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/gnome-switcher-calibration-bfc39c3fcb194baaae4d4b31a403c7b7.json"
+    ],
+    "source_inputs": {
+      "build-support/record_gnome_switcher.py": "d72f0b1e6b7f3c9c17bbad44e8f968c134d7ee8a3d4220fb570c401926ec99c6"
+    },
+    "started_at": "2026-10-06T02:57:12.009565+00:00",
+    "finished_at": "2026-10-06T02:57:13.650978+00:00",
+    "exit": 0,
+    "stdout": "[\n  {\n    \"control\": \"live\",\n    \"outcome\": \"pass\",\n    \"switcher_absence\": \"pass\",\n    \"dash_absence\": \"pass\",\n    \"switcher_entries\": [\n      \"SysPane Lab Alpha\",\n      \"SysPane Lab Beta\"\n    ],\n    \"dash_entries\": [\n      \"SysPane Lab Alpha\",\n      \"SysPane Lab Beta\"\n    ],\n    \"focus\": \"pass\",\n    \"final\": {\n      \"marker\": \"pass\",\n      \"icons\": \"pass\",\n      \"rectangle\": \"pass\",\n      \"max_gap_us\": 51751,\n      \"max_capture_us\": 2030\n    },\n    \"observations\": 7,\n    \"max_tree_nodes\": 156,\n    \"max_transition_us\": 392058,\n    \"cleanup\": \"confirmed\"\n  },\n  {\n    \"control\": \"ordinary-window\",\n    \"outcome\": \"fail\",\n    \"switcher_absence\": \"fail\",\n    \"dash_absence\": \"fail\",\n    \"switcher_entries\": [\n      \"SysPane Lab Alpha\",\n      \"SysPane Lab Beta\",\n      \"SysPane Surface Fault\"\n    ],\n    \"dash_entries\": [\n      \"SysPane Lab Alpha\",\n      \"SysPane Lab Beta\",\n      \"SysPane Surface Fault\"\n    ],\n    \"focus\": \"pass\",\n    \"final\": {\n      \"marker\": \"pass\",\n      \"icons\": \"pass\",\n      \"rectangle\": \"pass\",\n      \"max_gap_us\": 52691,\n      \"max_capture_us\": 3344\n    },\n    \"observations\": 7,\n    \"max_tree_nodes\": 173,\n    \"max_transition_us\": 424003,\n    \"cleanup\": \"confirmed\"\n  },\n  {\n    \"control\": \"no-switcher\",\n    \"outcome\": \"fail\",\n    \"switcher_absence\": \"fail\",\n    \"dash_absence\": null,\n    \"switcher_entries\": [],\n    \"dash_entries\": null,\n    \"focus\": \"pass\",\n    \"final\": null,\n    \"observations\": 2,\n    \"max_tree_nodes\": 99,\n    \"max_transition_us\": 331439,\n    \"cleanup\": \"confirmed\"\n  }\n]\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "source_inputs": {
+      "build-support/check_workspace_budget.py": "3a9ec8bf7f4f205e1986d19b523d57b41288936e3343910f80b460d71474b700"
+    },
+    "started_at": "2026-10-06T02:57:13.651297+00:00",
+    "finished_at": "2026-10-06T02:57:13.970908+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 3221225472,\n  \"checkout_out_bytes\": 934610376,\n  \"linux_campaign_bytes\": 1690886662,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "tests/desktop/test_gnome_switcher_record.py",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-SWITCHER-01-446cdac7b65742d3875cb5f63d21f6a5.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-SWITCHER-01-cb5bf02a245e488aa19654bd4f0ec5e6.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-SWITCHER-01-23be2bed51584e52943a924c2231d099.json",
+      "-v"
+    ],
+    "source_inputs": {
+      "tests/desktop/test_gnome_switcher_record.py": "facd503efca4c8575d24ca63f827cafb5568c25d3af03f5338fbba327baab85e"
+    },
+    "started_at": "2026-10-06T02:57:13.971159+00:00",
+    "finished_at": "2026-10-06T02:57:33.366435+00:00",
+    "exit": 0,
+    "stdout": "",
+    "stderr": "test_changed_background (__main__.SwitcherEvidence.test_changed_background) ... ok\ntest_changed_favorites (__main__.SwitcherEvidence.test_changed_favorites) ... ok\ntest_dash_names_without_rendered_icons (__main__.SwitcherEvidence.test_dash_names_without_rendered_icons) ... ok\ntest_duplicate_tree_node (__main__.SwitcherEvidence.test_duplicate_tree_node) ... ok\ntest_false_showing_claim (__main__.SwitcherEvidence.test_false_showing_claim) ... ok\ntest_false_unexecuted_steps (__main__.SwitcherEvidence.test_false_unexecuted_steps) ... ok\ntest_fault_entry_cannot_be_relabelled_as_control (__main__.SwitcherEvidence.test_fault_entry_cannot_be_relabelled_as_control) ... ok\ntest_final_observation_budget (__main__.SwitcherEvidence.test_final_observation_budget) ... ok\ntest_fixture_digest (__main__.SwitcherEvidence.test_fixture_digest) ... ok\ntest_focus_stolen_after_restoration (__main__.SwitcherEvidence.test_focus_stolen_after_restoration) ... ok\ntest_foreign_accessibility_bus (__main__.SwitcherEvidence.test_foreign_accessibility_bus) ... ok\ntest_foreign_native_owner (__main__.SwitcherEvidence.test_foreign_native_owner) ... ok\ntest_foreign_shell_tree_pid (__main__.SwitcherEvidence.test_foreign_shell_tree_pid) ... ok\ntest_hide_visible_subtree (__main__.SwitcherEvidence.test_hide_visible_subtree) ... ok\ntest_incorrect_geometry (__main__.SwitcherEvidence.test_incorrect_geometry) ... ok\ntest_journal_digest (__main__.SwitcherEvidence.test_journal_digest) ... ok\ntest_late_final_generation (__main__.SwitcherEvidence.test_late_final_generation) ... ok\ntest_late_transition (__main__.SwitcherEvidence.test_late_transition) ... ok\ntest_missing_final_composition (__main__.SwitcherEvidence.test_missing_final_composition) ... ok\ntest_missing_popup_does_not_pass_live (__main__.SwitcherEvidence.test_missing_popup_does_not_pass_live) ... ok\ntest_missing_registry_exit (__main__.SwitcherEvidence.test_missing_registry_exit) ... ok\ntest_missing_retained_application (__main__.SwitcherEvidence.test_missing_retained_application) ... ok\ntest_missing_step (__main__.SwitcherEvidence.test_missing_step) ... ok\ntest_missing_tree_child (__main__.SwitcherEvidence.test_missing_tree_child) ... ok\ntest_modified_launcher (__main__.SwitcherEvidence.test_modified_launcher) ... ok\ntest_names_without_rendered_icons (__main__.SwitcherEvidence.test_names_without_rendered_icons) ... ok\ntest_native_switch_did_not_focus_beta (__main__.SwitcherEvidence.test_native_switch_did_not_focus_beta) ... ok\ntest_native_three_controls (__main__.SwitcherEvidence.test_native_three_controls) ... ok\ntest_omitted_action_control_did_issue_chord (__main__.SwitcherEvidence.test_omitted_action_control_did_issue_chord) ... ok\ntest_unexpected_application_name (__main__.SwitcherEvidence.test_unexpected_application_name) ... ok\ntest_unexpected_normal_client (__main__.SwitcherEvidence.test_unexpected_normal_client) ... ok\ntest_wrong_control (__main__.SwitcherEvidence.test_wrong_control) ... ok\n\n----------------------------------------------------------------------\nRan 32 tests in 17.937s\n\nOK\n"
+  }
+]

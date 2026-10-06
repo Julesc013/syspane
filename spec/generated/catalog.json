@@ -357,7 +357,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "9540da0b06aa794a0b6ea6eb48aa9806563748c9e37c9679aa9bbbb0d0fc8fae"
+      "sha256": "034aa35fda6063c2fb584e7e7a4275e48f59364bb6059a43dc02404e02bec360"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -476,6 +476,18 @@
       "sha256": "1d84beec8b2032908e360bbd72e8e1ca6d7a3f5d2a48ea676c82542d0a4b55c6"
     },
     {
+      "id": "SP-GNOME-SWITCHER-HANDOFF",
+      "path": "delivery/gnome-switcher-handoff.md",
+      "title": "Native GNOME application-list checkpoint",
+      "description": "The passive bridge stays out of Alt+Tab and the overview dash, with actual normal-window and omitted-popup controls.",
+      "requires": [
+        "SP-W05-GNOME-SWITCHER",
+        "SP-GNOME-WALLPAPER-HANDOFF",
+        "SP-CAMPAIGN-ADMISSION"
+      ],
+      "sha256": "2a0ab6918e1ace322bf626bf0b1f255baf0c83879d566466e3f0e5101cfe4a52"
+    },
+    {
       "id": "SP-GNOME-WALLPAPER-HANDOFF",
       "path": "delivery/gnome-wallpaper-handoff.md",
       "title": "Native GNOME image-wallpaper checkpoint",
@@ -506,7 +518,7 @@
       "requires": [
         "SP-CURRENT"
       ],
-      "sha256": "9f1e7899f9fdbe089b10dd83f5c34c1c3ddc10f7b53fc34c7e78a890e8387f29"
+      "sha256": "c42a77d2b5352777a8c39e14e71b67d035ad20900a43f08b4b4bf84f91b8e118"
     },
     {
       "id": "SP-MEASURED-TIME-HANDOFF",
@@ -705,6 +717,18 @@
         "SP-DESKTOP"
       ],
       "sha256": "fd4a26b426b4a666bba06059bcc5561e267d930dfdc456e2eefbe165ce7a47ee"
+    },
+    {
+      "id": "SP-W05-GNOME-SWITCHER",
+      "path": "delivery/packages/w-05-gnome-switcher.md",
+      "title": "W-05 native GNOME application-list absence",
+      "description": "Observe actual Alt+Tab and overview dash entries independently of candidate-reported window hints.",
+      "requires": [
+        "SP-W05-GNOME-COMPOSITION",
+        "SP-DESKTOP",
+        "SP-ORACLE"
+      ],
+      "sha256": "466840593b471a47e4ea9c225220f25950c30dd38feec9c97c74f8b8fac7ca8b"
     },
     {
       "id": "SP-W05-GNOME-WALLPAPER",

@@ -74,6 +74,11 @@ preserves original file identity, native settings and exact PNG pixels beside th
 live drawing. Separate replacement, setting-redirection and obstruction controls
 expose each failure independently. Wallpaper policy and other display/image profiles
 still require qualification.
+A [native application-list experiment](spec/delivery/gnome-switcher-handoff.md)
+now keeps the passive bridge out of GNOME's Alt+Tab switcher and overview dash.
+Actual normal-window and omitted-popup controls validate the observations; normal
+application switching and overview dismissal preserve focus. The separate Show
+Desktop focus failure and shell recovery remain open.
 There is no usable SysPane desktop application or downloadable release yet.
 Desktop, screensaver and installer profiles remain unqualified.
 
