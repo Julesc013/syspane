@@ -50,7 +50,12 @@ SOURCES = ['tests/desktop/native_gnome_bootstrap.py', 'tests/desktop/native_orac
            'tests/desktop/gnome_wallpaper_policy.py', 'build-support/gnome-policy-runtime.json',
            'build-support/prepare_gnome_policy.py', 'spec/delivery/packages/w-05-gnome-wallpaper-policy.md',
            'source/desktop/gnome/lab-marker/surfaceLease.js', 'tests/desktop/gnome_lease_producer.py',
-           'tests/desktop/gnome_surface_lease.py', 'spec/delivery/packages/w-25-gnome-surface-lease.md']
+           'tests/desktop/gnome_surface_lease.py', 'spec/delivery/packages/w-25-gnome-surface-lease.md',
+           'source/desktop/gnome/lab-marker/networkCache.js', 'tests/desktop/gnome_network_relay.py',
+           'tests/desktop/gnome_network_cache.py', 'spec/delivery/packages/w-25-native-network-cache.md',
+           'tests/protocol/native_collector.py', 'tests/protocol/native_network.py', 'tests/protocol/native_ipc.py',
+           'tests/fault/native_recovery.py', 'build-support/record_gnome_network_cache.py',
+           'tests/desktop/test_gnome_network_cache_record.py']
 
 
 def marker_trace(display, environment, sample=None, dismiss=True):
@@ -140,6 +145,10 @@ def observe(environment, pid, channel, marker, composition, foreground_pid=None,
             import gnome_focus_baseline
             result['focus_baseline'] = gnome_focus_baseline.observe(display, environment, pid, foreground_pid,
                 Path(environment['HOME']).parent, result.get('reveal'), result.get('composition'))
+        if environment.get('SYSPANE_GNOME_NETWORK_CACHE'):
+            import gnome_network_cache
+            result['network_cache'] = gnome_network_cache.observe(display, environment, pid,
+                Path(environment['HOME']).parent, result['composition'], marker_trace)
         if environment.get('SYSPANE_GNOME_SURFACE_LEASE'):
             import gnome_surface_lease
             result['surface_lease'] = gnome_surface_lease.observe(display, environment, pid,
@@ -208,7 +217,7 @@ def group_members(group):
     return members
 
 
-def run(build, marker=False, control='live', composition=None, reveal=None, focus_baseline=None, focus_trace=False, icon_input=None, wallpaper=None, switcher=None, icon_recovery=None, shell_recovery=None, focus_integration=None, focus_scenarios=None, wallpaper_policy=None, surface_lease=None):
+def run(build, marker=False, control='live', composition=None, reveal=None, focus_baseline=None, focus_trace=False, icon_input=None, wallpaper=None, switcher=None, icon_recovery=None, shell_recovery=None, focus_integration=None, focus_scenarios=None, wallpaper_policy=None, surface_lease=None, network_cache=None):
     # Retain orphaned shell helpers for reaping; no service/session can adopt them.
     if ctypes.CDLL(None, use_errno=True).prctl(36, 1, 0, 0, 0) != 0:
         raise OSError(ctypes.get_errno(), 'cannot retain descendant exit evidence')
@@ -238,6 +247,8 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
         family = 'GNOME-WALLPAPER-POLICY-01'
     if surface_lease:
         family = 'GNOME-SURFACE-LEASE-01'
+    if network_cache:
+        family = 'GNOME-NETWORK-CACHE-01'
     with_icons = bool(composition) or focus_baseline == 'ding'
     token = family + '-' + uuid.uuid4().hex
     workspace = build / token
@@ -264,6 +275,7 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
               'focus_scenarios_mode': focus_scenarios,
               'wallpaper_policy_control': wallpaper_policy,
               'surface_lease_control': surface_lease,
+              'network_cache_control': network_cache,
               'executed_at': datetime.now(timezone.utc).isoformat(),
               'source_base': subprocess.check_output(['git', '-c', 'safe.directory=' + str(ROOT), 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
               'source_inputs': {p: sha(ROOT / p) for p in SOURCES},
@@ -296,6 +308,9 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
         report['qualification'] = 'Native private dconf wallpaper locks and policy preservation only; protected deployment, image policy, live revocation and complete host qualification remain open.'
     if surface_lease:
         report['qualification'] = 'Independent public-marker native surface expiry/disconnect/retention and new epoch only; full telemetry, policy, supervisor and product qualification remain open.'
+    if network_cache:
+        report['qualification'] = 'Private retained real-network tile, native policy revision/erasure and owner loss only; live renderer clock, installed policy, general transport and product qualification remain open.'
+        report['collector_build_record_sha256'] = sha(ROOT/'build-support/evidence/w-25-network-presentation-linux-x64-gcc13.json')
     archive = workspace / 'source-inputs.zip'
     with zipfile.ZipFile(archive, 'x', compression=zipfile.ZIP_DEFLATED) as target:
         for name in SOURCES:
@@ -327,6 +342,8 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
                        'LIBGWEATHER_LOCATIONS_PATH': str(sysroot / 'usr/lib/x86_64-linux-gnu/libgweather-4/Locations.bin')}
         if surface_lease:
             environment['SYSPANE_GNOME_SURFACE_LEASE'] = surface_lease
+        if network_cache:
+            environment['SYSPANE_GNOME_NETWORK_CACHE'] = network_cache
         if marker:
             environment['SYSPANE_GNOME_MARKER_CONTROL'] = control
         if composition:
@@ -493,6 +510,18 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
                 time.sleep(.05)
             else:
                 raise TimeoutError('owned accessibility registry did not acquire its bus name')
+        network_relay = None
+        if network_cache:
+            network_relay = launch('network-relay', ['/usr/bin/python3',str(ROOT/'tests/desktop/gnome_network_relay.py')])
+            environment['SYSPANE_GNOME_NETWORK_PID'] = str(network_relay.pid)
+            deadline = time.monotonic()+3
+            while time.monotonic()<deadline:
+                path=workspace/'network-relay.private.jsonl'
+                if path.exists() and path.stat().st_size:break
+                if network_relay.poll() is not None:raise ValueError('network relay exited at startup')
+                time.sleep(.02)
+            else:raise TimeoutError('network relay not ready')
+            report['network_relay_mapped_files'] = mapped_files(network_relay.pid)
         lease_producers = {}
         if surface_lease:
             for role in ['first','second']:
@@ -575,6 +604,9 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
                     report['outcome'] = report['observation']['shell_recovery']['outcome']
                     if report['observation']['shell_recovery'].get('error'):
                         report['error'] = report['observation']['shell_recovery']['error']
+                if network_cache:
+                    if network_relay.poll() != (73 if network_cache=='owner-loss' else None):raise ValueError('retained network relay lifetime differs')
+                    report['outcome'] = report['observation']['network_cache']['evaluation']['outcome']
                 if surface_lease:
                     if lease_producers['first'].poll()!=73 or lease_producers['second'].poll() is not None:raise ValueError('retained producer lifecycle differs')
                     report['outcome'] = report['observation']['surface_lease']['evaluation']['outcome']
@@ -662,6 +694,8 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
                     report[key] = {'path': str(path), 'bytes': path.stat().st_size, 'sha256': sha(path)}
             extension_root = workspace / 'data/gnome-shell/extensions'
             report['enabled_extension_inputs_after'] = inventory(extension_root) if extension_root.exists() else {}
+        if network_cache:
+            report['network_private_artifacts'] = {p.name:{'path':str(p),'bytes':p.stat().st_size,'sha256':sha(p)} for p in workspace.glob('network-*.private.*')}
         if surface_lease:
             for key,name in [('surface_lease_journal','surface-lease.jsonl'),('lease_first_journal','lease-producer-first.jsonl'),('lease_second_journal','lease-producer-second.jsonl')]:
                 path = workspace/name
@@ -745,7 +779,12 @@ if __name__ == '__main__':
     parser.add_argument('--focus-scenarios', choices=('observe','restore','helper-exit'))
     parser.add_argument('--wallpaper-policy', choices=('locked','unlocked','replace-policy'))
     parser.add_argument('--surface-lease', choices=('live','ignore-expiry','disconnect'))
+    parser.add_argument('--network-cache', choices=('live','ignore-clear','wrong-value','owner-loss'))
     args = parser.parse_args()
+    if args.network_cache:
+        if any([args.marker,args.composition,args.reveal,args.focus_baseline,args.focus_trace,args.icon_input,args.wallpaper,args.switcher,args.icon_recovery,args.shell_recovery,args.focus_integration,args.focus_scenarios,args.wallpaper_policy,args.surface_lease]) or args.marker_control != 'live':
+            parser.error('--network-cache owns its retained relay and live composition')
+        args.composition = 'live'
     if args.surface_lease:
         if any([args.marker,args.composition,args.reveal,args.focus_baseline,args.focus_trace,args.icon_input,args.wallpaper,args.switcher,args.icon_recovery,args.shell_recovery,args.focus_integration,args.focus_scenarios,args.wallpaper_policy]) or args.marker_control != 'live':
             parser.error('--surface-lease owns its retained fixtures and live composition')
@@ -802,4 +841,4 @@ if __name__ == '__main__':
         parser.error('composition uses its own above/below controls')
     if not args.marker and args.marker_control != 'live':
         parser.error('--marker-control requires --marker')
-    sys.exit(run(owned_build(args.build_dir), args.marker or bool(args.composition), args.marker_control, args.composition, args.reveal, args.focus_baseline, args.focus_trace, args.icon_input, args.wallpaper, args.switcher, args.icon_recovery, args.shell_recovery, args.focus_integration, args.focus_scenarios, args.wallpaper_policy, args.surface_lease))
+    sys.exit(run(owned_build(args.build_dir), args.marker or bool(args.composition), args.marker_control, args.composition, args.reveal, args.focus_baseline, args.focus_trace, args.icon_input, args.wallpaper, args.switcher, args.icon_recovery, args.shell_recovery, args.focus_integration, args.focus_scenarios, args.wallpaper_policy, args.surface_lease, args.network_cache))

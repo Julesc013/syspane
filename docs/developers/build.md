@@ -707,3 +707,32 @@ output arguments. The historical recorder also requires the exact relocated smok
 result. The configure-time subtree size guard reads the declared campaign allocation;
 it supplements the mandatory combined Windows preflight and does not replace it.
 The component enables no native operational surface, cached payload or release.
+
+## Native retained network cache and erasure
+
+The explicitly enabled cache experiment uses the existing owned GNOME laboratory
+and tested Linux CollectorProbe. Run the mandatory Windows workspace preflight
+before each native command, then use the admitted `ir4runner` account:
+
+```text
+python3 tests/desktop/native_gnome_bootstrap.py <owned-linux-build> --network-cache live
+python3 tests/desktop/native_gnome_bootstrap.py <owned-linux-build> --network-cache ignore-clear
+python3 tests/desktop/native_gnome_bootstrap.py <owned-linux-build> --network-cache wrong-value
+python3 tests/desktop/native_gnome_bootstrap.py <owned-linux-build> --network-cache owner-loss
+python3 build-support/record_gnome_network_cache.py --build-dir <owned-linux-build> --reports <live> <ignore-clear> <wrong-value> <owner-loss> --output <new-owned-record>
+python3 tests/desktop/test_gnome_network_cache_record.py <owned-linux-build> <live> <ignore-clear> <wrong-value> <owner-loss> -v
+```
+
+The two negative controls must fail candidate acceptance and pass independent
+verification of that failure. A public native glyph calibration establishes the
+digit/null templates before any operational values. The oracle compares complete
+real counter/rate strings, then checks old-pixel removal after policy revocation,
+permission restoration without a full, disable and independently observed owner exit.
+The tile's retained/unknown-age caption is deliberate; live freshness is not enabled.
+
+`network-*.private.*` files contain operational values and pixels. Keep them under
+their mode-0700 attempt directory with mode-0600 files. Commit only public reports,
+source archives and hashes/references to those private files. The relay uses the
+existing short native IPC root because the isolated GNOME HOME exceeds Unix socket
+path limits. Native owner/queue/clock and release limitations are in the
+[checkpoint](../../spec/delivery/native-network-cache-handoff.md).

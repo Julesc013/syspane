@@ -6,6 +6,7 @@ import Clutter from 'gi://Clutter';
 import {Extension} from 'resource:///org/gnome/shell/extensions/extension.js';
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 import {SurfaceLease} from './surfaceLease.js';
+import {NetworkCache} from './networkCache.js';
 
 const INTERFACE = `<node><interface name="org.syspane.LabMarker">
 <method name="SetGeneration"><arg type="u" direction="in" name="generation"/></method>
@@ -241,6 +242,8 @@ export default class LabMarker extends Extension {
                 '<method name="SetWallpaperOccluded"><arg type="b" direction="in" name="occluded"/></method></interface>');
         this._bus = Gio.DBusExportedObject.wrapJSObject(interfaceXml, this);
         this._bus.export(Gio.DBus.session, '/org/syspane/LabMarker');
+        if (GLib.getenv('SYSPANE_GNOME_NETWORK_CACHE'))
+            this._networkCache = new NetworkCache(parent);
         if (GLib.getenv('SYSPANE_GNOME_SURFACE_LEASE'))
             this._surfaceLease = new SurfaceLease(parent, generation => {
                 this._actor.visible = generation !== null;
@@ -301,6 +304,8 @@ export default class LabMarker extends Extension {
     }
 
     disable() {
+        this._networkCache?.disable();
+        this._networkCache = null;
         this._surfaceLease?.disable();
         this._surfaceLease = null;
         this._focusIntegration?.disable();

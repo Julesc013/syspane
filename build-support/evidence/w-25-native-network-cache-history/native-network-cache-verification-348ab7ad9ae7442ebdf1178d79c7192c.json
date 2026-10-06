@@ -1,0 +1,93 @@
+[
+  {
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "source_inputs": {
+      "build-support/check_workspace_budget.py": "3a9ec8bf7f4f205e1986d19b523d57b41288936e3343910f80b460d71474b700"
+    },
+    "started_at": "2026-10-06T06:25:19.283905+00:00",
+    "finished_at": "2026-10-06T06:25:25.023153+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 4294967296,\n  \"checkout_out_bytes\": 1044136408,\n  \"linux_campaign_bytes\": 2303486241,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "build-support/record_gnome_network_cache.py",
+      "--build-dir",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13",
+      "--reports",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-NETWORK-CACHE-01-594db7ef95114c9db7ce3f0d73f72b5e.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-NETWORK-CACHE-01-2d3bacf95cf74c6ea7f11edb0b0644d2.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-NETWORK-CACHE-01-587c0c706da34fd38a6e8703f0bd252b.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-NETWORK-CACHE-01-e3088427c6404843af4e7cc718e594c2.json",
+      "--output",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/network-cache-calibration-348ab7ad9ae7442ebdf1178d79c7192c.json"
+    ],
+    "source_inputs": {
+      "build-support/record_gnome_network_cache.py": "7c4b954d34684621b817635cf2ef2bd2237106505c9c228d50dd0c4a3331d1e8"
+    },
+    "started_at": "2026-10-06T06:25:25.023500+00:00",
+    "finished_at": "2026-10-06T06:25:26.794512+00:00",
+    "exit": 0,
+    "stdout": "Four native cache modes independently verified; private operational records were not copied.\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "source_inputs": {
+      "build-support/check_workspace_budget.py": "3a9ec8bf7f4f205e1986d19b523d57b41288936e3343910f80b460d71474b700"
+    },
+    "started_at": "2026-10-06T06:25:26.794933+00:00",
+    "finished_at": "2026-10-06T06:25:27.172536+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 4294967296,\n  \"checkout_out_bytes\": 1044138703,\n  \"linux_campaign_bytes\": 2303496224,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "tests/desktop/test_gnome_network_cache_record.py",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-NETWORK-CACHE-01-594db7ef95114c9db7ce3f0d73f72b5e.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-NETWORK-CACHE-01-2d3bacf95cf74c6ea7f11edb0b0644d2.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-NETWORK-CACHE-01-587c0c706da34fd38a6e8703f0bd252b.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-NETWORK-CACHE-01-e3088427c6404843af4e7cc718e594c2.json",
+      "-v"
+    ],
+    "source_inputs": {
+      "tests/desktop/test_gnome_network_cache_record.py": "0983b1b78d7855bb7d1d2228de7d478866f68d44f73a50a59ccdb766ce48fee9"
+    },
+    "started_at": "2026-10-06T06:25:27.172775+00:00",
+    "finished_at": "2026-10-06T06:25:35.757526+00:00",
+    "exit": 0,
+    "stdout": "",
+    "stderr": "test_calibration_missing_digit (__main__.CacheEvidence.test_calibration_missing_digit) ... ok\ntest_capacity_prefix (__main__.CacheEvidence.test_capacity_prefix) ... ok\ntest_capture_gap (__main__.CacheEvidence.test_capture_gap) ... ok\ntest_changed_full_epoch (__main__.CacheEvidence.test_changed_full_epoch) ... ok\ntest_clear_control_cannot_pass (__main__.CacheEvidence.test_clear_control_cannot_pass) ... ok\ntest_collector_artifact (__main__.CacheEvidence.test_collector_artifact) ... ok\ntest_collector_comparison_count (__main__.CacheEvidence.test_collector_comparison_count) ... ok\ntest_conflicting_grant (__main__.CacheEvidence.test_conflicting_grant) ... ok\ntest_disable_residue (__main__.CacheEvidence.test_disable_residue) ... ok\ntest_exit_timeout_not_proof (__main__.CacheEvidence.test_exit_timeout_not_proof) ... ok\ntest_extra_private_payload (__main__.CacheEvidence.test_extra_private_payload) ... ok\ntest_four_native_modes (__main__.CacheEvidence.test_four_native_modes) ... ok\ntest_missing_regrant_gap (__main__.CacheEvidence.test_missing_regrant_gap) ... ok\ntest_missing_replay (__main__.CacheEvidence.test_missing_replay) ... ok\ntest_native_exit (__main__.CacheEvidence.test_native_exit) ... ok\ntest_native_pid (__main__.CacheEvidence.test_native_pid) ... ok\ntest_native_receipt (__main__.CacheEvidence.test_native_receipt) ... ok\ntest_private_digest (__main__.CacheEvidence.test_private_digest) ... ok\ntest_private_path (__main__.CacheEvidence.test_private_path) ... ok\ntest_residual_pixels (__main__.CacheEvidence.test_residual_pixels) ... ok\ntest_stale_callback_cache (__main__.CacheEvidence.test_stale_callback_cache) ... ok\ntest_unauthorized_peer (__main__.CacheEvidence.test_unauthorized_peer) ... ok\ntest_unbound_erasure_ack (__main__.CacheEvidence.test_unbound_erasure_ack) ... ok\ntest_value_oracle_redefinition (__main__.CacheEvidence.test_value_oracle_redefinition) ... ok\ntest_wrong_value_control_cannot_pass (__main__.CacheEvidence.test_wrong_value_control_cannot_pass) ... ok\n\n----------------------------------------------------------------------\nRan 25 tests in 7.751s\n\nOK\n"
+  }
+]

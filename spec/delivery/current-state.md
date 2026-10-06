@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-06T06:02:33Z", "scope": "Shared measured network presentation and real collector comparisons verified"}
+updated: {"by": "codex", "at": "2026-10-06T06:31:19.606748+00:00", "scope": "Native retained network cache and policy/owner-loss pixel erasure verified"}
 ---
 
 # Current state and next admitted boundary
@@ -300,6 +300,14 @@ native clock becomes unavailable. Full suites pass 102 Windows, 107 Linux and 94
 historical-toolset host checks. This adds no native operational-payload cache or
 text/pixel claim; delivery and policy-driven erasure remain the next boundary.
 
+The [native retained-cache checkpoint](native-network-cache-handoff.md) now displays
+actual projected counters/rates on the owned GNOME desktop. Public glyph calibration
+and private native documents independently bind the displayed digits. Revision-bound
+revocation, regrant-without-full and actual owner exit clear operational pixels;
+wrong-value and ignored-clear controls fail acceptance. The tile explicitly retains
+samples with unknown age. Live native clock/freshness, product controller/policy and
+renderer watchdogs remain open. Private operational evidence is not committed.
+
 Canonical 0.2.0 documentation bundle, unchanged 0.1 authoring profile, preserved old
 fixtures, new experimental scene/command/capability 0.2 and admission descriptors.
 The initial settings registry has enforced metadata/default consistency and generated
@@ -360,10 +368,11 @@ Continue other native tracks independently of the remaining GNOME qualification.
 W-25's [supervised network checkpoint](network-publication-handoff.md) connects
 real Linux acquisition, source lifetimes and measured receipt under independent
 child supervision. The native surface demonstrates retained public-marker recovery,
-and the shared projection now closes measured values and status semantics. Close
-native operational-payload admission, queue/cache ownership, policy invalidation and
-acknowledged erasure before enabling it on that surface. Verify pixels and recovery
-independently, then connect product controller demand and renderer supervision.
+and the shared projection now closes measured values and status semantics.
+The explicit retained cache now proves bounded native admission and policy/owner-loss
+erasure with real value pixels. Qualify its live clock/age progression and independent
+lease faults, then connect product controller policy/demand, general delivery queues
+and renderer supervision.
 Actual native topology faults and Windows full-table notification
 coverage remain unqualified. The native
 inventory probe now connects bounded subscription/demand and queue revocation to

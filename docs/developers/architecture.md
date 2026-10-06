@@ -33,3 +33,19 @@ native toolkit dependencies. It owns no cache or IPC endpoint. A native backend 
 close its own delivery, policy clearing and acknowledgement contract before retaining
 operational text or pixels. The existing collector probe exercises the shared
 projection over actual measured data through its private development pipe.
+
+## Native retained network cache experiment
+
+The optional GNOME `NetworkCache` adapter accepts one bounded selected frame from
+a retained, native-PID-authenticated laboratory relay. A policy revision owns its
+single cache; every new revision clears it before another full frame is admitted.
+Revocation, owner loss and owner-lease expiry remove payload references and native
+actors. A local clear acknowledgement and externally observed pixel disappearance
+are separate facts. The public diagnostic reports counts/status only.
+
+The finite relay uses the existing tested C++ CollectorProbe and independently
+checked documents. Raw operational values and pixel crops remain in private owned
+evidence. The tile explicitly shows retained samples with unknown age; its GLib
+timer is not a qualified replacement for the C++ CLOCK_BOOTTIME measurement domain.
+Live clock integration, general IPC, installed policy and a production controller
+remain separate work. See the [package](../../spec/delivery/packages/w-25-native-network-cache.md).

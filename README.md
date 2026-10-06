@@ -47,8 +47,11 @@ The [measured network presentation checkpoint](spec/delivery/network-presentatio
 adds a shared renderer input with exact selection, counter/rate text, original
 measurement age, independent freshness/lease state and policy-bound borrowing.
 It passes portable checks on all three build profiles and comparisons against
-the real Linux collector. Operational delivery to a native desktop surface and
-clearing its cached text/pixels on policy changes remain pending.
+the real Linux collector. A [native retained-cache experiment](spec/delivery/native-network-cache-handoff.md)
+now displays its real values on the owned GNOME desktop and independently decodes
+the digits. Revision-bound revocation and owner exit remove the cached actors and
+pixels; negative controls expose wrong values and failed clearing. Live freshness,
+installed policy and general product delivery remain pending.
 An external pixel/time oracle is calibrated against live, hidden, frozen and
 obstructed synthetic X11 surfaces. A real Openbox/PCManFM Show Desktop experiment
 now exposes the basic X11 candidate's placement failure: above the desktop it
