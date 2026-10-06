@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-06T15:31:11Z", "scope": "Authenticated session demand, three full development suites and preserved native restart timing failure"}
+updated: {"by": "codex", "at": "2026-10-06T16:09:21Z", "scope": "Shared authored transactions and independently interrupted native Linux generation storage"}
 ---
 
 # Current state and next admitted boundary
@@ -21,6 +21,16 @@ The active objective is now the [complete 0.1.0 release](release-0.1.0.md) for W
 9x, Windows NT, Linux X11, Wayland and Mac OS X. The foundation campaign remains
 required but is no longer the final completion boundary. Legacy version/architecture
 floors, native labs and complete desktop/package evidence remain unresolved.
+
+The latest [authored transaction checkpoint](authored-transactions-handoff.md)
+validates scene/settings contracts and performs coherent commits in the Linux ext4
+laboratory. Twenty native cases cover ten interrupted transitions, lost-response
+reconciliation, policy changes immediately before replacement, corruption and bounds.
+Full suites passed 139 Linux, 127 Windows and 116 historical-toolset host entries;
+affected checks pass again after the final Linux guard-placement and metadata changes.
+Installed ownership, asynchronous commit IPC, asset closure, native settings/editor
+integration and visible activation remain required. No historical runtime or new
+desktop qualification follows from these shared components and storage experiments.
 
 The latest [shared demand checkpoint](demand-owner-handoff.md) implements authorized
 consumer leases, merged acquisition plans, fair dispatch and cancelled-slot retention

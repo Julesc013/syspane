@@ -4,6 +4,7 @@
   "kernel32.dll": [
     "CloseHandle",
     "CompareStringW",
+    "CreateEventW",
     "CreateFileW",
     "DecodePointer",
     "DeleteCriticalSection",
@@ -62,9 +63,11 @@
     "RaiseException",
     "ReadConsoleW",
     "ReadFile",
+    "ResetEvent",
     "RtlUnwind",
     "SetEndOfFile",
     "SetEnvironmentVariableA",
+    "SetEvent",
     "SetFilePointerEx",
     "SetLastError",
     "SetStdHandle",
@@ -76,6 +79,7 @@
     "TlsGetValue",
     "TlsSetValue",
     "UnhandledExceptionFilter",
+    "WaitForSingleObjectEx",
     "WideCharToMultiByte",
     "WriteConsoleW",
     "WriteFile"
@@ -86,6 +90,21 @@
       "https://learn.microsoft.com/en-us/windows/win32/api/datetimeapi/nf-datetimeapi-getdateformatw",
       "https://learn.microsoft.com/en-us/windows/win32/api/datetimeapi/nf-datetimeapi-gettimeformatw",
       "https://learn.microsoft.com/en-us/windows/win32/api/timezoneapi/nf-timezoneapi-gettimezoneinformation"
+    ]
+  },
+  "authored_initialization_imports": {
+    "symbols": [
+      "CreateEventW",
+      "ResetEvent",
+      "SetEvent",
+      "WaitForSingleObjectEx"
+    ],
+    "basis": "Documented Windows XP minimum and Kernel32.dll membership; this remains a declared static import closure, not guest execution qualification.",
+    "sources": [
+      "https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-createeventw",
+      "https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-resetevent",
+      "https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-setevent",
+      "https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-waitforsingleobjectex"
     ]
   }
 }

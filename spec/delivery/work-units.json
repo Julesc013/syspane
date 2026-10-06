@@ -292,7 +292,8 @@
         "SP-PERSISTENCE",
         "SP-CONFIG-RESOLUTION",
         "SP-WORK-PACKAGES",
-        "SP-ACCEPTANCE-TRACES"
+        "SP-ACCEPTANCE-TRACES",
+        "SP-W08-AUTHORED"
       ],
       "acceptance_tests": [
         "T-TRANSACTION",
@@ -304,12 +305,18 @@
       "planned_outputs": [
         "source/commands/",
         "source/protocol/",
-        "source/configuration/"
+        "source/configuration/",
+        "source/configuration/authored.hpp",
+        "source/configuration/transaction.hpp",
+        "source/platform/generation_store_linux.cpp",
+        "tests/configuration/"
       ],
-      "status": "planned",
+      "status": "in_progress",
       "authority_class": "development",
-      "execution_grant": null,
-      "notes": "Dependency-ready is not execution authority. Native work may produce a failed/inconclusive probe without a support claim; independent tracks can continue."
+      "execution_grant": "user:foundation-native-campaign-2026-10-05",
+      "notes": "Shared authored validation and atomic scene/settings coordinator implemented with typed replay/reconciliation, current policy and mandatory resource preparation. Native Linux ext4 experiment passes twenty cases including ten observed stop/kill transitions, original-request recovery, late policy change, corruption and storage bounds. Full suites passed 139 Linux, 127 Windows and 116 historical-toolset host entries; final affected checks pass after Linux guard-placement and import/component metadata refinements. Original component and import-audit failures retained. Asynchronous commit/cancel/reconciliation IPC, installed resource/store ownership, activation, undo, external-edit and non-Linux storage gates remain open. The full five-family 0.1.0 release remains required.",
+      "package": "delivery/packages/w-08-authored-transactions.md",
+      "evidence": "delivery/authored-transactions-handoff.md"
     },
     {
       "id": "W-09",

@@ -23,6 +23,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [W-05 bounded X11 host investigation](w-05-x11-investigation.md) — Observe desktop-type placement and native reveal under a real window and icon manager in an owned lab.
 - [Shared controller demand and acquisition ownership](w-07-demand-owner.md) — Merge authorized consumer leases, schedule bounded source work and retain ownership until stopped work is confirmed.
 - [Authenticated session demand ownership](w-07-session-demand.md) — Bind controller-selected acquisition requests to authoritative session lifetimes without changing existing wire documents.
+- [Authored scene transactions and generation recovery](w-08-authored-transactions.md) — Implement coherent settings and scene replacement with explicit stored, durable and activation facts.
 - [W-24 authenticated transport and policy boundary](w-24-transport.md) — Close the initial local protocol, admission and preview boundary before native integration.
 - [W-25 collection continuity across consumer replacement](w-25-consumer-continuity.md) — Keep real collection independently owned while admitting bounded replacement consumers.
 - [W-25 automatic recovery from independent render failure](w-25-controller-render-recovery.md) — Connect the existing render and health guards to the persistent native desktop replacement owner.

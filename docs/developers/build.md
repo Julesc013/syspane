@@ -1,5 +1,25 @@
 # Developer setup and checks
 
+The latest [authored transaction checkpoint](../../spec/delivery/authored-transactions-handoff.md)
+adds `syspane_authored` on all three development profiles and the Linux-only
+`syspane_generation_store` / `SysPane.ConfigProbe`. After ordinary workspace
+preflight and configure/build, run `ctest --preset <profile> -R
+'^(configuration[.]|native[.]CONFIG-STORE$)' --output-on-failure`. Linux requires
+the existing native cache build root, unprivileged runner, ext4, `findmnt` and the
+recorded Python JSON Schema validator. The native test creates private synthetic
+stores, observes stopped child processes, kills only those held children and records
+recovery. It preserves all case directories under the build's `native-evidence/`.
+
+The compiled validator embeds canonical settings/scene/layout/binding/command
+schemas; runtime validation does not fetch schemas. Transactions require a resource
+preparer and current-policy callback. The probe uses typed laboratory policy and
+its synthetic built-in theme only. Publication and reconciliation return result
+0.1 documents, with pending activation and no visibility claim. Existing IPC remains
+preview-only for commands. Do not point the probe at installed user configuration.
+The native store retains at most 32 generation attempts and does not prune them;
+capacity or corruption requires an explicit maintenance/repair boundary still to
+be implemented. Current/previous selectors, not directory timestamps, own recovery.
+
 The latest [session demand checkpoint](../../spec/delivery/session-demand-handoff.md)
 passes full suites of 130 Linux, 119 Windows and 108 historical-toolset entries.
 `syspane_demand_sessions` privately owns Sessions and DemandOwner. The controller

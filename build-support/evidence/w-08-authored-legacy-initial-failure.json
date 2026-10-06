@@ -1,0 +1,19 @@
+{
+  "outcome": "fail",
+  "source_base": "c2656732efb5f15f3b257e4508c7052154c503d7",
+  "command": [
+    "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "out/campaign/audit_authored_legacy.py"
+  ],
+  "started_at": "2026-10-06T16:04:34.174304+00:00",
+  "exit": 1,
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"D:\\Projects\\SysPane\\syspane\\out\\campaign\\audit_authored_legacy.py\", line 15, in <module>\n    p=b/'Release'/name;v['artifacts'][name]={'sha256':sha(p),'bytes':p.stat().st_size,**audit.verify(p.read_bytes())}\n                                                                                        ~~~~~~~~~~~~^^^^^^^^^^^^^^^^\n  File \"D:\\Projects\\SysPane\\syspane\\build-support\\check_legacy_artifacts.py\", line 139, in verify\n    raise ValueError('mandatory imports exceed the declared experiment closure')\nValueError: mandatory imports exceed the declared experiment closure\n",
+  "inputs": {
+    "build-support/check_legacy_artifacts.py": "b4c962501a30a7dbc14b1d3e2896eb52c3ea54a6d73ba3f8a107c49a14f4f3af",
+    "build-support/targets/windows-x86-v141-xp.imports.json": "dfa715bd074089156d18fd9ba143a2d99cd6733293c73904bf86d4df48490af3",
+    "out/build/windows-x86-v141-xp/Release/syspane_authored_tests.exe": "4f393b031fde7d3c328742a6021d8d7fac3f8d8b73c70d8e55b0db4401e1a16a"
+  }
+}

@@ -1,0 +1,110 @@
+[
+  {
+    "step": "configure",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-06T15:52:30.802785+00:00",
+    "finished_at": "2026-10-06T15:52:41.033096+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 5368709120,\n  \"checkout_out_bytes\": 1370410465,\n  \"linux_campaign_bytes\": 3186380632,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "configure",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/authored_step.py",
+      "linux-x64-gcc13",
+      "configure"
+    ],
+    "started_at": "2026-10-06T15:52:41.033530+00:00",
+    "finished_at": "2026-10-06T15:52:55.612034+00:00",
+    "exit": 0,
+    "stdout": "Preset CMake variables:\n\n  BUILD_TESTING=\"ON\"\n  CMAKE_BUILD_TYPE=\"Debug\"\n  CMAKE_CXX_COMPILER=\"g++\"\n  SYSPANE_PROFILE=\"linux-x64-gcc13\"\n\nprofile verified: linux-x64-gcc13\nvendored dependency digests: pass\ndiagnostic toolkit verified: GTK 3.24.41 / Ubuntu 3.24.41-4ubuntu1.3\nnative GJS clock build dependencies verified\n-- Configuring done (8.1s)\n-- Generating done (0.0s)\n-- Build files have been written to: /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-08-authored/linux-x64-gcc13-configure-97845aded3\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-06T15:52:55.612454+00:00",
+    "finished_at": "2026-10-06T15:52:56.151662+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 5368709120,\n  \"checkout_out_bytes\": 1371414829,\n  \"linux_campaign_bytes\": 3186416641,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/authored_step.py",
+      "linux-x64-gcc13",
+      "build"
+    ],
+    "started_at": "2026-10-06T15:52:56.151978+00:00",
+    "finished_at": "2026-10-06T15:53:12.503264+00:00",
+    "exit": 0,
+    "stdout": "[1/10] Building CXX object CMakeFiles/syspane_authored.dir/source/configuration/digest.cpp.o\n[2/10] Building CXX object CMakeFiles/syspane_authored.dir/source/configuration/transaction.cpp.o\n[3/10] Building CXX object CMakeFiles/syspane_generation_store.dir/source/platform/generation_store_linux.cpp.o\n[4/10] Building CXX object CMakeFiles/syspane_configuration_probe.dir/source/application/configuration_probe.cpp.o\n[5/10] Building CXX object CMakeFiles/syspane_authored.dir/source/configuration/authored.cpp.o\n[6/10] Linking CXX static library libsyspane_authored.a\n[7/10] Linking CXX static library libsyspane_generation_store.a\n[8/10] Linking CXX executable SysPane.ConfigProbe\n[9/10] Building CXX object CMakeFiles/syspane_authored_tests.dir/tests/configuration/authored_tests.cpp.o\n[10/10] Linking CXX executable syspane_authored_tests\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-08-authored/linux-x64-gcc13-build-e1d01b94a9\n",
+    "stderr": ""
+  },
+  {
+    "step": "focus",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-06T15:53:12.503688+00:00",
+    "finished_at": "2026-10-06T15:53:13.031602+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 5368709120,\n  \"checkout_out_bytes\": 1372419901,\n  \"linux_campaign_bytes\": 3249238328,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "focus",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/authored_step.py",
+      "linux-x64-gcc13",
+      "focus"
+    ],
+    "started_at": "2026-10-06T15:53:13.031951+00:00",
+    "finished_at": "2026-10-06T15:53:25.314795+00:00",
+    "exit": 8,
+    "stdout": "Test project /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n      Start  1: configuration.AUTH-SCHEMA\n 1/11 Test  #1: configuration.AUTH-SCHEMA ........   Passed    0.06 sec\n      Start  2: configuration.TX-MIXED\n 2/11 Test  #2: configuration.TX-MIXED ...........   Passed    0.03 sec\n      Start  3: configuration.TX-CONFLICT\n 3/11 Test  #3: configuration.TX-CONFLICT ........   Passed    0.03 sec\n      Start  4: configuration.TX-REPLAY\n 4/11 Test  #4: configuration.TX-REPLAY ..........   Passed    0.03 sec\n      Start  5: configuration.TX-INTERRUPT\n 5/11 Test  #5: configuration.TX-INTERRUPT .......   Passed    0.06 sec\n      Start  6: configuration.TX-BOUNDS\n 6/11 Test  #6: configuration.TX-BOUNDS ..........   Passed    0.04 sec\n      Start  7: configuration.TX-CAPACITY\n 7/11 Test  #7: configuration.TX-CAPACITY ........   Passed    1.16 sec\n      Start  8: configuration.DIGEST\n 8/11 Test  #8: configuration.DIGEST .............   Passed    0.02 sec\n      Start  9: native.CONFIG-STORE\n 9/11 Test  #9: native.CONFIG-STORE ..............   Passed    4.00 sec\n      Start 35: composition.graph\n10/11 Test #35: composition.graph ................***Failed    0.17 sec\nTraceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/build-support/check_components.py\", line 59, in <module>\n    main()\n  File \"/mnt/d/Projects/SysPane/syspane/build-support/check_components.py\", line 49, in main\n    raise ValueError('; '.join(errors))\nValueError: syspane_configuration_probe: forbidden dependency\n\n      Start 36: composition.reject_forbidden\n11/11 Test #36: composition.reject_forbidden .....***Failed    0.16 sec\nTraceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/build-support/check_components.py\", line 59, in <module>\n    main()\n  File \"/mnt/d/Projects/SysPane/syspane/build-support/check_components.py\", line 49, in main\n    raise ValueError('; '.join(errors))\nValueError: syspane_configuration_probe: forbidden dependency\n\n\n82% tests passed, 2 tests failed out of 11\n\nTotal Test time (real) =   5.77 sec\n\nThe following tests FAILED:\n\t 35 - composition.graph (Failed)\n\t 36 - composition.reject_forbidden (Failed)\n Errors while running CTest\n\nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-08-authored/linux-x64-gcc13-focus-614692789f\n",
+    "stderr": ""
+  }
+]

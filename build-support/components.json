@@ -1438,6 +1438,115 @@
         "linux-x64-gcc13",
         "windows-x86-v141-xp"
       ]
+    },
+    {
+      "id": "authored",
+      "target": "syspane_authored",
+      "type": "STATIC_LIBRARY",
+      "source_owner": "source/configuration/",
+      "public_interfaces": [
+        "source/configuration/authored.hpp",
+        "source/configuration/transaction.hpp",
+        "source/configuration/digest.hpp"
+      ],
+      "private_interfaces": [],
+      "sources": [
+        "source/configuration/authored.cpp",
+        "source/configuration/transaction.cpp",
+        "source/configuration/digest.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_configuration"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "windows-x64-gcc15",
+        "linux-x64-gcc13",
+        "windows-x86-v141-xp"
+      ]
+    },
+    {
+      "id": "authored-tests",
+      "target": "syspane_authored_tests",
+      "type": "EXECUTABLE",
+      "source_owner": "tests/configuration/",
+      "public_interfaces": [],
+      "private_interfaces": [],
+      "sources": [
+        "tests/configuration/authored_tests.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_authored"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "windows-x64-gcc15",
+        "linux-x64-gcc13",
+        "windows-x86-v141-xp"
+      ]
+    },
+    {
+      "id": "generation-store",
+      "target": "syspane_generation_store",
+      "type": "STATIC_LIBRARY",
+      "source_owner": "source/platform/",
+      "public_interfaces": [
+        "source/platform/generation_store_linux.hpp"
+      ],
+      "private_interfaces": [],
+      "sources": [
+        "source/platform/generation_store_linux.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_authored"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
+    },
+    {
+      "id": "configuration-probe",
+      "target": "syspane_configuration_probe",
+      "type": "EXECUTABLE",
+      "source_owner": "source/application/",
+      "public_interfaces": [],
+      "private_interfaces": [],
+      "sources": [
+        "source/application/configuration_probe.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_generation_store",
+        "Threads::Threads"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
     }
   ]
 }

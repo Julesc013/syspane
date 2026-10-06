@@ -7,6 +7,12 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
+The [authored transaction checkpoint](spec/delivery/authored-transactions-handoff.md)
+adds shared scene/settings validation and coherent generation storage on the Linux
+ext4 laboratory profile. Interrupted commits recover a complete old or new bundle;
+reconciliation does not repeat the edit. Installed configuration, commit IPC, asset
+resolution, native controls and visible activation remain required.
+
 The [session demand integration](spec/delivery/session-demand-handoff.md) now binds
 authenticated subscriptions to controller-selected acquisition requests. Independent
 leases, policy changes and stale callbacks are checked on all three development

@@ -31,7 +31,7 @@
         "SP-COMMANDS",
         "SP-SETTINGS"
       ],
-      "sha256": "b0866706d03d2e8038745340787e4d71ac2ae74eaca24d5268ac092a1fe041aa"
+      "sha256": "a546339f3a4bf17ea01aff2b3204c6effb26a890de40cd4baa53c887c46a4f27"
     },
     {
       "id": "SP-PORTABILITY",
@@ -339,6 +339,17 @@
       "sha256": "4502c5fd48ad4b17d10aa05a17a3a4a5244dab10292f242a2c5ccf8711eca402"
     },
     {
+      "id": "SP-AUTHORED-TRANSACTIONS-HANDOFF",
+      "path": "delivery/authored-transactions-handoff.md",
+      "title": "Authored transactions and Linux generation recovery",
+      "description": "Preserve coherent scene/settings changes and committed request identities through native process interruption.",
+      "requires": [
+        "SP-W08-AUTHORED",
+        "SP-SESSION-DEMAND-HANDOFF"
+      ],
+      "sha256": "239fd88085d29a991f5e25d042bd66ae7017b6aa838718ca3f76b7e65fd3f68d"
+    },
+    {
       "id": "SP-CAMPAIGN-ADMISSION",
       "path": "delivery/campaign-admission.md",
       "title": "Foundation and native-experiment campaign admission",
@@ -388,7 +399,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "199eea2094b9d1fe24f07ad0b7d1dd0fc799c50d92d8275caddbb20402acefef"
+      "sha256": "8543bab217ba12c4062f62efaef2989205783c70ea36ca938f769d76f50b29ec"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -1111,6 +1122,20 @@
         "SP-W25-SUBSCRIPTIONS"
       ],
       "sha256": "68123c0375248f5292111209005279a39ade3e85d7d3dbafc47a6f77aca52d90"
+    },
+    {
+      "id": "SP-W08-AUTHORED",
+      "path": "delivery/packages/w-08-authored-transactions.md",
+      "title": "Authored scene transactions and generation recovery",
+      "description": "Implement coherent settings and scene replacement with explicit stored, durable and activation facts.",
+      "requires": [
+        "SP-COMMANDS",
+        "SP-PERSISTENCE",
+        "SP-ACCEPTANCE-TRACES",
+        "SP-CONFIG-RESOLUTION",
+        "SP-W24-PACKAGE"
+      ],
+      "sha256": "43a732ab4e8fc63137c953755b03d4e9729cda586e3bde736011f3f8a4a9212d"
     },
     {
       "id": "SP-W24-PACKAGE",

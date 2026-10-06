@@ -63,3 +63,10 @@ fixes expected revision/request outcomes across a lost acknowledgement and resta
 It includes revoked policy, unavailable media, corrupt selecting records, renderer
 failure and result-cache expiry. W-08 must supply its concrete fixtures and fault
 runner; these expectations are not evidence that recovery has been implemented.
+
+The subsequent [W-08 checkpoint](../delivery/authored-transactions-handoff.md) supplies
+shared transaction/reconciliation components and an owned ext4 process-interruption
+runner. This executes the coherent-generation and retained-identity prerequisites;
+the complete PERSIST trace still requires asynchronous native IPC binding, installed
+resource/policy ownership and activation evidence. Its fsync acknowledgements do not
+qualify arbitrary filesystems, hardware power loss or another operating system.
