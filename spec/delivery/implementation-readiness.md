@@ -178,6 +178,14 @@ omitting the popup cannot pass. Thirty-four new verifier checks and 100 existing
 desktop checks pass. This leaves other taskbars, Show Desktop focus and native
 recovery open; ordinary switching/overview focus does not substitute for them.
 
+The [native icon-manager recovery checkpoint](gnome-icon-recovery-handoff.md)
+confirms owned DING exit, a distinct native replacement lifetime, live drawing and
+input bound to the replacement. Window-ID reuse cannot substitute for process
+identity. Frozen-drawing and omitted-stop controls distinguish process replacement
+from visual progress. Thirty-six new verifier checks and 134 desktop regressions
+pass; the first invalid control remains preserved. Shell/compositor replacement,
+product continuity and the separate Show Desktop focus failure remain open.
+
 Use the proposed cold-start exercise to detect missing observable contracts.
 Private implementation differences are permissible. Missing laboratories remain
 blocked qualification. A finite release scope must identify exact profiles,

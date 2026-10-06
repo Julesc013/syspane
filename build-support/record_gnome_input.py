@@ -14,11 +14,16 @@ from oracle import evaluate
 
 def validate(value,build):
     initial=composition(value,build,family='GNOME-INPUT-01',outer_outcome=False)
-    result=value['observation']['icon_input'];env=value['environment']['explicit'];workspace=Path(value['workspace'])
+    return validate_observations(value,build,initial,value['observation']['icon_input'],value['observation']['composition']['icon_manager'])
+
+
+def validate_observations(value,build,initial,result,expected_owner):
+    """Check input against a caller-validated composition gate and native lifetime."""
+    env=value['environment']['explicit'];workspace=Path(value['workspace'])
     control=result['control'];owner=result['icon_manager'];shell_pid=value['observation']['manager']['pid'][0]
     if result['version']!='0.1.0' or control not in ['live','block-pointer','no-selection'] or value['icon_input_control']!=control or env['SYSPANE_GNOME_INPUT_CONTROL']!=control:
         raise ValueError('native input identity/control')
-    if initial['outcome']!='pass' or owner!=value['observation']['composition']['icon_manager'] or result['icon_center']!=icon_center(value['observation']['composition']):
+    if initial['outcome']!='pass' or owner!=expected_owner or result['icon_center']!=icon_center(value['observation']['composition']):
         raise ValueError('independent input prerequisite/coordinates')
     if result['background_before']!=value['observation']['composition']['background_settings_after']:
         raise ValueError('input background differs from composition prerequisite')

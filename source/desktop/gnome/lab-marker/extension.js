@@ -109,6 +109,13 @@ export default class LabMarker extends Extension {
         if (this._control === 'hidden')
             this._actor.hide();
         let interfaceXml = this._composition ? COMPOSITION_INTERFACE : INTERFACE;
+        this._recoveryControl = GLib.getenv('SYSPANE_GNOME_ICON_RECOVERY');
+        if (this._recoveryControl && !['live', 'frozen-surface', 'no-stop'].includes(this._recoveryControl))
+            throw new Error('Unknown icon-recovery control');
+        this._recoveryFrozen = false;
+        if (this._recoveryControl === 'frozen-surface')
+            interfaceXml = interfaceXml.replace('</interface>',
+                '<method name="FreezeRecoveryMarker"><arg type="b" direction="in" name="frozen"/></method></interface>');
         if (this._wallpaperCover)
             interfaceXml = interfaceXml.replace('</interface>',
                 '<method name="SetWallpaperOccluded"><arg type="b" direction="in" name="occluded"/></method></interface>');
@@ -119,7 +126,7 @@ export default class LabMarker extends Extension {
     SetGeneration(generation) {
         if (!Number.isInteger(generation) || generation < 1 || generation > 0xffffffff)
             throw new Error('Generation outside the laboratory uint32 range');
-        if (this._control === 'frozen')
+        if (this._control === 'frozen' || this._recoveryFrozen)
             return;
         this._generation = generation;
         this._actor.queue_repaint();
@@ -146,6 +153,12 @@ export default class LabMarker extends Extension {
             throw new Error('Wallpaper occlusion is available only in its explicit control');
         this._wallpaperOccluded = occluded;
         this._wallpaperCover.visible = this._witness.visible && occluded;
+    }
+
+    FreezeRecoveryMarker(frozen) {
+        if (this._recoveryControl !== 'frozen-surface' || frozen !== true)
+            throw new Error('One-way freeze is available only in the recovery control');
+        this._recoveryFrozen = true;
     }
 
     disable() {

@@ -41,7 +41,8 @@ SOURCES = ['tests/desktop/native_gnome_bootstrap.py', 'tests/desktop/native_orac
            'build-support/x11-lab-packages.json', 'tests/desktop/gnome_wallpaper.py',
            'tests/desktop/fixtures/gnome-wallpaper.json', 'spec/delivery/packages/w-05-gnome-wallpaper.md',
            'tests/desktop/gnome_switcher.py', 'tests/desktop/gnome_switcher_app.py',
-           'tests/desktop/fixtures/gnome-switcher.json', 'spec/delivery/packages/w-05-gnome-switcher.md']
+           'tests/desktop/fixtures/gnome-switcher.json', 'spec/delivery/packages/w-05-gnome-switcher.md',
+           'tests/desktop/gnome_icon_recovery.py', 'spec/delivery/packages/w-05-gnome-icon-recovery.md']
 
 
 def marker_trace(display, environment, sample=None, dismiss=True):
@@ -131,7 +132,7 @@ def observe(environment, pid, channel, marker, composition, foreground_pid=None,
             import gnome_focus_baseline
             result['focus_baseline'] = gnome_focus_baseline.observe(display, environment, pid, foreground_pid,
                 Path(environment['HOME']).parent, result.get('reveal'), result.get('composition'))
-        if environment.get('SYSPANE_GNOME_INPUT_CONTROL'):
+        if environment.get('SYSPANE_GNOME_INPUT_CONTROL') and not environment.get('SYSPANE_GNOME_ICON_RECOVERY'):
             import gnome_input
             result['icon_input'] = gnome_input.observe(display, environment, pid,
                 Path(environment['HOME']).parent, result['composition'], marker_trace)
@@ -142,6 +143,10 @@ def observe(environment, pid, channel, marker, composition, foreground_pid=None,
         if environment.get('SYSPANE_GNOME_SWITCHER_CONTROL'):
             import gnome_switcher
             result['switcher'] = gnome_switcher.observe(display, environment, pid,
+                Path(environment['HOME']).parent, result['composition'], marker_trace)
+        if environment.get('SYSPANE_GNOME_ICON_RECOVERY'):
+            import gnome_icon_recovery
+            result['icon_recovery'] = gnome_icon_recovery.observe(display, environment, pid,
                 Path(environment['HOME']).parent, result['composition'], marker_trace)
         channel.send(result)
     except Exception as error:
@@ -175,7 +180,7 @@ def group_members(group):
     return members
 
 
-def run(build, marker=False, control='live', composition=None, reveal=None, focus_baseline=None, focus_trace=False, icon_input=None, wallpaper=None, switcher=None):
+def run(build, marker=False, control='live', composition=None, reveal=None, focus_baseline=None, focus_trace=False, icon_input=None, wallpaper=None, switcher=None, icon_recovery=None):
     # Retain orphaned shell helpers for reaping; no service/session can adopt them.
     if ctypes.CDLL(None, use_errno=True).prctl(36, 1, 0, 0, 0) != 0:
         raise OSError(ctypes.get_errno(), 'cannot retain descendant exit evidence')
@@ -195,6 +200,8 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
         family = 'GNOME-WALLPAPER-01'
     if switcher:
         family = 'GNOME-SWITCHER-01'
+    if icon_recovery:
+        family = 'GNOME-ICON-RECOVERY-01'
     with_icons = bool(composition) or focus_baseline == 'ding'
     token = family + '-' + uuid.uuid4().hex
     workspace = build / token
@@ -215,6 +222,7 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
               'icon_input_control': icon_input,
               'wallpaper_control': wallpaper,
               'switcher_control': switcher,
+              'icon_recovery_control': icon_recovery,
               'executed_at': datetime.now(timezone.utc).isoformat(),
               'source_base': subprocess.check_output(['git', '-c', 'safe.directory=' + str(ROOT), 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
               'source_inputs': {p: sha(ROOT / p) for p in SOURCES},
@@ -235,6 +243,8 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
         report['qualification'] = 'Selected owned GNOME/DING single-display PNG file/settings/pixel preservation and live composition only; wallpaper policy, other image modes, Show Desktop focus, taskbar, recovery and full product qualification remain open.'
     if switcher:
         report['qualification'] = 'Selected owned GNOME/DING Alt+Tab and overview dash investigation only; other taskbars, Show Desktop focus, recovery and full product qualification remain open.'
+    if icon_recovery:
+        report['qualification'] = 'Selected owned DING exit/replacement, independent live composition and input on the replacement only; shell/compositor replacement, Show Desktop focus and full product qualification remain open.'
     archive = workspace / 'source-inputs.zip'
     with zipfile.ZipFile(archive, 'x', compression=zipfile.ZIP_DEFLATED) as target:
         for name in SOURCES:
@@ -277,6 +287,8 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
             environment['MUTTER_DEBUG'] = 'focus,keybindings,window-state'
         if wallpaper:
             environment['SYSPANE_GNOME_WALLPAPER_CONTROL'] = wallpaper
+        if icon_recovery:
+            environment['SYSPANE_GNOME_ICON_RECOVERY'] = icon_recovery
         if switcher:
             import gnome_switcher
             input_runtime = json.loads((ROOT / 'build-support/x11-input-runtime.json').read_text())
@@ -423,7 +435,8 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
                     raise RuntimeError('shell exited during observation')
                 report['mapped_files'] = mapped_files(shell.pid)
                 if composition:
-                    report['icon_manager_mapped_files'] = mapped_files(report['observation']['composition']['icon_manager']['pid'])
+                    report['icon_manager_mapped_files'] = (report['observation']['icon_recovery']['old_icon_mapped_files'] if icon_recovery else
+                                                          mapped_files(report['observation']['composition']['icon_manager']['pid']))
                     report['outcome'] = report['observation']['composition']['outcome']
                 elif not focus_baseline:
                     report['outcome'] = report['observation']['marker']['evaluation']['outcome'] if marker else 'pass'
@@ -436,7 +449,7 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
                     if result['icon_manager']:
                         report['icon_manager_mapped_files'] = mapped_files(result['icon_manager']['pid'])
                     report['outcome'] = 'pass'
-                if icon_input:
+                if icon_input and not icon_recovery:
                     report['outcome'] = report['observation']['icon_input']['outcome']
                     if report['observation']['icon_input'].get('error'):
                         report['error'] = report['observation']['icon_input']['error']
@@ -445,6 +458,10 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
                 if switcher:
                     report['switcher_mapped_files'] = {role:mapped_files(p.pid) for role,p in switcher_apps.items()}
                     report['outcome'] = report['observation']['switcher']['outcome']
+                if icon_recovery:
+                    report['outcome'] = report['observation']['icon_recovery']['outcome']
+                    if report['observation']['icon_recovery'].get('error'):
+                        report['error'] = report['observation']['icon_recovery']['error']
                 break
             if shell.poll() is not None:
                 raise RuntimeError('shell exited during bootstrap: ' + str(shell.returncode))
@@ -532,6 +549,10 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
             if path.exists():
                 report['switcher_journal'] = {'path':str(path),'bytes':path.stat().st_size,'sha256':sha(path)}
             report['switcher_launcher_inputs_after'] = inventory(workspace/'data/applications')
+        if icon_recovery:
+            path = workspace/'icon-recovery.jsonl'
+            if path.exists():
+                report['icon_recovery_journal'] = {'path':str(path),'bytes':path.stat().st_size,'sha256':sha(path)}
         if with_icons:
             report['fixture_after'] = {name: inventory(workspace / name) for name in ['home/Desktop', 'data/icons', 'config/gtk-3.0']}
             report['desktop_entries_after'] = sorted(p.relative_to(workspace / 'home/Desktop').as_posix()
@@ -567,9 +588,15 @@ if __name__ == '__main__':
     parser.add_argument('--icon-input', choices=('live', 'block-pointer', 'no-selection'))
     parser.add_argument('--wallpaper', choices=('live', 'replace-file', 'redirect-setting', 'cover-wallpaper'))
     parser.add_argument('--switcher', choices=('live','ordinary-window','no-switcher'))
+    parser.add_argument('--icon-recovery', choices=('live','frozen-surface','no-stop'))
     args = parser.parse_args()
     if args.focus_trace and not args.focus_baseline:
         parser.error('--focus-trace requires --focus-baseline')
+    if args.icon_recovery:
+        if args.marker or args.composition or args.reveal or args.focus_baseline or args.focus_trace or args.icon_input or args.wallpaper or args.switcher or args.marker_control != 'live':
+            parser.error('--icon-recovery owns the live composition and native input setup')
+        args.composition = 'live'
+        args.icon_input = 'live'
     if args.switcher:
         if args.marker or args.composition or args.reveal or args.focus_baseline or args.focus_trace or args.icon_input or args.wallpaper or args.marker_control != 'live':
             parser.error('--switcher owns the live composition prerequisite')
@@ -578,7 +605,7 @@ if __name__ == '__main__':
         if args.marker or args.composition or args.reveal or args.focus_baseline or args.focus_trace or args.icon_input or args.marker_control != 'live':
             parser.error('--wallpaper owns the live composition prerequisite')
         args.composition = 'live'
-    if args.icon_input:
+    if args.icon_input and not args.icon_recovery:
         if args.marker or args.composition or args.reveal or args.focus_baseline or args.focus_trace or args.marker_control != 'live':
             parser.error('--icon-input owns the live composition prerequisite')
         args.composition = 'live'
@@ -596,4 +623,4 @@ if __name__ == '__main__':
         parser.error('composition uses its own above/below controls')
     if not args.marker and args.marker_control != 'live':
         parser.error('--marker-control requires --marker')
-    sys.exit(run(owned_build(args.build_dir), args.marker or bool(args.composition), args.marker_control, args.composition, args.reveal, args.focus_baseline, args.focus_trace, args.icon_input, args.wallpaper, args.switcher))
+    sys.exit(run(owned_build(args.build_dir), args.marker or bool(args.composition), args.marker_control, args.composition, args.reveal, args.focus_baseline, args.focus_trace, args.icon_input, args.wallpaper, args.switcher, args.icon_recovery))

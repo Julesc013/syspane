@@ -14,6 +14,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Owned GNOME and DING composition checkpoint](gnome-composition-handoff.md) — Externally verify a live drawing between the synthetic wallpaper and real desktop icons, with two wrong-layer controls.
 - [Independent GNOME and DING focus comparison](gnome-focus-handoff.md) — The native focus and keyboard-delivery failure repeats without the SysPane bridge.
 - [Native Mutter focus-decision evidence](gnome-focus-trace-handoff.md) — Built-in native diagnostics bind the reproduced focus failure to desktop MRU selection.
+- [Native GNOME icon-manager recovery checkpoint](gnome-icon-recovery-handoff.md) — Owned DING replacement preserves live composition and replacement-bound input while independent fault controls remain failed.
 - [Native GNOME icon-input checkpoint](gnome-input-handoff.md) — Real DING selection, menus and owned folder activation pass beside the passive bridge, with calibrated blocking controls.
 - [Owned GNOME shell marker checkpoint](gnome-marker-handoff.md) — A real pinned shell bridge now presents changing externally decoded pixels; desktop composition remains open.
 - [Owned GNOME native reveal and failed focus restoration](gnome-reveal-handoff.md) — Live composition survives visible native hide/restore, while the required foreground focus remains failed.

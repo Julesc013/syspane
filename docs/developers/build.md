@@ -469,6 +469,29 @@ failed attempts and raw journals. GNOME's overview dash is the named running-app
 surface here; other taskbars require their own evidence. See the
 [application-list checkpoint](../../spec/delivery/gnome-switcher-handoff.md).
 
+The icon-manager recovery experiment stops only the exact held owned DING process,
+lets its unchanged native supervisor replace it, and observes live drawing and
+full icon input on the replacement:
+
+```text
+python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --icon-recovery live
+python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --icon-recovery frozen-surface
+python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --icon-recovery no-stop
+python3 build-support/record_gnome_icon_recovery.py --build-dir <owned-build-directory> --reports <three-recovery-reports> --output <new-owned-record>
+python3 tests/desktop/test_gnome_icon_recovery_record.py <owned-build-directory> <three-recovery-reports> -v
+```
+
+Complete the Windows coordinator's workspace-budget preflight before each run or
+verifier. These modes own their composition and private input prerequisites and
+cannot combine with other optional flags. Each attempt retains the ordinary
+40-second bound and owned cleanup. The recorder requires identical source/runtime
+inputs, held-process exit, native replacement ownership, original pixel witnesses
+and replacement-bound input. Frozen drawing must fail progress despite successful
+native replacement; omitted stop must fail replacement despite live drawing.
+Both controls return native exit 1 and leave dependent input unexecuted. Preserve
+all attempts and journals. Shell/compositor replacement and Show Desktop focus
+remain separate open gates; see the [checkpoint](../../spec/delivery/gnome-icon-recovery-handoff.md).
+
 For the historical shared-subset experiment, the existing Visual Studio 2017 XP
 toolset has its own preset. It compiles the same model, protocol/policy, recovery
 and diagnostic projection sources; modern native adapters require separate closure.

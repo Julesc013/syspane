@@ -11,7 +11,7 @@ from gnome_composition import FIXTURE, FIXTURE_PATH, judge_samples, png_icon
 from oracle import evaluate
 
 
-def validate(value, build, family='GNOME-COMPOSITION-01', outer_outcome=True):
+def validate(value, build, family='GNOME-COMPOSITION-01', outer_outcome=True, icon_exit=None):
     observation = validate_runtime(value, build, family, family + '-')
     result = observation['composition']
     control = result['control']
@@ -27,7 +27,13 @@ def validate(value, build, family='GNOME-COMPOSITION-01', outer_outcome=True):
         expected_script not in manager['arguments'] or manager['start_ticks'] <= 0):
         raise ValueError('native DING lifetime binding')
     retained = next(row for row in value['cleanup'] if row['process']=='shell')['members_before_stop']
-    if manager['pid'] not in [row['pid'] for row in retained if row['state']!='Z'] or manager['executable'] not in value['icon_manager_mapped_files']:
+    if icon_exit is None:
+        if manager['pid'] not in [row['pid'] for row in retained if row['state']!='Z']:
+            raise ValueError('icon manager was not retained through cleanup')
+    elif (family!='GNOME-ICON-RECOVERY-01' or icon_exit.get('event')!='exit-observed' or
+          icon_exit.get('pid')!=manager['pid'] or icon_exit.get('observer')!='pidfd' or icon_exit.get('readable') is not True):
+        raise ValueError('only the explicit recovery family admits independently observed old-icon exit')
+    if manager['executable'] not in value['icon_manager_mapped_files']:
         raise ValueError('icon manager was not retained through cleanup')
     identity = json.loads((build / 'gnome-lab/identity.json').read_text())
     prefix = 'usr/share/gnome-shell/extensions/ding@rastersoft.com/'

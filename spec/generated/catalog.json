@@ -357,7 +357,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "034aa35fda6063c2fb584e7e7a4275e48f59364bb6059a43dc02404e02bec360"
+      "sha256": "4f6cdd65dff8e0d0e8362d648383320b044bebe121f06bd9629d0e549e2311e1"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -440,6 +440,18 @@
       "sha256": "c6d4c0db6c9ccb518fbc3fef6a0d9ac14b3d60ec6774e493beb0126ebc800b6e"
     },
     {
+      "id": "SP-GNOME-ICON-RECOVERY-HANDOFF",
+      "path": "delivery/gnome-icon-recovery-handoff.md",
+      "title": "Native GNOME icon-manager recovery checkpoint",
+      "description": "Owned DING replacement preserves live composition and replacement-bound input while independent fault controls remain failed.",
+      "requires": [
+        "SP-W05-GNOME-ICON-RECOVERY",
+        "SP-GNOME-SWITCHER-HANDOFF",
+        "SP-CAMPAIGN-ADMISSION"
+      ],
+      "sha256": "597eb45afdbec55cde67e6c6d1f24a5c70cc2edcf3759e523f1ecd36a047a9c6"
+    },
+    {
       "id": "SP-GNOME-INPUT-HANDOFF",
       "path": "delivery/gnome-input-handoff.md",
       "title": "Native GNOME icon-input checkpoint",
@@ -518,7 +530,7 @@
       "requires": [
         "SP-CURRENT"
       ],
-      "sha256": "c42a77d2b5352777a8c39e14e71b67d035ad20900a43f08b4b4bf84f91b8e118"
+      "sha256": "82cf76e761df9cc1d92b53d92f2e722242921acec348bec0c9ba2ab4a4406cae"
     },
     {
       "id": "SP-MEASURED-TIME-HANDOFF",
@@ -680,6 +692,19 @@
         "SP-DESKTOP"
       ],
       "sha256": "004cd7aad03e2b39c00b3eeb5cb5fed67fc1bea76e562218c11d9f2aa006f27e"
+    },
+    {
+      "id": "SP-W05-GNOME-ICON-RECOVERY",
+      "path": "delivery/packages/w-05-gnome-icon-recovery.md",
+      "title": "W-05 native GNOME icon-manager recovery",
+      "description": "Confirm one owned DING lifetime ends, observe native replacement and pixels, then exercise input on the replacement.",
+      "requires": [
+        "SP-W05-GNOME-COMPOSITION",
+        "SP-W05-GNOME-INPUT",
+        "SP-DESKTOP",
+        "SP-ORACLE"
+      ],
+      "sha256": "33538f4fc00e7ab08b5675a2c87aab990d76fcc362527d719cf74697bf3d3966"
     },
     {
       "id": "SP-W05-GNOME-INPUT",

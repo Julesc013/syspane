@@ -79,6 +79,11 @@ now keeps the passive bridge out of GNOME's Alt+Tab switcher and overview dash.
 Actual normal-window and omitted-popup controls validate the observations; normal
 application switching and overview dismissal preserve focus. The separate Show
 Desktop focus failure and shell recovery remain open.
+A [native icon-manager recovery experiment](spec/delivery/gnome-icon-recovery-handoff.md)
+now confirms DING process replacement, continuing live drawing and usable icons
+after the fault. Held process identities distinguish replacement even when the
+window ID is reused. Frozen-drawing and omitted-stop controls fail independently.
+Shell/compositor recovery and the separate focus failure remain open.
 There is no usable SysPane desktop application or downloadable release yet.
 Desktop, screensaver and installer profiles remain unqualified.
 

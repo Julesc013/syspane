@@ -235,6 +235,16 @@ new verifier checks and 100 existing desktop checks pass. The first overbroad tr
 traversal and preliminary calibration remain preserved. Show Desktop focus,
 other taskbar/shell profiles and recovery remain separate open gates.
 
+The [native icon-manager recovery checkpoint](gnome-icon-recovery-handoff.md) now
+confirms exact owned DING exit and native replacement while the original shell and
+bridge remain alive. The replacement reuses the old XID; held process handles,
+start times and native resource ownership establish the distinct lifetime. Live
+generations, original icon composition and the full replacement-bound input sequence
+pass. Frozen-marker and omitted-stop controls fail their intended dimensions.
+Thirty-six new verifier checks and 134 existing desktop checks pass. The original
+invalid single-generation control remains preserved. Shell/compositor replacement,
+product continuity and the separate Show Desktop focus failure remain open.
+
 Canonical 0.2.0 documentation bundle, unchanged 0.1 authoring profile, preserved old
 fixtures, new experimental scene/command/capability 0.2 and admission descriptors.
 The initial settings registry has enforced metadata/default consistency and generated
@@ -274,7 +284,7 @@ License, contribution and release-identity decisions remain open.
 Continue the admitted campaign: use the calibrated GNOME/DING composition path and
 unchanged external marker oracle to resolve the independently reproduced DING/X11
 foreground-focus failure through a bounded integration contract informed by the
-observed native MRU selection. Continue wallpaper policy and shell/icon-manager
+observed native MRU selection. Continue wallpaper policy and shell/compositor
 recovery independently of that
 failure. The named GNOME/DING/PCManFM icon-input experiment now passes; other profiles
 need their own evidence. The named single-display PNG preservation experiment now
@@ -287,8 +297,9 @@ historical guest execution once guest test scope and usability are established.
 W-05's GNOME bridge now preserves the tested icon pixels, but remains unqualified
 after the failed focus restoration. The earlier EWMH window stacking candidates
 still fail composition even after the observed Openbox recovery.
-Product renderer/collector continuity, icon-manager/compositor
-restart and post-recovery input remain open. Continue other native tracks
+The named DING restart and replacement-bound input now pass independently;
+product renderer/collector continuity and shell/compositor restart remain open.
+Continue other native tracks
 independently of this negative result.
 W-25's [supervised network checkpoint](network-publication-handoff.md) connects
 real Linux acquisition, source lifetimes and measured receipt under independent

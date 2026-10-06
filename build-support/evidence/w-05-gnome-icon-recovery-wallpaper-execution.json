@@ -1,0 +1,158 @@
+[
+  {
+    "case": "live",
+    "phase": "preflight",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-06T03:20:42.898278+00:00",
+    "finished_at": "2026-10-06T03:20:43.228253+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 3221225472,\n  \"checkout_out_bytes\": 934783165,\n  \"linux_campaign_bytes\": 1796568614,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "case": "live",
+    "phase": "native",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "tests/desktop/native_gnome_bootstrap.py",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13",
+      "--wallpaper",
+      "live"
+    ],
+    "started_at": "2026-10-06T03:20:43.228737+00:00",
+    "finished_at": "2026-10-06T03:20:58.329988+00:00",
+    "exit": 0,
+    "stdout": "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-WALLPAPER-01-e24f50b2d7304344af5c1d71d8931ce5.json\npass owned shell and requested observations completed\n",
+    "stderr": ""
+  },
+  {
+    "case": "replace-file",
+    "phase": "preflight",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-06T03:20:58.330343+00:00",
+    "finished_at": "2026-10-06T03:20:58.677524+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 3221225472,\n  \"checkout_out_bytes\": 934784571,\n  \"linux_campaign_bytes\": 1800709817,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "case": "replace-file",
+    "phase": "native",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "tests/desktop/native_gnome_bootstrap.py",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13",
+      "--wallpaper",
+      "replace-file"
+    ],
+    "started_at": "2026-10-06T03:20:58.677913+00:00",
+    "finished_at": "2026-10-06T03:21:13.764407+00:00",
+    "exit": 1,
+    "stdout": "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-WALLPAPER-01-d117386cc4604fc9b1ca4a52b6410d96.json\nfail owned shell and requested observations completed\n",
+    "stderr": ""
+  },
+  {
+    "case": "redirect-setting",
+    "phase": "preflight",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-06T03:21:13.764932+00:00",
+    "finished_at": "2026-10-06T03:21:14.107955+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 3221225472,\n  \"checkout_out_bytes\": 934785998,\n  \"linux_campaign_bytes\": 1804850066,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "case": "redirect-setting",
+    "phase": "native",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "tests/desktop/native_gnome_bootstrap.py",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13",
+      "--wallpaper",
+      "redirect-setting"
+    ],
+    "started_at": "2026-10-06T03:21:14.108292+00:00",
+    "finished_at": "2026-10-06T03:21:29.171604+00:00",
+    "exit": 1,
+    "stdout": "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-WALLPAPER-01-a37142d2431c45b0b3ee7abc887208c2.json\nfail owned shell and requested observations completed\n",
+    "stderr": ""
+  },
+  {
+    "case": "cover-wallpaper",
+    "phase": "preflight",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-06T03:21:29.171996+00:00",
+    "finished_at": "2026-10-06T03:21:29.503532+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 3221225472,\n  \"checkout_out_bytes\": 934787437,\n  \"linux_campaign_bytes\": 1808991487,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "case": "cover-wallpaper",
+    "phase": "native",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "tests/desktop/native_gnome_bootstrap.py",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13",
+      "--wallpaper",
+      "cover-wallpaper"
+    ],
+    "started_at": "2026-10-06T03:21:29.503911+00:00",
+    "finished_at": "2026-10-06T03:21:44.594712+00:00",
+    "exit": 1,
+    "stdout": "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-WALLPAPER-01-f16992c7ad8e4daca19420ae877a1955.json\nfail owned shell and requested observations completed\n",
+    "stderr": ""
+  }
+]
