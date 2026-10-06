@@ -185,6 +185,9 @@ if(BUILD_TESTING)
         add_test(NAME native.GJS-NETWORK COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/desktop/native_gjs_network_view.py"
             "${CMAKE_BINARY_DIR}")
         set_tests_properties(native.GJS-NETWORK PROPERTIES TIMEOUT 60)
+        add_test(NAME native.GJS-LIVE COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/desktop/native_live_network.py"
+            "${CMAKE_BINARY_DIR}")
+        set_tests_properties(native.GJS-LIVE PROPERTIES TIMEOUT 100)
         find_package(X11 REQUIRED)
         add_library(syspane_x11_candidate STATIC source/desktop/x11/desktop_candidate.cpp)
         target_link_libraries(syspane_x11_candidate PRIVATE X11::X11 X11::Xext)

@@ -810,8 +810,8 @@ SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498 \
   ctest --preset linux-x64-gcc13 -R '^native.GJS-NETWORK$' --output-on-failure
 ```
 
-Use `record_protocol.py --gjs-network --profile linux-x64-gcc13 --build-dir
-<owned-build> --output <new-record>` after the complete current Linux suite. This
+The 109-entry checkpoint used `record_protocol.py --gjs-network --profile
+linux-x64-gcc13 --build-dir <owned-build> --output <new-record>`. This
 scope includes the original clock and all preceding regression families. It verifies
 the synthetic consumer's source/artifact identities, native age brackets, namespace,
 cleanup and held-peer exit. The standalone peer supplies clock/socket identity;
@@ -820,3 +820,26 @@ The Linux profile rebuilds the static dependency closure as position-independent
 code for the shared module. Before another desktop experiment, explicitly update
 the pinned collector/library evidence binding to this build and preserve its old
 record. The previous GNOME matrices keep their original artifact identities.
+
+The [live native session](../../spec/delivery/packages/w-25-live-network-session.md)
+adds `native.GJS-LIVE` to the current Linux suite. After the Windows workspace
+test preflight, run from the unprivileged Linux checkout:
+
+```sh
+SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498 \
+  ctest --preset linux-x64-gcc13 -R '^native.GJS-LIVE$' --output-on-failure
+```
+
+The runner starts real supervised collection and the same asynchronous
+`networkSession.js` owner intended for the shell. It tests `live`, `lease-loss`,
+`hang`, `revoke` and `parent-loss`. Each worker takes two real samples and deliberately
+holds the second while it ages. Private original-frame journals and consumer
+transcripts stay under mode-0700 native evidence directories, with mode-0600 files;
+public reports contain lifecycle facts and hashes, without raw interface counters.
+
+Record the complete current Linux suite with `record_protocol.py --live-network
+--profile linux-x64-gcc13 --build-dir <owned-build> --output <new-record>`. It includes
+both preceding GJS families and all native collector regressions. This evidence is
+standalone native delivery, not a visible desktop qualification. Before the next
+GNOME run, explicitly rebind its pinned collector/library record to this build;
+preserve the old public-clock and retained-cache records and acceptance criteria.

@@ -28,6 +28,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [W-25 native GJS measured network consumer](w-25-gjs-network-view.md) — Reuse the protocol, revocable data owner and measured network projection in the native shell process.
 - [W-25 asynchronous native shell clock and visible age](w-25-gnome-clock.md) — Qualify same-session clock ownership, native age progression and bounded teardown in the owned GNOME shell.
 - [W-25 independent native surface producer lease](w-25-gnome-surface-lease.md) — Observe producer expiry, disconnect, retained pixels and new-epoch resynchronization on the owned GNOME surface.
+- [W-25 live measured collector session for GJS](w-25-live-network-session.md) — Preserve original measured frames through a bounded supervised native session before visible desktop acceptance.
 - [W-25 measured telemetry and consumer freshness](w-25-measured-time.md) — Version measurement time and bind received values to a qualified consumer clock without refreshing replayed data.
 - [W-25 native measurement-clock investigation](w-25-measurement-clock.md) — Test a shared native time domain across authenticated local processes before admitting measured telemetry.
 - [W-25 native retained network cache and policy erasure](w-25-native-network-cache.md) — Bind real projected network values to an owned native cache, explicit retained presentation and independently observed revocation.

@@ -1,0 +1,77 @@
+[
+  {
+    "phase": "preflight",
+    "step": "test",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-06T08:46:23.389255+00:00",
+    "finished_at": "2026-10-06T08:46:30.636657+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 4294967296,\n  \"checkout_out_bytes\": 1102698393,\n  \"linux_campaign_bytes\": 2519411560,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "phase": "test",
+    "step": "test",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "out/campaign/run_live_network_step.py",
+      "linux-x64-gcc13",
+      "test"
+    ],
+    "started_at": "2026-10-06T08:46:30.637039+00:00",
+    "finished_at": "2026-10-06T08:48:49.851278+00:00",
+    "exit": 0,
+    "stdout": "  Passed    0.00 sec\n        Start  10: model.STATE-05\n 10/110 Test  #10: model.STATE-05 .....................   Passed    0.00 sec\n        Start  11: model.VALIDITY-01\n 11/110 Test  #11: model.VALIDITY-01 ..................   Passed    0.00 sec\n        Start  12: model.VALIDITY-02\n 12/110 Test  #12: model.VALIDITY-02 ..................   Passed    0.00 sec\n        Start  13: model.CLOCK-01\n 13/110 Test  #13: model.CLOCK-01 .....................   Passed    0.00 sec\n        Start  14: model.CLOCK-02\n 14/110 Test  #14: model.CLOCK-02 .....................   Passed    0.00 sec\n        Start  15: model.BOUNDS-01\n 15/110 Test  #15: model.BOUNDS-01 ....................   Passed    0.00 sec\n        Start  16: model.BOUNDS-02\n 16/110 Test  #16: model.BOUNDS-02 ....................   Passed    0.00 sec\n        Start  17: model.BOUNDS-03\n 17/110 Test  #17: model.BOUNDS-03 ....................   Passed    0.00 sec\n        Start  18: model.OBSERVATION-01\n 18/110 Test  #18: model.OBSERVATION-01 ...............   Passed    0.00 sec\n        Start  19: model.EPOCH-01\n 19/110 Test  #19: model.EPOCH-01 .....................   Passed    0.00 sec\n        Start  20: model.FRESHNESS-01\n 20/110 Test  #20: model.FRESHNESS-01 .................   Passed    0.00 sec\n        Start  21: model.smoke\n 21/110 Test  #21: model.smoke ........................   Passed    0.04 sec\n        Start  22: composition.graph\n 22/110 Test  #22: composition.graph ..................   Passed    0.06 sec\n        Start  23: composition.reject_forbidden\n 23/110 Test  #23: composition.reject_forbidden .......   Passed    0.12 sec\n        Start  24: subscription.SUB-ADMIT\n 24/110 Test  #24: subscription.SUB-ADMIT .............   Passed    0.02 sec\n        Start  25: subscription.SUB-QUEUE\n 25/110 Test  #25: subscription.SUB-QUEUE .............   Passed    0.04 sec\n        Start  26: subscription.SUB-LIFETIME\n 26/110 Test  #26: subscription.SUB-LIFETIME ..........   Passed    0.01 sec\n        Start  27: protocol.FRAME-01\n 27/110 Test  #27: protocol.FRAME-01 ..................   Passed    0.01 sec\n        Start  28: protocol.FRAME-02\n 28/110 Test  #28: protocol.FRAME-02 ..................   Passed    0.00 sec\n        Start  29: protocol.FRAME-03\n 29/110 Test  #29: protocol.FRAME-03 ..................   Passed    0.00 sec\n        Start  30: protocol.JSON-01\n 30/110 Test  #30: protocol.JSON-01 ...................   Passed    0.02 sec\n        Start  31: protocol.WIRE-01\n 31/110 Test  #31: protocol.WIRE-01 ...................   Passed    0.00 sec\n        Start  32: protocol.NEGOTIATE-01\n 32/110 Test  #32: protocol.NEGOTIATE-01 ..............   Passed    0.00 sec\n        Start  33: protocol.IPC-BUDGET-01\n 33/110 Test  #33: protocol.IPC-BUDGET-01 .............   Passed    0.00 sec\n        Start  34: protocol.IPC-BUDGET-02\n 34/110 Test  #34: protocol.IPC-BUDGET-02 .............   Passed    0.00 sec\n        Start  35: protocol.IPC-BUDGET-03\n 35/110 Test  #35: protocol.IPC-BUDGET-03 .............   Passed    0.00 sec\n        Start  36: protocol.IPC-BUDGET-04\n 36/110 Test  #36: protocol.IPC-BUDGET-04 .............   Passed    0.00 sec\n        Start  37: protocol.LEDGER-01\n 37/110 Test  #37: protocol.LEDGER-01 .................   Passed    0.10 sec\n        Start  38: protocol.POLICY-01\n 38/110 Test  #38: protocol.POLICY-01 .................   Passed    0.00 sec\n        Start  39: protocol.POLICY-02\n 39/110 Test  #39: protocol.POLICY-02 .................   Passed    0.00 sec\n        Start  40: protocol.DISCLOSURE-01\n 40/110 Test  #40: protocol.DISCLOSURE-01 .............   Passed    0.00 sec\n        Start  41: protocol.QUEUE-01\n 41/110 Test  #41: protocol.QUEUE-01 ..................   Passed    0.00 sec\n        Start  42: protocol.SESSION-01\n 42/110 Test  #42: protocol.SESSION-01 ................   Passed    0.01 sec\n        Start  43: protocol.dependencies\n 43/110 Test  #43: protocol.dependencies ..............   Passed    0.04 sec\n        Start  44: recovery.LEASE-01\n 44/110 Test  #44: recovery.LEASE-01 ..................   Passed    0.00 sec\n        Start  45: recovery.LEASE-02\n 45/110 Test  #45: recovery.LEASE-02 ..................   Passed    0.00 sec\n        Start  46: recovery.LEASE-03\n 46/110 Test  #46: recovery.LEASE-03 ..................   Passed    0.00 sec\n        Start  47: recovery.LEASE-04\n 47/110 Test  #47: recovery.LEASE-04 ..................   Passed    0.00 sec\n        Start  48: recovery.LEASE-05\n 48/110 Test  #48: recovery.LEASE-05 ..................   Passed    0.00 sec\n        Start  49: recovery.RENDER-01\n 49/110 Test  #49: recovery.RENDER-01 .................   Passed    0.00 sec\n        Start  50: recovery.RENDER-02\n 50/110 Test  #50: recovery.RENDER-02 .................   Passed    0.00 sec\n        Start  51: recovery.RETRY-01\n 51/110 Test  #51: recovery.RETRY-01 ..................   Passed    0.00 sec\n        Start  52: recovery.RETRY-02\n 52/110 Test  #52: recovery.RETRY-02 ..................   Passed    0.00 sec\n        Start  53: recovery.RETRY-03\n 53/110 Test  #53: recovery.RETRY-03 ..................   Passed    0.00 sec\n        Start  54: recovery.RECOVERY-CLOCK\n 54/110 Test  #54: recovery.RECOVERY-CLOCK ............   Passed    0.00 sec\n        Start  55: native.NATIVE-MEASURED\n 55/110 Test  #55: native.NATIVE-MEASURED .............   Passed    0.62 sec\n        Start  56: native.NATIVE-CLOCK\n 56/110 Test  #56: native.NATIVE-CLOCK ................   Passed    0.33 sec\n        Start  57: native.NATIVE-SUB\n 57/110 Test  #57: native.NATIVE-SUB ..................   Passed    3.50 sec\n        Start  58: native.NATIVE-01\n 58/110 Test  #58: native.NATIVE-01 ...................   Passed   25.70 sec\n        Start  59: native.NATIVE-02\n 59/110 Test  #59: native.NATIVE-02 ...................   Passed    3.87 sec\n        Start  60: native.RECOVERY-01\n 60/110 Test  #60: native.RECOVERY-01 .................   Passed   33.74 sec\n        Start  61: telemetry.TELEMETRY-SNAPSHOT\n 61/110 Test  #61: telemetry.TELEMETRY-SNAPSHOT .......   Passed    0.01 sec\n        Start  62: telemetry.TELEMETRY-MESSAGES\n 62/110 Test  #62: telemetry.TELEMETRY-MESSAGES .......   Passed    0.01 sec\n        Start  63: telemetry.TELEMETRY-GRAPH\n 63/110 Test  #63: telemetry.TELEMETRY-GRAPH ..........   Passed    0.02 sec\n        Start  64: telemetry.TELEMETRY-TIME\n 64/110 Test  #64: telemetry.TELEMETRY-TIME ...........   Passed    0.03 sec\n        Start  65: telemetry.TELEMETRY-BOUNDS\n 65/110 Test  #65: telemetry.TELEMETRY-BOUNDS .........   Passed    0.12 sec\n        Start  66: telemetry.TELEMETRY-PRESERVE\n 66/110 Test  #66: telemetry.TELEMETRY-PRESERVE .......   Passed    0.01 sec\n        Start  67: presentation.NVIEW-VALUES\n 67/110 Test  #67: presentation.NVIEW-VALUES ..........   Passed    0.01 sec\n        Start  68: presentation.NVIEW-FORMAT\n 68/110 Test  #68: presentation.NVIEW-FORMAT ..........   Passed    0.07 sec\n        Start  69: presentation.NVIEW-STATES\n 69/110 Test  #69: presentation.NVIEW-STATES ..........   Passed    0.01 sec\n        Start  70: presentation.NVIEW-SELECTION\n 70/110 Test  #70: presentation.NVIEW-SELECTION .......   Passed    0.00 sec\n        Start  71: presentation.NVIEW-BOUNDS\n 71/110 Test  #71: presentation.NVIEW-BOUNDS ..........   Passed    0.01 sec\n        Start  72: presentation.NVIEW-LIFETIME\n 72/110 Test  #72: presentation.NVIEW-LIFETIME ........   Passed    0.01 sec\n        Start  73: network.PUBLICATION-VALUES\n 73/110 Test  #73: network.PUBLICATION-VALUES .........   Passed    0.01 sec\n        Start  74: network.PUBLICATION-FAILURE\n 74/110 Test  #74: network.PUBLICATION-FAILURE ........   Passed    0.00 sec\n        Start  75: network.PUBLICATION-BOUNDARY\n 75/110 Test  #75: network.PUBLICATION-BOUNDARY .......   Passed    0.00 sec\n        Start  76: native.NATIVE-COLLECTOR\n 76/110 Test  #76: native.NATIVE-COLLECTOR ............   Passed   16.96 sec\n        Start  77: network.RECONCILE-IDENTITY\n 77/110 Test  #77: network.RECONCILE-IDENTITY .........   Passed    0.00 sec\n        Start  78: network.RECONCILE-CLOCK-RATE\n 78/110 Test  #78: network.RECONCILE-CLOCK-RATE .......   Passed    0.00 sec\n        Start  79: network.RECONCILE-CANCEL-FAILURE\n 79/110 Test  #79: network.RECONCILE-CANCEL-FAILURE ...   Passed    0.00 sec\n        Start  80: network.RECONCILE-CAPACITY\n 80/110 Test  #80: network.RECONCILE-CAPACITY .........   Passed    0.00 sec\n        Start  81: native.NATIVE-NETWORK\n 81/110 Test  #81: native.NATIVE-NETWORK ..............   Passed    1.05 sec\n        Start  82: network.NETWORK-NETLINK\n 82/110 Test  #82: network.NETWORK-NETLINK ............   Passed    0.00 sec\n        Start  83: network.NETWORK-NETLINK-REJECT\n 83/110 Test  #83: network.NETWORK-NETLINK-REJECT .....   Passed    0.00 sec\n        Start  84: network.NETWORK-WATCH-DECODE\n 84/110 Test  #84: network.NETWORK-WATCH-DECODE .......   Passed    0.00 sec\n        Start  85: measured.MEASURED-CODEC\n 85/110 Test  #85: measured.MEASURED-CODEC ............   Passed    0.01 sec\n        Start  86: measured.MEASURED-AGE\n 86/110 Test  #86: measured.MEASURED-AGE ..............   Passed    0.01 sec\n        Start  87: measured.MEASURED-REPLAY\n 87/110 Test  #87: measured.MEASURED-REPLAY ...........   Passed    0.01 sec\n        Start  88: measured.MEASURED-LIFETIME\n 88/110 Test  #88: measured.MEASURED-LIFETIME .........   Passed    0.01 sec\n        Start  89: measured.MEASURED-SESSION\n 89/110 Test  #89: measured.MEASURED-SESSION ..........   Passed    0.01 sec\n        Start  90: import.IMPORT-STATE\n 90/110 Test  #90: import.IMPORT-STATE ................   Passed    0.01 sec\n        Start  91: import.IMPORT-RETAIN\n 91/110 Test  #91: import.IMPORT-RETAIN ...............   Passed    0.02 sec\n        Start  92: import.IMPORT-COVERAGE\n 92/110 Test  #92: import.IMPORT-COVERAGE .............   Passed    0.01 sec\n        Start  93: import.IMPORT-REPLAY\n 93/110 Test  #93: import.IMPORT-REPLAY ...............   Passed    0.01 sec\n        Start  94: import.IMPORT-TIME\n 94/110 Test  #94: import.IMPORT-TIME .................   Passed    0.01 sec\n        Start  95: import.IMPORT-LIFETIME\n 95/110 Test  #95: import.IMPORT-LIFETIME .............   Passed    0.01 sec\n        Start  96: data.VIEW-ATOMIC\n 96/110 Test  #96: data.VIEW-ATOMIC ...................   Passed    0.01 sec\n        Start  97: data.VIEW-REPLAY\n 97/110 Test  #97: data.VIEW-REPLAY ...................   Passed    0.00 sec\n        Start  98: data.VIEW-RECONNECT\n 98/110 Test  #98: data.VIEW-RECONNECT ................   Passed    0.00 sec\n        Start  99: data.VIEW-LEASE\n 99/110 Test  #99: data.VIEW-LEASE ....................   Passed    0.00 sec\n        Start 100: data.VIEW-POLICY\n100/110 Test #100: data.VIEW-POLICY ...................   Passed    0.00 sec\n        Start 101: data.VIEW-FAULT\n101/110 Test #101: data.VIEW-FAULT ....................   Passed    0.00 sec\n        Start 102: diagnostic.DIAG-POLICY\n102/110 Test #102: diagnostic.DIAG-POLICY .............   Passed    0.02 sec\n        Start 103: diagnostic.DIAG-PROJECTION\n103/110 Test #103: diagnostic.DIAG-PROJECTION .........   Passed    0.00 sec\n        Start 104: diagnostic.FAILURE-CODEC\n104/110 Test #104: diagnostic.FAILURE-CODEC ...........   Passed    0.00 sec\n        Start 105: diagnostic.FAILURE-INTERRUPT\n105/110 Test #105: diagnostic.FAILURE-INTERRUPT .......   Passed    0.00 sec\n        Start 106: diagnostic.FAILURE-PROJECTION\n106/110 Test #106: diagnostic.FAILURE-PROJECTION ......   Passed    0.00 sec\n        Start 107: diagnostic.PRESERVE-POLICY\n107/110 Test #107: diagnostic.PRESERVE-POLICY .........   Passed    0.00 sec\n        Start 108: native.PRESERVE\n108/110 Test #108: native.PRESERVE ....................   Passed    3.96 sec\n        Start 109: native.FAILURE-STORE\n109/110 Test #109: native.FAILURE-STORE ...............   Passed    0.16 sec\n        Start 110: native.DIAG-01\n110/110 Test #110: native.DIAG-01 .....................   Passed    0.38 sec\n\n100% tests passed, 0 tests failed out of 110\n\nTotal Test time (real) = 133.91 sec\n\n\nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-25-live-network-session/linux-x64-gcc13-test-6fbfd28712\n",
+    "stderr": ""
+  },
+  {
+    "phase": "preflight",
+    "step": "package",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "package"
+    ],
+    "started_at": "2026-10-06T08:48:49.851650+00:00",
+    "finished_at": "2026-10-06T08:48:53.292211+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"package\",\n  \"maximum_bytes\": 4294967296,\n  \"checkout_out_bytes\": 1103469090,\n  \"linux_campaign_bytes\": 2524510251,\n  \"reserved_growth_bytes\": 33554432,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "phase": "package",
+    "step": "package",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "sh",
+      "build-support/run_foundation.sh",
+      "package"
+    ],
+    "started_at": "2026-10-06T08:48:53.292578+00:00",
+    "finished_at": "2026-10-06T08:49:02.070350+00:00",
+    "exit": 0,
+    "stdout": "{\"status\": \"pass\", \"result\": \"out/campaign/linux-x64-gcc13/smoke-lq___gj2/result.json\", \"archive_sha256\": \"775d9748c8aba7f9c98734a729db7a9ade9cef0a50383034063edafe1ef23a45\"}\n",
+    "stderr": ""
+  }
+]

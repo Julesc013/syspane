@@ -7,10 +7,14 @@
 #include "session.hpp"
 #include <array>
 #include <chrono>
+#include <cerrno>
 #include <cstdlib>
 #include <ctime>
 #include <iostream>
 #include <thread>
+#include <fcntl.h>
+#include <sys/stat.h>
+#include <unistd.h>
 
 namespace os=syspane::platform;namespace r=syspane::recovery;namespace n=syspane::runtime;
 namespace p=syspane::protocol;namespace c=syspane::configuration;namespace m=syspane::model;
@@ -33,13 +37,17 @@ Json hello(){return {{"type","hello"},{"body",{{"wire_major",0},{"wire_minor",1}
 class DataPipe {
 public:
     explicit DataPipe(os::Stream& stream):stream_(stream){}
-    std::vector<std::string> poll(){std::vector<std::string> values;std::array<char,16384> buffer{};
-        const auto input=stream_.read(buffer.data(),buffer.size(),1);if(input.eof){decoder_.eof();throw p::Error("collector.data_eof");}
+    std::vector<std::string> poll(bool allow_eof=false){std::vector<std::string> values;std::array<char,16384> buffer{};
+        const auto input=stream_.read(buffer.data(),buffer.size(),1);if(input.eof){decoder_.eof();ended_=true;
+            if(allow_eof)return values;
+            throw p::Error("collector.data_eof");}
         if(input.bytes)decoder_.feed(std::string_view(buffer.data(),input.bytes),input.observed_ms,[&](auto payload){
             need(values.size()<16,"collector.input_capacity");values.emplace_back(payload);});
         decoder_.tick(input.observed_ms);return values;}
-    void send(const std::string& payload){stream_.write(p::frame(payload),100);}
-private:os::Stream& stream_;p::Framer decoder_;
+    void send(const std::string& payload){stream_.write(p::frame(payload,limit_),100);}
+    bool ended()const{return ended_;}
+    void restrict_limit(std::size_t limit){decoder_.restrict_limit(limit);limit_=limit;}
+private:os::Stream& stream_;p::Framer decoder_;bool ended_=false;std::size_t limit_=p::frame_limit;
 };
 m::Tick tick(os::Stream& stream,const std::string& epoch){const auto now=stream.measurement_clock();return {epoch,now.nanoseconds,now.clock_id,now.local_scope};}
 
@@ -83,7 +91,7 @@ void worker(const std::string& address,const std::string& mode,const std::string
             need(state->demand(subscription->ticket)==n::NetworkStateCode::accepted,"collector.demand");
             if(mode=="replay"&&delivered==1&&!replayed){
                 need(sessions.offer("D",subscription->ticket,"network:1",replay,{},os::monotonic_ms()),"collector.replay_offer");replayed=true;
-            } else if(!publication||now-last_attempt>=1000){
+            } else if(!((mode=="stream-hold"||mode=="stream-hang")&&publication>=2)&&(!publication||now-last_attempt>=1000)){
                 last_attempt=now;const auto attempt_utc=utc();const auto begin=tick(data_stream,epoch);
                 const auto revision=state->revision();os::NetworkResult raw;
                 if(mode=="failure"&&publication==1)raw={os::NetworkCode::failed,5};
@@ -112,7 +120,7 @@ void worker(const std::string& address,const std::string& mode,const std::string
         }
         while(auto payload=sessions.pop("D",os::monotonic_ms())){
             const bool sample=p::decode(*payload).type=="snapshot";pipe.send(*payload);
-            if(sample){++delivered;if(mode=="hang"&&delivered==1)for(;;)pause(100);}
+            if(sample){++delivered;if((mode=="hang"&&delivered==1)||(mode=="stream-hang"&&delivered==2))for(;;)pause(100);}
         }
     }
     throw p::Error("collector.worker_deadline");
@@ -148,6 +156,96 @@ void projection(r::DataView& view,const char* event,std::uint64_t pid,const std:
     else syspane::rendering::project_network_retained(view,selected,os::monotonic_ms(),render);
 }
 void stopped(os::Child& child,const os::ChildExit& status,bool forced){emit({{"event","stopped"},{"pid",child.id()},{"code",status.code},{"signaled",status.signaled},{"forced",forced},{"os_confirmed",true}});}
+class PrivateJournal {
+    struct File {int fd=-1;~File(){if(fd>=0)::close(fd);}} file_;
+    std::size_t size_=0;
+public:
+    explicit PrivateJournal(const std::string& path){
+        const auto slash=path.find_last_of('/');need(slash!=std::string::npos&&slash&&slash+1<path.size(),"collector.journal_path");
+        const auto parent=path.substr(0,slash),name=path.substr(slash+1);
+        std::array<char,4096> resolved{};need(::realpath(parent.c_str(),resolved.data())&&parent==resolved.data(),"collector.journal_parent");
+        File directory;directory.fd=::open(parent.c_str(),O_DIRECTORY|O_NOFOLLOW|O_CLOEXEC|O_RDONLY);
+        struct stat info{};need(directory.fd>=0&&!::fstat(directory.fd,&info)&&info.st_uid==::geteuid()&&(info.st_mode&0777)==0700,"collector.journal_parent");
+        file_.fd=::openat(directory.fd,name.c_str(),O_CREAT|O_EXCL|O_NOFOLLOW|O_CLOEXEC|O_WRONLY,0600);
+        need(file_.fd>=0&&!::fstat(file_.fd,&info)&&S_ISREG(info.st_mode)&&info.st_nlink==1&&info.st_uid==::geteuid()&&(info.st_mode&0777)==0600,"collector.journal_file");
+    }
+    void record(Json value){
+        const auto raw=value.dump()+"\n";need(raw.size()<=4*1024*1024-size_,"collector.journal_capacity");
+        std::size_t offset=0;
+        while(offset<raw.size()){
+            const auto count=::write(file_.fd,raw.data()+offset,raw.size()-offset);
+            if(count<0&&errno==EINTR)continue;
+            need(count>0,"collector.journal_write");offset+=static_cast<std::size_t>(count);
+        }
+        size_+=raw.size();
+    }
+};
+void stream_session(const std::string& address,const std::string& mode,const std::string& journal_path){
+    need(mode=="hold"||mode=="lease-loss"||mode=="hang","collector.stream_mode");
+    const auto parent=static_cast<std::uint64_t>(::getppid());os::arm_parent_lifetime(parent);
+    os::Listener health_listener(address+"/h/s"),data_listener(address+"/d/s"),front_listener(address+"/v/s");
+    need(health_listener.access_controls_verified()&&data_listener.access_controls_verified()&&front_listener.access_controls_verified(),"collector.endpoint_controls");
+    PrivateJournal journal(journal_path);emit({{"event","ready"}});
+    auto front=front_listener.accept(parent);front.measurement_clock();DataPipe consumer(front);
+    const auto started=os::monotonic_ms();const auto epoch="collector:"+std::to_string(os::current_process_id())+":stream";
+    auto child=os::Child::launch_self({"worker",address,mode=="hang"?"stream-hang":"stream-hold",epoch,std::to_string(os::current_process_id())});
+    emit({{"event","spawned"},{"pid",child.id()},{"epoch",epoch}});
+    auto health_stream=health_listener.accept(child.id());r::HealthLink health(health_stream,true,"collector",epoch,"H");
+    auto source=data_listener.accept(child.id());DataPipe producer(source);
+    r::ProducerLease lease;std::uint64_t token=0,sent=0,last_sent=0,samples=0;
+    bool greeted=false,welcomed=false,normal=false,shutdown=false;std::string failure;
+    p::Handshake client{};
+    try{
+        for(;;){
+            const auto entered=os::monotonic_ms();need(entered-started<20000,"collector.stream_deadline");
+            need(welcomed||entered-started<5000,"collector.welcome_timeout");
+            for(const auto& event:health.poll()){
+                if(event.kind==r::HealthKind::ready){token=lease.attach("producer:network",epoch,event.observed_ms).token;
+                    emit({{"event","authenticated"},{"pid",child.id()},{"parent",parent}});}
+                else if(event.kind==r::HealthKind::heartbeat){const auto code=lease.heartbeat(token,event.value,event.observed_ms);
+                    need(code==r::Code::accepted||code==r::Code::duplicate,"collector.heartbeat");}
+                else throw p::Error("collector.health_direction");
+            }
+            const auto now=os::monotonic_ms();
+            if(health.ready()){
+                lease.tick(now);need(lease.view().alive,"collector.producer_expired");
+                if(!sent||now-last_sent>=1000){health.heartbeat(sent++);last_sent=now;}
+            }
+            for(const auto& bytes:consumer.poll(true)){
+                const auto message=p::decode(bytes);
+                if(!greeted){need(message.type=="hello","collector.stream_hello");client=p::handshake(message.body);
+                    need(client.role=="desktop","collector.stream_role");greeted=true;}
+                else {need(welcomed&&message.connection_id=="D"&&message.producer_epoch==epoch,"collector.stream_identity");
+                    need(message.type=="subscribe"||message.type=="heartbeat"||message.type=="shutdown","collector.stream_direction");}
+                producer.send(bytes);
+                if(message.type=="shutdown"){shutdown=true;normal=true;break;}
+            }
+            if(shutdown||consumer.ended()){normal=true;break;}
+            for(const auto& bytes:producer.poll()){
+                const auto message=p::decode(bytes);
+                need(greeted&&message.connection_id=="D"&&message.producer_epoch==epoch,"collector.stream_identity");
+                if(!welcomed){need(message.type=="welcome","collector.stream_welcome");const auto remote=p::handshake(message.body);
+                    need(remote.role=="console"&&remote.epoch==epoch,"collector.stream_welcome");
+                    const auto selected=p::negotiate(remote,client,{"desktop"});
+                    consumer.restrict_limit(selected.max_frame_bytes);producer.restrict_limit(selected.max_frame_bytes);welcomed=true;
+                }else need(message.type=="snapshot"||message.type=="heartbeat","collector.stream_direction");
+                const auto origin=source.measurement_clock(),destination=front.measurement_clock();
+                need(std::string(origin.clock_id)==destination.clock_id&&origin.local_scope==destination.local_scope,"collector.stream_clock");
+                if(message.type=="snapshot")++samples;
+                const bool dropped=mode=="lease-loss"&&samples>=2&&message.type=="heartbeat";
+                journal.record({{"payload",bytes},{"now_ns",std::to_string(origin.nanoseconds)},{"dropped",dropped}});
+                if(!dropped)consumer.send(bytes);
+            }
+            need(!child.wait(0),"collector.child_exited");
+        }
+    }catch(const p::Error& error){failure=error.what();}catch(const os::IpcError& error){failure=error.what();}
+    if(!shutdown)try{health.shutdown();}catch(const os::IpcError&){/* Exit is established below. */}catch(const p::Error&){}
+    auto status=child.wait(normal?1000:250);bool forced=false;
+    if(!status){child.request_stop();forced=true;status=child.wait(2000);}
+    need(status.has_value(),"collector.stop_unconfirmed");stopped(child,*status,forced);
+    if(!failure.empty())throw p::Error(failure.c_str());
+    need(normal&&!forced&&!status->signaled&&status->code==0,"collector.graceful_exit");emit({{"event","complete"}});
+}
 void supervisor(const std::string& address,const std::string& scenario){
     need(std::set<std::string>{"live","failure","replay","hang","crash","unsubscribe","revoke","parent-loss"}.count(scenario),"collector.scenario");
     os::Listener health_listener(address+"/h/s"),data_listener(address+"/d/s");
@@ -258,6 +356,7 @@ void supervisor(const std::string& address,const std::string& scenario){
 }
 int main(int argc,char** argv){try{need(os::unprivileged_context(),"collector.privileged_context");
     if(argc==4&&std::string(argv[1])=="supervisor")supervisor(argv[2],argv[3]);
+    else if(argc==5&&std::string(argv[1])=="stream")stream_session(argv[2],argv[3],argv[4]);
     else if(argc==6&&std::string(argv[1])=="worker"){const auto parent=p::decimal(argv[5]);need(parent&&*parent,"collector.parent");worker(argv[2],argv[3],argv[4],*parent);}
     else return 2;
     return 0;

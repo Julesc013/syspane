@@ -44,8 +44,11 @@ adds asynchronous attachment, visible public-sample age/expiry and native teardo
 Operational network freshness remains a separate integration gate.
 The [native GJS network consumer](spec/delivery/gjs-network-view-handoff.md) now
 reuses the shared C++ model, measured projection and revocable policy. Standalone
-fixtures check its exact values, age, lease and failure behavior; live collector
-delivery and network pixels remain the next integration boundary.
+fixtures check its exact values, age, lease and failure behavior. The
+[live native session](spec/delivery/live-network-session-handoff.md) now forwards
+real measured collector messages to an asynchronous GJS owner and tests source
+hang, policy erasure and parent loss. Displayed operational age and network pixels
+remain the next integration boundary.
 The [measured telemetry path](spec/delivery/measured-time-handoff.md) now preserves
 sample age through delay, replay and reconnect, with explicit clock scope and TTL checks.
 A [native network reader](spec/delivery/network-acquisition-handoff.md) now acquires

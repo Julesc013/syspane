@@ -358,7 +358,7 @@
         "SP-CAMPAIGN-ADMISSION",
         "SP-CURRENT"
       ],
-      "sha256": "01ee8553f7f9bcaa8851bce00c75abf52d22eb2a9e7491837478292c92f877e5"
+      "sha256": "38f06659e6ed0298c083e68c58e558ec389a385c5c737981e56e94c5d76e0c14"
     },
     {
       "id": "SP-CURRENT",
@@ -368,7 +368,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "e14b86672de9f64e3e4bfc1f543566e32397709ba1a80f4cbcfe9faa7f1da418"
+      "sha256": "31764a8418e7333138016b2a111c9ef8ef29a7fcb07028c8f6834553b67bb568"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -635,6 +635,17 @@
         "SP-CURRENT"
       ],
       "sha256": "c7b7870299f1fd65447397ab948b3e86432072054221c3ba649737840b95c093"
+    },
+    {
+      "id": "SP-LIVE-NETWORK-SESSION-HANDOFF",
+      "path": "delivery/live-network-session-handoff.md",
+      "title": "Live measured collector and asynchronous GJS session checkpoint",
+      "description": "Original real telemetry, native clock provenance and independent lifecycle evidence before operational shell pixels.",
+      "requires": [
+        "SP-W25-LIVE-NETWORK-SESSION",
+        "SP-CAMPAIGN-ADMISSION"
+      ],
+      "sha256": "0ea827c6c7c1bab0ffe12f4f4d9a2c9878c20c2e97e21bb30a70b4013cec4ad5"
     },
     {
       "id": "SP-MEASURED-TIME-HANDOFF",
@@ -1065,6 +1076,18 @@
         "SP-CAMPAIGN-ADMISSION"
       ],
       "sha256": "ff2edb10ed54466f1ff1e4392fc948fc7b5d3d42ac82fcf4e54fbc23874511d7"
+    },
+    {
+      "id": "SP-W25-LIVE-NETWORK-SESSION",
+      "path": "delivery/packages/w-25-live-network-session.md",
+      "title": "W-25 live measured collector session for GJS",
+      "description": "Preserve original measured frames through a bounded supervised native session before visible desktop acceptance.",
+      "requires": [
+        "SP-W25-GJS-NETWORK-VIEW",
+        "SP-W25-NETWORK-PUBLICATION",
+        "SP-W25-GNOME-CLOCK"
+      ],
+      "sha256": "2bc467d1ce834216a17b71f206950e26011d40248c54dd61a64ad133ba327c64"
     },
     {
       "id": "SP-W25-MEASURED-TIME",

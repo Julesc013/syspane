@@ -37,6 +37,14 @@
     <return-value transfer-ownership="full"><type name="utf8" c:type="gchar*"/></return-value>
     <parameters><instance-parameter name="self" transfer-ownership="none"><type name="NetworkView" c:type="SysPaneNetworkView*"/></instance-parameter><parameter name="bytes" transfer-ownership="none"><type name="GLib.Bytes" c:type="GBytes*"/></parameter></parameters>
    </method>
+   <method name="subscribe" c:identifier="syspane_network_view_subscribe" throws="1">
+    <return-value transfer-ownership="full"><type name="GLib.Bytes" c:type="GBytes*"/></return-value>
+    <parameters><instance-parameter name="self" transfer-ownership="none"><type name="NetworkView" c:type="SysPaneNetworkView*"/></instance-parameter></parameters>
+   </method>
+   <method name="heartbeat" c:identifier="syspane_network_view_heartbeat" throws="1">
+    <return-value transfer-ownership="full"><type name="GLib.Bytes" c:type="GBytes*"/></return-value>
+    <parameters><instance-parameter name="self" transfer-ownership="none"><type name="NetworkView" c:type="SysPaneNetworkView*"/></instance-parameter><parameter name="sequence" transfer-ownership="none"><type name="utf8" c:type="const gchar*"/></parameter></parameters>
+   </method>
    <method name="project" c:identifier="syspane_network_view_project" throws="1">
     <return-value transfer-ownership="full"><type name="utf8" c:type="gchar*"/></return-value>
     <parameters><instance-parameter name="self" transfer-ownership="none"><type name="NetworkView" c:type="SysPaneNetworkView*"/></instance-parameter></parameters>

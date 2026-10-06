@@ -1,0 +1,50 @@
+{
+  "case": "GJS-LIVE.HANG",
+  "outcome": "pass",
+  "command": [
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/bin/gjs",
+    "-m",
+    "/mnt/d/Projects/SysPane/syspane/tests/desktop/gjs_live_network.js",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/SysPane.CollectorProbe",
+    "/home/ir4runner/.cache/syspane/ipc-w24/case-ba3b16ad63b9",
+    "hang",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GJS-LIVE-hang-ba3b16ad63b9/producer.private.jsonl"
+  ],
+  "children": [
+    {
+      "role": "gjs",
+      "pid": 458,
+      "observer": "pidfd",
+      "observed_alive": true,
+      "observed_exited": true
+    },
+    {
+      "role": "supervisor",
+      "pid": 473,
+      "observer": "pidfd",
+      "observed_alive": true,
+      "observed_exited": true
+    },
+    {
+      "role": "worker",
+      "pid": 474,
+      "observer": "pidfd",
+      "observed_alive": true,
+      "observed_exited": true
+    }
+  ],
+  "watch_registered": true,
+  "same_time_namespace": true,
+  "projected_frames": 81,
+  "gjs_exit": 0,
+  "private_artifacts": {
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GJS-LIVE-hang-ba3b16ad63b9/consumer.private.json": {
+      "sha256": "d7e768e045e887af0ba7db3eeabb44b8aea113c2b36c00685bc0f02b33bea164",
+      "bytes": 250609
+    },
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GJS-LIVE-hang-ba3b16ad63b9/producer.private.jsonl": {
+      "sha256": "e74cf315e3d97cdc272568702b0c138c878f8fce587df0be32dae331a2468575",
+      "bytes": 12592
+    }
+  }
+}

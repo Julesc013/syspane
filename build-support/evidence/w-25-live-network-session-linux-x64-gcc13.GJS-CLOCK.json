@@ -1,0 +1,216 @@
+{
+  "family": "GJS-CLOCK",
+  "outcome": "pass",
+  "executed_at": "2026-10-06T08:46:35.995871+00:00",
+  "source_inputs": {
+    "CMakeLists.txt": "e6e87608de735f4adab2dadc47befb4de8147192f9ff1cfcc545afe91b26f249",
+    "build-support/components.json": "068e59d5c61e69c805ae83c0f709ba16c5b1f67fb65f2c286b0a4821110faf37",
+    "build-support/check_gjs_clock_dependencies.py": "c3c823946033a35ed58172471cd910f15c43967f2017e0d3051c3cf98ab4a7d1",
+    "build-support/prepare_gnome_lab.py": "c465e04fc55332602718176c192296eb1d91cc80348b64768ffe8669356e04b4",
+    "build-support/gnome-lab-packages.json": "0247c9bb465cdbfc2b900f3ff70cfa1d47fa9d657f37da210bd17dedef7ac3d0",
+    "build-support/targets/linux-x64-gcc13.json": "d60c68f33208eff243f7e74efd10006347a61d39f7697f63d293d3377212e588",
+    "source/platform/local_ipc.hpp": "89170c65417e043be4184b7cd3c569d8e2c28cb9e9229416dc9e43107fd2b91c",
+    "source/platform/local_ipc_linux.cpp": "350a6e59aec33504b74d2d126572afcf41e9519cf1cd8bfeda938bc4f6022ecb",
+    "source/desktop/gnome/native_clock.hpp": "bdc8302eb8ea24f8435fc8ebf39db17ddfe041f07c031fe8b33a5b1ef86de189",
+    "source/desktop/gnome/native_clock.cpp": "62dc94bd37cca0fb398b5ec1ac43a6bb5fe346ff786a87bc3d47e861f7f94f36",
+    "source/desktop/gnome/SysPaneClock-0.1.gir": "bbf0f9e5dc92b710afaa17f70975c83c6fd31e33e399bbc1c6eb57730415c681",
+    "tests/desktop/gjs_clock.js": "f7efc7afd968af92ab97903101555466a2dd60b221a7c1295a6125ddfd177873",
+    "tests/desktop/native_gjs_clock.py": "dd97247f22978bb1fbd27520112b13f5eb23d853d642bb73b6219dbe61da0017",
+    "spec/delivery/packages/w-25-gjs-clock.md": "f38e9efa86cd8ef27535e85bf8e2baabe0f4261ff739bc7be5c660ff44c35b8a"
+  },
+  "cases": [
+    {
+      "case": "GJS-CLOCK.REJECT",
+      "outcome": "pass",
+      "observation": {
+        "event": "ready",
+        "codes": [
+          "peer.handle",
+          "peer.process",
+          "peer.process",
+          "peer.socket",
+          "peer.socket",
+          "peer.socket",
+          "peer.socket",
+          "peer.socket",
+          "clock.closed"
+        ]
+      },
+      "borrowed_flags_unchanged": true
+    },
+    {
+      "case": "GJS-CLOCK.ROUNDTRIP",
+      "outcome": "pass",
+      "brackets_ns": [
+        [
+          "10947825300",
+          "10947913100",
+          "10948039800"
+        ],
+        [
+          "10948045200",
+          "10948086200",
+          "10948121000"
+        ],
+        [
+          "10948124200",
+          "10948150800",
+          "10948175900"
+        ],
+        [
+          "10948183100",
+          "10948212700",
+          "10948240700"
+        ],
+        [
+          "10948242500",
+          "10948268700",
+          "10948293900"
+        ],
+        [
+          "10948296100",
+          "10948319600",
+          "10948343600"
+        ],
+        [
+          "10948345500",
+          "10948368500",
+          "10948392500"
+        ],
+        [
+          "10948394500",
+          "10948417500",
+          "10948443100"
+        ],
+        [
+          "10948444800",
+          "10948467500",
+          "10948491600"
+        ],
+        [
+          "10948493500",
+          "10948516300",
+          "10948540300"
+        ],
+        [
+          "10948542000",
+          "10948588000",
+          "10948685700"
+        ],
+        [
+          "10948687600",
+          "10948718900",
+          "10948744600"
+        ],
+        [
+          "10948746500",
+          "10948770100",
+          "10948795000"
+        ],
+        [
+          "10948797000",
+          "10948820200",
+          "10948843400"
+        ],
+        [
+          "10948845200",
+          "10948868100",
+          "10948891200"
+        ],
+        [
+          "10948893100",
+          "10948916000",
+          "10948939100"
+        ]
+      ]
+    },
+    {
+      "case": "GJS-CLOCK.PEER-EXIT",
+      "outcome": "pass",
+      "native_pid": 387,
+      "native_exit": 0,
+      "pidfd_exit": true,
+      "observation": {
+        "event": "peer-exit",
+        "codes": [
+          "clock.peer_exited",
+          "clock.unavailable"
+        ]
+      }
+    },
+    {
+      "case": "GJS-CLOCK.CLOSE",
+      "outcome": "pass",
+      "cycles": 64,
+      "baseline_descriptors": {
+        "0": "pipe:[6370]",
+        "1": "pipe:[6371]",
+        "2": "pipe:[6372]",
+        "3": "anon_inode:[eventfd]",
+        "4": "anon_inode:[eventfd]",
+        "5": "socket:[1497]",
+        "6": "anon_inode:[eventfd]",
+        "7": "socket:[6364]",
+        "8": "socket:[6375]",
+        "9": "socket:[6365]",
+        "10": "socket:[6366]",
+        "11": "socket:[6374]",
+        "12": "socket:[6368]",
+        "13": "anon_inode:[pidfd]",
+        "14": "/dev/null",
+        "15": "time:[4026531834]"
+      },
+      "after_close_descriptors": {
+        "0": "pipe:[6370]",
+        "1": "pipe:[6371]",
+        "2": "pipe:[6372]",
+        "3": "anon_inode:[eventfd]",
+        "4": "anon_inode:[eventfd]",
+        "5": "socket:[1497]",
+        "6": "anon_inode:[eventfd]",
+        "7": "socket:[6364]",
+        "9": "socket:[6365]",
+        "10": "socket:[6366]",
+        "12": "socket:[6368]",
+        "14": "/dev/null"
+      }
+    }
+  ],
+  "qualification": "Standalone authenticated native GJS BOOTTIME only; no renderer age, suspend or namespace-change qualification.",
+  "source_archive_sha256": "03f61d9e9c66afbc098f05d9f9e1f5fe5780f0fe51a342f0cb46c5b030630147",
+  "build_dependencies": {
+    "/usr/bin/gi-compile-repository": "2400af6ecb249f0a75367550e3e4de0ebb396bd25805a216b4c84101bfdff6b9",
+    "/usr/lib/x86_64-linux-gnu/libgobject-2.0.so.0": "99bf0727e0ca4faf12ab09b753b3d03294562c29c559b970c4dad435f9ec2bc6",
+    "/usr/lib/x86_64-linux-gnu/libglib-2.0.so.0": "42467d0dbcc0a6c9e0a31f05a5944095504ce98f093c3fe0825f0a1533fa8207"
+  },
+  "artifacts": {
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/libsyspane_gjs_clock.so": "d9c5e38e5d0de589f6801e54752be4ab777a8e072131fbe3ccf0b82111098da7",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/SysPaneClock-0.1.typelib": "b91592a187a073fa0113fa14a40f05845cf3c0d3d4860567fa0211596b8db7c1",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/bin/gjs": "8fecb290aab1c6a3ee23fdd2b78ad5dc50a8e7c15319bb9bd787c2bc4bdc6378",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/identity.json": "eceddaf54ee63ca9da0d664f460b8865b67155da15516e3c07bab8cad44aa054"
+  },
+  "command": [
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/bin/gjs",
+    "-m",
+    "/mnt/d/Projects/SysPane/syspane/tests/desktop/gjs_clock.js",
+    "/home/ir4runner/.cache/syspane/ipc-w24/case-b0517d6734aa4097a669b517e38d8fa7/s",
+    "387",
+    "[7, 9, 10, 12, 14]"
+  ],
+  "processes": [
+    {
+      "pid": 387,
+      "exit": 0,
+      "forced_cleanup": false,
+      "remaining_stdout": "",
+      "stderr": ""
+    },
+    {
+      "pid": 388,
+      "exit": 0,
+      "forced_cleanup": false,
+      "remaining_stdout": "",
+      "stderr": ""
+    }
+  ]
+}

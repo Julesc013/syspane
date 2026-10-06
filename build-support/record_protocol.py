@@ -47,7 +47,10 @@ def main():
     parser.add_argument('--network-presentation', action='store_true', help='Require selected measured network renderer projection and prior regressions')
     parser.add_argument('--gjs-clock', action='store_true', help='Require standalone Linux native GJS clock and all prior regressions')
     parser.add_argument('--gjs-network', action='store_true', help='Require standalone GJS measured model consumer and prior regressions')
+    parser.add_argument('--live-network', action='store_true', help='Require real supervised collector delivery through the asynchronous GJS owner')
     args = parser.parse_args()
+    if args.live_network:
+        args.gjs_network = True
     if args.gjs_network:
         args.gjs_clock = True
     if args.gjs_clock:
@@ -143,6 +146,8 @@ def main():
         expected.add('native.GJS-CLOCK')
     if args.gjs_network:
         expected.add('native.GJS-NETWORK')
+    if args.live_network:
+        expected.add('native.GJS-LIVE')
     if len(cases) != len(expected) or {case['case'] for case in cases} != expected or any(case['outcome'] != 'pass' for case in cases):
         raise ValueError('missing, repeated, unexpected or failing case; preserve log before rerun')
     suffix = '.exe' if platform.system() == 'Windows' else ''
@@ -233,6 +238,8 @@ def main():
         if args.gjs_network:
             required['GJS-NETWORK'] = {'ADMISSION', 'VALUES', 'AGE-REPLAY', 'LEASE-POLICY', 'GAP', 'RETAIN',
                 'REPLAY-CONFLICT', 'NEGOTIATION', 'REJECT', 'DEADLINE', 'CLEANUP', 'PEER-EXIT'}
+        if args.live_network:
+            required['GJS-LIVE'] = {'LIVE', 'LEASE-LOSS', 'HANG', 'REVOKE', 'PARENT-LOSS'}
         if args.preservation:
             for name in ('syspane_preservation_tests'+suffix, 'libsyspane_preservation_job.a'):
                 artifacts[name] = {'sha256': sha(build/name), 'bytes': (build/name).stat().st_size}
@@ -264,15 +271,27 @@ def main():
                     raise ValueError('Windows reparse case must execute or retain its exact privilege limitation')
             if native['outcome'] != 'pass' or len(native['cases']) != len(expected_cases) or {case['case'] for case in native['cases']} != expected_cases or any(case['outcome'] != 'pass' for case in native['cases']):
                 raise ValueError('native case missing or failed; preserve original report')
-            if family in ('GJS-CLOCK', 'GJS-NETWORK'):
+            if family in ('GJS-CLOCK', 'GJS-NETWORK', 'GJS-LIVE'):
                 for source, digest in native['source_inputs'].items():
                     if sha(ROOT/source) != digest:
                         raise ValueError('GJS source changed after native run: '+source)
                 for artifact, digest in {**native['artifacts'], **native['build_dependencies']}.items():
                     if sha(Path(artifact)) != digest:
                         raise ValueError('GJS artifact/dependency changed after run')
-                if len(native['processes']) != 2 or any(p['exit'] != 0 or p['forced_cleanup'] or p['stderr'] or p['remaining_stdout'] for p in native['processes']):
+                if family != 'GJS-LIVE' and (len(native['processes']) != 2 or any(p['exit'] != 0 or p['forced_cleanup'] or p['stderr'] or p['remaining_stdout'] for p in native['processes'])):
                     raise ValueError('GJS native process completion differs')
+            if family == 'GJS-LIVE':
+                for case in native['cases']:
+                    if case.get('failure') or case['projected_frames'] < 2 or not case['watch_registered'] or not case['same_time_namespace']:
+                        raise ValueError('Live native stream coverage missing')
+                    if len(case['children']) != 3 or {c['role'] for c in case['children']} != {'gjs', 'supervisor', 'worker'} or not all(c['observer']=='pidfd' and c['observed_alive'] and c['observed_exited'] for c in case['children']):
+                        raise ValueError('Live native child lifetime proof missing')
+                    if case['gjs_exit'] != (-9 if case['case']=='GJS-LIVE.PARENT-LOSS' else 0):
+                        raise ValueError('Live native owner exit differs')
+                    for filename, artifact in case['private_artifacts'].items():
+                        private = Path(filename)
+                        if not private.resolve().is_relative_to(build/'native-evidence') or private.stat().st_mode & 0o777 != 0o600 or sha(private) != artifact['sha256'] or private.stat().st_size != artifact['bytes']:
+                            raise ValueError('Live native private evidence identity differs')
             if family == 'GJS-NETWORK':
                 if native.get('failure') or not native.get('calls'):
                     raise ValueError('GJS network observations missing or failed')
@@ -406,6 +425,8 @@ def main():
         paths.append(ROOT/'spec/delivery/packages/w-25-gjs-clock.md')
     if args.gjs_network:
         paths.append(ROOT/'spec/delivery/packages/w-25-gjs-network-view.md')
+    if args.live_network:
+        paths.append(ROOT/'spec/delivery/packages/w-25-live-network-session.md')
     for directory in ('source', 'tests', 'build-support', 'spec/contracts'):
         paths.extend(sorted((ROOT/directory).rglob('*')))
     inputs = {p.relative_to(ROOT).as_posix(): sha(p) for p in paths
@@ -584,6 +605,10 @@ def main():
         report['slice'] = 'standalone native GJS measured model consumer with typed revocable policy'
         report['bindings']['gjs_network'] = 'spec/delivery/packages/w-25-gjs-network-view.md'
         report['limits'][0] = 'The native GJS consumer reuses DataView and network projection with synthetic input from its serialized fixture owner. Operational collector forwarding, shell network age/pixels, installed policy and complete desktop recovery remain unqualified by this record.'
+    if args.live_network:
+        report['slice'] = 'real supervised collector forwarding and asynchronous native GJS consumer'
+        report['bindings']['live_network'] = 'spec/delivery/packages/w-25-live-network-session.md'
+        report['limits'][0] = 'Two actual measured samples are forwarded unchanged to the native GJS owner, then deliberately held while age/lease behavior is observed. Source hang, revocation and parent loss have native exit proof. This standalone evidence does not qualify shell pixels, installed policy, continuous production collection or complete desktop recovery. Operational artifacts remain private.'
     args.output.parent.mkdir(parents=True, exist_ok=True)
     log_output.write_text(raw.replace(str(build), '<build>').replace(str(ROOT), '<source>'), encoding='utf-8', newline='\n')
     args.output.write_text(json.dumps(report, indent=2)+'\n', encoding='utf-8', newline='\n')

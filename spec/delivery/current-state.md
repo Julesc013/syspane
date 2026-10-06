@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-06T08:22:07Z", "scope": "Standalone native GJS measured network consumer and next live delivery boundary"}
+updated: {"by": "codex", "at": "2026-10-06T08:49:39.784370+00:00", "scope": "Real measured collector forwarding and asynchronous GJS native session"}
 ---
 
 # Current state and next admitted boundary
@@ -328,6 +328,13 @@ counter/rate text, original metadata and age, replay conflicts, producer lease,
 revocation/regrant, deadlines and deterministic native resource release. This
 component gate does not qualify operational network delivery or shell pixels.
 
+The [live native session](live-network-session-handoff.md) now forwards two original
+real measured publications through the existing collector supervisor to an
+asynchronous GJS owner. The source remains alive while the second sample ages.
+Standalone cases cover original values/metadata, data-lease loss, worker hang,
+revocation and parent death with held native process identities. The same owner
+still needs shell rendering and independently observed operational pixels/age.
+
 Canonical 0.2.0 documentation bundle, unchanged 0.1 authoring profile, preserved old
 fixtures, new experimental scene/command/capability 0.2 and admission descriptors.
 The initial settings registry has enforced metadata/default consistency and generated
@@ -398,9 +405,10 @@ child supervision. The native surface demonstrates retained public-marker recove
 and the shared projection now closes measured values and status semantics.
 The explicit retained cache now proves bounded native admission and policy/owner-loss
 erasure with real value pixels. The native GJS consumer now supplies the shared
-model semantics inside the shell runtime. Close the live supervised collector's
-forwarding/teardown contract, then connect original measured messages through this
-owner and the asynchronous clock path. Preserve original timestamps and exercise independent
+model semantics inside the shell runtime. The supervised forwarding/session boundary
+now passes real standalone delivery and native fault/exit checks. Use that same
+asynchronous owner in the owned GNOME composition, independently verify actual
+value/age/expiry pixels and policy erasure, and exercise independent
 lease faults, then connect product controller policy/demand, general delivery queues
 and renderer supervision.
 Actual native topology faults and Windows full-table notification

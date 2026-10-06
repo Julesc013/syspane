@@ -50,6 +50,11 @@ Live supervised forwarding and actual operational shell age remain open. Its thr
 new model smoke records use `build-support/evidence/w-25-gjs-network-view-*.smoke.json`;
 the earlier records above remain historical.
 
+The [live native session](live-network-session-handoff.md) subsequently connects
+actual supervised collector messages to the asynchronous GJS owner and observes
+data-lease loss, worker hang, revocation and parent death. This closes the standalone
+forwarding prerequisite. Operational shell pixels and complete recovery remain open.
+
 No row above removes native settings, direct editing, persistence, real telemetry
 or recovery from the first complete desktop edition. No synthetic marker, model
 archive or retained sample tile is called that edition. Repository-only cold-start

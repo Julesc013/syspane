@@ -181,6 +181,23 @@ SysPaneNetworkView* syspane_network_view_new_from_socket(gint fd, guint pid, con
 GBytes* syspane_network_view_hello(SysPaneNetworkView* self, GError** error) {
     return guarded<GBytes*>(self, error, [](Consumer&) { return framed(hello()); });
 }
+GBytes* syspane_network_view_subscribe(SysPaneNetworkView* self, GError** error) {
+    return guarded<GBytes*>(self, error, [](Consumer& state) {
+        need(state.welcomed && state.permit && !state.obsolete, "network.subscription");
+        return framed({{"type", "subscribe"}, {"connection_id", state.connection}, {"producer_epoch", state.epoch},
+            {"body", {{"schema_version", "0.2.0"}, {"subscription_id", "S"}, {"producer_id", "producer:network"},
+                {"policy_revision", std::to_string(state.revision)}, {"channel", "desktop"}, {"classification", "operational"},
+                {"clock_id", state.tick().clock_id}}}});
+    });
+}
+GBytes* syspane_network_view_heartbeat(SysPaneNetworkView* self, const gchar* sequence, GError** error) {
+    return guarded<GBytes*>(self, error, [&](Consumer& state) {
+        need(state.welcomed && state.permit && !state.obsolete, "network.subscription");
+        need(sequence && p::decimal(sequence).has_value(), "network.sequence");
+        return framed({{"type", "heartbeat"}, {"connection_id", state.connection}, {"producer_epoch", state.epoch},
+            {"body", {{"sequence", sequence}}}});
+    });
+}
 gchar* syspane_network_view_feed(SysPaneNetworkView* self, GBytes* bytes, GError** error) {
     return guarded<gchar*>(self, error, [&](Consumer& state) {
         if (!state.permit) return g_strdup("restricted");

@@ -7,6 +7,8 @@ G_DECLARE_FINAL_TYPE(SysPaneNetworkView, syspane_network_view, SYSPANE, NETWORK_
 SysPaneNetworkView* syspane_network_view_new_from_socket(gint fd, guint expected_pid,
     const gchar* revision, gboolean permit, GError** error);
 GBytes* syspane_network_view_hello(SysPaneNetworkView* self, GError** error);
+GBytes* syspane_network_view_subscribe(SysPaneNetworkView* self, GError** error);
+GBytes* syspane_network_view_heartbeat(SysPaneNetworkView* self, const gchar* sequence, GError** error);
 gchar* syspane_network_view_feed(SysPaneNetworkView* self, GBytes* bytes, GError** error);
 gchar* syspane_network_view_project(SysPaneNetworkView* self, GError** error);
 gchar* syspane_network_view_policy(SysPaneNetworkView* self, const gchar* revision,
