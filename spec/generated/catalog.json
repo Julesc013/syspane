@@ -357,7 +357,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "4f6cdd65dff8e0d0e8362d648383320b044bebe121f06bd9629d0e549e2311e1"
+      "sha256": "81671f188c8dbaff15b88934d30085db082475c01e024a3364167863be782899"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -488,6 +488,18 @@
       "sha256": "1d84beec8b2032908e360bbd72e8e1ca6d7a3f5d2a48ea676c82542d0a4b55c6"
     },
     {
+      "id": "SP-GNOME-SHELL-RECOVERY-HANDOFF",
+      "path": "delivery/gnome-shell-recovery-handoff.md",
+      "title": "Owned GNOME shell/compositor recovery checkpoint",
+      "description": "Exact shell exit, native replacement, bridge reattachment and new-desktop input pass independently of calibrated omissions.",
+      "requires": [
+        "SP-W05-GNOME-SHELL-RECOVERY",
+        "SP-GNOME-ICON-RECOVERY-HANDOFF",
+        "SP-CAMPAIGN-ADMISSION"
+      ],
+      "sha256": "042b41d1f42ad4e75a8aa88891342a4ef68cda11b139462fa566ea0aca9fe571"
+    },
+    {
       "id": "SP-GNOME-SWITCHER-HANDOFF",
       "path": "delivery/gnome-switcher-handoff.md",
       "title": "Native GNOME application-list checkpoint",
@@ -530,7 +542,7 @@
       "requires": [
         "SP-CURRENT"
       ],
-      "sha256": "82cf76e761df9cc1d92b53d92f2e722242921acec348bec0c9ba2ab4a4406cae"
+      "sha256": "287ededa4387f0bdf452bf3e16e71068619a942077a9644b4e721116a418a1e8"
     },
     {
       "id": "SP-MEASURED-TIME-HANDOFF",
@@ -742,6 +754,19 @@
         "SP-DESKTOP"
       ],
       "sha256": "fd4a26b426b4a666bba06059bcc5561e267d930dfdc456e2eefbe165ce7a47ee"
+    },
+    {
+      "id": "SP-W05-GNOME-SHELL-RECOVERY",
+      "path": "delivery/packages/w-05-gnome-shell-recovery.md",
+      "title": "W-05 owned GNOME shell/compositor replacement",
+      "description": "Observe exact shell exit, native replacement, bridge reattachment and input on the replacement desktop.",
+      "requires": [
+        "SP-W05-GNOME-ICON-RECOVERY",
+        "SP-W05-GNOME-COMPOSITION",
+        "SP-W05-GNOME-INPUT",
+        "SP-ORACLE"
+      ],
+      "sha256": "f6c87fc6073785eedc3b1f8eab916370f394cc577e5ca71a4ba38f24e9fbaf6a"
     },
     {
       "id": "SP-W05-GNOME-SWITCHER",

@@ -492,6 +492,27 @@ Both controls return native exit 1 and leave dependent input unexecuted. Preserv
 all attempts and journals. Shell/compositor replacement and Show Desktop focus
 remain separate open gates; see the [checkpoint](../../spec/delivery/gnome-icon-recovery-handoff.md).
 
+The shell/compositor experiment replaces only the exact owned GNOME process while
+retaining Xvfb and private buses, then checks bridge reattachment and new-desktop input:
+
+```text
+python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --shell-recovery live
+python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --shell-recovery no-reattach
+python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --shell-recovery no-restart
+python3 build-support/record_gnome_shell_recovery.py --build-dir <owned-build-directory> --reports <three-shell-recovery-reports> --output <new-owned-record>
+python3 tests/desktop/test_gnome_shell_recovery_record.py <owned-build-directory> <three-shell-recovery-reports> -v
+```
+
+Complete the Windows coordinator's workspace-budget preflight before each run or
+verifier. These modes own their live composition/private input setup and exclude
+other optional flags. The observer holds original shell/DING process handles; the
+parent retains one replacement launched only after confirmed original shell exit.
+Keep the complete outage journal and original pixel calibration. Omitted reattachment
+must fail drawing despite native recovery; omitted restart must fail recovery.
+These controls return native exit 1 and leave dependent input unexecuted. The named
+experiment does not qualify a real session manager or product continuity. See the
+[shell recovery checkpoint](../../spec/delivery/gnome-shell-recovery-handoff.md).
+
 For the historical shared-subset experiment, the existing Visual Studio 2017 XP
 toolset has its own preset. It compiles the same model, protocol/policy, recovery
 and diagnostic projection sources; modern native adapters require separate closure.

@@ -186,6 +186,13 @@ from visual progress. Thirty-six new verifier checks and 134 desktop regressions
 pass; the first invalid control remains preserved. Shell/compositor replacement,
 product continuity and the separate Show Desktop focus failure remain open.
 
+The [owned GNOME shell/compositor checkpoint](gnome-shell-recovery-handoff.md)
+now verifies exact shell exit, one native replacement, bridge reattachment and
+input on the new desktop. Native recovery without reattachment fails the external
+drawing oracle; omitted restart cannot pass. Forty-five new verifier checks and
+170 regressions pass. Actual session-manager supervision, product continuity,
+wallpaper policy and the separately failed focus-restoration gate remain open.
+
 Use the proposed cold-start exercise to detect missing observable contracts.
 Private implementation differences are permissible. Missing laboratories remain
 blocked qualification. A finite release scope must identify exact profiles,

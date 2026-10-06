@@ -11,8 +11,8 @@ from gnome_composition import FIXTURE, FIXTURE_PATH, judge_samples, png_icon
 from oracle import evaluate
 
 
-def validate(value, build, family='GNOME-COMPOSITION-01', outer_outcome=True, icon_exit=None):
-    observation = validate_runtime(value, build, family, family + '-')
+def validate(value, build, family='GNOME-COMPOSITION-01', outer_outcome=True, icon_exit=None, shell_exit=None):
+    observation = validate_runtime(value, build, family, family + '-', shell_exit=shell_exit)
     result = observation['composition']
     control = result['control']
     if control not in {'live', 'above-icons', 'below-wallpaper'} or value['composition_control'] != control or value['environment']['explicit']['SYSPANE_GNOME_COMPOSITION'] != control:
@@ -30,7 +30,7 @@ def validate(value, build, family='GNOME-COMPOSITION-01', outer_outcome=True, ic
     if icon_exit is None:
         if manager['pid'] not in [row['pid'] for row in retained if row['state']!='Z']:
             raise ValueError('icon manager was not retained through cleanup')
-    elif (family!='GNOME-ICON-RECOVERY-01' or icon_exit.get('event')!='exit-observed' or
+    elif (family not in ['GNOME-ICON-RECOVERY-01','GNOME-SHELL-RECOVERY-01'] or icon_exit.get('event')!='exit-observed' or
           icon_exit.get('pid')!=manager['pid'] or icon_exit.get('observer')!='pidfd' or icon_exit.get('readable') is not True):
         raise ValueError('only the explicit recovery family admits independently observed old-icon exit')
     if manager['executable'] not in value['icon_manager_mapped_files']:

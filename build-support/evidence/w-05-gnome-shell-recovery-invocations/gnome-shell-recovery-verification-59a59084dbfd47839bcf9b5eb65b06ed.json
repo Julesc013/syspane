@@ -1,0 +1,48 @@
+[
+  {
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "source_inputs": {
+      "build-support/check_workspace_budget.py": "3a9ec8bf7f4f205e1986d19b523d57b41288936e3343910f80b460d71474b700"
+    },
+    "started_at": "2026-10-06T03:36:16.735425+00:00",
+    "finished_at": "2026-10-06T03:36:46.358688+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 3221225472,\n  \"checkout_out_bytes\": 934886930,\n  \"linux_campaign_bytes\": 1854863862,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "build-support/record_gnome_shell_recovery.py",
+      "--build-dir",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13",
+      "--reports",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-SHELL-RECOVERY-01-f5fdb9b7b04141da87f289c0a6ce47c5.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-SHELL-RECOVERY-01-b1ae51c52daf46dfb68ee4e09d6ab232.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-SHELL-RECOVERY-01-f052067745754de48592b71a4f238cec.json",
+      "--output",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/gnome-shell-recovery-calibration-59a59084dbfd47839bcf9b5eb65b06ed.json"
+    ],
+    "source_inputs": {
+      "build-support/record_gnome_shell_recovery.py": "5ba1efbc6cd8479a46263f748faf523307185aa08b7189ed911303ae21940f6e"
+    },
+    "started_at": "2026-10-06T03:36:46.359123+00:00",
+    "finished_at": "2026-10-06T03:36:47.000833+00:00",
+    "exit": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/build-support/record_gnome_shell_recovery.py\", line 128, in <module>\n    if __name__=='__main__':main()\n                            ^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/build-support/record_gnome_shell_recovery.py\", line 111, in main\n    raw=path.read_bytes();value=json.loads(raw);results.append(validate(value,build))\n                                                               ^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/build-support/record_gnome_shell_recovery.py\", line 37, in validate\n    raise ValueError('mapped native runtime differs')\nValueError: mapped native runtime differs\n"
+  }
+]

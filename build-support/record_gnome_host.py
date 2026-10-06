@@ -31,7 +31,7 @@ def rgb(value, size):
     return raw
 
 
-def validate_runtime(value, build, family, prefix):
+def validate_runtime(value, build, family, prefix, shell_exit=None):
     if value['family'] != family or value.get('error'):
         raise ValueError('completed native record required')
     workspace = Path(value['workspace']).resolve(strict=True)
@@ -56,8 +56,15 @@ def validate_runtime(value, build, family, prefix):
     if observation['outcome'] != 'pass':
         raise ValueError('native observation incomplete')
     shell = [c for c in value['commands'] if c['command'][0].endswith('/usr/bin/gnome-shell')]
-    if len(shell) != 1:
+    recovering = shell_exit is not None
+    if recovering and (family != 'GNOME-SHELL-RECOVERY-01' or shell_exit.get('event') != 'shell-exit' or
+                       shell_exit.get('observer') != 'pidfd' or shell_exit.get('readable') is not True):
+        raise ValueError('only explicit shell recovery admits independently observed shell exit')
+    expected_shells = 1 if not recovering or value['shell_recovery_control'] == 'no-restart' else 2
+    if len(shell) != expected_shells or (recovering and shell_exit['pid'] != shell[0]['pid']):
         raise ValueError('shell command identity')
+    if len(shell) == 2 and (shell[1]['command'] != shell[0]['command'] or shell[1]['pid'] == shell[0]['pid']):
+        raise ValueError('replacement must use identical command and distinct native child')
     manager = observation['manager']
     if manager['pid'] != [shell[0]['pid']] or manager['self'] != [manager['window']] or manager['pid_origin'] != 'XResQueryClientIds' or manager['window'] & ~manager['resource_mask'] != manager['resource_base']:
         raise ValueError('native manager binding')
@@ -65,9 +72,11 @@ def validate_runtime(value, build, family, prefix):
     for key, directory in [('HOME', 'home'), ('XDG_CONFIG_HOME', 'config'), ('XDG_DATA_HOME', 'data'), ('XDG_RUNTIME_DIR', 'run')]:
         if environment[key] != str(workspace / directory):
             raise ValueError('owned environment differs')
-    for phase in ('bus', 'system-bus', 'shell', 'observer', 'Xvfb'):
+    phases = ['bus', 'system-bus', 'shell', 'observer', 'Xvfb'] + (['shell-replacement'] if len(shell) == 2 else [])
+    for phase in phases:
         rows = [r for r in value['cleanup'] if r['process'] == phase]
-        if len(rows) != 1 or rows[0]['exit'] != 0 or rows[0].get('members_after_stop', []):
+        expected_exit = -9 if phase == 'shell' and recovering else 0
+        if len(rows) != 1 or rows[0]['exit'] != expected_exit or rows[0].get('members_after_stop', []):
             raise ValueError('owned process exit unconfirmed')
     frames = observation['frames']
     if len(frames) != 3:

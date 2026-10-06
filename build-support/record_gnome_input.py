@@ -17,10 +17,10 @@ def validate(value,build):
     return validate_observations(value,build,initial,value['observation']['icon_input'],value['observation']['composition']['icon_manager'])
 
 
-def validate_observations(value,build,initial,result,expected_owner):
+def validate_observations(value,build,initial,result,expected_owner,expected_shell_pid=None):
     """Check input against a caller-validated composition gate and native lifetime."""
     env=value['environment']['explicit'];workspace=Path(value['workspace'])
-    control=result['control'];owner=result['icon_manager'];shell_pid=value['observation']['manager']['pid'][0]
+    control=result['control'];owner=result['icon_manager'];shell_pid=value['observation']['manager']['pid'][0] if expected_shell_pid is None else expected_shell_pid
     if result['version']!='0.1.0' or control not in ['live','block-pointer','no-selection'] or value['icon_input_control']!=control or env['SYSPANE_GNOME_INPUT_CONTROL']!=control:
         raise ValueError('native input identity/control')
     if initial['outcome']!='pass' or owner!=expected_owner or result['icon_center']!=icon_center(value['observation']['composition']):

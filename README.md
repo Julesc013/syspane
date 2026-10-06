@@ -57,7 +57,7 @@ now observes live drawings between a synthetic wallpaper and real desktop icons,
 with independently calibrated pixels and wrong-layer controls. The subsequent
 [native reveal experiment](spec/delivery/gnome-reveal-handoff.md) keeps those drawings
 live while Show Desktop hides and restores a foreground window, but fails the
-required foreground-focus restoration. Shell recovery also remains open.
+required foreground-focus restoration.
 No desktop profile is qualified.
 An [independent native comparison](spec/delivery/gnome-focus-handoff.md) reproduces
 the focus and keyboard-delivery failure with DING while the SysPane extension is
@@ -78,12 +78,15 @@ A [native application-list experiment](spec/delivery/gnome-switcher-handoff.md)
 now keeps the passive bridge out of GNOME's Alt+Tab switcher and overview dash.
 Actual normal-window and omitted-popup controls validate the observations; normal
 application switching and overview dismissal preserve focus. The separate Show
-Desktop focus failure and shell recovery remain open.
+Desktop focus failure remains open.
 A [native icon-manager recovery experiment](spec/delivery/gnome-icon-recovery-handoff.md)
 now confirms DING process replacement, continuing live drawing and usable icons
 after the fault. Held process identities distinguish replacement even when the
 window ID is reused. Frozen-drawing and omitted-stop controls fail independently.
-Shell/compositor recovery and the separate focus failure remain open.
+A [native shell/compositor recovery experiment](spec/delivery/gnome-shell-recovery-handoff.md)
+now replaces the owned GNOME process, reattaches the drawing and verifies input on
+the new desktop. Omitting reattachment or replacement fails independently. User
+session recovery, product continuity and the separate focus failure remain open.
 There is no usable SysPane desktop application or downloadable release yet.
 Desktop, screensaver and installer profiles remain unqualified.
 
