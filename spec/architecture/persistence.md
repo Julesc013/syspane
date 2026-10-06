@@ -75,3 +75,9 @@ runner. This executes the coherent-generation and retained-identity prerequisite
 the complete PERSIST trace still requires asynchronous native IPC binding, installed
 resource/policy ownership and activation evidence. Its fsync acknowledgements do not
 qualify arbitrary filesystems, hardware power loss or another operating system.
+
+The [native content composition](../delivery/packages/w-08-native-content.md)
+uses only the current generation's complete resource closure for an identical
+selection. New selections resolve from the configured import catalog alone.
+Retained resources enable new edits after restart without the original import
+directory; they do not bypass current policy, read-only fallback or activation.

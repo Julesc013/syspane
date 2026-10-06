@@ -127,6 +127,28 @@ void resource_guards(const std::string& root){Fixture f(root);ResourceStore stor
     auto changed=q;changed["content"]["package"]["sha256"]=std::string(64,'0');f.policy.revision=7;
     VERIFY(invalid.submit("p","c",changed.dump(),f.authority,[&]{return f.policy;},0)["error"]["code"]=="resource.selection"&&other.writes==0);
 }
+void retained(const std::string& root){
+    Fixture f(root);ResourceStore store(f.base);unsigned calls=0;
+    auto load=[&]{++calls;return f.packages;};auto resources=c::make_resource_provider(store,{"scene.selector"},load);
+    auto q=resource_command(f);auto candidate=f.preview().candidate;const auto selection=q["content"];
+    auto snapshot=resources.prepare(candidate,selection);VERIFY(calls==1);
+    store.current={candidate,{},snapshot};f.packages.clear();
+    candidate.scene["theme_id"]="theme:parent";
+    VERIFY(resources.prepare(candidate,selection)->theme()["theme_id"]=="theme:parent"&&calls==1);
+    candidate.scene["theme_id"]="theme:missing";rejects([&]{resources.prepare(candidate,selection);},"content.theme");VERIFY(calls==1);
+    candidate.scene["theme_id"]="theme:native";auto retained_only=c::make_resource_provider(store,{});
+    VERIFY(retained_only.prepare(candidate,selection)->selection()==selection);
+    auto other=selection;other["preset"]["sha256"]=std::string(64,'0');
+    rejects([&]{retained_only.prepare(candidate,other);},"resource.unavailable");
+    f=Fixture(root);f.leaf([](Json& d){d["preset_id"]="preset:replacement";});other=resource_command(f)["content"];
+    const auto complete=f.packages;f.packages.erase(f.packages.begin());
+    rejects([&]{resources.prepare(candidate,other);},"content.dependency");VERIFY(calls==2&&store.current.resources==snapshot);
+    f.packages=complete;auto replacement=resources.prepare(candidate,other);VERIFY(calls==3);
+    store.current={candidate,{},replacement};f.packages.clear();VERIFY(resources.prepare(candidate,other)->selection()==other&&calls==3);
+    // The old selection is no longer retained by the current generation.
+    rejects([&]{resources.prepare(candidate,selection);});VERIFY(calls==4);
+    ResourceStore empty(f.base);rejects([&]{c::make_resource_provider(empty,{}).prepare(candidate,other);},"resource.unavailable");
+}
 void resource_session(const std::string& root){Fixture f(root);ResourceStore store(f.base);unsigned calls=0;auto owner=std::make_shared<c::AsyncCommands>(store,"E1",provider(f,calls));
     c::Sessions sessions("E1",40,f.policy,{},owner);auto q=resource_command(f);
     auto hello=[](const std::string& version,bool content){return Json{{"wire_major",0},{"wire_minor",1},{"role","console"},{"producer_epoch","client"},{"max_frame_bytes",1048576},
@@ -148,5 +170,5 @@ void resource_session(const std::string& root){Fixture f(root);ResourceStore sto
 void content_tests(const std::string& name,const std::string& root){
     if(name=="CONTENT-COMPOSE")compose(root);else if(name=="CONTENT-PINS")pins(root);else if(name=="CONTENT-PATHS")names(root);
     else if(name=="CONTENT-BOUNDS")bounds(root);else if(name=="CONTENT-CAPABILITIES")capabilities(root);else if(name=="CONTENT-POLICY")policy(root);
-    else if(name=="RESOURCE-COMMIT")resource_commit(root);else if(name=="RESOURCE-GUARDS")resource_guards(root);else if(name=="RESOURCE-SESSION")resource_session(root);else VERIFY(false);
+    else if(name=="RESOURCE-COMMIT")resource_commit(root);else if(name=="RESOURCE-GUARDS")resource_guards(root);else if(name=="RESOURCE-SESSION")resource_session(root);else if(name=="RESOURCE-RETAINED")retained(root);else VERIFY(false);
 }

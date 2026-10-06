@@ -46,6 +46,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Live measured collector and asynchronous GJS session checkpoint](live-network-session-handoff.md) — Original real telemetry, native clock provenance and independent lifecycle evidence before operational shell pixels.
 - [Measured telemetry and freshness checkpoint](measured-time-handoff.md) — Bind versioned measurement times to consumer clock scope, replay history and native delayed-delivery evidence.
 - [Native measurement-clock checkpoint](measurement-clock-handoff.md) — Record causal clock brackets and peer-exit rejection without claiming measured telemetry or suspend qualification.
+- [Supervised native content checkpoint](native-content-handoff.md) — Retained resource editing through authenticated commands and exact controller replacement.
 - [Native retained network cache checkpoint](native-network-cache-handoff.md) — Actual C++ projected counters and rates reach the owned native desktop with independently checked value pixels and policy erasure.
 - [Native local IPC implementation handoff](native-transport-handoff.md) — Bind W-24's Windows and Linux adapter gate to real process and stream evidence.
 - [Real native network acquisition checkpoint](network-acquisition-handoff.md) — Read bounded interface counters on Windows and Linux without claiming reconciled model identity or complete collection.

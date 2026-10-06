@@ -1,0 +1,110 @@
+[
+  {
+    "step": "configure",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-06T18:45:20.955621+00:00",
+    "finished_at": "2026-10-06T18:45:30.955119+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 5368709120,\n  \"checkout_out_bytes\": 1653295008,\n  \"linux_campaign_bytes\": 3398528738,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "configure",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/native_content_step.py",
+      "linux-x64-gcc13",
+      "configure"
+    ],
+    "started_at": "2026-10-06T18:45:30.955549+00:00",
+    "finished_at": "2026-10-06T18:45:43.805471+00:00",
+    "exit": 0,
+    "stdout": "Preset CMake variables:\n\n  BUILD_TESTING=\"ON\"\n  CMAKE_BUILD_TYPE=\"Debug\"\n  CMAKE_CXX_COMPILER=\"g++\"\n  SYSPANE_PROFILE=\"linux-x64-gcc13\"\n\nprofile verified: linux-x64-gcc13\nvendored dependency digests: pass\ndiagnostic toolkit verified: GTK 3.24.41 / Ubuntu 3.24.41-4ubuntu1.3\nnative GJS clock build dependencies verified\n-- Configuring done (5.7s)\n-- Generating done (0.0s)\n-- Build files have been written to: /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-08-native-content/linux-x64-gcc13-configure-2af0e1593a\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-06T18:45:43.805784+00:00",
+    "finished_at": "2026-10-06T18:45:44.489668+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 5368709120,\n  \"checkout_out_bytes\": 1654374229,\n  \"linux_campaign_bytes\": 3398525445,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/native_content_step.py",
+      "linux-x64-gcc13",
+      "build"
+    ],
+    "started_at": "2026-10-06T18:45:44.490361+00:00",
+    "finished_at": "2026-10-06T18:46:09.006787+00:00",
+    "exit": 0,
+    "stdout": "[1/21] Building CXX object CMakeFiles/syspane_content_reader.dir/source/platform/content_reader_linux.cpp.o\n[2/21] Building CXX object CMakeFiles/syspane_async_commands.dir/source/configuration/async_commands.cpp.o\n[3/21] Building CXX object CMakeFiles/syspane_authored.dir/source/configuration/transaction.cpp.o\n[4/21] Building CXX object CMakeFiles/syspane_content_probe.dir/source/application/content_probe.cpp.o\n[5/21] Building CXX object CMakeFiles/syspane_authored.dir/source/configuration/authored.cpp.o\n[6/21] Linking CXX static library libsyspane_authored.a\n[7/21] Linking CXX static library libsyspane_async_commands.a\n[8/21] Linking CXX static library libsyspane_content_reader.a\n[9/21] Linking CXX executable SysPane.ContentProbe\n[10/21] Building CXX object CMakeFiles/syspane_generation_store.dir/source/platform/generation_store_linux.cpp.o\n[11/21] Building CXX object CMakeFiles/syspane_configuration_probe.dir/source/application/configuration_probe.cpp.o\n[12/21] Linking CXX static library libsyspane_generation_store.a\n[13/21] Linking CXX executable SysPane.ConfigProbe\n[14/21] Building CXX object CMakeFiles/syspane_command_probe.dir/source/application/command_supervisor.cpp.o\n[15/21] Building CXX object CMakeFiles/syspane_command_probe.dir/source/application/command_probe.cpp.o\n[16/21] Linking CXX executable SysPane.CommandProbe\n[17/21] Building CXX object CMakeFiles/syspane_authored_tests.dir/tests/configuration/authored_tests.cpp.o\n[18/21] Building CXX object CMakeFiles/syspane_authored_tests.dir/tests/configuration/content_tests.cpp.o\n[19/21] Linking CXX executable syspane_authored_tests\n[20/21] Building CXX object CMakeFiles/syspane_command_session_tests.dir/tests/configuration/command_session_tests.cpp.o\n[21/21] Linking CXX executable syspane_command_session_tests\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-08-native-content/linux-x64-gcc13-build-5caceba55b\n",
+    "stderr": ""
+  },
+  {
+    "step": "focus",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-06T18:46:09.007250+00:00",
+    "finished_at": "2026-10-06T18:46:09.752110+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 5368709120,\n  \"checkout_out_bytes\": 1655456096,\n  \"linux_campaign_bytes\": 3400977823,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "focus",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/native_content_step.py",
+      "linux-x64-gcc13",
+      "focus"
+    ],
+    "started_at": "2026-10-06T18:46:09.752420+00:00",
+    "finished_at": "2026-10-06T18:46:36.968985+00:00",
+    "exit": 0,
+    "stdout": "Test project /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n      Start  1: configuration.COMMAND-COMMIT\n 1/34 Test  #1: configuration.COMMAND-COMMIT .........   Passed    0.07 sec\n      Start  2: configuration.COMMAND-CANCEL\n 2/34 Test  #2: configuration.COMMAND-CANCEL .........   Passed    0.05 sec\n      Start  3: configuration.COMMAND-POLICY\n 3/34 Test  #3: configuration.COMMAND-POLICY .........   Passed    0.06 sec\n      Start  4: configuration.COMMAND-LIFETIME\n 4/34 Test  #4: configuration.COMMAND-LIFETIME .......   Passed    0.03 sec\n      Start  5: configuration.COMMAND-CAPACITY\n 5/34 Test  #5: configuration.COMMAND-CAPACITY .......   Passed    1.13 sec\n      Start  6: configuration.COMMAND-FAULT\n 6/34 Test  #6: configuration.COMMAND-FAULT ..........   Passed    0.06 sec\n      Start  7: configuration.COMMAND-NEGOTIATE\n 7/34 Test  #7: configuration.COMMAND-NEGOTIATE ......   Passed    0.02 sec\n      Start  8: configuration.RECON-RECEIPTS\n 8/34 Test  #8: configuration.RECON-RECEIPTS .........   Passed    0.04 sec\n      Start  9: configuration.RECON-POLICY\n 9/34 Test  #9: configuration.RECON-POLICY ...........   Passed    0.03 sec\n      Start 10: configuration.RECON-CODEC\n10/34 Test #10: configuration.RECON-CODEC ............   Passed    0.00 sec\n      Start 11: configuration.RECON-BOUNDS\n11/34 Test #11: configuration.RECON-BOUNDS ...........   Passed    0.07 sec\n      Start 12: configuration.AUTH-SCHEMA\n12/34 Test #12: configuration.AUTH-SCHEMA ............   Passed    0.05 sec\n      Start 13: configuration.TX-MIXED\n13/34 Test #13: configuration.TX-MIXED ...............   Passed    0.03 sec\n      Start 14: configuration.TX-CONFLICT\n14/34 Test #14: configuration.TX-CONFLICT ............   Passed    0.03 sec\n      Start 15: configuration.TX-REPLAY\n15/34 Test #15: configuration.TX-REPLAY ..............   Passed    0.04 sec\n      Start 16: configuration.TX-INTERRUPT\n16/34 Test #16: configuration.TX-INTERRUPT ...........   Passed    0.07 sec\n      Start 17: configuration.TX-BOUNDS\n17/34 Test #17: configuration.TX-BOUNDS ..............   Passed    0.05 sec\n      Start 18: configuration.TX-CAPACITY\n18/34 Test #18: configuration.TX-CAPACITY ............   Passed    1.18 sec\n      Start 19: configuration.DIGEST\n19/34 Test #19: configuration.DIGEST .................   Passed    0.02 sec\n      Start 20: configuration.CONTENT-COMPOSE\n20/34 Test #20: configuration.CONTENT-COMPOSE ........   Passed    0.06 sec\n      Start 21: configuration.CONTENT-PINS\n21/34 Test #21: configuration.CONTENT-PINS ...........   Passed    0.12 sec\n      Start 22: configuration.CONTENT-PATHS\n22/34 Test #22: configuration.CONTENT-PATHS ..........   Passed    0.01 sec\n      Start 23: configuration.CONTENT-BOUNDS\n23/34 Test #23: configuration.CONTENT-BOUNDS .........   Passed    0.09 sec\n      Start 24: configuration.CONTENT-CAPABILITIES\n24/34 Test #24: configuration.CONTENT-CAPABILITIES ...   Passed    0.08 sec\n      Start 25: configuration.CONTENT-POLICY\n25/34 Test #25: configuration.CONTENT-POLICY .........   Passed    0.12 sec\n      Start 26: configuration.RESOURCE-COMMIT\n26/34 Test #26: configuration.RESOURCE-COMMIT ........   Passed    0.13 sec\n      Start 27: configuration.RESOURCE-GUARDS\n27/34 Test #27: configuration.RESOURCE-GUARDS ........   Passed    0.15 sec\n      Start 28: configuration.RESOURCE-SESSION\n28/34 Test #28: configuration.RESOURCE-SESSION .......   Passed    0.08 sec\n      Start 29: configuration.RESOURCE-RETAINED\n29/34 Test #29: configuration.RESOURCE-RETAINED ......   Passed    0.21 sec\n      Start 30: native.CONTENT-READER\n30/34 Test #30: native.CONTENT-READER ................   Passed    0.69 sec\n      Start 31: native.RESOURCE-GENERATIONS\n31/34 Test #31: native.RESOURCE-GENERATIONS ..........   Passed    9.28 sec\n      Start 32: native.CONFIG-STORE\n32/34 Test #32: native.CONFIG-STORE ..................   Passed    4.37 sec\n      Start 63: composition.graph\n33/34 Test #63: composition.graph ....................   Passed    0.08 sec\n      Start 64: composition.reject_forbidden\n34/34 Test #64: composition.reject_forbidden .........   Passed    0.17 sec\n\n100% tests passed, 0 tests failed out of 34\n\nTotal Test time (real) =  18.68 sec\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-08-native-content/linux-x64-gcc13-focus-c01d81b84b\n",
+    "stderr": ""
+  }
+]

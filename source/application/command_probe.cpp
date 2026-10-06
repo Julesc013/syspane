@@ -1,5 +1,6 @@
 #include "async_commands.hpp"
 #include "generation_store_linux.hpp"
+#include "content_reader_linux.hpp"
 #include "local_ipc.hpp"
 #include "session.hpp"
 #include "child.hpp"
@@ -16,7 +17,7 @@
 
 namespace c=syspane::configuration;namespace p=syspane::protocol;namespace os=syspane::platform;using p::Json;
 namespace r=syspane::recovery;
-int supervise_commands(int,char**);
+int supervise_commands(int,char**,const std::optional<std::string>&);
 std::mutex output;
 void emit(Json v){std::lock_guard<std::mutex> lock(output);std::cout<<v.dump()<<std::endl;}
 struct Gate {
@@ -28,30 +29,40 @@ struct Gate {
     }
 };
 int main(int argc,char** argv){try{
-    if(argc>1&&std::string(argv[1])=="supervisor")return supervise_commands(argc,argv);
+    std::optional<std::string> content;
+    if(argc>2&&std::string(argv[1])=="content"){content=argv[2];argc-=2;argv+=2;}
+    if(argc>1&&std::string(argv[1])=="supervisor")return supervise_commands(argc,argv,content);
     const bool supervised=argc==9;
     if(argc<5||(argc>7&&!supervised)||!os::unprivileged_context())throw p::Error("probe.arguments");
     const std::string phase=argv[3];const auto expected=p::decimal(argv[4]);
     const std::string epoch=argc>=6?argv[5]:"E1",permission=argc>=7?argv[6]:"allow";
     if(!expected||!*expected||!p::identifier(epoch)||(permission!="allow"&&permission!="deny")||
-       (phase!="preparing"&&phase!="permitted"&&phase!="plain"&&phase!="crash-before"&&phase!="crash-durable"&&phase!="hang-prepare"&&phase!="hang-durable"))throw p::Error("probe.arguments");
-    if(!supervised&&(phase=="hang-prepare"||phase=="hang-durable"))throw p::Error("probe.supervision_required");
+       (phase!="preparing"&&phase!="permitted"&&phase!="plain"&&phase!="crash-before"&&phase!="crash-durable"&&phase!="hang-prepare"&&phase!="hang-durable"&&phase!="hang-resource"))throw p::Error("probe.arguments");
+    if(!supervised&&(phase=="hang-prepare"||phase=="hang-durable"||phase=="hang-resource"))throw p::Error("probe.supervision_required");
     const auto forever=[]{for(;;)std::this_thread::sleep_for(std::chrono::milliseconds(100));};
     std::optional<os::Stream> guardian;std::unique_ptr<r::HealthLink> health;r::ProducerLease parent_lease;
     std::uint64_t parent_token=0,sequence=0,last_sent=0,active_ticket=0;bool armed=false;
     if(supervised){const auto parent=p::decimal(argv[8]);if(!parent||!*parent)throw p::Error("probe.parent");os::arm_parent_lifetime(*parent);}
     Gate gate;
     os::LinuxGenerationStore store(argv[2],[&](const char* step){
+        if(phase=="hang-resource"&&std::string(step)=="resource_manifest:0")forever();
         if(phase=="hang-durable"&&std::string(step)=="durable")forever();
         if(phase=="permitted"&&std::string(step)=="authorized")gate.wait("permitted");
         if((phase=="crash-before"&&std::string(step)=="selector_ready")||(phase=="crash-durable"&&std::string(step)=="durable")){
             emit({{"event","held"},{"phase",phase}});std::raise(SIGSTOP);
         }
     });
-    auto owner=std::make_shared<c::AsyncCommands>(store,epoch,[&](const c::Authored& value){
+    const auto prepared=[&]{if(phase=="preparing")gate.wait("preparing");if(phase=="hang-prepare")forever();};
+    std::shared_ptr<c::AsyncCommands> owner;
+    if(content){
+        std::function<std::vector<c::ContentPackage>()> imports;
+        if(*content!="-")imports=[path=*content]{return os::read_content_catalog(path);};
+        auto resources=c::make_resource_provider(store,{"scene.selector"},std::move(imports));
+        resources.prepare=[prepare=std::move(resources.prepare),&prepared](const c::Authored& value,const Json& selection){auto result=prepare(value,selection);prepared();return result;};
+        owner=std::make_shared<c::AsyncCommands>(store,epoch,std::move(resources));
+    }else owner=std::make_shared<c::AsyncCommands>(store,epoch,[&](const c::Authored& value){
         if(value.settings["display"]["theme_id"]!="theme:native"||(!value.scene["theme_id"].is_null()&&value.scene["theme_id"]!="theme:native"))throw p::Error("resource.unavailable");
-        if(phase=="preparing")gate.wait("preparing");
-        if(phase=="hang-prepare")forever();
+        prepared();
     });
     c::Policy policy;policy.available=true;policy.revision=supervised?7:(epoch=="E1"?7:8);if(permission=="deny")policy.denied_capabilities.insert("scene.replace");
     c::Sessions sessions(epoch,c::authored_revision(store.load().documents),policy,{},owner);

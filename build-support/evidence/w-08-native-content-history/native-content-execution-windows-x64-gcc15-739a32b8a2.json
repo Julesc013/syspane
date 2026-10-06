@@ -1,0 +1,98 @@
+[
+  {
+    "step": "configure",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-06T18:58:55.914710+00:00",
+    "finished_at": "2026-10-06T18:59:02.138571+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 5368709120,\n  \"checkout_out_bytes\": 1668604268,\n  \"linux_campaign_bytes\": 3411211031,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "configure",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "out/campaign/native_content_step.py",
+      "windows-x64-gcc15",
+      "configure"
+    ],
+    "started_at": "2026-10-06T18:59:02.139034+00:00",
+    "finished_at": "2026-10-06T18:59:03.974212+00:00",
+    "exit": 0,
+    "stdout": "profile verified: windows-x64-gcc15\nvendored dependency digests: pass\n-- Configuring done (1.1s)\n-- Generating done (0.1s)\n-- Build files have been written to: D:/Projects/SysPane/syspane/out/build/windows-x64-gcc15\n \nAttempt: D:\\Projects\\SysPane\\syspane\\out\\campaign\\w-08-native-content\\windows-x64-gcc15-configure-78c54f3e49\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-06T18:59:03.974533+00:00",
+    "finished_at": "2026-10-06T18:59:04.575448+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 5368709120,\n  \"checkout_out_bytes\": 1669688882,\n  \"linux_campaign_bytes\": 3411211031,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "out/campaign/native_content_step.py",
+      "windows-x64-gcc15",
+      "build"
+    ],
+    "started_at": "2026-10-06T18:59:04.575942+00:00",
+    "finished_at": "2026-10-06T18:59:16.999891+00:00",
+    "exit": 0,
+    "stdout": "[1/10] Building CXX object CMakeFiles/syspane_async_commands.dir/source/configuration/async_commands.cpp.obj\n[2/10] Building CXX object CMakeFiles/syspane_authored.dir/source/configuration/transaction.cpp.obj\n[3/10] Building CXX object CMakeFiles/syspane_authored_tests.dir/tests/configuration/authored_tests.cpp.obj\n[4/10] Building CXX object CMakeFiles/syspane_authored.dir/source/configuration/authored.cpp.obj\n[5/10] Linking CXX static library libsyspane_authored.a\n[6/10] Linking CXX static library libsyspane_async_commands.a\n[7/10] Building CXX object CMakeFiles/syspane_command_session_tests.dir/tests/configuration/command_session_tests.cpp.obj\n[8/10] Building CXX object CMakeFiles/syspane_authored_tests.dir/tests/configuration/content_tests.cpp.obj\n[9/10] Linking CXX executable syspane_command_session_tests.exe\n[10/10] Linking CXX executable syspane_authored_tests.exe\n \nAttempt: D:\\Projects\\SysPane\\syspane\\out\\campaign\\w-08-native-content\\windows-x64-gcc15-build-81adadd911\n",
+    "stderr": ""
+  },
+  {
+    "step": "test",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-06T18:59:17.000174+00:00",
+    "finished_at": "2026-10-06T18:59:17.628297+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 5368709120,\n  \"checkout_out_bytes\": 1672470509,\n  \"linux_campaign_bytes\": 3411211031,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "test",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "out/campaign/native_content_step.py",
+      "windows-x64-gcc15",
+      "test"
+    ],
+    "started_at": "2026-10-06T18:59:17.628599+00:00",
+    "finished_at": "2026-10-06T19:00:45.878992+00:00",
+    "exit": 0,
+    "stdout": "-CLOCK ..................   Passed    0.02 sec\n        Start 113: presentation.NVIEW-VALUES\n113/152 Test #113: presentation.NVIEW-VALUES ............   Passed    0.03 sec\n        Start 114: presentation.NVIEW-FORMAT\n114/152 Test #114: presentation.NVIEW-FORMAT ............   Passed    0.12 sec\n        Start 115: presentation.NVIEW-STATES\n115/152 Test #115: presentation.NVIEW-STATES ............   Passed    0.03 sec\n        Start 116: presentation.NVIEW-SELECTION\n116/152 Test #116: presentation.NVIEW-SELECTION .........   Passed    0.03 sec\n        Start 117: presentation.NVIEW-BOUNDS\n117/152 Test #117: presentation.NVIEW-BOUNDS ............   Passed    0.03 sec\n        Start 118: presentation.NVIEW-LIFETIME\n118/152 Test #118: presentation.NVIEW-LIFETIME ..........   Passed    0.03 sec\n        Start 119: network.PUBLICATION-VALUES\n119/152 Test #119: network.PUBLICATION-VALUES ...........   Passed    0.02 sec\n        Start 120: network.PUBLICATION-FAILURE\n120/152 Test #120: network.PUBLICATION-FAILURE ..........   Passed    0.03 sec\n        Start 121: network.PUBLICATION-BOUNDARY\n121/152 Test #121: network.PUBLICATION-BOUNDARY .........   Passed    0.03 sec\n        Start 122: network.RECONCILE-IDENTITY\n122/152 Test #122: network.RECONCILE-IDENTITY ...........   Passed    0.02 sec\n        Start 123: network.RECONCILE-CLOCK-RATE\n123/152 Test #123: network.RECONCILE-CLOCK-RATE .........   Passed    0.02 sec\n        Start 124: network.RECONCILE-CANCEL-FAILURE\n124/152 Test #124: network.RECONCILE-CANCEL-FAILURE .....   Passed    0.02 sec\n        Start 125: network.RECONCILE-CAPACITY\n125/152 Test #125: network.RECONCILE-CAPACITY ...........   Passed    0.02 sec\n        Start 126: native.NATIVE-NETWORK\n126/152 Test #126: native.NATIVE-NETWORK ................   Passed    0.25 sec\n        Start 127: measured.MEASURED-CODEC\n127/152 Test #127: measured.MEASURED-CODEC ..............   Passed    0.03 sec\n        Start 128: measured.MEASURED-AGE\n128/152 Test #128: measured.MEASURED-AGE ................   Passed    0.02 sec\n        Start 129: measured.MEASURED-REPLAY\n129/152 Test #129: measured.MEASURED-REPLAY .............   Passed    0.02 sec\n        Start 130: measured.MEASURED-LIFETIME\n130/152 Test #130: measured.MEASURED-LIFETIME ...........   Passed    0.03 sec\n        Start 131: measured.MEASURED-SESSION\n131/152 Test #131: measured.MEASURED-SESSION ............   Passed    0.03 sec\n        Start 132: import.IMPORT-STATE\n132/152 Test #132: import.IMPORT-STATE ..................   Passed    0.02 sec\n        Start 133: import.IMPORT-RETAIN\n133/152 Test #133: import.IMPORT-RETAIN .................   Passed    0.03 sec\n        Start 134: import.IMPORT-COVERAGE\n134/152 Test #134: import.IMPORT-COVERAGE ...............   Passed    0.03 sec\n        Start 135: import.IMPORT-REPLAY\n135/152 Test #135: import.IMPORT-REPLAY .................   Passed    0.03 sec\n        Start 136: import.IMPORT-TIME\n136/152 Test #136: import.IMPORT-TIME ...................   Passed    0.03 sec\n        Start 137: import.IMPORT-LIFETIME\n137/152 Test #137: import.IMPORT-LIFETIME ...............   Passed    0.03 sec\n        Start 138: data.VIEW-ATOMIC\n138/152 Test #138: data.VIEW-ATOMIC .....................   Passed    0.02 sec\n        Start 139: data.VIEW-REPLAY\n139/152 Test #139: data.VIEW-REPLAY .....................   Passed    0.02 sec\n        Start 140: data.VIEW-RECONNECT\n140/152 Test #140: data.VIEW-RECONNECT ..................   Passed    0.02 sec\n        Start 141: data.VIEW-LEASE\n141/152 Test #141: data.VIEW-LEASE ......................   Passed    0.03 sec\n        Start 142: data.VIEW-POLICY\n142/152 Test #142: data.VIEW-POLICY .....................   Passed    0.02 sec\n        Start 143: data.VIEW-FAULT\n143/152 Test #143: data.VIEW-FAULT ......................   Passed    0.02 sec\n        Start 144: diagnostic.DIAG-POLICY\n144/152 Test #144: diagnostic.DIAG-POLICY ...............   Passed    0.04 sec\n        Start 145: diagnostic.DIAG-PROJECTION\n145/152 Test #145: diagnostic.DIAG-PROJECTION ...........   Passed    0.02 sec\n        Start 146: diagnostic.FAILURE-CODEC\n146/152 Test #146: diagnostic.FAILURE-CODEC .............   Passed    0.03 sec\n        Start 147: diagnostic.FAILURE-INTERRUPT\n147/152 Test #147: diagnostic.FAILURE-INTERRUPT .........   Passed    0.03 sec\n        Start 148: diagnostic.FAILURE-PROJECTION\n148/152 Test #148: diagnostic.FAILURE-PROJECTION ........   Passed    0.02 sec\n        Start 149: diagnostic.PRESERVE-POLICY\n149/152 Test #149: diagnostic.PRESERVE-POLICY ...........   Passed    0.02 sec\n        Start 150: native.PRESERVE\n150/152 Test #150: native.PRESERVE ......................   Passed    6.18 sec\n        Start 151: native.FAILURE-STORE\n151/152 Test #151: native.FAILURE-STORE .................   Passed    1.63 sec\n        Start 152: native.DIAG-01\n152/152 Test #152: native.DIAG-01 .......................   Passed    0.85 sec\n\n100% tests passed, 0 tests failed out of 152\n\nTotal Test time (real) =  87.76 sec\n \nAttempt: D:\\Projects\\SysPane\\syspane\\out\\campaign\\w-08-native-content\\windows-x64-gcc15-test-0521bec448\n",
+    "stderr": ""
+  }
+]

@@ -1,5 +1,29 @@
 # Developer setup and checks
 
+The [native content package](../../spec/delivery/packages/w-08-native-content.md)
+adds `make_resource_provider(store, capabilities, imports)` to the shared transaction
+component. The store must outlive the provider, invoked on its serialized worker.
+An exact current selection resolves solely from retained original packages; every
+other selection uses the configured loader once. There is no cross-catalog merge
+or fallback. Current policy and the commit permit still govern publication.
+
+The Linux finite command fixture accepts `content <catalog-root-or-dash>` before
+its existing direct or supervisor arguments. For example, use `SysPane.CommandProbe
+content <private-root> supervisor <private-runtime> <store> normal <client-pid>
+allow`. The root has a private `catalog.json` following content-catalog 0.1 and
+explicit named package child directories. `-` permits retained-only editing.
+Imports load on the transaction worker, never at startup or in the IPC loop.
+The supervisor forwards this configuration to each owned replacement child.
+The laboratory's explicit policy and scene.selector capability confer no installed
+authority. Existing framing, child argument limits and 5000 ms deadline remain.
+
+After the usual workspace preflight/configure/build, run `ctest --preset <profile>
+-R '^configuration[.]RESOURCE-RETAINED$' --output-on-failure`. Linux also runs
+`ctest --preset linux-x64-gcc13 -R '^native[.]CONTENT-COMMANDS$' --output-on-failure`.
+Reports use `native-evidence/content-commands-*`. This independent client validates
+wire results, held process exit, original-epoch reconciliation and exact persisted
+resource bytes. The resource-write hang is an owned test phase, not product behavior.
+
 The [resource generation package](../../spec/delivery/packages/w-08-resource-generations.md)
 adds command 0.3 with an explicit content selection. A typed `ResourceProvider`
 returns an immutable `ResourceSet` from the existing `ContentCatalog`; the common

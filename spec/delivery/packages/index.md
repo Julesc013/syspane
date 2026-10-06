@@ -26,6 +26,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Authored scene transactions and generation recovery](w-08-authored-transactions.md) — Implement coherent settings and scene replacement with explicit stored, durable and activation facts.
 - [Asynchronous authored command sessions](w-08-command-sessions.md) — Join authenticated sessions to one bounded transaction owner without blocking control traffic.
 - [Pinned content and preset preview](w-08-content-resolution.md) — Resolve immutable content bytes into a validated authored preview without granting installation or activation.
+- [Supervised native content commands](w-08-native-content.md) — Connect retained resource preparation to authenticated native commands and exact controller replacement.
 - [Committed request reconciliation across producer epochs](w-08-reconciliation.md) — Recover durable outcomes through authenticated read-only IPC without resubmitting mutations.
 - [Durable pinned resource generations](w-08-resource-generations.md) — Bind command identity and generation recovery to the exact prepared content closure.
 - [Independent transaction deadlines and controller recovery](w-08-supervised-transactions.md) — Bound uncooperative transaction work without killing threads or replaying uncertain mutations.

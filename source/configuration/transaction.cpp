@@ -15,6 +15,17 @@ const char* outcome(const std::string& code){
     return "invalid";
 }
 }
+ResourceProvider make_resource_provider(GenerationStore& store,std::set<std::string> capabilities,
+    std::function<std::vector<ContentPackage>()> imports){
+    return {std::move(capabilities),[&store,imports=std::move(imports)](const Authored& candidate,const Json& selection){
+        const auto current=store.load();
+        if(current.resources&&current.resources->selection()==selection){
+            std::vector<ContentPackage> packages;for(const auto& package:current.resources->packages())packages.push_back(*package);
+            return ContentCatalog(std::move(packages)).resources(selection,candidate);
+        }
+        require(static_cast<bool>(imports),"resource.unavailable");return ContentCatalog(imports()).resources(selection,candidate);
+    }};
+}
 Transactions::Transactions(GenerationStore& store,std::string epoch,std::function<void(const Authored&)> prepare_resources)
     :store_(store),epoch_(std::move(epoch)),current_(store.load()),prepare_resources_(std::move(prepare_resources)){
     require(protocol::identifier(epoch_)&&static_cast<bool>(prepare_resources_),"transaction.owner");validate_authored(current_.documents);

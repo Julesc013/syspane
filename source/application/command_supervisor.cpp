@@ -19,11 +19,11 @@ bool stopping(){
     return false;
 }
 }
-int supervise_commands(int argc,char** argv){
+int supervise_commands(int argc,char** argv,const std::optional<std::string>& content){
     need(argc==7&&os::unprivileged_context(),"supervisor.arguments");
     const std::string root=argv[2],store=argv[3],scenario=argv[4],permission=argv[6];const auto parent=p::decimal(argv[5]);
     need(parent&&*parent&&(permission=="allow"||permission=="deny")&&
-        (scenario=="normal"||scenario=="prepare"||scenario=="durable"||scenario=="repeat"),"supervisor.arguments");
+        (scenario=="normal"||scenario=="prepare"||scenario=="durable"||scenario=="repeat"||scenario=="resource"),"supervisor.arguments");
     os::arm_parent_lifetime(*parent);
     struct stat info{};need(std::filesystem::canonical(root)==root&&::lstat(root.c_str(),&info)==0&&S_ISDIR(info.st_mode)&&
         info.st_uid==::getuid()&&(info.st_mode&0777)==0700,"supervisor.root");
@@ -38,8 +38,10 @@ int supervise_commands(int argc,char** argv){
         const auto client_dir=root+"/c"+std::to_string(generation),guard_dir=root+"/g"+std::to_string(generation);
         need(::mkdir(client_dir.c_str(),0700)==0&&::mkdir(guard_dir.c_str(),0700)==0,"supervisor.directory");
         const auto endpoint=client_dir+"/s",guard_endpoint=guard_dir+"/s";os::Listener listener(guard_endpoint);
-        const auto phase=scenario=="repeat"?"hang-prepare":(generation>1||scenario=="normal"?"plain":(scenario=="prepare"?"hang-prepare":"hang-durable"));
-        auto child=os::Child::launch_self({endpoint,store,phase,argv[5],epoch,permission,guard_endpoint,std::to_string(os::current_process_id())});
+        const auto phase=scenario=="repeat"?"hang-prepare":(generation>1||scenario=="normal"?"plain":(scenario=="prepare"?"hang-prepare":(scenario=="resource"?"hang-resource":"hang-durable")));
+        std::vector<std::string> args{endpoint,store,phase,argv[5],epoch,permission,guard_endpoint,std::to_string(os::current_process_id())};
+        if(content){args.insert(args.begin(),*content);args.insert(args.begin(),"content");}
+        auto child=os::Child::launch_self(args);
         report({{"event","launched"},{"pid",child.id()},{"epoch",epoch},{"endpoint",endpoint},{"generation",generation}});
         std::optional<os::Stream> stream;std::unique_ptr<r::HealthLink> link;r::ProducerLease lease;r::TransactionWatch operation;
         std::uint64_t token=0,sequence=0,last_sent=0,heartbeats=0;const auto launched=os::monotonic_ms();

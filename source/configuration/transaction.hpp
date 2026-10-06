@@ -25,6 +25,9 @@ public:
     virtual std::optional<Committed> reconcile(const std::string& principal,const std::string& epoch,const std::string& request)const=0;
     virtual Publication publish(const Committed& next,const std::function<void()>& guard)=0;
 };
+// Store outlives the provider. Invoke on the store's serialized transaction worker.
+ResourceProvider make_resource_provider(GenerationStore& store,std::set<std::string> capabilities,
+    std::function<std::vector<ContentPackage>()> imports={});
 class Transactions {
 public:
     Transactions(GenerationStore& store,std::string epoch,std::function<void(const Authored&)> prepare_resources);

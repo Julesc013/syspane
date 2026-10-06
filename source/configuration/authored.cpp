@@ -12,7 +12,7 @@ void require(bool value,const char* code){if(!value)throw Error(code);}
 const std::map<std::string,Json>& schemas(){
     static const std::map<std::string,Json> value=[] {
         std::map<std::string,Json> result;
-        for(const char* text:{settings_schema,scene_v0_2_schema,layout_schema,binding_schema,command_v0_2_schema,command_v0_3_schema,content_package_schema,preset_schema,theme_schema}){
+        for(const char* text:{settings_schema,scene_v0_2_schema,layout_schema,binding_schema,command_v0_2_schema,command_v0_3_schema,content_package_schema,content_catalog_schema,preset_schema,theme_schema}){
             auto item=Json::parse(text);result.emplace(item["$id"].get<std::string>(),std::move(item));
         }
         return result;
@@ -124,8 +124,8 @@ void scene_semantics(const Json& scene){
 }
 std::uint64_t authored_revision(const Authored& value){return revision(value.settings.at("revision"));}
 void validate_content_document(const Json& value,const std::string& kind){
-    require(kind=="content-package"||kind=="preset"||kind=="theme","content.kind");
-    const auto name="0.1.0/"+kind;structural(value,name.c_str(),kind=="content-package"?65536:262144);
+    require(kind=="content-catalog"||kind=="content-package"||kind=="preset"||kind=="theme","content.kind");
+    const auto name="0.1.0/"+kind;structural(value,name.c_str(),kind=="content-catalog"?16384:(kind=="content-package"?65536:262144));
 }
 void validate_scene_document(const Json& value){structural(value,"0.2.0/scene",262144);(void)revision(value["revision"]);scene_semantics(value);}
 void validate_authored(const Authored& value){

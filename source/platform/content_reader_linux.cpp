@@ -71,4 +71,12 @@ std::vector<c::ContentPackage> read_content_packages(const std::vector<std::stri
     }
     return result;
 }
+std::vector<c::ContentPackage> read_content_catalog(const std::string& path){
+    auto dir=root(path);const auto catalog=c::parse_content_json(read(dir.fd,"catalog.json",16384));
+    c::validate_content_document(catalog,"content-catalog");std::set<std::string> names;std::vector<std::string> paths;
+    for(const auto& item:catalog["packages"]){const auto name=item.get<std::string>();auto folded=name;
+        for(auto& ch:folded)if(ch>='A'&&ch<='Z')ch=static_cast<char>(ch-'A'+'a');
+        need(names.insert(folded).second,"content.path_collision");paths.push_back(path+"/"+name);}
+    return read_content_packages(paths);
+}
 }
