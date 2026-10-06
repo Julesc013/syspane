@@ -72,8 +72,9 @@ required; this does not resolve the separate focus-restoration failure.
 A [native image-wallpaper experiment](spec/delivery/gnome-wallpaper-handoff.md) now
 preserves original file identity, native settings and exact PNG pixels beside the
 live drawing. Separate replacement, setting-redirection and obstruction controls
-expose each failure independently. Wallpaper policy and other display/image profiles
-still require qualification.
+expose each failure independently. A [native policy experiment](spec/delivery/gnome-wallpaper-policy-handoff.md)
+now verifies locked wallpaper keys and unchanged policy identity. Protected policy
+deployment, locked images and other display profiles still require qualification.
 A [native application-list experiment](spec/delivery/gnome-switcher-handoff.md)
 now keeps the passive bridge out of GNOME's Alt+Tab switcher and overview dash.
 Actual normal-window and omitted-popup controls validate the observations; normal

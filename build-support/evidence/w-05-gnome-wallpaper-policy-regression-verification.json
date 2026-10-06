@@ -1,0 +1,173 @@
+[
+  {
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "source_inputs": {
+      "build-support/check_workspace_budget.py": "3a9ec8bf7f4f205e1986d19b523d57b41288936e3343910f80b460d71474b700"
+    },
+    "started_at": "2026-10-06T05:07:58.005744+00:00",
+    "finished_at": "2026-10-06T05:08:02.735233+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 3221225472,\n  \"checkout_out_bytes\": 935369357,\n  \"linux_campaign_bytes\": 2164385170,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "build-support/record_gnome_reveal.py",
+      "--build-dir",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13",
+      "--reports",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-REVEAL-01-945512db85e04969ba1e1705a81ad62f.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-REVEAL-01-4291693a304c43f198e1c353fb108094.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-REVEAL-01-5637754091854150a7fd29b011b9f254.json",
+      "--output",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/gnome-reveal-calibration-cad9636c03324d3f8d58f535d574e6f4.json"
+    ],
+    "source_inputs": {
+      "build-support/record_gnome_reveal.py": "ed9882d9533fe4b3424ad4725829c8e01091ffc4f533d2b06fe982ade05b0cc5"
+    },
+    "started_at": "2026-10-06T05:08:02.735584+00:00",
+    "finished_at": "2026-10-06T05:08:04.508915+00:00",
+    "exit": 0,
+    "stdout": "[\n  {\n    \"control\": \"live\",\n    \"outcome\": \"fail\",\n    \"marker\": \"pass\",\n    \"icons\": \"pass\",\n    \"rectangle\": \"pass\",\n    \"background\": \"pass\",\n    \"visual_reveal\": \"pass\",\n    \"focus\": \"fail\",\n    \"reveal\": \"fail\",\n    \"marker_failures\": [],\n    \"samples\": 48,\n    \"max_gap_us\": 52906,\n    \"max_capture_us\": 2509,\n    \"transition_latency_us\": [\n      52451,\n      51948\n    ],\n    \"cleanup\": \"confirmed\"\n  },\n  {\n    \"control\": \"no-action\",\n    \"outcome\": \"fail\",\n    \"marker\": \"pass\",\n    \"icons\": \"pass\",\n    \"rectangle\": \"pass\",\n    \"background\": \"pass\",\n    \"visual_reveal\": \"fail\",\n    \"focus\": \"pass\",\n    \"reveal\": \"fail\",\n    \"marker_failures\": [],\n    \"samples\": 48,\n    \"max_gap_us\": 53730,\n    \"max_capture_us\": 2961,\n    \"transition_latency_us\": [\n      null,\n      1881\n    ],\n    \"cleanup\": \"confirmed\"\n  },\n  {\n    \"control\": \"transient-blank\",\n    \"outcome\": \"fail\",\n    \"marker\": \"fail\",\n    \"icons\": \"pass\",\n    \"rectangle\": \"fail\",\n    \"background\": \"pass\",\n    \"visual_reveal\": \"pass\",\n    \"focus\": \"fail\",\n    \"reveal\": \"fail\",\n    \"marker_failures\": [\n      \"marker.absent_or_invalid\"\n    ],\n    \"samples\": 48,\n    \"max_gap_us\": 52423,\n    \"max_capture_us\": 2703,\n    \"transition_latency_us\": [\n      52426,\n      51256\n    ],\n    \"cleanup\": \"confirmed\"\n  }\n]\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "source_inputs": {
+      "build-support/check_workspace_budget.py": "3a9ec8bf7f4f205e1986d19b523d57b41288936e3343910f80b460d71474b700"
+    },
+    "started_at": "2026-10-06T05:08:04.509193+00:00",
+    "finished_at": "2026-10-06T05:08:04.873258+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 3221225472,\n  \"checkout_out_bytes\": 935372872,\n  \"linux_campaign_bytes\": 2164405972,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "tests/desktop/test_gnome_reveal_record.py",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-REVEAL-01-945512db85e04969ba1e1705a81ad62f.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-REVEAL-01-4291693a304c43f198e1c353fb108094.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-REVEAL-01-5637754091854150a7fd29b011b9f254.json",
+      "-v"
+    ],
+    "source_inputs": {
+      "tests/desktop/test_gnome_reveal_record.py": "60051c642c1e0142ba9911e715cc4164997143636f9057308f1f266186481539"
+    },
+    "started_at": "2026-10-06T05:08:04.873531+00:00",
+    "finished_at": "2026-10-06T05:08:12.964718+00:00",
+    "exit": 0,
+    "stdout": "",
+    "stderr": "test_changed_background_pixels_with_valid_hash (__main__.RevealEvidence.test_changed_background_pixels_with_valid_hash) ... ok\ntest_changed_background_settings (__main__.RevealEvidence.test_changed_background_settings) ... ok\ntest_changed_journal (__main__.RevealEvidence.test_changed_journal) ... ok\ntest_changed_native_window_type (__main__.RevealEvidence.test_changed_native_window_type) ... ok\ntest_false_focus_pass (__main__.RevealEvidence.test_false_focus_pass) ... ok\ntest_focus_first_observed_after_deadline_fails (__main__.RevealEvidence.test_focus_first_observed_after_deadline_fails) ... ok\ntest_foreground_wrong_group (__main__.RevealEvidence.test_foreground_wrong_group) ... ok\ntest_foreign_foreground_pid (__main__.RevealEvidence.test_foreign_foreground_pid) ... ok\ntest_forged_transition_claim (__main__.RevealEvidence.test_forged_transition_claim) ... ok\ntest_late_action (__main__.RevealEvidence.test_late_action) ... ok\ntest_missing_action (__main__.RevealEvidence.test_missing_action) ... ok\ntest_missing_foreground_native_client (__main__.RevealEvidence.test_missing_foreground_native_client) ... ok\ntest_missing_paired_sample (__main__.RevealEvidence.test_missing_paired_sample) ... ok\ntest_native_controls (__main__.RevealEvidence.test_native_controls) ... ok\ntest_native_flag_without_visible_disappearance_fails (__main__.RevealEvidence.test_native_flag_without_visible_disappearance_fails) ... ok\ntest_relabelled_omitted_action (__main__.RevealEvidence.test_relabelled_omitted_action) ... ok\ntest_reversed_capture_order (__main__.RevealEvidence.test_reversed_capture_order) ... ok\ntest_temporary_failure_is_not_repaired_into_pass (__main__.RevealEvidence.test_temporary_failure_is_not_repaired_into_pass) ... ok\ntest_unconfirmed_foreground_exit (__main__.RevealEvidence.test_unconfirmed_foreground_exit) ... ok\ntest_visible_disappearance_without_native_state_fails (__main__.RevealEvidence.test_visible_disappearance_without_native_state_fails) ... ok\ntest_wrong_binding (__main__.RevealEvidence.test_wrong_binding) ... ok\ntest_wrong_window_geometry (__main__.RevealEvidence.test_wrong_window_geometry) ... ok\n\n----------------------------------------------------------------------\nRan 22 tests in 7.214s\n\nOK\n"
+  },
+  {
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "source_inputs": {
+      "build-support/check_workspace_budget.py": "3a9ec8bf7f4f205e1986d19b523d57b41288936e3343910f80b460d71474b700"
+    },
+    "started_at": "2026-10-06T05:08:12.965023+00:00",
+    "finished_at": "2026-10-06T05:08:13.333842+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 3221225472,\n  \"checkout_out_bytes\": 935376955,\n  \"linux_campaign_bytes\": 2164405972,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "tests/desktop/test_gnome_composition_record.py",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-COMPOSITION-01-a4b593be62a64e7b839064b3e01d53c4.json",
+      "-v"
+    ],
+    "source_inputs": {
+      "tests/desktop/test_gnome_composition_record.py": "9b14ed5a328a056a05f5ea424d519ad2e05663b36198c9b8e7d4c3208bce5371"
+    },
+    "started_at": "2026-10-06T05:08:13.334122+00:00",
+    "finished_at": "2026-10-06T05:08:14.702238+00:00",
+    "exit": 0,
+    "stdout": "",
+    "stderr": "test_background_change (__main__.CompositionEvidence.test_background_change) ... ok\ntest_calibration_after_enable (__main__.CompositionEvidence.test_calibration_after_enable) ... ok\ntest_changed_icon_script (__main__.CompositionEvidence.test_changed_icon_script) ... ok\ntest_changed_journal (__main__.CompositionEvidence.test_changed_journal) ... ok\ntest_empty_icon_mask_with_valid_pixel_hashes (__main__.CompositionEvidence.test_empty_icon_mask_with_valid_pixel_hashes) ... ok\ntest_false_calibration_pixels (__main__.CompositionEvidence.test_false_calibration_pixels) ... ok\ntest_foreign_icon_pid (__main__.CompositionEvidence.test_foreign_icon_pid) ... ok\ntest_invented_mask_count (__main__.CompositionEvidence.test_invented_mask_count) ... ok\ntest_missing_overlap_sample (__main__.CompositionEvidence.test_missing_overlap_sample) ... ok\ntest_missing_white_control (__main__.CompositionEvidence.test_missing_white_control) ... ok\ntest_moved_fixture (__main__.CompositionEvidence.test_moved_fixture) ... ok\ntest_native_record (__main__.CompositionEvidence.test_native_record) ... ok\ntest_overlapping_capture_times (__main__.CompositionEvidence.test_overlapping_capture_times) ... ok\ntest_relabelled_negative_control (__main__.CompositionEvidence.test_relabelled_negative_control) ... ok\ntest_unconfirmed_exit (__main__.CompositionEvidence.test_unconfirmed_exit) ... ok\n\n----------------------------------------------------------------------\nRan 15 tests in 1.034s\n\nOK\n"
+  },
+  {
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "source_inputs": {
+      "build-support/check_workspace_budget.py": "3a9ec8bf7f4f205e1986d19b523d57b41288936e3343910f80b460d71474b700"
+    },
+    "started_at": "2026-10-06T05:08:14.702522+00:00",
+    "finished_at": "2026-10-06T05:08:15.066704+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 3221225472,\n  \"checkout_out_bytes\": 935379996,\n  \"linux_campaign_bytes\": 2164405972,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "tests/desktop/test_gnome_record.py",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-MARKER-01-23f95542240243a5bc900fbfb433379d.json",
+      "-v"
+    ],
+    "source_inputs": {
+      "tests/desktop/test_gnome_record.py": "3f4f55aa8718bd018c9ddcb551737677653a739c9d5636e71456fa4f5e41c650"
+    },
+    "started_at": "2026-10-06T05:08:15.066978+00:00",
+    "finished_at": "2026-10-06T05:08:15.553479+00:00",
+    "exit": 0,
+    "stdout": "",
+    "stderr": "test_changed_background (__main__.EvidenceChecks.test_changed_background) ... ok\ntest_changed_source (__main__.EvidenceChecks.test_changed_source) ... ok\ntest_false_pixel_digest (__main__.EvidenceChecks.test_false_pixel_digest) ... ok\ntest_foreign_manager (__main__.EvidenceChecks.test_foreign_manager) ... ok\ntest_ineligible_capture (__main__.EvidenceChecks.test_ineligible_capture) ... ok\ntest_missing_generation (__main__.EvidenceChecks.test_missing_generation) ... ok\ntest_native_record (__main__.EvidenceChecks.test_native_record) ... ok\ntest_unbound_resource (__main__.EvidenceChecks.test_unbound_resource) ... ok\ntest_unconfirmed_cleanup (__main__.EvidenceChecks.test_unconfirmed_cleanup) ... ok\n\n----------------------------------------------------------------------\nRan 9 tests in 0.280s\n\nOK\n"
+  }
+]

@@ -1,0 +1,91 @@
+[
+  {
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "source_inputs": {
+      "build-support/check_workspace_budget.py": "3a9ec8bf7f4f205e1986d19b523d57b41288936e3343910f80b460d71474b700"
+    },
+    "started_at": "2026-10-06T05:05:18.723099+00:00",
+    "finished_at": "2026-10-06T05:05:25.492884+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 3221225472,\n  \"checkout_out_bytes\": 935349152,\n  \"linux_campaign_bytes\": 2147277439,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "build-support/record_gnome_wallpaper_policy.py",
+      "--build-dir",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13",
+      "--reports",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-WALLPAPER-POLICY-01-b00a987e960f4efd9026466b0c7716a7.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-WALLPAPER-POLICY-01-09af16c992b14e44a52833fef6a4bd0f.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-WALLPAPER-POLICY-01-c619f6cb8e3744a997c6ed9d0fcc21fc.json",
+      "--output",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/gnome-wallpaper-policy-calibration-baa6f01421be41d688c4ad43fd0717fe.json"
+    ],
+    "source_inputs": {
+      "build-support/record_gnome_wallpaper_policy.py": "e553d192b747de19c4569add464521aa9c8d42efb248be40bf1cdcf46756ee2b"
+    },
+    "started_at": "2026-10-06T05:05:25.493210+00:00",
+    "finished_at": "2026-10-06T05:05:27.311993+00:00",
+    "exit": 0,
+    "stdout": "[\n  {\n    \"control\": \"locked\",\n    \"outcome\": \"pass\",\n    \"locks\": \"pass\",\n    \"settings\": \"pass\",\n    \"files\": \"pass\",\n    \"background\": \"pass\",\n    \"marker\": \"pass\",\n    \"icons\": \"pass\",\n    \"samples\": 48,\n    \"max_gap_us\": 53353,\n    \"max_observation_us\": 2489,\n    \"cleanup\": \"confirmed\"\n  },\n  {\n    \"control\": \"unlocked\",\n    \"outcome\": \"fail\",\n    \"locks\": \"fail\",\n    \"settings\": \"fail\",\n    \"files\": \"pass\",\n    \"background\": \"pass\",\n    \"marker\": \"pass\",\n    \"icons\": \"pass\",\n    \"samples\": 48,\n    \"max_gap_us\": 53477,\n    \"max_observation_us\": 2319,\n    \"cleanup\": \"confirmed\"\n  },\n  {\n    \"control\": \"replace-policy\",\n    \"outcome\": \"fail\",\n    \"locks\": \"pass\",\n    \"settings\": \"pass\",\n    \"files\": \"fail\",\n    \"background\": \"pass\",\n    \"marker\": \"pass\",\n    \"icons\": \"pass\",\n    \"samples\": 48,\n    \"max_gap_us\": 51505,\n    \"max_observation_us\": 5230,\n    \"cleanup\": \"confirmed\"\n  }\n]\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "source_inputs": {
+      "build-support/check_workspace_budget.py": "3a9ec8bf7f4f205e1986d19b523d57b41288936e3343910f80b460d71474b700"
+    },
+    "started_at": "2026-10-06T05:05:27.312405+00:00",
+    "finished_at": "2026-10-06T05:05:27.729502+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 3221225472,\n  \"checkout_out_bytes\": 935352294,\n  \"linux_campaign_bytes\": 2147298856,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "tests/desktop/test_gnome_wallpaper_policy_record.py",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-WALLPAPER-POLICY-01-b00a987e960f4efd9026466b0c7716a7.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-WALLPAPER-POLICY-01-09af16c992b14e44a52833fef6a4bd0f.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-WALLPAPER-POLICY-01-c619f6cb8e3744a997c6ed9d0fcc21fc.json",
+      "-v"
+    ],
+    "source_inputs": {
+      "tests/desktop/test_gnome_wallpaper_policy_record.py": "4cd5e69875a1f247ece741b1b0ee10465d8c0da3b42195940fba8aea6abeaac3"
+    },
+    "started_at": "2026-10-06T05:05:27.729773+00:00",
+    "finished_at": "2026-10-06T05:05:47.990796+00:00",
+    "exit": 0,
+    "stdout": "",
+    "stderr": "test_background_corruption (__main__.PolicyEvidence.test_background_corruption) ... ok\ntest_compile_failure (__main__.PolicyEvidence.test_compile_failure) ... ok\ntest_equal_hash_does_not_hide_inode_change (__main__.PolicyEvidence.test_equal_hash_does_not_hide_inode_change) ... ok\ntest_foreign_compile_target (__main__.PolicyEvidence.test_foreign_compile_target) ... ok\ntest_foreign_icon_owner (__main__.PolicyEvidence.test_foreign_icon_owner) ... ok\ntest_foreign_owner_consistently (__main__.PolicyEvidence.test_foreign_owner_consistently) ... ok\ntest_foreign_profile (__main__.PolicyEvidence.test_foreign_profile) ... ok\ntest_icon_corruption (__main__.PolicyEvidence.test_icon_corruption) ... ok\ntest_keyfile_cannot_qualify_native_dconf (__main__.PolicyEvidence.test_keyfile_cannot_qualify_native_dconf) ... ok\ntest_late_capture (__main__.PolicyEvidence.test_late_capture) ... ok\ntest_late_generation (__main__.PolicyEvidence.test_late_generation) ... ok\ntest_late_replacement (__main__.PolicyEvidence.test_late_replacement) ... ok\ntest_lost_lock (__main__.PolicyEvidence.test_lost_lock) ... ok\ntest_missing_capture (__main__.PolicyEvidence.test_missing_capture) ... ok\ntest_missing_locked_key (__main__.PolicyEvidence.test_missing_locked_key) ... ok\ntest_missing_replacement (__main__.PolicyEvidence.test_missing_replacement) ... ok\ntest_mutable_policy_consistently (__main__.PolicyEvidence.test_mutable_policy_consistently) ... ok\ntest_native_matrix (__main__.PolicyEvidence.test_native_matrix) ... ok\ntest_native_stdout_must_match_values (__main__.PolicyEvidence.test_native_stdout_must_match_values) ... ok\ntest_no_perpetual_command (__main__.PolicyEvidence.test_no_perpetual_command) ... ok\ntest_omit_nonvisible_key_consistently (__main__.PolicyEvidence.test_omit_nonvisible_key_consistently) ... ok\ntest_path_does_not_replace_held_identity (__main__.PolicyEvidence.test_path_does_not_replace_held_identity) ... ok\ntest_replacement_cannot_change_content (__main__.PolicyEvidence.test_replacement_cannot_change_content) ... ok\ntest_replacement_must_unlink_held_original (__main__.PolicyEvidence.test_replacement_must_unlink_held_original) ... ok\ntest_unavailable_writer_is_not_policy (__main__.PolicyEvidence.test_unavailable_writer_is_not_policy) ... ok\ntest_unlocked_control_cannot_report_denial (__main__.PolicyEvidence.test_unlocked_control_cannot_report_denial) ... ok\ntest_write_denial_must_be_native_policy_reason (__main__.PolicyEvidence.test_write_denial_must_be_native_policy_reason) ... ok\ntest_write_must_precede_interval (__main__.PolicyEvidence.test_write_must_precede_interval) ... ok\ntest_writer_exit (__main__.PolicyEvidence.test_writer_exit) ... ok\ntest_writer_readback_must_change (__main__.PolicyEvidence.test_writer_readback_must_change) ... ok\ntest_writer_survivor (__main__.PolicyEvidence.test_writer_survivor) ... ok\ntest_wrong_native_writer (__main__.PolicyEvidence.test_wrong_native_writer) ... ok\ntest_wrong_policy_bytes (__main__.PolicyEvidence.test_wrong_policy_bytes) ... ok\ntest_wrong_runtime (__main__.PolicyEvidence.test_wrong_runtime) ... ok\ntest_wrong_write_target (__main__.PolicyEvidence.test_wrong_write_target) ... ok\n\n----------------------------------------------------------------------\nRan 35 tests in 19.933s\n\nOK\n"
+  }
+]

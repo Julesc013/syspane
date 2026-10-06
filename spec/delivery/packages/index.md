@@ -16,6 +16,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [W-05 GNOME native desktop reveal experiment](w-05-gnome-reveal.md) — Observe the composed scene while a real foreground window disappears and returns through Show Desktop.
 - [W-05 owned GNOME shell/compositor replacement](w-05-gnome-shell-recovery.md) — Observe exact shell exit, native replacement, bridge reattachment and input on the replacement desktop.
 - [W-05 native GNOME application-list absence](w-05-gnome-switcher.md) — Observe actual Alt+Tab and overview dash entries independently of candidate-reported window hints.
+- [W-05 native GNOME wallpaper policy preservation](w-05-gnome-wallpaper-policy.md) — Verify native locked background keys and immutable private policy during live composition.
 - [W-05 native GNOME image-wallpaper preservation](w-05-gnome-wallpaper.md) — Separate original file identity, native settings and externally observed image pixels.
 - [W-05 owned X11 window-manager recovery](w-05-shell-recovery.md) — Measure native manager replacement and candidate continuity without promoting failed placement.
 - [W-05 bounded X11 host investigation](w-05-x11-investigation.md) — Observe desktop-type placement and native reveal under a real window and icon manager in an owned lab.

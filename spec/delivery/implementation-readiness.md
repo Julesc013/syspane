@@ -213,6 +213,13 @@ an earlier passed substep. Forty-five new evidence checks pass. Default enableme
 moved windows, broader application/modal cases, lock/session changes and alternate
 triggers remain open; the native controller itself did not change.
 
+The [native wallpaper-policy checkpoint](gnome-wallpaper-policy-handoff.md) now
+preserves three actual dconf wallpaper locks and private policy identity during
+live composition. An unlocked control permits a URI change despite identical
+pixels; identical-byte policy replacement fails the held-file lifetime check.
+Thirty-five verifier checks pass. Protected deployment, locked image wallpaper,
+live policy updates and disclosure revocation remain separate open gates.
+
 Use the proposed cold-start exercise to detect missing observable contracts.
 Private implementation differences are permissible. Missing laboratories remain
 blocked qualification. A finite release scope must identify exact profiles,

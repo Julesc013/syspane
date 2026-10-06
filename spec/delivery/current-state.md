@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-06T04:39:45Z", "scope": "Named GNOME multi-window/modal focus and closed/workspace target invalidation pass; default enablement and broader qualification remain open"}
+updated: {"by": "codex", "at": "2026-10-06T05:07:50.665783+00:00", "scope": "Native wallpaper locks and policy lifetime preservation verified on the private GNOME solid-color profile"}
 ---
 
 # Current state and next admitted boundary
@@ -275,6 +275,13 @@ an earlier passed substep. Forty-five new evidence checks pass. Default enableme
 moved windows, broader application/modal cases, lock/session changes and alternate
 triggers remain open; the native controller itself did not change.
 
+The [native wallpaper-policy checkpoint](gnome-wallpaper-policy-handoff.md) now
+preserves three actual dconf wallpaper locks and private policy identity during
+live composition. An unlocked control permits a URI change despite identical
+pixels; identical-byte policy replacement fails the held-file lifetime check.
+Thirty-five verifier checks pass. Protected deployment, locked image wallpaper,
+live policy updates and disclosure revocation remain separate open gates.
+
 Canonical 0.2.0 documentation bundle, unchanged 0.1 authoring profile, preserved old
 fixtures, new experimental scene/command/capability 0.2 and admission descriptors.
 The initial settings registry has enforced metadata/default consistency and generated
@@ -314,7 +321,7 @@ License, contribution and release-identity decisions remain open.
 Continue the admitted campaign: extend the optional event-bound GNOME/DING focus
 integration with moved-window, broader application/modal, lock/session and alternate
 reveal-trigger contracts and independent native evidence before general enablement.
-Keep the original oracle and failed default evidence. Continue wallpaper policy,
+Keep the original oracle and failed default evidence. Continue locked-image wallpaper and protected-policy qualification,
 actual session-manager supervision and product continuity independently. The named
 GNOME/DING/PCManFM icon-input experiment now passes; other profiles
 need their own evidence. The named single-display PNG preservation experiment now

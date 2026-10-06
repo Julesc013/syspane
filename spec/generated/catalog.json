@@ -357,7 +357,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "5378b6dc9f8eab59b4e49307af7135e7815d0e232fce986fa55ea7b3f0fb2450"
+      "sha256": "ffa7015127ffc931bcf1dbcb892a790a429a53c53c53cf9e2e79aa6183a9b3f9"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -549,6 +549,18 @@
       "sha256": "762b3af33b7b15866431790bb520f862ccd05101a21d0b61c4fea59ee34c220c"
     },
     {
+      "id": "SP-GNOME-WALLPAPER-POLICY-HANDOFF",
+      "path": "delivery/gnome-wallpaper-policy-handoff.md",
+      "title": "Native GNOME wallpaper policy checkpoint",
+      "description": "Native dconf locks, immutable policy identity and independent live composition have separate evidence.",
+      "requires": [
+        "SP-W05-GNOME-WALLPAPER-POLICY",
+        "SP-GNOME-WALLPAPER-HANDOFF",
+        "SP-CAMPAIGN-ADMISSION"
+      ],
+      "sha256": "4d3ea87b17f88e441d35b23748e6e8de39812b1c1fbf1787d41aabafca4f9fad"
+    },
+    {
       "id": "SP-HISTORICAL-BUILD-HANDOFF",
       "path": "delivery/historical-build-handoff.md",
       "title": "Historical Windows shared-subset build checkpoint",
@@ -567,7 +579,7 @@
       "requires": [
         "SP-CURRENT"
       ],
-      "sha256": "1325aa91800cd0e32a2b9669b2ef9daa6c075179cb2a9f97e06cbd383ebdcd34"
+      "sha256": "c7b7870299f1fd65447397ab948b3e86432072054221c3ba649737840b95c093"
     },
     {
       "id": "SP-MEASURED-TIME-HANDOFF",
@@ -830,6 +842,19 @@
         "SP-ORACLE"
       ],
       "sha256": "466840593b471a47e4ea9c225220f25950c30dd38feec9c97c74f8b8fac7ca8b"
+    },
+    {
+      "id": "SP-W05-GNOME-WALLPAPER-POLICY",
+      "path": "delivery/packages/w-05-gnome-wallpaper-policy.md",
+      "title": "W-05 native GNOME wallpaper policy preservation",
+      "description": "Verify native locked background keys and immutable private policy during live composition.",
+      "requires": [
+        "SP-W05-GNOME-COMPOSITION",
+        "SP-DESKTOP",
+        "SP-POLICY",
+        "SP-CAMPAIGN-ADMISSION"
+      ],
+      "sha256": "81d3240a407fb41f07500021852a748f4d899bdab9502ca9b392ae359641b12a"
     },
     {
       "id": "SP-W05-GNOME-WALLPAPER",

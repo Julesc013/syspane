@@ -593,6 +593,27 @@ For the historical build, use `record_legacy_build.py --failure-metadata` with i
 existing build/smoke/output arguments. Records retain source/artifact identities,
 raw failures and explicitly unexecuted Windows symlink qualification.
 
+The [native wallpaper-policy checkpoint](../../spec/delivery/gnome-wallpaper-policy-handoff.md)
+uses the private dconf backend only under `--wallpaper-policy`. Prepare its pinned
+CLI with `python3 build-support/prepare_gnome_policy.py <owned-linux-build>` after
+a successful Windows coordinator `--action package` preflight. No packages are
+installed. After a `--action test` preflight before each invocation, run:
+
+```sh
+python3 tests/desktop/native_gnome_bootstrap.py <owned-linux-build> --wallpaper-policy locked
+python3 tests/desktop/native_gnome_bootstrap.py <owned-linux-build> --wallpaper-policy unlocked
+python3 tests/desktop/native_gnome_bootstrap.py <owned-linux-build> --wallpaper-policy replace-policy
+```
+
+The locked mode returns 0; the two completed negative controls return 1. Use the
+three exact emitted report paths with `build-support/record_gnome_wallpaper_policy.py
+--build-dir <build> --reports <locked> <unlocked> <replacement> --output
+<build>/native-evidence/<unique-record>.json`, then run
+`tests/desktop/test_gnome_wallpaper_policy_record.py <build> <locked> <unlocked>
+<replacement> -v` (35 checks). The private writer has a retained process lifetime
+and the original background/marker/icon oracle remains unchanged. The lab owns its
+policy files, so this does not qualify protected organization-policy deployment.
+
 Specification tooling separately uses Python 3.11+ in an isolated environment:
 
 ```powershell

@@ -23,6 +23,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Owned GNOME shell/compositor recovery checkpoint](gnome-shell-recovery-handoff.md) — Exact shell exit, native replacement, bridge reattachment and new-desktop input pass independently of calibrated omissions.
 - [Native GNOME application-list checkpoint](gnome-switcher-handoff.md) — The passive bridge stays out of Alt+Tab and the overview dash, with actual normal-window and omitted-popup controls.
 - [Native GNOME image-wallpaper checkpoint](gnome-wallpaper-handoff.md) — Original image identity, native configuration and independent pixels pass with separately calibrated faults.
+- [Native GNOME wallpaper policy checkpoint](gnome-wallpaper-policy-handoff.md) — Native dconf locks, immutable policy identity and independent live composition have separate evidence.
 - [Historical Windows shared-subset build checkpoint](historical-build-handoff.md) — Record the pinned v141_xp build, unchanged shared behavior, resolved runtime inputs and pending guest qualification.
 - [Implementation readiness and gates](implementation-readiness.md) — Distinguish implemented specification checks from pending native and release work.
 - [Measured telemetry and freshness checkpoint](measured-time-handoff.md) — Bind versioned measurement times to consumer clock scope, replay history and native delayed-delivery evidence.

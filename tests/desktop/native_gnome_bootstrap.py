@@ -46,7 +46,9 @@ SOURCES = ['tests/desktop/native_gnome_bootstrap.py', 'tests/desktop/native_orac
            'tests/desktop/gnome_shell_recovery.py', 'spec/delivery/packages/w-05-gnome-shell-recovery.md',
            'tests/desktop/gnome_focus_integration.py', 'spec/delivery/packages/w-05-gnome-focus-integration.md',
            'tests/desktop/gnome_focus_scenarios.py', 'tests/desktop/gnome_focus_controls.py',
-           'spec/delivery/packages/w-05-gnome-focus-scenarios.md']
+           'spec/delivery/packages/w-05-gnome-focus-scenarios.md',
+           'tests/desktop/gnome_wallpaper_policy.py', 'build-support/gnome-policy-runtime.json',
+           'build-support/prepare_gnome_policy.py', 'spec/delivery/packages/w-05-gnome-wallpaper-policy.md']
 
 
 def marker_trace(display, environment, sample=None, dismiss=True):
@@ -136,6 +138,10 @@ def observe(environment, pid, channel, marker, composition, foreground_pid=None,
             import gnome_focus_baseline
             result['focus_baseline'] = gnome_focus_baseline.observe(display, environment, pid, foreground_pid,
                 Path(environment['HOME']).parent, result.get('reveal'), result.get('composition'))
+        if environment.get('SYSPANE_GNOME_WALLPAPER_POLICY'):
+            import gnome_wallpaper_policy
+            result['wallpaper_policy'] = gnome_wallpaper_policy.observe(display, environment, pid,
+                Path(environment['HOME']).parent, result['composition'], marker_trace)
         if environment.get('SYSPANE_GNOME_FOCUS_SCENARIOS'):
             import gnome_focus_scenarios
             result['focus_scenarios'] = gnome_focus_scenarios.observe(display, environment,
@@ -196,7 +202,7 @@ def group_members(group):
     return members
 
 
-def run(build, marker=False, control='live', composition=None, reveal=None, focus_baseline=None, focus_trace=False, icon_input=None, wallpaper=None, switcher=None, icon_recovery=None, shell_recovery=None, focus_integration=None, focus_scenarios=None):
+def run(build, marker=False, control='live', composition=None, reveal=None, focus_baseline=None, focus_trace=False, icon_input=None, wallpaper=None, switcher=None, icon_recovery=None, shell_recovery=None, focus_integration=None, focus_scenarios=None, wallpaper_policy=None):
     # Retain orphaned shell helpers for reaping; no service/session can adopt them.
     if ctypes.CDLL(None, use_errno=True).prctl(36, 1, 0, 0, 0) != 0:
         raise OSError(ctypes.get_errno(), 'cannot retain descendant exit evidence')
@@ -222,6 +228,8 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
         family = 'GNOME-SHELL-RECOVERY-01'
     if focus_integration:
         family = 'GNOME-FOCUS-BASELINE-01'
+    if wallpaper_policy:
+        family = 'GNOME-WALLPAPER-POLICY-01'
     with_icons = bool(composition) or focus_baseline == 'ding'
     token = family + '-' + uuid.uuid4().hex
     workspace = build / token
@@ -246,6 +254,7 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
               'shell_recovery_control': shell_recovery,
               'focus_integration_mode': focus_integration,
               'focus_scenarios_mode': focus_scenarios,
+              'wallpaper_policy_control': wallpaper_policy,
               'executed_at': datetime.now(timezone.utc).isoformat(),
               'source_base': subprocess.check_output(['git', '-c', 'safe.directory=' + str(ROOT), 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
               'source_inputs': {p: sha(ROOT / p) for p in SOURCES},
@@ -274,6 +283,8 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
         report['qualification'] = 'Optional event-bound native Show Desktop focus integration and declared guards only; default behavior, broader focus/session cases and complete product qualification remain open.'
     if focus_scenarios:
         report['qualification'] = 'Optional owned GNOME X11 multiple-window/modal focus, closed lifetime and workspace invalidation only; broader session/alternate triggers and complete host qualification remain open.'
+    if wallpaper_policy:
+        report['qualification'] = 'Native private dconf wallpaper locks and policy preservation only; protected deployment, image policy, live revocation and complete host qualification remain open.'
     archive = workspace / 'source-inputs.zip'
     with zipfile.ZipFile(archive, 'x', compression=zipfile.ZIP_DEFLATED) as target:
         for name in SOURCES:
@@ -414,6 +425,9 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
                 report['commands'].append({'command': command, 'exit': configured.returncode,
                                            'stdout': configured.stdout, 'stderr': configured.stderr})
                 configured.check_returncode()
+        if wallpaper_policy:
+            import gnome_wallpaper_policy
+            report['wallpaper_policy_setup'] = gnome_wallpaper_policy.prepare(workspace, environment, build, wallpaper_policy)
         (workspace / 'bus.xml').write_text('<busconfig><type>session</type><listen>' + bus + '</listen>'
                                          '<policy context="default"><allow send_destination="*"/><allow receive_sender="*"/><allow own="*"/></policy></busconfig>')
         (workspace / 'system-bus.xml').write_text('<busconfig><type>system</type><listen>' + system_bus + '</listen>'
@@ -438,6 +452,20 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
             time.sleep(.05)
         else:
             raise TimeoutError('owned session bus unavailable')
+        policy_writer = None
+        if wallpaper_policy:
+            policy_writer = launch('dconf-writer', ['/usr/libexec/dconf-service'])
+            deadline = time.monotonic() + 3
+            while time.monotonic() < deadline:
+                ready = subprocess.run(['/usr/bin/gdbus', 'call', '--address', bus, '--dest', 'org.freedesktop.DBus',
+                    '--object-path', '/org/freedesktop/DBus', '--method', 'org.freedesktop.DBus.GetConnectionUnixProcessID', 'ca.desrt.dconf'],
+                    env=environment, capture_output=True, text=True, timeout=1)
+                if ready.returncode == 0 and ready.stdout.strip() == '(uint32 ' + str(policy_writer.pid) + ',)':
+                    report['wallpaper_policy_writer_pid'] = policy_writer.pid
+                    break
+                time.sleep(.05)
+            else:
+                raise TimeoutError('private dconf writer did not acquire its bus name')
         if icon_input or switcher:
             registry = launch('registry', ['/usr/libexec/at-spi2-registryd'])
             deadline = time.monotonic() + 3
@@ -523,6 +551,10 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
                     report['outcome'] = report['observation']['shell_recovery']['outcome']
                     if report['observation']['shell_recovery'].get('error'):
                         report['error'] = report['observation']['shell_recovery']['error']
+                if wallpaper_policy:
+                    if policy_writer.poll() is not None:raise ValueError('private dconf writer exited')
+                    report['wallpaper_policy_mapped_files'] = mapped_files(policy_writer.pid)
+                    report['outcome'] = report['observation']['wallpaper_policy']['evaluation']['outcome']
                 if focus_scenarios:
                     if focus_helper is None or focus_helper.poll() is not None:raise ValueError('retained focus helper not live')
                     report['focus_helper_mapped_files'] = mapped_files(focus_helper.pid)
@@ -603,6 +635,10 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
                     report[key] = {'path': str(path), 'bytes': path.stat().st_size, 'sha256': sha(path)}
             extension_root = workspace / 'data/gnome-shell/extensions'
             report['enabled_extension_inputs_after'] = inventory(extension_root) if extension_root.exists() else {}
+        if wallpaper_policy:
+            path = workspace/'wallpaper-policy.jsonl'
+            if path.exists():report['wallpaper_policy_journal'] = {'path':str(path),'bytes':path.stat().st_size,'sha256':sha(path)}
+            report['wallpaper_policy_inputs_after'] = inventory(workspace/'wallpaper-policy')
         if focus_scenarios:
             for key,name in [('focus_scenarios_journal','focus-scenarios.jsonl'),('focus_control_events','focus-control-events.jsonl')]:
                 path = workspace/name
@@ -676,7 +712,12 @@ if __name__ == '__main__':
     parser.add_argument('--shell-recovery', choices=('live','no-reattach','no-restart'))
     parser.add_argument('--focus-integration', choices=('observe','restore'))
     parser.add_argument('--focus-scenarios', choices=('observe','restore','helper-exit'))
+    parser.add_argument('--wallpaper-policy', choices=('locked','unlocked','replace-policy'))
     args = parser.parse_args()
+    if args.wallpaper_policy:
+        if any([args.marker,args.composition,args.reveal,args.focus_baseline,args.focus_trace,args.icon_input,args.wallpaper,args.switcher,args.icon_recovery,args.shell_recovery,args.focus_integration,args.focus_scenarios]) or args.marker_control != 'live':
+            parser.error('--wallpaper-policy owns its private backend and live composition')
+        args.composition = 'live'
     if args.focus_scenarios:
         if any([args.marker,args.composition,args.reveal,args.focus_baseline,args.focus_trace,args.icon_input,args.wallpaper,args.switcher,args.icon_recovery,args.shell_recovery,args.focus_integration]) or args.marker_control != 'live':
             parser.error('--focus-scenarios owns its untraced candidate baseline and workspace setup')
@@ -725,4 +766,4 @@ if __name__ == '__main__':
         parser.error('composition uses its own above/below controls')
     if not args.marker and args.marker_control != 'live':
         parser.error('--marker-control requires --marker')
-    sys.exit(run(owned_build(args.build_dir), args.marker or bool(args.composition), args.marker_control, args.composition, args.reveal, args.focus_baseline, args.focus_trace, args.icon_input, args.wallpaper, args.switcher, args.icon_recovery, args.shell_recovery, args.focus_integration, args.focus_scenarios))
+    sys.exit(run(owned_build(args.build_dir), args.marker or bool(args.composition), args.marker_control, args.composition, args.reveal, args.focus_baseline, args.focus_trace, args.icon_input, args.wallpaper, args.switcher, args.icon_recovery, args.shell_recovery, args.focus_integration, args.focus_scenarios, args.wallpaper_policy))
