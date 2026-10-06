@@ -781,3 +781,20 @@ adversarial mutations of those original observations. No operational values ente
 this clock fixture. The retained-cache relay now uses the existing
 `w-25-gjs-clock-linux-x64-gcc13.json` collector evidence binding; the earlier
 presentation and native-cache records remain historical and unchanged.
+
+
+The [Windows host observation package](../../spec/delivery/packages/w-03-windows-investigation.md)
+adds a read-only native prerequisite with no C++ target or profile change. Run the
+workspace test preflight before each command:
+
+```powershell
+.venv/Scripts/python.exe -X utf8 tests/desktop/test_windows_host_inventory.py -v
+.venv/Scripts/python.exe -X utf8 tests/desktop/windows_host_inventory.py
+```
+
+The observer owns an eight-second child and writes exact source/runtime identities,
+two shell observations and cleanup to a fresh `out/campaign/WINDOWS-HOST-INVENTORY-01-*`
+directory. It records no window titles or pixels and performs no shell/input mutation.
+`observed` describes only a consistent native structure, not a qualified attachment
+or visible host. The complete desktop experiment requires a designated synthetic
+lab and the package's unchanged independent pixel/input/recovery acceptance.

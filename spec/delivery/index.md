@@ -6,6 +6,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Binaries, packages and release identity](artifacts.md) — Choose stable binary roles and exact offline payload closure.
 - [October audit disposition](audit-2026-10-04.md) — Map supplied recommendations to amended owners without treating review text as authority.
 - [Foundation and native-experiment campaign admission](campaign-admission.md) — Record the user-admitted implementation scope and the first package's closed boundaries.
+- [Foundation campaign coverage audit](campaign-coverage.md) — Map the admitted campaign to actual evidence and remaining implementation or native laboratory requirements.
 - [Current state and next admitted boundary](current-state.md) — An honest resumption point for the initial greenfield specification.
 - [Synchronized data owner checkpoint](data-view-handoff.md) — Bind atomic model admission, independent lease state and revocable presentation to portable execution evidence.
 - [Independent diagnostic implementation checkpoint](diagnostic-handoff.md) — Bind independent public reporting and native inspector startup to scoped Windows/Linux evidence.
@@ -48,6 +49,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Build targets and qualification profiles](target-profiles.md) — Bind concrete runtime floors to evidence instead of inferring support from platform names.
 - [Bounded telemetry document checkpoint](telemetry-wire-handoff.md) — Bind versioned delivery decoding and exact replay preservation to native-compiled portable cases without claiming a live subscription.
 - [Portable transport and policy checkpoint](transport-handoff.md) — Resume W-24 from executable portable contracts without claiming native authentication.
+- [Contemporary Windows host observation checkpoint](windows-host-inventory-handoff.md) — Read-only Explorer ownership and icon hierarchy, with native host execution still dependent on a designated laboratory.
 - [Implementation work-package closure](work-packages.md) — Make each admitted package implementable, verifiable and resumable from the repository.
 - [work-units.json](work-units.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [Initial X11 desktop-host investigation](x11-host-handoff.md) — Bind real Openbox reveal and PCManFM placement failures to independent pixels, with image-background startup failures preserved.

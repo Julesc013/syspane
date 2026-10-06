@@ -10,6 +10,11 @@ themes and presets describe user intent; native adapters supply each platform's
 data, controls and desktop integration. A companion screensaver reuses the
 presentation components under its own lifecycle and privacy policy.
 
+The [campaign coverage audit](spec/delivery/campaign-coverage.md) maps implemented
+foundations and outstanding native gates. A [Windows observer](spec/delivery/windows-host-inventory-handoff.md)
+now records Explorer ownership and icon hierarchy; actual Windows desktop tests
+await a designated synthetic lab.
+
 **Current stage: foundation implementation.** The C++17 model, explicit CMake
 targets and development smoke program build on pinned Windows and Linux profiles.
 Portable framing, request replay, settings-preview policy and connection handling

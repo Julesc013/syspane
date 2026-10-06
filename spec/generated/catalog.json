@@ -350,6 +350,17 @@
       "sha256": "44b1a55c11dc923407af0812c3f38591d0c5da9fe4ef8a92c1b76a18a26d534a"
     },
     {
+      "id": "SP-CAMPAIGN-COVERAGE",
+      "path": "delivery/campaign-coverage.md",
+      "title": "Foundation campaign coverage audit",
+      "description": "Map the admitted campaign to actual evidence and remaining implementation or native laboratory requirements.",
+      "requires": [
+        "SP-CAMPAIGN-ADMISSION",
+        "SP-CURRENT"
+      ],
+      "sha256": "0805de214653f8d2672b2ecb73d0ca1422c978edc2261bcc83ae8518209a04c8"
+    },
+    {
       "id": "SP-CURRENT",
       "path": "delivery/current-state.md",
       "title": "Current state and next admitted boundary",
@@ -357,7 +368,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "7bf3342da71826e89809d909cd46758eb02ed6a9ebc7b46299252af4bb47d96c"
+      "sha256": "b3c1d495327135fcdb7f021798cfd5def0a970d559ac8b9d4e23e5be4519b0e7"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -752,6 +763,18 @@
         "SP-TESTING"
       ],
       "sha256": "02086132205bcb49baf13eb724bb88c4a2129d1794ded3c7c41d116c4a980459"
+    },
+    {
+      "id": "SP-W03-PACKAGE",
+      "path": "delivery/packages/w-03-windows-investigation.md",
+      "title": "W-03 contemporary Windows host investigation",
+      "description": "Establish native Explorer topology and an admitted desktop laboratory before attachment, pixels and shell recovery.",
+      "requires": [
+        "SP-WINDOWS",
+        "SP-W02-PACKAGE",
+        "SP-CAMPAIGN-ADMISSION"
+      ],
+      "sha256": "107efa32d2808000de3e498c4986898e5c62ae2fd071282190a80ebdbb423a70"
     },
     {
       "id": "SP-W04-PACKAGE",
@@ -1283,6 +1306,17 @@
         "SP-W24-PACKAGE"
       ],
       "sha256": "99ee6d276ecf61b6baf9da7e7c710aefb8d29f90bc79d5e39d7e7d2ed9e01900"
+    },
+    {
+      "id": "SP-WINDOWS-HOST-INVENTORY-HANDOFF",
+      "path": "delivery/windows-host-inventory-handoff.md",
+      "title": "Contemporary Windows host observation checkpoint",
+      "description": "Read-only Explorer ownership and icon hierarchy, with native host execution still dependent on a designated laboratory.",
+      "requires": [
+        "SP-W03-PACKAGE",
+        "SP-CAMPAIGN-ADMISSION"
+      ],
+      "sha256": "282527f6a5e1e518b25d1057a20f76f792efd9f093782e6177ee3567786a8876"
     },
     {
       "id": "SP-WORK-PACKAGES",

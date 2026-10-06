@@ -122,7 +122,8 @@
       "specs": [
         "SP-WINDOWS",
         "SP-PROCESSES",
-        "SP-DESKTOP"
+        "SP-DESKTOP",
+        "SP-W03-PACKAGE"
       ],
       "acceptance_tests": [
         "T-DESKTOP-REVEAL",
@@ -131,12 +132,15 @@
       ],
       "planned_outputs": [
         "source/desktop/windows/",
-        "source/platform/windows/"
+        "source/platform/windows/",
+        "tests/desktop/windows_host_inventory.py"
       ],
-      "status": "planned",
+      "status": "in_progress",
       "authority_class": "native_lab",
-      "execution_grant": null,
-      "notes": "Dependency-ready is not execution authority. Native work may produce a failed/inconclusive probe without a support claim; independent tracks can continue."
+      "execution_grant": "user:foundation-native-campaign-2026-10-05",
+      "notes": "Read-only native Windows observer now binds the held Explorer process/image/session and two bounded shell/icon hierarchy observations. Fourteen structural tests pass. No pixels, input, attachment or shell restart occurred. Windows 10 VM lab designation/usability remains pending; the package admits only the read-only phase until that boundary is closed. Structural observation does not qualify a host.",
+      "package": "delivery/packages/w-03-windows-investigation.md",
+      "evidence": "delivery/windows-host-inventory-handoff.md"
     },
     {
       "id": "W-04",

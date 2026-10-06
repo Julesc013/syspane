@@ -1,0 +1,92 @@
+{
+  "schema_version": "0.1.0",
+  "work_id": "W-03",
+  "source_ref": "a9015c02a60b89e77e24eb25a8e0d3f755e15c61",
+  "objective": "Begin contemporary Windows host investigation with bounded native Explorer ownership/topology observation and expose remaining campaign gates without claiming desktop qualification.",
+  "changed_files": [
+    ".gitattributes",
+    "README.md",
+    "TODO.md",
+    "build-support/evidence/w-03-windows-inventory-attempts.json",
+    "build-support/evidence/w-03-windows-inventory-final-execution.json",
+    "build-support/evidence/w-03-windows-inventory-final-report.json",
+    "build-support/evidence/w-03-windows-inventory-final-source-inputs.zip",
+    "build-support/evidence/w-03-windows-inventory-final-stderr.txt",
+    "build-support/evidence/w-03-windows-inventory-final-stdout.json",
+    "build-support/evidence/w-03-windows-inventory-initial-execution.json",
+    "build-support/evidence/w-03-windows-inventory-initial-report.json",
+    "build-support/evidence/w-03-windows-inventory-initial-source-inputs.zip",
+    "build-support/evidence/w-03-windows-inventory-initial-stderr.txt",
+    "build-support/evidence/w-03-windows-inventory-initial-stdout.json",
+    "build-support/evidence/w-03-windows-inventory-lab.json",
+    "build-support/evidence/w-03-windows-inventory-staging.json",
+    "build-support/evidence/w-03-windows-inventory-verification.json",
+    "build-support/evidence/windows-host-inventory-handoff.json",
+    "docs/developers/build.md",
+    "spec/checksums.json",
+    "spec/delivery/campaign-coverage.md",
+    "spec/delivery/current-state.md",
+    "spec/delivery/index.md",
+    "spec/delivery/packages/index.md",
+    "spec/delivery/packages/w-03-windows-investigation.md",
+    "spec/delivery/windows-host-inventory-handoff.md",
+    "spec/delivery/work-units.json",
+    "spec/generated/catalog.json",
+    "tests/desktop/test_windows_host_inventory.py",
+    "tests/desktop/windows_host_inventory.py"
+  ],
+  "decisions": [
+    "Use GetShellWindow and a held process handle, native creation time/session and exact system Explorer path/image digest; do not select by process name.",
+    "Observe only fixed shell/icon classes under bounded enumerations; record no window title, icon label, user file or pixels.",
+    "Keep two original observations and report changed/ambiguous/incomplete ownership separately; equal polls do not establish HWND creation identity.",
+    "Preserve initial and final native attempts with exact stdout bytes, source archives, commands, preflights and cleanup.",
+    "Keep Windows 10 VM designation pending and leave the original VM untouched; record Windows/historical/Mac gaps in the existing campaign scope."
+  ],
+  "checks": [
+    {
+      "name": "Fourteen literal structural decision fixtures",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-03-windows-inventory-final-execution.json"
+    },
+    {
+      "name": "Native Windows 10 read-only Explorer/icon hierarchy and normal owned-child exit",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-03-windows-inventory-final-report.json"
+    },
+    {
+      "name": "Original attempts and exact source/runtime identities",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-03-windows-inventory-attempts.json"
+    },
+    {
+      "name": "Specification schemas, fixtures, generated metadata, tooling and integrity",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-03-windows-inventory-verification.json"
+    },
+    {
+      "name": "Windows attachment, external pixels, Win+D/reveal, icon input and Explorer recovery",
+      "outcome": "not_run",
+      "evidence": "spec/delivery/windows-host-inventory-handoff.md"
+    },
+    {
+      "name": "Read-only Windows 10 VM registration and powered-off state; lab designation unverified",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-03-windows-inventory-lab.json"
+    }
+  ],
+  "open_questions": [
+    "Is the registered Windows 10 Hyper-V VM an admitted synthetic desktop laboratory, and is its guest usable?",
+    "Historical XP/7 guest scope and a macOS runner remain unresolved.",
+    "Native HWND lifetime admission and Windows capture/input/recovery contracts still need closure before the host experiment."
+  ],
+  "next_step": "Resolve Windows laboratory designation and close the native host experiment; advance independent W-25 measured delivery and renderer recovery while laboratory scope remains pending.",
+  "authority_used": [
+    "user:foundation-native-campaign-2026-10-05"
+  ],
+  "limitations": [
+    "This read-only observer is not a surface implementation or desktop-host qualification.",
+    "W-03 and the campaign remain incomplete; the coverage audit does not redefine their completion criteria.",
+    "No C++ target/profile changed, so prior compiled suites and local smoke packages retain their exact earlier evidence identities.",
+    "No active desktop capture/input, wallpaper change, Explorer restart, VM boot/mutation, privilege, public release or AIDE activation occurred."
+  ]
+}

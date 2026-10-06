@@ -13,3 +13,5 @@ spec/** text eol=lf
 source/third_party/** -text
 # Native diagnostic evidence retains exact upstream bytes, including blank-line spaces.
 build-support/evidence/w-05-gnome-focus-trace-journals/*-native_focus_log.log -text -whitespace
+# Preserve exact Windows native stdout bytes referenced by observation digests.
+build-support/evidence/w-03-windows-inventory-*-stdout.json -text whitespace=cr-at-eol

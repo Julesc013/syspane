@@ -1,0 +1,15 @@
+{
+  "started_at": "2026-10-06T07:50:27.179602+00:00",
+  "finished_at": "2026-10-06T07:50:30.514969+00:00",
+  "command": [
+    "powershell.exe",
+    "-NoProfile",
+    "-NonInteractive",
+    "-Command",
+    "$ErrorActionPreference='Stop'; [ordered]@{Identity=[System.Security.Principal.WindowsIdentity]::GetCurrent().Name; VM=Get-VM -Name 'Windows 10' | Select-Object Name,Id,@{Name='State';Expression={$_.State.ToString()}},Path,Generation; Disks=@(Get-VMHardDiskDrive -VMName 'Windows 10' | Select-Object Path,ControllerType,ControllerNumber,ControllerLocation)} | ConvertTo-Json -Depth 5"
+  ],
+  "exit": 0,
+  "stdout": "{\n    \"Identity\":  \"BLACKGLASS-WIN1\\\\Jules\",\n    \"VM\":  {\n               \"Name\":  \"Windows 10\",\n               \"Id\":  \"3ebbe558-91b9-435b-96e4-0c8199bd38ad\",\n               \"State\":  \"Off\",\n               \"Path\":  \"D:\\\\VMs\\\\Hyper-V\",\n               \"Generation\":  2\n           },\n    \"Disks\":  [\n                  {\n                      \"Path\":  \"D:\\\\VMs\\\\Hyper-V\\\\Virtual Hard Disks\\\\Windows 10_C53E8752-2E9D-4AE9-A301-2F532EF47BEA.avhdx\",\n                      \"ControllerType\":  1,\n                      \"ControllerNumber\":  0,\n                      \"ControllerLocation\":  0\n                  }\n              ]\n}\n",
+  "stderr": "",
+  "scope": "Read-only VM registration/state/disk-path inventory. No boot, checkpoint, disk write or guest capture. Designation and guest usability remain unverified."
+}

@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-06T07:34:36.784376+00:00", "scope": "Authenticated asynchronous GNOME clock, public age/expiry and native teardown verified"}
+updated: {"by": "codex", "at": "2026-10-06T07:47:37.032612+00:00", "scope": "Windows native structural observation and campaign coverage audit"}
 ---
 
 # Current state and next admitted boundary
@@ -357,6 +357,13 @@ inactive with no grants. USK and ScreenSave are not adopted runtime dependencies
 License, contribution and release-identity decisions remain open.
 
 ## Next work
+
+Start with the [campaign coverage audit](campaign-coverage.md). W-03 now has a
+[read-only Windows observer](windows-host-inventory-handoff.md): native Explorer
+ownership and its icon chain were observed, while actual attachment/capture/reveal
+remain pending a designated synthetic Windows lab. Resolve that independent native
+track alongside the remaining W-25 implementation before expanding optional GNOME
+scenarios. Historical guest scope and a macOS runner remain unresolved.
 
 Continue the admitted campaign: extend the optional event-bound GNOME/DING focus
 integration with moved-window, broader application/modal, lock/session and alternate
