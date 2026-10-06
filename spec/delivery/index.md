@@ -11,6 +11,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Automatic recovery from independent render failure checkpoint](controller-render-recovery-handoff.md) — The persistent controller replaces failed rendering lifetimes and preserves original measured collection.
 - [Current state and next admitted boundary](current-state.md) — An honest resumption point for the initial greenfield specification.
 - [Synchronized data owner checkpoint](data-view-handoff.md) — Bind atomic model admission, independent lease state and revocable presentation to portable execution evidence.
+- [Shared controller demand ownership checkpoint](demand-owner-handoff.md) — Bounded authorized leases merge into fair source jobs, with cancellation distinct from confirmed stop.
 - [Independent diagnostic implementation checkpoint](diagnostic-handoff.md) — Bind independent public reporting and native inspector startup to scoped Windows/Linux evidence.
 - [Independent editor lifetime checkpoint](editor-exit-handoff.md) — An owned X11 candidate has independent keyboard and native exit with external process, pixel and input evidence.
 - [Independent recent-failure metadata checkpoint](failure-metadata-handoff.md) — Bind bounded native fault records, private file handling and policy-gated diagnostic projection to current evidence.
@@ -51,6 +52,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Independent temporal oracle implementation checkpoint](oracle-handoff.md) — Bind external marker/time evaluation and native X11 fault calibration to source and raw capture evidence.
 - [Explicit private preservation checkpoint](preservation-handoff.md) — Bind opaque configuration copies, native controls and interrupted publication to measured development evidence.
 - [Portable recovery implementation checkpoint](recovery-handoff.md) — Record lease, render-progress and restart decisions while preserving native recovery gates.
+- [SysPane 0.1.0 release objective and unresolved admission](release-0.1.0.md) — Preserve the requested complete desktop release across Windows 9x, Windows NT, X11, Wayland and Mac OS X.
 - [Greenfield implementation campaign](roadmap.md) — Build native vertical slices and contracts together in risk order.
 - [Complete remote state import checkpoint](state-import-handoff.md) — Connect bounded telemetry documents to a revocable complete model without changing reported retention or inventing measurement freshness.
 - [Native inventory subscription checkpoint](subscriptions-handoff.md) — Bind demand expiry, policy-bound queues and complete-state receipt to authenticated native process experiments.

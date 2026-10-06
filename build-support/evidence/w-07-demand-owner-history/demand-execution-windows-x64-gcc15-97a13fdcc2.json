@@ -1,0 +1,66 @@
+[
+  {
+    "step": "configure",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-06T14:17:56.322476+00:00",
+    "finished_at": "2026-10-06T14:18:04.284037+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 5368709120,\n  \"checkout_out_bytes\": 1258339992,\n  \"linux_campaign_bytes\": 3149314426,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "configure",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "out/campaign/demand_step.py",
+      "windows-x64-gcc15",
+      "configure"
+    ],
+    "started_at": "2026-10-06T14:18:04.284773+00:00",
+    "finished_at": "2026-10-06T14:18:06.524295+00:00",
+    "exit": 0,
+    "stdout": "profile verified: windows-x64-gcc15\nvendored dependency digests: pass\n-- Configuring done (1.4s)\n-- Generating done (0.1s)\n-- Build files have been written to: D:/Projects/SysPane/syspane/out/build/windows-x64-gcc15\n \nAttempt: D:\\Projects\\SysPane\\syspane\\out\\campaign\\w-07-demand-owner\\windows-x64-gcc15-configure-6ed4e120a5\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-06T14:18:06.524666+00:00",
+    "finished_at": "2026-10-06T14:18:07.130318+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 5368709120,\n  \"checkout_out_bytes\": 1259190809,\n  \"linux_campaign_bytes\": 3149314426,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "out/campaign/demand_step.py",
+      "windows-x64-gcc15",
+      "build"
+    ],
+    "started_at": "2026-10-06T14:18:07.130637+00:00",
+    "finished_at": "2026-10-06T14:18:10.709914+00:00",
+    "exit": 1,
+    "stdout": "[1/4] Building CXX object CMakeFiles/syspane_demand_tests.dir/tests/fault/demand_tests.cpp.obj\nFAILED: [code=1] CMakeFiles/syspane_demand_tests.dir/tests/fault/demand_tests.cpp.obj \nC:\\Users\\Jules\\AppData\\Local\\Microsoft\\WinGet\\Packages\\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\\mingw64\\bin\\g++.exe -DJSON_DIAGNOSTICS=0 -DJSON_DIAGNOSTIC_POSITIONS=1 -DWINVER=0x0A00 -D_WIN32_WINNT=0x0A00 -ID:/Projects/SysPane/syspane/source/runtime -ID:/Projects/SysPane/syspane/source/configuration -ID:/Projects/SysPane/syspane/source/protocol -isystem D:/Projects/SysPane/syspane/source/third_party -g -std=c++17 -Wall -Wextra -Wpedantic -Werror -march=x86-64 -mtune=generic -MD -MT CMakeFiles/syspane_demand_tests.dir/tests/fault/demand_tests.cpp.obj -MF CMakeFiles\\syspane_demand_tests.dir\\tests\\fault\\demand_tests.cpp.obj.d -o CMakeFiles/syspane_demand_tests.dir/tests/fault/demand_tests.cpp.obj -c D:/Projects/SysPane/syspane/tests/fault/demand_tests.cpp\nD:/Projects/SysPane/syspane/tests/fault/demand_tests.cpp: In function 'void merge()':\nD:/Projects/SysPane/syspane/tests/fault/demand_tests.cpp:45:1: error: dangling pointer to an unnamed temporary may be used [-Werror=dangling-pointer=]\n   45 | }\n      | ^\nD:/Projects/SysPane/syspane/tests/fault/demand_tests.cpp:35:89: note: unnamed temporary defined here\n   35 |         job.plan.selections == std::vector<r::DemandSelection>{{\"network.rx\",\"entity:1\"}} && !owner.take(0));\n      |                                                                                         ^\nD:/Projects/SysPane/syspane/tests/fault/demand_tests.cpp:45:1: error: dangling pointer to an unnamed temporary may be used [-Werror=dangling-pointer=]\n   45 | }\n      | ^\nD:/Projects/SysPane/syspane/tests/fault/demand_tests.cpp:41:118: note: unnamed temporary defined here\n   41 |         std::vector<r::DemandSelection>{{\"network.rx\",\"entity:1\"},{\"network.rx\",\"entity:2\"},{\"network.tx\",\"entity:1\"}});\n      |                                                                                                                      ^\nD:/Projects/SysPane/syspane/tests/fault/demand_tests.cpp:45:1: error: dangling pointer to an unnamed temporary may be used [-Werror=dangling-pointer=]\n   45 | }\n      | ^\nD:/Projects/SysPane/syspane/tests/fault/demand_tests.cpp:41:118: note: unnamed temporary defined here\n   41 |         std::vector<r::DemandSelection>{{\"network.rx\",\"entity:1\"},{\"network.rx\",\"entity:2\"},{\"network.tx\",\"entity:1\"}});\n      |                                                                                                                      ^\nD:/Projects/SysPane/syspane/tests/fault/demand_tests.cpp:45:1: error: dangling pointer to an unnamed temporary may be used [-Werror=dangling-pointer=]\n   45 | }\n      | ^\nD:/Projects/SysPane/syspane/tests/fault/demand_tests.cpp:41:118: note: unnamed temporary defined here\n   41 |         std::vector<r::DemandSelection>{{\"network.rx\",\"entity:1\"},{\"network.rx\",\"entity:2\"},{\"network.tx\",\"entity:1\"}});\n      |                                                                                                                      ^\ncc1plus.exe: all warnings being treated as errors\n[2/4] Building CXX object CMakeFiles/syspane_demand.dir/source/runtime/demand.cpp.obj\nninja: build stopped: subcommand failed.\n \nAttempt: D:\\Projects\\SysPane\\syspane\\out\\campaign\\w-07-demand-owner\\windows-x64-gcc15-build-53c17814db\n",
+    "stderr": ""
+  }
+]

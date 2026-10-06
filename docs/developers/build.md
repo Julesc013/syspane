@@ -1068,3 +1068,22 @@ matrix and challenge its evidence. Keep sources identical across the native matr
 Preserve the original private measurement/pixel journals and failed placement
 attempts. The [handoff](../../spec/delivery/gnome-editor-exit-handoff.md) records the
 remaining scene-transaction, fullscreen and installed-ownership boundaries.
+
+## Shared controller demand owner
+
+`syspane_demand` implements the typed [demand contract](../../spec/delivery/packages/w-07-demand-owner.md).
+It depends on the existing configuration/policy component and creates no threads,
+timers, sockets or native workers. Call it from the controller's serialized event
+loop, pass locally authenticated authority, and treat cancellation separately from
+the executor's exact native stop/completion proof.
+
+After ordinary workspace preflight and configure/build, run `ctest --preset
+<profile> -R '^(demand|composition)[.]' --output-on-failure`. This selects nine
+behavior families and two dependency checks on each existing development profile.
+Historical-toolset tests execute on the current Windows host; the
+[handoff](../../spec/delivery/demand-owner-handoff.md) records their import audit
+and explicitly leaves guest/runtime and native executor qualification open.
+
+The [0.1.0 release scope](../../spec/delivery/release-0.1.0.md) requires all five
+named platform tracks and full native editions. Passing these component checks does
+not establish any new OS floor, desktop support or release readiness.

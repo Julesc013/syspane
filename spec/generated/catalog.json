@@ -9,7 +9,7 @@
       "title": "SysPane specification bundle",
       "description": "Start here to adopt, validate and use this repository-native specification.",
       "requires": [],
-      "sha256": "4b92bba3949f788f080d3258ea8948dc8bedab8a93e5a5f3fd0075aa2ca19144"
+      "sha256": "83a2466c24e5f6e170a538dd08e33add4bcd7c0561c60dd2005a11732b276f51"
     },
     {
       "id": "SP-COMPOSITION",
@@ -347,7 +347,7 @@
         "SP-WORK-PACKAGES",
         "SP-W01-PACKAGE"
       ],
-      "sha256": "b88ee29698f2e4969ec61a7261f74630d55b8e6b78b938293ccbff421dc4084e"
+      "sha256": "e64f975f00a249dd1f51fcc545773c653ef725caaffe6da089e1c6689bcf2571"
     },
     {
       "id": "SP-CAMPAIGN-COVERAGE",
@@ -388,7 +388,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "d35349713a4cff47742b71867469989e117711701fbf3bf659499e7b7244baf3"
+      "sha256": "1158d7dc6b5e9b2a0d5fa5fe9debb8e453f9a640846b9da5894ea74f60714aa9"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -400,6 +400,17 @@
         "SP-CAMPAIGN-ADMISSION"
       ],
       "sha256": "4ad1dfa8b8a5ff7fa2777d3188a61d1506a4442c33ea8cdaa28330459a5cd6c0"
+    },
+    {
+      "id": "SP-DEMAND-OWNER-HANDOFF",
+      "path": "delivery/demand-owner-handoff.md",
+      "title": "Shared controller demand ownership checkpoint",
+      "description": "Bounded authorized leases merge into fair source jobs, with cancellation distinct from confirmed stop.",
+      "requires": [
+        "SP-W07-DEMAND-OWNER",
+        "SP-RELEASE-0-1-0"
+      ],
+      "sha256": "9eadd483b4ae70af2e23f5482152e5ca85425c2938837e21df126f0479ae8ad3"
     },
     {
       "id": "SP-DIAGNOSTIC-HANDOFF",
@@ -1067,6 +1078,19 @@
       "sha256": "624ba982aca392fc9dc565bd550f6449ea266a5ac36b575e7810763c81428f68"
     },
     {
+      "id": "SP-W07-DEMAND-OWNER",
+      "path": "delivery/packages/w-07-demand-owner.md",
+      "title": "Shared controller demand and acquisition ownership",
+      "description": "Merge authorized consumer leases, schedule bounded source work and retain ownership until stopped work is confirmed.",
+      "requires": [
+        "SP-SCHEDULER",
+        "SP-POLICY",
+        "SP-W25-SUBSCRIPTIONS",
+        "SP-RECOVERY"
+      ],
+      "sha256": "808aaac0d1b38290ab2843764d7195fcb91c20386a1fd7763c17ae9ba42ff8d7"
+    },
+    {
       "id": "SP-W24-PACKAGE",
       "path": "delivery/packages/w-24-transport.md",
       "title": "W-24 authenticated transport and policy boundary",
@@ -1427,6 +1451,19 @@
         "SP-W25-PACKAGE"
       ],
       "sha256": "31c429a04579385c92720dfe1f6fa2c0d8b110fb49f65e84af1c6c295f14187f"
+    },
+    {
+      "id": "SP-RELEASE-0-1-0",
+      "path": "delivery/release-0.1.0.md",
+      "title": "SysPane 0.1.0 release objective and unresolved admission",
+      "description": "Preserve the requested complete desktop release across Windows 9x, Windows NT, X11, Wayland and Mac OS X.",
+      "requires": [
+        "SP-RELEASE",
+        "SP-PLATFORMS",
+        "SP-WORK-PACKAGES",
+        "SP-TARGETS"
+      ],
+      "sha256": "e7119811fcd8a2d45457876576c709da36f56fc56cdc9b3567d9427b7f04e244"
     },
     {
       "id": "SP-ROADMAP",

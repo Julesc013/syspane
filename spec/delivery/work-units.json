@@ -254,7 +254,8 @@
       ],
       "specs": [
         "SP-SCHEDULER",
-        "SP-STATE"
+        "SP-STATE",
+        "SP-W07-DEMAND-OWNER"
       ],
       "acceptance_tests": [
         "T-SCHED",
@@ -262,12 +263,16 @@
         "T-CLOCK"
       ],
       "planned_outputs": [
-        "source/runtime/"
+        "source/runtime/",
+        "source/runtime/demand.hpp",
+        "tests/fault/demand_tests.cpp"
       ],
-      "status": "planned",
+      "status": "in_progress",
       "authority_class": "development",
-      "execution_grant": null,
-      "notes": "Dependency-ready is not execution authority. Native work may produce a failed/inconclusive probe without a support claim; independent tracks can continue."
+      "execution_grant": "user:foundation-native-campaign-2026-10-05",
+      "notes": "Shared typed demand owner implemented: authorized field/entity/age/priority/recording leases, current-policy replacement, cadence/worker caps, deterministic priority aging, exact job identity and cancelled slots retained until completion/stop proof. Nine component families and two dependency checks pass on all three development profiles; v141_xp executes on the modern Windows host only. Real native executor integration, invalidation/coalescing, installed session/policy distribution and full 0.1.0 native release gates remain open.",
+      "package": "delivery/packages/w-07-demand-owner.md",
+      "evidence": "delivery/demand-owner-handoff.md"
     },
     {
       "id": "W-08",
@@ -669,7 +674,8 @@
         "W-24"
       ],
       "specs": [
-        "SP-PLATFORMS"
+        "SP-PLATFORMS",
+        "SP-RELEASE-0-1-0"
       ],
       "acceptance_tests": [
         "T-PLATFORM",
@@ -683,7 +689,7 @@
       "status": "planned",
       "authority_class": "native_lab",
       "execution_grant": null,
-      "notes": "Additional target feasibility is independent; applicable native vertical and qualification gates precede any support claim."
+      "notes": "Additional target feasibility is independent; applicable native vertical and qualification gates precede any support claim. The expanded 0.1.0 release objective makes Windows 9x and older Windows NT required tracks. Exact OS/architecture floors and native labs remain unresolved; the existing XP build is not proof of either family."
     },
     {
       "id": "W-24",

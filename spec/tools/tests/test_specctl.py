@@ -110,21 +110,53 @@ class BundleTests(unittest.TestCase):
     def test_context_mandatory_not_truncated(self):
         with self.assertRaisesRegex(s.SpecError,'nothing was silently truncated'):
             s.context_packet(self.root,'network',100)
+    def context_fixture(self):
+        # Exercise packet accounting with fixed inputs, not a size assumption
+        # about the growing delivery history in the real network route.
+        root=self.base/'context';root.mkdir()
+        for name in ('tools','requirements','assurance','delivery'):(root/name).mkdir()
+        (root/'required.md').write_text('---\nsp_id: "FIXTURE"\n---\n# Required\nComplete required body.\n',encoding='utf-8')
+        (root/'optional.txt').write_text('Optional body.\n'*1000,encoding='utf-8')
+        for path,value in {
+            'tools/routes.json':{'core':['required.md'],'topics':{'network':{'required':['required.md'],'optional':['optional.txt']}}},
+            'requirements/catalog.json':{'requirements':[{'id':'R-FIXTURE','owner':'FIXTURE','statement':'Complete required body.','tests':['T-FIXTURE']}]},
+            'assurance/tests.json':{'tests':[{'id':'T-FIXTURE','execution':'not_run'}]},
+            'delivery/work-units.json':{'work_units':[]}
+        }.items():(root/path).write_bytes(s.json_bytes(value))
+        return root
     def test_context_budget_and_hashes(self):
-        text,manifest=s.context_packet(self.root,'network',65000)
-        self.assertLessEqual(len(text),65000)
+        root=self.context_fixture()
+        text,manifest=s.context_packet(root,'network',4096)
+        self.assertLessEqual(len(text),4096)
         self.assertEqual(manifest['actual_characters'],len(text))
-        self.assertTrue(set(manifest['mandatory'])<={x['path'] for x in manifest['included']})
+        self.assertEqual(manifest['mandatory'],['required.md'])
+        self.assertEqual([x['path'] for x in manifest['included']],['required.md'])
+        self.assertEqual(manifest['omitted_optional'],['optional.txt'])
+        self.assertIn((root/'required.md').read_text(encoding='utf-8'),text)
+        self.assertIn('R-FIXTURE',text);self.assertIn('T-FIXTURE',text)
         for item in manifest['included']:
-            self.assertEqual(item['sha256'],s.sha((self.root/item['path']).read_bytes()))
+            self.assertEqual(item['sha256'],s.sha((root/item['path']).read_bytes()))
         self.assertIsNone(manifest['git']['commit'])
+    def test_context_exact_budget_boundary(self):
+        root=self.context_fixture()
+        text,_=s.context_packet(root,'network',4096)
+        # Keep the budget's serialized digit count constant at this boundary.
+        self.assertGreater(len(text),1000)
+        self.assertLess(len(text),4096)
+        exact,manifest=s.context_packet(root,'network',len(text))
+        self.assertEqual(len(exact),len(text))
+        self.assertEqual(manifest['character_budget'],len(exact))
+        with self.assertRaisesRegex(s.SpecError,'nothing was silently truncated'):
+            s.context_packet(root,'network',len(text)-1)
     def test_context_unknown_topic(self):
         with self.assertRaises(s.SpecError):s.context_packet(self.root,'nonexistent',65000)
     def test_context_changed_source_changes_packet(self):
-        a,_=s.context_packet(self.root,'network',65000)
-        p=self.root/'telemetry/network.md';p.write_text(p.read_text(encoding='utf-8')+'\nNew source note.\n',encoding='utf-8')
-        b,_=s.context_packet(self.root,'network',65000)
+        root=self.context_fixture()
+        a,ma=s.context_packet(root,'network',4096)
+        p=root/'required.md';p.write_text(p.read_text(encoding='utf-8')+'\nNew source note.\n',encoding='utf-8')
+        b,mb=s.context_packet(root,'network',4096)
         self.assertNotEqual(a,b)
+        self.assertNotEqual(ma['included'][0]['sha256'],mb['included'][0]['sha256'])
     def test_output_cannot_overwrite_spec(self):
         with self.assertRaises(s.SpecError):s.output_file(self.root/'oops.md',b'x',self.root)
     def test_output_refuses_different_existing_file(self):

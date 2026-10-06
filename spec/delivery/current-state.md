@@ -17,6 +17,18 @@ updated: {"by": "codex", "at": "2026-10-06T13:56:23Z", "scope": "Owned GNOME edi
 
 # Current state and next admitted boundary
 
+The active objective is now the [complete 0.1.0 release](release-0.1.0.md) for Windows
+9x, Windows NT, Linux X11, Wayland and Mac OS X. The foundation campaign remains
+required but is no longer the final completion boundary. Legacy version/architecture
+floors, native labs and complete desktop/package evidence remain unresolved.
+
+The latest [shared demand checkpoint](demand-owner-handoff.md) implements authorized
+consumer leases, merged acquisition plans, fair dispatch and cancelled-slot retention
+until confirmed stop. Nine component families plus two dependency checks pass on
+each development profile, including the historical toolset on the modern host.
+Next connect that owner to real native collection and current-policy distribution;
+the existing fixed-demand desktop experiment is not yet that product integration.
+
 The latest [render-failure recovery checkpoint](controller-render-recovery-handoff.md)
 connects independent render/health deadlines to the persistent native replacement
 owner. Stopped/hidden drawing and a frozen owned shell recover current original

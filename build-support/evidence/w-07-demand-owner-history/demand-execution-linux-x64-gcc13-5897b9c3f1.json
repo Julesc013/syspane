@@ -1,0 +1,74 @@
+[
+  {
+    "step": "configure",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-06T14:14:40.366879+00:00",
+    "finished_at": "2026-10-06T14:14:49.669738+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 5368709120,\n  \"checkout_out_bytes\": 1254976643,\n  \"linux_campaign_bytes\": 3131371434,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "configure",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/demand_step.py",
+      "linux-x64-gcc13",
+      "configure"
+    ],
+    "started_at": "2026-10-06T14:14:49.670210+00:00",
+    "finished_at": "2026-10-06T14:15:00.421263+00:00",
+    "exit": 0,
+    "stdout": "Preset CMake variables:\n\n  BUILD_TESTING=\"ON\"\n  CMAKE_BUILD_TYPE=\"Debug\"\n  CMAKE_CXX_COMPILER=\"g++\"\n  SYSPANE_PROFILE=\"linux-x64-gcc13\"\n\nprofile verified: linux-x64-gcc13\nvendored dependency digests: pass\ndiagnostic toolkit verified: GTK 3.24.41 / Ubuntu 3.24.41-4ubuntu1.3\nnative GJS clock build dependencies verified\n-- Configuring done (5.5s)\n-- Generating done (0.0s)\n-- Build files have been written to: /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-07-demand-owner/linux-x64-gcc13-configure-5b047ed206\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-06T14:15:00.421724+00:00",
+    "finished_at": "2026-10-06T14:15:00.945876+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 5368709120,\n  \"checkout_out_bytes\": 1255816251,\n  \"linux_campaign_bytes\": 3131380810,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/demand_step.py",
+      "linux-x64-gcc13",
+      "build"
+    ],
+    "started_at": "2026-10-06T14:15:00.946321+00:00",
+    "finished_at": "2026-10-06T14:15:08.425461+00:00",
+    "exit": 1,
+    "stdout": "[1/4] Building CXX object CMakeFiles/syspane_demand_tests.dir/tests/fault/demand_tests.cpp.o\nFAILED: CMakeFiles/syspane_demand_tests.dir/tests/fault/demand_tests.cpp.o \n/usr/bin/g++ -DJSON_DIAGNOSTICS=0 -DJSON_DIAGNOSTIC_POSITIONS=1 -I/mnt/d/Projects/SysPane/syspane/source/runtime -I/mnt/d/Projects/SysPane/syspane/source/configuration -I/mnt/d/Projects/SysPane/syspane/source/protocol -isystem /mnt/d/Projects/SysPane/syspane/source/third_party -g -std=c++17 -Wall -Wextra -Wpedantic -Werror -march=x86-64 -mtune=generic -MD -MT CMakeFiles/syspane_demand_tests.dir/tests/fault/demand_tests.cpp.o -MF CMakeFiles/syspane_demand_tests.dir/tests/fault/demand_tests.cpp.o.d -o CMakeFiles/syspane_demand_tests.dir/tests/fault/demand_tests.cpp.o -c /mnt/d/Projects/SysPane/syspane/tests/fault/demand_tests.cpp\n/mnt/d/Projects/SysPane/syspane/tests/fault/demand_tests.cpp:141:6: error: ambiguating new declaration of \u2018void clock()\u2019\n  141 | void clock() {\n      |      ^~~~~\nIn file included from /usr/include/pthread.h:23,\n                 from /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h:35,\n                 from /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h:148,\n                 from /usr/include/c++/13/ext/atomicity.h:35,\n                 from /usr/include/c++/13/bits/ios_base.h:39,\n                 from /usr/include/c++/13/streambuf:43,\n                 from /usr/include/c++/13/bits/streambuf_iterator.h:35,\n                 from /usr/include/c++/13/iterator:66,\n                 from /mnt/d/Projects/SysPane/syspane/source/third_party/nlohmann/json.hpp:28,\n                 from /mnt/d/Projects/SysPane/syspane/source/protocol/wire.hpp:2,\n                 from /mnt/d/Projects/SysPane/syspane/source/configuration/policy.hpp:2,\n                 from /mnt/d/Projects/SysPane/syspane/source/runtime/demand.hpp:2,\n                 from /mnt/d/Projects/SysPane/syspane/tests/fault/demand_tests.cpp:1:\n/usr/include/time.h:72:16: note: old declaration \u2018clock_t clock()\u2019\n   72 | extern clock_t clock (void) __THROW;\n      |                ^~~~~\n[2/4] Building CXX object CMakeFiles/syspane_demand.dir/source/runtime/demand.cpp.o\nninja: build stopped: subcommand failed.\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-07-demand-owner/linux-x64-gcc13-build-1b657f078f\n",
+    "stderr": ""
+  }
+]

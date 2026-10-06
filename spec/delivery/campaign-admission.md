@@ -29,6 +29,14 @@ AIDE binding or descendant-agent authority is invented. Desktop experiments must
 remain bounded and reversible, with recovery independent of the surface under test.
 Unavailable target laboratories remain blocked qualification, not compatibility.
 
+The subsequent user goal explicitly expands completion to a full SysPane 0.1.0
+release for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X. The
+[release scope](release-0.1.0.md) preserves these required families and the complete
+native desktop behavior. Shared runtime/commands/settings/editing/persistence,
+providers, native profiles and packaging work necessary for that outcome are now
+in scope. Privileged actions and public release still require their corresponding
+authority. Unspecified legacy floors and missing labs cannot become assumed support.
+
 Use this checkout. Windows development build roots are `out/build/<preset>/`,
 captures and packages use `out/campaign/`. Linux uses an explicitly declared
 `SYSPANE_LINUX_BUILD_ROOT` task directory under the existing unprivileged account's

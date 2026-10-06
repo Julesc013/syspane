@@ -6,6 +6,10 @@ profiles; **the native desktop application and release qualification remain pend
 This checklist routes work; the
 [work-unit catalog](spec/delivery/work-units.json) owns dependencies and acceptance.
 
+The user-expanded [0.1.0 release scope](spec/delivery/release-0.1.0.md) now requires
+Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X. Finish the full native desktop
+editions and their release gates; foundation experiments alone cannot complete this goal.
+
 ## Completed specification work
 
 - [x] Preserve the native architecture, one `source/` tree and Windows controller/surface isolation.
@@ -22,6 +26,8 @@ behaviour has been implemented. See [audit disposition](spec/delivery/audit-2026
 
 ## First native campaign
 
+- [x] W-07 controller demand component: merge authorized field/entity/age/priority/recording leases, apply cadence/concurrency policy, age priorities and retain cancelled slots until confirmed stop. See the [handoff](spec/delivery/demand-owner-handoff.md).
+- [ ] W-07/W-25: connect shared demand to the real native executor; qualify revocation, stopped-work ownership and recorder independence, then complete invalidation/coalescing and installed policy/session distribution.
 - [x] W-25 consumer continuity: preserve real collection and original measurements across bounded native consumer replacement; verify typed consumer revocation and circuit opening. See the [handoff](spec/delivery/consumer-continuity-handoff.md).
 - [x] W-25 owned GNOME controller: preserve collection during automatic shell replacement and full-state reattachment; verify current operational pixels after native overview dismissal, with disabled-attachment and revoked-permission controls. See the [handoff](spec/delivery/gnome-controller-recovery-handoff.md).
 - [x] W-25 independent render recovery: connect render/health expiry to the persistent native replacement owner; recover drawing and frozen-shell cases, reject false progress and enforce current typed revocation. See the [handoff](spec/delivery/controller-render-recovery-handoff.md).

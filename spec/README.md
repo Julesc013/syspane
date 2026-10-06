@@ -56,11 +56,11 @@ The first command is a plan. The second creates missing, reviewed root integrati
 
 ```sh
 python spec/tools/specctl.py work --ready
-python spec/tools/specctl.py context --topic network --max-chars 42000 --out /tmp/syspane-network-context.md
+python spec/tools/specctl.py context --topic network --max-chars 80000 --out /tmp/syspane-network-context.md
 python spec/tools/specctl.py impact spec/telemetry/network.md
 ```
 
-On Windows choose a suitable writable output path instead of `/tmp`. Context output is an explicitly bounded projection with file hashes and omitted-file notices; it is not a new source of truth. Never instruct every subagent to read the entire bundle.
+On Windows choose a suitable writable output path instead of `/tmp`. Context output is an explicitly bounded projection with file hashes and omitted-file notices; it is not a new source of truth. If mandatory content exceeds the chosen budget, the command reports the required size and fails without truncation; choose a sufficient budget for the current checkout. Never instruct every subagent to read the entire bundle.
 
 ## Authority and review
 
