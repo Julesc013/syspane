@@ -60,6 +60,14 @@ Four drawing fault controls fail their intended dimensions. Independent supervis
 of real rendering and complete recovery remain open; the Windows/Mac laboratory
 requirements and default focus failure above are unchanged.
 
+The [independent render watcher](gnome-render-watch-handoff.md) subsequently closes
+finite operational drawing supervision. Native render/health deadlines remain
+independent of the shell event loop and take precedence over queued late messages.
+External pixels still reject false progress. Concurrent consumer-lease expiry and
+nonzero child exits retain failure outcomes. Automatic renderer replacement,
+current-policy reattachment, visible/editor recovery and complete product editions
+remain open; no Windows/Mac laboratory gap is closed by this Linux evidence.
+
 No row above removes native settings, direct editing, persistence, real telemetry
 or recovery from the first complete desktop edition. No synthetic marker, model
 archive or retained sample tile is called that edition. Repository-only cold-start

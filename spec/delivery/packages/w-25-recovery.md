@@ -419,3 +419,10 @@ journals and a deliberately defective expiry control. The [checkpoint](../gnome-
 records its evidence. Product telemetry/policy integration, native clock and sequence
 faults, render watchdogs, automatic restart and native editor-exit recovery remain
 separate gates; this increment does not complete W-25.
+
+The [operational render-watch increment](w-25-gnome-render-watch.md) subsequently
+connects the same native guard and health protocol to measured drawing/paint.
+It retains independent pixel acceptance, native peer/child ownership, concurrent
+consumer-lease failure and expiry-before-dispatch ordering. Its
+[checkpoint](../gnome-render-watch-handoff.md) preserves native failures and results.
+Automatic renderer replacement and complete visible/editor recovery remain open.

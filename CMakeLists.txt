@@ -138,7 +138,7 @@ add_library(syspane_local_ipc STATIC source/platform/local_ipc_linux.cpp source/
 target_include_directories(syspane_local_ipc PUBLIC "${CMAKE_SOURCE_DIR}/source/platform")
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
     set_target_properties(syspane_local_ipc syspane_model syspane_protocol syspane_configuration
-        syspane_recovery syspane_data_view syspane_network_view syspane_network_publication syspane_network_state
+        syspane_recovery syspane_data_view syspane_network_view syspane_network_publication syspane_network_state syspane_health
         PROPERTIES POSITION_INDEPENDENT_CODE ON)
     pkg_check_modules(GOBJECT REQUIRED IMPORTED_TARGET gobject-2.0=2.80.0)
     find_program(SYSPANE_GI_COMPILER gi-compile-repository REQUIRED)
@@ -147,8 +147,8 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
     if(NOT clock_dependency_result EQUAL 0)
         message(FATAL_ERROR "Native GJS clock dependencies differ from the pinned profile")
     endif()
-    add_library(syspane_gjs_clock SHARED source/desktop/gnome/native_clock.cpp source/desktop/gnome/native_network_view.cpp)
-    target_link_libraries(syspane_gjs_clock PRIVATE syspane_local_ipc syspane_network_view syspane_network_publication PkgConfig::GOBJECT)
+    add_library(syspane_gjs_clock SHARED source/desktop/gnome/native_clock.cpp source/desktop/gnome/native_network_view.cpp source/desktop/gnome/native_health_view.cpp)
+    target_link_libraries(syspane_gjs_clock PRIVATE syspane_local_ipc syspane_network_view syspane_network_publication syspane_health syspane_recovery PkgConfig::GOBJECT)
     add_custom_command(OUTPUT "${CMAKE_BINARY_DIR}/SysPaneClock-0.1.typelib"
         COMMAND "${SYSPANE_GI_COMPILER}" --includedir=/usr/lib/x86_64-linux-gnu/gir-1.0
             "--output=${CMAKE_BINARY_DIR}/SysPaneClock-0.1.typelib"
@@ -178,6 +178,13 @@ endif()
 
 include(CTest)
 if(BUILD_TESTING)
+    if(NOT SYSPANE_LEGACY_EXPERIMENT)
+        add_executable(syspane_health_tests tests/fault/health_tests.cpp)
+        target_link_libraries(syspane_health_tests PRIVATE syspane_health)
+        foreach(family HEALTH-ASYNC-01 HEALTH-ASYNC-02 HEALTH-ASYNC-03)
+            add_test(NAME "health.${family}" COMMAND syspane_health_tests "${family}")
+        endforeach()
+    endif()
     if(NOT WIN32)
         add_test(NAME native.GJS-CLOCK COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/desktop/native_gjs_clock.py"
             "${CMAKE_BINARY_DIR}")
@@ -332,6 +339,9 @@ if(BUILD_TESTING)
 endif()
 
 set(component_targets syspane_model syspane_model_smoke syspane_json syspane_protocol syspane_configuration syspane_local_ipc syspane_ipc_probe syspane_recovery syspane_child syspane_health syspane_recovery_probe syspane_diagnostic syspane_machine_policy syspane_diagnostic_inspector syspane_diag)
+if(TARGET syspane_health_tests)
+    list(APPEND component_targets syspane_health_tests)
+endif()
 list(APPEND component_targets syspane_gjs_clock)
 list(APPEND component_targets syspane_network syspane_network_probe syspane_network_netlink_tests syspane_network_contract syspane_network_state syspane_network_state_tests)
 list(APPEND component_targets syspane_network_publication syspane_network_publication_tests syspane_collector_probe)

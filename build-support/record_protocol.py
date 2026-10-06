@@ -48,7 +48,10 @@ def main():
     parser.add_argument('--gjs-clock', action='store_true', help='Require standalone Linux native GJS clock and all prior regressions')
     parser.add_argument('--gjs-network', action='store_true', help='Require standalone GJS measured model consumer and prior regressions')
     parser.add_argument('--live-network', action='store_true', help='Require real supervised collector delivery through the asynchronous GJS owner')
+    parser.add_argument('--async-health', action='store_true', help='Require the shared bounded asynchronous health codec and native supervision regressions')
     args = parser.parse_args()
+    if args.async_health:
+        args.supervision = True
     if args.live_network:
         args.gjs_network = True
     if args.gjs_network:
@@ -148,6 +151,8 @@ def main():
         expected.add('native.GJS-NETWORK')
     if args.live_network:
         expected.add('native.GJS-LIVE')
+    if args.async_health:
+        expected |= {'health.HEALTH-ASYNC-'+number for number in ('01','02','03')}
     if len(cases) != len(expected) or {case['case'] for case in cases} != expected or any(case['outcome'] != 'pass' for case in cases):
         raise ValueError('missing, repeated, unexpected or failing case; preserve log before rerun')
     suffix = '.exe' if platform.system() == 'Windows' else ''
@@ -155,6 +160,9 @@ def main():
                  for name in ('syspane_protocol_tests'+suffix, 'libsyspane_protocol.a', 'libsyspane_configuration.a', 'generated/settings_descriptors.hpp')}
     if args.network_presentation:
         for name in ('syspane_network_view_tests'+suffix, 'libsyspane_network_view.a'):
+            artifacts[name] = {'sha256': sha(build/name), 'bytes': (build/name).stat().st_size}
+    if args.async_health:
+        for name in ('syspane_health_tests'+suffix, 'libsyspane_health.a'):
             artifacts[name] = {'sha256': sha(build/name), 'bytes': (build/name).stat().st_size}
     native_records = []
     if args.gjs_clock:
@@ -427,6 +435,8 @@ def main():
         paths.append(ROOT/'spec/delivery/packages/w-25-gjs-network-view.md')
     if args.live_network:
         paths.append(ROOT/'spec/delivery/packages/w-25-live-network-session.md')
+    if args.async_health:
+        paths.append(ROOT/'spec/delivery/packages/w-25-gnome-render-watch.md')
     for directory in ('source', 'tests', 'build-support', 'spec/contracts'):
         paths.extend(sorted((ROOT/directory).rglob('*')))
     inputs = {p.relative_to(ROOT).as_posix(): sha(p) for p in paths
@@ -609,6 +619,9 @@ def main():
         report['slice'] = 'real supervised collector forwarding and asynchronous native GJS consumer'
         report['bindings']['live_network'] = 'spec/delivery/packages/w-25-live-network-session.md'
         report['limits'][0] = 'Two actual measured samples are forwarded unchanged to the native GJS owner, then deliberately held while age/lease behavior is observed. Source hang, revocation and parent loss have native exit proof. This standalone evidence does not qualify shell pixels, installed policy, continuous production collection or complete desktop recovery. Operational artifacts remain private.'
+    if args.async_health:
+        report['bindings']['async_health'] = 'spec/delivery/packages/w-25-gnome-render-watch.md'
+        report['async_health_scope'] = 'Shared health framing, negotiation, exact challenge identities, deadlines and resource bounds. Instrumented native render completion and visible pixels require separate desktop evidence.'
     args.output.parent.mkdir(parents=True, exist_ok=True)
     log_output.write_text(raw.replace(str(build), '<build>').replace(str(ROOT), '<source>'), encoding='utf-8', newline='\n')
     args.output.write_text(json.dumps(report, indent=2)+'\n', encoding='utf-8', newline='\n')

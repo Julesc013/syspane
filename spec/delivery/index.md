@@ -24,6 +24,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Native GNOME icon-input checkpoint](gnome-input-handoff.md) — Real DING selection, menus and owned folder activation pass beside the passive bridge, with calibrated blocking controls.
 - [Measured network pixels and lifecycle in the owned GNOME shell](gnome-live-network-handoff.md) — Original counters/rates, native age and independent lease/erasure observations.
 - [Owned GNOME shell marker checkpoint](gnome-marker-handoff.md) — A real pinned shell bridge now presents changing externally decoded pixels; desktop composition remains open.
+- [Independent supervision of operational GNOME drawing](gnome-render-watch-handoff.md) — Native render deadlines, independent pixels, actual exits and preserved boundary failures.
 - [Owned GNOME native reveal and failed focus restoration](gnome-reveal-handoff.md) — Live composition survives visible native hide/restore, while the required foreground focus remains failed.
 - [Owned GNOME shell/compositor recovery checkpoint](gnome-shell-recovery-handoff.md) — Exact shell exit, native replacement, bridge reattachment and new-desktop input pass independently of calibrated omissions.
 - [Native GNOME surface producer-lease checkpoint](gnome-surface-lease-handoff.md) — Independent expiry, native disconnect, retained drawing and full-snapshot replacement have source-bound evidence.

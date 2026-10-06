@@ -358,7 +358,7 @@
         "SP-CAMPAIGN-ADMISSION",
         "SP-CURRENT"
       ],
-      "sha256": "bbc00f960896c3923d04f03e0912603744a624c77aae406ab3ef6ac2c095779e"
+      "sha256": "bb1cc68732816be1e0d7e0b6998d3e4bb5d04aa6784671bf548d2baccc7949a9"
     },
     {
       "id": "SP-CURRENT",
@@ -368,7 +368,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "59d321196669e224ff925db0bebec5042c8bcb8e58227a5018d8654eba1d5f2e"
+      "sha256": "8af184f7bd984054f4d4eca4392b76ea35e423171ef88567705eb1c1a73838d4"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -553,6 +553,17 @@
         "SP-X11-RECOVERY-HANDOFF"
       ],
       "sha256": "1332b021a6695c4e0b10ff842203dfa7d77c403d20d618d4011907ddc627e9f1"
+    },
+    {
+      "id": "SP-GNOME-RENDER-WATCH-HANDOFF",
+      "path": "delivery/gnome-render-watch-handoff.md",
+      "title": "Independent supervision of operational GNOME drawing",
+      "description": "Native render deadlines, independent pixels, actual exits and preserved boundary failures.",
+      "requires": [
+        "SP-W25-GNOME-RENDER-WATCH",
+        "SP-CAMPAIGN-ADMISSION"
+      ],
+      "sha256": "e9261f09c967a04d3fe0e4b3599409d90cc3ef878a285ebb3009c4f6fcf642ac"
     },
     {
       "id": "SP-GNOME-REVEAL-HANDOFF",
@@ -1087,6 +1098,17 @@
       "sha256": "70668710fd37f53a087078b62f5b19abac6b38e72166641707bce605099392af"
     },
     {
+      "id": "SP-W25-GNOME-RENDER-WATCH",
+      "path": "delivery/packages/w-25-gnome-render-watch.md",
+      "title": "W-25 independent supervision of the measured GNOME tile",
+      "description": "Bind render challenges to drawing and enforce their deadlines outside the shell event loop.",
+      "requires": [
+        "SP-W25-PACKAGE",
+        "SP-W25-GNOME-LIVE-NETWORK"
+      ],
+      "sha256": "4d9206bbf4ae1accb274bd0c620715b25db28e1e4566153ff8e650b9cfbfe4a7"
+    },
+    {
       "id": "SP-W25-GNOME-SURFACE-LEASE",
       "path": "delivery/packages/w-25-gnome-surface-lease.md",
       "title": "W-25 independent native surface producer lease",
@@ -1223,7 +1245,7 @@
         "SP-TRANSPORT",
         "SP-COMPOSITION"
       ],
-      "sha256": "88177609a3258313de6dedc3d14e4260a9322a7d06b016d857d6c4fb7e2a99a1"
+      "sha256": "fd60a4875e88c1fd1a9968b1a062e49823fadb2db4b4e10356e6345d6c515482"
     },
     {
       "id": "SP-W25-STATE-IMPORT",

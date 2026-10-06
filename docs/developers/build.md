@@ -869,4 +869,48 @@ observations. Raw operational JSON and crops remain mode 0600 inside the attempt
 0700 directory; preserve only their hashes in public evidence. Do not copy them to
 the repository. The existing public-clock and retained-cache matrices remain useful
 regressions with their original meanings. Native build artifacts retain the pinned
-live-session checkpoint; this drawing experiment changes no C++ target or profile.
+live-session checkpoint at that historical checkpoint; that drawing-only experiment
+changed no C++ target or profile.
+
+The [independent render-watch package](../../spec/delivery/packages/w-25-gnome-render-watch.md)
+adds three `health.HEALTH-ASYNC-*` cases and a native `HealthView` in the existing
+GJS module. The complete suites contain 113 Linux and 105 contemporary Windows
+entries. Record them with `record_protocol.py --async-health --live-network` on
+Linux and `--async-health --network-presentation` on Windows, retaining the usual
+profile/build/output arguments. The current desktop bootstrap pins the new
+`w-25-gnome-render-watch-linux-x64-gcc13.json` build record; earlier evidence retains
+its original identity. Historical-toolset native health remains disabled.
+
+After each completed Windows workspace test preflight, run under `ir4runner`:
+
+```sh
+/usr/bin/python3 tests/desktop/native_gnome_bootstrap.py "$BUILD" --render-watch live
+```
+
+Repeat with `render-stall`, `false-progress`, `hidden`, `revoke`, `watch-exit`,
+`watch-hang` and `shell-freeze`. These cases launch the existing RecoveryProbe in
+`render-watch` mode as a separate owned child. The shell uses the shared native
+health parser over asynchronous socket IO; an operational draw followed by stage
+after-paint completes the exact pending challenge. The native watcher enforces its
+own deadline outside the shell loop. Independent pixels remain required: the
+`false-progress` control must retain a failed candidate outcome.
+
+The observer signals only held pidfds from the owned laboratory process tree.
+It resumes the same stopped shell in a finally path and measures erasure from
+confirmed resume. The stopped shell's surviving pixels are recorded honestly.
+The native shell-side view also expires a silent watcher, then the existing owner
+enforces its bounded teardown. Neither experiment restarts an installed desktop.
+
+`build-support/record_gnome_render_watch.py --build-dir "$BUILD" --output
+<new-record> <eight-native-reports>` recomputes acceptance from original health
+journals and private glyph crops. Run `tests/desktop/test_gnome_render_watch_record.py
+<eight-network-render-watch.private.json-files> -v` for adversarial evidence checks.
+`render-watch.jsonl` contains public lifecycle facts; the two `network-*.private.*`
+files retain operational originals/pixels and must remain in their private native
+attempt directory. Preserve all attempts and source archives, including failures.
+
+After the same workspace preflight, `/usr/bin/python3 tests/fault/native_render_deadline.py
+"$BUILD"` exercises native queued-message ordering without a desktop. It holds and
+stops its own watcher, queues late progress, heartbeat and shutdown separately,
+then requires a latched expiry and failed native exit after resume. The initial
+three failing traces remain preserved; no queued message may override expiry.

@@ -62,5 +62,40 @@
     <parameters><instance-parameter name="self" transfer-ownership="none"><type name="NetworkView" c:type="SysPaneNetworkView*"/></instance-parameter></parameters>
    </method>
   </class>
+  <class name="HealthView" c:type="SysPaneHealthView" parent="GObject.Object"
+   glib:type-name="SysPaneHealthView" glib:get-type="syspane_health_view_get_type">
+   <constructor name="new_from_socket" c:identifier="syspane_health_view_new_from_socket" throws="1">
+    <return-value transfer-ownership="full"><type name="HealthView" c:type="SysPaneHealthView*"/></return-value>
+    <parameters><parameter name="fd" transfer-ownership="none"><type name="gint" c:type="gint"/></parameter><parameter name="expected_pid" transfer-ownership="none"><type name="guint" c:type="guint"/></parameter></parameters>
+   </constructor>
+   <method name="hello" c:identifier="syspane_health_view_hello" throws="1">
+    <return-value transfer-ownership="full"><type name="GLib.Bytes" c:type="GBytes*"/></return-value>
+    <parameters><instance-parameter name="self" transfer-ownership="none"><type name="HealthView" c:type="SysPaneHealthView*"/></instance-parameter></parameters>
+   </method>
+   <method name="feed" c:identifier="syspane_health_view_feed" throws="1">
+    <return-value transfer-ownership="full"><type name="utf8" c:type="gchar*"/></return-value>
+    <parameters><instance-parameter name="self" transfer-ownership="none"><type name="HealthView" c:type="SysPaneHealthView*"/></instance-parameter><parameter name="bytes" transfer-ownership="none"><type name="GLib.Bytes" c:type="GBytes*"/></parameter></parameters>
+   </method>
+   <method name="heartbeat" c:identifier="syspane_health_view_heartbeat" throws="1">
+    <return-value transfer-ownership="full"><type name="GLib.Bytes" c:type="GBytes*"/></return-value>
+    <parameters><instance-parameter name="self" transfer-ownership="none"><type name="HealthView" c:type="SysPaneHealthView*"/></instance-parameter><parameter name="sequence" transfer-ownership="none"><type name="utf8" c:type="const gchar*"/></parameter></parameters>
+   </method>
+   <method name="progress" c:identifier="syspane_health_view_progress" throws="1">
+    <return-value transfer-ownership="full"><type name="GLib.Bytes" c:type="GBytes*"/></return-value>
+    <parameters><instance-parameter name="self" transfer-ownership="none"><type name="HealthView" c:type="SysPaneHealthView*"/></instance-parameter><parameter name="generation" transfer-ownership="none"><type name="utf8" c:type="const gchar*"/></parameter></parameters>
+   </method>
+   <method name="shutdown" c:identifier="syspane_health_view_shutdown" throws="1">
+    <return-value transfer-ownership="full"><type name="GLib.Bytes" c:type="GBytes*"/></return-value>
+    <parameters><instance-parameter name="self" transfer-ownership="none"><type name="HealthView" c:type="SysPaneHealthView*"/></instance-parameter></parameters>
+   </method>
+   <method name="tick" c:identifier="syspane_health_view_tick" throws="1">
+    <return-value transfer-ownership="none"><type name="gboolean" c:type="gboolean"/></return-value>
+    <parameters><instance-parameter name="self" transfer-ownership="none"><type name="HealthView" c:type="SysPaneHealthView*"/></instance-parameter></parameters>
+   </method>
+   <method name="close" c:identifier="syspane_health_view_close">
+    <return-value transfer-ownership="none"><type name="none" c:type="void"/></return-value>
+    <parameters><instance-parameter name="self" transfer-ownership="none"><type name="HealthView" c:type="SysPaneHealthView*"/></instance-parameter></parameters>
+   </method>
+  </class>
  </namespace>
 </repository>

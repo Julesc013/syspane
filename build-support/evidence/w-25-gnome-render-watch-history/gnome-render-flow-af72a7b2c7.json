@@ -1,0 +1,48 @@
+[
+  {
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "source_inputs": {
+      "build-support/check_workspace_budget.py": "3a9ec8bf7f4f205e1986d19b523d57b41288936e3343910f80b460d71474b700"
+    },
+    "exit": 0,
+    "expected": 0,
+    "at": "2026-10-06T10:16:34.590014+00:00",
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 4294967296,\n  \"checkout_out_bytes\": 1142092097,\n  \"linux_campaign_bytes\": 2705632228,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "/usr/bin/python3",
+      "/mnt/d/Projects/SysPane/syspane/build-support/record_protocol.py",
+      "--async-health",
+      "--live-network",
+      "--profile",
+      "linux-x64-gcc13",
+      "--build-dir",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13",
+      "--output",
+      "/mnt/d/Projects/SysPane/syspane/build-support/evidence/w-25-gnome-render-watch-linux-x64-gcc13.json"
+    ],
+    "source_inputs": {
+      "build-support/record_protocol.py": "6cfe577ab693ccd7e12256231a53cb5095baefbbcbcbb5aab7e0ff82a7cbcb81"
+    },
+    "exit": 0,
+    "expected": 0,
+    "at": "2026-10-06T10:16:41.861981+00:00",
+    "stdout": "{\"profile\": \"linux-x64-gcc13\", \"cases\": 113, \"outcome\": \"pass\", \"native_ipc\": \"executed\", \"recovery\": \"native_supervision\"}\n",
+    "stderr": ""
+  }
+]

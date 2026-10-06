@@ -4,9 +4,23 @@
 namespace syspane::recovery {
 namespace w = protocol;
 HealthLink::HealthLink(platform::Stream& stream, bool server, std::string role, std::string epoch, std::string connection)
-    : stream_(stream), server_(server), progress_(role == "desktop"), role_(std::move(role)),
+    : HealthLink(server, std::move(role), std::move(epoch), std::move(connection), stream.connected_ms()) {
+    stream_ = &stream;
+    const auto initial = take_output();
+    if (!initial.empty()) stream_->write(initial, 100);
+}
+HealthLink::HealthLink(bool server, std::string role, std::string epoch, std::string connection, std::uint64_t connected_ms)
+    : connected_ms_(connected_ms), server_(server), progress_(role == "desktop"), role_(std::move(role)),
       epoch_(std::move(epoch)), connection_(std::move(connection)) {
-    if (!server_) stream_.write(w::frame(w::Json{{"type", "hello"}, {"body", greeting(role_)}}.dump(), limit_), 100);
+    if (!server_) write(w::frame(w::Json{{"type", "hello"}, {"body", greeting(role_)}}.dump(), limit_));
+}
+void HealthLink::write(std::string bytes) {
+    if (stream_) { stream_->write(bytes, 100); return; }
+    if (output_frames_ >= 16 || bytes.size() > 65536 - output_.size()) throw w::Error("health.outbox_capacity");
+    output_ += bytes; ++output_frames_;
+}
+std::string HealthLink::take_output() {
+    std::string result; result.swap(output_); output_frames_ = 0; return result;
 }
 w::Json HealthLink::greeting(const std::string& role) const {
     w::Json features = w::Json::array({"recovery.health"});
@@ -17,25 +31,32 @@ w::Json HealthLink::greeting(const std::string& role) const {
 }
 void HealthLink::send(const std::string& type, w::Json body) try {
     if (!ready_ || closed_) throw w::Error("health.not_ready");
-    stream_.write(w::frame(w::Json{{"type", type}, {"body", std::move(body)},
-        {"connection_id", connection_}, {"producer_epoch", epoch_}}.dump(), limit_), 100);
+    write(w::frame(w::Json{{"type", type}, {"body", std::move(body)},
+        {"connection_id", connection_}, {"producer_epoch", epoch_}}.dump(), limit_));
 } catch (...) {
     closed_ = true;
+    output_.clear(); output_frames_ = 0;
     throw;
 }
 std::vector<HealthEvent> HealthLink::poll() try {
     if (closed_) throw w::Error("health.closed");
-    std::vector<HealthEvent> events;
+    if (!stream_) throw w::Error("health.no_stream");
     std::array<char, 4096> buffer{};
-    const auto read = stream_.read(buffer.data(), buffer.size(), 100);
+    const auto read = stream_->read(buffer.data(), buffer.size(), 100);
     if (read.eof) { closed_ = true; decoder_.eof(); throw w::Error("health.eof"); }
-    if (read.bytes) decoder_.feed(std::string_view(buffer.data(), read.bytes), read.observed_ms, [&](std::string_view payload) {
+    return feed(std::string_view(buffer.data(), read.bytes), read.observed_ms);
+} catch (...) { closed_ = true; output_.clear(); output_frames_ = 0; throw; }
+std::vector<HealthEvent> HealthLink::feed(std::string_view bytes, std::uint64_t observed_ms) try {
+    if (closed_) throw w::Error("health.closed");
+    if (bytes.size() > 4096) throw w::Error("health.read_capacity");
+    std::vector<HealthEvent> events;
+    if (!bytes.empty()) decoder_.feed(bytes, observed_ms, [&](std::string_view payload) {
         if (closed_) throw w::Error("health.closed");
         if (events.size() >= 16) throw w::Error("health.event_limit");
         const auto message = w::decode(payload);
-        const auto now = platform::monotonic_ms();
+        const auto now = observed_ms;
         if (!ready_) {
-            if (now - stream_.connected_ms() >= 5000) throw w::Error("health.handshake_timeout");
+            if (now - connected_ms_ >= 5000) throw w::Error("health.handshake_timeout");
             if (message.type != (server_ ? "hello" : "welcome")) throw w::Error("health.handshake_state");
             const auto remote = w::handshake(message.body), local = w::handshake(greeting(server_ ? "console" : role_));
             const auto selection = server_ ? w::negotiate(local, remote, {role_}) : w::negotiate(remote, local, {role_});
@@ -69,22 +90,26 @@ std::vector<HealthEvent> HealthLink::poll() try {
             closed_ = true; events.push_back({HealthKind::shutdown, 0, now});
         } else throw w::Error("health.direction_or_feature");
     });
-    const auto now = platform::monotonic_ms();
-    if (!ready_ && now - stream_.connected_ms() >= 5000) throw w::Error("health.handshake_timeout");
-    decoder_.tick(now);
+    if (!closed_) tick(observed_ms);
     return events;
 } catch (...) {
     closed_ = true;
+    output_.clear(); output_frames_ = 0;
     throw;
 }
+void HealthLink::tick(std::uint64_t now) try {
+    if (closed_) throw w::Error("health.closed");
+    if (!ready_ && now - connected_ms_ >= 5000) throw w::Error("health.handshake_timeout");
+    decoder_.tick(now);
+} catch (...) { closed_ = true; output_.clear(); output_frames_ = 0; throw; }
 void HealthLink::heartbeat(std::uint64_t sequence) { send("heartbeat", {{"sequence", std::to_string(sequence)}}); }
-void HealthLink::challenge(std::uint64_t generation) {
+void HealthLink::challenge(std::uint64_t generation) try {
     if (!server_ || !progress_ || pending_ || (completed_ && generation <= *completed_)) throw w::Error("health.challenge_order");
     send("render.challenge", {{"generation", std::to_string(generation)}}); pending_ = generation;
-}
-void HealthLink::progress(std::uint64_t generation) {
+} catch (...) { closed_ = true; output_.clear(); output_frames_ = 0; throw; }
+void HealthLink::progress(std::uint64_t generation) try {
     if (server_ || !progress_ || !pending_ || generation != *pending_) throw w::Error("health.progress_order");
     send("render.progress", {{"generation", std::to_string(generation)}}); completed_ = generation; pending_.reset();
-}
+} catch (...) { closed_ = true; output_.clear(); output_frames_ = 0; throw; }
 void HealthLink::shutdown() { send("shutdown", {{"reason", "normal"}}); closed_ = true; }
 } // namespace syspane::recovery

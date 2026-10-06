@@ -11,9 +11,14 @@ struct HealthEvent { HealthKind kind; std::uint64_t value, observed_ms; };
 class HealthLink {
 public:
     HealthLink(platform::Stream& stream, bool server, std::string role, std::string epoch, std::string connection);
+    // Same wire state machine without synchronous IO, for an asynchronous owner.
+    HealthLink(bool server, std::string role, std::string epoch, std::string connection, std::uint64_t connected_ms);
     HealthLink(const HealthLink&) = delete;
     HealthLink& operator=(const HealthLink&) = delete;
     std::vector<HealthEvent> poll();
+    std::vector<HealthEvent> feed(std::string_view bytes, std::uint64_t observed_ms);
+    void tick(std::uint64_t now);
+    std::string take_output();
     void heartbeat(std::uint64_t sequence);
     void challenge(std::uint64_t generation);
     void progress(std::uint64_t generation);
@@ -23,8 +28,12 @@ public:
     const std::string& epoch() const { return epoch_; }
 private:
     void send(const std::string& type, protocol::Json body);
+    void write(std::string bytes);
     protocol::Json greeting(const std::string& role) const;
-    platform::Stream& stream_;
+    platform::Stream* stream_ = nullptr;
+    std::uint64_t connected_ms_;
+    std::string output_;
+    std::size_t output_frames_ = 0;
     bool server_, progress_, ready_ = false, closed_ = false;
     std::string role_, epoch_, connection_;
     std::size_t limit_ = 4096;

@@ -51,7 +51,11 @@ hang, policy erasure and parent loss. The [measured GNOME tile](spec/delivery/gn
 now uses that owner to display actual counters/rates, advancing age and independent
 freshness/lease states. External pixel checks detect frozen age, false freshness,
 wrong values and failed clearing; native exits and typed policy erasure also pass.
-Independent supervision of real rendering and complete desktop recovery remain open.
+An [independent render watcher](spec/delivery/gnome-render-watch-handoff.md) now
+connects native challenges to operational drawing and paint instrumentation.
+External pixels reject false progress; native deadlines survive a stopped shell
+and queued late messages. Watcher loss clears the tile and retains actual child
+exit failures. Automatic renderer replacement and complete desktop recovery remain open.
 The [measured telemetry path](spec/delivery/measured-time-handoff.md) now preserves
 sample age through delay, replay and reconnect, with explicit clock scope and TTL checks.
 A [native network reader](spec/delivery/network-acquisition-handoff.md) now acquires

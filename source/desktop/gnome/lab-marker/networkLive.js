@@ -1,7 +1,7 @@
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import St from 'gi://St';
-import {NetworkSession} from './networkSession.js';
+import {NetworkSession, RenderSession} from './networkSession.js';
 
 const XML = `<node><interface name="org.syspane.NetworkLive">
 ${['Calibrate', 'Start', 'GetState', 'Revoke', 'Stop', 'Cleanup'].map(name =>
@@ -12,11 +12,15 @@ ${['Calibrate', 'Start', 'GetState', 'Revoke', 'Stop', 'Cleanup'].map(name =>
 export class NetworkLive {
     constructor(parent) {
         this.mode = GLib.getenv('SYSPANE_GNOME_NETWORK_LIVE');
+        this.watchMode = GLib.getenv('SYSPANE_GNOME_RENDER_WATCH');
+        this.watch = null; this.paintSignal = 0; this.pending = null; this.staged = null;
+        this.freezeDrawing = false; this.renderTrace = [];
         this.phase = 'new'; this.session = null; this.frozen = null; this.generation = null;
         this.tile = new St.Widget({x: 300, y: 310, width: 448, height: 210,
             reactive: false, can_focus: false, style: 'background-color: rgb(20,30,40);'});
         parent.add_child(this.tile); this.tile.hide(); this.rows = []; this.actors = [];
-        this.bus = Gio.DBusExportedObject.wrapJSObject(XML, this);
+        const xml = this.watchMode ? XML.replace('</interface>', '<method name="Fault"><arg type="s" direction="out"/></method></interface>') : XML;
+        this.bus = Gio.DBusExportedObject.wrapJSObject(xml, this);
         this.bus.export(Gio.DBus.session, '/org/syspane/NetworkLive');
     }
     label(text, x, y, width) {
@@ -63,12 +67,14 @@ export class NetworkLive {
             root: GLib.getenv('SYSPANE_GNOME_NETWORK_ROOT'), journal: GLib.getenv('SYSPANE_GNOME_NETWORK_JOURNAL'),
             mode: ['lease-loss', 'hang'].includes(this.mode) ? this.mode : 'hold',
             onProjection: frame => this.draw(frame), onClear: () => {
+                this.closeWatch();
                 if (this.mode !== 'ignore-clear') this.erase();
             }});
         this.session.start(); return 'starting';
     }
     draw(frame) {
         if (this.phase !== 'started' || !this.session.active()) return;
+        if (this.freezeDrawing) return;
         if (!this.rows.length) this.prepare();
         frame.fields.forEach((field, row) => {
             let value = field.value;
@@ -82,13 +88,58 @@ export class NetworkLive {
         if (this.generation !== frame.generation) { this.generation = frame.generation; this.frozen = age; }
         if (this.mode === 'freeze-age') age = this.frozen;
         this.text(4, age); this.indicators(this.mode !== 'ignore-expiry' && field.effective === 1, frame.lease === 2);
+        if (this.watchMode && frame.generation === '2' && !this.watch) this.startWatch();
+        if (this.watch?.active() && this.pending !== null) {
+            this.staged = this.pending;
+            this.recordRender('draw', this.staged);
+            this.tile.queue_redraw();
+        }
     }
+    recordRender(event, generation = null) {
+        if (this.renderTrace.length >= 128) throw new Error('render.trace_capacity');
+        this.renderTrace.push({event, generation, monotonic_us: GLib.get_monotonic_time()});
+    }
+    startWatch() {
+        this.watch = new RenderSession({executable: GLib.getenv('SYSPANE_GNOME_WATCH_EXECUTABLE'),
+            root: GLib.getenv('SYSPANE_GNOME_NETWORK_ROOT'), journal: GLib.getenv('SYSPANE_GNOME_WATCH_JOURNAL'),
+            onChallenge: generation => {
+                if (this.pending !== null) throw new Error('render.challenge_overlap');
+                this.pending = generation; this.recordRender('challenge', generation);
+                if (this.freezeDrawing && this.watchMode === 'false-progress') {
+                    this.pending = null; this.recordRender('false-progress', generation); this.watch.complete(generation);
+                }
+            },
+            onClear: () => {
+                this.phase = 'closed'; this.stopPaint(); this.erase(); this.session?.close();
+            }});
+        this.paintSignal = global.stage.connect('after-paint', () => {
+            if (this.staged === null || this.staged !== this.pending || !this.tile.visible || !this.tile.mapped || !this.watch.active()) return;
+            const generation = this.staged; this.pending = this.staged = null;
+            try { this.recordRender('paint', generation); this.watch.complete(generation); }
+            catch (error) { this.watch.close(error.message); }
+        });
+        this.watch.start();
+    }
+    Fault() {
+        if (this.phase !== 'started' || this.watch?.phase !== 'live') return 'closed';
+        if (['render-stall', 'false-progress'].includes(this.watchMode)) this.freezeDrawing = true;
+        else if (this.watchMode === 'hidden') this.tile.hide();
+        else return 'unsupported';
+        this.recordRender('fault'); return 'faulted';
+    }
+    stopPaint() {
+        if (this.paintSignal) { global.stage.disconnect(this.paintSignal); this.paintSignal = 0; }
+        this.pending = this.staged = null; this.freezeDrawing = false;
+    }
+    closeWatch() { this.stopPaint(); this.watch?.close(); }
     GetState() {
         return JSON.stringify({phase: this.phase, labels: this.rows.reduce((n, row) => n + row.length, 0),
-            session: this.session?.state() ?? null});
+            session: this.session?.state() ?? null,
+            ...(this.watchMode ? {watch: this.watch?.state() ?? null, paintSignal: !!this.paintSignal,
+                pending: this.pending, staged: this.staged, renderTrace: this.renderTrace} : {})});
     }
     Revoke() { return this.session?.revoke() ?? 'closed'; }
-    Stop() { this.session?.close(); this.phase = 'closed'; return 'stopping'; }
+    Stop() { this.phase = 'closed'; this.closeWatch(); this.session?.close(); return 'stopping'; }
     Cleanup() { this.Stop(); this.erase(); return 'cleared'; }
     erase() {
         this.tile.hide();

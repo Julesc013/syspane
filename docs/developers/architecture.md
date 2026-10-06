@@ -49,3 +49,29 @@ evidence. The tile explicitly shows retained samples with unknown age; its GLib
 timer is not a qualified replacement for the C++ CLOCK_BOOTTIME measurement domain.
 Live clock integration, general IPC, installed policy and a production controller
 remain separate work. See the [package](../../spec/delivery/packages/w-25-native-network-cache.md).
+
+## Live measured drawing and independent render supervision
+
+The later `NetworkLive` experiment uses the shared C++ `NetworkView` directly
+through `networkSession.js`. Its asynchronous native session owns one supervised
+source, socket, revocable model, serialized write queue and cancellable read.
+Drawing consumes the model's values, age and separate freshness/lease statuses.
+It does not calculate a competing telemetry state in JavaScript.
+
+`RenderSession` reuses that process/socket owner. Its native `HealthView` exposes
+the same recovery-health parser used by native supervisors. The independent
+RecoveryProbe child owns the render deadline; the shell owns the pending drawing
+generation and stage callback. A completed operational draw stages that generation,
+and subsequent after-paint instrumentation acknowledges it. Heartbeats do not
+complete drawing. Independent pixel evidence is still required because this
+callback alone cannot establish visibility or correct displayed content.
+
+Both owners erase their retained state before asynchronous teardown. A nonzero
+child exit remains failed even when a sibling already initiated closure. The
+native health view expires a silent watcher, while the watcher can detect a
+stopped shell independently. A stopped shell cannot repaint: the experiment
+records its surviving pixels and verifies erasure after confirmed resume. The
+existing consumer lease can expire concurrently; it is never extended to make
+this test pass. See the [render-watch package](../../spec/delivery/packages/w-25-gnome-render-watch.md).
+Automatic renderer replacement, product demand/policy and editor recovery remain
+separate implementation boundaries.

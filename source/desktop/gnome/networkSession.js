@@ -7,7 +7,7 @@ const finish = (begin, end) => new Promise((resolve, reject) => begin((object, r
 
 // One serialized asynchronous owner, shared by standalone and desktop experiments.
 // The caller owns policy authority and synchronously erases its sink on onClear.
-export class NetworkSession {
+class NativeSession {
     constructor(options) {
         this.options = options; this.phase = 'new'; this.error = null;
         this.child = null; this.connection = null; this.view = null;
@@ -34,8 +34,7 @@ export class NetworkSession {
         try {
             const native = (await import('gi://SysPaneClock?version=0.1')).default;
             if (!this.active()) return;
-            this.child = Gio.Subprocess.new([this.options.executable, 'stream', this.options.root,
-                this.options.mode, this.options.journal], Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDERR_SILENCE);
+            this.child = Gio.Subprocess.new(this.arguments(), Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDERR_SILENCE);
             this.pid = Number(this.child.get_identifier());
             if (!Number.isSafeInteger(this.pid) || this.pid <= 1) throw new Error('session.pid');
             this.waited = finish(cb => this.child.wait_async(null, cb), (child, result) => {
@@ -48,10 +47,10 @@ export class NetworkSession {
             await this.ready;
             if (!this.active()) return;
             const client = new Gio.SocketClient({enable_proxy: false});
-            this.connection = await finish(cb => client.connect_async(new Gio.UnixSocketAddress({path: this.options.root + '/v/s'}), this.readCancel, cb),
+            this.connection = await finish(cb => client.connect_async(new Gio.UnixSocketAddress({path: this.socketPath()}), this.readCancel, cb),
                 (object, result) => object.connect_finish(result));
             if (!this.active()) { this.dropConnection(); return; }
-            this.view = native.NetworkView.new_from_socket(this.connection.get_socket().get_fd(), this.pid, '7', true);
+            this.view = this.createView(native, this.connection.get_socket().get_fd());
             await this.send(this.view.hello());
             if (!this.active()) return;
             this.readTask = this.readFrames();
@@ -79,7 +78,7 @@ export class NetworkSession {
                 while ((boundary = pending.indexOf('\n')) >= 0) {
                     if (boundary > 512 || this.events.length >= 64) throw new Error('session.stdout_capacity');
                     const row = JSON.parse(pending.slice(0, boundary)); pending = pending.slice(boundary + 1);
-                    if (!['ready', 'spawned', 'authenticated', 'stopped', 'complete', 'error'].includes(row.event)) throw new Error('session.stdout_event');
+                    if (!this.eventNames().includes(row.event)) throw new Error('session.stdout_event');
                     this.events.push(row); this.options.onEvent?.(row);
                     if (row.event === 'ready') this.readyResolve();
                 }
@@ -112,14 +111,11 @@ export class NetworkSession {
     async readFrames() {
         try {
             while (this.active()) {
-                const bytes = await finish(cb => this.connection.get_input_stream().read_bytes_async(16384, GLib.PRIORITY_DEFAULT, this.readCancel, cb),
+                const bytes = await finish(cb => this.connection.get_input_stream().read_bytes_async(this.readCapacity(), GLib.PRIORITY_DEFAULT, this.readCancel, cb),
                     (object, result) => object.read_bytes_finish(result));
                 if (!this.active()) return;
                 if (!bytes.get_size()) throw new Error('session.eof');
-                const code = this.view.feed(bytes);
-                if (code !== 'buffered' && !this.subscribed) {
-                    await this.send(this.view.subscribe()); this.subscribed = true;
-                }
+                await this.accept(bytes);
             }
         } catch (error) { if (this.active()) this.close(error.message); }
     }
@@ -131,23 +127,18 @@ export class NetworkSession {
                 this.nextBeat = now + 1000000;
                 this.send(this.view.heartbeat(String(this.sequence++))).catch(error => { if (this.active()) this.close(error.message); });
             }
-            const frame = JSON.parse(this.view.project());
-            if (frame.code === 'ready') {
-                if (this.phase === 'starting') {
-                    this.phase = 'live'; GLib.source_remove(this.startTimer); this.startTimer = 0; this.fullResolve();
-                }
-                this.options.onProjection(frame);
-            }
+            this.advanceNative();
         } catch (error) { this.close(error.message); }
     }
-    revoke() {
-        if (!this.active() || !this.view) return 'closed';
-        const code = this.view.policy('8', false);
-        this.options.onClear();
-        this.close(); return code;
+    accepted() {
+        if (this.phase === 'starting') {
+            this.phase = 'live'; GLib.source_remove(this.startTimer); this.startTimer = 0; this.fullResolve();
+        }
     }
     close(reason = null) {
         if (this.closeTask) return this.closeTask;
+        let resolved, rejected;
+        this.closeTask = new Promise((resolve, reject) => { resolved = resolve; rejected = reject; });
         this.phase = 'closing'; this.error = reason;
         this.readyReject(new Error('session.closed')); this.fullReject(new Error('session.closed'));
         for (const key of ['timer', 'startTimer', 'endTimer']) if (this[key]) { GLib.source_remove(this[key]); this[key] = 0; }
@@ -161,13 +152,17 @@ export class NetworkSession {
             this.killTimer = 0; this.writeCancel.cancel(); this.forced = true;
             this.child?.force_exit(); this.dropConnection(); return GLib.SOURCE_REMOVE;
         });
-        this.closeTask = this.finishClose(shutdown); return this.closeTask;
+        this.finishClose(shutdown).then(resolved, rejected); return this.closeTask;
     }
     async finishClose(shutdown) {
         try { if (shutdown && this.connection) await this.send(shutdown, true); } catch (_) { /* Bounded native teardown follows. */ }
         this.dropConnection();
         await this.waited; await this.outputDone; await this.readTask;
         this.child = null; this.subscribed = false; this.sequence = 0;
+        // A sibling may initiate normal closure before this child's failure is
+        // delivered. Keep its actual nonzero exit visible after every wait.
+        if (this.error === null && this.exitStatus !== null && this.exitStatus !== 0)
+            this.error = 'session.peer_failed';
         this.phase = this.error ? 'failed' : 'closed';
     }
     dropConnection() {
@@ -179,4 +174,52 @@ export class NetworkSession {
             exitStatus: this.exitStatus, forced: this.forced, view: this.view !== null,
             connection: this.connection !== null, queuedBytes: this.queuedBytes, events: this.events};
     }
+}
+
+export class NetworkSession extends NativeSession {
+    arguments() { return [this.options.executable, 'stream', this.options.root, this.options.mode, this.options.journal]; }
+    socketPath() { return this.options.root + '/v/s'; }
+    readCapacity() { return 16384; }
+    eventNames() { return ['ready', 'spawned', 'authenticated', 'stopped', 'complete', 'error']; }
+    createView(native, fd) { return native.NetworkView.new_from_socket(fd, this.pid, '7', true); }
+    async accept(bytes) {
+        const code = this.view.feed(bytes);
+        if (code !== 'buffered' && !this.subscribed) {
+            await this.send(this.view.subscribe()); this.subscribed = true;
+        }
+    }
+    advanceNative() {
+        const frame = JSON.parse(this.view.project());
+        if (frame.code === 'ready') { this.accepted(); this.options.onProjection(frame); }
+    }
+    revoke() {
+        if (!this.active() || !this.view) return 'closed';
+        const code = this.view.policy('8', false);
+        this.options.onClear(); this.close(); return code;
+    }
+}
+
+export class RenderSession extends NativeSession {
+    constructor(options) { super(options); this.receipts = []; }
+    arguments() { return [this.options.executable, 'render-watch', this.socketPath(), this.options.journal]; }
+    socketPath() { return this.options.root + '/r/s'; }
+    readCapacity() { return 4096; }
+    eventNames() { return ['ready', 'authenticated', 'complete', 'error', 'heartbeat', 'challenge', 'progress', 'fault']; }
+    createView(native, fd) { return native.HealthView.new_from_socket(fd, this.pid); }
+    async accept(bytes) {
+        for (const event of JSON.parse(this.view.feed(bytes))) {
+            if (this.receipts.length >= 64) throw new Error('health.receipt_capacity');
+            this.receipts.push(event);
+            if (event.kind === 'ready') { this.subscribed = true; this.accepted(); }
+            else if (event.kind === 'challenge') this.options.onChallenge(event.value);
+            else if (event.kind === 'shutdown') { this.close('health.shutdown'); break; }
+        }
+    }
+    advanceNative() { this.view.tick(); }
+    complete(generation) {
+        if (!this.active() || !this.view) return;
+        try { this.send(this.view.progress(generation)).catch(error => { if (this.active()) this.close(error.message); }); }
+        catch (error) { this.close(error.message); }
+    }
+    state() { return {...super.state(), receipts: this.receipts}; }
 }

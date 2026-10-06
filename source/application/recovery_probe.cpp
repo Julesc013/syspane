@@ -8,6 +8,13 @@
 #include <iostream>
 #include <mutex>
 #include <thread>
+#if defined(__linux__)
+#include <cerrno>
+#include <fcntl.h>
+#include <filesystem>
+#include <sys/stat.h>
+#include <unistd.h>
+#endif
 
 namespace p = syspane::platform;
 namespace r = syspane::recovery;
@@ -17,6 +24,94 @@ namespace {
 void emit(Json value) { value["observed_ms"] = p::monotonic_ms(); std::cout << value.dump() << std::endl; }
 void require(bool condition, const char* code) { if (!condition) throw w::Error(code); }
 void pause(unsigned ms) { std::this_thread::sleep_for(std::chrono::milliseconds(ms)); }
+
+#if defined(__linux__)
+class WatchJournal {
+public:
+    explicit WatchJournal(const std::string& name) {
+        const std::filesystem::path path(name); const auto parent = path.parent_path();
+        struct stat info{};
+        require(path.is_absolute() && std::filesystem::canonical(parent) == parent &&
+            lstat(parent.c_str(), &info) == 0 && S_ISDIR(info.st_mode) && info.st_uid == getuid() &&
+            (info.st_mode & 0777) == 0700, "watch.journal_parent");
+        fd_ = open(name.c_str(), O_WRONLY | O_CREAT | O_EXCL | O_CLOEXEC | O_NOFOLLOW, 0600);
+        require(fd_ >= 0, "watch.journal_open");
+    }
+    ~WatchJournal() { if (fd_ >= 0) close(fd_); }
+    void record(Json value) {
+        value["observed_ms"] = p::monotonic_ms();
+        const auto line = value.dump() + '\n';
+        require(line.size() <= 512 && bytes_ + line.size() <= 65536, "watch.journal_capacity");
+        std::size_t done = 0;
+        while (done < line.size()) {
+            const auto count = write(fd_, line.data() + done, line.size() - done);
+            if (count < 0 && errno == EINTR) continue;
+            require(count > 0, "watch.journal_write"); done += static_cast<std::size_t>(count);
+        }
+        bytes_ += line.size(); std::cout << value.dump() << std::endl;
+    }
+private:
+    int fd_ = -1;
+    std::size_t bytes_ = 0;
+};
+void render_watch(const std::string& endpoint, const std::string& journal_path) {
+    const auto parent = static_cast<std::uint64_t>(getppid()); p::arm_parent_lifetime(parent);
+    WatchJournal journal(journal_path); p::Listener listener(endpoint);
+    require(listener.access_controls_verified(), "watch.endpoint_controls");
+    journal.record({{"event", "ready"}, {"pid", p::current_process_id()}, {"parent", parent}});
+    auto stream = listener.accept(parent);
+    const auto epoch = "watch:" + std::to_string(p::current_process_id());
+    r::HealthLink link(stream, true, "desktop", epoch, "R"); r::ProducerLease lease; r::RenderWatch render;
+    std::uint64_t token = 0, sequence = 0, last_sent = 0, received = 0, last_received = 0;
+    std::uint64_t challenge = 0, issued_ms = 0, completed = 0;
+    const auto started = p::monotonic_ms();
+    const auto check_deadlines = [&](std::uint64_t now) {
+        if (!token) return;
+        lease.tick(now); render.tick(now);
+        const bool stalled = render.view().state == r::RenderState::stalled;
+        if (!stalled && lease.view().alive) return;
+        journal.record({{"event", "fault"}, {"reason", stalled ? "render.stalled" : "health.expired"},
+            {"pending", render.view().pending ? Json(*render.view().pending) : Json()}, {"completed", completed},
+            {"since_challenge_ms", challenge ? now - issued_ms : 0},
+            {"since_heartbeat_ms", last_received ? now - last_received : 0}, {"heartbeats", received}, {"health_alive", lease.view().alive}});
+        try { link.shutdown(); } catch (...) { /* Preserve the independently latched fault. */ }
+        throw w::Error(stalled ? "watch.render_stalled" : "watch.health_expired");
+    };
+    while (p::monotonic_ms() - started < 16000) {
+        for (const auto& event : link.poll()) {
+            // A queued completion, renewal or normal shutdown cannot erase a
+            // deadline that elapsed before this native receipt was observed.
+            check_deadlines(event.observed_ms);
+            if (event.kind == r::HealthKind::ready) {
+                token = lease.attach("shell", epoch, event.observed_ms).token;
+                journal.record({{"event", "authenticated"}, {"pid", stream.peer().process_id}});
+            } else if (event.kind == r::HealthKind::heartbeat) {
+                const auto code = lease.heartbeat(token, event.value, event.observed_ms);
+                require(code == r::Code::accepted || code == r::Code::duplicate, "watch.heartbeat");
+                ++received; last_received = event.observed_ms;
+                journal.record({{"event", "heartbeat"}, {"direction", "received"}, {"sequence", event.value}});
+            } else if (event.kind == r::HealthKind::progress) {
+                require(render.complete(event.value, event.observed_ms) == r::Code::accepted, "watch.late_progress");
+                ++completed; journal.record({{"event", "progress"}, {"generation", event.value}, {"completed", completed}});
+            } else if (event.kind == r::HealthKind::shutdown) {
+                journal.record({{"event", "complete"}, {"completed", completed}}); return;
+            }
+        }
+        if (!link.ready()) continue;
+        const auto now = p::monotonic_ms(); check_deadlines(now);
+        if (!sequence || now - last_sent >= 1000) {
+            link.heartbeat(sequence); last_sent = now;
+            journal.record({{"event", "heartbeat"}, {"direction", "sent"}, {"sequence", sequence++}});
+        }
+        if (render.view().state == r::RenderState::idle && (!challenge || now - issued_ms >= 1000)) {
+            ++challenge; issued_ms = now;
+            require(render.issue(challenge, now) == r::Code::accepted, "watch.challenge");
+            link.challenge(challenge); journal.record({{"event", "challenge"}, {"generation", challenge}, {"issued_ms", issued_ms}});
+        }
+    }
+    throw w::Error("watch.deadline");
+}
+#endif
 
 class RenderWorker {
 public:
@@ -234,6 +329,11 @@ int main(int argc, char** argv) {
     try {
         require(p::unprivileged_context(), "probe.privileged_context");
         const auto arguments = p::native_arguments(argc, argv);
+#if defined(__linux__)
+        if (arguments.size() == 4 && arguments[1] == "render-watch") {
+            render_watch(arguments[2], arguments[3]); return 0;
+        }
+#endif
         if ((arguments.size() == 4 || arguments.size() == 5) && arguments[1] == "supervisor")
             supervisor(arguments[2], arguments[3], arguments.size() == 5 ? arguments[4] : "");
         else if (arguments.size() == 6 && arguments[1] == "worker") {

@@ -1,0 +1,38 @@
+[
+  {
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "at": "2026-10-06T10:10:03.507471+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 4294967296,\n  \"checkout_out_bytes\": 1141126418,\n  \"linux_campaign_bytes\": 2683342882,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": "",
+    "source_inputs": {
+      "CMakeLists.txt": "7f626200b3da2cac4efb2258bf4a1aa793e6cfaaab5fc1989cca964821502c43",
+      "build-support/components.json": "e16892fd74d7a60449f381d7b7727b3850aadfb58c6e968d30e25885718e15a8"
+    }
+  },
+  {
+    "command": [
+      "ctest",
+      "--preset",
+      "windows-x86-v141-xp",
+      "-R",
+      "^composition[.]",
+      "--output-on-failure"
+    ],
+    "at": "2026-10-06T10:10:04.825563+00:00",
+    "exit": 0,
+    "stdout": "Test project D:/Projects/SysPane/syspane/out/build/windows-x86-v141-xp\n    Start 20: composition.graph\n1/2 Test #20: composition.graph ................   Passed    0.29 sec\n    Start 21: composition.reject_forbidden\n2/2 Test #21: composition.reject_forbidden .....   Passed    0.06 sec\n\n100% tests passed, 0 tests failed out of 2\n\nTotal Test time (real) =   0.85 sec\n",
+    "stderr": "",
+    "source_inputs": {
+      "CMakeLists.txt": "7f626200b3da2cac4efb2258bf4a1aa793e6cfaaab5fc1989cca964821502c43",
+      "build-support/components.json": "e16892fd74d7a60449f381d7b7727b3850aadfb58c6e968d30e25885718e15a8"
+    }
+  }
+]

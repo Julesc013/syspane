@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-06T09:25:00Z", "scope": "Measured GNOME values, age, independent leases and native teardown"}
+updated: {"by": "codex", "at": "2026-10-06T10:26:00Z", "scope": "Independent operational render supervision, native deadline ordering and retained exit failures"}
 ---
 
 # Current state and next admitted boundary
@@ -344,6 +344,17 @@ pass. Operational journals and crops stay private. This closes one finite visibl
 delivery experiment; independent supervision of real rendering and full recovery
 remain open.
 
+The subsequent [independent render-watch checkpoint](gnome-render-watch-handoff.md)
+connects the shared native health protocol to operational drawing and paint
+instrumentation through a separate RecoveryProbe child. Eight native cases verify
+actual pixels, render stalls, false progress, hidden drawing, revocation, watcher
+death/hang and a stopped shell. A separate three-case native experiment proves
+that queued progress, heartbeat and shutdown cannot erase elapsed deadlines.
+Nonzero exits remain failed during concurrent owner teardown. The original
+consumer-lease/order assumptions and native deadline failures remain preserved.
+Full suites pass 113 Linux and 105 Windows entries. Automatic renderer replacement,
+editor recovery, product policy/demand and complete native editions remain open.
+
 Canonical 0.2.0 documentation bundle, unchanged 0.1 authoring profile, preserved old
 fixtures, new experimental scene/command/capability 0.2 and admission descriptors.
 The initial settings registry has enforced metadata/default consistency and generated
@@ -417,9 +428,11 @@ erasure with real value pixels. The native GJS consumer now supplies the shared
 model semantics inside the shell runtime. The supervised forwarding/session boundary
 now passes real standalone delivery and native fault/exit checks. The same owner
 also passes independently observed operational value/age/expiry pixels, policy
-erasure and data-lease faults in the owned GNOME composition. Connect independent
-render-progress challenges to that actual rendering path, then complete product
-controller policy/demand, general delivery queues and visible/editor recovery.
+erasure and data-lease faults in the owned GNOME composition. Independent native
+render-progress supervision now covers that finite rendering path. Next close
+bounded automatic replacement after confirmed old exit, current-policy full-state
+reattachment and independent visible recovery; complete product controller
+policy/demand, general delivery queues and native editor-exit recovery.
 Actual native topology faults and Windows full-table notification
 coverage remain unqualified. The native
 inventory probe now connects bounded subscription/demand and queue revocation to
