@@ -128,6 +128,13 @@ All three controls retain the original temporal oracle; nine evidence checks pas
 This closes the bootstrap/marker prerequisite only. A new calibrated overlap fixture
 and actual DING, reveal, input and recovery observations must precede desktop claims.
 
+The later [GNOME/DING composition checkpoint](gnome-composition-handoff.md) now
+passes a separately calibrated solid-color/icon-overlap experiment with a real
+icon manager. Above-icons and below-wallpaper controls expose the expected failures;
+15 composition evidence checks and nine marker regression checks pass. Original
+fixture/control defects remain preserved. Reveal, input, image wallpaper, recovery
+and broader platform qualification are still required.
+
 Use the proposed cold-start exercise to detect missing observable contracts.
 Private implementation differences are permissible. Missing laboratories remain
 blocked qualification. A finite release scope must identify exact profiles,

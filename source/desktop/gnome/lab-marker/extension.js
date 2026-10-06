@@ -7,6 +7,8 @@ import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 const INTERFACE = `<node><interface name="org.syspane.LabMarker">
 <method name="SetGeneration"><arg type="u" direction="in" name="generation"/></method>
 </interface></node>`;
+const COMPOSITION_INTERFACE = INTERFACE.replace('</interface>',
+    '<method name="SetSceneEnabled"><arg type="b" direction="in" name="enabled"/></method></interface>');
 
 // Independent painter; the external pixel decoder is never imported here.
 function payload(generation) {
@@ -29,6 +31,9 @@ export default class LabMarker extends Extension {
         this._control = GLib.getenv('SYSPANE_GNOME_MARKER_CONTROL') ?? 'live';
         if (!['live', 'hidden', 'frozen'].includes(this._control))
             throw new Error('Unknown laboratory control');
+        this._composition = GLib.getenv('SYSPANE_GNOME_COMPOSITION');
+        if (this._composition && !['live', 'above-icons', 'below-wallpaper'].includes(this._composition))
+            throw new Error('Unknown composition control');
         this._generation = 1;
         this._actor = new St.DrawingArea({x: 300, y: 200, width: 128, height: 96,
             reactive: false, can_focus: false, track_hover: false});
@@ -54,10 +59,29 @@ export default class LabMarker extends Extension {
             }
             context.$dispose();
         });
-        Main.layoutManager._backgroundGroup.add_child(this._actor);
+        const parent = this._composition === 'above-icons' ? Main.uiGroup : Main.layoutManager._backgroundGroup;
+        const attach = actor => {
+            if (this._composition === 'below-wallpaper')
+                parent.insert_child_at_index(actor, 0);
+            else
+                parent.add_child(actor);
+        };
+        attach(this._actor);
+        if (this._composition) {
+            this._witness = new St.DrawingArea({x: 0, y: 32, width: 180, height: 220,
+                reactive: false, can_focus: false, track_hover: false});
+            this._witness.connect('repaint', area => {
+                const context = area.get_context();
+                context.setSourceRGB(192 / 255, 32 / 255, 128 / 255);
+                context.paint();
+                context.$dispose();
+            });
+            attach(this._witness);
+            this.SetSceneEnabled(false);
+        }
         if (this._control === 'hidden')
             this._actor.hide();
-        this._bus = Gio.DBusExportedObject.wrapJSObject(INTERFACE, this);
+        this._bus = Gio.DBusExportedObject.wrapJSObject(this._composition ? COMPOSITION_INTERFACE : INTERFACE, this);
         this._bus.export(Gio.DBus.session, '/org/syspane/LabMarker');
     }
 
@@ -70,10 +94,24 @@ export default class LabMarker extends Extension {
         this._actor.queue_repaint();
     }
 
+    SetSceneEnabled(enabled) {
+        if (!this._composition || typeof enabled !== 'boolean')
+            throw new Error('Scene visibility is available only in the composition experiment');
+        if (enabled && this._composition === 'below-wallpaper') {
+            const parent = Main.layoutManager._backgroundGroup;
+            parent.set_child_below_sibling(this._actor, null);
+            parent.set_child_below_sibling(this._witness, null);
+        }
+        this._actor.visible = enabled;
+        this._witness.visible = enabled;
+    }
+
     disable() {
         this._bus?.unexport();
         this._bus = null;
         this._actor?.destroy();
         this._actor = null;
+        this._witness?.destroy();
+        this._witness = null;
     }
 }

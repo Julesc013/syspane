@@ -1,0 +1,120 @@
+{
+  "schema_version": "0.1.0",
+  "work_id": "W-05",
+  "source_ref": "0b24cf3d7af298a9320addd1bc2eb9bcbbd30745",
+  "objective": "Observe the real GNOME/DING solid-color composition boundary with independent opaque/transparent calibration and wrong-layer controls, preserving original failures and remaining desktop gates.",
+  "changed_files": [
+    "README.md",
+    "TODO.md",
+    "build-support/evidence/gnome-composition-handoff.json",
+    "build-support/evidence/w-05-gnome-composition-GNOME-COMPOSITION-01-7946d2a1cacc49b3b75ec4625213e4ef.json",
+    "build-support/evidence/w-05-gnome-composition-GNOME-COMPOSITION-01-7a17d1781f4047c785f1f1ad5560c7d3.json",
+    "build-support/evidence/w-05-gnome-composition-GNOME-COMPOSITION-01-94e3dbe150234c68a8367821c92da21a.json",
+    "build-support/evidence/w-05-gnome-composition-GNOME-COMPOSITION-01-97726df4f0a34218bf5306e793ed53cb.json",
+    "build-support/evidence/w-05-gnome-composition-GNOME-COMPOSITION-01-9d2c1890fe56497d8a0377e5b8bacf15.json",
+    "build-support/evidence/w-05-gnome-composition-GNOME-COMPOSITION-01-ba2622fad45d4067bd22a67f93660c50.json",
+    "build-support/evidence/w-05-gnome-composition-GNOME-COMPOSITION-01-c2bed077c81848e3a9437725a8159993.json",
+    "build-support/evidence/w-05-gnome-composition-GNOME-COMPOSITION-01-e6b8f018e0784e8eb063da09caa84bec.json",
+    "build-support/evidence/w-05-gnome-composition-GNOME-MARKER-01-ac7ca90b5a894a898e67db4674a5ba98.json",
+    "build-support/evidence/w-05-gnome-composition-attempts.json",
+    "build-support/evidence/w-05-gnome-composition-calibration.json",
+    "build-support/evidence/w-05-gnome-composition-execution-control-error.json",
+    "build-support/evidence/w-05-gnome-composition-execution.json",
+    "build-support/evidence/w-05-gnome-composition-journals/GNOME-COMPOSITION-01-7946d2a1cacc49b3b75ec4625213e4ef.jsonl",
+    "build-support/evidence/w-05-gnome-composition-journals/GNOME-COMPOSITION-01-7a17d1781f4047c785f1f1ad5560c7d3.jsonl",
+    "build-support/evidence/w-05-gnome-composition-journals/GNOME-COMPOSITION-01-94e3dbe150234c68a8367821c92da21a.jsonl",
+    "build-support/evidence/w-05-gnome-composition-journals/GNOME-COMPOSITION-01-97726df4f0a34218bf5306e793ed53cb.jsonl",
+    "build-support/evidence/w-05-gnome-composition-journals/GNOME-COMPOSITION-01-9d2c1890fe56497d8a0377e5b8bacf15.jsonl",
+    "build-support/evidence/w-05-gnome-composition-journals/GNOME-COMPOSITION-01-ba2622fad45d4067bd22a67f93660c50.jsonl",
+    "build-support/evidence/w-05-gnome-composition-journals/GNOME-COMPOSITION-01-c2bed077c81848e3a9437725a8159993.jsonl",
+    "build-support/evidence/w-05-gnome-composition-journals/GNOME-COMPOSITION-01-e6b8f018e0784e8eb063da09caa84bec.jsonl",
+    "build-support/evidence/w-05-gnome-composition-native-verification.json",
+    "build-support/evidence/w-05-gnome-composition-source-archives/GNOME-COMPOSITION-01-7946d2a1cacc49b3b75ec4625213e4ef.zip",
+    "build-support/evidence/w-05-gnome-composition-source-archives/GNOME-COMPOSITION-01-7a17d1781f4047c785f1f1ad5560c7d3.zip",
+    "build-support/evidence/w-05-gnome-composition-source-archives/GNOME-COMPOSITION-01-94e3dbe150234c68a8367821c92da21a.zip",
+    "build-support/evidence/w-05-gnome-composition-source-archives/GNOME-COMPOSITION-01-97726df4f0a34218bf5306e793ed53cb.zip",
+    "build-support/evidence/w-05-gnome-composition-source-archives/GNOME-COMPOSITION-01-9d2c1890fe56497d8a0377e5b8bacf15.zip",
+    "build-support/evidence/w-05-gnome-composition-source-archives/GNOME-COMPOSITION-01-ba2622fad45d4067bd22a67f93660c50.zip",
+    "build-support/evidence/w-05-gnome-composition-source-archives/GNOME-COMPOSITION-01-c2bed077c81848e3a9437725a8159993.zip",
+    "build-support/evidence/w-05-gnome-composition-source-archives/GNOME-COMPOSITION-01-e6b8f018e0784e8eb063da09caa84bec.zip",
+    "build-support/evidence/w-05-gnome-composition-source-archives/GNOME-MARKER-01-ac7ca90b5a894a898e67db4674a5ba98.zip",
+    "build-support/evidence/w-05-gnome-composition-verification.json",
+    "build-support/record_gnome_composition.py",
+    "build-support/record_gnome_host.py",
+    "docs/developers/build.md",
+    "source/desktop/gnome/lab-marker/extension.js",
+    "spec/checksums.json",
+    "spec/delivery/current-state.md",
+    "spec/delivery/gnome-composition-handoff.md",
+    "spec/delivery/implementation-readiness.md",
+    "spec/delivery/index.md",
+    "spec/delivery/packages/index.md",
+    "spec/delivery/packages/w-05-gnome-composition.md",
+    "spec/delivery/work-units.json",
+    "spec/generated/catalog.json",
+    "tests/desktop/fixtures/gnome-composition-0.2.json",
+    "tests/desktop/fixtures/gnome-composition.json",
+    "tests/desktop/gnome_composition.py",
+    "tests/desktop/native_gnome_bootstrap.py",
+    "tests/desktop/test_gnome_composition_record.py"
+  ],
+  "decisions": [
+    "Reuse the owned pinned shell runtime and marker encoder/decoder; enable exact unmodified DING from a unique private path.",
+    "Separate the readable marker from an icon-overlap witness, and calibrate opaque/transparent pixels against independent black/white backgrounds before candidate enablement.",
+    "Keep the original failed 0.1 fixture and introduce 0.2 without weakening pixel equality, native icon requirements or timing limits.",
+    "Place owned below-control actors once at activation after calibration; retain the earlier unexpected passing control.",
+    "Bind and retain the real native icon process/window and record paired captures, source/runtime identity, journals and cleanup."
+  ],
+  "checks": [
+    {
+      "name": "Live changing marker, unchanged native opaque icons and visible rectangle through calibrated transparent pixels",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-05-gnome-composition-calibration.json"
+    },
+    {
+      "name": "Above-icons and below-wallpaper candidate acceptance",
+      "outcome": "fail",
+      "evidence": "build-support/evidence/w-05-gnome-composition-calibration.json"
+    },
+    {
+      "name": "Three-control calibration, 15 adversarial composition checks and nine marker regression checks",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-05-gnome-composition-native-verification.json"
+    },
+    {
+      "name": "Original dark-baseline fixture defect and unexpected passing below control preserved",
+      "outcome": "fail",
+      "evidence": "build-support/evidence/w-05-gnome-composition-attempts.json"
+    },
+    {
+      "name": "Confirmed workspace preflights before every final native invocation",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-05-gnome-composition-execution.json"
+    },
+    {
+      "name": "Specification schemas/fixtures, generated outputs, tooling and integrity",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-05-gnome-composition-verification.json"
+    },
+    {
+      "name": "Reveal, focus/taskbar, icon input, image wallpaper, recovery and complete desktop qualification",
+      "outcome": "not_run",
+      "evidence": "spec/delivery/gnome-composition-handoff.md"
+    }
+  ],
+  "open_questions": [
+    "Observe real reveal with foreground windows and native icon selection/drag/menu/opening.",
+    "Close image-wallpaper preservation and shell/icon-manager recovery/reattachment on this native path.",
+    "Continue independent Windows/XP/7/macOS tracks when their own synthetic laboratories are admitted."
+  ],
+  "next_step": "Use the working GNOME/DING composition path to close and execute native reveal, focus/taskbar and icon-input observations, then image-wallpaper and recovery gates.",
+  "authority_used": [
+    "user:foundation-native-campaign-2026-10-05"
+  ],
+  "limitations": [
+    "The campaign and W-02/W-05 remain incomplete; no full desktop profile or release is qualified.",
+    "Only owned synthetic display, folders, icons, settings and processes were used; no user desktop, shell or VM was controlled.",
+    "Private buses expose no real system services; DING file-operation/Nautilus limitations remain logged and unqualified.",
+    "No C++ build artifact or target profile changed; earlier CTest/smoke results retain their own source identities."
+  ]
+}

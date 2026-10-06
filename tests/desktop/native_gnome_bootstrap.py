@@ -28,18 +28,22 @@ SOURCES = ['tests/desktop/native_gnome_bootstrap.py', 'tests/desktop/native_orac
            'tests/desktop/oracle.py', 'tests/fault/native_diagnostic.py',
            'build-support/prepare_gnome_lab.py', 'build-support/gnome-lab-packages.json',
            'spec/delivery/packages/w-05-gnome-investigation.md',
-           'source/desktop/gnome/lab-marker/extension.js', 'source/desktop/gnome/lab-marker/metadata.json']
+           'source/desktop/gnome/lab-marker/extension.js', 'source/desktop/gnome/lab-marker/metadata.json',
+           'spec/delivery/packages/w-05-gnome-composition.md', 'tests/desktop/gnome_composition.py',
+           'tests/desktop/fixtures/gnome-composition.json', 'tests/desktop/fixtures/gnome-composition-0.2.json',
+           'build-support/record_gnome_host.py']
 
 
-def marker_trace(display, environment):
-    key = display.x.XKeysymToKeycode(display.handle, display.x.XStringToKeysym(b'Escape'))
-    if not key:
-        raise ValueError('native Escape key unavailable')
-    for pressed in (True, False):
-        if not display.xtest.XTestFakeKeyEvent(display.handle, key, pressed, 0):
-            raise ValueError('native overview-dismiss stimulus failed')
-    display.x.XFlush(display.handle)
-    time.sleep(.3)
+def marker_trace(display, environment, sample=None, dismiss=True):
+    if dismiss:
+        key = display.x.XKeysymToKeycode(display.handle, display.x.XStringToKeysym(b'Escape'))
+        if not key:
+            raise ValueError('native Escape key unavailable')
+        for pressed in (True, False):
+            if not display.xtest.XTestFakeKeyEvent(display.handle, key, pressed, 0):
+                raise ValueError('native overview-dismiss stimulus failed')
+        display.x.XFlush(display.handle)
+        time.sleep(.3)
     def issue(generation):
         command = ['/usr/bin/gdbus', 'call', '--address', environment['DBUS_SESSION_BUS_ADDRESS'],
                    '--dest', 'org.gnome.Shell', '--object-path', '/org/syspane/LabMarker',
@@ -66,16 +70,19 @@ def marker_trace(display, environment):
             pixels = display.capture(300, 200, 128, 96)
             after = now()
             if after <= trace['end_us']:
-                trace['frames'].append(pack_frame(pixels, before, after))
+                frame = pack_frame(pixels, before, after)
+                trace['frames'].append(frame)
+                if sample:
+                    sample(frame, now)
             next_frame += 50000
         time.sleep(.002)
-    return {'trace': trace, 'evaluation': evaluate(trace),
+    return {'trace': trace, 'evaluation': evaluate(trace), 'started_monotonic_ns': started,
             'background_before': rgb_record(background),
             'background_after': rgb_record(display.capture(600, 400, 128, 96)),
             'final_desktop': rgb_record(display.capture(0, 0, 800, 600))}
 
 
-def observe(environment, pid, channel, marker):
+def observe(environment, pid, channel, marker, composition):
     os.environ.clear()
     os.environ.update(environment)
     display = None
@@ -101,7 +108,11 @@ def observe(environment, pid, channel, marker):
             if manager_identity(display, owner) != manager:
                 raise ValueError('manager disappeared or changed during bootstrap interval')
         result = {'outcome': 'pass', 'manager': manager, 'frames': frames}
-        if marker:
+        if composition:
+            import gnome_composition
+            workspace = Path(environment['HOME']).parent
+            result['composition'] = gnome_composition.observe(display, environment, pid, workspace, marker_trace)
+        elif marker:
             result['marker'] = marker_trace(display, environment)
         channel.send(result)
     except Exception as error:
@@ -135,7 +146,7 @@ def group_members(group):
     return members
 
 
-def run(build, marker=False, control='live'):
+def run(build, marker=False, control='live', composition=None):
     # Retain orphaned shell helpers for reaping; no service/session can adopt them.
     if ctypes.CDLL(None, use_errno=True).prctl(36, 1, 0, 0, 0) != 0:
         raise OSError(ctypes.get_errno(), 'cannot retain descendant exit evidence')
@@ -146,7 +157,7 @@ def run(build, marker=False, control='live'):
         raise ValueError('pinned GNOME runtime identity changed')
     evidence = build / 'native-evidence'
     evidence.mkdir(exist_ok=True)
-    family = 'GNOME-MARKER-01' if marker else 'GNOME-BOOTSTRAP-01'
+    family = 'GNOME-COMPOSITION-01' if composition else ('GNOME-MARKER-01' if marker else 'GNOME-BOOTSTRAP-01')
     token = family + '-' + uuid.uuid4().hex
     workspace = build / token
     workspace.mkdir(mode=0o700)
@@ -159,6 +170,7 @@ def run(build, marker=False, control='live'):
     (workspace / 'home/src/frames/mutter-x11-frames').symlink_to(sysroot / 'usr/libexec/mutter-x11-frames')
     report = {'family': family, 'outcome': 'fail',
               'marker_control': control if marker else None,
+              'composition_control': composition,
               'executed_at': datetime.now(timezone.utc).isoformat(),
               'source_base': subprocess.check_output(['git', '-c', 'safe.directory=' + str(ROOT), 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
               'source_inputs': {p: sha(ROOT / p) for p in SOURCES},
@@ -167,6 +179,8 @@ def run(build, marker=False, control='live'):
               'system_binaries': {p: sha(Path(p)) for p in ['/usr/bin/Xvfb', '/usr/bin/dbus-daemon', '/usr/bin/glib-compile-schemas', '/usr/lib/x86_64-linux-gnu/libXRes.so.1']},
               'commands': [], 'cleanup': [],
               'qualification': 'Laboratory bootstrap and optional temporal marker only; icon composition, reveal, input, recovery, wallpaper policy, Wayland and product host qualification are not run.'}
+    if composition:
+        report['qualification'] = 'Selected solid-color DING composition experiment only; reveal, native input, image wallpaper/policy, recovery, Wayland and full product host qualification are not run.'
     archive = workspace / 'source-inputs.zip'
     with zipfile.ZipFile(archive, 'x', compression=zipfile.ZIP_DEFLATED) as target:
         for name in SOURCES:
@@ -198,6 +212,8 @@ def run(build, marker=False, control='live'):
                        'LIBGWEATHER_LOCATIONS_PATH': str(sysroot / 'usr/lib/x86_64-linux-gnu/libgweather-4/Locations.bin')}
         if marker:
             environment['SYSPANE_GNOME_MARKER_CONTROL'] = control
+        if composition:
+            environment['SYSPANE_GNOME_COMPOSITION'] = composition
         report['environment']['explicit'] = environment
         # Schema compilation is data-only and confined to this unique attempt.
         for folder in (Path('/usr/share/glib-2.0/schemas'), sysroot / 'usr/share/glib-2.0/schemas'):
@@ -219,6 +235,13 @@ def run(build, marker=False, control='live'):
                         ('org.gnome.desktop.background', 'picture-options', "'none'"),
                         ('org.gnome.desktop.background', 'primary-color', "'#304860'"),
                         ('org.gnome.desktop.background', 'color-shading-type', "'solid'")]
+            if composition:
+                import gnome_composition
+                settings.extend(gnome_composition.prepare(workspace, sysroot))
+                report['ding_inputs'] = inventory(workspace / 'data/gnome-shell/extensions/ding@rastersoft.com')
+                report['fixture_inputs'] = {name: inventory(workspace / name) for name in ['home/Desktop', 'data/icons', 'config/gtk-3.0']}
+                report['desktop_entries'] = sorted(p.relative_to(workspace / 'home/Desktop').as_posix()
+                                                   for p in (workspace / 'home/Desktop').rglob('*'))
             for schema, key, value in settings:
                 command = ['/usr/bin/gsettings', 'set', schema, key, value]
                 configured = subprocess.run(command, env=environment, capture_output=True, text=True, timeout=2)
@@ -252,7 +275,7 @@ def run(build, marker=False, control='live'):
         shell = launch('shell', [str(sysroot / 'usr/bin/gnome-shell'), '--x11', '--mode=user'])
         context = mp.get_context('spawn')
         local, remote = context.Pipe(duplex=False)
-        worker = context.Process(target=observe, args=(environment, shell.pid, remote, marker))
+        worker = context.Process(target=observe, args=(environment, shell.pid, remote, marker, composition))
         worker.start()
         remote.close()
         while time.monotonic() - started < 40:
@@ -265,7 +288,11 @@ def run(build, marker=False, control='live'):
                 if shell.poll() is not None:
                     raise RuntimeError('shell exited during observation')
                 report['mapped_files'] = mapped_files(shell.pid)
-                report['outcome'] = report['observation']['marker']['evaluation']['outcome'] if marker else 'pass'
+                if composition:
+                    report['icon_manager_mapped_files'] = mapped_files(report['observation']['composition']['icon_manager']['pid'])
+                    report['outcome'] = report['observation']['composition']['outcome']
+                else:
+                    report['outcome'] = report['observation']['marker']['evaluation']['outcome'] if marker else 'pass'
                 break
             if shell.poll() is not None:
                 raise RuntimeError('shell exited during bootstrap: ' + str(shell.returncode))
@@ -314,6 +341,13 @@ def run(build, marker=False, control='live'):
         for stream in streams:
             stream.close()
         report['logs'] = {p.name: p.read_text(errors='replace')[:1048576] for p in workspace.glob('*.log')}
+        journal = workspace / 'composition.jsonl'
+        if journal.exists():
+            report['composition_journal'] = {'path': str(journal), 'bytes': journal.stat().st_size, 'sha256': sha(journal)}
+        if composition:
+            report['fixture_after'] = {name: inventory(workspace / name) for name in ['home/Desktop', 'data/icons', 'config/gtk-3.0']}
+            report['desktop_entries_after'] = sorted(p.relative_to(workspace / 'home/Desktop').as_posix()
+                                                     for p in (workspace / 'home/Desktop').rglob('*'))
         if server:
             if server.poll() is None:
                 server.terminate()
@@ -338,7 +372,10 @@ if __name__ == '__main__':
     parser.add_argument('build_dir', type=Path)
     parser.add_argument('--marker', action='store_true', help='Observe three changing generations through the trusted shell bridge')
     parser.add_argument('--marker-control', choices=('live', 'hidden', 'frozen'), default='live')
+    parser.add_argument('--composition', choices=('live', 'above-icons', 'below-wallpaper'))
     args = parser.parse_args()
+    if args.composition and args.marker_control != 'live':
+        parser.error('composition uses its own above/below controls')
     if not args.marker and args.marker_control != 'live':
         parser.error('--marker-control requires --marker')
-    sys.exit(run(owned_build(args.build_dir), args.marker, args.marker_control))
+    sys.exit(run(owned_build(args.build_dir), args.marker or bool(args.composition), args.marker_control, args.composition))

@@ -31,14 +31,11 @@ def rgb(value, size):
     return raw
 
 
-def validate(value, build):
-    if value['family'] != 'GNOME-MARKER-01' or value.get('error'):
-        raise ValueError('completed marker record required')
-    control = value['marker_control']
-    if control not in {'live', 'hidden', 'frozen'}:
-        raise ValueError('control identity')
+def validate_runtime(value, build, family, prefix):
+    if value['family'] != family or value.get('error'):
+        raise ValueError('completed native record required')
     workspace = Path(value['workspace']).resolve(strict=True)
-    if workspace.parent != build or not workspace.name.startswith('GNOME-MARKER-01-'):
+    if workspace.parent != build or not workspace.name.startswith(prefix):
         raise ValueError('owned workspace required')
     archive = Path(value['source_archive']['path']).resolve(strict=True)
     if archive.parent != workspace or archive.name != 'source-inputs.zip':
@@ -65,8 +62,6 @@ def validate(value, build):
     if manager['pid'] != [shell[0]['pid']] or manager['self'] != [manager['window']] or manager['pid_origin'] != 'XResQueryClientIds' or manager['window'] & ~manager['resource_mask'] != manager['resource_base']:
         raise ValueError('native manager binding')
     environment = value['environment']['explicit']
-    if environment['SYSPANE_GNOME_MARKER_CONTROL'] != control:
-        raise ValueError('control environment differs')
     for key, directory in [('HOME', 'home'), ('XDG_CONFIG_HOME', 'config'), ('XDG_DATA_HOME', 'data'), ('XDG_RUNTIME_DIR', 'run')]:
         if environment[key] != str(workspace / directory):
             raise ValueError('owned environment differs')
@@ -83,6 +78,14 @@ def validate(value, build):
             raise ValueError('bootstrap capture provenance/time')
         rgb(frame['pixels'], 800 * 600 * 3)
         previous = frame['capture_finished_ns']
+    return observation
+
+
+def validate(value, build):
+    observation = validate_runtime(value, build, 'GNOME-MARKER-01', 'GNOME-MARKER-01-')
+    control = value['marker_control']
+    if control not in {'live', 'hidden', 'frozen'} or value['environment']['explicit']['SYSPANE_GNOME_MARKER_CONTROL'] != control:
+        raise ValueError('control identity/environment')
     marker = observation['marker']
     result = evaluate(marker['trace'])
     if marker['evaluation'] != result or value['outcome'] != result['outcome']:

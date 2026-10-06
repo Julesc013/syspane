@@ -338,6 +338,25 @@ error cannot substitute for a negative control. The default command tests bootst
 only. No icon, reveal/input, wallpaper-policy, recovery or product-host claim follows
 from the marker result. See the [GNOME checkpoint](../../spec/delivery/gnome-marker-handoff.md).
 
+The same owned GNOME runner now has a separate DING composition fixture:
+
+```sh
+python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --composition live
+python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --composition above-icons
+python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --composition below-wallpaper
+python3 build-support/record_gnome_composition.py --build-dir <owned-build-directory> --reports <live-report> <above-report> <below-report> --output <new-owned-record>
+python3 tests/desktop/test_gnome_composition_record.py <owned-build-directory> <live-report> -v
+```
+
+Run and await a successful workspace preflight before each invocation. Wrong-layer
+controls intentionally return 1, but must finish the exact native scenario and fail
+the required pixel dimensions. A native error does not qualify as a control. The
+recorder requires all three reports to share exact current source inputs. It checks
+independent pre-candidate black/white calibration, fixed opaque/transparent witnesses,
+paired captures, native DING ownership, unchanged settings and preserved journals.
+No user icon/theme/wallpaper is used. See the [composition checkpoint](../../spec/delivery/gnome-composition-handoff.md)
+for scope and the next reveal/input/recovery boundaries.
+
 For the historical shared-subset experiment, the existing Visual Studio 2017 XP
 toolset has its own preset. It compiles the same model, protocol/policy, recovery
 and diagnostic projection sources; modern native adapters require separate closure.

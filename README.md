@@ -52,10 +52,10 @@ pixel checks; the original image-at-startup failure remains separate. See the
 [X11 input checkpoint](spec/delivery/x11-input-handoff.md). An
 [owned Openbox restart](spec/delivery/x11-recovery-handoff.md) now proves manager
 recovery and continuing marker progress, while independently retaining the candidates'
-visible-placement failures. A [GNOME 46 shell bridge](spec/delivery/gnome-marker-handoff.md)
-now paints externally observed changing markers in the real background layer, with
-hidden/frozen controls and confirmed owned-process cleanup. Icon composition,
-reveal/input and shell recovery remain open. No desktop profile is qualified.
+visible-placement failures. A [GNOME 46/DING experiment](spec/delivery/gnome-composition-handoff.md)
+now observes live drawings between a synthetic wallpaper and real desktop icons,
+with independently calibrated pixels and wrong-layer controls. Reveal/input, image
+wallpaper and shell recovery remain open. No desktop profile is qualified.
 There is no usable SysPane desktop application or downloadable release yet.
 Desktop, screensaver and installer profiles remain unqualified.
 

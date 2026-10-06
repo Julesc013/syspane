@@ -5,6 +5,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [W-01 portable build and model foundation](w-01-foundation.md) — Define the first useful program, model cases and build evidence without claiming a desktop implementation.
 - [W-02 independent temporal desktop oracle](w-02-desktop-oracle.md) — Close externally captured marker decoding, time coverage and native calibration before desktop qualification.
 - [W-04 historical Windows build and host experiments](w-04-historical-windows.md) — Test the existing shared C++ subset with the installed XP toolset before claiming historical runtime or desktop support.
+- [W-05 GNOME icon composition experiment](w-05-gnome-composition.md) — Calibrate separated marker and opaque icon witnesses against a real owned DING desktop.
 - [W-05 owned GNOME composition investigation](w-05-gnome-investigation.md) — Test a pinned shell bridge on a private display without claiming a supported desktop.
 - [W-05 owned X11 window-manager recovery](w-05-shell-recovery.md) — Measure native manager replacement and candidate continuity without promoting failed placement.
 - [W-05 bounded X11 host investigation](w-05-x11-investigation.md) — Observe desktop-type placement and native reveal under a real window and icon manager in an owned lab.

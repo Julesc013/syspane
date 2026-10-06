@@ -173,6 +173,14 @@ as required. Nine evidence checks pass and original preparation/bootstrap failur
 are preserved with source archives. DING is pinned but not enabled; no icon
 composition, reveal/input, native GPU/Wayland or product host claim follows.
 
+The [GNOME composition checkpoint](gnome-composition-handoff.md) now enables real
+DING and independently observes a live drawing behind 4,096 opaque icon pixels,
+through 33,695 calibrated transparent pixels and above the synthetic wallpaper.
+Both wrong-layer controls fail as required; 15 composition and nine marker evidence
+checks pass. The original dark-baseline and actor-ordering mistakes are preserved.
+This closes only the selected solid-color composition experiment, not reveal/input,
+image wallpaper, recovery or full desktop qualification.
+
 Canonical 0.2.0 documentation bundle, unchanged 0.1 authoring profile, preserved old
 fixtures, new experimental scene/command/capability 0.2 and admission descriptors.
 The initial settings registry has enforced metadata/default consistency and generated
@@ -209,10 +217,10 @@ License, contribution and release-identity decisions remain open.
 
 ## Next work
 
-Continue the admitted campaign: use the working GNOME bridge and unchanged external
-oracle to calibrate a separate marker/icon-overlap fixture, then enable the pinned
-icon manager and measure actual composition, reveal/input and recovery. Keep the
-earlier X11 failures. Close other platform capture/reveal boundaries in admitted
+Continue the admitted campaign: use the calibrated GNOME/DING composition path and
+unchanged external marker oracle to measure real reveal, focus/taskbar behavior,
+icon input, image-wallpaper preservation and shell/icon-manager recovery. Keep the
+earlier X11 failures and failed GNOME fixture/control attempts. Close other platform capture/reveal boundaries in admitted
 synthetic desktops. W-04 has build artifacts ready for
 historical guest execution once guest test scope and usability are established.
 W-05 needs a composition strategy that actually preserves icon pixels; its initial

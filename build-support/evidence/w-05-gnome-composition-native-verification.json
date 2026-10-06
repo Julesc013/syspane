@@ -1,0 +1,112 @@
+[
+  {
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-06T00:44:54.661577+00:00",
+    "finished_at": "2026-10-06T00:44:57.161123+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 3221225472,\n  \"checkout_out_bytes\": 934162643,\n  \"linux_campaign_bytes\": 1399407163,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "build-support/record_gnome_composition.py",
+      "--build-dir",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13",
+      "--reports",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-COMPOSITION-01-e6b8f018e0784e8eb063da09caa84bec.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-COMPOSITION-01-ba2622fad45d4067bd22a67f93660c50.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-COMPOSITION-01-c2bed077c81848e3a9437725a8159993.json",
+      "--output",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/gnome-composition-calibration.json"
+    ],
+    "started_at": "2026-10-06T00:44:57.161551+00:00",
+    "finished_at": "2026-10-06T00:44:57.924260+00:00",
+    "exit": 0,
+    "stdout": "[\n  {\n    \"control\": \"live\",\n    \"outcome\": \"pass\",\n    \"marker\": \"pass\",\n    \"icons\": \"pass\",\n    \"rectangle\": \"pass\",\n    \"anchor_counts\": [\n      1024,\n      1024,\n      1024,\n      1024\n    ],\n    \"clean_count\": 33695,\n    \"samples\": 48,\n    \"max_gap_us\": 52470,\n    \"max_capture_us\": 2195,\n    \"native_manager_pid\": 502,\n    \"cleanup\": \"confirmed\",\n    \"background\": \"unchanged synthetic color/settings\"\n  },\n  {\n    \"control\": \"above-icons\",\n    \"outcome\": \"fail\",\n    \"marker\": \"pass\",\n    \"icons\": \"fail\",\n    \"rectangle\": \"pass\",\n    \"anchor_counts\": [\n      1024,\n      1024,\n      1024,\n      1024\n    ],\n    \"clean_count\": 33695,\n    \"samples\": 48,\n    \"max_gap_us\": 53875,\n    \"max_capture_us\": 1502,\n    \"native_manager_pid\": 701,\n    \"cleanup\": \"confirmed\",\n    \"background\": \"unchanged synthetic color/settings\"\n  },\n  {\n    \"control\": \"below-wallpaper\",\n    \"outcome\": \"fail\",\n    \"marker\": \"fail\",\n    \"icons\": \"pass\",\n    \"rectangle\": \"fail\",\n    \"anchor_counts\": [\n      1024,\n      1024,\n      1024,\n      1024\n    ],\n    \"clean_count\": 33695,\n    \"samples\": 48,\n    \"max_gap_us\": 52933,\n    \"max_capture_us\": 1991,\n    \"native_manager_pid\": 895,\n    \"cleanup\": \"confirmed\",\n    \"background\": \"unchanged synthetic color/settings\"\n  }\n]\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-06T00:44:57.924593+00:00",
+    "finished_at": "2026-10-06T00:44:58.214366+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 3221225472,\n  \"checkout_out_bytes\": 934165799,\n  \"linux_campaign_bytes\": 1399416114,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "tests/desktop/test_gnome_composition_record.py",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-COMPOSITION-01-e6b8f018e0784e8eb063da09caa84bec.json",
+      "-v"
+    ],
+    "started_at": "2026-10-06T00:44:58.214726+00:00",
+    "finished_at": "2026-10-06T00:44:59.601823+00:00",
+    "exit": 0,
+    "stdout": "",
+    "stderr": "test_background_change (__main__.CompositionEvidence.test_background_change) ... ok\ntest_calibration_after_enable (__main__.CompositionEvidence.test_calibration_after_enable) ... ok\ntest_changed_icon_script (__main__.CompositionEvidence.test_changed_icon_script) ... ok\ntest_changed_journal (__main__.CompositionEvidence.test_changed_journal) ... ok\ntest_empty_icon_mask_with_valid_pixel_hashes (__main__.CompositionEvidence.test_empty_icon_mask_with_valid_pixel_hashes) ... ok\ntest_false_calibration_pixels (__main__.CompositionEvidence.test_false_calibration_pixels) ... ok\ntest_foreign_icon_pid (__main__.CompositionEvidence.test_foreign_icon_pid) ... ok\ntest_invented_mask_count (__main__.CompositionEvidence.test_invented_mask_count) ... ok\ntest_missing_overlap_sample (__main__.CompositionEvidence.test_missing_overlap_sample) ... ok\ntest_missing_white_control (__main__.CompositionEvidence.test_missing_white_control) ... ok\ntest_moved_fixture (__main__.CompositionEvidence.test_moved_fixture) ... ok\ntest_native_record (__main__.CompositionEvidence.test_native_record) ... ok\ntest_overlapping_capture_times (__main__.CompositionEvidence.test_overlapping_capture_times) ... ok\ntest_relabelled_negative_control (__main__.CompositionEvidence.test_relabelled_negative_control) ... ok\ntest_unconfirmed_exit (__main__.CompositionEvidence.test_unconfirmed_exit) ... ok\n\n----------------------------------------------------------------------\nRan 15 tests in 1.139s\n\nOK\n"
+  },
+  {
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-06T00:44:59.602155+00:00",
+    "finished_at": "2026-10-06T00:44:59.895919+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 3221225472,\n  \"checkout_out_bytes\": 934168541,\n  \"linux_campaign_bytes\": 1399416114,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "tests/desktop/test_gnome_record.py",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-MARKER-01-ac7ca90b5a894a898e67db4674a5ba98.json",
+      "-v"
+    ],
+    "started_at": "2026-10-06T00:44:59.896326+00:00",
+    "finished_at": "2026-10-06T00:45:00.383189+00:00",
+    "exit": 0,
+    "stdout": "",
+    "stderr": "test_changed_background (__main__.EvidenceChecks.test_changed_background) ... ok\ntest_changed_source (__main__.EvidenceChecks.test_changed_source) ... ok\ntest_false_pixel_digest (__main__.EvidenceChecks.test_false_pixel_digest) ... ok\ntest_foreign_manager (__main__.EvidenceChecks.test_foreign_manager) ... ok\ntest_ineligible_capture (__main__.EvidenceChecks.test_ineligible_capture) ... ok\ntest_missing_generation (__main__.EvidenceChecks.test_missing_generation) ... ok\ntest_native_record (__main__.EvidenceChecks.test_native_record) ... ok\ntest_unbound_resource (__main__.EvidenceChecks.test_unbound_resource) ... ok\ntest_unconfirmed_cleanup (__main__.EvidenceChecks.test_unconfirmed_cleanup) ... ok\n\n----------------------------------------------------------------------\nRan 9 tests in 0.315s\n\nOK\n"
+  }
+]
