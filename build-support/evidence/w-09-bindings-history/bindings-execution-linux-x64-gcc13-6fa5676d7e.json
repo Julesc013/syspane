@@ -1,0 +1,110 @@
+[
+  {
+    "step": "configure",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-06T20:02:23.659189+00:00",
+    "finished_at": "2026-10-06T20:02:26.106733+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 6442450944,\n  \"checkout_out_bytes\": 1678576415,\n  \"linux_campaign_bytes\": 3467184116,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "configure",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/bindings_step.py",
+      "linux-x64-gcc13",
+      "configure"
+    ],
+    "started_at": "2026-10-06T20:02:26.107154+00:00",
+    "finished_at": "2026-10-06T20:02:38.824727+00:00",
+    "exit": 0,
+    "stdout": "Preset CMake variables:\n\n  BUILD_TESTING=\"ON\"\n  CMAKE_BUILD_TYPE=\"Debug\"\n  CMAKE_CXX_COMPILER=\"g++\"\n  SYSPANE_PROFILE=\"linux-x64-gcc13\"\n\nprofile verified: linux-x64-gcc13\nvendored dependency digests: pass\ndiagnostic toolkit verified: GTK 3.24.41 / Ubuntu 3.24.41-4ubuntu1.3\nnative GJS clock build dependencies verified\n-- Configuring done (5.7s)\n-- Generating done (0.0s)\n-- Build files have been written to: /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-09-bindings/linux-x64-gcc13-configure-330bc6d1fd\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-06T20:02:38.825117+00:00",
+    "finished_at": "2026-10-06T20:02:39.408744+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 6442450944,\n  \"checkout_out_bytes\": 1679715173,\n  \"linux_campaign_bytes\": 3467182995,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/bindings_step.py",
+      "linux-x64-gcc13",
+      "build"
+    ],
+    "started_at": "2026-10-06T20:02:39.409073+00:00",
+    "finished_at": "2026-10-06T20:02:52.504805+00:00",
+    "exit": 0,
+    "stdout": "[1/2] Building CXX object CMakeFiles/syspane_scene_tests.dir/tests/scene/binding_tests.cpp.o\n[2/2] Linking CXX executable syspane_scene_tests\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-09-bindings/linux-x64-gcc13-build-835e223523\n",
+    "stderr": ""
+  },
+  {
+    "step": "focus",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-06T20:02:52.505114+00:00",
+    "finished_at": "2026-10-06T20:02:53.097003+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 6442450944,\n  \"checkout_out_bytes\": 1680853221,\n  \"linux_campaign_bytes\": 3468632262,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "focus",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/bindings_step.py",
+      "linux-x64-gcc13",
+      "focus"
+    ],
+    "started_at": "2026-10-06T20:02:53.097314+00:00",
+    "finished_at": "2026-10-06T20:03:01.873429+00:00",
+    "exit": 0,
+    "stdout": "sec\n      Start   8: scene.BIND-FRESHNESS\n 8/52 Test   #8: scene.BIND-FRESHNESS .............   Passed    0.01 sec\n      Start   9: scene.BIND-AXES\n 9/52 Test   #9: scene.BIND-AXES ..................   Passed    0.01 sec\n      Start  10: scene.BIND-POLICY\n10/52 Test  #10: scene.BIND-POLICY ................   Passed    0.01 sec\n      Start  11: scene.BIND-BOUNDS\n11/52 Test  #11: scene.BIND-BOUNDS ................   Passed    0.01 sec\n      Start  12: scene.BIND-LIFETIME\n12/52 Test  #12: scene.BIND-LIFETIME ..............   Passed    0.01 sec\n      Start  13: scene.BIND-INVALID\n13/52 Test  #13: scene.BIND-INVALID ...............   Passed    0.01 sec\n      Start  14: scene.BIND-MULTISOURCE\n14/52 Test  #14: scene.BIND-MULTISOURCE ...........   Passed    0.00 sec\n      Start  15: scene.BIND-RESTART\n15/52 Test  #15: scene.BIND-RESTART ...............   Passed    0.01 sec\n      Start  16: scene.BIND-REAL-SORT\n16/52 Test  #16: scene.BIND-REAL-SORT .............   Passed    0.01 sec\n      Start  17: scene.BIND-COLLECTION-BOUND\n17/52 Test  #17: scene.BIND-COLLECTION-BOUND ......   Passed    0.07 sec\n      Start  18: scene.ROOT-FLOW\n18/52 Test  #18: scene.ROOT-FLOW ..................   Passed    0.01 sec\n      Start  19: scene.STACK-V\n19/52 Test  #19: scene.STACK-V ....................   Passed    0.01 sec\n      Start  20: scene.STACK-H\n20/52 Test  #20: scene.STACK-H ....................   Passed    0.01 sec\n      Start  21: scene.PRIORITY\n21/52 Test  #21: scene.PRIORITY ...................   Passed    0.01 sec\n      Start  22: scene.FAIR-SHRINK\n22/52 Test  #22: scene.FAIR-SHRINK ................   Passed    0.01 sec\n      Start  23: scene.OVERFLOW\n23/52 Test  #23: scene.OVERFLOW ...................   Passed    0.01 sec\n      Start  24: scene.FIXED-GROUP\n24/52 Test  #24: scene.FIXED-GROUP ................   Passed    0.01 sec\n      Start  25: scene.CANVAS\n25/52 Test  #25: scene.CANVAS .....................   Passed    0.01 sec\n      Start  26: scene.GRID\n26/52 Test  #26: scene.GRID .......................   Passed    0.01 sec\n      Start  27: scene.GRID-OVERFLOW\n27/52 Test  #27: scene.GRID-OVERFLOW ..............   Passed    0.01 sec\n      Start  28: scene.NESTED\n28/52 Test  #28: scene.NESTED .....................   Passed    0.01 sec\n      Start  29: scene.BREAKPOINT-EQUAL\n29/52 Test  #29: scene.BREAKPOINT-EQUAL ...........   Passed    0.01 sec\n      Start  30: scene.BREAKPOINT-BELOW\n30/52 Test  #30: scene.BREAKPOINT-BELOW ...........   Passed    0.01 sec\n      Start  31: scene.DISPLAY-MISSING\n31/52 Test  #31: scene.DISPLAY-MISSING ............   Passed    0.01 sec\n      Start  32: scene.DISPLAY-AMBIGUOUS\n32/52 Test  #32: scene.DISPLAY-AMBIGUOUS ..........   Passed    0.01 sec\n      Start  33: scene.DISPLAY-REMOVED\n33/52 Test  #33: scene.DISPLAY-REMOVED ............   Passed    0.01 sec\n      Start  34: scene.SAFE-REGION\n34/52 Test  #34: scene.SAFE-REGION ................   Passed    0.01 sec\n      Start  35: scene.EXCLUSION-TIE\n35/52 Test  #35: scene.EXCLUSION-TIE ..............   Passed    0.01 sec\n      Start  36: scene.NO-REGION\n36/52 Test  #36: scene.NO-REGION ..................   Passed    0.01 sec\n      Start  37: scene.PIXELS\n37/52 Test  #37: scene.PIXELS .....................   Passed    0.01 sec\n      Start  38: scene.PIXEL-CLIP\n38/52 Test  #38: scene.PIXEL-CLIP .................   Passed    0.01 sec\n      Start  39: scene.READABLE-FIXED\n39/52 Test  #39: scene.READABLE-FIXED .............   Passed    0.01 sec\n      Start  40: scene.READABLE-FLOW\n40/52 Test  #40: scene.READABLE-FLOW ..............   Passed    0.01 sec\n      Start  41: scene.OVERLAP\n41/52 Test  #41: scene.OVERLAP ....................   Passed    0.01 sec\n      Start  42: scene.DISPLAY-CONFLICT\n42/52 Test  #42: scene.DISPLAY-CONFLICT ...........   Passed    0.01 sec\n      Start  43: scene.MISSING-METRICS\n43/52 Test  #43: scene.MISSING-METRICS ............   Passed    0.01 sec\n      Start  44: scene.EXCLUSION-ORDER\n44/52 Test  #44: scene.EXCLUSION-ORDER ............   Passed    0.01 sec\n      Start  45: scene.QUANTIZED-FIXED\n45/52 Test  #45: scene.QUANTIZED-FIXED ............   Passed    0.01 sec\n      Start  46: scene.QUANTIZED-GAP\n46/52 Test  #46: scene.QUANTIZED-GAP ..............   Passed    0.01 sec\n      Start  47: scene.NESTED-BREAKPOINT\n47/52 Test  #47: scene.NESTED-BREAKPOINT ..........   Passed    0.01 sec\n      Start  48: scene.NATIVE-METRICS\n48/52 Test  #48: scene.NATIVE-METRICS .............   Passed    0.01 sec\n      Start  49: scene.LIMITS\n49/52 Test  #49: scene.LIMITS .....................   Passed    0.22 sec\n      Start  50: scene.EXCLUSION-EXHAUSTIVE\n50/52 Test  #50: scene.EXCLUSION-EXHAUSTIVE .......   Passed    0.38 sec\n      Start 114: composition.graph\n51/52 Test #114: composition.graph ................   Passed    0.08 sec\n      Start 115: composition.reject_forbidden\n52/52 Test #115: composition.reject_forbidden .....   Passed    0.16 sec\n\n100% tests passed, 0 tests failed out of 52\n\nTotal Test time (real) =   1.28 sec\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-09-bindings/linux-x64-gcc13-focus-b7907cfb66\n",
+    "stderr": ""
+  }
+]

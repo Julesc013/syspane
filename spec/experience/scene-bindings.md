@@ -45,6 +45,11 @@ Portable monitor roles resolve through a host-local map. Missing displays retain
 their assignment and temporarily map to an admitted readable fallback with a warning.
 Do not rewrite user intent when DPI, fonts or display topology changes.
 
+The shared [binding implementation contract](../delivery/packages/w-09-bindings.md)
+closes explicit provider routing, exact predicate/sort semantics, persistent mapping,
+policy borrowing and bounded incomplete outcomes. Native routing and retained-cache
+ownership must integrate that boundary before claiming actual scene activation.
+
 ## Binding grammar
 
 [Binding descriptors](../contracts/binding.schema.json) select an entity type and

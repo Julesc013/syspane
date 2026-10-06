@@ -1,0 +1,74 @@
+[
+  {
+    "step": "configure",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-06T19:58:36.075359+00:00",
+    "finished_at": "2026-10-06T19:58:36.771650+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 6442450944,\n  \"checkout_out_bytes\": 1671723869,\n  \"linux_campaign_bytes\": 3440164257,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "configure",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/bindings_step.py",
+      "linux-x64-gcc13",
+      "configure"
+    ],
+    "started_at": "2026-10-06T19:58:36.772096+00:00",
+    "finished_at": "2026-10-06T19:58:51.141173+00:00",
+    "exit": 0,
+    "stdout": "Preset CMake variables:\n\n  BUILD_TESTING=\"ON\"\n  CMAKE_BUILD_TYPE=\"Debug\"\n  CMAKE_CXX_COMPILER=\"g++\"\n  SYSPANE_PROFILE=\"linux-x64-gcc13\"\n\nprofile verified: linux-x64-gcc13\nvendored dependency digests: pass\ndiagnostic toolkit verified: GTK 3.24.41 / Ubuntu 3.24.41-4ubuntu1.3\nnative GJS clock build dependencies verified\n-- Configuring done (5.6s)\n-- Generating done (0.0s)\n-- Build files have been written to: /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-09-bindings/linux-x64-gcc13-configure-f6347c2080\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-06T19:58:51.141533+00:00",
+    "finished_at": "2026-10-06T19:58:51.778718+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 6442450944,\n  \"checkout_out_bytes\": 1672861575,\n  \"linux_campaign_bytes\": 3440174585,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/bindings_step.py",
+      "linux-x64-gcc13",
+      "build"
+    ],
+    "started_at": "2026-10-06T19:58:51.778995+00:00",
+    "finished_at": "2026-10-06T19:59:15.813471+00:00",
+    "exit": 1,
+    "stdout": "[1/27] Building CXX object CMakeFiles/syspane_authored.dir/source/configuration/transaction.cpp.o\n[2/27] Building CXX object CMakeFiles/syspane_authored.dir/source/configuration/content.cpp.o\n[3/27] Building CXX object CMakeFiles/syspane_scene.dir/source/scene/layout.cpp.o\n[4/27] Building CXX object CMakeFiles/syspane_authored.dir/source/configuration/authored.cpp.o\n[5/27] Linking CXX static library libsyspane_authored.a\n[6/27] Building CXX object CMakeFiles/syspane_content_reader.dir/source/platform/content_reader_linux.cpp.o\n[7/27] Linking CXX static library libsyspane_content_reader.a\n[8/27] Building CXX object CMakeFiles/syspane_async_commands.dir/source/configuration/async_commands.cpp.o\n[9/27] Linking CXX static library libsyspane_async_commands.a\n[10/27] Building CXX object CMakeFiles/syspane_scene.dir/source/scene/bindings.cpp.o\n[11/27] Linking CXX static library libsyspane_scene.a\n[12/27] Building CXX object CMakeFiles/syspane_content_probe.dir/source/application/content_probe.cpp.o\n[13/27] Linking CXX executable SysPane.ContentProbe\n[14/27] Building CXX object CMakeFiles/syspane_generation_store.dir/source/platform/generation_store_linux.cpp.o\n[15/27] Linking CXX static library libsyspane_generation_store.a\n[16/27] Building CXX object CMakeFiles/syspane_configuration_probe.dir/source/application/configuration_probe.cpp.o\n[17/27] Linking CXX executable SysPane.ConfigProbe\n[18/27] Building CXX object CMakeFiles/syspane_command_probe.dir/source/application/command_probe.cpp.o\n[19/27] Linking CXX executable SysPane.CommandProbe\n[20/27] Building CXX object CMakeFiles/syspane_authored_tests.dir/tests/configuration/authored_tests.cpp.o\n[21/27] Building CXX object CMakeFiles/syspane_scene_tests.dir/tests/scene/layout_tests.cpp.o\n[22/27] Building CXX object CMakeFiles/syspane_authored_tests.dir/tests/configuration/content_tests.cpp.o\n[23/27] Linking CXX executable syspane_authored_tests\n[24/27] Building CXX object CMakeFiles/syspane_scene_tests.dir/tests/scene/binding_tests.cpp.o\nFAILED: CMakeFiles/syspane_scene_tests.dir/tests/scene/binding_tests.cpp.o \n/usr/bin/g++ -DJSON_DIAGNOSTICS=0 -DJSON_DIAGNOSTIC_POSITIONS=1 -I/mnt/d/Projects/SysPane/syspane/source/scene -I/mnt/d/Projects/SysPane/syspane/source/configuration -I/mnt/d/Projects/SysPane/syspane/source/protocol -I/mnt/d/Projects/SysPane/syspane/source/diagnostics -I/mnt/d/Projects/SysPane/syspane/source/model -I/mnt/d/Projects/SysPane/syspane/source/runtime -I/mnt/d/Projects/SysPane/syspane/source/platform -isystem /mnt/d/Projects/SysPane/syspane/source/third_party -g -std=c++17 -Wall -Wextra -Wpedantic -Werror -march=x86-64 -mtune=generic -MD -MT CMakeFiles/syspane_scene_tests.dir/tests/scene/binding_tests.cpp.o -MF CMakeFiles/syspane_scene_tests.dir/tests/scene/binding_tests.cpp.o.d -o CMakeFiles/syspane_scene_tests.dir/tests/scene/binding_tests.cpp.o -c /mnt/d/Projects/SysPane/syspane/tests/scene/binding_tests.cpp\n/mnt/d/Projects/SysPane/syspane/tests/scene/binding_tests.cpp: In member function \u2018syspane::scene::BindingInput {anonymous}::Fixture::input()\u2019:\n/mnt/d/Projects/SysPane/syspane/tests/scene/binding_tests.cpp:39:9: error: this \u2018for\u2019 clause does not guard... [-Werror=misleading-indentation]\n   39 |         for(const auto& metric:n::network_metrics())v.fields.emplace(metric.field,3000000000ULL);return v;}\n      |         ^~~\n/mnt/d/Projects/SysPane/syspane/tests/scene/binding_tests.cpp:39:98: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the \u2018for\u2019\n   39 |         for(const auto& metric:n::network_metrics())v.fields.emplace(metric.field,3000000000ULL);return v;}\n      |                                                                                                  ^~~~~~\ncc1plus: all warnings being treated as errors\n[25/27] Building CXX object CMakeFiles/syspane_command_session_tests.dir/tests/configuration/command_session_tests.cpp.o\nninja: build stopped: subcommand failed.\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-09-bindings/linux-x64-gcc13-build-62d04d17ef\n",
+    "stderr": ""
+  }
+]

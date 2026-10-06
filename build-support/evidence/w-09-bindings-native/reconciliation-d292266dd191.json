@@ -1,0 +1,387 @@
+{
+  "family": "RECONCILIATION",
+  "outcome": "pass",
+  "filesystem": "ext4",
+  "uid": 1000,
+  "executable_sha256": "f77b839e6efe5f4fb723e370d56b5105251119963a5090593b6afc3496b04c09",
+  "store_executable_sha256": "fa2c4521ac00371667ad21c09f9f18bd39903df439e866b371e67d94fa158420",
+  "oracle_sha256": "34088bcd9379b12d6fe0bfbc5477bb2f1ab24287395e55a7d3aa208d37241083",
+  "cases": [
+    {
+      "case": "AFTER-DURABLE",
+      "outcome": "pass",
+      "processes": [
+        {
+          "pid": 895,
+          "exit": -9,
+          "events": [
+            {
+              "access_controls_verified": true,
+              "event": "ready",
+              "recovered_previous": false
+            },
+            {
+              "event": "authenticated",
+              "peer_pid": 892
+            },
+            {
+              "event": "held",
+              "phase": "crash-durable"
+            }
+          ]
+        },
+        {
+          "pid": 899,
+          "exit": 0,
+          "events": [
+            {
+              "access_controls_verified": true,
+              "event": "ready",
+              "recovered_previous": false
+            },
+            {
+              "event": "authenticated",
+              "peer_pid": 892
+            },
+            {
+              "event": "disconnected"
+            },
+            {
+              "event": "stopped",
+              "revision": 41
+            }
+          ]
+        }
+      ],
+      "stopped_then_killed": true,
+      "revision": 41,
+      "result": {
+        "activation": [
+          {
+            "component": "presentation",
+            "reason": "Activation has not been reported.",
+            "state": "pending"
+          }
+        ],
+        "durable": true,
+        "error": null,
+        "outcome": "accepted",
+        "producer_epoch": "E2",
+        "request_id": "R",
+        "revision": "41",
+        "schema_version": "0.1.0",
+        "stored": true,
+        "visible": false
+      }
+    },
+    {
+      "case": "BEFORE-PUBLISH",
+      "outcome": "pass",
+      "processes": [
+        {
+          "pid": 903,
+          "exit": -9,
+          "events": [
+            {
+              "access_controls_verified": true,
+              "event": "ready",
+              "recovered_previous": false
+            },
+            {
+              "event": "authenticated",
+              "peer_pid": 892
+            },
+            {
+              "event": "held",
+              "phase": "crash-before"
+            }
+          ]
+        },
+        {
+          "pid": 907,
+          "exit": 0,
+          "events": [
+            {
+              "access_controls_verified": true,
+              "event": "ready",
+              "recovered_previous": false
+            },
+            {
+              "event": "authenticated",
+              "peer_pid": 892
+            },
+            {
+              "event": "disconnected"
+            },
+            {
+              "event": "stopped",
+              "revision": 40
+            }
+          ]
+        }
+      ],
+      "stopped_then_killed": true,
+      "revision": 40,
+      "result": {
+        "activation": [],
+        "durable": null,
+        "error": {
+          "code": "request.reconcile",
+          "message": "Request outcome requires reconciliation.",
+          "retryable": false
+        },
+        "outcome": "unknown",
+        "producer_epoch": "E2",
+        "request_id": "R",
+        "revision": null,
+        "schema_version": "0.1.0",
+        "stored": null,
+        "visible": null
+      }
+    },
+    {
+      "case": "POLICY-RESTART",
+      "outcome": "pass",
+      "processes": [
+        {
+          "pid": 911,
+          "exit": -9,
+          "events": [
+            {
+              "access_controls_verified": true,
+              "event": "ready",
+              "recovered_previous": false
+            },
+            {
+              "event": "authenticated",
+              "peer_pid": 892
+            },
+            {
+              "event": "held",
+              "phase": "crash-durable"
+            }
+          ]
+        },
+        {
+          "pid": 915,
+          "exit": 0,
+          "events": [
+            {
+              "access_controls_verified": true,
+              "event": "ready",
+              "recovered_previous": false
+            },
+            {
+              "event": "authenticated",
+              "peer_pid": 892
+            },
+            {
+              "event": "disconnected"
+            },
+            {
+              "event": "stopped",
+              "revision": 41
+            }
+          ]
+        }
+      ],
+      "stopped_then_killed": true,
+      "revision": 41,
+      "result": {
+        "activation": [],
+        "durable": null,
+        "error": {
+          "code": "policy.denied",
+          "message": "Request outcome requires reconciliation.",
+          "retryable": false
+        },
+        "outcome": "unknown",
+        "producer_epoch": "E2",
+        "request_id": "R",
+        "revision": null,
+        "schema_version": "0.1.0",
+        "stored": null,
+        "visible": null
+      }
+    },
+    {
+      "case": "FALLBACK",
+      "outcome": "pass",
+      "processes": [
+        {
+          "pid": 919,
+          "exit": -9,
+          "events": [
+            {
+              "access_controls_verified": true,
+              "event": "ready",
+              "recovered_previous": false
+            },
+            {
+              "event": "authenticated",
+              "peer_pid": 892
+            },
+            {
+              "event": "held",
+              "phase": "crash-durable"
+            }
+          ]
+        },
+        {
+          "pid": 923,
+          "exit": 0,
+          "events": [
+            {
+              "access_controls_verified": true,
+              "event": "ready",
+              "recovered_previous": true
+            },
+            {
+              "event": "authenticated",
+              "peer_pid": 892
+            },
+            {
+              "event": "disconnected"
+            },
+            {
+              "event": "stopped",
+              "revision": 40
+            }
+          ]
+        }
+      ],
+      "stopped_then_killed": true,
+      "revision": 40,
+      "result": {
+        "activation": [],
+        "durable": null,
+        "error": {
+          "code": "request.reconcile",
+          "message": "Request outcome requires reconciliation.",
+          "retryable": false
+        },
+        "outcome": "unknown",
+        "producer_epoch": "E2",
+        "request_id": "R",
+        "revision": null,
+        "schema_version": "0.1.0",
+        "stored": null,
+        "visible": null
+      }
+    },
+    {
+      "case": "RETENTION-SCOPE",
+      "outcome": "pass",
+      "processes": [
+        {
+          "pid": 927,
+          "exit": -9,
+          "events": [
+            {
+              "access_controls_verified": true,
+              "event": "ready",
+              "recovered_previous": false
+            },
+            {
+              "event": "authenticated",
+              "peer_pid": 892
+            },
+            {
+              "event": "held",
+              "phase": "crash-durable"
+            }
+          ]
+        },
+        {
+          "pid": 931,
+          "exit": 0,
+          "events": [
+            {
+              "access_controls_verified": true,
+              "event": "ready",
+              "recovered_previous": false
+            },
+            {
+              "event": "authenticated",
+              "peer_pid": 892
+            },
+            {
+              "event": "joined",
+              "revision": 42
+            },
+            {
+              "event": "joined",
+              "revision": 43
+            },
+            {
+              "event": "disconnected"
+            },
+            {
+              "event": "stopped",
+              "revision": 43
+            }
+          ]
+        }
+      ],
+      "stopped_then_killed": true,
+      "revision": 43,
+      "result": {
+        "activation": [
+          {
+            "component": "presentation",
+            "reason": "Activation has not been reported.",
+            "state": "pending"
+          }
+        ],
+        "durable": true,
+        "error": null,
+        "outcome": "accepted",
+        "producer_epoch": "E2",
+        "request_id": "R",
+        "revision": "41",
+        "schema_version": "0.1.0",
+        "stored": true,
+        "visible": false
+      }
+    },
+    {
+      "case": "LIVE-LOOKUP",
+      "outcome": "pass",
+      "processes": [
+        {
+          "pid": 937,
+          "exit": 0,
+          "events": [
+            {
+              "access_controls_verified": true,
+              "event": "ready",
+              "recovered_previous": false
+            },
+            {
+              "event": "authenticated",
+              "peer_pid": 892
+            },
+            {
+              "event": "held",
+              "phase": "preparing"
+            },
+            {
+              "event": "joined",
+              "revision": 41
+            },
+            {
+              "event": "disconnected"
+            },
+            {
+              "event": "stopped",
+              "revision": 41
+            }
+          ]
+        }
+      ],
+      "worker_observed": true,
+      "revision": 41
+    }
+  ],
+  "qualification": "Owned Linux IPC/ext4 process-crash experiment only. Full activation, installed ownership, worker supervision and other platforms remain open."
+}

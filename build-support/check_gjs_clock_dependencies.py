@@ -3,9 +3,9 @@ import hashlib
 from pathlib import Path
 
 PINS = {
-    '/usr/bin/gi-compile-repository': '2400af6ecb249f0a75367550e3e4de0ebb396bd25805a216b4c84101bfdff6b9',
-    '/usr/lib/x86_64-linux-gnu/libgobject-2.0.so.0': '99bf0727e0ca4faf12ab09b753b3d03294562c29c559b970c4dad435f9ec2bc6',
-    '/usr/lib/x86_64-linux-gnu/libglib-2.0.so.0': '42467d0dbcc0a6c9e0a31f05a5944095504ce98f093c3fe0825f0a1533fa8207',
+    '/usr/bin/gi-compile-repository': '223a704d5ef6c0c860a630295b4cc061f376d14032833ab7c4aa4d7337155474',
+    '/usr/lib/x86_64-linux-gnu/libgobject-2.0.so.0': '7a8981c2df678797438cc92f246402b81d185604623d12ab71c1ff1c2840e9fc',
+    '/usr/lib/x86_64-linux-gnu/libglib-2.0.so.0': '96ef9163aee942bdc09e6f4a1acd2fd6b178c03af824c569741440d63ac9f4f4',
 }
 
 def verify():

@@ -128,6 +128,7 @@ void validate_content_document(const Json& value,const std::string& kind){
     const auto name="0.1.0/"+kind;structural(value,name.c_str(),kind=="content-catalog"?16384:(kind=="content-package"?65536:262144));
 }
 void validate_scene_document(const Json& value){structural(value,"0.2.0/scene",262144);(void)revision(value["revision"]);scene_semantics(value);}
+void validate_binding_document(const Json& value){structural(value,"0.1.0/binding",262144);}
 void validate_authored(const Authored& value){
     structural(value.settings,"0.1.0/settings",16384);structural(value.scene,"0.2.0/scene",262144);
     require(revision(value.settings["revision"])==revision(value.scene["revision"]),"authored.mixed_revision");scene_semantics(value.scene);

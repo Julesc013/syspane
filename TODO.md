@@ -26,6 +26,7 @@ behaviour has been implemented. See [audit disposition](spec/delivery/audit-2026
 
 ## First native campaign
 
+- [x] W-09 shared binding prerequisite: existing selector/pin grammar, scoped policy borrowing, exact numeric comparisons, bounded ordering and explicit incomplete states. See the [handoff](spec/delivery/bindings-handoff.md).
 - [x] W-09 shared layout prerequisite: deterministic admitted layouts, display fallback, safe exclusions, breakpoints, readable minima, priority allocation and exact pixel bounds. See the [handoff](spec/delivery/layout-handoff.md).
 - [ ] W-09 native projection: connect real text metrics, live bindings, current resources/policy, primitive drawing and visible activation/recovery; qualify accessibility and native raster behavior.
 

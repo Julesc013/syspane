@@ -1698,14 +1698,17 @@
       "type": "STATIC_LIBRARY",
       "source_owner": "source/scene/",
       "public_interfaces": [
-        "source/scene/layout.hpp"
+        "source/scene/layout.hpp",
+        "source/scene/bindings.hpp"
       ],
       "private_interfaces": [],
       "sources": [
-        "source/scene/layout.cpp"
+        "source/scene/layout.cpp",
+        "source/scene/bindings.cpp"
       ],
       "allowed_dependencies": [
-        "syspane_authored"
+        "syspane_authored",
+        "syspane_data_view"
       ],
       "target_requirements": [
         "cxx17"
@@ -1728,10 +1731,12 @@
       "public_interfaces": [],
       "private_interfaces": [],
       "sources": [
-        "tests/scene/layout_tests.cpp"
+        "tests/scene/layout_tests.cpp",
+        "tests/scene/binding_tests.cpp"
       ],
       "allowed_dependencies": [
-        "syspane_scene"
+        "syspane_scene",
+        "syspane_network_publication"
       ],
       "target_requirements": [
         "cxx17"

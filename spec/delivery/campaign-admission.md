@@ -89,6 +89,15 @@ has 126,512,525,312 free bytes and the native filesystem 1,004,556,574,720. This
 bounded, reversible allocation retains original source/debug/evidence artifacts;
 no product limit, test oracle or standard growth reservation changes.
 
+The authored-binding checkpoint raises this owned development allocation to 6 GiB.
+Its original build preflight stopped at 1,670,571,705 checkout-output bytes plus
+3,440,164,317 native-output bytes; the unchanged 268,435,456-byte reservation did
+not fit 5 GiB. Retained three-profile debug/test outputs and archived attempts need
+additional headroom for the scene/data-view integration. The checkout drive has
+172,427,317,248 free bytes and Linux has 1,003,952,840,704. Preserve the failed
+preflight; retain the fixed reservations and all product acceptance/resource limits.
+This remains a bounded reversible workspace decision, not release qualification.
+
 ## W-01 closure before implementation
 
 The in-process API uses typed publication candidates, each with producer/epoch,

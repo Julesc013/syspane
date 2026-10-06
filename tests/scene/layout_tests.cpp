@@ -75,8 +75,10 @@ void exclusions(const Json& input){
         std::reverse(env.displays[0].exclusions.begin(),env.displays[0].exclusions.end());check(encoded(s::resolve(scene,env,{}))==encoded(result),"exclusion order");
     }
 }
+int binding_test(const std::string& name);
 int main(int argc,char** argv){try{
     check(argc==3,"arguments");const std::string name=argv[1],root=argv[2];
+    if(name.rfind("BIND-",0)==0)return binding_test(name);
     if(name=="LIMITS")limits(read(root+"/ROOT-FLOW.json"));else if(name=="EXCLUSION-EXHAUSTIVE")exclusions(read(root+"/ROOT-FLOW.json"));else golden(read(root+"/"+name+".json"));
     std::cout<<name<<" pass\n";return 0;
 }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}}

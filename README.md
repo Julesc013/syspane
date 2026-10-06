@@ -7,6 +7,11 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
+The [scene binding checkpoint](spec/delivery/bindings-handoff.md) resolves authored
+selectors and pins through current-policy data views. Exact identities, scope,
+truncation and missing/stale values remain explicit. Native rendering and editing
+are still required for complete desktop editions.
+
 The [scene layout checkpoint](spec/delivery/layout-handoff.md) adds shared geometry
 for fixed, flow, canvas, stack and grid layouts. Explicit display maps, safe regions,
 breakpoints and readable text metrics determine placement without changing the

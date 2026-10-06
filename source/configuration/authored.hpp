@@ -9,6 +9,7 @@ void validate_command(const Json& value);
 // Closed content schemas use the same compiled validator as authored transactions.
 void validate_content_document(const Json& value,const std::string& kind);
 void validate_scene_document(const Json& value);
+void validate_binding_document(const Json& value);
 std::uint64_t authored_revision(const Authored& value);
 Authored prepare_authored(const Authored& current,const Json& command,const Authority& authority,const Policy& policy);
 // Validate current policy and authorization again just before native publication.

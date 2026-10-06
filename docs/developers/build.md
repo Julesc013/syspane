@@ -1,5 +1,18 @@
 # Developer setup and checks
 
+The [authored binding package](../../spec/delivery/packages/w-09-bindings.md) adds
+`scene::project_binding` to `syspane_scene`. Supply a complete trusted catalog of
+scoped DataViews, supported types/fields/TTLs, explicit pin mappings and qualified
+measurement ticks. The callback must consume results synchronously without
+retaining payload or reentering a view. No implicit routing, acquisition, mapping
+or unit conversion occurs. Inspect resolution and row status separately.
+
+After workspace preflight/configure/build, run `ctest --preset <profile>
+-R "^scene[.]BIND-" --output-on-failure` for the seventeen binding families.
+The Linux development profile explicitly records the externally updated GLib
+2.80.0-6ubuntu3.9 and glibc 2.39-0ubuntu8.9 environment; historical evidence retains
+its original dependency identity.
+
 The [scene layout package](../../spec/delivery/packages/w-09-layout.md) adds
 `syspane_scene` and `syspane_scene_tests` on all three development profiles. Call
 `scene::resolve(scene, topology, metrics)` with immutable authored data, explicit

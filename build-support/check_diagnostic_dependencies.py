@@ -6,7 +6,7 @@ import subprocess
 EXPECTED = {
     'libgtk-3-dev': '3.24.41-4ubuntu1.3',
     'libgtk-3-0t64': '3.24.41-4ubuntu1.3',
-    'libglib2.0-dev': '2.80.0-6ubuntu3.8',
+    'libglib2.0-dev': '2.80.0-6ubuntu3.9',
     'libx11-dev': '2:1.8.7-1build1',
     'libx11-6': '2:1.8.7-1build1',
     'libxext-dev': '2:1.3.4-1build2',

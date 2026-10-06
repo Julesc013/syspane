@@ -1,0 +1,38 @@
+[
+  {
+    "step": "configure",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-06T19:56:53.924945+00:00",
+    "finished_at": "2026-10-06T19:57:02.404277+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 6442450944,\n  \"checkout_out_bytes\": 1670571988,\n  \"linux_campaign_bytes\": 3440164317,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "configure",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/bindings_step.py",
+      "linux-x64-gcc13",
+      "configure"
+    ],
+    "started_at": "2026-10-06T19:57:02.404647+00:00",
+    "finished_at": "2026-10-06T19:57:13.243008+00:00",
+    "exit": 1,
+    "stdout": "Preset CMake variables:\n\n  BUILD_TESTING=\"ON\"\n  CMAKE_BUILD_TYPE=\"Debug\"\n  CMAKE_CXX_COMPILER=\"g++\"\n  SYSPANE_PROFILE=\"linux-x64-gcc13\"\n\nprofile verified: linux-x64-gcc13\nvendored dependency digests: pass\n-- Configuring incomplete, errors occurred!\n Traceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/build-support/check_diagnostic_dependencies.py\", line 19, in <module>\n    raise ValueError('diagnostic package differs from pinned profile: ' + package)\nValueError: diagnostic package differs from pinned profile: libglib2.0-dev\nCMake Error at CMakeLists.txt:121 (message):\n  Diagnostic toolkit differs from the pinned development profile\n\n\n\nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-09-bindings/linux-x64-gcc13-configure-abb82d1e08\n",
+    "stderr": ""
+  }
+]

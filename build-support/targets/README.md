@@ -127,7 +127,7 @@ is not hostile-code isolation or a product/historical-platform qualification.
 Profile revision 6 adds independent diagnostic reporting and Win32/GTK inspectors,
 bounded policy decoding and read-only protected policy sources (52 CTest entries).
 Windows adds USER32/GDI32 native controls. Linux pins GTK 3.24.41 with Ubuntu
-`libgtk-3-dev`/`libgtk-3-0t64` 3.24.41-4ubuntu1.3, GLib development 2.80.0-6ubuntu3.8
+`libgtk-3-dev`/`libgtk-3-0t64` 3.24.41-4ubuntu1.3, GLib development 2.80.0-6ubuntu3.9
 and X11 development 2:1.8.7-1build1. Configure checks those package versions and the
 GTK shared-library SHA-256 through `check_diagnostic_dependencies.py`; it does not
 install packages. The installed GTK copyright file records LGPL-2+, LGPL-2.1+ and

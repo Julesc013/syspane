@@ -350,6 +350,17 @@
       "sha256": "239fd88085d29a991f5e25d042bd66ae7017b6aa838718ca3f76b7e65fd3f68d"
     },
     {
+      "id": "SP-BINDINGS-HANDOFF",
+      "path": "delivery/bindings-handoff.md",
+      "title": "Policy-bound scene binding checkpoint",
+      "description": "Scoped authored selectors and pins consume accepted telemetry with explicit identity, freshness and permission.",
+      "requires": [
+        "SP-W09-BINDINGS",
+        "SP-LAYOUT-HANDOFF"
+      ],
+      "sha256": "ccbea0acfecfdd142f4dc3458c37da9e1bc3fdd978258b36c7a281e573b3019e"
+    },
+    {
       "id": "SP-CAMPAIGN-ADMISSION",
       "path": "delivery/campaign-admission.md",
       "title": "Foundation and native-experiment campaign admission",
@@ -358,7 +369,7 @@
         "SP-WORK-PACKAGES",
         "SP-W01-PACKAGE"
       ],
-      "sha256": "e64f975f00a249dd1f51fcc545773c653ef725caaffe6da089e1c6689bcf2571"
+      "sha256": "a9b7ea15560476ff416d9fce0e85ea9cc31598bb201e56dc58a3071b21b03b15"
     },
     {
       "id": "SP-CAMPAIGN-COVERAGE",
@@ -421,7 +432,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "45e1adccb1cd2f102cb5fbaf3a0d48c84a356ebd0809b7ba4b11400309f1d693"
+      "sha256": "5fdc96851d0fe4065984e1f1e6fb7e4fbd8ada3788216062520a4801923cf2e7"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -1256,6 +1267,18 @@
       "sha256": "0840aff27adde95a1368eec6c6cc12a7bb8112a69d6f50392257e1a250066909"
     },
     {
+      "id": "SP-W09-BINDINGS",
+      "path": "delivery/packages/w-09-bindings.md",
+      "title": "Policy-bound authored scene bindings",
+      "description": "Resolve existing selectors and pins against scoped immutable producer views without name-based rebinding.",
+      "requires": [
+        "SP-BINDINGS",
+        "SP-W09-LAYOUT",
+        "SP-W25-NETWORK-PRESENTATION"
+      ],
+      "sha256": "31981041bcec9817c695fa7d94913a731982900fe178e76ccf43ceaa933470ba"
+    },
+    {
       "id": "SP-W09-LAYOUT",
       "path": "delivery/packages/w-09-layout.md",
       "title": "Deterministic portable scene layout",
@@ -1957,7 +1980,7 @@
         "SP-SCENE",
         "SP-STATE"
       ],
-      "sha256": "5ba9bc0a8f940dfe6cce615259e089cbbcedecac8c5aa9b146c5ea7615b8747a"
+      "sha256": "151fef06e29d72be7f9a4df1aa69ec0de4f6425688542d1b7012bd41c164a543"
     },
     {
       "id": "SP-SCENE",
