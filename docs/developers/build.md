@@ -55,7 +55,7 @@ measured-field freshness remain unqualified.
 Before a build, test or package launch, run the Windows coordinator
 `python build-support/check_workspace_budget.py --action build` (select `test` or
 `package` as appropriate); require exit zero. Run it afterward with `--action inspect`.
-The combined checkout/native-Linux allocation is 2 GiB with growth reservations;
+The combined checkout/native-Linux allocation is 3 GiB with growth reservations;
 this is a preflight check, not an OS quota. The original 1 GiB overrun is preserved
 in the subscription checkpoint. Do not remove or overwrite another task's files to gain space.
 
@@ -532,6 +532,26 @@ Keep the original reveal interval, actual keyboard journal, all 15 guard steps,
 full folder-input evidence, bounded native decisions and one-way disable result.
 Do not enable the controller generally from this finite experiment; see the
 [focus integration checkpoint](../../spec/delivery/gnome-focus-integration-handoff.md).
+
+The next focus experiment tests selected normal windows, a modal transient,
+closed targets and static-workspace changes using the same optional controller:
+
+```text
+python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --focus-scenarios restore
+python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --focus-scenarios observe
+python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --focus-scenarios helper-exit
+python3 build-support/record_gnome_focus_scenarios.py --build-dir <owned-build-directory> --reports <restore-report> <observe-report> <helper-exit-report> --output <new-owned-record>
+python3 tests/desktop/test_gnome_focus_scenarios_record.py <owned-build-directory> <restore-report> <observe-report> <helper-exit-report> -v
+```
+
+Complete the Windows coordinator's workspace preflight before each launch. These
+modes own their original candidate baseline, helper and private workspace settings;
+do not combine them with other flags. Completed restore/observe runs return 0 with
+separate fixed per-scenario outcomes. The deliberate helper-exit control returns 1
+and must record failed startup without a dependent completion claim. Preserve every
+raw sample, including transient BadWindow records for the exact closing owned
+window; foreign or settled query errors cannot pass. See the
+[focus-scenario checkpoint](../../spec/delivery/gnome-focus-scenarios-handoff.md).
 
 For the historical shared-subset experiment, the existing Visual Studio 2017 XP
 toolset has its own preset. It compiles the same model, protocol/policy, recovery

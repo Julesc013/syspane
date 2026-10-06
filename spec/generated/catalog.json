@@ -357,7 +357,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "e9bd0a47d7f5dce2340dc9da184fb91847d22518938f7dcffeae3a1c010ada32"
+      "sha256": "5378b6dc9f8eab59b4e49307af7135e7815d0e232fce986fa55ea7b3f0fb2450"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -439,6 +439,18 @@
         "SP-CAMPAIGN-ADMISSION"
       ],
       "sha256": "ed3f1d75679e23373991c2237e35a4327aab1fc1ed3f41c6fafe18bf9eb794ec"
+    },
+    {
+      "id": "SP-GNOME-FOCUS-SCENARIOS-HANDOFF",
+      "path": "delivery/gnome-focus-scenarios-handoff.md",
+      "title": "GNOME native focus lifetimes and workspace checkpoint",
+      "description": "Selected normal/modal focus, closed targets and workspace invalidation have independent native evidence.",
+      "requires": [
+        "SP-W05-GNOME-FOCUS-SCENARIOS",
+        "SP-GNOME-FOCUS-INTEGRATION-HANDOFF",
+        "SP-CAMPAIGN-ADMISSION"
+      ],
+      "sha256": "0963cf4f978888927574b8d762a2a91ee4e7cefbd58fa5b3b3723708ac790cbf"
     },
     {
       "id": "SP-GNOME-FOCUS-TRACE-HANDOFF",
@@ -555,7 +567,7 @@
       "requires": [
         "SP-CURRENT"
       ],
-      "sha256": "c6b9027963616d8daee526f249f65715d814b42e22dd11f0aa6fc8d1c1725adf"
+      "sha256": "1325aa91800cd0e32a2b9669b2ef9daa6c075179cb2a9f97e06cbd383ebdcd34"
     },
     {
       "id": "SP-MEASURED-TIME-HANDOFF",
@@ -719,6 +731,19 @@
         "SP-DESKTOP"
       ],
       "sha256": "9d8ef6cf797051d35409bff5d712332525c7b785ca04c9e7a490ccb248475c4d"
+    },
+    {
+      "id": "SP-W05-GNOME-FOCUS-SCENARIOS",
+      "path": "delivery/packages/w-05-gnome-focus-scenarios.md",
+      "title": "W-05 native focus lifetimes, modality and workspace changes",
+      "description": "Extend the optional focus experiment with externally observed user choices and invalidated pending targets.",
+      "requires": [
+        "SP-W05-GNOME-FOCUS-INTEGRATION",
+        "SP-W05-GNOME-REVEAL",
+        "SP-WINDOWS",
+        "SP-DESKTOP"
+      ],
+      "sha256": "eb6b1aaa5aa03d5e9d8c4d88d36f3adfaf0a59384e3c0cc065d6508372d20cbb"
     },
     {
       "id": "SP-W05-GNOME-FOCUS-TRACE",

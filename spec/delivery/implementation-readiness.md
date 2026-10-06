@@ -203,6 +203,16 @@ focus call and remains disabled by default; broader window/workspace/session cas
 and alternate triggers need qualification before general enablement. Original
 failed evidence remains preserved, and W-02/W-05 remain open.
 
+The [native focus-scenario checkpoint](gnome-focus-scenarios-handoff.md) verifies
+two normal windows in one retained GTK helper, its modal transient, target closure
+and native workspace changes. The existing controller restores actual selected/modal
+focus and F9 receipt; observation mode fails all four restoration cases. Closed
+and cross-workspace pending targets are invalidated, while a fresh entry restores
+normally. A deliberate helper exit also proves that an outer attempt fails after
+an earlier passed substep. Forty-five new evidence checks pass. Default enablement,
+moved windows, broader application/modal cases, lock/session changes and alternate
+triggers remain open; the native controller itself did not change.
+
 Use the proposed cold-start exercise to detect missing observable contracts.
 Private implementation differences are permissible. Missing laboratories remain
 blocked qualification. A finite release scope must identify exact profiles,

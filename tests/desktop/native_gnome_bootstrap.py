@@ -44,7 +44,9 @@ SOURCES = ['tests/desktop/native_gnome_bootstrap.py', 'tests/desktop/native_orac
            'tests/desktop/fixtures/gnome-switcher.json', 'spec/delivery/packages/w-05-gnome-switcher.md',
            'tests/desktop/gnome_icon_recovery.py', 'spec/delivery/packages/w-05-gnome-icon-recovery.md',
            'tests/desktop/gnome_shell_recovery.py', 'spec/delivery/packages/w-05-gnome-shell-recovery.md',
-           'tests/desktop/gnome_focus_integration.py', 'spec/delivery/packages/w-05-gnome-focus-integration.md']
+           'tests/desktop/gnome_focus_integration.py', 'spec/delivery/packages/w-05-gnome-focus-integration.md',
+           'tests/desktop/gnome_focus_scenarios.py', 'tests/desktop/gnome_focus_controls.py',
+           'spec/delivery/packages/w-05-gnome-focus-scenarios.md']
 
 
 def marker_trace(display, environment, sample=None, dismiss=True):
@@ -134,7 +136,11 @@ def observe(environment, pid, channel, marker, composition, foreground_pid=None,
             import gnome_focus_baseline
             result['focus_baseline'] = gnome_focus_baseline.observe(display, environment, pid, foreground_pid,
                 Path(environment['HOME']).parent, result.get('reveal'), result.get('composition'))
-        if environment.get('SYSPANE_GNOME_FOCUS_INTEGRATION'):
+        if environment.get('SYSPANE_GNOME_FOCUS_SCENARIOS'):
+            import gnome_focus_scenarios
+            result['focus_scenarios'] = gnome_focus_scenarios.observe(display, environment,
+                Path(environment['HOME']).parent, result['focus_baseline'], result['composition'], channel, marker_trace)
+        elif environment.get('SYSPANE_GNOME_FOCUS_INTEGRATION'):
             import gnome_focus_integration
             result['focus_integration'] = gnome_focus_integration.observe(display, environment,
                 Path(environment['HOME']).parent, result['focus_baseline'], result['composition'], pid, marker_trace)
@@ -190,7 +196,7 @@ def group_members(group):
     return members
 
 
-def run(build, marker=False, control='live', composition=None, reveal=None, focus_baseline=None, focus_trace=False, icon_input=None, wallpaper=None, switcher=None, icon_recovery=None, shell_recovery=None, focus_integration=None):
+def run(build, marker=False, control='live', composition=None, reveal=None, focus_baseline=None, focus_trace=False, icon_input=None, wallpaper=None, switcher=None, icon_recovery=None, shell_recovery=None, focus_integration=None, focus_scenarios=None):
     # Retain orphaned shell helpers for reaping; no service/session can adopt them.
     if ctypes.CDLL(None, use_errno=True).prctl(36, 1, 0, 0, 0) != 0:
         raise OSError(ctypes.get_errno(), 'cannot retain descendant exit evidence')
@@ -239,6 +245,7 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
               'icon_recovery_control': icon_recovery,
               'shell_recovery_control': shell_recovery,
               'focus_integration_mode': focus_integration,
+              'focus_scenarios_mode': focus_scenarios,
               'executed_at': datetime.now(timezone.utc).isoformat(),
               'source_base': subprocess.check_output(['git', '-c', 'safe.directory=' + str(ROOT), 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
               'source_inputs': {p: sha(ROOT / p) for p in SOURCES},
@@ -265,6 +272,8 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
         report['qualification'] = 'Owned GNOME X11 shell/compositor replacement and bridge reattachment only; user session supervision, product continuity, Show Desktop focus and other profiles remain open.'
     if focus_integration:
         report['qualification'] = 'Optional event-bound native Show Desktop focus integration and declared guards only; default behavior, broader focus/session cases and complete product qualification remain open.'
+    if focus_scenarios:
+        report['qualification'] = 'Optional owned GNOME X11 multiple-window/modal focus, closed lifetime and workspace invalidation only; broader session/alternate triggers and complete host qualification remain open.'
     archive = workspace / 'source-inputs.zip'
     with zipfile.ZipFile(archive, 'x', compression=zipfile.ZIP_DEFLATED) as target:
         for name in SOURCES:
@@ -305,8 +314,10 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
             environment['SYSPANE_FOREGROUND_EVENTS'] = str(workspace / 'foreground-events.jsonl')
         if focus_trace:
             environment['MUTTER_DEBUG'] = 'focus,keybindings,window-state'
-        if focus_integration:
-            environment['SYSPANE_GNOME_FOCUS_INTEGRATION'] = focus_integration
+        if focus_integration or focus_scenarios:
+            environment['SYSPANE_GNOME_FOCUS_INTEGRATION'] = focus_integration or ('restore' if focus_scenarios=='helper-exit' else focus_scenarios)
+        if focus_scenarios:
+            environment['SYSPANE_GNOME_FOCUS_SCENARIOS'] = focus_scenarios
         if wallpaper:
             environment['SYSPANE_GNOME_WALLPAPER_CONTROL'] = wallpaper
         if icon_recovery:
@@ -392,6 +403,11 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
                 settings.extend([('org.gnome.shell','favorite-apps','[]'),
                                  ('org.gnome.desktop.interface','toolkit-accessibility','true'),
                                  ('org.gnome.desktop.wm.keybindings','switch-applications',"['<Alt>Tab']")])
+            if focus_scenarios:
+                settings.extend([('org.gnome.mutter','dynamic-workspaces','false'),
+                                 ('org.gnome.desktop.wm.preferences','num-workspaces','2'),
+                                 ('org.gnome.desktop.wm.keybindings','switch-to-workspace-1',"['<Control><Alt>1']"),
+                                 ('org.gnome.desktop.wm.keybindings','switch-to-workspace-2',"['<Control><Alt>2']")])
             for schema, key, value in settings:
                 command = ['/usr/bin/gsettings', 'set', schema, key, value]
                 configured = subprocess.run(command, env=environment, capture_output=True, text=True, timeout=2)
@@ -444,7 +460,8 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
                 switcher_apps[role] = launch('switcher-'+role, ['/usr/bin/python3',str(ROOT/'tests/desktop/gnome_switcher_app.py'),role])
             environment['SYSPANE_GNOME_SWITCHER_PIDS'] = json.dumps({role:p.pid for role,p in switcher_apps.items()})
         context = mp.get_context('spawn')
-        local, remote = context.Pipe(duplex=bool(shell_recovery))
+        local, remote = context.Pipe(duplex=bool(shell_recovery or focus_scenarios))
+        focus_helper = None
         recovery_parent = None
         if shell_recovery:
             from gnome_shell_recovery import Parent
@@ -457,6 +474,14 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
                 raise ValueError('laboratory log capacity exceeded')
             if local.poll(.05):
                 message = local.recv()
+                if focus_scenarios and message == {'focus_scenarios_request':'launch'}:
+                    if focus_helper is not None:raise ValueError('focus helper launch already consumed')
+                    received_ns = time.monotonic_ns()
+                    focus_helper = launch('focus-controls', ['/usr/bin/python3', str(ROOT/'tests/desktop/gnome_focus_controls.py')])
+                    reply = {'focus_scenarios_pid':focus_helper.pid}
+                    local.send(reply)
+                    report['focus_scenarios_parent'] = {'message':message,'received_ns':received_ns,'responded_ns':time.monotonic_ns(),'response':reply}
+                    continue
                 if recovery_parent and recovery_parent.receive(message):
                     continue
                 report['observation'] = message
@@ -498,6 +523,12 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
                     report['outcome'] = report['observation']['shell_recovery']['outcome']
                     if report['observation']['shell_recovery'].get('error'):
                         report['error'] = report['observation']['shell_recovery']['error']
+                if focus_scenarios:
+                    if focus_helper is None or focus_helper.poll() is not None:raise ValueError('retained focus helper not live')
+                    report['focus_helper_mapped_files'] = mapped_files(focus_helper.pid)
+                    report['outcome'] = report['observation']['focus_scenarios']['outcome']
+                    if report['observation']['focus_scenarios'].get('error'):
+                        report['error'] = report['observation']['focus_scenarios']['error']
                 if focus_integration:
                     report['outcome'] = report['observation']['focus_integration']['outcome']
                     if report['observation']['focus_integration'].get('error'):
@@ -510,6 +541,7 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
         else:
             raise TimeoutError('bounded GNOME bootstrap deadline')
     except Exception as error:
+        report['outcome'] = 'fail'
         report['error'] = type(error).__name__ + ': ' + str(error)
     finally:
         if worker:
@@ -571,6 +603,10 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
                     report[key] = {'path': str(path), 'bytes': path.stat().st_size, 'sha256': sha(path)}
             extension_root = workspace / 'data/gnome-shell/extensions'
             report['enabled_extension_inputs_after'] = inventory(extension_root) if extension_root.exists() else {}
+        if focus_scenarios:
+            for key,name in [('focus_scenarios_journal','focus-scenarios.jsonl'),('focus_control_events','focus-control-events.jsonl')]:
+                path = workspace/name
+                if path.exists():report[key] = {'path':str(path),'bytes':path.stat().st_size,'sha256':sha(path)}
         if focus_integration:
             path = workspace/'focus-integration.jsonl'
             if path.exists():
@@ -639,7 +675,12 @@ if __name__ == '__main__':
     parser.add_argument('--icon-recovery', choices=('live','frozen-surface','no-stop'))
     parser.add_argument('--shell-recovery', choices=('live','no-reattach','no-restart'))
     parser.add_argument('--focus-integration', choices=('observe','restore'))
+    parser.add_argument('--focus-scenarios', choices=('observe','restore','helper-exit'))
     args = parser.parse_args()
+    if args.focus_scenarios:
+        if any([args.marker,args.composition,args.reveal,args.focus_baseline,args.focus_trace,args.icon_input,args.wallpaper,args.switcher,args.icon_recovery,args.shell_recovery,args.focus_integration]) or args.marker_control != 'live':
+            parser.error('--focus-scenarios owns its untraced candidate baseline and workspace setup')
+        args.focus_baseline = 'candidate'
     if args.focus_trace and not args.focus_baseline:
         parser.error('--focus-trace requires --focus-baseline')
     if args.focus_integration and (args.focus_baseline != 'candidate' or args.focus_trace):
@@ -684,4 +725,4 @@ if __name__ == '__main__':
         parser.error('composition uses its own above/below controls')
     if not args.marker and args.marker_control != 'live':
         parser.error('--marker-control requires --marker')
-    sys.exit(run(owned_build(args.build_dir), args.marker or bool(args.composition), args.marker_control, args.composition, args.reveal, args.focus_baseline, args.focus_trace, args.icon_input, args.wallpaper, args.switcher, args.icon_recovery, args.shell_recovery, args.focus_integration))
+    sys.exit(run(owned_build(args.build_dir), args.marker or bool(args.composition), args.marker_control, args.composition, args.reveal, args.focus_baseline, args.focus_trace, args.icon_input, args.wallpaper, args.switcher, args.icon_recovery, args.shell_recovery, args.focus_integration, args.focus_scenarios))

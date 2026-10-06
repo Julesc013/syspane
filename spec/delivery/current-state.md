@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-06T04:07:41Z", "scope": "Optional event-bound GNOME focus restoration and native interaction guards pass; default and broader qualification remain open"}
+updated: {"by": "codex", "at": "2026-10-06T04:39:45Z", "scope": "Named GNOME multi-window/modal focus and closed/workspace target invalidation pass; default enablement and broader qualification remain open"}
 ---
 
 # Current state and next admitted boundary
@@ -265,6 +265,16 @@ focus call and remains disabled by default; broader window/workspace/session cas
 and alternate triggers need qualification before general enablement. Original
 failed evidence remains preserved, and W-02/W-05 remain open.
 
+The [native focus-scenario checkpoint](gnome-focus-scenarios-handoff.md) verifies
+two normal windows in one retained GTK helper, its modal transient, target closure
+and native workspace changes. The existing controller restores actual selected/modal
+focus and F9 receipt; observation mode fails all four restoration cases. Closed
+and cross-workspace pending targets are invalidated, while a fresh entry restores
+normally. A deliberate helper exit also proves that an outer attempt fails after
+an earlier passed substep. Forty-five new evidence checks pass. Default enablement,
+moved windows, broader application/modal cases, lock/session changes and alternate
+triggers remain open; the native controller itself did not change.
+
 Canonical 0.2.0 documentation bundle, unchanged 0.1 authoring profile, preserved old
 fixtures, new experimental scene/command/capability 0.2 and admission descriptors.
 The initial settings registry has enforced metadata/default consistency and generated
@@ -302,7 +312,7 @@ License, contribution and release-identity decisions remain open.
 ## Next work
 
 Continue the admitted campaign: extend the optional event-bound GNOME/DING focus
-integration with explicit multi-window/modal, workspace/session and alternate
+integration with moved-window, broader application/modal, lock/session and alternate
 reveal-trigger contracts and independent native evidence before general enablement.
 Keep the original oracle and failed default evidence. Continue wallpaper policy,
 actual session-manager supervision and product continuity independently. The named

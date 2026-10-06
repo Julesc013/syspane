@@ -90,8 +90,10 @@ session recovery and product continuity remain open.
 An [optional focus integration](spec/delivery/gnome-focus-integration-handoff.md)
 now passes the original Show Desktop focus deadline and actual keyboard receipt.
 Native icon/folder interactions, minimization and disabling the controller pass
-the declared guards. It stays disabled by default pending broader window, workspace
-and session qualification; the original default failure remains preserved.
+the declared guards. A [further native experiment](spec/delivery/gnome-focus-scenarios-handoff.md)
+now verifies selecting between two normal windows, modal focus, target closure and
+workspace invalidation. The controller remains disabled by default pending broader
+application/session cases and alternate triggers; the default failure is preserved.
 There is no usable SysPane desktop application or downloadable release yet.
 Desktop, screensaver and installer profiles remain unqualified.
 
