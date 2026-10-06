@@ -125,3 +125,41 @@ Keep the existing transport, native collector and desktop evidence intact. Hando
 must identify exact source/build artifacts, executed cases, failures, remaining
 native integration and the next admitted step. W-07/W-25 stay open until their
 actual native and full scheduling/reconciliation requirements are met.
+
+## Admitted Linux executor integration
+
+Connect the existing Linux collector's authenticated fixed network subscription to
+one DemandOwner lease selecting its four operational network fields at 1,000 ms.
+The session still owns the wire subscription and rejects invalid input. Only its
+accepted increasing client heartbeats renew acquisition demand; a busy loop cannot
+renew it. Subscription loss retires this source composition rather than guessing
+that consumed native topology indications can be replayed into a later lifetime.
+Wire document versions, measurement clocks and existing publication oracles stay fixed.
+
+Acquisition runs outside the IPC/health owner on at most one native worker thread.
+The existing watched netlink source is exclusively used by that thread until join.
+Capture qualified measurement start/end and UTC acquisition time in the worker,
+not when its completion is delivered. The collector's stream clock is accessed only
+by that worker while it runs; the IPC owner retains byte I/O and stream lifetime.
+The source minimum cadence is 1,000 ms, acquisition deadline 2,000 ms and demand-job
+timeout 2,500 ms. No second task or source replacement may begin until the held
+thread has completed and joined. Cancellation is an atomic request, never stop proof.
+The independent parent retains the existing whole-process termination fallback if
+the native source or join cannot finish; no detached replacement thread is allowed.
+
+Before considering a result, process current session/policy/lease state, cancel any
+invalidated task, and join a completed task. Only DemandOwner's exact current-job
+completion permits NetworkState commit and publication. Discard obsolete values;
+retire the source/watch after lost demand, including any consumed indications.
+Preserve unchanged original measurements and explicit acquisition failure semantics.
+
+Fixed native cases must observe a real acquisition and live OS worker thread, then
+prove merged desktop/saver/recorder demand survives desktop/saver release, cancelled
+work retains its slot until join, revocation rejects new demand and old completion,
+and timeout rejects a late result. A bounded test-only delay after the real read may
+hold a result even after cancellation to make these boundaries observable. It must
+not rewrite acquisition timestamps. Independently bracket counters and clock values,
+observe native thread disappearance before replacement, and retain failure evidence.
+Rerun existing collector and consumer-continuity acceptance without changing their
+expectations. Typed test policy and this Linux composition do not qualify installed
+policy distribution, multi-client wire selection or another native platform.

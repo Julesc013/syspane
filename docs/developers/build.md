@@ -1,5 +1,17 @@
 # Developer setup and checks
 
+The [Linux demand executor checkpoint](../../spec/delivery/demand-executor-handoff.md)
+adds `native.NATIVE-DEMAND-EXECUTOR` with five cases. Run it using
+`ctest --preset linux-x64-gcc13 -R '^native[.]NATIVE-DEMAND-EXECUTOR$' --output-on-failure`
+with the ordinary Linux build-root environment. It observes actual native threads,
+watched sockets and original measurements, including IPC policy revocation during
+an outstanding acquisition. The Linux full run passed 124 of 125 entries; the new
+family passes after correcting only its observer, against the same binary. The
+failed attempt remains recorded. Windows's 11 demand/component checks also pass.
+No installed policy, general multi-client selection or other-platform executor is
+qualified. Probe stdout can contain operational counters; publish only the generated
+public outcome report, keeping any `.private.json` failure capture in owned output.
+
 The [supervised network publication checkpoint](../../spec/delivery/network-publication-handoff.md)
 passes 96 Windows, 101 Linux and 88 historical-toolset host checks. All profiles run
 three `network.PUBLICATION-*` families; Linux adds `native.NATIVE-COLLECTOR` with
@@ -55,7 +67,7 @@ measured-field freshness remain unqualified.
 Before a build, test or package launch, run the Windows coordinator
 `python build-support/check_workspace_budget.py --action build` (select `test` or
 `package` as appropriate); require exit zero. Run it afterward with `--action inspect`.
-The combined checkout/native-Linux allocation is 4 GiB with growth reservations;
+The combined checkout/native-Linux allocation is 5 GiB with growth reservations;
 this is a preflight check, not an OS quota. The original 1 GiB overrun is preserved
 in the subscription checkpoint. Do not remove or overwrite another task's files to gain space.
 

@@ -5,6 +5,7 @@
 #include "network_view.hpp"
 #include "network_watch.hpp"
 #include "session.hpp"
+#include "demand.hpp"
 #include <array>
 #include <chrono>
 #include <cerrno>
@@ -12,9 +13,11 @@
 #include <csignal>
 #include <ctime>
 #include <iostream>
+#include <functional>
 #include <thread>
 #include <fcntl.h>
 #include <sys/stat.h>
+#include <sys/syscall.h>
 #include <unistd.h>
 
 namespace os=syspane::platform;namespace r=syspane::recovery;namespace n=syspane::runtime;
@@ -53,6 +56,133 @@ private:os::Stream& stream_;p::Framer decoder_;bool ended_=false;std::size_t lim
 };
 m::Tick tick(os::Stream& stream,const std::string& epoch){const auto now=stream.measurement_clock();return {epoch,now.nanoseconds,now.clock_id,now.local_scope};}
 
+std::vector<n::DemandSource> network_catalog(std::uint64_t timeout=2500){
+    n::DemandSource source{"network","collection.network",1000,timeout,"",{}};
+    for(const auto& metric:n::network_metrics())source.fields.push_back({metric.field,"operational"});
+    return {std::move(source)};
+}
+n::DemandRequest network_request(const std::string& channel="desktop",bool recording=false){
+    n::DemandRequest request;request.channel=channel;request.recording=recording;
+    for(const auto& metric:n::network_metrics())request.selections.push_back({metric.field,{}});
+    return request;
+}
+// One held native task. Publication and all DemandOwner/NetworkState mutations
+// stay on the caller. Joining is mandatory before releasing or reusing its slot.
+class AcquisitionTask {
+public:
+    struct Result {os::WatchedNetworkResult acquired; m::Tick begin,end;std::string sampled_utc;};
+    const std::uint64_t ticket,revision;
+    AcquisitionTask(os::NetworkWatch& watch,std::uint64_t id,std::uint64_t rev,
+                    std::function<m::Tick()> clock,bool failure=false,unsigned hold_ms=0)
+        :ticket(id),revision(rev){
+        need(hold_ms<=1500,"collector.task_hold");
+        thread_=std::thread([this,&watch,clock=std::move(clock),failure,hold_ms]{
+            native_thread_.store(static_cast<std::uint64_t>(::syscall(SYS_gettid)));
+            try{
+                result_.sampled_utc=utc();result_.begin=clock();
+                if(failure){result_.acquired.sample={os::NetworkCode::failed,5};result_.acquired.continuity=true;}
+                else result_.acquired=watch.read({std::chrono::steady_clock::now()+std::chrono::seconds(2),cancelled_});
+                result_.end=clock();read_ready_.store(true);
+                // Test-only late completion after an actual acquisition. Deliberately
+                // ignores cancellation; a cancelled result must never be published.
+                if(hold_ms)pause(hold_ms);
+            }catch(...){error_=std::current_exception();}
+            done_.store(true);
+        });
+    }
+    ~AcquisitionTask(){cancel();if(thread_.joinable())thread_.join();}
+    void cancel(){cancelled_.store(true);}
+    bool done()const{return done_.load();}
+    bool read_ready()const{return read_ready_.load();}
+    std::uint64_t native_thread()const{return native_thread_.load();}
+    Result finish(){need(done(),"collector.task_pending");thread_.join();if(error_)std::rethrow_exception(error_);return std::move(result_);}
+private:
+    std::atomic_bool cancelled_{false},done_{false},read_ready_{false};
+    std::atomic<std::uint64_t> native_thread_{0};
+    Result result_{};std::exception_ptr error_;std::thread thread_;
+};
+
+// Finite native acceptance composition. The same task and demand owner are used
+// by worker(); this entry adds fixed fault stimuli and public lifecycle metadata.
+void demand_exercise(const std::string& mode){
+    need(mode=="merge"||mode=="cancel"||mode=="revoke"||mode=="timeout","collector.demand_mode");
+    auto admitted_policy=policy();
+    admitted_policy.disclosure[{"saver","saver"}]={"operational"};
+    admitted_policy.disclosure[{"console","history"}]={"operational"};
+    n::DemandOwner owner(network_catalog(mode=="timeout"?300:2500),admitted_policy,{32,64,1});
+    const std::string epoch="demand:native";
+    const auto clock=[&]{timespec value{};need(::clock_gettime(CLOCK_BOOTTIME,&value)==0,"collector.test_clock");
+        return m::Tick{epoch,static_cast<std::uint64_t>(value.tv_sec)*1000000000+static_cast<std::uint64_t>(value.tv_nsec),"linux.boottime","test:native-local"};};
+    const auto add=[&](const std::string& role,const std::string& channel,bool recording){
+        const auto result=owner.admit(network_request(channel,recording),{true,role,{role}},os::monotonic_ms());
+        need(result.code==n::DemandCode::accepted,"collector.test_admission");return result.lease;};
+    std::vector<std::uint64_t> desktop;
+    for(unsigned index=0;index<(mode=="merge"?5U:1U);++index)desktop.push_back(add("desktop","desktop",false));
+    std::uint64_t saver=0,recorder=0;
+    if(mode=="merge"){saver=add("saver","saver",false);recorder=add("console","history",true);}
+    auto watch=std::make_unique<os::NetworkWatch>();need(watch->active(),"collector.test_watch");
+    n::NetworkState state(epoch,"linux.boottime","test:native-local");
+    auto job=owner.take(os::monotonic_ms());need(job.has_value(),"collector.test_take");
+    auto task=std::make_unique<AcquisitionTask>(*watch,job->ticket,0,clock,false,1200);
+    const auto until=os::monotonic_ms();
+    while(!task->read_ready()){need(os::monotonic_ms()-until<2000&&!task->done(),"collector.test_read");pause(2);}
+    emit({{"event","task_live"},{"pid",os::current_process_id()},{"tid",task->native_thread()},{"ticket",job->ticket},{"mode",mode}});
+    if(mode=="merge"){
+        for(const auto lease:desktop)need(owner.release(lease,os::monotonic_ms())==n::DemandCode::accepted,"collector.test_release");
+        need(owner.release(saver,os::monotonic_ms())==n::DemandCode::accepted&&owner.lease_count()==1,"collector.test_recorder");
+        need(!owner.outstanding()[0].cancelled,"collector.test_merged_job");
+    }else if(mode=="cancel"){
+        owner.release(desktop[0],os::monotonic_ms());desktop[0]=add("desktop","desktop",false);
+    }else if(mode=="revoke"){
+        need(owner.policy(policy(false),os::monotonic_ms())==n::DemandCode::accepted,"collector.test_revoke");
+        need(owner.admit(network_request(),{true,"desktop",{"desktop"}},os::monotonic_ms()).code==n::DemandCode::denied,"collector.test_denied");
+    }else{
+        while(os::monotonic_ms()-job->started_ms<350)pause(2);
+        owner.tick(os::monotonic_ms());
+    }
+    need(!task->done()&&!owner.take(os::monotonic_ms())&&owner.outstanding().size()==1,"collector.test_slot");
+    const bool cancelled=owner.outstanding()[0].cancelled;
+    need(cancelled==(mode!="merge"),"collector.test_cancellation");if(cancelled)task->cancel();
+    emit({{"event","slot_held"},{"ticket",job->ticket},{"tid",task->native_thread()},{"cancelled",cancelled},{"leases",owner.lease_count()}});
+    unsigned publications=0;
+    const auto consume=[&](const AcquisitionTask::Result& result,const n::DemandJob& completed){
+        need(result.acquired.continuity&&result.acquired.sample.code==os::NetworkCode::success&&result.acquired.indications.empty(),"collector.test_stable_source");
+        need(state.demand(completed.ticket)==n::NetworkStateCode::accepted,"collector.test_state_demand");
+        need(state.commit(completed.ticket,state.revision(),result.acquired.sample,result.begin,result.end)==n::NetworkStateCode::accepted,"collector.test_commit");
+        ++publications;
+        emit({{"event","sample"},{"ticket",completed.ticket},{"recording",completed.plan.recording},
+              {"document",n::network_document(*state.sample(),publications,result.sampled_utc,result.sampled_utc,true)}});
+    };
+    while(!task->done()){need(os::monotonic_ms()-until<2500,"collector.test_stop_bound");owner.tick(os::monotonic_ms());pause(2);}
+    const auto tid=task->native_thread();const auto first=task->finish();task.reset();
+    const auto result=owner.complete(job->ticket,os::monotonic_ms());
+    need(result==(cancelled?n::DemandCode::obsolete:n::DemandCode::accepted),"collector.test_completion");
+    emit({{"event","task_joined"},{"tid",tid},{"ticket",job->ticket},{"accepted",result==n::DemandCode::accepted}});
+    if(result==n::DemandCode::accepted)consume(first,*job);
+    else{
+        need(first.acquired.continuity&&first.acquired.sample.code==os::NetworkCode::success,"collector.test_late_real_read");
+        Json rows=Json::array();for(const auto& row:first.acquired.sample.rows){need(row.counters.has_value(),"collector.test_counters");
+            rows.push_back({{"index",std::to_string(row.index)},{"receive",std::to_string(row.counters->receive)},{"transmit",std::to_string(row.counters->transmit)}});}
+        emit({{"event","discarded_candidate"},{"ticket",job->ticket},{"measured_ns",std::to_string(first.begin.nanoseconds)},{"rows",std::move(rows)}});
+    }
+    // Keep a distinct observation interval between joined thread and replacement.
+    pause(150);
+    if(mode=="revoke"){
+        admitted_policy.revision=9;need(owner.policy(admitted_policy,os::monotonic_ms())==n::DemandCode::accepted,"collector.test_regrant");
+        need(!owner.take(os::monotonic_ms())&&owner.lease_count()==0,"collector.test_no_revival");
+        desktop[0]=add("desktop","desktop",false);
+    }
+    if(cancelled){watch.reset();watch=std::make_unique<os::NetworkWatch>();need(watch->active(),"collector.test_fresh_watch");}
+    job=owner.take(os::monotonic_ms());need(job.has_value(),"collector.test_successor");
+    task=std::make_unique<AcquisitionTask>(*watch,job->ticket,0,clock,false,100);
+    while(!task->done())pause(2);
+    const auto second=task->finish();task.reset();
+    need(owner.complete(job->ticket,os::monotonic_ms())==n::DemandCode::accepted,"collector.test_successor_complete");consume(second,*job);
+    if(recorder)owner.release(recorder,os::monotonic_ms());else owner.release(desktop[0],os::monotonic_ms());
+    need(owner.lease_count()==0&&owner.outstanding().empty()&&!owner.take(os::monotonic_ms()),"collector.test_final_drain");
+    watch.reset();emit({{"event","drained"},{"publications",publications},{"pid",os::current_process_id()}});pause(150);
+}
+
 void worker(const std::string& address,const std::string& mode,const std::string& epoch,std::uint64_t parent){
     os::arm_parent_lifetime(parent);
     auto health_stream=os::Stream::connect(address+"/h/s",parent);r::HealthLink health(health_stream,false,"collector",epoch,"");
@@ -60,10 +190,12 @@ void worker(const std::string& address,const std::string& mode,const std::string
     const auto clock=data_stream.measurement_clock();
     c::TelemetrySource source{"producer:network","desktop","operational"};source.document_version="0.2.0";source.clock_id=clock.clock_id;source.clock_scope=clock.local_scope;
     c::Sessions sessions(epoch,0,policy(),source);sessions.open("D",data_stream.peer().principal,{true,"desktop",{"desktop"}},data_stream.connected_ms());
-    r::ProducerLease parent_lease;std::uint64_t parent_token=0,sent=0,last_sent=0,last_attempt=0,publication=0,delivered=0;
+    r::ProducerLease parent_lease;std::uint64_t parent_token=0,sent=0,last_sent=0,publication=0,delivered=0,demand_lease=0;
+    n::DemandOwner demand(network_catalog(),policy(),{32,64,1});
     std::unique_ptr<os::NetworkWatch> watch;std::unique_ptr<n::NetworkState> state;
+    std::unique_ptr<AcquisitionTask> task;
     std::string sampled_utc;Json replay;bool replayed=false,revoked=false,retired=false;
-    const auto started=os::monotonic_ms();std::atomic_bool cancel{false};
+    const auto started=os::monotonic_ms();
     while(os::monotonic_ms()-started<(mode=="continuous"?90000U:25000U)){
         for(const auto& event:health.poll()){
             if(event.kind==r::HealthKind::ready)parent_token=parent_lease.attach("supervisor",epoch,event.observed_ms).token;
@@ -77,46 +209,70 @@ void worker(const std::string& address,const std::string& mode,const std::string
             if(!sent||now-last_sent>=1000){health.heartbeat(sent++);last_sent=now;}
         }
         for(const auto& payload:pipe.poll()){
-            sessions.receive("D",payload,os::monotonic_ms());
+            const auto received=os::monotonic_ms();sessions.receive("D",payload,received);
+            const auto subscription=sessions.subscription("D");
+            if(subscription&&!demand_lease){
+                const auto admitted=demand.admit(network_request(),{true,"desktop",{"desktop"}},received);
+                need(admitted.code==n::DemandCode::accepted,"collector.demand_admission");demand_lease=admitted.lease;
+            }
+            const auto message=p::decode(payload);
+            if(subscription&&message.type=="heartbeat"){
+                const auto sequence=p::decimal(message.body["sequence"].get<std::string>());need(sequence.has_value(),"collector.demand_sequence");
+                const auto code=demand.renew(demand_lease,*sequence,received);
+                need(code==n::DemandCode::accepted||code==n::DemandCode::duplicate,"collector.demand_heartbeat");
+            }
             if(mode=="crash"&&delivered==1){const auto message=p::decode(payload);
                 if(message.type=="heartbeat"&&message.body["sequence"]=="0")std::_Exit(73);}
         }
         sessions.tick(os::monotonic_ms());
-        if(mode=="revoke"&&delivered&&!revoked){sessions.policy(policy(false),os::monotonic_ms());revoked=true;}
+        const bool revoke_pending=mode=="revoke-pending"&&delivered&&task&&task->read_ready();
+        if(((mode=="revoke"&&delivered)||revoke_pending)&&!revoked){const auto changed=os::monotonic_ms();
+            if(revoke_pending)emit({{"event","policy_during_read"},{"pid",os::current_process_id()},{"tid",task->native_thread()}});
+            sessions.policy(policy(false),changed);demand.policy(policy(false),changed);demand_lease=0;revoked=true;}
         if(sessions.closed("D"))return;
         auto subscription=sessions.subscription("D");
-        if(!subscription){if(state){state.reset();watch.reset();replay=Json();sampled_utc.clear();retired=true;}}
-        else {
-            need(!retired,"collector.retired_source");
-            if(!state){watch=std::make_unique<os::NetworkWatch>();need(watch->active(),"collector.watch_unavailable");
-                state=std::make_unique<n::NetworkState>(epoch,clock.clock_id,clock.local_scope);}
-            need(state->demand(subscription->ticket)==n::NetworkStateCode::accepted,"collector.demand");
-            if(mode=="replay"&&delivered==1&&!replayed){
-                need(sessions.offer("D",subscription->ticket,"network:1",replay,{},os::monotonic_ms()),"collector.replay_offer");replayed=true;
-            } else if(!((mode=="stream-hold"||mode=="stream-hang")&&publication>=2)&&(!publication||now-last_attempt>=1000)){
-                last_attempt=now;const auto attempt_utc=utc();const auto begin=tick(data_stream,epoch);
-                const auto revision=state->revision();os::NetworkResult raw;
-                if(mode=="failure"&&publication==1)raw={os::NetworkCode::failed,5};
-                else {
-                    auto acquired=watch->read({std::chrono::steady_clock::now()+std::chrono::seconds(2),cancel});
-                    need(acquired.continuity,"collector.watch_gap");
-                    for(const auto& event:acquired.indications)need(state->indicate(event.key,event.removed)==n::NetworkStateCode::accepted,"collector.indication");
-                    raw=std::move(acquired.sample);
-                }
-                const auto end=tick(data_stream,epoch);
-                // Pending events drained at acquisition start may advance the owner's
-                // revision; that candidate is conservatively retried next cadence.
-                const auto result=state->commit(subscription->ticket,revision,raw,begin,end);
+        if(!subscription){
+            if(demand_lease){demand.release(demand_lease,os::monotonic_ms());demand_lease=0;}
+            if(state){state->demand(0);retired=true;}
+        }
+        need(demand.tick(os::monotonic_ms())==n::DemandCode::accepted,"collector.demand_clock");
+        for(const auto& job:demand.outstanding())if(job.cancelled&&task&&task->ticket==job.ticket)task->cancel();
+        if(task&&task->done()){
+            const auto ticket=task->ticket,revision=task->revision;const auto completed=task->finish();task.reset();
+            const auto admitted=demand.complete(ticket,os::monotonic_ms());
+            if(admitted==n::DemandCode::accepted&&subscription){
+                need(completed.acquired.continuity,"collector.watch_gap");
+                for(const auto& event:completed.acquired.indications)need(state->indicate(event.key,event.removed)==n::NetworkStateCode::accepted,"collector.indication");
+                const auto result=state->commit(ticket,revision,completed.acquired.sample,completed.begin,completed.end);
                 need(result==n::NetworkStateCode::accepted||result==n::NetworkStateCode::dirty||result==n::NetworkStateCode::source_failed,"collector.source_contract");
-                if(result==n::NetworkStateCode::accepted)sampled_utc=attempt_utc;
+                if(result==n::NetworkStateCode::accepted)sampled_utc=completed.sampled_utc;
                 if(result!=n::NetworkStateCode::dirty){
                     need(static_cast<bool>(state->sample()),"collector.no_inventory");
-                    const auto doc=n::network_document(*state->sample(),publication+1,sampled_utc,attempt_utc,state->current());
+                    const auto doc=n::network_document(*state->sample(),publication+1,sampled_utc,completed.sampled_utc,state->current());
                     sessions.tick(os::monotonic_ms());const auto active=sessions.subscription("D");
                     if(active&&active->ticket==subscription->ticket){
                         need(sessions.offer("D",active->ticket,"network:"+std::to_string(publication+1),doc,{},os::monotonic_ms()),"collector.offer");
                         ++publication;if(publication==1&&mode=="replay")replay=doc;
                     }
+                }
+            }else if(subscription){
+                // Native indications may have been consumed by the obsolete read.
+                // Recovery needs a fresh producer epoch, never a mixed identity map.
+                throw p::Error("collector.obsolete_acquisition");
+            }
+        }
+        if(!subscription){if(!task&&state){state.reset();watch.reset();replay=Json();sampled_utc.clear();}}
+        else {
+            need(!retired,"collector.retired_source");
+            if(!state){watch=std::make_unique<os::NetworkWatch>();need(watch->active(),"collector.watch_unavailable");
+                state=std::make_unique<n::NetworkState>(epoch,clock.clock_id,clock.local_scope);}
+            if(mode=="replay"&&delivered==1&&!replayed){
+                need(sessions.offer("D",subscription->ticket,"network:1",replay,{},os::monotonic_ms()),"collector.replay_offer");replayed=true;
+            } else if(!task&&!((mode=="stream-hold"||mode=="stream-hang")&&publication>=2)){
+                if(const auto job=demand.take(os::monotonic_ms())){
+                    need(state->demand(job->ticket)==n::NetworkStateCode::accepted,"collector.demand");
+                    task=std::make_unique<AcquisitionTask>(*watch,job->ticket,state->revision(),[&]{return tick(data_stream,epoch);},mode=="failure"&&publication==1,
+                        mode=="revoke-pending"&&publication==1?1200U:0U);
                 }
             }
         }
@@ -536,7 +692,7 @@ void continuity(const std::string& address,const std::string& mode,const std::st
         {"circuit_open",circuit_reported},{"last_failure",last_failure}});
 }
 void supervisor(const std::string& address,const std::string& scenario){
-    need(std::set<std::string>{"live","failure","replay","hang","crash","unsubscribe","revoke","parent-loss"}.count(scenario),"collector.scenario");
+    need(std::set<std::string>{"live","failure","replay","hang","crash","unsubscribe","revoke","revoke-pending","parent-loss"}.count(scenario),"collector.scenario");
     os::Listener health_listener(address+"/h/s"),data_listener(address+"/d/s");
     need(health_listener.access_controls_verified()&&data_listener.access_controls_verified(),"collector.endpoint_controls");
     emit({{"event","ready"},{"unprivileged",true},{"endpoint_controls",true}});
@@ -600,7 +756,7 @@ void supervisor(const std::string& address,const std::string& scenario){
                         else if(mode=="parent-loss"&&!parent_loss_announced){emit({{"event","parent_loss_ready"},{"pid",child.id()}});parent_loss_announced=true;}
                         else if((mode=="live"&&received==2)||((mode=="failure"||mode=="replay")&&received==3))done=true;
                     } else if(message.type=="gap"){
-                        need(scenario=="revoke"&&message.body["reason"]=="policy_changed","collector.gap");
+                        need((scenario=="revoke"||scenario=="revoke-pending")&&message.body["reason"]=="policy_changed","collector.gap");
                         view.policy(policy(false),os::monotonic_ms());projection(view,"revoked",child.id(),epoch,{});released=true;
                     } else if(message.type=="heartbeat"){
                         if(barrier&&message.body["sequence"]==std::to_string(*barrier))released=true;
@@ -645,6 +801,7 @@ void supervisor(const std::string& address,const std::string& scenario){
 }
 int main(int argc,char** argv){try{need(os::unprivileged_context(),"collector.privileged_context");
     if(argc==4&&std::string(argv[1])=="supervisor")supervisor(argv[2],argv[3]);
+    else if(argc==3&&std::string(argv[1])=="demand-exercise")demand_exercise(argv[2]);
     else if(argc==4&&std::string(argv[1])=="continuity")continuity(argv[2],argv[3]);
     else if(argc==5&&std::string(argv[1])=="desktop")continuity(argv[2],argv[3],argv[4]);
     else if(argc==5&&std::string(argv[1])=="desktop-watch")continuity(argv[2],argv[3],argv[4],true);

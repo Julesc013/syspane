@@ -1,0 +1,110 @@
+[
+  {
+    "step": "configure",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-06T14:44:01.683340+00:00",
+    "finished_at": "2026-10-06T14:44:11.953506+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 5368709120,\n  \"checkout_out_bytes\": 1303543113,\n  \"linux_campaign_bytes\": 3149289049,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "configure",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/executor_step.py",
+      "linux-x64-gcc13",
+      "configure"
+    ],
+    "started_at": "2026-10-06T14:44:11.953903+00:00",
+    "finished_at": "2026-10-06T14:44:23.592384+00:00",
+    "exit": 0,
+    "stdout": "Preset CMake variables:\n\n  BUILD_TESTING=\"ON\"\n  CMAKE_BUILD_TYPE=\"Debug\"\n  CMAKE_CXX_COMPILER=\"g++\"\n  SYSPANE_PROFILE=\"linux-x64-gcc13\"\n\nprofile verified: linux-x64-gcc13\nvendored dependency digests: pass\ndiagnostic toolkit verified: GTK 3.24.41 / Ubuntu 3.24.41-4ubuntu1.3\nnative GJS clock build dependencies verified\n-- Configuring done (6.4s)\n-- Generating done (0.0s)\n-- Build files have been written to: /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-07-demand-executor/linux-x64-gcc13-configure-63133a893d\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-06T14:44:23.592817+00:00",
+    "finished_at": "2026-10-06T14:44:24.141345+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 5368709120,\n  \"checkout_out_bytes\": 1304389571,\n  \"linux_campaign_bytes\": 3149289518,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/executor_step.py",
+      "linux-x64-gcc13",
+      "build"
+    ],
+    "started_at": "2026-10-06T14:44:24.141661+00:00",
+    "finished_at": "2026-10-06T14:44:40.082727+00:00",
+    "exit": 0,
+    "stdout": "[1/2] Building CXX object CMakeFiles/syspane_collector_probe.dir/source/application/collector_probe.cpp.o\n[2/2] Linking CXX executable SysPane.CollectorProbe\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-07-demand-executor/linux-x64-gcc13-build-8e22b1dfd0\n",
+    "stderr": ""
+  },
+  {
+    "step": "focus",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-06T14:44:40.083028+00:00",
+    "finished_at": "2026-10-06T14:44:40.619945+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 5368709120,\n  \"checkout_out_bytes\": 1305235351,\n  \"linux_campaign_bytes\": 3152218170,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "focus",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/executor_step.py",
+      "linux-x64-gcc13",
+      "focus"
+    ],
+    "started_at": "2026-10-06T14:44:40.620328+00:00",
+    "finished_at": "2026-10-06T14:46:25.935758+00:00",
+    "exit": 0,
+    "stdout": "Test project /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n      Start 26: composition.graph\n 1/14 Test #26: composition.graph ................   Passed    0.08 sec\n      Start 27: composition.reject_forbidden\n 2/14 Test #27: composition.reject_forbidden .....   Passed    0.17 sec\n      Start 71: demand.DEMAND-MERGE\n 3/14 Test #71: demand.DEMAND-MERGE ..............   Passed    0.01 sec\n      Start 72: demand.DEMAND-POLICY\n 4/14 Test #72: demand.DEMAND-POLICY .............   Passed    0.00 sec\n      Start 73: demand.DEMAND-LEASES\n 5/14 Test #73: demand.DEMAND-LEASES .............   Passed    0.00 sec\n      Start 74: demand.DEMAND-STOP\n 6/14 Test #74: demand.DEMAND-STOP ...............   Passed    0.00 sec\n      Start 75: demand.DEMAND-CAPS\n 7/14 Test #75: demand.DEMAND-CAPS ...............   Passed    0.00 sec\n      Start 76: demand.DEMAND-FAIRNESS\n 8/14 Test #76: demand.DEMAND-FAIRNESS ...........   Passed    0.00 sec\n      Start 77: demand.DEMAND-PLANS\n 9/14 Test #77: demand.DEMAND-PLANS ..............   Passed    0.00 sec\n      Start 78: demand.DEMAND-BOUNDS\n10/14 Test #78: demand.DEMAND-BOUNDS .............   Passed    0.00 sec\n      Start 79: demand.DEMAND-CLOCK\n11/14 Test #79: demand.DEMAND-CLOCK ..............   Passed    0.00 sec\n      Start 89: native.NATIVE-DEMAND-EXECUTOR\n12/14 Test #89: native.NATIVE-DEMAND-EXECUTOR ....   Passed    6.74 sec\n      Start 90: native.NATIVE-COLLECTOR\n13/14 Test #90: native.NATIVE-COLLECTOR ..........   Passed   18.30 sec\n      Start 91: native.CONSUMER-CONTINUITY\n14/14 Test #91: native.CONSUMER-CONTINUITY .......   Passed   70.70 sec\n\n100% tests passed, 0 tests failed out of 14\n\nTotal Test time (real) =  96.03 sec\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-07-demand-executor/linux-x64-gcc13-focus-2ec17eaf82\n",
+    "stderr": ""
+  }
+]

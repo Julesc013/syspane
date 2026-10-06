@@ -26,8 +26,13 @@ The latest [shared demand checkpoint](demand-owner-handoff.md) implements author
 consumer leases, merged acquisition plans, fair dispatch and cancelled-slot retention
 until confirmed stop. Nine component families plus two dependency checks pass on
 each development profile, including the historical toolset on the modern host.
-Next connect that owner to real native collection and current-policy distribution;
-the existing fixed-demand desktop experiment is not yet that product integration.
+The subsequent [Linux executor checkpoint](demand-executor-handoff.md) connects
+that owner to real acquisition outside the IPC loop. Five native cases now prove
+merged demand, cancellation/timeout slot retention and actual IPC revocation while
+a worker is alive. All 125 Linux entries have passing evidence across the full run
+and one corrected-observer rerun; the original full-run failure is retained.
+General per-session selection, invalidation/coalescing and installed controller/
+policy distribution remain open before common scene transactions complete the vertical.
 
 The latest [render-failure recovery checkpoint](controller-render-recovery-handoff.md)
 connects independent render/health deadlines to the persistent native replacement

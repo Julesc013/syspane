@@ -11,6 +11,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Automatic recovery from independent render failure checkpoint](controller-render-recovery-handoff.md) — The persistent controller replaces failed rendering lifetimes and preserves original measured collection.
 - [Current state and next admitted boundary](current-state.md) — An honest resumption point for the initial greenfield specification.
 - [Synchronized data owner checkpoint](data-view-handoff.md) — Bind atomic model admission, independent lease state and revocable presentation to portable execution evidence.
+- [Linux demand and native acquisition integration](demand-executor-handoff.md) — Keep IPC responsive while a bounded native task owns acquisition and obsolete results remain unpublishable.
 - [Shared controller demand ownership checkpoint](demand-owner-handoff.md) — Bounded authorized leases merge into fair source jobs, with cancellation distinct from confirmed stop.
 - [Independent diagnostic implementation checkpoint](diagnostic-handoff.md) — Bind independent public reporting and native inspector startup to scoped Windows/Linux evidence.
 - [Independent editor lifetime checkpoint](editor-exit-handoff.md) — An owned X11 candidate has independent keyboard and native exit with external process, pixel and input evidence.

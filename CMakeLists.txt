@@ -128,7 +128,7 @@ target_link_libraries(syspane_network_probe PRIVATE syspane_network syspane_loca
 set_target_properties(syspane_network_probe PROPERTIES OUTPUT_NAME "SysPane.NetworkProbe")
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
     add_executable(syspane_collector_probe source/application/collector_probe.cpp)
-    target_link_libraries(syspane_collector_probe PRIVATE syspane_network_publication syspane_network syspane_data_view syspane_health syspane_child syspane_network_view)
+    target_link_libraries(syspane_collector_probe PRIVATE syspane_network_publication syspane_network syspane_data_view syspane_health syspane_child syspane_network_view syspane_demand)
     set_target_properties(syspane_collector_probe PROPERTIES OUTPUT_NAME "SysPane.CollectorProbe")
 endif()
 add_library(syspane_child STATIC source/platform/child_linux.cpp source/platform/child_windows.cpp)
@@ -301,6 +301,9 @@ if(BUILD_TESTING)
         add_test(NAME "network.${case}" COMMAND syspane_network_publication_tests "${case}")
     endforeach()
     if(TARGET syspane_collector_probe)
+        add_test(NAME native.NATIVE-DEMAND-EXECUTOR COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/protocol/native_demand_executor.py"
+            "$<TARGET_FILE:syspane_collector_probe>" "${CMAKE_BINARY_DIR}/native-evidence")
+        set_tests_properties(native.NATIVE-DEMAND-EXECUTOR PROPERTIES TIMEOUT 30)
         add_test(NAME native.NATIVE-COLLECTOR COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/protocol/native_collector.py"
             "$<TARGET_FILE:syspane_collector_probe>" "${CMAKE_BINARY_DIR}/native-evidence")
         set_tests_properties(native.NATIVE-COLLECTOR PROPERTIES TIMEOUT 150)

@@ -7,9 +7,10 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
-The [shared demand owner](spec/delivery/demand-owner-handoff.md) now merges authorized
-consumer requests, preserves independent recorder leases and bounds source work
-through policy changes, expiry and confirmed stop. Native executor integration remains open.
+The [Linux demand integration](spec/delivery/demand-executor-handoff.md) now connects
+authorized consumer leases to real acquisition outside the IPC loop, retaining
+cancelled work until native completion. General session selection and installed
+policy/controller integration remain open.
 
 SysPane is designed around a persistent passive desktop surface, a native
 inspector and settings application, and direct desktop editing. GUI, editor,
