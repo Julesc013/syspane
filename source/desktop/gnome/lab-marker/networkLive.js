@@ -1,7 +1,7 @@
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import St from 'gi://St';
-import {NetworkSession, AttachedNetworkSession, RenderSession} from './networkSession.js';
+import {NetworkSession, AttachedNetworkSession, RenderSession, AttachedRenderSession} from './networkSession.js';
 
 const XML = `<node><interface name="org.syspane.NetworkLive">
 ${['Calibrate', 'Start', 'GetState', 'Revoke', 'Stop', 'Cleanup'].map(name =>
@@ -13,6 +13,7 @@ export class NetworkLive {
     constructor(parent) {
         this.mode = GLib.getenv('SYSPANE_GNOME_NETWORK_LIVE');
         this.watchMode = GLib.getenv('SYSPANE_GNOME_RENDER_WATCH');
+        this.controllerRender = GLib.getenv('SYSPANE_GNOME_CONTROLLER_RENDER') === '1';
         this.watch = null; this.paintSignal = 0; this.pending = null; this.staged = null;
         this.freezeDrawing = false; this.renderTrace = [];
         this.phase = 'new'; this.session = null; this.frozen = null; this.generation = null;
@@ -93,7 +94,7 @@ export class NetworkLive {
         if (this.generation !== frame.generation) { this.generation = frame.generation; this.frozen = age; }
         if (this.mode === 'freeze-age') age = this.frozen;
         this.text(4, age); this.indicators(this.mode !== 'ignore-expiry' && field.effective === 1, frame.lease === 2);
-        if (this.watchMode && frame.generation === '2' && !this.watch) this.startWatch();
+        if (this.watchMode && (this.controllerRender || frame.generation === '2') && !this.watch) this.startWatch();
         if (this.watch?.active() && this.pending !== null) {
             this.staged = this.pending;
             this.recordRender('draw', this.staged);
@@ -101,11 +102,13 @@ export class NetworkLive {
         }
     }
     recordRender(event, generation = null) {
-        if (this.renderTrace.length >= 128) throw new Error('render.trace_capacity');
+        if (this.renderTrace.length >= (this.controllerRender ? 256 : 128)) throw new Error('render.trace_capacity');
         this.renderTrace.push({event, generation, monotonic_us: GLib.get_monotonic_time()});
     }
     startWatch() {
-        this.watch = new RenderSession({executable: GLib.getenv('SYSPANE_GNOME_WATCH_EXECUTABLE'),
+        const Session = this.controllerRender ? AttachedRenderSession : RenderSession;
+        this.watch = new Session({peer: this.controllerRender ? GLib.getenv('SYSPANE_GNOME_CONTROLLER_PID') : null,
+            executable: GLib.getenv('SYSPANE_GNOME_WATCH_EXECUTABLE'),
             root: GLib.getenv('SYSPANE_GNOME_NETWORK_ROOT'), journal: GLib.getenv('SYSPANE_GNOME_WATCH_JOURNAL'),
             onChallenge: generation => {
                 if (this.pending !== null) throw new Error('render.challenge_overlap');

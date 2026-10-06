@@ -1,0 +1,78 @@
+[
+  {
+    "phase": "preflight",
+    "step": "configure",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-06T12:14:29.390696+00:00",
+    "finished_at": "2026-10-06T12:14:38.452488+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 5368709120,\n  \"checkout_out_bytes\": 1209637223,\n  \"linux_campaign_bytes\": 2977835314,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "phase": "configure",
+    "step": "configure",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "out/campaign/run_render_recovery_step.py",
+      "linux-x64-gcc13",
+      "configure"
+    ],
+    "started_at": "2026-10-06T12:14:38.452852+00:00",
+    "finished_at": "2026-10-06T12:14:48.747537+00:00",
+    "exit": 0,
+    "stdout": "Preset CMake variables:\n\n  BUILD_TESTING=\"ON\"\n  CMAKE_BUILD_TYPE=\"Debug\"\n  CMAKE_CXX_COMPILER=\"g++\"\n  SYSPANE_PROFILE=\"linux-x64-gcc13\"\n\nprofile verified: linux-x64-gcc13\nvendored dependency digests: pass\ndiagnostic toolkit verified: GTK 3.24.41 / Ubuntu 3.24.41-4ubuntu1.3\nnative GJS clock build dependencies verified\n-- Configuring done (5.4s)\n-- Generating done (0.0s)\n-- Build files have been written to: /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n\n\nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-25-controller-render-recovery/linux-x64-gcc13-configure-c82804bc2a\n",
+    "stderr": ""
+  },
+  {
+    "phase": "preflight",
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-06T12:14:48.748016+00:00",
+    "finished_at": "2026-10-06T12:14:49.238963+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 5368709120,\n  \"checkout_out_bytes\": 1210589488,\n  \"linux_campaign_bytes\": 2977834552,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "phase": "build",
+    "step": "build",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "out/campaign/run_render_recovery_step.py",
+      "linux-x64-gcc13",
+      "build"
+    ],
+    "started_at": "2026-10-06T12:14:49.239245+00:00",
+    "finished_at": "2026-10-06T12:14:59.818605+00:00",
+    "exit": 0,
+    "stdout": "[1/10] Building CXX object CMakeFiles/syspane_health.dir/source/diagnostics/health_link.cpp.o\n[2/10] Linking CXX static library libsyspane_health.a\n[3/10] Building CXX object CMakeFiles/syspane_gjs_clock.dir/source/desktop/gnome/native_health_view.cpp.o\n[4/10] Building CXX object CMakeFiles/syspane_recovery_probe.dir/source/application/recovery_probe.cpp.o\n[5/10] Linking CXX shared library libsyspane_gjs_clock.so\n[6/10] Linking CXX executable SysPane.RecoveryProbe\n[7/10] Building CXX object CMakeFiles/syspane_health_tests.dir/tests/fault/health_tests.cpp.o\n[8/10] Linking CXX executable syspane_health_tests\n[9/10] Building CXX object CMakeFiles/syspane_collector_probe.dir/source/application/collector_probe.cpp.o\n[10/10] Linking CXX executable SysPane.CollectorProbe\n\n\nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-25-controller-render-recovery/linux-x64-gcc13-build-5017064a1e\n",
+    "stderr": ""
+  }
+]

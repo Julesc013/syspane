@@ -38,11 +38,12 @@ void HealthLink::send(const std::string& type, w::Json body) try {
     output_.clear(); output_frames_ = 0;
     throw;
 }
-std::vector<HealthEvent> HealthLink::poll() try {
+std::vector<HealthEvent> HealthLink::poll(unsigned wait_ms) try {
+    if (wait_ms > 100) throw w::Error("health.poll_bound");
     if (closed_) throw w::Error("health.closed");
     if (!stream_) throw w::Error("health.no_stream");
     std::array<char, 4096> buffer{};
-    const auto read = stream_->read(buffer.data(), buffer.size(), 100);
+    const auto read = stream_->read(buffer.data(), buffer.size(), wait_ms);
     if (read.eof) { closed_ = true; decoder_.eof(); throw w::Error("health.eof"); }
     return feed(std::string_view(buffer.data(), read.bytes), read.observed_ms);
 } catch (...) { closed_ = true; output_.clear(); output_frames_ = 0; throw; }

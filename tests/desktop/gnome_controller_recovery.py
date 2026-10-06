@@ -22,6 +22,11 @@ from native_network import linux_rows
 from native_consumer_continuity import verify_source
 
 BACKGROUND_RECT = (0, 400, 128, 96)  # Outside both the operational tile and icon fixture.
+RENDER_MODES = ('render-stall','hidden','false-progress','shell-freeze','render-revoke')
+MODES = ('live','no-reattach','revoke') + RENDER_MODES
+REVOKED = ('revoke','render-revoke')
+NO_REPLACEMENT = REVOKED + ('false-progress',)
+mono = lambda: time.monotonic_ns()//1_000_000
 
 
 def lines(path, maximum):
@@ -95,9 +100,91 @@ def visible(samples, calibration, deliveries, connection):
     return len(set(generations))>=2 and max(ages)-min(ages)>=400
 
 
+def render_evidence(raw):
+    mode=raw['mode'];fault=raw['fault'];rows=raw['controller']
+    captures=[raw['calibration'],*raw['baseline'],*raw['outage']]
+    offset=captures[0]['begin_ns']//1_000_000-captures[0]['mono_begin_ms']
+    for row in captures:
+        if abs(row['begin_ns']//1_000_000-row['mono_begin_ms']-offset)>2 or abs(row['end_ns']//1_000_000-row['mono_end_ms']-offset)>2:
+            raise ValueError('native/capture clocks differ')
+    if mode=='shell-freeze':
+        if fault['method']!='SIGSTOP' or raw['stop_observed']['state'] not in ('T','t'):
+            raise ValueError('held shell freeze proof missing')
+    else:
+        calls=[c for c in raw['calls'] if c['method']=='Fault']
+        if fault['method']!='Fault' or len(calls)!=1 or calls[0]['reply']!='faulted' or calls[0]['begin_ns']!=fault['begin_ns'] or calls[0]['end_ns']!=fault['end_ns']:
+            raise ValueError('render injection identity')
+    groups={name:[r for r in rows if r['event'].startswith('render_') and r['connection']==name]
+            for name in {r['connection'] for r in rows if r['event']=='consumer_spawned'}}
+    all_progress=[];faults=[]
+    for name,events in groups.items():
+        pending=None;issued={};completed=0;previous=0;failed=False
+        if not events or events[0]['event']!='render_authenticated':raise ValueError('render attachment missing')
+        pid=next(r['pid'] for r in rows if r['event']=='consumer_spawned' and r['connection']==name)
+        for row in events:
+            at=row['observed_ms'];kind=row['event']
+            if row['pid']!=pid or at<previous or failed:raise ValueError('render lifetime/order differs')
+            previous=at
+            if kind=='render_challenge':
+                generation=row['generation']
+                if pending is not None or generation!=len(issued)+1 or not 0<=at-row['issued_ms']<=100:raise ValueError('render challenge overlap/clock')
+                pending=generation;issued[generation]=row['issued_ms']
+            elif kind=='render_progress':
+                completed+=1
+                if row['generation']!=pending or row['completed']!=completed or not 0<=at-issued[pending]<3000:raise ValueError('render completion mismatch/deadline')
+                all_progress.append(row);pending=None
+            elif kind=='render_fault':
+                if row['pending']!=pending or row['completed']!=completed:raise ValueError('render fault state differs')
+                beats=[r for r in events if r['event']=='render_heartbeat' and r['observed_ms']<=at]
+                if not beats or abs(at-beats[-1]['observed_ms']-row['since_heartbeat_ms'])>2:raise ValueError('render fault heartbeat age')
+                if pending is not None and abs(at-issued[pending]-row['since_challenge_ms'])>2:raise ValueError('render fault challenge age')
+                if row['reason']=='render.stalled' and (pending is None or not 3000<=row['since_challenge_ms']<=3200):raise ValueError('render fault deadline')
+                faults.append(row);failed=True
+            elif kind not in ('render_authenticated','render_heartbeat'):raise ValueError('unknown render event')
+    initial=next(r['connection'] for r in rows if r['event']=='consumer_spawned')
+    def painted(progress,trace):
+        related=[r for r in trace if r['generation']==str(progress['generation'])]
+        names=[r['event'] for r in related]
+        if len(names)<3 or names[0]!='challenge' or names[-1]!='paint' or any(n!='draw' for n in names[1:-1]):raise ValueError('completion without draw/paint')
+        if not all(a['monotonic_us']<=b['monotonic_us'] for a,b in zip(related,related[1:])) or related[-1]['monotonic_us']//1000>progress['observed_ms']:raise ValueError('paint completion causality')
+    baseline=[r for r in all_progress if r['connection']==initial and r['observed_ms']<=raw['before_fault_ms']]
+    if len(baseline)<2:raise ValueError('two initial native paint completions missing')
+    for row in baseline:painted(row,raw['before_fault_state']['renderTrace'])
+    if mode=='false-progress':
+        if faults or any(r['event']=='consumer_fault' for r in rows):raise ValueError('lying control unexpectedly failed native supervision')
+        new_challenges={r['generation'] for r in groups[initial] if r['event']=='render_challenge' and r['issued_ms']>=fault['mono_end_ms']}
+        later=[r for r in all_progress if r['generation'] in new_challenges and r['observed_ms']<=raw['after_trace_ms']]
+        if len(later)<3 or raw['outage'][-1]['mono_end_ms']-fault['mono_end_ms']<5000:raise ValueError('lying control observation too short')
+        for row in later:
+            related=[r for r in raw['after_trace_state']['renderTrace'] if r['generation']==str(row['generation'])]
+            if [r['event'] for r in related]!=['challenge','false-progress']:raise ValueError('lying completion lacks injected provenance')
+        limit=raw['outage'][-1]['mono_end_ms']
+    else:
+        failures=[r for r in rows if r['event']=='consumer_fault']
+        if len(failures)!=1:raise ValueError('render recovery failure count')
+        limit=failures[0]['observed_ms']
+        if mode!='shell-freeze':
+            if len(faults)!=1 or faults[0]['reason']!='render.stalled' or failures[0]['reason']!='render.stalled':raise ValueError('independent render failure missing')
+            if not faults[0]['health_alive'] or not 0<=faults[0]['since_heartbeat_ms']<1200:raise ValueError('render stall confused with health expiry')
+        elif not faults and not any(word in failures[0]['reason'] for word in ('expired','heartbeat','lease')):
+            raise ValueError('frozen shell has no independent expiry reason')
+        if mode not in REVOKED:
+            later=[r for r in all_progress if r['connection']!=initial and r['observed_ms']<=raw['after_trace_ms']]
+            if len(later)<2:raise ValueError('replacement paint did not recover')
+            for row in later:painted(row,raw['after_trace_state']['renderTrace'])
+    settled=[r for r in raw['outage'] if r['mono_begin_ms']>=fault['mono_end_ms']+200 and r['mono_end_ms']<limit]
+    if len(settled)<25 or settled[-1]['mono_end_ms']-settled[0]['mono_begin_ms']<1500:raise ValueError('failed rendering interval missing')
+    if not all(all(r['alive'].values()) for r in settled):raise ValueError('native lifetime missing before render expiry')
+    if mode=='hidden':
+        if any(rgb(r['pixels'],448*210*3)!=bytes(FIXTURE['background_rgb'])*448*210 for r in settled):raise ValueError('hidden control pixels remain visible')
+    else:
+        table=templates(raw['calibration']['pixels']);ages=[decode(r['pixels'],table)[1] for r in settled]
+        if len(set(ages))!=1:raise ValueError('injected render freeze did not freeze age')
+
+
 def judge(raw, composition):
     mode = raw['mode']
-    if mode not in ('live','no-reattach','revoke'):
+    if mode not in MODES:
         raise ValueError('controller recovery mode')
     controller, source, old = (raw['identities'][k] for k in ('controller','source','old_shell'))
     if controller['pid']!=controller['session'] or controller['pid']!=controller['process_group']:
@@ -107,11 +194,11 @@ def judge(raw, composition):
             raise ValueError('native child session ownership')
     if not all(raw['held_live'][name] for name in ('controller','source','old_shell','old_icon')):
         raise ValueError('original held native lifetime missing')
-    if not raw['old_shell_exit']['pidfd_exit'] or raw['old_shell_exit']['pid']!=old['pid']:
+    if mode!='false-progress' and (not raw['old_shell_exit']['pidfd_exit'] or raw['old_shell_exit']['pid']!=old['pid']):
         raise ValueError('held old shell exit missing')
     if raw['fault']['pid']!=old['pid'] or raw['fault']['begin_ns']>raw['fault']['end_ns']:
         raise ValueError('wrong held fault target or clock')
-    if not raw['fault']['end_ns']<=raw['old_shell_exit']['observed_ns']<=raw['fault']['end_ns']+2_000_000_000:
+    if mode!='false-progress' and not raw['fault']['end_ns']<=raw['old_shell_exit']['observed_ns']<=raw['fault']['end_ns']+(4_500_000_000 if mode in RENDER_MODES else 2_000_000_000):
         raise ValueError('shell exit deadline')
     if not raw['final_live']['controller'] or not raw['final_live']['source']:
         raise ValueError('independent owner/source died')
@@ -119,7 +206,7 @@ def judge(raw, composition):
     originals = {json.loads(r['payload'])['body']['snapshot']['generation']:json.loads(r['payload'])['body'] for r in raw['source']}
     events = raw['controller']; started = [e for e in events if e['event']=='source_spawned']
     launches = [e for e in events if e['event']=='consumer_spawned']; failures = [e for e in events if e['event']=='consumer_fault']
-    if len(started)!=1 or started[0]['pid']!=source['pid'] or len(failures)!=1 or failures[0]['pid']!=old['pid']:
+    if len(started)!=1 or started[0]['pid']!=source['pid'] or len(failures)!=int(mode!='false-progress') or any(r['pid']!=old['pid'] for r in failures):
         raise ValueError('source or fault lifetime differs')
     if launches[0]['pid']!=old['pid'] or any(row['source_pid']!=source['pid'] for row in launches):
         raise ValueError('consumer/source launch binding differs')
@@ -143,15 +230,24 @@ def judge(raw, composition):
         raise ValueError('outage observation bound')
     if any(c['method'] in ('Calibrate','Start') and c['begin_ns']>=raw['fault']['begin_ns'] for c in raw['calls']):
         raise ValueError('observer drove replacement attachment')
-    if any(c['begin_ns']>=raw['baseline'][0]['begin_ns'] for c in raw['calls']):
+    if mode in RENDER_MODES:
+        for interval in (raw['baseline'],raw['outage']):
+            if any(interval[0]['begin_ns']<=c['begin_ns']<=interval[-1]['end_ns'] for c in raw['calls']):raise ValueError('implementation query during independent capture')
+        render_evidence(raw)
+    elif any(c['begin_ns']>=raw['baseline'][0]['begin_ns'] for c in raw['calls']):
         raise ValueError('implementation query during independent capture')
     if raw['settings_after']!=composition['background_settings_before']:
         raise ValueError('native background settings changed')
+    if mode=='false-progress':
+        if len(launches)!=1 or not raw['final_live']['old_shell'] or not raw['final_live']['old_icon'] or 'old_shell_exit' in raw:
+            raise ValueError('lying control native lifetime changed')
+        if visible(raw['outage'],raw['calibration'],raw['delivery'],launches[0]['connection']):raise ValueError('false progress passed external pixels')
+        return {'outcome':'fail','collection':'pass','policy':'pass','native_replacement':'not_triggered','pixels':'fail'}
     failure = failures[0]
     during = [r for r in raw['source'] if r['observed_ms']>=failure['observed_ms']]
     if len(during)<2:
         raise ValueError('no continued acquisition after failure')
-    if mode=='revoke':
+    if mode in REVOKED:
         grants = [e for e in events if e['event']=='consumer_policy']
         if len(launches)!=1 or len(grants)!=1 or grants[0]['revision']!=8 or grants[0]['permitted']:
             raise ValueError('revoked consumer admitted')
@@ -205,6 +301,7 @@ def judge(raw, composition):
 def observe(display, environment, shell_pid, workspace, composition):
     from native_gnome_bootstrap import mapped_files
     controller = int(environment['SYSPANE_GNOME_CONTROLLER_PID']); mode = environment['SYSPANE_GNOME_CONTROLLER_CONTROL']
+    rendering=mode in RENDER_MODES
     raw = {'version':'0.1.0','mode':mode,'calls':[],'baseline':[],'outage':[],'post':[],'identities':{},'held_live':{},'final_live':{}}
     path = workspace/'network-controller-recovery.private.json'; descriptors = {}; pollers = {}
     connection = Gio.DBusConnection.new_for_address_sync(environment['DBUS_SESSION_BUS_ADDRESS'],Gio.DBusConnectionFlags.AUTHENTICATION_CLIENT|Gio.DBusConnectionFlags.MESSAGE_BUS_CONNECTION,None,None)
@@ -213,12 +310,14 @@ def observe(display, environment, shell_pid, workspace, composition):
         descriptors[name]=fd;pollers[name]=poller;raw['identities'][name]=identity(pid);raw['held_live'][name]=not bool(poller.poll(0))
         if not raw['held_live'][name]:raise ValueError('held native process already exited')
     def call(method):
-        begin=now();reply=connection.call_sync('org.gnome.Shell','/org/syspane/NetworkLive','org.syspane.NetworkLive',method,None,None,Gio.DBusCallFlags.NO_AUTO_START,1000,None).unpack()[0]
-        raw['calls'].append({'method':method,'begin_ns':begin,'end_ns':now(),'reply':reply});return reply
+        begin=now();clock=mono();reply=connection.call_sync('org.gnome.Shell','/org/syspane/NetworkLive','org.syspane.NetworkLive',method,None,None,Gio.DBusCallFlags.NO_AUTO_START,1000,None).unpack()[0]
+        raw['calls'].append({'method':method,'begin_ns':begin,'end_ns':now(),'mono_begin_ms':clock,'mono_end_ms':mono(),'reply':reply});return reply
     def capture(extra=False):
-        begin=now();row={'begin_ns':begin,'pixels':rgb_record(display.capture(*RECT))}
+        begin=now();clock=mono();row={'begin_ns':begin,'mono_begin_ms':clock,'pixels':rgb_record(display.capture(*RECT))}
         if extra:row.update(icons=rgb_record(display.capture(*FIXTURE['overlap'])),background=rgb_record(display.capture(*BACKGROUND_RECT)))
-        row['end_ns']=now();return row
+        row['end_ns']=now();row['mono_end_ms']=mono()
+        if rendering:row['alive']={name:not bool(pollers[name].poll(0)) for name in ('controller','source','old_shell')}
+        return row
     try:
         hold('controller',controller);hold('old_shell',shell_pid);hold('old_icon',composition['icon_manager']['pid'])
         spawned=[r for r in controller_rows(workspace) if r['event']=='source_spawned'];assert len(spawned)==1
@@ -234,9 +333,32 @@ def observe(display, environment, shell_pid, workspace, composition):
             time.sleep(.02)
         else:raise TimeoutError('first operational attachment')
         raw['old_shell_mapped_files']=mapped_files(shell_pid)
+        if rendering:
+            deadline=time.monotonic()+4
+            while time.monotonic()<deadline:
+                if len([r for r in controller_rows(workspace) if r['event']=='render_progress'])>=2:break
+                time.sleep(.02)
+            else:raise TimeoutError('initial native render completions')
         time.sleep(.25);until=now()+2_200_000_000
         while now()<until:raw['baseline'].append(capture());time.sleep(.05)
-        raw['fault']={'begin_ns':now(),'pid':shell_pid};signal.pidfd_send_signal(descriptors['old_shell'],signal.SIGKILL);raw['fault']['end_ns']=now()
+        if rendering:
+            raw['before_fault_state']=json.loads(call('GetState'));raw['before_fault_ms']=raw['calls'][-1]['mono_begin_ms']
+            if mode=='shell-freeze':
+                raw['fault']={'begin_ns':now(),'mono_begin_ms':mono(),'pid':shell_pid,'method':'SIGSTOP'}
+                signal.pidfd_send_signal(descriptors['old_shell'],signal.SIGSTOP)
+                raw['fault'].update(end_ns=now(),mono_end_ms=mono())
+                deadline=time.monotonic()+.1
+                while time.monotonic()<deadline:
+                    state=Path(f'/proc/{shell_pid}/stat').read_text().rsplit(')',1)[1].split()[0]
+                    if state in ('T','t'):break
+                    time.sleep(.002)
+                else:raise ValueError('native stop was not observed')
+                raw['stop_observed']={'state':state,'observed_ms':mono()}
+            else:
+                assert call('Fault')=='faulted'
+                raw['fault']={**raw['calls'][-1],'pid':shell_pid}
+        else:
+            raw['fault']={'begin_ns':now(),'pid':shell_pid};signal.pidfd_send_signal(descriptors['old_shell'],signal.SIGKILL);raw['fault']['end_ns']=now()
         post_begin=None;new_pid=None;ready=None;end=raw['fault']['begin_ns']+10_000_000_000
         while now()<end:
             row=capture(extra=post_begin is not None);raw['outage'].append(row)
@@ -246,7 +368,9 @@ def observe(display, environment, shell_pid, workspace, composition):
             if 'old_icon_exit' not in raw and pollers['old_icon'].poll(0):
                 raw['old_icon_exit']={'pid':raw['identities']['old_icon']['pid'],'pidfd_exit':True,'observed_ns':now()}
             events=controller_rows(workspace);launches=[r for r in events if r['event']=='consumer_spawned']
-            if mode=='revoke':
+            if mode=='false-progress':
+                if now()-raw['fault']['end_ns']>=5_200_000_000:break
+            elif mode in REVOKED:
                 if 'old_shell_exit' in raw and now()-raw['old_shell_exit']['observed_ns']>=2_500_000_000:break
             else:
                 if len(launches)>1 and new_pid is None:
@@ -272,7 +396,9 @@ def observe(display, environment, shell_pid, workspace, composition):
             time.sleep(.045)
         else:raise TimeoutError('native recovery interval')
         raw['old_icon_exited']=bool(pollers['old_icon'].poll(0))
-        if mode!='revoke':raw['new_shell_mapped_files']=mapped_files(new_pid)
+        if mode not in NO_REPLACEMENT:raw['new_shell_mapped_files']=mapped_files(new_pid)
+        if rendering and mode not in REVOKED:
+            raw['after_trace_state']=json.loads(call('GetState'));raw['after_trace_ms']=raw['calls'][-1]['mono_begin_ms']
         raw['controller']=controller_rows(workspace)
         raw['source']=lines(Path(environment['SYSPANE_GNOME_CONTROLLER_SOURCE']),4*1024**2)
         raw['delivery']=lines(Path(environment['SYSPANE_GNOME_CONTROLLER_DELIVERY']),4*1024**2)

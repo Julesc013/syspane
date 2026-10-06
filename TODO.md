@@ -24,7 +24,8 @@ behaviour has been implemented. See [audit disposition](spec/delivery/audit-2026
 
 - [x] W-25 consumer continuity: preserve real collection and original measurements across bounded native consumer replacement; verify typed consumer revocation and circuit opening. See the [handoff](spec/delivery/consumer-continuity-handoff.md).
 - [x] W-25 owned GNOME controller: preserve collection during automatic shell replacement and full-state reattachment; verify current operational pixels after native overview dismissal, with disabled-attachment and revoked-permission controls. See the [handoff](spec/delivery/gnome-controller-recovery-handoff.md).
-- [ ] W-25 integration: connect independent render-progress failures to automatic replacement, then close native editor-exit recovery and installed controller/policy/demand ownership. Overview-free unattended desktop recovery remains unqualified.
+- [x] W-25 independent render recovery: connect render/health expiry to the persistent native replacement owner; recover drawing and frozen-shell cases, reject false progress and enforce current typed revocation. See the [handoff](spec/delivery/controller-render-recovery-handoff.md).
+- [ ] W-25 integration: close native editor-exit recovery and installed controller/policy/demand ownership. Overview-free unattended desktop recovery remains unqualified.
 - [x] W-00/W-01: admit runtime scope; create real CMake targets, component ownership and pinned Windows/Linux development profiles.
 - [x] W-01: bind mandatory model cases to runnable tests and deliver a nonempty fixture smoke program; see the [handoff](spec/delivery/foundation-handoff.md).
 - [x] W-24 portable slice: close and test framing, negotiation, request reservations, settings preview, policy/disclosure, queues and connection states; see the [package](spec/delivery/packages/w-24-transport.md).

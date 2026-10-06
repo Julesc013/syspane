@@ -299,7 +299,74 @@ void continuity_consumer(const std::string& address,const std::string& connectio
     throw p::Error("continuity.consumer_deadline");
 }
 
-void continuity(const std::string& address,const std::string& mode,const std::string& shell={}){
+// Native owner, independent of the shell event loop. One instance per shell lifetime.
+class DesktopWatch {
+public:
+    DesktopWatch(const std::string& address,std::string connection)
+        :listener_(address+"/r/s"),connection_(std::move(connection)) {
+        need(listener_.access_controls_verified(),"render.endpoint_controls");
+    }
+    void activate(std::uint64_t now) { if(!activated_)activated_=now; }
+    void poll(std::uint64_t pid) {
+        if(!activated_)return;
+        pid_=pid;
+        if(!stream_){
+            if(auto accepted=listener_.accept_ready(pid)){
+                stream_=std::make_unique<os::Stream>(std::move(*accepted));
+                link_=std::make_unique<r::HealthLink>(*stream_,true,"desktop","render:"+connection_,connection_);
+            }
+        }
+        const auto now=os::monotonic_ms();deadlines(now);
+        if(!token_)need(now-*activated_<2000,"render.startup_timeout");
+        if(!link_)return;
+        for(const auto& event:link_->poll(1)){
+            deadlines(event.observed_ms);
+            if(event.kind==r::HealthKind::ready){
+                token_=lease_.attach("shell",link_->epoch(),event.observed_ms).token;
+                record({{"event","render_authenticated"}});
+            }else if(event.kind==r::HealthKind::heartbeat){
+                const auto code=lease_.heartbeat(token_,event.value,event.observed_ms);
+                need(code==r::Code::accepted||code==r::Code::duplicate,"render.heartbeat");
+                last_received_=event.observed_ms;++received_;
+                record({{"event","render_heartbeat"},{"sequence",event.value}});
+            }else if(event.kind==r::HealthKind::progress){
+                need(render_.complete(event.value,event.observed_ms)==r::Code::accepted,"render.late_progress");
+                record({{"event","render_progress"},{"generation",event.value},{"completed",++completed_}});
+            }else if(event.kind==r::HealthKind::shutdown)throw p::Error("render.closed");
+            else throw p::Error("render.direction");
+        }
+        const auto observed=os::monotonic_ms();deadlines(observed);
+        if(!link_->ready())return;
+        if(!sequence_||observed-last_sent_>=1000){link_->heartbeat(sequence_++);last_sent_=observed;}
+        if(render_.view().state==r::RenderState::idle&&(!challenge_||observed-issued_ms_>=1000)){
+            ++challenge_;issued_ms_=observed;
+            need(render_.issue(challenge_,observed)==r::Code::accepted,"render.challenge");
+            link_->challenge(challenge_);record({{"event","render_challenge"},{"generation",challenge_},{"issued_ms",issued_ms_}});
+        }
+    }
+private:
+    void record(Json value){value["pid"]=pid_;value["connection"]=connection_;emit(std::move(value));}
+    void deadlines(std::uint64_t now){
+        if(!token_)return;
+        lease_.tick(now);render_.tick(now);
+        const bool stalled=render_.view().state==r::RenderState::stalled;
+        if(!stalled&&lease_.view().alive)return;
+        const auto reason=stalled?"render.stalled":"render.health_expired";
+        record({{"event","render_fault"},{"reason",reason},{"pending",render_.view().pending?Json(*render_.view().pending):Json()},
+            {"completed",completed_},{"since_challenge_ms",challenge_?now-issued_ms_:0},
+            {"since_heartbeat_ms",last_received_?now-last_received_:0},{"heartbeats",received_},{"health_alive",lease_.view().alive}});
+        throw p::Error(reason);
+    }
+    os::Listener listener_;
+    std::string connection_;
+    std::unique_ptr<os::Stream> stream_;
+    std::unique_ptr<r::HealthLink> link_;
+    r::ProducerLease lease_;r::RenderWatch render_;
+    std::optional<std::uint64_t> activated_;
+    std::uint64_t pid_=0,token_=0,sequence_=0,last_sent_=0,last_received_=0,received_=0,challenge_=0,issued_ms_=0,completed_=0;
+};
+
+void continuity(const std::string& address,const std::string& mode,const std::string& shell={},bool rendering=false){
     const bool desktop=!shell.empty();
     need(mode=="allow"||mode=="revoke-on-exit"||(desktop&&mode=="no-reattach"),"continuity.mode");
     if(desktop){desktop_stop=0;need(std::signal(SIGTERM,[](int){desktop_stop=1;})!=SIG_ERR,"continuity.signal");}
@@ -326,12 +393,13 @@ void continuity(const std::string& address,const std::string& mode,const std::st
     std::unique_ptr<os::Listener> listener;
     std::unique_ptr<os::Stream> front;
     std::unique_ptr<DataPipe> pipe;
+    std::unique_ptr<DesktopWatch> watch;
     Json latest;std::string connection,last_failure;bool stopping=false,denied=false,circuit_reported=false,scene_active=false;
     const auto started=os::monotonic_ms();
     const auto send=[&](const char* type,Json body){source_pipe.send(Json{{"type",type},{"connection_id","D"},
         {"producer_epoch",epoch},{"body",std::move(body)}}.dump());};
     while(os::monotonic_ms()-started<(desktop?60000U:14000U)&&!(desktop&&desktop_stop)){
-        for(const auto& event:health.poll()){
+        for(const auto& event:health.poll(rendering?20:100)){
             if(event.kind==r::HealthKind::ready)health_token=lease.attach("producer:network",epoch,event.observed_ms).token;
             else if(event.kind==r::HealthKind::heartbeat){
                 const auto code=lease.heartbeat(health_token,event.value,event.observed_ms);
@@ -371,6 +439,7 @@ void continuity(const std::string& address,const std::string& mode,const std::st
             try{
                 if(consumer->wait(0))fault="consumer.exited";
                 else {
+                    if(watch)watch->poll(consumer->id());
                     if(!front){
                         need(now-launched_at<(desktop?15000U:2000U),"continuity.connect_timeout");
                         if(auto accepted=listener->accept_ready(consumer->id())){
@@ -394,6 +463,7 @@ void continuity(const std::string& address,const std::string& mode,const std::st
                             else {
                                 if(auto active=sessions.subscription(connection)){
                                     scene_active=true;
+                                    if(watch)watch->activate(os::monotonic_ms());
                                     const auto generation=*p::decimal(latest["snapshot"]["generation"].get<std::string>());
                                     if(generation>offered){
                                         need(sessions.offer(connection,active->ticket,latest["record_id"],latest["snapshot"],{},os::monotonic_ms()),"continuity.offer");
@@ -412,9 +482,11 @@ void continuity(const std::string& address,const std::string& mode,const std::st
             }catch(const p::Error& error){fault=error.what();}catch(const os::IpcError& error){fault=error.what();}
             if(!fault.empty()&&!(desktop&&desktop_stop)){
                 now=os::monotonic_ms();last_failure=fault;
-                need(gate.failed(r::Failure::crashed,r::StopProof::unconfirmed,now)==r::Code::accepted,"continuity.failure_gate");
+                const auto category=fault=="render.stalled"?r::Failure::render_stalled:
+                    fault=="render.health_expired"?r::Failure::producer_expired:r::Failure::crashed;
+                need(gate.failed(category,r::StopProof::unconfirmed,now)==r::Code::accepted,"continuity.failure_gate");
                 // Release all consumer demand and queues before stop or retry.
-                sessions.disconnect(connection);pipe.reset();front.reset();listener.reset();
+                sessions.disconnect(connection);pipe.reset();front.reset();listener.reset();watch.reset();
                 emit({{"event","consumer_fault"},{"pid",consumer->id()},{"reason",fault},{"backoff_ms",gate.view().backoff_ms}});
                 if(mode=="revoke-on-exit"&&!denied){sessions.policy(policy(false),now);denied=true;
                     emit({{"event","consumer_policy"},{"revision",8},{"permitted",false}});}
@@ -427,6 +499,7 @@ void continuity(const std::string& address,const std::string& mode,const std::st
                 connection="C"+std::to_string(++launches);offered=0;
                 listener=std::make_unique<os::Listener>(address+"/v/s");
                 need(listener->access_controls_verified(),"continuity.endpoint_controls");
+                if(rendering)watch=std::make_unique<DesktopWatch>(address,connection);
                 if(desktop){
                     need(!::setenv("SYSPANE_GNOME_CONTROLLER_PID",std::to_string(os::current_process_id()).c_str(),1)&&
                          !::setenv("SYSPANE_GNOME_CONTROLLER_ACTIVE",scene_active&&mode!="no-reattach"?"1":"0",1),"continuity.environment");
@@ -439,6 +512,7 @@ void continuity(const std::string& address,const std::string& mode,const std::st
         }
     }
     sessions.disconnect(connection);
+    watch.reset();
     if(desktop){
         if(consumer)consumer->request_terminate();
         health.shutdown();const auto source_status=source_child.wait(2000);
@@ -573,6 +647,7 @@ int main(int argc,char** argv){try{need(os::unprivileged_context(),"collector.pr
     if(argc==4&&std::string(argv[1])=="supervisor")supervisor(argv[2],argv[3]);
     else if(argc==4&&std::string(argv[1])=="continuity")continuity(argv[2],argv[3]);
     else if(argc==5&&std::string(argv[1])=="desktop")continuity(argv[2],argv[3],argv[4]);
+    else if(argc==5&&std::string(argv[1])=="desktop-watch")continuity(argv[2],argv[3],argv[4],true);
     else if(argc==4&&std::string(argv[1])=="desktop-shell"){const auto parent=p::decimal(argv[3]);need(parent&&*parent,"collector.parent");os::exec_program(argv[2],{"--x11","--mode=user"},*parent);}
     else if(argc==6&&std::string(argv[1])=="consumer"){const auto parent=p::decimal(argv[5]);need(parent&&*parent,"collector.parent");continuity_consumer(argv[2],argv[3],argv[4],*parent);}
     else if(argc==5&&std::string(argv[1])=="stream")stream_session(argv[2],argv[3],argv[4]);

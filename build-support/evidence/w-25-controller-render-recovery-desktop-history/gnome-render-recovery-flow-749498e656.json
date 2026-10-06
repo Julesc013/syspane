@@ -1,0 +1,41 @@
+[
+  {
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "source_inputs": {
+      "build-support/check_workspace_budget.py": "3a9ec8bf7f4f205e1986d19b523d57b41288936e3343910f80b460d71474b700"
+    },
+    "exit": 0,
+    "expected": 0,
+    "at": "2026-10-06T12:28:17.030279+00:00",
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 5368709120,\n  \"checkout_out_bytes\": 1217118365,\n  \"linux_campaign_bytes\": 3037673233,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "/usr/bin/python3",
+      "/mnt/d/Projects/SysPane/syspane/tests/fault/native_render_deadline.py",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13"
+    ],
+    "source_inputs": {
+      "tests/fault/native_render_deadline.py": "45a94056b9c2d76a2b08d91009030d59afef6c2f0fe1cc2e7e87fc0cde9de48a"
+    },
+    "exit": 0,
+    "expected": 0,
+    "at": "2026-10-06T12:28:27.619992+00:00",
+    "stdout": "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/RENDER-DEADLINE-94205d654e7c4d17bdd9de672fa473cc/result.json\n[('late-progress', 'pass', None), ('late-heartbeat', 'pass', None), ('late-shutdown', 'pass', None)]\n",
+    "stderr": ""
+  }
+]

@@ -6,7 +6,7 @@ import sys
 import unittest
 ROOT=Path(__file__).resolve().parents[2]
 sys.path.insert(0,str(ROOT/'build-support'))
-from record_gnome_controller_recovery import judge
+from record_gnome_controller_recovery import judge, MODES
 ORIGINALS={}
 
 
@@ -19,7 +19,7 @@ class ControllerEvidence(unittest.TestCase):
     def test_originals(self):
         for mode,(raw,composition) in ORIGINALS.items():
             self.assertEqual(judge(raw,composition),raw['evaluation'])
-            self.assertEqual(raw['evaluation']['outcome'],'fail' if mode=='no-reattach' else 'pass')
+            self.assertEqual(raw['evaluation']['outcome'],'fail' if mode in ('no-reattach','false-progress') else 'pass')
     def test_wrong_session(self):self.reject(lambda r:r['identities']['new_shell'].update(session=0))
     def test_wrong_parent(self):self.reject(lambda r:r['identities']['new_shell'].update(parent=0))
     def test_reused_lifetime(self):self.reject(lambda r:r['identities']['new_shell'].update(start_ticks=r['identities']['old_shell']['start_ticks']))
@@ -51,11 +51,22 @@ class ControllerEvidence(unittest.TestCase):
         def change(r):
             revision=next(e for e in r['controller'] if e['event']=='consumer_policy');r['delivery'][-1]['observed_ms']=revision['observed_ms']+1
         self.reject(change,'revoke')
+    def test_missing_render_fault(self):self.reject(lambda r:r.update(controller=[e for e in r['controller'] if e['event']!='render_fault']),'render-stall')
+    def test_late_render_fault(self):self.reject(lambda r:next(e for e in r['controller'] if e['event']=='render_fault').update(since_challenge_ms=3201),'render-stall')
+    def test_unhealthy_stall(self):self.reject(lambda r:next(e for e in r['controller'] if e['event']=='render_fault').update(health_alive=False),'render-stall')
+    def test_wrong_completion(self):self.reject(lambda r:next(e for e in r['controller'] if e['event']=='render_progress').update(generation=999),'render-stall')
+    def test_missing_paint(self):self.reject(lambda r:r['before_fault_state'].update(renderTrace=[e for e in r['before_fault_state']['renderTrace'] if e['event']!='paint']),'render-stall')
+    def test_replacement_without_paint(self):self.reject(lambda r:r['after_trace_state'].update(renderTrace=[]),'render-stall')
+    def test_render_query_drove_pixels(self):self.reject(lambda r:r['calls'].append(dict(method='GetState',begin_ns=r['outage'][2]['begin_ns'])),'render-stall')
+    def test_capture_clock_changed(self):self.reject(lambda r:r['outage'][0].update(mono_begin_ms=r['outage'][0]['mono_begin_ms']+10),'render-stall')
+    def test_shell_not_stopped(self):self.reject(lambda r:r['stop_observed'].update(state='R'),'shell-freeze')
+    def test_hidden_fault_is_not_pixels(self):self.reject(lambda r:[s.update(pixels=r['baseline'][-1]['pixels']) for s in r['outage']],'hidden')
+    def test_render_revocation_erased(self):self.reject(lambda r:r.update(controller=[e for e in r['controller'] if e['event']!='consumer_policy']),'render-revoke')
 
 
 if __name__=='__main__':
     for name in sys.argv[1:]:
         report=json.loads(Path(name).read_text());raw=json.loads(Path(report['network_private_artifacts']['network-controller-recovery.private.json']['path']).read_text())
         ORIGINALS[raw['mode']]=(raw,report['observation']['composition'])
-    if set(ORIGINALS)!={'live','no-reattach','revoke'}:raise ValueError('three original native reports required')
+    if set(ORIGINALS)!=set(MODES):raise ValueError('eight original native reports required')
     sys.argv=[sys.argv[0],'-v'];unittest.main()

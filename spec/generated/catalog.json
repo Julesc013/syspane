@@ -358,7 +358,7 @@
         "SP-CAMPAIGN-ADMISSION",
         "SP-CURRENT"
       ],
-      "sha256": "63eeb79530c89de2879eb03651bb60d9dd2b2dffb7cd71cdbda1ec5d7af25199"
+      "sha256": "988e10edfef1a38c3182ca255d043986b93f3c498e735da04517e616419e9088"
     },
     {
       "id": "SP-CONSUMER-CONTINUITY-HANDOFF",
@@ -371,6 +371,16 @@
       "sha256": "a2ea873114a7bcd78a884382bd03133b5a9d78c5c9211dd0422cc38242b0d30c"
     },
     {
+      "id": "SP-CONTROLLER-RENDER-RECOVERY-HANDOFF",
+      "path": "delivery/controller-render-recovery-handoff.md",
+      "title": "Automatic recovery from independent render failure checkpoint",
+      "description": "The persistent controller replaces failed rendering lifetimes and preserves original measured collection.",
+      "requires": [
+        "SP-W25-CONTROLLER-RENDER-RECOVERY"
+      ],
+      "sha256": "abcec501d55fc1f3cc1e8b89f693d712eff6330182874dc8ee796e0ec7473853"
+    },
+    {
       "id": "SP-CURRENT",
       "path": "delivery/current-state.md",
       "title": "Current state and next admitted boundary",
@@ -378,7 +388,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "c38748e79278922faca87097d1d8f8c6e17d96a71f79c74f97c49b62b8fc1382"
+      "sha256": "e165c2215e32b10eab9666bde6afab373755e389f2e37a1d79c44cec324dafc6"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -1059,6 +1069,17 @@
         "SP-W25-SUBSCRIPTIONS"
       ],
       "sha256": "2b7cd89119d857bc0f03cd53233a3bab3d838da0b4808e9dd8671b6df999b272"
+    },
+    {
+      "id": "SP-W25-CONTROLLER-RENDER-RECOVERY",
+      "path": "delivery/packages/w-25-controller-render-recovery.md",
+      "title": "W-25 automatic recovery from independent render failure",
+      "description": "Connect the existing render and health guards to the persistent native desktop replacement owner.",
+      "requires": [
+        "SP-W25-GNOME-CONTROLLER-RECOVERY",
+        "SP-W25-GNOME-RENDER-WATCH"
+      ],
+      "sha256": "0e14544d7425721c9e3aa25ce23515f001e40e50253a1409444f7e9f5c364c08"
     },
     {
       "id": "SP-W25-DATA-VIEW",

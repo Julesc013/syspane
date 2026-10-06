@@ -12,19 +12,20 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-06T12:00:00Z", "scope": "Persistent native controller and automatic GNOME reattachment with independent operational pixel evidence"}
+updated: {"by": "codex", "at": "2026-10-06T12:30:00Z", "scope": "Independent render-failure detection, automatic owned shell replacement and recovered operational pixels"}
 ---
 
 # Current state and next admitted boundary
 
-The latest [persistent-controller checkpoint](gnome-controller-recovery-handoff.md)
-keeps one real collector and native session owner alive during automatic GNOME shell
-replacement. The replacement reattaches without an observer Start call; external
-pixels verify current original measurements after native overview dismissal.
-Disabled reattachment fails the pixel condition, and typed revocation prevents
-replacement while independently authorized collection continues. This is one finite
-owned laboratory composition. Next connect independent render-progress failure to
-automatic replacement, and close editor recovery and installed controller ownership.
+The latest [render-failure recovery checkpoint](controller-render-recovery-handoff.md)
+connects independent render/health deadlines to the persistent native replacement
+owner. Stopped/hidden drawing and a frozen owned shell recover current original
+pixels after native overview dismissal. External pixels reject false progress;
+typed revocation prevents replacement while collection continues. All eight current
+controls and 33 adversarial evidence checks pass their required outcomes. This is
+one finite owned laboratory composition. Next close native editor-exit recovery and
+installed controller/session/policy/demand ownership; complete desktop editions and
+the independently blocked native platform tracks remain required.
 
 ## Repository checkpoint: 2026-10-05
 
@@ -442,9 +443,9 @@ render-progress supervision now covers that finite rendering path. The native co
 and bounds replacement after confirmed exit. The persistent-controller experiment
 now supplies same-session automatic shell replacement and original measured-state
 reattachment, with recovered operational pixels after native overview dismissal.
-Next integrate independent render-progress failure with that replacement owner;
-complete product controller policy/demand, general delivery queues, overview-free
-recovery and native editor-exit recovery.
+Independent render-progress failure now drives that replacement owner, including
+stopped/hidden drawing and a frozen shell. Complete product controller policy/demand,
+general delivery queues, overview-free recovery and native editor-exit recovery next.
 Actual native topology faults and Windows full-table notification
 coverage remain unqualified. The native
 inventory probe now connects bounded subscription/demand and queue revocation to

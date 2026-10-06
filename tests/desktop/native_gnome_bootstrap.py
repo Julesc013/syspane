@@ -23,7 +23,8 @@ from oracle import evaluate, pack_frame
 sys.path.insert(0, str(ROOT / 'build-support'))
 from prepare_gnome_lab import owned_build, sha, inventory
 
-LIVE_BUILD_RECORD = 'build-support/evidence/w-25-gnome-controller-recovery-linux-x64-gcc13.json'
+LIVE_BUILD_RECORD = 'build-support/evidence/w-25-controller-render-recovery-linux-x64-gcc13.json'
+CONTROLLER_RENDER_MODES = ('render-stall','hidden','false-progress','shell-freeze','render-revoke')
 
 SOURCES = ['tests/desktop/gnome_render_watch.py', 'spec/delivery/packages/w-25-gnome-render-watch.md',
            'build-support/record_gnome_render_watch.py', 'tests/desktop/test_gnome_render_watch_record.py',
@@ -249,11 +250,13 @@ def group_members(group):
 SOURCES += ['tests/desktop/gnome_controller_recovery.py', 'tests/desktop/test_gnome_controller_recovery_record.py',
             'build-support/record_gnome_controller_recovery.py', 'build-support/record_gnome_composition.py',
             'tests/protocol/native_consumer_continuity.py', 'source/application/collector_probe.cpp',
-            'spec/delivery/packages/w-25-gnome-controller-recovery.md', 'source/platform/child.hpp', 'source/platform/child_linux.cpp']
+            'spec/delivery/packages/w-25-gnome-controller-recovery.md', 'source/platform/child.hpp', 'source/platform/child_linux.cpp',
+            'spec/delivery/packages/w-25-controller-render-recovery.md', 'source/diagnostics/health_link.cpp', 'source/diagnostics/health_link.hpp']
 SOURCES = list(dict.fromkeys(SOURCES))
 
 
 def run(build, marker=False, control='live', composition=None, reveal=None, focus_baseline=None, focus_trace=False, icon_input=None, wallpaper=None, switcher=None, icon_recovery=None, shell_recovery=None, focus_integration=None, focus_scenarios=None, wallpaper_policy=None, surface_lease=None, network_cache=None, clock_age=None, network_live=None, render_watch=None, controller_recovery=None):
+    controller_render = controller_recovery in CONTROLLER_RENDER_MODES
     # Retain orphaned shell helpers for reaping; no service/session can adopt them.
     if ctypes.CDLL(None, use_errno=True).prctl(36, 1, 0, 0, 0) != 0:
         raise OSError(ctypes.get_errno(), 'cannot retain descendant exit evidence')
@@ -424,6 +427,10 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
                 environment.update(SYSPANE_GNOME_CONTROLLER_CONTROL=controller_recovery,
                     SYSPANE_GNOME_CONTROLLER_SOURCE=str(workspace/'network-controller-source.private.jsonl'),
                     SYSPANE_GNOME_CONTROLLER_DELIVERY=str(workspace/'network-controller-delivery.private.jsonl'))
+                if controller_render:
+                    (network_directory/'r').mkdir(mode=0o700)
+                    environment.update(SYSPANE_GNOME_CONTROLLER_RENDER='1',
+                        SYSPANE_GNOME_RENDER_WATCH='render-stall' if controller_recovery=='render-revoke' else 'live' if controller_recovery=='shell-freeze' else controller_recovery)
             if render_watch:
                 (network_directory/'r').mkdir(mode=0o700)
                 environment.update(SYSPANE_GNOME_RENDER_WATCH=render_watch,
@@ -641,8 +648,8 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
             with bracket.open('x') as target:
                 bracket.chmod(0o600)
                 target.write(json.dumps({'before':linux_rows(),'lower_ns':time.clock_gettime_ns(time.CLOCK_BOOTTIME)})+'\n')
-            controller = launch('controller', [str(build/'SysPane.CollectorProbe'), 'desktop', str(network_directory),
-                'revoke-on-exit' if controller_recovery=='revoke' else 'no-reattach' if controller_recovery=='no-reattach' else 'allow',
+            controller = launch('controller', [str(build/'SysPane.CollectorProbe'), 'desktop-watch' if controller_render else 'desktop', str(network_directory),
+                'revoke-on-exit' if controller_recovery in ('revoke','render-revoke') else 'no-reattach' if controller_recovery=='no-reattach' else 'allow',
                 str(sysroot/'usr/bin/gnome-shell')])
             from gnome_controller_recovery import controller_rows
             deadline = time.monotonic()+5
@@ -817,7 +824,7 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
             if any(row.get('members_after_stop') for row in report['cleanup']):
                 report['outcome']='fail';report['error']='network descendants survived cleanup'
             else:
-                for name in (('h','d','v','r') if render_watch else ('h','d','v')):
+                for name in (('h','d','v','r') if render_watch or controller_render else ('h','d','v')):
                     folder=network_directory/name;socket=folder/'s'
                     if socket.is_socket():socket.unlink()
                     folder.rmdir()
@@ -938,7 +945,7 @@ if __name__ == '__main__':
     parser.add_argument('--network-cache', choices=('live','ignore-clear','wrong-value','owner-loss'))
     parser.add_argument('--clock-age', choices=('live','freeze-age','ignore-expiry','peer-exit','pending-disable','wrong-peer'))
     parser.add_argument('--network-live', choices=('live','freeze-age','ignore-expiry','wrong-value','ignore-clear','lease-loss','revoke','peer-exit','hang'))
-    parser.add_argument('--controller-recovery', choices=('live','no-reattach','revoke'))
+    parser.add_argument('--controller-recovery', choices=('live','no-reattach','revoke')+CONTROLLER_RENDER_MODES)
     parser.add_argument('--render-watch', choices=('live','render-stall','false-progress','hidden','revoke','watch-exit','watch-hang','shell-freeze'))
     args = parser.parse_args()
     if args.controller_recovery:

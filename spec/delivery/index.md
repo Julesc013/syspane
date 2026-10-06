@@ -8,6 +8,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Foundation and native-experiment campaign admission](campaign-admission.md) — Record the user-admitted implementation scope and the first package's closed boundaries.
 - [Foundation campaign coverage audit](campaign-coverage.md) — Map the admitted campaign to actual evidence and remaining implementation or native laboratory requirements.
 - [Native collection continuity checkpoint](consumer-continuity-handoff.md) — Real acquisition survives separately owned consumer failures and bounded replacement.
+- [Automatic recovery from independent render failure checkpoint](controller-render-recovery-handoff.md) — The persistent controller replaces failed rendering lifetimes and preserves original measured collection.
 - [Current state and next admitted boundary](current-state.md) — An honest resumption point for the initial greenfield specification.
 - [Synchronized data owner checkpoint](data-view-handoff.md) — Bind atomic model admission, independent lease state and revocable presentation to portable execution evidence.
 - [Independent diagnostic implementation checkpoint](diagnostic-handoff.md) — Bind independent public reporting and native inspector startup to scoped Windows/Linux evidence.

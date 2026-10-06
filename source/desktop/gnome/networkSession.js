@@ -220,10 +220,11 @@ export class RenderSession extends NativeSession {
     socketPath() { return this.options.root + '/r/s'; }
     readCapacity() { return 4096; }
     eventNames() { return ['ready', 'authenticated', 'complete', 'error', 'heartbeat', 'challenge', 'progress', 'fault']; }
+    receiptCapacity() { return 64; }
     createView(native, fd) { return native.HealthView.new_from_socket(fd, this.pid); }
     async accept(bytes) {
         for (const event of JSON.parse(this.view.feed(bytes))) {
-            if (this.receipts.length >= 64) throw new Error('health.receipt_capacity');
+            if (this.receipts.length >= this.receiptCapacity()) throw new Error('health.receipt_capacity');
             this.receipts.push(event);
             if (event.kind === 'ready') { this.subscribed = true; this.accepted(); }
             else if (event.kind === 'challenge') this.options.onChallenge(event.value);
@@ -237,4 +238,14 @@ export class RenderSession extends NativeSession {
         catch (error) { this.close(error.message); }
     }
     state() { return {...super.state(), receipts: this.receipts}; }
+}
+
+export class AttachedRenderSession extends RenderSession {
+    lifetimeMs() { return 60000; }
+    receiptCapacity() { return 256; }
+    preparePeer() {
+        this.pid = Number(this.options.peer);
+        if (!Number.isSafeInteger(this.pid) || this.pid <= 1) throw new Error('session.pid');
+        this.readyResolve();
+    }
 }

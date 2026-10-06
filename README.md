@@ -55,7 +55,8 @@ An [independent render watcher](spec/delivery/gnome-render-watch-handoff.md) now
 connects native challenges to operational drawing and paint instrumentation.
 External pixels reject false progress; native deadlines survive a stopped shell
 and queued late messages. Watcher loss clears the tile and retains actual child
-exit failures. Automatic renderer replacement and complete desktop recovery remain open.
+exit failures. Later controller experiments below add bounded automatic replacement;
+complete desktop recovery remains open.
 The [consumer-continuity checkpoint](spec/delivery/consumer-continuity-handoff.md)
 keeps one real collector alive across consumer crashes, lease expiry and bounded
 replacement. Reattachment preserves original measurements; typed consumer-policy
@@ -64,8 +65,11 @@ now replaces an owned GNOME shell automatically while preserving its collector,
 then reattaches and displays current original measurements. Independent pixels
 verify recovery after native dismissal of GNOME's startup overview. Disabled
 reattachment and revoked permission controls preserve their distinct outcomes.
-Automatic render-stall replacement, editor recovery and complete host qualification
-remain open.
+The [render-failure recovery checkpoint](spec/delivery/controller-render-recovery-handoff.md)
+now connects independent render deadlines to that replacement owner. Stopped or
+hidden drawing and a frozen owned shell recover current pixels; external observation
+still rejects false progress acknowledgements. Editor recovery, installed ownership
+and complete host qualification remain open.
 The [measured telemetry path](spec/delivery/measured-time-handoff.md) now preserves
 sample age through delay, replay and reconnect, with explicit clock scope and TTL checks.
 A [native network reader](spec/delivery/network-acquisition-handoff.md) now acquires

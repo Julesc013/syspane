@@ -88,3 +88,13 @@ icons and background after native overview dismissal. Disabled-attachment and
 revocation controls are independently distinguished. Render-stall replacement,
 editor recovery, installed policy/session ownership and complete native editions
 remain open. This evidence does not resolve any other platform's missing lab.
+
+The [render-failure recovery checkpoint](controller-render-recovery-handoff.md) now
+connects the independent render/health guards to automatic native replacement.
+Stopped and hidden drawing, a frozen held shell, original crash controls, false
+progress and typed revocation are distinguished by eight fixed native cases and
+33 adversarial checks. Original collection continues through replacement and the
+replacement must resume both genuine paint progress and current external pixels.
+Overview dismissal remains an explicit native action. Editor-exit recovery,
+installed controller/policy/demand and complete editions remain required; none of
+the independent Windows, historical guest or Mac laboratory gaps is closed.

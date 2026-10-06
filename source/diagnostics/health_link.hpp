@@ -15,7 +15,7 @@ public:
     HealthLink(bool server, std::string role, std::string epoch, std::string connection, std::uint64_t connected_ms);
     HealthLink(const HealthLink&) = delete;
     HealthLink& operator=(const HealthLink&) = delete;
-    std::vector<HealthEvent> poll();
+    std::vector<HealthEvent> poll(unsigned wait_ms = 100);
     std::vector<HealthEvent> feed(std::string_view bytes, std::uint64_t observed_ms);
     void tick(std::uint64_t now);
     std::string take_output();
