@@ -12,18 +12,19 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-06T11:17:00Z", "scope": "Independent real collection across bounded native consumer replacement and typed consumer revocation"}
+updated: {"by": "codex", "at": "2026-10-06T12:00:00Z", "scope": "Persistent native controller and automatic GNOME reattachment with independent operational pixel evidence"}
 ---
 
 # Current state and next admitted boundary
 
-The latest [consumer-continuity checkpoint](consumer-continuity-handoff.md) keeps
-one real collector independently alive through native consumer crashes, lease
-expiry and bounded replacement. Full-state reattachment retains original measured
-snapshots; typed consumer-policy revocation prevents another launch, and repeated
-crashes open the existing circuit. Its native process/model evidence is a
-prerequisite for automatic desktop recovery. The next boundary is persistent
-same-session desktop composition and independently observed visible/editor recovery.
+The latest [persistent-controller checkpoint](gnome-controller-recovery-handoff.md)
+keeps one real collector and native session owner alive during automatic GNOME shell
+replacement. The replacement reattaches without an observer Start call; external
+pixels verify current original measurements after native overview dismissal.
+Disabled reattachment fails the pixel condition, and typed revocation prevents
+replacement while independently authorized collection continues. This is one finite
+owned laboratory composition. Next connect independent render-progress failure to
+automatic replacement, and close editor recovery and installed controller ownership.
 
 ## Repository checkpoint: 2026-10-05
 
@@ -438,9 +439,12 @@ now passes real standalone delivery and native fault/exit checks. The same owner
 also passes independently observed operational value/age/expiry pixels, policy
 erasure and data-lease faults in the owned GNOME composition. Independent native
 render-progress supervision now covers that finite rendering path. The native consumer-continuity prerequisite now preserves independent collection
-and bounds replacement after confirmed exit. Next close persistent desktop-session
-composition and actual current-policy visible recovery; complete product controller
-policy/demand, general delivery queues and native editor-exit recovery.
+and bounds replacement after confirmed exit. The persistent-controller experiment
+now supplies same-session automatic shell replacement and original measured-state
+reattachment, with recovered operational pixels after native overview dismissal.
+Next integrate independent render-progress failure with that replacement owner;
+complete product controller policy/demand, general delivery queues, overview-free
+recovery and native editor-exit recovery.
 Actual native topology faults and Windows full-table notification
 coverage remain unqualified. The native
 inventory probe now connects bounded subscription/demand and queue revocation to

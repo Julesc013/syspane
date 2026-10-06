@@ -22,15 +22,17 @@ def validate(value, build, family='GNOME-COMPOSITION-01', outer_outcome=True, ic
     manager = result['icon_manager']
     expected_script = str(Path(value['workspace']) / 'data/gnome-shell/extensions/ding@rastersoft.com/app/ding.js')
     shell_pid = observation['manager']['pid'][0]
+    controlled = family == 'GNOME-CONTROLLER-RECOVERY-01'
+    session_owner = value['controller_pid'] if controlled else shell_pid
     if (manager['pid_origin'] != 'XResQueryClientIds' or manager['window'] & ~manager['resource_mask'] != manager['resource_base'] or
-        manager['pid'] == shell_pid or manager['process_group'] != shell_pid or manager['session'] != shell_pid or
+        manager['pid'] == shell_pid or manager['process_group'] != session_owner or manager['session'] != session_owner or
         expected_script not in manager['arguments'] or manager['start_ticks'] <= 0):
         raise ValueError('native DING lifetime binding')
-    retained = next(row for row in value['cleanup'] if row['process']=='shell')['members_before_stop']
+    retained = next(row for row in value['cleanup'] if row['process']==('controller' if controlled else 'shell'))['members_before_stop']
     if icon_exit is None:
         if manager['pid'] not in [row['pid'] for row in retained if row['state']!='Z']:
             raise ValueError('icon manager was not retained through cleanup')
-    elif (family not in ['GNOME-ICON-RECOVERY-01','GNOME-SHELL-RECOVERY-01'] or icon_exit.get('event')!='exit-observed' or
+    elif (family not in ['GNOME-ICON-RECOVERY-01','GNOME-SHELL-RECOVERY-01','GNOME-CONTROLLER-RECOVERY-01'] or icon_exit.get('event')!='exit-observed' or
           icon_exit.get('pid')!=manager['pid'] or icon_exit.get('observer')!='pidfd' or icon_exit.get('readable') is not True):
         raise ValueError('only the explicit recovery family admits independently observed old-icon exit')
     if manager['executable'] not in value['icon_manager_mapped_files']:

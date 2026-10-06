@@ -9,6 +9,7 @@
 #include <chrono>
 #include <cerrno>
 #include <cstdlib>
+#include <csignal>
 #include <ctime>
 #include <iostream>
 #include <thread>
@@ -20,6 +21,7 @@ namespace os=syspane::platform;namespace r=syspane::recovery;namespace n=syspane
 namespace p=syspane::protocol;namespace c=syspane::configuration;namespace m=syspane::model;
 using p::Json;
 namespace {
+volatile std::sig_atomic_t desktop_stop=0;
 void need(bool ok,const char* code){if(!ok)throw p::Error(code);}
 void emit(Json value){value["observed_ms"]=os::monotonic_ms();std::cout<<value.dump()<<std::endl;}
 void pause(unsigned ms){std::this_thread::sleep_for(std::chrono::milliseconds(ms));}
@@ -62,7 +64,7 @@ void worker(const std::string& address,const std::string& mode,const std::string
     std::unique_ptr<os::NetworkWatch> watch;std::unique_ptr<n::NetworkState> state;
     std::string sampled_utc;Json replay;bool replayed=false,revoked=false,retired=false;
     const auto started=os::monotonic_ms();std::atomic_bool cancel{false};
-    while(os::monotonic_ms()-started<25000){
+    while(os::monotonic_ms()-started<(mode=="continuous"?90000U:25000U)){
         for(const auto& event:health.poll()){
             if(event.kind==r::HealthKind::ready)parent_token=parent_lease.attach("supervisor",epoch,event.observed_ms).token;
             else if(event.kind==r::HealthKind::heartbeat){const auto code=parent_lease.heartbeat(parent_token,event.value,event.observed_ms);need(code==r::Code::accepted||code==r::Code::duplicate,"collector.parent_heartbeat");}
@@ -297,14 +299,19 @@ void continuity_consumer(const std::string& address,const std::string& connectio
     throw p::Error("continuity.consumer_deadline");
 }
 
-void continuity(const std::string& address,const std::string& mode){
-    need(mode=="allow"||mode=="revoke-on-exit","continuity.mode");
+void continuity(const std::string& address,const std::string& mode,const std::string& shell={}){
+    const bool desktop=!shell.empty();
+    need(mode=="allow"||mode=="revoke-on-exit"||(desktop&&mode=="no-reattach"),"continuity.mode");
+    if(desktop){desktop_stop=0;need(std::signal(SIGTERM,[](int){desktop_stop=1;})!=SIG_ERR,"continuity.signal");}
     os::arm_parent_lifetime(static_cast<std::uint64_t>(::getppid()));
     os::Listener health_listener(address+"/h/s"),source_listener(address+"/d/s");
     need(health_listener.access_controls_verified()&&source_listener.access_controls_verified(),"continuity.endpoint_controls");
-    PrivateJournal journal(address+"/source.jsonl");
+    const auto environment=[](const char* key){const auto value=std::getenv(key);need(value&&*value,"continuity.environment");return std::string(value);};
+    PrivateJournal journal(desktop?environment("SYSPANE_GNOME_CONTROLLER_SOURCE"):address+"/source.jsonl");
+    std::unique_ptr<PrivateJournal> delivery;
+    if(desktop)delivery=std::make_unique<PrivateJournal>(environment("SYSPANE_GNOME_CONTROLLER_DELIVERY"));
     const auto epoch="collector:"+std::to_string(os::current_process_id())+":continuous";
-    auto source_child=os::Child::launch_self({"worker",address,"live",epoch,std::to_string(os::current_process_id())});
+    auto source_child=os::Child::launch_self({"worker",address,desktop?"continuous":"live",epoch,std::to_string(os::current_process_id())});
     emit({{"event","source_spawned"},{"pid",source_child.id()},{"epoch",epoch}});
     auto health_stream=health_listener.accept(source_child.id());r::HealthLink health(health_stream,true,"collector",epoch,"H");
     auto source_stream=source_listener.accept(source_child.id());DataPipe source_pipe(source_stream);source_pipe.send(hello().dump());
@@ -319,11 +326,11 @@ void continuity(const std::string& address,const std::string& mode){
     std::unique_ptr<os::Listener> listener;
     std::unique_ptr<os::Stream> front;
     std::unique_ptr<DataPipe> pipe;
-    Json latest;std::string connection,last_failure;bool stopping=false,denied=false,circuit_reported=false;
+    Json latest;std::string connection,last_failure;bool stopping=false,denied=false,circuit_reported=false,scene_active=false;
     const auto started=os::monotonic_ms();
     const auto send=[&](const char* type,Json body){source_pipe.send(Json{{"type",type},{"connection_id","D"},
         {"producer_epoch",epoch},{"body",std::move(body)}}.dump());};
-    while(os::monotonic_ms()-started<14000){
+    while(os::monotonic_ms()-started<(desktop?60000U:14000U)&&!(desktop&&desktop_stop)){
         for(const auto& event:health.poll()){
             if(event.kind==r::HealthKind::ready)health_token=lease.attach("producer:network",epoch,event.observed_ms).token;
             else if(event.kind==r::HealthKind::heartbeat){
@@ -365,7 +372,7 @@ void continuity(const std::string& address,const std::string& mode){
                 if(consumer->wait(0))fault="consumer.exited";
                 else {
                     if(!front){
-                        need(now-launched_at<2000,"continuity.connect_timeout");
+                        need(now-launched_at<(desktop?15000U:2000U),"continuity.connect_timeout");
                         if(auto accepted=listener->accept_ready(consumer->id())){
                             front=std::make_unique<os::Stream>(std::move(*accepted));
                             const auto destination=front->measurement_clock();
@@ -386,19 +393,24 @@ void continuity(const std::string& address,const std::string& mode){
                             else if(sessions.closed(connection))fault=sessions.close_reason(connection);
                             else {
                                 if(auto active=sessions.subscription(connection)){
+                                    scene_active=true;
                                     const auto generation=*p::decimal(latest["snapshot"]["generation"].get<std::string>());
                                     if(generation>offered){
                                         need(sessions.offer(connection,active->ticket,latest["record_id"],latest["snapshot"],{},os::monotonic_ms()),"continuity.offer");
                                         offered=generation;
                                     }
                                 }
-                                while(auto bytes=sessions.pop(connection,os::monotonic_ms()))pipe->send(*bytes);
+                                while(auto bytes=sessions.pop(connection,os::monotonic_ms())){
+                                    pipe->send(*bytes);
+                                    if(delivery)delivery->record({{"payload",*bytes},{"now_ns",std::to_string(source_stream.measurement_clock().nanoseconds)},
+                                        {"observed_ms",os::monotonic_ms()}});
+                                }
                             }
                         }
                     }
                 }
             }catch(const p::Error& error){fault=error.what();}catch(const os::IpcError& error){fault=error.what();}
-            if(!fault.empty()){
+            if(!fault.empty()&&!(desktop&&desktop_stop)){
                 now=os::monotonic_ms();last_failure=fault;
                 need(gate.failed(r::Failure::crashed,r::StopProof::unconfirmed,now)==r::Code::accepted,"continuity.failure_gate");
                 // Release all consumer demand and queues before stop or retry.
@@ -415,7 +427,11 @@ void continuity(const std::string& address,const std::string& mode){
                 connection="C"+std::to_string(++launches);offered=0;
                 listener=std::make_unique<os::Listener>(address+"/v/s");
                 need(listener->access_controls_verified(),"continuity.endpoint_controls");
-                consumer=std::make_unique<os::Child>(os::Child::launch_self({"consumer",address,connection,epoch,std::to_string(os::current_process_id())}));
+                if(desktop){
+                    need(!::setenv("SYSPANE_GNOME_CONTROLLER_PID",std::to_string(os::current_process_id()).c_str(),1)&&
+                         !::setenv("SYSPANE_GNOME_CONTROLLER_ACTIVE",scene_active&&mode!="no-reattach"?"1":"0",1),"continuity.environment");
+                    consumer=std::make_unique<os::Child>(os::Child::launch_self({"desktop-shell",shell,std::to_string(os::current_process_id())}));
+                }else consumer=std::make_unique<os::Child>(os::Child::launch_self({"consumer",address,connection,epoch,std::to_string(os::current_process_id())}));
                 launched_at=os::monotonic_ms();emit({{"event","consumer_spawned"},{"pid",consumer->id()},{"connection",connection},
                     {"source_pid",source_child.id()},{"epoch",epoch},{"last_failure",last_failure}});
             }else if(decision==r::Code::circuit_open){if(!circuit_reported){emit({{"event","consumer_circuit_open"},{"last_failure",last_failure}});circuit_reported=true;}}
@@ -423,6 +439,16 @@ void continuity(const std::string& address,const std::string& mode){
         }
     }
     sessions.disconnect(connection);
+    if(desktop){
+        if(consumer)consumer->request_terminate();
+        health.shutdown();const auto source_status=source_child.wait(2000);
+        need(source_status&&source_status->code==0&&!source_status->signaled,"continuity.source_shutdown");stopped(source_child,*source_status,false);
+        if(consumer){auto status=consumer->wait(2000);bool forced=false;
+            if(!status){consumer->request_stop();forced=true;status=consumer->wait(2000);}
+            need(status.has_value(),"continuity.stop_unconfirmed");stopped(*consumer,*status,forced);}
+        emit({{"event","complete"},{"launches",launches},{"consumer_policy_revision",denied?8:7},
+            {"circuit_open",circuit_reported},{"last_failure",last_failure},{"requested",desktop_stop!=0}});return;
+    }
     if(consumer){
         need(pipe&&!stopping,"continuity.shutdown_pending_fault");
         pipe->send(Json{{"type","shutdown"},{"connection_id",connection},{"producer_epoch",epoch},
@@ -546,6 +572,8 @@ void supervisor(const std::string& address,const std::string& scenario){
 int main(int argc,char** argv){try{need(os::unprivileged_context(),"collector.privileged_context");
     if(argc==4&&std::string(argv[1])=="supervisor")supervisor(argv[2],argv[3]);
     else if(argc==4&&std::string(argv[1])=="continuity")continuity(argv[2],argv[3]);
+    else if(argc==5&&std::string(argv[1])=="desktop")continuity(argv[2],argv[3],argv[4]);
+    else if(argc==4&&std::string(argv[1])=="desktop-shell"){const auto parent=p::decimal(argv[3]);need(parent&&*parent,"collector.parent");os::exec_program(argv[2],{"--x11","--mode=user"},*parent);}
     else if(argc==6&&std::string(argv[1])=="consumer"){const auto parent=p::decimal(argv[5]);need(parent&&*parent,"collector.parent");continuity_consumer(argv[2],argv[3],argv[4],*parent);}
     else if(argc==5&&std::string(argv[1])=="stream")stream_session(argv[2],argv[3],argv[4]);
     else if(argc==6&&std::string(argv[1])=="worker"){const auto parent=p::decimal(argv[5]);need(parent&&*parent,"collector.parent");worker(argv[2],argv[3],argv[4],*parent);}

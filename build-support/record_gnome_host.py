@@ -55,12 +55,21 @@ def validate_runtime(value, build, family, prefix, shell_exit=None):
     observation = value['observation']
     if observation['outcome'] != 'pass':
         raise ValueError('native observation incomplete')
-    shell = [c for c in value['commands'] if c['command'][0].endswith('/usr/bin/gnome-shell')]
+    controlled = family == 'GNOME-CONTROLLER-RECOVERY-01'
+    if controlled:
+        from record_gnome_controller_recovery import controller_lifetimes
+        raw, _ = controller_lifetimes(value, build)
+        identities = [raw['identities']['old_shell']]
+        if raw['mode'] != 'revoke':
+            identities.append(raw['identities']['new_shell'])
+        shell = [{'pid': row['pid'], 'command': row['arguments']} for row in identities]
+    else:
+        shell = [c for c in value['commands'] if c['command'][0].endswith('/usr/bin/gnome-shell')]
     recovering = shell_exit is not None
     if recovering and (family != 'GNOME-SHELL-RECOVERY-01' or shell_exit.get('event') != 'shell-exit' or
                        shell_exit.get('observer') != 'pidfd' or shell_exit.get('readable') is not True):
         raise ValueError('only explicit shell recovery admits independently observed shell exit')
-    expected_shells = 1 if not recovering or value['shell_recovery_control'] == 'no-restart' else 2
+    expected_shells = (1 if raw['mode'] == 'revoke' else 2) if controlled else (1 if not recovering or value['shell_recovery_control'] == 'no-restart' else 2)
     if len(shell) != expected_shells or (recovering and shell_exit['pid'] != shell[0]['pid']):
         raise ValueError('shell command identity')
     if len(shell) == 2 and (shell[1]['command'] != shell[0]['command'] or shell[1]['pid'] == shell[0]['pid']):
@@ -72,7 +81,7 @@ def validate_runtime(value, build, family, prefix, shell_exit=None):
     for key, directory in [('HOME', 'home'), ('XDG_CONFIG_HOME', 'config'), ('XDG_DATA_HOME', 'data'), ('XDG_RUNTIME_DIR', 'run')]:
         if environment[key] != str(workspace / directory):
             raise ValueError('owned environment differs')
-    phases = ['bus', 'system-bus', 'shell', 'observer', 'Xvfb'] + (['shell-replacement'] if len(shell) == 2 else [])
+    phases = ['bus', 'system-bus', 'controller', 'observer', 'Xvfb'] if controlled else ['bus', 'system-bus', 'shell', 'observer', 'Xvfb'] + (['shell-replacement'] if len(shell) == 2 else [])
     for phase in phases:
         rows = [r for r in value['cleanup'] if r['process'] == phase]
         expected_exit = -9 if phase == 'shell' and recovering else 0

@@ -66,7 +66,10 @@ def settings(environment):
     return result
 
 
-def bind_icon_window(display, shell_pid, workspace):
+def bind_icon_window(display, shell_pid, workspace, session_owner=None):
+    if session_owner is not None and (os.getsid(shell_pid) != session_owner or os.getpgid(shell_pid) != session_owner):
+        raise ValueError('shell outside admitted session/group')
+    session_owner = shell_pid if session_owner is None else session_owner
     owner = ResourceOwner(display)
     script = str(workspace / 'data/gnome-shell/extensions/ding@rastersoft.com/app/ding.js')
     matches = []
@@ -84,7 +87,7 @@ def bind_icon_window(display, shell_pid, workspace):
             if script not in arguments:
                 continue
             stat = (path / 'stat').read_text().rsplit(')', 1)[1].split()
-            if int(stat[2]) != shell_pid or int(stat[3]) != shell_pid:
+            if int(stat[2]) != session_owner or int(stat[3]) != session_owner:
                 raise ValueError('icon process outside retained shell group/session')
             if display.atom('_NET_WM_WINDOW_TYPE_DESKTOP') not in display.property(window, '_NET_WM_WINDOW_TYPE'):
                 raise ValueError('icon manager window lacks native desktop type')
@@ -143,6 +146,7 @@ def judge_samples(baseline, samples, calibrations):
 
 
 def observe(display, environment, shell_pid, workspace, trace_function):
+    session_owner = int(environment['SYSPANE_GNOME_CONTROLLER_PID']) if environment.get('SYSPANE_GNOME_CONTROLLER_CONTROL') else shell_pid
     journal = (workspace / 'composition.jsonl').open('x', encoding='utf-8', newline='\n')
     count, descriptor = 0, None
     def preserve(kind, value):
@@ -167,7 +171,7 @@ def observe(display, environment, shell_pid, workspace, trace_function):
         deadline = time.monotonic() + 5
         last_error = 'icon window absent'
         while time.monotonic() < deadline:
-            owner = bind_icon_window(display, shell_pid, workspace)
+            owner = bind_icon_window(display, shell_pid, workspace, session_owner)
             if owner:
                 baseline = display.capture(*FIXTURE['overlap'])
                 try:
@@ -251,7 +255,7 @@ def observe(display, environment, shell_pid, workspace, trace_function):
         result['background_settings_after'] = settings(environment)
         if result['background_settings_before'] != result['background_settings_after']:
             raise ValueError('background settings changed during composition')
-        if bind_icon_window(display, shell_pid, workspace) != owner or poller.poll(0):
+        if bind_icon_window(display, shell_pid, workspace, session_owner) != owner or poller.poll(0):
             raise ValueError('icon manager lifetime changed')
         result['evaluation'] = judge_samples(baseline, result['overlap_samples'], calibration_pixels)
         results = [result['marker']['evaluation']['outcome'], result['evaluation']['icons'], result['evaluation']['rectangle']]

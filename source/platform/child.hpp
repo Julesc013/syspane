@@ -14,6 +14,12 @@ public:
 struct ChildExit { bool signaled; std::uint32_t code; };
 std::uint64_t current_process_id();
 void arm_parent_lifetime(std::uint64_t expected_parent);
+#if defined(__linux__)
+// Called only inside an owned self child. PID/session and armed parent lifetime
+// survive exec; the caller supplies the admitted canonical native ELF and args.
+[[noreturn]] void exec_program(const std::string& path, const std::vector<std::string>& arguments,
+                              std::uint64_t expected_parent);
+#endif
 class Child {
 public:
     static Child launch_self(const std::vector<std::string>& arguments);
@@ -25,6 +31,9 @@ public:
     std::uint64_t id() const;
     std::optional<ChildExit> wait(unsigned milliseconds = 0);
     void request_stop(); // Does not assert termination. Only wait() supplies proof.
+#if defined(__linux__)
+    void request_terminate(); // Exact held child SIGTERM; still requires wait().
+#endif
 private:
     struct Impl;
     std::unique_ptr<Impl> impl_;

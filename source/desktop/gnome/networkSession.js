@@ -28,22 +28,13 @@ class NativeSession {
         this.startTimer = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 2000, () => {
             this.startTimer = 0; this.close('session.startup_timeout'); return GLib.SOURCE_REMOVE;
         });
-        this.endTimer = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 18000, () => {
+        this.endTimer = GLib.timeout_add(GLib.PRIORITY_DEFAULT, this.lifetimeMs(), () => {
             this.endTimer = 0; this.close('session.deadline'); return GLib.SOURCE_REMOVE;
         });
         try {
             const native = (await import('gi://SysPaneClock?version=0.1')).default;
             if (!this.active()) return;
-            this.child = Gio.Subprocess.new(this.arguments(), Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDERR_SILENCE);
-            this.pid = Number(this.child.get_identifier());
-            if (!Number.isSafeInteger(this.pid) || this.pid <= 1) throw new Error('session.pid');
-            this.waited = finish(cb => this.child.wait_async(null, cb), (child, result) => {
-                child.wait_finish(result); this.exited = true;
-                this.exitStatus = child.get_if_exited() ? child.get_exit_status() : -child.get_term_sig();
-                if (this.killTimer) { GLib.source_remove(this.killTimer); this.killTimer = 0; }
-                if (this.active()) this.close('session.peer_exited');
-            });
-            this.outputDone = this.readEvents(this.child.get_stdout_pipe());
+            this.preparePeer();
             await this.ready;
             if (!this.active()) return;
             const client = new Gio.SocketClient({enable_proxy: false});
@@ -63,6 +54,19 @@ class NativeSession {
         } catch (error) {
             if (this.active()) await this.close(error.message);
         }
+    }
+    lifetimeMs() { return 18000; }
+    preparePeer() {
+        this.child = Gio.Subprocess.new(this.arguments(), Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDERR_SILENCE);
+        this.pid = Number(this.child.get_identifier());
+        if (!Number.isSafeInteger(this.pid) || this.pid <= 1) throw new Error('session.pid');
+        this.waited = finish(cb => this.child.wait_async(null, cb), (child, result) => {
+            child.wait_finish(result); this.exited = true;
+            this.exitStatus = child.get_if_exited() ? child.get_exit_status() : -child.get_term_sig();
+            if (this.killTimer) { GLib.source_remove(this.killTimer); this.killTimer = 0; }
+            if (this.active()) this.close('session.peer_exited');
+        });
+        this.outputDone = this.readEvents(this.child.get_stdout_pipe());
     }
     async readEvents(stream) {
         let pending = ''; let total = 0;
@@ -148,8 +152,8 @@ class NativeSession {
         this.view?.close(); this.view = null; this.options.onClear();
         for (const item of this.queue) { this.queuedBytes -= item.raw.length; item.reject(new Error('session.closed')); }
         this.queue = [];
-        if (this.child && !this.exited) this.killTimer = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 1000, () => {
-            this.killTimer = 0; this.writeCancel.cancel(); this.forced = true;
+        if ((this.child && !this.exited) || this.options.peer) this.killTimer = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 1000, () => {
+            this.killTimer = 0; this.writeCancel.cancel(); this.forced = !!this.child;
             this.child?.force_exit(); this.dropConnection(); return GLib.SOURCE_REMOVE;
         });
         this.finishClose(shutdown).then(resolved, rejected); return this.closeTask;
@@ -158,6 +162,7 @@ class NativeSession {
         try { if (shutdown && this.connection) await this.send(shutdown, true); } catch (_) { /* Bounded native teardown follows. */ }
         this.dropConnection();
         await this.waited; await this.outputDone; await this.readTask;
+        if (this.killTimer) { GLib.source_remove(this.killTimer); this.killTimer = 0; }
         this.child = null; this.subscribed = false; this.sequence = 0;
         // A sibling may initiate normal closure before this child's failure is
         // delivered. Keep its actual nonzero exit visible after every wait.
@@ -196,6 +201,16 @@ export class NetworkSession extends NativeSession {
         if (!this.active() || !this.view) return 'closed';
         const code = this.view.policy('8', false);
         this.options.onClear(); this.close(); return code;
+    }
+}
+
+// The controller is an authenticated external owner, never this session's child.
+export class AttachedNetworkSession extends NetworkSession {
+    lifetimeMs() { return 60000; }
+    preparePeer() {
+        this.pid = Number(this.options.peer);
+        if (!Number.isSafeInteger(this.pid) || this.pid <= 1) throw new Error('session.pid');
+        this.readyResolve();
     }
 }
 

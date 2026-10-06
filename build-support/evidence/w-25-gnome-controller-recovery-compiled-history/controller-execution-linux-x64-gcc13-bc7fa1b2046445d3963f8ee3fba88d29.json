@@ -1,0 +1,116 @@
+[
+  {
+    "phase": "preflight",
+    "step": "configure",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-06T11:42:10.458620+00:00",
+    "finished_at": "2026-10-06T11:42:19.858274+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 5368709120,\n  \"checkout_out_bytes\": 1188295805,\n  \"linux_campaign_bytes\": 2924173871,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "phase": "configure",
+    "step": "configure",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "out/campaign/run_controller_step.py",
+      "linux-x64-gcc13",
+      "configure"
+    ],
+    "started_at": "2026-10-06T11:42:19.858729+00:00",
+    "finished_at": "2026-10-06T11:42:29.866412+00:00",
+    "exit": 0,
+    "stdout": "Preset CMake variables:\n\n  BUILD_TESTING=\"ON\"\n  CMAKE_BUILD_TYPE=\"Debug\"\n  CMAKE_CXX_COMPILER=\"g++\"\n  SYSPANE_PROFILE=\"linux-x64-gcc13\"\n\nprofile verified: linux-x64-gcc13\nvendored dependency digests: pass\ndiagnostic toolkit verified: GTK 3.24.41 / Ubuntu 3.24.41-4ubuntu1.3\nnative GJS clock build dependencies verified\n-- Configuring done (5.6s)\n-- Generating done (0.0s)\n-- Build files have been written to: /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n\n\nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-25-gnome-controller-recovery/linux-x64-gcc13-configure-36952f81a9\n",
+    "stderr": ""
+  },
+  {
+    "phase": "preflight",
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-06T11:42:29.866727+00:00",
+    "finished_at": "2026-10-06T11:42:30.643395+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 5368709120,\n  \"checkout_out_bytes\": 1189241733,\n  \"linux_campaign_bytes\": 2924173676,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "phase": "build",
+    "step": "build",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "out/campaign/run_controller_step.py",
+      "linux-x64-gcc13",
+      "build"
+    ],
+    "started_at": "2026-10-06T11:42:30.643763+00:00",
+    "finished_at": "2026-10-06T11:42:41.859604+00:00",
+    "exit": 0,
+    "stdout": "[1/6] Building CXX object CMakeFiles/syspane_child.dir/source/platform/child_linux.cpp.o\n[2/6] Linking CXX static library libsyspane_child.a\n[3/6] Building CXX object CMakeFiles/syspane_recovery_probe.dir/source/application/recovery_probe.cpp.o\n[4/6] Linking CXX executable SysPane.RecoveryProbe\n[5/6] Building CXX object CMakeFiles/syspane_collector_probe.dir/source/application/collector_probe.cpp.o\n[6/6] Linking CXX executable SysPane.CollectorProbe\n\n\nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-25-gnome-controller-recovery/linux-x64-gcc13-build-1ba09848ec\n",
+    "stderr": ""
+  },
+  {
+    "phase": "preflight",
+    "step": "test",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-06T11:42:41.859990+00:00",
+    "finished_at": "2026-10-06T11:42:42.321564+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 5368709120,\n  \"checkout_out_bytes\": 1190187560,\n  \"linux_campaign_bytes\": 2924367116,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "phase": "test",
+    "step": "test",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "out/campaign/run_controller_step.py",
+      "linux-x64-gcc13",
+      "test"
+    ],
+    "started_at": "2026-10-06T11:42:42.321835+00:00",
+    "finished_at": "2026-10-06T11:46:27.163190+00:00",
+    "exit": 0,
+    "stdout": "0.00 sec\n        Start  14: model.VALIDITY-01\n 14/114 Test  #14: model.VALIDITY-01 ..................   Passed    0.00 sec\n        Start  15: model.VALIDITY-02\n 15/114 Test  #15: model.VALIDITY-02 ..................   Passed    0.00 sec\n        Start  16: model.CLOCK-01\n 16/114 Test  #16: model.CLOCK-01 .....................   Passed    0.00 sec\n        Start  17: model.CLOCK-02\n 17/114 Test  #17: model.CLOCK-02 .....................   Passed    0.00 sec\n        Start  18: model.BOUNDS-01\n 18/114 Test  #18: model.BOUNDS-01 ....................   Passed    0.00 sec\n        Start  19: model.BOUNDS-02\n 19/114 Test  #19: model.BOUNDS-02 ....................   Passed    0.00 sec\n        Start  20: model.BOUNDS-03\n 20/114 Test  #20: model.BOUNDS-03 ....................   Passed    0.00 sec\n        Start  21: model.OBSERVATION-01\n 21/114 Test  #21: model.OBSERVATION-01 ...............   Passed    0.00 sec\n        Start  22: model.EPOCH-01\n 22/114 Test  #22: model.EPOCH-01 .....................   Passed    0.00 sec\n        Start  23: model.FRESHNESS-01\n 23/114 Test  #23: model.FRESHNESS-01 .................   Passed    0.00 sec\n        Start  24: model.smoke\n 24/114 Test  #24: model.smoke ........................   Passed    0.04 sec\n        Start  25: composition.graph\n 25/114 Test  #25: composition.graph ..................   Passed    0.06 sec\n        Start  26: composition.reject_forbidden\n 26/114 Test  #26: composition.reject_forbidden .......   Passed    0.13 sec\n        Start  27: subscription.SUB-ADMIT\n 27/114 Test  #27: subscription.SUB-ADMIT .............   Passed    0.02 sec\n        Start  28: subscription.SUB-QUEUE\n 28/114 Test  #28: subscription.SUB-QUEUE .............   Passed    0.04 sec\n        Start  29: subscription.SUB-LIFETIME\n 29/114 Test  #29: subscription.SUB-LIFETIME ..........   Passed    0.01 sec\n        Start  30: protocol.FRAME-01\n 30/114 Test  #30: protocol.FRAME-01 ..................   Passed    0.01 sec\n        Start  31: protocol.FRAME-02\n 31/114 Test  #31: protocol.FRAME-02 ..................   Passed    0.00 sec\n        Start  32: protocol.FRAME-03\n 32/114 Test  #32: protocol.FRAME-03 ..................   Passed    0.00 sec\n        Start  33: protocol.JSON-01\n 33/114 Test  #33: protocol.JSON-01 ...................   Passed    0.02 sec\n        Start  34: protocol.WIRE-01\n 34/114 Test  #34: protocol.WIRE-01 ...................   Passed    0.00 sec\n        Start  35: protocol.NEGOTIATE-01\n 35/114 Test  #35: protocol.NEGOTIATE-01 ..............   Passed    0.00 sec\n        Start  36: protocol.IPC-BUDGET-01\n 36/114 Test  #36: protocol.IPC-BUDGET-01 .............   Passed    0.00 sec\n        Start  37: protocol.IPC-BUDGET-02\n 37/114 Test  #37: protocol.IPC-BUDGET-02 .............   Passed    0.00 sec\n        Start  38: protocol.IPC-BUDGET-03\n 38/114 Test  #38: protocol.IPC-BUDGET-03 .............   Passed    0.00 sec\n        Start  39: protocol.IPC-BUDGET-04\n 39/114 Test  #39: protocol.IPC-BUDGET-04 .............   Passed    0.00 sec\n        Start  40: protocol.LEDGER-01\n 40/114 Test  #40: protocol.LEDGER-01 .................   Passed    0.09 sec\n        Start  41: protocol.POLICY-01\n 41/114 Test  #41: protocol.POLICY-01 .................   Passed    0.00 sec\n        Start  42: protocol.POLICY-02\n 42/114 Test  #42: protocol.POLICY-02 .................   Passed    0.00 sec\n        Start  43: protocol.DISCLOSURE-01\n 43/114 Test  #43: protocol.DISCLOSURE-01 .............   Passed    0.00 sec\n        Start  44: protocol.QUEUE-01\n 44/114 Test  #44: protocol.QUEUE-01 ..................   Passed    0.00 sec\n        Start  45: protocol.SESSION-01\n 45/114 Test  #45: protocol.SESSION-01 ................   Passed    0.01 sec\n        Start  46: protocol.dependencies\n 46/114 Test  #46: protocol.dependencies ..............   Passed    0.04 sec\n        Start  47: recovery.LEASE-01\n 47/114 Test  #47: recovery.LEASE-01 ..................   Passed    0.00 sec\n        Start  48: recovery.LEASE-02\n 48/114 Test  #48: recovery.LEASE-02 ..................   Passed    0.00 sec\n        Start  49: recovery.LEASE-03\n 49/114 Test  #49: recovery.LEASE-03 ..................   Passed    0.00 sec\n        Start  50: recovery.LEASE-04\n 50/114 Test  #50: recovery.LEASE-04 ..................   Passed    0.00 sec\n        Start  51: recovery.LEASE-05\n 51/114 Test  #51: recovery.LEASE-05 ..................   Passed    0.00 sec\n        Start  52: recovery.RENDER-01\n 52/114 Test  #52: recovery.RENDER-01 .................   Passed    0.00 sec\n        Start  53: recovery.RENDER-02\n 53/114 Test  #53: recovery.RENDER-02 .................   Passed    0.00 sec\n        Start  54: recovery.RETRY-01\n 54/114 Test  #54: recovery.RETRY-01 ..................   Passed    0.00 sec\n        Start  55: recovery.RETRY-02\n 55/114 Test  #55: recovery.RETRY-02 ..................   Passed    0.00 sec\n        Start  56: recovery.RETRY-03\n 56/114 Test  #56: recovery.RETRY-03 ..................   Passed    0.00 sec\n        Start  57: recovery.RECOVERY-CLOCK\n 57/114 Test  #57: recovery.RECOVERY-CLOCK ............   Passed    0.00 sec\n        Start  58: native.NATIVE-MEASURED\n 58/114 Test  #58: native.NATIVE-MEASURED .............   Passed    0.64 sec\n        Start  59: native.NATIVE-CLOCK\n 59/114 Test  #59: native.NATIVE-CLOCK ................   Passed    0.35 sec\n        Start  60: native.NATIVE-SUB\n 60/114 Test  #60: native.NATIVE-SUB ..................   Passed    3.52 sec\n        Start  61: native.NATIVE-01\n 61/114 Test  #61: native.NATIVE-01 ...................   Passed   25.68 sec\n        Start  62: native.NATIVE-02\n 62/114 Test  #62: native.NATIVE-02 ...................   Passed    3.86 sec\n        Start  63: native.RECOVERY-01\n 63/114 Test  #63: native.RECOVERY-01 .................   Passed   33.74 sec\n        Start  64: telemetry.TELEMETRY-SNAPSHOT\n 64/114 Test  #64: telemetry.TELEMETRY-SNAPSHOT .......   Passed    0.02 sec\n        Start  65: telemetry.TELEMETRY-MESSAGES\n 65/114 Test  #65: telemetry.TELEMETRY-MESSAGES .......   Passed    0.02 sec\n        Start  66: telemetry.TELEMETRY-GRAPH\n 66/114 Test  #66: telemetry.TELEMETRY-GRAPH ..........   Passed    0.03 sec\n        Start  67: telemetry.TELEMETRY-TIME\n 67/114 Test  #67: telemetry.TELEMETRY-TIME ...........   Passed    0.04 sec\n        Start  68: telemetry.TELEMETRY-BOUNDS\n 68/114 Test  #68: telemetry.TELEMETRY-BOUNDS .........   Passed    0.13 sec\n        Start  69: telemetry.TELEMETRY-PRESERVE\n 69/114 Test  #69: telemetry.TELEMETRY-PRESERVE .......   Passed    0.01 sec\n        Start  70: presentation.NVIEW-VALUES\n 70/114 Test  #70: presentation.NVIEW-VALUES ..........   Passed    0.01 sec\n        Start  71: presentation.NVIEW-FORMAT\n 71/114 Test  #71: presentation.NVIEW-FORMAT ..........   Passed    0.08 sec\n        Start  72: presentation.NVIEW-STATES\n 72/114 Test  #72: presentation.NVIEW-STATES ..........   Passed    0.01 sec\n        Start  73: presentation.NVIEW-SELECTION\n 73/114 Test  #73: presentation.NVIEW-SELECTION .......   Passed    0.00 sec\n        Start  74: presentation.NVIEW-BOUNDS\n 74/114 Test  #74: presentation.NVIEW-BOUNDS ..........   Passed    0.01 sec\n        Start  75: presentation.NVIEW-LIFETIME\n 75/114 Test  #75: presentation.NVIEW-LIFETIME ........   Passed    0.01 sec\n        Start  76: network.PUBLICATION-VALUES\n 76/114 Test  #76: network.PUBLICATION-VALUES .........   Passed    0.01 sec\n        Start  77: network.PUBLICATION-FAILURE\n 77/114 Test  #77: network.PUBLICATION-FAILURE ........   Passed    0.00 sec\n        Start  78: network.PUBLICATION-BOUNDARY\n 78/114 Test  #78: network.PUBLICATION-BOUNDARY .......   Passed    0.00 sec\n        Start  79: native.NATIVE-COLLECTOR\n 79/114 Test  #79: native.NATIVE-COLLECTOR ............   Passed   17.05 sec\n        Start  80: native.CONSUMER-CONTINUITY\n 80/114 Test  #80: native.CONSUMER-CONTINUITY .........   Passed   70.48 sec\n        Start  81: network.RECONCILE-IDENTITY\n 81/114 Test  #81: network.RECONCILE-IDENTITY .........   Passed    0.00 sec\n        Start  82: network.RECONCILE-CLOCK-RATE\n 82/114 Test  #82: network.RECONCILE-CLOCK-RATE .......   Passed    0.00 sec\n        Start  83: network.RECONCILE-CANCEL-FAILURE\n 83/114 Test  #83: network.RECONCILE-CANCEL-FAILURE ...   Passed    0.00 sec\n        Start  84: network.RECONCILE-CAPACITY\n 84/114 Test  #84: network.RECONCILE-CAPACITY .........   Passed    0.00 sec\n        Start  85: native.NATIVE-NETWORK\n 85/114 Test  #85: native.NATIVE-NETWORK ..............   Passed    1.13 sec\n        Start  86: network.NETWORK-NETLINK\n 86/114 Test  #86: network.NETWORK-NETLINK ............   Passed    0.00 sec\n        Start  87: network.NETWORK-NETLINK-REJECT\n 87/114 Test  #87: network.NETWORK-NETLINK-REJECT .....   Passed    0.00 sec\n        Start  88: network.NETWORK-WATCH-DECODE\n 88/114 Test  #88: network.NETWORK-WATCH-DECODE .......   Passed    0.00 sec\n        Start  89: measured.MEASURED-CODEC\n 89/114 Test  #89: measured.MEASURED-CODEC ............   Passed    0.02 sec\n        Start  90: measured.MEASURED-AGE\n 90/114 Test  #90: measured.MEASURED-AGE ..............   Passed    0.01 sec\n        Start  91: measured.MEASURED-REPLAY\n 91/114 Test  #91: measured.MEASURED-REPLAY ...........   Passed    0.01 sec\n        Start  92: measured.MEASURED-LIFETIME\n 92/114 Test  #92: measured.MEASURED-LIFETIME .........   Passed    0.01 sec\n        Start  93: measured.MEASURED-SESSION\n 93/114 Test  #93: measured.MEASURED-SESSION ..........   Passed    0.01 sec\n        Start  94: import.IMPORT-STATE\n 94/114 Test  #94: import.IMPORT-STATE ................   Passed    0.01 sec\n        Start  95: import.IMPORT-RETAIN\n 95/114 Test  #95: import.IMPORT-RETAIN ...............   Passed    0.03 sec\n        Start  96: import.IMPORT-COVERAGE\n 96/114 Test  #96: import.IMPORT-COVERAGE .............   Passed    0.01 sec\n        Start  97: import.IMPORT-REPLAY\n 97/114 Test  #97: import.IMPORT-REPLAY ...............   Passed    0.02 sec\n        Start  98: import.IMPORT-TIME\n 98/114 Test  #98: import.IMPORT-TIME .................   Passed    0.01 sec\n        Start  99: import.IMPORT-LIFETIME\n 99/114 Test  #99: import.IMPORT-LIFETIME .............   Passed    0.01 sec\n        Start 100: data.VIEW-ATOMIC\n100/114 Test #100: data.VIEW-ATOMIC ...................   Passed    0.01 sec\n        Start 101: data.VIEW-REPLAY\n101/114 Test #101: data.VIEW-REPLAY ...................   Passed    0.00 sec\n        Start 102: data.VIEW-RECONNECT\n102/114 Test #102: data.VIEW-RECONNECT ................   Passed    0.00 sec\n        Start 103: data.VIEW-LEASE\n103/114 Test #103: data.VIEW-LEASE ....................   Passed    0.00 sec\n        Start 104: data.VIEW-POLICY\n104/114 Test #104: data.VIEW-POLICY ...................   Passed    0.00 sec\n        Start 105: data.VIEW-FAULT\n105/114 Test #105: data.VIEW-FAULT ....................   Passed    0.00 sec\n        Start 106: diagnostic.DIAG-POLICY\n106/114 Test #106: diagnostic.DIAG-POLICY .............   Passed    0.02 sec\n        Start 107: diagnostic.DIAG-PROJECTION\n107/114 Test #107: diagnostic.DIAG-PROJECTION .........   Passed    0.00 sec\n        Start 108: diagnostic.FAILURE-CODEC\n108/114 Test #108: diagnostic.FAILURE-CODEC ...........   Passed    0.00 sec\n        Start 109: diagnostic.FAILURE-INTERRUPT\n109/114 Test #109: diagnostic.FAILURE-INTERRUPT .......   Passed    0.00 sec\n        Start 110: diagnostic.FAILURE-PROJECTION\n110/114 Test #110: diagnostic.FAILURE-PROJECTION ......   Passed    0.00 sec\n        Start 111: diagnostic.PRESERVE-POLICY\n111/114 Test #111: diagnostic.PRESERVE-POLICY .........   Passed    0.00 sec\n        Start 112: native.PRESERVE\n112/114 Test #112: native.PRESERVE ....................   Passed    4.06 sec\n        Start 113: native.FAILURE-STORE\n113/114 Test #113: native.FAILURE-STORE ...............   Passed    0.18 sec\n        Start 114: native.DIAG-01\n114/114 Test #114: native.DIAG-01 .....................   Passed    0.45 sec\n\n100% tests passed, 0 tests failed out of 114\n\nTotal Test time (real) = 206.13 sec\n\n\nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-25-gnome-controller-recovery/linux-x64-gcc13-test-8c8e4ca77f\n",
+    "stderr": ""
+  }
+]

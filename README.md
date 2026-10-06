@@ -59,8 +59,13 @@ exit failures. Automatic renderer replacement and complete desktop recovery rema
 The [consumer-continuity checkpoint](spec/delivery/consumer-continuity-handoff.md)
 keeps one real collector alive across consumer crashes, lease expiry and bounded
 replacement. Reattachment preserves original measurements; typed consumer-policy
-revocation blocks another launch. This is a native ownership prerequisite for
-automatic visible recovery, which remains unqualified.
+revocation blocks another launch. The subsequent [persistent-controller experiment](spec/delivery/gnome-controller-recovery-handoff.md)
+now replaces an owned GNOME shell automatically while preserving its collector,
+then reattaches and displays current original measurements. Independent pixels
+verify recovery after native dismissal of GNOME's startup overview. Disabled
+reattachment and revoked permission controls preserve their distinct outcomes.
+Automatic render-stall replacement, editor recovery and complete host qualification
+remain open.
 The [measured telemetry path](spec/delivery/measured-time-handoff.md) now preserves
 sample age through delay, replay and reconnect, with explicit clock scope and TTL checks.
 A [native network reader](spec/delivery/network-acquisition-handoff.md) now acquires

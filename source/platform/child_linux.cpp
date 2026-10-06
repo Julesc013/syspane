@@ -12,6 +12,8 @@
 #include <sys/wait.h>
 #include <unistd.h>
 #include <utility>
+#include <array>
+#include <sys/stat.h>
 
 extern char** environ;
 namespace syspane::platform {
@@ -34,6 +36,24 @@ std::uint64_t current_process_id() { return static_cast<std::uint64_t>(::getpid(
 void arm_parent_lifetime(std::uint64_t expected_parent) {
     if (!expected_parent || ::prctl(PR_SET_PDEATHSIG, SIGKILL) || static_cast<std::uint64_t>(::getppid()) != expected_parent)
         throw ChildError("child.parent_lifetime");
+}
+[[noreturn]] void exec_program(const std::string& path,const std::vector<std::string>& arguments,
+                              std::uint64_t parent) {
+    check_child_arguments(arguments);
+    std::array<char,4096> canonical{};
+    if (path.empty() || path.size()>512 || path.front()!='/' ||
+        !::realpath(path.c_str(),canonical.data()) || path!=canonical.data()) throw ChildError("child.program_path");
+    struct File { int fd=-1; ~File(){if(fd>=0)::close(fd);} } file;
+    file.fd=::open(path.c_str(),O_RDONLY|O_CLOEXEC|O_NOFOLLOW);
+    struct stat info{};std::array<unsigned char,4> magic{};
+    if(file.fd<0 || ::fstat(file.fd,&info) || !S_ISREG(info.st_mode) || (info.st_mode&(S_ISUID|S_ISGID)) ||
+       !(info.st_mode&0111) || ::pread(file.fd,magic.data(),magic.size(),0)!=4 ||
+       magic!=std::array<unsigned char,4>{0x7f,'E','L','F'}) throw ChildError("child.program_type");
+    std::vector<std::string> storage{path};storage.insert(storage.end(),arguments.begin(),arguments.end());
+    std::vector<char*> argv;for(auto& argument:storage)argv.push_back(argument.data());argv.push_back(nullptr);
+    arm_parent_lifetime(parent);
+    ::fexecve(file.fd,argv.data(),environ);
+    throw ChildError("child.exec");
 }
 Child Child::launch_self(const std::vector<std::string>& arguments) {
     check_child_arguments(arguments);
@@ -96,6 +116,12 @@ void Child::request_stop() {
     const int result = impl_->pidfd < 0 ? ::kill(impl_->pid, SIGKILL)
         : static_cast<int>(::syscall(SYS_pidfd_send_signal, impl_->pidfd, SIGKILL, nullptr, 0));
     if (result && errno != ESRCH) throw ChildError("child.terminate");
+}
+void Child::request_terminate() {
+    if(impl_->exited)return;
+    if(impl_->pidfd<0)throw ChildError("child.pidfd");
+    if(::syscall(SYS_pidfd_send_signal,impl_->pidfd,SIGTERM,nullptr,0) && errno!=ESRCH)
+        throw ChildError("child.terminate");
 }
 Child::~Child() {
     if (!impl_) return;

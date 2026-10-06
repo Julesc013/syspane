@@ -8,7 +8,7 @@ from record_gnome_composition import validate as composition
 sys.path.insert(0,str(ROOT/'tests/desktop'))
 from gnome_live_network import judge, MODES
 
-BUILD_RECORD='build-support/evidence/w-25-consumer-continuity-linux-x64-gcc13.json'
+BUILD_RECORD='build-support/evidence/w-25-gnome-controller-recovery-linux-x64-gcc13.json'
 
 def validate_raw(raw):
     result=judge(raw);mode=raw['mode'];calls=raw['calls'];previous=0

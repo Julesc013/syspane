@@ -1,0 +1,40 @@
+[
+  {
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "source_inputs": {
+      "build-support/check_workspace_budget.py": "3a9ec8bf7f4f205e1986d19b523d57b41288936e3343910f80b460d71474b700"
+    },
+    "exit": 0,
+    "expected": 0,
+    "at": "2026-10-06T11:57:13.129118+00:00",
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 5368709120,\n  \"checkout_out_bytes\": 1197646326,\n  \"linux_campaign_bytes\": 2955353739,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "/usr/bin/python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/check_controller_desktop.py"
+    ],
+    "source_inputs": {
+      "out/campaign/check_controller_desktop.py": "3265279049792f32398d01f5fea96e206c1a584d162eea64b8cc9b2c1461969c"
+    },
+    "exit": 1,
+    "expected": 0,
+    "at": "2026-10-06T11:57:13.745234+00:00",
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/out/campaign/check_controller_desktop.py\", line 14, in <module>\n    print(json.dumps(validate(value,build)),flush=True);paths.append(str(path))\n                     ^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/build-support/record_gnome_controller_recovery.py\", line 82, in validate\n    raw,result=controller_lifetimes(value,build)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/build-support/record_gnome_controller_recovery.py\", line 71, in controller_lifetimes\n    if value['mapped_files'].get(str(build/name))!=compiled['artifacts'][name]['sha256']:raise ValueError('original shell native mapping differs')\n                                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: original shell native mapping differs\n"
+  }
+]

@@ -358,7 +358,7 @@
         "SP-CAMPAIGN-ADMISSION",
         "SP-CURRENT"
       ],
-      "sha256": "1e489c060cccd555329b723e24d9e2a6adcaf3789e76f5339767df57a42231b0"
+      "sha256": "63eeb79530c89de2879eb03651bb60d9dd2b2dffb7cd71cdbda1ec5d7af25199"
     },
     {
       "id": "SP-CONSUMER-CONTINUITY-HANDOFF",
@@ -378,7 +378,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "5f8a606a7da4440c457502f24d690386187e761dc846b3937f3056f846a43c0b"
+      "sha256": "c38748e79278922faca87097d1d8f8c6e17d96a71f79c74f97c49b62b8fc1382"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -467,6 +467,16 @@
         "SP-CAMPAIGN-ADMISSION"
       ],
       "sha256": "ac2bc6edf8cf502ee883914b30489a0104dd386d82078e5f7759c0b42d48c701"
+    },
+    {
+      "id": "SP-GNOME-CONTROLLER-RECOVERY-HANDOFF",
+      "path": "delivery/gnome-controller-recovery-handoff.md",
+      "title": "Persistent native controller and GNOME reattachment checkpoint",
+      "description": "Real collection survives automatic shell replacement with independently recovered operational pixels.",
+      "requires": [
+        "SP-W25-GNOME-CONTROLLER-RECOVERY"
+      ],
+      "sha256": "7e27c96e2cfd59a248fb383d36674af57f87802cb8f9c7a47d5ea5a1b301dbfa"
     },
     {
       "id": "SP-GNOME-FOCUS-HANDOFF",
@@ -1107,6 +1117,18 @@
         "SP-W25-NATIVE-NETWORK-CACHE"
       ],
       "sha256": "f39729227e19da0fca00e36540b9c7c7167c6afe903cf282bab34f171e85b192"
+    },
+    {
+      "id": "SP-W25-GNOME-CONTROLLER-RECOVERY",
+      "path": "delivery/packages/w-25-gnome-controller-recovery.md",
+      "title": "W-25 persistent controller and automatic GNOME reattachment",
+      "description": "Preserve one collection/session owner through native shell replacement and verify recovered operational pixels.",
+      "requires": [
+        "SP-W25-CONSUMER-CONTINUITY",
+        "SP-W05-GNOME-SHELL-RECOVERY",
+        "SP-W25-GNOME-LIVE-NETWORK"
+      ],
+      "sha256": "e91cec254f547916ab49d695f3f821985feaa4d0253fe229fdb48999f814212a"
     },
     {
       "id": "SP-W25-GNOME-LIVE-NETWORK",

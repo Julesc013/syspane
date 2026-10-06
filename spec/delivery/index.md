@@ -17,6 +17,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Native GJS measured network consumer checkpoint](gjs-network-view-handoff.md) — Shared measured model, policy and lease semantics inside the native GJS runtime before operational shell delivery.
 - [Asynchronous GNOME clock and visible age checkpoint](gnome-clock-handoff.md) — Native authenticated clock ownership, independently observed public age and expiry, and bounded startup/exit cleanup.
 - [Owned GNOME and DING composition checkpoint](gnome-composition-handoff.md) — Externally verify a live drawing between the synthetic wallpaper and real desktop icons, with two wrong-layer controls.
+- [Persistent native controller and GNOME reattachment checkpoint](gnome-controller-recovery-handoff.md) — Real collection survives automatic shell replacement with independently recovered operational pixels.
 - [Independent GNOME and DING focus comparison](gnome-focus-handoff.md) — The native focus and keyboard-delivery failure repeats without the SysPane bridge.
 - [Optional GNOME focus integration checkpoint](gnome-focus-integration-handoff.md) — Native event-bound focus restoration passes the original oracle and declared interaction guards while default behavior remains unchanged.
 - [GNOME native focus lifetimes and workspace checkpoint](gnome-focus-scenarios-handoff.md) — Selected normal/modal focus, closed targets and workspace invalidation have independent native evidence.

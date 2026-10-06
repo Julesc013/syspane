@@ -1,7 +1,7 @@
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import St from 'gi://St';
-import {NetworkSession, RenderSession} from './networkSession.js';
+import {NetworkSession, AttachedNetworkSession, RenderSession} from './networkSession.js';
 
 const XML = `<node><interface name="org.syspane.NetworkLive">
 ${['Calibrate', 'Start', 'GetState', 'Revoke', 'Stop', 'Cleanup'].map(name =>
@@ -22,6 +22,9 @@ export class NetworkLive {
         const xml = this.watchMode ? XML.replace('</interface>', '<method name="Fault"><arg type="s" direction="out"/></method></interface>') : XML;
         this.bus = Gio.DBusExportedObject.wrapJSObject(xml, this);
         this.bus.export(Gio.DBus.session, '/org/syspane/NetworkLive');
+        if (GLib.getenv('SYSPANE_GNOME_CONTROLLER_ACTIVE') === '1') {
+            this.phase = 'calibration'; this.Start();
+        }
     }
     label(text, x, y, width) {
         const actor = new St.Label({text, x, y, width, height: 26, reactive: false, can_focus: false,
@@ -63,7 +66,9 @@ export class NetworkLive {
     Start() {
         if (this.phase !== 'calibration') return 'closed';
         this.phase = 'started'; this.erase();
-        this.session = new NetworkSession({executable: GLib.getenv('SYSPANE_GNOME_NETWORK_EXECUTABLE'),
+        const peer = GLib.getenv('SYSPANE_GNOME_CONTROLLER_PID');
+        const Session = peer ? AttachedNetworkSession : NetworkSession;
+        this.session = new Session({peer, executable: GLib.getenv('SYSPANE_GNOME_NETWORK_EXECUTABLE'),
             root: GLib.getenv('SYSPANE_GNOME_NETWORK_ROOT'), journal: GLib.getenv('SYSPANE_GNOME_NETWORK_JOURNAL'),
             mode: ['lease-loss', 'hang'].includes(this.mode) ? this.mode : 'hold',
             onProjection: frame => this.draw(frame), onClear: () => {

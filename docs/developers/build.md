@@ -939,6 +939,41 @@ and fresh native consumers admitted by the existing Sessions/RestartGate owners.
 The typed revocation fixture removes the consumer's authority while retaining the
 controller's independently authorized collection demand. It does not model global
 policy revocation or authorize cross-session attachment. The existing GNOME command
-now pins `w-25-consumer-continuity-linux-x64-gcc13.json`; earlier records keep their
-original artifact identities. Automatic visible recovery requires its own session
-composition and unchanged external pixel acceptance.
+now pins `w-25-gnome-controller-recovery-linux-x64-gcc13.json`; earlier records keep
+their original artifact identities. The following experiment closes one persistent
+session composition while retaining the earlier native cases.
+
+## Persistent controller and automatic GNOME reattachment
+
+Read the [bounded package](../../spec/delivery/packages/w-25-gnome-controller-recovery.md)
+and [checkpoint](../../spec/delivery/gnome-controller-recovery-handoff.md). After a
+completed Windows workspace preflight for each test, run as `ir4runner` in the
+admitted WSL distribution, using the existing owned build root:
+
+```sh
+/usr/bin/python3 tests/desktop/native_gnome_bootstrap.py "$BUILD" --controller-recovery live
+/usr/bin/python3 tests/desktop/native_gnome_bootstrap.py "$BUILD" --controller-recovery no-reattach
+/usr/bin/python3 tests/desktop/native_gnome_bootstrap.py "$BUILD" --controller-recovery revoke
+```
+
+The middle command returns 1 for its required failed pixel outcome. It must still
+complete its native observation and cleanup; an observer exception cannot pass
+that negative control. The other commands return 0. Use the resulting three report
+paths with `build-support/record_gnome_controller_recovery.py --build-dir "$BUILD"
+--output <new-owned-record> <three-reports>` and
+`tests/desktop/test_gnome_controller_recovery_record.py <three-reports>` to recompute
+original evidence and exercise adversarial mutations. Keep all inputs identical
+across the matrix and retain every failed attempt with its original source archive.
+
+The native controller is the persistent session/group owner. Its source and shell
+inherit that session; the replacement attaches automatically after confirmed old
+exit and existing backoff. The observer issues no replacement Start command. Native
+Escape dismisses the replacement startup overview before the recovered desktop
+interval, so this case does not qualify unattended overview-free recovery. Global
+policy, installed session management and native editor recovery remain separate.
+
+The four `network-controller-*.private.*` files contain original counter brackets,
+source/delivery documents and pixels. Keep them 0600 in their owned 0700 native
+attempt directory; public evidence records their paths, bounds and digests only.
+The native owner acknowledges shutdown and confirms held child exits; the outer
+lab confirms its owned process group is empty. No command targets a user desktop.

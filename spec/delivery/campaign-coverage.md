@@ -79,3 +79,12 @@ bounded replacement, typed consumer-policy denial and circuit opening. Original
 full-state measurements survive reattachment. The desktop's persistent session
 composition, automatic visible replacement and editor recovery remain open; this
 headless prerequisite does not close any missing native host track.
+
+The [persistent-controller checkpoint](gnome-controller-recovery-handoff.md) now
+closes one same-session composition: the native owner and real collector survive
+shell exit, replace the shell after confirmed stop/backoff and automatically
+reattach original full state. External pixels verify current values, rates, age,
+icons and background after native overview dismissal. Disabled-attachment and
+revocation controls are independently distinguished. Render-stall replacement,
+editor recovery, installed policy/session ownership and complete native editions
+remain open. This evidence does not resolve any other platform's missing lab.

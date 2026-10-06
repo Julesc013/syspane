@@ -23,7 +23,7 @@ from oracle import evaluate, pack_frame
 sys.path.insert(0, str(ROOT / 'build-support'))
 from prepare_gnome_lab import owned_build, sha, inventory
 
-LIVE_BUILD_RECORD = 'build-support/evidence/w-25-consumer-continuity-linux-x64-gcc13.json'
+LIVE_BUILD_RECORD = 'build-support/evidence/w-25-gnome-controller-recovery-linux-x64-gcc13.json'
 
 SOURCES = ['tests/desktop/gnome_render_watch.py', 'spec/delivery/packages/w-25-gnome-render-watch.md',
            'build-support/record_gnome_render_watch.py', 'tests/desktop/test_gnome_render_watch_record.py',
@@ -162,7 +162,11 @@ def observe(environment, pid, channel, marker, composition, foreground_pid=None,
             import gnome_clock_age
             result['clock_age'] = gnome_clock_age.observe(display, environment, pid,
                 Path(environment['HOME']).parent, result['composition'], marker_trace)
-        if environment.get('SYSPANE_GNOME_RENDER_WATCH'):
+        if environment.get('SYSPANE_GNOME_CONTROLLER_CONTROL'):
+            import gnome_controller_recovery
+            result['controller_recovery'] = gnome_controller_recovery.observe(display, environment, pid,
+                Path(environment['HOME']).parent, result['composition'])
+        elif environment.get('SYSPANE_GNOME_RENDER_WATCH'):
             import gnome_render_watch
             result['render_watch'] = gnome_render_watch.observe(display, environment, pid,
                 Path(environment['HOME']).parent, result['composition'], marker_trace)
@@ -242,7 +246,14 @@ def group_members(group):
     return members
 
 
-def run(build, marker=False, control='live', composition=None, reveal=None, focus_baseline=None, focus_trace=False, icon_input=None, wallpaper=None, switcher=None, icon_recovery=None, shell_recovery=None, focus_integration=None, focus_scenarios=None, wallpaper_policy=None, surface_lease=None, network_cache=None, clock_age=None, network_live=None, render_watch=None):
+SOURCES += ['tests/desktop/gnome_controller_recovery.py', 'tests/desktop/test_gnome_controller_recovery_record.py',
+            'build-support/record_gnome_controller_recovery.py', 'build-support/record_gnome_composition.py',
+            'tests/protocol/native_consumer_continuity.py', 'source/application/collector_probe.cpp',
+            'spec/delivery/packages/w-25-gnome-controller-recovery.md', 'source/platform/child.hpp', 'source/platform/child_linux.cpp']
+SOURCES = list(dict.fromkeys(SOURCES))
+
+
+def run(build, marker=False, control='live', composition=None, reveal=None, focus_baseline=None, focus_trace=False, icon_input=None, wallpaper=None, switcher=None, icon_recovery=None, shell_recovery=None, focus_integration=None, focus_scenarios=None, wallpaper_policy=None, surface_lease=None, network_cache=None, clock_age=None, network_live=None, render_watch=None, controller_recovery=None):
     # Retain orphaned shell helpers for reaping; no service/session can adopt them.
     if ctypes.CDLL(None, use_errno=True).prctl(36, 1, 0, 0, 0) != 0:
         raise OSError(ctypes.get_errno(), 'cannot retain descendant exit evidence')
@@ -280,6 +291,8 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
         family = 'GNOME-NETWORK-LIVE-01'
     if render_watch:
         family = 'GNOME-RENDER-WATCH-01'
+    if controller_recovery:
+        family = 'GNOME-CONTROLLER-RECOVERY-01'
     with_icons = bool(composition) or focus_baseline == 'ding'
     token = family + '-' + uuid.uuid4().hex
     workspace = build / token
@@ -302,6 +315,7 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
               'switcher_control': switcher,
               'icon_recovery_control': icon_recovery,
               'shell_recovery_control': shell_recovery,
+              'controller_recovery_control': controller_recovery,
               'focus_integration_mode': focus_integration,
               'focus_scenarios_mode': focus_scenarios,
               'wallpaper_policy_control': wallpaper_policy,
@@ -354,7 +368,7 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
         for name,digest in expected['source_inputs'].items():
             if name.startswith('source/') and Path(name).suffix in ('.cpp','.hpp','.gir') and sha(ROOT/name)!=digest:raise ValueError('tested clock source differs')
         report['clock_build_record_sha256'] = sha(record)
-    if network_live or render_watch:
+    if network_live or render_watch or controller_recovery:
         report['qualification'] = 'Owned native measured network pixels, age/lease expiry and lifecycle only; full desktop and installed policy remain open.'
         record = ROOT/LIVE_BUILD_RECORD
         expected = json.loads(record.read_text())
@@ -363,6 +377,8 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
         for name,digest in expected['source_inputs'].items():
             if name.startswith('source/') and Path(name).suffix in ('.cpp','.hpp','.gir') and sha(ROOT/name)!=digest:raise ValueError('tested network source differs')
         report['network_build_record_sha256'] = sha(record)
+        if controller_recovery:
+            report['qualification'] = 'Persistent owned controller/session and real collection through automatic native GNOME reattachment; visible recovery is observed after native overview dismissal. No installed user-session manager or complete product qualification.'
         if render_watch:
             report['qualification'] = 'Independent native render/health supervision and measured tile erasure in the owned GNOME laboratory only; automatic replacement and full recovery remain open.'
     archive = workspace / 'source-inputs.zip'
@@ -396,7 +412,7 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
                        'GI_TYPELIB_PATH': ':'.join(str(sysroot / p) for p in ('usr/lib/gnome-shell', 'usr/lib/x86_64-linux-gnu/mutter-14', 'usr/lib/x86_64-linux-gnu/gjs/girepository-1.0', 'usr/lib/x86_64-linux-gnu/girepository-1.0')),
                        'GNOME_SHELL_DATADIR': str(sysroot / 'usr/share/gnome-shell'),
                        'LIBGWEATHER_LOCATIONS_PATH': str(sysroot / 'usr/lib/x86_64-linux-gnu/libgweather-4/Locations.bin')}
-        if network_live or render_watch:
+        if network_live or render_watch or controller_recovery:
             runtime = Path.home()/'.cache/syspane/ipc-w24'
             if runtime.resolve(strict=True)!=runtime or runtime.stat().st_uid!=os.getuid() or runtime.stat().st_mode & 0o777 != 0o700:raise ValueError('owned IPC root required')
             network_directory = runtime/('case-'+uuid.uuid4().hex[:12]);network_directory.mkdir(mode=0o700)
@@ -404,6 +420,10 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
             environment.update(SYSPANE_GNOME_NETWORK_LIVE=network_live or 'live', SYSPANE_GNOME_NETWORK_ROOT=str(network_directory),
                 SYSPANE_GNOME_NETWORK_EXECUTABLE=str(build/'SysPane.CollectorProbe'),
                 SYSPANE_GNOME_NETWORK_JOURNAL=str(workspace/'network-live-producer.private.jsonl'))
+            if controller_recovery:
+                environment.update(SYSPANE_GNOME_CONTROLLER_CONTROL=controller_recovery,
+                    SYSPANE_GNOME_CONTROLLER_SOURCE=str(workspace/'network-controller-source.private.jsonl'),
+                    SYSPANE_GNOME_CONTROLLER_DELIVERY=str(workspace/'network-controller-delivery.private.jsonl'))
             if render_watch:
                 (network_directory/'r').mkdir(mode=0o700)
                 environment.update(SYSPANE_GNOME_RENDER_WATCH=render_watch,
@@ -613,7 +633,31 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
                 time.sleep(.02)
             else:raise TimeoutError('retained lease fixtures not ready')
             report['lease_producer_mapped_files'] = {role:mapped_files(p.pid) for role,p in lease_producers.items()}
-        shell = launch('shell', [str(sysroot / 'usr/bin/gnome-shell'), '--x11', '--mode=user'])
+        controller = None
+        if controller_recovery:
+            from gnome_controller_recovery import controller_rows
+            from native_network import linux_rows
+            bracket=workspace/'network-controller-bracket.private.json'
+            with bracket.open('x') as target:
+                bracket.chmod(0o600)
+                target.write(json.dumps({'before':linux_rows(),'lower_ns':time.clock_gettime_ns(time.CLOCK_BOOTTIME)})+'\n')
+            controller = launch('controller', [str(build/'SysPane.CollectorProbe'), 'desktop', str(network_directory),
+                'revoke-on-exit' if controller_recovery=='revoke' else 'no-reattach' if controller_recovery=='no-reattach' else 'allow',
+                str(sysroot/'usr/bin/gnome-shell')])
+            from gnome_controller_recovery import controller_rows
+            deadline = time.monotonic()+5
+            while time.monotonic()<deadline:
+                launched = [row for row in controller_rows(workspace) if row['event']=='consumer_spawned']
+                if launched:break
+                if controller.poll() is not None:raise ValueError('native controller startup failed')
+                time.sleep(.02)
+            else:raise TimeoutError('native controller shell launch missing')
+            from types import SimpleNamespace
+            shell = SimpleNamespace(pid=launched[0]['pid'])
+            environment['SYSPANE_GNOME_CONTROLLER_PID'] = str(controller.pid)
+            report['controller_pid'] = controller.pid
+        else:
+            shell = launch('shell', [str(sysroot / 'usr/bin/gnome-shell'), '--x11', '--mode=user'])
         foreground = launch('foreground', ['/usr/bin/python3', str(ROOT / 'tests/desktop/gnome_foreground.py')]) if reveal or focus_baseline else None
         switcher_apps = {}
         if switcher:
@@ -630,7 +674,7 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
         worker = context.Process(target=observe, args=(environment, shell.pid, remote, marker, composition, foreground.pid if foreground else None, focus_baseline))
         worker.start()
         remote.close()
-        while time.monotonic() - started < 40:
+        while time.monotonic() - started < (70 if controller_recovery else 40):
             if any(Path(stream.name).stat().st_size > 1024**2 for stream in streams):
                 raise ValueError('laboratory log capacity exceeded')
             if local.poll(.05):
@@ -648,11 +692,13 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
                 report['observation'] = message
                 if report['observation']['outcome'] != 'pass':
                     raise RuntimeError(report['observation']['error'])
-                if not shell_recovery and shell.poll() is not None:
+                if not (shell_recovery or controller_recovery) and shell.poll() is not None:
                     raise RuntimeError('shell exited during observation')
-                report['mapped_files'] = report['observation']['shell_recovery']['old_shell_mapped_files'] if shell_recovery else mapped_files(shell.pid)
+                report['mapped_files'] = (report['observation']['controller_recovery']['old_shell_mapped_files'] if controller_recovery else
+                    report['observation']['shell_recovery']['old_shell_mapped_files'] if shell_recovery else mapped_files(shell.pid))
                 if composition:
-                    report['icon_manager_mapped_files'] = (report['observation']['shell_recovery']['old_icon_mapped_files'] if shell_recovery else
+                    report['icon_manager_mapped_files'] = (report['observation']['controller_recovery']['old_icon_mapped_files'] if controller_recovery else
+                                                          report['observation']['shell_recovery']['old_icon_mapped_files'] if shell_recovery else
                                                           report['observation']['icon_recovery']['old_icon_mapped_files'] if icon_recovery else
                                                           mapped_files(report['observation']['composition']['icon_manager']['pid']))
                     report['outcome'] = report['observation']['composition']['outcome']
@@ -680,6 +726,8 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
                     report['outcome'] = report['observation']['icon_recovery']['outcome']
                     if report['observation']['icon_recovery'].get('error'):
                         report['error'] = report['observation']['icon_recovery']['error']
+                if controller_recovery:
+                    report['outcome'] = report['observation']['controller_recovery']['outcome']
                 if shell_recovery:
                     report['outcome'] = report['observation']['shell_recovery']['outcome']
                     if report['observation']['shell_recovery'].get('error'):
@@ -711,8 +759,10 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
                     if report['observation']['focus_integration'].get('error'):
                         report['error'] = report['observation']['focus_integration']['error']
                 break
-            if shell.poll() is not None and not (recovery_parent and recovery_parent.armed):
+            if not controller_recovery and shell.poll() is not None and not (recovery_parent and recovery_parent.armed):
                 raise RuntimeError('shell exited during bootstrap: ' + str(shell.returncode))
+            if controller_recovery and controller.poll() is not None:
+                raise RuntimeError('controller exited during bootstrap: ' + str(controller.returncode))
             if not worker.is_alive():
                 raise RuntimeError('observer exited without a report')
         else:
@@ -734,7 +784,9 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
             # Each retained child owns a fresh session/group; never signal a user group.
             before = group_members(process.pid)
             if before:
-                os.killpg(process.pid, signal.SIGTERM)
+                if name=='controller' and process.poll() is None:
+                    process.send_signal(signal.SIGTERM)
+                else:os.killpg(process.pid, signal.SIGTERM)
             try:
                 process.wait(timeout=2)
             except subprocess.TimeoutExpired:
@@ -795,7 +847,7 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
             report['enabled_extension_inputs_after'] = inventory(extension_root) if extension_root.exists() else {}
         if clock_age:
             report['clock_artifacts'] = {p.name:{'path':str(p),'bytes':p.stat().st_size,'sha256':sha(p)} for p in workspace.glob('clock-*.json*')}
-        if network_cache or network_live or render_watch:
+        if network_cache or network_live or render_watch or controller_recovery:
             report['network_private_artifacts'] = {p.name:{'path':str(p),'bytes':p.stat().st_size,'sha256':sha(p)} for p in workspace.glob('network-*.private.*')}
         if render_watch and (workspace/'render-watch.jsonl').exists():
             path = workspace/'render-watch.jsonl'
@@ -886,8 +938,13 @@ if __name__ == '__main__':
     parser.add_argument('--network-cache', choices=('live','ignore-clear','wrong-value','owner-loss'))
     parser.add_argument('--clock-age', choices=('live','freeze-age','ignore-expiry','peer-exit','pending-disable','wrong-peer'))
     parser.add_argument('--network-live', choices=('live','freeze-age','ignore-expiry','wrong-value','ignore-clear','lease-loss','revoke','peer-exit','hang'))
+    parser.add_argument('--controller-recovery', choices=('live','no-reattach','revoke'))
     parser.add_argument('--render-watch', choices=('live','render-stall','false-progress','hidden','revoke','watch-exit','watch-hang','shell-freeze'))
     args = parser.parse_args()
+    if args.controller_recovery:
+        if any(value for name,value in vars(args).items() if name not in ('build_dir','controller_recovery','marker_control')) or args.marker_control!='live':
+            parser.error('--controller-recovery owns its persistent native session and composition')
+        args.composition='live'
     if args.render_watch:
         if any([args.marker,args.composition,args.reveal,args.focus_baseline,args.focus_trace,args.icon_input,args.wallpaper,args.switcher,args.icon_recovery,args.shell_recovery,args.focus_integration,args.focus_scenarios,args.wallpaper_policy,args.surface_lease,args.network_cache,args.clock_age,args.network_live]) or args.marker_control != 'live':
             parser.error('--render-watch owns its native watcher, source and live composition')
@@ -960,4 +1017,4 @@ if __name__ == '__main__':
         parser.error('composition uses its own above/below controls')
     if not args.marker and args.marker_control != 'live':
         parser.error('--marker-control requires --marker')
-    sys.exit(run(owned_build(args.build_dir), args.marker or bool(args.composition), args.marker_control, args.composition, args.reveal, args.focus_baseline, args.focus_trace, args.icon_input, args.wallpaper, args.switcher, args.icon_recovery, args.shell_recovery, args.focus_integration, args.focus_scenarios, args.wallpaper_policy, args.surface_lease, args.network_cache, args.clock_age, args.network_live, args.render_watch))
+    sys.exit(run(owned_build(args.build_dir), args.marker or bool(args.composition), args.marker_control, args.composition, args.reveal, args.focus_baseline, args.focus_trace, args.icon_input, args.wallpaper, args.switcher, args.icon_recovery, args.shell_recovery, args.focus_integration, args.focus_scenarios, args.wallpaper_policy, args.surface_lease, args.network_cache, args.clock_age, args.network_live, args.render_watch, args.controller_recovery))
