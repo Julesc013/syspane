@@ -8,6 +8,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [W-05 GNOME icon composition experiment](w-05-gnome-composition.md) — Calibrate separated marker and opaque icon witnesses against a real owned DING desktop.
 - [W-05 independent GNOME focus baseline](w-05-gnome-focus-baseline.md) — Compare native focus and keyboard delivery without the candidate and with the live bridge.
 - [W-05 native Mutter focus-decision trace](w-05-gnome-focus-trace.md) — Bind built-in native focus decisions to the independent window/pixel/keyboard baseline.
+- [W-05 native GNOME icon-input experiment](w-05-gnome-input.md) — Verify real icon selection, menu and folder activation independently of the passive drawing bridge.
 - [W-05 owned GNOME composition investigation](w-05-gnome-investigation.md) — Test a pinned shell bridge on a private display without claiming a supported desktop.
 - [W-05 GNOME native desktop reveal experiment](w-05-gnome-reveal.md) — Observe the composed scene while a real foreground window disappears and returns through Show Desktop.
 - [W-05 owned X11 window-manager recovery](w-05-shell-recovery.md) — Measure native manager replacement and candidate continuity without promoting failed placement.

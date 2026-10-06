@@ -410,6 +410,24 @@ checks that tracing did not alter observed behaviour. A successful recorder does
 not imply successful candidate acceptance. See the [decision evidence](../../spec/delivery/gnome-focus-trace-handoff.md)
 for the observed DING MRU selection and remaining integration boundary.
 
+Native icon input uses the same GNOME scene and the existing pinned X11 laboratory's
+PCManFM through a private MIME association. Complete the normal workspace preflight
+before each invocation; no packages or user settings are installed:
+
+```sh
+python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --icon-input live
+python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --icon-input block-pointer
+python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --icon-input no-selection
+python3 build-support/record_gnome_input.py --build-dir <owned-build-directory> --reports <three-input-reports> --output <new-owned-record>
+python3 tests/desktop/test_gnome_input_record.py <owned-build-directory> <three-input-reports> -v
+```
+
+Live input returns 0; both calibrated negative controls return 1 with an observed
+selection failure. An inconclusive startup/observer error is not a valid negative
+control. The recorder verifies initial composition, native input ownership and
+observations, final live composition and exact control outcomes. See the
+[input checkpoint](../../spec/delivery/gnome-input-handoff.md) for scope and retained failures.
+
 For the historical shared-subset experiment, the existing Visual Studio 2017 XP
 toolset has its own preset. It compiles the same model, protocol/policy, recovery
 and diagnostic projection sources; modern native adapters require separate closure.

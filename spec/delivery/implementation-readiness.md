@@ -155,6 +155,13 @@ MRU selection during restoration. Six traced/untraced cases have equal independe
 observations, and 23 evidence checks pass. The integration resolution is still open;
 preserve the original failed acceptance while closing that next bounded contract.
 
+The [native icon-input checkpoint](gnome-input-handoff.md) independently closes the
+owned GNOME/DING/PCManFM selection/menu/folder sequence. Fresh native clipboard
+responses, PID-bound accessibility trees, external focus/pixels and final live
+composition support the result. Blocking and omitted-click controls fail correctly;
+27 verifier checks pass. This does not qualify another file manager or waive the
+separate focus-restoration, wallpaper and recovery gates.
+
 Use the proposed cold-start exercise to detect missing observable contracts.
 Private implementation differences are permissible. Missing laboratories remain
 blocked qualification. A finite release scope must identify exact profiles,

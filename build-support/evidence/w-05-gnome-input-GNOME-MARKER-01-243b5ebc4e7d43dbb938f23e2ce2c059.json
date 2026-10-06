@@ -1,0 +1,1505 @@
+{
+  "family": "GNOME-MARKER-01",
+  "outcome": "pass",
+  "marker_control": "live",
+  "composition_control": null,
+  "reveal_control": null,
+  "focus_baseline_mode": null,
+  "focus_trace": false,
+  "icon_input_control": null,
+  "executed_at": "2026-10-06T02:14:08.793161+00:00",
+  "source_base": "3f8568c78d7e32f81a0fbea2eea4313c95d5491e",
+  "source_inputs": {
+    "tests/desktop/native_gnome_bootstrap.py": "22ea819f5ed33638f36cff87340312d54f6b434b5d621c5b4a060adf1020bdff",
+    "tests/desktop/native_oracle.py": "975958fe693d18ae517ee9397fd086b75a794115ec9f04214a8460a02f7c5ad3",
+    "tests/desktop/native_x11_host.py": "3a6f568d24dcafdc31d3d5904e9823072d15c8a8b92ed4cc52cdb8b6010af8fb",
+    "tests/desktop/x11_recovery.py": "5b02d3e81715243863c336c2b1ed8fb3fdfb55ba40964a37901d3c1a7e6a08f7",
+    "tests/desktop/oracle.py": "7de6458b9b98be4c7f75f4856a9d6c97d69b38578376cba886f3ee19c12f9b82",
+    "tests/fault/native_diagnostic.py": "aab3f07a8a823412ab78fb49ae31d45ac764c85554c7580d07e01838e8bfcb72",
+    "build-support/prepare_gnome_lab.py": "c465e04fc55332602718176c192296eb1d91cc80348b64768ffe8669356e04b4",
+    "build-support/gnome-lab-packages.json": "0247c9bb465cdbfc2b900f3ff70cfa1d47fa9d657f37da210bd17dedef7ac3d0",
+    "spec/delivery/packages/w-05-gnome-investigation.md": "056ebdef228ee90c6c791c39498d9dffe7052b7952c13876de6de989d32577bb",
+    "source/desktop/gnome/lab-marker/extension.js": "8fcacc7421a9143ed784516b4e889cac6cdd905f93fc7e3f1956ffa3f40d3aff",
+    "source/desktop/gnome/lab-marker/metadata.json": "2b6b7ab220d6ef7588f2bd70e6459d0283e912c3d8768469bf3218f9cb956e06",
+    "spec/delivery/packages/w-05-gnome-composition.md": "64e7ba84f3911e3d3d804197ac9ef5014946fe406c02f7c94f3773e55ce10ec4",
+    "tests/desktop/gnome_composition.py": "81032b53e74b15bef967a58cef6edb1ed1aa5055d877b5190dd64ffd3eb77b8f",
+    "tests/desktop/fixtures/gnome-composition.json": "d29a4e8b76785d953fdf5e7cdaa48f95b1506004f188accf748be123b1649e4c",
+    "tests/desktop/fixtures/gnome-composition-0.2.json": "550f7ff7ec0e6ed0e20c3eb20cbff2050a0217a31cffa5ba94046f932d75388d",
+    "build-support/record_gnome_host.py": "e46db0e837dcc41fce788f4474823ae89d9e480b833e3ab2f741b952dfefdf58",
+    "spec/delivery/packages/w-05-gnome-reveal.md": "fd4a26b426b4a666bba06059bcc5561e267d930dfdc456e2eefbe165ce7a47ee",
+    "tests/desktop/gnome_reveal.py": "5098a0d82a8231072b0164449bf7e8425b635af0e96115063d69950f10afaa14",
+    "tests/desktop/gnome_foreground.py": "edf1a95a8241b1e3606e8dce91163c9427b57e7401247a3577c0bcc7c5510bfb",
+    "tests/desktop/fixtures/gnome-reveal.json": "cf893325e1daa815ba30b0a3c083d638d9d3dcb4b353fe49f4864ec931201b10",
+    "tests/desktop/gnome_focus_baseline.py": "7dfa32edccf9b3a8af3e2024d3bf69163760160885c495e6334d2cba5bc8f929",
+    "spec/delivery/packages/w-05-gnome-focus-baseline.md": "4a415791131a1827e778a0acbb7f03e957527dcfcbbc5a0c2759dc047999a362",
+    "spec/delivery/packages/w-05-gnome-focus-trace.md": "004cd7aad03e2b39c00b3eeb5cb5fed67fc1bea76e562218c11d9f2aa006f27e",
+    "spec/delivery/packages/w-05-gnome-input.md": "dae8cf5ed197bf551ab17b83d349ab6f9f6427040f037aadd1ffb3aa47d782b1",
+    "tests/desktop/gnome_input.py": "a328ac2cf0b72bb0c1539f68a408f27648aa9ed047f5de35f5341cf69fcbae3a",
+    "tests/desktop/x11_input.py": "cb70db7166d69520d7192edc957c84b4c8a00a0a008106effe6612c50587e071",
+    "build-support/x11-input-runtime.json": "e5ced8557ba5d2b44257a1ccfca3a9d9ac2df24a4c8465c2899d197076a1a45a",
+    "build-support/x11-lab-packages.json": "ca98875e8e6d29b56cc08dde7edb5c6b3abf09d51936778171ff0facc810830b"
+  },
+  "workspace": "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/GNOME-MARKER-01-243b5ebc4e7d43dbb938f23e2ce2c059",
+  "lab_identity_sha256": "eceddaf54ee63ca9da0d664f460b8865b67155da15516e3c07bab8cad44aa054",
+  "environment": {
+    "uid": 1000,
+    "os_release_sha256": "01af466feb100306498c86aa6bad1815e33036019aa34d4362c20f374ea5c829",
+    "explicit": {
+      "PATH": "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/bin:/usr/bin:/bin",
+      "LC_ALL": "C.UTF-8",
+      "HOME": "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/GNOME-MARKER-01-243b5ebc4e7d43dbb938f23e2ce2c059/home",
+      "USER": "ir4runner",
+      "DISPLAY": ":49108",
+      "XAUTHORITY": "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/GNOME-MARKER-01-243b5ebc4e7d43dbb938f23e2ce2c059/xauthority",
+      "XDG_CONFIG_HOME": "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/GNOME-MARKER-01-243b5ebc4e7d43dbb938f23e2ce2c059/config",
+      "XDG_DATA_HOME": "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/GNOME-MARKER-01-243b5ebc4e7d43dbb938f23e2ce2c059/data",
+      "XDG_CACHE_HOME": "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/GNOME-MARKER-01-243b5ebc4e7d43dbb938f23e2ce2c059/cache",
+      "XDG_RUNTIME_DIR": "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/GNOME-MARKER-01-243b5ebc4e7d43dbb938f23e2ce2c059/run",
+      "XDG_CONFIG_DIRS": "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/etc/xdg",
+      "XDG_DATA_DIRS": "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/share:/usr/share",
+      "XDG_CURRENT_DESKTOP": "GNOME",
+      "XDG_SESSION_TYPE": "x11",
+      "DBUS_SESSION_BUS_ADDRESS": "unix:abstract=syspane-gnome-03b5d987c24b4b589a75e59d4d0905cc",
+      "DBUS_SYSTEM_BUS_ADDRESS": "unix:abstract=syspane-gnome-system-766f93847c6e44a4ba7d1f0fc7aa1d01",
+      "AT_SPI_BUS_ADDRESS": "unix:abstract=syspane-gnome-03b5d987c24b4b589a75e59d4d0905cc",
+      "NO_AT_BRIDGE": "1",
+      "GIO_USE_VFS": "local",
+      "GSETTINGS_BACKEND": "keyfile",
+      "GSETTINGS_SCHEMA_DIR": "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/GNOME-MARKER-01-243b5ebc4e7d43dbb938f23e2ce2c059/schemas",
+      "GTK_USE_PORTAL": "0",
+      "GDK_BACKEND": "x11",
+      "LIBGL_ALWAYS_SOFTWARE": "1",
+      "LD_LIBRARY_PATH": "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/gnome-shell:/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/mutter-14:/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu",
+      "GI_TYPELIB_PATH": "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/gnome-shell:/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/mutter-14:/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/gjs/girepository-1.0:/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/girepository-1.0",
+      "GNOME_SHELL_DATADIR": "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/share/gnome-shell",
+      "LIBGWEATHER_LOCATIONS_PATH": "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libgweather-4/Locations.bin",
+      "SYSPANE_GNOME_MARKER_CONTROL": "live"
+    }
+  },
+  "system_binaries": {
+    "/usr/bin/Xvfb": "2c7f5a9534410fed5092d782a69ca7ffd9fce80e98b81ffe4944d703dd11d3b1",
+    "/usr/bin/dbus-daemon": "8c479f1fcddfd6693c736ce541da0955f6752834bdeeef4b928e27f5e974c247",
+    "/usr/bin/glib-compile-schemas": "d094c2bd516bfb73648940a4448d6c82849e966a133af771876b1c59ba79790c",
+    "/usr/lib/x86_64-linux-gnu/libXRes.so.1": "c2aefa4bf373492430f48aec108c5ead95e1dc757d52968775e905e23a2ad56c"
+  },
+  "commands": [
+    {
+      "command": [
+        "/usr/bin/glib-compile-schemas",
+        "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/GNOME-MARKER-01-243b5ebc4e7d43dbb938f23e2ce2c059/schemas"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/usr/bin/gsettings",
+        "set",
+        "org.gnome.shell",
+        "enabled-extensions",
+        "['syspane-lab-marker@syspane.invalid']"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/usr/bin/gsettings",
+        "set",
+        "org.gnome.desktop.interface",
+        "enable-animations",
+        "false"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/usr/bin/gsettings",
+        "set",
+        "org.gnome.desktop.background",
+        "picture-uri",
+        "''"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/usr/bin/gsettings",
+        "set",
+        "org.gnome.desktop.background",
+        "picture-uri-dark",
+        "''"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/usr/bin/gsettings",
+        "set",
+        "org.gnome.desktop.background",
+        "picture-options",
+        "'none'"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/usr/bin/gsettings",
+        "set",
+        "org.gnome.desktop.background",
+        "primary-color",
+        "'#304860'"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/usr/bin/gsettings",
+        "set",
+        "org.gnome.desktop.background",
+        "color-shading-type",
+        "'solid'"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/usr/bin/dbus-daemon",
+        "--nofork",
+        "--nopidfile",
+        "--nosyslog",
+        "--config-file=/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/GNOME-MARKER-01-243b5ebc4e7d43dbb938f23e2ce2c059/bus.xml"
+      ],
+      "pid": 1306
+    },
+    {
+      "command": [
+        "/usr/bin/dbus-daemon",
+        "--nofork",
+        "--nopidfile",
+        "--nosyslog",
+        "--config-file=/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/GNOME-MARKER-01-243b5ebc4e7d43dbb938f23e2ce2c059/system-bus.xml"
+      ],
+      "pid": 1307
+    },
+    {
+      "command": [
+        "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/bin/gnome-shell",
+        "--x11",
+        "--mode=user"
+      ],
+      "pid": 1312
+    }
+  ],
+  "cleanup": [
+    {
+      "process": "observer",
+      "pid": 1314,
+      "exit": 0
+    },
+    {
+      "process": "shell",
+      "pid": 1312,
+      "exit": 0,
+      "members_before_stop": [
+        {
+          "pid": 1312,
+          "state": "S"
+        },
+        {
+          "pid": 1354,
+          "state": "S"
+        }
+      ],
+      "members_after_stop": []
+    },
+    {
+      "process": "system-bus",
+      "pid": 1307,
+      "exit": 0,
+      "members_before_stop": [
+        {
+          "pid": 1307,
+          "state": "S"
+        }
+      ],
+      "members_after_stop": []
+    },
+    {
+      "process": "bus",
+      "pid": 1306,
+      "exit": 0,
+      "members_before_stop": [
+        {
+          "pid": 1306,
+          "state": "S"
+        }
+      ],
+      "members_after_stop": []
+    },
+    {
+      "process": "Xvfb",
+      "pid": 1288,
+      "exit": 0
+    }
+  ],
+  "qualification": "Laboratory bootstrap and optional temporal marker only; icon composition, reveal, input, recovery, wallpaper policy, Wayland and product host qualification are not run.",
+  "source_archive": {
+    "path": "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/GNOME-MARKER-01-243b5ebc4e7d43dbb938f23e2ce2c059/source-inputs.zip",
+    "bytes": 110413,
+    "sha256": "9ff3c9bfe269e19da9fefc917faaf82409c3bedc7f4ecb34caa2b63a2090fb77"
+  },
+  "schema_inputs": {
+    "00_org.gnome.shell.gschema.override": {
+      "bytes": 158,
+      "sha256": "067c8a8d0a7eb0642b3969801e3c845436060e8cc6f39f4748c1d9772d410cf3"
+    },
+    "10_gnome-shell.gschema.override": {
+      "bytes": 216,
+      "sha256": "1368663973fd8dd06cd304fbdc4a860dd73457693803a58fda2bf404581681cf"
+    },
+    "10_gsettings-desktop-schemas.gschema.override": {
+      "bytes": 342,
+      "sha256": "7aec3161e0146744b3bfd09b5f78180aa90002703935b5b3e938b2f9ac3c2dbb"
+    },
+    "com.canonical.Unity.Lenses.gschema.xml": {
+      "bytes": 2513,
+      "sha256": "b93dc1fbecca1ed6c04a2e18f6329b7f73ad97ee63584003dcf3bd2ad515ae2d"
+    },
+    "com.ubuntu.login-screen.gschema.xml": {
+      "bytes": 3235,
+      "sha256": "3fd07fd75edc398d5fb60f71561a8b28c8195d746388837c0ac69f0ab90feb05"
+    },
+    "gschemas.compiled": {
+      "bytes": 89032,
+      "sha256": "1a4837e57a71b7269e9a595eed6a24f0ac7263e5f5a988485c6c3d772e0fd33c"
+    },
+    "org.freedesktop.Tracker3.Extract.gschema.xml": {
+      "bytes": 1897,
+      "sha256": "17f0a20f7e95efa2a420e4ab4b4f2e43b2e58ee1bb03d1f19aad7a9c7f59d13c"
+    },
+    "org.freedesktop.Tracker3.FTS.gschema.xml": {
+      "bytes": 1690,
+      "sha256": "07409fc0e77cc58189687b06669a16eecfbf79e8e67a254e6a12f3d452ba205f"
+    },
+    "org.freedesktop.Tracker3.Miner.Files.gschema.xml": {
+      "bytes": 6269,
+      "sha256": "eed7be7957891c621e84538edae6e584774df89775820f3c15720dc05398a959"
+    },
+    "org.freedesktop.TrackerMiners3.enums.xml": {
+      "bytes": 619,
+      "sha256": "1e85d583b0a2e01a573bde2d57b76ebe7e369943e5b2d8ad46b4873eb58e0d97"
+    },
+    "org.gnome.Evolution.DefaultSources.gschema.xml": {
+      "bytes": 1054,
+      "sha256": "3cf064656716c98dce393da025bc121a9f791a72d9325d6102604f070e859a7a"
+    },
+    "org.gnome.Extensions.gschema.xml": {
+      "bytes": 511,
+      "sha256": "69bb0e8732123e242fac81a1fd6a9a1d334034cfaac73b3dd9050cc81953e030"
+    },
+    "org.gnome.GWeather4.enums.xml": {
+      "bytes": 1523,
+      "sha256": "4850d7df2eea3c3c3e4cafb2aa70fd7c7e4eb72f191bbef9ffae048bfb7e3ef9"
+    },
+    "org.gnome.GWeather4.gschema.xml": {
+      "bytes": 2792,
+      "sha256": "9f9b03d82ba3b3fcd40504b183a724671040afb4c657e7f270906b58206f37af"
+    },
+    "org.gnome.desktop.a11y.applications.gschema.xml": {
+      "bytes": 845,
+      "sha256": "6e67c6d900b0e698681454948dc6a11904edc1059af69d83ae8ff1c69abfe4ca"
+    },
+    "org.gnome.desktop.a11y.gschema.xml": {
+      "bytes": 828,
+      "sha256": "f471028deedc07708638c7ea056ed1c6eb6632b987905321085288e836f337a8"
+    },
+    "org.gnome.desktop.a11y.interface.gschema.xml": {
+      "bytes": 676,
+      "sha256": "d5ba583b0b4ffb2fc0aeaa9943d3546de2c9dab61d2311c27aaff83266cdd55e"
+    },
+    "org.gnome.desktop.a11y.keyboard.gschema.xml": {
+      "bytes": 4897,
+      "sha256": "429b25000a947e1b03724546e88b0f3dd6d3bac42addaec36d6cf81062c89cbb"
+    },
+    "org.gnome.desktop.a11y.magnifier.gschema.xml": {
+      "bytes": 9380,
+      "sha256": "0316beb1020bf0e1594c1578d4ee17044d8d4f04a58e788631b054503f07e0a0"
+    },
+    "org.gnome.desktop.a11y.mouse.gschema.xml": {
+      "bytes": 2907,
+      "sha256": "2409903ede1c85e899ff6576bc9711b9016704ee0434c22287d34d7e8c888c36"
+    },
+    "org.gnome.desktop.app-folders.gschema.xml": {
+      "bytes": 1841,
+      "sha256": "f6a6be999af5d5ed29079432182af7708adefc0a2c7beeb7418254487ee4b772"
+    },
+    "org.gnome.desktop.background.gschema.xml": {
+      "bytes": 2612,
+      "sha256": "13f2de7840224b1c165bbdaa199dfe711f87de1d2bc8df9b1d73c64f96999ed1"
+    },
+    "org.gnome.desktop.calendar.gschema.xml": {
+      "bytes": 427,
+      "sha256": "d153ebb1fbf3b72396be332c3402366420819c94248a4b96c4df77bb1a49ec3e"
+    },
+    "org.gnome.desktop.datetime.gschema.xml": {
+      "bytes": 439,
+      "sha256": "db8f91d8966e24570844f4f0e52b6d5e4d0212cb398c71509f5f3cab6b39d292"
+    },
+    "org.gnome.desktop.default-applications.gschema.xml": {
+      "bytes": 3092,
+      "sha256": "ba0b55abfbf2a6d300d3a222e4005fd4e965629ed7787ab8e08f1b7f65c4083d"
+    },
+    "org.gnome.desktop.enums.xml": {
+      "bytes": 6756,
+      "sha256": "b200d78b55838e62eebc2ecf7f03ec2f9b8f5dab66a3ce65452695f4c7fa3456"
+    },
+    "org.gnome.desktop.input-sources.gschema.xml": {
+      "bytes": 2839,
+      "sha256": "1255b1e6ba8fcccf43a87ff6ca2343fd55b99f2d89a936556ff1fa6a9b23069e"
+    },
+    "org.gnome.desktop.interface.gschema.xml": {
+      "bytes": 12608,
+      "sha256": "38a86d1b471124afd08e8eaf78ffec9136679bb8a1c95cbbaf020c082e5d6b0e"
+    },
+    "org.gnome.desktop.lockdown.gschema.xml": {
+      "bytes": 3454,
+      "sha256": "7d977d0932a4062ce5ddfce7cb8548092cc52fc7cb1d3b2825ae4599ca69e07c"
+    },
+    "org.gnome.desktop.media-handling.gschema.xml": {
+      "bytes": 2604,
+      "sha256": "cdaa8e9740fb99852b237cfae8efcd0bb85d2de8b32ea483aad4919e3c87bb10"
+    },
+    "org.gnome.desktop.notifications.gschema.xml": {
+      "bytes": 2838,
+      "sha256": "b7e983b5fa4cedccba7e6494c89de0997274986cdc69377a51589d97ac07acb4"
+    },
+    "org.gnome.desktop.peripherals.gschema.xml": {
+      "bytes": 16019,
+      "sha256": "9d4e25b9552239840063dc4676e3bd2e6d49264f7b3a742a016032459fde166f"
+    },
+    "org.gnome.desktop.privacy.gschema.xml": {
+      "bytes": 4907,
+      "sha256": "304f26f2030d538f0e7ab1a8bae486e2b5e5879bc55c618e8931dc822284abd5"
+    },
+    "org.gnome.desktop.screensaver.gschema.xml": {
+      "bytes": 6191,
+      "sha256": "d6b5f96c421da95378d3424a379fa9d507f98e6daca18eac4dfc8b16fb59bcdf"
+    },
+    "org.gnome.desktop.search-providers.gschema.xml": {
+      "bytes": 1907,
+      "sha256": "9efd368948d891c550bef426430a4c60cda5632a2859fd7da5c4595edd89c81d"
+    },
+    "org.gnome.desktop.session.gschema.xml": {
+      "bytes": 668,
+      "sha256": "462b3b4fe456aecd72a584e533566a0beccfeb9e7b6184f8bc410c4147a3ef7a"
+    },
+    "org.gnome.desktop.sound.gschema.xml": {
+      "bytes": 1055,
+      "sha256": "ff7dcae2b2b3d6109bf4d75511f0ce1538e39b0593bfcd33f35f12653c62be92"
+    },
+    "org.gnome.desktop.thumbnail-cache.gschema.xml": {
+      "bytes": 600,
+      "sha256": "20246fc5002a989287eb7e5e351cfd79245df63d0978b879882ff3d534b8f9fb"
+    },
+    "org.gnome.desktop.thumbnailers.gschema.xml": {
+      "bytes": 866,
+      "sha256": "899bfc15c310051674714addc541824556a1e6d65b32cb715cba18662dc6ea02"
+    },
+    "org.gnome.desktop.wm.keybindings.gschema.xml": {
+      "bytes": 13506,
+      "sha256": "eeaf1359144c03d185a7164031b309e1f571c4680668eb7947fed64f564c16be"
+    },
+    "org.gnome.desktop.wm.preferences.gschema.xml": {
+      "bytes": 12390,
+      "sha256": "f207daeb4dd2a4b1eb5ddb43f8f81186ed041fd468e4b84aec0b9c69c931d235"
+    },
+    "org.gnome.evolution-data-server.addressbook.gschema.xml": {
+      "bytes": 320,
+      "sha256": "231ec9c542473d42f15dcd483891e82b0497a5623e30aa31374dbb0c3c620c83"
+    },
+    "org.gnome.evolution-data-server.calendar.gschema.xml": {
+      "bytes": 5656,
+      "sha256": "de8d14ca92e5f12f05b1248b599a9b810c080caceec12d1e749b2b140ceac76f"
+    },
+    "org.gnome.evolution-data-server.gschema.xml": {
+      "bytes": 6863,
+      "sha256": "d02ae8ee259feb8e559918ee377ed76f0a3c8a8781339ca81ceb5ba65dc4201c"
+    },
+    "org.gnome.evolution.eds-shell.gschema.xml": {
+      "bytes": 684,
+      "sha256": "3cef34c338212bd6552fd07070def888727fabf0f31484c0ec376aa4760b779f"
+    },
+    "org.gnome.evolution.shell.network-config.gschema.xml": {
+      "bytes": 5394,
+      "sha256": "1991fe03daf18bdf5b450fa6bb5b06a48f48a38b712fc8206addcaddd7a33822"
+    },
+    "org.gnome.login-screen.gschema.xml": {
+      "bytes": 3418,
+      "sha256": "dbb48fe82931188dfd6971fc30497d4f5d484fa84e2ab0ca068a91973f1d4412"
+    },
+    "org.gnome.mutter.gschema.xml": {
+      "bytes": 7702,
+      "sha256": "4a56280364ce2d77c26ee503869bd9085be4ea200087c025854ba362092db5db"
+    },
+    "org.gnome.mutter.wayland.gschema.xml": {
+      "bytes": 5987,
+      "sha256": "c78d76344802ca6ca5868bec17d338008ebc9e916a31ed1b9764fb153623a04e"
+    },
+    "org.gnome.mutter.x11.gschema.xml": {
+      "bytes": 1117,
+      "sha256": "2e3f2bc9ff7cfd85a744c81ac6cb0821b7355061ccb06efc5e4446646be97ae7"
+    },
+    "org.gnome.nautilus.gschema.xml": {
+      "bytes": 14038,
+      "sha256": "df96574a39e55e9cc386959d703421f42475e7fcd867b03945c3fbff227f6761"
+    },
+    "org.gnome.nm-applet.eap.gschema.xml": {
+      "bytes": 650,
+      "sha256": "86aa19fbdf31374c52377eee5ce2d2a8d08623a240e23d39fbe6a68b2ecc4d99"
+    },
+    "org.gnome.settings-daemon.enums.xml": {
+      "bytes": 3001,
+      "sha256": "5fa52547883de70a819312004a4ba6d0cc3d4ab7f60d0445411e33eb96779b87"
+    },
+    "org.gnome.settings-daemon.peripherals.gschema.xml": {
+      "bytes": 7421,
+      "sha256": "9cb581a4414e2b5d76f2664d208140581e797a358324744b24d77eac24623cfd"
+    },
+    "org.gnome.settings-daemon.peripherals.wacom.gschema.xml": {
+      "bytes": 4857,
+      "sha256": "280b1f79bfd8f6c2f212bc6a4e8630096e1bf13480c92dd999407fce8ef97aca"
+    },
+    "org.gnome.settings-daemon.plugins.color.gschema.xml": {
+      "bytes": 2536,
+      "sha256": "55d3f13c6482245188ee67f886970777d9b4a83633c1d444a6f09803a6ef575a"
+    },
+    "org.gnome.settings-daemon.plugins.gschema.xml": {
+      "bytes": 966,
+      "sha256": "abaf06275be61c07275efe3d81532cee73174a60abef6cbae5c7885c0905be7f"
+    },
+    "org.gnome.settings-daemon.plugins.housekeeping.gschema.xml": {
+      "bytes": 1718,
+      "sha256": "47314ac998f7e4a295b39fcd62cda24ad33760c55553baf02c7e49e02260066f"
+    },
+    "org.gnome.settings-daemon.plugins.media-keys.gschema.xml": {
+      "bytes": 28870,
+      "sha256": "7e641f9f6334474e61733696fee480cbdea19ec8bdcff1e4cd5ac19cce80d8c9"
+    },
+    "org.gnome.settings-daemon.plugins.power.gschema.xml": {
+      "bytes": 4421,
+      "sha256": "10aad58b95f69b39626ea04b63eb14bc225caaedea64aaa07aa7406b9e3ca05e"
+    },
+    "org.gnome.settings-daemon.plugins.sharing.gschema.xml": {
+      "bytes": 493,
+      "sha256": "25b726557bcfea0a12422518ba7d27c36d14526fa505bbd92d59dc7a007fdfbd"
+    },
+    "org.gnome.settings-daemon.plugins.wwan.gschema.xml": {
+      "bytes": 407,
+      "sha256": "5404faf0eb8678fb009b5d79007a7b1d69b3a8e9b415e89b8fff9a22a972e060"
+    },
+    "org.gnome.settings-daemon.plugins.xsettings.gschema.xml": {
+      "bytes": 3088,
+      "sha256": "6e2dafedc47c2c6f3fcbc82eb88e34208ca73e35ca39ba4e40aa004ebbdaa3f6"
+    },
+    "org.gnome.shell.extensions.ding.gschema.xml": {
+      "bytes": 5157,
+      "sha256": "99fc0f84785c3e56f7de1ad491d9bbd74450bb0c4638380aad21af7a73780849"
+    },
+    "org.gnome.shell.gschema.xml": {
+      "bytes": 16101,
+      "sha256": "37d87513dacbc5cd405b85e44335e703ab30ce54f8140fbe2faa715b66bbf1d4"
+    },
+    "org.gnome.shell.ubuntu.gschema.xml": {
+      "bytes": 709,
+      "sha256": "c7d956507d083df34f8eb0b0fefda1f5f3ee78e4795f96eced4adb34dd7fa1b0"
+    },
+    "org.gnome.system.locale.gschema.xml": {
+      "bytes": 448,
+      "sha256": "5b1e65629a77dcd201f4d86932ad62c0c41ec61fb117f151966d13e69411e2dc"
+    },
+    "org.gnome.system.location.gschema.xml": {
+      "bytes": 1159,
+      "sha256": "3fe90ebe8c851340249a1febe741b777c65b49a823201ead02f341be861060ed"
+    },
+    "org.gnome.system.proxy.gschema.xml": {
+      "bytes": 6363,
+      "sha256": "0f02db915e726017c17c1619ee9fd8f9ee7e6d4698f0fc160a0eb88b29f2bafd"
+    },
+    "org.gtk.Settings.ColorChooser.gschema.xml": {
+      "bytes": 931,
+      "sha256": "e476913ef61e6719ff56c2e4c5b8b276af3020bfb0d007263c2a241835730882"
+    },
+    "org.gtk.Settings.Debug.gschema.xml": {
+      "bytes": 833,
+      "sha256": "de0685fdc2f6e890e32445a79aa938e5566b8dd406dd71d6c6a66c69e3f941e3"
+    },
+    "org.gtk.Settings.EmojiChooser.gschema.xml": {
+      "bytes": 623,
+      "sha256": "22aba28a5a78745d87eeded88f1b86f7ddea24b1b90771151ef494c660a1b591"
+    },
+    "org.gtk.Settings.FileChooser.gschema.xml": {
+      "bytes": 6212,
+      "sha256": "c7089f41d22b3854c05fe4996ff271949b40148a40b9c6f0ae0349792dc94b77"
+    },
+    "org.gtk.gtk4.Settings.ColorChooser.gschema.xml": {
+      "bytes": 941,
+      "sha256": "3c60a020ac823ad9c02394c8579296711a148fb6e15dac1c4dffa3470303af32"
+    },
+    "org.gtk.gtk4.Settings.Debug.gschema.xml": {
+      "bytes": 840,
+      "sha256": "f3093b00e9184a19289f0755345e3414921aafe15433342b36b327ade2048998"
+    },
+    "org.gtk.gtk4.Settings.EmojiChooser.gschema.xml": {
+      "bytes": 678,
+      "sha256": "893b260569e832bb96bfa5ff95893f85d81543069799f22bf66dd419ad50a702"
+    },
+    "org.gtk.gtk4.Settings.FileChooser.gschema.xml": {
+      "bytes": 6537,
+      "sha256": "e7a7482f7937a0588961613df2b14e509b08c1281bdb0b12ab279856d7d8fcea"
+    },
+    "xdg-desktop-portal-gnome.gschema.xml": {
+      "bytes": 391,
+      "sha256": "a75f3fa4230660238ae832f690128e0cd3782214d02fa74363da3fe52e828ee6"
+    }
+  },
+  "observation": {
+    "outcome": "pass",
+    "manager": {
+      "window": 4194305,
+      "self": [
+        4194305
+      ],
+      "pid": [
+        1312
+      ],
+      "pid_origin": "XResQueryClientIds",
+      "resource_base": 4194304,
+      "resource_mask": 2097151,
+      "pid_property": []
+    },
+    "frames": [
+      {
+        "capture_started_ns": 200200993823,
+        "capture_finished_ns": 200205284213,
+        "origin": "display_server_root",
+        "pixels": {
+          "bytes": 1440000,
+          "sha256": "eda525bab6d74d439bd683b578242e87fd3146fc4d631b7c81d9f76dd4d47a2d",
+          "rgb_zlib_base64": "eJztwTEBAAAAwqD1T20LL6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4GPo7AAE="
+        }
+      },
+      {
+        "capture_started_ns": 201209408889,
+        "capture_finished_ns": 201213151274,
+        "origin": "display_server_root",
+        "pixels": {
+          "bytes": 1440000,
+          "sha256": "e50a84651aa25f62e195b83a38ad7b13b8e0b533cc13e2dd63427a074705fdec",
+          "rgb_zlib_base64": "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i+2r0aNHqzSVx7ht2zZJrClTpsgVJkyYcPLkSbnklVdekQvlOhJI3nuXstq1a9eRI0fUYcP+/fuXXNpXPkPzWTEAyAXoK4CMkebrr9asWSORILtp2cUvWbJEVdbQoUPVhbfeequ6mpSY+kCVgESLtFCvXr3UNYWbbrqppqZm0qRJ8tXjx4/LNa+77rpEX9LLefvtt0sj7NmzRz594IEHYtcwbl8NGzZMB558Wltbq1b4hhtuqHPlFyxYIIUjH7z88suxdzdixAhv7EkveU/D6RCSmlKBpK5WXl6ulyAPR/6VSd5///1ynXfffdd77+pOZZWOHTsmn6qjdnqxPkPzXzEAyAXoK4CMkf7fD958883bt29XTfLee+9JKsycOVM+PnXqVOyVVQmsWLFCfaquGUtFRYXPl/Ryli9frpajjjjFfZFV3L6aPXu2XPjjjz9Grdidd95Z58rv379fRYs+n+hl+vTp8tUffvhBXyL3EttX8ih27typHtHnn38+Z84cdeV58+Z9+umn0l368X788cfee1+0aJH6dPPmzfLpc889512sz9D8VwwAcgH6CiBjmHp/BqmsEydOyP566dKlUgv+iaJfia164PTp03MupayszOdLsctRJ8WC95VaeGxfBVl5ddxJ/n3ooYdirzNjxgz50smTJ/Ul8nFsX5VEXgAmnalqTbVibW2tOmf3yCOPTJw48cknn4ztqyVLlqhPt2zZIp9u2LChJKav4g7Nf8UAIBegrwAyRjp9NWrUqOnTp6uXT5eWln722We/R14vJJerZlCvKSqJnIBTH0R1kT4ZN2HCBL3YgQMH+n8pdjnJ9tXgwYPVwqPOD44ZM6bOlX/44YdvueWW3yLEvuJLn4YbN26cfKpeZxXbV5WVlSoUZW5/+9vf5MLt27cvXLjwd8850GeffTa2rzZt2iQfV1VVqZq9++67vYv1GZr/igFALkBfAWSMdPpKduiyg/71118PHDig/pjuzJkzI0eOlC/t2LFDfbpz507Z++/fv1/dJPadBF5++WV1yGXz5s1btmyRRb3wwgt1finZvpJo2XWBf/zjH3L5iy+++PuF17erM2X6lU5BVv6RRx6Rj+VRq1eYe/noo4/UMS754OTJkyp4ovpKkEDaunWrrMbhw4dVtt10002/R170/txzz23YsEH9fV9UXwlffPGFmvapU6f69esX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"
+        }
+      },
+      {
+        "capture_started_ns": 205219273112,
+        "capture_finished_ns": 205222036257,
+        "origin": "display_server_root",
+        "pixels": {
+          "bytes": 1440000,
+          "sha256": "d1a67585344dfef1d80754f5e43076e15fb652f6b8926c96d3fa01a626ae8783",
+          "rgb_zlib_base64": "eJzt3ft33HWB//G/hUshSdOUNk1b2iLlUqCA0JYKBQGhLJddQFZRkcNNysUbK1UQFL/n7K4XtCKgUKVcxZWD/LAuy3rWgwsu+v26y0VdXD38/n2b2X075jL5ZOb9nve8M4/HeR4OTdIkfSeZeXVmko6MAAAAAAAAAPyPI4444rjjjtuxY8euXbvOP//8CwsJbzq8A+HdCO9MeJdKnwoAQDfWrFkT9kypQdXZzp07p6amSp8QAEBTo6OjW7duLb2hFhbeyfCulj4tAIAFjI+Pn3HGGaWnU1PhXQ3vcOkzAwCY1+joaEXjqmXnzp1jY2OlTw4AYG5V3C04W3i3S58cAFC3559//rnnnkv+atesWVN6KHUvvPPJDwQAWPLWrVvX+qa5d6aNTC+i8MRUr7+6ewbb7dixI9U5AABD4v3vf/+bb7756quvjrTtq5/97GfhiVdeeWXvr3/VqlWlJ1Kv/Fws6Kf169ffe++9P/3pT3/961+//vrrL7zwwnXXXdfwW3pvu+223bt3z/fcrVu3fuMb3wgXd2+//fbvfve7k046qfNr27NnT3jJP/zhD63bscNFQXjKiy+++Jvf/OaNN94I79hVV10Vnj45OfnEtKuvvnq+39tu79694en/9m//1uRPBNQojKvwZR421b59+0ba9lX4Zfif8KzeJ9Zxxx3XZMN88IMffO65537729++05vwGp5//vlrrrkm4b469thjE5w10MBRRx0V9k+48Pn973//yiuv/OpXv/rDtIceemjB37tr167wkvfdd998zw2DLbzAv/7rvx6YFi6d5ntVYRQ9+uijf/hfrY0ULgrCrArD7KWXXgp/CW0967zzzguDsPX/n/3sZ+f7vdFZZ50VXoN9BUvYxo0bw6VN2CR33nln6++GcV+FX4YLivD/b7311oYNG3p5K01+lGgYV633JJXwt8vwOme/oYsvvjj89fb+aR//+MfDL5vsK3cRQt888MADYXv8/Oc/P+WUU1pP+dCHPtQaKpdccknrKRMTE3v37n355Zf/67/+67XXXgvTa/ny5Zdeeum///u/x1Xz4x//eMZrDrMqbLbwl8oF34fw2v7lX/4lvJL9+/fP2Ejbt2+P/x/+KheetWfPnvZ91eH3jkzf0hVmVWub2VewVH3uc58LU+T73/9+fErcVyPTE+vZZ58Nv2z9jaxr4e+MCw6Y5557LuG4agmvc/YbCuPqm23CL5vsq7PPPrungwaaGR8fb93EdPPNN7c//Qc/+EF4Yviabf3yW9/6Vvhl+GvUD3/4w7BSDhw4EJ547bXX/vSnPw1Pf+mll772ta/dcccd7a/h9NNPD8964YUXzjvvvK9+9atf/OIX3/Oe93R4T6666qrrr79+y5Ytc94GtWLFivDXrl/84hfhvT3hhBPCpeWaaStXruz8e/ft2xd+y0c/+lH7CpawcCkUdkjYD/Epz02Lv7zooovCC7z44ou9vJUm/7Zg73cLzhb+Yjv7DYVL3fZ9FX7ZZF+FP0IvJwA0dPTRR7c2yYy/1IQ5FJ74ox/9KPz/Mccc8/vf/z788txzz209d9WqVa3/+frXvz7f/YPXXHNNeFYYYK375oL//u//Dhdxnd+fk046afZGCpecrSf+4z/+46mnntr897Yej3HTTTeFSxX7CpawsEDCDunw8wfWrl37zvR9bb28lVL7KrzO2W/o/vvvb99X4a+xTfZV+AtvLycANBT31TnnnNP+9DCZ4r4Koyj8/xtvvDH7t3fYV7fddlvrJq/du3eHPRb+bhV+2X7r/Zzm3Ff33HPPo48++s///M/h6a+++ur27dub/N7Nmze//vrrzz777OjoaHgf7CtYwlr7auPGjfO9QHhW7/sq/D10wQHz/PPPJ99XP/zhD2e/odtvv72L+wd37drVywkADS1fvrx1/+Att9zS/vTw5RzvH7z00ku72FfXX399XGjB+973vvDLl19+ufP7M+e+ih5++OHwrAMHDqxbt+7X0z796U/P93tbL/zCCy/s37+/9cCt8PLh/ztcAgOVevHFF9/58/sHZwjPeqfn+webPL79mmuuCSsu4bh666235nx8+yWXXBI21dem3XrrrQ0f3z7f30+B5MKICtvjtddeO+2001pPad21Fx/ffvLJJ8dv3Gu9QPx3Flq3Sn3lK1+Z/Wq3bdvWmjStbwf+5Cc/GX75zDPPdH5nZt8GNTk52XrW6Ojok08+2XolM75/cM7f23oI2WzHH398D6cFDKLWdwg+/fTT873A97///fACe/fu7eWtLOrnM7RuUutFeA3hr7pzjquu+fkM0DebNm1q/XyGP0x/F+Hrr7/e+v8HH3wwvkzr5qzf/va3P/rRj15++eWf/OQnrae37gR8++23/+Ef/iHsmRmv+cCBA+G5//Ef//HCCy+0HsF12WWXdX5nZmykm2++ObzRH//4x+Gy8ZVXXmk964orrgjP/fG0G264Yb7f2879g7C0bdiw4a233npnnu8QvOuuu8Kz3nzzzSOPPLKXt3LEEUcknDpF+Pmi0E+zf77o9ddf3/7zRcNiue+++372s5/97ne/++Uvf/mZz3ym9fRVq1Y98sgj//mf//nGG2/s379/xqsNX8hf+MIXwmYLrzZsoSY/qGHGRtq5c+cTTzwR3mJ4u+GtPPPMMxdffHHD39vOvoIl78orr/zD9M8XffbZZ8OX/JHTwv+Ev/q9M/3zRS+//PLe30qTuwgHlh9+BQAsVphYb7755uw72sITk4yrkekfqXfBBReUHkpd8u87AwBd2LBhw969e//pn/7pN9PC/4Rf9vhj22fYunVr6aHUjfi4WQCAQTM6OlrdvYQ7d+4cGxsrfXIAAPMaHx8/44wzSo+mpsIaDO9w6TMDAFjA6Ojo4N9ReMEFF4R3sv2blQAABtzq1au3bdtWekbNbceOHfHnBwIA1OWII4449thjw57ZtWtXk3+jMJPwpsM7sH379vDO+DlXAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACwlExMTU1NTmzZt2rx58/HHH38CMATCF3v4kg9f+OHLP1wIlL4cAlgixsbG1q5de8wxx5S+mAfKCxcFYWiNjo6WvmQCqFi4IHVTFTBDuFgIFw6lL58A6rNixQq3WQEdhIuIcEFR+rIKoBqrVq3asmVL6QtvYNAdf/zx4eKi9CUWQAUmJydLX2YDNQkXGqUvtwAGWviraOmLaqA+bsUCmM/4+LhHswNd2LJli8diAczJA9qBrm3evLn0ZRjAwJmamip98QzUzQ9tAGg3OjrqnkGgR+FiZGxsrPTlGcCgWLt2bekLZmApcBMWQLSoR15ddNFF99577/79+5955pnw33vuuSc8Jd/FNVCRcGFS+vIMYCBMTEw0vOQ86aST/uZv/uYHcwlPD8/NerkNVME3EgKMLObOwda4euqpp/bs2XPmmWdu3br1rLPOCv8fntKaWFkvtIfB3/3d391+++2l3wvoibsIAYJNmzY1ucy86KKLWuPqggsumPGsCy+8sDWxFntH4UMPPfTMXBb1Spq79NJL77777kyvPAn7iiUgXKSUvlQDKK/hg6/uueeesKD27Nkz53NvueWW8NzwMou6HD7zzDPPnhZmz1e+8pWz/9eiXklzd9xxh30FuXkIFkDQ8Ccz7N+/PyyosIjmfO6uXbvCc8PLdHeBHJbP3/7t38Zf3n///Z/61KfiL7dv3/7000//1V/9VZgfH/nIR+68884DBw488sgj4XedcsoprZc58cQTP/axj33nO9958sknw1SbfSPb3r17WzeOhVfVej/Db7n55pu//e1vP/XUUw888MCHPvShOd+3q666at++feHVht/1pS996d3vfneHN3fOOefcd9994X174oknwtPPO++81tPDex5ez4033vjYY4+F/2+9hptuuumhhx4Kr+Hhhx++/PLLWy/2iU98IvwBH5t27733btu2rbsjhVLCRUrpSzWA8rZs2dLkMjMsk7Cgtm7dOudzTz755PDcru/am7GvPvrRj4YxEx8wf+211373u98NvwzzI+yW66+/Psy5yy67LMyY+KCvPXv2hK2ye/funTt33nbbbWGchFU24618/vOfb7/9Koyr8GqvuOKKs846K4yrxx9/fPbECq8t/KHe//73h9d27rnnfvjDH+785s4444zwSsIr3LFjx1133fXNb36z9fLhPQ+j8Qtf+MKFF17YuoHu1ltvDW/9Ax/4QPhlmI7h9bReLLwbYYaFHRs2W3gTYWt1d6RQSrhIKX2pBlBew8vM1u1XYTnM+dy0t1+ddtppTz75ZFhQrV9++ctfbu2oMD/aXyysnaeeeipMvjC9vve974UV1Hr6iSeeGKZLGGkz3kr7vgovc+DAgfaXuf3227/1rW/N+C3nnHNO2FfxPWlp+Ob+4i/+Ivze1iIN7/kDDzwQXrL1rPDE8NbDbpzxW/5uWvxlGFr79u2bfVww4EpfqgGU1/D2q86Pv7r11lvDc++9997uLo1n7KsTprfQXXfdFf5nx44dYaVceOGFJ0zPj/b7Dd/73veGZ5199tlnnnlm+J+web77v55++unbbrttxltp31etG6bi/XfB5ZdfHp5y8sknz/hdN9100xNPPBHevSuuuKI1kDq8ufAuhTcRptS3v/3tRx99NLzYqaeeOvs9b72G888/f8bbCi/26U9/Ov4yDMiHH354MQcJ5bn9CmCk8eOv4vcPtqZOu927d4eB8eyzz3b9g0Zn76vLLrssrJpTTjnluuuue+ihh1pPnDE/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"
+        }
+      }
+    ],
+    "marker": {
+      "trace": {
+        "version": "0.1.0",
+        "start_us": 0,
+        "end_us": 2400000,
+        "stimuli": [
+          {
+            "at_us": 0,
+            "generation": 1
+          },
+          {
+            "at_us": 801779,
+            "generation": 2
+          },
+          {
+            "at_us": 1600547,
+            "generation": 3
+          }
+        ],
+        "frames": [
+          {
+            "start_us": 4,
+            "end_us": 239,
+            "origin": "display_server_root",
+            "rgb_zlib_base64": "eJztm7ENwzAQA1fwCBkto2WUjJIRMkIKF2r8gChTIhzfQSWhpy/VC8j2/GxH5/vaDs9hmDx58uTJkydPnjx58pfIV+dR8Clw5dV7ZvdxzVV/l9n9q/xsD668eg/+vf3Ve/Dv7a/eg39vf/Ue/Hv7q/fg39tfvQf/3v7qPZX/6szu78rPxtVH3ddcffC/g/8x8I//M33wv4P/MfCP/zN98L+jvv9Xc1X8Rtbi+i51/8X/Dv6z4D8L/rPgPwv+s+A/y2z/6v4FY7j2XxgD/1nwnwX/WfCfBf9Z8J9Fff9P9/031P033fffwH8W/GfBfxb8Z8F/Fvxn4f0/C/tvFvxnwX8W/GfBfxb8Z8F/Ft7/s7D/ZsF/FvxnwX8W/GfBfxb8Z7nK+/9V/t+h9rnK/ot//J/pWeXxv6Znlcf/mp5VHv9relZ5/K/pWeXxv6ZnlXe9/6tzXXkXrrnVPRWu/df1XS4PKq65fdYb+PfO7bPewL93bp/1Bv69c/usN/DvndtnvYF/79w+6w38e+f2WW+o7/+zv0vtr5KaW6Huv/j3gn/84x//s+dW4B//+Mf/7LkVlf/X43141H2N/Fge//i/cx7/+L9zHv/4v3Me/9n8D6bOEuA=",
+            "rgb_sha256": "933eb08154ff50fc4662276f9002a9e7e60098a8fca93eee077d939f0c852546"
+          },
+          {
+            "start_us": 50793,
+            "end_us": 51083,
+            "origin": "display_server_root",
+            "rgb_zlib_base64": "eJztm7ENwzAQA1fwCBkto2WUjJIRMkIKF2r8gChTIhzfQSWhpy/VC8j2/GxH5/vaDs9hmDx58uTJkydPnjx58pfIV+dR8Clw5dV7ZvdxzVV/l9n9q/xsD668eg/+vf3Ve/Dv7a/eg39vf/Ue/Hv7q/fg39tfvQf/3v7qPZX/6szu78rPxtVH3ddcffC/g/8x8I//M33wv4P/MfCP/zN98L+jvv9Xc1X8Rtbi+i51/8X/Dv6z4D8L/rPgPwv+s+A/y2z/6v4FY7j2XxgD/1nwnwX/WfCfBf9Z8J9Fff9P9/031P033fffwH8W/GfBfxb8Z8F/Fvxn4f0/C/tvFvxnwX8W/GfBfxb8Z8F/Ft7/s7D/ZsF/FvxnwX8W/GfBfxb8Z7nK+/9V/t+h9rnK/ot//J/pWeXxv6Znlcf/mp5VHv9relZ5/K/pWeXxv6ZnlXe9/6tzXXkXrrnVPRWu/df1XS4PKq65fdYb+PfO7bPewL93bp/1Bv69c/usN/DvndtnvYF/79w+6w38e+f2WW+o7/+zv0vtr5KaW6Huv/j3gn/84x//s+dW4B//+Mf/7LkVlf/X43141H2N/Fge//i/cx7/+L9zHv/4v3Me/9n8D6bOEuA=",
+            "rgb_sha256": "933eb08154ff50fc4662276f9002a9e7e60098a8fca93eee077d939f0c852546"
+          },
+          {
+            "start_us": 101328,
+            "end_us": 101647,
+            "origin": "display_server_root",
+            "rgb_zlib_base64": "eJztm7ENwzAQA1fwCBkto2WUjJIRMkIKF2r8gChTIhzfQSWhpy/VC8j2/GxH5/vaDs9hmDx58uTJkydPnjx58pfIV+dR8Clw5dV7ZvdxzVV/l9n9q/xsD668eg/+vf3Ve/Dv7a/eg39vf/Ue/Hv7q/fg39tfvQf/3v7qPZX/6szu78rPxtVH3ddcffC/g/8x8I//M33wv4P/MfCP/zN98L+jvv9Xc1X8Rtbi+i51/8X/Dv6z4D8L/rPgPwv+s+A/y2z/6v4FY7j2XxgD/1nwnwX/WfCfBf9Z8J9Fff9P9/031P033fffwH8W/GfBfxb8Z8F/Fvxn4f0/C/tvFvxnwX8W/GfBfxb8Z8F/Ft7/s7D/ZsF/FvxnwX8W/GfBfxb8Z7nK+/9V/t+h9rnK/ot//J/pWeXxv6Znlcf/mp5VHv9relZ5/K/pWeXxv6ZnlXe9/6tzXXkXrrnVPRWu/df1XS4PKq65fdYb+PfO7bPewL93bp/1Bv69c/usN/DvndtnvYF/79w+6w38e+f2WW+o7/+zv0vtr5KaW6Huv/j3gn/84x//s+dW4B//+Mf/7LkVlf/X43141H2N/Fge//i/cx7/+L9zHv/4v3Me/9n8D6bOEuA=",
+            "rgb_sha256": "933eb08154ff50fc4662276f9002a9e7e60098a8fca93eee077d939f0c852546"
+          },
+          {
+            "start_us": 150287,
+            "end_us": 150701,
+            "origin": "display_server_root",
+            "rgb_zlib_base64": "eJztm7ENwzAQA1fwCBkto2WUjJIRMkIKF2r8gChTIhzfQSWhpy/VC8j2/GxH5/vaDs9hmDx58uTJkydPnjx58pfIV+dR8Clw5dV7ZvdxzVV/l9n9q/xsD668eg/+vf3Ve/Dv7a/eg39vf/Ue/Hv7q/fg39tfvQf/3v7qPZX/6szu78rPxtVH3ddcffC/g/8x8I//M33wv4P/MfCP/zN98L+jvv9Xc1X8Rtbi+i51/8X/Dv6z4D8L/rPgPwv+s+A/y2z/6v4FY7j2XxgD/1nwnwX/WfCfBf9Z8J9Fff9P9/031P033fffwH8W/GfBfxb8Z8F/Fvxn4f0/C/tvFvxnwX8W/GfBfxb8Z8F/Ft7/s7D/ZsF/FvxnwX8W/GfBfxb8Z7nK+/9V/t+h9rnK/ot//J/pWeXxv6Znlcf/mp5VHv9relZ5/K/pWeXxv6ZnlXe9/6tzXXkXrrnVPRWu/df1XS4PKq65fdYb+PfO7bPewL93bp/1Bv69c/usN/DvndtnvYF/79w+6w38e+f2WW+o7/+zv0vtr5KaW6Huv/j3gn/84x//s+dW4B//+Mf/7LkVlf/X43141H2N/Fge//i/cx7/+L9zHv/4v3Me/9n8D6bOEuA=",
+            "rgb_sha256": "933eb08154ff50fc4662276f9002a9e7e60098a8fca93eee077d939f0c852546"
+          },
+          {
+            "start_us": 201438,
+            "end_us": 201775,
+            "origin": "display_server_root",
+            "rgb_zlib_base64": "eJztm7ENwzAQA1fwCBkto2WUjJIRMkIKF2r8gChTIhzfQSWhpy/VC8j2/GxH5/vaDs9hmDx58uTJkydPnjx58pfIV+dR8Clw5dV7ZvdxzVV/l9n9q/xsD668eg/+vf3Ve/Dv7a/eg39vf/Ue/Hv7q/fg39tfvQf/3v7qPZX/6szu78rPxtVH3ddcffC/g/8x8I//M33wv4P/MfCP/zN98L+jvv9Xc1X8Rtbi+i51/8X/Dv6z4D8L/rPgPwv+s+A/y2z/6v4FY7j2XxgD/1nwnwX/WfCfBf9Z8J9Fff9P9/031P033fffwH8W/GfBfxb8Z8F/Fvxn4f0/C/tvFvxnwX8W/GfBfxb8Z8F/Ft7/s7D/ZsF/FvxnwX8W/GfBfxb8Z7nK+/9V/t+h9rnK/ot//J/pWeXxv6Znlcf/mp5VHv9relZ5/K/pWeXxv6ZnlXe9/6tzXXkXrrnVPRWu/df1XS4PKq65fdYb+PfO7bPewL93bp/1Bv69c/usN/DvndtnvYF/79w+6w38e+f2WW+o7/+zv0vtr5KaW6Huv/j3gn/84x//s+dW4B//+Mf/7LkVlf/X43141H2N/Fge//i/cx7/+L9zHv/4v3Me/9n8D6bOEuA=",
+            "rgb_sha256": "933eb08154ff50fc4662276f9002a9e7e60098a8fca93eee077d939f0c852546"
+          },
+          {
+            "start_us": 250105,
+            "end_us": 250368,
+            "origin": "display_server_root",
+            "rgb_zlib_base64": "eJztm7ENwzAQA1fwCBkto2WUjJIRMkIKF2r8gChTIhzfQSWhpy/VC8j2/GxH5/vaDs9hmDx58uTJkydPnjx58pfIV+dR8Clw5dV7ZvdxzVV/l9n9q/xsD668eg/+vf3Ve/Dv7a/eg39vf/Ue/Hv7q/fg39tfvQf/3v7qPZX/6szu78rPxtVH3ddcffC/g/8x8I//M33wv4P/MfCP/zN98L+jvv9Xc1X8Rtbi+i51/8X/Dv6z4D8L/rPgPwv+s+A/y2z/6v4FY7j2XxgD/1nwnwX/WfCfBf9Z8J9Fff9P9/031P033fffwH8W/GfBfxb8Z8F/Fvxn4f0/C/tvFvxnwX8W/GfBfxb8Z8F/Ft7/s7D/ZsF/FvxnwX8W/GfBfxb8Z7nK+/9V/t+h9rnK/ot//J/pWeXxv6Znlcf/mp5VHv9relZ5/K/pWeXxv6ZnlXe9/6tzXXkXrrnVPRWu/df1XS4PKq65fdYb+PfO7bPewL93bp/1Bv69c/usN/DvndtnvYF/79w+6w38e+f2WW+o7/+zv0vtr5KaW6Huv/j3gn/84x//s+dW4B//+Mf/7LkVlf/X43141H2N/Fge//i/cx7/+L9zHv/4v3Me/9n8D6bOEuA=",
+            "rgb_sha256": "933eb08154ff50fc4662276f9002a9e7e60098a8fca93eee077d939f0c852546"
+          },
+          {
+            "start_us": 300893,
+            "end_us": 301269,
+            "origin": "display_server_root",
+            "rgb_zlib_base64": "eJztm7ENwzAQA1fwCBkto2WUjJIRMkIKF2r8gChTIhzfQSWhpy/VC8j2/GxH5/vaDs9hmDx58uTJkydPnjx58pfIV+dR8Clw5dV7ZvdxzVV/l9n9q/xsD668eg/+vf3Ve/Dv7a/eg39vf/Ue/Hv7q/fg39tfvQf/3v7qPZX/6szu78rPxtVH3ddcffC/g/8x8I//M33wv4P/MfCP/zN98L+jvv9Xc1X8Rtbi+i51/8X/Dv6z4D8L/rPgPwv+s+A/y2z/6v4FY7j2XxgD/1nwnwX/WfCfBf9Z8J9Fff9P9/031P033fffwH8W/GfBfxb8Z8F/Fvxn4f0/C/tvFvxnwX8W/GfBfxb8Z8F/Ft7/s7D/ZsF/FvxnwX8W/GfBfxb8Z7nK+/9V/t+h9rnK/ot//J/pWeXxv6Znlcf/mp5VHv9relZ5/K/pWeXxv6ZnlXe9/6tzXXkXrrnVPRWu/df1XS4PKq65fdYb+PfO7bPewL93bp/1Bv69c/usN/DvndtnvYF/79w+6w38e+f2WW+o7/+zv0vtr5KaW6Huv/j3gn/84x//s+dW4B//+Mf/7LkVlf/X43141H2N/Fge//i/cx7/+L9zHv/4v3Me/9n8D6bOEuA=",
+            "rgb_sha256": "933eb08154ff50fc4662276f9002a9e7e60098a8fca93eee077d939f0c852546"
+          },
+          {
+            "start_us": 351947,
+            "end_us": 352340,
+            "origin": "display_server_root",
+            "rgb_zlib_base64": "eJztm7ENwzAQA1fwCBkto2WUjJIRMkIKF2r8gChTIhzfQSWhpy/VC8j2/GxH5/vaDs9hmDx58uTJkydPnjx58pfIV+dR8Clw5dV7ZvdxzVV/l9n9q/xsD668eg/+vf3Ve/Dv7a/eg39vf/Ue/Hv7q/fg39tfvQf/3v7qPZX/6szu78rPxtVH3ddcffC/g/8x8I//M33wv4P/MfCP/zN98L+jvv9Xc1X8Rtbi+i51/8X/Dv6z4D8L/rPgPwv+s+A/y2z/6v4FY7j2XxgD/1nwnwX/WfCfBf9Z8J9Fff9P9/031P033fffwH8W/GfBfxb8Z8F/Fvxn4f0/C/tvFvxnwX8W/GfBfxb8Z8F/Ft7/s7D/ZsF/FvxnwX8W/GfBfxb8Z7nK+/9V/t+h9rnK/ot//J/pWeXxv6Znlcf/mp5VHv9relZ5/K/pWeXxv6ZnlXe9/6tzXXkXrrnVPRWu/df1XS4PKq65fdYb+PfO7bPewL93bp/1Bv69c/usN/DvndtnvYF/79w+6w38e+f2WW+o7/+zv0vtr5KaW6Huv/j3gn/84x//s+dW4B//+Mf/7LkVlf/X43141H2N/Fge//i/cx7/+L9zHv/4v3Me/9n8D6bOEuA=",
+            "rgb_sha256": "933eb08154ff50fc4662276f9002a9e7e60098a8fca93eee077d939f0c852546"
+          },
+          {
+            "start_us": 401192,
+            "end_us": 401536,
+            "origin": "display_server_root",
+            "rgb_zlib_base64": "eJztm7ENwzAQA1fwCBkto2WUjJIRMkIKF2r8gChTIhzfQSWhpy/VC8j2/GxH5/vaDs9hmDx58uTJkydPnjx58pfIV+dR8Clw5dV7ZvdxzVV/l9n9q/xsD668eg/+vf3Ve/Dv7a/eg39vf/Ue/Hv7q/fg39tfvQf/3v7qPZX/6szu78rPxtVH3ddcffC/g/8x8I//M33wv4P/MfCP/zN98L+jvv9Xc1X8Rtbi+i51/8X/Dv6z4D8L/rPgPwv+s+A/y2z/6v4FY7j2XxgD/1nwnwX/WfCfBf9Z8J9Fff9P9/031P033fffwH8W/GfBfxb8Z8F/Fvxn4f0/C/tvFvxnwX8W/GfBfxb8Z8F/Ft7/s7D/ZsF/FvxnwX8W/GfBfxb8Z7nK+/9V/t+h9rnK/ot//J/pWeXxv6Znlcf/mp5VHv9relZ5/K/pWeXxv6ZnlXe9/6tzXXkXrrnVPRWu/df1XS4PKq65fdYb+PfO7bPewL93bp/1Bv69c/usN/DvndtnvYF/79w+6w38e+f2WW+o7/+zv0vtr5KaW6Huv/j3gn/84x//s+dW4B//+Mf/7LkVlf/X43141H2N/Fge//i/cx7/+L9zHv/4v3Me/9n8D6bOEuA=",
+            "rgb_sha256": "933eb08154ff50fc4662276f9002a9e7e60098a8fca93eee077d939f0c852546"
+          },
+          {
+            "start_us": 450114,
+            "end_us": 450388,
+            "origin": "display_server_root",
+            "rgb_zlib_base64": "eJztm7ENwzAQA1fwCBkto2WUjJIRMkIKF2r8gChTIhzfQSWhpy/VC8j2/GxH5/vaDs9hmDx58uTJkydPnjx58pfIV+dR8Clw5dV7ZvdxzVV/l9n9q/xsD668eg/+vf3Ve/Dv7a/eg39vf/Ue/Hv7q/fg39tfvQf/3v7qPZX/6szu78rPxtVH3ddcffC/g/8x8I//M33wv4P/MfCP/zN98L+jvv9Xc1X8Rtbi+i51/8X/Dv6z4D8L/rPgPwv+s+A/y2z/6v4FY7j2XxgD/1nwnwX/WfCfBf9Z8J9Fff9P9/031P033fffwH8W/GfBfxb8Z8F/Fvxn4f0/C/tvFvxnwX8W/GfBfxb8Z8F/Ft7/s7D/ZsF/FvxnwX8W/GfBfxb8Z7nK+/9V/t+h9rnK/ot//J/pWeXxv6Znlcf/mp5VHv9relZ5/K/pWeXxv6ZnlXe9/6tzXXkXrrnVPRWu/df1XS4PKq65fdYb+PfO7bPewL93bp/1Bv69c/usN/DvndtnvYF/79w+6w38e+f2WW+o7/+zv0vtr5KaW6Huv/j3gn/84x//s+dW4B//+Mf/7LkVlf/X43141H2N/Fge//i/cx7/+L9zHv/4v3Me/9n8D6bOEuA=",
+            "rgb_sha256": "933eb08154ff50fc4662276f9002a9e7e60098a8fca93eee077d939f0c852546"
+          },
+          {
+            "start_us": 500860,
+            "end_us": 501154,
+            "origin": "display_server_root",
+            "rgb_zlib_base64": "eJztm7ENwzAQA1fwCBkto2WUjJIRMkIKF2r8gChTIhzfQSWhpy/VC8j2/GxH5/vaDs9hmDx58uTJkydPnjx58pfIV+dR8Clw5dV7ZvdxzVV/l9n9q/xsD668eg/+vf3Ve/Dv7a/eg39vf/Ue/Hv7q/fg39tfvQf/3v7qPZX/6szu78rPxtVH3ddcffC/g/8x8I//M33wv4P/MfCP/zN98L+jvv9Xc1X8Rtbi+i51/8X/Dv6z4D8L/rPgPwv+s+A/y2z/6v4FY7j2XxgD/1nwnwX/WfCfBf9Z8J9Fff9P9/031P033fffwH8W/GfBfxb8Z8F/Fvxn4f0/C/tvFvxnwX8W/GfBfxb8Z8F/Ft7/s7D/ZsF/FvxnwX8W/GfBfxb8Z7nK+/9V/t+h9rnK/ot//J/pWeXxv6Znlcf/mp5VHv9relZ5/K/pWeXxv6ZnlXe9/6tzXXkXrrnVPRWu/df1XS4PKq65fdYb+PfO7bPewL93bp/1Bv69c/usN/DvndtnvYF/79w+6w38e+f2WW+o7/+zv0vtr5KaW6Huv/j3gn/84x//s+dW4B//+Mf/7LkVlf/X43141H2N/Fge//i/cx7/+L9zHv/4v3Me/9n8D6bOEuA=",
+            "rgb_sha256": "933eb08154ff50fc4662276f9002a9e7e60098a8fca93eee077d939f0c852546"
+          },
+          {
+            "start_us": 552028,
+            "end_us": 552312,
+            "origin": "display_server_root",
+            "rgb_zlib_base64": "eJztm7ENwzAQA1fwCBkto2WUjJIRMkIKF2r8gChTIhzfQSWhpy/VC8j2/GxH5/vaDs9hmDx58uTJkydPnjx58pfIV+dR8Clw5dV7ZvdxzVV/l9n9q/xsD668eg/+vf3Ve/Dv7a/eg39vf/Ue/Hv7q/fg39tfvQf/3v7qPZX/6szu78rPxtVH3ddcffC/g/8x8I//M33wv4P/MfCP/zN98L+jvv9Xc1X8Rtbi+i51/8X/Dv6z4D8L/rPgPwv+s+A/y2z/6v4FY7j2XxgD/1nwnwX/WfCfBf9Z8J9Fff9P9/031P033fffwH8W/GfBfxb8Z8F/Fvxn4f0/C/tvFvxnwX8W/GfBfxb8Z8F/Ft7/s7D/ZsF/FvxnwX8W/GfBfxb8Z7nK+/9V/t+h9rnK/ot//J/pWeXxv6Znlcf/mp5VHv9relZ5/K/pWeXxv6ZnlXe9/6tzXXkXrrnVPRWu/df1XS4PKq65fdYb+PfO7bPewL93bp/1Bv69c/usN/DvndtnvYF/79w+6w38e+f2WW+o7/+zv0vtr5KaW6Huv/j3gn/84x//s+dW4B//+Mf/7LkVlf/X43141H2N/Fge//i/cx7/+L9zHv/4v3Me/9n8D6bOEuA=",
+            "rgb_sha256": "933eb08154ff50fc4662276f9002a9e7e60098a8fca93eee077d939f0c852546"
+          },
+          {
+            "start_us": 600595,
+            "end_us": 600873,
+            "origin": "display_server_root",
+            "rgb_zlib_base64": "eJztm7ENwzAQA1fwCBkto2WUjJIRMkIKF2r8gChTIhzfQSWhpy/VC8j2/GxH5/vaDs9hmDx58uTJkydPnjx58pfIV+dR8Clw5dV7ZvdxzVV/l9n9q/xsD668eg/+vf3Ve/Dv7a/eg39vf/Ue/Hv7q/fg39tfvQf/3v7qPZX/6szu78rPxtVH3ddcffC/g/8x8I//M33wv4P/MfCP/zN98L+jvv9Xc1X8Rtbi+i51/8X/Dv6z4D8L/rPgPwv+s+A/y2z/6v4FY7j2XxgD/1nwnwX/WfCfBf9Z8J9Fff9P9/031P033fffwH8W/GfBfxb8Z8F/Fvxn4f0/C/tvFvxnwX8W/GfBfxb8Z8F/Ft7/s7D/ZsF/FvxnwX8W/GfBfxb8Z7nK+/9V/t+h9rnK/ot//J/pWeXxv6Znlcf/mp5VHv9relZ5/K/pWeXxv6ZnlXe9/6tzXXkXrrnVPRWu/df1XS4PKq65fdYb+PfO7bPewL93bp/1Bv69c/usN/DvndtnvYF/79w+6w38e+f2WW+o7/+zv0vtr5KaW6Huv/j3gn/84x//s+dW4B//+Mf/7LkVlf/X43141H2N/Fge//i/cx7/+L9zHv/4v3Me/9n8D6bOEuA=",
+            "rgb_sha256": "933eb08154ff50fc4662276f9002a9e7e60098a8fca93eee077d939f0c852546"
+          },
+          {
+            "start_us": 651414,
+            "end_us": 651702,
+            "origin": "display_server_root",
+            "rgb_zlib_base64": "eJztm7ENwzAQA1fwCBkto2WUjJIRMkIKF2r8gChTIhzfQSWhpy/VC8j2/GxH5/vaDs9hmDx58uTJkydPnjx58pfIV+dR8Clw5dV7ZvdxzVV/l9n9q/xsD668eg/+vf3Ve/Dv7a/eg39vf/Ue/Hv7q/fg39tfvQf/3v7qPZX/6szu78rPxtVH3ddcffC/g/8x8I//M33wv4P/MfCP/zN98L+jvv9Xc1X8Rtbi+i51/8X/Dv6z4D8L/rPgPwv+s+A/y2z/6v4FY7j2XxgD/1nwnwX/WfCfBf9Z8J9Fff9P9/031P033fffwH8W/GfBfxb8Z8F/Fvxn4f0/C/tvFvxnwX8W/GfBfxb8Z8F/Ft7/s7D/ZsF/FvxnwX8W/GfBfxb8Z7nK+/9V/t+h9rnK/ot//J/pWeXxv6Znlcf/mp5VHv9relZ5/K/pWeXxv6ZnlXe9/6tzXXkXrrnVPRWu/df1XS4PKq65fdYb+PfO7bPewL93bp/1Bv69c/usN/DvndtnvYF/79w+6w38e+f2WW+o7/+zv0vtr5KaW6Huv/j3gn/84x//s+dW4B//+Mf/7LkVlf/X43141H2N/Fge//i/cx7/+L9zHv/4v3Me/9n8D6bOEuA=",
+            "rgb_sha256": "933eb08154ff50fc4662276f9002a9e7e60098a8fca93eee077d939f0c852546"
+          },
+          {
+            "start_us": 700042,
+            "end_us": 700334,
+            "origin": "display_server_root",
+            "rgb_zlib_base64": "eJztm7ENwzAQA1fwCBkto2WUjJIRMkIKF2r8gChTIhzfQSWhpy/VC8j2/GxH5/vaDs9hmDx58uTJkydPnjx58pfIV+dR8Clw5dV7ZvdxzVV/l9n9q/xsD668eg/+vf3Ve/Dv7a/eg39vf/Ue/Hv7q/fg39tfvQf/3v7qPZX/6szu78rPxtVH3ddcffC/g/8x8I//M33wv4P/MfCP/zN98L+jvv9Xc1X8Rtbi+i51/8X/Dv6z4D8L/rPgPwv+s+A/y2z/6v4FY7j2XxgD/1nwnwX/WfCfBf9Z8J9Fff9P9/031P033fffwH8W/GfBfxb8Z8F/Fvxn4f0/C/tvFvxnwX8W/GfBfxb8Z8F/Ft7/s7D/ZsF/FvxnwX8W/GfBfxb8Z7nK+/9V/t+h9rnK/ot//J/pWeXxv6Znlcf/mp5VHv9relZ5/K/pWeXxv6ZnlXe9/6tzXXkXrrnVPRWu/df1XS4PKq65fdYb+PfO7bPewL93bp/1Bv69c/usN/DvndtnvYF/79w+6w38e+f2WW+o7/+zv0vtr5KaW6Huv/j3gn/84x//s+dW4B//+Mf/7LkVlf/X43141H2N/Fge//i/cx7/+L9zHv/4v3Me/9n8D6bOEuA=",
+            "rgb_sha256": "933eb08154ff50fc4662276f9002a9e7e60098a8fca93eee077d939f0c852546"
+          },
+          {
+            "start_us": 751174,
+            "end_us": 751476,
+            "origin": "display_server_root",
+            "rgb_zlib_base64": "eJztm7ENwzAQA1fwCBkto2WUjJIRMkIKF2r8gChTIhzfQSWhpy/VC8j2/GxH5/vaDs9hmDx58uTJkydPnjx58pfIV+dR8Clw5dV7ZvdxzVV/l9n9q/xsD668eg/+vf3Ve/Dv7a/eg39vf/Ue/Hv7q/fg39tfvQf/3v7qPZX/6szu78rPxtVH3ddcffC/g/8x8I//M33wv4P/MfCP/zN98L+jvv9Xc1X8Rtbi+i51/8X/Dv6z4D8L/rPgPwv+s+A/y2z/6v4FY7j2XxgD/1nwnwX/WfCfBf9Z8J9Fff9P9/031P033fffwH8W/GfBfxb8Z8F/Fvxn4f0/C/tvFvxnwX8W/GfBfxb8Z8F/Ft7/s7D/ZsF/FvxnwX8W/GfBfxb8Z7nK+/9V/t+h9rnK/ot//J/pWeXxv6Znlcf/mp5VHv9relZ5/K/pWeXxv6ZnlXe9/6tzXXkXrrnVPRWu/df1XS4PKq65fdYb+PfO7bPewL93bp/1Bv69c/usN/DvndtnvYF/79w+6w38e+f2WW+o7/+zv0vtr5KaW6Huv/j3gn/84x//s+dW4B//+Mf/7LkVlf/X43141H2N/Fge//i/cx7/+L9zHv/4v3Me/9n8D6bOEuA=",
+            "rgb_sha256": "933eb08154ff50fc4662276f9002a9e7e60098a8fca93eee077d939f0c852546"
+          },
+          {
+            "start_us": 805533,
+            "end_us": 805834,
+            "origin": "display_server_root",
+            "rgb_zlib_base64": "eJztm7ENwzAQA1fwCBkto2WUjJIRMkIKF2r8gChTIhzfQSWhpy/VC8j2/GxH5/vaDs9hmDx58uTJkydPnjx58pfIV+dR8Clw5dV7ZvdxzVV/l9n9q/xsD668eg/+vf3Ve/Dv7a/eg39vf/Ue/Hv7q/fg39tfvQf/3v7qPZX/6szu78rPxtVH3ddcffC/g/8x8I//M33wv4P/MfCP/zN98L+jvv9Xc1X8Rtbi+i51/8X/Dv6z4D8L/rPgPwv+s+A/y2z/6v4FY7j2XxgD/1nwnwX/WfCfBf9Z8J9Fff9P9/031P033fffwH8W/GfBfxb8Z8F/Fvxn4f0/C/tvFvxnwX8W/GfBfxb8Z8F/Ft7/s7D/ZsF/FvxnwX8W/GfBfxb8Z7nK+/9V/t+h9rnK/ot//J/pWeXxv6Znlcf/mp5VHv9relZ5/K/pWeXxv6ZnlXe9/6tzXXkXrrnVPRWu/df1XS4PKq65fdYb+PfO7bPewL93bp/1Bv69c/usN/DvndtnvYF/79w+6w38e+f2WW+o7/+zv0vtr5KaW6Huv/j3gn/84x//s+dW4B//+Mf/7LkVlf/X43141H2N/Fge//i/cx7/+L9zHv/4v3Me/9n8D6bOEuA=",
+            "rgb_sha256": "933eb08154ff50fc4662276f9002a9e7e60098a8fca93eee077d939f0c852546"
+          },
+          {
+            "start_us": 852015,
+            "end_us": 852366,
+            "origin": "display_server_root",
+            "rgb_zlib_base64": "eJztm8Fxg0AQBFMgBIXm0BSKQ1EIDkEPPn5wZQ3MqbHorntOLUPz2qti+XosW+fnvmyezbB58+bNmzdv3rx58+b/RX50bgMeA1r5dM7sPq3npt9ldv9RfraHVj6do/9u/3SO/rv90zn67/ZP5+i/2z+do/9u/3SO/rv90zkj/6Mzu38rP5tWn3Rfa/XR/4r+96F//R/po/8V/e9D//o/0kf/K+n9/+i5KX0j76X1Xun+q/8V/bPon0X/LPpn0T+L/llm+0/3L9lHa/+VfeifRf8s+mfRP4v+WfTPkt7/030/jXT/pft+Gvpn0T+L/ln0z6J/Fv2zeP/P4v7Lon8W/bPon0X/LPpn0T+L9/8s7r8s+mfRP4v+WfTPon8W/bOc7f6f+l+j9f9IOuds+6/+9a9//etf//rXv/6v6T/dv2b3TJn93Ne+6t+09l/KA/XcQ9J/of/u/BT9d+en6L87P0X/3fkp+u/OT9F/d35Kev9PvW9Ky89s0v03fd+3CX+xz9nQP4v+WfTPon8W/bPon2Xk/3773jzpvmZ+X17/+r9yXv/6v3Je//q/cl7/bP4JugRS/g==",
+            "rgb_sha256": "321a169b927861e42e5c21de9b0c085eef9431632c52afdebd952229719ccd5d"
+          },
+          {
+            "start_us": 900909,
+            "end_us": 901230,
+            "origin": "display_server_root",
+            "rgb_zlib_base64": "eJztm8Fxg0AQBFMgBIXm0BSKQ1EIDkEPPn5wZQ3MqbHorntOLUPz2qti+XosW+fnvmyezbB58+bNmzdv3rx58+b/RX50bgMeA1r5dM7sPq3npt9ldv9RfraHVj6do/9u/3SO/rv90zn67/ZP5+i/2z+do/9u/3SO/rv90zkj/6Mzu38rP5tWn3Rfa/XR/4r+96F//R/po/8V/e9D//o/0kf/K+n9/+i5KX0j76X1Xun+q/8V/bPon0X/LPpn0T+L/llm+0/3L9lHa/+VfeifRf8s+mfRP4v+WfTPkt7/030/jXT/pft+Gvpn0T+L/ln0z6J/Fv2zeP/P4v7Lon8W/bPon0X/LPpn0T+L9/8s7r8s+mfRP4v+WfTPon8W/bOc7f6f+l+j9f9IOuds+6/+9a9//etf//rXv/6v6T/dv2b3TJn93Ne+6t+09l/KA/XcQ9J/of/u/BT9d+en6L87P0X/3fkp+u/OT9F/d35Kev9PvW9Ky89s0v03fd+3CX+xz9nQP4v+WfTPon8W/bPon2Xk/3773jzpvmZ+X17/+r9yXv/6v3Je//q/cl7/bP4JugRS/g==",
+            "rgb_sha256": "321a169b927861e42e5c21de9b0c085eef9431632c52afdebd952229719ccd5d"
+          },
+          {
+            "start_us": 951772,
+            "end_us": 952081,
+            "origin": "display_server_root",
+            "rgb_zlib_base64": "eJztm8Fxg0AQBFMgBIXm0BSKQ1EIDkEPPn5wZQ3MqbHorntOLUPz2qti+XosW+fnvmyezbB58+bNmzdv3rx58+b/RX50bgMeA1r5dM7sPq3npt9ldv9RfraHVj6do/9u/3SO/rv90zn67/ZP5+i/2z+do/9u/3SO/rv90zkj/6Mzu38rP5tWn3Rfa/XR/4r+96F//R/po/8V/e9D//o/0kf/K+n9/+i5KX0j76X1Xun+q/8V/bPon0X/LPpn0T+L/llm+0/3L9lHa/+VfeifRf8s+mfRP4v+WfTPkt7/030/jXT/pft+Gvpn0T+L/ln0z6J/Fv2zeP/P4v7Lon8W/bPon0X/LPpn0T+L9/8s7r8s+mfRP4v+WfTPon8W/bOc7f6f+l+j9f9IOuds+6/+9a9//etf//rXv/6v6T/dv2b3TJn93Ne+6t+09l/KA/XcQ9J/of/u/BT9d+en6L87P0X/3fkp+u/OT9F/d35Kev9PvW9Ky89s0v03fd+3CX+xz9nQP4v+WfTPon8W/bPon2Xk/3773jzpvmZ+X17/+r9yXv/6v3Je//q/cl7/bP4JugRS/g==",
+            "rgb_sha256": "321a169b927861e42e5c21de9b0c085eef9431632c52afdebd952229719ccd5d"
+          },
+          {
+            "start_us": 1000592,
+            "end_us": 1000977,
+            "origin": "display_server_root",
+            "rgb_zlib_base64": "eJztm8Fxg0AQBFMgBIXm0BSKQ1EIDkEPPn5wZQ3MqbHorntOLUPz2qti+XosW+fnvmyezbB58+bNmzdv3rx58+b/RX50bgMeA1r5dM7sPq3npt9ldv9RfraHVj6do/9u/3SO/rv90zn67/ZP5+i/2z+do/9u/3SO/rv90zkj/6Mzu38rP5tWn3Rfa/XR/4r+96F//R/po/8V/e9D//o/0kf/K+n9/+i5KX0j76X1Xun+q/8V/bPon0X/LPpn0T+L/llm+0/3L9lHa/+VfeifRf8s+mfRP4v+WfTPkt7/030/jXT/pft+Gvpn0T+L/ln0z6J/Fv2zeP/P4v7Lon8W/bPon0X/LPpn0T+L9/8s7r8s+mfRP4v+WfTPon8W/bOc7f6f+l+j9f9IOuds+6/+9a9//etf//rXv/6v6T/dv2b3TJn93Ne+6t+09l/KA/XcQ9J/of/u/BT9d+en6L87P0X/3fkp+u/OT9F/d35Kev9PvW9Ky89s0v03fd+3CX+xz9nQP4v+WfTPon8W/bPon2Xk/3773jzpvmZ+X17/+r9yXv/6v3Je//q/cl7/bP4JugRS/g==",
+            "rgb_sha256": "321a169b927861e42e5c21de9b0c085eef9431632c52afdebd952229719ccd5d"
+          },
+          {
+            "start_us": 1051555,
+            "end_us": 1051939,
+            "origin": "display_server_root",
+            "rgb_zlib_base64": "eJztm8Fxg0AQBFMgBIXm0BSKQ1EIDkEPPn5wZQ3MqbHorntOLUPz2qti+XosW+fnvmyezbB58+bNmzdv3rx58+b/RX50bgMeA1r5dM7sPq3npt9ldv9RfraHVj6do/9u/3SO/rv90zn67/ZP5+i/2z+do/9u/3SO/rv90zkj/6Mzu38rP5tWn3Rfa/XR/4r+96F//R/po/8V/e9D//o/0kf/K+n9/+i5KX0j76X1Xun+q/8V/bPon0X/LPpn0T+L/llm+0/3L9lHa/+VfeifRf8s+mfRP4v+WfTPkt7/030/jXT/pft+Gvpn0T+L/ln0z6J/Fv2zeP/P4v7Lon8W/bPon0X/LPpn0T+L9/8s7r8s+mfRP4v+WfTPon8W/bOc7f6f+l+j9f9IOuds+6/+9a9//etf//rXv/6v6T/dv2b3TJn93Ne+6t+09l/KA/XcQ9J/of/u/BT9d+en6L87P0X/3fkp+u/OT9F/d35Kev9PvW9Ky89s0v03fd+3CX+xz9nQP4v+WfTPon8W/bPon2Xk/3773jzpvmZ+X17/+r9yXv/6v3Je//q/cl7/bP4JugRS/g==",
+            "rgb_sha256": "321a169b927861e42e5c21de9b0c085eef9431632c52afdebd952229719ccd5d"
+          },
+          {
+            "start_us": 1100650,
+            "end_us": 1100964,
+            "origin": "display_server_root",
+            "rgb_zlib_base64": "eJztm8Fxg0AQBFMgBIXm0BSKQ1EIDkEPPn5wZQ3MqbHorntOLUPz2qti+XosW+fnvmyezbB58+bNmzdv3rx58+b/RX50bgMeA1r5dM7sPq3npt9ldv9RfraHVj6do/9u/3SO/rv90zn67/ZP5+i/2z+do/9u/3SO/rv90zkj/6Mzu38rP5tWn3Rfa/XR/4r+96F//R/po/8V/e9D//o/0kf/K+n9/+i5KX0j76X1Xun+q/8V/bPon0X/LPpn0T+L/llm+0/3L9lHa/+VfeifRf8s+mfRP4v+WfTPkt7/030/jXT/pft+Gvpn0T+L/ln0z6J/Fv2zeP/P4v7Lon8W/bPon0X/LPpn0T+L9/8s7r8s+mfRP4v+WfTPon8W/bOc7f6f+l+j9f9IOuds+6/+9a9//etf//rXv/6v6T/dv2b3TJn93Ne+6t+09l/KA/XcQ9J/of/u/BT9d+en6L87P0X/3fkp+u/OT9F/d35Kev9PvW9Ky89s0v03fd+3CX+xz9nQP4v+WfTPon8W/bPon2Xk/3773jzpvmZ+X17/+r9yXv/6v3Je//q/cl7/bP4JugRS/g==",
+            "rgb_sha256": "321a169b927861e42e5c21de9b0c085eef9431632c52afdebd952229719ccd5d"
+          },
+          {
+            "start_us": 1151463,
+            "end_us": 1151724,
+            "origin": "display_server_root",
+            "rgb_zlib_base64": "eJztm8Fxg0AQBFMgBIXm0BSKQ1EIDkEPPn5wZQ3MqbHorntOLUPz2qti+XosW+fnvmyezbB58+bNmzdv3rx58+b/RX50bgMeA1r5dM7sPq3npt9ldv9RfraHVj6do/9u/3SO/rv90zn67/ZP5+i/2z+do/9u/3SO/rv90zkj/6Mzu38rP5tWn3Rfa/XR/4r+96F//R/po/8V/e9D//o/0kf/K+n9/+i5KX0j76X1Xun+q/8V/bPon0X/LPpn0T+L/llm+0/3L9lHa/+VfeifRf8s+mfRP4v+WfTPkt7/030/jXT/pft+Gvpn0T+L/ln0z6J/Fv2zeP/P4v7Lon8W/bPon0X/LPpn0T+L9/8s7r8s+mfRP4v+WfTPon8W/bOc7f6f+l+j9f9IOuds+6/+9a9//etf//rXv/6v6T/dv2b3TJn93Ne+6t+09l/KA/XcQ9J/of/u/BT9d+en6L87P0X/3fkp+u/OT9F/d35Kev9PvW9Ky89s0v03fd+3CX+xz9nQP4v+WfTPon8W/bPon2Xk/3773jzpvmZ+X17/+r9yXv/6v3Je//q/cl7/bP4JugRS/g==",
+            "rgb_sha256": "321a169b927861e42e5c21de9b0c085eef9431632c52afdebd952229719ccd5d"
+          },
+          {
+            "start_us": 1200262,
+            "end_us": 1200582,
+            "origin": "display_server_root",
+            "rgb_zlib_base64": "eJztm8Fxg0AQBFMgBIXm0BSKQ1EIDkEPPn5wZQ3MqbHorntOLUPz2qti+XosW+fnvmyezbB58+bNmzdv3rx58+b/RX50bgMeA1r5dM7sPq3npt9ldv9RfraHVj6do/9u/3SO/rv90zn67/ZP5+i/2z+do/9u/3SO/rv90zkj/6Mzu38rP5tWn3Rfa/XR/4r+96F//R/po/8V/e9D//o/0kf/K+n9/+i5KX0j76X1Xun+q/8V/bPon0X/LPpn0T+L/llm+0/3L9lHa/+VfeifRf8s+mfRP4v+WfTPkt7/030/jXT/pft+Gvpn0T+L/ln0z6J/Fv2zeP/P4v7Lon8W/bPon0X/LPpn0T+L9/8s7r8s+mfRP4v+WfTPon8W/bOc7f6f+l+j9f9IOuds+6/+9a9//etf//rXv/6v6T/dv2b3TJn93Ne+6t+09l/KA/XcQ9J/of/u/BT9d+en6L87P0X/3fkp+u/OT9F/d35Kev9PvW9Ky89s0v03fd+3CX+xz9nQP4v+WfTPon8W/bPon2Xk/3773jzpvmZ+X17/+r9yXv/6v3Je//q/cl7/bP4JugRS/g==",
+            "rgb_sha256": "321a169b927861e42e5c21de9b0c085eef9431632c52afdebd952229719ccd5d"
+          },
+          {
+            "start_us": 1251224,
+            "end_us": 1251591,
+            "origin": "display_server_root",
+            "rgb_zlib_base64": "eJztm8Fxg0AQBFMgBIXm0BSKQ1EIDkEPPn5wZQ3MqbHorntOLUPz2qti+XosW+fnvmyezbB58+bNmzdv3rx58+b/RX50bgMeA1r5dM7sPq3npt9ldv9RfraHVj6do/9u/3SO/rv90zn67/ZP5+i/2z+do/9u/3SO/rv90zkj/6Mzu38rP5tWn3Rfa/XR/4r+96F//R/po/8V/e9D//o/0kf/K+n9/+i5KX0j76X1Xun+q/8V/bPon0X/LPpn0T+L/llm+0/3L9lHa/+VfeifRf8s+mfRP4v+WfTPkt7/030/jXT/pft+Gvpn0T+L/ln0z6J/Fv2zeP/P4v7Lon8W/bPon0X/LPpn0T+L9/8s7r8s+mfRP4v+WfTPon8W/bOc7f6f+l+j9f9IOuds+6/+9a9//etf//rXv/6v6T/dv2b3TJn93Ne+6t+09l/KA/XcQ9J/of/u/BT9d+en6L87P0X/3fkp+u/OT9F/d35Kev9PvW9Ky89s0v03fd+3CX+xz9nQP4v+WfTPon8W/bPon2Xk/3773jzpvmZ+X17/+r9yXv/6v3Je//q/cl7/bP4JugRS/g==",
+            "rgb_sha256": "321a169b927861e42e5c21de9b0c085eef9431632c52afdebd952229719ccd5d"
+          },
+          {
+            "start_us": 1300306,
+            "end_us": 1300612,
+            "origin": "display_server_root",
+            "rgb_zlib_base64": "eJztm8Fxg0AQBFMgBIXm0BSKQ1EIDkEPPn5wZQ3MqbHorntOLUPz2qti+XosW+fnvmyezbB58+bNmzdv3rx58+b/RX50bgMeA1r5dM7sPq3npt9ldv9RfraHVj6do/9u/3SO/rv90zn67/ZP5+i/2z+do/9u/3SO/rv90zkj/6Mzu38rP5tWn3Rfa/XR/4r+96F//R/po/8V/e9D//o/0kf/K+n9/+i5KX0j76X1Xun+q/8V/bPon0X/LPpn0T+L/llm+0/3L9lHa/+VfeifRf8s+mfRP4v+WfTPkt7/030/jXT/pft+Gvpn0T+L/ln0z6J/Fv2zeP/P4v7Lon8W/bPon0X/LPpn0T+L9/8s7r8s+mfRP4v+WfTPon8W/bOc7f6f+l+j9f9IOuds+6/+9a9//etf//rXv/6v6T/dv2b3TJn93Ne+6t+09l/KA/XcQ9J/of/u/BT9d+en6L87P0X/3fkp+u/OT9F/d35Kev9PvW9Ky89s0v03fd+3CX+xz9nQP4v+WfTPon8W/bPon2Xk/3773jzpvmZ+X17/+r9yXv/6v3Je//q/cl7/bP4JugRS/g==",
+            "rgb_sha256": "321a169b927861e42e5c21de9b0c085eef9431632c52afdebd952229719ccd5d"
+          },
+          {
+            "start_us": 1351557,
+            "end_us": 1351860,
+            "origin": "display_server_root",
+            "rgb_zlib_base64": "eJztm8Fxg0AQBFMgBIXm0BSKQ1EIDkEPPn5wZQ3MqbHorntOLUPz2qti+XosW+fnvmyezbB58+bNmzdv3rx58+b/RX50bgMeA1r5dM7sPq3npt9ldv9RfraHVj6do/9u/3SO/rv90zn67/ZP5+i/2z+do/9u/3SO/rv90zkj/6Mzu38rP5tWn3Rfa/XR/4r+96F//R/po/8V/e9D//o/0kf/K+n9/+i5KX0j76X1Xun+q/8V/bPon0X/LPpn0T+L/llm+0/3L9lHa/+VfeifRf8s+mfRP4v+WfTPkt7/030/jXT/pft+Gvpn0T+L/ln0z6J/Fv2zeP/P4v7Lon8W/bPon0X/LPpn0T+L9/8s7r8s+mfRP4v+WfTPon8W/bOc7f6f+l+j9f9IOuds+6/+9a9//etf//rXv/6v6T/dv2b3TJn93Ne+6t+09l/KA/XcQ9J/of/u/BT9d+en6L87P0X/3fkp+u/OT9F/d35Kev9PvW9Ky89s0v03fd+3CX+xz9nQP4v+WfTPon8W/bPon2Xk/3773jzpvmZ+X17/+r9yXv/6v3Je//q/cl7/bP4JugRS/g==",
+            "rgb_sha256": "321a169b927861e42e5c21de9b0c085eef9431632c52afdebd952229719ccd5d"
+          },
+          {
+            "start_us": 1400468,
+            "end_us": 1400800,
+            "origin": "display_server_root",
+            "rgb_zlib_base64": "eJztm8Fxg0AQBFMgBIXm0BSKQ1EIDkEPPn5wZQ3MqbHorntOLUPz2qti+XosW+fnvmyezbB58+bNmzdv3rx58+b/RX50bgMeA1r5dM7sPq3npt9ldv9RfraHVj6do/9u/3SO/rv90zn67/ZP5+i/2z+do/9u/3SO/rv90zkj/6Mzu38rP5tWn3Rfa/XR/4r+96F//R/po/8V/e9D//o/0kf/K+n9/+i5KX0j76X1Xun+q/8V/bPon0X/LPpn0T+L/llm+0/3L9lHa/+VfeifRf8s+mfRP4v+WfTPkt7/030/jXT/pft+Gvpn0T+L/ln0z6J/Fv2zeP/P4v7Lon8W/bPon0X/LPpn0T+L9/8s7r8s+mfRP4v+WfTPon8W/bOc7f6f+l+j9f9IOuds+6/+9a9//etf//rXv/6v6T/dv2b3TJn93Ne+6t+09l/KA/XcQ9J/of/u/BT9d+en6L87P0X/3fkp+u/OT9F/d35Kev9PvW9Ky89s0v03fd+3CX+xz9nQP4v+WfTPon8W/bPon2Xk/3773jzpvmZ+X17/+r9yXv/6v3Je//q/cl7/bP4JugRS/g==",
+            "rgb_sha256": "321a169b927861e42e5c21de9b0c085eef9431632c52afdebd952229719ccd5d"
+          },
+          {
+            "start_us": 1451507,
+            "end_us": 1451869,
+            "origin": "display_server_root",
+            "rgb_zlib_base64": "eJztm8Fxg0AQBFMgBIXm0BSKQ1EIDkEPPn5wZQ3MqbHorntOLUPz2qti+XosW+fnvmyezbB58+bNmzdv3rx58+b/RX50bgMeA1r5dM7sPq3npt9ldv9RfraHVj6do/9u/3SO/rv90zn67/ZP5+i/2z+do/9u/3SO/rv90zkj/6Mzu38rP5tWn3Rfa/XR/4r+96F//R/po/8V/e9D//o/0kf/K+n9/+i5KX0j76X1Xun+q/8V/bPon0X/LPpn0T+L/llm+0/3L9lHa/+VfeifRf8s+mfRP4v+WfTPkt7/030/jXT/pft+Gvpn0T+L/ln0z6J/Fv2zeP/P4v7Lon8W/bPon0X/LPpn0T+L9/8s7r8s+mfRP4v+WfTPon8W/bOc7f6f+l+j9f9IOuds+6/+9a9//etf//rXv/6v6T/dv2b3TJn93Ne+6t+09l/KA/XcQ9J/of/u/BT9d+en6L87P0X/3fkp+u/OT9F/d35Kev9PvW9Ky89s0v03fd+3CX+xz9nQP4v+WfTPon8W/bPon2Xk/3773jzpvmZ+X17/+r9yXv/6v3Je//q/cl7/bP4JugRS/g==",
+            "rgb_sha256": "321a169b927861e42e5c21de9b0c085eef9431632c52afdebd952229719ccd5d"
+          },
+          {
+            "start_us": 1500405,
+            "end_us": 1500789,
+            "origin": "display_server_root",
+            "rgb_zlib_base64": "eJztm8Fxg0AQBFMgBIXm0BSKQ1EIDkEPPn5wZQ3MqbHorntOLUPz2qti+XosW+fnvmyezbB58+bNmzdv3rx58+b/RX50bgMeA1r5dM7sPq3npt9ldv9RfraHVj6do/9u/3SO/rv90zn67/ZP5+i/2z+do/9u/3SO/rv90zkj/6Mzu38rP5tWn3Rfa/XR/4r+96F//R/po/8V/e9D//o/0kf/K+n9/+i5KX0j76X1Xun+q/8V/bPon0X/LPpn0T+L/llm+0/3L9lHa/+VfeifRf8s+mfRP4v+WfTPkt7/030/jXT/pft+Gvpn0T+L/ln0z6J/Fv2zeP/P4v7Lon8W/bPon0X/LPpn0T+L9/8s7r8s+mfRP4v+WfTPon8W/bOc7f6f+l+j9f9IOuds+6/+9a9//etf//rXv/6v6T/dv2b3TJn93Ne+6t+09l/KA/XcQ9J/of/u/BT9d+en6L87P0X/3fkp+u/OT9F/d35Kev9PvW9Ky89s0v03fd+3CX+xz9nQP4v+WfTPon8W/bPon2Xk/3773jzpvmZ+X17/+r9yXv/6v3Je//q/cl7/bP4JugRS/g==",
+            "rgb_sha256": "321a169b927861e42e5c21de9b0c085eef9431632c52afdebd952229719ccd5d"
+          },
+          {
+            "start_us": 1551497,
+            "end_us": 1551785,
+            "origin": "display_server_root",
+            "rgb_zlib_base64": "eJztm8Fxg0AQBFMgBIXm0BSKQ1EIDkEPPn5wZQ3MqbHorntOLUPz2qti+XosW+fnvmyezbB58+bNmzdv3rx58+b/RX50bgMeA1r5dM7sPq3npt9ldv9RfraHVj6do/9u/3SO/rv90zn67/ZP5+i/2z+do/9u/3SO/rv90zkj/6Mzu38rP5tWn3Rfa/XR/4r+96F//R/po/8V/e9D//o/0kf/K+n9/+i5KX0j76X1Xun+q/8V/bPon0X/LPpn0T+L/llm+0/3L9lHa/+VfeifRf8s+mfRP4v+WfTPkt7/030/jXT/pft+Gvpn0T+L/ln0z6J/Fv2zeP/P4v7Lon8W/bPon0X/LPpn0T+L9/8s7r8s+mfRP4v+WfTPon8W/bOc7f6f+l+j9f9IOuds+6/+9a9//etf//rXv/6v6T/dv2b3TJn93Ne+6t+09l/KA/XcQ9J/of/u/BT9d+en6L87P0X/3fkp+u/OT9F/d35Kev9PvW9Ky89s0v03fd+3CX+xz9nQP4v+WfTPon8W/bPon2Xk/3773jzpvmZ+X17/+r9yXv/6v3Je//q/cl7/bP4JugRS/g==",
+            "rgb_sha256": "321a169b927861e42e5c21de9b0c085eef9431632c52afdebd952229719ccd5d"
+          },
+          {
+            "start_us": 1604554,
+            "end_us": 1604792,
+            "origin": "display_server_root",
+            "rgb_zlib_base64": "eJztm8Fxg0AQBFMgBIXm0BSKQ1EIDkEPPn5wZQ3MqbHorntOLUPz2qti+XosW+fnvmyezbB58+bNmzdv3rx58+b/RX50bgMeA1r5dM7sPq3npt9ldv9RfraHVj6do/9u/3SO/rv90zn67/ZP5+i/2z+do/9u/3SO/rv90zkj/6Mzu38rP5tWn3Rfa/XR/4r+96F//R/po/8V/e9D//o/0kf/K+n9/+i5KX0j76X1Xun+q/8V/bPon0X/LPpn0T+L/llm+0/3L9lHa/+VfeifRf8s+mfRP4v+WfTPkt7/030/jXT/pft+Gvpn0T+L/ln0z6J/Fv2zeP/P4v7Lon8W/bPon0X/LPpn0T+L9/8s7r8s+mfRP4v+WfTPon8W/bOc7f6f+l+j9f9IOuds+6/+9a9//etf//rXv/6v6T/dv2b3TJn93Ne+6t+09l/KA/XcQ9J/of/u/BT9d+en6L87P0X/3fkp+u/OT9F/d35Kev9PvW9Ky89s0v03fd+3CX+xz9nQP4v+WfTPon8W/bPon2Xk/3773jzpvmZ+X17/+r9yXv/6v3Je//q/cl7/bP4JugRS/g==",
+            "rgb_sha256": "321a169b927861e42e5c21de9b0c085eef9431632c52afdebd952229719ccd5d"
+          },
+          {
+            "start_us": 1651313,
+            "end_us": 1651716,
+            "origin": "display_server_root",
+            "rgb_zlib_base64": "eJztm7ERwjAQBFtwCZRGaS6FUiiBEgic+oN7n3QC747Cm9d5iV4zbM/3dnY++3Z6TsPkyZMnT548efLkyZP/iXx1HgXvAldenTO6j+te9XcZ3b/Kj/bgyqtz8O/tr87Bv7e/Ogf/3v7qHPx7+6tz8O/tr87Bv7e/OqfyX53R/V350bj6qPuaqw/+D/DfA//4v9IH/wf474F//F/pg/8D9f2/ulfFb2Quru9S91/8H+A/C/6z4D8L/rPgPwv+s4z2r+5f0MO1/0IP/GfBfxb8Z8F/FvxnwX8W9f0/3fffUPffdN9/A/9Z8J8F/1nwnwX/WfCfhff/LOy/WfCfBf9Z8J8F/1nwnwX/WXj/z8L+mwX/WfCfBf9Z8J8F/1nwn2W193/X/zhWm1Ox2v67mjfXnAr8z5lTgf85cyrwP2dOBf7nzKnA/5w5FfifM6fC9f6/2nep81391Z6u/dfV3/Vd6nxXf7Un/nv3unriv3evqyf+e/e6euK/d6+rJ/5797p64r93r6un+v6f8uOa4+rvQt1/Xf1dfvrGr/V3gf9efxf47/V3gf9efxf47/V3gf9efxf47/V3UfnfH6/To+5r5Ht5/OP/znn84//Oefzj/855/GfzXx2+Uv4=",
+            "rgb_sha256": "fdd08a94f0eb8b22d0ceb7b493d32e83bab4937d41de6c50e5317ff06d51230e"
+          },
+          {
+            "start_us": 1700112,
+            "end_us": 1700398,
+            "origin": "display_server_root",
+            "rgb_zlib_base64": "eJztm7ERwjAQBFtwCZRGaS6FUiiBEgic+oN7n3QC747Cm9d5iV4zbM/3dnY++3Z6TsPkyZMnT548efLkyZP/iXx1HgXvAldenTO6j+te9XcZ3b/Kj/bgyqtz8O/tr87Bv7e/Ogf/3v7qHPx7+6tz8O/tr87Bv7e/OqfyX53R/V350bj6qPuaqw/+D/DfA//4v9IH/wf474F//F/pg/8D9f2/ulfFb2Quru9S91/8H+A/C/6z4D8L/rPgPwv+s4z2r+5f0MO1/0IP/GfBfxb8Z8F/FvxnwX8W9f0/3fffUPffdN9/A/9Z8J8F/1nwnwX/WfCfhff/LOy/WfCfBf9Z8J8F/1nwnwX/WXj/z8L+mwX/WfCfBf9Z8J8F/1nwn2W193/X/zhWm1Ox2v67mjfXnAr8z5lTgf85cyrwP2dOBf7nzKnA/5w5FfifM6fC9f6/2nep81391Z6u/dfV3/Vd6nxXf7Un/nv3unriv3evqyf+e/e6euK/d6+rJ/5797p64r93r6un+v6f8uOa4+rvQt1/Xf1dfvrGr/V3gf9efxf47/V3gf9efxf47/V3gf9efxf47/V3UfnfH6/To+5r5Ht5/OP/znn84//Oefzj/855/GfzXx2+Uv4=",
+            "rgb_sha256": "fdd08a94f0eb8b22d0ceb7b493d32e83bab4937d41de6c50e5317ff06d51230e"
+          },
+          {
+            "start_us": 1751040,
+            "end_us": 1751321,
+            "origin": "display_server_root",
+            "rgb_zlib_base64": "eJztm7ERwjAQBFtwCZRGaS6FUiiBEgic+oN7n3QC747Cm9d5iV4zbM/3dnY++3Z6TsPkyZMnT548efLkyZP/iXx1HgXvAldenTO6j+te9XcZ3b/Kj/bgyqtz8O/tr87Bv7e/Ogf/3v7qHPx7+6tz8O/tr87Bv7e/OqfyX53R/V350bj6qPuaqw/+D/DfA//4v9IH/wf474F//F/pg/8D9f2/ulfFb2Quru9S91/8H+A/C/6z4D8L/rPgPwv+s4z2r+5f0MO1/0IP/GfBfxb8Z8F/FvxnwX8W9f0/3fffUPffdN9/A/9Z8J8F/1nwnwX/WfCfhff/LOy/WfCfBf9Z8J8F/1nwnwX/WXj/z8L+mwX/WfCfBf9Z8J8F/1nwn2W193/X/zhWm1Ox2v67mjfXnAr8z5lTgf85cyrwP2dOBf7nzKnA/5w5FfifM6fC9f6/2nep81391Z6u/dfV3/Vd6nxXf7Un/nv3unriv3evqyf+e/e6euK/d6+rJ/5797p64r93r6un+v6f8uOa4+rvQt1/Xf1dfvrGr/V3gf9efxf47/V3gf9efxf47/V3gf9efxf47/V3UfnfH6/To+5r5Ht5/OP/znn84//Oefzj/855/GfzXx2+Uv4=",
+            "rgb_sha256": "fdd08a94f0eb8b22d0ceb7b493d32e83bab4937d41de6c50e5317ff06d51230e"
+          },
+          {
+            "start_us": 1802056,
+            "end_us": 1802393,
+            "origin": "display_server_root",
+            "rgb_zlib_base64": "eJztm7ERwjAQBFtwCZRGaS6FUiiBEgic+oN7n3QC747Cm9d5iV4zbM/3dnY++3Z6TsPkyZMnT548efLkyZP/iXx1HgXvAldenTO6j+te9XcZ3b/Kj/bgyqtz8O/tr87Bv7e/Ogf/3v7qHPx7+6tz8O/tr87Bv7e/OqfyX53R/V350bj6qPuaqw/+D/DfA//4v9IH/wf474F//F/pg/8D9f2/ulfFb2Quru9S91/8H+A/C/6z4D8L/rPgPwv+s4z2r+5f0MO1/0IP/GfBfxb8Z8F/FvxnwX8W9f0/3fffUPffdN9/A/9Z8J8F/1nwnwX/WfCfhff/LOy/WfCfBf9Z8J8F/1nwnwX/WXj/z8L+mwX/WfCfBf9Z8J8F/1nwn2W193/X/zhWm1Ox2v67mjfXnAr8z5lTgf85cyrwP2dOBf7nzKnA/5w5FfifM6fC9f6/2nep81391Z6u/dfV3/Vd6nxXf7Un/nv3unriv3evqyf+e/e6euK/d6+rJ/5797p64r93r6un+v6f8uOa4+rvQt1/Xf1dfvrGr/V3gf9efxf47/V3gf9efxf47/V3gf9efxf47/V3UfnfH6/To+5r5Ht5/OP/znn84//Oefzj/855/GfzXx2+Uv4=",
+            "rgb_sha256": "fdd08a94f0eb8b22d0ceb7b493d32e83bab4937d41de6c50e5317ff06d51230e"
+          },
+          {
+            "start_us": 1851140,
+            "end_us": 1851437,
+            "origin": "display_server_root",
+            "rgb_zlib_base64": "eJztm7ERwjAQBFtwCZRGaS6FUiiBEgic+oN7n3QC747Cm9d5iV4zbM/3dnY++3Z6TsPkyZMnT548efLkyZP/iXx1HgXvAldenTO6j+te9XcZ3b/Kj/bgyqtz8O/tr87Bv7e/Ogf/3v7qHPx7+6tz8O/tr87Bv7e/OqfyX53R/V350bj6qPuaqw/+D/DfA//4v9IH/wf474F//F/pg/8D9f2/ulfFb2Quru9S91/8H+A/C/6z4D8L/rPgPwv+s4z2r+5f0MO1/0IP/GfBfxb8Z8F/FvxnwX8W9f0/3fffUPffdN9/A/9Z8J8F/1nwnwX/WfCfhff/LOy/WfCfBf9Z8J8F/1nwnwX/WXj/z8L+mwX/WfCfBf9Z8J8F/1nwn2W193/X/zhWm1Ox2v67mjfXnAr8z5lTgf85cyrwP2dOBf7nzKnA/5w5FfifM6fC9f6/2nep81391Z6u/dfV3/Vd6nxXf7Un/nv3unriv3evqyf+e/e6euK/d6+rJ/5797p64r93r6un+v6f8uOa4+rvQt1/Xf1dfvrGr/V3gf9efxf47/V3gf9efxf47/V3gf9efxf47/V3UfnfH6/To+5r5Ht5/OP/znn84//Oefzj/855/GfzXx2+Uv4=",
+            "rgb_sha256": "fdd08a94f0eb8b22d0ceb7b493d32e83bab4937d41de6c50e5317ff06d51230e"
+          },
+          {
+            "start_us": 1902030,
+            "end_us": 1902357,
+            "origin": "display_server_root",
+            "rgb_zlib_base64": "eJztm7ERwjAQBFtwCZRGaS6FUiiBEgic+oN7n3QC747Cm9d5iV4zbM/3dnY++3Z6TsPkyZMnT548efLkyZP/iXx1HgXvAldenTO6j+te9XcZ3b/Kj/bgyqtz8O/tr87Bv7e/Ogf/3v7qHPx7+6tz8O/tr87Bv7e/OqfyX53R/V350bj6qPuaqw/+D/DfA//4v9IH/wf474F//F/pg/8D9f2/ulfFb2Quru9S91/8H+A/C/6z4D8L/rPgPwv+s4z2r+5f0MO1/0IP/GfBfxb8Z8F/FvxnwX8W9f0/3fffUPffdN9/A/9Z8J8F/1nwnwX/WfCfhff/LOy/WfCfBf9Z8J8F/1nwnwX/WXj/z8L+mwX/WfCfBf9Z8J8F/1nwn2W193/X/zhWm1Ox2v67mjfXnAr8z5lTgf85cyrwP2dOBf7nzKnA/5w5FfifM6fC9f6/2nep81391Z6u/dfV3/Vd6nxXf7Un/nv3unriv3evqyf+e/e6euK/d6+rJ/5797p64r93r6un+v6f8uOa4+rvQt1/Xf1dfvrGr/V3gf9efxf47/V3gf9efxf47/V3gf9efxf47/V3UfnfH6/To+5r5Ht5/OP/znn84//Oefzj/855/GfzXx2+Uv4=",
+            "rgb_sha256": "fdd08a94f0eb8b22d0ceb7b493d32e83bab4937d41de6c50e5317ff06d51230e"
+          },
+          {
+            "start_us": 1950855,
+            "end_us": 1951148,
+            "origin": "display_server_root",
+            "rgb_zlib_base64": "eJztm7ERwjAQBFtwCZRGaS6FUiiBEgic+oN7n3QC747Cm9d5iV4zbM/3dnY++3Z6TsPkyZMnT548efLkyZP/iXx1HgXvAldenTO6j+te9XcZ3b/Kj/bgyqtz8O/tr87Bv7e/Ogf/3v7qHPx7+6tz8O/tr87Bv7e/OqfyX53R/V350bj6qPuaqw/+D/DfA//4v9IH/wf474F//F/pg/8D9f2/ulfFb2Quru9S91/8H+A/C/6z4D8L/rPgPwv+s4z2r+5f0MO1/0IP/GfBfxb8Z8F/FvxnwX8W9f0/3fffUPffdN9/A/9Z8J8F/1nwnwX/WfCfhff/LOy/WfCfBf9Z8J8F/1nwnwX/WXj/z8L+mwX/WfCfBf9Z8J8F/1nwn2W193/X/zhWm1Ox2v67mjfXnAr8z5lTgf85cyrwP2dOBf7nzKnA/5w5FfifM6fC9f6/2nep81391Z6u/dfV3/Vd6nxXf7Un/nv3unriv3evqyf+e/e6euK/d6+rJ/5797p64r93r6un+v6f8uOa4+rvQt1/Xf1dfvrGr/V3gf9efxf47/V3gf9efxf47/V3gf9efxf47/V3UfnfH6/To+5r5Ht5/OP/znn84//Oefzj/855/GfzXx2+Uv4=",
+            "rgb_sha256": "fdd08a94f0eb8b22d0ceb7b493d32e83bab4937d41de6c50e5317ff06d51230e"
+          },
+          {
+            "start_us": 2001972,
+            "end_us": 2002270,
+            "origin": "display_server_root",
+            "rgb_zlib_base64": "eJztm7ERwjAQBFtwCZRGaS6FUiiBEgic+oN7n3QC747Cm9d5iV4zbM/3dnY++3Z6TsPkyZMnT548efLkyZP/iXx1HgXvAldenTO6j+te9XcZ3b/Kj/bgyqtz8O/tr87Bv7e/Ogf/3v7qHPx7+6tz8O/tr87Bv7e/OqfyX53R/V350bj6qPuaqw/+D/DfA//4v9IH/wf474F//F/pg/8D9f2/ulfFb2Quru9S91/8H+A/C/6z4D8L/rPgPwv+s4z2r+5f0MO1/0IP/GfBfxb8Z8F/FvxnwX8W9f0/3fffUPffdN9/A/9Z8J8F/1nwnwX/WfCfhff/LOy/WfCfBf9Z8J8F/1nwnwX/WXj/z8L+mwX/WfCfBf9Z8J8F/1nwn2W193/X/zhWm1Ox2v67mjfXnAr8z5lTgf85cyrwP2dOBf7nzKnA/5w5FfifM6fC9f6/2nep81391Z6u/dfV3/Vd6nxXf7Un/nv3unriv3evqyf+e/e6euK/d6+rJ/5797p64r93r6un+v6f8uOa4+rvQt1/Xf1dfvrGr/V3gf9efxf47/V3gf9efxf47/V3gf9efxf47/V3UfnfH6/To+5r5Ht5/OP/znn84//Oefzj/855/GfzXx2+Uv4=",
+            "rgb_sha256": "fdd08a94f0eb8b22d0ceb7b493d32e83bab4937d41de6c50e5317ff06d51230e"
+          },
+          {
+            "start_us": 2050667,
+            "end_us": 2051001,
+            "origin": "display_server_root",
+            "rgb_zlib_base64": "eJztm7ERwjAQBFtwCZRGaS6FUiiBEgic+oN7n3QC747Cm9d5iV4zbM/3dnY++3Z6TsPkyZMnT548efLkyZP/iXx1HgXvAldenTO6j+te9XcZ3b/Kj/bgyqtz8O/tr87Bv7e/Ogf/3v7qHPx7+6tz8O/tr87Bv7e/OqfyX53R/V350bj6qPuaqw/+D/DfA//4v9IH/wf474F//F/pg/8D9f2/ulfFb2Quru9S91/8H+A/C/6z4D8L/rPgPwv+s4z2r+5f0MO1/0IP/GfBfxb8Z8F/FvxnwX8W9f0/3fffUPffdN9/A/9Z8J8F/1nwnwX/WfCfhff/LOy/WfCfBf9Z8J8F/1nwnwX/WXj/z8L+mwX/WfCfBf9Z8J8F/1nwn2W193/X/zhWm1Ox2v67mjfXnAr8z5lTgf85cyrwP2dOBf7nzKnA/5w5FfifM6fC9f6/2nep81391Z6u/dfV3/Vd6nxXf7Un/nv3unriv3evqyf+e/e6euK/d6+rJ/5797p64r93r6un+v6f8uOa4+rvQt1/Xf1dfvrGr/V3gf9efxf47/V3gf9efxf47/V3gf9efxf47/V3UfnfH6/To+5r5Ht5/OP/znn84//Oefzj/855/GfzXx2+Uv4=",
+            "rgb_sha256": "fdd08a94f0eb8b22d0ceb7b493d32e83bab4937d41de6c50e5317ff06d51230e"
+          },
+          {
+            "start_us": 2101534,
+            "end_us": 2101931,
+            "origin": "display_server_root",
+            "rgb_zlib_base64": "eJztm7ERwjAQBFtwCZRGaS6FUiiBEgic+oN7n3QC747Cm9d5iV4zbM/3dnY++3Z6TsPkyZMnT548efLkyZP/iXx1HgXvAldenTO6j+te9XcZ3b/Kj/bgyqtz8O/tr87Bv7e/Ogf/3v7qHPx7+6tz8O/tr87Bv7e/OqfyX53R/V350bj6qPuaqw/+D/DfA//4v9IH/wf474F//F/pg/8D9f2/ulfFb2Quru9S91/8H+A/C/6z4D8L/rPgPwv+s4z2r+5f0MO1/0IP/GfBfxb8Z8F/FvxnwX8W9f0/3fffUPffdN9/A/9Z8J8F/1nwnwX/WfCfhff/LOy/WfCfBf9Z8J8F/1nwnwX/WXj/z8L+mwX/WfCfBf9Z8J8F/1nwn2W193/X/zhWm1Ox2v67mjfXnAr8z5lTgf85cyrwP2dOBf7nzKnA/5w5FfifM6fC9f6/2nep81391Z6u/dfV3/Vd6nxXf7Un/nv3unriv3evqyf+e/e6euK/d6+rJ/5797p64r93r6un+v6f8uOa4+rvQt1/Xf1dfvrGr/V3gf9efxf47/V3gf9efxf47/V3gf9efxf47/V3UfnfH6/To+5r5Ht5/OP/znn84//Oefzj/855/GfzXx2+Uv4=",
+            "rgb_sha256": "fdd08a94f0eb8b22d0ceb7b493d32e83bab4937d41de6c50e5317ff06d51230e"
+          },
+          {
+            "start_us": 2150441,
+            "end_us": 2150729,
+            "origin": "display_server_root",
+            "rgb_zlib_base64": "eJztm7ERwjAQBFtwCZRGaS6FUiiBEgic+oN7n3QC747Cm9d5iV4zbM/3dnY++3Z6TsPkyZMnT548efLkyZP/iXx1HgXvAldenTO6j+te9XcZ3b/Kj/bgyqtz8O/tr87Bv7e/Ogf/3v7qHPx7+6tz8O/tr87Bv7e/OqfyX53R/V350bj6qPuaqw/+D/DfA//4v9IH/wf474F//F/pg/8D9f2/ulfFb2Quru9S91/8H+A/C/6z4D8L/rPgPwv+s4z2r+5f0MO1/0IP/GfBfxb8Z8F/FvxnwX8W9f0/3fffUPffdN9/A/9Z8J8F/1nwnwX/WfCfhff/LOy/WfCfBf9Z8J8F/1nwnwX/WXj/z8L+mwX/WfCfBf9Z8J8F/1nwn2W193/X/zhWm1Ox2v67mjfXnAr8z5lTgf85cyrwP2dOBf7nzKnA/5w5FfifM6fC9f6/2nep81391Z6u/dfV3/Vd6nxXf7Un/nv3unriv3evqyf+e/e6euK/d6+rJ/5797p64r93r6un+v6f8uOa4+rvQt1/Xf1dfvrGr/V3gf9efxf47/V3gf9efxf47/V3gf9efxf47/V3UfnfH6/To+5r5Ht5/OP/znn84//Oefzj/855/GfzXx2+Uv4=",
+            "rgb_sha256": "fdd08a94f0eb8b22d0ceb7b493d32e83bab4937d41de6c50e5317ff06d51230e"
+          },
+          {
+            "start_us": 2201220,
+            "end_us": 2201541,
+            "origin": "display_server_root",
+            "rgb_zlib_base64": "eJztm7ERwjAQBFtwCZRGaS6FUiiBEgic+oN7n3QC747Cm9d5iV4zbM/3dnY++3Z6TsPkyZMnT548efLkyZP/iXx1HgXvAldenTO6j+te9XcZ3b/Kj/bgyqtz8O/tr87Bv7e/Ogf/3v7qHPx7+6tz8O/tr87Bv7e/OqfyX53R/V350bj6qPuaqw/+D/DfA//4v9IH/wf474F//F/pg/8D9f2/ulfFb2Quru9S91/8H+A/C/6z4D8L/rPgPwv+s4z2r+5f0MO1/0IP/GfBfxb8Z8F/FvxnwX8W9f0/3fffUPffdN9/A/9Z8J8F/1nwnwX/WfCfhff/LOy/WfCfBf9Z8J8F/1nwnwX/WXj/z8L+mwX/WfCfBf9Z8J8F/1nwn2W193/X/zhWm1Ox2v67mjfXnAr8z5lTgf85cyrwP2dOBf7nzKnA/5w5FfifM6fC9f6/2nep81391Z6u/dfV3/Vd6nxXf7Un/nv3unriv3evqyf+e/e6euK/d6+rJ/5797p64r93r6un+v6f8uOa4+rvQt1/Xf1dfvrGr/V3gf9efxf47/V3gf9efxf47/V3gf9efxf47/V3UfnfH6/To+5r5Ht5/OP/znn84//Oefzj/855/GfzXx2+Uv4=",
+            "rgb_sha256": "fdd08a94f0eb8b22d0ceb7b493d32e83bab4937d41de6c50e5317ff06d51230e"
+          },
+          {
+            "start_us": 2252123,
+            "end_us": 2252458,
+            "origin": "display_server_root",
+            "rgb_zlib_base64": "eJztm7ERwjAQBFtwCZRGaS6FUiiBEgic+oN7n3QC747Cm9d5iV4zbM/3dnY++3Z6TsPkyZMnT548efLkyZP/iXx1HgXvAldenTO6j+te9XcZ3b/Kj/bgyqtz8O/tr87Bv7e/Ogf/3v7qHPx7+6tz8O/tr87Bv7e/OqfyX53R/V350bj6qPuaqw/+D/DfA//4v9IH/wf474F//F/pg/8D9f2/ulfFb2Quru9S91/8H+A/C/6z4D8L/rPgPwv+s4z2r+5f0MO1/0IP/GfBfxb8Z8F/FvxnwX8W9f0/3fffUPffdN9/A/9Z8J8F/1nwnwX/WfCfhff/LOy/WfCfBf9Z8J8F/1nwnwX/WXj/z8L+mwX/WfCfBf9Z8J8F/1nwn2W193/X/zhWm1Ox2v67mjfXnAr8z5lTgf85cyrwP2dOBf7nzKnA/5w5FfifM6fC9f6/2nep81391Z6u/dfV3/Vd6nxXf7Un/nv3unriv3evqyf+e/e6euK/d6+rJ/5797p64r93r6un+v6f8uOa4+rvQt1/Xf1dfvrGr/V3gf9efxf47/V3gf9efxf47/V3gf9efxf47/V3UfnfH6/To+5r5Ht5/OP/znn84//Oefzj/855/GfzXx2+Uv4=",
+            "rgb_sha256": "fdd08a94f0eb8b22d0ceb7b493d32e83bab4937d41de6c50e5317ff06d51230e"
+          },
+          {
+            "start_us": 2300803,
+            "end_us": 2301179,
+            "origin": "display_server_root",
+            "rgb_zlib_base64": "eJztm7ERwjAQBFtwCZRGaS6FUiiBEgic+oN7n3QC747Cm9d5iV4zbM/3dnY++3Z6TsPkyZMnT548efLkyZP/iXx1HgXvAldenTO6j+te9XcZ3b/Kj/bgyqtz8O/tr87Bv7e/Ogf/3v7qHPx7+6tz8O/tr87Bv7e/OqfyX53R/V350bj6qPuaqw/+D/DfA//4v9IH/wf474F//F/pg/8D9f2/ulfFb2Quru9S91/8H+A/C/6z4D8L/rPgPwv+s4z2r+5f0MO1/0IP/GfBfxb8Z8F/FvxnwX8W9f0/3fffUPffdN9/A/9Z8J8F/1nwnwX/WfCfhff/LOy/WfCfBf9Z8J8F/1nwnwX/WXj/z8L+mwX/WfCfBf9Z8J8F/1nwn2W193/X/zhWm1Ox2v67mjfXnAr8z5lTgf85cyrwP2dOBf7nzKnA/5w5FfifM6fC9f6/2nep81391Z6u/dfV3/Vd6nxXf7Un/nv3unriv3evqyf+e/e6euK/d6+rJ/5797p64r93r6un+v6f8uOa4+rvQt1/Xf1dfvrGr/V3gf9efxf47/V3gf9efxf47/V3gf9efxf47/V3UfnfH6/To+5r5Ht5/OP/znn84//Oefzj/855/GfzXx2+Uv4=",
+            "rgb_sha256": "fdd08a94f0eb8b22d0ceb7b493d32e83bab4937d41de6c50e5317ff06d51230e"
+          },
+          {
+            "start_us": 2351821,
+            "end_us": 2352170,
+            "origin": "display_server_root",
+            "rgb_zlib_base64": "eJztm7ERwjAQBFtwCZRGaS6FUiiBEgic+oN7n3QC747Cm9d5iV4zbM/3dnY++3Z6TsPkyZMnT548efLkyZP/iXx1HgXvAldenTO6j+te9XcZ3b/Kj/bgyqtz8O/tr87Bv7e/Ogf/3v7qHPx7+6tz8O/tr87Bv7e/OqfyX53R/V350bj6qPuaqw/+D/DfA//4v9IH/wf474F//F/pg/8D9f2/ulfFb2Quru9S91/8H+A/C/6z4D8L/rPgPwv+s4z2r+5f0MO1/0IP/GfBfxb8Z8F/FvxnwX8W9f0/3fffUPffdN9/A/9Z8J8F/1nwnwX/WfCfhff/LOy/WfCfBf9Z8J8F/1nwnwX/WXj/z8L+mwX/WfCfBf9Z8J8F/1nwn2W193/X/zhWm1Ox2v67mjfXnAr8z5lTgf85cyrwP2dOBf7nzKnA/5w5FfifM6fC9f6/2nep81391Z6u/dfV3/Vd6nxXf7Un/nv3unriv3evqyf+e/e6euK/d6+rJ/5797p64r93r6un+v6f8uOa4+rvQt1/Xf1dfvrGr/V3gf9efxf47/V3gf9efxf47/V3gf9efxf47/V3UfnfH6/To+5r5Ht5/OP/znn84//Oefzj/855/GfzXx2+Uv4=",
+            "rgb_sha256": "fdd08a94f0eb8b22d0ceb7b493d32e83bab4937d41de6c50e5317ff06d51230e"
+          }
+        ]
+      },
+      "evaluation": {
+        "oracle_version": "0.1.0",
+        "scope": "temporal_pixel_observation",
+        "outcome": "pass",
+        "failures": [],
+        "uncertainty": [],
+        "samples": 48,
+        "max_gap_us": 54057,
+        "max_capture_us": 414,
+        "observed_generations": [
+          "1",
+          "2",
+          "3"
+        ],
+        "observations": [
+          {
+            "at_us": 4,
+            "generation": "1"
+          },
+          {
+            "at_us": 50793,
+            "generation": "1"
+          },
+          {
+            "at_us": 101328,
+            "generation": "1"
+          },
+          {
+            "at_us": 150287,
+            "generation": "1"
+          },
+          {
+            "at_us": 201438,
+            "generation": "1"
+          },
+          {
+            "at_us": 250105,
+            "generation": "1"
+          },
+          {
+            "at_us": 300893,
+            "generation": "1"
+          },
+          {
+            "at_us": 351947,
+            "generation": "1"
+          },
+          {
+            "at_us": 401192,
+            "generation": "1"
+          },
+          {
+            "at_us": 450114,
+            "generation": "1"
+          },
+          {
+            "at_us": 500860,
+            "generation": "1"
+          },
+          {
+            "at_us": 552028,
+            "generation": "1"
+          },
+          {
+            "at_us": 600595,
+            "generation": "1"
+          },
+          {
+            "at_us": 651414,
+            "generation": "1"
+          },
+          {
+            "at_us": 700042,
+            "generation": "1"
+          },
+          {
+            "at_us": 751174,
+            "generation": "1"
+          },
+          {
+            "at_us": 805533,
+            "generation": "1"
+          },
+          {
+            "at_us": 852015,
+            "generation": "2"
+          },
+          {
+            "at_us": 900909,
+            "generation": "2"
+          },
+          {
+            "at_us": 951772,
+            "generation": "2"
+          },
+          {
+            "at_us": 1000592,
+            "generation": "2"
+          },
+          {
+            "at_us": 1051555,
+            "generation": "2"
+          },
+          {
+            "at_us": 1100650,
+            "generation": "2"
+          },
+          {
+            "at_us": 1151463,
+            "generation": "2"
+          },
+          {
+            "at_us": 1200262,
+            "generation": "2"
+          },
+          {
+            "at_us": 1251224,
+            "generation": "2"
+          },
+          {
+            "at_us": 1300306,
+            "generation": "2"
+          },
+          {
+            "at_us": 1351557,
+            "generation": "2"
+          },
+          {
+            "at_us": 1400468,
+            "generation": "2"
+          },
+          {
+            "at_us": 1451507,
+            "generation": "2"
+          },
+          {
+            "at_us": 1500405,
+            "generation": "2"
+          },
+          {
+            "at_us": 1551497,
+            "generation": "2"
+          },
+          {
+            "at_us": 1604554,
+            "generation": "2"
+          },
+          {
+            "at_us": 1651313,
+            "generation": "3"
+          },
+          {
+            "at_us": 1700112,
+            "generation": "3"
+          },
+          {
+            "at_us": 1751040,
+            "generation": "3"
+          },
+          {
+            "at_us": 1802056,
+            "generation": "3"
+          },
+          {
+            "at_us": 1851140,
+            "generation": "3"
+          },
+          {
+            "at_us": 1902030,
+            "generation": "3"
+          },
+          {
+            "at_us": 1950855,
+            "generation": "3"
+          },
+          {
+            "at_us": 2001972,
+            "generation": "3"
+          },
+          {
+            "at_us": 2050667,
+            "generation": "3"
+          },
+          {
+            "at_us": 2101534,
+            "generation": "3"
+          },
+          {
+            "at_us": 2150441,
+            "generation": "3"
+          },
+          {
+            "at_us": 2201220,
+            "generation": "3"
+          },
+          {
+            "at_us": 2252123,
+            "generation": "3"
+          },
+          {
+            "at_us": 2300803,
+            "generation": "3"
+          },
+          {
+            "at_us": 2351821,
+            "generation": "3"
+          }
+        ]
+      },
+      "started_monotonic_ns": 205782324215,
+      "background_before": {
+        "bytes": 36864,
+        "sha256": "b014bc620df76c3c67e48ffb9a432e07bb53942c0d53b8a4438fceae7f124aa4",
+        "rgb_zlib_base64": "eJztwgENAAAMAqBKxjCG/VO8xwcjXVRVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV9fsDtqqCWQ=="
+      },
+      "background_after": {
+        "bytes": 36864,
+        "sha256": "b014bc620df76c3c67e48ffb9a432e07bb53942c0d53b8a4438fceae7f124aa4",
+        "rgb_zlib_base64": "eJztwgENAAAMAqBKxjCG/VO8xwcjXVRVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV9fsDtqqCWQ=="
+      },
+      "final_desktop": {
+        "bytes": 1440000,
+        "sha256": "a39dcfe235bae435d286dfedbcfca91fe113c969740372d561a799b98c13ef5a",
+        "rgb_zlib_base64": "eJzt3F9olfUDx3FHlhailpkWWRmVSkW/souitJSoFYVBSd4UQUUWUQZ6ERS2/tz0B6/LIOl/MvViiIXOLFvropYZkTDNZdZFqducppbi78t5+B3Ob9s57Tk+e87c9/XmdXH+POfsWcz5OW6dESMkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIk5VpLS8vmzZtrfRaSJEknfRMmTDjzzDPDheOFwoXx48eHG2t9XpIkSSdl9913X1dXV0dHx4iSfbVjx45w4/z582t8cpLi6+yzz3711Ve3bdt24MCBvXv3tra2Pvroo3V1dQN57JIlS2677bZy986YMWPFihXh293hw4ePHDkyffr0ys+2aNGicOSxY8fCS85w9fTTTw+3bNmy5eDBg52dnV9//fWCBQvC7WPHjl1X6P777y/32NJeeOGFcPvPP/88kM9I0slYGFfhj3nYVOF7zoiSfRWuhgvhrtwm1pQpUxobG/fv33/8xArPsGbNmmnTpuVz2pKy7bzzzvvll1/CN5+jR4/u3Lnzjz/+OFboww8//NfHzpo1Kxy5bNmyfu+98cYbw2ALB/z0009NTU1r1669+OKLyz3VuHHjVq1adex/JRtp6tSpYVaFYbZ169bt27cnd82dOzcMwuTyiy++WO6xxW644Ya///7bvpKGcZMnT072zPPPP5+8Nizuq3A1fKMIl7u7u88555zBPpMwrsKr1BNcVqXt27cvPGffDzRq1KjZs2cvKTRnzpzRo0cP9qcmKVXvvfde2B67du264oorklseeOCBZKjcddddyS3hD3JDQ0N7e/uhQ4d279790UcfnXLKKfPmzfv111+Lq6atra3XM4dZFTZbeFH5r+cwcuTIH374ITzJ6tWre22kmTNnFi9/+eWX4a5FixaV7qsKjx1R+JeuHTt2JNvMvpKGay+99FKYIuvXry/eUtxXIwoTq7m5OVxNXpENao2NjRmOq6SVK1f2/UBhXD333HNLC4UL4epgf2qSBt6pp57a09MTtseTTz5ZevvGjRvDje+++25y9f333w9XDx48+Pnnn4eV0tTUFG585JFHtm3bFm7funXr8uXLwx/w0me4+uqrw12tra1z58598803X3/99euvv77CmSxYsOCxxx679NJL+/03qNNOO+3aa6/97bffwtledtll4bvl+ELJS7YKj33nnXfC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"
+      }
+    }
+  },
+  "mapped_files": {
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/GNOME-MARKER-01-243b5ebc4e7d43dbb938f23e2ce2c059/cache/mesa_shader_cache/index": "0da2ddea5a23ad0cc2b1b3078eac8e38ce4434f2d98dc476e50eefe2246320e8",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/GNOME-MARKER-01-243b5ebc4e7d43dbb938f23e2ce2c059/schemas/gschemas.compiled": "1a4837e57a71b7269e9a595eed6a24f0ac7263e5f5a988485c6c3d772e0fd33c",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/bin/gnome-shell": "5f678999f051dd1e17f2da50cb55ddc152d9b1f5d45a6ea8ead8b4df603b2a17",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/gnome-shell/Gvc-1.0.typelib": "d7b04b63bf1e3991c71a4bd957c3b6c96881fb79dc283e92e3645dfa650f3f6d",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/gnome-shell/Shell-14.typelib": "6c13c4685dd957d7c45b279bb452ca73f874d7d6b71c69a068be0f12c955481b",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/gnome-shell/St-14.typelib": "9e96e7659f8ce65ad3db1ff01c5cd15264fc7c2354a3d2305d8183c49b0f405a",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/gnome-shell/libgnome-shell-menu.so": "395e97a1e98e44555a076ddb517071a00d8b4b2da2441cb66814edda02197606",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/gnome-shell/libgvc.so": "043f981d2a0432a313fc9d1c65ec80143660d5e3ad5e1ab19055a4a09c216841",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/gnome-shell/libshell-14.so": "7f0ff0cd2536c9827e4f98b6b07f4174a67d552ac7edb05c0d6e74178e71ce35",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/gnome-shell/libst-14.so": "e482f07b44180e8cd00c5f5dcc4e9d11391f3e829c093ddc402c2de87a689181",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/girepository-1.0/AccountsService-1.0.typelib": "0f9569debc8db85adf15afdcdb51f911014847bdf3a880b550a001f48b4401c2",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/girepository-1.0/GDesktopEnums-3.0.typelib": "c0dd5d4ff1a8023071bad25d4b5951c7d8a4e9edfdc97cf18268a308139edca5",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/girepository-1.0/GWeather-4.0.typelib": "6e3e9983f3fecfc6af81ed2b4f59386ab3dbe24c5c83f98056c0ba7531a2e540",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/girepository-1.0/Gck-2.typelib": "9e6fba1d266f60b47a0053ce9e64b946a8f1d39313d48f23f425130fb435702f",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/girepository-1.0/Gcr-4.typelib": "27d15b605252f086ffaf82b79975db8d3b6055d45750b53596fd97816b74213c",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/girepository-1.0/Gdk-4.0.typelib": "4416aff0f2a94e1f7781f029cfa2b9fb7c07315a642bb7b31ac257199121c61d",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/girepository-1.0/Gdm-1.0.typelib": "6e2d7c13d5431a8675c35c25cb44664ccad1d0c0cdd5b815042571f118143c7b",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/girepository-1.0/Geoclue-2.0.typelib": "5c33009d9f9b670a92c01a4fc6e151b0aa9e96e855f2d249a3f4a99024ff0a08",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/girepository-1.0/GnomeBG-4.0.typelib": "9678b433dbf444f6ed47e89d73d9db20bef77acb2a9ff69764d36e4f3642f19f",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/girepository-1.0/GnomeBluetooth-3.0.typelib": "d530e800a5883573486a5348b2470dba0fb130b1c5f697327d52139a554c90ac",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/girepository-1.0/GnomeDesktop-4.0.typelib": "5322ae0b7eb208d61f68e5e59fd25994396716c394bab9b46874d2650f2100b7",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/girepository-1.0/Graphene-1.0.typelib": "e41ea620c9d28113dc76aaa4c22d1feb599e8eda573e7176cb63848ef939f7ec",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/girepository-1.0/Gsk-4.0.typelib": "6b3dc9d4d286a2cde3e8d127d6e2c076671ff900b1f1e0eb2d92e8c9a116a0e9",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/girepository-1.0/Gtk-4.0.typelib": "271424ad8e21fb20958b972ce07cda808b29f517def2a84deaa399b94b7c33cd",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/girepository-1.0/IBus-1.0.typelib": "368207ab8596e32ebf40aa1b21eb2012c8ecf2ba8211a11faef14ecef7db66b4",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/girepository-1.0/NM-1.0.typelib": "107d9056cf9cdede8e25984acdb399947a150833d08204b76686247f37db4245",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/girepository-1.0/NMA4-1.0.typelib": "1a883d28033d0184ca694daed34beb5739468a22cc68ae43d3469bcb3754edf8",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/girepository-1.0/Polkit-1.0.typelib": "5bad83f910b5d9e3fb0a1b3acecf667dddf6608d23d4e34e0152964ddccf9fec",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/girepository-1.0/PolkitAgent-1.0.typelib": "c2ab85a8f36ed94434b6a297c9ebf1acd3df6fdf4b15bb90b657494b0e8012de",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/girepository-1.0/Rsvg-2.0.typelib": "b0e60435175a2b246cf013a54f2361f897a5c4be3be1657a6d935f7117d8d8af",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/girepository-1.0/Soup-3.0.typelib": "b15149d668a4c683753a3f2a94ff030d294bb5b2e9af701e501f82c7f2605f1d",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/girepository-1.0/UPowerGlib-1.0.typelib": "f017846ac6041e6831cb8112d59b2d0f7b32f791b79f7baf21b82a11dcd69a77",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/gjs/girepository-1.0/GjsPrivate-1.0.typelib": "50558e47b129ca2a341090b61e6d2d45905fea77e94c5b188f60e6929d4325c6",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libaccountsservice.so.0.0.0": "7c38f50aa24b2a33332964d5e97b66b28ec0e9d25333d45ea7ea1c90cc88ba62",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libcanberra.so.0.2.5": "626bfac23934e0a254e3caea7fa18a9cf39f80eda014b1604c1e5b9aec0e76e2",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libeis.so.1.2.1": "5c2df16bfd509d59c4bcc7dc179a22e7722509f4239fcdab7a2c413ceea6451f",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libevdev.so.2.3.0": "38125f0052d085b76d67666a6ac1405e31d1bb8b49cb6fb5c6728bf3e9a3f4aa",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libgck-2.so.2.2.0": "ef7c10851a903bc768d30a7a998b27fea9835a5541fb3540e012027420c37de9",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libgcr-4.so.4.2.0": "9b1f196c239e207533e2346f0926738e375ce2d63274d76cb5c8912b4d3198fc",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libgdm.so.1.0.0": "6c504ce3ac77ac993726917ccbde01b367a5482c041d6988f98f194365c81c02",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libgeoclue-2.so.0.0.0": "709a0f7f46a489cf837e46e29a17d6f30aa687767c8c06122f2d7654c52b83c7",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libgeocode-glib-2.so.0.0.0": "351d2e9a1c704fbd77aeb072b38a0e7427b5d6d34cfe4bedb7c71cf5add7d2e0",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libgjs.so.0.0.0": "fa55034e79132a36d8e11bcdf7d0b365717e3dc85efe3fca6414f075c422d7a1",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libgnome-bg-4.so.2.1.0": "591b8f4b0eafbbb9ae8c935c70d59581028065a1db4e3eff54d265f912591fdc",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libgnome-bluetooth-3.0.so.13.2.0": "818200f154c8510420cd5f8b82ae843b55eb58887b099fa5bcb524784256f202",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libgnome-desktop-4.so.2.1.0": "bee95c4bff128b7d41779572919811eb9ea5ea80ed749cc487b96ceba7147efa",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libgraphene-1.0.so.0.1000.8": "05ec52d7b5c5f5b891e20ab73243102e4316e3c98675b62df48e4218ca799c2f",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libgtk-4.so.1.1400.5": "cdc584775543f6020a367e85ebe28e8ffec6fe107a7ff8d94bb312a8a10f3c46",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libgweather-4.so.0.400.2": "da3a8a4e98f8f6172dee915c0d979661e6a4f764319c28c6616520c141bdd96b",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libgweather-4/Locations.bin": "078ea7492654f5f5b6c8ecfc72b12d2f13ea694668fef71e69b4c6a73fd9984c",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libibus-1.0.so.5.0.529": "96476cea7380142e333a0044c6c4a4a1e5ca874dc3a02d919c38ec43c5e26697",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libinput.so.10.13.0": "3dea9a694022f2d59fbaa2714f3ea614bef6e16b624bfe817a6ea481704d73b3",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libjson-glib-1.0.so.0.800.0": "f633e2720c6d7706dabe44241a4050efdc0e7df9ab43f3fb58a165eb3c2d5ec5",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libmozjs-115.so.115.10.0": "17ddc8d6546fee566e64fd8165ad905add3f72e022c10c4a7bac236695e2eeb2",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libmtdev.so.1.0.0": "843e4aa13d0407569a5fb9b44f235c3a788e6afde4ed3ee82a9db37d70a466f7",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libmutter-14.so.0.0.0": "0f9fa621e55b7593e871f7789150ba1f2d860371ae2ba33736d72c6192419be8",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libnm.so.0.1.0": "b39505d1f8faa109b82377de49252c7b796761aa618d405d973feca13f837d8a",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libpipewire-0.3.so.0.1005.0": "2e21fa4ca7e82f95df0bc880df23392a576bba983e48c65a01657c65c54e575e",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libpolkit-agent-1.so.0.0.0": "a9d8f69f44bf813ca58d516dd62933d7df35f8d24799a541d2b8302c1333868d",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libpolkit-gobject-1.so.0.0.0": "e759b475aa29664d6219a59b0c360f764c56318547f8c9b3ff433b0c3b1e0778",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libpulse-mainloop-glib.so.0.0.6": "3740e5add513a27a70afb657e261847df1eeba9e62111b2ce480c1641e72692c",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libsecret-1.so.0.0.0": "dd11ac9962eb3cd082cc6c8c3529019ab2a333ddc4ccc79ed608fdfbf7ef95a1",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libsoup-3.0.so.0.7.1": "a0087faeb8a539328da89338d3cd19fd316825482549b921a8e799393d9aa54c",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libtdb.so.1.4.10": "6b9930cda5fc15a4d43bb231b8524b2c74cb7386e57d1d7c3d9cad99ab05bc82",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libupower-glib.so.3.1.0": "fe92340195ec15a2384c681cdf1316b0da78efd1e4aae31a15aede124e058029",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libvorbisfile.so.3.3.8": "7499ededea9e6c2a1f3801da281f10ff50cd831b7bf3274da911ef6327b0035d",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libwacom.so.9.0.0": "67fc99dbb4eb53465847d7982d8455bdb10671f1af2cd4b29e42f60915195376",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libxcb-res.so.0.0.0": "f398f04a67f89d094225004a7f56d6cfce4fa6e45a656a756d59302f60c25d01",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libxcb-xkb.so.1.0.0": "f6b3ca63ff23f3e82d122af4622aaebed49c58614e2f840568a0bb4c9048436c",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libxkbcommon-x11.so.0.0.0": "109a5c2095ab6bcc36f751d3c0deb3b066ecbfb664a36904b6ca212f987a408a",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libxkbregistry.so.0.0.0": "f368dce47345415e81be57a4c1bd10f918263fbcbf809ccc71b20fe20b5f406a",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/mutter-14/Cally-14.typelib": "07242a61ebd6811f3357ce09091f8dfbfe45bab47d1cd16a51276313b9a69958",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/mutter-14/Clutter-14.typelib": "2a9ff8360906fe47b25a209260ee9b3045ace3b4277fa2df2be346317252dcbc",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/mutter-14/Cogl-14.typelib": "1518706a0283b46fc3c9a22ba48955d952aa24c2240206fcc58c0d33a264488a",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/mutter-14/CoglPango-14.typelib": "e321dbf163d9f39b072c309da18a617c691d430ca4cc9eb5d6a8b2e2bec76d6e",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/mutter-14/Meta-14.typelib": "0b27d73b639dd7914450caddc6df046d60afab804c083c8e46a425023dd6dd08",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/mutter-14/Mtk-14.typelib": "6591f888df412fa4af43f346b96073eff95e5979b010de7f117d4fbe028d246f",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/mutter-14/libmutter-clutter-14.so.0.0.0": "300de1bf2895003f0ee6f7b3323839e64bf2ad22ceb64228bd348a58e174aca0",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/mutter-14/libmutter-cogl-14.so.0.0.0": "2f7e5a049324e07adf581b1db88d53ad0f726763f3463dcba95819eac6cd32c0",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/mutter-14/libmutter-cogl-pango-14.so.0.0.0": "240a9df2516aa0b397818025d211daa05ac96f550b8294df21cca77519774d07",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/mutter-14/libmutter-mtk-14.so.0.0.0": "45798799b6418869c73b61346d889c443c7ba7ba2a414a624bc82934ff05e19a",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/share/gnome-shell/gnome-shell-dbus-interfaces.gresource": "de22075c2a7144c0e5277ee69c37e59e1b960a54f4f396d94a8e00b1d7d722db",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/share/gnome-shell/gnome-shell-icons.gresource": "adbb5532df2174f69749277bcb8e41fd1df16bcf80fa413e194eb1bc37e4ea89",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/share/gnome-shell/gnome-shell-osk-layouts.gresource": "79744b7f7f9f4b058bc83226776a13853691918d8035e6359429d2e399020fb7",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/share/gnome-shell/gnome-shell-theme.gresource": "bebe858825c1e7e11d934ab3e3b816d3be49e88b5882438b0826d6aaabaeeb9f",
+    "/usr/lib/locale/C.utf8/LC_ADDRESS": "26e2800affab801cb36d4ff9625a95c3abceeda2b6553a7aecd0cfcf34c98099",
+    "/usr/lib/locale/C.utf8/LC_COLLATE": "47a5f5359a8f324abc39d69a7f6241a2ac0e2fbbeae5b9c3a756e682b75d087b",
+    "/usr/lib/locale/C.utf8/LC_CTYPE": "59015993b1b671273461ef1167d7a9ad76dc090d521c91102e962217ed6b6dba",
+    "/usr/lib/locale/C.utf8/LC_IDENTIFICATION": "38a1d8e5271c86f48910d9c684f64271955335736e71cec35eeac942f90eb091",
+    "/usr/lib/locale/C.utf8/LC_MEASUREMENT": "bb14a6f2cbd5092a755e8f272079822d3e842620dd4542a8dfa1e5e72fc6115b",
+    "/usr/lib/locale/C.utf8/LC_MESSAGES/SYS_LC_MESSAGES": "f9ad02f1d8eba721d4cbd50c365b5c681c39aec008f90bfc2be2dc80bfbaddcb",
+    "/usr/lib/locale/C.utf8/LC_MONETARY": "bfd9e9975443b834582493fe9a8d7aefcd989376789c17470a1e548aee76fd55",
+    "/usr/lib/locale/C.utf8/LC_NAME": "14507aad9f806112e464b9ca94c93b2e4d759ddc612b5f87922d7cac7170697d",
+    "/usr/lib/locale/C.utf8/LC_NUMERIC": "f5976e6b3e6b24dfe03caad6a5b98d894d8110d8bd15507e690fd60fd3e04ab2",
+    "/usr/lib/locale/C.utf8/LC_PAPER": "cde048b81e2a026517cc707c906aebbd50f5ee3957b6f0c1c04699dffcb7c015",
+    "/usr/lib/locale/C.utf8/LC_TELEPHONE": "f4caf0d12844219b65ba42edc7ec2f5ac1b2fc36a3c88c28887457275daca1ee",
+    "/usr/lib/locale/C.utf8/LC_TIME": "0910b595d1d5d4e52cc0f415bbb1ff07c015d6860d34aae02505dd9973a63154",
+    "/usr/lib/x86_64-linux-gnu/gconv/gconv-modules.cache": "52c227df9d53248238602c1ddaccd2c8ddc4cc6a61aa45d7c425af590b8806a5",
+    "/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-svg.so": "4f0dbd5b1ee4dba2c0c087e5eb14830277f4ef67d7832ff0c4d6ef6e766ec67a",
+    "/usr/lib/x86_64-linux-gnu/gio/modules/libdconfsettings.so": "00f54e95cce730ee71cd96f6030a6a980e75e1d7cf18a40cfd72e1d2286c3704",
+    "/usr/lib/x86_64-linux-gnu/girepository-1.0/Atk-1.0.typelib": "ddc5cc47d281b52638cbe0ab39c65a207e11b24f2a43ef50094f2a62533cf3fa",
+    "/usr/lib/x86_64-linux-gnu/girepository-1.0/Atspi-2.0.typelib": "e0577f7eb3ce969032661d201eed028de5944dbab35ed2f8a799342a2fa3aa36",
+    "/usr/lib/x86_64-linux-gnu/girepository-1.0/DBus-1.0.typelib": "0843f4d6a549703df7c07f8e96d3c47752123ecf910c7571d786f5347fa02234",
+    "/usr/lib/x86_64-linux-gnu/girepository-1.0/GIRepository-2.0.typelib": "c9ce34a9b1bb9be57113f2271022d0283feda81c2baaf8cfe6cc7d6f09f93a90",
+    "/usr/lib/x86_64-linux-gnu/girepository-1.0/GL-1.0.typelib": "e6677facd41cc99b3e3e1a9007d9762b00a446b42206d78dd28ea2653478bc80",
+    "/usr/lib/x86_64-linux-gnu/girepository-1.0/GLib-2.0.typelib": "7959062e30ce9b0e6dcad631d61272d6e5ade7abf73e6fb29065276ba4592809",
+    "/usr/lib/x86_64-linux-gnu/girepository-1.0/GModule-2.0.typelib": "07e643cc1fcb9210c1ffd5eb243e2e9cbab05fa3ef25a65e0f083f291cf1ede9",
+    "/usr/lib/x86_64-linux-gnu/girepository-1.0/GObject-2.0.typelib": "25b6c3aa94daa1fe93a47ae7ba97e7e248b810384812a8dfa84772ee99cc82eb",
+    "/usr/lib/x86_64-linux-gnu/girepository-1.0/GdkPixbuf-2.0.typelib": "e0dd4e5ee413492c7af2d1953375d65a102d0b3a7dcb30bbc1311db82613ad24",
+    "/usr/lib/x86_64-linux-gnu/girepository-1.0/Gio-2.0.typelib": "e49bc20f64bd49c6f4b138e8292a2ef4f61f0e41b4feb10fec73bb0567f146be",
+    "/usr/lib/x86_64-linux-gnu/girepository-1.0/GioUnix-2.0.typelib": "df9a26e63c34efb0819a92e5eb534ceb64c436f71393f742ba10bdcc9460e90e",
+    "/usr/lib/x86_64-linux-gnu/girepository-1.0/HarfBuzz-0.0.typelib": "1c2b5d710b9548b4bdabb8fe07695021762999138b2bbf97af59a86f9965781e",
+    "/usr/lib/x86_64-linux-gnu/girepository-1.0/Pango-1.0.typelib": "69a7120e594d37c0c07048120ff28c06ebb9e5ee26c5a01a7a2e38735e3bbca7",
+    "/usr/lib/x86_64-linux-gnu/girepository-1.0/PangoCairo-1.0.typelib": "85d7c36d3a1899b47e3261f8cfe43da7a3386073a6815c41b2a27320ca3a0e6a",
+    "/usr/lib/x86_64-linux-gnu/girepository-1.0/cairo-1.0.typelib": "6a0d6b4c8ae23d2690f83d3aa49a74abc298bcc6f7fd6c2b89fcc134c4f966dd",
+    "/usr/lib/x86_64-linux-gnu/girepository-1.0/freetype2-2.0.typelib": "77695d83d33b8f84f252b7c0e05adced1e9feb3b3a43431f0be8b0fc53d2343a",
+    "/usr/lib/x86_64-linux-gnu/girepository-1.0/xfixes-4.0.typelib": "e55b4e0489c9aac5c7f055f4a1b40e0f92417e0db7c02d1611d342a3396c0890",
+    "/usr/lib/x86_64-linux-gnu/girepository-1.0/xlib-2.0.typelib": "4450fa0426b410db5a219f64b4e0d7f9b0be17ae81b9a6947045aeaacf417f91",
+    "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2": "cd4df4f3c7b83673d61189bf2eaebd33ca4f2853ab9772b8a25e025ef99b1e81",
+    "/usr/lib/x86_64-linux-gnu/libEGL.so.1.1.0": "875ecbb2a07d60e32216c9f102965abc1e9cc1da7789558e2e9b8b9c107e231d",
+    "/usr/lib/x86_64-linux-gnu/libEGL_mesa.so.0.0.0": "ee0de80dc8521bbccf83c90961c53a1cef6a418eabed560a9c618ab7387581b4",
+    "/usr/lib/x86_64-linux-gnu/libFLAC.so.12.1.0": "03f99851a828586d74e06f62d098025271b19aeba9fe781a31b2d90dc57e723b",
+    "/usr/lib/x86_64-linux-gnu/libGL.so.1.7.0": "67f471213576d225d38347a0b6d2a08a231980685301ff6461bd74d3994e5027",
+    "/usr/lib/x86_64-linux-gnu/libGLESv2.so.2.1.0": "4d410c7e883b6e4bab42fafae7ebad6ae5702883bfce07a5e6ffdf4c3fec433b",
+    "/usr/lib/x86_64-linux-gnu/libGLX.so.0.0.0": "16fc8a37eea9210dc83c57eeff5aedc10ab4c6673f2f97e8bb6ee103df657b40",
+    "/usr/lib/x86_64-linux-gnu/libGLX_mesa.so.0.0.0": "409f932670504cc5829c7526db466eb69a6b7f9997fd5df8afc8dfb1588278c2",
+    "/usr/lib/x86_64-linux-gnu/libGLdispatch.so.0.0.0": "ca01a91104c8887b3d8e59499b58cbb8f604cc285666b50d9ec888eb0c915182",
+    "/usr/lib/x86_64-linux-gnu/libICE.so.6.3.0": "899ff245d50d4f1a7bb114d13b6200f42f93696ad93f38020c6ed7c84a5a943e",
+    "/usr/lib/x86_64-linux-gnu/libLLVM.so.20.1": "4b93481bd1c9d42c0951275dd275d4a9d30db78c309ae2cc0405669bc6dbbf8a",
+    "/usr/lib/x86_64-linux-gnu/libLerc.so.4": "a0ee52df526738293bdd232ddaefbb0d1d9c2da775a82fc6730e7cd394da560c",
+    "/usr/lib/x86_64-linux-gnu/libSM.so.6.0.1": "c9301f0ff852c0edcfc766f91c5df4f73b1b300c0303ac188524154588892fd0",
+    "/usr/lib/x86_64-linux-gnu/libX11-xcb.so.1.0.0": "966fc171a949852a606efdf44d255f6f91b35c16328f5405c1b24743b6708ea7",
+    "/usr/lib/x86_64-linux-gnu/libX11.so.6.4.0": "c5b5d782bd9cab3420a62df88f5c991507edf3331a89f98464ddbc538c37b879",
+    "/usr/lib/x86_64-linux-gnu/libXau.so.6.0.0": "8040da3f8516c1acfe39f04ff022480cdb273705ba5e7a4ca70bbdb1527cd67a",
+    "/usr/lib/x86_64-linux-gnu/libXcomposite.so.1.0.0": "675c78d8d5b088a59ad4f8eb15419d0842b17caca3317a5e9f68573171ec5d61",
+    "/usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2": "09bd5941a53ee7fb06898fa066709cf098df8e33a45042e065d2f8461d92672c",
+    "/usr/lib/x86_64-linux-gnu/libXdamage.so.1.1.0": "6ff910fbde851ede163b9066671e1740e374df414591015d90770b99d5b3de4a",
+    "/usr/lib/x86_64-linux-gnu/libXdmcp.so.6.0.0": "667d97d6da16016400ab10de9f83ef4ab209ceb6adf68ff9650225ec13e723b0",
+    "/usr/lib/x86_64-linux-gnu/libXext.so.6.4.0": "2907e6a996465de5b32a0dd10534d4416b87f1dee5670aaa7b19301a1fc93f44",
+    "/usr/lib/x86_64-linux-gnu/libXfixes.so.3.1.0": "89e5897f438456013d2297850a7558cd28c9ad1f6978447197568949fb6a0fd9",
+    "/usr/lib/x86_64-linux-gnu/libXi.so.6.1.0": "a51348c921ce1a35123fa7c99dc59bfd3e815be6829874fe15ae55172901d3e4",
+    "/usr/lib/x86_64-linux-gnu/libXinerama.so.1.0.0": "dceff724f4f74c420116fa6a11ece62894af4fc0e74a2254c923ccc215e1a041",
+    "/usr/lib/x86_64-linux-gnu/libXrandr.so.2.2.0": "bc6120a734d52e7f5e3611334e9f3cff0b3ce1b129bb20b6412ce8f0f62c049d",
+    "/usr/lib/x86_64-linux-gnu/libXrender.so.1.3.0": "250977e0e004b6c0556144c3e683487063b4582dc83d205196ec3aa65d54e2c6",
+    "/usr/lib/x86_64-linux-gnu/libXtst.so.6.1.0": "b236448961631bb13464c878e68535f5335b5fa10a5d8411f3ad1a56ff430ec2",
+    "/usr/lib/x86_64-linux-gnu/libXxf86vm.so.1.0.0": "7dc2d9687e3b238c2caa25ce8c8c7a6c90bce157239ee7fbb2ead2b5cd34c888",
+    "/usr/lib/x86_64-linux-gnu/libapparmor.so.1.17.1": "6d3f5037a2361f6ec2430d33f1c58fdfe97990833d129e9a98d9a936da8bde3b",
+    "/usr/lib/x86_64-linux-gnu/libasyncns.so.0.3.1": "47618619d79ea314f12905b3fff430916123df4a12602a5c40dd3679cf675521",
+    "/usr/lib/x86_64-linux-gnu/libatk-1.0.so.0.25209.1": "d312f3dbed8f19037bf4d8581f0e41ddfe53796dc7abbc9b7f253495d472a923",
+    "/usr/lib/x86_64-linux-gnu/libatk-bridge-2.0.so.0.0.0": "366fcd2f2cd9a77767855a7c25b00ffce57e6b55109a2bf800872f0337a28415",
+    "/usr/lib/x86_64-linux-gnu/libatspi.so.0.0.1": "4af877d2d235b7eaab015abe6d81b82c82fe506a5d71403b9bbdfcbce99e8141",
+    "/usr/lib/x86_64-linux-gnu/libblkid.so.1.1.0": "f3d6283f6b58de134f0f13094deac9c3af6764923c62e85f08a5780ad4ebe039",
+    "/usr/lib/x86_64-linux-gnu/libbrotlicommon.so.1.1.0": "a91ead095d2c80520c55a89057bbe10b031a075340442e63f44b310f93883a1b",
+    "/usr/lib/x86_64-linux-gnu/libbrotlidec.so.1.1.0": "64d8a5019d4c294b89fde1193343ea324bbd8603652554e5545f0a01595fa2c5",
+    "/usr/lib/x86_64-linux-gnu/libbsd.so.0.12.1": "e86cd4f0019f42c2ba5e60602e0edc8694d2948377d98c3654d0f6bddb5254bb",
+    "/usr/lib/x86_64-linux-gnu/libbz2.so.1.0.4": "218c4abdabce31161f3c2778762986d1fe06633705c7eb004a740946a5ccdfff",
+    "/usr/lib/x86_64-linux-gnu/libc.so.6": "8db37cf3f2169f59a0f07ef1fea308c35656668c64c8ff294e1860f4121eb161",
+    "/usr/lib/x86_64-linux-gnu/libcairo-gobject.so.2.11800.0": "61b4b6cb475c8c2c4622fd1618981d466b716b11903255b68975830fa20d982c",
+    "/usr/lib/x86_64-linux-gnu/libcairo-script-interpreter.so.2.11800.0": "81bafae4f1784d8a3544f6a713ef6990ab7657d75600477a6b110e99c32c895a",
+    "/usr/lib/x86_64-linux-gnu/libcairo.so.2.11800.0": "3144bd5935aee427d6c191b6b6d0ebf9010fb6320295a7f73edd276bc6993f2d",
+    "/usr/lib/x86_64-linux-gnu/libcap.so.2.66": "6ac6abc86ac891c6e13486470e26f1d939f47fda9e6b5d5508a7f5ec881adc84",
+    "/usr/lib/x86_64-linux-gnu/libcolord.so.2.0.5": "82eec8f0da7d833308bcbb39bc5aebf4213f0b163b34b06b95b3a761c40e2e3d",
+    "/usr/lib/x86_64-linux-gnu/libcom_err.so.2.1": "022943b3b11c860b049bce41342f1c2594941b7b401d95dfdf235521099fee08",
+    "/usr/lib/x86_64-linux-gnu/libcrypt.so.1.1.0": "1502636e3be8232c9cf801dfb533694aea985d449904f3e1295db26d7b348946",
+    "/usr/lib/x86_64-linux-gnu/libdatrie.so.1.4.0": "507f33edbbc19b80637d6d66f8e3f62fac097d0b4e9ee6f6f23f535ecea26a61",
+    "/usr/lib/x86_64-linux-gnu/libdbus-1.so.3.32.4": "a6ae7b4ef48562b40d7b9ba8efd2e49f6528b7cc6364bea382dcee4b473b5413",
+    "/usr/lib/x86_64-linux-gnu/libdeflate.so.0": "608c8d7e4345a9ff4b57aa853ce0c355cf2e1d5ec11b8bee86fb4760bba8a15f",
+    "/usr/lib/x86_64-linux-gnu/libdrm.so.2.125.0": "ff39219aa058421e46afd36851342370cd1932d2557eb22f54e129755642bf67",
+    "/usr/lib/x86_64-linux-gnu/libdrm_amdgpu.so.1.125.0": "b4353f38e7d1f6097732d326dfdc605e720bfde0488c8582b9af71ffbc0a3d97",
+    "/usr/lib/x86_64-linux-gnu/libdrm_intel.so.1.125.0": "be4c3b86ea638cb1df8a4237ea20269021b97e3aae27633027839d40e3ebf0ae",
+    "/usr/lib/x86_64-linux-gnu/libedit.so.2.0.72": "195c607216f8581dbf516346ed38f4c73500cac4b84e18eb0a4fd49931e4cd56",
+    "/usr/lib/x86_64-linux-gnu/libelf-0.190.so": "248c989360783cdc52f3659921de852c2efcc2097253ce58e34443f856412814",
+    "/usr/lib/x86_64-linux-gnu/libepoxy.so.0.0.0": "5fc7dd1ea433bfe5f1fd9854e66246bdb44e0cbf148707121c5f4c99fe11be29",
+    "/usr/lib/x86_64-linux-gnu/libexpat.so.1.9.1": "c42ff317838b4b4639e2ea801905f0317177c6df7e31b2f0d0240e3c3ac0cfde",
+    "/usr/lib/x86_64-linux-gnu/libffi.so.8.1.4": "00f593fe192f2851b8ce23b25cec2488d769beb5a8f63e8c9e563071e1075153",
+    "/usr/lib/x86_64-linux-gnu/libfontconfig.so.1.12.1": "a94b4059b27766f563894c8f7e61762b6f6b2e25c59ef36b730164d4b75c6c98",
+    "/usr/lib/x86_64-linux-gnu/libfreetype.so.6.20.1": "c14c53c5baff12afafb610c6312fb879e9bb77e80dd42e27504d52d6d8bcd059",
+    "/usr/lib/x86_64-linux-gnu/libfribidi.so.0.4.0": "550020af7ff4f77e3f05500e71051b676ee76f530479c2a836dfe899fcaf8395",
+    "/usr/lib/x86_64-linux-gnu/libgallium-25.2.8-0ubuntu0.24.04.2.so": "e37486422ecafdad74fb05bbcdcfc35300241a5f46e72b63ca442d4e0c0cca8b",
+    "/usr/lib/x86_64-linux-gnu/libgbm.so.1.0.0": "66f584160554d07f03d2a2fd1037d6af8f071e189c92438a77924e99c4572f0d",
+    "/usr/lib/x86_64-linux-gnu/libgcc_s.so.1": "d93224d2b0dab4247598be683adca02f5cf00586f99c187579cd7e92058fb7cb",
+    "/usr/lib/x86_64-linux-gnu/libgcrypt.so.20.4.3": "9f872b8956edfa11a3ad093f509cf312e8d135dd801ca548c990daa214c03bd4",
+    "/usr/lib/x86_64-linux-gnu/libgdk_pixbuf-2.0.so.0.4200.10": "f9f51980f9d8978507c3637fa5d4e89f9910d01d74c91905f27158efca27279d",
+    "/usr/lib/x86_64-linux-gnu/libgio-2.0.so.0.8000.0": "d8c4cf698e9b8790584cc5ede813a86ec4f041c0d58daa452b72431572685a87",
+    "/usr/lib/x86_64-linux-gnu/libgirepository-1.0.so.1.0.0": "2c16fd69df300c76d8ff4847dadb09d30433595e737de98c9935752e6fa29fb1",
+    "/usr/lib/x86_64-linux-gnu/libglib-2.0.so.0.8000.0": "42467d0dbcc0a6c9e0a31f05a5944095504ce98f093c3fe0825f0a1533fa8207",
+    "/usr/lib/x86_64-linux-gnu/libgmodule-2.0.so.0.8000.0": "f8445c01952fd3ff0bb4f17f73be821af3e4b9b61546ff517392e9baeb8f2126",
+    "/usr/lib/x86_64-linux-gnu/libgmp.so.10.5.0": "0ccdfb6d6f5c039465f6d002cf7e4c072d48ac6a2cffc8dd6c748dec31592804",
+    "/usr/lib/x86_64-linux-gnu/libgnutls.so.30.37.1": "ddbae2995750875c07bc218d12a062d73f8250678f54dedda7e9be5068781c98",
+    "/usr/lib/x86_64-linux-gnu/libgobject-2.0.so.0.8000.0": "99bf0727e0ca4faf12ab09b753b3d03294562c29c559b970c4dad435f9ec2bc6",
+    "/usr/lib/x86_64-linux-gnu/libgpg-error.so.0.34.0": "6cb18a007bfcb623029f4528a36b46578fea7dc34c2b505b8e6e0d99e6348cd1",
+    "/usr/lib/x86_64-linux-gnu/libgraphite2.so.3.2.1": "fcfaf843b25b58b88319ced52f826fc8213a661f3693c916f88641eddffe05b8",
+    "/usr/lib/x86_64-linux-gnu/libgssapi_krb5.so.2.2": "8d0b00978cde2a5a9ec76bee1e16a80efd502bc4db8647174a00a61c9d90f989",
+    "/usr/lib/x86_64-linux-gnu/libgudev-1.0.so.0.3.0": "fe24380e9898291c58f4b5533bf9199604c919a6e0567ff21652eaad7e4982eb",
+    "/usr/lib/x86_64-linux-gnu/libharfbuzz.so.0.60830.0": "4562cfcfd18935324ba3ac74a944898b867ab87a56e925ab3e351ba773f1513e",
+    "/usr/lib/x86_64-linux-gnu/libhogweed.so.6.8": "c3c606139d4f7776efa4dbd4a6b62e30c916b07a0cafd8c3ef173d6f093607e3",
+    "/usr/lib/x86_64-linux-gnu/libicudata.so.74.2": "ddbb3718b8bd9cbd780e5ab08b4503c30a6c4fa0706ebe5d074ed6b596c1714e",
+    "/usr/lib/x86_64-linux-gnu/libicuuc.so.74.2": "7560aadde38e5f4237a47a1ddd5891f9b36768a77a60faae30beee003ac01901",
+    "/usr/lib/x86_64-linux-gnu/libidn2.so.0.4.0": "6e632fd9a3125db60bbc623719bbc17b0470330321c5b1c57f1ff7190e5551ad",
+    "/usr/lib/x86_64-linux-gnu/libjbig.so.0": "6fea8a26ef5e0d2a36d296d7d0ec0c1f0894bf796b5824317bea88c090833a62",
+    "/usr/lib/x86_64-linux-gnu/libjpeg.so.8.2.2": "ac09f2cd6f8a3b8e3cb123999ce275f9bcbe31c6cf9e20212c8f297772591d15",
+    "/usr/lib/x86_64-linux-gnu/libk5crypto.so.3.1": "dd8b93b95adf53a638772061dbe81dc0252d2d8857ae1df774aed78c6a79e0c0",
+    "/usr/lib/x86_64-linux-gnu/libkeyutils.so.1.10": "f48214417757f18793ed6e180cc14ee1d6f04252a518fc7270e8ca1d0b4260fe",
+    "/usr/lib/x86_64-linux-gnu/libkrb5.so.3.3": "8cd11f2aa69efdac7c040a2794f8bf1a737405abff53908b737c721d1c4ba65d",
+    "/usr/lib/x86_64-linux-gnu/libkrb5support.so.0.1": "8253bcdf7f39fcf8f25e797757808e671d777efc00b0cd1fbbcd9da61b0e98f7",
+    "/usr/lib/x86_64-linux-gnu/liblcms2.so.2.0.14": "65d948920458341176f78e3797320ffb7c052ab5bd75036c3db75dd88839b007",
+    "/usr/lib/x86_64-linux-gnu/libltdl.so.7.3.2": "f059d7bfdc300ea3de7241bf0d21b2b5c9a5eac47cf8b8b28d3accafed90fe6e",
+    "/usr/lib/x86_64-linux-gnu/liblz4.so.1.9.4": "40bffd0a098387368b16b992abd5f7cf43c0fa2f05cabe5a6d483719554adfda",
+    "/usr/lib/x86_64-linux-gnu/liblzma.so.5.4.5": "696e868dd0700a19a6d65fc01608ec2d70d3cb91f65710e89180cd2e688f30cb",
+    "/usr/lib/x86_64-linux-gnu/liblzo2.so.2.0.0": "67a7624b45b4af0dd0d61122cfe16cf26353533a6b9d443179f6ec72093e0d48",
+    "/usr/lib/x86_64-linux-gnu/libm.so.6": "e9c4b28d340e415b8137480ec442662f981e1399386c5931dae0e886e3639e91",
+    "/usr/lib/x86_64-linux-gnu/libmd.so.0.1.0": "423e18586b6ea740f4465afd64f7a9a4cb7264ed979c8e7256f9085af5345fef",
+    "/usr/lib/x86_64-linux-gnu/libmount.so.1.1.0": "43831ab1f85948e5599c5c0295d87ad6d03e3d58b801534abdf4cd5d266388de",
+    "/usr/lib/x86_64-linux-gnu/libmp3lame.so.0.0.0": "14b664b4af2fe18975adb3c06c0369b436dd6504ce421736649c0415447c9d00",
+    "/usr/lib/x86_64-linux-gnu/libmpg123.so.0.48.2": "af6e041af88719710b77d83b7deb8ecbe10bdf67a255fcadcfae7eec1d19eea6",
+    "/usr/lib/x86_64-linux-gnu/libnettle.so.8.8": "a245ed916229583d6fe0b07657b3ed945bc148c28cc08b5266295f620d2b91cc",
+    "/usr/lib/x86_64-linux-gnu/libnghttp2.so.14.26.0": "46764ab5b6ca7e353a322054f0bee45d9158a27f3e6a82a2fa4447f2ba9ba268",
+    "/usr/lib/x86_64-linux-gnu/libogg.so.0.8.5": "1017f00b886f340acede53689da1267398e1297a20e8208db69ead7ab0fc3b6d",
+    "/usr/lib/x86_64-linux-gnu/libopus.so.0.9.0": "63ddaf057d71c53090607e0467eb308640c3b39b0f189e5b937e9c397be2f676",
+    "/usr/lib/x86_64-linux-gnu/libp11-kit.so.0.3.1": "a59efd4792d3343dedea1d26a28f5597abfe3369082deb504c4802a31b014897",
+    "/usr/lib/x86_64-linux-gnu/libpango-1.0.so.0.5200.1": "44fbb30ec8f9b2621095bad0d27cc15cec39245133124a44e8abc45193cbb493",
+    "/usr/lib/x86_64-linux-gnu/libpangocairo-1.0.so.0.5200.1": "229b50cdc7e7675000815e18338189db6f03fd564baaa4d0f257dbbe34f14652",
+    "/usr/lib/x86_64-linux-gnu/libpangoft2-1.0.so.0.5200.1": "cfcd528cfb737212719b3273b433b7fe35b6528acbb08c2223a486449314d629",
+    "/usr/lib/x86_64-linux-gnu/libpciaccess.so.0.11.1": "8f84e18b27f8e5808762b389667628be13076cc432d96c793daeb6fde5ee2a4b",
+    "/usr/lib/x86_64-linux-gnu/libpcre2-8.so.0.11.2": "e00576d71d81d3ba0cfa4903c835a44a8723aac96f72f79ff75200b4cff9071b",
+    "/usr/lib/x86_64-linux-gnu/libpixman-1.so.0.42.2": "73aa0daeedb7228754d798b194e2ff69c8b82a689b9aa4f1d8ab32a8763b0cc5",
+    "/usr/lib/x86_64-linux-gnu/libpng16.so.16.43.0": "eac265b3506df0d9110dd9143e1d0503e2daabafe1d98b23fac8ca17b71d1f6b",
+    "/usr/lib/x86_64-linux-gnu/libpsl.so.5.3.4": "ae6c5a9aecc249fc66e03c16ec6c4385d09d7e12e0ea7694bb831ab4fee8133c",
+    "/usr/lib/x86_64-linux-gnu/libpulse.so.0.24.2": "3d78bd6bfcebccb7d4e65bac298c3aef5b0906fc4c6a4bebcd761c845f4c3c4a",
+    "/usr/lib/x86_64-linux-gnu/libreadline.so.8.2": "0a079f958147699f7bb5bf228406a5d878dc2387fe9cdc5cce6f3e35e20380fc",
+    "/usr/lib/x86_64-linux-gnu/libresolv.so.2": "4086b12d3b95ef6f02373b30b88444e7d79fb8693ed1cfeaa5162e6959878912",
+    "/usr/lib/x86_64-linux-gnu/librsvg-2.so.2.50.0": "5d7825eb908cfb6aebf9a0c4962307865875bfb8ad3b5cda5e9503d328be4a1b",
+    "/usr/lib/x86_64-linux-gnu/libseccomp.so.2.5.5": "b4d9140a7797ccf3ac14f5d9d579b64f157111662940cb8330c632b11a8cea8e",
+    "/usr/lib/x86_64-linux-gnu/libselinux.so.1": "0ec0843463f90e227b0e138e1f379774f50b5514bd7f5dbd4c8a87aca0aa6670",
+    "/usr/lib/x86_64-linux-gnu/libsensors.so.5.0.0": "5464959e6896b27396304c91706089f1339f10430d7381fef0beebf183332a36",
+    "/usr/lib/x86_64-linux-gnu/libsharpyuv.so.0.0.1": "b2e62799e5dbd783a0671d53be99f7c6489567a5332a1e8f471e6bb250f294dc",
+    "/usr/lib/x86_64-linux-gnu/libsndfile.so.1.0.37": "3b9c4be9dab1c1fa6c0d9b9936946f07f02525f93b43fb1ee2112dd3fe70858d",
+    "/usr/lib/x86_64-linux-gnu/libsqlite3.so.0.8.6": "f2cd05de8b6f71ea9d0495a6f9ff9cae844b15d9c45b7ef49ee0af0f81658cc7",
+    "/usr/lib/x86_64-linux-gnu/libstartup-notification-1.so.0.0.0": "c7e370bca1c0a0806bedfeb1229bd821fa855eb3eb139172395a973ac5e5cfde",
+    "/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.33": "1fd75fe70354a416d75aef22bcae68c47bd25d20e2d0568c30b1a9838cf62f11",
+    "/usr/lib/x86_64-linux-gnu/libsystemd.so.0.38.0": "bdf59c828b547bcdbe7b3576c0810d9d9d2e982d8b61b365812542da6a4c4a99",
+    "/usr/lib/x86_64-linux-gnu/libtasn1.so.6.6.3": "59994414d0cdec4f678ef91eaaafc44b26b00bca507e4cc7978caaf79f584173",
+    "/usr/lib/x86_64-linux-gnu/libthai.so.0.3.1": "1a72e318418dc0ee6014401de9d9976516fe127358c07c305e1198b9814e2b31",
+    "/usr/lib/x86_64-linux-gnu/libtiff.so.6.0.1": "aad9b47982a23560b6f6657adcd70a1141d0971bd4f2eb5b3753745f3e8feee4",
+    "/usr/lib/x86_64-linux-gnu/libtinfo.so.6.4": "28ab8e2e29d46dc8f7222025ca2d61e0b898364c6426cc631bf4ecc7c7f5ac52",
+    "/usr/lib/x86_64-linux-gnu/libudev.so.1.7.8": "4298228175fa62a36af88b1afd4406cdd8b1bf166621f957d0dbbde45a698fe5",
+    "/usr/lib/x86_64-linux-gnu/libunistring.so.5.0.0": "7bcf825cd449892db5105ad2aed91dcf94a27b796426600c765720c584c54dd1",
+    "/usr/lib/x86_64-linux-gnu/libuuid.so.1.3.0": "a0fe32d24d125186cf332570770ae749822b5b529d4d4f59222e1aedbc63b58d",
+    "/usr/lib/x86_64-linux-gnu/libvorbis.so.0.4.9": "ba08466742bf3f502d3a47699c321d99fdcb9628aaa8b4356cb6394cfe8a4113",
+    "/usr/lib/x86_64-linux-gnu/libvorbisenc.so.2.0.12": "f62e5237a789185d6a08c66745b585edd9e1c6956c16ee34d98ad6435efc7881",
+    "/usr/lib/x86_64-linux-gnu/libvulkan.so.1.3.275": "e833b010f814b72c6aca0300c8b5f19b6106ffa06c24ddc95a293970c7d6058e",
+    "/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0": "1c22abb422953442aa12822ea51ac76d1c8be92ed143e0159e0f830776cde2b2",
+    "/usr/lib/x86_64-linux-gnu/libwayland-egl.so.1.22.0": "f62e5dae4e63cb43e0210f08ef74dd379f0cd87eafbe569998fe6e1c4a820a10",
+    "/usr/lib/x86_64-linux-gnu/libwayland-server.so.0.22.0": "d6cc42aff7539831152735f58958fd3d854c77881b053c771fbe7a819df5392f",
+    "/usr/lib/x86_64-linux-gnu/libwebp.so.7.1.8": "9664db51ec65209078abbb8bc7b699888a43ecc2f3c74ce8dd4e497175aa5bf0",
+    "/usr/lib/x86_64-linux-gnu/libxcb-dri3.so.0.1.0": "a919146693e71897484c2996beb837273a7a278d1a2afe477bc072f10681f3b0",
+    "/usr/lib/x86_64-linux-gnu/libxcb-glx.so.0.0.0": "7537790510f7a4a14cc54785761dffb1c6fc0058fc379f9cdb0ff26bafee3ff1",
+    "/usr/lib/x86_64-linux-gnu/libxcb-present.so.0.0.0": "d06d982abe6e9202aecd22322166be8ba49e68e05889fb6c6faec0daa88530a4",
+    "/usr/lib/x86_64-linux-gnu/libxcb-randr.so.0.1.0": "9fa6b0ec4af163a86bc9a9ded3309a5979155fb5ef2d311fdda7fff0e9eee01a",
+    "/usr/lib/x86_64-linux-gnu/libxcb-render.so.0.0.0": "35fdef7a90d7f44a0ad9cb259c9ee22f04a48cb064ceb1fc7d17be815acab327",
+    "/usr/lib/x86_64-linux-gnu/libxcb-shm.so.0.0.0": "ad78a7b22409685ca82e54346c2b9465d697f303e69e74a9c1693bb206e319df",
+    "/usr/lib/x86_64-linux-gnu/libxcb-sync.so.1.0.0": "27c2d6dddde34146904c3c64cfcc885a14a351636d6611877368a48e29355c39",
+    "/usr/lib/x86_64-linux-gnu/libxcb-util.so.1.0.0": "53a59cf786fc63d7e5968392fc70098e8d922b311015b7ccd711c44ca352bd39",
+    "/usr/lib/x86_64-linux-gnu/libxcb-xfixes.so.0.0.0": "e59ef497333a6ede2096a0bd9eeb6ec4023374c16d3a8d7511d1251fb7f9b9df",
+    "/usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0": "7958a0136b121bdc4c708968569ad152a9ed208ab026e2537b1005dde64ca440",
+    "/usr/lib/x86_64-linux-gnu/libxkbcommon.so.0.0.0": "3eb6c7315985803a7c72cb81aa3293b763e6cfc907b70b7b2f641c2827cd90f9",
+    "/usr/lib/x86_64-linux-gnu/libxkbfile.so.1.0.2": "f502634e5b3af5244bd2d666aa87284b7bc836b8dd655cf66592985d8d47985a",
+    "/usr/lib/x86_64-linux-gnu/libxml2.so.2.9.14": "8b6f68c242929aebe49eb28f800dc3e8ee7147298c94bdabc834f61eff1ac177",
+    "/usr/lib/x86_64-linux-gnu/libxshmfence.so.1.0.0": "7d40b02b27d449b6b26cea10ea10aafd0cce5a1e2d7859ea57f34b29fe88923f",
+    "/usr/lib/x86_64-linux-gnu/libz.so.1.3": "9b64150b28505a33d6bc3ecf709c279f6de97a1c184dbda65d06ee4537f6d286",
+    "/usr/lib/x86_64-linux-gnu/libzstd.so.1.5.5": "0a2128bc10841fb29e76d08d945864dfb0b6a66da5df6df5d8299197439e54bb",
+    "/usr/lib/x86_64-linux-gnu/pulseaudio/libpulsecommon-16.1.so": "00ab68a64ecbb5d6e0d4b5b35707a83a9040cdb373008e487176e49d184cf22f",
+    "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf": "5c1247acef7f2b8522a31742c76d6adcb5569bacc0be7ceaa4dc39dd252ce895",
+    "/usr/share/fonts/truetype/noto/NotoSans-Bold.ttf": "e83493c945848ecd4a9ad0f6d19164541a0d3e23a9c952304a00a46e00272ac5",
+    "/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf": "89c3c497f618fdaa0b2d1e98fef93582f28c71debd2c4a8cdf41f190ced2909d",
+    "/usr/share/glib-2.0/schemas/gschemas.compiled": "19b94135470184b249253d2600bafb3ece119b6f488765892b834b433da9e5ec",
+    "/usr/share/icons/Adwaita/icon-theme.cache": "cf8f98c24498578200244bdfa1476d67421c204c2a9867fa7db6e9e8e46c8082",
+    "/usr/share/icons/hicolor/icon-theme.cache": "cce9d53864ce178a17ce3321421cfd7e256314b4b4fdfc2c98c7bcf77f3e3891",
+    "/usr/share/mime/mime.cache": "6fd7ef67f7be559e85ccc71d8fad9ce2d14840bbfc6eedfdf0a2fcf1d22ac94d",
+    "/var/cache/fontconfig/0bd3dc0958fa2205aaaa8ebb13e2872b-le64.cache-9": "923a91711a8fc4bc866887cfc6d59ff528975a51a092e955f3c0a2b178bc7b07",
+    "/var/cache/fontconfig/2300eef321c393bfd76478a5c0e95b23-le64.cache-9": "2c1176165a731ca14ce3754c4db5d5c7e2192ee7dc5894f365195d3a25b3ecea",
+    "/var/cache/fontconfig/9b89f8e3dae116d678bbf48e5f21f69b-le64.cache-9": "03234a25788411ca0d0d5638e717e1e493953f7162eaea48cb19d4e78b8d2142",
+    "/var/cache/fontconfig/d589a48862398ed80a3d6066f4f56f4c-le64.cache-9": "7ddf1c166b59bf0838f11a114dc6bdde49cb74a788a6d0fafb52851f911e89e5"
+  },
+  "logs": {
+    "shell.log": "libmutter-Message: 13:14:09.161: Running GNOME Shell (using mutter 46.2) as a X11 window and compositing manager\n\n(gnome-shell:1312): libmutter-WARNING **: 13:14:09.161: Could not create database of Wacom devices, expect tablets to misbehave\nXlib:  extension \"DPMS\" missing on display \":49108\".\nWindow manager warning: Impossible to set scaling on crtc 59 to 1.000000, error id 2\nWindow manager warning: Scalig CRTC 59 at 1.000000 failed\n\nXlib:  extension \"DPMS\" missing on display \":49108\".\nXlib:  extension \"DPMS\" missing on display \":49108\".\n\n(gnome-shell:1312): libmutter-WARNING **: 13:14:09.262: There is no colord server available\nGNOME Shell-Message: 13:14:09.547: Failed to launch ibus-daemon: Failed to execute child process \u201cibus-daemon\u201d (No such file or directory)\n\n(gnome-shell:1312): GNOME Shell-CRITICAL **: 13:14:09.557: Gio.DBusError: GDBus.Error:org.freedesktop.DBus.Error.ServiceUnknown: The name org.gnome.Shell.CalendarServer was not provided by any .service files\n\nStack trace:\n  asyncCallback@resource:///org/gnome/gjs/modules/core/overrides/Gio.js:114:23\n  @resource:///org/gnome/shell/ui/init.js:21:20\n  \n\n(gnome-shell:1312): GNOME Shell-CRITICAL **: 13:14:09.557: Gio.DBusError: GDBus.Error:org.freedesktop.DBus.Error.ServiceUnknown: The name org.gnome.Shell.CalendarServer was not provided by any .service files\n\nStack trace:\n  asyncCallback@resource:///org/gnome/gjs/modules/core/overrides/Gio.js:114:23\n  @resource:///org/gnome/shell/ui/init.js:21:20\n  \nGNOME Shell-Message: 13:14:09.564: Failed to register AuthenticationAgent\n\n(gnome-shell:1312): accountsservice-WARNING **: 13:14:09.591: ActUserManager: user (null) has no username (uid: -1)\nGNOME Shell-Message: 13:14:09.593: No permission to control network connections: Gio.DBusError: GDBus.Error:org.freedesktop.DBus.Error.ServiceUnknown: The name org.freedesktop.PolicyKit1 was not provided by any .service files\n\n(gnome-shell:1312): GNOME Shell-WARNING **: 13:14:09.599: Missing required core component Settings, expect trouble\u2026\n[E] pw.loop [loop.c:67 pw_loop_new()] 0x587b697307a0: can't make support.system handle: No such file or directory\n** Message: 13:14:09.601: Failed to start camera monitor\nGNOME Shell-Message: 13:14:09.616: Failed to get PolKit permission: Gio.DBusError: GDBus.Error:org.freedesktop.DBus.Error.ServiceUnknown: The name org.freedesktop.PolicyKit1 was not provided by any .service files\nGNOME Shell-Message: 13:14:09.617: GDBus.Error:org.freedesktop.DBus.Error.ServiceUnknown: The name org.freedesktop.GeoClue2 was not provided by any .service files\nGNOME Shell-Message: 13:14:10.093: GNOME Shell started at Tue Oct 06 2026 13:14:09 GMT+1100 (Australian Eastern Daylight Time)\nGNOME Shell-Message: 13:14:10.099: Registering session with GDM\nGNOME Shell-Message: 13:14:10.122: Error registering session with GDM: GDBus.Error:org.freedesktop.DBus.Error.ServiceUnknown: The name org.gnome.DisplayManager was not provided by any .service files\n** Message: 13:14:18.587: Shutting down GNOME Shell\n",
+    "system-bus.log": "",
+    "bus.log": "",
+    "Xvfb": "The XKEYBOARD keymap compiler (xkbcomp) reports:\n> Warning:          Could not resolve keysym XF86CameraAccessEnable\n> Warning:          Could not resolve keysym XF86CameraAccessDisable\n> Warning:          Could not resolve keysym XF86CameraAccessToggle\n> Warning:          Could not resolve keysym XF86NextElement\n> Warning:          Could not resolve keysym XF86PreviousElement\n> Warning:          Could not resolve keysym XF86AutopilotEngageToggle\n> Warning:          Could not resolve keysym XF86MarkWaypoint\n> Warning:          Could not resolve keysym XF86Sos\n> Warning:          Could not resolve keysym XF86NavChart\n> Warning:          Could not resolve keysym XF86FishingChart\n> Warning:          Could not resolve keysym XF86SingleRangeRadar\n> Warning:          Could not resolve keysym XF86DualRangeRadar\n> Warning:          Could not resolve keysym XF86RadarOverlay\n> Warning:          Could not resolve keysym XF86TraditionalSonar\n> Warning:          Could not resolve keysym XF86ClearvuSonar\n> Warning:          Could not resolve keysym XF86SidevuSonar\n> Warning:          Could not resolve keysym XF86NavInfo\nErrors from xkbcomp are not fatal to the X server\nThe XKEYBOARD keymap compiler (xkbcomp) reports:\n> Warning:          Could not resolve keysym XF86CameraAccessEnable\n> Warning:          Could not resolve keysym XF86CameraAccessDisable\n> Warning:          Could not resolve keysym XF86CameraAccessToggle\n> Warning:          Could not resolve keysym XF86NextElement\n> Warning:          Could not resolve keysym XF86PreviousElement\n> Warning:          Could not resolve keysym XF86AutopilotEngageToggle\n> Warning:          Could not resolve keysym XF86MarkWaypoint\n> Warning:          Could not resolve keysym XF86Sos\n> Warning:          Could not resolve keysym XF86NavChart\n> Warning:          Could not resolve keysym XF86FishingChart\n> Warning:          Could not resolve keysym XF86SingleRangeRadar\n> Warning:          Could not resolve keysym XF86DualRangeRadar\n> Warning:          Could not resolve keysym XF86RadarOverlay\n> Warning:          Could not resolve keysym XF86TraditionalSonar\n> Warning:          Could not resolve keysym XF86ClearvuSonar\n> Warning:          Could not resolve keysym XF86SidevuSonar\n> Warning:          Could not resolve keysym XF86NavInfo\nErrors from xkbcomp are not fatal to the X server\n"
+  },
+  "elapsed_ms": 8800,
+  "finished_at": "2026-10-06T02:14:18.708337+00:00"
+}

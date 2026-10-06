@@ -35,7 +35,10 @@ SOURCES = ['tests/desktop/native_gnome_bootstrap.py', 'tests/desktop/native_orac
            'tests/desktop/gnome_reveal.py', 'tests/desktop/gnome_foreground.py',
            'tests/desktop/fixtures/gnome-reveal.json', 'tests/desktop/gnome_focus_baseline.py',
            'spec/delivery/packages/w-05-gnome-focus-baseline.md',
-           'spec/delivery/packages/w-05-gnome-focus-trace.md']
+           'spec/delivery/packages/w-05-gnome-focus-trace.md',
+           'spec/delivery/packages/w-05-gnome-input.md', 'tests/desktop/gnome_input.py',
+           'tests/desktop/x11_input.py', 'build-support/x11-input-runtime.json',
+           'build-support/x11-lab-packages.json']
 
 
 def marker_trace(display, environment, sample=None, dismiss=True):
@@ -125,6 +128,10 @@ def observe(environment, pid, channel, marker, composition, foreground_pid=None,
             import gnome_focus_baseline
             result['focus_baseline'] = gnome_focus_baseline.observe(display, environment, pid, foreground_pid,
                 Path(environment['HOME']).parent, result.get('reveal'), result.get('composition'))
+        if environment.get('SYSPANE_GNOME_INPUT_CONTROL'):
+            import gnome_input
+            result['icon_input'] = gnome_input.observe(display, environment, pid,
+                Path(environment['HOME']).parent, result['composition'], marker_trace)
         channel.send(result)
     except Exception as error:
         channel.send({'outcome': 'fail', 'error': type(error).__name__ + ': ' + str(error)})
@@ -157,7 +164,7 @@ def group_members(group):
     return members
 
 
-def run(build, marker=False, control='live', composition=None, reveal=None, focus_baseline=None, focus_trace=False):
+def run(build, marker=False, control='live', composition=None, reveal=None, focus_baseline=None, focus_trace=False, icon_input=None):
     # Retain orphaned shell helpers for reaping; no service/session can adopt them.
     if ctypes.CDLL(None, use_errno=True).prctl(36, 1, 0, 0, 0) != 0:
         raise OSError(ctypes.get_errno(), 'cannot retain descendant exit evidence')
@@ -171,6 +178,8 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
     family = 'GNOME-REVEAL-01' if reveal else ('GNOME-COMPOSITION-01' if composition else ('GNOME-MARKER-01' if marker else 'GNOME-BOOTSTRAP-01'))
     if focus_baseline:
         family = 'GNOME-FOCUS-BASELINE-01'
+    if icon_input:
+        family = 'GNOME-INPUT-01'
     with_icons = bool(composition) or focus_baseline == 'ding'
     token = family + '-' + uuid.uuid4().hex
     workspace = build / token
@@ -188,6 +197,7 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
               'reveal_control': reveal,
               'focus_baseline_mode': focus_baseline,
               'focus_trace': focus_trace,
+              'icon_input_control': icon_input,
               'executed_at': datetime.now(timezone.utc).isoformat(),
               'source_base': subprocess.check_output(['git', '-c', 'safe.directory=' + str(ROOT), 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
               'source_inputs': {p: sha(ROOT / p) for p in SOURCES},
@@ -202,6 +212,8 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
         report['qualification'] = 'Configured GNOME Super+D reveal with one owned normal window and solid-color composition only; icon input, taskbar/task-switcher behavior, image wallpaper/policy, recovery, Wayland and full product qualification are not run.'
     if focus_baseline:
         report['qualification'] = 'Diagnostic native focus comparison only; completion is not a passed focus/reveal or product acceptance claim.'
+    if icon_input:
+        report['qualification'] = 'Selected owned GNOME/DING/PCManFM icon input and solid-color composition only; Show Desktop focus, taskbar, image wallpaper, recovery, other file managers and full product qualification remain open.'
     archive = workspace / 'source-inputs.zip'
     with zipfile.ZipFile(archive, 'x', compression=zipfile.ZIP_DEFLATED) as target:
         for name in SOURCES:
@@ -242,6 +254,33 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
             environment['SYSPANE_FOREGROUND_EVENTS'] = str(workspace / 'foreground-events.jsonl')
         if focus_trace:
             environment['MUTTER_DEBUG'] = 'focus,keybindings,window-state'
+        if icon_input:
+            x11 = build / 'x11-lab'
+            x11_identity = json.loads((x11 / 'identity.json').read_text())
+            if x11_identity['lock_sha256'] != sha(ROOT / 'build-support/x11-lab-packages.json') or any(
+                    sha(x11 / 'sysroot' / p) != expected for p, expected in x11_identity['files'].items()):
+                raise ValueError('pinned folder runtime identity changed')
+            report['folder_runtime_identity'] = {'path': str(x11 / 'identity.json'), 'sha256': sha(x11 / 'identity.json')}
+            input_runtime = json.loads((ROOT / 'build-support/x11-input-runtime.json').read_text())
+            if any(sha(Path(p)) != expected for p, expected in input_runtime['files'].items()):
+                raise ValueError('pinned accessibility runtime differs')
+            report['input_runtime_files'] = input_runtime['files']
+            environment.pop('NO_AT_BRIDGE')
+            environment['GTK_MODULES'] = 'atk-bridge'
+            environment['SYSPANE_GNOME_INPUT_CONTROL'] = icon_input
+            executable = str(x11 / 'sysroot/usr/bin/pcmanfm')
+            environment['SYSPANE_GNOME_FOLDER_EXECUTABLE'] = executable
+            applications = workspace / 'data/applications'
+            applications.mkdir()
+            launcher = ('[Desktop Entry]\nType=Application\nName=SysPane owned folder laboratory\n'
+                        'Exec=/usr/bin/env LD_LIBRARY_PATH=' + str(x11 / 'sysroot/usr/lib/x86_64-linux-gnu') +
+                        ' XDG_DATA_DIRS=' + str(x11 / 'sysroot/usr/share') + ':/usr/share ' + executable +
+                        ' --new-win %U\nTerminal=false\nDBusActivatable=false\nMimeType=inode/directory;\n')
+            (applications / 'syspane-owned-folder.desktop').write_text(launcher)
+            (applications / 'mimeinfo.cache').write_text('[MIME Cache]\ninode/directory=syspane-owned-folder.desktop;\n')
+            (workspace / 'config/mimeapps.list').write_text('[Default Applications]\ninode/directory=syspane-owned-folder.desktop;\n')
+            report['folder_association'] = {'launcher': launcher, 'inputs': inventory(applications),
+                                          'mimeapps_sha256': sha(workspace / 'config/mimeapps.list')}
         report['environment']['explicit'] = environment
         # Schema compilation is data-only and confined to this unique attempt.
         for folder in (Path('/usr/share/glib-2.0/schemas'), sysroot / 'usr/share/glib-2.0/schemas'):
@@ -310,6 +349,20 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
             time.sleep(.05)
         else:
             raise TimeoutError('owned session bus unavailable')
+        if icon_input:
+            registry = launch('registry', ['/usr/libexec/at-spi2-registryd'])
+            deadline = time.monotonic() + 3
+            while time.monotonic() < deadline:
+                ready = subprocess.run(['/usr/bin/gdbus', 'call', '--address', bus, '--dest', 'org.freedesktop.DBus',
+                                        '--object-path', '/org/freedesktop/DBus', '--method',
+                                        'org.freedesktop.DBus.GetConnectionUnixProcessID', 'org.a11y.atspi.Registry'],
+                                       env=environment, capture_output=True, text=True, timeout=1)
+                if ready.returncode == 0 and ready.stdout.strip() == '(uint32 ' + str(registry.pid) + ',)':
+                    report['registry_pid'] = registry.pid
+                    break
+                time.sleep(.05)
+            else:
+                raise TimeoutError('owned accessibility registry did not acquire its bus name')
         shell = launch('shell', [str(sysroot / 'usr/bin/gnome-shell'), '--x11', '--mode=user'])
         foreground = launch('foreground', ['/usr/bin/python3', str(ROOT / 'tests/desktop/gnome_foreground.py')]) if reveal or focus_baseline else None
         context = mp.get_context('spawn')
@@ -341,6 +394,10 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
                     if result['icon_manager']:
                         report['icon_manager_mapped_files'] = mapped_files(result['icon_manager']['pid'])
                     report['outcome'] = 'pass'
+                if icon_input:
+                    report['outcome'] = report['observation']['icon_input']['outcome']
+                    if report['observation']['icon_input'].get('error'):
+                        report['error'] = report['observation']['icon_input']['error']
                 break
             if shell.poll() is not None:
                 raise RuntimeError('shell exited during bootstrap: ' + str(shell.returncode))
@@ -410,6 +467,13 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
                     report[key] = {'path': str(path), 'bytes': path.stat().st_size, 'sha256': sha(path)}
             extension_root = workspace / 'data/gnome-shell/extensions'
             report['enabled_extension_inputs_after'] = inventory(extension_root) if extension_root.exists() else {}
+        if icon_input:
+            path = workspace / 'input.jsonl'
+            if path.exists():
+                report['input_journal'] = {'path': str(path), 'bytes': path.stat().st_size, 'sha256': sha(path)}
+            if (workspace / 'config/mimeapps.list').exists():
+                report['folder_association_after'] = {'inputs': inventory(workspace / 'data/applications'),
+                                                     'mimeapps_sha256': sha(workspace / 'config/mimeapps.list')}
         if with_icons:
             report['fixture_after'] = {name: inventory(workspace / name) for name in ['home/Desktop', 'data/icons', 'config/gtk-3.0']}
             report['desktop_entries_after'] = sorted(p.relative_to(workspace / 'home/Desktop').as_posix()
@@ -442,9 +506,14 @@ if __name__ == '__main__':
     parser.add_argument('--reveal', choices=('live', 'no-action', 'transient-blank'))
     parser.add_argument('--focus-baseline', choices=('shell', 'ding', 'candidate'))
     parser.add_argument('--focus-trace', action='store_true')
+    parser.add_argument('--icon-input', choices=('live', 'block-pointer', 'no-selection'))
     args = parser.parse_args()
     if args.focus_trace and not args.focus_baseline:
         parser.error('--focus-trace requires --focus-baseline')
+    if args.icon_input:
+        if args.marker or args.composition or args.reveal or args.focus_baseline or args.focus_trace or args.marker_control != 'live':
+            parser.error('--icon-input owns the live composition prerequisite')
+        args.composition = 'live'
     if args.focus_baseline:
         if args.marker or args.composition or args.reveal or args.marker_control != 'live':
             parser.error('--focus-baseline owns its marker/composition/reveal selection')
@@ -459,4 +528,4 @@ if __name__ == '__main__':
         parser.error('composition uses its own above/below controls')
     if not args.marker and args.marker_control != 'live':
         parser.error('--marker-control requires --marker')
-    sys.exit(run(owned_build(args.build_dir), args.marker or bool(args.composition), args.marker_control, args.composition, args.reveal, args.focus_baseline, args.focus_trace))
+    sys.exit(run(owned_build(args.build_dir), args.marker or bool(args.composition), args.marker_control, args.composition, args.reveal, args.focus_baseline, args.focus_trace, args.icon_input))

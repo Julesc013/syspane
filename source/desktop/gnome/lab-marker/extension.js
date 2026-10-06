@@ -1,6 +1,7 @@
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import St from 'gi://St';
+import Clutter from 'gi://Clutter';
 import {Extension} from 'resource:///org/gnome/shell/extensions/extension.js';
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 
@@ -77,6 +78,17 @@ export default class LabMarker extends Extension {
                 context.$dispose();
             });
             attach(this._witness);
+            const inputControl = GLib.getenv('SYSPANE_GNOME_INPUT_CONTROL');
+            if (inputControl && !['live', 'block-pointer', 'no-selection'].includes(inputControl))
+                throw new Error('Unknown native input control');
+            if (inputControl === 'block-pointer') {
+                this._inputShield = new St.Widget({x: 0, y: 32, width: 180, height: 220,
+                    reactive: true, can_focus: false});
+                this._inputShield.connect('button-press-event', () => Clutter.EVENT_STOP);
+                this._inputShield.connect('button-release-event', () => Clutter.EVENT_STOP);
+                Main.layoutManager.addChrome(this._inputShield, {affectsInputRegion: true,
+                    affectsStruts: false, trackFullscreen: false});
+            }
             this.SetSceneEnabled(false);
         }
         if (this._control === 'hidden')
@@ -104,6 +116,8 @@ export default class LabMarker extends Extension {
         }
         this._actor.visible = enabled;
         this._witness.visible = enabled;
+        if (this._inputShield)
+            this._inputShield.visible = enabled;
     }
 
     disable() {
@@ -113,5 +127,10 @@ export default class LabMarker extends Extension {
         this._actor = null;
         this._witness?.destroy();
         this._witness = null;
+        if (this._inputShield) {
+            Main.layoutManager.removeChrome(this._inputShield);
+            this._inputShield.destroy();
+        }
+        this._inputShield = null;
     }
 }

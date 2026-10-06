@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-06T01:54:00Z", "scope": "Built-in Mutter diagnostics bind the reproduced focus failure to native DING MRU selection"}
+updated: {"by": "codex", "at": "2026-10-06T02:13:19Z", "scope": "Named GNOME/DING/PCManFM input sequence passes with calibrated blocking and omitted-click controls"}
 ---
 
 # Current state and next admitted boundary
@@ -207,6 +207,15 @@ keyboard observations; 23 verifier checks pass. This identifies the pinned nativ
 mechanism while preserving the failed acceptance. An integration fix, broader
 input and recovery qualification remain open.
 
+The [native icon-input checkpoint](gnome-input-handoff.md) passes click selection,
+clear, drag selection, visible menu/dismissal and actual folder opening with exact
+contents, focus and closure on the owned GNOME/DING/PCManFM profile. Final changing
+marker/composition observations pass after restoration. Pointer-blocking and
+omitted-click controls preserve composition but fail selection as required.
+Twenty-seven verifier checks pass, including consistent-but-false semantic records.
+Original empty-copy, accessibility-registration and untracked-blocker mistakes
+remain preserved. The separate Show Desktop focus failure stays open.
+
 Canonical 0.2.0 documentation bundle, unchanged 0.1 authoring profile, preserved old
 fixtures, new experimental scene/command/capability 0.2 and admission descriptors.
 The initial settings registry has enforced metadata/default consistency and generated
@@ -246,8 +255,10 @@ License, contribution and release-identity decisions remain open.
 Continue the admitted campaign: use the calibrated GNOME/DING composition path and
 unchanged external marker oracle to resolve the independently reproduced DING/X11
 foreground-focus failure through a bounded integration contract informed by the
-observed native MRU selection, then measure taskbar/task-switcher behavior, icon input,
-image-wallpaper preservation and shell/icon-manager recovery. Keep the
+observed native MRU selection. Continue taskbar/task-switcher behavior,
+image-wallpaper preservation and shell/icon-manager recovery independently of that
+failure. The named GNOME/DING/PCManFM icon-input experiment now passes; other profiles
+need their own evidence. Keep the
 earlier X11 failures and failed GNOME fixture/control attempts. Close other platform capture/reveal boundaries in admitted
 synthetic desktops. W-04 has build artifacts ready for
 historical guest execution once guest test scope and usability are established.
