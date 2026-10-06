@@ -1,5 +1,25 @@
 # Developer setup and checks
 
+The [chart history package](../../spec/delivery/packages/w-09-chart-history.md)
+adds `scene::ChartHistory` to the existing portable scene component. Construct
+one per unchanged chart binding, using validated window_ms/max_points. Feed each
+admitted singleton BindingFrame and its qualified measurement clock before a later
+publication replaces it; also observe at presentation/expiry. The synchronous
+ChartView contains exact numeric points, continuity flags, window horizon and
+capacity truncation. Null/failure/retained states create gaps; selection changes
+erase, and chronology conflicts latch until clear. No raster or axis conversion
+occurs in this component.
+
+After ordinary preflight/configure/build, run `ctest --preset <profile> -R
+'^scene[.]CHART-' --output-on-failure` for eleven families, including actual wire
+admission and three samples delivered before painting. Regression selection is
+`'^(scene[.]|composition[.]|legacy[.]|native[.]SCENE-(SURFACE|TABLE)$)'` on each
+development profile. These are affected-component checks, not a full release suite.
+The native owner must separately authorize history-channel retention and clear on
+policy/resource/binding/lifetime changes. Native aggregate ownership, every-event
+clock context, pixels and accessibility remain integration gates; SceneSurface
+still returns its explicit unsupported alternative for charts.
+
 The [scene-content package](../../spec/delivery/packages/w-09-scene-content.md)
 adds scene 0.3 and resource-bound command 0.4. Use `upgrade_scene_content` explicitly;
 it returns a validated copy and refuses to guess legacy image/chart parameters.

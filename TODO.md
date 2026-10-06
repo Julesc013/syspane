@@ -32,7 +32,9 @@ behaviour has been implemented. See [audit disposition](spec/delivery/audit-2026
 - [x] W-09 scalar scene surface prerequisite: pinned resources, singleton bindings, native geometry/text and one erasing policy owner; independent owned-X11 pixel and AT-SPI name checks. See the [handoff](spec/delivery/scene-surface-handoff.md).
 - [x] W-09 collection table rendering: identity-aligned columns, explicit incomplete/truncated states, bounded measured grids and native pixel/name erasure checks. See the [handoff](spec/delivery/table-surface-handoff.md).
 - [x] W-09 authored content boundary: versioned text/labels/chart/image definitions, explicit migration, negotiated resource transactions and native recovery; connect text bodies and table labels. See the [handoff](spec/delivery/scene-content-handoff.md).
-- [ ] W-09 native charts and images: close sampling/decimation, gap/epoch, decoder/resource and accessibility contracts before enabling their renderers.
+- [x] W-09 shared chart retention: bounded measured windows, exact numeric samples, duplicate/conflict handling, gap/epoch resets and synchronous borrows. See the [handoff](spec/delivery/chart-history-handoff.md).
+- [ ] W-09 native charts: connect every admitted sample with complete selector clock context; close axis/pixel reduction, geometry, aggregate budgets, history-channel policy erasure and accessibility before enabling drawing.
+- [ ] W-09 native images: close decoder, external-reference, animation and resource contracts before enabling rendering.
 - [ ] W-09 full native projection: close and implement remaining widget content, installed producer/catalog/policy ownership, full native accessibility, visible host activation/recovery and Windows/Mac adapters.
 
 - [x] W-07 controller demand component: merge authorized field/entity/age/priority/recording leases, apply cadence/concurrency policy, age priorities and retain cancelled slots until confirmed stop. See the [handoff](spec/delivery/demand-owner-handoff.md).

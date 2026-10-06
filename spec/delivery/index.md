@@ -9,6 +9,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Policy-bound scene binding checkpoint](bindings-handoff.md) — Scoped authored selectors and pins consume accepted telemetry with explicit identity, freshness and permission.
 - [Foundation and native-experiment campaign admission](campaign-admission.md) — Record the user-admitted implementation scope and the first package's closed boundaries.
 - [Foundation campaign coverage audit](campaign-coverage.md) — Map the admitted campaign to actual evidence and remaining implementation or native laboratory requirements.
+- [Measured chart history checkpoint](chart-history-handoff.md) — Portable bounded sample retention with exact values, explicit discontinuities and fixed executable traces.
 - [Asynchronous authenticated command checkpoint](command-sessions-handoff.md) — Preserve responsive control traffic, exact request ownership and honest storage outcomes during native transactions.
 - [Native collection continuity checkpoint](consumer-continuity-handoff.md) — Real acquisition survives separately owned consumer failures and bounded replacement.
 - [Pinned content and preset preview checkpoint](content-resolution-handoff.md) — Verified content identities and immutable resource snapshots for common authored previews.

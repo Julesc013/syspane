@@ -7,6 +7,11 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
+The [chart history checkpoint](spec/delivery/chart-history-handoff.md) implements
+bounded measured samples, exact integer values, explicit gaps and stream resets.
+Native chart geometry, policy-owned retention and accessibility integration remain
+the next rendering boundary; chart drawing is not yet enabled.
+
 The [scene content checkpoint](spec/delivery/scene-content-handoff.md) adds versioned
 text bodies, table labels, chart settings and pinned image references. Shared
 validation, negotiated transactions and native recovery preserve those definitions.

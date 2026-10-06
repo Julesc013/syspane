@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-06T22:18:00Z", "scope": "Versioned scene content, negotiated transactions and exact resource recovery"}
+updated: {"by": "codex", "at": "2026-10-06T23:04:14Z", "scope": "Bounded measured chart history and native integration gates"}
 ---
 
 # Current state and next admitted boundary
@@ -21,6 +21,12 @@ The active objective is now the [complete 0.1.0 release](release-0.1.0.md) for W
 9x, Windows NT, Linux X11, Wayland and Mac OS X. The foundation campaign remains
 required but is no longer the final completion boundary. Legacy version/architecture
 floors, native labs and complete desktop/package evidence remain unresolved.
+
+The latest [chart history checkpoint](chart-history-handoff.md) implements bounded
+measured windows, exact numeric samples, explicit continuity breaks, stream resets
+and latched chronology conflicts in the shared scene component. Every-publication
+wire ingestion is executable. Native axis/pixel/accessibility and policy-owned
+history integration remain the next boundary; no chart drawing is enabled yet.
 
 The latest [scene content checkpoint](scene-content-handoff.md) adds scene 0.3 and
 command 0.4 with explicit text bodies, table labels, chart settings and image pins.

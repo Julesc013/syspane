@@ -31,6 +31,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Durable pinned resource generations](w-08-resource-generations.md) — Bind command identity and generation recovery to the exact prepared content closure.
 - [Independent transaction deadlines and controller recovery](w-08-supervised-transactions.md) — Bound uncooperative transaction work without killing threads or replaying uncertain mutations.
 - [Policy-bound authored scene bindings](w-09-bindings.md) — Resolve existing selectors and pins against scoped immutable producer views without name-based rebinding.
+- [Bounded measured chart history](w-09-chart-history.md) — Exact sample admission, discontinuities and bounded retention before native chart drawing.
 - [Deterministic portable scene layout](w-09-layout.md) — Resolve admitted scene geometry from explicit topology and native readable metrics without mutating authored state.
 - [Native Linux text metrics and raster adapter](w-09-native-text.md) — Bounded plain-text shaping and painting with explicit native metrics, fallback and pixel ownership.
 - [Versioned widget content and transactions](w-09-scene-content.md) — Carry explicit text, columns, chart settings and pinned images through authored validation and durable resource-bound transactions.

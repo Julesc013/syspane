@@ -1,0 +1,98 @@
+[
+  {
+    "step": "configure",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-06T23:01:31.555367+00:00",
+    "finished_at": "2026-10-06T23:01:32.179991+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 6442450944,\n  \"checkout_out_bytes\": 1919049641,\n  \"linux_campaign_bytes\": 4214000471,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "configure",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "out/campaign/chart_history_step.py",
+      "windows-x64-gcc15",
+      "configure"
+    ],
+    "started_at": "2026-10-06T23:01:32.180395+00:00",
+    "finished_at": "2026-10-06T23:01:34.183475+00:00",
+    "exit": 0,
+    "stdout": "profile verified: windows-x64-gcc15\nvendored dependency digests: pass\n-- Configuring done (1.4s)\n-- Generating done (0.1s)\n-- Build files have been written to: D:/Projects/SysPane/syspane/out/build/windows-x64-gcc15\n \nAttempt: D:\\Projects\\SysPane\\syspane\\out\\campaign\\w-09-chart-history\\windows-x64-gcc15-configure-0b67fde383\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-06T23:01:34.183758+00:00",
+    "finished_at": "2026-10-06T23:01:34.803299+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 6442450944,\n  \"checkout_out_bytes\": 1920289639,\n  \"linux_campaign_bytes\": 4214000471,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "out/campaign/chart_history_step.py",
+      "windows-x64-gcc15",
+      "build"
+    ],
+    "started_at": "2026-10-06T23:01:34.803590+00:00",
+    "finished_at": "2026-10-06T23:02:00.912217+00:00",
+    "exit": 0,
+    "stdout": "[1/5] Building CXX object CMakeFiles/syspane_scene.dir/source/scene/chart_history.cpp.obj\n[2/5] Linking CXX static library libsyspane_scene.a\n[3/5] Building CXX object CMakeFiles/syspane_scene_tests.dir/tests/scene/layout_tests.cpp.obj\n[4/5] Building CXX object CMakeFiles/syspane_scene_tests.dir/tests/scene/chart_history_tests.cpp.obj\n[5/5] Linking CXX executable syspane_scene_tests.exe\n \nAttempt: D:\\Projects\\SysPane\\syspane\\out\\campaign\\w-09-chart-history\\windows-x64-gcc15-build-4139268cec\n",
+    "stderr": ""
+  },
+  {
+    "step": "test",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-06T23:02:00.912602+00:00",
+    "finished_at": "2026-10-06T23:02:01.602729+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 6442450944,\n  \"checkout_out_bytes\": 1939369685,\n  \"linux_campaign_bytes\": 4214000471,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "test",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "out/campaign/chart_history_step.py",
+      "windows-x64-gcc15",
+      "test"
+    ],
+    "started_at": "2026-10-06T23:02:01.603025+00:00",
+    "finished_at": "2026-10-06T23:02:04.637490+00:00",
+    "exit": 0,
+    "stdout": "sec\n      Start  19: scene.BIND-FRESHNESS\n19/63 Test  #19: scene.BIND-FRESHNESS .............   Passed    0.03 sec\n      Start  20: scene.BIND-AXES\n20/63 Test  #20: scene.BIND-AXES ..................   Passed    0.02 sec\n      Start  21: scene.BIND-POLICY\n21/63 Test  #21: scene.BIND-POLICY ................   Passed    0.03 sec\n      Start  22: scene.BIND-BOUNDS\n22/63 Test  #22: scene.BIND-BOUNDS ................   Passed    0.02 sec\n      Start  23: scene.BIND-LIFETIME\n23/63 Test  #23: scene.BIND-LIFETIME ..............   Passed    0.03 sec\n      Start  24: scene.BIND-INVALID\n24/63 Test  #24: scene.BIND-INVALID ...............   Passed    0.03 sec\n      Start  25: scene.BIND-MULTISOURCE\n25/63 Test  #25: scene.BIND-MULTISOURCE ...........   Passed    0.02 sec\n      Start  26: scene.BIND-RESTART\n26/63 Test  #26: scene.BIND-RESTART ...............   Passed    0.03 sec\n      Start  27: scene.BIND-REAL-SORT\n27/63 Test  #27: scene.BIND-REAL-SORT .............   Passed    0.02 sec\n      Start  28: scene.BIND-COLLECTION-BOUND\n28/63 Test  #28: scene.BIND-COLLECTION-BOUND ......   Passed    0.12 sec\n      Start  29: scene.ROOT-FLOW\n29/63 Test  #29: scene.ROOT-FLOW ..................   Passed    0.02 sec\n      Start  30: scene.STACK-V\n30/63 Test  #30: scene.STACK-V ....................   Passed    0.03 sec\n      Start  31: scene.STACK-H\n31/63 Test  #31: scene.STACK-H ....................   Passed    0.03 sec\n      Start  32: scene.PRIORITY\n32/63 Test  #32: scene.PRIORITY ...................   Passed    0.03 sec\n      Start  33: scene.FAIR-SHRINK\n33/63 Test  #33: scene.FAIR-SHRINK ................   Passed    0.03 sec\n      Start  34: scene.OVERFLOW\n34/63 Test  #34: scene.OVERFLOW ...................   Passed    0.03 sec\n      Start  35: scene.FIXED-GROUP\n35/63 Test  #35: scene.FIXED-GROUP ................   Passed    0.02 sec\n      Start  36: scene.CANVAS\n36/63 Test  #36: scene.CANVAS .....................   Passed    0.02 sec\n      Start  37: scene.GRID\n37/63 Test  #37: scene.GRID .......................   Passed    0.02 sec\n      Start  38: scene.GRID-OVERFLOW\n38/63 Test  #38: scene.GRID-OVERFLOW ..............   Passed    0.02 sec\n      Start  39: scene.NESTED\n39/63 Test  #39: scene.NESTED .....................   Passed    0.02 sec\n      Start  40: scene.BREAKPOINT-EQUAL\n40/63 Test  #40: scene.BREAKPOINT-EQUAL ...........   Passed    0.02 sec\n      Start  41: scene.BREAKPOINT-BELOW\n41/63 Test  #41: scene.BREAKPOINT-BELOW ...........   Passed    0.02 sec\n      Start  42: scene.DISPLAY-MISSING\n42/63 Test  #42: scene.DISPLAY-MISSING ............   Passed    0.02 sec\n      Start  43: scene.DISPLAY-AMBIGUOUS\n43/63 Test  #43: scene.DISPLAY-AMBIGUOUS ..........   Passed    0.03 sec\n      Start  44: scene.DISPLAY-REMOVED\n44/63 Test  #44: scene.DISPLAY-REMOVED ............   Passed    0.02 sec\n      Start  45: scene.SAFE-REGION\n45/63 Test  #45: scene.SAFE-REGION ................   Passed    0.02 sec\n      Start  46: scene.EXCLUSION-TIE\n46/63 Test  #46: scene.EXCLUSION-TIE ..............   Passed    0.02 sec\n      Start  47: scene.NO-REGION\n47/63 Test  #47: scene.NO-REGION ..................   Passed    0.02 sec\n      Start  48: scene.PIXELS\n48/63 Test  #48: scene.PIXELS .....................   Passed    0.02 sec\n      Start  49: scene.PIXEL-CLIP\n49/63 Test  #49: scene.PIXEL-CLIP .................   Passed    0.02 sec\n      Start  50: scene.READABLE-FIXED\n50/63 Test  #50: scene.READABLE-FIXED .............   Passed    0.02 sec\n      Start  51: scene.READABLE-FLOW\n51/63 Test  #51: scene.READABLE-FLOW ..............   Passed    0.02 sec\n      Start  52: scene.OVERLAP\n52/63 Test  #52: scene.OVERLAP ....................   Passed    0.02 sec\n      Start  53: scene.DISPLAY-CONFLICT\n53/63 Test  #53: scene.DISPLAY-CONFLICT ...........   Passed    0.02 sec\n      Start  54: scene.MISSING-METRICS\n54/63 Test  #54: scene.MISSING-METRICS ............   Passed    0.02 sec\n      Start  55: scene.EXCLUSION-ORDER\n55/63 Test  #55: scene.EXCLUSION-ORDER ............   Passed    0.02 sec\n      Start  56: scene.QUANTIZED-FIXED\n56/63 Test  #56: scene.QUANTIZED-FIXED ............   Passed    0.02 sec\n      Start  57: scene.QUANTIZED-GAP\n57/63 Test  #57: scene.QUANTIZED-GAP ..............   Passed    0.02 sec\n      Start  58: scene.NESTED-BREAKPOINT\n58/63 Test  #58: scene.NESTED-BREAKPOINT ..........   Passed    0.02 sec\n      Start  59: scene.NATIVE-METRICS\n59/63 Test  #59: scene.NATIVE-METRICS .............   Passed    0.02 sec\n      Start  60: scene.LIMITS\n60/63 Test  #60: scene.LIMITS .....................   Passed    0.23 sec\n      Start  61: scene.EXCLUSION-EXHAUSTIVE\n61/63 Test  #61: scene.EXCLUSION-EXHAUSTIVE .......   Passed    0.23 sec\n      Start 119: composition.graph\n62/63 Test #119: composition.graph ................   Passed    0.06 sec\n      Start 120: composition.reject_forbidden\n63/63 Test #120: composition.reject_forbidden .....   Passed    0.05 sec\n\n100% tests passed, 0 tests failed out of 63\n\nTotal Test time (real) =   2.43 sec\n \nAttempt: D:\\Projects\\SysPane\\syspane\\out\\campaign\\w-09-chart-history\\windows-x64-gcc15-test-9a54c7a10e\n",
+    "stderr": ""
+  }
+]

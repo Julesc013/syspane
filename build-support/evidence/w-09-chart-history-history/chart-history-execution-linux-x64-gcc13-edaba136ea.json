@@ -1,0 +1,74 @@
+[
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-06T22:56:49.255739+00:00",
+    "finished_at": "2026-10-06T22:56:49.970615+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 6442450944,\n  \"checkout_out_bytes\": 1901552576,\n  \"linux_campaign_bytes\": 4213800409,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/chart_history_step.py",
+      "linux-x64-gcc13",
+      "build"
+    ],
+    "started_at": "2026-10-06T22:56:49.971267+00:00",
+    "finished_at": "2026-10-06T22:57:02.880699+00:00",
+    "exit": 0,
+    "stdout": "[1/2] Building CXX object CMakeFiles/syspane_scene_tests.dir/tests/scene/chart_history_tests.cpp.o\n[2/2] Linking CXX executable syspane_scene_tests\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-09-chart-history/linux-x64-gcc13-build-eb3e631098\n",
+    "stderr": ""
+  },
+  {
+    "step": "focus",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-06T22:57:02.881018+00:00",
+    "finished_at": "2026-10-06T22:57:03.495372+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 6442450944,\n  \"checkout_out_bytes\": 1902784802,\n  \"linux_campaign_bytes\": 4213860246,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "focus",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/chart_history_step.py",
+      "linux-x64-gcc13",
+      "focus"
+    ],
+    "started_at": "2026-10-06T22:57:03.495676+00:00",
+    "finished_at": "2026-10-06T22:57:11.181825+00:00",
+    "exit": 8,
+    "stdout": "Test project /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n      Start  7: scene.CHART-LIMITS\n 1/11 Test  #7: scene.CHART-LIMITS ...............   Passed    0.00 sec\n      Start  8: scene.CHART-WINDOW\n 2/11 Test  #8: scene.CHART-WINDOW ...............   Passed    0.00 sec\n      Start  9: scene.CHART-CAPACITY\n 3/11 Test  #9: scene.CHART-CAPACITY .............   Passed    0.01 sec\n      Start 10: scene.CHART-REPLAY\n 4/11 Test #10: scene.CHART-REPLAY ...............***Failed    0.00 sec\nerased payload\n\n      Start 11: scene.CHART-GAPS\n 5/11 Test #11: scene.CHART-GAPS .................   Passed    0.00 sec\n      Start 12: scene.CHART-IDENTITY\n 6/11 Test #12: scene.CHART-IDENTITY .............   Passed    0.00 sec\n      Start 13: scene.CHART-CLOCK\n 7/11 Test #13: scene.CHART-CLOCK ................   Passed    0.00 sec\n      Start 14: scene.CHART-SELECTION\n 8/11 Test #14: scene.CHART-SELECTION ............   Passed    0.00 sec\n      Start 15: scene.CHART-NUMERIC\n 9/11 Test #15: scene.CHART-NUMERIC ..............   Passed    0.00 sec\n      Start 16: scene.CHART-LIFETIME\n10/11 Test #16: scene.CHART-LIFETIME .............   Passed    0.00 sec\n      Start 17: scene.CHART-WIRE\n11/11 Test #17: scene.CHART-WIRE .................   Passed    0.01 sec\n\n91% tests passed, 1 tests failed out of 11\n\nTotal Test time (real) =   0.04 sec\n\nThe following tests FAILED:\n\t 10 - scene.CHART-REPLAY (Failed)\n Errors while running CTest\n\nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-09-chart-history/linux-x64-gcc13-focus-c7ac0dd85d\n",
+    "stderr": ""
+  }
+]
