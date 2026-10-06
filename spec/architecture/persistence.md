@@ -17,6 +17,11 @@ updated: {"by": "codex", "at": "2026-10-05T19:48:29+11:00", "scope": "Implementa
 
 # Configuration persistence and recovery
 
+The [resource generation package](../delivery/packages/w-08-resource-generations.md)
+closes the first concrete content-bearing generation format. Exact package manifests
+and asset bytes are owned by the generation, bound to command selection and validated
+on recovery. This does not authorize media decoding or report presentation activation.
+
 
 ## Experimental storage contract
 

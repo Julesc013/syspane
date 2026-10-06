@@ -7,6 +7,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [capability.schema.json](capability.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [command-result.schema.json](command-result.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [command-v0.2.schema.json](command-v0.2.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
+- [command-v0.3.schema.json](command-v0.3.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [command.schema.json](command.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [Commands, transactions and activation](commands.md) — Unify editing, native settings, CLI and policy through validated operations.
 - [common.schema.json](common.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.

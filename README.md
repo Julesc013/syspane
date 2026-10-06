@@ -13,6 +13,11 @@ The Linux reader loads bounded private directories without following links. Plan
 retain original bytes and provenance; durable resource storage, media decoding and
 native activation remain required.
 
+The subsequent [resource generation checkpoint](spec/delivery/resource-generations-handoff.md)
+binds content pins to command 0.3 and stores original package bytes with each Linux
+generation. Recovery uses that complete stored closure, including when the original
+import directory is unavailable. Presentation activation remains a separate gate.
+
 The [command session checkpoint](spec/delivery/command-sessions-handoff.md) connects
 authenticated IPC to asynchronous scene/settings transactions and Linux generation
 storage. Heartbeats, cancellation and result retrieval continue while storage work

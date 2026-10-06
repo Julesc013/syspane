@@ -132,6 +132,6 @@ void digest(){
 int main(int argc,char** argv){try{CHECK(argc==3);fixtures=argv[2];const std::string name=argv[1];
     if(name=="AUTH-SCHEMA")schemas();else if(name=="TX-MIXED")mixed();else if(name=="TX-CONFLICT")conflicts();else if(name=="TX-REPLAY")replay();
     else if(name=="TX-INTERRUPT")interruption();else if(name=="TX-BOUNDS")bounds();else if(name=="TX-CAPACITY")capacity();else if(name=="DIGEST")digest();
-    else if(name.substr(0,8)=="CONTENT-")content_tests(name,fixtures);else CHECK(false);
+    else if(name.substr(0,8)=="CONTENT-"||name.substr(0,9)=="RESOURCE-")content_tests(name,fixtures);else CHECK(false);
     std::cout<<name<<" pass\n";return 0;
 }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}}

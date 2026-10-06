@@ -222,7 +222,7 @@ def settings_projections(root: Path) -> dict[str, Any]:
         section, key = row['id'].split('.')
         settings['properties'][section]['properties'][key] = row['constraints']
     result = {'contracts/settings.schema.json': settings}
-    for name in ('command', 'command-v0.2'):
+    for name in ('command', 'command-v0.2', 'command-v0.3'):
         path = f'contracts/{name}.schema.json'
         command = read_json(root/path)
         operations = command['properties']['operations']['items']['oneOf']
@@ -381,7 +381,7 @@ def semantic_errors(value: Any, schema_name: str, root: Path=ROOT) -> list[str]:
                 allowed_layouts = ('canvas','stack','grid','fixed') if widget['kind'] == 'group' else ('fixed','flow')
                 if variant['kind'] not in allowed_layouts:
                     errors.append('container layout and widget kind disagree')
-    if schema_name == 'command-v0.2':
+    if schema_name in ('command-v0.2', 'command-v0.3'):
         if sum(op['op'] == 'scene.replace' for op in value['operations']) > 1:
             errors.append('only one scene replacement per request is admitted')
         for operation in value['operations']:
@@ -466,9 +466,10 @@ def schema_validators(root: Path) -> dict[str, Any]:
             Draft202012Validator.check_schema(data)
         except Exception as exc:
             raise SpecError(f'invalid schema {p.name}: {exc}') from exc
-        versioned = p.name.endswith('-v0.2.schema.json')
-        expected_id = (BASE.replace('/0.1.0/', '/0.2.0/') + p.name.replace('-v0.2', '')
-                       if versioned else BASE + p.name)
+        version = ('0.3' if p.name == 'command-v0.3.schema.json' else
+                   '0.2' if p.name.endswith('-v0.2.schema.json') else None)
+        expected_id = (BASE.replace('/0.1.0/', f'/{version}.0/') + p.name.replace(f'-v{version}', '')
+                       if version else BASE + p.name)
         if data.get('$id') != expected_id:
             raise SpecError(f'unexpected schema identity: {p.name}')
         all_schemas[p.name.removesuffix('.schema.json')] = data

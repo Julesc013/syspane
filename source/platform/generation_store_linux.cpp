@@ -26,7 +26,7 @@ struct File {
 void private_node(int fd,bool directory,std::size_t maximum=1048576){
     struct stat s{};need(fd>=0&&::fstat(fd,&s)==0,"storage.open");
     need(s.st_uid==::geteuid()&&!(s.st_mode&0077)&&!(s.st_mode&07000),"storage.permissions");
-    need(directory?S_ISDIR(s.st_mode):(S_ISREG(s.st_mode)&&s.st_nlink==1&&s.st_size>=0&&static_cast<std::uint64_t>(s.st_size)<=maximum),"storage.type");
+    need(directory?S_ISDIR(s.st_mode):(S_ISREG(s.st_mode)&&s.st_nlink==1&&!(s.st_mode&0111)&&s.st_size>=0&&static_cast<std::uint64_t>(s.st_size)<=maximum),"storage.type");
 }
 void flush(int fd){need(::fsync(fd)==0,"storage.flush");}
 File directory_at(int parent,const char* name){File f(::openat(parent,name,O_RDONLY|O_DIRECTORY|O_NOFOLLOW|O_CLOEXEC));private_node(f.fd,true);return f;}
@@ -74,6 +74,50 @@ Json identity(const std::optional<c::CommitIdentity>& value){
     if(!value)return nullptr;
     return {{"principal",value->principal},{"epoch",value->epoch},{"request",value->request},{"body",value->body}};
 }
+void exact_files(int fd,const std::set<std::string>& expected){
+    File listing(::openat(fd,".",O_RDONLY|O_DIRECTORY|O_CLOEXEC));need(listing.fd>=0,"storage.directory");
+    DIR* raw=::fdopendir(listing.fd);need(raw!=nullptr,"storage.directory");listing.fd=-1;
+    std::unique_ptr<DIR,int(*)(DIR*)> dir(raw,::closedir);std::set<std::string> found;
+    for(;;){errno=0;const auto* entry=::readdir(dir.get());if(!entry){need(errno==0,"storage.directory");break;}
+        const std::string name=entry->d_name;if(name=="."||name=="..")continue;
+        need(expected.count(name)&&found.insert(name).second,"storage.resource_files");}
+    need(found==expected,"storage.resource_files");
+}
+c::ResourceSnapshot decode_resources(int parent,const Json& hash,const c::Authored& documents,bool synchronize){
+    need(digest(hash),"storage.resources");const auto bytes=required(parent,"resources.json",65536,synchronize);
+    need(c::sha256(bytes)==hash,"storage.resources");const auto index=protocol::parse(bytes);
+    need(protocol::members(index,{"version","selection","theme","packages"})&&index["version"]=="0.1.0"&&
+        index["packages"].is_array()&&!index["packages"].empty()&&index["packages"].size()<=64,"storage.resources");
+    auto dir=directory_at(parent,"resources");std::set<std::string> expected;std::string prior;std::vector<c::ContentPackage> packages;std::size_t count=0,total=0;
+    for(const auto& item:index["packages"]){need(digest(item),"storage.resources");const auto pin=item.get<std::string>();need(prior.empty()||prior<pin,"storage.resources");prior=pin;
+        const auto filename="m-"+pin+".json";expected.insert(filename);c::ContentPackage package;package.manifest=required(dir.fd,filename.c_str(),65536,synchronize);
+        need(c::sha256(package.manifest)==pin,"storage.resources");const auto manifest=c::validate_content_manifest(package.manifest);
+        for(const auto& asset:manifest["assets"]){const auto size=asset["bytes"].get<std::size_t>();total+=size;
+            need(++count<=1024&&total<=67108864&&(asset["media_type"]!="application/json"||size<=262144),"storage.resource_capacity");
+            const auto file="a-"+asset["sha256"].get<std::string>()+".bin";expected.insert(file);
+            auto payload=required(dir.fd,file.c_str(),size,synchronize);need(payload.size()==size&&c::sha256(payload)==asset["sha256"],"storage.resources");
+            package.assets.emplace(asset["path"].get<std::string>(),std::move(payload));}
+        packages.push_back(std::move(package));
+    }
+    exact_files(dir.fd,expected);const auto resources=c::ContentCatalog(std::move(packages)).resources(index["selection"],documents);
+    need(resources->packages().size()==index["packages"].size()&&resources->theme_pin()==index["theme"],"storage.resources");
+    if(synchronize)flush(dir.fd);
+    return resources;
+}
+std::string write_resources(int parent,const c::ResourceSet& resources,const std::function<void(const char*)>& hook){
+    need(::mkdirat(parent,"resources",0700)==0,"storage.mkdir");auto dir=directory_at(parent,"resources");if(hook)hook("resources_created");
+    std::map<std::string,const std::string*> manifests,assets;
+    for(const auto& package:resources.packages()){
+        manifests.emplace(c::sha256(package->manifest),&package->manifest);
+        for(const auto& asset:package->assets)assets.emplace(c::sha256(asset.second),&asset.second);}
+    Json pins=Json::array();unsigned n=0;
+    for(const auto& row:manifests){write(dir.fd,("m-"+row.first+".json").c_str(),*row.second);pins.push_back(row.first);
+        const auto phase="resource_manifest:"+std::to_string(n++);if(hook)hook(phase.c_str());}
+    n=0;for(const auto& row:assets){write(dir.fd,("a-"+row.first+".bin").c_str(),*row.second);
+        const auto phase="resource_asset:"+std::to_string(n++);if(hook)hook(phase.c_str());}
+    const auto index=Json{{"version","0.1.0"},{"selection",resources.selection()},{"theme",resources.theme_pin()},{"packages",pins}}.dump();
+    need(index.size()<=65536,"storage.resource_capacity");write(parent,"resources.json",index);if(hook)hook("resource_index");flush(dir.fd);if(hook)hook("resources_flushed");return c::sha256(index);
+}
 }
 struct LinuxGenerationStore::Impl {
     File root,lock;std::function<void(const char*)> hook;
@@ -88,21 +132,27 @@ struct LinuxGenerationStore::Impl {
         need(name.size()==34&&name.substr(0,2)=="g-"&&name.substr(2).find_first_not_of("0123456789abcdef")==std::string::npos,"storage.generation");
         auto dir=directory_at(root.fd,name.c_str());const auto manifest_bytes=required(dir.fd,"manifest.json",65536,synchronize);
         need(c::sha256(manifest_bytes)==pointer["manifest"],"storage.manifest_digest");const auto manifest=protocol::parse(manifest_bytes);
-        need(protocol::members(manifest,{"version","revision","settings","scene","identity"})&&manifest["version"]=="0.1.0"&&digest(manifest["settings"])&&digest(manifest["scene"]),"storage.manifest");
+        const bool resources=manifest.is_object()&&manifest.contains("version")&&manifest["version"]=="0.2.0";
+        need((resources?protocol::members(manifest,{"version","revision","settings","scene","identity","resources"}):
+            (protocol::members(manifest,{"version","revision","settings","scene","identity"})&&manifest["version"]=="0.1.0"))&&digest(manifest["settings"])&&digest(manifest["scene"]),"storage.manifest");
         const auto settings=required(dir.fd,"settings.json",16384,synchronize),scene=required(dir.fd,"scene.json",262144,synchronize);
         need(c::sha256(settings)==manifest["settings"]&&c::sha256(scene)==manifest["scene"],"storage.document_digest");
         c::Committed value{{protocol::parse(settings),protocol::parse(scene)},std::nullopt};c::validate_authored(value.documents);
+        if(resources){exact_files(dir.fd,{"settings.json","scene.json","manifest.json","resources.json","resources"});
+            value.resources=decode_resources(dir.fd,manifest["resources"],value.documents,synchronize);}
         need(value.documents.settings["revision"]==manifest["revision"],"storage.revision");const auto& id=manifest["identity"];
         if(!id.is_null()){
             need(protocol::members(id,{"principal","epoch","request","body"}),"storage.identity");
             for(const char* key:{"principal","epoch","request"})need(id[key].is_string()&&protocol::identifier(id[key].get_ref<const std::string&>()),"storage.identity");
             need(id["body"].is_string()&&id["body"].get_ref<const std::string&>().size()<=16384,"storage.identity");
             const auto command=protocol::parse(id["body"].get_ref<const std::string&>());c::validate_command(command);
+            need((command["schema_version"]=="0.3.0")==resources&&(!resources||command["content"]==value.resources->selection()),"storage.resource_identity");
             const auto expected=protocol::decimal(command["expected_revision"].get_ref<const std::string&>());
             need(command["request_id"]==id["request"]&&command["intent"]=="commit"&&*expected<c::authored_revision(value.documents)&&
                  c::authored_revision(value.documents)-*expected==1,"storage.identity");
             value.identity=c::CommitIdentity{id["principal"],id["epoch"],id["request"],id["body"]};
         }
+        need(!resources||value.identity.has_value(),"storage.resource_identity");
         if(synchronize){flush(dir.fd);flush(root.fd);}
         return value;
     }
@@ -127,7 +177,9 @@ struct LinuxGenerationStore::Impl {
             const auto generation=random_name("g-");need(::mkdirat(root.fd,generation.c_str(),0700)==0,"storage.mkdir");auto dir=directory_at(root.fd,generation.c_str());step("created");
             const auto settings=next.documents.settings.dump(),scene=next.documents.scene.dump();
             write(dir.fd,"settings.json",settings);step("settings");write(dir.fd,"scene.json",scene);step("scene");
-            const auto manifest=Json{{"version","0.1.0"},{"revision",next.documents.settings["revision"]},{"settings",c::sha256(settings)},{"scene",c::sha256(scene)},{"identity",identity(next.identity)}}.dump();
+            Json manifest_value={{"version",next.resources?"0.2.0":"0.1.0"},{"revision",next.documents.settings["revision"]},{"settings",c::sha256(settings)},{"scene",c::sha256(scene)},{"identity",identity(next.identity)}};
+            if(next.resources){c::validate_resource_binding(*next.resources,next.documents);manifest_value["resources"]=write_resources(dir.fd,*next.resources,hook);}
+            const auto manifest=manifest_value.dump();
             need(manifest.size()<=65536,"storage.manifest_size");write(dir.fd,"manifest.json",manifest);step("manifest");flush(dir.fd);flush(root.fd);step("generation");
             const auto selector=Json{{"version","0.1.0"},{"generation",generation},{"manifest",c::sha256(manifest)}}.dump();
             (void)decode(selector,false);

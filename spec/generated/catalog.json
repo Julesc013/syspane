@@ -31,7 +31,7 @@
         "SP-COMMANDS",
         "SP-SETTINGS"
       ],
-      "sha256": "a546339f3a4bf17ea01aff2b3204c6effb26a890de40cd4baa53c887c46a4f27"
+      "sha256": "c6ea3ddf5795e9564edab94a264d10f32f3bad56c5c279b3d79d6156faed9e95"
     },
     {
       "id": "SP-PORTABILITY",
@@ -216,7 +216,7 @@
         "SP-PROTOCOL",
         "SP-COMMANDS"
       ],
-      "sha256": "13f8fc594698b56c3e2b85c21516fed63060fd31c973507753e1137204247cf2"
+      "sha256": "c96d9a4ff9f6a4aec7fb28bd1005973ee9f7a574eb862f24c4e7eef5e324b8ec"
     },
     {
       "id": "SP-VERSIONS",
@@ -421,7 +421,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "63c4d4e23e0e1865408d0b5f9912e2841d05fb69e36ca753bfc918f6114a81c7"
+      "sha256": "8a22d7cfb6dcc6e36b77cebf09b6c7d03cd22eddecae864e4c282864c02368e4"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -1197,6 +1197,19 @@
       "sha256": "df5a351611a330da28666ecff1279c820f4ce1997eecee1dbeca8ed0ab58cdc5"
     },
     {
+      "id": "SP-W08-RESOURCES",
+      "path": "delivery/packages/w-08-resource-generations.md",
+      "title": "Durable pinned resource generations",
+      "description": "Bind command identity and generation recovery to the exact prepared content closure.",
+      "requires": [
+        "SP-W08-CONTENT",
+        "SP-W08-AUTHORED",
+        "SP-W08-COMMAND-SESSIONS",
+        "SP-PERSISTENCE"
+      ],
+      "sha256": "0e0536fbe3cf5421a374efb25ddb84891c05539c5b2d06fd4ddb2e0f4e8f6307"
+    },
+    {
       "id": "SP-W08-SUPERVISION",
       "path": "delivery/packages/w-08-supervised-transactions.md",
       "title": "Independent transaction deadlines and controller recovery",
@@ -1593,6 +1606,17 @@
         "SP-TARGETS"
       ],
       "sha256": "e7119811fcd8a2d45457876576c709da36f56fc56cdc9b3567d9427b7f04e244"
+    },
+    {
+      "id": "SP-RESOURCE-GENERATIONS-HANDOFF",
+      "path": "delivery/resource-generations-handoff.md",
+      "title": "Durable resource generation checkpoint",
+      "description": "Exact content closure, command identity and coherent Linux recovery.",
+      "requires": [
+        "SP-W08-RESOURCES",
+        "SP-CONTENT-RESOLUTION-HANDOFF"
+      ],
+      "sha256": "48ec834342e7940fda798c4c84feea1960ae2c076ccd898da0e1d7731c33f7b3"
     },
     {
       "id": "SP-ROADMAP",

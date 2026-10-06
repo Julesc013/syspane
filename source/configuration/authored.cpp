@@ -12,7 +12,7 @@ void require(bool value,const char* code){if(!value)throw Error(code);}
 const std::map<std::string,Json>& schemas(){
     static const std::map<std::string,Json> value=[] {
         std::map<std::string,Json> result;
-        for(const char* text:{settings_schema,scene_v0_2_schema,layout_schema,binding_schema,command_v0_2_schema,content_package_schema,preset_schema,theme_schema}){
+        for(const char* text:{settings_schema,scene_v0_2_schema,layout_schema,binding_schema,command_v0_2_schema,command_v0_3_schema,content_package_schema,preset_schema,theme_schema}){
             auto item=Json::parse(text);result.emplace(item["$id"].get<std::string>(),std::move(item));
         }
         return result;
@@ -133,7 +133,7 @@ void validate_authored(const Authored& value){
     require(revision(value.settings["revision"])==revision(value.scene["revision"]),"authored.mixed_revision");scene_semantics(value.scene);
 }
 void validate_command(const Json& value){
-    structural(value,"0.2.0/command",16384);(void)revision(value["expected_revision"]);(void)revision(value["policy_generation"]);
+    structural(value,value.is_object()&&value.contains("schema_version")&&value["schema_version"]=="0.3.0"?"0.3.0/command":"0.2.0/command",16384);(void)revision(value["expected_revision"]);(void)revision(value["policy_generation"]);
     std::set<std::string> paths;bool scene=false;
     for(const auto& op:value["operations"]){
         if(op["op"]=="scene.replace"){
@@ -148,6 +148,7 @@ void authorize_authored(const Json& command,const Authority& authority,const Pol
     require(revision(command["policy_generation"])==policy.revision,"policy.changed");
     require(revision(command["expected_revision"])==current,"revision.changed");
     require(!policy.denied_capabilities.count(command["intent"]=="commit"?"settings.commit":"settings.preview"),"policy.denied");
+    if(command["schema_version"]=="0.3.0")require(!policy.denied_capabilities.count("content.select"),"policy.denied");
     for(const auto& op:command["operations"]){
         const auto name=op["op"].get<std::string>();require(!policy.denied_capabilities.count(name),"policy.denied");
         if(name=="scene.replace")require(authority.role!="saver_settings","policy.denied");

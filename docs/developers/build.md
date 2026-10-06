@@ -1,5 +1,27 @@
 # Developer setup and checks
 
+The [resource generation package](../../spec/delivery/packages/w-08-resource-generations.md)
+adds command 0.3 with an explicit content selection. A typed `ResourceProvider`
+returns an immutable `ResourceSet` from the existing `ContentCatalog`; the common
+coordinator verifies its selection, candidate theme, capability availability and
+current policy. AsyncCommands advertises `configuration.content` only with this
+provider. Ordinary command 0.2 ownership remains available for resource-free stores.
+
+After workspace preflight/configure/build, run `ctest --preset <profile> -R
+'^configuration[.]RESOURCE-' --output-on-failure`. Linux also runs `ctest --preset
+linux-x64-gcc13 -R '^native[.]RESOURCE-GENERATIONS$' --output-on-failure`. Native
+reports use `native-evidence/resources-*`. The independent oracle covers exact
+stored bytes, interrupted writes, missing import sources and complete-previous
+fallback without repairing corrupt generations.
+
+The existing finite ConfigProbe accepts `<store> content-commit <command-json>
+<fault-or-dash> <package-dir>...`. It uses laboratory console authority, policy 7
+and the scene.selector capability, and loads package directories only when actual
+preparation is required. Replayed committed requests therefore need no import path.
+`read` additionally reports recovered selection/theme/package pins for resource-bearing
+generations. Native installed endpoint/policy ownership, media decoding and visible
+activation are separate gates; do not infer them from a durable response.
+
 The [content resolution package](../../spec/delivery/packages/w-08-content-resolution.md)
 adds `ContentCatalog` to the authored configuration component. Supply exact package
 and document pins, an immutable baseline, authenticated role, current policy and
@@ -20,7 +42,8 @@ It uses explicit laboratory console authority, policy generation 7 and the
 before consuming stdin; tests change the files then prove copied bytes survive.
 Denied mode blocks settings previews. These controls do not supply installed policy
 or an import UI. The current generation store cannot publish external resource
-closures yet; do not turn this plan into a product commit by changing its intent.
+closures in the original 0.2 path. The subsequent 0.3 resource path above binds
+selection explicitly; changing only a preview's intent is insufficient.
 
 The [transaction supervision checkpoint](../../spec/delivery/transaction-supervision-handoff.md)
 adds `TransactionWatch` in the common recovery component and an opt-in controller

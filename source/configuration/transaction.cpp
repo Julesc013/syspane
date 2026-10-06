@@ -19,6 +19,10 @@ Transactions::Transactions(GenerationStore& store,std::string epoch,std::functio
     :store_(store),epoch_(std::move(epoch)),current_(store.load()),prepare_resources_(std::move(prepare_resources)){
     require(protocol::identifier(epoch_)&&static_cast<bool>(prepare_resources_),"transaction.owner");validate_authored(current_.documents);
 }
+Transactions::Transactions(GenerationStore& store,std::string epoch,ResourceProvider resources)
+    :store_(store),epoch_(std::move(epoch)),current_(store.load()),resource_provider_(std::move(resources)){
+    require(protocol::identifier(epoch_)&&static_cast<bool>(resource_provider_.prepare),"transaction.owner");validate_authored(current_.documents);
+}
 Json Transactions::reply(const std::string& request,const char* status,const char* code,std::optional<std::uint64_t> committed)const{
     if(committed)return committed_result(request,epoch_,*committed);
     return result({status,code},request,epoch_,authored_revision(current_.documents));
@@ -81,19 +85,27 @@ Json Transactions::submit_impl(const std::string& principal,const std::string& c
     try{
         if(cancelled())throw Error("request.cancelled");
         auto candidate=prepare_authored(current_.documents,command,authority,checked_policy);
-        prepare_resources_(candidate);
+        ResourceSnapshot resources;
+        if(command["schema_version"]=="0.3.0"){
+            require(supports_resources(),"resource.contract");resources=resource_provider_.prepare(candidate,command["content"]);
+            require(resources&&resources->selection()==command["content"],"resource.selection");
+            validate_resource_binding(*resources,candidate);authorize_resources(*resources,checked_policy,resource_provider_.capabilities);
+        }else{
+            require(!current_.resources&&static_cast<bool>(prepare_resources_),"resource.contract");prepare_resources_(candidate);
+        }
         if(cancelled())throw Error("request.cancelled");
         if(command["intent"]=="preview")answer=reply(request,"preview");
         else{
             const auto old=authored_revision(current_.documents);require(old<std::numeric_limits<std::uint64_t>::max(),"revision.exhausted");
             candidate.settings["revision"]=candidate.scene["revision"]=std::to_string(old+1);
-            Committed next{std::move(candidate),CommitIdentity{principal,epoch_,request,body}};
+            Committed next{std::move(candidate),CommitIdentity{principal,epoch_,request,body},std::move(resources)};
             // Finish all fallible result construction before native publication.
             auto accepted=reply(request,"accepted","",old+1);
             const auto publication=store_.publish(next,[&]{
                 if(cancelled())throw Error("request.cancelled");
                 require(authored_revision(store_.load().documents)==old,"revision.changed");
-                authorize_authored(command,authority,policy(),old);
+                const auto current_policy=policy();authorize_authored(command,authority,current_policy,old);
+                if(next.resources)authorize_resources(*next.resources,current_policy,resource_provider_.capabilities);
                 permit();
             });
             if(publication==Publication::durable){current_=std::move(next);answer=std::move(accepted);did_commit=true;}

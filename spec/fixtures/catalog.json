@@ -665,6 +665,34 @@
       "expected": "invalid",
       "semantic": true,
       "reason": "Supervision tickets cannot overflow uint64."
+    },
+    {
+      "path": "fixtures/valid/command-content.json",
+      "schema": "command-v0.3",
+      "expected": "valid",
+      "semantic": true,
+      "reason": "Pinned content selection; byte existence is a runtime check."
+    },
+    {
+      "path": "fixtures/invalid/command-content-missing.json",
+      "schema": "command-v0.3",
+      "expected": "invalid",
+      "semantic": true,
+      "reason": "Missing, malformed or authority-bearing content selection."
+    },
+    {
+      "path": "fixtures/invalid/command-content-pin.json",
+      "schema": "command-v0.3",
+      "expected": "invalid",
+      "semantic": true,
+      "reason": "Missing, malformed or authority-bearing content selection."
+    },
+    {
+      "path": "fixtures/invalid/command-content-authority.json",
+      "schema": "command-v0.3",
+      "expected": "invalid",
+      "semantic": true,
+      "reason": "Missing, malformed or authority-bearing content selection."
     }
   ]
 }

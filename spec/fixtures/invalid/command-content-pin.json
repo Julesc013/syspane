@@ -1,0 +1,106 @@
+{
+  "schema_version": "0.3.0",
+  "request_id": "request:scene",
+  "expected_revision": "0",
+  "policy_generation": "0",
+  "intent": "preview",
+  "operations": [
+    {
+      "op": "scene.replace",
+      "scene": {
+        "schema_version": "0.2.0",
+        "revision": "0",
+        "scene_id": "scene:portable",
+        "theme_id": null,
+        "roots": [
+          "group:network"
+        ],
+        "widgets": [
+          {
+            "id": "group:network",
+            "kind": "group",
+            "title": "Network",
+            "display": {
+              "role": "primary"
+            },
+            "layout": {
+              "base": {
+                "kind": "stack",
+                "axis": "vertical",
+                "gap_dip": 8,
+                "overflow": "diagnose"
+              }
+            },
+            "bindings": [],
+            "priority": "essential",
+            "children": [
+              "widget:adapters"
+            ]
+          },
+          {
+            "id": "widget:adapters",
+            "kind": "table",
+            "title": "Physical adapters",
+            "display": {
+              "role": "primary"
+            },
+            "layout": {
+              "base": {
+                "kind": "flow",
+                "width": {
+                  "min": 100,
+                  "preferred": 240,
+                  "max": 640
+                },
+                "height": {
+                  "min": 32,
+                  "preferred": 80,
+                  "max": 256
+                },
+                "anchor": "end"
+              }
+            },
+            "bindings": [
+              {
+                "kind": "selector",
+                "scope": {
+                  "kind": "local_host"
+                },
+                "entity_type": "network_interface",
+                "mode": "collection",
+                "predicates": [
+                  {
+                    "field": "physical",
+                    "op": "eq",
+                    "value": true
+                  }
+                ],
+                "sort": [
+                  {
+                    "field": "name",
+                    "direction": "ascending"
+                  }
+                ],
+                "limit": 64,
+                "field": "operational_state"
+              }
+            ],
+            "priority": "normal"
+          }
+        ]
+      }
+    }
+  ],
+  "content": {
+    "package": {
+      "id": "package:example",
+      "version": "0.1.0",
+      "sha256": "not-a-digest"
+    },
+    "preset": {
+      "id": "preset:example",
+      "version": "0.1.0",
+      "sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+    }
+  }
+}

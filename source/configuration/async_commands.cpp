@@ -13,6 +13,8 @@ Decision decision(const std::string& code){
 }
 AsyncCommands::AsyncCommands(GenerationStore& store,std::string epoch,std::function<void(const Authored&)> prepare)
     :epoch_(std::move(epoch)),transactions_(store,epoch_,std::move(prepare)),receipts_(transactions_.receipts()),revision_(authored_revision(transactions_.authored())){}
+AsyncCommands::AsyncCommands(GenerationStore& store,std::string epoch,ResourceProvider prepare)
+    :epoch_(std::move(epoch)),transactions_(store,epoch_,std::move(prepare)),receipts_(transactions_.receipts()),revision_(authored_revision(transactions_.authored())){}
 void AsyncCommands::attach(const std::string& epoch,std::uint64_t revision,Policy policy){
     std::lock_guard<std::mutex> lock(mutex_);
     if(attached_||invalid_||epoch!=epoch_||revision!=revision_)throw Error("command.owner");

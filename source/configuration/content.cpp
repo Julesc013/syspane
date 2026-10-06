@@ -96,20 +96,51 @@ ContentCatalog::ContentCatalog(std::vector<ContentPackage> packages){
     };
     for(std::size_t i=0;i<entries_.size();++i)(void)visit(i);
 }
-PresetPlan ContentCatalog::preview(const Json& package_pin,const Json& selected,const Authored& baseline,const std::string& request,
-    const Authority& authority,const Policy& policy,const std::set<std::string>& capabilities)const{
-    validate_authored(baseline);pin_valid(selected);pin_valid(package_pin);
-    auto lookup=[&](const Json& pin,const char* kind,const std::set<std::size_t>& scope){
-        pin_valid(pin);std::optional<std::size_t> result;
-        for(auto i:scope)if(entries_[i].manifest["kind"]==kind&&entries_[i].pin==pin){need(!result,"content.ambiguous");result=i;}
-        need(result.has_value(),"content.reference");return *result;
-    };
+std::size_t ContentCatalog::lookup(const Json& pin,const char* kind,const std::set<std::size_t>& scope)const{
+    pin_valid(pin);std::optional<std::size_t> result;
+    for(auto i:scope)if(entries_[i].manifest["kind"]==kind&&entries_[i].pin==pin){need(!result,"content.ambiguous");result=i;}
+    need(result.has_value(),"content.reference");return *result;
+}
+ContentCatalog::Selection ContentCatalog::select(const Json& package_pin,const Json& selected)const{
+    pin_valid(selected);pin_valid(package_pin);
     std::set<std::size_t> selected_package;
     for(std::size_t i=0;i<entries_.size();++i){const auto& e=entries_[i];
         if(e.manifest["package_id"]==package_pin["id"]&&e.manifest["version"]==package_pin["version"]&&sha256(e.bytes->manifest)==package_pin["sha256"])selected_package.insert(i);}
     const auto leaf=lookup(selected,"preset",selected_package);const auto& scope=entries_[leaf].closure;
     std::set<std::pair<std::string,std::string>> documents;
     for(auto i:scope)need(documents.emplace(entries_[i].pin["id"].get<std::string>(),entries_[i].pin["version"].get<std::string>()).second,"content.ambiguous");
+    std::vector<std::size_t> chain;std::set<std::size_t> visited;auto cursor=leaf;
+    for(;;){need(chain.size()<8&&visited.insert(cursor).second,"content.parent_depth");chain.push_back(cursor);const auto& e=entries_[cursor];
+        (void)lookup(e.document["scene"],"scene",e.closure);if(!e.document["theme"].is_null())(void)lookup(e.document["theme"],"theme",e.closure);
+        if(e.document["parent"].is_null())break;
+        cursor=lookup(e.document["parent"],"preset",e.closure);
+    }
+    std::reverse(chain.begin(),chain.end());return {leaf,std::move(chain)};
+}
+ResourceSnapshot ContentCatalog::resources(const Json& selection,const Authored& candidate)const{
+    need(protocol::members(selection,{"package","preset"}),"content.selection");validate_authored(candidate);
+    const auto selected=select(selection["package"],selection["preset"]);const auto& scope=entries_[selected.leaf].closure;
+    auto result=std::shared_ptr<ResourceSet>(new ResourceSet);result->selection_=selection;
+    for(auto i:scope){const auto& e=entries_[i];result->packages_.push_back(e.bytes);
+        for(const auto& cap:e.manifest["required_capabilities"])result->required_.insert(cap.get<std::string>());
+        if(e.manifest["kind"]=="preset")for(const auto& cap:e.document["required_capabilities"])result->required_.insert(cap.get<std::string>());}
+    const auto id=candidate.scene["theme_id"].is_null()?candidate.settings["display"]["theme_id"]:candidate.scene["theme_id"];
+    const auto& pin=entries_[selected.leaf].document["theme"];std::optional<std::size_t> theme;
+    if(!pin.is_null()&&pin["id"]==id)theme=lookup(pin,"theme",scope);
+    else for(auto i:scope)if(entries_[i].manifest["kind"]=="theme"&&entries_[i].pin["id"]==id){need(!theme,"content.ambiguous");theme=i;}
+    need(theme.has_value(),"content.theme");result->theme_pin_=entries_[*theme].pin;result->theme_=entries_[*theme].document;return result;
+}
+void validate_resource_binding(const ResourceSet& resources,const Authored& candidate){
+    validate_authored(candidate);const auto id=candidate.scene["theme_id"].is_null()?candidate.settings["display"]["theme_id"]:candidate.scene["theme_id"];
+    need(id==resources.theme()["theme_id"],"content.theme");
+}
+void authorize_resources(const ResourceSet& resources,const Policy& policy,const std::set<std::string>& capabilities){
+    need(policy.available,"policy.denied");
+    for(const auto& cap:resources.required())need(capabilities.count(cap)&&!policy.denied_capabilities.count(cap),"policy.denied");
+}
+PresetPlan ContentCatalog::preview(const Json& package_pin,const Json& selected,const Authored& baseline,const std::string& request,
+    const Authority& authority,const Policy& policy,const std::set<std::string>& capabilities)const{
+    validate_authored(baseline);const auto selection=select(package_pin,selected);const auto leaf=selection.leaf;const auto& scope=entries_[leaf].closure;
     PresetPlan result;result.package_pins=Json::array();result.preset_pins=Json::array();result.setting_origins=Json::object();
     std::set<std::string> missing;std::map<std::string,Json> sorted;
     auto requirements=[&](const Json& document){
@@ -122,14 +153,8 @@ PresetPlan ContentCatalog::preview(const Json& package_pin,const Json& selected,
         sorted.emplace(pin.dump(),pin);result.packages.push_back(e.bytes);}
     for(const auto& row:sorted)result.package_pins.push_back(row.second);
     result.missing_optional=Json::array();for(const auto& cap:missing)result.missing_optional.push_back(cap);
-    std::vector<std::size_t> chain;std::set<std::size_t> visited;auto cursor=leaf;
-    for(;;){need(chain.size()<8&&visited.insert(cursor).second,"content.parent_depth");chain.push_back(cursor);const auto& e=entries_[cursor];
-        (void)lookup(e.document["scene"],"scene",e.closure);if(!e.document["theme"].is_null())(void)lookup(e.document["theme"],"theme",e.closure);
-        if(e.document["parent"].is_null())break;
-        cursor=lookup(e.document["parent"],"preset",e.closure);
-    }
-    std::reverse(chain.begin(),chain.end());std::map<std::string,Json> values;
-    for(auto i:chain){const auto& e=entries_[i];result.preset_pins.push_back(e.pin);
+    std::map<std::string,Json> values;
+    for(auto i:selection.chain){const auto& e=entries_[i];result.preset_pins.push_back(e.pin);
         for(const auto& setting:e.document["settings"]){const auto key=setting["path"].get<std::string>();values[key]=setting["value"];result.setting_origins[key]=e.pin;}}
     const auto& leafdoc=entries_[leaf].document;auto scene=entries_[lookup(leafdoc["scene"],"scene",scope)].document;
     scene["revision"]=baseline.settings["revision"];

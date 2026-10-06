@@ -1,0 +1,560 @@
+{
+  "family": "TRANSACTION-SUPERVISION",
+  "outcome": "pass",
+  "filesystem": "ext4",
+  "uid": 1000,
+  "executable_sha256": "80a75696b1cb45b8a3566286bc5f395c0b310e9223684059f50c5e24be21a0ab",
+  "store_executable_sha256": "5bc013eee31df8db70885d851eec8bd436d995b98c935e10877832d0ec837230",
+  "oracle_sha256": "123df9491fc38ab420f9069ca3d0d8209d39a5120e6414dbdd626cc565da98e7",
+  "cases": [
+    {
+      "case": "NORMAL",
+      "outcome": "pass",
+      "revision": 42,
+      "supervisor": {
+        "pid": 817,
+        "exit": 0,
+        "events": [
+          {
+            "endpoint": "/home/ir4runner/.cache/syspane/ipc-w24/sup-18a3854d/c1/s",
+            "epoch": "supervised:817:1",
+            "event": "launched",
+            "generation": 1,
+            "observed_ms": 333445,
+            "pid": 819,
+            "oracle_received_ms": 333445
+          },
+          {
+            "endpoint": "/home/ir4runner/.cache/syspane/ipc-w24/sup-18a3854d/c1/s",
+            "epoch": "supervised:817:1",
+            "event": "ready",
+            "observed_ms": 333458,
+            "pid": 819,
+            "oracle_received_ms": 333459
+          },
+          {
+            "event": "armed",
+            "observed_ms": 333469,
+            "pid": 819,
+            "ticket": 1,
+            "oracle_received_ms": 333470
+          },
+          {
+            "event": "finished",
+            "observed_ms": 333525,
+            "pid": 819,
+            "ticket": 1,
+            "oracle_received_ms": 333526
+          },
+          {
+            "event": "armed",
+            "observed_ms": 333546,
+            "pid": 819,
+            "ticket": 2,
+            "oracle_received_ms": 333547
+          },
+          {
+            "event": "finished",
+            "observed_ms": 333613,
+            "pid": 819,
+            "ticket": 2,
+            "oracle_received_ms": 333614
+          },
+          {
+            "code": 9,
+            "event": "reaped",
+            "observed_ms": 333634,
+            "pid": 819,
+            "signaled": true,
+            "oracle_received_ms": 333634
+          }
+        ]
+      }
+    },
+    {
+      "case": "PREPARE-HANG",
+      "outcome": "pass",
+      "revision": 40,
+      "supervisor": {
+        "pid": 824,
+        "exit": 0,
+        "events": [
+          {
+            "endpoint": "/home/ir4runner/.cache/syspane/ipc-w24/sup-f48280db/c1/s",
+            "epoch": "supervised:824:1",
+            "event": "launched",
+            "generation": 1,
+            "observed_ms": 333685,
+            "pid": 826,
+            "oracle_received_ms": 333686
+          },
+          {
+            "endpoint": "/home/ir4runner/.cache/syspane/ipc-w24/sup-f48280db/c1/s",
+            "epoch": "supervised:824:1",
+            "event": "ready",
+            "observed_ms": 333698,
+            "pid": 826,
+            "oracle_received_ms": 333699
+          },
+          {
+            "event": "armed",
+            "observed_ms": 333709,
+            "pid": 826,
+            "ticket": 1,
+            "oracle_received_ms": 333709
+          },
+          {
+            "event": "fault",
+            "heartbeats": 5,
+            "observed_ms": 338709,
+            "pid": 826,
+            "quarantined": true,
+            "reason": "transaction.deadline",
+            "oracle_received_ms": 338709
+          },
+          {
+            "code": 9,
+            "event": "reaped",
+            "observed_ms": 338709,
+            "pid": 826,
+            "signaled": true,
+            "oracle_received_ms": 338710
+          },
+          {
+            "endpoint": "/home/ir4runner/.cache/syspane/ipc-w24/sup-f48280db/c2/s",
+            "epoch": "supervised:824:2",
+            "event": "launched",
+            "generation": 2,
+            "observed_ms": 339711,
+            "pid": 828,
+            "oracle_received_ms": 339712
+          },
+          {
+            "endpoint": "/home/ir4runner/.cache/syspane/ipc-w24/sup-f48280db/c2/s",
+            "epoch": "supervised:824:2",
+            "event": "ready",
+            "observed_ms": 339727,
+            "pid": 828,
+            "oracle_received_ms": 339727
+          },
+          {
+            "code": 9,
+            "event": "reaped",
+            "observed_ms": 339740,
+            "pid": 828,
+            "signaled": true,
+            "oracle_received_ms": 339740
+          }
+        ]
+      }
+    },
+    {
+      "case": "DURABLE-HANG",
+      "outcome": "pass",
+      "revision": 41,
+      "supervisor": {
+        "pid": 831,
+        "exit": 0,
+        "events": [
+          {
+            "endpoint": "/home/ir4runner/.cache/syspane/ipc-w24/sup-9895f028/c1/s",
+            "epoch": "supervised:831:1",
+            "event": "launched",
+            "generation": 1,
+            "observed_ms": 339783,
+            "pid": 833,
+            "oracle_received_ms": 339783
+          },
+          {
+            "endpoint": "/home/ir4runner/.cache/syspane/ipc-w24/sup-9895f028/c1/s",
+            "epoch": "supervised:831:1",
+            "event": "ready",
+            "observed_ms": 339796,
+            "pid": 833,
+            "oracle_received_ms": 339797
+          },
+          {
+            "event": "armed",
+            "observed_ms": 339809,
+            "pid": 833,
+            "ticket": 1,
+            "oracle_received_ms": 339809
+          },
+          {
+            "event": "fault",
+            "heartbeats": 5,
+            "observed_ms": 344816,
+            "pid": 833,
+            "quarantined": true,
+            "reason": "transaction.deadline",
+            "oracle_received_ms": 344816
+          },
+          {
+            "code": 9,
+            "event": "reaped",
+            "observed_ms": 344816,
+            "pid": 833,
+            "signaled": true,
+            "oracle_received_ms": 344817
+          },
+          {
+            "endpoint": "/home/ir4runner/.cache/syspane/ipc-w24/sup-9895f028/c2/s",
+            "epoch": "supervised:831:2",
+            "event": "launched",
+            "generation": 2,
+            "observed_ms": 345820,
+            "pid": 835,
+            "oracle_received_ms": 345820
+          },
+          {
+            "endpoint": "/home/ir4runner/.cache/syspane/ipc-w24/sup-9895f028/c2/s",
+            "epoch": "supervised:831:2",
+            "event": "ready",
+            "observed_ms": 345846,
+            "pid": 835,
+            "oracle_received_ms": 345846
+          },
+          {
+            "code": 9,
+            "event": "reaped",
+            "observed_ms": 345858,
+            "pid": 835,
+            "signaled": true,
+            "oracle_received_ms": 345859
+          }
+        ]
+      }
+    },
+    {
+      "case": "CONTROLLER-FREEZE",
+      "outcome": "pass",
+      "revision": 40,
+      "supervisor": {
+        "pid": 838,
+        "exit": 0,
+        "events": [
+          {
+            "endpoint": "/home/ir4runner/.cache/syspane/ipc-w24/sup-259007f0/c1/s",
+            "epoch": "supervised:838:1",
+            "event": "launched",
+            "generation": 1,
+            "observed_ms": 345908,
+            "pid": 840,
+            "oracle_received_ms": 345909
+          },
+          {
+            "endpoint": "/home/ir4runner/.cache/syspane/ipc-w24/sup-259007f0/c1/s",
+            "epoch": "supervised:838:1",
+            "event": "ready",
+            "observed_ms": 345921,
+            "pid": 840,
+            "oracle_received_ms": 345922
+          },
+          {
+            "event": "armed",
+            "observed_ms": 345932,
+            "pid": 840,
+            "ticket": 1,
+            "oracle_received_ms": 345933
+          },
+          {
+            "event": "fault",
+            "heartbeats": 1,
+            "observed_ms": 348929,
+            "pid": 840,
+            "quarantined": true,
+            "reason": "supervisor.health_expired",
+            "oracle_received_ms": 348930
+          },
+          {
+            "code": 9,
+            "event": "reaped",
+            "observed_ms": 348930,
+            "pid": 840,
+            "signaled": true,
+            "oracle_received_ms": 348930
+          },
+          {
+            "endpoint": "/home/ir4runner/.cache/syspane/ipc-w24/sup-259007f0/c2/s",
+            "epoch": "supervised:838:2",
+            "event": "launched",
+            "generation": 2,
+            "observed_ms": 349931,
+            "pid": 842,
+            "oracle_received_ms": 349932
+          },
+          {
+            "endpoint": "/home/ir4runner/.cache/syspane/ipc-w24/sup-259007f0/c2/s",
+            "epoch": "supervised:838:2",
+            "event": "ready",
+            "observed_ms": 349946,
+            "pid": 842,
+            "oracle_received_ms": 349947
+          },
+          {
+            "code": 9,
+            "event": "reaped",
+            "observed_ms": 349959,
+            "pid": 842,
+            "signaled": true,
+            "oracle_received_ms": 349960
+          }
+        ]
+      }
+    },
+    {
+      "case": "GUARDIAN-DEATH",
+      "outcome": "pass",
+      "independent_child_exit": true,
+      "revision": 40,
+      "supervisor": {
+        "pid": 845,
+        "exit": -9,
+        "events": [
+          {
+            "endpoint": "/home/ir4runner/.cache/syspane/ipc-w24/sup-4be9d91a/c1/s",
+            "epoch": "supervised:845:1",
+            "event": "launched",
+            "generation": 1,
+            "observed_ms": 350000,
+            "pid": 847,
+            "oracle_received_ms": 350000
+          },
+          {
+            "endpoint": "/home/ir4runner/.cache/syspane/ipc-w24/sup-4be9d91a/c1/s",
+            "epoch": "supervised:845:1",
+            "event": "ready",
+            "observed_ms": 350013,
+            "pid": 847,
+            "oracle_received_ms": 350014
+          },
+          {
+            "event": "armed",
+            "observed_ms": 350024,
+            "pid": 847,
+            "ticket": 1,
+            "oracle_received_ms": 350024
+          }
+        ]
+      }
+    },
+    {
+      "case": "GUARDIAN-FREEZE",
+      "outcome": "pass",
+      "independent_child_exit": true,
+      "revision": 40,
+      "supervisor": {
+        "pid": 851,
+        "exit": -9,
+        "events": [
+          {
+            "endpoint": "/home/ir4runner/.cache/syspane/ipc-w24/sup-25b74f60/c1/s",
+            "epoch": "supervised:851:1",
+            "event": "launched",
+            "generation": 1,
+            "observed_ms": 350081,
+            "pid": 853,
+            "oracle_received_ms": 350081
+          },
+          {
+            "endpoint": "/home/ir4runner/.cache/syspane/ipc-w24/sup-25b74f60/c1/s",
+            "epoch": "supervised:851:1",
+            "event": "ready",
+            "observed_ms": 350094,
+            "pid": 853,
+            "oracle_received_ms": 350095
+          },
+          {
+            "event": "armed",
+            "observed_ms": 350105,
+            "pid": 853,
+            "ticket": 1,
+            "oracle_received_ms": 350106
+          }
+        ]
+      }
+    },
+    {
+      "case": "CIRCUIT",
+      "outcome": "pass",
+      "revision": 40,
+      "supervisor": {
+        "pid": 857,
+        "exit": 0,
+        "events": [
+          {
+            "endpoint": "/home/ir4runner/.cache/syspane/ipc-w24/sup-f9b1c350/c1/s",
+            "epoch": "supervised:857:1",
+            "event": "launched",
+            "generation": 1,
+            "observed_ms": 353152,
+            "pid": 859,
+            "oracle_received_ms": 353153
+          },
+          {
+            "endpoint": "/home/ir4runner/.cache/syspane/ipc-w24/sup-f9b1c350/c1/s",
+            "epoch": "supervised:857:1",
+            "event": "ready",
+            "observed_ms": 353168,
+            "pid": 859,
+            "oracle_received_ms": 353169
+          },
+          {
+            "event": "armed",
+            "observed_ms": 353180,
+            "pid": 859,
+            "ticket": 1,
+            "oracle_received_ms": 353181
+          },
+          {
+            "event": "fault",
+            "heartbeats": 5,
+            "observed_ms": 358187,
+            "pid": 859,
+            "quarantined": true,
+            "reason": "transaction.deadline",
+            "oracle_received_ms": 358187
+          },
+          {
+            "code": 9,
+            "event": "reaped",
+            "observed_ms": 358187,
+            "pid": 859,
+            "signaled": true,
+            "oracle_received_ms": 358187
+          },
+          {
+            "endpoint": "/home/ir4runner/.cache/syspane/ipc-w24/sup-f9b1c350/c2/s",
+            "epoch": "supervised:857:2",
+            "event": "launched",
+            "generation": 2,
+            "observed_ms": 359188,
+            "pid": 861,
+            "oracle_received_ms": 359189
+          },
+          {
+            "endpoint": "/home/ir4runner/.cache/syspane/ipc-w24/sup-f9b1c350/c2/s",
+            "epoch": "supervised:857:2",
+            "event": "ready",
+            "observed_ms": 359201,
+            "pid": 861,
+            "oracle_received_ms": 359202
+          },
+          {
+            "event": "armed",
+            "observed_ms": 359212,
+            "pid": 861,
+            "ticket": 1,
+            "oracle_received_ms": 359213
+          },
+          {
+            "event": "fault",
+            "heartbeats": 5,
+            "observed_ms": 364215,
+            "pid": 861,
+            "quarantined": true,
+            "reason": "transaction.deadline",
+            "oracle_received_ms": 364216
+          },
+          {
+            "code": 9,
+            "event": "reaped",
+            "observed_ms": 364215,
+            "pid": 861,
+            "signaled": true,
+            "oracle_received_ms": 364216
+          },
+          {
+            "endpoint": "/home/ir4runner/.cache/syspane/ipc-w24/sup-f9b1c350/c3/s",
+            "epoch": "supervised:857:3",
+            "event": "launched",
+            "generation": 3,
+            "observed_ms": 366217,
+            "pid": 863,
+            "oracle_received_ms": 366217
+          },
+          {
+            "endpoint": "/home/ir4runner/.cache/syspane/ipc-w24/sup-f9b1c350/c3/s",
+            "epoch": "supervised:857:3",
+            "event": "ready",
+            "observed_ms": 366232,
+            "pid": 863,
+            "oracle_received_ms": 366233
+          },
+          {
+            "event": "armed",
+            "observed_ms": 366241,
+            "pid": 863,
+            "ticket": 1,
+            "oracle_received_ms": 366242
+          },
+          {
+            "event": "fault",
+            "heartbeats": 5,
+            "observed_ms": 371242,
+            "pid": 863,
+            "quarantined": true,
+            "reason": "transaction.deadline",
+            "oracle_received_ms": 371242
+          },
+          {
+            "code": 9,
+            "event": "reaped",
+            "observed_ms": 371242,
+            "pid": 863,
+            "signaled": true,
+            "oracle_received_ms": 371243
+          },
+          {
+            "endpoint": "/home/ir4runner/.cache/syspane/ipc-w24/sup-f9b1c350/c4/s",
+            "epoch": "supervised:857:4",
+            "event": "launched",
+            "generation": 4,
+            "observed_ms": 375245,
+            "pid": 875,
+            "oracle_received_ms": 375245
+          },
+          {
+            "endpoint": "/home/ir4runner/.cache/syspane/ipc-w24/sup-f9b1c350/c4/s",
+            "epoch": "supervised:857:4",
+            "event": "ready",
+            "observed_ms": 375260,
+            "pid": 875,
+            "oracle_received_ms": 375261
+          },
+          {
+            "event": "armed",
+            "observed_ms": 375272,
+            "pid": 875,
+            "ticket": 1,
+            "oracle_received_ms": 375272
+          },
+          {
+            "event": "fault",
+            "heartbeats": 5,
+            "observed_ms": 380273,
+            "pid": 875,
+            "quarantined": true,
+            "reason": "transaction.deadline",
+            "oracle_received_ms": 380273
+          },
+          {
+            "code": 9,
+            "event": "reaped",
+            "observed_ms": 380273,
+            "pid": 875,
+            "signaled": true,
+            "oracle_received_ms": 380274
+          },
+          {
+            "event": "circuit_open",
+            "generations": 4,
+            "observed_ms": 380273,
+            "oracle_received_ms": 380274
+          }
+        ]
+      }
+    }
+  ],
+  "qualification": "Owned Linux supervisor/controller IPC/ext4 experiment only. Installed ownership, resource closure, activation and non-Linux supervision remain open."
+}

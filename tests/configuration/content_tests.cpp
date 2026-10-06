@@ -1,5 +1,7 @@
 #include "content.hpp"
 #include "digest.hpp"
+#include "async_commands.hpp"
+#include "session.hpp"
 #include <fstream>
 #include <functional>
 
@@ -86,8 +88,65 @@ void policy(const std::string& root){Fixture f(root);f.policy.forced["sampling.r
     f=Fixture(root);f.policy.denied_capabilities.insert("settings.preview");rejects([&]{f.preview();},"policy.denied");
     f=Fixture(root);f.authority={true,"saver_settings",{"saver_settings"}};rejects([&]{f.preview();},"policy.denied");
 }
+struct ResourceStore:c::GenerationStore{
+    c::Committed current,previous;unsigned writes=0;std::function<void()> before=[]{};
+    explicit ResourceStore(const c::Authored& base):current{base,{}}{}
+    c::Committed load()const override{return current;}
+    std::vector<c::CommitReceipt> receipts()const override{std::vector<c::CommitReceipt> result;
+        for(const auto* v:{&current,&previous})if(v->identity)result.push_back({*v->identity,c::authored_revision(v->documents)});
+        return result;}
+    std::optional<c::Committed> reconcile(const std::string& principal,const std::string& epoch,const std::string& request)const override{
+        for(const auto* v:{&current,&previous})if(v->identity&&v->identity->principal==principal&&v->identity->epoch==epoch&&v->identity->request==request)return *v;
+        return {};}
+    c::Publication publish(const c::Committed& next,const std::function<void()>& guard)override{before();guard();previous=current;current=next;++writes;return c::Publication::durable;}
+};
+Json resource_command(Fixture& f){auto q=f.preview().command;q["schema_version"]="0.3.0";q["intent"]="commit";
+    q["content"]={{"package",package_pin(f.packages[4])},{"preset",doc_pin(f.packages[4])}};return q;}
+c::ResourceProvider provider(const Fixture& f,unsigned& calls){auto catalog=std::make_shared<c::ContentCatalog>(f.packages);
+    return {{"scene.selector"},[catalog,&calls](const c::Authored& candidate,const Json& selection){++calls;return catalog->resources(selection,candidate);}};}
+void resource_commit(const std::string& root){Fixture f(root);ResourceStore store(f.base);unsigned calls=0;c::Transactions tx(store,"E1",provider(f,calls));auto q=resource_command(f);
+    auto submit=[&](Json v){return tx.submit("principal","connection",v.dump(),f.authority,[&]{return f.policy;},0);};
+    auto preview=q;preview["request_id"]="preview";preview["intent"]="preview";VERIFY(submit(preview)["outcome"]=="preview"&&store.writes==0);
+    const auto accepted=submit(q);VERIFY(accepted["revision"]=="41"&&accepted["durable"]==true&&accepted["visible"]==false&&store.writes==1);
+    VERIFY(store.current.resources&&store.current.resources->selection()==q["content"]&&store.current.resources->packages().size()==5);
+    VERIFY(submit(q)==accepted&&calls==2&&store.writes==1);q["content"]["package"]["sha256"]=std::string(64,'0');VERIFY(submit(q)["error"]["code"]=="request.changed");
+    auto legacy=resource_command(f);legacy["schema_version"]="0.2.0";legacy.erase("content");legacy["request_id"]="legacy";
+    legacy["expected_revision"]=legacy["operations"].back()["scene"]["revision"]="41";VERIFY(submit(legacy)["error"]["code"]=="resource.contract"&&store.writes==1);
+    c::Transactions restarted(store,"E2",[](const c::Authored&){throw p::Error("should.not.prepare");});
+    VERIFY(restarted.reconcile("principal","E1","P",f.authority,f.policy)["revision"]=="41");
+    f.policy.denied_capabilities.insert("content.select");VERIFY(restarted.reconcile("principal","E1","P",f.authority,f.policy)["outcome"]=="denied");
+}
+void resource_guards(const std::string& root){Fixture f(root);ResourceStore store(f.base);unsigned calls=0;const auto q=resource_command(f);
+    c::Transactions old(store,"old",[](const c::Authored&){});VERIFY(old.submit("p","c",q.dump(),f.authority,[&]{return f.policy;},0)["error"]["code"]=="resource.contract");
+    c::Transactions tx(store,"E1",provider(f,calls));auto submit=[&](const std::string& id){auto v=q;v["request_id"]=id;return tx.submit("p","c",v.dump(),f.authority,[&]{return f.policy;},0);};
+    f.policy.denied_capabilities.insert("scene.selector");VERIFY(submit("denied")["outcome"]=="denied"&&store.writes==0);
+    f.policy.denied_capabilities.clear();store.before=[&]{f.policy.revision=8;};VERIFY(submit("late")["error"]["code"]=="policy.changed"&&store.writes==0);
+    const auto snapshot=c::ContentCatalog(f.packages).resources(q["content"],f.preview().candidate);
+    auto wrong=f.base;wrong.scene["theme_id"]="theme:parent";rejects([&]{c::validate_resource_binding(*snapshot,wrong);},"content.theme");
+    c::ResourceProvider mismatch{{"scene.selector"},[snapshot](const c::Authored&,const Json&){return snapshot;}};ResourceStore other(f.base);c::Transactions invalid(other,"E1",std::move(mismatch));
+    auto changed=q;changed["content"]["package"]["sha256"]=std::string(64,'0');f.policy.revision=7;
+    VERIFY(invalid.submit("p","c",changed.dump(),f.authority,[&]{return f.policy;},0)["error"]["code"]=="resource.selection"&&other.writes==0);
+}
+void resource_session(const std::string& root){Fixture f(root);ResourceStore store(f.base);unsigned calls=0;auto owner=std::make_shared<c::AsyncCommands>(store,"E1",provider(f,calls));
+    c::Sessions sessions("E1",40,f.policy,{},owner);auto q=resource_command(f);
+    auto hello=[](const std::string& version,bool content){return Json{{"wire_major",0},{"wire_minor",1},{"role","console"},{"producer_epoch","client"},{"max_frame_bytes",1048576},
+        {"document_versions",Json::array({{{"document","command"},{"version",version}},{{"document","command-result"},{"version","0.1.0"}}})},
+        {"required_features",Json::array({"configuration.transactions"})},{"optional_features",content?Json::array({"configuration.content"}):Json::array()}};};
+    auto send=[&](const char* id,const char* type,Json body){Json envelope={{"type",type},{"body",std::move(body)}};if(std::string(type)!="hello"){envelope["connection_id"]=id;envelope["producer_epoch"]="E1";}
+        sessions.receive(id,envelope.dump(),0);VERIFY(!sessions.closed(id));};
+    auto pop=[&](const char* id){const auto bytes=sessions.pop(id,0);VERIFY(bytes);return p::parse(*bytes);};
+    sessions.open("C","p",f.authority,0);send("C","hello",hello("0.3.0",true));VERIFY(pop("C")["type"]=="welcome");
+    send("C","command",q);const auto ticket=owner->take();VERIFY(ticket);auto completion=owner->run(*ticket);VERIFY(owner->finish(std::move(completion),0,true));
+    VERIFY(pop("C")["body"]["outcome"]=="accepted"&&store.current.resources&&calls==1);
+    sessions.open("D","p",f.authority,0);send("D","hello",hello("0.2.0",false));VERIFY(pop("D")["type"]=="welcome");
+    send("D","command",q);VERIFY(pop("D")["body"]["error"]["code"]=="feature.unsupported"&&calls==1);
+    sessions.open("F","p",f.authority,0);send("F","hello",hello("0.3.0",false));VERIFY(pop("F")["type"]=="welcome");
+    send("F","command",q);VERIFY(pop("F")["body"]["error"]["code"]=="feature.unsupported"&&calls==1);
+    q["schema_version"]="0.2.0";q.erase("content");send("C","command",q);VERIFY(pop("C")["body"]["error"]["code"]=="feature.unsupported");
+}
 }
 void content_tests(const std::string& name,const std::string& root){
     if(name=="CONTENT-COMPOSE")compose(root);else if(name=="CONTENT-PINS")pins(root);else if(name=="CONTENT-PATHS")names(root);
-    else if(name=="CONTENT-BOUNDS")bounds(root);else if(name=="CONTENT-CAPABILITIES")capabilities(root);else if(name=="CONTENT-POLICY")policy(root);else VERIFY(false);
+    else if(name=="CONTENT-BOUNDS")bounds(root);else if(name=="CONTENT-CAPABILITIES")capabilities(root);else if(name=="CONTENT-POLICY")policy(root);
+    else if(name=="RESOURCE-COMMIT")resource_commit(root);else if(name=="RESOURCE-GUARDS")resource_guards(root);else if(name=="RESOURCE-SESSION")resource_session(root);else VERIFY(false);
 }

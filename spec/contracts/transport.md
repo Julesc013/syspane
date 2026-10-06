@@ -17,6 +17,12 @@ updated: {"by": "codex", "at": "2026-10-06T02:15:05+11:00", "scope": "Native W-2
 
 # Local transport and request lifecycle
 
+The [resource generation profile](../delivery/packages/w-08-resource-generations.md)
+adds command 0.3 and `configuration.content` only for a controller with a resource
+provider. It requires command-result 0.1, configuration.transactions and the existing
+8192-byte frame floor. Both the document and feature must be negotiated before a
+content-bound command is admitted. Command 0.2 and its earlier clients remain valid.
+
 
 ## Wire 0.1 framing
 

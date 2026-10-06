@@ -1,6 +1,7 @@
 """Executed tests cover specification tooling/fixtures, not a native SysPane app."""
 from __future__ import annotations
 import contextlib
+import copy
 import importlib.util
 import io
 import json
@@ -268,10 +269,14 @@ class BundleTests(unittest.TestCase):
         s.generate(self.root)
         self.assertEqual(s.validate_settings(self.root), [])
     def test_command_constraint_drift_rejected(self):
-        value=s.read_json(self.root/'contracts/command-v0.2.schema.json')
-        value['properties']['operations']['items']['oneOf'][0]['properties']['value']['type']='string'
-        self.write_json('contracts/command-v0.2.schema.json', value)
-        self.assertTrue(any('projection drift' in e for e in s.validate_settings(self.root)))
+        for name in ('command-v0.2', 'command-v0.3'):
+            with self.subTest(name=name):
+                path=f'contracts/{name}.schema.json'
+                original=s.read_json(self.root/path);value=copy.deepcopy(original)
+                value['properties']['operations']['items']['oneOf'][0]['properties']['value']['type']='string'
+                self.write_json(path, value)
+                self.assertTrue(any('projection drift' in e for e in s.validate_settings(self.root)))
+                self.write_json(path, original)
     def test_scene_nesting_bound(self):
         value=s.read_json(self.root/'fixtures/valid/scene-portable.json')
         group=value['widgets'][0]

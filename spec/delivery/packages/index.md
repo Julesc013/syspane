@@ -27,6 +27,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Asynchronous authored command sessions](w-08-command-sessions.md) — Join authenticated sessions to one bounded transaction owner without blocking control traffic.
 - [Pinned content and preset preview](w-08-content-resolution.md) — Resolve immutable content bytes into a validated authored preview without granting installation or activation.
 - [Committed request reconciliation across producer epochs](w-08-reconciliation.md) — Recover durable outcomes through authenticated read-only IPC without resubmitting mutations.
+- [Durable pinned resource generations](w-08-resource-generations.md) — Bind command identity and generation recovery to the exact prepared content closure.
 - [Independent transaction deadlines and controller recovery](w-08-supervised-transactions.md) — Bound uncooperative transaction work without killing threads or replaying uncertain mutations.
 - [W-24 authenticated transport and policy boundary](w-24-transport.md) — Close the initial local protocol, admission and preview boundary before native integration.
 - [W-25 collection continuity across consumer replacement](w-25-consumer-continuity.md) — Keep real collection independently owned while admitting bounded replacement consumers.

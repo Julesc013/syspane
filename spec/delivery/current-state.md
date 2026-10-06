@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-06T18:00:00Z", "scope": "Pinned content and deterministic preset previews with private native Linux input verification"}
+updated: {"by": "codex", "at": "2026-10-06T18:20:00Z", "scope": "Content-bound commands and coherent Linux generation recovery of original resource bytes"}
 ---
 
 # Current state and next admitted boundary
@@ -22,7 +22,13 @@ The active objective is now the [complete 0.1.0 release](release-0.1.0.md) for W
 required but is no longer the final completion boundary. Legacy version/architecture
 floors, native labs and complete desktop/package evidence remain unresolved.
 
-The latest [content resolution checkpoint](content-resolution-handoff.md) validates
+The latest [resource generation checkpoint](resource-generations-handoff.md) binds
+content selection to versioned requests and stores the exact prepared package bytes
+inside each Linux generation. Restart recovery verifies the complete closure without
+the original import directory. Current policy is rechecked before publication.
+Installed ownership, media decoding, native editing and activation remain open.
+
+The earlier [content resolution checkpoint](content-resolution-handoff.md) validates
 pinned packages and produces deterministic preset previews through the common
 authored transaction contract. Owned bytes and setting provenance survive changes
 to the source directory. The Linux reader rejects links and undeclared files.
