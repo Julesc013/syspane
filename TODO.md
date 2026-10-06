@@ -22,6 +22,8 @@ behaviour has been implemented. See [audit disposition](spec/delivery/audit-2026
 
 ## First native campaign
 
+- [x] W-25 consumer continuity: preserve real collection and original measurements across bounded native consumer replacement; verify typed consumer revocation and circuit opening. See the [handoff](spec/delivery/consumer-continuity-handoff.md).
+- [ ] W-25 integration: admit a persistent desktop session composition, then connect automatic replacement to current-policy full-state reattachment and independent visible/editor recovery.
 - [x] W-00/W-01: admit runtime scope; create real CMake targets, component ownership and pinned Windows/Linux development profiles.
 - [x] W-01: bind mandatory model cases to runnable tests and deliver a nonempty fixture smoke program; see the [handoff](spec/delivery/foundation-handoff.md).
 - [x] W-24 portable slice: close and test framing, negotiation, request reservations, settings preview, policy/disclosure, queues and connection states; see the [package](spec/delivery/packages/w-24-transport.md).

@@ -12,10 +12,18 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-06T10:26:00Z", "scope": "Independent operational render supervision, native deadline ordering and retained exit failures"}
+updated: {"by": "codex", "at": "2026-10-06T11:17:00Z", "scope": "Independent real collection across bounded native consumer replacement and typed consumer revocation"}
 ---
 
 # Current state and next admitted boundary
+
+The latest [consumer-continuity checkpoint](consumer-continuity-handoff.md) keeps
+one real collector independently alive through native consumer crashes, lease
+expiry and bounded replacement. Full-state reattachment retains original measured
+snapshots; typed consumer-policy revocation prevents another launch, and repeated
+crashes open the existing circuit. Its native process/model evidence is a
+prerequisite for automatic desktop recovery. The next boundary is persistent
+same-session desktop composition and independently observed visible/editor recovery.
 
 ## Repository checkpoint: 2026-10-05
 
@@ -429,9 +437,9 @@ model semantics inside the shell runtime. The supervised forwarding/session boun
 now passes real standalone delivery and native fault/exit checks. The same owner
 also passes independently observed operational value/age/expiry pixels, policy
 erasure and data-lease faults in the owned GNOME composition. Independent native
-render-progress supervision now covers that finite rendering path. Next close
-bounded automatic replacement after confirmed old exit, current-policy full-state
-reattachment and independent visible recovery; complete product controller
+render-progress supervision now covers that finite rendering path. The native consumer-continuity prerequisite now preserves independent collection
+and bounds replacement after confirmed exit. Next close persistent desktop-session
+composition and actual current-policy visible recovery; complete product controller
 policy/demand, general delivery queues and native editor-exit recovery.
 Actual native topology faults and Windows full-table notification
 coverage remain unqualified. The native

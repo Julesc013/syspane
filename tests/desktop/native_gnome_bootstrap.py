@@ -23,7 +23,7 @@ from oracle import evaluate, pack_frame
 sys.path.insert(0, str(ROOT / 'build-support'))
 from prepare_gnome_lab import owned_build, sha, inventory
 
-LIVE_BUILD_RECORD = 'build-support/evidence/w-25-gnome-render-watch-linux-x64-gcc13.json'
+LIVE_BUILD_RECORD = 'build-support/evidence/w-25-consumer-continuity-linux-x64-gcc13.json'
 
 SOURCES = ['tests/desktop/gnome_render_watch.py', 'spec/delivery/packages/w-25-gnome-render-watch.md',
            'build-support/record_gnome_render_watch.py', 'tests/desktop/test_gnome_render_watch_record.py',

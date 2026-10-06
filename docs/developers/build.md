@@ -914,3 +914,31 @@ After the same workspace preflight, `/usr/bin/python3 tests/fault/native_render_
 stops its own watcher, queues late progress, heartbeat and shutdown separately,
 then requires a latched expiry and failed native exit after resume. The initial
 three failing traces remain preserved; no queued message may override expiry.
+
+## Independent collection during consumer recovery
+
+The [consumer-continuity package](../../spec/delivery/packages/w-25-consumer-continuity.md)
+adds `native.CONSUMER-CONTINUITY` to the Linux suite (114 entries). After the ordinary
+Windows workspace preflight, build and run the existing Linux preset. Record the
+complete suite using `record_protocol.py --consumer-continuity --profile
+linux-x64-gcc13 --build-dir <owned-build> --output <new-record>`. The flag includes
+the earlier live-network and asynchronous-health families. Windows retains 105
+entries; its new run is a regression, not consumer-continuity qualification.
+
+For a focused run, invoke `tests/protocol/native_consumer_continuity.py
+<owned-build>/SysPane.CollectorProbe <owned-build>/native-evidence` as the admitted
+Linux user. The observer owns all processes, holds pidfds, faults only those exact
+consumer lifetimes and verifies real acquisition throughout recovery. Original
+source/consumer JSONL remains 0600 in the recorded owned 0700 native IPC directory;
+public results contain only lifecycle metadata and original-file hashes. Do not
+commit or print the private originals. The runner preserves each attempt under a
+unique evidence directory before updating its current family record.
+
+This composition uses one POSIX session, one continuously demanded real worker,
+and fresh native consumers admitted by the existing Sessions/RestartGate owners.
+The typed revocation fixture removes the consumer's authority while retaining the
+controller's independently authorized collection demand. It does not model global
+policy revocation or authorize cross-session attachment. The existing GNOME command
+now pins `w-25-consumer-continuity-linux-x64-gcc13.json`; earlier records keep their
+original artifact identities. Automatic visible recovery requires its own session
+composition and unchanged external pixel acceptance.

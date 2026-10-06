@@ -72,3 +72,10 @@ No row above removes native settings, direct editing, persistence, real telemetr
 or recovery from the first complete desktop edition. No synthetic marker, model
 archive or retained sample tile is called that edition. Repository-only cold-start
 implementation and complete release evidence remain separate unexecuted gates.
+
+The [consumer-continuity checkpoint](consumer-continuity-handoff.md) subsequently
+keeps real collection independently alive during native consumer crash/hang,
+bounded replacement, typed consumer-policy denial and circuit opening. Original
+full-state measurements survive reattachment. The desktop's persistent session
+composition, automatic visible replacement and editor recovery remain open; this
+headless prerequisite does not close any missing native host track.

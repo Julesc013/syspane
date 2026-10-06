@@ -48,7 +48,7 @@ def collect():
     collect_count+=1
     if collect_count>2:raise ValueError('collection count')
     executable=workspace.parent/'SysPane.CollectorProbe'
-    build_record=ROOT/'build-support/evidence/w-25-gnome-render-watch-linux-x64-gcc13.json'
+    build_record=ROOT/'build-support/evidence/w-25-consumer-continuity-linux-x64-gcc13.json'
     expected=json.loads(build_record.read_text())
     digest=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
     if digest(executable)!=expected['artifacts']['SysPane.CollectorProbe']['sha256']:raise ValueError('tested collector identity differs')

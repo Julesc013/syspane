@@ -73,6 +73,14 @@ reservations and all product resource/acceptance limits remain unchanged.
 This is a preflight reservation, not an OS quota; a new package whose predicted
 growth exceeds the reservation needs a measured allocation decision before launch.
 
+The consumer-continuity checkpoint raises the development allocation to 5 GiB.
+The prior build preflight stopped at 1,160,637,129 checkout-output bytes plus
+2,905,675,648 native-output bytes: its unchanged 268,435,456-byte reservation did
+not fit 4 GiB. Preserve that stop in the checkpoint evidence. The checkout drive
+has 126,512,525,312 free bytes and the native filesystem 1,004,556,574,720. This
+bounded, reversible allocation retains original source/debug/evidence artifacts;
+no product limit, test oracle or standard growth reservation changes.
+
 ## W-01 closure before implementation
 
 The in-process API uses typed publication candidates, each with producer/epoch,

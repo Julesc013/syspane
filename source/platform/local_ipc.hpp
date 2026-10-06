@@ -2,6 +2,7 @@
 #include <cstddef>
 #include <cstdint>
 #include <memory>
+#include <optional>
 #include <stdexcept>
 #include <string>
 #include <string_view>
@@ -62,6 +63,11 @@ public:
     Listener(const Listener&) = delete;
     Listener& operator=(const Listener&) = delete;
     Stream accept(std::uint64_t expected_process = 0);
+#if defined(__linux__)
+    // One nonblocking admission attempt; authenticate exactly as accept().
+    // Empty on no connection or interrupted attempt; caller owns its deadline.
+    std::optional<Stream> accept_ready(std::uint64_t expected_process);
+#endif
     bool access_controls_verified() const;
 private:
     struct Impl;

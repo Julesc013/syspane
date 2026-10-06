@@ -49,7 +49,13 @@ def main():
     parser.add_argument('--gjs-network', action='store_true', help='Require standalone GJS measured model consumer and prior regressions')
     parser.add_argument('--live-network', action='store_true', help='Require real supervised collector delivery through the asynchronous GJS owner')
     parser.add_argument('--async-health', action='store_true', help='Require the shared bounded asynchronous health codec and native supervision regressions')
+    parser.add_argument('--consumer-continuity', action='store_true', help='Require real collection across bounded native consumer replacement')
     args = parser.parse_args()
+    if args.consumer_continuity:
+        if platform.system() != 'Linux':
+            raise ValueError('consumer continuity requires the Linux laboratory')
+        args.live_network = True
+        args.async_health = True
     if args.async_health:
         args.supervision = True
     if args.live_network:
@@ -153,6 +159,8 @@ def main():
         expected.add('native.GJS-LIVE')
     if args.async_health:
         expected |= {'health.HEALTH-ASYNC-'+number for number in ('01','02','03')}
+    if args.consumer_continuity:
+        expected.add('native.CONSUMER-CONTINUITY')
     if len(cases) != len(expected) or {case['case'] for case in cases} != expected or any(case['outcome'] != 'pass' for case in cases):
         raise ValueError('missing, repeated, unexpected or failing case; preserve log before rerun')
     suffix = '.exe' if platform.system() == 'Windows' else ''
@@ -241,6 +249,8 @@ def main():
                 required['NATIVE-NETWORK'].add('NETWORK-WATCH')
         if args.network_publication and not suffix:
             required['NATIVE-COLLECTOR'] = {'LIVE', 'FAILURE', 'REPLAY', 'HANG', 'CRASH', 'UNSUBSCRIBE', 'REVOKE', 'PARENT-LOSS'}
+        if args.consumer_continuity:
+            required['CONSUMER-CONTINUITY'] = {'LIVE', 'CRASH', 'HANG', 'REVOKE', 'CIRCUIT'}
         if args.gjs_clock:
             required['GJS-CLOCK'] = {'ROUNDTRIP', 'REJECT', 'CLOSE', 'PEER-EXIT'}
         if args.gjs_network:
@@ -300,6 +310,17 @@ def main():
                         private = Path(filename)
                         if not private.resolve().is_relative_to(build/'native-evidence') or private.stat().st_mode & 0o777 != 0o600 or sha(private) != artifact['sha256'] or private.stat().st_size != artifact['bytes']:
                             raise ValueError('Live native private evidence identity differs')
+            if family == 'CONSUMER-CONTINUITY':
+                if native['artifact_sha256'] != sha(build/'SysPane.CollectorProbe'):
+                    raise ValueError('consumer continuity executable changed after run')
+                private_root = Path.home()/'.cache/syspane/ipc-w24'
+                for case in native['cases']:
+                    if not case.get('held_exits') or not all(case['cleanup_exits'].values()):
+                        raise ValueError('consumer continuity native exit proof missing')
+                    for item in [case['source_journal'], *case['consumer_journals']]:
+                        private = Path(item['path'])
+                        if not private.resolve().is_relative_to(private_root) or private.stat().st_mode & 0o777 != 0o600 or sha(private) != item['sha256']:
+                            raise ValueError('consumer continuity private evidence identity differs')
             if family == 'GJS-NETWORK':
                 if native.get('failure') or not native.get('calls'):
                     raise ValueError('GJS network observations missing or failed')
@@ -384,7 +405,8 @@ def main():
             destination.parent.mkdir(parents=True, exist_ok=True)
             destination.write_bytes(path.read_bytes())
             native_records.append({'family': family, 'record': destination.name, 'sha256': sha(path), 'cases': len(expected_cases),
-                                   'qualification': native['qualification']})
+                                   'qualification': ('Finite same-session Linux consumer continuity; no desktop or installed-policy qualification.'
+                                       if family == 'CONSUMER-CONTINUITY' else native['qualification'])})
         if seen != set(required):
             raise ValueError('required native family has no bound report in this CTest log')
         inspector = 'objdump' if suffix else 'readelf'
@@ -402,6 +424,8 @@ def main():
              ROOT/'spec/delivery/packages/w-24-transport.md', ROOT/'spec/assurance/acceptance-traces.md']
     if args.recovery:
         paths.extend([ROOT/'spec/delivery/packages/w-25-recovery.md', ROOT/'spec/architecture/recovery.md'])
+    if args.consumer_continuity:
+        paths.append(ROOT/'spec/delivery/packages/w-25-consumer-continuity.md')
     if args.oracle:
         paths.extend([ROOT/'spec/delivery/packages/w-02-desktop-oracle.md', ROOT/'spec/assurance/desktop-oracle.md'])
     if args.failure_metadata:
@@ -622,6 +646,11 @@ def main():
     if args.async_health:
         report['bindings']['async_health'] = 'spec/delivery/packages/w-25-gnome-render-watch.md'
         report['async_health_scope'] = 'Shared health framing, negotiation, exact challenge identities, deadlines and resource bounds. Instrumented native render completion and visible pixels require separate desktop evidence.'
+    if args.consumer_continuity:
+        report['slice'] = 'independent real collection through bounded native consumer replacement'
+        report['bindings']['consumer_continuity'] = 'spec/delivery/packages/w-25-consumer-continuity.md'
+        report['bindings']['consumer_continuity_oracle'] = 'tests/protocol/native_consumer_continuity.py'
+        report['limits'][0] = 'One real collector and its original measured snapshots survive native consumer crash/hang, bounded replacement, typed consumer-policy denial and circuit opening. The controller retains separately authorized development collection demand. This finite same-session composition does not qualify automatic visible recovery, global policy distribution, desktop/session replacement or a complete product.'
     args.output.parent.mkdir(parents=True, exist_ok=True)
     log_output.write_text(raw.replace(str(build), '<build>').replace(str(ROOT), '<source>'), encoding='utf-8', newline='\n')
     args.output.write_text(json.dumps(report, indent=2)+'\n', encoding='utf-8', newline='\n')

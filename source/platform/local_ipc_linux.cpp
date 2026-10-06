@@ -265,6 +265,12 @@ Listener::Listener(const std::string& endpoint) {
     if (::fchmodat(impl_->directory.value, "s", 0600, 0) || ::listen(impl_->socket.value, 1)) throw IpcError("endpoint.listen");
 }
 Listener::~Listener() = default;
+std::optional<Stream> Listener::accept_ready(std::uint64_t expected) {
+    Fd fd(::accept4(impl_->socket.value, nullptr, nullptr, SOCK_NONBLOCK | SOCK_CLOEXEC));
+    if (fd.value >= 0) return Stream(std::make_unique<Stream::Impl>(std::move(fd), expected));
+    if (errno == EAGAIN || errno == EWOULDBLOCK || errno == EINTR) return {};
+    throw IpcError("io.accept");
+}
 Stream Listener::accept(std::uint64_t expected) {
     const auto deadline = monotonic_ms() + 5000;
     for (;;) {

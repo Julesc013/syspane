@@ -347,7 +347,7 @@
         "SP-WORK-PACKAGES",
         "SP-W01-PACKAGE"
       ],
-      "sha256": "44b1a55c11dc923407af0812c3f38591d0c5da9fe4ef8a92c1b76a18a26d534a"
+      "sha256": "b88ee29698f2e4969ec61a7261f74630d55b8e6b78b938293ccbff421dc4084e"
     },
     {
       "id": "SP-CAMPAIGN-COVERAGE",
@@ -358,7 +358,17 @@
         "SP-CAMPAIGN-ADMISSION",
         "SP-CURRENT"
       ],
-      "sha256": "bb1cc68732816be1e0d7e0b6998d3e4bb5d04aa6784671bf548d2baccc7949a9"
+      "sha256": "1e489c060cccd555329b723e24d9e2a6adcaf3789e76f5339767df57a42231b0"
+    },
+    {
+      "id": "SP-CONSUMER-CONTINUITY-HANDOFF",
+      "path": "delivery/consumer-continuity-handoff.md",
+      "title": "Native collection continuity checkpoint",
+      "description": "Real acquisition survives separately owned consumer failures and bounded replacement.",
+      "requires": [
+        "SP-W25-CONSUMER-CONTINUITY"
+      ],
+      "sha256": "a2ea873114a7bcd78a884382bd03133b5a9d78c5c9211dd0422cc38242b0d30c"
     },
     {
       "id": "SP-CURRENT",
@@ -368,7 +378,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "8af184f7bd984054f4d4eca4392b76ea35e423171ef88567705eb1c1a73838d4"
+      "sha256": "5f8a606a7da4440c457502f24d690386187e761dc846b3937f3056f846a43c0b"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -1027,6 +1037,18 @@
         "SP-POLICY"
       ],
       "sha256": "2d88899f08dd04a985b5576246d8ad051a6630e59440346e897f0fbe5352a03f"
+    },
+    {
+      "id": "SP-W25-CONSUMER-CONTINUITY",
+      "path": "delivery/packages/w-25-consumer-continuity.md",
+      "title": "W-25 collection continuity across consumer replacement",
+      "description": "Keep real collection independently owned while admitting bounded replacement consumers.",
+      "requires": [
+        "SP-W25-PACKAGE",
+        "SP-W25-NETWORK-PUBLICATION",
+        "SP-W25-SUBSCRIPTIONS"
+      ],
+      "sha256": "2b7cd89119d857bc0f03cd53233a3bab3d838da0b4808e9dd8671b6df999b272"
     },
     {
       "id": "SP-W25-DATA-VIEW",

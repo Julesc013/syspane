@@ -246,6 +246,195 @@ void stream_session(const std::string& address,const std::string& mode,const std
     if(!failure.empty())throw p::Error(failure.c_str());
     need(normal&&!forced&&!status->signaled&&status->code==0,"collector.graceful_exit");emit({{"event","complete"}});
 }
+
+std::uint64_t attach_network(r::DataView& view,const p::Message& welcome,os::Stream& stream,
+                             const std::string& connection,const std::string& epoch){
+    need(welcome.type=="welcome"&&welcome.connection_id==connection&&welcome.producer_epoch==epoch,"continuity.welcome");
+    const auto remote=p::handshake(welcome.body);need(remote.role=="console"&&remote.epoch==epoch,"continuity.server_role");
+    const auto selected=p::negotiate(remote,p::handshake(hello()["body"]),{"desktop"});
+    const auto clock=stream.measurement_clock();
+    p::TelemetryBinding binding{selected,connection,epoch,"producer:network","S","desktop","operational",7,
+        p::TelemetryDirection::producer_to_consumer,"0.2.0",clock.clock_id,clock.local_scope};
+    const auto attached=view.attach_wire(binding,os::monotonic_ms());
+    need(attached.code==r::DataCode::accepted,"continuity.attach");return attached.token;
+}
+Json subscription(const char* clock){return {{"schema_version","0.2.0"},{"subscription_id","S"},
+    {"producer_id","producer:network"},{"policy_revision","7"},{"channel","desktop"},
+    {"classification","operational"},{"clock_id",clock}};}
+void continuity_consumer(const std::string& address,const std::string& connection,const std::string& epoch,
+                         std::uint64_t parent){
+    os::arm_parent_lifetime(parent);PrivateJournal journal(address+"/consumer-"+connection+".jsonl");
+    auto stream=os::Stream::connect(address+"/v/s",parent);DataPipe pipe(stream);pipe.send(hello().dump());
+    r::DataView view({true,"desktop",{"desktop"}},policy(),"desktop","operational",n::network_metrics());
+    std::uint64_t token=0,sequence=0,last_sent=0;const auto started=os::monotonic_ms();
+    const auto send=[&](const char* type,Json body){pipe.send(Json{{"type",type},{"connection_id",connection},
+        {"producer_epoch",epoch},{"body",std::move(body)}}.dump());};
+    while(os::monotonic_ms()-started<20000){
+        for(const auto& bytes:pipe.poll(true)){
+            const auto message=p::decode(bytes);
+            if(!token){token=attach_network(view,message,stream,connection,epoch);
+                send("subscribe",subscription(stream.measurement_clock().clock_id));}
+            else if(message.type=="snapshot"){
+                const auto measured=tick(stream,epoch);const auto now=os::monotonic_ms();
+                need(view.receive(token,7,bytes,now,measured).code==r::DataCode::accepted,"continuity.import");
+                Json row{{"payload",bytes},{"now_ns",std::to_string(measured.nanoseconds)},{"observed_ms",now}};
+                need(view.project(now,[&](const auto& snapshot,const auto&){row["projection"]=Json::parse(snapshot.reported_document);}),"continuity.projection");
+                journal.record(std::move(row));
+            }else if(message.type=="shutdown"){
+                need(message.connection_id==connection&&message.producer_epoch==epoch,"continuity.identity");return;
+            }else if(message.type=="heartbeat"){
+                need(message.connection_id==connection&&message.producer_epoch==epoch,"continuity.identity");
+                const auto code=view.heartbeat(token,7,*p::decimal(message.body["sequence"].get<std::string>()),os::monotonic_ms());
+                need(code==r::DataCode::accepted||code==r::DataCode::duplicate,"continuity.heartbeat");
+            }else throw p::Error("continuity.direction");
+        }
+        if(pipe.ended())return;
+        const auto now=os::monotonic_ms();
+        if(token){need(view.status(now).alive,"continuity.source_expired");
+            if(!sequence||now-last_sent>=1000){send("heartbeat",{{"sequence",std::to_string(sequence++)}});last_sent=now;}}
+        pause(5);
+    }
+    throw p::Error("continuity.consumer_deadline");
+}
+
+void continuity(const std::string& address,const std::string& mode){
+    need(mode=="allow"||mode=="revoke-on-exit","continuity.mode");
+    os::arm_parent_lifetime(static_cast<std::uint64_t>(::getppid()));
+    os::Listener health_listener(address+"/h/s"),source_listener(address+"/d/s");
+    need(health_listener.access_controls_verified()&&source_listener.access_controls_verified(),"continuity.endpoint_controls");
+    PrivateJournal journal(address+"/source.jsonl");
+    const auto epoch="collector:"+std::to_string(os::current_process_id())+":continuous";
+    auto source_child=os::Child::launch_self({"worker",address,"live",epoch,std::to_string(os::current_process_id())});
+    emit({{"event","source_spawned"},{"pid",source_child.id()},{"epoch",epoch}});
+    auto health_stream=health_listener.accept(source_child.id());r::HealthLink health(health_stream,true,"collector",epoch,"H");
+    auto source_stream=source_listener.accept(source_child.id());DataPipe source_pipe(source_stream);source_pipe.send(hello().dump());
+    const auto clock=source_stream.measurement_clock();
+    c::TelemetrySource source{"producer:network","desktop","operational"};source.document_version="0.2.0";
+    source.clock_id=clock.clock_id;source.clock_scope=clock.local_scope;
+    c::Sessions sessions(epoch,0,policy(),source);
+    r::DataView view({true,"desktop",{"desktop"}},policy(),"desktop","operational",n::network_metrics());
+    r::ProducerLease lease;r::RestartGate gate(0);
+    std::uint64_t health_token=0,data_token=0,sequence=0,last_sent=0,launches=0,launched_at=0,offered=0,quarantined_at=0;
+    std::unique_ptr<os::Child> consumer;
+    std::unique_ptr<os::Listener> listener;
+    std::unique_ptr<os::Stream> front;
+    std::unique_ptr<DataPipe> pipe;
+    Json latest;std::string connection,last_failure;bool stopping=false,denied=false,circuit_reported=false;
+    const auto started=os::monotonic_ms();
+    const auto send=[&](const char* type,Json body){source_pipe.send(Json{{"type",type},{"connection_id","D"},
+        {"producer_epoch",epoch},{"body",std::move(body)}}.dump());};
+    while(os::monotonic_ms()-started<14000){
+        for(const auto& event:health.poll()){
+            if(event.kind==r::HealthKind::ready)health_token=lease.attach("producer:network",epoch,event.observed_ms).token;
+            else if(event.kind==r::HealthKind::heartbeat){
+                const auto code=lease.heartbeat(health_token,event.value,event.observed_ms);
+                need(code==r::Code::accepted||code==r::Code::duplicate,"continuity.source_heartbeat");
+                if(data_token)view.heartbeat(data_token,7,event.value,event.observed_ms);
+            }else throw p::Error("continuity.health_direction");
+        }
+        auto now=os::monotonic_ms();
+        if(health.ready()){
+            lease.tick(now);need(lease.view().alive,"continuity.source_expired");
+            if(!sequence||now-last_sent>=1000){health.heartbeat(sequence);
+                if(data_token)send("heartbeat",{{"sequence",std::to_string(sequence)}});
+                ++sequence;last_sent=now;}
+        }
+        for(const auto& bytes:source_pipe.poll()){
+            const auto message=p::decode(bytes);
+            if(!data_token){data_token=attach_network(view,message,source_stream,"D",epoch);
+                send("subscribe",subscription(clock.clock_id));}
+            else if(message.type=="snapshot"){
+                const auto measured=tick(source_stream,epoch);
+                need(view.receive(data_token,7,bytes,os::monotonic_ms(),measured).code==r::DataCode::accepted,"continuity.source_import");
+                latest=message.body;journal.record({{"payload",bytes},{"now_ns",std::to_string(measured.nanoseconds)},
+                    {"observed_ms",os::monotonic_ms()}});
+                emit({{"event","source_sample"},{"pid",source_child.id()},{"generation",latest["snapshot"]["generation"]}});
+            }else need(message.type=="heartbeat"&&message.connection_id=="D"&&message.producer_epoch==epoch,"continuity.source_direction");
+        }
+        need(!source_child.wait(0),"continuity.source_exited");
+        now=os::monotonic_ms();sessions.tick(now);
+        if(consumer&&stopping){
+            if(const auto status=consumer->wait(0)){
+                need(gate.confirm_stopped(now)==r::Code::accepted,"continuity.confirm_stopped");
+                stopped(*consumer,*status,true);consumer.reset();stopping=false;
+            }else need(now-quarantined_at<2000,"continuity.stop_unconfirmed");
+        }
+        if(consumer&&!stopping){
+            std::string fault;
+            try{
+                if(consumer->wait(0))fault="consumer.exited";
+                else {
+                    if(!front){
+                        need(now-launched_at<2000,"continuity.connect_timeout");
+                        if(auto accepted=listener->accept_ready(consumer->id())){
+                            front=std::make_unique<os::Stream>(std::move(*accepted));
+                            const auto destination=front->measurement_clock();
+                            need(std::string(clock.clock_id)==destination.clock_id&&clock.local_scope==destination.local_scope,"continuity.clock");
+                            pipe=std::make_unique<DataPipe>(*front);
+                            sessions.open(connection,front->peer().principal,{true,"desktop",{"desktop"}},front->connected_ms());
+                            emit({{"event","consumer_authenticated"},{"pid",consumer->id()},{"connection",connection}});
+                        }
+                    }
+                    if(pipe){
+                        if(sessions.closed(connection))fault=sessions.close_reason(connection);
+                        else {
+                            for(const auto& bytes:pipe->poll(true)){
+                                sessions.receive(connection,bytes,os::monotonic_ms());
+                                if(sessions.closed(connection))break;
+                            }
+                            if(pipe->ended())fault="consumer.eof";
+                            else if(sessions.closed(connection))fault=sessions.close_reason(connection);
+                            else {
+                                if(auto active=sessions.subscription(connection)){
+                                    const auto generation=*p::decimal(latest["snapshot"]["generation"].get<std::string>());
+                                    if(generation>offered){
+                                        need(sessions.offer(connection,active->ticket,latest["record_id"],latest["snapshot"],{},os::monotonic_ms()),"continuity.offer");
+                                        offered=generation;
+                                    }
+                                }
+                                while(auto bytes=sessions.pop(connection,os::monotonic_ms()))pipe->send(*bytes);
+                            }
+                        }
+                    }
+                }
+            }catch(const p::Error& error){fault=error.what();}catch(const os::IpcError& error){fault=error.what();}
+            if(!fault.empty()){
+                now=os::monotonic_ms();last_failure=fault;
+                need(gate.failed(r::Failure::crashed,r::StopProof::unconfirmed,now)==r::Code::accepted,"continuity.failure_gate");
+                // Release all consumer demand and queues before stop or retry.
+                sessions.disconnect(connection);pipe.reset();front.reset();listener.reset();
+                emit({{"event","consumer_fault"},{"pid",consumer->id()},{"reason",fault},{"backoff_ms",gate.view().backoff_ms}});
+                if(mode=="revoke-on-exit"&&!denied){sessions.policy(policy(false),now);denied=true;
+                    emit({{"event","consumer_policy"},{"revision",8},{"permitted",false}});}
+                consumer->request_stop();stopping=true;quarantined_at=now;
+            }
+        }
+        if(!consumer&&!latest.is_null()&&!denied){
+            const auto decision=gate.start(os::monotonic_ms());
+            if(decision==r::Code::accepted){
+                connection="C"+std::to_string(++launches);offered=0;
+                listener=std::make_unique<os::Listener>(address+"/v/s");
+                need(listener->access_controls_verified(),"continuity.endpoint_controls");
+                consumer=std::make_unique<os::Child>(os::Child::launch_self({"consumer",address,connection,epoch,std::to_string(os::current_process_id())}));
+                launched_at=os::monotonic_ms();emit({{"event","consumer_spawned"},{"pid",consumer->id()},{"connection",connection},
+                    {"source_pid",source_child.id()},{"epoch",epoch},{"last_failure",last_failure}});
+            }else if(decision==r::Code::circuit_open){if(!circuit_reported){emit({{"event","consumer_circuit_open"},{"last_failure",last_failure}});circuit_reported=true;}}
+            else need(decision==r::Code::not_due,"continuity.restart_gate");
+        }
+    }
+    sessions.disconnect(connection);
+    if(consumer){
+        need(pipe&&!stopping,"continuity.shutdown_pending_fault");
+        pipe->send(Json{{"type","shutdown"},{"connection_id",connection},{"producer_epoch",epoch},
+            {"body",{{"reason","normal"}}}}.dump());
+        auto status=consumer->wait(2000);need(status&&status->code==0&&!status->signaled,"continuity.consumer_shutdown");
+        stopped(*consumer,*status,false);consumer.reset();}
+    pipe.reset();front.reset();listener.reset();
+    health.shutdown();const auto status=source_child.wait(2000);
+    need(status&&status->code==0&&!status->signaled,"continuity.source_shutdown");stopped(source_child,*status,false);
+    emit({{"event","complete"},{"launches",launches},{"consumer_policy_revision",denied?8:7},
+        {"circuit_open",circuit_reported},{"last_failure",last_failure}});
+}
 void supervisor(const std::string& address,const std::string& scenario){
     need(std::set<std::string>{"live","failure","replay","hang","crash","unsubscribe","revoke","parent-loss"}.count(scenario),"collector.scenario");
     os::Listener health_listener(address+"/h/s"),data_listener(address+"/d/s");
@@ -356,6 +545,8 @@ void supervisor(const std::string& address,const std::string& scenario){
 }
 int main(int argc,char** argv){try{need(os::unprivileged_context(),"collector.privileged_context");
     if(argc==4&&std::string(argv[1])=="supervisor")supervisor(argv[2],argv[3]);
+    else if(argc==4&&std::string(argv[1])=="continuity")continuity(argv[2],argv[3]);
+    else if(argc==6&&std::string(argv[1])=="consumer"){const auto parent=p::decimal(argv[5]);need(parent&&*parent,"collector.parent");continuity_consumer(argv[2],argv[3],argv[4],*parent);}
     else if(argc==5&&std::string(argv[1])=="stream")stream_session(argv[2],argv[3],argv[4]);
     else if(argc==6&&std::string(argv[1])=="worker"){const auto parent=p::decimal(argv[5]);need(parent&&*parent,"collector.parent");worker(argv[2],argv[3],argv[4],*parent);}
     else return 2;

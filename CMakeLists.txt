@@ -287,6 +287,10 @@ if(BUILD_TESTING)
         add_test(NAME native.NATIVE-COLLECTOR COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/protocol/native_collector.py"
             "$<TARGET_FILE:syspane_collector_probe>" "${CMAKE_BINARY_DIR}/native-evidence")
         set_tests_properties(native.NATIVE-COLLECTOR PROPERTIES TIMEOUT 150)
+        add_test(NAME native.CONSUMER-CONTINUITY COMMAND "${Python3_EXECUTABLE}"
+            "${CMAKE_SOURCE_DIR}/tests/protocol/native_consumer_continuity.py"
+            "$<TARGET_FILE:syspane_collector_probe>" "${CMAKE_BINARY_DIR}/native-evidence")
+        set_tests_properties(native.CONSUMER-CONTINUITY PROPERTIES TIMEOUT 120)
     endif()
     foreach(case RECONCILE-IDENTITY RECONCILE-CLOCK-RATE RECONCILE-CANCEL-FAILURE RECONCILE-CAPACITY)
         add_test(NAME "network.${case}" COMMAND syspane_network_state_tests "${case}")

@@ -86,7 +86,7 @@ def validate(value,build):
     else:origins=[c['finished_ns'] for c in calls if c['method']=='Policy' and c['args'][0] in ('8','9','10') and c['native']['reply']=='cleared']
     if [r['start_ns'] for r in raw['erasure']]!=origins:raise ValueError('erasure not bound to native acknowledgement/exit')
     if result['collectors']!=raw['collectors'] or len(raw['collectors'])!=len(frames):raise ValueError('collector evidence coverage')
-    build_record=ROOT/'build-support/evidence/w-25-gnome-render-watch-linux-x64-gcc13.json'
+    build_record=ROOT/'build-support/evidence/w-25-consumer-continuity-linux-x64-gcc13.json'
     prior=json.loads(build_record.read_text());artifact=prior['artifacts']['SysPane.CollectorProbe']['sha256']
     if value['collector_build_record_sha256']!=digest(build_record.read_bytes()) or digest((build/'SysPane.CollectorProbe').read_bytes())!=artifact:raise ValueError('tested collector artifact identity')
     for index,(record,frame) in enumerate(zip(raw['collectors'],frames),1):

@@ -56,6 +56,11 @@ connects native challenges to operational drawing and paint instrumentation.
 External pixels reject false progress; native deadlines survive a stopped shell
 and queued late messages. Watcher loss clears the tile and retains actual child
 exit failures. Automatic renderer replacement and complete desktop recovery remain open.
+The [consumer-continuity checkpoint](spec/delivery/consumer-continuity-handoff.md)
+keeps one real collector alive across consumer crashes, lease expiry and bounded
+replacement. Reattachment preserves original measurements; typed consumer-policy
+revocation blocks another launch. This is a native ownership prerequisite for
+automatic visible recovery, which remains unqualified.
 The [measured telemetry path](spec/delivery/measured-time-handoff.md) now preserves
 sample age through delay, replay and reconnect, with explicit clock scope and TTL checks.
 A [native network reader](spec/delivery/network-acquisition-handoff.md) now acquires

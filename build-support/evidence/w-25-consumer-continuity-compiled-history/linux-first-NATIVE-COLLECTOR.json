@@ -1,0 +1,638 @@
+{
+  "family": "NATIVE-COLLECTOR",
+  "outcome": "pass",
+  "executed_at": "2026-10-06T11:11:08.514912+00:00",
+  "executable_sha256": "dde47c7df77a3d0fd17a698e53b7853d1d9bd0b1311cb2003c9b66c30884fb7c",
+  "cases": [
+    {
+      "case": "NATIVE-COLLECTOR.LIVE",
+      "outcome": "pass",
+      "rows_compared": 4,
+      "presentation_fields_compared": 8,
+      "launches": 1,
+      "independent_exits": 1,
+      "watch_registration_observed": true,
+      "watch_release_observed": false,
+      "elapsed_seconds": 1.472,
+      "child_observations": [
+        {
+          "pid": 874,
+          "observer": "pidfd",
+          "observed_alive": true,
+          "observed_exited": true
+        }
+      ],
+      "lifecycle": [
+        {
+          "endpoint_controls": true,
+          "event": "ready",
+          "observed_ms": 323224,
+          "unprivileged": true
+        },
+        {
+          "attempt": 0,
+          "epoch": "collector:872:1",
+          "event": "spawned",
+          "observed_ms": 323224,
+          "pid": 874
+        },
+        {
+          "data_peer": 874,
+          "event": "authenticated",
+          "health_peer": 874,
+          "observed_ms": 323475,
+          "pid": 874
+        },
+        {
+          "code": 0,
+          "event": "stopped",
+          "forced": false,
+          "observed_ms": 324594,
+          "os_confirmed": true,
+          "pid": 874,
+          "signaled": false
+        },
+        {
+          "event": "complete",
+          "launches": 1,
+          "observed_ms": 324594
+        }
+      ]
+    },
+    {
+      "case": "NATIVE-COLLECTOR.FAILURE",
+      "outcome": "pass",
+      "rows_compared": 6,
+      "presentation_fields_compared": 12,
+      "launches": 1,
+      "independent_exits": 1,
+      "watch_registration_observed": true,
+      "watch_release_observed": false,
+      "elapsed_seconds": 2.486,
+      "child_observations": [
+        {
+          "pid": 877,
+          "observer": "pidfd",
+          "observed_alive": true,
+          "observed_exited": true
+        }
+      ],
+      "lifecycle": [
+        {
+          "endpoint_controls": true,
+          "event": "ready",
+          "observed_ms": 324697,
+          "unprivileged": true
+        },
+        {
+          "attempt": 0,
+          "epoch": "collector:875:1",
+          "event": "spawned",
+          "observed_ms": 324697,
+          "pid": 877
+        },
+        {
+          "data_peer": 877,
+          "event": "authenticated",
+          "health_peer": 877,
+          "observed_ms": 324948,
+          "pid": 877
+        },
+        {
+          "code": 0,
+          "event": "stopped",
+          "forced": false,
+          "observed_ms": 327080,
+          "os_confirmed": true,
+          "pid": 877,
+          "signaled": false
+        },
+        {
+          "event": "complete",
+          "launches": 1,
+          "observed_ms": 327080
+        }
+      ]
+    },
+    {
+      "case": "NATIVE-COLLECTOR.REPLAY",
+      "outcome": "pass",
+      "rows_compared": 6,
+      "presentation_fields_compared": 12,
+      "launches": 1,
+      "independent_exits": 1,
+      "watch_registration_observed": true,
+      "watch_release_observed": false,
+      "elapsed_seconds": 1.473,
+      "child_observations": [
+        {
+          "pid": 880,
+          "observer": "pidfd",
+          "observed_alive": true,
+          "observed_exited": true
+        }
+      ],
+      "lifecycle": [
+        {
+          "endpoint_controls": true,
+          "event": "ready",
+          "observed_ms": 327183,
+          "unprivileged": true
+        },
+        {
+          "attempt": 0,
+          "epoch": "collector:878:1",
+          "event": "spawned",
+          "observed_ms": 327183,
+          "pid": 880
+        },
+        {
+          "data_peer": 880,
+          "event": "authenticated",
+          "health_peer": 880,
+          "observed_ms": 327434,
+          "pid": 880
+        },
+        {
+          "code": 0,
+          "event": "stopped",
+          "forced": false,
+          "observed_ms": 328554,
+          "os_confirmed": true,
+          "pid": 880,
+          "signaled": false
+        },
+        {
+          "event": "complete",
+          "launches": 1,
+          "observed_ms": 328554
+        }
+      ]
+    },
+    {
+      "case": "NATIVE-COLLECTOR.HANG",
+      "outcome": "pass",
+      "rows_compared": 6,
+      "presentation_fields_compared": 16,
+      "expiry_ms": 3038,
+      "launches": 2,
+      "independent_exits": 2,
+      "watch_registration_observed": true,
+      "watch_release_observed": false,
+      "elapsed_seconds": 5.768,
+      "child_observations": [
+        {
+          "pid": 883,
+          "observer": "pidfd",
+          "observed_alive": true,
+          "observed_exited": true
+        },
+        {
+          "pid": 884,
+          "observer": "pidfd",
+          "observed_alive": true,
+          "observed_exited": true
+        }
+      ],
+      "lifecycle": [
+        {
+          "endpoint_controls": true,
+          "event": "ready",
+          "observed_ms": 328656,
+          "unprivileged": true
+        },
+        {
+          "attempt": 0,
+          "epoch": "collector:881:1",
+          "event": "spawned",
+          "observed_ms": 328657,
+          "pid": 883
+        },
+        {
+          "data_peer": 883,
+          "event": "authenticated",
+          "health_peer": 883,
+          "observed_ms": 328908,
+          "pid": 883
+        },
+        {
+          "backoff_ms": 1000,
+          "event": "fault",
+          "observed_ms": 331948,
+          "pid": 883,
+          "reason": "producer.expired",
+          "since_heartbeat_ms": 3038
+        },
+        {
+          "code": 9,
+          "event": "stopped",
+          "forced": true,
+          "observed_ms": 332198,
+          "os_confirmed": true,
+          "pid": 883,
+          "signaled": true
+        },
+        {
+          "attempt": 1,
+          "epoch": "collector:881:2",
+          "event": "spawned",
+          "observed_ms": 332953,
+          "pid": 884
+        },
+        {
+          "data_peer": 884,
+          "event": "authenticated",
+          "health_peer": 884,
+          "observed_ms": 333204,
+          "pid": 884
+        },
+        {
+          "code": 0,
+          "event": "stopped",
+          "forced": false,
+          "observed_ms": 334323,
+          "os_confirmed": true,
+          "pid": 884,
+          "signaled": false
+        },
+        {
+          "event": "complete",
+          "launches": 2,
+          "observed_ms": 334323
+        }
+      ]
+    },
+    {
+      "case": "NATIVE-COLLECTOR.CRASH",
+      "outcome": "pass",
+      "rows_compared": 6,
+      "presentation_fields_compared": 16,
+      "launches": 2,
+      "independent_exits": 2,
+      "watch_registration_observed": false,
+      "watch_release_observed": false,
+      "elapsed_seconds": 2.831,
+      "child_observations": [
+        {
+          "pid": 887,
+          "observer": "pidfd",
+          "observed_alive": true,
+          "observed_exited": true
+        },
+        {
+          "pid": 888,
+          "observer": "pidfd",
+          "observed_alive": true,
+          "observed_exited": true
+        }
+      ],
+      "lifecycle": [
+        {
+          "endpoint_controls": true,
+          "event": "ready",
+          "observed_ms": 334425,
+          "unprivileged": true
+        },
+        {
+          "attempt": 0,
+          "epoch": "collector:885:1",
+          "event": "spawned",
+          "observed_ms": 334426,
+          "pid": 887
+        },
+        {
+          "data_peer": 887,
+          "event": "authenticated",
+          "health_peer": 887,
+          "observed_ms": 334677,
+          "pid": 887
+        },
+        {
+          "backoff_ms": 1000,
+          "event": "fault",
+          "observed_ms": 334782,
+          "pid": 887,
+          "reason": "child.crashed"
+        },
+        {
+          "code": 73,
+          "event": "stopped",
+          "forced": false,
+          "observed_ms": 334782,
+          "os_confirmed": true,
+          "pid": 887,
+          "signaled": false
+        },
+        {
+          "attempt": 1,
+          "epoch": "collector:885:2",
+          "event": "spawned",
+          "observed_ms": 335783,
+          "pid": 888
+        },
+        {
+          "data_peer": 888,
+          "event": "authenticated",
+          "health_peer": 888,
+          "observed_ms": 336034,
+          "pid": 888
+        },
+        {
+          "code": 0,
+          "event": "stopped",
+          "forced": false,
+          "observed_ms": 337154,
+          "os_confirmed": true,
+          "pid": 888,
+          "signaled": false
+        },
+        {
+          "event": "complete",
+          "launches": 2,
+          "observed_ms": 337154
+        }
+      ]
+    },
+    {
+      "case": "NATIVE-COLLECTOR.UNSUBSCRIBE",
+      "outcome": "pass",
+      "rows_compared": 2,
+      "presentation_fields_compared": 4,
+      "launches": 1,
+      "independent_exits": 1,
+      "watch_registration_observed": false,
+      "watch_release_observed": true,
+      "elapsed_seconds": 1.162,
+      "child_observations": [
+        {
+          "pid": 891,
+          "observer": "pidfd",
+          "observed_alive": true,
+          "observed_exited": true
+        }
+      ],
+      "lifecycle": [
+        {
+          "endpoint_controls": true,
+          "event": "ready",
+          "observed_ms": 337257,
+          "unprivileged": true
+        },
+        {
+          "attempt": 0,
+          "epoch": "collector:889:1",
+          "event": "spawned",
+          "observed_ms": 337257,
+          "pid": 891
+        },
+        {
+          "data_peer": 891,
+          "event": "authenticated",
+          "health_peer": 891,
+          "observed_ms": 337508,
+          "pid": 891
+        },
+        {
+          "event": "demand_released",
+          "observed_ms": 337815,
+          "pid": 891
+        },
+        {
+          "code": 0,
+          "event": "stopped",
+          "forced": false,
+          "observed_ms": 338317,
+          "os_confirmed": true,
+          "pid": 891,
+          "signaled": false
+        },
+        {
+          "event": "complete",
+          "launches": 1,
+          "observed_ms": 338317
+        }
+      ]
+    },
+    {
+      "case": "NATIVE-COLLECTOR.REVOKE",
+      "outcome": "pass",
+      "rows_compared": 2,
+      "presentation_fields_compared": 4,
+      "launches": 1,
+      "independent_exits": 1,
+      "watch_registration_observed": false,
+      "watch_release_observed": true,
+      "elapsed_seconds": 1.162,
+      "child_observations": [
+        {
+          "pid": 894,
+          "observer": "pidfd",
+          "observed_alive": true,
+          "observed_exited": true
+        }
+      ],
+      "lifecycle": [
+        {
+          "endpoint_controls": true,
+          "event": "ready",
+          "observed_ms": 338419,
+          "unprivileged": true
+        },
+        {
+          "attempt": 0,
+          "epoch": "collector:892:1",
+          "event": "spawned",
+          "observed_ms": 338419,
+          "pid": 894
+        },
+        {
+          "data_peer": 894,
+          "event": "authenticated",
+          "health_peer": 894,
+          "observed_ms": 338671,
+          "pid": 894
+        },
+        {
+          "event": "demand_released",
+          "observed_ms": 338978,
+          "pid": 894
+        },
+        {
+          "code": 0,
+          "event": "stopped",
+          "forced": false,
+          "observed_ms": 339480,
+          "os_confirmed": true,
+          "pid": 894,
+          "signaled": false
+        },
+        {
+          "event": "complete",
+          "launches": 1,
+          "observed_ms": 339480
+        }
+      ]
+    },
+    {
+      "case": "NATIVE-COLLECTOR.PARENT-LOSS",
+      "outcome": "pass",
+      "rows_compared": 2,
+      "presentation_fields_compared": 4,
+      "launches": 1,
+      "independent_exits": 1,
+      "watch_registration_observed": false,
+      "watch_release_observed": false,
+      "elapsed_seconds": 0.359,
+      "child_observations": [
+        {
+          "pid": 897,
+          "observer": "pidfd",
+          "observed_alive": true,
+          "observed_exited": true
+        }
+      ],
+      "lifecycle": [
+        {
+          "endpoint_controls": true,
+          "event": "ready",
+          "observed_ms": 339582,
+          "unprivileged": true
+        },
+        {
+          "attempt": 0,
+          "epoch": "collector:895:1",
+          "event": "spawned",
+          "observed_ms": 339582,
+          "pid": 897
+        },
+        {
+          "data_peer": 897,
+          "event": "authenticated",
+          "health_peer": 897,
+          "observed_ms": 339833,
+          "pid": 897
+        },
+        {
+          "event": "parent_loss_ready",
+          "observed_ms": 339938,
+          "pid": 897
+        }
+      ]
+    }
+  ],
+  "source_inputs": {
+    "source/application/collector_probe.cpp": "766e600406c7cd35f4e5c4eba044861f07ee1a2d66a7e7c7f12dc4d9bbd3c627",
+    "source/application/diagnostic.cpp": "639b873786d2a4ae745f0c16567ba13da9feb6b4929bc1f7746eac831ce39512",
+    "source/application/ipc_probe.cpp": "542f0120ce61069f0b8564cda9aef04e196333b5dce68be17481a5fef2104419",
+    "source/application/model_smoke.cpp": "5752a655511f83b1635d4e77c00274f0952145680d5a540d8bfec0b6e4386137",
+    "source/application/network_probe.cpp": "646543143c6fe4dd76871bfff2a2606d9665bb040f297a3855d555c3106d83f0",
+    "source/application/recovery_probe.cpp": "b388dce5ca46a1a40a22f3c053be74b76a7efe58017e65855407245181357042",
+    "source/application/telemetry_probe.cpp": "c74fab9a03ec373be14dda1c7d9899c0abfc15ef824b2e251d74b1f1a4399d58",
+    "source/configuration/policy.cpp": "28e53f88449cb2ff4c85e0a26c0a2dbe4fa85ca7d037a3df6a299cf2cb03df87",
+    "source/configuration/policy.hpp": "966822971245eedbde662b08987da8519cd71011b5620bb385a47b161e93e36a",
+    "source/configuration/session.cpp": "69a14e9f369ae28fd2e64fd46a81feaf8503a011693aacfecb34c07d763adfa4",
+    "source/configuration/session.hpp": "1380daf312ab2224433ad425fa72c22dde663ff49fd26fae77b593680f1515e1",
+    "source/diagnostics/data_view.cpp": "fc12c12a447af1a89d380ea6d91a9b238b81539415f4fcb7bb87e1722d92cf41",
+    "source/diagnostics/data_view.hpp": "17847cf0e80a41326903abd1d055da2d471c55aff0ba48063162df73f9e5a86c",
+    "source/diagnostics/entry.cpp": "802e0ae85f122aa8c7717935757780abb362aa73eb073a0fe8ec6f84a894d179",
+    "source/diagnostics/entry.hpp": "91f6afb3a8491ac90ce3e35596b22d4979f6ba65688de4acaaaa16a77078b01b",
+    "source/diagnostics/failure_history.cpp": "2c099d7400f966e7f55b2689f34acabb3fbd2eb1ca6579c9b7b45330d5ab06fc",
+    "source/diagnostics/failure_history.hpp": "d25874b43474b2d0138ff3e7c77897f9d36f698673439ba13e5fe3ecbc01f879",
+    "source/diagnostics/health_link.cpp": "5eb6a7c3c11ff1ae0fd2684fd55f79c0fab3465d99aa2054926d9477501f08a4",
+    "source/diagnostics/health_link.hpp": "d06ca3856f31ce4b99d68c0b903c7a418f74e6c5f3f3eb336373d6480b823a36",
+    "source/diagnostics/oracle_probe_x11.cpp": "fbef9a7c76e0c291e88905dfdcc1e5ff12380bdbe68c9aba87360cb1b97649b8",
+    "source/diagnostics/preservation_job.cpp": "432c9f6dc5def54e20ba4576fcf7b998812e120d3dd669dcfbac360077049476",
+    "source/diagnostics/preservation_job.hpp": "6d90739d0ce70c28a3bb815e7292f2623d9e7441ff746f7813819e2722705454",
+    "source/diagnostics/recovery.cpp": "33f725661262c9888920892c1e77060999682b79d1f5b24e14e8cbfc57fdaaa6",
+    "source/diagnostics/recovery.hpp": "746295ce4ecaede329e6c6f44f378a9e96e92217b808ec0279bea9f0cfb14301",
+    "source/diagnostics/reported_state.cpp": "735bdf88526123d20a153fe30cf399ef7645358ee5a221933aa1677136f8f030",
+    "source/diagnostics/reported_state.hpp": "674ee53024b7c5088e180ac90a9a274673aac9d50efe30784927f556ffb4d467",
+    "source/interfaces/diagnostic_inspector.hpp": "d5ca073d485ae2b5caef308669dd30111aa7b963f6e5f0b5b63edd49183561ce",
+    "source/interfaces/diagnostic_inspector_linux.cpp": "78b5e2af65a1523a11167a1847ac59d8f6dc780a94533569bb2495638fd7afd3",
+    "source/interfaces/diagnostic_inspector_windows.cpp": "1e2545082854f23cf8e1c1311e2923ed736a71ddce0e9f1eb7cd0d9267c32a20",
+    "source/model/state.cpp": "674c5b735735cabc1b2d57394da97f61b36dff0189b8cfd77bcab1df07e81d8e",
+    "source/model/state.hpp": "dbd584494db63b513fe8a21ed66a68d7d8b78fbe0ac3ad105e79e06a71007cbc",
+    "source/platform/child.hpp": "266297cb253ba93b1c73c6a6a28218721e3277c21ffc725c84cd8866012be5aa",
+    "source/platform/child_linux.cpp": "46d26731c0c2ddf873265c008f0b25a17aef8f0cdf3f52ac16e2db6458686bfc",
+    "source/platform/child_windows.cpp": "3385dc40dd91341951a2039cb5f722f2ce069a7b824e2eb91059b9a180fcb864",
+    "source/platform/failure_store.cpp": "18055cbb3c6cb134599478e4e1bb30e672d9e9bbbe0ef3092e382c289b92b837",
+    "source/platform/failure_store.hpp": "b9cf5b5c7394c036a054cff3604facf688935f69a6f256540a40f953e4e12cf6",
+    "source/platform/local_ipc.hpp": "b9489fb05583cf395027bd9266dc0931b053a98d42c30dd2ed51c0828495e641",
+    "source/platform/local_ipc_linux.cpp": "75f0d455ed7bef0cad5f32c11bed2849bb55d6f958c35c3eaadf83ea046be918",
+    "source/platform/local_ipc_windows.cpp": "088c9bca22990057cd50207815017a54728d095a2ad705cba579f237b5e68c6b",
+    "source/platform/machine_policy.hpp": "e12c51cdaeb3806e4813098fbfb8db7a181beb338b6623492c29165c0c0da5bb",
+    "source/platform/machine_policy_linux.cpp": "34925aa2d0173782a0a132413b3bddf2c4db25098575699b0f94193154094c16",
+    "source/platform/machine_policy_windows.cpp": "3ec13d9fe46b5e39a3c077de9620e051879155f9eba782e542de558e90b53653",
+    "source/platform/network.cpp": "4281f7fbb0ac5dbe4e4300940180fa0f407919d13a0ae9b0df5f2d4d86180198",
+    "source/platform/network.hpp": "b554c49a42dfeb646329138609d6e08febf03dfd3ec8409d6a4301757f0a09e8",
+    "source/platform/network_linux.cpp": "c908af093259e15743af6bd79b8367fe9c38347d42c8242ac32a43967639f6e5",
+    "source/platform/network_netlink.cpp": "67b5c4602f7e8c772600c869feab5707191e896f9fc36d9f3f48bdac0e4ebf1b",
+    "source/platform/network_netlink.hpp": "213561b333c06ef1831a80abb8ffd615d8ecd0b2ae10e87bf356254cc3a1bf7d",
+    "source/platform/network_watch.hpp": "06061aecd6ba3a14a77fffc943f4ab497a78f96709794cecf187f6bc8f7552e3",
+    "source/platform/network_watch_linux.cpp": "7f47f01de121ba2ca0601d17d14796081499637ae448fe9cd54e1ad1844d6f80",
+    "source/platform/network_windows.cpp": "456fe55d36b5c0fb09d559f582221fdc334062309cccb79f63f1d4557fcb78b4",
+    "source/platform/preservation.hpp": "1d4525eaec593c5dd1dbbfcd4abf347596422ffb01b27312b666f04a4afc7600",
+    "source/protocol/ledger.cpp": "f756277e0ad6dec26f3b72ffc243758c5acccd1124172f0290bee66c7e785421",
+    "source/protocol/ledger.hpp": "ac320df68d58abc9e3cd9697f3ff9ef3bbb2798a79974d5650816599e08ce2c0",
+    "source/protocol/outbox.cpp": "13b79a49a0be37f635c19b2f78cd4c0648a1412eae56a4f999ffd642c185f9a2",
+    "source/protocol/outbox.hpp": "6ca6041cffadcbf65621b556717bccdf9ee55cae9349fadd4e141db9b923b41c",
+    "source/protocol/telemetry.cpp": "cd5cafcf2f0e758205af8fd42fb7b7aa603daa9fdb7ccdec3e0c6dad087a8736",
+    "source/protocol/telemetry.hpp": "c507650a49cb489d567bf70f1dbfd76c9962aaf5d6a5901b97311d334ef8da87",
+    "source/protocol/wire.cpp": "0168904f2c00cea6f28bbe5996c42889df2e33b8df063fc08e159e7502446330",
+    "source/protocol/wire.hpp": "68ada918d121c3e861fd9e13a084c9ea1c7b4acf55ff4ba543c913d71a74523e",
+    "source/rendering/network_view.cpp": "4c80ecc2e48f5819afa108e3cc6b33c8d6cc70053c4e2bb63e866d5d12441601",
+    "source/rendering/network_view.hpp": "7d987a0659f7d3d267c5e9efa5cc4b80299d7f6146772e67dafff97c23ae7d1f",
+    "source/runtime/network_publication.cpp": "815b0305c50788bdb9f8eef3ff4bf55348e87f5f3bbab1ff454107ff166958a5",
+    "source/runtime/network_publication.hpp": "5b66852864957870d065e94427478bfa8f1181816bffc108b4ea5fa5c2e37f6d",
+    "source/runtime/network_state.cpp": "8874d4cf48b490d593cb396aead05fbf498ac6bc30a094ace03d1c1f0c44b317",
+    "source/runtime/network_state.hpp": "2fb9e9c645697f644d405617372447544bcde6901dae9dfe4b53dccf559688e3",
+    "source/desktop/gnome/native_clock.cpp": "62dc94bd37cca0fb398b5ec1ac43a6bb5fe346ff786a87bc3d47e861f7f94f36",
+    "source/desktop/gnome/native_clock.hpp": "bdc8302eb8ea24f8435fc8ebf39db17ddfe041f07c031fe8b33a5b1ef86de189",
+    "source/desktop/gnome/native_health_view.cpp": "9c427e548b63e8994393312e912bc41ffced2c0f6fdebffa6dd40447036bc123",
+    "source/desktop/gnome/native_health_view.hpp": "743eaae2e8d95d480b1990188c1a26ee332feb849d1fd9782fb01ba6799d8593",
+    "source/desktop/gnome/native_network_view.cpp": "3af5604216b52746ba04b88f4c108c1237f733ada7bf02e3c169fc24d6d86008",
+    "source/desktop/gnome/native_network_view.hpp": "fe81ae60befc910cd0a4868d4bba98950fe53ba55daed853cfda592a26e1d5c0",
+    "source/desktop/gnome/networkSession.js": "44a46abba04e733d5fc5a85590e952e204a21fd1d64bb45ac4639acf2cb51b3b",
+    "source/desktop/gnome/SysPaneClock-0.1.gir": "6338c5f020dc5e86a20528865e4c2ea9bef1d63dc003f32cdefaa07dd42b5f66",
+    "source/desktop/x11/desktop_candidate.cpp": "fc36197818557ed6979c7a1a4db792f8f63752f9371f91f186377d62ad8db179",
+    "source/desktop/x11/desktop_candidate.hpp": "16643e4d8cf657c2350e6cf65dff5bf604c0878585c6440a944079340687974d",
+    "source/desktop/gnome/lab-marker/clockExperiment.js": "884ff50d745ae9ffd7a6767b16ed0b3c0386673272ffbe1f1bc8ee3c6b2720e0",
+    "source/desktop/gnome/lab-marker/extension.js": "c74e19051062cfeb8757c8733872452fb8811a5423c237ce721eed66e22b0b5b",
+    "source/desktop/gnome/lab-marker/metadata.json": "2b6b7ab220d6ef7588f2bd70e6459d0283e912c3d8768469bf3218f9cb956e06",
+    "source/desktop/gnome/lab-marker/networkCache.js": "cbd034d03512d04d2042ecd635c4a5b8a7d1095c394a8ca4d21bbff2ce2c3a22",
+    "source/desktop/gnome/lab-marker/networkLive.js": "1bf35b504e4bd2f75585e8a26defb7c38c215aa2c3c920f5980ddf048c8750e0",
+    "source/desktop/gnome/lab-marker/surfaceLease.js": "b6277475e30cd27e2685282ea353a2cafa811ccecf951cce148191efcd85424d",
+    "source/third_party/nlohmann/json.hpp": "aaf127c04cb31c406e5b04a63f1ae89369fccde6d8fa7cdda1ed4f32dfc5de63",
+    "source/third_party/nlohmann/LICENSE.MIT": "46a65cffd1ea955132d95a8dd921640714a8d6b537d2e4e482d31145ae95b603",
+    "tests/protocol/native_clock.py": "66ab390b37cc27e4baea14a5c6cd58efe310afc917beb2bfb45fadc3f9e809a8",
+    "tests/protocol/native_collector.py": "0c9d8f745d9810b3ece83bc9fd330c70fda04dcd4fb0d5618fc015e1e947d472",
+    "tests/protocol/native_consumer_continuity.py": "33694970320baccc3f863e69d657fbaefa214070fd292e2dd9cad2cded521334",
+    "tests/protocol/native_ipc.py": "f9312aa97ec01b1f8357f939baf0671114c8558c89fae08df1626854477563bb",
+    "tests/protocol/native_measured.py": "71c76ed4450a44c75c8bbc554ec5d97e18576fecc27eeda1e343141881c8d74a",
+    "tests/protocol/native_network.py": "be9a5a3cc50a6b9c27ecc9af70dc7e9460b029b0a396e7bdaa5a36defd4f7907",
+    "tests/protocol/native_subscription.py": "4ad7faf31cdc57a54460e8850520cad450e345f9d75de912208dff7dd1f6a337",
+    "tests/protocol/network_netlink_tests.cpp": "049bc0149b52dbd9dfb34ffe5ffa78b6ba0bde66c8f7a553e2c1146d1a127c1b",
+    "tests/protocol/protocol_tests.cpp": "749089d6224e5d15232da569286616b9003db66766a83d0ec4e5159a38f85919",
+    "tests/protocol/subscription_tests.cpp": "59b5bec118a82a6941cadb906e2664fa67757ab20c3d613e5b556d2f6a85358c",
+    "tests/protocol/telemetry_tests.cpp": "9d8c0fb52024751e257201fbecd689b41da648ac159f1dd92a2ed209afc26a5a",
+    "tests/fault/data_view_tests.cpp": "ee3d510d52ef8295c981330ad7fd8fd70962e0d4d4ea3a8f6683dcf3f9e1eb10",
+    "tests/fault/diagnostic_tests.cpp": "88931457bf507fffb76b766019558f3f1a8f33b7d3293a39d61d4af870fbfcce",
+    "tests/fault/failure_store_tests.cpp": "e965216fc283b40fabeb972eea11b6e1d994ee2756d4e8fe29689434df5746bb",
+    "tests/fault/health_tests.cpp": "22032c4b8eef9784946057366b0f5664e78a2f328afb075cc8b3797e5ea6496f",
+    "tests/fault/measured_time_tests.cpp": "7840b4bf523fa2d11f5bc71dc7beb70110844baf4545a34a66695ae7864b956a",
+    "tests/fault/native_diagnostic.py": "aab3f07a8a823412ab78fb49ae31d45ac764c85554c7580d07e01838e8bfcb72",
+    "tests/fault/native_failure_store.py": "8100b236a2344733b5eaa6898975b0dfa9c546ad0ff8e2d6a150561edc03630b",
+    "tests/fault/native_preservation.py": "571437ed404f312c52fab7371b74d0efe0a9c8360d33f176a936696b000edb96",
+    "tests/fault/native_recovery.py": "6a9cffe9309042356edf1a3b1f04b16a21ba1f79d6d1922be170b65641caa85c",
+    "tests/fault/native_render_deadline.py": "45a94056b9c2d76a2b08d91009030d59afef6c2f0fe1cc2e7e87fc0cde9de48a",
+    "tests/fault/network_publication_tests.cpp": "5c7c45de0bbd39c6e27256dc4160fa21e0700c7080a6b79dc56cf94d6e4adba4",
+    "tests/fault/network_state_tests.cpp": "f6e3142363c4eb3c4641eba1a7533edde59e9b8ea03f2d3825e1d1f651973031",
+    "tests/fault/preservation_tests.cpp": "60ed1b77962cd6eee27a5756dd037733a8270e62a26f120c404ca398d723fdd3",
+    "tests/fault/recovery_tests.cpp": "81385c57695df15a366daa8b4a662cf68d11d52d5b74a7a2f51c158a022e7763",
+    "tests/fault/state_import_tests.cpp": "789ff7e1bc376abffa9ebf7de105a767bf364edd864e55d6e130ce437188ffff",
+    "spec/delivery/packages/w-25-network-publication.md": "1b29289f399e51742627a243b7841ed3df0e00515d507c0cc6fc2e1b98e43cc1",
+    "spec/telemetry/metrics.json": "3b60c29eac5f70d40862379d3aaa74cccfc33a1a24a8641cabbb2bd1431f6f2d"
+  },
+  "qualification": "Real Linux collection and measured receipt under owned child supervision; typed policy and injected failures do not qualify installed policy, actual kernel faults or a desktop edition.",
+  "disclosure": "Public outcomes/counts/timings only. Raw native documents and OS brackets remain in memory or owned ignored private failure evidence."
+}
