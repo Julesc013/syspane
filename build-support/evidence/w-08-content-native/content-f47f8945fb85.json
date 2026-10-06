@@ -1,0 +1,405 @@
+{
+  "family": "CONTENT-READER",
+  "outcome": "pass",
+  "uid": 1000,
+  "executable_sha256": "b7eda3a541e823acb578afa5c516906f36f33556ecd924abda368ec1c0548b64",
+  "oracle_sha256": "b6f34d1e48e87ce6e4affee27028f3182f456d646d512b3a07bf98a10551d93f",
+  "cases": [
+    {
+      "case": "COMPOSE",
+      "outcome": "pass",
+      "observation": {
+        "command": {
+          "expected_revision": "40",
+          "intent": "preview",
+          "operations": [
+            {
+              "op": "settings.set",
+              "path": "display.enabled",
+              "value": false
+            },
+            {
+              "op": "settings.set",
+              "path": "sampling.resources_ms",
+              "value": 1500
+            },
+            {
+              "op": "scene.replace",
+              "scene": {
+                "revision": "40",
+                "roots": [
+                  "group:network"
+                ],
+                "scene_id": "scene:portable",
+                "schema_version": "0.2.0",
+                "theme_id": null,
+                "widgets": [
+                  {
+                    "bindings": [],
+                    "children": [
+                      "widget:adapters"
+                    ],
+                    "display": {
+                      "role": "primary"
+                    },
+                    "id": "group:network",
+                    "kind": "group",
+                    "layout": {
+                      "base": {
+                        "axis": "vertical",
+                        "gap_dip": 8,
+                        "kind": "stack",
+                        "overflow": "diagnose"
+                      }
+                    },
+                    "priority": "essential",
+                    "title": "Network"
+                  },
+                  {
+                    "bindings": [
+                      {
+                        "entity_type": "network_interface",
+                        "field": "operational_state",
+                        "kind": "selector",
+                        "limit": 64,
+                        "mode": "collection",
+                        "predicates": [
+                          {
+                            "field": "physical",
+                            "op": "eq",
+                            "value": true
+                          }
+                        ],
+                        "scope": {
+                          "kind": "local_host"
+                        },
+                        "sort": [
+                          {
+                            "direction": "ascending",
+                            "field": "name"
+                          }
+                        ]
+                      }
+                    ],
+                    "display": {
+                      "role": "primary"
+                    },
+                    "id": "widget:adapters",
+                    "kind": "table",
+                    "layout": {
+                      "base": {
+                        "anchor": "end",
+                        "height": {
+                          "max": 256,
+                          "min": 32,
+                          "preferred": 80
+                        },
+                        "kind": "flow",
+                        "width": {
+                          "max": 640,
+                          "min": 100,
+                          "preferred": 240
+                        }
+                      }
+                    },
+                    "priority": "normal",
+                    "title": "Physical adapters"
+                  }
+                ]
+              }
+            }
+          ],
+          "policy_generation": "7",
+          "request_id": "P",
+          "schema_version": "0.2.0"
+        },
+        "missing_optional": [
+          "optional.a",
+          "optional.z"
+        ],
+        "origins": {
+          "display.enabled": {
+            "id": "preset:parent",
+            "sha256": "9a0a8990bc54169737c4031415086ee31488819bdeb36acf2524f743575ef1f0",
+            "version": "0.1.0"
+          },
+          "sampling.resources_ms": {
+            "id": "preset:leaf",
+            "sha256": "4574040fe2fa1f650caee2eebbf4094bfc4327318289be06db1ae90e8ddefb8d",
+            "version": "0.1.0"
+          }
+        },
+        "packages": [
+          {
+            "id": "package:0",
+            "sha256": "d0112b82002f12e36912d306b44717cfaf5ab0981fc2461a94617beb5da51561",
+            "version": "0.1.0"
+          },
+          {
+            "id": "package:1",
+            "sha256": "3529c4f1b85f3a3e334ccd2ec8a8bd21f56c8676eb1a935da231749181aae2c3",
+            "version": "0.1.0"
+          },
+          {
+            "id": "package:2",
+            "sha256": "666055bc21c722177cebd8352ab166aa8ff3fa96fa6e482c38913d31c5273011",
+            "version": "0.1.0"
+          },
+          {
+            "id": "package:3",
+            "sha256": "35b0d6ad6919236c1377045a3ea532af76876ebc7d47b38a365b213bf7afad23",
+            "version": "0.1.0"
+          }
+        ],
+        "presets": [
+          {
+            "id": "preset:parent",
+            "sha256": "9a0a8990bc54169737c4031415086ee31488819bdeb36acf2524f743575ef1f0",
+            "version": "0.1.0"
+          },
+          {
+            "id": "preset:leaf",
+            "sha256": "4574040fe2fa1f650caee2eebbf4094bfc4327318289be06db1ae90e8ddefb8d",
+            "version": "0.1.0"
+          }
+        ],
+        "scene": {
+          "revision": "40",
+          "roots": [
+            "group:network"
+          ],
+          "scene_id": "scene:portable",
+          "schema_version": "0.2.0",
+          "theme_id": null,
+          "widgets": [
+            {
+              "bindings": [],
+              "children": [
+                "widget:adapters"
+              ],
+              "display": {
+                "role": "primary"
+              },
+              "id": "group:network",
+              "kind": "group",
+              "layout": {
+                "base": {
+                  "axis": "vertical",
+                  "gap_dip": 8,
+                  "kind": "stack",
+                  "overflow": "diagnose"
+                }
+              },
+              "priority": "essential",
+              "title": "Network"
+            },
+            {
+              "bindings": [
+                {
+                  "entity_type": "network_interface",
+                  "field": "operational_state",
+                  "kind": "selector",
+                  "limit": 64,
+                  "mode": "collection",
+                  "predicates": [
+                    {
+                      "field": "physical",
+                      "op": "eq",
+                      "value": true
+                    }
+                  ],
+                  "scope": {
+                    "kind": "local_host"
+                  },
+                  "sort": [
+                    {
+                      "direction": "ascending",
+                      "field": "name"
+                    }
+                  ]
+                }
+              ],
+              "display": {
+                "role": "primary"
+              },
+              "id": "widget:adapters",
+              "kind": "table",
+              "layout": {
+                "base": {
+                  "anchor": "end",
+                  "height": {
+                    "max": 256,
+                    "min": 32,
+                    "preferred": 80
+                  },
+                  "kind": "flow",
+                  "width": {
+                    "max": 640,
+                    "min": 100,
+                    "preferred": 240
+                  }
+                }
+              },
+              "priority": "normal",
+              "title": "Physical adapters"
+            }
+          ]
+        },
+        "settings": {
+          "display": {
+            "enabled": false,
+            "reduced_motion": true,
+            "theme_id": "theme:native"
+          },
+          "history": {
+            "persistent": false,
+            "segment_bytes": 10485760,
+            "segments": 5
+          },
+          "privacy": {
+            "export_enabled": false,
+            "remote_probes": false
+          },
+          "revision": "40",
+          "sampling": {
+            "max_workers": 4,
+            "reconcile_ms": 10000,
+            "resources_ms": 1500
+          },
+          "schema_version": "0.1.0"
+        },
+        "theme": {
+          "font": {
+            "family": "system-ui",
+            "size_dip": 13
+          },
+          "motion": "reduced",
+          "name": "Synthetic native contrast",
+          "schema_version": "0.1.0",
+          "theme_id": "theme:native",
+          "tokens": {
+            "background": "#14345acc",
+            "error": "#ff8080ff",
+            "foreground": "#ffffffff",
+            "muted": "#d0d0d0ff",
+            "warning": "#ffcf4aff"
+          }
+        }
+      }
+    },
+    {
+      "case": "SNAPSHOT",
+      "outcome": "pass",
+      "observation": {
+        "prepared_snapshot": "unchanged",
+        "fresh_read": "content.digest"
+      }
+    },
+    {
+      "case": "ROOT-LINK",
+      "outcome": "pass",
+      "observation": {
+        "error": "content.root"
+      }
+    },
+    {
+      "case": "ASSET-LINK",
+      "outcome": "pass",
+      "observation": {
+        "error": "content.open"
+      }
+    },
+    {
+      "case": "HARDLINK",
+      "outcome": "pass",
+      "observation": {
+        "error": "content.file"
+      }
+    },
+    {
+      "case": "EXECUTABLE",
+      "outcome": "pass",
+      "observation": {
+        "error": "content.file"
+      }
+    },
+    {
+      "case": "PUBLIC",
+      "outcome": "pass",
+      "observation": {
+        "error": "content.permissions"
+      }
+    },
+    {
+      "case": "FIFO",
+      "outcome": "pass",
+      "observation": {
+        "error": "content.file"
+      }
+    },
+    {
+      "case": "EXTRA",
+      "outcome": "pass",
+      "observation": {
+        "error": "content.undeclared"
+      }
+    },
+    {
+      "case": "MISSING",
+      "outcome": "pass",
+      "observation": {
+        "error": "content.assets"
+      }
+    },
+    {
+      "case": "DIGEST",
+      "outcome": "pass",
+      "observation": {
+        "error": "content.digest"
+      }
+    },
+    {
+      "case": "TRUNCATED",
+      "outcome": "pass",
+      "observation": {
+        "error": "content.digest"
+      }
+    },
+    {
+      "case": "PIN",
+      "outcome": "pass",
+      "observation": {
+        "error": "content.reference"
+      }
+    },
+    {
+      "case": "POLICY",
+      "outcome": "pass",
+      "observation": {
+        "error": "policy.denied"
+      }
+    },
+    {
+      "case": "MANIFEST-OVERSIZE",
+      "outcome": "pass",
+      "observation": {
+        "error": "content.file"
+      }
+    },
+    {
+      "case": "MANIFEST-LINK",
+      "outcome": "pass",
+      "observation": {
+        "error": "content.open"
+      }
+    },
+    {
+      "case": "DIRECTORY-LINK",
+      "outcome": "pass",
+      "observation": {
+        "error": "content.open"
+      }
+    }
+  ],
+  "qualification": "Explicit private Linux uncompressed directories and previews only; no durable resource closure, media decoding, installation or activation."
+}

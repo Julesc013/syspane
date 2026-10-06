@@ -17,6 +17,11 @@ updated: {"by": "codex", "at": "2026-10-04T19:32:52+11:00", "scope": "October au
 
 # Preset and content admission
 
+The bounded [content resolution package](../delivery/packages/w-08-content-resolution.md)
+defines exact manifest/document pin semantics, entry names, closure bounds and
+preset composition for the first executable preview. Its implementation does not
+qualify archive import, durable resource installation or rendering.
+
 
 Presets reference versioned scenes, themes and permitted setting defaults by
 identity and digest. Shipped presets are immutable; edits produce a user derivative

@@ -10,6 +10,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Foundation campaign coverage audit](campaign-coverage.md) — Map the admitted campaign to actual evidence and remaining implementation or native laboratory requirements.
 - [Asynchronous authenticated command checkpoint](command-sessions-handoff.md) — Preserve responsive control traffic, exact request ownership and honest storage outcomes during native transactions.
 - [Native collection continuity checkpoint](consumer-continuity-handoff.md) — Real acquisition survives separately owned consumer failures and bounded replacement.
+- [Pinned content and preset preview checkpoint](content-resolution-handoff.md) — Verified content identities and immutable resource snapshots for common authored previews.
 - [Automatic recovery from independent render failure checkpoint](controller-render-recovery-handoff.md) — The persistent controller replaces failed rendering lifetimes and preserves original measured collection.
 - [Current state and next admitted boundary](current-state.md) — An honest resumption point for the initial greenfield specification.
 - [Synchronized data owner checkpoint](data-view-handoff.md) — Bind atomic model admission, independent lease state and revocable presentation to portable execution evidence.

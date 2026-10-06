@@ -7,11 +7,17 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
+The [content resolution checkpoint](spec/delivery/content-resolution-handoff.md)
+adds pinned package verification, preset inheritance and policy-checked previews.
+The Linux reader loads bounded private directories without following links. Plans
+retain original bytes and provenance; durable resource storage, media decoding and
+native activation remain required.
+
 The [command session checkpoint](spec/delivery/command-sessions-handoff.md) connects
 authenticated IPC to asynchronous scene/settings transactions and Linux generation
 storage. Heartbeats, cancellation and result retrieval continue while storage work
 runs. Reconnect retrieves the admitted outcome without repeating the edit. Installed
-ownership, worker supervision, asset resolution, native controls and visible
+ownership, durable resource closure, native controls and visible
 activation remain required. The [reconciliation checkpoint](spec/delivery/reconciliation-handoff.md)
 adds read-only recovery of committed requests across controller restarts. Six native
 crash/reconnect cases verify exact revisions and current-policy disclosure without

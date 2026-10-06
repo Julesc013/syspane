@@ -1,0 +1,98 @@
+[
+  {
+    "step": "configure",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-06T17:58:49.344550+00:00",
+    "finished_at": "2026-10-06T17:59:12.515835+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 5368709120,\n  \"checkout_out_bytes\": 1642699576,\n  \"linux_campaign_bytes\": 3371337801,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "configure",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "out/campaign/content_step.py",
+      "windows-x86-v141-xp",
+      "configure"
+    ],
+    "started_at": "2026-10-06T17:59:12.516584+00:00",
+    "finished_at": "2026-10-06T17:59:14.030223+00:00",
+    "exit": 0,
+    "stdout": "-- Selecting Windows SDK version 10.0.26100.0 to target Windows 10.0.19045.\nprofile verified: windows-x86-v141-xp\nvendored dependency digests: pass\n-- Configuring done (0.8s)\n-- Generating done (0.2s)\n-- Build files have been written to: D:/Projects/SysPane/syspane/out/build/windows-x86-v141-xp\n \nAttempt: D:\\Projects\\SysPane\\syspane\\out\\campaign\\w-08-content-resolution\\windows-x86-v141-xp-configure-4dd089d98f\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-06T17:59:14.030514+00:00",
+    "finished_at": "2026-10-06T17:59:14.637100+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 5368709120,\n  \"checkout_out_bytes\": 1643781707,\n  \"linux_campaign_bytes\": 3371337801,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "out/campaign/content_step.py",
+      "windows-x86-v141-xp",
+      "build"
+    ],
+    "started_at": "2026-10-06T17:59:14.637445+00:00",
+    "finished_at": "2026-10-06T17:59:31.866162+00:00",
+    "exit": 0,
+    "stdout": ":\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Enterprise\\Common7\\IDE\\VC\\VCTargets\\Platforms\\Win32\\PlatformToolsets\\v141_xp\\Toolset.targets(39,5): warning MSB8051: Support for targeting Windows XP is deprecated and will not be present in future releases of Visual Studio. Please see https://go.microsoft.com/fwlink/?linkid=2023588 for more information. [D:\\Projects\\SysPane\\syspane\\out\\build\\windows-x86-v141-xp\\syspane_network_state_tests.vcxproj]\n  syspane_network_publication.vcxproj -> D:\\Projects\\SysPane\\syspane\\out\\build\\windows-x86-v141-xp\\Release\\syspane_network_publication.lib\nC:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Enterprise\\Common7\\IDE\\VC\\VCTargets\\Platforms\\Win32\\PlatformToolsets\\v141_xp\\Toolset.targets(39,5): warning MSB8051: Support for targeting Windows XP is deprecated and will not be present in future releases of Visual Studio. Please see https://go.microsoft.com/fwlink/?linkid=2023588 for more information. [D:\\Projects\\SysPane\\syspane\\out\\build\\windows-x86-v141-xp\\syspane_network_view_tests.vcxproj]\n  syspane_network_state_tests.vcxproj -> D:\\Projects\\SysPane\\syspane\\out\\build\\windows-x86-v141-xp\\Release\\syspane_network_state_tests.exe\nC:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Enterprise\\Common7\\IDE\\VC\\VCTargets\\Platforms\\Win32\\PlatformToolsets\\v141_xp\\Toolset.targets(39,5): warning MSB8051: Support for targeting Windows XP is deprecated and will not be present in future releases of Visual Studio. Please see https://go.microsoft.com/fwlink/?linkid=2023588 for more information. [D:\\Projects\\SysPane\\syspane\\out\\build\\windows-x86-v141-xp\\syspane_network_publication_tests.vcxproj]\n  syspane_network_view_tests.vcxproj -> D:\\Projects\\SysPane\\syspane\\out\\build\\windows-x86-v141-xp\\Release\\syspane_network_view_tests.exe\n  syspane_network_publication_tests.vcxproj -> D:\\Projects\\SysPane\\syspane\\out\\build\\windows-x86-v141-xp\\Release\\syspane_network_publication_tests.exe\nC:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Enterprise\\Common7\\IDE\\VC\\VCTargets\\Platforms\\Win32\\PlatformToolsets\\v141_xp\\Toolset.targets(39,5): warning MSB8051: Support for targeting Windows XP is deprecated and will not be present in future releases of Visual Studio. Please see https://go.microsoft.com/fwlink/?linkid=2023588 for more information. [D:\\Projects\\SysPane\\syspane\\out\\build\\windows-x86-v141-xp\\syspane_demand_session_tests.vcxproj]\n  syspane_demand_session_tests.vcxproj -> D:\\Projects\\SysPane\\syspane\\out\\build\\windows-x86-v141-xp\\Release\\syspane_demand_session_tests.exe\n  transaction.cpp\n  content.cpp\n  Generating Code...\n  syspane_authored.vcxproj -> D:\\Projects\\SysPane\\syspane\\out\\build\\windows-x86-v141-xp\\Release\\syspane_authored.lib\nC:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Enterprise\\Common7\\IDE\\VC\\VCTargets\\Platforms\\Win32\\PlatformToolsets\\v141_xp\\Toolset.targets(39,5): warning MSB8051: Support for targeting Windows XP is deprecated and will not be present in future releases of Visual Studio. Please see https://go.microsoft.com/fwlink/?linkid=2023588 for more information. [D:\\Projects\\SysPane\\syspane\\out\\build\\windows-x86-v141-xp\\syspane_authored_tests.vcxproj]\nC:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Enterprise\\Common7\\IDE\\VC\\VCTargets\\Platforms\\Win32\\PlatformToolsets\\v141_xp\\Toolset.targets(39,5): warning MSB8051: Support for targeting Windows XP is deprecated and will not be present in future releases of Visual Studio. Please see https://go.microsoft.com/fwlink/?linkid=2023588 for more information. [D:\\Projects\\SysPane\\syspane\\out\\build\\windows-x86-v141-xp\\syspane_async_commands.vcxproj]\n  authored_tests.cpp\n  async_commands.cpp\n  content_tests.cpp\n  syspane_async_commands.vcxproj -> D:\\Projects\\SysPane\\syspane\\out\\build\\windows-x86-v141-xp\\Release\\syspane_async_commands.lib\nC:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Enterprise\\Common7\\IDE\\VC\\VCTargets\\Platforms\\Win32\\PlatformToolsets\\v141_xp\\Toolset.targets(39,5): warning MSB8051: Support for targeting Windows XP is deprecated and will not be present in future releases of Visual Studio. Please see https://go.microsoft.com/fwlink/?linkid=2023588 for more information. [D:\\Projects\\SysPane\\syspane\\out\\build\\windows-x86-v141-xp\\syspane_command_session_tests.vcxproj]\n  command_session_tests.cpp\n  Generating Code...\n  syspane_command_session_tests.vcxproj -> D:\\Projects\\SysPane\\syspane\\out\\build\\windows-x86-v141-xp\\Release\\syspane_command_session_tests.exe\n  syspane_authored_tests.vcxproj -> D:\\Projects\\SysPane\\syspane\\out\\build\\windows-x86-v141-xp\\Release\\syspane_authored_tests.exe\nC:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Enterprise\\Common7\\IDE\\VC\\VCTargets\\Platforms\\Win32\\PlatformToolsets\\v141_xp\\Toolset.targets(39,5): warning MSB8051: Support for targeting Windows XP is deprecated and will not be present in future releases of Visual Studio. Please see https://go.microsoft.com/fwlink/?linkid=2023588 for more information. [D:\\Projects\\SysPane\\syspane\\out\\build\\windows-x86-v141-xp\\ALL_BUILD.vcxproj]\n \nAttempt: D:\\Projects\\SysPane\\syspane\\out\\campaign\\w-08-content-resolution\\windows-x86-v141-xp-build-27969531ef\n",
+    "stderr": ""
+  },
+  {
+    "step": "test",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-06T17:59:31.866658+00:00",
+    "finished_at": "2026-10-06T17:59:40.403768+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 5368709120,\n  \"checkout_out_bytes\": 1654381241,\n  \"linux_campaign_bytes\": 3371337801,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "test",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "out/campaign/content_step.py",
+      "windows-x86-v141-xp",
+      "test"
+    ],
+    "started_at": "2026-10-06T17:59:40.404391+00:00",
+    "finished_at": "2026-10-06T17:59:46.943966+00:00",
+    "exit": 0,
+    "stdout": "...............   Passed    0.03 sec\n        Start  96: demand.DEMAND-FAIRNESS\n 96/135 Test  #96: demand.DEMAND-FAIRNESS ...............   Passed    0.03 sec\n        Start  97: demand.DEMAND-PLANS\n 97/135 Test  #97: demand.DEMAND-PLANS ..................   Passed    0.03 sec\n        Start  98: demand.DEMAND-BOUNDS\n 98/135 Test  #98: demand.DEMAND-BOUNDS .................   Passed    0.02 sec\n        Start  99: demand.DEMAND-CLOCK\n 99/135 Test  #99: demand.DEMAND-CLOCK ..................   Passed    0.02 sec\n        Start 100: presentation.NVIEW-VALUES\n100/135 Test #100: presentation.NVIEW-VALUES ............   Passed    0.03 sec\n        Start 101: presentation.NVIEW-FORMAT\n101/135 Test #101: presentation.NVIEW-FORMAT ............   Passed    0.06 sec\n        Start 102: presentation.NVIEW-STATES\n102/135 Test #102: presentation.NVIEW-STATES ............   Passed    0.02 sec\n        Start 103: presentation.NVIEW-SELECTION\n103/135 Test #103: presentation.NVIEW-SELECTION .........   Passed    0.03 sec\n        Start 104: presentation.NVIEW-BOUNDS\n104/135 Test #104: presentation.NVIEW-BOUNDS ............   Passed    0.03 sec\n        Start 105: presentation.NVIEW-LIFETIME\n105/135 Test #105: presentation.NVIEW-LIFETIME ..........   Passed    0.03 sec\n        Start 106: network.PUBLICATION-VALUES\n106/135 Test #106: network.PUBLICATION-VALUES ...........   Passed    0.02 sec\n        Start 107: network.PUBLICATION-FAILURE\n107/135 Test #107: network.PUBLICATION-FAILURE ..........   Passed    0.03 sec\n        Start 108: network.PUBLICATION-BOUNDARY\n108/135 Test #108: network.PUBLICATION-BOUNDARY .........   Passed    0.02 sec\n        Start 109: network.RECONCILE-IDENTITY\n109/135 Test #109: network.RECONCILE-IDENTITY ...........   Passed    0.02 sec\n        Start 110: network.RECONCILE-CLOCK-RATE\n110/135 Test #110: network.RECONCILE-CLOCK-RATE .........   Passed    0.02 sec\n        Start 111: network.RECONCILE-CANCEL-FAILURE\n111/135 Test #111: network.RECONCILE-CANCEL-FAILURE .....   Passed    0.02 sec\n        Start 112: network.RECONCILE-CAPACITY\n112/135 Test #112: network.RECONCILE-CAPACITY ...........   Passed    0.02 sec\n        Start 113: measured.MEASURED-CODEC\n113/135 Test #113: measured.MEASURED-CODEC ..............   Passed    0.03 sec\n        Start 114: measured.MEASURED-AGE\n114/135 Test #114: measured.MEASURED-AGE ................   Passed    0.03 sec\n        Start 115: measured.MEASURED-REPLAY\n115/135 Test #115: measured.MEASURED-REPLAY .............   Passed    0.03 sec\n        Start 116: measured.MEASURED-LIFETIME\n116/135 Test #116: measured.MEASURED-LIFETIME ...........   Passed    0.03 sec\n        Start 117: measured.MEASURED-SESSION\n117/135 Test #117: measured.MEASURED-SESSION ............   Passed    0.02 sec\n        Start 118: import.IMPORT-STATE\n118/135 Test #118: import.IMPORT-STATE ..................   Passed    0.02 sec\n        Start 119: import.IMPORT-RETAIN\n119/135 Test #119: import.IMPORT-RETAIN .................   Passed    0.03 sec\n        Start 120: import.IMPORT-COVERAGE\n120/135 Test #120: import.IMPORT-COVERAGE ...............   Passed    0.03 sec\n        Start 121: import.IMPORT-REPLAY\n121/135 Test #121: import.IMPORT-REPLAY .................   Passed    0.03 sec\n        Start 122: import.IMPORT-TIME\n122/135 Test #122: import.IMPORT-TIME ...................   Passed    0.02 sec\n        Start 123: import.IMPORT-LIFETIME\n123/135 Test #123: import.IMPORT-LIFETIME ...............   Passed    0.02 sec\n        Start 124: data.VIEW-ATOMIC\n124/135 Test #124: data.VIEW-ATOMIC .....................   Passed    0.02 sec\n        Start 125: data.VIEW-REPLAY\n125/135 Test #125: data.VIEW-REPLAY .....................   Passed    0.02 sec\n        Start 126: data.VIEW-RECONNECT\n126/135 Test #126: data.VIEW-RECONNECT ..................   Passed    0.03 sec\n        Start 127: data.VIEW-LEASE\n127/135 Test #127: data.VIEW-LEASE ......................   Passed    0.02 sec\n        Start 128: data.VIEW-POLICY\n128/135 Test #128: data.VIEW-POLICY .....................   Passed    0.03 sec\n        Start 129: data.VIEW-FAULT\n129/135 Test #129: data.VIEW-FAULT ......................   Passed    0.03 sec\n        Start 130: diagnostic.DIAG-POLICY\n130/135 Test #130: diagnostic.DIAG-POLICY ...............   Passed    0.03 sec\n        Start 131: diagnostic.DIAG-PROJECTION\n131/135 Test #131: diagnostic.DIAG-PROJECTION ...........   Passed    0.03 sec\n        Start 132: diagnostic.FAILURE-CODEC\n132/135 Test #132: diagnostic.FAILURE-CODEC .............   Passed    0.03 sec\n        Start 133: diagnostic.FAILURE-INTERRUPT\n133/135 Test #133: diagnostic.FAILURE-INTERRUPT .........   Passed    0.03 sec\n        Start 134: diagnostic.FAILURE-PROJECTION\n134/135 Test #134: diagnostic.FAILURE-PROJECTION ........   Passed    0.03 sec\n        Start 135: diagnostic.PRESERVE-POLICY\n135/135 Test #135: diagnostic.PRESERVE-POLICY ...........   Passed    0.03 sec\n\n100% tests passed, 0 tests failed out of 135\n\nTotal Test time (real) =   6.06 sec\n \nAttempt: D:\\Projects\\SysPane\\syspane\\out\\campaign\\w-08-content-resolution\\windows-x86-v141-xp-test-fa6d058340\n",
+    "stderr": ""
+  }
+]

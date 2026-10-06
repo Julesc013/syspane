@@ -393,6 +393,17 @@
       "sha256": "a2ea873114a7bcd78a884382bd03133b5a9d78c5c9211dd0422cc38242b0d30c"
     },
     {
+      "id": "SP-CONTENT-RESOLUTION-HANDOFF",
+      "path": "delivery/content-resolution-handoff.md",
+      "title": "Pinned content and preset preview checkpoint",
+      "description": "Verified content identities and immutable resource snapshots for common authored previews.",
+      "requires": [
+        "SP-W08-CONTENT",
+        "SP-TRANSACTION-SUPERVISION-HANDOFF"
+      ],
+      "sha256": "35f276b3288188ca9da9d0a26629a5aec2f5467e6a33bea1183d816253760d1a"
+    },
+    {
       "id": "SP-CONTROLLER-RENDER-RECOVERY-HANDOFF",
       "path": "delivery/controller-render-recovery-handoff.md",
       "title": "Automatic recovery from independent render failure checkpoint",
@@ -410,7 +421,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "2f5d56bb324593965499cdd6eb4fda3d5119ef150ad13a00140e7e90d94b6117"
+      "sha256": "63c4d4e23e0e1865408d0b5f9912e2841d05fb69e36ca753bfc918f6114a81c7"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -1161,6 +1172,19 @@
       "sha256": "36fa1020cc5ae3afba5dfdf4cef25a3ee68eb5270c76c12d1398891c05c9a94d"
     },
     {
+      "id": "SP-W08-CONTENT",
+      "path": "delivery/packages/w-08-content-resolution.md",
+      "title": "Pinned content and preset preview",
+      "description": "Resolve immutable content bytes into a validated authored preview without granting installation or activation.",
+      "requires": [
+        "SP-PRESETS",
+        "SP-CONFIG-RESOLUTION",
+        "SP-W08-AUTHORED",
+        "SP-PERSISTENCE"
+      ],
+      "sha256": "bd9df5ee6313da4cc5af7cbef1f5c2b6cc6367fd9b33397f9b7ff98a1b6304ca"
+    },
+    {
       "id": "SP-W08-RECONCILIATION",
       "path": "delivery/packages/w-08-reconciliation.md",
       "title": "Committed request reconciliation across producer epochs",
@@ -1807,7 +1831,7 @@
         "SP-SETTINGS",
         "SP-COMMANDS"
       ],
-      "sha256": "614c16104c181a03b4857c205b632ce69b98e0ffe1ded1d10631b7aeefde33cc"
+      "sha256": "846518b19fa3d5dffbd96e0b5085e2450c15e4dc4376ece54fd143658374bd65"
     },
     {
       "id": "SP-CONTROL",
@@ -1851,7 +1875,7 @@
         "SP-CONFIG-RESOLUTION",
         "SP-SDK"
       ],
-      "sha256": "eae803bd91344161b95573694141988894a773899e7b7d6b281dc9b502c4349a"
+      "sha256": "a99840ba22b0c6803ce1514e9e839642f97c286d9beaa4b0bcd459a4be0a11b1"
     },
     {
       "id": "SP-BINDINGS",

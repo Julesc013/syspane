@@ -25,6 +25,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Authenticated session demand ownership](w-07-session-demand.md) — Bind controller-selected acquisition requests to authoritative session lifetimes without changing existing wire documents.
 - [Authored scene transactions and generation recovery](w-08-authored-transactions.md) — Implement coherent settings and scene replacement with explicit stored, durable and activation facts.
 - [Asynchronous authored command sessions](w-08-command-sessions.md) — Join authenticated sessions to one bounded transaction owner without blocking control traffic.
+- [Pinned content and preset preview](w-08-content-resolution.md) — Resolve immutable content bytes into a validated authored preview without granting installation or activation.
 - [Committed request reconciliation across producer epochs](w-08-reconciliation.md) — Recover durable outcomes through authenticated read-only IPC without resubmitting mutations.
 - [Independent transaction deadlines and controller recovery](w-08-supervised-transactions.md) — Bound uncooperative transaction work without killing threads or replaying uncertain mutations.
 - [W-24 authenticated transport and policy boundary](w-24-transport.md) — Close the initial local protocol, admission and preview boundary before native integration.

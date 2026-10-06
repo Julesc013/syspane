@@ -1449,13 +1449,15 @@
       "public_interfaces": [
         "source/configuration/authored.hpp",
         "source/configuration/transaction.hpp",
-        "source/configuration/digest.hpp"
+        "source/configuration/digest.hpp",
+        "source/configuration/content.hpp"
       ],
       "private_interfaces": [],
       "sources": [
         "source/configuration/authored.cpp",
         "source/configuration/transaction.cpp",
-        "source/configuration/digest.cpp"
+        "source/configuration/digest.cpp",
+        "source/configuration/content.cpp"
       ],
       "allowed_dependencies": [
         "syspane_configuration"
@@ -1481,7 +1483,8 @@
       "public_interfaces": [],
       "private_interfaces": [],
       "sources": [
-        "tests/configuration/authored_tests.cpp"
+        "tests/configuration/authored_tests.cpp",
+        "tests/configuration/content_tests.cpp"
       ],
       "allowed_dependencies": [
         "syspane_authored"
@@ -1624,6 +1627,56 @@
         "syspane_child",
         "syspane_health",
         "syspane_recovery"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
+    },
+    {
+      "id": "content-reader",
+      "target": "syspane_content_reader",
+      "type": "STATIC_LIBRARY",
+      "source_owner": "source/platform/",
+      "sources": [
+        "source/platform/content_reader_linux.cpp"
+      ],
+      "public_interfaces": [
+        "source/platform/content_reader_linux.hpp"
+      ],
+      "private_interfaces": [],
+      "allowed_dependencies": [
+        "syspane_authored"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
+    },
+    {
+      "id": "content-probe",
+      "target": "syspane_content_probe",
+      "type": "EXECUTABLE",
+      "source_owner": "source/application/",
+      "sources": [
+        "source/application/content_probe.cpp"
+      ],
+      "public_interfaces": [],
+      "private_interfaces": [],
+      "allowed_dependencies": [
+        "syspane_content_reader"
       ],
       "target_requirements": [
         "cxx17"

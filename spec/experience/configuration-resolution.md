@@ -17,6 +17,11 @@ updated: {"by": "codex", "at": "2026-10-04T19:32:52+11:00", "scope": "October au
 
 # Configuration resolution and provenance
 
+The first executable [preset preview](../delivery/packages/w-08-content-resolution.md)
+materializes pinned parent settings and a selected scene/theme through command 0.2.
+It preserves source bytes and winning setting origins. Persistent layers, reset,
+tombstones and three-way updates below remain distinct implementation gates.
+
 
 ## Resolution order
 

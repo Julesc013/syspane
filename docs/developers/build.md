@@ -1,5 +1,27 @@
 # Developer setup and checks
 
+The [content resolution package](../../spec/delivery/packages/w-08-content-resolution.md)
+adds `ContentCatalog` to the authored configuration component. Supply exact package
+and document pins, an immutable baseline, authenticated role, current policy and
+trusted available capabilities. `preview` returns the command, candidate, original
+package bytes, theme, provenance and missing optional capabilities. It performs no
+publication or activation. Runtime schema validation reuses the compiled closure.
+
+After normal workspace preflight/configure/build, run `ctest --preset <profile> -R
+'^configuration[.]CONTENT-' --output-on-failure`. Linux also runs `ctest --preset
+linux-x64-gcc13 -R '^native[.]CONTENT-READER$' --output-on-failure` with the existing
+native-cache environment. The oracle creates private package directories and checks
+hashes and complete output independently. Reports use `native-evidence/content-*`.
+
+The finite `SysPane.ContentProbe <preview|snapshot|denied> <package-dir>...` accepts
+one JSON line with `settings`, `scene`, `package` pin and `preset` pin on stdin.
+It uses explicit laboratory console authority, policy generation 7 and the
+`scene.selector` capability. Snapshot mode emits `{"ready":true}` after reading,
+before consuming stdin; tests change the files then prove copied bytes survive.
+Denied mode blocks settings previews. These controls do not supply installed policy
+or an import UI. The current generation store cannot publish external resource
+closures yet; do not turn this plan into a product commit by changing its intent.
+
 The [transaction supervision checkpoint](../../spec/delivery/transaction-supervision-handoff.md)
 adds `TransactionWatch` in the common recovery component and an opt-in controller
 HealthLink profile. A started/armed handshake precedes worker dispatch; finished
