@@ -1,0 +1,38 @@
+[
+  {
+    "phase": "preflight",
+    "step": "package",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "package"
+    ],
+    "started_at": "2026-10-06T06:53:54.573997+00:00",
+    "finished_at": "2026-10-06T06:53:55.226464+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"package\",\n  \"maximum_bytes\": 4294967296,\n  \"checkout_out_bytes\": 1058225389,\n  \"linux_campaign_bytes\": 2378956724,\n  \"reserved_growth_bytes\": 33554432,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "phase": "package",
+    "step": "package",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/package_smoke.py",
+      "--profile",
+      "windows-x64-gcc15",
+      "--build-dir",
+      "out/build/windows-x64-gcc15"
+    ],
+    "started_at": "2026-10-06T06:53:55.226936+00:00",
+    "finished_at": "2026-10-06T06:53:56.267322+00:00",
+    "exit": 0,
+    "stdout": "{\"status\": \"pass\", \"result\": \"out\\\\campaign\\\\windows-x64-gcc15\\\\smoke-mn7te3uk\\\\result.json\", \"archive_sha256\": \"ddb6906f169b6a24dbb50d118224a570a6ed04ec30e15473deeb5ff033a623dc\"}\n",
+    "stderr": ""
+  }
+]

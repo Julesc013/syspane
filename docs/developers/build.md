@@ -736,3 +736,26 @@ source archives and hashes/references to those private files. The relay uses the
 existing short native IPC root because the isolated GNOME HOME exceeds Unix socket
 path limits. Native owner/queue/clock and release limitations are in the
 [checkpoint](../../spec/delivery/native-network-cache-handoff.md).
+
+
+The [standalone GJS clock boundary](../../spec/delivery/packages/w-25-gjs-clock.md)
+adds a Linux development shared library and `SysPaneClock-0.1.typelib`. Ordinary
+configure/build verifies the installed GI compiler and GObject identities offline.
+`native.GJS-CLOCK` requires the already prepared, pinned GNOME extraction; it runs
+standalone GJS with no display or user bus. Run it after the Windows test preflight:
+
+```sh
+SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498 \
+  ctest --preset linux-x64-gcc13 -R '^native.GJS-CLOCK$' --output-on-failure
+```
+
+The observer retains both child process handles and checks exact BOOTTIME causal
+brackets, rejected descriptors, 64 close cycles and native peer-exit failure.
+`record_protocol.py --gjs-clock --profile linux-x64-gcc13 --build-dir <owned-build>
+--output <record>` requires the complete current suite and checks the bound native
+clock observations, sources and artifacts. The module has no installed product
+payload; importing it does not authorize a producer or establish remote freshness.
+Shell code must connect asynchronously and bind current policy before future use.
+Existing desktop evidence keeps its original collector/source identity. Rebuilds
+require an explicitly refreshed evidence binding before the retained-cache laboratory
+can admit a changed collector; never bypass its fingerprint check.

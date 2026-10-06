@@ -136,6 +136,24 @@ target_include_directories(syspane_health PUBLIC "${CMAKE_SOURCE_DIR}/source/dia
 target_link_libraries(syspane_health PUBLIC syspane_protocol syspane_local_ipc)
 add_library(syspane_local_ipc STATIC source/platform/local_ipc_linux.cpp source/platform/local_ipc_windows.cpp)
 target_include_directories(syspane_local_ipc PUBLIC "${CMAKE_SOURCE_DIR}/source/platform")
+if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+    set_target_properties(syspane_local_ipc PROPERTIES POSITION_INDEPENDENT_CODE ON)
+    pkg_check_modules(GOBJECT REQUIRED IMPORTED_TARGET gobject-2.0=2.80.0)
+    find_program(SYSPANE_GI_COMPILER gi-compile-repository REQUIRED)
+    execute_process(COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/build-support/check_gjs_clock_dependencies.py"
+        RESULT_VARIABLE clock_dependency_result)
+    if(NOT clock_dependency_result EQUAL 0)
+        message(FATAL_ERROR "Native GJS clock dependencies differ from the pinned profile")
+    endif()
+    add_library(syspane_gjs_clock SHARED source/desktop/gnome/native_clock.cpp)
+    target_link_libraries(syspane_gjs_clock PRIVATE syspane_local_ipc PkgConfig::GOBJECT)
+    add_custom_command(OUTPUT "${CMAKE_BINARY_DIR}/SysPaneClock-0.1.typelib"
+        COMMAND "${SYSPANE_GI_COMPILER}" --includedir=/usr/lib/x86_64-linux-gnu/gir-1.0
+            "--output=${CMAKE_BINARY_DIR}/SysPaneClock-0.1.typelib"
+            "${CMAKE_SOURCE_DIR}/source/desktop/gnome/SysPaneClock-0.1.gir"
+        DEPENDS source/desktop/gnome/SysPaneClock-0.1.gir VERBATIM)
+    add_custom_target(syspane_gjs_clock_typelib ALL DEPENDS "${CMAKE_BINARY_DIR}/SysPaneClock-0.1.typelib")
+endif()
 if(WIN32)
     target_link_libraries(syspane_local_ipc PRIVATE advapi32 mincore)
 endif()
@@ -159,6 +177,9 @@ endif()
 include(CTest)
 if(BUILD_TESTING)
     if(NOT WIN32)
+        add_test(NAME native.GJS-CLOCK COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/desktop/native_gjs_clock.py"
+            "${CMAKE_BINARY_DIR}")
+        set_tests_properties(native.GJS-CLOCK PROPERTIES TIMEOUT 45)
         find_package(X11 REQUIRED)
         add_library(syspane_x11_candidate STATIC source/desktop/x11/desktop_candidate.cpp)
         target_link_libraries(syspane_x11_candidate PRIVATE X11::X11 X11::Xext)
@@ -303,6 +324,7 @@ if(BUILD_TESTING)
 endif()
 
 set(component_targets syspane_model syspane_model_smoke syspane_json syspane_protocol syspane_configuration syspane_local_ipc syspane_ipc_probe syspane_recovery syspane_child syspane_health syspane_recovery_probe syspane_diagnostic syspane_machine_policy syspane_diagnostic_inspector syspane_diag)
+list(APPEND component_targets syspane_gjs_clock)
 list(APPEND component_targets syspane_network syspane_network_probe syspane_network_netlink_tests syspane_network_contract syspane_network_state syspane_network_state_tests)
 list(APPEND component_targets syspane_network_publication syspane_network_publication_tests syspane_collector_probe)
 list(APPEND component_targets syspane_data_view syspane_network_view syspane_network_view_tests)

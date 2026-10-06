@@ -45,7 +45,12 @@ def main():
     parser.add_argument('--network-reconciliation', action='store_true', help='Require portable network lifetimes and Linux watched acquisition')
     parser.add_argument('--network-publication', action='store_true', help='Require network projection and Linux supervised real collection')
     parser.add_argument('--network-presentation', action='store_true', help='Require selected measured network renderer projection and prior regressions')
+    parser.add_argument('--gjs-clock', action='store_true', help='Require standalone Linux native GJS clock and all prior regressions')
     args = parser.parse_args()
+    if args.gjs_clock:
+        if platform.system() != 'Linux':
+            raise ValueError('GJS clock qualification requires the Linux laboratory')
+        args.network_presentation = True
     if args.network_presentation:
         args.network_publication = True
     if args.network_publication:
@@ -131,6 +136,8 @@ def main():
             expected.add('native.NATIVE-COLLECTOR')
     if args.network_presentation:
         expected |= {'presentation.NVIEW-'+case for case in ('VALUES','FORMAT','STATES','SELECTION','BOUNDS','LIFETIME')}
+    if args.gjs_clock:
+        expected.add('native.GJS-CLOCK')
     if len(cases) != len(expected) or {case['case'] for case in cases} != expected or any(case['outcome'] != 'pass' for case in cases):
         raise ValueError('missing, repeated, unexpected or failing case; preserve log before rerun')
     suffix = '.exe' if platform.system() == 'Windows' else ''
@@ -140,6 +147,9 @@ def main():
         for name in ('syspane_network_view_tests'+suffix, 'libsyspane_network_view.a'):
             artifacts[name] = {'sha256': sha(build/name), 'bytes': (build/name).stat().st_size}
     native_records = []
+    if args.gjs_clock:
+        for name in ('libsyspane_gjs_clock.so', 'SysPaneClock-0.1.typelib'):
+            artifacts[name] = {'sha256': sha(build/name), 'bytes': (build/name).stat().st_size}
     if args.network_publication:
         for name in ('syspane_network_publication_tests'+suffix, 'libsyspane_network_publication.a'):
             artifacts[name] = {'sha256': sha(build/name), 'bytes': (build/name).stat().st_size}
@@ -213,6 +223,8 @@ def main():
                 required['NATIVE-NETWORK'].add('NETWORK-WATCH')
         if args.network_publication and not suffix:
             required['NATIVE-COLLECTOR'] = {'LIVE', 'FAILURE', 'REPLAY', 'HANG', 'CRASH', 'UNSUBSCRIBE', 'REVOKE', 'PARENT-LOSS'}
+        if args.gjs_clock:
+            required['GJS-CLOCK'] = {'ROUNDTRIP', 'REJECT', 'CLOSE', 'PEER-EXIT'}
         if args.preservation:
             for name in ('syspane_preservation_tests'+suffix, 'libsyspane_preservation_job.a'):
                 artifacts[name] = {'sha256': sha(build/name), 'bytes': (build/name).stat().st_size}
@@ -244,6 +256,30 @@ def main():
                     raise ValueError('Windows reparse case must execute or retain its exact privilege limitation')
             if native['outcome'] != 'pass' or len(native['cases']) != len(expected_cases) or {case['case'] for case in native['cases']} != expected_cases or any(case['outcome'] != 'pass' for case in native['cases']):
                 raise ValueError('native case missing or failed; preserve original report')
+            if family == 'GJS-CLOCK':
+                for source, digest in native['source_inputs'].items():
+                    if sha(ROOT/source) != digest:
+                        raise ValueError('GJS clock source changed after native run: '+source)
+                for artifact, digest in {**native['artifacts'], **native['build_dependencies']}.items():
+                    if sha(Path(artifact)) != digest:
+                        raise ValueError('GJS clock artifact/dependency changed after run')
+                if len(native['processes']) != 2 or any(p['exit'] != 0 or p['forced_cleanup'] or p['stderr'] or p['remaining_stdout'] for p in native['processes']):
+                    raise ValueError('GJS clock native process completion differs')
+                rows = {case['case'].split('.')[1]: case for case in native['cases']}
+                brackets = rows['ROUNDTRIP']['brackets_ns']
+                if len(brackets) != 16 or any(len(b) != 3 or any(v != str(int(v)) for v in b) or not 0 <= int(b[0]) <= int(b[1]) <= int(b[2]) <= 2**64-1 for b in brackets):
+                    raise ValueError('GJS clock causal bracket differs')
+                if any(int(a[1]) > int(b[1]) for a, b in zip(brackets, brackets[1:])):
+                    raise ValueError('GJS clock sample regressed')
+                if rows['REJECT']['observation'] != {'event':'ready','codes':['peer.handle','peer.process','peer.process']+['peer.socket']*5+['clock.closed']} or not rows['REJECT']['borrowed_flags_unchanged']:
+                    raise ValueError('GJS clock invalid-input rejection differs')
+                exited = rows['PEER-EXIT']
+                if exited['native_pid'] != native['processes'][0]['pid'] or exited['native_exit'] != 0 or not exited['pidfd_exit'] or exited['observation'] != {'event':'peer-exit','codes':['clock.peer_exited','clock.unavailable']}:
+                    raise ValueError('GJS clock held-peer exit differs')
+                closed = rows['CLOSE']
+                before, after = closed['baseline_descriptors'], closed['after_close_descriptors']
+                if closed['cycles'] != 64 or not set(after) < set(before) or len(before)-len(after) != 4 or any(before[fd] != value for fd, value in after.items()):
+                    raise ValueError('GJS clock descriptor cleanup differs')
             if family in ('RECOVERY-01', 'DIAG-01', 'ORACLE-01', 'FAILURE-STORE', 'PRESERVE', 'NATIVE-SUB', 'NATIVE-CLOCK', 'NATIVE-MEASURED', 'NATIVE-NETWORK', 'NATIVE-COLLECTOR'):
                 executable = {'RECOVERY-01':'SysPane.RecoveryProbe'+suffix, 'DIAG-01':'SysPane.Diag.exe' if suffix else 'syspane-diag', 'ORACLE-01':'SysPane.OracleProbe', 'FAILURE-STORE':'syspane_failure_store_tests'+suffix, 'PRESERVE':'syspane_preservation_tests'+suffix, 'NATIVE-SUB':'SysPane.TelemetryProbe'+suffix, 'NATIVE-CLOCK':'SysPane.TelemetryProbe'+suffix, 'NATIVE-MEASURED':'SysPane.TelemetryProbe'+suffix, 'NATIVE-NETWORK':'SysPane.NetworkProbe'+suffix, 'NATIVE-COLLECTOR':'SysPane.CollectorProbe'}[family]
                 if family == 'PRESERVE' and native['diagnostic_sha256'] != sha(build/('SysPane.Diag.exe' if suffix else 'syspane-diag')):
@@ -336,6 +372,8 @@ def main():
         paths.extend([ROOT/'spec/delivery/packages/w-25-network-publication.md', ROOT/'spec/telemetry/metrics.json'])
     if args.network_presentation:
         paths.append(ROOT/'spec/delivery/packages/w-25-network-presentation.md')
+    if args.gjs_clock:
+        paths.append(ROOT/'spec/delivery/packages/w-25-gjs-clock.md')
     for directory in ('source', 'tests', 'build-support', 'spec/contracts'):
         paths.extend(sorted((ROOT/directory).rglob('*')))
     inputs = {p.relative_to(ROOT).as_posix(): sha(p) for p in paths
@@ -506,6 +544,10 @@ def main():
         report['slice'] = 'shared selected measured network renderer projection with current-policy borrowing'
         report['bindings']['network_presentation'] = 'spec/delivery/packages/w-25-network-presentation.md'
         report['limits'][0] = 'Exact selection, status axes, TTL, deterministic binary64 formatting and atomic no-payload outcomes are portable. Native visible delivery/cache erasure, protected policy and complete desktop qualification remain open.'
+    if args.gjs_clock:
+        report['slice'] = 'standalone native GJS measurement clock with authenticated socket ownership'
+        report['bindings']['gjs_clock'] = 'spec/delivery/packages/w-25-gjs-clock.md'
+        report['limits'][0] = 'Standalone GJS exact clock strings, native causal brackets, rejection, explicit cleanup and held-peer exit pass. Shell connection, live displayed age/expiry, suspend and namespace-change qualification remain open.'
     args.output.parent.mkdir(parents=True, exist_ok=True)
     log_output.write_text(raw.replace(str(build), '<build>').replace(str(ROOT), '<source>'), encoding='utf-8', newline='\n')
     args.output.write_text(json.dumps(report, indent=2)+'\n', encoding='utf-8', newline='\n')

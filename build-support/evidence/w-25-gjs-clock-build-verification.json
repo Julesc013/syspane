@@ -1,0 +1,60 @@
+[
+  {
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/record_protocol.py",
+      "--network-presentation",
+      "--profile",
+      "windows-x64-gcc15",
+      "--build-dir",
+      "out/build/windows-x64-gcc15",
+      "--output",
+      "build-support/evidence/w-25-gjs-clock-windows-x64-gcc15.json"
+    ],
+    "exit": 0,
+    "stdout": "{\"profile\": \"windows-x64-gcc15\", \"cases\": 102, \"outcome\": \"pass\", \"native_ipc\": \"executed\", \"recovery\": \"native_supervision\"}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "build-support/record_protocol.py",
+      "--gjs-clock",
+      "--profile",
+      "linux-x64-gcc13",
+      "--build-dir",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13",
+      "--output",
+      "build-support/evidence/w-25-gjs-clock-linux-x64-gcc13.json"
+    ],
+    "exit": 0,
+    "stdout": "{\"profile\": \"linux-x64-gcc13\", \"cases\": 108, \"outcome\": \"pass\", \"native_ipc\": \"executed\", \"recovery\": \"native_supervision\"}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/record_legacy_build.py",
+      "--network-presentation",
+      "--build-dir",
+      "out/build/windows-x86-v141-xp",
+      "--smoke-result",
+      "out/campaign/windows-x86-v141-xp/smoke-a0y9c3co/result.json",
+      "--output",
+      "build-support/evidence/w-25-gjs-clock-windows-x86-v141-xp.json"
+    ],
+    "exit": 0,
+    "stdout": "Historical-toolset evidence recorded: 94 host checks; no guest qualification\n",
+    "stderr": ""
+  }
+]

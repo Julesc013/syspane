@@ -23,6 +23,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [W-24 authenticated transport and policy boundary](w-24-transport.md) — Close the initial local protocol, admission and preview boundary before native integration.
 - [W-25 synchronized model view and policy lifetime](w-25-data-view.md) — Join model validation, producer leases and revocable presentation without enabling an unspecified wire subscription.
 - [W-25 bounded recent-failure metadata](w-25-failure-metadata.md) — Connect recorded failures to independent diagnosis without treating a local file as live health or policy authority.
+- [W-25 native GJS measurement-clock boundary](w-25-gjs-clock.md) — Expose the existing authenticated Linux clock through a bounded native object before enabling renderer freshness.
 - [W-25 independent native surface producer lease](w-25-gnome-surface-lease.md) — Observe producer expiry, disconnect, retained pixels and new-epoch resynchronization on the owned GNOME surface.
 - [W-25 measured telemetry and consumer freshness](w-25-measured-time.md) — Version measurement time and bind received values to a qualified consumer clock without refreshing replayed data.
 - [W-25 native measurement-clock investigation](w-25-measurement-clock.md) — Test a shared native time domain across authenticated local processes before admitting measured telemetry.

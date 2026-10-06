@@ -1210,6 +1210,36 @@
         "linux-x64-gcc13",
         "windows-x86-v141-xp"
       ]
+    },
+    {
+      "id": "gjs-clock",
+      "target": "syspane_gjs_clock",
+      "type": "SHARED_LIBRARY",
+      "source_owner": "source/desktop/gnome/",
+      "public_interfaces": [
+        "source/desktop/gnome/native_clock.hpp",
+        "source/desktop/gnome/SysPaneClock-0.1.gir"
+      ],
+      "private_interfaces": [],
+      "sources": [
+        "source/desktop/gnome/native_clock.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_local_ipc",
+        "PkgConfig::GOBJECT"
+      ],
+      "target_requirements": [
+        "cxx17",
+        "native_local_ipc",
+        "gobject-2.80"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
     }
   ]
 }

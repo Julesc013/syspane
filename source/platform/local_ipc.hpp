@@ -37,6 +37,11 @@ public:
     Stream(const Stream&) = delete;
     Stream& operator=(const Stream&) = delete;
     static Stream connect(const std::string& endpoint, std::uint64_t expected_process = 0);
+#if defined(__linux__)
+    // Borrow a caller-authorized, connected nonblocking AF_UNIX stream. Duplicate
+    // it and authenticate the native peer; never alter or close the input FD.
+    static Stream from_connected_socket(int fd, std::uint64_t expected_process);
+#endif
     Read read(char* buffer, std::size_t capacity, unsigned wait_ms = 100);
     void write(std::string_view bytes, unsigned wait_ms = 5000);
     const Peer& peer() const;

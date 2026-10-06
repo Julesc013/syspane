@@ -308,6 +308,12 @@ wrong-value and ignored-clear controls fail acceptance. The tile explicitly reta
 samples with unknown age. Live native clock/freshness, product controller/policy and
 renderer watchdogs remain open. Private operational evidence is not committed.
 
+The [standalone native GJS clock](gjs-clock-handoff.md) now reuses the existing
+authenticated Linux clock through an introspected object. Exact decimal strings,
+causal brackets, invalid-socket rejection, explicit resource release and held-peer
+exit pass in standalone GJS. The desktop retained cache is unchanged; asynchronous
+shell attachment and visible age progression/expiry remain required.
+
 Canonical 0.2.0 documentation bundle, unchanged 0.1 authoring profile, preserved old
 fixtures, new experimental scene/command/capability 0.2 and admission descriptors.
 The initial settings registry has enforced metadata/default consistency and generated
@@ -370,7 +376,8 @@ real Linux acquisition, source lifetimes and measured receipt under independent
 child supervision. The native surface demonstrates retained public-marker recovery,
 and the shared projection now closes measured values and status semantics.
 The explicit retained cache now proves bounded native admission and policy/owner-loss
-erasure with real value pixels. Qualify its live clock/age progression and independent
+erasure with real value pixels. Integrate the standalone qualified native clock and
+prove displayed age progression plus independent
 lease faults, then connect product controller policy/demand, general delivery queues
 and renderer supervision.
 Actual native topology faults and Windows full-table notification

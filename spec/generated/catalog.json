@@ -357,7 +357,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "68bfafc05fe69e52eb86446bc44286dd26bf7c3ada0605c662c690b3a42d9710"
+      "sha256": "59b9fe178a46620a1fb25e2a00689bf30a72dfa05f548c784d302dd84236c5ea"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -402,6 +402,16 @@
         "SP-W26-PACKAGE"
       ],
       "sha256": "a2652a69852d9eaeb38751adcd62547443df6b0ed0d5cc54e4f5b07d5b968c2b"
+    },
+    {
+      "id": "SP-GJS-CLOCK-HANDOFF",
+      "path": "delivery/gjs-clock-handoff.md",
+      "title": "Standalone native GJS measurement-clock checkpoint",
+      "description": "Exact native clock strings, authenticated peer lifetime and deterministic resource cleanup before live desktop freshness.",
+      "requires": [
+        "SP-W25-GJS-CLOCK"
+      ],
+      "sha256": "dc600da7608d0013efb656f0fab5160dd4b039f220165d0b849ac4ad3536dfc5"
     },
     {
       "id": "SP-GNOME-COMPOSITION-HANDOFF",
@@ -963,6 +973,17 @@
         "SP-POLICY"
       ],
       "sha256": "16754f609c01c4da6dbcdbaea9dd05c300e1e64a09a35bc88b01d23af3f5b28c"
+    },
+    {
+      "id": "SP-W25-GJS-CLOCK",
+      "path": "delivery/packages/w-25-gjs-clock.md",
+      "title": "W-25 native GJS measurement-clock boundary",
+      "description": "Expose the existing authenticated Linux clock through a bounded native object before enabling renderer freshness.",
+      "requires": [
+        "SP-W25-MEASUREMENT-CLOCK",
+        "SP-W25-NATIVE-NETWORK-CACHE"
+      ],
+      "sha256": "f38e9efa86cd8ef27535e85bf8e2baabe0f4261ff739bc7be5c660ff44c35b8a"
     },
     {
       "id": "SP-W25-GNOME-SURFACE-LEASE",

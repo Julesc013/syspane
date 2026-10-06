@@ -1,0 +1,78 @@
+[
+  {
+    "phase": "preflight",
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-06T06:48:52.304985+00:00",
+    "finished_at": "2026-10-06T06:48:57.720884+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 4294967296,\n  \"checkout_out_bytes\": 1046144688,\n  \"linux_campaign_bytes\": 2375485550,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "phase": "build",
+    "step": "build",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "out/campaign/run_gjs_clock_step.py",
+      "linux-x64-gcc13",
+      "build"
+    ],
+    "started_at": "2026-10-06T06:48:57.721272+00:00",
+    "finished_at": "2026-10-06T06:49:07.114060+00:00",
+    "exit": 0,
+    "stdout": "[0/1] Re-running CMake...\nprofile verified: linux-x64-gcc13\nvendored dependency digests: pass\ndiagnostic toolkit verified: GTK 3.24.41 / Ubuntu 3.24.41-4ubuntu1.3\nnative GJS clock build dependencies verified\n-- Configuring done (5.4s)\n-- Generating done (0.0s)\n-- Build files have been written to: /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n[1/3] Generating SysPaneClock-0.1.typelib\n[2/3] Linking CXX executable SysPane.RecoveryProbe\n[3/3] Linking CXX executable SysPane.TelemetryProbe\n\n\nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-25-gjs-clock/linux-x64-gcc13-build-867f634322\n",
+    "stderr": ""
+  },
+  {
+    "phase": "preflight",
+    "step": "focus",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-06T06:49:07.114446+00:00",
+    "finished_at": "2026-10-06T06:49:07.526384+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 4294967296,\n  \"checkout_out_bytes\": 1046994341,\n  \"linux_campaign_bytes\": 2375491507,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "phase": "focus",
+    "step": "focus",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "out/campaign/run_gjs_clock_step.py",
+      "linux-x64-gcc13",
+      "focus"
+    ],
+    "started_at": "2026-10-06T06:49:07.526661+00:00",
+    "finished_at": "2026-10-06T06:49:42.646042+00:00",
+    "exit": 8,
+    "stdout": "Test project /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n    Start  1: native.GJS-CLOCK\n1/6 Test  #1: native.GJS-CLOCK .................***Failed    0.16 sec\nTraceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/desktop/native_gjs_clock.py\", line 191, in <module>\n    main()\n  File \"/mnt/d/Projects/SysPane/syspane/tests/desktop/native_gjs_clock.py\", line 66, in main\n    build = owned_build(sys.argv[1])\n            ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/build-support/prepare_gnome_lab.py\", line 28, in owned_build\n    build = path.resolve(strict=True)\n            ^^^^^^^^^^^^\nAttributeError: 'str' object has no attribute 'resolve'\n\n    Start 20: composition.graph\n2/6 Test #20: composition.graph ................   Passed    0.06 sec\n    Start 21: composition.reject_forbidden\n3/6 Test #21: composition.reject_forbidden .....   Passed    0.12 sec\n    Start 54: native.NATIVE-CLOCK\n4/6 Test #54: native.NATIVE-CLOCK ..............   Passed    0.33 sec\n    Start 56: native.NATIVE-01\n5/6 Test #56: native.NATIVE-01 .................   Passed   25.67 sec\n    Start 57: native.NATIVE-02\n6/6 Test #57: native.NATIVE-02 .................   Passed    3.87 sec\n\n83% tests passed, 1 tests failed out of 6\n\nTotal Test time (real) =  30.22 sec\n\nThe following tests FAILED:\n\t  1 - native.GJS-CLOCK (Failed)\n\nErrors while running CTest\n\nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-25-gjs-clock/linux-x64-gcc13-focus-dfedb6896e\n",
+    "stderr": ""
+  }
+]

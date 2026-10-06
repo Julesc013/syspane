@@ -209,6 +209,23 @@ Stream Stream::connect(const std::string& endpoint, std::uint64_t expected) {
     }
     return Stream(std::make_unique<Impl>(std::move(fd), expected));
 }
+Stream Stream::from_connected_socket(int borrowed, std::uint64_t expected) {
+    if (!unprivileged_context()) throw IpcError("peer.context");
+    if (!expected) throw IpcError("peer.process");
+    Fd fd(::fcntl(borrowed, F_DUPFD_CLOEXEC, 0));
+    if (fd.value < 0) throw IpcError("peer.handle");
+    int type = 0;
+    socklen_t size = sizeof(type);
+    sockaddr_storage address{};
+    socklen_t address_size = sizeof(address);
+    const auto flags = ::fcntl(fd.value, F_GETFL);
+    if (::getsockopt(fd.value, SOL_SOCKET, SO_TYPE, &type, &size) ||
+        size != sizeof(type) || type != SOCK_STREAM ||
+        ::getpeername(fd.value, reinterpret_cast<sockaddr*>(&address), &address_size) ||
+        address.ss_family != AF_UNIX || flags < 0 || !(flags & O_NONBLOCK))
+        throw IpcError("peer.socket");
+    return Stream(std::make_unique<Impl>(std::move(fd), expected));
+}
 Read Stream::read(char* buffer, std::size_t capacity, unsigned timeout) {
     check_timeout(timeout);
     if (!buffer || capacity == 0 || capacity > max_io) throw IpcError("io.limit");
