@@ -42,7 +42,7 @@ the distribution's default root identity is not needed for building.
 
 The initial allocation was 1 GiB. The subscription checkpoint measured 1,108,437,093
 bytes after expanding all three debug/toolset builds; that overrun is preserved,
-not described as compliance with the old ceiling. The current allocation is 2 GiB
+not described as compliance with the old ceiling. That checkpoint raised the allocation to 2 GiB
 combined, recorded in `build-support/campaign-workspace.json`. This is a reversible
 development-workspace allocation within the admitted campaign, not a product memory
 limit or relaxed acceptance condition. The checkout drive had 68,639,891,456 free
@@ -53,6 +53,14 @@ Before each build, test or package launch, run the Windows coordinator
 one action selected. It reserves respectively 256, 64 or 32 MiB of growth under
 the combined ceiling; inspect again afterward. Stop on a failed check and preserve
 it before archiving verified owned outputs or explicitly revising the allocation.
+The GNOME investigation raises the owned development allocation to 3 GiB. Its
+196-package runtime snapshot requires 123,909,062 archive bytes and 345,080,832
+declared extracted bytes. Combined with 1,586,274,144 existing owned bytes, the old
+2 GiB allocation would leave inadequate room for repeated preserved attempts and
+the normal build reservation. The checkout drive has 63.54 GiB free and the native
+Linux filesystem more than 1 TB free. This is a measured reversible workspace
+decision; no product resource or acceptance budget changes.
+
 This is a preflight reservation, not an OS quota; a new package whose predicted
 growth exceeds the reservation needs a measured allocation decision before launch.
 

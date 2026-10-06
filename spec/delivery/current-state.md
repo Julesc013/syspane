@@ -166,6 +166,13 @@ Color and delayed-image profiles preserve wallpaper and capture coverage. All
 candidates still fail visible recovery/placement. Native process ownership, including
 reused XIDs, is independently bound through X-Resource and held exit proof.
 
+The [GNOME marker checkpoint](gnome-marker-handoff.md) now boots pinned GNOME 46
+on an owned Xvfb display and paints a trusted shell bridge in its background group.
+Independent captures pass all three live generations; hidden/frozen controls fail
+as required. Nine evidence checks pass and original preparation/bootstrap failures
+are preserved with source archives. DING is pinned but not enabled; no icon
+composition, reveal/input, native GPU/Wayland or product host claim follows.
+
 Canonical 0.2.0 documentation bundle, unchanged 0.1 authoring profile, preserved old
 fixtures, new experimental scene/command/capability 0.2 and admission descriptors.
 The initial settings registry has enforced metadata/default consistency and generated
@@ -202,9 +209,11 @@ License, contribution and release-identity decisions remain open.
 
 ## Next work
 
-Continue the admitted campaign: use W-02's measured X11 reveal/input/image adapters
-to investigate conforming composition, and close the other platform capture/reveal
-boundaries in admitted synthetic desktops. W-04 has build artifacts ready for
+Continue the admitted campaign: use the working GNOME bridge and unchanged external
+oracle to calibrate a separate marker/icon-overlap fixture, then enable the pinned
+icon manager and measure actual composition, reveal/input and recovery. Keep the
+earlier X11 failures. Close other platform capture/reveal boundaries in admitted
+synthetic desktops. W-04 has build artifacts ready for
 historical guest execution once guest test scope and usability are established.
 W-05 needs a composition strategy that actually preserves icon pixels; its initial
 EWMH window stacking candidates fail that requirement even after the observed

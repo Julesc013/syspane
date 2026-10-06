@@ -314,6 +314,30 @@ Use the same recorder, then run
 `python3 tests/desktop/test_x11_recovery_record.py <build> <exact-restart-report> -v`
 for nine independent evidence checks. See the [recovery checkpoint](../../spec/delivery/x11-recovery-handoff.md).
 
+The optional GNOME laboratory extracts a pinned runtime into the owned Linux build;
+it performs no package installation or service activation. Run the workspace budget
+preflight before preparation and each test. The 3 GiB combined allocation includes
+runtime archives, signed metadata and preserved attempts. Preparation is the explicit
+network step; ordinary builds and the native experiment stay offline.
+
+```sh
+python3 build-support/prepare_gnome_lab.py <owned-build-directory>
+python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory>
+python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --marker
+python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --marker --marker-control hidden
+python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --marker --marker-control frozen
+python3 build-support/record_gnome_host.py --build-dir <owned-build-directory> --reports <live-report> <hidden-report> <frozen-report> --output <new-owned-record>
+python3 tests/desktop/test_gnome_record.py <owned-build-directory> <live-report> -v
+```
+
+Each attempt retains source bytes, root frames, process identity and cleanup. The
+negative controls intentionally return exit 1 with completed traces; the recorder
+requires their specific visibility/deadline failures and adequate capture coverage.
+It also requires identical current source inputs for all three controls. A startup
+error cannot substitute for a negative control. The default command tests bootstrap
+only. No icon, reveal/input, wallpaper-policy, recovery or product-host claim follows
+from the marker result. See the [GNOME checkpoint](../../spec/delivery/gnome-marker-handoff.md).
+
 For the historical shared-subset experiment, the existing Visual Studio 2017 XP
 toolset has its own preset. It compiles the same model, protocol/policy, recovery
 and diagnostic projection sources; modern native adapters require separate closure.

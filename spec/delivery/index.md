@@ -11,6 +11,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Independent diagnostic implementation checkpoint](diagnostic-handoff.md) — Bind independent public reporting and native inspector startup to scoped Windows/Linux evidence.
 - [Independent recent-failure metadata checkpoint](failure-metadata-handoff.md) — Bind bounded native fault records, private file handling and policy-gated diagnostic projection to current evidence.
 - [Foundation implementation handoff](foundation-handoff.md) — Resume the admitted campaign from tested model builds and local smoke packages.
+- [Owned GNOME shell marker checkpoint](gnome-marker-handoff.md) — A real pinned shell bridge now presents changing externally decoded pixels; desktop composition remains open.
 - [Historical Windows shared-subset build checkpoint](historical-build-handoff.md) — Record the pinned v141_xp build, unchanged shared behavior, resolved runtime inputs and pending guest qualification.
 - [Implementation readiness and gates](implementation-readiness.md) — Distinguish implemented specification checks from pending native and release work.
 - [Measured telemetry and freshness checkpoint](measured-time-handoff.md) — Bind versioned measurement times to consumer clock scope, replay history and native delayed-delivery evidence.

@@ -122,6 +122,12 @@ delivery scenarios; suites pass 88/89/81 checks. Real source acquisition contrac
 and independently supervised production are the next boundary. Suspend, namespace
 change and product rendering remain unqualified.
 
+The [GNOME marker checkpoint](gnome-marker-handoff.md) establishes a pinned owned
+shell runtime and an in-process bridge with external live/hidden/frozen calibration.
+All three controls retain the original temporal oracle; nine evidence checks pass.
+This closes the bootstrap/marker prerequisite only. A new calibrated overlap fixture
+and actual DING, reveal, input and recovery observations must precede desktop claims.
+
 Use the proposed cold-start exercise to detect missing observable contracts.
 Private implementation differences are permissible. Missing laboratories remain
 blocked qualification. A finite release scope must identify exact profiles,

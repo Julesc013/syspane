@@ -347,7 +347,7 @@
         "SP-WORK-PACKAGES",
         "SP-W01-PACKAGE"
       ],
-      "sha256": "44091be0d45edc5de6d3e7e05730a46d3d6cee5d918d93d3131a828e8292b5f9"
+      "sha256": "bcd83a2c62a26e0ff9c1d13f44e7c9484d62386edd43037a64050d11b320277d"
     },
     {
       "id": "SP-CURRENT",
@@ -357,7 +357,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "df135ded3e347f2df8227ac7ad8da1e0c847627986617caa205bbc3f175093c5"
+      "sha256": "437e90d18c5f5de6e73f3df51f36c0f70982731dcb3c6e3333ea9e7de199380d"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -404,6 +404,18 @@
       "sha256": "a2652a69852d9eaeb38751adcd62547443df6b0ed0d5cc54e4f5b07d5b968c2b"
     },
     {
+      "id": "SP-GNOME-MARKER-HANDOFF",
+      "path": "delivery/gnome-marker-handoff.md",
+      "title": "Owned GNOME shell marker checkpoint",
+      "description": "A real pinned shell bridge now presents changing externally decoded pixels; desktop composition remains open.",
+      "requires": [
+        "SP-W05-GNOME-PACKAGE",
+        "SP-CAMPAIGN-ADMISSION",
+        "SP-X11-RECOVERY-HANDOFF"
+      ],
+      "sha256": "1332b021a6695c4e0b10ff842203dfa7d77c403d20d618d4011907ddc627e9f1"
+    },
+    {
       "id": "SP-HISTORICAL-BUILD-HANDOFF",
       "path": "delivery/historical-build-handoff.md",
       "title": "Historical Windows shared-subset build checkpoint",
@@ -422,7 +434,7 @@
       "requires": [
         "SP-CURRENT"
       ],
-      "sha256": "ecc684acca0658ac9fabb2635d730cbbf21335c24c6b1ec5cdfe6c861ea07221"
+      "sha256": "e8bb963e33b974833dba9872e095a932b15180d40010c1a6b1443e628058cf80"
     },
     {
       "id": "SP-MEASURED-TIME-HANDOFF",
@@ -550,6 +562,19 @@
         "SP-W02-PACKAGE"
       ],
       "sha256": "0b5f0cbdc1af240ccc281928fbb9dd201bb5840057891711309f739ca30979ed"
+    },
+    {
+      "id": "SP-W05-GNOME-PACKAGE",
+      "path": "delivery/packages/w-05-gnome-investigation.md",
+      "title": "W-05 owned GNOME composition investigation",
+      "description": "Test a pinned shell bridge on a private display without claiming a supported desktop.",
+      "requires": [
+        "SP-W05-PACKAGE",
+        "SP-W02-PACKAGE",
+        "SP-LINUX",
+        "SP-CAMPAIGN-ADMISSION"
+      ],
+      "sha256": "056ebdef228ee90c6c791c39498d9dffe7052b7952c13876de6de989d32577bb"
     },
     {
       "id": "SP-W05-SHELL-RECOVERY",

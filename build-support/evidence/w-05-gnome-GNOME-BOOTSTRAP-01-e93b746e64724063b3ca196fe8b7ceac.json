@@ -1,0 +1,781 @@
+{
+  "family": "GNOME-BOOTSTRAP-01",
+  "outcome": "pass",
+  "executed_at": "2026-10-06T00:13:50.029980+00:00",
+  "source_base": "2607efb68b5080d240004b693ff58d5d9e7fb905",
+  "source_inputs": {
+    "tests/desktop/native_gnome_bootstrap.py": "4a534664f6a75fa5af5abe70bf098353910a4bf7edc917affc2169cbe98c3d61",
+    "tests/desktop/native_oracle.py": "975958fe693d18ae517ee9397fd086b75a794115ec9f04214a8460a02f7c5ad3",
+    "tests/desktop/native_x11_host.py": "3a6f568d24dcafdc31d3d5904e9823072d15c8a8b92ed4cc52cdb8b6010af8fb",
+    "tests/desktop/x11_recovery.py": "5b02d3e81715243863c336c2b1ed8fb3fdfb55ba40964a37901d3c1a7e6a08f7",
+    "tests/desktop/oracle.py": "7de6458b9b98be4c7f75f4856a9d6c97d69b38578376cba886f3ee19c12f9b82",
+    "tests/fault/native_diagnostic.py": "aab3f07a8a823412ab78fb49ae31d45ac764c85554c7580d07e01838e8bfcb72",
+    "build-support/prepare_gnome_lab.py": "c465e04fc55332602718176c192296eb1d91cc80348b64768ffe8669356e04b4",
+    "build-support/gnome-lab-packages.json": "0247c9bb465cdbfc2b900f3ff70cfa1d47fa9d657f37da210bd17dedef7ac3d0",
+    "spec/delivery/packages/w-05-gnome-investigation.md": "ea444e51a56a2466986314f44d00c24b99066c2cc580175b19dff590e046f924"
+  },
+  "workspace": "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/GNOME-BOOTSTRAP-01-e93b746e64724063b3ca196fe8b7ceac",
+  "lab_identity_sha256": "eceddaf54ee63ca9da0d664f460b8865b67155da15516e3c07bab8cad44aa054",
+  "environment": {
+    "uid": 1000,
+    "os_release_sha256": "01af466feb100306498c86aa6bad1815e33036019aa34d4362c20f374ea5c829"
+  },
+  "system_binaries": {
+    "/usr/bin/Xvfb": "2c7f5a9534410fed5092d782a69ca7ffd9fce80e98b81ffe4944d703dd11d3b1",
+    "/usr/bin/dbus-daemon": "8c479f1fcddfd6693c736ce541da0955f6752834bdeeef4b928e27f5e974c247",
+    "/usr/bin/glib-compile-schemas": "d094c2bd516bfb73648940a4448d6c82849e966a133af771876b1c59ba79790c",
+    "/usr/lib/x86_64-linux-gnu/libXRes.so.1": "c2aefa4bf373492430f48aec108c5ead95e1dc757d52968775e905e23a2ad56c"
+  },
+  "commands": [
+    {
+      "command": [
+        "/usr/bin/glib-compile-schemas",
+        "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/GNOME-BOOTSTRAP-01-e93b746e64724063b3ca196fe8b7ceac/schemas"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/usr/bin/dbus-daemon",
+        "--nofork",
+        "--nopidfile",
+        "--nosyslog",
+        "--config-file=/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/GNOME-BOOTSTRAP-01-e93b746e64724063b3ca196fe8b7ceac/bus.xml"
+      ],
+      "pid": 513
+    },
+    {
+      "command": [
+        "/usr/bin/dbus-daemon",
+        "--nofork",
+        "--nopidfile",
+        "--nosyslog",
+        "--config-file=/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/GNOME-BOOTSTRAP-01-e93b746e64724063b3ca196fe8b7ceac/system-bus.xml"
+      ],
+      "pid": 514
+    },
+    {
+      "command": [
+        "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/bin/gnome-shell",
+        "--x11",
+        "--mode=user"
+      ],
+      "pid": 519
+    }
+  ],
+  "cleanup": [
+    {
+      "process": "observer",
+      "pid": 521,
+      "exit": 0
+    },
+    {
+      "process": "shell",
+      "pid": 519,
+      "exit": 0,
+      "members_before_stop": [
+        {
+          "pid": 519,
+          "state": "S"
+        },
+        {
+          "pid": 562,
+          "state": "S"
+        }
+      ],
+      "members_after_stop": []
+    },
+    {
+      "process": "system-bus",
+      "pid": 514,
+      "exit": 0,
+      "members_before_stop": [
+        {
+          "pid": 514,
+          "state": "S"
+        }
+      ],
+      "members_after_stop": []
+    },
+    {
+      "process": "bus",
+      "pid": 513,
+      "exit": 0,
+      "members_before_stop": [
+        {
+          "pid": 513,
+          "state": "S"
+        }
+      ],
+      "members_after_stop": []
+    },
+    {
+      "process": "Xvfb",
+      "pid": 509,
+      "exit": 0
+    }
+  ],
+  "qualification": "Laboratory bootstrap only; placement, reveal, icons, input, recovery, Wayland and product host qualification are not run.",
+  "source_archive": {
+    "path": "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/GNOME-BOOTSTRAP-01-e93b746e64724063b3ca196fe8b7ceac/source-inputs.zip",
+    "bytes": 54862,
+    "sha256": "232159c8ac78d3858bbe084607e54a2c9ec8b0b760bd8316fdafd8fcc5b0c16d"
+  },
+  "schema_inputs": {
+    "00_org.gnome.shell.gschema.override": {
+      "bytes": 158,
+      "sha256": "067c8a8d0a7eb0642b3969801e3c845436060e8cc6f39f4748c1d9772d410cf3"
+    },
+    "10_gnome-shell.gschema.override": {
+      "bytes": 216,
+      "sha256": "1368663973fd8dd06cd304fbdc4a860dd73457693803a58fda2bf404581681cf"
+    },
+    "10_gsettings-desktop-schemas.gschema.override": {
+      "bytes": 342,
+      "sha256": "7aec3161e0146744b3bfd09b5f78180aa90002703935b5b3e938b2f9ac3c2dbb"
+    },
+    "com.canonical.Unity.Lenses.gschema.xml": {
+      "bytes": 2513,
+      "sha256": "b93dc1fbecca1ed6c04a2e18f6329b7f73ad97ee63584003dcf3bd2ad515ae2d"
+    },
+    "com.ubuntu.login-screen.gschema.xml": {
+      "bytes": 3235,
+      "sha256": "3fd07fd75edc398d5fb60f71561a8b28c8195d746388837c0ac69f0ab90feb05"
+    },
+    "gschemas.compiled": {
+      "bytes": 89032,
+      "sha256": "1a4837e57a71b7269e9a595eed6a24f0ac7263e5f5a988485c6c3d772e0fd33c"
+    },
+    "org.freedesktop.Tracker3.Extract.gschema.xml": {
+      "bytes": 1897,
+      "sha256": "17f0a20f7e95efa2a420e4ab4b4f2e43b2e58ee1bb03d1f19aad7a9c7f59d13c"
+    },
+    "org.freedesktop.Tracker3.FTS.gschema.xml": {
+      "bytes": 1690,
+      "sha256": "07409fc0e77cc58189687b06669a16eecfbf79e8e67a254e6a12f3d452ba205f"
+    },
+    "org.freedesktop.Tracker3.Miner.Files.gschema.xml": {
+      "bytes": 6269,
+      "sha256": "eed7be7957891c621e84538edae6e584774df89775820f3c15720dc05398a959"
+    },
+    "org.freedesktop.TrackerMiners3.enums.xml": {
+      "bytes": 619,
+      "sha256": "1e85d583b0a2e01a573bde2d57b76ebe7e369943e5b2d8ad46b4873eb58e0d97"
+    },
+    "org.gnome.Evolution.DefaultSources.gschema.xml": {
+      "bytes": 1054,
+      "sha256": "3cf064656716c98dce393da025bc121a9f791a72d9325d6102604f070e859a7a"
+    },
+    "org.gnome.Extensions.gschema.xml": {
+      "bytes": 511,
+      "sha256": "69bb0e8732123e242fac81a1fd6a9a1d334034cfaac73b3dd9050cc81953e030"
+    },
+    "org.gnome.GWeather4.enums.xml": {
+      "bytes": 1523,
+      "sha256": "4850d7df2eea3c3c3e4cafb2aa70fd7c7e4eb72f191bbef9ffae048bfb7e3ef9"
+    },
+    "org.gnome.GWeather4.gschema.xml": {
+      "bytes": 2792,
+      "sha256": "9f9b03d82ba3b3fcd40504b183a724671040afb4c657e7f270906b58206f37af"
+    },
+    "org.gnome.desktop.a11y.applications.gschema.xml": {
+      "bytes": 845,
+      "sha256": "6e67c6d900b0e698681454948dc6a11904edc1059af69d83ae8ff1c69abfe4ca"
+    },
+    "org.gnome.desktop.a11y.gschema.xml": {
+      "bytes": 828,
+      "sha256": "f471028deedc07708638c7ea056ed1c6eb6632b987905321085288e836f337a8"
+    },
+    "org.gnome.desktop.a11y.interface.gschema.xml": {
+      "bytes": 676,
+      "sha256": "d5ba583b0b4ffb2fc0aeaa9943d3546de2c9dab61d2311c27aaff83266cdd55e"
+    },
+    "org.gnome.desktop.a11y.keyboard.gschema.xml": {
+      "bytes": 4897,
+      "sha256": "429b25000a947e1b03724546e88b0f3dd6d3bac42addaec36d6cf81062c89cbb"
+    },
+    "org.gnome.desktop.a11y.magnifier.gschema.xml": {
+      "bytes": 9380,
+      "sha256": "0316beb1020bf0e1594c1578d4ee17044d8d4f04a58e788631b054503f07e0a0"
+    },
+    "org.gnome.desktop.a11y.mouse.gschema.xml": {
+      "bytes": 2907,
+      "sha256": "2409903ede1c85e899ff6576bc9711b9016704ee0434c22287d34d7e8c888c36"
+    },
+    "org.gnome.desktop.app-folders.gschema.xml": {
+      "bytes": 1841,
+      "sha256": "f6a6be999af5d5ed29079432182af7708adefc0a2c7beeb7418254487ee4b772"
+    },
+    "org.gnome.desktop.background.gschema.xml": {
+      "bytes": 2612,
+      "sha256": "13f2de7840224b1c165bbdaa199dfe711f87de1d2bc8df9b1d73c64f96999ed1"
+    },
+    "org.gnome.desktop.calendar.gschema.xml": {
+      "bytes": 427,
+      "sha256": "d153ebb1fbf3b72396be332c3402366420819c94248a4b96c4df77bb1a49ec3e"
+    },
+    "org.gnome.desktop.datetime.gschema.xml": {
+      "bytes": 439,
+      "sha256": "db8f91d8966e24570844f4f0e52b6d5e4d0212cb398c71509f5f3cab6b39d292"
+    },
+    "org.gnome.desktop.default-applications.gschema.xml": {
+      "bytes": 3092,
+      "sha256": "ba0b55abfbf2a6d300d3a222e4005fd4e965629ed7787ab8e08f1b7f65c4083d"
+    },
+    "org.gnome.desktop.enums.xml": {
+      "bytes": 6756,
+      "sha256": "b200d78b55838e62eebc2ecf7f03ec2f9b8f5dab66a3ce65452695f4c7fa3456"
+    },
+    "org.gnome.desktop.input-sources.gschema.xml": {
+      "bytes": 2839,
+      "sha256": "1255b1e6ba8fcccf43a87ff6ca2343fd55b99f2d89a936556ff1fa6a9b23069e"
+    },
+    "org.gnome.desktop.interface.gschema.xml": {
+      "bytes": 12608,
+      "sha256": "38a86d1b471124afd08e8eaf78ffec9136679bb8a1c95cbbaf020c082e5d6b0e"
+    },
+    "org.gnome.desktop.lockdown.gschema.xml": {
+      "bytes": 3454,
+      "sha256": "7d977d0932a4062ce5ddfce7cb8548092cc52fc7cb1d3b2825ae4599ca69e07c"
+    },
+    "org.gnome.desktop.media-handling.gschema.xml": {
+      "bytes": 2604,
+      "sha256": "cdaa8e9740fb99852b237cfae8efcd0bb85d2de8b32ea483aad4919e3c87bb10"
+    },
+    "org.gnome.desktop.notifications.gschema.xml": {
+      "bytes": 2838,
+      "sha256": "b7e983b5fa4cedccba7e6494c89de0997274986cdc69377a51589d97ac07acb4"
+    },
+    "org.gnome.desktop.peripherals.gschema.xml": {
+      "bytes": 16019,
+      "sha256": "9d4e25b9552239840063dc4676e3bd2e6d49264f7b3a742a016032459fde166f"
+    },
+    "org.gnome.desktop.privacy.gschema.xml": {
+      "bytes": 4907,
+      "sha256": "304f26f2030d538f0e7ab1a8bae486e2b5e5879bc55c618e8931dc822284abd5"
+    },
+    "org.gnome.desktop.screensaver.gschema.xml": {
+      "bytes": 6191,
+      "sha256": "d6b5f96c421da95378d3424a379fa9d507f98e6daca18eac4dfc8b16fb59bcdf"
+    },
+    "org.gnome.desktop.search-providers.gschema.xml": {
+      "bytes": 1907,
+      "sha256": "9efd368948d891c550bef426430a4c60cda5632a2859fd7da5c4595edd89c81d"
+    },
+    "org.gnome.desktop.session.gschema.xml": {
+      "bytes": 668,
+      "sha256": "462b3b4fe456aecd72a584e533566a0beccfeb9e7b6184f8bc410c4147a3ef7a"
+    },
+    "org.gnome.desktop.sound.gschema.xml": {
+      "bytes": 1055,
+      "sha256": "ff7dcae2b2b3d6109bf4d75511f0ce1538e39b0593bfcd33f35f12653c62be92"
+    },
+    "org.gnome.desktop.thumbnail-cache.gschema.xml": {
+      "bytes": 600,
+      "sha256": "20246fc5002a989287eb7e5e351cfd79245df63d0978b879882ff3d534b8f9fb"
+    },
+    "org.gnome.desktop.thumbnailers.gschema.xml": {
+      "bytes": 866,
+      "sha256": "899bfc15c310051674714addc541824556a1e6d65b32cb715cba18662dc6ea02"
+    },
+    "org.gnome.desktop.wm.keybindings.gschema.xml": {
+      "bytes": 13506,
+      "sha256": "eeaf1359144c03d185a7164031b309e1f571c4680668eb7947fed64f564c16be"
+    },
+    "org.gnome.desktop.wm.preferences.gschema.xml": {
+      "bytes": 12390,
+      "sha256": "f207daeb4dd2a4b1eb5ddb43f8f81186ed041fd468e4b84aec0b9c69c931d235"
+    },
+    "org.gnome.evolution-data-server.addressbook.gschema.xml": {
+      "bytes": 320,
+      "sha256": "231ec9c542473d42f15dcd483891e82b0497a5623e30aa31374dbb0c3c620c83"
+    },
+    "org.gnome.evolution-data-server.calendar.gschema.xml": {
+      "bytes": 5656,
+      "sha256": "de8d14ca92e5f12f05b1248b599a9b810c080caceec12d1e749b2b140ceac76f"
+    },
+    "org.gnome.evolution-data-server.gschema.xml": {
+      "bytes": 6863,
+      "sha256": "d02ae8ee259feb8e559918ee377ed76f0a3c8a8781339ca81ceb5ba65dc4201c"
+    },
+    "org.gnome.evolution.eds-shell.gschema.xml": {
+      "bytes": 684,
+      "sha256": "3cef34c338212bd6552fd07070def888727fabf0f31484c0ec376aa4760b779f"
+    },
+    "org.gnome.evolution.shell.network-config.gschema.xml": {
+      "bytes": 5394,
+      "sha256": "1991fe03daf18bdf5b450fa6bb5b06a48f48a38b712fc8206addcaddd7a33822"
+    },
+    "org.gnome.login-screen.gschema.xml": {
+      "bytes": 3418,
+      "sha256": "dbb48fe82931188dfd6971fc30497d4f5d484fa84e2ab0ca068a91973f1d4412"
+    },
+    "org.gnome.mutter.gschema.xml": {
+      "bytes": 7702,
+      "sha256": "4a56280364ce2d77c26ee503869bd9085be4ea200087c025854ba362092db5db"
+    },
+    "org.gnome.mutter.wayland.gschema.xml": {
+      "bytes": 5987,
+      "sha256": "c78d76344802ca6ca5868bec17d338008ebc9e916a31ed1b9764fb153623a04e"
+    },
+    "org.gnome.mutter.x11.gschema.xml": {
+      "bytes": 1117,
+      "sha256": "2e3f2bc9ff7cfd85a744c81ac6cb0821b7355061ccb06efc5e4446646be97ae7"
+    },
+    "org.gnome.nautilus.gschema.xml": {
+      "bytes": 14038,
+      "sha256": "df96574a39e55e9cc386959d703421f42475e7fcd867b03945c3fbff227f6761"
+    },
+    "org.gnome.nm-applet.eap.gschema.xml": {
+      "bytes": 650,
+      "sha256": "86aa19fbdf31374c52377eee5ce2d2a8d08623a240e23d39fbe6a68b2ecc4d99"
+    },
+    "org.gnome.settings-daemon.enums.xml": {
+      "bytes": 3001,
+      "sha256": "5fa52547883de70a819312004a4ba6d0cc3d4ab7f60d0445411e33eb96779b87"
+    },
+    "org.gnome.settings-daemon.peripherals.gschema.xml": {
+      "bytes": 7421,
+      "sha256": "9cb581a4414e2b5d76f2664d208140581e797a358324744b24d77eac24623cfd"
+    },
+    "org.gnome.settings-daemon.peripherals.wacom.gschema.xml": {
+      "bytes": 4857,
+      "sha256": "280b1f79bfd8f6c2f212bc6a4e8630096e1bf13480c92dd999407fce8ef97aca"
+    },
+    "org.gnome.settings-daemon.plugins.color.gschema.xml": {
+      "bytes": 2536,
+      "sha256": "55d3f13c6482245188ee67f886970777d9b4a83633c1d444a6f09803a6ef575a"
+    },
+    "org.gnome.settings-daemon.plugins.gschema.xml": {
+      "bytes": 966,
+      "sha256": "abaf06275be61c07275efe3d81532cee73174a60abef6cbae5c7885c0905be7f"
+    },
+    "org.gnome.settings-daemon.plugins.housekeeping.gschema.xml": {
+      "bytes": 1718,
+      "sha256": "47314ac998f7e4a295b39fcd62cda24ad33760c55553baf02c7e49e02260066f"
+    },
+    "org.gnome.settings-daemon.plugins.media-keys.gschema.xml": {
+      "bytes": 28870,
+      "sha256": "7e641f9f6334474e61733696fee480cbdea19ec8bdcff1e4cd5ac19cce80d8c9"
+    },
+    "org.gnome.settings-daemon.plugins.power.gschema.xml": {
+      "bytes": 4421,
+      "sha256": "10aad58b95f69b39626ea04b63eb14bc225caaedea64aaa07aa7406b9e3ca05e"
+    },
+    "org.gnome.settings-daemon.plugins.sharing.gschema.xml": {
+      "bytes": 493,
+      "sha256": "25b726557bcfea0a12422518ba7d27c36d14526fa505bbd92d59dc7a007fdfbd"
+    },
+    "org.gnome.settings-daemon.plugins.wwan.gschema.xml": {
+      "bytes": 407,
+      "sha256": "5404faf0eb8678fb009b5d79007a7b1d69b3a8e9b415e89b8fff9a22a972e060"
+    },
+    "org.gnome.settings-daemon.plugins.xsettings.gschema.xml": {
+      "bytes": 3088,
+      "sha256": "6e2dafedc47c2c6f3fcbc82eb88e34208ca73e35ca39ba4e40aa004ebbdaa3f6"
+    },
+    "org.gnome.shell.extensions.ding.gschema.xml": {
+      "bytes": 5157,
+      "sha256": "99fc0f84785c3e56f7de1ad491d9bbd74450bb0c4638380aad21af7a73780849"
+    },
+    "org.gnome.shell.gschema.xml": {
+      "bytes": 16101,
+      "sha256": "37d87513dacbc5cd405b85e44335e703ab30ce54f8140fbe2faa715b66bbf1d4"
+    },
+    "org.gnome.shell.ubuntu.gschema.xml": {
+      "bytes": 709,
+      "sha256": "c7d956507d083df34f8eb0b0fefda1f5f3ee78e4795f96eced4adb34dd7fa1b0"
+    },
+    "org.gnome.system.locale.gschema.xml": {
+      "bytes": 448,
+      "sha256": "5b1e65629a77dcd201f4d86932ad62c0c41ec61fb117f151966d13e69411e2dc"
+    },
+    "org.gnome.system.location.gschema.xml": {
+      "bytes": 1159,
+      "sha256": "3fe90ebe8c851340249a1febe741b777c65b49a823201ead02f341be861060ed"
+    },
+    "org.gnome.system.proxy.gschema.xml": {
+      "bytes": 6363,
+      "sha256": "0f02db915e726017c17c1619ee9fd8f9ee7e6d4698f0fc160a0eb88b29f2bafd"
+    },
+    "org.gtk.Settings.ColorChooser.gschema.xml": {
+      "bytes": 931,
+      "sha256": "e476913ef61e6719ff56c2e4c5b8b276af3020bfb0d007263c2a241835730882"
+    },
+    "org.gtk.Settings.Debug.gschema.xml": {
+      "bytes": 833,
+      "sha256": "de0685fdc2f6e890e32445a79aa938e5566b8dd406dd71d6c6a66c69e3f941e3"
+    },
+    "org.gtk.Settings.EmojiChooser.gschema.xml": {
+      "bytes": 623,
+      "sha256": "22aba28a5a78745d87eeded88f1b86f7ddea24b1b90771151ef494c660a1b591"
+    },
+    "org.gtk.Settings.FileChooser.gschema.xml": {
+      "bytes": 6212,
+      "sha256": "c7089f41d22b3854c05fe4996ff271949b40148a40b9c6f0ae0349792dc94b77"
+    },
+    "org.gtk.gtk4.Settings.ColorChooser.gschema.xml": {
+      "bytes": 941,
+      "sha256": "3c60a020ac823ad9c02394c8579296711a148fb6e15dac1c4dffa3470303af32"
+    },
+    "org.gtk.gtk4.Settings.Debug.gschema.xml": {
+      "bytes": 840,
+      "sha256": "f3093b00e9184a19289f0755345e3414921aafe15433342b36b327ade2048998"
+    },
+    "org.gtk.gtk4.Settings.EmojiChooser.gschema.xml": {
+      "bytes": 678,
+      "sha256": "893b260569e832bb96bfa5ff95893f85d81543069799f22bf66dd419ad50a702"
+    },
+    "org.gtk.gtk4.Settings.FileChooser.gschema.xml": {
+      "bytes": 6537,
+      "sha256": "e7a7482f7937a0588961613df2b14e509b08c1281bdb0b12ab279856d7d8fcea"
+    },
+    "xdg-desktop-portal-gnome.gschema.xml": {
+      "bytes": 391,
+      "sha256": "a75f3fa4230660238ae832f690128e0cd3782214d02fa74363da3fe52e828ee6"
+    }
+  },
+  "observation": {
+    "outcome": "pass",
+    "manager": {
+      "window": 4194305,
+      "self": [
+        4194305
+      ],
+      "pid": [
+        519
+      ],
+      "pid_origin": "XResQueryClientIds",
+      "resource_base": 4194304,
+      "resource_mask": 2097151,
+      "pid_property": []
+    },
+    "frames": [
+      {
+        "capture_started_ns": 355865415839,
+        "capture_finished_ns": 355869045461,
+        "origin": "display_server_root",
+        "pixels": {
+          "bytes": 1440000,
+          "sha256": "eda525bab6d74d439bd683b578242e87fd3146fc4d631b7c81d9f76dd4d47a2d",
+          "rgb_zlib_base64": "eJztwTEBAAAAwqD1T20LL6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4GPo7AAE="
+        }
+      },
+      {
+        "capture_started_ns": 356873251942,
+        "capture_finished_ns": 356876798104,
+        "origin": "display_server_root",
+        "pixels": {
+          "bytes": 1440000,
+          "sha256": "7a6bab1f181b207c08f1bdfe3bcc64220fea633ad3d8c2e4ac88782c389da30e",
+          "rgb_zlib_base64": "eJztnQeUVFW6qNfi3jdvwn133r33vTvh3QmKgW5aUtNEASPdDQ00UUTJNiBRmihBsoCAJEHEUcecQMcw6jgjQRB1dFQcUQSUICISREUMOK77fmrD9lDh9KmqvevU7vq+9S1Wd1X1qVN/VZ/z9alArVoAAAAAAAAAAAAAAAAAACepV6/exRdf3KlTp+7du/fq1atvSMhVywrIasjKyCqFPRUAAACAVGjYsKH0TFhB5U+XLl2KiorCnhAAAABAUPLy8kpLS8NuqKqRlZRVDXtaAAAAAFVQUFDQuXPnsNMpKLKqssJhzwwAAAAgIXl5eQ7FlaJLly75+flhTw4AAAAgPk48LRiLrHbYkwMAAAC32bRp08aNG40vtmHDhmGHUurIyhsfCAAAAFR7GjdurN40dyxCrUgRyYmmlu/cM4NeOnXqZGoOAAAAkCMMHz78448/3rFjRy1PX7377rty4rBhw9Jffv369cNOpHThc7EAMkmTJk1uvvnmt99+++DBgx999NFLL700ceLEgG/pnTVrVr9+/RKdW1pa+sADD8jm7siRI59++mlJSYn/0qZPny6XPHr0aNRx7KjTCwsLn40watSoRJeRzYic8vrrrx86dGj//v1yo0aMGBHkFgGAi0hcya+/NNWDDz5Yy9NX8q18IWeln1gXX3xxkIaprKzcuHHj4cOHj6WHLGHTpk3jxo0z2FcXXXSRgVkDQABatGgh/SMbn88//3z79u179+49GuGRRx6p8me7d+8ul1y5cmWicyXY5AJbtmx5JoJsnRItSqLoiSeeOHoK3VdxT5cgVN8uXrw40WVkMyJZJVG3efNm+QNWndWzZ88URgQAWU7z5s1layNNsnDhQvW3oe4r+VY2FPL1gQMHmjVrls61BPkoUYkrtSamkL8QZZmxV1RRUSF/3t4XYfbs2fJtkL7iKUKAjPHwww9LeLz33ntt27ZVp4wePVrVyIABA9QpderUWbRo0datWz/55JOdO3dKetWuXXvgwIHvv/++rpq//e1vUUuWrJJmkz8qq1wHWdqbb74pC3nyySe9jZTodG9fJbqM0LFjR/21/BkoZ02fPt3EzAAgu1iyZImkyNq1a/Upuq9qRRJr3bp18q36iyxl5G/GKgNm48aNBuNKIcuMvSKJq4c8yLdB+uryyy9Pa9AAEIyCggJ1iGnatGne09evXy8nyu+s+nbVqlXyrfwZtWHDhm3btj3zzDNy4rXXXvv222/L6Zs3b7733nvnz5/vXUKHDh3krJdeeqlnz5733HPPLbfc0rVrV581GTFixKRJky699NKoRop7umwtG0aoW7euz88qzjvvPPmTbdeuXXJLW7dune7IACD7kK2QdIj0gz5lYwT9bf/+/eUCr7/+ejrXEuT/Fkz/acFY5A/b2CuSra63r+TbIH0lNyGdCQBAQFq1aqWaJOqPGskhOfHFF1+Ury+88MLPP/9cvr3yyivVufXr11df3H///YmeHxw3bpycJQH26aefqqv47LPPZBPnvz4lJSVxGynR6VVeRra66sRXX321rKzM/9oBwFGkQKRDfLYPjRo1OhZ5ri2dawmrr2SZsVd03333eftK/owN0le8RgIgM+i+6tGjh/d0SSbdVxJF8vX+/ftjf9ynr2bNmqUOefXr1096TP62km+9R+/jYryvli9f/sQTT7zxxhty+o4dOzp27Oi/AgDgIqqvmjdvnugCclb6fSV/h1YZMJs2bTLeVxs2bIi9ouuvvz6F5we7d++ezgQAICC1a9dWzw/OmDHDe7r8OuvnBwcOHJhCX02aNEkXmtC7d2/5duvWrf7rE7CvGjdufDDCvHnzqvxZxaOPPipnqWc2AaCa8frrrx87/fnBKOSsY2k/Pxjk9e3jxo2TijMYVwcOHIj7+vYBAwZIU90bYebMmQFf387fmAAZQyJKwmPnzp3t27dXp6in9vTr29u0aRP15jv9/yyoo1J333137GLLy8vlLEkg9XbguXPnyrdr1qzxX5mAfRX1/sG4l7ngggsKCwvVWXl5eX/+85+DrAAAuIh6h+Bzzz2X6AJr166VCyxatCida0nq8xnUIbV0kCXIn7px4ypl+HwGgIxx/vnnq89nOBp5F+FHH32kvl69erW+jDqcdfjw4RdffHHr1q1///vf1enqScAjR448//zz69evj1ryM888I+d++OGHL730knoF16BBg/xXJmBfyb9/izB58uREl5k2bZqssFxGtqvbt29XZw0dOjT1SQFAttKsWbMDBw4cS/AOwaVLl8pZH3/8cdOmTdO5lnr16hlMnVDg80UBMkns54tOmjTJ+/miUiwrV6589913P/300927d994443q9Pr16z/++OP79u3bv3//k08+GbVY+UVesWKFNJssVjonyAc1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MeBfiAAASZHm/+8c9QpPH+grgIxh5PlBL7Nnz/Z+1AAAAFRJWVlZan2V1P9wSl8BZAzjfQUAACmQ6IXuPqj3KQeHvgLIGPQVAECW0K5du4BPFMrFUnivDX0FkDHoKwCA7KGkpKRjx47+cdW5c+fgr7nyQl8BZAz6CgAg2ygtLW3fvn2XLl26devWPYJ8Id/Kiem80Ya+AsgY9BUAQI5AXwFkDPoKACBHoK8AMgZ9BQCQI9BXABmDvgIAyBHoK4CMQV8BAOQI9BVAxqCvAAByBPoKIGPQVwAAOQJ9BZAx6CsAgByBvgLIGPQVAECOQF8BZAz6CgAgR6CvADIGfQUAkCPQVwAZg74CAMgR6CuAjEFfAQDkCPQVQMagrwAAcgT6CiBj0FfB2bt373fffTdjxozgP1JeXv5dhL59+8q3GzZsOHz48OjRo81ee/orBgC5AH0FkDHS7Ksrrrji2WefPXDgwFdfffXBBx889dRT2ba/fv7556UiHnjggfQXlX7GvPXWW8ePH584caLZa6evACAI9BVAxkinr0pKSt5//33ZR3/xxRd79uz55ptvvv322169elndPiRLuH3Vvn37qIyRU9K59unTp1taMQCo9tBXABkjnb7q06eP7KD/8Y9/dO/eXb5t167diBEj1FllZWX33HOP7Pclug4ePLhu3brS0tLiSAkcOnTo8ssvf/nll7/++uspU6bIJe+///6PPvroq6++2r1798qVK9u0aaMXkugsWc5nn302fPjwLVu2yHL27du3bNmyuCuZqK/atm177733yg/KGspVyNdySpUrrzOmZ8+eBw4ckG9XrFgRteQePXrIrZN1/vjjj+fMmSNf6IzxLmHu3Lk7duyQc+WGvPnmm+qg1qhRo1588UVZstwoubCshrpq/bOLFy+WC8u5O3fuHDdunPcstVifofmsGADkAvQVQMZIp6/Ky8uPHz+uGkNngGLNmjVyuuzBJQZkX//SSy+p01UJ7NmzRx08qays/Mtf/iJfSGk8+uij0gzytUSFurDPWWo5KiHUMTQh7uuaEvXVc889J6cfO3ZM1vDo0aPy9fr164Os/PTp07t166ZugpRM7DW+9tpr6sfffvttWf63334b21eDBg1SaSq3cePGjZJYY8eOlQuMHDnyyJEjcsrTTz8tJ8plJJC81y5ltXXr1v3796vDhl27di0+va98huazYgCQC9BXABkjzddfLV++XCJBdtOyi583b56qrJ49e6oTx4wZoy4mJaa+UCUg0SIt1LZtW3VJYfDgwb169Ro1apSce+jQIbnklVdemegsvZwXX3yxJML27dvl29tuuy12DeP2Ve/evXXgybcVFRVqhQcOHFjlys+cOVMKR7546qmnYq+uX79+3tiTXvI+DadDSGpKBZK6WFlZmV6C3Bz5VyZ56623ymVefvll77WrK5VVOnjwoHyrjtrpxfoMzX/FACAXoK8AMkb67x8cPnz4pk2bVJO88sorkgqTJk2Sr48ePRp7YVUCixYtUt+qS8bSrl07n7P0chYuXKiWo444xX2RVdy+mjJlipz4+eefR63YDTfcUOXK79q1S0WLfj7Ry4QJE+Tczz77TJ8i1xLbV3IrtmzZom7Ru+++O3XqVHXh6dOnv/3229Jd+va++eab3mufM2eO+nbt2rXy7SOPPOJdrM/Q/FcMAHIB+gogY5j6fAaprMOHD8v+ev78+VIL/omiX4mteuDYsWNTT6e0tNTnrNjlqCfFgveVWnhsXwVZeXXcSf694447Yi8zceJEOevIkSP6FPk6tq+KIy8Ak85UtaZasaKiQj1nd9ddd1VWVt5///2xfTVv3jz17bp16+Tb1atXF8f0Vdyh+a8YAOQC9BVAxkinrwYMGDBhwgT18umSkpJ33nnnu8jrheR01QzqNUXFkSfg1BdRXaSfjBs5cqRe7GWXXeZ/Vuxyku2rHj16qIVHPT84ZMiQKlf+zjvvvOaaa76NEPuKL/003LBhw+Rb9Tqr2L4qLy9XoShz++Mf/ygnbtq0adasWd95ngN9+OGHY/tqzZo18nXHjh1Vzd50003exfoMzX/FACAXoK8AMkY6fSU7dNlBf/PNN7t371Zvpvv666/79+8vZ23evFl9u2XLFtn779q1S/1I7CcJPPXUU+qQy9q1a9etWyeLeuyxx6o8K9m+kmjZeoo///nPcvrjjz/+3anXt6tnyvQrnYKs/F133SVfy61WrzD38sYbb6hjXPLFkSNHVPBE9ZUggbRhwwZZjX379qlsGzx48HeRF70/8sgjq1evVu/vi+or4b333lPTPnr0aJcuXaJWzGdoPisGALkAfQWQMdLpK9k1y058//79klgSMJs2bVLHRoROnTpJJHz44YfHjx+Xs6RG1OmxfdWmTZtbb711586d0jNSFNu2bdMvRvI5K9m+8iKJVRx5Afltt92mPoRBcmXVqlX6k6mCrLz8uJSPqjL1inTN5ZdfLqOQjJFwmjx58l//+tfYvhoyZIjEm3Sd3DS5ogcffFC9mmvlypVyjXLiW2+9VVlZqT66QV/7l19+KQuUvpJ1fv/99/Ur8L0r5jM0nxUDgFyAvgLIGPz/OAAAOQJ9BZAx6CsAgByBvgLIGPQVAECOQF8BZAz6CgAgR6CvADIGfQUAkCPQVwAZg74CAMgR6CuAjEFfAQDkCPQVQMagrwAAcgT6CiBj0FcAADkCfQWQMegrAIAcgb4CyBj0FQBAjkBfAWQM+goAIEegrwAyBn0FAJAj0FcAGYO+AgDIEegrgIwR21e//e1vw94GZAtvvPHGAw88EHv6xo0bb7/99syvT2pkZm0TzSoXuPfee7ds2aK+TmfauTxDyAyyeaevADKD7quaNWuqP22S6qtevXqtW7fu008//eqrrz744IMnn3yyTZs29jYOAXnsscdkV5X+chLt7xYsWDBmzJj0l58ZLK3t+PHj//KXv+hv02+DkpISWVVZzieffPL1119/9NFH69evr6ioUOfKffrdd99de+213h+56667XnvtNf1t165dV61atXfvXnk0Hjly5JVXXhk7dqw+Vy3h0Ucfjbre0aNHy+kHDhzwXszLhAkT/Nfc21fpTJu+AtuovhLoKwDbyC+XOniVQl/JDlGa6q233pJd7bBhw2bMmHHHHXdY3TgExHZfQXFkyAb7qm3btn/9618/++yz3//+96NGjRo6dOjEiRPvvPPOzp0766s7duzYvn37OnTooH/K21fdunWTc7dt2zZz5sxBgwZVVlY+9NBDx48fX7hwoV6CpJdcRbt27bxXvXbtWnkYe/vqnXfeucqD9xrj4u2rdODxBrbRfSUbfNns01cAlvA+OZhCX8keLfaQgqK0tPS2226T3Zk6EDFlypTiyO5j1qxZv/vd72Qfp/pHCu3222/fv3//V199JZ02YsQI9eOJTpefWrRo0ZNPPvlZhA0bNsg6xF57or6SxcruW9bnm2++2blz54IFC6pcYb2/k1257IJ79eoVdbrPKpWVlT3++ONy4hdffPHss8/Onz8/7l44+FgkDJ544gm1wKeeemrOnDl6gbt375b118uUr7dv366X713bgNcllfLe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lPSVK1oaMmjoK0RENCV95YqWhgwa+goREU1JX7mipSGDhr5CRERT0leuaGnIoKGvEBHRlPSVK1oaMmjoK0RENCV95YqWhgwa+goREU1JX7mipSGDhr5CRERT0leuaGnIoKGvEBHRlPSVK1oaMmjoK0RENCV95YqWhgwa+goREU1JX7mipSGDhr5CRERT0leuaGnIoKGvEBHRlPSVK1oaMmjoK0RENCV95YqWhgwa+goREU1JX7mipSGDhr5CRERT0leuaGnIoKGvEBHRlPSVK1oaMmjoK0RENCV95YqWhgwa+goREU1JX7mipSGDhr5CRERT0leuaGnIoKGvEBHRlPSVK1oaMmjoK0RENCV95YqWhgwa+goREU1JX7mipSGDhr5CRERT0leuaGnIoKGvEBHRlPSVK1oaMmjoK0RENCV95YqWhgwa+goREU1JX7mipSGDhr5CRERT0leuaGnIoKGvEBHRlPSVK1oaMmjoK0RENCV95YqWhgwa+goREU1JX7mipSGDhr5CRERT0leuaGnIoKGvEBHRlPSVK1oaMmjoK0RENCV95YqWhgwa+goREU1JX7mipSGDhr5CRERT0leuaGnIoKGvEBHRlPSVK1oaMmjoK0RENCV95YqWhgwa+goREU1JX7mipSGDhr5CRERT0leuaGnIoKGvEBHRlPSVK1oaMmjoK0RENCV95YqWhgwa+goREU1JX7mipSGDhr5CRERT0leuaGnIoKGvEBHRlPSVK1oaMmjoK0RENCV95YqWhgwa+goREU1JX7mipSGDhr5CRERT0leuaGnIoKGvEBHRlPSVK1oaMmjoK0RENCV95YqWhgwa+goREU1JX7mipSGDhr5CRERT0leuaGnIoKGvEBHRlPSVK1oaMmjoK0RENCV95YqWhgwa+goREU1JX7mipSGDhr5CRERT0leuaGnIoKGvEBHRlPSVK1oaMmjoK0RENCV95YqWhgwa+goREU1JX7mipSGDhr5CRERT0leuaGnIoKGvEBHRlPSVK1oaMmjoK0RENCV95YqWhgwa+goREU1JX7mipSGDhr5CRERT0leuaGnIoKGvEBHRlPSVK1oaMmjoK0RENCV95YqWhgwa+goREU1JX7mipSGDhr5CRERT0leuaGnIoKGvEBHRlPSVK1oaMmjoK0RENCV95YqWhgwa+goREU1JX7mipSGDhr5CRERT0leuaGnIoKGvEBHRlPSVK1oaMmjoK0RENCV95YqWhgwa+goREU1JX7mipSGDhr5CRERT0leuaGnIoKGvEBHRlPSVK1oaMmjoK0RENCV95YqWhgwa+goREU1JX7mipSGDhr5CRERT0leuaGnIoKGvEBHRlPSVK1oaMmjoK0RENCV95YqWhgwa+goREU1JX7mipSGDhr5CRERT0leuaGnIoKGvEBHRlPSVK1oaMmjoK0RENCV95YqWhgwa+goREU1JX7mipSGDhr5CRERT0leuaGnIoKGvEBHRlPSVK1oaMmjoK0RENCV95YqWhgwa+goREU1JX7mipSGDhr5CRERT0leuaGnIoKGvEBHRlPSVK1oaMmjoK0RENCV95YqWhgwa+goREU1JX7mipSGDhr5CRERT0leuaGnIoKGvEBHRlPSVK1oaMmjoK0RENCV95YqWhgwa+goREU1JX7mipSGDhr5CRERT0leuaGnIoKGvEBHRlPSVK1oaMmjoK0RENCV95YqWhgwa+goREU1JX7mipSGDhr5CRERT0leuaGnIoKGvEBHRlPSVK1oaMmjoK0RENCV95YqWhgwa+goREU1JX7mipSGDhr5CRERT0leuaGnIoKGvEBHRlPSVK1oaMmjoK0RENCV95YqWhgwa+goREU1JX7mipSGDhr5CRERT0leuaGnIoKGvEBHRlPSVK1oaMmjoK0RENCV95YqWhgwa+goREU1JX7mipSGDhr5CRERT0leuaGnIoKGvEBHRlPSVK1oaMmjoK0RENCV95YqWhgwa+goREU1JX7mipSGDhr5CRERT0leuaGnIoKGvEBHRlPSVK1oaMmjoK0RENCV95YqWhgwa+goREU1JX7mipSGDhr5CRERT0leuaGnIoKGvEBHRlPSVK1oaMmjoK0RENCV95YqWhgwa+goREU1JX7mipSGDhr5CRERT0leuaGnIoKGvEBHRlPSVK1oaMmjoK0RENCV95YqWhgwa+goREU1JX7mipSGDhr5CRERT0leuaGnIoKGvEBHRlPSVK1oaMmjoK0RENCV95YqWhgwa+goREU1JX7mipSGDhr5CRERT0leuaGnIoKGvEBHRlPSVK1oaMmjoK0RENCV95YqWhgwa+goREU1JX7mipSGDhr5CRERT0leuaGnIoKGvEBHRlPSVK1oaMmjoK0RENCV95YqWhgwa+goREU1JX7mipSGDhr5CRERT0leuaGnIoKGvEBHRlPSVK1oaMmjoK0RENCV95YqWhgwa+goREU1JX7mipSGDhr5CRERT0leuaGnIoKGvEBHRlPSVK1oaMmjoK0RENCV95YqWhgwa+goREU1JX7mipSGDhr5CRERT0leuaGnIoKGvEBHRlPSVK1oaMmjoK0RENCV95YqWhgwa+goREU1JX7mipSGDhr5CRERT0leuaGnIoKGvEBHRlPSVK1oaMmjoK0RENCV95YqWhgwa+goREU1JX7mipSGDhr5CRERT0leuaGnIoKGvEBHRlPSVK1oaMmjoK0RENCV95YqWhgwa+goREU1JX7mipSGDhr5CRERT0leuaGnIoKGvEBHRlPSVK1oaMmjoK0RENCV95YqWhgwa+goREU1JX7mipSGDhr5CRERT0leuaGnIoKGvEBHRlPSVK1oaMmjoK0RENCV95YqWhgwa+goREU1JX7mipSGDhr5CRERT0leuaGnIoKGvEBHRlPSVK1oaMmjoK0RENCV95YqWhgwa+goREU1JX7mipSGDhr5CRERT0leuaGnIoKGvEBHRlPSVK1oaMmjoK0RENCV95YqWhgwa+goREU1JX7mipSGDhr5CRERT0leuaGnIoKGvEBHRlPSVK1oaMmjoK0RENCV95YqWhgwa+goREU1JX7mipSGDhr5CRERT0leuaGnIoKGvEBHRlPSVK1oaMmjoK0RENCV95YqWhgwa+goREU1JX7mipSGDhr5CRERT0leuaGnIoKGvEBHRlPSVK1oaMmjoK0RENCV95YqWhgwa+goREU1JX7mipSGDhr5CRERT0leuaGnIoKGvEBHRlPSVK1oaMmjoK0RENCV95YqWhgwa+goREU1JX7mipSGDhr5CRERT0leuaGnIoKGvEBHRlPSVK1oaMmjoK0RENCV95YqWhgwa+goREU1JX7mipSGDhr5CRERT0leuaGnIoKGvEBHRlPSVK1oaMmjoK0RENCV95YqWhgwa+goREU1JX7mipSGDhr5CRERT0leuaGnIoKGvEBHRlPSVK1oaMmjoK0RENCV95YqWhgwa+goREU1JX7mipSGDhr5CRERT0leuaGnIoKGvEBHRlPSVK1oaMmjoK0RENCV95YqWhgwa+goREU1JX7mipSGDhr5CRERT0leuaGnIoKGv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"
+        }
+      },
+      {
+        "capture_started_ns": 360882475560,
+        "capture_finished_ns": 360885736172,
+        "origin": "display_server_root",
+        "pixels": {
+          "bytes": 1440000,
+          "sha256": "6a9574a5f32d719b0987419acfe20c3d08b00952543ac1b5f5f0588bd30a5d3e",
+          "rgb_zlib_base64": "eJzt3XuQ5GVh7+Gqk3OM0UrM5Zx4STRBFHdmh112Z2fZG4LoAgsIy7LAglwXuSggKioSltvCIioRFATBUxXjBUUEFFDuiJFC/oghxIqFAYPmmAiogWjx/3mdTt60c+n5Tff79tvv9PPUp6jdmWFm9p2Z7u9298wuWgQAAAAAAADwn3bbbbc3v/nNmzZt2rJly7HHHntCIeFNh3cgvBvhnQnvUulTAQDoxooVK8KeKTWoOtu8efPExETpEwIAaGpkZGTDhg2lN9TcwjsZ3tXSpwUAMIexsbFDDz209HRqKryr4R0ufWYAALMaGRmpaFy1bN68eXR0tPTJAQDMrIq7BacL73bpkwMA6vbwww8/9NBDyV/tihUrSg+l7oV3PvmBAAAL3u677976prkXJi2aXEThialef3X3DLbbtGlTqnMAAIbEu971rmeeeebJJ59c1LavfvCDH4QnnnHGGb2//mXLlpWeSL3yc7Ggn1atWnXttdd+//vf/9nPfvbTn/70kUceOffccxt+S++OHTu2bt0623M3bNjwpS99KVzcPffcc88///x+++3X+bVt3749vOSvfvWrKbdjT3n6+Pj4PZPOOuus2V4mXIyEpzz66KM///nPn3766fCHOvPMM5v8iYAahXEVvvzDprrxxhsXte2r8Nvwi/Cs3ifWm9/85iYb5r3vfe9DDz30i1/84oXehNfw8MMPn3322Qn31d57753grIEG9thjj7B/woXPL3/5yyeeeOInP/nJrybdcsstc/6/W7ZsCS95/fXXz/bcMNjCC/zjP/7jXZPCpdNsryqMottvv/1X/yXuqxmfHgZh67cf//jHZ3uZcDESZlUYdY899lj4C2zrWcccc0wXRwQMuLVr14ZLm7BJrrjiitbfDeO+Cr8NFxTh188+++yaNWt6eStNfpRoGFet9ySV8DfE8Dqnv6GTTjop/PX2hkkf+tCHwm+b7Ct3EULf3HTTTWF4/PCHPzzggANaT3nf+97XWiMnn3xy6ylLliy58sorH3/88X//939/6qmnwvRavHjxKaec8s///M9x1Xz3u9+d8prDrAqbLfylcs73Iby2f/iHfwiv5I477mjfSLM9vX1fzfYywSGHHBJ/Hf4aGJ61ffv2FGcGDJZPfOITYYp885vfjE+J+2rR5MR68MEHw29bfyPrWvg745wD5qGHHko4rlrC65z+hsK4+nKb8Nsm++rII4/s6aCBZsbGxlo3MV100UXtT//Wt74Vnhi+Zlu//cpXvhJ+G/4a9e1vf/uf/umf7rrrrvDEc8455/vf/354+mOPPfaFL3zh8ssvb38NBx98cHjWI488cswxx3z+85+/7rrrDjvssA7vyZlnnrlt27b169dP2UgzPj1cWq6YtHTp0g7/b8uuu+4a/sr2ox/9KPxJ99lnn16PDBg84VIo7JCwH+JTHpoUf3viiSeGF3j00Ud7eStN/m3B3u8WnC78xXb6GwqXuu37Kvy2yb4Kf4ReTgBoaM8992xtkil/qQlzKDzxO9/5Tvj1m970pl/+8pfht0cffXTrucuWLWv94otf/OJs9w+effbZ4VlhgD3//POtN/Ef//Ef4SKu8/uz3377zbiRZnv6nC8TLnVbT/zbv/3bAw88sPNbByoVFkjYIR0uH1auXPnC5H1tvbyVUvsqvM7pb+iGG25o31fhr7FN9pXHSEB/xH111FFHtT89TKa4r8IoCr9++umnp//vHfbVjh07Wjd5bd26Neyx8Her8Nv2W+9nlHxfXXPNNbfffvvf//3fh6c/+eSThxxySOd3AKhRa1+tXbt2thcIz+p9X4W/h845YB5++OHk++rb3/729Dd06aWXdnH/4JYtW3o5AaChxYsXt+4fvPjii9ufHr6c4/2Dp5xyShf7atu2bXGhBccdd1z47eOPP975/Wm4r3bfffefTfroRz865//bcuutt4Znte7ZBBaYRx999IXfvH9wivCsF3q+f7DJ49vPPvvssOISjqtnn312xse3n3zyyWFTfWHSJZdc0vDx7f6OCX0TRlQYHk899dRBBx3Uekrrrr34+Pb9999/yjffxX9noXWr1Oc+97npr3bjxo3hWWECtb4d+MMf/nD47QMPPND5nWm4r6Z8/+CML7PXXnuNj4+3njUyMnLvvfc2eQeAGrW+Q/D++++f7QW++c1vhhe48sore3kr8/r5DK2b1HoRXkP4q+6M46prfj4D9M26detaP5/hV5PfRfjTn/609eubb745vkzr5qxf/OIX3/nOdx5//PHvfe97rae37gR87rnn/uZv/uZb3/rWlNd81113hef+67/+6yOPPNJ6BNepp57a+Z1puK/Cf7876bzzzpvtZS666KLwDoeXCZerTzzxROtZp59+evcnBQyqNWvWPPvssy/M8h2CV111VXjWM888s3r16l7eym677ZZw6hTh54tCP03/+aLbtm1r//miYbFcf/31P/jBD55//vkf//jHH/vYx1pPX7Zs2W233fZv//ZvTz/99B133DHl1YYv5E996lNhs4VXG3ZOkx/UkPDxV5s3b77nnnvCexve5/AePvDAAyeddFLzMwHqcsYZZ/xq8ueLPvjgg1u3bl09Kfwi/NXvhcmfL3raaaf1/laa3EU4sPzwKwBgvsLEeuaZZ6bf0RaemGRcLZr8xyOOP/740kOpS/59ZwCgC2vWrLnyyiv/7u/+7ueTwi/Cb3v8se1TbNiwofRQ6kZ83CwAwKAZGRmp7l7CzZs3j46Olj45AIBZjY2NHXrooaVHU1NhDYZ3uPSZAQDMYWRkZPDvKDz++OPDO9n+zUoAAANu+fLlGzduLD2jZrZp06b4MwABAOqy22677b333mHPbNmypcm/UZhJeNPhHTjkkEPCO+PnXAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACwkCxZsmRiYmLdunV77bXXW97yln2AIRC+2MOXfPjCD1/+4UKg9OUQwAIxOjq6cuXKN73pTaUv5oHywkVBGFojIyOlL5kAKhYuSN1UBUwRLhbChUPpyyeA+uy6665uswI6CBcR4YKi9GUVQDWWLVu2fv360hfewKB7y1veEi4uSl9iAVRgfHy89GU2UJNwoVH6cgtgoIW/ipa+qAbq41YsgNmMjY15NDvQhfXr13ssFsCMPKAd6Npee+1V+jIMYOBMTEyUvngG6uaHNgC0GxkZcc8g0KNwMTI6Olr68gxgUKxcubL0BTOwELgJCyCa1yOvTjzxxGuvvfaOO+544IEHwn+vueaa8JR8F9dARcKFSenLM4CBsGTJkoaXnPvtt99f/uVffmsm4enhuVkvt4Eq+EZCgEXzuXOwNa7uu+++7du3H3744Rs2bDjiiCPCr8NTWhMr64X2MPjMZz5z6aWXln4voCfuIgQI1q1b1+Qy88QTT2yNq+OPP37Ks0444YTWxJrvHYW33HLLAzOZ1ytp7pRTTrn66qszvfIk7CsWgHCRUvpSDaC8hg++uuaaa8KC2r59+4zPvfjii8Nzw8vM63L48MMPP3JSmD2f+9znjvwv83olzV1++eX2FeTmIVgAQcOfzHDHHXeEBRUW0YzP3bJlS3hueJnuLpDD8vmrv/qr+NsbbrjhIx/5SPztIYcccv/997/zne8M8+MDH/jAFVdccdddd912223h/zrggANaL7PvvvteeOGFX/va1+69994w1abfyHbllVe2bhwLr6r1fob/5aKLLvrqV79633333XTTTe973/tmfN/OPPPMG2+8Mbza8H99+tOffutb39rhzR111FHXX399eN/uueee8PRjjjmm9fTwnofXc/755995553h163XcMEFF9xyyy3hNdx6662nnXZa68Uuu+yy8Ae8c9K11167cePG7o4USgkXKaUv1QDKW79+fZPLzLBMwoLasGHDjM/df//9w3O7vmtvyr764Ac/GMZMfMD8Oeec8/Wvfz38NsyPsFu2bdsW5typp54aZkx80Nf27dvDVtm6devmzZt37NgRxklYZVPeyic/+cn226/CuAqv9vTTTz/iiCPCuLr77runT6zw2sIf6l3veld4bUcfffT73//+zm/u0EMPDa8kvMJNmzZdddVVX/7yl1svH97zMBo/9alPnXDCCa0b6C655JLw1t/znveE34bpGF5P68XCuxFmWNixYbOFNxG2VndHCqWEi5TSl2oA5TW8zGzdfhWWw4zPTXv71UEHHXTvvfeGBdX67Wc/+9nWjgrzo/3Fwtq57777wuQL0+sb3/hGWEGtp++7775huoSRNuWttO+r8DJ33XVX+8tceumlX/nKV6b8L0cddVTYV/E9aWn45t7+9reH/7e1SMN7ftNNN4WXbD0rPDG89bAbp/wvn5kUfxuG1o033jj9uGDAlb5UAyiv4e1XnR9/dckll4TnXnvttd1dGk/ZV/tMbqGrrroq/GLTpk1hpZxwwgn7TM6P9vsN3/a2t4VnHXnkkYcffnj4Rdg8X/8v999//44dO6a8lfZ91bphKt5/F5x22mnhKfvvv/+U/+uCCy645557wrt3+umntwZShzcX3qXwJsKU+upXv3r77beHFzvwwAOnv+et13DsscdOeVvhxT760Y/G34YBeeutt87nIKE8t18BLGr8+Kv4/YOtqdNu69atYWA8+OCDXf+g0en76tRTTw2r5oADDjj33HNvueWW1hOnzI/jjjsurJQtk8IvWveyRa1h0659Xx1xxBHT91X40834U7wOPvjg888//7bbbvvrv/7r8Gpne3PhxcLoCu/hQQcd1Dqx9n3V/sD11mtof+vxD9j+YvYVNfL4K4BF8/nh7fHnX1188cVhn2zYsCHshEsuuSSMq/D0u+66a/pDnhqavq/23Xffr33ta+9+97vD5Ig3mk25++zss88O78z+k8JbP++88zq/lauuuipMrNavw46688472+/U27Fjx0033dThfw+r6e677z7jjDNme3NhE4bV1BpXwVlnnTXbvgpHF15VeP+nvAb7igXA9w8CLGr886/2mf3ntz/44IPf+MY3wi9uueWW7ibW9H21z+Tgue6668KCCiuu9ZQwP+69995t27Zt3rx569at7Y9vD5MvbJ4wSA4//PC3ve1tYTgdeuih019h2GzhtbWeddFFF91xxx3veMc7wmt7z3vec88994T/Tvlfwmt773vfG/771re+NbxkeGeOPvro2d7ckUceGQZVeLF9Jm8fC2tttn0VfOQjHwlvvfXo+pNOOql1X6F9xQLg518BBBMTE/O68AzD5pprrmk9uCj++4NhVoU50fXEmnFfte7C+8IXvhCf0pofH//4x8O2ufPOO6+44or2n88QdtfNN98cJtDXv/71T3/609PfjY0bN4a3cvfdd7fucGz9L+HX4X8J/+P0B6gHhx122Gc/+9nwtsKuu/HGG+MAm+3NnXvuubdNCu9268euzravNmzY0Np74WXCiDrllFOmv5h9RY38/HaARfP59wc7ixPrS1/6UpJXGDZM2G/t32QX5sf0R60DA8W/PwjQ0vwhWJ2FifXFL37x+uuvT/LaTjrppHvvvffggw+OT/HjzWHAefAVQDTfuwhz27hx41FHHXXjjTdefvnl7U+3r2DAuXMQIBoZGWn4Uxr644Ybbrj77ruvvvrq+PCqFvsKBlm4GAkXJqUvzwAGyKDdhAVUx41XANOlehQWMIT22msvN14BTDc2NjZQ9xICtVi/fr1vGwSYzbJly0pfTgP1CRcdpS+9AAba+Ph46YtqoCbhQqP05RZABcJfRd1RCMwpXFC45QqgubGxsb322qv0hTcwuMJFRLigKH1ZBVCfiYkJN2QBU4SLhXDh4LsFAboWLkLDBakf3QDsM/nP31hWAAntuuuu4XJ17dq14QI2/O11/fr1pS/pgbzCl3n4Yg9f8uvWrQtf/n4CAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA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"
+        }
+      }
+    ]
+  },
+  "mapped_files": {
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/GNOME-BOOTSTRAP-01-e93b746e64724063b3ca196fe8b7ceac/cache/mesa_shader_cache/index": "8b6bdb602904764adabee55112ab7cdd76a3c01927f086fb23adf0f5ec168d0e",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/GNOME-BOOTSTRAP-01-e93b746e64724063b3ca196fe8b7ceac/schemas/gschemas.compiled": "1a4837e57a71b7269e9a595eed6a24f0ac7263e5f5a988485c6c3d772e0fd33c",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/bin/gnome-shell": "5f678999f051dd1e17f2da50cb55ddc152d9b1f5d45a6ea8ead8b4df603b2a17",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/gnome-shell/Gvc-1.0.typelib": "d7b04b63bf1e3991c71a4bd957c3b6c96881fb79dc283e92e3645dfa650f3f6d",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/gnome-shell/Shell-14.typelib": "6c13c4685dd957d7c45b279bb452ca73f874d7d6b71c69a068be0f12c955481b",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/gnome-shell/St-14.typelib": "9e96e7659f8ce65ad3db1ff01c5cd15264fc7c2354a3d2305d8183c49b0f405a",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/gnome-shell/libgnome-shell-menu.so": "395e97a1e98e44555a076ddb517071a00d8b4b2da2441cb66814edda02197606",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/gnome-shell/libgvc.so": "043f981d2a0432a313fc9d1c65ec80143660d5e3ad5e1ab19055a4a09c216841",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/gnome-shell/libshell-14.so": "7f0ff0cd2536c9827e4f98b6b07f4174a67d552ac7edb05c0d6e74178e71ce35",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/gnome-shell/libst-14.so": "e482f07b44180e8cd00c5f5dcc4e9d11391f3e829c093ddc402c2de87a689181",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/girepository-1.0/AccountsService-1.0.typelib": "0f9569debc8db85adf15afdcdb51f911014847bdf3a880b550a001f48b4401c2",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/girepository-1.0/GDesktopEnums-3.0.typelib": "c0dd5d4ff1a8023071bad25d4b5951c7d8a4e9edfdc97cf18268a308139edca5",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/girepository-1.0/GWeather-4.0.typelib": "6e3e9983f3fecfc6af81ed2b4f59386ab3dbe24c5c83f98056c0ba7531a2e540",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/girepository-1.0/Gck-2.typelib": "9e6fba1d266f60b47a0053ce9e64b946a8f1d39313d48f23f425130fb435702f",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/girepository-1.0/Gcr-4.typelib": "27d15b605252f086ffaf82b79975db8d3b6055d45750b53596fd97816b74213c",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/girepository-1.0/Gdk-4.0.typelib": "4416aff0f2a94e1f7781f029cfa2b9fb7c07315a642bb7b31ac257199121c61d",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/girepository-1.0/Gdm-1.0.typelib": "6e2d7c13d5431a8675c35c25cb44664ccad1d0c0cdd5b815042571f118143c7b",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/girepository-1.0/Geoclue-2.0.typelib": "5c33009d9f9b670a92c01a4fc6e151b0aa9e96e855f2d249a3f4a99024ff0a08",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/girepository-1.0/GnomeBG-4.0.typelib": "9678b433dbf444f6ed47e89d73d9db20bef77acb2a9ff69764d36e4f3642f19f",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/girepository-1.0/GnomeBluetooth-3.0.typelib": "d530e800a5883573486a5348b2470dba0fb130b1c5f697327d52139a554c90ac",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/girepository-1.0/GnomeDesktop-4.0.typelib": "5322ae0b7eb208d61f68e5e59fd25994396716c394bab9b46874d2650f2100b7",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/girepository-1.0/Graphene-1.0.typelib": "e41ea620c9d28113dc76aaa4c22d1feb599e8eda573e7176cb63848ef939f7ec",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/girepository-1.0/Gsk-4.0.typelib": "6b3dc9d4d286a2cde3e8d127d6e2c076671ff900b1f1e0eb2d92e8c9a116a0e9",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/girepository-1.0/Gtk-4.0.typelib": "271424ad8e21fb20958b972ce07cda808b29f517def2a84deaa399b94b7c33cd",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/girepository-1.0/IBus-1.0.typelib": "368207ab8596e32ebf40aa1b21eb2012c8ecf2ba8211a11faef14ecef7db66b4",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/girepository-1.0/NM-1.0.typelib": "107d9056cf9cdede8e25984acdb399947a150833d08204b76686247f37db4245",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/girepository-1.0/NMA4-1.0.typelib": "1a883d28033d0184ca694daed34beb5739468a22cc68ae43d3469bcb3754edf8",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/girepository-1.0/Polkit-1.0.typelib": "5bad83f910b5d9e3fb0a1b3acecf667dddf6608d23d4e34e0152964ddccf9fec",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/girepository-1.0/PolkitAgent-1.0.typelib": "c2ab85a8f36ed94434b6a297c9ebf1acd3df6fdf4b15bb90b657494b0e8012de",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/girepository-1.0/Rsvg-2.0.typelib": "b0e60435175a2b246cf013a54f2361f897a5c4be3be1657a6d935f7117d8d8af",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/girepository-1.0/Soup-3.0.typelib": "b15149d668a4c683753a3f2a94ff030d294bb5b2e9af701e501f82c7f2605f1d",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/girepository-1.0/UPowerGlib-1.0.typelib": "f017846ac6041e6831cb8112d59b2d0f7b32f791b79f7baf21b82a11dcd69a77",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/gjs/girepository-1.0/GjsPrivate-1.0.typelib": "50558e47b129ca2a341090b61e6d2d45905fea77e94c5b188f60e6929d4325c6",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libaccountsservice.so.0.0.0": "7c38f50aa24b2a33332964d5e97b66b28ec0e9d25333d45ea7ea1c90cc88ba62",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libcanberra.so.0.2.5": "626bfac23934e0a254e3caea7fa18a9cf39f80eda014b1604c1e5b9aec0e76e2",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libeis.so.1.2.1": "5c2df16bfd509d59c4bcc7dc179a22e7722509f4239fcdab7a2c413ceea6451f",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libevdev.so.2.3.0": "38125f0052d085b76d67666a6ac1405e31d1bb8b49cb6fb5c6728bf3e9a3f4aa",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libgck-2.so.2.2.0": "ef7c10851a903bc768d30a7a998b27fea9835a5541fb3540e012027420c37de9",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libgcr-4.so.4.2.0": "9b1f196c239e207533e2346f0926738e375ce2d63274d76cb5c8912b4d3198fc",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libgdm.so.1.0.0": "6c504ce3ac77ac993726917ccbde01b367a5482c041d6988f98f194365c81c02",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libgeoclue-2.so.0.0.0": "709a0f7f46a489cf837e46e29a17d6f30aa687767c8c06122f2d7654c52b83c7",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libgeocode-glib-2.so.0.0.0": "351d2e9a1c704fbd77aeb072b38a0e7427b5d6d34cfe4bedb7c71cf5add7d2e0",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libgjs.so.0.0.0": "fa55034e79132a36d8e11bcdf7d0b365717e3dc85efe3fca6414f075c422d7a1",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libgnome-bg-4.so.2.1.0": "591b8f4b0eafbbb9ae8c935c70d59581028065a1db4e3eff54d265f912591fdc",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libgnome-bluetooth-3.0.so.13.2.0": "818200f154c8510420cd5f8b82ae843b55eb58887b099fa5bcb524784256f202",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libgnome-desktop-4.so.2.1.0": "bee95c4bff128b7d41779572919811eb9ea5ea80ed749cc487b96ceba7147efa",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libgraphene-1.0.so.0.1000.8": "05ec52d7b5c5f5b891e20ab73243102e4316e3c98675b62df48e4218ca799c2f",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libgtk-4.so.1.1400.5": "cdc584775543f6020a367e85ebe28e8ffec6fe107a7ff8d94bb312a8a10f3c46",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libgweather-4.so.0.400.2": "da3a8a4e98f8f6172dee915c0d979661e6a4f764319c28c6616520c141bdd96b",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libgweather-4/Locations.bin": "078ea7492654f5f5b6c8ecfc72b12d2f13ea694668fef71e69b4c6a73fd9984c",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libibus-1.0.so.5.0.529": "96476cea7380142e333a0044c6c4a4a1e5ca874dc3a02d919c38ec43c5e26697",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libinput.so.10.13.0": "3dea9a694022f2d59fbaa2714f3ea614bef6e16b624bfe817a6ea481704d73b3",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libjson-glib-1.0.so.0.800.0": "f633e2720c6d7706dabe44241a4050efdc0e7df9ab43f3fb58a165eb3c2d5ec5",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libmozjs-115.so.115.10.0": "17ddc8d6546fee566e64fd8165ad905add3f72e022c10c4a7bac236695e2eeb2",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libmtdev.so.1.0.0": "843e4aa13d0407569a5fb9b44f235c3a788e6afde4ed3ee82a9db37d70a466f7",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libmutter-14.so.0.0.0": "0f9fa621e55b7593e871f7789150ba1f2d860371ae2ba33736d72c6192419be8",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libnm.so.0.1.0": "b39505d1f8faa109b82377de49252c7b796761aa618d405d973feca13f837d8a",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libpipewire-0.3.so.0.1005.0": "2e21fa4ca7e82f95df0bc880df23392a576bba983e48c65a01657c65c54e575e",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libpolkit-agent-1.so.0.0.0": "a9d8f69f44bf813ca58d516dd62933d7df35f8d24799a541d2b8302c1333868d",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libpolkit-gobject-1.so.0.0.0": "e759b475aa29664d6219a59b0c360f764c56318547f8c9b3ff433b0c3b1e0778",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libpulse-mainloop-glib.so.0.0.6": "3740e5add513a27a70afb657e261847df1eeba9e62111b2ce480c1641e72692c",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libsecret-1.so.0.0.0": "dd11ac9962eb3cd082cc6c8c3529019ab2a333ddc4ccc79ed608fdfbf7ef95a1",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libsoup-3.0.so.0.7.1": "a0087faeb8a539328da89338d3cd19fd316825482549b921a8e799393d9aa54c",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libtdb.so.1.4.10": "6b9930cda5fc15a4d43bb231b8524b2c74cb7386e57d1d7c3d9cad99ab05bc82",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libupower-glib.so.3.1.0": "fe92340195ec15a2384c681cdf1316b0da78efd1e4aae31a15aede124e058029",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libvorbisfile.so.3.3.8": "7499ededea9e6c2a1f3801da281f10ff50cd831b7bf3274da911ef6327b0035d",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libwacom.so.9.0.0": "67fc99dbb4eb53465847d7982d8455bdb10671f1af2cd4b29e42f60915195376",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libxcb-res.so.0.0.0": "f398f04a67f89d094225004a7f56d6cfce4fa6e45a656a756d59302f60c25d01",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libxcb-xkb.so.1.0.0": "f6b3ca63ff23f3e82d122af4622aaebed49c58614e2f840568a0bb4c9048436c",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libxkbcommon-x11.so.0.0.0": "109a5c2095ab6bcc36f751d3c0deb3b066ecbfb664a36904b6ca212f987a408a",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/libxkbregistry.so.0.0.0": "f368dce47345415e81be57a4c1bd10f918263fbcbf809ccc71b20fe20b5f406a",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/mutter-14/Cally-14.typelib": "07242a61ebd6811f3357ce09091f8dfbfe45bab47d1cd16a51276313b9a69958",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/mutter-14/Clutter-14.typelib": "2a9ff8360906fe47b25a209260ee9b3045ace3b4277fa2df2be346317252dcbc",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/mutter-14/Cogl-14.typelib": "1518706a0283b46fc3c9a22ba48955d952aa24c2240206fcc58c0d33a264488a",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/mutter-14/CoglPango-14.typelib": "e321dbf163d9f39b072c309da18a617c691d430ca4cc9eb5d6a8b2e2bec76d6e",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/mutter-14/Meta-14.typelib": "0b27d73b639dd7914450caddc6df046d60afab804c083c8e46a425023dd6dd08",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/mutter-14/Mtk-14.typelib": "6591f888df412fa4af43f346b96073eff95e5979b010de7f117d4fbe028d246f",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/mutter-14/libmutter-clutter-14.so.0.0.0": "300de1bf2895003f0ee6f7b3323839e64bf2ad22ceb64228bd348a58e174aca0",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/mutter-14/libmutter-cogl-14.so.0.0.0": "2f7e5a049324e07adf581b1db88d53ad0f726763f3463dcba95819eac6cd32c0",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/mutter-14/libmutter-cogl-pango-14.so.0.0.0": "240a9df2516aa0b397818025d211daa05ac96f550b8294df21cca77519774d07",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/lib/x86_64-linux-gnu/mutter-14/libmutter-mtk-14.so.0.0.0": "45798799b6418869c73b61346d889c443c7ba7ba2a414a624bc82934ff05e19a",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/share/gnome-shell/gnome-shell-dbus-interfaces.gresource": "de22075c2a7144c0e5277ee69c37e59e1b960a54f4f396d94a8e00b1d7d722db",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/share/gnome-shell/gnome-shell-icons.gresource": "adbb5532df2174f69749277bcb8e41fd1df16bcf80fa413e194eb1bc37e4ea89",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/share/gnome-shell/gnome-shell-osk-layouts.gresource": "79744b7f7f9f4b058bc83226776a13853691918d8035e6359429d2e399020fb7",
+    "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/gnome-lab/sysroot/usr/share/gnome-shell/gnome-shell-theme.gresource": "bebe858825c1e7e11d934ab3e3b816d3be49e88b5882438b0826d6aaabaeeb9f",
+    "/usr/lib/locale/C.utf8/LC_ADDRESS": "26e2800affab801cb36d4ff9625a95c3abceeda2b6553a7aecd0cfcf34c98099",
+    "/usr/lib/locale/C.utf8/LC_COLLATE": "47a5f5359a8f324abc39d69a7f6241a2ac0e2fbbeae5b9c3a756e682b75d087b",
+    "/usr/lib/locale/C.utf8/LC_CTYPE": "59015993b1b671273461ef1167d7a9ad76dc090d521c91102e962217ed6b6dba",
+    "/usr/lib/locale/C.utf8/LC_IDENTIFICATION": "38a1d8e5271c86f48910d9c684f64271955335736e71cec35eeac942f90eb091",
+    "/usr/lib/locale/C.utf8/LC_MEASUREMENT": "bb14a6f2cbd5092a755e8f272079822d3e842620dd4542a8dfa1e5e72fc6115b",
+    "/usr/lib/locale/C.utf8/LC_MESSAGES/SYS_LC_MESSAGES": "f9ad02f1d8eba721d4cbd50c365b5c681c39aec008f90bfc2be2dc80bfbaddcb",
+    "/usr/lib/locale/C.utf8/LC_MONETARY": "bfd9e9975443b834582493fe9a8d7aefcd989376789c17470a1e548aee76fd55",
+    "/usr/lib/locale/C.utf8/LC_NAME": "14507aad9f806112e464b9ca94c93b2e4d759ddc612b5f87922d7cac7170697d",
+    "/usr/lib/locale/C.utf8/LC_NUMERIC": "f5976e6b3e6b24dfe03caad6a5b98d894d8110d8bd15507e690fd60fd3e04ab2",
+    "/usr/lib/locale/C.utf8/LC_PAPER": "cde048b81e2a026517cc707c906aebbd50f5ee3957b6f0c1c04699dffcb7c015",
+    "/usr/lib/locale/C.utf8/LC_TELEPHONE": "f4caf0d12844219b65ba42edc7ec2f5ac1b2fc36a3c88c28887457275daca1ee",
+    "/usr/lib/locale/C.utf8/LC_TIME": "0910b595d1d5d4e52cc0f415bbb1ff07c015d6860d34aae02505dd9973a63154",
+    "/usr/lib/x86_64-linux-gnu/gconv/gconv-modules.cache": "52c227df9d53248238602c1ddaccd2c8ddc4cc6a61aa45d7c425af590b8806a5",
+    "/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-svg.so": "4f0dbd5b1ee4dba2c0c087e5eb14830277f4ef67d7832ff0c4d6ef6e766ec67a",
+    "/usr/lib/x86_64-linux-gnu/gio/modules/libdconfsettings.so": "00f54e95cce730ee71cd96f6030a6a980e75e1d7cf18a40cfd72e1d2286c3704",
+    "/usr/lib/x86_64-linux-gnu/girepository-1.0/Atk-1.0.typelib": "ddc5cc47d281b52638cbe0ab39c65a207e11b24f2a43ef50094f2a62533cf3fa",
+    "/usr/lib/x86_64-linux-gnu/girepository-1.0/Atspi-2.0.typelib": "e0577f7eb3ce969032661d201eed028de5944dbab35ed2f8a799342a2fa3aa36",
+    "/usr/lib/x86_64-linux-gnu/girepository-1.0/DBus-1.0.typelib": "0843f4d6a549703df7c07f8e96d3c47752123ecf910c7571d786f5347fa02234",
+    "/usr/lib/x86_64-linux-gnu/girepository-1.0/GIRepository-2.0.typelib": "c9ce34a9b1bb9be57113f2271022d0283feda81c2baaf8cfe6cc7d6f09f93a90",
+    "/usr/lib/x86_64-linux-gnu/girepository-1.0/GL-1.0.typelib": "e6677facd41cc99b3e3e1a9007d9762b00a446b42206d78dd28ea2653478bc80",
+    "/usr/lib/x86_64-linux-gnu/girepository-1.0/GLib-2.0.typelib": "7959062e30ce9b0e6dcad631d61272d6e5ade7abf73e6fb29065276ba4592809",
+    "/usr/lib/x86_64-linux-gnu/girepository-1.0/GModule-2.0.typelib": "07e643cc1fcb9210c1ffd5eb243e2e9cbab05fa3ef25a65e0f083f291cf1ede9",
+    "/usr/lib/x86_64-linux-gnu/girepository-1.0/GObject-2.0.typelib": "25b6c3aa94daa1fe93a47ae7ba97e7e248b810384812a8dfa84772ee99cc82eb",
+    "/usr/lib/x86_64-linux-gnu/girepository-1.0/GdkPixbuf-2.0.typelib": "e0dd4e5ee413492c7af2d1953375d65a102d0b3a7dcb30bbc1311db82613ad24",
+    "/usr/lib/x86_64-linux-gnu/girepository-1.0/Gio-2.0.typelib": "e49bc20f64bd49c6f4b138e8292a2ef4f61f0e41b4feb10fec73bb0567f146be",
+    "/usr/lib/x86_64-linux-gnu/girepository-1.0/GioUnix-2.0.typelib": "df9a26e63c34efb0819a92e5eb534ceb64c436f71393f742ba10bdcc9460e90e",
+    "/usr/lib/x86_64-linux-gnu/girepository-1.0/HarfBuzz-0.0.typelib": "1c2b5d710b9548b4bdabb8fe07695021762999138b2bbf97af59a86f9965781e",
+    "/usr/lib/x86_64-linux-gnu/girepository-1.0/Pango-1.0.typelib": "69a7120e594d37c0c07048120ff28c06ebb9e5ee26c5a01a7a2e38735e3bbca7",
+    "/usr/lib/x86_64-linux-gnu/girepository-1.0/PangoCairo-1.0.typelib": "85d7c36d3a1899b47e3261f8cfe43da7a3386073a6815c41b2a27320ca3a0e6a",
+    "/usr/lib/x86_64-linux-gnu/girepository-1.0/cairo-1.0.typelib": "6a0d6b4c8ae23d2690f83d3aa49a74abc298bcc6f7fd6c2b89fcc134c4f966dd",
+    "/usr/lib/x86_64-linux-gnu/girepository-1.0/freetype2-2.0.typelib": "77695d83d33b8f84f252b7c0e05adced1e9feb3b3a43431f0be8b0fc53d2343a",
+    "/usr/lib/x86_64-linux-gnu/girepository-1.0/xfixes-4.0.typelib": "e55b4e0489c9aac5c7f055f4a1b40e0f92417e0db7c02d1611d342a3396c0890",
+    "/usr/lib/x86_64-linux-gnu/girepository-1.0/xlib-2.0.typelib": "4450fa0426b410db5a219f64b4e0d7f9b0be17ae81b9a6947045aeaacf417f91",
+    "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2": "cd4df4f3c7b83673d61189bf2eaebd33ca4f2853ab9772b8a25e025ef99b1e81",
+    "/usr/lib/x86_64-linux-gnu/libEGL.so.1.1.0": "875ecbb2a07d60e32216c9f102965abc1e9cc1da7789558e2e9b8b9c107e231d",
+    "/usr/lib/x86_64-linux-gnu/libEGL_mesa.so.0.0.0": "ee0de80dc8521bbccf83c90961c53a1cef6a418eabed560a9c618ab7387581b4",
+    "/usr/lib/x86_64-linux-gnu/libFLAC.so.12.1.0": "03f99851a828586d74e06f62d098025271b19aeba9fe781a31b2d90dc57e723b",
+    "/usr/lib/x86_64-linux-gnu/libGL.so.1.7.0": "67f471213576d225d38347a0b6d2a08a231980685301ff6461bd74d3994e5027",
+    "/usr/lib/x86_64-linux-gnu/libGLESv2.so.2.1.0": "4d410c7e883b6e4bab42fafae7ebad6ae5702883bfce07a5e6ffdf4c3fec433b",
+    "/usr/lib/x86_64-linux-gnu/libGLX.so.0.0.0": "16fc8a37eea9210dc83c57eeff5aedc10ab4c6673f2f97e8bb6ee103df657b40",
+    "/usr/lib/x86_64-linux-gnu/libGLX_mesa.so.0.0.0": "409f932670504cc5829c7526db466eb69a6b7f9997fd5df8afc8dfb1588278c2",
+    "/usr/lib/x86_64-linux-gnu/libGLdispatch.so.0.0.0": "ca01a91104c8887b3d8e59499b58cbb8f604cc285666b50d9ec888eb0c915182",
+    "/usr/lib/x86_64-linux-gnu/libICE.so.6.3.0": "899ff245d50d4f1a7bb114d13b6200f42f93696ad93f38020c6ed7c84a5a943e",
+    "/usr/lib/x86_64-linux-gnu/libLLVM.so.20.1": "4b93481bd1c9d42c0951275dd275d4a9d30db78c309ae2cc0405669bc6dbbf8a",
+    "/usr/lib/x86_64-linux-gnu/libLerc.so.4": "a0ee52df526738293bdd232ddaefbb0d1d9c2da775a82fc6730e7cd394da560c",
+    "/usr/lib/x86_64-linux-gnu/libSM.so.6.0.1": "c9301f0ff852c0edcfc766f91c5df4f73b1b300c0303ac188524154588892fd0",
+    "/usr/lib/x86_64-linux-gnu/libX11-xcb.so.1.0.0": "966fc171a949852a606efdf44d255f6f91b35c16328f5405c1b24743b6708ea7",
+    "/usr/lib/x86_64-linux-gnu/libX11.so.6.4.0": "c5b5d782bd9cab3420a62df88f5c991507edf3331a89f98464ddbc538c37b879",
+    "/usr/lib/x86_64-linux-gnu/libXau.so.6.0.0": "8040da3f8516c1acfe39f04ff022480cdb273705ba5e7a4ca70bbdb1527cd67a",
+    "/usr/lib/x86_64-linux-gnu/libXcomposite.so.1.0.0": "675c78d8d5b088a59ad4f8eb15419d0842b17caca3317a5e9f68573171ec5d61",
+    "/usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2": "09bd5941a53ee7fb06898fa066709cf098df8e33a45042e065d2f8461d92672c",
+    "/usr/lib/x86_64-linux-gnu/libXdamage.so.1.1.0": "6ff910fbde851ede163b9066671e1740e374df414591015d90770b99d5b3de4a",
+    "/usr/lib/x86_64-linux-gnu/libXdmcp.so.6.0.0": "667d97d6da16016400ab10de9f83ef4ab209ceb6adf68ff9650225ec13e723b0",
+    "/usr/lib/x86_64-linux-gnu/libXext.so.6.4.0": "2907e6a996465de5b32a0dd10534d4416b87f1dee5670aaa7b19301a1fc93f44",
+    "/usr/lib/x86_64-linux-gnu/libXfixes.so.3.1.0": "89e5897f438456013d2297850a7558cd28c9ad1f6978447197568949fb6a0fd9",
+    "/usr/lib/x86_64-linux-gnu/libXi.so.6.1.0": "a51348c921ce1a35123fa7c99dc59bfd3e815be6829874fe15ae55172901d3e4",
+    "/usr/lib/x86_64-linux-gnu/libXinerama.so.1.0.0": "dceff724f4f74c420116fa6a11ece62894af4fc0e74a2254c923ccc215e1a041",
+    "/usr/lib/x86_64-linux-gnu/libXrandr.so.2.2.0": "bc6120a734d52e7f5e3611334e9f3cff0b3ce1b129bb20b6412ce8f0f62c049d",
+    "/usr/lib/x86_64-linux-gnu/libXrender.so.1.3.0": "250977e0e004b6c0556144c3e683487063b4582dc83d205196ec3aa65d54e2c6",
+    "/usr/lib/x86_64-linux-gnu/libXtst.so.6.1.0": "b236448961631bb13464c878e68535f5335b5fa10a5d8411f3ad1a56ff430ec2",
+    "/usr/lib/x86_64-linux-gnu/libXxf86vm.so.1.0.0": "7dc2d9687e3b238c2caa25ce8c8c7a6c90bce157239ee7fbb2ead2b5cd34c888",
+    "/usr/lib/x86_64-linux-gnu/libapparmor.so.1.17.1": "6d3f5037a2361f6ec2430d33f1c58fdfe97990833d129e9a98d9a936da8bde3b",
+    "/usr/lib/x86_64-linux-gnu/libasyncns.so.0.3.1": "47618619d79ea314f12905b3fff430916123df4a12602a5c40dd3679cf675521",
+    "/usr/lib/x86_64-linux-gnu/libatk-1.0.so.0.25209.1": "d312f3dbed8f19037bf4d8581f0e41ddfe53796dc7abbc9b7f253495d472a923",
+    "/usr/lib/x86_64-linux-gnu/libatk-bridge-2.0.so.0.0.0": "366fcd2f2cd9a77767855a7c25b00ffce57e6b55109a2bf800872f0337a28415",
+    "/usr/lib/x86_64-linux-gnu/libatspi.so.0.0.1": "4af877d2d235b7eaab015abe6d81b82c82fe506a5d71403b9bbdfcbce99e8141",
+    "/usr/lib/x86_64-linux-gnu/libblkid.so.1.1.0": "f3d6283f6b58de134f0f13094deac9c3af6764923c62e85f08a5780ad4ebe039",
+    "/usr/lib/x86_64-linux-gnu/libbrotlicommon.so.1.1.0": "a91ead095d2c80520c55a89057bbe10b031a075340442e63f44b310f93883a1b",
+    "/usr/lib/x86_64-linux-gnu/libbrotlidec.so.1.1.0": "64d8a5019d4c294b89fde1193343ea324bbd8603652554e5545f0a01595fa2c5",
+    "/usr/lib/x86_64-linux-gnu/libbsd.so.0.12.1": "e86cd4f0019f42c2ba5e60602e0edc8694d2948377d98c3654d0f6bddb5254bb",
+    "/usr/lib/x86_64-linux-gnu/libbz2.so.1.0.4": "218c4abdabce31161f3c2778762986d1fe06633705c7eb004a740946a5ccdfff",
+    "/usr/lib/x86_64-linux-gnu/libc.so.6": "8db37cf3f2169f59a0f07ef1fea308c35656668c64c8ff294e1860f4121eb161",
+    "/usr/lib/x86_64-linux-gnu/libcairo-gobject.so.2.11800.0": "61b4b6cb475c8c2c4622fd1618981d466b716b11903255b68975830fa20d982c",
+    "/usr/lib/x86_64-linux-gnu/libcairo-script-interpreter.so.2.11800.0": "81bafae4f1784d8a3544f6a713ef6990ab7657d75600477a6b110e99c32c895a",
+    "/usr/lib/x86_64-linux-gnu/libcairo.so.2.11800.0": "3144bd5935aee427d6c191b6b6d0ebf9010fb6320295a7f73edd276bc6993f2d",
+    "/usr/lib/x86_64-linux-gnu/libcap.so.2.66": "6ac6abc86ac891c6e13486470e26f1d939f47fda9e6b5d5508a7f5ec881adc84",
+    "/usr/lib/x86_64-linux-gnu/libcolord.so.2.0.5": "82eec8f0da7d833308bcbb39bc5aebf4213f0b163b34b06b95b3a761c40e2e3d",
+    "/usr/lib/x86_64-linux-gnu/libcom_err.so.2.1": "022943b3b11c860b049bce41342f1c2594941b7b401d95dfdf235521099fee08",
+    "/usr/lib/x86_64-linux-gnu/libcrypt.so.1.1.0": "1502636e3be8232c9cf801dfb533694aea985d449904f3e1295db26d7b348946",
+    "/usr/lib/x86_64-linux-gnu/libdatrie.so.1.4.0": "507f33edbbc19b80637d6d66f8e3f62fac097d0b4e9ee6f6f23f535ecea26a61",
+    "/usr/lib/x86_64-linux-gnu/libdbus-1.so.3.32.4": "a6ae7b4ef48562b40d7b9ba8efd2e49f6528b7cc6364bea382dcee4b473b5413",
+    "/usr/lib/x86_64-linux-gnu/libdeflate.so.0": "608c8d7e4345a9ff4b57aa853ce0c355cf2e1d5ec11b8bee86fb4760bba8a15f",
+    "/usr/lib/x86_64-linux-gnu/libdrm.so.2.125.0": "ff39219aa058421e46afd36851342370cd1932d2557eb22f54e129755642bf67",
+    "/usr/lib/x86_64-linux-gnu/libdrm_amdgpu.so.1.125.0": "b4353f38e7d1f6097732d326dfdc605e720bfde0488c8582b9af71ffbc0a3d97",
+    "/usr/lib/x86_64-linux-gnu/libdrm_intel.so.1.125.0": "be4c3b86ea638cb1df8a4237ea20269021b97e3aae27633027839d40e3ebf0ae",
+    "/usr/lib/x86_64-linux-gnu/libedit.so.2.0.72": "195c607216f8581dbf516346ed38f4c73500cac4b84e18eb0a4fd49931e4cd56",
+    "/usr/lib/x86_64-linux-gnu/libelf-0.190.so": "248c989360783cdc52f3659921de852c2efcc2097253ce58e34443f856412814",
+    "/usr/lib/x86_64-linux-gnu/libepoxy.so.0.0.0": "5fc7dd1ea433bfe5f1fd9854e66246bdb44e0cbf148707121c5f4c99fe11be29",
+    "/usr/lib/x86_64-linux-gnu/libexpat.so.1.9.1": "c42ff317838b4b4639e2ea801905f0317177c6df7e31b2f0d0240e3c3ac0cfde",
+    "/usr/lib/x86_64-linux-gnu/libffi.so.8.1.4": "00f593fe192f2851b8ce23b25cec2488d769beb5a8f63e8c9e563071e1075153",
+    "/usr/lib/x86_64-linux-gnu/libfontconfig.so.1.12.1": "a94b4059b27766f563894c8f7e61762b6f6b2e25c59ef36b730164d4b75c6c98",
+    "/usr/lib/x86_64-linux-gnu/libfreetype.so.6.20.1": "c14c53c5baff12afafb610c6312fb879e9bb77e80dd42e27504d52d6d8bcd059",
+    "/usr/lib/x86_64-linux-gnu/libfribidi.so.0.4.0": "550020af7ff4f77e3f05500e71051b676ee76f530479c2a836dfe899fcaf8395",
+    "/usr/lib/x86_64-linux-gnu/libgallium-25.2.8-0ubuntu0.24.04.2.so": "e37486422ecafdad74fb05bbcdcfc35300241a5f46e72b63ca442d4e0c0cca8b",
+    "/usr/lib/x86_64-linux-gnu/libgbm.so.1.0.0": "66f584160554d07f03d2a2fd1037d6af8f071e189c92438a77924e99c4572f0d",
+    "/usr/lib/x86_64-linux-gnu/libgcc_s.so.1": "d93224d2b0dab4247598be683adca02f5cf00586f99c187579cd7e92058fb7cb",
+    "/usr/lib/x86_64-linux-gnu/libgcrypt.so.20.4.3": "9f872b8956edfa11a3ad093f509cf312e8d135dd801ca548c990daa214c03bd4",
+    "/usr/lib/x86_64-linux-gnu/libgdk_pixbuf-2.0.so.0.4200.10": "f9f51980f9d8978507c3637fa5d4e89f9910d01d74c91905f27158efca27279d",
+    "/usr/lib/x86_64-linux-gnu/libgio-2.0.so.0.8000.0": "d8c4cf698e9b8790584cc5ede813a86ec4f041c0d58daa452b72431572685a87",
+    "/usr/lib/x86_64-linux-gnu/libgirepository-1.0.so.1.0.0": "2c16fd69df300c76d8ff4847dadb09d30433595e737de98c9935752e6fa29fb1",
+    "/usr/lib/x86_64-linux-gnu/libglib-2.0.so.0.8000.0": "42467d0dbcc0a6c9e0a31f05a5944095504ce98f093c3fe0825f0a1533fa8207",
+    "/usr/lib/x86_64-linux-gnu/libgmodule-2.0.so.0.8000.0": "f8445c01952fd3ff0bb4f17f73be821af3e4b9b61546ff517392e9baeb8f2126",
+    "/usr/lib/x86_64-linux-gnu/libgmp.so.10.5.0": "0ccdfb6d6f5c039465f6d002cf7e4c072d48ac6a2cffc8dd6c748dec31592804",
+    "/usr/lib/x86_64-linux-gnu/libgnutls.so.30.37.1": "ddbae2995750875c07bc218d12a062d73f8250678f54dedda7e9be5068781c98",
+    "/usr/lib/x86_64-linux-gnu/libgobject-2.0.so.0.8000.0": "99bf0727e0ca4faf12ab09b753b3d03294562c29c559b970c4dad435f9ec2bc6",
+    "/usr/lib/x86_64-linux-gnu/libgpg-error.so.0.34.0": "6cb18a007bfcb623029f4528a36b46578fea7dc34c2b505b8e6e0d99e6348cd1",
+    "/usr/lib/x86_64-linux-gnu/libgraphite2.so.3.2.1": "fcfaf843b25b58b88319ced52f826fc8213a661f3693c916f88641eddffe05b8",
+    "/usr/lib/x86_64-linux-gnu/libgssapi_krb5.so.2.2": "8d0b00978cde2a5a9ec76bee1e16a80efd502bc4db8647174a00a61c9d90f989",
+    "/usr/lib/x86_64-linux-gnu/libgudev-1.0.so.0.3.0": "fe24380e9898291c58f4b5533bf9199604c919a6e0567ff21652eaad7e4982eb",
+    "/usr/lib/x86_64-linux-gnu/libharfbuzz.so.0.60830.0": "4562cfcfd18935324ba3ac74a944898b867ab87a56e925ab3e351ba773f1513e",
+    "/usr/lib/x86_64-linux-gnu/libhogweed.so.6.8": "c3c606139d4f7776efa4dbd4a6b62e30c916b07a0cafd8c3ef173d6f093607e3",
+    "/usr/lib/x86_64-linux-gnu/libicudata.so.74.2": "ddbb3718b8bd9cbd780e5ab08b4503c30a6c4fa0706ebe5d074ed6b596c1714e",
+    "/usr/lib/x86_64-linux-gnu/libicuuc.so.74.2": "7560aadde38e5f4237a47a1ddd5891f9b36768a77a60faae30beee003ac01901",
+    "/usr/lib/x86_64-linux-gnu/libidn2.so.0.4.0": "6e632fd9a3125db60bbc623719bbc17b0470330321c5b1c57f1ff7190e5551ad",
+    "/usr/lib/x86_64-linux-gnu/libjbig.so.0": "6fea8a26ef5e0d2a36d296d7d0ec0c1f0894bf796b5824317bea88c090833a62",
+    "/usr/lib/x86_64-linux-gnu/libjpeg.so.8.2.2": "ac09f2cd6f8a3b8e3cb123999ce275f9bcbe31c6cf9e20212c8f297772591d15",
+    "/usr/lib/x86_64-linux-gnu/libk5crypto.so.3.1": "dd8b93b95adf53a638772061dbe81dc0252d2d8857ae1df774aed78c6a79e0c0",
+    "/usr/lib/x86_64-linux-gnu/libkeyutils.so.1.10": "f48214417757f18793ed6e180cc14ee1d6f04252a518fc7270e8ca1d0b4260fe",
+    "/usr/lib/x86_64-linux-gnu/libkrb5.so.3.3": "8cd11f2aa69efdac7c040a2794f8bf1a737405abff53908b737c721d1c4ba65d",
+    "/usr/lib/x86_64-linux-gnu/libkrb5support.so.0.1": "8253bcdf7f39fcf8f25e797757808e671d777efc00b0cd1fbbcd9da61b0e98f7",
+    "/usr/lib/x86_64-linux-gnu/liblcms2.so.2.0.14": "65d948920458341176f78e3797320ffb7c052ab5bd75036c3db75dd88839b007",
+    "/usr/lib/x86_64-linux-gnu/libltdl.so.7.3.2": "f059d7bfdc300ea3de7241bf0d21b2b5c9a5eac47cf8b8b28d3accafed90fe6e",
+    "/usr/lib/x86_64-linux-gnu/liblz4.so.1.9.4": "40bffd0a098387368b16b992abd5f7cf43c0fa2f05cabe5a6d483719554adfda",
+    "/usr/lib/x86_64-linux-gnu/liblzma.so.5.4.5": "696e868dd0700a19a6d65fc01608ec2d70d3cb91f65710e89180cd2e688f30cb",
+    "/usr/lib/x86_64-linux-gnu/liblzo2.so.2.0.0": "67a7624b45b4af0dd0d61122cfe16cf26353533a6b9d443179f6ec72093e0d48",
+    "/usr/lib/x86_64-linux-gnu/libm.so.6": "e9c4b28d340e415b8137480ec442662f981e1399386c5931dae0e886e3639e91",
+    "/usr/lib/x86_64-linux-gnu/libmd.so.0.1.0": "423e18586b6ea740f4465afd64f7a9a4cb7264ed979c8e7256f9085af5345fef",
+    "/usr/lib/x86_64-linux-gnu/libmount.so.1.1.0": "43831ab1f85948e5599c5c0295d87ad6d03e3d58b801534abdf4cd5d266388de",
+    "/usr/lib/x86_64-linux-gnu/libmp3lame.so.0.0.0": "14b664b4af2fe18975adb3c06c0369b436dd6504ce421736649c0415447c9d00",
+    "/usr/lib/x86_64-linux-gnu/libmpg123.so.0.48.2": "af6e041af88719710b77d83b7deb8ecbe10bdf67a255fcadcfae7eec1d19eea6",
+    "/usr/lib/x86_64-linux-gnu/libnettle.so.8.8": "a245ed916229583d6fe0b07657b3ed945bc148c28cc08b5266295f620d2b91cc",
+    "/usr/lib/x86_64-linux-gnu/libnghttp2.so.14.26.0": "46764ab5b6ca7e353a322054f0bee45d9158a27f3e6a82a2fa4447f2ba9ba268",
+    "/usr/lib/x86_64-linux-gnu/libogg.so.0.8.5": "1017f00b886f340acede53689da1267398e1297a20e8208db69ead7ab0fc3b6d",
+    "/usr/lib/x86_64-linux-gnu/libopus.so.0.9.0": "63ddaf057d71c53090607e0467eb308640c3b39b0f189e5b937e9c397be2f676",
+    "/usr/lib/x86_64-linux-gnu/libp11-kit.so.0.3.1": "a59efd4792d3343dedea1d26a28f5597abfe3369082deb504c4802a31b014897",
+    "/usr/lib/x86_64-linux-gnu/libpango-1.0.so.0.5200.1": "44fbb30ec8f9b2621095bad0d27cc15cec39245133124a44e8abc45193cbb493",
+    "/usr/lib/x86_64-linux-gnu/libpangocairo-1.0.so.0.5200.1": "229b50cdc7e7675000815e18338189db6f03fd564baaa4d0f257dbbe34f14652",
+    "/usr/lib/x86_64-linux-gnu/libpangoft2-1.0.so.0.5200.1": "cfcd528cfb737212719b3273b433b7fe35b6528acbb08c2223a486449314d629",
+    "/usr/lib/x86_64-linux-gnu/libpciaccess.so.0.11.1": "8f84e18b27f8e5808762b389667628be13076cc432d96c793daeb6fde5ee2a4b",
+    "/usr/lib/x86_64-linux-gnu/libpcre2-8.so.0.11.2": "e00576d71d81d3ba0cfa4903c835a44a8723aac96f72f79ff75200b4cff9071b",
+    "/usr/lib/x86_64-linux-gnu/libpixman-1.so.0.42.2": "73aa0daeedb7228754d798b194e2ff69c8b82a689b9aa4f1d8ab32a8763b0cc5",
+    "/usr/lib/x86_64-linux-gnu/libpng16.so.16.43.0": "eac265b3506df0d9110dd9143e1d0503e2daabafe1d98b23fac8ca17b71d1f6b",
+    "/usr/lib/x86_64-linux-gnu/libpsl.so.5.3.4": "ae6c5a9aecc249fc66e03c16ec6c4385d09d7e12e0ea7694bb831ab4fee8133c",
+    "/usr/lib/x86_64-linux-gnu/libpulse.so.0.24.2": "3d78bd6bfcebccb7d4e65bac298c3aef5b0906fc4c6a4bebcd761c845f4c3c4a",
+    "/usr/lib/x86_64-linux-gnu/libreadline.so.8.2": "0a079f958147699f7bb5bf228406a5d878dc2387fe9cdc5cce6f3e35e20380fc",
+    "/usr/lib/x86_64-linux-gnu/libresolv.so.2": "4086b12d3b95ef6f02373b30b88444e7d79fb8693ed1cfeaa5162e6959878912",
+    "/usr/lib/x86_64-linux-gnu/librsvg-2.so.2.50.0": "5d7825eb908cfb6aebf9a0c4962307865875bfb8ad3b5cda5e9503d328be4a1b",
+    "/usr/lib/x86_64-linux-gnu/libseccomp.so.2.5.5": "b4d9140a7797ccf3ac14f5d9d579b64f157111662940cb8330c632b11a8cea8e",
+    "/usr/lib/x86_64-linux-gnu/libselinux.so.1": "0ec0843463f90e227b0e138e1f379774f50b5514bd7f5dbd4c8a87aca0aa6670",
+    "/usr/lib/x86_64-linux-gnu/libsensors.so.5.0.0": "5464959e6896b27396304c91706089f1339f10430d7381fef0beebf183332a36",
+    "/usr/lib/x86_64-linux-gnu/libsharpyuv.so.0.0.1": "b2e62799e5dbd783a0671d53be99f7c6489567a5332a1e8f471e6bb250f294dc",
+    "/usr/lib/x86_64-linux-gnu/libsndfile.so.1.0.37": "3b9c4be9dab1c1fa6c0d9b9936946f07f02525f93b43fb1ee2112dd3fe70858d",
+    "/usr/lib/x86_64-linux-gnu/libsqlite3.so.0.8.6": "f2cd05de8b6f71ea9d0495a6f9ff9cae844b15d9c45b7ef49ee0af0f81658cc7",
+    "/usr/lib/x86_64-linux-gnu/libstartup-notification-1.so.0.0.0": "c7e370bca1c0a0806bedfeb1229bd821fa855eb3eb139172395a973ac5e5cfde",
+    "/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.33": "1fd75fe70354a416d75aef22bcae68c47bd25d20e2d0568c30b1a9838cf62f11",
+    "/usr/lib/x86_64-linux-gnu/libsystemd.so.0.38.0": "bdf59c828b547bcdbe7b3576c0810d9d9d2e982d8b61b365812542da6a4c4a99",
+    "/usr/lib/x86_64-linux-gnu/libtasn1.so.6.6.3": "59994414d0cdec4f678ef91eaaafc44b26b00bca507e4cc7978caaf79f584173",
+    "/usr/lib/x86_64-linux-gnu/libthai.so.0.3.1": "1a72e318418dc0ee6014401de9d9976516fe127358c07c305e1198b9814e2b31",
+    "/usr/lib/x86_64-linux-gnu/libtiff.so.6.0.1": "aad9b47982a23560b6f6657adcd70a1141d0971bd4f2eb5b3753745f3e8feee4",
+    "/usr/lib/x86_64-linux-gnu/libtinfo.so.6.4": "28ab8e2e29d46dc8f7222025ca2d61e0b898364c6426cc631bf4ecc7c7f5ac52",
+    "/usr/lib/x86_64-linux-gnu/libudev.so.1.7.8": "4298228175fa62a36af88b1afd4406cdd8b1bf166621f957d0dbbde45a698fe5",
+    "/usr/lib/x86_64-linux-gnu/libunistring.so.5.0.0": "7bcf825cd449892db5105ad2aed91dcf94a27b796426600c765720c584c54dd1",
+    "/usr/lib/x86_64-linux-gnu/libuuid.so.1.3.0": "a0fe32d24d125186cf332570770ae749822b5b529d4d4f59222e1aedbc63b58d",
+    "/usr/lib/x86_64-linux-gnu/libvorbis.so.0.4.9": "ba08466742bf3f502d3a47699c321d99fdcb9628aaa8b4356cb6394cfe8a4113",
+    "/usr/lib/x86_64-linux-gnu/libvorbisenc.so.2.0.12": "f62e5237a789185d6a08c66745b585edd9e1c6956c16ee34d98ad6435efc7881",
+    "/usr/lib/x86_64-linux-gnu/libvulkan.so.1.3.275": "e833b010f814b72c6aca0300c8b5f19b6106ffa06c24ddc95a293970c7d6058e",
+    "/usr/lib/x86_64-linux-gnu/libwayland-client.so.0.22.0": "1c22abb422953442aa12822ea51ac76d1c8be92ed143e0159e0f830776cde2b2",
+    "/usr/lib/x86_64-linux-gnu/libwayland-egl.so.1.22.0": "f62e5dae4e63cb43e0210f08ef74dd379f0cd87eafbe569998fe6e1c4a820a10",
+    "/usr/lib/x86_64-linux-gnu/libwayland-server.so.0.22.0": "d6cc42aff7539831152735f58958fd3d854c77881b053c771fbe7a819df5392f",
+    "/usr/lib/x86_64-linux-gnu/libwebp.so.7.1.8": "9664db51ec65209078abbb8bc7b699888a43ecc2f3c74ce8dd4e497175aa5bf0",
+    "/usr/lib/x86_64-linux-gnu/libxcb-dri3.so.0.1.0": "a919146693e71897484c2996beb837273a7a278d1a2afe477bc072f10681f3b0",
+    "/usr/lib/x86_64-linux-gnu/libxcb-glx.so.0.0.0": "7537790510f7a4a14cc54785761dffb1c6fc0058fc379f9cdb0ff26bafee3ff1",
+    "/usr/lib/x86_64-linux-gnu/libxcb-present.so.0.0.0": "d06d982abe6e9202aecd22322166be8ba49e68e05889fb6c6faec0daa88530a4",
+    "/usr/lib/x86_64-linux-gnu/libxcb-randr.so.0.1.0": "9fa6b0ec4af163a86bc9a9ded3309a5979155fb5ef2d311fdda7fff0e9eee01a",
+    "/usr/lib/x86_64-linux-gnu/libxcb-render.so.0.0.0": "35fdef7a90d7f44a0ad9cb259c9ee22f04a48cb064ceb1fc7d17be815acab327",
+    "/usr/lib/x86_64-linux-gnu/libxcb-shm.so.0.0.0": "ad78a7b22409685ca82e54346c2b9465d697f303e69e74a9c1693bb206e319df",
+    "/usr/lib/x86_64-linux-gnu/libxcb-sync.so.1.0.0": "27c2d6dddde34146904c3c64cfcc885a14a351636d6611877368a48e29355c39",
+    "/usr/lib/x86_64-linux-gnu/libxcb-util.so.1.0.0": "53a59cf786fc63d7e5968392fc70098e8d922b311015b7ccd711c44ca352bd39",
+    "/usr/lib/x86_64-linux-gnu/libxcb-xfixes.so.0.0.0": "e59ef497333a6ede2096a0bd9eeb6ec4023374c16d3a8d7511d1251fb7f9b9df",
+    "/usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0": "7958a0136b121bdc4c708968569ad152a9ed208ab026e2537b1005dde64ca440",
+    "/usr/lib/x86_64-linux-gnu/libxkbcommon.so.0.0.0": "3eb6c7315985803a7c72cb81aa3293b763e6cfc907b70b7b2f641c2827cd90f9",
+    "/usr/lib/x86_64-linux-gnu/libxkbfile.so.1.0.2": "f502634e5b3af5244bd2d666aa87284b7bc836b8dd655cf66592985d8d47985a",
+    "/usr/lib/x86_64-linux-gnu/libxml2.so.2.9.14": "8b6f68c242929aebe49eb28f800dc3e8ee7147298c94bdabc834f61eff1ac177",
+    "/usr/lib/x86_64-linux-gnu/libxshmfence.so.1.0.0": "7d40b02b27d449b6b26cea10ea10aafd0cce5a1e2d7859ea57f34b29fe88923f",
+    "/usr/lib/x86_64-linux-gnu/libz.so.1.3": "9b64150b28505a33d6bc3ecf709c279f6de97a1c184dbda65d06ee4537f6d286",
+    "/usr/lib/x86_64-linux-gnu/libzstd.so.1.5.5": "0a2128bc10841fb29e76d08d945864dfb0b6a66da5df6df5d8299197439e54bb",
+    "/usr/lib/x86_64-linux-gnu/pulseaudio/libpulsecommon-16.1.so": "00ab68a64ecbb5d6e0d4b5b35707a83a9040cdb373008e487176e49d184cf22f",
+    "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf": "5c1247acef7f2b8522a31742c76d6adcb5569bacc0be7ceaa4dc39dd252ce895",
+    "/usr/share/fonts/truetype/noto/NotoSans-Bold.ttf": "e83493c945848ecd4a9ad0f6d19164541a0d3e23a9c952304a00a46e00272ac5",
+    "/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf": "89c3c497f618fdaa0b2d1e98fef93582f28c71debd2c4a8cdf41f190ced2909d",
+    "/usr/share/glib-2.0/schemas/gschemas.compiled": "19b94135470184b249253d2600bafb3ece119b6f488765892b834b433da9e5ec",
+    "/usr/share/icons/Adwaita/icon-theme.cache": "cf8f98c24498578200244bdfa1476d67421c204c2a9867fa7db6e9e8e46c8082",
+    "/usr/share/icons/hicolor/icon-theme.cache": "cce9d53864ce178a17ce3321421cfd7e256314b4b4fdfc2c98c7bcf77f3e3891",
+    "/usr/share/mime/mime.cache": "6fd7ef67f7be559e85ccc71d8fad9ce2d14840bbfc6eedfdf0a2fcf1d22ac94d",
+    "/var/cache/fontconfig/0bd3dc0958fa2205aaaa8ebb13e2872b-le64.cache-9": "923a91711a8fc4bc866887cfc6d59ff528975a51a092e955f3c0a2b178bc7b07",
+    "/var/cache/fontconfig/2300eef321c393bfd76478a5c0e95b23-le64.cache-9": "2c1176165a731ca14ce3754c4db5d5c7e2192ee7dc5894f365195d3a25b3ecea",
+    "/var/cache/fontconfig/9b89f8e3dae116d678bbf48e5f21f69b-le64.cache-9": "03234a25788411ca0d0d5638e717e1e493953f7162eaea48cb19d4e78b8d2142",
+    "/var/cache/fontconfig/d589a48862398ed80a3d6066f4f56f4c-le64.cache-9": "7ddf1c166b59bf0838f11a114dc6bdde49cb74a788a6d0fafb52851f911e89e5"
+  },
+  "logs": {
+    "shell.log": "libmutter-Message: 11:13:50.173: Running GNOME Shell (using mutter 46.2) as a X11 window and compositing manager\n\n(gnome-shell:519): libmutter-WARNING **: 11:13:50.173: Could not create database of Wacom devices, expect tablets to misbehave\nXlib:  extension \"DPMS\" missing on display \":43770\".\nWindow manager warning: Impossible to set scaling on crtc 59 to 1.000000, error id 2\nWindow manager warning: Scalig CRTC 59 at 1.000000 failed\n\nXlib:  extension \"DPMS\" missing on display \":43770\".\nXlib:  extension \"DPMS\" missing on display \":43770\".\n\n(gnome-shell:519): libmutter-WARNING **: 11:13:50.283: There is no colord server available\nGNOME Shell-Message: 11:13:50.566: Failed to launch ibus-daemon: Failed to execute child process \u201cibus-daemon\u201d (No such file or directory)\n\n(gnome-shell:519): GNOME Shell-CRITICAL **: 11:13:50.575: Gio.DBusError: GDBus.Error:org.freedesktop.DBus.Error.ServiceUnknown: The name org.gnome.Shell.CalendarServer was not provided by any .service files\n\nStack trace:\n  asyncCallback@resource:///org/gnome/gjs/modules/core/overrides/Gio.js:114:23\n  @resource:///org/gnome/shell/ui/init.js:21:20\n  \n\n(gnome-shell:519): GNOME Shell-CRITICAL **: 11:13:50.576: Gio.DBusError: GDBus.Error:org.freedesktop.DBus.Error.ServiceUnknown: The name org.gnome.Shell.CalendarServer was not provided by any .service files\n\nStack trace:\n  asyncCallback@resource:///org/gnome/gjs/modules/core/overrides/Gio.js:114:23\n  @resource:///org/gnome/shell/ui/init.js:21:20\n  \nGNOME Shell-Message: 11:13:50.582: Failed to register AuthenticationAgent\n\n(gnome-shell:519): accountsservice-WARNING **: 11:13:50.611: ActUserManager: user (null) has no username (uid: -1)\n\n(gnome-shell:519): GNOME Shell-WARNING **: 11:13:50.619: Missing required core component Settings, expect trouble\u2026\n[E] pw.loop [loop.c:67 pw_loop_new()] 0x5d491d1442c0: can't make support.system handle: No such file or directory\n** Message: 11:13:50.621: Failed to start camera monitor\nGNOME Shell-Message: 11:13:50.645: No permission to control network connections: Gio.DBusError: GDBus.Error:org.freedesktop.DBus.Error.ServiceUnknown: The name org.freedesktop.PolicyKit1 was not provided by any .service files\nGNOME Shell-Message: 11:13:50.645: Failed to get PolKit permission: Gio.DBusError: GDBus.Error:org.freedesktop.DBus.Error.ServiceUnknown: The name org.freedesktop.PolicyKit1 was not provided by any .service files\nGNOME Shell-Message: 11:13:50.646: GDBus.Error:org.freedesktop.DBus.Error.ServiceUnknown: The name org.freedesktop.GeoClue2 was not provided by any .service files\nGNOME Shell-Message: 11:13:51.121: GNOME Shell started at Tue Oct 06 2026 11:13:50 GMT+1100 (Australian Eastern Daylight Time)\nGNOME Shell-Message: 11:13:51.128: Registering session with GDM\nGNOME Shell-Message: 11:13:51.150: Error registering session with GDM: GDBus.Error:org.freedesktop.DBus.Error.ServiceUnknown: The name org.gnome.DisplayManager was not provided by any .service files\n** Message: 11:13:55.607: Shutting down GNOME Shell\n",
+    "system-bus.log": "",
+    "bus.log": "",
+    "Xvfb": "The XKEYBOARD keymap compiler (xkbcomp) reports:\n> Warning:          Could not resolve keysym XF86CameraAccessEnable\n> Warning:          Could not resolve keysym XF86CameraAccessDisable\n> Warning:          Could not resolve keysym XF86CameraAccessToggle\n> Warning:          Could not resolve keysym XF86NextElement\n> Warning:          Could not resolve keysym XF86PreviousElement\n> Warning:          Could not resolve keysym XF86AutopilotEngageToggle\n> Warning:          Could not resolve keysym XF86MarkWaypoint\n> Warning:          Could not resolve keysym XF86Sos\n> Warning:          Could not resolve keysym XF86NavChart\n> Warning:          Could not resolve keysym XF86FishingChart\n> Warning:          Could not resolve keysym XF86SingleRangeRadar\n> Warning:          Could not resolve keysym XF86DualRangeRadar\n> Warning:          Could not resolve keysym XF86RadarOverlay\n> Warning:          Could not resolve keysym XF86TraditionalSonar\n> Warning:          Could not resolve keysym XF86ClearvuSonar\n> Warning:          Could not resolve keysym XF86SidevuSonar\n> Warning:          Could not resolve keysym XF86NavInfo\nErrors from xkbcomp are not fatal to the X server\nThe XKEYBOARD keymap compiler (xkbcomp) reports:\n> Warning:          Could not resolve keysym XF86CameraAccessEnable\n> Warning:          Could not resolve keysym XF86CameraAccessDisable\n> Warning:          Could not resolve keysym XF86CameraAccessToggle\n> Warning:          Could not resolve keysym XF86NextElement\n> Warning:          Could not resolve keysym XF86PreviousElement\n> Warning:          Could not resolve keysym XF86AutopilotEngageToggle\n> Warning:          Could not resolve keysym XF86MarkWaypoint\n> Warning:          Could not resolve keysym XF86Sos\n> Warning:          Could not resolve keysym XF86NavChart\n> Warning:          Could not resolve keysym XF86FishingChart\n> Warning:          Could not resolve keysym XF86SingleRangeRadar\n> Warning:          Could not resolve keysym XF86DualRangeRadar\n> Warning:          Could not resolve keysym XF86RadarOverlay\n> Warning:          Could not resolve keysym XF86TraditionalSonar\n> Warning:          Could not resolve keysym XF86ClearvuSonar\n> Warning:          Could not resolve keysym XF86SidevuSonar\n> Warning:          Could not resolve keysym XF86NavInfo\nErrors from xkbcomp are not fatal to the X server\n"
+  },
+  "elapsed_ms": 5648,
+  "finished_at": "2026-10-06T00:13:55.728422+00:00"
+}
