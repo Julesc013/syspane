@@ -7,6 +7,12 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
+The [collection table checkpoint](spec/delivery/table-surface-handoff.md) adds
+ordered columns, stable scoped row identities, visible truncation and measured
+native grid rendering. Independent Linux pixel and accessibility checks cover
+updates, source loss and policy erasure. Charts, images, complete accessibility,
+editing and native desktop integration remain required.
+
 The [scene surface checkpoint](spec/delivery/scene-surface-handoff.md) connects
 authored scalar widgets, pinned themes, bindings and native layout/text. One owner
 erases cached values on policy and source changes. An owned Linux window experiment

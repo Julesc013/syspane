@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-06T21:20:00Z", "scope": "Policy-owned scalar scene composition and native synthetic erasure evidence"}
+updated: {"by": "codex", "at": "2026-10-06T21:50:00Z", "scope": "Collection table composition with native grid and erasure verification"}
 ---
 
 # Current state and next admitted boundary
@@ -22,7 +22,15 @@ The active objective is now the [complete 0.1.0 release](release-0.1.0.md) for W
 required but is no longer the final completion boundary. Legacy version/architecture
 floors, native labs and complete desktop/package evidence remain unresolved.
 
-The latest [scalar scene surface checkpoint](scene-surface-handoff.md) composes
+The latest [table surface checkpoint](table-surface-handoff.md) adds ordered
+collection columns, exact scoped row identity, visible truncation, missing-cell
+semantics and a bounded native grid. Independent owned-window checks compare
+every table cell's pixels and accessible content through replacement, source loss,
+policy revocation and fresh reattachment, including deliberate erasure faults.
+Charts, images, richer formatting, full native accessibility and installed
+desktop/editor integration remain open.
+
+The earlier [scalar scene surface checkpoint](scene-surface-handoff.md) composes
 authored text/value/status widgets and groups with pinned resources, real native
 metrics, shared bindings/layout and one current-policy erasure owner. An owned
 Linux GTK/X11 experiment verifies synthetic values and revocation through external

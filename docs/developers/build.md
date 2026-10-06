@@ -1,5 +1,16 @@
 # Developer setup and checks
 
+The [table package](../../spec/delivery/packages/w-09-table-surface.md) extends
+SceneSurface with table widgets. Supply ordered collection selectors that differ
+only in field; the renderer joins cells by scoped identity and exposes typed rows
+and relative cell pixel rectangles inside the same synchronous frame borrow.
+`native.SCENE-TABLE` checks component semantics; `native.TABLE-ERASURE` checks an
+owned two-column/two-row GTK window with independent grid pixels and AT-SPI names.
+Use the existing Linux preflight/configure/build commands, then `ctest --preset
+linux-x64-gcc13 -R '^native[.](SCENE-(SURFACE|ERASURE|TABLE)|TABLE-ERASURE)$'
+--output-on-failure`. Every native mode keeps the 200 ms observation bound and
+private Xvfb/D-Bus ownership. Tables are not yet an installed desktop feature.
+
 The [scalar surface package](../../spec/delivery/packages/w-09-scene-surface.md)
 adds Linux `SceneSurface`, owning immutable authored/resources input, its complete
 fixed provider catalog and private DataViews. Supply a native clear callback that

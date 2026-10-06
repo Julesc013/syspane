@@ -1,4 +1,4 @@
-#include "surface_fixture.hpp"
+#include "table_fixture.hpp"
 #include <gtk/gtk.h>
 #include <glib-unix.h>
 #include <fcntl.h>
@@ -10,12 +10,12 @@ namespace {
 struct Window {
     GtkWidget* area=nullptr;std::unique_ptr<v::SceneSurface> owner;
     gint64 start=g_get_monotonic_time();std::string input,mode;
-    std::uint64_t revision=7,token=0,sequence=0,generation=0;bool connected=true,drawing=false;int exit=0;
+    std::uint64_t revision=7,token=0,sequence=0,generation=0;bool connected=true,drawing=false,table=false;int exit=0;
     std::vector<unsigned char> fault_pixels;
     std::uint64_t now()const{return static_cast<std::uint64_t>((g_get_monotonic_time()-start)/1000);}
     m::Tick measured()const{return tick(100+now()*1000000);}
     bool clear(){if(mode!="ignore-accessible")atk_object_set_name(gtk_widget_get_accessible(area),"");if(!drawing)gtk_widget_queue_draw(area);return true;}
-    void full(std::uint64_t number){auto d=document(number,++generation);const auto code=owner->receive("P1",token,revision,wire(d,link(revision)),now(),measured()).code;need(code==r::DataCode::accepted,"native full");}
+    void full(std::uint64_t number){++generation;auto d=table?table_document(number,generation):document(number,generation);const auto code=owner->receive("P1",token,revision,wire(d,link(revision)),now(),measured()).code;need(code==r::DataCode::accepted,"native full");}
     void command(const std::string& name){
         if(name=="revoke"){revision=8;owner->policy(policy(revision,false),now());}
         else if(name=="regrant"){revision=9;owner->policy(policy(revision),now());}
@@ -62,14 +62,15 @@ gboolean input(gint fd,GIOCondition condition,gpointer data){auto& w=*static_cas
 gboolean deadline(gpointer data){auto& w=*static_cast<Window*>(data);w.exit=1;w.owner->close();gtk_main_quit();return G_SOURCE_REMOVE;}
 }
 int surface_window(const std::string& root,const std::string& mode){
-    need(mode=="normal"||mode=="ignore-pixels"||mode=="ignore-accessible","native mode");
+    const bool table=mode.find("table-")==0;const auto fault=table?mode.substr(6):mode;
+    need(fault=="normal"||fault=="ignore-pixels"||fault=="ignore-accessible","native mode");
     g_set_prgname("syspane-scene-surface");g_set_application_name("SysPane Scene Surface");if(!gtk_init_check(nullptr,nullptr))return 69;
-    Window w;w.mode=mode;auto* window=gtk_window_new(GTK_WINDOW_TOPLEVEL);w.area=gtk_drawing_area_new();
+    Window w;w.mode=fault;w.table=table;auto* window=gtk_window_new(GTK_WINDOW_TOPLEVEL);w.area=gtk_drawing_area_new();
     gtk_window_set_title(GTK_WINDOW(window),"SysPane Scene Surface");gtk_window_set_decorated(GTK_WINDOW(window),FALSE);
     gtk_window_set_default_size(GTK_WINDOW(window),800,600);gtk_window_move(GTK_WINDOW(window),0,0);gtk_container_add(GTK_CONTAINER(window),w.area);
     atk_object_set_description(gtk_widget_get_accessible(w.area),"syspane.scene.surface");
     auto provider_spec=provider();for(auto& field:provider_spec.fields)field.second=5000000000000ULL;
-    w.owner=std::make_unique<v::SceneSurface>(c::Authority{true,"desktop",{"desktop"}},policy(),config(root),std::vector<v::SurfaceProvider>{provider_spec},[&]{return w.clear();});
+    w.owner=std::make_unique<v::SceneSurface>(c::Authority{true,"desktop",{"desktop"}},policy(),table?table_config(root):config(root),std::vector<v::SurfaceProvider>{provider_spec},[&]{return w.clear();});
     w.token=w.owner->attach("P1",link(),w.now()).token;need(w.token!=0,"native initial attach");w.full(123);
     g_signal_connect(w.area,"draw",G_CALLBACK(draw),&w);gtk_widget_show_all(window);
     need(fcntl(STDIN_FILENO,F_SETFL,fcntl(STDIN_FILENO,F_GETFL)|O_NONBLOCK)==0,"native stdin");

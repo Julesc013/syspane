@@ -34,6 +34,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Deterministic portable scene layout](w-09-layout.md) — Resolve admitted scene geometry from explicit topology and native readable metrics without mutating authored state.
 - [Native Linux text metrics and raster adapter](w-09-native-text.md) — Bounded plain-text shaping and painting with explicit native metrics, fallback and pixel ownership.
 - [Policy-owned native scalar scene surface](w-09-scene-surface.md) — Compose authored scenes, pinned resources, scalar bindings and native text under one erasing presentation owner.
+- [Policy-owned collection tables](w-09-table-surface.md) — Render identity-aligned collection columns with bounded native grid geometry and explicit incomplete states.
 - [W-24 authenticated transport and policy boundary](w-24-transport.md) — Close the initial local protocol, admission and preview boundary before native integration.
 - [W-25 collection continuity across consumer replacement](w-25-consumer-continuity.md) — Keep real collection independently owned while admitting bounded replacement consumers.
 - [W-25 automatic recovery from independent render failure](w-25-controller-render-recovery.md) — Connect the existing render and health guards to the persistent native desktop replacement owner.

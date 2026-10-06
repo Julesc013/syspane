@@ -26,7 +26,23 @@ struct SurfacePixels {
     unsigned width=0,height=0;
     std::vector<unsigned char> rgba;
 };
-struct SurfaceText { std::string id,kind,text,accessible;std::vector<std::string> fonts; };
+struct SurfaceCell { std::string text,accessible;scene::Rect pixels; };
+struct SurfaceRow {
+    std::string producer,epoch,entity;
+    std::uint64_t generation=0;
+    std::vector<SurfaceCell> cells;
+};
+struct SurfaceTable {
+    std::vector<std::string> columns;
+    std::vector<SurfaceRow> rows;
+    std::string summary;
+    std::size_t total=0;
+    bool truncated=false;
+};
+struct SurfaceText {
+    std::string id,kind,text,accessible;std::vector<std::string> fonts;
+    std::optional<SurfaceTable> table;
+};
 struct SurfaceFrame {
     scene::Plan layout;
     configuration::Json theme_pin;

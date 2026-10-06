@@ -45,6 +45,11 @@ Fixtures cover shared bindings, invalid fields, unknown widgets, unit mismatch, 
 
 ## Initial executable contract scope
 
+The [table surface contract](../delivery/packages/w-09-table-surface.md) defines
+ordered collection columns using existing bindings, exact scoped row joins,
+explicit truncation/missing cells and native grid metrics. Custom column labels,
+chart/image content and richer formatting still need explicit versioned contracts.
+
 [Scene/binding 0.2](scene-bindings.md) supplies ordered container membership, bounded
 layout variants, monitor roles and portable selectors. The 0.1 rectangle schema is
 retained for migration, not silently reinterpreted. General expression evaluation

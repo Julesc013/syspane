@@ -17,8 +17,9 @@ sp_sources: ["SRC-CONVERSATION"]
 
 Continue W-09 by composing existing scene 0.2, bindings, immutable resources and
 native text. This package admits an initial scalar presentation capability, not a
-complete edition. Preserve valid unsupported documents. Tables, charts, images,
-collection-valued widgets and richer text content require their missing contracts
+complete edition. The subsequent [table package](w-09-table-surface.md) admits
+collection tables through this owner. Preserve valid unsupported documents.
+Charts, images, other collection-valued widgets and richer text content require their missing contracts
 and implementations; return an explicit whole-scene alternative, never silently
 omit them or invent content in extensions.
 

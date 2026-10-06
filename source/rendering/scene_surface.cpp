@@ -1,4 +1,5 @@
 #include "scene_surface.hpp"
+#include "scene_table.hpp"
 #include <algorithm>
 #include <cmath>
 #include <limits>
@@ -115,7 +116,7 @@ struct SceneSurface::Impl {
         c::authorize_resources(*config.resources,policy,config.capabilities);
         if(policy.forced.count("display.theme_id"))need(policy.forced.at("display.theme_id")==config.resources->theme()["theme_id"],"surface.theme_policy");
         auto next=std::make_unique<SurfaceFrame>();next->theme_pin=config.resources->theme_pin();
-        std::size_t display_pixels=0,leaf_pixels=0,text_bytes=0;
+        std::size_t display_pixels=0,leaf_pixels=0,text_bytes=0,queries=0;
         for(const auto& d:config.topology.displays){
             const auto pixels=[&](s::Unit u){return (u*d.scale_numerator+64*d.scale_denominator-1)/(64*d.scale_denominator);};
             const auto w=pixels(d.bounds.width),h=pixels(d.bounds.height);need(w<=2048&&h<=2048,"surface.capacity");
@@ -125,17 +126,24 @@ struct SceneSurface::Impl {
         const auto catalog=inputs(ticks);std::map<std::string,TextRaster> rasters;std::map<std::string,s::Metrics> metrics;std::map<std::string,SurfaceText> texts;
         for(const auto& w:config.authored.scene["widgets"]){
             const auto kind=w["kind"].get<std::string>();const bool bound=kind=="value"||kind=="status";
-            need(bound||kind=="text"||kind=="group","surface.unsupported");
-            need(w["bindings"].size()==(bound?1u:0u),"surface.unsupported");
+            const bool table=kind=="table";
+            need(bound||table||kind=="text"||kind=="group","surface.unsupported");
+            if(!table)need(w["bindings"].size()==(bound?1u:0u),"surface.unsupported");
+            queries+=w["bindings"].size();need(queries<=256,"surface.capacity");
             SurfaceText out;
-            if(bound){const auto& b=w["bindings"][0];need(b["kind"]!="selector"||b["mode"]=="singleton","surface.unsupported");
+            if(table){out=compose_table(w,catalog,now,[](const s::BindingRow& row){
+                    s::BindingFrame frame;frame.code=s::BindingCode::matched;frame.rows.push_back(row);
+                    const auto cell=text({{"id","cell"},{"kind","value"},{"title",""}},&frame);
+                    return SurfaceCell{cell.text.substr(1),cell.accessible.substr(1),{}};
+                });
+            }else if(bound){const auto& b=w["bindings"][0];need(b["kind"]!="selector"||b["mode"]=="singleton","surface.unsupported");
                 s::project_binding(b,catalog,now,[&](const auto& f){out=text(w,&f);});
             }else out=text(w,nullptr);
-            text_bytes+=out.id.size()+out.kind.size()+out.text.size()+out.accessible.size();need(text_bytes<=262144,"surface.capacity");
+            text_bytes+=surface_text_bytes(out);need(text_bytes<=262144,"surface.capacity");
             if(kind!="group"){
                 const auto& d=display_for(w,config.topology);TextRequest q;q.text=out.text;q.theme=config.resources->theme();q.language=config.language;q.contrast=config.contrast;
                 q.numerator=d.scale_numerator;q.denominator=d.scale_denominator;q.pixel_budget=std::min(std::size_t{4194304},8388608-display_pixels-leaf_pixels);
-                need(q.pixel_budget>0,"surface.capacity");auto raster=render_text(q);need(!raster.missing_glyphs,"surface.glyphs");
+                need(q.pixel_budget>0,"surface.capacity");auto raster=table?raster_table(q,out,8388608-display_pixels-leaf_pixels):render_text(q);need(!raster.missing_glyphs,"surface.glyphs");
                 leaf_pixels+=static_cast<std::size_t>(raster.width)*raster.height;out.fonts=raster.fonts;
                 for(const auto& family:out.fonts){text_bytes+=family.size();}
                 need(text_bytes<=262144,"surface.capacity");

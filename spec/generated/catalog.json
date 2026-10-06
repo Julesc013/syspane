@@ -432,7 +432,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "5e031efd0e37b6443a51c12219edb72513d4b59a728ca5612c7a081128445a39"
+      "sha256": "07b2d0ba1b30469b98db501eec34130d87bd6e6d83e0cac34db939855f9111b3"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -1326,7 +1326,18 @@
         "SP-W09-LAYOUT",
         "SP-W25-NATIVE-NETWORK-CACHE"
       ],
-      "sha256": "468be333c2f1762670964c1d34f997a7c8c69ce1ac076368d6246956471f5cda"
+      "sha256": "1e368d538a42a668691f9d389c0f728421dc4852f12e7212315ec559a6c1c4d0"
+    },
+    {
+      "id": "SP-W09-TABLE-SURFACE",
+      "path": "delivery/packages/w-09-table-surface.md",
+      "title": "Policy-owned collection tables",
+      "description": "Render identity-aligned collection columns with bounded native grid geometry and explicit incomplete states.",
+      "requires": [
+        "SP-W09-SCENE-SURFACE",
+        "SP-W09-BINDINGS"
+      ],
+      "sha256": "7fb876ed52e3b865800726c35fff7f3349c8841c1a50f4a444f24d6479782ca3"
     },
     {
       "id": "SP-W24-PACKAGE",
@@ -1793,6 +1804,17 @@
       "sha256": "7bd4eda4d9c730e416ddd338e944a5ff687e2dc8af394ff4e91930ecf2bd3885"
     },
     {
+      "id": "SP-TABLE-SURFACE-HANDOFF",
+      "path": "delivery/table-surface-handoff.md",
+      "title": "Collection table surface checkpoint",
+      "description": "Identity-aligned table cells and bounded native grids share the current-policy scene owner.",
+      "requires": [
+        "SP-W09-TABLE-SURFACE",
+        "SP-SCENE-SURFACE-HANDOFF"
+      ],
+      "sha256": "477d7c74bf6895c08146baabfdaf1d799af981f229d083123530dae692f9d05f"
+    },
+    {
       "id": "SP-TARGETS",
       "path": "delivery/target-profiles.md",
       "title": "Build targets and qualification profiles",
@@ -2039,7 +2061,7 @@
         "SP-STATE",
         "SP-RENDERING"
       ],
-      "sha256": "1dc6afcb0896151698d367fb063bfffae500f7c0626ecfd3645cdae3528b5714"
+      "sha256": "0418a9f090d950b87557ec48f0a2687832fe5d7aac19fde403fa307d7803421d"
     },
     {
       "id": "SP-SETTINGS",
