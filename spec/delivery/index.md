@@ -22,6 +22,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Native Mutter focus-decision evidence](gnome-focus-trace-handoff.md) — Built-in native diagnostics bind the reproduced focus failure to desktop MRU selection.
 - [Native GNOME icon-manager recovery checkpoint](gnome-icon-recovery-handoff.md) — Owned DING replacement preserves live composition and replacement-bound input while independent fault controls remain failed.
 - [Native GNOME icon-input checkpoint](gnome-input-handoff.md) — Real DING selection, menus and owned folder activation pass beside the passive bridge, with calibrated blocking controls.
+- [Measured network pixels and lifecycle in the owned GNOME shell](gnome-live-network-handoff.md) — Original counters/rates, native age and independent lease/erasure observations.
 - [Owned GNOME shell marker checkpoint](gnome-marker-handoff.md) — A real pinned shell bridge now presents changing externally decoded pixels; desktop composition remains open.
 - [Owned GNOME native reveal and failed focus restoration](gnome-reveal-handoff.md) — Live composition survives visible native hide/restore, while the required foreground focus remains failed.
 - [Owned GNOME shell/compositor recovery checkpoint](gnome-shell-recovery-handoff.md) — Exact shell exit, native replacement, bridge reattachment and new-desktop input pass independently of calibrated omissions.

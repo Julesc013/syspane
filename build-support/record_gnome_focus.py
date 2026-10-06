@@ -74,9 +74,11 @@ def validate(value, build):
         raise ValueError('shell-only baseline includes DING')
     if mode=='candidate':
         candidate = validate_reveal(value, build, family='GNOME-FOCUS-BASELINE-01', outer_outcome=False)
-        for name in ['extension.js','metadata.json','surfaceLease.js','networkCache.js','clockExperiment.js']:
+        for name in ['extension.js','metadata.json','surfaceLease.js','networkCache.js','clockExperiment.js','networkLive.js']:
             raw = (ROOT/'source/desktop/gnome/lab-marker'/name).read_bytes()
             expected_extensions['syspane-lab-marker@syspane.invalid/'+name] = {'bytes':len(raw),'sha256':digest(raw)}
+        raw = (ROOT/'source/desktop/gnome/networkSession.js').read_bytes()
+        expected_extensions['syspane-lab-marker@syspane.invalid/networkSession.js'] = {'bytes':len(raw),'sha256':digest(raw)}
         source = observation['reveal']
         expected_interval = {'actions':source['actions'],'samples':[{'start_us':f['start_us'],**r} for f,r in zip(source['trace']['frames'],source['samples'])]}
         if result['interval']!=expected_interval or result['foreground']!=source['foreground'] or result['icon_manager']!=observation['composition']['icon_manager']:

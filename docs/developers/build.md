@@ -778,8 +778,8 @@ the native session check to attach the separately launched retained relay.
 recomputes the public glyph/clock oracle and verifies held-child exit and artifacts.
 `tests/desktop/test_gnome_clock_record.py <six-clock-age.json-files> -v` checks
 adversarial mutations of those original observations. No operational values enter
-this clock fixture. The retained-cache relay now uses the existing
-`w-25-gjs-clock-linux-x64-gcc13.json` collector evidence binding; the earlier
+this clock fixture. The clock and retained-cache relay now use the existing
+`w-25-live-network-session-linux-x64-gcc13.json` native evidence binding; the earlier
 presentation and native-cache records remain historical and unchanged.
 
 
@@ -843,3 +843,30 @@ both preceding GJS families and all native collector regressions. This evidence 
 standalone native delivery, not a visible desktop qualification. Before the next
 GNOME run, explicitly rebind its pinned collector/library record to this build;
 preserve the old public-clock and retained-cache records and acceptance criteria.
+
+The [measured GNOME network package](../../spec/delivery/packages/w-25-gnome-live-network.md)
+uses that same asynchronous session owner inside the owned shell. Run the Windows
+workspace test preflight before each Linux command, under the admitted unprivileged
+runner:
+
+```sh
+/usr/bin/python3 tests/desktop/native_gnome_bootstrap.py "$BUILD" --network-live live
+```
+
+Repeat with `freeze-age`, `ignore-expiry`, `wrong-value`, `ignore-clear`,
+`lease-loss`, `revoke`, `peer-exit` and `hang`. The four drawing fault controls must
+retain failed candidate outcomes. Each attempt owns its Xvfb, private buses,
+shell, same-session collector and short IPC directory. The tile stays hidden until
+the public composition prerequisite finishes. The observer then brackets original
+native counters, derives rates, decodes values/age/status pixels without diagnostic
+queries during capture, and confirms erasure and actual descendant exits.
+
+`build-support/record_gnome_live_network.py --build-dir "$BUILD" --output
+<new-record> <nine-native-reports>` verifies source-identical controls against their
+original private journals. `tests/desktop/test_gnome_live_network_record.py
+<nine-network-live.private.json-files> -v` challenges that verifier with altered
+observations. Raw operational JSON and crops remain mode 0600 inside the attempt's
+0700 directory; preserve only their hashes in public evidence. Do not copy them to
+the repository. The existing public-clock and retained-cache matrices remain useful
+regressions with their original meanings. Native build artifacts retain the pinned
+live-session checkpoint; this drawing experiment changes no C++ target or profile.

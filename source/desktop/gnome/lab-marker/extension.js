@@ -8,6 +8,7 @@ import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 import {SurfaceLease} from './surfaceLease.js';
 import {NetworkCache} from './networkCache.js';
 import {ClockExperiment} from './clockExperiment.js';
+import {NetworkLive} from './networkLive.js';
 
 const INTERFACE = `<node><interface name="org.syspane.LabMarker">
 <method name="SetGeneration"><arg type="u" direction="in" name="generation"/></method>
@@ -245,6 +246,8 @@ export default class LabMarker extends Extension {
         this._bus.export(Gio.DBus.session, '/org/syspane/LabMarker');
         if (GLib.getenv('SYSPANE_GNOME_CLOCK_AGE'))
             this._clockExperiment = new ClockExperiment(parent);
+        if (GLib.getenv('SYSPANE_GNOME_NETWORK_LIVE'))
+            this._networkLive = new NetworkLive(parent);
         if (GLib.getenv('SYSPANE_GNOME_NETWORK_CACHE'))
             this._networkCache = new NetworkCache(parent);
         if (GLib.getenv('SYSPANE_GNOME_SURFACE_LEASE'))
@@ -309,6 +312,8 @@ export default class LabMarker extends Extension {
     disable() {
         this._clockExperiment?.disable();
         this._clockExperiment = null;
+        this._networkLive?.disable();
+        this._networkLive = null;
         this._networkCache?.disable();
         this._networkCache = null;
         this._surfaceLease?.disable();

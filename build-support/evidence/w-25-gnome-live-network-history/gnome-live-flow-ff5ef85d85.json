@@ -1,0 +1,162 @@
+[
+  {
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "exit": 0,
+    "expected": 0,
+    "at": "2026-10-06T09:22:42.339711+00:00",
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 4294967296,\n  \"checkout_out_bytes\": 1106828036,\n  \"linux_campaign_bytes\": 2604606759,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "/usr/bin/python3",
+      "/mnt/d/Projects/SysPane/syspane/build-support/record_gnome_clock.py",
+      "--build-dir",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13",
+      "--output",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/gnome-live-clock-calibration.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-CLOCK-01-1727943728124f59a510fd96ab67b675.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-CLOCK-01-e994a9834ce24cdab851d3fb467e2a2a.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-CLOCK-01-05e1c0b6053447339ddd741bf3d0af49.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-CLOCK-01-d4c5fb2f7f374863b522b84900489fbb.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-CLOCK-01-26af48d478b94cc28999a65586a29c32.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-CLOCK-01-2e57d790e6054916baa98e6dd74daa4c.json"
+    ],
+    "exit": 0,
+    "expected": 0,
+    "at": "2026-10-06T09:22:44.613420+00:00",
+    "stdout": "Native shell clock controls verified: 6\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "exit": 0,
+    "expected": 0,
+    "at": "2026-10-06T09:22:45.028639+00:00",
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 4294967296,\n  \"checkout_out_bytes\": 1106830130,\n  \"linux_campaign_bytes\": 2604618988,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "/usr/bin/python3",
+      "/mnt/d/Projects/SysPane/syspane/tests/desktop/test_gnome_clock_record.py",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/GNOME-CLOCK-01-1727943728124f59a510fd96ab67b675/clock-age.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/GNOME-CLOCK-01-e994a9834ce24cdab851d3fb467e2a2a/clock-age.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/GNOME-CLOCK-01-05e1c0b6053447339ddd741bf3d0af49/clock-age.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/GNOME-CLOCK-01-d4c5fb2f7f374863b522b84900489fbb/clock-age.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/GNOME-CLOCK-01-26af48d478b94cc28999a65586a29c32/clock-age.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/GNOME-CLOCK-01-2e57d790e6054916baa98e6dd74daa4c/clock-age.json",
+      "-v"
+    ],
+    "exit": 0,
+    "expected": 0,
+    "at": "2026-10-06T09:22:45.909756+00:00",
+    "stdout": "",
+    "stderr": "test_actor_survives (__main__.ClockEvidence.test_actor_survives) ... ok\ntest_capture_gap (__main__.ClockEvidence.test_capture_gap) ... ok\ntest_changed_final_receipt (__main__.ClockEvidence.test_changed_final_receipt) ... ok\ntest_claimed_false_pass (__main__.ClockEvidence.test_claimed_false_pass) ... ok\ntest_closed_connection (__main__.ClockEvidence.test_closed_connection) ... ok\ntest_closed_handle (__main__.ClockEvidence.test_closed_handle) ... ok\ntest_future_sample (__main__.ClockEvidence.test_future_sample) ... ok\ntest_missing_captures (__main__.ClockEvidence.test_missing_captures) ... ok\ntest_missing_clear_interval (__main__.ClockEvidence.test_missing_clear_interval) ... ok\ntest_missing_exit (__main__.ClockEvidence.test_missing_exit) ... ok\ntest_original_modes (__main__.ClockEvidence.test_original_modes) ... ok\ntest_peer_sample_rebased (__main__.ClockEvidence.test_peer_sample_rebased) ... ok\ntest_removed_disable (__main__.ClockEvidence.test_removed_disable) ... ok\ntest_reversed_capture (__main__.ClockEvidence.test_reversed_capture) ... ok\ntest_wrong_exit (__main__.ClockEvidence.test_wrong_exit) ... ok\ntest_wrong_parent (__main__.ClockEvidence.test_wrong_parent) ... ok\n\n----------------------------------------------------------------------\nRan 16 tests in 0.554s\n\nOK\n"
+  },
+  {
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "exit": 0,
+    "expected": 0,
+    "at": "2026-10-06T09:22:46.326934+00:00",
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 4294967296,\n  \"checkout_out_bytes\": 1106833236,\n  \"linux_campaign_bytes\": 2604618988,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "/usr/bin/python3",
+      "/mnt/d/Projects/SysPane/syspane/build-support/record_gnome_network_cache.py",
+      "--build-dir",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13",
+      "--output",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/gnome-live-cache-calibration.json",
+      "--reports",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-NETWORK-CACHE-01-8e4e7b5097f448a2aa980b773b21aba3.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-NETWORK-CACHE-01-d87089eea72844938d6d1c0f74328d42.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-NETWORK-CACHE-01-dbbac54e83374b91b023575b6ab9a63f.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-NETWORK-CACHE-01-376e92c8dd59452ca040d1007481eca6.json"
+    ],
+    "exit": 0,
+    "expected": 0,
+    "at": "2026-10-06T09:22:48.172281+00:00",
+    "stdout": "Four native cache modes independently verified; private operational records were not copied.\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "exit": 0,
+    "expected": 0,
+    "at": "2026-10-06T09:22:48.597696+00:00",
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 4294967296,\n  \"checkout_out_bytes\": 1106835155,\n  \"linux_campaign_bytes\": 2604631434,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "/usr/bin/python3",
+      "/mnt/d/Projects/SysPane/syspane/tests/desktop/test_gnome_network_cache_record.py",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-NETWORK-CACHE-01-8e4e7b5097f448a2aa980b773b21aba3.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-NETWORK-CACHE-01-d87089eea72844938d6d1c0f74328d42.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-NETWORK-CACHE-01-dbbac54e83374b91b023575b6ab9a63f.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-NETWORK-CACHE-01-376e92c8dd59452ca040d1007481eca6.json",
+      "-v"
+    ],
+    "exit": 0,
+    "expected": 0,
+    "at": "2026-10-06T09:22:57.080541+00:00",
+    "stdout": "",
+    "stderr": "test_calibration_missing_digit (__main__.CacheEvidence.test_calibration_missing_digit) ... ok\ntest_capacity_prefix (__main__.CacheEvidence.test_capacity_prefix) ... ok\ntest_capture_gap (__main__.CacheEvidence.test_capture_gap) ... ok\ntest_changed_full_epoch (__main__.CacheEvidence.test_changed_full_epoch) ... ok\ntest_clear_control_cannot_pass (__main__.CacheEvidence.test_clear_control_cannot_pass) ... ok\ntest_collector_artifact (__main__.CacheEvidence.test_collector_artifact) ... ok\ntest_collector_comparison_count (__main__.CacheEvidence.test_collector_comparison_count) ... ok\ntest_conflicting_grant (__main__.CacheEvidence.test_conflicting_grant) ... ok\ntest_disable_residue (__main__.CacheEvidence.test_disable_residue) ... ok\ntest_exit_timeout_not_proof (__main__.CacheEvidence.test_exit_timeout_not_proof) ... ok\ntest_extra_private_payload (__main__.CacheEvidence.test_extra_private_payload) ... ok\ntest_four_native_modes (__main__.CacheEvidence.test_four_native_modes) ... ok\ntest_missing_regrant_gap (__main__.CacheEvidence.test_missing_regrant_gap) ... ok\ntest_missing_replay (__main__.CacheEvidence.test_missing_replay) ... ok\ntest_native_exit (__main__.CacheEvidence.test_native_exit) ... ok\ntest_native_pid (__main__.CacheEvidence.test_native_pid) ... ok\ntest_native_receipt (__main__.CacheEvidence.test_native_receipt) ... ok\ntest_private_digest (__main__.CacheEvidence.test_private_digest) ... ok\ntest_private_path (__main__.CacheEvidence.test_private_path) ... ok\ntest_residual_pixels (__main__.CacheEvidence.test_residual_pixels) ... ok\ntest_stale_callback_cache (__main__.CacheEvidence.test_stale_callback_cache) ... ok\ntest_unauthorized_peer (__main__.CacheEvidence.test_unauthorized_peer) ... ok\ntest_unbound_erasure_ack (__main__.CacheEvidence.test_unbound_erasure_ack) ... ok\ntest_value_oracle_redefinition (__main__.CacheEvidence.test_value_oracle_redefinition) ... ok\ntest_wrong_value_control_cannot_pass (__main__.CacheEvidence.test_wrong_value_control_cannot_pass) ... ok\n\n----------------------------------------------------------------------\nRan 25 tests in 7.445s\n\nOK\n"
+  }
+]

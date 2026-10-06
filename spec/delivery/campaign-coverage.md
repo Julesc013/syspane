@@ -31,7 +31,7 @@ counts do not establish a later integration claim.
 | Independent desktop oracle | [Temporal oracle](oracle-handoff.md), [GNOME composition](gnome-composition-handoff.md), reveal/input/recovery records | Native Linux observation exists; Windows external capture and macOS equivalents have not run. Structural observations cannot close those gaps |
 | Contemporary Windows host track | [Read-only native observer](windows-host-inventory-handoff.md) and its exact Explorer graph/process evidence | W-03 has begun; synthetic lab designation/usability, actual attachment, pixels, input/reveal and shell recovery remain unexecuted |
 | XP/7 track | Historical toolset build/import audit, modern-host execution and relocated smoke | W-04 guest scope/usability remains unresolved. Neither XP nor Windows 7 runtime/host qualification has run |
-| Linux native-host track | X11 and GNOME/DING experiments, original failures and negative controls, [latest clock checkpoint](gnome-clock-handoff.md) | Initial experiments ran. Default focus restoration fails; optional integration is restricted. Operational freshness, product recovery and complete host qualification remain open |
+| Linux native-host track | X11 and GNOME/DING experiments, original failures and negative controls, [measured network tile](gnome-live-network-handoff.md) | Initial experiments and finite operational freshness/lease pixels ran. Default focus restoration fails; optional integration is restricted. Product renderer supervision/recovery and complete host qualification remain open |
 | Contemporary/older macOS track | Platform contract and prior laboratory inventory; no admitted endpoint | W-06 native compiler/SDK/profile, AppKit candidate, build and desktop experiment are missing. Lack of a Mac runner is not compatibility evidence |
 | Early smoke packages | `build-support/evidence/w-25-gjs-clock-*.smoke.json` and [smoke contract](packages/w-26-smoke.md) | Three local model packages passed relocated execution. Complete desktop payloads, installer/lifecycle and release qualification remain later gates |
 | Bounded, resumable execution | Campaign workspace/preflight records, ordinary developer commands, source archives and per-increment handoffs | Continue preserving failures and exact inputs. A preflight is not an OS quota; agent text does not enforce sandbox/signing policy |
@@ -39,9 +39,9 @@ counts do not establish a later integration claim.
 
 The foundation is materially buildable; the full requested campaign is not yet
 proven complete. The next Windows action depends on a designated native lab. In
-parallel, W-25 has independent implementation work: actual measured network delivery
-under the qualified clock owner, full model status/current policy, render supervision
-and visible/editor recovery. Keep initial native-track coverage visible before
+parallel, W-25 has independent implementation work: general product demand and
+current-policy distribution, real-rendering supervision and visible/editor recovery.
+Keep initial native-track coverage visible before
 expanding optional GNOME scenarios further.
 
 The subsequent [native GJS consumer](gjs-network-view-handoff.md) closes the shared
@@ -53,7 +53,12 @@ the earlier records above remain historical.
 The [live native session](live-network-session-handoff.md) subsequently connects
 actual supervised collector messages to the asynchronous GJS owner and observes
 data-lease loss, worker hang, revocation and parent death. This closes the standalone
-forwarding prerequisite. Operational shell pixels and complete recovery remain open.
+forwarding prerequisite. The [measured GNOME tile](gnome-live-network-handoff.md)
+then closes one operational pixel experiment: original counters/rates, advancing
+age, independent lease/freshness, typed policy erasure and actual native exits.
+Four drawing fault controls fail their intended dimensions. Independent supervision
+of real rendering and complete recovery remain open; the Windows/Mac laboratory
+requirements and default focus failure above are unchanged.
 
 No row above removes native settings, direct editing, persistence, real telemetry
 or recovery from the first complete desktop edition. No synthetic marker, model

@@ -41,14 +41,17 @@ The [GJS clock adapter](spec/delivery/gjs-clock-handoff.md) exposes that same Li
 clock as exact decimal strings, with tested native resource cleanup and peer-exit
 rejection. The [owned GNOME clock experiment](spec/delivery/gnome-clock-handoff.md)
 adds asynchronous attachment, visible public-sample age/expiry and native teardown.
-Operational network freshness remains a separate integration gate.
+Operational network freshness is covered by the later measured-tile experiment below.
 The [native GJS network consumer](spec/delivery/gjs-network-view-handoff.md) now
 reuses the shared C++ model, measured projection and revocable policy. Standalone
 fixtures check its exact values, age, lease and failure behavior. The
 [live native session](spec/delivery/live-network-session-handoff.md) now forwards
 real measured collector messages to an asynchronous GJS owner and tests source
-hang, policy erasure and parent loss. Displayed operational age and network pixels
-remain the next integration boundary.
+hang, policy erasure and parent loss. The [measured GNOME tile](spec/delivery/gnome-live-network-handoff.md)
+now uses that owner to display actual counters/rates, advancing age and independent
+freshness/lease states. External pixel checks detect frozen age, false freshness,
+wrong values and failed clearing; native exits and typed policy erasure also pass.
+Independent supervision of real rendering and complete desktop recovery remain open.
 The [measured telemetry path](spec/delivery/measured-time-handoff.md) now preserves
 sample age through delay, replay and reconnect, with explicit clock scope and TTL checks.
 A [native network reader](spec/delivery/network-acquisition-handoff.md) now acquires
@@ -67,8 +70,9 @@ It passes portable checks on all three build profiles and comparisons against
 the real Linux collector. A [native retained-cache experiment](spec/delivery/native-network-cache-handoff.md)
 now displays its real values on the owned GNOME desktop and independently decodes
 the digits. Revision-bound revocation and owner exit remove the cached actors and
-pixels; negative controls expose wrong values and failed clearing. Live freshness,
-installed policy and general product delivery remain pending.
+pixels; negative controls expose wrong values and failed clearing. That retained
+fixture keeps its original semantics. Installed policy and general product delivery
+remain pending.
 An external pixel/time oracle is calibrated against live, hidden, frozen and
 obstructed synthetic X11 surfaces. A real Openbox/PCManFM Show Desktop experiment
 now exposes the basic X11 candidate's placement failure: above the desktop it

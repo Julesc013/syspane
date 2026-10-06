@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-06T08:49:39.784370+00:00", "scope": "Real measured collector forwarding and asynchronous GJS native session"}
+updated: {"by": "codex", "at": "2026-10-06T09:25:00Z", "scope": "Measured GNOME values, age, independent leases and native teardown"}
 ---
 
 # Current state and next admitted boundary
@@ -332,8 +332,17 @@ The [live native session](live-network-session-handoff.md) now forwards two orig
 real measured publications through the existing collector supervisor to an
 asynchronous GJS owner. The source remains alive while the second sample ages.
 Standalone cases cover original values/metadata, data-lease loss, worker hang,
-revocation and parent death with held native process identities. The same owner
-still needs shell rendering and independently observed operational pixels/age.
+revocation and parent death with held native process identities.
+
+The [measured GNOME tile](gnome-live-network-handoff.md) now uses that same owner
+inside the owned shell. Nine source-identical cases independently compare original
+counter/rate pixels, advancing age, freshness and separate data-lease status.
+Four faulty drawing controls fail their intended dimensions. Typed revocation,
+actual supervisor exit and independent hung-worker cleanup remove the tile; the
+original icon manager and live marker survive. Eighteen evidence-mutation checks
+pass. Operational journals and crops stay private. This closes one finite visible
+delivery experiment; independent supervision of real rendering and full recovery
+remain open.
 
 Canonical 0.2.0 documentation bundle, unchanged 0.1 authoring profile, preserved old
 fixtures, new experimental scene/command/capability 0.2 and admission descriptors.
@@ -406,11 +415,11 @@ and the shared projection now closes measured values and status semantics.
 The explicit retained cache now proves bounded native admission and policy/owner-loss
 erasure with real value pixels. The native GJS consumer now supplies the shared
 model semantics inside the shell runtime. The supervised forwarding/session boundary
-now passes real standalone delivery and native fault/exit checks. Use that same
-asynchronous owner in the owned GNOME composition, independently verify actual
-value/age/expiry pixels and policy erasure, and exercise independent
-lease faults, then connect product controller policy/demand, general delivery queues
-and renderer supervision.
+now passes real standalone delivery and native fault/exit checks. The same owner
+also passes independently observed operational value/age/expiry pixels, policy
+erasure and data-lease faults in the owned GNOME composition. Connect independent
+render-progress challenges to that actual rendering path, then complete product
+controller policy/demand, general delivery queues and visible/editor recovery.
 Actual native topology faults and Windows full-table notification
 coverage remain unqualified. The native
 inventory probe now connects bounded subscription/demand and queue revocation to

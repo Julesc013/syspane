@@ -71,7 +71,7 @@ def validate(value, build):
     expected=['/usr/bin/python3',str(ROOT/'tests/desktop/gnome_clock_peer.py'),environment['SYSPANE_GNOME_CLOCK_SOCKET'],'slow-ready' if mode=='pending-disable' else 'normal']
     if peer['arguments']!=expected or environment['SYSPANE_GNOME_CLOCK_HELPER']!=expected[1]:raise ValueError('clock peer executable arguments differ')
     if raw['final']['exitStatus']!=0:raise ValueError('clock peer did not exit normally')
-    prior_path=ROOT/'build-support/evidence/w-25-gjs-clock-linux-x64-gcc13.json';prior=json.loads(prior_path.read_text())
+    prior_path=ROOT/'build-support/evidence/w-25-live-network-session-linux-x64-gcc13.json';prior=json.loads(prior_path.read_text())
     if digest(prior_path.read_bytes())!=value['clock_build_record_sha256']:raise ValueError('native clock build identity')
     for name in ['libsyspane_gjs_clock.so','SysPaneClock-0.1.typelib']:
         if digest((build/name).read_bytes())!=prior['artifacts'][name]['sha256']:raise ValueError('clock native artifact differs')

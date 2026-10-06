@@ -358,7 +358,7 @@
         "SP-CAMPAIGN-ADMISSION",
         "SP-CURRENT"
       ],
-      "sha256": "38f06659e6ed0298c083e68c58e558ec389a385c5c737981e56e94c5d76e0c14"
+      "sha256": "bbc00f960896c3923d04f03e0912603744a624c77aae406ab3ef6ac2c095779e"
     },
     {
       "id": "SP-CURRENT",
@@ -368,7 +368,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "31764a8418e7333138016b2a111c9ef8ef29a7fcb07028c8f6834553b67bb568"
+      "sha256": "59d321196669e224ff925db0bebec5042c8bcb8e58227a5018d8654eba1d5f2e"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -530,6 +530,17 @@
         "SP-CAMPAIGN-ADMISSION"
       ],
       "sha256": "894700010a79c566201f9c3c2736b23ba036cdd5fe666c15658055adb9f35ad6"
+    },
+    {
+      "id": "SP-GNOME-LIVE-NETWORK-HANDOFF",
+      "path": "delivery/gnome-live-network-handoff.md",
+      "title": "Measured network pixels and lifecycle in the owned GNOME shell",
+      "description": "Original counters/rates, native age and independent lease/erasure observations.",
+      "requires": [
+        "SP-W25-GNOME-LIVE-NETWORK",
+        "SP-CAMPAIGN-ADMISSION"
+      ],
+      "sha256": "92f907fc04c776d42a84cfaae28fa54d93cf1bdb2aaa132d2b90a73677f51ea8"
     },
     {
       "id": "SP-GNOME-MARKER-HANDOFF",
@@ -1063,6 +1074,17 @@
         "SP-W25-NATIVE-NETWORK-CACHE"
       ],
       "sha256": "f39729227e19da0fca00e36540b9c7c7167c6afe903cf282bab34f171e85b192"
+    },
+    {
+      "id": "SP-W25-GNOME-LIVE-NETWORK",
+      "path": "delivery/packages/w-25-gnome-live-network.md",
+      "title": "W-25 measured network pixels in the owned GNOME shell",
+      "description": "Connect the tested native session to independently observed values, age, freshness and lease state.",
+      "requires": [
+        "SP-W25-LIVE-NETWORK-SESSION",
+        "SP-W25-GNOME-CLOCK"
+      ],
+      "sha256": "70668710fd37f53a087078b62f5b19abac6b38e72166641707bce605099392af"
     },
     {
       "id": "SP-W25-GNOME-SURFACE-LEASE",

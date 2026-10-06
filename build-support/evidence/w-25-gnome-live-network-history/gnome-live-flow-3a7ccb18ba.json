@@ -1,0 +1,48 @@
+[
+  {
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "source_inputs": {
+      "build-support/check_workspace_budget.py": "3a9ec8bf7f4f205e1986d19b523d57b41288936e3343910f80b460d71474b700"
+    },
+    "exit": 0,
+    "expected": 0,
+    "at": "2026-10-06T09:30:43.593626+00:00",
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 4294967296,\n  \"checkout_out_bytes\": 1106904089,\n  \"linux_campaign_bytes\": 2646944784,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "/usr/bin/python3",
+      "/mnt/d/Projects/SysPane/syspane/build-support/record_gnome_surface_lease.py",
+      "--build-dir",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13",
+      "--output",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/gnome-live-lease-calibration.json",
+      "--reports",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-SURFACE-LEASE-01-6bce817cb36e4184a4a8139424250832.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-SURFACE-LEASE-01-a3d4da765891416c918cb3a23120ffd6.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-SURFACE-LEASE-01-e5a3835e393d4e469b2030457e1775d7.json"
+    ],
+    "source_inputs": {
+      "build-support/record_gnome_surface_lease.py": "cb1c140d4e92b950828ae6a7a5a1908d16c1c4c0669a3da09e1e052c028612a1"
+    },
+    "exit": 0,
+    "expected": 0,
+    "at": "2026-10-06T09:30:48.073296+00:00",
+    "stdout": "[\n  {\n    \"control\": \"live\",\n    \"outcome\": \"pass\",\n    \"lease_pixels\": \"pass\",\n    \"native_admission\": \"pass\",\n    \"retained_identity\": \"pass\",\n    \"composition\": \"pass\",\n    \"post_marker\": \"pass\",\n    \"samples\": 125,\n    \"max_gap_us\": 63010,\n    \"max_capture_us\": 2131,\n    \"cleanup\": \"confirmed\"\n  },\n  {\n    \"control\": \"ignore-expiry\",\n    \"outcome\": \"fail\",\n    \"lease_pixels\": \"fail\",\n    \"native_admission\": \"pass\",\n    \"retained_identity\": \"pass\",\n    \"composition\": \"pass\",\n    \"post_marker\": \"pass\",\n    \"samples\": 125,\n    \"max_gap_us\": 64298,\n    \"max_capture_us\": 2828,\n    \"cleanup\": \"confirmed\"\n  },\n  {\n    \"control\": \"disconnect\",\n    \"outcome\": \"pass\",\n    \"lease_pixels\": \"pass\",\n    \"native_admission\": \"pass\",\n    \"retained_identity\": \"pass\",\n    \"composition\": \"pass\",\n    \"post_marker\": \"pass\",\n    \"samples\": 53,\n    \"max_gap_us\": 50042,\n    \"max_capture_us\": 1713,\n    \"cleanup\": \"confirmed\"\n  }\n]\n",
+    "stderr": ""
+  }
+]

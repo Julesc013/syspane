@@ -66,6 +66,16 @@ class FocusIntegrationEvidence(unittest.TestCase):
             for key in ['enabled_extension_inputs', 'enabled_extension_inputs_after']:
                 v[key]['syspane-lab-marker@syspane.invalid/unexpected.js'] = {'bytes': 0, 'sha256': '0' * 64}
         self.reject(mutate)
+    def test_missing_network_drawing_module(self):
+        def mutate(v, r):
+            for key in ['enabled_extension_inputs', 'enabled_extension_inputs_after']:
+                v[key].pop('syspane-lab-marker@syspane.invalid/networkLive.js')
+        self.reject(mutate)
+    def test_changed_shared_network_owner(self):
+        def mutate(v, r):
+            for key in ['enabled_extension_inputs', 'enabled_extension_inputs_after']:
+                v[key]['syspane-lab-marker@syspane.invalid/networkSession.js']['sha256'] = '0' * 64
+        self.reject(mutate)
     def test_wrong_environment_mode(self):self.reject(lambda v,r:v['environment']['explicit'].update(SYSPANE_GNOME_FOCUS_INTEGRATION='observe'))
     def test_traced_experiment_not_admitted(self):self.reject(lambda v,r:v.update(focus_trace=True))
     def test_missing_guard(self):self.reject(lambda v,r:r['steps'].pop(1))
