@@ -409,3 +409,13 @@ API references: [registry opening](https://learn.microsoft.com/en-us/windows/win
 [key security](https://learn.microsoft.com/en-us/windows/win32/api/winreg/nf-winreg-reggetkeysecurity),
 [registry access rights](https://learn.microsoft.com/en-us/windows/win32/sysinfo/registry-key-security-and-access-rights)
 and [GTK display initialization](https://docs.gtk.org/gtk3/func.init_check.html).
+
+## Native surface lease increment
+
+The [GNOME surface package](w-25-gnome-surface-lease.md) connects the existing lease
+meaning to independently observed native drawing. Its public-marker experiment
+has an exact native peer pair, expiry/disconnect and new-full-snapshot cases, bounded
+journals and a deliberately defective expiry control. The [checkpoint](../gnome-surface-lease-handoff.md)
+records its evidence. Product telemetry/policy integration, native clock and sequence
+faults, render watchdogs, automatic restart and native editor-exit recovery remain
+separate gates; this increment does not complete W-25.

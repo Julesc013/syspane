@@ -5,6 +5,7 @@ import St from 'gi://St';
 import Clutter from 'gi://Clutter';
 import {Extension} from 'resource:///org/gnome/shell/extensions/extension.js';
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
+import {SurfaceLease} from './surfaceLease.js';
 
 const INTERFACE = `<node><interface name="org.syspane.LabMarker">
 <method name="SetGeneration"><arg type="u" direction="in" name="generation"/></method>
@@ -240,9 +241,19 @@ export default class LabMarker extends Extension {
                 '<method name="SetWallpaperOccluded"><arg type="b" direction="in" name="occluded"/></method></interface>');
         this._bus = Gio.DBusExportedObject.wrapJSObject(interfaceXml, this);
         this._bus.export(Gio.DBus.session, '/org/syspane/LabMarker');
+        if (GLib.getenv('SYSPANE_GNOME_SURFACE_LEASE'))
+            this._surfaceLease = new SurfaceLease(parent, generation => {
+                this._actor.visible = generation !== null;
+                if (generation !== null) {
+                    this._generation = generation;
+                    this._actor.queue_repaint();
+                }
+            });
     }
 
     SetGeneration(generation) {
+        if (this._surfaceLease?.armed)
+            throw new Error('An attached producer owns marker updates');
         if (!Number.isInteger(generation) || generation < 1 || generation > 0xffffffff)
             throw new Error('Generation outside the laboratory uint32 range');
         if (this._control === 'frozen' || this._recoveryFrozen)
@@ -290,6 +301,8 @@ export default class LabMarker extends Extension {
     }
 
     disable() {
+        this._surfaceLease?.disable();
+        this._surfaceLease = null;
         this._focusIntegration?.disable();
         this._focusIntegration = null;
         this._bus?.unexport();

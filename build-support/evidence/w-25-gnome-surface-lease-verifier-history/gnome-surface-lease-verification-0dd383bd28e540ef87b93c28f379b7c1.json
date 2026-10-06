@@ -1,0 +1,48 @@
+[
+  {
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "source_inputs": {
+      "build-support/check_workspace_budget.py": "3a9ec8bf7f4f205e1986d19b523d57b41288936e3343910f80b460d71474b700"
+    },
+    "started_at": "2026-10-06T05:30:17.423766+00:00",
+    "finished_at": "2026-10-06T05:30:17.792723+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 3221225472,\n  \"checkout_out_bytes\": 935438559,\n  \"linux_campaign_bytes\": 2184550074,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "build-support/record_gnome_surface_lease.py",
+      "--build-dir",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13",
+      "--reports",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-SURFACE-LEASE-01-00c4e179acf3411aabb0b317482e6c8d.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-SURFACE-LEASE-01-c41c0f7f7d2a4baab0b7d3164a3114cf.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-SURFACE-LEASE-01-1892f902acdb41a4840b64285a60d39c.json",
+      "--output",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/gnome-surface-lease-calibration-0dd383bd28e540ef87b93c28f379b7c1.json"
+    ],
+    "source_inputs": {
+      "build-support/record_gnome_surface_lease.py": "dfd21b1010d0b9ba52fb132a5bc5db748d7839668d34358c4fe3087da5c30743"
+    },
+    "started_at": "2026-10-06T05:30:17.793177+00:00",
+    "finished_at": "2026-10-06T05:30:20.514581+00:00",
+    "exit": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/build-support/record_gnome_surface_lease.py\", line 198, in <module>\n    main()\n  File \"/mnt/d/Projects/SysPane/syspane/build-support/record_gnome_surface_lease.py\", line 174, in main\n    results.append(validate(value, build))\n                   ^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/build-support/record_gnome_surface_lease.py\", line 126, in validate\n    raise ValueError('independent timer/control coverage absent')\nValueError: independent timer/control coverage absent\n"
+  }
+]

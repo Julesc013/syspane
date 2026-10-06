@@ -21,6 +21,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Owned GNOME shell marker checkpoint](gnome-marker-handoff.md) — A real pinned shell bridge now presents changing externally decoded pixels; desktop composition remains open.
 - [Owned GNOME native reveal and failed focus restoration](gnome-reveal-handoff.md) — Live composition survives visible native hide/restore, while the required foreground focus remains failed.
 - [Owned GNOME shell/compositor recovery checkpoint](gnome-shell-recovery-handoff.md) — Exact shell exit, native replacement, bridge reattachment and new-desktop input pass independently of calibrated omissions.
+- [Native GNOME surface producer-lease checkpoint](gnome-surface-lease-handoff.md) — Independent expiry, native disconnect, retained drawing and full-snapshot replacement have source-bound evidence.
 - [Native GNOME application-list checkpoint](gnome-switcher-handoff.md) — The passive bridge stays out of Alt+Tab and the overview dash, with actual normal-window and omitted-popup controls.
 - [Native GNOME image-wallpaper checkpoint](gnome-wallpaper-handoff.md) — Original image identity, native configuration and independent pixels pass with separately calibrated faults.
 - [Native GNOME wallpaper policy checkpoint](gnome-wallpaper-policy-handoff.md) — Native dconf locks, immutable policy identity and independent live composition have separate evidence.

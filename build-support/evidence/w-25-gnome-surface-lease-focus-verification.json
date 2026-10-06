@@ -1,0 +1,89 @@
+[
+  {
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "source_inputs": {
+      "build-support/check_workspace_budget.py": "3a9ec8bf7f4f205e1986d19b523d57b41288936e3343910f80b460d71474b700"
+    },
+    "started_at": "2026-10-06T05:33:35.956078+00:00",
+    "finished_at": "2026-10-06T05:33:40.902577+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 3221225472,\n  \"checkout_out_bytes\": 935481610,\n  \"linux_campaign_bytes\": 2211046396,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "build-support/record_gnome_focus_integration.py",
+      "--build-dir",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13",
+      "--reports",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-FOCUS-BASELINE-01-62a802ace1124caea997b8ea268da721.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-FOCUS-BASELINE-01-443d39c9442e4142bbb4e2eab4a922e8.json",
+      "--output",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/gnome-focus-integration-calibration-6416106ce80d4ad8b572aed0e7b1b065.json"
+    ],
+    "source_inputs": {
+      "build-support/record_gnome_focus_integration.py": "330d493aef5080c5b65cf24cc7714f07ff786abe627373922e9b3012058af7e2"
+    },
+    "started_at": "2026-10-06T05:33:40.902904+00:00",
+    "finished_at": "2026-10-06T05:33:43.985986+00:00",
+    "exit": 0,
+    "stdout": "[\n  {\n    \"mode\": \"observe\",\n    \"outcome\": \"pass\",\n    \"original_focus\": \"fail\",\n    \"f9_delivered\": false,\n    \"f10_delivered\": true,\n    \"guards\": [\n      {\n        \"step\": \"icon-focus\",\n        \"outcome\": \"pass\",\n        \"max_gap_us\": 49731,\n        \"max_capture_us\": 1725\n      },\n      {\n        \"step\": \"unrelated-key\",\n        \"outcome\": \"pass\",\n        \"max_gap_us\": 49635,\n        \"max_capture_us\": 1565\n      },\n      {\n        \"step\": \"prepare-cycle\",\n        \"outcome\": \"pass\",\n        \"max_gap_us\": 50135,\n        \"max_capture_us\": 2238\n      },\n      {\n        \"step\": \"cycle-enter\",\n        \"outcome\": \"pass\",\n        \"max_gap_us\": 49653,\n        \"max_capture_us\": 1409\n      },\n      {\n        \"step\": \"cycle-icon\",\n        \"outcome\": \"pass\",\n        \"max_gap_us\": 49606,\n        \"max_capture_us\": 1931\n      },\n      {\n        \"step\": \"cycle-restore\",\n        \"outcome\": \"pass\",\n        \"max_gap_us\": 49691,\n        \"max_capture_us\": 2361\n      },\n      {\n        \"step\": \"prepare-folder\",\n        \"outcome\": \"pass\",\n        \"max_gap_us\": 50446,\n        \"max_capture_us\": 2282\n      },\n      {\n        \"step\": \"folder-enter\",\n        \"outcome\": \"pass\",\n        \"max_gap_us\": 49791,\n        \"max_capture_us\": 1426\n      },\n      {\n        \"step\": \"restore-after-folder\",\n        \"outcome\": \"pass\",\n        \"max_gap_us\": 50176,\n        \"max_capture_us\": 1794\n      },\n      {\n        \"step\": \"minimize-enter\",\n        \"outcome\": \"pass\",\n        \"max_gap_us\": 49625,\n        \"max_capture_us\": 1781\n      },\n      {\n        \"step\": \"minimize-target\",\n        \"outcome\": \"pass\",\n        \"max_gap_us\": 49606,\n        \"max_capture_us\": 1427\n      },\n      {\n        \"step\": \"minimize-restore\",\n        \"outcome\": \"pass\",\n        \"max_gap_us\": 49596,\n        \"max_capture_us\": 1834\n      },\n      {\n        \"step\": \"restore-minimized\",\n        \"outcome\": \"pass\",\n        \"max_gap_us\": 50377,\n        \"max_capture_us\": 1946\n      },\n      {\n        \"step\": \"disabled-enter\",\n        \"outcome\": \"pass\",\n        \"max_gap_us\": 50461,\n        \"max_capture_us\": 1641\n      },\n      {\n        \"step\": \"disabled-restore\",\n        \"outcome\": \"pass\",\n        \"max_gap_us\": 50248,\n        \"max_capture_us\": 1485\n      }\n    ],\n    \"native_folder_input\": \"pass\",\n    \"non_key_abstention\": \"pass\",\n    \"minimized_target_preserved\": \"pass\",\n    \"disable_restores_default_failure\": \"pass\",\n    \"cleanup\": \"confirmed\"\n  },\n  {\n    \"mode\": \"restore\",\n    \"outcome\": \"pass\",\n    \"original_focus\": \"pass\",\n    \"f9_delivered\": true,\n    \"f10_delivered\": true,\n    \"guards\": [\n      {\n        \"step\": \"icon-focus\",\n        \"outcome\": \"pass\",\n        \"max_gap_us\": 49595,\n        \"max_capture_us\": 2118\n      },\n      {\n        \"step\": \"unrelated-key\",\n        \"outcome\": \"pass\",\n        \"max_gap_us\": 49784,\n        \"max_capture_us\": 1468\n      },\n      {\n        \"step\": \"prepare-cycle\",\n        \"outcome\": \"pass\",\n        \"max_gap_us\": 49688,\n        \"max_capture_us\": 2162\n      },\n      {\n        \"step\": \"cycle-enter\",\n        \"outcome\": \"pass\",\n        \"max_gap_us\": 49770,\n        \"max_capture_us\": 1557\n      },\n      {\n        \"step\": \"cycle-icon\",\n        \"outcome\": \"pass\",\n        \"max_gap_us\": 49645,\n        \"max_capture_us\": 1864\n      },\n      {\n        \"step\": \"cycle-restore\",\n        \"outcome\": \"pass\",\n        \"max_gap_us\": 50400,\n        \"max_capture_us\": 1595\n      },\n      {\n        \"step\": \"prepare-folder\",\n        \"outcome\": \"pass\",\n        \"max_gap_us\": 49717,\n        \"max_capture_us\": 1329\n      },\n      {\n        \"step\": \"folder-enter\",\n        \"outcome\": \"pass\",\n        \"max_gap_us\": 49833,\n        \"max_capture_us\": 1436\n      },\n      {\n        \"step\": \"restore-after-folder\",\n        \"outcome\": \"pass\",\n        \"max_gap_us\": 50337,\n        \"max_capture_us\": 1669\n      },\n      {\n        \"step\": \"minimize-enter\",\n        \"outcome\": \"pass\",\n        \"max_gap_us\": 49986,\n        \"max_capture_us\": 1665\n      },\n      {\n        \"step\": \"minimize-target\",\n        \"outcome\": \"pass\",\n        \"max_gap_us\": 49779,\n        \"max_capture_us\": 1857\n      },\n      {\n        \"step\": \"minimize-restore\",\n        \"outcome\": \"pass\",\n        \"max_gap_us\": 49932,\n        \"max_capture_us\": 1757\n      },\n      {\n        \"step\": \"restore-minimized\",\n        \"outcome\": \"pass\",\n        \"max_gap_us\": 49785,\n        \"max_capture_us\": 2137\n      },\n      {\n        \"step\": \"disabled-enter\",\n        \"outcome\": \"pass\",\n        \"max_gap_us\": 49813,\n        \"max_capture_us\": 2001\n      },\n      {\n        \"step\": \"disabled-restore\",\n        \"outcome\": \"pass\",\n        \"max_gap_us\": 49946,\n        \"max_capture_us\": 1797\n      }\n    ],\n    \"native_folder_input\": \"pass\",\n    \"non_key_abstention\": \"pass\",\n    \"minimized_target_preserved\": \"pass\",\n    \"disable_restores_default_failure\": \"pass\",\n    \"cleanup\": \"confirmed\"\n  }\n]\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "source_inputs": {
+      "build-support/check_workspace_budget.py": "3a9ec8bf7f4f205e1986d19b523d57b41288936e3343910f80b460d71474b700"
+    },
+    "started_at": "2026-10-06T05:33:43.986372+00:00",
+    "finished_at": "2026-10-06T05:33:44.358307+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 3221225472,\n  \"checkout_out_bytes\": 935489823,\n  \"linux_campaign_bytes\": 2211068754,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "tests/desktop/test_gnome_focus_integration_record.py",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-FOCUS-BASELINE-01-62a802ace1124caea997b8ea268da721.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-FOCUS-BASELINE-01-443d39c9442e4142bbb4e2eab4a922e8.json",
+      "-v"
+    ],
+    "source_inputs": {
+      "tests/desktop/test_gnome_focus_integration_record.py": "e321505d634f01b610441848660d296b0c3ecd729aa2c6e832ef71ba531c6bc3"
+    },
+    "started_at": "2026-10-06T05:33:44.358573+00:00",
+    "finished_at": "2026-10-06T05:34:42.477943+00:00",
+    "exit": 0,
+    "stdout": "",
+    "stderr": "test_callback_after_disable (__main__.FocusIntegrationEvidence.test_callback_after_disable) ... ok\ntest_capture_too_slow (__main__.FocusIntegrationEvidence.test_capture_too_slow) ... ok\ntest_changed_background (__main__.FocusIntegrationEvidence.test_changed_background) ... ok\ntest_changed_final_binding (__main__.FocusIntegrationEvidence.test_changed_final_binding) ... ok\ntest_changed_final_wallpaper (__main__.FocusIntegrationEvidence.test_changed_final_wallpaper) ... ok\ntest_changed_native_module (__main__.FocusIntegrationEvidence.test_changed_native_module) ... ok\ntest_disable_after_observation (__main__.FocusIntegrationEvidence.test_disable_after_observation) ... ok\ntest_disabled_controller_restores_focus (__main__.FocusIntegrationEvidence.test_disabled_controller_restores_focus) ... ok\ntest_disabled_flag_not_cleared (__main__.FocusIntegrationEvidence.test_disabled_flag_not_cleared) ... ok\ntest_extra_native_module (__main__.FocusIntegrationEvidence.test_extra_native_module) ... ok\ntest_folder_before_desktop_entry (__main__.FocusIntegrationEvidence.test_folder_before_desktop_entry) ... ok\ntest_folder_key_event_invented (__main__.FocusIntegrationEvidence.test_folder_key_event_invented) ... ok\ntest_foreign_focus_target (__main__.FocusIntegrationEvidence.test_foreign_focus_target) ... ok\ntest_foreign_workspace (__main__.FocusIntegrationEvidence.test_foreign_workspace) ... ok\ntest_guard_before_original_keyboard (__main__.FocusIntegrationEvidence.test_guard_before_original_keyboard) ... ok\ntest_guard_duration (__main__.FocusIntegrationEvidence.test_guard_duration) ... ok\ntest_guard_has_no_settled_coverage (__main__.FocusIntegrationEvidence.test_guard_has_no_settled_coverage) ... ok\ntest_guard_minimizes_another_window (__main__.FocusIntegrationEvidence.test_guard_minimizes_another_window) ... ok\ntest_guard_order (__main__.FocusIntegrationEvidence.test_guard_order) ... ok\ntest_hidden_foreground_claimed_visible (__main__.FocusIntegrationEvidence.test_hidden_foreground_claimed_visible) ... ok\ntest_icon_focus_stolen (__main__.FocusIntegrationEvidence.test_icon_focus_stolen) ... ok\ntest_late_focus (__main__.FocusIntegrationEvidence.test_late_focus) ... ok\ntest_later_click_substituted_for_restore (__main__.FocusIntegrationEvidence.test_later_click_substituted_for_restore) ... ok\ntest_minimized_target_retained (__main__.FocusIntegrationEvidence.test_minimized_target_retained) ... ok\ntest_minimized_window_unminimized (__main__.FocusIntegrationEvidence.test_minimized_window_unminimized) ... ok\ntest_missing_cleanup (__main__.FocusIntegrationEvidence.test_missing_cleanup) ... ok\ntest_missing_guard (__main__.FocusIntegrationEvidence.test_missing_guard) ... ok\ntest_missing_native_module (__main__.FocusIntegrationEvidence.test_missing_native_module) ... ok\ntest_native_folder_misidentified (__main__.FocusIntegrationEvidence.test_native_folder_misidentified) ... ok\ntest_native_observe_and_restore (__main__.FocusIntegrationEvidence.test_native_observe_and_restore) ... ok\ntest_non_key_restore (__main__.FocusIntegrationEvidence.test_non_key_restore) ... ok\ntest_observe_cannot_call_focus (__main__.FocusIntegrationEvidence.test_observe_cannot_call_focus) ... ok\ntest_original_f9_claim (__main__.FocusIntegrationEvidence.test_original_f9_claim) ... ok\ntest_owned_foreground_not_retained (__main__.FocusIntegrationEvidence.test_owned_foreground_not_retained) ... ok\ntest_raw_journal_identity (__main__.FocusIntegrationEvidence.test_raw_journal_identity) ... ok\ntest_restore_without_call (__main__.FocusIntegrationEvidence.test_restore_without_call) ... ok\ntest_stale_marker (__main__.FocusIntegrationEvidence.test_stale_marker) ... ok\ntest_stale_target_sequence (__main__.FocusIntegrationEvidence.test_stale_target_sequence) ... ok\ntest_trace_rewritten_after_disable (__main__.FocusIntegrationEvidence.test_trace_rewritten_after_disable) ... ok\ntest_traced_experiment_not_admitted (__main__.FocusIntegrationEvidence.test_traced_experiment_not_admitted) ... ok\ntest_unexpected_native_client (__main__.FocusIntegrationEvidence.test_unexpected_native_client) ... ok\ntest_unrelated_key_restores_focus (__main__.FocusIntegrationEvidence.test_unrelated_key_restores_focus) ... ok\ntest_wrong_environment_mode (__main__.FocusIntegrationEvidence.test_wrong_environment_mode) ... ok\ntest_wrong_modifier (__main__.FocusIntegrationEvidence.test_wrong_modifier) ... ok\ntest_wrong_native_pid (__main__.FocusIntegrationEvidence.test_wrong_native_pid) ... ok\ntest_wrong_native_type (__main__.FocusIntegrationEvidence.test_wrong_native_type) ... ok\ntest_zero_native_time (__main__.FocusIntegrationEvidence.test_zero_native_time) ... ok\n\n----------------------------------------------------------------------\nRan 47 tests in 55.397s\n\nOK\n"
+  }
+]

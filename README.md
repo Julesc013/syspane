@@ -88,6 +88,11 @@ A [native shell/compositor recovery experiment](spec/delivery/gnome-shell-recove
 now replaces the owned GNOME process, reattaches the drawing and verifies input on
 the new desktop. Omitting reattachment or replacement fails independently. User
 session recovery and product continuity remain open.
+A [native surface-lease experiment](spec/delivery/gnome-surface-lease-handoff.md)
+now marks the last public marker retained after producer expiry or actual disconnect.
+A replacement heartbeat preserves that old identity until a full snapshot arrives.
+Independent pixels and held process identities verify the transition. Product
+telemetry, policy integration and render-watchdog recovery remain open.
 An [optional focus integration](spec/delivery/gnome-focus-integration-handoff.md)
 now passes the original Show Desktop focus deadline and actual keyboard receipt.
 Native icon/folder interactions, minimization and disabling the controller pass

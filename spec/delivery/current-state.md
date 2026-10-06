@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-06T05:07:50.665783+00:00", "scope": "Native wallpaper locks and policy lifetime preservation verified on the private GNOME solid-color profile"}
+updated: {"by": "codex", "at": "2026-10-06T05:35:07.581691+00:00", "scope": "Native GNOME public-marker producer expiry, disconnect and retained-state recovery verified"}
 ---
 
 # Current state and next admitted boundary
@@ -282,6 +282,14 @@ pixels; identical-byte policy replacement fails the held-file lifetime check.
 Thirty-five verifier checks pass. Protected deployment, locked image wallpaper,
 live policy updates and disclosure revocation remain separate open gates.
 
+The [native surface-lease checkpoint](gnome-surface-lease-handoff.md) now observes
+three-second expiry independently in the GNOME bridge, actual producer disconnect,
+retained public marker pixels and full-snapshot replacement after a new epoch.
+A fault control disables expiry and fails independent acceptance. Native process
+identities, receipt journals and external badge/marker pixels agree. Product
+telemetry/policy integration, render watchdogs and editor/native-exit recovery
+remain open; the second fixture is prelaunched, not an automatic restart.
+
 Canonical 0.2.0 documentation bundle, unchanged 0.1 authoring profile, preserved old
 fixtures, new experimental scene/command/capability 0.2 and admission descriptors.
 The initial settings registry has enforced metadata/default consistency and generated
@@ -341,8 +349,8 @@ renderer/collector continuity remain open.
 Continue other native tracks independently of the remaining GNOME qualification.
 W-25's [supervised network checkpoint](network-publication-handoff.md) connects
 real Linux acquisition, source lifetimes and measured receipt under independent
-child supervision. Continue native-host/visible recovery tracks and connect this
-tested boundary to product controller demand, renderer supervision and policy
+child supervision. The native surface now demonstrates retained public-marker recovery. Connect this
+tested data boundary to product controller demand, renderer supervision and policy
 distribution. Actual native topology faults and Windows full-table notification
 coverage remain unqualified. The native
 inventory probe now connects bounded subscription/demand and queue revocation to

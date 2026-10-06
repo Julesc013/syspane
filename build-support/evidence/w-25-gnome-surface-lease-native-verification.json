@@ -1,0 +1,91 @@
+[
+  {
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "source_inputs": {
+      "build-support/check_workspace_budget.py": "3a9ec8bf7f4f205e1986d19b523d57b41288936e3343910f80b460d71474b700"
+    },
+    "started_at": "2026-10-06T05:33:35.960179+00:00",
+    "finished_at": "2026-10-06T05:33:40.901039+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 3221225472,\n  \"checkout_out_bytes\": 935481610,\n  \"linux_campaign_bytes\": 2211046396,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "build-support/record_gnome_surface_lease.py",
+      "--build-dir",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13",
+      "--reports",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-SURFACE-LEASE-01-00c4e179acf3411aabb0b317482e6c8d.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-SURFACE-LEASE-01-c41c0f7f7d2a4baab0b7d3164a3114cf.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-SURFACE-LEASE-01-1892f902acdb41a4840b64285a60d39c.json",
+      "--output",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/gnome-surface-lease-calibration-ff30bafe414249c086b586f097ee32ff.json"
+    ],
+    "source_inputs": {
+      "build-support/record_gnome_surface_lease.py": "cb1c140d4e92b950828ae6a7a5a1908d16c1c4c0669a3da09e1e052c028612a1"
+    },
+    "started_at": "2026-10-06T05:33:40.901428+00:00",
+    "finished_at": "2026-10-06T05:33:44.404339+00:00",
+    "exit": 0,
+    "stdout": "[\n  {\n    \"control\": \"live\",\n    \"outcome\": \"pass\",\n    \"lease_pixels\": \"pass\",\n    \"native_admission\": \"pass\",\n    \"retained_identity\": \"pass\",\n    \"composition\": \"pass\",\n    \"post_marker\": \"pass\",\n    \"samples\": 125,\n    \"max_gap_us\": 54149,\n    \"max_capture_us\": 2702,\n    \"cleanup\": \"confirmed\"\n  },\n  {\n    \"control\": \"ignore-expiry\",\n    \"outcome\": \"fail\",\n    \"lease_pixels\": \"fail\",\n    \"native_admission\": \"pass\",\n    \"retained_identity\": \"pass\",\n    \"composition\": \"pass\",\n    \"post_marker\": \"pass\",\n    \"samples\": 125,\n    \"max_gap_us\": 53734,\n    \"max_capture_us\": 8616,\n    \"cleanup\": \"confirmed\"\n  },\n  {\n    \"control\": \"disconnect\",\n    \"outcome\": \"pass\",\n    \"lease_pixels\": \"pass\",\n    \"native_admission\": \"pass\",\n    \"retained_identity\": \"pass\",\n    \"composition\": \"pass\",\n    \"post_marker\": \"pass\",\n    \"samples\": 53,\n    \"max_gap_us\": 50482,\n    \"max_capture_us\": 2879,\n    \"cleanup\": \"confirmed\"\n  }\n]\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "source_inputs": {
+      "build-support/check_workspace_budget.py": "3a9ec8bf7f4f205e1986d19b523d57b41288936e3343910f80b460d71474b700"
+    },
+    "started_at": "2026-10-06T05:33:44.404712+00:00",
+    "finished_at": "2026-10-06T05:33:44.819065+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 3221225472,\n  \"checkout_out_bytes\": 935492954,\n  \"linux_campaign_bytes\": 2211110598,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "tests/desktop/test_gnome_surface_lease_record.py",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-SURFACE-LEASE-01-00c4e179acf3411aabb0b317482e6c8d.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-SURFACE-LEASE-01-c41c0f7f7d2a4baab0b7d3164a3114cf.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-SURFACE-LEASE-01-1892f902acdb41a4840b64285a60d39c.json",
+      "-v"
+    ],
+    "source_inputs": {
+      "tests/desktop/test_gnome_surface_lease_record.py": "021309d3b663aaeddaca1e5694a9ced4b6e88849b5ce7824f91bd8010a6a49fa"
+    },
+    "started_at": "2026-10-06T05:33:44.819319+00:00",
+    "finished_at": "2026-10-06T05:34:38.893110+00:00",
+    "exit": 0,
+    "stdout": "",
+    "stderr": "test_badge_survives_disable (__main__.LeaseEvidence.test_badge_survives_disable) ... ok\ntest_changed_background (__main__.LeaseEvidence.test_changed_background) ... ok\ntest_changed_icons (__main__.LeaseEvidence.test_changed_icons) ... ok\ntest_data_cannot_renew_lease (__main__.LeaseEvidence.test_data_cannot_renew_lease) ... ok\ntest_duplicate_cannot_refresh_accepted_time (__main__.LeaseEvidence.test_duplicate_cannot_refresh_accepted_time) ... ok\ntest_expired_still_alive (__main__.LeaseEvidence.test_expired_still_alive) ... ok\ntest_expiry_fault_must_be_visible (__main__.LeaseEvidence.test_expiry_fault_must_be_visible) ... ok\ntest_false_exit_sample (__main__.LeaseEvidence.test_false_exit_sample) ... ok\ntest_foreign_connection (__main__.LeaseEvidence.test_foreign_connection) ... ok\ntest_foreign_native_producer (__main__.LeaseEvidence.test_foreign_native_producer) ... ok\ntest_late_call (__main__.LeaseEvidence.test_late_call) ... ok\ntest_late_capture (__main__.LeaseEvidence.test_late_capture) ... ok\ntest_late_disable (__main__.LeaseEvidence.test_late_disable) ... ok\ntest_late_heartbeat_cannot_resurrect (__main__.LeaseEvidence.test_late_heartbeat_cannot_resurrect) ... ok\ntest_missed_schedule (__main__.LeaseEvidence.test_missed_schedule) ... ok\ntest_missing_frames (__main__.LeaseEvidence.test_missing_frames) ... ok\ntest_missing_runtime_mapping (__main__.LeaseEvidence.test_missing_runtime_mapping) ... ok\ntest_native_journal_hash (__main__.LeaseEvidence.test_native_journal_hash) ... ok\ntest_native_matrix (__main__.LeaseEvidence.test_native_matrix) ... ok\ntest_new_full_old_generation (__main__.LeaseEvidence.test_new_full_old_generation) ... ok\ntest_no_real_exit (__main__.LeaseEvidence.test_no_real_exit) ... ok\ntest_observer_admitted (__main__.LeaseEvidence.test_observer_admitted) ... ok\ntest_old_pixels_cannot_be_active (__main__.LeaseEvidence.test_old_pixels_cannot_be_active) ... ok\ntest_pending_heartbeat_cannot_relabel_retained_epoch (__main__.LeaseEvidence.test_pending_heartbeat_cannot_relabel_retained_epoch) ... ok\ntest_pending_without_full (__main__.LeaseEvidence.test_pending_without_full) ... ok\ntest_post_marker_missing_stimulus (__main__.LeaseEvidence.test_post_marker_missing_stimulus) ... ok\ntest_producer_survived (__main__.LeaseEvidence.test_producer_survived) ... ok\ntest_receipt_before_send (__main__.LeaseEvidence.test_receipt_before_send) ... ok\ntest_replacement_died (__main__.LeaseEvidence.test_replacement_died) ... ok\ntest_shared_process_group (__main__.LeaseEvidence.test_shared_process_group) ... ok\ntest_too_short_retained_interval (__main__.LeaseEvidence.test_too_short_retained_interval) ... ok\ntest_unobserved_exit (__main__.LeaseEvidence.test_unobserved_exit) ... ok\ntest_wrong_exit_pid (__main__.LeaseEvidence.test_wrong_exit_pid) ... ok\ntest_wrong_icon_owner (__main__.LeaseEvidence.test_wrong_icon_owner) ... ok\ntest_wrong_mode (__main__.LeaseEvidence.test_wrong_mode) ... ok\ntest_wrong_peer (__main__.LeaseEvidence.test_wrong_peer) ... ok\ntest_wrong_process_start (__main__.LeaseEvidence.test_wrong_process_start) ... ok\ntest_wrong_reply_consistent_with_receipt (__main__.LeaseEvidence.test_wrong_reply_consistent_with_receipt) ... ok\n\n----------------------------------------------------------------------\nRan 38 tests in 51.514s\n\nOK\n"
+  }
+]

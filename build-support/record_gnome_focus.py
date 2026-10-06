@@ -74,7 +74,7 @@ def validate(value, build):
         raise ValueError('shell-only baseline includes DING')
     if mode=='candidate':
         candidate = validate_reveal(value, build, family='GNOME-FOCUS-BASELINE-01', outer_outcome=False)
-        for name in ['extension.js','metadata.json']:
+        for name in ['extension.js','metadata.json','surfaceLease.js']:
             raw = (ROOT/'source/desktop/gnome/lab-marker'/name).read_bytes()
             expected_extensions['syspane-lab-marker@syspane.invalid/'+name] = {'bytes':len(raw),'sha256':digest(raw)}
         source = observation['reveal']

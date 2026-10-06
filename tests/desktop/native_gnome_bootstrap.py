@@ -48,7 +48,9 @@ SOURCES = ['tests/desktop/native_gnome_bootstrap.py', 'tests/desktop/native_orac
            'tests/desktop/gnome_focus_scenarios.py', 'tests/desktop/gnome_focus_controls.py',
            'spec/delivery/packages/w-05-gnome-focus-scenarios.md',
            'tests/desktop/gnome_wallpaper_policy.py', 'build-support/gnome-policy-runtime.json',
-           'build-support/prepare_gnome_policy.py', 'spec/delivery/packages/w-05-gnome-wallpaper-policy.md']
+           'build-support/prepare_gnome_policy.py', 'spec/delivery/packages/w-05-gnome-wallpaper-policy.md',
+           'source/desktop/gnome/lab-marker/surfaceLease.js', 'tests/desktop/gnome_lease_producer.py',
+           'tests/desktop/gnome_surface_lease.py', 'spec/delivery/packages/w-25-gnome-surface-lease.md']
 
 
 def marker_trace(display, environment, sample=None, dismiss=True):
@@ -138,6 +140,10 @@ def observe(environment, pid, channel, marker, composition, foreground_pid=None,
             import gnome_focus_baseline
             result['focus_baseline'] = gnome_focus_baseline.observe(display, environment, pid, foreground_pid,
                 Path(environment['HOME']).parent, result.get('reveal'), result.get('composition'))
+        if environment.get('SYSPANE_GNOME_SURFACE_LEASE'):
+            import gnome_surface_lease
+            result['surface_lease'] = gnome_surface_lease.observe(display, environment, pid,
+                Path(environment['HOME']).parent, result['composition'], marker_trace)
         if environment.get('SYSPANE_GNOME_WALLPAPER_POLICY'):
             import gnome_wallpaper_policy
             result['wallpaper_policy'] = gnome_wallpaper_policy.observe(display, environment, pid,
@@ -202,7 +208,7 @@ def group_members(group):
     return members
 
 
-def run(build, marker=False, control='live', composition=None, reveal=None, focus_baseline=None, focus_trace=False, icon_input=None, wallpaper=None, switcher=None, icon_recovery=None, shell_recovery=None, focus_integration=None, focus_scenarios=None, wallpaper_policy=None):
+def run(build, marker=False, control='live', composition=None, reveal=None, focus_baseline=None, focus_trace=False, icon_input=None, wallpaper=None, switcher=None, icon_recovery=None, shell_recovery=None, focus_integration=None, focus_scenarios=None, wallpaper_policy=None, surface_lease=None):
     # Retain orphaned shell helpers for reaping; no service/session can adopt them.
     if ctypes.CDLL(None, use_errno=True).prctl(36, 1, 0, 0, 0) != 0:
         raise OSError(ctypes.get_errno(), 'cannot retain descendant exit evidence')
@@ -230,6 +236,8 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
         family = 'GNOME-FOCUS-BASELINE-01'
     if wallpaper_policy:
         family = 'GNOME-WALLPAPER-POLICY-01'
+    if surface_lease:
+        family = 'GNOME-SURFACE-LEASE-01'
     with_icons = bool(composition) or focus_baseline == 'ding'
     token = family + '-' + uuid.uuid4().hex
     workspace = build / token
@@ -255,6 +263,7 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
               'focus_integration_mode': focus_integration,
               'focus_scenarios_mode': focus_scenarios,
               'wallpaper_policy_control': wallpaper_policy,
+              'surface_lease_control': surface_lease,
               'executed_at': datetime.now(timezone.utc).isoformat(),
               'source_base': subprocess.check_output(['git', '-c', 'safe.directory=' + str(ROOT), 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
               'source_inputs': {p: sha(ROOT / p) for p in SOURCES},
@@ -285,6 +294,8 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
         report['qualification'] = 'Optional owned GNOME X11 multiple-window/modal focus, closed lifetime and workspace invalidation only; broader session/alternate triggers and complete host qualification remain open.'
     if wallpaper_policy:
         report['qualification'] = 'Native private dconf wallpaper locks and policy preservation only; protected deployment, image policy, live revocation and complete host qualification remain open.'
+    if surface_lease:
+        report['qualification'] = 'Independent public-marker native surface expiry/disconnect/retention and new epoch only; full telemetry, policy, supervisor and product qualification remain open.'
     archive = workspace / 'source-inputs.zip'
     with zipfile.ZipFile(archive, 'x', compression=zipfile.ZIP_DEFLATED) as target:
         for name in SOURCES:
@@ -314,6 +325,8 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
                        'GI_TYPELIB_PATH': ':'.join(str(sysroot / p) for p in ('usr/lib/gnome-shell', 'usr/lib/x86_64-linux-gnu/mutter-14', 'usr/lib/x86_64-linux-gnu/gjs/girepository-1.0', 'usr/lib/x86_64-linux-gnu/girepository-1.0')),
                        'GNOME_SHELL_DATADIR': str(sysroot / 'usr/share/gnome-shell'),
                        'LIBGWEATHER_LOCATIONS_PATH': str(sysroot / 'usr/lib/x86_64-linux-gnu/libgweather-4/Locations.bin')}
+        if surface_lease:
+            environment['SYSPANE_GNOME_SURFACE_LEASE'] = surface_lease
         if marker:
             environment['SYSPANE_GNOME_MARKER_CONTROL'] = control
         if composition:
@@ -480,6 +493,17 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
                 time.sleep(.05)
             else:
                 raise TimeoutError('owned accessibility registry did not acquire its bus name')
+        lease_producers = {}
+        if surface_lease:
+            for role in ['first','second']:
+                lease_producers[role] = launch('lease-'+role, ['/usr/bin/python3',str(ROOT/'tests/desktop/gnome_lease_producer.py'),role])
+            environment['SYSPANE_GNOME_LEASE_PIDS'] = json.dumps([p.pid for p in lease_producers.values()])
+            deadline = time.monotonic()+3
+            while time.monotonic()<deadline:
+                if all((workspace/('lease-producer-'+role+'.jsonl')).exists() and (workspace/('lease-producer-'+role+'.jsonl')).stat().st_size for role in lease_producers):break
+                time.sleep(.02)
+            else:raise TimeoutError('retained lease fixtures not ready')
+            report['lease_producer_mapped_files'] = {role:mapped_files(p.pid) for role,p in lease_producers.items()}
         shell = launch('shell', [str(sysroot / 'usr/bin/gnome-shell'), '--x11', '--mode=user'])
         foreground = launch('foreground', ['/usr/bin/python3', str(ROOT / 'tests/desktop/gnome_foreground.py')]) if reveal or focus_baseline else None
         switcher_apps = {}
@@ -551,6 +575,9 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
                     report['outcome'] = report['observation']['shell_recovery']['outcome']
                     if report['observation']['shell_recovery'].get('error'):
                         report['error'] = report['observation']['shell_recovery']['error']
+                if surface_lease:
+                    if lease_producers['first'].poll()!=73 or lease_producers['second'].poll() is not None:raise ValueError('retained producer lifecycle differs')
+                    report['outcome'] = report['observation']['surface_lease']['evaluation']['outcome']
                 if wallpaper_policy:
                     if policy_writer.poll() is not None:raise ValueError('private dconf writer exited')
                     report['wallpaper_policy_mapped_files'] = mapped_files(policy_writer.pid)
@@ -635,6 +662,10 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
                     report[key] = {'path': str(path), 'bytes': path.stat().st_size, 'sha256': sha(path)}
             extension_root = workspace / 'data/gnome-shell/extensions'
             report['enabled_extension_inputs_after'] = inventory(extension_root) if extension_root.exists() else {}
+        if surface_lease:
+            for key,name in [('surface_lease_journal','surface-lease.jsonl'),('lease_first_journal','lease-producer-first.jsonl'),('lease_second_journal','lease-producer-second.jsonl')]:
+                path = workspace/name
+                if path.exists():report[key] = {'path':str(path),'bytes':path.stat().st_size,'sha256':sha(path)}
         if wallpaper_policy:
             path = workspace/'wallpaper-policy.jsonl'
             if path.exists():report['wallpaper_policy_journal'] = {'path':str(path),'bytes':path.stat().st_size,'sha256':sha(path)}
@@ -713,7 +744,12 @@ if __name__ == '__main__':
     parser.add_argument('--focus-integration', choices=('observe','restore'))
     parser.add_argument('--focus-scenarios', choices=('observe','restore','helper-exit'))
     parser.add_argument('--wallpaper-policy', choices=('locked','unlocked','replace-policy'))
+    parser.add_argument('--surface-lease', choices=('live','ignore-expiry','disconnect'))
     args = parser.parse_args()
+    if args.surface_lease:
+        if any([args.marker,args.composition,args.reveal,args.focus_baseline,args.focus_trace,args.icon_input,args.wallpaper,args.switcher,args.icon_recovery,args.shell_recovery,args.focus_integration,args.focus_scenarios,args.wallpaper_policy]) or args.marker_control != 'live':
+            parser.error('--surface-lease owns its retained fixtures and live composition')
+        args.composition = 'live'
     if args.wallpaper_policy:
         if any([args.marker,args.composition,args.reveal,args.focus_baseline,args.focus_trace,args.icon_input,args.wallpaper,args.switcher,args.icon_recovery,args.shell_recovery,args.focus_integration,args.focus_scenarios]) or args.marker_control != 'live':
             parser.error('--wallpaper-policy owns its private backend and live composition')
@@ -766,4 +802,4 @@ if __name__ == '__main__':
         parser.error('composition uses its own above/below controls')
     if not args.marker and args.marker_control != 'live':
         parser.error('--marker-control requires --marker')
-    sys.exit(run(owned_build(args.build_dir), args.marker or bool(args.composition), args.marker_control, args.composition, args.reveal, args.focus_baseline, args.focus_trace, args.icon_input, args.wallpaper, args.switcher, args.icon_recovery, args.shell_recovery, args.focus_integration, args.focus_scenarios, args.wallpaper_policy))
+    sys.exit(run(owned_build(args.build_dir), args.marker or bool(args.composition), args.marker_control, args.composition, args.reveal, args.focus_baseline, args.focus_trace, args.icon_input, args.wallpaper, args.switcher, args.icon_recovery, args.shell_recovery, args.focus_integration, args.focus_scenarios, args.wallpaper_policy, args.surface_lease))

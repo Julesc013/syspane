@@ -357,7 +357,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "ffa7015127ffc931bcf1dbcb892a790a429a53c53c53cf9e2e79aa6183a9b3f9"
+      "sha256": "4c5a930c2f6d6d91f853be00ca95c3f96861f3478a2486d065780a47982951aa"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -523,6 +523,18 @@
         "SP-CAMPAIGN-ADMISSION"
       ],
       "sha256": "042b41d1f42ad4e75a8aa88891342a4ef68cda11b139462fa566ea0aca9fe571"
+    },
+    {
+      "id": "SP-GNOME-SURFACE-LEASE-HANDOFF",
+      "path": "delivery/gnome-surface-lease-handoff.md",
+      "title": "Native GNOME surface producer-lease checkpoint",
+      "description": "Independent expiry, native disconnect, retained drawing and full-snapshot replacement have source-bound evidence.",
+      "requires": [
+        "SP-W25-GNOME-SURFACE-LEASE",
+        "SP-W25-PACKAGE",
+        "SP-CAMPAIGN-ADMISSION"
+      ],
+      "sha256": "2579e186b001d8211548b6871fad01b081771ea5c224405503e83649a421dc17"
     },
     {
       "id": "SP-GNOME-SWITCHER-HANDOFF",
@@ -929,6 +941,19 @@
       "sha256": "16754f609c01c4da6dbcdbaea9dd05c300e1e64a09a35bc88b01d23af3f5b28c"
     },
     {
+      "id": "SP-W25-GNOME-SURFACE-LEASE",
+      "path": "delivery/packages/w-25-gnome-surface-lease.md",
+      "title": "W-25 independent native surface producer lease",
+      "description": "Observe producer expiry, disconnect, retained pixels and new-epoch resynchronization on the owned GNOME surface.",
+      "requires": [
+        "SP-W25-PACKAGE",
+        "SP-RECOVERY",
+        "SP-W05-GNOME-COMPOSITION",
+        "SP-CAMPAIGN-ADMISSION"
+      ],
+      "sha256": "ff2edb10ed54466f1ff1e4392fc948fc7b5d3d42ac82fcf4e54fbc23874511d7"
+    },
+    {
       "id": "SP-W25-MEASURED-TIME",
       "path": "delivery/packages/w-25-measured-time.md",
       "title": "W-25 measured telemetry and consumer freshness",
@@ -1015,7 +1040,7 @@
         "SP-TRANSPORT",
         "SP-COMPOSITION"
       ],
-      "sha256": "33d78a71380ae4049ddb3da0e9ab21b381ec4867a712d78595547edb3ae85b7b"
+      "sha256": "88177609a3258313de6dedc3d14e4260a9322a7d06b016d857d6c4fb7e2a99a1"
     },
     {
       "id": "SP-W25-STATE-IMPORT",

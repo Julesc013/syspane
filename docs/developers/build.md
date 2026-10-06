@@ -651,3 +651,32 @@ defines the first model program and required cases. Its concrete profiles and
 commands are now present. Buildable, implemented, qualified and
 releasable are separate claims. See [the workflow](agent-workflow.md) for case
 bindings and evidence needed to resume from a fresh checkout.
+
+## Native GNOME surface producer lease
+
+The [surface-lease package](../../spec/delivery/packages/w-25-gnome-surface-lease.md)
+uses the existing owned X11/GNOME/DING laboratory and two retained public-marker
+fixture processes. Run the Windows workspace preflight before each invocation,
+then use `wsl -d Ubuntu-24.04 -u ir4runner --` for these Linux commands:
+
+```sh
+python3 tests/desktop/native_gnome_bootstrap.py <owned-linux-build> --surface-lease live
+python3 tests/desktop/native_gnome_bootstrap.py <owned-linux-build> --surface-lease ignore-expiry
+python3 tests/desktop/native_gnome_bootstrap.py <owned-linux-build> --surface-lease disconnect
+python3 build-support/record_gnome_surface_lease.py --build-dir <owned-linux-build> --reports <live-report> <ignore-expiry-report> <disconnect-report> --output <new-owned-record>
+python3 tests/desktop/test_gnome_surface_lease_record.py <owned-linux-build> <live-report> <ignore-expiry-report> <disconnect-report> -v
+```
+
+The ignored-expiry native command intentionally exits 1 with failed lease acceptance;
+the other two exit 0. The recorder must accept all three intended results. It checks
+exact peer/process lifetimes, command/receipt times, last-accepted data identity,
+raw journals, external marker/status pixels and a post-disable original marker trace.
+The first child exits 73 deliberately; the second is prelaunched and stays alive
+until cleanup. This is neither an automatic restart test nor real telemetry.
+
+Capture samples alone establish timer expiry before any later diagnostic call.
+The existing marker helper has a 250 ms preparation delay before its separate
+2,400 ms post-disable interval. Failed verification attempts and their source
+revisions are preserved in the [checkpoint](../../spec/delivery/gnome-surface-lease-handoff.md).
+The bridge is active only under this explicit experiment flag. Native product
+transport/policy, render-watchdog and editor-exit integration remain pending.
