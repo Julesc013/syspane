@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-06T06:31:19.606748+00:00", "scope": "Native retained network cache and policy/owner-loss pixel erasure verified"}
+updated: {"by": "codex", "at": "2026-10-06T07:34:36.784376+00:00", "scope": "Authenticated asynchronous GNOME clock, public age/expiry and native teardown verified"}
 ---
 
 # Current state and next admitted boundary
@@ -314,6 +314,14 @@ causal brackets, invalid-socket rejection, explicit resource release and held-pe
 exit pass in standalone GJS. The desktop retained cache is unchanged; asynchronous
 shell attachment and visible age progression/expiry remain required.
 
+The [owned asynchronous GNOME clock](gnome-clock-handoff.md) now checks visible
+public-sample age and expiry using the authenticated native clock in the real shell.
+The shell owns a same-session peer; frozen age and ignored expiry fail their intended
+oracles. Wrong-peer admission, actual peer exit and disable during startup preserve
+closed state and remove the tile. This public clock fixture does not enable live
+operational network freshness. The retained relay now binds the updated collector
+evidence while preserving its original contract and earlier records.
+
 Canonical 0.2.0 documentation bundle, unchanged 0.1 authoring profile, preserved old
 fixtures, new experimental scene/command/capability 0.2 and admission descriptors.
 The initial settings registry has enforced metadata/default consistency and generated
@@ -376,8 +384,9 @@ real Linux acquisition, source lifetimes and measured receipt under independent
 child supervision. The native surface demonstrates retained public-marker recovery,
 and the shared projection now closes measured values and status semantics.
 The explicit retained cache now proves bounded native admission and policy/owner-loss
-erasure with real value pixels. Integrate the standalone qualified native clock and
-prove displayed age progression plus independent
+erasure with real value pixels. Connect actual measured network input through the
+qualified asynchronous clock path, preserving original timestamps and model status
+semantics, and exercise independent
 lease faults, then connect product controller policy/demand, general delivery queues
 and renderer supervision.
 Actual native topology faults and Windows full-table notification

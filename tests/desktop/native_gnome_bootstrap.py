@@ -55,7 +55,12 @@ SOURCES = ['tests/desktop/native_gnome_bootstrap.py', 'tests/desktop/native_orac
            'tests/desktop/gnome_network_cache.py', 'spec/delivery/packages/w-25-native-network-cache.md',
            'tests/protocol/native_collector.py', 'tests/protocol/native_network.py', 'tests/protocol/native_ipc.py',
            'tests/fault/native_recovery.py', 'build-support/record_gnome_network_cache.py',
-           'tests/desktop/test_gnome_network_cache_record.py']
+           'tests/desktop/test_gnome_network_cache_record.py',
+           'source/desktop/gnome/lab-marker/clockExperiment.js', 'tests/desktop/gnome_clock_peer.py',
+           'tests/desktop/gnome_clock_age.py', 'spec/delivery/packages/w-25-gnome-clock.md',
+           'source/desktop/gnome/native_clock.cpp', 'source/desktop/gnome/native_clock.hpp',
+           'source/desktop/gnome/SysPaneClock-0.1.gir', 'build-support/record_gnome_clock.py',
+           'tests/desktop/test_gnome_clock_record.py']
 
 
 def marker_trace(display, environment, sample=None, dismiss=True):
@@ -145,6 +150,10 @@ def observe(environment, pid, channel, marker, composition, foreground_pid=None,
             import gnome_focus_baseline
             result['focus_baseline'] = gnome_focus_baseline.observe(display, environment, pid, foreground_pid,
                 Path(environment['HOME']).parent, result.get('reveal'), result.get('composition'))
+        if environment.get('SYSPANE_GNOME_CLOCK_AGE'):
+            import gnome_clock_age
+            result['clock_age'] = gnome_clock_age.observe(display, environment, pid,
+                Path(environment['HOME']).parent, result['composition'], marker_trace)
         if environment.get('SYSPANE_GNOME_NETWORK_CACHE'):
             import gnome_network_cache
             result['network_cache'] = gnome_network_cache.observe(display, environment, pid,
@@ -217,7 +226,7 @@ def group_members(group):
     return members
 
 
-def run(build, marker=False, control='live', composition=None, reveal=None, focus_baseline=None, focus_trace=False, icon_input=None, wallpaper=None, switcher=None, icon_recovery=None, shell_recovery=None, focus_integration=None, focus_scenarios=None, wallpaper_policy=None, surface_lease=None, network_cache=None):
+def run(build, marker=False, control='live', composition=None, reveal=None, focus_baseline=None, focus_trace=False, icon_input=None, wallpaper=None, switcher=None, icon_recovery=None, shell_recovery=None, focus_integration=None, focus_scenarios=None, wallpaper_policy=None, surface_lease=None, network_cache=None, clock_age=None):
     # Retain orphaned shell helpers for reaping; no service/session can adopt them.
     if ctypes.CDLL(None, use_errno=True).prctl(36, 1, 0, 0, 0) != 0:
         raise OSError(ctypes.get_errno(), 'cannot retain descendant exit evidence')
@@ -249,6 +258,8 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
         family = 'GNOME-SURFACE-LEASE-01'
     if network_cache:
         family = 'GNOME-NETWORK-CACHE-01'
+    if clock_age:
+        family = 'GNOME-CLOCK-01'
     with_icons = bool(composition) or focus_baseline == 'ding'
     token = family + '-' + uuid.uuid4().hex
     workspace = build / token
@@ -276,6 +287,7 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
               'wallpaper_policy_control': wallpaper_policy,
               'surface_lease_control': surface_lease,
               'network_cache_control': network_cache,
+              'clock_age_control': clock_age,
               'executed_at': datetime.now(timezone.utc).isoformat(),
               'source_base': subprocess.check_output(['git', '-c', 'safe.directory=' + str(ROOT), 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
               'source_inputs': {p: sha(ROOT / p) for p in SOURCES},
@@ -310,12 +322,22 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
         report['qualification'] = 'Independent public-marker native surface expiry/disconnect/retention and new epoch only; full telemetry, policy, supervisor and product qualification remain open.'
     if network_cache:
         report['qualification'] = 'Private retained real-network tile, native policy revision/erasure and owner loss only; live renderer clock, installed policy, general transport and product qualification remain open.'
-        report['collector_build_record_sha256'] = sha(ROOT/'build-support/evidence/w-25-network-presentation-linux-x64-gcc13.json')
+        report['collector_build_record_sha256'] = sha(ROOT/'build-support/evidence/w-25-gjs-clock-linux-x64-gcc13.json')
+    if clock_age:
+        report['qualification'] = 'Owned asynchronous shell clock and public native age/expiry only; operational freshness, suspend and product qualification remain open.'
+        record = ROOT/'build-support/evidence/w-25-gjs-clock-linux-x64-gcc13.json'
+        expected = json.loads(record.read_text())
+        for name in ['libsyspane_gjs_clock.so', 'SysPaneClock-0.1.typelib']:
+            if sha(build/name) != expected['artifacts'][name]['sha256']:raise ValueError('tested native clock artifact differs')
+        for name,digest in expected['source_inputs'].items():
+            if name.startswith('source/') and Path(name).suffix in ('.cpp','.hpp','.gir') and sha(ROOT/name)!=digest:raise ValueError('tested clock source differs')
+        report['clock_build_record_sha256'] = sha(record)
     archive = workspace / 'source-inputs.zip'
     with zipfile.ZipFile(archive, 'x', compression=zipfile.ZIP_DEFLATED) as target:
         for name in SOURCES:
             target.write(ROOT / name, name)
     report['source_archive'] = {'path': str(archive), 'bytes': archive.stat().st_size, 'sha256': sha(archive)}
+    clock_directory = None
     server = worker = None
     children, streams = [], []
     started = time.monotonic()
@@ -340,6 +362,14 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
                        'GI_TYPELIB_PATH': ':'.join(str(sysroot / p) for p in ('usr/lib/gnome-shell', 'usr/lib/x86_64-linux-gnu/mutter-14', 'usr/lib/x86_64-linux-gnu/gjs/girepository-1.0', 'usr/lib/x86_64-linux-gnu/girepository-1.0')),
                        'GNOME_SHELL_DATADIR': str(sysroot / 'usr/share/gnome-shell'),
                        'LIBGWEATHER_LOCATIONS_PATH': str(sysroot / 'usr/lib/x86_64-linux-gnu/libgweather-4/Locations.bin')}
+        if clock_age:
+            runtime = Path.home()/'.cache/syspane/ipc-w24'
+            if runtime.resolve(strict=True)!=runtime or runtime.stat().st_uid!=os.getuid() or runtime.stat().st_mode & 0o777 != 0o700:raise ValueError('owned IPC root required')
+            clock_directory = runtime/('case-'+uuid.uuid4().hex[:12]);clock_directory.mkdir(mode=0o700)
+            environment.update(SYSPANE_GNOME_CLOCK_AGE=clock_age, SYSPANE_GNOME_CLOCK_SOCKET=str(clock_directory/'s'),
+                SYSPANE_GNOME_CLOCK_HELPER=str(ROOT/'tests/desktop/gnome_clock_peer.py'))
+            environment['LD_LIBRARY_PATH'] = str(build)+':'+environment['LD_LIBRARY_PATH']
+            environment['GI_TYPELIB_PATH'] = str(build)+':'+environment['GI_TYPELIB_PATH']
         if surface_lease:
             environment['SYSPANE_GNOME_SURFACE_LEASE'] = surface_lease
         if network_cache:
@@ -604,6 +634,8 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
                     report['outcome'] = report['observation']['shell_recovery']['outcome']
                     if report['observation']['shell_recovery'].get('error'):
                         report['error'] = report['observation']['shell_recovery']['error']
+                if clock_age:
+                    report['outcome'] = report['observation']['clock_age']['evaluation']['outcome']
                 if network_cache:
                     if network_relay.poll() != (73 if network_cache=='owner-loss' else None):raise ValueError('retained network relay lifetime differs')
                     report['outcome'] = report['observation']['network_cache']['evaluation']['outcome']
@@ -671,6 +703,10 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
                 report['error'] = 'owned process group did not stop'
             report['cleanup'].append({'process': name, 'pid': process.pid, 'exit': process.returncode,
                                       'members_before_stop': before, 'members_after_stop': remaining})
+        if clock_directory is not None:
+            if list(clock_directory.iterdir()):
+                report['outcome']='fail';report['error']='clock endpoint cleanup incomplete'
+            else:clock_directory.rmdir()
         for stream in streams:
             stream.close()
         report['logs'] = {p.name: p.read_text(errors='replace')[:1048576] for p in workspace.glob('*.log')}
@@ -694,6 +730,8 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
                     report[key] = {'path': str(path), 'bytes': path.stat().st_size, 'sha256': sha(path)}
             extension_root = workspace / 'data/gnome-shell/extensions'
             report['enabled_extension_inputs_after'] = inventory(extension_root) if extension_root.exists() else {}
+        if clock_age:
+            report['clock_artifacts'] = {p.name:{'path':str(p),'bytes':p.stat().st_size,'sha256':sha(p)} for p in workspace.glob('clock-*.json*')}
         if network_cache:
             report['network_private_artifacts'] = {p.name:{'path':str(p),'bytes':p.stat().st_size,'sha256':sha(p)} for p in workspace.glob('network-*.private.*')}
         if surface_lease:
@@ -780,7 +818,12 @@ if __name__ == '__main__':
     parser.add_argument('--wallpaper-policy', choices=('locked','unlocked','replace-policy'))
     parser.add_argument('--surface-lease', choices=('live','ignore-expiry','disconnect'))
     parser.add_argument('--network-cache', choices=('live','ignore-clear','wrong-value','owner-loss'))
+    parser.add_argument('--clock-age', choices=('live','freeze-age','ignore-expiry','peer-exit','pending-disable','wrong-peer'))
     args = parser.parse_args()
+    if args.clock_age:
+        if any([args.marker,args.composition,args.reveal,args.focus_baseline,args.focus_trace,args.icon_input,args.wallpaper,args.switcher,args.icon_recovery,args.shell_recovery,args.focus_integration,args.focus_scenarios,args.wallpaper_policy,args.surface_lease,args.network_cache]) or args.marker_control != 'live':
+            parser.error('--clock-age owns its same-session peer and live composition')
+        args.composition = 'live'
     if args.network_cache:
         if any([args.marker,args.composition,args.reveal,args.focus_baseline,args.focus_trace,args.icon_input,args.wallpaper,args.switcher,args.icon_recovery,args.shell_recovery,args.focus_integration,args.focus_scenarios,args.wallpaper_policy,args.surface_lease]) or args.marker_control != 'live':
             parser.error('--network-cache owns its retained relay and live composition')
@@ -841,4 +884,4 @@ if __name__ == '__main__':
         parser.error('composition uses its own above/below controls')
     if not args.marker and args.marker_control != 'live':
         parser.error('--marker-control requires --marker')
-    sys.exit(run(owned_build(args.build_dir), args.marker or bool(args.composition), args.marker_control, args.composition, args.reveal, args.focus_baseline, args.focus_trace, args.icon_input, args.wallpaper, args.switcher, args.icon_recovery, args.shell_recovery, args.focus_integration, args.focus_scenarios, args.wallpaper_policy, args.surface_lease, args.network_cache))
+    sys.exit(run(owned_build(args.build_dir), args.marker or bool(args.composition), args.marker_control, args.composition, args.reveal, args.focus_baseline, args.focus_trace, args.icon_input, args.wallpaper, args.switcher, args.icon_recovery, args.shell_recovery, args.focus_integration, args.focus_scenarios, args.wallpaper_policy, args.surface_lease, args.network_cache, args.clock_age))

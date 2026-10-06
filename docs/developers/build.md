@@ -759,3 +759,25 @@ Shell code must connect asynchronously and bind current policy before future use
 Existing desktop evidence keeps its original collector/source identity. Rebuilds
 require an explicitly refreshed evidence binding before the retained-cache laboratory
 can admit a changed collector; never bypass its fingerprint check.
+
+
+The [owned asynchronous shell clock](../../spec/delivery/packages/w-25-gnome-clock.md)
+uses the existing GNOME laboratory and native `SysPaneClock-0.1` artifacts. After
+the Windows workspace test preflight, run from the unprivileged Linux checkout:
+
+```sh
+python3 tests/desktop/native_gnome_bootstrap.py \
+  /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13 --clock-age live
+```
+
+Also run `freeze-age`, `ignore-expiry`, `peer-exit`, `pending-disable` and
+`wrong-peer`. The first two are expected failed candidate outcomes. The clock peer
+is a bounded child of the owned shell, inheriting its POSIX session; do not weaken
+the native session check to attach the separately launched retained relay.
+`record_gnome_clock.py --build-dir <owned-build> --output <record> <six-reports>`
+recomputes the public glyph/clock oracle and verifies held-child exit and artifacts.
+`tests/desktop/test_gnome_clock_record.py <six-clock-age.json-files> -v` checks
+adversarial mutations of those original observations. No operational values enter
+this clock fixture. The retained-cache relay now uses the existing
+`w-25-gjs-clock-linux-x64-gcc13.json` collector evidence binding; the earlier
+presentation and native-cache records remain historical and unchanged.

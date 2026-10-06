@@ -1,0 +1,42 @@
+[
+  {
+    "phase": "preflight",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 4294967296,\n  \"checkout_out_bytes\": 1071509602,\n  \"linux_campaign_bytes\": 2412788305,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "phase": "verify",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "build-support/record_gnome_clock.py",
+      "--build-dir",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13",
+      "--output",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/clock-age-calibration-b1bc4b2b42e54ed087778f3022095dc4.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-CLOCK-01-10eab508bf944ed3b60f7d67f1d57dad.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-CLOCK-01-b327e55b7140464f9be364b84ab333b7.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-CLOCK-01-2e82529e2c3f40e68e8292bd29e9a317.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-CLOCK-01-52ca6be4beef4b058600bd68bd2eaf92.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-CLOCK-01-0102614f7c24429e99c20d3060a068cb.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-CLOCK-01-e7e08f6ff70d4286a9da15809454263a.json"
+    ],
+    "exit": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/build-support/record_gnome_clock.py\", line 99, in <module>\n    if __name__=='__main__':main()\n                            ^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/build-support/record_gnome_clock.py\", line 94, in main\n    report={'outcome':'pass','source_inputs':values[0]['source_inputs'],'cases':[validate(v,build) for v in values],\n                                                                                 ^^^^^^^^^^^^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/build-support/record_gnome_clock.py\", line 79, in validate\n    if value['mapped_files'].get(library)!=prior['artifacts']['libsyspane_gjs_clock.so']['sha256']:raise ValueError('native clock library was not mapped in the shell')\n                                                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: native clock library was not mapped in the shell\n"
+  }
+]

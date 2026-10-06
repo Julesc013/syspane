@@ -34,7 +34,9 @@ The [native clock investigation](spec/delivery/measurement-clock-handoff.md) ver
 comparable readings across live local processes and rejects sampling after peer exit.
 The [GJS clock adapter](spec/delivery/gjs-clock-handoff.md) exposes that same Linux
 clock as exact decimal strings, with tested native resource cleanup and peer-exit
-rejection. Live desktop age progression remains a separate integration gate.
+rejection. The [owned GNOME clock experiment](spec/delivery/gnome-clock-handoff.md)
+adds asynchronous attachment, visible public-sample age/expiry and native teardown.
+Operational network freshness remains a separate integration gate.
 The [measured telemetry path](spec/delivery/measured-time-handoff.md) now preserves
 sample age through delay, replay and reconnect, with explicit clock scope and TTL checks.
 A [native network reader](spec/delivery/network-acquisition-handoff.md) now acquires

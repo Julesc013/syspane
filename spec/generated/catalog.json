@@ -357,7 +357,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "59b9fe178a46620a1fb25e2a00689bf30a72dfa05f548c784d302dd84236c5ea"
+      "sha256": "7bf3342da71826e89809d909cd46758eb02ed6a9ebc7b46299252af4bb47d96c"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -412,6 +412,17 @@
         "SP-W25-GJS-CLOCK"
       ],
       "sha256": "dc600da7608d0013efb656f0fab5160dd4b039f220165d0b849ac4ad3536dfc5"
+    },
+    {
+      "id": "SP-GNOME-CLOCK-HANDOFF",
+      "path": "delivery/gnome-clock-handoff.md",
+      "title": "Asynchronous GNOME clock and visible age checkpoint",
+      "description": "Native authenticated clock ownership, independently observed public age and expiry, and bounded startup/exit cleanup.",
+      "requires": [
+        "SP-W25-GNOME-CLOCK",
+        "SP-CAMPAIGN-ADMISSION"
+      ],
+      "sha256": "244b8217f21a6feacfc2bc4ad4b12a30b85327a15dc9a14ef30a326952d92e29"
     },
     {
       "id": "SP-GNOME-COMPOSITION-HANDOFF",
@@ -984,6 +995,17 @@
         "SP-W25-NATIVE-NETWORK-CACHE"
       ],
       "sha256": "f38e9efa86cd8ef27535e85bf8e2baabe0f4261ff739bc7be5c660ff44c35b8a"
+    },
+    {
+      "id": "SP-W25-GNOME-CLOCK",
+      "path": "delivery/packages/w-25-gnome-clock.md",
+      "title": "W-25 asynchronous native shell clock and visible age",
+      "description": "Qualify same-session clock ownership, native age progression and bounded teardown in the owned GNOME shell.",
+      "requires": [
+        "SP-W25-GJS-CLOCK",
+        "SP-W25-NATIVE-NETWORK-CACHE"
+      ],
+      "sha256": "f39729227e19da0fca00e36540b9c7c7167c6afe903cf282bab34f171e85b192"
     },
     {
       "id": "SP-W25-GNOME-SURFACE-LEASE",

@@ -12,6 +12,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Independent recent-failure metadata checkpoint](failure-metadata-handoff.md) — Bind bounded native fault records, private file handling and policy-gated diagnostic projection to current evidence.
 - [Foundation implementation handoff](foundation-handoff.md) — Resume the admitted campaign from tested model builds and local smoke packages.
 - [Standalone native GJS measurement-clock checkpoint](gjs-clock-handoff.md) — Exact native clock strings, authenticated peer lifetime and deterministic resource cleanup before live desktop freshness.
+- [Asynchronous GNOME clock and visible age checkpoint](gnome-clock-handoff.md) — Native authenticated clock ownership, independently observed public age and expiry, and bounded startup/exit cleanup.
 - [Owned GNOME and DING composition checkpoint](gnome-composition-handoff.md) — Externally verify a live drawing between the synthetic wallpaper and real desktop icons, with two wrong-layer controls.
 - [Independent GNOME and DING focus comparison](gnome-focus-handoff.md) — The native focus and keyboard-delivery failure repeats without the SysPane bridge.
 - [Optional GNOME focus integration checkpoint](gnome-focus-integration-handoff.md) — Native event-bound focus restoration passes the original oracle and declared interaction guards while default behavior remains unchanged.
