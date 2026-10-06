@@ -287,6 +287,8 @@ def semantic_errors(value: Any, schema_name: str, root: Path=ROOT) -> list[str]:
             for val in item:
                 walk(val)
     walk(value)
+    if schema_name == 'transaction-watch':
+        check_uint(value['ticket'])
     if schema_name in ('snapshot', 'snapshot-v0.2'):
         entities = [e['id'] for e in value['entities']]
         sources = [e['id'] for e in value['sources']]

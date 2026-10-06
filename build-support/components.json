@@ -1613,13 +1613,17 @@
       "public_interfaces": [],
       "private_interfaces": [],
       "sources": [
-        "source/application/command_probe.cpp"
+        "source/application/command_probe.cpp",
+        "source/application/command_supervisor.cpp"
       ],
       "allowed_dependencies": [
         "syspane_async_commands",
         "syspane_generation_store",
         "syspane_local_ipc",
-        "Threads::Threads"
+        "Threads::Threads",
+        "syspane_child",
+        "syspane_health",
+        "syspane_recovery"
       ],
       "target_requirements": [
         "cxx17"

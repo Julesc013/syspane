@@ -637,6 +637,34 @@
       "expected": "invalid",
       "semantic": false,
       "reason": "Reconciliation requires original scope and truthful durable/unknown facts."
+    },
+    {
+      "path": "fixtures/valid/transaction-watch.json",
+      "schema": "transaction-watch",
+      "expected": "valid",
+      "semantic": false,
+      "reason": "A supervision ticket conveys no command authority and must be positive."
+    },
+    {
+      "path": "fixtures/invalid/transaction-watch-zero.json",
+      "schema": "transaction-watch",
+      "expected": "invalid",
+      "semantic": false,
+      "reason": "A supervision ticket conveys no command authority and must be positive."
+    },
+    {
+      "path": "fixtures/invalid/transaction-watch-authority.json",
+      "schema": "transaction-watch",
+      "expected": "invalid",
+      "semantic": false,
+      "reason": "A supervision ticket conveys no command authority and must be positive."
+    },
+    {
+      "path": "fixtures/invalid/transaction-watch-overflow.json",
+      "schema": "transaction-watch",
+      "expected": "invalid",
+      "semantic": true,
+      "reason": "Supervision tickets cannot overflow uint64."
     }
   ]
 }

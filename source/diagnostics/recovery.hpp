@@ -87,6 +87,23 @@ private:
 };
 
 enum class ChildState { idle, running, waiting, quarantined, circuit_open, stopped, clock_fault };
+// One independent absolute deadline per controller transaction. A failed watch
+// cannot be renewed; replace it only with a new, independently owned child.
+class TransactionWatch {
+public:
+    TransactionWatch()=default;
+    TransactionWatch(const TransactionWatch&)=delete;
+    TransactionWatch& operator=(const TransactionWatch&)=delete;
+    Code started(std::uint64_t ticket,std::uint64_t now);
+    Code finished(std::uint64_t ticket,std::uint64_t now);
+    Code tick(std::uint64_t now);
+    std::optional<std::uint64_t> pending()const{return pending_;}
+private:
+    Clock clock_;
+    std::optional<std::uint64_t> pending_,completed_;
+    std::uint64_t started_ms_=0;
+    bool failed_=false;
+};
 enum class Failure { launch_failed, crashed, producer_expired, render_stalled, operation_timeout };
 enum class StopProof { unconfirmed, confirmed };
 struct FailureRecord { Failure reason; std::uint64_t observed_ms; };

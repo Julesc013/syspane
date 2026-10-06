@@ -1,5 +1,27 @@
 # Developer setup and checks
 
+The [transaction supervision checkpoint](../../spec/delivery/transaction-supervision-handoff.md)
+adds `TransactionWatch` in the common recovery component and an opt-in controller
+HealthLink profile. A started/armed handshake precedes worker dispatch; finished
+follows native join. The independent 5000 ms operation deadline cannot be renewed
+by health traffic. Whole-process termination isolates an uncooperative transaction.
+
+After workspace preflight/configure/build, run the recovery and health families
+with `ctest --preset <profile> -R '^(recovery[.]TRANSACTION-|health[.]HEALTH-TRANSACTION)'
+--output-on-failure`. Linux additionally runs `ctest --preset linux-x64-gcc13 -R
+'^native[.]TRANSACTION-SUPERVISION$' --output-on-failure`. This experiment launches
+`SysPane.CommandProbe supervisor <private-runtime-root> <owned-store>
+<normal|prepare|durable|repeat> <client-parent-pid> <allow|deny>`. The scenario and
+policy flags are finite laboratory controls. The supervisor creates fresh private
+endpoint directories for each child, uses the existing native Child owner, and
+retains one restart budget across replacements. Its parent pipe accepts `stop`.
+
+The independent client observes worker tasks and process exit through pidfds, then
+reconnects to the reported fresh epoch. It checks exact stored documents and receipt
+results without automatic command replay. Runtime reports are under
+`native-evidence/supervision-*`. Installed endpoint discovery, policy distribution,
+installation identity, assets and native UI activation remain separate gates.
+
 The [reconciliation checkpoint](../../spec/delivery/reconciliation-handoff.md) adds
 `result.reconcile` / `result.reconciled`, negotiated with reconciliation-request and
 reconciliation-result 0.1 plus command-result 0.1. `consume_reconciliation` checks

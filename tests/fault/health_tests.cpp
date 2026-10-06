@@ -56,6 +56,28 @@ int main(int argc, char** argv) {
             Pair events; events.client.heartbeat(1); const auto frame = events.client.take_output(); std::string many;
             for (unsigned i = 0; i < 17; ++i) many += frame;
             check(many.size() <= 4096); rejects([&] { events.server.feed(many, 104); }, "health.event_limit");
+        } else if(name=="HEALTH-TRANSACTION"){
+            r::HealthLink client(false,"console","C","",100,true),server(true,"console","E","G",100,true);
+            check(server.feed(client.take_output(),101)[0].kind==r::HealthKind::ready);client.feed(server.take_output(),102);
+            client.transaction_started(1);check(server.feed(client.take_output(),103)[0].kind==r::HealthKind::transaction_started);
+            server.transaction_armed(1);check(client.feed(server.take_output(),104)[0].kind==r::HealthKind::transaction_armed);
+            client.heartbeat(1);check(server.feed(client.take_output(),105)[0].kind==r::HealthKind::heartbeat);
+            client.transaction_finished(1);check(server.feed(client.take_output(),106)[0].kind==r::HealthKind::transaction_finished);
+            client.transaction_started(2);server.feed(client.take_output(),107);server.transaction_armed(2);client.feed(server.take_output(),108);
+            rejects([&]{client.transaction_finished(1);},"health.transaction_order");check(client.take_output().empty());
+        } else if(name=="HEALTH-TRANSACTION-REJECT"){
+            for(unsigned mode=0;mode<5;++mode){
+                r::HealthLink client(false,"console","C","",100,true),server(true,"console","E","G",100,true);
+                server.feed(client.take_output(),101);client.feed(server.take_output(),102);
+                if(mode==0)rejects([&]{client.transaction_finished(1);},"health.transaction_order");
+                if(mode==1)rejects([&]{server.transaction_started(1);},"health.transaction_order");
+                if(mode==2){client.transaction_started(1);rejects([&]{client.transaction_finished(1);},"health.transaction_order");}
+                if(mode==3){client.transaction_started(1);server.feed(client.take_output(),103);server.transaction_armed(1);rejects([&]{server.transaction_armed(1);},"health.transaction_order");}
+                if(mode==4){client.transaction_started(1);server.feed(client.take_output(),103);rejects([&]{server.transaction_armed(2);},"health.transaction_order");}
+            }
+            r::HealthLink plain(true,"console","E","G",100),required(false,"console","C","",100,true);
+            rejects([&]{plain.feed(required.take_output(),101);},"handshake.required_feature");
+            for(const auto& ticket:{"0","01","18446744073709551616"})rejects([&]{w::decode(w::Json{{"type","transaction.started"},{"body",{{"ticket",ticket}}},{"connection_id","G"},{"producer_epoch","E"}}.dump());},"body.invalid");
         } else return 2;
         std::cout << name << ": pass\n"; return 0;
     } catch (const std::exception& error) { std::cerr << error.what() << '\n'; return 1; }

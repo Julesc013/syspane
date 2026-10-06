@@ -3,15 +3,16 @@
 
 namespace syspane::recovery {
 namespace w = protocol;
-HealthLink::HealthLink(platform::Stream& stream, bool server, std::string role, std::string epoch, std::string connection)
-    : HealthLink(server, std::move(role), std::move(epoch), std::move(connection), stream.connected_ms()) {
+HealthLink::HealthLink(platform::Stream& stream, bool server, std::string role, std::string epoch, std::string connection,bool transactions)
+    : HealthLink(server, std::move(role), std::move(epoch), std::move(connection), stream.connected_ms(),transactions) {
     stream_ = &stream;
     const auto initial = take_output();
     if (!initial.empty()) stream_->write(initial, 100);
 }
-HealthLink::HealthLink(bool server, std::string role, std::string epoch, std::string connection, std::uint64_t connected_ms)
+HealthLink::HealthLink(bool server, std::string role, std::string epoch, std::string connection, std::uint64_t connected_ms,bool transactions)
     : connected_ms_(connected_ms), server_(server), progress_(role == "desktop"), role_(std::move(role)),
-      epoch_(std::move(epoch)), connection_(std::move(connection)) {
+      epoch_(std::move(epoch)), connection_(std::move(connection)),transactions_(transactions) {
+    if(transactions_&&role_!="console")throw w::Error("health.transaction_role");
     if (!server_) write(w::frame(w::Json{{"type", "hello"}, {"body", greeting(role_)}}.dump(), limit_));
 }
 void HealthLink::write(std::string bytes) {
@@ -25,8 +26,11 @@ std::string HealthLink::take_output() {
 w::Json HealthLink::greeting(const std::string& role) const {
     w::Json features = w::Json::array({"recovery.health"});
     if (progress_) features.push_back("recovery.progress");
+    if(transactions_)features.push_back("recovery.transaction");
+    auto documents=w::Json::array({{{"document","recovery-health"},{"version","0.1.0"}}});
+    if(transactions_)documents.push_back({{"document","transaction-watch"},{"version","0.1.0"}});
     return {{"wire_major", 0}, {"wire_minor", 1}, {"role", role}, {"producer_epoch", epoch_},
-        {"max_frame_bytes", limit_}, {"document_versions", w::Json::array({{{"document", "recovery-health"}, {"version", "0.1.0"}}})},
+        {"max_frame_bytes", limit_}, {"document_versions", documents},
         {"required_features", features}, {"optional_features", w::Json::array()}};
 }
 void HealthLink::send(const std::string& type, w::Json body) try {
@@ -62,7 +66,9 @@ std::vector<HealthEvent> HealthLink::feed(std::string_view bytes, std::uint64_t 
             const auto remote = w::handshake(message.body), local = w::handshake(greeting(server_ ? "console" : role_));
             const auto selection = server_ ? w::negotiate(local, remote, {role_}) : w::negotiate(remote, local, {role_});
             if (!server_ && remote.role != "console") throw w::Error("health.server_role");
-            if (selection.documents != std::set<std::pair<std::string,std::string>>{{"recovery-health", "0.1.0"}} ||
+            auto documents=std::set<std::pair<std::string,std::string>>{{"recovery-health","0.1.0"}};
+            if(transactions_)documents.insert({"transaction-watch","0.1.0"});
+            if (selection.documents != documents || (transactions_&&!selection.features.count("recovery.transaction")) ||
                 !selection.features.count("recovery.health") || (progress_ && !selection.features.count("recovery.progress")))
                 throw w::Error("health.feature");
             limit_ = selection.max_frame_bytes; decoder_.restrict_limit(limit_);
@@ -87,6 +93,18 @@ std::vector<HealthEvent> HealthLink::feed(std::string_view bytes, std::uint64_t 
             const auto generation = *w::decimal(message.body["generation"].get<std::string>());
             if (!pending_ || generation != *pending_) throw w::Error("health.progress_order");
             completed_ = generation; pending_.reset(); events.push_back({HealthKind::progress, generation, now});
+        } else if(transactions_&&message.type=="transaction.started"&&server_){
+            const auto ticket=*w::decimal(message.body["ticket"].get<std::string>());
+            if(work_pending_||(work_completed_&&ticket<=*work_completed_))throw w::Error("health.transaction_order");
+            work_pending_=ticket;work_armed_=false;events.push_back({HealthKind::transaction_started,ticket,now});
+        } else if(transactions_&&message.type=="transaction.armed"&&!server_){
+            const auto ticket=*w::decimal(message.body["ticket"].get<std::string>());
+            if(!work_pending_||*work_pending_!=ticket||work_armed_)throw w::Error("health.transaction_order");
+            work_armed_=true;events.push_back({HealthKind::transaction_armed,ticket,now});
+        } else if(transactions_&&message.type=="transaction.finished"&&server_){
+            const auto ticket=*w::decimal(message.body["ticket"].get<std::string>());
+            if(!work_pending_||*work_pending_!=ticket||!work_armed_)throw w::Error("health.transaction_order");
+            work_completed_=ticket;work_pending_.reset();work_armed_=false;events.push_back({HealthKind::transaction_finished,ticket,now});
         } else if (message.type == "shutdown") {
             closed_ = true; events.push_back({HealthKind::shutdown, 0, now});
         } else throw w::Error("health.direction_or_feature");
@@ -113,4 +131,16 @@ void HealthLink::progress(std::uint64_t generation) try {
     send("render.progress", {{"generation", std::to_string(generation)}}); completed_ = generation; pending_.reset();
 } catch (...) { closed_ = true; output_.clear(); output_frames_ = 0; throw; }
 void HealthLink::shutdown() { send("shutdown", {{"reason", "normal"}}); closed_ = true; }
+void HealthLink::transaction_started(std::uint64_t ticket)try{
+    if(!transactions_||server_||!ticket||work_pending_||(work_completed_&&ticket<=*work_completed_))throw w::Error("health.transaction_order");
+    send("transaction.started",{{"ticket",std::to_string(ticket)}});work_pending_=ticket;work_armed_=false;
+}catch(...){closed_=true;output_.clear();output_frames_=0;throw;}
+void HealthLink::transaction_armed(std::uint64_t ticket)try{
+    if(!transactions_||!server_||!work_pending_||*work_pending_!=ticket||work_armed_)throw w::Error("health.transaction_order");
+    send("transaction.armed",{{"ticket",std::to_string(ticket)}});work_armed_=true;
+}catch(...){closed_=true;output_.clear();output_frames_=0;throw;}
+void HealthLink::transaction_finished(std::uint64_t ticket)try{
+    if(!transactions_||server_||!work_pending_||*work_pending_!=ticket||!work_armed_)throw w::Error("health.transaction_order");
+    send("transaction.finished",{{"ticket",std::to_string(ticket)}});work_completed_=ticket;work_pending_.reset();work_armed_=false;
+}catch(...){closed_=true;output_.clear();output_frames_=0;throw;}
 } // namespace syspane::recovery

@@ -40,6 +40,9 @@ const char* kind(r::HealthKind value) {
     case r::HealthKind::challenge: return "challenge";
     case r::HealthKind::progress: return "progress";
     case r::HealthKind::shutdown: return "shutdown";
+    case r::HealthKind::transaction_started:
+    case r::HealthKind::transaction_armed:
+    case r::HealthKind::transaction_finished: break; // This renderer link never negotiates transaction supervision.
     }
     throw p::Error("health.internal");
 }

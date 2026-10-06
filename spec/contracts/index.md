@@ -38,5 +38,6 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [telemetry-v0.2.schema.json](telemetry-v0.2.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [telemetry.schema.json](telemetry.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [theme.schema.json](theme.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
+- [transaction-watch.schema.json](transaction-watch.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [Local transport and request lifecycle](transport.md) — Define experimental framing, negotiation and bounded result retrieval.
 - [Contract versions and migration](versions.md) — Keep bundle, documents, wire, ABI, content and provider identities independent.

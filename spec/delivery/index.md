@@ -64,6 +64,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Native child supervision implementation checkpoint](supervision-handoff.md) — Bind owned-child lifetime and independent health decisions to Windows/Linux fault evidence.
 - [Build targets and qualification profiles](target-profiles.md) — Bind concrete runtime floors to evidence instead of inferring support from platform names.
 - [Bounded telemetry document checkpoint](telemetry-wire-handoff.md) — Bind versioned delivery decoding and exact replay preservation to native-compiled portable cases without claiming a live subscription.
+- [Independent transaction supervision checkpoint](transaction-supervision-handoff.md) — Preserve exact process-stop and recovery boundaries for uncooperative native transactions.
 - [Portable transport and policy checkpoint](transport-handoff.md) — Resume W-24 from executable portable contracts without claiming native authentication.
 - [Contemporary Windows host observation checkpoint](windows-host-inventory-handoff.md) — Read-only Explorer ownership and icon hierarchy, with native host execution still dependent on a designated laboratory.
 - [Implementation work-package closure](work-packages.md) — Make each admitted package implementable, verifiable and resumable from the repository.

@@ -54,6 +54,12 @@ The [W-25 health profile](../delivery/packages/w-25-recovery.md#initial-native-s
 adds optional `render.challenge` and `render.progress` envelopes only under its
 negotiated `recovery.progress` feature. Preview command sessions do not enable them.
 That health profile carries no telemetry snapshot/delta or configuration mutation.
+The [transaction supervision profile](../delivery/packages/w-08-supervised-transactions.md)
+extends an explicitly selected controller HealthLink with `recovery.transaction`
+and [transaction-watch](transaction-watch.schema.json) 0.1. Its started/armed/finished
+messages bind one native worker lifetime to an independent absolute deadline; they
+carry no mutation, policy or durable-outcome authority. Existing client command and
+renderer health sessions do not accept these messages.
 
 Snapshot/delta sequence and producer epoch must agree. A gap, validation failure or
 new epoch invalidates incremental state and requires a coherent full snapshot.

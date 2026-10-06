@@ -22,7 +22,14 @@ The active objective is now the [complete 0.1.0 release](release-0.1.0.md) for W
 required but is no longer the final completion boundary. Legacy version/architecture
 floors, native labs and complete desktop/package evidence remain unresolved.
 
-The latest [reconciliation checkpoint](reconciliation-handoff.md) adds versioned
+The latest [transaction supervision checkpoint](transaction-supervision-handoff.md)
+adds an independent deadline for Linux transaction work, native process-stop proof
+before replacement, and recovery through the existing restart gate. Heartbeats
+cannot extend a transaction deadline. Supervisor loss stops the controller without
+waiting for an uncooperative thread. Installed lifecycle/policy ownership, complete
+resource preparation, native editing, activation and all release tracks remain open.
+
+The earlier [reconciliation checkpoint](reconciliation-handoff.md) adds versioned
 read-only IPC lookup of original-epoch committed requests. Bounded verified receipts
 move from native worker to owner loop only after actual stop; current policy and
 full response-scope validation govern disclosure. Six independent Linux crash/

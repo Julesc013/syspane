@@ -1,0 +1,110 @@
+[
+  {
+    "step": "configure",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-06T17:35:02.023813+00:00",
+    "finished_at": "2026-10-06T17:35:02.615868+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 5368709120,\n  \"checkout_out_bytes\": 1586246302,\n  \"linux_campaign_bytes\": 3328688570,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "configure",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/supervision_step.py",
+      "linux-x64-gcc13",
+      "configure"
+    ],
+    "started_at": "2026-10-06T17:35:02.616282+00:00",
+    "finished_at": "2026-10-06T17:35:18.838834+00:00",
+    "exit": 0,
+    "stdout": "Preset CMake variables:\n\n  BUILD_TESTING=\"ON\"\n  CMAKE_BUILD_TYPE=\"Debug\"\n  CMAKE_CXX_COMPILER=\"g++\"\n  SYSPANE_PROFILE=\"linux-x64-gcc13\"\n\nprofile verified: linux-x64-gcc13\nvendored dependency digests: pass\ndiagnostic toolkit verified: GTK 3.24.41 / Ubuntu 3.24.41-4ubuntu1.3\nnative GJS clock build dependencies verified\n-- Configuring done (6.5s)\n-- Generating done (0.1s)\n-- Build files have been written to: /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-08-supervised-transactions/linux-x64-gcc13-configure-0df1cd464c\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-06T17:35:18.839298+00:00",
+    "finished_at": "2026-10-06T17:35:19.565128+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 5368709120,\n  \"checkout_out_bytes\": 1583864115,\n  \"linux_campaign_bytes\": 3328685701,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/supervision_step.py",
+      "linux-x64-gcc13",
+      "build"
+    ],
+    "started_at": "2026-10-06T17:35:19.565546+00:00",
+    "finished_at": "2026-10-06T17:35:47.562738+00:00",
+    "exit": 0,
+    "stdout": "[1/30] Building CXX object CMakeFiles/syspane_recovery.dir/source/diagnostics/recovery.cpp.o\n[2/30] Linking CXX static library libsyspane_recovery.a\n[3/30] Building CXX object CMakeFiles/syspane_network_view.dir/source/rendering/network_view.cpp.o\n[4/30] Building CXX object CMakeFiles/syspane_data_view.dir/source/diagnostics/data_view.cpp.o\n[5/30] Linking CXX static library libsyspane_data_view.a\n[6/30] Building CXX object CMakeFiles/syspane_command_probe.dir/source/application/command_supervisor.cpp.o\n[7/30] Linking CXX static library libsyspane_network_view.a\n[8/30] Building CXX object CMakeFiles/syspane_command_probe.dir/source/application/command_probe.cpp.o\n[9/30] Linking CXX executable SysPane.CommandProbe\n[10/30] Building CXX object CMakeFiles/syspane_gjs_clock.dir/source/desktop/gnome/native_health_view.cpp.o\n[11/30] Building CXX object CMakeFiles/syspane_gjs_clock.dir/source/desktop/gnome/native_network_view.cpp.o\n[12/30] Linking CXX shared library libsyspane_gjs_clock.so\n[13/30] Building CXX object CMakeFiles/syspane_telemetry_probe.dir/source/application/telemetry_probe.cpp.o\n[14/30] Building CXX object CMakeFiles/syspane_recovery_tests.dir/tests/fault/recovery_tests.cpp.o\n[15/30] Linking CXX executable syspane_recovery_tests\n[16/30] Linking CXX executable SysPane.TelemetryProbe\n[17/30] Building CXX object CMakeFiles/syspane_collector_probe.dir/source/application/collector_probe.cpp.o\n[18/30] Building CXX object CMakeFiles/syspane_recovery_probe.dir/source/application/recovery_probe.cpp.o\n[19/30] Linking CXX executable SysPane.CollectorProbe\n[20/30] Linking CXX executable SysPane.RecoveryProbe\n[21/30] Building CXX object CMakeFiles/syspane_data_view_tests.dir/tests/fault/data_view_tests.cpp.o\n[22/30] Linking CXX executable syspane_data_view_tests\n[23/30] Building CXX object CMakeFiles/syspane_state_import_tests.dir/tests/fault/state_import_tests.cpp.o\n[24/30] Linking CXX executable syspane_state_import_tests\n[25/30] Building CXX object CMakeFiles/syspane_measured_time_tests.dir/tests/fault/measured_time_tests.cpp.o\n[26/30] Linking CXX executable syspane_measured_time_tests\n[27/30] Building CXX object CMakeFiles/syspane_network_view_tests.dir/tests/rendering/network_view_tests.cpp.o\n[28/30] Linking CXX executable syspane_network_view_tests\n[29/30] Building CXX object CMakeFiles/syspane_network_publication_tests.dir/tests/fault/network_publication_tests.cpp.o\n[30/30] Linking CXX executable syspane_network_publication_tests\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-08-supervised-transactions/linux-x64-gcc13-build-ee45b4c637\n",
+    "stderr": ""
+  },
+  {
+    "step": "test",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-06T17:35:47.563340+00:00",
+    "finished_at": "2026-10-06T17:35:48.297853+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 5368709120,\n  \"checkout_out_bytes\": 1597544249,\n  \"linux_campaign_bytes\": 3328714925,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "test",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/supervision_step.py",
+      "linux-x64-gcc13",
+      "test"
+    ],
+    "started_at": "2026-10-06T17:35:48.298135+00:00",
+    "finished_at": "2026-10-06T17:40:54.941770+00:00",
+    "exit": 0,
+    "stdout": "       Start 117: presentation.NVIEW-LIFETIME\n117/157 Test #117: presentation.NVIEW-LIFETIME ........   Passed    0.01 sec\n        Start 118: network.PUBLICATION-VALUES\n118/157 Test #118: network.PUBLICATION-VALUES .........   Passed    0.00 sec\n        Start 119: network.PUBLICATION-FAILURE\n119/157 Test #119: network.PUBLICATION-FAILURE ........   Passed    0.00 sec\n        Start 120: network.PUBLICATION-BOUNDARY\n120/157 Test #120: network.PUBLICATION-BOUNDARY .......   Passed    0.00 sec\n        Start 121: native.NATIVE-DEMAND-EXECUTOR\n121/157 Test #121: native.NATIVE-DEMAND-EXECUTOR ......   Passed    9.39 sec\n        Start 122: native.NATIVE-COLLECTOR\n122/157 Test #122: native.NATIVE-COLLECTOR ............   Passed   17.69 sec\n        Start 123: native.CONSUMER-CONTINUITY\n123/157 Test #123: native.CONSUMER-CONTINUITY .........   Passed   70.44 sec\n        Start 124: network.RECONCILE-IDENTITY\n124/157 Test #124: network.RECONCILE-IDENTITY .........   Passed    0.00 sec\n        Start 125: network.RECONCILE-CLOCK-RATE\n125/157 Test #125: network.RECONCILE-CLOCK-RATE .......   Passed    0.00 sec\n        Start 126: network.RECONCILE-CANCEL-FAILURE\n126/157 Test #126: network.RECONCILE-CANCEL-FAILURE ...   Passed    0.00 sec\n        Start 127: network.RECONCILE-CAPACITY\n127/157 Test #127: network.RECONCILE-CAPACITY .........   Passed    0.00 sec\n        Start 128: native.NATIVE-NETWORK\n128/157 Test #128: native.NATIVE-NETWORK ..............   Passed    1.22 sec\n        Start 129: network.NETWORK-NETLINK\n129/157 Test #129: network.NETWORK-NETLINK ............   Passed    0.00 sec\n        Start 130: network.NETWORK-NETLINK-REJECT\n130/157 Test #130: network.NETWORK-NETLINK-REJECT .....   Passed    0.00 sec\n        Start 131: network.NETWORK-WATCH-DECODE\n131/157 Test #131: network.NETWORK-WATCH-DECODE .......   Passed    0.00 sec\n        Start 132: measured.MEASURED-CODEC\n132/157 Test #132: measured.MEASURED-CODEC ............   Passed    0.01 sec\n        Start 133: measured.MEASURED-AGE\n133/157 Test #133: measured.MEASURED-AGE ..............   Passed    0.01 sec\n        Start 134: measured.MEASURED-REPLAY\n134/157 Test #134: measured.MEASURED-REPLAY ...........   Passed    0.01 sec\n        Start 135: measured.MEASURED-LIFETIME\n135/157 Test #135: measured.MEASURED-LIFETIME .........   Passed    0.01 sec\n        Start 136: measured.MEASURED-SESSION\n136/157 Test #136: measured.MEASURED-SESSION ..........   Passed    0.01 sec\n        Start 137: import.IMPORT-STATE\n137/157 Test #137: import.IMPORT-STATE ................   Passed    0.01 sec\n        Start 138: import.IMPORT-RETAIN\n138/157 Test #138: import.IMPORT-RETAIN ...............   Passed    0.02 sec\n        Start 139: import.IMPORT-COVERAGE\n139/157 Test #139: import.IMPORT-COVERAGE .............   Passed    0.01 sec\n        Start 140: import.IMPORT-REPLAY\n140/157 Test #140: import.IMPORT-REPLAY ...............   Passed    0.01 sec\n        Start 141: import.IMPORT-TIME\n141/157 Test #141: import.IMPORT-TIME .................   Passed    0.01 sec\n        Start 142: import.IMPORT-LIFETIME\n142/157 Test #142: import.IMPORT-LIFETIME .............   Passed    0.01 sec\n        Start 143: data.VIEW-ATOMIC\n143/157 Test #143: data.VIEW-ATOMIC ...................   Passed    0.01 sec\n        Start 144: data.VIEW-REPLAY\n144/157 Test #144: data.VIEW-REPLAY ...................   Passed    0.00 sec\n        Start 145: data.VIEW-RECONNECT\n145/157 Test #145: data.VIEW-RECONNECT ................   Passed    0.00 sec\n        Start 146: data.VIEW-LEASE\n146/157 Test #146: data.VIEW-LEASE ....................   Passed    0.00 sec\n        Start 147: data.VIEW-POLICY\n147/157 Test #147: data.VIEW-POLICY ...................   Passed    0.00 sec\n        Start 148: data.VIEW-FAULT\n148/157 Test #148: data.VIEW-FAULT ....................   Passed    0.00 sec\n        Start 149: diagnostic.DIAG-POLICY\n149/157 Test #149: diagnostic.DIAG-POLICY .............   Passed    0.02 sec\n        Start 150: diagnostic.DIAG-PROJECTION\n150/157 Test #150: diagnostic.DIAG-PROJECTION .........   Passed    0.00 sec\n        Start 151: diagnostic.FAILURE-CODEC\n151/157 Test #151: diagnostic.FAILURE-CODEC ...........   Passed    0.00 sec\n        Start 152: diagnostic.FAILURE-INTERRUPT\n152/157 Test #152: diagnostic.FAILURE-INTERRUPT .......   Passed    0.00 sec\n        Start 153: diagnostic.FAILURE-PROJECTION\n153/157 Test #153: diagnostic.FAILURE-PROJECTION ......   Passed    0.00 sec\n        Start 154: diagnostic.PRESERVE-POLICY\n154/157 Test #154: diagnostic.PRESERVE-POLICY .........   Passed    0.00 sec\n        Start 155: native.PRESERVE\n155/157 Test #155: native.PRESERVE ....................   Passed    4.25 sec\n        Start 156: native.FAILURE-STORE\n156/157 Test #156: native.FAILURE-STORE ...............   Passed    0.17 sec\n        Start 157: native.DIAG-01\n157/157 Test #157: native.DIAG-01 .....................   Passed    0.43 sec\n\n100% tests passed, 0 tests failed out of 157\n\nTotal Test time (real) = 277.11 sec\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-08-supervised-transactions/linux-x64-gcc13-test-e0cf2072e4\n",
+    "stderr": ""
+  }
+]

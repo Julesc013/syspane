@@ -151,7 +151,8 @@ Message decode(std::string_view payload) {
     Message message;
     message.type = root["type"].get<std::string>();
     const std::set<std::string> types = {"hello", "welcome", "command", "result", "subscribe", "unsubscribe",
-        "snapshot", "delta", "gap", "heartbeat", "cancel", "result.get", "result.reconcile", "result.reconciled", "shutdown", "render.challenge", "render.progress"};
+        "snapshot", "delta", "gap", "heartbeat", "cancel", "result.get", "result.reconcile", "result.reconciled", "shutdown", "render.challenge", "render.progress",
+        "transaction.started","transaction.armed","transaction.finished"};
     if (!types.count(message.type)) throw Error("message.unknown");
     if (message.type == "hello") {
         if (!members(root, {"type", "body"})) throw Error("envelope.invalid");
@@ -186,6 +187,11 @@ Message decode(std::string_view payload) {
     if (message.type == "render.challenge" || message.type == "render.progress") {
         if (!members(body, {"generation"}) || !body["generation"].is_string() ||
             !decimal(body["generation"].get_ref<const std::string&>())) throw Error("body.invalid");
+    }
+    if(message.type=="transaction.started"||message.type=="transaction.armed"||message.type=="transaction.finished"){
+        if(!members(body,{"ticket"})||!body["ticket"].is_string())throw Error("body.invalid");
+        const auto ticket=decimal(body["ticket"].get_ref<const std::string&>());
+        if(!ticket||!*ticket)throw Error("body.invalid");
     }
     if (message.type == "gap" || message.type == "shutdown") {
         if (!members(body, {"reason"}) || !body["reason"].is_string()) throw Error("body.invalid");

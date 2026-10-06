@@ -316,7 +316,23 @@ int main(int argc, char** argv) {
         else if (id == "LEASE-05") lease05(); else if (id == "RENDER-01") render01();
         else if (id == "RENDER-02") render02(); else if (id == "RETRY-01") retry01();
         else if (id == "RETRY-02") retry02(); else if (id == "RETRY-03") retry03();
-        else if (id == "RECOVERY-CLOCK") clock_fault(); else throw std::runtime_error("unknown case ID");
+        else if (id == "RECOVERY-CLOCK") clock_fault();
+        else if(id=="TRANSACTION-DEADLINE"){
+            TransactionWatch watch;CHECK(watch.started(1,100)==Code::accepted);CHECK(watch.tick(5099)==Code::accepted);
+            CHECK(watch.finished(1,5100)==Code::closed);CHECK(watch.pending()==1);CHECK(watch.started(2,6000)==Code::closed);
+            TransactionWatch good;CHECK(good.started(1,100)==Code::accepted);CHECK(good.finished(1,5099)==Code::accepted);
+            CHECK(!good.pending());CHECK(good.started(2,5099)==Code::accepted);CHECK(good.finished(2,5100)==Code::accepted);
+            const auto max=std::numeric_limits<std::uint64_t>::max();TransactionWatch edge;CHECK(edge.started(1,max-5000)==Code::accepted);CHECK(edge.tick(max)==Code::closed);
+        }else if(id=="TRANSACTION-ORDER"){
+            for(unsigned mode=0;mode<4;++mode){TransactionWatch watch;
+                if(mode==0)CHECK(watch.started(0,100)==Code::invalid);
+                if(mode==1){CHECK(watch.started(1,100)==Code::accepted);CHECK(watch.started(2,101)==Code::invalid);}
+                if(mode==2){CHECK(watch.started(1,100)==Code::accepted);CHECK(watch.finished(2,101)==Code::invalid);}
+                if(mode==3){CHECK(watch.started(1,100)==Code::accepted);CHECK(watch.finished(1,101)==Code::accepted);CHECK(watch.started(1,102)==Code::invalid);}
+                CHECK(watch.tick(10000)==Code::closed);
+            }
+            TransactionWatch clock;CHECK(clock.started(1,100)==Code::accepted);CHECK(clock.tick(99)==Code::clock_fault);CHECK(clock.finished(1,101)==Code::clock_fault);
+        }else throw std::runtime_error("unknown case ID");
         std::cout << id << ": pass\n";
         return 0;
     } catch (const std::exception& error) { std::cerr << error.what() << '\n'; return 1; }

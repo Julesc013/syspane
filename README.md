@@ -15,7 +15,10 @@ ownership, worker supervision, asset resolution, native controls and visible
 activation remain required. The [reconciliation checkpoint](spec/delivery/reconciliation-handoff.md)
 adds read-only recovery of committed requests across controller restarts. Six native
 crash/reconnect cases verify exact revisions and current-policy disclosure without
-repeating a mutation; visible activation remains unproven.
+repeating a mutation; visible activation remains unproven. The subsequent
+[supervision checkpoint](spec/delivery/transaction-supervision-handoff.md) adds an
+independent transaction deadline and process-stop boundary. A hung controller is
+replaced only after confirmed exit; clients reconcile under the new epoch.
 
 The [session demand integration](spec/delivery/session-demand-handoff.md) now binds
 authenticated subscriptions to controller-selected acquisition requests. Independent

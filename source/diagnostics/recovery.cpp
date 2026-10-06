@@ -140,6 +140,21 @@ RenderView RenderWatch::view() const { return {state_, pending_, completed_}; }
 RestartGate::RestartGate(std::uint32_t jitter_ms) : jitter_(jitter_ms) {
     if (jitter_ms > 250) throw std::invalid_argument("recovery.jitter");
 }
+Code TransactionWatch::tick(std::uint64_t now){
+    if(!clock_.observe(now)){failed_=true;return Code::clock_fault;}
+    if(pending_&&now-started_ms_>=5000)failed_=true;
+    return failed_?Code::closed:Code::accepted;
+}
+Code TransactionWatch::started(std::uint64_t ticket,std::uint64_t now){
+    const auto checked=tick(now);if(checked!=Code::accepted)return checked;
+    if(!ticket||pending_||(completed_&&ticket<=*completed_)){failed_=true;return Code::invalid;}
+    pending_=ticket;started_ms_=now;return Code::accepted;
+}
+Code TransactionWatch::finished(std::uint64_t ticket,std::uint64_t now){
+    const auto checked=tick(now);if(checked!=Code::accepted)return checked;
+    if(!pending_||*pending_!=ticket){failed_=true;return Code::invalid;}
+    completed_=ticket;pending_.reset();return Code::accepted;
+}
 Code RestartGate::tick(std::uint64_t now) {
     if (!clock_.observe(now)) { state_ = ChildState::clock_fault; return Code::clock_fault; }
     while (count_ && now - restarts_[0] >= 60000) {

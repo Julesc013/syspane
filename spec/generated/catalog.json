@@ -216,7 +216,7 @@
         "SP-PROTOCOL",
         "SP-COMMANDS"
       ],
-      "sha256": "512b3a49941f8c5302e16ff0b3808e101959c91c9f4a5196d5bf03b405f2069d"
+      "sha256": "13f8fc594698b56c3e2b85c21516fed63060fd31c973507753e1137204247cf2"
     },
     {
       "id": "SP-VERSIONS",
@@ -410,7 +410,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "306a349a3dc19569d776bd06a84deb066376b1ae8cab860d65279dc753d26853"
+      "sha256": "2f5d56bb324593965499cdd6eb4fda3d5119ef150ad13a00140e7e90d94b6117"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -1173,6 +1173,18 @@
       "sha256": "df5a351611a330da28666ecff1279c820f4ce1997eecee1dbeca8ed0ab58cdc5"
     },
     {
+      "id": "SP-W08-SUPERVISION",
+      "path": "delivery/packages/w-08-supervised-transactions.md",
+      "title": "Independent transaction deadlines and controller recovery",
+      "description": "Bound uncooperative transaction work without killing threads or replaying uncertain mutations.",
+      "requires": [
+        "SP-W08-RECONCILIATION",
+        "SP-W08-COMMAND-SESSIONS",
+        "SP-RECOVERY"
+      ],
+      "sha256": "0840aff27adde95a1368eec6c6cc12a7bb8112a69d6f50392257e1a250066909"
+    },
+    {
       "id": "SP-W24-PACKAGE",
       "path": "delivery/packages/w-24-transport.md",
       "title": "W-24 authenticated transport and policy boundary",
@@ -1635,6 +1647,17 @@
         "SP-CAMPAIGN-ADMISSION"
       ],
       "sha256": "93cd442117769a1c72fbc72c3481a2da32fb5551c7a014a1e7efe7750c3ce682"
+    },
+    {
+      "id": "SP-TRANSACTION-SUPERVISION-HANDOFF",
+      "path": "delivery/transaction-supervision-handoff.md",
+      "title": "Independent transaction supervision checkpoint",
+      "description": "Preserve exact process-stop and recovery boundaries for uncooperative native transactions.",
+      "requires": [
+        "SP-W08-SUPERVISION",
+        "SP-RECONCILIATION-HANDOFF"
+      ],
+      "sha256": "98a9ecd18f7647f458dd2675fe356a852247dd16be6a57f8cd24ce18389e792c"
     },
     {
       "id": "SP-TRANSPORT-HANDOFF",
