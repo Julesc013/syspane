@@ -33,7 +33,8 @@ SOURCES = ['tests/desktop/native_gnome_bootstrap.py', 'tests/desktop/native_orac
            'tests/desktop/fixtures/gnome-composition.json', 'tests/desktop/fixtures/gnome-composition-0.2.json',
            'build-support/record_gnome_host.py', 'spec/delivery/packages/w-05-gnome-reveal.md',
            'tests/desktop/gnome_reveal.py', 'tests/desktop/gnome_foreground.py',
-           'tests/desktop/fixtures/gnome-reveal.json']
+           'tests/desktop/fixtures/gnome-reveal.json', 'tests/desktop/gnome_focus_baseline.py',
+           'spec/delivery/packages/w-05-gnome-focus-baseline.md']
 
 
 def marker_trace(display, environment, sample=None, dismiss=True):
@@ -84,7 +85,7 @@ def marker_trace(display, environment, sample=None, dismiss=True):
             'final_desktop': rgb_record(display.capture(0, 0, 800, 600))}
 
 
-def observe(environment, pid, channel, marker, composition, foreground_pid=None):
+def observe(environment, pid, channel, marker, composition, foreground_pid=None, focus_baseline=None):
     os.environ.clear()
     os.environ.update(environment)
     display = None
@@ -117,8 +118,12 @@ def observe(environment, pid, channel, marker, composition, foreground_pid=None)
             if foreground_pid:
                 import gnome_reveal
                 result['reveal'] = gnome_reveal.observe(display, environment, foreground_pid, workspace, result['composition'])
-        elif marker:
+        elif marker and not focus_baseline:
             result['marker'] = marker_trace(display, environment)
+        if focus_baseline:
+            import gnome_focus_baseline
+            result['focus_baseline'] = gnome_focus_baseline.observe(display, environment, pid, foreground_pid,
+                Path(environment['HOME']).parent, result.get('reveal'), result.get('composition'))
         channel.send(result)
     except Exception as error:
         channel.send({'outcome': 'fail', 'error': type(error).__name__ + ': ' + str(error)})
@@ -151,7 +156,7 @@ def group_members(group):
     return members
 
 
-def run(build, marker=False, control='live', composition=None, reveal=None):
+def run(build, marker=False, control='live', composition=None, reveal=None, focus_baseline=None):
     # Retain orphaned shell helpers for reaping; no service/session can adopt them.
     if ctypes.CDLL(None, use_errno=True).prctl(36, 1, 0, 0, 0) != 0:
         raise OSError(ctypes.get_errno(), 'cannot retain descendant exit evidence')
@@ -163,6 +168,9 @@ def run(build, marker=False, control='live', composition=None, reveal=None):
     evidence = build / 'native-evidence'
     evidence.mkdir(exist_ok=True)
     family = 'GNOME-REVEAL-01' if reveal else ('GNOME-COMPOSITION-01' if composition else ('GNOME-MARKER-01' if marker else 'GNOME-BOOTSTRAP-01'))
+    if focus_baseline:
+        family = 'GNOME-FOCUS-BASELINE-01'
+    with_icons = bool(composition) or focus_baseline == 'ding'
     token = family + '-' + uuid.uuid4().hex
     workspace = build / token
     workspace.mkdir(mode=0o700)
@@ -177,6 +185,7 @@ def run(build, marker=False, control='live', composition=None, reveal=None):
               'marker_control': control if marker else None,
               'composition_control': composition,
               'reveal_control': reveal,
+              'focus_baseline_mode': focus_baseline,
               'executed_at': datetime.now(timezone.utc).isoformat(),
               'source_base': subprocess.check_output(['git', '-c', 'safe.directory=' + str(ROOT), 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
               'source_inputs': {p: sha(ROOT / p) for p in SOURCES},
@@ -189,6 +198,8 @@ def run(build, marker=False, control='live', composition=None, reveal=None):
         report['qualification'] = 'Selected solid-color DING composition experiment only; reveal, native input, image wallpaper/policy, recovery, Wayland and full product host qualification are not run.'
     if reveal:
         report['qualification'] = 'Configured GNOME Super+D reveal with one owned normal window and solid-color composition only; icon input, taskbar/task-switcher behavior, image wallpaper/policy, recovery, Wayland and full product qualification are not run.'
+    if focus_baseline:
+        report['qualification'] = 'Diagnostic native focus comparison only; completion is not a passed focus/reveal or product acceptance claim.'
     archive = workspace / 'source-inputs.zip'
     with zipfile.ZipFile(archive, 'x', compression=zipfile.ZIP_DEFLATED) as target:
         for name in SOURCES:
@@ -224,6 +235,9 @@ def run(build, marker=False, control='live', composition=None, reveal=None):
             environment['SYSPANE_GNOME_COMPOSITION'] = composition
         if reveal:
             environment['SYSPANE_GNOME_REVEAL'] = reveal
+        if focus_baseline:
+            environment['SYSPANE_GNOME_FOCUS_BASELINE'] = focus_baseline
+            environment['SYSPANE_FOREGROUND_EVENTS'] = str(workspace / 'foreground-events.jsonl')
         report['environment']['explicit'] = environment
         # Schema compilation is data-only and confined to this unique attempt.
         for folder in (Path('/usr/share/glib-2.0/schemas'), sysroot / 'usr/share/glib-2.0/schemas'):
@@ -237,7 +251,8 @@ def run(build, marker=False, control='live', composition=None, reveal=None):
         report['schema_inputs'] = inventory(workspace / 'schemas')
         if marker:
             target = workspace / 'data/gnome-shell/extensions/syspane-lab-marker@syspane.invalid'
-            shutil.copytree(ROOT / 'source/desktop/gnome/lab-marker', target)
+            if not focus_baseline or focus_baseline == 'candidate':
+                shutil.copytree(ROOT / 'source/desktop/gnome/lab-marker', target)
             settings = [('org.gnome.shell', 'enabled-extensions', "['syspane-lab-marker@syspane.invalid']"),
                         ('org.gnome.desktop.interface', 'enable-animations', 'false'),
                         ('org.gnome.desktop.background', 'picture-uri', "''"),
@@ -245,14 +260,20 @@ def run(build, marker=False, control='live', composition=None, reveal=None):
                         ('org.gnome.desktop.background', 'picture-options', "'none'"),
                         ('org.gnome.desktop.background', 'primary-color', "'#304860'"),
                         ('org.gnome.desktop.background', 'color-shading-type', "'solid'")]
-            if composition:
+            if with_icons:
                 import gnome_composition
                 settings.extend(gnome_composition.prepare(workspace, sysroot))
                 report['ding_inputs'] = inventory(workspace / 'data/gnome-shell/extensions/ding@rastersoft.com')
                 report['fixture_inputs'] = {name: inventory(workspace / name) for name in ['home/Desktop', 'data/icons', 'config/gtk-3.0']}
                 report['desktop_entries'] = sorted(p.relative_to(workspace / 'home/Desktop').as_posix()
                                                    for p in (workspace / 'home/Desktop').rglob('*'))
-            if reveal:
+            if focus_baseline:
+                from gnome_focus_baseline import MODES
+                settings = [row for row in settings if row[:2] != ('org.gnome.shell', 'enabled-extensions')]
+                settings.append(('org.gnome.shell', 'enabled-extensions', repr(MODES[focus_baseline])))
+                extension_root = workspace / 'data/gnome-shell/extensions'
+                report['enabled_extension_inputs'] = inventory(extension_root) if extension_root.exists() else {}
+            if reveal or focus_baseline:
                 from gnome_reveal import FIXTURE
                 settings.append(('org.gnome.desktop.wm.keybindings', 'show-desktop', FIXTURE['binding']))
             for schema, key, value in settings:
@@ -286,10 +307,10 @@ def run(build, marker=False, control='live', composition=None, reveal=None):
         else:
             raise TimeoutError('owned session bus unavailable')
         shell = launch('shell', [str(sysroot / 'usr/bin/gnome-shell'), '--x11', '--mode=user'])
-        foreground = launch('foreground', ['/usr/bin/python3', str(ROOT / 'tests/desktop/gnome_foreground.py')]) if reveal else None
+        foreground = launch('foreground', ['/usr/bin/python3', str(ROOT / 'tests/desktop/gnome_foreground.py')]) if reveal or focus_baseline else None
         context = mp.get_context('spawn')
         local, remote = context.Pipe(duplex=False)
-        worker = context.Process(target=observe, args=(environment, shell.pid, remote, marker, composition, foreground.pid if foreground else None))
+        worker = context.Process(target=observe, args=(environment, shell.pid, remote, marker, composition, foreground.pid if foreground else None, focus_baseline))
         worker.start()
         remote.close()
         while time.monotonic() - started < 40:
@@ -305,11 +326,17 @@ def run(build, marker=False, control='live', composition=None, reveal=None):
                 if composition:
                     report['icon_manager_mapped_files'] = mapped_files(report['observation']['composition']['icon_manager']['pid'])
                     report['outcome'] = report['observation']['composition']['outcome']
-                else:
+                elif not focus_baseline:
                     report['outcome'] = report['observation']['marker']['evaluation']['outcome'] if marker else 'pass'
                 if reveal:
                     report['foreground_mapped_files'] = mapped_files(foreground.pid)
                     report['outcome'] = report['observation']['reveal']['evaluation']['outcome']
+                if focus_baseline:
+                    result = report['observation']['focus_baseline']
+                    report['foreground_mapped_files'] = mapped_files(foreground.pid)
+                    if result['icon_manager']:
+                        report['icon_manager_mapped_files'] = mapped_files(result['icon_manager']['pid'])
+                    report['outcome'] = 'pass'
                 break
             if shell.poll() is not None:
                 raise RuntimeError('shell exited during bootstrap: ' + str(shell.returncode))
@@ -365,7 +392,14 @@ def run(build, marker=False, control='live', composition=None, reveal=None):
         journal = workspace / 'reveal.jsonl'
         if journal.exists():
             report['reveal_journal'] = {'path': str(journal), 'bytes': journal.stat().st_size, 'sha256': sha(journal)}
-        if composition:
+        if focus_baseline:
+            for key, name in [('focus_journal', 'focus-baseline.jsonl'), ('foreground_events', 'foreground-events.jsonl')]:
+                path = workspace / name
+                if path.exists():
+                    report[key] = {'path': str(path), 'bytes': path.stat().st_size, 'sha256': sha(path)}
+            extension_root = workspace / 'data/gnome-shell/extensions'
+            report['enabled_extension_inputs_after'] = inventory(extension_root) if extension_root.exists() else {}
+        if with_icons:
             report['fixture_after'] = {name: inventory(workspace / name) for name in ['home/Desktop', 'data/icons', 'config/gtk-3.0']}
             report['desktop_entries_after'] = sorted(p.relative_to(workspace / 'home/Desktop').as_posix()
                                                      for p in (workspace / 'home/Desktop').rglob('*'))
@@ -395,7 +429,14 @@ if __name__ == '__main__':
     parser.add_argument('--marker-control', choices=('live', 'hidden', 'frozen'), default='live')
     parser.add_argument('--composition', choices=('live', 'above-icons', 'below-wallpaper'))
     parser.add_argument('--reveal', choices=('live', 'no-action', 'transient-blank'))
+    parser.add_argument('--focus-baseline', choices=('shell', 'ding', 'candidate'))
     args = parser.parse_args()
+    if args.focus_baseline:
+        if args.marker or args.composition or args.reveal or args.marker_control != 'live':
+            parser.error('--focus-baseline owns its marker/composition/reveal selection')
+        args.marker = True
+        if args.focus_baseline == 'candidate':
+            args.reveal = 'live'
     if args.reveal:
         if args.marker_control != 'live' or args.composition not in (None, 'live'):
             parser.error('reveal requires live composition')
@@ -404,4 +445,4 @@ if __name__ == '__main__':
         parser.error('composition uses its own above/below controls')
     if not args.marker and args.marker_control != 'live':
         parser.error('--marker-control requires --marker')
-    sys.exit(run(owned_build(args.build_dir), args.marker or bool(args.composition), args.marker_control, args.composition, args.reveal))
+    sys.exit(run(owned_build(args.build_dir), args.marker or bool(args.composition), args.marker_control, args.composition, args.reveal, args.focus_baseline))

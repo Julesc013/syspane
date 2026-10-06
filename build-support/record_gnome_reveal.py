@@ -9,8 +9,8 @@ from record_gnome_composition import validate as validate_composition
 from gnome_reveal import FIXTURE, FIXTURE_PATH, judge
 
 
-def validate(value, build):
-    prerequisite = validate_composition(value, build, family='GNOME-REVEAL-01', outer_outcome=False)
+def validate(value, build, family='GNOME-REVEAL-01', outer_outcome=True):
+    prerequisite = validate_composition(value, build, family=family, outer_outcome=False)
     result = value['observation']['reveal']
     control = result['control']
     if prerequisite['control'] != 'live' or control not in {'live', 'no-action', 'transient-blank'}:
@@ -47,7 +47,7 @@ def validate(value, build):
         if len(clients) != 1 or clients[0]['type'] != owner['type'] or clients[0]['pid'] != [owner['pid']]:
             raise ValueError('normal foreground client changed during trace')
     actual = judge(result, composition)
-    if actual != result['evaluation'] or value['outcome'] != actual['outcome']:
+    if actual != result['evaluation'] or (outer_outcome and value['outcome'] != actual['outcome']):
         raise ValueError('reveal claim differs from raw evidence')
     dimensions = (actual['marker']['outcome'], actual['composition']['icons'], actual['composition']['rectangle'], actual['background'], actual['visual_reveal'])
     expected = {'live': ('pass', 'pass', 'pass', 'pass', 'pass'),

@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-06T01:10:00Z", "scope": "Owned GNOME native reveal preserves live composition but fails foreground-focus restoration"}
+updated: {"by": "codex", "at": "2026-10-06T01:32:00Z", "scope": "Independent native comparison reproduces the focus/input failure with DING and no candidate bridge"}
 ---
 
 # Current state and next admitted boundary
@@ -189,6 +189,16 @@ blank controls reject the intended missing transitions/disappearance; restoring 
 drawing cannot erase a temporal failure. The failed focus requirement is unchanged.
 Its cause needs an independent native baseline before any component attribution.
 
+The subsequent [native focus comparison](gnome-focus-handoff.md) repeats GNOME
+alone, DING without the candidate, and DING with the bridge three times each.
+GNOME alone restores foreground focus and actual keyboard receipt. Both DING
+configurations leave the icon desktop active and deliver no test key to the
+foreground until an explicit click; their positive keyboard controls pass. The
+failure therefore does not require the bridge. This localizes the observed behavior
+to the tested DING/X11 integration, without proving a specific upstream root cause
+or changing the original failed acceptance. Twenty-four comparison checks pass;
+the existing reveal, composition and marker evidence checks remain passing.
+
 Canonical 0.2.0 documentation bundle, unchanged 0.1 authoring profile, preserved old
 fixtures, new experimental scene/command/capability 0.2 and admission descriptors.
 The initial settings registry has enforced metadata/default consistency and generated
@@ -226,8 +236,8 @@ License, contribution and release-identity decisions remain open.
 ## Next work
 
 Continue the admitted campaign: use the calibrated GNOME/DING composition path and
-unchanged external marker oracle to resolve failed foreground-focus restoration
-against a native baseline, then measure taskbar/task-switcher behavior, icon input,
+unchanged external marker oracle to resolve the independently reproduced DING/X11
+foreground-focus failure, then measure taskbar/task-switcher behavior, icon input,
 image-wallpaper preservation and shell/icon-manager recovery. Keep the
 earlier X11 failures and failed GNOME fixture/control attempts. Close other platform capture/reveal boundaries in admitted
 synthetic desktops. W-04 has build artifacts ready for

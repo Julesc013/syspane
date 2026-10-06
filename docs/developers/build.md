@@ -376,6 +376,25 @@ not that the live candidate passed. Its output keeps visual transitions, focus,
 continuous marker/rectangle visibility and overall acceptance separate. Raw journals
 and source archives preserve failed attempts. See the [reveal checkpoint](../../spec/delivery/gnome-reveal-handoff.md).
 
+The independent focus comparison runs three modes, each in a fresh owned desktop:
+
+```sh
+python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --focus-baseline shell
+python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --focus-baseline ding
+python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --focus-baseline candidate
+python3 build-support/record_gnome_focus.py --build-dir <owned-build-directory> --reports <nine-reports> --output <new-owned-record>
+python3 tests/desktop/test_gnome_focus_record.py <owned-build-directory> <nine-reports> -v
+```
+
+Repeat each mode three times with identical sources and await a successful workspace
+preflight before each command. These modes return zero for completed diagnostic
+observation; their records separately retain failed native focus and candidate
+acceptance. The shell and DING baselines never copy or enable the candidate extension.
+F9 after restoration measures actual foreground key receipt; F10 after an explicit
+foreground click proves the keyboard observer works. Neither key alters the fixed
+earlier acceptance interval. Missing repetitions or inconsistent results cannot
+establish attribution. See the [native comparison](../../spec/delivery/gnome-focus-handoff.md).
+
 For the historical shared-subset experiment, the existing Visual Studio 2017 XP
 toolset has its own preset. It compiles the same model, protocol/policy, recovery
 and diagnostic projection sources; modern native adapters require separate closure.

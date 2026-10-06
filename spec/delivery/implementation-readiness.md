@@ -12,7 +12,7 @@ sp_requires: ["SP-CURRENT"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-AUDIT-2026-10-04", "resource": "User-supplied October 2026 audit inputs", "title": "October review inputs"}]
-updated: {"by": "codex", "at": "2026-10-06T01:14:00Z", "scope": "Owned GNOME native reveal preserves composition but fails foreground-focus restoration"}
+updated: {"by": "codex", "at": "2026-10-06T01:32:00Z", "scope": "Native focus comparison excludes the bridge as a necessary cause of the tested failure"}
 ---
 
 # Implementation readiness and gates
@@ -142,6 +142,13 @@ The live candidate therefore remains failed. Omitted-action and temporary-blank
 controls prove that state flags alone and later visual repair cannot satisfy the
 oracle. Determine the focus behavior's cause with an independent native baseline;
 do not relax the requirement or infer full reveal/input qualification.
+
+The [independent focus baseline](gnome-focus-handoff.md) now supplies that comparison:
+three repetitions per mode reproduce failed focus and foreground key delivery with
+DING both with and without the candidate. GNOME alone restores both, and explicit
+foreground-click keyboard controls pass in every mode. The bridge is not required
+for this failure. The tested DING/X11 integration still needs a verified resolution;
+the native baseline does not waive acceptance or qualify the product.
 
 Use the proposed cold-start exercise to detect missing observable contracts.
 Private implementation differences are permissible. Missing laboratories remain

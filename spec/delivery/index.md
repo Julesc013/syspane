@@ -12,6 +12,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Independent recent-failure metadata checkpoint](failure-metadata-handoff.md) — Bind bounded native fault records, private file handling and policy-gated diagnostic projection to current evidence.
 - [Foundation implementation handoff](foundation-handoff.md) — Resume the admitted campaign from tested model builds and local smoke packages.
 - [Owned GNOME and DING composition checkpoint](gnome-composition-handoff.md) — Externally verify a live drawing between the synthetic wallpaper and real desktop icons, with two wrong-layer controls.
+- [Independent GNOME and DING focus comparison](gnome-focus-handoff.md) — The native focus and keyboard-delivery failure repeats without the SysPane bridge.
 - [Owned GNOME shell marker checkpoint](gnome-marker-handoff.md) — A real pinned shell bridge now presents changing externally decoded pixels; desktop composition remains open.
 - [Owned GNOME native reveal and failed focus restoration](gnome-reveal-handoff.md) — Live composition survives visible native hide/restore, while the required foreground focus remains failed.
 - [Historical Windows shared-subset build checkpoint](historical-build-handoff.md) — Record the pinned v141_xp build, unchanged shared behavior, resolved runtime inputs and pending guest qualification.

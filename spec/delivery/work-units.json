@@ -82,7 +82,8 @@
         "SP-W05-SHELL-RECOVERY",
         "SP-W05-GNOME-PACKAGE",
         "SP-W05-GNOME-COMPOSITION",
-        "SP-W05-GNOME-REVEAL"
+        "SP-W05-GNOME-REVEAL",
+        "SP-W05-GNOME-FOCUS"
       ],
       "acceptance_tests": [
         "T-DESKTOP-REVEAL",
@@ -96,9 +97,9 @@
       "status": "in_progress",
       "authority_class": "native_lab",
       "execution_grant": "user:foundation-native-campaign-2026-10-05",
-      "notes": "Configured GNOME Super+D preserves live DING composition and visibly hides/restores an owned normal window, but foreground-focus restoration fails. Omitted-action and temporary-blank controls reject missing transitions and repaired disappearance. Native focus cause, taskbar/task-switcher, icon input, image wallpaper and recovery remain unqualified; independent native tracks continue.",
+      "notes": "Nine source-identical native focus comparisons show GNOME alone restoring focus and keyboard receipt, while DING with or without the candidate leaves the icon desktop active. Every explicit-click keyboard positive control passes. The failure does not require the bridge; original acceptance remains failed. Twenty-four comparison checks and the existing reveal/composition/marker checks pass. A specific DING/X11 mechanism, integration fix, icon input, taskbar, image wallpaper and recovery remain unqualified.",
       "package": "delivery/packages/w-02-desktop-oracle.md",
-      "evidence": "delivery/gnome-reveal-handoff.md"
+      "evidence": "delivery/gnome-focus-handoff.md"
     },
     {
       "id": "W-03",
@@ -171,7 +172,8 @@
         "SP-W05-SHELL-RECOVERY",
         "SP-W05-GNOME-PACKAGE",
         "SP-W05-GNOME-COMPOSITION",
-        "SP-W05-GNOME-REVEAL"
+        "SP-W05-GNOME-REVEAL",
+        "SP-W05-GNOME-FOCUS"
       ],
       "acceptance_tests": [
         "T-PLATFORM",
@@ -188,9 +190,9 @@
       "status": "in_progress",
       "authority_class": "native_lab",
       "execution_grant": "user:foundation-native-campaign-2026-10-05",
-      "notes": "Configured GNOME Super+D preserves live DING composition and visibly hides/restores an owned normal window, but foreground-focus restoration fails. Omitted-action and temporary-blank controls reject missing transitions and repaired disappearance. Native focus cause, taskbar/task-switcher, icon input, image wallpaper and recovery remain unqualified; independent native tracks continue.",
-      "package": "delivery/packages/w-05-gnome-reveal.md",
-      "evidence": "delivery/gnome-reveal-handoff.md"
+      "notes": "Nine source-identical native focus comparisons show GNOME alone restoring focus and keyboard receipt, while DING with or without the candidate leaves the icon desktop active. Every explicit-click keyboard positive control passes. The failure does not require the bridge; original acceptance remains failed. Twenty-four comparison checks and the existing reveal/composition/marker checks pass. A specific DING/X11 mechanism, integration fix, icon input, taskbar, image wallpaper and recovery remain unqualified.",
+      "package": "delivery/packages/w-05-gnome-focus-baseline.md",
+      "evidence": "delivery/gnome-focus-handoff.md"
     },
     {
       "id": "W-06",

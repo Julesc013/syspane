@@ -59,6 +59,9 @@ with independently calibrated pixels and wrong-layer controls. The subsequent
 live while Show Desktop hides and restores a foreground window, but fails the
 required foreground-focus restoration. Native icon input, image wallpaper and shell
 recovery also remain open. No desktop profile is qualified.
+An [independent native comparison](spec/delivery/gnome-focus-handoff.md) reproduces
+the focus and keyboard-delivery failure with DING while the SysPane extension is
+absent; GNOME alone restores both. The original acceptance failure remains open.
 There is no usable SysPane desktop application or downloadable release yet.
 Desktop, screensaver and installer profiles remain unqualified.
 
