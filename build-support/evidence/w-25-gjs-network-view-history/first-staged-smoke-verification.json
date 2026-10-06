@@ -1,0 +1,28 @@
+{
+  "recorded_at": "2026-10-06T08:26:58.022492+00:00",
+  "outcome": "fail",
+  "check": "Staged smoke report copies equal original bytes",
+  "observations": [
+    {
+      "record": "build-support/evidence/w-25-gjs-network-view-linux-x64-gcc13.smoke.json",
+      "original_sha256": "6a57a7b154ce2af5ff29894c10389ffd13a77566aa43def4e30ec337d56d22a1",
+      "staged_sha256": "6a57a7b154ce2af5ff29894c10389ffd13a77566aa43def4e30ec337d56d22a1",
+      "match": true
+    },
+    {
+      "record": "build-support/evidence/w-25-gjs-network-view-windows-x64-gcc15.smoke.json",
+      "original_sha256": "50c77b50b7e060872e18ba9a0b5f8eb92a64e72c8cab2a00721b54b6708f53c9",
+      "staged_sha256": "a01678ccda2344475793e18d76b5813b1d9a9f948ddfe485594568e912fd7ef7",
+      "match": false
+    },
+    {
+      "record": "build-support/evidence/w-25-gjs-network-view-windows-x86-v141-xp.smoke.json",
+      "original_sha256": "b25a32aa8b822c15afce857f6f31660f2b94ec6e9af9be715e4cce516b77fa20",
+      "staged_sha256": "5b3ac54f6d62e42590c8170857b339858d9ff2b99f6be9caeb179e917cc78837",
+      "match": false
+    }
+  ],
+  "failure": "AssertionError: build-support/evidence/w-25-gjs-network-view-windows-x64-gcc15.smoke.json",
+  "cause": "The first git add normalized CRLF. Adding a scoped -text attribute did not refresh the already staged unchanged files. Explicit git add --renormalize is required to recalculate their staged bytes.",
+  "scope": "Staging integrity only. Native and smoke execution results were unchanged."
+}

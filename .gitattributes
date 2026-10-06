@@ -15,3 +15,5 @@ source/third_party/** -text
 build-support/evidence/w-05-gnome-focus-trace-journals/*-native_focus_log.log -text -whitespace
 # Preserve exact Windows native stdout bytes referenced by observation digests.
 build-support/evidence/w-03-windows-inventory-*-stdout.json -text whitespace=cr-at-eol
+# Retain original Windows package-result bytes referenced by the checkpoint index.
+build-support/evidence/w-25-gjs-network-view-windows-*.smoke.json -text whitespace=cr-at-eol

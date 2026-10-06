@@ -44,6 +44,12 @@ under the qualified clock owner, full model status/current policy, render superv
 and visible/editor recovery. Keep initial native-track coverage visible before
 expanding optional GNOME scenarios further.
 
+The subsequent [native GJS consumer](gjs-network-view-handoff.md) closes the shared
+model/projection prerequisite inside that runtime with standalone synthetic checks.
+Live supervised forwarding and actual operational shell age remain open. Its three
+new model smoke records use `build-support/evidence/w-25-gjs-network-view-*.smoke.json`;
+the earlier records above remain historical.
+
 No row above removes native settings, direct editing, persistence, real telemetry
 or recovery from the first complete desktop edition. No synthetic marker, model
 archive or retained sample tile is called that edition. Repository-only cold-start

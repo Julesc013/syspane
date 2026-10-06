@@ -358,7 +358,7 @@
         "SP-CAMPAIGN-ADMISSION",
         "SP-CURRENT"
       ],
-      "sha256": "0805de214653f8d2672b2ecb73d0ca1422c978edc2261bcc83ae8518209a04c8"
+      "sha256": "01ee8553f7f9bcaa8851bce00c75abf52d22eb2a9e7491837478292c92f877e5"
     },
     {
       "id": "SP-CURRENT",
@@ -368,7 +368,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "b3c1d495327135fcdb7f021798cfd5def0a970d559ac8b9d4e23e5be4519b0e7"
+      "sha256": "e14b86672de9f64e3e4bfc1f543566e32397709ba1a80f4cbcfe9faa7f1da418"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -423,6 +423,17 @@
         "SP-W25-GJS-CLOCK"
       ],
       "sha256": "dc600da7608d0013efb656f0fab5160dd4b039f220165d0b849ac4ad3536dfc5"
+    },
+    {
+      "id": "SP-GJS-NETWORK-VIEW-HANDOFF",
+      "path": "delivery/gjs-network-view-handoff.md",
+      "title": "Native GJS measured network consumer checkpoint",
+      "description": "Shared measured model, policy and lease semantics inside the native GJS runtime before operational shell delivery.",
+      "requires": [
+        "SP-W25-GJS-NETWORK-VIEW",
+        "SP-CAMPAIGN-ADMISSION"
+      ],
+      "sha256": "ec4d048f27630b57ef3e20d123f6ab7d743add5d65e75882406bc7f03c66d7b0"
     },
     {
       "id": "SP-GNOME-CLOCK-HANDOFF",
@@ -1018,6 +1029,18 @@
         "SP-W25-NATIVE-NETWORK-CACHE"
       ],
       "sha256": "f38e9efa86cd8ef27535e85bf8e2baabe0f4261ff739bc7be5c660ff44c35b8a"
+    },
+    {
+      "id": "SP-W25-GJS-NETWORK-VIEW",
+      "path": "delivery/packages/w-25-gjs-network-view.md",
+      "title": "W-25 native GJS measured network consumer",
+      "description": "Reuse the protocol, revocable data owner and measured network projection in the native shell process.",
+      "requires": [
+        "SP-W25-GNOME-CLOCK",
+        "SP-W25-NETWORK-PRESENTATION",
+        "SP-W25-DATA-VIEW"
+      ],
+      "sha256": "49505a4b8b78f2d25c4ec75b914751c1dfab5e2927a6712482e710dd28f9a568"
     },
     {
       "id": "SP-W25-GNOME-CLOCK",

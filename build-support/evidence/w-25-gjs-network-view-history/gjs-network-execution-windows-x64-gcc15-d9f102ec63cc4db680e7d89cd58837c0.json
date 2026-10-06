@@ -1,0 +1,140 @@
+[
+  {
+    "phase": "preflight",
+    "step": "configure",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-06T08:18:45.518502+00:00",
+    "finished_at": "2026-10-06T08:18:45.932384+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 4294967296,\n  \"checkout_out_bytes\": 1077777567,\n  \"linux_campaign_bytes\": 2511462679,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "phase": "configure",
+    "step": "configure",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "out/campaign/run_gjs_network_step.py",
+      "windows-x64-gcc15",
+      "configure"
+    ],
+    "started_at": "2026-10-06T08:18:45.932796+00:00",
+    "finished_at": "2026-10-06T08:18:47.342023+00:00",
+    "exit": 0,
+    "stdout": "profile verified: windows-x64-gcc15\nvendored dependency digests: pass\n-- Configuring done (0.9s)\n-- Generating done (0.1s)\n-- Build files have been written to: D:/Projects/SysPane/syspane/out/build/windows-x64-gcc15\n\n\nAttempt: D:\\Projects\\SysPane\\syspane\\out\\campaign\\w-25-gjs-network-view\\windows-x64-gcc15-configure-4b80d100b9\n",
+    "stderr": ""
+  },
+  {
+    "phase": "preflight",
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-06T08:18:47.342316+00:00",
+    "finished_at": "2026-10-06T08:18:47.758889+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 4294967296,\n  \"checkout_out_bytes\": 1078657234,\n  \"linux_campaign_bytes\": 2511489077,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "phase": "build",
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "out/campaign/run_gjs_network_step.py",
+      "windows-x64-gcc15",
+      "build"
+    ],
+    "started_at": "2026-10-06T08:18:47.759194+00:00",
+    "finished_at": "2026-10-06T08:18:48.155450+00:00",
+    "exit": 0,
+    "stdout": "ninja: no work to do.\n\n\nAttempt: D:\\Projects\\SysPane\\syspane\\out\\campaign\\w-25-gjs-network-view\\windows-x64-gcc15-build-9dd858dd4d\n",
+    "stderr": ""
+  },
+  {
+    "phase": "preflight",
+    "step": "test",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-06T08:18:48.155767+00:00",
+    "finished_at": "2026-10-06T08:18:48.579882+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 4294967296,\n  \"checkout_out_bytes\": 1079537733,\n  \"linux_campaign_bytes\": 2511502242,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "phase": "test",
+    "step": "test",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "out/campaign/run_gjs_network_step.py",
+      "windows-x64-gcc15",
+      "test"
+    ],
+    "started_at": "2026-10-06T08:18:48.580175+00:00",
+    "finished_at": "2026-10-06T08:20:12.792490+00:00",
+    "exit": 0,
+    "stdout": "Test   #1: desktop.ORACLE-UNIT ................   Passed    1.24 sec\n        Start   2: model.STATE-01\n  2/102 Test   #2: model.STATE-01 .....................   Passed    0.02 sec\n        Start   3: model.STATE-02\n  3/102 Test   #3: model.STATE-02 .....................   Passed    0.02 sec\n        Start   4: model.STATE-03\n  4/102 Test   #4: model.STATE-03 .....................   Passed    0.02 sec\n        Start   5: model.STATE-04\n  5/102 Test   #5: model.STATE-04 .....................   Passed    0.02 sec\n        Start   6: model.STATE-05\n  6/102 Test   #6: model.STATE-05 .....................   Passed    0.02 sec\n        Start   7: model.VALIDITY-01\n  7/102 Test   #7: model.VALIDITY-01 ..................   Passed    0.02 sec\n        Start   8: model.VALIDITY-02\n  8/102 Test   #8: model.VALIDITY-02 ..................   Passed    0.02 sec\n        Start   9: model.CLOCK-01\n  9/102 Test   #9: model.CLOCK-01 .....................   Passed    0.02 sec\n        Start  10: model.CLOCK-02\n 10/102 Test  #10: model.CLOCK-02 .....................   Passed    0.02 sec\n        Start  11: model.BOUNDS-01\n 11/102 Test  #11: model.BOUNDS-01 ....................   Passed    0.02 sec\n        Start  12: model.BOUNDS-02\n 12/102 Test  #12: model.BOUNDS-02 ....................   Passed    0.02 sec\n        Start  13: model.BOUNDS-03\n 13/102 Test  #13: model.BOUNDS-03 ....................   Passed    0.02 sec\n        Start  14: model.OBSERVATION-01\n 14/102 Test  #14: model.OBSERVATION-01 ...............   Passed    0.02 sec\n        Start  15: model.EPOCH-01\n 15/102 Test  #15: model.EPOCH-01 .....................   Passed    0.02 sec\n        Start  16: model.FRESHNESS-01\n 16/102 Test  #16: model.FRESHNESS-01 .................   Passed    0.02 sec\n        Start  17: model.smoke\n 17/102 Test  #17: model.smoke ........................   Passed    0.08 sec\n        Start  18: composition.graph\n 18/102 Test  #18: composition.graph ..................   Passed    0.06 sec\n        Start  19: composition.reject_forbidden\n 19/102 Test  #19: composition.reject_forbidden .......   Passed    0.06 sec\n        Start  20: subscription.SUB-ADMIT\n 20/102 Test  #20: subscription.SUB-ADMIT .............   Passed    0.02 sec\n        Start  21: subscription.SUB-QUEUE\n 21/102 Test  #21: subscription.SUB-QUEUE .............   Passed    0.04 sec\n        Start  22: subscription.SUB-LIFETIME\n 22/102 Test  #22: subscription.SUB-LIFETIME ..........   Passed    0.02 sec\n        Start  23: protocol.FRAME-01\n 23/102 Test  #23: protocol.FRAME-01 ..................   Passed    0.02 sec\n        Start  24: protocol.FRAME-02\n 24/102 Test  #24: protocol.FRAME-02 ..................   Passed    0.02 sec\n        Start  25: protocol.FRAME-03\n 25/102 Test  #25: protocol.FRAME-03 ..................   Passed    0.02 sec\n        Start  26: protocol.JSON-01\n 26/102 Test  #26: protocol.JSON-01 ...................   Passed    0.04 sec\n        Start  27: protocol.WIRE-01\n 27/102 Test  #27: protocol.WIRE-01 ...................   Passed    0.02 sec\n        Start  28: protocol.NEGOTIATE-01\n 28/102 Test  #28: protocol.NEGOTIATE-01 ..............   Passed    0.02 sec\n        Start  29: protocol.IPC-BUDGET-01\n 29/102 Test  #29: protocol.IPC-BUDGET-01 .............   Passed    0.02 sec\n        Start  30: protocol.IPC-BUDGET-02\n 30/102 Test  #30: protocol.IPC-BUDGET-02 .............   Passed    0.02 sec\n        Start  31: protocol.IPC-BUDGET-03\n 31/102 Test  #31: protocol.IPC-BUDGET-03 .............   Passed    0.02 sec\n        Start  32: protocol.IPC-BUDGET-04\n 32/102 Test  #32: protocol.IPC-BUDGET-04 .............   Passed    0.02 sec\n        Start  33: protocol.LEDGER-01\n 33/102 Test  #33: protocol.LEDGER-01 .................   Passed    0.17 sec\n        Start  34: protocol.POLICY-01\n 34/102 Test  #34: protocol.POLICY-01 .................   Passed    0.02 sec\n        Start  35: protocol.POLICY-02\n 35/102 Test  #35: protocol.POLICY-02 .................   Passed    0.02 sec\n        Start  36: protocol.DISCLOSURE-01\n 36/102 Test  #36: protocol.DISCLOSURE-01 .............   Passed    0.02 sec\n        Start  37: protocol.QUEUE-01\n 37/102 Test  #37: protocol.QUEUE-01 ..................   Passed    0.02 sec\n        Start  38: protocol.SESSION-01\n 38/102 Test  #38: protocol.SESSION-01 ................   Passed    0.03 sec\n        Start  39: protocol.dependencies\n 39/102 Test  #39: protocol.dependencies ..............   Passed    0.06 sec\n        Start  40: recovery.LEASE-01\n 40/102 Test  #40: recovery.LEASE-01 ..................   Passed    0.02 sec\n        Start  41: recovery.LEASE-02\n 41/102 Test  #41: recovery.LEASE-02 ..................   Passed    0.02 sec\n        Start  42: recovery.LEASE-03\n 42/102 Test  #42: recovery.LEASE-03 ..................   Passed    0.02 sec\n        Start  43: recovery.LEASE-04\n 43/102 Test  #43: recovery.LEASE-04 ..................   Passed    0.02 sec\n        Start  44: recovery.LEASE-05\n 44/102 Test  #44: recovery.LEASE-05 ..................   Passed    0.03 sec\n        Start  45: recovery.RENDER-01\n 45/102 Test  #45: recovery.RENDER-01 .................   Passed    0.02 sec\n        Start  46: recovery.RENDER-02\n 46/102 Test  #46: recovery.RENDER-02 .................   Passed    0.02 sec\n        Start  47: recovery.RETRY-01\n 47/102 Test  #47: recovery.RETRY-01 ..................   Passed    0.02 sec\n        Start  48: recovery.RETRY-02\n 48/102 Test  #48: recovery.RETRY-02 ..................   Passed    0.02 sec\n        Start  49: recovery.RETRY-03\n 49/102 Test  #49: recovery.RETRY-03 ..................   Passed    0.02 sec\n        Start  50: recovery.RECOVERY-CLOCK\n 50/102 Test  #50: recovery.RECOVERY-CLOCK ............   Passed    0.02 sec\n        Start  51: native.NATIVE-MEASURED\n 51/102 Test  #51: native.NATIVE-MEASURED .............   Passed    0.62 sec\n        Start  52: native.NATIVE-CLOCK\n 52/102 Test  #52: native.NATIVE-CLOCK ................   Passed    0.35 sec\n        Start  53: native.NATIVE-SUB\n 53/102 Test  #53: native.NATIVE-SUB ..................   Passed    3.63 sec\n        Start  54: native.NATIVE-01\n 54/102 Test  #54: native.NATIVE-01 ...................   Passed   26.30 sec\n        Start  55: native.NATIVE-02\n 55/102 Test  #55: native.NATIVE-02 ...................   Passed    3.86 sec\n        Start  56: native.RECOVERY-01\n 56/102 Test  #56: native.RECOVERY-01 .................   Passed   37.36 sec\n        Start  57: telemetry.TELEMETRY-SNAPSHOT\n 57/102 Test  #57: telemetry.TELEMETRY-SNAPSHOT .......   Passed    0.02 sec\n        Start  58: telemetry.TELEMETRY-MESSAGES\n 58/102 Test  #58: telemetry.TELEMETRY-MESSAGES .......   Passed    0.02 sec\n        Start  59: telemetry.TELEMETRY-GRAPH\n 59/102 Test  #59: telemetry.TELEMETRY-GRAPH ..........   Passed    0.02 sec\n        Start  60: telemetry.TELEMETRY-TIME\n 60/102 Test  #60: telemetry.TELEMETRY-TIME ...........   Passed    0.03 sec\n        Start  61: telemetry.TELEMETRY-BOUNDS\n 61/102 Test  #61: telemetry.TELEMETRY-BOUNDS .........   Passed    0.10 sec\n        Start  62: telemetry.TELEMETRY-PRESERVE\n 62/102 Test  #62: telemetry.TELEMETRY-PRESERVE .......   Passed    0.02 sec\n        Start  63: presentation.NVIEW-VALUES\n 63/102 Test  #63: presentation.NVIEW-VALUES ..........   Passed    0.02 sec\n        Start  64: presentation.NVIEW-FORMAT\n 64/102 Test  #64: presentation.NVIEW-FORMAT ..........   Passed    0.10 sec\n        Start  65: presentation.NVIEW-STATES\n 65/102 Test  #65: presentation.NVIEW-STATES ..........   Passed    0.02 sec\n        Start  66: presentation.NVIEW-SELECTION\n 66/102 Test  #66: presentation.NVIEW-SELECTION .......   Passed    0.02 sec\n        Start  67: presentation.NVIEW-BOUNDS\n 67/102 Test  #67: presentation.NVIEW-BOUNDS ..........   Passed    0.03 sec\n        Start  68: presentation.NVIEW-LIFETIME\n 68/102 Test  #68: presentation.NVIEW-LIFETIME ........   Passed    0.02 sec\n        Start  69: network.PUBLICATION-VALUES\n 69/102 Test  #69: network.PUBLICATION-VALUES .........   Passed    0.02 sec\n        Start  70: network.PUBLICATION-FAILURE\n 70/102 Test  #70: network.PUBLICATION-FAILURE ........   Passed    0.02 sec\n        Start  71: network.PUBLICATION-BOUNDARY\n 71/102 Test  #71: network.PUBLICATION-BOUNDARY .......   Passed    0.02 sec\n        Start  72: network.RECONCILE-IDENTITY\n 72/102 Test  #72: network.RECONCILE-IDENTITY .........   Passed    0.02 sec\n        Start  73: network.RECONCILE-CLOCK-RATE\n 73/102 Test  #73: network.RECONCILE-CLOCK-RATE .......   Passed    0.02 sec\n        Start  74: network.RECONCILE-CANCEL-FAILURE\n 74/102 Test  #74: network.RECONCILE-CANCEL-FAILURE ...   Passed    0.02 sec\n        Start  75: network.RECONCILE-CAPACITY\n 75/102 Test  #75: network.RECONCILE-CAPACITY .........   Passed    0.02 sec\n        Start  76: native.NATIVE-NETWORK\n 76/102 Test  #76: native.NATIVE-NETWORK ..............   Passed    0.21 sec\n        Start  77: measured.MEASURED-CODEC\n 77/102 Test  #77: measured.MEASURED-CODEC ............   Passed    0.03 sec\n        Start  78: measured.MEASURED-AGE\n 78/102 Test  #78: measured.MEASURED-AGE ..............   Passed    0.02 sec\n        Start  79: measured.MEASURED-REPLAY\n 79/102 Test  #79: measured.MEASURED-REPLAY ...........   Passed    0.02 sec\n        Start  80: measured.MEASURED-LIFETIME\n 80/102 Test  #80: measured.MEASURED-LIFETIME .........   Passed    0.02 sec\n        Start  81: measured.MEASURED-SESSION\n 81/102 Test  #81: measured.MEASURED-SESSION ..........   Passed    0.02 sec\n        Start  82: import.IMPORT-STATE\n 82/102 Test  #82: import.IMPORT-STATE ................   Passed    0.02 sec\n        Start  83: import.IMPORT-RETAIN\n 83/102 Test  #83: import.IMPORT-RETAIN ...............   Passed    0.03 sec\n        Start  84: import.IMPORT-COVERAGE\n 84/102 Test  #84: import.IMPORT-COVERAGE .............   Passed    0.02 sec\n        Start  85: import.IMPORT-REPLAY\n 85/102 Test  #85: import.IMPORT-REPLAY ...............   Passed    0.02 sec\n        Start  86: import.IMPORT-TIME\n 86/102 Test  #86: import.IMPORT-TIME .................   Passed    0.02 sec\n        Start  87: import.IMPORT-LIFETIME\n 87/102 Test  #87: import.IMPORT-LIFETIME .............   Passed    0.02 sec\n        Start  88: data.VIEW-ATOMIC\n 88/102 Test  #88: data.VIEW-ATOMIC ...................   Passed    0.02 sec\n        Start  89: data.VIEW-REPLAY\n 89/102 Test  #89: data.VIEW-REPLAY ...................   Passed    0.02 sec\n        Start  90: data.VIEW-RECONNECT\n 90/102 Test  #90: data.VIEW-RECONNECT ................   Passed    0.02 sec\n        Start  91: data.VIEW-LEASE\n 91/102 Test  #91: data.VIEW-LEASE ....................   Passed    0.02 sec\n        Start  92: data.VIEW-POLICY\n 92/102 Test  #92: data.VIEW-POLICY ...................   Passed    0.02 sec\n        Start  93: data.VIEW-FAULT\n 93/102 Test  #93: data.VIEW-FAULT ....................   Passed    0.02 sec\n        Start  94: diagnostic.DIAG-POLICY\n 94/102 Test  #94: diagnostic.DIAG-POLICY .............   Passed    0.03 sec\n        Start  95: diagnostic.DIAG-PROJECTION\n 95/102 Test  #95: diagnostic.DIAG-PROJECTION .........   Passed    0.02 sec\n        Start  96: diagnostic.FAILURE-CODEC\n 96/102 Test  #96: diagnostic.FAILURE-CODEC ...........   Passed    0.02 sec\n        Start  97: diagnostic.FAILURE-INTERRUPT\n 97/102 Test  #97: diagnostic.FAILURE-INTERRUPT .......   Passed    0.02 sec\n        Start  98: diagnostic.FAILURE-PROJECTION\n 98/102 Test  #98: diagnostic.FAILURE-PROJECTION ......   Passed    0.02 sec\n        Start  99: diagnostic.PRESERVE-POLICY\n 99/102 Test  #99: diagnostic.PRESERVE-POLICY .........   Passed    0.02 sec\n        Start 100: native.PRESERVE\n100/102 Test #100: native.PRESERVE ....................   Passed    5.55 sec\n        Start 101: native.FAILURE-STORE\n101/102 Test #101: native.FAILURE-STORE ...............   Passed    1.58 sec\n        Start 102: native.DIAG-01\n102/102 Test #102: native.DIAG-01 .....................   Passed    0.75 sec\n\n100% tests passed, 0 tests failed out of 102\n\nTotal Test time (real) =  83.87 sec\n\n\nAttempt: D:\\Projects\\SysPane\\syspane\\out\\campaign\\w-25-gjs-network-view\\windows-x64-gcc15-test-f7d1186592\n",
+    "stderr": ""
+  },
+  {
+    "phase": "preflight",
+    "step": "package",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "package"
+    ],
+    "started_at": "2026-10-06T08:20:12.792847+00:00",
+    "finished_at": "2026-10-06T08:20:13.315094+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"package\",\n  \"maximum_bytes\": 4294967296,\n  \"checkout_out_bytes\": 1086208120,\n  \"linux_campaign_bytes\": 2512100341,\n  \"reserved_growth_bytes\": 33554432,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "phase": "package",
+    "step": "package",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/package_smoke.py",
+      "--profile",
+      "windows-x64-gcc15",
+      "--build-dir",
+      "out/build/windows-x64-gcc15"
+    ],
+    "started_at": "2026-10-06T08:20:13.315547+00:00",
+    "finished_at": "2026-10-06T08:20:14.676866+00:00",
+    "exit": 0,
+    "stdout": "{\"status\": \"pass\", \"result\": \"out\\\\campaign\\\\windows-x64-gcc15\\\\smoke-75dd4a53\\\\result.json\", \"archive_sha256\": \"3af6decaa96dade0ee54aef4493d17024972e29c9aefdef8d263c3e97648420b\"}\n",
+    "stderr": ""
+  }
+]

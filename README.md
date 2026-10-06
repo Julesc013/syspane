@@ -42,6 +42,10 @@ clock as exact decimal strings, with tested native resource cleanup and peer-exi
 rejection. The [owned GNOME clock experiment](spec/delivery/gnome-clock-handoff.md)
 adds asynchronous attachment, visible public-sample age/expiry and native teardown.
 Operational network freshness remains a separate integration gate.
+The [native GJS network consumer](spec/delivery/gjs-network-view-handoff.md) now
+reuses the shared C++ model, measured projection and revocable policy. Standalone
+fixtures check its exact values, age, lease and failure behavior; live collector
+delivery and network pixels remain the next integration boundary.
 The [measured telemetry path](spec/delivery/measured-time-handoff.md) now preserves
 sample age through delay, replay and reconnect, with explicit clock scope and TTL checks.
 A [native network reader](spec/delivery/network-acquisition-handoff.md) now acquires

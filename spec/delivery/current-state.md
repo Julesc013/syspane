@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-06T07:47:37.032612+00:00", "scope": "Windows native structural observation and campaign coverage audit"}
+updated: {"by": "codex", "at": "2026-10-06T08:22:07Z", "scope": "Standalone native GJS measured network consumer and next live delivery boundary"}
 ---
 
 # Current state and next admitted boundary
@@ -322,6 +322,12 @@ closed state and remove the tile. This public clock fixture does not enable live
 operational network freshness. The retained relay now binds the updated collector
 evidence while preserving its original contract and earlier records.
 
+The [native GJS network consumer](gjs-network-view-handoff.md) now reuses the shared
+measured DataView and network projection. Standalone synthetic input checks exact
+counter/rate text, original metadata and age, replay conflicts, producer lease,
+revocation/regrant, deadlines and deterministic native resource release. This
+component gate does not qualify operational network delivery or shell pixels.
+
 Canonical 0.2.0 documentation bundle, unchanged 0.1 authoring profile, preserved old
 fixtures, new experimental scene/command/capability 0.2 and admission descriptors.
 The initial settings registry has enforced metadata/default consistency and generated
@@ -391,9 +397,10 @@ real Linux acquisition, source lifetimes and measured receipt under independent
 child supervision. The native surface demonstrates retained public-marker recovery,
 and the shared projection now closes measured values and status semantics.
 The explicit retained cache now proves bounded native admission and policy/owner-loss
-erasure with real value pixels. Connect actual measured network input through the
-qualified asynchronous clock path, preserving original timestamps and model status
-semantics, and exercise independent
+erasure with real value pixels. The native GJS consumer now supplies the shared
+model semantics inside the shell runtime. Close the live supervised collector's
+forwarding/teardown contract, then connect original measured messages through this
+owner and the asynchronous clock path. Preserve original timestamps and exercise independent
 lease faults, then connect product controller policy/demand, general delivery queues
 and renderer supervision.
 Actual native topology faults and Windows full-table notification

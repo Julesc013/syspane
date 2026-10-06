@@ -752,7 +752,7 @@ SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498 \
 The observer retains both child process handles and checks exact BOOTTIME causal
 brackets, rejected descriptors, 64 close cycles and native peer-exit failure.
 `record_protocol.py --gjs-clock --profile linux-x64-gcc13 --build-dir <owned-build>
---output <record>` requires the complete current suite and checks the bound native
+--output <record>` recorded the 108-entry clock checkpoint and checked the bound native
 clock observations, sources and artifacts. The module has no installed product
 payload; importing it does not authorize a producer or establish remote freshness.
 Shell code must connect asynchronously and bind current policy before future use.
@@ -798,3 +798,25 @@ directory. It records no window titles or pixels and performs no shell/input mut
 `observed` describes only a consistent native structure, not a qualified attachment
 or visible host. The complete desktop experiment requires a designated synthetic
 lab and the package's unchanged independent pixel/input/recovery acceptance.
+
+The [native GJS network consumer](../../spec/delivery/packages/w-25-gjs-network-view.md)
+adds `SysPaneClock.NetworkView` to the existing module. It owns the shared C++
+DataView and network projection; callers supply typed development policy and feed
+bounded original frames. Its synchronous fixture driver is for standalone testing;
+product shell I/O must remain asynchronous. After the Windows test preflight:
+
+```sh
+SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498 \
+  ctest --preset linux-x64-gcc13 -R '^native.GJS-NETWORK$' --output-on-failure
+```
+
+Use `record_protocol.py --gjs-network --profile linux-x64-gcc13 --build-dir
+<owned-build> --output <new-record>` after the complete current Linux suite. This
+scope includes the original clock and all preceding regression families. It verifies
+the synthetic consumer's source/artifact identities, native age brackets, namespace,
+cleanup and held-peer exit. The standalone peer supplies clock/socket identity;
+fixture input injection is not evidence of operational delivery through that socket.
+The Linux profile rebuilds the static dependency closure as position-independent
+code for the shared module. Before another desktop experiment, explicitly update
+the pinned collector/library evidence binding to this build and preserve its old
+record. The previous GNOME matrices keep their original artifact identities.

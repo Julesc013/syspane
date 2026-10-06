@@ -46,7 +46,10 @@ def main():
     parser.add_argument('--network-publication', action='store_true', help='Require network projection and Linux supervised real collection')
     parser.add_argument('--network-presentation', action='store_true', help='Require selected measured network renderer projection and prior regressions')
     parser.add_argument('--gjs-clock', action='store_true', help='Require standalone Linux native GJS clock and all prior regressions')
+    parser.add_argument('--gjs-network', action='store_true', help='Require standalone GJS measured model consumer and prior regressions')
     args = parser.parse_args()
+    if args.gjs_network:
+        args.gjs_clock = True
     if args.gjs_clock:
         if platform.system() != 'Linux':
             raise ValueError('GJS clock qualification requires the Linux laboratory')
@@ -138,6 +141,8 @@ def main():
         expected |= {'presentation.NVIEW-'+case for case in ('VALUES','FORMAT','STATES','SELECTION','BOUNDS','LIFETIME')}
     if args.gjs_clock:
         expected.add('native.GJS-CLOCK')
+    if args.gjs_network:
+        expected.add('native.GJS-NETWORK')
     if len(cases) != len(expected) or {case['case'] for case in cases} != expected or any(case['outcome'] != 'pass' for case in cases):
         raise ValueError('missing, repeated, unexpected or failing case; preserve log before rerun')
     suffix = '.exe' if platform.system() == 'Windows' else ''
@@ -225,6 +230,9 @@ def main():
             required['NATIVE-COLLECTOR'] = {'LIVE', 'FAILURE', 'REPLAY', 'HANG', 'CRASH', 'UNSUBSCRIBE', 'REVOKE', 'PARENT-LOSS'}
         if args.gjs_clock:
             required['GJS-CLOCK'] = {'ROUNDTRIP', 'REJECT', 'CLOSE', 'PEER-EXIT'}
+        if args.gjs_network:
+            required['GJS-NETWORK'] = {'ADMISSION', 'VALUES', 'AGE-REPLAY', 'LEASE-POLICY', 'GAP', 'RETAIN',
+                'REPLAY-CONFLICT', 'NEGOTIATION', 'REJECT', 'DEADLINE', 'CLEANUP', 'PEER-EXIT'}
         if args.preservation:
             for name in ('syspane_preservation_tests'+suffix, 'libsyspane_preservation_job.a'):
                 artifacts[name] = {'sha256': sha(build/name), 'bytes': (build/name).stat().st_size}
@@ -256,15 +264,37 @@ def main():
                     raise ValueError('Windows reparse case must execute or retain its exact privilege limitation')
             if native['outcome'] != 'pass' or len(native['cases']) != len(expected_cases) or {case['case'] for case in native['cases']} != expected_cases or any(case['outcome'] != 'pass' for case in native['cases']):
                 raise ValueError('native case missing or failed; preserve original report')
-            if family == 'GJS-CLOCK':
+            if family in ('GJS-CLOCK', 'GJS-NETWORK'):
                 for source, digest in native['source_inputs'].items():
                     if sha(ROOT/source) != digest:
-                        raise ValueError('GJS clock source changed after native run: '+source)
+                        raise ValueError('GJS source changed after native run: '+source)
                 for artifact, digest in {**native['artifacts'], **native['build_dependencies']}.items():
                     if sha(Path(artifact)) != digest:
-                        raise ValueError('GJS clock artifact/dependency changed after run')
+                        raise ValueError('GJS artifact/dependency changed after run')
                 if len(native['processes']) != 2 or any(p['exit'] != 0 or p['forced_cleanup'] or p['stderr'] or p['remaining_stdout'] for p in native['processes']):
-                    raise ValueError('GJS clock native process completion differs')
+                    raise ValueError('GJS native process completion differs')
+            if family == 'GJS-NETWORK':
+                if native.get('failure') or not native.get('calls'):
+                    raise ValueError('GJS network observations missing or failed')
+                namespace = native['time_namespace']
+                if namespace['observer'] != namespace['peer'] or namespace['observer'] != namespace['gjs']:
+                    raise ValueError('GJS network time namespace differs')
+                rows = {case['case'].split('.')[1]: case for case in native['cases']}
+                cleanup, exited = rows['CLEANUP'], rows['PEER-EXIT']
+                if cleanup['cycles'] != 64 or cleanup['baseline_descriptors'] != cleanup['after_close_descriptors']:
+                    raise ValueError('GJS network native descriptor cleanup differs')
+                if exited['native_pid'] != native['processes'][0]['pid'] or exited['native_exit'] != 0 or not exited['pidfd_exit']:
+                    raise ValueError('GJS network held-peer exit differs')
+                for call in native['calls']:
+                    if not 0 <= int(call['before_ns']) <= int(call['after_ns']) <= 2**64-1:
+                        raise ValueError('GJS network local call bracket differs')
+                    if call['request']['op'] == 'project' and 'value' in call['reply']:
+                        for field in call['reply']['value']['fields']:
+                            if field['age_ns'] is not None:
+                                measured, age = int(field['measured_ns']), int(field['age_ns'])
+                                if not 0 <= age or not int(call['before_ns']) <= measured+age <= int(call['after_ns']):
+                                    raise ValueError('GJS network projected age left native bracket')
+            if family == 'GJS-CLOCK':
                 rows = {case['case'].split('.')[1]: case for case in native['cases']}
                 brackets = rows['ROUNDTRIP']['brackets_ns']
                 if len(brackets) != 16 or any(len(b) != 3 or any(v != str(int(v)) for v in b) or not 0 <= int(b[0]) <= int(b[1]) <= int(b[2]) <= 2**64-1 for b in brackets):
@@ -374,6 +404,8 @@ def main():
         paths.append(ROOT/'spec/delivery/packages/w-25-network-presentation.md')
     if args.gjs_clock:
         paths.append(ROOT/'spec/delivery/packages/w-25-gjs-clock.md')
+    if args.gjs_network:
+        paths.append(ROOT/'spec/delivery/packages/w-25-gjs-network-view.md')
     for directory in ('source', 'tests', 'build-support', 'spec/contracts'):
         paths.extend(sorted((ROOT/directory).rglob('*')))
     inputs = {p.relative_to(ROOT).as_posix(): sha(p) for p in paths
@@ -548,6 +580,10 @@ def main():
         report['slice'] = 'standalone native GJS measurement clock with authenticated socket ownership'
         report['bindings']['gjs_clock'] = 'spec/delivery/packages/w-25-gjs-clock.md'
         report['limits'][0] = 'Standalone GJS exact clock strings, native causal brackets, rejection, explicit cleanup and held-peer exit pass. Shell connection, live displayed age/expiry, suspend and namespace-change qualification remain open.'
+    if args.gjs_network:
+        report['slice'] = 'standalone native GJS measured model consumer with typed revocable policy'
+        report['bindings']['gjs_network'] = 'spec/delivery/packages/w-25-gjs-network-view.md'
+        report['limits'][0] = 'The native GJS consumer reuses DataView and network projection with synthetic input from its serialized fixture owner. Operational collector forwarding, shell network age/pixels, installed policy and complete desktop recovery remain unqualified by this record.'
     args.output.parent.mkdir(parents=True, exist_ok=True)
     log_output.write_text(raw.replace(str(build), '<build>').replace(str(ROOT), '<source>'), encoding='utf-8', newline='\n')
     args.output.write_text(json.dumps(report, indent=2)+'\n', encoding='utf-8', newline='\n')

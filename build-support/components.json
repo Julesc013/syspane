@@ -1218,14 +1218,18 @@
       "source_owner": "source/desktop/gnome/",
       "public_interfaces": [
         "source/desktop/gnome/native_clock.hpp",
-        "source/desktop/gnome/SysPaneClock-0.1.gir"
+        "source/desktop/gnome/SysPaneClock-0.1.gir",
+        "source/desktop/gnome/native_network_view.hpp"
       ],
       "private_interfaces": [],
       "sources": [
-        "source/desktop/gnome/native_clock.cpp"
+        "source/desktop/gnome/native_clock.cpp",
+        "source/desktop/gnome/native_network_view.cpp"
       ],
       "allowed_dependencies": [
         "syspane_local_ipc",
+        "syspane_network_view",
+        "syspane_network_publication",
         "PkgConfig::GOBJECT"
       ],
       "target_requirements": [

@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <repository version="1.2" xmlns="http://www.gtk.org/introspection/core/1.0"
  xmlns:c="http://www.gtk.org/introspection/c/1.0" xmlns:glib="http://www.gtk.org/introspection/glib/1.0">
+ <include name="GLib" version="2.0"/>
  <include name="GObject" version="2.0"/>
  <namespace name="SysPaneClock" version="0.1" shared-library="libsyspane_gjs_clock.so"
   c:identifier-prefixes="SysPane" c:symbol-prefixes="syspane">
@@ -20,6 +21,37 @@
    <method name="close" c:identifier="syspane_clock_close">
     <return-value transfer-ownership="none"><type name="none" c:type="void"/></return-value>
     <parameters><instance-parameter name="self" transfer-ownership="none"><type name="Clock" c:type="SysPaneClock*"/></instance-parameter></parameters>
+   </method>
+  </class>
+  <class name="NetworkView" c:type="SysPaneNetworkView" parent="GObject.Object"
+   glib:type-name="SysPaneNetworkView" glib:get-type="syspane_network_view_get_type">
+   <constructor name="new_from_socket" c:identifier="syspane_network_view_new_from_socket" throws="1">
+    <return-value transfer-ownership="full"><type name="NetworkView" c:type="SysPaneNetworkView*"/></return-value>
+    <parameters><parameter name="fd" transfer-ownership="none"><type name="gint" c:type="gint"/></parameter><parameter name="expected_pid" transfer-ownership="none"><type name="guint" c:type="guint"/></parameter><parameter name="revision" transfer-ownership="none"><type name="utf8" c:type="const gchar*"/></parameter><parameter name="permit" transfer-ownership="none"><type name="gboolean" c:type="gboolean"/></parameter></parameters>
+   </constructor>
+   <method name="hello" c:identifier="syspane_network_view_hello" throws="1">
+    <return-value transfer-ownership="full"><type name="GLib.Bytes" c:type="GBytes*"/></return-value>
+    <parameters><instance-parameter name="self" transfer-ownership="none"><type name="NetworkView" c:type="SysPaneNetworkView*"/></instance-parameter></parameters>
+   </method>
+   <method name="feed" c:identifier="syspane_network_view_feed" throws="1">
+    <return-value transfer-ownership="full"><type name="utf8" c:type="gchar*"/></return-value>
+    <parameters><instance-parameter name="self" transfer-ownership="none"><type name="NetworkView" c:type="SysPaneNetworkView*"/></instance-parameter><parameter name="bytes" transfer-ownership="none"><type name="GLib.Bytes" c:type="GBytes*"/></parameter></parameters>
+   </method>
+   <method name="project" c:identifier="syspane_network_view_project" throws="1">
+    <return-value transfer-ownership="full"><type name="utf8" c:type="gchar*"/></return-value>
+    <parameters><instance-parameter name="self" transfer-ownership="none"><type name="NetworkView" c:type="SysPaneNetworkView*"/></instance-parameter></parameters>
+   </method>
+   <method name="policy" c:identifier="syspane_network_view_policy" throws="1">
+    <return-value transfer-ownership="full"><type name="utf8" c:type="gchar*"/></return-value>
+    <parameters><instance-parameter name="self" transfer-ownership="none"><type name="NetworkView" c:type="SysPaneNetworkView*"/></instance-parameter><parameter name="revision" transfer-ownership="none"><type name="utf8" c:type="const gchar*"/></parameter><parameter name="permit" transfer-ownership="none"><type name="gboolean" c:type="gboolean"/></parameter></parameters>
+   </method>
+   <method name="shutdown" c:identifier="syspane_network_view_shutdown" throws="1">
+    <return-value transfer-ownership="full"><type name="GLib.Bytes" c:type="GBytes*"/></return-value>
+    <parameters><instance-parameter name="self" transfer-ownership="none"><type name="NetworkView" c:type="SysPaneNetworkView*"/></instance-parameter></parameters>
+   </method>
+   <method name="close" c:identifier="syspane_network_view_close">
+    <return-value transfer-ownership="none"><type name="none" c:type="void"/></return-value>
+    <parameters><instance-parameter name="self" transfer-ownership="none"><type name="NetworkView" c:type="SysPaneNetworkView*"/></instance-parameter></parameters>
    </method>
   </class>
  </namespace>

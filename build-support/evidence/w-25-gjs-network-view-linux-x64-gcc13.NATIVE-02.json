@@ -1,0 +1,463 @@
+{
+  "family": "NATIVE-02",
+  "profile_os": "posix",
+  "cases": [
+    {
+      "case": "NATIVE-02.COLLISION",
+      "outcome": "pass",
+      "started_at": "2026-10-06T08:19:27.235473+00:00",
+      "processes": [
+        {
+          "pid": 586,
+          "exit_code": 0,
+          "events": [
+            {
+              "access_controls_verified": true,
+              "event": "ready",
+              "unprivileged_context": true
+            },
+            {
+              "event": "listening",
+              "ordinal": 0
+            },
+            {
+              "event": "authenticated",
+              "peer_pid": 590,
+              "user_session_verified": true
+            },
+            {
+              "buffered": 0,
+              "elapsed_ms": 52,
+              "event": "closed",
+              "frames": 2,
+              "reads": 3,
+              "reason": "peer.shutdown",
+              "requests": 0
+            }
+          ]
+        },
+        {
+          "pid": 588,
+          "exit_code": 0,
+          "events": [
+            {
+              "event": "collision_rejected"
+            }
+          ]
+        },
+        {
+          "pid": 590,
+          "exit_code": 0,
+          "events": [
+            {
+              "event": "authenticated",
+              "peer_pid": 586,
+              "user_session_verified": true
+            },
+            {
+              "event": "reply",
+              "message": {
+                "body": {
+                  "document_versions": [
+                    {
+                      "document": "command",
+                      "version": "0.2.0"
+                    },
+                    {
+                      "document": "command-result",
+                      "version": "0.1.0"
+                    }
+                  ],
+                  "max_frame_bytes": 1048576,
+                  "optional_features": [
+                    "cancel",
+                    "result.get",
+                    "settings.preview"
+                  ],
+                  "producer_epoch": "probe:epoch-1",
+                  "required_features": [],
+                  "role": "console",
+                  "wire_major": 0,
+                  "wire_minor": 1
+                },
+                "connection_id": "C0",
+                "producer_epoch": "probe:epoch-1",
+                "type": "welcome"
+              }
+            }
+          ]
+        }
+      ],
+      "elapsed_seconds": 0.568
+    },
+    {
+      "case": "NATIVE-02.SERVER-PROCESS-DENIAL",
+      "outcome": "pass",
+      "started_at": "2026-10-06T08:19:27.804177+00:00",
+      "processes": [
+        {
+          "pid": 592,
+          "exit_code": 3,
+          "events": [
+            {
+              "access_controls_verified": true,
+              "event": "ready",
+              "unprivileged_context": true
+            },
+            {
+              "event": "listening",
+              "ordinal": 0
+            },
+            {
+              "code": "peer.process",
+              "event": "error"
+            }
+          ]
+        },
+        {
+          "pid": 594,
+          "exit_code": 3,
+          "events": [
+            {
+              "event": "authenticated",
+              "peer_pid": 592,
+              "user_session_verified": true
+            },
+            {
+              "code": "io.write",
+              "event": "error"
+            }
+          ]
+        }
+      ],
+      "elapsed_seconds": 0.517
+    },
+    {
+      "case": "NATIVE-02.CLIENT-PROCESS-DENIAL",
+      "outcome": "pass",
+      "started_at": "2026-10-06T08:19:28.321353+00:00",
+      "processes": [
+        {
+          "pid": 596,
+          "exit_code": 0,
+          "events": [
+            {
+              "access_controls_verified": true,
+              "event": "ready",
+              "unprivileged_context": true
+            },
+            {
+              "event": "listening",
+              "ordinal": 0
+            },
+            {
+              "event": "authenticated",
+              "peer_pid": 598,
+              "user_session_verified": true
+            },
+            {
+              "buffered": 0,
+              "elapsed_ms": 0,
+              "event": "closed",
+              "frames": 0,
+              "reads": 0,
+              "reason": "peer.eof",
+              "requests": 0
+            }
+          ]
+        },
+        {
+          "pid": 598,
+          "exit_code": 3,
+          "events": [
+            {
+              "code": "peer.process",
+              "event": "error"
+            }
+          ]
+        }
+      ],
+      "elapsed_seconds": 0.517
+    },
+    {
+      "case": "NATIVE-02.ROLE-SPOOF",
+      "outcome": "pass",
+      "started_at": "2026-10-06T08:19:28.838673+00:00",
+      "processes": [
+        {
+          "pid": 600,
+          "exit_code": 0,
+          "events": [
+            {
+              "access_controls_verified": true,
+              "event": "ready",
+              "unprivileged_context": true
+            },
+            {
+              "event": "listening",
+              "ordinal": 0
+            },
+            {
+              "event": "authenticated",
+              "peer_pid": 602,
+              "user_session_verified": true
+            },
+            {
+              "buffered": 0,
+              "elapsed_ms": 51,
+              "event": "closed",
+              "frames": 1,
+              "reads": 2,
+              "reason": "handshake.role_denied",
+              "requests": 0
+            }
+          ]
+        },
+        {
+          "pid": 602,
+          "exit_code": 3,
+          "events": [
+            {
+              "event": "authenticated",
+              "peer_pid": 600,
+              "user_session_verified": true
+            },
+            {
+              "code": "probe.eof",
+              "event": "error"
+            }
+          ]
+        }
+      ],
+      "elapsed_seconds": 0.567
+    },
+    {
+      "case": "NATIVE-02.FORGED-AUTHORITY",
+      "outcome": "pass",
+      "started_at": "2026-10-06T08:19:29.405937+00:00",
+      "processes": [
+        {
+          "pid": 604,
+          "exit_code": 0,
+          "events": [
+            {
+              "access_controls_verified": true,
+              "event": "ready",
+              "unprivileged_context": true
+            },
+            {
+              "event": "listening",
+              "ordinal": 0
+            },
+            {
+              "event": "authenticated",
+              "peer_pid": 606,
+              "user_session_verified": true
+            },
+            {
+              "buffered": 0,
+              "elapsed_ms": 52,
+              "event": "closed",
+              "frames": 3,
+              "reads": 4,
+              "reason": "peer.shutdown",
+              "requests": 0
+            }
+          ]
+        },
+        {
+          "pid": 606,
+          "exit_code": 0,
+          "events": [
+            {
+              "event": "authenticated",
+              "peer_pid": 604,
+              "user_session_verified": true
+            },
+            {
+              "event": "reply",
+              "message": {
+                "body": {
+                  "document_versions": [
+                    {
+                      "document": "command",
+                      "version": "0.2.0"
+                    },
+                    {
+                      "document": "command-result",
+                      "version": "0.1.0"
+                    }
+                  ],
+                  "max_frame_bytes": 1048576,
+                  "optional_features": [
+                    "cancel",
+                    "result.get",
+                    "settings.preview"
+                  ],
+                  "producer_epoch": "probe:epoch-1",
+                  "required_features": [],
+                  "role": "console",
+                  "wire_major": 0,
+                  "wire_minor": 1
+                },
+                "connection_id": "C0",
+                "producer_epoch": "probe:epoch-1",
+                "type": "welcome"
+              }
+            },
+            {
+              "event": "reply",
+              "message": {
+                "body": {
+                  "activation": [],
+                  "durable": false,
+                  "error": {
+                    "code": "command.shape",
+                    "message": "Request did not change stored configuration.",
+                    "retryable": false
+                  },
+                  "outcome": "invalid",
+                  "producer_epoch": "probe:epoch-1",
+                  "request_id": "forged",
+                  "revision": "40",
+                  "schema_version": "0.1.0",
+                  "stored": false,
+                  "visible": false
+                },
+                "connection_id": "C0",
+                "producer_epoch": "probe:epoch-1",
+                "type": "result"
+              }
+            }
+          ]
+        }
+      ],
+      "elapsed_seconds": 0.567
+    },
+    {
+      "case": "NATIVE-02.OLD-EPOCH",
+      "outcome": "pass",
+      "started_at": "2026-10-06T08:19:29.973129+00:00",
+      "processes": [
+        {
+          "pid": 608,
+          "exit_code": 0,
+          "events": [
+            {
+              "access_controls_verified": true,
+              "event": "ready",
+              "unprivileged_context": true
+            },
+            {
+              "event": "listening",
+              "ordinal": 0
+            },
+            {
+              "event": "authenticated",
+              "peer_pid": 610,
+              "user_session_verified": true
+            },
+            {
+              "buffered": 0,
+              "elapsed_ms": 52,
+              "event": "closed",
+              "frames": 2,
+              "reads": 3,
+              "reason": "session.identity",
+              "requests": 0
+            }
+          ]
+        },
+        {
+          "pid": 610,
+          "exit_code": 3,
+          "events": [
+            {
+              "event": "authenticated",
+              "peer_pid": 608,
+              "user_session_verified": true
+            },
+            {
+              "event": "reply",
+              "message": {
+                "body": {
+                  "document_versions": [
+                    {
+                      "document": "command",
+                      "version": "0.2.0"
+                    },
+                    {
+                      "document": "command-result",
+                      "version": "0.1.0"
+                    }
+                  ],
+                  "max_frame_bytes": 1048576,
+                  "optional_features": [
+                    "cancel",
+                    "result.get",
+                    "settings.preview"
+                  ],
+                  "producer_epoch": "probe:epoch-1",
+                  "required_features": [],
+                  "role": "console",
+                  "wire_major": 0,
+                  "wire_minor": 1
+                },
+                "connection_id": "C0",
+                "producer_epoch": "probe:epoch-1",
+                "type": "welcome"
+              }
+            },
+            {
+              "code": "probe.eof",
+              "event": "error"
+            }
+          ]
+        }
+      ],
+      "elapsed_seconds": 0.567
+    },
+    {
+      "case": "NATIVE-02.POSIX-SESSION-DENIAL",
+      "outcome": "pass",
+      "started_at": "2026-10-06T08:19:30.540354+00:00",
+      "processes": [
+        {
+          "pid": 612,
+          "exit_code": 3,
+          "events": [
+            {
+              "access_controls_verified": true,
+              "event": "ready",
+              "unprivileged_context": true
+            },
+            {
+              "event": "listening",
+              "ordinal": 0
+            },
+            {
+              "code": "peer.session",
+              "event": "error"
+            }
+          ]
+        },
+        {
+          "pid": 614,
+          "exit_code": 3,
+          "events": [
+            {
+              "code": "peer.session",
+              "event": "error"
+            }
+          ]
+        }
+      ],
+      "elapsed_seconds": 0.517
+    }
+  ],
+  "outcome": "pass",
+  "qualification": {
+    "cross_user": "blocked: no admitted second-user laboratory",
+    "cross_logon_or_desktop_session": "blocked: no admitted Windows second logon or Linux desktop-session laboratory"
+  }
+}

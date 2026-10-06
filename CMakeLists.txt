@@ -137,7 +137,9 @@ target_link_libraries(syspane_health PUBLIC syspane_protocol syspane_local_ipc)
 add_library(syspane_local_ipc STATIC source/platform/local_ipc_linux.cpp source/platform/local_ipc_windows.cpp)
 target_include_directories(syspane_local_ipc PUBLIC "${CMAKE_SOURCE_DIR}/source/platform")
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
-    set_target_properties(syspane_local_ipc PROPERTIES POSITION_INDEPENDENT_CODE ON)
+    set_target_properties(syspane_local_ipc syspane_model syspane_protocol syspane_configuration
+        syspane_recovery syspane_data_view syspane_network_view syspane_network_publication syspane_network_state
+        PROPERTIES POSITION_INDEPENDENT_CODE ON)
     pkg_check_modules(GOBJECT REQUIRED IMPORTED_TARGET gobject-2.0=2.80.0)
     find_program(SYSPANE_GI_COMPILER gi-compile-repository REQUIRED)
     execute_process(COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/build-support/check_gjs_clock_dependencies.py"
@@ -145,8 +147,8 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
     if(NOT clock_dependency_result EQUAL 0)
         message(FATAL_ERROR "Native GJS clock dependencies differ from the pinned profile")
     endif()
-    add_library(syspane_gjs_clock SHARED source/desktop/gnome/native_clock.cpp)
-    target_link_libraries(syspane_gjs_clock PRIVATE syspane_local_ipc PkgConfig::GOBJECT)
+    add_library(syspane_gjs_clock SHARED source/desktop/gnome/native_clock.cpp source/desktop/gnome/native_network_view.cpp)
+    target_link_libraries(syspane_gjs_clock PRIVATE syspane_local_ipc syspane_network_view syspane_network_publication PkgConfig::GOBJECT)
     add_custom_command(OUTPUT "${CMAKE_BINARY_DIR}/SysPaneClock-0.1.typelib"
         COMMAND "${SYSPANE_GI_COMPILER}" --includedir=/usr/lib/x86_64-linux-gnu/gir-1.0
             "--output=${CMAKE_BINARY_DIR}/SysPaneClock-0.1.typelib"
@@ -180,6 +182,9 @@ if(BUILD_TESTING)
         add_test(NAME native.GJS-CLOCK COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/desktop/native_gjs_clock.py"
             "${CMAKE_BINARY_DIR}")
         set_tests_properties(native.GJS-CLOCK PROPERTIES TIMEOUT 45)
+        add_test(NAME native.GJS-NETWORK COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/desktop/native_gjs_network_view.py"
+            "${CMAKE_BINARY_DIR}")
+        set_tests_properties(native.GJS-NETWORK PROPERTIES TIMEOUT 60)
         find_package(X11 REQUIRED)
         add_library(syspane_x11_candidate STATIC source/desktop/x11/desktop_candidate.cpp)
         target_link_libraries(syspane_x11_candidate PRIVATE X11::X11 X11::Xext)
