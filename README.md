@@ -7,6 +7,11 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
+The [native text checkpoint](spec/delivery/native-text-handoff.md) adds Linux
+Pango/Cairo measurement and raster output for bounded plain text, including Unicode
+shaping, fallback fonts, wrapping and contrast overrides. Live scene composition,
+policy-driven cache erasure and desktop activation remain integration work.
+
 The [scene binding checkpoint](spec/delivery/bindings-handoff.md) resolves authored
 selectors and pins through current-policy data views. Exact identities, scope,
 truncation and missing/stale values remain explicit. Native rendering and editing

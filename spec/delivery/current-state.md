@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-06T20:04:02Z", "scope": "Policy-bound authored binding resolution and explicit development runtime revision"}
+updated: {"by": "codex", "at": "2026-10-06T20:47:00Z", "scope": "Native Linux text metrics and raster checkpoint; full native scene integration remains open"}
 ---
 
 # Current state and next admitted boundary
@@ -22,10 +22,17 @@ The active objective is now the [complete 0.1.0 release](release-0.1.0.md) for W
 required but is no longer the final completion boundary. Legacy version/architecture
 floors, native labs and complete desktop/package evidence remain unresolved.
 
-The latest [authored binding checkpoint](bindings-handoff.md) implements the existing
+The latest [native text checkpoint](native-text-handoff.md) adds Linux Pango/Cairo
+measurement and bounded raster output. Independent pixel checks cover Unicode,
+wrapping, alpha, fallback and contrast, including a preserved color-font failure.
+It admits authored/public or synthetic text; live bindings still require native
+cache erasure and accessibility ownership. Full scene composition, other native
+text adapters and external visible activation remain open.
+
+The earlier [authored binding checkpoint](bindings-handoff.md) implements the existing
 selector/pin grammar over scoped, current-policy DataView borrows. Exact uint64
 comparisons, complete collection ordering, unresolved/ambiguous state and retained
-freshness are executable. Native catalog/mapping ownership, text measurement,
+freshness are executable. Native catalog/mapping ownership, complete text integration,
 drawing, cache erasure and visible activation remain required.
 
 The earlier [scene layout checkpoint](layout-handoff.md) implements shared geometry

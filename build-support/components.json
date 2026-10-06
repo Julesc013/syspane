@@ -1750,6 +1750,59 @@
         "linux-x64-gcc13",
         "windows-x86-v141-xp"
       ]
+    },
+    {
+      "id": "native-text",
+      "target": "syspane_native_text",
+      "type": "STATIC_LIBRARY",
+      "source_owner": "source/rendering/",
+      "public_interfaces": [
+        "source/rendering/native_text.hpp"
+      ],
+      "private_interfaces": [],
+      "sources": [
+        "source/rendering/native_text_linux.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_scene",
+        "PkgConfig::PANGOCAIRO"
+      ],
+      "target_requirements": [
+        "cxx17",
+        "native_text"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
+    },
+    {
+      "id": "text-probe",
+      "target": "syspane_text_probe",
+      "type": "EXECUTABLE",
+      "source_owner": "source/application/",
+      "public_interfaces": [],
+      "private_interfaces": [],
+      "sources": [
+        "source/application/text_probe.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_native_text"
+      ],
+      "target_requirements": [
+        "cxx17",
+        "native_text"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
     }
   ]
 }

@@ -1,0 +1,161 @@
+{
+  "schema_version": "0.1.0",
+  "work_id": "W-09",
+  "source_ref": "d79da0b9cf2077c85a505b5f5304cd59e7e7c247",
+  "objective": "Measure and rasterize bounded native Linux text with exact pixel ownership, explicit font fallback, wrapping and semantic/contrast colors.",
+  "changed_files": [
+    "CMakeLists.txt",
+    "README.md",
+    "TODO.md",
+    "build-support/check_text_runtime.py",
+    "build-support/components.json",
+    "build-support/evidence/text-handoff.json",
+    "build-support/evidence/w-09-text-attempts.json",
+    "build-support/evidence/w-09-text-history/audit_text_legacy.py",
+    "build-support/evidence/w-09-text-history/finish_text_checks.py",
+    "build-support/evidence/w-09-text-history/finish_text_handoff.py",
+    "build-support/evidence/w-09-text-history/linux-x64-gcc13-build-40e94fa5fe/result.json",
+    "build-support/evidence/w-09-text-history/linux-x64-gcc13-build-40e94fa5fe/source-inputs.zip",
+    "build-support/evidence/w-09-text-history/linux-x64-gcc13-build-56cf101f93/result.json",
+    "build-support/evidence/w-09-text-history/linux-x64-gcc13-build-56cf101f93/source-inputs.zip",
+    "build-support/evidence/w-09-text-history/linux-x64-gcc13-build-9a79c225e2/result.json",
+    "build-support/evidence/w-09-text-history/linux-x64-gcc13-build-9a79c225e2/source-inputs.zip",
+    "build-support/evidence/w-09-text-history/linux-x64-gcc13-build-eb8b56ec96/result.json",
+    "build-support/evidence/w-09-text-history/linux-x64-gcc13-build-eb8b56ec96/source-inputs.zip",
+    "build-support/evidence/w-09-text-history/linux-x64-gcc13-configure-215495d1b7/result.json",
+    "build-support/evidence/w-09-text-history/linux-x64-gcc13-configure-215495d1b7/source-inputs.zip",
+    "build-support/evidence/w-09-text-history/linux-x64-gcc13-configure-e14ee3bdb2/result.json",
+    "build-support/evidence/w-09-text-history/linux-x64-gcc13-configure-e14ee3bdb2/source-inputs.zip",
+    "build-support/evidence/w-09-text-history/linux-x64-gcc13-oracle-4dbe0fe2f8/result.json",
+    "build-support/evidence/w-09-text-history/linux-x64-gcc13-oracle-4dbe0fe2f8/source-inputs.zip",
+    "build-support/evidence/w-09-text-history/linux-x64-gcc13-oracle-9652d596a1/result.json",
+    "build-support/evidence/w-09-text-history/linux-x64-gcc13-oracle-9652d596a1/source-inputs.zip",
+    "build-support/evidence/w-09-text-history/linux-x64-gcc13-oracle-be16bcc9ac/result.json",
+    "build-support/evidence/w-09-text-history/linux-x64-gcc13-oracle-be16bcc9ac/source-inputs.zip",
+    "build-support/evidence/w-09-text-history/linux-x64-gcc13-test-7d3798aff8/result.json",
+    "build-support/evidence/w-09-text-history/linux-x64-gcc13-test-7d3798aff8/source-inputs.zip",
+    "build-support/evidence/w-09-text-history/preserve_text.py",
+    "build-support/evidence/w-09-text-history/stage_text.py",
+    "build-support/evidence/w-09-text-history/text-allowed.json",
+    "build-support/evidence/w-09-text-history/text-execution-linux-x64-gcc13-2755b1f2a9.json",
+    "build-support/evidence/w-09-text-history/text-execution-linux-x64-gcc13-30f316b633.json",
+    "build-support/evidence/w-09-text-history/text-execution-linux-x64-gcc13-588686124d.json",
+    "build-support/evidence/w-09-text-history/text-execution-linux-x64-gcc13-d9002296b2.json",
+    "build-support/evidence/w-09-text-history/text-execution-windows-x64-gcc15-5961350fbd.json",
+    "build-support/evidence/w-09-text-history/text-execution-windows-x86-v141-xp-c0795a2bc9.json",
+    "build-support/evidence/w-09-text-history/text-original.json",
+    "build-support/evidence/w-09-text-history/text-original.zip",
+    "build-support/evidence/w-09-text-history/text_flow.py",
+    "build-support/evidence/w-09-text-history/text_remaining_profiles.py",
+    "build-support/evidence/w-09-text-history/text_step.py",
+    "build-support/evidence/w-09-text-history/windows-x64-gcc15-build-fb250f8978/result.json",
+    "build-support/evidence/w-09-text-history/windows-x64-gcc15-build-fb250f8978/source-inputs.zip",
+    "build-support/evidence/w-09-text-history/windows-x64-gcc15-configure-74212a43a2/result.json",
+    "build-support/evidence/w-09-text-history/windows-x64-gcc15-configure-74212a43a2/source-inputs.zip",
+    "build-support/evidence/w-09-text-history/windows-x64-gcc15-test-60222b193f/result.json",
+    "build-support/evidence/w-09-text-history/windows-x64-gcc15-test-60222b193f/source-inputs.zip",
+    "build-support/evidence/w-09-text-history/windows-x86-v141-xp-build-aaec9b454e/result.json",
+    "build-support/evidence/w-09-text-history/windows-x86-v141-xp-build-aaec9b454e/source-inputs.zip",
+    "build-support/evidence/w-09-text-history/windows-x86-v141-xp-configure-99497312f7/result.json",
+    "build-support/evidence/w-09-text-history/windows-x86-v141-xp-configure-99497312f7/source-inputs.zip",
+    "build-support/evidence/w-09-text-history/windows-x86-v141-xp-test-715995c111/result.json",
+    "build-support/evidence/w-09-text-history/windows-x86-v141-xp-test-715995c111/source-inputs.zip",
+    "build-support/evidence/w-09-text-legacy-audit.json",
+    "build-support/evidence/w-09-text-native/text-893e414f0375.json",
+    "build-support/evidence/w-09-text-native/text-893e414f0375.zip",
+    "build-support/evidence/w-09-text-native/text-8edd2bb413ef.json",
+    "build-support/evidence/w-09-text-native/text-8edd2bb413ef.zip",
+    "build-support/evidence/w-09-text-native/text-a3d641cf293a.json",
+    "build-support/evidence/w-09-text-native/text-a3d641cf293a.zip",
+    "build-support/evidence/w-09-text-native/text-e361d3ccbbf4.json",
+    "build-support/evidence/w-09-text-native/text-e361d3ccbbf4.zip",
+    "build-support/evidence/w-09-text-staging.json",
+    "build-support/evidence/w-09-text-verification.json",
+    "build-support/targets/linux-x64-gcc13.json",
+    "build-support/text-runtime.json",
+    "docs/developers/build.md",
+    "source/application/text_probe.cpp",
+    "source/rendering/native_text.hpp",
+    "source/rendering/native_text_linux.cpp",
+    "spec/checksums.json",
+    "spec/delivery/current-state.md",
+    "spec/delivery/index.md",
+    "spec/delivery/native-text-handoff.md",
+    "spec/delivery/packages/index.md",
+    "spec/delivery/packages/w-09-native-text.md",
+    "spec/delivery/work-units.json",
+    "spec/desktop/rendering.md",
+    "spec/generated/catalog.json",
+    "tests/scene/native_text.py"
+  ],
+  "decisions": [
+    "Preserve scene/theme identities and full release ambition; add a Linux-only native text component to the existing component inventory.",
+    "Measure plain UTF-8 with explicit language, absolute DIP font size, native ink/logical bounds and actual font families. Preserve nonzero origins and measure separately from rational raster scale.",
+    "Reject malformed encoding, controls and text/raster capacity rather than truncating or silently clipping. Return explicit premultiplied RGBA8 bytes owned by the caller.",
+    "Use an alpha glyph coverage mask so embedded color-font layers cannot bypass semantic or contrast colors.",
+    "Archive 25 original independent test families before implementation. Add two cases for native malformed UTF-8 and color-font behavior; preserve the failing color-font raster and unchanged assertion.",
+    "Pin selected installed text libraries/packages plus 358 font/configuration/library files. No dependencies were installed or redistributed.",
+    "Restrict initial use to public/authored or synthetic text until a current-policy native cache/accessibility owner is implemented.",
+    "Keep W-09 and every full release track open; native text raster alone is not complete scene rendering or visible host activation."
+  ],
+  "checks": [
+    {
+      "name": "Original embedded color-font foreground bypass; preserved and corrected without relaxing the assertion",
+      "outcome": "fail",
+      "evidence": "build-support/evidence/w-09-text-attempts.json"
+    },
+    {
+      "name": "Full suites: 221 Linux, 202 modern Windows, 189 historical-toolset checks on the modern host",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-09-text-attempts.json"
+    },
+    {
+      "name": "27 native text input/pixel families and selected installed library/font identity",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-09-text-attempts.json"
+    },
+    {
+      "name": "18 historical executable/header/import and actual linker-input audits",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-09-text-legacy-audit.json"
+    },
+    {
+      "name": "Specification/schema/navigation/integrity and 56 passing tooling assertions, two existing skips",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-09-text-verification.json"
+    },
+    {
+      "name": "Exact staged inputs, original oracles, every native raster archive and final artifact identities",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-09-text-staging.json"
+    },
+    {
+      "name": "Live widget composition, policy cache/accessibility erasure and independent native host activation",
+      "outcome": "not_run",
+      "evidence": null
+    },
+    {
+      "name": "Windows/Mac text adapters, historical native OS execution and all complete editions",
+      "outcome": "not_run",
+      "evidence": null
+    }
+  ],
+  "open_questions": [
+    "Exact oldest Windows 9x, Windows NT and Mac OS X versions/service levels and CPU architectures remain awaiting clarification.",
+    "Designated historical/Windows and Mac laboratories remain unresolved; existing user desktops and unrelated VMs are not admitted by implication."
+  ],
+  "next_step": "Close missing primitive content semantics and compose immutable scene/resources, live bindings and shared geometry with native metrics; implement retained text/pixel/accessibility erasure ownership and externally verified native activation/editor integration. Continue Windows/Mac text adapters and all five full release tracks.",
+  "authority_used": [
+    "user:foundation-native-campaign-2026-10-05",
+    "User-expanded complete SysPane 0.1.0 release objective",
+    "User instruction to commit and sync main"
+  ],
+  "limitations": [
+    "Linux offscreen raster only. No new desktop visibility, behind-icons or accessibility qualification.",
+    "Native font caches belong to the external dependency; application cache erasure/live payload retention is not admitted by this adapter.",
+    "Selected runtime/font identities do not prove complete transitive reproduction, portable glyph equality or font redistribution rights.",
+    "Historical-toolset tests run on the modern Windows host, not historical operating systems.",
+    "The earlier binding checkpoint content-command receive timeout remains undetermined and preserved; later full passes do not erase it.",
+    "Two existing Windows symlink tool assertions remain skipped. Full product implementation, installed ownership/policy, native labs and release gates remain open."
+  ]
+}

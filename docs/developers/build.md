@@ -1,5 +1,24 @@
 # Developer setup and checks
 
+The [native text package](../../spec/delivery/packages/w-09-native-text.md) adds
+`syspane_native_text` and finite `SysPane.TextProbe` on the Linux development profile.
+`rendering::render_text` accepts plain text, an immutable validated theme, language,
+wrap width in 1/64 DIP, scale and contrast. It returns readable native metrics and
+owned premultiplied RGBA8 pixels. This prerequisite accepts public/authored or
+synthetic text; live DataView values require a separately admitted erasure owner.
+It performs no scene activation or display access.
+
+After normal workspace preflight/configure/build, run `ctest --preset
+linux-x64-gcc13 -R '^native[.]TEXT-RASTER$' --output-on-failure` with the existing
+Linux build-root environment. The independent Python oracle inspects raw pixels
+and rejects malformed/bounded input. Reports and synthetic rasters are written
+under `native-evidence/text-*`. Configure and native tests verify installed text
+libraries, fonts and font configuration against `build-support/text-runtime.json`.
+Dependency changes require an explicit identity revision; no package installation
+is performed. The probe accepts one bounded JSON input on stdin and one owned raw
+output path; its `text_hex` input is malformed-UTF-8 laboratory instrumentation.
+
+
 The [authored binding package](../../spec/delivery/packages/w-09-bindings.md) adds
 `scene::project_binding` to `syspane_scene`. Supply a complete trusted catalog of
 scoped DataViews, supported types/fields/TTLs, explicit pin mappings and qualified

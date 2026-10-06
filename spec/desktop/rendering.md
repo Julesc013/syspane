@@ -17,6 +17,12 @@ updated: {"by": "codex", "at": "2026-10-04T19:32:52+11:00", "scope": "October au
 
 # Rendering, text, layout and display recovery
 
+The [native text package](../delivery/packages/w-09-native-text.md) closes the Linux
+plain-text measurement/raster prerequisite. It preserves native logical/ink origins,
+uses bounded wrapping and explicit semantic/contrast colors, and records actual
+fallback fonts. Live scene composition and retained-policy cache erasure remain
+separate integration gates; this adapter's raster output does not establish visibility.
+
 ## Pipeline
 
 Accepted telemetry and scene revisions produce a display projection. The layout engine resolves authored constraints using display geometry and native text metrics. The renderer draws supported primitives and reports frame generation/presentation health. The host places those surfaces. No stage queries hardware while painting.

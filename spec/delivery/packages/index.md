@@ -32,6 +32,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Independent transaction deadlines and controller recovery](w-08-supervised-transactions.md) — Bound uncooperative transaction work without killing threads or replaying uncertain mutations.
 - [Policy-bound authored scene bindings](w-09-bindings.md) — Resolve existing selectors and pins against scoped immutable producer views without name-based rebinding.
 - [Deterministic portable scene layout](w-09-layout.md) — Resolve admitted scene geometry from explicit topology and native readable metrics without mutating authored state.
+- [Native Linux text metrics and raster adapter](w-09-native-text.md) — Bounded plain-text shaping and painting with explicit native metrics, fallback and pixel ownership.
 - [W-24 authenticated transport and policy boundary](w-24-transport.md) — Close the initial local protocol, admission and preview boundary before native integration.
 - [W-25 collection continuity across consumer replacement](w-25-consumer-continuity.md) — Keep real collection independently owned while admitting bounded replacement consumers.
 - [W-25 automatic recovery from independent render failure](w-25-controller-render-recovery.md) — Connect the existing render and health guards to the persistent native desktop replacement owner.
