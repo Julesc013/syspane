@@ -61,10 +61,10 @@ required foreground-focus restoration.
 No desktop profile is qualified.
 An [independent native comparison](spec/delivery/gnome-focus-handoff.md) reproduces
 the focus and keyboard-delivery failure with DING while the SysPane extension is
-absent; GNOME alone restores both. The original acceptance failure remains open.
+absent; GNOME alone restores both. The original default acceptance failure remains open.
 A [native decision trace](spec/delivery/gnome-focus-trace-handoff.md) now shows Mutter
 selecting the DING desktop as its recent focus target on restoration. Traced and
-untraced observations agree; an integration fix remains pending.
+untraced observations agree; the original default failure remains recorded.
 A [native icon-input experiment](spec/delivery/gnome-input-handoff.md) now passes
 real selection, drag selection, menus and folder opening with GNOME/DING and the
 pinned PCManFM laboratory. Pointer-blocking and omitted-click controls fail as
@@ -86,7 +86,12 @@ window ID is reused. Frozen-drawing and omitted-stop controls fail independently
 A [native shell/compositor recovery experiment](spec/delivery/gnome-shell-recovery-handoff.md)
 now replaces the owned GNOME process, reattaches the drawing and verifies input on
 the new desktop. Omitting reattachment or replacement fails independently. User
-session recovery, product continuity and the separate focus failure remain open.
+session recovery and product continuity remain open.
+An [optional focus integration](spec/delivery/gnome-focus-integration-handoff.md)
+now passes the original Show Desktop focus deadline and actual keyboard receipt.
+Native icon/folder interactions, minimization and disabling the controller pass
+the declared guards. It stays disabled by default pending broader window, workspace
+and session qualification; the original default failure remains preserved.
 There is no usable SysPane desktop application or downloadable release yet.
 Desktop, screensaver and installer profiles remain unqualified.
 

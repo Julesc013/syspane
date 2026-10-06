@@ -7,6 +7,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [W-04 historical Windows build and host experiments](w-04-historical-windows.md) — Test the existing shared C++ subset with the installed XP toolset before claiming historical runtime or desktop support.
 - [W-05 GNOME icon composition experiment](w-05-gnome-composition.md) — Calibrate separated marker and opaque icon witnesses against a real owned DING desktop.
 - [W-05 independent GNOME focus baseline](w-05-gnome-focus-baseline.md) — Compare native focus and keyboard delivery without the candidate and with the live bridge.
+- [W-05 bounded native Show Desktop focus integration](w-05-gnome-focus-integration.md) — Test event-bound restoration using public shell signals while preserving native key handling and icon focus.
 - [W-05 native Mutter focus-decision trace](w-05-gnome-focus-trace.md) — Bind built-in native focus decisions to the independent window/pixel/keyboard baseline.
 - [W-05 native GNOME icon-manager recovery](w-05-gnome-icon-recovery.md) — Confirm one owned DING lifetime ends, observe native replacement and pixels, then exercise input on the replacement.
 - [W-05 native GNOME icon-input experiment](w-05-gnome-input.md) — Verify real icon selection, menu and folder activation independently of the passive drawing bridge.

@@ -1,0 +1,119 @@
+[
+  {
+    "case": "live",
+    "phase": "preflight",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-06T04:11:46.899303+00:00",
+    "finished_at": "2026-10-06T04:11:47.276343+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 3221225472,\n  \"checkout_out_bytes\": 935140635,\n  \"linux_campaign_bytes\": 2041668626,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "case": "live",
+    "phase": "native",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "tests/desktop/native_gnome_bootstrap.py",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13",
+      "--icon-input",
+      "live"
+    ],
+    "started_at": "2026-10-06T04:11:47.276712+00:00",
+    "finished_at": "2026-10-06T04:12:03.832712+00:00",
+    "exit": 0,
+    "stdout": "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-INPUT-01-c4f82ae474a041f8b12d191dc1b49437.json\npass owned shell and requested observations completed\n",
+    "stderr": ""
+  },
+  {
+    "case": "block-pointer",
+    "phase": "preflight",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-06T04:12:03.833052+00:00",
+    "finished_at": "2026-10-06T04:12:04.178335+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 3221225472,\n  \"checkout_out_bytes\": 935142038,\n  \"linux_campaign_bytes\": 2046324238,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "case": "block-pointer",
+    "phase": "native",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "tests/desktop/native_gnome_bootstrap.py",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13",
+      "--icon-input",
+      "block-pointer"
+    ],
+    "started_at": "2026-10-06T04:12:04.178622+00:00",
+    "finished_at": "2026-10-06T04:12:16.135266+00:00",
+    "exit": 1,
+    "stdout": "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-INPUT-01-4fa72ac1fb9b488ba148dffa163638f9.json\nfail owned shell and requested observations completed\n",
+    "stderr": ""
+  },
+  {
+    "case": "no-selection",
+    "phase": "preflight",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-06T04:12:16.135799+00:00",
+    "finished_at": "2026-10-06T04:12:16.491254+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 3221225472,\n  \"checkout_out_bytes\": 935143465,\n  \"linux_campaign_bytes\": 2049583530,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "case": "no-selection",
+    "phase": "native",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "tests/desktop/native_gnome_bootstrap.py",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13",
+      "--icon-input",
+      "no-selection"
+    ],
+    "started_at": "2026-10-06T04:12:16.491645+00:00",
+    "finished_at": "2026-10-06T04:12:28.423747+00:00",
+    "exit": 1,
+    "stdout": "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-INPUT-01-08dfed44b14347319a5a1a2e5fd3b284.json\nfail owned shell and requested observations completed\n",
+    "stderr": ""
+  }
+]

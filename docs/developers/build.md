@@ -513,6 +513,26 @@ These controls return native exit 1 and leave dependent input unexecuted. The na
 experiment does not qualify a real session manager or product continuity. See the
 [shell recovery checkpoint](../../spec/delivery/gnome-shell-recovery-handoff.md).
 
+The optional focus experiment reuses the original candidate baseline and adds
+native interaction guards. It leaves the default bridge behavior unchanged:
+
+```text
+python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --focus-baseline candidate --focus-integration observe
+python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --focus-baseline candidate --focus-integration restore
+python3 build-support/record_gnome_focus_integration.py --build-dir <owned-build-directory> --reports <observe-report> <restore-report> --output <new-owned-record>
+python3 tests/desktop/test_gnome_focus_integration_record.py <owned-build-directory> <observe-report> <restore-report> -v
+```
+
+Complete the Windows coordinator's workspace-budget preflight before each native
+run or verification. This mode owns its private input/registry setup and cannot be
+combined with the trace or other experiment flags. Both completed controls return
+exit 0 because observation mode must retain failed focus/F9 while restoration must
+pass them. The original acceptance verdicts remain separate from control completion.
+Keep the original reveal interval, actual keyboard journal, all 15 guard steps,
+full folder-input evidence, bounded native decisions and one-way disable result.
+Do not enable the controller generally from this finite experiment; see the
+[focus integration checkpoint](../../spec/delivery/gnome-focus-integration-handoff.md).
+
 For the historical shared-subset experiment, the existing Visual Studio 2017 XP
 toolset has its own preset. It compiles the same model, protocol/policy, recovery
 and diagnostic projection sources; modern native adapters require separate closure.

@@ -43,7 +43,8 @@ SOURCES = ['tests/desktop/native_gnome_bootstrap.py', 'tests/desktop/native_orac
            'tests/desktop/gnome_switcher.py', 'tests/desktop/gnome_switcher_app.py',
            'tests/desktop/fixtures/gnome-switcher.json', 'spec/delivery/packages/w-05-gnome-switcher.md',
            'tests/desktop/gnome_icon_recovery.py', 'spec/delivery/packages/w-05-gnome-icon-recovery.md',
-           'tests/desktop/gnome_shell_recovery.py', 'spec/delivery/packages/w-05-gnome-shell-recovery.md']
+           'tests/desktop/gnome_shell_recovery.py', 'spec/delivery/packages/w-05-gnome-shell-recovery.md',
+           'tests/desktop/gnome_focus_integration.py', 'spec/delivery/packages/w-05-gnome-focus-integration.md']
 
 
 def marker_trace(display, environment, sample=None, dismiss=True):
@@ -133,7 +134,11 @@ def observe(environment, pid, channel, marker, composition, foreground_pid=None,
             import gnome_focus_baseline
             result['focus_baseline'] = gnome_focus_baseline.observe(display, environment, pid, foreground_pid,
                 Path(environment['HOME']).parent, result.get('reveal'), result.get('composition'))
-        if environment.get('SYSPANE_GNOME_INPUT_CONTROL') and not (environment.get('SYSPANE_GNOME_ICON_RECOVERY') or environment.get('SYSPANE_GNOME_SHELL_RECOVERY')):
+        if environment.get('SYSPANE_GNOME_FOCUS_INTEGRATION'):
+            import gnome_focus_integration
+            result['focus_integration'] = gnome_focus_integration.observe(display, environment,
+                Path(environment['HOME']).parent, result['focus_baseline'], result['composition'], pid, marker_trace)
+        if environment.get('SYSPANE_GNOME_INPUT_CONTROL') and not (environment.get('SYSPANE_GNOME_ICON_RECOVERY') or environment.get('SYSPANE_GNOME_SHELL_RECOVERY') or environment.get('SYSPANE_GNOME_FOCUS_INTEGRATION')):
             import gnome_input
             result['icon_input'] = gnome_input.observe(display, environment, pid,
                 Path(environment['HOME']).parent, result['composition'], marker_trace)
@@ -185,7 +190,7 @@ def group_members(group):
     return members
 
 
-def run(build, marker=False, control='live', composition=None, reveal=None, focus_baseline=None, focus_trace=False, icon_input=None, wallpaper=None, switcher=None, icon_recovery=None, shell_recovery=None):
+def run(build, marker=False, control='live', composition=None, reveal=None, focus_baseline=None, focus_trace=False, icon_input=None, wallpaper=None, switcher=None, icon_recovery=None, shell_recovery=None, focus_integration=None):
     # Retain orphaned shell helpers for reaping; no service/session can adopt them.
     if ctypes.CDLL(None, use_errno=True).prctl(36, 1, 0, 0, 0) != 0:
         raise OSError(ctypes.get_errno(), 'cannot retain descendant exit evidence')
@@ -209,6 +214,8 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
         family = 'GNOME-ICON-RECOVERY-01'
     if shell_recovery:
         family = 'GNOME-SHELL-RECOVERY-01'
+    if focus_integration:
+        family = 'GNOME-FOCUS-BASELINE-01'
     with_icons = bool(composition) or focus_baseline == 'ding'
     token = family + '-' + uuid.uuid4().hex
     workspace = build / token
@@ -231,6 +238,7 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
               'switcher_control': switcher,
               'icon_recovery_control': icon_recovery,
               'shell_recovery_control': shell_recovery,
+              'focus_integration_mode': focus_integration,
               'executed_at': datetime.now(timezone.utc).isoformat(),
               'source_base': subprocess.check_output(['git', '-c', 'safe.directory=' + str(ROOT), 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
               'source_inputs': {p: sha(ROOT / p) for p in SOURCES},
@@ -255,6 +263,8 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
         report['qualification'] = 'Selected owned DING exit/replacement, independent live composition and input on the replacement only; shell/compositor replacement, Show Desktop focus and full product qualification remain open.'
     if shell_recovery:
         report['qualification'] = 'Owned GNOME X11 shell/compositor replacement and bridge reattachment only; user session supervision, product continuity, Show Desktop focus and other profiles remain open.'
+    if focus_integration:
+        report['qualification'] = 'Optional event-bound native Show Desktop focus integration and declared guards only; default behavior, broader focus/session cases and complete product qualification remain open.'
     archive = workspace / 'source-inputs.zip'
     with zipfile.ZipFile(archive, 'x', compression=zipfile.ZIP_DEFLATED) as target:
         for name in SOURCES:
@@ -295,6 +305,8 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
             environment['SYSPANE_FOREGROUND_EVENTS'] = str(workspace / 'foreground-events.jsonl')
         if focus_trace:
             environment['MUTTER_DEBUG'] = 'focus,keybindings,window-state'
+        if focus_integration:
+            environment['SYSPANE_GNOME_FOCUS_INTEGRATION'] = focus_integration
         if wallpaper:
             environment['SYSPANE_GNOME_WALLPAPER_CONTROL'] = wallpaper
         if icon_recovery:
@@ -469,7 +481,7 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
                     if result['icon_manager']:
                         report['icon_manager_mapped_files'] = mapped_files(result['icon_manager']['pid'])
                     report['outcome'] = 'pass'
-                if icon_input and not (icon_recovery or shell_recovery):
+                if icon_input and not (icon_recovery or shell_recovery or focus_integration):
                     report['outcome'] = report['observation']['icon_input']['outcome']
                     if report['observation']['icon_input'].get('error'):
                         report['error'] = report['observation']['icon_input']['error']
@@ -486,6 +498,10 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
                     report['outcome'] = report['observation']['shell_recovery']['outcome']
                     if report['observation']['shell_recovery'].get('error'):
                         report['error'] = report['observation']['shell_recovery']['error']
+                if focus_integration:
+                    report['outcome'] = report['observation']['focus_integration']['outcome']
+                    if report['observation']['focus_integration'].get('error'):
+                        report['error'] = report['observation']['focus_integration']['error']
                 break
             if shell.poll() is not None and not (recovery_parent and recovery_parent.armed):
                 raise RuntimeError('shell exited during bootstrap: ' + str(shell.returncode))
@@ -555,6 +571,10 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
                     report[key] = {'path': str(path), 'bytes': path.stat().st_size, 'sha256': sha(path)}
             extension_root = workspace / 'data/gnome-shell/extensions'
             report['enabled_extension_inputs_after'] = inventory(extension_root) if extension_root.exists() else {}
+        if focus_integration:
+            path = workspace/'focus-integration.jsonl'
+            if path.exists():
+                report['focus_integration_journal'] = {'path':str(path),'bytes':path.stat().st_size,'sha256':sha(path)}
         if icon_input:
             path = workspace / 'input.jsonl'
             if path.exists():
@@ -618,9 +638,16 @@ if __name__ == '__main__':
     parser.add_argument('--switcher', choices=('live','ordinary-window','no-switcher'))
     parser.add_argument('--icon-recovery', choices=('live','frozen-surface','no-stop'))
     parser.add_argument('--shell-recovery', choices=('live','no-reattach','no-restart'))
+    parser.add_argument('--focus-integration', choices=('observe','restore'))
     args = parser.parse_args()
     if args.focus_trace and not args.focus_baseline:
         parser.error('--focus-trace requires --focus-baseline')
+    if args.focus_integration and (args.focus_baseline != 'candidate' or args.focus_trace):
+        parser.error('--focus-integration requires the untraced candidate focus baseline')
+    if args.focus_integration:
+        if args.icon_input:
+            parser.error('--focus-integration owns its native input setup')
+        args.icon_input = 'live'
     if args.shell_recovery:
         if args.marker or args.composition or args.reveal or args.focus_baseline or args.focus_trace or args.icon_input or args.wallpaper or args.switcher or args.icon_recovery or args.marker_control != 'live':
             parser.error('--shell-recovery owns the live composition and native input setup')
@@ -639,7 +666,7 @@ if __name__ == '__main__':
         if args.marker or args.composition or args.reveal or args.focus_baseline or args.focus_trace or args.icon_input or args.marker_control != 'live':
             parser.error('--wallpaper owns the live composition prerequisite')
         args.composition = 'live'
-    if args.icon_input and not (args.icon_recovery or args.shell_recovery):
+    if args.icon_input and not (args.icon_recovery or args.shell_recovery or args.focus_integration):
         if args.marker or args.composition or args.reveal or args.focus_baseline or args.focus_trace or args.marker_control != 'live':
             parser.error('--icon-input owns the live composition prerequisite')
         args.composition = 'live'
@@ -657,4 +684,4 @@ if __name__ == '__main__':
         parser.error('composition uses its own above/below controls')
     if not args.marker and args.marker_control != 'live':
         parser.error('--marker-control requires --marker')
-    sys.exit(run(owned_build(args.build_dir), args.marker or bool(args.composition), args.marker_control, args.composition, args.reveal, args.focus_baseline, args.focus_trace, args.icon_input, args.wallpaper, args.switcher, args.icon_recovery, args.shell_recovery))
+    sys.exit(run(owned_build(args.build_dir), args.marker or bool(args.composition), args.marker_control, args.composition, args.reveal, args.focus_baseline, args.focus_trace, args.icon_input, args.wallpaper, args.switcher, args.icon_recovery, args.shell_recovery, args.focus_integration))

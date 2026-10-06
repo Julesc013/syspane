@@ -193,6 +193,16 @@ drawing oracle; omitted restart cannot pass. Forty-five new verifier checks and
 170 regressions pass. Actual session-manager supervision, product continuity,
 wallpaper policy and the separately failed focus-restoration gate remain open.
 
+The [optional GNOME focus integration](gnome-focus-integration-handoff.md) now
+passes the unchanged native Show Desktop focus deadline and actual F9 receipt.
+Observation mode retains the failure. Fifteen native guard steps and the complete
+folder-input sequence verify explicit icon focus, unrelated keys, folder choice,
+minimized-window preservation and callback removal after one-way disable. Forty-four
+new evidence checks pass. The controller uses only the native event-bound public
+focus call and remains disabled by default; broader window/workspace/session cases
+and alternate triggers need qualification before general enablement. Original
+failed evidence remains preserved, and W-02/W-05 remain open.
+
 Use the proposed cold-start exercise to detect missing observable contracts.
 Private implementation differences are permissible. Missing laboratories remain
 blocked qualification. A finite release scope must identify exact profiles,

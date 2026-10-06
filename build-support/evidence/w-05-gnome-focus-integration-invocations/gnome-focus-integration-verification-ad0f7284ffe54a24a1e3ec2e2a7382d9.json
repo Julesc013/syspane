@@ -1,0 +1,47 @@
+[
+  {
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "source_inputs": {
+      "build-support/check_workspace_budget.py": "3a9ec8bf7f4f205e1986d19b523d57b41288936e3343910f80b460d71474b700"
+    },
+    "started_at": "2026-10-06T04:04:34.661574+00:00",
+    "finished_at": "2026-10-06T04:04:36.426196+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 3221225472,\n  \"checkout_out_bytes\": 935047304,\n  \"linux_campaign_bytes\": 1977634889,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "build-support/record_gnome_focus_integration.py",
+      "--build-dir",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13",
+      "--reports",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-FOCUS-BASELINE-01-143842783dc14e29861839fe5f8dd383.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-FOCUS-BASELINE-01-5bff066bd30c47989de753311b6cb46b.json",
+      "--output",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/gnome-focus-integration-calibration-ad0f7284ffe54a24a1e3ec2e2a7382d9.json"
+    ],
+    "source_inputs": {
+      "build-support/record_gnome_focus_integration.py": "b8743bc69445c12be9574cfe02b7a9d6c5a23c6ff8b2969f25aad1cef98dba78"
+    },
+    "started_at": "2026-10-06T04:04:36.426991+00:00",
+    "finished_at": "2026-10-06T04:04:37.722340+00:00",
+    "exit": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/build-support/record_gnome_focus_integration.py\", line 163, in <module>\n    if __name__ == '__main__':main()\n                              ^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/build-support/record_gnome_focus_integration.py\", line 141, in main\n    raw = path.read_bytes(); value = json.loads(raw); results.append(validate(value,build))\n                                                                     ^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/build-support/record_gnome_focus_integration.py\", line 64, in validate\n    if len(clients) != 1 or clients[0]['pid'] != [owner['pid']] or clients[0]['type'] != owner['type']:\n                                                                                         ~~~~~^^^^^^^^\nKeyError: 'type'\n"
+  }
+]

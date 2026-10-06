@@ -1,5 +1,6 @@
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
+import Meta from 'gi://Meta';
 import St from 'gi://St';
 import Clutter from 'gi://Clutter';
 import {Extension} from 'resource:///org/gnome/shell/extensions/extension.js';
@@ -25,6 +26,117 @@ function payload(generation) {
     crc = (crc ^ 0xffffffff) >>> 0;
     bytes.push(crc >>> 24, (crc >>> 16) & 255, (crc >>> 8) & 255, crc & 255);
     return bytes;
+}
+
+class RevealFocusIntegration {
+    constructor(mode) {
+        if (!['observe', 'restore'].includes(mode) || Meta.is_wayland_compositor())
+            throw new Error('Named X11 focus integration mode required');
+        this.mode = mode;
+        this.enabled = true;
+        this.records = [];
+        this.target = null;
+        this.pending = null;
+        this.targetSignals = [];
+        this.settings = new Gio.Settings({schema_id: 'org.gnome.desktop.wm.keybindings'});
+        this.signals = [
+            [global.display, global.display.connect('notify::focus-window', () => this.remember())],
+            [global.workspace_manager, global.workspace_manager.connect('active-workspace-changed', () => this.clear('workspace'))],
+            [global.workspace_manager, global.workspace_manager.connect('showing-desktop-changed', () => this.changed())],
+        ];
+        this.remember();
+    }
+
+    eligible(window) {
+        return window && window.get_window_type() === Meta.WindowType.NORMAL &&
+            !window.minimized && !window.get_transient_for() && window.get_compositor_private() &&
+            window.located_on_workspace(global.workspace_manager.get_active_workspace());
+    }
+
+    record(event, detail = {}) {
+        this.records.push({event, monotonic_us: GLib.get_monotonic_time(), ...detail});
+        if (this.records.length > 256 || JSON.stringify(this.records).length > 65536) {
+            this.disable();
+            throw new Error('Focus integration diagnostic capacity');
+        }
+    }
+
+    clear(reason) {
+        for (const [window, id] of this.targetSignals)
+            window.disconnect(id);
+        this.targetSignals = [];
+        this.target = null;
+        this.pending = null;
+        this.record('clear', {reason});
+    }
+
+    remember() {
+        const window = global.display.get_focus_window();
+        if (!this.eligible(window) || !window.showing_on_its_workspace() || window === this.target)
+            return;
+        this.clear('new-normal-focus');
+        this.target = window;
+        this.targetSignals = ['unmanaging', 'workspace-changed', 'notify::minimized'].map(signal =>
+            [window, window.connect(signal, () => this.clear(signal))]);
+        this.record('remember', {pid: window.get_pid(), sequence: window.get_stable_sequence()});
+    }
+
+    changed() {
+        if (!this.enabled)
+            return;
+        const event = Clutter.get_current_event();
+        const key = event?.type() === Clutter.EventType.KEY_PRESS;
+        const state = key ? event.get_state() : 0;
+        const superMask = Clutter.ModifierType.SUPER_MASK | Clutter.ModifierType.MOD4_MASK;
+        const allowed = superMask | Clutter.ModifierType.LOCK_MASK | Clutter.ModifierType.MOD2_MASK;
+        const symbol = key ? event.get_key_symbol() : 0;
+        const binding = this.settings.get_strv('show-desktop');
+        const eligibleEvent = key && [Clutter.KEY_d, Clutter.KEY_D].includes(symbol) &&
+            (state & superMask) !== 0 && (state & ~allowed) === 0 && event.get_time() !== 0 &&
+            binding.length === 1 && binding[0] === '<Super>d';
+        const window = this.target;
+        const workspace = global.workspace_manager.get_active_workspace();
+        const focus = global.display.get_focus_window();
+        const row = {event_type: event?.type() ?? null, key_symbol: symbol, state,
+            native_time: key ? event.get_time() : 0, eligible_event: Boolean(eligibleEvent),
+            target_pid: window?.get_pid() ?? null, target_sequence: window?.get_stable_sequence() ?? null,
+            focus_pid: focus?.get_pid() ?? null, workspace: workspace.index()};
+        if (!eligibleEvent || !this.eligible(window)) {
+            this.pending = null;
+            this.record('abstain', row);
+            return;
+        }
+        row.showing = window.showing_on_its_workspace();
+        if (!row.showing) {
+            this.pending = {window, workspace};
+            this.record('entry', row);
+            return;
+        }
+        const restore = this.pending?.window === window && this.pending.workspace === workspace &&
+            focus?.get_window_type() === Meta.WindowType.DESKTOP;
+        this.pending = null;
+        if (!restore) {
+            this.record('abstain', row);
+            return;
+        }
+        this.record('restore', {...row, performed: this.mode === 'restore'});
+        if (this.mode === 'restore')
+            window.focus(event.get_time());
+    }
+
+    disable() {
+        if (!this.enabled)
+            return;
+        this.enabled = false;
+        for (const [owner, id] of this.signals)
+            owner.disconnect(id);
+        this.signals = [];
+        for (const [window, id] of this.targetSignals)
+            window.disconnect(id);
+        this.targetSignals = [];
+        this.target = null;
+        this.pending = null;
+    }
 }
 
 export default class LabMarker extends Extension {
@@ -109,6 +221,13 @@ export default class LabMarker extends Extension {
         if (this._control === 'hidden')
             this._actor.hide();
         let interfaceXml = this._composition ? COMPOSITION_INTERFACE : INTERFACE;
+        const integration = GLib.getenv('SYSPANE_GNOME_FOCUS_INTEGRATION');
+        if (integration) {
+            this._focusIntegration = new RevealFocusIntegration(integration);
+            interfaceXml = interfaceXml.replace('</interface>',
+                '<method name="GetFocusTrace"><arg type="s" direction="out" name="trace"/></method>' +
+                '<method name="DisableFocusIntegration"/></interface>');
+        }
         this._recoveryControl = GLib.getenv('SYSPANE_GNOME_ICON_RECOVERY');
         if (this._recoveryControl && !['live', 'frozen-surface', 'no-stop'].includes(this._recoveryControl))
             throw new Error('Unknown icon-recovery control');
@@ -161,7 +280,18 @@ export default class LabMarker extends Extension {
         this._recoveryFrozen = true;
     }
 
+    GetFocusTrace() {
+        return JSON.stringify({version: '0.1.0', mode: this._focusIntegration.mode,
+            enabled: this._focusIntegration.enabled, records: this._focusIntegration.records});
+    }
+
+    DisableFocusIntegration() {
+        this._focusIntegration.disable();
+    }
+
     disable() {
+        this._focusIntegration?.disable();
+        this._focusIntegration = null;
         this._bus?.unexport();
         this._bus = null;
         this._actor?.destroy();

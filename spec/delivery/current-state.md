@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-06T03:00:03Z", "scope": "Named GNOME/DING Alt+Tab and overview dash absence passes with real normal-window and omitted-popup controls"}
+updated: {"by": "codex", "at": "2026-10-06T04:07:41Z", "scope": "Optional event-bound GNOME focus restoration and native interaction guards pass; default and broader qualification remain open"}
 ---
 
 # Current state and next admitted boundary
@@ -255,6 +255,16 @@ regressions pass. The complete outage and initial mutable-cache verifier failure
 remain preserved. User-session supervision, product continuity, wallpaper policy
 and the separate Show Desktop focus failure remain open.
 
+The [optional GNOME focus integration](gnome-focus-integration-handoff.md) now
+passes the unchanged native Show Desktop focus deadline and actual F9 receipt.
+Observation mode retains the failure. Fifteen native guard steps and the complete
+folder-input sequence verify explicit icon focus, unrelated keys, folder choice,
+minimized-window preservation and callback removal after one-way disable. Forty-four
+new evidence checks pass. The controller uses only the native event-bound public
+focus call and remains disabled by default; broader window/workspace/session cases
+and alternate triggers need qualification before general enablement. Original
+failed evidence remains preserved, and W-02/W-05 remain open.
+
 Canonical 0.2.0 documentation bundle, unchanged 0.1 authoring profile, preserved old
 fixtures, new experimental scene/command/capability 0.2 and admission descriptors.
 The initial settings registry has enforced metadata/default consistency and generated
@@ -291,12 +301,12 @@ License, contribution and release-identity decisions remain open.
 
 ## Next work
 
-Continue the admitted campaign: use the calibrated GNOME/DING composition path and
-unchanged external marker oracle to resolve the independently reproduced DING/X11
-foreground-focus failure through a bounded integration contract informed by the
-observed native MRU selection. Continue wallpaper policy, actual session-manager
-supervision and product continuity independently of that
-failure. The named GNOME/DING/PCManFM icon-input experiment now passes; other profiles
+Continue the admitted campaign: extend the optional event-bound GNOME/DING focus
+integration with explicit multi-window/modal, workspace/session and alternate
+reveal-trigger contracts and independent native evidence before general enablement.
+Keep the original oracle and failed default evidence. Continue wallpaper policy,
+actual session-manager supervision and product continuity independently. The named
+GNOME/DING/PCManFM icon-input experiment now passes; other profiles
 need their own evidence. The named single-display PNG preservation experiment now
 passes independently; other image/scaling/topology profiles remain open. The named
 GNOME Alt+Tab/overview dash evidence does not qualify other taskbar profiles.
@@ -304,14 +314,14 @@ Keep earlier X11 failures and failed GNOME fixture/control attempts.
 Close other platform capture/reveal boundaries in admitted
 synthetic desktops. W-04 has build artifacts ready for
 historical guest execution once guest test scope and usability are established.
-W-05's GNOME bridge now preserves the tested icon pixels, but remains unqualified
-after the failed focus restoration. The earlier EWMH window stacking candidates
+W-05's GNOME bridge preserves the tested icon pixels and the optional focus
+integration passes its named guards; the complete host remains unqualified. The
+earlier EWMH window stacking candidates
 still fail composition even after the observed Openbox recovery.
 The named DING restart and owned GNOME shell/compositor replacement now pass with
 replacement-bound input; actual session-manager supervision and product
 renderer/collector continuity remain open.
-Continue other native tracks
-independently of this negative result.
+Continue other native tracks independently of the remaining GNOME qualification.
 W-25's [supervised network checkpoint](network-publication-handoff.md) connects
 real Linux acquisition, source lifetimes and measured receipt under independent
 child supervision. Continue native-host/visible recovery tracks and connect this

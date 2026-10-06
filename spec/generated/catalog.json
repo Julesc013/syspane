@@ -357,7 +357,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "81671f188c8dbaff15b88934d30085db082475c01e024a3364167863be782899"
+      "sha256": "e9bd0a47d7f5dce2340dc9da184fb91847d22518938f7dcffeae3a1c010ada32"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -426,6 +426,19 @@
         "SP-CAMPAIGN-ADMISSION"
       ],
       "sha256": "db3158777322bb7fae694a0b6465f4583b8bfd890ded887bbb5594a03bcd14b9"
+    },
+    {
+      "id": "SP-GNOME-FOCUS-INTEGRATION-HANDOFF",
+      "path": "delivery/gnome-focus-integration-handoff.md",
+      "title": "Optional GNOME focus integration checkpoint",
+      "description": "Native event-bound focus restoration passes the original oracle and declared interaction guards while default behavior remains unchanged.",
+      "requires": [
+        "SP-W05-GNOME-FOCUS-INTEGRATION",
+        "SP-GNOME-SHELL-RECOVERY-HANDOFF",
+        "SP-GNOME-FOCUS-HANDOFF",
+        "SP-CAMPAIGN-ADMISSION"
+      ],
+      "sha256": "ed3f1d75679e23373991c2237e35a4327aab1fc1ed3f41c6fafe18bf9eb794ec"
     },
     {
       "id": "SP-GNOME-FOCUS-TRACE-HANDOFF",
@@ -542,7 +555,7 @@
       "requires": [
         "SP-CURRENT"
       ],
-      "sha256": "287ededa4387f0bdf452bf3e16e71068619a942077a9644b4e721116a418a1e8"
+      "sha256": "c6b9027963616d8daee526f249f65715d814b42e22dd11f0aa6fc8d1c1725adf"
     },
     {
       "id": "SP-MEASURED-TIME-HANDOFF",
@@ -693,6 +706,19 @@
         "SP-DESKTOP"
       ],
       "sha256": "4a415791131a1827e778a0acbb7f03e957527dcfcbbc5a0c2759dc047999a362"
+    },
+    {
+      "id": "SP-W05-GNOME-FOCUS-INTEGRATION",
+      "path": "delivery/packages/w-05-gnome-focus-integration.md",
+      "title": "W-05 bounded native Show Desktop focus integration",
+      "description": "Test event-bound restoration using public shell signals while preserving native key handling and icon focus.",
+      "requires": [
+        "SP-W05-GNOME-FOCUS-TRACE",
+        "SP-W05-GNOME-REVEAL",
+        "SP-W05-GNOME-INPUT",
+        "SP-DESKTOP"
+      ],
+      "sha256": "9d8ef6cf797051d35409bff5d712332525c7b785ca04c9e7a490ccb248475c4d"
     },
     {
       "id": "SP-W05-GNOME-FOCUS-TRACE",
