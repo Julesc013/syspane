@@ -1,0 +1,74 @@
+[
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-06T23:28:50.338905+00:00",
+    "finished_at": "2026-10-06T23:28:51.263745+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 6442450944,\n  \"checkout_out_bytes\": 1896559837,\n  \"linux_campaign_bytes\": 4244640970,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/native_chart_step.py",
+      "linux-x64-gcc13",
+      "build"
+    ],
+    "started_at": "2026-10-06T23:28:51.264334+00:00",
+    "finished_at": "2026-10-06T23:29:04.179791+00:00",
+    "exit": 0,
+    "stdout": "[1/3] Building CXX object CMakeFiles/syspane_scene_surface.dir/source/rendering/scene_surface.cpp.o\n[2/3] Linking CXX static library libsyspane_scene_surface.a\n[3/3] Linking CXX executable syspane_scene_surface_tests\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-09-native-chart/linux-x64-gcc13-build-26b7171a90\n",
+    "stderr": ""
+  },
+  {
+    "step": "focus",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-06T23:29:04.180084+00:00",
+    "finished_at": "2026-10-06T23:29:04.801510+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 6442450944,\n  \"checkout_out_bytes\": 1897817989,\n  \"linux_campaign_bytes\": 4244646948,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "focus",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/native_chart_step.py",
+      "linux-x64-gcc13",
+      "focus"
+    ],
+    "started_at": "2026-10-06T23:29:04.801778+00:00",
+    "finished_at": "2026-10-06T23:29:15.439254+00:00",
+    "exit": 0,
+    "stdout": "Test project /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n      Start   1: native.SCENE-SURFACE\n 1/20 Test   #1: native.SCENE-SURFACE .............   Passed    0.67 sec\n      Start   4: native.SCENE-CHART\n 2/20 Test   #4: native.SCENE-CHART ...............   Passed    0.82 sec\n      Start   5: native.SCENE-TABLE\n 3/20 Test   #5: native.SCENE-TABLE ...............   Passed    1.10 sec\n      Start   9: scene.PLOT-NUMERIC\n 4/20 Test   #9: scene.PLOT-NUMERIC ...............   Passed    0.02 sec\n      Start  10: scene.PLOT-GEOMETRY\n 5/20 Test  #10: scene.PLOT-GEOMETRY ..............   Passed    0.00 sec\n      Start  11: scene.PLOT-RANGES\n 6/20 Test  #11: scene.PLOT-RANGES ................   Passed    0.00 sec\n      Start  12: scene.PLOT-LIMITS\n 7/20 Test  #12: scene.PLOT-LIMITS ................   Passed    0.00 sec\n      Start  13: scene.CHART-LIMITS\n 8/20 Test  #13: scene.CHART-LIMITS ...............   Passed    0.00 sec\n      Start  14: scene.CHART-WINDOW\n 9/20 Test  #14: scene.CHART-WINDOW ...............   Passed    0.00 sec\n      Start  15: scene.CHART-CAPACITY\n10/20 Test  #15: scene.CHART-CAPACITY .............   Passed    0.01 sec\n      Start  16: scene.CHART-REPLAY\n11/20 Test  #16: scene.CHART-REPLAY ...............   Passed    0.00 sec\n      Start  17: scene.CHART-GAPS\n12/20 Test  #17: scene.CHART-GAPS .................   Passed    0.00 sec\n      Start  18: scene.CHART-IDENTITY\n13/20 Test  #18: scene.CHART-IDENTITY .............   Passed    0.00 sec\n      Start  19: scene.CHART-CLOCK\n14/20 Test  #19: scene.CHART-CLOCK ................   Passed    0.00 sec\n      Start  20: scene.CHART-SELECTION\n15/20 Test  #20: scene.CHART-SELECTION ............   Passed    0.00 sec\n      Start  21: scene.CHART-NUMERIC\n16/20 Test  #21: scene.CHART-NUMERIC ..............   Passed    0.00 sec\n      Start  22: scene.CHART-LIFETIME\n17/20 Test  #22: scene.CHART-LIFETIME .............   Passed    0.00 sec\n      Start  23: scene.CHART-WIRE\n18/20 Test  #23: scene.CHART-WIRE .................   Passed    0.01 sec\n      Start 144: composition.graph\n19/20 Test #144: composition.graph ................   Passed    0.08 sec\n      Start 145: composition.reject_forbidden\n20/20 Test #145: composition.reject_forbidden .....   Passed    0.17 sec\n\n100% tests passed, 0 tests failed out of 20\n\nTotal Test time (real) =   2.89 sec\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-09-native-chart/linux-x64-gcc13-focus-298660c3df\n",
+    "stderr": ""
+  }
+]

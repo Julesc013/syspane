@@ -19,7 +19,8 @@ Continue W-09 with the shared sample owner used by the forthcoming native chart
 adapter. Preserve scene 0.3's existing duration, point, interpolation and axis
 fields. This package closes sample retention; it does not enable chart painting,
 choose pixel geometry or claim native accessibility/erasure qualification. Existing
-SceneSurface continues its explicit unsupported alternative until those gates pass.
+SceneSurface retains its explicit unsupported alternative until those gates pass;
+the subsequent [native chart package](w-09-native-chart.md) admits that integration.
 
 ## Admission and identity
 

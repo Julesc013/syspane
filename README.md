@@ -7,15 +7,19 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
-The [chart history checkpoint](spec/delivery/chart-history-handoff.md) implements
+The [native chart checkpoint](spec/delivery/native-chart-handoff.md) connects
+measured history to Linux chart pixels and exact accessible point content. Shared
+geometry preserves large integers, explicit gaps and fixed/auto ranges. Independent
+owned-window tests verify updates and policy erasure; installed editions remain open.
+
+The earlier [chart history checkpoint](spec/delivery/chart-history-handoff.md) implements
 bounded measured samples, exact integer values, explicit gaps and stream resets.
-Native chart geometry, policy-owned retention and accessibility integration remain
-the next rendering boundary; chart drawing is not yet enabled.
+The native chart owner now applies its history-channel permission and lifetime rules.
 
 The [scene content checkpoint](spec/delivery/scene-content-handoff.md) adds versioned
 text bodies, table labels, chart settings and pinned image references. Shared
 validation, negotiated transactions and native recovery preserve those definitions.
-Linux renders the text and labels; chart and image rendering remain required.
+Linux renders the text, labels and charts; image rendering remains required.
 
 The [collection table checkpoint](spec/delivery/table-surface-handoff.md) adds
 ordered columns, stable scoped row identities, visible truncation and measured

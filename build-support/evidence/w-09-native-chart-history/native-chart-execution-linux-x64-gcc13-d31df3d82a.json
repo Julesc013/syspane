@@ -1,0 +1,38 @@
+[
+  {
+    "step": "scalar",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-06T23:32:38.201886+00:00",
+    "finished_at": "2026-10-06T23:32:38.830217+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 6442450944,\n  \"checkout_out_bytes\": 1901610923,\n  \"linux_campaign_bytes\": 4248664059,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "scalar",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/native_chart_step.py",
+      "linux-x64-gcc13",
+      "scalar"
+    ],
+    "started_at": "2026-10-06T23:32:38.830586+00:00",
+    "finished_at": "2026-10-06T23:32:48.852831+00:00",
+    "exit": 0,
+    "stdout": "Test project /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n    Start 2: native.SCENE-ERASURE\n1/1 Test #2: native.SCENE-ERASURE .............   Passed    2.22 sec\n\n100% tests passed, 0 tests failed out of 1\n\nTotal Test time (real) =   2.23 sec\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-09-native-chart/linux-x64-gcc13-scalar-605e1ab302\n",
+    "stderr": ""
+  }
+]

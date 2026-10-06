@@ -2,6 +2,7 @@
 #include "native_text.hpp"
 #include "bindings.hpp"
 #include "content.hpp"
+#include "chart_plot.hpp"
 
 namespace syspane::rendering {
 enum class SurfaceCode { ready,degraded,empty,restricted,alternative,closed };
@@ -42,6 +43,8 @@ struct SurfaceTable {
 struct SurfaceText {
     std::string id,kind,text,accessible;std::vector<std::string> fonts;
     std::optional<SurfaceTable> table;
+    struct Chart {std::string summary;std::size_t samples=0,segments=0;scene::Rect pixels;};
+    std::optional<Chart> chart;
 };
 struct SurfaceFrame {
     scene::Plan layout;
@@ -59,7 +62,8 @@ public:
     SceneSurface& operator=(const SceneSurface&)=delete;
     recovery::DataAttachment attach(const std::string&,const protocol::TelemetryBinding&,std::uint64_t now);
     recovery::DataResult receive(const std::string&,std::uint64_t token,std::uint64_t revision,
-                                std::string_view bytes,std::uint64_t now,const model::Tick&);
+                                std::string_view bytes,std::uint64_t now,const model::Tick&,
+                                const std::map<std::string,model::Tick>& other_ticks={});
     recovery::DataCode heartbeat(const std::string&,std::uint64_t token,std::uint64_t revision,std::uint64_t sequence,std::uint64_t now);
     recovery::DataCode gap(const std::string&,std::uint64_t token,std::uint64_t revision,std::uint64_t now);
     recovery::DataCode disconnect(const std::string&,std::uint64_t token,std::uint64_t revision,std::uint64_t now);

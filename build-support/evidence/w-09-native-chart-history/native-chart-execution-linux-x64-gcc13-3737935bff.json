@@ -1,0 +1,74 @@
+[
+  {
+    "step": "configure",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-06T23:20:11.293298+00:00",
+    "finished_at": "2026-10-06T23:20:18.444370+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 6442450944,\n  \"checkout_out_bytes\": 1885219153,\n  \"linux_campaign_bytes\": 4219489622,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "configure",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/native_chart_step.py",
+      "linux-x64-gcc13",
+      "configure"
+    ],
+    "started_at": "2026-10-06T23:20:18.444913+00:00",
+    "finished_at": "2026-10-06T23:20:32.279996+00:00",
+    "exit": 0,
+    "stdout": "Preset CMake variables:\n\n  BUILD_TESTING=\"ON\"\n  CMAKE_BUILD_TYPE=\"Debug\"\n  CMAKE_CXX_COMPILER=\"g++\"\n  SYSPANE_PROFILE=\"linux-x64-gcc13\"\n\nprofile verified: linux-x64-gcc13\nvendored dependency digests: pass\ndiagnostic toolkit verified: GTK 3.24.41 / Ubuntu 3.24.41-4ubuntu1.3\nnative text dependency identity verified: 358 files\nnative GJS clock build dependencies verified\n-- Configuring done (5.7s)\n-- Generating done (0.0s)\n-- Build files have been written to: /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-09-native-chart/linux-x64-gcc13-configure-4f96d7a83b\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-06T23:20:32.280309+00:00",
+    "finished_at": "2026-10-06T23:20:32.912724+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 6442450944,\n  \"checkout_out_bytes\": 1886475608,\n  \"linux_campaign_bytes\": 4219495287,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/native_chart_step.py",
+      "linux-x64-gcc13",
+      "build"
+    ],
+    "started_at": "2026-10-06T23:20:32.913013+00:00",
+    "finished_at": "2026-10-06T23:20:46.691573+00:00",
+    "exit": 1,
+    "stdout": "[1/9] Building CXX object CMakeFiles/syspane_scene_surface.dir/source/rendering/scene_chart.cpp.o\nFAILED: CMakeFiles/syspane_scene_surface.dir/source/rendering/scene_chart.cpp.o \n/usr/bin/g++ -DJSON_DIAGNOSTICS=0 -DJSON_DIAGNOSTIC_POSITIONS=1 -I/mnt/d/Projects/SysPane/syspane/source/rendering -I/mnt/d/Projects/SysPane/syspane/source/scene -I/mnt/d/Projects/SysPane/syspane/source/configuration -I/mnt/d/Projects/SysPane/syspane/source/protocol -I/mnt/d/Projects/SysPane/syspane/source/diagnostics -I/mnt/d/Projects/SysPane/syspane/source/model -isystem /mnt/d/Projects/SysPane/syspane/source/third_party -g -std=c++17 -Wall -Wextra -Wpedantic -Werror -march=x86-64 -mtune=generic -MD -MT CMakeFiles/syspane_scene_surface.dir/source/rendering/scene_chart.cpp.o -MF CMakeFiles/syspane_scene_surface.dir/source/rendering/scene_chart.cpp.o.d -o CMakeFiles/syspane_scene_surface.dir/source/rendering/scene_chart.cpp.o -c /mnt/d/Projects/SysPane/syspane/source/rendering/scene_chart.cpp\n/mnt/d/Projects/SysPane/syspane/source/rendering/scene_chart.cpp: In function \u2018std::array<unsigned int, 4> syspane::rendering::{anonymous}::color(const std::string&)\u2019:\n/mnt/d/Projects/SysPane/syspane/source/rendering/scene_chart.cpp:12:5: error: this \u2018for\u2019 clause does not guard... [-Werror=misleading-indentation]\n   12 |     for(unsigned i=0;i<3;++i)c[i]=(c[i]*c[3]+127)/255;return c;}\n      |     ^~~\n/mnt/d/Projects/SysPane/syspane/source/rendering/scene_chart.cpp:12:55: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the \u2018for\u2019\n   12 |     for(unsigned i=0;i<3;++i)c[i]=(c[i]*c[3]+127)/255;return c;}\n      |                                                       ^~~~~~\ncc1plus: all warnings being treated as errors\n[2/9] Building CXX object CMakeFiles/syspane_scene_surface.dir/source/rendering/scene_table.cpp.o\n[3/9] Building CXX object CMakeFiles/syspane_scene_surface.dir/source/rendering/scene_surface.cpp.o\nFAILED: CMakeFiles/syspane_scene_surface.dir/source/rendering/scene_surface.cpp.o \n/usr/bin/g++ -DJSON_DIAGNOSTICS=0 -DJSON_DIAGNOSTIC_POSITIONS=1 -I/mnt/d/Projects/SysPane/syspane/source/rendering -I/mnt/d/Projects/SysPane/syspane/source/scene -I/mnt/d/Projects/SysPane/syspane/source/configuration -I/mnt/d/Projects/SysPane/syspane/source/protocol -I/mnt/d/Projects/SysPane/syspane/source/diagnostics -I/mnt/d/Projects/SysPane/syspane/source/model -isystem /mnt/d/Projects/SysPane/syspane/source/third_party -g -std=c++17 -Wall -Wextra -Wpedantic -Werror -march=x86-64 -mtune=generic -MD -MT CMakeFiles/syspane_scene_surface.dir/source/rendering/scene_surface.cpp.o -MF CMakeFiles/syspane_scene_surface.dir/source/rendering/scene_surface.cpp.o.d -o CMakeFiles/syspane_scene_surface.dir/source/rendering/scene_surface.cpp.o -c /mnt/d/Projects/SysPane/syspane/source/rendering/scene_surface.cpp\n/mnt/d/Projects/SysPane/syspane/source/rendering/scene_surface.cpp: In member function \u2018bool syspane::rendering::SceneSurface::Impl::uses(const syspane::protocol::Json&, const std::string&)\u2019:\n/mnt/d/Projects/SysPane/syspane/source/rendering/scene_surface.cpp:117:9: error: this \u2018if\u2019 clause does not guard... [-Werror=misleading-indentation]\n  117 |         if(b[\"kind\"]==\"unresolved_pin\")return false;const auto& d=entry(producer).declaration;\n      |         ^~\n/mnt/d/Projects/SysPane/syspane/source/rendering/scene_surface.cpp:117:53: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the \u2018if\u2019\n  117 |         if(b[\"kind\"]==\"unresolved_pin\")return false;const auto& d=entry(producer).declaration;\n      |                                                     ^~~~~\n/mnt/d/Projects/SysPane/syspane/source/rendering/scene_surface.cpp: In member function \u2018syspane::recovery::DataAttachment syspane::rendering::SceneSurface::attach(const std::string&, const syspane::protocol::TelemetryBinding&, uint64_t)\u2019:\n/mnt/d/Projects/SysPane/syspane/source/rendering/scene_surface.cpp:223:5: error: this \u2018if\u2019 clause does not guard... [-Werror=misleading-indentation]\n  223 |     if(result.code==r::DataCode::accepted)i.discontinuity(producer,true);return result;\n      |     ^~\n/mnt/d/Projects/SysPane/syspane/source/rendering/scene_surface.cpp:223:74: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the \u2018if\u2019\n  223 |     if(result.code==r::DataCode::accepted)i.discontinuity(producer,true);return result;\n      |                                                                          ^~~~~~\ncc1plus: all warnings being treated as errors\n[4/9] Building CXX object CMakeFiles/syspane_scene_surface_tests.dir/tests/scene/surface_tests.cpp.o\nninja: build stopped: subcommand failed.\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-09-native-chart/linux-x64-gcc13-build-baf7fcd47a\n",
+    "stderr": ""
+  }
+]

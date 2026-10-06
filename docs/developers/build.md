@@ -1,5 +1,29 @@
 # Developer setup and checks
 
+The [native chart package](../../spec/delivery/packages/w-09-native-chart.md)
+connects scene 0.3 charts to the Linux SceneSurface. Grant operational disclosure
+on `history` as well as desktop/accessibility. `receive` takes an optional map of
+current ticks for other providers; supply the complete context relevant to any
+affected selector. Its mandatory receiving-provider tick takes precedence. Samples
+are captured before receive returns, not merely when painting. Unrelated producers
+do not clear a direct chart; incomplete relevant selector context clears history
+and reports Waiting. Policy changes require fresh attachment/full state.
+
+`scene::plot_chart` uses exact finite-number ratios and a bounded union of integer
+line coverage; no uint64-to-double conversion or sample downsampling occurs. Axis,
+window, clipping, gap and capacity facts are visible. Accessible content includes
+every retained point and its original generation. Initial graph size is 320 by
+120 DIP plus readable text; normal scene overflow and budget rules apply. Full
+native accessibility navigation and installed producer/editor integration remain.
+
+After workspace preflight/configure/build, run `ctest --preset <profile> -R
+'^scene[.]PLOT-' --output-on-failure`. The fixed numeric cases can be independently
+verified with `python tests/scene/chart_plot_oracle.py --check`. Linux adds
+`native.SCENE-CHART` component families and `native.CHART-ERASURE` external pixels
+and AT-SPI names. The latter uses the same owned Xvfb/private D-Bus runner and
+deliberate erasure faults as the existing scalar/table/content experiments. Preserve
+their original checks with `-R '^native[.](SCENE-ERASURE|TABLE-ERASURE|CONTENT-ERASURE|CHART-ERASURE)$'`.
+
 The [chart history package](../../spec/delivery/packages/w-09-chart-history.md)
 adds `scene::ChartHistory` to the existing portable scene component. Construct
 one per unchanged chart binding, using validated window_ms/max_points. Feed each
@@ -15,10 +39,8 @@ After ordinary preflight/configure/build, run `ctest --preset <profile> -R
 admission and three samples delivered before painting. Regression selection is
 `'^(scene[.]|composition[.]|legacy[.]|native[.]SCENE-(SURFACE|TABLE)$)'` on each
 development profile. These are affected-component checks, not a full release suite.
-The native owner must separately authorize history-channel retention and clear on
-policy/resource/binding/lifetime changes. Native aggregate ownership, every-event
-clock context, pixels and accessibility remain integration gates; SceneSurface
-still returns its explicit unsupported alternative for charts.
+The native chart owner now authorizes history-channel retention and clears on
+policy/resource/binding/lifetime changes. The shared class itself grants no authority.
 
 The [scene-content package](../../spec/delivery/packages/w-09-scene-content.md)
 adds scene 0.3 and resource-bound command 0.4. Use `upgrade_scene_content` explicitly;
@@ -33,8 +55,8 @@ configuration.SCENE-CONTENT --output-on-failure` runs six shared families. Linux
 also runs `native.SCENE-CONTENT` (owned ext4 crash/recovery) and
 `native.CONTENT-ERASURE` (owned Xvfb pixels and AT-SPI names with fault controls).
 The former deliberately uses opaque media bytes and does not qualify a decoder.
-The renderer consumes text bodies and column labels; images/charts still select
-the explicit unsupported whole-scene alternative.
+The renderer consumes text bodies, column labels and scene 0.3 chart content;
+images and legacy charts still select the explicit unsupported whole-scene alternative.
 
 The [table package](../../spec/delivery/packages/w-09-table-surface.md) extends
 SceneSurface with table widgets. Supply ordered collection selectors that differ

@@ -19,7 +19,8 @@ Continue W-09 by composing existing scene 0.2, bindings, immutable resources and
 native text. This package admits an initial scalar presentation capability, not a
 complete edition. The subsequent [table package](w-09-table-surface.md) admits
 collection tables through this owner. Preserve valid unsupported documents.
-Charts, images, other collection-valued widgets and richer text content require their missing contracts
+The later [native chart package](w-09-native-chart.md) admits bounded chart history
+and drawing through this owner. Images, other collection-valued widgets and richer text content require their missing contracts
 and implementations; return an explicit whole-scene alternative, never silently
 omit them or invent content in extensions.
 
@@ -114,8 +115,10 @@ Time is monotonic milliseconds supplied by the serialized native owner. Regressi
 closes and erases; no wrap/rebase. Native drawing obtains a new tick at execution
 time, not queue time. The owned GTK laboratory repaints at 50 ms cadence so source
 expiry becomes visible; installed scheduling/suspend recovery remain unqualified.
-Owner close and destruction clear before native widget teardown. No history, disk
-cache, clipboard, export or operational-value logging is enabled.
+Owner close and destruction clear before native widget teardown. This initial
+scalar capability enables no history, disk cache, clipboard, export or operational-value
+logging. The later chart package adds bounded volatile history under explicit
+history-channel permission and the same erasure owner; it does not enable disk history.
 
 ## Native experiment and acceptance
 

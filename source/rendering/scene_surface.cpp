@@ -1,5 +1,6 @@
 #include "scene_surface.hpp"
 #include "scene_table.hpp"
+#include "scene_chart.hpp"
 #include <algorithm>
 #include <cmath>
 #include <limits>
@@ -87,25 +88,60 @@ void validate(const SurfaceConfig& cfg){
 }
 struct SceneSurface::Impl {
     struct Entry {SurfaceProvider declaration;std::unique_ptr<r::DataView> view;};
+    struct History {std::unique_ptr<s::ChartHistory> samples;std::optional<s::ChartCode> fault;};
     c::Authority authority;c::Policy policy;SurfaceConfig config;std::vector<Entry> entries;
     std::function<bool()> clear;std::unique_ptr<SurfaceFrame> frame;SurfaceStatus status;
     std::optional<std::uint64_t> highest,last_time;bool busy=false,closed=false;
+    std::map<std::string,History> histories;
     void owner()const{if(busy)throw std::logic_error("surface.reentrant");}
     bool erase(){
         frame.reset();status.widgets=status.pixels=0;
         if(closed)return false;
         bool ok=false;
         try{Busy guard(busy);ok=clear();}catch(...){ok=false;}
-        if(!ok){closed=true;entries.clear();status={SurfaceCode::closed,0,0,"surface.clear"};}
+        if(!ok){closed=true;histories.clear();entries.clear();status={SurfaceCode::closed,0,0,"surface.clear"};}
         else status={SurfaceCode::empty,0,0,{}};
         return ok;
     }
-    void shut(const char* why){erase();closed=true;entries.clear();status={SurfaceCode::closed,0,0,why};}
+    void shut(const char* why){histories.clear();erase();closed=true;entries.clear();status={SurfaceCode::closed,0,0,why};}
     bool advance(std::uint64_t now){owner();if(closed)return false;if(last_time&&now<*last_time){shut("surface.clock");return false;}last_time=now;return true;}
-    bool start(std::uint64_t now){return advance(now)&&erase();}
+    bool start(std::uint64_t now){if(!advance(now)||!erase())return false;
+        for(auto& e:entries){const auto state=e.view->status(now);if(state.presentation==r::Presentation::retained||state.snapshot_required)discontinuity(e.declaration.producer,false);}
+        return true;}
     Entry& entry(const std::string& id){for(auto& e:entries)if(e.declaration.producer==id)return e;throw Error("surface.producer");}
+    bool charted()const{for(const auto& w:config.authored.scene["widgets"])if(w["kind"]=="chart"&&w.contains("content"))return true;return false;}
     bool allowed()const{return policy.available&&!policy.denied_capabilities.count("telemetry.subscribe")&&
-        c::permits(authority,policy,"desktop","operational")&&c::permits(authority,policy,"accessibility","operational");}
+        c::permits(authority,policy,"desktop","operational")&&c::permits(authority,policy,"accessibility","operational")&&
+        (!charted()||c::permits(authority,policy,"history","operational"));}
+    bool uses(const Json& w,const std::string& producer){const auto& b=w["bindings"][0];if(b["kind"]=="direct")return b["producer_id"]==producer;
+        if(b["kind"]=="unresolved_pin")return false;
+        const auto& d=entry(producer).declaration;
+        if(!d.types.count(b["entity_type"].get<std::string>())||b["scope"]["kind"]!=d.scope.kind)return false;
+        return d.scope.kind!="registered_asset"||b["scope"]["asset_id"]==d.scope.asset;}
+    void discontinuity(const std::string& producer,bool reset,std::optional<s::ChartCode> fault={}){
+        for(const auto& w:config.authored.scene["widgets"])if(w["kind"]=="chart"){
+            const auto found=histories.find(w["id"]);if(found==histories.end()||!uses(w,producer))continue;
+            if(reset){found->second.samples->clear();found->second.fault=fault;}else found->second.samples->gap();}}
+    void prepare_histories(){
+        need(allowed(),"policy.denied");c::authorize_resources(*config.resources,policy,config.capabilities);
+        std::size_t count=0,points=0;for(const auto& w:config.authored.scene["widgets"])if(w["kind"]=="chart"){
+            need(w.contains("content"),"surface.unsupported");++count;points+=w["content"]["max_points"].get<std::size_t>();}
+        need(count<=32&&points<=16384,"surface.capacity");
+        for(const auto& w:config.authored.scene["widgets"])if(w["kind"]=="chart"&&!histories.count(w["id"])){
+            histories.emplace(w["id"].get<std::string>(),History{std::make_unique<s::ChartHistory>(w["content"]["window_ms"].get<std::uint64_t>(),w["content"]["max_points"].get<std::size_t>()),{}});}
+    }
+    void observe_chart(const Json& w,const s::BindingFrame& f,const std::map<std::string,m::Tick>& ticks,const std::function<void(const s::ChartView&)>& sink){
+        auto& h=histories.at(w["id"].get<std::string>());std::optional<m::Tick> now;
+        if(f.rows.size()==1){const auto found=ticks.find(f.rows[0].producer);if(found!=ticks.end())now=found->second;}
+        if(h.fault){s::BindingFrame empty;h.samples->observe(empty,{},[&](auto v){v.code=*h.fault;sink(v);});}
+        else h.samples->observe(f,now,sink);
+    }
+    void feed(const std::string& producer,std::uint64_t now,const std::map<std::string,m::Tick>& ticks){
+        if(!charted())return;
+        try{prepare_histories();const auto catalog=inputs(ticks);
+            for(const auto& w:config.authored.scene["widgets"])if(w["kind"]=="chart"&&uses(w,producer))s::project_binding(w["bindings"][0],catalog,now,[&](const auto& f){observe_chart(w,f,ticks,[](const auto&){});});}
+        catch(const Error&){histories.clear();}catch(const std::bad_alloc&){histories.clear();}
+    }
     std::vector<s::BindingInput> inputs(const std::map<std::string,m::Tick>& ticks){
         std::vector<s::BindingInput> in;
         for(auto& e:entries){const auto& d=e.declaration;s::BindingInput v;v.view=e.view.get();v.producer=d.producer;v.scope=d.scope;
@@ -113,10 +149,10 @@ struct SceneSurface::Impl {
         return in;
     }
     std::unique_ptr<SurfaceFrame> compose(std::uint64_t now,const std::map<std::string,m::Tick>& ticks){
-        c::authorize_resources(*config.resources,policy,config.capabilities);
+        prepare_histories();
         if(policy.forced.count("display.theme_id"))need(policy.forced.at("display.theme_id")==config.resources->theme()["theme_id"],"surface.theme_policy");
         auto next=std::make_unique<SurfaceFrame>();next->theme_pin=config.resources->theme_pin();
-        std::size_t display_pixels=0,leaf_pixels=0,text_bytes=0,queries=0;
+        std::size_t display_pixels=0,leaf_pixels=0,text_bytes=0,queries=0,plot_work=0;
         for(const auto& d:config.topology.displays){
             const auto pixels=[&](s::Unit u){return (u*d.scale_numerator+64*d.scale_denominator-1)/(64*d.scale_denominator);};
             const auto w=pixels(d.bounds.width),h=pixels(d.bounds.height);need(w<=2048&&h<=2048,"surface.capacity");
@@ -125,25 +161,30 @@ struct SceneSurface::Impl {
         }
         const auto catalog=inputs(ticks);std::map<std::string,TextRaster> rasters;std::map<std::string,s::Metrics> metrics;std::map<std::string,SurfaceText> texts;
         for(const auto& w:config.authored.scene["widgets"]){
-            const auto kind=w["kind"].get<std::string>();const bool bound=kind=="value"||kind=="status";
+            const auto kind=w["kind"].get<std::string>();const bool chart=kind=="chart",bound=kind=="value"||kind=="status"||chart;
             const bool table=kind=="table";
             need(bound||table||kind=="text"||kind=="group","surface.unsupported");
             if(!table)need(w["bindings"].size()==(bound?1u:0u),"surface.unsupported");
             queries+=w["bindings"].size();need(queries<=256,"surface.capacity");
-            SurfaceText out;
+            SurfaceText out;std::optional<s::ChartPlot> plot;
             if(table){out=compose_table(w,catalog,now,[](const s::BindingRow& row){
                     s::BindingFrame frame;frame.code=s::BindingCode::matched;frame.rows.push_back(row);
                     const auto cell=text({{"id","cell"},{"kind","value"},{"title",""}},&frame);
                     return SurfaceCell{cell.text.substr(1),cell.accessible.substr(1),{}};
                 });
             }else if(bound){const auto& b=w["bindings"][0];need(b["kind"]!="selector"||b["mode"]=="singleton","surface.unsupported");
-                s::project_binding(b,catalog,now,[&](const auto& f){out=text(w,&f);});
+                s::project_binding(b,catalog,now,[&](const auto& f){out=text(w,&f);
+                    if(chart){const auto& d=display_for(w,config.topology);const auto width=(320*d.scale_numerator+d.scale_denominator-1)/d.scale_denominator;
+                        const auto height=(120*d.scale_numerator+d.scale_denominator-1)/d.scale_denominator;
+                        need(static_cast<std::size_t>(width)*height<8388608-display_pixels-leaf_pixels,"surface.capacity");
+                        observe_chart(w,f,ticks,[&](const auto& view){plot=compose_chart(w,out,view,f.rows.size()==1?f.rows[0].observation.unit:std::string(),width,height,4194304-plot_work);});plot_work+=plot->work;}
+                });
             }else out=text(w,nullptr);
             text_bytes+=surface_text_bytes(out);need(text_bytes<=262144,"surface.capacity");
             if(kind!="group"){
                 const auto& d=display_for(w,config.topology);TextRequest q;q.text=out.text;q.theme=config.resources->theme();q.language=config.language;q.contrast=config.contrast;
                 q.numerator=d.scale_numerator;q.denominator=d.scale_denominator;q.pixel_budget=std::min(std::size_t{4194304},8388608-display_pixels-leaf_pixels);
-                need(q.pixel_budget>0,"surface.capacity");auto raster=table?raster_table(q,out,8388608-display_pixels-leaf_pixels):render_text(q);need(!raster.missing_glyphs,"surface.glyphs");
+                need(q.pixel_budget>0,"surface.capacity");auto raster=chart?raster_chart(q,out,*plot,8388608-display_pixels-leaf_pixels):table?raster_table(q,out,8388608-display_pixels-leaf_pixels):render_text(q);need(!raster.missing_glyphs,"surface.glyphs");
                 leaf_pixels+=static_cast<std::size_t>(raster.width)*raster.height;out.fonts=raster.fonts;
                 for(const auto& family:out.fonts){text_bytes+=family.size();}
                 need(text_bytes<=262144,"surface.capacity");
@@ -179,37 +220,43 @@ SceneSurface::SceneSurface(c::Authority authority,c::Policy policy,SurfaceConfig
 }
 SceneSurface::~SceneSurface(){try{close();}catch(...){}}
 r::DataAttachment SceneSurface::attach(const std::string& producer,const protocol::TelemetryBinding& binding,std::uint64_t now){
-    auto& i=*impl_;if(!i.start(now))return {r::DataCode::closed};need(producer==binding.producer,"surface.producer");return i.entry(producer).view->attach_wire(binding,now);
+    auto& i=*impl_;if(!i.start(now))return {r::DataCode::closed};need(producer==binding.producer,"surface.producer");const auto result=i.entry(producer).view->attach_wire(binding,now);
+    if(result.code==r::DataCode::accepted)i.discontinuity(producer,true);
+    return result;
 }
-r::DataResult SceneSurface::receive(const std::string& producer,std::uint64_t token,std::uint64_t revision,std::string_view bytes,std::uint64_t now,const m::Tick& tick){
-    auto& i=*impl_;if(!i.start(now))return {r::DataCode::closed};return i.entry(producer).view->receive(token,revision,bytes,now,tick);
+r::DataResult SceneSurface::receive(const std::string& producer,std::uint64_t token,std::uint64_t revision,std::string_view bytes,std::uint64_t now,const m::Tick& tick,const std::map<std::string,m::Tick>& other_ticks){
+    auto& i=*impl_;if(!i.start(now))return {r::DataCode::closed};const auto result=i.entry(producer).view->receive(token,revision,bytes,now,tick);
+    if(result.code==r::DataCode::accepted||result.code==r::DataCode::duplicate){auto ticks=other_ticks;ticks[producer]=tick;i.feed(producer,now,ticks);}
+    else if(result.code==r::DataCode::clock_fault)i.discontinuity(producer,true,s::ChartCode::clock_fault);
+    else if(result.code!=r::DataCode::stale_attachment&&result.code!=r::DataCode::policy_changed)i.discontinuity(producer,false);
+    return result;
 }
 r::DataCode SceneSurface::heartbeat(const std::string& producer,std::uint64_t token,std::uint64_t revision,std::uint64_t sequence,std::uint64_t now){
     auto& i=*impl_;if(!i.start(now))return r::DataCode::closed;return i.entry(producer).view->heartbeat(token,revision,sequence,now);
 }
-r::DataCode SceneSurface::gap(const std::string& producer,std::uint64_t token,std::uint64_t revision,std::uint64_t now){auto& i=*impl_;if(!i.start(now))return r::DataCode::closed;return i.entry(producer).view->gap(token,revision,now);}
-r::DataCode SceneSurface::disconnect(const std::string& producer,std::uint64_t token,std::uint64_t revision,std::uint64_t now){auto& i=*impl_;if(!i.start(now))return r::DataCode::closed;return i.entry(producer).view->disconnect(token,revision,now);}
+r::DataCode SceneSurface::gap(const std::string& producer,std::uint64_t token,std::uint64_t revision,std::uint64_t now){auto& i=*impl_;if(!i.start(now))return r::DataCode::closed;const auto code=i.entry(producer).view->gap(token,revision,now);if(code==r::DataCode::accepted)i.discontinuity(producer,false);return code;}
+r::DataCode SceneSurface::disconnect(const std::string& producer,std::uint64_t token,std::uint64_t revision,std::uint64_t now){auto& i=*impl_;if(!i.start(now))return r::DataCode::closed;const auto code=i.entry(producer).view->disconnect(token,revision,now);if(code==r::DataCode::accepted)i.discontinuity(producer,false);return code;}
 void SceneSurface::policy(c::Policy next,std::uint64_t now){
-    auto& i=*impl_;if(!i.start(now))return;const bool valid=!next.available||!i.highest||next.revision>*i.highest;
+    auto& i=*impl_;if(!i.start(now))return;i.histories.clear();const bool valid=!next.available||!i.highest||next.revision>*i.highest;
     if(next.available&&valid)i.highest=next.revision;
     if(!valid)next.available=false;
     for(auto& e:i.entries)e.view->policy(next,now);
     i.policy=std::move(next);i.status.code=i.allowed()?SurfaceCode::empty:SurfaceCode::restricted;
 }
-void SceneSurface::replace(SurfaceConfig config,std::uint64_t now){auto& i=*impl_;if(!i.start(now))return;validate(config);i.config=std::move(config);}
+void SceneSurface::replace(SurfaceConfig config,std::uint64_t now){auto& i=*impl_;if(!i.start(now))return;i.histories.clear();validate(config);i.config=std::move(config);}
 void SceneSurface::close(){auto& i=*impl_;i.owner();if(!i.closed)i.shut("surface.closed");}
 SurfaceStatus SceneSurface::status()const{impl_->owner();return impl_->status;}
 void SceneSurface::paint(std::uint64_t now,const std::map<std::string,m::Tick>& ticks,const std::function<void(SurfaceCode,const SurfaceFrame*)>& sink){
     auto& i=*impl_;i.owner();need(static_cast<bool>(sink),"surface.sink");
     if(i.start(now)){
-        if(!i.allowed())i.status={SurfaceCode::restricted,0,0,"policy.denied"};
+        if(!i.allowed()){i.histories.clear();i.status={SurfaceCode::restricted,0,0,"policy.denied"};}
         else if(!(i.policy.forced.count("display.enabled")?i.policy.forced.at("display.enabled")==true:
                   i.config.authored.settings["display"]["enabled"].get<bool>()))i.status={SurfaceCode::empty,0,0,{}};
         else try{
             i.frame=i.compose(now,ticks);i.status.code=i.frame->layout.state==s::State::ready?SurfaceCode::ready:SurfaceCode::degraded;
             i.status.widgets=i.frame->widgets.size();for(const auto& d:i.frame->displays)i.status.pixels+=static_cast<std::size_t>(d.width)*d.height;
-        }catch(const Error& e){i.frame.reset();i.status={std::string(e.what())=="policy.denied"?SurfaceCode::restricted:SurfaceCode::alternative,0,0,e.what()};}
-        catch(const std::bad_alloc&){i.frame.reset();i.status={SurfaceCode::alternative,0,0,"surface.capacity"};}
+        }catch(const Error& e){i.histories.clear();i.frame.reset();i.status={std::string(e.what())=="policy.denied"?SurfaceCode::restricted:SurfaceCode::alternative,0,0,e.what()};}
+        catch(const std::bad_alloc&){i.histories.clear();i.frame.reset();i.status={SurfaceCode::alternative,0,0,"surface.capacity"};}
     }
     Busy guard(i.busy);sink(i.status.code,i.frame.get());
 }

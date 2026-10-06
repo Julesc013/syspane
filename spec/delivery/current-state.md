@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-06T23:04:14Z", "scope": "Bounded measured chart history and native integration gates"}
+updated: {"by": "codex", "at": "2026-10-06T23:33:59Z", "scope": "Native chart geometry, history policy and external verification"}
 ---
 
 # Current state and next admitted boundary
@@ -22,26 +22,34 @@ The active objective is now the [complete 0.1.0 release](release-0.1.0.md) for W
 required but is no longer the final completion boundary. Legacy version/architecture
 floors, native labs and complete desktop/package evidence remain unresolved.
 
-The latest [chart history checkpoint](chart-history-handoff.md) implements bounded
+The latest [native chart checkpoint](native-chart-handoff.md) adds exact portable
+numeric geometry and Linux chart rendering through the current-policy scene owner.
+Every relevant admitted publication feeds bounded history; missing selector clocks,
+gaps, conflicts and truncation remain explicit. Owned X11 pixels and exact AT-SPI
+point content verify updates and revocation with deliberate fault controls. Image
+decoding, full native accessibility/editor/installed ownership and all editions remain.
+
+The earlier [chart history checkpoint](chart-history-handoff.md) implements bounded
 measured windows, exact numeric samples, explicit continuity breaks, stream resets
 and latched chronology conflicts in the shared scene component. Every-publication
-wire ingestion is executable. Native axis/pixel/accessibility and policy-owned
-history integration remain the next boundary; no chart drawing is enabled yet.
+wire ingestion is executable; the native chart owner now composes that component
+with geometry, rendering and history-channel erasure.
 
-The latest [scene content checkpoint](scene-content-handoff.md) adds scene 0.3 and
+The earlier [scene content checkpoint](scene-content-handoff.md) adds scene 0.3 and
 command 0.4 with explicit text bodies, table labels, chart settings and image pins.
 Shared validation/migration, negotiated transactions and native coherent recovery
 preserve exact content and resource identities. Native text/label presentation
-remains policy-owned; chart sampling and image decoding/rendering are the next
-bounded implementation contracts. Full editions and platform qualification remain open.
+remains policy-owned; chart sampling/rendering now has the checkpoint above, while
+image decoding/rendering remains the next bounded contract. Full editions and
+platform qualification remain open.
 
 The earlier [table surface checkpoint](table-surface-handoff.md) adds ordered
 collection columns, exact scoped row identity, visible truncation, missing-cell
 semantics and a bounded native grid. Independent owned-window checks compare
 every table cell's pixels and accessible content through replacement, source loss,
 policy revocation and fresh reattachment, including deliberate erasure faults.
-Charts, images, richer formatting, full native accessibility and installed
-desktop/editor integration remain open.
+Images, richer formatting, full native accessibility and installed desktop/editor
+integration remain open; the latest checkpoint adds initial native charts.
 
 The earlier [scalar scene surface checkpoint](scene-surface-handoff.md) composes
 authored text/value/status widgets and groups with pinned resources, real native

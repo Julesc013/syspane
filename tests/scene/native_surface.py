@@ -22,7 +22,7 @@ from native_text import THEME
 
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 
-def observe(exe,text_probe,folder,mode,table=False,content=False):
+def observe(exe,text_probe,folder,mode,table=False,content=False,chart=False):
     import gi
     gi.require_version('Atspi','2.0')
     from gi.repository import Atspi,GLib
@@ -32,7 +32,7 @@ def observe(exe,text_probe,folder,mode,table=False,content=False):
                 oracle_sha256=sha(Path(__file__)),runtime_identity_sha256=sha(ROOT/'build-support/text-runtime.json'))
     report['surface_runtime_sha256']=sha(ROOT/'build-support/surface-runtime.json')
     err=(folder/'stderr').open('wb')
-    proc=subprocess.Popen([str(exe),str(ROOT/'spec/fixtures/valid'),'WINDOW',('content-' if content else 'table-' if table else '')+mode],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=err)
+    proc=subprocess.Popen([str(exe),str(ROOT/'spec/fixtures/valid'),'WINDOW',('chart-' if chart else 'content-' if content else 'table-' if table else '')+mode],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=err)
     display=None;sequence=0;last_ack=None
     def read():
         assert select.select([proc.stdout],[],[],5)[0], 'native reply timeout'
@@ -79,6 +79,37 @@ def observe(exe,text_probe,folder,mode,table=False,content=False):
         return bytes(image)
     def view(number=None,retained=False):
         status='Retained' if retained else 'Current'
+        if chart:
+            # Fixed independent input/output trace. Never ask the plotter for expected coordinates.
+            samples={123:[(0,10,1,0,107),(500000000,90,2,160,12),(1000000000,10,3,319,107)],
+                     987:[(500000000,90,2,0,12),(1000000000,10,3,160,107),(1500000000,50,4,319,59)],
+                     456:[(2000000000,80,1,319,24)],None:[]}[number]
+            scalar='Receive\nWaiting' if number is None else f'Receive\n{samples[-1][1]} byte\n{status}'
+            summary=f'Samples {len(samples)} | Segments {int(bool(samples))}'
+            if retained or number is None:summary+=' | Gap pending'
+            summary+='\nRange 0.0 .. 100.0'+(' byte' if number is not None else '')+'\nWindow 1000 ms | linear'
+            label=scalar
+            if number is not None:label+=f'\nsupport=supported; acquisition=success; presence=present; freshness=current; origin=observed; lease={"retained" if retained else "active"}; age=dynamic ns'
+            label+='\n'+summary
+            for i,(ns,value,generation,_,_) in enumerate(samples):label+=f'\nPoint {ns}: {value}; generation {generation}; {"join" if i else "start"}'
+            m,raw=raster(scalar+'\n'+summary);image=bytearray(800*600*3);graph_y=m['height']+4
+            assert graph_y+120<=600
+            for y in range(m['height']):
+                for x in range(m['width']):
+                    a=(y*m['width']+x)*4;b=(y*800+x)*3;image[b:b+3]=raw[a:a+3]
+            for y in range(120):
+                for x in range(320):
+                    if x in (0,319) or y in (0,119):
+                        b=((graph_y+y)*800+x)*3;image[b:b+3]=b'\xd0\xd0\xd0'
+            from fractions import Fraction
+            def rounded(f):return (2*f.numerator+f.denominator)//(2*f.denominator)
+            for i,(_,_,_,x,y) in enumerate(samples):
+                previous=samples[i-1][-2:] if i else (x,y);n=max(abs(x-previous[0]),abs(y-previous[1]))
+                for step in range(n+1):
+                    px=rounded(Fraction(previous[0]*(n-step)+x*step,n)) if n else x
+                    py=rounded(Fraction(previous[1]*(n-step)+y*step,n)) if n else y
+                    b=((graph_y+py)*800+px)*3;image[b:b+3]=b'\xff\xff\xff'
+            return bytes(image),label
         if not table:
             text='Receive\nWaiting' if number is None else f'Receive\n{number} byte\n{status}'
             return expected(text),text+('' if number is None else '\nsupport=supported;')
@@ -114,7 +145,7 @@ def observe(exe,text_probe,folder,mode,table=False,content=False):
         while True:
             pump();actual=display.capture(0,0,800,600);accessible.clear_cache();label=accessible.get_name() or ''
             observed_at=time.monotonic()
-            matches=(re.sub(r'age=[0-9]+ ns','age=dynamic ns',label)==prefix if table else label.startswith(prefix)) if prefix else label==''
+            matches=(re.sub(r'age=[0-9]+ ns','age=dynamic ns',label)==prefix if table or chart else label.startswith(prefix)) if prefix else label==''
             last=dict(pixels=actual==pixels,accessible=matches)
             sequence+=1;path=folder/(str(sequence)+'.rgb');path.write_bytes(actual)
             report['observations'].append(dict(case=name,elapsed=observed_at-started,pixels_sha256=sha(path),name=label,**last))
@@ -155,14 +186,14 @@ def observe(exe,text_probe,folder,mode,table=False,content=False):
 
 def main():
     if sys.argv[1]=='--observe':
-        observe(Path(sys.argv[2]),Path(sys.argv[3]),Path(sys.argv[4]),sys.argv[5],len(sys.argv)>6,'CONTENT' in sys.argv);return
+        observe(Path(sys.argv[2]),Path(sys.argv[3]),Path(sys.argv[4]),sys.argv[5],len(sys.argv)>6 and 'CHART' not in sys.argv,'CONTENT' in sys.argv,'CHART' in sys.argv);return
     exe,text_probe,evidence=map(Path,sys.argv[1:4]);folder=evidence/('surface-'+uuid.uuid4().hex[:12]);folder.mkdir()
-    table=len(sys.argv)>4;content='CONTENT' in sys.argv;report=dict(family='CONTENT-ERASURE' if content else 'TABLE-ERASURE' if table else 'SCENE-ERASURE',outcome='fail',started_at=datetime.now(timezone.utc).isoformat(),cases=[],executable_sha256=sha(exe),oracle_sha256=sha(Path(__file__)))
+    chart='CHART' in sys.argv;table=len(sys.argv)>4 and not chart;content='CONTENT' in sys.argv;report=dict(family='CHART-ERASURE' if chart else 'CONTENT-ERASURE' if content else 'TABLE-ERASURE' if table else 'SCENE-ERASURE',outcome='fail',started_at=datetime.now(timezone.utc).isoformat(),cases=[],executable_sha256=sha(exe),oracle_sha256=sha(Path(__file__)))
     server=None
     try:
         server,env=launch_xvfb(folder);env['NO_AT_BRIDGE']='0';env.pop('AT_SPI_BUS_ADDRESS',None)
         for mode in ('normal','ignore-pixels','ignore-accessible'):
-            child=subprocess.Popen(['dbus-run-session','--',sys.executable,str(Path(__file__)), '--observe',str(exe),str(text_probe),str(folder/mode),mode]+(['CONTENT'] if content else ['TABLE'] if table else []),env=env,stdout=subprocess.PIPE,stderr=subprocess.PIPE,start_new_session=True)
+            child=subprocess.Popen(['dbus-run-session','--',sys.executable,str(Path(__file__)), '--observe',str(exe),str(text_probe),str(folder/mode),mode]+(['CHART'] if chart else ['CONTENT'] if content else ['TABLE'] if table else []),env=env,stdout=subprocess.PIPE,stderr=subprocess.PIPE,start_new_session=True)
             timed_out=False
             try:stdout,stderr=child.communicate(timeout=35)
             except subprocess.TimeoutExpired:

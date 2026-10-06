@@ -33,6 +33,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Policy-bound authored scene bindings](w-09-bindings.md) — Resolve existing selectors and pins against scoped immutable producer views without name-based rebinding.
 - [Bounded measured chart history](w-09-chart-history.md) — Exact sample admission, discontinuities and bounded retention before native chart drawing.
 - [Deterministic portable scene layout](w-09-layout.md) — Resolve admitted scene geometry from explicit topology and native readable metrics without mutating authored state.
+- [Policy-owned native charts](w-09-native-chart.md) — Exact numeric geometry and every-publication history feed with native pixels and accessibility erasure.
 - [Native Linux text metrics and raster adapter](w-09-native-text.md) — Bounded plain-text shaping and painting with explicit native metrics, fallback and pixel ownership.
 - [Versioned widget content and transactions](w-09-scene-content.md) — Carry explicit text, columns, chart settings and pinned images through authored validation and durable resource-bound transactions.
 - [Policy-owned native scalar scene surface](w-09-scene-surface.md) — Compose authored scenes, pinned resources, scalar bindings and native text under one erasing presentation owner.
