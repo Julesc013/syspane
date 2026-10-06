@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-05T23:51:30Z", "scope": "Owned X11 manager recovery; visible placement and product recovery remain unqualified"}
+updated: {"by": "codex", "at": "2026-10-06T01:10:00Z", "scope": "Owned GNOME native reveal preserves live composition but fails foreground-focus restoration"}
 ---
 
 # Current state and next admitted boundary
@@ -181,6 +181,14 @@ checks pass. The original dark-baseline and actor-ordering mistakes are preserve
 This closes only the selected solid-color composition experiment, not reveal/input,
 image wallpaper, recovery or full desktop qualification.
 
+The [GNOME native reveal checkpoint](gnome-reveal-handoff.md) now observes configured
+Super+D with a real owned normal foreground window. Its pixels disappear and return
+while the marker, icon anchors, drawing and background stay correct. Foreground
+focus does not return, so the live case remains failed. Omitted-action and temporary
+blank controls reject the intended missing transitions/disappearance; restoring the
+drawing cannot erase a temporal failure. The failed focus requirement is unchanged.
+Its cause needs an independent native baseline before any component attribution.
+
 Canonical 0.2.0 documentation bundle, unchanged 0.1 authoring profile, preserved old
 fixtures, new experimental scene/command/capability 0.2 and admission descriptors.
 The initial settings registry has enforced metadata/default consistency and generated
@@ -218,14 +226,16 @@ License, contribution and release-identity decisions remain open.
 ## Next work
 
 Continue the admitted campaign: use the calibrated GNOME/DING composition path and
-unchanged external marker oracle to measure real reveal, focus/taskbar behavior,
-icon input, image-wallpaper preservation and shell/icon-manager recovery. Keep the
+unchanged external marker oracle to resolve failed foreground-focus restoration
+against a native baseline, then measure taskbar/task-switcher behavior, icon input,
+image-wallpaper preservation and shell/icon-manager recovery. Keep the
 earlier X11 failures and failed GNOME fixture/control attempts. Close other platform capture/reveal boundaries in admitted
 synthetic desktops. W-04 has build artifacts ready for
 historical guest execution once guest test scope and usability are established.
-W-05 needs a composition strategy that actually preserves icon pixels; its initial
-EWMH window stacking candidates fail that requirement even after the observed
-Openbox recovery. Product renderer/collector continuity, icon-manager/compositor
+W-05's GNOME bridge now preserves the tested icon pixels, but remains unqualified
+after the failed focus restoration. The earlier EWMH window stacking candidates
+still fail composition even after the observed Openbox recovery.
+Product renderer/collector continuity, icon-manager/compositor
 restart and post-recovery input remain open. Continue other native tracks
 independently of this negative result.
 W-25's [supervised network checkpoint](network-publication-handoff.md) connects

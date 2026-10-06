@@ -54,8 +54,11 @@ pixel checks; the original image-at-startup failure remains separate. See the
 recovery and continuing marker progress, while independently retaining the candidates'
 visible-placement failures. A [GNOME 46/DING experiment](spec/delivery/gnome-composition-handoff.md)
 now observes live drawings between a synthetic wallpaper and real desktop icons,
-with independently calibrated pixels and wrong-layer controls. Reveal/input, image
-wallpaper and shell recovery remain open. No desktop profile is qualified.
+with independently calibrated pixels and wrong-layer controls. The subsequent
+[native reveal experiment](spec/delivery/gnome-reveal-handoff.md) keeps those drawings
+live while Show Desktop hides and restores a foreground window, but fails the
+required foreground-focus restoration. Native icon input, image wallpaper and shell
+recovery also remain open. No desktop profile is qualified.
 There is no usable SysPane desktop application or downloadable release yet.
 Desktop, screensaver and installer profiles remain unqualified.
 

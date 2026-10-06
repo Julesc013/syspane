@@ -7,6 +7,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [W-04 historical Windows build and host experiments](w-04-historical-windows.md) — Test the existing shared C++ subset with the installed XP toolset before claiming historical runtime or desktop support.
 - [W-05 GNOME icon composition experiment](w-05-gnome-composition.md) — Calibrate separated marker and opaque icon witnesses against a real owned DING desktop.
 - [W-05 owned GNOME composition investigation](w-05-gnome-investigation.md) — Test a pinned shell bridge on a private display without claiming a supported desktop.
+- [W-05 GNOME native desktop reveal experiment](w-05-gnome-reveal.md) — Observe the composed scene while a real foreground window disappears and returns through Show Desktop.
 - [W-05 owned X11 window-manager recovery](w-05-shell-recovery.md) — Measure native manager replacement and candidate continuity without promoting failed placement.
 - [W-05 bounded X11 host investigation](w-05-x11-investigation.md) — Observe desktop-type placement and native reveal under a real window and icon manager in an owned lab.
 - [W-24 authenticated transport and policy boundary](w-24-transport.md) — Close the initial local protocol, admission and preview boundary before native integration.

@@ -357,7 +357,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "ab3aa3e4db76b84410c4f8e92999b7508c2170b82ecca538612f01f0fa8441dc"
+      "sha256": "229188dccc63a6ecd2ce094a0431efb066f918044e088a1231033c61e578c0e6"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -428,6 +428,18 @@
       "sha256": "1332b021a6695c4e0b10ff842203dfa7d77c403d20d618d4011907ddc627e9f1"
     },
     {
+      "id": "SP-GNOME-REVEAL-HANDOFF",
+      "path": "delivery/gnome-reveal-handoff.md",
+      "title": "Owned GNOME native reveal and failed focus restoration",
+      "description": "Live composition survives visible native hide/restore, while the required foreground focus remains failed.",
+      "requires": [
+        "SP-W05-GNOME-REVEAL",
+        "SP-GNOME-COMPOSITION-HANDOFF",
+        "SP-CAMPAIGN-ADMISSION"
+      ],
+      "sha256": "1d84beec8b2032908e360bbd72e8e1ca6d7a3f5d2a48ea676c82542d0a4b55c6"
+    },
+    {
       "id": "SP-HISTORICAL-BUILD-HANDOFF",
       "path": "delivery/historical-build-handoff.md",
       "title": "Historical Windows shared-subset build checkpoint",
@@ -446,7 +458,7 @@
       "requires": [
         "SP-CURRENT"
       ],
-      "sha256": "84d290f861a1ea6a5cc92e3d01b46b295e94c37f69dc17f1555852708682ebdb"
+      "sha256": "57b85d3c9251ba7a53d79888396fe077dd8b2816b0e0a884d18966220748db23"
     },
     {
       "id": "SP-MEASURED-TIME-HANDOFF",
@@ -599,6 +611,18 @@
         "SP-CAMPAIGN-ADMISSION"
       ],
       "sha256": "056ebdef228ee90c6c791c39498d9dffe7052b7952c13876de6de989d32577bb"
+    },
+    {
+      "id": "SP-W05-GNOME-REVEAL",
+      "path": "delivery/packages/w-05-gnome-reveal.md",
+      "title": "W-05 GNOME native desktop reveal experiment",
+      "description": "Observe the composed scene while a real foreground window disappears and returns through Show Desktop.",
+      "requires": [
+        "SP-W05-GNOME-COMPOSITION",
+        "SP-W02-PACKAGE",
+        "SP-DESKTOP"
+      ],
+      "sha256": "fd4a26b426b4a666bba06059bcc5561e267d930dfdc456e2eefbe165ce7a47ee"
     },
     {
       "id": "SP-W05-SHELL-RECOVERY",

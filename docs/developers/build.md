@@ -357,6 +357,25 @@ paired captures, native DING ownership, unchanged settings and preserved journal
 No user icon/theme/wallpaper is used. See the [composition checkpoint](../../spec/delivery/gnome-composition-handoff.md)
 for scope and the next reveal/input/recovery boundaries.
 
+The configured GNOME reveal experiment adds a normal owned GTK foreground window:
+
+```sh
+python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --reveal live
+python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --reveal no-action
+python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --reveal transient-blank
+python3 build-support/record_gnome_reveal.py --build-dir <owned-build-directory> --reports <live-report> <no-action-report> <blank-report> --output <new-owned-record>
+python3 tests/desktop/test_gnome_reveal_record.py <owned-build-directory> <live-report> <no-action-report> <blank-report> -v
+```
+
+Await a successful workspace preflight before each invocation. The pinned lab's
+live case currently returns 1: visible hide/restore succeeds, but foreground focus
+does not return. Both negative controls also return 1. The recorder requires
+completed source-identical cases with exact native/pixel control outcomes; startup
+errors cannot calibrate it. Recorder success means the experiment is validated,
+not that the live candidate passed. Its output keeps visual transitions, focus,
+continuous marker/rectangle visibility and overall acceptance separate. Raw journals
+and source archives preserve failed attempts. See the [reveal checkpoint](../../spec/delivery/gnome-reveal-handoff.md).
+
 For the historical shared-subset experiment, the existing Visual Studio 2017 XP
 toolset has its own preset. It compiles the same model, protocol/policy, recovery
 and diagnostic projection sources; modern native adapters require separate closure.

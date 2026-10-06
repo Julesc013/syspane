@@ -11,8 +11,8 @@ from gnome_composition import FIXTURE, FIXTURE_PATH, judge_samples, png_icon
 from oracle import evaluate
 
 
-def validate(value, build):
-    observation = validate_runtime(value, build, 'GNOME-COMPOSITION-01', 'GNOME-COMPOSITION-01-')
+def validate(value, build, family='GNOME-COMPOSITION-01', outer_outcome=True):
+    observation = validate_runtime(value, build, family, family + '-')
     result = observation['composition']
     control = result['control']
     if control not in {'live', 'above-icons', 'below-wallpaper'} or value['composition_control'] != control or value['environment']['explicit']['SYSPANE_GNOME_COMPOSITION'] != control:
@@ -92,7 +92,7 @@ def validate(value, build):
     actual = (marker_result['outcome'], outcome['icons'], outcome['rectangle'])
     expected = {'live': ('pass','pass','pass'), 'above-icons': ('pass','fail','pass'),
                 'below-wallpaper': ('fail','pass','fail')}[control]
-    if actual != expected or result['outcome'] != ('pass' if control == 'live' else 'fail') or value['outcome'] != result['outcome']:
+    if actual != expected or result['outcome'] != ('pass' if control == 'live' else 'fail') or (outer_outcome and value['outcome'] != result['outcome']):
         raise ValueError('candidate did not produce the required independent control results')
     journal_path = Path(value['composition_journal']['path']).resolve(strict=True)
     if journal_path != Path(value['workspace']) / 'composition.jsonl':

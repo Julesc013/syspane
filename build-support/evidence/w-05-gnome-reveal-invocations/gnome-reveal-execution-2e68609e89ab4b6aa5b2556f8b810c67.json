@@ -1,0 +1,41 @@
+[
+  {
+    "mode": "live",
+    "phase": "preflight",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-06T01:01:06.941928+00:00",
+    "finished_at": "2026-10-06T01:01:12.150947+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 3221225472,\n  \"checkout_out_bytes\": 934191527,\n  \"linux_campaign_bytes\": 1399416114,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "mode": "live",
+    "phase": "native",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "tests/desktop/native_gnome_bootstrap.py",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13",
+      "--reveal",
+      "live"
+    ],
+    "started_at": "2026-10-06T01:01:12.151377+00:00",
+    "finished_at": "2026-10-06T01:01:25.916890+00:00",
+    "exit": 1,
+    "stdout": "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-REVEAL-01-5ee734e25bc64bdcba52e0b033a086b5.json\nfail RuntimeError: ValueError: foreground activation/pixel prerequisite failed: {'client_order_bottom_to_top': [12582920, 4194307], 'focus': 4194308, 'showing_desktop': [0], 'active_window': [4194307], 'candidate': 0, 'clients': [{'window': 12582920, 'class': ['gjs', 'Gjs'], 'pid': [519], 'type': [345]}, {'window': 4194307, 'class': ['syspane-reveal-control', 'SysPaneRevealControl'], 'pid': [436], 'type': [269]}]}\n",
+    "stderr": ""
+  }
+]

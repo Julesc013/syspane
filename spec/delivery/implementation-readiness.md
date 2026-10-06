@@ -12,7 +12,7 @@ sp_requires: ["SP-CURRENT"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-AUDIT-2026-10-04", "resource": "User-supplied October 2026 audit inputs", "title": "October review inputs"}]
-updated: {"by": "codex", "at": "2026-10-05T23:51:30Z", "scope": "Owned X11 manager recovery; visible placement and product recovery remain unqualified"}
+updated: {"by": "codex", "at": "2026-10-06T01:14:00Z", "scope": "Owned GNOME native reveal preserves composition but fails foreground-focus restoration"}
 ---
 
 # Implementation readiness and gates
@@ -134,6 +134,14 @@ icon manager. Above-icons and below-wallpaper controls expose the expected failu
 15 composition evidence checks and nine marker regression checks pass. Original
 fixture/control defects remain preserved. Reveal, input, image wallpaper, recovery
 and broader platform qualification are still required.
+
+The [GNOME native reveal checkpoint](gnome-reveal-handoff.md) preserves that
+composition while configured Super+D hides and restores an owned foreground
+window. Visible transitions pass; required foreground-focus restoration fails.
+The live candidate therefore remains failed. Omitted-action and temporary-blank
+controls prove that state flags alone and later visual repair cannot satisfy the
+oracle. Determine the focus behavior's cause with an independent native baseline;
+do not relax the requirement or infer full reveal/input qualification.
 
 Use the proposed cold-start exercise to detect missing observable contracts.
 Private implementation differences are permissible. Missing laboratories remain
