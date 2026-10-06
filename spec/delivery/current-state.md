@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-06T13:56:23Z", "scope": "Owned GNOME editor lifetime exit, retained collection and restored icon input/pixels"}
+updated: {"by": "codex", "at": "2026-10-06T15:31:11Z", "scope": "Authenticated session demand, three full development suites and preserved native restart timing failure"}
 ---
 
 # Current state and next admitted boundary
@@ -31,8 +31,14 @@ that owner to real acquisition outside the IPC loop. Five native cases now prove
 merged demand, cancellation/timeout slot retention and actual IPC revocation while
 a worker is alive. All 125 Linux entries have passing evidence across the full run
 and one corrected-observer rerun; the original full-run failure is retained.
-General per-session selection, invalidation/coalescing and installed controller/
-policy distribution remain open before common scene transactions complete the vertical.
+The subsequent [session demand checkpoint](session-demand-handoff.md) binds locally
+selected requests to authenticated subscriptions and their negotiated roles. Shared
+acquisition survives independent subscriber loss, while stale callbacks, expiry and
+policy faults retire the correct lifetimes. Full suites pass 130 Linux, 119 Windows
+and 108 historical-toolset checks on the modern host. A native restart interval
+failure is preserved and fixed without changing its oracle. General consumer wire
+selection, invalidation/coalescing and installed controller/policy distribution
+remain open before common scene transactions complete the vertical.
 
 The latest [render-failure recovery checkpoint](controller-render-recovery-handoff.md)
 connects independent render/health deadlines to the persistent native replacement

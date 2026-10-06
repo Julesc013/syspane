@@ -55,6 +55,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Portable recovery implementation checkpoint](recovery-handoff.md) — Record lease, render-progress and restart decisions while preserving native recovery gates.
 - [SysPane 0.1.0 release objective and unresolved admission](release-0.1.0.md) — Preserve the requested complete desktop release across Windows 9x, Windows NT, X11, Wayland and Mac OS X.
 - [Greenfield implementation campaign](roadmap.md) — Build native vertical slices and contracts together in risk order.
+- [Authenticated session demand checkpoint](session-demand-handoff.md) — Bind controller-selected acquisition plans to authoritative subscription lifetimes and preserve native restart timing evidence.
 - [Complete remote state import checkpoint](state-import-handoff.md) — Connect bounded telemetry documents to a revocable complete model without changing reported retention or inventing measurement freshness.
 - [Native inventory subscription checkpoint](subscriptions-handoff.md) — Bind demand expiry, policy-bound queues and complete-state receipt to authenticated native process experiments.
 - [Native child supervision implementation checkpoint](supervision-handoff.md) — Bind owned-child lifetime and independent health decisions to Windows/Linux fault evidence.

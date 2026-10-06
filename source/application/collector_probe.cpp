@@ -6,6 +6,7 @@
 #include "network_watch.hpp"
 #include "session.hpp"
 #include "demand.hpp"
+#include "demand_sessions.hpp"
 #include <array>
 #include <chrono>
 #include <cerrno>
@@ -26,7 +27,7 @@ using p::Json;
 namespace {
 volatile std::sig_atomic_t desktop_stop=0;
 void need(bool ok,const char* code){if(!ok)throw p::Error(code);}
-void emit(Json value){value["observed_ms"]=os::monotonic_ms();std::cout<<value.dump()<<std::endl;}
+std::uint64_t emit(Json value){const auto now=os::monotonic_ms();value["observed_ms"]=now;std::cout<<value.dump()<<std::endl;return now;}
 void pause(unsigned ms){std::this_thread::sleep_for(std::chrono::milliseconds(ms));}
 std::string utc(){
     const auto value=std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());std::tm calendar{};
@@ -189,9 +190,9 @@ void worker(const std::string& address,const std::string& mode,const std::string
     auto data_stream=os::Stream::connect(address+"/d/s",parent);DataPipe pipe(data_stream);
     const auto clock=data_stream.measurement_clock();
     c::TelemetrySource source{"producer:network","desktop","operational"};source.document_version="0.2.0";source.clock_id=clock.clock_id;source.clock_scope=clock.local_scope;
-    c::Sessions sessions(epoch,0,policy(),source);sessions.open("D",data_stream.peer().principal,{true,"desktop",{"desktop"}},data_stream.connected_ms());
-    r::ProducerLease parent_lease;std::uint64_t parent_token=0,sent=0,last_sent=0,publication=0,delivered=0,demand_lease=0;
-    n::DemandOwner demand(network_catalog(),policy(),{32,64,1});
+    n::DemandSessions sessions(epoch,0,policy(),source,network_catalog(),{32,64,1});
+    sessions.open("D",data_stream.peer().principal,{true,"desktop",{"desktop"}},network_request(),data_stream.connected_ms());
+    r::ProducerLease parent_lease;std::uint64_t parent_token=0,sent=0,last_sent=0,publication=0,delivered=0;
     std::unique_ptr<os::NetworkWatch> watch;std::unique_ptr<n::NetworkState> state;
     std::unique_ptr<AcquisitionTask> task;
     std::string sampled_utc;Json replay;bool replayed=false,revoked=false,retired=false;
@@ -210,17 +211,6 @@ void worker(const std::string& address,const std::string& mode,const std::string
         }
         for(const auto& payload:pipe.poll()){
             const auto received=os::monotonic_ms();sessions.receive("D",payload,received);
-            const auto subscription=sessions.subscription("D");
-            if(subscription&&!demand_lease){
-                const auto admitted=demand.admit(network_request(),{true,"desktop",{"desktop"}},received);
-                need(admitted.code==n::DemandCode::accepted,"collector.demand_admission");demand_lease=admitted.lease;
-            }
-            const auto message=p::decode(payload);
-            if(subscription&&message.type=="heartbeat"){
-                const auto sequence=p::decimal(message.body["sequence"].get<std::string>());need(sequence.has_value(),"collector.demand_sequence");
-                const auto code=demand.renew(demand_lease,*sequence,received);
-                need(code==n::DemandCode::accepted||code==n::DemandCode::duplicate,"collector.demand_heartbeat");
-            }
             if(mode=="crash"&&delivered==1){const auto message=p::decode(payload);
                 if(message.type=="heartbeat"&&message.body["sequence"]=="0")std::_Exit(73);}
         }
@@ -228,18 +218,16 @@ void worker(const std::string& address,const std::string& mode,const std::string
         const bool revoke_pending=mode=="revoke-pending"&&delivered&&task&&task->read_ready();
         if(((mode=="revoke"&&delivered)||revoke_pending)&&!revoked){const auto changed=os::monotonic_ms();
             if(revoke_pending)emit({{"event","policy_during_read"},{"pid",os::current_process_id()},{"tid",task->native_thread()}});
-            sessions.policy(policy(false),changed);demand.policy(policy(false),changed);demand_lease=0;revoked=true;}
+            sessions.policy(policy(false),changed);revoked=true;}
         if(sessions.closed("D"))return;
         auto subscription=sessions.subscription("D");
         if(!subscription){
-            if(demand_lease){demand.release(demand_lease,os::monotonic_ms());demand_lease=0;}
             if(state){state->demand(0);retired=true;}
         }
-        need(demand.tick(os::monotonic_ms())==n::DemandCode::accepted,"collector.demand_clock");
-        for(const auto& job:demand.outstanding())if(job.cancelled&&task&&task->ticket==job.ticket)task->cancel();
+        for(const auto& job:sessions.outstanding())if(job.cancelled&&task&&task->ticket==job.ticket)task->cancel();
         if(task&&task->done()){
             const auto ticket=task->ticket,revision=task->revision;const auto completed=task->finish();task.reset();
-            const auto admitted=demand.complete(ticket,os::monotonic_ms());
+            const auto admitted=sessions.complete(ticket,os::monotonic_ms());
             if(admitted==n::DemandCode::accepted&&subscription){
                 need(completed.acquired.continuity,"collector.watch_gap");
                 for(const auto& event:completed.acquired.indications)need(state->indicate(event.key,event.removed)==n::NetworkStateCode::accepted,"collector.indication");
@@ -269,7 +257,7 @@ void worker(const std::string& address,const std::string& mode,const std::string
             if(mode=="replay"&&delivered==1&&!replayed){
                 need(sessions.offer("D",subscription->ticket,"network:1",replay,{},os::monotonic_ms()),"collector.replay_offer");replayed=true;
             } else if(!task&&!((mode=="stream-hold"||mode=="stream-hang")&&publication>=2)){
-                if(const auto job=demand.take(os::monotonic_ms())){
+                if(const auto job=sessions.take(os::monotonic_ms())){
                     need(state->demand(job->ticket)==n::NetworkStateCode::accepted,"collector.demand");
                     task=std::make_unique<AcquisitionTask>(*watch,job->ticket,state->revision(),[&]{return tick(data_stream,epoch);},mode=="failure"&&publication==1,
                         mode=="revoke-pending"&&publication==1?1200U:0U);
@@ -697,9 +685,12 @@ void supervisor(const std::string& address,const std::string& scenario){
     need(health_listener.access_controls_verified()&&data_listener.access_controls_verified(),"collector.endpoint_controls");
     emit({{"event","ready"},{"unprivileged",true},{"endpoint_controls",true}});
     r::RestartGate gate(0);r::DataView view({true,"desktop",{"desktop"}},policy(),"desktop","operational",n::network_metrics());
-    const auto started=os::monotonic_ms();
+    const auto started=os::monotonic_ms();std::optional<std::uint64_t> retry_reported;
     for(unsigned attempt=0;attempt<2;++attempt){
-        for(;;){need(os::monotonic_ms()-started<30000,"collector.deadline");const auto code=gate.start(os::monotonic_ms());
+        for(;;){const auto now=os::monotonic_ms();need(now-started<30000,"collector.deadline");
+            if(retry_reported){need(now>=*retry_reported,"collector.clock");
+                if(now-*retry_reported<gate.view().backoff_ms){pause(10);continue;}}
+            const auto code=gate.start(now);
             if(code==r::Code::accepted)break;
             need(code==r::Code::not_due,"collector.restart_gate");pause(10);}
         const auto epoch="collector:"+std::to_string(os::current_process_id())+":"+std::to_string(attempt+1);
@@ -786,12 +777,12 @@ void supervisor(const std::string& address,const std::string& scenario){
         if(crashed){
             const auto status=child.wait(100);need(status&&status->code==73&&!status->signaled,"collector.crash_exit");
             need(gate.failed(r::Failure::crashed,r::StopProof::confirmed,fault_time)==r::Code::accepted,"collector.crash_gate");
-            emit({{"event","fault"},{"pid",child.id()},{"reason","child.crashed"},{"backoff_ms",gate.view().backoff_ms}});
+            retry_reported=emit({{"event","fault"},{"pid",child.id()},{"reason","child.crashed"},{"backoff_ms",gate.view().backoff_ms}});
             stopped(child,*status,false);continue;
         }
         need(gate.failed(r::Failure::producer_expired,r::StopProof::unconfirmed,fault_time)==r::Code::accepted,"collector.failure_gate");
         need(gate.start(fault_time)==r::Code::quarantined,"collector.quarantine");
-        emit({{"event","fault"},{"pid",child.id()},{"reason",reason},{"since_heartbeat_ms",fault_time-last_received},{"backoff_ms",gate.view().backoff_ms}});
+        retry_reported=emit({{"event","fault"},{"pid",child.id()},{"reason",reason},{"since_heartbeat_ms",fault_time-last_received},{"backoff_ms",gate.view().backoff_ms}});
         health.shutdown();auto status=child.wait(250);bool forced=false;
         if(!status){child.request_stop();forced=true;status=child.wait(2000);}
         need(status.has_value(),"collector.stop_unconfirmed");need(gate.confirm_stopped(os::monotonic_ms())==r::Code::accepted,"collector.confirm_stopped");stopped(child,*status,forced);

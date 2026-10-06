@@ -1,0 +1,74 @@
+[
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-06T15:22:54.361824+00:00",
+    "finished_at": "2026-10-06T15:23:01.727807+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 5368709120,\n  \"checkout_out_bytes\": 1312941576,\n  \"linux_campaign_bytes\": 3181142319,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/session_demand_step.py",
+      "linux-x64-gcc13",
+      "build"
+    ],
+    "started_at": "2026-10-06T15:23:01.728295+00:00",
+    "finished_at": "2026-10-06T15:23:19.526475+00:00",
+    "exit": 0,
+    "stdout": "[1/29] Building CXX object CMakeFiles/syspane_demand_sessions.dir/source/runtime/demand_sessions.cpp.o\n[2/29] Building CXX object CMakeFiles/syspane_configuration.dir/source/configuration/session.cpp.o\n[3/29] Building CXX object CMakeFiles/syspane_ipc_probe.dir/source/application/ipc_probe.cpp.o\n[4/29] Linking CXX static library libsyspane_configuration.a\n[5/29] Linking CXX executable syspane-diag\n[6/29] Linking CXX static library libsyspane_demand_sessions.a\n[7/29] Linking CXX shared library libsyspane_gjs_clock.so\n[8/29] Linking CXX executable SysPane.IpcProbe\n[9/29] Linking CXX executable SysPane.RecoveryProbe\n[10/29] Building CXX object CMakeFiles/syspane_telemetry_probe.dir/source/application/telemetry_probe.cpp.o\n[11/29] Building CXX object CMakeFiles/syspane_collector_probe.dir/source/application/collector_probe.cpp.o\n[12/29] Linking CXX executable SysPane.TelemetryProbe\n[13/29] Linking CXX executable SysPane.CollectorProbe\n[14/29] Linking CXX executable syspane_diagnostic_tests\n[15/29] Linking CXX executable syspane_data_view_tests\n[16/29] Linking CXX executable syspane_state_import_tests\n[17/29] Linking CXX executable syspane_demand_tests\n[18/29] Building CXX object CMakeFiles/syspane_protocol_tests.dir/tests/protocol/protocol_tests.cpp.o\n[19/29] Linking CXX executable syspane_protocol_tests\n[20/29] Linking CXX executable syspane_network_view_tests\n[21/29] Building CXX object CMakeFiles/syspane_subscription_tests.dir/tests/protocol/subscription_tests.cpp.o\n[22/29] Linking CXX executable syspane_network_publication_tests\n[23/29] Linking CXX executable syspane_subscription_tests\n[24/29] Linking CXX executable syspane_failure_store_tests\n[25/29] Linking CXX executable syspane_preservation_tests\n[26/29] Building CXX object CMakeFiles/syspane_demand_session_tests.dir/tests/fault/demand_session_tests.cpp.o\n[27/29] Linking CXX executable syspane_demand_session_tests\n[28/29] Building CXX object CMakeFiles/syspane_measured_time_tests.dir/tests/fault/measured_time_tests.cpp.o\n[29/29] Linking CXX executable syspane_measured_time_tests\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-07-session-demand/linux-x64-gcc13-build-244b298860\n",
+    "stderr": ""
+  },
+  {
+    "step": "test",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-06T15:23:19.526842+00:00",
+    "finished_at": "2026-10-06T15:23:20.136340+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 5368709120,\n  \"checkout_out_bytes\": 1313799715,\n  \"linux_campaign_bytes\": 3181170178,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "test",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/session_demand_step.py",
+      "linux-x64-gcc13",
+      "test"
+    ],
+    "started_at": "2026-10-06T15:23:21.613172+00:00",
+    "finished_at": "2026-10-06T15:27:23.326723+00:00",
+    "exit": 0,
+    "stdout": "       Start  90: presentation.NVIEW-LIFETIME\n 90/130 Test  #90: presentation.NVIEW-LIFETIME ........   Passed    0.01 sec\n        Start  91: network.PUBLICATION-VALUES\n 91/130 Test  #91: network.PUBLICATION-VALUES .........   Passed    0.00 sec\n        Start  92: network.PUBLICATION-FAILURE\n 92/130 Test  #92: network.PUBLICATION-FAILURE ........   Passed    0.00 sec\n        Start  93: network.PUBLICATION-BOUNDARY\n 93/130 Test  #93: network.PUBLICATION-BOUNDARY .......   Passed    0.00 sec\n        Start  94: native.NATIVE-DEMAND-EXECUTOR\n 94/130 Test  #94: native.NATIVE-DEMAND-EXECUTOR ......   Passed    9.29 sec\n        Start  95: native.NATIVE-COLLECTOR\n 95/130 Test  #95: native.NATIVE-COLLECTOR ............   Passed   17.88 sec\n        Start  96: native.CONSUMER-CONTINUITY\n 96/130 Test  #96: native.CONSUMER-CONTINUITY .........   Passed   70.42 sec\n        Start  97: network.RECONCILE-IDENTITY\n 97/130 Test  #97: network.RECONCILE-IDENTITY .........   Passed    0.00 sec\n        Start  98: network.RECONCILE-CLOCK-RATE\n 98/130 Test  #98: network.RECONCILE-CLOCK-RATE .......   Passed    0.00 sec\n        Start  99: network.RECONCILE-CANCEL-FAILURE\n 99/130 Test  #99: network.RECONCILE-CANCEL-FAILURE ...   Passed    0.00 sec\n        Start 100: network.RECONCILE-CAPACITY\n100/130 Test #100: network.RECONCILE-CAPACITY .........   Passed    0.00 sec\n        Start 101: native.NATIVE-NETWORK\n101/130 Test #101: native.NATIVE-NETWORK ..............   Passed    1.18 sec\n        Start 102: network.NETWORK-NETLINK\n102/130 Test #102: network.NETWORK-NETLINK ............   Passed    0.00 sec\n        Start 103: network.NETWORK-NETLINK-REJECT\n103/130 Test #103: network.NETWORK-NETLINK-REJECT .....   Passed    0.00 sec\n        Start 104: network.NETWORK-WATCH-DECODE\n104/130 Test #104: network.NETWORK-WATCH-DECODE .......   Passed    0.00 sec\n        Start 105: measured.MEASURED-CODEC\n105/130 Test #105: measured.MEASURED-CODEC ............   Passed    0.01 sec\n        Start 106: measured.MEASURED-AGE\n106/130 Test #106: measured.MEASURED-AGE ..............   Passed    0.01 sec\n        Start 107: measured.MEASURED-REPLAY\n107/130 Test #107: measured.MEASURED-REPLAY ...........   Passed    0.01 sec\n        Start 108: measured.MEASURED-LIFETIME\n108/130 Test #108: measured.MEASURED-LIFETIME .........   Passed    0.01 sec\n        Start 109: measured.MEASURED-SESSION\n109/130 Test #109: measured.MEASURED-SESSION ..........   Passed    0.01 sec\n        Start 110: import.IMPORT-STATE\n110/130 Test #110: import.IMPORT-STATE ................   Passed    0.01 sec\n        Start 111: import.IMPORT-RETAIN\n111/130 Test #111: import.IMPORT-RETAIN ...............   Passed    0.02 sec\n        Start 112: import.IMPORT-COVERAGE\n112/130 Test #112: import.IMPORT-COVERAGE .............   Passed    0.01 sec\n        Start 113: import.IMPORT-REPLAY\n113/130 Test #113: import.IMPORT-REPLAY ...............   Passed    0.01 sec\n        Start 114: import.IMPORT-TIME\n114/130 Test #114: import.IMPORT-TIME .................   Passed    0.01 sec\n        Start 115: import.IMPORT-LIFETIME\n115/130 Test #115: import.IMPORT-LIFETIME .............   Passed    0.01 sec\n        Start 116: data.VIEW-ATOMIC\n116/130 Test #116: data.VIEW-ATOMIC ...................   Passed    0.01 sec\n        Start 117: data.VIEW-REPLAY\n117/130 Test #117: data.VIEW-REPLAY ...................   Passed    0.00 sec\n        Start 118: data.VIEW-RECONNECT\n118/130 Test #118: data.VIEW-RECONNECT ................   Passed    0.00 sec\n        Start 119: data.VIEW-LEASE\n119/130 Test #119: data.VIEW-LEASE ....................   Passed    0.00 sec\n        Start 120: data.VIEW-POLICY\n120/130 Test #120: data.VIEW-POLICY ...................   Passed    0.00 sec\n        Start 121: data.VIEW-FAULT\n121/130 Test #121: data.VIEW-FAULT ....................   Passed    0.00 sec\n        Start 122: diagnostic.DIAG-POLICY\n122/130 Test #122: diagnostic.DIAG-POLICY .............   Passed    0.02 sec\n        Start 123: diagnostic.DIAG-PROJECTION\n123/130 Test #123: diagnostic.DIAG-PROJECTION .........   Passed    0.00 sec\n        Start 124: diagnostic.FAILURE-CODEC\n124/130 Test #124: diagnostic.FAILURE-CODEC ...........   Passed    0.00 sec\n        Start 125: diagnostic.FAILURE-INTERRUPT\n125/130 Test #125: diagnostic.FAILURE-INTERRUPT .......   Passed    0.00 sec\n        Start 126: diagnostic.FAILURE-PROJECTION\n126/130 Test #126: diagnostic.FAILURE-PROJECTION ......   Passed    0.00 sec\n        Start 127: diagnostic.PRESERVE-POLICY\n127/130 Test #127: diagnostic.PRESERVE-POLICY .........   Passed    0.00 sec\n        Start 128: native.PRESERVE\n128/130 Test #128: native.PRESERVE ....................   Passed    4.02 sec\n        Start 129: native.FAILURE-STORE\n129/130 Test #129: native.FAILURE-STORE ...............   Passed    0.16 sec\n        Start 130: native.DIAG-01\n130/130 Test #130: native.DIAG-01 .....................   Passed    0.42 sec\n\n100% tests passed, 0 tests failed out of 130\n\nTotal Test time (real) = 219.52 sec\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-07-session-demand/linux-x64-gcc13-test-aa57b20fc7\n",
+    "stderr": ""
+  }
+]

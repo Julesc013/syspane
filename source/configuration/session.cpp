@@ -109,6 +109,7 @@ void Sessions::dispatch(Connection& c, const protocol::Message& message, std::ui
     if (message.type == "shutdown") { shut(c, "peer.shutdown"); return; }
     if (message.type == "heartbeat") {
         const auto sequence = *protocol::decimal(message.body["sequence"].get_ref<const std::string&>());
+        if (c.heartbeat && sequence < *c.heartbeat) throw Error("heartbeat.regressed");
         if (!c.heartbeat || sequence > *c.heartbeat) {
             c.heartbeat = sequence;
             if (c.ticket) c.renewed = now;
@@ -231,7 +232,12 @@ std::optional<Subscription> Sessions::subscription(const std::string& id) const 
     const auto found = connections_.find(id);
     if (found == connections_.end() || !found->second.ticket) return {};
     const auto& c = found->second;
-    return Subscription{binding(c,c.subscription_id,protocol::TelemetryDirection::producer_to_consumer),c.ticket};
+    return Subscription{binding(c,c.subscription_id,protocol::TelemetryDirection::producer_to_consumer),c.ticket,c.authority,c.heartbeat};
+}
+void Sessions::reject_demand(const std::string& id) { shut(connections_.at(id),"demand.denied"); }
+bool Sessions::current_subscription(const std::string& id,std::uint64_t ticket) const {
+    const auto found=connections_.find(id);
+    return ticket&&found!=connections_.end()&&found->second.ticket==ticket;
 }
 std::size_t Sessions::demand_count() const {
     std::size_t count = 0; for (const auto& entry : connections_) if (entry.second.ticket) ++count; return count;

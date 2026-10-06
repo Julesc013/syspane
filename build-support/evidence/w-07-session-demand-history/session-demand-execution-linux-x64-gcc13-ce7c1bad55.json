@@ -1,0 +1,110 @@
+[
+  {
+    "step": "configure",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-06T15:18:50.038142+00:00",
+    "finished_at": "2026-10-06T15:19:02.961214+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 5368709120,\n  \"checkout_out_bytes\": 1310364262,\n  \"linux_campaign_bytes\": 3157503891,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "configure",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/session_demand_step.py",
+      "linux-x64-gcc13",
+      "configure"
+    ],
+    "started_at": "2026-10-06T15:19:04.674047+00:00",
+    "finished_at": "2026-10-06T15:19:18.301926+00:00",
+    "exit": 0,
+    "stdout": "Preset CMake variables:\n\n  BUILD_TESTING=\"ON\"\n  CMAKE_BUILD_TYPE=\"Debug\"\n  CMAKE_CXX_COMPILER=\"g++\"\n  SYSPANE_PROFILE=\"linux-x64-gcc13\"\n\nprofile verified: linux-x64-gcc13\nvendored dependency digests: pass\ndiagnostic toolkit verified: GTK 3.24.41 / Ubuntu 3.24.41-4ubuntu1.3\nnative GJS clock build dependencies verified\n-- Configuring done (6.6s)\n-- Generating done (0.0s)\n-- Build files have been written to: /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-07-session-demand/linux-x64-gcc13-configure-e519d82a55\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-06T15:19:18.302372+00:00",
+    "finished_at": "2026-10-06T15:19:18.893294+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 5368709120,\n  \"checkout_out_bytes\": 1311219034,\n  \"linux_campaign_bytes\": 3157513453,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/session_demand_step.py",
+      "linux-x64-gcc13",
+      "build"
+    ],
+    "started_at": "2026-10-06T15:19:18.893612+00:00",
+    "finished_at": "2026-10-06T15:19:40.623192+00:00",
+    "exit": 0,
+    "stdout": "[1/29] Building CXX object CMakeFiles/syspane_demand_sessions.dir/source/runtime/demand_sessions.cpp.o\n[2/29] Building CXX object CMakeFiles/syspane_configuration.dir/source/configuration/session.cpp.o\n[3/29] Building CXX object CMakeFiles/syspane_ipc_probe.dir/source/application/ipc_probe.cpp.o\n[4/29] Linking CXX static library libsyspane_configuration.a\n[5/29] Linking CXX executable syspane-diag\n[6/29] Linking CXX static library libsyspane_demand_sessions.a\n[7/29] Linking CXX shared library libsyspane_gjs_clock.so\n[8/29] Linking CXX executable SysPane.IpcProbe\n[9/29] Linking CXX executable SysPane.RecoveryProbe\n[10/29] Building CXX object CMakeFiles/syspane_telemetry_probe.dir/source/application/telemetry_probe.cpp.o\n[11/29] Building CXX object CMakeFiles/syspane_collector_probe.dir/source/application/collector_probe.cpp.o\n[12/29] Linking CXX executable SysPane.TelemetryProbe\n[13/29] Linking CXX executable SysPane.CollectorProbe\n[14/29] Linking CXX executable syspane_diagnostic_tests\n[15/29] Linking CXX executable syspane_data_view_tests\n[16/29] Linking CXX executable syspane_state_import_tests\n[17/29] Linking CXX executable syspane_demand_tests\n[18/29] Building CXX object CMakeFiles/syspane_protocol_tests.dir/tests/protocol/protocol_tests.cpp.o\n[19/29] Linking CXX executable syspane_protocol_tests\n[20/29] Linking CXX executable syspane_network_view_tests\n[21/29] Building CXX object CMakeFiles/syspane_subscription_tests.dir/tests/protocol/subscription_tests.cpp.o\n[22/29] Linking CXX executable syspane_network_publication_tests\n[23/29] Linking CXX executable syspane_subscription_tests\n[24/29] Linking CXX executable syspane_failure_store_tests\n[25/29] Linking CXX executable syspane_preservation_tests\n[26/29] Building CXX object CMakeFiles/syspane_demand_session_tests.dir/tests/fault/demand_session_tests.cpp.o\n[27/29] Linking CXX executable syspane_demand_session_tests\n[28/29] Building CXX object CMakeFiles/syspane_measured_time_tests.dir/tests/fault/measured_time_tests.cpp.o\n[29/29] Linking CXX executable syspane_measured_time_tests\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-07-session-demand/linux-x64-gcc13-build-d182fee0d3\n",
+    "stderr": ""
+  },
+  {
+    "step": "focus",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-06T15:19:40.623583+00:00",
+    "finished_at": "2026-10-06T15:19:41.243141+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 5368709120,\n  \"checkout_out_bytes\": 1312077004,\n  \"linux_campaign_bytes\": 3180782342,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "focus",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/session_demand_step.py",
+      "linux-x64-gcc13",
+      "focus"
+    ],
+    "started_at": "2026-10-06T15:19:41.243512+00:00",
+    "finished_at": "2026-10-06T15:21:29.445020+00:00",
+    "exit": 8,
+    "stdout": ": subscription.SUB-ADMIT ...........   Passed    0.01 sec\n      Start 29: subscription.SUB-QUEUE\n 4/40 Test #29: subscription.SUB-QUEUE ...........   Passed    0.06 sec\n      Start 30: subscription.SUB-LIFETIME\n 5/40 Test #30: subscription.SUB-LIFETIME ........   Passed    0.02 sec\n      Start 31: protocol.FRAME-01\n 6/40 Test #31: protocol.FRAME-01 ................   Passed    0.00 sec\n      Start 32: protocol.FRAME-02\n 7/40 Test #32: protocol.FRAME-02 ................   Passed    0.00 sec\n      Start 33: protocol.FRAME-03\n 8/40 Test #33: protocol.FRAME-03 ................   Passed    0.00 sec\n      Start 34: protocol.JSON-01\n 9/40 Test #34: protocol.JSON-01 .................   Passed    0.03 sec\n      Start 35: protocol.WIRE-01\n10/40 Test #35: protocol.WIRE-01 .................   Passed    0.00 sec\n      Start 36: protocol.NEGOTIATE-01\n11/40 Test #36: protocol.NEGOTIATE-01 ............   Passed    0.01 sec\n      Start 37: protocol.IPC-BUDGET-01\n12/40 Test #37: protocol.IPC-BUDGET-01 ...........   Passed    0.00 sec\n      Start 38: protocol.IPC-BUDGET-02\n13/40 Test #38: protocol.IPC-BUDGET-02 ...........   Passed    0.00 sec\n      Start 39: protocol.IPC-BUDGET-03\n14/40 Test #39: protocol.IPC-BUDGET-03 ...........   Passed    0.00 sec\n      Start 40: protocol.IPC-BUDGET-04\n15/40 Test #40: protocol.IPC-BUDGET-04 ...........   Passed    0.00 sec\n      Start 41: protocol.LEDGER-01\n16/40 Test #41: protocol.LEDGER-01 ...............   Passed    0.13 sec\n      Start 42: protocol.POLICY-01\n17/40 Test #42: protocol.POLICY-01 ...............   Passed    0.00 sec\n      Start 43: protocol.POLICY-02\n18/40 Test #43: protocol.POLICY-02 ...............   Passed    0.00 sec\n      Start 44: protocol.DISCLOSURE-01\n19/40 Test #44: protocol.DISCLOSURE-01 ...........   Passed    0.00 sec\n      Start 45: protocol.QUEUE-01\n20/40 Test #45: protocol.QUEUE-01 ................   Passed    0.00 sec\n      Start 46: protocol.SESSION-01\n21/40 Test #46: protocol.SESSION-01 ..............   Passed    0.02 sec\n      Start 47: protocol.dependencies\n22/40 Test #47: protocol.dependencies ............   Passed    0.05 sec\n      Start 61: native.NATIVE-SUB\n23/40 Test #61: native.NATIVE-SUB ................   Passed    3.65 sec\n      Start 71: demand-session.DS-ADMIT\n24/40 Test #71: demand-session.DS-ADMIT ..........   Passed    0.01 sec\n      Start 72: demand-session.DS-LIFETIME\n25/40 Test #72: demand-session.DS-LIFETIME .......   Passed    0.00 sec\n      Start 73: demand-session.DS-REPLAY\n26/40 Test #73: demand-session.DS-REPLAY .........   Passed    0.00 sec\n      Start 74: demand-session.DS-POLICY\n27/40 Test #74: demand-session.DS-POLICY .........   Passed    0.00 sec\n      Start 75: demand-session.DS-FAULT\n28/40 Test #75: demand-session.DS-FAULT ..........   Passed    0.00 sec\n      Start 76: demand.DEMAND-MERGE\n29/40 Test #76: demand.DEMAND-MERGE ..............   Passed    0.00 sec\n      Start 77: demand.DEMAND-POLICY\n30/40 Test #77: demand.DEMAND-POLICY .............   Passed    0.00 sec\n      Start 78: demand.DEMAND-LEASES\n31/40 Test #78: demand.DEMAND-LEASES .............   Passed    0.00 sec\n      Start 79: demand.DEMAND-STOP\n32/40 Test #79: demand.DEMAND-STOP ...............   Passed    0.00 sec\n      Start 80: demand.DEMAND-CAPS\n33/40 Test #80: demand.DEMAND-CAPS ...............   Passed    0.00 sec\n      Start 81: demand.DEMAND-FAIRNESS\n34/40 Test #81: demand.DEMAND-FAIRNESS ...........   Passed    0.00 sec\n      Start 82: demand.DEMAND-PLANS\n35/40 Test #82: demand.DEMAND-PLANS ..............   Passed    0.00 sec\n      Start 83: demand.DEMAND-BOUNDS\n36/40 Test #83: demand.DEMAND-BOUNDS .............   Passed    0.00 sec\n      Start 84: demand.DEMAND-CLOCK\n37/40 Test #84: demand.DEMAND-CLOCK ..............   Passed    0.00 sec\n      Start 94: native.NATIVE-DEMAND-EXECUTOR\n38/40 Test #94: native.NATIVE-DEMAND-EXECUTOR ....   Passed    9.30 sec\n      Start 95: native.NATIVE-COLLECTOR\n39/40 Test #95: native.NATIVE-COLLECTOR ..........***Failed   12.10 sec\nNATIVE-COLLECTOR.LIVE: pass\nNATIVE-COLLECTOR.FAILURE: pass\nNATIVE-COLLECTOR.REPLAY: pass\nNATIVE-COLLECTOR.HANG: fail\nNative evidence: /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/NATIVE-COLLECTOR-77dccccaeeda.json\nTraceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/protocol/native_collector.py\", line 220, in <module>\n    if __name__=='__main__':main()\n                            ^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/tests/protocol/native_collector.py\", line 216, in main\n    raise RuntimeError('native collector acceptance failed; inspect the owned private record') from None\nRuntimeError: native collector acceptance failed; inspect the owned private record\n\n      Start 96: native.CONSUMER-CONTINUITY\n40/40 Test #96: native.CONSUMER-CONTINUITY .......   Passed   70.42 sec\n\n98% tests passed, 1 tests failed out of 40\n\nTotal Test time (real) =  96.21 sec\n\nThe following tests FAILED:\n\t 95 - native.NATIVE-COLLECTOR (Failed)\n Errors while running CTest\n\nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-07-session-demand/linux-x64-gcc13-focus-27f5d347fb\n",
+    "stderr": ""
+  }
+]

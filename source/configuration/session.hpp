@@ -16,6 +16,8 @@ using InventorySource = TelemetrySource;
 struct Subscription {
     protocol::TelemetryBinding binding;
     std::uint64_t ticket;
+    Authority authority = {};
+    std::optional<std::uint64_t> heartbeat = {};
 };
 // Portable controller-side state machine. Native streams own I/O deadlines and
 // supply authenticated context; this class cannot authenticate a process itself.
@@ -33,6 +35,9 @@ public:
     std::size_t frame_bound(const std::string& connection) const;
     std::size_t request_count() const { return ledger_.size(); }
     std::optional<Subscription> subscription(const std::string& connection) const;
+    bool current_subscription(const std::string& connection,std::uint64_t ticket) const;
+    // Trusted composition rejected acquisition; no wire caller supplies authority.
+    void reject_demand(const std::string& connection);
     std::size_t demand_count() const;
     bool offer(const std::string& connection, std::uint64_t ticket, const std::string& record,
                const Json& snapshot, std::optional<std::uint64_t> base, std::uint64_t now);

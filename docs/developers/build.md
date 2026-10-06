@@ -1,5 +1,20 @@
 # Developer setup and checks
 
+The latest [session demand checkpoint](../../spec/delivery/session-demand-handoff.md)
+passes full suites of 130 Linux, 119 Windows and 108 historical-toolset entries.
+`syspane_demand_sessions` privately owns Sessions and DemandOwner. The controller
+supplies an immutable bounded request when opening a native-authenticated connection;
+only an admitted subscription creates acquisition demand. Existing wire documents
+do not accept arbitrary field/entity selections. Native loops remain responsible
+for authentication, serialized calls, worker ownership and exact stop proof.
+
+After the ordinary workspace preflight and configure/build, run the five portable
+families with `ctest --preset <profile> -R '^demand-session[.]' --output-on-failure`.
+They cover admission, heartbeat/expiry, resubscription/callback identity, policy and
+clock faults. The Linux collector consumes the same adapter; its existing native
+collector, demand and continuity oracles pass unchanged. Historical host execution
+and a 15-executable PE/import/input audit do not establish guest OS compatibility.
+
 The [Linux demand executor checkpoint](../../spec/delivery/demand-executor-handoff.md)
 adds `native.NATIVE-DEMAND-EXECUTOR` with five cases. Run it using
 `ctest --preset linux-x64-gcc13 -R '^native[.]NATIVE-DEMAND-EXECUTOR$' --output-on-failure`

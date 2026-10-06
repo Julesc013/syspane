@@ -54,6 +54,8 @@ Malformed, denied or incorrectly bound subscription input closes without data.
 
 Admission starts a 3,000 ms demand lease. Only a strictly increasing peer heartbeat
 sequence renews it; duplicate heartbeats may be echoed but do not extend demand.
+An accepted sequence followed by a lower sequence closes with `heartbeat.regressed`
+and discards that connection's queues and demand; it does not close other peers.
 Data, repeated subscribe, and dequeue do not renew it. At exact expiry close the
 connection and discard its queues/demand. Native EOF/shutdown/write failure likewise
 destroys demand. The native loop ticks on bounded reads even without incoming bytes.

@@ -1,0 +1,140 @@
+{
+  "schema_version": "0.1.0",
+  "work_id": "W-07",
+  "source_ref": "e567a018d334506e42332dc7f44f9c911ac1d362",
+  "objective": "Bind immutable controller-selected acquisition requests to authenticated subscription lifetimes, using the shared owner in the native Linux collector.",
+  "changed_files": [
+    "CMakeLists.txt",
+    "README.md",
+    "TODO.md",
+    "build-support/components.json",
+    "build-support/evidence/session-demand-handoff.json",
+    "build-support/evidence/w-07-session-demand-attempts.json",
+    "build-support/evidence/w-07-session-demand-history/audit_session_demand_legacy.py",
+    "build-support/evidence/w-07-session-demand-history/linux-x64-gcc13-build-244b298860/result.json",
+    "build-support/evidence/w-07-session-demand-history/linux-x64-gcc13-build-244b298860/source-inputs.zip",
+    "build-support/evidence/w-07-session-demand-history/linux-x64-gcc13-build-d182fee0d3/result.json",
+    "build-support/evidence/w-07-session-demand-history/linux-x64-gcc13-build-d182fee0d3/source-inputs.zip",
+    "build-support/evidence/w-07-session-demand-history/linux-x64-gcc13-configure-e519d82a55/result.json",
+    "build-support/evidence/w-07-session-demand-history/linux-x64-gcc13-configure-e519d82a55/source-inputs.zip",
+    "build-support/evidence/w-07-session-demand-history/linux-x64-gcc13-focus-27f5d347fb/result.json",
+    "build-support/evidence/w-07-session-demand-history/linux-x64-gcc13-focus-27f5d347fb/source-inputs.zip",
+    "build-support/evidence/w-07-session-demand-history/linux-x64-gcc13-test-aa57b20fc7/result.json",
+    "build-support/evidence/w-07-session-demand-history/linux-x64-gcc13-test-aa57b20fc7/source-inputs.zip",
+    "build-support/evidence/w-07-session-demand-history/preserve_session_demand.py",
+    "build-support/evidence/w-07-session-demand-history/session-demand-execution-linux-x64-gcc13-89ed05394e.json",
+    "build-support/evidence/w-07-session-demand-history/session-demand-execution-linux-x64-gcc13-ce7c1bad55.json",
+    "build-support/evidence/w-07-session-demand-history/session-demand-execution-windows-x64-gcc15-071ff1ca87.json",
+    "build-support/evidence/w-07-session-demand-history/session-demand-execution-windows-x86-v141-xp-4b852cbb9c.json",
+    "build-support/evidence/w-07-session-demand-history/session_demand_flow.py",
+    "build-support/evidence/w-07-session-demand-history/session_demand_step.py",
+    "build-support/evidence/w-07-session-demand-history/windows-x64-gcc15-build-ec0f40feb6/result.json",
+    "build-support/evidence/w-07-session-demand-history/windows-x64-gcc15-build-ec0f40feb6/source-inputs.zip",
+    "build-support/evidence/w-07-session-demand-history/windows-x64-gcc15-configure-e832778fd6/result.json",
+    "build-support/evidence/w-07-session-demand-history/windows-x64-gcc15-configure-e832778fd6/source-inputs.zip",
+    "build-support/evidence/w-07-session-demand-history/windows-x64-gcc15-test-44512d4100/result.json",
+    "build-support/evidence/w-07-session-demand-history/windows-x64-gcc15-test-44512d4100/source-inputs.zip",
+    "build-support/evidence/w-07-session-demand-history/windows-x86-v141-xp-build-9df31320b8/result.json",
+    "build-support/evidence/w-07-session-demand-history/windows-x86-v141-xp-build-9df31320b8/source-inputs.zip",
+    "build-support/evidence/w-07-session-demand-history/windows-x86-v141-xp-configure-3ad5a0cfb3/result.json",
+    "build-support/evidence/w-07-session-demand-history/windows-x86-v141-xp-configure-3ad5a0cfb3/source-inputs.zip",
+    "build-support/evidence/w-07-session-demand-history/windows-x86-v141-xp-test-b02683fd93/result.json",
+    "build-support/evidence/w-07-session-demand-history/windows-x86-v141-xp-test-b02683fd93/source-inputs.zip",
+    "build-support/evidence/w-07-session-demand-legacy-audit.json",
+    "build-support/evidence/w-07-session-demand-native/NATIVE-COLLECTOR-3dbe6c5047c7.json",
+    "build-support/evidence/w-07-session-demand-native/NATIVE-COLLECTOR-77dccccaeeda.json",
+    "build-support/evidence/w-07-session-demand-native/NATIVE-DEMAND-EXECUTOR-b5b06c89fe6d4608a16913ebbcd0ea7c.json",
+    "build-support/evidence/w-07-session-demand-native/NATIVE-DEMAND-EXECUTOR-bdc4bc846d3e4feea13803612a5994c0.json",
+    "build-support/evidence/w-07-session-demand-native/consumer-continuity-02fe7cada2.json",
+    "build-support/evidence/w-07-session-demand-native/consumer-continuity-eb460c3299.json",
+    "build-support/evidence/w-07-session-demand-staging.json",
+    "build-support/evidence/w-07-session-demand-verification.json",
+    "build-support/targets/linux-x64-gcc13.json",
+    "build-support/targets/windows-x64-gcc15.json",
+    "build-support/targets/windows-x86-v141-xp.json",
+    "docs/developers/build.md",
+    "source/application/collector_probe.cpp",
+    "source/configuration/session.cpp",
+    "source/configuration/session.hpp",
+    "source/runtime/demand_sessions.cpp",
+    "source/runtime/demand_sessions.hpp",
+    "spec/checksums.json",
+    "spec/delivery/current-state.md",
+    "spec/delivery/index.md",
+    "spec/delivery/packages/index.md",
+    "spec/delivery/packages/w-07-session-demand.md",
+    "spec/delivery/packages/w-25-subscriptions.md",
+    "spec/delivery/session-demand-handoff.md",
+    "spec/delivery/work-units.json",
+    "spec/generated/catalog.json",
+    "tests/fault/demand_session_tests.cpp"
+  ],
+  "decisions": [
+    "Privately compose Sessions and DemandOwner. Existing 0.1/0.2 wire bodies remain unchanged; arbitrary consumer field selection is not implemented by this local API.",
+    "Admit collection only after subscription and with actual negotiated authority. Only accepted new heartbeat sequences renew demand; decreasing sequences close the affected peer.",
+    "Resubscription rotates session callback identity without renewing demand or cancelling compatible acquisition. Reject old callbacks before time and payload inspection.",
+    "Reconcile lifetimes before dispatch/publication. Policy and clock faults close sessions and cancel jobs while retaining native slots until confirmed stop.",
+    "Replace manual collector heartbeat/lease mirroring with the shared adapter; preserve real worker measurements and native stop proof.",
+    "Preserve the initial 999 ms restart observation. Anchor native retry delay to the exact reported fault time without changing existing native test oracles.",
+    "All five user-required release families remain open; this shared component and Linux integration are prerequisites only."
+  ],
+  "checks": [
+    {
+      "name": "Initial Linux focus run: 39 passed, native collector hang/backoff failed",
+      "outcome": "fail",
+      "evidence": "build-support/evidence/w-07-session-demand-attempts.json"
+    },
+    {
+      "name": "Final full Linux suite: 130 entries passed",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-07-session-demand-attempts.json"
+    },
+    {
+      "name": "Final full contemporary Windows suite: 119 entries passed",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-07-session-demand-attempts.json"
+    },
+    {
+      "name": "Final full historical-toolset suite on modern host: 108 entries passed",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-07-session-demand-attempts.json"
+    },
+    {
+      "name": "Fifteen historical PE/header/import audits and actual pinned build inputs",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-07-session-demand-legacy-audit.json"
+    },
+    {
+      "name": "Specification/schema/generation/integrity and 56 tooling tests passed, two skipped",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-07-session-demand-verification.json"
+    },
+    {
+      "name": "Staged implementation, source archives, unchanged native oracles and evidence identities",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-07-session-demand-staging.json"
+    },
+    {
+      "name": "Installed controller/policy, complete editions and native historical/Wayland/Mac qualification",
+      "outcome": "not_run",
+      "evidence": null
+    }
+  ],
+  "open_questions": [
+    "Exact oldest Windows 9x, Windows NT and Mac OS X releases/service levels and CPU architectures remain awaiting user clarification.",
+    "Designated Windows/historical and Mac laboratories remain unresolved; no existing user desktop or unrelated VM is admitted by implication."
+  ],
+  "next_step": "Close consumer wire selection, bounded invalidation/coalescing and installed controller/policy ownership; implement the existing W-08 scene-command and persistence contracts toward complete native editions. Preserve all five required release tracks and native qualification gates.",
+  "authority_used": [
+    "user:foundation-native-campaign-2026-10-05",
+    "User-expanded complete SysPane 0.1.0 release objective",
+    "User instruction to commit and sync main"
+  ],
+  "limitations": [
+    "W-07 and W-25 remain in progress. Local immutable controller requests do not implement general consumer wire selection or an installed product controller.",
+    "No Windows native collector, historical guest runtime, Wayland, Mac or new complete GNOME desktop qualification was executed.",
+    "Native late-result tests use bounded delays after real reads; they do not qualify cancellation of every possible blocked kernel query.",
+    "Operational continuity journals remain in owned ignored storage; committed projections identify their hashes and retain public outcomes only.",
+    "Two existing Windows symlink tooling assertions were skipped. No privilege, protected machine policy, unowned desktop or release publication was exercised."
+  ]
+}

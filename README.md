@@ -7,9 +7,10 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
-The [Linux demand integration](spec/delivery/demand-executor-handoff.md) now connects
-authorized consumer leases to real acquisition outside the IPC loop, retaining
-cancelled work until native completion. General session selection and installed
+The [session demand integration](spec/delivery/session-demand-handoff.md) now binds
+authenticated subscriptions to controller-selected acquisition requests. Independent
+leases, policy changes and stale callbacks are checked on all three development
+toolsets, with real collection on Linux. General wire selection and installed
 policy/controller integration remain open.
 
 SysPane is designed around a persistent passive desktop surface, a native

@@ -388,7 +388,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "e828cfcc28e964988aa90d0fe854c1ea1a61cce73060af644663144ef0bba5a0"
+      "sha256": "199eea2094b9d1fe24f07ad0b7d1dd0fc799c50d92d8275caddbb20402acefef"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -1102,6 +1102,17 @@
       "sha256": "fc19c23480fecb7dff1896fa0e6260836adfeef155a086247bc9a615fec1e4d9"
     },
     {
+      "id": "SP-W07-SESSION-DEMAND",
+      "path": "delivery/packages/w-07-session-demand.md",
+      "title": "Authenticated session demand ownership",
+      "description": "Bind controller-selected acquisition requests to authoritative session lifetimes without changing existing wire documents.",
+      "requires": [
+        "SP-W07-DEMAND-OWNER",
+        "SP-W25-SUBSCRIPTIONS"
+      ],
+      "sha256": "68123c0375248f5292111209005279a39ade3e85d7d3dbafc47a6f77aca52d90"
+    },
+    {
       "id": "SP-W24-PACKAGE",
       "path": "delivery/packages/w-24-transport.md",
       "title": "W-24 authenticated transport and policy boundary",
@@ -1414,7 +1425,7 @@
         "SP-W24-PACKAGE",
         "SP-SCHEDULER"
       ],
-      "sha256": "a9dd66367e9016139543756b0d5a838cb726d440dc650363d08f5ea91f0f41d6"
+      "sha256": "d29110b03cd48bdd260e145a9596b59d8935265fc52cc9787adff12dec3f85b0"
     },
     {
       "id": "SP-W25-TELEMETRY-WIRE",
@@ -1487,6 +1498,17 @@
         "SP-TESTING"
       ],
       "sha256": "a810e9b3bd8620436b24cdde1e0c9e9fb009817568e768381e2887db9669c6ea"
+    },
+    {
+      "id": "SP-SESSION-DEMAND-HANDOFF",
+      "path": "delivery/session-demand-handoff.md",
+      "title": "Authenticated session demand checkpoint",
+      "description": "Bind controller-selected acquisition plans to authoritative subscription lifetimes and preserve native restart timing evidence.",
+      "requires": [
+        "SP-W07-SESSION-DEMAND",
+        "SP-DEMAND-EXECUTOR-HANDOFF"
+      ],
+      "sha256": "a826f88565e6f40721d520739d54807b4ec7dc1a80c91ffa54a3d6d067040775"
     },
     {
       "id": "SP-STATE-IMPORT-HANDOFF",
