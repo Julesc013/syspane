@@ -104,6 +104,12 @@ executed development cases in the [native handoff](../delivery/native-transport-
 This preview slice conservatively retains preview IDs within the same
 reservation budget, with current-policy checks on retrieval and replay.
 
+The [asynchronous command profile](../delivery/packages/w-08-command-sessions.md)
+negotiates `configuration.transactions` with command 0.2/result 0.1. Its one ledger,
+worker-stop ownership, connection lifetimes, reply reservations and commit permit
+make cancellation and policy ordering explicit. This is a finite development
+composition; installed ownership and original-epoch wire reconciliation remain open.
+
 Cancel before commit may abort preparation. After commit it cannot undo the accepted
 generation; return the committed result with activation status. A lost connection
 does not prove cancellation. `result.get` reads a retained result without execution;

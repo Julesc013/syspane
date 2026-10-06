@@ -22,13 +22,23 @@ The active objective is now the [complete 0.1.0 release](release-0.1.0.md) for W
 required but is no longer the final completion boundary. Legacy version/architecture
 floors, native labs and complete desktop/package evidence remain unresolved.
 
-The latest [authored transaction checkpoint](authored-transactions-handoff.md)
+The latest [command session checkpoint](command-sessions-handoff.md) connects
+authenticated IPC to one asynchronous transaction ledger and the existing native
+Linux generation store. Reserved replies preserve control capacity; cancellation,
+policy replacement and reused connection IDs cannot fabricate storage outcomes.
+The independent client checks actual worker lifetime, responsive control traffic,
+same-epoch lost-response retrieval and stored documents. Installed ownership,
+supervised workers, original-epoch wire reconciliation, asset closure, native
+settings/editor integration and visible activation remain required. This is a
+bounded implementation checkpoint; all five complete release tracks remain open.
+
+The earlier [authored transaction checkpoint](authored-transactions-handoff.md)
 validates scene/settings contracts and performs coherent commits in the Linux ext4
 laboratory. Twenty native cases cover ten interrupted transitions, lost-response
 reconciliation, policy changes immediately before replacement, corruption and bounds.
 Full suites passed 139 Linux, 127 Windows and 116 historical-toolset host entries;
 affected checks pass again after the final Linux guard-placement and metadata changes.
-Installed ownership, asynchronous commit IPC, asset closure, native settings/editor
+At that checkpoint, installed ownership, asynchronous commit IPC, asset closure, native settings/editor
 integration and visible activation remain required. No historical runtime or new
 desktop qualification follows from these shared components and storage experiments.
 

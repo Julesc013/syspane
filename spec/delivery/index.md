@@ -8,6 +8,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Authored transactions and Linux generation recovery](authored-transactions-handoff.md) — Preserve coherent scene/settings changes and committed request identities through native process interruption.
 - [Foundation and native-experiment campaign admission](campaign-admission.md) — Record the user-admitted implementation scope and the first package's closed boundaries.
 - [Foundation campaign coverage audit](campaign-coverage.md) — Map the admitted campaign to actual evidence and remaining implementation or native laboratory requirements.
+- [Asynchronous authenticated command checkpoint](command-sessions-handoff.md) — Preserve responsive control traffic, exact request ownership and honest storage outcomes during native transactions.
 - [Native collection continuity checkpoint](consumer-continuity-handoff.md) — Real acquisition survives separately owned consumer failures and bounded replacement.
 - [Automatic recovery from independent render failure checkpoint](controller-render-recovery-handoff.md) — The persistent controller replaces failed rendering lifetimes and preserves original measured collection.
 - [Current state and next admitted boundary](current-state.md) — An honest resumption point for the initial greenfield specification.

@@ -126,7 +126,8 @@ Json result(const Decision& decision, const std::string& request_id, const std::
         reply["revision"] = reply["stored"] = reply["durable"] = reply["visible"] = nullptr;
     }
     if (!decision.code.empty()) reply["error"] = {{"code", decision.code},
-        {"message", "Request did not change stored configuration."}, {"retryable", decision.outcome == "busy"}};
+        {"message", decision.outcome == "unknown" ? "Request outcome requires reconciliation." : "Request did not change stored configuration."},
+        {"retryable", decision.outcome == "busy"}};
     return reply;
 }
 bool permits(const Authority& authority, const Policy& policy, const std::string& channel, const std::string& classification) {

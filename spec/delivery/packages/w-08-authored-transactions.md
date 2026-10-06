@@ -20,7 +20,8 @@ authored-state validator and transaction coordinator in `source/configuration/`,
 native generation storage in `source/platform/`, and finite native exercises in
 `source/application/` and `tests/configuration/`. Existing preview IPC remains
 unchanged until its asynchronous commit, cancellation and reconciliation integration
-is independently admitted and tested. This package does not declare a finished editor,
+is independently admitted and tested in the subsequent
+[command session package](w-08-command-sessions.md). This package does not declare a finished editor,
 renderer, preset resolver, native settings application or complete W-08 gate.
 
 ## Shared boundary

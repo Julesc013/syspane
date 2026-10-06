@@ -2,12 +2,18 @@
   "profile": "windows-x86-v141-xp",
   "scope": "Declared mandatory imports for the existing portable experiment with the pinned v141_xp static runtime. This allowlist does not prove guest exports, API behavior or dynamic runtime fallback.",
   "kernel32.dll": [
+    "ChangeTimerQueueTimer",
     "CloseHandle",
     "CompareStringW",
     "CreateEventW",
     "CreateFileW",
+    "CreateThread",
+    "CreateTimerQueue",
+    "CreateTimerQueueTimer",
     "DecodePointer",
     "DeleteCriticalSection",
+    "DeleteTimerQueueTimer",
+    "DuplicateHandle",
     "EncodePointer",
     "EnterCriticalSection",
     "EnumSystemLocalesW",
@@ -18,6 +24,7 @@
     "FlushFileBuffers",
     "FreeEnvironmentStringsW",
     "FreeLibrary",
+    "FreeLibraryAndExitThread",
     "GetACP",
     "GetCPInfo",
     "GetCommandLineA",
@@ -26,31 +33,44 @@
     "GetConsoleMode",
     "GetCurrentProcess",
     "GetCurrentProcessId",
+    "GetCurrentThread",
     "GetCurrentThreadId",
     "GetDateFormatW",
     "GetEnvironmentStringsW",
     "GetFileType",
     "GetLastError",
     "GetLocaleInfoW",
+    "GetLogicalProcessorInformation",
     "GetModuleFileNameA",
+    "GetModuleFileNameW",
+    "GetModuleHandleA",
     "GetModuleHandleExW",
     "GetModuleHandleW",
+    "GetNumaHighestNodeNumber",
     "GetOEMCP",
     "GetProcAddress",
+    "GetProcessAffinityMask",
     "GetProcessHeap",
     "GetStartupInfoW",
     "GetStdHandle",
     "GetStringTypeW",
     "GetSystemTimeAsFileTime",
+    "GetThreadPriority",
+    "GetThreadTimes",
+    "GetTickCount",
     "GetTimeFormatW",
     "GetTimeZoneInformation",
     "GetUserDefaultLCID",
+    "GetVersionExW",
     "HeapAlloc",
     "HeapFree",
     "HeapReAlloc",
     "HeapSize",
     "InitializeCriticalSectionAndSpinCount",
     "InitializeSListHead",
+    "InterlockedFlushSList",
+    "InterlockedPopEntrySList",
+    "InterlockedPushEntrySList",
     "IsDebuggerPresent",
     "IsProcessorFeaturePresent",
     "IsValidCodePage",
@@ -58,11 +78,15 @@
     "LCMapStringW",
     "LeaveCriticalSection",
     "LoadLibraryExW",
+    "LoadLibraryW",
     "MultiByteToWideChar",
+    "QueryDepthSList",
     "QueryPerformanceCounter",
     "RaiseException",
     "ReadConsoleW",
     "ReadFile",
+    "RegisterWaitForSingleObject",
+    "ReleaseSemaphore",
     "ResetEvent",
     "RtlUnwind",
     "SetEndOfFile",
@@ -71,14 +95,24 @@
     "SetFilePointerEx",
     "SetLastError",
     "SetStdHandle",
+    "SetThreadAffinityMask",
+    "SetThreadPriority",
     "SetUnhandledExceptionFilter",
+    "SignalObjectAndWait",
+    "Sleep",
     "SwitchToThread",
     "TerminateProcess",
     "TlsAlloc",
     "TlsFree",
     "TlsGetValue",
     "TlsSetValue",
+    "TryEnterCriticalSection",
     "UnhandledExceptionFilter",
+    "UnregisterWait",
+    "UnregisterWaitEx",
+    "VirtualAlloc",
+    "VirtualFree",
+    "VirtualProtect",
     "WaitForSingleObjectEx",
     "WideCharToMultiByte",
     "WriteConsoleW",
@@ -105,6 +139,218 @@
       "https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-resetevent",
       "https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-setevent",
       "https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-waitforsingleobjectex"
+    ]
+  },
+  "command_synchronization_imports": {
+    "symbols": [
+      "ChangeTimerQueueTimer",
+      "CreateThread",
+      "CreateTimerQueue",
+      "CreateTimerQueueTimer",
+      "DeleteTimerQueueTimer",
+      "DuplicateHandle",
+      "FreeLibraryAndExitThread",
+      "GetCurrentThread",
+      "GetLogicalProcessorInformation",
+      "GetModuleFileNameW",
+      "GetModuleHandleA",
+      "GetNumaHighestNodeNumber",
+      "GetProcessAffinityMask",
+      "GetThreadPriority",
+      "GetThreadTimes",
+      "GetTickCount",
+      "GetVersionExW",
+      "InterlockedFlushSList",
+      "InterlockedPopEntrySList",
+      "InterlockedPushEntrySList",
+      "LoadLibraryW",
+      "QueryDepthSList",
+      "RegisterWaitForSingleObject",
+      "ReleaseSemaphore",
+      "SetThreadAffinityMask",
+      "SetThreadPriority",
+      "SignalObjectAndWait",
+      "Sleep",
+      "TryEnterCriticalSection",
+      "UnregisterWait",
+      "UnregisterWaitEx",
+      "VirtualAlloc",
+      "VirtualFree",
+      "VirtualProtect"
+    ],
+    "reason": "Pinned v141_xp static Concurrency Runtime closure introduced by the shared asynchronous owner mutex. No guest runtime qualification follows.",
+    "source": "https://learn.microsoft.com/en-us/cpp/parallel/concrt/overview-of-the-concurrency-runtime",
+    "documented_client_floors": [
+      {
+        "name": "ChangeTimerQueueTimer",
+        "url": "https://learn.microsoft.com/en-us/windows/win32/api/threadpoollegacyapiset/nf-threadpoollegacyapiset-changetimerqueuetimer",
+        "requirements": "Minimum supported client Windows XP [desktop apps only]"
+      },
+      {
+        "name": "CreateTimerQueue",
+        "url": "https://learn.microsoft.com/en-us/windows/win32/api/threadpoollegacyapiset/nf-threadpoollegacyapiset-createtimerqueue",
+        "requirements": "Minimum supported client Windows XP [desktop apps only]"
+      },
+      {
+        "name": "CreateTimerQueueTimer",
+        "url": "https://learn.microsoft.com/en-us/windows/win32/api/threadpoollegacyapiset/nf-threadpoollegacyapiset-createtimerqueuetimer",
+        "requirements": "Minimum supported client Windows XP [desktop apps only]"
+      },
+      {
+        "name": "DeleteTimerQueueTimer",
+        "url": "https://learn.microsoft.com/en-us/windows/win32/api/threadpoollegacyapiset/nf-threadpoollegacyapiset-deletetimerqueuetimer",
+        "requirements": "Minimum supported client Windows XP [desktop apps only]"
+      },
+      {
+        "name": "UnregisterWaitEx",
+        "url": "https://learn.microsoft.com/en-us/windows/win32/api/threadpoollegacyapiset/nf-threadpoollegacyapiset-unregisterwaitex",
+        "requirements": "Minimum supported client Windows XP [desktop apps only]"
+      },
+      {
+        "name": "CreateThread",
+        "url": "https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-createthread",
+        "requirements": "Minimum supported client Windows XP [desktop apps | UWP apps]"
+      },
+      {
+        "name": "GetCurrentThread",
+        "url": "https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-getcurrentthread",
+        "requirements": "Minimum supported client Windows XP [desktop apps | UWP apps]"
+      },
+      {
+        "name": "GetProcessAffinityMask",
+        "url": "https://learn.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-getprocessaffinitymask",
+        "requirements": "Minimum supported client Windows XP [desktop apps | UWP apps]"
+      },
+      {
+        "name": "GetThreadPriority",
+        "url": "https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-getthreadpriority",
+        "requirements": "Minimum supported client Windows XP [desktop apps | UWP apps]"
+      },
+      {
+        "name": "GetThreadTimes",
+        "url": "https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-getthreadtimes",
+        "requirements": "Minimum supported client Windows XP [desktop apps | UWP apps]"
+      },
+      {
+        "name": "SetThreadPriority",
+        "url": "https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-setthreadpriority",
+        "requirements": "Minimum supported client Windows XP [desktop apps | UWP apps]"
+      },
+      {
+        "name": "DuplicateHandle",
+        "url": "https://learn.microsoft.com/en-us/windows/win32/api/handleapi/nf-handleapi-duplicatehandle",
+        "requirements": "Minimum supported client Windows 2000 Professional [desktop apps | UWP apps]"
+      },
+      {
+        "name": "FreeLibraryAndExitThread",
+        "url": "https://learn.microsoft.com/en-us/windows/win32/api/libloaderapi/nf-libloaderapi-freelibraryandexitthread",
+        "requirements": "Minimum supported client Windows XP [desktop apps | UWP apps]"
+      },
+      {
+        "name": "GetModuleFileNameW",
+        "url": "https://learn.microsoft.com/en-us/windows/win32/api/libloaderapi/nf-libloaderapi-getmodulefilenamew",
+        "requirements": "Minimum supported client Windows XP [desktop apps | UWP apps]"
+      },
+      {
+        "name": "GetModuleHandleA",
+        "url": "https://learn.microsoft.com/en-us/windows/win32/api/libloaderapi/nf-libloaderapi-getmodulehandlea",
+        "requirements": "Minimum supported client Windows XP [desktop apps only]"
+      },
+      {
+        "name": "LoadLibraryW",
+        "url": "https://learn.microsoft.com/en-us/windows/win32/api/libloaderapi/nf-libloaderapi-loadlibraryw",
+        "requirements": "Minimum supported client Windows XP [desktop apps only]"
+      },
+      {
+        "name": "GetNumaHighestNodeNumber",
+        "url": "https://learn.microsoft.com/en-us/windows/win32/api/systemtopologyapi/nf-systemtopologyapi-getnumahighestnodenumber",
+        "requirements": "Minimum supported client Windows Vista, Windows XP Professional x64 Edition, Windows XP with SP2 [desktop apps only]"
+      },
+      {
+        "name": "GetLogicalProcessorInformation",
+        "url": "https://learn.microsoft.com/en-us/windows/win32/api/sysinfoapi/nf-sysinfoapi-getlogicalprocessorinformation",
+        "requirements": "Minimum supported client Windows Vista, Windows XP Professional x64 Edition, Windows XP with SP3 [desktop apps | UWP apps]"
+      },
+      {
+        "name": "GetTickCount",
+        "url": "https://learn.microsoft.com/en-us/windows/win32/api/sysinfoapi/nf-sysinfoapi-gettickcount",
+        "requirements": "Minimum supported client Windows 2000 Professional [desktop apps | UWP apps]"
+      },
+      {
+        "name": "GetVersionExW",
+        "url": "https://learn.microsoft.com/en-us/windows/win32/api/sysinfoapi/nf-sysinfoapi-getversionexw",
+        "requirements": "Minimum supported client Windows 2000 Professional [desktop apps | UWP apps]"
+      },
+      {
+        "name": "InterlockedFlushSList",
+        "url": "https://learn.microsoft.com/en-us/windows/win32/api/interlockedapi/nf-interlockedapi-interlockedflushslist",
+        "requirements": "Minimum supported client Windows XP [desktop apps | UWP apps]"
+      },
+      {
+        "name": "InterlockedPopEntrySList",
+        "url": "https://learn.microsoft.com/en-us/windows/win32/api/interlockedapi/nf-interlockedapi-interlockedpopentryslist",
+        "requirements": "Minimum supported client Windows XP [desktop apps | UWP apps]"
+      },
+      {
+        "name": "InterlockedPushEntrySList",
+        "url": "https://learn.microsoft.com/en-us/windows/win32/api/interlockedapi/nf-interlockedapi-interlockedpushentryslist",
+        "requirements": "Minimum supported client Windows XP [desktop apps | UWP apps]"
+      },
+      {
+        "name": "QueryDepthSList",
+        "url": "https://learn.microsoft.com/en-us/windows/win32/api/interlockedapi/nf-interlockedapi-querydepthslist",
+        "requirements": "Minimum supported client Windows XP [desktop apps | UWP apps]"
+      },
+      {
+        "name": "RegisterWaitForSingleObject",
+        "url": "https://learn.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-registerwaitforsingleobject",
+        "requirements": "Minimum supported client Windows XP [desktop apps only]"
+      },
+      {
+        "name": "SetThreadAffinityMask",
+        "url": "https://learn.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-setthreadaffinitymask",
+        "requirements": "Minimum supported client Windows XP [desktop apps | UWP apps]"
+      },
+      {
+        "name": "UnregisterWait",
+        "url": "https://learn.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-unregisterwait",
+        "requirements": "Minimum supported client Windows XP [desktop apps only]"
+      },
+      {
+        "name": "ReleaseSemaphore",
+        "url": "https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-releasesemaphore",
+        "requirements": "Minimum supported client Windows XP [desktop apps | UWP apps]"
+      },
+      {
+        "name": "SignalObjectAndWait",
+        "url": "https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-signalobjectandwait",
+        "requirements": "Minimum supported client Windows XP [desktop apps | UWP apps]"
+      },
+      {
+        "name": "Sleep",
+        "url": "https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-sleep",
+        "requirements": "Minimum supported client Windows XP [desktop apps | UWP apps]"
+      },
+      {
+        "name": "TryEnterCriticalSection",
+        "url": "https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-tryentercriticalsection",
+        "requirements": "Minimum supported client Windows XP [desktop apps | UWP apps]"
+      },
+      {
+        "name": "VirtualAlloc",
+        "url": "https://learn.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-virtualalloc",
+        "requirements": "Minimum supported client Windows XP [desktop apps | UWP apps]"
+      },
+      {
+        "name": "VirtualFree",
+        "url": "https://learn.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-virtualfree",
+        "requirements": "Minimum supported client Windows XP [desktop apps | UWP apps]"
+      },
+      {
+        "name": "VirtualProtect",
+        "url": "https://learn.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-virtualprotect",
+        "requirements": "Minimum supported client Windows XP [desktop apps | UWP apps]"
+      }
     ]
   }
 }

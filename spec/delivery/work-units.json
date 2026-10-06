@@ -293,7 +293,8 @@
         "SP-CONFIG-RESOLUTION",
         "SP-WORK-PACKAGES",
         "SP-ACCEPTANCE-TRACES",
-        "SP-W08-AUTHORED"
+        "SP-W08-AUTHORED",
+        "SP-W08-COMMAND-SESSIONS"
       ],
       "acceptance_tests": [
         "T-TRANSACTION",
@@ -309,14 +310,15 @@
         "source/configuration/authored.hpp",
         "source/configuration/transaction.hpp",
         "source/platform/generation_store_linux.cpp",
-        "tests/configuration/"
+        "tests/configuration/",
+        "source/configuration/async_commands.hpp"
       ],
       "status": "in_progress",
       "authority_class": "development",
       "execution_grant": "user:foundation-native-campaign-2026-10-05",
-      "notes": "Shared authored validation and atomic scene/settings coordinator implemented with typed replay/reconciliation, current policy and mandatory resource preparation. Native Linux ext4 experiment passes twenty cases including ten observed stop/kill transitions, original-request recovery, late policy change, corruption and storage bounds. Full suites passed 139 Linux, 127 Windows and 116 historical-toolset host entries; final affected checks pass after Linux guard-placement and import/component metadata refinements. Original component and import-audit failures retained. Asynchronous commit/cancel/reconciliation IPC, installed resource/store ownership, activation, undo, external-edit and non-Linux storage gates remain open. The full five-family 0.1.0 release remains required.",
-      "package": "delivery/packages/w-08-authored-transactions.md",
-      "evidence": "delivery/authored-transactions-handoff.md"
+      "notes": "Authored validation and coherent Linux storage now connect to asynchronous authenticated command sessions with one ledger, bounded reply reservations, cancellation at the commit permit, current-policy disclosure and same-epoch reconnect. Seven shared test families and six independent native IPC scenarios exercise the boundary; source-bound evidence and original failures are linked. Installed controller/store/policy ownership, hard worker supervision, original-epoch wire reconciliation, resource/preset closure, activation, undo, external edits, migrations and non-Linux storage remain open. The full five-family 0.1.0 release remains required.",
+      "package": "delivery/packages/w-08-command-sessions.md",
+      "evidence": "delivery/command-sessions-handoff.md"
     },
     {
       "id": "W-09",

@@ -3,12 +3,15 @@
 
 namespace syspane::protocol {
 bool Outbox::can_control(std::size_t size) const {
-    return !closed_ && size > 0 && size <= frame_limit && control_.size() < 16 && size + 4 <= 65536 - control_bytes_;
+    return !closed_ && size > 0 && size <= frame_limit && control_.size()+reserved_ < 16 &&
+        size + 4 <= 65536 - control_bytes_ - reserved_*(reply_capacity+4);
 }
+bool Outbox::reserve_reply(){if(reserved_>=8||!can_control(reply_capacity))return false;++reserved_;return true;}
+void Outbox::release_reply(){if(!reserved_)throw Error("queue.reservation");--reserved_;}
 void Outbox::close() {
     closed_ = true;
     control_.clear(); data_.clear();
-    control_bytes_ = data_bytes_ = 0;
+    control_bytes_ = data_bytes_ = reserved_ = 0;
 }
 bool Outbox::control(std::string payload) {
     if (!can_control(payload.size())) { close(); return false; }

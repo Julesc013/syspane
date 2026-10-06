@@ -269,7 +269,8 @@
       "source_owner": "source/configuration/",
       "public_interfaces": [
         "source/configuration/policy.hpp",
-        "source/configuration/session.hpp"
+        "source/configuration/session.hpp",
+        "source/configuration/command_service.hpp"
       ],
       "private_interfaces": [],
       "sources": [
@@ -1535,6 +1536,88 @@
       ],
       "allowed_dependencies": [
         "syspane_generation_store",
+        "Threads::Threads"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
+    },
+    {
+      "id": "async-commands",
+      "target": "syspane_async_commands",
+      "type": "STATIC_LIBRARY",
+      "source_owner": "source/configuration/",
+      "public_interfaces": [
+        "source/configuration/async_commands.hpp"
+      ],
+      "private_interfaces": [],
+      "sources": [
+        "source/configuration/async_commands.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_authored",
+        "Threads::Threads"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "windows-x64-gcc15",
+        "linux-x64-gcc13",
+        "windows-x86-v141-xp"
+      ]
+    },
+    {
+      "id": "command-session-tests",
+      "target": "syspane_command_session_tests",
+      "type": "EXECUTABLE",
+      "source_owner": "tests/configuration/",
+      "public_interfaces": [],
+      "private_interfaces": [],
+      "sources": [
+        "tests/configuration/command_session_tests.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_async_commands"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "windows-x64-gcc15",
+        "linux-x64-gcc13",
+        "windows-x86-v141-xp"
+      ]
+    },
+    {
+      "id": "command-probe",
+      "target": "syspane_command_probe",
+      "type": "EXECUTABLE",
+      "source_owner": "source/application/",
+      "public_interfaces": [],
+      "private_interfaces": [],
+      "sources": [
+        "source/application/command_probe.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_async_commands",
+        "syspane_generation_store",
+        "syspane_local_ipc",
         "Threads::Threads"
       ],
       "target_requirements": [

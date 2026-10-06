@@ -1,5 +1,24 @@
 # Developer setup and checks
 
+The [command session checkpoint](../../spec/delivery/command-sessions-handoff.md)
+adds `syspane_async_commands` and seven portable command families on all three
+development profiles. The optional `configuration.transactions` feature uses existing
+command/result versions and requires an 8192-byte frame floor. Construct Sessions
+with its command owner; call its admission/delivery methods only on the serialized
+session loop. Dispatch `take()` tickets to one native worker, call `run()` there,
+join that worker, then call `finish(..., true)` on the owner loop. Keep the store and
+owner alive until actual stop. Do not substitute a cancellation callback for a join.
+
+After ordinary preflight and configure/build, run `ctest --preset <profile> -R
+'^(configuration[.]|native[.]COMMAND-IPC$)' --output-on-failure`. Linux's
+`SysPane.CommandProbe` uses the same private ext4 and native peer-authentication
+adapters. Its independent Python socket client verifies responsive control traffic,
+preparation/permit cancellation, policy revocation and same-epoch lost-response
+retrieval, then checks stored documents. Parent-pipe controls and bounded worker
+gates are test instrumentation. Reports remain under `native-evidence/commands-*`.
+This finite composition does not install a controller or qualify arbitrary resource
+preparers, a hard worker deadline, original-epoch wire reconciliation or activation.
+
 The latest [authored transaction checkpoint](../../spec/delivery/authored-transactions-handoff.md)
 adds `syspane_authored` on all three development profiles and the Linux-only
 `syspane_generation_store` / `SysPane.ConfigProbe`. After ordinary workspace
@@ -14,8 +33,9 @@ The compiled validator embeds canonical settings/scene/layout/binding/command
 schemas; runtime validation does not fetch schemas. Transactions require a resource
 preparer and current-policy callback. The probe uses typed laboratory policy and
 its synthetic built-in theme only. Publication and reconciliation return result
-0.1 documents, with pending activation and no visibility claim. Existing IPC remains
-preview-only for commands. Do not point the probe at installed user configuration.
+0.1 documents, with pending activation and no visibility claim. IPC compositions
+without an asynchronous command owner remain preview-only. Do not point the probes
+at installed user configuration.
 The native store retains at most 32 generation attempts and does not prune them;
 capacity or corruption requires an explicit maintenance/repair boundary still to
 be implemented. Current/previous selectors, not directory timestamps, own recovery.

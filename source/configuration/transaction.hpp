@@ -26,6 +26,9 @@ public:
     const Authored& authored()const{return current_.documents;} // Trusted owner only; external projection requires policy.
     bool faulted()const{return faulted_;}
 private:
+    friend class AsyncCommands;
+    Json submit_impl(const std::string&,const std::string&,std::string,const Authority&,
+        const std::function<Policy()>&,std::uint64_t,const std::function<bool()>&,bool,const std::function<void()>&);
     Json reply(const std::string& request,const char* outcome,const char* code="",std::optional<std::uint64_t> committed={})const;
     GenerationStore& store_;
     std::string epoch_;

@@ -216,7 +216,7 @@
         "SP-PROTOCOL",
         "SP-COMMANDS"
       ],
-      "sha256": "2f9d941f60901febca85d73c6fce0cc5aa835447ccade9fdc518c6982b6df15c"
+      "sha256": "cf6a152df3b4588ee6da81f37f8c86d6938ca71621bb3ab3f0c1c646b38320f1"
     },
     {
       "id": "SP-VERSIONS",
@@ -372,6 +372,17 @@
       "sha256": "0ae3f1f243ea12b86f2e7e09c88094da94e2db81c0940d65b8b4c08c5fc1d17e"
     },
     {
+      "id": "SP-COMMAND-SESSIONS-HANDOFF",
+      "path": "delivery/command-sessions-handoff.md",
+      "title": "Asynchronous authenticated command checkpoint",
+      "description": "Preserve responsive control traffic, exact request ownership and honest storage outcomes during native transactions.",
+      "requires": [
+        "SP-W08-COMMAND-SESSIONS",
+        "SP-AUTHORED-TRANSACTIONS-HANDOFF"
+      ],
+      "sha256": "fe8159b2a00ced313272b76259a3b8458df89d0ff741f3cc154261249ec1f293"
+    },
+    {
       "id": "SP-CONSUMER-CONTINUITY-HANDOFF",
       "path": "delivery/consumer-continuity-handoff.md",
       "title": "Native collection continuity checkpoint",
@@ -399,7 +410,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "8543bab217ba12c4062f62efaef2989205783c70ea36ca938f769d76f50b29ec"
+      "sha256": "a7e738db2d198c63bc65dd74bac45323f464acef0460c5e642f262648dbd1835"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -1135,7 +1146,19 @@
         "SP-CONFIG-RESOLUTION",
         "SP-W24-PACKAGE"
       ],
-      "sha256": "43a732ab4e8fc63137c953755b03d4e9729cda586e3bde736011f3f8a4a9212d"
+      "sha256": "f2d4aef27f76a43b8aeea7d32b26c0a12718ab838573a4fe7db674fdaf25ee77"
+    },
+    {
+      "id": "SP-W08-COMMAND-SESSIONS",
+      "path": "delivery/packages/w-08-command-sessions.md",
+      "title": "Asynchronous authored command sessions",
+      "description": "Join authenticated sessions to one bounded transaction owner without blocking control traffic.",
+      "requires": [
+        "SP-W08-AUTHORED",
+        "SP-W24-PACKAGE",
+        "SP-COMMANDS"
+      ],
+      "sha256": "36fa1020cc5ae3afba5dfdf4cef25a3ee68eb5270c76c12d1398891c05c9a94d"
     },
     {
       "id": "SP-W24-PACKAGE",

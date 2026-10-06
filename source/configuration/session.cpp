@@ -3,9 +3,10 @@
 namespace syspane::configuration {
 using protocol::Error;
 namespace {
-protocol::Handshake server_hello(const std::string& epoch, const std::optional<InventorySource>& source) {
+protocol::Handshake server_hello(const std::string& epoch, const std::optional<InventorySource>& source,bool commands=false) {
     protocol::Handshake hello{1, protocol::frame_limit, "console", epoch,
         {{"command", "0.2.0"}, {"command-result", "0.1.0"}}, {}, {"settings.preview", "result.get", "cancel"}};
+    if(commands)hello.optional.insert("configuration.transactions");
     if (source) {
         const auto& version = source->document_version;
         hello.documents.insert({{"telemetry",version},{"snapshot",version},{"observation",version}});
@@ -27,8 +28,8 @@ bool may_request(const Authority& authority, const Policy& policy) {
         policy.available && !policy.denied_capabilities.count("settings.preview") && !policy.denied_capabilities.count("settings.set");
 }
 }
-Sessions::Sessions(std::string epoch, std::uint64_t revision, Policy policy, std::optional<InventorySource> source)
-    : epoch_(std::move(epoch)), revision_(revision), policy_(std::move(policy)), source_(std::move(source)) {
+Sessions::Sessions(std::string epoch, std::uint64_t revision, Policy policy, std::optional<InventorySource> source,std::shared_ptr<CommandService> commands)
+    : epoch_(std::move(epoch)), revision_(revision), policy_(std::move(policy)), source_(std::move(source)),commands_(std::move(commands)) {
     if (!protocol::identifier(epoch_)) throw Error("session.epoch");
     if (source_) {
         const auto hello=server_hello(epoch_,source_);
@@ -36,23 +37,36 @@ Sessions::Sessions(std::string epoch, std::uint64_t revision, Policy policy, std
             "validation",epoch_,source_->producer,"validation",source_->channel,source_->classification,
             policy_.revision,protocol::TelemetryDirection::consumer_to_producer,source_->document_version,source_->clock_id,source_->clock_scope});
     }
+    if(commands_)commands_->attach(epoch_,revision_,policy_);
 }
+Sessions::~Sessions(){if(commands_)commands_->invalidate();}
 void Sessions::open(const std::string& id, std::string principal, Authority authority, std::uint64_t now) {
     tick(now);
     if (!authority.authenticated || authority.role_grants.empty()) throw Error("session.unauthenticated");
     if (!protocol::identifier(id) || !protocol::identifier(principal)) throw Error("session.identity");
     if (connections_.count(id)) throw Error("session.collision");
     if (connections_.size() >= 16) throw Error("session.capacity");
-    connections_.emplace(id, Connection{id, std::move(principal), std::move(authority), now, false, {}, {1, protocol::frame_limit, {}, {}}, {}});
+    if(lifetimes_==std::numeric_limits<std::uint64_t>::max())throw Error("session.capacity");
+    auto inserted=connections_.emplace(id, Connection{id, std::move(principal), std::move(authority), now, false, {}, {1, protocol::frame_limit, {}, {}}, {}});
+    inserted.first->second.lifetime=++lifetimes_;
 }
-void Sessions::shut(Connection& c, const char* reason) { c.ticket = 0; c.generation.reset(); c.reason = reason; c.outbox.close(); }
+void Sessions::shut(Connection& c, const char* reason) { c.ticket = 0; c.generation.reset(); c.pending.clear(); c.reason = reason; c.outbox.close(); }
 void Sessions::tick(std::uint64_t now) {
     if (clock_fault_ || (last_ && now < *last_)) {
         clock_fault_ = true;
+        if(commands_)commands_->invalidate();
         for (auto& entry : connections_) shut(entry.second,"clock.regressed");
         throw Error("clock.regressed");
     }
     last_ = now;
+    if(commands_)revision_=commands_->revision();
+    if(commands_)while(auto delivery=commands_->delivery(now)){
+        const auto found=connections_.find(delivery->connection);
+        if(found==connections_.end())continue;
+        auto& c=found->second;
+        if(c.outbox.closed()||c.lifetime!=delivery->lifetime||!c.pending.erase(delivery->ticket))continue;
+        c.outbox.release_reply();queue(c,"result",std::move(delivery->reply));
+    }
     for (auto& entry : connections_) {
         auto& c = entry.second;
         if (!c.negotiated && !c.outbox.closed() && now - c.opened >= protocol::deadline_ms) shut(c, "handshake.timeout");
@@ -84,12 +98,18 @@ void Sessions::dispatch(Connection& c, const protocol::Message& message, std::ui
     if (!c.negotiated) {
         if (message.type != "hello") throw Error("session.expected_hello");
         const auto client = protocol::handshake(message.body);
-        c.selection = protocol::negotiate(server_hello(epoch_,source_), client, c.authority.role_grants);
+        c.selection = protocol::negotiate(server_hello(epoch_,source_,static_cast<bool>(commands_)), client, c.authority.role_grants);
         c.authority.role = client.role;
         const bool has_commands = c.selection.documents.count({"command", "0.2.0"}) && c.selection.documents.count({"command-result", "0.1.0"});
         if (!has_commands) {
-            for (const auto& feature : {"settings.preview", "result.get", "cancel"}) {
+            for (const auto& feature : {"settings.preview", "result.get", "cancel", "configuration.transactions"}) {
                 if (client.required.count(feature)) throw Error("handshake.document_version");
+                c.selection.features.erase(feature);
+            }
+        }
+        if(commands_&&c.selection.max_frame_bytes<8192){
+            for(const auto& feature:{"configuration.transactions","settings.preview"}){
+                if(client.required.count(feature))throw Error("handshake.frame_floor");
                 c.selection.features.erase(feature);
             }
         }
@@ -118,11 +138,22 @@ void Sessions::dispatch(Connection& c, const protocol::Message& message, std::ui
     }
     if (message.type == "subscribe" || message.type == "unsubscribe") { subscribe(c,message,now); return; }
     if (message.type == "command") {
-        if (!c.selection.features.count("settings.preview")) throw Error("feature.unsupported");
+        if (!c.selection.features.count("settings.preview")&&!c.selection.features.count("configuration.transactions")) throw Error("feature.unsupported");
         const auto& body = message.body;
         if (!body.contains("request_id") || !body["request_id"].is_string() ||
             !protocol::identifier(body["request_id"].get_ref<const std::string&>())) throw Error("command.identity");
         const auto request = body["request_id"].get<std::string>();
+        if(commands_){
+            // Even legacy previews share this owner's admission/replay budget.
+            // A smaller negotiated frame cannot carry this concrete async profile.
+            if(c.selection.max_frame_bytes<8192){queue(c,"result",result({"invalid","feature.unsupported"},request,epoch_,revision_));return;}
+            if(!c.outbox.reserve_reply()){queue(c,"result",result({"busy","request.capacity"},request,epoch_,revision_));return;}
+            const auto admitted=commands_->submit(c.principal,c.id,c.lifetime,c.authority,message.body_bytes,
+                c.selection.features.count("configuration.transactions")!=0,now);
+            if(admitted.ticket)c.pending.insert(admitted.ticket);
+            else{c.outbox.release_reply();queue(c,"result",admitted.reply);}
+            return;
+        }
         auto decision = message.body_bytes.size() > 16384 ? Decision{"invalid", "command.size"} : preview(body, c.authority, policy_, revision_);
         const auto prior = may_request(c.authority, policy_) ? ledger_.get(c.principal, request, now) : std::nullopt;
         if (prior && prior->body != message.body_bytes) decision = {"conflict", "request.changed"};
@@ -155,6 +186,7 @@ void Sessions::dispatch(Connection& c, const protocol::Message& message, std::ui
     if (message.type == "result.get" || message.type == "cancel") {
         if (!c.selection.features.count(message.type)) throw Error("feature.unsupported");
         const auto request = message.body["request_id"].get<std::string>();
+        if(commands_){queue(c,"result",commands_->query(c.principal,c.authority,request,message.type=="cancel",now));return;}
         if (!may_request(c.authority, policy_)) {
             queue(c, "result", result({"denied", "policy.denied"}, request, epoch_, revision_)); return;
         }
@@ -181,15 +213,17 @@ void Sessions::policy(Policy next, std::uint64_t now) {
     // Invalidate before any fallible revision/time check. Never retain old data
     // because the caller's clock or policy adapter failed.
     for (auto& entry : connections_) {
-        auto& c = entry.second; c.ticket = 0; c.generation.reset();
+        auto& c = entry.second; c.ticket = 0; c.generation.reset(); c.pending.clear();
         if (!c.outbox.closed()) c.outbox = protocol::Outbox{};
     }
     if (next.revision <= policy_.revision) {
         policy_.available = false;
+        if(commands_)commands_->invalidate();
         for (auto& entry : connections_) shut(entry.second,"policy.revision");
         throw Error("policy.revision");
     }
     policy_ = std::move(next);
+    if(commands_)commands_->policy(policy_);
     tick(now);
     for (auto& entry : connections_) {
         auto& c = entry.second;

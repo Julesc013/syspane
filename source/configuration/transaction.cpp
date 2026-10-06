@@ -29,6 +29,11 @@ Json Transactions::reply(const std::string& request,const char* status,const cha
 }
 Json Transactions::submit(const std::string& principal,const std::string& connection,std::string body,const Authority& authority,
                          const std::function<Policy()>& policy,std::uint64_t now,const std::function<bool()>& cancelled){
+    return submit_impl(principal,connection,std::move(body),authority,policy,now,cancelled,true,[]{});
+}
+Json Transactions::submit_impl(const std::string& principal,const std::string& connection,std::string body,const Authority& authority,
+                         const std::function<Policy()>& policy,std::uint64_t now,const std::function<bool()>& cancelled,
+                         bool record,const std::function<void()>& permit){
     require(protocol::identifier(principal)&&protocol::identifier(connection),"transaction.scope");
     require(!body.empty()&&body.size()<=16384,"command.size");
     const auto command=protocol::parse(body);validate_command(command);const auto request=command["request_id"].get<std::string>();
@@ -47,13 +52,14 @@ Json Transactions::submit(const std::string& principal,const std::string& connec
         if(retained->identity->body!=body)return reply(request,"conflict","request.changed");
         return reply(request,"accepted","",authored_revision(retained->documents));
     }
-    const auto admission=ledger_.admit(principal,connection,request,body,now);
+    const auto admission=record?ledger_.admit(principal,connection,request,body,now):protocol::Admission::admitted;
     if(admission==protocol::Admission::conflict)return reply(request,"conflict","request.changed");
     if(admission==protocol::Admission::replay)return protocol::parse(ledger_.get(principal,request,now)->result);
     if(admission==protocol::Admission::busy||admission==protocol::Admission::pending)return reply(request,"busy","request.capacity");
     Json answer;
     bool did_commit=false;
     try{
+        if(cancelled())throw Error("request.cancelled");
         auto candidate=prepare_authored(current_.documents,command,authority,checked_policy);
         prepare_resources_(candidate);
         if(cancelled())throw Error("request.cancelled");
@@ -68,6 +74,7 @@ Json Transactions::submit(const std::string& principal,const std::string& connec
                 if(cancelled())throw Error("request.cancelled");
                 require(authored_revision(store_.load().documents)==old,"revision.changed");
                 authorize_authored(command,authority,policy(),old);
+                permit();
             });
             if(publication==Publication::durable){current_=std::move(next);answer=std::move(accepted);did_commit=true;}
             else if(publication==Publication::unchanged)answer=reply(request,"invalid","storage.unsaved");
@@ -75,7 +82,8 @@ Json Transactions::submit(const std::string& principal,const std::string& connec
         }
     }catch(const Error& e){answer=reply(request,outcome(e.what()),e.what());}
     catch(...){faulted_=true;throw;}
-    ledger_.finish(principal,request,answer.dump(),did_commit,now);return answer;
+    if(record)ledger_.finish(principal,request,answer.dump(),did_commit,now);
+    return answer;
 }
 Json Transactions::reconcile(const std::string& principal,const std::string& original_epoch,const std::string& request,
                              const Authority& authority,const Policy& policy)const{
