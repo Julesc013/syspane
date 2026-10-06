@@ -432,7 +432,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "c915dfcc103802120d54cc59fcca8c1a9911512667240ec21f351e05288f6637"
+      "sha256": "5e031efd0e37b6443a51c12219edb72513d4b59a728ca5612c7a081128445a39"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -1316,6 +1316,19 @@
       "sha256": "edb24d563a44598f339ac0b54214fdc5912f51c3bd9340de2b8d527916e2e1aa"
     },
     {
+      "id": "SP-W09-SCENE-SURFACE",
+      "path": "delivery/packages/w-09-scene-surface.md",
+      "title": "Policy-owned native scalar scene surface",
+      "description": "Compose authored scenes, pinned resources, scalar bindings and native text under one erasing presentation owner.",
+      "requires": [
+        "SP-W09-NATIVE-TEXT",
+        "SP-W09-BINDINGS",
+        "SP-W09-LAYOUT",
+        "SP-W25-NATIVE-NETWORK-CACHE"
+      ],
+      "sha256": "468be333c2f1762670964c1d34f997a7c8c69ce1ac076368d6246956471f5cda"
+    },
+    {
       "id": "SP-W24-PACKAGE",
       "path": "delivery/packages/w-24-transport.md",
       "title": "W-24 authenticated transport and policy boundary",
@@ -1725,6 +1738,17 @@
       "sha256": "a810e9b3bd8620436b24cdde1e0c9e9fb009817568e768381e2887db9669c6ea"
     },
     {
+      "id": "SP-SCENE-SURFACE-HANDOFF",
+      "path": "delivery/scene-surface-handoff.md",
+      "title": "Policy-owned scalar scene surface checkpoint",
+      "description": "Native composed scene pixels and accessible names follow current policy, source lifetime and pinned authored resources.",
+      "requires": [
+        "SP-W09-SCENE-SURFACE",
+        "SP-NATIVE-TEXT-HANDOFF"
+      ],
+      "sha256": "007c03a09fb13bcca95cf44791f93d42698fabdc0fdacca280c7cb9ebcfcc84a"
+    },
+    {
       "id": "SP-SESSION-DEMAND-HANDOFF",
       "path": "delivery/session-demand-handoff.md",
       "title": "Authenticated session demand checkpoint",
@@ -1906,7 +1930,7 @@
         "SP-DESKTOP",
         "SP-STATE"
       ],
-      "sha256": "6356acd840b2674d1c20bd2b08811de9953660ab1927bf4c98d467155bf1c2fb"
+      "sha256": "3458fcfadf4e17002b8b3fd6a7c47708a9d68ce093ab42e48dcc9c627d12149e"
     },
     {
       "id": "SP-SCREENSAVER",

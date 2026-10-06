@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-06T20:47:00Z", "scope": "Native Linux text metrics and raster checkpoint; full native scene integration remains open"}
+updated: {"by": "codex", "at": "2026-10-06T21:20:00Z", "scope": "Policy-owned scalar scene composition and native synthetic erasure evidence"}
 ---
 
 # Current state and next admitted boundary
@@ -22,7 +22,15 @@ The active objective is now the [complete 0.1.0 release](release-0.1.0.md) for W
 required but is no longer the final completion boundary. Legacy version/architecture
 floors, native labs and complete desktop/package evidence remain unresolved.
 
-The latest [native text checkpoint](native-text-handoff.md) adds Linux Pango/Cairo
+The latest [scalar scene surface checkpoint](scene-surface-handoff.md) composes
+authored text/value/status widgets and groups with pinned resources, real native
+metrics, shared bindings/layout and one current-policy erasure owner. An owned
+Linux GTK/X11 experiment verifies synthetic values and revocation through external
+pixels and AT-SPI names; both intentional erasure faults are detected. Complete
+widgets, installed routing/policy ownership, full accessibility and host activation
+remain required. A zero-age binding defect found during integration is corrected.
+
+The earlier [native text checkpoint](native-text-handoff.md) adds Linux Pango/Cairo
 measurement and bounded raster output. Independent pixel checks cover Unicode,
 wrapping, alpha, fallback and contrast, including a preserved color-font failure.
 It admits authored/public or synthetic text; live bindings still require native

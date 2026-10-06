@@ -1,5 +1,24 @@
 # Developer setup and checks
 
+The [scalar surface package](../../spec/delivery/packages/w-09-scene-surface.md)
+adds Linux `SceneSurface`, owning immutable authored/resources input, its complete
+fixed provider catalog and private DataViews. Supply a native clear callback that
+removes copied accessibility text and requests blank painting. Deliver all events
+on one serialized loop; all painting uses current qualified producer ticks and a
+synchronous borrowed frame. No model/frame pointer may escape. Regrant requires
+fresh attach/full state. Native clear failure closes permanently and requires host
+teardown/recovery before any new activation.
+
+After standard preflight/configure/build, run `ctest --preset linux-x64-gcc13
+-R '^native[.]SCENE-(SURFACE|ERASURE)$' --output-on-failure`. The component test uses
+actual wire admission. The independent native oracle opens only its owned Xvfb and
+private D-Bus session, compares root pixels with fixed expected text, and reads
+actual GTK names through AT-SPI. Intentional pixel/name retention controls must be
+rejected. Synthetic captures are under `native-evidence/surface-*`; the temporary
+X authorization file must never be copied into committed evidence. Installed
+AT-SPI/ATK/observer identities are checked against `build-support/surface-runtime.json`.
+This experiment does not install a renderer or qualify behind-icons placement.
+
 The [native text package](../../spec/delivery/packages/w-09-native-text.md) adds
 `syspane_native_text` and finite `SysPane.TextProbe` on the Linux development profile.
 `rendering::render_text` accepts plain text, an immutable validated theme, language,

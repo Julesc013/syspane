@@ -7,10 +7,16 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
+The [scene surface checkpoint](spec/delivery/scene-surface-handoff.md) connects
+authored scalar widgets, pinned themes, bindings and native layout/text. One owner
+erases cached values on policy and source changes. An owned Linux window experiment
+checks actual pixels and accessibility names, including deliberate erasure faults.
+Complete widgets, editing, installed ownership and desktop activation remain open.
+
 The [native text checkpoint](spec/delivery/native-text-handoff.md) adds Linux
 Pango/Cairo measurement and raster output for bounded plain text, including Unicode
-shaping, fallback fonts, wrapping and contrast overrides. Live scene composition,
-policy-driven cache erasure and desktop activation remain integration work.
+shaping, fallback fonts, wrapping and contrast overrides. The scalar surface builds
+on that adapter; complete widget rendering and desktop activation remain open.
 
 The [scene binding checkpoint](spec/delivery/bindings-handoff.md) resolves authored
 selectors and pins through current-policy data views. Exact identities, scope,

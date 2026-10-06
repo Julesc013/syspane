@@ -91,7 +91,9 @@ void missing(){Fixture a;auto& observations=a.doc["observations"];observations.e
     bool rejected=false;try{b.receive();}catch(const p::Error& e){rejected=std::string(e.what())=="telemetry.graph";}need(rejected,"duplicate source must fail wire admission");
     check(direct(),{b.input()},[](const auto& f){empty(f,Code::pending);});
 }
-void freshness(){Fixture a;a.receive();auto in=a.input();in.now=tick("E1",3000000100ULL);
+void freshness(){Fixture a;a.receive();auto in=a.input();
+    check(direct(),{in},[](const auto& f){need(f.rows[0].age_ns==0,"equal measurement tick has zero age");});
+    in.now=tick("E1",3000000100ULL);
     check(direct(),{in},[](const auto& f){need(f.rows[0].effective==m::Freshness::stale&&f.rows[0].age_ns==3000000000ULL);});
     in.now=tick("E1",3000000101ULL);auto q=selector();q["predicates"]={{{"field","network.receive_bytes"},{"op","eq"},{"value",3}}};check(q,{in},[](const auto& f){empty(f,Code::pending);});
     Fixture b;b.receive();b.view.disconnect(b.token,7,2);in=b.input();in.now.reset();

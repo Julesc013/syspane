@@ -1,0 +1,74 @@
+[
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-06T21:32:23.877662+00:00",
+    "finished_at": "2026-10-06T21:32:26.284403+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 6442450944,\n  \"checkout_out_bytes\": 1801947193,\n  \"linux_campaign_bytes\": 3771502236,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/surface_step.py",
+      "linux-x64-gcc13",
+      "build"
+    ],
+    "started_at": "2026-10-06T21:32:26.284806+00:00",
+    "finished_at": "2026-10-06T21:32:40.962932+00:00",
+    "exit": 0,
+    "stdout": "[1/2] Building CXX object CMakeFiles/syspane_scene_surface_tests.dir/tests/scene/surface_tests.cpp.o\n[2/2] Linking CXX executable syspane_scene_surface_tests\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-09-surface/linux-x64-gcc13-build-8ab821f37d\n",
+    "stderr": ""
+  },
+  {
+    "step": "oracle",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-06T21:32:40.963288+00:00",
+    "finished_at": "2026-10-06T21:32:41.675477+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 6442450944,\n  \"checkout_out_bytes\": 1803135637,\n  \"linux_campaign_bytes\": 3771535696,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "oracle",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/surface_step.py",
+      "linux-x64-gcc13",
+      "oracle"
+    ],
+    "started_at": "2026-10-06T21:32:41.675941+00:00",
+    "finished_at": "2026-10-06T21:32:52.925364+00:00",
+    "exit": 8,
+    "stdout": "Test project /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n    Start 1: native.SCENE-SURFACE\n1/2 Test #1: native.SCENE-SURFACE .............***Failed    0.62 sec\nCONTENT pass\nUINT64 pass\nZERO-NULL pass\nFAILURE pass\nERASE-REGRANT pass\nBOTH-CHANNELS pass\nPOLICY-ORDER pass\nSOURCE-LOSS pass\nRESTART-PIN pass\nUNSUPPORTED pass\nOVERFLOW pass\nTEXT-GROUP pass\nCLEAR-FAILURE pass\nBORROW pass\nCLOCK-CLOSE pass\nRESOURCE-BINDING pass\nMULTIDISPLAY-SCALE pass\nOVER-ALPHA pass\nPIXEL-LIMIT pass\nfixture paint\n\n    Start 2: native.SCENE-ERASURE\n2/2 Test #2: native.SCENE-ERASURE .............   Passed    2.60 sec\n\n50% tests passed, 1 tests failed out of 2\n\nTotal Test time (real) =   3.22 sec\n\nThe following tests FAILED:\n\t  1 - native.SCENE-SURFACE (Failed)\n Errors while running CTest\n\nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-09-surface/linux-x64-gcc13-oracle-4d13dcb154\n",
+    "stderr": ""
+  }
+]

@@ -17,6 +17,12 @@ updated: {"by": "codex", "at": "2026-10-04T19:32:52+11:00", "scope": "October au
 
 # Rendering, text, layout and display recovery
 
+The [scalar scene surface package](../delivery/packages/w-09-scene-surface.md)
+defines the initial text/value/status/group capability and its erasing owner.
+Pinned resources, singleton bindings and readable geometry compose atomically;
+unavailable capabilities produce a whole-scene alternative. Its owned native
+window evidence does not qualify the full widget set or behind-icons activation.
+
 The [native text package](../delivery/packages/w-09-native-text.md) closes the Linux
 plain-text measurement/raster prerequisite. It preserves native logical/ink origins,
 uses bounded wrapping and explicit semantic/contrast colors, and records actual

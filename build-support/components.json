@@ -1803,6 +1803,61 @@
       "profiles": [
         "linux-x64-gcc13"
       ]
+    },
+    {
+      "id": "scene-surface",
+      "target": "syspane_scene_surface",
+      "type": "STATIC_LIBRARY",
+      "source_owner": "source/rendering/",
+      "public_interfaces": [
+        "source/rendering/scene_surface.hpp"
+      ],
+      "private_interfaces": [],
+      "sources": [
+        "source/rendering/scene_surface.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_native_text"
+      ],
+      "target_requirements": [
+        "cxx17",
+        "native_text"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
+    },
+    {
+      "id": "scene-surface-tests",
+      "target": "syspane_scene_surface_tests",
+      "type": "EXECUTABLE",
+      "source_owner": "tests/scene/",
+      "public_interfaces": [],
+      "private_interfaces": [],
+      "sources": [
+        "tests/scene/surface_tests.cpp",
+        "tests/scene/surface_window.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_scene_surface",
+        "syspane_network_publication",
+        "PkgConfig::GTK3"
+      ],
+      "target_requirements": [
+        "cxx17",
+        "native_text"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
     }
   ]
 }

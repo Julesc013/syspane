@@ -64,6 +64,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [SysPane 0.1.0 release objective and unresolved admission](release-0.1.0.md) — Preserve the requested complete desktop release across Windows 9x, Windows NT, X11, Wayland and Mac OS X.
 - [Durable resource generation checkpoint](resource-generations-handoff.md) — Exact content closure, command identity and coherent Linux recovery.
 - [Greenfield implementation campaign](roadmap.md) — Build native vertical slices and contracts together in risk order.
+- [Policy-owned scalar scene surface checkpoint](scene-surface-handoff.md) — Native composed scene pixels and accessible names follow current policy, source lifetime and pinned authored resources.
 - [Authenticated session demand checkpoint](session-demand-handoff.md) — Bind controller-selected acquisition plans to authoritative subscription lifetimes and preserve native restart timing evidence.
 - [Complete remote state import checkpoint](state-import-handoff.md) — Connect bounded telemetry documents to a revocable complete model without changing reported retention or inventing measurement freshness.
 - [Native inventory subscription checkpoint](subscriptions-handoff.md) — Bind demand expiry, policy-bound queues and complete-state receipt to authenticated native process experiments.

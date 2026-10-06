@@ -1,0 +1,74 @@
+[
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-06T21:20:41.098877+00:00",
+    "finished_at": "2026-10-06T21:20:52.104951+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 6442450944,\n  \"checkout_out_bytes\": 1785910863,\n  \"linux_campaign_bytes\": 3668691055,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/surface_step.py",
+      "linux-x64-gcc13",
+      "build"
+    ],
+    "started_at": "2026-10-06T21:20:52.105412+00:00",
+    "finished_at": "2026-10-06T21:21:07.578293+00:00",
+    "exit": 0,
+    "stdout": "[1/5] Building CXX object CMakeFiles/syspane_scene_surface.dir/source/rendering/scene_surface.cpp.o\n[2/5] Linking CXX static library libsyspane_scene_surface.a\n[3/5] Building CXX object CMakeFiles/syspane_scene_surface_tests.dir/tests/scene/surface_tests.cpp.o\n[4/5] Building CXX object CMakeFiles/syspane_scene_surface_tests.dir/tests/scene/surface_window.cpp.o\n[5/5] Linking CXX executable syspane_scene_surface_tests\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-09-surface/linux-x64-gcc13-build-12189561e9\n",
+    "stderr": ""
+  },
+  {
+    "step": "oracle",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-06T21:21:07.578699+00:00",
+    "finished_at": "2026-10-06T21:21:08.201236+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 6442450944,\n  \"checkout_out_bytes\": 1787099578,\n  \"linux_campaign_bytes\": 3668867855,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "oracle",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/surface_step.py",
+      "linux-x64-gcc13",
+      "oracle"
+    ],
+    "started_at": "2026-10-06T21:21:08.201516+00:00",
+    "finished_at": "2026-10-06T21:21:18.829186+00:00",
+    "exit": 0,
+    "stdout": "Test project /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n    Start 1: native.SCENE-SURFACE\n1/2 Test #1: native.SCENE-SURFACE .............   Passed    0.71 sec\n    Start 2: native.SCENE-ERASURE\n2/2 Test #2: native.SCENE-ERASURE .............   Passed    2.25 sec\n\n100% tests passed, 0 tests failed out of 2\n\nTotal Test time (real) =   2.95 sec\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-09-surface/linux-x64-gcc13-oracle-b7394ad72a\n",
+    "stderr": ""
+  }
+]

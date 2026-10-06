@@ -178,7 +178,12 @@ private:
             out.acquisition=o.acquisition;out.freshness=o.freshness;out.presence=o.presence;out.observed_at=o.observed_at;out.attempted_at=o.attempted_at;
             out.measured_at=o.measured_at;out.sample_interval_ns=o.sample_interval_ns;out.generation=o.generation;
             if(o.error)out.error=model::Error{o.error->code,"",o.error->retryable};
-            if(o.measured_at&&borrow.input->now)result.age_ns=model::interval_ns(*o.measured_at,*borrow.input->now);
+            if(o.measured_at&&borrow.input->now){
+                const auto& measured=*o.measured_at;const auto& now=*borrow.input->now;
+                if(!measured.epoch.empty()&&measured.epoch==now.epoch&&measured.clock_id==now.clock_id&&
+                   measured.clock_scope==now.clock_scope&&measured.nanoseconds<=now.nanoseconds)
+                    result.age_ns=now.nanoseconds-measured.nanoseconds;
+            }
         }
         return result;
     }
