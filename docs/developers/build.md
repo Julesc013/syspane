@@ -55,7 +55,7 @@ measured-field freshness remain unqualified.
 Before a build, test or package launch, run the Windows coordinator
 `python build-support/check_workspace_budget.py --action build` (select `test` or
 `package` as appropriate); require exit zero. Run it afterward with `--action inspect`.
-The combined checkout/native-Linux allocation is 3 GiB with growth reservations;
+The combined checkout/native-Linux allocation is 4 GiB with growth reservations;
 this is a preflight check, not an OS quota. The original 1 GiB overrun is preserved
 in the subscription checkpoint. Do not remove or overwrite another task's files to gain space.
 
@@ -680,3 +680,30 @@ The existing marker helper has a 250 ms preparation delay before its separate
 revisions are preserved in the [checkpoint](../../spec/delivery/gnome-surface-lease-handoff.md).
 The bridge is active only under this explicit experiment flag. Native product
 transport/policy, render-watchdog and editor-exit integration remain pending.
+
+## Shared measured network presentation
+
+`syspane_network_view` provides the policy-bound renderer projection described in
+`spec/delivery/packages/w-25-network-presentation.md`. The six `presentation.NVIEW-*`
+CTest families cover exact counter/rate text, TTL/status axes, exact entity selection,
+whole-frame capacity and borrow/policy lifetime. Forty-six fixed binary64 vectors
+have independently calculated rational expectations; they run under a changed locale.
+Use the ordinary build commands and, for a focused Windows check:
+
+```powershell
+ctest --preset windows-x64-gcc15 -R '^presentation[.]' --output-on-failure
+```
+
+For Linux, set the existing `SYSPANE_LINUX_BUILD_ROOT` and use the corresponding
+preset through the admitted `ir4runner` account. The historical preset runs the same
+portable cases on this host; it does not qualify XP/7. The native Linux collector
+family additionally checks real counters/rates, retained states and typed revocation
+through this projection. Raw operational fields stay in its owned pipe or ignored
+private failure records; public evidence contains only outcomes and counts.
+
+Record a complete run with `record_protocol.py --network-presentation` or
+`record_legacy_build.py --network-presentation` and their existing profile/build/
+output arguments. The historical recorder also requires the exact relocated smoke
+result. The configure-time subtree size guard reads the declared campaign allocation;
+it supplements the mandatory combined Windows preflight and does not replace it.
+The component enables no native operational surface, cached payload or release.

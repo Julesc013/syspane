@@ -44,7 +44,10 @@ def main():
     parser.add_argument('--network', action='store_true', help='Require real raw native network acquisition and complete measured-time regressions')
     parser.add_argument('--network-reconciliation', action='store_true', help='Require portable network lifetimes and Linux watched acquisition')
     parser.add_argument('--network-publication', action='store_true', help='Require network projection and Linux supervised real collection')
+    parser.add_argument('--network-presentation', action='store_true', help='Require selected measured network renderer projection and prior regressions')
     args = parser.parse_args()
+    if args.network_presentation:
+        args.network_publication = True
     if args.network_publication:
         args.network_reconciliation = True
     if args.network_reconciliation:
@@ -126,11 +129,16 @@ def main():
         expected |= {'network.PUBLICATION-'+case for case in ('VALUES', 'FAILURE', 'BOUNDARY')}
         if platform.system() == 'Linux':
             expected.add('native.NATIVE-COLLECTOR')
+    if args.network_presentation:
+        expected |= {'presentation.NVIEW-'+case for case in ('VALUES','FORMAT','STATES','SELECTION','BOUNDS','LIFETIME')}
     if len(cases) != len(expected) or {case['case'] for case in cases} != expected or any(case['outcome'] != 'pass' for case in cases):
         raise ValueError('missing, repeated, unexpected or failing case; preserve log before rerun')
     suffix = '.exe' if platform.system() == 'Windows' else ''
     artifacts = {name: {'sha256': sha(build/name), 'bytes': (build/name).stat().st_size}
                  for name in ('syspane_protocol_tests'+suffix, 'libsyspane_protocol.a', 'libsyspane_configuration.a', 'generated/settings_descriptors.hpp')}
+    if args.network_presentation:
+        for name in ('syspane_network_view_tests'+suffix, 'libsyspane_network_view.a'):
+            artifacts[name] = {'sha256': sha(build/name), 'bytes': (build/name).stat().st_size}
     native_records = []
     if args.network_publication:
         for name in ('syspane_network_publication_tests'+suffix, 'libsyspane_network_publication.a'):
@@ -326,6 +334,8 @@ def main():
         paths.append(ROOT/'spec/delivery/packages/w-25-network-reconciliation.md')
     if args.network_publication:
         paths.extend([ROOT/'spec/delivery/packages/w-25-network-publication.md', ROOT/'spec/telemetry/metrics.json'])
+    if args.network_presentation:
+        paths.append(ROOT/'spec/delivery/packages/w-25-network-presentation.md')
     for directory in ('source', 'tests', 'build-support', 'spec/contracts'):
         paths.extend(sorted((ROOT/directory).rglob('*')))
     inputs = {p.relative_to(ROOT).as_posix(): sha(p) for p in paths
@@ -492,6 +502,10 @@ def main():
         report['bindings']['network_publication'] = 'spec/delivery/packages/w-25-network-publication.md'
         report['bindings']['collector_oracle'] = 'tests/protocol/native_collector.py'
         report['limits'][0] = 'Portable projection covers counters, rates, failure retention, byte bounds and actual codec/data-view import. Linux additionally runs real collection, exact replay, injected failure, hang/crash/restart, demand release, typed revocation and parent loss. Installed service/policy, full network fields, actual kernel topology faults and Windows notification/publication remain unqualified. Native operational values are excluded from public evidence.'
+    if args.network_presentation:
+        report['slice'] = 'shared selected measured network renderer projection with current-policy borrowing'
+        report['bindings']['network_presentation'] = 'spec/delivery/packages/w-25-network-presentation.md'
+        report['limits'][0] = 'Exact selection, status axes, TTL, deterministic binary64 formatting and atomic no-payload outcomes are portable. Native visible delivery/cache erasure, protected policy and complete desktop qualification remain open.'
     args.output.parent.mkdir(parents=True, exist_ok=True)
     log_output.write_text(raw.replace(str(build), '<build>').replace(str(ROOT), '<source>'), encoding='utf-8', newline='\n')
     args.output.write_text(json.dumps(report, indent=2)+'\n', encoding='utf-8', newline='\n')

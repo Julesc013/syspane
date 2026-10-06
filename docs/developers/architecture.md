@@ -25,3 +25,11 @@ See [composition](../../spec/architecture/composition.md),
 [portability](../../spec/architecture/portability.md),
 [recovery](../../spec/architecture/recovery.md) and
 [repository ownership](../../spec/foundation/repository.md).
+
+The measured network presentation component in `source/rendering/network_view.*`
+consumes a synchronous DataView borrow. It selects an exact producer/epoch/entity,
+keeps lease state separate from metric freshness, and formats counters/rates without
+native toolkit dependencies. It owns no cache or IPC endpoint. A native backend must
+close its own delivery, policy clearing and acknowledgement contract before retaining
+operational text or pixels. The existing collector probe exercises the shared
+projection over actual measured data through its private development pipe.

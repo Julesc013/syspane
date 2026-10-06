@@ -86,6 +86,49 @@ def verify_documents(process,before,after,lower,upper,mode):
     if mode=='revoke':assert len(events(process,'revoked'))==1 and not events(process,'revoked')[0]['payload'],'consumer policy erasure'
     return row_count
 
+def verify_presentation(process,lower,upper):
+    snapshots=[e for e in process.lines if e.get('event') in ('projection','retained','revoked')]
+    frames=events(process,'presentation')
+    assert len(frames)==len(snapshots),'one presentation per consumer projection'
+    compared=0
+    for frame,event in zip(frames,snapshots):
+        assert frame['phase']==event['event'] and frame['pid']==event['pid'],'presentation event binding'
+        if event['event']=='revoked':
+            assert frame['code']==1 and frame['fields']==[] and not frame['generation'] and not frame['epoch'] and not frame['entity'] and frame['lease']==0,'policy clears all projected payload'
+            continue
+        measured=frame['measurement_now_ns']
+        if event['event']=='retained':assert measured is None,'retained exit cannot query dead peer clock'
+        else:assert measured is not None and lower<=int(measured)<=upper,'independent native presentation clock bracket'
+        doc=event['snapshot']
+        assert frame['code']==0 and frame['epoch']==doc['producer_epoch'] and frame['entity']=='network:interface:1' and frame['generation']==doc['generation'],'explicit native lifetime selection'
+        assert frame['lease']==(3 if event['retained'] else 2),'independent retained lease state'
+        selected={o['field']:o for o in doc['observations'] if o['entity_id']=='network:interface:1'}
+        assert len(frame['fields'])==4,'complete presentation'
+        for row,key in zip(frame['fields'],('network.receive_bytes','network.transmit_bytes','network.receive_bytes_per_second','network.transmit_bytes_per_second')):
+            original=selected[key];value=original['value'];expected=None
+            if value is not None:
+                if value['kind']=='uint64':expected=value['data']
+                else:
+                    rational=Fraction(value['data'])*1000
+                    integer,remainder=divmod(rational.numerator,rational.denominator)
+                    integer+=int(2*remainder>=rational.denominator)
+                    text=str(integer).rjust(4,'0');expected=text[:-3]+'.'+text[-3:]
+            assert row['value']==expected and row['unit']==original['unit'],'independent exact counter/rate text'
+            assert row['acquisition']==['success','pending','denied','failed','disabled'].index(original['acquisition']),'acquisition axis'
+            assert row['reported']==['current','stale','unknown','not_applicable'].index(original['freshness']),'reported freshness axis'
+            stamp=original['measured_at']
+            assert row['measured_ns']==(stamp['nanoseconds'] if stamp else None) and row['interval_ns']==original['sample_interval_ns'],'original projection measurement'
+            assert row['error_code']==(original['error']['code'] if original['error'] else ''),'bounded source error code'
+            if stamp and measured is None:
+                assert row['age_ns'] is None and row['effective']==1,'unqualified retained age is unknown and value stale'
+            elif stamp:
+                assert isinstance(row['age_ns'],str) and int(row['age_ns'])==int(frame['measurement_now_ns'])-int(stamp['nanoseconds'])>=0,'measured presentation age'
+                expected_freshness=1 if original['acquisition']!='success' or original['freshness']!='current' or int(row['age_ns'])>=3_000_000_000 else 0
+                assert row['effective']==expected_freshness,'effective TTL independent of lease'
+            else:assert row['age_ns'] is None and row['effective']==2,'pending rate stays unknown'
+            compared+=1
+    return compared
+
 def main():
     executable,output=(Path(v).resolve() for v in sys.argv[1:3]);assert output.parent==executable.parent and output.name=='native-evidence'
     output.mkdir(exist_ok=True);identity=uuid.uuid4().hex[:12]
@@ -130,6 +173,7 @@ def main():
                 upper=time.clock_gettime_ns(time.CLOCK_BOOTTIME);after=linux_rows()
                 assert not events(process,'error'),'probe error'
                 case['rows_compared']=verify_documents(process,before,after,lower,upper,mode)
+                case['presentation_fields_compared']=verify_presentation(process,lower,upper)
                 launches=events(process,'spawned');assert len(launches)==(2 if mode in ('hang','crash') else 1),'bounded launch count'
                 assert len(observers)==len(launches) and all(observer.exited(0) for observer in observers.values()),'final independent child exit'
                 if mode!='parent-loss':assert exited==[event['pid'] for event in launches],'stop ordering'

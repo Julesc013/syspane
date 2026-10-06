@@ -60,8 +60,12 @@ def main():
         destination = Path(sys.argv[3]).resolve()
         if not destination.is_relative_to(output_root) or destination == output_root:
             raise ValueError('build output must stay in the owned profile directory')
-        if sum(path.stat().st_size for path in output_root.rglob('*') if path.is_file()) > 1024**3:
-            raise ValueError('owned build output exceeds the 1 GiB campaign budget')
+        allocation = json.loads((ROOT / 'campaign-workspace.json').read_text(encoding='utf-8'))['maximum_bytes']
+        if type(allocation) is not int or allocation <= 0:
+            raise ValueError('invalid campaign allocation')
+        # This subtree guard supplements the mandatory combined Windows preflight.
+        if sum(path.stat().st_size for path in output_root.rglob('*') if path.is_file() and not path.is_symlink()) > allocation:
+            raise ValueError('owned build output exceeds the declared campaign allocation')
         destination.mkdir(parents=True, exist_ok=True)
         (destination / '.syspane-owner.json').write_text(json.dumps({'owner': 'SysPane foundation campaign', 'profile': profile, 'generated': True}) + '\n', encoding='utf-8')
     print('profile verified: ' + profile)

@@ -7,7 +7,7 @@ import struct
 
 ROOT = Path(__file__).resolve().parents[1]
 EXECUTABLES = ('SysPane.ModelSmoke.exe', 'syspane_model_tests.exe', 'syspane_protocol_tests.exe',
-               'syspane_recovery_tests.exe', 'syspane_diagnostic_tests.exe', 'syspane_data_view_tests.exe', 'syspane_telemetry_tests.exe', 'syspane_state_import_tests.exe', 'syspane_subscription_tests.exe', 'syspane_measured_time_tests.exe', 'syspane_network_state_tests.exe', 'syspane_network_publication_tests.exe')
+               'syspane_recovery_tests.exe', 'syspane_diagnostic_tests.exe', 'syspane_data_view_tests.exe', 'syspane_telemetry_tests.exe', 'syspane_state_import_tests.exe', 'syspane_subscription_tests.exe', 'syspane_measured_time_tests.exe', 'syspane_network_state_tests.exe', 'syspane_network_publication_tests.exe', 'syspane_network_view_tests.exe')
 
 
 def build_inputs(build):

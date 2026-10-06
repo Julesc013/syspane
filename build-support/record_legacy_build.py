@@ -28,7 +28,10 @@ def main():
     parser.add_argument('--measured-time', action='store_true', help='Include measured telemetry and portable freshness cases; native adapter disabled')
     parser.add_argument('--network-reconciliation', action='store_true', help='Include portable network lifetime and counter interval cases; native readers disabled')
     parser.add_argument('--network-publication', action='store_true', help='Include portable measured network projection; native collector disabled')
+    parser.add_argument('--network-presentation', action='store_true', help='Require selected measured network renderer projection and prior regressions')
     args = parser.parse_args()
+    if args.network_presentation:
+        args.network_publication = True
     if args.network_publication:
         args.network_reconciliation = True
     if args.network_reconciliation:
@@ -76,6 +79,8 @@ def main():
         expected |= {'network.RECONCILE-'+case for case in ('IDENTITY', 'CLOCK-RATE', 'CANCEL-FAILURE', 'CAPACITY')}
     if args.network_publication:
         expected |= {'network.PUBLICATION-'+case for case in ('VALUES', 'FAILURE', 'BOUNDARY')}
+    if args.network_presentation:
+        expected |= {'presentation.NVIEW-'+case for case in ('VALUES','FORMAT','STATES','SELECTION','BOUNDS','LIFETIME')}
     if len(cases) != len(expected) or {c['case'] for c in cases} != expected or any(c['outcome'] != 'pass' for c in cases):
         raise ValueError('incomplete, duplicated or failed historical-toolset host run')
     artifacts = {}
@@ -113,7 +118,9 @@ def main():
         sources.append(ROOT/'spec/delivery/packages/w-25-telemetry-wire.md')
         for folder in ('spec/contracts', 'spec/fixtures'):
             sources.extend(p for p in (ROOT/folder).rglob('*') if p.is_file())
-    for folder in ('source', 'tests/model', 'tests/protocol', 'tests/fault', 'tests/desktop', 'build-support'):
+    if args.network_presentation:
+        sources.append(ROOT/'spec/delivery/packages/w-25-network-presentation.md')
+    for folder in ('source', 'tests/model', 'tests/protocol', 'tests/fault', 'tests/desktop', 'tests/rendering', 'build-support'):
         sources.extend(p for p in (ROOT/folder).rglob('*') if p.is_file() and 'evidence' not in p.parts and '__pycache__' not in p.parts)
     record = {'version': '0.1.0', 'work_ids': ['W-04', 'W-25', 'W-26'] if args.failure_metadata else ['W-04', 'W-26'], 'profile': PROFILE, 'outcome': 'pass',
               'recorded_at': datetime.now(timezone.utc).isoformat(),

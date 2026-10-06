@@ -43,6 +43,12 @@ now delivers real counters and interval rates through that measured path, preser
 failed samples and recovering a hung child after confirmed exit. Windows notification
 coverage, product service/subscription integration and native suspend qualification
 remain pending.
+The [measured network presentation checkpoint](spec/delivery/network-presentation-handoff.md)
+adds a shared renderer input with exact selection, counter/rate text, original
+measurement age, independent freshness/lease state and policy-bound borrowing.
+It passes portable checks on all three build profiles and comparisons against
+the real Linux collector. Operational delivery to a native desktop surface and
+clearing its cached text/pixels on policy changes remain pending.
 An external pixel/time oracle is calibrated against live, hidden, frozen and
 obstructed synthetic X11 surfaces. A real Openbox/PCManFM Show Desktop experiment
 now exposes the basic X11 candidate's placement failure: above the desktop it

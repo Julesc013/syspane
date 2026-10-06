@@ -61,6 +61,15 @@ the normal build reservation. The checkout drive has 63.54 GiB free and the nati
 Linux filesystem more than 1 TB free. This is a measured reversible workspace
 decision; no product resource or acceptance budget changes.
 
+The measured network-presentation increment raises the development allocation to
+4 GiB. Its build preflight stopped at 935,539,178 checkout-output bytes plus
+2,211,110,598 native-output bytes: the existing 256 MiB build reservation no longer
+fits 3 GiB. Preserve that failed check. The new shared renderer component, three
+profile builds, relocated packages and retained native/test evidence require
+headroom. The checkout drive has 67,631,624,192 free bytes and the Linux filesystem
+1,005,370,703,872. No existing artifact is deleted; the fixed build/test/package
+reservations and all product resource/acceptance limits remain unchanged.
+
 This is a preflight reservation, not an OS quota; a new package whose predicted
 growth exceeds the reservation needs a measured allocation decision before launch.
 

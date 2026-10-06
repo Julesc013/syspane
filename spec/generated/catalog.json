@@ -347,7 +347,7 @@
         "SP-WORK-PACKAGES",
         "SP-W01-PACKAGE"
       ],
-      "sha256": "bcd83a2c62a26e0ff9c1d13f44e7c9484d62386edd43037a64050d11b320277d"
+      "sha256": "44b1a55c11dc923407af0812c3f38591d0c5da9fe4ef8a92c1b76a18a26d534a"
     },
     {
       "id": "SP-CURRENT",
@@ -357,7 +357,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "4c5a930c2f6d6d91f853be00ca95c3f96861f3478a2486d065780a47982951aa"
+      "sha256": "2808a233b3f91a0f2faf547a650a6bef6dae0b5eed126b21bd005b17226b94b2"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -636,6 +636,18 @@
         "SP-CAMPAIGN-ADMISSION"
       ],
       "sha256": "46c4e9553a2761388ec3b82dcc36f5b2067815c8231a4381e3b219e49cd7ab28"
+    },
+    {
+      "id": "SP-NETWORK-PRESENTATION-HANDOFF",
+      "path": "delivery/network-presentation-handoff.md",
+      "title": "Measured network presentation checkpoint",
+      "description": "Shared renderer inputs preserve exact selected values, measurement metadata, lease state and disclosure lifetime.",
+      "requires": [
+        "SP-W25-NETWORK-PRESENTATION",
+        "SP-W25-PACKAGE",
+        "SP-CAMPAIGN-ADMISSION"
+      ],
+      "sha256": "6403950ed7651c23f681dc0aa678a7f37134e16dc202bf90ab4e3ee97d7dafa3"
     },
     {
       "id": "SP-NETWORK-PUBLICATION-HANDOFF",
@@ -989,6 +1001,19 @@
         "SP-W25-PACKAGE"
       ],
       "sha256": "0d280e3d8771a2a0e569a84a2f846b8344db3696ad96384f70ec4872aa0922df"
+    },
+    {
+      "id": "SP-W25-NETWORK-PRESENTATION",
+      "path": "delivery/packages/w-25-network-presentation.md",
+      "title": "W-25 measured network presentation",
+      "description": "Define the shared renderer projection before operational telemetry enters a native surface.",
+      "requires": [
+        "SP-W25-NETWORK-PUBLICATION",
+        "SP-W25-DATA-VIEW",
+        "SP-W25-MEASURED-TIME",
+        "SP-W25-GNOME-SURFACE-LEASE"
+      ],
+      "sha256": "e0b2c5e05677b3010bc19709cc172060c926950e331bc6da9f40a03725445164"
     },
     {
       "id": "SP-W25-NETWORK-PUBLICATION",

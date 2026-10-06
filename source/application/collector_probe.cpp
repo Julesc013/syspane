@@ -2,6 +2,7 @@
 #include "health_link.hpp"
 #include "data_view.hpp"
 #include "network_publication.hpp"
+#include "network_view.hpp"
 #include "network_watch.hpp"
 #include "session.hpp"
 #include <array>
@@ -117,12 +118,34 @@ void worker(const std::string& address,const std::string& mode,const std::string
     throw p::Error("collector.worker_deadline");
 }
 
-void projection(r::DataView& view,const char* event,std::uint64_t pid){
+void projection(r::DataView& view,const char* event,std::uint64_t pid,const std::string& epoch,const std::optional<m::Tick>& measured){
     Json result{{"event",event},{"pid",pid},{"payload",false}};
     view.project(os::monotonic_ms(),[&](const auto& snapshot,const auto& lease){
         result["payload"]=true;result["retained"]=lease.presentation==r::Presentation::retained;
         result["snapshot"]=Json::parse(snapshot.reported_document);
     });emit(std::move(result));
+    // Explicit finite development selection; no persisted selector or native cache.
+    const auto render=[&](const auto& frame){
+        Json report{{"event","presentation"},{"phase",event},{"pid",pid},{"code",static_cast<int>(frame.code)},
+            {"measurement_now_ns",measured?Json(std::to_string(measured->nanoseconds)):Json()},{"generation",frame.generation},{"epoch",frame.selected.epoch},{"entity",frame.selected.entity},
+            {"lease",static_cast<int>(frame.presentation)},{"fields",Json::array()}};
+        if(frame.code==syspane::rendering::NetworkViewCode::ready){
+            for(const auto& field:frame.fields){
+                report["fields"].push_back({{"value",field.value?Json(*field.value):Json()},
+                    {"unit",field.unit},{"acquisition",static_cast<int>(field.acquisition)},
+                    {"reported",static_cast<int>(field.reported)},{"effective",static_cast<int>(field.effective)},
+                    {"measured_ns",field.measured_at?Json(std::to_string(field.measured_at->nanoseconds)):Json()},
+                    {"age_ns",field.age_ns?Json(std::to_string(*field.age_ns)):Json()},
+                    {"interval_ns",field.interval_ns?Json(std::to_string(*field.interval_ns)):Json()},
+                    {"error_code",field.error_code}});
+            }
+        }
+        // The admitted test pipe consumes the frame synchronously; nothing is cached.
+        emit(std::move(report));
+    };
+    const syspane::rendering::NetworkSelection selected{"producer:network",epoch,"network:interface:1"};
+    if(measured)syspane::rendering::project_network(view,selected,os::monotonic_ms(),*measured,render);
+    else syspane::rendering::project_network_retained(view,selected,os::monotonic_ms(),render);
 }
 void stopped(os::Child& child,const os::ChildExit& status,bool forced){emit({{"event","stopped"},{"pid",child.id()},{"code",status.code},{"signaled",status.signaled},{"forced",forced},{"os_confirmed",true}});}
 void supervisor(const std::string& address,const std::string& scenario){
@@ -182,7 +205,7 @@ void supervisor(const std::string& address,const std::string& scenario){
                         need(result.code==r::DataCode::accepted||result.code==r::DataCode::duplicate,"collector.import");++received;
                         emit({{"event","imported"},{"pid",child.id()},{"duplicate",result.code==r::DataCode::duplicate},{"body",message.body_bytes},
                             {"now_ns",std::to_string(measured.nanoseconds)},{"clock_id",measured.clock_id}});
-                        projection(view,"projection",child.id());
+                        projection(view,"projection",child.id(),epoch,measured);
                         const auto mode=attempt?"live":scenario;
                         if(mode=="crash"&&received==1){need(data_sequence==0,"collector.crash_barrier");send("heartbeat",{{"sequence",std::to_string(data_sequence++)}});}
                         else if(mode=="unsubscribe"&&!unsubscribed){send("unsubscribe",{{"schema_version","0.2.0"},{"subscription_id","S"},{"clock_id",local.clock_id}});
@@ -191,7 +214,7 @@ void supervisor(const std::string& address,const std::string& scenario){
                         else if((mode=="live"&&received==2)||((mode=="failure"||mode=="replay")&&received==3))done=true;
                     } else if(message.type=="gap"){
                         need(scenario=="revoke"&&message.body["reason"]=="policy_changed","collector.gap");
-                        view.policy(policy(false),os::monotonic_ms());projection(view,"revoked",child.id());released=true;
+                        view.policy(policy(false),os::monotonic_ms());projection(view,"revoked",child.id(),epoch,{});released=true;
                     } else if(message.type=="heartbeat"){
                         if(barrier&&message.body["sequence"]==std::to_string(*barrier))released=true;
                     } else throw p::Error("collector.data_direction");
@@ -216,7 +239,7 @@ void supervisor(const std::string& address,const std::string& scenario){
         if(!hung&&!crashed){
             emit({{"event","unexpected_failure"},{"pid",child.id()},{"reason",reason}});throw p::Error("collector.unexpected_failure");
         }
-        const auto fault_time=os::monotonic_ms();view.disconnect(data_token,7,fault_time);projection(view,"retained",child.id());
+        const auto fault_time=os::monotonic_ms();view.disconnect(data_token,7,fault_time);projection(view,"retained",child.id(),epoch,{});
         if(crashed){
             const auto status=child.wait(100);need(status&&status->code==73&&!status->signaled,"collector.crash_exit");
             need(gate.failed(r::Failure::crashed,r::StopProof::confirmed,fault_time)==r::Code::accepted,"collector.crash_gate");

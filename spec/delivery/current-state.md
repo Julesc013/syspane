@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-06T05:35:07.581691+00:00", "scope": "Native GNOME public-marker producer expiry, disconnect and retained-state recovery verified"}
+updated: {"by": "codex", "at": "2026-10-06T06:02:33Z", "scope": "Shared measured network presentation and real collector comparisons verified"}
 ---
 
 # Current state and next admitted boundary
@@ -290,6 +290,16 @@ identities, receipt journals and external badge/marker pixels agree. Product
 telemetry/policy integration, render watchdogs and editor/native-exit recovery
 remain open; the second fixture is prelaunched, not an automatic restart.
 
+The [measured network presentation checkpoint](network-presentation-handoff.md)
+adds a toolkit-independent selected four-field projection with exact counter/rate
+formatting, original timestamps, independent freshness/lease state and current-policy
+borrowing. Six portable families pass on all three profiles; real Linux collector
+scenarios compare the same component against independently verified documents.
+Explicit retained projection preserves stale values with unknown age after the
+native clock becomes unavailable. Full suites pass 102 Windows, 107 Linux and 94
+historical-toolset host checks. This adds no native operational-payload cache or
+text/pixel claim; delivery and policy-driven erasure remain the next boundary.
+
 Canonical 0.2.0 documentation bundle, unchanged 0.1 authoring profile, preserved old
 fixtures, new experimental scene/command/capability 0.2 and admission descriptors.
 The initial settings registry has enforced metadata/default consistency and generated
@@ -349,9 +359,12 @@ renderer/collector continuity remain open.
 Continue other native tracks independently of the remaining GNOME qualification.
 W-25's [supervised network checkpoint](network-publication-handoff.md) connects
 real Linux acquisition, source lifetimes and measured receipt under independent
-child supervision. The native surface now demonstrates retained public-marker recovery. Connect this
-tested data boundary to product controller demand, renderer supervision and policy
-distribution. Actual native topology faults and Windows full-table notification
+child supervision. The native surface demonstrates retained public-marker recovery,
+and the shared projection now closes measured values and status semantics. Close
+native operational-payload admission, queue/cache ownership, policy invalidation and
+acknowledged erasure before enabling it on that surface. Verify pixels and recovery
+independently, then connect product controller demand and renderer supervision.
+Actual native topology faults and Windows full-table notification
 coverage remain unqualified. The native
 inventory probe now connects bounded subscription/demand and queue revocation to
 complete-state receipt. W-07 must add field/entity/age/priority/recording demand

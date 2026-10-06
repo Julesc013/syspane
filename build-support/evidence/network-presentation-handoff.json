@@ -1,0 +1,138 @@
+{
+  "schema_version": "0.1.0",
+  "work_id": "W-25",
+  "source_ref": "8b34ac65dbdf9abbaba3ffa75d7ba10b204994b2",
+  "objective": "Provide bounded selected network renderer inputs with exact text, original measured metadata, independent lease/freshness and current-policy lifetime.",
+  "changed_files": [
+    "CMakeLists.txt",
+    "README.md",
+    "TODO.md",
+    "build-support/campaign-workspace.json",
+    "build-support/check_legacy_artifacts.py",
+    "build-support/check_profile.py",
+    "build-support/components.json",
+    "build-support/evidence/network-presentation-handoff.json",
+    "build-support/evidence/w-25-network-presentation-attempts.json",
+    "build-support/evidence/w-25-network-presentation-first-native-failure.json",
+    "build-support/evidence/w-25-network-presentation-initial-preflight.json",
+    "build-support/evidence/w-25-network-presentation-linux-x64-gcc13.DIAG-01.json",
+    "build-support/evidence/w-25-network-presentation-linux-x64-gcc13.FAILURE-STORE.json",
+    "build-support/evidence/w-25-network-presentation-linux-x64-gcc13.NATIVE-01.json",
+    "build-support/evidence/w-25-network-presentation-linux-x64-gcc13.NATIVE-02.json",
+    "build-support/evidence/w-25-network-presentation-linux-x64-gcc13.NATIVE-CLOCK.json",
+    "build-support/evidence/w-25-network-presentation-linux-x64-gcc13.NATIVE-COLLECTOR.json",
+    "build-support/evidence/w-25-network-presentation-linux-x64-gcc13.NATIVE-MEASURED.json",
+    "build-support/evidence/w-25-network-presentation-linux-x64-gcc13.NATIVE-NETWORK.json",
+    "build-support/evidence/w-25-network-presentation-linux-x64-gcc13.NATIVE-SUB.json",
+    "build-support/evidence/w-25-network-presentation-linux-x64-gcc13.ORACLE-01.json",
+    "build-support/evidence/w-25-network-presentation-linux-x64-gcc13.PRESERVE.json",
+    "build-support/evidence/w-25-network-presentation-linux-x64-gcc13.RECOVERY-01.json",
+    "build-support/evidence/w-25-network-presentation-linux-x64-gcc13.ctest.txt",
+    "build-support/evidence/w-25-network-presentation-linux-x64-gcc13.json",
+    "build-support/evidence/w-25-network-presentation-linux-x64-gcc13.smoke.json",
+    "build-support/evidence/w-25-network-presentation-verification.json",
+    "build-support/evidence/w-25-network-presentation-windows-x64-gcc15.DIAG-01.json",
+    "build-support/evidence/w-25-network-presentation-windows-x64-gcc15.FAILURE-STORE.json",
+    "build-support/evidence/w-25-network-presentation-windows-x64-gcc15.NATIVE-01.json",
+    "build-support/evidence/w-25-network-presentation-windows-x64-gcc15.NATIVE-02.json",
+    "build-support/evidence/w-25-network-presentation-windows-x64-gcc15.NATIVE-CLOCK.json",
+    "build-support/evidence/w-25-network-presentation-windows-x64-gcc15.NATIVE-MEASURED.json",
+    "build-support/evidence/w-25-network-presentation-windows-x64-gcc15.NATIVE-NETWORK.json",
+    "build-support/evidence/w-25-network-presentation-windows-x64-gcc15.NATIVE-SUB.json",
+    "build-support/evidence/w-25-network-presentation-windows-x64-gcc15.PRESERVE.json",
+    "build-support/evidence/w-25-network-presentation-windows-x64-gcc15.RECOVERY-01.json",
+    "build-support/evidence/w-25-network-presentation-windows-x64-gcc15.ctest.txt",
+    "build-support/evidence/w-25-network-presentation-windows-x64-gcc15.json",
+    "build-support/evidence/w-25-network-presentation-windows-x64-gcc15.smoke.json",
+    "build-support/evidence/w-25-network-presentation-windows-x86-v141-xp.ctest.txt",
+    "build-support/evidence/w-25-network-presentation-windows-x86-v141-xp.json",
+    "build-support/evidence/w-25-network-presentation-windows-x86-v141-xp.smoke.json",
+    "build-support/record_legacy_build.py",
+    "build-support/record_protocol.py",
+    "build-support/targets/linux-x64-gcc13.json",
+    "build-support/targets/windows-x64-gcc15.json",
+    "build-support/targets/windows-x86-v141-xp.imports.json",
+    "build-support/targets/windows-x86-v141-xp.json",
+    "docs/developers/architecture.md",
+    "docs/developers/build.md",
+    "source/application/collector_probe.cpp",
+    "source/rendering/network_view.cpp",
+    "source/rendering/network_view.hpp",
+    "spec/checksums.json",
+    "spec/delivery/campaign-admission.md",
+    "spec/delivery/current-state.md",
+    "spec/delivery/index.md",
+    "spec/delivery/network-presentation-handoff.md",
+    "spec/delivery/packages/index.md",
+    "spec/delivery/packages/w-25-network-presentation.md",
+    "spec/delivery/work-units.json",
+    "spec/generated/catalog.json",
+    "tests/protocol/native_collector.py",
+    "tests/rendering/network-rates.json",
+    "tests/rendering/network_view_tests.cpp"
+  ],
+  "decisions": [
+    "Select exact producer/epoch/entity identity; never inherit a new epoch by table index or reused entity ID.",
+    "Format binary64 rates through bounded integer arithmetic with 46 independent rational oracles; preserve exact unsigned counters.",
+    "Keep the projection synchronous and cache-free; native delivery and acknowledged erasure require their own closed boundary.",
+    "Provide an explicit retained ordinary borrow with unknown age and stale non-null values after native clock qualification becomes unavailable; retain the existing clock guard.",
+    "Increase measured campaign output allocation to 4 GiB while keeping preflight reserves; document three specific historical locale imports without guest qualification."
+  ],
+  "checks": [
+    {
+      "name": "Windows full 102-entry suite",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-25-network-presentation-windows-x64-gcc15.json"
+    },
+    {
+      "name": "Linux full 107-entry suite including 76 field comparisons in real collector scenarios",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-25-network-presentation-linux-x64-gcc13.json"
+    },
+    {
+      "name": "Historical-toolset 94 host checks and thirteen PE/import audits",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-25-network-presentation-windows-x86-v141-xp.json"
+    },
+    {
+      "name": "Initial combined workspace preflight",
+      "outcome": "fail",
+      "evidence": "build-support/evidence/w-25-network-presentation-initial-preflight.json"
+    },
+    {
+      "name": "Five original configure/test failures, source archives and final passing attempts",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-25-network-presentation-attempts.json"
+    },
+    {
+      "name": "Three fresh relocated model smoke packages",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-25-network-presentation-attempts.json"
+    },
+    {
+      "name": "Schemas, fixtures, generated indexes, tooling and integrity",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-25-network-presentation-verification.json"
+    },
+    {
+      "name": "Native operational text/pixel delivery and policy-driven erasure",
+      "outcome": "not_run",
+      "evidence": "spec/delivery/network-presentation-handoff.md"
+    }
+  ],
+  "open_questions": [
+    "Close native operational-payload admission, queue/cache ownership, policy invalidation and acknowledged erasure before enabling the projection on a native surface.",
+    "Then verify displayed values, retained/revoked pixels and independent renderer recovery; preserve existing default focus failure.",
+    "Product demand/controller, actual topology/suspend faults, protected policy, Windows notification coverage, historical guests and Mac laboratory remain open."
+  ],
+  "next_step": "Close and implement native operational-payload delivery and current-policy erasure, then independently verify actual measured values and retained/revoked pixels.",
+  "authority_used": [
+    "user:foundation-native-campaign-2026-10-05"
+  ],
+  "limitations": [
+    "W-25, scene/rendering and the full campaign remain incomplete; no complete desktop edition or release is qualified.",
+    "Raw native counters/identities and private failure payloads are excluded from committed evidence.",
+    "Native GNOME public-marker behavior is unchanged; no operational cache, native typography/accessibility or allocation-fault injection is qualified.",
+    "Historical tests ran on Windows 10/WOW64. No VM, user desktop, privileged action, public release or AIDE activation occurred."
+  ]
+}

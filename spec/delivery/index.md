@@ -31,6 +31,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Native measurement-clock checkpoint](measurement-clock-handoff.md) — Record causal clock brackets and peer-exit rejection without claiming measured telemetry or suspend qualification.
 - [Native local IPC implementation handoff](native-transport-handoff.md) — Bind W-24's Windows and Linux adapter gate to real process and stream evidence.
 - [Real native network acquisition checkpoint](network-acquisition-handoff.md) — Read bounded interface counters on Windows and Linux without claiming reconciled model identity or complete collection.
+- [Measured network presentation checkpoint](network-presentation-handoff.md) — Shared renderer inputs preserve exact selected values, measurement metadata, lease state and disclosure lifetime.
 - [Supervised real network publication checkpoint](network-publication-handoff.md) — Publish real Linux counters and rates through measured telemetry with independent child recovery.
 - [Network lifetimes and Linux watched acquisition checkpoint](network-reconciliation-handoff.md) — Preserve observation identity and measurement age before supervised native publication.
 - [Open decisions, risks and resolving experiments](open-questions.md) — Keep unresolved choices discoverable without blocking unrelated work.
