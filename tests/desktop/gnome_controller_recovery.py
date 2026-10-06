@@ -23,9 +23,10 @@ from native_consumer_continuity import verify_source
 
 BACKGROUND_RECT = (0, 400, 128, 96)  # Outside both the operational tile and icon fixture.
 RENDER_MODES = ('render-stall','hidden','false-progress','shell-freeze','render-revoke')
+EDITOR_MODES = ('editor-key','editor-button','editor-owner-loss','editor-controller-freeze','editor-no-exit')
 MODES = ('live','no-reattach','revoke') + RENDER_MODES
 REVOKED = ('revoke','render-revoke')
-NO_REPLACEMENT = REVOKED + ('false-progress',)
+NO_REPLACEMENT = REVOKED + ('false-progress',) + EDITOR_MODES
 mono = lambda: time.monotonic_ns()//1_000_000
 
 
@@ -298,7 +299,10 @@ def judge(raw, composition):
     return {'outcome':'pass' if pixels else 'fail','collection':'pass','policy':'pass','native_replacement':'pass','pixels':'pass' if pixels else 'fail'}
 
 
-def observe(display, environment, shell_pid, workspace, composition):
+def observe(display, environment, shell_pid, workspace, composition, channel=None):
+    if environment['SYSPANE_GNOME_CONTROLLER_CONTROL'] in EDITOR_MODES:
+        from gnome_editor_exit import observe as editor_observe
+        return editor_observe(display, environment, shell_pid, workspace, composition, channel)
     from native_gnome_bootstrap import mapped_files
     controller = int(environment['SYSPANE_GNOME_CONTROLLER_PID']); mode = environment['SYSPANE_GNOME_CONTROLLER_CONTROL']
     rendering=mode in RENDER_MODES

@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-06T13:00:00Z", "scope": "Independent owned X11 editor lifetime, native escape and restored input"}
+updated: {"by": "codex", "at": "2026-10-06T13:56:23Z", "scope": "Owned GNOME editor lifetime exit, retained collection and restored icon input/pixels"}
 ---
 
 # Current state and next admitted boundary
@@ -26,8 +26,10 @@ controls and 33 adversarial evidence checks pass their required outcomes. This i
 one finite owned laboratory composition. The subsequent [editor lifetime checkpoint](editor-exit-handoff.md)
 tests an independent keyboard/GTK exit owner against a stopped owned candidate,
 including restored external pixels/input, keymap loss and owner-loss cleanup.
-Next connect that owner to the actual desktop/editor role and close installed
-controller/session/policy/demand ownership; complete desktop editions and
+The [GNOME editor lifetime checkpoint](gnome-editor-exit-handoff.md) now restores
+actual icon input and measured pixels while those desktop/controller/source lifetimes
+survive, including exit while the controller is frozen. Next close installed
+controller/session/policy/demand ownership and actual scene transactions; complete desktop editions and
 the independently blocked native platform tracks remain required.
 
 ## Repository checkpoint: 2026-10-05
@@ -448,9 +450,10 @@ now supplies same-session automatic shell replacement and original measured-stat
 reattachment, with recovered operational pixels after native overview dismissal.
 Independent render-progress failure now drives that replacement owner, including
 stopped/hidden drawing and a frozen shell. Complete product controller policy/demand,
-general delivery queues, overview-free recovery and actual desktop/editor integration next.
-The isolated X11 editor lifetime has independent exit evidence; it does not implement
-scene transactions, fullscreen recovery discovery or installed ownership.
+general delivery queues and overview-free recovery remain next. The independent X11
+exit owner now also passes the owned GNOME lifetime/input integration. Its public-pixel
+candidate does not implement scene transactions, fullscreen recovery discovery or
+installed ownership.
 Actual native topology faults and Windows full-table notification
 coverage remain unqualified. The native
 inventory probe now connects bounded subscription/demand and queue revocation to

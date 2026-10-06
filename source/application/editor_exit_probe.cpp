@@ -19,9 +19,42 @@ void finish(int) { finish_child = 1; }
 void event(const char* type, std::uint64_t value = 0) {
     std::cout << "{\"event\":\"" << type << "\",\"value\":" << value << ",\"at_ms\":" << monotonic_ms() << "}\n" << std::flush;
 }
-int editor(std::uint64_t parent) {
+int managed_editor() {
+    if (!gtk_init_check(nullptr, nullptr)) return 69;
+    GtkWidget* window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+    gtk_window_set_title(GTK_WINDOW(window), "SysPane editor lifetime candidate");
+    gtk_window_set_default_size(GTK_WINDOW(window), 800, 500);
+    gtk_window_set_resizable(GTK_WINDOW(window), TRUE);
+    g_signal_connect(window, "map-event", G_CALLBACK(+[](GtkWidget* widget, GdkEvent*, gpointer) -> gboolean {
+        gtk_window_maximize(GTK_WINDOW(widget)); return FALSE;
+    }), nullptr);
+    GtkWidget* canvas = gtk_drawing_area_new();
+    gtk_container_add(GTK_CONTAINER(window), canvas);
+    g_signal_connect(canvas, "draw", G_CALLBACK(+[](GtkWidget*, cairo_t* context, gpointer) -> gboolean {
+        cairo_set_source_rgb(context, 204.0/255.0, 34.0/255.0, 51.0/255.0);
+        cairo_paint(context); return FALSE;
+    }), nullptr);
+    g_signal_connect(window, "delete-event", G_CALLBACK(+[](GtkWidget*, GdkEvent*, gpointer) -> gboolean {
+        finish_child = 1; gtk_main_quit(); return TRUE;
+    }), nullptr);
+    auto started = monotonic_ms();
+    const guint timer = g_timeout_add(10, +[](gpointer data) -> gboolean {
+        if (finish_child || monotonic_ms() - *static_cast<const std::uint64_t*>(data) >= 17000) {
+            gtk_main_quit(); return G_SOURCE_REMOVE;
+        }
+        return G_SOURCE_CONTINUE;
+    }, &started);
+    gtk_window_maximize(GTK_WINDOW(window));
+    gtk_widget_show_all(window);
+    gtk_main();
+    if (g_main_context_find_source_by_id(nullptr, timer)) g_source_remove(timer);
+    gtk_widget_destroy(window);
+    return finish_child ? 0 : 70;
+}
+int editor(std::uint64_t parent, bool maximized) {
     syspane::platform::arm_parent_lifetime(parent);
     std::signal(SIGTERM, finish);
+    if (maximized) return managed_editor();
     Display* display = XOpenDisplay(nullptr);
     if (!display) return 69;
     const auto root = DefaultRootWindow(display);
@@ -50,7 +83,8 @@ struct Owner {
     std::uint64_t started = monotonic_ms(), stopping = 0;
     bool killed = false;
     int outcome = 0;
-    Owner() : child(Child::launch_self({"--child", std::to_string(syspane::platform::current_process_id())})) { event("child", child.id()); }
+    explicit Owner(bool maximized) : child(Child::launch_self({maximized ? "--child-maximized" : "--child",
+        std::to_string(syspane::platform::current_process_id())})) { event("child", child.id()); }
     void stop(const char* reason) {
         if (stopping) return;
         stopping = monotonic_ms();
@@ -87,14 +121,14 @@ gboolean closed(GtkWidget*, GdkEvent*, gpointer data) { clicked(nullptr, data); 
 }
 int main(int argc, char** argv) {
     try {
-        if (argc == 3 && std::string(argv[1]) == "--child") {
+        if (argc == 3 && (std::string(argv[1]) == "--child" || std::string(argv[1]) == "--child-maximized")) {
             const std::string value = argv[2];
             if (value.empty() || value.size() > 10 || value.find_first_not_of("0123456789") != std::string::npos) return 64;
-            return editor(std::stoull(value));
+            return editor(std::stoull(value), std::string(argv[1]) == "--child-maximized");
         }
-        if (argc != 2 || std::string(argv[1]) != "--owned-x11-lab") return 64;
+        if (argc != 2 || (std::string(argv[1]) != "--owned-x11-lab" && std::string(argv[1]) != "--owned-gnome-lab")) return 64;
         if (!gtk_init_check(nullptr, nullptr)) return 69;
-        Owner owner;
+        Owner owner(std::string(argv[1]) == "--owned-gnome-lab");
         GtkWidget* window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
         gtk_window_set_title(GTK_WINDOW(window), "SysPane independent editor exit");
         gtk_window_set_decorated(GTK_WINDOW(window), FALSE);

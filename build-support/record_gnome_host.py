@@ -58,9 +58,10 @@ def validate_runtime(value, build, family, prefix, shell_exit=None):
     controlled = family == 'GNOME-CONTROLLER-RECOVERY-01'
     if controlled:
         from record_gnome_controller_recovery import controller_lifetimes
+        from gnome_controller_recovery import NO_REPLACEMENT
         raw, _ = controller_lifetimes(value, build)
         identities = [raw['identities']['old_shell']]
-        if raw['mode'] not in ('revoke','render-revoke','false-progress'):
+        if raw['mode'] not in NO_REPLACEMENT:
             identities.append(raw['identities']['new_shell'])
         shell = [{'pid': row['pid'], 'command': row['arguments']} for row in identities]
     else:
@@ -69,7 +70,7 @@ def validate_runtime(value, build, family, prefix, shell_exit=None):
     if recovering and (family != 'GNOME-SHELL-RECOVERY-01' or shell_exit.get('event') != 'shell-exit' or
                        shell_exit.get('observer') != 'pidfd' or shell_exit.get('readable') is not True):
         raise ValueError('only explicit shell recovery admits independently observed shell exit')
-    expected_shells = (1 if raw['mode'] in ('revoke','render-revoke','false-progress') else 2) if controlled else (1 if not recovering or value['shell_recovery_control'] == 'no-restart' else 2)
+    expected_shells = (1 if raw['mode'] in NO_REPLACEMENT else 2) if controlled else (1 if not recovering or value['shell_recovery_control'] == 'no-restart' else 2)
     if len(shell) != expected_shells or (recovering and shell_exit['pid'] != shell[0]['pid']):
         raise ValueError('shell command identity')
     if len(shell) == 2 and (shell[1]['command'] != shell[0]['command'] or shell[1]['pid'] == shell[0]['pid']):

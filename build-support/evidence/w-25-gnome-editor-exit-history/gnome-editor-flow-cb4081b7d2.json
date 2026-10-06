@@ -1,0 +1,43 @@
+[
+  {
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "source_inputs": {
+      "build-support/check_workspace_budget.py": "3a9ec8bf7f4f205e1986d19b523d57b41288936e3343910f80b460d71474b700"
+    },
+    "exit": 0,
+    "expected": 0,
+    "at": "2026-10-06T13:39:15.744939+00:00",
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 5368709120,\n  \"checkout_out_bytes\": 1251086483,\n  \"linux_campaign_bytes\": 3066594219,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "/usr/bin/python3",
+      "/mnt/d/Projects/SysPane/syspane/tests/desktop/native_gnome_bootstrap.py",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13",
+      "--controller-recovery",
+      "editor-key"
+    ],
+    "source_inputs": {
+      "tests/desktop/native_gnome_bootstrap.py": "e5fa9d46e4a0601faa65abbad26190b8a2be259d5f99fa759c08482457506058"
+    },
+    "exit": 1,
+    "expected": 0,
+    "at": "2026-10-06T13:39:34.948169+00:00",
+    "stdout": "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-CONTROLLER-RECOVERY-01-9e2bbfb430e04b91a8f9754b60a2dee8.json\nfail RuntimeError: TimeoutError: editor native observation deadline\n",
+    "stderr": ""
+  }
+]

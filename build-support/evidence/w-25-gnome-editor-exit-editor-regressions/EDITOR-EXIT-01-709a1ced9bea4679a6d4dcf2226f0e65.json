@@ -1,0 +1,378 @@
+{
+  "family": "EDITOR-EXIT-01",
+  "recorded_at": "2026-10-06T13:52:15.414134+00:00",
+  "source_base": "c6a600d97e04b7c0d93f4727d77bfe3d3f659b6b",
+  "source_inputs": {
+    "tests/desktop/native_editor_exit.py": "1e453ebc01810b0b48e0f835503fc9d6047ec35588e83132fa4a4e4b435d13c2",
+    "tests/desktop/native_oracle.py": "975958fe693d18ae517ee9397fd086b75a794115ec9f04214a8460a02f7c5ad3",
+    "tests/fault/native_diagnostic.py": "aab3f07a8a823412ab78fb49ae31d45ac764c85554c7580d07e01838e8bfcb72",
+    "source/interfaces/editor_exit_x11.cpp": "55989f273c77fa266ac943ad8a19c7787cb3aaaa0ce3c845f40abdeb1a23c08e",
+    "source/interfaces/editor_exit_x11.hpp": "5b8fb7ce804bb5d13c47d06343817bbbfbbf11dff6c1abcafef8bee5492f82a6",
+    "source/application/editor_exit_probe.cpp": "34b07dd7a10f77d2c2c064a81d97af6d0621af9dca5eefa829ad9d6084b4d575",
+    "source/platform/child_linux.cpp": "37951b1e156ad5c5003046985b278dd6c0b5009a179858b40eaf48df126191ca",
+    "source/platform/child.hpp": "5d1ceae8a3870e437daa04da064c64b569526b863b0e50ffce5c68217dc15917",
+    "spec/delivery/packages/w-25-editor-exit.md": "af9a8bae71e635dc436e881b4c1e1f89c91f0840745a5791b0d4e952e4b2ec8f",
+    "CMakeLists.txt": "c7b3fc732dd80024ff7a8bce0eea8fd4d90fc3d16b8c3313e5166efac451ea96",
+    "build-support/components.json": "c5c47ae08d079260e8532d873579141cb1e6eaeda90aea3933edb3ab9e6f9a7a",
+    "build-support/targets/linux-x64-gcc13.json": "6b6c53574fc71c35107cdeac2f745af10e8a78c84506cc2cec934e0b31289b0c"
+  },
+  "executable_sha256": "c92a37fca5d0ef20a00c5333aac333a2bd2be0b0d6c3af0ba06f530866c196a6",
+  "environment": {
+    "uname": [
+      "Linux",
+      "BlackGlass-Win10",
+      "6.18.40.1-microsoft-standard-WSL2",
+      "#1 SMP PREEMPT_DYNAMIC Fri Jul 31 22:12:15 UTC 2026",
+      "x86_64"
+    ],
+    "python": "3.12.3 (main, Jun 19 2026, 12:46:00) [GCC 13.3.0]",
+    "runtime_files": {
+      "/usr/bin/Xvfb": "2c7f5a9534410fed5092d782a69ca7ffd9fce80e98b81ffe4944d703dd11d3b1",
+      "/usr/lib/x86_64-linux-gnu/libX11.so.6": "c5b5d782bd9cab3420a62df88f5c991507edf3331a89f98464ddbc538c37b879",
+      "/usr/lib/x86_64-linux-gnu/libXtst.so.6": "b236448961631bb13464c878e68535f5335b5fa10a5d8411f3ad1a56ff430ec2",
+      "/usr/lib/x86_64-linux-gnu/libgtk-3.so.0": "0611fd19d1354a39a7cfafceffa3bdf4289d4c497c7f69ff337f86e99cf37d93"
+    }
+  },
+  "cases": [
+    {
+      "case": "KEY-LIVE",
+      "result": "pass",
+      "baseline_pixel": "116633",
+      "owner_pid": 496,
+      "child_pid": 506,
+      "child_executable_sha256": "c92a37fca5d0ef20a00c5333aac333a2bd2be0b0d6c3af0ba06f530866c196a6",
+      "parent_verified": true,
+      "obstructed_pixel": "cc2233",
+      "input_obstructed": true,
+      "ordinary_and_shifted_ignored": true,
+      "stimulus_ns": 211676094182,
+      "native_exit_ns": 211696661001,
+      "restored_pixel": "116633",
+      "input_restored_ns": 211697010681,
+      "shortcut_released": true,
+      "owner_events": [
+        {
+          "event": "child",
+          "value": 506,
+          "at_ms": 211266
+        },
+        {
+          "event": "keyboard_exit",
+          "value": 506,
+          "at_ms": 211687
+        },
+        {
+          "event": "child_exit",
+          "value": 0,
+          "at_ms": 211707
+        }
+      ],
+      "child_exit_at_cleanup": true,
+      "display_exit": 0,
+      "owner_stdout_sha256": "be34f26a2ccb0c14d2bdd6e6adf6da8a278fb1a10f600035ccb61f8f9caffbc7",
+      "owner_stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "observer_exit": 0
+    },
+    {
+      "case": "KEY-FROZEN",
+      "result": "pass",
+      "baseline_pixel": "116633",
+      "owner_pid": 517,
+      "child_pid": 518,
+      "child_executable_sha256": "c92a37fca5d0ef20a00c5333aac333a2bd2be0b0d6c3af0ba06f530866c196a6",
+      "parent_verified": true,
+      "obstructed_pixel": "cc2233",
+      "input_obstructed": true,
+      "stopped_before_stimulus": true,
+      "stimulus_ns": 211912454417,
+      "native_exit_ns": 212206548138,
+      "restored_pixel": "116633",
+      "input_restored_ns": 212206944016,
+      "shortcut_released": true,
+      "owner_events": [
+        {
+          "event": "child",
+          "value": 518,
+          "at_ms": 211898
+        },
+        {
+          "event": "keyboard_exit",
+          "value": 518,
+          "at_ms": 211939
+        },
+        {
+          "event": "force_stop",
+          "value": 518,
+          "at_ms": 212201
+        },
+        {
+          "event": "child_signal",
+          "value": 9,
+          "at_ms": 212221
+        }
+      ],
+      "child_exit_at_cleanup": true,
+      "display_exit": 0,
+      "owner_stdout_sha256": "a875bab6b32d4a893404257447928cfde67996a4db85ce7ba80593b29a46500c",
+      "owner_stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "observer_exit": 0
+    },
+    {
+      "case": "BUTTON-FROZEN",
+      "result": "pass",
+      "baseline_pixel": "116633",
+      "owner_pid": 524,
+      "child_pid": 525,
+      "child_executable_sha256": "c92a37fca5d0ef20a00c5333aac333a2bd2be0b0d6c3af0ba06f530866c196a6",
+      "parent_verified": true,
+      "obstructed_pixel": "cc2233",
+      "input_obstructed": true,
+      "native_button": {
+        "window": 4194307,
+        "root_x": 500,
+        "root_y": 0,
+        "width": 280,
+        "height": 80
+      },
+      "stopped_before_stimulus": true,
+      "stimulus_ns": 212446299179,
+      "native_exit_ns": 212709892994,
+      "restored_pixel": "116633",
+      "input_restored_ns": 212710268073,
+      "shortcut_released": true,
+      "owner_events": [
+        {
+          "event": "child",
+          "value": 525,
+          "at_ms": 212417
+        },
+        {
+          "event": "native_exit",
+          "value": 525,
+          "at_ms": 212447
+        },
+        {
+          "event": "force_stop",
+          "value": 525,
+          "at_ms": 212705
+        },
+        {
+          "event": "child_signal",
+          "value": 9,
+          "at_ms": 212726
+        }
+      ],
+      "child_exit_at_cleanup": true,
+      "display_exit": 0,
+      "owner_stdout_sha256": "3bbc2ea88c06b2d47d8b40408c1c5dcf7911f93244feec99780ab3f9b93cc868",
+      "owner_stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "observer_exit": 0
+    },
+    {
+      "case": "LOCKS-FROZEN",
+      "result": "pass",
+      "baseline_pixel": "116633",
+      "owner_pid": 531,
+      "child_pid": 532,
+      "child_executable_sha256": "c92a37fca5d0ef20a00c5333aac333a2bd2be0b0d6c3af0ba06f530866c196a6",
+      "parent_verified": true,
+      "obstructed_pixel": "cc2233",
+      "input_obstructed": true,
+      "lock_state": 18,
+      "stopped_before_stimulus": true,
+      "stimulus_ns": 212941704389,
+      "native_exit_ns": 213236095999,
+      "restored_pixel": "116633",
+      "input_restored_ns": 213236432081,
+      "shortcut_released": true,
+      "owner_events": [
+        {
+          "event": "child",
+          "value": 532,
+          "at_ms": 212925
+        },
+        {
+          "event": "keyboard_exit",
+          "value": 532,
+          "at_ms": 212965
+        },
+        {
+          "event": "force_stop",
+          "value": 532,
+          "at_ms": 213227
+        },
+        {
+          "event": "child_signal",
+          "value": 9,
+          "at_ms": 213247
+        }
+      ],
+      "child_exit_at_cleanup": true,
+      "display_exit": 0,
+      "owner_stdout_sha256": "d47640f980d7f494eb26b717dc6a410c7eb76096eba9542cfc22b075abffbc37",
+      "owner_stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "observer_exit": 0
+    },
+    {
+      "case": "DRAG-FROZEN",
+      "result": "pass",
+      "baseline_pixel": "116633",
+      "owner_pid": 538,
+      "child_pid": 539,
+      "child_executable_sha256": "c92a37fca5d0ef20a00c5333aac333a2bd2be0b0d6c3af0ba06f530866c196a6",
+      "parent_verified": true,
+      "obstructed_pixel": "cc2233",
+      "input_obstructed": true,
+      "stopped_before_stimulus": true,
+      "drag_state": 256,
+      "stimulus_ns": 213451180825,
+      "native_exit_ns": 213735389559,
+      "restored_pixel": "116633",
+      "input_restored_ns": 213735932830,
+      "shortcut_released": true,
+      "owner_events": [
+        {
+          "event": "child",
+          "value": 539,
+          "at_ms": 213434
+        },
+        {
+          "event": "keyboard_exit",
+          "value": 539,
+          "at_ms": 213472
+        },
+        {
+          "event": "force_stop",
+          "value": 539,
+          "at_ms": 213734
+        },
+        {
+          "event": "child_signal",
+          "value": 9,
+          "at_ms": 213755
+        }
+      ],
+      "child_exit_at_cleanup": true,
+      "display_exit": 0,
+      "owner_stdout_sha256": "cd4b27a29654e27d55ef485de54a1a27d3885c1312fe514bfadd29086bb62df1",
+      "owner_stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "observer_exit": 0
+    },
+    {
+      "case": "MAPPING-LOSS",
+      "result": "pass",
+      "baseline_pixel": "116633",
+      "owner_pid": 545,
+      "child_pid": 546,
+      "child_executable_sha256": "c92a37fca5d0ef20a00c5333aac333a2bd2be0b0d6c3af0ba06f530866c196a6",
+      "parent_verified": true,
+      "obstructed_pixel": "cc2233",
+      "input_obstructed": true,
+      "stimulus_ns": 213965120839,
+      "native_exit_ns": 213995548194,
+      "restored_pixel": "116633",
+      "input_restored_ns": 213995919574,
+      "shortcut_released": true,
+      "owner_events": [
+        {
+          "event": "child",
+          "value": 546,
+          "at_ms": 213949
+        },
+        {
+          "event": "mapping_lost",
+          "value": 546,
+          "at_ms": 213986
+        },
+        {
+          "event": "child_exit",
+          "value": 0,
+          "at_ms": 214007
+        }
+      ],
+      "child_exit_at_cleanup": true,
+      "display_exit": 0,
+      "owner_stdout_sha256": "b71f5e04dd8d68735828f1627449d525ff9db59115832426a9a502cea33d205d",
+      "owner_stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "observer_exit": 0
+    },
+    {
+      "case": "OWNER-LOSS",
+      "result": "pass",
+      "baseline_pixel": "116633",
+      "owner_pid": 552,
+      "child_pid": 553,
+      "child_executable_sha256": "c92a37fca5d0ef20a00c5333aac333a2bd2be0b0d6c3af0ba06f530866c196a6",
+      "parent_verified": true,
+      "obstructed_pixel": "cc2233",
+      "input_obstructed": true,
+      "stimulus_ns": 214198393928,
+      "native_exit_ns": 214208521481,
+      "restored_pixel": "116633",
+      "input_restored_ns": 214208866662,
+      "shortcut_released": true,
+      "owner_events": [
+        {
+          "event": "child",
+          "value": 553,
+          "at_ms": 214192
+        }
+      ],
+      "child_exit_at_cleanup": true,
+      "display_exit": 0,
+      "owner_stdout_sha256": "dc4d064ac7de74aa5c1232bfee2a3fca8f0513a9627852a8e81a5d0958651ea2",
+      "owner_stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "observer_exit": 0
+    },
+    {
+      "case": "EDITOR-CRASH",
+      "result": "pass",
+      "baseline_pixel": "116633",
+      "owner_pid": 558,
+      "child_pid": 559,
+      "child_executable_sha256": "c92a37fca5d0ef20a00c5333aac333a2bd2be0b0d6c3af0ba06f530866c196a6",
+      "parent_verified": true,
+      "obstructed_pixel": "cc2233",
+      "input_obstructed": true,
+      "stimulus_ns": 214394218142,
+      "native_exit_ns": 214404340094,
+      "restored_pixel": "116633",
+      "input_restored_ns": 214404677876,
+      "shortcut_released": true,
+      "owner_events": [
+        {
+          "event": "child",
+          "value": 559,
+          "at_ms": 214387
+        },
+        {
+          "event": "child_signal",
+          "value": 9,
+          "at_ms": 214427
+        }
+      ],
+      "child_exit_at_cleanup": true,
+      "display_exit": 0,
+      "owner_stdout_sha256": "e2c44cdc88632d55d867ab89c49e21e708b22fae37a9d851a3633cae83f8609b",
+      "owner_stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "observer_exit": 0
+    },
+    {
+      "case": "GRAB-CONFLICT",
+      "result": "pass",
+      "baseline_pixel": "116633",
+      "owner_pid": 565,
+      "admission": "denied_before_child",
+      "shortcut_released": true,
+      "owner_events": [],
+      "display_exit": 0,
+      "owner_stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "owner_stderr_sha256": "7d00c160642a94003dfa5a1482238de006c378030274de0ebd137c74eb50fbde",
+      "observer_exit": 0
+    }
+  ],
+  "limitations": [
+    "Owned Xvfb lifetime experiment; no real editor transactions, installed recovery or desktop qualification."
+  ],
+  "result": "pass"
+}

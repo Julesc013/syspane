@@ -6,13 +6,16 @@ from pathlib import Path
 import sys
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'tests/desktop'))
-from gnome_controller_recovery import judge, MODES, RENDER_MODES, REVOKED, NO_REPLACEMENT
+from gnome_controller_recovery import judge, MODES, RENDER_MODES, REVOKED, NO_REPLACEMENT, EDITOR_MODES
 
 BUILD_RECORD='build-support/evidence/w-25-controller-render-recovery-linux-x64-gcc13.json'
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
 
 
 def controller_lifetimes(value, build):
+    if value.get('controller_recovery_control') in EDITOR_MODES:
+        from record_gnome_editor_exit import lifetimes
+        return lifetimes(value, build)
     workspace=Path(value['workspace']);mode=value['controller_recovery_control']
     if value['family']!='GNOME-CONTROLLER-RECOVERY-01' or mode not in MODES:
         raise ValueError('explicit persistent-controller family required')
@@ -81,6 +84,9 @@ def controller_lifetimes(value, build):
 
 
 def validate(value,build):
+    if value.get('controller_recovery_control') in EDITOR_MODES:
+        from record_gnome_editor_exit import validate as editor_validate
+        return editor_validate(value, build)
     from record_gnome_composition import validate as composition
     raw,result=controller_lifetimes(value,build)
     icon_exit={'event':'exit-observed','pid':raw['identities']['old_icon']['pid'],'observer':'pidfd','readable':raw['old_icon_exited']}

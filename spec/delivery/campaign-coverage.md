@@ -73,6 +73,13 @@ or recovery from the first complete desktop edition. No synthetic marker, model
 archive or retained sample tile is called that edition. Repository-only cold-start
 implementation and complete release evidence remain separate unexecuted gates.
 
+The later [GNOME editor-exit checkpoint](gnome-editor-exit-handoff.md) connects
+independent exit to actual icon input and original measured pixels on the owned
+desktop. Keyboard/button release, parent loss and a frozen controller preserve
+source/shell/icon lifetimes; an unavailable owner remains a failed control. This
+does not supply actual scene transactions, installed ownership or another platform's
+missing laboratory evidence.
+
 The [consumer-continuity checkpoint](consumer-continuity-handoff.md) subsequently
 keeps real collection independently alive during native consumer crash/hang,
 bounded replacement, typed consumer-policy denial and circuit opening. Original

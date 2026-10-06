@@ -25,6 +25,8 @@ from prepare_gnome_lab import owned_build, sha, inventory
 
 LIVE_BUILD_RECORD = 'build-support/evidence/w-25-controller-render-recovery-linux-x64-gcc13.json'
 CONTROLLER_RENDER_MODES = ('render-stall','hidden','false-progress','shell-freeze','render-revoke')
+EDITOR_MODES = ('editor-key','editor-button','editor-owner-loss','editor-controller-freeze','editor-no-exit')
+EDITOR_BUILD_RECORD = 'build-support/evidence/w-25-gnome-editor-exit-native-build.json'
 
 SOURCES = ['tests/desktop/gnome_render_watch.py', 'spec/delivery/packages/w-25-gnome-render-watch.md',
            'build-support/record_gnome_render_watch.py', 'tests/desktop/test_gnome_render_watch_record.py',
@@ -166,7 +168,7 @@ def observe(environment, pid, channel, marker, composition, foreground_pid=None,
         if environment.get('SYSPANE_GNOME_CONTROLLER_CONTROL'):
             import gnome_controller_recovery
             result['controller_recovery'] = gnome_controller_recovery.observe(display, environment, pid,
-                Path(environment['HOME']).parent, result['composition'])
+                Path(environment['HOME']).parent, result['composition'], channel)
         elif environment.get('SYSPANE_GNOME_RENDER_WATCH'):
             import gnome_render_watch
             result['render_watch'] = gnome_render_watch.observe(display, environment, pid,
@@ -252,11 +254,15 @@ SOURCES += ['tests/desktop/gnome_controller_recovery.py', 'tests/desktop/test_gn
             'tests/protocol/native_consumer_continuity.py', 'source/application/collector_probe.cpp',
             'spec/delivery/packages/w-25-gnome-controller-recovery.md', 'source/platform/child.hpp', 'source/platform/child_linux.cpp',
             'spec/delivery/packages/w-25-controller-render-recovery.md', 'source/diagnostics/health_link.cpp', 'source/diagnostics/health_link.hpp']
+SOURCES += ['tests/desktop/gnome_editor_exit.py', 'tests/desktop/test_gnome_editor_exit_record.py', 'build-support/record_gnome_editor_exit.py',
+            'source/application/editor_exit_probe.cpp', 'source/interfaces/editor_exit_x11.cpp',
+            'source/interfaces/editor_exit_x11.hpp', 'spec/delivery/packages/w-25-gnome-editor-exit.md']
 SOURCES = list(dict.fromkeys(SOURCES))
 
 
 def run(build, marker=False, control='live', composition=None, reveal=None, focus_baseline=None, focus_trace=False, icon_input=None, wallpaper=None, switcher=None, icon_recovery=None, shell_recovery=None, focus_integration=None, focus_scenarios=None, wallpaper_policy=None, surface_lease=None, network_cache=None, clock_age=None, network_live=None, render_watch=None, controller_recovery=None):
-    controller_render = controller_recovery in CONTROLLER_RENDER_MODES
+    editor_exit = controller_recovery in EDITOR_MODES
+    controller_render = controller_recovery in CONTROLLER_RENDER_MODES or editor_exit
     # Retain orphaned shell helpers for reaping; no service/session can adopt them.
     if ctypes.CDLL(None, use_errno=True).prctl(36, 1, 0, 0, 0) != 0:
         raise OSError(ctypes.get_errno(), 'cannot retain descendant exit evidence')
@@ -384,6 +390,13 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
             report['qualification'] = 'Persistent owned controller/session and real collection through automatic native GNOME reattachment; visible recovery is observed after native overview dismissal. No installed user-session manager or complete product qualification.'
         if render_watch:
             report['qualification'] = 'Independent native render/health supervision and measured tile erasure in the owned GNOME laboratory only; automatic replacement and full recovery remain open.'
+    if editor_exit:
+        editor_record = json.loads((ROOT/EDITOR_BUILD_RECORD).read_text())
+        for name, digest in editor_record['source_inputs'].items():
+            if name.startswith('source/') and sha(ROOT/name)!=digest:raise ValueError('tested editor source differs')
+        if sha(build/'SysPane.EditorExitProbe')!=editor_record['artifacts']['SysPane.EditorExitProbe']['sha256']:raise ValueError('tested editor artifact differs')
+        report['editor_build_record_sha256']=sha(ROOT/EDITOR_BUILD_RECORD)
+        report['qualification']='Independent owned GNOME editor lifetime exit, original real collection and restored icon/pixel input only; no scene transactions or installed recovery qualification.'
     archive = workspace / 'source-inputs.zip'
     with zipfile.ZipFile(archive, 'x', compression=zipfile.ZIP_DEFLATED) as target:
         for name in SOURCES:
@@ -430,7 +443,7 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
                 if controller_render:
                     (network_directory/'r').mkdir(mode=0o700)
                     environment.update(SYSPANE_GNOME_CONTROLLER_RENDER='1',
-                        SYSPANE_GNOME_RENDER_WATCH='render-stall' if controller_recovery=='render-revoke' else 'live' if controller_recovery=='shell-freeze' else controller_recovery)
+                        SYSPANE_GNOME_RENDER_WATCH='render-stall' if controller_recovery=='render-revoke' else 'live' if controller_recovery=='shell-freeze' or editor_exit else controller_recovery)
             if render_watch:
                 (network_directory/'r').mkdir(mode=0o700)
                 environment.update(SYSPANE_GNOME_RENDER_WATCH=render_watch,
@@ -672,8 +685,9 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
                 switcher_apps[role] = launch('switcher-'+role, ['/usr/bin/python3',str(ROOT/'tests/desktop/gnome_switcher_app.py'),role])
             environment['SYSPANE_GNOME_SWITCHER_PIDS'] = json.dumps({role:p.pid for role,p in switcher_apps.items()})
         context = mp.get_context('spawn')
-        local, remote = context.Pipe(duplex=bool(shell_recovery or focus_scenarios))
+        local, remote = context.Pipe(duplex=bool(shell_recovery or focus_scenarios or editor_exit))
         focus_helper = None
+        editor_owner = None
         recovery_parent = None
         if shell_recovery:
             from gnome_shell_recovery import Parent
@@ -686,6 +700,11 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
                 raise ValueError('laboratory log capacity exceeded')
             if local.poll(.05):
                 message = local.recv()
+                if editor_exit and message == {'editor_exit_request':'launch'}:
+                    if editor_owner is not None:raise ValueError('editor lifetime already launched')
+                    editor_owner = launch('editor-exit', [str(build/'SysPane.EditorExitProbe'), '--owned-gnome-lab'])
+                    local.send({'editor_exit_pid':editor_owner.pid})
+                    continue
                 if focus_scenarios and message == {'focus_scenarios_request':'launch'}:
                     if focus_helper is not None:raise ValueError('focus helper launch already consumed')
                     received_ns = time.monotonic_ns()
@@ -945,7 +964,7 @@ if __name__ == '__main__':
     parser.add_argument('--network-cache', choices=('live','ignore-clear','wrong-value','owner-loss'))
     parser.add_argument('--clock-age', choices=('live','freeze-age','ignore-expiry','peer-exit','pending-disable','wrong-peer'))
     parser.add_argument('--network-live', choices=('live','freeze-age','ignore-expiry','wrong-value','ignore-clear','lease-loss','revoke','peer-exit','hang'))
-    parser.add_argument('--controller-recovery', choices=('live','no-reattach','revoke')+CONTROLLER_RENDER_MODES)
+    parser.add_argument('--controller-recovery', choices=('live','no-reattach','revoke')+CONTROLLER_RENDER_MODES+EDITOR_MODES)
     parser.add_argument('--render-watch', choices=('live','render-stall','false-progress','hidden','revoke','watch-exit','watch-hang','shell-freeze'))
     args = parser.parse_args()
     if args.controller_recovery:

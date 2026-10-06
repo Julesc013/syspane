@@ -1037,3 +1037,34 @@ Revalidate an existing report with `python3 build-support/record_editor_exit.py
 evidence tests run with `python3 tests/desktop/test_editor_exit_record.py
 <absolute-report> -v`. The profile remains experimental; scene transactions,
 fullscreen recovery discovery and Wayland need their own contracts and evidence.
+
+## Independent exit on the measured GNOME desktop
+
+The [GNOME package](../../spec/delivery/packages/w-25-gnome-editor-exit.md) adds an
+ordinary maximized public-pixel candidate to the existing owned desktop/controller
+experiment. The independent owner retains the same keyboard shortcut, GTK button,
+child lifetime and bounded escalation. No installed shortcut or user desktop is used.
+
+After each Windows workspace test preflight, run the existing unprivileged bootstrap:
+
+```sh
+/usr/bin/python3 tests/desktop/native_gnome_bootstrap.py "$BUILD" --controller-recovery editor-key
+/usr/bin/python3 tests/desktop/native_gnome_bootstrap.py "$BUILD" --controller-recovery editor-button
+/usr/bin/python3 tests/desktop/native_gnome_bootstrap.py "$BUILD" --controller-recovery editor-owner-loss
+/usr/bin/python3 tests/desktop/native_gnome_bootstrap.py "$BUILD" --controller-recovery editor-controller-freeze
+/usr/bin/python3 tests/desktop/native_gnome_bootstrap.py "$BUILD" --controller-recovery editor-no-exit
+```
+
+The last command returns 1 for its required failed recovery, with complete healthy
+collection and native observation. The others return 0. Original icon obstruction,
+native exit, restored input and original measured pixels are separate requirements.
+The editor artifact must match `w-25-gnome-editor-exit-native-build.json` under
+`build-support/evidence/`, in addition to the existing measured-controller build pin.
+
+Use `build-support/record_gnome_editor_exit.py --build-dir "$BUILD" --output
+<new-owned-record> <five-reports>` and
+`tests/desktop/test_gnome_editor_exit_record.py <five-reports>` to verify the exact
+matrix and challenge its evidence. Keep sources identical across the native matrix.
+Preserve the original private measurement/pixel journals and failed placement
+attempts. The [handoff](../../spec/delivery/gnome-editor-exit-handoff.md) records the
+remaining scene-transaction, fullscreen and installed-ownership boundaries.

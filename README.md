@@ -73,8 +73,11 @@ and complete host qualification remain open.
 The [independent editor-exit experiment](spec/delivery/editor-exit-handoff.md) now
 removes an owned stopped editor candidate through a separate keyboard/GTK path.
 Native exit, restored pixels and restored clicks are checked independently. This
-closes a lifetime prerequisite; scene editing, transaction recovery and integration
-with the actual desktop/controller remain required.
+closes a lifetime prerequisite. The subsequent [GNOME editor-exit checkpoint](spec/delivery/gnome-editor-exit-handoff.md)
+connects it to the owned desktop and persistent collector/controller: native icon
+input and original measured pixels recover without replacing those lifetimes.
+Scene editing, transaction recovery, fullscreen discovery and installed ownership
+remain required.
 The [measured telemetry path](spec/delivery/measured-time-handoff.md) now preserves
 sample age through delay, replay and reconnect, with explicit clock scope and TTL checks.
 A [native network reader](spec/delivery/network-acquisition-handoff.md) now acquires

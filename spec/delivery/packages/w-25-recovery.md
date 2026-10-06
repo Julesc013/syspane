@@ -434,3 +434,9 @@ keyboard/GTK owner to one isolated interactive candidate. Its
 [checkpoint](../editor-exit-handoff.md) preserves stopped/drag/lock, keymap-loss,
 owner-loss and admission-conflict results with external pixels/input. Actual
 editor transactions, fullscreen discovery and installed recovery remain open.
+
+The subsequent [GNOME integration package](w-25-gnome-editor-exit.md) tests that
+same independent owner against real desktop icon input and live measured pixels,
+including a frozen controller and a deliberately unavailable recovery owner.
+Its [checkpoint](../gnome-editor-exit-handoff.md) closes that finite transient
+lifetime integration; actual scene transactions and installed ownership remain open.
