@@ -1,0 +1,239 @@
+[
+  {
+    "case": "shell:on",
+    "phase": "preflight",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-06T01:46:26.140438+00:00",
+    "finished_at": "2026-10-06T01:47:00.148990+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 3221225472,\n  \"checkout_out_bytes\": 934349227,\n  \"linux_campaign_bytes\": 1502524196,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "case": "shell:on",
+    "phase": "native",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "tests/desktop/native_gnome_bootstrap.py",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13",
+      "--focus-baseline",
+      "shell",
+      "--focus-trace"
+    ],
+    "started_at": "2026-10-06T01:47:00.149469+00:00",
+    "finished_at": "2026-10-06T01:47:10.941689+00:00",
+    "exit": 0,
+    "stdout": "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-FOCUS-BASELINE-01-22c9b40af53a43e5a91f7c87d82f57d6.json\npass owned shell and requested observations completed\n",
+    "stderr": ""
+  },
+  {
+    "case": "shell:off",
+    "phase": "preflight",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-06T01:47:10.942098+00:00",
+    "finished_at": "2026-10-06T01:47:11.229412+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 3221225472,\n  \"checkout_out_bytes\": 934350675,\n  \"linux_campaign_bytes\": 1504905625,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "case": "shell:off",
+    "phase": "native",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "tests/desktop/native_gnome_bootstrap.py",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13",
+      "--focus-baseline",
+      "shell"
+    ],
+    "started_at": "2026-10-06T01:47:11.229730+00:00",
+    "finished_at": "2026-10-06T01:47:21.371523+00:00",
+    "exit": 0,
+    "stdout": "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-FOCUS-BASELINE-01-1c3926feba2c493b8b73aeb54f315d06.json\npass owned shell and requested observations completed\n",
+    "stderr": ""
+  },
+  {
+    "case": "ding:on",
+    "phase": "preflight",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-06T01:47:21.371864+00:00",
+    "finished_at": "2026-10-06T01:47:21.676561+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 3221225472,\n  \"checkout_out_bytes\": 934352099,\n  \"linux_campaign_bytes\": 1507097969,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "case": "ding:on",
+    "phase": "native",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "tests/desktop/native_gnome_bootstrap.py",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13",
+      "--focus-baseline",
+      "ding",
+      "--focus-trace"
+    ],
+    "started_at": "2026-10-06T01:47:21.676941+00:00",
+    "finished_at": "2026-10-06T01:47:32.643068+00:00",
+    "exit": 0,
+    "stdout": "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-FOCUS-BASELINE-01-91e9a22e9646455582e2ec7c8d880f23.json\npass owned shell and requested observations completed\n",
+    "stderr": ""
+  },
+  {
+    "case": "ding:off",
+    "phase": "preflight",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-06T01:47:32.643432+00:00",
+    "finished_at": "2026-10-06T01:47:32.928276+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 3221225472,\n  \"checkout_out_bytes\": 934353541,\n  \"linux_campaign_bytes\": 1510369229,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "case": "ding:off",
+    "phase": "native",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "tests/desktop/native_gnome_bootstrap.py",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13",
+      "--focus-baseline",
+      "ding"
+    ],
+    "started_at": "2026-10-06T01:47:32.928613+00:00",
+    "finished_at": "2026-10-06T01:47:43.759461+00:00",
+    "exit": 0,
+    "stdout": "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-FOCUS-BASELINE-01-b2680a45b2f64f6a86f2db6c783839ee.json\npass owned shell and requested observations completed\n",
+    "stderr": ""
+  },
+  {
+    "case": "candidate:on",
+    "phase": "preflight",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-06T01:47:43.759834+00:00",
+    "finished_at": "2026-10-06T01:47:44.047277+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 3221225472,\n  \"checkout_out_bytes\": 934354962,\n  \"linux_campaign_bytes\": 1513430846,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "case": "candidate:on",
+    "phase": "native",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "tests/desktop/native_gnome_bootstrap.py",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13",
+      "--focus-baseline",
+      "candidate",
+      "--focus-trace"
+    ],
+    "started_at": "2026-10-06T01:47:44.047613+00:00",
+    "finished_at": "2026-10-06T01:47:59.222798+00:00",
+    "exit": 0,
+    "stdout": "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-FOCUS-BASELINE-01-a3f6783fa9e841c0953b2429c6d21b92.json\npass owned shell and requested observations completed\n",
+    "stderr": ""
+  },
+  {
+    "case": "candidate:off",
+    "phase": "preflight",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-06T01:47:59.223206+00:00",
+    "finished_at": "2026-10-06T01:47:59.519054+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 3221225472,\n  \"checkout_out_bytes\": 934356419,\n  \"linux_campaign_bytes\": 1518072300,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "case": "candidate:off",
+    "phase": "native",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "tests/desktop/native_gnome_bootstrap.py",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13",
+      "--focus-baseline",
+      "candidate"
+    ],
+    "started_at": "2026-10-06T01:47:59.519576+00:00",
+    "finished_at": "2026-10-06T01:48:14.396737+00:00",
+    "exit": 0,
+    "stdout": "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-FOCUS-BASELINE-01-75c890f2ae1d4ee8962c2678b9a101a3.json\npass owned shell and requested observations completed\n",
+    "stderr": ""
+  }
+]

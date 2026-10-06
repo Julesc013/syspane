@@ -62,6 +62,9 @@ recovery also remain open. No desktop profile is qualified.
 An [independent native comparison](spec/delivery/gnome-focus-handoff.md) reproduces
 the focus and keyboard-delivery failure with DING while the SysPane extension is
 absent; GNOME alone restores both. The original acceptance failure remains open.
+A [native decision trace](spec/delivery/gnome-focus-trace-handoff.md) now shows Mutter
+selecting the DING desktop as its recent focus target on restoration. Traced and
+untraced observations agree; an integration fix remains pending.
 There is no usable SysPane desktop application or downloadable release yet.
 Desktop, screensaver and installer profiles remain unqualified.
 

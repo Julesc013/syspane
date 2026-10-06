@@ -1,0 +1,97 @@
+[
+  {
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "source_inputs": {
+      "build-support/check_workspace_budget.py": "3a9ec8bf7f4f205e1986d19b523d57b41288936e3343910f80b460d71474b700"
+    },
+    "started_at": "2026-10-06T01:51:20.074667+00:00",
+    "finished_at": "2026-10-06T01:51:54.441770+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 3221225472,\n  \"checkout_out_bytes\": 934359676,\n  \"linux_campaign_bytes\": 1522625932,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "build-support/record_gnome_focus_trace.py",
+      "--build-dir",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13",
+      "--reports",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-FOCUS-BASELINE-01-22c9b40af53a43e5a91f7c87d82f57d6.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-FOCUS-BASELINE-01-1c3926feba2c493b8b73aeb54f315d06.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-FOCUS-BASELINE-01-91e9a22e9646455582e2ec7c8d880f23.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-FOCUS-BASELINE-01-b2680a45b2f64f6a86f2db6c783839ee.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-FOCUS-BASELINE-01-a3f6783fa9e841c0953b2429c6d21b92.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-FOCUS-BASELINE-01-75c890f2ae1d4ee8962c2678b9a101a3.json",
+      "--output",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/gnome-focus-trace-comparison-b55ca103965344e2893f38c0051348e5.json"
+    ],
+    "source_inputs": {
+      "build-support/record_gnome_focus_trace.py": "59373552fcd0f3eaa5c3361f19fe26bbd4bdd464246d81c2dc84b46eae164af2"
+    },
+    "started_at": "2026-10-06T01:51:54.442116+00:00",
+    "finished_at": "2026-10-06T01:51:55.835090+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"outcome\": \"stable\",\n  \"pairs\": {\n    \"shell\": {\n      \"observations_equal\": true,\n      \"signature\": {\n        \"visual_reveal\": \"pass\",\n        \"focus\": \"pass\",\n        \"phase_roles\": [\n          [\n            \"foreground\"\n          ],\n          [\n            \"none\"\n          ],\n          [\n            \"foreground\"\n          ]\n        ],\n        \"f9_delivered\": true,\n        \"f10_delivered\": true,\n        \"candidate_acceptance\": \"not_applicable\"\n      },\n      \"native_selected_role\": \"foreground\",\n      \"selection_matches_restored_role\": true\n    },\n    \"ding\": {\n      \"observations_equal\": true,\n      \"signature\": {\n        \"visual_reveal\": \"pass\",\n        \"focus\": \"fail\",\n        \"phase_roles\": [\n          [\n            \"foreground\"\n          ],\n          [\n            \"icon\"\n          ],\n          [\n            \"icon\"\n          ]\n        ],\n        \"f9_delivered\": false,\n        \"f10_delivered\": true,\n        \"candidate_acceptance\": \"not_applicable\"\n      },\n      \"native_selected_role\": \"icon\",\n      \"selection_matches_restored_role\": true\n    },\n    \"candidate\": {\n      \"observations_equal\": true,\n      \"signature\": {\n        \"visual_reveal\": \"pass\",\n        \"focus\": \"fail\",\n        \"phase_roles\": [\n          [\n            \"foreground\"\n          ],\n          [\n            \"icon\"\n          ],\n          [\n            \"icon\"\n          ]\n        ],\n        \"f9_delivered\": false,\n        \"f10_delivered\": true,\n        \"candidate_acceptance\": \"fail\"\n      },\n      \"native_selected_role\": \"icon\",\n      \"selection_matches_restored_role\": true\n    }\n  }\n}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "source_inputs": {
+      "build-support/check_workspace_budget.py": "3a9ec8bf7f4f205e1986d19b523d57b41288936e3343910f80b460d71474b700"
+    },
+    "started_at": "2026-10-06T01:51:55.835424+00:00",
+    "finished_at": "2026-10-06T01:51:56.125592+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 3221225472,\n  \"checkout_out_bytes\": 934363952,\n  \"linux_campaign_bytes\": 1522659780,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "tests/desktop/test_gnome_focus_trace_record.py",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-FOCUS-BASELINE-01-22c9b40af53a43e5a91f7c87d82f57d6.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-FOCUS-BASELINE-01-1c3926feba2c493b8b73aeb54f315d06.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-FOCUS-BASELINE-01-91e9a22e9646455582e2ec7c8d880f23.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-FOCUS-BASELINE-01-b2680a45b2f64f6a86f2db6c783839ee.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-FOCUS-BASELINE-01-a3f6783fa9e841c0953b2429c6d21b92.json",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/GNOME-FOCUS-BASELINE-01-75c890f2ae1d4ee8962c2678b9a101a3.json",
+      "-v"
+    ],
+    "source_inputs": {
+      "tests/desktop/test_gnome_focus_trace_record.py": "835c11a96260f8853e5779b6fd70f108284a0d0b9ec1eb6e9aacc4b2c5b4c60f"
+    },
+    "started_at": "2026-10-06T01:51:56.125851+00:00",
+    "finished_at": "2026-10-06T01:51:57.978682+00:00",
+    "exit": 0,
+    "stdout": "",
+    "stderr": "test_action_separation_mismatch (__main__.FocusTraceEvidence.test_action_separation_mismatch) ... ok\ntest_all_six_native_observations (__main__.FocusTraceEvidence.test_all_six_native_observations) ... ok\ntest_ambiguous_selection (__main__.FocusTraceEvidence.test_ambiguous_selection) ... ok\ntest_backwards_decision_clock (__main__.FocusTraceEvidence.test_backwards_decision_clock) ... ok\ntest_click_before_decision_is_not_restore (__main__.FocusTraceEvidence.test_click_before_decision_is_not_restore) ... ok\ntest_duplicate_pair (__main__.FocusTraceEvidence.test_duplicate_pair) ... ok\ntest_extra_executed_handler (__main__.FocusTraceEvidence.test_extra_executed_handler) ... ok\ntest_instrumentation_difference_inconclusive (__main__.FocusTraceEvidence.test_instrumentation_difference_inconclusive) ... ok\ntest_keyboard_boundary_before_decision (__main__.FocusTraceEvidence.test_keyboard_boundary_before_decision) ... ok\ntest_late_decision (__main__.FocusTraceEvidence.test_late_decision) ... ok\ntest_missing_executed_handler (__main__.FocusTraceEvidence.test_missing_executed_handler) ... ok\ntest_missing_focus_assignment (__main__.FocusTraceEvidence.test_missing_focus_assignment) ... ok\ntest_missing_foreground_show (__main__.FocusTraceEvidence.test_missing_foreground_show) ... ok\ntest_missing_pair (__main__.FocusTraceEvidence.test_missing_pair) ... ok\ntest_missing_selection_cannot_use_cleanup_selection (__main__.FocusTraceEvidence.test_missing_selection_cannot_use_cleanup_selection) ... ok\ntest_raw_log_hash (__main__.FocusTraceEvidence.test_raw_log_hash) ... ok\ntest_raw_log_path (__main__.FocusTraceEvidence.test_raw_log_path) ... ok\ntest_report_log_truncation (__main__.FocusTraceEvidence.test_report_log_truncation) ... ok\ntest_selection_not_forced_to_match_external_focus (__main__.FocusTraceEvidence.test_selection_not_forced_to_match_external_focus) ... ok\ntest_trace_flag (__main__.FocusTraceEvidence.test_trace_flag) ... ok\ntest_trace_topics (__main__.FocusTraceEvidence.test_trace_topics) ... ok\ntest_unknown_native_xid (__main__.FocusTraceEvidence.test_unknown_native_xid) ... ok\ntest_unowned_logging (__main__.FocusTraceEvidence.test_unowned_logging) ... ok\n\n----------------------------------------------------------------------\nRan 23 tests in 1.550s\n\nOK\n"
+  }
+]

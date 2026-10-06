@@ -1,0 +1,134 @@
+{
+  "schema_version": "0.1.0",
+  "work_id": "W-05",
+  "source_ref": "4ed0861528b80fb3965474b3450a9b0ec9835a8a",
+  "objective": "Identify the native focus decision behind the independently reproduced DING/X11 restoration failure without changing acceptance.",
+  "changed_files": [
+    ".gitattributes",
+    "README.md",
+    "TODO.md",
+    "build-support/evidence/gnome-focus-trace-handoff.json",
+    "build-support/evidence/w-05-gnome-focus-trace-GNOME-FOCUS-BASELINE-01-0c99d784f08641f7aa47d42e43317d94.json",
+    "build-support/evidence/w-05-gnome-focus-trace-GNOME-FOCUS-BASELINE-01-1c3926feba2c493b8b73aeb54f315d06.json",
+    "build-support/evidence/w-05-gnome-focus-trace-GNOME-FOCUS-BASELINE-01-22c9b40af53a43e5a91f7c87d82f57d6.json",
+    "build-support/evidence/w-05-gnome-focus-trace-GNOME-FOCUS-BASELINE-01-75c890f2ae1d4ee8962c2678b9a101a3.json",
+    "build-support/evidence/w-05-gnome-focus-trace-GNOME-FOCUS-BASELINE-01-91e9a22e9646455582e2ec7c8d880f23.json",
+    "build-support/evidence/w-05-gnome-focus-trace-GNOME-FOCUS-BASELINE-01-a3f6783fa9e841c0953b2429c6d21b92.json",
+    "build-support/evidence/w-05-gnome-focus-trace-GNOME-FOCUS-BASELINE-01-b2680a45b2f64f6a86f2db6c783839ee.json",
+    "build-support/evidence/w-05-gnome-focus-trace-attempts.json",
+    "build-support/evidence/w-05-gnome-focus-trace-comparison.json",
+    "build-support/evidence/w-05-gnome-focus-trace-execution.json",
+    "build-support/evidence/w-05-gnome-focus-trace-journals/GNOME-FOCUS-BASELINE-01-0c99d784f08641f7aa47d42e43317d94-focus_journal.jsonl",
+    "build-support/evidence/w-05-gnome-focus-trace-journals/GNOME-FOCUS-BASELINE-01-0c99d784f08641f7aa47d42e43317d94-foreground_events.jsonl",
+    "build-support/evidence/w-05-gnome-focus-trace-journals/GNOME-FOCUS-BASELINE-01-0c99d784f08641f7aa47d42e43317d94-native_focus_log.log",
+    "build-support/evidence/w-05-gnome-focus-trace-journals/GNOME-FOCUS-BASELINE-01-1c3926feba2c493b8b73aeb54f315d06-focus_journal.jsonl",
+    "build-support/evidence/w-05-gnome-focus-trace-journals/GNOME-FOCUS-BASELINE-01-1c3926feba2c493b8b73aeb54f315d06-foreground_events.jsonl",
+    "build-support/evidence/w-05-gnome-focus-trace-journals/GNOME-FOCUS-BASELINE-01-22c9b40af53a43e5a91f7c87d82f57d6-focus_journal.jsonl",
+    "build-support/evidence/w-05-gnome-focus-trace-journals/GNOME-FOCUS-BASELINE-01-22c9b40af53a43e5a91f7c87d82f57d6-foreground_events.jsonl",
+    "build-support/evidence/w-05-gnome-focus-trace-journals/GNOME-FOCUS-BASELINE-01-22c9b40af53a43e5a91f7c87d82f57d6-native_focus_log.log",
+    "build-support/evidence/w-05-gnome-focus-trace-journals/GNOME-FOCUS-BASELINE-01-75c890f2ae1d4ee8962c2678b9a101a3-composition_journal.jsonl",
+    "build-support/evidence/w-05-gnome-focus-trace-journals/GNOME-FOCUS-BASELINE-01-75c890f2ae1d4ee8962c2678b9a101a3-focus_journal.jsonl",
+    "build-support/evidence/w-05-gnome-focus-trace-journals/GNOME-FOCUS-BASELINE-01-75c890f2ae1d4ee8962c2678b9a101a3-foreground_events.jsonl",
+    "build-support/evidence/w-05-gnome-focus-trace-journals/GNOME-FOCUS-BASELINE-01-75c890f2ae1d4ee8962c2678b9a101a3-reveal_journal.jsonl",
+    "build-support/evidence/w-05-gnome-focus-trace-journals/GNOME-FOCUS-BASELINE-01-91e9a22e9646455582e2ec7c8d880f23-focus_journal.jsonl",
+    "build-support/evidence/w-05-gnome-focus-trace-journals/GNOME-FOCUS-BASELINE-01-91e9a22e9646455582e2ec7c8d880f23-foreground_events.jsonl",
+    "build-support/evidence/w-05-gnome-focus-trace-journals/GNOME-FOCUS-BASELINE-01-91e9a22e9646455582e2ec7c8d880f23-native_focus_log.log",
+    "build-support/evidence/w-05-gnome-focus-trace-journals/GNOME-FOCUS-BASELINE-01-a3f6783fa9e841c0953b2429c6d21b92-composition_journal.jsonl",
+    "build-support/evidence/w-05-gnome-focus-trace-journals/GNOME-FOCUS-BASELINE-01-a3f6783fa9e841c0953b2429c6d21b92-focus_journal.jsonl",
+    "build-support/evidence/w-05-gnome-focus-trace-journals/GNOME-FOCUS-BASELINE-01-a3f6783fa9e841c0953b2429c6d21b92-foreground_events.jsonl",
+    "build-support/evidence/w-05-gnome-focus-trace-journals/GNOME-FOCUS-BASELINE-01-a3f6783fa9e841c0953b2429c6d21b92-native_focus_log.log",
+    "build-support/evidence/w-05-gnome-focus-trace-journals/GNOME-FOCUS-BASELINE-01-a3f6783fa9e841c0953b2429c6d21b92-reveal_journal.jsonl",
+    "build-support/evidence/w-05-gnome-focus-trace-journals/GNOME-FOCUS-BASELINE-01-b2680a45b2f64f6a86f2db6c783839ee-focus_journal.jsonl",
+    "build-support/evidence/w-05-gnome-focus-trace-journals/GNOME-FOCUS-BASELINE-01-b2680a45b2f64f6a86f2db6c783839ee-foreground_events.jsonl",
+    "build-support/evidence/w-05-gnome-focus-trace-native-verification.json",
+    "build-support/evidence/w-05-gnome-focus-trace-preliminary-execution.json",
+    "build-support/evidence/w-05-gnome-focus-trace-source-archives/GNOME-FOCUS-BASELINE-01-0c99d784f08641f7aa47d42e43317d94.zip",
+    "build-support/evidence/w-05-gnome-focus-trace-source-archives/GNOME-FOCUS-BASELINE-01-1c3926feba2c493b8b73aeb54f315d06.zip",
+    "build-support/evidence/w-05-gnome-focus-trace-source-archives/GNOME-FOCUS-BASELINE-01-22c9b40af53a43e5a91f7c87d82f57d6.zip",
+    "build-support/evidence/w-05-gnome-focus-trace-source-archives/GNOME-FOCUS-BASELINE-01-75c890f2ae1d4ee8962c2678b9a101a3.zip",
+    "build-support/evidence/w-05-gnome-focus-trace-source-archives/GNOME-FOCUS-BASELINE-01-91e9a22e9646455582e2ec7c8d880f23.zip",
+    "build-support/evidence/w-05-gnome-focus-trace-source-archives/GNOME-FOCUS-BASELINE-01-a3f6783fa9e841c0953b2429c6d21b92.zip",
+    "build-support/evidence/w-05-gnome-focus-trace-source-archives/GNOME-FOCUS-BASELINE-01-b2680a45b2f64f6a86f2db6c783839ee.zip",
+    "build-support/evidence/w-05-gnome-focus-trace-verification.json",
+    "build-support/record_gnome_focus_trace.py",
+    "docs/developers/build.md",
+    "spec/checksums.json",
+    "spec/delivery/current-state.md",
+    "spec/delivery/gnome-focus-trace-handoff.md",
+    "spec/delivery/implementation-readiness.md",
+    "spec/delivery/index.md",
+    "spec/delivery/packages/index.md",
+    "spec/delivery/packages/w-05-gnome-focus-trace.md",
+    "spec/delivery/work-units.json",
+    "spec/generated/catalog.json",
+    "tests/desktop/native_gnome_bootstrap.py",
+    "tests/desktop/test_gnome_focus_trace_record.py"
+  ],
+  "decisions": [
+    "Use built-in topic-specific Mutter diagnostics in the existing owned shell; add no shell observer extension or upstream patch.",
+    "Compare one traced and one untraced case per mode with identical sources and the unchanged independent observer.",
+    "Bind bounded raw-log handler/MRU/focus/show entries to independent native action and process/window identities.",
+    "End decision association before later keyboard/mouse events or 200 ms; never substitute cleanup focus.",
+    "Preserve full raw logs, all native attempts and source archives; retain the preliminary trace separately.",
+    "Keep the candidate focus failure and original oracle; observed native MRU selection does not establish an integration fix.",
+    "Preserve exact native log bytes, including upstream blank-line spaces; disable text normalization and whitespace lint only for these raw log artifacts."
+  ],
+  "checks": [
+    {
+      "name": "Six source-identical traced/untraced cases and independent native observations",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-05-gnome-focus-trace-comparison.json"
+    },
+    {
+      "name": "Mutter native selection bound to foreground or DING owner and matching restored active client",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-05-gnome-focus-trace-comparison.json"
+    },
+    {
+      "name": "DING-only and candidate foreground-focus restoration",
+      "outcome": "fail",
+      "evidence": "build-support/evidence/w-05-gnome-focus-trace-comparison.json"
+    },
+    {
+      "name": "Twenty-three adversarial decision/log/pair checks",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-05-gnome-focus-trace-native-verification.json"
+    },
+    {
+      "name": "Seven attempts, exact source archives and raw journals/logs preserved",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-05-gnome-focus-trace-attempts.json"
+    },
+    {
+      "name": "Successful completed native budget preflights",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-05-gnome-focus-trace-execution.json"
+    },
+    {
+      "name": "Specification schema, generated projections, tooling and integrity",
+      "outcome": "pass",
+      "evidence": "build-support/evidence/w-05-gnome-focus-trace-verification.json"
+    },
+    {
+      "name": "Integration fix and complete desktop qualification",
+      "outcome": "not_run",
+      "evidence": "spec/delivery/gnome-focus-trace-handoff.md"
+    }
+  ],
+  "open_questions": [
+    "Can a supported native integration preserve normal foreground focus without taking focus from user actions or replacing upstream semantics?",
+    "Qualify taskbar/task-switcher behavior, icon input, image wallpaper and shell/icon-manager recovery; continue independent platform tracks."
+  ],
+  "next_step": "Close a bounded integration contract informed by the observed native MRU decision, preserve failed acceptance, and continue independent native input/recovery and product boundaries.",
+  "authority_used": [
+    "user:foundation-native-campaign-2026-10-05"
+  ],
+  "limitations": [
+    "Campaign and W-02/W-05 remain incomplete; DING/candidate focus acceptance remains failed and no full desktop profile or release is qualified.",
+    "Native diagnostics establish the selection mechanism only for the pinned owned X11 integration; they do not establish a general upstream defect or a fix.",
+    "One traced/untraced pair per mode tests instrumentation effects; the prior nine-run comparison remains separate evidence.",
+    "Only owned synthetic desktops, icons, windows, settings and processes were used; user desktops, shells and VMs were not controlled.",
+    "The laboratory uses software X11 rendering and private buses; real system/file-operation services, Wayland and GPU behavior remain unqualified.",
+    "No C++ artifact, profile, runtime package lock or workspace allocation changed; previous CTest/smoke evidence retains its original identity."
+  ]
+}

@@ -11,3 +11,5 @@ spec/** text eol=lf
 *.cmd text eol=crlf
 # Preserve upstream vendored bytes for dependency digest verification.
 source/third_party/** -text
+# Native diagnostic evidence retains exact upstream bytes, including blank-line spaces.
+build-support/evidence/w-05-gnome-focus-trace-journals/*-native_focus_log.log -text -whitespace

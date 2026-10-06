@@ -395,6 +395,21 @@ foreground click proves the keyboard observer works. Neither key alters the fixe
 earlier acceptance interval. Missing repetitions or inconsistent results cannot
 establish attribution. See the [native comparison](../../spec/delivery/gnome-focus-handoff.md).
 
+For the native decision trace, run each of the three modes once with and once
+without `--focus-trace`, completing the normal workspace preflight before each run:
+
+```sh
+python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --focus-baseline ding --focus-trace
+python3 build-support/record_gnome_focus_trace.py --build-dir <owned-build-directory> --reports <six-paired-reports> --output <new-owned-record>
+python3 tests/desktop/test_gnome_focus_trace_record.py <owned-build-directory> <six-paired-reports> -v
+```
+
+The flag enables bounded built-in Mutter diagnostics only in the owned shell.
+The recorder binds raw-log decisions to independently identified windows and
+checks that tracing did not alter observed behaviour. A successful recorder does
+not imply successful candidate acceptance. See the [decision evidence](../../spec/delivery/gnome-focus-trace-handoff.md)
+for the observed DING MRU selection and remaining integration boundary.
+
 For the historical shared-subset experiment, the existing Visual Studio 2017 XP
 toolset has its own preset. It compiles the same model, protocol/policy, recovery
 and diagnostic projection sources; modern native adapters require separate closure.

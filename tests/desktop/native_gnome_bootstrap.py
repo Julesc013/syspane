@@ -34,7 +34,8 @@ SOURCES = ['tests/desktop/native_gnome_bootstrap.py', 'tests/desktop/native_orac
            'build-support/record_gnome_host.py', 'spec/delivery/packages/w-05-gnome-reveal.md',
            'tests/desktop/gnome_reveal.py', 'tests/desktop/gnome_foreground.py',
            'tests/desktop/fixtures/gnome-reveal.json', 'tests/desktop/gnome_focus_baseline.py',
-           'spec/delivery/packages/w-05-gnome-focus-baseline.md']
+           'spec/delivery/packages/w-05-gnome-focus-baseline.md',
+           'spec/delivery/packages/w-05-gnome-focus-trace.md']
 
 
 def marker_trace(display, environment, sample=None, dismiss=True):
@@ -156,7 +157,7 @@ def group_members(group):
     return members
 
 
-def run(build, marker=False, control='live', composition=None, reveal=None, focus_baseline=None):
+def run(build, marker=False, control='live', composition=None, reveal=None, focus_baseline=None, focus_trace=False):
     # Retain orphaned shell helpers for reaping; no service/session can adopt them.
     if ctypes.CDLL(None, use_errno=True).prctl(36, 1, 0, 0, 0) != 0:
         raise OSError(ctypes.get_errno(), 'cannot retain descendant exit evidence')
@@ -186,6 +187,7 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
               'composition_control': composition,
               'reveal_control': reveal,
               'focus_baseline_mode': focus_baseline,
+              'focus_trace': focus_trace,
               'executed_at': datetime.now(timezone.utc).isoformat(),
               'source_base': subprocess.check_output(['git', '-c', 'safe.directory=' + str(ROOT), 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
               'source_inputs': {p: sha(ROOT / p) for p in SOURCES},
@@ -238,6 +240,8 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
         if focus_baseline:
             environment['SYSPANE_GNOME_FOCUS_BASELINE'] = focus_baseline
             environment['SYSPANE_FOREGROUND_EVENTS'] = str(workspace / 'foreground-events.jsonl')
+        if focus_trace:
+            environment['MUTTER_DEBUG'] = 'focus,keybindings,window-state'
         report['environment']['explicit'] = environment
         # Schema compilation is data-only and confined to this unique attempt.
         for folder in (Path('/usr/share/glib-2.0/schemas'), sysroot / 'usr/share/glib-2.0/schemas'):
@@ -386,6 +390,13 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
         for stream in streams:
             stream.close()
         report['logs'] = {p.name: p.read_text(errors='replace')[:1048576] for p in workspace.glob('*.log')}
+        if focus_trace:
+            path = workspace / 'shell.log'
+            if path.exists():
+                report['native_focus_log'] = {'path': str(path), 'bytes': path.stat().st_size, 'sha256': sha(path)}
+                if path.stat().st_size > 1048576:
+                    report['outcome'] = 'fail'
+                    report['error'] = 'native focus log capacity exceeded'
         journal = workspace / 'composition.jsonl'
         if journal.exists():
             report['composition_journal'] = {'path': str(journal), 'bytes': journal.stat().st_size, 'sha256': sha(journal)}
@@ -430,7 +441,10 @@ if __name__ == '__main__':
     parser.add_argument('--composition', choices=('live', 'above-icons', 'below-wallpaper'))
     parser.add_argument('--reveal', choices=('live', 'no-action', 'transient-blank'))
     parser.add_argument('--focus-baseline', choices=('shell', 'ding', 'candidate'))
+    parser.add_argument('--focus-trace', action='store_true')
     args = parser.parse_args()
+    if args.focus_trace and not args.focus_baseline:
+        parser.error('--focus-trace requires --focus-baseline')
     if args.focus_baseline:
         if args.marker or args.composition or args.reveal or args.marker_control != 'live':
             parser.error('--focus-baseline owns its marker/composition/reveal selection')
@@ -445,4 +459,4 @@ if __name__ == '__main__':
         parser.error('composition uses its own above/below controls')
     if not args.marker and args.marker_control != 'live':
         parser.error('--marker-control requires --marker')
-    sys.exit(run(owned_build(args.build_dir), args.marker or bool(args.composition), args.marker_control, args.composition, args.reveal, args.focus_baseline))
+    sys.exit(run(owned_build(args.build_dir), args.marker or bool(args.composition), args.marker_control, args.composition, args.reveal, args.focus_baseline, args.focus_trace))

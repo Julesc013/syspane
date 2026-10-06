@@ -83,7 +83,8 @@
         "SP-W05-GNOME-PACKAGE",
         "SP-W05-GNOME-COMPOSITION",
         "SP-W05-GNOME-REVEAL",
-        "SP-W05-GNOME-FOCUS"
+        "SP-W05-GNOME-FOCUS",
+        "SP-W05-GNOME-FOCUS-TRACE"
       ],
       "acceptance_tests": [
         "T-DESKTOP-REVEAL",
@@ -97,9 +98,9 @@
       "status": "in_progress",
       "authority_class": "native_lab",
       "execution_grant": "user:foundation-native-campaign-2026-10-05",
-      "notes": "Nine source-identical native focus comparisons show GNOME alone restoring focus and keyboard receipt, while DING with or without the candidate leaves the icon desktop active. Every explicit-click keyboard positive control passes. The failure does not require the bridge; original acceptance remains failed. Twenty-four comparison checks and the existing reveal/composition/marker checks pass. A specific DING/X11 mechanism, integration fix, icon input, taskbar, image wallpaper and recovery remain unqualified.",
+      "notes": "Six source-identical traced/untraced native cases agree on visual, focus and keyboard observations. Built-in Mutter diagnostics select the DING desktop as workspace MRU focus target during restoration, matching the independent focus failure with and without the candidate. GNOME alone selects the foreground. Twenty-three trace verifier checks pass; original acceptance remains failed. A bounded integration resolution, icon input, taskbar, image wallpaper and recovery remain open.",
       "package": "delivery/packages/w-02-desktop-oracle.md",
-      "evidence": "delivery/gnome-focus-handoff.md"
+      "evidence": "delivery/gnome-focus-trace-handoff.md"
     },
     {
       "id": "W-03",
@@ -173,7 +174,8 @@
         "SP-W05-GNOME-PACKAGE",
         "SP-W05-GNOME-COMPOSITION",
         "SP-W05-GNOME-REVEAL",
-        "SP-W05-GNOME-FOCUS"
+        "SP-W05-GNOME-FOCUS",
+        "SP-W05-GNOME-FOCUS-TRACE"
       ],
       "acceptance_tests": [
         "T-PLATFORM",
@@ -190,9 +192,9 @@
       "status": "in_progress",
       "authority_class": "native_lab",
       "execution_grant": "user:foundation-native-campaign-2026-10-05",
-      "notes": "Nine source-identical native focus comparisons show GNOME alone restoring focus and keyboard receipt, while DING with or without the candidate leaves the icon desktop active. Every explicit-click keyboard positive control passes. The failure does not require the bridge; original acceptance remains failed. Twenty-four comparison checks and the existing reveal/composition/marker checks pass. A specific DING/X11 mechanism, integration fix, icon input, taskbar, image wallpaper and recovery remain unqualified.",
-      "package": "delivery/packages/w-05-gnome-focus-baseline.md",
-      "evidence": "delivery/gnome-focus-handoff.md"
+      "notes": "Six source-identical traced/untraced native cases agree on visual, focus and keyboard observations. Built-in Mutter diagnostics select the DING desktop as workspace MRU focus target during restoration, matching the independent focus failure with and without the candidate. GNOME alone selects the foreground. Twenty-three trace verifier checks pass; original acceptance remains failed. A bounded integration resolution, icon input, taskbar, image wallpaper and recovery remain open.",
+      "package": "delivery/packages/w-05-gnome-focus-trace.md",
+      "evidence": "delivery/gnome-focus-trace-handoff.md"
     },
     {
       "id": "W-06",

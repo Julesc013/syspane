@@ -150,6 +150,11 @@ foreground-click keyboard controls pass in every mode. The bridge is not require
 for this failure. The tested DING/X11 integration still needs a verified resolution;
 the native baseline does not waive acceptance or qualify the product.
 
+The [native decision trace](gnome-focus-trace-handoff.md) identifies Mutter's DING
+MRU selection during restoration. Six traced/untraced cases have equal independent
+observations, and 23 evidence checks pass. The integration resolution is still open;
+preserve the original failed acceptance while closing that next bounded contract.
+
 Use the proposed cold-start exercise to detect missing observable contracts.
 Private implementation differences are permissible. Missing laboratories remain
 blocked qualification. A finite release scope must identify exact profiles,

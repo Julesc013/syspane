@@ -357,7 +357,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "3b6b7b8c7ee0fdf0e40b0089c7c84264ea831692ab053e559edda32feadcc5df"
+      "sha256": "3079492ba5895ff85257b5f6ae4e03399dab744fccb7de62c3c7a2e1c6a7019c"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -428,6 +428,18 @@
       "sha256": "db3158777322bb7fae694a0b6465f4583b8bfd890ded887bbb5594a03bcd14b9"
     },
     {
+      "id": "SP-GNOME-FOCUS-TRACE-HANDOFF",
+      "path": "delivery/gnome-focus-trace-handoff.md",
+      "title": "Native Mutter focus-decision evidence",
+      "description": "Built-in native diagnostics bind the reproduced focus failure to desktop MRU selection.",
+      "requires": [
+        "SP-W05-GNOME-FOCUS-TRACE",
+        "SP-GNOME-FOCUS-HANDOFF",
+        "SP-CAMPAIGN-ADMISSION"
+      ],
+      "sha256": "c6d4c0db6c9ccb518fbc3fef6a0d9ac14b3d60ec6774e493beb0126ebc800b6e"
+    },
+    {
       "id": "SP-GNOME-MARKER-HANDOFF",
       "path": "delivery/gnome-marker-handoff.md",
       "title": "Owned GNOME shell marker checkpoint",
@@ -470,7 +482,7 @@
       "requires": [
         "SP-CURRENT"
       ],
-      "sha256": "daf28c761e77a26cfc8fb4fa5af54b9ef96327f712cdd5016b2df832504f73d9"
+      "sha256": "d50833014e0a5f56c2fe287c12b371d0dfdcfef894741774d33fb358524a41a7"
     },
     {
       "id": "SP-MEASURED-TIME-HANDOFF",
@@ -621,6 +633,17 @@
         "SP-DESKTOP"
       ],
       "sha256": "4a415791131a1827e778a0acbb7f03e957527dcfcbbc5a0c2759dc047999a362"
+    },
+    {
+      "id": "SP-W05-GNOME-FOCUS-TRACE",
+      "path": "delivery/packages/w-05-gnome-focus-trace.md",
+      "title": "W-05 native Mutter focus-decision trace",
+      "description": "Bind built-in native focus decisions to the independent window/pixel/keyboard baseline.",
+      "requires": [
+        "SP-W05-GNOME-FOCUS",
+        "SP-DESKTOP"
+      ],
+      "sha256": "004cd7aad03e2b39c00b3eeb5cb5fed67fc1bea76e562218c11d9f2aa006f27e"
     },
     {
       "id": "SP-W05-GNOME-PACKAGE",
