@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-06T21:50:00Z", "scope": "Collection table composition with native grid and erasure verification"}
+updated: {"by": "codex", "at": "2026-10-06T22:18:00Z", "scope": "Versioned scene content, negotiated transactions and exact resource recovery"}
 ---
 
 # Current state and next admitted boundary
@@ -22,7 +22,14 @@ The active objective is now the [complete 0.1.0 release](release-0.1.0.md) for W
 required but is no longer the final completion boundary. Legacy version/architecture
 floors, native labs and complete desktop/package evidence remain unresolved.
 
-The latest [table surface checkpoint](table-surface-handoff.md) adds ordered
+The latest [scene content checkpoint](scene-content-handoff.md) adds scene 0.3 and
+command 0.4 with explicit text bodies, table labels, chart settings and image pins.
+Shared validation/migration, negotiated transactions and native coherent recovery
+preserve exact content and resource identities. Native text/label presentation
+remains policy-owned; chart sampling and image decoding/rendering are the next
+bounded implementation contracts. Full editions and platform qualification remain open.
+
+The earlier [table surface checkpoint](table-surface-handoff.md) adds ordered
 collection columns, exact scoped row identity, visible truncation, missing-cell
 semantics and a bounded native grid. Independent owned-window checks compare
 every table cell's pixels and accessible content through replacement, source loss,

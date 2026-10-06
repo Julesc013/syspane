@@ -1,0 +1,110 @@
+[
+  {
+    "step": "configure",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-06T22:13:53.966740+00:00",
+    "finished_at": "2026-10-06T22:14:00.591299+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 6442450944,\n  \"checkout_out_bytes\": 1822405190,\n  \"linux_campaign_bytes\": 4161126375,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "configure",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/scene_content_step.py",
+      "linux-x64-gcc13",
+      "configure"
+    ],
+    "started_at": "2026-10-06T22:14:00.591674+00:00",
+    "finished_at": "2026-10-06T22:14:14.601222+00:00",
+    "exit": 0,
+    "stdout": "Preset CMake variables:\n\n  BUILD_TESTING=\"ON\"\n  CMAKE_BUILD_TYPE=\"Debug\"\n  CMAKE_CXX_COMPILER=\"g++\"\n  SYSPANE_PROFILE=\"linux-x64-gcc13\"\n\nprofile verified: linux-x64-gcc13\nvendored dependency digests: pass\ndiagnostic toolkit verified: GTK 3.24.41 / Ubuntu 3.24.41-4ubuntu1.3\nnative text dependency identity verified: 358 files\nnative GJS clock build dependencies verified\n-- Configuring done (5.9s)\n-- Generating done (0.0s)\n-- Build files have been written to: /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-09-scene-content/linux-x64-gcc13-configure-dba90322a1\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-06T22:14:14.601499+00:00",
+    "finished_at": "2026-10-06T22:14:15.199187+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 6442450944,\n  \"checkout_out_bytes\": 1823628455,\n  \"linux_campaign_bytes\": 4161144242,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/scene_content_step.py",
+      "linux-x64-gcc13",
+      "build"
+    ],
+    "started_at": "2026-10-06T22:14:15.199826+00:00",
+    "finished_at": "2026-10-06T22:14:49.447723+00:00",
+    "exit": 0,
+    "stdout": "[1/59] Building CXX object CMakeFiles/syspane_authored.dir/source/configuration/transaction.cpp.o\n[2/59] Building CXX object CMakeFiles/syspane_authored.dir/source/configuration/content.cpp.o\n[3/59] Building CXX object CMakeFiles/syspane_configuration.dir/source/configuration/session.cpp.o\n[4/59] Linking CXX static library libsyspane_configuration.a\n[5/59] Building CXX object CMakeFiles/syspane_authored.dir/source/configuration/authored.cpp.o\n[6/59] Linking CXX static library libsyspane_authored.a\n[7/59] Building CXX object CMakeFiles/syspane_scene.dir/source/scene/layout.cpp.o\n[8/59] Building CXX object CMakeFiles/syspane_async_commands.dir/source/configuration/async_commands.cpp.o\n[9/59] Linking CXX static library libsyspane_async_commands.a\n[10/59] Building CXX object CMakeFiles/syspane_scene.dir/source/scene/bindings.cpp.o\n[11/59] Linking CXX static library libsyspane_scene.a\n[12/59] Building CXX object CMakeFiles/syspane_content_reader.dir/source/platform/content_reader_linux.cpp.o\n[13/59] Linking CXX static library libsyspane_content_reader.a\n[14/59] Building CXX object CMakeFiles/syspane_content_probe.dir/source/application/content_probe.cpp.o\n[15/59] Linking CXX executable SysPane.ContentProbe\n[16/59] Building CXX object CMakeFiles/syspane_generation_store.dir/source/platform/generation_store_linux.cpp.o\n[17/59] Linking CXX static library libsyspane_generation_store.a\n[18/59] Building CXX object CMakeFiles/syspane_configuration_probe.dir/source/application/configuration_probe.cpp.o\n[19/59] Linking CXX executable SysPane.ConfigProbe\n[20/59] Building CXX object CMakeFiles/syspane_command_probe.dir/source/application/command_probe.cpp.o\n[21/59] Linking CXX executable SysPane.CommandProbe\n[22/59] Building CXX object CMakeFiles/syspane_native_text.dir/source/rendering/native_text_linux.cpp.o\n[23/59] Linking CXX static library libsyspane_native_text.a\n[24/59] Linking CXX executable syspane-diag\n[25/59] Linking CXX executable SysPane.CollectorProbe\n[26/59] Linking CXX shared library libsyspane_gjs_clock.so\n[27/59] Linking CXX executable SysPane.IpcProbe\n[28/59] Building CXX object CMakeFiles/syspane_text_probe.dir/source/application/text_probe.cpp.o\n[29/59] Linking CXX executable SysPane.TelemetryProbe\n[30/59] Linking CXX executable SysPane.TextProbe\n[31/59] Linking CXX executable SysPane.RecoveryProbe\n[32/59] Building CXX object CMakeFiles/syspane_scene_surface.dir/source/rendering/scene_table.cpp.o\n[33/59] Building CXX object CMakeFiles/syspane_scene_surface.dir/source/rendering/scene_surface.cpp.o\n[34/59] Linking CXX static library libsyspane_scene_surface.a\n[35/59] Building CXX object CMakeFiles/syspane_authored_tests.dir/tests/configuration/authored_tests.cpp.o\n[36/59] Building CXX object CMakeFiles/syspane_authored_tests.dir/tests/configuration/content_tests.cpp.o\n[37/59] Building CXX object CMakeFiles/syspane_authored_tests.dir/tests/configuration/scene_content_tests.cpp.o\n[38/59] Linking CXX executable syspane_authored_tests\n[39/59] Building CXX object CMakeFiles/syspane_scene_surface_tests.dir/tests/scene/surface_tests.cpp.o\n[40/59] Building CXX object CMakeFiles/syspane_scene_tests.dir/tests/scene/layout_tests.cpp.o\n[41/59] Building CXX object CMakeFiles/syspane_scene_surface_tests.dir/tests/scene/table_tests.cpp.o\n[42/59] Building CXX object CMakeFiles/syspane_scene_surface_tests.dir/tests/scene/surface_window.cpp.o\n[43/59] Linking CXX executable syspane_protocol_tests\n[44/59] Linking CXX executable syspane_subscription_tests\n[45/59] Linking CXX executable syspane_scene_surface_tests\n[46/59] Linking CXX executable syspane_diagnostic_tests\n[47/59] Linking CXX executable syspane_data_view_tests\n[48/59] Linking CXX executable syspane_state_import_tests\n[49/59] Linking CXX executable syspane_measured_time_tests\n[50/59] Linking CXX executable syspane_demand_tests\n[51/59] Linking CXX executable syspane_demand_session_tests\n[52/59] Linking CXX executable syspane_network_view_tests\n[53/59] Linking CXX executable syspane_network_publication_tests\n[54/59] Linking CXX executable syspane_preservation_tests\n[55/59] Linking CXX executable syspane_failure_store_tests\n[56/59] Building CXX object CMakeFiles/syspane_scene_tests.dir/tests/scene/binding_tests.cpp.o\n[57/59] Linking CXX executable syspane_scene_tests\n[58/59] Building CXX object CMakeFiles/syspane_command_session_tests.dir/tests/configuration/command_session_tests.cpp.o\n[59/59] Linking CXX executable syspane_command_session_tests\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-09-scene-content/linux-x64-gcc13-build-4dc683a7e2\n",
+    "stderr": ""
+  },
+  {
+    "step": "focus",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-06T22:14:49.448061+00:00",
+    "finished_at": "2026-10-06T22:14:50.109563+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 6442450944,\n  \"checkout_out_bytes\": 1824859672,\n  \"linux_campaign_bytes\": 4176069450,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "focus",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/scene_content_step.py",
+      "linux-x64-gcc13",
+      "focus"
+    ],
+    "started_at": "2026-10-06T22:14:50.109894+00:00",
+    "finished_at": "2026-10-06T22:15:13.862472+00:00",
+    "exit": 0,
+    "stdout": "........   Passed    0.01 sec\n      Start 22: scene.BIND-REAL-SORT\n16/57 Test #22: scene.BIND-REAL-SORT ....................   Passed    0.01 sec\n      Start 23: scene.BIND-COLLECTION-BOUND\n17/57 Test #23: scene.BIND-COLLECTION-BOUND .............   Passed    0.08 sec\n      Start 24: scene.ROOT-FLOW\n18/57 Test #24: scene.ROOT-FLOW .........................   Passed    0.01 sec\n      Start 25: scene.STACK-V\n19/57 Test #25: scene.STACK-V ...........................   Passed    0.01 sec\n      Start 26: scene.STACK-H\n20/57 Test #26: scene.STACK-H ...........................   Passed    0.01 sec\n      Start 27: scene.PRIORITY\n21/57 Test #27: scene.PRIORITY ..........................   Passed    0.01 sec\n      Start 28: scene.FAIR-SHRINK\n22/57 Test #28: scene.FAIR-SHRINK .......................   Passed    0.01 sec\n      Start 29: scene.OVERFLOW\n23/57 Test #29: scene.OVERFLOW ..........................   Passed    0.01 sec\n      Start 30: scene.FIXED-GROUP\n24/57 Test #30: scene.FIXED-GROUP .......................   Passed    0.01 sec\n      Start 31: scene.CANVAS\n25/57 Test #31: scene.CANVAS ............................   Passed    0.01 sec\n      Start 32: scene.GRID\n26/57 Test #32: scene.GRID ..............................   Passed    0.01 sec\n      Start 33: scene.GRID-OVERFLOW\n27/57 Test #33: scene.GRID-OVERFLOW .....................   Passed    0.01 sec\n      Start 34: scene.NESTED\n28/57 Test #34: scene.NESTED ............................   Passed    0.01 sec\n      Start 35: scene.BREAKPOINT-EQUAL\n29/57 Test #35: scene.BREAKPOINT-EQUAL ..................   Passed    0.01 sec\n      Start 36: scene.BREAKPOINT-BELOW\n30/57 Test #36: scene.BREAKPOINT-BELOW ..................   Passed    0.01 sec\n      Start 37: scene.DISPLAY-MISSING\n31/57 Test #37: scene.DISPLAY-MISSING ...................   Passed    0.01 sec\n      Start 38: scene.DISPLAY-AMBIGUOUS\n32/57 Test #38: scene.DISPLAY-AMBIGUOUS .................   Passed    0.01 sec\n      Start 39: scene.DISPLAY-REMOVED\n33/57 Test #39: scene.DISPLAY-REMOVED ...................   Passed    0.01 sec\n      Start 40: scene.SAFE-REGION\n34/57 Test #40: scene.SAFE-REGION .......................   Passed    0.01 sec\n      Start 41: scene.EXCLUSION-TIE\n35/57 Test #41: scene.EXCLUSION-TIE .....................   Passed    0.01 sec\n      Start 42: scene.NO-REGION\n36/57 Test #42: scene.NO-REGION .........................   Passed    0.01 sec\n      Start 43: scene.PIXELS\n37/57 Test #43: scene.PIXELS ............................   Passed    0.01 sec\n      Start 44: scene.PIXEL-CLIP\n38/57 Test #44: scene.PIXEL-CLIP ........................   Passed    0.01 sec\n      Start 45: scene.READABLE-FIXED\n39/57 Test #45: scene.READABLE-FIXED ....................   Passed    0.01 sec\n      Start 46: scene.READABLE-FLOW\n40/57 Test #46: scene.READABLE-FLOW .....................   Passed    0.01 sec\n      Start 47: scene.OVERLAP\n41/57 Test #47: scene.OVERLAP ...........................   Passed    0.01 sec\n      Start 48: scene.DISPLAY-CONFLICT\n42/57 Test #48: scene.DISPLAY-CONFLICT ..................   Passed    0.01 sec\n      Start 49: scene.MISSING-METRICS\n43/57 Test #49: scene.MISSING-METRICS ...................   Passed    0.01 sec\n      Start 50: scene.EXCLUSION-ORDER\n44/57 Test #50: scene.EXCLUSION-ORDER ...................   Passed    0.01 sec\n      Start 51: scene.QUANTIZED-FIXED\n45/57 Test #51: scene.QUANTIZED-FIXED ...................   Passed    0.01 sec\n      Start 52: scene.QUANTIZED-GAP\n46/57 Test #52: scene.QUANTIZED-GAP .....................   Passed    0.01 sec\n      Start 53: scene.NESTED-BREAKPOINT\n47/57 Test #53: scene.NESTED-BREAKPOINT .................   Passed    0.01 sec\n      Start 54: scene.NATIVE-METRICS\n48/57 Test #54: scene.NATIVE-METRICS ....................   Passed    0.01 sec\n      Start 55: scene.LIMITS\n49/57 Test #55: scene.LIMITS ............................   Passed    0.23 sec\n      Start 56: scene.EXCLUSION-EXHAUSTIVE\n50/57 Test #56: scene.EXCLUSION-EXHAUSTIVE ..............   Passed    0.41 sec\n      Start 68: configuration.SCENE-CONTENT-SCHEMA\n51/57 Test #68: configuration.SCENE-CONTENT-SCHEMA ......   Passed    0.09 sec\n      Start 69: configuration.SCENE-CONTENT-MIGRATION\n52/57 Test #69: configuration.SCENE-CONTENT-MIGRATION ...   Passed    0.02 sec\n      Start 70: configuration.SCENE-CONTENT-RESOURCES\n53/57 Test #70: configuration.SCENE-CONTENT-RESOURCES ...   Passed    0.14 sec\n      Start 71: configuration.SCENE-CONTENT-PREVIEW\n54/57 Test #71: configuration.SCENE-CONTENT-PREVIEW .....   Passed    0.06 sec\n      Start 72: configuration.SCENE-CONTENT-TX\n55/57 Test #72: configuration.SCENE-CONTENT-TX ..........   Passed    0.15 sec\n      Start 73: configuration.SCENE-CONTENT-SESSION\n56/57 Test #73: configuration.SCENE-CONTENT-SESSION .....   Passed    0.11 sec\n      Start 94: native.SCENE-CONTENT\n57/57 Test #94: native.SCENE-CONTENT ....................   Passed   14.60 sec\n\n100% tests passed, 0 tests failed out of 57\n\nTotal Test time (real) =  16.29 sec\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-09-scene-content/linux-x64-gcc13-focus-33093c515e\n",
+    "stderr": ""
+  }
+]

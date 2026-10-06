@@ -32,7 +32,7 @@ const char* outcome(s::BindingCode code){switch(code){
 SurfaceText text(const Json& w,const s::BindingFrame* frame){
     SurfaceText out;out.id=w["id"];out.kind=w["kind"];const auto title=w["title"].get<std::string>();
     if(out.kind=="group"){out.accessible=title;return out;}
-    if(out.kind=="text"){out.text=out.accessible=title;return out;}
+    if(out.kind=="text"){out.text=out.accessible=w.contains("content")?w["content"]["body"].get<std::string>():title;return out;}
     out.text=title+"\n";
     need(frame!=nullptr,"surface.frame");
     if(frame->code==s::BindingCode::denied)throw Error("policy.denied");

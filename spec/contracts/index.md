@@ -8,6 +8,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [command-result.schema.json](command-result.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [command-v0.2.schema.json](command-v0.2.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [command-v0.3.schema.json](command-v0.3.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
+- [command-v0.4.schema.json](command-v0.4.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [command.schema.json](command.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [Commands, transactions and activation](commands.md) — Unify editing, native settings, CLI and policy through validated operations.
 - [common.schema.json](common.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
@@ -30,6 +31,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [reconciliation-request.schema.json](reconciliation-request.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [reconciliation-result.schema.json](reconciliation-result.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [scene-v0.2.schema.json](scene-v0.2.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
+- [scene-v0.3.schema.json](scene-v0.3.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [scene.schema.json](scene.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [Extension SDK and embedding boundaries](sdk.md) — Make extensions useful without making the trusted application an arbitrary code host.
 - [settings.schema.json](settings.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.

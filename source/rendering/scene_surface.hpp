@@ -33,7 +33,7 @@ struct SurfaceRow {
     std::vector<SurfaceCell> cells;
 };
 struct SurfaceTable {
-    std::vector<std::string> columns;
+    std::vector<std::string> columns,labels;
     std::vector<SurfaceRow> rows;
     std::string summary;
     std::size_t total=0;

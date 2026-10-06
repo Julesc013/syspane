@@ -1,0 +1,249 @@
+{
+  "schema_version": "0.3.0",
+  "revision": "40",
+  "scene_id": "scene:content",
+  "theme_id": "theme:native",
+  "roots": [
+    "widget:text",
+    "widget:value",
+    "widget:status",
+    "widget:group",
+    "widget:table",
+    "widget:chart",
+    "widget:image"
+  ],
+  "widgets": [
+    {
+      "id": "widget:text",
+      "kind": "text",
+      "title": "Text",
+      "display": {
+        "local_id": "D1"
+      },
+      "layout": {
+        "base": {
+          "kind": "fixed",
+          "x": 0,
+          "y": 0,
+          "width": 400,
+          "height": 200
+        }
+      },
+      "bindings": [],
+      "priority": "normal",
+      "content": {
+        "body": "Plain body\nsecond line"
+      }
+    },
+    {
+      "id": "widget:value",
+      "kind": "value",
+      "title": "Value",
+      "display": {
+        "local_id": "D1"
+      },
+      "layout": {
+        "base": {
+          "kind": "fixed",
+          "x": 20,
+          "y": 20,
+          "width": 400,
+          "height": 200
+        }
+      },
+      "bindings": [
+        {
+          "kind": "selector",
+          "scope": {
+            "kind": "local_host"
+          },
+          "entity_type": "network.interface",
+          "field": "network.receive_bytes",
+          "predicates": [],
+          "mode": "singleton",
+          "sort": [],
+          "limit": 1
+        }
+      ],
+      "priority": "normal",
+      "content": {}
+    },
+    {
+      "id": "widget:status",
+      "kind": "status",
+      "title": "Status",
+      "display": {
+        "local_id": "D1"
+      },
+      "layout": {
+        "base": {
+          "kind": "fixed",
+          "x": 40,
+          "y": 40,
+          "width": 400,
+          "height": 200
+        }
+      },
+      "bindings": [
+        {
+          "kind": "selector",
+          "scope": {
+            "kind": "local_host"
+          },
+          "entity_type": "network.interface",
+          "field": "network.receive_bytes",
+          "predicates": [],
+          "mode": "singleton",
+          "sort": [],
+          "limit": 1
+        }
+      ],
+      "priority": "normal",
+      "content": {}
+    },
+    {
+      "id": "widget:group",
+      "kind": "group",
+      "title": "Group",
+      "display": {
+        "local_id": "D1"
+      },
+      "layout": {
+        "base": {
+          "kind": "fixed",
+          "x": 60,
+          "y": 60,
+          "width": 400,
+          "height": 200
+        }
+      },
+      "bindings": [],
+      "priority": "normal",
+      "content": {},
+      "children": []
+    },
+    {
+      "id": "widget:table",
+      "kind": "table",
+      "title": "Table",
+      "display": {
+        "local_id": "D1"
+      },
+      "layout": {
+        "base": {
+          "kind": "fixed",
+          "x": 80,
+          "y": 80,
+          "width": 400,
+          "height": 200
+        }
+      },
+      "bindings": [
+        {
+          "kind": "selector",
+          "scope": {
+            "kind": "local_host"
+          },
+          "entity_type": "network.interface",
+          "field": "network.receive_bytes",
+          "predicates": [],
+          "mode": "collection",
+          "sort": [],
+          "limit": 8
+        }
+      ],
+      "priority": "normal",
+      "content": {
+        "columns": [
+          {
+            "label": "Receive"
+          }
+        ]
+      }
+    },
+    {
+      "id": "widget:chart",
+      "kind": "chart",
+      "title": "Chart",
+      "display": {
+        "local_id": "D1"
+      },
+      "layout": {
+        "base": {
+          "kind": "fixed",
+          "x": 100,
+          "y": 100,
+          "width": 400,
+          "height": 200
+        }
+      },
+      "bindings": [
+        {
+          "kind": "selector",
+          "scope": {
+            "kind": "local_host"
+          },
+          "entity_type": "network.interface",
+          "field": "network.receive_bytes",
+          "predicates": [],
+          "mode": "singleton",
+          "sort": [],
+          "limit": 1
+        }
+      ],
+      "priority": "normal",
+      "content": {
+        "window_ms": 60000,
+        "max_points": 256,
+        "interpolation": "linear",
+        "axis": {
+          "mode": "auto",
+          "include_zero": true
+        }
+      }
+    },
+    {
+      "id": "widget:image",
+      "kind": "image",
+      "title": "Image",
+      "display": {
+        "local_id": "D1"
+      },
+      "layout": {
+        "base": {
+          "kind": "fixed",
+          "x": 120,
+          "y": 120,
+          "width": 400,
+          "height": 200
+        }
+      },
+      "bindings": [],
+      "priority": "normal",
+      "content": {
+        "asset": {
+          "package": {
+            "id": "package:theme",
+            "version": "0.1.0",
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "path": "images/../pixel.png",
+          "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        },
+        "alt": "Public sample image",
+        "width_dip": 64,
+        "height_dip": 64,
+        "fit": "contain"
+      }
+    }
+  ],
+  "extensions": {
+    "author.note": {
+      "preserve": [
+        "x",
+        1,
+        false
+      ]
+    }
+  }
+}

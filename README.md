@@ -7,6 +7,11 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
+The [scene content checkpoint](spec/delivery/scene-content-handoff.md) adds versioned
+text bodies, table labels, chart settings and pinned image references. Shared
+validation, negotiated transactions and native recovery preserve those definitions.
+Linux renders the text and labels; chart and image rendering remain required.
+
 The [collection table checkpoint](spec/delivery/table-surface-handoff.md) adds
 ordered columns, stable scoped row identities, visible truncation and measured
 native grid rendering. Independent Linux pixel and accessibility checks cover

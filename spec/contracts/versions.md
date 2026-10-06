@@ -26,8 +26,11 @@ their own version and compatibility obligations.
 
 Existing 0.1 document schemas/fixtures retain their identities. Scene and command
 0.2 add hierarchy, portable binding and whole-scene transactions without silently
-changing 0.1 acceptance. Schema filenames ending `-v0.2.schema.json` have 0.2.0 IDs;
-other current schemas retain 0.1.0 IDs. The reserved
+changing 0.1 acceptance. Versioned schema filename suffixes identify their document
+version; unsuffixed schemas retain 0.1.0 IDs. Command 0.3 adds immutable resource
+selection. [Scene content](../delivery/packages/w-09-scene-content.md) adds scene
+0.3 and command 0.4 without changing older schemas or their accepted payloads.
+The reserved
 `https://schemas.example.invalid/syspane/` namespace is deliberately non-resolving,
 with a local-only registry. It is not a claimed owned web domain or a URN. Select a
 controlled stable public namespace and migration aliases before SDK stabilization.

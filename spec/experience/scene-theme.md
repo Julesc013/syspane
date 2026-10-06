@@ -47,8 +47,11 @@ Fixtures cover shared bindings, invalid fields, unknown widgets, unit mismatch, 
 
 The [table surface contract](../delivery/packages/w-09-table-surface.md) defines
 ordered collection columns using existing bindings, exact scoped row joins,
-explicit truncation/missing cells and native grid metrics. Custom column labels,
-chart/image content and richer formatting still need explicit versioned contracts.
+explicit truncation/missing cells and native grid metrics. The
+[scene 0.3 content contract](../delivery/packages/w-09-scene-content.md) adds plain
+text bodies, column labels, bounded chart settings and exact image package/asset
+references. Native text and label presentation are connected; chart sampling,
+image decoding/rendering and richer formatting remain separate enablement gates.
 
 [Scene/binding 0.2](scene-bindings.md) supplies ordered container membership, bounded
 layout variants, monitor roles and portable selectors. The 0.1 rectangle schema is

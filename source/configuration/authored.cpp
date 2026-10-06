@@ -1,4 +1,5 @@
 #include "authored.hpp"
+#include "content.hpp"
 #include "authored_schemas.hpp"
 #include <algorithm>
 #include <cmath>
@@ -12,7 +13,7 @@ void require(bool value,const char* code){if(!value)throw Error(code);}
 const std::map<std::string,Json>& schemas(){
     static const std::map<std::string,Json> value=[] {
         std::map<std::string,Json> result;
-        for(const char* text:{settings_schema,scene_v0_2_schema,layout_schema,binding_schema,command_v0_2_schema,command_v0_3_schema,content_package_schema,content_catalog_schema,preset_schema,theme_schema}){
+        for(const char* text:{settings_schema,scene_v0_2_schema,scene_v0_3_schema,layout_schema,binding_schema,command_v0_2_schema,command_v0_3_schema,command_v0_4_schema,content_package_schema,content_catalog_schema,preset_schema,theme_schema}){
             auto item=Json::parse(text);result.emplace(item["$id"].get<std::string>(),std::move(item));
         }
         return result;
@@ -93,9 +94,30 @@ std::uint64_t revision(const Json& v){
     require(v.is_string(),"authored.revision");const auto n=protocol::decimal(v.get_ref<const std::string&>());
     require(n.has_value(),"authored.revision");return *n;
 }
+void plain(const Json& value){
+    const auto& s=value.get_ref<const std::string&>();require(s.size()<=4096,"scene.text");
+    require(std::count(s.begin(),s.end(),'\n')<64,"scene.text");
+    for(std::size_t i=0;i<s.size();++i){const auto c=static_cast<unsigned char>(s[i]);
+        require((c>=32||c==10)&&c!=127,"scene.text");
+        if(c==0xc2&&i+1<s.size())require(static_cast<unsigned char>(s[i+1])<0x80||static_cast<unsigned char>(s[i+1])>0x9f,"scene.text");}
+}
+void content_semantics(const Json& w){
+    const auto& kind=w["kind"];const auto& c=w["content"];const auto& bindings=w["bindings"];
+    if(kind=="text")plain(c["body"]);
+    if(kind=="value"||kind=="status"||kind=="chart")require(bindings[0]["kind"]!="selector"||bindings[0]["mode"]=="singleton","scene.binding");
+    if(kind=="table"){
+        require(c["columns"].size()==bindings.size(),"scene.columns");Json shape;std::set<std::string> fields;
+        for(const auto& column:c["columns"])plain(column["label"]);
+        for(const auto& b:bindings){require(b["kind"]=="selector"&&b["mode"]=="collection","scene.binding");auto query=b;query.erase("field");
+            require(shape.is_null()||shape==query,"scene.columns");shape=std::move(query);require(fields.insert(b["field"].get<std::string>()).second,"scene.columns");}
+    }
+    if(kind=="chart"&&c["axis"]["mode"]=="fixed")require(c["axis"]["minimum"].get<double>()<c["axis"]["maximum"].get<double>(),"scene.axis");
+    if(kind=="image"){plain(c["alt"]);validate_content_path(c["asset"]["path"].get<std::string>());}
+}
 void scene_semantics(const Json& scene){
     (void)revision(scene["revision"]);std::map<std::string,const Json*> widgets;std::map<std::string,unsigned> owned;
     for(const auto& widget:scene["widgets"]){
+        if(scene["schema_version"]=="0.3.0")content_semantics(widget);
         require(widgets.emplace(widget["id"].get<std::string>(),&widget).second,"scene.duplicate");
         const auto& layout=widget["layout"];std::vector<Json> variants{layout["base"]};double previous=-1;
         if(layout.contains("breakpoints"))for(const auto& point:layout["breakpoints"]){
@@ -127,14 +149,22 @@ void validate_content_document(const Json& value,const std::string& kind){
     require(kind=="content-catalog"||kind=="content-package"||kind=="preset"||kind=="theme","content.kind");
     const auto name="0.1.0/"+kind;structural(value,name.c_str(),kind=="content-catalog"?16384:(kind=="content-package"?65536:262144));
 }
-void validate_scene_document(const Json& value){structural(value,"0.2.0/scene",262144);(void)revision(value["revision"]);scene_semantics(value);}
+void validate_scene_document(const Json& value){structural(value,value.is_object()&&value.contains("schema_version")&&value["schema_version"]=="0.3.0"?"0.3.0/scene":"0.2.0/scene",262144);(void)revision(value["revision"]);scene_semantics(value);}
+Json upgrade_scene_content(const Json& value){
+    validate_scene_document(value);if(value["schema_version"]=="0.3.0")return value;auto next=value;next["schema_version"]="0.3.0";
+    for(auto& w:next["widgets"]){const auto& kind=w["kind"];require(kind!="chart"&&kind!="image","scene.content_required");w["content"]=Json::object();
+        if(kind=="text")w["content"]["body"]=w["title"];
+        if(kind=="table"){w["content"]["columns"]=Json::array();for(const auto& b:w["bindings"])w["content"]["columns"].push_back({{"label",b["field"]}});}}
+    validate_scene_document(next);return next;
+}
 void validate_binding_document(const Json& value){structural(value,"0.1.0/binding",262144);}
 void validate_authored(const Authored& value){
-    structural(value.settings,"0.1.0/settings",16384);structural(value.scene,"0.2.0/scene",262144);
-    require(revision(value.settings["revision"])==revision(value.scene["revision"]),"authored.mixed_revision");scene_semantics(value.scene);
+    structural(value.settings,"0.1.0/settings",16384);validate_scene_document(value.scene);
+    require(revision(value.settings["revision"])==revision(value.scene["revision"]),"authored.mixed_revision");
 }
 void validate_command(const Json& value){
-    structural(value,value.is_object()&&value.contains("schema_version")&&value["schema_version"]=="0.3.0"?"0.3.0/command":"0.2.0/command",16384);(void)revision(value["expected_revision"]);(void)revision(value["policy_generation"]);
+    const auto version=value.is_object()&&value.contains("schema_version")?value["schema_version"]:Json();
+    structural(value,version=="0.4.0"?"0.4.0/command":version=="0.3.0"?"0.3.0/command":"0.2.0/command",16384);(void)revision(value["expected_revision"]);(void)revision(value["policy_generation"]);
     std::set<std::string> paths;bool scene=false;
     for(const auto& op:value["operations"]){
         if(op["op"]=="scene.replace"){
@@ -149,7 +179,7 @@ void authorize_authored(const Json& command,const Authority& authority,const Pol
     require(revision(command["policy_generation"])==policy.revision,"policy.changed");
     require(revision(command["expected_revision"])==current,"revision.changed");
     require(!policy.denied_capabilities.count(command["intent"]=="commit"?"settings.commit":"settings.preview"),"policy.denied");
-    if(command["schema_version"]=="0.3.0")require(!policy.denied_capabilities.count("content.select"),"policy.denied");
+    if(command.contains("content"))require(!policy.denied_capabilities.count("content.select"),"policy.denied");
     for(const auto& op:command["operations"]){
         const auto name=op["op"].get<std::string>();require(!policy.denied_capabilities.count(name),"policy.denied");
         if(name=="scene.replace")require(authority.role!="saver_settings","policy.denied");

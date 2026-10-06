@@ -97,7 +97,7 @@ Json Transactions::submit_impl(const std::string& principal,const std::string& c
         if(cancelled())throw Error("request.cancelled");
         auto candidate=prepare_authored(current_.documents,command,authority,checked_policy);
         ResourceSnapshot resources;
-        if(command["schema_version"]=="0.3.0"){
+        if(command.contains("content")){
             require(supports_resources(),"resource.contract");resources=resource_provider_.prepare(candidate,command["content"]);
             require(resources&&resources->selection()==command["content"],"resource.selection");
             validate_resource_binding(*resources,candidate);authorize_resources(*resources,checked_policy,resource_provider_.capabilities);

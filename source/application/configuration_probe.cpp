@@ -26,10 +26,11 @@ int main(int argc,char** argv){try{
     else if(mode=="read"&&argc==3){}
     else if(mode=="content-commit"&&argc>=6){
         std::vector<std::string> packages;for(int i=5;i<argc;++i)packages.emplace_back(argv[i]);
-        c::ResourceProvider provider{{"scene.selector"},[&](const c::Authored& candidate,const Json& selection){
+        c::ResourceProvider provider{{"scene.selector","scene.content"},[&](const c::Authored& candidate,const Json& selection){
             return c::ContentCatalog(os::read_content_packages(packages)).resources(selection,candidate);}};
         c::Transactions tx(store,"E1",std::move(provider));c::Policy policy;policy.available=true;policy.revision=7;
         if(fault=="deny")policy.denied_capabilities.insert("scene.selector");
+        if(fault=="deny-content")policy.denied_capabilities.insert("scene.content");
         std::cout<<Json{{"result",tx.submit("fixture:principal","fixture:connection",read(argv[3]),{true,"console",{"console"}},[&]{auto current=policy;if(revoked)current.revision=8;return current;},0)}}.dump()<<std::endl;return 0;
     }else if(mode=="commit"&&(argc==4||argc==5)){
         c::Transactions tx(store,"E1",[](const c::Authored& v){if(v.settings["display"]["theme_id"]!="theme:native"||

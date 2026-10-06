@@ -269,7 +269,7 @@ class BundleTests(unittest.TestCase):
         s.generate(self.root)
         self.assertEqual(s.validate_settings(self.root), [])
     def test_command_constraint_drift_rejected(self):
-        for name in ('command-v0.2', 'command-v0.3'):
+        for name in ('command-v0.2', 'command-v0.3', 'command-v0.4'):
             with self.subTest(name=name):
                 path=f'contracts/{name}.schema.json'
                 original=s.read_json(self.root/path);value=copy.deepcopy(original)
@@ -277,6 +277,24 @@ class BundleTests(unittest.TestCase):
                 self.write_json(path, value)
                 self.assertTrue(any('projection drift' in e for e in s.validate_settings(self.root)))
                 self.write_json(path, original)
+    def test_scene_content_semantics(self):
+        value=s.read_json(self.root/'fixtures/valid/scene-content.json')
+        self.assertEqual(s.semantic_errors(value,'scene-v0.3',self.root),[])
+        for body in ('\x7f','\u0085','\n'*64):
+            changed=copy.deepcopy(value);changed['widgets'][0]['content']['body']=body
+            self.assertTrue(s.semantic_errors(changed,'scene-v0.3',self.root))
+        for path in ('images/CON.png','images/pixel.','images//pixel.png'):
+            changed=copy.deepcopy(value);changed['widgets'][6]['content']['asset']['path']=path
+            self.assertTrue(s.semantic_errors(changed,'scene-v0.3',self.root))
+    def test_scene_content_versions(self):
+        validators=s.schema_validators(self.root)
+        value=s.read_json(self.root/'fixtures/valid/scene-content.json')
+        self.assertFalse(list(validators['scene-v0.3'].iter_errors(value)))
+        self.assertTrue(list(validators['scene-v0.2'].iter_errors(value)))
+        command=s.read_json(self.root/'fixtures/valid/command-content-scene.json')
+        self.assertFalse(list(validators['command-v0.4'].iter_errors(command)))
+        command['schema_version']='0.3.0'
+        self.assertTrue(list(validators['command-v0.3'].iter_errors(command)))
     def test_scene_nesting_bound(self):
         value=s.read_json(self.root/'fixtures/valid/scene-portable.json')
         group=value['widgets'][0]

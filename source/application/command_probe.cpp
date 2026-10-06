@@ -57,7 +57,7 @@ int main(int argc,char** argv){try{
     if(content){
         std::function<std::vector<c::ContentPackage>()> imports;
         if(*content!="-")imports=[path=*content]{return os::read_content_catalog(path);};
-        auto resources=c::make_resource_provider(store,{"scene.selector"},std::move(imports));
+        auto resources=c::make_resource_provider(store,{"scene.selector","scene.content"},std::move(imports));
         resources.prepare=[prepare=std::move(resources.prepare),&prepared](const c::Authored& value,const Json& selection){auto result=prepare(value,selection);prepared();return result;};
         owner=std::make_shared<c::AsyncCommands>(store,epoch,std::move(resources));
     }else owner=std::make_shared<c::AsyncCommands>(store,epoch,[&](const c::Authored& value){

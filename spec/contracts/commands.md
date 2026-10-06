@@ -60,6 +60,14 @@ The transaction coordinator owns the expected generation for affected settings a
 scene documents; drafts carry that base revision, then successful commit assigns a
 new revision. Only one scene replacement per request is admitted. Validate the
 complete candidate, including hierarchy and policy, before publication.
+
+[Command 0.3](command-v0.3.schema.json) additionally selects the exact resource
+closure. [Command 0.4](command-v0.4.schema.json) retains that envelope and accepts
+scene 0.2 or 0.3 replacement. The [content package](../delivery/packages/w-09-scene-content.md)
+defines typed widget content, validation and explicit migration. Older commands
+cannot carry new scene replacements; a resource-bound settings-only command 0.3
+preserves an existing scene 0.3. No command version implies visible activation.
+
 [Persistence](../architecture/persistence.md) owns generation recovery;
 [transport](transport.md) and [command results](command-result.schema.json) distinguish
 accepted/stored/durable/activated/visible, cancellation and result retrieval.

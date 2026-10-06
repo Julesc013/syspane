@@ -138,6 +138,7 @@ struct LinuxGenerationStore::Impl {
         const auto settings=required(dir.fd,"settings.json",16384,synchronize),scene=required(dir.fd,"scene.json",262144,synchronize);
         need(c::sha256(settings)==manifest["settings"]&&c::sha256(scene)==manifest["scene"],"storage.document_digest");
         c::Committed value{{protocol::parse(settings),protocol::parse(scene)},std::nullopt};c::validate_authored(value.documents);
+        need(resources||value.documents.scene["schema_version"]!="0.3.0","storage.resource_required");
         if(resources){exact_files(dir.fd,{"settings.json","scene.json","manifest.json","resources.json","resources"});
             value.resources=decode_resources(dir.fd,manifest["resources"],value.documents,synchronize);}
         need(value.documents.settings["revision"]==manifest["revision"],"storage.revision");const auto& id=manifest["identity"];
@@ -146,7 +147,7 @@ struct LinuxGenerationStore::Impl {
             for(const char* key:{"principal","epoch","request"})need(id[key].is_string()&&protocol::identifier(id[key].get_ref<const std::string&>()),"storage.identity");
             need(id["body"].is_string()&&id["body"].get_ref<const std::string&>().size()<=16384,"storage.identity");
             const auto command=protocol::parse(id["body"].get_ref<const std::string&>());c::validate_command(command);
-            need((command["schema_version"]=="0.3.0")==resources&&(!resources||command["content"]==value.resources->selection()),"storage.resource_identity");
+            need(command.contains("content")==resources&&(!resources||command["content"]==value.resources->selection()),"storage.resource_identity");
             const auto expected=protocol::decimal(command["expected_revision"].get_ref<const std::string&>());
             need(command["request_id"]==id["request"]&&command["intent"]=="commit"&&*expected<c::authored_revision(value.documents)&&
                  c::authored_revision(value.documents)-*expected==1,"storage.identity");
@@ -172,6 +173,7 @@ struct LinuxGenerationStore::Impl {
     }
     c::Publication publish(const c::Committed& next,const std::function<void()>& guard){
         need(!poisoned&&!fallback&&!damaged,"storage.recovery_required");c::validate_authored(next.documents);
+        need(next.resources||next.documents.scene["schema_version"]!="0.3.0","storage.resource_required");
         need(generations()<32,"storage.capacity");bool published=false;std::exception_ptr guard_failure;
         try{
             const auto generation=random_name("g-");need(::mkdirat(root.fd,generation.c_str(),0700)==0,"storage.mkdir");auto dir=directory_at(root.fd,generation.c_str());step("created");

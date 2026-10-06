@@ -1,6 +1,17 @@
 #pragma once
 #include "surface_fixture.hpp"
 namespace fixture {
+inline void content_config(v::SurfaceConfig& cfg){
+    cfg.authored.scene=c::upgrade_scene_content(cfg.authored.scene);std::vector<c::ContentPackage> packages;
+    for(const auto& p:cfg.resources->packages())packages.push_back(*p);
+    cfg.resources=c::ContentCatalog(std::move(packages)).resources(cfg.resources->selection(),cfg.authored);cfg.capabilities.insert("scene.content");
+}
+inline void labelled_content(v::SurfaceConfig& cfg){
+    content_config(cfg);cfg.authored.scene["widgets"][0]["content"]["columns"]={{{"label","Rx"}},{{"label","Tx"}}};
+    auto body=widget("body","text","Editor label");body["content"]={{"body","Public body\nsecond line"}};body["layout"]["base"]["y"]=450;
+    body["layout"]["base"]["width"]=800;body["layout"]["base"]["height"]=120;
+    cfg.authored.scene["widgets"].push_back(body);cfg.authored.scene["roots"].push_back("body");
+}
 inline Json collection(std::string field="network.receive_bytes",unsigned limit=8){return {
     {"kind","selector"},{"scope",{{"kind","local_host"}}},{"entity_type","network.interface"},{"field",field},
     {"predicates",Json::array()},{"mode","collection"},{"sort",Json::array()},{"limit",limit}};}

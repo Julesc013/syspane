@@ -128,11 +128,29 @@ ResourceSnapshot ContentCatalog::resources(const Json& selection,const Authored&
     const auto& pin=entries_[selected.leaf].document["theme"];std::optional<std::size_t> theme;
     if(!pin.is_null()&&pin["id"]==id)theme=lookup(pin,"theme",scope);
     else for(auto i:scope)if(entries_[i].manifest["kind"]=="theme"&&entries_[i].pin["id"]==id){need(!theme,"content.ambiguous");theme=i;}
-    need(theme.has_value(),"content.theme");result->theme_pin_=entries_[*theme].pin;result->theme_=entries_[*theme].document;return result;
+    need(theme.has_value(),"content.theme");result->theme_pin_=entries_[*theme].pin;result->theme_=entries_[*theme].document;
+    if(candidate.scene["schema_version"]=="0.3.0")result->required_.insert("scene.content");
+    validate_resource_binding(*result,candidate);return result;
 }
 void validate_resource_binding(const ResourceSet& resources,const Authored& candidate){
     validate_authored(candidate);const auto id=candidate.scene["theme_id"].is_null()?candidate.settings["display"]["theme_id"]:candidate.scene["theme_id"];
     need(id==resources.theme()["theme_id"],"content.theme");
+    if(candidate.scene["schema_version"]!="0.3.0")return;
+    need(resources.required().count("scene.content")!=0,"resource.contract");
+    // ResourceSet can only be made by ContentCatalog, which verified every byte.
+    // Index immutable manifests once; repeated image references must not rehash
+    // up to 64 MiB of identical media for each widget or presentation validation.
+    std::map<std::string,Json> manifests;
+    for(const auto& bytes:resources.packages()){
+        auto m=parse_content_json(bytes->manifest,65536);Json pin={{"id",m["package_id"]},{"version",m["version"]},{"sha256",sha256(bytes->manifest)}};
+        manifests.emplace(pin.dump(),std::move(m));}
+    for(const auto& w:candidate.scene["widgets"])if(w["kind"]=="image"){
+        const auto& ref=w["content"]["asset"];bool found=false;
+        const auto manifest=manifests.find(ref["package"].dump());need(manifest!=manifests.end(),"content.asset");
+        for(const auto& asset:manifest->second["assets"])if(asset["path"]==ref["path"]){const auto& media=asset["media_type"];
+            need(!found&&(media=="image/png"||media=="image/jpeg"||media=="image/svg+xml")&&asset["sha256"]==ref["sha256"],"content.asset");found=true;}
+        need(found,"content.asset");
+    }
 }
 void authorize_resources(const ResourceSet& resources,const Policy& policy,const std::set<std::string>& capabilities){
     need(policy.available,"policy.denied");
@@ -161,11 +179,14 @@ PresetPlan ContentCatalog::preview(const Json& package_pin,const Json& selected,
     if(!leafdoc["theme"].is_null())scene["theme_id"]=leafdoc["theme"]["id"];
     Json ops=Json::array();for(const auto& row:values)ops.push_back({{"op","settings.set"},{"path",row.first},{"value",row.second}});
     ops.push_back({{"op","scene.replace"},{"scene",scene}});result.command=command(baseline,request,policy.revision,ops);
+    if(scene["schema_version"]=="0.3.0"){result.command["schema_version"]="0.4.0";result.command["content"]={{"package",package_pin},{"preset",selected}};}
     result.candidate=prepare_authored(baseline,result.command,authority,policy);
     const auto theme_id=scene["theme_id"].is_null()?result.candidate.settings["display"]["theme_id"]:scene["theme_id"];
     std::optional<std::size_t> theme;
     if(!leafdoc["theme"].is_null())theme=lookup(leafdoc["theme"],"theme",scope);
     else for(auto i:scope)if(entries_[i].manifest["kind"]=="theme"&&entries_[i].pin["id"]==theme_id){need(!theme,"content.ambiguous");theme=i;}
-    need(theme.has_value(),"content.theme");result.theme=entries_[*theme].document;return result;
+    need(theme.has_value(),"content.theme");result.theme=entries_[*theme].document;
+    if(scene["schema_version"]=="0.3.0")authorize_resources(*resources(result.command["content"],result.candidate),policy,capabilities);
+    return result;
 }
 }

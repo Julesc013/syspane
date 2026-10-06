@@ -22,7 +22,7 @@ from native_text import THEME
 
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 
-def observe(exe,text_probe,folder,mode,table=False):
+def observe(exe,text_probe,folder,mode,table=False,content=False):
     import gi
     gi.require_version('Atspi','2.0')
     from gi.repository import Atspi,GLib
@@ -32,7 +32,7 @@ def observe(exe,text_probe,folder,mode,table=False):
                 oracle_sha256=sha(Path(__file__)),runtime_identity_sha256=sha(ROOT/'build-support/text-runtime.json'))
     report['surface_runtime_sha256']=sha(ROOT/'build-support/surface-runtime.json')
     err=(folder/'stderr').open('wb')
-    proc=subprocess.Popen([str(exe),str(ROOT/'spec/fixtures/valid'),'WINDOW',('table-' if table else '')+mode],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=err)
+    proc=subprocess.Popen([str(exe),str(ROOT/'spec/fixtures/valid'),'WINDOW',('content-' if content else 'table-' if table else '')+mode],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=err)
     display=None;sequence=0;last_ack=None
     def read():
         assert select.select([proc.stdout],[],[],5)[0], 'native reply timeout'
@@ -83,7 +83,7 @@ def observe(exe,text_probe,folder,mode,table=False):
             text='Receive\nWaiting' if number is None else f'Receive\n{number} byte\n{status}'
             return expected(text),text+('' if number is None else '\nsupport=supported;')
         title='Interfaces';summary='Waiting' if number is None else 'Showing 2 of 2 rows'
-        labels=['network.receive_bytes','network.transmit_bytes'];values=[[number,7],[124,8]]
+        fields=['network.receive_bytes','network.transmit_bytes'];labels=['Rx','Tx'] if content else fields;values=[[number,7],[124,8]]
         title_r,summary_r=raster(title),raster(summary);parts=[(0,0,title_r),(0,title_r[0]['height']+4,summary_r)]
         name=title+'\n'+summary
         if number is not None:
@@ -96,8 +96,11 @@ def observe(exe,text_probe,folder,mode,table=False):
                 name+=f'\nRow P1/E1/network:interface:{row+1}'
                 for c,cell in enumerate(entries):
                     parts.append((0 if c==0 else widths[0]+8,y,cell))
-                    name+=f'\n{labels[c]}: {values[row][c]} byte\n{status}\nsupport=supported; acquisition=success; presence=present; freshness=current; origin=observed; lease={"retained" if retained else "active"}; age=dynamic ns'
+                    label=labels[c]+' ['+fields[c]+']' if content else fields[c]
+                    name+=f'\n{label}: {values[row][c]} byte\n{status}\nsupport=supported; acquisition=success; presence=present; freshness=current; origin=observed; lease={"retained" if retained else "active"}; age=dynamic ns'
                 y+=max(cell[0]['height'] for cell in entries)+4
+        if content:
+            body='Public body\nsecond line';parts.append((0,450,raster(body)));name+='\n'+body
         image=bytearray(800*600*3)
         for x,y,(m,raw) in parts:
             assert x+m['width']<=800 and y+m['height']<=600
@@ -152,14 +155,14 @@ def observe(exe,text_probe,folder,mode,table=False):
 
 def main():
     if sys.argv[1]=='--observe':
-        observe(Path(sys.argv[2]),Path(sys.argv[3]),Path(sys.argv[4]),sys.argv[5],len(sys.argv)>6);return
+        observe(Path(sys.argv[2]),Path(sys.argv[3]),Path(sys.argv[4]),sys.argv[5],len(sys.argv)>6,'CONTENT' in sys.argv);return
     exe,text_probe,evidence=map(Path,sys.argv[1:4]);folder=evidence/('surface-'+uuid.uuid4().hex[:12]);folder.mkdir()
-    table=len(sys.argv)>4;report=dict(family='TABLE-ERASURE' if table else 'SCENE-ERASURE',outcome='fail',started_at=datetime.now(timezone.utc).isoformat(),cases=[],executable_sha256=sha(exe),oracle_sha256=sha(Path(__file__)))
+    table=len(sys.argv)>4;content='CONTENT' in sys.argv;report=dict(family='CONTENT-ERASURE' if content else 'TABLE-ERASURE' if table else 'SCENE-ERASURE',outcome='fail',started_at=datetime.now(timezone.utc).isoformat(),cases=[],executable_sha256=sha(exe),oracle_sha256=sha(Path(__file__)))
     server=None
     try:
         server,env=launch_xvfb(folder);env['NO_AT_BRIDGE']='0';env.pop('AT_SPI_BUS_ADDRESS',None)
         for mode in ('normal','ignore-pixels','ignore-accessible'):
-            child=subprocess.Popen(['dbus-run-session','--',sys.executable,str(Path(__file__)), '--observe',str(exe),str(text_probe),str(folder/mode),mode]+(['TABLE'] if table else []),env=env,stdout=subprocess.PIPE,stderr=subprocess.PIPE,start_new_session=True)
+            child=subprocess.Popen(['dbus-run-session','--',sys.executable,str(Path(__file__)), '--observe',str(exe),str(text_probe),str(folder/mode),mode]+(['CONTENT'] if content else ['TABLE'] if table else []),env=env,stdout=subprocess.PIPE,stderr=subprocess.PIPE,start_new_session=True)
             timed_out=False
             try:stdout,stderr=child.communicate(timeout=35)
             except subprocess.TimeoutExpired:

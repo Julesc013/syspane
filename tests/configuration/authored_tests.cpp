@@ -129,8 +129,9 @@ void digest(){
     CHECK(c::sha256("abc")=="ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad");
     CHECK(c::sha256(std::string(1000000,'a'))=="cdc76e5c9914fb9281a1c7e284d73e67f1809a48a497200e046d39ccc7112cd0");
 }
+void scene_content_tests(const std::string&,const std::string&);
 int main(int argc,char** argv){try{CHECK(argc==3);fixtures=argv[2];const std::string name=argv[1];
-    if(name=="AUTH-SCHEMA")schemas();else if(name=="TX-MIXED")mixed();else if(name=="TX-CONFLICT")conflicts();else if(name=="TX-REPLAY")replay();
+    if(name.rfind("SCENE-CONTENT-",0)==0)scene_content_tests(name,fixtures);else if(name=="AUTH-SCHEMA")schemas();else if(name=="TX-MIXED")mixed();else if(name=="TX-CONFLICT")conflicts();else if(name=="TX-REPLAY")replay();
     else if(name=="TX-INTERRUPT")interruption();else if(name=="TX-BOUNDS")bounds();else if(name=="TX-CAPACITY")capacity();else if(name=="DIGEST")digest();
     else if(name.substr(0,8)=="CONTENT-"||name.substr(0,9)=="RESOURCE-")content_tests(name,fixtures);else CHECK(false);
     std::cout<<name<<" pass\n";return 0;

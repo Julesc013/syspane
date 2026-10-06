@@ -10,7 +10,7 @@ int main(int argc,char** argv){try{
     std::string line;char ch=0;while(std::cin.get(ch)&&ch!='\n'){if(line.size()>=524288)throw p::Error("probe.size");line+=ch;}
     const auto input=c::parse_content_json(line,524288);if(!p::members(input,{"settings","scene","package","preset"}))throw p::Error("probe.input");
     c::Policy policy;policy.available=true;policy.revision=7;if(mode=="denied")policy.denied_capabilities.insert("settings.preview");
-    const auto plan=catalog.preview(input["package"],input["preset"],{input["settings"],input["scene"]},"P",{true,"console",{"console"}},policy,{"scene.selector"});
+    const auto plan=catalog.preview(input["package"],input["preset"],{input["settings"],input["scene"]},"P",{true,"console",{"console"}},policy,{"scene.selector","scene.content"});
     std::cout<<p::Json({{"command",plan.command},{"settings",plan.candidate.settings},{"scene",plan.candidate.scene},{"theme",plan.theme},
         {"packages",plan.package_pins},{"presets",plan.preset_pins},{"origins",plan.setting_origins},{"missing_optional",plan.missing_optional}}).dump()<<'\n';return 0;
 }catch(const p::Error& e){std::cout<<p::Json({{"error",e.what()}}).dump()<<'\n';return 2;}

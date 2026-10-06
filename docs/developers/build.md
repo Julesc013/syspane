@@ -1,5 +1,21 @@
 # Developer setup and checks
 
+The [scene-content package](../../spec/delivery/packages/w-09-scene-content.md)
+adds scene 0.3 and resource-bound command 0.4. Use `upgrade_scene_content` explicitly;
+it returns a validated copy and refuses to guess legacy image/chart parameters.
+Enable `scene.content` in the resource provider's capabilities and negotiate
+`configuration.scene-content` alongside configuration.content/transactions and
+command 0.4/result 0.1. ContentCatalog resolves every image reference within the
+selected verified closure; no renderer reads an import directory by path.
+
+After ordinary preflight/configure/build, `ctest --preset <profile> -R
+configuration.SCENE-CONTENT --output-on-failure` runs six shared families. Linux
+also runs `native.SCENE-CONTENT` (owned ext4 crash/recovery) and
+`native.CONTENT-ERASURE` (owned Xvfb pixels and AT-SPI names with fault controls).
+The former deliberately uses opaque media bytes and does not qualify a decoder.
+The renderer consumes text bodies and column labels; images/charts still select
+the explicit unsupported whole-scene alternative.
+
 The [table package](../../spec/delivery/packages/w-09-table-surface.md) extends
 SceneSurface with table widgets. Supply ordered collection selectors that differ
 only in field; the renderer joins cells by scoped identity and exposes typed rows

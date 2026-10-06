@@ -9,7 +9,7 @@ protocol::Handshake server_hello(const std::string& epoch, const std::optional<I
         {{"command", "0.2.0"}, {"command-result", "0.1.0"}}, {}, {"settings.preview", "result.get", "cancel"}};
     if(commands){hello.optional.insert({"configuration.transactions","result.reconcile"});
         hello.documents.insert({{"reconciliation-request","0.1.0"},{"reconciliation-result","0.1.0"}});}
-    if(resources){hello.documents.insert({"command","0.3.0"});hello.optional.insert("configuration.content");}
+    if(resources){hello.documents.insert({{"command","0.3.0"},{"command","0.4.0"}});hello.optional.insert({"configuration.content","configuration.scene-content"});}
     if (source) {
         const auto& version = source->document_version;
         hello.documents.insert({{"telemetry",version},{"snapshot",version},{"observation",version}});
@@ -103,7 +103,7 @@ void Sessions::dispatch(Connection& c, const protocol::Message& message, std::ui
         const auto client = protocol::handshake(message.body);
         c.selection = protocol::negotiate(server_hello(epoch_,source_,static_cast<bool>(commands_),commands_&&commands_->supports_resources()), client, c.authority.role_grants);
         c.authority.role = client.role;
-        const bool has_commands = (c.selection.documents.count({"command", "0.2.0"})||c.selection.documents.count({"command", "0.3.0"})) && c.selection.documents.count({"command-result", "0.1.0"});
+        const bool has_commands = (c.selection.documents.count({"command", "0.2.0"})||c.selection.documents.count({"command", "0.3.0"})||c.selection.documents.count({"command", "0.4.0"})) && c.selection.documents.count({"command-result", "0.1.0"});
         if (!has_commands) {
             for (const auto& feature : {"settings.preview", "result.get", "cancel", "configuration.transactions"}) {
                 if (client.required.count(feature)) throw Error("handshake.document_version");
@@ -121,9 +121,13 @@ void Sessions::dispatch(Connection& c, const protocol::Message& message, std::ui
             if(client.required.count("result.reconcile"))throw Error("handshake.document_version");
             c.selection.features.erase("result.reconcile");
         }
-        if(!has_commands||!c.selection.documents.count({"command","0.3.0"})||!c.selection.features.count("configuration.transactions")){
+        if(!has_commands||(!c.selection.documents.count({"command","0.3.0"})&&!c.selection.documents.count({"command","0.4.0"}))||!c.selection.features.count("configuration.transactions")){
             if(client.required.count("configuration.content"))throw Error("handshake.document_version");
             c.selection.features.erase("configuration.content");
+        }
+        if(!c.selection.documents.count({"command","0.4.0"})||!c.selection.features.count("configuration.content")){
+            if(client.required.count("configuration.scene-content"))throw Error("handshake.document_version");
+            c.selection.features.erase("configuration.scene-content");
         }
         const auto version = source_ ? source_->document_version : "0.1.0";
         if (!c.selection.documents.count({"telemetry",version}) || !c.selection.documents.count({"snapshot",version}) ||
@@ -162,7 +166,8 @@ void Sessions::dispatch(Connection& c, const protocol::Message& message, std::ui
         const auto request = body["request_id"].get<std::string>();
         if(body.contains("schema_version")&&body["schema_version"].is_string()&&
            (!c.selection.documents.count({"command",body["schema_version"].get<std::string>()})||
-            (body["schema_version"]=="0.3.0"&&!c.selection.features.count("configuration.content")))){
+            ((body["schema_version"]=="0.3.0"||body["schema_version"]=="0.4.0")&&!c.selection.features.count("configuration.content"))||
+            (body["schema_version"]=="0.4.0"&&!c.selection.features.count("configuration.scene-content")))){
             queue(c,"result",result({"invalid","feature.unsupported"},request,epoch_,revision_));return;
         }
         if(commands_){

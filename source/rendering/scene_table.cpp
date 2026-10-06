@@ -13,7 +13,7 @@ Key key(const scene::BindingRow& r){return {r.producer,r.epoch,r.entity};}
 std::size_t surface_text_bytes(const SurfaceText& s){
     std::size_t size=s.id.size()+s.kind.size()+s.text.size()+s.accessible.size();
     for(const auto& f:s.fonts)size+=f.size();
-    if(s.table){const auto& t=*s.table;size+=t.summary.size();for(const auto& c:t.columns)size+=c.size();
+    if(s.table){const auto& t=*s.table;size+=t.summary.size();for(const auto& c:t.columns)size+=c.size();for(const auto& c:t.labels)size+=c.size();
         for(const auto& r:t.rows){size+=r.producer.size()+r.epoch.size()+r.entity.size();for(const auto& c:r.cells)size+=c.text.size()+c.accessible.size();}}
     return size;
 }
@@ -27,7 +27,7 @@ SurfaceText compose_table(const Json& w,const std::vector<scene::BindingInput>& 
         need(fields.insert(b["field"].get<std::string>()).second,"surface.unsupported");}
     SurfaceText out;out.id=w["id"];out.kind="table";out.text=w["title"];out.table.emplace();auto& t=*out.table;
     Code state=Code::matched;bool first=true;std::map<Key,std::size_t> indexes;
-    for(const auto& b:bindings){t.columns.push_back(b["field"]);
+    for(const auto& b:bindings){t.labels.push_back(w.contains("content")?w["content"]["columns"][t.columns.size()]["label"]:b["field"]);t.columns.push_back(b["field"]);
         scene::project_binding(b,inputs,now,[&](const auto& frame){
             if(frame.code==Code::denied)throw protocol::Error("policy.denied");
             if(rank(frame.code)>rank(state))state=frame.code;
@@ -43,12 +43,12 @@ SurfaceText compose_table(const Json& w,const std::vector<scene::BindingInput>& 
                 need(surface_text_bytes(out)<=262144,"surface.capacity");}
         });first=false;
     }
-    if(state!=Code::matched){t.rows.clear();t.columns.clear();t.total=0;t.truncated=false;}
+    if(state!=Code::matched){t.rows.clear();t.columns.clear();t.labels.clear();t.total=0;t.truncated=false;}
     t.summary=state==Code::matched||state==Code::empty?"Showing "+std::to_string(t.rows.size())+" of "+std::to_string(t.total)+" rows":label(state);
     out.accessible=out.text+"\n"+t.summary;
     for(const auto& row:t.rows){need(row.cells.size()==t.columns.size(),"surface.table_identity");
         out.accessible+="\nRow "+row.producer+"/"+row.epoch+"/"+row.entity;
-        for(std::size_t i=0;i<row.cells.size();++i){out.accessible+="\n"+t.columns[i]+": "+row.cells[i].accessible;need(surface_text_bytes(out)<=262144,"surface.capacity");}}
+        for(std::size_t i=0;i<row.cells.size();++i){out.accessible+="\n"+(t.labels[i]==t.columns[i]?t.columns[i]:t.labels[i]+" ["+t.columns[i]+"]")+": "+row.cells[i].accessible;need(surface_text_bytes(out)<=262144,"surface.capacity");}}
     return out;
 }
 TextRaster raster_table(const TextRequest& request,SurfaceText& widget,std::size_t capacity){
@@ -62,7 +62,7 @@ TextRaster raster_table(const TextRequest& request,SurfaceText& widget,std::size
         auto raster=render_text(q);need(!raster.missing_glyphs,"surface.glyphs");retained+=static_cast<std::size_t>(raster.width)*raster.height;
         fonts.insert(raster.fonts.begin(),raster.fonts.end());parts.push_back(std::move(raster));return parts.size()-1;};
     const auto title=add(widget.text),summary=add(table.summary);std::vector<std::size_t> headers;std::vector<std::vector<std::size_t>> cells;
-    for(const auto& name:table.columns)headers.push_back(add(name));
+    for(const auto& name:table.labels)headers.push_back(add(name));
     for(const auto& row:table.rows){cells.emplace_back();for(const auto& c:row.cells)cells.back().push_back(add(c.text));}
     const unsigned horizontal=(8*q.numerator+q.denominator-1)/q.denominator,vertical=(4*q.numerator+q.denominator-1)/q.denominator;
     struct Placement {unsigned x,y;std::size_t part;};std::vector<Placement> placements{{0,0,title},{0,parts[title].height+vertical,summary}};

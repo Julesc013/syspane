@@ -160,3 +160,11 @@ The [measured-time extension](../delivery/packages/w-25-measured-time.md) explic
 selects the 0.2 triple and qualified clock domain without changing wire framing,
 queue limits or exact body replay identity. Product demand/collector/policy
 integration and native qualification remain separate gates.
+
+The [scene-content boundary](../delivery/packages/w-09-scene-content.md) extends
+resource-bound transactions with command 0.4. A client must negotiate command 0.4,
+command-result 0.1, configuration.transactions, configuration.content and
+configuration.scene-content before sending it. Required incompatible combinations
+fail the handshake; optional unsupported features are removed. Unnegotiated
+commands return feature.unsupported before resource preparation. Wire framing,
+request/queue limits, role restrictions and original-body replay remain unchanged.

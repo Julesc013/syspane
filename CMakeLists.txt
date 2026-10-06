@@ -47,7 +47,7 @@ if(NOT settings_result EQUAL 0)
 endif()
 set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS
     "${CMAKE_SOURCE_DIR}/build-support/generate_authored_schemas.py")
-foreach(schema settings scene-v0.2 layout binding command-v0.2 command-v0.3 content-package content-catalog preset theme)
+foreach(schema settings scene-v0.2 scene-v0.3 layout binding command-v0.2 command-v0.3 command-v0.4 content-package content-catalog preset theme)
     set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS "${CMAKE_SOURCE_DIR}/spec/contracts/${schema}.schema.json")
 endforeach()
 execute_process(COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/build-support/generate_authored_schemas.py"
@@ -233,7 +233,7 @@ endif()
 
 include(CTest)
 if(BUILD_TESTING)
-    add_executable(syspane_authored_tests tests/configuration/authored_tests.cpp tests/configuration/content_tests.cpp)
+    add_executable(syspane_authored_tests tests/configuration/authored_tests.cpp tests/configuration/content_tests.cpp tests/configuration/scene_content_tests.cpp)
     if(TARGET syspane_text_probe)
         add_executable(syspane_scene_surface_tests tests/scene/surface_tests.cpp tests/scene/surface_window.cpp tests/scene/table_tests.cpp)
         target_link_libraries(syspane_scene_surface_tests PRIVATE syspane_scene_surface syspane_network_publication PkgConfig::GTK3)
@@ -247,6 +247,9 @@ if(BUILD_TESTING)
         add_test(NAME native.TABLE-ERASURE COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/scene/native_surface.py"
             "$<TARGET_FILE:syspane_scene_surface_tests>" "$<TARGET_FILE:syspane_text_probe>" "${CMAKE_BINARY_DIR}/native-evidence" TABLE)
         set_tests_properties(native.TABLE-ERASURE PROPERTIES TIMEOUT 120)
+        add_test(NAME native.CONTENT-ERASURE COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/scene/native_surface.py"
+            "$<TARGET_FILE:syspane_scene_surface_tests>" "$<TARGET_FILE:syspane_text_probe>" "${CMAKE_BINARY_DIR}/native-evidence" CONTENT)
+        set_tests_properties(native.CONTENT-ERASURE PROPERTIES TIMEOUT 120)
         add_test(NAME native.TEXT-RASTER COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/scene/native_text.py"
             "$<TARGET_FILE:syspane_text_probe>" "${CMAKE_BINARY_DIR}/native-evidence")
         set_tests_properties(native.TEXT-RASTER PROPERTIES TIMEOUT 90)
@@ -265,7 +268,7 @@ if(BUILD_TESTING)
         add_test(NAME "configuration.${case}" COMMAND syspane_command_session_tests "${case}" "${CMAKE_SOURCE_DIR}/spec/fixtures/valid")
     endforeach()
     target_link_libraries(syspane_authored_tests PRIVATE syspane_authored syspane_async_commands)
-    foreach(case AUTH-SCHEMA TX-MIXED TX-CONFLICT TX-REPLAY TX-INTERRUPT TX-BOUNDS TX-CAPACITY DIGEST CONTENT-COMPOSE CONTENT-PINS CONTENT-PATHS CONTENT-BOUNDS CONTENT-CAPABILITIES CONTENT-POLICY RESOURCE-COMMIT RESOURCE-GUARDS RESOURCE-SESSION RESOURCE-RETAINED)
+    foreach(case SCENE-CONTENT-SCHEMA SCENE-CONTENT-MIGRATION SCENE-CONTENT-RESOURCES SCENE-CONTENT-PREVIEW SCENE-CONTENT-TX SCENE-CONTENT-SESSION AUTH-SCHEMA TX-MIXED TX-CONFLICT TX-REPLAY TX-INTERRUPT TX-BOUNDS TX-CAPACITY DIGEST CONTENT-COMPOSE CONTENT-PINS CONTENT-PATHS CONTENT-BOUNDS CONTENT-CAPABILITIES CONTENT-POLICY RESOURCE-COMMIT RESOURCE-GUARDS RESOURCE-SESSION RESOURCE-RETAINED)
         add_test(NAME "configuration.${case}" COMMAND syspane_authored_tests "${case}" "${CMAKE_SOURCE_DIR}/spec/fixtures/valid")
     endforeach()
     if(TARGET syspane_configuration_probe)
@@ -275,6 +278,9 @@ if(BUILD_TESTING)
         add_test(NAME "native.RESOURCE-GENERATIONS" COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/configuration/native_resources.py"
             "$<TARGET_FILE:syspane_configuration_probe>" "${CMAKE_SOURCE_DIR}" "${CMAKE_BINARY_DIR}/native-evidence")
         set_tests_properties("native.RESOURCE-GENERATIONS" PROPERTIES TIMEOUT 90)
+        add_test(NAME "native.SCENE-CONTENT" COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/configuration/native_scene_content.py"
+            "$<TARGET_FILE:syspane_configuration_probe>" "${CMAKE_SOURCE_DIR}" "${CMAKE_BINARY_DIR}/native-evidence")
+        set_tests_properties("native.SCENE-CONTENT" PROPERTIES TIMEOUT 90)
         add_test(NAME "native.CONTENT-COMMANDS" COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/configuration/native_content_commands.py"
             "$<TARGET_FILE:syspane_command_probe>" "$<TARGET_FILE:syspane_configuration_probe>" "${CMAKE_SOURCE_DIR}" "${CMAKE_BINARY_DIR}/native-evidence")
         set_tests_properties("native.CONTENT-COMMANDS" PROPERTIES TIMEOUT 120)
