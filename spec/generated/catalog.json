@@ -357,7 +357,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "d9a77cf7bdca7df8888824a98e7597badbcf4f40462c6407d55fef863bd43548"
+      "sha256": "9540da0b06aa794a0b6ea6eb48aa9806563748c9e37c9679aa9bbbb0d0fc8fae"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -476,6 +476,18 @@
       "sha256": "1d84beec8b2032908e360bbd72e8e1ca6d7a3f5d2a48ea676c82542d0a4b55c6"
     },
     {
+      "id": "SP-GNOME-WALLPAPER-HANDOFF",
+      "path": "delivery/gnome-wallpaper-handoff.md",
+      "title": "Native GNOME image-wallpaper checkpoint",
+      "description": "Original image identity, native configuration and independent pixels pass with separately calibrated faults.",
+      "requires": [
+        "SP-W05-GNOME-WALLPAPER",
+        "SP-GNOME-INPUT-HANDOFF",
+        "SP-CAMPAIGN-ADMISSION"
+      ],
+      "sha256": "762b3af33b7b15866431790bb520f862ccd05101a21d0b61c4fea59ee34c220c"
+    },
+    {
       "id": "SP-HISTORICAL-BUILD-HANDOFF",
       "path": "delivery/historical-build-handoff.md",
       "title": "Historical Windows shared-subset build checkpoint",
@@ -494,7 +506,7 @@
       "requires": [
         "SP-CURRENT"
       ],
-      "sha256": "4fb0b6d82e80550bd11ad92168dd9864388d9eaa8f92622c1644631c946cde04"
+      "sha256": "9f1e7899f9fdbe089b10dd83f5c34c1c3ddc10f7b53fc34c7e78a890e8387f29"
     },
     {
       "id": "SP-MEASURED-TIME-HANDOFF",
@@ -693,6 +705,18 @@
         "SP-DESKTOP"
       ],
       "sha256": "fd4a26b426b4a666bba06059bcc5561e267d930dfdc456e2eefbe165ce7a47ee"
+    },
+    {
+      "id": "SP-W05-GNOME-WALLPAPER",
+      "path": "delivery/packages/w-05-gnome-wallpaper.md",
+      "title": "W-05 native GNOME image-wallpaper preservation",
+      "description": "Separate original file identity, native settings and externally observed image pixels.",
+      "requires": [
+        "SP-W05-GNOME-COMPOSITION",
+        "SP-ORACLE",
+        "SP-DESKTOP"
+      ],
+      "sha256": "a5f1433c5a4bb961dbddd6d93d735506c59e7a455c7e0c4bf883fab0cf8341b8"
     },
     {
       "id": "SP-W05-SHELL-RECOVERY",

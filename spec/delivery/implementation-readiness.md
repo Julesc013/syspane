@@ -162,6 +162,14 @@ composition support the result. Blocking and omitted-click controls fail correct
 27 verifier checks pass. This does not qualify another file manager or waive the
 separate focus-restoration, wallpaper and recovery gates.
 
+The [native image-wallpaper checkpoint](gnome-wallpaper-handoff.md) now closes the
+named single-display PNG experiment. File identity, complete native settings and
+external image pixels each pass independently; three isolated negative controls
+prove that none can substitute for another. Twenty-seven wallpaper checks pass,
+along with 73 input/reveal/composition/marker regression checks. Wallpaper policy,
+other image/display profiles and shell recovery remain open. The separately failed
+focus-restoration acceptance is unchanged.
+
 Use the proposed cold-start exercise to detect missing observable contracts.
 Private implementation differences are permissible. Missing laboratories remain
 blocked qualification. A finite release scope must identify exact profiles,

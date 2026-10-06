@@ -89,11 +89,30 @@ export default class LabMarker extends Extension {
                 Main.layoutManager.addChrome(this._inputShield, {affectsInputRegion: true,
                     affectsStruts: false, trackFullscreen: false});
             }
+            const wallpaperControl = GLib.getenv('SYSPANE_GNOME_WALLPAPER_CONTROL');
+            if (wallpaperControl && !['live', 'replace-file', 'redirect-setting', 'cover-wallpaper'].includes(wallpaperControl))
+                throw new Error('Unknown wallpaper control');
+            if (wallpaperControl === 'cover-wallpaper') {
+                this._wallpaperCover = new St.DrawingArea({x: 600, y: 400, width: 128, height: 96,
+                    reactive: false, can_focus: false, track_hover: false});
+                this._wallpaperCover.connect('repaint', area => {
+                    const context = area.get_context();
+                    context.setSourceRGB(1 / 255, 2 / 255, 3 / 255);
+                    context.paint();
+                    context.$dispose();
+                });
+                attach(this._wallpaperCover);
+                this._wallpaperOccluded = false;
+            }
             this.SetSceneEnabled(false);
         }
         if (this._control === 'hidden')
             this._actor.hide();
-        this._bus = Gio.DBusExportedObject.wrapJSObject(this._composition ? COMPOSITION_INTERFACE : INTERFACE, this);
+        let interfaceXml = this._composition ? COMPOSITION_INTERFACE : INTERFACE;
+        if (this._wallpaperCover)
+            interfaceXml = interfaceXml.replace('</interface>',
+                '<method name="SetWallpaperOccluded"><arg type="b" direction="in" name="occluded"/></method></interface>');
+        this._bus = Gio.DBusExportedObject.wrapJSObject(interfaceXml, this);
         this._bus.export(Gio.DBus.session, '/org/syspane/LabMarker');
     }
 
@@ -118,6 +137,15 @@ export default class LabMarker extends Extension {
         this._witness.visible = enabled;
         if (this._inputShield)
             this._inputShield.visible = enabled;
+        if (this._wallpaperCover)
+            this._wallpaperCover.visible = enabled && this._wallpaperOccluded;
+    }
+
+    SetWallpaperOccluded(occluded) {
+        if (!this._wallpaperCover || typeof occluded !== 'boolean')
+            throw new Error('Wallpaper occlusion is available only in its explicit control');
+        this._wallpaperOccluded = occluded;
+        this._wallpaperCover.visible = this._witness.visible && occluded;
     }
 
     disable() {
@@ -132,5 +160,7 @@ export default class LabMarker extends Extension {
             this._inputShield.destroy();
         }
         this._inputShield = null;
+        this._wallpaperCover?.destroy();
+        this._wallpaperCover = null;
     }
 }

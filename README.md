@@ -57,8 +57,8 @@ now observes live drawings between a synthetic wallpaper and real desktop icons,
 with independently calibrated pixels and wrong-layer controls. The subsequent
 [native reveal experiment](spec/delivery/gnome-reveal-handoff.md) keeps those drawings
 live while Show Desktop hides and restores a foreground window, but fails the
-required foreground-focus restoration. Image wallpaper and shell
-recovery also remain open. No desktop profile is qualified.
+required foreground-focus restoration. Shell recovery also remains open.
+No desktop profile is qualified.
 An [independent native comparison](spec/delivery/gnome-focus-handoff.md) reproduces
 the focus and keyboard-delivery failure with DING while the SysPane extension is
 absent; GNOME alone restores both. The original acceptance failure remains open.
@@ -69,6 +69,11 @@ A [native icon-input experiment](spec/delivery/gnome-input-handoff.md) now passe
 real selection, drag selection, menus and folder opening with GNOME/DING and the
 pinned PCManFM laboratory. Pointer-blocking and omitted-click controls fail as
 required; this does not resolve the separate focus-restoration failure.
+A [native image-wallpaper experiment](spec/delivery/gnome-wallpaper-handoff.md) now
+preserves original file identity, native settings and exact PNG pixels beside the
+live drawing. Separate replacement, setting-redirection and obstruction controls
+expose each failure independently. Wallpaper policy and other display/image profiles
+still require qualification.
 There is no usable SysPane desktop application or downloadable release yet.
 Desktop, screensaver and installer profiles remain unqualified.
 

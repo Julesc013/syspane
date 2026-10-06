@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-06T02:13:19Z", "scope": "Named GNOME/DING/PCManFM input sequence passes with calibrated blocking and omitted-click controls"}
+updated: {"by": "codex", "at": "2026-10-06T02:40:44Z", "scope": "Named GNOME/DING image wallpaper passes file/settings/pixel preservation with independent fault controls"}
 ---
 
 # Current state and next admitted boundary
@@ -216,6 +216,15 @@ Twenty-seven verifier checks pass, including consistent-but-false semantic recor
 Original empty-copy, accessibility-registration and untracked-blocker mistakes
 remain preserved. The separate Show Desktop focus failure stays open.
 
+The [native image-wallpaper checkpoint](gnome-wallpaper-handoff.md) now preserves
+the original PNG file identity, complete background-settings record and exact
+externally captured pixels during live marker/icon composition. Same-pixel file
+replacement, identical-image URI redirection and a visual obstruction each fail
+only their intended dimension. Twenty-seven new verifier checks and 73 existing
+input/reveal/composition/marker checks pass. Thirteen native attempts, source
+archives, raw journals and image artifacts are preserved. Wallpaper policy, other
+image/display profiles and recovery remain unqualified; the focus failure remains.
+
 Canonical 0.2.0 documentation bundle, unchanged 0.1 authoring profile, preserved old
 fixtures, new experimental scene/command/capability 0.2 and admission descriptors.
 The initial settings registry has enforced metadata/default consistency and generated
@@ -256,9 +265,10 @@ Continue the admitted campaign: use the calibrated GNOME/DING composition path a
 unchanged external marker oracle to resolve the independently reproduced DING/X11
 foreground-focus failure through a bounded integration contract informed by the
 observed native MRU selection. Continue taskbar/task-switcher behavior,
-image-wallpaper preservation and shell/icon-manager recovery independently of that
+wallpaper policy and shell/icon-manager recovery independently of that
 failure. The named GNOME/DING/PCManFM icon-input experiment now passes; other profiles
-need their own evidence. Keep the
+need their own evidence. The named single-display PNG preservation experiment now
+passes independently; other image/scaling/topology profiles remain open. Keep the
 earlier X11 failures and failed GNOME fixture/control attempts. Close other platform capture/reveal boundaries in admitted
 synthetic desktops. W-04 has build artifacts ready for
 historical guest execution once guest test scope and usability are established.

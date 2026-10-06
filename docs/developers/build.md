@@ -428,6 +428,26 @@ control. The recorder verifies initial composition, native input ownership and
 observations, final live composition and exact control outcomes. See the
 [input checkpoint](../../spec/delivery/gnome-input-handoff.md) for scope and retained failures.
 
+The image-wallpaper experiment runs after its own live composition prerequisite:
+
+```text
+python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --wallpaper live
+python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --wallpaper replace-file
+python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --wallpaper redirect-setting
+python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --wallpaper cover-wallpaper
+python3 build-support/record_gnome_wallpaper.py --build-dir <owned-build-directory> --reports <four-wallpaper-reports> --output <new-owned-record>
+python3 tests/desktop/test_gnome_wallpaper_record.py <owned-build-directory> <four-wallpaper-reports> -v
+```
+
+Use the same Windows coordinator's completed workspace-budget preflight before each
+native run or verifier. The four reports must share source/runtime identities.
+The recorder requires a live pass and each negative control to fail only its
+intended file, settings or pixel dimension. Preserve native reports, source archives,
+raw journals and PNG artifacts; native exit 1 for these calibrated faults is expected.
+This uses only a private fixed 800x600 PNG and settings backend. It does not qualify
+wallpaper policy or other image/display profiles, and it leaves the separate Show
+Desktop focus failure open. See the [wallpaper checkpoint](../../spec/delivery/gnome-wallpaper-handoff.md).
+
 For the historical shared-subset experiment, the existing Visual Studio 2017 XP
 toolset has its own preset. It compiles the same model, protocol/policy, recovery
 and diagnostic projection sources; modern native adapters require separate closure.

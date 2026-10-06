@@ -38,7 +38,8 @@ SOURCES = ['tests/desktop/native_gnome_bootstrap.py', 'tests/desktop/native_orac
            'spec/delivery/packages/w-05-gnome-focus-trace.md',
            'spec/delivery/packages/w-05-gnome-input.md', 'tests/desktop/gnome_input.py',
            'tests/desktop/x11_input.py', 'build-support/x11-input-runtime.json',
-           'build-support/x11-lab-packages.json']
+           'build-support/x11-lab-packages.json', 'tests/desktop/gnome_wallpaper.py',
+           'tests/desktop/fixtures/gnome-wallpaper.json', 'spec/delivery/packages/w-05-gnome-wallpaper.md']
 
 
 def marker_trace(display, environment, sample=None, dismiss=True):
@@ -132,6 +133,10 @@ def observe(environment, pid, channel, marker, composition, foreground_pid=None,
             import gnome_input
             result['icon_input'] = gnome_input.observe(display, environment, pid,
                 Path(environment['HOME']).parent, result['composition'], marker_trace)
+        if environment.get('SYSPANE_GNOME_WALLPAPER_CONTROL'):
+            import gnome_wallpaper
+            result['wallpaper'] = gnome_wallpaper.observe(display, environment, pid,
+                Path(environment['HOME']).parent, result['composition'], marker_trace)
         channel.send(result)
     except Exception as error:
         channel.send({'outcome': 'fail', 'error': type(error).__name__ + ': ' + str(error)})
@@ -164,7 +169,7 @@ def group_members(group):
     return members
 
 
-def run(build, marker=False, control='live', composition=None, reveal=None, focus_baseline=None, focus_trace=False, icon_input=None):
+def run(build, marker=False, control='live', composition=None, reveal=None, focus_baseline=None, focus_trace=False, icon_input=None, wallpaper=None):
     # Retain orphaned shell helpers for reaping; no service/session can adopt them.
     if ctypes.CDLL(None, use_errno=True).prctl(36, 1, 0, 0, 0) != 0:
         raise OSError(ctypes.get_errno(), 'cannot retain descendant exit evidence')
@@ -180,6 +185,8 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
         family = 'GNOME-FOCUS-BASELINE-01'
     if icon_input:
         family = 'GNOME-INPUT-01'
+    if wallpaper:
+        family = 'GNOME-WALLPAPER-01'
     with_icons = bool(composition) or focus_baseline == 'ding'
     token = family + '-' + uuid.uuid4().hex
     workspace = build / token
@@ -198,6 +205,7 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
               'focus_baseline_mode': focus_baseline,
               'focus_trace': focus_trace,
               'icon_input_control': icon_input,
+              'wallpaper_control': wallpaper,
               'executed_at': datetime.now(timezone.utc).isoformat(),
               'source_base': subprocess.check_output(['git', '-c', 'safe.directory=' + str(ROOT), 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
               'source_inputs': {p: sha(ROOT / p) for p in SOURCES},
@@ -214,6 +222,8 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
         report['qualification'] = 'Diagnostic native focus comparison only; completion is not a passed focus/reveal or product acceptance claim.'
     if icon_input:
         report['qualification'] = 'Selected owned GNOME/DING/PCManFM icon input and solid-color composition only; Show Desktop focus, taskbar, image wallpaper, recovery, other file managers and full product qualification remain open.'
+    if wallpaper:
+        report['qualification'] = 'Selected owned GNOME/DING single-display PNG file/settings/pixel preservation and live composition only; wallpaper policy, other image modes, Show Desktop focus, taskbar, recovery and full product qualification remain open.'
     archive = workspace / 'source-inputs.zip'
     with zipfile.ZipFile(archive, 'x', compression=zipfile.ZIP_DEFLATED) as target:
         for name in SOURCES:
@@ -254,6 +264,8 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
             environment['SYSPANE_FOREGROUND_EVENTS'] = str(workspace / 'foreground-events.jsonl')
         if focus_trace:
             environment['MUTTER_DEBUG'] = 'focus,keybindings,window-state'
+        if wallpaper:
+            environment['SYSPANE_GNOME_WALLPAPER_CONTROL'] = wallpaper
         if icon_input:
             x11 = build / 'x11-lab'
             x11_identity = json.loads((x11 / 'identity.json').read_text())
@@ -398,6 +410,8 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
                     report['outcome'] = report['observation']['icon_input']['outcome']
                     if report['observation']['icon_input'].get('error'):
                         report['error'] = report['observation']['icon_input']['error']
+                if wallpaper:
+                    report['outcome'] = report['observation']['wallpaper']['evaluation']['outcome']
                 break
             if shell.poll() is not None:
                 raise RuntimeError('shell exited during bootstrap: ' + str(shell.returncode))
@@ -474,6 +488,12 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
             if (workspace / 'config/mimeapps.list').exists():
                 report['folder_association_after'] = {'inputs': inventory(workspace / 'data/applications'),
                                                      'mimeapps_sha256': sha(workspace / 'config/mimeapps.list')}
+        if wallpaper:
+            path = workspace / 'wallpaper.jsonl'
+            if path.exists():
+                report['wallpaper_journal'] = {'path': str(path), 'bytes': path.stat().st_size, 'sha256': sha(path)}
+            report['wallpaper_artifacts'] = {p.name: {'path': str(p), 'bytes': p.stat().st_size, 'sha256': sha(p)}
+                                              for p in workspace.glob('wallpaper*.png')}
         if with_icons:
             report['fixture_after'] = {name: inventory(workspace / name) for name in ['home/Desktop', 'data/icons', 'config/gtk-3.0']}
             report['desktop_entries_after'] = sorted(p.relative_to(workspace / 'home/Desktop').as_posix()
@@ -507,9 +527,14 @@ if __name__ == '__main__':
     parser.add_argument('--focus-baseline', choices=('shell', 'ding', 'candidate'))
     parser.add_argument('--focus-trace', action='store_true')
     parser.add_argument('--icon-input', choices=('live', 'block-pointer', 'no-selection'))
+    parser.add_argument('--wallpaper', choices=('live', 'replace-file', 'redirect-setting', 'cover-wallpaper'))
     args = parser.parse_args()
     if args.focus_trace and not args.focus_baseline:
         parser.error('--focus-trace requires --focus-baseline')
+    if args.wallpaper:
+        if args.marker or args.composition or args.reveal or args.focus_baseline or args.focus_trace or args.icon_input or args.marker_control != 'live':
+            parser.error('--wallpaper owns the live composition prerequisite')
+        args.composition = 'live'
     if args.icon_input:
         if args.marker or args.composition or args.reveal or args.focus_baseline or args.focus_trace or args.marker_control != 'live':
             parser.error('--icon-input owns the live composition prerequisite')
@@ -528,4 +553,4 @@ if __name__ == '__main__':
         parser.error('composition uses its own above/below controls')
     if not args.marker and args.marker_control != 'live':
         parser.error('--marker-control requires --marker')
-    sys.exit(run(owned_build(args.build_dir), args.marker or bool(args.composition), args.marker_control, args.composition, args.reveal, args.focus_baseline, args.focus_trace, args.icon_input))
+    sys.exit(run(owned_build(args.build_dir), args.marker or bool(args.composition), args.marker_control, args.composition, args.reveal, args.focus_baseline, args.focus_trace, args.icon_input, args.wallpaper))
