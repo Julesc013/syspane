@@ -1,0 +1,1073 @@
+{
+  "family": "CONSUMER-CONTINUITY",
+  "artifact_sha256": "4e173800af80b0447f1e1b3bef3c55855e2a64414ff4bbf6962ea21b3fd95922",
+  "cases": [
+    {
+      "case": "CONSUMER-CONTINUITY.LIVE",
+      "outcome": "pass",
+      "started_at": "2026-10-06T12:57:20.240286+00:00",
+      "source_journal": {
+        "path": "/home/ir4runner/.cache/syspane/ipc-w24/case-d1cd17fff536/source.jsonl",
+        "sha256": "ddf33b63ab3d0362e519e8cf0a22d00453c8acba26612d083553845eb8955840",
+        "samples": 14
+      },
+      "consumer_journals": [
+        {
+          "path": "/home/ir4runner/.cache/syspane/ipc-w24/case-d1cd17fff536/consumer-C1.jsonl",
+          "sha256": "649fb94e4643ab8089a3565325b7bb4d20babeba159e84beacd4b66df3bc3f2f",
+          "samples": 14
+        }
+      ],
+      "held_exits": true,
+      "process": {
+        "pid": 930,
+        "exit_code": 0,
+        "events": [
+          {
+            "epoch": "collector:930:continuous",
+            "event": "source_spawned",
+            "observed_ms": 148582,
+            "pid": 932
+          },
+          {
+            "event": "source_sample",
+            "generation": "1",
+            "observed_ms": 148688,
+            "pid": 932
+          },
+          {
+            "connection": "C1",
+            "epoch": "collector:930:continuous",
+            "event": "consumer_spawned",
+            "last_failure": "",
+            "observed_ms": 148688,
+            "pid": 933,
+            "source_pid": 932
+          },
+          {
+            "connection": "C1",
+            "event": "consumer_authenticated",
+            "observed_ms": 148790,
+            "pid": 933
+          },
+          {
+            "event": "source_sample",
+            "generation": "2",
+            "observed_ms": 149705,
+            "pid": 932
+          },
+          {
+            "event": "source_sample",
+            "generation": "3",
+            "observed_ms": 150721,
+            "pid": 932
+          },
+          {
+            "event": "source_sample",
+            "generation": "4",
+            "observed_ms": 151739,
+            "pid": 932
+          },
+          {
+            "event": "source_sample",
+            "generation": "5",
+            "observed_ms": 152756,
+            "pid": 932
+          },
+          {
+            "event": "source_sample",
+            "generation": "6",
+            "observed_ms": 153771,
+            "pid": 932
+          },
+          {
+            "event": "source_sample",
+            "generation": "7",
+            "observed_ms": 154785,
+            "pid": 932
+          },
+          {
+            "event": "source_sample",
+            "generation": "8",
+            "observed_ms": 155799,
+            "pid": 932
+          },
+          {
+            "event": "source_sample",
+            "generation": "9",
+            "observed_ms": 156814,
+            "pid": 932
+          },
+          {
+            "event": "source_sample",
+            "generation": "10",
+            "observed_ms": 157827,
+            "pid": 932
+          },
+          {
+            "event": "source_sample",
+            "generation": "11",
+            "observed_ms": 158843,
+            "pid": 932
+          },
+          {
+            "event": "source_sample",
+            "generation": "12",
+            "observed_ms": 159857,
+            "pid": 932
+          },
+          {
+            "event": "source_sample",
+            "generation": "13",
+            "observed_ms": 160872,
+            "pid": 932
+          },
+          {
+            "event": "source_sample",
+            "generation": "14",
+            "observed_ms": 161886,
+            "pid": 932
+          },
+          {
+            "code": 0,
+            "event": "stopped",
+            "forced": false,
+            "observed_ms": 162606,
+            "os_confirmed": true,
+            "pid": 933,
+            "signaled": false
+          },
+          {
+            "code": 0,
+            "event": "stopped",
+            "forced": false,
+            "observed_ms": 162607,
+            "os_confirmed": true,
+            "pid": 932,
+            "signaled": false
+          },
+          {
+            "circuit_open": false,
+            "consumer_policy_revision": 7,
+            "event": "complete",
+            "last_failure": "",
+            "launches": 1,
+            "observed_ms": 162607
+          }
+        ]
+      },
+      "cleanup_exits": {
+        "932": true,
+        "933": true
+      },
+      "faults": [],
+      "private_root": "/home/ir4runner/.cache/syspane/ipc-w24/case-d1cd17fff536",
+      "finished_at": "2026-10-06T12:57:34.269770+00:00"
+    },
+    {
+      "case": "CONSUMER-CONTINUITY.CRASH",
+      "outcome": "pass",
+      "started_at": "2026-10-06T12:57:34.270465+00:00",
+      "source_journal": {
+        "path": "/home/ir4runner/.cache/syspane/ipc-w24/case-3ee707bba44e/source.jsonl",
+        "sha256": "0cbc90e4d48c592879b5784f2a6191f700445b6d80ad0fa6805a290dfabcb584",
+        "samples": 14
+      },
+      "consumer_journals": [
+        {
+          "path": "/home/ir4runner/.cache/syspane/ipc-w24/case-3ee707bba44e/consumer-C1.jsonl",
+          "sha256": "ddbf3058fd6fd8ecdffac6eee4c3404876164d9bb99a9dc8c9481912b3189d68",
+          "samples": 1
+        },
+        {
+          "path": "/home/ir4runner/.cache/syspane/ipc-w24/case-3ee707bba44e/consumer-C2.jsonl",
+          "sha256": "02a21f91668a78a580ad68e3572a1b03a5787c2f1d99d046b3322c6f9f4d407c",
+          "samples": 13
+        }
+      ],
+      "held_exits": true,
+      "process": {
+        "pid": 934,
+        "exit_code": 0,
+        "events": [
+          {
+            "epoch": "collector:934:continuous",
+            "event": "source_spawned",
+            "observed_ms": 162612,
+            "pid": 936
+          },
+          {
+            "event": "source_sample",
+            "generation": "1",
+            "observed_ms": 162717,
+            "pid": 936
+          },
+          {
+            "connection": "C1",
+            "epoch": "collector:934:continuous",
+            "event": "consumer_spawned",
+            "last_failure": "",
+            "observed_ms": 162718,
+            "pid": 937,
+            "source_pid": 936
+          },
+          {
+            "connection": "C1",
+            "event": "consumer_authenticated",
+            "observed_ms": 162819,
+            "pid": 937
+          },
+          {
+            "backoff_ms": 1000,
+            "event": "consumer_fault",
+            "observed_ms": 163023,
+            "pid": 937,
+            "reason": "consumer.exited"
+          },
+          {
+            "code": 9,
+            "event": "stopped",
+            "forced": true,
+            "observed_ms": 163124,
+            "os_confirmed": true,
+            "pid": 937,
+            "signaled": true
+          },
+          {
+            "event": "source_sample",
+            "generation": "2",
+            "observed_ms": 163732,
+            "pid": 936
+          },
+          {
+            "connection": "C2",
+            "epoch": "collector:934:continuous",
+            "event": "consumer_spawned",
+            "last_failure": "consumer.exited",
+            "observed_ms": 164036,
+            "pid": 938,
+            "source_pid": 936
+          },
+          {
+            "connection": "C2",
+            "event": "consumer_authenticated",
+            "observed_ms": 164137,
+            "pid": 938
+          },
+          {
+            "event": "source_sample",
+            "generation": "3",
+            "observed_ms": 164748,
+            "pid": 936
+          },
+          {
+            "event": "source_sample",
+            "generation": "4",
+            "observed_ms": 165762,
+            "pid": 936
+          },
+          {
+            "event": "source_sample",
+            "generation": "5",
+            "observed_ms": 166776,
+            "pid": 936
+          },
+          {
+            "event": "source_sample",
+            "generation": "6",
+            "observed_ms": 167790,
+            "pid": 936
+          },
+          {
+            "event": "source_sample",
+            "generation": "7",
+            "observed_ms": 168804,
+            "pid": 936
+          },
+          {
+            "event": "source_sample",
+            "generation": "8",
+            "observed_ms": 169819,
+            "pid": 936
+          },
+          {
+            "event": "source_sample",
+            "generation": "9",
+            "observed_ms": 170833,
+            "pid": 936
+          },
+          {
+            "event": "source_sample",
+            "generation": "10",
+            "observed_ms": 171848,
+            "pid": 936
+          },
+          {
+            "event": "source_sample",
+            "generation": "11",
+            "observed_ms": 172863,
+            "pid": 936
+          },
+          {
+            "event": "source_sample",
+            "generation": "12",
+            "observed_ms": 173878,
+            "pid": 936
+          },
+          {
+            "event": "source_sample",
+            "generation": "13",
+            "observed_ms": 174892,
+            "pid": 936
+          },
+          {
+            "event": "source_sample",
+            "generation": "14",
+            "observed_ms": 175906,
+            "pid": 936
+          },
+          {
+            "code": 0,
+            "event": "stopped",
+            "forced": false,
+            "observed_ms": 176629,
+            "os_confirmed": true,
+            "pid": 938,
+            "signaled": false
+          },
+          {
+            "code": 0,
+            "event": "stopped",
+            "forced": false,
+            "observed_ms": 176629,
+            "os_confirmed": true,
+            "pid": 936,
+            "signaled": false
+          },
+          {
+            "circuit_open": false,
+            "consumer_policy_revision": 7,
+            "event": "complete",
+            "last_failure": "consumer.exited",
+            "launches": 2,
+            "observed_ms": 176629
+          }
+        ]
+      },
+      "cleanup_exits": {
+        "936": true,
+        "937": true,
+        "938": true
+      },
+      "faults": [
+        {
+          "pid": 937,
+          "signal": 9,
+          "observed_ms": 162945,
+          "last_generation": "1"
+        }
+      ],
+      "private_root": "/home/ir4runner/.cache/syspane/ipc-w24/case-3ee707bba44e",
+      "finished_at": "2026-10-06T12:57:48.292903+00:00"
+    },
+    {
+      "case": "CONSUMER-CONTINUITY.HANG",
+      "outcome": "pass",
+      "started_at": "2026-10-06T12:57:48.294559+00:00",
+      "source_journal": {
+        "path": "/home/ir4runner/.cache/syspane/ipc-w24/case-1335fcb89fb6/source.jsonl",
+        "sha256": "78b0559c53f9cd6f705efb2562efa1a654f9e6ac9d9c7236fe18f7e4f983014b",
+        "samples": 14
+      },
+      "consumer_journals": [
+        {
+          "path": "/home/ir4runner/.cache/syspane/ipc-w24/case-1335fcb89fb6/consumer-C1.jsonl",
+          "sha256": "3908c36f7c934effd447e2989911232c6111b2cbf62e2e3576323fac1554b033",
+          "samples": 1
+        },
+        {
+          "path": "/home/ir4runner/.cache/syspane/ipc-w24/case-1335fcb89fb6/consumer-C2.jsonl",
+          "sha256": "26466bb77ba20c85cd59af9a14065d3ac2017d1eff416435324720e168bebf28",
+          "samples": 10
+        }
+      ],
+      "held_exits": true,
+      "process": {
+        "pid": 939,
+        "exit_code": 0,
+        "events": [
+          {
+            "epoch": "collector:939:continuous",
+            "event": "source_spawned",
+            "observed_ms": 176646,
+            "pid": 941
+          },
+          {
+            "event": "source_sample",
+            "generation": "1",
+            "observed_ms": 176752,
+            "pid": 941
+          },
+          {
+            "connection": "C1",
+            "epoch": "collector:939:continuous",
+            "event": "consumer_spawned",
+            "last_failure": "",
+            "observed_ms": 176752,
+            "pid": 942,
+            "source_pid": 941
+          },
+          {
+            "connection": "C1",
+            "event": "consumer_authenticated",
+            "observed_ms": 176854,
+            "pid": 942
+          },
+          {
+            "event": "source_sample",
+            "generation": "2",
+            "observed_ms": 177769,
+            "pid": 941
+          },
+          {
+            "event": "source_sample",
+            "generation": "3",
+            "observed_ms": 178783,
+            "pid": 941
+          },
+          {
+            "event": "source_sample",
+            "generation": "4",
+            "observed_ms": 179798,
+            "pid": 941
+          },
+          {
+            "backoff_ms": 1000,
+            "event": "consumer_fault",
+            "observed_ms": 180004,
+            "pid": 942,
+            "reason": "subscription.expired"
+          },
+          {
+            "code": 9,
+            "event": "stopped",
+            "forced": true,
+            "observed_ms": 180105,
+            "os_confirmed": true,
+            "pid": 942,
+            "signaled": true
+          },
+          {
+            "event": "source_sample",
+            "generation": "5",
+            "observed_ms": 180811,
+            "pid": 941
+          },
+          {
+            "connection": "C2",
+            "epoch": "collector:939:continuous",
+            "event": "consumer_spawned",
+            "last_failure": "subscription.expired",
+            "observed_ms": 181014,
+            "pid": 943,
+            "source_pid": 941
+          },
+          {
+            "connection": "C2",
+            "event": "consumer_authenticated",
+            "observed_ms": 181115,
+            "pid": 943
+          },
+          {
+            "event": "source_sample",
+            "generation": "6",
+            "observed_ms": 181827,
+            "pid": 941
+          },
+          {
+            "event": "source_sample",
+            "generation": "7",
+            "observed_ms": 182842,
+            "pid": 941
+          },
+          {
+            "event": "source_sample",
+            "generation": "8",
+            "observed_ms": 183858,
+            "pid": 941
+          },
+          {
+            "event": "source_sample",
+            "generation": "9",
+            "observed_ms": 184873,
+            "pid": 941
+          },
+          {
+            "event": "source_sample",
+            "generation": "10",
+            "observed_ms": 185888,
+            "pid": 941
+          },
+          {
+            "event": "source_sample",
+            "generation": "11",
+            "observed_ms": 186904,
+            "pid": 941
+          },
+          {
+            "event": "source_sample",
+            "generation": "12",
+            "observed_ms": 187919,
+            "pid": 941
+          },
+          {
+            "event": "source_sample",
+            "generation": "13",
+            "observed_ms": 188933,
+            "pid": 941
+          },
+          {
+            "event": "source_sample",
+            "generation": "14",
+            "observed_ms": 189947,
+            "pid": 941
+          },
+          {
+            "code": 0,
+            "event": "stopped",
+            "forced": false,
+            "observed_ms": 190669,
+            "os_confirmed": true,
+            "pid": 943,
+            "signaled": false
+          },
+          {
+            "code": 0,
+            "event": "stopped",
+            "forced": false,
+            "observed_ms": 190669,
+            "os_confirmed": true,
+            "pid": 941,
+            "signaled": false
+          },
+          {
+            "circuit_open": false,
+            "consumer_policy_revision": 7,
+            "event": "complete",
+            "last_failure": "subscription.expired",
+            "launches": 2,
+            "observed_ms": 190669
+          }
+        ]
+      },
+      "cleanup_exits": {
+        "941": true,
+        "942": true,
+        "943": true
+      },
+      "faults": [
+        {
+          "pid": 942,
+          "signal": 19,
+          "observed_ms": 176980,
+          "last_generation": "1"
+        }
+      ],
+      "private_root": "/home/ir4runner/.cache/syspane/ipc-w24/case-1335fcb89fb6",
+      "finished_at": "2026-10-06T12:58:04.708236+00:00"
+    },
+    {
+      "case": "CONSUMER-CONTINUITY.REVOKE",
+      "outcome": "pass",
+      "started_at": "2026-10-06T12:58:04.708944+00:00",
+      "source_journal": {
+        "path": "/home/ir4runner/.cache/syspane/ipc-w24/case-0f3d4ecf7824/source.jsonl",
+        "sha256": "ca42f1ccdfd2a0acb53a693f78faf32d166b7c6c90e21d7769443c9e81acf88f",
+        "samples": 14
+      },
+      "consumer_journals": [
+        {
+          "path": "/home/ir4runner/.cache/syspane/ipc-w24/case-0f3d4ecf7824/consumer-C1.jsonl",
+          "sha256": "1b992e652c877fc61c39f42c6aa0999ace883eb678dc0bb53b6562aa08f3d3b0",
+          "samples": 1
+        }
+      ],
+      "held_exits": true,
+      "process": {
+        "pid": 944,
+        "exit_code": 0,
+        "events": [
+          {
+            "epoch": "collector:944:continuous",
+            "event": "source_spawned",
+            "observed_ms": 190675,
+            "pid": 946
+          },
+          {
+            "event": "source_sample",
+            "generation": "1",
+            "observed_ms": 190781,
+            "pid": 946
+          },
+          {
+            "connection": "C1",
+            "epoch": "collector:944:continuous",
+            "event": "consumer_spawned",
+            "last_failure": "",
+            "observed_ms": 190781,
+            "pid": 947,
+            "source_pid": 946
+          },
+          {
+            "connection": "C1",
+            "event": "consumer_authenticated",
+            "observed_ms": 190883,
+            "pid": 947
+          },
+          {
+            "backoff_ms": 1000,
+            "event": "consumer_fault",
+            "observed_ms": 191087,
+            "pid": 947,
+            "reason": "consumer.exited"
+          },
+          {
+            "event": "consumer_policy",
+            "observed_ms": 191087,
+            "permitted": false,
+            "revision": 8
+          },
+          {
+            "code": 9,
+            "event": "stopped",
+            "forced": true,
+            "observed_ms": 191188,
+            "os_confirmed": true,
+            "pid": 947,
+            "signaled": true
+          },
+          {
+            "event": "source_sample",
+            "generation": "2",
+            "observed_ms": 191796,
+            "pid": 946
+          },
+          {
+            "event": "source_sample",
+            "generation": "3",
+            "observed_ms": 192809,
+            "pid": 946
+          },
+          {
+            "event": "source_sample",
+            "generation": "4",
+            "observed_ms": 193822,
+            "pid": 946
+          },
+          {
+            "event": "source_sample",
+            "generation": "5",
+            "observed_ms": 194836,
+            "pid": 946
+          },
+          {
+            "event": "source_sample",
+            "generation": "6",
+            "observed_ms": 195848,
+            "pid": 946
+          },
+          {
+            "event": "source_sample",
+            "generation": "7",
+            "observed_ms": 196861,
+            "pid": 946
+          },
+          {
+            "event": "source_sample",
+            "generation": "8",
+            "observed_ms": 197874,
+            "pid": 946
+          },
+          {
+            "event": "source_sample",
+            "generation": "9",
+            "observed_ms": 198887,
+            "pid": 946
+          },
+          {
+            "event": "source_sample",
+            "generation": "10",
+            "observed_ms": 199901,
+            "pid": 946
+          },
+          {
+            "event": "source_sample",
+            "generation": "11",
+            "observed_ms": 200914,
+            "pid": 946
+          },
+          {
+            "event": "source_sample",
+            "generation": "12",
+            "observed_ms": 201927,
+            "pid": 946
+          },
+          {
+            "event": "source_sample",
+            "generation": "13",
+            "observed_ms": 202940,
+            "pid": 946
+          },
+          {
+            "event": "source_sample",
+            "generation": "14",
+            "observed_ms": 203953,
+            "pid": 946
+          },
+          {
+            "code": 0,
+            "event": "stopped",
+            "forced": false,
+            "observed_ms": 204763,
+            "os_confirmed": true,
+            "pid": 946,
+            "signaled": false
+          },
+          {
+            "circuit_open": false,
+            "consumer_policy_revision": 8,
+            "event": "complete",
+            "last_failure": "consumer.exited",
+            "launches": 1,
+            "observed_ms": 204763
+          }
+        ]
+      },
+      "cleanup_exits": {
+        "946": true,
+        "947": true
+      },
+      "faults": [
+        {
+          "pid": 947,
+          "signal": 9,
+          "observed_ms": 191009,
+          "last_generation": "1"
+        }
+      ],
+      "private_root": "/home/ir4runner/.cache/syspane/ipc-w24/case-0f3d4ecf7824",
+      "finished_at": "2026-10-06T12:58:18.824915+00:00"
+    },
+    {
+      "case": "CONSUMER-CONTINUITY.CIRCUIT",
+      "outcome": "pass",
+      "started_at": "2026-10-06T12:58:18.825596+00:00",
+      "source_journal": {
+        "path": "/home/ir4runner/.cache/syspane/ipc-w24/case-a6beb96cbb32/source.jsonl",
+        "sha256": "aada01e17f1aba3cbf0832e533d219a62c7c64f23140194cc7ec87f3b205253f",
+        "samples": 14
+      },
+      "consumer_journals": [
+        {
+          "path": "/home/ir4runner/.cache/syspane/ipc-w24/case-a6beb96cbb32/consumer-C1.jsonl",
+          "sha256": "0dc7a62a3f7dad2b64fff128f56c5601e3d0be888801f5dfb6027e6b843c9e6e",
+          "samples": 1
+        },
+        {
+          "path": "/home/ir4runner/.cache/syspane/ipc-w24/case-a6beb96cbb32/consumer-C2.jsonl",
+          "sha256": "dc9efa6b76f832cf323f3694449ae8205a585dfb5c191aa5b6e0aeff50947484",
+          "samples": 1
+        },
+        {
+          "path": "/home/ir4runner/.cache/syspane/ipc-w24/case-a6beb96cbb32/consumer-C3.jsonl",
+          "sha256": "fd5c1dfdd75d69333f0449008e0df6f53692cc715d4d926a49c1ad06763671b5",
+          "samples": 1
+        },
+        {
+          "path": "/home/ir4runner/.cache/syspane/ipc-w24/case-a6beb96cbb32/consumer-C4.jsonl",
+          "sha256": "d011a39fe54ae65182f133363b99578e4526e3c8fda7a366823b6b47c2b18983",
+          "samples": 1
+        }
+      ],
+      "held_exits": true,
+      "process": {
+        "pid": 948,
+        "exit_code": 0,
+        "events": [
+          {
+            "epoch": "collector:948:continuous",
+            "event": "source_spawned",
+            "observed_ms": 204792,
+            "pid": 950
+          },
+          {
+            "event": "source_sample",
+            "generation": "1",
+            "observed_ms": 205000,
+            "pid": 950
+          },
+          {
+            "connection": "C1",
+            "epoch": "collector:948:continuous",
+            "event": "consumer_spawned",
+            "last_failure": "",
+            "observed_ms": 205000,
+            "pid": 951,
+            "source_pid": 950
+          },
+          {
+            "connection": "C1",
+            "event": "consumer_authenticated",
+            "observed_ms": 205101,
+            "pid": 951
+          },
+          {
+            "backoff_ms": 1000,
+            "event": "consumer_fault",
+            "observed_ms": 205306,
+            "pid": 951,
+            "reason": "consumer.exited"
+          },
+          {
+            "code": 9,
+            "event": "stopped",
+            "forced": true,
+            "observed_ms": 205407,
+            "os_confirmed": true,
+            "pid": 951,
+            "signaled": true
+          },
+          {
+            "event": "source_sample",
+            "generation": "2",
+            "observed_ms": 206011,
+            "pid": 950
+          },
+          {
+            "connection": "C2",
+            "epoch": "collector:948:continuous",
+            "event": "consumer_spawned",
+            "last_failure": "consumer.exited",
+            "observed_ms": 206315,
+            "pid": 952,
+            "source_pid": 950
+          },
+          {
+            "connection": "C2",
+            "event": "consumer_authenticated",
+            "observed_ms": 206416,
+            "pid": 952
+          },
+          {
+            "backoff_ms": 2000,
+            "event": "consumer_fault",
+            "observed_ms": 206620,
+            "pid": 952,
+            "reason": "consumer.exited"
+          },
+          {
+            "code": 9,
+            "event": "stopped",
+            "forced": true,
+            "observed_ms": 206722,
+            "os_confirmed": true,
+            "pid": 952,
+            "signaled": true
+          },
+          {
+            "event": "source_sample",
+            "generation": "3",
+            "observed_ms": 207024,
+            "pid": 950
+          },
+          {
+            "event": "source_sample",
+            "generation": "4",
+            "observed_ms": 208037,
+            "pid": 950
+          },
+          {
+            "connection": "C3",
+            "epoch": "collector:948:continuous",
+            "event": "consumer_spawned",
+            "last_failure": "consumer.exited",
+            "observed_ms": 208645,
+            "pid": 953,
+            "source_pid": 950
+          },
+          {
+            "connection": "C3",
+            "event": "consumer_authenticated",
+            "observed_ms": 208746,
+            "pid": 953
+          },
+          {
+            "backoff_ms": 4000,
+            "event": "consumer_fault",
+            "observed_ms": 208949,
+            "pid": 953,
+            "reason": "consumer.exited"
+          },
+          {
+            "event": "source_sample",
+            "generation": "5",
+            "observed_ms": 209051,
+            "pid": 950
+          },
+          {
+            "code": 9,
+            "event": "stopped",
+            "forced": true,
+            "observed_ms": 209051,
+            "os_confirmed": true,
+            "pid": 953,
+            "signaled": true
+          },
+          {
+            "event": "source_sample",
+            "generation": "6",
+            "observed_ms": 210064,
+            "pid": 950
+          },
+          {
+            "event": "source_sample",
+            "generation": "7",
+            "observed_ms": 211077,
+            "pid": 950
+          },
+          {
+            "event": "source_sample",
+            "generation": "8",
+            "observed_ms": 212090,
+            "pid": 950
+          },
+          {
+            "connection": "C4",
+            "epoch": "collector:948:continuous",
+            "event": "consumer_spawned",
+            "last_failure": "consumer.exited",
+            "observed_ms": 213002,
+            "pid": 963,
+            "source_pid": 950
+          },
+          {
+            "event": "source_sample",
+            "generation": "9",
+            "observed_ms": 213104,
+            "pid": 950
+          },
+          {
+            "connection": "C4",
+            "event": "consumer_authenticated",
+            "observed_ms": 213104,
+            "pid": 963
+          },
+          {
+            "backoff_ms": 4000,
+            "event": "consumer_fault",
+            "observed_ms": 213309,
+            "pid": 963,
+            "reason": "consumer.exited"
+          },
+          {
+            "code": 9,
+            "event": "stopped",
+            "forced": true,
+            "observed_ms": 213410,
+            "os_confirmed": true,
+            "pid": 963,
+            "signaled": true
+          },
+          {
+            "event": "consumer_circuit_open",
+            "last_failure": "consumer.exited",
+            "observed_ms": 213410
+          },
+          {
+            "event": "source_sample",
+            "generation": "10",
+            "observed_ms": 214117,
+            "pid": 950
+          },
+          {
+            "event": "source_sample",
+            "generation": "11",
+            "observed_ms": 215131,
+            "pid": 950
+          },
+          {
+            "event": "source_sample",
+            "generation": "12",
+            "observed_ms": 216145,
+            "pid": 950
+          },
+          {
+            "event": "source_sample",
+            "generation": "13",
+            "observed_ms": 217158,
+            "pid": 950
+          },
+          {
+            "event": "source_sample",
+            "generation": "14",
+            "observed_ms": 218170,
+            "pid": 950
+          },
+          {
+            "code": 0,
+            "event": "stopped",
+            "forced": false,
+            "observed_ms": 218879,
+            "os_confirmed": true,
+            "pid": 950,
+            "signaled": false
+          },
+          {
+            "circuit_open": true,
+            "consumer_policy_revision": 7,
+            "event": "complete",
+            "last_failure": "consumer.exited",
+            "launches": 4,
+            "observed_ms": 218879
+          }
+        ]
+      },
+      "cleanup_exits": {
+        "950": true,
+        "951": true,
+        "952": true,
+        "953": true,
+        "963": true
+      },
+      "faults": [
+        {
+          "pid": 951,
+          "signal": 9,
+          "observed_ms": 205228,
+          "last_generation": "1"
+        },
+        {
+          "pid": 952,
+          "signal": 9,
+          "observed_ms": 206542,
+          "last_generation": "2"
+        },
+        {
+          "pid": 953,
+          "signal": 9,
+          "observed_ms": 208872,
+          "last_generation": "4"
+        },
+        {
+          "pid": 963,
+          "signal": 9,
+          "observed_ms": 213231,
+          "last_generation": "9"
+        }
+      ],
+      "private_root": "/home/ir4runner/.cache/syspane/ipc-w24/case-a6beb96cbb32",
+      "finished_at": "2026-10-06T12:58:35.555245+00:00"
+    }
+  ],
+  "outcome": "pass"
+}

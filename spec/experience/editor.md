@@ -52,3 +52,11 @@ Apply through command 0.2 `scene.replace` while fine-grained future operations r
 unadmitted. Telemetry changes do not move the selected item; missing monitors retain
 intent. Cancellation/crash releases any input-blocking editing surface. Saver scene
 editing is an unlocked interactive role, separate from a read-only saver or preview.
+
+Emergency release is distinct from a successful Cancel transaction: it removes the
+transient input owner without committing a draft or asserting rollback completion.
+An independent recovery owner must confirm that the obstructing native lifetime
+ended before reporting release or admitting a replacement. Its escape route must
+be available before editor admission. The [X11 lifetime experiment](../delivery/packages/w-25-editor-exit.md)
+tests this prerequisite; full draft/persistence and actual desktop integration still
+belong to the editor's acceptance gate.

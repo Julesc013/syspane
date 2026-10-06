@@ -70,6 +70,11 @@ now connects independent render deadlines to that replacement owner. Stopped or
 hidden drawing and a frozen owned shell recover current pixels; external observation
 still rejects false progress acknowledgements. Editor recovery, installed ownership
 and complete host qualification remain open.
+The [independent editor-exit experiment](spec/delivery/editor-exit-handoff.md) now
+removes an owned stopped editor candidate through a separate keyboard/GTK path.
+Native exit, restored pixels and restored clicks are checked independently. This
+closes a lifetime prerequisite; scene editing, transaction recovery and integration
+with the actual desktop/controller remain required.
 The [measured telemetry path](spec/delivery/measured-time-handoff.md) now preserves
 sample age through delay, replay and reconnect, with explicit clock scope and TTL checks.
 A [native network reader](spec/delivery/network-acquisition-handoff.md) now acquires

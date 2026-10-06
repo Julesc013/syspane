@@ -1,0 +1,116 @@
+[
+  {
+    "phase": "preflight",
+    "step": "configure",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-06T12:48:02.070766+00:00",
+    "finished_at": "2026-10-06T12:48:12.535192+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 5368709120,\n  \"checkout_out_bytes\": 1229106562,\n  \"linux_campaign_bytes\": 3045155525,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "phase": "configure",
+    "step": "configure",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "out/campaign/run_editor_exit_step.py",
+      "linux-x64-gcc13",
+      "configure"
+    ],
+    "started_at": "2026-10-06T12:48:12.535565+00:00",
+    "finished_at": "2026-10-06T12:48:26.681566+00:00",
+    "exit": 0,
+    "stdout": "Preset CMake variables:\n\n  BUILD_TESTING=\"ON\"\n  CMAKE_BUILD_TYPE=\"Debug\"\n  CMAKE_CXX_COMPILER=\"g++\"\n  SYSPANE_PROFILE=\"linux-x64-gcc13\"\n\nprofile verified: linux-x64-gcc13\nvendored dependency digests: pass\ndiagnostic toolkit verified: GTK 3.24.41 / Ubuntu 3.24.41-4ubuntu1.3\nnative GJS clock build dependencies verified\n-- Configuring done (7.0s)\n-- Generating done (0.0s)\n-- Build files have been written to: /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n\n\nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-25-editor-exit/linux-x64-gcc13-configure-2e86b10eb6\n",
+    "stderr": ""
+  },
+  {
+    "phase": "preflight",
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-06T12:48:26.681952+00:00",
+    "finished_at": "2026-10-06T12:48:27.278567+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 5368709120,\n  \"checkout_out_bytes\": 1230070825,\n  \"linux_campaign_bytes\": 3045164183,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "phase": "build",
+    "step": "build",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "out/campaign/run_editor_exit_step.py",
+      "linux-x64-gcc13",
+      "build"
+    ],
+    "started_at": "2026-10-06T12:48:27.278852+00:00",
+    "finished_at": "2026-10-06T12:48:34.506665+00:00",
+    "exit": 0,
+    "stdout": "[1/4] Building CXX object CMakeFiles/syspane_editor_exit.dir/source/interfaces/editor_exit_x11.cpp.o\n[2/4] Linking CXX static library libsyspane_editor_exit.a\n[3/4] Building CXX object CMakeFiles/syspane_editor_exit_probe.dir/source/application/editor_exit_probe.cpp.o\n[4/4] Linking CXX executable SysPane.EditorExitProbe\n\n\nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-25-editor-exit/linux-x64-gcc13-build-a3eda8de1f\n",
+    "stderr": ""
+  },
+  {
+    "phase": "preflight",
+    "step": "focus",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-06T12:48:34.507057+00:00",
+    "finished_at": "2026-10-06T12:48:35.076103+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 5368709120,\n  \"checkout_out_bytes\": 1231034719,\n  \"linux_campaign_bytes\": 3046515930,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "phase": "focus",
+    "step": "focus",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "out/campaign/run_editor_exit_step.py",
+      "linux-x64-gcc13",
+      "focus"
+    ],
+    "started_at": "2026-10-06T12:48:35.076483+00:00",
+    "finished_at": "2026-10-06T12:48:44.342108+00:00",
+    "exit": 8,
+    "stdout": "Test project /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n    Start 7: native.EDITOR-EXIT\n1/1 Test #7: native.EDITOR-EXIT ...............***Failed    4.53 sec\nKEY-LIVE fail AssertionError: \nKEY-FROZEN fail AssertionError: \nBUTTON-FROZEN fail AssertionError: native observation deadline\nLOCKS-FROZEN fail AssertionError: \nDRAG-FROZEN fail AssertionError: \nOWNER-LOSS pass \nEDITOR-CRASH pass \nGRAB-CONFLICT pass \n/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/EDITOR-EXIT-01-9b27be742d4a4832aa548bfb9a5734cd.json\n\n\n0% tests passed, 1 tests failed out of 1\n\nTotal Test time (real) =   4.53 sec\n\nThe following tests FAILED:\n\t  7 - native.EDITOR-EXIT (Failed)\n\nErrors while running CTest\n\nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-25-editor-exit/linux-x64-gcc13-focus-3d642b4da2\n",
+    "stderr": ""
+  }
+]

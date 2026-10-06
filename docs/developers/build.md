@@ -1005,3 +1005,35 @@ kills that exact stopped lifetime and replaces it; the observer cannot resume th
 old shell to claim recovery. All recovered desktop intervals still record native
 overview dismissal explicitly. Installed session management and editor recovery
 remain separate. Keep original operational crops/journals private.
+
+
+## Independent owned X11 editor exit
+
+The [package](../../spec/delivery/packages/w-25-editor-exit.md) builds
+`syspane_editor_exit` and the development-only `SysPane.EditorExitProbe` on the
+Linux profile. It acquires a native emergency shortcut before creating one owned
+candidate and provides a separate GTK Close editor button. It reads no scene or
+operational data. The [handoff](../../spec/delivery/editor-exit-handoff.md) distinguishes
+this lifetime experiment from full scene editing and installed recovery.
+
+Use the ordinary Linux configure/build commands and Windows workspace preflight
+before each action. In the existing unprivileged Linux environment, run:
+
+```sh
+SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498 \
+  ctest --preset linux-x64-gcc13 -R '^native[.]EDITOR-EXIT$' --output-on-failure
+```
+
+The runner creates authenticated owned Xvfb displays. Nine cases require confirmed
+native exit and independent restored pixels/clicks within 1,500 ms; conflict denies
+child admission. Caps/Num Lock, held pointer, real keymap changes, frozen children
+and parent loss have separate cases. Native GTK discovery verifies owner PID,
+title and geometry. Reports are `native-evidence/EDITOR-EXIT-01-<attempt>.json`;
+original native/observer records remain alongside each report. No user desktop,
+window manager or installed shortcut is modified.
+
+Revalidate an existing report with `python3 build-support/record_editor_exit.py
+<absolute-report> <absolute-EditorExitProbe>`. After a test preflight, the independent
+evidence tests run with `python3 tests/desktop/test_editor_exit_record.py
+<absolute-report> -v`. The profile remains experimental; scene transactions,
+fullscreen recovery discovery and Wayland need their own contracts and evidence.

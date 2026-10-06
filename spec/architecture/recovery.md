@@ -44,6 +44,12 @@ Safe mode skips optional configuration, not mandatory policy. An unreadable requ
 policy source fails closed for restricted operations and disclosure while allowing
 non-sensitive diagnostics. Restoring an old generation never restores revoked rights.
 An independent keyboard/native exit must release an obstructing editor surface.
+The [owned X11 lifetime boundary](../delivery/packages/w-25-editor-exit.md) admits
+the recovery input path before the child can obstruct input. Native process exit
+and restored external input/pixels are separate observations. Emergency release
+does not acknowledge a document commit, Cancel, or draft restoration. The
+[checkpoint](../delivery/editor-exit-handoff.md) qualifies only that experiment;
+actual desktop/editor integration and platform-specific escape discovery remain open.
 
 | Failure | Required action |
 |---|---|

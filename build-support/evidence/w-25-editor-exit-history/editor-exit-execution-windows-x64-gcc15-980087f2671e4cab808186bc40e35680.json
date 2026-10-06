@@ -1,0 +1,36 @@
+[
+  {
+    "phase": "preflight",
+    "step": "focus",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-06T12:55:17.712320+00:00",
+    "finished_at": "2026-10-06T12:55:18.305748+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 5368709120,\n  \"checkout_out_bytes\": 1238629954,\n  \"linux_campaign_bytes\": 3047691464,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "phase": "focus",
+    "step": "focus",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "out/campaign/run_editor_exit_step.py",
+      "windows-x64-gcc15",
+      "focus"
+    ],
+    "started_at": "2026-10-06T12:55:18.306298+00:00",
+    "finished_at": "2026-10-06T12:55:19.014509+00:00",
+    "exit": 0,
+    "stdout": "Test project D:/Projects/SysPane/syspane/out/build/windows-x64-gcc15\n    Start 21: composition.graph\n1/2 Test #21: composition.graph ................   Passed    0.08 sec\n    Start 22: composition.reject_forbidden\n2/2 Test #22: composition.reject_forbidden .....   Passed    0.07 sec\n\n100% tests passed, 0 tests failed out of 2\n\nTotal Test time (real) =   0.16 sec\n\n\nAttempt: D:\\Projects\\SysPane\\syspane\\out\\campaign\\w-25-editor-exit\\windows-x64-gcc15-focus-7529266888\n",
+    "stderr": ""
+  }
+]

@@ -12,6 +12,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Current state and next admitted boundary](current-state.md) — An honest resumption point for the initial greenfield specification.
 - [Synchronized data owner checkpoint](data-view-handoff.md) — Bind atomic model admission, independent lease state and revocable presentation to portable execution evidence.
 - [Independent diagnostic implementation checkpoint](diagnostic-handoff.md) — Bind independent public reporting and native inspector startup to scoped Windows/Linux evidence.
+- [Independent editor lifetime checkpoint](editor-exit-handoff.md) — An owned X11 candidate has independent keyboard and native exit with external process, pixel and input evidence.
 - [Independent recent-failure metadata checkpoint](failure-metadata-handoff.md) — Bind bounded native fault records, private file handling and policy-gated diagnostic projection to current evidence.
 - [Foundation implementation handoff](foundation-handoff.md) — Resume the admitted campaign from tested model builds and local smoke packages.
 - [Standalone native GJS measurement-clock checkpoint](gjs-clock-handoff.md) — Exact native clock strings, authenticated peer lifetime and deterministic resource cleanup before live desktop freshness.

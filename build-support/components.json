@@ -1274,6 +1274,59 @@
         "windows-x64-gcc15",
         "linux-x64-gcc13"
       ]
+    },
+    {
+      "id": "editor-exit",
+      "target": "syspane_editor_exit",
+      "type": "STATIC_LIBRARY",
+      "source_owner": "source/interfaces/",
+      "public_interfaces": [
+        "source/interfaces/editor_exit_x11.hpp"
+      ],
+      "private_interfaces": [],
+      "sources": [
+        "source/interfaces/editor_exit_x11.cpp"
+      ],
+      "allowed_dependencies": [
+        "X11::X11"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
+    },
+    {
+      "id": "editor-exit-probe",
+      "target": "syspane_editor_exit_probe",
+      "type": "EXECUTABLE",
+      "source_owner": "source/application/",
+      "public_interfaces": [],
+      "private_interfaces": [],
+      "sources": [
+        "source/application/editor_exit_probe.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_editor_exit",
+        "syspane_child",
+        "PkgConfig::GTK3",
+        "X11::X11"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
     }
   ]
 }

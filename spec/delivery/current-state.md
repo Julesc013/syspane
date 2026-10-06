@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-06T12:30:00Z", "scope": "Independent render-failure detection, automatic owned shell replacement and recovered operational pixels"}
+updated: {"by": "codex", "at": "2026-10-06T13:00:00Z", "scope": "Independent owned X11 editor lifetime, native escape and restored input"}
 ---
 
 # Current state and next admitted boundary
@@ -23,8 +23,11 @@ owner. Stopped/hidden drawing and a frozen owned shell recover current original
 pixels after native overview dismissal. External pixels reject false progress;
 typed revocation prevents replacement while collection continues. All eight current
 controls and 33 adversarial evidence checks pass their required outcomes. This is
-one finite owned laboratory composition. Next close native editor-exit recovery and
-installed controller/session/policy/demand ownership; complete desktop editions and
+one finite owned laboratory composition. The subsequent [editor lifetime checkpoint](editor-exit-handoff.md)
+tests an independent keyboard/GTK exit owner against a stopped owned candidate,
+including restored external pixels/input, keymap loss and owner-loss cleanup.
+Next connect that owner to the actual desktop/editor role and close installed
+controller/session/policy/demand ownership; complete desktop editions and
 the independently blocked native platform tracks remain required.
 
 ## Repository checkpoint: 2026-10-05
@@ -445,7 +448,9 @@ now supplies same-session automatic shell replacement and original measured-stat
 reattachment, with recovered operational pixels after native overview dismissal.
 Independent render-progress failure now drives that replacement owner, including
 stopped/hidden drawing and a frozen shell. Complete product controller policy/demand,
-general delivery queues, overview-free recovery and native editor-exit recovery next.
+general delivery queues, overview-free recovery and actual desktop/editor integration next.
+The isolated X11 editor lifetime has independent exit evidence; it does not implement
+scene transactions, fullscreen recovery discovery or installed ownership.
 Actual native topology faults and Windows full-table notification
 coverage remain unqualified. The native
 inventory probe now connects bounded subscription/demand and queue revocation to

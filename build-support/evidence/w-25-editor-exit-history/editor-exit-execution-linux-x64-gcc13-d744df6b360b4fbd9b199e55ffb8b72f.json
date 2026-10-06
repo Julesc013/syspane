@@ -1,0 +1,116 @@
+[
+  {
+    "phase": "preflight",
+    "step": "configure",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-06T12:59:28.121011+00:00",
+    "finished_at": "2026-10-06T12:59:33.386404+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 5368709120,\n  \"checkout_out_bytes\": 1239674163,\n  \"linux_campaign_bytes\": 3051705444,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "phase": "configure",
+    "step": "configure",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "out/campaign/run_editor_exit_step.py",
+      "linux-x64-gcc13",
+      "configure"
+    ],
+    "started_at": "2026-10-06T12:59:33.386801+00:00",
+    "finished_at": "2026-10-06T12:59:44.786295+00:00",
+    "exit": 0,
+    "stdout": "Preset CMake variables:\n\n  BUILD_TESTING=\"ON\"\n  CMAKE_BUILD_TYPE=\"Debug\"\n  CMAKE_CXX_COMPILER=\"g++\"\n  SYSPANE_PROFILE=\"linux-x64-gcc13\"\n\nprofile verified: linux-x64-gcc13\nvendored dependency digests: pass\ndiagnostic toolkit verified: GTK 3.24.41 / Ubuntu 3.24.41-4ubuntu1.3\nnative GJS clock build dependencies verified\n-- Configuring done (6.0s)\n-- Generating done (0.0s)\n-- Build files have been written to: /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n\n\nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-25-editor-exit/linux-x64-gcc13-configure-4ae2789415\n",
+    "stderr": ""
+  },
+  {
+    "phase": "preflight",
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-06T12:59:44.786649+00:00",
+    "finished_at": "2026-10-06T12:59:45.277486+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 5368709120,\n  \"checkout_out_bytes\": 1240643078,\n  \"linux_campaign_bytes\": 3051705055,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "phase": "build",
+    "step": "build",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "out/campaign/run_editor_exit_step.py",
+      "linux-x64-gcc13",
+      "build"
+    ],
+    "started_at": "2026-10-06T12:59:45.277904+00:00",
+    "finished_at": "2026-10-06T12:59:50.485059+00:00",
+    "exit": 0,
+    "stdout": "ninja: no work to do.\n\n\nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-25-editor-exit/linux-x64-gcc13-build-e000193d82\n",
+    "stderr": ""
+  },
+  {
+    "phase": "preflight",
+    "step": "focus",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-06T12:59:50.485379+00:00",
+    "finished_at": "2026-10-06T12:59:50.974341+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 5368709120,\n  \"checkout_out_bytes\": 1241611018,\n  \"linux_campaign_bytes\": 3051705055,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "phase": "focus",
+    "step": "focus",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "out/campaign/run_editor_exit_step.py",
+      "linux-x64-gcc13",
+      "focus"
+    ],
+    "started_at": "2026-10-06T12:59:50.974654+00:00",
+    "finished_at": "2026-10-06T13:00:00.248546+00:00",
+    "exit": 0,
+    "stdout": "Test project /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n    Start 7: native.EDITOR-EXIT\n1/1 Test #7: native.EDITOR-EXIT ...............   Passed    4.16 sec\n\n100% tests passed, 0 tests failed out of 1\n\nTotal Test time (real) =   4.16 sec\n\n\nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-25-editor-exit/linux-x64-gcc13-focus-902d57cb39\n",
+    "stderr": ""
+  }
+]

@@ -63,7 +63,7 @@
         "SP-PROCESSES",
         "SP-PERFORMANCE"
       ],
-      "sha256": "867a925a4230504dd8c4e044677fb75c00e3f7b23247cc2ae9914001ae154829"
+      "sha256": "86eb2a52c7462b421d4a5db035674cf8cddd6f7738548651f7a5617a43979434"
     },
     {
       "id": "SP-SCHEDULER",
@@ -358,7 +358,7 @@
         "SP-CAMPAIGN-ADMISSION",
         "SP-CURRENT"
       ],
-      "sha256": "988e10edfef1a38c3182ca255d043986b93f3c498e735da04517e616419e9088"
+      "sha256": "b200d4e31d4c0f92eb0bc3ef65b8798b8bc486fa61be7763ba79c2cdafdb5898"
     },
     {
       "id": "SP-CONSUMER-CONTINUITY-HANDOFF",
@@ -388,7 +388,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "e165c2215e32b10eab9666bde6afab373755e389f2e37a1d79c44cec324dafc6"
+      "sha256": "9b3d5dcb4fb9eec9432eb3bbbc656921129148ddf7b8304aa53db40303652d38"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -411,6 +411,16 @@
         "SP-W25-PACKAGE"
       ],
       "sha256": "5461b39ac919832366c4e92ad6b9d9065321c7a9f6df2967c2951117a1c1badc"
+    },
+    {
+      "id": "SP-EDITOR-EXIT-HANDOFF",
+      "path": "delivery/editor-exit-handoff.md",
+      "title": "Independent editor lifetime checkpoint",
+      "description": "An owned X11 candidate has independent keyboard and native exit with external process, pixel and input evidence.",
+      "requires": [
+        "SP-W25-EDITOR-EXIT"
+      ],
+      "sha256": "e24a9f08fb24a2cd0f720612ddad43ea209ff21e2ffe34ddfed2d8ce761041aa"
     },
     {
       "id": "SP-FAILURE-METADATA-HANDOFF",
@@ -1095,6 +1105,18 @@
       "sha256": "6a37b7ba107ccfee99bab7c1d2176b57c33dbdbe8c3effa53ad03fd7b790025a"
     },
     {
+      "id": "SP-W25-EDITOR-EXIT",
+      "path": "delivery/packages/w-25-editor-exit.md",
+      "title": "Independent X11 editor lifetime experiment",
+      "description": "Close and investigate an independent native escape from an owned obstructing editor process.",
+      "requires": [
+        "SP-RECOVERY",
+        "SP-EDITOR",
+        "SP-W25-PACKAGE"
+      ],
+      "sha256": "af9a8bae71e635dc436e881b4c1e1f89c91f0840745a5791b0d4e952e4b2ec8f"
+    },
+    {
       "id": "SP-W25-FAILURE-METADATA",
       "path": "delivery/packages/w-25-failure-metadata.md",
       "title": "W-25 bounded recent-failure metadata",
@@ -1310,7 +1332,7 @@
         "SP-TRANSPORT",
         "SP-COMPOSITION"
       ],
-      "sha256": "fd60a4875e88c1fd1a9968b1a062e49823fadb2db4b4e10356e6345d6c515482"
+      "sha256": "9c017c24b01cd82077cd842f94e9af9f1f1e2f923f48ca30a1d01ec3903d55c2"
     },
     {
       "id": "SP-W25-STATE-IMPORT",
@@ -1621,7 +1643,7 @@
         "SP-RENDERING",
         "SP-COMMANDS"
       ],
-      "sha256": "c8dd24a24277d7ea02b8d62bd6ff09d1f05f5707947f1dc9b6319de826f4f51f"
+      "sha256": "07fa95c80bfa943e604f74e908aeec3f5c8057e134113056be4ad4cba57bfcdc"
     },
     {
       "id": "SP-POLICY",

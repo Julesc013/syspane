@@ -426,3 +426,11 @@ It retains independent pixel acceptance, native peer/child ownership, concurrent
 consumer-lease failure and expiry-before-dispatch ordering. Its
 [checkpoint](../gnome-render-watch-handoff.md) preserves native failures and results.
 Automatic renderer replacement and complete visible/editor recovery remain open.
+
+## Independent editor lifetime increment
+
+The [owned X11 editor-exit package](w-25-editor-exit.md) connects a separate
+keyboard/GTK owner to one isolated interactive candidate. Its
+[checkpoint](../editor-exit-handoff.md) preserves stopped/drag/lock, keymap-loss,
+owner-loss and admission-conflict results with external pixels/input. Actual
+editor transactions, fullscreen discovery and installed recovery remain open.

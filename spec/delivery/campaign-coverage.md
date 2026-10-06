@@ -98,3 +98,10 @@ replacement must resume both genuine paint progress and current external pixels.
 Overview dismissal remains an explicit native action. Editor-exit recovery,
 installed controller/policy/demand and complete editions remain required; none of
 the independent Windows, historical guest or Mac laboratory gaps is closed.
+
+
+The [independent editor lifetime checkpoint](editor-exit-handoff.md) adds nine
+owned-X11 cases for native keyboard/GTK exit, confirmed child removal and restored
+external input/pixels. It closes a W-25 lifetime prerequisite. Actual scene editing,
+fullscreen escape discovery, continuing-collection integration and installed
+controller/policy/demand ownership remain open; no blocked platform lab is qualified.

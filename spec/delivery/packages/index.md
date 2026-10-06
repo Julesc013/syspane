@@ -25,6 +25,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [W-25 collection continuity across consumer replacement](w-25-consumer-continuity.md) — Keep real collection independently owned while admitting bounded replacement consumers.
 - [W-25 automatic recovery from independent render failure](w-25-controller-render-recovery.md) — Connect the existing render and health guards to the persistent native desktop replacement owner.
 - [W-25 synchronized model view and policy lifetime](w-25-data-view.md) — Join model validation, producer leases and revocable presentation without enabling an unspecified wire subscription.
+- [Independent X11 editor lifetime experiment](w-25-editor-exit.md) — Close and investigate an independent native escape from an owned obstructing editor process.
 - [W-25 bounded recent-failure metadata](w-25-failure-metadata.md) — Connect recorded failures to independent diagnosis without treating a local file as live health or policy authority.
 - [W-25 native GJS measurement-clock boundary](w-25-gjs-clock.md) — Expose the existing authenticated Linux clock through a bounded native object before enabling renderer freshness.
 - [W-25 native GJS measured network consumer](w-25-gjs-network-view.md) — Reuse the protocol, revocable data owner and measured network projection in the native shell process.
