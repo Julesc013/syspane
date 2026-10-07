@@ -27,6 +27,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Shared editor draft checkpoint](editor-draft-handoff.md) — Typed scene edits, bounded history and the common resource-aware transaction owner.
 - [Independent editor lifetime checkpoint](editor-exit-handoff.md) — An owned X11 candidate has independent keyboard and native exit with external process, pixel and input evidence.
 - [Independent recent-failure metadata checkpoint](failure-metadata-handoff.md) — Bind bounded native fault records, private file handling and policy-gated diagnostic projection to current evidence.
+- [Native editor refresh fairness checkpoint](focus-idle-handoff.md) — Observed GTK/ATK focus starvation, scoped style transitions and unchanged native acceptance.
 - [Foundation implementation handoff](foundation-handoff.md) — Resume the admitted campaign from tested model builds and local smoke packages.
 - [Standalone native GJS measurement-clock checkpoint](gjs-clock-handoff.md) — Exact native clock strings, authenticated peer lifetime and deterministic resource cleanup before live desktop freshness.
 - [Native GJS measured network consumer checkpoint](gjs-network-view-handoff.md) — Shared measured model, policy and lease semantics inside the native GJS runtime before operational shell delivery.

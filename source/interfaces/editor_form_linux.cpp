@@ -28,6 +28,10 @@ double number(const std::string& value){
 }
 const Json& authored_widget(const Json& scene,const std::string& id){for(const auto& w:scene["widgets"])if(w["id"]==id)return w;throw protocol::Error("editor.target");}
 bool contains(const s::Rect& r,double x,double y){return x>=r.x&&y>=r.y&&x<r.x+r.width&&y<r.y+r.height;}
+void immediate_style(GtkWidget* widget,gpointer provider){
+    gtk_style_context_add_provider(gtk_widget_get_style_context(widget),GTK_STYLE_PROVIDER(provider),GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+    if(GTK_IS_CONTAINER(widget))gtk_container_forall(GTK_CONTAINER(widget),immediate_style,provider);
+}
 }
 struct EditorForm::Impl {
     EditorDraft draft;c::Authority authority;c::Policy current;Json settings;std::optional<SettingsResources> resources;s::Topology topology;std::string display,worker;
@@ -356,7 +360,16 @@ EditorForm::EditorForm(c::Authority a,c::Policy p,c::Authored value,std::string 
     g_signal_connect(i.canvas,"key-press-event",G_CALLBACK(+[](GtkWidget*,GdkEventKey* e,gpointer p)->gboolean{auto& o=*static_cast<Impl*>(p);bool handled=false;o.event([&]{handled=o.key(e);});return handled;}),&i);
     g_signal_connect(i.canvas,"focus-out-event",G_CALLBACK(+[](GtkWidget*,GdkEventFocus*,gpointer p)->gboolean{auto& o=*static_cast<Impl*>(p);o.gesture.reset();o.guide_feedback();gtk_widget_queue_draw(o.canvas);return FALSE;}),&i);
     g_signal_connect(i.root,"destroy",G_CALLBACK(+[](GtkWidget*,gpointer p){static_cast<Impl*>(p)->shut();}),&i);
-    i.preview();i.list();i.sync(true);i.timer=g_timeout_add(40,+[](gpointer p)->gboolean{auto& o=*static_cast<Impl*>(p);try{if(o.surface)o.surface->poll_image_jobs();if(!o.closed)gtk_widget_queue_draw(o.canvas);}catch(...){o.shut();}return G_SOURCE_CONTINUE;},&i);
+    // Sensitive/focus style transitions otherwise keep the shared frame clock
+    // painting after policy erasure. Apply state changes immediately within this
+    // editor; preserve theme values and the desktop's animation preference.
+    auto* style=gtk_css_provider_new();gtk_css_provider_load_from_data(style,"* { transition: none; }",-1,nullptr);
+    immediate_style(i.root,style);g_object_unref(style);
+    // GTK publishes accessible focus from normal-idle work. A paint can take
+    // longer than this interval; periodic refresh must yield to that work rather
+    // than keeping higher-priority drawing continuously ready. Unavailable drafts
+    // already queued their clearing paint; do not keep repainting that empty view.
+    i.preview();i.list();i.sync(true);i.timer=g_timeout_add_full(G_PRIORITY_LOW,40,+[](gpointer p)->gboolean{auto& o=*static_cast<Impl*>(p);try{if(o.surface)o.surface->poll_image_jobs();if(!o.closed&&o.draft.available())gtk_widget_queue_draw(o.canvas);}catch(...){o.shut();}return G_SOURCE_CONTINUE;},&i,nullptr);
 }
 EditorForm::~EditorForm()=default;
 GtkWidget* EditorForm::widget()const{impl_->owner();return impl_->root;}

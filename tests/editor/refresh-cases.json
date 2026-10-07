@@ -1,0 +1,18 @@
+{
+  "version": "0.1.0",
+  "drawing_delay_us": 60000,
+  "sample_interval_ms": 50,
+  "minimum_paints": 5,
+  "minimum_starved_focus_us": 2000000,
+  "cases": [
+    {"id": "loaded-drag", "mode": "drag", "legacy_priority": false, "expected": "pass"},
+    {"id": "loaded-revoke", "mode": "revoke", "legacy_priority": false, "expected": "pass"},
+    {"id": "legacy-priority", "mode": "drag", "legacy_priority": true, "expected": "focus_starvation"}
+  ],
+  "preserved_oracles": [
+    "tests/editor/native_editor.py",
+    "tests/editor/native_observation.py",
+    "tests/configuration/large-command-cases.json"
+  ],
+  "scope": "The existing real keyboard, exact scene/pixel/history/storage/recovery and erasure checks run with bounded extra drawing cost. The negative control restores only the old periodic refresh priority and must fail focused-state observation while GTK focus and drawing remain live."
+}

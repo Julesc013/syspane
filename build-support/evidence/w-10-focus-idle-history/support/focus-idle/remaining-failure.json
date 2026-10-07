@@ -1,0 +1,19 @@
+{
+  "recorded_at": "2026-10-07T21:55:29.439336+00:00",
+  "outcome": "unresolved",
+  "record": {
+    "path": "build-support/evidence/w-10-focus-idle-native/binding-d46e37083044.json",
+    "sha256": "eb7ef0a9e0711e2457eda19966c558be41529a8a07882a6f8776393d8cb091ca"
+  },
+  "archive": {
+    "path": "build-support/evidence/w-10-focus-idle-native/binding-d46e37083044.zip",
+    "sha256": "a8415ddc1bbd7904be038e6d23a120beed51ec4cf0ac6a95f8e9a046287fc3c2"
+  },
+  "failed_child_sha256": "3f145e68f4adedeea363423eebc941cd2d185afe31699e292c89d24ffb124f5a",
+  "oracle_sha256": "e27bfd4b0dd2ff57326e703e7307fe8a3649c0a31631cd1602a06b4ca9f1e168",
+  "harness_sha256": "1744ca0af7cc0d7caa799fbac55459534ceb1507cdbf23755dc5b51e6b3046db",
+  "observation_helper_sha256": "0639714b300d355bbcea40cc3999c12cba5dfdd779934f834c08ca38760ac21b",
+  "finding": "Selector mode fails during PAGE_TAB discovery when libatspi get_role raises timeout from dbind. The completed field/table/direct/persistent cases pass. The full matrix is failed; remaining cases did not execute. The exception is in captured stderr, not a fabricated error field in the child record.",
+  "limitation": "The failed role query did not capture its object/address or explicit wire reply. Existing recorded UnknownObject replies occurred during separate observations and do not establish the role-timeout cause. No product/environment attribution is claimed.",
+  "next_step": "Admit a bounded role/hierarchy observation investigation. Capture the exact object, owner, method and reply/lifetime around tab discovery while retaining the same selector, inputs, keyboard actions, deadlines and full expected scene/storage outcomes. Calibrate any observation-helper correction independently before rerunning dependent suites."
+}

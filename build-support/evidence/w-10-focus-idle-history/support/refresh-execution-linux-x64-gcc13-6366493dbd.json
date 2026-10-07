@@ -1,0 +1,38 @@
+[
+  {
+    "step": "configure",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-07T21:29:22.297382+00:00",
+    "finished_at": "2026-10-07T21:29:30.739462+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2393990894,\n  \"linux_campaign_bytes\": 4785909985,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "configure",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/refresh_step.py",
+      "linux-x64-gcc13",
+      "configure"
+    ],
+    "started_at": "2026-10-07T21:29:30.739986+00:00",
+    "finished_at": "2026-10-07T21:29:38.976206+00:00",
+    "exit": 1,
+    "stdout": "Preset CMake variables:\n\n  BUILD_TESTING=\"ON\"\n  CMAKE_BUILD_TYPE=\"Debug\"\n  CMAKE_CXX_COMPILER=\"g++\"\n  SYSPANE_PROFILE=\"linux-x64-gcc13\"\n\nprofile verified: linux-x64-gcc13\nvendored dependency digests: pass\ndiagnostic toolkit verified: GTK 3.24.41 / Ubuntu 3.24.41-4ubuntu1.3\nnative text dependency identity verified: 358 files\n-- Configuring incomplete, errors occurred!\n Traceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/build-support/check_image_runtime.py\", line 22, in <module>\n    if __name__=='__main__':print('native image dependencies verified:',len(verify()['files']),'files')\n                                                                            ^^^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/build-support/check_image_runtime.py\", line 20, in verify\n    value=identify();assert value==json.loads((ROOT/'image-runtime.json').read_text()),'Image runtime/header/kernel identity differs; revise the development profile explicitly'\n                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Image runtime/header/kernel identity differs; revise the development profile explicitly\nCMake Error at CMakeLists.txt:146 (message):\n  Native image dependencies differ from the pinned development profile\n\n\n\nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-focus-idle/linux-x64-gcc13-configure-19fe07e1c2\n",
+    "stderr": ""
+  }
+]

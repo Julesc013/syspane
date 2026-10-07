@@ -7,11 +7,19 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
+The [refresh-fairness checkpoint](spec/delivery/focus-idle-handoff.md) fixes
+GTK accessibility-focus starvation under sustained preview drawing. Scoped editor
+style transitions also preserve prompt policy erasure. Passing matrices cover 165
+existing cases and three new load/fault cases, including the prior large-scene
+regression. Binding/inspector accessibility timeouts and a scene-image timing
+failure keep full regression qualification open.
+Installed integration and complete editions remain in progress.
+
 The [edit-lock checkpoint](spec/delivery/edit-locks-handoff.md) adds persistent
 widget/group locks, explicit unlock and inherited protection in the native editor.
 Scene 0.4 and command 0.6 preserve existing contracts and require negotiation.
-Intermittent Apply/Undo keyboard-focus failures remain under investigation. Installed
-integration, remaining authoring and all complete editions remain open.
+Its large-scene focus regression now has the refresh-fairness checkpoint above.
+Installed integration, remaining authoring and all complete editions remain open.
 
 The [container checkpoint](spec/delivery/containers-handoff.md) adds explicit Wrap
 and Unwrap for flowing, nested and responsive layout rules. Native dialogs show the

@@ -1739,3 +1739,19 @@ content and adds edit_locked; command 0.6 requires the resource, scene-content,
 large-command and edit-lock negotiation gates. Use `editor.LOCK-*` and native
 `native.EDITOR-LOCKS` in the existing presets. The [package](../../spec/delivery/packages/w-10-edit-locks.md)
 and [handoff](../../spec/delivery/edit-locks-handoff.md) record scope and evidence.
+
+
+### Native editor refresh fairness
+
+The editor refresh timer runs below normal-idle GTK accessibility work. Immediate
+widget style transitions are scoped to the editor; global animation settings are
+unchanged. After the usual workspace preflight/configure/build, run
+`ctest --preset linux-x64-gcc13 -R "^native[.]EDITOR-REFRESH$" --output-on-failure`.
+The owned non-root Xvfb/D-Bus test injects 60 ms paint work, reuses the original
+large-scene keyboard/pixel/storage/erasure oracle, and positively detects the old
+timer priority as a fault. Do not preload its module into an ordinary session.
+
+The [handoff](../../spec/delivery/focus-idle-handoff.md) retains the original failures,
+the auxiliary observation correction, paired animation experiment and exact runtime
+admissions. Changed text/image runtime identities require configure verification
+and existing native rendering/decode checks with unchanged expected outputs.

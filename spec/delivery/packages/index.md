@@ -49,6 +49,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Native widget content and scene-theme properties](w-10-content-properties.md) — Expose existing table, chart, image and theme contracts through a bounded native buffer and the shared editor draft.
 - [Persistent native editor locks](w-10-edit-locks.md) — Versioned authored locks, explicit unlock, protected direct editing and durable native verification.
 - [Shared editor draft and typed local operations](w-10-editor-draft.md) — Reversible scene editing through the existing authored transaction owner.
+- [Native editor focus and refresh fairness](w-10-focus-idle.md) — Explain preserved focus failures without weakening native interaction or erasure checks.
 - [Reversible native grouping with explicit geometry](w-10-group.md) — Close group and ungroup transformations, selection history, drawing order and native persistence.
 - [Native keyboard input completion](w-10-keyboard-input.md) — Acknowledge navigation before requesting a different focus target.
 - [Native layout and responsive variant authoring](w-10-layout-authoring.md) — Author every existing layout kind, ordered breakpoint, display intent and active fixed variant through the shared draft.

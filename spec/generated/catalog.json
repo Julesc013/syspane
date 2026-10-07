@@ -489,7 +489,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "d1fb13d1800479742bf8293bf9ff2eccb0768a194b6853979a408ab13613ae90"
+      "sha256": "dc3264f8cce28651cf7cfc9316f987bb07b4aaeab8076d62ccb40f55e2dfb74d"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -577,6 +577,17 @@
         "SP-CAMPAIGN-ADMISSION"
       ],
       "sha256": "05e07d0b832cb58bb6e962184a3d140ee22e65db08c4a855cd818ec070f5bc71"
+    },
+    {
+      "id": "SP-FOCUS-IDLE-HANDOFF",
+      "path": "delivery/focus-idle-handoff.md",
+      "title": "Native editor refresh fairness checkpoint",
+      "description": "Observed GTK/ATK focus starvation, scoped style transitions and unchanged native acceptance.",
+      "requires": [
+        "SP-W10-FOCUS-IDLE",
+        "SP-EDIT-LOCKS-HANDOFF"
+      ],
+      "sha256": "c442889e7b49ec84ff3406ebecdb693b3b40467f7131aa80d5e1f641ada602b1"
     },
     {
       "id": "SP-FOUNDATION-HANDOFF",
@@ -1678,6 +1689,17 @@
         "SP-W09-SCENE-CONTENT"
       ],
       "sha256": "d8154eb12bc6a139fc3a18e9b56910c6f4ba8d80b5cd49d8eddd8cc9187ba1f2"
+    },
+    {
+      "id": "SP-W10-FOCUS-IDLE",
+      "path": "delivery/packages/w-10-focus-idle.md",
+      "title": "Native editor focus and refresh fairness",
+      "description": "Explain preserved focus failures without weakening native interaction or erasure checks.",
+      "requires": [
+        "SP-W10-EDIT-LOCKS",
+        "SP-EDIT-LOCKS-HANDOFF"
+      ],
+      "sha256": "5bbe317acaff4123ef8e928d12c147aff047b5f22ee180e85fe5e301869b59d3"
     },
     {
       "id": "SP-W10-GROUP",

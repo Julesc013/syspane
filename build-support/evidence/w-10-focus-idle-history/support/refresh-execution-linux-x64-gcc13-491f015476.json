@@ -1,0 +1,110 @@
+[
+  {
+    "step": "configure",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-07T21:30:55.742007+00:00",
+    "finished_at": "2026-10-07T21:30:57.001277+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2395728023,\n  \"linux_campaign_bytes\": 4785909985,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "configure",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/refresh_step.py",
+      "linux-x64-gcc13",
+      "configure"
+    ],
+    "started_at": "2026-10-07T21:30:57.001663+00:00",
+    "finished_at": "2026-10-07T21:31:08.792014+00:00",
+    "exit": 0,
+    "stdout": "Preset CMake variables:\n\n  BUILD_TESTING=\"ON\"\n  CMAKE_BUILD_TYPE=\"Debug\"\n  CMAKE_CXX_COMPILER=\"g++\"\n  SYSPANE_PROFILE=\"linux-x64-gcc13\"\n\nprofile verified: linux-x64-gcc13\nvendored dependency digests: pass\ndiagnostic toolkit verified: GTK 3.24.41 / Ubuntu 3.24.41-4ubuntu1.3\nnative text dependency identity verified: 358 files\nnative image dependencies verified: 344 files\nnative GJS clock build dependencies verified\n-- Configuring done (6.3s)\n-- Generating done (0.1s)\n-- Build files have been written to: /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-focus-idle/linux-x64-gcc13-configure-01655daedb\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-07T21:31:08.792337+00:00",
+    "finished_at": "2026-10-07T21:31:09.539451+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2397373014,\n  \"linux_campaign_bytes\": 4785907763,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/refresh_step.py",
+      "linux-x64-gcc13",
+      "build"
+    ],
+    "started_at": "2026-10-07T21:31:09.539776+00:00",
+    "finished_at": "2026-10-07T21:31:14.666277+00:00",
+    "exit": 0,
+    "stdout": "[1/2] Building CXX object CMakeFiles/syspane_editor_refresh_probe.dir/tests/editor/refresh_probe_linux.cpp.o\n[2/2] Linking CXX shared module libsyspane_editor_refresh_probe.so\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-focus-idle/linux-x64-gcc13-build-2d9313810f\n",
+    "stderr": ""
+  },
+  {
+    "step": "refresh",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-07T21:31:14.666678+00:00",
+    "finished_at": "2026-10-07T21:31:15.445597+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2399017163,\n  \"linux_campaign_bytes\": 4786042479,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "refresh",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/refresh_step.py",
+      "linux-x64-gcc13",
+      "refresh"
+    ],
+    "started_at": "2026-10-07T21:31:15.446098+00:00",
+    "finished_at": "2026-10-07T21:31:28.757904+00:00",
+    "exit": 8,
+    "stdout": "Test project /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n    Start 93: native.EDITOR-REFRESH\n1/1 Test #93: native.EDITOR-REFRESH ............***Failed    7.80 sec\n/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/editor-refresh-cac1c9011c94/result.json fail\nTraceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_refresh.py\", line 56, in <module>\n    if __name__=='__main__':main()\n                            ^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_refresh.py\", line 40, in main\n    assert child.returncode==0 and detail['outcome']=='pass',(name,detail.get('error'),err.decode(errors='replace'))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: ('loaded-drag', 'PIXEL_MOVE observation deadline', 'dbus-daemon[617056]: [session uid=1000 pid=617056] Activating service name=\\'org.a11y.Bus\\' requested by \\':1.0\\' (uid=1000 pid=617057 comm=\"/usr/bin/python3 /mnt/d/Projects/SysPane/syspane/t\" label=\"kernel\")\\ndbus-daemon[617056]: [session uid=1000 pid=617056] Successfully activated service \\'org.a11y.Bus\\'\\ndbus-daemon[617067]: Activating service name=\\'org.a11y.atspi.Registry\\' requested by \\':1.2\\' (uid=1000 pid=617073 comm=\"/home/ir4runner/.cache/syspane/campaign-229a498/li\" label=\"kernel\")\\ndbus-daemon[617067]: Successfully activated service \\'org.a11y.atspi.Registry\\'\\nTraceback (most recent call last):\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_refresh.py\", line 56, in <module>\\n    if __name__==\\'__main__\\':main()\\n                            ^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_refresh.py\", line 23, in main\\n    if sys.argv[1]==\\'--observe\\':observe(*map(Path,sys.argv[2:5]),sys.argv[5],True);return\\n                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_editor.py\", line 308, in observe\\n    try:recovery(h) if mode.startswith(\\'recovery-\\') else exercise(h)\\n                                                         ^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_editor.py\", line 237, in exercise\\n    h.click(\\'undo\\');h.wait(lambda:h.number(\\'x\\')==40 and h.number(\\'y\\')==40);assert not h.sensitive(\\'undo\\')\\n    ^^^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_editor.py\", line 155, in click\\n    assert self.sensitive(id),(id,self.status());self.focus(id);self.input.press(0x20)\\n                                                 ^^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_editor.py\", line 150, in focus\\n    self.wait(lambda:self.state(obj,self.Atspi.StateType.FOCUSED))\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_editor.py\", line 80, in wait\\n    assert time.monotonic()<end,self.stage+\\' observation deadline\\'\\n           ^^^^^^^^^^^^^^^^^^^^\\nAssertionError: PIXEL_MOVE observation deadline\\n')\n\n\n0% tests passed, 1 tests failed out of 1\n\nTotal Test time (real) =   7.81 sec\n\nThe following tests FAILED:\n\t 93 - native.EDITOR-REFRESH (Failed)\n Errors while running CTest\n\nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-focus-idle/linux-x64-gcc13-refresh-a151a25776\n",
+    "stderr": ""
+  }
+]

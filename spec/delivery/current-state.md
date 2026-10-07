@@ -12,20 +12,27 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-07T12:48:21.342320+00:00", "scope": "Persistent editor lock checkpoint and remaining editor/release boundaries"}
+updated: {"by": "codex", "at": "2026-10-07T22:02:10.361592+00:00", "scope": "Refresh-fairness repair and preserved binding observation failure"}
 ---
 
 # Current state and next admitted boundary
 
-The latest [edit-lock checkpoint](edit-locks-handoff.md) adds persistent locks
-through scene 0.4, negotiated command 0.6 and the existing resource/transaction
-owners. Native selection remains available while ordinary protected edits reject;
-explicit unlock and Undo/Redo preserve exact authored state. Continue conditional
+The latest [refresh-fairness checkpoint](focus-idle-handoff.md) identifies and
+repairs GTK/ATK focus starvation caused by continuous higher-priority preview
+refresh. Scoped editor style transitions preserve prompt erasure under the same
+load. Passing matrices cover 165 existing editor cases and three load/fault cases;
+311 non-native Linux checks and 13 of 15 rendering checks also pass. The large-command
+matrix passes, but binding authoring fails at a libatspi tab-role query. Investigate
+that preserved timeout, the inspector selected-row timeout and scene-image timing
+failure next; this checkpoint is not fully qualified. Earlier
+unrelated interface/focus causes remain open. Then continue conditional
 visibility/typography, clipboard/recovery drafts and installed ownership, then
 full accessibility/performance and all five complete-edition release tracks.
-First investigate the intermittent large-scene Apply/Undo focus failures captured
-again in this checkpoint; both full regression attempts failed. Bounded diagnostic
-passes do not establish a cause or repair it. This checkpoint is not qualified.
+
+The earlier [edit-lock checkpoint](edit-locks-handoff.md) adds persistent locks
+through scene 0.4, negotiated command 0.6 and the existing resource/transaction
+owners. Its original failed focus regressions remain preserved; the new checkpoint
+above records the repaired behavior without rewriting historical outcomes.
 
 The earlier [container checkpoint](containers-handoff.md) adds explicit Wrap and
 Unwrap for flowing children, nested containers and responsive rules. Children keep
