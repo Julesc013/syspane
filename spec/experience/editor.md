@@ -93,3 +93,13 @@ history. One validated batch changes content/theme; Cancel and value-identical S
 preserve the preview. Disclosure loss erases fields and native choice models.
 The [checkpoint](../delivery/content-properties-handoff.md) records executed scope
 and remaining binding/authoring/installed acceptance.
+
+## Native binding-authoring boundary
+
+The [binding-authoring package](../delivery/packages/w-10-binding-authoring.md)
+defines typed selectors/pins, private ordered predicate/sort buffers and atomic
+table query edits. The [text extension](../delivery/packages/w-10-binding-text.md)
+preserves control characters through an explicit escaped format. Existing resolver,
+policy, history and persistence owners remain authoritative. The
+[checkpoint](../delivery/binding-authoring-handoff.md) records scoped evidence;
+provider discovery, installed routing and complete editions remain open.

@@ -7,6 +7,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Binaries, packages and release identity](artifacts.md) — Choose stable binary roles and exact offline payload closure.
 - [October audit disposition](audit-2026-10-04.md) — Map supplied recommendations to amended owners without treating review text as authority.
 - [Authored transactions and Linux generation recovery](authored-transactions-handoff.md) — Preserve coherent scene/settings changes and committed request identities through native process interruption.
+- [Native binding-authoring checkpoint](binding-authoring-handoff.md) — Typed selectors and explicit pins through the existing native draft and resolver.
 - [Policy-bound scene binding checkpoint](bindings-handoff.md) — Scoped authored selectors and pins consume accepted telemetry with explicit identity, freshness and permission.
 - [Foundation and native-experiment campaign admission](campaign-admission.md) — Record the user-admitted implementation scope and the first package's closed boundaries.
 - [Foundation campaign coverage audit](campaign-coverage.md) — Map the admitted campaign to actual evidence and remaining implementation or native laboratory requirements.

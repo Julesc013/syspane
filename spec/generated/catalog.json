@@ -361,6 +361,18 @@
       "sha256": "239fd88085d29a991f5e25d042bd66ae7017b6aa838718ca3f76b7e65fd3f68d"
     },
     {
+      "id": "SP-BINDING-AUTHORING-HANDOFF",
+      "path": "delivery/binding-authoring-handoff.md",
+      "title": "Native binding-authoring checkpoint",
+      "description": "Typed selectors and explicit pins through the existing native draft and resolver.",
+      "requires": [
+        "SP-W10-BINDING-AUTHORING",
+        "SP-W10-BINDING-TEXT",
+        "SP-CONTENT-PROPERTIES-HANDOFF"
+      ],
+      "sha256": "691ccf1eb6e29450ccd6193da5935289112ccb38fd1f92c41a80471b826d7d22"
+    },
+    {
       "id": "SP-BINDINGS-HANDOFF",
       "path": "delivery/bindings-handoff.md",
       "title": "Policy-bound scene binding checkpoint",
@@ -465,7 +477,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "d1ca6bf2851fd1e783a363b1d7dd68f6ced52a6129ced9d8425f5fca867c3826"
+      "sha256": "eb2ee46aca69fb7523afb6b684d956ba9b3d0158324867e0ddab5eff85928072"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -1530,6 +1542,28 @@
       "sha256": "e5b427a02aa1e91287706cc28eb536e998c0c94b491d15ded8e6635b06ebab4f"
     },
     {
+      "id": "SP-W10-BINDING-AUTHORING",
+      "path": "delivery/packages/w-10-binding-authoring.md",
+      "title": "Native authored binding controls",
+      "description": "Edit selectors and explicit pins through the existing scene draft and resolver.",
+      "requires": [
+        "SP-W10-CONTENT-PROPERTIES",
+        "SP-W09-BINDINGS",
+        "SP-EDITOR"
+      ],
+      "sha256": "0051ed84d58d57a4e4387df2ee546e63d3a0e0d65bd38171bd1644025b50e173"
+    },
+    {
+      "id": "SP-W10-BINDING-TEXT",
+      "path": "delivery/packages/w-10-binding-text.md",
+      "title": "Lossless native binding text",
+      "description": "Preserve binding strings that native text buffers cannot represent literally.",
+      "requires": [
+        "SP-W10-BINDING-AUTHORING"
+      ],
+      "sha256": "7345db9ec2e238cd9f5bf58e32b498007a835f1253d308f735e1a2f5c56e302b"
+    },
+    {
       "id": "SP-W10-CONTENT-PROPERTIES",
       "path": "delivery/packages/w-10-content-properties.md",
       "title": "Native widget content and scene-theme properties",
@@ -2358,7 +2392,7 @@
         "SP-RENDERING",
         "SP-COMMANDS"
       ],
-      "sha256": "8a4d8bf5fbc801ffe4543fd79b9e594d3907f708b1606b20c8cefe0686c1a5f0"
+      "sha256": "33b5f39405ef6244914a902f48d5d0639a609bae3455419a8ccec2b786473769"
     },
     {
       "id": "SP-POLICY",

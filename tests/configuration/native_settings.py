@@ -130,7 +130,11 @@ def observe(exe,folder,mode):
             app=desktop.get_child_at_index(n)
             if app.get_process_id()==proc.pid:pending.append((app,0))
         while pending:
-            obj,depth=pending.pop();obj.clear_cache();out.append(obj);assert len(out)<=512 and depth<=20
+            obj,depth=pending.pop()
+            # GTK may destroy a child between child-count and indexed retrieval.
+            # Required controls and their live values must still be observed below.
+            if obj is None:continue
+            obj.clear_cache();out.append(obj);assert len(out)<=512 and depth<=20
             for n in range(obj.get_child_count()):pending.append((obj.get_child_at_index(n),depth+1))
         return out
     def find(id):return next((o for o in objects() if o.get_description()==id),None)

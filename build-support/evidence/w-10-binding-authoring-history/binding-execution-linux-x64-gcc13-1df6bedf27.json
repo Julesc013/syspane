@@ -1,0 +1,38 @@
+[
+  {
+    "step": "bindings",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-07T07:30:36.326751+00:00",
+    "finished_at": "2026-10-07T07:30:37.274107+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2166235957,\n  \"linux_campaign_bytes\": 4652027408,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "bindings",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/binding_step.py",
+      "linux-x64-gcc13",
+      "bindings"
+    ],
+    "started_at": "2026-10-07T07:30:37.274719+00:00",
+    "finished_at": "2026-10-07T07:30:53.449032+00:00",
+    "exit": 8,
+    "stdout": "Test project /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n    Start 66: native.EDITOR-BINDING-AUTHORING\n1/1 Test #66: native.EDITOR-BINDING-AUTHORING ...***Failed    4.89 sec\n/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/binding-12b3d8e49f94/result.json fail\nTraceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_binding_authoring.py\", line 136, in <module>\n    if __name__=='__main__':main()\n                            ^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_binding_authoring.py\", line 130, in main\n    (folder/(mode+'.stdout')).write_bytes(stdout);(folder/(mode+'.stderr')).write_bytes(stderr);assert not timed_out and child.returncode==0,(mode,stderr.decode(errors='replace'));case=json.loads((folder/mode/'result.json').read_text());assert case['outcome']=='pass';report['cases'].append(dict(case=mode,outcome='pass',fault_detected=case.get('fault_detected',False),record_sha256=sha(folder/mode/'result.json')))\n                                                                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: ('table', 'dbus-daemon[188866]: [session uid=1000 pid=188866] Activating service name=\\'org.a11y.Bus\\' requested by \\':1.0\\' (uid=1000 pid=188867 comm=\"/usr/bin/python3 /mnt/d/Projects/SysPane/syspane/t\" label=\"kernel\")\\ndbus-daemon[188866]: [session uid=1000 pid=188866] Successfully activated service \\'org.a11y.Bus\\'\\ndbus-daemon[188875]: Activating service name=\\'org.a11y.atspi.Registry\\' requested by \\':1.1\\' (uid=1000 pid=188878 comm=\"/home/ir4runner/.cache/syspane/campaign-229a498/li\" label=\"kernel\")\\ndbus-daemon[188875]: Successfully activated service \\'org.a11y.atspi.Registry\\'\\nTraceback (most recent call last):\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_binding_authoring.py\", line 136, in <module>\\n    if __name__==\\'__main__\\':main()\\n                            ^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_binding_authoring.py\", line 120, in main\\n    if sys.argv[1]==\\'--observe\\':observe(*map(Path,sys.argv[2:5]),sys.argv[5]);return\\n                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_binding_authoring.py\", line 109, in observe\\n    try:exercise(h)\\n        ^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_binding_authoring.py\", line 93, in exercise\\n    populate(h,mode);h.check()\\n    ^^^^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_binding_authoring.py\", line 58, in populate\\n    field(h,\\'limit\\',\\'1\\');tab(h,\\'filter\\');predicate(h,\\'entity.id\\',\\'ne\\',\\'text\\',\\'nic:absent\\');tab(h,\\'order\\');order(h,\\'entity.id\\',\\'descending\\');return\\n                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_binding_authoring.py\", line 53, in predicate\\n    h.click(\\'binding.predicate-Add\\');field(h,\\'predicate_field\\',f);choose(h,\\'op\\',0,op);choose(h,\\'type\\',0,kind);field(h,\\'value\\',v)\\n                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_binding_authoring.py\", line 21, in field\\n    obj=h.find(\\'binding.\\'+id);assert h.sensitive(\\'binding.\\'+id)\\n                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^\\nAssertionError\\n')\n\n\n0% tests passed, 1 tests failed out of 1\n\nTotal Test time (real) =   4.90 sec\n\nThe following tests FAILED:\n\t 66 - native.EDITOR-BINDING-AUTHORING (Failed)\n Errors while running CTest\n\nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-binding-authoring/linux-x64-gcc13-bindings-b5bc682865\n",
+    "stderr": ""
+  }
+]

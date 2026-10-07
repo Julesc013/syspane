@@ -1,0 +1,146 @@
+[
+  {
+    "step": "configure",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-07T07:35:29.365850+00:00",
+    "finished_at": "2026-10-07T07:35:36.637241+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2169385424,\n  \"linux_campaign_bytes\": 4652314392,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "configure",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/binding_step.py",
+      "linux-x64-gcc13",
+      "configure"
+    ],
+    "started_at": "2026-10-07T07:35:36.637647+00:00",
+    "finished_at": "2026-10-07T07:35:53.692684+00:00",
+    "exit": 0,
+    "stdout": "Preset CMake variables:\n\n  BUILD_TESTING=\"ON\"\n  CMAKE_BUILD_TYPE=\"Debug\"\n  CMAKE_CXX_COMPILER=\"g++\"\n  SYSPANE_PROFILE=\"linux-x64-gcc13\"\n\nprofile verified: linux-x64-gcc13\nvendored dependency digests: pass\ndiagnostic toolkit verified: GTK 3.24.41 / Ubuntu 3.24.41-4ubuntu1.3\nnative text dependency identity verified: 358 files\nnative image dependencies verified: 344 files\nnative GJS clock build dependencies verified\n-- Configuring done (5.5s)\n-- Generating done (0.1s)\n-- Build files have been written to: /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-binding-authoring/linux-x64-gcc13-configure-190d5a776e\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-07T07:35:53.693010+00:00",
+    "finished_at": "2026-10-07T07:35:54.381092+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2170951672,\n  \"linux_campaign_bytes\": 4652314109,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/binding_step.py",
+      "linux-x64-gcc13",
+      "build"
+    ],
+    "started_at": "2026-10-07T07:35:54.381361+00:00",
+    "finished_at": "2026-10-07T07:36:14.421811+00:00",
+    "exit": 0,
+    "stdout": "[1/12] Building CXX object CMakeFiles/syspane_private_text.dir/source/interfaces/private_text_linux.cpp.o\n[2/12] Linking CXX static library libsyspane_private_text.a\n[3/12] Building CXX object CMakeFiles/syspane_editor_draft.dir/source/interfaces/editor_binding.cpp.o\n[4/12] Linking CXX static library libsyspane_editor_draft.a\n[5/12] Building CXX object CMakeFiles/syspane_editor_tests.dir/tests/editor/binding_authoring_tests.cpp.o\n[6/12] Linking CXX executable syspane_large_command_tests\n[7/12] Building CXX object CMakeFiles/syspane_editor_form.dir/source/interfaces/editor_binding_form_linux.cpp.o\n[8/12] Linking CXX executable syspane_editor_tests\n[9/12] Linking CXX executable syspane_settings_window\n[10/12] Building CXX object CMakeFiles/syspane_editor_form.dir/source/interfaces/editor_form_linux.cpp.o\n[11/12] Linking CXX static library libsyspane_editor_form.a\n[12/12] Linking CXX executable syspane_editor_window\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-binding-authoring/linux-x64-gcc13-build-ab711d8528\n",
+    "stderr": ""
+  },
+  {
+    "step": "focus",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-07T07:36:14.422149+00:00",
+    "finished_at": "2026-10-07T07:36:15.102965+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2172518600,\n  \"linux_campaign_bytes\": 4652514040,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "focus",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/binding_step.py",
+      "linux-x64-gcc13",
+      "focus"
+    ],
+    "started_at": "2026-10-07T07:36:15.103249+00:00",
+    "finished_at": "2026-10-07T07:36:27.178685+00:00",
+    "exit": 0,
+    "stdout": "Test project /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n    Start 40: editor.BINDING-MAPPING\n1/7 Test #40: editor.BINDING-MAPPING ...........   Passed    0.33 sec\n    Start 41: editor.BINDING-NUMBERS\n2/7 Test #41: editor.BINDING-NUMBERS ...........   Passed    0.03 sec\n    Start 42: editor.BINDING-ATOMIC\n3/7 Test #42: editor.BINDING-ATOMIC ............   Passed    0.06 sec\n    Start 43: editor.BINDING-BOUNDS\n4/7 Test #43: editor.BINDING-BOUNDS ............   Passed    0.04 sec\n    Start 44: editor.BINDING-HISTORY\n5/7 Test #44: editor.BINDING-HISTORY ...........   Passed    0.64 sec\n    Start 45: editor.BINDING-POLICY\n6/7 Test #45: editor.BINDING-POLICY ............   Passed    0.08 sec\n    Start 46: editor.BINDING-TEXT\n7/7 Test #46: editor.BINDING-TEXT ..............   Passed    0.06 sec\n\n100% tests passed, 0 tests failed out of 7\n\nTotal Test time (real) =   1.24 sec\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-binding-authoring/linux-x64-gcc13-focus-fe10e7922a\n",
+    "stderr": ""
+  },
+  {
+    "step": "bindings",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-07T07:36:27.179042+00:00",
+    "finished_at": "2026-10-07T07:36:27.870769+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2174086540,\n  \"linux_campaign_bytes\": 4652514392,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "bindings",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/binding_step.py",
+      "linux-x64-gcc13",
+      "bindings"
+    ],
+    "started_at": "2026-10-07T07:36:27.871107+00:00",
+    "finished_at": "2026-10-07T07:36:58.959921+00:00",
+    "exit": 8,
+    "stdout": "Test project /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n    Start 67: native.EDITOR-BINDING-AUTHORING\n1/1 Test #67: native.EDITOR-BINDING-AUTHORING ...***Failed   18.65 sec\n/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/binding-7dc22bc4a4ac/result.json fail\nTraceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_binding_authoring.py\", line 145, in <module>\n    if __name__=='__main__':main()\n                            ^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_binding_authoring.py\", line 139, in main\n    (folder/(mode+'.stdout')).write_bytes(stdout);(folder/(mode+'.stderr')).write_bytes(stderr);assert not timed_out and child.returncode==0,(mode,stderr.decode(errors='replace'));case=json.loads((folder/mode/'result.json').read_text());assert case['outcome']=='pass';report['cases'].append(dict(case=mode,outcome='pass',fault_detected=case.get('fault_detected',False),record_sha256=sha(folder/mode/'result.json')))\n                                                                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: ('selector', 'dbus-daemon[193092]: [session uid=1000 pid=193092] Activating service name=\\'org.a11y.Bus\\' requested by \\':1.0\\' (uid=1000 pid=193093 comm=\"/usr/bin/python3 /mnt/d/Projects/SysPane/syspane/t\" label=\"kernel\")\\ndbus-daemon[193092]: [session uid=1000 pid=193092] Successfully activated service \\'org.a11y.Bus\\'\\ndbus-daemon[193101]: Activating service name=\\'org.a11y.atspi.Registry\\' requested by \\':1.1\\' (uid=1000 pid=193104 comm=\"/home/ir4runner/.cache/syspane/campaign-229a498/li\" label=\"kernel\")\\ndbus-daemon[193101]: Successfully activated service \\'org.a11y.atspi.Registry\\'\\nTraceback (most recent call last):\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_binding_authoring.py\", line 145, in <module>\\n    if __name__==\\'__main__\\':main()\\n                            ^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_binding_authoring.py\", line 128, in main\\n    if sys.argv[1]==\\'--observe\\':observe(*map(Path,sys.argv[2:5]),sys.argv[5]);return\\n                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_binding_authoring.py\", line 117, in observe\\n    try:exercise(h)\\n        ^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_binding_authoring.py\", line 98, in exercise\\n    populate(h,mode);h.check()\\n    ^^^^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_binding_authoring.py\", line 69, in populate\\n    predicate(h,\\'network.receive_bytes\\',\\'eq\\',\\'number\\',\\'9007199254740993\\');predicate(h,\\'entity.display_name\\',\\'ne\\',\\'text\\',\\'Ghost\\');h.click(\\'binding.predicate-Up\\')\\n                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_binding_authoring.py\", line 54, in predicate\\n    h.click(\\'binding.predicate-Add\\');field(h,\\'predicate_field\\',f);choose(h,\\'op\\',0,op);choose(h,\\'type\\',0,kind);field(h,\\'value\\',v)\\n                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_binding_authoring.py\", line 23, in field\\n    assert h.Atspi.EditableText.set_text_contents(obj.get_editable_text_iface(),str(text));h.wait(lambda:value(h,id)==str(text))\\n                                                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_editor.py\", line 73, in wait\\n    assert time.monotonic()<end,self.stage+\\' observation deadline\\'\\n           ^^^^^^^^^^^^^^^^^^^^\\nAssertionError: BUFFER observation deadline\\n')\n\n\n0% tests passed, 1 tests failed out of 1\n\nTotal Test time (real) =  18.65 sec\n\nThe following tests FAILED:\n\t 67 - native.EDITOR-BINDING-AUTHORING (Failed)\n Errors while running CTest\n\nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-binding-authoring/linux-x64-gcc13-bindings-ca3f80db40\n",
+    "stderr": ""
+  }
+]

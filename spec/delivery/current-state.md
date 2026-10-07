@@ -12,14 +12,21 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-07T06:54:22.139245+00:00", "scope": "Native content properties, independent persistence/erasure evidence and remaining editor boundaries"}
+updated: {"by": "codex", "at": "2026-10-07T07:50:13.434728+00:00", "scope": "Native binding authoring, exact text/number input and remaining editor boundaries"}
 ---
 
 # Current state and next admitted boundary
 
-The latest [content-properties checkpoint](content-properties-handoff.md) adds
+The latest [binding-authoring checkpoint](binding-authoring-handoff.md) adds native
+selectors and explicit pins, ordered predicates/sort keys, exact integer values,
+lossless text and atomic table queries. Next close non-text insertion, responsive/
+flow transforms and remaining property controls, then installed controller/catalog/
+policy ownership and independent entry/restoration. W-10 and all complete editions
+remain in progress.
+
+The earlier [content-properties checkpoint](content-properties-handoff.md) adds
 bounded table, chart, image and scene-theme input through the existing atomic
-draft and resource owners. Next close binding authoring, non-text insertion,
+draft and resource owners. Binding authoring now has the checkpoint above. Next close non-text insertion,
 responsive/flow transforms and remaining property controls, then installed
 controller ownership and independent entry/restoration. W-10 remains in progress;
 complete editions and historical qualification remain open.

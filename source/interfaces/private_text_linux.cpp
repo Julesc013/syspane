@@ -36,7 +36,7 @@ static void sp_private_text_init(SpPrivateText* self){
 
 namespace syspane::interfaces {
 GtkWidget* private_text(unsigned limit,bool multiline){
-    if(!limit||limit>1024)throw std::invalid_argument("text.limit");
+    if(!limit||limit>4096)throw std::invalid_argument("text.limit");
     auto* value=static_cast<SpPrivateText*>(g_object_new(sp_private_text_get_type(),nullptr));value->limit=limit;value->multiline=multiline;
     gtk_text_view_set_wrap_mode(GTK_TEXT_VIEW(value),multiline?GTK_WRAP_WORD_CHAR:GTK_WRAP_NONE);return GTK_WIDGET(value);
 }

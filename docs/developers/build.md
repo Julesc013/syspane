@@ -1628,3 +1628,21 @@ bytes. Deliberate wrong-content, frozen-preview and retained-content faults must
 be positively distinguished. Run the existing snap/group/arrange/editor/large-command
 matrices after changes to the shared native owner. See the
 [handoff](../../spec/delivery/content-properties-handoff.md) for source-bound evidence.
+
+### Native binding authoring
+
+`source/interfaces/editor_binding.*` projects bounded private fields into existing
+binding descriptors and one WidgetContentEdit. The lazily created GTK dialog owns
+no DataView, persistent mapping or transaction ledger. The shared validator and
+EditorDraft remain authoritative. Private text allows a caller-supplied 4096-character
+editing buffer for escaped strings; all existing controls retain their own limits.
+
+After ordinary preflight and profile build, run `ctest --preset <profile> -R "^editor[.]BINDING-" --output-on-failure`.
+The seven families use fixed complete scenes and exact text/number values. In the
+unprivileged Linux laboratory run `ctest --preset linux-x64-gcc13 -R "^native[.]EDITOR-BINDING-AUTHORING$" --output-on-failure`.
+Fifteen cases operate actual controls, compare pixels/accessibility and coherent
+stored resources, reopen and challenge deliberate storage/preview/retention faults.
+The original binding cases and supplemental escaped-text cases remain separate
+frozen inputs. Rerun existing content, snap, group, arrange, editor, settings and
+large-command matrices when changing shared native ownership or private controls.
+See the [handoff](../../spec/delivery/binding-authoring-handoff.md) for exact evidence.

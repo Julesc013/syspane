@@ -5,6 +5,7 @@
 #include <limits>
 namespace c=syspane::configuration;namespace p=syspane::protocol;namespace ui=syspane::interfaces;using c::Json;
 void run_arrange(const std::string&,const std::string&);
+void run_binding_authoring(const std::string&,const std::string&);
 void run_content_properties(const std::string&,const std::string&);
 void run_snap(const std::string&,const std::string&);
 void run_group(const std::string&,const std::string&);
@@ -48,6 +49,7 @@ void run(const std::string& name,const std::string& root){
     if(name.substr(0,8)=="ARRANGE-"){run_arrange(name.substr(8),root);return;}
     if(name.substr(0,5)=="SNAP-"){run_snap(name.substr(5),root);return;}
     if(name.substr(0,6)=="GROUP-"){run_group(name.substr(6),root);return;}
+    if(name.substr(0,8)=="BINDING-"){run_binding_authoring(name.substr(8),root);return;}
     if(name.substr(0,8)=="CONTENT-"){run_content_properties(name.substr(8),root);return;}
     Fixture f(root);const auto cases=settings_fixture::read(root+"/tests/editor/cases.json");auto d=draft(f);
     if(name=="OPERATIONS"){

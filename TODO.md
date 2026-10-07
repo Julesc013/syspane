@@ -34,6 +34,7 @@ behaviour has been implemented. See [audit disposition](spec/delivery/audit-2026
 - [x] W-10 grouping: exact fixed-variant group/ungroup, nested selection history, explicit overlap order and native persistence/recovery checks. See the [handoff](spec/delivery/group-handoff.md).
 - [x] W-10 snapping: deterministic grid/alignment guides, captured pointer projection, visible/accessible feedback and native persistence/recovery evidence. See the [handoff](spec/delivery/snap-handoff.md).
 - [x] W-10 native content properties: bounded table/chart/image/theme buffers, atomic history, immutable resource choices and independent native persistence/erasure checks. See the [handoff](spec/delivery/content-properties-handoff.md).
+- [x] W-10 native binding authoring: exact typed selectors/pins, ordered predicates/sort keys, atomic table queries, lossless text and independent native save/recovery/erasure evidence. See the [handoff](spec/delivery/binding-authoring-handoff.md).
 - [ ] W-10 complete editor: installed scene-aligned desktop entry/restoration, responsive/flow container transforms, responsive arrangement, remaining property/authoring contracts, clipboard authority, recovery drafts, full accessibility/performance and other native adapters.
 
 - [x] W-09 shared binding prerequisite: existing selector/pin grammar, scoped policy borrowing, exact numeric comparisons, bounded ordering and explicit incomplete states. See the [handoff](spec/delivery/bindings-handoff.md).

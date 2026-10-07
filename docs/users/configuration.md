@@ -75,6 +75,27 @@ discards only the dialog buffer. Invalid values leave the draft unchanged and st
 available for correction. A policy change closes and clears the dialog; disclosure
 regrant requires Reload. Text body remains in the basic property fields.
 
-These controls currently run in the owned Linux development editor. Binding
-creation, new non-text widgets, remaining properties and installed desktop routing
-are still pending. See the [recorded scope](../../spec/delivery/content-properties-handoff.md).
+These controls currently run in the owned Linux development editor. New non-text
+widgets, remaining properties and installed desktop routing are still pending. See the [recorded scope](../../spec/delivery/content-properties-handoff.md).
+
+## Bindings in the development editor
+
+Select one value, status, chart or table and choose **Bindings**. Target controls
+edit a selector, a direct producer/epoch/entity pin or a persistent namespace/key.
+Selectors use an explicit host, session or registered-asset scope. Filter and Order
+tabs add, remove and reorder predicates and sort keys. Numbers retain exact whole
+values within signed/unsigned 64-bit limits. Text and boolean are distinct types.
+For tables, choose the column to change its value field; target/filter/order changes
+apply to every column together, preserving labels and order. Duplicate fields reject.
+
+**Set bindings** creates one reversible draft change; **Apply** saves it. Invalid
+input stays available for correction. Cancel bindings discards private input only.
+Missing sources stay missing; entering a persistent key does not create a mapping
+or grant access. Existing legacy pins stay inert until explicitly rebound.
+
+Text normally uses literal format. Escaped format accepts one quoted string, such
+as `"a\tb"` for a tab or `"a\\tb"` for a literal backslash and t. Existing control
+characters automatically open in escaped format. The saved value remains the
+decoded text; choosing a format determines how the current buffer is interpreted.
+The existing 512-character limit applies after decoding. Policy/owner changes
+erase all input, including hidden rows. See the [recorded scope](../../spec/delivery/binding-authoring-handoff.md).

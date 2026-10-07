@@ -42,6 +42,8 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Policy-owned native scalar scene surface](w-09-scene-surface.md) — Compose authored scenes, pinned resources, scalar bindings and native text under one erasing presentation owner.
 - [Policy-owned collection tables](w-09-table-surface.md) — Render identity-aligned collection columns with bounded native grid geometry and explicit incomplete states.
 - [Deterministic native alignment and spacing](w-10-arrange.md) — Close fixed-base arrange operations through shared drafts and independent native evidence.
+- [Native authored binding controls](w-10-binding-authoring.md) — Edit selectors and explicit pins through the existing scene draft and resolver.
+- [Lossless native binding text](w-10-binding-text.md) — Preserve binding strings that native text buffers cannot represent literally.
 - [Native widget content and scene-theme properties](w-10-content-properties.md) — Expose existing table, chart, image and theme contracts through a bounded native buffer and the shared editor draft.
 - [Shared editor draft and typed local operations](w-10-editor-draft.md) — Reversible scene editing through the existing authored transaction owner.
 - [Reversible native grouping with explicit geometry](w-10-group.md) — Close group and ungroup transformations, selection history, drawing order and native persistence.
