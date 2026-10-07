@@ -7,6 +7,12 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
+The [shared editor draft](spec/delivery/editor-draft-handoff.md) adds typed widget,
+hierarchy, layout and content edits with bounded undo/redo and exact discard.
+Apply uses the existing resource-aware transaction owner and preserves unresolved
+requests for reconciliation. The native editor, larger-scene command envelope and
+complete authoring controls remain required.
+
 The [resource-aware settings checkpoint](spec/delivery/settings-resources-handoff.md)
 preserves exact package/preset identity through native edits, theme changes and
 restart. Saves use stored resource bytes after imports are unavailable; an independent

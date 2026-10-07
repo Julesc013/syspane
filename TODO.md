@@ -26,6 +26,9 @@ behaviour has been implemented. See [audit disposition](spec/delivery/audit-2026
 
 ## First native campaign
 
+- [x] W-10 shared editor draft: typed atomic scene operations, stable selection, bounded undo/redo, local preview, exact discard and resource-aware Apply/reconciliation. See the [handoff](spec/delivery/editor-draft-handoff.md).
+- [ ] W-10 complete editor: native interactive surface with independent escape, mouse/keyboard equivalence, snap/align/distribute, remaining authoring contracts, clipboard authority, recovery drafts, larger-scene transport and installed routing.
+
 - [x] W-09 shared binding prerequisite: existing selector/pin grammar, scoped policy borrowing, exact numeric comparisons, bounded ordering and explicit incomplete states. See the [handoff](spec/delivery/bindings-handoff.md).
 - [x] W-09 shared layout prerequisite: deterministic admitted layouts, display fallback, safe exclusions, breakpoints, readable minima, priority allocation and exact pixel bounds. See the [handoff](spec/delivery/layout-handoff.md).
 - [x] W-09 Linux text prerequisite: native glyph metrics/raster, Unicode/fallback, bounded wrapping, semantic color and contrast checks. See the [handoff](spec/delivery/native-text-handoff.md).

@@ -44,6 +44,9 @@ public:
     const Json& last_result()const{return result_;}
     std::optional<std::uint64_t> revision()const;
 private:
+    friend class EditorDraft;
+    // Shared scene staging for the editor; publication still uses begin/complete.
+    void replace_scene(Json);
     void editable()const;
     bool disclosure()const;
     void erase();

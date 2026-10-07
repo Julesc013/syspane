@@ -443,7 +443,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "57a28215a89f14e8ae787382956946d3c57129fad0e119a7f6d9ee08c4017504"
+      "sha256": "b1a127bfe28965911e0f5e1f2b56e7237f7ef73633a27f46d18661a01a666bed"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -488,6 +488,17 @@
         "SP-W25-PACKAGE"
       ],
       "sha256": "5461b39ac919832366c4e92ad6b9d9065321c7a9f6df2967c2951117a1c1badc"
+    },
+    {
+      "id": "SP-EDITOR-DRAFT-HANDOFF",
+      "path": "delivery/editor-draft-handoff.md",
+      "title": "Shared editor draft checkpoint",
+      "description": "Typed scene edits, bounded history and the common resource-aware transaction owner.",
+      "requires": [
+        "SP-W10-EDITOR-DRAFT",
+        "SP-SETTINGS-RESOURCES-HANDOFF"
+      ],
+      "sha256": "31d4c8fdc4efb66c186c260c59de9150fb9519cf1b17327c9d49ea6ca36bbbc8"
     },
     {
       "id": "SP-EDITOR-EXIT-HANDOFF",
@@ -1439,6 +1450,18 @@
       "sha256": "7fb876ed52e3b865800726c35fff7f3349c8841c1a50f4a444f24d6479782ca3"
     },
     {
+      "id": "SP-W10-EDITOR-DRAFT",
+      "path": "delivery/packages/w-10-editor-draft.md",
+      "title": "Shared editor draft and typed local operations",
+      "description": "Reversible scene editing through the existing authored transaction owner.",
+      "requires": [
+        "SP-EDITOR",
+        "SP-W11-SETTINGS-RESOURCES",
+        "SP-W09-SCENE-CONTENT"
+      ],
+      "sha256": "d517fde81c53474c01445d3aef57cf650b3bf5466b45a11ab0ce387d6b76e5bb"
+    },
+    {
       "id": "SP-W11-NATIVE-SETTINGS",
       "path": "delivery/packages/w-11-native-settings.md",
       "title": "Native settings drafts and transaction results",
@@ -2197,7 +2220,7 @@
         "SP-RENDERING",
         "SP-COMMANDS"
       ],
-      "sha256": "07fa95c80bfa943e604f74e908aeec3f5c8057e134113056be4ad4cba57bfcdc"
+      "sha256": "14954297fb6b885cde44352dc4b744d7b0ded18962944da65df450628ff775b6"
     },
     {
       "id": "SP-POLICY",

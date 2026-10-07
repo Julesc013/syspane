@@ -1,0 +1,74 @@
+[
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-07T03:12:30.662547+00:00",
+    "finished_at": "2026-10-07T03:12:32.076826+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 6442450944,\n  \"checkout_out_bytes\": 1708842466,\n  \"linux_campaign_bytes\": 4451150683,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/editor_step.py",
+      "linux-x64-gcc13",
+      "build"
+    ],
+    "started_at": "2026-10-07T03:12:32.077233+00:00",
+    "finished_at": "2026-10-07T03:12:49.205194+00:00",
+    "exit": 0,
+    "stdout": "[1/4] Linking CXX executable syspane_settings_tests\n[2/4] Linking CXX executable syspane_settings_window\n[3/4] Building CXX object CMakeFiles/syspane_editor_tests.dir/tests/editor/editor_draft_tests.cpp.o\n[4/4] Linking CXX executable syspane_editor_tests\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-editor-draft/linux-x64-gcc13-build-846fb85a7a\n",
+    "stderr": ""
+  },
+  {
+    "step": "focus",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-07T03:12:49.205509+00:00",
+    "finished_at": "2026-10-07T03:12:50.071116+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 6442450944,\n  \"checkout_out_bytes\": 1710288747,\n  \"linux_campaign_bytes\": 4475432996,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "focus",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/editor_step.py",
+      "linux-x64-gcc13",
+      "focus"
+    ],
+    "started_at": "2026-10-07T03:12:50.071684+00:00",
+    "finished_at": "2026-10-07T03:13:21.687879+00:00",
+    "exit": 0,
+    "stdout": "Test project /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n      Start   1: editor.OPERATIONS\n 1/30 Test   #1: editor.OPERATIONS ................   Passed    1.02 sec\n      Start   2: editor.ATOMIC\n 2/30 Test   #2: editor.ATOMIC ....................   Passed    0.14 sec\n      Start   3: editor.SELECTION\n 3/30 Test   #3: editor.SELECTION .................   Passed    0.11 sec\n      Start   4: editor.HISTORY\n 4/30 Test   #4: editor.HISTORY ...................   Passed    3.80 sec\n      Start   5: editor.TRANSACTION\n 5/30 Test   #5: editor.TRANSACTION ...............   Passed    0.38 sec\n      Start   6: editor.POLICY\n 6/30 Test   #6: editor.POLICY ....................   Passed    0.46 sec\n      Start   7: editor.RECONCILE\n 7/30 Test   #7: editor.RECONCILE .................   Passed    0.25 sec\n      Start   8: editor.CONFLICT\n 8/30 Test   #8: editor.CONFLICT ..................   Passed    0.23 sec\n      Start   9: editor.CANCEL\n 9/30 Test   #9: editor.CANCEL ....................   Passed    0.21 sec\n      Start  10: editor.BOUNDS\n10/30 Test  #10: editor.BOUNDS ....................   Passed   10.25 sec\n      Start  11: editor.COMPAT\n11/30 Test  #11: editor.COMPAT ....................   Passed    0.08 sec\n      Start  12: settings.DRAFT\n12/30 Test  #12: settings.DRAFT ...................   Passed    0.04 sec\n      Start  13: settings.VALUES\n13/30 Test  #13: settings.VALUES ..................   Passed    0.08 sec\n      Start  14: settings.DEFAULT\n14/30 Test  #14: settings.DEFAULT .................   Passed    0.03 sec\n      Start  15: settings.PREVIEW\n15/30 Test  #15: settings.PREVIEW .................   Passed    0.03 sec\n      Start  16: settings.COMMIT\n16/30 Test  #16: settings.COMMIT ..................   Passed    0.03 sec\n      Start  17: settings.CANCEL\n17/30 Test  #17: settings.CANCEL ..................   Passed    0.03 sec\n      Start  18: settings.CONFLICT\n18/30 Test  #18: settings.CONFLICT ................   Passed    0.03 sec\n      Start  19: settings.POLICY\n19/30 Test  #19: settings.POLICY ..................   Passed    0.04 sec\n      Start  20: settings.RESULT-SCOPE\n20/30 Test  #20: settings.RESULT-SCOPE ............   Passed    0.13 sec\n      Start  21: settings.UNKNOWN\n21/30 Test  #21: settings.UNKNOWN .................   Passed    0.02 sec\n      Start  22: settings.BOUNDS\n22/30 Test  #22: settings.BOUNDS ..................   Passed    0.03 sec\n      Start  23: settings.CONTENT\n23/30 Test  #23: settings.CONTENT .................   Passed    0.15 sec\n      Start  24: settings.THEME\n24/30 Test  #24: settings.THEME ...................   Passed    0.23 sec\n      Start  25: settings.CONTENT-POLICY\n25/30 Test  #25: settings.CONTENT-POLICY ..........   Passed    0.23 sec\n      Start  26: settings.CONTENT-RELOAD\n26/30 Test  #26: settings.CONTENT-RELOAD ..........   Passed    0.18 sec\n      Start  27: settings.CONTENT-RESULT\n27/30 Test  #27: settings.CONTENT-RESULT ..........   Passed    0.25 sec\n      Start  28: settings.CONTENT-BOUNDS\n28/30 Test  #28: settings.CONTENT-BOUNDS ..........   Passed    0.12 sec\n      Start 183: composition.graph\n29/30 Test #183: composition.graph ................   Passed    0.10 sec\n      Start 184: composition.reject_forbidden\n30/30 Test #184: composition.reject_forbidden .....   Passed    0.21 sec\n\n100% tests passed, 0 tests failed out of 30\n\nTotal Test time (real) =  18.90 sec\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-editor-draft/linux-x64-gcc13-focus-f55724eabb\n",
+    "stderr": ""
+  }
+]

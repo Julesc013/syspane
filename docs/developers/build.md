@@ -1,5 +1,30 @@
 # Developer setup and checks
 
+The [editor draft package](../../spec/delivery/packages/w-10-editor-draft.md) adds
+`syspane_editor_draft` and `interfaces::EditorDraft`. Construct it on one serialized
+owner with the same coherent Authored/Authority/Policy/epoch and optional immutable
+SettingsResources context as settings. `execute(vector<SceneEdit>)` applies an atomic
+local batch; `scene()` is a const borrow valid only until the next mutation/policy
+call. Native preview caches need their own policy-owned erasure. This component
+creates no native surface, filesystem path, clipboard owner or persistence worker.
+
+Use stable IDs with `select`, typed property/content/theme/insert/remove/reparent/
+duplicate/move/resize operations, `undo`, `redo` and `discard`. Reparent coordinates
+stay parent-local; responsive layout variants need explicit layout edits. Call
+`begin("commit", fresh_request_id)` for Apply and route its exact body through the
+existing asynchronous command owner. Deliver results with `complete` or `reconciled`.
+Disconnect/callback failure remains unresolved; never retry under a new identity.
+Close erases local state and cannot reverse a submitted transaction.
+
+History holds at most 64 entries and 8 MiB of canonical scene/selection JSON bytes.
+Local scenes retain their 256 KiB contract, while oversized current wire commands
+reject without discarding the draft. The larger-scene envelope and native editing
+surface remain required. After normal workspace preflight/configure/build, run
+`ctest --preset <profile> -R '^(editor[.]|settings[.]|configuration[.]|composition[.]|protocol[.](POLICY-|DISCLOSURE-))' --output-on-failure`.
+Linux also runs the existing `native.SETTINGS-FORM` regression for the shared owner.
+The [handoff](../../spec/delivery/editor-draft-handoff.md) records exact evidence and
+the native editor's remaining acceptance gates.
+
 The [native settings package](../../spec/delivery/packages/w-11-native-settings.md)
 adds shared `interfaces::SettingsDraft` and Linux `interfaces::SettingsForm`. Construct
 the form on the GTK owner thread with a coherent Authored snapshot, authenticated

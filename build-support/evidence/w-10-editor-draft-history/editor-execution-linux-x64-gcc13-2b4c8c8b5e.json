@@ -1,0 +1,74 @@
+[
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-07T03:19:16.511771+00:00",
+    "finished_at": "2026-10-07T03:19:23.384339+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 6442450944,\n  \"checkout_out_bytes\": 1723129479,\n  \"linux_campaign_bytes\": 4437657563,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/editor_step.py",
+      "linux-x64-gcc13",
+      "build"
+    ],
+    "started_at": "2026-10-07T03:19:23.384815+00:00",
+    "finished_at": "2026-10-07T03:19:33.019861+00:00",
+    "exit": 0,
+    "stdout": "ninja: no work to do.\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-editor-draft/linux-x64-gcc13-build-e5b2a9d58f\n",
+    "stderr": ""
+  },
+  {
+    "step": "test",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-07T03:19:33.020169+00:00",
+    "finished_at": "2026-10-07T03:19:33.735646+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 6442450944,\n  \"checkout_out_bytes\": 1724575539,\n  \"linux_campaign_bytes\": 4437657563,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "test",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/editor_step.py",
+      "linux-x64-gcc13",
+      "test"
+    ],
+    "started_at": "2026-10-07T03:19:33.735959+00:00",
+    "finished_at": "2026-10-07T03:20:07.053534+00:00",
+    "exit": 0,
+    "stdout": "....   Passed    0.05 sec\n      Start 114: configuration.COMMAND-POLICY\n31/69 Test #114: configuration.COMMAND-POLICY ............   Passed    0.05 sec\n      Start 115: configuration.COMMAND-LIFETIME\n32/69 Test #115: configuration.COMMAND-LIFETIME ..........   Passed    0.03 sec\n      Start 116: configuration.COMMAND-CAPACITY\n33/69 Test #116: configuration.COMMAND-CAPACITY ..........   Passed    1.02 sec\n      Start 117: configuration.COMMAND-FAULT\n34/69 Test #117: configuration.COMMAND-FAULT .............   Passed    0.06 sec\n      Start 118: configuration.COMMAND-NEGOTIATE\n35/69 Test #118: configuration.COMMAND-NEGOTIATE .........   Passed    0.02 sec\n      Start 119: configuration.RECON-RECEIPTS\n36/69 Test #119: configuration.RECON-RECEIPTS ............   Passed    0.04 sec\n      Start 120: configuration.RECON-POLICY\n37/69 Test #120: configuration.RECON-POLICY ..............   Passed    0.03 sec\n      Start 121: configuration.RECON-CODEC\n38/69 Test #121: configuration.RECON-CODEC ...............   Passed    0.00 sec\n      Start 122: configuration.RECON-BOUNDS\n39/69 Test #122: configuration.RECON-BOUNDS ..............   Passed    0.06 sec\n      Start 123: configuration.SCENE-CONTENT-SCHEMA\n40/69 Test #123: configuration.SCENE-CONTENT-SCHEMA ......   Passed    0.12 sec\n      Start 124: configuration.SCENE-CONTENT-MIGRATION\n41/69 Test #124: configuration.SCENE-CONTENT-MIGRATION ...   Passed    0.02 sec\n      Start 125: configuration.SCENE-CONTENT-RESOURCES\n42/69 Test #125: configuration.SCENE-CONTENT-RESOURCES ...   Passed    0.13 sec\n      Start 126: configuration.SCENE-CONTENT-PREVIEW\n43/69 Test #126: configuration.SCENE-CONTENT-PREVIEW .....   Passed    0.05 sec\n      Start 127: configuration.SCENE-CONTENT-TX\n44/69 Test #127: configuration.SCENE-CONTENT-TX ..........   Passed    0.14 sec\n      Start 128: configuration.SCENE-CONTENT-SESSION\n45/69 Test #128: configuration.SCENE-CONTENT-SESSION .....   Passed    0.11 sec\n      Start 129: configuration.AUTH-SCHEMA\n46/69 Test #129: configuration.AUTH-SCHEMA ...............   Passed    0.04 sec\n      Start 130: configuration.TX-MIXED\n47/69 Test #130: configuration.TX-MIXED ..................   Passed    0.03 sec\n      Start 131: configuration.TX-CONFLICT\n48/69 Test #131: configuration.TX-CONFLICT ...............   Passed    0.03 sec\n      Start 132: configuration.TX-REPLAY\n49/69 Test #132: configuration.TX-REPLAY .................   Passed    0.04 sec\n      Start 133: configuration.TX-INTERRUPT\n50/69 Test #133: configuration.TX-INTERRUPT ..............   Passed    0.06 sec\n      Start 134: configuration.TX-BOUNDS\n51/69 Test #134: configuration.TX-BOUNDS .................   Passed    0.04 sec\n      Start 135: configuration.TX-CAPACITY\n52/69 Test #135: configuration.TX-CAPACITY ...............   Passed    1.10 sec\n      Start 136: configuration.DIGEST\n53/69 Test #136: configuration.DIGEST ....................   Passed    0.02 sec\n      Start 137: configuration.DIGEST-CONTENT\n54/69 Test #137: configuration.DIGEST-CONTENT ............   Passed    0.56 sec\n      Start 138: configuration.CONTENT-COMPOSE\n55/69 Test #138: configuration.CONTENT-COMPOSE ...........   Passed    0.05 sec\n      Start 139: configuration.CONTENT-PINS\n56/69 Test #139: configuration.CONTENT-PINS ..............   Passed    0.11 sec\n      Start 140: configuration.CONTENT-PATHS\n57/69 Test #140: configuration.CONTENT-PATHS .............   Passed    0.01 sec\n      Start 141: configuration.CONTENT-BOUNDS\n58/69 Test #141: configuration.CONTENT-BOUNDS ............   Passed    0.08 sec\n      Start 142: configuration.CONTENT-CAPABILITIES\n59/69 Test #142: configuration.CONTENT-CAPABILITIES ......   Passed    0.07 sec\n      Start 143: configuration.CONTENT-POLICY\n60/69 Test #143: configuration.CONTENT-POLICY ............   Passed    0.10 sec\n      Start 144: configuration.RESOURCE-COMMIT\n61/69 Test #144: configuration.RESOURCE-COMMIT ...........   Passed    0.13 sec\n      Start 145: configuration.RESOURCE-GUARDS\n62/69 Test #145: configuration.RESOURCE-GUARDS ...........   Passed    0.15 sec\n      Start 146: configuration.RESOURCE-SESSION\n63/69 Test #146: configuration.RESOURCE-SESSION ..........   Passed    0.08 sec\n      Start 147: configuration.RESOURCE-RETAINED\n64/69 Test #147: configuration.RESOURCE-RETAINED .........   Passed    0.20 sec\n      Start 183: composition.graph\n65/69 Test #183: composition.graph .......................   Passed    0.09 sec\n      Start 184: composition.reject_forbidden\n66/69 Test #184: composition.reject_forbidden ............   Passed    0.18 sec\n      Start 199: protocol.POLICY-01\n67/69 Test #199: protocol.POLICY-01 ......................   Passed    0.01 sec\n      Start 200: protocol.POLICY-02\n68/69 Test #200: protocol.POLICY-02 ......................   Passed    0.00 sec\n      Start 201: protocol.DISCLOSURE-01\n69/69 Test #201: protocol.DISCLOSURE-01 ..................   Passed    0.00 sec\n\n100% tests passed, 0 tests failed out of 69\n\nTotal Test time (real) =  22.70 sec\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-editor-draft/linux-x64-gcc13-test-dd3df1360f\n",
+    "stderr": ""
+  }
+]

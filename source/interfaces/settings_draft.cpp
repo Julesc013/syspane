@@ -28,7 +28,7 @@ SettingsDraft::SettingsDraft(c::Authority authority,c::Policy policy,c::Authored
 bool SettingsDraft::disclosure()const{return policy_.available&&c::permits(authority_,policy_,"inspector","operational")&&c::permits(authority_,policy_,"accessibility","operational");}
 void SettingsDraft::erase(){base_.reset();draft_.reset();context_.reset();base_resources_.reset();draft_resources_.reset();result_=nullptr;if(active_)active_->request.body.clear();state_=DraftState::unavailable;}
 void SettingsDraft::authorize_resources()const{if(context_)c::authorize_resources(*draft_resources_,policy_,context_->capabilities);}
-bool SettingsDraft::dirty()const{return available()&&draft_->settings!=base_->settings;}
+bool SettingsDraft::dirty()const{return available()&&(draft_->settings!=base_->settings||draft_->scene!=base_->scene);}
 std::optional<std::uint64_t> SettingsDraft::revision()const{return base_?std::optional<std::uint64_t>(c::authored_revision(*base_)):std::nullopt;}
 void SettingsDraft::editable()const{need(available(),"settings.unavailable");need(!active_,"settings.pending");need(state_!=DraftState::conflict,"settings.reload_required");}
 SettingValue SettingsDraft::value(const std::string& id)const{
@@ -53,9 +53,23 @@ void SettingsDraft::use_default(const std::string& id){set(id,descriptor(id).def
 void SettingsDraft::revert(){editable();draft_=base_;draft_resources_=base_resources_;result_=nullptr;state_=DraftState::clean;}
 Json SettingsDraft::command(const std::string& intent,const std::string& request)const{
     Json ops=Json::array();for(const auto& d:setting_descriptions())if(setting(*base_,d.id)!=setting(*draft_,d.id))ops.push_back({{"op","settings.set"},{"path",d.id},{"value",setting(*draft_,d.id)}});
-    Json result={{"schema_version",context_?"0.3.0":"0.2.0"},{"request_id",request},{"expected_revision",base_->settings["revision"]},{"policy_generation",std::to_string(policy_.revision)},{"intent",intent},{"operations",std::move(ops)}};
+    const bool scene_changed=draft_->scene!=base_->scene;
+    if(scene_changed)ops.push_back({{"op","scene.replace"},{"scene",draft_->scene}});
+    Json result={{"schema_version",context_?(scene_changed&&draft_->scene["schema_version"]=="0.3.0"?"0.4.0":"0.3.0"):"0.2.0"},{"request_id",request},{"expected_revision",base_->settings["revision"]},{"policy_generation",std::to_string(policy_.revision)},{"intent",intent},{"operations",std::move(ops)}};
     if(context_)result["content"]=context_->selection;
     return result;
+}
+void SettingsDraft::replace_scene(Json scene){
+    editable();auto next=*draft_;next.scene=std::move(scene);c::validate_authored(next);
+    Json check={{"schema_version",context_?"0.4.0":"0.2.0"},{"request_id","draft.scene"},{"expected_revision",base_->settings["revision"]},
+        {"policy_generation",std::to_string(policy_.revision)},{"intent","preview"},{"operations",Json::array({{{"op","scene.replace"},{"scene",next.scene}}})}};
+    if(context_)check["content"]=context_->selection;
+    // Local previews can exceed the wire envelope. begin() validates that limit
+    // before admission and leaves the local draft intact on failure.
+    c::authorize_authored(check,authority_,policy_,*revision());
+    auto resources=context_?context_->catalog->resources(context_->selection,next):c::ResourceSnapshot{};
+    if(resources)c::authorize_resources(*resources,policy_,context_->capabilities);
+    draft_=std::move(next);draft_resources_=std::move(resources);result_=nullptr;state_=dirty()?DraftState::dirty:DraftState::clean;
 }
 std::optional<EditRequest> SettingsDraft::begin(const std::string& intent,const std::string& request){
     editable();need(intent=="preview"||intent=="commit","settings.intent");need(p::identifier(request),"settings.request");if(!dirty())return {};
@@ -64,7 +78,7 @@ std::optional<EditRequest> SettingsDraft::begin(const std::string& intent,const 
 }
 bool SettingsDraft::may_submit(const std::string& intent)const{
     if(!available()||active_||state_==DraftState::conflict||!dirty()||(intent!="preview"&&intent!="commit"))return false;
-    try{c::authorize_authored(command(intent,"draft.check"),authority_,policy_,*revision());authorize_resources();return true;}catch(const p::Error&){return false;}
+    try{const auto body=command(intent,"draft.check");c::validate_command(body);c::authorize_authored(body,authority_,policy_,*revision());authorize_resources();return true;}catch(const p::Error&){return false;}
 }
 std::optional<EditRequest> SettingsDraft::active_request()const{return active_?std::optional<EditRequest>(active_->request):std::nullopt;}
 std::optional<EditRequest> SettingsDraft::cancel_request(){if(!active_||active_->cancelled||state_==DraftState::closed)return {};active_->cancelled=true;return active_->request;}

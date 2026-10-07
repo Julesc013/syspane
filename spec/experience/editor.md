@@ -48,8 +48,11 @@ Test mouse and keyboard equivalence, repeated Apply, Cancel after many operation
 ## Portable authoring and role constraints
 
 Edit authored hierarchy, layout variants and selectors from [scene bindings](scene-bindings.md).
-Apply through command 0.2 `scene.replace` while fine-grained future operations remain
-unadmitted. Telemetry changes do not move the selected item; missing monitors retain
+Apply through the existing versioned `scene.replace`: command 0.2 for resource-free
+scene 0.2, command 0.3 for resource-backed scene 0.2, and command 0.4 for scene 0.3.
+The [shared draft package](../delivery/packages/w-10-editor-draft.md) defines typed
+local operations and history; fine-grained wire operations remain unadmitted.
+Telemetry changes do not move the selected item; missing monitors retain
 intent. Cancellation/crash releases any input-blocking editing surface. Saver scene
 editing is an unlocked interactive role, separate from a read-only saver or preview.
 

@@ -1,0 +1,74 @@
+[
+  {
+    "step": "configure",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-07T03:11:33.388590+00:00",
+    "finished_at": "2026-10-07T03:11:40.456301+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 6442450944,\n  \"checkout_out_bytes\": 1705943520,\n  \"linux_campaign_bytes\": 4441571766,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "configure",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/editor_step.py",
+      "linux-x64-gcc13",
+      "configure"
+    ],
+    "started_at": "2026-10-07T03:11:40.456720+00:00",
+    "finished_at": "2026-10-07T03:11:56.397306+00:00",
+    "exit": 0,
+    "stdout": "Preset CMake variables:\n\n  BUILD_TESTING=\"ON\"\n  CMAKE_BUILD_TYPE=\"Debug\"\n  CMAKE_CXX_COMPILER=\"g++\"\n  SYSPANE_PROFILE=\"linux-x64-gcc13\"\n\nprofile verified: linux-x64-gcc13\nvendored dependency digests: pass\ndiagnostic toolkit verified: GTK 3.24.41 / Ubuntu 3.24.41-4ubuntu1.3\nnative text dependency identity verified: 358 files\nnative image dependencies verified: 344 files\nnative GJS clock build dependencies verified\n-- Configuring done (5.9s)\n-- Generating done (0.0s)\n-- Build files have been written to: /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-editor-draft/linux-x64-gcc13-configure-e347f803be\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-07T03:11:56.397681+00:00",
+    "finished_at": "2026-10-07T03:11:57.090239+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 6442450944,\n  \"checkout_out_bytes\": 1707390480,\n  \"linux_campaign_bytes\": 4441582385,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/editor_step.py",
+      "linux-x64-gcc13",
+      "build"
+    ],
+    "started_at": "2026-10-07T03:11:57.090567+00:00",
+    "finished_at": "2026-10-07T03:12:17.799559+00:00",
+    "exit": 1,
+    "stdout": "[1/13] Building CXX object CMakeFiles/syspane_editor_draft.dir/source/interfaces/editor_draft.cpp.o\n[2/13] Building CXX object CMakeFiles/syspane_settings_draft.dir/source/interfaces/settings_draft.cpp.o\n[3/13] Linking CXX static library libsyspane_settings_draft.a\n[4/13] Linking CXX static library libsyspane_editor_draft.a\n[5/13] Building CXX object CMakeFiles/syspane_settings_form.dir/source/interfaces/settings_form_linux.cpp.o\n[6/13] Linking CXX static library libsyspane_settings_form.a\n[7/13] Building CXX object CMakeFiles/syspane_editor_tests.dir/tests/editor/editor_draft_tests.cpp.o\nFAILED: CMakeFiles/syspane_editor_tests.dir/tests/editor/editor_draft_tests.cpp.o \n/usr/bin/g++ -DJSON_DIAGNOSTICS=0 -DJSON_DIAGNOSTIC_POSITIONS=1 -I/mnt/d/Projects/SysPane/syspane/source/interfaces -I/mnt/d/Projects/SysPane/syspane/source/configuration -I/mnt/d/Projects/SysPane/syspane/source/protocol -isystem /mnt/d/Projects/SysPane/syspane/source/third_party -g -std=c++17 -Wall -Wextra -Wpedantic -Werror -march=x86-64 -mtune=generic -MD -MT CMakeFiles/syspane_editor_tests.dir/tests/editor/editor_draft_tests.cpp.o -MF CMakeFiles/syspane_editor_tests.dir/tests/editor/editor_draft_tests.cpp.o.d -o CMakeFiles/syspane_editor_tests.dir/tests/editor/editor_draft_tests.cpp.o -c /mnt/d/Projects/SysPane/syspane/tests/editor/editor_draft_tests.cpp\n/mnt/d/Projects/SysPane/syspane/tests/editor/editor_draft_tests.cpp: In function \u2018void run(const std::string&, const std::string&)\u2019:\n/mnt/d/Projects/SysPane/syspane/tests/editor/editor_draft_tests.cpp:123:9: error: this \u2018for\u2019 clause does not guard... [-Werror=misleading-indentation]\n  123 |         for(unsigned i=0;i<40;++i)d.execute({title(\"large \"+std::to_string(i))});CHECK(d.history_bytes()<=cases[\"history_bytes\"]&&d.undo_count()<41&&d.undo_count()>0);d.discard();CHECK(*d.scene()==f.authored.scene&&d.history_bytes()==0);\n      |         ^~~\n/mnt/d/Projects/SysPane/syspane/tests/editor/editor_draft_tests.cpp:8:18: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the \u2018for\u2019\n    8 | #define CHECK(x) verify(static_cast<bool>(x),__LINE__)\n      |                  ^~~~~~\n/mnt/d/Projects/SysPane/syspane/tests/editor/editor_draft_tests.cpp:123:82: note: in expansion of macro \u2018CHECK\u2019\n  123 |         for(unsigned i=0;i<40;++i)d.execute({title(\"large \"+std::to_string(i))});CHECK(d.history_bytes()<=cases[\"history_bytes\"]&&d.undo_count()<41&&d.undo_count()>0);d.discard();CHECK(*d.scene()==f.authored.scene&&d.history_bytes()==0);\n      |                                                                                  ^~~~~\ncc1plus: all warnings being treated as errors\n[8/13] Building CXX object CMakeFiles/syspane_settings_tests.dir/tests/configuration/settings_draft_tests.cpp.o\n[9/13] Building CXX object CMakeFiles/syspane_settings_tests.dir/tests/configuration/settings_content_tests.cpp.o\n[10/13] Building CXX object CMakeFiles/syspane_settings_window.dir/tests/configuration/settings_window.cpp.o\nninja: build stopped: subcommand failed.\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-editor-draft/linux-x64-gcc13-build-e945a9d991\n",
+    "stderr": ""
+  }
+]
