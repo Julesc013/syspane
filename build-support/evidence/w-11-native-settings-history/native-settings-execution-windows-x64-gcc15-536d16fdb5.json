@@ -1,0 +1,98 @@
+[
+  {
+    "step": "configure",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-07T02:20:39.927762+00:00",
+    "finished_at": "2026-10-07T02:20:40.728249+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 6442450944,\n  \"checkout_out_bytes\": 1725368406,\n  \"linux_campaign_bytes\": 4433146571,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "configure",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "out/campaign/settings_step.py",
+      "windows-x64-gcc15",
+      "configure"
+    ],
+    "started_at": "2026-10-07T02:20:40.728671+00:00",
+    "finished_at": "2026-10-07T02:20:42.609004+00:00",
+    "exit": 0,
+    "stdout": "profile verified: windows-x64-gcc15\nvendored dependency digests: pass\n-- Configuring done (1.1s)\n-- Generating done (0.1s)\n-- Build files have been written to: D:/Projects/SysPane/syspane/out/build/windows-x64-gcc15\n \nAttempt: D:\\Projects\\SysPane\\syspane\\out\\campaign\\w-11-native-settings\\windows-x64-gcc15-configure-69021abd5e\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-07T02:20:42.609284+00:00",
+    "finished_at": "2026-10-07T02:20:43.369460+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 6442450944,\n  \"checkout_out_bytes\": 1726808280,\n  \"linux_campaign_bytes\": 4433146571,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "out/campaign/settings_step.py",
+      "windows-x64-gcc15",
+      "build"
+    ],
+    "started_at": "2026-10-07T02:20:43.370255+00:00",
+    "finished_at": "2026-10-07T02:21:23.147739+00:00",
+    "exit": 0,
+    "stdout": "[1/44] Building CXX object CMakeFiles/syspane_authored.dir/source/configuration/transaction.cpp.obj\n[2/44] Building CXX object CMakeFiles/syspane_authored.dir/source/configuration/content.cpp.obj\n[3/44] Building CXX object CMakeFiles/syspane_configuration.dir/source/configuration/policy.cpp.obj\n[4/44] Linking CXX static library libsyspane_configuration.a\n[5/44] Building CXX object CMakeFiles/syspane_authored.dir/source/configuration/authored.cpp.obj\n[6/44] Linking CXX static library libsyspane_authored.a\n[7/44] Building CXX object CMakeFiles/syspane_settings_draft.dir/source/interfaces/settings_draft.cpp.obj\n[8/44] Building CXX object CMakeFiles/syspane_scene.dir/source/scene/layout.cpp.obj\n[9/44] Building CXX object CMakeFiles/syspane_scene.dir/source/scene/chart_history.cpp.obj\n[10/44] Building CXX object CMakeFiles/syspane_scene.dir/source/scene/chart_plot.cpp.obj\n[11/44] Linking CXX static library libsyspane_settings_draft.a\n[12/44] Building CXX object CMakeFiles/syspane_scene.dir/source/scene/bindings.cpp.obj\n[13/44] Linking CXX static library libsyspane_scene.a\n[14/44] Building CXX object CMakeFiles/syspane_async_commands.dir/source/configuration/async_commands.cpp.obj\n[15/44] Linking CXX static library libsyspane_async_commands.a\n[16/44] Building CXX object CMakeFiles/syspane_settings_tests.dir/tests/configuration/settings_draft_tests.cpp.obj\n[17/44] Building CXX object CMakeFiles/syspane_authored_tests.dir/tests/configuration/authored_tests.cpp.obj\n[18/44] Building CXX object CMakeFiles/syspane_scene_tests.dir/tests/scene/layout_tests.cpp.obj\n[19/44] Building CXX object CMakeFiles/syspane_authored_tests.dir/tests/configuration/scene_content_tests.cpp.obj\n[20/44] Building CXX object CMakeFiles/syspane_authored_tests.dir/tests/configuration/content_tests.cpp.obj\n[21/44] Building CXX object CMakeFiles/syspane_scene_tests.dir/tests/scene/chart_plot_tests.cpp.obj\n[22/44] Linking CXX executable SysPane.Diag.exe\n[23/44] Linking CXX executable SysPane.IpcProbe.exe\n[24/44] Building CXX object CMakeFiles/syspane_scene_tests.dir/tests/scene/chart_history_tests.cpp.obj\n[25/44] Building CXX object CMakeFiles/syspane_command_session_tests.dir/tests/configuration/command_session_tests.cpp.obj\n[26/44] Building CXX object CMakeFiles/syspane_scene_tests.dir/tests/scene/binding_tests.cpp.obj\n[27/44] Linking CXX executable SysPane.RecoveryProbe.exe\n[28/44] Linking CXX executable SysPane.TelemetryProbe.exe\n[29/44] Linking CXX executable syspane_settings_tests.exe\n[30/44] Linking CXX executable syspane_authored_tests.exe\n[31/44] Linking CXX executable syspane_command_session_tests.exe\n[32/44] Linking CXX executable syspane_protocol_tests.exe\n[33/44] Linking CXX executable syspane_subscription_tests.exe\n[34/44] Linking CXX executable syspane_scene_tests.exe\n[35/44] Linking CXX executable syspane_diagnostic_tests.exe\n[36/44] Linking CXX executable syspane_data_view_tests.exe\n[37/44] Linking CXX executable syspane_measured_time_tests.exe\n[38/44] Linking CXX executable syspane_state_import_tests.exe\n[39/44] Linking CXX executable syspane_demand_tests.exe\n[40/44] Linking CXX executable syspane_preservation_tests.exe\n[41/44] Linking CXX executable syspane_demand_session_tests.exe\n[42/44] Linking CXX executable syspane_network_publication_tests.exe\n[43/44] Linking CXX executable syspane_network_view_tests.exe\n[44/44] Linking CXX executable syspane_failure_store_tests.exe\n \nAttempt: D:\\Projects\\SysPane\\syspane\\out\\campaign\\w-11-native-settings\\windows-x64-gcc15-build-e3467b408a\n",
+    "stderr": ""
+  },
+  {
+    "step": "test",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-07T02:21:23.148101+00:00",
+    "finished_at": "2026-10-07T02:21:23.853114+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 6442450944,\n  \"checkout_out_bytes\": 1782568099,\n  \"linux_campaign_bytes\": 4433146571,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "test",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "out/campaign/settings_step.py",
+      "windows-x64-gcc15",
+      "test"
+    ],
+    "started_at": "2026-10-07T02:21:23.853424+00:00",
+    "finished_at": "2026-10-07T02:21:30.003686+00:00",
+    "exit": 0,
+    "stdout": "....   Passed    0.05 sec\n      Start  82: configuration.COMMAND-POLICY\n14/52 Test  #82: configuration.COMMAND-POLICY ............   Passed    0.05 sec\n      Start  83: configuration.COMMAND-LIFETIME\n15/52 Test  #83: configuration.COMMAND-LIFETIME ..........   Passed    0.03 sec\n      Start  84: configuration.COMMAND-CAPACITY\n16/52 Test  #84: configuration.COMMAND-CAPACITY ..........   Passed    0.56 sec\n      Start  85: configuration.COMMAND-FAULT\n17/52 Test  #85: configuration.COMMAND-FAULT .............   Passed    0.04 sec\n      Start  86: configuration.COMMAND-NEGOTIATE\n18/52 Test  #86: configuration.COMMAND-NEGOTIATE .........   Passed    0.02 sec\n      Start  87: configuration.RECON-RECEIPTS\n19/52 Test  #87: configuration.RECON-RECEIPTS ............   Passed    0.04 sec\n      Start  88: configuration.RECON-POLICY\n20/52 Test  #88: configuration.RECON-POLICY ..............   Passed    0.03 sec\n      Start  89: configuration.RECON-CODEC\n21/52 Test  #89: configuration.RECON-CODEC ...............   Passed    0.02 sec\n      Start  90: configuration.RECON-BOUNDS\n22/52 Test  #90: configuration.RECON-BOUNDS ..............   Passed    0.05 sec\n      Start  91: configuration.SCENE-CONTENT-SCHEMA\n23/52 Test  #91: configuration.SCENE-CONTENT-SCHEMA ......   Passed    0.09 sec\n      Start  92: configuration.SCENE-CONTENT-MIGRATION\n24/52 Test  #92: configuration.SCENE-CONTENT-MIGRATION ...   Passed    0.03 sec\n      Start  93: configuration.SCENE-CONTENT-RESOURCES\n25/52 Test  #93: configuration.SCENE-CONTENT-RESOURCES ...   Passed    0.09 sec\n      Start  94: configuration.SCENE-CONTENT-PREVIEW\n26/52 Test  #94: configuration.SCENE-CONTENT-PREVIEW .....   Passed    0.05 sec\n      Start  95: configuration.SCENE-CONTENT-TX\n27/52 Test  #95: configuration.SCENE-CONTENT-TX ..........   Passed    0.09 sec\n      Start  96: configuration.SCENE-CONTENT-SESSION\n28/52 Test  #96: configuration.SCENE-CONTENT-SESSION .....   Passed    0.08 sec\n      Start  97: configuration.AUTH-SCHEMA\n29/52 Test  #97: configuration.AUTH-SCHEMA ...............   Passed    0.04 sec\n      Start  98: configuration.TX-MIXED\n30/52 Test  #98: configuration.TX-MIXED ..................   Passed    0.03 sec\n      Start  99: configuration.TX-CONFLICT\n31/52 Test  #99: configuration.TX-CONFLICT ...............   Passed    0.04 sec\n      Start 100: configuration.TX-REPLAY\n32/52 Test #100: configuration.TX-REPLAY .................   Passed    0.03 sec\n      Start 101: configuration.TX-INTERRUPT\n33/52 Test #101: configuration.TX-INTERRUPT ..............   Passed    0.05 sec\n      Start 102: configuration.TX-BOUNDS\n34/52 Test #102: configuration.TX-BOUNDS .................   Passed    0.04 sec\n      Start 103: configuration.TX-CAPACITY\n35/52 Test #103: configuration.TX-CAPACITY ...............   Passed    0.57 sec\n      Start 104: configuration.DIGEST\n36/52 Test #104: configuration.DIGEST ....................   Passed    0.04 sec\n      Start 105: configuration.DIGEST-CONTENT\n37/52 Test #105: configuration.DIGEST-CONTENT ............   Passed    0.68 sec\n      Start 106: configuration.CONTENT-COMPOSE\n38/52 Test #106: configuration.CONTENT-COMPOSE ...........   Passed    0.05 sec\n      Start 107: configuration.CONTENT-PINS\n39/52 Test #107: configuration.CONTENT-PINS ..............   Passed    0.07 sec\n      Start 108: configuration.CONTENT-PATHS\n40/52 Test #108: configuration.CONTENT-PATHS .............   Passed    0.02 sec\n      Start 109: configuration.CONTENT-BOUNDS\n41/52 Test #109: configuration.CONTENT-BOUNDS ............   Passed    0.06 sec\n      Start 110: configuration.CONTENT-CAPABILITIES\n42/52 Test #110: configuration.CONTENT-CAPABILITIES ......   Passed    0.06 sec\n      Start 111: configuration.CONTENT-POLICY\n43/52 Test #111: configuration.CONTENT-POLICY ............   Passed    0.07 sec\n      Start 112: configuration.RESOURCE-COMMIT\n44/52 Test #112: configuration.RESOURCE-COMMIT ...........   Passed    0.08 sec\n      Start 113: configuration.RESOURCE-GUARDS\n45/52 Test #113: configuration.RESOURCE-GUARDS ...........   Passed    0.09 sec\n      Start 114: configuration.RESOURCE-SESSION\n46/52 Test #114: configuration.RESOURCE-SESSION ..........   Passed    0.06 sec\n      Start 115: configuration.RESOURCE-RETAINED\n47/52 Test #115: configuration.RESOURCE-RETAINED .........   Passed    0.12 sec\n      Start 138: composition.graph\n48/52 Test #138: composition.graph .......................   Passed    0.05 sec\n      Start 139: composition.reject_forbidden\n49/52 Test #139: composition.reject_forbidden ............   Passed    0.05 sec\n      Start 154: protocol.POLICY-01\n50/52 Test #154: protocol.POLICY-01 ......................   Passed    0.05 sec\n      Start 155: protocol.POLICY-02\n51/52 Test #155: protocol.POLICY-02 ......................   Passed    0.02 sec\n      Start 156: protocol.DISCLOSURE-01\n52/52 Test #156: protocol.DISCLOSURE-01 ..................   Passed    0.02 sec\n\n100% tests passed, 0 tests failed out of 52\n\nTotal Test time (real) =   5.51 sec\n \nAttempt: D:\\Projects\\SysPane\\syspane\\out\\campaign\\w-11-native-settings\\windows-x64-gcc15-test-ffefe8ab13\n",
+    "stderr": ""
+  }
+]

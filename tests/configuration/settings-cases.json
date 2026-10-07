@@ -1,0 +1,26 @@
+{
+  "schema_version": "0.1.0",
+  "base_revision": "40",
+  "committed_revision": "41",
+  "policy_generation": "7",
+  "revocation_ms": 200,
+  "settings": [
+    {"id": "sampling.resources_ms", "label": "Resource sampling interval", "initial": 1000, "edit": 1500, "invalid": "99"},
+    {"id": "sampling.reconcile_ms", "label": "Inventory reconciliation interval", "initial": 10000, "edit": 12000, "invalid": "3600001"},
+    {"id": "sampling.max_workers", "label": "Maximum collection workers", "initial": 4, "edit": 6, "invalid": "1.5"},
+    {"id": "history.persistent", "label": "Record history on disk", "initial": false, "edit": true},
+    {"id": "history.segment_bytes", "label": "History segment size", "initial": 10485760, "edit": 20971520, "invalid": "1073741825"},
+    {"id": "history.segments", "label": "History segment count", "initial": 5, "edit": 8, "invalid": ""},
+    {"id": "display.enabled", "label": "Show desktop scene", "initial": true, "edit": false},
+    {"id": "display.theme_id", "label": "Default scene theme", "initial": "theme:native", "edit": "theme:native", "invalid": "theme invalid"},
+    {"id": "display.reduced_motion", "label": "Reduce motion", "initial": true, "edit": false},
+    {"id": "privacy.remote_probes", "label": "Allow remote probes", "initial": false, "edit": true},
+    {"id": "privacy.export_enabled", "label": "Allow data export", "initial": false, "edit": true}
+  ],
+  "commit_facts": {"stored": true, "durable": true, "visible": false, "activation": "pending"},
+  "controls": ["Search settings", "Preview", "Apply", "Revert draft", "Cancel request", "Use built-in default"],
+  "locked": {"id": "sampling.max_workers", "effective": 2, "requested": 4},
+  "cancel_revision": "40",
+  "conflict_revision": "41",
+  "lost_ack_revision": "41"
+}

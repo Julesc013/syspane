@@ -1,0 +1,110 @@
+[
+  {
+    "step": "configure",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-07T02:04:25.510729+00:00",
+    "finished_at": "2026-10-07T02:04:26.210985+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 6442450944,\n  \"checkout_out_bytes\": 1705438657,\n  \"linux_campaign_bytes\": 4366017769,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "configure",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/settings_step.py",
+      "linux-x64-gcc13",
+      "configure"
+    ],
+    "started_at": "2026-10-07T02:04:26.211367+00:00",
+    "finished_at": "2026-10-07T02:04:41.045626+00:00",
+    "exit": 0,
+    "stdout": "Preset CMake variables:\n\n  BUILD_TESTING=\"ON\"\n  CMAKE_BUILD_TYPE=\"Debug\"\n  CMAKE_CXX_COMPILER=\"g++\"\n  SYSPANE_PROFILE=\"linux-x64-gcc13\"\n\nprofile verified: linux-x64-gcc13\nvendored dependency digests: pass\ndiagnostic toolkit verified: GTK 3.24.41 / Ubuntu 3.24.41-4ubuntu1.3\nnative text dependency identity verified: 358 files\nnative image dependencies verified: 344 files\nnative GJS clock build dependencies verified\n-- Configuring done (5.4s)\n-- Generating done (0.0s)\n-- Build files have been written to: /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-11-native-settings/linux-x64-gcc13-configure-eb39dc7ab7\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-07T02:04:41.045903+00:00",
+    "finished_at": "2026-10-07T02:04:41.674551+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 6442450944,\n  \"checkout_out_bytes\": 1706850177,\n  \"linux_campaign_bytes\": 4366037629,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/settings_step.py",
+      "linux-x64-gcc13",
+      "build"
+    ],
+    "started_at": "2026-10-07T02:04:41.674875+00:00",
+    "finished_at": "2026-10-07T02:05:31.555428+00:00",
+    "exit": 0,
+    "stdout": "ommands.cpp.o\n[17/80] Linking CXX static library libsyspane_async_commands.a\n[18/80] Building CXX object CMakeFiles/syspane_content_probe.dir/source/application/content_probe.cpp.o\n[19/80] Linking CXX executable SysPane.ContentProbe\n[20/80] Building CXX object CMakeFiles/syspane_generation_store.dir/source/platform/generation_store_linux.cpp.o\n[21/80] Linking CXX static library libsyspane_generation_store.a\n[22/80] Building CXX object CMakeFiles/syspane_configuration_probe.dir/source/application/configuration_probe.cpp.o\n[23/80] Linking CXX executable SysPane.ConfigProbe\n[24/80] Building CXX object CMakeFiles/syspane_command_probe.dir/source/application/command_probe.cpp.o\n[25/80] Building CXX object CMakeFiles/syspane_native_text.dir/source/rendering/native_text_linux.cpp.o\n[26/80] Linking CXX static library libsyspane_native_text.a\n[27/80] Linking CXX executable SysPane.CommandProbe\n[28/80] Building CXX object CMakeFiles/syspane_text_probe.dir/source/application/text_probe.cpp.o\n[29/80] Linking CXX executable SysPane.TextProbe\n[30/80] Building CXX object CMakeFiles/syspane_scene_surface.dir/source/rendering/scene_chart.cpp.o\n[31/80] Building CXX object CMakeFiles/syspane_scene_surface.dir/source/rendering/scene_table.cpp.o\n[32/80] Building CXX object CMakeFiles/syspane_scene_surface.dir/source/rendering/scene_surface.cpp.o\n[33/80] Building CXX object CMakeFiles/syspane_scene_surface.dir/source/rendering/scene_image.cpp.o\n[34/80] Linking CXX static library libsyspane_scene_surface.a\n[35/80] Linking CXX executable SysPane.ImageWorker\n[36/80] Linking CXX executable syspane-diag\n[37/80] Linking CXX executable SysPane.CollectorProbe\n[38/80] Linking CXX shared library libsyspane_gjs_clock.so\n[39/80] Building CXX object CMakeFiles/syspane_scene_inspector.dir/source/interfaces/scene_inspector_model.cpp.o\n[40/80] Building CXX object CMakeFiles/syspane_settings_form.dir/source/interfaces/settings_form_linux.cpp.o\n[41/80] Linking CXX executable SysPane.IpcProbe\n[42/80] Linking CXX static library libsyspane_settings_form.a\n[43/80] Linking CXX executable SysPane.TelemetryProbe\n[44/80] Linking CXX executable SysPane.RecoveryProbe\n[45/80] Building CXX object CMakeFiles/syspane_scene_inspector.dir/source/interfaces/scene_inspector_linux.cpp.o\n[46/80] Linking CXX static library libsyspane_scene_inspector.a\n[47/80] Building CXX object CMakeFiles/syspane_settings_tests.dir/tests/configuration/settings_draft_tests.cpp.o\n[48/80] Linking CXX executable syspane_settings_tests\n[49/80] Building CXX object CMakeFiles/syspane_authored_tests.dir/tests/configuration/authored_tests.cpp.o\n[50/80] Building CXX object CMakeFiles/syspane_authored_tests.dir/tests/configuration/content_tests.cpp.o\n[51/80] Building CXX object CMakeFiles/syspane_authored_tests.dir/tests/configuration/scene_content_tests.cpp.o\n[52/80] Linking CXX executable syspane_authored_tests\n[53/80] Building CXX object CMakeFiles/syspane_scene_surface_tests.dir/tests/scene/surface_tests.cpp.o\n[54/80] Building CXX object CMakeFiles/syspane_scene_inspector_tests.dir/tests/scene/inspector_tests.cpp.o\n[55/80] Building CXX object CMakeFiles/syspane_scene_surface_tests.dir/tests/scene/surface_window.cpp.o\n[56/80] Linking CXX executable syspane_scene_inspector_tests\n[57/80] Linking CXX executable syspane_image_job_tests\n[58/80] Building CXX object CMakeFiles/syspane_scene_surface_tests.dir/tests/scene/table_tests.cpp.o\n[59/80] Building CXX object CMakeFiles/syspane_scene_surface_tests.dir/tests/scene/chart_surface_tests.cpp.o\n[60/80] Building CXX object CMakeFiles/syspane_scene_tests.dir/tests/scene/layout_tests.cpp.o\n[61/80] Building CXX object CMakeFiles/syspane_scene_tests.dir/tests/scene/binding_tests.cpp.o\n[62/80] Building CXX object CMakeFiles/syspane_scene_surface_tests.dir/tests/scene/image_surface_tests.cpp.o\n[63/80] Linking CXX executable syspane_scene_surface_tests\n[64/80] Building CXX object CMakeFiles/syspane_scene_tests.dir/tests/scene/chart_plot_tests.cpp.o\n[65/80] Linking CXX executable syspane_protocol_tests\n[66/80] Linking CXX executable syspane_subscription_tests\n[67/80] Linking CXX executable syspane_diagnostic_tests\n[68/80] Linking CXX executable syspane_data_view_tests\n[69/80] Building CXX object CMakeFiles/syspane_scene_tests.dir/tests/scene/chart_history_tests.cpp.o\n[70/80] Linking CXX executable syspane_state_import_tests\n[71/80] Linking CXX executable syspane_measured_time_tests\n[72/80] Linking CXX executable syspane_demand_tests\n[73/80] Linking CXX executable syspane_scene_tests\n[74/80] Linking CXX executable syspane_demand_session_tests\n[75/80] Linking CXX executable syspane_network_view_tests\n[76/80] Linking CXX executable syspane_network_publication_tests\n[77/80] Linking CXX executable syspane_preservation_tests\n[78/80] Linking CXX executable syspane_failure_store_tests\n[79/80] Building CXX object CMakeFiles/syspane_command_session_tests.dir/tests/configuration/command_session_tests.cpp.o\n[80/80] Linking CXX executable syspane_command_session_tests\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-11-native-settings/linux-x64-gcc13-build-62ba7ae1fe\n",
+    "stderr": ""
+  },
+  {
+    "step": "focus",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-07T02:05:31.555763+00:00",
+    "finished_at": "2026-10-07T02:05:32.222067+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 6442450944,\n  \"checkout_out_bytes\": 1708271976,\n  \"linux_campaign_bytes\": 4402899074,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "focus",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/settings_step.py",
+      "linux-x64-gcc13",
+      "focus"
+    ],
+    "started_at": "2026-10-07T02:05:32.222403+00:00",
+    "finished_at": "2026-10-07T02:05:41.845510+00:00",
+    "exit": 0,
+    "stdout": "Test project /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n      Start   1: settings.DRAFT\n 1/13 Test   #1: settings.DRAFT ...................   Passed    0.04 sec\n      Start   2: settings.VALUES\n 2/13 Test   #2: settings.VALUES ..................   Passed    0.08 sec\n      Start   3: settings.DEFAULT\n 3/13 Test   #3: settings.DEFAULT .................   Passed    0.03 sec\n      Start   4: settings.PREVIEW\n 4/13 Test   #4: settings.PREVIEW .................   Passed    0.03 sec\n      Start   5: settings.COMMIT\n 5/13 Test   #5: settings.COMMIT ..................   Passed    0.03 sec\n      Start   6: settings.CANCEL\n 6/13 Test   #6: settings.CANCEL ..................   Passed    0.03 sec\n      Start   7: settings.CONFLICT\n 7/13 Test   #7: settings.CONFLICT ................   Passed    0.03 sec\n      Start   8: settings.POLICY\n 8/13 Test   #8: settings.POLICY ..................   Passed    0.04 sec\n      Start   9: settings.RESULT-SCOPE\n 9/13 Test   #9: settings.RESULT-SCOPE ............   Passed    0.13 sec\n      Start  10: settings.UNKNOWN\n10/13 Test  #10: settings.UNKNOWN .................   Passed    0.02 sec\n      Start  11: settings.BOUNDS\n11/13 Test  #11: settings.BOUNDS ..................   Passed    0.03 sec\n      Start 165: composition.graph\n12/13 Test #165: composition.graph ................   Passed    0.08 sec\n      Start 166: composition.reject_forbidden\n13/13 Test #166: composition.reject_forbidden .....   Passed    0.18 sec\n\n100% tests passed, 0 tests failed out of 13\n\nTotal Test time (real) =   0.76 sec\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-11-native-settings/linux-x64-gcc13-focus-5a517a5e10\n",
+    "stderr": ""
+  }
+]

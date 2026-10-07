@@ -40,6 +40,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Policy-owned asynchronous scene images](w-09-scene-images.md) — Connect immutable image resources, bounded worker lifetime and native pixels to current scene authority.
 - [Policy-owned native scalar scene surface](w-09-scene-surface.md) — Compose authored scenes, pinned resources, scalar bindings and native text under one erasing presentation owner.
 - [Policy-owned collection tables](w-09-table-surface.md) — Render identity-aligned collection columns with bounded native grid geometry and explicit incomplete states.
+- [Native settings drafts and transaction results](w-11-native-settings.md) — Connect every initial settings descriptor to native controls and the common authored transaction boundary.
 - [Native scene inspector navigation and disclosure](w-11-scene-inspector.md) — Expose scene semantics through native controls with identity-stable navigation and current inspector authority.
 - [W-24 authenticated transport and policy boundary](w-24-transport.md) — Close the initial local protocol, admission and preview boundary before native integration.
 - [W-25 collection continuity across consumer replacement](w-25-consumer-continuity.md) — Keep real collection independently owned while admitting bounded replacement consumers.

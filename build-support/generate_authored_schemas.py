@@ -3,7 +3,7 @@ import hashlib,json
 from pathlib import Path
 import sys
 ROOT=Path(__file__).resolve().parents[1]
-NAMES=('settings','scene-v0.2','scene-v0.3','layout','binding','command-v0.2','command-v0.3','command-v0.4','content-package','content-catalog','preset','theme')
+NAMES=('settings','scene-v0.2','scene-v0.3','layout','binding','command-v0.2','command-v0.3','command-v0.4','command-result','content-package','content-catalog','preset','theme')
 KEYS={'$schema','$id','$defs','$ref','$comment','title','description','type','properties','required','additionalProperties',
       'const','enum','oneOf','anyOf','allOf','if','then','else','not','minLength','maxLength','pattern','propertyNames',
       'minItems','maxItems','uniqueItems','items','minimum','maximum','maxProperties'}

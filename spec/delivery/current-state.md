@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-07T01:44:55Z", "scope": "Native scene inspector navigation, exact semantics and independent disclosure checks"}
+updated: {"by": "codex", "at": "2026-10-07T02:19:00Z", "scope": "Native settings drafts, transaction results and independently observed persistence"}
 ---
 
 # Current state and next admitted boundary
@@ -22,11 +22,19 @@ The active objective is now the [complete 0.1.0 release](release-0.1.0.md) for W
 required but is no longer the final completion boundary. Legacy version/architecture
 floors, native labs and complete desktop/package evidence remain unresolved.
 
-The latest [scene inspector checkpoint](scene-inspector-handoff.md) adds a native
+The latest [native settings checkpoint](native-settings-handoff.md) adds portable
+drafts and a GTK form for all eleven initial descriptors. Real asynchronous commands
+and Linux generation storage are exercised through independent native controls and
+stored-document reads. Unknown results retain their request identity through policy
+changes, callback failure and restart. Built-in defaults are explicit values, not
+inheritance reset. W-11 remains in progress: content-aware settings, installed routing,
+native editing, full accessibility and other platform adapters remain required.
+
+The earlier [scene inspector checkpoint](scene-inspector-handoff.md) adds a native
 Linux tree table, inspector-channel ownership, exact typed chart points, scoped
 selection and explicit requested summaries. Independent native keys and AT-SPI
 queries exercise content, updates, revocation and held references, with deliberate
-retention and wrong-selection controls. W-11 remains in progress: settings/editing,
+retention and wrong-selection controls. W-11 remains in progress: integrated settings/editing,
 installed routing, clipboard/export, complete localization and human accessibility
 review remain required, along with other adapters and every complete edition.
 

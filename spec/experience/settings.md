@@ -49,7 +49,12 @@ The eleven initial descriptors now carry structural constraints, units, scope,
 dependencies, activation, policy classification, localization/help IDs and native
 coverage status. `specctl generate` projects their setting constraints into settings
 and both command schemas; validation rejects bad defaults and projection drift.
-Native bindings/help generation and actual GUI coverage remain implementation work.
+The [native settings checkpoint](../delivery/native-settings-handoff.md) adds generated
+descriptor metadata, portable drafts and an embeddable GTK form. The
+[coverage report](settings-native-coverage.json) maps all eleven controls to commands
+and executable cases. Installed routing, content-aware settings, CLI/help generation,
+inheritance reset and other native adapters remain implementation work; component
+evidence does not mark full product coverage complete.
 
 [Resolution](configuration-resolution.md) owns precedence, reset/delete/list semantics,
 theme selection and provenance. [Presets](presets.md), [policy](policy.md) and

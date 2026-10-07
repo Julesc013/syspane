@@ -41,7 +41,8 @@ behaviour has been implemented. See [audit disposition](spec/delivery/audit-2026
 - [ ] W-09 full native projection: close and implement remaining widget content, installed producer/catalog/policy ownership, full native accessibility, visible host activation/recovery and Windows/Mac adapters.
 
 - [x] W-11 initial Linux scene inspector: native tree/table navigation, typed exact chart points, stable scoped selection, requested summaries and independent AT-SPI/XTest revocation checks. See the [handoff](spec/delivery/scene-inspector-handoff.md).
-- [ ] W-11 product controls: native settings and editing through the shared transaction API, installed inspector routing, clipboard/export authority, full localization and representative screen-reader review; Windows/Mac adapters remain required.
+- [x] W-11 initial native settings: portable validated drafts and all eleven GTK controls through the existing asynchronous transaction/store owner; independent save/reopen, cancellation, policy, conflict and lost-acknowledgement/restart checks. See the [handoff](spec/delivery/native-settings-handoff.md).
+- [ ] W-11 product controls: content-aware settings and editing, installed inspector/settings routing, persistent layer inheritance reset, clipboard/export authority, full localization and representative screen-reader review; Windows/Mac adapters remain required.
 
 - [x] W-07 controller demand component: merge authorized field/entity/age/priority/recording leases, apply cadence/concurrency policy, age priorities and retain cancelled slots until confirmed stop. See the [handoff](spec/delivery/demand-owner-handoff.md).
 - [x] W-07/W-25 Linux demand integration: real bounded acquisition outside the IPC loop, native join before slot release, rejected late results and policy revocation while a worker remains alive. See the [handoff](spec/delivery/demand-executor-handoff.md).

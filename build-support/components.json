@@ -2045,6 +2045,115 @@
       "profiles": [
         "linux-x64-gcc13"
       ]
+    },
+    {
+      "id": "settings-draft",
+      "target": "syspane_settings_draft",
+      "type": "STATIC_LIBRARY",
+      "source_owner": "source/interfaces/",
+      "public_interfaces": [
+        "source/interfaces/settings_draft.hpp"
+      ],
+      "private_interfaces": [],
+      "sources": [
+        "source/interfaces/settings_draft.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_authored"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "windows-x64-gcc15",
+        "linux-x64-gcc13",
+        "windows-x86-v141-xp"
+      ]
+    },
+    {
+      "id": "settings-form",
+      "target": "syspane_settings_form",
+      "type": "STATIC_LIBRARY",
+      "source_owner": "source/interfaces/",
+      "public_interfaces": [
+        "source/interfaces/settings_form.hpp"
+      ],
+      "private_interfaces": [],
+      "sources": [
+        "source/interfaces/settings_form_linux.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_settings_draft",
+        "PkgConfig::GTK3"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
+    },
+    {
+      "id": "settings-tests",
+      "target": "syspane_settings_tests",
+      "type": "EXECUTABLE",
+      "source_owner": "tests/configuration/",
+      "public_interfaces": [],
+      "private_interfaces": [],
+      "sources": [
+        "tests/configuration/settings_draft_tests.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_settings_draft"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "windows-x64-gcc15",
+        "linux-x64-gcc13",
+        "windows-x86-v141-xp"
+      ]
+    },
+    {
+      "id": "settings-window",
+      "target": "syspane_settings_window",
+      "type": "EXECUTABLE",
+      "source_owner": "tests/configuration/",
+      "public_interfaces": [],
+      "private_interfaces": [],
+      "sources": [
+        "tests/configuration/settings_window.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_settings_form",
+        "syspane_async_commands",
+        "syspane_generation_store",
+        "PkgConfig::GTK3",
+        "Threads::Threads"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
     }
   ]
 }

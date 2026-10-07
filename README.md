@@ -7,11 +7,18 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
+The [native settings checkpoint](spec/delivery/native-settings-handoff.md) adds
+portable drafts and a Linux GTK form for all eleven initial settings. Native controls
+use the common transaction API, preserve unknown requests for reconciliation and
+distinguish durable saves from activation. Independent checks cover save/reopen,
+cancellation, conflicts, policy changes and restart without duplicate commits.
+Installed routing, content-aware settings, native editing and complete editions remain open.
+
 The [native scene inspector checkpoint](spec/delivery/scene-inspector-handoff.md)
 adds a Linux tree table for scalar, collection, chart and image information. Native
 keyboard navigation preserves scoped selection across updates, and requested
 summaries remain explicit snapshots. Inspector permission governs disclosure;
-revocation clears native cells and held accessibility references. Settings, editing,
+revocation clears native cells and held accessibility references. Integrated settings, editing,
 installed routing and complete accessibility qualification remain open.
 
 The [native scene images checkpoint](spec/delivery/scene-images-handoff.md) connects

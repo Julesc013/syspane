@@ -1,6 +1,6 @@
 {
   "version": "0.1.0",
-  "note": "Canonical initial descriptors. Schema/command constraints are generated; native bindings/help remain planned.",
+  "note": "Canonical initial descriptors. Schema, command constraints and native descriptor metadata are generated. Native product coverage remains profile-specific.",
   "settings": [
     {
       "id": "sampling.resources_ms",
@@ -27,7 +27,9 @@
       "label_id": "setting.sampling.resources_ms.label",
       "help_id": "setting.sampling.resources_ms.help",
       "classification": "user",
-      "sensitivity": "operational"
+      "sensitivity": "operational",
+      "label": "Resource sampling interval",
+      "help": "Interval between routine resource samples, in milliseconds."
     },
     {
       "id": "sampling.reconcile_ms",
@@ -54,7 +56,9 @@
       "label_id": "setting.sampling.reconcile_ms.label",
       "help_id": "setting.sampling.reconcile_ms.help",
       "classification": "user",
-      "sensitivity": "operational"
+      "sensitivity": "operational",
+      "label": "Inventory reconciliation interval",
+      "help": "Interval between full device inventory reconciliation, in milliseconds."
     },
     {
       "id": "sampling.max_workers",
@@ -81,7 +85,9 @@
       "label_id": "setting.sampling.max_workers.label",
       "help_id": "setting.sampling.max_workers.help",
       "classification": "user",
-      "sensitivity": "operational"
+      "sensitivity": "operational",
+      "label": "Maximum collection workers",
+      "help": "Maximum concurrent collection workers admitted by the source plan."
     },
     {
       "id": "history.persistent",
@@ -106,7 +112,9 @@
       "label_id": "setting.history.persistent.label",
       "help_id": "setting.history.persistent.help",
       "classification": "user",
-      "sensitivity": "operational"
+      "sensitivity": "operational",
+      "label": "Record history on disk",
+      "help": "Store admitted historical samples on disk. Disabled by default."
     },
     {
       "id": "history.segment_bytes",
@@ -133,7 +141,9 @@
       "label_id": "setting.history.segment_bytes.label",
       "help_id": "setting.history.segment_bytes.help",
       "classification": "user",
-      "sensitivity": "operational"
+      "sensitivity": "operational",
+      "label": "History segment size",
+      "help": "Maximum bytes in one persistent history segment."
     },
     {
       "id": "history.segments",
@@ -160,7 +170,9 @@
       "label_id": "setting.history.segments.label",
       "help_id": "setting.history.segments.help",
       "classification": "user",
-      "sensitivity": "operational"
+      "sensitivity": "operational",
+      "label": "History segment count",
+      "help": "Maximum number of persistent history segments."
     },
     {
       "id": "display.enabled",
@@ -185,7 +197,9 @@
       "label_id": "setting.display.enabled.label",
       "help_id": "setting.display.enabled.help",
       "classification": "user",
-      "sensitivity": "operational"
+      "sensitivity": "operational",
+      "label": "Show desktop scene",
+      "help": "Enable the passive desktop scene."
     },
     {
       "id": "display.theme_id",
@@ -213,7 +227,9 @@
       "label_id": "setting.display.theme_id.label",
       "help_id": "setting.display.theme_id.help",
       "classification": "user",
-      "sensitivity": "operational"
+      "sensitivity": "operational",
+      "label": "Default scene theme",
+      "help": "Theme identifier inherited by scenes without an explicit theme selection."
     },
     {
       "id": "display.reduced_motion",
@@ -238,7 +254,9 @@
       "label_id": "setting.display.reduced_motion.label",
       "help_id": "setting.display.reduced_motion.help",
       "classification": "user",
-      "sensitivity": "operational"
+      "sensitivity": "operational",
+      "label": "Reduce motion",
+      "help": "Request reduced motion; system accessibility and policy may be more restrictive."
     },
     {
       "id": "privacy.remote_probes",
@@ -263,7 +281,9 @@
       "label_id": "setting.privacy.remote_probes.label",
       "help_id": "setting.privacy.remote_probes.help",
       "classification": "user",
-      "sensitivity": "operational"
+      "sensitivity": "operational",
+      "label": "Allow remote probes",
+      "help": "Permit supported active remote probes. This preference does not grant system privileges."
     },
     {
       "id": "privacy.export_enabled",
@@ -288,7 +308,9 @@
       "label_id": "setting.privacy.export_enabled.label",
       "help_id": "setting.privacy.export_enabled.help",
       "classification": "user",
-      "sensitivity": "operational"
+      "sensitivity": "operational",
+      "label": "Allow data export",
+      "help": "Permit supported data export; each disclosure channel still requires its own current policy grant."
     }
   ],
   "revision": "2026-10-04"

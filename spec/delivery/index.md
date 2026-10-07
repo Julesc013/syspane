@@ -53,6 +53,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Native chart checkpoint](native-chart-handoff.md) — Exact chart geometry, authorized history ownership and independently observed Linux pixels and accessibility.
 - [Supervised native content checkpoint](native-content-handoff.md) — Retained resource editing through authenticated commands and exact controller replacement.
 - [Native retained network cache checkpoint](native-network-cache-handoff.md) — Actual C++ projected counters and rates reach the owned native desktop with independently checked value pixels and policy erasure.
+- [Native settings checkpoint](native-settings-handoff.md) — Portable drafts, native controls and independently observed transaction outcomes.
 - [Native Linux text checkpoint](native-text-handoff.md) — Bounded native shaping, readable metrics and semantic-color raster output with preserved independent checks.
 - [Native local IPC implementation handoff](native-transport-handoff.md) — Bind W-24's Windows and Linux adapter gate to real process and stream evidence.
 - [Real native network acquisition checkpoint](network-acquisition-handoff.md) — Read bounded interface counters on Windows and Linux without claiming reconciled model identity or complete collection.

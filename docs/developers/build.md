@@ -1,5 +1,37 @@
 # Developer setup and checks
 
+The [native settings package](../../spec/delivery/packages/w-11-native-settings.md)
+adds shared `interfaces::SettingsDraft` and Linux `interfaces::SettingsForm`. Construct
+the form on the GTK owner thread with a coherent Authored snapshot, authenticated
+authority, current policy and producer epoch; embed `widget()` in the host's window.
+The canonical registry generates defaults, constraints and presentation metadata.
+The [coverage report](../../spec/experience/settings-native-coverage.json) separates
+owned component checks from pending installed UI and CLI coverage.
+
+Provide fresh request IDs and callbacks that enqueue submit/cancel/reload work and
+return immediately. Do not reenter the form from a callback or perform filesystem
+work on the UI thread. Pass later results to `complete(ticket, result)`; after a
+restart, pass the independently scoped response to `reconciled(ticket, query_id,
+current_epoch, response)`. Disconnect or callback failure leaves the original request
+unresolved. The external command owner retains its ledger/reconciliation duties after
+the form closes. Explicit Reload takes a fresh snapshot only after no request remains
+unresolved. Current policy must grant operational inspector and accessibility disclosure.
+
+The initial form emits resource-free command 0.2 settings operations. Connecting it
+to a resource-backed installed scene requires the existing content-aware transaction
+contract; that integration remains open. Use built-in default assigns an explicit
+value; persistent-layer inheritance reset is separate pending work. Native selection
+does not publish authored values to PRIMARY/CLIPBOARD; copy/cut/drag export awaits an
+admitted clipboard owner. Full locale formatting and human accessibility review remain.
+
+After ordinary preflight/configure/build, use `ctest --preset <profile> -R
+'^(settings[.]|configuration[.]|composition[.]|protocol[.](POLICY-|DISCLOSURE-))'
+--output-on-failure`. Linux adds `-R '^native[.]SETTINGS-FORM$'`. The latter creates
+owned Xvfb/private-D-Bus windows, sends XTest keys, reads AT-SPI controls and independently
+checks coherent ext4 generations. It preserves the 200 ms disclosure bound and requires
+positive detection of retained-value and premature-saved controls. These checks do
+not qualify an installed settings application or a complete desktop edition.
+
 The [scene inspector package](../../spec/delivery/packages/w-11-scene-inspector.md)
 adds Linux `interfaces::SceneInspector`. Construct it on the GTK owner thread with
 the same authority, immutable scene/resources, providers and trusted image worker

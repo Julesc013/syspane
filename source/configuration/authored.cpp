@@ -13,7 +13,7 @@ void require(bool value,const char* code){if(!value)throw Error(code);}
 const std::map<std::string,Json>& schemas(){
     static const std::map<std::string,Json> value=[] {
         std::map<std::string,Json> result;
-        for(const char* text:{settings_schema,scene_v0_2_schema,scene_v0_3_schema,layout_schema,binding_schema,command_v0_2_schema,command_v0_3_schema,command_v0_4_schema,content_package_schema,content_catalog_schema,preset_schema,theme_schema}){
+        for(const char* text:{settings_schema,scene_v0_2_schema,scene_v0_3_schema,layout_schema,binding_schema,command_v0_2_schema,command_v0_3_schema,command_v0_4_schema,command_result_schema,content_package_schema,content_catalog_schema,preset_schema,theme_schema}){
             auto item=Json::parse(text);result.emplace(item["$id"].get<std::string>(),std::move(item));
         }
         return result;
@@ -172,6 +172,10 @@ void validate_command(const Json& value){
             require(op["scene"]["revision"]==value["expected_revision"],"command.scene_revision");
         }else require(paths.insert(op["path"].get<std::string>()).second,"command.duplicate_path");
     }
+}
+void validate_command_result(const Json& value){
+    structural(value,"0.1.0/command-result",4096);
+    if(!value["revision"].is_null())(void)revision(value["revision"]);
 }
 void authorize_authored(const Json& command,const Authority& authority,const Policy& policy,std::uint64_t current){
     require(authority.authenticated&&authority.role_grants.count(authority.role)&&

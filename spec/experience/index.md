@@ -10,5 +10,6 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Preset and content admission](presets.md) — Compose versioned documents without granting authority or losing local edits.
 - [Portable scene structure and binding](scene-bindings.md) — Separate authored hierarchy and selectors from resolved geometry and live identity.
 - [Scene, theme and binding model](scene-theme.md) — Keep visual customization portable, bounded and independent from collection.
+- [settings-native-coverage.json](settings-native-coverage.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [settings-registry.json](settings-registry.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [Native settings and complete user operation coverage](settings.md) — Every supported user-configurable capability has a native discoverable operation.
