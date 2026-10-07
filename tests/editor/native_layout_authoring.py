@@ -3,6 +3,7 @@ from pathlib import Path
 from datetime import datetime,timezone
 import json,os,signal,subprocess,sys,time,uuid
 from native_editor import Harness,ROOT,sha,stored,launch_xvfb
+from native_observation import PREFIX
 CASES=json.loads((ROOT/'tests/editor/layout-authoring-cases.json').read_text())
 class LayoutHarness(Harness):
     def __init__(self,*args):super().__init__(*args,layout=True)
@@ -13,10 +14,6 @@ class LayoutHarness(Harness):
                 if description.startswith('editor.'):self.controls[description[7:]]=obj
             assert len(self.controls)<=128
         return self.controls.get(id)
-    def click(self,id):
-        obj=self.find(id);assert self.sensitive(id) and self.state(obj,self.Atspi.StateType.SHOWING)
-        rect=self.extents(obj);assert rect.x>=0 and rect.y>=0 and rect.width>0 and rect.height>0
-        self.input.click(rect.x+rect.width//2,rect.y+rect.height//2)
 
 def value(h,id):return h.text(h.find('layout.'+id))
 def field(h,id,text):
@@ -36,15 +33,24 @@ def tab(h,title):
     matches=[o for o in h.objects() if o.get_role()==h.Atspi.Role.PAGE_TAB and h.text(o)==title];assert len(matches)==1
     rect=h.extents(matches[0]);h.input.click(rect.x+rect.width//2,rect.y+rect.height//2);h.wait(lambda:h.state(matches[0],h.Atspi.StateType.SELECTED))
 def select(h,index):
-    # Focusing an unselected GTK tree can place its cursor on row zero. Home is
-    # then a no-op; first move to End so Home performs a real selection change.
-    h.focus('objects');h.input.press(0xff57);h.input.press(0xff50)
-    for _ in range(index):h.input.press(0xff54)
-    title=CASES['authored']['scene']['widgets'][index]['title']
-    try:h.wait(lambda:h.value('title')==title)
+    widgets=CASES['authored']['scene']['widgets'];assert 0<=index<len(widgets)
+    previous=h.observer.deadline;h.observer.deadline=min(time.monotonic()+3,previous or float('inf'))
+    try:
+        h.focus('objects');obj=h.find('objects')
+        # End and the final Down can select the same row. A single matching title
+        # may therefore precede queued navigation that would reclaim focus.
+        for key,row in [(0xff57,len(widgets)-1),(0xff50,0)]+[(0xff54,n) for n in range(1,index+1)]:
+            h.input.press(key);title=widgets[row]['title']
+            def selection():
+                selected=h.observer.call(obj,PREFIX+'Table','GetSelectedRows',signature='(ai)')[0]
+                observed=h.value('title');return dict(rows=selected,title=observed) if selected==[row] and observed==title else None
+            observed=h.wait(selection);trace=h.report.setdefault('navigation',[]);assert len(trace)<128
+            trace.append(dict(key=key,expected_row=row,expected_title=title,observed=observed))
     except Exception:
+        h.observer.deadline=previous
         h.report['selection_failure']=dict(index=index,title=h.value('title'),status=h.status(),focus=h.focus_snapshot('objects'),rows=list(h.find('objects').get_table_iface().get_selected_rows()))
         h.screenshot('selection-failure');raise
+    finally:h.observer.deadline=previous
 def open_layout(h):h.click('layout');h.wait(lambda:h.find('layout.set') is not None and h.state(h.find('layout.set'),h.Atspi.StateType.SHOWING) and h.sensitive('layout.set') and not h.sensitive('layout') and not h.sensitive('apply'))
 def set_layout(h):h.click('layout.set');h.wait(lambda:h.sensitive('layout'));h.input.focus(h.pid)
 def kind(h,k,group=False):choose(h,'kind',(['fixed','canvas','stack','grid'] if group else ['fixed','flow']).index(k),k)
@@ -90,10 +96,15 @@ def exercise(h):
             key='variant-move';location=(130,100);h.wait(lambda:h.number('x')==110 and h.number('y')==80)
         elif mode=='variant-resize':h.drag(317,167,20,10);key='variant-resize';h.wait(lambda:h.number('width')==240 and h.number('height')==100)
         elif mode=='variant-align':
-            h.point(110,90);h.point(280,50,True);h.wait(lambda:h.value('title')=='');h.click('align-left');select(h,1);h.wait(lambda:h.number('x')==80);key='variant-align';location=(100,40)
             # These fixed expected boxes overlap below y=80. Compare the second
             # caption above that overlap, not transparent pixels over the first.
-            sample_height=28;sample=second[:160*sample_height*3]
+            key='variant-align';location=(100,40);sample_height=28;sample=second[:160*sample_height*3]
+            h.point(110,90);h.point(280,50,True);h.wait(lambda:h.value('title')=='')
+            h.click('align-left')
+            # Observe completion before changing selection/focus: queuing Space
+            # does not acknowledge the native button's activation.
+            h.wait(lambda:body(h,*location,sample_height)==sample)
+            select(h,1);h.wait(lambda:h.number('x')==80)
     elif mode in ('canvas','stack-horizontal','stack-vertical','grid'):
         h.click('layout.cancel');h.wait(lambda:h.sensitive('layout'));h.input.focus(h.pid)
         if mode!='canvas':

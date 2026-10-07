@@ -1,0 +1,38 @@
+[
+  {
+    "step": "layout",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-07T10:53:06.167340+00:00",
+    "finished_at": "2026-10-07T10:53:13.587744+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2504040824,\n  \"linux_campaign_bytes\": 4725458358,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "layout",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/keyboard_step.py",
+      "linux-x64-gcc13",
+      "layout"
+    ],
+    "started_at": "2026-10-07T10:53:13.588113+00:00",
+    "finished_at": "2026-10-07T10:53:57.629409+00:00",
+    "exit": 8,
+    "stdout": "Test project /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n    Start 80: native.EDITOR-LAYOUT\n1/1 Test #80: native.EDITOR-LAYOUT .............***Failed   29.16 sec\n/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/layout-a0569501378e/result.json fail\nTraceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_layout_authoring.py\", line 167, in <module>\n    if __name__=='__main__':main()\n                            ^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_layout_authoring.py\", line 162, in main\n    assert child.returncode==0 and detail['outcome']=='pass',(mode,err.decode(errors='replace'))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: ('variant-align', 'dbus-daemon[456862]: [session uid=1000 pid=456862] Activating service name=\\'org.a11y.Bus\\' requested by \\':1.0\\' (uid=1000 pid=456863 comm=\"/usr/bin/python3 /mnt/d/Projects/SysPane/syspane/t\" label=\"kernel\")\\ndbus-daemon[456862]: [session uid=1000 pid=456862] Successfully activated service \\'org.a11y.Bus\\'\\ndbus-daemon[456871]: Activating service name=\\'org.a11y.atspi.Registry\\' requested by \\':1.2\\' (uid=1000 pid=456877 comm=\"/home/ir4runner/.cache/syspane/campaign-229a498/li\" label=\"kernel\")\\ndbus-daemon[456871]: Successfully activated service \\'org.a11y.atspi.Registry\\'\\nTraceback (most recent call last):\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_layout_authoring.py\", line 167, in <module>\\n    if __name__==\\'__main__\\':main()\\n                            ^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_layout_authoring.py\", line 151, in main\\n    if sys.argv[1]==\\'--observe\\':observe(*map(Path,sys.argv[2:5]),sys.argv[5]);return\\n                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_layout_authoring.py\", line 139, in observe\\n    try:exercise(h)\\n        ^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_layout_authoring.py\", line 99, in exercise\\n    h.point(110,90);h.point(280,50,True);h.wait(lambda:h.value(\\'title\\')==\\'\\');h.click(\\'align-left\\');select(h,1);h.wait(lambda:h.number(\\'x\\')==80);key=\\'variant-align\\';location=(100,40)\\n                                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_editor.py\", line 80, in wait\\n    assert time.monotonic()<end,self.stage+\\' observation deadline\\'\\n           ^^^^^^^^^^^^^^^^^^^^\\nAssertionError: BUFFER observation deadline\\n')\n\n\n0% tests passed, 1 tests failed out of 1\n\nTotal Test time (real) =  29.16 sec\n\nThe following tests FAILED:\n\t 80 - native.EDITOR-LAYOUT (Failed)\n Errors while running CTest\n\nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-modal-focus/linux-x64-gcc13-layout-0976e1ae41\n",
+    "stderr": ""
+  }
+]

@@ -1,0 +1,18 @@
+{
+  "source": "1327296abae9e592ad6f20dd0334004c244c67c1",
+  "package": "spec/delivery/packages/w-10-native-observation.md",
+  "question": "Why can the explicit AT-SPI GrabFocus call succeed while GetState remains unfocused on the layout button after modal cancellation and list selection?",
+  "original_failure": "build-support/evidence/w-10-layout-authoring-native/layout-f8e646b90d18.json",
+  "original_source_archive": "build-support/evidence/w-10-layout-authoring-history/linux-x64-gcc13-layout-1901b24c42/source-inputs.zip",
+  "method": "Run the preserved keyboard oracle's canvas case on the same committed native binary. Record explicit accessibility state and X11 focus before and after focus requests. On a failure only, issue one Space key to observe the already requested focus target's actual activation, then stop the diagnostic without claiming acceptance.",
+  "maximum_unchanged_repetitions": 3,
+  "child_seconds": 40,
+  "criteria": {
+    "unavailable": "An explicit query error remains unavailable; it is never evidence of no focus.",
+    "external_focus": "If X11 focus leaves the owned editor, investigate activation and ownership.",
+    "state_mismatch": "If X11 focus stays with the owned editor and Space activates the requested control despite explicit false FOCUSED, inspect GTK export and widget/window focus distinctions.",
+    "wrong_activation": "If another control activates, inspect the producer focus lifecycle.",
+    "no_failure": "An unchanged pass is inconclusive and does not establish a fix."
+  },
+  "limits": "Use the existing unprivileged ir4runner ext4/Xvfb/DBus laboratory only. Keep source, expected scenes, acceptance deadlines and other native oracles unchanged. Preserve all diagnostic attempts and binary/script identities."
+}

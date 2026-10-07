@@ -1703,3 +1703,17 @@ Twenty-one cases exercise actual controls, pixels, saved resources, reopen,
 topology, cancellation, recovery and erasure, including positive fault controls.
 The existing nine native matrices remain required regressions for shared-owner
 changes. See the [handoff](../../spec/delivery/layout-authoring-handoff.md).
+
+### Native keyboard input ordering
+
+The layout oracle acknowledges each navigation key using explicit native selected
+rows and the expected title. A single three-second deadline covers the whole
+selection. End can select the same row as the eventual final Down; that intermediate
+match cannot prove the later queued input completed. Do not substitute an arbitrary
+sleep, retry a mutation or force focus inside a held-focus assertion.
+
+Layout-suite buttons now use explicit focus plus Space again. The original scenes,
+pixel/storage outcomes, fault controls and 200-ms erasure bound remain unchanged.
+After workspace test preflight, run `ctest --preset linux-x64-gcc13 -R "^native[.]EDITOR-LAYOUT$" --output-on-failure`.
+The [handoff](../../spec/delivery/keyboard-input-handoff.md) records the paired native
+experiment, all ten regression matrices and the remaining qualification scope.

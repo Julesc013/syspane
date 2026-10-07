@@ -477,7 +477,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "2afe9bb6e1cf03b14c4c6c4affbe3262feade5fec34f6e54a80ee4557667f29f"
+      "sha256": "6f782aa5bac3ff7f2124bd5ddbd9d3fd6cffad356862a1b556ce894c5a12cc81"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -851,6 +851,17 @@
         "SP-CURRENT"
       ],
       "sha256": "c7b7870299f1fd65447397ab948b3e86432072054221c3ba649737840b95c093"
+    },
+    {
+      "id": "SP-KEYBOARD-INPUT-HANDOFF",
+      "path": "delivery/keyboard-input-handoff.md",
+      "title": "Native keyboard-input checkpoint",
+      "description": "Queued navigation completion explains the recorded layout-button focus failure.",
+      "requires": [
+        "SP-W10-KEYBOARD-INPUT",
+        "SP-LAYOUT-AUTHORING-HANDOFF"
+      ],
+      "sha256": "af9255f6beeb6ee53a3630ec59881ef5f7fd53c54447db8ec6a778aef0532606"
     },
     {
       "id": "SP-LARGE-COMMANDS-HANDOFF",
@@ -1620,6 +1631,17 @@
         "SP-W10-NATIVE-EDITOR"
       ],
       "sha256": "54d2c7b9774a523227ffe04375ad9824a88a16f58097676c560808e6a05e26f0"
+    },
+    {
+      "id": "SP-W10-KEYBOARD-INPUT",
+      "path": "delivery/packages/w-10-keyboard-input.md",
+      "title": "Native keyboard input completion",
+      "description": "Acknowledge navigation before requesting a different focus target.",
+      "requires": [
+        "SP-W10-NATIVE-OBSERVATION",
+        "SP-W10-LAYOUT-AUTHORING"
+      ],
+      "sha256": "931307a48aaad9e822f6781d7c6e1c653760e377f69449e8cf170e2e53c85e5c"
     },
     {
       "id": "SP-W10-LAYOUT-AUTHORING",

@@ -7,6 +7,12 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
+The [keyboard-input checkpoint](spec/delivery/keyboard-input-handoff.md) resolves
+the recorded layout-button focus failure in the laboratory: navigation now awaits
+each selected row before requesting another control's focus. Layout buttons again
+use explicit focus and keyboard activation. Production bytes and fixed acceptance
+outcomes are unchanged; earlier unrelated failures and full editions remain open.
+
 The [layout-authoring checkpoint](spec/delivery/layout-authoring-handoff.md) adds
 fixed, flow, canvas, stack and grid controls, responsive breakpoints, priority,
 sibling order and whole-group display assignment. Direct fixed-layout edits target

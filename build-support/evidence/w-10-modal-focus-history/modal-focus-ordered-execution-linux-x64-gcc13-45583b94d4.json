@@ -1,0 +1,38 @@
+[
+  {
+    "step": "diagnostic",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-07T10:47:54.583954+00:00",
+    "finished_at": "2026-10-07T10:48:02.106685+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2500946674,\n  \"linux_campaign_bytes\": 4724214183,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "diagnostic",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/modal_focus_ordered_step.py",
+      "linux-x64-gcc13",
+      "diagnostic"
+    ],
+    "started_at": "2026-10-07T10:48:02.107091+00:00",
+    "finished_at": "2026-10-07T10:48:46.987554+00:00",
+    "exit": 0,
+    "stdout": "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/modal-focus-ordered-9e12178f91ee/result.json observed\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-modal-focus/linux-x64-gcc13-diagnostic-278da5f015\n",
+    "stderr": ""
+  }
+]

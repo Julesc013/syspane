@@ -12,12 +12,21 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-07T10:19:48.459090+00:00", "scope": "Native layout authoring and active fixed variants"}
+updated: {"by": "codex", "at": "2026-10-07T11:01:07.990994+00:00", "scope": "Proven layout keyboard input ordering cause and remaining native boundaries"}
 ---
 
 # Current state and next admitted boundary
 
-The latest [layout-authoring checkpoint](layout-authoring-handoff.md) adds every
+The latest [keyboard-input checkpoint](keyboard-input-handoff.md) identifies the
+layout-button focus failure as an input-ordering error in the laboratory. End
+temporarily selected the expected final row before later queued navigation ran.
+The oracle now awaits each selected row/title within one deadline and restores
+keyboard button activation. Production bytes and all fixed outcomes remain unchanged.
+Earlier unrelated interface/focus failures remain open. Continue flow/container
+group transformations and remaining properties, then installed ownership and all
+five complete editions; W-10 remains in progress.
+
+The earlier [layout-authoring checkpoint](layout-authoring-handoff.md) adds every
 existing layout kind, responsive breakpoint input, priority, sibling order and
 whole-root display intent. Native fixed gestures and arrangement edit the active
 variant; topology invalidates stale buffered geometry. Portable and independent
