@@ -2088,6 +2088,7 @@
       ],
       "allowed_dependencies": [
         "syspane_settings_draft",
+        "syspane_private_text",
         "PkgConfig::GTK3"
       ],
       "target_requirements": [
@@ -2210,6 +2211,90 @@
         "windows-x64-gcc15",
         "linux-x64-gcc13",
         "windows-x86-v141-xp"
+      ]
+    },
+    {
+      "id": "private-text",
+      "target": "syspane_private_text",
+      "type": "STATIC_LIBRARY",
+      "source_owner": "source/interfaces/",
+      "public_interfaces": [
+        "source/interfaces/private_text.hpp"
+      ],
+      "private_interfaces": [],
+      "sources": [
+        "source/interfaces/private_text_linux.cpp"
+      ],
+      "allowed_dependencies": [
+        "PkgConfig::GTK3"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
+    },
+    {
+      "id": "editor-form",
+      "target": "syspane_editor_form",
+      "type": "STATIC_LIBRARY",
+      "source_owner": "source/interfaces/",
+      "public_interfaces": [
+        "source/interfaces/editor_form.hpp"
+      ],
+      "private_interfaces": [],
+      "sources": [
+        "source/interfaces/editor_form_linux.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_editor_draft",
+        "syspane_scene_surface",
+        "syspane_private_text",
+        "PkgConfig::GTK3"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
+    },
+    {
+      "id": "editor-window",
+      "target": "syspane_editor_window",
+      "type": "EXECUTABLE",
+      "source_owner": "tests/editor/",
+      "public_interfaces": [],
+      "private_interfaces": [],
+      "sources": [
+        "tests/editor/editor_window.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_editor_form",
+        "syspane_async_commands",
+        "syspane_generation_store",
+        "syspane_child",
+        "PkgConfig::GTK3",
+        "Threads::Threads"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
       ]
     }
   ]

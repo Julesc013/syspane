@@ -61,5 +61,8 @@ transient input owner without committing a draft or asserting rollback completio
 An independent recovery owner must confirm that the obstructing native lifetime
 ended before reporting release or admitting a replacement. Its escape route must
 be available before editor admission. The [X11 lifetime experiment](../delivery/packages/w-25-editor-exit.md)
-tests this prerequisite; full draft/persistence and actual desktop integration still
-belong to the editor's acceptance gate.
+tests this prerequisite. The [native editor package](../delivery/packages/w-10-native-editor.md)
+connects the shared draft, real GTK controls, scene pixels and stored transactions
+to that independent owner in a private laboratory. It covers fixed-base gestures,
+keyboard editing, buffered properties, policy erasure and frozen-editor release.
+Installed desktop entry/restoration and the complete editor remain acceptance gates.

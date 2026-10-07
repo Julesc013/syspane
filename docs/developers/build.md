@@ -1537,3 +1537,20 @@ and explicitly leaves guest/runtime and native executor qualification open.
 The [0.1.0 release scope](../../spec/delivery/release-0.1.0.md) requires all five
 named platform tracks and full native editions. Passing these component checks does
 not establish any new OS floor, desktop support or release readiness.
+
+## Native scene editor component
+
+After ordinary Linux workspace preflight and configure/build, run
+`ctest --preset linux-x64-gcc13 -R '^native[.]EDITOR-FORM$' --output-on-failure`.
+The runner owns a private Xvfb/DBus laboratory. It checks actual pointer/keyboard
+input, rendered pixels, accessible fields, coherent stored resources and a separate
+recovery owner. The fixture executable is `syspane_editor_window`; it is not an
+installed application entry point. See the [package](../../spec/delivery/packages/w-10-native-editor.md)
+for the exact admitted controls and [handoff](../../spec/delivery/native-editor-handoff.md)
+for results and remaining gates.
+
+Embed EditorForm on its GTK owner thread, supply coherent authored/resource state,
+current policy and topology, and route callbacks through the existing command owner.
+Deliver results by their original ticket/epoch and reload with fresh resources.
+Install the separate escape owner before mapping an input-blocking editor. The
+form does not create a store, authorize itself or qualify a desktop host.

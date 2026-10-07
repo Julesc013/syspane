@@ -3,6 +3,12 @@
 These are planned controls. Every advertised setting must be editable through
 the native UI as well as the shared command API; hand-editing a file is optional.
 
+The current Linux development editor supports selection, drag/resize, keyboard
+movement, title/text/geometry fields, duplicate/delete, undo/redo and Apply/Cancel.
+Property fields become one draft edit when Set properties is selected. Apply saves
+the draft; activation and desktop visibility remain separate facts. This component
+is tested in a private laboratory and is not yet an installed desktop edition.
+
 A setting changes application behaviour. A scene arranges widgets and their data
 bindings. A theme supplies visual tokens. A preset combines those documents for
 a task. Machine bindings map portable roles to local devices and displays.

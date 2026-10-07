@@ -83,8 +83,8 @@ struct Owner {
     std::uint64_t started = monotonic_ms(), stopping = 0;
     bool killed = false;
     int outcome = 0;
-    explicit Owner(bool maximized) : child(Child::launch_self({maximized ? "--child-maximized" : "--child",
-        std::to_string(syspane::platform::current_process_id())})) { event("child", child.id()); }
+    explicit Owner(bool maximized,std::vector<std::string> arguments={}) : child(Child::launch_self(arguments.empty()?std::vector<std::string>{maximized ? "--child-maximized" : "--child",
+        std::to_string(syspane::platform::current_process_id())}:arguments)) { event("child", child.id()); }
     void stop(const char* reason) {
         if (stopping) return;
         stopping = monotonic_ms();
@@ -121,14 +121,21 @@ gboolean closed(GtkWidget*, GdkEvent*, gpointer data) { clicked(nullptr, data); 
 }
 int main(int argc, char** argv) {
     try {
+        if(argc==7&&std::string(argv[1])=="--editor-program"){
+            const auto parent=std::stoull(argv[2]);
+            syspane::platform::exec_program(argv[3],{"--recovery-child",argv[2],argv[4],argv[5],argv[6]},parent);
+        }
         if (argc == 3 && (std::string(argv[1]) == "--child" || std::string(argv[1]) == "--child-maximized")) {
             const std::string value = argv[2];
             if (value.empty() || value.size() > 10 || value.find_first_not_of("0123456789") != std::string::npos) return 64;
             return editor(std::stoull(value), std::string(argv[1]) == "--child-maximized");
         }
-        if (argc != 2 || (std::string(argv[1]) != "--owned-x11-lab" && std::string(argv[1]) != "--owned-gnome-lab")) return 64;
+        const bool editor_lab=argc==6&&std::string(argv[1])=="--owned-editor-lab";
+        if (!editor_lab&&(argc != 2 || (std::string(argv[1]) != "--owned-x11-lab" && std::string(argv[1]) != "--owned-gnome-lab"))) return 64;
         if (!gtk_init_check(nullptr, nullptr)) return 69;
-        Owner owner(std::string(argv[1]) == "--owned-gnome-lab");
+        std::vector<std::string> arguments;
+        if(editor_lab)arguments={"--editor-program",std::to_string(syspane::platform::current_process_id()),argv[2],argv[3],argv[4],argv[5]};
+        Owner owner(std::string(argv[1]) == "--owned-gnome-lab",std::move(arguments));
         GtkWidget* window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
         gtk_window_set_title(GTK_WINDOW(window), "SysPane independent editor exit");
         gtk_window_set_decorated(GTK_WINDOW(window), FALSE);

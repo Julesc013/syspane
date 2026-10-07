@@ -104,7 +104,7 @@ struct SceneSurface::Impl {
         else status={SurfaceCode::empty,0,0,{}};
         return ok;
     }
-    void shut(const char* why){images->clear();histories.clear();erase();closed=true;entries.clear();status={SurfaceCode::closed,0,0,why};}
+    void shut(const char* why){images->clear();histories.clear();erase();closed=true;entries.clear();config={};status={SurfaceCode::closed,0,0,why};}
     bool advance(std::uint64_t now){owner();if(closed)return false;if(last_time&&now<*last_time){shut("surface.clock");return false;}last_time=now;return true;}
     bool start(std::uint64_t now){if(!advance(now)||!erase())return false;
         for(auto& e:entries){const auto state=e.view->status(now);if(state.presentation==r::Presentation::retained||state.snapshot_required)discontinuity(e.declaration.producer,false);}

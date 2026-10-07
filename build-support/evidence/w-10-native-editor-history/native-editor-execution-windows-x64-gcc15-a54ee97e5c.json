@@ -1,0 +1,98 @@
+[
+  {
+    "step": "configure",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-07T03:55:27.070617+00:00",
+    "finished_at": "2026-10-07T03:55:27.868069+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 1737529449,\n  \"linux_campaign_bytes\": 4506652644,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "configure",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "out/campaign/native_editor_step.py",
+      "windows-x64-gcc15",
+      "configure"
+    ],
+    "started_at": "2026-10-07T03:55:27.868581+00:00",
+    "finished_at": "2026-10-07T03:55:29.656529+00:00",
+    "exit": 0,
+    "stdout": "profile verified: windows-x64-gcc15\nvendored dependency digests: pass\n-- Configuring done (1.0s)\n-- Generating done (0.1s)\n-- Build files have been written to: D:/Projects/SysPane/syspane/out/build/windows-x64-gcc15\n \nAttempt: D:\\Projects\\SysPane\\syspane\\out\\campaign\\w-10-native-editor\\windows-x64-gcc15-configure-0aa521cfe8\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-07T03:55:29.656801+00:00",
+    "finished_at": "2026-10-07T03:55:30.529216+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 1740487121,\n  \"linux_campaign_bytes\": 4506651022,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "out/campaign/native_editor_step.py",
+      "windows-x64-gcc15",
+      "build"
+    ],
+    "started_at": "2026-10-07T03:55:30.529524+00:00",
+    "finished_at": "2026-10-07T03:55:31.169765+00:00",
+    "exit": 0,
+    "stdout": "ninja: no work to do.\n \nAttempt: D:\\Projects\\SysPane\\syspane\\out\\campaign\\w-10-native-editor\\windows-x64-gcc15-build-66634aa379\n",
+    "stderr": ""
+  },
+  {
+    "step": "test",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-07T03:55:31.170056+00:00",
+    "finished_at": "2026-10-07T03:55:31.921035+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 1743298847,\n  \"linux_campaign_bytes\": 4506651022,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "test",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "out/campaign/native_editor_step.py",
+      "windows-x64-gcc15",
+      "test"
+    ],
+    "started_at": "2026-10-07T03:55:31.921419+00:00",
+    "finished_at": "2026-10-07T03:55:49.264157+00:00",
+    "exit": 0,
+    "stdout": "....   Passed    0.05 sec\n      Start  99: configuration.COMMAND-POLICY\n31/69 Test  #99: configuration.COMMAND-POLICY ............   Passed    0.04 sec\n      Start 100: configuration.COMMAND-LIFETIME\n32/69 Test #100: configuration.COMMAND-LIFETIME ..........   Passed    0.03 sec\n      Start 101: configuration.COMMAND-CAPACITY\n33/69 Test #101: configuration.COMMAND-CAPACITY ..........   Passed    0.61 sec\n      Start 102: configuration.COMMAND-FAULT\n34/69 Test #102: configuration.COMMAND-FAULT .............   Passed    0.05 sec\n      Start 103: configuration.COMMAND-NEGOTIATE\n35/69 Test #103: configuration.COMMAND-NEGOTIATE .........   Passed    0.03 sec\n      Start 104: configuration.RECON-RECEIPTS\n36/69 Test #104: configuration.RECON-RECEIPTS ............   Passed    0.04 sec\n      Start 105: configuration.RECON-POLICY\n37/69 Test #105: configuration.RECON-POLICY ..............   Passed    0.03 sec\n      Start 106: configuration.RECON-CODEC\n38/69 Test #106: configuration.RECON-CODEC ...............   Passed    0.02 sec\n      Start 107: configuration.RECON-BOUNDS\n39/69 Test #107: configuration.RECON-BOUNDS ..............   Passed    0.05 sec\n      Start 108: configuration.SCENE-CONTENT-SCHEMA\n40/69 Test #108: configuration.SCENE-CONTENT-SCHEMA ......   Passed    0.08 sec\n      Start 109: configuration.SCENE-CONTENT-MIGRATION\n41/69 Test #109: configuration.SCENE-CONTENT-MIGRATION ...   Passed    0.03 sec\n      Start 110: configuration.SCENE-CONTENT-RESOURCES\n42/69 Test #110: configuration.SCENE-CONTENT-RESOURCES ...   Passed    0.10 sec\n      Start 111: configuration.SCENE-CONTENT-PREVIEW\n43/69 Test #111: configuration.SCENE-CONTENT-PREVIEW .....   Passed    0.05 sec\n      Start 112: configuration.SCENE-CONTENT-TX\n44/69 Test #112: configuration.SCENE-CONTENT-TX ..........   Passed    0.10 sec\n      Start 113: configuration.SCENE-CONTENT-SESSION\n45/69 Test #113: configuration.SCENE-CONTENT-SESSION .....   Passed    0.08 sec\n      Start 114: configuration.AUTH-SCHEMA\n46/69 Test #114: configuration.AUTH-SCHEMA ...............   Passed    0.04 sec\n      Start 115: configuration.TX-MIXED\n47/69 Test #115: configuration.TX-MIXED ..................   Passed    0.03 sec\n      Start 116: configuration.TX-CONFLICT\n48/69 Test #116: configuration.TX-CONFLICT ...............   Passed    0.03 sec\n      Start 117: configuration.TX-REPLAY\n49/69 Test #117: configuration.TX-REPLAY .................   Passed    0.04 sec\n      Start 118: configuration.TX-INTERRUPT\n50/69 Test #118: configuration.TX-INTERRUPT ..............   Passed    0.05 sec\n      Start 119: configuration.TX-BOUNDS\n51/69 Test #119: configuration.TX-BOUNDS .................   Passed    0.04 sec\n      Start 120: configuration.TX-CAPACITY\n52/69 Test #120: configuration.TX-CAPACITY ...............   Passed    0.59 sec\n      Start 121: configuration.DIGEST\n53/69 Test #121: configuration.DIGEST ....................   Passed    0.04 sec\n      Start 122: configuration.DIGEST-CONTENT\n54/69 Test #122: configuration.DIGEST-CONTENT ............   Passed    0.73 sec\n      Start 123: configuration.CONTENT-COMPOSE\n55/69 Test #123: configuration.CONTENT-COMPOSE ...........   Passed    0.05 sec\n      Start 124: configuration.CONTENT-PINS\n56/69 Test #124: configuration.CONTENT-PINS ..............   Passed    0.07 sec\n      Start 125: configuration.CONTENT-PATHS\n57/69 Test #125: configuration.CONTENT-PATHS .............   Passed    0.02 sec\n      Start 126: configuration.CONTENT-BOUNDS\n58/69 Test #126: configuration.CONTENT-BOUNDS ............   Passed    0.06 sec\n      Start 127: configuration.CONTENT-CAPABILITIES\n59/69 Test #127: configuration.CONTENT-CAPABILITIES ......   Passed    0.05 sec\n      Start 128: configuration.CONTENT-POLICY\n60/69 Test #128: configuration.CONTENT-POLICY ............   Passed    0.07 sec\n      Start 129: configuration.RESOURCE-COMMIT\n61/69 Test #129: configuration.RESOURCE-COMMIT ...........   Passed    0.08 sec\n      Start 130: configuration.RESOURCE-GUARDS\n62/69 Test #130: configuration.RESOURCE-GUARDS ...........   Passed    0.09 sec\n      Start 131: configuration.RESOURCE-SESSION\n63/69 Test #131: configuration.RESOURCE-SESSION ..........   Passed    0.06 sec\n      Start 132: configuration.RESOURCE-RETAINED\n64/69 Test #132: configuration.RESOURCE-RETAINED .........   Passed    0.12 sec\n      Start 155: composition.graph\n65/69 Test #155: composition.graph .......................   Passed    0.05 sec\n      Start 156: composition.reject_forbidden\n66/69 Test #156: composition.reject_forbidden ............   Passed    0.05 sec\n      Start 171: protocol.POLICY-01\n67/69 Test #171: protocol.POLICY-01 ......................   Passed    0.02 sec\n      Start 172: protocol.POLICY-02\n68/69 Test #172: protocol.POLICY-02 ......................   Passed    0.02 sec\n      Start 173: protocol.DISCLOSURE-01\n69/69 Test #173: protocol.DISCLOSURE-01 ..................   Passed    0.02 sec\n\n100% tests passed, 0 tests failed out of 69\n\nTotal Test time (real) =  16.53 sec\n \nAttempt: D:\\Projects\\SysPane\\syspane\\out\\campaign\\w-10-native-editor\\windows-x64-gcc15-test-a670646833\n",
+    "stderr": ""
+  }
+]

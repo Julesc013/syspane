@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-07T03:05:50Z", "scope": "Shared editor draft, typed operations and bounded reversible history"}
+updated: {"by": "codex", "at": "2026-10-07T03:55:11Z", "scope": "Initial GTK editor, actual persistence and independent native recovery"}
 ---
 
 # Current state and next admitted boundary
@@ -22,12 +22,20 @@ The active objective is now the [complete 0.1.0 release](release-0.1.0.md) for W
 required but is no longer the final completion boundary. Legacy version/architecture
 floors, native labs and complete desktop/package evidence remain unresolved.
 
-The latest [editor draft checkpoint](editor-draft-handoff.md) implements typed atomic
+The latest [native editor checkpoint](native-editor-handoff.md) connects the shared
+draft to GTK selection, pointer/keyboard edits, buffered properties and shared scene
+pixels. The private native laboratory checks real resource-aware commits, policy
+erasure, cross-epoch reconciliation and separate-owner frozen-editor recovery.
+Next close larger-scene transport and remaining authoring/property boundaries, then
+connect installed scene-aligned desktop entry and restoration. Full editor, native
+accessibility/performance, other adapters and all complete-edition gates remain open.
+
+The earlier [editor draft checkpoint](editor-draft-handoff.md) implements typed atomic
 widget/hierarchy/layout/content operations, stable selection, bounded undo/redo and
 exact discard through the existing resource-aware transaction owner. Independent
 expected scenes, current-policy history checks and cross-epoch reconciliation cover
-the portable draft. The next boundary is its native interactive surface with the
-existing independent escape owner. Larger-scene transport, remaining authoring
+the portable draft. Its initial Linux native surface and independent escape owner
+now have the checkpoint above. Larger-scene transport, remaining authoring
 contracts, recovery drafts, installed routing and complete editions remain required.
 
 The earlier [resource-aware settings checkpoint](settings-resources-handoff.md)

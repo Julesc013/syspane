@@ -45,3 +45,7 @@ build-support/evidence/w-11-native-settings-history/** -text whitespace=cr-at-eo
 build-support/evidence/w-11-settings-resources-history/** -text whitespace=cr-at-eol
 # Preserve exact editor attempts, fixed expected scenes and executed helpers.
 build-support/evidence/w-10-editor-draft-history/** -text whitespace=cr-at-eol
+# Preserve exact native editor attempts, original contracts and executed helpers.
+build-support/evidence/w-10-native-editor-history/** -text whitespace=cr-at-eol
+# This executed fixture generator ended with a blank line; keep its exact bytes.
+build-support/evidence/w-10-native-editor-history/prepare_editor_window.py -text whitespace=cr-at-eol,-blank-at-eof

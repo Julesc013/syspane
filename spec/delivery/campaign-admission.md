@@ -89,7 +89,14 @@ has 126,512,525,312 free bytes and the native filesystem 1,004,556,574,720. This
 bounded, reversible allocation retains original source/debug/evidence artifacts;
 no product limit, test oracle or standard growth reservation changes.
 
-The authored-binding checkpoint raises this owned development allocation to 6 GiB.
+The native editor checkpoint raises the owned development allocation to 7 GiB.
+Its preserved build preflight stopped at 1,727,247,236 checkout-output bytes plus
+4,503,267,320 Linux-output bytes: the additional 268,435,456-byte build reservation
+exceeds 6 GiB. Verified duplicate archives were reclaimed first. Keep source/debug
+artifacts and failed native attempts. The allocation record binds measured available
+storage and this reversible development decision; product runtime limits are unchanged.
+
+The authored-binding checkpoint raised this owned development allocation to 6 GiB.
 Its original build preflight stopped at 1,670,571,705 checkout-output bytes plus
 3,440,164,317 native-output bytes; the unchanged 268,435,456-byte reservation did
 not fit 5 GiB. Retained three-profile debug/test outputs and archived attempts need

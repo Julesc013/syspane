@@ -1,37 +1,8 @@
 #include "settings_form.hpp"
+#include "private_text.hpp"
 #include <gtk/gtk.h>
 #include <gtk/gtk-a11y.h>
 #include <thread>
-
-// Distinct native accessible type: reading/editing remains standard; this component
-// has no clipboard export owner, including AT-SPI EditableText copy/cut entry points.
-typedef struct {GtkTextViewAccessible parent;} SpSettingsAccessible;
-typedef struct {GtkTextViewAccessibleClass parent;} SpSettingsAccessibleClass;
-static void settings_editable_init(AtkEditableTextIface* iface){
-    iface->copy_text=+[](AtkEditableText*,gint,gint){};
-    iface->cut_text=+[](AtkEditableText*,gint,gint){};
-}
-G_DEFINE_TYPE_WITH_CODE(SpSettingsAccessible,sp_settings_accessible,GTK_TYPE_TEXT_VIEW_ACCESSIBLE,
-    G_IMPLEMENT_INTERFACE(ATK_TYPE_EDITABLE_TEXT,settings_editable_init))
-static void sp_settings_accessible_init(SpSettingsAccessible*){}
-static void sp_settings_accessible_class_init(SpSettingsAccessibleClass*){}
-typedef struct {GtkTextView parent;} SpSettingsText;
-typedef struct {GtkTextViewClass parent;} SpSettingsTextClass;
-G_DEFINE_TYPE(SpSettingsText,sp_settings_text,GTK_TYPE_TEXT_VIEW)
-static void sp_settings_text_class_init(SpSettingsTextClass* cls){
-    gtk_widget_class_set_accessible_type(GTK_WIDGET_CLASS(cls),sp_settings_accessible_get_type());
-    auto* text=GTK_TEXT_VIEW_CLASS(cls);text->copy_clipboard=+[](GtkTextView*){};text->cut_clipboard=+[](GtkTextView*){};
-    GTK_WIDGET_CLASS(cls)->drag_data_get=+[](GtkWidget*,GdkDragContext*,GtkSelectionData*,guint,guint){};
-}
-static void sp_settings_text_init(SpSettingsText* self){
-    auto* view=GTK_TEXT_VIEW(self);gtk_text_view_set_accepts_tab(view,FALSE);gtk_text_view_set_wrap_mode(view,GTK_WRAP_NONE);
-    auto* buffer=gtk_text_view_get_buffer(view);
-    g_signal_connect_after(self,"realize",G_CALLBACK(+[](GtkWidget* w,gpointer){gtk_text_buffer_remove_selection_clipboard(gtk_text_view_get_buffer(GTK_TEXT_VIEW(w)),gtk_widget_get_clipboard(w,GDK_SELECTION_PRIMARY));}),nullptr);
-    g_signal_connect(buffer,"insert-text",G_CALLBACK(+[](GtkTextBuffer* b,GtkTextIter*,gchar* t,gint n,gpointer){
-        if(n<0||n>1024||!g_utf8_validate(t,n,nullptr)||gtk_text_buffer_get_char_count(b)+g_utf8_strlen(t,n)>256||
-           std::string_view(t,static_cast<std::size_t>(n)).find_first_of("\r\n\t")!=std::string_view::npos)
-            g_signal_stop_emission_by_name(b,"insert-text");}),nullptr);
-}
 
 namespace syspane::interfaces {
 namespace {
@@ -109,12 +80,12 @@ struct SettingsForm::Impl {
 SettingsForm::SettingsForm(c::Authority a,c::Policy p,c::Authored v,std::string e,Actions actions,Translator translate,std::optional<SettingsResources> resources):impl_(std::make_unique<Impl>(std::move(a),std::move(p),std::move(v),std::move(e),std::move(actions),std::move(translate),std::move(resources))){
     auto& i=*impl_;if(!i.actions.request_id||!i.actions.submit||!i.actions.cancel||!i.actions.reload)throw protocol::Error("settings.actions");
     i.root=i.own(gtk_box_new(GTK_ORIENTATION_VERTICAL,8));auto* search_label=i.label(i.tr("settings.search","Search settings"));gtk_box_pack_start(GTK_BOX(i.root),search_label,FALSE,FALSE,0);
-    i.search=i.own(GTK_WIDGET(g_object_new(sp_settings_text_get_type(),nullptr)));gtk_widget_set_size_request(i.search,-1,30);accessible(i.search,i.tr("settings.search","Search settings"),"settings.search");gtk_box_pack_start(GTK_BOX(i.root),i.search,FALSE,FALSE,0);
+    i.search=i.own(private_text());gtk_widget_set_size_request(i.search,-1,30);accessible(i.search,i.tr("settings.search","Search settings"),"settings.search");gtk_box_pack_start(GTK_BOX(i.root),i.search,FALSE,FALSE,0);
     auto* scroll=gtk_scrolled_window_new(nullptr,nullptr);gtk_box_pack_start(GTK_BOX(i.root),scroll,TRUE,TRUE,0);auto* list=gtk_box_new(GTK_ORIENTATION_VERTICAL,12);gtk_container_add(GTK_CONTAINER(scroll),list);
     for(const auto& d:setting_descriptions()){
         auto row=std::make_unique<Impl::Row>();row->owner=&i;row->descriptor=d;row->box=i.own(gtk_box_new(GTK_ORIENTATION_VERTICAL,3));gtk_box_pack_start(GTK_BOX(list),row->box,FALSE,FALSE,0);
         auto* label=i.label(i.tr(d.label_id,d.label));gtk_box_pack_start(GTK_BOX(row->box),label,FALSE,FALSE,0);auto* line=gtk_box_new(GTK_ORIENTATION_HORIZONTAL,8);gtk_box_pack_start(GTK_BOX(row->box),line,FALSE,FALSE,0);
-        row->control=i.own(d.kind==SettingKind::boolean?gtk_check_button_new():GTK_WIDGET(g_object_new(sp_settings_text_get_type(),nullptr)));gtk_widget_set_size_request(row->control,240,30);
+        row->control=i.own(d.kind==SettingKind::boolean?gtk_check_button_new():private_text());gtk_widget_set_size_request(row->control,240,30);
         accessible(row->control,i.tr(d.label_id,d.label),"settings.value."+d.id);gtk_label_set_mnemonic_widget(GTK_LABEL(label),row->control);gtk_box_pack_start(GTK_BOX(line),row->control,TRUE,TRUE,0);
         row->defaults=i.button("default","Use built-in default");atk_object_set_description(gtk_widget_get_accessible(row->defaults),("settings.default."+d.id).c_str());gtk_box_pack_start(GTK_BOX(line),row->defaults,FALSE,FALSE,0);
         row->detail=i.label("");row->error=i.label("");accessible(row->detail,"", "settings.detail."+d.id);accessible(row->error,"", "settings.error."+d.id);

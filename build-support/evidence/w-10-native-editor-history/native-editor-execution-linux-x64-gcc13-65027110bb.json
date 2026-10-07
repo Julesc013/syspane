@@ -1,0 +1,38 @@
+[
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-07T03:44:13.509084+00:00",
+    "finished_at": "2026-10-07T03:44:14.171598+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 6442450944,\n  \"checkout_out_bytes\": 1724307204,\n  \"linux_campaign_bytes\": 4446468527,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/native_editor_step.py",
+      "linux-x64-gcc13",
+      "build"
+    ],
+    "started_at": "2026-10-07T03:44:14.171979+00:00",
+    "finished_at": "2026-10-07T03:44:33.147882+00:00",
+    "exit": 0,
+    "stdout": "[1/6] Linking CXX static library libsyspane_scene_surface.a\n[2/6] Linking CXX executable syspane_scene_inspector_tests\n[3/6] Linking CXX executable syspane_scene_surface_tests\n[4/6] Building CXX object CMakeFiles/syspane_editor_form.dir/source/interfaces/editor_form_linux.cpp.o\n[5/6] Linking CXX static library libsyspane_editor_form.a\n[6/6] Linking CXX executable syspane_editor_window\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-native-editor/linux-x64-gcc13-build-aae52b5009\n",
+    "stderr": ""
+  }
+]
