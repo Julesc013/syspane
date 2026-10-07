@@ -76,13 +76,27 @@ void apply(Json& scene,const DuplicateWidgets& edit){
     for(const auto& id:edit.ids){auto& list=owner(scene,id);const auto index=static_cast<std::size_t>(std::distance(list.begin(),std::find(list.begin(),list.end(),id)))+1;at_index(list,index,{edit.mapping.at(id)});}
     for(auto& w:copies)scene["widgets"].push_back(std::move(w));
 }
+Json& variant(Json& scene,const std::string& id,int index){
+    auto& layout=widget(scene,id).at("layout");need(index>=-1&&index<8,"editor.layout_variant");
+    if(index==-1)return layout.at("base");
+    need(layout.contains("breakpoints")&&static_cast<std::size_t>(index)<layout.at("breakpoints").size(),"editor.layout_variant");
+    return layout.at("breakpoints").at(static_cast<std::size_t>(index)).at("layout");
+}
+int variant_index(const std::vector<std::string>& ids,const std::vector<int>& indices,const std::string& id){
+    need(indices.empty()||indices.size()==ids.size(),"editor.layout_variants");
+    return indices.empty()?-1:indices.at(static_cast<std::size_t>(std::distance(ids.begin(),std::find(ids.begin(),ids.end(),id))));
+}
+void apply(Json& scene,const RootDisplayEdit& edit){
+    need(std::find(scene.at("roots").begin(),scene.at("roots").end(),edit.root)!=scene.at("roots").end(),"editor.layout_root");
+    for(const auto& id:subtree(scene,{edit.root}))widget(scene,id)["display"]=edit.display;
+}
 void apply(Json& scene,const MoveWidgets& edit){
     need(std::isfinite(edit.dx)&&std::isfinite(edit.dy),"editor.number");(void)subtree(scene,edit.ids);
-    for(const auto& id:edit.ids){auto& base=widget(scene,id)["layout"]["base"];need(base["kind"]=="fixed","editor.fixed");
+    for(const auto& id:edit.ids){auto& base=variant(scene,id,variant_index(edit.ids,edit.variants,id));need(base["kind"]=="fixed","editor.fixed");
         base["x"]=base["x"].get<double>()+edit.dx;base["y"]=base["y"].get<double>()+edit.dy;}
 }
 void apply(Json& scene,const ResizeWidget& edit){
-    need(std::isfinite(edit.width)&&std::isfinite(edit.height),"editor.number");auto& base=widget(scene,edit.id)["layout"]["base"];
+    need(std::isfinite(edit.width)&&std::isfinite(edit.height),"editor.number");auto& base=variant(scene,edit.id,edit.variant);
     need(base["kind"]=="fixed","editor.fixed");base["width"]=edit.width;base["height"]=edit.height;
 }
 struct Box {std::string id;std::int64_t x,y,width,height;};
@@ -104,13 +118,13 @@ std::vector<Json*> variants(Json& w){
 void translate_variants(Json& w,std::int64_t dx,std::int64_t dy){
     for(auto* variant:variants(w)){const auto box=fixed_box(*variant,w.at("id"));(*variant)["x"]=static_cast<double>(box.x+dx)/64;(*variant)["y"]=static_cast<double>(box.y+dy)/64;}
 }
-std::vector<Box> arrange_boxes(Json& scene,const std::vector<std::string>& ids,std::size_t minimum){
+std::vector<Box> arrange_boxes(Json& scene,const std::vector<std::string>& ids,std::size_t minimum,const std::vector<int>& indices={}){
     need(ids.size()>=minimum,"editor.targets");(void)subtree(scene,ids);
     auto& list=owner(scene,ids.front());const auto display=widget(scene,ids.front()).at("display");
     for(const auto& id:ids)need(&owner(scene,id)==&list&&widget(scene,id).at("display")==display,"editor.arrange_scope");
     std::vector<Box> boxes;
     for(const auto& item:list){const auto id=item.get<std::string>();if(std::find(ids.begin(),ids.end(),id)==ids.end())continue;
-        boxes.push_back(fixed_box(widget(scene,id).at("layout").at("base"),id));
+        boxes.push_back(fixed_box(variant(scene,id,variant_index(ids,indices,id)),id));
     }
     return boxes;
 }
@@ -121,18 +135,18 @@ void apply(Json& scene,const AlignWidgets& edit){
         case Alignment::top:vertical=true;break;case Alignment::vcenter:vertical=true;anchor=1;break;case Alignment::bottom:vertical=true;anchor=2;break;
         default:throw protocol::Error("editor.alignment");
     }
-    const auto boxes=arrange_boxes(scene,edit.ids,2);auto left=vertical?boxes[0].y:boxes[0].x;
+    const auto boxes=arrange_boxes(scene,edit.ids,2,edit.variants);auto left=vertical?boxes[0].y:boxes[0].x;
     auto right=left+(vertical?boxes[0].height:boxes[0].width);
     for(const auto& b:boxes){const auto pos=vertical?b.y:b.x;left=std::min(left,pos);right=std::max(right,pos+(vertical?b.height:b.width));}
     for(const auto& b:boxes){const auto extent=vertical?b.height:b.width;auto pos=left;
         if(anchor==2)pos=right-extent;
         else if(anchor==1){const auto twice=left+right-extent;pos=twice/2+((twice%2)?(twice<0?-1:1):0);}
-        widget(scene,b.id)["layout"]["base"][vertical?"y":"x"]=static_cast<double>(pos)/64;
+        variant(scene,b.id,variant_index(edit.ids,edit.variants,b.id))[vertical?"y":"x"]=static_cast<double>(pos)/64;
     }
 }
 void apply(Json& scene,const DistributeWidgets& edit){
     need(edit.spacing==Spacing::horizontal||edit.spacing==Spacing::vertical,"editor.spacing");const bool vertical=edit.spacing==Spacing::vertical;
-    auto boxes=arrange_boxes(scene,edit.ids,3);
+    auto boxes=arrange_boxes(scene,edit.ids,3,edit.variants);
     auto origin=[&](const Box& b){return vertical?b.y:b.x;};auto extent=[&](const Box& b){return vertical?b.height:b.width;};
     std::stable_sort(boxes.begin(),boxes.end(),[&](const Box& a,const Box& b){return origin(a)<origin(b);});
     auto gaps=origin(boxes.back())-origin(boxes.front());
@@ -140,7 +154,7 @@ void apply(Json& scene,const DistributeWidgets& edit){
     need(gaps>=0,"editor.spacing_overlap");const auto count=static_cast<std::int64_t>(boxes.size()-1),q=gaps/count,r=gaps%count;
     auto pos=origin(boxes.front());
     for(std::size_t i=1;i+1<boxes.size();++i){pos+=extent(boxes[i-1])+q+(static_cast<std::int64_t>(i)<=r?1:0);
-        widget(scene,boxes[i].id)["layout"]["base"][vertical?"y":"x"]=static_cast<double>(pos)/64;}
+        variant(scene,boxes[i].id,variant_index(edit.ids,edit.variants,boxes[i].id))[vertical?"y":"x"]=static_cast<double>(pos)/64;}
 }
 void apply(Json& scene,const GroupWidgets& edit){
     need(protocol::identifier(edit.id)&&!exists(scene,edit.id),"editor.identity");const auto boxes=arrange_boxes(scene,edit.ids,2);

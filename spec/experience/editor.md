@@ -112,3 +112,13 @@ per-kind buffers and one insertion/selection history step. Existing policy,
 resource, layout and transaction owners remain authoritative. The
 [checkpoint](../delivery/widget-creation-handoff.md) records scoped evidence;
 responsive authoring, installed routing and complete editions remain open.
+
+## Layout authoring boundary
+
+The [layout-authoring package](../delivery/packages/w-10-layout-authoring.md)
+closes private input for every existing layout kind, ordered responsive variants,
+priority, sibling position and whole-root display intent. Direct fixed operations
+target explicit resolved variants; base-only callers remain compatible. The
+[checkpoint](../delivery/layout-authoring-handoff.md) records component evidence.
+Flow/container group transformations, remaining properties, installed ownership
+and full native editions remain required.

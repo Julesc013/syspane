@@ -12,12 +12,21 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-07T09:30:22.966768+00:00", "scope": "Explicit native observation and unresolved historical focus cause"}
+updated: {"by": "codex", "at": "2026-10-07T10:19:48.459090+00:00", "scope": "Native layout authoring and active fixed variants"}
 ---
 
 # Current state and next admitted boundary
 
-The latest [native observation checkpoint](native-observation-handoff.md) replaces
+The latest [layout-authoring checkpoint](layout-authoring-handoff.md) adds every
+existing layout kind, responsive breakpoint input, priority, sibling order and
+whole-root display intent. Native fixed gestures and arrangement edit the active
+variant; topology invalidates stale buffered geometry. Portable and independent
+native checks cover exact scenes, pixels, persistence, recovery and erasure.
+Continue flow/container group transformations and remaining property contracts,
+then installed ownership and scene-aligned entry/restoration. W-10 and every full
+edition remain in progress.
+
+The earlier [native observation checkpoint](native-observation-handoff.md) replaces
 ambiguous accessibility fallbacks with explicit text/state/interface/geometry and
 selection replies. Delays, denial and disconnection cannot pass negative checks;
 destroyed objects need an explicit missing-object reply and live owner. Seven

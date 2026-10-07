@@ -52,6 +52,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Bounded image pipeline checkpoint](image-pipeline-handoff.md) — Exact portable fit and isolated Linux PNG/JPEG/static-SVG decoding with nonblocking child ownership.
 - [Implementation readiness and gates](implementation-readiness.md) — Distinguish implemented specification checks from pending native and release work.
 - [Complete-scene command checkpoint](large-commands-handoff.md) — Negotiated full-scene edits, bounded admission and coherent native request recovery.
+- [Native layout-authoring checkpoint](layout-authoring-handoff.md) — Existing layout grammar and active fixed variants through the shared draft.
 - [Portable scene layout checkpoint](layout-handoff.md) — Exact authored geometry, safe display regions and explicit readable overflow across development toolchains.
 - [Live measured collector and asynchronous GJS session checkpoint](live-network-session-handoff.md) — Original real telemetry, native clock provenance and independent lifecycle evidence before operational shell pixels.
 - [Measured telemetry and freshness checkpoint](measured-time-handoff.md) — Bind versioned measurement times to consumer clock scope, replay history and native delayed-delivery evidence.

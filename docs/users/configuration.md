@@ -119,3 +119,29 @@ Cancel creation discards private input; invalid input stays available for correc
 Policy or owner changes erase the dialog, including hidden kind buffers. The older
 **Add text** shortcut remains available. These controls currently run in the owned
 Linux development editor, as scoped in the [handoff](../../spec/delivery/widget-creation-handoff.md).
+
+## Layouts and responsive editing
+
+Select one object and choose **Layout**. Leaves offer fixed or flow sizing; groups
+offer fixed, canvas, stack or grid. The Geometry tab exposes each kind's dimensions,
+constraints, anchor, axis, gap and overflow options. Changing kind keeps its private
+input until the panel closes. Invalid numbers stay available for correction.
+
+Choose Base or a breakpoint. **Add breakpoint** copies the selected variant and
+requires a minimum display width. Up to eight thresholds must stay strictly
+increasing; they are not automatically sorted. **Remove breakpoint** removes the
+selected row. Threshold equality activates that variant using the display's safe
+width. Direct drag, resize, keyboard and arrangement operations edit the currently
+active fixed variant; the status text identifies it. Flow objects use constraints
+and sibling order instead of direct movement.
+
+Assignment changes priority and zero-based sibling position. Changing a local
+display ID or portable role moves the object's entire top-level group, including
+its descendants. Missing displays retain the assignment for later recovery.
+
+**Set layout** makes one undoable draft change; **Apply** saves separately. Cancel
+or Escape discards private input. Policy, owner and topology changes erase the
+panel. If a topology change switches a variant while numeric geometry is buffered,
+**Set properties** rejects it; **Revert fields** loads the active variant. These
+controls are currently exercised in the owned Linux development editor, as scoped
+in the [handoff](../../spec/delivery/layout-authoring-handoff.md).

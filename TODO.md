@@ -39,7 +39,8 @@ behaviour has been implemented. See [audit disposition](spec/delivery/audit-2026
 - [ ] W-10 native observation stability: diagnose the preserved AT-SPI component lookup and keyboard-focus failures before full native qualification; unchanged reruns alone do not explain them. See the [creation handoff](spec/delivery/widget-creation-handoff.md).
 - [x] W-10 native observation: explicit accessibility errors, bounded positive reads, seven calibration cases and fixed native regressions. See the [handoff](spec/delivery/native-observation-handoff.md).
 - [ ] W-10 recurring focus failures: preserve X11 ownership and explicit accessibility evidence if reproduced; earlier intermittent failures do not yet have a proven cause.
-- [ ] W-10 complete editor: installed scene-aligned desktop entry/restoration, responsive/flow container transforms, responsive arrangement, remaining property/authoring contracts, clipboard authority, recovery drafts, full accessibility/performance and other native adapters.
+- [x] W-10 layout authoring: all existing layout kinds and breakpoints, atomic display/order/priority edits, active fixed-variant gestures and independent native persistence/erasure checks. See the [handoff](spec/delivery/layout-authoring-handoff.md).
+- [ ] W-10 complete editor: installed scene-aligned desktop entry/restoration, responsive/flow container group transforms, remaining property/authoring contracts, clipboard authority, recovery drafts, full accessibility/performance and other native adapters.
 
 - [x] W-09 shared binding prerequisite: existing selector/pin grammar, scoped policy borrowing, exact numeric comparisons, bounded ordering and explicit incomplete states. See the [handoff](spec/delivery/bindings-handoff.md).
 - [x] W-09 shared layout prerequisite: deterministic admitted layouts, display fallback, safe exclusions, breakpoints, readable minima, priority allocation and exact pixel bounds. See the [handoff](spec/delivery/layout-handoff.md).

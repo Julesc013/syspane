@@ -7,6 +7,12 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
+The [layout-authoring checkpoint](spec/delivery/layout-authoring-handoff.md) adds
+fixed, flow, canvas, stack and grid controls, responsive breakpoints, priority,
+sibling order and whole-group display assignment. Direct fixed-layout edits target
+the active variant. Independent native checks cover pixels, save/reopen, history,
+policy erasure and restart. Installed integration and full editions remain open.
+
 The [native observation checkpoint](spec/delivery/native-observation-handoff.md)
 strengthens editor verification: unavailable accessibility calls cannot count as
 empty text, lost focus or completed erasure. Seven calibrated error/delay cases

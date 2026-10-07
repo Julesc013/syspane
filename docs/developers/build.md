@@ -1684,3 +1684,22 @@ explicit error; focus failures additionally record X11 ownership.
 See the [handoff](../../spec/delivery/native-observation-handoff.md) for preserved
 diagnostics and unresolved historical focus failures. These are native laboratory
 checks, not installed-desktop or historical-platform qualification.
+
+### Layout and responsive authoring
+
+`editor_layout.*` projects bounded private input into existing atomic draft edits.
+`RootDisplayEdit` assigns a whole top-level subtree in one operation, retaining the
+128-operation limit for 256-node scenes. Optional variant indices on move, resize,
+align and distribute preserve existing base-only callers. GTK captures resolved
+variants for direct operations and rejects stale buffered geometry after topology
+changes. Native tree selection retains its model during selection callbacks.
+
+After ordinary workspace preflight and profile build, run
+`ctest --preset <profile> -R "^editor[.]LAYOUT-" --output-on-failure`.
+Eight families cover exact scenes, kinds, breakpoints, display/order, atomic bounds,
+policy and independent geometry. In the unprivileged Linux laboratory run
+`ctest --preset linux-x64-gcc13 -R "^native[.]EDITOR-LAYOUT$" --output-on-failure`.
+Twenty-one cases exercise actual controls, pixels, saved resources, reopen,
+topology, cancellation, recovery and erasure, including positive fault controls.
+The existing nine native matrices remain required regressions for shared-owner
+changes. See the [handoff](../../spec/delivery/layout-authoring-handoff.md).

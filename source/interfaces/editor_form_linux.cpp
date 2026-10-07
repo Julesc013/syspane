@@ -3,6 +3,7 @@
 #include "editor_content_form.hpp"
 #include "editor_binding_form.hpp"
 #include "editor_create_form.hpp"
+#include "editor_layout_form.hpp"
 #include "private_text.hpp"
 #include <gtk/gtk.h>
 #include <algorithm>
@@ -34,7 +35,7 @@ struct EditorForm::Impl {
     Actions actions;std::thread::id thread=std::this_thread::get_id();bool closed=false,updating=false,dispatching=false,fields_dirty=false,drawing=false;std::string error;
     GtkWidget *root=nullptr,*canvas=nullptr,*tree=nullptr,*status=nullptr,*guidance=nullptr;GtkListStore* model=nullptr;std::vector<GtkWidget*> owned;
     std::map<std::string,GtkWidget*> buttons,fields;std::vector<s::Node> nodes;
-    std::unique_ptr<EditorContentForm> content;std::unique_ptr<EditorBindingForm> binding;std::unique_ptr<EditorCreateForm> creation;
+    std::unique_ptr<EditorContentForm> content;std::unique_ptr<EditorBindingForm> binding;std::unique_ptr<EditorCreateForm> creation;std::unique_ptr<EditorLayoutForm> layout_form;int field_variant=-2;
     bool snap_grid=false,snap_guides=false,show_grid=false;s::Unit grid_spacing=8*s::dip;
     struct Gesture {double x,y,dx=0,dy=0,pixel_per_unit=1.0/64;bool resize=false;std::vector<s::Node> nodes;std::optional<SnapInput> input;SnapResult result{0,0,{},{}};};std::optional<Gesture> gesture;
     guint timer=0;
@@ -45,7 +46,7 @@ struct EditorForm::Impl {
     GtkWidget* own(GtkWidget* w){g_object_ref_sink(w);owned.push_back(w);return w;}
     GtkWidget* label(const char* value){auto* w=own(gtk_label_new(value));gtk_label_set_xalign(GTK_LABEL(w),0);return w;}
     const s::Display& viewport()const{for(const auto& d:topology.displays)if(d.id==display)return d;for(const auto& d:topology.displays)if(d.id==topology.fallback)return d;throw protocol::Error("editor.display");}
-    bool editing()const{return draft.available()&&!draft.active_request()&&draft.state()!=DraftState::conflict&&(!content||!content->opened())&&(!binding||!binding->opened())&&(!creation||!creation->opened());}
+    bool editing()const{return draft.available()&&!draft.active_request()&&draft.state()!=DraftState::conflict&&(!content||!content->opened())&&(!binding||!binding->opened())&&(!creation||!creation->opened())&&(!layout_form||!layout_form->opened());}
     void ready()const{need(editing(),"editor.unavailable");need(!fields_dirty,"editor.properties_pending");}
     bool clear(){nodes.clear();if(canvas){atk_object_set_name(gtk_widget_get_accessible(canvas),"");if(!drawing)gtk_widget_queue_draw(canvas);}return true;}
     void stop_preview(){gesture.reset();ticks.clear();if(surface)surface->close();clear();}
@@ -64,7 +65,7 @@ struct EditorForm::Impl {
         resolve_nodes();gtk_widget_queue_draw(canvas);
     }
     const s::Node* node(const std::string& id)const{for(const auto& n:nodes)if(n.id==id&&n.display==viewport().id)return &n;return nullptr;}
-    bool fixed(const std::string& id)const{if(!draft.scene())return false;const auto* n=node(id);return n&&n->variant==-1&&authored_widget(*draft.scene(),id)["layout"]["base"]["kind"]=="fixed";}
+    bool fixed(const std::string& id)const{if(!draft.scene())return false;const auto* n=node(id);return n&&active_layout(id).at("kind")=="fixed";}
     void message(const std::string& value){gtk_label_set_text(GTK_LABEL(status),value.c_str());}
     void guide_feedback(){
         if(!guidance)return;
@@ -81,11 +82,11 @@ struct EditorForm::Impl {
         const bool enabled=editing()&&!fields_dirty;const bool one=draft.selection().size()==1;
         const Json* selected=one&&draft.scene()?&authored_widget(*draft.scene(),draft.selection()[0]):nullptr;
         if(values||!draft.available()){
-            fields_dirty=false;
+            fields_dirty=false;field_variant=selected&&fixed(draft.selection()[0])?node(draft.selection()[0])->variant:-2;
             for(auto& row:fields){std::string value;
                 if(selected){if(row.first=="title")value=(*selected)["title"];
                     else if(row.first=="body"){if((*selected)["kind"]=="text")value=selected->contains("content")?(*selected)["content"]["body"].get<std::string>():selected->at("title").get<std::string>();}
-                    else if((*selected)["layout"]["base"]["kind"]=="fixed")value=(*selected)["layout"]["base"][row.first].dump();}
+                    else if(fixed(draft.selection()[0]))value=active_layout(draft.selection()[0]).at(row.first).dump();}
                 text(row.second,value);
             }
         }
@@ -103,8 +104,9 @@ struct EditorForm::Impl {
             else if(id.substr(0,6)=="align-")active=enabled&&draft.selection().size()>=2;
             else if(id.substr(0,6)=="space-")active=enabled&&draft.selection().size()>=3;
             if(id=="bindings")active=enabled&&selected&&draft.scene()->at("schema_version")=="0.3.0"&&(selected->at("kind")=="value"||selected->at("kind")=="status"||selected->at("kind")=="chart"||selected->at("kind")=="table");
+            if(id=="layout")active=enabled&&selected;
             if(id=="insert")active=enabled&&draft.scene()&&draft.scene()->at("schema_version")=="0.3.0";
-            if((content&&content->opened())||(binding&&binding->opened())||(creation&&creation->opened()))active=false;
+            if((content&&content->opened())||(binding&&binding->opened())||(creation&&creation->opened())||(layout_form&&layout_form->opened()))active=false;
             gtk_widget_set_sensitive(row.second,active);
         }
         gtk_widget_set_sensitive(tree,enabled);gtk_widget_set_sensitive(canvas,enabled);
@@ -118,6 +120,7 @@ struct EditorForm::Impl {
         else value=draft.dirty()?"Draft changes have not been saved.":"No draft changes.";
         if(draft.revision())value+=" Revision "+std::to_string(*draft.revision());
         if(!error.empty()&&draft.available())value=error;
+        if(selected){const auto* n=node(draft.selection()[0]);value+=n?(n->variant<0?" Active layout: Base":" Active layout: Breakpoint "+std::to_string(n->variant+1)):" Not on this display";}
         message(value);guide_feedback();updating=false;
     }
     void list(){
@@ -128,13 +131,14 @@ struct EditorForm::Impl {
         updating=false;
     }
     void changed(){gesture.reset();error.clear();preview();list();sync(true);}
-    void selected(std::vector<std::string> ids){ready();draft.select(std::move(ids));list();sync(true);gtk_widget_queue_draw(canvas);}
+    void selected(std::vector<std::string> ids,bool from_tree=false){ready();draft.select(std::move(ids));if(!from_tree)list();sync(true);gtk_widget_queue_draw(canvas);}
     void execute(const std::vector<SceneEdit>& edits){ready();draft.execute(edits);changed();}
     void properties(){
         need(editing()&&draft.selection().size()==1,"editor.selection");const auto id=draft.selection()[0];const auto& w=authored_widget(*draft.scene(),id);
+        need(field_variant==-2||(node(id)&&node(id)->variant==field_variant),"editor.layout_changed");
         std::vector<SceneEdit> edits{WidgetPropertyEdit{id,WidgetProperty::title,text(fields["title"])}};
         if(w["kind"]=="text"&&w.contains("content"))edits.push_back(WidgetContentEdit{id,w["bindings"],{{"body",text(fields["body"])}}});
-        if(fixed(id)){auto layout=w["layout"];for(const char* key:{"x","y","width","height"})layout["base"][key]=number(text(fields[key]));edits.push_back(WidgetPropertyEdit{id,WidgetProperty::layout,std::move(layout)});}
+        if(fixed(id)){auto layout=w["layout"];const int index=node(id)->variant;auto& target=index<0?layout["base"]:layout["breakpoints"][static_cast<std::size_t>(index)]["layout"];for(const char* key:{"x","y","width","height"})target[key]=number(text(fields[key]));edits.push_back(WidgetPropertyEdit{id,WidgetProperty::layout,std::move(layout)});}
         draft.execute(edits);fields_dirty=false;changed();
     }
     void duplicate(){
@@ -153,14 +157,14 @@ struct EditorForm::Impl {
     void dispatch(const std::function<void()>& f){dispatching=true;try{f();dispatching=false;}catch(...){dispatching=false;throw;}}
     void submit(){ready();const auto q=draft.begin("commit",actions.request_id());sync();if(q)try{dispatch([&]{actions.submit(*q);});}catch(...){draft.disconnected();sync();}}
     void arrange(const std::string& id){
-        ready();gesture.reset();resolve_nodes();const auto ids=draft.selection();need(!ids.empty(),"editor.targets");const s::Node* first=nullptr;
+        ready();gesture.reset();resolve_nodes();const auto ids=draft.selection();need(!ids.empty(),"editor.targets");const s::Node* first=nullptr;std::vector<int> indices;
         for(const auto& selected_id:ids){need(fixed(selected_id),"editor.arrange_geometry");const auto* n=node(selected_id);
-            const auto& b=authored_widget(*draft.scene(),selected_id)["layout"]["base"];
+            const auto& b=active_layout(selected_id);indices.push_back(n->variant);
             need(n->box.width==std::ceil(b["width"].get<double>()*64)&&n->box.height==std::ceil(b["height"].get<double>()*64),"editor.arrange_geometry");
             need(!first||(n->parent==first->parent&&n->display==first->display),"editor.arrange_scope");first=n;}
-        if(id=="space-horizontal"||id=="space-vertical")execute({DistributeWidgets{ids,id=="space-horizontal"?Spacing::horizontal:Spacing::vertical}});
+        if(id=="space-horizontal"||id=="space-vertical")execute({DistributeWidgets{ids,id=="space-horizontal"?Spacing::horizontal:Spacing::vertical,indices}});
         else {static const std::map<std::string,Alignment> kinds={{"align-left",Alignment::left},{"align-hcenter",Alignment::hcenter},{"align-right",Alignment::right},
-            {"align-top",Alignment::top},{"align-vcenter",Alignment::vcenter},{"align-bottom",Alignment::bottom}};execute({AlignWidgets{ids,kinds.at(id)}});}
+            {"align-top",Alignment::top},{"align-vcenter",Alignment::vcenter},{"align-bottom",Alignment::bottom}};execute({AlignWidgets{ids,kinds.at(id),indices}});}
     }
     const Json& active_layout(const std::string& id)const{
         const auto* n=node(id);need(n!=nullptr,"editor.group_geometry");const auto& l=authored_widget(*draft.scene(),id).at("layout");
@@ -213,6 +217,9 @@ struct EditorForm::Impl {
             // dialog focus/accessibility initialization must not join editor entry.
             if(!content)content=std::make_unique<EditorContentForm>(root,[this](const std::vector<SceneEdit>& edits){return draft.execute(edits);},[this](bool changed){if(changed)this->changed();else sync();},[this]{shut();});
             content->open(*draft.scene(),w,*snapshot);sync();}
+        else if(id=="layout"){ready();gesture.reset();need(draft.selection().size()==1,"editor.selection");
+            if(!layout_form)layout_form=std::make_unique<EditorLayoutForm>(root,[this](const std::vector<SceneEdit>& edits){return draft.execute(edits);},[this](bool changed){if(changed)this->changed();else sync();},[this]{shut();});
+            layout_form->open(*draft.scene(),draft.selection()[0]);sync();}
         else if(id=="properties")properties();else if(id=="revert-fields"){fields_dirty=false;error.clear();sync(true);}
         else if(id=="apply")submit();else if(id=="reload")dispatch(actions.reload);
         else if(id=="cancel-request"){const auto q=draft.cancel_request();if(q)try{dispatch([&]{actions.cancel(*q);});}catch(...){draft.disconnected();sync();}}
@@ -230,7 +237,7 @@ struct EditorForm::Impl {
         if(shift){if(found==ids.end())ids.push_back(id);else ids.erase(found);selected(std::move(ids));return;}
         if(found==ids.end())selected({id});
         Gesture g;g.x=x;g.y=y;
-        for(const auto& selected_id:draft.selection()){need(fixed(selected_id),"editor.fixed_variant");g.nodes.push_back(*node(selected_id));}
+        for(const auto& selected_id:draft.selection()){if(!fixed(selected_id)){gtk_widget_queue_draw(canvas);return;}g.nodes.push_back(*node(selected_id));}
         g.resize=g.nodes.size()==1&&x>=g.nodes[0].pixels.x+g.nodes[0].pixels.width-8&&y>=g.nodes[0].pixels.y+g.nodes[0].pixels.height-8;
         g.pixel_per_unit=static_cast<double>(d.scale_numerator)/(64*d.scale_denominator);if(snap_grid||snap_guides)g.input=capture_snap(g.nodes,g.resize);
         gesture=std::move(g);gtk_widget_queue_draw(canvas);
@@ -241,8 +248,8 @@ struct EditorForm::Impl {
         guide_feedback();gtk_widget_queue_draw(canvas);}
     void release(double x,double y,bool bypass){if(!gesture)return;motion(x,y,bypass);const auto g=*gesture;gesture.reset();guide_feedback();const auto& d=viewport();const double scale=static_cast<double>(d.scale_denominator)/d.scale_numerator;
         if(g.dx==0&&g.dy==0){gtk_widget_queue_draw(canvas);return;}
-        if(g.resize){const auto& base=authored_widget(*draft.scene(),g.nodes[0].id)["layout"]["base"];execute({ResizeWidget{g.nodes[0].id,base["width"].get<double>()+g.dx*scale,base["height"].get<double>()+g.dy*scale}});}
-        else execute({MoveWidgets{draft.selection(),g.dx*scale,g.dy*scale}});
+        if(g.resize){const auto& base=active_layout(g.nodes[0].id);execute({ResizeWidget{g.nodes[0].id,base["width"].get<double>()+g.dx*scale,base["height"].get<double>()+g.dy*scale,g.nodes[0].variant}});}
+        else {std::vector<int> indices;for(const auto& n:g.nodes)indices.push_back(n.variant);execute({MoveWidgets{draft.selection(),g.dx*scale,g.dy*scale,indices}});}
     }
     bool key(GdkEventKey* e){
         if(e->keyval==GDK_KEY_Escape){gesture.reset();guide_feedback();gtk_widget_queue_draw(canvas);return true;}
@@ -251,8 +258,8 @@ struct EditorForm::Impl {
         double x=0,y=0;const double amount=e->state&GDK_SHIFT_MASK?10:1;
         if(e->keyval==GDK_KEY_Left)x=-amount;else if(e->keyval==GDK_KEY_Right)x=amount;else if(e->keyval==GDK_KEY_Up)y=-amount;else if(e->keyval==GDK_KEY_Down)y=amount;else return false;
         ready();need(!draft.selection().empty(),"editor.selection");for(const auto& id:draft.selection())need(fixed(id),"editor.fixed_variant");
-        if(e->state&GDK_MOD1_MASK){need(draft.selection().size()==1,"editor.selection");const auto id=draft.selection()[0];const auto& b=authored_widget(*draft.scene(),id)["layout"]["base"];execute({ResizeWidget{id,b["width"].get<double>()+x,b["height"].get<double>()+y}});}
-        else execute({MoveWidgets{draft.selection(),x,y}});
+        if(e->state&GDK_MOD1_MASK){need(draft.selection().size()==1,"editor.selection");const auto id=draft.selection()[0];const auto& b=active_layout(id);execute({ResizeWidget{id,b["width"].get<double>()+x,b["height"].get<double>()+y,node(id)->variant}});}
+        else {std::vector<int> indices;for(const auto& id:draft.selection())indices.push_back(node(id)->variant);execute({MoveWidgets{draft.selection(),x,y,indices}});}
         return true;
     }
     void draw(cairo_t* cr){
@@ -279,16 +286,16 @@ struct EditorForm::Impl {
             for(const auto& n:selected_nodes)if(n.display==d.id&&std::find(draft.selection().begin(),draft.selection().end(),n.id)!=draft.selection().end()){
                 double x=n.pixels.x-d.pixel_x,y=n.pixels.y-d.pixel_y,w=n.pixels.width,h=n.pixels.height;
                 if(gesture){if(gesture->resize){w+=gesture->dx;h+=gesture->dy;}else{x+=gesture->dx;y+=gesture->dy;}}
-                cairo_rectangle(cr,x+1,y+1,w-2,h-2);cairo_stroke(cr);if(draft.selection().size()==1){cairo_rectangle(cr,x+w-8,y+h-8,8,8);cairo_fill(cr);}
+                cairo_rectangle(cr,x+1,y+1,w-2,h-2);cairo_stroke(cr);if(draft.selection().size()==1&&fixed(n.id)){cairo_rectangle(cr,x+w-8,y+h-8,8,8);cairo_fill(cr);}
             }
             if(gesture&&gesture->input){const auto& r=gesture->result;cairo_set_source_rgb(cr,1,0,1);cairo_set_line_width(cr,1);
                 if(r.x){const double px=std::floor((r.x->position-d.bounds.x)*device_per_unit)+0.5;cairo_move_to(cr,px,0);cairo_line_to(cr,px,d.bounds.height*device_per_unit);}
                 if(r.y){const double py=std::floor((r.y->position-d.bounds.y)*device_per_unit)+0.5;cairo_move_to(cr,0,py);cairo_line_to(cr,d.bounds.width*device_per_unit,py);}cairo_stroke(cr);}
         });cairo_restore(cr);sync();
     }
-    void shut(){if(closed)return;closed=true;if(content)content->erase();if(binding)binding->erase();if(creation)creation->erase();draft.close();fields_dirty=false;settings=nullptr;resources.reset();stop_preview();if(tree){list();sync(true);}}
+    void shut(){if(closed)return;closed=true;if(content)content->erase();if(binding)binding->erase();if(creation)creation->erase();if(layout_form)layout_form->erase();draft.close();fields_dirty=false;settings=nullptr;resources.reset();stop_preview();if(tree){list();sync(true);}}
     template<class F> void event(F f)noexcept{try{if(!closed)f();}catch(const protocol::Error& e){gesture.reset();const std::string code=e.what();
-        guide_feedback();error=code=="editor.number"?"Enter a number using digits and an optional decimal point.":
+        guide_feedback();error=code=="editor.number"?"Enter a number using digits and an optional decimal point.":code=="editor.layout_changed"?"Layout changed; Revert fields before applying.":
             code=="editor.arrange_geometry"||code=="editor.arrange_scope"?"Arrange needs fixed widgets in the same parent and display, with no size expansion.":
             code=="editor.group_geometry"||code=="editor.group_layout"||code=="editor.fixed"?"Grouping needs fixed layouts and a fixed or canvas parent, with no size expansion.":
             code=="editor.group_clip"?"Ungroup would reveal clipped content. Adjust the group or child layouts first.":
@@ -302,7 +309,7 @@ EditorForm::EditorForm(c::Authority a,c::Policy p,c::Authored value,std::string 
     i.root=i.own(gtk_box_new(GTK_ORIENTATION_VERTICAL,4));auto* top=gtk_box_new(GTK_ORIENTATION_HORIZONTAL,4);gtk_box_pack_start(GTK_BOX(i.root),top,FALSE,FALSE,0);
     auto button=[&](GtkWidget* box,const char* id,const char* label){auto* w=i.own(gtk_button_new_with_label(label));i.buttons[id]=w;accessible(w,label,std::string("editor.")+id);g_object_set_data_full(G_OBJECT(w),"editor-action",g_strdup(id),g_free);gtk_box_pack_start(GTK_BOX(box),w,FALSE,FALSE,0);
         g_signal_connect(w,"clicked",G_CALLBACK(+[](GtkWidget* w,gpointer p){auto& o=*static_cast<Impl*>(p);o.event([&]{o.command(static_cast<const char*>(g_object_get_data(G_OBJECT(w),"editor-action")));});}),&i);};
-    for(const auto& b:std::vector<std::pair<const char*,const char*>>{{"undo","Undo"},{"redo","Redo"},{"apply","Apply"},{"cancel","Cancel session"},{"cancel-request","Cancel request"},{"reload","Reload"},{"content","Content"},{"bindings","Bindings"}})button(top,b.first,b.second);
+    for(const auto& b:std::vector<std::pair<const char*,const char*>>{{"undo","Undo"},{"redo","Redo"},{"apply","Apply"},{"cancel","Cancel session"},{"cancel-request","Cancel request"},{"reload","Reload"},{"content","Content"},{"bindings","Bindings"},{"layout","Layout"}})button(top,b.first,b.second);
     auto* middle=gtk_box_new(GTK_ORIENTATION_HORIZONTAL,6);gtk_box_pack_start(GTK_BOX(i.root),middle,TRUE,TRUE,0);i.canvas=i.own(gtk_drawing_area_new());gtk_widget_set_size_request(i.canvas,500,420);gtk_widget_set_can_focus(i.canvas,TRUE);
     accessible(i.canvas,"","editor.canvas");gtk_widget_add_events(i.canvas,GDK_BUTTON_PRESS_MASK|GDK_BUTTON_RELEASE_MASK|GDK_POINTER_MOTION_MASK|GDK_KEY_PRESS_MASK|GDK_FOCUS_CHANGE_MASK);gtk_box_pack_start(GTK_BOX(middle),i.canvas,TRUE,TRUE,0);
     auto* side=gtk_box_new(GTK_ORIENTATION_VERTICAL,3);gtk_widget_set_size_request(side,270,-1);gtk_box_pack_start(GTK_BOX(middle),side,FALSE,FALSE,0);
@@ -327,7 +334,7 @@ EditorForm::EditorForm(c::Authority a,c::Policy p,c::Authored value,std::string 
     button(bottom,"group","Group");button(bottom,"ungroup","Ungroup");
     i.status=i.label("");accessible(i.status,"","editor.status");gtk_label_set_line_wrap(GTK_LABEL(i.status),TRUE);gtk_box_pack_start(GTK_BOX(i.root),i.status,FALSE,FALSE,0);
     g_signal_connect(selection,"changed",G_CALLBACK(+[](GtkTreeSelection* selection,gpointer p){auto& o=*static_cast<Impl*>(p);if(o.updating)return;o.event([&]{std::vector<std::string> ids;GtkTreeModel* model=nullptr;auto* rows=gtk_tree_selection_get_selected_rows(selection,&model);
-        for(auto* row=rows;row;row=row->next){GtkTreeIter it;if(gtk_tree_model_get_iter(model,&it,static_cast<GtkTreePath*>(row->data))){gchar* id=nullptr;gtk_tree_model_get(model,&it,0,&id,-1);ids.emplace_back(id);g_free(id);}}g_list_free_full(rows,reinterpret_cast<GDestroyNotify>(gtk_tree_path_free));o.selected(std::move(ids));});}),&i);
+        for(auto* row=rows;row;row=row->next){GtkTreeIter it;if(gtk_tree_model_get_iter(model,&it,static_cast<GtkTreePath*>(row->data))){gchar* id=nullptr;gtk_tree_model_get(model,&it,0,&id,-1);ids.emplace_back(id);g_free(id);}}g_list_free_full(rows,reinterpret_cast<GDestroyNotify>(gtk_tree_path_free));o.selected(std::move(ids),true);});}),&i);
     g_signal_connect(i.canvas,"draw",G_CALLBACK(+[](GtkWidget*,cairo_t* cr,gpointer p)->gboolean{auto& o=*static_cast<Impl*>(p);if(o.closed){cairo_set_source_rgb(cr,0,0,0);cairo_paint(cr);}else o.event([&]{o.draw(cr);});return TRUE;}),&i);
     g_signal_connect(i.canvas,"button-press-event",G_CALLBACK(+[](GtkWidget*,GdkEventButton* e,gpointer p)->gboolean{auto& o=*static_cast<Impl*>(p);if(e->button!=1)return FALSE;o.event([&]{o.point(e->x,e->y,e->state&GDK_SHIFT_MASK);});return TRUE;}),&i);
     g_signal_connect(i.canvas,"motion-notify-event",G_CALLBACK(+[](GtkWidget*,GdkEventMotion* e,gpointer p)->gboolean{auto& o=*static_cast<Impl*>(p);o.event([&]{o.motion(e->x,e->y,e->state&GDK_CONTROL_MASK);});return TRUE;}),&i);
@@ -341,16 +348,17 @@ EditorForm::~EditorForm()=default;
 GtkWidget* EditorForm::widget()const{impl_->owner();return impl_->root;}
 void EditorForm::complete(std::uint64_t ticket,const Json& result){auto& i=*impl_;i.owner();if(i.closed)return;try{if(i.draft.complete(ticket,result))i.changed();}catch(...){i.sync();throw;}}
 void EditorForm::reconciled(std::uint64_t ticket,const std::string& query,const std::string& epoch,const Json& result){auto& i=*impl_;i.owner();if(i.closed)return;try{if(i.draft.reconciled(ticket,query,epoch,result))i.changed();}catch(...){i.sync();throw;}}
-void EditorForm::disconnected(){auto& i=*impl_;i.owner();if(i.closed)return;if(i.content)i.content->erase();if(i.binding)i.binding->erase();if(i.creation)i.creation->erase();i.draft.disconnected();i.gesture.reset();i.sync();}
-void EditorForm::policy(c::Policy policy){auto& i=*impl_;i.owner();if(i.closed)return;if(i.content)i.content->erase();if(i.binding)i.binding->erase();if(i.creation)i.creation->erase();i.gesture.reset();i.draft.policy(policy);i.current=std::move(policy);if(i.surface)i.surface->policy(i.current,i.now());
+void EditorForm::disconnected(){auto& i=*impl_;i.owner();if(i.closed)return;if(i.content)i.content->erase();if(i.binding)i.binding->erase();if(i.creation)i.creation->erase();if(i.layout_form)i.layout_form->erase();i.draft.disconnected();i.gesture.reset();i.sync();}
+void EditorForm::policy(c::Policy policy){auto& i=*impl_;i.owner();if(i.closed)return;if(i.content)i.content->erase();if(i.binding)i.binding->erase();if(i.creation)i.creation->erase();if(i.layout_form)i.layout_form->erase();i.gesture.reset();i.draft.policy(policy);i.current=std::move(policy);if(i.surface)i.surface->policy(i.current,i.now());
     if(!i.draft.available()){i.settings=nullptr;i.resources.reset();i.stop_preview();i.list();}else i.resolve_nodes();i.sync();}
 void EditorForm::reload(c::Authored value,std::string epoch,SettingsResources resources){auto& i=*impl_;i.owner();if(i.closed)return;
     if(i.content)i.content->erase();
     if(i.binding)i.binding->erase();
     if(i.creation)i.creation->erase();
+    if(i.layout_form)i.layout_form->erase();
     if(i.surface&&i.surface->status().code==v::SurfaceCode::closed)need(i.surface->poll_image_jobs(),"editor.renderer_stopping");
     i.draft.reload(value,std::move(epoch),resources);i.settings=std::move(value.settings);i.resources=std::move(resources);i.fields_dirty=false;i.changed();}
-void EditorForm::topology(s::Topology topology,std::string display){auto& i=*impl_;i.owner();if(i.closed)return;if(i.content)i.content->erase();if(i.binding)i.binding->erase();if(i.creation)i.creation->erase();i.gesture.reset();i.topology=std::move(topology);i.display=std::move(display);i.preview();i.sync();}
+void EditorForm::topology(s::Topology topology,std::string display){auto& i=*impl_;i.owner();if(i.closed)return;if(i.content)i.content->erase();if(i.binding)i.binding->erase();if(i.creation)i.creation->erase();if(i.layout_form)i.layout_form->erase();i.gesture.reset();i.topology=std::move(topology);i.display=std::move(display);i.preview();i.sync(!i.fields_dirty);}
 recovery::DataAttachment EditorForm::attach(const std::string& p,const protocol::TelemetryBinding& b,std::uint64_t now){auto& i=*impl_;i.owner();return i.surface?i.surface->attach(p,b,now):recovery::DataAttachment{recovery::DataCode::closed};}
 recovery::DataResult EditorForm::receive(const std::string& p,std::uint64_t t,std::uint64_t r,std::string_view bytes,std::uint64_t now,const model::Tick& tick){auto& i=*impl_;i.owner();if(!i.surface)return {recovery::DataCode::closed};const auto result=i.surface->receive(p,t,r,bytes,now,tick);i.ticks[p]=tick;return result;}
 recovery::DataCode EditorForm::heartbeat(const std::string& p,std::uint64_t t,std::uint64_t r,std::uint64_t q,std::uint64_t now){auto& i=*impl_;i.owner();return i.surface?i.surface->heartbeat(p,t,r,q,now):recovery::DataCode::closed;}

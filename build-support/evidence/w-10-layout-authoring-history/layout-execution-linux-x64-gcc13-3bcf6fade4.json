@@ -1,0 +1,38 @@
+[
+  {
+    "step": "layout",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-07T10:06:52.704248+00:00",
+    "finished_at": "2026-10-07T10:06:53.798733+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2391334337,\n  \"linux_campaign_bytes\": 4722436015,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "layout",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/layout_step.py",
+      "linux-x64-gcc13",
+      "layout"
+    ],
+    "started_at": "2026-10-07T10:06:53.799412+00:00",
+    "finished_at": "2026-10-07T10:07:14.368863+00:00",
+    "exit": 8,
+    "stdout": "Test project /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n    Start 80: native.EDITOR-LAYOUT\n1/1 Test #80: native.EDITOR-LAYOUT .............***Failed    8.02 sec\n/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/layout-043d7ef84c7f/result.json fail\nTraceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_layout_authoring.py\", line 143, in <module>\n    if __name__=='__main__':main()\n                            ^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_layout_authoring.py\", line 138, in main\n    assert child.returncode==0 and detail['outcome']=='pass',(mode,err.decode(errors='replace'))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: ('canvas', 'dbus-daemon[390036]: [session uid=1000 pid=390036] Activating service name=\\'org.a11y.Bus\\' requested by \\':1.0\\' (uid=1000 pid=390037 comm=\"/usr/bin/python3 /mnt/d/Projects/SysPane/syspane/t\" label=\"kernel\")\\ndbus-daemon[390036]: [session uid=1000 pid=390036] Successfully activated service \\'org.a11y.Bus\\'\\ndbus-daemon[390045]: Activating service name=\\'org.a11y.atspi.Registry\\' requested by \\':1.2\\' (uid=1000 pid=390051 comm=\"/home/ir4runner/.cache/syspane/campaign-229a498/li\" label=\"kernel\")\\ndbus-daemon[390045]: Successfully activated service \\'org.a11y.atspi.Registry\\'\\nTraceback (most recent call last):\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_layout_authoring.py\", line 143, in <module>\\n    if __name__==\\'__main__\\':main()\\n                            ^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_layout_authoring.py\", line 127, in main\\n    if sys.argv[1]==\\'--observe\\':observe(*map(Path,sys.argv[2:5]),sys.argv[5]);return\\n                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_layout_authoring.py\", line 116, in observe\\n    try:exercise(h)\\n        ^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_layout_authoring.py\", line 84, in exercise\\n    select(h,3);open_layout(h);kind(h,\\'canvas\\' if mode==\\'canvas\\' else \\'grid\\' if mode==\\'grid\\' else \\'stack\\',True)\\n    ^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_layout_authoring.py\", line 34, in select\\n    h.focus(\\'objects\\');h.input.press(0xff57);h.input.press(0xff50)\\n    ^^^^^^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_editor.py\", line 150, in focus\\n    self.wait(lambda:self.state(obj,self.Atspi.StateType.FOCUSED))\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_editor.py\", line 80, in wait\\n    assert time.monotonic()<end,self.stage+\\' observation deadline\\'\\n           ^^^^^^^^^^^^^^^^^^^^\\nAssertionError: BUFFER observation deadline\\n')\n\n\n0% tests passed, 1 tests failed out of 1\n\nTotal Test time (real) =   8.02 sec\n\nThe following tests FAILED:\n\t 80 - native.EDITOR-LAYOUT (Failed)\n Errors while running CTest\n\nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-layout-authoring/linux-x64-gcc13-layout-f41389945a\n",
+    "stderr": ""
+  }
+]

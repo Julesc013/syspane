@@ -12,15 +12,16 @@ struct InsertWidget {Json widget;std::optional<std::string> parent;std::size_t i
 struct RemoveWidgets {std::vector<std::string> ids;};
 struct ReparentWidgets {std::vector<std::string> ids;std::optional<std::string> parent;std::size_t index;};
 struct DuplicateWidgets {std::vector<std::string> ids;std::map<std::string,std::string> mapping;};
-struct MoveWidgets {std::vector<std::string> ids;double dx,dy;};
-struct ResizeWidget {std::string id;double width,height;};
+struct MoveWidgets {std::vector<std::string> ids;double dx,dy;std::vector<int> variants={};};
+struct ResizeWidget {std::string id;double width,height;int variant=-1;};
+struct RootDisplayEdit {std::string root;Json display;};
 enum class Alignment {left,hcenter,right,top,vcenter,bottom};
 enum class Spacing {horizontal,vertical};
-struct AlignWidgets {std::vector<std::string> ids;Alignment alignment;};
-struct DistributeWidgets {std::vector<std::string> ids;Spacing spacing;};
+struct AlignWidgets {std::vector<std::string> ids;Alignment alignment;std::vector<int> variants={};};
+struct DistributeWidgets {std::vector<std::string> ids;Spacing spacing;std::vector<int> variants={};};
 struct GroupWidgets {std::vector<std::string> ids;std::string id,title;};
 struct UngroupWidget {std::string id;};
-using SceneEdit=std::variant<WidgetPropertyEdit,WidgetContentEdit,SceneThemeEdit,InsertWidget,RemoveWidgets,ReparentWidgets,DuplicateWidgets,MoveWidgets,ResizeWidget,AlignWidgets,DistributeWidgets,GroupWidgets,UngroupWidget>;
+using SceneEdit=std::variant<WidgetPropertyEdit,WidgetContentEdit,SceneThemeEdit,InsertWidget,RemoveWidgets,ReparentWidgets,DuplicateWidgets,MoveWidgets,ResizeWidget,AlignWidgets,DistributeWidgets,GroupWidgets,UngroupWidget,RootDisplayEdit>;
 
 // One serialized native owner. Scene/selection borrows expire on every mutation,
 // policy update or close; adapters must erase their own caches on disclosure loss.

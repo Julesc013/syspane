@@ -5,6 +5,7 @@
 #include <limits>
 namespace c=syspane::configuration;namespace p=syspane::protocol;namespace ui=syspane::interfaces;using c::Json;
 void run_arrange(const std::string&,const std::string&);
+void run_layout_authoring(const std::string&,const std::string&);
 void run_widget_creation(const std::string&,const std::string&);
 void run_binding_authoring(const std::string&,const std::string&);
 void run_content_properties(const std::string&,const std::string&);
@@ -50,6 +51,7 @@ void run(const std::string& name,const std::string& root){
     if(name.substr(0,8)=="ARRANGE-"){run_arrange(name.substr(8),root);return;}
     if(name.substr(0,5)=="SNAP-"){run_snap(name.substr(5),root);return;}
     if(name.substr(0,6)=="GROUP-"){run_group(name.substr(6),root);return;}
+    if(name.substr(0,7)=="LAYOUT-"){run_layout_authoring(name.substr(7),root);return;}
     if(name.substr(0,7)=="CREATE-"){run_widget_creation(name.substr(7),root);return;}
     if(name.substr(0,8)=="BINDING-"){run_binding_authoring(name.substr(8),root);return;}
     if(name.substr(0,8)=="CONTENT-"){run_content_properties(name.substr(8),root);return;}

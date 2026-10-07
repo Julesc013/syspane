@@ -1,0 +1,110 @@
+[
+  {
+    "step": "configure",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-06T19:25:21.667294+00:00",
+    "finished_at": "2026-10-06T19:25:32.864868+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 5368709120,\n  \"checkout_out_bytes\": 1629258753,\n  \"linux_campaign_bytes\": 3417143142,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "configure",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/layout_step.py",
+      "linux-x64-gcc13",
+      "configure"
+    ],
+    "started_at": "2026-10-06T19:25:32.865329+00:00",
+    "finished_at": "2026-10-06T19:25:45.701836+00:00",
+    "exit": 0,
+    "stdout": "Preset CMake variables:\n\n  BUILD_TESTING=\"ON\"\n  CMAKE_BUILD_TYPE=\"Debug\"\n  CMAKE_CXX_COMPILER=\"g++\"\n  SYSPANE_PROFILE=\"linux-x64-gcc13\"\n\nprofile verified: linux-x64-gcc13\nvendored dependency digests: pass\ndiagnostic toolkit verified: GTK 3.24.41 / Ubuntu 3.24.41-4ubuntu1.3\nnative GJS clock build dependencies verified\n-- Configuring done (5.9s)\n-- Generating done (0.0s)\n-- Build files have been written to: /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-09-layout/linux-x64-gcc13-configure-ec05a906d3\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-06T19:25:45.702177+00:00",
+    "finished_at": "2026-10-06T19:25:46.294766+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 5368709120,\n  \"checkout_out_bytes\": 1630386322,\n  \"linux_campaign_bytes\": 3417145476,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/layout_step.py",
+      "linux-x64-gcc13",
+      "build"
+    ],
+    "started_at": "2026-10-06T19:25:46.295043+00:00",
+    "finished_at": "2026-10-06T19:25:57.278077+00:00",
+    "exit": 0,
+    "stdout": "[1/4] Building CXX object CMakeFiles/syspane_scene.dir/source/scene/layout.cpp.o\n[2/4] Linking CXX static library libsyspane_scene.a\n[3/4] Building CXX object CMakeFiles/syspane_scene_tests.dir/tests/scene/layout_tests.cpp.o\n[4/4] Linking CXX executable syspane_scene_tests\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-09-layout/linux-x64-gcc13-build-df2e776e45\n",
+    "stderr": ""
+  },
+  {
+    "step": "focus",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-06T19:25:57.278425+00:00",
+    "finished_at": "2026-10-06T19:25:57.856184+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 5368709120,\n  \"checkout_out_bytes\": 1631513449,\n  \"linux_campaign_bytes\": 3433856378,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "focus",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/layout_step.py",
+      "linux-x64-gcc13",
+      "focus"
+    ],
+    "started_at": "2026-10-06T19:25:57.856508+00:00",
+    "finished_at": "2026-10-06T19:26:05.756369+00:00",
+    "exit": 0,
+    "stdout": "Test project /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n      Start  1: scene.ROOT-FLOW\n 1/35 Test  #1: scene.ROOT-FLOW ..................   Passed    0.01 sec\n      Start  2: scene.STACK-V\n 2/35 Test  #2: scene.STACK-V ....................   Passed    0.01 sec\n      Start  3: scene.STACK-H\n 3/35 Test  #3: scene.STACK-H ....................   Passed    0.01 sec\n      Start  4: scene.PRIORITY\n 4/35 Test  #4: scene.PRIORITY ...................   Passed    0.01 sec\n      Start  5: scene.FAIR-SHRINK\n 5/35 Test  #5: scene.FAIR-SHRINK ................   Passed    0.01 sec\n      Start  6: scene.OVERFLOW\n 6/35 Test  #6: scene.OVERFLOW ...................   Passed    0.01 sec\n      Start  7: scene.FIXED-GROUP\n 7/35 Test  #7: scene.FIXED-GROUP ................   Passed    0.01 sec\n      Start  8: scene.CANVAS\n 8/35 Test  #8: scene.CANVAS .....................   Passed    0.01 sec\n      Start  9: scene.GRID\n 9/35 Test  #9: scene.GRID .......................   Passed    0.01 sec\n      Start 10: scene.GRID-OVERFLOW\n10/35 Test #10: scene.GRID-OVERFLOW ..............   Passed    0.01 sec\n      Start 11: scene.NESTED\n11/35 Test #11: scene.NESTED .....................   Passed    0.01 sec\n      Start 12: scene.BREAKPOINT-EQUAL\n12/35 Test #12: scene.BREAKPOINT-EQUAL ...........   Passed    0.01 sec\n      Start 13: scene.BREAKPOINT-BELOW\n13/35 Test #13: scene.BREAKPOINT-BELOW ...........   Passed    0.01 sec\n      Start 14: scene.DISPLAY-MISSING\n14/35 Test #14: scene.DISPLAY-MISSING ............   Passed    0.01 sec\n      Start 15: scene.DISPLAY-AMBIGUOUS\n15/35 Test #15: scene.DISPLAY-AMBIGUOUS ..........   Passed    0.01 sec\n      Start 16: scene.DISPLAY-REMOVED\n16/35 Test #16: scene.DISPLAY-REMOVED ............   Passed    0.01 sec\n      Start 17: scene.SAFE-REGION\n17/35 Test #17: scene.SAFE-REGION ................   Passed    0.01 sec\n      Start 18: scene.EXCLUSION-TIE\n18/35 Test #18: scene.EXCLUSION-TIE ..............   Passed    0.01 sec\n      Start 19: scene.NO-REGION\n19/35 Test #19: scene.NO-REGION ..................   Passed    0.01 sec\n      Start 20: scene.PIXELS\n20/35 Test #20: scene.PIXELS .....................   Passed    0.01 sec\n      Start 21: scene.PIXEL-CLIP\n21/35 Test #21: scene.PIXEL-CLIP .................   Passed    0.01 sec\n      Start 22: scene.READABLE-FIXED\n22/35 Test #22: scene.READABLE-FIXED .............   Passed    0.01 sec\n      Start 23: scene.READABLE-FLOW\n23/35 Test #23: scene.READABLE-FLOW ..............   Passed    0.01 sec\n      Start 24: scene.OVERLAP\n24/35 Test #24: scene.OVERLAP ....................   Passed    0.01 sec\n      Start 25: scene.DISPLAY-CONFLICT\n25/35 Test #25: scene.DISPLAY-CONFLICT ...........   Passed    0.01 sec\n      Start 26: scene.MISSING-METRICS\n26/35 Test #26: scene.MISSING-METRICS ............   Passed    0.01 sec\n      Start 27: scene.EXCLUSION-ORDER\n27/35 Test #27: scene.EXCLUSION-ORDER ............   Passed    0.01 sec\n      Start 28: scene.QUANTIZED-FIXED\n28/35 Test #28: scene.QUANTIZED-FIXED ............   Passed    0.01 sec\n      Start 29: scene.QUANTIZED-GAP\n29/35 Test #29: scene.QUANTIZED-GAP ..............   Passed    0.01 sec\n      Start 30: scene.NESTED-BREAKPOINT\n30/35 Test #30: scene.NESTED-BREAKPOINT ..........   Passed    0.01 sec\n      Start 31: scene.NATIVE-METRICS\n31/35 Test #31: scene.NATIVE-METRICS .............   Passed    0.01 sec\n      Start 32: scene.LIMITS\n32/35 Test #32: scene.LIMITS .....................   Passed    0.24 sec\n      Start 33: scene.EXCLUSION-EXHAUSTIVE\n33/35 Test #33: scene.EXCLUSION-EXHAUSTIVE .......   Passed    0.43 sec\n      Start 97: composition.graph\n34/35 Test #97: composition.graph ................   Passed    0.08 sec\n      Start 98: composition.reject_forbidden\n35/35 Test #98: composition.reject_forbidden .....   Passed    0.17 sec\n\n100% tests passed, 0 tests failed out of 35\n\nTotal Test time (real) =   1.17 sec\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-09-layout/linux-x64-gcc13-focus-cb2180e32b\n",
+    "stderr": ""
+  }
+]

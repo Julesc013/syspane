@@ -1,0 +1,110 @@
+[
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-07T10:02:24.107486+00:00",
+    "finished_at": "2026-10-07T10:02:32.051446+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2381609731,\n  \"linux_campaign_bytes\": 4779710649,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/layout_step.py",
+      "linux-x64-gcc13",
+      "build"
+    ],
+    "started_at": "2026-10-07T10:02:32.051857+00:00",
+    "finished_at": "2026-10-07T10:02:49.984497+00:00",
+    "exit": 0,
+    "stdout": "[1/2] Building CXX object CMakeFiles/syspane_editor_tests.dir/tests/editor/layout_authoring_tests.cpp.o\n[2/2] Linking CXX executable syspane_editor_tests\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-layout-authoring/linux-x64-gcc13-build-50d449e1ca\n",
+    "stderr": ""
+  },
+  {
+    "step": "focus",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-07T10:02:49.984872+00:00",
+    "finished_at": "2026-10-07T10:02:50.707432+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2383217839,\n  \"linux_campaign_bytes\": 4779841197,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "focus",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/layout_step.py",
+      "linux-x64-gcc13",
+      "focus"
+    ],
+    "started_at": "2026-10-07T10:02:50.707738+00:00",
+    "finished_at": "2026-10-07T10:03:04.780694+00:00",
+    "exit": 0,
+    "stdout": "Test project /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n    Start 53: editor.LAYOUT-KINDS\n1/8 Test #53: editor.LAYOUT-KINDS ..............   Passed    0.34 sec\n    Start 54: editor.LAYOUT-VARIANTS\n2/8 Test #54: editor.LAYOUT-VARIANTS ...........   Passed    0.20 sec\n    Start 55: editor.LAYOUT-ORDER\n3/8 Test #55: editor.LAYOUT-ORDER ..............   Passed    0.07 sec\n    Start 56: editor.LAYOUT-DISPLAY\n4/8 Test #56: editor.LAYOUT-DISPLAY ............   Passed    1.13 sec\n    Start 57: editor.LAYOUT-BOUNDS\n5/8 Test #57: editor.LAYOUT-BOUNDS .............   Passed    0.08 sec\n    Start 58: editor.LAYOUT-ATOMIC\n6/8 Test #58: editor.LAYOUT-ATOMIC .............   Passed    0.07 sec\n    Start 59: editor.LAYOUT-POLICY\n7/8 Test #59: editor.LAYOUT-POLICY .............   Passed    0.06 sec\n    Start 60: editor.LAYOUT-GEOMETRY\n8/8 Test #60: editor.LAYOUT-GEOMETRY ...........   Passed    0.07 sec\n\n100% tests passed, 0 tests failed out of 8\n\nTotal Test time (real) =   2.02 sec\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-layout-authoring/linux-x64-gcc13-focus-d31dd56749\n",
+    "stderr": ""
+  },
+  {
+    "step": "layout",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-07T10:03:04.780976+00:00",
+    "finished_at": "2026-10-07T10:03:05.497593+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2384828772,\n  \"linux_campaign_bytes\": 4779841190,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "layout",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/layout_step.py",
+      "linux-x64-gcc13",
+      "layout"
+    ],
+    "started_at": "2026-10-07T10:03:05.498030+00:00",
+    "finished_at": "2026-10-07T10:03:21.978992+00:00",
+    "exit": 8,
+    "stdout": "Test project /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n    Start 80: native.EDITOR-LAYOUT\n1/1 Test #80: native.EDITOR-LAYOUT .............***Failed    4.27 sec\n/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/layout-b2b836c58bb6/result.json fail\nTraceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_layout_authoring.py\", line 137, in <module>\n    if __name__=='__main__':main()\n                            ^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_layout_authoring.py\", line 132, in main\n    assert child.returncode==0 and detail['outcome']=='pass',(mode,err.decode(errors='replace'))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: ('fixed', 'dbus-daemon[389015]: [session uid=1000 pid=389015] Activating service name=\\'org.a11y.Bus\\' requested by \\':1.0\\' (uid=1000 pid=389016 comm=\"/usr/bin/python3 /mnt/d/Projects/SysPane/syspane/t\" label=\"kernel\")\\ndbus-daemon[389015]: [session uid=1000 pid=389015] Successfully activated service \\'org.a11y.Bus\\'\\ndbus-daemon[389026]: Activating service name=\\'org.a11y.atspi.Registry\\' requested by \\':1.2\\' (uid=1000 pid=389032 comm=\"/home/ir4runner/.cache/syspane/campaign-229a498/li\" label=\"kernel\")\\ndbus-daemon[389026]: Successfully activated service \\'org.a11y.atspi.Registry\\'\\nTraceback (most recent call last):\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_layout_authoring.py\", line 137, in <module>\\n    if __name__==\\'__main__\\':main()\\n                            ^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_layout_authoring.py\", line 121, in main\\n    if sys.argv[1]==\\'--observe\\':observe(*map(Path,sys.argv[2:5]),sys.argv[5]);return\\n                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_layout_authoring.py\", line 110, in observe\\n    try:exercise(h)\\n        ^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_layout_authoring.py\", line 47, in exercise\\n    mode=h.mode;h.launch();h.check();select(h,0);h.wait(lambda:h.number(\\'x\\')==20);baseline=body(h,40,40);second=body(h,270,40);assert len(set(baseline))>2;h.screenshot(\\'initial\\')\\n                                     ^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_layout_authoring.py\", line 34, in select\\n    title=CASES[\\'authored\\'][\\'scene\\'][\\'widgets\\'][index][\\'title\\'];h.wait(lambda:h.value(\\'title\\')==title)\\n                                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_editor.py\", line 80, in wait\\n    assert time.monotonic()<end,self.stage+\\' observation deadline\\'\\n           ^^^^^^^^^^^^^^^^^^^^\\nAssertionError: startup observation deadline\\n')\n\n\n0% tests passed, 1 tests failed out of 1\n\nTotal Test time (real) =   4.28 sec\n\nThe following tests FAILED:\n\t 80 - native.EDITOR-LAYOUT (Failed)\n Errors while running CTest\n\nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-layout-authoring/linux-x64-gcc13-layout-ba268c87ca\n",
+    "stderr": ""
+  }
+]
