@@ -37,6 +37,8 @@ behaviour has been implemented. See [audit disposition](spec/delivery/audit-2026
 - [x] W-10 native binding authoring: exact typed selectors/pins, ordered predicates/sort keys, atomic table queries, lossless text and independent native save/recovery/erasure evidence. See the [handoff](spec/delivery/binding-authoring-handoff.md).
 - [x] W-10 widget creation: all seven primitives, explicit resource choices and parent-local geometry, atomic selection history and independent native storage/recovery/erasure checks. See the [handoff](spec/delivery/widget-creation-handoff.md).
 - [ ] W-10 native observation stability: diagnose the preserved AT-SPI component lookup and keyboard-focus failures before full native qualification; unchanged reruns alone do not explain them. See the [creation handoff](spec/delivery/widget-creation-handoff.md).
+- [x] W-10 native observation: explicit accessibility errors, bounded positive reads, seven calibration cases and fixed native regressions. See the [handoff](spec/delivery/native-observation-handoff.md).
+- [ ] W-10 recurring focus failures: preserve X11 ownership and explicit accessibility evidence if reproduced; earlier intermittent failures do not yet have a proven cause.
 - [ ] W-10 complete editor: installed scene-aligned desktop entry/restoration, responsive/flow container transforms, responsive arrangement, remaining property/authoring contracts, clipboard authority, recovery drafts, full accessibility/performance and other native adapters.
 
 - [x] W-09 shared binding prerequisite: existing selector/pin grammar, scoped policy borrowing, exact numeric comparisons, bounded ordering and explicit incomplete states. See the [handoff](spec/delivery/bindings-handoff.md).

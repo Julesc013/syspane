@@ -1,0 +1,74 @@
+[
+  {
+    "step": "creation",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-07T09:18:47.939764+00:00",
+    "finished_at": "2026-10-07T09:18:48.663343+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2357550839,\n  \"linux_campaign_bytes\": 4680824253,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "creation",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/observation_step.py",
+      "linux-x64-gcc13",
+      "creation"
+    ],
+    "started_at": "2026-10-07T09:18:48.663834+00:00",
+    "finished_at": "2026-10-07T09:19:59.198666+00:00",
+    "exit": 0,
+    "stdout": "Test project /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n    Start 74: native.EDITOR-WIDGET-CREATION\n1/1 Test #74: native.EDITOR-WIDGET-CREATION ....   Passed   53.30 sec\n\n100% tests passed, 0 tests failed out of 1\n\nTotal Test time (real) =  53.30 sec\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-native-observation/linux-x64-gcc13-creation-bd698a2d6c\n",
+    "stderr": ""
+  },
+  {
+    "step": "bindings",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-07T09:19:59.199050+00:00",
+    "finished_at": "2026-10-07T09:19:59.922156+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2359143056,\n  \"linux_campaign_bytes\": 4684090726,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "bindings",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/observation_step.py",
+      "linux-x64-gcc13",
+      "bindings"
+    ],
+    "started_at": "2026-10-07T09:19:59.922442+00:00",
+    "finished_at": "2026-10-07T09:20:29.749784+00:00",
+    "exit": 8,
+    "stdout": "t['cases'].append(dict(case=mode,outcome='pass',fault_detected=case.get('fault_detected',False),record_sha256=sha(folder/mode/'result.json')))\n                                                                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: ('selector', 'dbus-daemon[348338]: [session uid=1000 pid=348338] Activating service name=\\'org.a11y.Bus\\' requested by \\':1.0\\' (uid=1000 pid=348339 comm=\"/usr/bin/python3 /mnt/d/Projects/SysPane/syspane/t\" label=\"kernel\")\\ndbus-daemon[348338]: [session uid=1000 pid=348338] Successfully activated service \\'org.a11y.Bus\\'\\ndbus-daemon[348347]: Activating service name=\\'org.a11y.atspi.Registry\\' requested by \\':1.2\\' (uid=1000 pid=348353 comm=\"/home/ir4runner/.cache/syspane/campaign-229a498/li\" label=\"kernel\")\\ndbus-daemon[348347]: Successfully activated service \\'org.a11y.atspi.Registry\\'\\nTraceback (most recent call last):\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_binding_authoring.py\", line 147, in <module>\\n    if __name__==\\'__main__\\':main()\\n                            ^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_binding_authoring.py\", line 130, in main\\n    if sys.argv[1]==\\'--observe\\':observe(*map(Path,sys.argv[2:5]),sys.argv[5]);return\\n                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_binding_authoring.py\", line 119, in observe\\n    try:exercise(h)\\n        ^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_binding_authoring.py\", line 100, in exercise\\n    populate(h,mode);h.check();h.screenshot(\\'buffer\\')\\n    ^^^^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_binding_authoring.py\", line 71, in populate\\n    predicate(h,\\'network.receive_bytes\\',\\'eq\\',\\'number\\',\\'9007199254740993\\');predicate(h,\\'entity.display_name\\',\\'ne\\',\\'text\\',\\'Ghost\\');h.click(\\'binding.predicate-Up\\');h.wait(lambda:selected(h,\\'predicate\\')==\\'Predicate 1\\')\\n                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_binding_authoring.py\", line 54, in predicate\\n    previous=selected(h,\\'predicate\\');h.click(\\'binding.predicate-Add\\');h.wait(lambda:selected(h,\\'predicate\\')!=previous and value(h,\\'predicate_field\\')==\\'\\')\\n                                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_editor.py\", line 76, in wait\\n    try:value=predicate()\\n              ^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_binding_authoring.py\", line 54, in <lambda>\\n    previous=selected(h,\\'predicate\\');h.click(\\'binding.predicate-Add\\');h.wait(lambda:selected(h,\\'predicate\\')!=previous and value(h,\\'predicate_field\\')==\\'\\')\\n                                                                                    ^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_binding_authoring.py\", line 27, in selected\\n    if selection and selection.get_n_selected_children():return h.text(selection.get_selected_child(0))\\n                                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_editor.py\", line 119, in text\\n    return self.observer.text(obj)\\n           ^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_observation.py\", line 50, in text\\n    if PREFIX+\\'Text\\' in self.interfaces(obj):return self.call(obj,PREFIX+\\'Text\\',\\'GetText\\',GLib.Variant(\\'(ii)\\',(0,-1)),\\'(s)\\')[0]\\n                        ^^^^^^^^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_observation.py\", line 48, in interfaces\\n    def interfaces(self,obj):return self.call(obj,PREFIX+\\'Accessible\\',\\'GetInterfaces\\',signature=\\'(as)\\')[0]\\n                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_observation.py\", line 39, in call\\n    reply=self.bus.call_sync(name,path,interface,method,args,GLib.VariantType.new(signature),Gio.DBusCallFlags.NONE,timeout,None)\\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\ngi.repository.GLib.GError: g-dbus-error-quark: GDBus.Error:org.freedesktop.DBus.Error.UnknownObject: Method \"GetInterfaces\" with signature \"\" on interface \"org.a11y.atspi.Accessible\" could not be processed as object /org/a11y/atspi/accessible/204 does not exist\\n (41)\\n')\n\n\n0% tests passed, 1 tests failed out of 1\n\nTotal Test time (real) =  16.76 sec\n\nThe following tests FAILED:\n\t 75 - native.EDITOR-BINDING-AUTHORING (Failed)\n Errors while running CTest\n\nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-native-observation/linux-x64-gcc13-bindings-80a35d10a8\n",
+    "stderr": ""
+  }
+]

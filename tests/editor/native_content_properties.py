@@ -9,15 +9,6 @@ class ContentHarness(Harness):
     def point(self,x,y,shift=False):return super().point(int(x*3/4),int(y*3/4),shift)
     def pixels(self,x,y,w,h):return super().pixels(int(x*3/4),int(y*3/4),max(1,int(w*3/4)),max(1,int(h*3/4)))
     def cleared_canvas(self):return set(super().pixels(0,0,500,420))=={0}
-    def erased(self,obj):
-        try:return super().erased(obj)
-        except self.GLib.GError as error:
-            # A removed GTK menu item can lose its application association. Require
-            # its defunct state AND a live, accessible owner; disconnection is no pass.
-            if error.domain!='atspi_error' or str(error)!='atspi_error: The application no longer exists (0)':raise
-            assert self.proc.poll() is None and obj.get_state_set().contains(self.Atspi.StateType.DEFUNCT)
-            assert 'Editor unavailable' in self.status() and self.sensitive('reload')
-            return True
     def check(self,scene=None,revision='40'):
         expected=self.documents(scene,revision);assert stored(self.directory)==expected,'stored documents differ'
         check_resources(self.directory,expected['scene']['theme_id'] or expected['settings']['display']['theme_id'],fixture=RESOURCES)
@@ -26,18 +17,13 @@ def value(h,id):return h.text(h.find('content.'+id))
 def field(h,id,text):
     obj=h.find('content.'+id);assert h.sensitive('content.'+id)
     assert h.Atspi.EditableText.set_text_contents(obj.get_editable_text_iface(),str(text));h.wait(lambda:value(h,id)==str(text))
-def selected(h,id):
-    obj=h.find('content.'+id);obj.clear_cache();selection=obj.get_selection_iface()
-    try:
-        if selection and selection.get_n_selected_children():return h.text(selection.get_selected_child(0))
-    except h.GLib.GError as error:
-        if error.domain!='atspi_error' or 'does not exist' not in str(error):raise
-    return ''
+def selected(h,id):return h.observer.selected_text(h.find('content.'+id))
+
 def choose(h,id,index,expected):
-    obj=h.find('content.'+id);rect=obj.get_component_iface().get_extents(h.Atspi.CoordType.SCREEN);h.input.click(rect.x+rect.width-12,rect.y+rect.height//2)
+    obj=h.find('content.'+id);rect=h.extents(obj);h.input.click(rect.x+rect.width-12,rect.y+rect.height//2)
     def option():
-        matches=[o for o in h.objects() if o.get_role()==h.Atspi.Role.MENU_ITEM and o.get_state_set().contains(h.Atspi.StateType.SHOWING) and h.text(o)==expected]
-        bounds=[o.get_component_iface().get_extents(h.Atspi.CoordType.SCREEN) for o in matches]
+        matches=[o for o in h.objects() if o.get_role()==h.Atspi.Role.MENU_ITEM and h.state(o,h.Atspi.StateType.SHOWING) and h.text(o)==expected]
+        bounds=[h.extents(o) for o in matches]
         # GTK exports its popup through both the combo and application hierarchy.
         positions={(b.x,b.y,b.width,b.height) for b in bounds if b.x>=0 and b.width>0}
         assert len(positions)<=1

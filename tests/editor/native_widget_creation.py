@@ -18,8 +18,8 @@ class CreationHarness(ContentHarness):
         return self.controls.get(id)
     def click(self,id):
         assert self.sensitive(id),(id,self.status())
-        obj=self.find(id);assert obj.get_state_set().contains(self.Atspi.StateType.SHOWING)
-        rect=obj.get_component_iface().get_extents(self.Atspi.CoordType.SCREEN)
+        obj=self.find(id);assert self.state(obj,self.Atspi.StateType.SHOWING)
+        rect=self.extents(obj)
         assert rect.x>=0 and rect.y>=0 and rect.width>0 and rect.height>0
         self.input.click(rect.x+rect.width//2,rect.y+rect.height//2)
 
@@ -27,18 +27,13 @@ def value(h,id):return h.text(h.find('create.'+id))
 def field(h,id,text):
     obj=h.find('create.'+id);h.wait(lambda:h.sensitive('create.'+id))
     assert h.Atspi.EditableText.set_text_contents(obj.get_editable_text_iface(),str(text));h.wait(lambda:value(h,id)==str(text))
-def selected(h,id):
-    obj=h.find('create.'+id);obj.clear_cache();selection=obj.get_selection_iface()
-    try:
-        if selection and selection.get_n_selected_children():return h.text(selection.get_selected_child(0))
-    except h.GLib.GError as error:
-        if error.domain!='atspi_error' or 'does not exist' not in str(error):raise
-    return ''
+def selected(h,id):return h.observer.selected_text(h.find('create.'+id))
+
 def choose(h,id,index,expected):
-    obj=h.find('create.'+id);rect=obj.get_component_iface().get_extents(h.Atspi.CoordType.SCREEN);h.input.click(rect.x+rect.width-12,rect.y+rect.height//2)
+    obj=h.find('create.'+id);rect=h.extents(obj);h.input.click(rect.x+rect.width-12,rect.y+rect.height//2)
     def option():
-        matches=[o for o in h.objects() if o.get_role()==h.Atspi.Role.MENU_ITEM and o.get_state_set().contains(h.Atspi.StateType.SHOWING) and h.text(o)==expected]
-        bounds=[o.get_component_iface().get_extents(h.Atspi.CoordType.SCREEN) for o in matches]
+        matches=[o for o in h.objects() if o.get_role()==h.Atspi.Role.MENU_ITEM and h.state(o,h.Atspi.StateType.SHOWING) and h.text(o)==expected]
+        bounds=[h.extents(o) for o in matches]
         # GTK exports its popup through both the combo and application hierarchy.
         positions={(b.x,b.y,b.width,b.height) for b in bounds if b.x>=0 and b.width>0}
         assert len(positions)<=1
@@ -50,8 +45,8 @@ def choose(h,id,index,expected):
 
 def tab(h,title):
     matches=[o for o in h.objects() if o.get_role()==h.Atspi.Role.PAGE_TAB and h.text(o)==title];assert len(matches)==1
-    rect=matches[0].get_component_iface().get_extents(h.Atspi.CoordType.SCREEN);h.input.click(rect.x+rect.width//2,rect.y+rect.height//2)
-    h.wait(lambda:matches[0].get_state_set().contains(h.Atspi.StateType.SELECTED))
+    rect=h.extents(matches[0]);h.input.click(rect.x+rect.width//2,rect.y+rect.height//2)
+    h.wait(lambda:h.state(matches[0],h.Atspi.StateType.SELECTED))
 def open_create(h):
     h.click('insert');h.wait(lambda:h.find('create.add') is not None and h.sensitive('create.add') and not h.sensitive('insert'))
 def add(h):h.click('create.add');h.wait(lambda:h.sensitive('insert'));h.input.focus(h.pid)

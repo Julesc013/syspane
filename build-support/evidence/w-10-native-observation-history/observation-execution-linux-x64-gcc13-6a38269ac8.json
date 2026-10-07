@@ -1,0 +1,38 @@
+[
+  {
+    "step": "experiment",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-07T09:07:45.275322+00:00",
+    "finished_at": "2026-10-07T09:07:46.620221+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2351180183,\n  \"linux_campaign_bytes\": 4679413621,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "experiment",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/observation_step.py",
+      "linux-x64-gcc13",
+      "experiment"
+    ],
+    "started_at": "2026-10-07T09:07:46.620992+00:00",
+    "finished_at": "2026-10-07T09:08:06.536942+00:00",
+    "exit": 0,
+    "stdout": "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/observation-89d37dd0f80d/result.json observed\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-native-observation/linux-x64-gcc13-experiment-af91259d40\n",
+    "stderr": ""
+  }
+]

@@ -1662,3 +1662,25 @@ Seventeen cases operate actual controls and inspect pixels, accessibility, coher
 stored resources, reopen, cancellation, restart and erasure. Existing native
 binding/content/snap/group/arrange/editor and large-command matrices cover shared
 ownership regressions. See the [evidence handoff](../../spec/delivery/widget-creation-handoff.md).
+
+### Native observation calibration
+
+After Linux workspace preflight and ordinary configure, run `ctest --preset
+linux-x64-gcc13 -R "^native[.]EDITOR-OBSERVATION$" --output-on-failure`. Seven owned
+cases verify explicit live, unfocused, delayed, disconnected, missing-object and
+denied replies. Existing `EDITOR-WIDGET-CREATION`, `EDITOR-BINDING-AUTHORING`,
+`EDITOR-CONTENT-PROPERTIES`, `EDITOR-SNAP`, `EDITOR-GROUP`, `EDITOR-ARRANGE`,
+`EDITOR-FORM` and `LARGE-COMMANDS` remain required consumers of the shared observer.
+
+`tests/editor/native_observation.py` caches addresses only. Calls have a 200-ms
+ceiling and inherit any smaller remaining wait budget. Read-only retries never
+repeat user input or persistence commands. No unavailable read counts as empty,
+unfocused, unsupported or erased; held-key checks require positive focus throughout.
+UnknownObject erasure additionally checks a live accessible owner. Per child, the
+observer bounds retained addresses at 4096 and error records at 128. Reopening clears
+addresses. Error records include method, unique owner, object path, duration and
+explicit error; focus failures additionally record X11 ownership.
+
+See the [handoff](../../spec/delivery/native-observation-handoff.md) for preserved
+diagnostics and unresolved historical focus failures. These are native laboratory
+checks, not installed-desktop or historical-platform qualification.

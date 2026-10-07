@@ -5,7 +5,7 @@ import hashlib,json,os,signal,subprocess,sys,time,uuid
 from native_editor import Harness,ROOT,sha,stored,launch_xvfb
 CASES=json.loads((ROOT/'tests/editor/snap-cases.json').read_text())
 def checked(h,id):
-    obj=h.find(id);obj.clear_cache();return obj.get_state_set().contains(h.Atspi.StateType.CHECKED)
+    obj=h.find(id);obj.clear_cache();return h.state(obj,h.Atspi.StateType.CHECKED)
 def samples(h,scene,count):
     return [h.pixels(b['x']+10,b['y']+10,b['width']-20,b['height']-20) for b in (w['layout']['base'] for w in scene['widgets'][:count])]
 def guide(h):return h.text(h.find('guidance'))

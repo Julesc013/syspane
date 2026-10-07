@@ -292,6 +292,9 @@ if(BUILD_TESTING)
         add_test(NAME native.EDITOR-FORM COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/editor/native_editor.py"
             "$<TARGET_FILE:syspane_editor_window>" "$<TARGET_FILE:syspane_editor_exit_probe>" "${CMAKE_BINARY_DIR}/native-evidence")
         set_tests_properties(native.EDITOR-FORM PROPERTIES TIMEOUT 300)
+        add_test(NAME native.EDITOR-OBSERVATION COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/editor/native_observation_cases.py"
+            $<TARGET_FILE:syspane_editor_window> $<TARGET_FILE:syspane_editor_exit_probe> "${CMAKE_BINARY_DIR}/native-evidence")
+        set_tests_properties(native.EDITOR-OBSERVATION PROPERTIES TIMEOUT 300)
         add_test(NAME native.EDITOR-ARRANGE COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/editor/native_arrange.py"
             "$<TARGET_FILE:syspane_editor_window>" "$<TARGET_FILE:syspane_editor_exit_probe>" "${CMAKE_BINARY_DIR}/native-evidence")
         set_tests_properties(native.EDITOR-ARRANGE PROPERTIES TIMEOUT 300)

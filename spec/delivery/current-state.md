@@ -12,15 +12,24 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-07T08:29:17.403156+00:00", "scope": "Native creation of all seven primitives and remaining editor boundaries"}
+updated: {"by": "codex", "at": "2026-10-07T09:30:22.966768+00:00", "scope": "Explicit native observation and unresolved historical focus cause"}
 ---
 
 # Current state and next admitted boundary
 
-The latest [widget-creation checkpoint](widget-creation-handoff.md) adds all seven
+The latest [native observation checkpoint](native-observation-handoff.md) replaces
+ambiguous accessibility fallbacks with explicit text/state/interface/geometry and
+selection replies. Delays, denial and disconnection cannot pass negative checks;
+destroyed objects need an explicit missing-object reply and live owner. Seven
+calibrations and 129 existing native cases pass with unchanged production bytes.
+The earlier intermittent focus/interface failures are still unproven. Continue
+responsive/flow transforms and remaining properties; use the new failure snapshots
+if focus failures recur. Installed ownership and all complete editions remain open.
+
+The earlier [widget-creation checkpoint](widget-creation-handoff.md) adds all seven
 primitive kinds, explicit parent-local geometry and resource choice, per-kind
-private input and atomic insertion/selection history. Investigate the preserved
-native focus/interface observation failures, then close responsive/flow transforms and remaining property controls, then installed controller/catalog/policy
+private input and atomic insertion/selection history. Native observation now has the checkpoint above. Close responsive/flow transforms
+and remaining property controls, then installed controller/catalog/policy
 ownership and independent entry/restoration. W-10 and all complete editions remain
 in progress.
 

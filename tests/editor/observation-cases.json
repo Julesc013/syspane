@@ -1,0 +1,20 @@
+{
+  "family": "EDITOR-OBSERVATION",
+  "expected_title": "Editable pane",
+  "cases": ["live", "unfocused", "short-stop", "long-stop", "dead", "removed", "denied"],
+  "short_stop_ms": 50,
+  "long_stop_ms": 350,
+  "rpc_ms": 200,
+  "erase_ms": 200,
+  "unfocused_wait_ms": 50,
+  "child_seconds": 40,
+  "expectations": {
+    "live": "Fresh nonempty title, focused button and explicit unsupported Text interface on button; erased false; explicit cleared title after close",
+    "unfocused": "Changing focus once to another control produces focused false; held observation cannot restore it or pass",
+    "short-stop": "A bounded read succeeds after the 50 ms stop with the unchanged nonempty title",
+    "long-stop": "Stopped owner retains X focus but cannot provide observations; text, state and erasure cannot pass within 200 ms; after 350 ms resume the original title remains",
+    "dead": "Previously read title cannot become empty/erased and focus cannot pass after owned process exits; require an explicit service failure",
+    "removed": "The live owner explicitly reports a nonexistent object; only this response plus a fresh accessible live owner may satisfy removed-object erasure",
+    "denied": "An independent private D-Bus calibration service returns AccessDenied; this cannot satisfy text, focus or erased predicates"
+  }
+}

@@ -8,6 +8,7 @@ from native_settings import stored,check_resources
 from native_diagnostic import launch_xvfb
 from native_editor_exit import Observer
 from check_surface_runtime import verify
+from native_observation import Observations,Unavailable
 CASES=json.loads((ROOT/'tests/editor/native-cases.json').read_text())
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
 
@@ -47,8 +48,9 @@ class Harness:
         self.proc=None;self.pid=None;self.fd=None;self.stage='startup';self.events=queue.Queue();self.inbox=[];self.input=Input();self.controls={}
         self.err=(folder/'stderr').open('wb')
         self.report=dict(outcome='fail',mode=mode,events=[],observations=[],executable_sha256=sha(exe),exit_executable_sha256=sha(exit_exe),oracle_sha256=sha(Path(__file__)),fixture_sha256=sha(self.case_path))
+        self.observer=Observations(self.report);self.report['observation_helper_sha256']=sha(ROOT/'tests/editor/native_observation.py')
     def launch(self,mode=None,recovery=False):
-        self.controls.clear()
+        self.controls.clear();self.observer.addresses.clear()
         args=[str(self.exit_exe),'--owned-editor-lab',str(self.exe),str(ROOT),str(self.directory),'drag'] if recovery else [str(self.exe),str(ROOT),str(self.directory),("large-" if self.large else "arrange-" if self.arrange else "group-" if self.group else "snap-" if self.snap else "properties-" if self.properties else "")+(mode or self.mode)]
         self.proc=subprocess.Popen(args,stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=self.err,bufsize=0)
         def collect(child):
@@ -66,12 +68,19 @@ class Harness:
             if not context.pending():break
             context.iteration(False)
     def wait(self,predicate,seconds=3):
-        end=time.monotonic()+seconds
-        while True:
-            self.pump();value=predicate()
-            if value:return value
-            assert time.monotonic()<end,self.stage+' observation deadline'
-            time.sleep(.005)
+        previous=self.observer.deadline;end=min(time.monotonic()+seconds,previous or float('inf'))
+        self.observer.deadline=end
+        try:
+            while True:
+                self.pump()
+                try:value=predicate()
+                except (self.GLib.GError,Unavailable) as error:
+                    if not self.observer.retryable(error):raise
+                    value=False
+                assert time.monotonic()<end,self.stage+' observation deadline'
+                if value:return value
+                time.sleep(.005)
+        finally:self.observer.deadline=previous
     def event(self,key,value):
         end=time.monotonic()+5
         while time.monotonic()<end:
@@ -93,7 +102,7 @@ class Harness:
             # GTK can remove a list cell between count and indexed child reads.
             # Required controls/results are still independently awaited below.
             if obj is None:continue
-            obj.clear_cache();out.append(obj);assert len(out)<=512 and depth<=20
+            obj.clear_cache();self.observer.identity(obj);out.append(obj);assert len(out)<=512 and depth<=20
             for n in range(obj.get_child_count()):pending.append((obj.get_child_at_index(n),depth+1))
         return out
     def find(self,id):
@@ -107,30 +116,47 @@ class Harness:
             assert len(self.controls)<=64
         return self.controls.get(id)
     def text(self,obj):
-        if obj is None:return ''
-        obj.clear_cache();interface=obj.get_text_iface();return self.Atspi.Text.get_text(interface,0,-1) if interface else obj.get_name() or ''
+        return self.observer.text(obj)
     def erased(self,obj):
         try:return self.text(obj)==''
         except self.GLib.GError as error:
             # A destroyed native cell may no longer have an exported object. This
             # is distinct from a timeout, disconnected application or stale text.
-            if error.domain=='atspi_error' and 'does not exist' in str(error):return True
+            if self.observer.removed(error):
+                assert self.proc.poll() is None
+                self.observer.interfaces(self.find('status'))
+                return True
             raise
     def value(self,id):return self.text(self.find('value.'+id))
     def number(self,id):return float(self.value(id)) if self.value(id) else None
     def status(self):return self.text(self.find('status'))
     def sensitive(self,id):
-        obj=self.find(id);obj.clear_cache();return obj.get_state_set().contains(self.Atspi.StateType.SENSITIVE)
+        return self.state(self.find(id),self.Atspi.StateType.SENSITIVE)
+    def state(self,obj,state):return self.observer.state(obj,state)
+    def extents(self,obj):return self.observer.extents(obj)
+    def focus_snapshot(self,id):
+        self.input.x.XGetInputFocus.argtypes=[C.c_void_p,C.POINTER(C.c_ulong),C.POINTER(C.c_int)]
+        value=C.c_ulong();revert=C.c_int();self.input.x.XGetInputFocus(self.input.handle,C.byref(value),C.byref(revert))
+        result=dict(control=id,x_focus=value.value,owner_windows=list(self.input.windows(self.pid)),process_exit=self.proc.poll())
+        try:
+            obj=self.find(id);result['object']=self.observer.identity(obj)
+            result['focused']=self.state(obj,self.Atspi.StateType.FOCUSED)
+            result['sensitive']=self.sensitive(id)
+        except Exception as error:result['observation_error']=str(error)
+        return result
     def focus(self,id):
-        obj=self.find(id);assert obj.get_component_iface().grab_focus()
-        def focused():obj.clear_cache();return obj.get_state_set().contains(self.Atspi.StateType.FOCUSED)
-        self.wait(focused)
+        try:
+            obj=self.find(id);assert self.observer.focus(obj)
+            self.wait(lambda:self.state(obj,self.Atspi.StateType.FOCUSED))
+        except Exception:
+            self.report['focus_failure']=self.focus_snapshot(id)
+            raise
     def click(self,id):
         assert self.sensitive(id),(id,self.status());self.focus(id);self.input.press(0x20)
     def field(self,id,value):
         obj=self.find('value.'+id);assert self.sensitive('value.'+id)
         assert self.Atspi.EditableText.set_text_contents(obj.get_editable_text_iface(),str(value));self.wait(lambda:self.value(id)==str(value))
-    def rect(self):return self.find('canvas').get_component_iface().get_extents(self.Atspi.CoordType.SCREEN)
+    def rect(self):return self.extents(self.find('canvas'))
     def point(self,x,y,shift=False):
         rect=self.rect()
         if shift:self.input.key(0xffe1,True)
@@ -184,7 +210,7 @@ def exercise(h):
         h.wait(lambda:'Enter a number' in h.status());assert h.value('x')=='1e2' and not h.sensitive('apply');h.check()
         h.command('topology');assert h.value('x')=='1e2' and h.value('title')=='Renamed pane' and not h.sensitive('apply')
         for key,value in dict(title='Renamed pane',body='Updated body',x=125,y=135,width=210,height=90).items():h.field(key,value)
-        obj=h.find('value.body');assert obj.get_component_iface().grab_focus();h.input.press(ord('a'),control=True);h.input.press(ord('c'),control=True)
+        obj=h.find('value.body');assert h.observer.focus(obj);h.input.press(ord('a'),control=True);h.input.press(ord('c'),control=True)
         h.Atspi.EditableText.copy_text(obj.get_editable_text_iface(),0,12);h.pump()
         assert h.Gtk.Clipboard.get(h.Gdk.SELECTION_PRIMARY).wait_for_text() is None
         assert h.Gtk.Clipboard.get(h.Gdk.SELECTION_CLIPBOARD).wait_for_text() is None

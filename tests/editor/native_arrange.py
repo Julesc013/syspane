@@ -31,8 +31,8 @@ def held_activation(h,id):
     try:
         while time.monotonic()<until:
             h.pump();obj.clear_cache()
-            if not obj.get_state_set().contains(h.Atspi.StateType.FOCUSED):
-                h.report['focus_failure']={'control':id,'sensitive':h.sensitive(id),'focused':[{'name':h.text(o),'description':o.get_description(),'role':str(o.get_role())} for o in h.objects() if o.get_state_set().contains(h.Atspi.StateType.FOCUSED)]}
+            if not h.state(obj,h.Atspi.StateType.FOCUSED):
+                h.report['focus_failure']=h.focus_snapshot(id)
                 raise AssertionError('repaint stole native button focus')
             time.sleep(.005)
     finally:h.input.key(0x20,False);h.input.sync()

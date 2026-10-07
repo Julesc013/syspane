@@ -21,18 +21,13 @@ def value(h,id):return h.text(h.find('binding.'+id))
 def field(h,id,text):
     obj=h.find('binding.'+id);h.wait(lambda:h.sensitive('binding.'+id))
     assert h.Atspi.EditableText.set_text_contents(obj.get_editable_text_iface(),str(text));h.wait(lambda:value(h,id)==str(text))
-def selected(h,id):
-    obj=h.find('binding.'+id);obj.clear_cache();selection=obj.get_selection_iface()
-    try:
-        if selection and selection.get_n_selected_children():return h.text(selection.get_selected_child(0))
-    except h.GLib.GError as error:
-        if error.domain!='atspi_error' or 'does not exist' not in str(error):raise
-    return ''
+def selected(h,id):return h.observer.selected_text(h.find('binding.'+id))
+
 def choose(h,id,index,expected):
-    obj=h.find('binding.'+id);rect=obj.get_component_iface().get_extents(h.Atspi.CoordType.SCREEN);h.input.click(rect.x+rect.width-12,rect.y+rect.height//2)
+    obj=h.find('binding.'+id);rect=h.extents(obj);h.input.click(rect.x+rect.width-12,rect.y+rect.height//2)
     def option():
-        matches=[o for o in h.objects() if o.get_role()==h.Atspi.Role.MENU_ITEM and o.get_state_set().contains(h.Atspi.StateType.SHOWING) and h.text(o)==expected]
-        bounds=[o.get_component_iface().get_extents(h.Atspi.CoordType.SCREEN) for o in matches]
+        matches=[o for o in h.objects() if o.get_role()==h.Atspi.Role.MENU_ITEM and h.state(o,h.Atspi.StateType.SHOWING) and h.text(o)==expected]
+        bounds=[h.extents(o) for o in matches]
         # GTK exports its popup through both the combo and application hierarchy.
         positions={(b.x,b.y,b.width,b.height) for b in bounds if b.x>=0 and b.width>0}
         assert len(positions)<=1
@@ -45,9 +40,9 @@ def tab(h,id):
     title={'target':'Target','filter':'Filter','order':'Order'}[id]
     matches=[o for o in h.objects() if o.get_role()==h.Atspi.Role.PAGE_TAB and h.text(o)==title]
     assert len(matches)==1
-    rect=matches[0].get_component_iface().get_extents(h.Atspi.CoordType.SCREEN)
+    rect=h.extents(matches[0])
     h.input.click(rect.x+rect.width//2,rect.y+rect.height//2)
-    h.wait(lambda:h.find('binding.'+('predicate-Add' if id=='filter' else 'sort-Add' if id=='order' else 'scope')).get_state_set().contains(h.Atspi.StateType.SHOWING))
+    h.wait(lambda:h.state(h.find('binding.'+('predicate-Add' if id=='filter' else 'sort-Add' if id=='order' else 'scope')),h.Atspi.StateType.SHOWING))
 def open_binding(h):h.click('bindings');h.wait(lambda:h.find('binding.set') is not None and h.sensitive('binding.set') and not h.sensitive('bindings'))
 def set_binding(h):h.click('binding.set');h.wait(lambda:h.sensitive('bindings'));h.input.focus(h.pid)
 def predicate(h,f,op,kind,v):

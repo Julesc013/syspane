@@ -7,6 +7,12 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
+The [native observation checkpoint](spec/delivery/native-observation-handoff.md)
+strengthens editor verification: unavailable accessibility calls cannot count as
+empty text, lost focus or completed erasure. Seven calibrated error/delay cases
+and the existing native matrices retain the same product expectations. The earlier
+intermittent focus failures remain unexplained; full editions remain in progress.
+
 The [widget-creation checkpoint](spec/delivery/widget-creation-handoff.md) adds
 native creation of text, value, status, table, chart, image and group widgets.
 Root/group placement, explicit image choices and selection share one reversible
