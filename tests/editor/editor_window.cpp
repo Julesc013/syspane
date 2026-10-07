@@ -89,6 +89,7 @@ struct Window {
         window=gtk_window_new(GTK_WINDOW_TOPLEVEL);gtk_window_set_title(GTK_WINDOW(window),"SysPane Editor");gtk_window_set_default_size(GTK_WINDOW(window),790,580);gtk_window_move(GTK_WINDOW(window),0,recovery?100:0);
         auto* box=gtk_box_new(GTK_ORIENTATION_VERTICAL,0);overlay=gtk_overlay_new();gtk_container_add(GTK_CONTAINER(window),overlay);gtk_container_add(GTK_CONTAINER(overlay),box);gtk_box_pack_start(GTK_BOX(box),form->widget(),TRUE,TRUE,0);
         if(behavior=="retain"||behavior=="false-saved"){canary=gtk_label_new(behavior=="retain"?"Retained editor canary Move me":"");gtk_box_pack_start(GTK_BOX(box),canary,FALSE,FALSE,0);}
+        if(behavior=="retain-create"){canary=gtk_label_new("Retained creation canary Private creation");gtk_box_pack_start(GTK_BOX(box),canary,FALSE,FALSE,0);}
         if(behavior=="retain-binding"){canary=gtk_label_new("Retained binding canary Private filter");gtk_box_pack_start(GTK_BOX(box),canary,FALSE,FALSE,0);}
         if(behavior=="retain-content"){canary=gtk_label_new("Retained content canary Initial color image");gtk_box_pack_start(GTK_BOX(box),canary,FALSE,FALSE,0);}
         g_signal_connect(window,"destroy",G_CALLBACK(+[](GtkWidget*,gpointer p){static_cast<Window*>(p)->closed=true;gtk_main_quit();}),this);gtk_widget_show_all(window);
@@ -108,6 +109,7 @@ struct Window {
             if(command.first=="cancel"){auto result=owner->query("fixture:editor",authority(),q.request,true,now());emit({{"event","cancel-requested"},{"result",result}});continue;}
             request=q;auto body=q.body;if(behavior=="wrong-commit"){auto changed=c::parse_command(body);changed["operations"][0]["scene"]["widgets"][0]["layout"]["base"]["x"]=71;body=changed.dump();}
             if(behavior=="wrong-group"){auto changed=c::parse_command(body);auto& children=changed["operations"][0]["scene"]["widgets"][3]["children"];std::reverse(children.begin(),children.end());body=changed.dump();}
+            if(behavior=="wrong-insert"){auto changed=c::parse_command(body);changed["operations"][0]["scene"]["widgets"].back()["title"]="Wrong insertion";body=changed.dump();}
             if(behavior=="wrong-binding"){auto changed=c::parse_command(body);changed["operations"][0]["scene"]["widgets"][2]["bindings"][0]["field"]="network.receive_bytes";body=changed.dump();}
             if(behavior=="wrong-content"){auto changed=c::parse_command(body);changed["operations"][0]["scene"]["widgets"][3]["content"]["alt"]="Wrong replacement";body=changed.dump();}
             auto admission=owner->submit("fixture:editor","settings",1,authority(),body,true,now());emit({{"event","submitted"},{"body",c::parse_command(body)}});

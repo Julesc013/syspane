@@ -75,8 +75,8 @@ discards only the dialog buffer. Invalid values leave the draft unchanged and st
 available for correction. A policy change closes and clears the dialog; disclosure
 regrant requires Reload. Text body remains in the basic property fields.
 
-These controls currently run in the owned Linux development editor. New non-text
-widgets, remaining properties and installed desktop routing are still pending. See the [recorded scope](../../spec/delivery/content-properties-handoff.md).
+These controls currently run in the owned Linux development editor. All seven widget kinds now have creation controls below. Remaining properties and
+installed desktop routing are still pending. See the [recorded scope](../../spec/delivery/content-properties-handoff.md).
 
 ## Bindings in the development editor
 
@@ -99,3 +99,23 @@ characters automatically open in escaped format. The saved value remains the
 decoded text; choosing a format determines how the current buffer is interpreted.
 The existing 512-character limit applies after decoding. Policy/owner changes
 erase all input, including hidden rows. See the [recorded scope](../../spec/delivery/binding-authoring-handoff.md).
+
+## Adding widgets in the development editor
+
+Choose **Add widget**, then text, value, status, table, chart, image or group.
+Placement sets the title and fixed size/position. Choose Scene roots or an existing
+group; coordinates inside a group are local to that group. A selected group is
+the initial parent. Each kind keeps its own input while the dialog is open.
+
+Content edits text or source fields. New counters/charts start with this host's
+network receive counter; tables start with receive/sent columns. These visible
+defaults do not acquire a source or grant access. Use **Bindings** to choose other
+selectors/pins and **Content** for further options. Images require an explicit
+choice from the admitted resource catalog; there is no automatic image selection.
+
+**Add widget** inserts and selects one draft object. Undo restores the prior scene
+and selection; Redo selects the restored object. **Apply** saves separately.
+Cancel creation discards private input; invalid input stays available for correction.
+Policy or owner changes erase the dialog, including hidden kind buffers. The older
+**Add text** shortcut remains available. These controls currently run in the owned
+Linux development editor, as scoped in the [handoff](../../spec/delivery/widget-creation-handoff.md).

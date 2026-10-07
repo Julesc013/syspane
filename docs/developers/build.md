@@ -1646,3 +1646,19 @@ The original binding cases and supplemental escaped-text cases remain separate
 frozen inputs. Rerun existing content, snap, group, arrange, editor, settings and
 large-command matrices when changing shared native ownership or private controls.
 See the [handoff](../../spec/delivery/binding-authoring-handoff.md) for exact evidence.
+
+### Native widget creation
+
+`editor_create.*` projects bounded private input into InsertWidget. The optional
+`select_inserted` flag makes object insertion and selection one EditorDraft history
+entry; its default preserves existing callers. The GTK creation dialog uses the
+existing immutable resource choices, validator, renderer and request owner.
+
+After profile build and workspace preflight, run `ctest --preset <profile> -R "^editor[.]CREATE-" --output-on-failure`.
+Six families compare fixed full objects/scenes, parent display intent, selection
+history, exact command scenes, limits and atomic rejection. In the unprivileged
+Linux laboratory run `ctest --preset linux-x64-gcc13 -R "^native[.]EDITOR-WIDGET-CREATION$" --output-on-failure`.
+Seventeen cases operate actual controls and inspect pixels, accessibility, coherent
+stored resources, reopen, cancellation, restart and erasure. Existing native
+binding/content/snap/group/arrange/editor and large-command matrices cover shared
+ownership regressions. See the [evidence handoff](../../spec/delivery/widget-creation-handoff.md).

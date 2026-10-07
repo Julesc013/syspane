@@ -103,3 +103,12 @@ preserves control characters through an explicit escaped format. Existing resolv
 policy, history and persistence owners remain authoritative. The
 [checkpoint](../delivery/binding-authoring-handoff.md) records scoped evidence;
 provider discovery, installed routing and complete editions remain open.
+
+## Native creation boundary
+
+The [widget-creation package](../delivery/packages/w-10-widget-creation.md) defines
+all seven primitives, explicit parent-local geometry and image choice, bounded
+per-kind buffers and one insertion/selection history step. Existing policy,
+resource, layout and transaction owners remain authoritative. The
+[checkpoint](../delivery/widget-creation-handoff.md) records scoped evidence;
+responsive authoring, installed routing and complete editions remain open.

@@ -1,0 +1,74 @@
+[
+  {
+    "step": "configure",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-07T08:14:14.945086+00:00",
+    "finished_at": "2026-10-07T08:14:16.199550+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2259431746,\n  \"linux_campaign_bytes\": 4706966345,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "configure",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/creation_step.py",
+      "linux-x64-gcc13",
+      "configure"
+    ],
+    "started_at": "2026-10-07T08:14:16.208607+00:00",
+    "finished_at": "2026-10-07T08:14:46.890601+00:00",
+    "exit": 0,
+    "stdout": "Preset CMake variables:\n\n  BUILD_TESTING=\"ON\"\n  CMAKE_BUILD_TYPE=\"Debug\"\n  CMAKE_CXX_COMPILER=\"g++\"\n  SYSPANE_PROFILE=\"linux-x64-gcc13\"\n\nprofile verified: linux-x64-gcc13\nvendored dependency digests: pass\ndiagnostic toolkit verified: GTK 3.24.41 / Ubuntu 3.24.41-4ubuntu1.3\nnative text dependency identity verified: 358 files\nnative image dependencies verified: 344 files\nnative GJS clock build dependencies verified\n-- Configuring done (8.6s)\n-- Generating done (0.1s)\n-- Build files have been written to: /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-widget-creation/linux-x64-gcc13-configure-db39e84295\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-07T08:14:46.890903+00:00",
+    "finished_at": "2026-10-07T08:14:47.780463+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2261015397,\n  \"linux_campaign_bytes\": 4706975806,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/creation_step.py",
+      "linux-x64-gcc13",
+      "build"
+    ],
+    "started_at": "2026-10-07T08:14:47.780784+00:00",
+    "finished_at": "2026-10-07T08:15:06.763325+00:00",
+    "exit": 1,
+    "stdout": "[1/22] Building CXX object CMakeFiles/syspane_editor_draft.dir/source/interfaces/editor_create.cpp.o\nFAILED: CMakeFiles/syspane_editor_draft.dir/source/interfaces/editor_create.cpp.o \n/usr/bin/g++ -DJSON_DIAGNOSTICS=0 -DJSON_DIAGNOSTIC_POSITIONS=1 -I/mnt/d/Projects/SysPane/syspane/source/interfaces -I/mnt/d/Projects/SysPane/syspane/source/configuration -I/mnt/d/Projects/SysPane/syspane/source/protocol -I/mnt/d/Projects/SysPane/syspane/source/scene -I/mnt/d/Projects/SysPane/syspane/source/diagnostics -I/mnt/d/Projects/SysPane/syspane/source/model -isystem /mnt/d/Projects/SysPane/syspane/source/third_party -g -std=c++17 -Wall -Wextra -Wpedantic -Werror -march=x86-64 -mtune=generic -MD -MT CMakeFiles/syspane_editor_draft.dir/source/interfaces/editor_create.cpp.o -MF CMakeFiles/syspane_editor_draft.dir/source/interfaces/editor_create.cpp.o.d -o CMakeFiles/syspane_editor_draft.dir/source/interfaces/editor_create.cpp.o -c /mnt/d/Projects/SysPane/syspane/source/interfaces/editor_create.cpp\n/mnt/d/Projects/SysPane/syspane/source/interfaces/editor_create.cpp: In function \u2018syspane::interfaces::CreateInput syspane::interfaces::create_input(const std::string&)\u2019:\n/mnt/d/Projects/SysPane/syspane/source/interfaces/editor_create.cpp:10:214: error: expected \u2018}\u2019 before \u2018;\u2019 token\n   10 |     static const std::map<std::string,std::pair<unsigned,unsigned>> sizes={{\"text\",{180,80}},{\"value\",{240,100}},{\"status\",{240,120}},{\"table\",{420,180}},{\"chart\",{400,240}},{\"image\",{160,120}},{\"group\",{320,240}};\n      |                                                                           ~                                                                                                                                          ^\n[2/22] Building CXX object CMakeFiles/syspane_editor_draft.dir/source/interfaces/editor_draft.cpp.o\n[3/22] Building CXX object CMakeFiles/syspane_editor_draft.dir/source/interfaces/editor_content.cpp.o\n[4/22] Building CXX object CMakeFiles/syspane_editor_draft.dir/source/interfaces/editor_binding.cpp.o\nninja: build stopped: subcommand failed.\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-widget-creation/linux-x64-gcc13-build-075ecca47e\n",
+    "stderr": ""
+  }
+]

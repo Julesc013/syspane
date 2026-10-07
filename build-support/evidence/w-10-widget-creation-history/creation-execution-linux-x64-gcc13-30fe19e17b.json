@@ -1,0 +1,38 @@
+[
+  {
+    "step": "creation",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-07T08:20:35.892541+00:00",
+    "finished_at": "2026-10-07T08:20:36.715145+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2272234630,\n  \"linux_campaign_bytes\": 4734629020,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "creation",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/creation_step.py",
+      "linux-x64-gcc13",
+      "creation"
+    ],
+    "started_at": "2026-10-07T08:20:36.715588+00:00",
+    "finished_at": "2026-10-07T08:21:10.717275+00:00",
+    "exit": 8,
+    "stdout": "Test project /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n    Start 73: native.EDITOR-WIDGET-CREATION\n1/1 Test #73: native.EDITOR-WIDGET-CREATION ....***Failed   18.52 sec\n/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/creation-2e5f2ca19e00/result.json fail\nTraceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_widget_creation.py\", line 134, in <module>\n    if __name__=='__main__':main()\n                            ^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_widget_creation.py\", line 128, in main\n    (folder/(mode+'.stdout')).write_bytes(stdout);(folder/(mode+'.stderr')).write_bytes(stderr);assert not timed_out and child.returncode==0,(mode,stderr.decode(errors='replace'));case=json.loads((folder/mode/'result.json').read_text());assert case['outcome']=='pass';report['cases'].append(dict(case=mode,outcome='pass',fault_detected=case.get('fault_detected',False),record_sha256=sha(folder/mode/'result.json')))\n                                                                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: ('table', 'dbus-daemon[248100]: [session uid=1000 pid=248100] Activating service name=\\'org.a11y.Bus\\' requested by \\':1.0\\' (uid=1000 pid=248101 comm=\"/usr/bin/python3 /mnt/d/Projects/SysPane/syspane/t\" label=\"kernel\")\\ndbus-daemon[248100]: [session uid=1000 pid=248100] Successfully activated service \\'org.a11y.Bus\\'\\ndbus-daemon[248109]: Activating service name=\\'org.a11y.atspi.Registry\\' requested by \\':1.1\\' (uid=1000 pid=248112 comm=\"/home/ir4runner/.cache/syspane/campaign-229a498/li\" label=\"kernel\")\\ndbus-daemon[248109]: Successfully activated service \\'org.a11y.atspi.Registry\\'\\nTraceback (most recent call last):\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_widget_creation.py\", line 134, in <module>\\n    if __name__==\\'__main__\\':main()\\n                            ^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_widget_creation.py\", line 118, in main\\n    if sys.argv[1]==\\'--observe\\':observe(*map(Path,sys.argv[2:5]),sys.argv[5]);return\\n                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_widget_creation.py\", line 107, in observe\\n    try:exercise(h)\\n        ^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_widget_creation.py\", line 92, in exercise\\n    h.click(\\'undo\\');h.wait(lambda:selection(h,\\'group\\') if k==\\'nested\\' else not h.sensitive(\\'apply\\') and h.value(\\'title\\')==\\'Text\\')\\n    ^^^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_editor.py\", line 129, in click\\n    assert self.sensitive(id),(id,self.status());self.focus(id);self.input.press(0x20)\\n                                                 ^^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_editor.py\", line 127, in focus\\n    self.wait(focused)\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_editor.py\", line 73, in wait\\n    assert time.monotonic()<end,self.stage+\\' observation deadline\\'\\n           ^^^^^^^^^^^^^^^^^^^^\\nAssertionError: PIXELS observation deadline\\n')\n\n\n0% tests passed, 1 tests failed out of 1\n\nTotal Test time (real) =  18.53 sec\n\nThe following tests FAILED:\n\t 73 - native.EDITOR-WIDGET-CREATION (Failed)\n Errors while running CTest\n\nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-widget-creation/linux-x64-gcc13-creation-46aa4092ec\n",
+    "stderr": ""
+  }
+]

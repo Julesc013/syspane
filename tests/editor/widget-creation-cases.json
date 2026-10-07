@@ -1,0 +1,2155 @@
+{
+  "authored": {
+    "scene": {
+      "extensions": {
+        "author.note": {
+          "preserve": [
+            "x",
+            1,
+            false
+          ]
+        }
+      },
+      "revision": "40",
+      "roots": [
+        "widget:text",
+        "widget:table",
+        "widget:chart",
+        "widget:image"
+      ],
+      "scene_id": "scene:content",
+      "schema_version": "0.3.0",
+      "theme_id": null,
+      "widgets": [
+        {
+          "bindings": [],
+          "content": {
+            "body": "Move me"
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:text",
+          "kind": "text",
+          "layout": {
+            "base": {
+              "height": 50,
+              "kind": "fixed",
+              "width": 120,
+              "x": 20,
+              "y": 20
+            }
+          },
+          "priority": "normal",
+          "title": "Text"
+        },
+        {
+          "bindings": [
+            {
+              "entity_type": "network.interface",
+              "field": "network.receive_bytes",
+              "kind": "selector",
+              "limit": 8,
+              "mode": "collection",
+              "predicates": [],
+              "scope": {
+                "kind": "local_host"
+              },
+              "sort": []
+            },
+            {
+              "entity_type": "network.interface",
+              "field": "network.transmit_bytes",
+              "kind": "selector",
+              "limit": 8,
+              "mode": "collection",
+              "predicates": [],
+              "scope": {
+                "kind": "local_host"
+              },
+              "sort": []
+            }
+          ],
+          "content": {
+            "columns": [
+              {
+                "label": "Receive"
+              },
+              {
+                "label": "Sent"
+              }
+            ]
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:table",
+          "kind": "table",
+          "layout": {
+            "base": {
+              "height": 90,
+              "kind": "fixed",
+              "width": 460,
+              "x": 20,
+              "y": 90
+            }
+          },
+          "priority": "normal",
+          "title": "Table"
+        },
+        {
+          "bindings": [
+            {
+              "entity_type": "network.interface",
+              "field": "network.receive_bytes",
+              "kind": "selector",
+              "limit": 1,
+              "mode": "singleton",
+              "predicates": [],
+              "scope": {
+                "kind": "local_host"
+              },
+              "sort": []
+            }
+          ],
+          "content": {
+            "axis": {
+              "include_zero": true,
+              "mode": "auto"
+            },
+            "interpolation": "linear",
+            "max_points": 256,
+            "window_ms": 60000
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:chart",
+          "kind": "chart",
+          "layout": {
+            "base": {
+              "height": 180,
+              "kind": "fixed",
+              "width": 300,
+              "x": 20,
+              "y": 195
+            }
+          },
+          "priority": "normal",
+          "title": "Chart"
+        },
+        {
+          "bindings": [],
+          "content": {
+            "alt": "Initial color image",
+            "asset": {
+              "package": {
+                "id": "package:properties-native",
+                "sha256": "dde2c5cf2f3e71d24e16bc47ffcd4744e518c9fac89c268fd68b6b4f4c49bef9",
+                "version": "0.1.0"
+              },
+              "path": "images/a-rgb.png",
+              "sha256": "78253200c249d4d84293b2a1e6fc803adedeba8645f38d6bc2f6734a2dfacec9"
+            },
+            "fit": "contain",
+            "height_dip": 100,
+            "width_dip": 120
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:image",
+          "kind": "image",
+          "layout": {
+            "base": {
+              "height": 100,
+              "kind": "fixed",
+              "width": 120,
+              "x": 355,
+              "y": 230
+            }
+          },
+          "priority": "normal",
+          "title": "Image"
+        }
+      ]
+    },
+    "settings": {
+      "display": {
+        "enabled": true,
+        "reduced_motion": true,
+        "theme_id": "theme:native"
+      },
+      "history": {
+        "persistent": false,
+        "segment_bytes": 10485760,
+        "segments": 5
+      },
+      "privacy": {
+        "export_enabled": false,
+        "remote_probes": false
+      },
+      "revision": "40",
+      "sampling": {
+        "max_workers": 4,
+        "reconcile_ms": 10000,
+        "resources_ms": 1000
+      },
+      "schema_version": "0.1.0"
+    }
+  },
+  "objects": {
+    "text": {
+      "id": "widget:new1",
+      "kind": "text",
+      "title": "Text",
+      "display": {
+        "local_id": "D1"
+      },
+      "layout": {
+        "base": {
+          "kind": "fixed",
+          "x": 20,
+          "y": 20,
+          "width": 180,
+          "height": 80
+        }
+      },
+      "bindings": [],
+      "priority": "normal",
+      "content": {
+        "body": "Text"
+      }
+    },
+    "value": {
+      "id": "widget:new1",
+      "kind": "value",
+      "title": "Value",
+      "display": {
+        "local_id": "D1"
+      },
+      "layout": {
+        "base": {
+          "kind": "fixed",
+          "x": 20,
+          "y": 20,
+          "width": 240,
+          "height": 100
+        }
+      },
+      "bindings": [
+        {
+          "kind": "selector",
+          "scope": {
+            "kind": "local_host"
+          },
+          "entity_type": "network.interface",
+          "mode": "singleton",
+          "predicates": [],
+          "sort": [],
+          "limit": 1,
+          "field": "network.receive_bytes"
+        }
+      ],
+      "priority": "normal",
+      "content": {}
+    },
+    "status": {
+      "id": "widget:new1",
+      "kind": "status",
+      "title": "Status",
+      "display": {
+        "local_id": "D1"
+      },
+      "layout": {
+        "base": {
+          "kind": "fixed",
+          "x": 20,
+          "y": 20,
+          "width": 240,
+          "height": 120
+        }
+      },
+      "bindings": [
+        {
+          "kind": "selector",
+          "scope": {
+            "kind": "local_host"
+          },
+          "entity_type": "network.interface",
+          "mode": "singleton",
+          "predicates": [],
+          "sort": [],
+          "limit": 1,
+          "field": "network.receive_bytes"
+        }
+      ],
+      "priority": "normal",
+      "content": {}
+    },
+    "table": {
+      "id": "widget:new1",
+      "kind": "table",
+      "title": "Table",
+      "display": {
+        "local_id": "D1"
+      },
+      "layout": {
+        "base": {
+          "kind": "fixed",
+          "x": 20,
+          "y": 20,
+          "width": 420,
+          "height": 180
+        }
+      },
+      "bindings": [
+        {
+          "kind": "selector",
+          "scope": {
+            "kind": "local_host"
+          },
+          "entity_type": "network.interface",
+          "mode": "collection",
+          "predicates": [],
+          "sort": [],
+          "limit": 8,
+          "field": "network.receive_bytes"
+        },
+        {
+          "kind": "selector",
+          "scope": {
+            "kind": "local_host"
+          },
+          "entity_type": "network.interface",
+          "mode": "collection",
+          "predicates": [],
+          "sort": [],
+          "limit": 8,
+          "field": "network.transmit_bytes"
+        }
+      ],
+      "priority": "normal",
+      "content": {
+        "columns": [
+          {
+            "label": "Receive"
+          },
+          {
+            "label": "Sent"
+          }
+        ]
+      }
+    },
+    "chart": {
+      "id": "widget:new1",
+      "kind": "chart",
+      "title": "Chart",
+      "display": {
+        "local_id": "D1"
+      },
+      "layout": {
+        "base": {
+          "kind": "fixed",
+          "x": 20,
+          "y": 20,
+          "width": 400,
+          "height": 240
+        }
+      },
+      "bindings": [
+        {
+          "kind": "selector",
+          "scope": {
+            "kind": "local_host"
+          },
+          "entity_type": "network.interface",
+          "mode": "singleton",
+          "predicates": [],
+          "sort": [],
+          "limit": 1,
+          "field": "network.receive_bytes"
+        }
+      ],
+      "priority": "normal",
+      "content": {
+        "window_ms": 60000,
+        "max_points": 256,
+        "interpolation": "linear",
+        "axis": {
+          "mode": "auto",
+          "include_zero": true
+        }
+      }
+    },
+    "image": {
+      "id": "widget:new1",
+      "kind": "image",
+      "title": "Image",
+      "display": {
+        "local_id": "D1"
+      },
+      "layout": {
+        "base": {
+          "kind": "fixed",
+          "x": 20,
+          "y": 20,
+          "width": 160,
+          "height": 120
+        }
+      },
+      "bindings": [],
+      "priority": "normal",
+      "content": {
+        "asset": {
+          "package": {
+            "id": "package:properties-native",
+            "sha256": "dde2c5cf2f3e71d24e16bc47ffcd4744e518c9fac89c268fd68b6b4f4c49bef9",
+            "version": "0.1.0"
+          },
+          "path": "images/b-gray.png",
+          "sha256": "22db4561335948f1d776b0be766e690dabb95c8d9e270073d9ca8145676dcd9c"
+        },
+        "alt": "Image",
+        "width_dip": 160,
+        "height_dip": 120,
+        "fit": "contain"
+      }
+    },
+    "group": {
+      "id": "widget:new1",
+      "kind": "group",
+      "title": "Group",
+      "display": {
+        "local_id": "D1"
+      },
+      "layout": {
+        "base": {
+          "kind": "fixed",
+          "x": 20,
+          "y": 20,
+          "width": 320,
+          "height": 240
+        }
+      },
+      "bindings": [],
+      "priority": "normal",
+      "content": {},
+      "children": []
+    }
+  },
+  "expected": {
+    "text": {
+      "extensions": {
+        "author.note": {
+          "preserve": [
+            "x",
+            1,
+            false
+          ]
+        }
+      },
+      "revision": "40",
+      "roots": [
+        "widget:text",
+        "widget:table",
+        "widget:chart",
+        "widget:image",
+        "widget:new1"
+      ],
+      "scene_id": "scene:content",
+      "schema_version": "0.3.0",
+      "theme_id": null,
+      "widgets": [
+        {
+          "bindings": [],
+          "content": {
+            "body": "Move me"
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:text",
+          "kind": "text",
+          "layout": {
+            "base": {
+              "height": 50,
+              "kind": "fixed",
+              "width": 120,
+              "x": 20,
+              "y": 20
+            }
+          },
+          "priority": "normal",
+          "title": "Text"
+        },
+        {
+          "bindings": [
+            {
+              "entity_type": "network.interface",
+              "field": "network.receive_bytes",
+              "kind": "selector",
+              "limit": 8,
+              "mode": "collection",
+              "predicates": [],
+              "scope": {
+                "kind": "local_host"
+              },
+              "sort": []
+            },
+            {
+              "entity_type": "network.interface",
+              "field": "network.transmit_bytes",
+              "kind": "selector",
+              "limit": 8,
+              "mode": "collection",
+              "predicates": [],
+              "scope": {
+                "kind": "local_host"
+              },
+              "sort": []
+            }
+          ],
+          "content": {
+            "columns": [
+              {
+                "label": "Receive"
+              },
+              {
+                "label": "Sent"
+              }
+            ]
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:table",
+          "kind": "table",
+          "layout": {
+            "base": {
+              "height": 90,
+              "kind": "fixed",
+              "width": 460,
+              "x": 20,
+              "y": 90
+            }
+          },
+          "priority": "normal",
+          "title": "Table"
+        },
+        {
+          "bindings": [
+            {
+              "entity_type": "network.interface",
+              "field": "network.receive_bytes",
+              "kind": "selector",
+              "limit": 1,
+              "mode": "singleton",
+              "predicates": [],
+              "scope": {
+                "kind": "local_host"
+              },
+              "sort": []
+            }
+          ],
+          "content": {
+            "axis": {
+              "include_zero": true,
+              "mode": "auto"
+            },
+            "interpolation": "linear",
+            "max_points": 256,
+            "window_ms": 60000
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:chart",
+          "kind": "chart",
+          "layout": {
+            "base": {
+              "height": 180,
+              "kind": "fixed",
+              "width": 300,
+              "x": 20,
+              "y": 195
+            }
+          },
+          "priority": "normal",
+          "title": "Chart"
+        },
+        {
+          "bindings": [],
+          "content": {
+            "alt": "Initial color image",
+            "asset": {
+              "package": {
+                "id": "package:properties-native",
+                "sha256": "dde2c5cf2f3e71d24e16bc47ffcd4744e518c9fac89c268fd68b6b4f4c49bef9",
+                "version": "0.1.0"
+              },
+              "path": "images/a-rgb.png",
+              "sha256": "78253200c249d4d84293b2a1e6fc803adedeba8645f38d6bc2f6734a2dfacec9"
+            },
+            "fit": "contain",
+            "height_dip": 100,
+            "width_dip": 120
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:image",
+          "kind": "image",
+          "layout": {
+            "base": {
+              "height": 100,
+              "kind": "fixed",
+              "width": 120,
+              "x": 355,
+              "y": 230
+            }
+          },
+          "priority": "normal",
+          "title": "Image"
+        },
+        {
+          "id": "widget:new1",
+          "kind": "text",
+          "title": "Text",
+          "display": {
+            "local_id": "D1"
+          },
+          "layout": {
+            "base": {
+              "kind": "fixed",
+              "x": 20,
+              "y": 20,
+              "width": 180,
+              "height": 80
+            }
+          },
+          "bindings": [],
+          "priority": "normal",
+          "content": {
+            "body": "Text"
+          }
+        }
+      ]
+    },
+    "value": {
+      "extensions": {
+        "author.note": {
+          "preserve": [
+            "x",
+            1,
+            false
+          ]
+        }
+      },
+      "revision": "40",
+      "roots": [
+        "widget:text",
+        "widget:table",
+        "widget:chart",
+        "widget:image",
+        "widget:new1"
+      ],
+      "scene_id": "scene:content",
+      "schema_version": "0.3.0",
+      "theme_id": null,
+      "widgets": [
+        {
+          "bindings": [],
+          "content": {
+            "body": "Move me"
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:text",
+          "kind": "text",
+          "layout": {
+            "base": {
+              "height": 50,
+              "kind": "fixed",
+              "width": 120,
+              "x": 20,
+              "y": 20
+            }
+          },
+          "priority": "normal",
+          "title": "Text"
+        },
+        {
+          "bindings": [
+            {
+              "entity_type": "network.interface",
+              "field": "network.receive_bytes",
+              "kind": "selector",
+              "limit": 8,
+              "mode": "collection",
+              "predicates": [],
+              "scope": {
+                "kind": "local_host"
+              },
+              "sort": []
+            },
+            {
+              "entity_type": "network.interface",
+              "field": "network.transmit_bytes",
+              "kind": "selector",
+              "limit": 8,
+              "mode": "collection",
+              "predicates": [],
+              "scope": {
+                "kind": "local_host"
+              },
+              "sort": []
+            }
+          ],
+          "content": {
+            "columns": [
+              {
+                "label": "Receive"
+              },
+              {
+                "label": "Sent"
+              }
+            ]
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:table",
+          "kind": "table",
+          "layout": {
+            "base": {
+              "height": 90,
+              "kind": "fixed",
+              "width": 460,
+              "x": 20,
+              "y": 90
+            }
+          },
+          "priority": "normal",
+          "title": "Table"
+        },
+        {
+          "bindings": [
+            {
+              "entity_type": "network.interface",
+              "field": "network.receive_bytes",
+              "kind": "selector",
+              "limit": 1,
+              "mode": "singleton",
+              "predicates": [],
+              "scope": {
+                "kind": "local_host"
+              },
+              "sort": []
+            }
+          ],
+          "content": {
+            "axis": {
+              "include_zero": true,
+              "mode": "auto"
+            },
+            "interpolation": "linear",
+            "max_points": 256,
+            "window_ms": 60000
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:chart",
+          "kind": "chart",
+          "layout": {
+            "base": {
+              "height": 180,
+              "kind": "fixed",
+              "width": 300,
+              "x": 20,
+              "y": 195
+            }
+          },
+          "priority": "normal",
+          "title": "Chart"
+        },
+        {
+          "bindings": [],
+          "content": {
+            "alt": "Initial color image",
+            "asset": {
+              "package": {
+                "id": "package:properties-native",
+                "sha256": "dde2c5cf2f3e71d24e16bc47ffcd4744e518c9fac89c268fd68b6b4f4c49bef9",
+                "version": "0.1.0"
+              },
+              "path": "images/a-rgb.png",
+              "sha256": "78253200c249d4d84293b2a1e6fc803adedeba8645f38d6bc2f6734a2dfacec9"
+            },
+            "fit": "contain",
+            "height_dip": 100,
+            "width_dip": 120
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:image",
+          "kind": "image",
+          "layout": {
+            "base": {
+              "height": 100,
+              "kind": "fixed",
+              "width": 120,
+              "x": 355,
+              "y": 230
+            }
+          },
+          "priority": "normal",
+          "title": "Image"
+        },
+        {
+          "id": "widget:new1",
+          "kind": "value",
+          "title": "Value",
+          "display": {
+            "local_id": "D1"
+          },
+          "layout": {
+            "base": {
+              "kind": "fixed",
+              "x": 20,
+              "y": 20,
+              "width": 240,
+              "height": 100
+            }
+          },
+          "bindings": [
+            {
+              "kind": "selector",
+              "scope": {
+                "kind": "local_host"
+              },
+              "entity_type": "network.interface",
+              "mode": "singleton",
+              "predicates": [],
+              "sort": [],
+              "limit": 1,
+              "field": "network.receive_bytes"
+            }
+          ],
+          "priority": "normal",
+          "content": {}
+        }
+      ]
+    },
+    "status": {
+      "extensions": {
+        "author.note": {
+          "preserve": [
+            "x",
+            1,
+            false
+          ]
+        }
+      },
+      "revision": "40",
+      "roots": [
+        "widget:text",
+        "widget:table",
+        "widget:chart",
+        "widget:image",
+        "widget:new1"
+      ],
+      "scene_id": "scene:content",
+      "schema_version": "0.3.0",
+      "theme_id": null,
+      "widgets": [
+        {
+          "bindings": [],
+          "content": {
+            "body": "Move me"
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:text",
+          "kind": "text",
+          "layout": {
+            "base": {
+              "height": 50,
+              "kind": "fixed",
+              "width": 120,
+              "x": 20,
+              "y": 20
+            }
+          },
+          "priority": "normal",
+          "title": "Text"
+        },
+        {
+          "bindings": [
+            {
+              "entity_type": "network.interface",
+              "field": "network.receive_bytes",
+              "kind": "selector",
+              "limit": 8,
+              "mode": "collection",
+              "predicates": [],
+              "scope": {
+                "kind": "local_host"
+              },
+              "sort": []
+            },
+            {
+              "entity_type": "network.interface",
+              "field": "network.transmit_bytes",
+              "kind": "selector",
+              "limit": 8,
+              "mode": "collection",
+              "predicates": [],
+              "scope": {
+                "kind": "local_host"
+              },
+              "sort": []
+            }
+          ],
+          "content": {
+            "columns": [
+              {
+                "label": "Receive"
+              },
+              {
+                "label": "Sent"
+              }
+            ]
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:table",
+          "kind": "table",
+          "layout": {
+            "base": {
+              "height": 90,
+              "kind": "fixed",
+              "width": 460,
+              "x": 20,
+              "y": 90
+            }
+          },
+          "priority": "normal",
+          "title": "Table"
+        },
+        {
+          "bindings": [
+            {
+              "entity_type": "network.interface",
+              "field": "network.receive_bytes",
+              "kind": "selector",
+              "limit": 1,
+              "mode": "singleton",
+              "predicates": [],
+              "scope": {
+                "kind": "local_host"
+              },
+              "sort": []
+            }
+          ],
+          "content": {
+            "axis": {
+              "include_zero": true,
+              "mode": "auto"
+            },
+            "interpolation": "linear",
+            "max_points": 256,
+            "window_ms": 60000
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:chart",
+          "kind": "chart",
+          "layout": {
+            "base": {
+              "height": 180,
+              "kind": "fixed",
+              "width": 300,
+              "x": 20,
+              "y": 195
+            }
+          },
+          "priority": "normal",
+          "title": "Chart"
+        },
+        {
+          "bindings": [],
+          "content": {
+            "alt": "Initial color image",
+            "asset": {
+              "package": {
+                "id": "package:properties-native",
+                "sha256": "dde2c5cf2f3e71d24e16bc47ffcd4744e518c9fac89c268fd68b6b4f4c49bef9",
+                "version": "0.1.0"
+              },
+              "path": "images/a-rgb.png",
+              "sha256": "78253200c249d4d84293b2a1e6fc803adedeba8645f38d6bc2f6734a2dfacec9"
+            },
+            "fit": "contain",
+            "height_dip": 100,
+            "width_dip": 120
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:image",
+          "kind": "image",
+          "layout": {
+            "base": {
+              "height": 100,
+              "kind": "fixed",
+              "width": 120,
+              "x": 355,
+              "y": 230
+            }
+          },
+          "priority": "normal",
+          "title": "Image"
+        },
+        {
+          "id": "widget:new1",
+          "kind": "status",
+          "title": "Status",
+          "display": {
+            "local_id": "D1"
+          },
+          "layout": {
+            "base": {
+              "kind": "fixed",
+              "x": 20,
+              "y": 20,
+              "width": 240,
+              "height": 120
+            }
+          },
+          "bindings": [
+            {
+              "kind": "selector",
+              "scope": {
+                "kind": "local_host"
+              },
+              "entity_type": "network.interface",
+              "mode": "singleton",
+              "predicates": [],
+              "sort": [],
+              "limit": 1,
+              "field": "network.receive_bytes"
+            }
+          ],
+          "priority": "normal",
+          "content": {}
+        }
+      ]
+    },
+    "table": {
+      "extensions": {
+        "author.note": {
+          "preserve": [
+            "x",
+            1,
+            false
+          ]
+        }
+      },
+      "revision": "40",
+      "roots": [
+        "widget:text",
+        "widget:table",
+        "widget:chart",
+        "widget:image",
+        "widget:new1"
+      ],
+      "scene_id": "scene:content",
+      "schema_version": "0.3.0",
+      "theme_id": null,
+      "widgets": [
+        {
+          "bindings": [],
+          "content": {
+            "body": "Move me"
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:text",
+          "kind": "text",
+          "layout": {
+            "base": {
+              "height": 50,
+              "kind": "fixed",
+              "width": 120,
+              "x": 20,
+              "y": 20
+            }
+          },
+          "priority": "normal",
+          "title": "Text"
+        },
+        {
+          "bindings": [
+            {
+              "entity_type": "network.interface",
+              "field": "network.receive_bytes",
+              "kind": "selector",
+              "limit": 8,
+              "mode": "collection",
+              "predicates": [],
+              "scope": {
+                "kind": "local_host"
+              },
+              "sort": []
+            },
+            {
+              "entity_type": "network.interface",
+              "field": "network.transmit_bytes",
+              "kind": "selector",
+              "limit": 8,
+              "mode": "collection",
+              "predicates": [],
+              "scope": {
+                "kind": "local_host"
+              },
+              "sort": []
+            }
+          ],
+          "content": {
+            "columns": [
+              {
+                "label": "Receive"
+              },
+              {
+                "label": "Sent"
+              }
+            ]
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:table",
+          "kind": "table",
+          "layout": {
+            "base": {
+              "height": 90,
+              "kind": "fixed",
+              "width": 460,
+              "x": 20,
+              "y": 90
+            }
+          },
+          "priority": "normal",
+          "title": "Table"
+        },
+        {
+          "bindings": [
+            {
+              "entity_type": "network.interface",
+              "field": "network.receive_bytes",
+              "kind": "selector",
+              "limit": 1,
+              "mode": "singleton",
+              "predicates": [],
+              "scope": {
+                "kind": "local_host"
+              },
+              "sort": []
+            }
+          ],
+          "content": {
+            "axis": {
+              "include_zero": true,
+              "mode": "auto"
+            },
+            "interpolation": "linear",
+            "max_points": 256,
+            "window_ms": 60000
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:chart",
+          "kind": "chart",
+          "layout": {
+            "base": {
+              "height": 180,
+              "kind": "fixed",
+              "width": 300,
+              "x": 20,
+              "y": 195
+            }
+          },
+          "priority": "normal",
+          "title": "Chart"
+        },
+        {
+          "bindings": [],
+          "content": {
+            "alt": "Initial color image",
+            "asset": {
+              "package": {
+                "id": "package:properties-native",
+                "sha256": "dde2c5cf2f3e71d24e16bc47ffcd4744e518c9fac89c268fd68b6b4f4c49bef9",
+                "version": "0.1.0"
+              },
+              "path": "images/a-rgb.png",
+              "sha256": "78253200c249d4d84293b2a1e6fc803adedeba8645f38d6bc2f6734a2dfacec9"
+            },
+            "fit": "contain",
+            "height_dip": 100,
+            "width_dip": 120
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:image",
+          "kind": "image",
+          "layout": {
+            "base": {
+              "height": 100,
+              "kind": "fixed",
+              "width": 120,
+              "x": 355,
+              "y": 230
+            }
+          },
+          "priority": "normal",
+          "title": "Image"
+        },
+        {
+          "id": "widget:new1",
+          "kind": "table",
+          "title": "Table",
+          "display": {
+            "local_id": "D1"
+          },
+          "layout": {
+            "base": {
+              "kind": "fixed",
+              "x": 20,
+              "y": 20,
+              "width": 420,
+              "height": 180
+            }
+          },
+          "bindings": [
+            {
+              "kind": "selector",
+              "scope": {
+                "kind": "local_host"
+              },
+              "entity_type": "network.interface",
+              "mode": "collection",
+              "predicates": [],
+              "sort": [],
+              "limit": 8,
+              "field": "network.receive_bytes"
+            },
+            {
+              "kind": "selector",
+              "scope": {
+                "kind": "local_host"
+              },
+              "entity_type": "network.interface",
+              "mode": "collection",
+              "predicates": [],
+              "sort": [],
+              "limit": 8,
+              "field": "network.transmit_bytes"
+            }
+          ],
+          "priority": "normal",
+          "content": {
+            "columns": [
+              {
+                "label": "Receive"
+              },
+              {
+                "label": "Sent"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "chart": {
+      "extensions": {
+        "author.note": {
+          "preserve": [
+            "x",
+            1,
+            false
+          ]
+        }
+      },
+      "revision": "40",
+      "roots": [
+        "widget:text",
+        "widget:table",
+        "widget:chart",
+        "widget:image",
+        "widget:new1"
+      ],
+      "scene_id": "scene:content",
+      "schema_version": "0.3.0",
+      "theme_id": null,
+      "widgets": [
+        {
+          "bindings": [],
+          "content": {
+            "body": "Move me"
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:text",
+          "kind": "text",
+          "layout": {
+            "base": {
+              "height": 50,
+              "kind": "fixed",
+              "width": 120,
+              "x": 20,
+              "y": 20
+            }
+          },
+          "priority": "normal",
+          "title": "Text"
+        },
+        {
+          "bindings": [
+            {
+              "entity_type": "network.interface",
+              "field": "network.receive_bytes",
+              "kind": "selector",
+              "limit": 8,
+              "mode": "collection",
+              "predicates": [],
+              "scope": {
+                "kind": "local_host"
+              },
+              "sort": []
+            },
+            {
+              "entity_type": "network.interface",
+              "field": "network.transmit_bytes",
+              "kind": "selector",
+              "limit": 8,
+              "mode": "collection",
+              "predicates": [],
+              "scope": {
+                "kind": "local_host"
+              },
+              "sort": []
+            }
+          ],
+          "content": {
+            "columns": [
+              {
+                "label": "Receive"
+              },
+              {
+                "label": "Sent"
+              }
+            ]
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:table",
+          "kind": "table",
+          "layout": {
+            "base": {
+              "height": 90,
+              "kind": "fixed",
+              "width": 460,
+              "x": 20,
+              "y": 90
+            }
+          },
+          "priority": "normal",
+          "title": "Table"
+        },
+        {
+          "bindings": [
+            {
+              "entity_type": "network.interface",
+              "field": "network.receive_bytes",
+              "kind": "selector",
+              "limit": 1,
+              "mode": "singleton",
+              "predicates": [],
+              "scope": {
+                "kind": "local_host"
+              },
+              "sort": []
+            }
+          ],
+          "content": {
+            "axis": {
+              "include_zero": true,
+              "mode": "auto"
+            },
+            "interpolation": "linear",
+            "max_points": 256,
+            "window_ms": 60000
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:chart",
+          "kind": "chart",
+          "layout": {
+            "base": {
+              "height": 180,
+              "kind": "fixed",
+              "width": 300,
+              "x": 20,
+              "y": 195
+            }
+          },
+          "priority": "normal",
+          "title": "Chart"
+        },
+        {
+          "bindings": [],
+          "content": {
+            "alt": "Initial color image",
+            "asset": {
+              "package": {
+                "id": "package:properties-native",
+                "sha256": "dde2c5cf2f3e71d24e16bc47ffcd4744e518c9fac89c268fd68b6b4f4c49bef9",
+                "version": "0.1.0"
+              },
+              "path": "images/a-rgb.png",
+              "sha256": "78253200c249d4d84293b2a1e6fc803adedeba8645f38d6bc2f6734a2dfacec9"
+            },
+            "fit": "contain",
+            "height_dip": 100,
+            "width_dip": 120
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:image",
+          "kind": "image",
+          "layout": {
+            "base": {
+              "height": 100,
+              "kind": "fixed",
+              "width": 120,
+              "x": 355,
+              "y": 230
+            }
+          },
+          "priority": "normal",
+          "title": "Image"
+        },
+        {
+          "id": "widget:new1",
+          "kind": "chart",
+          "title": "Chart",
+          "display": {
+            "local_id": "D1"
+          },
+          "layout": {
+            "base": {
+              "kind": "fixed",
+              "x": 20,
+              "y": 20,
+              "width": 400,
+              "height": 240
+            }
+          },
+          "bindings": [
+            {
+              "kind": "selector",
+              "scope": {
+                "kind": "local_host"
+              },
+              "entity_type": "network.interface",
+              "mode": "singleton",
+              "predicates": [],
+              "sort": [],
+              "limit": 1,
+              "field": "network.receive_bytes"
+            }
+          ],
+          "priority": "normal",
+          "content": {
+            "window_ms": 60000,
+            "max_points": 256,
+            "interpolation": "linear",
+            "axis": {
+              "mode": "auto",
+              "include_zero": true
+            }
+          }
+        }
+      ]
+    },
+    "image": {
+      "extensions": {
+        "author.note": {
+          "preserve": [
+            "x",
+            1,
+            false
+          ]
+        }
+      },
+      "revision": "40",
+      "roots": [
+        "widget:text",
+        "widget:table",
+        "widget:chart",
+        "widget:image",
+        "widget:new1"
+      ],
+      "scene_id": "scene:content",
+      "schema_version": "0.3.0",
+      "theme_id": null,
+      "widgets": [
+        {
+          "bindings": [],
+          "content": {
+            "body": "Move me"
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:text",
+          "kind": "text",
+          "layout": {
+            "base": {
+              "height": 50,
+              "kind": "fixed",
+              "width": 120,
+              "x": 20,
+              "y": 20
+            }
+          },
+          "priority": "normal",
+          "title": "Text"
+        },
+        {
+          "bindings": [
+            {
+              "entity_type": "network.interface",
+              "field": "network.receive_bytes",
+              "kind": "selector",
+              "limit": 8,
+              "mode": "collection",
+              "predicates": [],
+              "scope": {
+                "kind": "local_host"
+              },
+              "sort": []
+            },
+            {
+              "entity_type": "network.interface",
+              "field": "network.transmit_bytes",
+              "kind": "selector",
+              "limit": 8,
+              "mode": "collection",
+              "predicates": [],
+              "scope": {
+                "kind": "local_host"
+              },
+              "sort": []
+            }
+          ],
+          "content": {
+            "columns": [
+              {
+                "label": "Receive"
+              },
+              {
+                "label": "Sent"
+              }
+            ]
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:table",
+          "kind": "table",
+          "layout": {
+            "base": {
+              "height": 90,
+              "kind": "fixed",
+              "width": 460,
+              "x": 20,
+              "y": 90
+            }
+          },
+          "priority": "normal",
+          "title": "Table"
+        },
+        {
+          "bindings": [
+            {
+              "entity_type": "network.interface",
+              "field": "network.receive_bytes",
+              "kind": "selector",
+              "limit": 1,
+              "mode": "singleton",
+              "predicates": [],
+              "scope": {
+                "kind": "local_host"
+              },
+              "sort": []
+            }
+          ],
+          "content": {
+            "axis": {
+              "include_zero": true,
+              "mode": "auto"
+            },
+            "interpolation": "linear",
+            "max_points": 256,
+            "window_ms": 60000
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:chart",
+          "kind": "chart",
+          "layout": {
+            "base": {
+              "height": 180,
+              "kind": "fixed",
+              "width": 300,
+              "x": 20,
+              "y": 195
+            }
+          },
+          "priority": "normal",
+          "title": "Chart"
+        },
+        {
+          "bindings": [],
+          "content": {
+            "alt": "Initial color image",
+            "asset": {
+              "package": {
+                "id": "package:properties-native",
+                "sha256": "dde2c5cf2f3e71d24e16bc47ffcd4744e518c9fac89c268fd68b6b4f4c49bef9",
+                "version": "0.1.0"
+              },
+              "path": "images/a-rgb.png",
+              "sha256": "78253200c249d4d84293b2a1e6fc803adedeba8645f38d6bc2f6734a2dfacec9"
+            },
+            "fit": "contain",
+            "height_dip": 100,
+            "width_dip": 120
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:image",
+          "kind": "image",
+          "layout": {
+            "base": {
+              "height": 100,
+              "kind": "fixed",
+              "width": 120,
+              "x": 355,
+              "y": 230
+            }
+          },
+          "priority": "normal",
+          "title": "Image"
+        },
+        {
+          "id": "widget:new1",
+          "kind": "image",
+          "title": "Image",
+          "display": {
+            "local_id": "D1"
+          },
+          "layout": {
+            "base": {
+              "kind": "fixed",
+              "x": 20,
+              "y": 20,
+              "width": 160,
+              "height": 120
+            }
+          },
+          "bindings": [],
+          "priority": "normal",
+          "content": {
+            "asset": {
+              "package": {
+                "id": "package:properties-native",
+                "sha256": "dde2c5cf2f3e71d24e16bc47ffcd4744e518c9fac89c268fd68b6b4f4c49bef9",
+                "version": "0.1.0"
+              },
+              "path": "images/b-gray.png",
+              "sha256": "22db4561335948f1d776b0be766e690dabb95c8d9e270073d9ca8145676dcd9c"
+            },
+            "alt": "Image",
+            "width_dip": 160,
+            "height_dip": 120,
+            "fit": "contain"
+          }
+        }
+      ]
+    },
+    "group": {
+      "extensions": {
+        "author.note": {
+          "preserve": [
+            "x",
+            1,
+            false
+          ]
+        }
+      },
+      "revision": "40",
+      "roots": [
+        "widget:text",
+        "widget:table",
+        "widget:chart",
+        "widget:image",
+        "widget:new1"
+      ],
+      "scene_id": "scene:content",
+      "schema_version": "0.3.0",
+      "theme_id": null,
+      "widgets": [
+        {
+          "bindings": [],
+          "content": {
+            "body": "Move me"
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:text",
+          "kind": "text",
+          "layout": {
+            "base": {
+              "height": 50,
+              "kind": "fixed",
+              "width": 120,
+              "x": 20,
+              "y": 20
+            }
+          },
+          "priority": "normal",
+          "title": "Text"
+        },
+        {
+          "bindings": [
+            {
+              "entity_type": "network.interface",
+              "field": "network.receive_bytes",
+              "kind": "selector",
+              "limit": 8,
+              "mode": "collection",
+              "predicates": [],
+              "scope": {
+                "kind": "local_host"
+              },
+              "sort": []
+            },
+            {
+              "entity_type": "network.interface",
+              "field": "network.transmit_bytes",
+              "kind": "selector",
+              "limit": 8,
+              "mode": "collection",
+              "predicates": [],
+              "scope": {
+                "kind": "local_host"
+              },
+              "sort": []
+            }
+          ],
+          "content": {
+            "columns": [
+              {
+                "label": "Receive"
+              },
+              {
+                "label": "Sent"
+              }
+            ]
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:table",
+          "kind": "table",
+          "layout": {
+            "base": {
+              "height": 90,
+              "kind": "fixed",
+              "width": 460,
+              "x": 20,
+              "y": 90
+            }
+          },
+          "priority": "normal",
+          "title": "Table"
+        },
+        {
+          "bindings": [
+            {
+              "entity_type": "network.interface",
+              "field": "network.receive_bytes",
+              "kind": "selector",
+              "limit": 1,
+              "mode": "singleton",
+              "predicates": [],
+              "scope": {
+                "kind": "local_host"
+              },
+              "sort": []
+            }
+          ],
+          "content": {
+            "axis": {
+              "include_zero": true,
+              "mode": "auto"
+            },
+            "interpolation": "linear",
+            "max_points": 256,
+            "window_ms": 60000
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:chart",
+          "kind": "chart",
+          "layout": {
+            "base": {
+              "height": 180,
+              "kind": "fixed",
+              "width": 300,
+              "x": 20,
+              "y": 195
+            }
+          },
+          "priority": "normal",
+          "title": "Chart"
+        },
+        {
+          "bindings": [],
+          "content": {
+            "alt": "Initial color image",
+            "asset": {
+              "package": {
+                "id": "package:properties-native",
+                "sha256": "dde2c5cf2f3e71d24e16bc47ffcd4744e518c9fac89c268fd68b6b4f4c49bef9",
+                "version": "0.1.0"
+              },
+              "path": "images/a-rgb.png",
+              "sha256": "78253200c249d4d84293b2a1e6fc803adedeba8645f38d6bc2f6734a2dfacec9"
+            },
+            "fit": "contain",
+            "height_dip": 100,
+            "width_dip": 120
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:image",
+          "kind": "image",
+          "layout": {
+            "base": {
+              "height": 100,
+              "kind": "fixed",
+              "width": 120,
+              "x": 355,
+              "y": 230
+            }
+          },
+          "priority": "normal",
+          "title": "Image"
+        },
+        {
+          "id": "widget:new1",
+          "kind": "group",
+          "title": "Group",
+          "display": {
+            "local_id": "D1"
+          },
+          "layout": {
+            "base": {
+              "kind": "fixed",
+              "x": 20,
+              "y": 20,
+              "width": 320,
+              "height": 240
+            }
+          },
+          "bindings": [],
+          "priority": "normal",
+          "content": {},
+          "children": []
+        }
+      ]
+    },
+    "nested": {
+      "extensions": {
+        "author.note": {
+          "preserve": [
+            "x",
+            1,
+            false
+          ]
+        }
+      },
+      "revision": "40",
+      "roots": [
+        "widget:text",
+        "widget:table",
+        "widget:chart",
+        "widget:image",
+        "widget:new1"
+      ],
+      "scene_id": "scene:content",
+      "schema_version": "0.3.0",
+      "theme_id": null,
+      "widgets": [
+        {
+          "bindings": [],
+          "content": {
+            "body": "Move me"
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:text",
+          "kind": "text",
+          "layout": {
+            "base": {
+              "height": 50,
+              "kind": "fixed",
+              "width": 120,
+              "x": 20,
+              "y": 20
+            }
+          },
+          "priority": "normal",
+          "title": "Text"
+        },
+        {
+          "bindings": [
+            {
+              "entity_type": "network.interface",
+              "field": "network.receive_bytes",
+              "kind": "selector",
+              "limit": 8,
+              "mode": "collection",
+              "predicates": [],
+              "scope": {
+                "kind": "local_host"
+              },
+              "sort": []
+            },
+            {
+              "entity_type": "network.interface",
+              "field": "network.transmit_bytes",
+              "kind": "selector",
+              "limit": 8,
+              "mode": "collection",
+              "predicates": [],
+              "scope": {
+                "kind": "local_host"
+              },
+              "sort": []
+            }
+          ],
+          "content": {
+            "columns": [
+              {
+                "label": "Receive"
+              },
+              {
+                "label": "Sent"
+              }
+            ]
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:table",
+          "kind": "table",
+          "layout": {
+            "base": {
+              "height": 90,
+              "kind": "fixed",
+              "width": 460,
+              "x": 20,
+              "y": 90
+            }
+          },
+          "priority": "normal",
+          "title": "Table"
+        },
+        {
+          "bindings": [
+            {
+              "entity_type": "network.interface",
+              "field": "network.receive_bytes",
+              "kind": "selector",
+              "limit": 1,
+              "mode": "singleton",
+              "predicates": [],
+              "scope": {
+                "kind": "local_host"
+              },
+              "sort": []
+            }
+          ],
+          "content": {
+            "axis": {
+              "include_zero": true,
+              "mode": "auto"
+            },
+            "interpolation": "linear",
+            "max_points": 256,
+            "window_ms": 60000
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:chart",
+          "kind": "chart",
+          "layout": {
+            "base": {
+              "height": 180,
+              "kind": "fixed",
+              "width": 300,
+              "x": 20,
+              "y": 195
+            }
+          },
+          "priority": "normal",
+          "title": "Chart"
+        },
+        {
+          "bindings": [],
+          "content": {
+            "alt": "Initial color image",
+            "asset": {
+              "package": {
+                "id": "package:properties-native",
+                "sha256": "dde2c5cf2f3e71d24e16bc47ffcd4744e518c9fac89c268fd68b6b4f4c49bef9",
+                "version": "0.1.0"
+              },
+              "path": "images/a-rgb.png",
+              "sha256": "78253200c249d4d84293b2a1e6fc803adedeba8645f38d6bc2f6734a2dfacec9"
+            },
+            "fit": "contain",
+            "height_dip": 100,
+            "width_dip": 120
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:image",
+          "kind": "image",
+          "layout": {
+            "base": {
+              "height": 100,
+              "kind": "fixed",
+              "width": 120,
+              "x": 355,
+              "y": 230
+            }
+          },
+          "priority": "normal",
+          "title": "Image"
+        },
+        {
+          "id": "widget:new1",
+          "kind": "group",
+          "title": "Group",
+          "display": {
+            "local_id": "D1"
+          },
+          "layout": {
+            "base": {
+              "kind": "fixed",
+              "x": 20,
+              "y": 20,
+              "width": 320,
+              "height": 240
+            }
+          },
+          "bindings": [],
+          "priority": "normal",
+          "content": {},
+          "children": [
+            "widget:new2"
+          ]
+        },
+        {
+          "id": "widget:new2",
+          "kind": "text",
+          "title": "Nested",
+          "display": {
+            "local_id": "D1"
+          },
+          "layout": {
+            "base": {
+              "kind": "fixed",
+              "x": 20,
+              "y": 20,
+              "width": 180,
+              "height": 80
+            }
+          },
+          "bindings": [],
+          "priority": "normal",
+          "content": {
+            "body": "Nested body"
+          }
+        }
+      ]
+    }
+  },
+  "gray_asset": {
+    "package": {
+      "id": "package:properties-native",
+      "sha256": "dde2c5cf2f3e71d24e16bc47ffcd4744e518c9fac89c268fd68b6b4f4c49bef9",
+      "version": "0.1.0"
+    },
+    "path": "images/b-gray.png",
+    "sha256": "22db4561335948f1d776b0be766e690dabb95c8d9e270073d9ca8145676dcd9c"
+  },
+  "erase_ms": 200,
+  "native_modes": [
+    "text",
+    "value",
+    "status",
+    "table",
+    "chart",
+    "image",
+    "group",
+    "nested",
+    "buffers",
+    "invalid",
+    "cancel-buffer",
+    "cancel",
+    "restart",
+    "revoke",
+    "wrong-insert",
+    "frozen-preview",
+    "retain-create"
+  ]
+}

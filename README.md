@@ -7,6 +7,12 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
+The [widget-creation checkpoint](spec/delivery/widget-creation-handoff.md) adds
+native creation of text, value, status, table, chart, image and group widgets.
+Root/group placement, explicit image choices and selection share one reversible
+insertion. Independent native checks cover preview, save/reopen, cancellation,
+restart and erasure. Installed routing and complete editions remain open.
+
 The [binding-authoring checkpoint](spec/delivery/binding-authoring-handoff.md)
 adds native selectors, explicit pins, ordered filters/sort keys and atomic table
 query edits. Exact integer predicates and escaped control-character text survive

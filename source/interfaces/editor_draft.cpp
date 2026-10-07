@@ -172,6 +172,7 @@ void apply(Json& scene,const UngroupWidget& edit){
 }
 template<class T> void edit_selection(Json& scene,std::vector<std::string>&,const T& edit){apply(scene,edit);}
 void edit_selection(Json& scene,std::vector<std::string>& selection,const GroupWidgets& edit){apply(scene,edit);selection={edit.id};}
+void edit_selection(Json& scene,std::vector<std::string>& selection,const InsertWidget& edit){apply(scene,edit);if(edit.select_inserted)selection={edit.widget.at("id").get<std::string>()};}
 void edit_selection(Json& scene,std::vector<std::string>& selection,const UngroupWidget& edit){
     const auto members=widget(scene,edit.id).at("children").get<std::vector<std::string>>();apply(scene,edit);selection=members;
 }

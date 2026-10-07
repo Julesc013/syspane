@@ -1,0 +1,23 @@
+from pathlib import Path
+import hashlib,json,subprocess,sys,jsonschema
+r=Path.cwd();prefix='build-support/evidence/w-10-widget-creation-';hp='build-support/evidence/widget-creation-handoff.json';pending='--pending' in sys.argv
+sha=lambda p:hashlib.sha256((r/p).read_bytes()).hexdigest()
+def write(p,v):(r/p).write_text(json.dumps(v,indent=2)+'\n',encoding='utf-8',newline='\n')
+if not pending:
+ v=json.loads((r/(prefix+'verification.json')).read_bytes());assert all(c['exit']==0 for c in v['checks'])
+ unit=next(c for c in v['checks'] if 'unittest' in c['command']);assert 'Ran 60 tests' in unit['stderr'] and 'OK (skipped=2)' in unit['stderr'];assert json.loads(next(c for c in v['checks'] if '--schemas' in c['command'])['stdout'])['status']=='pass'
+ v['sealed_specification']={'path':'spec/checksums.json','sha256':sha('spec/checksums.json')};v['tool_inputs']={p:sha(p) for p in ('spec/tools/specctl.py','spec/tools/tests/test_specctl.py','tests/configuration/settings_content_fixture.py')};v['unchanged_old_contracts']={}
+ for p in subprocess.check_output(['git','ls-tree','-r','--name-only','HEAD','spec/contracts','spec/fixtures'],text=True).splitlines():
+  if not p.endswith('.json') or p=='spec/fixtures/catalog.json':continue
+  before=subprocess.check_output(['git','show','HEAD:'+p]);assert before==(r/p).read_bytes();v['unchanged_old_contracts'][p]=hashlib.sha256(before).hexdigest()
+ budget=subprocess.run([str(r/'.venv/Scripts/python.exe'),'-X','utf8','build-support/check_workspace_budget.py','--action','inspect'],capture_output=True,text=True);assert budget.returncode==0;v['final_workspace_budget']=json.loads(budget.stdout);write(prefix+'verification.json',v)
+ index=json.loads((r/(prefix+'attempts.json')).read_bytes());assert all(len(x['cases'])==124 for x in index['final_runs'].values());assert sum(x['cases'] for x in index['final_native'].values())==129
+files=subprocess.check_output(['git','diff','HEAD','--name-only'],text=True).splitlines()+subprocess.check_output(['git','ls-files','--others','--exclude-standard'],text=True).splitlines();h=json.loads((r/'build-support/evidence/content-properties-handoff.json').read_bytes())
+h.update(source_ref=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),objective='Add native creation of all seven primitives through existing atomic draft, resource, policy and persistence owners',changed_files=sorted(set(files)|{hp,prefix+'staging.json'}),
+ decisions=['Freeze exact default objects, full expected scenes and resource inputs before implementation.', 'Keep parent-local geometry and root/group display intent explicit; images require an admitted choice.', 'Use separate private buffers, atomic insertion/selection history and separate durable Apply.', 'Preserve original compile/test/native failures with exact source identities.', 'Keep the 7 GiB workspace limit and all five release tracks.'],
+ checks=[{'name':'124 affected checks on each of three toolchains','outcome':'not_run' if pending else 'pass','evidence':prefix+'attempts.json'}, {'name':'129 native cases across eight matrices','outcome':'not_run' if pending else 'pass','evidence':prefix+'attempts.json'}, {'name':'Schema, fixture, tooling and integrity checks','outcome':'not_run' if pending else 'pass','evidence':prefix+'verification.json'}, {'name':'Staged source/oracle/artifact/evidence identities','outcome':'not_run','evidence':prefix+'staging.json'}, {'name':'Complete native editions and historical/release qualification','outcome':'not_run','evidence':None}],
+ next_step='Investigate preserved native focus/interface failures. Close responsive/flow transforms and remaining properties, then installed controller/catalog/policy ownership, scene-aligned entry/restoration and independent escape. Continue all five release tracks.',
+ limitations=['Owned Linux ext4/Xvfb/DBus evidence does not qualify installed editing or physical power-loss durability.', 'Provider discovery, responsive/flow transforms, lock/visibility/typography, clipboard authority and recovery drafts remain required.', 'Full accessibility/performance, other adapters, historical laboratories and every complete-edition gate remain open.', 'Windows builds run on contemporary Windows; two existing symlink tooling assertions remain skipped.', 'Intermittent AT-SPI interface and keyboard-focus failures are preserved; unchanged reruns do not establish their cause or complete native qualification.'])
+jsonschema.validate(h,json.loads((r/'spec/contracts/handoff.schema.json').read_bytes()));write(hp,h)
+if pending:write(prefix+'staging.json',{'outcome':'pending'})
+print('Prepared pending handoff.' if pending else 'Verified results and sealed handoff.')

@@ -1,0 +1,17 @@
+{
+  "recorded_at": "2026-10-07T08:51:09.007261+00:00",
+  "scope": "Owned Xvfb only; original large-command inputs and acceptance unchanged",
+  "recorded_after_first_diagnostic": true,
+  "maximum_diagnostic_runs": 3,
+  "question": "Does a keyboard-focus failure coincide with X11 focus outside the editor, absent accessibility component state, or neither?",
+  "method": "Run the original matrix through creation_focus_probe.py. Only on an original focus failure, read XGetInputFocus, editor window IDs, process status and AT-SPI state; preserve the original exception.",
+  "decisions": [
+    "X11 focus outside the editor: inspect laboratory activation/ownership.",
+    "X11 focus on the editor with missing or contradictory accessibility state: investigate GTK/AT-SPI export/state.",
+    "No reproduced failure within three runs: inconclusive; retain unresolved limitation and all earlier failures."
+  ],
+  "qualification": "Diagnostic passes do not resolve intermittent failures or qualify a complete edition.",
+  "diagnostic_runs": 3,
+  "outcome": "inconclusive",
+  "observation": "All three direct diagnostic wrapper runs passed the original checks. No focus failure was available for the added failure-time snapshot. Ordinary CTest failures remain unexplained."
+}

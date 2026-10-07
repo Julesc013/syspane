@@ -12,21 +12,28 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-07T07:50:13.434728+00:00", "scope": "Native binding authoring, exact text/number input and remaining editor boundaries"}
+updated: {"by": "codex", "at": "2026-10-07T08:29:17.403156+00:00", "scope": "Native creation of all seven primitives and remaining editor boundaries"}
 ---
 
 # Current state and next admitted boundary
 
-The latest [binding-authoring checkpoint](binding-authoring-handoff.md) adds native
+The latest [widget-creation checkpoint](widget-creation-handoff.md) adds all seven
+primitive kinds, explicit parent-local geometry and resource choice, per-kind
+private input and atomic insertion/selection history. Investigate the preserved
+native focus/interface observation failures, then close responsive/flow transforms and remaining property controls, then installed controller/catalog/policy
+ownership and independent entry/restoration. W-10 and all complete editions remain
+in progress.
+
+The earlier [binding-authoring checkpoint](binding-authoring-handoff.md) adds native
 selectors and explicit pins, ordered predicates/sort keys, exact integer values,
-lossless text and atomic table queries. Next close non-text insertion, responsive/
+lossless text and atomic table queries. Creation now has the checkpoint above. Next close responsive/
 flow transforms and remaining property controls, then installed controller/catalog/
 policy ownership and independent entry/restoration. W-10 and all complete editions
 remain in progress.
 
 The earlier [content-properties checkpoint](content-properties-handoff.md) adds
 bounded table, chart, image and scene-theme input through the existing atomic
-draft and resource owners. Binding authoring now has the checkpoint above. Next close non-text insertion,
+draft and resource owners. Binding authoring now has the checkpoint above. Creation now has the checkpoint above. Next close
 responsive/flow transforms and remaining property controls, then installed
 controller ownership and independent entry/restoration. W-10 remains in progress;
 complete editions and historical qualification remain open.

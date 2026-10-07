@@ -2,6 +2,7 @@
 #include "editor_snap.hpp"
 #include "editor_content_form.hpp"
 #include "editor_binding_form.hpp"
+#include "editor_create_form.hpp"
 #include "private_text.hpp"
 #include <gtk/gtk.h>
 #include <algorithm>
@@ -33,7 +34,7 @@ struct EditorForm::Impl {
     Actions actions;std::thread::id thread=std::this_thread::get_id();bool closed=false,updating=false,dispatching=false,fields_dirty=false,drawing=false;std::string error;
     GtkWidget *root=nullptr,*canvas=nullptr,*tree=nullptr,*status=nullptr,*guidance=nullptr;GtkListStore* model=nullptr;std::vector<GtkWidget*> owned;
     std::map<std::string,GtkWidget*> buttons,fields;std::vector<s::Node> nodes;
-    std::unique_ptr<EditorContentForm> content;std::unique_ptr<EditorBindingForm> binding;
+    std::unique_ptr<EditorContentForm> content;std::unique_ptr<EditorBindingForm> binding;std::unique_ptr<EditorCreateForm> creation;
     bool snap_grid=false,snap_guides=false,show_grid=false;s::Unit grid_spacing=8*s::dip;
     struct Gesture {double x,y,dx=0,dy=0,pixel_per_unit=1.0/64;bool resize=false;std::vector<s::Node> nodes;std::optional<SnapInput> input;SnapResult result{0,0,{},{}};};std::optional<Gesture> gesture;
     guint timer=0;
@@ -44,7 +45,7 @@ struct EditorForm::Impl {
     GtkWidget* own(GtkWidget* w){g_object_ref_sink(w);owned.push_back(w);return w;}
     GtkWidget* label(const char* value){auto* w=own(gtk_label_new(value));gtk_label_set_xalign(GTK_LABEL(w),0);return w;}
     const s::Display& viewport()const{for(const auto& d:topology.displays)if(d.id==display)return d;for(const auto& d:topology.displays)if(d.id==topology.fallback)return d;throw protocol::Error("editor.display");}
-    bool editing()const{return draft.available()&&!draft.active_request()&&draft.state()!=DraftState::conflict&&(!content||!content->opened())&&(!binding||!binding->opened());}
+    bool editing()const{return draft.available()&&!draft.active_request()&&draft.state()!=DraftState::conflict&&(!content||!content->opened())&&(!binding||!binding->opened())&&(!creation||!creation->opened());}
     void ready()const{need(editing(),"editor.unavailable");need(!fields_dirty,"editor.properties_pending");}
     bool clear(){nodes.clear();if(canvas){atk_object_set_name(gtk_widget_get_accessible(canvas),"");if(!drawing)gtk_widget_queue_draw(canvas);}return true;}
     void stop_preview(){gesture.reset();ticks.clear();if(surface)surface->close();clear();}
@@ -102,7 +103,8 @@ struct EditorForm::Impl {
             else if(id.substr(0,6)=="align-")active=enabled&&draft.selection().size()>=2;
             else if(id.substr(0,6)=="space-")active=enabled&&draft.selection().size()>=3;
             if(id=="bindings")active=enabled&&selected&&draft.scene()->at("schema_version")=="0.3.0"&&(selected->at("kind")=="value"||selected->at("kind")=="status"||selected->at("kind")=="chart"||selected->at("kind")=="table");
-            if((content&&content->opened())||(binding&&binding->opened()))active=false;
+            if(id=="insert")active=enabled&&draft.scene()&&draft.scene()->at("schema_version")=="0.3.0";
+            if((content&&content->opened())||(binding&&binding->opened())||(creation&&creation->opened()))active=false;
             gtk_widget_set_sensitive(row.second,active);
         }
         gtk_widget_set_sensitive(tree,enabled);gtk_widget_set_sensitive(canvas,enabled);
@@ -197,7 +199,13 @@ struct EditorForm::Impl {
         guide_feedback();gtk_widget_queue_draw(canvas);
     }
     void command(const std::string& id){
-        if(id=="bindings"){ready();gesture.reset();need(draft.selection().size()==1,"editor.selection");
+        if(id=="insert"){ready();gesture.reset();need(resources.has_value(),"editor.resources");
+            if(!creation)creation=std::make_unique<EditorCreateForm>(root,[this](const CreateInput& input){
+                need(resources.has_value(),"editor.resources");const auto snapshot=resources->catalog->resources(resources->selection,{settings,*draft.scene()});
+                auto edit=create_widget(*draft.scene(),input,"editor:proposed",{{"local_id",viewport().id}},content_choices(*snapshot));edit.widget["id"]=actions.widget_id();return draft.execute({edit});
+            },[this](bool changed){if(changed)this->changed();else sync();},[this]{shut();});
+            const auto snapshot=resources->catalog->resources(resources->selection,{settings,*draft.scene()});creation->open(*draft.scene(),draft.selection(),content_choices(*snapshot));sync();}
+        else if(id=="bindings"){ready();gesture.reset();need(draft.selection().size()==1,"editor.selection");
             if(!binding)binding=std::make_unique<EditorBindingForm>(root,[this](const std::vector<SceneEdit>& edits){return draft.execute(edits);},[this](bool changed){if(changed)this->changed();else sync();},[this]{shut();});
             binding->open(authored_widget(*draft.scene(),draft.selection()[0]));sync();}
         else if(id=="content"){ready();gesture.reset();need(resources.has_value(),"editor.resources");const auto snapshot=resources->catalog->resources(resources->selection,{settings,*draft.scene()});const Json* w=draft.selection().size()==1?&authored_widget(*draft.scene(),draft.selection()[0]):nullptr;
@@ -278,7 +286,7 @@ struct EditorForm::Impl {
                 if(r.y){const double py=std::floor((r.y->position-d.bounds.y)*device_per_unit)+0.5;cairo_move_to(cr,0,py);cairo_line_to(cr,d.bounds.width*device_per_unit,py);}cairo_stroke(cr);}
         });cairo_restore(cr);sync();
     }
-    void shut(){if(closed)return;closed=true;if(content)content->erase();if(binding)binding->erase();draft.close();fields_dirty=false;settings=nullptr;resources.reset();stop_preview();if(tree){list();sync(true);}}
+    void shut(){if(closed)return;closed=true;if(content)content->erase();if(binding)binding->erase();if(creation)creation->erase();draft.close();fields_dirty=false;settings=nullptr;resources.reset();stop_preview();if(tree){list();sync(true);}}
     template<class F> void event(F f)noexcept{try{if(!closed)f();}catch(const protocol::Error& e){gesture.reset();const std::string code=e.what();
         guide_feedback();error=code=="editor.number"?"Enter a number using digits and an optional decimal point.":
             code=="editor.arrange_geometry"||code=="editor.arrange_scope"?"Arrange needs fixed widgets in the same parent and display, with no size expansion.":
@@ -314,7 +322,7 @@ EditorForm::EditorForm(c::Authority a,c::Policy p,c::Authored value,std::string 
     i.guidance=i.label("");accessible(i.guidance,"","editor.guidance");gtk_widget_set_size_request(i.guidance,-1,20);gtk_box_pack_start(GTK_BOX(side),i.guidance,FALSE,FALSE,0);
     auto* bottom=gtk_box_new(GTK_ORIENTATION_HORIZONTAL,4);gtk_box_pack_start(GTK_BOX(i.root),bottom,FALSE,FALSE,0);button(bottom,"add","Add text");button(bottom,"duplicate","Duplicate");button(bottom,"delete","Delete");
     auto* align=gtk_box_new(GTK_ORIENTATION_HORIZONTAL,3);gtk_box_pack_start(GTK_BOX(i.root),align,FALSE,FALSE,0);
-    for(const auto& b:std::vector<std::pair<const char*,const char*>>{{"align-left","Align left"},{"align-hcenter","Center horizontally"},{"align-right","Align right"},{"align-top","Align top"},{"align-vcenter","Center vertically"},{"align-bottom","Align bottom"}})button(align,b.first,b.second);
+    for(const auto& b:std::vector<std::pair<const char*,const char*>>{{"insert","Add widget"},{"align-left","Align left"},{"align-hcenter","Center horizontally"},{"align-right","Align right"},{"align-top","Align top"},{"align-vcenter","Center vertically"},{"align-bottom","Align bottom"}})button(align,b.first,b.second);
     button(bottom,"space-horizontal","Space horizontally");button(bottom,"space-vertical","Space vertically");
     button(bottom,"group","Group");button(bottom,"ungroup","Ungroup");
     i.status=i.label("");accessible(i.status,"","editor.status");gtk_label_set_line_wrap(GTK_LABEL(i.status),TRUE);gtk_box_pack_start(GTK_BOX(i.root),i.status,FALSE,FALSE,0);
@@ -333,15 +341,16 @@ EditorForm::~EditorForm()=default;
 GtkWidget* EditorForm::widget()const{impl_->owner();return impl_->root;}
 void EditorForm::complete(std::uint64_t ticket,const Json& result){auto& i=*impl_;i.owner();if(i.closed)return;try{if(i.draft.complete(ticket,result))i.changed();}catch(...){i.sync();throw;}}
 void EditorForm::reconciled(std::uint64_t ticket,const std::string& query,const std::string& epoch,const Json& result){auto& i=*impl_;i.owner();if(i.closed)return;try{if(i.draft.reconciled(ticket,query,epoch,result))i.changed();}catch(...){i.sync();throw;}}
-void EditorForm::disconnected(){auto& i=*impl_;i.owner();if(i.closed)return;if(i.content)i.content->erase();if(i.binding)i.binding->erase();i.draft.disconnected();i.gesture.reset();i.sync();}
-void EditorForm::policy(c::Policy policy){auto& i=*impl_;i.owner();if(i.closed)return;if(i.content)i.content->erase();if(i.binding)i.binding->erase();i.gesture.reset();i.draft.policy(policy);i.current=std::move(policy);if(i.surface)i.surface->policy(i.current,i.now());
+void EditorForm::disconnected(){auto& i=*impl_;i.owner();if(i.closed)return;if(i.content)i.content->erase();if(i.binding)i.binding->erase();if(i.creation)i.creation->erase();i.draft.disconnected();i.gesture.reset();i.sync();}
+void EditorForm::policy(c::Policy policy){auto& i=*impl_;i.owner();if(i.closed)return;if(i.content)i.content->erase();if(i.binding)i.binding->erase();if(i.creation)i.creation->erase();i.gesture.reset();i.draft.policy(policy);i.current=std::move(policy);if(i.surface)i.surface->policy(i.current,i.now());
     if(!i.draft.available()){i.settings=nullptr;i.resources.reset();i.stop_preview();i.list();}else i.resolve_nodes();i.sync();}
 void EditorForm::reload(c::Authored value,std::string epoch,SettingsResources resources){auto& i=*impl_;i.owner();if(i.closed)return;
     if(i.content)i.content->erase();
     if(i.binding)i.binding->erase();
+    if(i.creation)i.creation->erase();
     if(i.surface&&i.surface->status().code==v::SurfaceCode::closed)need(i.surface->poll_image_jobs(),"editor.renderer_stopping");
     i.draft.reload(value,std::move(epoch),resources);i.settings=std::move(value.settings);i.resources=std::move(resources);i.fields_dirty=false;i.changed();}
-void EditorForm::topology(s::Topology topology,std::string display){auto& i=*impl_;i.owner();if(i.closed)return;if(i.content)i.content->erase();if(i.binding)i.binding->erase();i.gesture.reset();i.topology=std::move(topology);i.display=std::move(display);i.preview();i.sync();}
+void EditorForm::topology(s::Topology topology,std::string display){auto& i=*impl_;i.owner();if(i.closed)return;if(i.content)i.content->erase();if(i.binding)i.binding->erase();if(i.creation)i.creation->erase();i.gesture.reset();i.topology=std::move(topology);i.display=std::move(display);i.preview();i.sync();}
 recovery::DataAttachment EditorForm::attach(const std::string& p,const protocol::TelemetryBinding& b,std::uint64_t now){auto& i=*impl_;i.owner();return i.surface?i.surface->attach(p,b,now):recovery::DataAttachment{recovery::DataCode::closed};}
 recovery::DataResult EditorForm::receive(const std::string& p,std::uint64_t t,std::uint64_t r,std::string_view bytes,std::uint64_t now,const model::Tick& tick){auto& i=*impl_;i.owner();if(!i.surface)return {recovery::DataCode::closed};const auto result=i.surface->receive(p,t,r,bytes,now,tick);i.ticks[p]=tick;return result;}
 recovery::DataCode EditorForm::heartbeat(const std::string& p,std::uint64_t t,std::uint64_t r,std::uint64_t q,std::uint64_t now){auto& i=*impl_;i.owner();return i.surface?i.surface->heartbeat(p,t,r,q,now):recovery::DataCode::closed;}

@@ -1,0 +1,110 @@
+[
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-07T08:18:22.789136+00:00",
+    "finished_at": "2026-10-07T08:18:24.151123+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2265790183,\n  \"linux_campaign_bytes\": 4724380242,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/creation_step.py",
+      "linux-x64-gcc13",
+      "build"
+    ],
+    "started_at": "2026-10-07T08:18:24.151662+00:00",
+    "finished_at": "2026-10-07T08:18:48.764965+00:00",
+    "exit": 0,
+    "stdout": "[1/2] Building CXX object CMakeFiles/syspane_editor_tests.dir/tests/editor/widget_creation_tests.cpp.o\n[2/2] Linking CXX executable syspane_editor_tests\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-widget-creation/linux-x64-gcc13-build-d3d034859e\n",
+    "stderr": ""
+  },
+  {
+    "step": "focus",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-07T08:18:48.765306+00:00",
+    "finished_at": "2026-10-07T08:18:49.582886+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2267373230,\n  \"linux_campaign_bytes\": 4734271429,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "focus",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/creation_step.py",
+      "linux-x64-gcc13",
+      "focus"
+    ],
+    "started_at": "2026-10-07T08:18:49.583226+00:00",
+    "finished_at": "2026-10-07T08:19:07.490842+00:00",
+    "exit": 0,
+    "stdout": "Test project /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n    Start 47: editor.CREATE-KINDS\n1/6 Test #47: editor.CREATE-KINDS ..............   Passed    0.50 sec\n    Start 48: editor.CREATE-PARENTS\n2/6 Test #48: editor.CREATE-PARENTS ............   Passed    0.11 sec\n    Start 49: editor.CREATE-HISTORY\n3/6 Test #49: editor.CREATE-HISTORY ............   Passed    0.82 sec\n    Start 50: editor.CREATE-ATOMIC\n4/6 Test #50: editor.CREATE-ATOMIC .............   Passed    0.09 sec\n    Start 51: editor.CREATE-BOUNDS\n5/6 Test #51: editor.CREATE-BOUNDS .............   Passed    0.74 sec\n    Start 52: editor.CREATE-POLICY\n6/6 Test #52: editor.CREATE-POLICY .............   Passed    0.15 sec\n\n100% tests passed, 0 tests failed out of 6\n\nTotal Test time (real) =   2.41 sec\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-widget-creation/linux-x64-gcc13-focus-c197910951\n",
+    "stderr": ""
+  },
+  {
+    "step": "creation",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-07T08:19:07.491237+00:00",
+    "finished_at": "2026-10-07T08:19:08.273202+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2268958594,\n  \"linux_campaign_bytes\": 4734274766,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "creation",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/creation_step.py",
+      "linux-x64-gcc13",
+      "creation"
+    ],
+    "started_at": "2026-10-07T08:19:08.273510+00:00",
+    "finished_at": "2026-10-07T08:19:26.690698+00:00",
+    "exit": 8,
+    "stdout": "Test project /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n    Start 73: native.EDITOR-WIDGET-CREATION\n1/1 Test #73: native.EDITOR-WIDGET-CREATION ....***Failed    5.76 sec\n/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/creation-9ad317c66fe7/result.json fail\nTraceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_widget_creation.py\", line 133, in <module>\n    if __name__=='__main__':main()\n                            ^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_widget_creation.py\", line 127, in main\n    (folder/(mode+'.stdout')).write_bytes(stdout);(folder/(mode+'.stderr')).write_bytes(stderr);assert not timed_out and child.returncode==0,(mode,stderr.decode(errors='replace'));case=json.loads((folder/mode/'result.json').read_text());assert case['outcome']=='pass';report['cases'].append(dict(case=mode,outcome='pass',fault_detected=case.get('fault_detected',False),record_sha256=sha(folder/mode/'result.json')))\n                                                                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: ('text', 'dbus-daemon[244268]: [session uid=1000 pid=244268] Activating service name=\\'org.a11y.Bus\\' requested by \\':1.0\\' (uid=1000 pid=244269 comm=\"/usr/bin/python3 /mnt/d/Projects/SysPane/syspane/t\" label=\"kernel\")\\ndbus-daemon[244268]: [session uid=1000 pid=244268] Successfully activated service \\'org.a11y.Bus\\'\\ndbus-daemon[244279]: Activating service name=\\'org.a11y.atspi.Registry\\' requested by \\':1.1\\' (uid=1000 pid=244282 comm=\"/home/ir4runner/.cache/syspane/campaign-229a498/li\" label=\"kernel\")\\ndbus-daemon[244279]: Successfully activated service \\'org.a11y.atspi.Registry\\'\\nTraceback (most recent call last):\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_widget_creation.py\", line 133, in <module>\\n    if __name__==\\'__main__\\':main()\\n                            ^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_widget_creation.py\", line 117, in main\\n    if sys.argv[1]==\\'--observe\\':observe(*map(Path,sys.argv[2:5]),sys.argv[5]);return\\n                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_widget_creation.py\", line 106, in observe\\n    try:exercise(h)\\n        ^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_widget_creation.py\", line 93, in exercise\\n    h.wait(lambda:pixels(h)==baseline);h.click(\\'redo\\');h.wait(lambda:h.sensitive(\\'apply\\') and selection(h,\\'group\\' if k==\\'nested\\' else k))\\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_editor.py\", line 73, in wait\\n    assert time.monotonic()<end,self.stage+\\' observation deadline\\'\\n           ^^^^^^^^^^^^^^^^^^^^\\nAssertionError: PIXELS observation deadline\\n')\n\n\n0% tests passed, 1 tests failed out of 1\n\nTotal Test time (real) =   5.76 sec\n\nThe following tests FAILED:\n\t 73 - native.EDITOR-WIDGET-CREATION (Failed)\n Errors while running CTest\n\nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-widget-creation/linux-x64-gcc13-creation-5d27f66c14\n",
+    "stderr": ""
+  }
+]

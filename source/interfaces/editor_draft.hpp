@@ -8,7 +8,7 @@ enum class WidgetProperty {title,display,layout,priority};
 struct WidgetPropertyEdit {std::string id;WidgetProperty property;Json value;};
 struct WidgetContentEdit {std::string id;Json bindings,content;};
 struct SceneThemeEdit {std::optional<std::string> theme;};
-struct InsertWidget {Json widget;std::optional<std::string> parent;std::size_t index;};
+struct InsertWidget {Json widget;std::optional<std::string> parent;std::size_t index;bool select_inserted=false;};
 struct RemoveWidgets {std::vector<std::string> ids;};
 struct ReparentWidgets {std::vector<std::string> ids;std::optional<std::string> parent;std::size_t index;};
 struct DuplicateWidgets {std::vector<std::string> ids;std::map<std::string,std::string> mapping;};
