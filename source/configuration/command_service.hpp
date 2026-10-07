@@ -12,6 +12,7 @@ public:
     virtual bool supports_resources()const{return false;}
     virtual bool supports_large_commands()const{return false;}
     virtual bool supports_edit_locks()const{return false;}
+    virtual bool supports_visibility()const{return false;}
     virtual void attach(const std::string& epoch,std::uint64_t revision,Policy policy)=0;
     virtual CommandAdmission submit(const std::string& principal,const std::string& connection,std::uint64_t lifetime,
         const Authority&,std::string body,bool transactions,std::uint64_t now)=0;

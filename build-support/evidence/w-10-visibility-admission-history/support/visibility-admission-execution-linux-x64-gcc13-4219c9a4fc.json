@@ -1,0 +1,74 @@
+[
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-07T23:06:55.128203+00:00",
+    "finished_at": "2026-10-07T23:06:56.117534+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2309090587,\n  \"linux_campaign_bytes\": 4811041048,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/visibility_admission_step.py",
+      "linux-x64-gcc13",
+      "build"
+    ],
+    "started_at": "2026-10-07T23:06:56.118271+00:00",
+    "finished_at": "2026-10-07T23:07:08.017687+00:00",
+    "exit": 0,
+    "stdout": "[1/10] Building CXX object CMakeFiles/syspane_settings_draft.dir/source/interfaces/settings_draft.cpp.o\n[2/10] Linking CXX static library libsyspane_settings_draft.a\n[3/10] Linking CXX executable syspane_settings_tests\n[4/10] Linking CXX executable syspane_settings_window\n[5/10] Building CXX object CMakeFiles/syspane_editor_draft.dir/source/interfaces/editor_draft.cpp.o\n[6/10] Linking CXX static library libsyspane_editor_draft.a\n[7/10] Linking CXX executable syspane_large_command_tests\n[8/10] Linking CXX executable syspane_editor_window\n[9/10] Building CXX object CMakeFiles/syspane_editor_tests.dir/tests/editor/visibility_admission_tests.cpp.o\n[10/10] Linking CXX executable syspane_editor_tests\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-visibility-admission/linux-x64-gcc13-build-34b6945fac\n",
+    "stderr": ""
+  },
+  {
+    "step": "test",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-07T23:07:08.017988+00:00",
+    "finished_at": "2026-10-07T23:07:08.735580+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2310772646,\n  \"linux_campaign_bytes\": 4811069723,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "test",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/visibility_admission_step.py",
+      "linux-x64-gcc13",
+      "test"
+    ],
+    "started_at": "2026-10-07T23:07:08.735878+00:00",
+    "finished_at": "2026-10-07T23:07:26.968671+00:00",
+    "exit": 8,
+    "stdout": "editor.VIS-DURABLE ......................   Passed    0.19 sec\n      Start 202: configuration.COMMAND-COMMIT\n22/59 Test #202: configuration.COMMAND-COMMIT ............   Passed    0.07 sec\n      Start 203: configuration.COMMAND-CANCEL\n23/59 Test #203: configuration.COMMAND-CANCEL ............   Passed    0.06 sec\n      Start 204: configuration.COMMAND-POLICY\n24/59 Test #204: configuration.COMMAND-POLICY ............   Passed    0.06 sec\n      Start 205: configuration.COMMAND-LIFETIME\n25/59 Test #205: configuration.COMMAND-LIFETIME ..........   Passed    0.03 sec\n      Start 206: configuration.COMMAND-CAPACITY\n26/59 Test #206: configuration.COMMAND-CAPACITY ..........   Passed    1.08 sec\n      Start 207: configuration.COMMAND-FAULT\n27/59 Test #207: configuration.COMMAND-FAULT .............   Passed    0.06 sec\n      Start 208: configuration.COMMAND-NEGOTIATE\n28/59 Test #208: configuration.COMMAND-NEGOTIATE .........   Passed    0.02 sec\n      Start 209: configuration.RECON-RECEIPTS\n29/59 Test #209: configuration.RECON-RECEIPTS ............   Passed    0.04 sec\n      Start 210: configuration.RECON-POLICY\n30/59 Test #210: configuration.RECON-POLICY ..............   Passed    0.03 sec\n      Start 211: configuration.RECON-CODEC\n31/59 Test #211: configuration.RECON-CODEC ...............   Passed    0.00 sec\n      Start 212: configuration.RECON-BOUNDS\n32/59 Test #212: configuration.RECON-BOUNDS ..............   Passed    0.07 sec\n      Start 213: configuration.SCENE-CONTENT-SCHEMA\n33/59 Test #213: configuration.SCENE-CONTENT-SCHEMA ......   Passed    0.12 sec\n      Start 214: configuration.SCENE-CONTENT-MIGRATION\n34/59 Test #214: configuration.SCENE-CONTENT-MIGRATION ...   Passed    0.02 sec\n      Start 215: configuration.SCENE-CONTENT-RESOURCES\n35/59 Test #215: configuration.SCENE-CONTENT-RESOURCES ...   Passed    0.14 sec\n      Start 216: configuration.SCENE-CONTENT-PREVIEW\n36/59 Test #216: configuration.SCENE-CONTENT-PREVIEW .....   Passed    0.06 sec\n      Start 217: configuration.SCENE-CONTENT-TX\n37/59 Test #217: configuration.SCENE-CONTENT-TX ..........   Passed    0.15 sec\n      Start 218: configuration.SCENE-CONTENT-SESSION\n38/59 Test #218: configuration.SCENE-CONTENT-SESSION .....   Passed    0.13 sec\n      Start 219: configuration.AUTH-SCHEMA\n39/59 Test #219: configuration.AUTH-SCHEMA ...............   Passed    0.05 sec\n      Start 220: configuration.TX-MIXED\n40/59 Test #220: configuration.TX-MIXED ..................   Passed    0.03 sec\n      Start 221: configuration.TX-CONFLICT\n41/59 Test #221: configuration.TX-CONFLICT ...............   Passed    0.03 sec\n      Start 222: configuration.TX-REPLAY\n42/59 Test #222: configuration.TX-REPLAY .................   Passed    0.04 sec\n      Start 223: configuration.TX-INTERRUPT\n43/59 Test #223: configuration.TX-INTERRUPT ..............   Passed    0.07 sec\n      Start 224: configuration.TX-BOUNDS\n44/59 Test #224: configuration.TX-BOUNDS .................   Passed    0.05 sec\n      Start 225: configuration.TX-CAPACITY\n45/59 Test #225: configuration.TX-CAPACITY ...............   Passed    1.15 sec\n      Start 226: configuration.DIGEST\n46/59 Test #226: configuration.DIGEST ....................   Passed    0.02 sec\n      Start 227: configuration.DIGEST-CONTENT\n47/59 Test #227: configuration.DIGEST-CONTENT ............   Passed    0.64 sec\n      Start 228: configuration.CONTENT-COMPOSE\n48/59 Test #228: configuration.CONTENT-COMPOSE ...........   Passed    0.06 sec\n      Start 229: configuration.CONTENT-PINS\n49/59 Test #229: configuration.CONTENT-PINS ..............   Passed    0.12 sec\n      Start 230: configuration.CONTENT-PATHS\n50/59 Test #230: configuration.CONTENT-PATHS .............   Passed    0.02 sec\n      Start 231: configuration.CONTENT-BOUNDS\n51/59 Test #231: configuration.CONTENT-BOUNDS ............   Passed    0.09 sec\n      Start 232: configuration.CONTENT-CAPABILITIES\n52/59 Test #232: configuration.CONTENT-CAPABILITIES ......   Passed    0.08 sec\n      Start 233: configuration.CONTENT-POLICY\n53/59 Test #233: configuration.CONTENT-POLICY ............   Passed    0.12 sec\n      Start 234: configuration.RESOURCE-COMMIT\n54/59 Test #234: configuration.RESOURCE-COMMIT ...........   Passed    0.14 sec\n      Start 235: configuration.RESOURCE-GUARDS\n55/59 Test #235: configuration.RESOURCE-GUARDS ...........   Passed    0.16 sec\n      Start 236: configuration.RESOURCE-SESSION\n56/59 Test #236: configuration.RESOURCE-SESSION ..........   Passed    0.10 sec\n      Start 237: configuration.RESOURCE-RETAINED\n57/59 Test #237: configuration.RESOURCE-RETAINED .........   Passed    0.22 sec\n      Start 274: composition.graph\n58/59 Test #274: composition.graph .......................   Passed    0.11 sec\n      Start 275: composition.reject_forbidden\n59/59 Test #275: composition.reject_forbidden ............   Passed    0.24 sec\n\n98% tests passed, 1 tests failed out of 59\n\nTotal Test time (real) =  14.27 sec\n\nThe following tests FAILED:\n\t 75 - editor.VIS-SCHEMAS (Failed)\n Errors while running CTest\n\nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-visibility-admission/linux-x64-gcc13-test-02b5510420\n",
+    "stderr": ""
+  }
+]

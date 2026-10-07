@@ -150,5 +150,19 @@ The [checkpoint](../delivery/edit-locks-handoff.md) records scoped validation.
 The [shared visibility package](../delivery/packages/w-09-visibility.md) closes
 single-condition evaluation and fixes the next scene/native gates. Do not place
 visibility properties into existing scenes or reinterpret unavailable as hidden.
-Native private input, reversible draft edits, negotiated persistence, mandatory
-status preservation and independent pixels/accessibility checks remain required.
+The authored admission below supplies reversible draft edits and negotiated
+persistence. Native private input, mandatory status preservation and independent
+pixels/accessibility checks remain required.
+
+The [visibility-admission package](../delivery/packages/w-10-visibility-admission.md)
+now implements SetWidgetVisibility in the shared draft. It validates all targets
+atomically, promotes scene 0.3/0.4 to 0.5 on Set, retains that version on Clear,
+preserves exact history and applies ordinary lock/ancestor protection. Current
+capability and policy checks apply to Clear and no-op as well as Set. Lock edits
+must preserve scene 0.5. Group/Wrap retain child rules and create an unconditional
+parent; Ungroup/Unwrap reject a parent's own rule until explicitly cleared.
+
+Apply for a scene 0.5 replacement requires command 0.7 negotiation. Settings-only
+changes preserve the existing conditional scene and its resource closure. Native
+condition dialogs and WYSIWYG composition remain open; retain unavailable-preview,
+authored recovery and durable/activation distinctions in the meantime.

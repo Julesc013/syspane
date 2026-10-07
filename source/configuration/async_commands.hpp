@@ -22,6 +22,7 @@ public:
     AsyncCommands(GenerationStore&,std::string epoch,ResourceProvider);
     bool supports_resources()const override{return transactions_.supports_resources();}
     bool supports_large_commands()const override{return true;}
+    bool supports_visibility()const override{return transactions_.supports_visibility();}
     bool supports_edit_locks()const override{return transactions_.supports_edit_locks();}
     void attach(const std::string&,std::uint64_t,Policy)override;
     CommandAdmission submit(const std::string&,const std::string&,std::uint64_t,const Authority&,std::string,bool,std::uint64_t)override;

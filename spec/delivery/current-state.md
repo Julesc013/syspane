@@ -12,16 +12,22 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-07T22:51:02.675487+00:00", "scope": "Shared conditional visibility; native admission remains open"}
+updated: {"by": "codex", "at": "2026-10-07T23:31:04.147035+00:00", "scope": "Visibility authoring admission; native conditional rendering and full editions remain open"}
 ---
 
 # Current state and next admitted boundary
 
-The [conditional-visibility evaluator](visibility-handoff.md) now
+The [visibility-admission checkpoint](visibility-admission-handoff.md)
+adds scene 0.5, negotiated command 0.7, protected typed edits and exact durable
+recovery. Conditional scenes explicitly report an unavailable renderer until native
+composition and controls enforce the rules. This is a component checkpoint; the
+five complete editions and their release qualification remain open.
+
+The earlier [conditional-visibility evaluator](visibility-handoff.md) now
 compares policy-bound singleton values with exact numeric and unit semantics.
 Missing, stale, denied and disconnected inputs remain explicit unresolved outcomes.
-Versioned scene admission and native controls/rendering are the next required
-integration; this checkpoint does not enable conditional widgets yet.
+Native controls/rendering remain required after the authored admission above;
+the evaluator alone does not enable conditional widgets.
 
 The earlier [image-validation checkpoint](runtime-observation-handoff.md) reduces
 complete validation cost from about 34 ms to 5 ms in the development profile.

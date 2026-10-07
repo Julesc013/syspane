@@ -1,0 +1,125 @@
+{
+  "schema_version": "0.7.0",
+  "request_id": "visibility",
+  "expected_revision": "40",
+  "policy_generation": "7",
+  "intent": "commit",
+  "operations": [
+    {
+      "op": "scene.replace",
+      "scene": {
+        "extensions": {
+          "author.note": {
+            "preserve": [
+              "x",
+              1,
+              false
+            ]
+          }
+        },
+        "revision": "40",
+        "roots": [
+          "widget:text",
+          "widget:second",
+          "widget:image"
+        ],
+        "scene_id": "scene:content",
+        "schema_version": "0.5.0",
+        "theme_id": null,
+        "widgets": [
+          {
+            "bindings": [],
+            "content": {
+              "body": "Editable pane\nMove me"
+            },
+            "display": {
+              "local_id": "D1"
+            },
+            "id": "widget:text",
+            "kind": "text",
+            "layout": {
+              "base": {
+                "height": 80,
+                "kind": "fixed",
+                "width": 180,
+                "x": 40,
+                "y": 40
+              }
+            },
+            "priority": "normal",
+            "title": "Editable pane",
+            "visibility": {
+              "schema_version": "0.1.0",
+              "binding": {
+                "kind": "direct",
+                "producer_id": "P1",
+                "producer_epoch": "E1",
+                "entity_id": "a",
+                "field": "test.value"
+              },
+              "op": "eq",
+              "value": 3,
+              "unit": "byte"
+            }
+          },
+          {
+            "bindings": [],
+            "content": {
+              "body": "Second pane"
+            },
+            "display": {
+              "local_id": "D1"
+            },
+            "id": "widget:second",
+            "kind": "text",
+            "layout": {
+              "base": {
+                "height": 80,
+                "kind": "fixed",
+                "width": 180,
+                "x": 280,
+                "y": 40
+              }
+            },
+            "priority": "normal",
+            "title": "Second pane"
+          },
+          {
+            "bindings": [],
+            "content": {
+              "alt": "Public sample image",
+              "asset": {
+                "package": {
+                  "id": "package:settings-native",
+                  "sha256": "82793f6c05865da00783ae14aa4468c5483d42f06cfbdabde757ba0b3bfdfb7b",
+                  "version": "0.1.0"
+                },
+                "path": "images/pixel.png",
+                "sha256": "78253200c249d4d84293b2a1e6fc803adedeba8645f38d6bc2f6734a2dfacec9"
+              },
+              "fit": "contain",
+              "height_dip": 64,
+              "width_dip": 64
+            },
+            "display": {
+              "local_id": "D1"
+            },
+            "id": "widget:image",
+            "kind": "image",
+            "layout": {
+              "base": {
+                "height": 100,
+                "kind": "fixed",
+                "width": 160,
+                "x": 40,
+                "y": 180
+              }
+            },
+            "priority": "normal",
+            "title": "Image"
+          }
+        ]
+      }
+    }
+  ]
+}

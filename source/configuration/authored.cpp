@@ -13,7 +13,7 @@ void require(bool value,const char* code){if(!value)throw Error(code);}
 const std::map<std::string,Json>& schemas(){
     static const std::map<std::string,Json> value=[] {
         std::map<std::string,Json> result;
-        for(const char* text:{settings_schema,scene_v0_2_schema,scene_v0_3_schema,scene_v0_4_schema,layout_schema,binding_schema,visibility_schema,command_v0_2_schema,command_v0_3_schema,command_v0_4_schema,command_v0_5_schema,command_v0_6_schema,command_result_schema,content_package_schema,content_catalog_schema,preset_schema,theme_schema}){
+        for(const char* text:{settings_schema,scene_v0_2_schema,scene_v0_3_schema,scene_v0_4_schema,scene_v0_5_schema,layout_schema,binding_schema,visibility_schema,command_v0_2_schema,command_v0_3_schema,command_v0_4_schema,command_v0_5_schema,command_v0_6_schema,command_v0_7_schema,command_result_schema,content_package_schema,content_catalog_schema,preset_schema,theme_schema}){
             auto item=Json::parse(text);result.emplace(item["$id"].get<std::string>(),std::move(item));
         }
         return result;
@@ -122,6 +122,7 @@ void scene_semantics(const Json& scene){
     (void)revision(scene["revision"]);std::map<std::string,const Json*> widgets;std::map<std::string,unsigned> owned;
     for(const auto& widget:scene["widgets"]){
         if(scene["schema_version"]!="0.2.0")content_semantics(widget);
+        if(widget.contains("visibility"))validate_visibility_document(widget["visibility"]);
         require(widgets.emplace(widget["id"].get<std::string>(),&widget).second,"scene.duplicate");
         const auto& layout=widget["layout"];std::vector<Json> variants{layout["base"]};double previous=-1;
         if(layout.contains("breakpoints"))for(const auto& point:layout["breakpoints"]){
@@ -153,7 +154,7 @@ void validate_content_document(const Json& value,const std::string& kind){
     require(kind=="content-catalog"||kind=="content-package"||kind=="preset"||kind=="theme","content.kind");
     const auto name="0.1.0/"+kind;structural(value,name.c_str(),kind=="content-catalog"?16384:(kind=="content-package"?65536:262144));
 }
-void validate_scene_document(const Json& value){const auto version=value.is_object()?value.value("schema_version",Json()):Json();structural(value,version=="0.4.0"?"0.4.0/scene":version=="0.3.0"?"0.3.0/scene":"0.2.0/scene",262144);(void)revision(value["revision"]);scene_semantics(value);}
+void validate_scene_document(const Json& value){const auto version=value.is_object()?value.value("schema_version",Json()):Json();structural(value,version=="0.5.0"?"0.5.0/scene":version=="0.4.0"?"0.4.0/scene":version=="0.3.0"?"0.3.0/scene":"0.2.0/scene",262144);(void)revision(value["revision"]);scene_semantics(value);}
 Json upgrade_scene_content(const Json& value){
     validate_scene_document(value);if(value["schema_version"]!="0.2.0")return value;auto next=value;next["schema_version"]="0.3.0";
     for(auto& w:next["widgets"]){const auto& kind=w["kind"];require(kind!="chart"&&kind!="image","scene.content_required");w["content"]=Json::object();
@@ -170,21 +171,21 @@ void validate_authored(const Authored& value){
 Json parse_command(std::string_view bytes){
     require(!bytes.empty()&&bytes.size()<=protocol::large_command_limit,"command.size");
     auto value=protocol::parse(bytes,protocol::ParseProfile::large_command);
-    if(!(value.is_object()&&(value.value("schema_version",Json())=="0.5.0"||value.value("schema_version",Json())=="0.6.0"))){
+    if(!(value.is_object()&&(value.value("schema_version",Json())=="0.5.0"||value.value("schema_version",Json())=="0.6.0"||value.value("schema_version",Json())=="0.7.0"))){
         require(bytes.size()<=protocol::command_limit,"command.size");value=protocol::parse(bytes);
     }
     return value;
 }
 void validate_command(const Json& value){
     const auto version=value.is_object()&&value.contains("schema_version")?value["schema_version"]:Json();
-    structural(value,version=="0.6.0"?"0.6.0/command":version=="0.5.0"?"0.5.0/command":version=="0.4.0"?"0.4.0/command":version=="0.3.0"?"0.3.0/command":"0.2.0/command",
-        (version=="0.5.0"||version=="0.6.0")?protocol::large_command_limit:protocol::command_limit,(version=="0.5.0"||version=="0.6.0")?protocol::ParseProfile::large_command:protocol::ParseProfile::ordinary);
+    structural(value,version=="0.7.0"?"0.7.0/command":version=="0.6.0"?"0.6.0/command":version=="0.5.0"?"0.5.0/command":version=="0.4.0"?"0.4.0/command":version=="0.3.0"?"0.3.0/command":"0.2.0/command",
+        (version=="0.5.0"||version=="0.6.0"||version=="0.7.0")?protocol::large_command_limit:protocol::command_limit,(version=="0.5.0"||version=="0.6.0"||version=="0.7.0")?protocol::ParseProfile::large_command:protocol::ParseProfile::ordinary);
     (void)revision(value["expected_revision"]);(void)revision(value["policy_generation"]);
     std::set<std::string> paths;bool scene=false;
     for(const auto& op:value["operations"]){
         if(op["op"]=="scene.replace"){
             require(!scene,"command.duplicate_scene");scene=true;scene_semantics(op["scene"]);
-            if(version=="0.5.0"||version=="0.6.0")validate_scene_document(op["scene"]);
+            if(version=="0.5.0"||version=="0.6.0"||version=="0.7.0")validate_scene_document(op["scene"]);
             require(op["scene"]["revision"]==value["expected_revision"],"command.scene_revision");
         }else require(paths.insert(op["path"].get<std::string>()).second,"command.duplicate_path");
     }
@@ -199,6 +200,7 @@ void authorize_authored(const Json& command,const Authority& authority,const Pol
     require(revision(command["policy_generation"])==policy.revision,"policy.changed");
     require(revision(command["expected_revision"])==current,"revision.changed");
     require(!policy.denied_capabilities.count(command["intent"]=="commit"?"settings.commit":"settings.preview"),"policy.denied");
+    if(command.value("schema_version",Json())=="0.7.0")require(!policy.denied_capabilities.count("configuration.visibility"),"policy.denied");
     if(command.contains("content"))require(!policy.denied_capabilities.count("content.select"),"policy.denied");
     for(const auto& op:command["operations"]){
         const auto name=op["op"].get<std::string>();require(!policy.denied_capabilities.count(name),"policy.denied");

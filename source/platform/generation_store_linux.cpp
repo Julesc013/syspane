@@ -160,7 +160,7 @@ struct LinuxGenerationStore::Impl {
                 body=id["body"].get<std::string>();
             }
             const auto command=c::parse_command(body);c::validate_command(command);
-            need((command["schema_version"]=="0.5.0"||command["schema_version"]=="0.6.0")==separate,"storage.identity_version");
+            need((command["schema_version"]=="0.5.0"||command["schema_version"]=="0.6.0"||command["schema_version"]=="0.7.0")==separate,"storage.identity_version");
             need(command.contains("content")==resources&&(!resources||command["content"]==value.resources->selection()),"storage.resource_identity");
             const auto expected=protocol::decimal(command["expected_revision"].get_ref<const std::string&>());
             need(command["request_id"]==id["request"]&&command["intent"]=="commit"&&*expected<c::authored_revision(value.documents)&&
@@ -194,7 +194,7 @@ struct LinuxGenerationStore::Impl {
             const auto settings=next.documents.settings.dump(),scene=next.documents.scene.dump();
             write(dir.fd,"settings.json",settings);step("settings");write(dir.fd,"scene.json",scene);step("scene");
             Json manifest_value={{"version",next.resources?"0.2.0":"0.1.0"},{"revision",next.documents.settings["revision"]},{"settings",c::sha256(settings)},{"scene",c::sha256(scene)},{"identity",identity(next.identity)}};
-            if(next.identity&&(c::parse_command(next.identity->body)["schema_version"]=="0.5.0"||c::parse_command(next.identity->body)["schema_version"]=="0.6.0")){
+            if(next.identity&&(c::parse_command(next.identity->body)["schema_version"]=="0.5.0"||c::parse_command(next.identity->body)["schema_version"]=="0.6.0"||c::parse_command(next.identity->body)["schema_version"]=="0.7.0")){
                 manifest_value["version"]="0.3.0";manifest_value["identity"].erase("body");
                 manifest_value["identity"]["body_sha256"]=c::sha256(next.identity->body);
                 write(dir.fd,"request.json",next.identity->body);step("request");

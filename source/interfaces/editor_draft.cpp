@@ -172,7 +172,7 @@ void apply(Json& scene,const GroupWidgets& edit){
     erase_ids(list,std::set<std::string>(members.begin(),members.end()));at_index(list,index,{edit.id});scene["widgets"].push_back(std::move(group));
 }
 void apply(Json& scene,const UngroupWidget& edit){
-    const auto group=widget(scene,edit.id);need(group.at("kind")=="group","editor.group");
+    const auto group=widget(scene,edit.id);need(group.at("kind")=="group","editor.group");need(!group.contains("visibility"),"editor.visibility_container");
     need(!group.at("layout").contains("breakpoints")||group["layout"]["breakpoints"].empty(),"editor.group_layout");
     const auto box=fixed_box(group.at("layout").at("base"),edit.id);const auto members=group.at("children").get<std::vector<std::string>>();
     for(const auto& id:members){auto& w=widget(scene,id);need(w.at("display")==group.at("display"),"editor.arrange_scope");
@@ -195,7 +195,7 @@ void apply(Json& scene,const WrapWidgets& edit){
     erase_ids(list,std::set<std::string>(members.begin(),members.end()));at_index(list,index,{edit.id});scene["widgets"].push_back(std::move(group));
 }
 void apply(Json& scene,const UnwrapWidget& edit){
-    const auto group=widget(scene,edit.id);need(group.at("kind")=="group","editor.group");const auto members=group.at("children").get<std::vector<std::string>>();
+    const auto group=widget(scene,edit.id);need(group.at("kind")=="group","editor.group");need(!group.contains("visibility"),"editor.visibility_container");const auto members=group.at("children").get<std::vector<std::string>>();
     for(const auto& id:members)need(widget(scene,id).at("display")==group.at("display"),"editor.arrange_scope");
     auto& list=owner(scene,edit.id);const auto index=static_cast<std::size_t>(std::distance(list.begin(),std::find(list.begin(),list.end(),edit.id)));
     erase_ids(list,{edit.id});at_index(list,index,members);auto& rows=scene["widgets"];
@@ -204,9 +204,16 @@ void apply(Json& scene,const UnwrapWidget& edit){
 void apply(Json& scene,const SetWidgetLocks& edit){
     need(scene.at("schema_version")!="0.2.0","editor.lock_version");need(!edit.ids.empty()&&edit.ids.size()<=256,"editor.targets");std::set<std::string> ids;
     for(const auto& id:edit.ids){need(ids.insert(id).second,"editor.targets");(void)widget(scene,id);}
-    if(edit.locked)scene["schema_version"]="0.4.0";
+    if(edit.locked&&scene["schema_version"]=="0.3.0")scene["schema_version"]="0.4.0";
     for(const auto& id:edit.ids){auto& w=widget(scene,id);if(edit.locked)w["edit_locked"]=true;else w.erase("edit_locked");}
 }
+void apply(Json& scene,const SetWidgetVisibility& edit){
+    need(scene.at("schema_version")!="0.2.0","editor.visibility_version");need(!edit.ids.empty()&&edit.ids.size()<=256,"editor.targets");std::set<std::string> ids;
+    for(const auto& id:edit.ids){need(ids.insert(id).second,"editor.targets");(void)widget(scene,id);}
+    if(edit.rule){c::validate_visibility_document(*edit.rule);scene["schema_version"]="0.5.0";}
+    for(const auto& id:edit.ids){auto& w=widget(scene,id);if(edit.rule)w["visibility"]=*edit.rule;else w.erase("visibility");}
+}
+
 template<class T>std::vector<std::string> targets(const T& edit){return edit.ids;}
 std::vector<std::string> targets(const WidgetPropertyEdit& e){return {e.id};}
 std::vector<std::string> targets(const WidgetContentEdit& e){return {e.id};}
@@ -258,6 +265,12 @@ bool EditorDraft::locks_available()const{
     if(!available()||scene()->at("schema_version")=="0.2.0"||!transaction_.large_commands_||!transaction_.context_||!transaction_.context_->capabilities.count("configuration.edit-locks")||!transaction_.context_->capabilities.count("scene.edit-locks"))return false;
     try{transaction_.editable();transaction_.authorize_resources();c::authorize_authored({{"intent","preview"},{"policy_generation",std::to_string(transaction_.policy_.revision)},{"expected_revision",std::to_string(*revision())},{"operations",Json::array({{{"op","scene.replace"}}})}},transaction_.authority_,transaction_.policy_,*revision());return true;}catch(const protocol::Error&){return false;}
 }
+bool EditorDraft::visibility_available()const{
+    if(!locks_available())return false;
+    for(const char* cap:{"configuration.visibility","configuration.edit-locks","scene.visibility","scene.edit-locks"})
+        if(!transaction_.context_->capabilities.count(cap)||transaction_.policy_.denied_capabilities.count(cap))return false;
+    return true;
+}
 void EditorDraft::select(std::vector<std::string> ids){
     transaction_.editable();need(ids.size()<=256,"editor.targets");std::set<std::string> unique;
     for(const auto& id:ids)need(unique.insert(id).second&&exists(*scene(),id),"editor.selection");
@@ -267,7 +280,7 @@ std::size_t EditorDraft::history_bytes()const{std::size_t n=0;for(const auto& e:
 void EditorDraft::clear_history(){undo_.clear();redo_.clear();}
 bool EditorDraft::execute(const std::vector<SceneEdit>& edits){
     transaction_.editable();need(!edits.empty()&&edits.size()<=128,"editor.operations");auto candidate=*scene();auto selected=selected_;
-    try{for(const auto& edit:edits){if(std::holds_alternative<SetWidgetLocks>(edit))need(locks_available(),"editor.lock_unavailable");std::visit([&](const auto& op){guard(candidate,op);edit_selection(candidate,selected,op);},edit);}}
+    try{for(const auto& edit:edits){if(std::holds_alternative<SetWidgetVisibility>(edit))need(visibility_available(),"editor.visibility_unavailable");if(std::holds_alternative<SetWidgetLocks>(edit))need(locks_available(),"editor.lock_unavailable");std::visit([&](const auto& op){guard(candidate,op);edit_selection(candidate,selected,op);},edit);}}
     catch(const Json::exception&){throw protocol::Error("editor.operation");}
     if(candidate==*scene())return false;
     Change change{{*scene(),selected_},{candidate,surviving(candidate,selected)},0};

@@ -130,7 +130,8 @@ ResourceSnapshot ContentCatalog::resources(const Json& selection,const Authored&
     else for(auto i:scope)if(entries_[i].manifest["kind"]=="theme"&&entries_[i].pin["id"]==id){need(!theme,"content.ambiguous");theme=i;}
     need(theme.has_value(),"content.theme");result->theme_pin_=entries_[*theme].pin;result->theme_=entries_[*theme].document;
     if(candidate.scene["schema_version"]!="0.2.0")result->required_.insert("scene.content");
-    if(candidate.scene["schema_version"]=="0.4.0")result->required_.insert("scene.edit-locks");
+    if((candidate.scene["schema_version"]=="0.4.0"||candidate.scene["schema_version"]=="0.5.0"))result->required_.insert("scene.edit-locks");
+    if(candidate.scene["schema_version"]=="0.5.0")result->required_.insert("scene.visibility");
     validate_resource_binding(*result,candidate);return result;
 }
 void validate_resource_binding(const ResourceSet& resources,const Authored& candidate){
@@ -138,7 +139,8 @@ void validate_resource_binding(const ResourceSet& resources,const Authored& cand
     need(id==resources.theme()["theme_id"],"content.theme");
     if(candidate.scene["schema_version"]=="0.2.0")return;
     need(resources.required().count("scene.content")!=0,"resource.contract");
-    if(candidate.scene["schema_version"]=="0.4.0")need(resources.required().count("scene.edit-locks")!=0,"resource.contract");
+    if((candidate.scene["schema_version"]=="0.4.0"||candidate.scene["schema_version"]=="0.5.0"))need(resources.required().count("scene.edit-locks")!=0,"resource.contract");
+    if(candidate.scene["schema_version"]=="0.5.0")need(resources.required().count("scene.visibility")!=0,"resource.contract");
     // ResourceSet can only be made by ContentCatalog, which verified every byte.
     // Index immutable manifests once; repeated image references must not rehash
     // up to 64 MiB of identical media for each widget or presentation validation.
@@ -182,6 +184,7 @@ PresetPlan ContentCatalog::preview(const Json& package_pin,const Json& selected,
     Json ops=Json::array();for(const auto& row:values)ops.push_back({{"op","settings.set"},{"path",row.first},{"value",row.second}});
     ops.push_back({{"op","scene.replace"},{"scene",scene}});result.command=command(baseline,request,policy.revision,ops);
     if(capabilities.count("configuration.large-commands")||scene["schema_version"]!="0.2.0"){result.command["schema_version"]=capabilities.count("configuration.large-commands")?"0.5.0":"0.4.0";result.command["content"]={{"package",package_pin},{"preset",selected}};}
+    if(scene["schema_version"]=="0.5.0"){need(capabilities.count("configuration.visibility")&&capabilities.count("configuration.edit-locks")&&capabilities.count("configuration.large-commands"),"resource.capability");result.command["schema_version"]="0.7.0";}
     if(scene["schema_version"]=="0.4.0"){need(capabilities.count("configuration.edit-locks")&&capabilities.count("configuration.large-commands"),"resource.capability");result.command["schema_version"]="0.6.0";}
     result.candidate=prepare_authored(baseline,result.command,authority,policy);
     const auto theme_id=scene["theme_id"].is_null()?result.candidate.settings["display"]["theme_id"]:scene["theme_id"];

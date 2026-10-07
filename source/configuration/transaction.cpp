@@ -86,7 +86,7 @@ Json Transactions::submit_impl(const std::string& principal,const std::string& c
         if(retained->identity->body!=body)return reply(request,"conflict","request.changed");
         return reply(request,"accepted","",authored_revision(retained->documents));
     }
-    const auto admission=record?ledger_.admit(principal,connection,request,body,now,(command["schema_version"]=="0.5.0"||command["schema_version"]=="0.6.0")):protocol::Admission::admitted;
+    const auto admission=record?ledger_.admit(principal,connection,request,body,now,(command["schema_version"]=="0.5.0"||command["schema_version"]=="0.6.0"||command["schema_version"]=="0.7.0")):protocol::Admission::admitted;
     if(admission==protocol::Admission::conflict)return reply(request,"conflict","request.changed");
     if(admission==protocol::Admission::replay)return protocol::parse(ledger_.get(principal,request,now)->result);
     if(admission==protocol::Admission::busy||admission==protocol::Admission::pending)return reply(request,"busy","request.capacity");

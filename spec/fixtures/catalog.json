@@ -860,6 +860,62 @@
       "expected": "invalid",
       "semantic": false,
       "reason": "No executable or unknown property."
+    },
+    {
+      "path": "fixtures/valid/scene-visibility.json",
+      "schema": "scene-v0.5",
+      "expected": "valid",
+      "semantic": true,
+      "reason": "Versioned visibility authoring and admission boundary."
+    },
+    {
+      "path": "fixtures/valid/command-visibility.json",
+      "schema": "command-v0.7",
+      "expected": "valid",
+      "semantic": true,
+      "reason": "Versioned visibility authoring and admission boundary."
+    },
+    {
+      "path": "fixtures/invalid/scene-visibility-null.json",
+      "schema": "scene-v0.5",
+      "expected": "invalid",
+      "semantic": false,
+      "reason": "Versioned visibility authoring and admission boundary."
+    },
+    {
+      "path": "fixtures/invalid/scene-visibility-collection.json",
+      "schema": "scene-v0.5",
+      "expected": "invalid",
+      "semantic": false,
+      "reason": "Versioned visibility authoring and admission boundary."
+    },
+    {
+      "path": "fixtures/invalid/scene-visibility-coercion.json",
+      "schema": "scene-v0.5",
+      "expected": "invalid",
+      "semantic": false,
+      "reason": "Versioned visibility authoring and admission boundary."
+    },
+    {
+      "path": "fixtures/invalid/scene-old-visibility.json",
+      "schema": "scene-v0.4",
+      "expected": "invalid",
+      "semantic": false,
+      "reason": "Versioned visibility authoring and admission boundary."
+    },
+    {
+      "path": "fixtures/invalid/command-old-visibility.json",
+      "schema": "command-v0.6",
+      "expected": "invalid",
+      "semantic": false,
+      "reason": "Versioned visibility authoring and admission boundary."
+    },
+    {
+      "path": "fixtures/invalid/command-visibility-no-content.json",
+      "schema": "command-v0.7",
+      "expected": "invalid",
+      "semantic": false,
+      "reason": "Versioned visibility authoring and admission boundary."
     }
   ]
 }

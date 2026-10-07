@@ -178,3 +178,15 @@ configuration.scene-content before sending it. Required incompatible combination
 fail the handshake; optional unsupported features are removed. Unnegotiated
 commands return feature.unsupported before resource preparation. Wire framing,
 request/queue limits, role restrictions and original-body replay remain unchanged.
+
+The [visibility-admission boundary](../delivery/packages/w-10-visibility-admission.md)
+adds [command 0.7](command-v0.7.schema.json), accepting scene versions 0.2 through
+0.5. It always requires configuration.transactions, configuration.content,
+configuration.scene-content, configuration.large-commands, configuration.edit-locks,
+configuration.visibility, command-result 0.1 and the existing 328704-byte frame
+floor. The server offers it only with an explicit resource provider that supports
+visibility and edit locks. Missing required dependencies reject the handshake;
+optional incompatibility removes visibility and a late 0.7 command returns
+feature.unsupported before publication. Denied configuration.visibility returns
+policy.denied. The 327680-byte body, framing, queues, 128 admissions, exact request
+bytes, cancellation and replay semantics retain their owners and limits.

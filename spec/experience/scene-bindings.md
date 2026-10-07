@@ -98,6 +98,22 @@ The [visibility package](../delivery/packages/w-09-visibility.md) defines one bo
 comparison over a current policy-bound singleton, exact numeric/unit behavior and
 explicit unresolved outcomes. The standalone [visibility schema](../contracts/visibility.schema.json)
 and shared evaluator are a prerequisite, not an extension to existing scenes.
-Versioned scene/command admission, native status/group composition and editor
-controls remain required before enablement. The [handoff](../delivery/visibility-handoff.md)
-records current execution scope.
+Versioned authored admission is recorded below. Native status/group composition
+and editor controls remain required before enablement. The [evaluator handoff](../delivery/visibility-handoff.md)
+records the earlier shared prerequisite.
+
+## Versioned conditional scenes
+
+[Scene 0.5](../contracts/scene-v0.5.schema.json) admits optional widget visibility
+using the exact visibility 0.1 rule. Absence is unconditional; null rejects.
+Scene 0.4 and older remain byte-identical. The entire scene retains its 256 KiB
+bound and each embedded rule its 64 KiB bound. All widget kinds support authored
+conditions. Version 0.5 requires scene.content, scene.edit-locks and scene.visibility
+resources even when no widget carries a condition or lock.
+
+The [admission package](../delivery/packages/w-10-visibility-admission.md) defines
+preservation, promotion, current policy and coherent storage. SceneSurface currently
+returns alternative/surface.visibility_unavailable with no frame for this version;
+authored capability support must never bypass the native composition gate. Native
+condition evaluation, layout-space preservation, inherited group rules, unresolved
+diagnostics and mandatory status remain required before enablement.

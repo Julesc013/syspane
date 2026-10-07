@@ -23,10 +23,11 @@ struct GroupWidgets {std::vector<std::string> ids;std::string id,title;};
 struct UngroupWidget {std::string id;};
 struct WrapWidgets {std::vector<std::string> ids;std::string id,title;Json layout;std::string priority="normal";};
 struct UnwrapWidget {std::string id;};
+struct SetWidgetVisibility {std::vector<std::string> ids;std::optional<Json> rule;};
 struct SetWidgetLocks {std::vector<std::string> ids;bool locked;};
 bool edit_locked(const Json& scene,const std::string& id);
 bool edit_protected(const Json& scene,const std::string& id);
-using SceneEdit=std::variant<WidgetPropertyEdit,WidgetContentEdit,SceneThemeEdit,InsertWidget,RemoveWidgets,ReparentWidgets,DuplicateWidgets,MoveWidgets,ResizeWidget,AlignWidgets,DistributeWidgets,GroupWidgets,UngroupWidget,RootDisplayEdit,WrapWidgets,UnwrapWidget,SetWidgetLocks>;
+using SceneEdit=std::variant<WidgetPropertyEdit,WidgetContentEdit,SceneThemeEdit,InsertWidget,RemoveWidgets,ReparentWidgets,DuplicateWidgets,MoveWidgets,ResizeWidget,AlignWidgets,DistributeWidgets,GroupWidgets,UngroupWidget,RootDisplayEdit,WrapWidgets,UnwrapWidget,SetWidgetLocks,SetWidgetVisibility>;
 
 // One serialized native owner. Scene/selection borrows expire on every mutation,
 // policy update or close; adapters must erase their own caches on disclosure loss.
@@ -38,6 +39,7 @@ public:
     void select(std::vector<std::string>);
     bool execute(const std::vector<SceneEdit>&);
     bool locks_available()const;
+    bool visibility_available()const;
     bool undo();
     bool redo();
     std::size_t undo_count()const{return undo_.size();}

@@ -1,0 +1,38 @@
+[
+  {
+    "step": "configure",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-07T23:04:08.862642+00:00",
+    "finished_at": "2026-10-07T23:04:10.095192+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2302339547,\n  \"linux_campaign_bytes\": 4787710870,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "configure",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/visibility_admission_step.py",
+      "linux-x64-gcc13",
+      "configure"
+    ],
+    "started_at": "2026-10-07T23:04:10.095800+00:00",
+    "finished_at": "2026-10-07T23:04:21.067802+00:00",
+    "exit": 1,
+    "stdout": "Preset CMake variables:\n\n  BUILD_TESTING=\"ON\"\n  CMAKE_BUILD_TYPE=\"Debug\"\n  CMAKE_CXX_COMPILER=\"g++\"\n  SYSPANE_PROFILE=\"linux-x64-gcc13\"\n\nprofile verified: linux-x64-gcc13\nvendored dependency digests: pass\ndiagnostic toolkit verified: GTK 3.24.41 / Ubuntu 3.24.41-4ubuntu1.3\nnative text dependency identity verified: 358 files\nnative image dependencies verified: 344 files\nnative GJS clock build dependencies verified\n-- Configuring done (6.7s)\n-- Generating done (0.1s)\n CMake Error at CMakeLists.txt:409 (add_test):\n  Error evaluating generator expression:\n\n    $<TARGET_FILE:SysPane.ConfigProbe>\n\n  No target \"SysPane.ConfigProbe\"\n\n\nCMake Generate step failed.  Build files cannot be regenerated correctly.\n\nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-visibility-admission/linux-x64-gcc13-configure-70e51defe1\n",
+    "stderr": ""
+  }
+]

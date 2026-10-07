@@ -1,0 +1,110 @@
+[
+  {
+    "step": "configure",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-07T23:04:32.804636+00:00",
+    "finished_at": "2026-10-07T23:04:33.733943+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2304020857,\n  \"linux_campaign_bytes\": 4787717663,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "configure",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/visibility_admission_step.py",
+      "linux-x64-gcc13",
+      "configure"
+    ],
+    "started_at": "2026-10-07T23:04:33.734595+00:00",
+    "finished_at": "2026-10-07T23:04:43.863643+00:00",
+    "exit": 0,
+    "stdout": "Preset CMake variables:\n\n  BUILD_TESTING=\"ON\"\n  CMAKE_BUILD_TYPE=\"Debug\"\n  CMAKE_CXX_COMPILER=\"g++\"\n  SYSPANE_PROFILE=\"linux-x64-gcc13\"\n\nprofile verified: linux-x64-gcc13\nvendored dependency digests: pass\ndiagnostic toolkit verified: GTK 3.24.41 / Ubuntu 3.24.41-4ubuntu1.3\nnative text dependency identity verified: 358 files\nnative image dependencies verified: 344 files\nnative GJS clock build dependencies verified\n-- Configuring done (6.0s)\n-- Generating done (0.1s)\n-- Build files have been written to: /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-visibility-admission/linux-x64-gcc13-configure-f604e2e5d0\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-07T23:04:43.864002+00:00",
+    "finished_at": "2026-10-07T23:04:44.543217+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2305701869,\n  \"linux_campaign_bytes\": 4787719130,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/visibility_admission_step.py",
+      "linux-x64-gcc13",
+      "build"
+    ],
+    "started_at": "2026-10-07T23:04:44.543504+00:00",
+    "finished_at": "2026-10-07T23:05:49.450463+00:00",
+    "exit": 0,
+    "stdout": "etworkProbe\n[36/97] Building CXX object CMakeFiles/syspane_demand_sessions.dir/source/runtime/demand_sessions.cpp.o\n[37/97] Linking CXX static library libsyspane_demand_sessions.a\n[38/97] Linking CXX shared library libsyspane_gjs_clock.so\n[39/97] Building CXX object CMakeFiles/syspane_editor_form.dir/source/interfaces/editor_layout_form_linux.cpp.o\n[40/97] Linking CXX static library libsyspane_editor_form.a\n[41/97] Linking CXX executable SysPane.RecoveryProbe\n[42/97] Building CXX object CMakeFiles/syspane_ipc_probe.dir/source/application/ipc_probe.cpp.o\n[43/97] Linking CXX executable SysPane.IpcProbe\n[44/97] Building CXX object CMakeFiles/syspane_telemetry_probe.dir/source/application/telemetry_probe.cpp.o\n[45/97] Linking CXX executable SysPane.TelemetryProbe\n[46/97] Building CXX object CMakeFiles/syspane_collector_probe.dir/source/application/collector_probe.cpp.o\n[47/97] Linking CXX executable SysPane.CollectorProbe\n[48/97] Building CXX object CMakeFiles/syspane_large_command_tests.dir/tests/configuration/large_command_tests.cpp.o\n[49/97] Linking CXX executable syspane_large_command_tests\n[50/97] Building CXX object CMakeFiles/syspane_editor_tests.dir/tests/editor/editor_draft_tests.cpp.o\n[51/97] Building CXX object CMakeFiles/syspane_editor_tests.dir/tests/editor/arrange_tests.cpp.o\n[52/97] Building CXX object CMakeFiles/syspane_editor_tests.dir/tests/editor/group_tests.cpp.o\n[53/97] Building CXX object CMakeFiles/syspane_editor_tests.dir/tests/editor/snap_tests.cpp.o\n[54/97] Building CXX object CMakeFiles/syspane_editor_tests.dir/tests/editor/content_properties_tests.cpp.o\n[55/97] Building CXX object CMakeFiles/syspane_editor_tests.dir/tests/editor/binding_authoring_tests.cpp.o\n[56/97] Building CXX object CMakeFiles/syspane_editor_tests.dir/tests/editor/widget_creation_tests.cpp.o\n[57/97] Building CXX object CMakeFiles/syspane_editor_tests.dir/tests/editor/layout_authoring_tests.cpp.o\n[58/97] Building CXX object CMakeFiles/syspane_editor_tests.dir/tests/editor/container_tests.cpp.o\n[59/97] Building CXX object CMakeFiles/syspane_editor_tests.dir/tests/editor/edit_lock_tests.cpp.o\n[60/97] Building CXX object CMakeFiles/syspane_settings_tests.dir/tests/configuration/settings_draft_tests.cpp.o\n[61/97] Building CXX object CMakeFiles/syspane_editor_tests.dir/tests/editor/visibility_admission_tests.cpp.o\n[62/97] Building CXX object CMakeFiles/syspane_settings_tests.dir/tests/configuration/settings_content_tests.cpp.o\n[63/97] Linking CXX executable syspane_settings_tests\n[64/97] Linking CXX executable syspane_editor_tests\n[65/97] Building CXX object CMakeFiles/syspane_authored_tests.dir/tests/configuration/authored_tests.cpp.o\n[66/97] Building CXX object CMakeFiles/syspane_authored_tests.dir/tests/configuration/content_tests.cpp.o\n[67/97] Linking CXX executable syspane_scene_inspector_tests\n[68/97] Building CXX object CMakeFiles/syspane_authored_tests.dir/tests/configuration/scene_content_tests.cpp.o\n[69/97] Linking CXX executable syspane_authored_tests\n[70/97] Linking CXX executable syspane_image_job_tests\n[71/97] Linking CXX executable syspane_scene_tests\n[72/97] Building CXX object CMakeFiles/syspane_settings_window.dir/tests/configuration/settings_window.cpp.o\n[73/97] Linking CXX executable syspane_settings_window\n[74/97] Linking CXX executable syspane_health_tests\n[75/97] Building CXX object CMakeFiles/syspane_editor_window.dir/tests/editor/editor_window.cpp.o\n[76/97] Building CXX object CMakeFiles/syspane_command_session_tests.dir/tests/configuration/command_session_tests.cpp.o\n[77/97] Linking CXX executable syspane_command_session_tests\n[78/97] Building CXX object CMakeFiles/syspane_protocol_tests.dir/tests/protocol/protocol_tests.cpp.o\n[79/97] Building CXX object CMakeFiles/syspane_scene_surface_tests.dir/tests/scene/surface_tests.cpp.o\n[80/97] Linking CXX executable syspane_editor_window\n[81/97] Linking CXX executable syspane_protocol_tests\n[82/97] Linking CXX executable syspane_diagnostic_tests\n[83/97] Linking CXX executable syspane_telemetry_tests\n[84/97] Linking CXX executable syspane_data_view_tests\n[85/97] Linking CXX executable syspane_state_import_tests\n[86/97] Linking CXX executable syspane_scene_surface_tests\n[87/97] Linking CXX executable syspane_demand_tests\n[88/97] Linking CXX executable syspane_network_view_tests\n[89/97] Linking CXX executable syspane_network_publication_tests\n[90/97] Linking CXX executable syspane_preservation_tests\n[91/97] Linking CXX executable syspane_failure_store_tests\n[92/97] Building CXX object CMakeFiles/syspane_subscription_tests.dir/tests/protocol/subscription_tests.cpp.o\n[93/97] Linking CXX executable syspane_subscription_tests\n[94/97] Building CXX object CMakeFiles/syspane_demand_session_tests.dir/tests/fault/demand_session_tests.cpp.o\n[95/97] Linking CXX executable syspane_demand_session_tests\n[96/97] Building CXX object CMakeFiles/syspane_measured_time_tests.dir/tests/fault/measured_time_tests.cpp.o\n[97/97] Linking CXX executable syspane_measured_time_tests\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-visibility-admission/linux-x64-gcc13-build-8cfe220ec3\n",
+    "stderr": ""
+  },
+  {
+    "step": "test",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-07T23:05:49.450851+00:00",
+    "finished_at": "2026-10-07T23:05:50.132659+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2307394742,\n  \"linux_campaign_bytes\": 4811011642,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "test",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/visibility_admission_step.py",
+      "linux-x64-gcc13",
+      "test"
+    ],
+    "started_at": "2026-10-07T23:05:50.133000+00:00",
+    "finished_at": "2026-10-07T23:06:08.743810+00:00",
+    "exit": 0,
+    "stdout": " 0.27 sec\n      Start  82: editor.VIS-DURABLE\n21/59 Test  #82: editor.VIS-DURABLE ......................   Passed    0.19 sec\n      Start 202: configuration.COMMAND-COMMIT\n22/59 Test #202: configuration.COMMAND-COMMIT ............   Passed    0.07 sec\n      Start 203: configuration.COMMAND-CANCEL\n23/59 Test #203: configuration.COMMAND-CANCEL ............   Passed    0.06 sec\n      Start 204: configuration.COMMAND-POLICY\n24/59 Test #204: configuration.COMMAND-POLICY ............   Passed    0.06 sec\n      Start 205: configuration.COMMAND-LIFETIME\n25/59 Test #205: configuration.COMMAND-LIFETIME ..........   Passed    0.03 sec\n      Start 206: configuration.COMMAND-CAPACITY\n26/59 Test #206: configuration.COMMAND-CAPACITY ..........   Passed    1.09 sec\n      Start 207: configuration.COMMAND-FAULT\n27/59 Test #207: configuration.COMMAND-FAULT .............   Passed    0.06 sec\n      Start 208: configuration.COMMAND-NEGOTIATE\n28/59 Test #208: configuration.COMMAND-NEGOTIATE .........   Passed    0.02 sec\n      Start 209: configuration.RECON-RECEIPTS\n29/59 Test #209: configuration.RECON-RECEIPTS ............   Passed    0.04 sec\n      Start 210: configuration.RECON-POLICY\n30/59 Test #210: configuration.RECON-POLICY ..............   Passed    0.03 sec\n      Start 211: configuration.RECON-CODEC\n31/59 Test #211: configuration.RECON-CODEC ...............   Passed    0.00 sec\n      Start 212: configuration.RECON-BOUNDS\n32/59 Test #212: configuration.RECON-BOUNDS ..............   Passed    0.07 sec\n      Start 213: configuration.SCENE-CONTENT-SCHEMA\n33/59 Test #213: configuration.SCENE-CONTENT-SCHEMA ......   Passed    0.12 sec\n      Start 214: configuration.SCENE-CONTENT-MIGRATION\n34/59 Test #214: configuration.SCENE-CONTENT-MIGRATION ...   Passed    0.02 sec\n      Start 215: configuration.SCENE-CONTENT-RESOURCES\n35/59 Test #215: configuration.SCENE-CONTENT-RESOURCES ...   Passed    0.14 sec\n      Start 216: configuration.SCENE-CONTENT-PREVIEW\n36/59 Test #216: configuration.SCENE-CONTENT-PREVIEW .....   Passed    0.06 sec\n      Start 217: configuration.SCENE-CONTENT-TX\n37/59 Test #217: configuration.SCENE-CONTENT-TX ..........   Passed    0.15 sec\n      Start 218: configuration.SCENE-CONTENT-SESSION\n38/59 Test #218: configuration.SCENE-CONTENT-SESSION .....   Passed    0.12 sec\n      Start 219: configuration.AUTH-SCHEMA\n39/59 Test #219: configuration.AUTH-SCHEMA ...............   Passed    0.05 sec\n      Start 220: configuration.TX-MIXED\n40/59 Test #220: configuration.TX-MIXED ..................   Passed    0.03 sec\n      Start 221: configuration.TX-CONFLICT\n41/59 Test #221: configuration.TX-CONFLICT ...............   Passed    0.03 sec\n      Start 222: configuration.TX-REPLAY\n42/59 Test #222: configuration.TX-REPLAY .................   Passed    0.04 sec\n      Start 223: configuration.TX-INTERRUPT\n43/59 Test #223: configuration.TX-INTERRUPT ..............   Passed    0.07 sec\n      Start 224: configuration.TX-BOUNDS\n44/59 Test #224: configuration.TX-BOUNDS .................   Passed    0.05 sec\n      Start 225: configuration.TX-CAPACITY\n45/59 Test #225: configuration.TX-CAPACITY ...............   Passed    1.16 sec\n      Start 226: configuration.DIGEST\n46/59 Test #226: configuration.DIGEST ....................   Passed    0.02 sec\n      Start 227: configuration.DIGEST-CONTENT\n47/59 Test #227: configuration.DIGEST-CONTENT ............   Passed    0.62 sec\n      Start 228: configuration.CONTENT-COMPOSE\n48/59 Test #228: configuration.CONTENT-COMPOSE ...........   Passed    0.06 sec\n      Start 229: configuration.CONTENT-PINS\n49/59 Test #229: configuration.CONTENT-PINS ..............   Passed    0.11 sec\n      Start 230: configuration.CONTENT-PATHS\n50/59 Test #230: configuration.CONTENT-PATHS .............   Passed    0.01 sec\n      Start 231: configuration.CONTENT-BOUNDS\n51/59 Test #231: configuration.CONTENT-BOUNDS ............   Passed    0.09 sec\n      Start 232: configuration.CONTENT-CAPABILITIES\n52/59 Test #232: configuration.CONTENT-CAPABILITIES ......   Passed    0.08 sec\n      Start 233: configuration.CONTENT-POLICY\n53/59 Test #233: configuration.CONTENT-POLICY ............   Passed    0.11 sec\n      Start 234: configuration.RESOURCE-COMMIT\n54/59 Test #234: configuration.RESOURCE-COMMIT ...........   Passed    0.15 sec\n      Start 235: configuration.RESOURCE-GUARDS\n55/59 Test #235: configuration.RESOURCE-GUARDS ...........   Passed    0.19 sec\n      Start 236: configuration.RESOURCE-SESSION\n56/59 Test #236: configuration.RESOURCE-SESSION ..........   Passed    0.09 sec\n      Start 237: configuration.RESOURCE-RETAINED\n57/59 Test #237: configuration.RESOURCE-RETAINED .........   Passed    0.22 sec\n      Start 274: composition.graph\n58/59 Test #274: composition.graph .......................   Passed    0.11 sec\n      Start 275: composition.reject_forbidden\n59/59 Test #275: composition.reject_forbidden ............   Passed    0.23 sec\n\n100% tests passed, 0 tests failed out of 59\n\nTotal Test time (real) =  14.45 sec\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-visibility-admission/linux-x64-gcc13-test-4fce460a00\n",
+    "stderr": ""
+  }
+]

@@ -58,6 +58,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Native scene editing and independent exit](w-10-native-editor.md) — Connect the shared draft to real native pixels, input, transactions and recovery.
 - [Native observation error and focus boundary](w-10-native-observation.md) — Distinguish inaccessible observations from actual absent state without weakening native acceptance.
 - [Deterministic pointer snapping and visible alignment guides](w-10-snap.md) — Close bounded grid and guide projection through existing editor gestures and typed edits.
+- [Versioned visibility authoring and durable admission](w-10-visibility-admission.md) — Preserve conditional scene meaning through typed edits, negotiation and coherent recovery.
 - [Native creation of every scene primitive](w-10-widget-creation.md) — Create bounded authored widgets through existing resource, draft and transaction owners.
 - [Native settings drafts and transaction results](w-11-native-settings.md) — Connect every initial settings descriptor to native controls and the common authored transaction boundary.
 - [Native scene inspector navigation and disclosure](w-11-scene-inspector.md) — Expose scene semantics through native controls with identity-stable navigation and current inspector authority.

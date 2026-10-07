@@ -1778,10 +1778,26 @@ comparison with an explicit unit. The callback receives only a VisibilityCode
 inside the existing policy-bound borrow; retain no operational decision or payload
 and do not reenter DataView. Only shown/hidden are successful evaluations. Every
 other outcome requires explicit unresolved handling by the future native owner.
-Existing scene/command versions do not admit this property.
+Scene 0.4 and older and command 0.6 and older do not admit this property.
 
 After ordinary workspace preflight/configure/build, run `ctest --preset <profile>
 -R '^(scene[.](VISIBILITY-|BIND-)|composition[.])' --output-on-failure`, then the
 affected ordinary non-native suite. The fixed inputs are
 `tests/scene/visibility-cases.json`; the [handoff](../../spec/delivery/visibility-handoff.md)
 records actual runs and the remaining native admission gates.
+
+The [visibility admission package](../../spec/delivery/packages/w-10-visibility-admission.md)
+adds scene 0.5/command 0.7 to the existing validators, resource provider, transaction
+ledger and editor. SetWidgetVisibility accepts distinct target IDs and an optional
+visibility document; absence means Clear. Do not advertise renderer support from
+authored resource capability. The current SceneSurface rejects this version with
+surface.visibility_unavailable after the existing policy checks.
+
+After the ordinary workspace preflight/configure/build, run `ctest --preset
+<profile> -R '^(editor[.](VIS-|LOCK-)|configuration[.]|composition[.])'
+--output-on-failure` and the full non-native suite. On the owned non-root ext4 Linux
+profile, native.VISIBILITY-ADMISSION invokes the bounded ConfigProbe visibility-commit
+laboratory mode. It installs nothing and does not enable a native visibility UI.
+Regress native storage/IPC, SCENE-SURFACE, SCENE-INSPECTOR-MODEL, EDITOR-LOCKS and
+EDITOR-CONTAINERS. Exact input examples live in tests/editor/visibility-admission-cases.json;
+the [handoff](../../spec/delivery/visibility-admission-handoff.md) binds executed evidence.

@@ -7,11 +7,17 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
-The [conditional-visibility evaluator](spec/delivery/visibility-handoff.md) now
+The [visibility-admission checkpoint](spec/delivery/visibility-admission-handoff.md)
+adds scene 0.5, negotiated command 0.7, protected typed edits and exact durable
+recovery. Conditional scenes explicitly report an unavailable renderer until native
+composition and controls enforce the rules. This is a component checkpoint; the
+five complete editions and their release qualification remain open.
+
+The earlier [conditional-visibility evaluator](spec/delivery/visibility-handoff.md) now
 compares policy-bound singleton values with exact numeric and unit semantics.
 Missing, stale, denied and disconnected inputs remain explicit unresolved outcomes.
-Versioned scene admission and native controls/rendering are the next required
-integration; this checkpoint does not enable conditional widgets yet.
+Native controls/rendering remain required after the authored admission above;
+the evaluator alone does not enable conditional widgets.
 
 The [image-validation checkpoint](spec/delivery/runtime-observation-handoff.md)
 reduces measured validation cost from about 34 ms to 5 ms while retaining every

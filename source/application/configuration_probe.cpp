@@ -16,7 +16,7 @@ std::string read(const char* path,std::size_t maximum=262144){std::ifstream inpu
     const auto end=value.find_last_not_of(" \r\n\t");if(end==std::string::npos)throw syspane::protocol::Error("probe.empty");value.resize(end+1);return value;}
 int main(int argc,char** argv){try{
     if(argc<3||argc>69||::geteuid()==0)throw syspane::protocol::Error("probe.arguments");
-    const std::string mode=argv[2];const std::string fault=(argc==5&&mode=="commit")||(argc>=6&&mode=="content-commit")?argv[4]:"";
+    const std::string mode=argv[2];const std::string fault=(argc==5&&mode=="commit")||(argc>=6&&(mode=="content-commit"||mode=="visibility-commit"))?argv[4]:"";
     bool revoked=false;
     os::LinuxGenerationStore store(argv[1],[&](const char* step){if(fault==step){std::cout<<Json{{"transition",step}}.dump()<<std::endl;std::raise(SIGSTOP);}
         if(fault=="revoke"&&std::string(step)=="selector_ready")revoked=true;
@@ -24,13 +24,15 @@ int main(int argc,char** argv){try{
     if(mode=="init"&&argc==5){store.initialize({syspane::protocol::parse(read(argv[3])),syspane::protocol::parse(read(argv[4]))});}
     else if(mode=="hold"&&argc==3){std::cout<<"{\"locked\":true}"<<std::endl;std::this_thread::sleep_for(std::chrono::seconds(10));return 0;}
     else if(mode=="read"&&argc==3){}
-    else if(mode=="content-commit"&&argc>=6){
+    else if((mode=="content-commit"||mode=="visibility-commit")&&argc>=6){
         std::vector<std::string> packages;for(int i=5;i<argc;++i)packages.emplace_back(argv[i]);
         c::ResourceProvider provider{{"scene.selector","scene.content"},[&](const c::Authored& candidate,const Json& selection){
             return c::ContentCatalog(os::read_content_packages(packages)).resources(selection,candidate);}};
+        if(mode=="visibility-commit")provider.capabilities.insert({"scene.edit-locks","scene.visibility"});
         c::Transactions tx(store,"E1",std::move(provider));c::Policy policy;policy.available=true;policy.revision=7;
         if(fault=="deny")policy.denied_capabilities.insert("scene.selector");
         if(fault=="deny-content")policy.denied_capabilities.insert("scene.content");
+        if(fault=="deny-visibility")policy.denied_capabilities.insert("configuration.visibility");
         std::cout<<Json{{"result",tx.submit("fixture:principal","fixture:connection",read(argv[3],syspane::protocol::large_command_limit),{true,"console",{"console"}},[&]{auto current=policy;if(revoked)current.revision=8;return current;},0)}}.dump()<<std::endl;return 0;
     }else if(mode=="commit"&&(argc==4||argc==5)){
         c::Transactions tx(store,"E1",[](const c::Authored& v){if(v.settings["display"]["theme_id"]!="theme:native"||

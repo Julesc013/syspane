@@ -57,12 +57,18 @@ Json SettingsDraft::command(const std::string& intent,const std::string& request
     if(scene_changed)ops.push_back({{"op","scene.replace"},{"scene",draft_->scene}});
     Json result={{"schema_version",large_commands_?"0.5.0":context_?(scene_changed&&draft_->scene["schema_version"]!="0.2.0"?"0.4.0":"0.3.0"):"0.2.0"},{"request_id",request},{"expected_revision",base_->settings["revision"]},{"policy_generation",std::to_string(policy_.revision)},{"intent",intent},{"operations",std::move(ops)}};
     if(context_)result["content"]=context_->selection;
+    if(scene_changed&&draft_->scene["schema_version"]=="0.5.0"){need(large_commands_&&context_&&context_->capabilities.count("configuration.visibility")&&context_->capabilities.count("configuration.edit-locks"),"settings.visibility");result["schema_version"]="0.7.0";}
     if(scene_changed&&draft_->scene["schema_version"]=="0.4.0"){need(large_commands_&&context_&&context_->capabilities.count("configuration.edit-locks"),"settings.edit_locks");result["schema_version"]="0.6.0";}
     return result;
 }
 void SettingsDraft::replace_scene(Json scene){
     editable();auto next=*draft_;next.scene=std::move(scene);c::validate_authored(next);
-    Json check={{"schema_version",context_?"0.4.0":"0.2.0"},{"request_id","draft.scene"},{"expected_revision",base_->settings["revision"]},
+    if(next.scene["schema_version"]=="0.5.0"||draft_->scene["schema_version"]=="0.5.0"){
+        need(large_commands_&&context_,"settings.visibility");
+        for(const char* cap:{"configuration.visibility","configuration.edit-locks","scene.visibility","scene.edit-locks"})
+            need(context_->capabilities.count(cap)&&!policy_.denied_capabilities.count(cap),"policy.denied");
+    }
+    Json check={{"schema_version",next.scene["schema_version"]=="0.5.0"||draft_->scene["schema_version"]=="0.5.0"?"0.7.0":context_?"0.4.0":"0.2.0"},{"request_id","draft.scene"},{"expected_revision",base_->settings["revision"]},
         {"policy_generation",std::to_string(policy_.revision)},{"intent","preview"},{"operations",Json::array({{{"op","scene.replace"},{"scene",next.scene}}})}};
     if(context_)check["content"]=context_->selection;
     // Local previews can exceed the wire envelope. begin() validates that limit

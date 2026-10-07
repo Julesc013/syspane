@@ -7,6 +7,7 @@ namespace c=syspane::configuration;namespace p=syspane::protocol;namespace ui=sy
 void run_arrange(const std::string&,const std::string&);
 void run_container(const std::string&,const std::string&);
 void run_edit_lock(const std::string&,const std::string&);
+void run_visibility_admission(const std::string&,const std::string&);
 void run_layout_authoring(const std::string&,const std::string&);
 void run_widget_creation(const std::string&,const std::string&);
 void run_binding_authoring(const std::string&,const std::string&);
@@ -53,6 +54,7 @@ void run(const std::string& name,const std::string& root){
     if(name.substr(0,8)=="ARRANGE-"){run_arrange(name.substr(8),root);return;}
     if(name.substr(0,5)=="SNAP-"){run_snap(name.substr(5),root);return;}
     if(name.substr(0,6)=="GROUP-"){run_group(name.substr(6),root);return;}
+    if(name.substr(0,4)=="VIS-"){run_visibility_admission(name.substr(4),root);return;}
     if(name.substr(0,5)=="LOCK-"){run_edit_lock(name.substr(5),root);return;}
     if(name.substr(0,10)=="CONTAINER-"){run_container(name.substr(10),root);return;}
     if(name.substr(0,7)=="LAYOUT-"){run_layout_authoring(name.substr(7),root);return;}

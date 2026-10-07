@@ -89,3 +89,10 @@ uses only the current generation's complete resource closure for an identical
 selection. New selections resolve from the configured import catalog alone.
 Retained resources enable new edits after restart without the original import
 directory; they do not bypass current policy, read-only fallback or activation.
+
+The [visibility admission checkpoint](../delivery/visibility-admission-handoff.md)
+extends the existing manifest 0.3/request.json path to command 0.7. It records
+owned ext4 process cuts at request, selector_ready, selected and durable, coherent
+40/41 recovery, exact original-body replay, cross-epoch reconciliation, revoked
+policy and corrupt request/scene fallback. These results cover authored durability,
+not renderer activation, hardware power loss or other filesystem/OS qualification.

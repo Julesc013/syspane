@@ -1,0 +1,541 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.example.invalid/syspane/0.5.0/scene.schema.json",
+  "title": "SysPane authored visibility scene 0.5.0",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "0.5.0"
+    },
+    "revision": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]{0,19})$"
+    },
+    "scene_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+    },
+    "theme_id": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "roots": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 256,
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+      },
+      "minItems": 0,
+      "maxItems": 256,
+      "uniqueItems": true
+    },
+    "widgets": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/widget"
+      },
+      "minItems": 0,
+      "maxItems": 256
+    },
+    "extensions": {
+      "type": "object",
+      "maxProperties": 64,
+      "propertyNames": {
+        "pattern": "^[a-z][a-z0-9_.-]{0,127}$"
+      }
+    }
+  },
+  "required": [
+    "schema_version",
+    "revision",
+    "scene_id",
+    "theme_id",
+    "roots",
+    "widgets"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "widget": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+        },
+        "kind": {
+          "enum": [
+            "text",
+            "value",
+            "table",
+            "chart",
+            "status",
+            "group",
+            "image"
+          ]
+        },
+        "title": {
+          "type": "string",
+          "maxLength": 512
+        },
+        "display": {
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "role": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 256,
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+                }
+              },
+              "required": [
+                "role"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "local_id": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 256,
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+                }
+              },
+              "required": [
+                "local_id"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "layout": {
+          "$ref": "https://schemas.example.invalid/syspane/0.1.0/layout.schema.json"
+        },
+        "bindings": {
+          "type": "array",
+          "items": {
+            "$ref": "https://schemas.example.invalid/syspane/0.1.0/binding.schema.json"
+          },
+          "minItems": 0,
+          "maxItems": 256
+        },
+        "priority": {
+          "enum": [
+            "essential",
+            "normal",
+            "secondary"
+          ]
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+          },
+          "minItems": 0,
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "extensions": {
+          "type": "object",
+          "maxProperties": 64,
+          "propertyNames": {
+            "pattern": "^[a-z][a-z0-9_.-]{0,127}$"
+          }
+        },
+        "content": {
+          "type": "object"
+        },
+        "edit_locked": {
+          "type": "boolean",
+          "description": "Own editing lock; missing/false is unlocked. Group locks apply to descendants. Not an authorization or disclosure rule."
+        },
+        "visibility": {
+          "$ref": "https://schemas.example.invalid/syspane/0.1.0/visibility.schema.json"
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "title",
+        "display",
+        "layout",
+        "bindings",
+        "priority",
+        "content"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "group"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "children"
+            ]
+          },
+          "else": {
+            "not": {
+              "required": [
+                "children"
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "text"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "content": {
+                "type": "object",
+                "properties": {
+                  "body": {
+                    "type": "string",
+                    "minLength": 0,
+                    "maxLength": 1024
+                  }
+                },
+                "required": [
+                  "body"
+                ],
+                "additionalProperties": false
+              },
+              "bindings": {
+                "minItems": 0,
+                "maxItems": 0
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "value"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "content": {
+                "type": "object",
+                "properties": {},
+                "required": [],
+                "additionalProperties": false
+              },
+              "bindings": {
+                "minItems": 1,
+                "maxItems": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "status"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "content": {
+                "type": "object",
+                "properties": {},
+                "required": [],
+                "additionalProperties": false
+              },
+              "bindings": {
+                "minItems": 1,
+                "maxItems": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "group"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "content": {
+                "type": "object",
+                "properties": {},
+                "required": [],
+                "additionalProperties": false
+              },
+              "bindings": {
+                "minItems": 0,
+                "maxItems": 0
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "table"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "content": {
+                "type": "object",
+                "properties": {
+                  "columns": {
+                    "type": "array",
+                    "minItems": 1,
+                    "maxItems": 256,
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "label": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 128
+                        }
+                      },
+                      "required": [
+                        "label"
+                      ],
+                      "additionalProperties": false
+                    }
+                  }
+                },
+                "required": [
+                  "columns"
+                ],
+                "additionalProperties": false
+              },
+              "bindings": {
+                "minItems": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "chart"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "content": {
+                "type": "object",
+                "properties": {
+                  "window_ms": {
+                    "type": "integer",
+                    "minimum": 1000,
+                    "maximum": 3600000
+                  },
+                  "max_points": {
+                    "type": "integer",
+                    "minimum": 2,
+                    "maximum": 4096
+                  },
+                  "interpolation": {
+                    "enum": [
+                      "linear",
+                      "step"
+                    ]
+                  },
+                  "axis": {
+                    "oneOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "mode": {
+                            "const": "auto"
+                          },
+                          "include_zero": {
+                            "type": "boolean"
+                          }
+                        },
+                        "required": [
+                          "mode",
+                          "include_zero"
+                        ],
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "mode": {
+                            "const": "fixed"
+                          },
+                          "minimum": {
+                            "type": "number"
+                          },
+                          "maximum": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "mode",
+                          "minimum",
+                          "maximum"
+                        ],
+                        "additionalProperties": false
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "window_ms",
+                  "max_points",
+                  "interpolation",
+                  "axis"
+                ],
+                "additionalProperties": false
+              },
+              "bindings": {
+                "minItems": 1,
+                "maxItems": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "image"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "content": {
+                "type": "object",
+                "properties": {
+                  "asset": {
+                    "type": "object",
+                    "properties": {
+                      "package": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 256,
+                            "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+                          },
+                          "version": {
+                            "type": "string",
+                            "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[A-Za-z0-9.-]+)?$",
+                            "maxLength": 64
+                          },
+                          "sha256": {
+                            "type": "string",
+                            "pattern": "^[0-9a-f]{64}$"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "version",
+                          "sha256"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "path": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 512,
+                        "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*[\\\\:])[A-Za-z0-9_. /-]+$"
+                      },
+                      "sha256": {
+                        "type": "string",
+                        "pattern": "^[0-9a-f]{64}$"
+                      }
+                    },
+                    "required": [
+                      "package",
+                      "path",
+                      "sha256"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "alt": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 1024
+                  },
+                  "width_dip": {
+                    "type": "number",
+                    "minimum": 1,
+                    "maximum": 4096
+                  },
+                  "height_dip": {
+                    "type": "number",
+                    "minimum": 1,
+                    "maximum": 4096
+                  },
+                  "fit": {
+                    "enum": [
+                      "contain",
+                      "cover",
+                      "stretch"
+                    ]
+                  }
+                },
+                "required": [
+                  "asset",
+                  "alt",
+                  "width_dip",
+                  "height_dip",
+                  "fit"
+                ],
+                "additionalProperties": false
+              },
+              "bindings": {
+                "minItems": 0,
+                "maxItems": 0
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}
