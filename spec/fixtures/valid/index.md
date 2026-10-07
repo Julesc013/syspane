@@ -52,3 +52,4 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [telemetry-unsubscribe.json](telemetry-unsubscribe.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [theme.json](theme.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [transaction-watch.json](transaction-watch.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
+- [visibility-counter.json](visibility-counter.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.

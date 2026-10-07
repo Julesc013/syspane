@@ -1,0 +1,470 @@
+{
+  "comparisons": [
+    {
+      "id": "equal-eq",
+      "kind": "uint64",
+      "observed": "3",
+      "unit": "byte",
+      "op": "eq",
+      "literal": 3,
+      "literal_unit": "byte",
+      "expected": "shown"
+    },
+    {
+      "id": "equal-ne",
+      "kind": "uint64",
+      "observed": "3",
+      "unit": "byte",
+      "op": "ne",
+      "literal": 3,
+      "literal_unit": "byte",
+      "expected": "hidden"
+    },
+    {
+      "id": "equal-lt",
+      "kind": "uint64",
+      "observed": "3",
+      "unit": "byte",
+      "op": "lt",
+      "literal": 3,
+      "literal_unit": "byte",
+      "expected": "hidden"
+    },
+    {
+      "id": "equal-le",
+      "kind": "uint64",
+      "observed": "3",
+      "unit": "byte",
+      "op": "le",
+      "literal": 3,
+      "literal_unit": "byte",
+      "expected": "shown"
+    },
+    {
+      "id": "equal-gt",
+      "kind": "uint64",
+      "observed": "3",
+      "unit": "byte",
+      "op": "gt",
+      "literal": 3,
+      "literal_unit": "byte",
+      "expected": "hidden"
+    },
+    {
+      "id": "equal-ge",
+      "kind": "uint64",
+      "observed": "3",
+      "unit": "byte",
+      "op": "ge",
+      "literal": 3,
+      "literal_unit": "byte",
+      "expected": "shown"
+    },
+    {
+      "id": "below-eq",
+      "kind": "uint64",
+      "observed": "3",
+      "unit": "byte",
+      "op": "eq",
+      "literal": 4,
+      "literal_unit": "byte",
+      "expected": "hidden"
+    },
+    {
+      "id": "below-ne",
+      "kind": "uint64",
+      "observed": "3",
+      "unit": "byte",
+      "op": "ne",
+      "literal": 4,
+      "literal_unit": "byte",
+      "expected": "shown"
+    },
+    {
+      "id": "below-lt",
+      "kind": "uint64",
+      "observed": "3",
+      "unit": "byte",
+      "op": "lt",
+      "literal": 4,
+      "literal_unit": "byte",
+      "expected": "shown"
+    },
+    {
+      "id": "below-le",
+      "kind": "uint64",
+      "observed": "3",
+      "unit": "byte",
+      "op": "le",
+      "literal": 4,
+      "literal_unit": "byte",
+      "expected": "shown"
+    },
+    {
+      "id": "below-gt",
+      "kind": "uint64",
+      "observed": "3",
+      "unit": "byte",
+      "op": "gt",
+      "literal": 4,
+      "literal_unit": "byte",
+      "expected": "hidden"
+    },
+    {
+      "id": "below-ge",
+      "kind": "uint64",
+      "observed": "3",
+      "unit": "byte",
+      "op": "ge",
+      "literal": 4,
+      "literal_unit": "byte",
+      "expected": "hidden"
+    },
+    {
+      "id": "above-2p53",
+      "kind": "uint64",
+      "observed": "9007199254740993",
+      "unit": "1",
+      "op": "gt",
+      "literal": 9007199254740992.0,
+      "literal_unit": "1",
+      "expected": "shown"
+    },
+    {
+      "id": "no-rounded-equality",
+      "kind": "uint64",
+      "observed": "9007199254740993",
+      "unit": "1",
+      "op": "eq",
+      "literal": 9007199254740992.0,
+      "literal_unit": "1",
+      "expected": "hidden"
+    },
+    {
+      "id": "uint64-max-exact",
+      "kind": "uint64",
+      "observed": "18446744073709551615",
+      "unit": "1",
+      "op": "eq",
+      "literal": 18446744073709551615,
+      "literal_unit": "1",
+      "expected": "shown"
+    },
+    {
+      "id": "uint64-max-below-double-2p64",
+      "kind": "uint64",
+      "observed": "18446744073709551615",
+      "unit": "1",
+      "op": "lt",
+      "literal": 1.8446744073709552e+19,
+      "literal_unit": "1",
+      "expected": "shown"
+    },
+    {
+      "id": "uint64-above-negative",
+      "kind": "uint64",
+      "observed": "0",
+      "unit": "1",
+      "op": "gt",
+      "literal": -9223372036854775808,
+      "literal_unit": "1",
+      "expected": "shown"
+    },
+    {
+      "id": "double-below-uint64-max",
+      "kind": "number",
+      "observed": 1.844674407370955e+19,
+      "unit": "1",
+      "op": "lt",
+      "literal": 18446744073709551615,
+      "literal_unit": "1",
+      "expected": "shown"
+    },
+    {
+      "id": "double-2p64-above-max",
+      "kind": "number",
+      "observed": 1.8446744073709552e+19,
+      "unit": "1",
+      "op": "gt",
+      "literal": 18446744073709551615,
+      "literal_unit": "1",
+      "expected": "shown"
+    },
+    {
+      "id": "negative-signed-min",
+      "kind": "number",
+      "observed": -9.223372036854776e+18,
+      "unit": "1",
+      "op": "eq",
+      "literal": -9223372036854775808,
+      "literal_unit": "1",
+      "expected": "shown"
+    },
+    {
+      "id": "negative-rounded-int",
+      "kind": "number",
+      "observed": -9007199254740992.0,
+      "unit": "1",
+      "op": "gt",
+      "literal": -9007199254740993,
+      "literal_unit": "1",
+      "expected": "shown"
+    },
+    {
+      "id": "fraction",
+      "kind": "number",
+      "observed": 3.5,
+      "unit": "1",
+      "op": "gt",
+      "literal": 3,
+      "literal_unit": "1",
+      "expected": "shown"
+    },
+    {
+      "id": "negative-fraction",
+      "kind": "number",
+      "observed": -3.5,
+      "unit": "1",
+      "op": "lt",
+      "literal": -3,
+      "literal_unit": "1",
+      "expected": "shown"
+    },
+    {
+      "id": "negative-zero",
+      "kind": "number",
+      "observed": -0.0,
+      "unit": "1",
+      "op": "eq",
+      "literal": 0,
+      "literal_unit": "1",
+      "expected": "shown"
+    },
+    {
+      "id": "minimum-positive-double",
+      "kind": "number",
+      "observed": 5e-324,
+      "unit": "1",
+      "op": "gt",
+      "literal": 0,
+      "literal_unit": "1",
+      "expected": "shown"
+    },
+    {
+      "id": "maximum-double",
+      "kind": "number",
+      "observed": 1.7976931348623157e+308,
+      "unit": "1",
+      "op": "gt",
+      "literal": 18446744073709551615,
+      "literal_unit": "1",
+      "expected": "shown"
+    },
+    {
+      "id": "boolean-true",
+      "kind": "boolean",
+      "observed": true,
+      "unit": "1",
+      "op": "eq",
+      "literal": true,
+      "literal_unit": "1",
+      "expected": "shown"
+    },
+    {
+      "id": "boolean-false",
+      "kind": "boolean",
+      "observed": false,
+      "unit": "1",
+      "op": "ne",
+      "literal": true,
+      "literal_unit": "1",
+      "expected": "shown"
+    },
+    {
+      "id": "no-bool-number-coercion",
+      "kind": "boolean",
+      "observed": true,
+      "unit": "1",
+      "op": "ne",
+      "literal": 1,
+      "literal_unit": "1",
+      "expected": "type_mismatch"
+    },
+    {
+      "id": "no-string-number-coercion",
+      "kind": "string",
+      "observed": "3",
+      "unit": "1",
+      "op": "ne",
+      "literal": 3,
+      "literal_unit": "1",
+      "expected": "type_mismatch"
+    },
+    {
+      "id": "no-number-string-coercion",
+      "kind": "uint64",
+      "observed": "3",
+      "unit": "1",
+      "op": "ne",
+      "literal": "3",
+      "literal_unit": "1",
+      "expected": "type_mismatch"
+    },
+    {
+      "id": "no-number-bool-coercion",
+      "kind": "uint64",
+      "observed": "1",
+      "unit": "1",
+      "op": "ne",
+      "literal": true,
+      "literal_unit": "1",
+      "expected": "type_mismatch"
+    },
+    {
+      "id": "unicode",
+      "kind": "string",
+      "observed": "漢字\n😀",
+      "unit": "1",
+      "op": "eq",
+      "literal": "漢字\n😀",
+      "literal_unit": "1",
+      "expected": "shown"
+    },
+    {
+      "id": "no-normalization",
+      "kind": "string",
+      "observed": "é",
+      "unit": "1",
+      "op": "eq",
+      "literal": "é",
+      "literal_unit": "1",
+      "expected": "hidden"
+    },
+    {
+      "id": "no-case-fold",
+      "kind": "string",
+      "observed": "Alpha",
+      "unit": "1",
+      "op": "eq",
+      "literal": "alpha",
+      "literal_unit": "1",
+      "expected": "hidden"
+    },
+    {
+      "id": "empty-text",
+      "kind": "string",
+      "observed": "",
+      "unit": "1",
+      "op": "eq",
+      "literal": "",
+      "literal_unit": "1",
+      "expected": "shown"
+    },
+    {
+      "id": "unit-mismatch",
+      "kind": "uint64",
+      "observed": "3",
+      "unit": "byte",
+      "op": "eq",
+      "literal": 3,
+      "literal_unit": "bit",
+      "expected": "unit_mismatch"
+    },
+    {
+      "id": "no-unit-conversion",
+      "kind": "number",
+      "observed": 1000.0,
+      "unit": "byte",
+      "op": "eq",
+      "literal": 1,
+      "literal_unit": "kbyte",
+      "expected": "unit_mismatch"
+    }
+  ],
+  "states": [
+    {
+      "id": "current",
+      "expected": "shown"
+    },
+    {
+      "id": "denied",
+      "expected": "denied"
+    },
+    {
+      "id": "unsupported",
+      "expected": "unsupported"
+    },
+    {
+      "id": "failed-retained",
+      "expected": "unavailable"
+    },
+    {
+      "id": "pending-retained",
+      "expected": "unavailable"
+    },
+    {
+      "id": "disabled",
+      "expected": "unavailable"
+    },
+    {
+      "id": "absent",
+      "expected": "unavailable"
+    },
+    {
+      "id": "support-unknown",
+      "expected": "unavailable"
+    },
+    {
+      "id": "no-value",
+      "expected": "unavailable"
+    },
+    {
+      "id": "stale",
+      "expected": "stale"
+    },
+    {
+      "id": "clock-missing",
+      "expected": "pending"
+    },
+    {
+      "id": "expired",
+      "expected": "lease_lost"
+    },
+    {
+      "id": "disconnected",
+      "expected": "lease_lost"
+    },
+    {
+      "id": "clock-missing-retained",
+      "expected": "lease_lost"
+    },
+    {
+      "id": "missing-field",
+      "expected": "pending"
+    },
+    {
+      "id": "unsupported-field",
+      "expected": "unsupported"
+    },
+    {
+      "id": "missing-entity",
+      "expected": "empty"
+    },
+    {
+      "id": "ambiguous",
+      "expected": "ambiguous"
+    },
+    {
+      "id": "revoked",
+      "expected": "denied"
+    },
+    {
+      "id": "regranted",
+      "expected": "pending"
+    },
+    {
+      "id": "no-snapshot",
+      "expected": "pending"
+    }
+  ]
+}

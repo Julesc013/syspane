@@ -91,3 +91,13 @@ optional edit_locked. A group lock is inherited during editing; it changes neith
 rendering nor disclosure. The [lock package](../delivery/packages/w-10-edit-locks.md)
 defines explicit promotion, unlock, protected operations and capability admission.
 Older consumers must reject unsupported versions without dropping flags.
+
+## Conditional visibility prerequisite
+
+The [visibility package](../delivery/packages/w-09-visibility.md) defines one bounded
+comparison over a current policy-bound singleton, exact numeric/unit behavior and
+explicit unresolved outcomes. The standalone [visibility schema](../contracts/visibility.schema.json)
+and shared evaluator are a prerequisite, not an extension to existing scenes.
+Versioned scene/command admission, native status/group composition and editor
+controls remain required before enablement. The [handoff](../delivery/visibility-handoff.md)
+records current execution scope.

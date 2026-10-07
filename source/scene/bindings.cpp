@@ -1,4 +1,5 @@
 #include "bindings.hpp"
+#include "value_compare.hpp"
 #include <algorithm>
 #include <array>
 #include <cmath>
@@ -33,30 +34,8 @@ void validate(const std::vector<BindingInput>& inputs,const BindingLimits& limit
         }
     }
 }
-struct Number { bool negative=false,real=false;std::uint64_t integer=0;double fraction=0; };
-Number number(const model::Value& v){
-    if(const auto* n=std::get_if<std::uint64_t>(&v))return {false,false,*n,0};
-    const auto n=std::get<double>(v);return {n<0,true,0,std::abs(n)};
-}
-Number number(const Json& v){
-    if(v.is_number_unsigned())return {false,false,v.get<std::uint64_t>(),0};
-    if(v.is_number_integer()){const auto n=v.get<std::int64_t>();return {n<0,false,n<0?static_cast<std::uint64_t>(-(n+1))+1:static_cast<std::uint64_t>(n),0};}
-    const auto n=v.get<double>();return {n<0,true,0,std::abs(n)};
-}
-int compare_unsigned_real(std::uint64_t a,double b){
-    if(b>=18446744073709551616.0)return -1;
-    const auto whole=static_cast<std::uint64_t>(b);
-    if(a!=whole)return a<whole?-1:1;
-    return b>static_cast<double>(whole)?-1:0;
-}
-int compare(Number a,Number b){
-    if(a.negative!=b.negative)return a.negative?-1:1;
-    int result=0;
-    if(a.real&&b.real)result=a.fraction==b.fraction?0:(a.fraction<b.fraction?-1:1);
-    else if(!a.real&&!b.real)result=a.integer==b.integer?0:(a.integer<b.integer?-1:1);
-    else result=a.real?-compare_unsigned_real(b.integer,a.fraction):compare_unsigned_real(a.integer,b.fraction);
-    return a.negative?-result:result;
-}
+using detail::number;
+using detail::compare;
 struct Datum {
     const model::Value* value=nullptr;const std::string* text=nullptr;
     const model::Observation* observation=nullptr;

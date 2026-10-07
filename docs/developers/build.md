@@ -1770,3 +1770,18 @@ The earlier run exceeded its 64 MiB reservation; its failure is preserved.
 The [handoff](../../spec/delivery/runtime-observation-handoff.md) records measured
 validation cost, exact artifacts, six native query trials and remaining unexplained
 accessibility timeouts. Successful unchanged queries do not establish a repair.
+
+The [visibility evaluator](../../spec/delivery/packages/w-09-visibility.md) provides
+`scene::project_visibility(rule, inputs, now_ms, sink, limits)` through syspane_scene.
+The visibility 0.1 rule uses the existing singleton binding grammar and one typed
+comparison with an explicit unit. The callback receives only a VisibilityCode
+inside the existing policy-bound borrow; retain no operational decision or payload
+and do not reenter DataView. Only shown/hidden are successful evaluations. Every
+other outcome requires explicit unresolved handling by the future native owner.
+Existing scene/command versions do not admit this property.
+
+After ordinary workspace preflight/configure/build, run `ctest --preset <profile>
+-R '^(scene[.](VISIBILITY-|BIND-)|composition[.])' --output-on-failure`, then the
+affected ordinary non-native suite. The fixed inputs are
+`tests/scene/visibility-cases.json`; the [handoff](../../spec/delivery/visibility-handoff.md)
+records actual runs and the remaining native admission gates.

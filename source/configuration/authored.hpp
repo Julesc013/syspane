@@ -15,6 +15,7 @@ void validate_scene_document(const Json& value);
 // Copies supported legacy content without guessing chart/image semantics.
 Json upgrade_scene_content(const Json& value);
 void validate_binding_document(const Json& value);
+void validate_visibility_document(const Json& value);
 std::uint64_t authored_revision(const Authored& value);
 Authored prepare_authored(const Authored& current,const Json& command,const Authority& authority,const Policy& policy);
 // Validate current policy and authorization again just before native publication.

@@ -13,7 +13,7 @@ void require(bool value,const char* code){if(!value)throw Error(code);}
 const std::map<std::string,Json>& schemas(){
     static const std::map<std::string,Json> value=[] {
         std::map<std::string,Json> result;
-        for(const char* text:{settings_schema,scene_v0_2_schema,scene_v0_3_schema,scene_v0_4_schema,layout_schema,binding_schema,command_v0_2_schema,command_v0_3_schema,command_v0_4_schema,command_v0_5_schema,command_v0_6_schema,command_result_schema,content_package_schema,content_catalog_schema,preset_schema,theme_schema}){
+        for(const char* text:{settings_schema,scene_v0_2_schema,scene_v0_3_schema,scene_v0_4_schema,layout_schema,binding_schema,visibility_schema,command_v0_2_schema,command_v0_3_schema,command_v0_4_schema,command_v0_5_schema,command_v0_6_schema,command_result_schema,content_package_schema,content_catalog_schema,preset_schema,theme_schema}){
             auto item=Json::parse(text);result.emplace(item["$id"].get<std::string>(),std::move(item));
         }
         return result;
@@ -162,6 +162,7 @@ Json upgrade_scene_content(const Json& value){
     validate_scene_document(next);return next;
 }
 void validate_binding_document(const Json& value){structural(value,"0.1.0/binding",262144);}
+void validate_visibility_document(const Json& value){structural(value,"0.1.0/visibility",65536);}
 void validate_authored(const Authored& value){
     structural(value.settings,"0.1.0/settings",16384);validate_scene_document(value.scene);
     require(revision(value.settings["revision"])==revision(value.scene["revision"]),"authored.mixed_revision");

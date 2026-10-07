@@ -12,12 +12,18 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-07T22:23:18.128931+00:00", "scope": "Image validation optimization and unresolved native observations"}
+updated: {"by": "codex", "at": "2026-10-07T22:51:02.675487+00:00", "scope": "Shared conditional visibility; native admission remains open"}
 ---
 
 # Current state and next admitted boundary
 
-The latest [image-validation checkpoint](runtime-observation-handoff.md) reduces
+The [conditional-visibility evaluator](visibility-handoff.md) now
+compares policy-bound singleton values with exact numeric and unit semantics.
+Missing, stale, denied and disconnected inputs remain explicit unresolved outcomes.
+Versioned scene admission and native controls/rendering are the next required
+integration; this checkpoint does not enable conditional widgets yet.
+
+The earlier [image-validation checkpoint](runtime-observation-handoff.md) reduces
 complete validation cost from about 34 ms to 5 ms in the development profile.
 Original image timing, exact pixels, worker lifetime and erasure checks now pass;
 new first/middle/last rejection examples were verified before implementation.
@@ -687,13 +693,14 @@ traces remain unexecuted.
 
 ## Not implemented or qualified
 
-No product controller, renderer, complete collector, settings/editor, saver, SDK,
-setup adapter or complete product package exists. The independent diagnostic
-executable/inspector, with explicit policy-gated private preservation, is implemented on the two development profiles. No native desktop/saver/performance/
-accessibility/setup qualification ran. Test definitions stay `not_run`; concepts stay
-draft/unreviewed and experimental contracts stay experimental. AIDE's binding remains
-inactive with no grants. USK and ScreenSave are not adopted runtime dependencies.
-License, contribution and release-identity decisions remain open.
+No complete installed desktop edition or qualified release package exists. The
+component implementations and native experiments above have scoped executable
+evidence; they do not establish full desktop, saver, performance, accessibility or
+setup qualification. Inspect each acceptance definition and its linked evidence
+for execution status. Concepts remain draft/unreviewed and experimental contracts
+remain experimental. AIDE's binding remains inactive with no grants. USK and
+ScreenSave are not adopted runtime dependencies. License, contribution and
+release-identity decisions remain open.
 
 ## Next work
 

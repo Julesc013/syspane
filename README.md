@@ -7,6 +7,12 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
+The [conditional-visibility evaluator](spec/delivery/visibility-handoff.md) now
+compares policy-bound singleton values with exact numeric and unit semantics.
+Missing, stale, denied and disconnected inputs remain explicit unresolved outcomes.
+Versioned scene admission and native controls/rendering are the next required
+integration; this checkpoint does not enable conditional widgets yet.
+
 The [image-validation checkpoint](spec/delivery/runtime-observation-handoff.md)
 reduces measured validation cost from about 34 ms to 5 ms while retaining every
 pixel check. All affected development and native rendering checks pass. The earlier

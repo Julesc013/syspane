@@ -1,0 +1,98 @@
+[
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-07T22:47:35.084196+00:00",
+    "finished_at": "2026-10-07T22:47:35.770201+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2295561795,\n  \"linux_campaign_bytes\": 4787920759,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "out/campaign/visibility_step.py",
+      "windows-x64-gcc15",
+      "build"
+    ],
+    "started_at": "2026-10-07T22:47:35.770599+00:00",
+    "finished_at": "2026-10-07T22:47:42.421566+00:00",
+    "exit": 0,
+    "stdout": "[1/6] Building CXX object CMakeFiles/syspane_scene.dir/source/scene/visibility.cpp.obj\n[2/6] Linking CXX static library libsyspane_scene.a\n[3/6] Linking CXX executable syspane_large_command_tests.exe\n[4/6] Linking CXX executable syspane_editor_tests.exe\n[5/6] Building CXX object CMakeFiles/syspane_scene_tests.dir/tests/scene/visibility_tests.cpp.obj\n[6/6] Linking CXX executable syspane_scene_tests.exe\n \nAttempt: D:\\Projects\\SysPane\\syspane\\out\\campaign\\w-09-visibility\\windows-x64-gcc15-build-24d38292dc\n",
+    "stderr": ""
+  },
+  {
+    "step": "test",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-07T22:47:42.421854+00:00",
+    "finished_at": "2026-10-07T22:47:43.142489+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2297221662,\n  \"linux_campaign_bytes\": 4787920759,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "test",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "out/campaign/visibility_step.py",
+      "windows-x64-gcc15",
+      "test"
+    ],
+    "started_at": "2026-10-07T22:47:43.142779+00:00",
+    "finished_at": "2026-10-07T22:47:44.945035+00:00",
+    "exit": 0,
+    "stdout": "Test project D:/Projects/SysPane/syspane/out/build/windows-x64-gcc15\n      Start  92: scene.VISIBILITY-COMPARE\n 1/24 Test  #92: scene.VISIBILITY-COMPARE .........   Passed    0.45 sec\n      Start  93: scene.VISIBILITY-STATES\n 2/24 Test  #93: scene.VISIBILITY-STATES ..........   Passed    0.05 sec\n      Start  94: scene.VISIBILITY-LIFECYCLE\n 3/24 Test  #94: scene.VISIBILITY-LIFECYCLE .......   Passed    0.03 sec\n      Start  95: scene.VISIBILITY-LIMITS\n 4/24 Test  #95: scene.VISIBILITY-LIMITS ..........   Passed    0.03 sec\n      Start  96: scene.VISIBILITY-GRAMMAR\n 5/24 Test  #96: scene.VISIBILITY-GRAMMAR .........   Passed    0.04 sec\n      Start 116: scene.BIND-ORDER\n 6/24 Test #116: scene.BIND-ORDER .................   Passed    0.03 sec\n      Start 117: scene.BIND-SCOPE\n 7/24 Test #117: scene.BIND-SCOPE .................   Passed    0.03 sec\n      Start 118: scene.BIND-DIRECT\n 8/24 Test #118: scene.BIND-DIRECT ................   Passed    0.03 sec\n      Start 119: scene.BIND-PINS\n 9/24 Test #119: scene.BIND-PINS ..................   Passed    0.03 sec\n      Start 120: scene.BIND-NUMERIC\n10/24 Test #120: scene.BIND-NUMERIC ...............   Passed    0.03 sec\n      Start 121: scene.BIND-UNKNOWN\n11/24 Test #121: scene.BIND-UNKNOWN ...............   Passed    0.03 sec\n      Start 122: scene.BIND-MISSING\n12/24 Test #122: scene.BIND-MISSING ...............   Passed    0.03 sec\n      Start 123: scene.BIND-FRESHNESS\n13/24 Test #123: scene.BIND-FRESHNESS .............   Passed    0.03 sec\n      Start 124: scene.BIND-AXES\n14/24 Test #124: scene.BIND-AXES ..................   Passed    0.03 sec\n      Start 125: scene.BIND-POLICY\n15/24 Test #125: scene.BIND-POLICY ................   Passed    0.03 sec\n      Start 126: scene.BIND-BOUNDS\n16/24 Test #126: scene.BIND-BOUNDS ................   Passed    0.03 sec\n      Start 127: scene.BIND-LIFETIME\n17/24 Test #127: scene.BIND-LIFETIME ..............   Passed    0.03 sec\n      Start 128: scene.BIND-INVALID\n18/24 Test #128: scene.BIND-INVALID ...............   Passed    0.03 sec\n      Start 129: scene.BIND-MULTISOURCE\n19/24 Test #129: scene.BIND-MULTISOURCE ...........   Passed    0.02 sec\n      Start 130: scene.BIND-RESTART\n20/24 Test #130: scene.BIND-RESTART ...............   Passed    0.03 sec\n      Start 131: scene.BIND-REAL-SORT\n21/24 Test #131: scene.BIND-REAL-SORT .............   Passed    0.03 sec\n      Start 132: scene.BIND-COLLECTION-BOUND\n22/24 Test #132: scene.BIND-COLLECTION-BOUND ......   Passed    0.11 sec\n      Start 224: composition.graph\n23/24 Test #224: composition.graph ................   Passed    0.05 sec\n      Start 225: composition.reject_forbidden\n24/24 Test #225: composition.reject_forbidden .....   Passed    0.05 sec\n\n100% tests passed, 0 tests failed out of 24\n\nTotal Test time (real) =   1.27 sec\n \nAttempt: D:\\Projects\\SysPane\\syspane\\out\\campaign\\w-09-visibility\\windows-x64-gcc15-test-592ea902ef\n",
+    "stderr": ""
+  },
+  {
+    "step": "portable",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-07T22:47:44.945350+00:00",
+    "finished_at": "2026-10-07T22:47:45.628946+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2298668181,\n  \"linux_campaign_bytes\": 4787920759,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "portable",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "out/campaign/visibility_step.py",
+      "windows-x64-gcc15",
+      "portable"
+    ],
+    "started_at": "2026-10-07T22:47:45.629282+00:00",
+    "finished_at": "2026-10-07T22:48:24.003373+00:00",
+    "exit": 0,
+    "stdout": " ..................   Passed    0.02 sec\n        Start 276: demand.DEMAND-PLANS\n276/314 Test #276: demand.DEMAND-PLANS .....................   Passed    0.02 sec\n        Start 277: demand.DEMAND-BOUNDS\n277/314 Test #277: demand.DEMAND-BOUNDS ....................   Passed    0.02 sec\n        Start 278: demand.DEMAND-CLOCK\n278/314 Test #278: demand.DEMAND-CLOCK .....................   Passed    0.02 sec\n        Start 279: presentation.NVIEW-VALUES\n279/314 Test #279: presentation.NVIEW-VALUES ...............   Passed    0.03 sec\n        Start 280: presentation.NVIEW-FORMAT\n280/314 Test #280: presentation.NVIEW-FORMAT ...............   Passed    0.11 sec\n        Start 281: presentation.NVIEW-STATES\n281/314 Test #281: presentation.NVIEW-STATES ...............   Passed    0.02 sec\n        Start 282: presentation.NVIEW-SELECTION\n282/314 Test #282: presentation.NVIEW-SELECTION ............   Passed    0.02 sec\n        Start 283: presentation.NVIEW-BOUNDS\n283/314 Test #283: presentation.NVIEW-BOUNDS ...............   Passed    0.03 sec\n        Start 284: presentation.NVIEW-LIFETIME\n284/314 Test #284: presentation.NVIEW-LIFETIME .............   Passed    0.02 sec\n        Start 285: network.PUBLICATION-VALUES\n285/314 Test #285: network.PUBLICATION-VALUES ..............   Passed    0.02 sec\n        Start 286: network.PUBLICATION-FAILURE\n286/314 Test #286: network.PUBLICATION-FAILURE .............   Passed    0.02 sec\n        Start 287: network.PUBLICATION-BOUNDARY\n287/314 Test #287: network.PUBLICATION-BOUNDARY ............   Passed    0.02 sec\n        Start 288: network.RECONCILE-IDENTITY\n288/314 Test #288: network.RECONCILE-IDENTITY ..............   Passed    0.02 sec\n        Start 289: network.RECONCILE-CLOCK-RATE\n289/314 Test #289: network.RECONCILE-CLOCK-RATE ............   Passed    0.02 sec\n        Start 290: network.RECONCILE-CANCEL-FAILURE\n290/314 Test #290: network.RECONCILE-CANCEL-FAILURE ........   Passed    0.02 sec\n        Start 291: network.RECONCILE-CAPACITY\n291/314 Test #291: network.RECONCILE-CAPACITY ..............   Passed    0.02 sec\n        Start 292: measured.MEASURED-CODEC\n292/314 Test #292: measured.MEASURED-CODEC .................   Passed    0.03 sec\n        Start 293: measured.MEASURED-AGE\n293/314 Test #293: measured.MEASURED-AGE ...................   Passed    0.03 sec\n        Start 294: measured.MEASURED-REPLAY\n294/314 Test #294: measured.MEASURED-REPLAY ................   Passed    0.03 sec\n        Start 295: measured.MEASURED-LIFETIME\n295/314 Test #295: measured.MEASURED-LIFETIME ..............   Passed    0.02 sec\n        Start 296: measured.MEASURED-SESSION\n296/314 Test #296: measured.MEASURED-SESSION ...............   Passed    0.02 sec\n        Start 297: import.IMPORT-STATE\n297/314 Test #297: import.IMPORT-STATE .....................   Passed    0.03 sec\n        Start 298: import.IMPORT-RETAIN\n298/314 Test #298: import.IMPORT-RETAIN ....................   Passed    0.03 sec\n        Start 299: import.IMPORT-COVERAGE\n299/314 Test #299: import.IMPORT-COVERAGE ..................   Passed    0.02 sec\n        Start 300: import.IMPORT-REPLAY\n300/314 Test #300: import.IMPORT-REPLAY ....................   Passed    0.02 sec\n        Start 301: import.IMPORT-TIME\n301/314 Test #301: import.IMPORT-TIME ......................   Passed    0.02 sec\n        Start 302: import.IMPORT-LIFETIME\n302/314 Test #302: import.IMPORT-LIFETIME ..................   Passed    0.02 sec\n        Start 303: data.VIEW-ATOMIC\n303/314 Test #303: data.VIEW-ATOMIC ........................   Passed    0.02 sec\n        Start 304: data.VIEW-REPLAY\n304/314 Test #304: data.VIEW-REPLAY ........................   Passed    0.02 sec\n        Start 305: data.VIEW-RECONNECT\n305/314 Test #305: data.VIEW-RECONNECT .....................   Passed    0.02 sec\n        Start 306: data.VIEW-LEASE\n306/314 Test #306: data.VIEW-LEASE .........................   Passed    0.02 sec\n        Start 307: data.VIEW-POLICY\n307/314 Test #307: data.VIEW-POLICY ........................   Passed    0.02 sec\n        Start 308: data.VIEW-FAULT\n308/314 Test #308: data.VIEW-FAULT .........................   Passed    0.02 sec\n        Start 309: diagnostic.DIAG-POLICY\n309/314 Test #309: diagnostic.DIAG-POLICY ..................   Passed    0.03 sec\n        Start 310: diagnostic.DIAG-PROJECTION\n310/314 Test #310: diagnostic.DIAG-PROJECTION ..............   Passed    0.02 sec\n        Start 311: diagnostic.FAILURE-CODEC\n311/314 Test #311: diagnostic.FAILURE-CODEC ................   Passed    0.02 sec\n        Start 312: diagnostic.FAILURE-INTERRUPT\n312/314 Test #312: diagnostic.FAILURE-INTERRUPT ............   Passed    0.02 sec\n        Start 313: diagnostic.FAILURE-PROJECTION\n313/314 Test #313: diagnostic.FAILURE-PROJECTION ...........   Passed    0.02 sec\n        Start 314: diagnostic.PRESERVE-POLICY\n314/314 Test #314: diagnostic.PRESERVE-POLICY ..............   Passed    0.02 sec\n\n100% tests passed, 0 tests failed out of 314\n\nTotal Test time (real) =  37.79 sec\n \nAttempt: D:\\Projects\\SysPane\\syspane\\out\\campaign\\w-09-visibility\\windows-x64-gcc15-portable-4d28ef88e2\n",
+    "stderr": ""
+  }
+]

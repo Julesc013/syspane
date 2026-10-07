@@ -489,7 +489,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "b81c8a8e8d294631e10ea6beed65ce1ad89af9dff26bb4b64ff1388b92986ed8"
+      "sha256": "3ab0fb1ac12ee143863532ce8c1a8ed27e91b90b1742e02b675ee4096dcfbf3f"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -1607,6 +1607,18 @@
       "sha256": "7fb876ed52e3b865800726c35fff7f3349c8841c1a50f4a444f24d6479782ca3"
     },
     {
+      "id": "SP-W09-VISIBILITY",
+      "path": "delivery/packages/w-09-visibility.md",
+      "title": "Policy-bound conditional visibility",
+      "description": "Close conditional visibility semantics before scene and native authoring admission.",
+      "requires": [
+        "SP-W09-BINDINGS",
+        "SP-W10-EDIT-LOCKS",
+        "SP-RUNTIME-OBSERVATION-HANDOFF"
+      ],
+      "sha256": "46de2bbfd439d0692cc61c5fab917e747bb09b16e689fac61ffe5984124b1d3c"
+    },
+    {
       "id": "SP-W10-ARRANGE",
       "path": "delivery/packages/w-10-arrange.md",
       "title": "Deterministic native alignment and spacing",
@@ -2416,6 +2428,17 @@
       "sha256": "99ee6d276ecf61b6baf9da7e7c710aefb8d29f90bc79d5e39d7e7d2ed9e01900"
     },
     {
+      "id": "SP-VISIBILITY-HANDOFF",
+      "path": "delivery/visibility-handoff.md",
+      "title": "Conditional visibility evaluator checkpoint",
+      "description": "Exact policy-bound comparison with explicit unresolved states and open native admission.",
+      "requires": [
+        "SP-W09-VISIBILITY",
+        "SP-RUNTIME-OBSERVATION-HANDOFF"
+      ],
+      "sha256": "128460930d6ad5307c6ae2dc67f1335b417a44fedd8e00be3b1efda6cdaefa21"
+    },
+    {
       "id": "SP-WIDGET-CREATION-HANDOFF",
       "path": "delivery/widget-creation-handoff.md",
       "title": "Native widget-creation checkpoint",
@@ -2585,7 +2608,7 @@
         "SP-RENDERING",
         "SP-COMMANDS"
       ],
-      "sha256": "59e5638f4d20559003e4628d9430a3aa0568b7c43769afe042f730d7eec72f2d"
+      "sha256": "77862ed33d02b6d89ea312dae6b5508f5d5950ec57dd6a6f43e059b77d2e09df"
     },
     {
       "id": "SP-POLICY",
@@ -2618,7 +2641,7 @@
         "SP-SCENE",
         "SP-STATE"
       ],
-      "sha256": "a714cfbf592a95e5c44aae3f342d555147be1a689ebe8253b30aa99c8ac35044"
+      "sha256": "84dfb1dc31a8e851439b53d127fc2f1ff89792516cdb5868d81b6b346b2fcb06"
     },
     {
       "id": "SP-SCENE",

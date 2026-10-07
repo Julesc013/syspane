@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.example.invalid/syspane/0.1.0/visibility.schema.json",
+  "title": "SysPane visibility comparison experimental 0.1.0",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "binding": {
+      "$ref": "https://schemas.example.invalid/syspane/0.1.0/binding.schema.json",
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "selector"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "mode": {
+            "const": "singleton"
+          },
+          "limit": {
+            "const": 1
+          }
+        }
+      }
+    },
+    "op": {
+      "enum": [
+        "eq",
+        "ne",
+        "lt",
+        "le",
+        "gt",
+        "ge"
+      ]
+    },
+    "value": {
+      "type": [
+        "number",
+        "boolean",
+        "string"
+      ],
+      "maxLength": 512
+    },
+    "unit": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^[A-Za-z0-9_./%:*^-]+$"
+    }
+  },
+  "required": [
+    "schema_version",
+    "binding",
+    "op",
+    "value",
+    "unit"
+  ],
+  "additionalProperties": false,
+  "if": {
+    "properties": {
+      "value": {
+        "type": [
+          "string",
+          "boolean"
+        ]
+      }
+    }
+  },
+  "then": {
+    "properties": {
+      "op": {
+        "enum": [
+          "eq",
+          "ne"
+        ]
+      },
+      "unit": {
+        "const": "1"
+      }
+    }
+  }
+}

@@ -76,12 +76,14 @@ void exclusions(const Json& input){
     }
 }
 int binding_test(const std::string& name);
+int visibility_test(const std::string& name,const std::string& root);
 int chart_plot_test(const std::string& name,const std::string& root);
 int image_fit_test(const std::string& name,const std::string& root);
 int chart_history_test(const std::string& name);
 int main(int argc,char** argv){try{
     check(argc==3,"arguments");const std::string name=argv[1],root=argv[2];
     if(name.rfind("BIND-",0)==0)return binding_test(name);
+    if(name.rfind("VISIBILITY-",0)==0)return visibility_test(name,root);
     if(name.rfind("PLOT-",0)==0)return chart_plot_test(name,root);
     if(name.rfind("IMAGE-",0)==0)return image_fit_test(name,root);
     if(name.rfind("CHART-",0)==0)return chart_history_test(name);

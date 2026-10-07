@@ -825,6 +825,41 @@
       "expected": "invalid",
       "semantic": false,
       "reason": "Persistent edit-lock version, type and compatibility boundary."
+    },
+    {
+      "path": "fixtures/valid/visibility-counter.json",
+      "schema": "visibility",
+      "expected": "valid",
+      "semantic": false,
+      "reason": "Exact singleton comparison."
+    },
+    {
+      "path": "fixtures/invalid/visibility-collection.json",
+      "schema": "visibility",
+      "expected": "invalid",
+      "semantic": false,
+      "reason": "A one-row collection is still not a singleton condition."
+    },
+    {
+      "path": "fixtures/invalid/visibility-string-order.json",
+      "schema": "visibility",
+      "expected": "invalid",
+      "semantic": false,
+      "reason": "Text ordering is not admitted."
+    },
+    {
+      "path": "fixtures/invalid/visibility-coercion.json",
+      "schema": "visibility",
+      "expected": "invalid",
+      "semantic": false,
+      "reason": "Boolean literals require dimensionless unit 1."
+    },
+    {
+      "path": "fixtures/invalid/visibility-extension.json",
+      "schema": "visibility",
+      "expected": "invalid",
+      "semantic": false,
+      "reason": "No executable or unknown property."
     }
   ]
 }

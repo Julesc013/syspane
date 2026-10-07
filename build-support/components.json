@@ -1703,15 +1703,19 @@
         "source/scene/bindings.hpp",
         "source/scene/chart_history.hpp",
         "source/scene/chart_plot.hpp",
-        "source/scene/image.hpp"
+        "source/scene/image.hpp",
+        "source/scene/visibility.hpp"
       ],
-      "private_interfaces": [],
+      "private_interfaces": [
+        "source/scene/value_compare.hpp"
+      ],
       "sources": [
         "source/scene/layout.cpp",
         "source/scene/bindings.cpp",
         "source/scene/chart_history.cpp",
         "source/scene/chart_plot.cpp",
-        "source/scene/image.cpp"
+        "source/scene/image.cpp",
+        "source/scene/visibility.cpp"
       ],
       "allowed_dependencies": [
         "syspane_authored",
@@ -1742,7 +1746,8 @@
         "tests/scene/binding_tests.cpp",
         "tests/scene/chart_history_tests.cpp",
         "tests/scene/chart_plot_tests.cpp",
-        "tests/scene/image_fit_tests.cpp"
+        "tests/scene/image_fit_tests.cpp",
+        "tests/scene/visibility_tests.cpp"
       ],
       "allowed_dependencies": [
         "syspane_scene",

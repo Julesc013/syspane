@@ -26,6 +26,9 @@ behaviour has been implemented. See [audit disposition](spec/delivery/audit-2026
 
 ## First native campaign
 
+- [x] W-09 shared conditional-visibility evaluator: bounded singleton comparisons, exact uint64/binary64 ordering, unit/type checks, current-policy borrowing and explicit unavailable outcomes. See the [handoff](spec/delivery/visibility-handoff.md).
+- [ ] W-09/W-10 conditional-visibility integration: new scene/command capability admission, coherent resource/persistence/replay, atomic editor controls, group/status composition and independent native pixels/accessibility/erasure. The evaluator alone does not complete the feature.
+
 - [x] W-08/W-10 complete-scene transport: command 0.5 negotiation and parser bounds, unchanged ledger capacity, explicit draft opt-in and manifest 0.3 request files; portable and independent native checks. See the [handoff](spec/delivery/large-commands-handoff.md).
 
 - [x] W-10 shared editor draft: typed atomic scene operations, stable selection, bounded undo/redo, local preview, exact discard and resource-aware Apply/reconciliation. See the [handoff](spec/delivery/editor-draft-handoff.md).

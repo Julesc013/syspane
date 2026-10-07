@@ -144,3 +144,11 @@ locks, protected branches, explicit unlock, exact history and negotiated durable
 submission. Keep selection and recovery paths usable. A lock guards ordinary editor
 commands; authorization, disclosure and dynamic scene resolution keep their owners.
 The [checkpoint](../delivery/edit-locks-handoff.md) records scoped validation.
+
+## Conditional visibility admission
+
+The [shared visibility package](../delivery/packages/w-09-visibility.md) closes
+single-condition evaluation and fixes the next scene/native gates. Do not place
+visibility properties into existing scenes or reinterpret unavailable as hidden.
+Native private input, reversible draft edits, negotiated persistence, mandatory
+status preservation and independent pixels/accessibility checks remain required.
