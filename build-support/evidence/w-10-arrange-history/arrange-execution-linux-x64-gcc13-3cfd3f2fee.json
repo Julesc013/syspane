@@ -1,0 +1,38 @@
+[
+  {
+    "step": "arrange",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-07T05:11:08.171890+00:00",
+    "finished_at": "2026-10-07T05:11:09.175476+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 1907144262,\n  \"linux_campaign_bytes\": 5030454935,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "arrange",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/arrange_step.py",
+      "linux-x64-gcc13",
+      "arrange"
+    ],
+    "started_at": "2026-10-07T05:11:09.176089+00:00",
+    "finished_at": "2026-10-07T05:11:24.318084+00:00",
+    "exit": 8,
+    "stdout": "Test project /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n    Start 42: native.EDITOR-ARRANGE\n1/1 Test #42: native.EDITOR-ARRANGE ............***Failed    4.27 sec\n/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/arrange-9ddb0446d01c/result.json fail\nTraceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_arrange.py\", line 103, in <module>\n    if __name__=='__main__':main()\n                            ^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_arrange.py\", line 95, in main\n    assert child.returncode==0,(mode,stderr.decode(errors='replace'));case=json.loads((folder/mode/'result.json').read_text());assert case['outcome']=='pass'\n           ^^^^^^^^^^^^^^^^^^^\nAssertionError: ('left', 'dbus-daemon[92532]: [session uid=1000 pid=92532] Activating service name=\\'org.a11y.Bus\\' requested by \\':1.0\\' (uid=1000 pid=92533 comm=\"/usr/bin/python3 /mnt/d/Projects/SysPane/syspane/t\" label=\"kernel\")\\ndbus-daemon[92532]: [session uid=1000 pid=92532] Successfully activated service \\'org.a11y.Bus\\'\\ndbus-daemon[92541]: Activating service name=\\'org.a11y.atspi.Registry\\' requested by \\':1.1\\' (uid=1000 pid=92544 comm=\"/home/ir4runner/.cache/syspane/campaign-229a498/li\" label=\"kernel\")\\ndbus-daemon[92541]: Successfully activated service \\'org.a11y.atspi.Registry\\'\\nTraceback (most recent call last):\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_arrange.py\", line 103, in <module>\\n    if __name__==\\'__main__\\':main()\\n                            ^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_arrange.py\", line 84, in main\\n    if sys.argv[1]==\\'--observe\\':observe(*map(Path,sys.argv[2:5]),sys.argv[5]);return\\n                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_arrange.py\", line 74, in observe\\n    try:exercise(h)\\n        ^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_arrange.py\", line 28, in exercise\\n    h.field(\\'title\\',\\'Buffered\\');assert not h.sensitive(\\'align-left\\');h.stage=\\'FOCUS\\';held_activation(h,\\'revert-fields\\');h.wait(lambda:h.value(\\'title\\')==\\'Editable pane\\');h.stage=\\'CONTROLS\\'\\n                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_editor.py\", line 73, in wait\\n    assert time.monotonic()<end,self.stage+\\' observation deadline\\'\\n           ^^^^^^^^^^^^^^^^^^^^\\nAssertionError: FOCUS observation deadline\\n')\n\n\n0% tests passed, 1 tests failed out of 1\n\nTotal Test time (real) =   4.27 sec\n\nThe following tests FAILED:\n\t 42 - native.EDITOR-ARRANGE (Failed)\n Errors while running CTest\n\nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-arrange/linux-x64-gcc13-arrange-4ad3af13ef\n",
+    "stderr": ""
+  }
+]

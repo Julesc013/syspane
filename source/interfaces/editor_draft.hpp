@@ -14,7 +14,11 @@ struct ReparentWidgets {std::vector<std::string> ids;std::optional<std::string> 
 struct DuplicateWidgets {std::vector<std::string> ids;std::map<std::string,std::string> mapping;};
 struct MoveWidgets {std::vector<std::string> ids;double dx,dy;};
 struct ResizeWidget {std::string id;double width,height;};
-using SceneEdit=std::variant<WidgetPropertyEdit,WidgetContentEdit,SceneThemeEdit,InsertWidget,RemoveWidgets,ReparentWidgets,DuplicateWidgets,MoveWidgets,ResizeWidget>;
+enum class Alignment {left,hcenter,right,top,vcenter,bottom};
+enum class Spacing {horizontal,vertical};
+struct AlignWidgets {std::vector<std::string> ids;Alignment alignment;};
+struct DistributeWidgets {std::vector<std::string> ids;Spacing spacing;};
+using SceneEdit=std::variant<WidgetPropertyEdit,WidgetContentEdit,SceneThemeEdit,InsertWidget,RemoveWidgets,ReparentWidgets,DuplicateWidgets,MoveWidgets,ResizeWidget,AlignWidgets,DistributeWidgets>;
 
 // One serialized native owner. Scene/selection borrows expire on every mutation,
 // policy update or close; adapters must erase their own caches on disclosure loss.

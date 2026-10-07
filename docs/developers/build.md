@@ -1,5 +1,20 @@
 # Developer setup and checks
 
+The [arrangement package](../../spec/delivery/packages/w-10-arrange.md) adds typed
+AlignWidgets and DistributeWidgets through EditorDraft::execute. Provide stable IDs;
+alignment needs two disjoint siblings and spacing needs three. Only fixed base
+origins change. Ownership order breaks spacing ties; current policy and ordinary
+atomic/history limits apply. Native hosts must check active resolved base geometry
+and native metric expansion before offering a WYSIWYG arrange operation.
+
+After ordinary workspace preflight/configure/build, run `ctest --preset <profile>
+-R '^(editor[.]|settings[.]|configuration[.]|composition[.]|protocol[.])'
+--output-on-failure`. In the declared non-root Linux workspace also run `ctest
+--preset linux-x64-gcc13 -R '^native[.](EDITOR-ARRANGE|EDITOR-FORM|LARGE-COMMANDS)$'
+--output-on-failure`. Frozen inputs are tests/editor/arrange-cases.json; native
+reports preserve independently observed pixels and stored scenes, including fault
+controls. See the [handoff](../../spec/delivery/arrange-handoff.md) for remaining gates.
+
 The [complete-scene command package](../../spec/delivery/packages/w-08-large-commands.md)
 adds command 0.5 and Linux generation manifest 0.3. Pass `large_commands=true` as the
 last `SettingsDraft`, `EditorDraft` or `EditorForm` constructor argument only after

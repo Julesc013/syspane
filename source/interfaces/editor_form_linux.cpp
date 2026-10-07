@@ -72,12 +72,18 @@ struct EditorForm::Impl {
             }
         }
         for(auto& row:fields)gtk_widget_set_sensitive(row.second,editing()&&selected&&(row.first=="title"||(row.first=="body"&&(*selected)["kind"]=="text")||((row.first!="body")&&fixed(draft.selection()[0]))));
-        for(auto& row:buttons)gtk_widget_set_sensitive(row.second,enabled);
-        gtk_widget_set_sensitive(buttons["undo"],enabled&&draft.undo_count());gtk_widget_set_sensitive(buttons["redo"],enabled&&draft.redo_count());
-        gtk_widget_set_sensitive(buttons["apply"],!fields_dirty&&draft.may_submit("commit"));gtk_widget_set_sensitive(buttons["cancel"],editing());
-        gtk_widget_set_sensitive(buttons["cancel-request"],draft.available()&&draft.active_request().has_value());gtk_widget_set_sensitive(buttons["reload"],!closed&&!draft.active_request());
-        gtk_widget_set_sensitive(buttons["properties"],editing()&&selected&&fields_dirty);gtk_widget_set_sensitive(buttons["revert-fields"],editing()&&fields_dirty);
-        gtk_widget_set_sensitive(buttons["duplicate"],enabled&&!draft.selection().empty());gtk_widget_set_sensitive(buttons["delete"],enabled&&!draft.selection().empty());
+        // Apply each final state once. Temporarily disabling an enabled button
+        // on every repaint cancels a keyboard activation held across that frame.
+        for(auto& row:buttons){const auto& id=row.first;bool active=enabled;
+            if(id=="undo")active=enabled&&draft.undo_count();else if(id=="redo")active=enabled&&draft.redo_count();
+            else if(id=="apply")active=!fields_dirty&&draft.may_submit("commit");else if(id=="cancel")active=editing();
+            else if(id=="cancel-request")active=draft.available()&&draft.active_request().has_value();else if(id=="reload")active=!closed&&!draft.active_request();
+            else if(id=="properties")active=editing()&&selected&&fields_dirty;else if(id=="revert-fields")active=editing()&&fields_dirty;
+            else if(id=="duplicate"||id=="delete")active=enabled&&!draft.selection().empty();
+            else if(id.substr(0,6)=="align-")active=enabled&&draft.selection().size()>=2;
+            else if(id.substr(0,6)=="space-")active=enabled&&draft.selection().size()>=3;
+            gtk_widget_set_sensitive(row.second,active);
+        }
         gtk_widget_set_sensitive(tree,enabled);gtk_widget_set_sensitive(canvas,enabled);
         std::string value;
         if(!draft.available())value="Editor unavailable";
@@ -123,12 +129,23 @@ struct EditorForm::Impl {
     }
     void dispatch(const std::function<void()>& f){dispatching=true;try{f();dispatching=false;}catch(...){dispatching=false;throw;}}
     void submit(){ready();const auto q=draft.begin("commit",actions.request_id());sync();if(q)try{dispatch([&]{actions.submit(*q);});}catch(...){draft.disconnected();sync();}}
+    void arrange(const std::string& id){
+        ready();gesture.reset();resolve_nodes();const auto ids=draft.selection();need(!ids.empty(),"editor.targets");const s::Node* first=nullptr;
+        for(const auto& selected_id:ids){need(fixed(selected_id),"editor.arrange_geometry");const auto* n=node(selected_id);
+            const auto& b=authored_widget(*draft.scene(),selected_id)["layout"]["base"];
+            need(n->box.width==std::ceil(b["width"].get<double>()*64)&&n->box.height==std::ceil(b["height"].get<double>()*64),"editor.arrange_geometry");
+            need(!first||(n->parent==first->parent&&n->display==first->display),"editor.arrange_scope");first=n;}
+        if(id=="space-horizontal"||id=="space-vertical")execute({DistributeWidgets{ids,id=="space-horizontal"?Spacing::horizontal:Spacing::vertical}});
+        else {static const std::map<std::string,Alignment> kinds={{"align-left",Alignment::left},{"align-hcenter",Alignment::hcenter},{"align-right",Alignment::right},
+            {"align-top",Alignment::top},{"align-vcenter",Alignment::vcenter},{"align-bottom",Alignment::bottom}};execute({AlignWidgets{ids,kinds.at(id)}});}
+    }
     void command(const std::string& id){
         if(id=="properties")properties();else if(id=="revert-fields"){fields_dirty=false;error.clear();sync(true);}
         else if(id=="apply")submit();else if(id=="reload")dispatch(actions.reload);
         else if(id=="cancel-request"){const auto q=draft.cancel_request();if(q)try{dispatch([&]{actions.cancel(*q);});}catch(...){draft.disconnected();sync();}}
         else if(id=="cancel"){draft.discard();shut();dispatch(actions.exit);}
         else if(id=="add")add();else if(id=="duplicate")duplicate();else if(id=="delete")execute({RemoveWidgets{draft.selection()}});
+        else if(id.substr(0,6)=="align-"||id.substr(0,6)=="space-")arrange(id);
         else {ready();if(id=="undo")draft.undo();else if(id=="redo")draft.redo();changed();}
     }
     void point(double x,double y,bool shift){
@@ -182,7 +199,11 @@ struct EditorForm::Impl {
         });cairo_restore(cr);sync();
     }
     void shut(){if(closed)return;closed=true;draft.close();fields_dirty=false;settings=nullptr;resources.reset();stop_preview();if(tree){list();sync(true);}}
-    template<class F> void event(F f)noexcept{try{if(!closed)f();}catch(const protocol::Error& e){gesture.reset();error=std::string(e.what())=="editor.number"?"Enter a number using digits and an optional decimal point.":"This edit could not be applied. Check the selection and property values.";message(error);gtk_widget_queue_draw(canvas);}catch(...){try{shut();}catch(...){}}}
+    template<class F> void event(F f)noexcept{try{if(!closed)f();}catch(const protocol::Error& e){gesture.reset();const std::string code=e.what();
+        error=code=="editor.number"?"Enter a number using digits and an optional decimal point.":
+            code=="editor.arrange_geometry"||code=="editor.arrange_scope"?"Arrange needs fixed widgets in the same parent and display, with no size expansion.":
+            code=="editor.spacing_overlap"?"There is not enough room for equal gaps between the endpoints.":"This edit could not be applied. Check the selection and property values.";
+        message(error);gtk_widget_queue_draw(canvas);}catch(...){try{shut();}catch(...){}}}
     ~Impl(){if(timer)g_source_remove(timer);try{shut();}catch(...){}surface.reset();if(root)gtk_widget_destroy(root);for(auto i=owned.rbegin();i!=owned.rend();++i)g_object_unref(*i);if(model)g_object_unref(model);}
 };
 EditorForm::EditorForm(c::Authority a,c::Policy p,c::Authored value,std::string epoch,SettingsResources resources,s::Topology topology,std::string display,std::vector<v::SurfaceProvider> providers,std::string worker,Actions actions,bool large_commands)
@@ -205,6 +226,9 @@ EditorForm::EditorForm(c::Authority a,c::Policy p,c::Authored value,std::string 
     }
     auto* prop=gtk_box_new(GTK_ORIENTATION_HORIZONTAL,3);gtk_box_pack_start(GTK_BOX(side),prop,FALSE,FALSE,0);button(prop,"properties","Set properties");button(prop,"revert-fields","Revert fields");
     auto* bottom=gtk_box_new(GTK_ORIENTATION_HORIZONTAL,4);gtk_box_pack_start(GTK_BOX(i.root),bottom,FALSE,FALSE,0);button(bottom,"add","Add text");button(bottom,"duplicate","Duplicate");button(bottom,"delete","Delete");
+    auto* align=gtk_box_new(GTK_ORIENTATION_HORIZONTAL,3);gtk_box_pack_start(GTK_BOX(i.root),align,FALSE,FALSE,0);
+    for(const auto& b:std::vector<std::pair<const char*,const char*>>{{"align-left","Align left"},{"align-hcenter","Center horizontally"},{"align-right","Align right"},{"align-top","Align top"},{"align-vcenter","Center vertically"},{"align-bottom","Align bottom"}})button(align,b.first,b.second);
+    button(bottom,"space-horizontal","Space horizontally");button(bottom,"space-vertical","Space vertically");
     i.status=i.label("");accessible(i.status,"","editor.status");gtk_label_set_line_wrap(GTK_LABEL(i.status),TRUE);gtk_box_pack_start(GTK_BOX(i.root),i.status,FALSE,FALSE,0);
     g_signal_connect(selection,"changed",G_CALLBACK(+[](GtkTreeSelection* selection,gpointer p){auto& o=*static_cast<Impl*>(p);if(o.updating)return;o.event([&]{std::vector<std::string> ids;GtkTreeModel* model=nullptr;auto* rows=gtk_tree_selection_get_selected_rows(selection,&model);
         for(auto* row=rows;row;row=row->next){GtkTreeIter it;if(gtk_tree_model_get_iter(model,&it,static_cast<GtkTreePath*>(row->data))){gchar* id=nullptr;gtk_tree_model_get(model,&it,0,&id,-1);ids.emplace_back(id);g_free(id);}}g_list_free_full(rows,reinterpret_cast<GDestroyNotify>(gtk_tree_path_free));o.selected(std::move(ids));});}),&i);

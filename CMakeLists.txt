@@ -270,9 +270,9 @@ if(BUILD_TESTING)
     foreach(case BOUNDS LEDGER DRAFT ASYNC NEGOTIATION)
         add_test(NAME "configuration.LARGE-${case}" COMMAND syspane_large_command_tests "${case}" "${CMAKE_SOURCE_DIR}")
     endforeach()
-    add_executable(syspane_editor_tests tests/editor/editor_draft_tests.cpp)
+    add_executable(syspane_editor_tests tests/editor/editor_draft_tests.cpp tests/editor/arrange_tests.cpp)
     target_link_libraries(syspane_editor_tests PRIVATE syspane_editor_draft)
-    foreach(case OPERATIONS ATOMIC SELECTION HISTORY TRANSACTION POLICY RECONCILE CONFLICT CANCEL BOUNDS COMPAT)
+    foreach(case OPERATIONS ATOMIC SELECTION HISTORY TRANSACTION POLICY RECONCILE CONFLICT CANCEL BOUNDS COMPAT ARRANGE-FIXED ARRANGE-ROUNDING ARRANGE-ATOMIC ARRANGE-SCOPE ARRANGE-HISTORY ARRANGE-POLICY)
         add_test(NAME "editor.${case}" COMMAND syspane_editor_tests "${case}" "${CMAKE_SOURCE_DIR}")
     endforeach()
     add_executable(syspane_settings_tests tests/configuration/settings_draft_tests.cpp tests/configuration/settings_content_tests.cpp)
@@ -292,6 +292,9 @@ if(BUILD_TESTING)
         add_test(NAME native.EDITOR-FORM COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/editor/native_editor.py"
             "$<TARGET_FILE:syspane_editor_window>" "$<TARGET_FILE:syspane_editor_exit_probe>" "${CMAKE_BINARY_DIR}/native-evidence")
         set_tests_properties(native.EDITOR-FORM PROPERTIES TIMEOUT 300)
+        add_test(NAME native.EDITOR-ARRANGE COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/editor/native_arrange.py"
+            "$<TARGET_FILE:syspane_editor_window>" "$<TARGET_FILE:syspane_editor_exit_probe>" "${CMAKE_BINARY_DIR}/native-evidence")
+        set_tests_properties(native.EDITOR-ARRANGE PROPERTIES TIMEOUT 300)
         add_test(NAME native.LARGE-COMMANDS COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/configuration/native_large_commands.py"
             "$<TARGET_FILE:syspane_command_probe>" "$<TARGET_FILE:syspane_configuration_probe>" "$<TARGET_FILE:syspane_editor_window>"
             "$<TARGET_FILE:syspane_editor_exit_probe>" "${CMAKE_BINARY_DIR}/native-evidence")

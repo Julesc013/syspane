@@ -25,6 +25,12 @@ Selection follows scene-object identity, not row number or transient telemetry. 
 
 ## Operations
 
+The [fixed-base arrangement package](../delivery/packages/w-10-arrange.md) defines
+exact alignment/spacing arithmetic, scope, rejection and native geometry checks.
+It is part of W-10; remaining responsive authoring and other operations below stay
+required. Shared draft submission also supports explicitly negotiated command 0.5
+under the [complete-scene contract](../delivery/packages/w-08-large-commands.md).
+
 Support add/remove, drag/resize, multi-selection, keyboard movement, snap/grid/guides, align/distribute, group/ungroup, duplicate, copy/paste, lock, monitor assignment, data binding, column choice, chart choice, typography, theme and conditional visibility. Each operation is a typed command; the editor has no private mutation path.
 
 Property panels provide precise numeric entry and accessible alternatives to gestures. Common operations are possible directly on the desktop, not solely in a detached configuration file. The native settings application is still available for detailed policy/source/history controls.

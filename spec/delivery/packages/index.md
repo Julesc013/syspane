@@ -41,6 +41,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Policy-owned asynchronous scene images](w-09-scene-images.md) — Connect immutable image resources, bounded worker lifetime and native pixels to current scene authority.
 - [Policy-owned native scalar scene surface](w-09-scene-surface.md) — Compose authored scenes, pinned resources, scalar bindings and native text under one erasing presentation owner.
 - [Policy-owned collection tables](w-09-table-surface.md) — Render identity-aligned collection columns with bounded native grid geometry and explicit incomplete states.
+- [Deterministic native alignment and spacing](w-10-arrange.md) — Close fixed-base arrange operations through shared drafts and independent native evidence.
 - [Shared editor draft and typed local operations](w-10-editor-draft.md) — Reversible scene editing through the existing authored transaction owner.
 - [Native scene editing and independent exit](w-10-native-editor.md) — Connect the shared draft to real native pixels, input, transactions and recovery.
 - [Native settings drafts and transaction results](w-11-native-settings.md) — Connect every initial settings descriptor to native controls and the common authored transaction boundary.

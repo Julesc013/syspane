@@ -23,6 +23,10 @@ shared transaction API remains the only commit path. This package establishes th
 draft for the native interactive editor; the native surface, independent escape
 attachment, installed routing and full editor acceptance remain required.
 
+The [arrangement extension](w-10-arrange.md) now closes fixed-base align/distribute
+operations and native controls through this same owner. Its deterministic arithmetic
+and geometry eligibility apply alongside the remaining authoring requirements.
+
 ## Inputs and ownership
 
 Construction/reload takes coherent validated Authored documents, native Authority,

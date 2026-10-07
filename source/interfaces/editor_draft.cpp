@@ -85,6 +85,52 @@ void apply(Json& scene,const ResizeWidget& edit){
     need(std::isfinite(edit.width)&&std::isfinite(edit.height),"editor.number");auto& base=widget(scene,edit.id)["layout"]["base"];
     need(base["kind"]=="fixed","editor.fixed");base["width"]=edit.width;base["height"]=edit.height;
 }
+struct Box {std::string id;std::int64_t x,y,width,height;};
+std::int64_t unit(const Json& value,double minimum,double maximum,bool extent){
+    need(value.is_number(),"editor.number");const auto n=value.get<double>();
+    need(std::isfinite(n)&&n>=minimum&&n<=maximum,"editor.number");
+    return static_cast<std::int64_t>(extent?std::ceil(n*64):std::round(n*64));
+}
+std::vector<Box> arrange_boxes(Json& scene,const std::vector<std::string>& ids,std::size_t minimum){
+    need(ids.size()>=minimum,"editor.targets");(void)subtree(scene,ids);
+    auto& list=owner(scene,ids.front());const auto display=widget(scene,ids.front()).at("display");
+    for(const auto& id:ids)need(&owner(scene,id)==&list&&widget(scene,id).at("display")==display,"editor.arrange_scope");
+    std::vector<Box> boxes;
+    for(const auto& item:list){const auto id=item.get<std::string>();if(std::find(ids.begin(),ids.end(),id)==ids.end())continue;
+        const auto& base=widget(scene,id).at("layout").at("base");need(base.at("kind")=="fixed","editor.fixed");
+        boxes.push_back({id,unit(base.at("x"),-100000,100000,false),unit(base.at("y"),-100000,100000,false),
+            unit(base.at("width"),32,32768,true),unit(base.at("height"),16,32768,true)});
+    }
+    return boxes;
+}
+void apply(Json& scene,const AlignWidgets& edit){
+    bool vertical=false;int anchor=0;
+    switch(edit.alignment){
+        case Alignment::left:break;case Alignment::hcenter:anchor=1;break;case Alignment::right:anchor=2;break;
+        case Alignment::top:vertical=true;break;case Alignment::vcenter:vertical=true;anchor=1;break;case Alignment::bottom:vertical=true;anchor=2;break;
+        default:throw protocol::Error("editor.alignment");
+    }
+    const auto boxes=arrange_boxes(scene,edit.ids,2);auto left=vertical?boxes[0].y:boxes[0].x;
+    auto right=left+(vertical?boxes[0].height:boxes[0].width);
+    for(const auto& b:boxes){const auto pos=vertical?b.y:b.x;left=std::min(left,pos);right=std::max(right,pos+(vertical?b.height:b.width));}
+    for(const auto& b:boxes){const auto extent=vertical?b.height:b.width;auto pos=left;
+        if(anchor==2)pos=right-extent;
+        else if(anchor==1){const auto twice=left+right-extent;pos=twice/2+((twice%2)?(twice<0?-1:1):0);}
+        widget(scene,b.id)["layout"]["base"][vertical?"y":"x"]=static_cast<double>(pos)/64;
+    }
+}
+void apply(Json& scene,const DistributeWidgets& edit){
+    need(edit.spacing==Spacing::horizontal||edit.spacing==Spacing::vertical,"editor.spacing");const bool vertical=edit.spacing==Spacing::vertical;
+    auto boxes=arrange_boxes(scene,edit.ids,3);
+    auto origin=[&](const Box& b){return vertical?b.y:b.x;};auto extent=[&](const Box& b){return vertical?b.height:b.width;};
+    std::stable_sort(boxes.begin(),boxes.end(),[&](const Box& a,const Box& b){return origin(a)<origin(b);});
+    auto gaps=origin(boxes.back())-origin(boxes.front());
+    for(std::size_t i=0;i+1<boxes.size();++i)gaps-=extent(boxes[i]);
+    need(gaps>=0,"editor.spacing_overlap");const auto count=static_cast<std::int64_t>(boxes.size()-1),q=gaps/count,r=gaps%count;
+    auto pos=origin(boxes.front());
+    for(std::size_t i=1;i+1<boxes.size();++i){pos+=extent(boxes[i-1])+q+(static_cast<std::int64_t>(i)<=r?1:0);
+        widget(scene,boxes[i].id)["layout"]["base"][vertical?"y":"x"]=static_cast<double>(pos)/64;}
+}
 std::vector<std::string> surviving(const Json& scene,const std::vector<std::string>& ids){
     std::vector<std::string> out;for(const auto& w:scene["widgets"]){const auto id=w["id"].get<std::string>();if(std::find(ids.begin(),ids.end(),id)!=ids.end())out.push_back(id);}return out;
 }

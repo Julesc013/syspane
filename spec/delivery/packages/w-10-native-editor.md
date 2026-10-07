@@ -22,7 +22,16 @@ display and providers. No new storage, telemetry or resource resolver. The form
 owns its native controls, gesture state, preview and erasure caches on one GTK thread.
 Installed entry still requires a separate recovery owner before mapping the editor.
 
+The [arrangement extension](w-10-arrange.md) now closes fixed-base align/distribute
+operations and native controls through this same owner. Its deterministic arithmetic
+and geometry eligibility apply alongside the remaining authoring requirements.
+
 ## Native behavior
+
+Updating native control availability must apply each control's final state once.
+An otherwise available control must retain keyboard focus and a held key activation
+across ordinary preview repaints. Do not transiently disable and re-enable it while
+computing its state. Actual permission/pending changes still disable it immediately.
 
 Draw the actual shared renderer output for the selected display. Hit-test its
 resolved visible node rectangles in reverse drawing order using device pixels;

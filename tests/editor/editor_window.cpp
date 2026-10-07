@@ -22,7 +22,7 @@ c::Policy policy(std::uint64_t revision=7){c::Policy v;v.available=true;v.revisi
 std::string image_worker(){char path[4096];const auto n=readlink("/proc/self/exe",path,sizeof(path)-1);need(n>0,"native path");std::string value(path,static_cast<std::size_t>(n));return value.substr(0,value.rfind('/'))+"/SysPane.ImageWorker";}
 syspane::scene::Topology topology(const std::string& id="D1"){syspane::scene::Display d;d.id=id;d.bounds=d.work={0,0,500*64,420*64};return {{d},{},id};}
 struct Window {
-    std::string root,path,mode,behavior,input,epoch="E1";bool content=false,large=false;Json alternate_selection;c::Authored original;c::Policy current=policy();
+    std::string root,path,mode,behavior,input,epoch="E1";bool content=false,large=false,arrange=false;Json alternate_selection;c::Authored original;c::Policy current=policy();
     std::unique_ptr<os::LinuxGenerationStore> store;std::unique_ptr<c::AsyncCommands> owner;std::unique_ptr<ui::EditorForm> form;
     GtkWidget *window=nullptr,*canary=nullptr,*overlay=nullptr;bool recovery=false;std::uint64_t serial=0;std::optional<ui::EditRequest> request;
     std::deque<std::pair<std::string,std::optional<ui::EditRequest>>> commands;
@@ -52,14 +52,14 @@ struct Window {
     }
     void open_owner(){store=std::make_unique<os::LinuxGenerationStore>(path);attach_owner();}
     void initialize(){
-        content=true;large=mode.substr(0,6)=="large-";behavior=large?mode.substr(6):mode;
+        content=true;large=mode.substr(0,6)=="large-";arrange=mode.substr(0,8)=="arrange-";behavior=large?mode.substr(6):arrange?mode.substr(8):mode;
         if(behavior=="reopen")epoch="E2";
         original={read(root+"/spec/fixtures/valid/settings.json"),read(root+"/spec/fixtures/valid/scene-portable.json")};original.settings["revision"]=original.scene["revision"]="40";
         store=std::make_unique<os::LinuxGenerationStore>(path);
         if(content&&behavior!="reopen"){
             settings_fixture::Fixture fixture(root);auto bare=original;bare.settings["revision"]=bare.scene["revision"]="39";store->initialize(bare);
             c::ResourceProvider imports{{"scene.content"},[&](const c::Authored& v,const Json& s){return fixture.catalog->resources(s,v);}};
-            c::Transactions bootstrap(*store,"E0",imports);auto scene=read(root+(large?"/tests/configuration/large-command-cases.json":"/tests/editor/native-cases.json"))["authored"]["scene"];scene["revision"]="39";
+            c::Transactions bootstrap(*store,"E0",imports);auto scene=read(root+(large?"/tests/configuration/large-command-cases.json":arrange?"/tests/editor/arrange-cases.json":"/tests/editor/native-cases.json"))["authored"]["scene"];scene["revision"]="39";
             Json q={{"schema_version",large?"0.5.0":"0.4.0"},{"request_id","bootstrap"},{"expected_revision","39"},{"policy_generation","7"},{"intent","commit"},{"content",fixture.document["selection"]},{"operations",Json::array({{{"op","scene.replace"},{"scene",scene}}})}};
             const auto result=bootstrap.submit("fixture:editor","bootstrap",q.dump(),authority(),[&]{return current;},0);need(result["outcome"]=="accepted"&&result["revision"]=="40","resource bootstrap");
             alternate_selection=fixture.document["alternate_selection"];original=store->load().documents;

@@ -7,6 +7,12 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
+The [arrangement checkpoint](spec/delivery/arrange-handoff.md) adds six alignment
+and two equal-spacing actions to the shared draft and Linux native editor. Exact
+geometry cases and independent native pixels/storage checks cover undo, save,
+cancellation, policy changes and restart. Responsive authoring and the remaining
+editor controls are still required.
+
 The [complete-scene command checkpoint](spec/delivery/large-commands-handoff.md)
 carries full 256 KiB scenes through negotiated commands, bounded admission and
 crash-safe request receipts. Portable boundary checks and native IPC/storage/editor

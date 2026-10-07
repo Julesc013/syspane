@@ -31,23 +31,25 @@ class Input(Observer):
     def button(self,down):assert self.xt.XTestFakeButtonEvent(self.handle,1,down,0);self.sync()
 
 class Harness:
-    def __init__(self,exe,exit_exe,folder,mode,large=False):
+    def __init__(self,exe,exit_exe,folder,mode,large=False,arrange=False):
         import gi
         gi.require_version('Atspi','2.0');gi.require_version('Gtk','3.0')
         from gi.repository import Atspi,GLib,Gtk,Gdk
         self.Atspi,self.GLib,self.Gtk,self.Gdk=Atspi,GLib,Gtk,Gdk
         Gtk.init([]);Atspi.set_timeout(200,500);verify();folder.mkdir(mode=0o700)
-        self.large=large;self.case_path=ROOT/('tests/configuration/large-command-cases.json' if large else 'tests/editor/native-cases.json')
+        assert not (large and arrange)
+        self.large=large;self.arrange=arrange;self.case_path=ROOT/('tests/configuration/large-command-cases.json' if large else 'tests/editor/arrange-cases.json' if arrange else 'tests/editor/native-cases.json')
         self.cases=json.loads(self.case_path.read_text())
         if large:self.cases['drag']['expected']=self.cases['moved_scene']
         self.exe,self.exit_exe,self.folder,self.mode=exe,exit_exe,folder,mode
         self.directory=folder/'store';self.directory.mkdir(mode=0o700)
         assert subprocess.check_output(['findmnt','--target',str(self.directory),'--noheadings','--output','FSTYPE'],text=True).strip()=='ext4'
-        self.proc=None;self.pid=None;self.fd=None;self.stage='startup';self.events=queue.Queue();self.inbox=[];self.input=Input()
+        self.proc=None;self.pid=None;self.fd=None;self.stage='startup';self.events=queue.Queue();self.inbox=[];self.input=Input();self.controls={}
         self.err=(folder/'stderr').open('wb')
         self.report=dict(outcome='fail',mode=mode,events=[],observations=[],executable_sha256=sha(exe),exit_executable_sha256=sha(exit_exe),oracle_sha256=sha(Path(__file__)),fixture_sha256=sha(self.case_path))
     def launch(self,mode=None,recovery=False):
-        args=[str(self.exit_exe),'--owned-editor-lab',str(self.exe),str(ROOT),str(self.directory),'drag'] if recovery else [str(self.exe),str(ROOT),str(self.directory),("large-" if self.large else "")+(mode or self.mode)]
+        self.controls.clear()
+        args=[str(self.exit_exe),'--owned-editor-lab',str(self.exe),str(ROOT),str(self.directory),'drag'] if recovery else [str(self.exe),str(ROOT),str(self.directory),("large-" if self.large else "arrange-" if self.arrange else "")+(mode or self.mode)]
         self.proc=subprocess.Popen(args,stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=self.err,bufsize=0)
         def collect(child):
             for line in child.stdout:
@@ -94,7 +96,16 @@ class Harness:
             obj.clear_cache();out.append(obj);assert len(out)<=512 and depth<=20
             for n in range(obj.get_child_count()):pending.append((obj.get_child_at_index(n),depth+1))
         return out
-    def find(self,id):return next((o for o in self.objects() if o.get_description()=='editor.'+id),None)
+    def find(self,id):
+        # These chrome objects live for the entire form. Cache references, never
+        # text/state/geometry: each read still observes the live native interface.
+        # Reopening starts a different process and discards every old reference.
+        if id not in self.controls:
+            for obj in self.objects():
+                description=obj.get_description() or ''
+                if description.startswith('editor.'):self.controls[description[7:]]=obj
+            assert len(self.controls)<=64
+        return self.controls.get(id)
     def text(self,obj):
         if obj is None:return ''
         obj.clear_cache();interface=obj.get_text_iface();return self.Atspi.Text.get_text(interface,0,-1) if interface else obj.get_name() or ''
@@ -110,8 +121,12 @@ class Harness:
     def status(self):return self.text(self.find('status'))
     def sensitive(self,id):
         obj=self.find(id);obj.clear_cache();return obj.get_state_set().contains(self.Atspi.StateType.SENSITIVE)
+    def focus(self,id):
+        obj=self.find(id);assert obj.get_component_iface().grab_focus()
+        def focused():obj.clear_cache();return obj.get_state_set().contains(self.Atspi.StateType.FOCUSED)
+        self.wait(focused)
     def click(self,id):
-        assert self.sensitive(id),(id,self.status());assert self.find(id).get_component_iface().grab_focus();self.input.press(0x20)
+        assert self.sensitive(id),(id,self.status());self.focus(id);self.input.press(0x20)
     def field(self,id,value):
         obj=self.find('value.'+id);assert self.sensitive('value.'+id)
         assert self.Atspi.EditableText.set_text_contents(obj.get_editable_text_iface(),str(value));self.wait(lambda:self.value(id)==str(value))

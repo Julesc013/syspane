@@ -17,6 +17,12 @@ updated: {"by": "codex", "at": "2026-10-07T03:55:11Z", "scope": "Initial GTK edi
 
 # Current state and next admitted boundary
 
+The latest [arrangement checkpoint](arrange-handoff.md) adds deterministic shared
+alignment/spacing and native controls with independent geometry, pixel and storage
+evidence. Next close snapping/grid/guides, grouping and remaining authoring/property
+contracts, then installed controller/catalog/policy routing and scene-aligned
+entry/restoration. Complete editions and historical native qualification remain open.
+
 The latest [complete-scene command checkpoint](large-commands-handoff.md) closes
 the local-scene/wire-size mismatch. Command 0.5, explicit capability negotiation and
 manifest 0.3 carry exact full-scene requests through the existing owners. Fixed

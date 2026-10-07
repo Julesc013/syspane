@@ -3,6 +3,7 @@
 Generated navigation; edit the referenced source documents, then run `specctl.py generate`.
 
 - [packages](packages/index.md) — browse this responsibility.
+- [Native alignment and spacing checkpoint](arrange-handoff.md) — Deterministic shared arrangement with native controls and independently observed persistence.
 - [Binaries, packages and release identity](artifacts.md) — Choose stable binary roles and exact offline payload closure.
 - [October audit disposition](audit-2026-10-04.md) — Map supplied recommendations to amended owners without treating review text as authority.
 - [Authored transactions and Linux generation recovery](authored-transactions-handoff.md) — Preserve coherent scene/settings changes and committed request identities through native process interruption.

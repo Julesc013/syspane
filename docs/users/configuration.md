@@ -9,6 +9,13 @@ Property fields become one draft edit when Set properties is selected. Apply sav
 the draft; activation and desktop visibility remain separate facts. This component
 is tested in a private laboratory and is not yet an installed desktop edition.
 
+Select at least two fixed widgets in the same group and display to align their
+edges or centers. Select at least three for equal horizontal or vertical spacing.
+Spacing keeps the endpoints in place and reports when there is insufficient room.
+Arrange changes are reversible with Undo and become persistent only after Apply.
+Finish or revert property fields before arranging. Responsive or size-expanded
+widgets need explicit layout editing; this initial arrange control leaves them alone.
+
 A setting changes application behaviour. A scene arranges widgets and their data
 bindings. A theme supplies visual tokens. A preset combines those documents for
 a task. Machine bindings map portable roles to local devices and displays.
