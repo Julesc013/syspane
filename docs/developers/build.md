@@ -1717,3 +1717,19 @@ pixel/storage outcomes, fault controls and 200-ms erasure bound remain unchanged
 After workspace test preflight, run `ctest --preset linux-x64-gcc13 -R "^native[.]EDITOR-LAYOUT$" --output-on-failure`.
 The [handoff](../../spec/delivery/keyboard-input-handoff.md) records the paired native
 experiment, all ten regression matrices and the remaining qualification scope.
+
+### Explicit container transformations
+
+`WrapWidgets` takes disjoint sibling IDs, a fresh group ID/title, complete group
+layout and priority. `UnwrapWidget` removes one group and promotes its children.
+Both preserve surviving authored values exactly and intentionally resolve them in
+the new parent. Selection/history change atomically through EditorDraft. Existing
+GroupWidgets/UngroupWidget retain their fixed-geometry rules. The native Layout
+modal reuses its parser/buffers for Wrap and an explicit Unwrap confirmation.
+
+After workspace preflight/configure/build, use `ctest --preset <profile> -R
+"^(editor[.]|settings[.]|configuration[.]|composition[.]|protocol[.])" --output-on-failure`.
+The owned non-root Linux laboratory additionally runs `ctest --preset linux-x64-gcc13
+-R "^native[.]EDITOR-CONTAINERS$" --output-on-failure` and existing editor matrices.
+See the [package](../../spec/delivery/packages/w-10-containers.md) and
+[handoff](../../spec/delivery/containers-handoff.md) for exact scope and evidence.

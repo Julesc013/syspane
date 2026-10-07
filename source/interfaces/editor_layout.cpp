@@ -47,12 +47,16 @@ LayoutInput layout_input(const Json& scene,const std::string& id){
     const auto& display=w.at("display");out.display_kind=display.contains("local_id")?"local_id":"role";out.display_value=display.at(out.display_kind);out.priority=w.at("priority");
     const auto& list=siblings(scene,id);out.sibling=std::to_string(std::distance(list.begin(),std::find(list.begin(),list.end(),id)));return out;
 }
-std::vector<SceneEdit> layout_edits(const Json& scene,const std::string& id,const LayoutInput& in){
-    const auto& w=widget(scene,id);need(!in.variants.empty()&&in.variants.size()<=9&&in.thresholds.size()+1==in.variants.size(),"editor.layout_variants");
-    Json layout={{"base",variant(in.variants[0],w.at("kind")=="group")}};double previous=-1;
+Json layout_value(const LayoutInput& in,bool group){
+    need(!in.variants.empty()&&in.variants.size()<=9&&in.thresholds.size()+1==in.variants.size(),"editor.layout_variants");
+    Json layout={{"base",variant(in.variants[0],group)}};double previous=-1;
     if(in.breakpoints_present||!in.thresholds.empty())layout["breakpoints"]=Json::array();
     for(std::size_t n=0;n<in.thresholds.size();++n){const double width=content_number(in.thresholds[n]);need(width>=0&&width<=32768&&width>previous,"editor.layout_threshold");previous=width;
-        layout["breakpoints"].push_back({{"min_width_dip",width},{"layout",variant(in.variants[n+1],w.at("kind")=="group")}});}
+        layout["breakpoints"].push_back({{"min_width_dip",width},{"layout",variant(in.variants[n+1],group)}});}
+    return layout;
+}
+std::vector<SceneEdit> layout_edits(const Json& scene,const std::string& id,const LayoutInput& in){
+    const auto& w=widget(scene,id);auto layout=layout_value(in,w.at("kind")=="group");
     need(in.priority=="essential"||in.priority=="normal"||in.priority=="secondary","editor.layout_priority");
     need((in.display_kind=="local_id"||in.display_kind=="role")&&protocol::identifier(in.display_value),"editor.layout_display");
     std::vector<SceneEdit> edits{WidgetPropertyEdit{id,WidgetProperty::layout,std::move(layout)},WidgetPropertyEdit{id,WidgetProperty::priority,in.priority}};

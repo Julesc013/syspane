@@ -21,7 +21,9 @@ struct AlignWidgets {std::vector<std::string> ids;Alignment alignment;std::vecto
 struct DistributeWidgets {std::vector<std::string> ids;Spacing spacing;std::vector<int> variants={};};
 struct GroupWidgets {std::vector<std::string> ids;std::string id,title;};
 struct UngroupWidget {std::string id;};
-using SceneEdit=std::variant<WidgetPropertyEdit,WidgetContentEdit,SceneThemeEdit,InsertWidget,RemoveWidgets,ReparentWidgets,DuplicateWidgets,MoveWidgets,ResizeWidget,AlignWidgets,DistributeWidgets,GroupWidgets,UngroupWidget,RootDisplayEdit>;
+struct WrapWidgets {std::vector<std::string> ids;std::string id,title;Json layout;std::string priority="normal";};
+struct UnwrapWidget {std::string id;};
+using SceneEdit=std::variant<WidgetPropertyEdit,WidgetContentEdit,SceneThemeEdit,InsertWidget,RemoveWidgets,ReparentWidgets,DuplicateWidgets,MoveWidgets,ResizeWidget,AlignWidgets,DistributeWidgets,GroupWidgets,UngroupWidget,RootDisplayEdit,WrapWidgets,UnwrapWidget>;
 
 // One serialized native owner. Scene/selection borrows expire on every mutation,
 // policy update or close; adapters must erase their own caches on disclosure loss.

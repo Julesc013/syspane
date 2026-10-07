@@ -101,6 +101,8 @@ struct EditorForm::Impl {
             else if(id=="duplicate"||id=="delete")active=enabled&&!draft.selection().empty();
             else if(id=="group")active=enabled&&draft.selection().size()>=2;
             else if(id=="ungroup")active=enabled&&selected&&selected->at("kind")=="group";
+            else if(id=="wrap")active=enabled&&!draft.selection().empty();
+            else if(id=="unwrap")active=enabled&&selected&&selected->at("kind")=="group";
             else if(id.substr(0,6)=="align-")active=enabled&&draft.selection().size()>=2;
             else if(id.substr(0,6)=="space-")active=enabled&&draft.selection().size()>=3;
             if(id=="bindings")active=enabled&&selected&&draft.scene()->at("schema_version")=="0.3.0"&&(selected->at("kind")=="value"||selected->at("kind")=="status"||selected->at("kind")=="chart"||selected->at("kind")=="table");
@@ -120,7 +122,9 @@ struct EditorForm::Impl {
         else value=draft.dirty()?"Draft changes have not been saved.":"No draft changes.";
         if(draft.revision())value+=" Revision "+std::to_string(*draft.revision());
         if(!error.empty()&&draft.available())value=error;
-        if(selected){const auto* n=node(draft.selection()[0]);value+=n?(n->variant<0?" Active layout: Base":" Active layout: Breakpoint "+std::to_string(n->variant+1)):" Not on this display";}
+        const bool unavailable=draft.available()&&surface&&surface->status().code==v::SurfaceCode::alternative;
+        if(unavailable)value+=" Preview unavailable. Use Layout or Undo to recover.";
+        else if(selected){const auto* n=node(draft.selection()[0]);value+=n?(n->variant<0?" Active layout: Base":" Active layout: Breakpoint "+std::to_string(n->variant+1)):" Not on this display";}
         message(value);guide_feedback();updating=false;
     }
     void list(){
@@ -217,9 +221,9 @@ struct EditorForm::Impl {
             // dialog focus/accessibility initialization must not join editor entry.
             if(!content)content=std::make_unique<EditorContentForm>(root,[this](const std::vector<SceneEdit>& edits){return draft.execute(edits);},[this](bool changed){if(changed)this->changed();else sync();},[this]{shut();});
             content->open(*draft.scene(),w,*snapshot);sync();}
-        else if(id=="layout"){ready();gesture.reset();need(draft.selection().size()==1,"editor.selection");
+        else if(id=="layout"||id=="wrap"||id=="unwrap"){ready();gesture.reset();need(id=="wrap"?!draft.selection().empty():draft.selection().size()==1,"editor.selection");
             if(!layout_form)layout_form=std::make_unique<EditorLayoutForm>(root,[this](const std::vector<SceneEdit>& edits){return draft.execute(edits);},[this](bool changed){if(changed)this->changed();else sync();},[this]{shut();});
-            layout_form->open(*draft.scene(),draft.selection()[0]);sync();}
+            if(id=="wrap")layout_form->wrap(*draft.scene(),draft.selection(),actions.widget_id());else if(id=="unwrap")layout_form->unwrap(*draft.scene(),draft.selection()[0]);else layout_form->open(*draft.scene(),draft.selection()[0]);sync();}
         else if(id=="properties")properties();else if(id=="revert-fields"){fields_dirty=false;error.clear();sync(true);}
         else if(id=="apply")submit();else if(id=="reload")dispatch(actions.reload);
         else if(id=="cancel-request"){const auto q=draft.cancel_request();if(q)try{dispatch([&]{actions.cancel(*q);});}catch(...){draft.disconnected();sync();}}
@@ -326,7 +330,8 @@ EditorForm::EditorForm(c::Authority a,c::Policy p,c::Authored value,std::string 
         g_signal_connect(w,"toggled",G_CALLBACK(+[](GtkWidget* w,gpointer p){auto& o=*static_cast<Impl*>(p);o.event([&]{o.command(static_cast<const char*>(g_object_get_data(G_OBJECT(w),"editor-action")));});}),&i);};
     auto* snapping=gtk_box_new(GTK_ORIENTATION_HORIZONTAL,3);gtk_box_pack_start(GTK_BOX(side),snapping,FALSE,FALSE,0);check(snapping,"snap-grid","Snap to grid");check(snapping,"snap-guides","Snap to guides");
     auto* grid=gtk_box_new(GTK_ORIENTATION_HORIZONTAL,3);gtk_box_pack_start(GTK_BOX(side),grid,FALSE,FALSE,0);check(grid,"show-grid","Show grid");button(grid,"grid-spacing","Grid 8 DIP");
-    i.guidance=i.label("");accessible(i.guidance,"","editor.guidance");gtk_widget_set_size_request(i.guidance,-1,20);gtk_box_pack_start(GTK_BOX(side),i.guidance,FALSE,FALSE,0);
+    auto* containers=gtk_box_new(GTK_ORIENTATION_HORIZONTAL,3);gtk_box_pack_start(GTK_BOX(side),containers,FALSE,FALSE,0);button(containers,"wrap","Wrap...");button(containers,"unwrap","Unwrap...");
+    i.guidance=i.label("");accessible(i.guidance,"","editor.guidance");gtk_widget_set_size_request(i.guidance,-1,20);gtk_box_pack_start(GTK_BOX(containers),i.guidance,TRUE,TRUE,0);
     auto* bottom=gtk_box_new(GTK_ORIENTATION_HORIZONTAL,4);gtk_box_pack_start(GTK_BOX(i.root),bottom,FALSE,FALSE,0);button(bottom,"add","Add text");button(bottom,"duplicate","Duplicate");button(bottom,"delete","Delete");
     auto* align=gtk_box_new(GTK_ORIENTATION_HORIZONTAL,3);gtk_box_pack_start(GTK_BOX(i.root),align,FALSE,FALSE,0);
     for(const auto& b:std::vector<std::pair<const char*,const char*>>{{"insert","Add widget"},{"align-left","Align left"},{"align-hcenter","Center horizontally"},{"align-right","Align right"},{"align-top","Align top"},{"align-vcenter","Center vertically"},{"align-bottom","Align bottom"}})button(align,b.first,b.second);

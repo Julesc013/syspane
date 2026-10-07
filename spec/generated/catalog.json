@@ -438,6 +438,18 @@
       "sha256": "a2ea873114a7bcd78a884382bd03133b5a9d78c5c9211dd0422cc38242b0d30c"
     },
     {
+      "id": "SP-CONTAINERS-HANDOFF",
+      "path": "delivery/containers-handoff.md",
+      "title": "Explicit container authoring checkpoint",
+      "description": "Wrap and Unwrap preserve authored rules with explicit native reflow and atomic history.",
+      "requires": [
+        "SP-W10-CONTAINERS",
+        "SP-W10-CONTAINER-PREVIEW",
+        "SP-KEYBOARD-INPUT-HANDOFF"
+      ],
+      "sha256": "430d5362284123114bc2415879d589197ee3a449e840ad6a22b5026f8f62e913"
+    },
+    {
       "id": "SP-CONTENT-PROPERTIES-HANDOFF",
       "path": "delivery/content-properties-handoff.md",
       "title": "Native content-properties checkpoint",
@@ -477,7 +489,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "6f782aa5bac3ff7f2124bd5ddbd9d3fd6cffad356862a1b556ce894c5a12cc81"
+      "sha256": "6c231cafaed3264b8c509f72d41da390217715072b32d1779d9ac9cc67769832"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -1597,6 +1609,30 @@
       "sha256": "7345db9ec2e238cd9f5bf58e32b498007a835f1253d308f735e1a2f5c56e302b"
     },
     {
+      "id": "SP-W10-CONTAINER-PREVIEW",
+      "path": "delivery/packages/w-10-container-preview.md",
+      "title": "Unavailable container preview and authored recovery",
+      "description": "Distinguish renderer rejection from an absent display and retain usable authored controls.",
+      "requires": [
+        "SP-W10-CONTAINERS",
+        "SP-W09-LAYOUT",
+        "SP-W10-NATIVE-EDITOR"
+      ],
+      "sha256": "961db9af3fc9399bc53f16abb919a4e287b6234a2f61de441f62478ac64986e8"
+    },
+    {
+      "id": "SP-W10-CONTAINERS",
+      "path": "delivery/packages/w-10-containers.md",
+      "title": "Explicit reflowing container transformations",
+      "description": "Wrap and unwrap authored layout rules without silently freezing responsive or flow geometry.",
+      "requires": [
+        "SP-W10-GROUP",
+        "SP-W10-LAYOUT-AUTHORING",
+        "SP-W10-KEYBOARD-INPUT"
+      ],
+      "sha256": "6a6192afa4df3431e4459a48055c53ef7725c3bca422883c24bc938c767376c9"
+    },
+    {
       "id": "SP-W10-CONTENT-PROPERTIES",
       "path": "delivery/packages/w-10-content-properties.md",
       "title": "Native widget content and scene-theme properties",
@@ -2483,7 +2519,7 @@
         "SP-RENDERING",
         "SP-COMMANDS"
       ],
-      "sha256": "9fd429c563a98e28fe12d5f221bb4147da7f86fe4f83770d2bfcb0f32f79803e"
+      "sha256": "6ededb6f55a713fd411867fea51deeb4e9b6ee140139670915d3f53de15e1603"
     },
     {
       "id": "SP-POLICY",

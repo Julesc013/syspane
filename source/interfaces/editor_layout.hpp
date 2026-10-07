@@ -12,5 +12,6 @@ struct LayoutInput {
     bool breakpoints_present=false;
 };
 LayoutInput layout_input(const Json& scene,const std::string& id);
+Json layout_value(const LayoutInput&,bool group);
 std::vector<SceneEdit> layout_edits(const Json& scene,const std::string& id,const LayoutInput&);
 }

@@ -184,7 +184,28 @@ void apply(Json& scene,const UngroupWidget& edit){
     erase_ids(list,{edit.id});at_index(list,index,members);auto& rows=scene["widgets"];
     rows.erase(std::remove_if(rows.begin(),rows.end(),[&](const auto& w){return w["id"]==edit.id;}),rows.end());
 }
+void apply(Json& scene,const WrapWidgets& edit){
+    need(protocol::identifier(edit.id)&&!exists(scene,edit.id),"editor.identity");(void)subtree(scene,edit.ids);
+    auto& list=owner(scene,edit.ids.front());const auto display=widget(scene,edit.ids.front()).at("display");
+    for(const auto& id:edit.ids)need(&owner(scene,id)==&list&&widget(scene,id).at("display")==display,"editor.arrange_scope");
+    std::vector<std::string> members;for(const auto& id:list)if(std::find(edit.ids.begin(),edit.ids.end(),id.get<std::string>())!=edit.ids.end())members.push_back(id);
+    const auto index=static_cast<std::size_t>(std::distance(list.begin(),std::find(list.begin(),list.end(),members.front())));
+    Json group={{"id",edit.id},{"kind","group"},{"title",edit.title},{"display",display},{"layout",edit.layout},{"priority",edit.priority},{"bindings",Json::array()},{"children",members}};
+    if(scene.at("schema_version")=="0.3.0")group["content"]=Json::object();
+    erase_ids(list,std::set<std::string>(members.begin(),members.end()));at_index(list,index,{edit.id});scene["widgets"].push_back(std::move(group));
+}
+void apply(Json& scene,const UnwrapWidget& edit){
+    const auto group=widget(scene,edit.id);need(group.at("kind")=="group","editor.group");const auto members=group.at("children").get<std::vector<std::string>>();
+    for(const auto& id:members)need(widget(scene,id).at("display")==group.at("display"),"editor.arrange_scope");
+    auto& list=owner(scene,edit.id);const auto index=static_cast<std::size_t>(std::distance(list.begin(),std::find(list.begin(),list.end(),edit.id)));
+    erase_ids(list,{edit.id});at_index(list,index,members);auto& rows=scene["widgets"];
+    rows.erase(std::remove_if(rows.begin(),rows.end(),[&](const auto& w){return w["id"]==edit.id;}),rows.end());
+}
 template<class T> void edit_selection(Json& scene,std::vector<std::string>&,const T& edit){apply(scene,edit);}
+void edit_selection(Json& scene,std::vector<std::string>& selection,const WrapWidgets& edit){apply(scene,edit);selection={edit.id};}
+void edit_selection(Json& scene,std::vector<std::string>& selection,const UnwrapWidget& edit){
+    const auto members=widget(scene,edit.id).at("children").get<std::vector<std::string>>();apply(scene,edit);selection=members;
+}
 void edit_selection(Json& scene,std::vector<std::string>& selection,const GroupWidgets& edit){apply(scene,edit);selection={edit.id};}
 void edit_selection(Json& scene,std::vector<std::string>& selection,const InsertWidget& edit){apply(scene,edit);if(edit.select_inserted)selection={edit.widget.at("id").get<std::string>()};}
 void edit_selection(Json& scene,std::vector<std::string>& selection,const UngroupWidget& edit){

@@ -12,12 +12,22 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-07T11:01:07.990994+00:00", "scope": "Proven layout keyboard input ordering cause and remaining native boundaries"}
+updated: {"by": "codex", "at": "2026-10-07T11:38:29.791582+00:00", "scope": "Explicit reflowing container checkpoint and remaining editor/release boundaries"}
 ---
 
 # Current state and next admitted boundary
 
-The latest [keyboard-input checkpoint](keyboard-input-handoff.md) identifies the
+The latest [container checkpoint](containers-handoff.md) adds explicit Wrap and
+Unwrap for flowing children, nested containers and responsive rules. Children keep
+every authored value and resolve in their new parent; native dialogs explain reflow
+before one atomic draft operation. Fixed-geometry Group/Ungroup remain unchanged.
+Rejected previews show an explicit unavailable state and retain Layout/Undo recovery;
+the original failure and the repaired scene's save/reopen evidence are preserved.
+Continue lock/visibility/typography, clipboard/recovery drafts and installed ownership,
+then complete native accessibility/performance and all five release tracks. W-10
+remains in progress; no complete edition or historical qualification is claimed.
+
+The earlier [keyboard-input checkpoint](keyboard-input-handoff.md) identifies the
 layout-button focus failure as an input-ordering error in the laboratory. End
 temporarily selected the expected final row before later queued navigation ran.
 The oracle now awaits each selected row/title within one deadline and restores

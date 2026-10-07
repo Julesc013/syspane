@@ -122,3 +122,17 @@ target explicit resolved variants; base-only callers remain compatible. The
 [checkpoint](../delivery/layout-authoring-handoff.md) records component evidence.
 Flow/container group transformations, remaining properties, installed ownership
 and full native editions remain required.
+
+## Explicit container reflow
+
+A renderer alternative must show an unavailable preview alongside the existing
+draft/request/durable facts. Retain authored Layout and Undo recovery and avoid
+a false display-absence message; see the [recovery supplement](../delivery/packages/w-10-container-preview.md).
+
+The [container package](../delivery/packages/w-10-containers.md) adds Wrap/Unwrap
+for flowing, responsive and nested children. These explicit commands retain every
+child's authored rules and resolve them in the new parent. The native dialog explains
+reflow and possible clipping changes before adoption; no pixel-preserving conversion
+is inferred. Existing fixed-geometry Group/Ungroup semantics remain unchanged.
+The [checkpoint](../delivery/containers-handoff.md) records component evidence and
+remaining editor, installed-integration and complete-edition acceptance.

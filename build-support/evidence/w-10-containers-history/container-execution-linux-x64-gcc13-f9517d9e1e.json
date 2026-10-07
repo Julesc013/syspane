@@ -1,0 +1,38 @@
+[
+  {
+    "step": "containers",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-07T11:28:53.808061+00:00",
+    "finished_at": "2026-10-07T11:28:54.553723+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2441992429,\n  \"linux_campaign_bytes\": 4749051469,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "containers",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/container_step.py",
+      "linux-x64-gcc13",
+      "containers"
+    ],
+    "started_at": "2026-10-07T11:28:54.554087+00:00",
+    "finished_at": "2026-10-07T11:29:29.505769+00:00",
+    "exit": 8,
+    "stdout": "Test project /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n    Start 86: native.EDITOR-CONTAINERS\n1/1 Test #86: native.EDITOR-CONTAINERS .........***Failed   17.89 sec\n/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/containers-dc577403f923/result.json fail\nTraceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_containers.py\", line 85, in <module>\n    if __name__=='__main__':main()\n                            ^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_containers.py\", line 80, in main\n    (folder/(mode+'.stdout')).write_bytes(out);(folder/(mode+'.stderr')).write_bytes(err);detail=json.loads((folder/mode/'result.json').read_text());report['cases'].append(dict(case=mode,outcome=detail['outcome'],fault_detected=detail.get('fault_detected',False),record_sha256=sha(folder/mode/'result.json')));assert child.returncode==0 and detail['outcome']=='pass',(mode,err.decode(errors='replace'))\n                                                                                                                                                                                                                                                                                                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: ('unwrap', 'dbus-daemon[505310]: [session uid=1000 pid=505310] Activating service name=\\'org.a11y.Bus\\' requested by \\':1.0\\' (uid=1000 pid=505311 comm=\"/usr/bin/python3 /mnt/d/Projects/SysPane/syspane/t\" label=\"kernel\")\\ndbus-daemon[505310]: [session uid=1000 pid=505310] Successfully activated service \\'org.a11y.Bus\\'\\ndbus-daemon[505319]: Activating service name=\\'org.a11y.atspi.Registry\\' requested by \\':1.2\\' (uid=1000 pid=505325 comm=\"/home/ir4runner/.cache/syspane/campaign-229a498/li\" label=\"kernel\")\\ndbus-daemon[505319]: Successfully activated service \\'org.a11y.atspi.Registry\\'\\nTraceback (most recent call last):\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_containers.py\", line 85, in <module>\\n    if __name__==\\'__main__\\':main()\\n                            ^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_containers.py\", line 71, in main\\n    if sys.argv[1]==\\'--observe\\':observe(*map(Path,sys.argv[2:5]),sys.argv[5]);return\\n                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_containers.py\", line 61, in observe\\n    try:exercise(h)\\n        ^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_containers.py\", line 47, in exercise\\n    h.stage=\\'PIXELS\\';h.wait(lambda:[caption(h,p) for p in positions]==samples);h.check();h.screenshot(\\'draft\\')\\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_editor.py\", line 80, in wait\\n    assert time.monotonic()<end,self.stage+\\' observation deadline\\'\\n           ^^^^^^^^^^^^^^^^^^^^\\nAssertionError: PIXELS observation deadline\\n')\n\n\n0% tests passed, 1 tests failed out of 1\n\nTotal Test time (real) =  17.90 sec\n\nThe following tests FAILED:\n\t 86 - native.EDITOR-CONTAINERS (Failed)\n Errors while running CTest\n\nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-containers/linux-x64-gcc13-containers-37a98b09d5\n",
+    "stderr": ""
+  }
+]
