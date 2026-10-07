@@ -1,0 +1,38 @@
+[
+  {
+    "step": "properties",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-07T06:46:53.998775+00:00",
+    "finished_at": "2026-10-07T06:46:54.853045+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2054207233,\n  \"linux_campaign_bytes\": 5054561215,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "properties",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/properties_step.py",
+      "linux-x64-gcc13",
+      "properties"
+    ],
+    "started_at": "2026-10-07T06:46:54.854026+00:00",
+    "finished_at": "2026-10-07T06:47:40.596554+00:00",
+    "exit": 8,
+    "stdout": "Test project /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n    Start 60: native.EDITOR-CONTENT-PROPERTIES\n1/1 Test #60: native.EDITOR-CONTENT-PROPERTIES ...***Failed   32.29 sec\n/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/properties-c48b8981fc07/result.json fail\nTraceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_content_properties.py\", line 151, in <module>\n    if __name__=='__main__':main()\n                            ^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_content_properties.py\", line 145, in main\n    assert not timed_out and child.returncode==0,(mode,stderr.decode(errors='replace'));case=json.loads((folder/mode/'result.json').read_text());assert case['outcome']=='pass';report['cases'].append(dict(case=mode,outcome='pass',fault_detected=case.get('fault_detected',False),record_sha256=sha(folder/mode/'result.json')))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: ('revoke', 'dbus-daemon[137659]: [session uid=1000 pid=137659] Activating service name=\\'org.a11y.Bus\\' requested by \\':1.0\\' (uid=1000 pid=137660 comm=\"/usr/bin/python3 /mnt/d/Projects/SysPane/syspane/t\" label=\"kernel\")\\ndbus-daemon[137659]: [session uid=1000 pid=137659] Successfully activated service \\'org.a11y.Bus\\'\\ndbus-daemon[137668]: Activating service name=\\'org.a11y.atspi.Registry\\' requested by \\':1.1\\' (uid=1000 pid=137671 comm=\"/home/ir4runner/.cache/syspane/campaign-229a498/li\" label=\"kernel\")\\ndbus-daemon[137668]: Successfully activated service \\'org.a11y.atspi.Registry\\'\\nTraceback (most recent call last):\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_content_properties.py\", line 151, in <module>\\n    if __name__==\\'__main__\\':main()\\n                            ^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_content_properties.py\", line 133, in main\\n    if sys.argv[1]==\\'--observe\\':observe(*map(Path,sys.argv[2:5]),sys.argv[5]);return\\n                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_content_properties.py\", line 121, in observe\\n    try:exercise(h)\\n        ^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_content_properties.py\", line 93, in exercise\\n    issued=h.command(\\'revoke\\');h.stage=\\'ERASE\\';h.wait(lambda:all(h.erased(obj) for obj in held) and h.cleared_canvas(),max(.001,issued+.2-time.monotonic()))\\n                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_editor.py\", line 71, in wait\\n    self.pump();value=predicate()\\n                      ^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_content_properties.py\", line 93, in <lambda>\\n    issued=h.command(\\'revoke\\');h.stage=\\'ERASE\\';h.wait(lambda:all(h.erased(obj) for obj in held) and h.cleared_canvas(),max(.001,issued+.2-time.monotonic()))\\n                                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_content_properties.py\", line 93, in <genexpr>\\n    issued=h.command(\\'revoke\\');h.stage=\\'ERASE\\';h.wait(lambda:all(h.erased(obj) for obj in held) and h.cleared_canvas(),max(.001,issued+.2-time.monotonic()))\\n                                                                 ^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_editor.py\", line 113, in erased\\n    try:return self.text(obj)==\\'\\'\\n               ^^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_editor.py\", line 111, in text\\n    obj.clear_cache();interface=obj.get_text_iface();return self.Atspi.Text.get_text(interface,0,-1) if interface else obj.get_name() or \\'\\'\\n                                                                                                                       ^^^^^^^^^^^^^^\\ngi.repository.GLib.GError: atspi_error: The application no longer exists (0)\\n')\n\n\n0% tests passed, 1 tests failed out of 1\n\nTotal Test time (real) =  32.29 sec\n\nThe following tests FAILED:\n\t 60 - native.EDITOR-CONTENT-PROPERTIES (Failed)\n Errors while running CTest\n\nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-content-properties/linux-x64-gcc13-properties-1a7f4630c4\n",
+    "stderr": ""
+  }
+]

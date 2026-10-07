@@ -9,6 +9,17 @@ def all_selected(h):
     h.wait(lambda:h.sensitive('space-horizontal') and h.value('title')=='')
 def pixels(h,scene):
     return [h.pixels(b['x']+4,b['y']+4,b['width']-8,b['height']-8) for b in (w['layout']['base'] for w in scene['widgets'])]
+def pixel_match(h,scene,expected):
+    try:return pixels(h,scene)==expected
+    except h.GLib.GError as error:
+        # Missing read-only geometry is no pixel observation. Retry only inside
+        # the caller's original deadline; fault calibration below requires fresh
+        # positive observations and never accepts a timeout as its pixel witness.
+        if error.domain!='atspi_error' or 'timeout from dbind' not in str(error):raise
+        assert h.proc.poll() is None
+        h.report['pixel_rpc_timeouts']=h.report.get('pixel_rpc_timeouts',0)+1
+        assert h.report['pixel_rpc_timeouts']<=64
+        return False
 def selected_frame(h,scene):
     # Await an externally painted multiselection before recording its pixels.
     # AT-SPI state can change before GTK paints; a single-selection resize handle
@@ -19,7 +30,10 @@ def held_activation(h,id):
     h.input.key(0x20,True);h.input.sync()
     try:
         while time.monotonic()<until:
-            h.pump();obj.clear_cache();assert obj.get_state_set().contains(h.Atspi.StateType.FOCUSED),'repaint stole native button focus'
+            h.pump();obj.clear_cache()
+            if not obj.get_state_set().contains(h.Atspi.StateType.FOCUSED):
+                h.report['focus_failure']={'control':id,'sensitive':h.sensitive(id),'focused':[{'name':h.text(o),'description':o.get_description(),'role':str(o.get_role())} for o in h.objects() if o.get_state_set().contains(h.Atspi.StateType.FOCUSED)]}
+                raise AssertionError('repaint stole native button focus')
             time.sleep(.005)
     finally:h.input.key(0x20,False);h.input.sync()
 def exercise(h):
@@ -38,7 +52,7 @@ def exercise(h):
     # Inspect an independently known changed box before checking pixels. The
     # frozen-preview control must really mutate the draft and retain old pixels.
     b=expected['widgets'][1]['layout']['base'];h.point(490,410);h.point(b['x']+8,b['y']+8);h.wait(lambda:h.number('x')==b['x'] and h.number('y')==b['y']);all_selected(h)
-    h.report['observed_second']={'x':b['x'],'y':b['y']};h.stage='PIXELS';h.wait(lambda:pixels(h,expected)==baseline)
+    h.report['observed_second']={'x':b['x'],'y':b['y']};h.stage='PIXELS';h.wait(lambda:pixel_match(h,expected,baseline))
     if h.mode=='left':h.click('space-horizontal');h.wait(lambda:'not enough room' in h.status());assert pixels(h,expected)==baseline
     h.click('undo');h.wait(lambda:not h.sensitive('apply'));h.wait(lambda:pixels(h,original)==baseline)
     h.click('redo');h.wait(lambda:h.sensitive('apply'));h.wait(lambda:pixels(h,expected)==baseline);h.check();h.screenshot('arranged')

@@ -60,3 +60,21 @@ Contracts: [resolution](../../spec/experience/configuration-resolution.md),
 [presets](../../spec/experience/presets.md),
 [bindings](../../spec/experience/scene-bindings.md) and
 [editing](../../spec/experience/editor.md).
+
+## Content properties in the development editor
+
+Choose **Content** with clean basic property fields. For a table, select a source
+column, edit its label and use Move column up/down to move the label and source
+together. Chart controls set the history window (1,000–3,600,000 ms), point limit
+(2–4,096), interpolation and automatic/fixed axis. Image controls choose an admitted
+asset, alternative text, preferred dimensions (1–4,096 DIP) and fit. Scene theme
+offers an admitted theme or Inherit settings, even with no selected widget.
+
+**Set content** applies one undoable draft change; **Apply** saves it. Cancel content
+discards only the dialog buffer. Invalid values leave the draft unchanged and stay
+available for correction. A policy change closes and clears the dialog; disclosure
+regrant requires Reload. Text body remains in the basic property fields.
+
+These controls currently run in the owned Linux development editor. Binding
+creation, new non-text widgets, remaining properties and installed desktop routing
+are still pending. See the [recorded scope](../../spec/delivery/content-properties-handoff.md).

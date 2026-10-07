@@ -426,6 +426,17 @@
       "sha256": "a2ea873114a7bcd78a884382bd03133b5a9d78c5c9211dd0422cc38242b0d30c"
     },
     {
+      "id": "SP-CONTENT-PROPERTIES-HANDOFF",
+      "path": "delivery/content-properties-handoff.md",
+      "title": "Native content-properties checkpoint",
+      "description": "Bounded native table, chart, image and scene-theme buffers through existing atomic owners.",
+      "requires": [
+        "SP-W10-CONTENT-PROPERTIES",
+        "SP-SNAP-HANDOFF"
+      ],
+      "sha256": "b2eb1b8a60c02d8d68b1f275ef21aff0942852afb53801eace15e6b8e59f08bb"
+    },
+    {
       "id": "SP-CONTENT-RESOLUTION-HANDOFF",
       "path": "delivery/content-resolution-handoff.md",
       "title": "Pinned content and preset preview checkpoint",
@@ -454,7 +465,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "833011628e3c21b4b122572ad1498118916c2466506818bbae0d1320ec764840"
+      "sha256": "d1ca6bf2851fd1e783a363b1d7dd68f6ced52a6129ced9d8425f5fca867c3826"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -1519,6 +1530,18 @@
       "sha256": "e5b427a02aa1e91287706cc28eb536e998c0c94b491d15ded8e6635b06ebab4f"
     },
     {
+      "id": "SP-W10-CONTENT-PROPERTIES",
+      "path": "delivery/packages/w-10-content-properties.md",
+      "title": "Native widget content and scene-theme properties",
+      "description": "Expose existing table, chart, image and theme contracts through a bounded native buffer and the shared editor draft.",
+      "requires": [
+        "SP-W10-SNAP",
+        "SP-W09-SCENE-CONTENT",
+        "SP-W09-SCENE-IMAGES"
+      ],
+      "sha256": "000a747dd55f7eaf12dd8a10ce5db8ccb52e95eaefe631a8679f40668eade0e8"
+    },
+    {
       "id": "SP-W10-EDITOR-DRAFT",
       "path": "delivery/packages/w-10-editor-draft.md",
       "title": "Shared editor draft and typed local operations",
@@ -2335,7 +2358,7 @@
         "SP-RENDERING",
         "SP-COMMANDS"
       ],
-      "sha256": "b9202273706bcc75486b8af988933601bc5e64ae70a82f5c9644957efa97ef35"
+      "sha256": "8a4d8bf5fbc801ffe4543fd79b9e594d3907f708b1606b20c8cefe0686c1a5f0"
     },
     {
       "id": "SP-POLICY",

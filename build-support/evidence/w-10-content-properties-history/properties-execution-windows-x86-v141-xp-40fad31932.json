@@ -1,0 +1,66 @@
+[
+  {
+    "step": "configure",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-07T06:51:32.746253+00:00",
+    "finished_at": "2026-10-07T06:51:33.568874+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2058863196,\n  \"linux_campaign_bytes\": 5056671168,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "configure",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "out/campaign/properties_step.py",
+      "windows-x86-v141-xp",
+      "configure"
+    ],
+    "started_at": "2026-10-07T06:51:33.569482+00:00",
+    "finished_at": "2026-10-07T06:51:36.040317+00:00",
+    "exit": 0,
+    "stdout": "-- Selecting Windows SDK version 10.0.26100.0 to target Windows 10.0.19045.\nprofile verified: windows-x86-v141-xp\nvendored dependency digests: pass\n-- Configuring done (0.9s)\n-- Generating done (0.7s)\n-- Build files have been written to: D:/Projects/SysPane/syspane/out/build/windows-x86-v141-xp\n \nAttempt: D:\\Projects\\SysPane\\syspane\\out\\campaign\\w-10-content-properties\\windows-x86-v141-xp-configure-91b7e3bb15\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-07T06:51:36.040627+00:00",
+    "finished_at": "2026-10-07T06:51:36.828883+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2061960928,\n  \"linux_campaign_bytes\": 5056671168,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "out/campaign/properties_step.py",
+      "windows-x86-v141-xp",
+      "build"
+    ],
+    "started_at": "2026-10-07T06:51:36.829162+00:00",
+    "finished_at": "2026-10-07T06:51:58.867690+00:00",
+    "exit": 1,
+    "stdout": "ort for targeting Windows XP is deprecated and will not be present in future releases of Visual Studio. Please see https://go.microsoft.com/fwlink/?linkid=2023588 for more information. [D:\\Projects\\SysPane\\syspane\\out\\build\\windows-x86-v141-xp\\syspane_network_state_tests.vcxproj]\n  syspane_network_publication.vcxproj -> D:\\Projects\\SysPane\\syspane\\out\\build\\windows-x86-v141-xp\\Release\\syspane_network_publication.lib\n  syspane_authored_tests.vcxproj -> D:\\Projects\\SysPane\\syspane\\out\\build\\windows-x86-v141-xp\\Release\\syspane_authored_tests.exe\n  syspane_network_state_tests.vcxproj -> D:\\Projects\\SysPane\\syspane\\out\\build\\windows-x86-v141-xp\\Release\\syspane_network_state_tests.exe\nC:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Enterprise\\Common7\\IDE\\VC\\VCTargets\\Platforms\\Win32\\PlatformToolsets\\v141_xp\\Toolset.targets(39,5): warning MSB8051: Support for targeting Windows XP is deprecated and will not be present in future releases of Visual Studio. Please see https://go.microsoft.com/fwlink/?linkid=2023588 for more information. [D:\\Projects\\SysPane\\syspane\\out\\build\\windows-x86-v141-xp\\syspane_command_session_tests.vcxproj]\nC:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Enterprise\\Common7\\IDE\\VC\\VCTargets\\Platforms\\Win32\\PlatformToolsets\\v141_xp\\Toolset.targets(39,5): warning MSB8051: Support for targeting Windows XP is deprecated and will not be present in future releases of Visual Studio. Please see https://go.microsoft.com/fwlink/?linkid=2023588 for more information. [D:\\Projects\\SysPane\\syspane\\out\\build\\windows-x86-v141-xp\\syspane_scene_tests.vcxproj]\nC:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Enterprise\\Common7\\IDE\\VC\\VCTargets\\Platforms\\Win32\\PlatformToolsets\\v141_xp\\Toolset.targets(39,5): warning MSB8051: Support for targeting Windows XP is deprecated and will not be present in future releases of Visual Studio. Please see https://go.microsoft.com/fwlink/?linkid=2023588 for more information. [D:\\Projects\\SysPane\\syspane\\out\\build\\windows-x86-v141-xp\\syspane_network_publication_tests.vcxproj]\n  syspane_command_session_tests.vcxproj -> D:\\Projects\\SysPane\\syspane\\out\\build\\windows-x86-v141-xp\\Release\\syspane_command_session_tests.exe\nC:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Enterprise\\Common7\\IDE\\VC\\VCTargets\\Platforms\\Win32\\PlatformToolsets\\v141_xp\\Toolset.targets(39,5): warning MSB8051: Support for targeting Windows XP is deprecated and will not be present in future releases of Visual Studio. Please see https://go.microsoft.com/fwlink/?linkid=2023588 for more information. [D:\\Projects\\SysPane\\syspane\\out\\build\\windows-x86-v141-xp\\syspane_network_view_tests.vcxproj]\n  syspane_network_publication_tests.vcxproj -> D:\\Projects\\SysPane\\syspane\\out\\build\\windows-x86-v141-xp\\Release\\syspane_network_publication_tests.exe\n  syspane_scene_tests.vcxproj -> D:\\Projects\\SysPane\\syspane\\out\\build\\windows-x86-v141-xp\\Release\\syspane_scene_tests.exe\n  syspane_network_view_tests.vcxproj -> D:\\Projects\\SysPane\\syspane\\out\\build\\windows-x86-v141-xp\\Release\\syspane_network_view_tests.exe\n  settings_content_tests.cpp\n  editor_content.cpp\n  syspane_editor_draft.vcxproj -> D:\\Projects\\SysPane\\syspane\\out\\build\\windows-x86-v141-xp\\Release\\syspane_editor_draft.lib\nC:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Enterprise\\Common7\\IDE\\VC\\VCTargets\\Platforms\\Win32\\PlatformToolsets\\v141_xp\\Toolset.targets(39,5): warning MSB8051: Support for targeting Windows XP is deprecated and will not be present in future releases of Visual Studio. Please see https://go.microsoft.com/fwlink/?linkid=2023588 for more information. [D:\\Projects\\SysPane\\syspane\\out\\build\\windows-x86-v141-xp\\syspane_editor_tests.vcxproj]\nC:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Enterprise\\Common7\\IDE\\VC\\VCTargets\\Platforms\\Win32\\PlatformToolsets\\v141_xp\\Toolset.targets(39,5): warning MSB8051: Support for targeting Windows XP is deprecated and will not be present in future releases of Visual Studio. Please see https://go.microsoft.com/fwlink/?linkid=2023588 for more information. [D:\\Projects\\SysPane\\syspane\\out\\build\\windows-x86-v141-xp\\syspane_large_command_tests.vcxproj]\n  syspane_settings_tests.vcxproj -> D:\\Projects\\SysPane\\syspane\\out\\build\\windows-x86-v141-xp\\Release\\syspane_settings_tests.exe\n  editor_draft_tests.cpp\n  large_command_tests.cpp\n  arrange_tests.cpp\n  group_tests.cpp\n  syspane_large_command_tests.vcxproj -> D:\\Projects\\SysPane\\syspane\\out\\build\\windows-x86-v141-xp\\Release\\syspane_large_command_tests.exe\n  snap_tests.cpp\n  content_properties_tests.cpp\nD:\\Projects\\SysPane\\syspane\\tests\\editor\\content_properties_tests.cpp(30): error C2220: warning treated as error - no 'object' file generated [D:\\Projects\\SysPane\\syspane\\out\\build\\windows-x86-v141-xp\\syspane_editor_tests.vcxproj]\nD:\\Projects\\SysPane\\syspane\\tests\\editor\\content_properties_tests.cpp(30): warning C4389: '==': signed/unsigned mismatch [D:\\Projects\\SysPane\\syspane\\out\\build\\windows-x86-v141-xp\\syspane_editor_tests.vcxproj]\n  Generating Code...\n \nAttempt: D:\\Projects\\SysPane\\syspane\\out\\campaign\\w-10-content-properties\\windows-x86-v141-xp-build-f3df41d87b\n",
+    "stderr": ""
+  }
+]

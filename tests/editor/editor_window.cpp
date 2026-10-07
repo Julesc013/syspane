@@ -3,6 +3,7 @@
 #include "async_commands.hpp"
 #include "generation_store_linux.hpp"
 #include "../configuration/settings_content_fixture.hpp"
+#include "../scene/chart_fixture.hpp"
 #include <gtk/gtk.h>
 #include <glib-unix.h>
 #include <algorithm>
@@ -23,7 +24,8 @@ c::Policy policy(std::uint64_t revision=7){c::Policy v;v.available=true;v.revisi
 std::string image_worker(){char path[4096];const auto n=readlink("/proc/self/exe",path,sizeof(path)-1);need(n>0,"native path");std::string value(path,static_cast<std::size_t>(n));return value.substr(0,value.rfind('/'))+"/SysPane.ImageWorker";}
 syspane::scene::Topology topology(const std::string& id="D1"){syspane::scene::Display d;d.id=id;d.bounds=d.work={0,0,500*64,420*64};return {{d},{},id};}
 struct Window {
-    std::string root,path,mode,behavior,input,epoch="E1";bool content=false,large=false,arrange=false,group=false,snap=false;Json alternate_selection;c::Authored original;c::Policy current=policy();
+    std::string root,path,mode,behavior,input,epoch="E1";bool content=false,large=false,arrange=false,group=false,snap=false,properties=false;Json alternate_selection;c::Authored original;c::Policy current=policy();
+    std::uint64_t data_token=0,data_sequence=0,last_heartbeat=0;
     std::unique_ptr<os::LinuxGenerationStore> store;std::unique_ptr<c::AsyncCommands> owner;std::unique_ptr<ui::EditorForm> form;
     GtkWidget *window=nullptr,*canary=nullptr,*overlay=nullptr;bool recovery=false;std::uint64_t serial=0;std::optional<ui::EditRequest> request;
     std::deque<std::pair<std::string,std::optional<ui::EditRequest>>> commands;
@@ -53,14 +55,15 @@ struct Window {
     }
     void open_owner(){store=std::make_unique<os::LinuxGenerationStore>(path);attach_owner();}
     void initialize(){
-        content=true;large=mode.substr(0,6)=="large-";arrange=mode.substr(0,8)=="arrange-";group=mode.substr(0,6)=="group-";snap=mode.substr(0,5)=="snap-";behavior=large?mode.substr(6):arrange?mode.substr(8):group?mode.substr(6):snap?mode.substr(5):mode;
+        content=true;large=mode.substr(0,6)=="large-";arrange=mode.substr(0,8)=="arrange-";group=mode.substr(0,6)=="group-";snap=mode.substr(0,5)=="snap-";properties=mode.substr(0,11)=="properties-";behavior=large?mode.substr(6):arrange?mode.substr(8):group?mode.substr(6):snap?mode.substr(5):properties?mode.substr(11):mode;
+        if(properties)current.disclosure[{"desktop","history"}]={"operational"};
         if(behavior=="reopen")epoch="E2";
         original={read(root+"/spec/fixtures/valid/settings.json"),read(root+"/spec/fixtures/valid/scene-portable.json")};original.settings["revision"]=original.scene["revision"]="40";
         store=std::make_unique<os::LinuxGenerationStore>(path);
         if(content&&behavior!="reopen"){
-            settings_fixture::Fixture fixture(root);auto bare=original;bare.settings["revision"]=bare.scene["revision"]="39";store->initialize(bare);
+            settings_fixture::Fixture fixture(root,properties?"tests/editor/content-properties-fixture.json":"tests/configuration/settings-content-fixture.json");auto bare=original;bare.settings["revision"]=bare.scene["revision"]="39";store->initialize(bare);
             c::ResourceProvider imports{{"scene.content"},[&](const c::Authored& v,const Json& s){return fixture.catalog->resources(s,v);}};
-            c::Transactions bootstrap(*store,"E0",imports);auto scene=read(root+(large?"/tests/configuration/large-command-cases.json":arrange?"/tests/editor/arrange-cases.json":group?"/tests/editor/group-cases.json":snap?"/tests/editor/snap-cases.json":"/tests/editor/native-cases.json"))["authored"]["scene"];scene["revision"]="39";
+            c::Transactions bootstrap(*store,"E0",imports);auto scene=read(root+(large?"/tests/configuration/large-command-cases.json":arrange?"/tests/editor/arrange-cases.json":group?"/tests/editor/group-cases.json":snap?"/tests/editor/snap-cases.json":properties?"/tests/editor/content-properties-cases.json":"/tests/editor/native-cases.json"))["authored"]["scene"];scene["revision"]="39";
             Json q={{"schema_version",large?"0.5.0":"0.4.0"},{"request_id","bootstrap"},{"expected_revision","39"},{"policy_generation","7"},{"intent","commit"},{"content",fixture.document["selection"]},{"operations",Json::array({{{"op","scene.replace"},{"scene",scene}}})}};
             const auto result=bootstrap.submit("fixture:editor","bootstrap",q.dump(),authority(),[&]{return current;},0);need(result["outcome"]=="accepted"&&result["revision"]=="40","resource bootstrap");
             alternate_selection=fixture.document["alternate_selection"];original=store->load().documents;
@@ -78,13 +81,19 @@ struct Window {
         ui::EditorForm::Actions actions;
         actions.widget_id=[&]{return "widget:new"+std::to_string(++serial);};actions.exit=[&]{commands.push_back({"exit",{}});};actions.request_id=[&]{return "editor:"+std::to_string(++serial);};actions.submit=[&](const auto& q){need(commands.size()<4,"fixture queue");commands.push_back({"submit",q});if(behavior=="callback")throw std::runtime_error("ambiguous callback delivery");};
         actions.cancel=[&](const auto& q){need(commands.size()<4,"fixture queue");commands.push_back({"cancel",q});};actions.reload=[&]{need(commands.size()<4,"fixture queue");commands.push_back({"reload",{}});};
-        form=std::make_unique<ui::EditorForm>(authority(),current,original,epoch,*resource_context(),topology(),"D1",std::vector<syspane::rendering::SurfaceProvider>{},image_worker(),std::move(actions),large);
+        auto display=topology();if(properties){display.displays[0].bounds=display.displays[0].work={0,0,640*64,560*64};display.displays[0].scale_numerator=3;display.displays[0].scale_denominator=4;}
+        form=std::make_unique<ui::EditorForm>(authority(),current,original,epoch,*resource_context(),display,"D1",properties?std::vector<syspane::rendering::SurfaceProvider>{fixture::provider()}:std::vector<syspane::rendering::SurfaceProvider>{},image_worker(),std::move(actions),large);
+        if(properties){auto link=fixture::link();link.channel="inspector";data_token=form->attach("P1",link,now()).token;need(data_token!=0,"properties provider attach");
+            for(unsigned i=1;i<=2;++i){auto document=fixture::document(i==1?20:80,i);for(auto& o:document["observations"])if(!o["measured_at"].is_null())o["measured_at"]["nanoseconds"]=std::to_string(i*1000000000ULL);
+                need(form->receive("P1",data_token,7,fixture::wire(document,link),now(),fixture::tick(i*1000000000ULL)).code==fixture::r::DataCode::accepted,"properties sample");}}
         window=gtk_window_new(GTK_WINDOW_TOPLEVEL);gtk_window_set_title(GTK_WINDOW(window),"SysPane Editor");gtk_window_set_default_size(GTK_WINDOW(window),790,580);gtk_window_move(GTK_WINDOW(window),0,recovery?100:0);
         auto* box=gtk_box_new(GTK_ORIENTATION_VERTICAL,0);overlay=gtk_overlay_new();gtk_container_add(GTK_CONTAINER(window),overlay);gtk_container_add(GTK_CONTAINER(overlay),box);gtk_box_pack_start(GTK_BOX(box),form->widget(),TRUE,TRUE,0);
         if(behavior=="retain"||behavior=="false-saved"){canary=gtk_label_new(behavior=="retain"?"Retained editor canary Move me":"");gtk_box_pack_start(GTK_BOX(box),canary,FALSE,FALSE,0);}
+        if(behavior=="retain-content"){canary=gtk_label_new("Retained content canary Initial color image");gtk_box_pack_start(GTK_BOX(box),canary,FALSE,FALSE,0);}
         g_signal_connect(window,"destroy",G_CALLBACK(+[](GtkWidget*,gpointer p){static_cast<Window*>(p)->closed=true;gtk_main_quit();}),this);gtk_widget_show_all(window);
     }
     void tick(){
+        if(data_token&&current.revision==7&&now()-last_heartbeat>=500){last_heartbeat=now();form->heartbeat("P1",data_token,7,++data_sequence,last_heartbeat);}
         if(done.load(std::memory_order_acquire)){
             worker.join();if(error)std::rethrow_exception(error);need(owner->finish(std::move(*completion),now(),true),"worker not finished");completion.reset();done.store(false,std::memory_order_relaxed);
             auto delivery=owner->delivery(now());need(delivery.has_value()&&request.has_value(),"missing command delivery");emit({{"event","result"},{"result",delivery->reply}});
@@ -98,6 +107,7 @@ struct Window {
             if(command.first=="cancel"){auto result=owner->query("fixture:editor",authority(),q.request,true,now());emit({{"event","cancel-requested"},{"result",result}});continue;}
             request=q;auto body=q.body;if(behavior=="wrong-commit"){auto changed=c::parse_command(body);changed["operations"][0]["scene"]["widgets"][0]["layout"]["base"]["x"]=71;body=changed.dump();}
             if(behavior=="wrong-group"){auto changed=c::parse_command(body);auto& children=changed["operations"][0]["scene"]["widgets"][3]["children"];std::reverse(children.begin(),children.end());body=changed.dump();}
+            if(behavior=="wrong-content"){auto changed=c::parse_command(body);changed["operations"][0]["scene"]["widgets"][3]["content"]["alt"]="Wrong replacement";body=changed.dump();}
             auto admission=owner->submit("fixture:editor","settings",1,authority(),body,true,now());emit({{"event","submitted"},{"body",c::parse_command(body)}});
             if(!admission.ticket){form->complete(q.ticket,admission.reply);emit({{"event","result"},{"result",admission.reply}});continue;}
             const auto ticket=owner->take();need(ticket.has_value()&&!worker.joinable(),"worker admission");
@@ -114,10 +124,10 @@ struct Window {
         else if(value=="topology"){form->topology(topology("D2"),"D2");}
         else if(value=="release")release();
         else if(value=="revoke"){current=policy(current.revision+1);current.disclosure.clear();owner->policy(current);form->policy(current);}
-        else if(value=="regrant"){current=policy(current.revision+1);owner->policy(current);form->policy(current);}
+        else if(value=="regrant"){current=policy(current.revision+1);if(properties)current.disclosure[{"desktop","history"}]={"operational"};owner->policy(current);form->policy(current);}
         else if(value=="deny"){current=policy(current.revision+1);current.denied_capabilities.insert(content?"content.select":"settings.commit");owner->policy(current);form->policy(current);}
         else if(value=="retrieve"){need(request.has_value()&&!worker.joinable(),"retrieve before stop");auto result=owner->query("fixture:editor",authority(),request->request,false,now());form->complete(request->ticket,result);emit({{"event","retrieved"},{"result",result}});}
-        else if(value=="restart"){need(request.has_value()&&!worker.joinable(),"restart before stop");owner.reset();store.reset();epoch="E2";current=policy(8);open_owner();form->policy(current);
+        else if(value=="restart"){need(request.has_value()&&!worker.joinable(),"restart before stop");owner.reset();store.reset();epoch="E2";current=policy(8);if(properties)current.disclosure[{"desktop","history"}]={"operational"};open_owner();form->policy(current);
             Json query={{"schema_version","0.1.0"},{"query_id","Q"},{"original_producer_epoch",request->epoch},{"request_id",request->request}};
             auto result=owner->reconcile("fixture:editor",authority(),query,now());form->reconciled(request->ticket,"Q",epoch,result);emit({{"event","reconciled"},{"response",result}});}
         else if(value=="close"){form->close();}

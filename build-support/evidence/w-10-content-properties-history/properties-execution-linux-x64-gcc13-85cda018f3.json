@@ -1,0 +1,38 @@
+[
+  {
+    "step": "properties",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-07T06:44:56.676265+00:00",
+    "finished_at": "2026-10-07T06:44:57.535093+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2051099726,\n  \"linux_campaign_bytes\": 5053900013,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "properties",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/properties_step.py",
+      "linux-x64-gcc13",
+      "properties"
+    ],
+    "started_at": "2026-10-07T06:44:57.535841+00:00",
+    "finished_at": "2026-10-07T06:45:13.444585+00:00",
+    "exit": 8,
+    "stdout": "Test project /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n    Start 60: native.EDITOR-CONTENT-PROPERTIES\n1/1 Test #60: native.EDITOR-CONTENT-PROPERTIES ...***Failed    4.76 sec\n/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/properties-437d1fdfac61/result.json fail\nTraceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_content_properties.py\", line 146, in <module>\n    if __name__=='__main__':main()\n                            ^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_content_properties.py\", line 140, in main\n    assert not timed_out and child.returncode==0,(mode,stderr.decode(errors='replace'));case=json.loads((folder/mode/'result.json').read_text());assert case['outcome']=='pass';report['cases'].append(dict(case=mode,outcome='pass',fault_detected=case.get('fault_detected',False),record_sha256=sha(folder/mode/'result.json')))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: ('order', 'dbus-daemon[126887]: [session uid=1000 pid=126887] Activating service name=\\'org.a11y.Bus\\' requested by \\':1.0\\' (uid=1000 pid=126888 comm=\"/usr/bin/python3 /mnt/d/Projects/SysPane/syspane/t\" label=\"kernel\")\\ndbus-daemon[126887]: [session uid=1000 pid=126887] Successfully activated service \\'org.a11y.Bus\\'\\ndbus-daemon[126896]: Activating service name=\\'org.a11y.atspi.Registry\\' requested by \\':1.1\\' (uid=1000 pid=126899 comm=\"/home/ir4runner/.cache/syspane/campaign-229a498/li\" label=\"kernel\")\\ndbus-daemon[126896]: Successfully activated service \\'org.a11y.atspi.Registry\\'\\nTraceback (most recent call last):\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_content_properties.py\", line 146, in <module>\\n    if __name__==\\'__main__\\':main()\\n                            ^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_content_properties.py\", line 128, in main\\n    if sys.argv[1]==\\'--observe\\':observe(*map(Path,sys.argv[2:5]),sys.argv[5]);return\\n                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_content_properties.py\", line 116, in observe\\n    try:exercise(h)\\n        ^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_content_properties.py\", line 94, in exercise\\n    populate(h,kind,mode);h.check()\\n    ^^^^^^^^^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_content_properties.py\", line 49, in populate\\n    if mode==\\'order\\':h.click(\\'content.down\\');h.wait(lambda:selected(h,\\'column\\')==\\'network.receive_bytes\\' and not h.sensitive(\\'content.down\\'))\\n                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_editor.py\", line 71, in wait\\n    self.pump();value=predicate()\\n                      ^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_content_properties.py\", line 49, in <lambda>\\n    if mode==\\'order\\':h.click(\\'content.down\\');h.wait(lambda:selected(h,\\'column\\')==\\'network.receive_bytes\\' and not h.sensitive(\\'content.down\\'))\\n                                                           ^^^^^^^^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_content_properties.py\", line 22, in selected\\n    if selection and selection.get_n_selected_children():return h.text(selection.get_selected_child(0))\\n                                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_editor.py\", line 111, in text\\n    obj.clear_cache();interface=obj.get_text_iface();return self.Atspi.Text.get_text(interface,0,-1) if interface else obj.get_name() or \\'\\'\\n                                                                                                                       ^^^^^^^^^^^^^^\\ngi.repository.GLib.GError: atspi_error: Method \"Get\" with signature \"ss\" on interface \"org.freedesktop.DBus.Properties\" could not be processed as object /org/a11y/atspi/accessible/120 does not exist\\n (1)\\n')\n\n\n0% tests passed, 1 tests failed out of 1\n\nTotal Test time (real) =   4.76 sec\n\nThe following tests FAILED:\n\t 60 - native.EDITOR-CONTENT-PROPERTIES (Failed)\n Errors while running CTest\n\nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-content-properties/linux-x64-gcc13-properties-45a9b3ca00\n",
+    "stderr": ""
+  }
+]

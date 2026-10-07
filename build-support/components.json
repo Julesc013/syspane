@@ -2166,12 +2166,14 @@
       "source_owner": "source/interfaces/",
       "public_interfaces": [
         "source/interfaces/editor_draft.hpp",
-        "source/interfaces/editor_snap.hpp"
+        "source/interfaces/editor_snap.hpp",
+        "source/interfaces/editor_content.hpp"
       ],
       "private_interfaces": [],
       "sources": [
         "source/interfaces/editor_draft.cpp",
-        "source/interfaces/editor_snap.cpp"
+        "source/interfaces/editor_snap.cpp",
+        "source/interfaces/editor_content.cpp"
       ],
       "allowed_dependencies": [
         "syspane_settings_draft",
@@ -2201,7 +2203,8 @@
         "tests/editor/editor_draft_tests.cpp",
         "tests/editor/arrange_tests.cpp",
         "tests/editor/group_tests.cpp",
-        "tests/editor/snap_tests.cpp"
+        "tests/editor/snap_tests.cpp",
+        "tests/editor/content_properties_tests.cpp"
       ],
       "allowed_dependencies": [
         "syspane_editor_draft",
@@ -2254,9 +2257,12 @@
       "public_interfaces": [
         "source/interfaces/editor_form.hpp"
       ],
-      "private_interfaces": [],
+      "private_interfaces": [
+        "source/interfaces/editor_content_form.hpp"
+      ],
       "sources": [
-        "source/interfaces/editor_form_linux.cpp"
+        "source/interfaces/editor_form_linux.cpp",
+        "source/interfaces/editor_content_form_linux.cpp"
       ],
       "allowed_dependencies": [
         "syspane_editor_draft",
@@ -2291,7 +2297,8 @@
         "syspane_generation_store",
         "syspane_child",
         "PkgConfig::GTK3",
-        "Threads::Threads"
+        "Threads::Threads",
+        "syspane_network_publication"
       ],
       "target_requirements": [
         "cxx17"

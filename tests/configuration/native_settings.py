@@ -69,15 +69,15 @@ def resource_index(directory,manifest_version="0.2.0"):
     assert sha(generation/'resources.json')==manifest['resources']
     return generation,json.loads((generation/'resources.json').read_text())
 
-def check_resources(directory,theme='theme:native',manifest_version='0.2.0'):
+def check_resources(directory,theme='theme:native',manifest_version='0.2.0',fixture=CONTENT_FIXTURE):
     generation,index=resource_index(directory,manifest_version)
-    assert index['selection']==CONTENT_FIXTURE['selection'],'resource selection differs'
+    assert index['selection']==fixture['selection'],'resource selection differs'
     expected={};pins=[]
-    for package in CONTENT_FIXTURE['packages']:
+    for package in fixture['packages']:
         raw=package['manifest'].encode();digest=hashlib.sha256(raw).hexdigest();pins.append(digest);expected['m-'+digest+'.json']=raw
         for raw in package['assets_hex'].values():
             raw=bytes.fromhex(raw);expected['a-'+hashlib.sha256(raw).hexdigest()+'.bin']=raw
-    assert index==dict(version='0.1.0',selection=CONTENT_FIXTURE['selection'],theme=CONTENT_FIXTURE['themes'][theme],packages=sorted(pins))
+    assert index==dict(version='0.1.0',selection=fixture['selection'],theme=fixture['themes'][theme],packages=sorted(pins))
     actual={p.name:p.read_bytes() for p in (generation/'resources').iterdir() if p.is_file() and not p.is_symlink()}
     assert actual==expected,'stored resource bytes differ'
     assert len(list((generation/'resources').iterdir()))==len(expected)

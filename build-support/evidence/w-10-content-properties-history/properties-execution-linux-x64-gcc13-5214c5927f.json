@@ -1,0 +1,74 @@
+[
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-07T06:51:32.746260+00:00",
+    "finished_at": "2026-10-07T06:51:33.568894+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2058863196,\n  \"linux_campaign_bytes\": 5056671168,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/properties_step.py",
+      "linux-x64-gcc13",
+      "build"
+    ],
+    "started_at": "2026-10-07T06:51:33.569432+00:00",
+    "finished_at": "2026-10-07T06:51:48.848288+00:00",
+    "exit": 0,
+    "stdout": "ninja: no work to do.\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-content-properties/linux-x64-gcc13-build-2b555c9a51\n",
+    "stderr": ""
+  },
+  {
+    "step": "test",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-07T06:51:48.848647+00:00",
+    "finished_at": "2026-10-07T06:51:49.735074+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2092888821,\n  \"linux_campaign_bytes\": 5056671168,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "test",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/properties_step.py",
+      "linux-x64-gcc13",
+      "test"
+    ],
+    "started_at": "2026-10-07T06:51:49.735390+00:00",
+    "finished_at": "2026-10-07T06:52:35.479263+00:00",
+    "exit": 0,
+    "stdout": "....   Passed    0.13 sec\n        Start 162: configuration.SCENE-CONTENT-SESSION\n 73/111 Test #162: configuration.SCENE-CONTENT-SESSION .....   Passed    0.11 sec\n        Start 163: configuration.AUTH-SCHEMA\n 74/111 Test #163: configuration.AUTH-SCHEMA ...............   Passed    0.04 sec\n        Start 164: configuration.TX-MIXED\n 75/111 Test #164: configuration.TX-MIXED ..................   Passed    0.03 sec\n        Start 165: configuration.TX-CONFLICT\n 76/111 Test #165: configuration.TX-CONFLICT ...............   Passed    0.03 sec\n        Start 166: configuration.TX-REPLAY\n 77/111 Test #166: configuration.TX-REPLAY .................   Passed    0.04 sec\n        Start 167: configuration.TX-INTERRUPT\n 78/111 Test #167: configuration.TX-INTERRUPT ..............   Passed    0.06 sec\n        Start 168: configuration.TX-BOUNDS\n 79/111 Test #168: configuration.TX-BOUNDS .................   Passed    0.04 sec\n        Start 169: configuration.TX-CAPACITY\n 80/111 Test #169: configuration.TX-CAPACITY ...............   Passed    1.06 sec\n        Start 170: configuration.DIGEST\n 81/111 Test #170: configuration.DIGEST ....................   Passed    0.02 sec\n        Start 171: configuration.DIGEST-CONTENT\n 82/111 Test #171: configuration.DIGEST-CONTENT ............   Passed    0.58 sec\n        Start 172: configuration.CONTENT-COMPOSE\n 83/111 Test #172: configuration.CONTENT-COMPOSE ...........   Passed    0.05 sec\n        Start 173: configuration.CONTENT-PINS\n 84/111 Test #173: configuration.CONTENT-PINS ..............   Passed    0.11 sec\n        Start 174: configuration.CONTENT-PATHS\n 85/111 Test #174: configuration.CONTENT-PATHS .............   Passed    0.01 sec\n        Start 175: configuration.CONTENT-BOUNDS\n 86/111 Test #175: configuration.CONTENT-BOUNDS ............   Passed    0.08 sec\n        Start 176: configuration.CONTENT-CAPABILITIES\n 87/111 Test #176: configuration.CONTENT-CAPABILITIES ......   Passed    0.07 sec\n        Start 177: configuration.CONTENT-POLICY\n 88/111 Test #177: configuration.CONTENT-POLICY ............   Passed    0.10 sec\n        Start 178: configuration.RESOURCE-COMMIT\n 89/111 Test #178: configuration.RESOURCE-COMMIT ...........   Passed    0.12 sec\n        Start 179: configuration.RESOURCE-GUARDS\n 90/111 Test #179: configuration.RESOURCE-GUARDS ...........   Passed    0.14 sec\n        Start 180: configuration.RESOURCE-SESSION\n 91/111 Test #180: configuration.RESOURCE-SESSION ..........   Passed    0.08 sec\n        Start 181: configuration.RESOURCE-RETAINED\n 92/111 Test #181: configuration.RESOURCE-RETAINED .........   Passed    0.19 sec\n        Start 217: composition.graph\n 93/111 Test #217: composition.graph .......................   Passed    0.09 sec\n        Start 218: composition.reject_forbidden\n 94/111 Test #218: composition.reject_forbidden ............   Passed    0.19 sec\n        Start 222: protocol.FRAME-01\n 95/111 Test #222: protocol.FRAME-01 .......................   Passed    0.01 sec\n        Start 223: protocol.FRAME-02\n 96/111 Test #223: protocol.FRAME-02 .......................   Passed    0.00 sec\n        Start 224: protocol.FRAME-03\n 97/111 Test #224: protocol.FRAME-03 .......................   Passed    0.00 sec\n        Start 225: protocol.JSON-01\n 98/111 Test #225: protocol.JSON-01 ........................   Passed    0.02 sec\n        Start 226: protocol.WIRE-01\n 99/111 Test #226: protocol.WIRE-01 ........................   Passed    0.00 sec\n        Start 227: protocol.NEGOTIATE-01\n100/111 Test #227: protocol.NEGOTIATE-01 ...................   Passed    0.00 sec\n        Start 228: protocol.IPC-BUDGET-01\n101/111 Test #228: protocol.IPC-BUDGET-01 ..................   Passed    0.00 sec\n        Start 229: protocol.IPC-BUDGET-02\n102/111 Test #229: protocol.IPC-BUDGET-02 ..................   Passed    0.00 sec\n        Start 230: protocol.IPC-BUDGET-03\n103/111 Test #230: protocol.IPC-BUDGET-03 ..................   Passed    0.00 sec\n        Start 231: protocol.IPC-BUDGET-04\n104/111 Test #231: protocol.IPC-BUDGET-04 ..................   Passed    0.00 sec\n        Start 232: protocol.LEDGER-01\n105/111 Test #232: protocol.LEDGER-01 ......................   Passed    0.09 sec\n        Start 233: protocol.POLICY-01\n106/111 Test #233: protocol.POLICY-01 ......................   Passed    0.00 sec\n        Start 234: protocol.POLICY-02\n107/111 Test #234: protocol.POLICY-02 ......................   Passed    0.00 sec\n        Start 235: protocol.DISCLOSURE-01\n108/111 Test #235: protocol.DISCLOSURE-01 ..................   Passed    0.00 sec\n        Start 236: protocol.QUEUE-01\n109/111 Test #236: protocol.QUEUE-01 .......................   Passed    0.00 sec\n        Start 237: protocol.SESSION-01\n110/111 Test #237: protocol.SESSION-01 .....................   Passed    0.01 sec\n        Start 238: protocol.dependencies\n111/111 Test #238: protocol.dependencies ...................   Passed    0.04 sec\n\n100% tests passed, 0 tests failed out of 111\n\nTotal Test time (real) =  30.75 sec\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-content-properties/linux-x64-gcc13-test-1d839c9f61\n",
+    "stderr": ""
+  }
+]

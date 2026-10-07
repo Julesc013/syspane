@@ -7,6 +7,12 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
+The [content-properties checkpoint](spec/delivery/content-properties-handoff.md)
+adds a native dialog for table labels/order, chart controls, immutable image choices
+and scene themes. Buffered edits apply as one undoable change; save/reopen,
+cancellation and disclosure erasure have independent native evidence. Binding
+authoring, remaining editor controls and installed editions remain open.
+
 The [snapping checkpoint](spec/delivery/snap-handoff.md) adds deterministic grid
 and alignment-guide snapping to the Linux native editor. Held-drag outlines,
 visible guides and accessible coordinates share one captured geometry projection.

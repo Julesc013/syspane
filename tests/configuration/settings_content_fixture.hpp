@@ -13,7 +13,7 @@ inline std::string hex(const std::string& value){
 }
 struct Fixture {
     Json document;c::Authored authored;std::shared_ptr<const c::ContentCatalog> catalog;
-    explicit Fixture(const std::string& root):document(read(root+"/tests/configuration/settings-content-fixture.json")),authored{document["authored"]["settings"],document["authored"]["scene"]}{
+    explicit Fixture(const std::string& root,const std::string& path="tests/configuration/settings-content-fixture.json"):document(read(root+"/"+path)),authored{document["authored"]["settings"],document["authored"]["scene"]}{
         std::vector<c::ContentPackage> packages;
         for(const auto& row:document["packages"]){c::ContentPackage package;package.manifest=row["manifest"];
             for(auto it=row["assets_hex"].begin();it!=row["assets_hex"].end();++it)package.assets[it.key()]=hex(it.value().get<std::string>());

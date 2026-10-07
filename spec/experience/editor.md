@@ -83,3 +83,13 @@ connects the shared draft, real GTK controls, scene pixels and stored transactio
 to that independent owner in a private laboratory. It covers fixed-base gestures,
 keyboard editing, buffered properties, policy erasure and frozen-editor release.
 Installed desktop entry/restoration and the complete editor remain acceptance gates.
+
+## Native content-property boundary
+
+The [content-properties package](../delivery/packages/w-10-content-properties.md)
+defines table-label/binding permutations, active chart-axis serialization, exact
+image choices and scene-theme inheritance. Modal input stays outside authored
+history. One validated batch changes content/theme; Cancel and value-identical Set
+preserve the preview. Disclosure loss erases fields and native choice models.
+The [checkpoint](../delivery/content-properties-handoff.md) records executed scope
+and remaining binding/authoring/installed acceptance.

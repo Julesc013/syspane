@@ -1,0 +1,74 @@
+[
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-07T06:40:25.899306+00:00",
+    "finished_at": "2026-10-07T06:40:26.847532+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2041756460,\n  \"linux_campaign_bytes\": 5053574139,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/properties_step.py",
+      "linux-x64-gcc13",
+      "build"
+    ],
+    "started_at": "2026-10-07T06:40:26.848193+00:00",
+    "finished_at": "2026-10-07T06:40:47.008388+00:00",
+    "exit": 0,
+    "stdout": "[1/2] Building CXX object CMakeFiles/syspane_editor_window.dir/tests/editor/editor_window.cpp.o\n[2/2] Linking CXX executable syspane_editor_window\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-content-properties/linux-x64-gcc13-build-6c2b81ce67\n",
+    "stderr": ""
+  },
+  {
+    "step": "properties",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-07T06:40:47.008682+00:00",
+    "finished_at": "2026-10-07T06:40:47.706107+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2043300474,\n  \"linux_campaign_bytes\": 5053579071,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "properties",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/properties_step.py",
+      "linux-x64-gcc13",
+      "properties"
+    ],
+    "started_at": "2026-10-07T06:40:47.706415+00:00",
+    "finished_at": "2026-10-07T06:40:59.452720+00:00",
+    "exit": 8,
+    "stdout": "Test project /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n    Start 60: native.EDITOR-CONTENT-PROPERTIES\n1/1 Test #60: native.EDITOR-CONTENT-PROPERTIES ...***Failed    1.17 sec\n/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/properties-67941004c881/result.json fail\nTraceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_content_properties.py\", line 135, in <module>\n    if __name__=='__main__':main()\n                            ^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_content_properties.py\", line 129, in main\n    assert not timed_out and child.returncode==0,(mode,stderr.decode(errors='replace'));case=json.loads((folder/mode/'result.json').read_text());assert case['outcome']=='pass';report['cases'].append(dict(case=mode,outcome='pass',fault_detected=case.get('fault_detected',False),record_sha256=sha(folder/mode/'result.json')))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: ('table', 'dbus-daemon[124843]: [session uid=1000 pid=124843] Activating service name=\\'org.a11y.Bus\\' requested by \\':1.0\\' (uid=1000 pid=124844 comm=\"/usr/bin/python3 /mnt/d/Projects/SysPane/syspane/t\" label=\"kernel\")\\ndbus-daemon[124843]: [session uid=1000 pid=124843] Successfully activated service \\'org.a11y.Bus\\'\\ndbus-daemon[124852]: Activating service name=\\'org.a11y.atspi.Registry\\' requested by \\':1.1\\' (uid=1000 pid=124855 comm=\"/home/ir4runner/.cache/syspane/campaign-229a498/li\" label=\"kernel\")\\ndbus-daemon[124852]: Successfully activated service \\'org.a11y.atspi.Registry\\'\\nTraceback (most recent call last):\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_content_properties.py\", line 135, in <module>\\n    if __name__==\\'__main__\\':main()\\n                            ^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_content_properties.py\", line 117, in main\\n    if sys.argv[1]==\\'--observe\\':observe(*map(Path,sys.argv[2:5]),sys.argv[5]);return\\n                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_content_properties.py\", line 105, in observe\\n    try:exercise(h)\\n        ^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_content_properties.py\", line 68, in exercise\\n    h.launch();h.check();h.stage=\\'SOURCE\\';h.wait(lambda:\\'Showing 1 of 1 rows\\' in canvas(h) and \\'80 byte\\' in canvas(h) and \\'Initial color image\\\\nImage ready\\' in canvas(h))\\n               ^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_editor.py\", line 156, in check\\n    assert stored(self.directory)==self.documents(scene,revision),\\'stored documents differ\\';check_resources(self.directory,manifest_version=\"0.3.0\" if self.large else \"0.2.0\")\\n                                                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_settings.py\", line 74, in check_resources\\n    assert index[\\'selection\\']==CONTENT_FIXTURE[\\'selection\\'],\\'resource selection differs\\'\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\nAssertionError: resource selection differs\\n')\n\n\n0% tests passed, 1 tests failed out of 1\n\nTotal Test time (real) =   1.18 sec\n\nThe following tests FAILED:\n\t 60 - native.EDITOR-CONTENT-PROPERTIES (Failed)\n Errors while running CTest\n\nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-content-properties/linux-x64-gcc13-properties-834b816699\n",
+    "stderr": ""
+  }
+]

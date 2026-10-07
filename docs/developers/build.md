@@ -1612,3 +1612,19 @@ current policy and topology, and route callbacks through the existing command ow
 Deliver results by their original ticket/epoch and reload with fresh resources.
 Install the separate escape owner before mapping an input-blocking editor. The
 form does not create a store, authorize itself or qualify a desktop host.
+
+### Native content properties
+
+The shared content projection lives in `source/interfaces/editor_content.*` and
+uses EditorDraft for atomic validation/history. The private GTK dialog owns only
+bounded input and admitted resource-choice buffers. Frozen scenes, package bytes
+and pins are in `tests/editor/content-properties-{cases,fixture}.json`.
+
+After the ordinary profile build, run `ctest --preset <profile> -R "^editor[.]CONTENT-" --output-on-failure`.
+In the unprivileged Linux laboratory, run `ctest --preset linux-x64-gcc13 -R "^native[.]EDITOR-CONTENT-PROPERTIES$" --output-on-failure`.
+The native observer records a 640×560 DIP display at ¾ scale, live synthetic
+telemetry, actual input, pixels, held accessible references and stored resource
+bytes. Deliberate wrong-content, frozen-preview and retained-content faults must
+be positively distinguished. Run the existing snap/group/arrange/editor/large-command
+matrices after changes to the shared native owner. See the
+[handoff](../../spec/delivery/content-properties-handoff.md) for source-bound evidence.
