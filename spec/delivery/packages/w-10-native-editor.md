@@ -26,6 +26,10 @@ The [arrangement extension](w-10-arrange.md) now closes fixed-base align/distrib
 operations and native controls through this same owner. Its deterministic arithmetic
 and geometry eligibility apply alongside the remaining authoring requirements.
 
+The [grouping extension](w-10-group.md) adds reversible fixed-container hierarchy
+operations and selection history through this same owner. Its variant bounds,
+containment and native geometry requirements apply alongside remaining authoring.
+
 ## Native behavior
 
 Updating native control availability must apply each control's final state once.

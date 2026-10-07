@@ -25,6 +25,11 @@ Selection follows scene-object identity, not row number or transient telemetry. 
 
 ## Operations
 
+The [grouping package](../delivery/packages/w-10-group.md) defines exact
+group/ungroup geometry, ownership and drawing order, atomic selection/history,
+containment rejection and native eligibility. Responsive container and flowing
+child transformations remain required; this checkpoint does not close all W-10.
+
 The [fixed-base arrangement package](../delivery/packages/w-10-arrange.md) defines
 exact alignment/spacing arithmetic, scope, rejection and native geometry checks.
 It is part of W-10; remaining responsive authoring and other operations below stay

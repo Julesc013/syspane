@@ -31,14 +31,14 @@ class Input(Observer):
     def button(self,down):assert self.xt.XTestFakeButtonEvent(self.handle,1,down,0);self.sync()
 
 class Harness:
-    def __init__(self,exe,exit_exe,folder,mode,large=False,arrange=False):
+    def __init__(self,exe,exit_exe,folder,mode,large=False,arrange=False,group=False):
         import gi
         gi.require_version('Atspi','2.0');gi.require_version('Gtk','3.0')
         from gi.repository import Atspi,GLib,Gtk,Gdk
         self.Atspi,self.GLib,self.Gtk,self.Gdk=Atspi,GLib,Gtk,Gdk
         Gtk.init([]);Atspi.set_timeout(200,500);verify();folder.mkdir(mode=0o700)
-        assert not (large and arrange)
-        self.large=large;self.arrange=arrange;self.case_path=ROOT/('tests/configuration/large-command-cases.json' if large else 'tests/editor/arrange-cases.json' if arrange else 'tests/editor/native-cases.json')
+        assert sum((large,arrange,group))<=1
+        self.large=large;self.arrange=arrange;self.group=group;self.case_path=ROOT/('tests/configuration/large-command-cases.json' if large else 'tests/editor/arrange-cases.json' if arrange else 'tests/editor/group-cases.json' if group else 'tests/editor/native-cases.json')
         self.cases=json.loads(self.case_path.read_text())
         if large:self.cases['drag']['expected']=self.cases['moved_scene']
         self.exe,self.exit_exe,self.folder,self.mode=exe,exit_exe,folder,mode
@@ -49,7 +49,7 @@ class Harness:
         self.report=dict(outcome='fail',mode=mode,events=[],observations=[],executable_sha256=sha(exe),exit_executable_sha256=sha(exit_exe),oracle_sha256=sha(Path(__file__)),fixture_sha256=sha(self.case_path))
     def launch(self,mode=None,recovery=False):
         self.controls.clear()
-        args=[str(self.exit_exe),'--owned-editor-lab',str(self.exe),str(ROOT),str(self.directory),'drag'] if recovery else [str(self.exe),str(ROOT),str(self.directory),("large-" if self.large else "arrange-" if self.arrange else "")+(mode or self.mode)]
+        args=[str(self.exit_exe),'--owned-editor-lab',str(self.exe),str(ROOT),str(self.directory),'drag'] if recovery else [str(self.exe),str(ROOT),str(self.directory),("large-" if self.large else "arrange-" if self.arrange else "group-" if self.group else "")+(mode or self.mode)]
         self.proc=subprocess.Popen(args,stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=self.err,bufsize=0)
         def collect(child):
             for line in child.stdout:

@@ -7,6 +7,11 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
+The [grouping checkpoint](spec/delivery/group-handoff.md) adds Group/Ungroup
+to the shared draft and Linux native editor. Exact hierarchy, fractional and
+responsive-variant cases accompany native drawing-order, undo, save/reopen,
+policy-erasure and restart checks. Full authoring and installed editions remain open.
+
 The [arrangement checkpoint](spec/delivery/arrange-handoff.md) adds six alignment
 and two equal-spacing actions to the shared draft and Linux native editor. Exact
 geometry cases and independent native pixels/storage checks cover undo, save,

@@ -1,0 +1,110 @@
+[
+  {
+    "step": "arrange",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-07T05:44:28.326260+00:00",
+    "finished_at": "2026-10-07T05:44:29.092101+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 1973277120,\n  \"linux_campaign_bytes\": 5092811506,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "arrange",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/group_step.py",
+      "linux-x64-gcc13",
+      "arrange"
+    ],
+    "started_at": "2026-10-07T05:44:29.092512+00:00",
+    "finished_at": "2026-10-07T05:45:08.958713+00:00",
+    "exit": 0,
+    "stdout": "Test project /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n    Start 49: native.EDITOR-ARRANGE\n1/1 Test #49: native.EDITOR-ARRANGE ............   Passed   27.90 sec\n\n100% tests passed, 0 tests failed out of 1\n\nTotal Test time (real) =  27.90 sec\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-group/linux-x64-gcc13-arrange-c0aa10c87e\n",
+    "stderr": ""
+  },
+  {
+    "step": "native",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-07T05:45:08.959087+00:00",
+    "finished_at": "2026-10-07T05:45:09.677312+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 1974795934,\n  \"linux_campaign_bytes\": 5094431438,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "native",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/group_step.py",
+      "linux-x64-gcc13",
+      "native"
+    ],
+    "started_at": "2026-10-07T05:45:09.677624+00:00",
+    "finished_at": "2026-10-07T05:45:47.663946+00:00",
+    "exit": 0,
+    "stdout": "Test project /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n    Start 48: native.EDITOR-FORM\n1/1 Test #48: native.EDITOR-FORM ...............   Passed   26.30 sec\n\n100% tests passed, 0 tests failed out of 1\n\nTotal Test time (real) =  26.30 sec\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-group/linux-x64-gcc13-native-f1ee25ff2e\n",
+    "stderr": ""
+  },
+  {
+    "step": "large",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-07T05:45:47.664256+00:00",
+    "finished_at": "2026-10-07T05:45:48.381899+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 1976309246,\n  \"linux_campaign_bytes\": 5096310157,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "large",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/group_step.py",
+      "linux-x64-gcc13",
+      "large"
+    ],
+    "started_at": "2026-10-07T05:45:48.382223+00:00",
+    "finished_at": "2026-10-07T05:46:56.177010+00:00",
+    "exit": 0,
+    "stdout": "Test project /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n    Start 51: native.LARGE-COMMANDS\n1/1 Test #51: native.LARGE-COMMANDS ............   Passed   54.68 sec\n\n100% tests passed, 0 tests failed out of 1\n\nTotal Test time (real) =  54.68 sec\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-group/linux-x64-gcc13-large-02d319fd4c\n",
+    "stderr": ""
+  }
+]

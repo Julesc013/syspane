@@ -1,0 +1,110 @@
+[
+  {
+    "step": "configure",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-07T05:31:17.277070+00:00",
+    "finished_at": "2026-10-07T05:31:18.009429+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 1916254238,\n  \"linux_campaign_bytes\": 5072465049,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "configure",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/group_step.py",
+      "linux-x64-gcc13",
+      "configure"
+    ],
+    "started_at": "2026-10-07T05:31:18.009811+00:00",
+    "finished_at": "2026-10-07T05:31:36.719979+00:00",
+    "exit": 0,
+    "stdout": "Preset CMake variables:\n\n  BUILD_TESTING=\"ON\"\n  CMAKE_BUILD_TYPE=\"Debug\"\n  CMAKE_CXX_COMPILER=\"g++\"\n  SYSPANE_PROFILE=\"linux-x64-gcc13\"\n\nprofile verified: linux-x64-gcc13\nvendored dependency digests: pass\ndiagnostic toolkit verified: GTK 3.24.41 / Ubuntu 3.24.41-4ubuntu1.3\nnative text dependency identity verified: 358 files\nnative image dependencies verified: 344 files\nnative GJS clock build dependencies verified\n-- Configuring done (6.1s)\n-- Generating done (0.1s)\n-- Build files have been written to: /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-group/linux-x64-gcc13-configure-b673a396b1\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-07T05:31:36.720271+00:00",
+    "finished_at": "2026-10-07T05:31:37.427910+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 1917762379,\n  \"linux_campaign_bytes\": 5072470367,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/group_step.py",
+      "linux-x64-gcc13",
+      "build"
+    ],
+    "started_at": "2026-10-07T05:31:37.428195+00:00",
+    "finished_at": "2026-10-07T05:32:04.333815+00:00",
+    "exit": 0,
+    "stdout": "[1/12] Building CXX object CMakeFiles/syspane_editor_draft.dir/source/interfaces/editor_draft.cpp.o\n[2/12] Linking CXX static library libsyspane_editor_draft.a\n[3/12] Building CXX object CMakeFiles/syspane_large_command_tests.dir/tests/configuration/large_command_tests.cpp.o\n[4/12] Linking CXX executable syspane_large_command_tests\n[5/12] Building CXX object CMakeFiles/syspane_editor_tests.dir/tests/editor/editor_draft_tests.cpp.o\n[6/12] Building CXX object CMakeFiles/syspane_editor_tests.dir/tests/editor/arrange_tests.cpp.o\n[7/12] Building CXX object CMakeFiles/syspane_editor_form.dir/source/interfaces/editor_form_linux.cpp.o\n[8/12] Linking CXX static library libsyspane_editor_form.a\n[9/12] Building CXX object CMakeFiles/syspane_editor_tests.dir/tests/editor/group_tests.cpp.o\n[10/12] Linking CXX executable syspane_editor_tests\n[11/12] Building CXX object CMakeFiles/syspane_editor_window.dir/tests/editor/editor_window.cpp.o\n[12/12] Linking CXX executable syspane_editor_window\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-group/linux-x64-gcc13-build-11492ba3f3\n",
+    "stderr": ""
+  },
+  {
+    "step": "focus",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-07T05:32:04.334146+00:00",
+    "finished_at": "2026-10-07T05:32:05.113224+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 1919271328,\n  \"linux_campaign_bytes\": 5089951205,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "focus",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/group_step.py",
+      "linux-x64-gcc13",
+      "focus"
+    ],
+    "started_at": "2026-10-07T05:32:05.113585+00:00",
+    "finished_at": "2026-10-07T05:32:17.804299+00:00",
+    "exit": 0,
+    "stdout": "Test project /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n    Start 23: editor.GROUP-SCENES\n1/7 Test #23: editor.GROUP-SCENES ..............   Passed    0.13 sec\n    Start 24: editor.GROUP-VARIANTS\n2/7 Test #24: editor.GROUP-VARIANTS ............   Passed    0.15 sec\n    Start 25: editor.GROUP-ORDER\n3/7 Test #25: editor.GROUP-ORDER ...............   Passed    0.07 sec\n    Start 26: editor.GROUP-ATOMIC\n4/7 Test #26: editor.GROUP-ATOMIC ..............   Passed    0.06 sec\n    Start 27: editor.GROUP-CONTAINMENT\n5/7 Test #27: editor.GROUP-CONTAINMENT .........   Passed    0.46 sec\n    Start 28: editor.GROUP-POLICY\n6/7 Test #28: editor.GROUP-POLICY ..............   Passed    0.08 sec\n    Start 29: editor.GROUP-COMPAT\n7/7 Test #29: editor.GROUP-COMPAT ..............   Passed    0.05 sec\n\n100% tests passed, 0 tests failed out of 7\n\nTotal Test time (real) =   0.99 sec\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-group/linux-x64-gcc13-focus-9264a9be54\n",
+    "stderr": ""
+  }
+]

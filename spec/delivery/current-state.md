@@ -12,14 +12,20 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-07T03:55:11Z", "scope": "Initial GTK editor, actual persistence and independent native recovery"}
+updated: {"by": "codex", "at": "2026-10-07T05:49:00Z", "scope": "Reversible native grouping, independent drawing-order/persistence evidence and remaining editor boundaries"}
 ---
 
 # Current state and next admitted boundary
 
-The latest [arrangement checkpoint](arrange-handoff.md) adds deterministic shared
+The latest [grouping checkpoint](group-handoff.md) adds atomic group/ungroup,
+selection history and native controls with exact hierarchy and pixel/storage evidence.
+Next close snapping/grid/guides, responsive/flow container transforms and remaining
+authoring/property contracts, then installed ownership and scene-aligned entry with
+independent recovery. Complete editions and historical qualification remain open.
+
+The earlier [arrangement checkpoint](arrange-handoff.md) adds deterministic shared
 alignment/spacing and native controls with independent geometry, pixel and storage
-evidence. Next close snapping/grid/guides, grouping and remaining authoring/property
+evidence. Next close snapping/grid/guides and remaining authoring/property
 contracts, then installed controller/catalog/policy routing and scene-aligned
 entry/restoration. Complete editions and historical native qualification remain open.
 

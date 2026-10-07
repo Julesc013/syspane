@@ -9,6 +9,14 @@ Property fields become one draft edit when Set properties is selected. Apply sav
 the draft; activation and desktop visibility remain separate facts. This component
 is tested in a private laboratory and is not yet an installed desktop edition.
 
+Select two or more fixed widgets in the same parent and display, then choose
+Group. The new container becomes selected; click its empty area or its list row
+to select it later. Ungroup releases its direct children while preserving their
+positions. Undo restores both the hierarchy and selection. Apply saves the draft.
+Grouping nonadjacent objects places them together at the first selected drawing
+position, which can change overlaps with intervening objects. Ungroup reports
+clipped or unsupported layouts instead of changing their visible meaning.
+
 Select at least two fixed widgets in the same group and display to align their
 edges or centers. Select at least three for equal horizontal or vertical spacing.
 Spacing keeps the endpoints in place and reports when there is insufficient room.

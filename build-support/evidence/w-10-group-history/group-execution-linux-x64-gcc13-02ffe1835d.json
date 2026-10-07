@@ -1,0 +1,38 @@
+[
+  {
+    "step": "group",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-07T05:40:28.485439+00:00",
+    "finished_at": "2026-10-07T05:40:36.694670+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 1926879812,\n  \"linux_campaign_bytes\": 5090578488,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "group",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/group_step.py",
+      "linux-x64-gcc13",
+      "group"
+    ],
+    "started_at": "2026-10-07T05:40:36.695043+00:00",
+    "finished_at": "2026-10-07T05:40:48.655183+00:00",
+    "exit": 8,
+    "stdout": "Test project /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n    Start 50: native.EDITOR-GROUP\n1/1 Test #50: native.EDITOR-GROUP ..............***Failed    1.34 sec\n/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/group-e54b842f3384/result.json fail\nTraceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_group.py\", line 110, in <module>\n    if __name__=='__main__':main()\n                            ^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_group.py\", line 102, in main\n    assert not timed_out and child.returncode==0,(mode,stderr.decode(errors='replace'));case=json.loads((folder/mode/'result.json').read_text());assert case['outcome']=='pass'\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: ('group', 'dbus-daemon[99742]: [session uid=1000 pid=99742] Activating service name=\\'org.a11y.Bus\\' requested by \\':1.0\\' (uid=1000 pid=99743 comm=\"/usr/bin/python3 /mnt/d/Projects/SysPane/syspane/t\" label=\"kernel\")\\ndbus-daemon[99742]: [session uid=1000 pid=99742] Successfully activated service \\'org.a11y.Bus\\'\\ndbus-daemon[99753]: Activating service name=\\'org.a11y.atspi.Registry\\' requested by \\':1.1\\' (uid=1000 pid=99756 comm=\"/home/ir4runner/.cache/syspane/campaign-229a498/li\" label=\"kernel\")\\ndbus-daemon[99753]: Successfully activated service \\'org.a11y.atspi.Registry\\'\\nTraceback (most recent call last):\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_group.py\", line 110, in <module>\\n    if __name__==\\'__main__\\':main()\\n                            ^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_group.py\", line 90, in main\\n    if sys.argv[1]==\\'--observe\\':observe(*map(Path,sys.argv[2:5]),sys.argv[5]);return\\n                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_group.py\", line 80, in observe\\n    try:exercise(h)\\n        ^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_group.py\", line 22, in exercise\\n    opaque=[n for n in range(0,len(second),3) if second[n:n+3]==b\\'\\\\xff\\\\xff\\\\xff\\'];assert len(opaque)>=8\\n                                                                                        ^^^^^^^^^^^^^^\\nAssertionError\\n')\n\n\n0% tests passed, 1 tests failed out of 1\n\nTotal Test time (real) =   1.34 sec\n\nThe following tests FAILED:\n\t 50 - native.EDITOR-GROUP (Failed)\n Errors while running CTest\n\nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-group/linux-x64-gcc13-group-dade1dfe33\n",
+    "stderr": ""
+  }
+]

@@ -80,6 +80,8 @@ struct EditorForm::Impl {
             else if(id=="cancel-request")active=draft.available()&&draft.active_request().has_value();else if(id=="reload")active=!closed&&!draft.active_request();
             else if(id=="properties")active=editing()&&selected&&fields_dirty;else if(id=="revert-fields")active=editing()&&fields_dirty;
             else if(id=="duplicate"||id=="delete")active=enabled&&!draft.selection().empty();
+            else if(id=="group")active=enabled&&draft.selection().size()>=2;
+            else if(id=="ungroup")active=enabled&&selected&&selected->at("kind")=="group";
             else if(id.substr(0,6)=="align-")active=enabled&&draft.selection().size()>=2;
             else if(id.substr(0,6)=="space-")active=enabled&&draft.selection().size()>=3;
             gtk_widget_set_sensitive(row.second,active);
@@ -139,12 +141,31 @@ struct EditorForm::Impl {
         else {static const std::map<std::string,Alignment> kinds={{"align-left",Alignment::left},{"align-hcenter",Alignment::hcenter},{"align-right",Alignment::right},
             {"align-top",Alignment::top},{"align-vcenter",Alignment::vcenter},{"align-bottom",Alignment::bottom}};execute({AlignWidgets{ids,kinds.at(id)}});}
     }
+    const Json& active_layout(const std::string& id)const{
+        const auto* n=node(id);need(n!=nullptr,"editor.group_geometry");const auto& l=authored_widget(*draft.scene(),id).at("layout");
+        return n->variant<0?l.at("base"):l.at("breakpoints").at(static_cast<std::size_t>(n->variant)).at("layout");
+    }
+    void group_geometry(const std::string& id,bool parent=false)const{
+        const auto& l=active_layout(id);const auto* n=node(id);
+        need(l.at("kind")=="fixed"||(parent&&l.at("kind")=="canvas"),"editor.group_geometry");
+        need(n->box.width==std::ceil(l.at("width").get<double>()*64)&&n->box.height==std::ceil(l.at("height").get<double>()*64),"editor.group_geometry");
+    }
+    void group(bool remove){
+        ready();gesture.reset();resolve_nodes();const auto ids=draft.selection();need(!ids.empty(),"editor.targets");
+        for(const auto& id:ids){group_geometry(id);need(node(id)->parent==node(ids[0])->parent,"editor.arrange_scope");}
+        const auto parent=node(ids[0])->parent;if(!parent.empty())group_geometry(parent,true);
+        if(remove){need(ids.size()==1,"editor.selection");const auto& w=authored_widget(*draft.scene(),ids[0]);need(w.at("kind")=="group","editor.group");
+            for(const auto& child:w.at("children"))group_geometry(child.get<std::string>());
+            execute({UngroupWidget{ids[0]}});
+        }else execute({GroupWidgets{ids,actions.widget_id(),"Group"}});
+    }
     void command(const std::string& id){
         if(id=="properties")properties();else if(id=="revert-fields"){fields_dirty=false;error.clear();sync(true);}
         else if(id=="apply")submit();else if(id=="reload")dispatch(actions.reload);
         else if(id=="cancel-request"){const auto q=draft.cancel_request();if(q)try{dispatch([&]{actions.cancel(*q);});}catch(...){draft.disconnected();sync();}}
         else if(id=="cancel"){draft.discard();shut();dispatch(actions.exit);}
         else if(id=="add")add();else if(id=="duplicate")duplicate();else if(id=="delete")execute({RemoveWidgets{draft.selection()}});
+        else if(id=="group"||id=="ungroup")group(id=="ungroup");
         else if(id.substr(0,6)=="align-"||id.substr(0,6)=="space-")arrange(id);
         else {ready();if(id=="undo")draft.undo();else if(id=="redo")draft.redo();changed();}
     }
@@ -202,6 +223,8 @@ struct EditorForm::Impl {
     template<class F> void event(F f)noexcept{try{if(!closed)f();}catch(const protocol::Error& e){gesture.reset();const std::string code=e.what();
         error=code=="editor.number"?"Enter a number using digits and an optional decimal point.":
             code=="editor.arrange_geometry"||code=="editor.arrange_scope"?"Arrange needs fixed widgets in the same parent and display, with no size expansion.":
+            code=="editor.group_geometry"||code=="editor.group_layout"||code=="editor.fixed"?"Grouping needs fixed layouts and a fixed or canvas parent, with no size expansion.":
+            code=="editor.group_clip"?"Ungroup would reveal clipped content. Adjust the group or child layouts first.":
             code=="editor.spacing_overlap"?"There is not enough room for equal gaps between the endpoints.":"This edit could not be applied. Check the selection and property values.";
         message(error);gtk_widget_queue_draw(canvas);}catch(...){try{shut();}catch(...){}}}
     ~Impl(){if(timer)g_source_remove(timer);try{shut();}catch(...){}surface.reset();if(root)gtk_widget_destroy(root);for(auto i=owned.rbegin();i!=owned.rend();++i)g_object_unref(*i);if(model)g_object_unref(model);}
@@ -229,6 +252,7 @@ EditorForm::EditorForm(c::Authority a,c::Policy p,c::Authored value,std::string 
     auto* align=gtk_box_new(GTK_ORIENTATION_HORIZONTAL,3);gtk_box_pack_start(GTK_BOX(i.root),align,FALSE,FALSE,0);
     for(const auto& b:std::vector<std::pair<const char*,const char*>>{{"align-left","Align left"},{"align-hcenter","Center horizontally"},{"align-right","Align right"},{"align-top","Align top"},{"align-vcenter","Center vertically"},{"align-bottom","Align bottom"}})button(align,b.first,b.second);
     button(bottom,"space-horizontal","Space horizontally");button(bottom,"space-vertical","Space vertically");
+    button(bottom,"group","Group");button(bottom,"ungroup","Ungroup");
     i.status=i.label("");accessible(i.status,"","editor.status");gtk_label_set_line_wrap(GTK_LABEL(i.status),TRUE);gtk_box_pack_start(GTK_BOX(i.root),i.status,FALSE,FALSE,0);
     g_signal_connect(selection,"changed",G_CALLBACK(+[](GtkTreeSelection* selection,gpointer p){auto& o=*static_cast<Impl*>(p);if(o.updating)return;o.event([&]{std::vector<std::string> ids;GtkTreeModel* model=nullptr;auto* rows=gtk_tree_selection_get_selected_rows(selection,&model);
         for(auto* row=rows;row;row=row->next){GtkTreeIter it;if(gtk_tree_model_get_iter(model,&it,static_cast<GtkTreePath*>(row->data))){gchar* id=nullptr;gtk_tree_model_get(model,&it,0,&id,-1);ids.emplace_back(id);g_free(id);}}g_list_free_full(rows,reinterpret_cast<GDestroyNotify>(gtk_tree_path_free));o.selected(std::move(ids));});}),&i);

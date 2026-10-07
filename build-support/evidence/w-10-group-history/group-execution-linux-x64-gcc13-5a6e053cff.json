@@ -1,0 +1,110 @@
+[
+  {
+    "step": "group",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-07T05:41:15.343060+00:00",
+    "finished_at": "2026-10-07T05:41:16.260075+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 1928435949,\n  \"linux_campaign_bytes\": 5090676002,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "group",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/group_step.py",
+      "linux-x64-gcc13",
+      "group"
+    ],
+    "started_at": "2026-10-07T05:41:16.260867+00:00",
+    "finished_at": "2026-10-07T05:41:48.244252+00:00",
+    "exit": 0,
+    "stdout": "Test project /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n    Start 50: native.EDITOR-GROUP\n1/1 Test #50: native.EDITOR-GROUP ..............   Passed   20.60 sec\n\n100% tests passed, 0 tests failed out of 1\n\nTotal Test time (real) =  20.60 sec\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-group/linux-x64-gcc13-group-23363af18e\n",
+    "stderr": ""
+  },
+  {
+    "step": "test",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-07T05:41:48.244634+00:00",
+    "finished_at": "2026-10-07T05:41:49.099455+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 1910278519,\n  \"linux_campaign_bytes\": 5092034707,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "test",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/group_step.py",
+      "linux-x64-gcc13",
+      "test"
+    ],
+    "started_at": "2026-10-07T05:41:49.099774+00:00",
+    "finished_at": "2026-10-07T05:42:38.774790+00:00",
+    "exit": 0,
+    "stdout": "....   Passed    0.15 sec\n        Start 150: configuration.SCENE-CONTENT-SESSION\n 63/101 Test #150: configuration.SCENE-CONTENT-SESSION .....   Passed    0.12 sec\n        Start 151: configuration.AUTH-SCHEMA\n 64/101 Test #151: configuration.AUTH-SCHEMA ...............   Passed    0.05 sec\n        Start 152: configuration.TX-MIXED\n 65/101 Test #152: configuration.TX-MIXED ..................   Passed    0.03 sec\n        Start 153: configuration.TX-CONFLICT\n 66/101 Test #153: configuration.TX-CONFLICT ...............   Passed    0.03 sec\n        Start 154: configuration.TX-REPLAY\n 67/101 Test #154: configuration.TX-REPLAY .................   Passed    0.04 sec\n        Start 155: configuration.TX-INTERRUPT\n 68/101 Test #155: configuration.TX-INTERRUPT ..............   Passed    0.07 sec\n        Start 156: configuration.TX-BOUNDS\n 69/101 Test #156: configuration.TX-BOUNDS .................   Passed    0.05 sec\n        Start 157: configuration.TX-CAPACITY\n 70/101 Test #157: configuration.TX-CAPACITY ...............   Passed    1.22 sec\n        Start 158: configuration.DIGEST\n 71/101 Test #158: configuration.DIGEST ....................   Passed    0.03 sec\n        Start 159: configuration.DIGEST-CONTENT\n 72/101 Test #159: configuration.DIGEST-CONTENT ............   Passed    0.63 sec\n        Start 160: configuration.CONTENT-COMPOSE\n 73/101 Test #160: configuration.CONTENT-COMPOSE ...........   Passed    0.05 sec\n        Start 161: configuration.CONTENT-PINS\n 74/101 Test #161: configuration.CONTENT-PINS ..............   Passed    0.11 sec\n        Start 162: configuration.CONTENT-PATHS\n 75/101 Test #162: configuration.CONTENT-PATHS .............   Passed    0.01 sec\n        Start 163: configuration.CONTENT-BOUNDS\n 76/101 Test #163: configuration.CONTENT-BOUNDS ............   Passed    0.08 sec\n        Start 164: configuration.CONTENT-CAPABILITIES\n 77/101 Test #164: configuration.CONTENT-CAPABILITIES ......   Passed    0.07 sec\n        Start 165: configuration.CONTENT-POLICY\n 78/101 Test #165: configuration.CONTENT-POLICY ............   Passed    0.10 sec\n        Start 166: configuration.RESOURCE-COMMIT\n 79/101 Test #166: configuration.RESOURCE-COMMIT ...........   Passed    0.13 sec\n        Start 167: configuration.RESOURCE-GUARDS\n 80/101 Test #167: configuration.RESOURCE-GUARDS ...........   Passed    0.15 sec\n        Start 168: configuration.RESOURCE-SESSION\n 81/101 Test #168: configuration.RESOURCE-SESSION ..........   Passed    0.08 sec\n        Start 169: configuration.RESOURCE-RETAINED\n 82/101 Test #169: configuration.RESOURCE-RETAINED .........   Passed    0.19 sec\n        Start 205: composition.graph\n 83/101 Test #205: composition.graph .......................   Passed    0.09 sec\n        Start 206: composition.reject_forbidden\n 84/101 Test #206: composition.reject_forbidden ............   Passed    0.19 sec\n        Start 210: protocol.FRAME-01\n 85/101 Test #210: protocol.FRAME-01 .......................   Passed    0.01 sec\n        Start 211: protocol.FRAME-02\n 86/101 Test #211: protocol.FRAME-02 .......................   Passed    0.00 sec\n        Start 212: protocol.FRAME-03\n 87/101 Test #212: protocol.FRAME-03 .......................   Passed    0.00 sec\n        Start 213: protocol.JSON-01\n 88/101 Test #213: protocol.JSON-01 ........................   Passed    0.02 sec\n        Start 214: protocol.WIRE-01\n 89/101 Test #214: protocol.WIRE-01 ........................   Passed    0.00 sec\n        Start 215: protocol.NEGOTIATE-01\n 90/101 Test #215: protocol.NEGOTIATE-01 ...................   Passed    0.00 sec\n        Start 216: protocol.IPC-BUDGET-01\n 91/101 Test #216: protocol.IPC-BUDGET-01 ..................   Passed    0.00 sec\n        Start 217: protocol.IPC-BUDGET-02\n 92/101 Test #217: protocol.IPC-BUDGET-02 ..................   Passed    0.00 sec\n        Start 218: protocol.IPC-BUDGET-03\n 93/101 Test #218: protocol.IPC-BUDGET-03 ..................   Passed    0.00 sec\n        Start 219: protocol.IPC-BUDGET-04\n 94/101 Test #219: protocol.IPC-BUDGET-04 ..................   Passed    0.00 sec\n        Start 220: protocol.LEDGER-01\n 95/101 Test #220: protocol.LEDGER-01 ......................   Passed    0.09 sec\n        Start 221: protocol.POLICY-01\n 96/101 Test #221: protocol.POLICY-01 ......................   Passed    0.00 sec\n        Start 222: protocol.POLICY-02\n 97/101 Test #222: protocol.POLICY-02 ......................   Passed    0.00 sec\n        Start 223: protocol.DISCLOSURE-01\n 98/101 Test #223: protocol.DISCLOSURE-01 ..................   Passed    0.00 sec\n        Start 224: protocol.QUEUE-01\n 99/101 Test #224: protocol.QUEUE-01 .......................   Passed    0.00 sec\n        Start 225: protocol.SESSION-01\n100/101 Test #225: protocol.SESSION-01 .....................   Passed    0.01 sec\n        Start 226: protocol.dependencies\n101/101 Test #226: protocol.dependencies ...................   Passed    0.04 sec\n\n100% tests passed, 0 tests failed out of 101\n\nTotal Test time (real) =  36.65 sec\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-group/linux-x64-gcc13-test-783620d921\n",
+    "stderr": ""
+  },
+  {
+    "step": "arrange",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-07T05:42:38.775290+00:00",
+    "finished_at": "2026-10-07T05:42:39.567006+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 1971632102,\n  \"linux_campaign_bytes\": 5092105814,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "arrange",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/group_step.py",
+      "linux-x64-gcc13",
+      "arrange"
+    ],
+    "started_at": "2026-10-07T05:42:39.567327+00:00",
+    "finished_at": "2026-10-07T05:43:04.164068+00:00",
+    "exit": 8,
+    "stdout": "Test project /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n    Start 49: native.EDITOR-ARRANGE\n1/1 Test #49: native.EDITOR-ARRANGE ............***Failed   13.06 sec\n/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/arrange-527e094a43f4/result.json fail\nTraceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_arrange.py\", line 103, in <module>\n    if __name__=='__main__':main()\n                            ^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_arrange.py\", line 95, in main\n    assert child.returncode==0,(mode,stderr.decode(errors='replace'));case=json.loads((folder/mode/'result.json').read_text());assert case['outcome']=='pass'\n           ^^^^^^^^^^^^^^^^^^^\nAssertionError: ('horizontal', 'dbus-daemon[103162]: [session uid=1000 pid=103162] Activating service name=\\'org.a11y.Bus\\' requested by \\':1.0\\' (uid=1000 pid=103163 comm=\"/usr/bin/python3 /mnt/d/Projects/SysPane/syspane/t\" label=\"kernel\")\\ndbus-daemon[103162]: [session uid=1000 pid=103162] Successfully activated service \\'org.a11y.Bus\\'\\ndbus-daemon[103171]: Activating service name=\\'org.a11y.atspi.Registry\\' requested by \\':1.1\\' (uid=1000 pid=103174 comm=\"/home/ir4runner/.cache/syspane/campaign-229a498/li\" label=\"kernel\")\\ndbus-daemon[103171]: Successfully activated service \\'org.a11y.atspi.Registry\\'\\nTraceback (most recent call last):\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_arrange.py\", line 103, in <module>\\n    if __name__==\\'__main__\\':main()\\n                            ^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_arrange.py\", line 84, in main\\n    if sys.argv[1]==\\'--observe\\':observe(*map(Path,sys.argv[2:5]),sys.argv[5]);return\\n                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_arrange.py\", line 74, in observe\\n    try:exercise(h)\\n        ^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_arrange.py\", line 44, in exercise\\n    h.click(\\'redo\\');h.wait(lambda:h.sensitive(\\'apply\\'));h.wait(lambda:pixels(h,expected)==baseline);h.check();h.screenshot(\\'arranged\\')\\n                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_editor.py\", line 71, in wait\\n    self.pump();value=predicate()\\n                      ^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_arrange.py\", line 44, in <lambda>\\n    h.click(\\'redo\\');h.wait(lambda:h.sensitive(\\'apply\\'));h.wait(lambda:pixels(h,expected)==baseline);h.check();h.screenshot(\\'arranged\\')\\n                                                                      ^^^^^^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_arrange.py\", line 11, in pixels\\n    return [h.pixels(b[\\'x\\']+4,b[\\'y\\']+4,b[\\'width\\']-8,b[\\'height\\']-8) for b in (w[\\'layout\\'][\\'base\\'] for w in scene[\\'widgets\\'])]\\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_editor.py\", line 144, in pixels\\n    rect=self.rect();return self.input.capture(rect.x+x,rect.y+y,w,h)\\n         ^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_editor.py\", line 133, in rect\\n    def rect(self):return self.find(\\'canvas\\').get_component_iface().get_extents(self.Atspi.CoordType.SCREEN)\\n                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\ngi.repository.GLib.GError: atspi_error: timeout from dbind (1)\\n')\n\n\n0% tests passed, 1 tests failed out of 1\n\nTotal Test time (real) =  13.06 sec\n\nThe following tests FAILED:\n\t 49 - native.EDITOR-ARRANGE (Failed)\n Errors while running CTest\n\nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-group/linux-x64-gcc13-arrange-460fdb7e10\n",
+    "stderr": ""
+  }
+]

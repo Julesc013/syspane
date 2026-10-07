@@ -1,5 +1,20 @@
 # Developer setup and checks
 
+The [grouping package](../../spec/delivery/packages/w-10-group.md) adds
+GroupWidgets and UngroupWidget to EditorDraft::execute. Supply sibling IDs and
+a fresh group ID/title. Group bounds cover every fixed variant; selection changes
+atomically with the scene. Ungroup requires contained fixed variants and a fixed
+container origin. Native hosts must check current resolved geometry and parent
+eligibility before using these transformations as direct-edit operations.
+
+After ordinary workspace preflight/configure/build, run `ctest --preset <profile>
+-R '^(editor[.]|settings[.]|configuration[.]|composition[.]|protocol[.])'
+--output-on-failure`. In the declared non-root Linux laboratory also run `ctest
+--preset linux-x64-gcc13 -R '^native[.](EDITOR-GROUP|EDITOR-ARRANGE|EDITOR-FORM|LARGE-COMMANDS)$'
+--output-on-failure`. Frozen scenes live in tests/editor/group-cases.json and
+tests/editor/group-overlap-cases.json. See the [handoff](../../spec/delivery/group-handoff.md)
+for executed evidence and remaining boundaries.
+
 The [arrangement package](../../spec/delivery/packages/w-10-arrange.md) adds typed
 AlignWidgets and DistributeWidgets through EditorDraft::execute. Provide stable IDs;
 alignment needs two disjoint siblings and spacing needs three. Only fixed base
