@@ -20,7 +20,7 @@ using SceneEdit=std::variant<WidgetPropertyEdit,WidgetContentEdit,SceneThemeEdit
 // policy update or close; adapters must erase their own caches on disclosure loss.
 class EditorDraft {
 public:
-    EditorDraft(configuration::Authority,configuration::Policy,configuration::Authored,std::string epoch,std::optional<SettingsResources> resources={});
+    EditorDraft(configuration::Authority,configuration::Policy,configuration::Authored,std::string epoch,std::optional<SettingsResources> resources={},bool large_commands=false);
     const Json* scene()const;
     const std::vector<std::string>& selection()const{return selected_;}
     void select(std::vector<std::string>);

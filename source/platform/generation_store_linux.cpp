@@ -132,28 +132,42 @@ struct LinuxGenerationStore::Impl {
         need(name.size()==34&&name.substr(0,2)=="g-"&&name.substr(2).find_first_not_of("0123456789abcdef")==std::string::npos,"storage.generation");
         auto dir=directory_at(root.fd,name.c_str());const auto manifest_bytes=required(dir.fd,"manifest.json",65536,synchronize);
         need(c::sha256(manifest_bytes)==pointer["manifest"],"storage.manifest_digest");const auto manifest=protocol::parse(manifest_bytes);
-        const bool resources=manifest.is_object()&&manifest.contains("version")&&manifest["version"]=="0.2.0";
+        const bool separate=manifest.is_object()&&manifest.value("version",Json())=="0.3.0";
+        const bool resources=manifest.is_object()&&(manifest.value("version",Json())=="0.2.0"||(separate&&manifest.contains("resources")));
         need((resources?protocol::members(manifest,{"version","revision","settings","scene","identity","resources"}):
-            (protocol::members(manifest,{"version","revision","settings","scene","identity"})&&manifest["version"]=="0.1.0"))&&digest(manifest["settings"])&&digest(manifest["scene"]),"storage.manifest");
+            (protocol::members(manifest,{"version","revision","settings","scene","identity"})&&(separate||manifest["version"]=="0.1.0")))&&digest(manifest["settings"])&&digest(manifest["scene"]),"storage.manifest");
         const auto settings=required(dir.fd,"settings.json",16384,synchronize),scene=required(dir.fd,"scene.json",262144,synchronize);
         need(c::sha256(settings)==manifest["settings"]&&c::sha256(scene)==manifest["scene"],"storage.document_digest");
         c::Committed value{{protocol::parse(settings),protocol::parse(scene)},std::nullopt};c::validate_authored(value.documents);
         need(resources||value.documents.scene["schema_version"]!="0.3.0","storage.resource_required");
-        if(resources){exact_files(dir.fd,{"settings.json","scene.json","manifest.json","resources.json","resources"});
-            value.resources=decode_resources(dir.fd,manifest["resources"],value.documents,synchronize);}
+        if(resources||separate){
+            std::set<std::string> expected={"settings.json","scene.json","manifest.json"};
+            if(resources)expected.insert({"resources.json","resources"});
+            if(separate)expected.insert("request.json");
+            exact_files(dir.fd,expected);
+        }
+        if(resources)value.resources=decode_resources(dir.fd,manifest["resources"],value.documents,synchronize);
         need(value.documents.settings["revision"]==manifest["revision"],"storage.revision");const auto& id=manifest["identity"];
         if(!id.is_null()){
-            need(protocol::members(id,{"principal","epoch","request","body"}),"storage.identity");
+            need(separate?protocol::members(id,{"principal","epoch","request","body_sha256"}):protocol::members(id,{"principal","epoch","request","body"}),"storage.identity");
             for(const char* key:{"principal","epoch","request"})need(id[key].is_string()&&protocol::identifier(id[key].get_ref<const std::string&>()),"storage.identity");
-            need(id["body"].is_string()&&id["body"].get_ref<const std::string&>().size()<=16384,"storage.identity");
-            const auto command=protocol::parse(id["body"].get_ref<const std::string&>());c::validate_command(command);
+            std::string body;
+            if(separate){
+                need(digest(id["body_sha256"]),"storage.identity");body=required(dir.fd,"request.json",protocol::large_command_limit,synchronize);
+                need(c::sha256(body)==id["body_sha256"],"storage.request_digest");
+            }else{
+                need(id["body"].is_string()&&id["body"].get_ref<const std::string&>().size()<=protocol::command_limit,"storage.identity");
+                body=id["body"].get<std::string>();
+            }
+            const auto command=c::parse_command(body);c::validate_command(command);
+            need((command["schema_version"]=="0.5.0")==separate,"storage.identity_version");
             need(command.contains("content")==resources&&(!resources||command["content"]==value.resources->selection()),"storage.resource_identity");
             const auto expected=protocol::decimal(command["expected_revision"].get_ref<const std::string&>());
             need(command["request_id"]==id["request"]&&command["intent"]=="commit"&&*expected<c::authored_revision(value.documents)&&
                  c::authored_revision(value.documents)-*expected==1,"storage.identity");
-            value.identity=c::CommitIdentity{id["principal"],id["epoch"],id["request"],id["body"]};
+            value.identity=c::CommitIdentity{id["principal"],id["epoch"],id["request"],std::move(body)};
         }
-        need(!resources||value.identity.has_value(),"storage.resource_identity");
+        need((!resources&&!separate)||value.identity.has_value(),"storage.resource_identity");
         if(synchronize){flush(dir.fd);flush(root.fd);}
         return value;
     }
@@ -180,6 +194,11 @@ struct LinuxGenerationStore::Impl {
             const auto settings=next.documents.settings.dump(),scene=next.documents.scene.dump();
             write(dir.fd,"settings.json",settings);step("settings");write(dir.fd,"scene.json",scene);step("scene");
             Json manifest_value={{"version",next.resources?"0.2.0":"0.1.0"},{"revision",next.documents.settings["revision"]},{"settings",c::sha256(settings)},{"scene",c::sha256(scene)},{"identity",identity(next.identity)}};
+            if(next.identity&&c::parse_command(next.identity->body)["schema_version"]=="0.5.0"){
+                manifest_value["version"]="0.3.0";manifest_value["identity"].erase("body");
+                manifest_value["identity"]["body_sha256"]=c::sha256(next.identity->body);
+                write(dir.fd,"request.json",next.identity->body);step("request");
+            }
             if(next.resources){c::validate_resource_binding(*next.resources,next.documents);manifest_value["resources"]=write_resources(dir.fd,*next.resources,hook);}
             const auto manifest=manifest_value.dump();
             need(manifest.size()<=65536,"storage.manifest_size");write(dir.fd,"manifest.json",manifest);step("manifest");flush(dir.fd);flush(root.fd);step("generation");

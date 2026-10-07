@@ -62,15 +62,15 @@ def documents(revision,edits=False):
             group,key=setting['id'].split('.');out['settings'][group][key]=setting['edit']
     return out
 
-def resource_index(directory):
+def resource_index(directory,manifest_version="0.2.0"):
     selector=json.loads((directory/'current.json').read_text());generation=directory/selector['generation']
     assert generation.parent==directory and generation.is_dir()
-    manifest=json.loads((generation/'manifest.json').read_text());assert manifest['version']=='0.2.0' and sha(generation/'manifest.json')==selector['manifest']
+    manifest=json.loads((generation/'manifest.json').read_text());assert manifest['version']==manifest_version and sha(generation/'manifest.json')==selector['manifest']
     assert sha(generation/'resources.json')==manifest['resources']
     return generation,json.loads((generation/'resources.json').read_text())
 
-def check_resources(directory,theme='theme:native'):
-    generation,index=resource_index(directory)
+def check_resources(directory,theme='theme:native',manifest_version='0.2.0'):
+    generation,index=resource_index(directory,manifest_version)
     assert index['selection']==CONTENT_FIXTURE['selection'],'resource selection differs'
     expected={};pins=[]
     for package in CONTENT_FIXTURE['packages']:

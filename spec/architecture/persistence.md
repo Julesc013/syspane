@@ -17,6 +17,14 @@ updated: {"by": "codex", "at": "2026-10-05T19:48:29+11:00", "scope": "Implementa
 
 # Configuration persistence and recovery
 
+[Manifest 0.3](../delivery/packages/w-08-large-commands.md) stores an original
+command 0.5 in a private `request.json` file, bounded at 327,680 bytes and SHA-256
+bound by the manifest identity. Flush and validate it with the complete generation
+before selection. Exact file membership, command version, revision, request/intent
+and resource pins are verified during recovery. Missing, changed or linked request
+files invalidate that generation; fallback remains coherent and read-only. Older
+manifest 0.1/0.2 readers and inline 16 KiB identities retain their original contract.
+
 The [resource generation package](../delivery/packages/w-08-resource-generations.md)
 closes the first concrete content-bearing generation format. Exact package manifests
 and asset bytes are owned by the generation, bound to command selection and validated

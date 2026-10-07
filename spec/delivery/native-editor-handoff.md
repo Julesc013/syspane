@@ -15,6 +15,11 @@ sp_sources: ["SRC-CONVERSATION"]
 
 # Native scene editor checkpoint
 
+Subsequent checkpoint: [complete-scene commands](large-commands-handoff.md) closes
+the larger-scene transport limitation recorded below. This page preserves the
+original checkpoint and its remaining independent gates.
+
+
 Source baseline: `c225a32823682b904e624d295b694d233accb773`. The
 [package](packages/w-10-native-editor.md) admits the initial Linux GTK EditorForm.
 W-10 remains in progress. This is an embeddable native component and owned laboratory

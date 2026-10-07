@@ -17,6 +17,15 @@ updated: {"by": "codex", "at": "2026-10-06T02:15:05+11:00", "scope": "Native W-2
 
 # Local transport and request lifecycle
 
+Command 0.5 additionally requires the exact document version, command-result 0.1,
+`configuration.transactions`, `configuration.large-commands` and a negotiated frame
+ceiling of at least 328,704 bytes. The [complete-scene package](../delivery/packages/w-08-large-commands.md)
+owns its 327,680-byte body and 18,432-node/depth-below-40 wrapper profile. Embedded
+scenes retain their own 262,144-byte, 16,384-node/depth-below-32 limits. Other messages
+and legacy commands retain their existing parser profile. The 1 MiB frame limit,
+incomplete-frame deadline and 16 MiB request ledger remain unchanged. Larger requests
+consume more of the existing body-plus-4-KiB reservation; no unexpired result eviction.
+
 The [resource generation profile](../delivery/packages/w-08-resource-generations.md)
 adds command 0.3 and `configuration.content` only for a controller with a resource
 provider. It requires command-result 0.1, configuration.transactions and the existing
@@ -36,8 +45,9 @@ partial accepted message. Export NDJSON is a separate framing format.
 The initial [handshake](handshake.schema.json) advertises wire major/minor, role,
 producer epoch, supported document versions and required/optional features. Major
 must match, minor is the lower supported value, and unknown required features fail.
-Effective frame limit is the minimum of both peers and the hard ceiling; parse depth
-is at most 32. Authentication uses native peer user/session identity and endpoint
+Effective frame limit is the minimum of both peers and the hard ceiling. Ordinary
+JSON containers have depth below 32; the command 0.5 wrapper profile above is the
+explicit exception. Authentication uses native peer user/session identity and endpoint
 access controls before any subscription. Claimed role/epoch never authenticates a
 peer or grants privileges. No network listener is enabled by this contract.
 

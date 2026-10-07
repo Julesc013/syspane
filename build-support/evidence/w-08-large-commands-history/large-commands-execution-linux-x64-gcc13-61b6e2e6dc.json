@@ -1,0 +1,74 @@
+[
+  {
+    "step": "configure",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-07T04:21:53.421808+00:00",
+    "finished_at": "2026-10-07T04:21:54.435234+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 1756890241,\n  \"linux_campaign_bytes\": 4830991621,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "configure",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/large_commands_step.py",
+      "linux-x64-gcc13",
+      "configure"
+    ],
+    "started_at": "2026-10-07T04:21:54.435708+00:00",
+    "finished_at": "2026-10-07T04:22:10.757779+00:00",
+    "exit": 0,
+    "stdout": "Preset CMake variables:\n\n  BUILD_TESTING=\"ON\"\n  CMAKE_BUILD_TYPE=\"Debug\"\n  CMAKE_CXX_COMPILER=\"g++\"\n  SYSPANE_PROFILE=\"linux-x64-gcc13\"\n\nprofile verified: linux-x64-gcc13\nvendored dependency digests: pass\ndiagnostic toolkit verified: GTK 3.24.41 / Ubuntu 3.24.41-4ubuntu1.3\nnative text dependency identity verified: 358 files\nnative image dependencies verified: 344 files\nnative GJS clock build dependencies verified\n-- Configuring done (5.7s)\n-- Generating done (0.1s)\n-- Build files have been written to: /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-08-large-commands/linux-x64-gcc13-configure-21a59269bb\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-07T04:22:10.758069+00:00",
+    "finished_at": "2026-10-07T04:22:11.424067+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 1758375088,\n  \"linux_campaign_bytes\": 4831003661,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/large_commands_step.py",
+      "linux-x64-gcc13",
+      "build"
+    ],
+    "started_at": "2026-10-07T04:22:11.424363+00:00",
+    "finished_at": "2026-10-07T04:23:08.266280+00:00",
+    "exit": 1,
+    "stdout": "b.a\n[77/157] Linking CXX static library libsyspane_scene_surface.a\n[78/157] Linking CXX static library libsyspane_editor_form.a\n[79/157] Linking CXX static library libsyspane_scene_inspector.a\n[80/157] Linking CXX static library libsyspane_network_view.a\n[81/157] Building CXX object CMakeFiles/syspane_network_probe.dir/source/application/network_probe.cpp.o\n[82/157] Linking CXX executable SysPane.NetworkProbe\n[83/157] Building CXX object CMakeFiles/syspane_health.dir/source/diagnostics/health_link.cpp.o\n[84/157] Linking CXX static library libsyspane_health.a\n[85/157] Linking CXX executable SysPane.CommandProbe\n[86/157] Building CXX object CMakeFiles/syspane_gjs_clock.dir/source/desktop/gnome/native_health_view.cpp.o\n[87/157] Building CXX object CMakeFiles/syspane_gjs_clock.dir/source/desktop/gnome/native_network_view.cpp.o\n[88/157] Linking CXX shared library libsyspane_gjs_clock.so\n[89/157] Building CXX object CMakeFiles/syspane_collector_probe.dir/source/application/collector_probe.cpp.o\n[90/157] Linking CXX executable SysPane.CollectorProbe\n[91/157] Building CXX object CMakeFiles/syspane_ipc_probe.dir/source/application/ipc_probe.cpp.o\n[92/157] Linking CXX executable SysPane.IpcProbe\n[93/157] Building CXX object CMakeFiles/syspane_recovery_probe.dir/source/application/recovery_probe.cpp.o\n[94/157] Building CXX object CMakeFiles/syspane_telemetry_probe.dir/source/application/telemetry_probe.cpp.o\n[95/157] Linking CXX executable SysPane.RecoveryProbe\n[96/157] Linking CXX executable SysPane.TelemetryProbe\n[97/157] Building CXX object CMakeFiles/syspane_large_command_tests.dir/tests/configuration/large_command_tests.cpp.o\nFAILED: CMakeFiles/syspane_large_command_tests.dir/tests/configuration/large_command_tests.cpp.o \n/usr/bin/g++ -DJSON_DIAGNOSTICS=0 -DJSON_DIAGNOSTIC_POSITIONS=1 -I/mnt/d/Projects/SysPane/syspane/source/interfaces -I/mnt/d/Projects/SysPane/syspane/source/configuration -I/mnt/d/Projects/SysPane/syspane/source/protocol -isystem /mnt/d/Projects/SysPane/syspane/source/third_party -g -std=c++17 -Wall -Wextra -Wpedantic -Werror -march=x86-64 -mtune=generic -MD -MT CMakeFiles/syspane_large_command_tests.dir/tests/configuration/large_command_tests.cpp.o -MF CMakeFiles/syspane_large_command_tests.dir/tests/configuration/large_command_tests.cpp.o.d -o CMakeFiles/syspane_large_command_tests.dir/tests/configuration/large_command_tests.cpp.o -c /mnt/d/Projects/SysPane/syspane/tests/configuration/large_command_tests.cpp\n/mnt/d/Projects/SysPane/syspane/tests/configuration/large_command_tests.cpp: In member function \u2018virtual std::optional<syspane::configuration::Committed> Store::reconcile(const std::string&, const std::string&, const std::string&) const\u2019:\n/mnt/d/Projects/SysPane/syspane/tests/configuration/large_command_tests.cpp:18:9: error: this \u2018for\u2019 clause does not guard... [-Werror=misleading-indentation]\n   18 |         for(const auto* v:{&current,&previous})if(v->identity&&v->identity->principal==principal&&v->identity->epoch==epoch&&v->identity->request==request)return *v;return {};\n      |         ^~~\n/mnt/d/Projects/SysPane/syspane/tests/configuration/large_command_tests.cpp:18:166: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the \u2018for\u2019\n   18 |         for(const auto* v:{&current,&previous})if(v->identity&&v->identity->principal==principal&&v->identity->epoch==epoch&&v->identity->request==request)return *v;return {};\n      |                                                                                                                                                                      ^~~~~~\n/mnt/d/Projects/SysPane/syspane/tests/configuration/large_command_tests.cpp: In function \u2018void run(const std::string&, const std::string&)\u2019:\n/mnt/d/Projects/SysPane/syspane/tests/configuration/large_command_tests.cpp:55:9: error: this \u2018for\u2019 clause does not guard... [-Werror=misleading-indentation]\n   55 |         for(std::size_t n=nodes(excessive);n<=18432;++n)excessive[\"extensions\"][\"author.nodes\"].push_back(0);rejects([&]{c::parse_command(excessive.dump());});\n      |         ^~~\n/mnt/d/Projects/SysPane/syspane/tests/configuration/large_command_tests.cpp:55:110: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the \u2018for\u2019\n   55 |         for(std::size_t n=nodes(excessive);n<=18432;++n)excessive[\"extensions\"][\"author.nodes\"].push_back(0);rejects([&]{c::parse_command(excessive.dump());});\n      |                                                                                                              ^~~~~~~\ncc1plus: all warnings being treated as errors\n[98/157] Building CXX object CMakeFiles/syspane_editor_tests.dir/tests/editor/editor_draft_tests.cpp.o\n[99/157] Building CXX object CMakeFiles/syspane_settings_tests.dir/tests/configuration/settings_draft_tests.cpp.o\n[100/157] Building CXX object CMakeFiles/syspane_settings_tests.dir/tests/configuration/settings_content_tests.cpp.o\nninja: build stopped: subcommand failed.\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-08-large-commands/linux-x64-gcc13-build-35cff28521\n",
+    "stderr": ""
+  }
+]

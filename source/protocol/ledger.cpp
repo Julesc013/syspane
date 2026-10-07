@@ -4,7 +4,7 @@
 
 namespace syspane::protocol {
 namespace {
-constexpr std::size_t result_bytes = 4096, body_bytes = 16384, total_bytes = 16 * 1024 * 1024;
+constexpr std::size_t result_bytes = 4096, total_bytes = 16 * 1024 * 1024;
 }
 void Ledger::advance(std::uint64_t now) {
     if (last_ && now < *last_) throw Error("clock.regressed");
@@ -17,9 +17,9 @@ void Ledger::advance(std::uint64_t now) {
     }
 }
 Admission Ledger::admit(const std::string& principal, const std::string& connection,
-                         const std::string& request, std::string body, std::uint64_t now) {
+                         const std::string& request, std::string body, std::uint64_t now,bool large_command) {
     advance(now);
-    if (!identifier(principal) || !identifier(connection) || !identifier(request) || body.empty() || body.size() > body_bytes)
+    if (!identifier(principal) || !identifier(connection) || !identifier(request) || body.empty() || body.size() > (large_command?large_command_limit:command_limit))
         throw Error("request.invalid");
     const auto key = std::make_pair(principal, request);
     if (const auto it = records_.find(key); it != records_.end()) {

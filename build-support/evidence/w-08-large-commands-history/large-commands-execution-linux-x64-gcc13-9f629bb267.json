@@ -1,0 +1,38 @@
+[
+  {
+    "step": "large",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-07T04:27:38.023248+00:00",
+    "finished_at": "2026-10-07T04:27:41.042738+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 1769607612,\n  \"linux_campaign_bytes\": 4859201643,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "large",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/large_commands_step.py",
+      "linux-x64-gcc13",
+      "large"
+    ],
+    "started_at": "2026-10-07T04:27:41.043130+00:00",
+    "finished_at": "2026-10-07T04:28:41.809977+00:00",
+    "exit": 8,
+    "stdout": "Test project /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n    Start 36: native.LARGE-COMMANDS\n1/1 Test #36: native.LARGE-COMMANDS ............***Failed   42.72 sec\n/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/large-commands-6ed0c9079b9c/result.json fail\nTraceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_large_commands.py\", line 187, in <module>\n    if __name__=='__main__':main()\n                            ^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_large_commands.py\", line 169, in main\n    native(exe,probe,folder,report)\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_large_commands.py\", line 151, in native\n    fault=owner.event('fault');assert fault['reason']=='transaction.deadline';reaped=owner.event('reaped');assert reaped['pid']==ready['pid'] and select.select([owner.children[ready['pid']]],[],[],0)[0]\n          ^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_large_commands.py\", line 98, in event\n    raise AssertionError(('event timeout',name,self.log))\nAssertionError: ('event timeout', 'fault', [{'endpoint': '/home/ir4runner/.cache/syspane/ipc-w24/large-2e3b6040/c1/s', 'epoch': 'supervised:64653:1', 'event': 'launched', 'generation': 1, 'observed_ms': 23400828, 'pid': 64655}, {'endpoint': '/home/ir4runner/.cache/syspane/ipc-w24/large-2e3b6040/c1/s', 'epoch': 'supervised:64653:1', 'event': 'ready', 'observed_ms': 23401543, 'pid': 64655}, {'event': 'armed', 'observed_ms': 23401787, 'pid': 64655, 'ticket': 1}, {'event': 'finished', 'observed_ms': 23401977, 'pid': 64655, 'ticket': 1}])\n\n\n0% tests passed, 1 tests failed out of 1\n\nTotal Test time (real) =  42.73 sec\n\nThe following tests FAILED:\n\t 36 - native.LARGE-COMMANDS (Failed)\n Errors while running CTest\n\nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-08-large-commands/linux-x64-gcc13-large-726a08a3a9\n",
+    "stderr": ""
+  }
+]

@@ -6,6 +6,8 @@ struct Authored { Json settings,scene; };
 // Throws a bounded protocol::Error; optional annotations remain authored content.
 void validate_authored(const Authored& value);
 void validate_command(const Json& value);
+// Parses original bytes with version-specific bounds; schema validation remains explicit.
+Json parse_command(std::string_view bytes);
 void validate_command_result(const Json& value);
 // Closed content schemas use the same compiled validator as authored transactions.
 void validate_content_document(const Json& value,const std::string& kind);

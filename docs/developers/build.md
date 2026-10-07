@@ -1,5 +1,20 @@
 # Developer setup and checks
 
+The [complete-scene command package](../../spec/delivery/packages/w-08-large-commands.md)
+adds command 0.5 and Linux generation manifest 0.3. Pass `large_commands=true` as the
+last `SettingsDraft`, `EditorDraft` or `EditorForm` constructor argument only after
+the host has negotiated the exact version, features and frame floor. Legacy default
+behavior remains unchanged. Do not rewrite an unresolved request on reconnect.
+ContentCatalog preview accepts the explicit `configuration.large-commands` capability.
+
+After the ordinary workspace preflight/configure/build, run `ctest --preset <profile>
+-R '^(configuration[.]LARGE-|editor[.]|settings[.]|configuration[.]|protocol[.]|composition[.])'
+--output-on-failure`. Linux additionally runs `ctest --preset linux-x64-gcc13 -R
+'^native[.](LARGE-COMMANDS|CONFIG-STORE|COMMAND-IPC|CONTENT-COMMANDS|RESOURCE-GENERATIONS|SCENE-CONTENT|EDITOR-FORM|SETTINGS-FORM)$'
+--output-on-failure` in the declared non-root campaign workspace. The new native
+family uses private ext4, authenticated IPC and owned Xvfb/DBus. Its records bind
+original request bytes, coherent documents, resource pins and actual process exit.
+
 The [editor draft package](../../spec/delivery/packages/w-10-editor-draft.md) adds
 `syspane_editor_draft` and `interfaces::EditorDraft`. Construct it on one serialized
 owner with the same coherent Authored/Authority/Policy/epoch and optional immutable
@@ -17,9 +32,9 @@ Disconnect/callback failure remains unresolved; never retry under a new identity
 Close erases local state and cannot reverse a submitted transaction.
 
 History holds at most 64 entries and 8 MiB of canonical scene/selection JSON bytes.
-Local scenes retain their 256 KiB contract, while oversized current wire commands
-reject without discarding the draft. The larger-scene envelope and native editing
-surface remain required. After normal workspace preflight/configure/build, run
+Local scenes retain their 256 KiB contract. Legacy oversized commands reject
+without discarding the draft; explicitly negotiated command 0.5 supports full scenes.
+The initial native editing component is recorded in the native editor handoff. After normal workspace preflight/configure/build, run
 `ctest --preset <profile> -R '^(editor[.]|settings[.]|configuration[.]|composition[.]|protocol[.](POLICY-|DISCLOSURE-))' --output-on-failure`.
 Linux also runs the existing `native.SETTINGS-FORM` regression for the shared owner.
 The [handoff](../../spec/delivery/editor-draft-handoff.md) records exact evidence and

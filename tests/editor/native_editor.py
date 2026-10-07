@@ -31,20 +31,23 @@ class Input(Observer):
     def button(self,down):assert self.xt.XTestFakeButtonEvent(self.handle,1,down,0);self.sync()
 
 class Harness:
-    def __init__(self,exe,exit_exe,folder,mode):
+    def __init__(self,exe,exit_exe,folder,mode,large=False):
         import gi
         gi.require_version('Atspi','2.0');gi.require_version('Gtk','3.0')
         from gi.repository import Atspi,GLib,Gtk,Gdk
         self.Atspi,self.GLib,self.Gtk,self.Gdk=Atspi,GLib,Gtk,Gdk
         Gtk.init([]);Atspi.set_timeout(200,500);verify();folder.mkdir(mode=0o700)
+        self.large=large;self.case_path=ROOT/('tests/configuration/large-command-cases.json' if large else 'tests/editor/native-cases.json')
+        self.cases=json.loads(self.case_path.read_text())
+        if large:self.cases['drag']['expected']=self.cases['moved_scene']
         self.exe,self.exit_exe,self.folder,self.mode=exe,exit_exe,folder,mode
         self.directory=folder/'store';self.directory.mkdir(mode=0o700)
         assert subprocess.check_output(['findmnt','--target',str(self.directory),'--noheadings','--output','FSTYPE'],text=True).strip()=='ext4'
         self.proc=None;self.pid=None;self.fd=None;self.stage='startup';self.events=queue.Queue();self.inbox=[];self.input=Input()
         self.err=(folder/'stderr').open('wb')
-        self.report=dict(outcome='fail',mode=mode,events=[],observations=[],executable_sha256=sha(exe),exit_executable_sha256=sha(exit_exe),oracle_sha256=sha(Path(__file__)),fixture_sha256=sha(ROOT/'tests/editor/native-cases.json'))
+        self.report=dict(outcome='fail',mode=mode,events=[],observations=[],executable_sha256=sha(exe),exit_executable_sha256=sha(exit_exe),oracle_sha256=sha(Path(__file__)),fixture_sha256=sha(self.case_path))
     def launch(self,mode=None,recovery=False):
-        args=[str(self.exit_exe),'--owned-editor-lab',str(self.exe),str(ROOT),str(self.directory),'drag'] if recovery else [str(self.exe),str(ROOT),str(self.directory),mode or self.mode]
+        args=[str(self.exit_exe),'--owned-editor-lab',str(self.exe),str(ROOT),str(self.directory),'drag'] if recovery else [str(self.exe),str(ROOT),str(self.directory),("large-" if self.large else "")+(mode or self.mode)]
         self.proc=subprocess.Popen(args,stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=self.err,bufsize=0)
         def collect(child):
             for line in child.stdout:
@@ -130,12 +133,12 @@ class Harness:
         pixels=b''.join(b'\0'+raw[n*2400:(n+1)*2400] for n in range(600))
         (self.folder/(name+'.png')).write_bytes(b'\x89PNG\r\n\x1a\n'+chunk(b'IHDR',struct.pack('!2I5B',800,600,8,2,0,0,0))+chunk(b'IDAT',zlib.compress(pixels))+chunk(b'IEND',b''))
     def documents(self,scene=None,revision='40'):
-        value=copy.deepcopy(CASES['authored'])
+        value=copy.deepcopy(self.cases['authored'])
         if scene is not None:value['scene']=copy.deepcopy(scene)
         for doc in value.values():doc['revision']=revision
         return value
     def check(self,scene=None,revision='40'):
-        assert stored(self.directory)==self.documents(scene,revision),'stored documents differ';check_resources(self.directory)
+        assert stored(self.directory)==self.documents(scene,revision),'stored documents differ';check_resources(self.directory,manifest_version="0.3.0" if self.large else "0.2.0")
     def note(self,name):self.report['observations'].append(dict(case=name,status=self.status(),documents=stored(self.directory)))
     def close(self):
         if self.proc and self.proc.poll() is None:self.proc.kill();self.proc.wait(timeout=5)
@@ -145,6 +148,7 @@ class Harness:
         self.input.close();self.err.close();(self.folder/'result.json').write_text(json.dumps(self.report,indent=2)+'\n')
 
 def exercise(h):
+    CASES=h.cases
     mode=h.mode;h.launch()
     if mode=='conflict':
         other=copy.deepcopy(CASES['authored']['scene']);other['widgets'][0]['title']='Theirs';h.check(other,'41')
@@ -232,6 +236,7 @@ def exercise(h):
     assert mode not in ('frozen-preview','wrong-commit','retain'),'deliberate fault escaped observer';h.report['outcome']='pass'
 
 def recovery(h):
+    CASES=h.cases
     mode=h.mode[9:];h.stage='RECOVERY';assert h.input.pixel()=='116633';h.input.click();assert h.input.clicks()==1
     if mode=='conflict':
         h.input.grab();h.proc=subprocess.Popen([str(h.exit_exe),'--owned-editor-lab',str(h.exe),str(ROOT),str(h.directory),'drag'],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
@@ -257,8 +262,8 @@ def recovery(h):
     if mode!='owner-loss':h.event('event','child_signal');assert any(e['event']=='force_stop' for e in h.report['events'])
     h.report['outcome']='pass'
 
-def observe(exe,exit_exe,folder,mode):
-    h=Harness(exe,exit_exe,folder,mode)
+def observe(exe,exit_exe,folder,mode,large=False):
+    h=Harness(exe,exit_exe,folder,mode,large)
     try:recovery(h) if mode.startswith('recovery-') else exercise(h)
     except AssertionError as exc:
         h.report.update(error=str(exc),stage=h.stage)

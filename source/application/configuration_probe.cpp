@@ -10,9 +10,9 @@
 #include <unistd.h>
 
 namespace c=syspane::configuration;namespace os=syspane::platform;using syspane::protocol::Json;
-std::string read(const char* path){std::ifstream input(path,std::ios::binary);if(!input)throw syspane::protocol::Error("probe.input");
+std::string read(const char* path,std::size_t maximum=262144){std::ifstream input(path,std::ios::binary);if(!input)throw syspane::protocol::Error("probe.input");
     std::string value;char buffer[4096];while(input){input.read(buffer,sizeof buffer);value.append(buffer,static_cast<std::size_t>(input.gcount()));
-        if(value.size()>262144)throw syspane::protocol::Error("probe.size");}
+        if(value.size()>maximum)throw syspane::protocol::Error("probe.size");}
     const auto end=value.find_last_not_of(" \r\n\t");if(end==std::string::npos)throw syspane::protocol::Error("probe.empty");value.resize(end+1);return value;}
 int main(int argc,char** argv){try{
     if(argc<3||argc>69||::geteuid()==0)throw syspane::protocol::Error("probe.arguments");
@@ -31,11 +31,11 @@ int main(int argc,char** argv){try{
         c::Transactions tx(store,"E1",std::move(provider));c::Policy policy;policy.available=true;policy.revision=7;
         if(fault=="deny")policy.denied_capabilities.insert("scene.selector");
         if(fault=="deny-content")policy.denied_capabilities.insert("scene.content");
-        std::cout<<Json{{"result",tx.submit("fixture:principal","fixture:connection",read(argv[3]),{true,"console",{"console"}},[&]{auto current=policy;if(revoked)current.revision=8;return current;},0)}}.dump()<<std::endl;return 0;
+        std::cout<<Json{{"result",tx.submit("fixture:principal","fixture:connection",read(argv[3],syspane::protocol::large_command_limit),{true,"console",{"console"}},[&]{auto current=policy;if(revoked)current.revision=8;return current;},0)}}.dump()<<std::endl;return 0;
     }else if(mode=="commit"&&(argc==4||argc==5)){
         c::Transactions tx(store,"E1",[](const c::Authored& v){if(v.settings["display"]["theme_id"]!="theme:native"||
             (!v.scene["theme_id"].is_null()&&v.scene["theme_id"]!="theme:native"))throw syspane::protocol::Error("resource.unavailable");});c::Policy policy;policy.available=true;policy.revision=7;
-        std::cout<<Json{{"result",tx.submit("fixture:principal","fixture:connection",read(argv[3]),{true,"console",{"console"}},[&]{auto current=policy;if(revoked)current.revision=8;return current;},0)}}.dump()<<std::endl;return 0;
+        std::cout<<Json{{"result",tx.submit("fixture:principal","fixture:connection",read(argv[3],syspane::protocol::large_command_limit),{true,"console",{"console"}},[&]{auto current=policy;if(revoked)current.revision=8;return current;},0)}}.dump()<<std::endl;return 0;
     }else if((mode=="reconcile"||mode=="deny-reconcile")&&argc==5){
         c::Transactions tx(store,"E2",[](const c::Authored&){});c::Policy policy;policy.available=true;policy.revision=8;if(mode=="deny-reconcile")policy.denied_capabilities.insert("scene.replace");
         std::cout<<Json{{"result",tx.reconcile("fixture:principal",argv[3],argv[4],{true,"console",{"console"}},policy)}}.dump()<<std::endl;return 0;

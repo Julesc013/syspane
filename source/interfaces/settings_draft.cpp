@@ -21,7 +21,7 @@ const std::vector<SettingDescription>& setting_descriptions(){
             d.kind==c::Kind::boolean?SettingKind::boolean:d.kind==c::Kind::integer?SettingKind::integer:SettingKind::identifier,Json::parse(d.default_json)});
         return out;}();return rows;
 }
-SettingsDraft::SettingsDraft(c::Authority authority,c::Policy policy,c::Authored value,std::string epoch,std::optional<SettingsResources> resources):authority_(std::move(authority)),policy_(std::move(policy)){
+SettingsDraft::SettingsDraft(c::Authority authority,c::Policy policy,c::Authored value,std::string epoch,std::optional<SettingsResources> resources,bool large_commands):authority_(std::move(authority)),policy_(std::move(policy)),large_commands_(large_commands){
     if(policy_.available)highest_policy_=policy_.revision;
     reload(std::move(value),std::move(epoch),std::move(resources));
 }
@@ -55,7 +55,7 @@ Json SettingsDraft::command(const std::string& intent,const std::string& request
     Json ops=Json::array();for(const auto& d:setting_descriptions())if(setting(*base_,d.id)!=setting(*draft_,d.id))ops.push_back({{"op","settings.set"},{"path",d.id},{"value",setting(*draft_,d.id)}});
     const bool scene_changed=draft_->scene!=base_->scene;
     if(scene_changed)ops.push_back({{"op","scene.replace"},{"scene",draft_->scene}});
-    Json result={{"schema_version",context_?(scene_changed&&draft_->scene["schema_version"]=="0.3.0"?"0.4.0":"0.3.0"):"0.2.0"},{"request_id",request},{"expected_revision",base_->settings["revision"]},{"policy_generation",std::to_string(policy_.revision)},{"intent",intent},{"operations",std::move(ops)}};
+    Json result={{"schema_version",large_commands_?"0.5.0":context_?(scene_changed&&draft_->scene["schema_version"]=="0.3.0"?"0.4.0":"0.3.0"):"0.2.0"},{"request_id",request},{"expected_revision",base_->settings["revision"]},{"policy_generation",std::to_string(policy_.revision)},{"intent",intent},{"operations",std::move(ops)}};
     if(context_)result["content"]=context_->selection;
     return result;
 }

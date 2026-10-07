@@ -33,7 +33,7 @@ void AsyncCommands::advance(std::uint64_t now){
 Json AsyncCommands::reply(const std::string& request,const char* outcome,const char* code)const{return result({outcome,code},request,epoch_,revision_);}
 Decision AsyncCommands::authorize(const std::string& body,const Authority& authority)const{
     try{
-        auto command=protocol::parse(body);validate_command(command);const auto policy=snapshot();
+        auto command=parse_command(body);validate_command(command);const auto policy=snapshot();
         command["expected_revision"]=std::to_string(revision_);command["policy_generation"]=std::to_string(policy.revision);
         authorize_authored(command,authority,policy,revision_);return {"preview",""};
     }catch(const Error& e){return decision(e.what());}
@@ -41,10 +41,9 @@ Decision AsyncCommands::authorize(const std::string& body,const Authority& autho
 CommandAdmission AsyncCommands::submit(const std::string& principal,const std::string& connection,std::uint64_t lifetime,
     const Authority& authority,std::string body,bool transactions,std::uint64_t now){
     advance(now);
-    const auto command=protocol::parse(body);
+    const auto command=protocol::parse(body,protocol::ParseProfile::large_command);
     const auto request=command.at("request_id").get<std::string>();
-    if(body.size()>16384)return {0,reply(request,"invalid","command.size")};
-    try{validate_command(command);}catch(const Error& e){const auto d=decision(e.what());return {0,result(d,request,epoch_,revision_)};}
+    try{(void)parse_command(body);validate_command(command);}catch(const Error& e){const auto d=decision(e.what());return {0,result(d,request,epoch_,revision_)};}
     const auto authorized=authorize(body,authority);
     if(authorized.outcome!="preview")return {0,result(authorized,request,epoch_,revision_)};
     // Negotiation restricts this connection before a retained outcome is disclosed.
@@ -64,7 +63,7 @@ CommandAdmission AsyncCommands::submit(const std::string& principal,const std::s
         if(jobs_.size()+ready_.size()>=128||tickets_==std::numeric_limits<std::uint64_t>::max())return {0,reply(request,"busy","request.capacity")};
     }
     auto job=std::make_shared<Job>(Job{tickets_+1,lifetime,principal,connection,request,std::move(body),authority});
-    const auto admission=ledger_.admit(principal,connection,request,job->body,now);
+    const auto admission=ledger_.admit(principal,connection,request,job->body,now,command["schema_version"]=="0.5.0");
     if(admission!=protocol::Admission::admitted)return {0,reply(request,"busy","request.capacity")};
     std::lock_guard<std::mutex> lock(mutex_);jobs_.emplace(job->ticket,job);++tickets_;return {job->ticket,{}};
 }
@@ -126,7 +125,7 @@ AsyncCommands::Completion AsyncCommands::run(std::uint64_t ticket){
         answer=transactions_.submit_impl(job->principal,job->connection,job->body,job->authority,[&]{return snapshot();},0,cancelled,false,[&]{
             std::lock_guard<std::mutex> lock(mutex_);
             if(job->cancelled||invalid_)throw Error("request.cancelled");
-            authorize_authored(protocol::parse(job->body),job->authority,policy_,authored_revision(transactions_.authored()));
+            authorize_authored(parse_command(job->body),job->authority,policy_,authored_revision(transactions_.authored()));
             job->committing=true;
         });
         if(!transactions_.faulted())receipts=transactions_.receipts();

@@ -7,6 +7,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [capability-unqualified.json](capability-unqualified.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [command-content-scene.json](command-content-scene.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [command-content.json](command-content.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
+- [command-large-scene.json](command-large-scene.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [command-preview.json](command-preview.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [command-result.json](command-result.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [command-scene-replace.json](command-scene-replace.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.

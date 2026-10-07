@@ -17,6 +17,14 @@ updated: {"by": "codex", "at": "2026-10-07T03:55:11Z", "scope": "Initial GTK edi
 
 # Current state and next admitted boundary
 
+The latest [complete-scene command checkpoint](large-commands-handoff.md) closes
+the local-scene/wire-size mismatch. Command 0.5, explicit capability negotiation and
+manifest 0.3 carry exact full-scene requests through the existing owners. Fixed
+boundary inputs and native IPC/storage/GTK checks cover recovery without duplicate
+publication. Next close remaining authoring/property contracts and installed
+controller/catalog/policy routing, then scene-aligned entry/restoration. Complete
+editions, historical labs and release gates remain open.
+
 The active objective is now the [complete 0.1.0 release](release-0.1.0.md) for Windows
 9x, Windows NT, Linux X11, Wayland and Mac OS X. The foundation campaign remains
 required but is no longer the final completion boundary. Legacy version/architecture
@@ -26,7 +34,7 @@ The latest [native editor checkpoint](native-editor-handoff.md) connects the sha
 draft to GTK selection, pointer/keyboard edits, buffered properties and shared scene
 pixels. The private native laboratory checks real resource-aware commits, policy
 erasure, cross-epoch reconciliation and separate-owner frozen-editor recovery.
-Next close larger-scene transport and remaining authoring/property boundaries, then
+Larger-scene transport now has the checkpoint above. Close remaining authoring/property boundaries, then
 connect installed scene-aligned desktop entry and restoration. Full editor, native
 accessibility/performance, other adapters and all complete-edition gates remain open.
 

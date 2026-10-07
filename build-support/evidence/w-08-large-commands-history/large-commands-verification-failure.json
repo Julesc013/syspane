@@ -1,0 +1,68 @@
+{
+  "source_base": "c7c2f32489caec1c1cba143ec3c48cef707a86e5",
+  "recorded_at": "2026-10-07T04:35:26.712033+00:00",
+  "checks": [
+    {
+      "command": [
+        "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "build-support/check_workspace_budget.py",
+        "--action",
+        "test"
+      ],
+      "started_at": "2026-10-07T04:35:26.712058+00:00",
+      "finished_at": "2026-10-07T04:35:27.635437+00:00",
+      "exit": 0,
+      "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 1847170515,\n  \"linux_campaign_bytes\": 4932782124,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "spec/tools/specctl.py",
+        "generate"
+      ],
+      "started_at": "2026-10-07T04:35:27.636114+00:00",
+      "finished_at": "2026-10-07T04:35:30.545826+00:00",
+      "exit": 0,
+      "stdout": "{\n  \"status\": \"pass\",\n  \"mode\": \"write\",\n  \"generated_files\": 32,\n  \"differences\": [\n    \"generated/catalog.json\",\n    \"contracts/index.md\",\n    \"delivery/index.md\",\n    \"delivery/packages/index.md\",\n    \"fixtures/invalid/index.md\",\n    \"fixtures/valid/index.md\"\n  ]\n}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "build-support/check_workspace_budget.py",
+        "--action",
+        "test"
+      ],
+      "started_at": "2026-10-07T04:35:30.546118+00:00",
+      "finished_at": "2026-10-07T04:35:31.253545+00:00",
+      "exit": 0,
+      "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 1847170515,\n  \"linux_campaign_bytes\": 4932782124,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "spec/tools/specctl.py",
+        "validate",
+        "--schemas"
+      ],
+      "started_at": "2026-10-07T04:35:31.253886+00:00",
+      "finished_at": "2026-10-07T04:35:32.119494+00:00",
+      "exit": 2,
+      "stdout": "{\n  \"status\": \"fail\",\n  \"scope\": \"specification_and_tooling_only\",\n  \"counts\": {\n    \"files\": 434,\n    \"concepts\": 227,\n    \"requirements\": 131,\n    \"planned_tests\": 61,\n    \"work_units\": 49\n  },\n  \"errors\": [\n    \"unexpected schema identity: command-v0.5.schema.json\"\n  ],\n  \"warnings\": [\n    \"Specification checks do not qualify native SysPane behaviour or activate AIDE.\"\n  ],\n  \"full_schemas\": \"not_run\",\n  \"schema_results\": null,\n  \"native_tests_executed\": 0\n}\n",
+      "stderr": ""
+    }
+  ],
+  "limitations": [
+    "Specification checks do not qualify product behavior. Existing Windows symlink checks may be skipped."
+  ]
+}

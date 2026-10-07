@@ -7,6 +7,12 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
+The [complete-scene command checkpoint](spec/delivery/large-commands-handoff.md)
+carries full 256 KiB scenes through negotiated commands, bounded admission and
+crash-safe request receipts. Portable boundary checks and native IPC/storage/editor
+cases cover exact replay, cancellation, policy changes and restart. Legacy command
+limits remain compatible; installed integration and complete editions remain open.
+
 The [native editor checkpoint](spec/delivery/native-editor-handoff.md) connects the
 shared draft to GTK selection, pointer/keyboard edits, property fields and real
 scene pixels. Independent tests compare stored documents and exercise policy erasure,
@@ -16,8 +22,8 @@ routing, complete authoring controls and all complete-edition release gates rema
 The [shared editor draft](spec/delivery/editor-draft-handoff.md) adds typed widget,
 hierarchy, layout and content edits with bounded undo/redo and exact discard.
 Apply uses the existing resource-aware transaction owner and preserves unresolved
-requests for reconciliation. The full editor, larger-scene command envelope and
-complete authoring controls remain required.
+requests for reconciliation. The full editor and complete authoring controls remain required; negotiated
+large-command support now has the checkpoint above.
 
 The [resource-aware settings checkpoint](spec/delivery/settings-resources-handoff.md)
 preserves exact package/preset identity through native edits, theme changes and

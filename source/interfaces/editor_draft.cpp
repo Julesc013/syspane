@@ -89,8 +89,8 @@ std::vector<std::string> surviving(const Json& scene,const std::vector<std::stri
     std::vector<std::string> out;for(const auto& w:scene["widgets"]){const auto id=w["id"].get<std::string>();if(std::find(ids.begin(),ids.end(),id)!=ids.end())out.push_back(id);}return out;
 }
 }
-EditorDraft::EditorDraft(c::Authority a,c::Policy p,c::Authored value,std::string epoch,std::optional<SettingsResources> resources)
-    :transaction_(std::move(a),std::move(p),std::move(value),std::move(epoch),std::move(resources)){}
+EditorDraft::EditorDraft(c::Authority a,c::Policy p,c::Authored value,std::string epoch,std::optional<SettingsResources> resources,bool large_commands)
+    :transaction_(std::move(a),std::move(p),std::move(value),std::move(epoch),std::move(resources),large_commands){}
 const Json* EditorDraft::scene()const{return available()?&transaction_.draft_->scene:nullptr;}
 void EditorDraft::select(std::vector<std::string> ids){
     transaction_.editable();need(ids.size()<=256,"editor.targets");std::set<std::string> unique;

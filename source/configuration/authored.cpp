@@ -13,7 +13,7 @@ void require(bool value,const char* code){if(!value)throw Error(code);}
 const std::map<std::string,Json>& schemas(){
     static const std::map<std::string,Json> value=[] {
         std::map<std::string,Json> result;
-        for(const char* text:{settings_schema,scene_v0_2_schema,scene_v0_3_schema,layout_schema,binding_schema,command_v0_2_schema,command_v0_3_schema,command_v0_4_schema,command_result_schema,content_package_schema,content_catalog_schema,preset_schema,theme_schema}){
+        for(const char* text:{settings_schema,scene_v0_2_schema,scene_v0_3_schema,layout_schema,binding_schema,command_v0_2_schema,command_v0_3_schema,command_v0_4_schema,command_v0_5_schema,command_result_schema,content_package_schema,content_catalog_schema,preset_schema,theme_schema}){
             auto item=Json::parse(text);result.emplace(item["$id"].get<std::string>(),std::move(item));
         }
         return result;
@@ -66,6 +66,10 @@ bool matches(const Json& s,const Json& v,const Json& root,unsigned depth=0){
         }
     }
     if(v.is_array()){
+        if(s.contains("contains")){
+            bool found=false;for(const auto& item:v)if(matches(s["contains"],item,root,depth+1)){found=true;break;}
+            if(!found)return false;
+        }
         if((s.contains("minItems")&&v.size()<s["minItems"].get<std::size_t>())||
            (s.contains("maxItems")&&v.size()>s["maxItems"].get<std::size_t>()))return false;
         for(std::size_t i=0;i<v.size();++i){
@@ -86,8 +90,8 @@ bool matches(const Json& s,const Json& v,const Json& root,unsigned depth=0){
     }
     return true;
 }
-void structural(const Json& value,const char* name,std::size_t limit){
-    const auto text=value.dump();require(text.size()<=limit,"authored.size");require(protocol::parse(text)==value,"authored.encoding");
+void structural(const Json& value,const char* name,std::size_t limit,protocol::ParseProfile profile=protocol::ParseProfile::ordinary){
+    const auto text=value.dump();require(text.size()<=limit,"authored.size");require(protocol::parse(text,profile)==value,"authored.encoding");
     const auto& s=schema(name);require(matches(s,value,s),"authored.schema");
 }
 std::uint64_t revision(const Json& v){
@@ -162,13 +166,24 @@ void validate_authored(const Authored& value){
     structural(value.settings,"0.1.0/settings",16384);validate_scene_document(value.scene);
     require(revision(value.settings["revision"])==revision(value.scene["revision"]),"authored.mixed_revision");
 }
+Json parse_command(std::string_view bytes){
+    require(!bytes.empty()&&bytes.size()<=protocol::large_command_limit,"command.size");
+    auto value=protocol::parse(bytes,protocol::ParseProfile::large_command);
+    if(!(value.is_object()&&value.value("schema_version",Json())=="0.5.0")){
+        require(bytes.size()<=protocol::command_limit,"command.size");value=protocol::parse(bytes);
+    }
+    return value;
+}
 void validate_command(const Json& value){
     const auto version=value.is_object()&&value.contains("schema_version")?value["schema_version"]:Json();
-    structural(value,version=="0.4.0"?"0.4.0/command":version=="0.3.0"?"0.3.0/command":"0.2.0/command",16384);(void)revision(value["expected_revision"]);(void)revision(value["policy_generation"]);
+    structural(value,version=="0.5.0"?"0.5.0/command":version=="0.4.0"?"0.4.0/command":version=="0.3.0"?"0.3.0/command":"0.2.0/command",
+        version=="0.5.0"?protocol::large_command_limit:protocol::command_limit,version=="0.5.0"?protocol::ParseProfile::large_command:protocol::ParseProfile::ordinary);
+    (void)revision(value["expected_revision"]);(void)revision(value["policy_generation"]);
     std::set<std::string> paths;bool scene=false;
     for(const auto& op:value["operations"]){
         if(op["op"]=="scene.replace"){
             require(!scene,"command.duplicate_scene");scene=true;scene_semantics(op["scene"]);
+            if(version=="0.5.0")validate_scene_document(op["scene"]);
             require(op["scene"]["revision"]==value["expected_revision"],"command.scene_revision");
         }else require(paths.insert(op["path"].get<std::string>()).second,"command.duplicate_path");
     }

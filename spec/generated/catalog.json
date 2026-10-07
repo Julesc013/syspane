@@ -31,7 +31,7 @@
         "SP-COMMANDS",
         "SP-SETTINGS"
       ],
-      "sha256": "b9d2e6d6c73df89cd5ee0b00bd2033f3f7aa95c36ad57752d919084c0336c74e"
+      "sha256": "db2264f66dfcc841791198e96bb5dbd75e2b6b6c816fc8da3b39f4b8d728eb40"
     },
     {
       "id": "SP-PORTABILITY",
@@ -172,7 +172,7 @@
       "requires": [
         "SP-STATE"
       ],
-      "sha256": "cfcb2af487becc92be3f5604b65e5866d798a0904ff92d895812dedff4b1a2be"
+      "sha256": "455118c5364242e0858a17eb5249dc770a8213b23cd4bdfe435b8e4bebe30d7c"
     },
     {
       "id": "SP-NETWORK-CONTRACT",
@@ -216,7 +216,7 @@
         "SP-PROTOCOL",
         "SP-COMMANDS"
       ],
-      "sha256": "e04822e3d95c753fe02b3ac9b0c3631d4ce4fb28f3e4bfbeec4ffb0eeec341b8"
+      "sha256": "5fa83d95fac917e6d8aa9b31b9b2ea1d63decce84f5dbf08953cb4f9d8304e9e"
     },
     {
       "id": "SP-VERSIONS",
@@ -227,7 +227,7 @@
         "SP-PROTOCOL",
         "SP-CHANGES"
       ],
-      "sha256": "36ddeef6c1a300b4461f655095b79944674166de70a3d885b47987d883f9a018"
+      "sha256": "bf379bd165e6b832d0b33979e1c9a1c5b94e65e439e79ad17dd101cd154db18b"
     },
     {
       "id": "SP-ADR-001",
@@ -443,7 +443,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "3d5a8b61baf474e2c182a847904b66deb6ce3fb1eb18c23132e799d6b994dd77"
+      "sha256": "c717432a2ba537caff3d76f3a4f41e2a87ead5437761e6a25ebd84d14958df37"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -498,7 +498,7 @@
         "SP-W10-EDITOR-DRAFT",
         "SP-SETTINGS-RESOURCES-HANDOFF"
       ],
-      "sha256": "31d4c8fdc4efb66c186c260c59de9150fb9519cf1b17327c9d49ea6ca36bbbc8"
+      "sha256": "c42c22b4dc9f50f2a85a70f963013f9ddea0a3eecf3beef09fb68861ec4bdff0"
     },
     {
       "id": "SP-EDITOR-EXIT-HANDOFF",
@@ -808,6 +808,17 @@
       "sha256": "c7b7870299f1fd65447397ab948b3e86432072054221c3ba649737840b95c093"
     },
     {
+      "id": "SP-LARGE-COMMANDS-HANDOFF",
+      "path": "delivery/large-commands-handoff.md",
+      "title": "Complete-scene command checkpoint",
+      "description": "Negotiated full-scene edits, bounded admission and coherent native request recovery.",
+      "requires": [
+        "SP-W08-LARGE-COMMANDS",
+        "SP-NATIVE-EDITOR-HANDOFF"
+      ],
+      "sha256": "60263d669b85f8e83fd2f1b9f0d56a331715acd6a7031f54b993771bd13b9759"
+    },
+    {
       "id": "SP-LAYOUT-HANDOFF",
       "path": "delivery/layout-handoff.md",
       "title": "Portable scene layout checkpoint",
@@ -882,7 +893,7 @@
         "SP-W10-NATIVE-EDITOR",
         "SP-EDITOR-DRAFT-HANDOFF"
       ],
-      "sha256": "404b3fc25d0b7f57b9b56a97e3bc439aae28005815be1f30e284741eb9cce518"
+      "sha256": "9dbcaa3a57c7e24ca81a8080911724fac39f21aa4f504058a4f6514633826861"
     },
     {
       "id": "SP-NATIVE-NETWORK-CACHE-HANDOFF",
@@ -1293,6 +1304,19 @@
         "SP-PERSISTENCE"
       ],
       "sha256": "bd9df5ee6313da4cc5af7cbef1f5c2b6cc6367fd9b33397f9b7ff98a1b6304ca"
+    },
+    {
+      "id": "SP-W08-LARGE-COMMANDS",
+      "path": "delivery/packages/w-08-large-commands.md",
+      "title": "Complete-scene command transport",
+      "description": "Carry the full authored scene contract through negotiated commands, bounded admission and durable recovery.",
+      "requires": [
+        "SP-W08-NATIVE-CONTENT",
+        "SP-W08-RESOURCES",
+        "SP-W08-COMMAND-SESSIONS",
+        "SP-W10-NATIVE-EDITOR"
+      ],
+      "sha256": "85b504b38c979dedb2d3617eb040c28d239885d6849773cea7fb522fd62206c9"
     },
     {
       "id": "SP-W08-NATIVE-CONTENT",

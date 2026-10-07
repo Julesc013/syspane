@@ -22,7 +22,7 @@ c::Policy policy(std::uint64_t revision=7){c::Policy v;v.available=true;v.revisi
 std::string image_worker(){char path[4096];const auto n=readlink("/proc/self/exe",path,sizeof(path)-1);need(n>0,"native path");std::string value(path,static_cast<std::size_t>(n));return value.substr(0,value.rfind('/'))+"/SysPane.ImageWorker";}
 syspane::scene::Topology topology(const std::string& id="D1"){syspane::scene::Display d;d.id=id;d.bounds=d.work={0,0,500*64,420*64};return {{d},{},id};}
 struct Window {
-    std::string root,path,mode,behavior,input,epoch="E1";bool content=false;Json alternate_selection;c::Authored original;c::Policy current=policy();
+    std::string root,path,mode,behavior,input,epoch="E1";bool content=false,large=false;Json alternate_selection;c::Authored original;c::Policy current=policy();
     std::unique_ptr<os::LinuxGenerationStore> store;std::unique_ptr<c::AsyncCommands> owner;std::unique_ptr<ui::EditorForm> form;
     GtkWidget *window=nullptr,*canary=nullptr,*overlay=nullptr;bool recovery=false;std::uint64_t serial=0;std::optional<ui::EditRequest> request;
     std::deque<std::pair<std::string,std::optional<ui::EditRequest>>> commands;
@@ -52,15 +52,15 @@ struct Window {
     }
     void open_owner(){store=std::make_unique<os::LinuxGenerationStore>(path);attach_owner();}
     void initialize(){
-        content=true;behavior=mode;
+        content=true;large=mode.substr(0,6)=="large-";behavior=large?mode.substr(6):mode;
         if(behavior=="reopen")epoch="E2";
         original={read(root+"/spec/fixtures/valid/settings.json"),read(root+"/spec/fixtures/valid/scene-portable.json")};original.settings["revision"]=original.scene["revision"]="40";
         store=std::make_unique<os::LinuxGenerationStore>(path);
         if(content&&behavior!="reopen"){
             settings_fixture::Fixture fixture(root);auto bare=original;bare.settings["revision"]=bare.scene["revision"]="39";store->initialize(bare);
             c::ResourceProvider imports{{"scene.content"},[&](const c::Authored& v,const Json& s){return fixture.catalog->resources(s,v);}};
-            c::Transactions bootstrap(*store,"E0",imports);auto scene=read(root+"/tests/editor/native-cases.json")["authored"]["scene"];scene["revision"]="39";
-            Json q={{"schema_version","0.4.0"},{"request_id","bootstrap"},{"expected_revision","39"},{"policy_generation","7"},{"intent","commit"},{"content",fixture.document["selection"]},{"operations",Json::array({{{"op","scene.replace"},{"scene",scene}}})}};
+            c::Transactions bootstrap(*store,"E0",imports);auto scene=read(root+(large?"/tests/configuration/large-command-cases.json":"/tests/editor/native-cases.json"))["authored"]["scene"];scene["revision"]="39";
+            Json q={{"schema_version",large?"0.5.0":"0.4.0"},{"request_id","bootstrap"},{"expected_revision","39"},{"policy_generation","7"},{"intent","commit"},{"content",fixture.document["selection"]},{"operations",Json::array({{{"op","scene.replace"},{"scene",scene}}})}};
             const auto result=bootstrap.submit("fixture:editor","bootstrap",q.dump(),authority(),[&]{return current;},0);need(result["outcome"]=="accepted"&&result["revision"]=="40","resource bootstrap");
             alternate_selection=fixture.document["alternate_selection"];original=store->load().documents;
         }
@@ -70,14 +70,14 @@ struct Window {
         if(behavior=="conflict"){
             c::Transactions external(*store,"EX",c::make_resource_provider(*store,{"scene.content"},[]{return std::vector<c::ContentPackage>{};}));
             auto scene=original.scene;scene["widgets"][0]["title"]="Theirs";
-            Json q={{"schema_version","0.4.0"},{"request_id","other"},{"expected_revision","40"},{"policy_generation","7"},{"intent","commit"},{"content",store->load().resources->selection()},{"operations",Json::array({{{"op","scene.replace"},{"scene",scene}}})}};
+            Json q={{"schema_version",large?"0.5.0":"0.4.0"},{"request_id","other"},{"expected_revision","40"},{"policy_generation","7"},{"intent","commit"},{"content",store->load().resources->selection()},{"operations",Json::array({{{"op","scene.replace"},{"scene",scene}}})}};
             need(external.submit("fixture:editor","other",q.dump(),authority(),[&]{return current;},0)["outcome"]=="accepted","conflict fixture");
         }
         attach_owner();
         ui::EditorForm::Actions actions;
         actions.widget_id=[&]{return "widget:new"+std::to_string(++serial);};actions.exit=[&]{commands.push_back({"exit",{}});};actions.request_id=[&]{return "editor:"+std::to_string(++serial);};actions.submit=[&](const auto& q){need(commands.size()<4,"fixture queue");commands.push_back({"submit",q});if(behavior=="callback")throw std::runtime_error("ambiguous callback delivery");};
         actions.cancel=[&](const auto& q){need(commands.size()<4,"fixture queue");commands.push_back({"cancel",q});};actions.reload=[&]{need(commands.size()<4,"fixture queue");commands.push_back({"reload",{}});};
-        form=std::make_unique<ui::EditorForm>(authority(),current,original,epoch,*resource_context(),topology(),"D1",std::vector<syspane::rendering::SurfaceProvider>{},image_worker(),std::move(actions));
+        form=std::make_unique<ui::EditorForm>(authority(),current,original,epoch,*resource_context(),topology(),"D1",std::vector<syspane::rendering::SurfaceProvider>{},image_worker(),std::move(actions),large);
         window=gtk_window_new(GTK_WINDOW_TOPLEVEL);gtk_window_set_title(GTK_WINDOW(window),"SysPane Editor");gtk_window_set_default_size(GTK_WINDOW(window),790,580);gtk_window_move(GTK_WINDOW(window),0,recovery?100:0);
         auto* box=gtk_box_new(GTK_ORIENTATION_VERTICAL,0);overlay=gtk_overlay_new();gtk_container_add(GTK_CONTAINER(window),overlay);gtk_container_add(GTK_CONTAINER(overlay),box);gtk_box_pack_start(GTK_BOX(box),form->widget(),TRUE,TRUE,0);
         if(behavior=="retain"||behavior=="false-saved"){canary=gtk_label_new(behavior=="retain"?"Retained editor canary Move me":"");gtk_box_pack_start(GTK_BOX(box),canary,FALSE,FALSE,0);}
@@ -95,8 +95,8 @@ struct Window {
             if(command.first=="reload"){need(!worker.joinable(),"reload while working");form->reload(store->load().documents,epoch,*resource_context());emit({{"event","reloaded"}});continue;}
             const auto& q=*command.second;
             if(command.first=="cancel"){auto result=owner->query("fixture:editor",authority(),q.request,true,now());emit({{"event","cancel-requested"},{"result",result}});continue;}
-            request=q;auto body=q.body;if(behavior=="wrong-commit"){auto changed=p::parse(body);changed["operations"][0]["scene"]["widgets"][0]["layout"]["base"]["x"]=71;body=changed.dump();}
-            auto admission=owner->submit("fixture:editor","settings",1,authority(),body,true,now());emit({{"event","submitted"},{"body",p::parse(body)}});
+            request=q;auto body=q.body;if(behavior=="wrong-commit"){auto changed=c::parse_command(body);changed["operations"][0]["scene"]["widgets"][0]["layout"]["base"]["x"]=71;body=changed.dump();}
+            auto admission=owner->submit("fixture:editor","settings",1,authority(),body,true,now());emit({{"event","submitted"},{"body",c::parse_command(body)}});
             if(!admission.ticket){form->complete(q.ticket,admission.reply);emit({{"event","result"},{"result",admission.reply}});continue;}
             const auto ticket=owner->take();need(ticket.has_value()&&!worker.joinable(),"worker admission");
             if(behavior=="false-saved")gtk_label_set_text(GTK_LABEL(canary),"Saved durably; activation pending. Revision 41");

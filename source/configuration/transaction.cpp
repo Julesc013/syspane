@@ -49,8 +49,8 @@ std::vector<CommitReceipt> Transactions::receipts()const{
     std::vector<CommitReceipt> checked;
     for(const auto& row:rows){
         const auto& id=row.identity;
-        require(protocol::identifier(id.principal)&&protocol::identifier(id.epoch)&&protocol::identifier(id.request)&&!id.body.empty()&&id.body.size()<=16384,"storage.receipts");
-        const auto command=protocol::parse(id.body);validate_command(command);
+        require(protocol::identifier(id.principal)&&protocol::identifier(id.epoch)&&protocol::identifier(id.request)&&!id.body.empty()&&id.body.size()<=protocol::large_command_limit,"storage.receipts");
+        const auto command=parse_command(id.body);validate_command(command);
         const auto expected=*protocol::decimal(command["expected_revision"].get<std::string>());
         require(command["intent"]=="commit"&&command["request_id"]==id.request&&expected<std::numeric_limits<std::uint64_t>::max()&&
             row.revision==expected+1&&row.revision<=authored_revision(current_.documents),"storage.receipts");
@@ -70,8 +70,7 @@ Json Transactions::submit_impl(const std::string& principal,const std::string& c
                          const std::function<Policy()>& policy,std::uint64_t now,const std::function<bool()>& cancelled,
                          bool record,const std::function<void()>& permit){
     require(protocol::identifier(principal)&&protocol::identifier(connection),"transaction.scope");
-    require(!body.empty()&&body.size()<=16384,"command.size");
-    const auto command=protocol::parse(body);validate_command(command);const auto request=command["request_id"].get<std::string>();
+    const auto command=parse_command(body);validate_command(command);const auto request=command["request_id"].get<std::string>();
     if(faulted_)return reply(request,"unknown","storage.reconcile");
     auto checked_policy=policy();
     if(!writer(authority,checked_policy))return reply(request,"denied","policy.denied");
@@ -87,7 +86,7 @@ Json Transactions::submit_impl(const std::string& principal,const std::string& c
         if(retained->identity->body!=body)return reply(request,"conflict","request.changed");
         return reply(request,"accepted","",authored_revision(retained->documents));
     }
-    const auto admission=record?ledger_.admit(principal,connection,request,body,now):protocol::Admission::admitted;
+    const auto admission=record?ledger_.admit(principal,connection,request,body,now,command["schema_version"]=="0.5.0"):protocol::Admission::admitted;
     if(admission==protocol::Admission::conflict)return reply(request,"conflict","request.changed");
     if(admission==protocol::Admission::replay)return protocol::parse(ledger_.get(principal,request,now)->result);
     if(admission==protocol::Admission::busy||admission==protocol::Admission::pending)return reply(request,"busy","request.capacity");
@@ -136,7 +135,7 @@ Json Transactions::reconcile(const std::string& principal,const std::string& ori
     const auto record=store_.reconcile(principal,original_epoch,request);
     if(!record)return reply(request,"unknown","request.reconcile");
     require(record->identity.has_value(),"storage.identity");
-    auto command=protocol::parse(record->identity->body);validate_command(command);
+    auto command=parse_command(record->identity->body);validate_command(command);
     command["expected_revision"]=std::to_string(authored_revision(current_.documents));command["policy_generation"]=std::to_string(policy.revision);
     try{authorize_authored(command,authority,policy,authored_revision(current_.documents));}
     catch(const Error& e){return reply(request,outcome(e.what()),e.what());}

@@ -1,0 +1,98 @@
+[
+  {
+    "step": "configure",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-07T04:26:12.096440+00:00",
+    "finished_at": "2026-10-07T04:26:14.672973+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 1762798198,\n  \"linux_campaign_bytes\": 4848388424,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "configure",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "out/campaign/large_commands_step.py",
+      "windows-x64-gcc15",
+      "configure"
+    ],
+    "started_at": "2026-10-07T04:26:14.673489+00:00",
+    "finished_at": "2026-10-07T04:26:18.701317+00:00",
+    "exit": 0,
+    "stdout": "profile verified: windows-x64-gcc15\nvendored dependency digests: pass\n-- Configuring done (1.5s)\n-- Generating done (0.1s)\n-- Build files have been written to: D:/Projects/SysPane/syspane/out/build/windows-x64-gcc15\n \nAttempt: D:\\Projects\\SysPane\\syspane\\out\\campaign\\w-08-large-commands\\windows-x64-gcc15-configure-85c512bdb2\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-07T04:26:18.701750+00:00",
+    "finished_at": "2026-10-07T04:26:19.812307+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 1764300033,\n  \"linux_campaign_bytes\": 4858623003,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "out/campaign/large_commands_step.py",
+      "windows-x64-gcc15",
+      "build"
+    ],
+    "started_at": "2026-10-07T04:26:19.812726+00:00",
+    "finished_at": "2026-10-07T04:27:58.559727+00:00",
+    "exit": 0,
+    "stdout": "ary libsyspane_health.a\n[48/104] Building CXX object CMakeFiles/syspane_diag.dir/source/application/diagnostic.cpp.obj\n[49/104] Building CXX object CMakeFiles/syspane_network_probe.dir/source/application/network_probe.cpp.obj\n[50/104] Building CXX object CMakeFiles/syspane_ipc_probe.dir/source/application/ipc_probe.cpp.obj\n[51/104] Building CXX object CMakeFiles/syspane_recovery_probe.dir/source/application/recovery_probe.cpp.obj\n[52/104] Building CXX object CMakeFiles/syspane_telemetry_probe.dir/source/application/telemetry_probe.cpp.obj\n[53/104] Building CXX object CMakeFiles/syspane_large_command_tests.dir/tests/configuration/large_command_tests.cpp.obj\n[54/104] Building CXX object CMakeFiles/syspane_settings_tests.dir/tests/configuration/settings_draft_tests.cpp.obj\n[55/104] Building CXX object CMakeFiles/syspane_editor_tests.dir/tests/editor/editor_draft_tests.cpp.obj\n[56/104] Building CXX object CMakeFiles/syspane_settings_tests.dir/tests/configuration/settings_content_tests.cpp.obj\n[57/104] Building CXX object CMakeFiles/syspane_authored_tests.dir/tests/configuration/authored_tests.cpp.obj\n[58/104] Building CXX object CMakeFiles/syspane_authored_tests.dir/tests/configuration/scene_content_tests.cpp.obj\n[59/104] Building CXX object CMakeFiles/syspane_authored_tests.dir/tests/configuration/content_tests.cpp.obj\n[60/104] Building CXX object CMakeFiles/syspane_scene_tests.dir/tests/scene/layout_tests.cpp.obj\n[61/104] Building CXX object CMakeFiles/syspane_scene_tests.dir/tests/scene/chart_plot_tests.cpp.obj\n[62/104] Building CXX object CMakeFiles/syspane_scene_tests.dir/tests/scene/image_fit_tests.cpp.obj\n[63/104] Building CXX object CMakeFiles/syspane_scene_tests.dir/tests/scene/chart_history_tests.cpp.obj\n[64/104] Building CXX object CMakeFiles/syspane_scene_tests.dir/tests/scene/binding_tests.cpp.obj\n[65/104] Building CXX object CMakeFiles/syspane_health_tests.dir/tests/fault/health_tests.cpp.obj\n[66/104] Building CXX object CMakeFiles/syspane_subscription_tests.dir/tests/protocol/subscription_tests.cpp.obj\n[67/104] Building CXX object CMakeFiles/syspane_command_session_tests.dir/tests/configuration/command_session_tests.cpp.obj\n[68/104] Building CXX object CMakeFiles/syspane_protocol_tests.dir/tests/protocol/protocol_tests.cpp.obj\n[69/104] Building CXX object CMakeFiles/syspane_diagnostic_tests.dir/tests/fault/diagnostic_tests.cpp.obj\n[70/104] Building CXX object CMakeFiles/syspane_data_view_tests.dir/tests/fault/data_view_tests.cpp.obj\n[71/104] Building CXX object CMakeFiles/syspane_telemetry_tests.dir/tests/protocol/telemetry_tests.cpp.obj\n[72/104] Building CXX object CMakeFiles/syspane_demand_tests.dir/tests/fault/demand_tests.cpp.obj\n[73/104] Building CXX object CMakeFiles/syspane_state_import_tests.dir/tests/fault/state_import_tests.cpp.obj\n[74/104] Building CXX object CMakeFiles/syspane_demand_session_tests.dir/tests/fault/demand_session_tests.cpp.obj\n[75/104] Building CXX object CMakeFiles/syspane_measured_time_tests.dir/tests/fault/measured_time_tests.cpp.obj\n[76/104] Building CXX object CMakeFiles/syspane_failure_store_tests.dir/tests/fault/failure_store_tests.cpp.obj\n[77/104] Building CXX object CMakeFiles/syspane_network_publication_tests.dir/tests/fault/network_publication_tests.cpp.obj\n[78/104] Linking CXX executable SysPane.Diag.exe\n[79/104] Building CXX object CMakeFiles/syspane_network_view_tests.dir/tests/rendering/network_view_tests.cpp.obj\n[80/104] Building CXX object CMakeFiles/syspane_preservation_tests.dir/tests/fault/preservation_tests.cpp.obj\n[81/104] Linking CXX executable SysPane.NetworkProbe.exe\n[82/104] Linking CXX executable SysPane.IpcProbe.exe\n[83/104] Linking CXX executable SysPane.RecoveryProbe.exe\n[84/104] Linking CXX executable SysPane.TelemetryProbe.exe\n[85/104] Linking CXX executable syspane_settings_tests.exe\n[86/104] Linking CXX executable syspane_editor_tests.exe\n[87/104] Linking CXX executable syspane_large_command_tests.exe\n[88/104] Linking CXX executable syspane_health_tests.exe\n[89/104] Linking CXX executable syspane_protocol_tests.exe\n[90/104] Linking CXX executable syspane_command_session_tests.exe\n[91/104] Linking CXX executable syspane_authored_tests.exe\n[92/104] Linking CXX executable syspane_telemetry_tests.exe\n[93/104] Linking CXX executable syspane_subscription_tests.exe\n[94/104] Linking CXX executable syspane_diagnostic_tests.exe\n[95/104] Linking CXX executable syspane_data_view_tests.exe\n[96/104] Linking CXX executable syspane_state_import_tests.exe\n[97/104] Linking CXX executable syspane_scene_tests.exe\n[98/104] Linking CXX executable syspane_measured_time_tests.exe\n[99/104] Linking CXX executable syspane_demand_tests.exe\n[100/104] Linking CXX executable syspane_demand_session_tests.exe\n[101/104] Linking CXX executable syspane_preservation_tests.exe\n[102/104] Linking CXX executable syspane_failure_store_tests.exe\n[103/104] Linking CXX executable syspane_network_publication_tests.exe\n[104/104] Linking CXX executable syspane_network_view_tests.exe\n \nAttempt: D:\\Projects\\SysPane\\syspane\\out\\campaign\\w-08-large-commands\\windows-x64-gcc15-build-0c16529ad8\n",
+    "stderr": ""
+  },
+  {
+    "step": "focus",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-07T04:27:58.560032+00:00",
+    "finished_at": "2026-10-07T04:27:59.365502+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 1826281860,\n  \"linux_campaign_bytes\": 4865521895,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "focus",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "out/campaign/large_commands_step.py",
+      "windows-x64-gcc15",
+      "focus"
+    ],
+    "started_at": "2026-10-07T04:27:59.365835+00:00",
+    "finished_at": "2026-10-07T04:28:07.938687+00:00",
+    "exit": 0,
+    "stdout": "Test project D:/Projects/SysPane/syspane/out/build/windows-x64-gcc15\n    Start 1: configuration.LARGE-BOUNDS\n1/5 Test #1: configuration.LARGE-BOUNDS ........   Passed    0.30 sec\n    Start 2: configuration.LARGE-LEDGER\n2/5 Test #2: configuration.LARGE-LEDGER ........   Passed    0.08 sec\n    Start 3: configuration.LARGE-DRAFT\n3/5 Test #3: configuration.LARGE-DRAFT .........   Passed    0.54 sec\n    Start 4: configuration.LARGE-ASYNC\n4/5 Test #4: configuration.LARGE-ASYNC .........   Passed    5.89 sec\n    Start 5: configuration.LARGE-NEGOTIATION\n5/5 Test #5: configuration.LARGE-NEGOTIATION ...   Passed    0.81 sec\n\n100% tests passed, 0 tests failed out of 5\n\nTotal Test time (real) =   7.71 sec\n \nAttempt: D:\\Projects\\SysPane\\syspane\\out\\campaign\\w-08-large-commands\\windows-x64-gcc15-focus-4db31dfbcf\n",
+    "stderr": ""
+  }
+]

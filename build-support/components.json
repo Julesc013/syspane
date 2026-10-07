@@ -2296,6 +2296,33 @@
       "profiles": [
         "linux-x64-gcc13"
       ]
+    },
+    {
+      "id": "large-command-tests",
+      "target": "syspane_large_command_tests",
+      "type": "EXECUTABLE",
+      "source_owner": "tests/configuration/",
+      "public_interfaces": [],
+      "private_interfaces": [],
+      "sources": [
+        "tests/configuration/large_command_tests.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_editor_draft",
+        "syspane_async_commands"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "windows-x64-gcc15",
+        "linux-x64-gcc13",
+        "windows-x86-v141-xp"
+      ]
     }
   ]
 }

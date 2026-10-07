@@ -22,7 +22,7 @@ struct SettingsResources {
 // Serialized native owner; immutable snapshots enter only through construction/reload.
 class SettingsDraft {
 public:
-    SettingsDraft(configuration::Authority,configuration::Policy,configuration::Authored,std::string epoch,std::optional<SettingsResources> resources={});
+    SettingsDraft(configuration::Authority,configuration::Policy,configuration::Authored,std::string epoch,std::optional<SettingsResources> resources={},bool large_commands=false);
     SettingValue value(const std::string&)const;
     void set(const std::string&,Json);
     void set_text(const std::string&,std::string_view);
@@ -57,7 +57,7 @@ private:
     std::optional<configuration::Authored> base_,draft_;
     std::optional<SettingsResources> context_;
     configuration::ResourceSnapshot base_resources_,draft_resources_;
-    bool requires_resources_=false;
+    bool requires_resources_=false,large_commands_=false;
     std::string epoch_;std::uint64_t tickets_=0;std::optional<std::uint64_t> highest_policy_;
     struct Active {EditRequest request;std::string intent;std::uint64_t revision;bool cancelled=false;};
     std::optional<Active> active_;DraftState state_=DraftState::unavailable;Json result_;

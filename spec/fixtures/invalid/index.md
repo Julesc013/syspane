@@ -12,6 +12,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [command-content-missing.json](command-content-missing.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [command-content-pin.json](command-content-pin.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [command-invalid-scene.json](command-invalid-scene.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
+- [command-large-no-content.json](command-large-no-content.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [command-setting-wrong-type.json](command-setting-wrong-type.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [content-case-collision.json](content-case-collision.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [content-chart-collection.json](content-chart-collection.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.

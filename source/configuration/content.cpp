@@ -179,14 +179,14 @@ PresetPlan ContentCatalog::preview(const Json& package_pin,const Json& selected,
     if(!leafdoc["theme"].is_null())scene["theme_id"]=leafdoc["theme"]["id"];
     Json ops=Json::array();for(const auto& row:values)ops.push_back({{"op","settings.set"},{"path",row.first},{"value",row.second}});
     ops.push_back({{"op","scene.replace"},{"scene",scene}});result.command=command(baseline,request,policy.revision,ops);
-    if(scene["schema_version"]=="0.3.0"){result.command["schema_version"]="0.4.0";result.command["content"]={{"package",package_pin},{"preset",selected}};}
+    if(capabilities.count("configuration.large-commands")||scene["schema_version"]=="0.3.0"){result.command["schema_version"]=capabilities.count("configuration.large-commands")?"0.5.0":"0.4.0";result.command["content"]={{"package",package_pin},{"preset",selected}};}
     result.candidate=prepare_authored(baseline,result.command,authority,policy);
     const auto theme_id=scene["theme_id"].is_null()?result.candidate.settings["display"]["theme_id"]:scene["theme_id"];
     std::optional<std::size_t> theme;
     if(!leafdoc["theme"].is_null())theme=lookup(leafdoc["theme"],"theme",scope);
     else for(auto i:scope)if(entries_[i].manifest["kind"]=="theme"&&entries_[i].pin["id"]==theme_id){need(!theme,"content.ambiguous");theme=i;}
     need(theme.has_value(),"content.theme");result.theme=entries_[*theme].document;
-    if(scene["schema_version"]=="0.3.0")authorize_resources(*resources(result.command["content"],result.candidate),policy,capabilities);
+    if(result.command.contains("content"))authorize_resources(*resources(result.command["content"],result.candidate),policy,capabilities);
     return result;
 }
 }

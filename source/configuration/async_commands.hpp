@@ -21,6 +21,7 @@ public:
     AsyncCommands(GenerationStore&,std::string epoch,std::function<void(const Authored&)>);
     AsyncCommands(GenerationStore&,std::string epoch,ResourceProvider);
     bool supports_resources()const override{return transactions_.supports_resources();}
+    bool supports_large_commands()const override{return true;}
     void attach(const std::string&,std::uint64_t,Policy)override;
     CommandAdmission submit(const std::string&,const std::string&,std::uint64_t,const Authority&,std::string,bool,std::uint64_t)override;
     Json query(const std::string&,const Authority&,const std::string&,bool,std::uint64_t)override;

@@ -16,7 +16,7 @@ struct Record {
 class Ledger {
 public:
     Admission admit(const std::string& principal, const std::string& connection,
-                    const std::string& request, std::string body, std::uint64_t now);
+                    const std::string& request, std::string body, std::uint64_t now,bool large_command=false);
     void finish(const std::string& principal, const std::string& request,
                 std::string result, bool committed, std::uint64_t now);
     std::optional<Record> get(const std::string& principal, const std::string& request, std::uint64_t now);

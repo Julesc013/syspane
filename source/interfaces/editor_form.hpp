@@ -11,7 +11,7 @@ public:
         std::function<void()> reload,exit;
     };
     EditorForm(configuration::Authority,configuration::Policy,configuration::Authored,std::string epoch,SettingsResources,
-        scene::Topology,std::string display,std::vector<rendering::SurfaceProvider>,std::string image_worker,Actions);
+        scene::Topology,std::string display,std::vector<rendering::SurfaceProvider>,std::string image_worker,Actions,bool large_commands=false);
     ~EditorForm();
     EditorForm(const EditorForm&)=delete;EditorForm& operator=(const EditorForm&)=delete;
     GtkWidget* widget()const;

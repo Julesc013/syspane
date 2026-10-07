@@ -19,6 +19,13 @@ updated: {"by": "codex", "at": "2026-10-04T19:32:52+11:00", "scope": "October au
 
 ## Command envelope
 
+[Command 0.5](command-v0.5.schema.json) carries a complete 256 KiB authored scene.
+The [complete-scene package](../delivery/packages/w-08-large-commands.md) defines
+320 KiB raw/canonical command bounds, explicit negotiation, parser headroom,
+unchanged resource policy and exact-body replay. Content is optional for resource-free
+scene 0.2; scene 0.3 replacement requires exact content pins. Versions 0.2/0.3/0.4
+retain their 16 KiB command limits. No large-command capability implies commit authority.
+
 A request carries a request ID, expected document revision, relevant policy generation and typed operations. Each operation identifies a stable target and typed arguments. Initial operations include setting a property, adding/removing/moving/resizing a widget, binding a field, applying a theme and changing a display assignment.
 
 The controller resolves authorization from the authenticated caller and policy, never from a caller-supplied `approved: true`. A request can ask for preview or commit, but neither mode bypasses schema/semantic validation. Exports and diagnostics use separate read operations.

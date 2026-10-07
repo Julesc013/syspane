@@ -3,10 +3,10 @@ import hashlib,json
 from pathlib import Path
 import sys
 ROOT=Path(__file__).resolve().parents[1]
-NAMES=('settings','scene-v0.2','scene-v0.3','layout','binding','command-v0.2','command-v0.3','command-v0.4','command-result','content-package','content-catalog','preset','theme')
+NAMES=('settings','scene-v0.2','scene-v0.3','layout','binding','command-v0.2','command-v0.3','command-v0.4','command-v0.5','command-result','content-package','content-catalog','preset','theme')
 KEYS={'$schema','$id','$defs','$ref','$comment','title','description','type','properties','required','additionalProperties',
       'const','enum','oneOf','anyOf','allOf','if','then','else','not','minLength','maxLength','pattern','propertyNames',
-      'minItems','maxItems','uniqueItems','items','minimum','maximum','maxProperties'}
+      'minItems','maxItems','uniqueItems','items','contains','minimum','maximum','maxProperties'}
 def check(s):
     if not isinstance(s,dict) or set(s)-KEYS:raise ValueError('unsupported authored schema keyword')
     if 'additionalProperties' in s and s['additionalProperties'] is not False:raise ValueError('unsupported additional properties')
@@ -14,7 +14,7 @@ def check(s):
         for child in s.get(key,{}).values():check(child)
     for key in ('oneOf','anyOf','allOf'):
         for child in s.get(key,[]):check(child)
-    for key in ('if','then','else','not','items','propertyNames'):
+    for key in ('if','then','else','not','items','contains','propertyNames'):
         if key in s:check(s[key])
 def main():
     lines=['// Generated from the canonical authored schemas. Do not edit.','#pragma once','namespace syspane::configuration {']

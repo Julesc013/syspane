@@ -13,6 +13,8 @@
 namespace syspane::protocol {
 using Json = nlohmann::json;
 constexpr std::size_t frame_limit = 1048576;
+constexpr std::size_t command_limit = 16384, large_command_limit = 327680, large_command_frame_floor = 328704;
+enum class ParseProfile {ordinary,large_command};
 constexpr std::uint64_t deadline_ms = 5000;
 class Error : public std::runtime_error {
 public:
@@ -21,7 +23,7 @@ public:
 bool identifier(std::string_view value);
 std::optional<std::uint64_t> decimal(std::string_view value);
 bool members(const Json& value, std::initializer_list<const char*> names);
-Json parse(std::string_view bytes);
+Json parse(std::string_view bytes,ParseProfile profile=ParseProfile::ordinary);
 std::string frame(std::string_view payload, std::size_t limit = frame_limit);
 
 // One owner, one monotonic clock domain. Callback must consume/copy synchronously.
@@ -47,7 +49,7 @@ struct Message {
     std::string type, connection_id, producer_epoch, body_bytes;
     Json body;
 };
-Message decode(std::string_view payload);
+Message decode(std::string_view payload,bool large_commands=false);
 struct Handshake {
     unsigned minor = 1;
     std::size_t max_frame_bytes = frame_limit;

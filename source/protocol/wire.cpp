@@ -59,7 +59,7 @@ bool members(const Json& value, std::initializer_list<const char*> names) {
     if (!value.is_object() || value.size() != names.size()) return false;
     return std::all_of(names.begin(), names.end(), [&](const char* name) { return value.contains(name); });
 }
-Json parse(std::string_view bytes) {
+Json parse(std::string_view bytes,ParseProfile profile) {
     if (bytes.empty() || bytes.size() > frame_limit) throw Error("json.size");
     if (bytes.back() == '\n' || bytes.substr(0, 3) == "\xef\xbb\xbf") throw Error("json.encoding");
     std::vector<std::set<std::string>> object_keys;
@@ -68,9 +68,9 @@ Json parse(std::string_view bytes) {
         return Json::parse(bytes.begin(), bytes.end(), [&](int depth, Json::parse_event_t event, Json& value) {
             using E = Json::parse_event_t;
             const bool container = event == E::object_start || event == E::array_start;
-            if (container && depth >= 32) throw Error("json.depth");
+            if (container && depth >= (profile==ParseProfile::large_command?40:32)) throw Error("json.depth");
             if (container || event == E::key || (event == E::value && !value.is_structured())) {
-                if (++nodes > 16384) throw Error("json.nodes");
+                if (++nodes > (profile==ParseProfile::large_command?18432U:16384U)) throw Error("json.nodes");
             }
             if (event == E::object_start) object_keys.emplace_back();
             if (event == E::key && !object_keys.back().insert(value.get<std::string>()).second)
@@ -144,8 +144,11 @@ void Framer::restrict_limit(std::size_t limit) {
     if (prefix_size_ && (prefix_size_ != 4 || payload_.size() != expected_)) fail("frame.state");
     limit_ = limit;
 }
-Message decode(std::string_view payload) {
-    auto root = parse(payload);
+Message decode(std::string_view payload,bool large_commands) {
+    auto root = parse(payload,large_commands?ParseProfile::large_command:ParseProfile::ordinary);
+    // Negotiated headroom belongs exclusively to command 0.5, including its envelope.
+    if(large_commands&&!(root.is_object()&&root.value("type",Json())=="command"&&root.contains("body")&&
+        root["body"].is_object()&&root["body"].value("schema_version",Json())=="0.5.0"))root=parse(payload);
     if (!root.is_object() || !root.contains("type") || !root["type"].is_string())
         throw Error("envelope.invalid");
     Message message;

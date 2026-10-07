@@ -269,7 +269,7 @@ class BundleTests(unittest.TestCase):
         s.generate(self.root)
         self.assertEqual(s.validate_settings(self.root), [])
     def test_command_constraint_drift_rejected(self):
-        for name in ('command-v0.2', 'command-v0.3', 'command-v0.4'):
+        for name in ('command-v0.2', 'command-v0.3', 'command-v0.4','command-v0.5'):
             with self.subTest(name=name):
                 path=f'contracts/{name}.schema.json'
                 original=s.read_json(self.root/path);value=copy.deepcopy(original)

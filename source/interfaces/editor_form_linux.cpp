@@ -30,8 +30,8 @@ struct EditorForm::Impl {
     std::map<std::string,GtkWidget*> buttons,fields;std::vector<s::Node> nodes;
     struct Gesture {double x,y,dx=0,dy=0;bool resize=false;std::vector<s::Node> nodes;};std::optional<Gesture> gesture;
     guint timer=0;
-    Impl(c::Authority a,c::Policy p,c::Authored value,std::string epoch,SettingsResources r,s::Topology t,std::string d,std::vector<v::SurfaceProvider> ps,std::string w,Actions callbacks)
-      :draft(a,p,value,std::move(epoch),r),authority(std::move(a)),current(std::move(p)),settings(std::move(value.settings)),resources(std::move(r)),topology(std::move(t)),display(std::move(d)),worker(std::move(w)),providers(std::move(ps)),actions(std::move(callbacks)){}
+    Impl(c::Authority a,c::Policy p,c::Authored value,std::string epoch,SettingsResources r,s::Topology t,std::string d,std::vector<v::SurfaceProvider> ps,std::string w,Actions callbacks,bool large_commands)
+      :draft(a,p,value,std::move(epoch),r,large_commands),authority(std::move(a)),current(std::move(p)),settings(std::move(value.settings)),resources(std::move(r)),topology(std::move(t)),display(std::move(d)),worker(std::move(w)),providers(std::move(ps)),actions(std::move(callbacks)){}
     void owner()const{if(thread!=std::this_thread::get_id()||dispatching)throw std::logic_error("editor.owner");}
     std::uint64_t now()const{return static_cast<std::uint64_t>(g_get_monotonic_time()/1000);}
     GtkWidget* own(GtkWidget* w){g_object_ref_sink(w);owned.push_back(w);return w;}
@@ -185,8 +185,8 @@ struct EditorForm::Impl {
     template<class F> void event(F f)noexcept{try{if(!closed)f();}catch(const protocol::Error& e){gesture.reset();error=std::string(e.what())=="editor.number"?"Enter a number using digits and an optional decimal point.":"This edit could not be applied. Check the selection and property values.";message(error);gtk_widget_queue_draw(canvas);}catch(...){try{shut();}catch(...){}}}
     ~Impl(){if(timer)g_source_remove(timer);try{shut();}catch(...){}surface.reset();if(root)gtk_widget_destroy(root);for(auto i=owned.rbegin();i!=owned.rend();++i)g_object_unref(*i);if(model)g_object_unref(model);}
 };
-EditorForm::EditorForm(c::Authority a,c::Policy p,c::Authored value,std::string epoch,SettingsResources resources,s::Topology topology,std::string display,std::vector<v::SurfaceProvider> providers,std::string worker,Actions actions)
- :impl_(std::make_unique<Impl>(std::move(a),std::move(p),std::move(value),std::move(epoch),std::move(resources),std::move(topology),std::move(display),std::move(providers),std::move(worker),std::move(actions))){
+EditorForm::EditorForm(c::Authority a,c::Policy p,c::Authored value,std::string epoch,SettingsResources resources,s::Topology topology,std::string display,std::vector<v::SurfaceProvider> providers,std::string worker,Actions actions,bool large_commands)
+ :impl_(std::make_unique<Impl>(std::move(a),std::move(p),std::move(value),std::move(epoch),std::move(resources),std::move(topology),std::move(display),std::move(providers),std::move(worker),std::move(actions),large_commands)){
     auto& i=*impl_;need(i.actions.request_id&&i.actions.widget_id&&i.actions.submit&&i.actions.cancel&&i.actions.reload&&i.actions.exit,"editor.actions");
     i.root=i.own(gtk_box_new(GTK_ORIENTATION_VERTICAL,4));auto* top=gtk_box_new(GTK_ORIENTATION_HORIZONTAL,4);gtk_box_pack_start(GTK_BOX(i.root),top,FALSE,FALSE,0);
     auto button=[&](GtkWidget* box,const char* id,const char* label){auto* w=i.own(gtk_button_new_with_label(label));i.buttons[id]=w;accessible(w,label,std::string("editor.")+id);g_object_set_data_full(G_OBJECT(w),"editor-action",g_strdup(id),g_free);gtk_box_pack_start(GTK_BOX(box),w,FALSE,FALSE,0);

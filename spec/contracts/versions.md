@@ -30,6 +30,12 @@ changing 0.1 acceptance. Versioned schema filename suffixes identify their docum
 version; unsuffixed schemas retain 0.1.0 IDs. Command 0.3 adds immutable resource
 selection. [Scene content](../delivery/packages/w-09-scene-content.md) adds scene
 0.3 and command 0.4 without changing older schemas or their accepted payloads.
+The [complete-scene package](../delivery/packages/w-08-large-commands.md) adds
+command 0.5 with explicit feature/frame negotiation and generation manifest 0.3
+with a separately hashed original request. Older commands keep their 16 KiB limits;
+older stored generations retain their inline identity. New-format persistence
+requires a reader implementing that version; retaining an older binary is not a
+valid downgrade strategy by itself.
 The reserved
 `https://schemas.example.invalid/syspane/` namespace is deliberately non-resolving,
 with a local-only registry. It is not a claimed owned web domain or a URN. Select a

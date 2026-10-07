@@ -15,6 +15,11 @@ sp_sources: ["SRC-CONVERSATION"]
 
 # Shared editor draft checkpoint
 
+Subsequent checkpoint: [complete-scene commands](large-commands-handoff.md) closes
+the larger-scene transport limitation recorded below. This page preserves the
+original checkpoint and its remaining independent gates.
+
+
 Source baseline: `10765b6a65b9fe3e13e7e255fba2b91758107d0b`. The
 [package](packages/w-10-editor-draft.md) admits the portable W-10 draft against the
 implemented authored/resource/scene boundaries. W-10 remains in progress; this
