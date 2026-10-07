@@ -1,10 +1,13 @@
 #include "editor_form.hpp"
+#include "editor_snap.hpp"
 #include "private_text.hpp"
 #include <gtk/gtk.h>
 #include <algorithm>
 #include <cmath>
 #include <locale>
+#include <iomanip>
 #include <regex>
+#include <set>
 #include <sstream>
 #include <thread>
 
@@ -26,9 +29,10 @@ struct EditorForm::Impl {
     EditorDraft draft;c::Authority authority;c::Policy current;Json settings;std::optional<SettingsResources> resources;s::Topology topology;std::string display,worker;
     std::vector<v::SurfaceProvider> providers;std::unique_ptr<v::SceneSurface> surface;std::map<std::string,model::Tick> ticks;
     Actions actions;std::thread::id thread=std::this_thread::get_id();bool closed=false,updating=false,dispatching=false,fields_dirty=false,drawing=false;std::string error;
-    GtkWidget *root=nullptr,*canvas=nullptr,*tree=nullptr,*status=nullptr;GtkListStore* model=nullptr;std::vector<GtkWidget*> owned;
+    GtkWidget *root=nullptr,*canvas=nullptr,*tree=nullptr,*status=nullptr,*guidance=nullptr;GtkListStore* model=nullptr;std::vector<GtkWidget*> owned;
     std::map<std::string,GtkWidget*> buttons,fields;std::vector<s::Node> nodes;
-    struct Gesture {double x,y,dx=0,dy=0;bool resize=false;std::vector<s::Node> nodes;};std::optional<Gesture> gesture;
+    bool snap_grid=false,snap_guides=false,show_grid=false;s::Unit grid_spacing=8*s::dip;
+    struct Gesture {double x,y,dx=0,dy=0,pixel_per_unit=1.0/64;bool resize=false;std::vector<s::Node> nodes;std::optional<SnapInput> input;SnapResult result{0,0,{},{}};};std::optional<Gesture> gesture;
     guint timer=0;
     Impl(c::Authority a,c::Policy p,c::Authored value,std::string epoch,SettingsResources r,s::Topology t,std::string d,std::vector<v::SurfaceProvider> ps,std::string w,Actions callbacks,bool large_commands)
       :draft(a,p,value,std::move(epoch),r,large_commands),authority(std::move(a)),current(std::move(p)),settings(std::move(value.settings)),resources(std::move(r)),topology(std::move(t)),display(std::move(d)),worker(std::move(w)),providers(std::move(ps)),actions(std::move(callbacks)){}
@@ -58,6 +62,16 @@ struct EditorForm::Impl {
     const s::Node* node(const std::string& id)const{for(const auto& n:nodes)if(n.id==id&&n.display==viewport().id)return &n;return nullptr;}
     bool fixed(const std::string& id)const{if(!draft.scene())return false;const auto* n=node(id);return n&&n->variant==-1&&authored_widget(*draft.scene(),id)["layout"]["base"]["kind"]=="fixed";}
     void message(const std::string& value){gtk_label_set_text(GTK_LABEL(status),value.c_str());}
+    void guide_feedback(){
+        if(!guidance)return;
+        std::ostringstream value;value.imbue(std::locale::classic());value<<std::setprecision(17);
+        if(gesture&&gesture->input&&draft.available()){
+            const auto& d=viewport();const auto& r=gesture->result;
+            if(r.x)value<<"X guide: "<<(r.x->position-d.bounds.x)/64.0<<" DIP";
+            if(r.y){if(r.x)value<<"; ";value<<"Y guide: "<<(r.y->position-d.bounds.y)/64.0<<" DIP";}
+        }
+        gtk_label_set_text(GTK_LABEL(guidance),value.str().c_str());
+    }
     void sync(bool values=false){
         updating=true;if(values||!draft.available())fields_dirty=false;
         const bool enabled=editing()&&!fields_dirty;const bool one=draft.selection().size()==1;
@@ -97,7 +111,7 @@ struct EditorForm::Impl {
         else value=draft.dirty()?"Draft changes have not been saved.":"No draft changes.";
         if(draft.revision())value+=" Revision "+std::to_string(*draft.revision());
         if(!error.empty()&&draft.available())value=error;
-        message(value);updating=false;
+        message(value);guide_feedback();updating=false;
     }
     void list(){
         updating=true;GtkTreeIter it;if(gtk_tree_model_get_iter_first(GTK_TREE_MODEL(model),&it))do{gtk_list_store_set(model,&it,0,"",1,"",-1);}while(gtk_tree_model_iter_next(GTK_TREE_MODEL(model),&it));
@@ -159,6 +173,24 @@ struct EditorForm::Impl {
             execute({UngroupWidget{ids[0]}});
         }else execute({GroupWidgets{ids,actions.widget_id(),"Group"}});
     }
+    SnapInput capture_snap(const std::vector<s::Node>& selected,bool resize){
+        need(!selected.empty(),"editor.selection");const auto& d=viewport();SnapInput in;in.selection=selected[0].box;in.resize=resize;
+        in.grid=snap_grid;in.guides=snap_guides;in.spacing=grid_spacing;in.origin_x=d.bounds.x;in.origin_y=d.bounds.y;
+        const auto parent=selected[0].parent;std::set<std::string> ids;
+        for(const auto& n:selected){need(n.parent==parent&&ids.insert(n.id).second,"editor.arrange_scope");group_geometry(n.id);
+            const auto right=std::max(in.selection.x+in.selection.width,n.box.x+n.box.width),bottom=std::max(in.selection.y+in.selection.height,n.box.y+n.box.height);
+            in.selection.x=std::min(in.selection.x,n.box.x);in.selection.y=std::min(in.selection.y,n.box.y);in.selection.width=right-in.selection.x;in.selection.height=bottom-in.selection.y;}
+        if(parent.empty())in.area={d.work.x+d.safe.left,d.work.y+d.safe.top,d.work.width-d.safe.left-d.safe.right,d.work.height-d.safe.top-d.safe.bottom};
+        else {group_geometry(parent,true);in.area=node(parent)->content;}
+        for(const auto& n:nodes)if(n.display==d.id&&n.parent==parent&&!ids.count(n.id))in.siblings.push_back({n.id,n.box});
+        (void)snap(in);return in;
+    }
+    void option(const std::string& id){
+        ready();gesture.reset();
+        if(id=="grid-spacing"){grid_spacing=grid_spacing==32*64?4*64:grid_spacing*2;const auto label="Grid "+std::to_string(grid_spacing/64)+" DIP";gtk_button_set_label(GTK_BUTTON(buttons.at(id)),label.c_str());accessible(buttons.at(id),label,"editor.grid-spacing");}
+        else {const bool active=gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(buttons.at(id)));if(id=="snap-grid")snap_grid=active;else if(id=="snap-guides")snap_guides=active;else show_grid=active;}
+        guide_feedback();gtk_widget_queue_draw(canvas);
+    }
     void command(const std::string& id){
         if(id=="properties")properties();else if(id=="revert-fields"){fields_dirty=false;error.clear();sync(true);}
         else if(id=="apply")submit();else if(id=="reload")dispatch(actions.reload);
@@ -166,11 +198,12 @@ struct EditorForm::Impl {
         else if(id=="cancel"){draft.discard();shut();dispatch(actions.exit);}
         else if(id=="add")add();else if(id=="duplicate")duplicate();else if(id=="delete")execute({RemoveWidgets{draft.selection()}});
         else if(id=="group"||id=="ungroup")group(id=="ungroup");
+        else if(id=="snap-grid"||id=="snap-guides"||id=="show-grid"||id=="grid-spacing")option(id);
         else if(id.substr(0,6)=="align-"||id.substr(0,6)=="space-")arrange(id);
         else {ready();if(id=="undo")draft.undo();else if(id=="redo")draft.redo();changed();}
     }
     void point(double x,double y,bool shift){
-        ready();gtk_widget_grab_focus(canvas);const auto& d=viewport();const double factor=gtk_widget_get_scale_factor(canvas);x=x*factor+d.pixel_x;y=y*factor+d.pixel_y;
+        ready();gtk_widget_grab_focus(canvas);if(snap_grid||snap_guides)resolve_nodes();const auto& d=viewport();const double factor=gtk_widget_get_scale_factor(canvas);x=x*factor+d.pixel_x;y=y*factor+d.pixel_y;
         const s::Node* hit=nullptr;for(auto i=nodes.rbegin();i!=nodes.rend();++i)if(i->display==d.id&&contains(i->pixels,x,y)){hit=&*i;break;}
         if(!hit){selected({});return;}const auto id=hit->id;auto ids=draft.selection();const auto found=std::find(ids.begin(),ids.end(),id);
         if(shift){if(found==ids.end())ids.push_back(id);else ids.erase(found);selected(std::move(ids));return;}
@@ -178,16 +211,20 @@ struct EditorForm::Impl {
         Gesture g;g.x=x;g.y=y;
         for(const auto& selected_id:draft.selection()){need(fixed(selected_id),"editor.fixed_variant");g.nodes.push_back(*node(selected_id));}
         g.resize=g.nodes.size()==1&&x>=g.nodes[0].pixels.x+g.nodes[0].pixels.width-8&&y>=g.nodes[0].pixels.y+g.nodes[0].pixels.height-8;
+        g.pixel_per_unit=static_cast<double>(d.scale_numerator)/(64*d.scale_denominator);if(snap_grid||snap_guides)g.input=capture_snap(g.nodes,g.resize);
         gesture=std::move(g);gtk_widget_queue_draw(canvas);
     }
-    void motion(double x,double y){if(!gesture)return;const auto& d=viewport();const double factor=gtk_widget_get_scale_factor(canvas);gesture->dx=x*factor+d.pixel_x-gesture->x;gesture->dy=y*factor+d.pixel_y-gesture->y;gtk_widget_queue_draw(canvas);}
-    void release(double x,double y){if(!gesture)return;motion(x,y);const auto g=*gesture;gesture.reset();const auto& d=viewport();const double scale=static_cast<double>(d.scale_denominator)/d.scale_numerator;
+    void motion(double x,double y,bool bypass){if(!gesture)return;const auto& d=viewport();const double factor=gtk_widget_get_scale_factor(canvas);auto& g=*gesture;g.dx=x*factor+d.pixel_x-g.x;g.dy=y*factor+d.pixel_y-g.y;
+        if(g.input){const double dx=std::round(g.dx/g.pixel_per_unit),dy=std::round(g.dy/g.pixel_per_unit);need(std::isfinite(dx)&&std::isfinite(dy)&&std::abs(dx)<=134217728&&std::abs(dy)<=134217728,"editor.snap_input");
+            g.input->dx=static_cast<s::Unit>(dx);g.input->dy=static_cast<s::Unit>(dy);g.input->bypass=bypass;g.result=snap(*g.input);g.dx=g.result.dx*g.pixel_per_unit;g.dy=g.result.dy*g.pixel_per_unit;}
+        guide_feedback();gtk_widget_queue_draw(canvas);}
+    void release(double x,double y,bool bypass){if(!gesture)return;motion(x,y,bypass);const auto g=*gesture;gesture.reset();guide_feedback();const auto& d=viewport();const double scale=static_cast<double>(d.scale_denominator)/d.scale_numerator;
         if(g.dx==0&&g.dy==0){gtk_widget_queue_draw(canvas);return;}
         if(g.resize){const auto& base=authored_widget(*draft.scene(),g.nodes[0].id)["layout"]["base"];execute({ResizeWidget{g.nodes[0].id,base["width"].get<double>()+g.dx*scale,base["height"].get<double>()+g.dy*scale}});}
         else execute({MoveWidgets{draft.selection(),g.dx*scale,g.dy*scale}});
     }
     bool key(GdkEventKey* e){
-        if(e->keyval==GDK_KEY_Escape){gesture.reset();gtk_widget_queue_draw(canvas);return true;}
+        if(e->keyval==GDK_KEY_Escape){gesture.reset();guide_feedback();gtk_widget_queue_draw(canvas);return true;}
         if((e->state&GDK_CONTROL_MASK)&&(e->keyval==GDK_KEY_z||e->keyval==GDK_KEY_Z)){command(e->state&GDK_SHIFT_MASK?"redo":"undo");return true;}
         if(e->keyval==GDK_KEY_Delete){command("delete");return true;}
         double x=0,y=0;const double amount=e->state&GDK_SHIFT_MASK?10:1;
@@ -210,6 +247,12 @@ struct EditorForm::Impl {
                 std::vector<std::uint32_t> argb(static_cast<std::size_t>(image.width)*image.height);for(std::size_t n=0;n<argb.size();++n)argb[n]=(static_cast<std::uint32_t>(image.rgba[n*4+3])<<24)|(static_cast<std::uint32_t>(image.rgba[n*4])<<16)|(static_cast<std::uint32_t>(image.rgba[n*4+1])<<8)|image.rgba[n*4+2];
                 auto* bitmap=cairo_image_surface_create_for_data(reinterpret_cast<unsigned char*>(argb.data()),CAIRO_FORMAT_ARGB32,static_cast<int>(image.width),static_cast<int>(image.height),static_cast<int>(image.width*4));cairo_set_source_surface(cr,bitmap,0,0);cairo_paint(cr);cairo_surface_destroy(bitmap);
             }
+            const double device_per_unit=static_cast<double>(d.scale_numerator)/(64*d.scale_denominator);
+            if(show_grid){s::Unit multiple=1;while(d.bounds.width/(grid_spacing*multiple)+d.bounds.height/(grid_spacing*multiple)+2>512)++multiple;
+                cairo_set_source_rgb(cr,0.2,0.2,0.2);cairo_set_line_width(cr,1);
+                for(s::Unit x=0;x<=d.bounds.width;x+=grid_spacing*multiple){const double px=std::floor(x*device_per_unit)+0.5;cairo_move_to(cr,px,0);cairo_line_to(cr,px,d.bounds.height*device_per_unit);}
+                for(s::Unit y=0;y<=d.bounds.height;y+=grid_spacing*multiple){const double py=std::floor(y*device_per_unit)+0.5;cairo_move_to(cr,0,py);cairo_line_to(cr,d.bounds.width*device_per_unit,py);}cairo_stroke(cr);
+            }
             cairo_set_source_rgb(cr,0,0.6,1);cairo_set_line_width(cr,2);
             const auto selected_nodes=gesture?gesture->nodes:nodes;
             for(const auto& n:selected_nodes)if(n.display==d.id&&std::find(draft.selection().begin(),draft.selection().end(),n.id)!=draft.selection().end()){
@@ -217,11 +260,14 @@ struct EditorForm::Impl {
                 if(gesture){if(gesture->resize){w+=gesture->dx;h+=gesture->dy;}else{x+=gesture->dx;y+=gesture->dy;}}
                 cairo_rectangle(cr,x+1,y+1,w-2,h-2);cairo_stroke(cr);if(draft.selection().size()==1){cairo_rectangle(cr,x+w-8,y+h-8,8,8);cairo_fill(cr);}
             }
+            if(gesture&&gesture->input){const auto& r=gesture->result;cairo_set_source_rgb(cr,1,0,1);cairo_set_line_width(cr,1);
+                if(r.x){const double px=std::floor((r.x->position-d.bounds.x)*device_per_unit)+0.5;cairo_move_to(cr,px,0);cairo_line_to(cr,px,d.bounds.height*device_per_unit);}
+                if(r.y){const double py=std::floor((r.y->position-d.bounds.y)*device_per_unit)+0.5;cairo_move_to(cr,0,py);cairo_line_to(cr,d.bounds.width*device_per_unit,py);}cairo_stroke(cr);}
         });cairo_restore(cr);sync();
     }
     void shut(){if(closed)return;closed=true;draft.close();fields_dirty=false;settings=nullptr;resources.reset();stop_preview();if(tree){list();sync(true);}}
     template<class F> void event(F f)noexcept{try{if(!closed)f();}catch(const protocol::Error& e){gesture.reset();const std::string code=e.what();
-        error=code=="editor.number"?"Enter a number using digits and an optional decimal point.":
+        guide_feedback();error=code=="editor.number"?"Enter a number using digits and an optional decimal point.":
             code=="editor.arrange_geometry"||code=="editor.arrange_scope"?"Arrange needs fixed widgets in the same parent and display, with no size expansion.":
             code=="editor.group_geometry"||code=="editor.group_layout"||code=="editor.fixed"?"Grouping needs fixed layouts and a fixed or canvas parent, with no size expansion.":
             code=="editor.group_clip"?"Ungroup would reveal clipped content. Adjust the group or child layouts first.":
@@ -248,6 +294,11 @@ EditorForm::EditorForm(c::Authority a,c::Policy p,c::Authored value,std::string 
         g_signal_connect(gtk_text_view_get_buffer(GTK_TEXT_VIEW(field)),"changed",G_CALLBACK(+[](GtkTextBuffer*,gpointer p){auto& o=*static_cast<Impl*>(p);if(!o.updating)o.event([&]{o.fields_dirty=true;o.sync();});}),&i);
     }
     auto* prop=gtk_box_new(GTK_ORIENTATION_HORIZONTAL,3);gtk_box_pack_start(GTK_BOX(side),prop,FALSE,FALSE,0);button(prop,"properties","Set properties");button(prop,"revert-fields","Revert fields");
+    auto check=[&](GtkWidget* box,const char* id,const char* label){auto* w=i.own(gtk_check_button_new_with_label(label));i.buttons[id]=w;accessible(w,label,std::string("editor.")+id);g_object_set_data_full(G_OBJECT(w),"editor-action",g_strdup(id),g_free);gtk_box_pack_start(GTK_BOX(box),w,FALSE,FALSE,0);
+        g_signal_connect(w,"toggled",G_CALLBACK(+[](GtkWidget* w,gpointer p){auto& o=*static_cast<Impl*>(p);o.event([&]{o.command(static_cast<const char*>(g_object_get_data(G_OBJECT(w),"editor-action")));});}),&i);};
+    auto* snapping=gtk_box_new(GTK_ORIENTATION_HORIZONTAL,3);gtk_box_pack_start(GTK_BOX(side),snapping,FALSE,FALSE,0);check(snapping,"snap-grid","Snap to grid");check(snapping,"snap-guides","Snap to guides");
+    auto* grid=gtk_box_new(GTK_ORIENTATION_HORIZONTAL,3);gtk_box_pack_start(GTK_BOX(side),grid,FALSE,FALSE,0);check(grid,"show-grid","Show grid");button(grid,"grid-spacing","Grid 8 DIP");
+    i.guidance=i.label("");accessible(i.guidance,"","editor.guidance");gtk_widget_set_size_request(i.guidance,-1,20);gtk_box_pack_start(GTK_BOX(side),i.guidance,FALSE,FALSE,0);
     auto* bottom=gtk_box_new(GTK_ORIENTATION_HORIZONTAL,4);gtk_box_pack_start(GTK_BOX(i.root),bottom,FALSE,FALSE,0);button(bottom,"add","Add text");button(bottom,"duplicate","Duplicate");button(bottom,"delete","Delete");
     auto* align=gtk_box_new(GTK_ORIENTATION_HORIZONTAL,3);gtk_box_pack_start(GTK_BOX(i.root),align,FALSE,FALSE,0);
     for(const auto& b:std::vector<std::pair<const char*,const char*>>{{"align-left","Align left"},{"align-hcenter","Center horizontally"},{"align-right","Align right"},{"align-top","Align top"},{"align-vcenter","Center vertically"},{"align-bottom","Align bottom"}})button(align,b.first,b.second);
@@ -258,10 +309,10 @@ EditorForm::EditorForm(c::Authority a,c::Policy p,c::Authored value,std::string 
         for(auto* row=rows;row;row=row->next){GtkTreeIter it;if(gtk_tree_model_get_iter(model,&it,static_cast<GtkTreePath*>(row->data))){gchar* id=nullptr;gtk_tree_model_get(model,&it,0,&id,-1);ids.emplace_back(id);g_free(id);}}g_list_free_full(rows,reinterpret_cast<GDestroyNotify>(gtk_tree_path_free));o.selected(std::move(ids));});}),&i);
     g_signal_connect(i.canvas,"draw",G_CALLBACK(+[](GtkWidget*,cairo_t* cr,gpointer p)->gboolean{auto& o=*static_cast<Impl*>(p);if(o.closed){cairo_set_source_rgb(cr,0,0,0);cairo_paint(cr);}else o.event([&]{o.draw(cr);});return TRUE;}),&i);
     g_signal_connect(i.canvas,"button-press-event",G_CALLBACK(+[](GtkWidget*,GdkEventButton* e,gpointer p)->gboolean{auto& o=*static_cast<Impl*>(p);if(e->button!=1)return FALSE;o.event([&]{o.point(e->x,e->y,e->state&GDK_SHIFT_MASK);});return TRUE;}),&i);
-    g_signal_connect(i.canvas,"motion-notify-event",G_CALLBACK(+[](GtkWidget*,GdkEventMotion* e,gpointer p)->gboolean{auto& o=*static_cast<Impl*>(p);o.event([&]{o.motion(e->x,e->y);});return TRUE;}),&i);
-    g_signal_connect(i.canvas,"button-release-event",G_CALLBACK(+[](GtkWidget*,GdkEventButton* e,gpointer p)->gboolean{auto& o=*static_cast<Impl*>(p);if(e->button!=1)return FALSE;o.event([&]{o.release(e->x,e->y);});return TRUE;}),&i);
+    g_signal_connect(i.canvas,"motion-notify-event",G_CALLBACK(+[](GtkWidget*,GdkEventMotion* e,gpointer p)->gboolean{auto& o=*static_cast<Impl*>(p);o.event([&]{o.motion(e->x,e->y,e->state&GDK_CONTROL_MASK);});return TRUE;}),&i);
+    g_signal_connect(i.canvas,"button-release-event",G_CALLBACK(+[](GtkWidget*,GdkEventButton* e,gpointer p)->gboolean{auto& o=*static_cast<Impl*>(p);if(e->button!=1)return FALSE;o.event([&]{o.release(e->x,e->y,e->state&GDK_CONTROL_MASK);});return TRUE;}),&i);
     g_signal_connect(i.canvas,"key-press-event",G_CALLBACK(+[](GtkWidget*,GdkEventKey* e,gpointer p)->gboolean{auto& o=*static_cast<Impl*>(p);bool handled=false;o.event([&]{handled=o.key(e);});return handled;}),&i);
-    g_signal_connect(i.canvas,"focus-out-event",G_CALLBACK(+[](GtkWidget*,GdkEventFocus*,gpointer p)->gboolean{auto& o=*static_cast<Impl*>(p);o.gesture.reset();gtk_widget_queue_draw(o.canvas);return FALSE;}),&i);
+    g_signal_connect(i.canvas,"focus-out-event",G_CALLBACK(+[](GtkWidget*,GdkEventFocus*,gpointer p)->gboolean{auto& o=*static_cast<Impl*>(p);o.gesture.reset();o.guide_feedback();gtk_widget_queue_draw(o.canvas);return FALSE;}),&i);
     g_signal_connect(i.root,"destroy",G_CALLBACK(+[](GtkWidget*,gpointer p){static_cast<Impl*>(p)->shut();}),&i);
     i.preview();i.list();i.sync(true);i.timer=g_timeout_add(40,+[](gpointer p)->gboolean{auto& o=*static_cast<Impl*>(p);try{if(o.surface)o.surface->poll_image_jobs();if(!o.closed)gtk_widget_queue_draw(o.canvas);}catch(...){o.shut();}return G_SOURCE_CONTINUE;},&i);
 }

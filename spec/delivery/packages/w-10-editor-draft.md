@@ -31,6 +31,10 @@ The [grouping extension](w-10-group.md) adds reversible fixed-container hierarch
 operations and selection history through this same owner. Its variant bounds,
 containment and native geometry requirements apply alongside remaining authoring.
 
+The [snapping extension](w-10-snap.md) projects a captured native gesture into
+the existing MoveWidgets/ResizeWidget operations. Its exact geometry rules and
+transient guide lifetime apply alongside remaining authoring requirements.
+
 ## Inputs and ownership
 
 Construction/reload takes coherent validated Authored documents, native Authority,

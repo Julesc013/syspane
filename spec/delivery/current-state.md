@@ -12,20 +12,26 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-07T05:49:00Z", "scope": "Reversible native grouping, independent drawing-order/persistence evidence and remaining editor boundaries"}
+updated: {"by": "codex", "at": "2026-10-07T06:10:20.794700+00:00", "scope": "Native grid/alignment guides, independent gesture evidence and remaining editor boundaries"}
 ---
 
 # Current state and next admitted boundary
 
-The latest [grouping checkpoint](group-handoff.md) adds atomic group/ungroup,
+The latest [snapping checkpoint](snap-handoff.md) adds bounded grid/alignment-guide
+projection, native controls and independently observed held-gesture feedback.
+Next close remaining authoring/property contracts and responsive/flow transforms,
+then installed ownership and scene-aligned entry/restoration with independent
+recovery. Complete editions and historical qualification remain open.
+
+The earlier [grouping checkpoint](group-handoff.md) adds atomic group/ungroup,
 selection history and native controls with exact hierarchy and pixel/storage evidence.
-Next close snapping/grid/guides, responsive/flow container transforms and remaining
+Next close responsive/flow container transforms and remaining
 authoring/property contracts, then installed ownership and scene-aligned entry with
 independent recovery. Complete editions and historical qualification remain open.
 
 The earlier [arrangement checkpoint](arrange-handoff.md) adds deterministic shared
 alignment/spacing and native controls with independent geometry, pixel and storage
-evidence. Next close snapping/grid/guides and remaining authoring/property
+evidence. Next close remaining authoring/property
 contracts, then installed controller/catalog/policy routing and scene-aligned
 entry/restoration. Complete editions and historical native qualification remain open.
 

@@ -7,6 +7,12 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
+The [snapping checkpoint](spec/delivery/snap-handoff.md) adds deterministic grid
+and alignment-guide snapping to the Linux native editor. Held-drag outlines,
+visible guides and accessible coordinates share one captured geometry projection.
+Ctrl bypass, precise keyboard movement, undo, save/reopen and policy erasure have
+independent native evidence. Full authoring and installed editions remain open.
+
 The [grouping checkpoint](spec/delivery/group-handoff.md) adds Group/Ungroup
 to the shared draft and Linux native editor. Exact hierarchy, fractional and
 responsive-variant cases accompany native drawing-order, undo, save/reopen,

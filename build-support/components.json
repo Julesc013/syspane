@@ -2165,14 +2165,17 @@
       "type": "STATIC_LIBRARY",
       "source_owner": "source/interfaces/",
       "public_interfaces": [
-        "source/interfaces/editor_draft.hpp"
+        "source/interfaces/editor_draft.hpp",
+        "source/interfaces/editor_snap.hpp"
       ],
       "private_interfaces": [],
       "sources": [
-        "source/interfaces/editor_draft.cpp"
+        "source/interfaces/editor_draft.cpp",
+        "source/interfaces/editor_snap.cpp"
       ],
       "allowed_dependencies": [
-        "syspane_settings_draft"
+        "syspane_settings_draft",
+        "syspane_scene"
       ],
       "target_requirements": [
         "cxx17"
@@ -2197,7 +2200,8 @@
       "sources": [
         "tests/editor/editor_draft_tests.cpp",
         "tests/editor/arrange_tests.cpp",
-        "tests/editor/group_tests.cpp"
+        "tests/editor/group_tests.cpp",
+        "tests/editor/snap_tests.cpp"
       ],
       "allowed_dependencies": [
         "syspane_editor_draft",

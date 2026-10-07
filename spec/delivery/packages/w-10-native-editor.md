@@ -30,6 +30,10 @@ The [grouping extension](w-10-group.md) adds reversible fixed-container hierarch
 operations and selection history through this same owner. Its variant bounds,
 containment and native geometry requirements apply alongside remaining authoring.
 
+The [snapping extension](w-10-snap.md) projects a captured native gesture into
+the existing MoveWidgets/ResizeWidget operations. Its exact geometry rules and
+transient guide lifetime apply alongside remaining authoring requirements.
+
 ## Native behavior
 
 Updating native control availability must apply each control's final state once.
@@ -116,6 +120,6 @@ workspace/build commands remain the execution path. Consult the GTK primary docs
 [device scaling](https://docs.gtk.org/gtk3/method.Widget.get_scale_factor.html).
 
 This component does not qualify behind-icons integration, a full native editor or a
-release. Larger-scene transport, remaining authoring contracts/panels, snap/align/
-distribute, clipboard, recovery drafts, full localization/accessibility, maximum-size
+release. Remaining authoring contracts/panels, responsive/flow
+transforms, clipboard, recovery drafts, full localization/accessibility, maximum-size
 responsiveness, installed ownership and other native adapters remain required.

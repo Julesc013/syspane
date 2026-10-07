@@ -25,6 +25,12 @@ Selection follows scene-object identity, not row number or transient telemetry. 
 
 ## Operations
 
+The [snapping package](../delivery/packages/w-10-snap.md) defines grid/alignment
+projection, deterministic candidate order, native snapshot ownership and transient
+guide erasure. It extends fixed-base pointer gestures; arrows and numeric fields
+remain precise, unsnapped alternatives. Native snapping preferences are session
+state, not authored scene content or a separate mutation path.
+
 The [grouping package](../delivery/packages/w-10-group.md) defines exact
 group/ungroup geometry, ownership and drawing order, atomic selection/history,
 containment rejection and native eligibility. Responsive container and flowing

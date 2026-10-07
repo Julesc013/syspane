@@ -1,5 +1,18 @@
 # Developer setup and checks
 
+The [snapping package](../../spec/delivery/packages/w-10-snap.md) defines the
+pure `snap(SnapInput)` projection in editor_snap.hpp. Provide validated captured
+world geometry in 1/64-DIP units; consume deltas through existing typed draft edits.
+Do not rebuild targets from live telemetry during a gesture. Native adapters own
+temporary guides and must erase both accessible feedback and pixels on revocation.
+
+After ordinary workspace preflight/configure/build, run `ctest --preset <profile>
+-R '^(editor[.]|settings[.]|configuration[.]|composition[.]|protocol[.])'
+--output-on-failure`. The declared non-root Linux laboratory additionally runs
+`ctest --preset linux-x64-gcc13 -R '^native[.](EDITOR-SNAP|EDITOR-GROUP|EDITOR-ARRANGE|EDITOR-FORM|LARGE-COMMANDS)$'
+--output-on-failure`. Frozen inputs are tests/editor/snap-cases.json. See the
+[handoff](../../spec/delivery/snap-handoff.md) for executed evidence and limits.
+
 The [grouping package](../../spec/delivery/packages/w-10-group.md) adds
 GroupWidgets and UngroupWidget to EditorDraft::execute. Supply sibling IDs and
 a fresh group ID/title. Group bounds cover every fixed variant; selection changes

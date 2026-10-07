@@ -45,6 +45,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Shared editor draft and typed local operations](w-10-editor-draft.md) — Reversible scene editing through the existing authored transaction owner.
 - [Reversible native grouping with explicit geometry](w-10-group.md) — Close group and ungroup transformations, selection history, drawing order and native persistence.
 - [Native scene editing and independent exit](w-10-native-editor.md) — Connect the shared draft to real native pixels, input, transactions and recovery.
+- [Deterministic pointer snapping and visible alignment guides](w-10-snap.md) — Close bounded grid and guide projection through existing editor gestures and typed edits.
 - [Native settings drafts and transaction results](w-11-native-settings.md) — Connect every initial settings descriptor to native controls and the common authored transaction boundary.
 - [Native scene inspector navigation and disclosure](w-11-scene-inspector.md) — Expose scene semantics through native controls with identity-stable navigation and current inspector authority.
 - [Resource-aware native settings](w-11-settings-resources.md) — Preserve exact resource selection through settings drafts, native commits and restart.

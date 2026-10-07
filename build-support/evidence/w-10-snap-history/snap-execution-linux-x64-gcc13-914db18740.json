@@ -1,0 +1,38 @@
+[
+  {
+    "step": "snap",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-07T06:02:01.204645+00:00",
+    "finished_at": "2026-10-07T06:02:02.254437+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 1988544886,\n  \"linux_campaign_bytes\": 5145080039,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "snap",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/snap_step.py",
+      "linux-x64-gcc13",
+      "snap"
+    ],
+    "started_at": "2026-10-07T06:02:02.255084+00:00",
+    "finished_at": "2026-10-07T06:02:34.885835+00:00",
+    "exit": 8,
+    "stdout": "Test project /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n    Start 54: native.EDITOR-SNAP\n1/1 Test #54: native.EDITOR-SNAP ...............***Failed   20.36 sec\n/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/snap-1ce6e6a010fb/result.json fail\nTraceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_snap.py\", line 100, in <module>\n    if __name__=='__main__':main()\n                            ^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_snap.py\", line 94, in main\n    assert not timed_out and child.returncode==0,(mode,stderr.decode(errors='replace'));case=json.loads((folder/mode/'result.json').read_text());assert case['outcome']=='pass';report['cases'].append(dict(case=mode,outcome='pass',fault_detected=case.get('fault_detected',False),record_sha256=sha(folder/mode/'result.json')))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: ('frozen-preview', 'dbus-daemon[111611]: [session uid=1000 pid=111611] Activating service name=\\'org.a11y.Bus\\' requested by \\':1.0\\' (uid=1000 pid=111612 comm=\"/usr/bin/python3 /mnt/d/Projects/SysPane/syspane/t\" label=\"kernel\")\\ndbus-daemon[111611]: [session uid=1000 pid=111611] Successfully activated service \\'org.a11y.Bus\\'\\ndbus-daemon[111620]: Activating service name=\\'org.a11y.atspi.Registry\\' requested by \\':1.1\\' (uid=1000 pid=111623 comm=\"/home/ir4runner/.cache/syspane/campaign-229a498/li\" label=\"kernel\")\\ndbus-daemon[111620]: Successfully activated service \\'org.a11y.atspi.Registry\\'\\nTraceback (most recent call last):\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_snap.py\", line 100, in <module>\\n    if __name__==\\'__main__\\':main()\\n                            ^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_snap.py\", line 82, in main\\n    if sys.argv[1]==\\'--observe\\':observe(*map(Path,sys.argv[2:5]),sys.argv[5]);return\\n                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_snap.py\", line 71, in observe\\n    try:exercise(h)\\n        ^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_snap.py\", line 34, in exercise\\n    h.stage=\\'HELD\\';held(h,h.mode==\\'resize\\',h.mode==\\'guides\\')\\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_snap.py\", line 17, in held\\n    h.wait(lambda:h.pixels(gx,10,1,1)==b\\'\\\\xff\\\\x00\\\\xff\\' and h.pixels(10,gy,1,1)==b\\'\\\\xff\\\\x00\\\\xff\\')\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_editor.py\", line 73, in wait\\n    assert time.monotonic()<end,self.stage+\\' observation deadline\\'\\n           ^^^^^^^^^^^^^^^^^^^^\\nAssertionError: HELD observation deadline\\n')\n\n\n0% tests passed, 1 tests failed out of 1\n\nTotal Test time (real) =  20.36 sec\n\nThe following tests FAILED:\n\t 54 - native.EDITOR-SNAP (Failed)\n Errors while running CTest\n\nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-snap/linux-x64-gcc13-snap-a6c89b79b1\n",
+    "stderr": ""
+  }
+]

@@ -454,7 +454,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "532241846ba1f9fddbd0e1f5b794ca07f49617c7800bc77041fd41b78a68ff5f"
+      "sha256": "833011628e3c21b4b122572ad1498118916c2466506818bbae0d1320ec764840"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -1528,7 +1528,7 @@
         "SP-W11-SETTINGS-RESOURCES",
         "SP-W09-SCENE-CONTENT"
       ],
-      "sha256": "b94511855e203adee0650d6be367ecb9fa4e8e5e9d08185311dbb61dd844a909"
+      "sha256": "d8154eb12bc6a139fc3a18e9b56910c6f4ba8d80b5cd49d8eddd8cc9187ba1f2"
     },
     {
       "id": "SP-W10-GROUP",
@@ -1552,7 +1552,18 @@
         "SP-W25-EDITOR-EXIT",
         "SP-W09-SCENE-IMAGES"
       ],
-      "sha256": "e295f2a66cd8c02ba631844365eca16bcb88465d50995c99eac9563323af9e06"
+      "sha256": "74b24aadf053202b077eb63a2d7d36b94c74631c25cd5bf3dbdd257fd101230a"
+    },
+    {
+      "id": "SP-W10-SNAP",
+      "path": "delivery/packages/w-10-snap.md",
+      "title": "Deterministic pointer snapping and visible alignment guides",
+      "description": "Close bounded grid and guide projection through existing editor gestures and typed edits.",
+      "requires": [
+        "SP-W10-GROUP",
+        "SP-W10-NATIVE-EDITOR"
+      ],
+      "sha256": "d4bfa30d6be4b9dab6d9d13e3f5418e4f4645b15b4e2765e2f2ede86354458e4"
     },
     {
       "id": "SP-W11-NATIVE-SETTINGS",
@@ -2067,6 +2078,17 @@
       "sha256": "16fe2a602cc521c0b958b26ad08c9e4e157bac5890d889ca726e87d76014cc04"
     },
     {
+      "id": "SP-SNAP-HANDOFF",
+      "path": "delivery/snap-handoff.md",
+      "title": "Native grid and alignment-guide checkpoint",
+      "description": "Bounded shared snapping with independently observed native gesture feedback and persistence.",
+      "requires": [
+        "SP-W10-SNAP",
+        "SP-GROUP-HANDOFF"
+      ],
+      "sha256": "ba86774edaf25fde86588433582b0e66f901e93508dce7af953d3ba7d007030b"
+    },
+    {
       "id": "SP-STATE-IMPORT-HANDOFF",
       "path": "delivery/state-import-handoff.md",
       "title": "Complete remote state import checkpoint",
@@ -2313,7 +2335,7 @@
         "SP-RENDERING",
         "SP-COMMANDS"
       ],
-      "sha256": "00cdcd1804fda88b3ec839fc3b2559136688670a1d0083ed8f3fbb6230dcccff"
+      "sha256": "b9202273706bcc75486b8af988933601bc5e64ae70a82f5c9644957efa97ef35"
     },
     {
       "id": "SP-POLICY",

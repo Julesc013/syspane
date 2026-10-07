@@ -9,6 +9,14 @@ Property fields become one draft edit when Set properties is selected. Apply sav
 the draft; activation and desktop visibility remain separate facts. This component
 is tested in a private laboratory and is not yet an installed desktop edition.
 
+Use Snap to grid or Snap to guides while dragging or resizing fixed widgets.
+Magenta lines and the guide text show the chosen positions before release.
+Hold Ctrl when releasing to bypass snapping. Arrow keys and numeric fields remain
+precise, unsnapped alternatives. Show grid is independent of snapping; the Grid
+button cycles through 8, 16, 32 and 4 DIP spacing. These preferences last for this
+editor session and do not change the saved scene. Escape cancels the current drag;
+changing a grid option also cancels it. Release creates one reversible draft edit.
+
 Select two or more fixed widgets in the same parent and display, then choose
 Group. The new container becomes selected; click its empty area or its list row
 to select it later. Ungroup releases its direct children while preserving their

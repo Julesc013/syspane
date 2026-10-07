@@ -79,6 +79,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Policy-owned scalar scene surface checkpoint](scene-surface-handoff.md) — Native composed scene pixels and accessible names follow current policy, source lifetime and pinned authored resources.
 - [Authenticated session demand checkpoint](session-demand-handoff.md) — Bind controller-selected acquisition plans to authoritative subscription lifetimes and preserve native restart timing evidence.
 - [Resource-aware settings checkpoint](settings-resources-handoff.md) — Exact selected resources survive native edits, policy changes and restart.
+- [Native grid and alignment-guide checkpoint](snap-handoff.md) — Bounded shared snapping with independently observed native gesture feedback and persistence.
 - [Complete remote state import checkpoint](state-import-handoff.md) — Connect bounded telemetry documents to a revocable complete model without changing reported retention or inventing measurement freshness.
 - [Native inventory subscription checkpoint](subscriptions-handoff.md) — Bind demand expiry, policy-bound queues and complete-state receipt to authenticated native process experiments.
 - [Native child supervision implementation checkpoint](supervision-handoff.md) — Bind owned-child lifetime and independent health decisions to Windows/Linux fault evidence.

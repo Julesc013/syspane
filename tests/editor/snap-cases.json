@@ -1,0 +1,1782 @@
+{
+  "cases": [
+    {
+      "name": "grid",
+      "input": {
+        "selection": [
+          40,
+          40,
+          120,
+          80
+        ],
+        "area": [
+          0,
+          0,
+          500,
+          420
+        ],
+        "siblings": [
+          {
+            "id": "widget:second",
+            "box": [
+              200,
+              170,
+              96,
+              64
+            ]
+          },
+          {
+            "id": "widget:third",
+            "box": [
+              370,
+              300,
+              80,
+              48
+            ]
+          }
+        ],
+        "origin": [
+          0,
+          0
+        ],
+        "spacing": 8,
+        "threshold": 6,
+        "grid": true,
+        "guides": false,
+        "resize": false,
+        "bypass": false,
+        "delta": [
+          29,
+          21
+        ]
+      },
+      "expected": {
+        "delta": [
+          32,
+          24
+        ],
+        "x": {
+          "position": 72,
+          "source": "grid",
+          "target": "",
+          "moving": 0,
+          "anchor": 0
+        },
+        "y": {
+          "position": 64,
+          "source": "grid",
+          "target": "",
+          "moving": 0,
+          "anchor": 0
+        }
+      }
+    },
+    {
+      "name": "zero-axis",
+      "input": {
+        "selection": [
+          40,
+          40,
+          120,
+          80
+        ],
+        "area": [
+          0,
+          0,
+          500,
+          420
+        ],
+        "siblings": [
+          {
+            "id": "widget:second",
+            "box": [
+              200,
+              170,
+              96,
+              64
+            ]
+          },
+          {
+            "id": "widget:third",
+            "box": [
+              370,
+              300,
+              80,
+              48
+            ]
+          }
+        ],
+        "origin": [
+          0,
+          0
+        ],
+        "spacing": 8,
+        "threshold": 6,
+        "grid": true,
+        "guides": false,
+        "resize": false,
+        "bypass": false,
+        "delta": [
+          0,
+          21
+        ]
+      },
+      "expected": {
+        "delta": [
+          0,
+          24
+        ],
+        "x": null,
+        "y": {
+          "position": 64,
+          "source": "grid",
+          "target": "",
+          "moving": 0,
+          "anchor": 0
+        }
+      }
+    },
+    {
+      "name": "negative-tie",
+      "input": {
+        "selection": [
+          -13,
+          -13,
+          120,
+          80
+        ],
+        "area": [
+          0,
+          0,
+          500,
+          420
+        ],
+        "siblings": [
+          {
+            "id": "widget:second",
+            "box": [
+              200,
+              170,
+              96,
+              64
+            ]
+          },
+          {
+            "id": "widget:third",
+            "box": [
+              370,
+              300,
+              80,
+              48
+            ]
+          }
+        ],
+        "origin": [
+          0,
+          0
+        ],
+        "spacing": 8,
+        "threshold": 6,
+        "grid": true,
+        "guides": false,
+        "resize": false,
+        "bypass": false,
+        "delta": [
+          1,
+          1
+        ]
+      },
+      "expected": {
+        "delta": [
+          -3,
+          -3
+        ],
+        "x": {
+          "position": -16,
+          "source": "grid",
+          "target": "",
+          "moving": 0,
+          "anchor": 0
+        },
+        "y": {
+          "position": -16,
+          "source": "grid",
+          "target": "",
+          "moving": 0,
+          "anchor": 0
+        }
+      }
+    },
+    {
+      "name": "positive-tie",
+      "input": {
+        "selection": [
+          40,
+          40,
+          120,
+          80
+        ],
+        "area": [
+          0,
+          0,
+          500,
+          420
+        ],
+        "siblings": [
+          {
+            "id": "widget:second",
+            "box": [
+              200,
+              170,
+              96,
+              64
+            ]
+          },
+          {
+            "id": "widget:third",
+            "box": [
+              370,
+              300,
+              80,
+              48
+            ]
+          }
+        ],
+        "origin": [
+          0,
+          0
+        ],
+        "spacing": 8,
+        "threshold": 6,
+        "grid": true,
+        "guides": false,
+        "resize": false,
+        "bypass": false,
+        "delta": [
+          4,
+          4
+        ]
+      },
+      "expected": {
+        "delta": [
+          8,
+          8
+        ],
+        "x": {
+          "position": 48,
+          "source": "grid",
+          "target": "",
+          "moving": 0,
+          "anchor": 0
+        },
+        "y": {
+          "position": 48,
+          "source": "grid",
+          "target": "",
+          "moving": 0,
+          "anchor": 0
+        }
+      }
+    },
+    {
+      "name": "origin",
+      "input": {
+        "selection": [
+          40,
+          40,
+          120,
+          80
+        ],
+        "area": [
+          0,
+          0,
+          500,
+          420
+        ],
+        "siblings": [
+          {
+            "id": "widget:second",
+            "box": [
+              200,
+              170,
+              96,
+              64
+            ]
+          },
+          {
+            "id": "widget:third",
+            "box": [
+              370,
+              300,
+              80,
+              48
+            ]
+          }
+        ],
+        "origin": [
+          3,
+          5
+        ],
+        "spacing": 8,
+        "threshold": 6,
+        "grid": true,
+        "guides": false,
+        "resize": false,
+        "bypass": false,
+        "delta": [
+          29,
+          21
+        ]
+      },
+      "expected": {
+        "delta": [
+          27,
+          21
+        ],
+        "x": {
+          "position": 67,
+          "source": "grid",
+          "target": "",
+          "moving": 0,
+          "anchor": 0
+        },
+        "y": {
+          "position": 61,
+          "source": "grid",
+          "target": "",
+          "moving": 0,
+          "anchor": 0
+        }
+      }
+    },
+    {
+      "name": "fraction",
+      "input": {
+        "selection": [
+          40.015625,
+          40,
+          120,
+          80
+        ],
+        "area": [
+          0,
+          0,
+          500,
+          420
+        ],
+        "siblings": [
+          {
+            "id": "widget:second",
+            "box": [
+              200,
+              170,
+              96,
+              64
+            ]
+          },
+          {
+            "id": "widget:third",
+            "box": [
+              370,
+              300,
+              80,
+              48
+            ]
+          }
+        ],
+        "origin": [
+          0,
+          0
+        ],
+        "spacing": 8,
+        "threshold": 6,
+        "grid": true,
+        "guides": false,
+        "resize": false,
+        "bypass": false,
+        "delta": [
+          29,
+          21
+        ]
+      },
+      "expected": {
+        "delta": [
+          31.984375,
+          24
+        ],
+        "x": {
+          "position": 72,
+          "source": "grid",
+          "target": "",
+          "moving": 0,
+          "anchor": 0
+        },
+        "y": {
+          "position": 64,
+          "source": "grid",
+          "target": "",
+          "moving": 0,
+          "anchor": 0
+        }
+      }
+    },
+    {
+      "name": "resize",
+      "input": {
+        "selection": [
+          40,
+          40,
+          120,
+          80
+        ],
+        "area": [
+          0,
+          0,
+          500,
+          420
+        ],
+        "siblings": [
+          {
+            "id": "widget:second",
+            "box": [
+              200,
+              170,
+              96,
+              64
+            ]
+          },
+          {
+            "id": "widget:third",
+            "box": [
+              370,
+              300,
+              80,
+              48
+            ]
+          }
+        ],
+        "origin": [
+          0,
+          0
+        ],
+        "spacing": 8,
+        "threshold": 6,
+        "grid": true,
+        "guides": false,
+        "resize": true,
+        "bypass": false,
+        "delta": [
+          7,
+          7
+        ]
+      },
+      "expected": {
+        "delta": [
+          8,
+          8
+        ],
+        "x": {
+          "position": 168,
+          "source": "grid",
+          "target": "",
+          "moving": 2,
+          "anchor": 0
+        },
+        "y": {
+          "position": 128,
+          "source": "grid",
+          "target": "",
+          "moving": 2,
+          "anchor": 0
+        }
+      }
+    },
+    {
+      "name": "invalid-size",
+      "input": {
+        "selection": [
+          40,
+          40,
+          120,
+          80
+        ],
+        "area": [
+          0,
+          0,
+          500,
+          420
+        ],
+        "siblings": [
+          {
+            "id": "widget:second",
+            "box": [
+              200,
+              170,
+              96,
+              64
+            ]
+          },
+          {
+            "id": "widget:third",
+            "box": [
+              370,
+              300,
+              80,
+              48
+            ]
+          }
+        ],
+        "origin": [
+          0,
+          0
+        ],
+        "spacing": 8,
+        "threshold": 6,
+        "grid": true,
+        "guides": false,
+        "resize": true,
+        "bypass": false,
+        "delta": [
+          -121,
+          0
+        ]
+      },
+      "expected": {
+        "delta": [
+          -121,
+          0
+        ],
+        "x": null,
+        "y": null
+      }
+    },
+    {
+      "name": "threshold",
+      "input": {
+        "selection": [
+          40,
+          40,
+          120,
+          80
+        ],
+        "area": [
+          0,
+          0,
+          500,
+          420
+        ],
+        "siblings": [
+          {
+            "id": "widget:second",
+            "box": [
+              200,
+              170,
+              96,
+              64
+            ]
+          },
+          {
+            "id": "widget:third",
+            "box": [
+              370,
+              300,
+              80,
+              48
+            ]
+          }
+        ],
+        "origin": [
+          0,
+          0
+        ],
+        "spacing": 32,
+        "threshold": 6,
+        "grid": true,
+        "guides": false,
+        "resize": false,
+        "bypass": false,
+        "delta": [
+          7,
+          0
+        ]
+      },
+      "expected": {
+        "delta": [
+          7,
+          0
+        ],
+        "x": null,
+        "y": null
+      }
+    },
+    {
+      "name": "inclusive",
+      "input": {
+        "selection": [
+          40,
+          40,
+          120,
+          80
+        ],
+        "area": [
+          0,
+          0,
+          500,
+          420
+        ],
+        "siblings": [
+          {
+            "id": "widget:second",
+            "box": [
+              200,
+              170,
+              96,
+              64
+            ]
+          },
+          {
+            "id": "widget:third",
+            "box": [
+              370,
+              300,
+              80,
+              48
+            ]
+          }
+        ],
+        "origin": [
+          0,
+          0
+        ],
+        "spacing": 32,
+        "threshold": 6,
+        "grid": true,
+        "guides": false,
+        "resize": false,
+        "bypass": false,
+        "delta": [
+          -2,
+          0
+        ]
+      },
+      "expected": {
+        "delta": [
+          -8,
+          0
+        ],
+        "x": {
+          "position": 32,
+          "source": "grid",
+          "target": "",
+          "moving": 0,
+          "anchor": 0
+        },
+        "y": null
+      }
+    },
+    {
+      "name": "guides",
+      "input": {
+        "selection": [
+          40,
+          40,
+          120,
+          80
+        ],
+        "area": [
+          0,
+          0,
+          500,
+          420
+        ],
+        "siblings": [
+          {
+            "id": "widget:second",
+            "box": [
+              200,
+              170,
+              96,
+              64
+            ]
+          },
+          {
+            "id": "widget:third",
+            "box": [
+              370,
+              300,
+              80,
+              48
+            ]
+          }
+        ],
+        "origin": [
+          0,
+          0
+        ],
+        "spacing": 8,
+        "threshold": 6,
+        "grid": false,
+        "guides": true,
+        "resize": false,
+        "bypass": false,
+        "delta": [
+          37,
+          45
+        ]
+      },
+      "expected": {
+        "delta": [
+          40,
+          50
+        ],
+        "x": {
+          "position": 200,
+          "source": "sibling",
+          "target": "widget:second",
+          "moving": 2,
+          "anchor": 0
+        },
+        "y": {
+          "position": 170,
+          "source": "sibling",
+          "target": "widget:second",
+          "moving": 2,
+          "anchor": 0
+        }
+      }
+    },
+    {
+      "name": "priority",
+      "input": {
+        "selection": [
+          40,
+          40,
+          120,
+          80
+        ],
+        "area": [
+          0,
+          0,
+          500,
+          420
+        ],
+        "siblings": [
+          {
+            "id": "widget:second",
+            "box": [
+              200,
+              170,
+              96,
+              64
+            ]
+          },
+          {
+            "id": "widget:third",
+            "box": [
+              370,
+              300,
+              80,
+              48
+            ]
+          }
+        ],
+        "origin": [
+          0,
+          0
+        ],
+        "spacing": 8,
+        "threshold": 6,
+        "grid": true,
+        "guides": true,
+        "resize": false,
+        "bypass": false,
+        "delta": [
+          38,
+          0
+        ]
+      },
+      "expected": {
+        "delta": [
+          40,
+          0
+        ],
+        "x": {
+          "position": 200,
+          "source": "sibling",
+          "target": "widget:second",
+          "moving": 2,
+          "anchor": 0
+        },
+        "y": null
+      }
+    },
+    {
+      "name": "area",
+      "input": {
+        "selection": [
+          40,
+          40,
+          120,
+          80
+        ],
+        "area": [
+          0,
+          0,
+          500,
+          420
+        ],
+        "siblings": [],
+        "origin": [
+          0,
+          0
+        ],
+        "spacing": 8,
+        "threshold": 6,
+        "grid": false,
+        "guides": true,
+        "resize": false,
+        "bypass": false,
+        "delta": [
+          87,
+          0
+        ]
+      },
+      "expected": {
+        "delta": [
+          90,
+          0
+        ],
+        "x": {
+          "position": 250,
+          "source": "area",
+          "target": "",
+          "moving": 2,
+          "anchor": 1
+        },
+        "y": null
+      }
+    },
+    {
+      "name": "order",
+      "input": {
+        "selection": [
+          40,
+          40,
+          120,
+          80
+        ],
+        "area": [
+          0,
+          0,
+          500,
+          420
+        ],
+        "siblings": [
+          {
+            "id": "z",
+            "box": [
+              200,
+              170,
+              96,
+              64
+            ]
+          },
+          {
+            "id": "b",
+            "box": [
+              196,
+              170,
+              96,
+              64
+            ]
+          },
+          {
+            "id": "a",
+            "box": [
+              196,
+              170,
+              96,
+              64
+            ]
+          }
+        ],
+        "origin": [
+          0,
+          0
+        ],
+        "spacing": 8,
+        "threshold": 6,
+        "grid": false,
+        "guides": true,
+        "resize": false,
+        "bypass": false,
+        "delta": [
+          38,
+          0
+        ]
+      },
+      "expected": {
+        "delta": [
+          36,
+          0
+        ],
+        "x": {
+          "position": 196,
+          "source": "sibling",
+          "target": "a",
+          "moving": 2,
+          "anchor": 0
+        },
+        "y": null
+      }
+    },
+    {
+      "name": "bypass",
+      "input": {
+        "selection": [
+          40,
+          40,
+          120,
+          80
+        ],
+        "area": [
+          0,
+          0,
+          500,
+          420
+        ],
+        "siblings": [
+          {
+            "id": "widget:second",
+            "box": [
+              200,
+              170,
+              96,
+              64
+            ]
+          },
+          {
+            "id": "widget:third",
+            "box": [
+              370,
+              300,
+              80,
+              48
+            ]
+          }
+        ],
+        "origin": [
+          0,
+          0
+        ],
+        "spacing": 8,
+        "threshold": 6,
+        "grid": true,
+        "guides": false,
+        "resize": false,
+        "bypass": true,
+        "delta": [
+          29,
+          21
+        ]
+      },
+      "expected": {
+        "delta": [
+          29,
+          21
+        ],
+        "x": null,
+        "y": null
+      }
+    },
+    {
+      "name": "disabled",
+      "input": {
+        "selection": [
+          40,
+          40,
+          120,
+          80
+        ],
+        "area": [
+          0,
+          0,
+          500,
+          420
+        ],
+        "siblings": [
+          {
+            "id": "widget:second",
+            "box": [
+              200,
+              170,
+              96,
+              64
+            ]
+          },
+          {
+            "id": "widget:third",
+            "box": [
+              370,
+              300,
+              80,
+              48
+            ]
+          }
+        ],
+        "origin": [
+          0,
+          0
+        ],
+        "spacing": 8,
+        "threshold": 6,
+        "grid": false,
+        "guides": false,
+        "resize": false,
+        "bypass": false,
+        "delta": [
+          29,
+          21
+        ]
+      },
+      "expected": {
+        "delta": [
+          29,
+          21
+        ],
+        "x": null,
+        "y": null
+      }
+    },
+    {
+      "name": "union",
+      "input": {
+        "selection": [
+          40,
+          40,
+          256,
+          194
+        ],
+        "area": [
+          0,
+          0,
+          500,
+          420
+        ],
+        "siblings": [
+          {
+            "id": "widget:second",
+            "box": [
+              200,
+              170,
+              96,
+              64
+            ]
+          },
+          {
+            "id": "widget:third",
+            "box": [
+              370,
+              300,
+              80,
+              48
+            ]
+          }
+        ],
+        "origin": [
+          0,
+          0
+        ],
+        "spacing": 8,
+        "threshold": 6,
+        "grid": true,
+        "guides": false,
+        "resize": false,
+        "bypass": false,
+        "delta": [
+          29,
+          21
+        ]
+      },
+      "expected": {
+        "delta": [
+          32,
+          24
+        ],
+        "x": {
+          "position": 72,
+          "source": "grid",
+          "target": "",
+          "moving": 0,
+          "anchor": 0
+        },
+        "y": {
+          "position": 64,
+          "source": "grid",
+          "target": "",
+          "moving": 0,
+          "anchor": 0
+        }
+      }
+    }
+  ],
+  "authored": {
+    "scene": {
+      "extensions": {
+        "author.note": {
+          "preserve": [
+            "x",
+            1,
+            false
+          ]
+        }
+      },
+      "revision": "40",
+      "roots": [
+        "widget:text",
+        "widget:second",
+        "widget:third"
+      ],
+      "scene_id": "scene:content",
+      "schema_version": "0.3.0",
+      "theme_id": null,
+      "widgets": [
+        {
+          "bindings": [],
+          "content": {
+            "body": "Move me"
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:text",
+          "kind": "text",
+          "layout": {
+            "base": {
+              "height": 80,
+              "kind": "fixed",
+              "width": 120,
+              "x": 40,
+              "y": 40
+            }
+          },
+          "priority": "normal",
+          "title": "Editable pane"
+        },
+        {
+          "bindings": [],
+          "content": {
+            "body": "Second"
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:second",
+          "kind": "text",
+          "layout": {
+            "base": {
+              "height": 64,
+              "kind": "fixed",
+              "width": 96,
+              "x": 200,
+              "y": 170
+            }
+          },
+          "priority": "normal",
+          "title": "Second pane"
+        },
+        {
+          "bindings": [],
+          "content": {
+            "body": "Third"
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:third",
+          "kind": "text",
+          "layout": {
+            "base": {
+              "height": 48,
+              "kind": "fixed",
+              "width": 80,
+              "x": 370,
+              "y": 300
+            }
+          },
+          "priority": "normal",
+          "title": "Third pane"
+        }
+      ]
+    },
+    "settings": {
+      "display": {
+        "enabled": true,
+        "reduced_motion": true,
+        "theme_id": "theme:native"
+      },
+      "history": {
+        "persistent": false,
+        "segment_bytes": 10485760,
+        "segments": 5
+      },
+      "privacy": {
+        "export_enabled": false,
+        "remote_probes": false
+      },
+      "revision": "40",
+      "sampling": {
+        "max_workers": 4,
+        "reconcile_ms": 10000,
+        "resources_ms": 1000
+      },
+      "schema_version": "0.1.0"
+    }
+  },
+  "expected": {
+    "grid": {
+      "extensions": {
+        "author.note": {
+          "preserve": [
+            "x",
+            1,
+            false
+          ]
+        }
+      },
+      "revision": "40",
+      "roots": [
+        "widget:text",
+        "widget:second",
+        "widget:third"
+      ],
+      "scene_id": "scene:content",
+      "schema_version": "0.3.0",
+      "theme_id": null,
+      "widgets": [
+        {
+          "bindings": [],
+          "content": {
+            "body": "Move me"
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:text",
+          "kind": "text",
+          "layout": {
+            "base": {
+              "height": 80,
+              "kind": "fixed",
+              "width": 120,
+              "x": 72,
+              "y": 64
+            }
+          },
+          "priority": "normal",
+          "title": "Editable pane"
+        },
+        {
+          "bindings": [],
+          "content": {
+            "body": "Second"
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:second",
+          "kind": "text",
+          "layout": {
+            "base": {
+              "height": 64,
+              "kind": "fixed",
+              "width": 96,
+              "x": 200,
+              "y": 170
+            }
+          },
+          "priority": "normal",
+          "title": "Second pane"
+        },
+        {
+          "bindings": [],
+          "content": {
+            "body": "Third"
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:third",
+          "kind": "text",
+          "layout": {
+            "base": {
+              "height": 48,
+              "kind": "fixed",
+              "width": 80,
+              "x": 370,
+              "y": 300
+            }
+          },
+          "priority": "normal",
+          "title": "Third pane"
+        }
+      ]
+    },
+    "guides": {
+      "extensions": {
+        "author.note": {
+          "preserve": [
+            "x",
+            1,
+            false
+          ]
+        }
+      },
+      "revision": "40",
+      "roots": [
+        "widget:text",
+        "widget:second",
+        "widget:third"
+      ],
+      "scene_id": "scene:content",
+      "schema_version": "0.3.0",
+      "theme_id": null,
+      "widgets": [
+        {
+          "bindings": [],
+          "content": {
+            "body": "Move me"
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:text",
+          "kind": "text",
+          "layout": {
+            "base": {
+              "height": 80,
+              "kind": "fixed",
+              "width": 120,
+              "x": 80,
+              "y": 90
+            }
+          },
+          "priority": "normal",
+          "title": "Editable pane"
+        },
+        {
+          "bindings": [],
+          "content": {
+            "body": "Second"
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:second",
+          "kind": "text",
+          "layout": {
+            "base": {
+              "height": 64,
+              "kind": "fixed",
+              "width": 96,
+              "x": 200,
+              "y": 170
+            }
+          },
+          "priority": "normal",
+          "title": "Second pane"
+        },
+        {
+          "bindings": [],
+          "content": {
+            "body": "Third"
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:third",
+          "kind": "text",
+          "layout": {
+            "base": {
+              "height": 48,
+              "kind": "fixed",
+              "width": 80,
+              "x": 370,
+              "y": 300
+            }
+          },
+          "priority": "normal",
+          "title": "Third pane"
+        }
+      ]
+    },
+    "bypass": {
+      "extensions": {
+        "author.note": {
+          "preserve": [
+            "x",
+            1,
+            false
+          ]
+        }
+      },
+      "revision": "40",
+      "roots": [
+        "widget:text",
+        "widget:second",
+        "widget:third"
+      ],
+      "scene_id": "scene:content",
+      "schema_version": "0.3.0",
+      "theme_id": null,
+      "widgets": [
+        {
+          "bindings": [],
+          "content": {
+            "body": "Move me"
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:text",
+          "kind": "text",
+          "layout": {
+            "base": {
+              "height": 80,
+              "kind": "fixed",
+              "width": 120,
+              "x": 69,
+              "y": 61
+            }
+          },
+          "priority": "normal",
+          "title": "Editable pane"
+        },
+        {
+          "bindings": [],
+          "content": {
+            "body": "Second"
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:second",
+          "kind": "text",
+          "layout": {
+            "base": {
+              "height": 64,
+              "kind": "fixed",
+              "width": 96,
+              "x": 200,
+              "y": 170
+            }
+          },
+          "priority": "normal",
+          "title": "Second pane"
+        },
+        {
+          "bindings": [],
+          "content": {
+            "body": "Third"
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:third",
+          "kind": "text",
+          "layout": {
+            "base": {
+              "height": 48,
+              "kind": "fixed",
+              "width": 80,
+              "x": 370,
+              "y": 300
+            }
+          },
+          "priority": "normal",
+          "title": "Third pane"
+        }
+      ]
+    },
+    "resize": {
+      "extensions": {
+        "author.note": {
+          "preserve": [
+            "x",
+            1,
+            false
+          ]
+        }
+      },
+      "revision": "40",
+      "roots": [
+        "widget:text",
+        "widget:second",
+        "widget:third"
+      ],
+      "scene_id": "scene:content",
+      "schema_version": "0.3.0",
+      "theme_id": null,
+      "widgets": [
+        {
+          "bindings": [],
+          "content": {
+            "body": "Move me"
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:text",
+          "kind": "text",
+          "layout": {
+            "base": {
+              "height": 88,
+              "kind": "fixed",
+              "width": 128,
+              "x": 40,
+              "y": 40
+            }
+          },
+          "priority": "normal",
+          "title": "Editable pane"
+        },
+        {
+          "bindings": [],
+          "content": {
+            "body": "Second"
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:second",
+          "kind": "text",
+          "layout": {
+            "base": {
+              "height": 64,
+              "kind": "fixed",
+              "width": 96,
+              "x": 200,
+              "y": 170
+            }
+          },
+          "priority": "normal",
+          "title": "Second pane"
+        },
+        {
+          "bindings": [],
+          "content": {
+            "body": "Third"
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:third",
+          "kind": "text",
+          "layout": {
+            "base": {
+              "height": 48,
+              "kind": "fixed",
+              "width": 80,
+              "x": 370,
+              "y": 300
+            }
+          },
+          "priority": "normal",
+          "title": "Third pane"
+        }
+      ]
+    },
+    "multi": {
+      "extensions": {
+        "author.note": {
+          "preserve": [
+            "x",
+            1,
+            false
+          ]
+        }
+      },
+      "revision": "40",
+      "roots": [
+        "widget:text",
+        "widget:second",
+        "widget:third"
+      ],
+      "scene_id": "scene:content",
+      "schema_version": "0.3.0",
+      "theme_id": null,
+      "widgets": [
+        {
+          "bindings": [],
+          "content": {
+            "body": "Move me"
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:text",
+          "kind": "text",
+          "layout": {
+            "base": {
+              "height": 80,
+              "kind": "fixed",
+              "width": 120,
+              "x": 72,
+              "y": 64
+            }
+          },
+          "priority": "normal",
+          "title": "Editable pane"
+        },
+        {
+          "bindings": [],
+          "content": {
+            "body": "Second"
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:second",
+          "kind": "text",
+          "layout": {
+            "base": {
+              "height": 64,
+              "kind": "fixed",
+              "width": 96,
+              "x": 232,
+              "y": 194
+            }
+          },
+          "priority": "normal",
+          "title": "Second pane"
+        },
+        {
+          "bindings": [],
+          "content": {
+            "body": "Third"
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:third",
+          "kind": "text",
+          "layout": {
+            "base": {
+              "height": 48,
+              "kind": "fixed",
+              "width": 80,
+              "x": 370,
+              "y": 300
+            }
+          },
+          "priority": "normal",
+          "title": "Third pane"
+        }
+      ]
+    },
+    "keyboard": {
+      "extensions": {
+        "author.note": {
+          "preserve": [
+            "x",
+            1,
+            false
+          ]
+        }
+      },
+      "revision": "40",
+      "roots": [
+        "widget:text",
+        "widget:second",
+        "widget:third"
+      ],
+      "scene_id": "scene:content",
+      "schema_version": "0.3.0",
+      "theme_id": null,
+      "widgets": [
+        {
+          "bindings": [],
+          "content": {
+            "body": "Move me"
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:text",
+          "kind": "text",
+          "layout": {
+            "base": {
+              "height": 80,
+              "kind": "fixed",
+              "width": 120,
+              "x": 41,
+              "y": 40
+            }
+          },
+          "priority": "normal",
+          "title": "Editable pane"
+        },
+        {
+          "bindings": [],
+          "content": {
+            "body": "Second"
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:second",
+          "kind": "text",
+          "layout": {
+            "base": {
+              "height": 64,
+              "kind": "fixed",
+              "width": 96,
+              "x": 200,
+              "y": 170
+            }
+          },
+          "priority": "normal",
+          "title": "Second pane"
+        },
+        {
+          "bindings": [],
+          "content": {
+            "body": "Third"
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:third",
+          "kind": "text",
+          "layout": {
+            "base": {
+              "height": 48,
+              "kind": "fixed",
+              "width": 80,
+              "x": 370,
+              "y": 300
+            }
+          },
+          "priority": "normal",
+          "title": "Third pane"
+        }
+      ]
+    }
+  },
+  "erase_ms": 200,
+  "native_modes": [
+    "grid",
+    "guides",
+    "resize",
+    "multi",
+    "bypass",
+    "keyboard",
+    "escape",
+    "options",
+    "cancel",
+    "revoke",
+    "restart",
+    "wrong-commit",
+    "frozen-preview"
+  ]
+}
