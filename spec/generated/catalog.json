@@ -443,7 +443,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "c16744069fd23fd92dcd3107ab5ff598ffe32766fcf719a72f6d27c337e2f69b"
+      "sha256": "57a28215a89f14e8ae787382956946d3c57129fad0e119a7f6d9ee08c4017504"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -1464,6 +1464,18 @@
       "sha256": "bc28c7d55bf204e34700b43b457f3c0bf1e9a3c692aa5218b7980874be3b4258"
     },
     {
+      "id": "SP-W11-SETTINGS-RESOURCES",
+      "path": "delivery/packages/w-11-settings-resources.md",
+      "title": "Resource-aware native settings",
+      "description": "Preserve exact resource selection through settings drafts, native commits and restart.",
+      "requires": [
+        "SP-W11-NATIVE-SETTINGS",
+        "SP-W08-RESOURCES",
+        "SP-W09-SCENE-CONTENT"
+      ],
+      "sha256": "69446ce4994a15aa8e2df10be9edf146e83f733de2d8ffbfb0eb646ae21ef611"
+    },
+    {
       "id": "SP-W24-PACKAGE",
       "path": "delivery/packages/w-24-transport.md",
       "title": "W-24 authenticated transport and policy boundary",
@@ -1928,6 +1940,17 @@
       "sha256": "a826f88565e6f40721d520739d54807b4ec7dc1a80c91ffa54a3d6d067040775"
     },
     {
+      "id": "SP-SETTINGS-RESOURCES-HANDOFF",
+      "path": "delivery/settings-resources-handoff.md",
+      "title": "Resource-aware settings checkpoint",
+      "description": "Exact selected resources survive native edits, policy changes and restart.",
+      "requires": [
+        "SP-W11-SETTINGS-RESOURCES",
+        "SP-NATIVE-SETTINGS-HANDOFF"
+      ],
+      "sha256": "16fe2a602cc521c0b958b26ad08c9e4e157bac5890d889ca726e87d76014cc04"
+    },
+    {
       "id": "SP-STATE-IMPORT-HANDOFF",
       "path": "delivery/state-import-handoff.md",
       "title": "Complete remote state import checkpoint",
@@ -2228,7 +2251,7 @@
       "requires": [
         "SP-COMMANDS"
       ],
-      "sha256": "1883446116e19f0da640bb2d04c7da0f2366a19d51ee9a0bce0e3e85b5e21b9d"
+      "sha256": "d9c835e193d068b8387e1aad084e742a455351ee1342a93c4203c2f726fcd0e1"
     },
     {
       "id": "SP-AUTHORITY",

@@ -9,7 +9,11 @@ namespace c=configuration;namespace p=protocol;
 void need(bool value,const char* code){if(!value)throw p::Error(code);}
 const SettingDescription& descriptor(const std::string& id){const auto& rows=setting_descriptions();const auto it=std::find_if(rows.begin(),rows.end(),[&](const auto& r){return r.id==id;});need(it!=rows.end(),"settings.path");return *it;}
 const Json& setting(const c::Authored& value,const std::string& id){const auto dot=id.find('.');return value.settings.at(id.substr(0,dot)).at(id.substr(dot+1));}
-Json one(const c::Authored& value,const c::Policy& policy,const std::string& id,Json v){return {{"schema_version","0.2.0"},{"request_id","draft.validation"},{"expected_revision",value.settings["revision"]},{"policy_generation",std::to_string(policy.revision)},{"intent","preview"},{"operations",Json::array({{{"op","settings.set"},{"path",id},{"value",std::move(v)}}})}};}
+Json one(const c::Authored& value,const c::Policy& policy,const std::string& id,Json v,const std::optional<SettingsResources>& context){
+    Json command={{"schema_version",context?"0.3.0":"0.2.0"},{"request_id","draft.validation"},{"expected_revision",value.settings["revision"]},{"policy_generation",std::to_string(policy.revision)},{"intent","preview"},{"operations",Json::array({{{"op","settings.set"},{"path",id},{"value",std::move(v)}}})}};
+    if(context)command["content"]=context->selection;
+    return command;
+}
 }
 const std::vector<SettingDescription>& setting_descriptions(){
     static const std::vector<SettingDescription> rows=[] {std::vector<SettingDescription> out;
@@ -17,24 +21,27 @@ const std::vector<SettingDescription>& setting_descriptions(){
             d.kind==c::Kind::boolean?SettingKind::boolean:d.kind==c::Kind::integer?SettingKind::integer:SettingKind::identifier,Json::parse(d.default_json)});
         return out;}();return rows;
 }
-SettingsDraft::SettingsDraft(c::Authority authority,c::Policy policy,c::Authored value,std::string epoch):authority_(std::move(authority)),policy_(std::move(policy)){
+SettingsDraft::SettingsDraft(c::Authority authority,c::Policy policy,c::Authored value,std::string epoch,std::optional<SettingsResources> resources):authority_(std::move(authority)),policy_(std::move(policy)){
     if(policy_.available)highest_policy_=policy_.revision;
-    reload(std::move(value),std::move(epoch));
+    reload(std::move(value),std::move(epoch),std::move(resources));
 }
 bool SettingsDraft::disclosure()const{return policy_.available&&c::permits(authority_,policy_,"inspector","operational")&&c::permits(authority_,policy_,"accessibility","operational");}
-void SettingsDraft::erase(){base_.reset();draft_.reset();result_=nullptr;if(active_)active_->request.body.clear();state_=DraftState::unavailable;}
+void SettingsDraft::erase(){base_.reset();draft_.reset();context_.reset();base_resources_.reset();draft_resources_.reset();result_=nullptr;if(active_)active_->request.body.clear();state_=DraftState::unavailable;}
+void SettingsDraft::authorize_resources()const{if(context_)c::authorize_resources(*draft_resources_,policy_,context_->capabilities);}
 bool SettingsDraft::dirty()const{return available()&&draft_->settings!=base_->settings;}
 std::optional<std::uint64_t> SettingsDraft::revision()const{return base_?std::optional<std::uint64_t>(c::authored_revision(*base_)):std::nullopt;}
 void SettingsDraft::editable()const{need(available(),"settings.unavailable");need(!active_,"settings.pending");need(state_!=DraftState::conflict,"settings.reload_required");}
 SettingValue SettingsDraft::value(const std::string& id)const{
     descriptor(id);if(!available())return {{},{},false,"settings.unavailable"};const auto requested=setting(*draft_,id);const auto forced=policy_.forced.find(id);
     SettingValue result{requested,forced==policy_.forced.end()?requested:forced->second,false,{}};
-    try{editable();need(forced==policy_.forced.end(),"policy.forced");c::authorize_authored(one(*draft_,policy_,id,requested),authority_,policy_,*revision());result.editable=true;}
+    try{editable();need(forced==policy_.forced.end(),"policy.forced");c::authorize_authored(one(*draft_,policy_,id,requested,context_),authority_,policy_,*revision());authorize_resources();result.editable=true;}
     catch(const p::Error& e){result.reason=e.what();}return result;
 }
 void SettingsDraft::set(const std::string& id,Json v){
-    descriptor(id);editable();need(value(id).editable,"settings.locked");auto next=c::prepare_authored(*draft_,one(*draft_,policy_,id,std::move(v)),authority_,policy_);
-    draft_=std::move(next);result_=nullptr;state_=dirty()?DraftState::dirty:DraftState::clean;
+    descriptor(id);editable();need(value(id).editable,"settings.locked");auto next=c::prepare_authored(*draft_,one(*draft_,policy_,id,std::move(v),context_),authority_,policy_);
+    auto resources=context_?context_->catalog->resources(context_->selection,next):c::ResourceSnapshot{};
+    if(resources)c::authorize_resources(*resources,policy_,context_->capabilities);
+    draft_=std::move(next);draft_resources_=std::move(resources);result_=nullptr;state_=dirty()?DraftState::dirty:DraftState::clean;
 }
 void SettingsDraft::set_text(const std::string& id,std::string_view text){
     const auto& d=descriptor(id);need(text.size()<=256,"settings.input_size");
@@ -43,19 +50,21 @@ void SettingsDraft::set_text(const std::string& id,std::string_view text){
     else{need(p::identifier(text),"settings.identifier");set(id,std::string(text));}
 }
 void SettingsDraft::use_default(const std::string& id){set(id,descriptor(id).default_value);}
-void SettingsDraft::revert(){editable();draft_=base_;result_=nullptr;state_=DraftState::clean;}
+void SettingsDraft::revert(){editable();draft_=base_;draft_resources_=base_resources_;result_=nullptr;state_=DraftState::clean;}
 Json SettingsDraft::command(const std::string& intent,const std::string& request)const{
     Json ops=Json::array();for(const auto& d:setting_descriptions())if(setting(*base_,d.id)!=setting(*draft_,d.id))ops.push_back({{"op","settings.set"},{"path",d.id},{"value",setting(*draft_,d.id)}});
-    return {{"schema_version","0.2.0"},{"request_id",request},{"expected_revision",base_->settings["revision"]},{"policy_generation",std::to_string(policy_.revision)},{"intent",intent},{"operations",std::move(ops)}};
+    Json result={{"schema_version",context_?"0.3.0":"0.2.0"},{"request_id",request},{"expected_revision",base_->settings["revision"]},{"policy_generation",std::to_string(policy_.revision)},{"intent",intent},{"operations",std::move(ops)}};
+    if(context_)result["content"]=context_->selection;
+    return result;
 }
 std::optional<EditRequest> SettingsDraft::begin(const std::string& intent,const std::string& request){
     editable();need(intent=="preview"||intent=="commit","settings.intent");need(p::identifier(request),"settings.request");if(!dirty())return {};
-    const auto body=command(intent,request);(void)c::prepare_authored(*base_,body,authority_,policy_);need(tickets_<std::numeric_limits<std::uint64_t>::max(),"settings.capacity");
+    const auto body=command(intent,request);(void)c::prepare_authored(*base_,body,authority_,policy_);authorize_resources();need(tickets_<std::numeric_limits<std::uint64_t>::max(),"settings.capacity");
     EditRequest q{++tickets_,epoch_,request,body.dump()};active_=Active{q,intent,*revision(),false};result_=nullptr;state_=DraftState::pending;return q;
 }
 bool SettingsDraft::may_submit(const std::string& intent)const{
     if(!available()||active_||state_==DraftState::conflict||!dirty()||(intent!="preview"&&intent!="commit"))return false;
-    try{c::authorize_authored(command(intent,"draft.check"),authority_,policy_,*revision());return true;}catch(const p::Error&){return false;}
+    try{c::authorize_authored(command(intent,"draft.check"),authority_,policy_,*revision());authorize_resources();return true;}catch(const p::Error&){return false;}
 }
 std::optional<EditRequest> SettingsDraft::active_request()const{return active_?std::optional<EditRequest>(active_->request):std::nullopt;}
 std::optional<EditRequest> SettingsDraft::cancel_request(){if(!active_||active_->cancelled||state_==DraftState::closed)return {};active_->cancelled=true;return active_->request;}
@@ -87,7 +96,7 @@ bool SettingsDraft::finish(std::uint64_t ticket,const Json& result,const std::st
         const auto next_epoch=expected_epoch;active_.reset();if(!available())return true;
         epoch_=next_epoch;
         result_=result;
-        if(outcome=="accepted"){draft_->settings["revision"]=draft_->scene["revision"]=result["revision"];base_=draft_;state_=DraftState::clean;}
+        if(outcome=="accepted"){draft_->settings["revision"]=draft_->scene["revision"]=result["revision"];base_=draft_;base_resources_=draft_resources_;state_=DraftState::clean;}
         else state_=outcome=="conflict"?DraftState::conflict:dirty()?DraftState::dirty:DraftState::clean;
         return true;
     }catch(...){disconnected();throw;}
@@ -98,9 +107,14 @@ void SettingsDraft::policy(c::Policy next){
     if(next.available)highest_policy_=next.revision;
     policy_=std::move(next);if(!disclosure())erase();
 }
-void SettingsDraft::reload(c::Authored value,std::string epoch){
+void SettingsDraft::reload(c::Authored value,std::string epoch,std::optional<SettingsResources> resources){
     need(state_!=DraftState::closed,"settings.closed");need(!active_,"settings.pending");c::validate_authored(value);need(p::identifier(epoch),"settings.epoch");
-    if(!disclosure()){erase();return;}base_=std::move(value);draft_=base_;epoch_=std::move(epoch);result_=nullptr;state_=DraftState::clean;
+    need(resources.has_value()||(!requires_resources_&&value.scene["schema_version"]=="0.2.0"),"resource.contract");
+    c::ResourceSnapshot prepared;
+    if(resources){need(static_cast<bool>(resources->catalog),"resource.context");prepared=resources->catalog->resources(resources->selection,value);}
+    requires_resources_=requires_resources_||resources.has_value();
+    if(!disclosure()){erase();return;}
+    context_=std::move(resources);base_resources_=draft_resources_=std::move(prepared);base_=std::move(value);draft_=base_;epoch_=std::move(epoch);result_=nullptr;state_=DraftState::clean;
 }
 void SettingsDraft::close(){erase();active_.reset();state_=DraftState::closed;}
 }

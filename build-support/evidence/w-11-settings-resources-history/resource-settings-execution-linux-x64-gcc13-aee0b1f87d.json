@@ -1,0 +1,110 @@
+[
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-07T02:47:56.176514+00:00",
+    "finished_at": "2026-10-07T02:47:57.131604+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 6442450944,\n  \"checkout_out_bytes\": 1693481432,\n  \"linux_campaign_bytes\": 4439108428,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/resource_settings_step.py",
+      "linux-x64-gcc13",
+      "build"
+    ],
+    "started_at": "2026-10-07T02:47:57.132218+00:00",
+    "finished_at": "2026-10-07T02:48:10.711356+00:00",
+    "exit": 0,
+    "stdout": "[1/2] Building CXX object CMakeFiles/syspane_settings_tests.dir/tests/configuration/settings_content_tests.cpp.o\n[2/2] Linking CXX executable syspane_settings_tests\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-11-settings-resources/linux-x64-gcc13-build-517998f486\n",
+    "stderr": ""
+  },
+  {
+    "step": "focus",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-07T02:48:10.711691+00:00",
+    "finished_at": "2026-10-07T02:48:11.415367+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 6442450944,\n  \"checkout_out_bytes\": 1694914399,\n  \"linux_campaign_bytes\": 4439110011,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "focus",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/resource_settings_step.py",
+      "linux-x64-gcc13",
+      "focus"
+    ],
+    "started_at": "2026-10-07T02:48:11.415677+00:00",
+    "finished_at": "2026-10-07T02:48:22.445984+00:00",
+    "exit": 0,
+    "stdout": "Test project /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n      Start   1: settings.DRAFT\n 1/19 Test   #1: settings.DRAFT ...................   Passed    0.04 sec\n      Start   2: settings.VALUES\n 2/19 Test   #2: settings.VALUES ..................   Passed    0.08 sec\n      Start   3: settings.DEFAULT\n 3/19 Test   #3: settings.DEFAULT .................   Passed    0.03 sec\n      Start   4: settings.PREVIEW\n 4/19 Test   #4: settings.PREVIEW .................   Passed    0.03 sec\n      Start   5: settings.COMMIT\n 5/19 Test   #5: settings.COMMIT ..................   Passed    0.03 sec\n      Start   6: settings.CANCEL\n 6/19 Test   #6: settings.CANCEL ..................   Passed    0.02 sec\n      Start   7: settings.CONFLICT\n 7/19 Test   #7: settings.CONFLICT ................   Passed    0.03 sec\n      Start   8: settings.POLICY\n 8/19 Test   #8: settings.POLICY ..................   Passed    0.04 sec\n      Start   9: settings.RESULT-SCOPE\n 9/19 Test   #9: settings.RESULT-SCOPE ............   Passed    0.12 sec\n      Start  10: settings.UNKNOWN\n10/19 Test  #10: settings.UNKNOWN .................   Passed    0.02 sec\n      Start  11: settings.BOUNDS\n11/19 Test  #11: settings.BOUNDS ..................   Passed    0.03 sec\n      Start  12: settings.CONTENT\n12/19 Test  #12: settings.CONTENT .................   Passed    0.16 sec\n      Start  13: settings.THEME\n13/19 Test  #13: settings.THEME ...................   Passed    0.23 sec\n      Start  14: settings.CONTENT-POLICY\n14/19 Test  #14: settings.CONTENT-POLICY ..........   Passed    0.22 sec\n      Start  15: settings.CONTENT-RELOAD\n15/19 Test  #15: settings.CONTENT-RELOAD ..........   Passed    0.17 sec\n      Start  16: settings.CONTENT-RESULT\n16/19 Test  #16: settings.CONTENT-RESULT ..........   Passed    0.25 sec\n      Start  17: settings.CONTENT-BOUNDS\n17/19 Test  #17: settings.CONTENT-BOUNDS ..........   Passed    0.12 sec\n      Start 172: composition.graph\n18/19 Test #172: composition.graph ................   Passed    0.09 sec\n      Start 173: composition.reject_forbidden\n19/19 Test #173: composition.reject_forbidden .....   Passed    0.19 sec\n\n100% tests passed, 0 tests failed out of 19\n\nTotal Test time (real) =   1.92 sec\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-11-settings-resources/linux-x64-gcc13-focus-1e64c0ea15\n",
+    "stderr": ""
+  },
+  {
+    "step": "oracle",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-07T02:48:22.446298+00:00",
+    "finished_at": "2026-10-07T02:48:23.093850+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 6442450944,\n  \"checkout_out_bytes\": 1696353181,\n  \"linux_campaign_bytes\": 4439109987,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "oracle",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/resource_settings_step.py",
+      "linux-x64-gcc13",
+      "oracle"
+    ],
+    "started_at": "2026-10-07T02:48:23.094154+00:00",
+    "finished_at": "2026-10-07T02:49:08.310595+00:00",
+    "exit": 0,
+    "stdout": "Test project /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n    Start 18: native.SETTINGS-FORM\n1/1 Test #18: native.SETTINGS-FORM .............   Passed   34.85 sec\n\n100% tests passed, 0 tests failed out of 1\n\nTotal Test time (real) =  34.85 sec\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-11-settings-resources/linux-x64-gcc13-oracle-f80d04d90b\n",
+    "stderr": ""
+  }
+]

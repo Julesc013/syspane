@@ -48,7 +48,7 @@ struct SettingsForm::Impl {
     std::vector<GtkWidget*> owned;
     struct Row {Impl* owner;SettingDescription descriptor;GtkWidget *box,*control,*detail,*error,*defaults;std::string invalid;};
     std::vector<std::unique_ptr<Row>> rows;
-    Impl(c::Authority a,c::Policy p,c::Authored v,std::string e,Actions f,Translator t):draft(std::move(a),std::move(p),std::move(v),std::move(e)),actions(std::move(f)),translate(std::move(t)){}
+    Impl(c::Authority a,c::Policy p,c::Authored v,std::string e,Actions f,Translator t,std::optional<SettingsResources> resources):draft(std::move(a),std::move(p),std::move(v),std::move(e),std::move(resources)),actions(std::move(f)),translate(std::move(t)){}
     void owner()const{if(thread!=std::this_thread::get_id()||dispatching)throw std::logic_error("settings.owner");}
     GtkWidget* own(GtkWidget* w){g_object_ref_sink(w);owned.push_back(w);return w;}
     std::string tr(const std::string& id,const std::string& fallback)const{auto s=translate?translate(id,fallback):fallback;if(s.empty()||s.size()>4096||s.find('\0')!=std::string::npos||!g_utf8_validate(s.data(),static_cast<gssize>(s.size()),nullptr))throw protocol::Error("settings.translation");return s;}
@@ -106,7 +106,7 @@ struct SettingsForm::Impl {
     template<class F> void event(F f)noexcept{try{if(!closed){f();}}catch(const protocol::Error& e){try{gtk_label_set_text(GTK_LABEL(status),e.what());}catch(...){shut();}}catch(...){try{shut();}catch(...){}}}
     ~Impl(){try{shut();}catch(...){}if(root)gtk_widget_destroy(root);for(auto it=owned.rbegin();it!=owned.rend();++it)g_object_unref(*it);}
 };
-SettingsForm::SettingsForm(c::Authority a,c::Policy p,c::Authored v,std::string e,Actions actions,Translator translate):impl_(std::make_unique<Impl>(std::move(a),std::move(p),std::move(v),std::move(e),std::move(actions),std::move(translate))){
+SettingsForm::SettingsForm(c::Authority a,c::Policy p,c::Authored v,std::string e,Actions actions,Translator translate,std::optional<SettingsResources> resources):impl_(std::make_unique<Impl>(std::move(a),std::move(p),std::move(v),std::move(e),std::move(actions),std::move(translate),std::move(resources))){
     auto& i=*impl_;if(!i.actions.request_id||!i.actions.submit||!i.actions.cancel||!i.actions.reload)throw protocol::Error("settings.actions");
     i.root=i.own(gtk_box_new(GTK_ORIENTATION_VERTICAL,8));auto* search_label=i.label(i.tr("settings.search","Search settings"));gtk_box_pack_start(GTK_BOX(i.root),search_label,FALSE,FALSE,0);
     i.search=i.own(GTK_WIDGET(g_object_new(sp_settings_text_get_type(),nullptr)));gtk_widget_set_size_request(i.search,-1,30);accessible(i.search,i.tr("settings.search","Search settings"),"settings.search");gtk_box_pack_start(GTK_BOX(i.root),i.search,FALSE,FALSE,0);
@@ -144,6 +144,6 @@ void SettingsForm::complete(std::uint64_t ticket,const Json& result){auto& i=*im
 void SettingsForm::reconciled(std::uint64_t ticket,const std::string& query_id,const std::string& epoch,const Json& response){auto& i=*impl_;i.owner();if(i.closed)return;try{if(i.draft.reconciled(ticket,query_id,epoch,response))i.render(true);}catch(...){i.render();throw;}}
 void SettingsForm::disconnected(){auto& i=*impl_;i.owner();if(i.closed)return;i.draft.disconnected();i.render();}
 void SettingsForm::policy(c::Policy policy){auto& i=*impl_;i.owner();if(i.closed)return;i.draft.policy(std::move(policy));i.clear_errors();i.render(true);}
-void SettingsForm::reload(c::Authored value,std::string epoch){auto& i=*impl_;i.owner();if(i.closed)return;i.draft.reload(std::move(value),std::move(epoch));i.clear_errors();i.render(true);}
+void SettingsForm::reload(c::Authored value,std::string epoch,std::optional<SettingsResources> resources){auto& i=*impl_;i.owner();if(i.closed)return;i.draft.reload(std::move(value),std::move(epoch),std::move(resources));i.clear_errors();i.render(true);}
 void SettingsForm::close(){impl_->owner();impl_->shut();}
 }

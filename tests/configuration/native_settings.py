@@ -10,6 +10,8 @@ from native_oracle import Display
 from check_surface_runtime import verify
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
 EXPECTED=json.loads((ROOT/'tests/configuration/settings-cases.json').read_text())
+CONTENT_CASES=json.loads((ROOT/'tests/configuration/settings-content-cases.json').read_text())
+CONTENT_FIXTURE=json.loads((ROOT/'tests/configuration/settings-content-fixture.json').read_text())
 
 class Keys(Display):
     def __init__(self,pid):
@@ -60,17 +62,40 @@ def documents(revision,edits=False):
             group,key=setting['id'].split('.');out['settings'][group][key]=setting['edit']
     return out
 
+def resource_index(directory):
+    selector=json.loads((directory/'current.json').read_text());generation=directory/selector['generation']
+    assert generation.parent==directory and generation.is_dir()
+    manifest=json.loads((generation/'manifest.json').read_text());assert manifest['version']=='0.2.0' and sha(generation/'manifest.json')==selector['manifest']
+    assert sha(generation/'resources.json')==manifest['resources']
+    return generation,json.loads((generation/'resources.json').read_text())
+
+def check_resources(directory,theme='theme:native'):
+    generation,index=resource_index(directory)
+    assert index['selection']==CONTENT_FIXTURE['selection'],'resource selection differs'
+    expected={};pins=[]
+    for package in CONTENT_FIXTURE['packages']:
+        raw=package['manifest'].encode();digest=hashlib.sha256(raw).hexdigest();pins.append(digest);expected['m-'+digest+'.json']=raw
+        for raw in package['assets_hex'].values():
+            raw=bytes.fromhex(raw);expected['a-'+hashlib.sha256(raw).hexdigest()+'.bin']=raw
+    assert index==dict(version='0.1.0',selection=CONTENT_FIXTURE['selection'],theme=CONTENT_FIXTURE['themes'][theme],packages=sorted(pins))
+    actual={p.name:p.read_bytes() for p in (generation/'resources').iterdir() if p.is_file() and not p.is_symlink()}
+    assert actual==expected,'stored resource bytes differ'
+    assert len(list((generation/'resources').iterdir()))==len(expected)
+
 def observe(exe,folder,mode):
     import gi
     gi.require_version('Atspi','2.0');gi.require_version('Gtk','3.0')
     from gi.repository import Atspi,GLib,Gtk,Gdk
     Gtk.init([]);Atspi.set_timeout(200,500);verify();folder.mkdir(mode=0o700)
+    resource=mode.startswith('resource-');behavior=mode[9:] if resource else mode
     directory=folder/'store';directory.mkdir(mode=0o700)
     assert subprocess.check_output(['findmnt','--target',str(directory),'--noheadings','--output','FSTYPE'],text=True).strip()=='ext4'
     report=dict(outcome='fail',mode=mode,events=[],observations=[],executable_sha256=sha(exe),oracle_sha256=sha(Path(__file__)),fixture_sha256=sha(ROOT/'tests/configuration/settings-cases.json'),surface_runtime_sha256=sha(ROOT/'build-support/surface-runtime.json'),xtest_sha256=sha(Path('/usr/lib/x86_64-linux-gnu/libXtst.so.6')))
+    if resource:report.update(resource_fixture_sha256=sha(ROOT/'tests/configuration/settings-content-fixture.json'),resource_cases_sha256=sha(ROOT/'tests/configuration/settings-content-cases.json'))
     err=(folder/'stderr').open('wb');proc=None;keys=None;stage='startup';events=queue.Queue();inbox=[]
     def launch(which):
         nonlocal proc,keys
+        if resource and not which.startswith('resource-'):which='resource-'+which
         proc=subprocess.Popen([str(exe),str(ROOT),str(directory),which],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=err,bufsize=0)
         def collect(child):
             for line in child.stdout:
@@ -128,7 +153,18 @@ def observe(exe,folder,mode):
     def check_values(edited=False):
         for row in EXPECTED['settings']:
             v=row['edit'] if edited else row['initial'];assert value(row)==(v if isinstance(v,bool) else str(v)),(row['id'],value(row),v)
-    def note(name):report['observations'].append(dict(case=name,status=status(),documents=stored(directory)))
+    def expected_documents(revision,edited=False):
+        if not resource:return documents(revision,edited)
+        value=copy.deepcopy(CONTENT_FIXTURE['authored'])
+        for n in value:value[n]['revision']=revision
+        if edited:
+            for setting in EXPECTED['settings']:
+                group,key=setting['id'].split('.');value['settings'][group][key]=setting['edit']
+        return value
+    def note(name):
+        item=dict(case=name,status=status(),documents=stored(directory))
+        if resource:item['resources']=resource_index(directory)[1]
+        report['observations'].append(item)
     def capture():
         raw=keys.capture(0,0,800,600)
         def chunk(kind,data):return struct.pack('!I',len(data))+kind+data+struct.pack('!I',zlib.crc32(kind+data))
@@ -139,70 +175,88 @@ def observe(exe,folder,mode):
         for row in EXPECTED['settings']:
             obj=control(row['id']);assert obj and obj.get_name()==row['label'];assert obj.get_role() in (Atspi.Role.TEXT,Atspi.Role.CHECK_BOX)
         capture();stage='CONTROLS'
-        if mode=='locked':
+        if resource:check_resources(directory)
+        if behavior=='locked':
             locked=EXPECTED['locked'];obj=control(locked['id']);assert text(obj)==str(locked['effective']) and not state(obj,Atspi.StateType.SENSITIVE)
             detail=text(find('settings.detail.'+locked['id']));assert 'Locked by policy' in detail and 'Requested: 4' in detail and 'Effective: 2' in detail
         else:check_values()
         row=EXPECTED['settings'][0];set_value(row,1500)
-        if mode=='save':
+        if resource and behavior in ('theme','invalid'):
+            theme=next(r for r in EXPECTED['settings'] if r['id']=='display.theme_id')
+            if behavior=='invalid':
+                stage='INVALID-THEME';set_value(theme,CONTENT_CASES['invalid_theme']);wait(lambda:'Correct invalid fields' in status())
+                assert not state(find('settings.apply'),Atspi.StateType.SENSITIVE) and stored(directory)==expected_documents('40');check_resources(directory)
+            set_value(theme,CONTENT_CASES['selected_theme'])
+        if behavior=='save':
             stage='INVALID';set_value(row,99);wait(lambda:'Correct invalid fields' in status());assert not state(find('settings.apply'),Atspi.StateType.SENSITIVE);set_value(row,1500)
             stage='CLIPBOARD';obj=control(row['id']);assert obj.get_component_iface().grab_focus();keys.press(ord('a'),True);keys.press(ord('c'),True);pump()
             Atspi.EditableText.copy_text(obj.get_editable_text_iface(),0,4);pump()
             assert Gtk.Clipboard.get(Gdk.SELECTION_PRIMARY).wait_for_text() is None,'PRIMARY exported settings'
             assert Gtk.Clipboard.get(Gdk.SELECTION_CLIPBOARD).wait_for_text() is None,'CLIPBOARD exported settings'
             assert text(obj)=='1500';note('CLIPBOARD')
-            stage='DEFAULT';click('default.'+row['id']);wait(lambda:value(row)=='1000');set_value(row,1500);click('revert');wait(lambda:value(row)=='1000');assert stored(directory)==documents('40')
+            stage='DEFAULT';click('default.'+row['id']);wait(lambda:value(row)=='1000');set_value(row,1500);click('revert');wait(lambda:value(row)=='1000');assert stored(directory)==expected_documents('40')
             stage='SEARCH';search=find('settings.search');assert Atspi.EditableText.set_text_contents(search.get_editable_text_iface(),'Resource sampling interval');wait(lambda:state(control(row['id']),Atspi.StateType.SHOWING));assert not state(control('display.enabled'),Atspi.StateType.SHOWING)
             assert Atspi.EditableText.set_text_contents(search.get_editable_text_iface(),'display.enabled');wait(lambda:state(control('display.enabled'),Atspi.StateType.SHOWING));assert Atspi.EditableText.set_text_contents(search.get_editable_text_iface(),'')
             for field in EXPECTED['settings']:set_value(field,field['edit'])
-            stage='PREVIEW';click('preview');event('event','held');assert stored(directory)==documents('40') and 'Request pending' in status();command('release');assert event('event','result')['result']['outcome']=='preview';wait(lambda:'Preview validated' in status());check_values(True)
+            stage='PREVIEW';click('preview');event('event','held');assert stored(directory)==expected_documents('40') and 'Request pending' in status();command('release');assert event('event','result')['result']['outcome']=='preview';wait(lambda:'Preview validated' in status());check_values(True)
         stage='SUBMIT';click('apply')
-        if mode=='conflict':
-            assert event('event','result')['result']['outcome']=='conflict';wait(lambda:'Configuration changed' in status());assert stored(directory)==documents('41');click('reload');event('event','reloaded');check_values();assert 'Revision 41' in status();note('CONFLICT')
+        submitted=event('event','submitted')
+        # Save's preview submission was observed earlier through its held/result events.
+        if behavior=='save':submitted=event('event','submitted')
+        if resource:
+            assert submitted['body']['schema_version']=='0.3.0'
+            assert submitted['body']['content']==CONTENT_FIXTURE['alternate_selection' if behavior=='wrong-selection' else 'selection']
+        if behavior=='conflict':
+            assert event('event','result')['result']['outcome']=='conflict';wait(lambda:'Configuration changed' in status());assert stored(directory)==expected_documents('41');click('reload');event('event','reloaded');check_values();assert 'Revision 41' in status();note('CONFLICT')
         else:
-            event('event','held');stage='PENDING';assert ('Outcome unknown' if mode=='callback' else 'Request pending') in status() and not state(find('settings.apply'),Atspi.StateType.SENSITIVE)
-            assert stored(directory)==documents('40');assert not any('Saved durably' in text(o) for o in objects()),'premature saved claim'
-            if mode=='cancel':click('cancel');event('event','cancel-requested')
-            if mode=='deny':command('deny')
-            if mode in ('revoke','retain'):
+            event('event','held');stage='PENDING';assert ('Outcome unknown' if behavior=='callback' else 'Request pending') in status() and not state(find('settings.apply'),Atspi.StateType.SENSITIVE)
+            assert stored(directory)==expected_documents('40');assert not any('Saved durably' in text(o) for o in objects()),'premature saved claim'
+            if resource:check_resources(directory)
+            if behavior=='cancel':click('cancel');event('event','cancel-requested')
+            if behavior=='deny':command('deny')
+            if behavior in ('revoke','retain'):
                 held=[control(r['id']) for r in EXPECTED['settings'] if not isinstance(r['initial'],bool)];stage='REVOKE';issued=command('revoke')
                 def erased():return all(text(o)=='' for o in held) and not any('Retained settings canary' in text(o) for o in objects())
                 wait(erased,max(.001,issued+EXPECTED['revocation_ms']/1000-time.monotonic()));assert time.monotonic()-issued<=EXPECTED['revocation_ms']/1000
                 note('REVOKE')
             command('release');result=event('event','result')['result'];stage='RESULT'
-            if mode in ('cancel','deny','revoke'):
-                assert stored(directory)==documents('40')
-                if mode=='deny':
+            if behavior in ('cancel','deny','revoke'):
+                assert stored(directory)==expected_documents('40')
+                if behavior=='deny':
                     assert result['outcome']=='unknown' and result['error']['code']=='policy.denied' and result['activation']==[]
                     assert all(result[k] is None for k in ('revision','stored','durable','visible'))
                     wait(lambda:'Outcome unknown' in status());assert not state(find('settings.reload'),Atspi.StateType.SENSITIVE)
                     command('regrant');assert 'Outcome unknown' in status();command('retrieve');result=event('event','retrieved')['result']
-                assert result['outcome']==('cancelled' if mode=='cancel' else 'conflict')
-                assert result['error']['code']==('request.cancelled' if mode=='cancel' else 'policy.changed')
+                assert result['outcome']==('cancelled' if behavior=='cancel' else 'conflict')
+                assert result['error']['code']==('request.cancelled' if behavior=='cancel' else 'policy.changed')
                 assert result['revision']=='40' and all(result[k] is False for k in ('stored','durable','visible')) and result['activation']==[]
-                assert stored(directory)==documents('40')
-                if mode=='cancel':wait(lambda:'Request cancelled' in status());click('revert');wait(lambda:value(row)=='1000')
-                if mode=='deny':wait(lambda:'Configuration changed' in status());click('reload');event('event','reloaded');check_values();note('DENY-RETRIEVED')
-                if mode=='revoke':
+                assert stored(directory)==expected_documents('40')
+                if resource:check_resources(directory)
+                if behavior=='cancel':wait(lambda:'Request cancelled' in status());click('revert');wait(lambda:value(row)=='1000')
+                if behavior=='deny':wait(lambda:'Configuration changed' in status());click('reload');event('event','reloaded');check_values();note('DENY-RETRIEVED')
+                if behavior=='revoke':
                     assert all(text(o)=='' for o in held);command('regrant');assert all(text(o)=='' for o in held);click('reload');event('event','reloaded');check_values()
             else:
                 assert result['outcome']=='accepted' and result['revision']=='41' and result['stored'] is True and result['durable'] is True and result['visible'] is False
-                wanted=documents('41',mode=='save')
-                if mode!='save':wanted['settings']['sampling']['resources_ms']=1500
+                wanted=expected_documents('41',behavior=='save')
+                if behavior!='save':wanted['settings']['sampling']['resources_ms']=1500
+                if resource and behavior in ('theme','invalid'):wanted['settings']['display']['theme_id']=CONTENT_CASES['selected_theme']
                 assert stored(directory)==wanted
-                if mode in ('unknown','restart','callback'):
+                if resource:stage='RESOURCE';check_resources(directory,wanted['settings']['display']['theme_id'])
+                if behavior in ('unknown','restart','callback'):
                     wait(lambda:'Outcome unknown' in status());assert not state(find('settings.apply'),Atspi.StateType.SENSITIVE);before=(directory/'current.json').read_bytes()
-                    command('restart' if mode=='restart' else 'retrieve');assert (directory/'current.json').read_bytes()==before
+                    command('restart' if behavior=='restart' else 'retrieve');assert (directory/'current.json').read_bytes()==before
                 wait(lambda:'Saved durably' in status() and 'activation pending' in status() and 'Visibility has not been confirmed' in status());note('DURABLE')
-                if mode=='save':
+                if behavior=='save':
                     command('quit');assert proc.wait(timeout=5)==0;keys.close();keys=None;launch('reopen');wait(lambda:find('settings.status'));check_values(True);assert stored(directory)==wanted;note('REOPEN')
         stage='CLOSE';held=control(row['id']);command('close');wait(lambda:text(held)=='');command('quit');assert proc.wait(timeout=5)==0
-        assert mode not in ('retain','false-saved'),'deliberate fault escaped observer';report['outcome']='pass'
+        assert behavior not in ('retain','false-saved','wrong-selection'),'deliberate fault escaped observer';report['outcome']='pass'
     except AssertionError as exc:
         report.update(error=str(exc),stage=stage)
-        retained=mode=='retain' and stage=='REVOKE' and str(exc)=='REVOKE observation deadline' and all(text(o)=='' for o in held) and any('Retained settings canary' in text(o) for o in objects())
-        premature=mode=='false-saved' and stage=='PENDING' and str(exc)=='premature saved claim' and stored(directory)==documents('40') and 'Request pending' in status()
-        if retained or premature:report.update(outcome='pass',fault_detected=True)
+        retained=behavior=='retain' and stage=='REVOKE' and str(exc)=='REVOKE observation deadline' and all(text(o)=='' for o in held) and any('Retained settings canary' in text(o) for o in objects())
+        premature=behavior=='false-saved' and stage=='PENDING' and str(exc)=='premature saved claim' and stored(directory)==expected_documents('40') and 'Request pending' in status()
+        wrong=resource and behavior=='wrong-selection' and stage=='RESOURCE' and str(exc)=='resource selection differs' and resource_index(directory)[1]['selection']==CONTENT_FIXTURE['alternate_selection'] and stored(directory)==wanted
+        if retained or premature or wrong:report.update(outcome='pass',fault_detected=True)
         else:raise
     finally:
         if proc and proc.poll() is None:proc.kill();proc.wait(timeout=5)
@@ -216,7 +270,7 @@ def main():
     report=dict(family='SETTINGS-FORM',outcome='fail',started_at=datetime.now(timezone.utc).isoformat(),executable_sha256=sha(exe),oracle_sha256=sha(Path(__file__)),cases=[])
     try:
         server,env=launch_xvfb(folder);env['NO_AT_BRIDGE']='0';env.pop('AT_SPI_BUS_ADDRESS',None)
-        for mode in ('save','cancel','conflict','deny','revoke','unknown','callback','restart','locked','retain','false-saved'):
+        for mode in ('save','cancel','conflict','deny','revoke','unknown','callback','restart','locked','retain','false-saved',*CONTENT_CASES['native_modes']):
             child=subprocess.Popen(['dbus-run-session','--',sys.executable,str(Path(__file__)),'--observe',str(exe),str(folder/mode),mode],env=env,stdout=subprocess.PIPE,stderr=subprocess.PIPE,start_new_session=True)
             try:stdout,stderr=child.communicate(timeout=45)
             except subprocess.TimeoutExpired:os.killpg(child.pid,signal.SIGKILL);stdout,stderr=child.communicate(timeout=5);raise AssertionError('observer deadline')

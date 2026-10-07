@@ -3,6 +3,7 @@
 #include <fstream>
 #include <iostream>
 namespace c=syspane::configuration;namespace p=syspane::protocol;namespace ui=syspane::interfaces;using p::Json;
+void run_settings_content_case(const std::string&,const std::string&);
 void check(bool value,const char* expression,int line){if(!value)throw std::runtime_error(std::string(expression)+":"+std::to_string(line));}
 #define CHECK(x) check(static_cast<bool>(x),#x,__LINE__)
 std::string root;Json settings_cases;
@@ -74,4 +75,4 @@ void run(const std::string& name){
         auto v=initial();v.settings["revision"]=v.scene["revision"]="18446744073709551615";ui::SettingsDraft maximum(authority(),policy(),v,"E1");edit(maximum);auto q=*maximum.begin("commit","R");CHECK(p::parse(q.body)["expected_revision"]=="18446744073709551615");rejected([&]{maximum.complete(q.ticket,c::committed_result("R","E1",0));});
     }else throw std::runtime_error("unknown case");
 }
-int main(int argc,char** argv){try{CHECK(argc==3);root=argv[2];settings_cases=read("tests/configuration/settings-cases.json");run(argv[1]);std::cout<<argv[1]<<" pass\n";return 0;}catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}}
+int main(int argc,char** argv){try{CHECK(argc==3);root=argv[2];settings_cases=read("tests/configuration/settings-cases.json");const std::string name=argv[1];if(name=="THEME"||name.find("CONTENT")==0)run_settings_content_case(name,root);else run(name);std::cout<<name<<" pass\n";return 0;}catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}}

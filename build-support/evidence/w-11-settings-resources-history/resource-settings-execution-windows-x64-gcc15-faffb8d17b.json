@@ -1,0 +1,66 @@
+[
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-07T02:59:30.619420+00:00",
+    "finished_at": "2026-10-07T02:59:31.300041+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 6442450944,\n  \"checkout_out_bytes\": 1728581320,\n  \"linux_campaign_bytes\": 4440379029,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "out/campaign/resource_settings_step.py",
+      "windows-x64-gcc15",
+      "build"
+    ],
+    "started_at": "2026-10-07T02:59:31.300567+00:00",
+    "finished_at": "2026-10-07T02:59:31.912670+00:00",
+    "exit": 0,
+    "stdout": "ninja: no work to do.\n \nAttempt: D:\\Projects\\SysPane\\syspane\\out\\campaign\\w-11-settings-resources\\windows-x64-gcc15-build-53143956ef\n",
+    "stderr": ""
+  },
+  {
+    "step": "test",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-07T02:59:31.912961+00:00",
+    "finished_at": "2026-10-07T02:59:32.650649+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 6442450944,\n  \"checkout_out_bytes\": 1730012775,\n  \"linux_campaign_bytes\": 4440379029,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "test",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "out/campaign/resource_settings_step.py",
+      "windows-x64-gcc15",
+      "test"
+    ],
+    "started_at": "2026-10-07T02:59:32.651009+00:00",
+    "finished_at": "2026-10-07T02:59:38.362741+00:00",
+    "exit": 0,
+    "stdout": "....   Passed    0.04 sec\n      Start  88: configuration.COMMAND-POLICY\n20/58 Test  #88: configuration.COMMAND-POLICY ............   Passed    0.04 sec\n      Start  89: configuration.COMMAND-LIFETIME\n21/58 Test  #89: configuration.COMMAND-LIFETIME ..........   Passed    0.03 sec\n      Start  90: configuration.COMMAND-CAPACITY\n22/58 Test  #90: configuration.COMMAND-CAPACITY ..........   Passed    0.57 sec\n      Start  91: configuration.COMMAND-FAULT\n23/58 Test  #91: configuration.COMMAND-FAULT .............   Passed    0.04 sec\n      Start  92: configuration.COMMAND-NEGOTIATE\n24/58 Test  #92: configuration.COMMAND-NEGOTIATE .........   Passed    0.03 sec\n      Start  93: configuration.RECON-RECEIPTS\n25/58 Test  #93: configuration.RECON-RECEIPTS ............   Passed    0.04 sec\n      Start  94: configuration.RECON-POLICY\n26/58 Test  #94: configuration.RECON-POLICY ..............   Passed    0.03 sec\n      Start  95: configuration.RECON-CODEC\n27/58 Test  #95: configuration.RECON-CODEC ...............   Passed    0.02 sec\n      Start  96: configuration.RECON-BOUNDS\n28/58 Test  #96: configuration.RECON-BOUNDS ..............   Passed    0.05 sec\n      Start  97: configuration.SCENE-CONTENT-SCHEMA\n29/58 Test  #97: configuration.SCENE-CONTENT-SCHEMA ......   Passed    0.08 sec\n      Start  98: configuration.SCENE-CONTENT-MIGRATION\n30/58 Test  #98: configuration.SCENE-CONTENT-MIGRATION ...   Passed    0.03 sec\n      Start  99: configuration.SCENE-CONTENT-RESOURCES\n31/58 Test  #99: configuration.SCENE-CONTENT-RESOURCES ...   Passed    0.09 sec\n      Start 100: configuration.SCENE-CONTENT-PREVIEW\n32/58 Test #100: configuration.SCENE-CONTENT-PREVIEW .....   Passed    0.05 sec\n      Start 101: configuration.SCENE-CONTENT-TX\n33/58 Test #101: configuration.SCENE-CONTENT-TX ..........   Passed    0.09 sec\n      Start 102: configuration.SCENE-CONTENT-SESSION\n34/58 Test #102: configuration.SCENE-CONTENT-SESSION .....   Passed    0.08 sec\n      Start 103: configuration.AUTH-SCHEMA\n35/58 Test #103: configuration.AUTH-SCHEMA ...............   Passed    0.04 sec\n      Start 104: configuration.TX-MIXED\n36/58 Test #104: configuration.TX-MIXED ..................   Passed    0.03 sec\n      Start 105: configuration.TX-CONFLICT\n37/58 Test #105: configuration.TX-CONFLICT ...............   Passed    0.04 sec\n      Start 106: configuration.TX-REPLAY\n38/58 Test #106: configuration.TX-REPLAY .................   Passed    0.04 sec\n      Start 107: configuration.TX-INTERRUPT\n39/58 Test #107: configuration.TX-INTERRUPT ..............   Passed    0.05 sec\n      Start 108: configuration.TX-BOUNDS\n40/58 Test #108: configuration.TX-BOUNDS .................   Passed    0.04 sec\n      Start 109: configuration.TX-CAPACITY\n41/58 Test #109: configuration.TX-CAPACITY ...............   Passed    0.61 sec\n      Start 110: configuration.DIGEST\n42/58 Test #110: configuration.DIGEST ....................   Passed    0.04 sec\n      Start 111: configuration.DIGEST-CONTENT\n43/58 Test #111: configuration.DIGEST-CONTENT ............   Passed    0.69 sec\n      Start 112: configuration.CONTENT-COMPOSE\n44/58 Test #112: configuration.CONTENT-COMPOSE ...........   Passed    0.05 sec\n      Start 113: configuration.CONTENT-PINS\n45/58 Test #113: configuration.CONTENT-PINS ..............   Passed    0.07 sec\n      Start 114: configuration.CONTENT-PATHS\n46/58 Test #114: configuration.CONTENT-PATHS .............   Passed    0.02 sec\n      Start 115: configuration.CONTENT-BOUNDS\n47/58 Test #115: configuration.CONTENT-BOUNDS ............   Passed    0.06 sec\n      Start 116: configuration.CONTENT-CAPABILITIES\n48/58 Test #116: configuration.CONTENT-CAPABILITIES ......   Passed    0.05 sec\n      Start 117: configuration.CONTENT-POLICY\n49/58 Test #117: configuration.CONTENT-POLICY ............   Passed    0.07 sec\n      Start 118: configuration.RESOURCE-COMMIT\n50/58 Test #118: configuration.RESOURCE-COMMIT ...........   Passed    0.08 sec\n      Start 119: configuration.RESOURCE-GUARDS\n51/58 Test #119: configuration.RESOURCE-GUARDS ...........   Passed    0.09 sec\n      Start 120: configuration.RESOURCE-SESSION\n52/58 Test #120: configuration.RESOURCE-SESSION ..........   Passed    0.06 sec\n      Start 121: configuration.RESOURCE-RETAINED\n53/58 Test #121: configuration.RESOURCE-RETAINED .........   Passed    0.12 sec\n      Start 144: composition.graph\n54/58 Test #144: composition.graph .......................   Passed    0.05 sec\n      Start 145: composition.reject_forbidden\n55/58 Test #145: composition.reject_forbidden ............   Passed    0.05 sec\n      Start 160: protocol.POLICY-01\n56/58 Test #160: protocol.POLICY-01 ......................   Passed    0.03 sec\n      Start 161: protocol.POLICY-02\n57/58 Test #161: protocol.POLICY-02 ......................   Passed    0.02 sec\n      Start 162: protocol.DISCLOSURE-01\n58/58 Test #162: protocol.DISCLOSURE-01 ..................   Passed    0.02 sec\n\n100% tests passed, 0 tests failed out of 58\n\nTotal Test time (real) =   5.05 sec\n \nAttempt: D:\\Projects\\SysPane\\syspane\\out\\campaign\\w-11-settings-resources\\windows-x64-gcc15-test-65f33a100b\n",
+    "stderr": ""
+  }
+]

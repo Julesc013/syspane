@@ -50,9 +50,11 @@ dependencies, activation, policy classification, localization/help IDs and nativ
 coverage status. `specctl generate` projects their setting constraints into settings
 and both command schemas; validation rejects bad defaults and projection drift.
 The [native settings checkpoint](../delivery/native-settings-handoff.md) adds generated
-descriptor metadata, portable drafts and an embeddable GTK form. The
+descriptor metadata, portable drafts and an embeddable GTK form. Its
+[resource-aware extension](../delivery/settings-resources-handoff.md) retains exact
+package/preset selection through theme edits, saves and reconciliation. The
 [coverage report](settings-native-coverage.json) maps all eleven controls to commands
-and executable cases. Installed routing, content-aware settings, CLI/help generation,
+and executable cases. Installed routing, preset/import controls, CLI/help generation,
 inheritance reset and other native adapters remain implementation work; component
 evidence does not mark full product coverage complete.
 

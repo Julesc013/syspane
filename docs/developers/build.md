@@ -17,9 +17,21 @@ unresolved. The external command owner retains its ledger/reconciliation duties 
 the form closes. Explicit Reload takes a fresh snapshot only after no request remains
 unresolved. Current policy must grant operational inspector and accessibility disclosure.
 
-The initial form emits resource-free command 0.2 settings operations. Connecting it
-to a resource-backed installed scene requires the existing content-aware transaction
-contract; that integration remains open. Use built-in default assigns an explicit
+For a resource-backed generation, prepare `SettingsResources` before entering the UI
+owner: an immutable validated ContentCatalog from that generation, its exact selection
+and the adapter capability set. Pass it after the optional Translator constructor
+argument, and provide fresh context with explicit reloads. The
+[resource settings package](../../spec/delivery/packages/w-11-settings-resources.md)
+defines ownership. Settings-only edits emit command 0.3 with that exact selection,
+including when the unchanged scene uses schema 0.3. Resource-free scene 0.2 keeps
+command 0.2; bare scene 0.3 and dropping an already-required context are rejected.
+Only the trusted host can replace catalog/selection via a fresh admitted snapshot.
+Current-policy checks cover content.select and required resource capabilities.
+
+Theme edits resolve from the admitted catalog, without filesystem access. Revert and
+accepted results update document/resource snapshots together. Disclosure loss clears
+all local references and needs a fresh complete reload after regrant. Installed
+owner/transport routing and preset/import controls remain open. Use built-in default assigns an explicit
 value; persistent-layer inheritance reset is separate pending work. Native selection
 does not publish authored values to PRIMARY/CLIPBOARD; copy/cut/drag export awaits an
 admitted clipboard owner. Full locale formatting and human accessibility review remain.
@@ -29,7 +41,11 @@ After ordinary preflight/configure/build, use `ctest --preset <profile> -R
 --output-on-failure`. Linux adds `-R '^native[.]SETTINGS-FORM$'`. The latter creates
 owned Xvfb/private-D-Bus windows, sends XTest keys, reads AT-SPI controls and independently
 checks coherent ext4 generations. It preserves the 200 ms disclosure bound and requires
-positive detection of retained-value and premature-saved controls. These checks do
+positive detection of retained-value, premature-saved and wrong-resource-selection
+controls. Resource cases compare every manifest/asset byte and exact theme/selection
+pin after save/reopen and restart, while the owner rejects import fallback. Check
+the independent fixed resource fixture with `python tests/configuration/settings_content_fixture.py --check`.
+These checks do
 not qualify an installed settings application or a complete desktop edition.
 
 The [scene inspector package](../../spec/delivery/packages/w-11-scene-inspector.md)

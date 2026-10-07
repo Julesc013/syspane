@@ -7,12 +7,18 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
+The [resource-aware settings checkpoint](spec/delivery/settings-resources-handoff.md)
+preserves exact package/preset identity through native edits, theme changes and
+restart. Saves use stored resource bytes after imports are unavailable; an independent
+oracle checks documents, manifests, assets and selection pins. Installed routing,
+native editing and complete editions remain open.
+
 The [native settings checkpoint](spec/delivery/native-settings-handoff.md) adds
 portable drafts and a Linux GTK form for all eleven initial settings. Native controls
 use the common transaction API, preserve unknown requests for reconciliation and
 distinguish durable saves from activation. Independent checks cover save/reopen,
 cancellation, conflicts, policy changes and restart without duplicate commits.
-Installed routing, content-aware settings, native editing and complete editions remain open.
+Installed routing, preset/import controls, native editing and complete editions remain open.
 
 The [native scene inspector checkpoint](spec/delivery/scene-inspector-handoff.md)
 adds a Linux tree table for scalar, collection, chart and image information. Native

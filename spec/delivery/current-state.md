@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-07T02:19:00Z", "scope": "Native settings drafts, transaction results and independently observed persistence"}
+updated: {"by": "codex", "at": "2026-10-07T02:53:39Z", "scope": "Resource-aware settings and exact native resource persistence"}
 ---
 
 # Current state and next admitted boundary
@@ -22,12 +22,21 @@ The active objective is now the [complete 0.1.0 release](release-0.1.0.md) for W
 required but is no longer the final completion boundary. Legacy version/architecture
 floors, native labs and complete desktop/package evidence remain unresolved.
 
-The latest [native settings checkpoint](native-settings-handoff.md) adds portable
+The latest [resource-aware settings checkpoint](settings-resources-handoff.md)
+connects those controls to immutable catalogs and exact package/preset selections.
+Settings-only command 0.3 preserves scene 0.3 and resolves valid theme edits inside
+the admitted closure. Native saves/reopen/restart use stored resources when imports
+are unavailable; independent checks compare all resource bytes and detect a
+deliberately substituted selection. Installed routing and the complete editor remain
+required. The next boundary is W-10's shared editing draft, commands, undo/redo and
+native interactive surface, retaining the existing independent escape owner.
+
+The earlier [native settings checkpoint](native-settings-handoff.md) adds portable
 drafts and a GTK form for all eleven initial descriptors. Real asynchronous commands
 and Linux generation storage are exercised through independent native controls and
 stored-document reads. Unknown results retain their request identity through policy
 changes, callback failure and restart. Built-in defaults are explicit values, not
-inheritance reset. W-11 remains in progress: content-aware settings, installed routing,
+inheritance reset. W-11 remains in progress: preset/import controls, installed routing,
 native editing, full accessibility and other platform adapters remain required.
 
 The earlier [scene inspector checkpoint](scene-inspector-handoff.md) adds a native

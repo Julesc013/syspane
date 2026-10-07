@@ -11,7 +11,7 @@ public:
         std::function<void()> reload;
     };
     using Translator=std::function<std::string(const std::string&,const std::string&)>;
-    SettingsForm(configuration::Authority,configuration::Policy,configuration::Authored,std::string epoch,Actions,Translator={});
+    SettingsForm(configuration::Authority,configuration::Policy,configuration::Authored,std::string epoch,Actions,Translator={},std::optional<SettingsResources> resources={});
     ~SettingsForm();
     SettingsForm(const SettingsForm&)=delete;SettingsForm& operator=(const SettingsForm&)=delete;
     GtkWidget* widget()const;
@@ -19,7 +19,7 @@ public:
     void reconciled(std::uint64_t,const std::string& query_id,const std::string& current_epoch,const Json&);
     void disconnected();
     void policy(configuration::Policy);
-    void reload(configuration::Authored,std::string epoch);
+    void reload(configuration::Authored,std::string epoch,std::optional<SettingsResources> resources={});
     void close();
 private:
     struct Impl;std::unique_ptr<Impl> impl_;
