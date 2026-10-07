@@ -489,7 +489,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "dc3264f8cce28651cf7cfc9316f987bb07b4aaeab8076d62ccb40f55e2dfb74d"
+      "sha256": "b81c8a8e8d294631e10ea6beed65ce1ad89af9dff26bb4b64ff1388b92986ed8"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -1551,6 +1551,16 @@
       "sha256": "edb24d563a44598f339ac0b54214fdc5912f51c3bd9340de2b8d527916e2e1aa"
     },
     {
+      "id": "SP-W09-RUNTIME-OBSERVATION",
+      "path": "delivery/packages/w-09-runtime-observation.md",
+      "title": "Bounded rendering work and explicit native observations",
+      "description": "Investigate the preserved image-paint and accessibility failures with fixed acceptance.",
+      "requires": [
+        "SP-FOCUS-IDLE-HANDOFF"
+      ],
+      "sha256": "334f859fdf64f64abbaee8a74e1670924004360b9e28b1a9ee5343c3a7c12439"
+    },
+    {
       "id": "SP-W09-SCENE-CONTENT",
       "path": "delivery/packages/w-09-scene-content.md",
       "title": "Versioned widget content and transactions",
@@ -2228,6 +2238,17 @@
         "SP-TESTING"
       ],
       "sha256": "a810e9b3bd8620436b24cdde1e0c9e9fb009817568e768381e2887db9669c6ea"
+    },
+    {
+      "id": "SP-RUNTIME-OBSERVATION-HANDOFF",
+      "path": "delivery/runtime-observation-handoff.md",
+      "title": "Image validation cost and native observation checkpoint",
+      "description": "Preserve complete image validation while reducing parent work and retaining unexplained accessibility failures.",
+      "requires": [
+        "SP-W09-RUNTIME-OBSERVATION",
+        "SP-FOCUS-IDLE-HANDOFF"
+      ],
+      "sha256": "bbd6e2354a09b94e3d28e9cdf2be0e365d8977e0f3557f72f34ef31e2f7962dd"
     },
     {
       "id": "SP-SCENE-CONTENT-HANDOFF",

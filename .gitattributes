@@ -84,3 +84,8 @@ build-support/evidence/w-10-edit-locks-history/** -text whitespace=cr-at-eol
 
 # Preserve exact focus/refresh diagnostics, attempts and admission records.
 build-support/evidence/w-10-focus-idle-history/** -text whitespace=cr-at-eol
+
+# Preserve exact image/observation diagnostics and frozen acceptance inputs.
+build-support/evidence/w-09-runtime-observation-history/** -text whitespace=cr-at-eol
+# Keep the executed coordinator's original blank-line indentation byte-exact.
+build-support/evidence/w-09-runtime-observation-history/support/runtime_observation_flow.py -whitespace

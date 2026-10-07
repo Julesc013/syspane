@@ -7,12 +7,17 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
+The [image-validation checkpoint](spec/delivery/runtime-observation-handoff.md)
+reduces measured validation cost from about 34 ms to 5 ms while retaining every
+pixel check. All affected development and native rendering checks pass. The earlier
+accessibility timeouts remain unexplained; complete editions remain in progress.
+
 The [refresh-fairness checkpoint](spec/delivery/focus-idle-handoff.md) fixes
 GTK accessibility-focus starvation under sustained preview drawing. Scoped editor
 style transitions also preserve prompt policy erasure. Passing matrices cover 165
 existing cases and three new load/fault cases, including the prior large-scene
-regression. Binding/inspector accessibility timeouts and a scene-image timing
-failure keep full regression qualification open.
+regression. Its preserved failures and the later image-validation evidence remain
+separate records; full native qualification is still open.
 Installed integration and complete editions remain in progress.
 
 The [edit-lock checkpoint](spec/delivery/edit-locks-handoff.md) adds persistent

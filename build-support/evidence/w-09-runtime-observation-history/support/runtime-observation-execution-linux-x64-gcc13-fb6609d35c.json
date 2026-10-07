@@ -1,0 +1,110 @@
+[
+  {
+    "step": "configure",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-07T22:12:54.906969+00:00",
+    "finished_at": "2026-10-07T22:12:56.061574+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2206792970,\n  \"linux_campaign_bytes\": 4773388503,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "configure",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/runtime_observation_step.py",
+      "linux-x64-gcc13",
+      "configure"
+    ],
+    "started_at": "2026-10-07T22:12:56.062089+00:00",
+    "finished_at": "2026-10-07T22:13:07.483175+00:00",
+    "exit": 0,
+    "stdout": "Preset CMake variables:\n\n  BUILD_TESTING=\"ON\"\n  CMAKE_BUILD_TYPE=\"Debug\"\n  CMAKE_CXX_COMPILER=\"g++\"\n  SYSPANE_PROFILE=\"linux-x64-gcc13\"\n\nprofile verified: linux-x64-gcc13\nvendored dependency digests: pass\ndiagnostic toolkit verified: GTK 3.24.41 / Ubuntu 3.24.41-4ubuntu1.3\nnative text dependency identity verified: 358 files\nnative image dependencies verified: 344 files\nnative GJS clock build dependencies verified\n-- Configuring done (7.2s)\n-- Generating done (0.1s)\n-- Build files have been written to: /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-09-runtime-observation/linux-x64-gcc13-configure-aa70c7b774\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-07T22:13:07.483523+00:00",
+    "finished_at": "2026-10-07T22:13:08.195837+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2208439970,\n  \"linux_campaign_bytes\": 4773387877,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/runtime_observation_step.py",
+      "linux-x64-gcc13",
+      "build"
+    ],
+    "started_at": "2026-10-07T22:13:08.196127+00:00",
+    "finished_at": "2026-10-07T22:13:16.066070+00:00",
+    "exit": 0,
+    "stdout": "[1/2] Building CXX object CMakeFiles/syspane_scene_tests.dir/tests/scene/image_fit_tests.cpp.o\n[2/2] Linking CXX executable syspane_scene_tests\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-09-runtime-observation/linux-x64-gcc13-build-47dea4da1a\n",
+    "stderr": ""
+  },
+  {
+    "step": "test",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-07T22:13:16.066382+00:00",
+    "finished_at": "2026-10-07T22:13:16.782985+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2210086064,\n  \"linux_campaign_bytes\": 4773660611,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "test",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/runtime_observation_step.py",
+      "linux-x64-gcc13",
+      "test"
+    ],
+    "started_at": "2026-10-07T22:13:16.783324+00:00",
+    "finished_at": "2026-10-07T22:13:22.068162+00:00",
+    "exit": 0,
+    "stdout": "Test project /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n    Start 124: scene.IMAGE-FIT\n1/6 Test #124: scene.IMAGE-FIT ..................   Passed    0.02 sec\n    Start 125: scene.IMAGE-ORIENTATION\n2/6 Test #125: scene.IMAGE-ORIENTATION ..........   Passed    0.00 sec\n    Start 126: scene.IMAGE-LIMITS\n3/6 Test #126: scene.IMAGE-LIMITS ...............   Passed    0.00 sec\n    Start 127: scene.IMAGE-VALIDATION\n4/6 Test #127: scene.IMAGE-VALIDATION ...........   Passed    0.58 sec\n    Start 260: composition.graph\n5/6 Test #260: composition.graph ................   Passed    0.12 sec\n    Start 261: composition.reject_forbidden\n6/6 Test #261: composition.reject_forbidden .....   Passed    0.27 sec\n\n100% tests passed, 0 tests failed out of 6\n\nTotal Test time (real) =   1.00 sec\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-09-runtime-observation/linux-x64-gcc13-test-41d7544281\n",
+    "stderr": ""
+  }
+]

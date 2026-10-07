@@ -12,22 +12,25 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-07T22:02:10.361592+00:00", "scope": "Refresh-fairness repair and preserved binding observation failure"}
+updated: {"by": "codex", "at": "2026-10-07T22:23:18.128931+00:00", "scope": "Image validation optimization and unresolved native observations"}
 ---
 
 # Current state and next admitted boundary
 
-The latest [refresh-fairness checkpoint](focus-idle-handoff.md) identifies and
-repairs GTK/ATK focus starvation caused by continuous higher-priority preview
-refresh. Scoped editor style transitions preserve prompt erasure under the same
-load. Passing matrices cover 165 existing editor cases and three load/fault cases;
-311 non-native Linux checks and 13 of 15 rendering checks also pass. The large-command
-matrix passes, but binding authoring fails at a libatspi tab-role query. Investigate
-that preserved timeout, the inspector selected-row timeout and scene-image timing
-failure next; this checkpoint is not fully qualified. Earlier
-unrelated interface/focus causes remain open. Then continue conditional
-visibility/typography, clipboard/recovery drafts and installed ownership, then
-full accessibility/performance and all five complete-edition release tracks.
+The latest [image-validation checkpoint](runtime-observation-handoff.md) reduces
+complete validation cost from about 34 ms to 5 ms in the development profile.
+Original image timing, exact pixels, worker lifetime and erasure checks now pass;
+new first/middle/last rejection examples were verified before implementation.
+All non-native suites pass (312 Linux, 309 Windows GCC15, 306 v141_xp), along with
+15 native rendering checks and refresh/binding matrices. Six query diagnostics
+did not reproduce the historical binding/inspector timeouts; their causes remain
+open. Continue explicit native observation evidence and the remaining authoring,
+clipboard/recovery drafts, installed ownership and five complete-edition tracks.
+
+The earlier [refresh-fairness checkpoint](focus-idle-handoff.md) repairs GTK/ATK
+focus starvation under sustained painting. Its original three regression failures
+remain preserved; current passing runs above do not rewrite those outcomes or
+explain the two historical accessibility timeouts.
 
 The earlier [edit-lock checkpoint](edit-locks-handoff.md) adds persistent locks
 through scene 0.4, negotiated command 0.6 and the existing resource/transaction

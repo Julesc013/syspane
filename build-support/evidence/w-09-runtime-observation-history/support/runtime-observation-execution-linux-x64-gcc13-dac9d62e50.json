@@ -1,0 +1,218 @@
+[
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-07T22:15:28.878592+00:00",
+    "finished_at": "2026-10-07T22:15:29.954193+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2211739126,\n  \"linux_campaign_bytes\": 4775321164,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/runtime_observation_step.py",
+      "linux-x64-gcc13",
+      "build"
+    ],
+    "started_at": "2026-10-07T22:15:29.954670+00:00",
+    "finished_at": "2026-10-07T22:15:38.043761+00:00",
+    "exit": 0,
+    "stdout": "[1/11] Building CXX object CMakeFiles/syspane_scene.dir/source/scene/image.cpp.o\n[2/11] Linking CXX static library libsyspane_scene.a\n[3/11] Linking CXX executable SysPane.ImageWorker\n[4/11] Linking CXX executable SysPane.TextProbe\n[5/11] Linking CXX executable syspane_large_command_tests\n[6/11] Linking CXX executable syspane_editor_tests\n[7/11] Linking CXX executable syspane_scene_inspector_tests\n[8/11] Linking CXX executable syspane_image_job_tests\n[9/11] Linking CXX executable syspane_editor_window\n[10/11] Linking CXX executable syspane_scene_surface_tests\n[11/11] Linking CXX executable syspane_scene_tests\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-09-runtime-observation/linux-x64-gcc13-build-f79e243617\n",
+    "stderr": ""
+  },
+  {
+    "step": "test",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-07T22:15:38.044078+00:00",
+    "finished_at": "2026-10-07T22:15:38.950447+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2213386308,\n  \"linux_campaign_bytes\": 4775328242,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "test",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/runtime_observation_step.py",
+      "linux-x64-gcc13",
+      "test"
+    ],
+    "started_at": "2026-10-07T22:15:38.950749+00:00",
+    "finished_at": "2026-10-07T22:15:43.987157+00:00",
+    "exit": 0,
+    "stdout": "Test project /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n    Start 124: scene.IMAGE-FIT\n1/6 Test #124: scene.IMAGE-FIT ..................   Passed    0.02 sec\n    Start 125: scene.IMAGE-ORIENTATION\n2/6 Test #125: scene.IMAGE-ORIENTATION ..........   Passed    0.00 sec\n    Start 126: scene.IMAGE-LIMITS\n3/6 Test #126: scene.IMAGE-LIMITS ...............   Passed    0.00 sec\n    Start 127: scene.IMAGE-VALIDATION\n4/6 Test #127: scene.IMAGE-VALIDATION ...........   Passed    0.19 sec\n    Start 260: composition.graph\n5/6 Test #260: composition.graph ................   Passed    0.11 sec\n    Start 261: composition.reject_forbidden\n6/6 Test #261: composition.reject_forbidden .....   Passed    0.25 sec\n\n100% tests passed, 0 tests failed out of 6\n\nTotal Test time (real) =   0.59 sec\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-09-runtime-observation/linux-x64-gcc13-test-2f97db0b5d\n",
+    "stderr": ""
+  },
+  {
+    "step": "portable",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-07T22:15:43.987657+00:00",
+    "finished_at": "2026-10-07T22:15:44.934491+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2218244332,\n  \"linux_campaign_bytes\": 4775328243,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "portable",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/runtime_observation_step.py",
+      "linux-x64-gcc13",
+      "portable"
+    ],
+    "started_at": "2026-10-07T22:15:44.934936+00:00",
+    "finished_at": "2026-10-07T22:16:41.168972+00:00",
+    "exit": 0,
+    "stdout": "assed    0.00 sec\n        Start 274: presentation.NVIEW-VALUES\n274/312 Test #274: presentation.NVIEW-VALUES ...............   Passed    0.01 sec\n        Start 275: presentation.NVIEW-FORMAT\n275/312 Test #275: presentation.NVIEW-FORMAT ...............   Passed    0.07 sec\n        Start 276: presentation.NVIEW-STATES\n276/312 Test #276: presentation.NVIEW-STATES ...............   Passed    0.01 sec\n        Start 277: presentation.NVIEW-SELECTION\n277/312 Test #277: presentation.NVIEW-SELECTION ............   Passed    0.00 sec\n        Start 278: presentation.NVIEW-BOUNDS\n278/312 Test #278: presentation.NVIEW-BOUNDS ...............   Passed    0.01 sec\n        Start 279: presentation.NVIEW-LIFETIME\n279/312 Test #279: presentation.NVIEW-LIFETIME .............   Passed    0.01 sec\n        Start 280: network.PUBLICATION-VALUES\n280/312 Test #280: network.PUBLICATION-VALUES ..............   Passed    0.01 sec\n        Start 281: network.PUBLICATION-FAILURE\n281/312 Test #281: network.PUBLICATION-FAILURE .............   Passed    0.00 sec\n        Start 282: network.PUBLICATION-BOUNDARY\n282/312 Test #282: network.PUBLICATION-BOUNDARY ............   Passed    0.00 sec\n        Start 283: network.RECONCILE-IDENTITY\n283/312 Test #283: network.RECONCILE-IDENTITY ..............   Passed    0.00 sec\n        Start 284: network.RECONCILE-CLOCK-RATE\n284/312 Test #284: network.RECONCILE-CLOCK-RATE ............   Passed    0.00 sec\n        Start 285: network.RECONCILE-CANCEL-FAILURE\n285/312 Test #285: network.RECONCILE-CANCEL-FAILURE ........   Passed    0.00 sec\n        Start 286: network.RECONCILE-CAPACITY\n286/312 Test #286: network.RECONCILE-CAPACITY ..............   Passed    0.00 sec\n        Start 287: network.NETWORK-NETLINK\n287/312 Test #287: network.NETWORK-NETLINK .................   Passed    0.00 sec\n        Start 288: network.NETWORK-NETLINK-REJECT\n288/312 Test #288: network.NETWORK-NETLINK-REJECT ..........   Passed    0.00 sec\n        Start 289: network.NETWORK-WATCH-DECODE\n289/312 Test #289: network.NETWORK-WATCH-DECODE ............   Passed    0.00 sec\n        Start 290: measured.MEASURED-CODEC\n290/312 Test #290: measured.MEASURED-CODEC .................   Passed    0.01 sec\n        Start 291: measured.MEASURED-AGE\n291/312 Test #291: measured.MEASURED-AGE ...................   Passed    0.01 sec\n        Start 292: measured.MEASURED-REPLAY\n292/312 Test #292: measured.MEASURED-REPLAY ................   Passed    0.01 sec\n        Start 293: measured.MEASURED-LIFETIME\n293/312 Test #293: measured.MEASURED-LIFETIME ..............   Passed    0.01 sec\n        Start 294: measured.MEASURED-SESSION\n294/312 Test #294: measured.MEASURED-SESSION ...............   Passed    0.01 sec\n        Start 295: import.IMPORT-STATE\n295/312 Test #295: import.IMPORT-STATE .....................   Passed    0.01 sec\n        Start 296: import.IMPORT-RETAIN\n296/312 Test #296: import.IMPORT-RETAIN ....................   Passed    0.02 sec\n        Start 297: import.IMPORT-COVERAGE\n297/312 Test #297: import.IMPORT-COVERAGE ..................   Passed    0.01 sec\n        Start 298: import.IMPORT-REPLAY\n298/312 Test #298: import.IMPORT-REPLAY ....................   Passed    0.01 sec\n        Start 299: import.IMPORT-TIME\n299/312 Test #299: import.IMPORT-TIME ......................   Passed    0.01 sec\n        Start 300: import.IMPORT-LIFETIME\n300/312 Test #300: import.IMPORT-LIFETIME ..................   Passed    0.01 sec\n        Start 301: data.VIEW-ATOMIC\n301/312 Test #301: data.VIEW-ATOMIC ........................   Passed    0.01 sec\n        Start 302: data.VIEW-REPLAY\n302/312 Test #302: data.VIEW-REPLAY ........................   Passed    0.00 sec\n        Start 303: data.VIEW-RECONNECT\n303/312 Test #303: data.VIEW-RECONNECT .....................   Passed    0.00 sec\n        Start 304: data.VIEW-LEASE\n304/312 Test #304: data.VIEW-LEASE .........................   Passed    0.00 sec\n        Start 305: data.VIEW-POLICY\n305/312 Test #305: data.VIEW-POLICY ........................   Passed    0.00 sec\n        Start 306: data.VIEW-FAULT\n306/312 Test #306: data.VIEW-FAULT .........................   Passed    0.00 sec\n        Start 307: diagnostic.DIAG-POLICY\n307/312 Test #307: diagnostic.DIAG-POLICY ..................   Passed    0.02 sec\n        Start 308: diagnostic.DIAG-PROJECTION\n308/312 Test #308: diagnostic.DIAG-PROJECTION ..............   Passed    0.00 sec\n        Start 309: diagnostic.FAILURE-CODEC\n309/312 Test #309: diagnostic.FAILURE-CODEC ................   Passed    0.00 sec\n        Start 310: diagnostic.FAILURE-INTERRUPT\n310/312 Test #310: diagnostic.FAILURE-INTERRUPT ............   Passed    0.00 sec\n        Start 311: diagnostic.FAILURE-PROJECTION\n311/312 Test #311: diagnostic.FAILURE-PROJECTION ...........   Passed    0.00 sec\n        Start 312: diagnostic.PRESERVE-POLICY\n312/312 Test #312: diagnostic.PRESERVE-POLICY ..............   Passed    0.00 sec\n\n100% tests passed, 0 tests failed out of 312\n\nTotal Test time (real) =  50.89 sec\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-09-runtime-observation/linux-x64-gcc13-portable-6a0ed423c8\n",
+    "stderr": ""
+  },
+  {
+    "step": "rendering",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-07T22:16:41.169490+00:00",
+    "finished_at": "2026-10-07T22:16:42.033977+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2230551833,\n  \"linux_campaign_bytes\": 4775544879,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "rendering",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/runtime_observation_step.py",
+      "linux-x64-gcc13",
+      "rendering"
+    ],
+    "started_at": "2026-10-07T22:16:42.034358+00:00",
+    "finished_at": "2026-10-07T22:18:04.684311+00:00",
+    "exit": 0,
+    "stdout": "Test project /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n      Start  92: native.SETTINGS-FORM\n 1/15 Test  #92: native.SETTINGS-FORM .............   Passed   38.68 sec\n      Start 106: native.SCENE-INSPECTOR-MODEL\n 2/15 Test #106: native.SCENE-INSPECTOR-MODEL .....   Passed    0.19 sec\n      Start 107: native.SCENE-INSPECTOR\n 3/15 Test #107: native.SCENE-INSPECTOR ...........   Passed    4.86 sec\n      Start 108: native.SCENE-SURFACE\n 4/15 Test #108: native.SCENE-SURFACE .............   Passed    0.76 sec\n      Start 109: native.SCENE-ERASURE\n 5/15 Test #109: native.SCENE-ERASURE .............   Passed    2.53 sec\n      Start 110: native.CHART-ERASURE\n 6/15 Test #110: native.CHART-ERASURE .............   Passed    2.83 sec\n      Start 111: native.IMAGE-ERASURE\n 7/15 Test #111: native.IMAGE-ERASURE .............   Passed    3.12 sec\n      Start 112: native.SCENE-IMAGE\n 8/15 Test #112: native.SCENE-IMAGE ...............   Passed    6.61 sec\n      Start 113: native.SCENE-CHART\n 9/15 Test #113: native.SCENE-CHART ...............   Passed    0.92 sec\n      Start 114: native.SCENE-TABLE\n10/15 Test #114: native.SCENE-TABLE ...............   Passed    1.19 sec\n      Start 115: native.TABLE-ERASURE\n11/15 Test #115: native.TABLE-ERASURE .............   Passed    3.77 sec\n      Start 116: native.CONTENT-ERASURE\n12/15 Test #116: native.CONTENT-ERASURE ...........   Passed    4.07 sec\n      Start 117: native.TEXT-RASTER\n13/15 Test #117: native.TEXT-RASTER ...............   Passed    0.98 sec\n      Start 118: native.IMAGE-DECODE\n14/15 Test #118: native.IMAGE-DECODE ..............   Passed    3.44 sec\n      Start 119: native.IMAGE-JOB\n15/15 Test #119: native.IMAGE-JOB .................   Passed    3.39 sec\n\n100% tests passed, 0 tests failed out of 15\n\nTotal Test time (real) =  77.35 sec\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-09-runtime-observation/linux-x64-gcc13-rendering-910159b89d\n",
+    "stderr": ""
+  },
+  {
+    "step": "refresh",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-07T22:18:04.684653+00:00",
+    "finished_at": "2026-10-07T22:18:05.390949+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2232729913,\n  \"linux_campaign_bytes\": 5112280585,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "refresh",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/runtime_observation_step.py",
+      "linux-x64-gcc13",
+      "refresh"
+    ],
+    "started_at": "2026-10-07T22:18:05.391297+00:00",
+    "finished_at": "2026-10-07T22:18:23.075729+00:00",
+    "exit": 0,
+    "stdout": "Test project /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n    Start 93: native.EDITOR-REFRESH\n1/1 Test #93: native.EDITOR-REFRESH ............   Passed   13.69 sec\n\n100% tests passed, 0 tests failed out of 1\n\nTotal Test time (real) =  13.69 sec\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-09-runtime-observation/linux-x64-gcc13-refresh-89bd3bf1bf\n",
+    "stderr": ""
+  },
+  {
+    "step": "bindings",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-07T22:18:23.076091+00:00",
+    "finished_at": "2026-10-07T22:18:23.767135+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2234377290,\n  \"linux_campaign_bytes\": 5117028281,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "bindings",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/runtime_observation_step.py",
+      "linux-x64-gcc13",
+      "bindings"
+    ],
+    "started_at": "2026-10-07T22:18:23.767502+00:00",
+    "finished_at": "2026-10-07T22:19:09.481480+00:00",
+    "exit": 0,
+    "stdout": "Test project /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n    Start 101: native.EDITOR-BINDING-AUTHORING\n1/1 Test #101: native.EDITOR-BINDING-AUTHORING ...   Passed   41.76 sec\n\n100% tests passed, 0 tests failed out of 1\n\nTotal Test time (real) =  41.76 sec\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-09-runtime-observation/linux-x64-gcc13-bindings-5585c80ec5\n",
+    "stderr": ""
+  }
+]

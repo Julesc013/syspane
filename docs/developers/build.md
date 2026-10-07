@@ -1755,3 +1755,18 @@ The [handoff](../../spec/delivery/focus-idle-handoff.md) retains the original fa
 the auxiliary observation correction, paired animation experiment and exact runtime
 admissions. Changed text/image runtime identities require configure verification
 and existing native rendering/decode checks with unchanged expected outputs.
+
+
+### Complete image validation and observation evidence
+
+`scene.IMAGE-VALIDATION` checks invalid first/middle/last color channels at maximum
+size through validation, fitting and orientation. Existing raw-image checks remain
+mandatory; a faster loop is not a trusted-input bypass. Use the existing image
+and native rendering tests with their unchanged timing and pixel expectations.
+
+Before the full native rendering matrix, admit at least 400 MiB of output growth
+within the combined workspace bound in addition to running the ordinary preflight.
+The earlier run exceeded its 64 MiB reservation; its failure is preserved.
+The [handoff](../../spec/delivery/runtime-observation-handoff.md) records measured
+validation cost, exact artifacts, six native query trials and remaining unexplained
+accessibility timeouts. Successful unchanged queries do not establish a repair.

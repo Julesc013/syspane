@@ -15,7 +15,10 @@ Axis axis(unsigned p,unsigned output,unsigned source,std::uint64_t numerator,std
 void validate_image(const Image& image){
     need(image.width&&image.height&&image.width<=4096&&image.height<=4096);
     const auto count=static_cast<std::size_t>(image.width)*image.height;need(count<=4194304&&image.rgba.size()==count*4);
-    for(std::size_t i=0;i<image.rgba.size();i+=4)need(image.rgba[i]<=image.rgba[i+3]&&image.rgba[i+1]<=image.rgba[i+3]&&image.rgba[i+2]<=image.rgba[i+3]);
+    // Size is checked above. Scan every pixel without per-component container
+    // calls: this also runs on the parent paint path in development builds.
+    const auto* pixel=image.rgba.data();const auto* end=pixel+image.rgba.size();
+    for(;pixel!=end;pixel+=4)if(pixel[0]>pixel[3]||pixel[1]>pixel[3]||pixel[2]>pixel[3])throw protocol::Error("image.input");
 }
 Image orient_image(const Image& image,unsigned orientation){
     validate_image(image);need(orientation>=1&&orientation<=8);
