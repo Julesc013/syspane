@@ -42,6 +42,7 @@ int main(int argc,char** argv){try{
     r::ImageJob job(worker,"image/png",png);need(job.input_sha256()==syspane::configuration::sha256(png),"input identity");
     auto status=finish(job);need(status.state==r::ImageJobState::ready&&status.reaped,"real worker ready");auto image=job.take();need(image.width==2&&image.height==2&&image.rgba==std::vector<unsigned char>{255,0,0,255,0,128,0,128,0,0,0,0,255,255,255,255},"real worker pixels");
     bool refused=false;try{job.take();}catch(const syspane::protocol::Error&){refused=true;}need(refused,"second take refused");
+    const auto encoded=read(fixtures+"/large-encoded.png");need(encoded.size()>1048576,"large encoded fixture");r::ImageJob large_encoded(worker,"image/png",encoded);status=finish(large_encoded);need(status.state==r::ImageJobState::ready&&large_encoded.input_sha256()==syspane::configuration::content_sha256(encoded),"large input identity");need(large_encoded.take().rgba==image.rgba,"large encoded input retains exact pixels");
     r::ImageJob maximum(worker,"image/png",read(fixtures+"/maximum.png"));status=finish(maximum);need(status.state==r::ImageJobState::ready,"maximum native raster ready");
     image=maximum.take();need(image.width==2048&&image.height==2048&&image.rgba.size()==16777216&&std::all_of(image.rgba.begin(),image.rgba.end(),[](auto v){return v==0;}),"maximum native raster bytes");
     std::array<char,4096> executable{};const auto n=::readlink("/proc/self/exe",executable.data(),executable.size()-1);need(n>0,"self executable");const std::string self(executable.data(),n);

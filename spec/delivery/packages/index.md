@@ -37,6 +37,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Policy-owned native charts](w-09-native-chart.md) — Exact numeric geometry and every-publication history feed with native pixels and accessibility erasure.
 - [Native Linux text metrics and raster adapter](w-09-native-text.md) — Bounded plain-text shaping and painting with explicit native metrics, fallback and pixel ownership.
 - [Versioned widget content and transactions](w-09-scene-content.md) — Carry explicit text, columns, chart settings and pinned images through authored validation and durable resource-bound transactions.
+- [Policy-owned asynchronous scene images](w-09-scene-images.md) — Connect immutable image resources, bounded worker lifetime and native pixels to current scene authority.
 - [Policy-owned native scalar scene surface](w-09-scene-surface.md) — Compose authored scenes, pinned resources, scalar bindings and native text under one erasing presentation owner.
 - [Policy-owned collection tables](w-09-table-surface.md) — Render identity-aligned collection columns with bounded native grid geometry and explicit incomplete states.
 - [W-24 authenticated transport and policy boundary](w-24-transport.md) — Close the initial local protocol, admission and preview boundary before native integration.

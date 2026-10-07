@@ -68,7 +68,7 @@ ContentCatalog::ContentCatalog(std::vector<ContentPackage> packages){
         need(bytes.assets.size()==manifest["assets"].size(),"content.assets");
         for(const auto& asset:manifest["assets"]){
             const auto found=bytes.assets.find(asset["path"].get<std::string>());need(found!=bytes.assets.end(),"content.assets");const auto& raw=found->second;
-            need(raw.size()==asset["bytes"].get<std::size_t>()&&sha256(raw)==asset["sha256"],"content.digest");
+            need(raw.size()==asset["bytes"].get<std::size_t>()&&content_sha256(raw)==asset["sha256"],"content.digest");
             total+=raw.size();need(++count<=1024&&total<=67108864,"content.capacity");
             if(asset["media_type"]=="application/json")(void)parse_content_json(raw);
         }

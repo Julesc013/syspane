@@ -22,7 +22,7 @@ from native_text import THEME
 
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 
-def observe(exe,text_probe,folder,mode,table=False,content=False,chart=False):
+def observe(exe,text_probe,folder,mode,table=False,content=False,chart=False,image_mode=False):
     import gi
     gi.require_version('Atspi','2.0')
     from gi.repository import Atspi,GLib
@@ -30,9 +30,13 @@ def observe(exe,text_probe,folder,mode,table=False,content=False,chart=False):
     verify();verify_surface();folder.mkdir()
     report=dict(mode=mode,outcome='fail',observations=[],executable_sha256=sha(exe),text_probe_sha256=sha(text_probe),
                 oracle_sha256=sha(Path(__file__)),runtime_identity_sha256=sha(ROOT/'build-support/text-runtime.json'))
+    if image_mode:
+        report['image_worker_sha256']=sha(exe.with_name('SysPane.ImageWorker'))
+        report['image_oracle_sha256']=sha(ROOT/'tests/scene/image-cases/surface.json')
+        report['image_runtime_sha256']=sha(ROOT/'build-support/image-runtime.json')
     report['surface_runtime_sha256']=sha(ROOT/'build-support/surface-runtime.json')
     err=(folder/'stderr').open('wb')
-    proc=subprocess.Popen([str(exe),str(ROOT/'spec/fixtures/valid'),'WINDOW',('chart-' if chart else 'content-' if content else 'table-' if table else '')+mode],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=err)
+    proc=subprocess.Popen([str(exe),str(ROOT/'spec/fixtures/valid'),'WINDOW',('image-' if image_mode else 'chart-' if chart else 'content-' if content else 'table-' if table else '')+mode],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=err)
     display=None;sequence=0;last_ack=None
     def read():
         assert select.select([proc.stdout],[],[],5)[0], 'native reply timeout'
@@ -79,6 +83,15 @@ def observe(exe,text_probe,folder,mode,table=False,content=False,chart=False):
         return bytes(image)
     def view(number=None,retained=False):
         status='Retained' if retained else 'Current'
+        if image_mode:
+            canvas=bytearray(800*600*3)
+            if number in (987,None):raw=[0,255,0,255]*45
+            else:
+                mode={123:'contain',456:'contain','cover':'cover','stretch':'stretch'}[number]
+                raw=next(c['rgba'] for c in json.loads((ROOT/'tests/scene/image-cases/surface.json').read_text()) if c['width']==9 and c['fit']==mode)
+            for y in range(5):
+                for x in range(9):canvas[(y*800+x)*3:(y*800+x)*3+3]=bytes(raw[(y*9+x)*4:(y*9+x)*4+3])
+            return bytes(canvas),'Public image\nImage ready'
         if chart:
             # Fixed independent input/output trace. Never ask the plotter for expected coordinates.
             samples={123:[(0,10,1,0,107),(500000000,90,2,160,12),(1000000000,10,3,319,107)],
@@ -145,7 +158,7 @@ def observe(exe,text_probe,folder,mode,table=False,content=False,chart=False):
         while True:
             pump();actual=display.capture(0,0,800,600);accessible.clear_cache();label=accessible.get_name() or ''
             observed_at=time.monotonic()
-            matches=(re.sub(r'age=[0-9]+ ns','age=dynamic ns',label)==prefix if table or chart else label.startswith(prefix)) if prefix else label==''
+            matches=(re.sub(r'age=[0-9]+ ns','age=dynamic ns',label)==prefix if table or chart or image_mode else label.startswith(prefix)) if prefix else label==''
             last=dict(pixels=actual==pixels,accessible=matches)
             sequence+=1;path=folder/(str(sequence)+'.rgb');path.write_bytes(actual)
             report['observations'].append(dict(case=name,elapsed=observed_at-started,pixels_sha256=sha(path),name=label,**last))
@@ -165,13 +178,16 @@ def observe(exe,text_probe,folder,mode,table=False,content=False,chart=False):
         references={(n,retained):view(n,retained) for n,retained in ((123,False),(987,False),(None,False),(456,False),(456,True))}
         check('INITIAL',*references[(123,False)],timeout=2)
         if mode=='normal':
-            command('replace');check('REPLACE',*references[(987,False)])
+            if image_mode:
+                for fit in ('cover','stretch'):
+                    command('fit-'+fit);check('FIT-'+fit,*view(fit),timeout=3)
+            command('replace');check('REPLACE',*references[(987,False)],timeout=3 if image_mode else .2)
         command('revoke');blank=bytes(800*600*3)
         check('REVOKE',blank,'',negative={'ignore-pixels':'pixels','ignore-accessible':'accessible'}.get(mode))
         if mode=='normal':
             command('stale');check('STALE',blank,'')
-            command('regrant');check('REGRANT',*references[(None,False)])
-            command('fresh');check('FRESH',*references[(456,False)])
+            command('regrant');check('REGRANT',*references[(None,False)],timeout=3 if image_mode else .2)
+            command('fresh');check('FRESH',*references[(456,False)],timeout=3 if image_mode else .2)
             command('disconnect');check('DISCONNECT',*references[(456,True)])
         command('close');assert proc.wait(timeout=5)==0
         report['outcome']='pass';report['negative_control']=mode!='normal'
@@ -186,14 +202,14 @@ def observe(exe,text_probe,folder,mode,table=False,content=False,chart=False):
 
 def main():
     if sys.argv[1]=='--observe':
-        observe(Path(sys.argv[2]),Path(sys.argv[3]),Path(sys.argv[4]),sys.argv[5],len(sys.argv)>6 and 'CHART' not in sys.argv,'CONTENT' in sys.argv,'CHART' in sys.argv);return
+        observe(Path(sys.argv[2]),Path(sys.argv[3]),Path(sys.argv[4]),sys.argv[5],len(sys.argv)>6 and 'CHART' not in sys.argv and 'IMAGE' not in sys.argv,'CONTENT' in sys.argv,'CHART' in sys.argv,'IMAGE' in sys.argv);return
     exe,text_probe,evidence=map(Path,sys.argv[1:4]);folder=evidence/('surface-'+uuid.uuid4().hex[:12]);folder.mkdir()
-    chart='CHART' in sys.argv;table=len(sys.argv)>4 and not chart;content='CONTENT' in sys.argv;report=dict(family='CHART-ERASURE' if chart else 'CONTENT-ERASURE' if content else 'TABLE-ERASURE' if table else 'SCENE-ERASURE',outcome='fail',started_at=datetime.now(timezone.utc).isoformat(),cases=[],executable_sha256=sha(exe),oracle_sha256=sha(Path(__file__)))
+    image='IMAGE' in sys.argv;chart='CHART' in sys.argv;table=len(sys.argv)>4 and not chart and not image;content='CONTENT' in sys.argv;report=dict(family='IMAGE-ERASURE' if image else 'CHART-ERASURE' if chart else 'CONTENT-ERASURE' if content else 'TABLE-ERASURE' if table else 'SCENE-ERASURE',outcome='fail',started_at=datetime.now(timezone.utc).isoformat(),cases=[],executable_sha256=sha(exe),oracle_sha256=sha(Path(__file__)))
     server=None
     try:
         server,env=launch_xvfb(folder);env['NO_AT_BRIDGE']='0';env.pop('AT_SPI_BUS_ADDRESS',None)
         for mode in ('normal','ignore-pixels','ignore-accessible'):
-            child=subprocess.Popen(['dbus-run-session','--',sys.executable,str(Path(__file__)), '--observe',str(exe),str(text_probe),str(folder/mode),mode]+(['CHART'] if chart else ['CONTENT'] if content else ['TABLE'] if table else []),env=env,stdout=subprocess.PIPE,stderr=subprocess.PIPE,start_new_session=True)
+            child=subprocess.Popen(['dbus-run-session','--',sys.executable,str(Path(__file__)), '--observe',str(exe),str(text_probe),str(folder/mode),mode]+(['IMAGE'] if image else ['CHART'] if chart else ['CONTENT'] if content else ['TABLE'] if table else []),env=env,stdout=subprocess.PIPE,stderr=subprocess.PIPE,start_new_session=True)
             timed_out=False
             try:stdout,stderr=child.communicate(timeout=35)
             except subprocess.TimeoutExpired:

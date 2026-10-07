@@ -68,6 +68,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Durable resource generation checkpoint](resource-generations-handoff.md) — Exact content closure, command identity and coherent Linux recovery.
 - [Greenfield implementation campaign](roadmap.md) — Build native vertical slices and contracts together in risk order.
 - [Versioned scene content checkpoint](scene-content-handoff.md) — Typed authored content crosses shared validation, negotiated commands and exact native resource recovery.
+- [Policy-owned native scene images checkpoint](scene-images-handoff.md) — Asynchronous pinned image presentation, native erasure and declared-size content hashing.
 - [Policy-owned scalar scene surface checkpoint](scene-surface-handoff.md) — Native composed scene pixels and accessible names follow current policy, source lifetime and pinned authored resources.
 - [Authenticated session demand checkpoint](session-demand-handoff.md) — Bind controller-selected acquisition plans to authoritative subscription lifetimes and preserve native restart timing evidence.
 - [Complete remote state import checkpoint](state-import-handoff.md) — Connect bounded telemetry documents to a revocable complete model without changing reported retention or inventing measurement freshness.

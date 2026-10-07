@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-07T00:12:51Z", "scope": "Bounded native image pipeline and nonblocking worker ownership"}
+updated: {"by": "codex", "at": "2026-10-07T00:48:23Z", "scope": "Policy-owned scene images, native erasure and declared-size content hashing"}
 ---
 
 # Current state and next admitted boundary
@@ -22,18 +22,26 @@ The active objective is now the [complete 0.1.0 release](release-0.1.0.md) for W
 required but is no longer the final completion boundary. Legacy version/architecture
 floors, native labs and complete desktop/package evidence remain unresolved.
 
-The latest [image pipeline checkpoint](image-pipeline-handoff.md) adds exact shared
+The latest [scene images checkpoint](scene-images-handoff.md) connects asynchronous
+decoding to exact immutable resources and current scene policy. Pending images keep
+their extent while other widgets update; replacement/revocation erase decoded content
+and accessible names. Native tests observe pixels, erasure and actual worker reaping.
+Content hashing now supports the existing 16 MiB asset ceiling with large-resource
+durable recovery evidence. Installed routing, editing, complete accessibility,
+performance qualification, other platform adapters and full editions remain open.
+
+The earlier [image pipeline checkpoint](image-pipeline-handoff.md) adds exact shared
 fit/orientation and bounded Linux PNG/JPEG/static-SVG decoding. A nonblocking owner
 caps IPC, suppresses cancelled output and requires actual worker termination before
-disclosing decoded pixels. Operational scene/policy integration and native image
-erasure remain the next boundary; image widgets are not yet enabled.
+disclosing decoded pixels. The latest checkpoint supplies its scene/policy owner
+and native component erasure evidence; installed desktop routing remains open.
 
 The earlier [native chart checkpoint](native-chart-handoff.md) adds exact portable
 numeric geometry and Linux chart rendering through the current-policy scene owner.
 Every relevant admitted publication feeds bounded history; missing selector clocks,
 gaps, conflicts and truncation remain explicit. Owned X11 pixels and exact AT-SPI
 point content verify updates and revocation with deliberate fault controls. Image
-decoding, full native accessibility/editor/installed ownership and all editions remain.
+adapters, full native accessibility/editor/installed ownership and all editions remain.
 
 The earlier [chart history checkpoint](chart-history-handoff.md) implements bounded
 measured windows, exact numeric samples, explicit continuity breaks, stream resets
@@ -46,7 +54,7 @@ command 0.4 with explicit text bodies, table labels, chart settings and image pi
 Shared validation/migration, negotiated transactions and native coherent recovery
 preserve exact content and resource identities. Native text/label presentation
 remains policy-owned; chart sampling/rendering now has the checkpoint above, while
-image decoding/rendering remains the next bounded contract. Full editions and
+image decoding/rendering now has the checkpoint above. Full editions and
 platform qualification remain open.
 
 The earlier [table surface checkpoint](table-surface-handoff.md) adds ordered

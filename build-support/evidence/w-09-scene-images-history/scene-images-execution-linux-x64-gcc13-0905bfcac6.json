@@ -1,0 +1,38 @@
+[
+  {
+    "step": "oracle",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-07T00:42:43.936297+00:00",
+    "finished_at": "2026-10-07T00:42:44.563048+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 6442450944,\n  \"checkout_out_bytes\": 1871597815,\n  \"linux_campaign_bytes\": 4290746881,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "oracle",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/scene_images_step.py",
+      "linux-x64-gcc13",
+      "oracle"
+    ],
+    "started_at": "2026-10-07T00:42:44.563435+00:00",
+    "finished_at": "2026-10-07T00:42:53.685957+00:00",
+    "exit": 8,
+    "stdout": "Test project /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n    Start 4: native.IMAGE-ERASURE\n1/1 Test #4: native.IMAGE-ERASURE .............***Failed    0.93 sec\n/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/surface-2381bf94b930/result.json fail\nTraceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/scene/native_surface.py\", line 231, in <module>\n    if __name__=='__main__':main()\n                            ^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/tests/scene/native_surface.py\", line 218, in main\n    assert not timed_out and child.returncode==0,(mode,'observer deadline' if timed_out else stderr.decode(errors='replace'))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: ('normal', 'dbus-daemon[26436]: [session uid=1000 pid=26436] Activating service name=\\'org.a11y.Bus\\' requested by \\':1.0\\' (uid=1000 pid=26444 comm=\"/home/ir4runner/.cache/syspane/campaign-229a498/li\" label=\"kernel\")\\ndbus-daemon[26436]: [session uid=1000 pid=26436] Successfully activated service \\'org.a11y.Bus\\'\\ndbus-daemon[26452]: Activating service name=\\'org.a11y.atspi.Registry\\' requested by \\':1.0\\' (uid=1000 pid=26444 comm=\"/home/ir4runner/.cache/syspane/campaign-229a498/li\" label=\"kernel\")\\ndbus-daemon[26452]: Successfully activated service \\'org.a11y.atspi.Registry\\'\\nTraceback (most recent call last):\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/scene/native_surface.py\", line 231, in <module>\\n    if __name__==\\'__main__\\':main()\\n                            ^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/scene/native_surface.py\", line 205, in main\\n    observe(Path(sys.argv[2]),Path(sys.argv[3]),Path(sys.argv[4]),sys.argv[5],len(sys.argv)>6 and \\'CHART\\' not in sys.argv and \\'IMAGE\\' not in sys.argv,\\'CONTENT\\' in sys.argv,\\'CHART\\' in sys.argv,\\'IMAGE\\' in sys.argv);return\\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/scene/native_surface.py\", line 178, in observe\\n    references={(n,retained):view(n,retained) for n,retained in ((123,False),(987,False),(None,False),(456,False),(456,True))}\\n                             ^^^^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/scene/native_surface.py\", line 86, in view\\n    if image:\\n       ^^^^^\\nUnboundLocalError: cannot access local variable \\'image\\' where it is not associated with a value\\n')\n\n\n0% tests passed, 1 tests failed out of 1\n\nTotal Test time (real) =   0.94 sec\n\nThe following tests FAILED:\n\t  4 - native.IMAGE-ERASURE (Failed)\n Errors while running CTest\n\nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-09-scene-images/linux-x64-gcc13-oracle-c4712f3712\n",
+    "stderr": ""
+  }
+]

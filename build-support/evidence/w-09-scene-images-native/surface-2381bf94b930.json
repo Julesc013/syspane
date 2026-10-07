@@ -1,0 +1,15 @@
+{
+  "family": "IMAGE-ERASURE",
+  "outcome": "fail",
+  "started_at": "2026-10-07T00:42:52.028235+00:00",
+  "cases": [],
+  "executable_sha256": "93684593f98655cf395077700f27ed15ea1acdfe05eb6ec5ccb123d6b84ecbcf",
+  "oracle_sha256": "666f8835ccaeb7aaf1e3e59be42f42d382289acba66b1b2296cfec055011a5c4",
+  "error": "AssertionError(('normal', 'dbus-daemon[26436]: [session uid=1000 pid=26436] Activating service name=\\'org.a11y.Bus\\' requested by \\':1.0\\' (uid=1000 pid=26444 comm=\"/home/ir4runner/.cache/syspane/campaign-229a498/li\" label=\"kernel\")\\ndbus-daemon[26436]: [session uid=1000 pid=26436] Successfully activated service \\'org.a11y.Bus\\'\\ndbus-daemon[26452]: Activating service name=\\'org.a11y.atspi.Registry\\' requested by \\':1.0\\' (uid=1000 pid=26444 comm=\"/home/ir4runner/.cache/syspane/campaign-229a498/li\" label=\"kernel\")\\ndbus-daemon[26452]: Successfully activated service \\'org.a11y.atspi.Registry\\'\\nTraceback (most recent call last):\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/scene/native_surface.py\", line 231, in <module>\\n    if __name__==\\'__main__\\':main()\\n                            ^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/scene/native_surface.py\", line 205, in main\\n    observe(Path(sys.argv[2]),Path(sys.argv[3]),Path(sys.argv[4]),sys.argv[5],len(sys.argv)>6 and \\'CHART\\' not in sys.argv and \\'IMAGE\\' not in sys.argv,\\'CONTENT\\' in sys.argv,\\'CHART\\' in sys.argv,\\'IMAGE\\' in sys.argv);return\\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/scene/native_surface.py\", line 178, in observe\\n    references={(n,retained):view(n,retained) for n,retained in ((123,False),(987,False),(None,False),(456,False),(456,True))}\\n                             ^^^^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/scene/native_surface.py\", line 86, in view\\n    if image:\\n       ^^^^^\\nUnboundLocalError: cannot access local variable \\'image\\' where it is not associated with a value\\n'))",
+  "files": {
+    "normal.stdout": "9d307ed556499f37fcb1517732638144b4ee8125619c1a443295c570b34c6bae",
+    "normal.stderr": "b874ce946954f864b0d0b96ed27b2d1b85bb502ffcfa7ebb6ae22abddf41237d",
+    "normal/stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "normal/result.json": "1ad73a61a014760e91eec200d496fa8a2becebebcf6050a935dd80cb0b2c4f42"
+  }
+}

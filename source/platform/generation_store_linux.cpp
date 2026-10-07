@@ -95,7 +95,7 @@ c::ResourceSnapshot decode_resources(int parent,const Json& hash,const c::Author
         for(const auto& asset:manifest["assets"]){const auto size=asset["bytes"].get<std::size_t>();total+=size;
             need(++count<=1024&&total<=67108864&&(asset["media_type"]!="application/json"||size<=262144),"storage.resource_capacity");
             const auto file="a-"+asset["sha256"].get<std::string>()+".bin";expected.insert(file);
-            auto payload=required(dir.fd,file.c_str(),size,synchronize);need(payload.size()==size&&c::sha256(payload)==asset["sha256"],"storage.resources");
+            auto payload=required(dir.fd,file.c_str(),size,synchronize);need(payload.size()==size&&c::content_sha256(payload)==asset["sha256"],"storage.resources");
             package.assets.emplace(asset["path"].get<std::string>(),std::move(payload));}
         packages.push_back(std::move(package));
     }
@@ -109,7 +109,7 @@ std::string write_resources(int parent,const c::ResourceSet& resources,const std
     std::map<std::string,const std::string*> manifests,assets;
     for(const auto& package:resources.packages()){
         manifests.emplace(c::sha256(package->manifest),&package->manifest);
-        for(const auto& asset:package->assets)assets.emplace(c::sha256(asset.second),&asset.second);}
+        for(const auto& asset:package->assets)assets.emplace(c::content_sha256(asset.second),&asset.second);}
     Json pins=Json::array();unsigned n=0;
     for(const auto& row:manifests){write(dir.fd,("m-"+row.first+".json").c_str(),*row.second);pins.push_back(row.first);
         const auto phase="resource_manifest:"+std::to_string(n++);if(hook)hook(phase.c_str());}

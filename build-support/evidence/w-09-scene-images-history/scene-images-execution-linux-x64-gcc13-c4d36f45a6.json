@@ -1,0 +1,38 @@
+[
+  {
+    "step": "test",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-07T01:00:45.049963+00:00",
+    "finished_at": "2026-10-07T01:00:45.799735+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 6442450944,\n  \"checkout_out_bytes\": 1854206430,\n  \"linux_campaign_bytes\": 4297252997,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "test",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/scene_images_step.py",
+      "linux-x64-gcc13",
+      "test"
+    ],
+    "started_at": "2026-10-07T01:00:45.800224+00:00",
+    "finished_at": "2026-10-07T01:02:42.977607+00:00",
+    "exit": 0,
+    "stdout": "configuration.COMMAND-POLICY\n 77/114 Test  #83: configuration.COMMAND-POLICY ............   Passed    0.06 sec\n        Start  84: configuration.COMMAND-LIFETIME\n 78/114 Test  #84: configuration.COMMAND-LIFETIME ..........   Passed    0.03 sec\n        Start  85: configuration.COMMAND-CAPACITY\n 79/114 Test  #85: configuration.COMMAND-CAPACITY ..........   Passed    1.04 sec\n        Start  86: configuration.COMMAND-FAULT\n 80/114 Test  #86: configuration.COMMAND-FAULT .............   Passed    0.06 sec\n        Start  87: configuration.COMMAND-NEGOTIATE\n 81/114 Test  #87: configuration.COMMAND-NEGOTIATE .........   Passed    0.02 sec\n        Start  88: configuration.RECON-RECEIPTS\n 82/114 Test  #88: configuration.RECON-RECEIPTS ............   Passed    0.04 sec\n        Start  89: configuration.RECON-POLICY\n 83/114 Test  #89: configuration.RECON-POLICY ..............   Passed    0.03 sec\n        Start  90: configuration.RECON-CODEC\n 84/114 Test  #90: configuration.RECON-CODEC ...............   Passed    0.00 sec\n        Start  91: configuration.RECON-BOUNDS\n 85/114 Test  #91: configuration.RECON-BOUNDS ..............   Passed    0.06 sec\n        Start  92: configuration.SCENE-CONTENT-SCHEMA\n 86/114 Test  #92: configuration.SCENE-CONTENT-SCHEMA ......   Passed    0.12 sec\n        Start  93: configuration.SCENE-CONTENT-MIGRATION\n 87/114 Test  #93: configuration.SCENE-CONTENT-MIGRATION ...   Passed    0.02 sec\n        Start  94: configuration.SCENE-CONTENT-RESOURCES\n 88/114 Test  #94: configuration.SCENE-CONTENT-RESOURCES ...   Passed    0.13 sec\n        Start  95: configuration.SCENE-CONTENT-PREVIEW\n 89/114 Test  #95: configuration.SCENE-CONTENT-PREVIEW .....   Passed    0.06 sec\n        Start  96: configuration.SCENE-CONTENT-TX\n 90/114 Test  #96: configuration.SCENE-CONTENT-TX ..........   Passed    0.15 sec\n        Start  97: configuration.SCENE-CONTENT-SESSION\n 91/114 Test  #97: configuration.SCENE-CONTENT-SESSION .....   Passed    0.12 sec\n        Start  98: configuration.AUTH-SCHEMA\n 92/114 Test  #98: configuration.AUTH-SCHEMA ...............   Passed    0.05 sec\n        Start  99: configuration.TX-MIXED\n 93/114 Test  #99: configuration.TX-MIXED ..................   Passed    0.03 sec\n        Start 100: configuration.TX-CONFLICT\n 94/114 Test #100: configuration.TX-CONFLICT ...............   Passed    0.03 sec\n        Start 101: configuration.TX-REPLAY\n 95/114 Test #101: configuration.TX-REPLAY .................   Passed    0.03 sec\n        Start 102: configuration.TX-INTERRUPT\n 96/114 Test #102: configuration.TX-INTERRUPT ..............   Passed    0.07 sec\n        Start 103: configuration.TX-BOUNDS\n 97/114 Test #103: configuration.TX-BOUNDS .................   Passed    0.04 sec\n        Start 104: configuration.TX-CAPACITY\n 98/114 Test #104: configuration.TX-CAPACITY ...............   Passed    1.12 sec\n        Start 105: configuration.DIGEST\n 99/114 Test #105: configuration.DIGEST ....................   Passed    0.02 sec\n        Start 106: configuration.DIGEST-CONTENT\n100/114 Test #106: configuration.DIGEST-CONTENT ............   Passed    0.64 sec\n        Start 107: configuration.CONTENT-COMPOSE\n101/114 Test #107: configuration.CONTENT-COMPOSE ...........   Passed    0.06 sec\n        Start 108: configuration.CONTENT-PINS\n102/114 Test #108: configuration.CONTENT-PINS ..............   Passed    0.11 sec\n        Start 109: configuration.CONTENT-PATHS\n103/114 Test #109: configuration.CONTENT-PATHS .............   Passed    0.01 sec\n        Start 110: configuration.CONTENT-BOUNDS\n104/114 Test #110: configuration.CONTENT-BOUNDS ............   Passed    0.08 sec\n        Start 111: configuration.CONTENT-CAPABILITIES\n105/114 Test #111: configuration.CONTENT-CAPABILITIES ......   Passed    0.08 sec\n        Start 112: configuration.CONTENT-POLICY\n106/114 Test #112: configuration.CONTENT-POLICY ............   Passed    0.12 sec\n        Start 113: configuration.RESOURCE-COMMIT\n107/114 Test #113: configuration.RESOURCE-COMMIT ...........   Passed    0.15 sec\n        Start 114: configuration.RESOURCE-GUARDS\n108/114 Test #114: configuration.RESOURCE-GUARDS ...........   Passed    0.17 sec\n        Start 115: configuration.RESOURCE-SESSION\n109/114 Test #115: configuration.RESOURCE-SESSION ..........   Passed    0.09 sec\n        Start 116: configuration.RESOURCE-RETAINED\n110/114 Test #116: configuration.RESOURCE-RETAINED .........   Passed    0.22 sec\n        Start 124: native.TRANSACTION-SUPERVISION\n111/114 Test #124: native.TRANSACTION-SUPERVISION ..........   Passed   47.13 sec\n        Start 152: composition.graph\n112/114 Test #152: composition.graph .......................   Passed    0.08 sec\n        Start 153: composition.reject_forbidden\n113/114 Test #153: composition.reject_forbidden ............   Passed    0.17 sec\n        Start 192: native.RECOVERY-01\n114/114 Test #192: native.RECOVERY-01 ......................   Passed   33.70 sec\n\n100% tests passed, 0 tests failed out of 114\n\nTotal Test time (real) = 103.82 sec\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-09-scene-images/linux-x64-gcc13-test-bb29439b5f\n",
+    "stderr": ""
+  }
+]

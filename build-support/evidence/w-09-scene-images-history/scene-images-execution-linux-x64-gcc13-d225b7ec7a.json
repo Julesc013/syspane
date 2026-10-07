@@ -1,0 +1,74 @@
+[
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-07T00:42:04.158138+00:00",
+    "finished_at": "2026-10-07T00:42:04.946070+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 6442450944,\n  \"checkout_out_bytes\": 1868847785,\n  \"linux_campaign_bytes\": 4290460203,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/scene_images_step.py",
+      "linux-x64-gcc13",
+      "build"
+    ],
+    "started_at": "2026-10-07T00:42:04.946847+00:00",
+    "finished_at": "2026-10-07T00:42:20.698581+00:00",
+    "exit": 0,
+    "stdout": "[1/5] Building CXX object CMakeFiles/syspane_scene_surface.dir/source/rendering/scene_image.cpp.o\n[2/5] Linking CXX static library libsyspane_scene_surface.a\n[3/5] Building CXX object CMakeFiles/syspane_scene_surface_tests.dir/tests/scene/image_surface_tests.cpp.o\n[4/5] Building CXX object CMakeFiles/syspane_scene_surface_tests.dir/tests/scene/surface_window.cpp.o\n[5/5] Linking CXX executable syspane_scene_surface_tests\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-09-scene-images/linux-x64-gcc13-build-c0174e1099\n",
+    "stderr": ""
+  },
+  {
+    "step": "focus",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-07T00:42:20.698925+00:00",
+    "finished_at": "2026-10-07T00:42:21.335415+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 6442450944,\n  \"checkout_out_bytes\": 1870221965,\n  \"linux_campaign_bytes\": 4290746679,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "focus",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/scene_images_step.py",
+      "linux-x64-gcc13",
+      "focus"
+    ],
+    "started_at": "2026-10-07T00:42:21.335738+00:00",
+    "finished_at": "2026-10-07T00:42:34.548485+00:00",
+    "exit": 0,
+    "stdout": "Test project /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n    Start   5: native.SCENE-IMAGE\n1/4 Test   #5: native.SCENE-IMAGE ...............   Passed    1.28 sec\n    Start  12: native.IMAGE-JOB\n2/4 Test  #12: native.IMAGE-JOB .................   Passed    3.26 sec\n    Start 151: composition.graph\n3/4 Test #151: composition.graph ................   Passed    0.09 sec\n    Start 152: composition.reject_forbidden\n4/4 Test #152: composition.reject_forbidden .....   Passed    0.17 sec\n\n100% tests passed, 0 tests failed out of 4\n\nTotal Test time (real) =   4.81 sec\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-09-scene-images/linux-x64-gcc13-focus-10791a0d2f\n",
+    "stderr": ""
+  }
+]

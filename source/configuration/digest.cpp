@@ -1,11 +1,11 @@
 #include "digest.hpp"
 #include "wire.hpp"
 #include <array>
-#include <vector>
+
 
 namespace syspane::configuration {
-std::string sha256(std::string_view bytes){
-    if(bytes.size()>1048576)throw protocol::Error("digest.size");
+namespace {
+std::string digest(std::string_view bytes){
     constexpr std::array<std::uint32_t,64> k{{
         0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,
         0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,
@@ -16,14 +16,18 @@ std::string sha256(std::string_view bytes){
         0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,
         0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2}};
     std::array<std::uint32_t,8> h{{0x6a09e667,0xbb67ae85,0x3c6ef372,0xa54ff53a,0x510e527f,0x9b05688c,0x1f83d9ab,0x5be0cd19}};
-    std::vector<unsigned char> data(bytes.begin(),bytes.end());data.push_back(0x80);
-    while(data.size()%64!=56)data.push_back(0);
     const auto bits=static_cast<std::uint64_t>(bytes.size())*8;
-    for(unsigned n=0;n<8;++n)data.push_back(static_cast<unsigned char>(bits>>(56-8*n)));
+    const auto length=((bytes.size()+9+63)/64)*64;
+    const auto byte=[&](std::size_t at)->unsigned char {
+        if(at<bytes.size())return static_cast<unsigned char>(bytes[at]);
+        if(at==bytes.size())return 0x80;
+        if(at>=length-8)return static_cast<unsigned char>(bits>>(8*(length-1-at)));
+        return 0;
+    };
     const auto rotate=[](std::uint32_t x,unsigned n){return (x>>n)|(x<<(32-n));};
-    for(std::size_t pos=0;pos<data.size();pos+=64){
+    for(std::size_t pos=0;pos<length;pos+=64){
         std::array<std::uint32_t,64> w{};
-        for(std::size_t i=0;i<16;++i)for(unsigned n=0;n<4;++n)w[i]=(w[i]<<8)|data[pos+4*i+n];
+        for(std::size_t i=0;i<16;++i)for(unsigned n=0;n<4;++n)w[i]=(w[i]<<8)|byte(pos+4*i+n);
         for(std::size_t i=16;i<64;++i){
             const auto x=w[i-15],y=w[i-2];w[i]=w[i-16]+(rotate(x,7)^rotate(x,18)^(x>>3))+w[i-7]+(rotate(y,17)^rotate(y,19)^(y>>10));
         }
@@ -39,4 +43,7 @@ std::string sha256(std::string_view bytes){
     for(const auto value:h)for(unsigned n=0;n<8;++n)result+=hex[(value>>(28-4*n))&15];
     return result;
 }
+}
+std::string sha256(std::string_view bytes){if(bytes.size()>1048576)throw protocol::Error("digest.size");return digest(bytes);}
+std::string content_sha256(std::string_view bytes){if(bytes.size()>16777216)throw protocol::Error("digest.size");return digest(bytes);}
 }

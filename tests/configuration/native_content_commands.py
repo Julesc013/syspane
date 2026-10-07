@@ -46,7 +46,7 @@ def fixture(name):
     'total_unpacked_bytes':sum(map(len,assets.values())),'required_capabilities':[],'optional_capabilities':[]}
   valid(m,'content-package');valid(doc,'scene-v0.2' if kind=='scene' else kind);mb=encoded(m)+b'\n';write(p/'manifest.json',mb);files['m-'+sha(mb)+'.json']=mb
   pins.append({'id':m['package_id'],'version':'0.1.0','sha256':sha(mb)});docs.append({'id':doc[kind+'_id'],'version':'0.1.0','sha256':sha(assets[kind+'.json'])});paths.append(p)
- package('theme',theme,[],{'images/pixel.png':b'opaque media bytes\x00unchanged'})
+ package('theme',theme,[],{'images/pixel.png':b'a'*1048577 if name=='LARGE-RESOURCE' else b'opaque media bytes\x00unchanged'})
  authored=copy.deepcopy(scene);authored['revision']='3';authored['widgets'][1]['layout']['base']['x']=20;package('scene',authored,[])
  preset={'schema_version':'0.1.0','preset_id':'preset:custom','version':'0.1.0','parent':None,'scene':docs[1],'theme':docs[0],
   'settings':[{'path':'display.theme_id','value':'theme:custom'}],'required_capabilities':['scene.selector'],'optional_capabilities':[]}
@@ -184,9 +184,9 @@ def run(name):
    write(catalog/'catalog.json',encoded({'schema_version':'0.1.0','packages':['theme','scene','preset']}))
    commit(supervisor,client,command(f),41);write(catalog/'catalog.json',b'not json')
    commit(supervisor,client,command(f,41,30,'S'),42);revision=42;x=30
-  elif name in ('NORMAL-RETAINED','POLICY-DENY','RETAINED-ONLY'):
+  elif name in ('NORMAL-RETAINED','POLICY-DENY','RETAINED-ONLY','LARGE-RESOURCE'):
    commit(supervisor,client,command(f),41);gone(f)
-   if name=='NORMAL-RETAINED':
+   if name in ('NORMAL-RETAINED','LARGE-RESOURCE'):
     commit(supervisor,client,command(f,41,30,'S'),42)
     signal.pidfd_send_signal(supervisor.children[ready['pid']],signal.SIGKILL)
     ready,client=replacement(supervisor,client,ready,'supervisor.child_exit')
@@ -227,6 +227,6 @@ def run(name):
   if supervisor:logs.append(supervisor.dispose())
   case['supervisors']=logs;record['cases'].append(case);save()
 try:
- for name in ('NORMAL-RETAINED','PREPARE-HANG','CANCEL-HANG','RESOURCE-HANG','DURABLE-HANG','POLICY-DENY','RETAINED-ONLY','UNNEGOTIATED','CATALOG-REJECTION'):run(name)
+ for name in ('NORMAL-RETAINED','PREPARE-HANG','CANCEL-HANG','RESOURCE-HANG','DURABLE-HANG','POLICY-DENY','RETAINED-ONLY','UNNEGOTIATED','CATALOG-REJECTION','LARGE-RESOURCE'):run(name)
  record['outcome']='pass';save();print(json.dumps({'outcome':'pass','cases':len(record['cases']),'report':str(root/'result.json')}))
 except Exception as e:record.update(outcome='fail',error=repr(e));save();raise

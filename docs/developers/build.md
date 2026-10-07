@@ -1,5 +1,21 @@
 # Developer setup and checks
 
+The [scene images package](../../spec/delivery/packages/w-09-scene-images.md) connects
+the worker to SceneSurface. Pass its canonical executable as the constructor's
+optional final argument from trusted application setup. Authored content cannot choose
+an executable. With an admitted resource closure and current desktop/accessibility
+policy, image widgets now render asynchronously. Repaint while pending; use
+`poll_image_jobs()` during native ticks and after `close()` until it returns true
+before destroying the owner. Pending work preserves chart history. Resource, scene
+and policy replacement cancel old jobs and clear decoded caches.
+
+Linux adds `native.SCENE-IMAGE` and `native.IMAGE-ERASURE`; the latter observes actual
+owned X11 pixels and AT-SPI names with intentional erasure faults. Check the independent
+geometry with `python tests/scene/image_surface_oracle.py --check`. The shared
+`configuration.DIGEST-CONTENT` case checks the separate 16 MiB asset-hashing ceiling;
+the ordinary document digest remains limited to 1 MiB. Native content-command tests
+include large-asset persistence and recovery after the import is removed.
+
 The [image pipeline package](../../spec/delivery/packages/w-09-image-pipeline.md)
 adds shared premultiplied bilinear fit/orientation and the Linux
 `SysPane.ImageWorker` / `rendering::ImageJob` boundary. The worker accepts PNG,
@@ -13,8 +29,8 @@ encoded bytes. Poll without waiting; cancellation suppresses take immediately bu
 the owner must retain the job until actual stop is observed. The worker receives
 no image path or base URI. The job binds the original input SHA256, limits IPC
 and accepts output only after successful exit and reaping. This low-level API
-does not grant disclosure permission. SceneSurface still rejects image widgets
-until an asynchronous scene/policy owner and external erasure oracle are integrated.
+does not grant disclosure permission. SceneSurface supplies the scene/policy owner
+described above; direct ImageJob callers must supply their own admitted owner.
 
 After ordinary workspace preflight/configure/build, run
 `ctest --preset <profile> -R '^scene[.]IMAGE-' --output-on-failure` on each toolchain.
@@ -78,8 +94,9 @@ configuration.SCENE-CONTENT --output-on-failure` runs six shared families. Linux
 also runs `native.SCENE-CONTENT` (owned ext4 crash/recovery) and
 `native.CONTENT-ERASURE` (owned Xvfb pixels and AT-SPI names with fault controls).
 The former deliberately uses opaque media bytes and does not qualify a decoder.
-The renderer consumes text bodies, column labels and scene 0.3 chart content;
-images and legacy charts still select the explicit unsupported whole-scene alternative.
+The renderer consumes text bodies, column labels and scene 0.3 chart/image content.
+Legacy charts/images without explicit content, or images without a trusted worker,
+select the explicit unsupported whole-scene alternative.
 
 The [table package](../../spec/delivery/packages/w-09-table-surface.md) extends
 SceneSurface with table widgets. Supply ordered collection selectors that differ

@@ -45,6 +45,8 @@ struct SurfaceText {
     std::optional<SurfaceTable> table;
     struct Chart {std::string summary;std::size_t samples=0,segments=0;scene::Rect pixels;};
     std::optional<Chart> chart;
+    struct Image {std::string state;configuration::Json asset;unsigned width=0,height=0;};
+    std::optional<Image> image;
 };
 struct SurfaceFrame {
     scene::Plan layout;
@@ -56,7 +58,7 @@ struct SurfaceStatus { SurfaceCode code=SurfaceCode::empty;std::size_t widgets=0
 class SceneSurface {
 public:
     SceneSurface(configuration::Authority,configuration::Policy,SurfaceConfig,
-                 std::vector<SurfaceProvider>,std::function<bool()> clear_native);
+                 std::vector<SurfaceProvider>,std::function<bool()> clear_native,std::string image_worker={});
     ~SceneSurface();
     SceneSurface(const SceneSurface&)=delete;
     SceneSurface& operator=(const SceneSurface&)=delete;
@@ -70,6 +72,7 @@ public:
     void policy(configuration::Policy,std::uint64_t now);
     void replace(SurfaceConfig,std::uint64_t now);
     void close();
+    bool poll_image_jobs(); // Nonblocking; true when no running/stopping job remains.
     void paint(std::uint64_t now,const std::map<std::string,model::Tick>& ticks,
                const std::function<void(SurfaceCode,const SurfaceFrame*)>& sink);
     SurfaceStatus status()const;

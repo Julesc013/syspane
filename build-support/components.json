@@ -1824,15 +1824,18 @@
       ],
       "private_interfaces": [
         "source/rendering/scene_table.hpp",
-        "source/rendering/scene_chart.hpp"
+        "source/rendering/scene_chart.hpp",
+        "source/rendering/scene_image.hpp"
       ],
       "sources": [
         "source/rendering/scene_surface.cpp",
         "source/rendering/scene_table.cpp",
-        "source/rendering/scene_chart.cpp"
+        "source/rendering/scene_chart.cpp",
+        "source/rendering/scene_image.cpp"
       ],
       "allowed_dependencies": [
-        "syspane_native_text"
+        "syspane_native_text",
+        "syspane_image_job"
       ],
       "target_requirements": [
         "cxx17",
@@ -1857,7 +1860,8 @@
         "tests/scene/surface_tests.cpp",
         "tests/scene/surface_window.cpp",
         "tests/scene/table_tests.cpp",
-        "tests/scene/chart_surface_tests.cpp"
+        "tests/scene/chart_surface_tests.cpp",
+        "tests/scene/image_surface_tests.cpp"
       ],
       "allowed_dependencies": [
         "syspane_scene_surface",

@@ -24,7 +24,7 @@ struct ImageJob::Impl {
 };
 ImageJob::ImageJob(const std::string& worker,std::string media,std::string encoded):impl_(std::make_unique<Impl>()){
     need(media=="image/png"||media=="image/jpeg"||media=="image/svg+xml","image.media");need(!encoded.empty()&&encoded.size()<=8388608,"image.capacity");
-    auto& i=*impl_;i.digest=configuration::sha256(encoded);const auto size=static_cast<unsigned>(encoded.size());
+    auto& i=*impl_;i.digest=configuration::content_sha256(encoded);const auto size=static_cast<unsigned>(encoded.size());
     i.input.resize(4);for(unsigned n=0;n<4;++n)i.input[n]=static_cast<char>(size>>(24-n*8));i.input+=encoded;
     int socket[2],errors[2];need(!::socketpair(AF_UNIX,SOCK_STREAM|SOCK_CLOEXEC,0,socket),"image.channel");Fd remote;remote.fd=socket[1];i.channel.fd=socket[0];
     need(!::pipe2(errors,O_CLOEXEC),"image.channel");Fd remote_error;remote_error.fd=errors[1];i.error.fd=errors[0];

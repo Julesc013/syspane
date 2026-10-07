@@ -1,0 +1,12 @@
+from pathlib import Path
+r=Path.cwd()
+p=r/'source/rendering/scene_image.hpp';t=p.read_text().replace('void clear(bool blocked=false);','void clear(std::string blocked_reason={});').replace('prepared_=false,valid_job_=false,blocked_=false;','prepared_=false,valid_job_=false;std::string blocked_reason_;');p.write_text(t,encoding='utf-8',newline='\n')
+p=r/'source/rendering/scene_image.cpp';t=p.read_text().replace('void SceneImages::clear(bool blocked)', 'void SceneImages::clear(std::string blocked_reason)').replace('blocked_=blocked;', 'blocked_reason_=std::move(blocked_reason);').replace('clear(true);','clear("surface.capacity");').replace('need(!blocked_,"surface.capacity");','if(!blocked_reason_.empty())throw protocol::Error(blocked_reason_);');p.write_text(t,encoding='utf-8',newline='\n')
+p=r/'source/rendering/scene_surface.cpp';t=p.read_text().replace('i.images->clear(true);i.erase();i.status={SurfaceCode::alternative,0,0,"surface.capacity"};','i.images->clear("surface.capacity");if(i.erase())i.status={SurfaceCode::alternative,0,0,"surface.capacity"};').replace('catch(const Error& e){i.images->clear(true);','catch(const Error& e){i.images->clear(e.what());').replace('catch(const std::bad_alloc&){i.images->clear(true);','catch(const std::bad_alloc&){i.images->clear("surface.capacity");');p.write_text(t,encoding='utf-8',newline='\n')
+p=r/'tests/scene/image_surface_tests.cpp';t=p.read_text();marker='    test("PENDING-CHART",';assert marker in t
+t=t.replace(marker,'''    test("CAPACITY-CLEAR-FAILURE",[&]{std::ifstream file(root+"/../../../tests/scene/image-cases/maximum.png",std::ios::binary);const std::string bytes{std::istreambuf_iterator<char>(file),{}};Images f(root,bytes);auto cfg=f.cfg;extra(cfg,image_bytes(root),1);f.replace(cfg);const auto deadline=Clock::now()+std::chrono::seconds(5);bool first=false;
+        while(!first){auto frame=f.paint();first=frame.widgets[0].image->state=="ready";need(frame.widgets[1].image->state=="loading","second job pending");need(Clock::now()<deadline,"first cache deadline");if(!first)std::this_thread::sleep_for(std::chrono::milliseconds(1));}
+        f.clear_ok=false;while(!f.owner->poll_image_jobs()){need(Clock::now()<deadline,"capacity clearing deadline");std::this_thread::sleep_for(std::chrono::milliseconds(1));}
+        need(f.owner->status().code==v::SurfaceCode::closed&&children().empty(),"native clear failure stays terminal after capacity error");f.empty(v::SurfaceCode::closed);});
+'''+marker)
+p.write_text(t,encoding='utf-8',newline='\n')

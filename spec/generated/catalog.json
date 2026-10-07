@@ -443,7 +443,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "0b71c79a5f9545cbcfab6dac475d6aac458762cecf50ac770c47de4fc89bdd36"
+      "sha256": "c8fca51922ad604e670291fdcf215c4c0f143f9f0294c69653084036b41b1b34"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -1393,6 +1393,17 @@
       "sha256": "2ff385c1da6acdab647708f05e673b2ba4ee4caec33886a8f32e4ca2fa5d074d"
     },
     {
+      "id": "SP-W09-SCENE-IMAGES",
+      "path": "delivery/packages/w-09-scene-images.md",
+      "title": "Policy-owned asynchronous scene images",
+      "description": "Connect immutable image resources, bounded worker lifetime and native pixels to current scene authority.",
+      "requires": [
+        "SP-W09-IMAGE-PIPELINE",
+        "SP-W09-NATIVE-CHART"
+      ],
+      "sha256": "3782f2edba7943d304ce012c8b0be7455ca48667a262d99cfd2978bcc5dcacfa"
+    },
+    {
       "id": "SP-W09-SCENE-SURFACE",
       "path": "delivery/packages/w-09-scene-surface.md",
       "title": "Policy-owned native scalar scene surface",
@@ -1835,6 +1846,17 @@
         "SP-TABLE-SURFACE-HANDOFF"
       ],
       "sha256": "92f49d8279e60848ddb7397aced85ac7bbb0272000821daf3d8a85f153f342dd"
+    },
+    {
+      "id": "SP-SCENE-IMAGES-HANDOFF",
+      "path": "delivery/scene-images-handoff.md",
+      "title": "Policy-owned native scene images checkpoint",
+      "description": "Asynchronous pinned image presentation, native erasure and declared-size content hashing.",
+      "requires": [
+        "SP-W09-SCENE-IMAGES",
+        "SP-IMAGE-PIPELINE-HANDOFF"
+      ],
+      "sha256": "d1c650a7adfa4b2a644e688a1008462204369f5add37c1b03b714822183ffa87"
     },
     {
       "id": "SP-SCENE-SURFACE-HANDOFF",

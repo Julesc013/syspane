@@ -124,6 +124,11 @@ void capacity(){
     const auto q=command(store.current.documents,"preview","next");CHECK(submit(tx,q,599999)["outcome"]=="busy");
     CHECK(submit(tx,q,600000)["outcome"]=="preview"&&store.writes==0);
 }
+void content_digest(){
+    std::ifstream stream(fixtures+"/../../../tests/configuration/content-digests.json");Json cases;stream>>cases;
+    for(const auto& c:cases)CHECK(c::content_sha256(std::string(c["bytes"].get<std::size_t>(),'a'))==c["sha256"]);
+    rejected([]{c::sha256(std::string(1048577,'a'));});rejected([]{c::content_sha256(std::string(16777217,'a'));});
+}
 void digest(){
     CHECK(c::sha256("")=="e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855");
     CHECK(c::sha256("abc")=="ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad");
@@ -132,7 +137,7 @@ void digest(){
 void scene_content_tests(const std::string&,const std::string&);
 int main(int argc,char** argv){try{CHECK(argc==3);fixtures=argv[2];const std::string name=argv[1];
     if(name.rfind("SCENE-CONTENT-",0)==0)scene_content_tests(name,fixtures);else if(name=="AUTH-SCHEMA")schemas();else if(name=="TX-MIXED")mixed();else if(name=="TX-CONFLICT")conflicts();else if(name=="TX-REPLAY")replay();
-    else if(name=="TX-INTERRUPT")interruption();else if(name=="TX-BOUNDS")bounds();else if(name=="TX-CAPACITY")capacity();else if(name=="DIGEST")digest();
+    else if(name=="TX-INTERRUPT")interruption();else if(name=="TX-BOUNDS")bounds();else if(name=="TX-CAPACITY")capacity();else if(name=="DIGEST")digest();else if(name=="DIGEST-CONTENT")content_digest();
     else if(name.substr(0,8)=="CONTENT-"||name.substr(0,9)=="RESOURCE-")content_tests(name,fixtures);else CHECK(false);
     std::cout<<name<<" pass\n";return 0;
 }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}}
