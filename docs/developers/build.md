@@ -1733,3 +1733,9 @@ The owned non-root Linux laboratory additionally runs `ctest --preset linux-x64-
 -R "^native[.]EDITOR-CONTAINERS$" --output-on-failure` and existing editor matrices.
 See the [package](../../spec/delivery/packages/w-10-containers.md) and
 [handoff](../../spec/delivery/containers-handoff.md) for exact scope and evidence.
+
+Persistent editor locks use SetWidgetLocks through EditorDraft. Scene 0.4 retains
+content and adds edit_locked; command 0.6 requires the resource, scene-content,
+large-command and edit-lock negotiation gates. Use `editor.LOCK-*` and native
+`native.EDITOR-LOCKS` in the existing presets. The [package](../../spec/delivery/packages/w-10-edit-locks.md)
+and [handoff](../../spec/delivery/edit-locks-handoff.md) record scope and evidence.

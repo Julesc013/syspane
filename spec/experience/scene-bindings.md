@@ -83,3 +83,11 @@ Unknown optional extensions survive inertly within parse bounds.
 Fixtures cover hierarchy cycles, multiple parents, dangling/deep graphs, constraints,
 selector bounds and migration. Native tests use two host inventories and display
 topologies, removal/replacement, ambiguous pins and save/reload equivalence.
+
+## Persistent editing guards
+
+[Scene 0.4](../contracts/scene-v0.4.schema.json) retains scene 0.3 content and adds
+optional edit_locked. A group lock is inherited during editing; it changes neither
+rendering nor disclosure. The [lock package](../delivery/packages/w-10-edit-locks.md)
+defines explicit promotion, unlock, protected operations and capability admission.
+Older consumers must reject unsupported versions without dropping flags.

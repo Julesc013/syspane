@@ -7,6 +7,12 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
+The [edit-lock checkpoint](spec/delivery/edit-locks-handoff.md) adds persistent
+widget/group locks, explicit unlock and inherited protection in the native editor.
+Scene 0.4 and command 0.6 preserve existing contracts and require negotiation.
+Intermittent Apply/Undo keyboard-focus failures remain under investigation. Installed
+integration, remaining authoring and all complete editions remain open.
+
 The [container checkpoint](spec/delivery/containers-handoff.md) adds explicit Wrap
 and Unwrap for flowing, nested and responsive layout rules. Native dialogs show the
 reflow choice before applying one reversible draft operation. Existing fixed-geometry

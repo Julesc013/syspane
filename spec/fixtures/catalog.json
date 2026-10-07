@@ -790,6 +790,41 @@
       "expected": "invalid",
       "semantic": true,
       "reason": "Scene 0.3 replacement requires resource pins."
+    },
+    {
+      "path": "fixtures/valid/scene-edit-locks.json",
+      "schema": "scene-v0.4",
+      "expected": "valid",
+      "semantic": true,
+      "reason": "Persistent edit-lock version, type and compatibility boundary."
+    },
+    {
+      "path": "fixtures/valid/command-edit-locks.json",
+      "schema": "command-v0.6",
+      "expected": "valid",
+      "semantic": true,
+      "reason": "Persistent edit-lock version, type and compatibility boundary."
+    },
+    {
+      "path": "fixtures/invalid/scene-edit-lock-type.json",
+      "schema": "scene-v0.4",
+      "expected": "invalid",
+      "semantic": false,
+      "reason": "Persistent edit-lock version, type and compatibility boundary."
+    },
+    {
+      "path": "fixtures/invalid/scene-old-edit-lock.json",
+      "schema": "scene-v0.3",
+      "expected": "invalid",
+      "semantic": false,
+      "reason": "Persistent edit-lock version, type and compatibility boundary."
+    },
+    {
+      "path": "fixtures/invalid/command-old-edit-lock.json",
+      "schema": "command-v0.5",
+      "expected": "invalid",
+      "semantic": false,
+      "reason": "Persistent edit-lock version, type and compatibility boundary."
     }
   ]
 }

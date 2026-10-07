@@ -13,7 +13,7 @@ CreateInput create_input(const std::string& kind){
         {"body",kind=="image"?"Image":"Text"},{"entity_type","network.interface"},{"field","network.receive_bytes"},{"second_field","network.transmit_bytes"}};return out;
 }
 InsertWidget create_widget(const Json& scene,const CreateInput& in,const std::string& id,const Json& root_display,const ContentChoices& choices){
-    need(scene.at("schema_version")=="0.3.0","editor.create_version");(void)create_input(in.kind);need(protocol::identifier(id),"editor.identity");
+    need(scene.at("schema_version")!="0.2.0","editor.create_version");(void)create_input(in.kind);need(protocol::identifier(id),"editor.identity");
     Json display=root_display;std::size_t index=scene.at("roots").size();
     if(in.parent){bool found=false;for(const auto& w:scene.at("widgets"))if(w.at("id")==*in.parent){need(w.at("kind")=="group","editor.parent");display=w.at("display");index=w.at("children").size();found=true;break;}need(found,"editor.parent");}
     Json base={{"kind","fixed"}};for(const char* k:{"x","y","width","height"}){const double n=content_number(field(in,k));const bool position=std::string(k)=="x"||std::string(k)=="y";const double minimum=position?-100000:std::string(k)=="width"?32:16,maximum=position?100000:32768;need(n>=minimum&&n<=maximum,"editor.create_geometry");base[k]=n;}

@@ -136,3 +136,11 @@ reflow and possible clipping changes before adoption; no pixel-preserving conver
 is inferred. Existing fixed-geometry Group/Ungroup semantics remain unchanged.
 The [checkpoint](../delivery/containers-handoff.md) records component evidence and
 remaining editor, installed-integration and complete-edition acceptance.
+
+## Persistent edit locks
+
+The [edit-lock package](../delivery/packages/w-10-edit-locks.md) defines own/inherited
+locks, protected branches, explicit unlock, exact history and negotiated durable
+submission. Keep selection and recovery paths usable. A lock guards ordinary editor
+commands; authorization, disclosure and dynamic scene resolution keep their owners.
+The [checkpoint](../delivery/edit-locks-handoff.md) records scoped validation.

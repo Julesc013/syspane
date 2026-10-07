@@ -1,0 +1,43 @@
+{
+  "outcome": "unresolved",
+  "original": {
+    "path": "build-support/evidence/w-10-edit-locks-native/large-commands-046364558a9d.json",
+    "sha256": "700fdbb8aabefa5c600685b21be69f9def33935182ee7905b355cbabfcce3883",
+    "archive": {
+      "path": "build-support/evidence/w-10-edit-locks-native/large-commands-046364558a9d.zip",
+      "sha256": "d72bdecc2c39a6b528e83698078b1701d41a24b0bf1da5e9c7bf34aac213e3ca"
+    }
+  },
+  "diagnostics": [
+    {
+      "path": "build-support/evidence/w-10-edit-locks-native/locks-focus-diagnostic-150c081f8ac5.json",
+      "sha256": "73c1b1f1651a9068f611c0e31e0d5bb3d65bdd68ee72070f59e20c1a0b4c0980",
+      "archive": {
+        "path": "build-support/evidence/w-10-edit-locks-native/locks-focus-diagnostic-150c081f8ac5.zip",
+        "sha256": "4e3811493d3a027645e3e23256dc28f625ea176f5649c4448417152fdc3894c4"
+      }
+    },
+    {
+      "path": "build-support/evidence/w-10-edit-locks-native/locks-focus-state-fdd8ba38b7d0.json",
+      "sha256": "746513cd33968205c42546f97b3b81afe26f9e601a8395de58c00a0a24abd046",
+      "archive": {
+        "path": "build-support/evidence/w-10-edit-locks-native/locks-focus-state-fdd8ba38b7d0.zip",
+        "sha256": "88a0718d6b065e2d7f52ad09cabd14c8d7fc7d49fdfad2ab028911312de05892"
+      }
+    }
+  ],
+  "unchanged_full_suite_rerun": {
+    "path": "build-support/evidence/w-10-edit-locks-history/linux-x64-gcc13-large-fd2317aece/result.json",
+    "sha256": "352aa2ace82faa90a0e8ce2383c27cd7aa0d70f1000992c03171d7cfddde717d"
+  },
+  "failed_rerun": {
+    "path": "build-support/evidence/w-10-edit-locks-native/large-commands-3fac26c3492c.json",
+    "sha256": "3fbb807fbb31cbfbd11a7b2d26972988e1474aaa5b0538d6879a894c688bcec4",
+    "archive": {
+      "path": "build-support/evidence/w-10-edit-locks-native/large-commands-3fac26c3492c.zip",
+      "sha256": "6fc10403bca2946a7a9f5623056d640bd6efa9cf26143f23a3ff2e52f3a41326"
+    }
+  },
+  "scope": "Apply-focus failed in the original full suite and one of three unchanged reproductions. Six failure-only instrumented runs passed. The full-suite rerun failed at Undo focus. Native interaction reliability remains unresolved; the 24-case large-command matrix has not passed.",
+  "setup_note": "The first diagnostic launcher exited before creating a native experiment because its helper import directory was wrong; tests/fault corrected that local launcher import."
+}

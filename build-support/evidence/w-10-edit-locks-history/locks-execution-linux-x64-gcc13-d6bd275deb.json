@@ -1,0 +1,110 @@
+[
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-07T12:29:04.420016+00:00",
+    "finished_at": "2026-10-07T12:29:05.579917+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2456107080,\n  \"linux_campaign_bytes\": 4757397841,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/locks_step.py",
+      "linux-x64-gcc13",
+      "build"
+    ],
+    "started_at": "2026-10-07T12:29:05.580402+00:00",
+    "finished_at": "2026-10-07T12:29:37.059665+00:00",
+    "exit": 0,
+    "stdout": "[1/36] Building CXX object CMakeFiles/syspane_settings_tests.dir/tests/configuration/settings_content_tests.cpp.o\n[2/36] Linking CXX executable syspane_settings_tests\n[3/36] Building CXX object CMakeFiles/syspane_authored_tests.dir/tests/configuration/authored_tests.cpp.o\n[4/36] Building CXX object CMakeFiles/syspane_authored_tests.dir/tests/configuration/content_tests.cpp.o\n[5/36] Building CXX object CMakeFiles/syspane_editor_tests.dir/tests/editor/edit_lock_tests.cpp.o\n[6/36] Linking CXX executable syspane_editor_tests\n[7/36] Linking CXX executable syspane_scene_inspector_tests\n[8/36] Linking CXX executable syspane_scene_surface_tests\n[9/36] Linking CXX executable syspane_image_job_tests\n[10/36] Building CXX object CMakeFiles/syspane_authored_tests.dir/tests/configuration/scene_content_tests.cpp.o\n[11/36] Linking CXX executable syspane_scene_tests\n[12/36] Linking CXX executable syspane_authored_tests\n[13/36] Linking CXX executable syspane_health_tests\n[14/36] Building CXX object CMakeFiles/syspane_settings_window.dir/tests/configuration/settings_window.cpp.o\n[15/36] Linking CXX executable syspane_settings_window\n[16/36] Building CXX object CMakeFiles/syspane_command_session_tests.dir/tests/configuration/command_session_tests.cpp.o\n[17/36] Building CXX object CMakeFiles/syspane_protocol_tests.dir/tests/protocol/protocol_tests.cpp.o\n[18/36] Linking CXX executable syspane_protocol_tests\n[19/36] Linking CXX executable syspane_command_session_tests\n[20/36] Building CXX object CMakeFiles/syspane_editor_window.dir/tests/editor/editor_window.cpp.o\n[21/36] Linking CXX executable syspane_telemetry_tests\n[22/36] Building CXX object CMakeFiles/syspane_subscription_tests.dir/tests/protocol/subscription_tests.cpp.o\n[23/36] Linking CXX executable syspane_diagnostic_tests\n[24/36] Linking CXX executable syspane_data_view_tests\n[25/36] Linking CXX executable syspane_subscription_tests\n[26/36] Linking CXX executable syspane_state_import_tests\n[27/36] Linking CXX executable syspane_demand_tests\n[28/36] Linking CXX executable syspane_editor_window\n[29/36] Linking CXX executable syspane_network_view_tests\n[30/36] Linking CXX executable syspane_network_publication_tests\n[31/36] Linking CXX executable syspane_preservation_tests\n[32/36] Linking CXX executable syspane_failure_store_tests\n[33/36] Building CXX object CMakeFiles/syspane_demand_session_tests.dir/tests/fault/demand_session_tests.cpp.o\n[34/36] Linking CXX executable syspane_demand_session_tests\n[35/36] Building CXX object CMakeFiles/syspane_measured_time_tests.dir/tests/fault/measured_time_tests.cpp.o\n[36/36] Linking CXX executable syspane_measured_time_tests\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-edit-locks/linux-x64-gcc13-build-4db50054ab\n",
+    "stderr": ""
+  },
+  {
+    "step": "focus",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-07T12:29:37.060098+00:00",
+    "finished_at": "2026-10-07T12:29:37.858487+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2457752008,\n  \"linux_campaign_bytes\": 4774631764,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "focus",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/locks_step.py",
+      "linux-x64-gcc13",
+      "focus"
+    ],
+    "started_at": "2026-10-07T12:29:37.858780+00:00",
+    "finished_at": "2026-10-07T12:29:51.293709+00:00",
+    "exit": 0,
+    "stdout": "Test project /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n    Start 67: editor.LOCK-SCHEMAS\n1/8 Test #67: editor.LOCK-SCHEMAS ..............   Passed    0.09 sec\n    Start 68: editor.LOCK-DRAFT\n2/8 Test #68: editor.LOCK-DRAFT ................   Passed    0.11 sec\n    Start 69: editor.LOCK-GUARDS\n3/8 Test #69: editor.LOCK-GUARDS ...............   Passed    0.07 sec\n    Start 70: editor.LOCK-INHERIT\n4/8 Test #70: editor.LOCK-INHERIT ..............   Passed    0.12 sec\n    Start 71: editor.LOCK-ATOMIC\n5/8 Test #71: editor.LOCK-ATOMIC ...............   Passed    0.07 sec\n    Start 72: editor.LOCK-POLICY\n6/8 Test #72: editor.LOCK-POLICY ...............   Passed    0.09 sec\n    Start 73: editor.LOCK-NEGOTIATE\n7/8 Test #73: editor.LOCK-NEGOTIATE ............   Passed    0.22 sec\n    Start 74: editor.LOCK-DURABLE\n8/8 Test #74: editor.LOCK-DURABLE ..............   Passed    0.14 sec\n\n100% tests passed, 0 tests failed out of 8\n\nTotal Test time (real) =   0.91 sec\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-edit-locks/linux-x64-gcc13-focus-2edac5f0c5\n",
+    "stderr": ""
+  },
+  {
+    "step": "locks",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-07T12:29:51.294038+00:00",
+    "finished_at": "2026-10-07T12:29:52.029410+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2459394680,\n  \"linux_campaign_bytes\": 4774636340,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "locks",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/locks_step.py",
+      "linux-x64-gcc13",
+      "locks"
+    ],
+    "started_at": "2026-10-07T12:29:52.029733+00:00",
+    "finished_at": "2026-10-07T12:30:11.917648+00:00",
+    "exit": 8,
+    "stdout": "Test project /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n    Start 94: native.EDITOR-LOCKS\n1/1 Test #94: native.EDITOR-LOCKS ..............***Failed    6.77 sec\n/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/edit-locks-65ab6adc4440/result.json fail\nTraceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_edit_locks.py\", line 72, in <module>\n    if __name__=='__main__':main()\n                            ^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_edit_locks.py\", line 67, in main\n    (folder/(mode+'.stdout')).write_bytes(out);(folder/(mode+'.stderr')).write_bytes(err);detail=json.loads((folder/mode/'result.json').read_bytes());report['cases'].append(dict(case=mode,outcome=detail['outcome'],fault_detected=detail.get('fault_detected',False),record_sha256=sha(folder/mode/'result.json')));assert child.returncode==0 and detail['outcome']=='pass',(mode,err.decode(errors='replace'))\n                                                                                                                                                                                                                                                                                                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: ('unlock-move', 'dbus-daemon[560039]: [session uid=1000 pid=560039] Activating service name=\\'org.a11y.Bus\\' requested by \\':1.0\\' (uid=1000 pid=560040 comm=\"/usr/bin/python3 /mnt/d/Projects/SysPane/syspane/t\" label=\"kernel\")\\ndbus-daemon[560039]: [session uid=1000 pid=560039] Successfully activated service \\'org.a11y.Bus\\'\\ndbus-daemon[560048]: Activating service name=\\'org.a11y.atspi.Registry\\' requested by \\':1.2\\' (uid=1000 pid=560054 comm=\"/home/ir4runner/.cache/syspane/campaign-229a498/li\" label=\"kernel\")\\ndbus-daemon[560048]: Successfully activated service \\'org.a11y.atspi.Registry\\'\\nTraceback (most recent call last):\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_edit_locks.py\", line 72, in <module>\\n    if __name__==\\'__main__\\':main()\\n                            ^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_edit_locks.py\", line 58, in main\\n    if sys.argv[1]==\\'--observe\\':observe(*map(Path,sys.argv[2:5]),sys.argv[5]);return\\n                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_edit_locks.py\", line 50, in observe\\n    try:exercise(h)\\n        ^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_edit_locks.py\", line 35, in exercise\\n    h.click(\\'lock\\');h.wait(lambda:not locked(h) and h.sensitive(\\'value.x\\'));h.drag(60,60,20,0);h.wait(lambda:h.value(\\'x\\')==\\'60\\');expected=CASES[\\'moved\\']\\n                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_editor.py\", line 80, in wait\\n    assert time.monotonic()<end,self.stage+\\' observation deadline\\'\\n           ^^^^^^^^^^^^^^^^^^^^\\nAssertionError: GUARD observation deadline\\n')\n\n\n0% tests passed, 1 tests failed out of 1\n\nTotal Test time (real) =   6.78 sec\n\nThe following tests FAILED:\n\t 94 - native.EDITOR-LOCKS (Failed)\n Errors while running CTest\n\nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-edit-locks/linux-x64-gcc13-locks-041ca46f92\n",
+    "stderr": ""
+  }
+]

@@ -222,7 +222,7 @@ def settings_projections(root: Path) -> dict[str, Any]:
         section, key = row['id'].split('.')
         settings['properties'][section]['properties'][key] = row['constraints']
     result = {'contracts/settings.schema.json': settings}
-    for name in ('command', 'command-v0.2', 'command-v0.3', 'command-v0.4','command-v0.5'):
+    for name in ('command', 'command-v0.2', 'command-v0.3', 'command-v0.4','command-v0.5','command-v0.6'):
         path = f'contracts/{name}.schema.json'
         command = read_json(root/path)
         operations = command['properties']['operations']['items']['oneOf']
@@ -350,7 +350,7 @@ def semantic_errors(value: Any, schema_name: str, root: Path=ROOT) -> list[str]:
                     bounds = layout[axis]
                     if not bounds['min'] <= bounds['preferred'] <= bounds['max']:
                         errors.append('layout bounds must satisfy min <= preferred <= max')
-    if schema_name in ('scene-v0.2','scene-v0.3'):
+    if schema_name in ('scene-v0.2','scene-v0.3','scene-v0.4'):
         widgets = value['widgets']
         ids = [w['id'] for w in widgets]
         if len(ids) != len(set(ids)):
@@ -375,7 +375,7 @@ def semantic_errors(value: Any, schema_name: str, root: Path=ROOT) -> list[str]:
                 for ident in value['roots']:
                     if ident in graph: depth(ident, 1)
         for widget in widgets:
-            if schema_name == 'scene-v0.3':
+            if schema_name in ('scene-v0.3','scene-v0.4'):
                 kind,content,bindings=widget['kind'],widget['content'],widget['bindings']
                 texts=([content['body']] if kind=='text' else [content['alt']] if kind=='image' else
                        [c['label'] for c in content['columns']] if kind=='table' else [])
@@ -401,7 +401,7 @@ def semantic_errors(value: Any, schema_name: str, root: Path=ROOT) -> list[str]:
                 allowed_layouts = ('canvas','stack','grid','fixed') if widget['kind'] == 'group' else ('fixed','flow')
                 if variant['kind'] not in allowed_layouts:
                     errors.append('container layout and widget kind disagree')
-    if schema_name in ('command-v0.2', 'command-v0.3', 'command-v0.4','command-v0.5'):
+    if schema_name in ('command-v0.2', 'command-v0.3', 'command-v0.4','command-v0.5','command-v0.6'):
         if sum(op['op'] == 'scene.replace' for op in value['operations']) > 1:
             errors.append('only one scene replacement per request is admitted')
         for operation in value['operations']:
@@ -486,7 +486,7 @@ def schema_validators(root: Path) -> dict[str, Any]:
             Draft202012Validator.check_schema(data)
         except Exception as exc:
             raise SpecError(f'invalid schema {p.name}: {exc}') from exc
-        version_match = re.search(r'-v(0\.[2345])\.schema\.json$', p.name)
+        version_match = re.search(r'-v(0\.[23456])\.schema\.json$', p.name)
         version = version_match[1] if version_match else None
         expected_id = (BASE.replace('/0.1.0/', f'/{version}.0/') + p.name.replace(f'-v{version}', '')
                        if version else BASE + p.name)

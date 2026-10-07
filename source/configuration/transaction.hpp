@@ -33,6 +33,7 @@ public:
     Transactions(GenerationStore& store,std::string epoch,std::function<void(const Authored&)> prepare_resources);
     Transactions(GenerationStore& store,std::string epoch,ResourceProvider resources);
     bool supports_resources()const{return static_cast<bool>(resource_provider_.prepare);}
+    bool supports_edit_locks()const{return supports_resources()&&resource_provider_.capabilities.count("scene.edit-locks");}
     Json submit(const std::string& principal,const std::string& connection,std::string body,const Authority& authority,
                 const std::function<Policy()>& policy,std::uint64_t now,const std::function<bool()>& cancelled=[] {return false;});
     Json reconcile(const std::string& principal,const std::string& original_epoch,const std::string& request,

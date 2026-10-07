@@ -47,7 +47,7 @@ struct EditorContentForm::Impl {
     std::string combo_value(const char* id)const{auto* raw=gtk_combo_box_text_get_active_text(GTK_COMBO_BOX_TEXT(combos.at(id)));need(raw!=nullptr,"editor.content_choice");std::string result=raw;g_free(raw);return result;}
     Json chosen(const char* id,const std::vector<ContentChoice>& values)const{const int n=gtk_combo_box_get_active(GTK_COMBO_BOX(combos.at(id)));need(n>=0&&static_cast<std::size_t>(n)<values.size(),"editor.content_choice");return values[static_cast<std::size_t>(n)].value;}
     void open(const Json& scene,const Json* widget,const configuration::ResourceSet& resources){
-        erase();need(scene.at("schema_version")=="0.3.0","editor.content_version");updating=true;
+        erase();need(scene.at("schema_version")!="0.2.0","editor.content_version");updating=true;
         try{choices=content_choices(resources);if(widget){selected=*widget;input=content_input(selected);}const std::string kind=selected.is_null()?"none":selected.at("kind").get<std::string>();
             for(const auto& f:input.fields)if(fields.count(f.first))text(fields.at(f.first),f.second);
             if(kind=="table"){column=0;columns();}

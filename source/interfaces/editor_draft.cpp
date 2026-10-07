@@ -166,7 +166,7 @@ void apply(Json& scene,const GroupWidgets& edit){
         {"layout",{{"base",{{"kind","fixed"},{"x",static_cast<double>(left)/64},{"y",static_cast<double>(top)/64},
             {"width",static_cast<double>(right-left)/64},{"height",static_cast<double>(bottom-top)/64}}}}},
         {"bindings",Json::array()},{"priority","normal"},{"children",members}};
-    if(scene.at("schema_version")=="0.3.0")group["content"]=Json::object();
+    if(scene.at("schema_version")!="0.2.0")group["content"]=Json::object();
     for(const auto& id:members)translate_variants(widget(scene,id),-left,-top);
     auto& list=owner(scene,members[0]);const auto index=static_cast<std::size_t>(std::distance(list.begin(),std::find(list.begin(),list.end(),members[0])));
     erase_ids(list,std::set<std::string>(members.begin(),members.end()));at_index(list,index,{edit.id});scene["widgets"].push_back(std::move(group));
@@ -191,7 +191,7 @@ void apply(Json& scene,const WrapWidgets& edit){
     std::vector<std::string> members;for(const auto& id:list)if(std::find(edit.ids.begin(),edit.ids.end(),id.get<std::string>())!=edit.ids.end())members.push_back(id);
     const auto index=static_cast<std::size_t>(std::distance(list.begin(),std::find(list.begin(),list.end(),members.front())));
     Json group={{"id",edit.id},{"kind","group"},{"title",edit.title},{"display",display},{"layout",edit.layout},{"priority",edit.priority},{"bindings",Json::array()},{"children",members}};
-    if(scene.at("schema_version")=="0.3.0")group["content"]=Json::object();
+    if(scene.at("schema_version")!="0.2.0")group["content"]=Json::object();
     erase_ids(list,std::set<std::string>(members.begin(),members.end()));at_index(list,index,{edit.id});scene["widgets"].push_back(std::move(group));
 }
 void apply(Json& scene,const UnwrapWidget& edit){
@@ -201,6 +201,24 @@ void apply(Json& scene,const UnwrapWidget& edit){
     erase_ids(list,{edit.id});at_index(list,index,members);auto& rows=scene["widgets"];
     rows.erase(std::remove_if(rows.begin(),rows.end(),[&](const auto& w){return w["id"]==edit.id;}),rows.end());
 }
+void apply(Json& scene,const SetWidgetLocks& edit){
+    need(scene.at("schema_version")!="0.2.0","editor.lock_version");need(!edit.ids.empty()&&edit.ids.size()<=256,"editor.targets");std::set<std::string> ids;
+    for(const auto& id:edit.ids){need(ids.insert(id).second,"editor.targets");(void)widget(scene,id);}
+    if(edit.locked)scene["schema_version"]="0.4.0";
+    for(const auto& id:edit.ids){auto& w=widget(scene,id);if(edit.locked)w["edit_locked"]=true;else w.erase("edit_locked");}
+}
+template<class T>std::vector<std::string> targets(const T& edit){return edit.ids;}
+std::vector<std::string> targets(const WidgetPropertyEdit& e){return {e.id};}
+std::vector<std::string> targets(const WidgetContentEdit& e){return {e.id};}
+std::vector<std::string> targets(const ResizeWidget& e){return {e.id};}
+std::vector<std::string> targets(const UngroupWidget& e){return {e.id};}
+std::vector<std::string> targets(const UnwrapWidget& e){return {e.id};}
+std::vector<std::string> targets(const RootDisplayEdit& e){return {e.root};}
+template<class T>void guard(const Json& scene,const T& edit){for(const auto& id:targets(edit))need(!edit_protected(scene,id),"editor.locked");}
+void guard(const Json&,const SceneThemeEdit&){}
+void guard(const Json&,const SetWidgetLocks&){}
+void guard(const Json& scene,const InsertWidget& edit){if(edit.parent)need(!edit_locked(scene,*edit.parent),"editor.locked");}
+void guard(const Json& scene,const ReparentWidgets& edit){for(const auto& id:edit.ids)need(!edit_protected(scene,id),"editor.locked");if(edit.parent)need(!edit_locked(scene,*edit.parent),"editor.locked");}
 template<class T> void edit_selection(Json& scene,std::vector<std::string>&,const T& edit){apply(scene,edit);}
 void edit_selection(Json& scene,std::vector<std::string>& selection,const WrapWidgets& edit){apply(scene,edit);selection={edit.id};}
 void edit_selection(Json& scene,std::vector<std::string>& selection,const UnwrapWidget& edit){
@@ -218,6 +236,28 @@ std::vector<std::string> surviving(const Json& scene,const std::vector<std::stri
 EditorDraft::EditorDraft(c::Authority a,c::Policy p,c::Authored value,std::string epoch,std::optional<SettingsResources> resources,bool large_commands)
     :transaction_(std::move(a),std::move(p),std::move(value),std::move(epoch),std::move(resources),large_commands){}
 const Json* EditorDraft::scene()const{return available()?&transaction_.draft_->scene:nullptr;}
+bool edit_locked(const Json& scene,const std::string& id){
+    std::map<std::string,const Json*> rows;std::map<std::string,std::string> parents;
+    for(const auto& w:scene.at("widgets")){rows.emplace(w.at("id").get<std::string>(),&w);if(w.contains("children"))for(const auto& child:w.at("children"))parents.emplace(child.get<std::string>(),w.at("id").get<std::string>());}
+    need(rows.count(id)!=0,"editor.target");auto current=id;
+    for(unsigned depth=0;depth<16;++depth){const auto row=rows.find(current);need(row!=rows.end(),"editor.target");if(row->second->value("edit_locked",false))return true;const auto parent=parents.find(current);if(parent==parents.end())return false;current=parent->second;}
+    throw protocol::Error("editor.depth");
+}
+bool edit_protected(const Json& scene,const std::string& id){
+    if(edit_locked(scene,id))return true;
+    std::map<std::string,const Json*> rows;for(const auto& w:scene.at("widgets"))rows.emplace(w.at("id").get<std::string>(),&w);
+    std::set<std::string> visited;
+    std::function<bool(const std::string&,unsigned)> visit=[&](const std::string& target,unsigned depth){
+        need(depth<=16&&visited.insert(target).second,"editor.depth");const auto row=rows.find(target);need(row!=rows.end(),"editor.target");const auto& w=*row->second;
+        if(w.value("edit_locked",false))return true;
+        if(w.contains("children"))for(const auto& child:w.at("children"))if(visit(child.get<std::string>(),depth+1))return true;
+        return false;
+    };return visit(id,1);
+}
+bool EditorDraft::locks_available()const{
+    if(!available()||scene()->at("schema_version")=="0.2.0"||!transaction_.large_commands_||!transaction_.context_||!transaction_.context_->capabilities.count("configuration.edit-locks")||!transaction_.context_->capabilities.count("scene.edit-locks"))return false;
+    try{transaction_.editable();transaction_.authorize_resources();c::authorize_authored({{"intent","preview"},{"policy_generation",std::to_string(transaction_.policy_.revision)},{"expected_revision",std::to_string(*revision())},{"operations",Json::array({{{"op","scene.replace"}}})}},transaction_.authority_,transaction_.policy_,*revision());return true;}catch(const protocol::Error&){return false;}
+}
 void EditorDraft::select(std::vector<std::string> ids){
     transaction_.editable();need(ids.size()<=256,"editor.targets");std::set<std::string> unique;
     for(const auto& id:ids)need(unique.insert(id).second&&exists(*scene(),id),"editor.selection");
@@ -227,7 +267,7 @@ std::size_t EditorDraft::history_bytes()const{std::size_t n=0;for(const auto& e:
 void EditorDraft::clear_history(){undo_.clear();redo_.clear();}
 bool EditorDraft::execute(const std::vector<SceneEdit>& edits){
     transaction_.editable();need(!edits.empty()&&edits.size()<=128,"editor.operations");auto candidate=*scene();auto selected=selected_;
-    try{for(const auto& edit:edits)std::visit([&](const auto& op){edit_selection(candidate,selected,op);},edit);}
+    try{for(const auto& edit:edits){if(std::holds_alternative<SetWidgetLocks>(edit))need(locks_available(),"editor.lock_unavailable");std::visit([&](const auto& op){guard(candidate,op);edit_selection(candidate,selected,op);},edit);}}
     catch(const Json::exception&){throw protocol::Error("editor.operation");}
     if(candidate==*scene())return false;
     Change change{{*scene(),selected_},{candidate,surviving(candidate,selected)},0};

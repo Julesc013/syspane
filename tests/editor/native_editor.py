@@ -32,14 +32,14 @@ class Input(Observer):
     def button(self,down):assert self.xt.XTestFakeButtonEvent(self.handle,1,down,0);self.sync()
 
 class Harness:
-    def __init__(self,exe,exit_exe,folder,mode,large=False,arrange=False,group=False,snap=False,properties=False,layout=False,container=False):
+    def __init__(self,exe,exit_exe,folder,mode,large=False,arrange=False,group=False,snap=False,properties=False,layout=False,container=False,locks=False):
         import gi
         gi.require_version('Atspi','2.0');gi.require_version('Gtk','3.0')
         from gi.repository import Atspi,GLib,Gtk,Gdk
         self.Atspi,self.GLib,self.Gtk,self.Gdk=Atspi,GLib,Gtk,Gdk
         Gtk.init([]);Atspi.set_timeout(200,500);verify();folder.mkdir(mode=0o700)
-        assert sum((large,arrange,group,snap,properties,layout,container))<=1
-        self.container=container;self.layout=layout;self.large=large;self.arrange=arrange;self.group=group;self.snap=snap;self.properties=properties;self.case_path=ROOT/('tests/editor/container-cases.json' if container else 'tests/editor/layout-authoring-cases.json' if layout else 'tests/configuration/large-command-cases.json' if large else 'tests/editor/arrange-cases.json' if arrange else 'tests/editor/group-cases.json' if group else 'tests/editor/snap-cases.json' if snap else 'tests/editor/content-properties-cases.json' if properties else 'tests/editor/native-cases.json')
+        assert sum((large,arrange,group,snap,properties,layout,container,locks))<=1
+        self.locks=locks;self.container=container;self.layout=layout;self.large=large;self.arrange=arrange;self.group=group;self.snap=snap;self.properties=properties;self.case_path=ROOT/('tests/editor/edit-lock-cases.json' if locks else 'tests/editor/container-cases.json' if container else 'tests/editor/layout-authoring-cases.json' if layout else 'tests/configuration/large-command-cases.json' if large else 'tests/editor/arrange-cases.json' if arrange else 'tests/editor/group-cases.json' if group else 'tests/editor/snap-cases.json' if snap else 'tests/editor/content-properties-cases.json' if properties else 'tests/editor/native-cases.json')
         self.cases=json.loads(self.case_path.read_text())
         if large:self.cases['drag']['expected']=self.cases['moved_scene']
         self.exe,self.exit_exe,self.folder,self.mode=exe,exit_exe,folder,mode
@@ -51,7 +51,7 @@ class Harness:
         self.observer=Observations(self.report);self.report['observation_helper_sha256']=sha(ROOT/'tests/editor/native_observation.py')
     def launch(self,mode=None,recovery=False):
         self.controls.clear();self.observer.addresses.clear()
-        args=[str(self.exit_exe),'--owned-editor-lab',str(self.exe),str(ROOT),str(self.directory),'drag'] if recovery else [str(self.exe),str(ROOT),str(self.directory),("container-" if self.container else "layout-" if self.layout else "large-" if self.large else "arrange-" if self.arrange else "group-" if self.group else "snap-" if self.snap else "properties-" if self.properties else "")+(mode or self.mode)]
+        args=[str(self.exit_exe),'--owned-editor-lab',str(self.exe),str(ROOT),str(self.directory),'drag'] if recovery else [str(self.exe),str(ROOT),str(self.directory),("locks-" if self.locks else "container-" if self.container else "layout-" if self.layout else "large-" if self.large else "arrange-" if self.arrange else "group-" if self.group else "snap-" if self.snap else "properties-" if self.properties else "")+(mode or self.mode)]
         self.proc=subprocess.Popen(args,stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=self.err,bufsize=0)
         def collect(child):
             for line in child.stdout:
@@ -179,7 +179,7 @@ class Harness:
         for doc in value.values():doc['revision']=revision
         return value
     def check(self,scene=None,revision='40'):
-        assert stored(self.directory)==self.documents(scene,revision),'stored documents differ';check_resources(self.directory,manifest_version="0.3.0" if self.large else "0.2.0")
+        assert stored(self.directory)==self.documents(scene,revision),'stored documents differ';check_resources(self.directory,manifest_version="0.3.0" if self.large or self.locks else "0.2.0")
     def note(self,name):self.report['observations'].append(dict(case=name,status=self.status(),documents=stored(self.directory)))
     def close(self):
         if self.proc and self.proc.poll() is None:self.proc.kill();self.proc.wait(timeout=5)

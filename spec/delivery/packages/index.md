@@ -47,6 +47,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Unavailable container preview and authored recovery](w-10-container-preview.md) — Distinguish renderer rejection from an absent display and retain usable authored controls.
 - [Explicit reflowing container transformations](w-10-containers.md) — Wrap and unwrap authored layout rules without silently freezing responsive or flow geometry.
 - [Native widget content and scene-theme properties](w-10-content-properties.md) — Expose existing table, chart, image and theme contracts through a bounded native buffer and the shared editor draft.
+- [Persistent native editor locks](w-10-edit-locks.md) — Versioned authored locks, explicit unlock, protected direct editing and durable native verification.
 - [Shared editor draft and typed local operations](w-10-editor-draft.md) — Reversible scene editing through the existing authored transaction owner.
 - [Reversible native grouping with explicit geometry](w-10-group.md) — Close group and ungroup transformations, selection history, drawing order and native persistence.
 - [Native keyboard input completion](w-10-keyboard-input.md) — Acknowledge navigation before requesting a different focus target.

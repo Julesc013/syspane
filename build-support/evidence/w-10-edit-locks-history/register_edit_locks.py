@@ -1,0 +1,32 @@
+from pathlib import Path
+import json
+r=Path.cwd()
+def edit(n,a,b):
+ p=r/n;s=p.read_text();assert a in s,(n,a);p.write_text(s.replace(a,b),encoding='utf-8',newline='\n')
+edit('CMakeLists.txt','tests/editor/container_tests.cpp)','tests/editor/container_tests.cpp tests/editor/edit_lock_tests.cpp)')
+edit('CMakeLists.txt','target_link_libraries(syspane_editor_tests PRIVATE syspane_editor_draft syspane_scene)','target_link_libraries(syspane_editor_tests PRIVATE syspane_editor_draft syspane_scene syspane_async_commands)')
+edit('CMakeLists.txt','CONTAINER-POLICY CONTAINER-COMPAT)','CONTAINER-POLICY CONTAINER-COMPAT LOCK-SCHEMAS LOCK-DRAFT LOCK-GUARDS LOCK-INHERIT LOCK-ATOMIC LOCK-POLICY LOCK-NEGOTIATE LOCK-DURABLE)')
+edit('tests/editor/editor_draft_tests.cpp','void run_container(const std::string&,const std::string&);','void run_container(const std::string&,const std::string&);\nvoid run_edit_lock(const std::string&,const std::string&);')
+edit('tests/editor/editor_draft_tests.cpp','if(name.substr(0,10)=="CONTAINER-")','if(name.substr(0,5)=="LOCK-"){run_edit_lock(name.substr(5),root);return;}\n    if(name.substr(0,10)=="CONTAINER-")')
+p=r/'build-support/components.json';v=json.loads(p.read_bytes());row=next(x for x in v['components'] if x['target']=='syspane_editor_tests');row['sources'].append('tests/editor/edit_lock_tests.cpp');row['allowed_dependencies'].append('syspane_async_commands');p.write_text(json.dumps(v,indent=2)+'\n',encoding='utf-8',newline='\n')
+edit('CMakeLists.txt','add_test(NAME native.EDITOR-CONTAINERS','add_test(NAME native.EDITOR-LOCKS COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/editor/native_edit_locks.py"\n            "$<TARGET_FILE:syspane_editor_window>" "$<TARGET_FILE:syspane_editor_exit_probe>" "${CMAKE_BINARY_DIR}/native-evidence")\n        set_tests_properties(native.EDITOR-LOCKS PROPERTIES TIMEOUT 600)\n        add_test(NAME native.EDITOR-CONTAINERS')
+n='tests/editor/native_editor.py'
+edit(n,'layout=False,container=False):','layout=False,container=False,locks=False):')
+edit(n,'properties,layout,container))','properties,layout,container,locks))')
+edit(n,'self.container=container;','self.locks=locks;self.container=container;')
+edit(n,"ROOT/('tests/editor/container-cases.json' if container", "ROOT/('tests/editor/edit-lock-cases.json' if locks else 'tests/editor/container-cases.json' if container")
+edit(n,'("container-" if self.container','("locks-" if self.locks else "container-" if self.container')
+edit(n,'"0.3.0" if self.large else','"0.3.0" if self.large or self.locks else')
+n='tests/editor/editor_window.cpp'
+edit(n,'container_mode=false;','container_mode=false,locks_mode=false;')
+edit(n,'std::optional<ui::SettingsResources> resource_context(){','std::set<std::string> capabilities()const{return locks_mode?std::set<std::string>{"scene.content","scene.edit-locks","configuration.edit-locks"}:std::set<std::string>{"scene.content"};}\n    std::optional<ui::SettingsResources> resource_context(){')
+edit(n,'saved.resources->selection(),{"scene.content"}','saved.resources->selection(),capabilities()')
+edit(n,'*store,{"scene.content"},','*store,capabilities(),')
+edit(n,'content=true;container_mode=','content=true;locks_mode=mode.substr(0,6)=="locks-";container_mode=')
+edit(n,'large=mode.substr(0,6)=="large-"','large=locks_mode||mode.substr(0,6)=="large-"')
+edit(n,'behavior=container_mode?','behavior=locks_mode?mode.substr(6):container_mode?')
+edit(n,'c::ResourceProvider imports{{"scene.content"},','c::ResourceProvider imports{capabilities(),')
+edit(n,'root+(container_mode?', 'root+(locks_mode?"/tests/editor/edit-lock-cases.json":container_mode?')
+edit(n,'scene["revision"]="39";','if(locks_mode&&behavior=="nested")scene=read(root+"/tests/editor/edit-lock-cases.json")["grouped"];scene["revision"]="39";')
+edit(n,'large?"0.5.0":"0.4.0"','locks_mode?"0.6.0":large?"0.5.0":"0.4.0"')
+edit(n,'if(behavior=="wrong-container"){','if(behavior=="wrong-lock"){auto changed=c::parse_command(body);changed["operations"][0]["scene"]["widgets"][0].erase("edit_locked");body=changed.dump();}\n            if(behavior=="wrong-container"){')

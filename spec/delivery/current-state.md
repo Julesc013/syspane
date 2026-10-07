@@ -12,12 +12,22 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-07T11:38:29.791582+00:00", "scope": "Explicit reflowing container checkpoint and remaining editor/release boundaries"}
+updated: {"by": "codex", "at": "2026-10-07T12:48:21.342320+00:00", "scope": "Persistent editor lock checkpoint and remaining editor/release boundaries"}
 ---
 
 # Current state and next admitted boundary
 
-The latest [container checkpoint](containers-handoff.md) adds explicit Wrap and
+The latest [edit-lock checkpoint](edit-locks-handoff.md) adds persistent locks
+through scene 0.4, negotiated command 0.6 and the existing resource/transaction
+owners. Native selection remains available while ordinary protected edits reject;
+explicit unlock and Undo/Redo preserve exact authored state. Continue conditional
+visibility/typography, clipboard/recovery drafts and installed ownership, then
+full accessibility/performance and all five complete-edition release tracks.
+First investigate the intermittent large-scene Apply/Undo focus failures captured
+again in this checkpoint; both full regression attempts failed. Bounded diagnostic
+passes do not establish a cause or repair it. This checkpoint is not qualified.
+
+The earlier [container checkpoint](containers-handoff.md) adds explicit Wrap and
 Unwrap for flowing children, nested containers and responsive rules. Children keep
 every authored value and resolve in their new parent; native dialogs explain reflow
 before one atomic draft operation. Fixed-geometry Group/Ungroup remain unchanged.

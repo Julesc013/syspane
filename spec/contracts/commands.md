@@ -82,3 +82,10 @@ accepted/stored/durable/activated/visible, cancellation and result retrieval.
 Settings defaults and overlapping command constraints derive from the initial
 registry. Check current policy during prepare, commit and activation. Tightening
 policy revokes prohibited work/disclosure independently of slow cosmetic activation.
+
+## Persistent editor locks
+
+[Command 0.6](command-v0.6.schema.json) retains the complete-command 0.5 bounds and
+adds scene 0.4 to its versioned replacement union. It requires configuration.edit-locks
+alongside large-command, resource and scene-content negotiation. [The package](../delivery/packages/w-10-edit-locks.md)
+owns admission and exact guard semantics. Old command schemas remain unchanged.
