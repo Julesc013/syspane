@@ -1,0 +1,74 @@
+[
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-07T00:17:21.476486+00:00",
+    "finished_at": "2026-10-07T00:17:28.461863+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 6442450944,\n  \"checkout_out_bytes\": 1883853540,\n  \"linux_campaign_bytes\": 4266347506,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/image_pipeline_step.py",
+      "linux-x64-gcc13",
+      "build"
+    ],
+    "started_at": "2026-10-07T00:17:28.462307+00:00",
+    "finished_at": "2026-10-07T00:17:39.428732+00:00",
+    "exit": 0,
+    "stdout": "[1/2] Building CXX object CMakeFiles/syspane_image_job_tests.dir/tests/scene/image_job_tests.cpp.o\n[2/2] Linking CXX executable syspane_image_job_tests\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-09-image-pipeline/linux-x64-gcc13-build-9d154618cc\n",
+    "stderr": ""
+  },
+  {
+    "step": "focus",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-07T00:17:39.429025+00:00",
+    "finished_at": "2026-10-07T00:17:40.053213+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 6442450944,\n  \"checkout_out_bytes\": 1885217121,\n  \"linux_campaign_bytes\": 4266387524,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "focus",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/image_pipeline_step.py",
+      "linux-x64-gcc13",
+      "focus"
+    ],
+    "started_at": "2026-10-07T00:17:40.053488+00:00",
+    "finished_at": "2026-10-07T00:17:55.135351+00:00",
+    "exit": 0,
+    "stdout": "Test project /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n    Start   9: native.IMAGE-DECODE\n1/7 Test   #9: native.IMAGE-DECODE ..............   Passed    3.42 sec\n    Start  10: native.IMAGE-JOB\n2/7 Test  #10: native.IMAGE-JOB .................   Passed    3.26 sec\n    Start  15: scene.IMAGE-FIT\n3/7 Test  #15: scene.IMAGE-FIT ..................   Passed    0.02 sec\n    Start  16: scene.IMAGE-ORIENTATION\n4/7 Test  #16: scene.IMAGE-ORIENTATION ..........   Passed    0.00 sec\n    Start  17: scene.IMAGE-LIMITS\n5/7 Test  #17: scene.IMAGE-LIMITS ...............   Passed    0.00 sec\n    Start 149: composition.graph\n6/7 Test #149: composition.graph ................   Passed    0.08 sec\n    Start 150: composition.reject_forbidden\n7/7 Test #150: composition.reject_forbidden .....   Passed    0.17 sec\n\n100% tests passed, 0 tests failed out of 7\n\nTotal Test time (real) =   6.97 sec\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-09-image-pipeline/linux-x64-gcc13-focus-3a9a6428aa\n",
+    "stderr": ""
+  }
+]

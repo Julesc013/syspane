@@ -35,7 +35,8 @@ behaviour has been implemented. See [audit disposition](spec/delivery/audit-2026
 - [x] W-09 shared chart retention: bounded measured windows, exact numeric samples, duplicate/conflict handling, gap/epoch resets and synchronous borrows. See the [handoff](spec/delivery/chart-history-handoff.md).
 - [x] W-09 initial Linux native charts: exact portable axis/pixel projection, every relevant publication, complete selector clock context, aggregate budgets, history-channel erasure and exact accessible point content. See the [handoff](spec/delivery/native-chart-handoff.md).
 - [ ] W-09 chart product integration: native accessibility navigation, installed live-producer routing, native editor controls and Windows/Mac rendering adapters.
-- [ ] W-09 native images: close decoder, external-reference, animation and resource contracts before enabling rendering.
+- [x] W-09 image pipeline: exact fit/orientation, bounded PNG/JPEG/static-SVG decoding, filesystem/network restrictions and nonblocking child ownership. See the [handoff](spec/delivery/image-pipeline-handoff.md).
+- [ ] W-09 native image integration: bind asynchronous results to exact resource/scene/policy identity, aggregate budgets, cancellation and independent pixels/accessibility erasure before enabling image widgets.
 - [ ] W-09 full native projection: close and implement remaining widget content, installed producer/catalog/policy ownership, full native accessibility, visible host activation/recovery and Windows/Mac adapters.
 
 - [x] W-07 controller demand component: merge authorized field/entity/age/priority/recording leases, apply cadence/concurrency policy, age priorities and retain cancelled slots until confirmed stop. See the [handoff](spec/delivery/demand-owner-handoff.md).

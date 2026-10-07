@@ -1,5 +1,28 @@
 # Developer setup and checks
 
+The [image pipeline package](../../spec/delivery/packages/w-09-image-pipeline.md)
+adds shared premultiplied bilinear fit/orientation and the Linux
+`SysPane.ImageWorker` / `rendering::ImageJob` boundary. The worker accepts PNG,
+JPEG and the declared static SVG profile from bounded bytes. Its installed codec,
+loader, relevant header and kernel identities are in `build-support/image-runtime.json`.
+Linux requires Landlock ABI >= 3, seccomp and the pinned runtime; startup fails
+when containment cannot be installed. No privileged installation is involved.
+
+Supply ImageJob an admitted canonical worker ELF, declared media type and immutable
+encoded bytes. Poll without waiting; cancellation suppresses take immediately but
+the owner must retain the job until actual stop is observed. The worker receives
+no image path or base URI. The job binds the original input SHA256, limits IPC
+and accepts output only after successful exit and reaping. This low-level API
+does not grant disclosure permission. SceneSurface still rejects image widgets
+until an asynchronous scene/policy owner and external erasure oracle are integrated.
+
+After ordinary workspace preflight/configure/build, run
+`ctest --preset <profile> -R '^scene[.]IMAGE-' --output-on-failure` on each toolchain.
+Linux adds `-R '^native[.]IMAGE-(DECODE|JOB)$'`. The fixed portable oracle is checked
+with `python tests/scene/image_fit_oracle.py --check`. Native tests use owned public
+fixtures, verify actual worker pixels and rejection, and inspect OS limits and
+termination; they do not test an installed desktop image widget.
+
 The [native chart package](../../spec/delivery/packages/w-09-native-chart.md)
 connects scene 0.3 charts to the Linux SceneSurface. Grant operational disclosure
 on `history` as well as desktop/accessibility. `receive` takes an optional map of

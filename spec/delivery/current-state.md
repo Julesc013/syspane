@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-06T23:33:59Z", "scope": "Native chart geometry, history policy and external verification"}
+updated: {"by": "codex", "at": "2026-10-07T00:12:51Z", "scope": "Bounded native image pipeline and nonblocking worker ownership"}
 ---
 
 # Current state and next admitted boundary
@@ -22,7 +22,13 @@ The active objective is now the [complete 0.1.0 release](release-0.1.0.md) for W
 required but is no longer the final completion boundary. Legacy version/architecture
 floors, native labs and complete desktop/package evidence remain unresolved.
 
-The latest [native chart checkpoint](native-chart-handoff.md) adds exact portable
+The latest [image pipeline checkpoint](image-pipeline-handoff.md) adds exact shared
+fit/orientation and bounded Linux PNG/JPEG/static-SVG decoding. A nonblocking owner
+caps IPC, suppresses cancelled output and requires actual worker termination before
+disclosing decoded pixels. Operational scene/policy integration and native image
+erasure remain the next boundary; image widgets are not yet enabled.
+
+The earlier [native chart checkpoint](native-chart-handoff.md) adds exact portable
 numeric geometry and Linux chart rendering through the current-policy scene owner.
 Every relevant admitted publication feeds bounded history; missing selector clocks,
 gaps, conflicts and truncation remain explicit. Owned X11 pixels and exact AT-SPI

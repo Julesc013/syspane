@@ -443,7 +443,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "bee63ccc33f08e2513e90a1e2c2fda87935260593859bf3637bb7827f17afc87"
+      "sha256": "0b71c79a5f9545cbcfab6dac475d6aac458762cecf50ac770c47de4fc89bdd36"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -774,6 +774,17 @@
         "SP-W04-PACKAGE"
       ],
       "sha256": "bbbd85e5204a08250c06f150ccf87d1aac042374a6014a0f96a52b7399b6665b"
+    },
+    {
+      "id": "SP-IMAGE-PIPELINE-HANDOFF",
+      "path": "delivery/image-pipeline-handoff.md",
+      "title": "Bounded image pipeline checkpoint",
+      "description": "Exact portable fit and isolated Linux PNG/JPEG/static-SVG decoding with nonblocking child ownership.",
+      "requires": [
+        "SP-W09-IMAGE-PIPELINE",
+        "SP-NATIVE-CHART-HANDOFF"
+      ],
+      "sha256": "5351ca700833da52dd653c72f76c47bdf9c5ae79fd7357871abe3b58515fcbf5"
     },
     {
       "id": "SP-READINESS",
@@ -1321,6 +1332,17 @@
         "SP-W09-BINDINGS"
       ],
       "sha256": "c538e688d0b6ba748a37088551657f26ecb9be872d055cdff0b32c2cc5cb6d42"
+    },
+    {
+      "id": "SP-W09-IMAGE-PIPELINE",
+      "path": "delivery/packages/w-09-image-pipeline.md",
+      "title": "Bounded pinned image pipeline",
+      "description": "Static image admission, isolated native decoding and exact premultiplied fit geometry before scene integration.",
+      "requires": [
+        "SP-W09-SCENE-CONTENT",
+        "SP-W09-NATIVE-CHART"
+      ],
+      "sha256": "a2022b5bab4b33b439f273fed10c7f9832f91da9b5a770be6dac54093df76757"
     },
     {
       "id": "SP-W09-LAYOUT",

@@ -79,6 +79,30 @@ Child Child::launch_self(const std::vector<std::string>& arguments) {
     return child;
 }
 std::uint64_t Child::id() const { return static_cast<std::uint64_t>(impl_->pid); }
+Child Child::launch_program(const std::string& path,const std::vector<std::string>& arguments,int input,int output,int error){
+    check_child_arguments(arguments);
+    if(input<3||output<3||error<3)throw ChildError("child.descriptors");
+    struct sigaction action{};
+    if(::sigaction(SIGCHLD,nullptr,&action)||action.sa_handler!=SIG_DFL||(action.sa_flags&SA_NOCLDWAIT))throw ChildError("child.reaper_policy");
+    std::array<char,4096> canonical{};
+    if(path.empty()||path.size()>512||path.front()!='/'||!::realpath(path.c_str(),canonical.data())||path!=canonical.data())throw ChildError("child.program_path");
+    struct File{int fd;~File(){if(fd>=0)::close(fd);}} file{::open(path.c_str(),O_RDONLY|O_CLOEXEC|O_NOFOLLOW)};
+    struct stat info{};std::array<unsigned char,4> magic{};
+    if(file.fd<3||::fstat(file.fd,&info)||!S_ISREG(info.st_mode)||(info.st_mode&(S_ISUID|S_ISGID))||!(info.st_mode&0111)||
+       ::pread(file.fd,magic.data(),magic.size(),0)!=4||magic!=std::array<unsigned char,4>{0x7f,'E','L','F'})throw ChildError("child.program_type");
+    Actions actions;
+    if(posix_spawn_file_actions_adddup2(&actions.value,input,0)||posix_spawn_file_actions_adddup2(&actions.value,output,1)||
+       posix_spawn_file_actions_adddup2(&actions.value,error,2)||posix_spawn_file_actions_adddup2(&actions.value,file.fd,3)||
+       posix_spawn_file_actions_addclosefrom_np(&actions.value,4))throw ChildError("child.actions");
+    std::vector<std::string> storage{path};storage.insert(storage.end(),arguments.begin(),arguments.end());std::vector<char*> argv;
+    for(auto& argument:storage)argv.push_back(argument.data());
+    argv.push_back(nullptr);char language[]="LANG=C.UTF-8";char* environment[]={language,nullptr};
+    auto impl=std::make_unique<Impl>();
+    if(::posix_spawn(&impl->pid,"/proc/self/fd/3",&actions.value,nullptr,argv.data(),environment))throw ChildError("child.launch");
+    Child child(std::move(impl));child.impl_->pidfd=static_cast<int>(::syscall(SYS_pidfd_open,child.impl_->pid,0));
+    if(child.impl_->pidfd<0)throw ChildError("child.pidfd");
+    return child;
+}
 std::optional<ChildExit> Child::wait(unsigned milliseconds) {
     if (milliseconds > 5000) throw ChildError("child.wait_limit");
     if (impl_->exited) return impl_->exited;

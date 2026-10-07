@@ -1,0 +1,38 @@
+[
+  {
+    "step": "test",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-07T00:11:21.593788+00:00",
+    "finished_at": "2026-10-07T00:11:22.226579+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 6442450944,\n  \"checkout_out_bytes\": 1879725839,\n  \"linux_campaign_bytes\": 4266056912,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "test",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/image_pipeline_step.py",
+      "linux-x64-gcc13",
+      "test"
+    ],
+    "started_at": "2026-10-07T00:11:22.226962+00:00",
+    "finished_at": "2026-10-07T00:13:04.418735+00:00",
+    "exit": 0,
+    "stdout": "rt  38: scene.BIND-POLICY\n33/77 Test  #38: scene.BIND-POLICY ................   Passed    0.01 sec\n      Start  39: scene.BIND-BOUNDS\n34/77 Test  #39: scene.BIND-BOUNDS ................   Passed    0.01 sec\n      Start  40: scene.BIND-LIFETIME\n35/77 Test  #40: scene.BIND-LIFETIME ..............   Passed    0.01 sec\n      Start  41: scene.BIND-INVALID\n36/77 Test  #41: scene.BIND-INVALID ...............   Passed    0.01 sec\n      Start  42: scene.BIND-MULTISOURCE\n37/77 Test  #42: scene.BIND-MULTISOURCE ...........   Passed    0.00 sec\n      Start  43: scene.BIND-RESTART\n38/77 Test  #43: scene.BIND-RESTART ...............   Passed    0.01 sec\n      Start  44: scene.BIND-REAL-SORT\n39/77 Test  #44: scene.BIND-REAL-SORT .............   Passed    0.01 sec\n      Start  45: scene.BIND-COLLECTION-BOUND\n40/77 Test  #45: scene.BIND-COLLECTION-BOUND ......   Passed    0.07 sec\n      Start  46: scene.ROOT-FLOW\n41/77 Test  #46: scene.ROOT-FLOW ..................   Passed    0.01 sec\n      Start  47: scene.STACK-V\n42/77 Test  #47: scene.STACK-V ....................   Passed    0.01 sec\n      Start  48: scene.STACK-H\n43/77 Test  #48: scene.STACK-H ....................   Passed    0.01 sec\n      Start  49: scene.PRIORITY\n44/77 Test  #49: scene.PRIORITY ...................   Passed    0.01 sec\n      Start  50: scene.FAIR-SHRINK\n45/77 Test  #50: scene.FAIR-SHRINK ................   Passed    0.01 sec\n      Start  51: scene.OVERFLOW\n46/77 Test  #51: scene.OVERFLOW ...................   Passed    0.01 sec\n      Start  52: scene.FIXED-GROUP\n47/77 Test  #52: scene.FIXED-GROUP ................   Passed    0.01 sec\n      Start  53: scene.CANVAS\n48/77 Test  #53: scene.CANVAS .....................   Passed    0.01 sec\n      Start  54: scene.GRID\n49/77 Test  #54: scene.GRID .......................   Passed    0.01 sec\n      Start  55: scene.GRID-OVERFLOW\n50/77 Test  #55: scene.GRID-OVERFLOW ..............   Passed    0.01 sec\n      Start  56: scene.NESTED\n51/77 Test  #56: scene.NESTED .....................   Passed    0.01 sec\n      Start  57: scene.BREAKPOINT-EQUAL\n52/77 Test  #57: scene.BREAKPOINT-EQUAL ...........   Passed    0.01 sec\n      Start  58: scene.BREAKPOINT-BELOW\n53/77 Test  #58: scene.BREAKPOINT-BELOW ...........   Passed    0.01 sec\n      Start  59: scene.DISPLAY-MISSING\n54/77 Test  #59: scene.DISPLAY-MISSING ............   Passed    0.01 sec\n      Start  60: scene.DISPLAY-AMBIGUOUS\n55/77 Test  #60: scene.DISPLAY-AMBIGUOUS ..........   Passed    0.01 sec\n      Start  61: scene.DISPLAY-REMOVED\n56/77 Test  #61: scene.DISPLAY-REMOVED ............   Passed    0.01 sec\n      Start  62: scene.SAFE-REGION\n57/77 Test  #62: scene.SAFE-REGION ................   Passed    0.01 sec\n      Start  63: scene.EXCLUSION-TIE\n58/77 Test  #63: scene.EXCLUSION-TIE ..............   Passed    0.01 sec\n      Start  64: scene.NO-REGION\n59/77 Test  #64: scene.NO-REGION ..................   Passed    0.01 sec\n      Start  65: scene.PIXELS\n60/77 Test  #65: scene.PIXELS .....................   Passed    0.01 sec\n      Start  66: scene.PIXEL-CLIP\n61/77 Test  #66: scene.PIXEL-CLIP .................   Passed    0.01 sec\n      Start  67: scene.READABLE-FIXED\n62/77 Test  #67: scene.READABLE-FIXED .............   Passed    0.01 sec\n      Start  68: scene.READABLE-FLOW\n63/77 Test  #68: scene.READABLE-FLOW ..............   Passed    0.01 sec\n      Start  69: scene.OVERLAP\n64/77 Test  #69: scene.OVERLAP ....................   Passed    0.01 sec\n      Start  70: scene.DISPLAY-CONFLICT\n65/77 Test  #70: scene.DISPLAY-CONFLICT ...........   Passed    0.01 sec\n      Start  71: scene.MISSING-METRICS\n66/77 Test  #71: scene.MISSING-METRICS ............   Passed    0.01 sec\n      Start  72: scene.EXCLUSION-ORDER\n67/77 Test  #72: scene.EXCLUSION-ORDER ............   Passed    0.01 sec\n      Start  73: scene.QUANTIZED-FIXED\n68/77 Test  #73: scene.QUANTIZED-FIXED ............   Passed    0.01 sec\n      Start  74: scene.QUANTIZED-GAP\n69/77 Test  #74: scene.QUANTIZED-GAP ..............   Passed    0.01 sec\n      Start  75: scene.NESTED-BREAKPOINT\n70/77 Test  #75: scene.NESTED-BREAKPOINT ..........   Passed    0.01 sec\n      Start  76: scene.NATIVE-METRICS\n71/77 Test  #76: scene.NATIVE-METRICS .............   Passed    0.01 sec\n      Start  77: scene.LIMITS\n72/77 Test  #77: scene.LIMITS .....................   Passed    0.22 sec\n      Start  78: scene.EXCLUSION-EXHAUSTIVE\n73/77 Test  #78: scene.EXCLUSION-EXHAUSTIVE .......   Passed    0.40 sec\n      Start 121: native.TRANSACTION-SUPERVISION\n74/77 Test #121: native.TRANSACTION-SUPERVISION ...   Passed   47.08 sec\n      Start 149: composition.graph\n75/77 Test #149: composition.graph ................   Passed    0.08 sec\n      Start 150: composition.reject_forbidden\n76/77 Test #150: composition.reject_forbidden .....   Passed    0.21 sec\n      Start 189: native.RECOVERY-01\n77/77 Test #189: native.RECOVERY-01 ...............   Passed   33.69 sec\n\n100% tests passed, 0 tests failed out of 77\n\nTotal Test time (real) =  91.24 sec\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-09-image-pipeline/linux-x64-gcc13-test-6232cbe29b\n",
+    "stderr": ""
+  }
+]

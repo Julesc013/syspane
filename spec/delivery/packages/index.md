@@ -32,6 +32,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Independent transaction deadlines and controller recovery](w-08-supervised-transactions.md) — Bound uncooperative transaction work without killing threads or replaying uncertain mutations.
 - [Policy-bound authored scene bindings](w-09-bindings.md) — Resolve existing selectors and pins against scoped immutable producer views without name-based rebinding.
 - [Bounded measured chart history](w-09-chart-history.md) — Exact sample admission, discontinuities and bounded retention before native chart drawing.
+- [Bounded pinned image pipeline](w-09-image-pipeline.md) — Static image admission, isolated native decoding and exact premultiplied fit geometry before scene integration.
 - [Deterministic portable scene layout](w-09-layout.md) — Resolve admitted scene geometry from explicit topology and native readable metrics without mutating authored state.
 - [Policy-owned native charts](w-09-native-chart.md) — Exact numeric geometry and every-publication history feed with native pixels and accessibility erasure.
 - [Native Linux text metrics and raster adapter](w-09-native-text.md) — Bounded plain-text shaping and painting with explicit native metrics, fallback and pixel ownership.

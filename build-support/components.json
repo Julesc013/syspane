@@ -1702,14 +1702,16 @@
         "source/scene/layout.hpp",
         "source/scene/bindings.hpp",
         "source/scene/chart_history.hpp",
-        "source/scene/chart_plot.hpp"
+        "source/scene/chart_plot.hpp",
+        "source/scene/image.hpp"
       ],
       "private_interfaces": [],
       "sources": [
         "source/scene/layout.cpp",
         "source/scene/bindings.cpp",
         "source/scene/chart_history.cpp",
-        "source/scene/chart_plot.cpp"
+        "source/scene/chart_plot.cpp",
+        "source/scene/image.cpp"
       ],
       "allowed_dependencies": [
         "syspane_authored",
@@ -1739,7 +1741,8 @@
         "tests/scene/layout_tests.cpp",
         "tests/scene/binding_tests.cpp",
         "tests/scene/chart_history_tests.cpp",
-        "tests/scene/chart_plot_tests.cpp"
+        "tests/scene/chart_plot_tests.cpp",
+        "tests/scene/image_fit_tests.cpp"
       ],
       "allowed_dependencies": [
         "syspane_scene",
@@ -1864,6 +1867,114 @@
       "target_requirements": [
         "cxx17",
         "native_text"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
+    },
+    {
+      "id": "native-image",
+      "target": "syspane_native_image",
+      "type": "STATIC_LIBRARY",
+      "source_owner": "source/rendering/",
+      "public_interfaces": [
+        "source/rendering/image_decode.hpp"
+      ],
+      "private_interfaces": [],
+      "sources": [
+        "source/rendering/image_decode_linux.cpp",
+        "source/rendering/image_sandbox_linux.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_scene",
+        "PkgConfig::PIXBUF"
+      ],
+      "target_requirements": [
+        "cxx17",
+        "native_image"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
+    },
+    {
+      "id": "image-worker",
+      "target": "syspane_image_worker",
+      "type": "EXECUTABLE",
+      "source_owner": "source/application/",
+      "public_interfaces": [],
+      "private_interfaces": [],
+      "sources": [
+        "source/application/image_worker.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_native_image",
+        "syspane_child"
+      ],
+      "target_requirements": [
+        "cxx17",
+        "native_image"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
+    },
+    {
+      "id": "image-job",
+      "target": "syspane_image_job",
+      "type": "STATIC_LIBRARY",
+      "source_owner": "source/rendering/",
+      "public_interfaces": [
+        "source/rendering/image_job.hpp"
+      ],
+      "private_interfaces": [],
+      "sources": [
+        "source/rendering/image_job_linux.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_scene",
+        "syspane_child"
+      ],
+      "target_requirements": [
+        "cxx17",
+        "native_image"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
+    },
+    {
+      "id": "image-job-tests",
+      "target": "syspane_image_job_tests",
+      "type": "EXECUTABLE",
+      "source_owner": "tests/scene/",
+      "public_interfaces": [],
+      "private_interfaces": [],
+      "sources": [
+        "tests/scene/image_job_tests.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_image_job"
+      ],
+      "target_requirements": [
+        "cxx17",
+        "native_image"
       ],
       "roles": [
         "development_test"

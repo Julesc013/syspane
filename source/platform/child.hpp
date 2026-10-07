@@ -33,6 +33,11 @@ public:
     void request_stop(); // Does not assert termination. Only wait() supplies proof.
 #if defined(__linux__)
     void request_terminate(); // Exact held child SIGTERM; still requires wait().
+    // Executes a held canonical ELF with only the supplied stdio, fd 3 holding
+    // that ELF, and a clean environment. Borrowed descriptors must be >= 3.
+    // The child entry point must close fd 3 and arm its parent lifetime.
+    static Child launch_program(const std::string& path,const std::vector<std::string>& arguments,
+                                int input,int output,int error);
 #endif
 private:
     struct Impl;

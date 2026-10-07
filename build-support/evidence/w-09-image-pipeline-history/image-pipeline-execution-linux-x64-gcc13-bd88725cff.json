@@ -1,0 +1,110 @@
+[
+  {
+    "step": "configure",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-07T00:02:25.655626+00:00",
+    "finished_at": "2026-10-07T00:02:32.963077+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 6442450944,\n  \"checkout_out_bytes\": 1898883346,\n  \"linux_campaign_bytes\": 4261988839,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "configure",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/image_pipeline_step.py",
+      "linux-x64-gcc13",
+      "configure"
+    ],
+    "started_at": "2026-10-07T00:02:32.963562+00:00",
+    "finished_at": "2026-10-07T00:02:47.926519+00:00",
+    "exit": 0,
+    "stdout": "Preset CMake variables:\n\n  BUILD_TESTING=\"ON\"\n  CMAKE_BUILD_TYPE=\"Debug\"\n  CMAKE_CXX_COMPILER=\"g++\"\n  SYSPANE_PROFILE=\"linux-x64-gcc13\"\n\nprofile verified: linux-x64-gcc13\nvendored dependency digests: pass\ndiagnostic toolkit verified: GTK 3.24.41 / Ubuntu 3.24.41-4ubuntu1.3\nnative text dependency identity verified: 358 files\nnative image dependencies verified: 344 files\nnative GJS clock build dependencies verified\n-- Configuring done (5.7s)\n-- Generating done (0.0s)\n-- Build files have been written to: /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-09-image-pipeline/linux-x64-gcc13-configure-fb307b8a3d\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-07T00:02:47.926835+00:00",
+    "finished_at": "2026-10-07T00:02:48.544680+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 6442450944,\n  \"checkout_out_bytes\": 1900233068,\n  \"linux_campaign_bytes\": 4261998516,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/image_pipeline_step.py",
+      "linux-x64-gcc13",
+      "build"
+    ],
+    "started_at": "2026-10-07T00:02:48.545005+00:00",
+    "finished_at": "2026-10-07T00:03:04.924984+00:00",
+    "exit": 0,
+    "stdout": "[1/17] Building CXX object CMakeFiles/syspane_image_worker.dir/source/application/image_worker.cpp.o\n[2/17] Building CXX object CMakeFiles/syspane_image_job.dir/source/rendering/image_job_linux.cpp.o\n[3/17] Building CXX object CMakeFiles/syspane_child.dir/source/platform/child_linux.cpp.o\n[4/17] Linking CXX static library libsyspane_child.a\n[5/17] Building CXX object CMakeFiles/syspane_command_probe.dir/source/application/command_supervisor.cpp.o\n[6/17] Linking CXX static library libsyspane_image_job.a\n[7/17] Linking CXX executable SysPane.ImageWorker\n[8/17] Building CXX object CMakeFiles/syspane_command_probe.dir/source/application/command_probe.cpp.o\n[9/17] Linking CXX executable SysPane.CommandProbe\n[10/17] Building CXX object CMakeFiles/syspane_image_job_tests.dir/tests/scene/image_job_tests.cpp.o\n[11/17] Linking CXX executable syspane_image_job_tests\n[12/17] Building CXX object CMakeFiles/syspane_editor_exit_probe.dir/source/application/editor_exit_probe.cpp.o\n[13/17] Linking CXX executable SysPane.EditorExitProbe\n[14/17] Building CXX object CMakeFiles/syspane_recovery_probe.dir/source/application/recovery_probe.cpp.o\n[15/17] Linking CXX executable SysPane.RecoveryProbe\n[16/17] Building CXX object CMakeFiles/syspane_collector_probe.dir/source/application/collector_probe.cpp.o\n[17/17] Linking CXX executable SysPane.CollectorProbe\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-09-image-pipeline/linux-x64-gcc13-build-1587f70320\n",
+    "stderr": ""
+  },
+  {
+    "step": "focus",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-07T00:03:04.925300+00:00",
+    "finished_at": "2026-10-07T00:03:05.548121+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 6442450944,\n  \"checkout_out_bytes\": 1901584338,\n  \"linux_campaign_bytes\": 4265955966,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "focus",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/image_pipeline_step.py",
+      "linux-x64-gcc13",
+      "focus"
+    ],
+    "started_at": "2026-10-07T00:03:05.548421+00:00",
+    "finished_at": "2026-10-07T00:03:21.103935+00:00",
+    "exit": 0,
+    "stdout": "Test project /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n    Start   9: native.IMAGE-DECODE\n1/7 Test   #9: native.IMAGE-DECODE ..............   Passed    3.24 sec\n    Start  10: native.IMAGE-JOB\n2/7 Test  #10: native.IMAGE-JOB .................   Passed    3.02 sec\n    Start  15: scene.IMAGE-FIT\n3/7 Test  #15: scene.IMAGE-FIT ..................   Passed    0.02 sec\n    Start  16: scene.IMAGE-ORIENTATION\n4/7 Test  #16: scene.IMAGE-ORIENTATION ..........   Passed    0.00 sec\n    Start  17: scene.IMAGE-LIMITS\n5/7 Test  #17: scene.IMAGE-LIMITS ...............   Passed    0.00 sec\n    Start 149: composition.graph\n6/7 Test #149: composition.graph ................   Passed    0.09 sec\n    Start 150: composition.reject_forbidden\n7/7 Test #150: composition.reject_forbidden .....   Passed    0.19 sec\n\n100% tests passed, 0 tests failed out of 7\n\nTotal Test time (real) =   6.57 sec\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-09-image-pipeline/linux-x64-gcc13-focus-99851fc170\n",
+    "stderr": ""
+  }
+]

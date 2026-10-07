@@ -7,6 +7,11 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
+The [image pipeline checkpoint](spec/delivery/image-pipeline-handoff.md) adds exact
+image fit/orientation and a bounded Linux PNG/JPEG/static-SVG worker with a
+nonblocking owner. Operational image widgets still require scene-policy ownership
+and independent native pixel/accessibility erasure checks.
+
 The [native chart checkpoint](spec/delivery/native-chart-handoff.md) connects
 measured history to Linux chart pixels and exact accessible point content. Shared
 geometry preserves large integers, explicit gaps and fixed/auto ranges. Independent

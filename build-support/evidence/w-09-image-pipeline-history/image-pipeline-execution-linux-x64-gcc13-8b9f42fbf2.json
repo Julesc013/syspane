@@ -1,0 +1,74 @@
+[
+  {
+    "step": "configure",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-06T23:57:52.985821+00:00",
+    "finished_at": "2026-10-06T23:57:53.786877+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 6442450944,\n  \"checkout_out_bytes\": 1893501556,\n  \"linux_campaign_bytes\": 4251661040,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "configure",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/image_pipeline_step.py",
+      "linux-x64-gcc13",
+      "configure"
+    ],
+    "started_at": "2026-10-06T23:57:53.787292+00:00",
+    "finished_at": "2026-10-06T23:58:08.143234+00:00",
+    "exit": 0,
+    "stdout": "Preset CMake variables:\n\n  BUILD_TESTING=\"ON\"\n  CMAKE_BUILD_TYPE=\"Debug\"\n  CMAKE_CXX_COMPILER=\"g++\"\n  SYSPANE_PROFILE=\"linux-x64-gcc13\"\n\nprofile verified: linux-x64-gcc13\nvendored dependency digests: pass\ndiagnostic toolkit verified: GTK 3.24.41 / Ubuntu 3.24.41-4ubuntu1.3\nnative text dependency identity verified: 358 files\n-- Checking for module 'gdk-pixbuf-2.0=2.42.10'\n--   Found gdk-pixbuf-2.0, version 2.42.10\nnative image dependencies verified: 344 files\nnative GJS clock build dependencies verified\n-- Configuring done (5.9s)\n-- Generating done (0.0s)\n-- Build files have been written to: /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-09-image-pipeline/linux-x64-gcc13-configure-93ad6fad44\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-06T23:58:08.143696+00:00",
+    "finished_at": "2026-10-06T23:58:08.760613+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 6442450944,\n  \"checkout_out_bytes\": 1894845872,\n  \"linux_campaign_bytes\": 4251683324,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/image_pipeline_step.py",
+      "linux-x64-gcc13",
+      "build"
+    ],
+    "started_at": "2026-10-06T23:58:08.760892+00:00",
+    "finished_at": "2026-10-06T23:58:22.911781+00:00",
+    "exit": 1,
+    "stdout": "[1/12] Building CXX object CMakeFiles/syspane_scene.dir/source/scene/image.cpp.o\n[2/12] Building CXX object CMakeFiles/syspane_native_image.dir/source/rendering/image_sandbox_linux.cpp.o\n[3/12] Linking CXX static library libsyspane_scene.a\n[4/12] Building CXX object CMakeFiles/syspane_image_worker.dir/source/application/image_worker.cpp.o\n[5/12] Linking CXX executable SysPane.TextProbe\n[6/12] Linking CXX executable syspane_scene_surface_tests\n[7/12] Building CXX object CMakeFiles/syspane_native_image.dir/source/rendering/image_decode_linux.cpp.o\nFAILED: CMakeFiles/syspane_native_image.dir/source/rendering/image_decode_linux.cpp.o \n/usr/bin/g++ -DJSON_DIAGNOSTICS=0 -DJSON_DIAGNOSTIC_POSITIONS=1 -I/mnt/d/Projects/SysPane/syspane/source/rendering -I/mnt/d/Projects/SysPane/syspane/source/scene -I/mnt/d/Projects/SysPane/syspane/source/configuration -I/mnt/d/Projects/SysPane/syspane/source/protocol -I/mnt/d/Projects/SysPane/syspane/source/diagnostics -I/mnt/d/Projects/SysPane/syspane/source/model -isystem /mnt/d/Projects/SysPane/syspane/source/third_party -isystem /usr/include/gdk-pixbuf-2.0 -isystem /usr/include/glib-2.0 -isystem /usr/lib/x86_64-linux-gnu/glib-2.0/include -isystem /usr/include/libpng16 -isystem /usr/include/webp -isystem /usr/include/libmount -isystem /usr/include/blkid -g -std=c++17 -Wall -Wextra -Wpedantic -Werror -march=x86-64 -mtune=generic -pthread -MD -MT CMakeFiles/syspane_native_image.dir/source/rendering/image_decode_linux.cpp.o -MF CMakeFiles/syspane_native_image.dir/source/rendering/image_decode_linux.cpp.o.d -o CMakeFiles/syspane_native_image.dir/source/rendering/image_decode_linux.cpp.o -c /mnt/d/Projects/SysPane/syspane/source/rendering/image_decode_linux.cpp\n/mnt/d/Projects/SysPane/syspane/source/rendering/image_decode_linux.cpp: In function \u2018syspane::rendering::{anonymous}::Prepared syspane::rendering::{anonymous}::jpeg(std::string_view)\u2019:\n/mnt/d/Projects/SysPane/syspane/source/rendering/image_decode_linux.cpp:46:29: error: suggest parentheses around \u2018&&\u2019 within \u2018||\u2019 [-Werror=parentheses]\n   46 |         const bool keep=!app&&code!=254||(code==224&&payload.substr(0,5)==std::string_view(\"JFIF\\0\",5)&&payload.size()==14)||(code==238&&payload.substr(0,5)==\"Adobe\"&&payload.size()==12);\n      |                         ~~~~^~~~~~~~~~~\ncc1plus: all warnings being treated as errors\n[8/12] Building CXX object CMakeFiles/syspane_scene_tests.dir/tests/scene/image_fit_tests.cpp.o\n[9/12] Building CXX object CMakeFiles/syspane_scene_tests.dir/tests/scene/layout_tests.cpp.o\nninja: build stopped: subcommand failed.\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-09-image-pipeline/linux-x64-gcc13-build-54aa944177\n",
+    "stderr": ""
+  }
+]
