@@ -34,11 +34,14 @@ behaviour has been implemented. See [audit disposition](spec/delivery/audit-2026
 - [x] W-09 authored content boundary: versioned text/labels/chart/image definitions, explicit migration, negotiated resource transactions and native recovery; connect text bodies and table labels. See the [handoff](spec/delivery/scene-content-handoff.md).
 - [x] W-09 shared chart retention: bounded measured windows, exact numeric samples, duplicate/conflict handling, gap/epoch resets and synchronous borrows. See the [handoff](spec/delivery/chart-history-handoff.md).
 - [x] W-09 initial Linux native charts: exact portable axis/pixel projection, every relevant publication, complete selector clock context, aggregate budgets, history-channel erasure and exact accessible point content. See the [handoff](spec/delivery/native-chart-handoff.md).
-- [ ] W-09 chart product integration: native accessibility navigation, installed live-producer routing, native editor controls and Windows/Mac rendering adapters.
+- [ ] W-09 chart product integration: complete accessibility qualification, installed live-producer routing, native editor controls and Windows/Mac rendering adapters.
 - [x] W-09 image pipeline: exact fit/orientation, bounded PNG/JPEG/static-SVG decoding, filesystem/network restrictions and nonblocking child ownership. See the [handoff](spec/delivery/image-pipeline-handoff.md).
 - [x] W-09 native image component: exact resource/scene/policy identity, aggregate budgets, asynchronous cancellation/reaping and independent pixels/accessibility erasure. See the [handoff](spec/delivery/scene-images-handoff.md).
 - [ ] W-09 image product integration: installed scene/resource/policy routing, native editor controls, performance qualification and Windows/Mac adapters.
 - [ ] W-09 full native projection: close and implement remaining widget content, installed producer/catalog/policy ownership, full native accessibility, visible host activation/recovery and Windows/Mac adapters.
+
+- [x] W-11 initial Linux scene inspector: native tree/table navigation, typed exact chart points, stable scoped selection, requested summaries and independent AT-SPI/XTest revocation checks. See the [handoff](spec/delivery/scene-inspector-handoff.md).
+- [ ] W-11 product controls: native settings and editing through the shared transaction API, installed inspector routing, clipboard/export authority, full localization and representative screen-reader review; Windows/Mac adapters remain required.
 
 - [x] W-07 controller demand component: merge authorized field/entity/age/priority/recording leases, apply cadence/concurrency policy, age priorities and retain cancelled slots until confirmed stop. See the [handoff](spec/delivery/demand-owner-handoff.md).
 - [x] W-07/W-25 Linux demand integration: real bounded acquisition outside the IPC loop, native join before slot release, rejected late results and policy revocation while a worker remains alive. See the [handoff](spec/delivery/demand-executor-handoff.md).

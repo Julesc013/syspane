@@ -1,0 +1,26 @@
+{
+  "family": "SCENE-INSPECTOR",
+  "outcome": "fail",
+  "started_at": "2026-10-07T01:26:12.604689+00:00",
+  "executable_sha256": "b8099758795516c46b5d97bca9efb56cb9281d2a246a3dd25520703108905a21",
+  "oracle_sha256": "86e258efe61721c80779886a347b4d1991e40221fd5a0c961cb50f4bb48d23fd",
+  "cases": [
+    {
+      "case": "scalar",
+      "outcome": "pass",
+      "fault_detected": false,
+      "record_sha256": "daeaef0db58c81531f5d13fd9083dd3dcede05543578376dcc20f5d44c6ee774"
+    }
+  ],
+  "error": "AssertionError(('table', 'dbus-daemon[32376]: [session uid=1000 pid=32376] Activating service name=\\'org.a11y.Bus\\' requested by \\':1.0\\' (uid=1000 pid=32379 comm=\"/home/ir4runner/.cache/syspane/campaign-229a498/li\" label=\"kernel\")\\ndbus-daemon[32376]: [session uid=1000 pid=32376] Successfully activated service \\'org.a11y.Bus\\'\\ndbus-daemon[32387]: Activating service name=\\'org.a11y.atspi.Registry\\' requested by \\':1.0\\' (uid=1000 pid=32379 comm=\"/home/ir4runner/.cache/syspane/campaign-229a498/li\" label=\"kernel\")\\ndbus-daemon[32387]: Successfully activated service \\'org.a11y.atspi.Registry\\'\\nTraceback (most recent call last):\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/scene/native_inspector.py\", line 173, in <module>\\n    if __name__==\\'__main__\\':main()\\n                            ^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/scene/native_inspector.py\", line 155, in main\\n    if sys.argv[1]==\\'--observe\\':observe(Path(sys.argv[2]),Path(sys.argv[3]),sys.argv[4]);return\\n                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/scene/native_inspector.py\", line 110, in observe\\n    stage=\\'TABLE\\';rows=wait(lambda:matrix() if len(matrix())==7 else None);expected=EXPECTED[\\'table\\'];assert rows[0]==[expected[\\'item\\'],expected[\\'summary\\']]\\n                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/scene/native_inspector.py\", line 71, in wait\\n    assert time.monotonic()<end,stage+\\' observation deadline\\'\\n           ^^^^^^^^^^^^^^^^^^^^\\nAssertionError: TABLE observation deadline\\n'))",
+  "files": {
+    "scalar.stderr": "078e9a2d3259a3a61dc05742cd51d6ef929422be5d448b9ee1495960bea78fef",
+    "scalar.stdout": "9d307ed556499f37fcb1517732638144b4ee8125619c1a443295c570b34c6bae",
+    "table.stderr": "319393a186e3afb8d1713a628ad062e98f61857b9e361e712131a3c41ffb95fb",
+    "table.stdout": "9d307ed556499f37fcb1517732638144b4ee8125619c1a443295c570b34c6bae",
+    "scalar/stderr": "a1de8e979b71ab9130b35b91cdbb09ef98fc6a4dd3b1edcaf7dbc46e70db4503",
+    "scalar/result.json": "daeaef0db58c81531f5d13fd9083dd3dcede05543578376dcc20f5d44c6ee774",
+    "table/stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "table/result.json": "4e99e3a17eeab898d42583d5951c5933296c62331176c531b0a6fe207ef8c2ad"
+  }
+}

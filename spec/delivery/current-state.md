@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-07T00:48:23Z", "scope": "Policy-owned scene images, native erasure and declared-size content hashing"}
+updated: {"by": "codex", "at": "2026-10-07T01:44:55Z", "scope": "Native scene inspector navigation, exact semantics and independent disclosure checks"}
 ---
 
 # Current state and next admitted boundary
@@ -22,7 +22,15 @@ The active objective is now the [complete 0.1.0 release](release-0.1.0.md) for W
 required but is no longer the final completion boundary. Legacy version/architecture
 floors, native labs and complete desktop/package evidence remain unresolved.
 
-The latest [scene images checkpoint](scene-images-handoff.md) connects asynchronous
+The latest [scene inspector checkpoint](scene-inspector-handoff.md) adds a native
+Linux tree table, inspector-channel ownership, exact typed chart points, scoped
+selection and explicit requested summaries. Independent native keys and AT-SPI
+queries exercise content, updates, revocation and held references, with deliberate
+retention and wrong-selection controls. W-11 remains in progress: settings/editing,
+installed routing, clipboard/export, complete localization and human accessibility
+review remain required, along with other adapters and every complete edition.
+
+The earlier [scene images checkpoint](scene-images-handoff.md) connects asynchronous
 decoding to exact immutable resources and current scene policy. Pending images keep
 their extent while other widgets update; replacement/revocation erase decoded content
 and accessible names. Native tests observe pixels, erasure and actual worker reaping.

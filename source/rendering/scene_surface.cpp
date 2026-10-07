@@ -90,7 +90,7 @@ void validate(const SurfaceConfig& cfg){
 struct SceneSurface::Impl {
     struct Entry {SurfaceProvider declaration;std::unique_ptr<r::DataView> view;};
     struct History {std::unique_ptr<s::ChartHistory> samples;std::optional<s::ChartCode> fault;};
-    c::Authority authority;c::Policy policy;SurfaceConfig config;std::vector<Entry> entries;
+    c::Authority authority;c::Policy policy;SurfaceConfig config;std::vector<Entry> entries;std::string channel;
     std::function<bool()> clear;std::unique_ptr<SurfaceFrame> frame;SurfaceStatus status;
     std::optional<std::uint64_t> highest,last_time;bool busy=false,closed=false;
     std::map<std::string,History> histories;std::unique_ptr<SceneImages> images;
@@ -112,7 +112,7 @@ struct SceneSurface::Impl {
     Entry& entry(const std::string& id){for(auto& e:entries)if(e.declaration.producer==id)return e;throw Error("surface.producer");}
     bool charted()const{for(const auto& w:config.authored.scene["widgets"])if(w["kind"]=="chart"&&w.contains("content"))return true;return false;}
     bool allowed()const{return policy.available&&!policy.denied_capabilities.count("telemetry.subscribe")&&
-        c::permits(authority,policy,"desktop","operational")&&c::permits(authority,policy,"accessibility","operational")&&
+        c::permits(authority,policy,channel,"operational")&&c::permits(authority,policy,"accessibility","operational")&&
         (!charted()||c::permits(authority,policy,"history","operational"));}
     bool uses(const Json& w,const std::string& producer){const auto& b=w["bindings"][0];if(b["kind"]=="direct")return b["producer_id"]==producer;
         if(b["kind"]=="unresolved_pin")return false;
@@ -190,7 +190,7 @@ struct SceneSurface::Impl {
                 const auto units=[&](unsigned p){return (static_cast<s::Unit>(p)*64*d.scale_denominator+d.scale_numerator-1)/d.scale_numerator;};
                 const s::Size size{units(raster.width),units(raster.height)};metrics[out.id]={size,size};rasters.emplace(out.id,std::move(raster));
             }
-            text_bytes+=surface_text_bytes(out);need(text_bytes<=262144,"surface.capacity");
+            out.title=w["title"];text_bytes+=surface_text_bytes(out);need(text_bytes<=262144,"surface.capacity");
             texts.emplace(out.id,std::move(out));
         }
         next->layout=s::resolve(config.authored.scene,config.topology,metrics);need(next->layout.state!=s::State::alternative,"surface.layout");
@@ -210,12 +210,13 @@ struct SceneSurface::Impl {
         return next;
     }
 };
-SceneSurface::SceneSurface(c::Authority authority,c::Policy policy,SurfaceConfig config,std::vector<SurfaceProvider> providers,std::function<bool()> clear_native,std::string image_worker):impl_(std::make_unique<Impl>()){
+SceneSurface::SceneSurface(c::Authority authority,c::Policy policy,SurfaceConfig config,std::vector<SurfaceProvider> providers,std::function<bool()> clear_native,std::string image_worker,SurfaceAudience audience):impl_(std::make_unique<Impl>()){
     validate(config);need(static_cast<bool>(clear_native)&&providers.size()<=16,"surface.input");auto& i=*impl_;
+    need(audience==SurfaceAudience::desktop||audience==SurfaceAudience::inspector,"surface.audience");i.channel=audience==SurfaceAudience::desktop?"desktop":"inspector";
     i.images=std::make_unique<SceneImages>(std::move(image_worker));i.authority=std::move(authority);i.policy=std::move(policy);i.config=std::move(config);i.clear=std::move(clear_native);if(i.policy.available)i.highest=i.policy.revision;
     std::set<std::string> ids;
     for(auto& p:providers){need(protocol::identifier(p.producer)&&ids.insert(p.producer).second,"surface.producer");
-        auto view=std::make_unique<r::DataView>(i.authority,i.policy,"desktop","operational",p.metrics);i.entries.push_back({std::move(p),std::move(view)});}
+        auto view=std::make_unique<r::DataView>(i.authority,i.policy,i.channel,"operational",p.metrics);i.entries.push_back({std::move(p),std::move(view)});}
     s::project_binding({{"kind","direct"},{"producer_id","validation"},{"producer_epoch","validation"},{"entity_id","validation"},{"field","entity.id"}},i.inputs({}),0,[](const auto&){});
 }
 SceneSurface::~SceneSurface(){try{close();}catch(...){}}

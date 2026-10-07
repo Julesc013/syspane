@@ -11,9 +11,10 @@ const char* label(Code c){switch(c){case Code::pending:return "Waiting";case Cod
 Key key(const scene::BindingRow& r){return {r.producer,r.epoch,r.entity};}
 }
 std::size_t surface_text_bytes(const SurfaceText& s){
-    std::size_t size=s.id.size()+s.kind.size()+s.text.size()+s.accessible.size();
+    std::size_t size=s.id.size()+s.kind.size()+s.title.size()+s.text.size()+s.accessible.size();
     for(const auto& f:s.fonts)size+=f.size();
-    if(s.chart)size+=s.chart->summary.size();
+    if(s.chart){size+=s.chart->summary.size()+s.chart->accessible_summary.size()+s.chart->points.size()*sizeof(scene::ChartPoint);
+        if(s.chart->identity){const auto& i=*s.chart->identity;size+=i.producer.size()+i.epoch.size()+i.entity.size()+i.field.size()+i.source.size()+i.unit.size()+i.clock_id.size()+i.clock_scope.size();}}
     if(s.image)size+=s.image->state.size()+s.image->asset.dump().size();
     if(s.table){const auto& t=*s.table;size+=t.summary.size();for(const auto& c:t.columns)size+=c.size();for(const auto& c:t.labels)size+=c.size();
         for(const auto& r:t.rows){size+=r.producer.size()+r.epoch.size()+r.entity.size();for(const auto& c:r.cells)size+=c.text.size()+c.accessible.size();}}

@@ -1987,6 +1987,64 @@
       "profiles": [
         "linux-x64-gcc13"
       ]
+    },
+    {
+      "id": "scene-inspector",
+      "target": "syspane_scene_inspector",
+      "type": "STATIC_LIBRARY",
+      "source_owner": "source/interfaces/",
+      "public_interfaces": [
+        "source/interfaces/scene_inspector.hpp"
+      ],
+      "private_interfaces": [
+        "source/interfaces/scene_inspector_model.hpp"
+      ],
+      "sources": [
+        "source/interfaces/scene_inspector_model.cpp",
+        "source/interfaces/scene_inspector_linux.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_scene_surface",
+        "PkgConfig::GTK3"
+      ],
+      "target_requirements": [
+        "cxx17",
+        "native_text"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
+    },
+    {
+      "id": "scene-inspector-tests",
+      "target": "syspane_scene_inspector_tests",
+      "type": "EXECUTABLE",
+      "source_owner": "tests/scene/",
+      "public_interfaces": [],
+      "private_interfaces": [],
+      "sources": [
+        "tests/scene/inspector_tests.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_scene_inspector",
+        "syspane_network_publication",
+        "PkgConfig::GTK3"
+      ],
+      "target_requirements": [
+        "cxx17",
+        "native_text"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
     }
   ]
 }

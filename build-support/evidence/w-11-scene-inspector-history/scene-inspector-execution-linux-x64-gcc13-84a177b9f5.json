@@ -1,0 +1,38 @@
+[
+  {
+    "step": "oracle",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-07T01:36:22.587849+00:00",
+    "finished_at": "2026-10-07T01:36:23.359347+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 6442450944,\n  \"checkout_out_bytes\": 1733087039,\n  \"linux_campaign_bytes\": 4358068683,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "oracle",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/inspector_step.py",
+      "linux-x64-gcc13",
+      "oracle"
+    ],
+    "started_at": "2026-10-07T01:36:23.360071+00:00",
+    "finished_at": "2026-10-07T01:36:36.971553+00:00",
+    "exit": 8,
+    "stdout": "Test project /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n    Start 2: native.SCENE-INSPECTOR\n1/1 Test #2: native.SCENE-INSPECTOR ...........***Failed    4.55 sec\n/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/inspector-6e4472aea188/result.json fail\nTraceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/scene/native_inspector.py\", line 179, in <module>\n    if __name__=='__main__':main()\n                            ^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/tests/scene/native_inspector.py\", line 171, in main\n    assert child.returncode==0,(mode,stderr.decode(errors='replace'));case=json.loads((folder/mode/'result.json').read_text());assert case['outcome']=='pass'\n           ^^^^^^^^^^^^^^^^^^^\nAssertionError: ('wrong-selection', 'dbus-daemon[40509]: [session uid=1000 pid=40509] Activating service name=\\'org.a11y.Bus\\' requested by \\':1.0\\' (uid=1000 pid=40512 comm=\"/home/ir4runner/.cache/syspane/campaign-229a498/li\" label=\"kernel\")\\ndbus-daemon[40509]: [session uid=1000 pid=40509] Successfully activated service \\'org.a11y.Bus\\'\\ndbus-daemon[40520]: Activating service name=\\'org.a11y.atspi.Registry\\' requested by \\':1.0\\' (uid=1000 pid=40512 comm=\"/home/ir4runner/.cache/syspane/campaign-229a498/li\" label=\"kernel\")\\ndbus-daemon[40520]: Successfully activated service \\'org.a11y.atspi.Registry\\'\\nTraceback (most recent call last):\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/scene/native_inspector.py\", line 149, in observe\\n    assert mode not in (\\'retain\\',\\'wrong-selection\\'),\\'deliberate fault escaped observer\\';report[\\'outcome\\']=\\'pass\\'\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\nAssertionError: deliberate fault escaped observer\\n\\nDuring handling of the above exception, another exception occurred:\\n\\nTraceback (most recent call last):\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/scene/native_inspector.py\", line 179, in <module>\\n    if __name__==\\'__main__\\':main()\\n                            ^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/scene/native_inspector.py\", line 161, in main\\n    if sys.argv[1]==\\'--observe\\':observe(Path(sys.argv[2]),Path(sys.argv[3]),sys.argv[4]);return\\n                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/scene/native_inspector.py\", line 152, in observe\\n    if \\'tree\\' in locals():report[\\'last_rows\\']=matrix();report[\\'last_selection\\']=selected()\\n                                              ^^^^^^^^\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/scene/native_inspector.py\", line 92, in matrix\\n    tree.clear_cache();table=tree.get_table_iface();return [[text(table.get_accessible_at(r,c)) for c in range(table.get_n_columns())] for r in range(table.get_n_rows())]\\n                                                                                                                                                      ^^^^^^^^^^^^^^^^\\nAttributeError: \\'NoneType\\' object has no attribute \\'get_n_rows\\'\\n')\n\n\n0% tests passed, 1 tests failed out of 1\n\nTotal Test time (real) =   4.55 sec\n\nThe following tests FAILED:\n\t  2 - native.SCENE-INSPECTOR (Failed)\n Errors while running CTest\n\nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-11-scene-inspector/linux-x64-gcc13-oracle-7783272060\n",
+    "stderr": ""
+  }
+]

@@ -29,6 +29,7 @@ scene::ChartPlot compose_chart(const Json& widget,SurfaceText& text,const s::Cha
     if(plot.clipped)chart.summary+=" | Clipped "+std::to_string(plot.clipped);
     chart.summary+="\nWindow "+std::to_string(content["window_ms"].get<unsigned>())+" ms | "+interpolation;
     text.text+='\n'+chart.summary;text.accessible+='\n'+chart.summary;
+    chart.accessible_summary=text.accessible;chart.identity=view.identity;chart.points=view.points;
     for(const auto& point:view.points){text.accessible+="\nPoint "+std::to_string(point.measured_ns)+": "+number(point.value)+"; generation "+std::to_string(point.generation)+(point.joins_previous?"; join":"; start");
         need(text.accessible.size()+text.text.size()+chart.summary.size()<=262144,"surface.capacity");}
     return plot;

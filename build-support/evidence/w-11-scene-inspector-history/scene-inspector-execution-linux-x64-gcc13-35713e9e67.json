@@ -1,0 +1,110 @@
+[
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-07T01:37:54.788746+00:00",
+    "finished_at": "2026-10-07T01:37:55.554618+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 6442450944,\n  \"checkout_out_bytes\": 1734490357,\n  \"linux_campaign_bytes\": 4358121803,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/inspector_step.py",
+      "linux-x64-gcc13",
+      "build"
+    ],
+    "started_at": "2026-10-07T01:37:55.555420+00:00",
+    "finished_at": "2026-10-07T01:38:14.633198+00:00",
+    "exit": 0,
+    "stdout": "[1/2] Building CXX object CMakeFiles/syspane_scene_inspector_tests.dir/tests/scene/inspector_tests.cpp.o\n[2/2] Linking CXX executable syspane_scene_inspector_tests\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-11-scene-inspector/linux-x64-gcc13-build-2eb6e2fbf2\n",
+    "stderr": ""
+  },
+  {
+    "step": "focus",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-07T01:38:14.633521+00:00",
+    "finished_at": "2026-10-07T01:38:15.379116+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 6442450944,\n  \"checkout_out_bytes\": 1735886118,\n  \"linux_campaign_bytes\": 4358126353,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "focus",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/inspector_step.py",
+      "linux-x64-gcc13",
+      "focus"
+    ],
+    "started_at": "2026-10-07T01:38:15.379382+00:00",
+    "finished_at": "2026-10-07T01:38:25.478490+00:00",
+    "exit": 0,
+    "stdout": "Test project /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n    Start   1: native.SCENE-INSPECTOR-MODEL\n1/3 Test   #1: native.SCENE-INSPECTOR-MODEL .....   Passed    0.18 sec\n    Start 154: composition.graph\n2/3 Test #154: composition.graph ................   Passed    0.09 sec\n    Start 155: composition.reject_forbidden\n3/3 Test #155: composition.reject_forbidden .....   Passed    0.18 sec\n\n100% tests passed, 0 tests failed out of 3\n\nTotal Test time (real) =   0.46 sec\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-11-scene-inspector/linux-x64-gcc13-focus-6fe02dc398\n",
+    "stderr": ""
+  },
+  {
+    "step": "oracle",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-07T01:38:25.478812+00:00",
+    "finished_at": "2026-10-07T01:38:26.188466+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 6442450944,\n  \"checkout_out_bytes\": 1737283577,\n  \"linux_campaign_bytes\": 4358124903,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "oracle",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/inspector_step.py",
+      "linux-x64-gcc13",
+      "oracle"
+    ],
+    "started_at": "2026-10-07T01:38:26.188833+00:00",
+    "finished_at": "2026-10-07T01:38:41.539140+00:00",
+    "exit": 0,
+    "stdout": "Test project /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n    Start 2: native.SCENE-INSPECTOR\n1/1 Test #2: native.SCENE-INSPECTOR ...........   Passed    5.37 sec\n\n100% tests passed, 0 tests failed out of 1\n\nTotal Test time (real) =   5.37 sec\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-11-scene-inspector/linux-x64-gcc13-oracle-a0d9285712\n",
+    "stderr": ""
+  }
+]

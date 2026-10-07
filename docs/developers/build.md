@@ -1,8 +1,33 @@
 # Developer setup and checks
 
+The [scene inspector package](../../spec/delivery/packages/w-11-scene-inspector.md)
+adds Linux `interfaces::SceneInspector`. Construct it on the GTK owner thread with
+the same authority, immutable scene/resources, providers and trusted image worker
+as SceneSurface, then embed `widget()` in an application-owned native window.
+It uses the `inspector` telemetry/disclosure channel; accessibility, history and
+resource permission checks still apply independently. Supply an inspector-bound
+attachment and current qualified ticks. All public calls and GTK events share one
+serialized loop; do not reenter the inspector during an operation.
+
+Deliver telemetry and refresh normally. Close on host shutdown, then poll
+`poll_image_jobs()` until actual worker termination before destroying the owner.
+Policy and scene replacement clear native strings and require the existing fresh
+attachment/full-state rules. Keys retain selected identities and native expansion;
+Summary requests snapshot the selected row's last presented content. Native GTK
+Shift-Left/Shift-Right collapses/expands; ordinary Left/Right changes columns.
+The four `inspector.*` chrome translation IDs accept bounded plain UTF-8 labels.
+
+After ordinary preflight/configure/build, run `ctest --preset linux-x64-gcc13 -R
+'native[.]SCENE-INSPECTOR' --output-on-failure`. The model checks exact data/channel
+semantics and bounds. The independent runner uses an owned Xvfb/private D-Bus,
+native XTest keys and AT-SPI cell reads, including held references after revoke.
+Its deliberate retained-content and wrong-selection controls must both be detected.
+This is an embeddable component; installed settings/editor routing and representative
+human accessibility review remain required.
+
 The [scene images package](../../spec/delivery/packages/w-09-scene-images.md) connects
 the worker to SceneSurface. Pass its canonical executable as the constructor's
-optional final argument from trusted application setup. Authored content cannot choose
+optional worker argument from trusted application setup. Authored content cannot choose
 an executable. With an admitted resource closure and current desktop/accessibility
 policy, image widgets now render asynchronously. Repaint while pending; use
 `poll_image_jobs()` during native ticks and after `close()` until it returns true

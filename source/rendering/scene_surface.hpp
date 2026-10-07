@@ -6,6 +6,7 @@
 
 namespace syspane::rendering {
 enum class SurfaceCode { ready,degraded,empty,restricted,alternative,closed };
+enum class SurfaceAudience { desktop,inspector };
 struct SurfaceConfig {
     configuration::Authored authored;
     configuration::ResourceSnapshot resources;
@@ -41,9 +42,12 @@ struct SurfaceTable {
     bool truncated=false;
 };
 struct SurfaceText {
-    std::string id,kind,text,accessible;std::vector<std::string> fonts;
+    std::string id,kind,title,text,accessible;std::vector<std::string> fonts;
     std::optional<SurfaceTable> table;
-    struct Chart {std::string summary;std::size_t samples=0,segments=0;scene::Rect pixels;};
+    struct Chart {
+        std::string summary,accessible_summary;std::size_t samples=0,segments=0;scene::Rect pixels;
+        std::optional<scene::ChartIdentity> identity;std::vector<scene::ChartPoint> points;
+    };
     std::optional<Chart> chart;
     struct Image {std::string state;configuration::Json asset;unsigned width=0,height=0;};
     std::optional<Image> image;
@@ -58,7 +62,8 @@ struct SurfaceStatus { SurfaceCode code=SurfaceCode::empty;std::size_t widgets=0
 class SceneSurface {
 public:
     SceneSurface(configuration::Authority,configuration::Policy,SurfaceConfig,
-                 std::vector<SurfaceProvider>,std::function<bool()> clear_native,std::string image_worker={});
+                 std::vector<SurfaceProvider>,std::function<bool()> clear_native,std::string image_worker={},
+                 SurfaceAudience audience=SurfaceAudience::desktop);
     ~SceneSurface();
     SceneSurface(const SceneSurface&)=delete;
     SceneSurface& operator=(const SceneSurface&)=delete;
