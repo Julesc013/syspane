@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-08T21:44:15.159963+00:00", "scope": "Installed native settings frontend and authenticated recovery; full desktop/editor/telemetry integration and all editions remain open"}
+updated: {"by": "codex", "at": "2026-10-08T22:02:57.712172+00:00", "scope": "Private GTK text lifetime repair; installed editor/helper composition and all complete editions remain open"}
 ---
 
 # Current state and next admitted boundary
@@ -21,6 +21,11 @@ Shared build tooling now lives in `source/build/`. Machine bindings and raw
 recordings are local ignored `out/` content; the retired root is absent from the
 tracked tree. See `docs/developers/build.md` in the repository for checkout
 setup and the [repository contract](../foundation/repository.md) for ownership.
+
+The [private text lifetime repair](private-text-lifetime-handoff.md) closes the
+shared GTK selection-registration teardown defect while retaining text selection
+and preventing implicit clipboard export. Installed editor/helper composition and
+all five complete editions remain open.
 
 The [installed settings frontend](installed-settings-handoff.md) now composes the
 actual entry point, verified helper installation, runtime owner, independent
@@ -819,8 +824,9 @@ escape/recovery to the same product owners. Add installed recovery/draft context
 import catalogs and persistence layers. Preserve original request reconciliation,
 private-state erasure and the current source-bound native oracles. Protected-policy
 deployment, representative accessibility/performance, historical/native target labs
-and every complete edition remain required. Known GTK selection-clipboard shutdown
-diagnostics remain visible in the evidence and need resolution before qualification.
+and every complete edition remain required. The private-text lifetime checkpoint above resolves the reproduced selection-clipboard
+shutdown critical; earlier diagnostic evidence remains preserved. Full native
+accessibility and lifecycle qualification still require their own evidence.
 
 Start with the [campaign coverage audit](campaign-coverage.md). W-03 now has a
 [read-only Windows observer](windows-host-inventory-handoff.md): native Explorer

@@ -72,7 +72,7 @@ struct Window {
         window=gtk_window_new(GTK_WINDOW_TOPLEVEL);gtk_window_set_title(GTK_WINDOW(window),"SysPane Settings");gtk_window_set_default_size(GTK_WINDOW(window),790,580);gtk_window_move(GTK_WINDOW(window),0,0);
         auto* box=gtk_box_new(GTK_ORIENTATION_VERTICAL,0);gtk_container_add(GTK_CONTAINER(window),box);gtk_box_pack_start(GTK_BOX(box),form->widget(),TRUE,TRUE,0);
         if(behavior=="retain"||behavior=="false-saved"){canary=gtk_label_new(behavior=="retain"?"Retained settings canary 1500":"");gtk_box_pack_start(GTK_BOX(box),canary,FALSE,FALSE,0);}
-        g_signal_connect(window,"destroy",G_CALLBACK(+[](GtkWidget*,gpointer p){static_cast<Window*>(p)->closed=true;gtk_main_quit();}),this);gtk_widget_show_all(window);
+        g_signal_connect(window,"destroy",G_CALLBACK(+[](GtkWidget*,gpointer p){static_cast<Window*>(p)->closed=true;if(gtk_main_level())gtk_main_quit();}),this);gtk_widget_show_all(window);
     }
     void tick(){
         if(done.load(std::memory_order_acquire)){

@@ -15,6 +15,18 @@ build` before configuring or building; use `test` or `package` for those actions
 The common active-output budget is unchanged; retained `out/evidence/` archives
 are measured separately. Never use the placeholder account from the example.
 
+The shared private text control owns one GtkTextBuffer. Callers may edit its contents,
+but must not replace/share the buffer or alter its clipboard registrations. Its native
+lifecycle wrappers balance GTK's bookkeeping without enabling implicit PRIMARY or
+CLIPBOARD publication. See the [lifetime package](../../spec/delivery/packages/w-11-private-text-lifetime.md).
+
+After the ordinary budget/configure/build checks, run
+`ctest --preset linux-x64-gcc13 -R '^native[.](PRIVATE-TEXT-LIFETIME|SETTINGS-FORM|EDITOR-FORM|INSTALLED-SETTINGS)$' --output-on-failure`.
+The dedicated consumer runs with fatal criticals on an isolated display; its observer
+holds both selections and detects transient ownership loss. Keep native stderr and
+baseline failures. The installed family still requires its additional payload-space
+forecast. Other native environments and complete accessibility remain unqualified.
+
 The [installed settings package](../../spec/delivery/packages/w-11-installed-settings.md)
 adds the real `syspane` frontend on the Linux development profile. After the ordinary
 configure/build preflight and preset commands, stage its unmanaged development

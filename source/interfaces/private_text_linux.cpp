@@ -18,15 +18,34 @@ static void sp_private_accessible_class_init(SpPrivateAccessibleClass*){}
 typedef struct {GtkTextView parent;guint limit;gboolean multiline;} SpPrivateText;
 typedef struct {GtkTextViewClass parent;} SpPrivateTextClass;
 G_DEFINE_TYPE(SpPrivateText,sp_private_text,GTK_TYPE_TEXT_VIEW)
+static void private_realize(GtkWidget* widget){
+    GTK_WIDGET_CLASS(sp_private_text_parent_class)->realize(widget);
+    gtk_text_buffer_remove_selection_clipboard(gtk_text_view_get_buffer(GTK_TEXT_VIEW(widget)),
+        gtk_widget_get_clipboard(widget,GDK_SELECTION_PRIMARY));
+}
+static void private_unrealize(GtkWidget* widget){
+    // Restore only GTK's bookkeeping reference. Adding it does not publish the
+    // selection. The parent's first buffer action removes it synchronously;
+    // there is no event dispatch or buffer mutation in this handoff.
+    gtk_text_buffer_add_selection_clipboard(gtk_text_view_get_buffer(GTK_TEXT_VIEW(widget)),
+        gtk_widget_get_clipboard(widget,GDK_SELECTION_PRIMARY));
+    GTK_WIDGET_CLASS(sp_private_text_parent_class)->unrealize(widget);
+}
+static void private_destroy(GtkWidget* widget){
+    // GtkTextView destruction replaces its buffer. Finish the balanced native
+    // unrealize first so buffer removal cannot consume the reference again.
+    if(gtk_widget_get_realized(widget))gtk_widget_unrealize(widget);
+    GTK_WIDGET_CLASS(sp_private_text_parent_class)->destroy(widget);
+}
 static void sp_private_text_class_init(SpPrivateTextClass* cls){
     gtk_widget_class_set_accessible_type(GTK_WIDGET_CLASS(cls),sp_private_accessible_get_type());
+    auto* widget=GTK_WIDGET_CLASS(cls);widget->realize=private_realize;widget->unrealize=private_unrealize;widget->destroy=private_destroy;
     auto* text=GTK_TEXT_VIEW_CLASS(cls);text->copy_clipboard=+[](GtkTextView*){};text->cut_clipboard=+[](GtkTextView*){};
     GTK_WIDGET_CLASS(cls)->drag_data_get=+[](GtkWidget*,GdkDragContext*,GtkSelectionData*,guint,guint){};
 }
 static void sp_private_text_init(SpPrivateText* self){
     self->limit=256;self->multiline=FALSE;auto* view=GTK_TEXT_VIEW(self);gtk_text_view_set_accepts_tab(view,FALSE);gtk_text_view_set_wrap_mode(view,GTK_WRAP_NONE);
     auto* buffer=gtk_text_view_get_buffer(view);
-    g_signal_connect_after(self,"realize",G_CALLBACK(+[](GtkWidget* w,gpointer){gtk_text_buffer_remove_selection_clipboard(gtk_text_view_get_buffer(GTK_TEXT_VIEW(w)),gtk_widget_get_clipboard(w,GDK_SELECTION_PRIMARY));}),nullptr);
     g_signal_connect_object(buffer,"insert-text",G_CALLBACK(+[](GtkTextBuffer* b,GtkTextIter*,gchar* t,gint n,gpointer data){
         const auto* options=static_cast<SpPrivateText*>(data);
         if(n<0||n>4096||!g_utf8_validate(t,n,nullptr)||gtk_text_buffer_get_char_count(b)+g_utf8_strlen(t,n)>options->limit||

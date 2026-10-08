@@ -3554,6 +3554,31 @@
       "profiles": [
         "linux-x64-gcc13"
       ]
+    },
+    {
+      "id": "private-text-probe",
+      "target": "syspane_private_text_probe",
+      "type": "EXECUTABLE",
+      "source_owner": "tests/configuration/",
+      "public_interfaces": [],
+      "private_interfaces": [],
+      "sources": [
+        "tests/configuration/private_text_window.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_private_text",
+        "PkgConfig::GTK3"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
     }
   ]
 }

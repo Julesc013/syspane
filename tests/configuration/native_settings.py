@@ -96,7 +96,7 @@ def observe(exe,folder,mode):
     def launch(which):
         nonlocal proc,keys
         if resource and not which.startswith('resource-'):which='resource-'+which
-        proc=subprocess.Popen([str(exe),str(ROOT),str(directory),which],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=err,bufsize=0)
+        proc=subprocess.Popen([str(exe),str(ROOT),str(directory),which],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=err,bufsize=0,env=dict(os.environ,G_DEBUG='fatal-criticals'))
         def collect(child):
             for line in child.stdout:
                 item=json.loads(line);report['events'].append(item);events.put(item)
@@ -280,6 +280,8 @@ def main():
             except subprocess.TimeoutExpired:os.killpg(child.pid,signal.SIGKILL);stdout,stderr=child.communicate(timeout=5);raise AssertionError('observer deadline')
             (folder/(mode+'.stdout')).write_bytes(stdout);(folder/(mode+'.stderr')).write_bytes(stderr)
             assert child.returncode==0,(mode,stderr.decode(errors='replace'));case=json.loads((folder/mode/'result.json').read_text());assert case['outcome']=='pass'
+            diagnostics=(folder/mode/'stderr').read_text(errors='replace')
+            assert 'Gtk-CRITICAL' not in diagnostics and 'Gtk-WARNING' not in diagnostics,(mode,diagnostics)
             report['cases'].append(dict(case=mode,outcome='pass',fault_detected=case.get('fault_detected',False),record_sha256=sha(folder/mode/'result.json')))
         report['outcome']='pass'
     except Exception as exc:report['error']=repr(exc);raise

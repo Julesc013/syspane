@@ -81,6 +81,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Open decisions, risks and resolving experiments](open-questions.md) — Keep unresolved choices discoverable without blocking unrelated work.
 - [Independent temporal oracle implementation checkpoint](oracle-handoff.md) — Bind external marker/time evaluation and native X11 fault calibration to source and raw capture evidence.
 - [Explicit private preservation checkpoint](preservation-handoff.md) — Bind opaque configuration copies, native controls and interrupted publication to measured development evidence.
+- [Private native text lifetime repair](private-text-lifetime-handoff.md) — Balanced GTK teardown preserves selection and prevents implicit clipboard export.
 - [Supervised native profile controller process](profile-controller-handoff.md) — Authenticated startup, current-policy result disclosure and interrupted command recovery.
 - [Linux profile directory ownership checkpoint](profile-owner-handoff.md) — Private root selection, interrupted creation, lifetime locks and existing store composition.
 - [Coherent authored profile and resource projection](profile-projection-handoff.md) — Bounded authenticated reads connect the native command controller to a typed frontend receiver.

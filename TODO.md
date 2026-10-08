@@ -27,6 +27,8 @@ behaviour has been implemented. See [audit disposition](spec/delivery/audit-2026
 
 ## First native campaign
 
+- [x] W-11 shared private text lifetime: balanced realization/destruction, retained editing and independent verification that neither clipboard changes ownership. See the [handoff](spec/delivery/private-text-lifetime-handoff.md).
+
 - [x] W-11 installed development settings frontend: actual entry point, verified helper payload, independent supervision/client owners, authenticated profile loading, native commands and original-request recovery. See the [handoff](spec/delivery/installed-settings-handoff.md).
 - [x] W-08 frontend runtime ownership: bounded private allocation, identity checks and explicit cleanup after supervisor release, with native replacement/orphan/exit evidence. See the [handoff](spec/delivery/runtime-directory-handoff.md).
 - [x] W-08 coherent profile/resource reads: immutable saved revisions, authenticated policy checks, bounded transfer and typed frontend receiver. See the [handoff](spec/delivery/profile-projection-handoff.md).

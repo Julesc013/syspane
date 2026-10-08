@@ -86,6 +86,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Native creation of every scene primitive](w-10-widget-creation.md) — Create bounded authored widgets through existing resource, draft and transaction owners.
 - [Installed native settings frontend](w-11-installed-settings.md) — Compose the real application entry point, independently supervised controller and authenticated settings client.
 - [Native settings drafts and transaction results](w-11-native-settings.md) — Connect every initial settings descriptor to native controls and the common authored transaction boundary.
+- [Private native text lifetime](w-11-private-text-lifetime.md) — Balance GTK selection registration across realization and destruction without exporting authored text.
 - [Native scene inspector navigation and disclosure](w-11-scene-inspector.md) — Expose scene semantics through native controls with identity-stable navigation and current inspector authority.
 - [Resource-aware native settings](w-11-settings-resources.md) — Preserve exact resource selection through settings drafts, native commits and restart.
 - [W-24 authenticated transport and policy boundary](w-24-transport.md) — Close the initial local protocol, admission and preview boundary before native integration.

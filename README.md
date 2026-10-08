@@ -17,6 +17,8 @@ helper and loads real saved profiles into native controls. Preview, Apply, cance
 save/reopen and original-request recovery use authenticated IPC. Production policy
 still fails closed without protected deployment authority. Desktop/editor/telemetry
 integration and all five complete editions remain open.
+The [shared private-text repair](spec/delivery/private-text-lifetime-handoff.md)
+resolves the reproduced GTK shutdown diagnostic while preserving selection privacy.
 
 The [runtime directory checkpoint](spec/delivery/runtime-directory-handoff.md)
 adds private frontend runtime allocation and explicit retirement after supervisor
