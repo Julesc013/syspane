@@ -1895,8 +1895,9 @@ adds explicit `ContentCatalog::theme_resources` for resource selection 0.2 and
 requires current source/result policy and `configuration.theme-overrides` admission.
 It retains `ResourceSet::base_packages()` and validates canonical artifact bytes;
 it never appends a preset layer. `ContentCatalog::resources` keeps the legacy shape.
-Existing command/store/SettingsDraft consumers reject new selections. Do not route
-them through an old command or enable native authoring before the next admission.
+Legacy command/store formats and current SettingsDraft consumers reject new
+selections. The command 0.8 admission below now supplies durable storage; editor
+resource history and native authoring require the next integration.
 
 After ordinary workspace preflight/configure/build, run
 `ctest --preset <profile> -R '^configuration[.]THEME-OVERRIDE-' --output-on-failure`
@@ -1904,3 +1905,27 @@ and the affected/full portable suites. The non-root Linux laboratory runs
 `ctest --preset linux-x64-gcc13 -R '^native[.](RESOURCE-GENERATIONS|CONTENT-COMMANDS)$'
 --output-on-failure` for legacy consumer regressions. These native checks do not
 qualify storage of new selections. See the [handoff](../../spec/delivery/theme-overrides-handoff.md).
+
+
+The [durable theme-command package](../../spec/delivery/packages/w-08-theme-commands.md)
+adds `prepare_theme_command` to the existing transaction worker. Command 0.8 carries
+an exact current source pin, complete base/role fonts and resource selection 0.2.
+The owner constructs and validates canonical bytes without importing packages.
+The explicit `configuration.theme-overrides` feature requires the existing visibility,
+edit-lock, full-scene, content and transaction features plus theme typography support.
+Original body bytes remain request identity, including their existing 327680-byte limit.
+
+Linux writes generation manifest 0.4 and resource index 0.2 only for command 0.8.
+Recovery checks version pairing, exact files/hashes and fulfilled font intent.
+The ConfigProbe `theme-commit <command-file> <fault>` mode uses current resources;
+it accepts no import roots. Old generations retain their readers. This does not
+enable native font controls or EditorForm typography.
+
+After ordinary preflight/configure/build, run
+`ctest --preset <profile> -R '^configuration[.]THEME-COMMAND-' --output-on-failure`,
+the affected configuration/editor/protocol/component tests and full portable suite.
+In the existing non-root ext4 Linux laboratory run
+`ctest --preset linux-x64-gcc13 -R '^native[.](THEME-COMMANDS|RESOURCE-GENERATIONS|CONTENT-COMMANDS|CONFIG-STORE|COMMAND-IPC|VISIBILITY-ADMISSION)$' --output-on-failure`.
+The independent oracle compares literal artifact bytes, confirms stopped/killed owners,
+and preserves corruption and wrong-output witnesses. Read the
+[handoff](../../spec/delivery/theme-commands-handoff.md) before editor integration.

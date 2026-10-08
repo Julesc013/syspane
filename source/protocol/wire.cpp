@@ -148,7 +148,7 @@ Message decode(std::string_view payload,bool large_commands) {
     auto root = parse(payload,large_commands?ParseProfile::large_command:ParseProfile::ordinary);
     // Negotiated headroom belongs exclusively to command 0.5, including its envelope.
     if(large_commands&&!(root.is_object()&&root.value("type",Json())=="command"&&root.contains("body")&&
-        root["body"].is_object()&&(root["body"].value("schema_version",Json())=="0.5.0"||root["body"].value("schema_version",Json())=="0.6.0"||root["body"].value("schema_version",Json())=="0.7.0")))root=parse(payload);
+        root["body"].is_object()&&(root["body"].value("schema_version",Json())=="0.5.0"||root["body"].value("schema_version",Json())=="0.6.0"||root["body"].value("schema_version",Json())=="0.7.0"||root["body"].value("schema_version",Json())=="0.8.0")))root=parse(payload);
     if (!root.is_object() || !root.contains("type") || !root["type"].is_string())
         throw Error("envelope.invalid");
     Message message;

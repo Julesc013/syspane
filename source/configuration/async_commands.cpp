@@ -63,7 +63,7 @@ CommandAdmission AsyncCommands::submit(const std::string& principal,const std::s
         if(jobs_.size()+ready_.size()>=128||tickets_==std::numeric_limits<std::uint64_t>::max())return {0,reply(request,"busy","request.capacity")};
     }
     auto job=std::make_shared<Job>(Job{tickets_+1,lifetime,principal,connection,request,std::move(body),authority});
-    const auto admission=ledger_.admit(principal,connection,request,job->body,now,(command["schema_version"]=="0.5.0"||command["schema_version"]=="0.6.0"||command["schema_version"]=="0.7.0"));
+    const auto admission=ledger_.admit(principal,connection,request,job->body,now,(command["schema_version"]=="0.5.0"||command["schema_version"]=="0.6.0"||command["schema_version"]=="0.7.0"||command["schema_version"]=="0.8.0"));
     if(admission!=protocol::Admission::admitted)return {0,reply(request,"busy","request.capacity")};
     std::lock_guard<std::mutex> lock(mutex_);jobs_.emplace(job->ticket,job);++tickets_;return {job->ticket,{}};
 }

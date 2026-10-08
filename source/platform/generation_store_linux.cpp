@@ -1,4 +1,5 @@
 #include "generation_store_linux.hpp"
+#include "theme_command.hpp"
 #include "digest.hpp"
 #include <array>
 #include <cerrno>
@@ -83,10 +84,10 @@ void exact_files(int fd,const std::set<std::string>& expected){
         need(expected.count(name)&&found.insert(name).second,"storage.resource_files");}
     need(found==expected,"storage.resource_files");
 }
-c::ResourceSnapshot decode_resources(int parent,const Json& hash,const c::Authored& documents,bool synchronize){
+c::ResourceSnapshot decode_resources(int parent,const Json& hash,const c::Authored& documents,bool synchronize,bool themes){
     need(digest(hash),"storage.resources");const auto bytes=required(parent,"resources.json",65536,synchronize);
     need(c::sha256(bytes)==hash,"storage.resources");const auto index=protocol::parse(bytes);
-    need(protocol::members(index,{"version","selection","theme","packages"})&&index["version"]=="0.1.0"&&
+    need(protocol::members(index,{"version","selection","theme","packages"})&&index["version"]==(themes?"0.2.0":"0.1.0")&&
         index["packages"].is_array()&&!index["packages"].empty()&&index["packages"].size()<=64,"storage.resources");
     auto dir=directory_at(parent,"resources");std::set<std::string> expected;std::string prior;std::vector<c::ContentPackage> packages;std::size_t count=0,total=0;
     for(const auto& item:index["packages"]){need(digest(item),"storage.resources");const auto pin=item.get<std::string>();need(prior.empty()||prior<pin,"storage.resources");prior=pin;
@@ -99,12 +100,12 @@ c::ResourceSnapshot decode_resources(int parent,const Json& hash,const c::Author
             package.assets.emplace(asset["path"].get<std::string>(),std::move(payload));}
         packages.push_back(std::move(package));
     }
-    exact_files(dir.fd,expected);const auto resources=c::ContentCatalog(std::move(packages)).resources(index["selection"],documents);
+    exact_files(dir.fd,expected);const c::ContentCatalog catalog(std::move(packages));const auto resources=themes?catalog.theme_resources(index["selection"],documents):catalog.resources(index["selection"],documents);
     need(resources->packages().size()==index["packages"].size()&&resources->theme_pin()==index["theme"],"storage.resources");
     if(synchronize)flush(dir.fd);
     return resources;
 }
-std::string write_resources(int parent,const c::ResourceSet& resources,const std::function<void(const char*)>& hook){
+std::string write_resources(int parent,const c::ResourceSet& resources,const std::function<void(const char*)>& hook,bool themes){
     need(::mkdirat(parent,"resources",0700)==0,"storage.mkdir");auto dir=directory_at(parent,"resources");if(hook)hook("resources_created");
     std::map<std::string,const std::string*> manifests,assets;
     for(const auto& package:resources.packages()){
@@ -115,7 +116,7 @@ std::string write_resources(int parent,const c::ResourceSet& resources,const std
         const auto phase="resource_manifest:"+std::to_string(n++);if(hook)hook(phase.c_str());}
     n=0;for(const auto& row:assets){write(dir.fd,("a-"+row.first+".bin").c_str(),*row.second);
         const auto phase="resource_asset:"+std::to_string(n++);if(hook)hook(phase.c_str());}
-    const auto index=Json{{"version","0.1.0"},{"selection",resources.selection()},{"theme",resources.theme_pin()},{"packages",pins}}.dump();
+    const auto index=Json{{"version",themes?"0.2.0":"0.1.0"},{"selection",resources.selection()},{"theme",resources.theme_pin()},{"packages",pins}}.dump();
     need(index.size()<=65536,"storage.resource_capacity");write(parent,"resources.json",index);if(hook)hook("resource_index");flush(dir.fd);if(hook)hook("resources_flushed");return c::sha256(index);
 }
 }
@@ -132,7 +133,9 @@ struct LinuxGenerationStore::Impl {
         need(name.size()==34&&name.substr(0,2)=="g-"&&name.substr(2).find_first_not_of("0123456789abcdef")==std::string::npos,"storage.generation");
         auto dir=directory_at(root.fd,name.c_str());const auto manifest_bytes=required(dir.fd,"manifest.json",65536,synchronize);
         need(c::sha256(manifest_bytes)==pointer["manifest"],"storage.manifest_digest");const auto manifest=protocol::parse(manifest_bytes);
-        const bool separate=manifest.is_object()&&manifest.value("version",Json())=="0.3.0";
+        const bool themes=manifest.is_object()&&manifest.value("version",Json())=="0.4.0";
+        const bool separate=themes||(manifest.is_object()&&manifest.value("version",Json())=="0.3.0");
+        need(!themes||manifest.contains("resources"),"storage.resources");
         const bool resources=manifest.is_object()&&(manifest.value("version",Json())=="0.2.0"||(separate&&manifest.contains("resources")));
         need((resources?protocol::members(manifest,{"version","revision","settings","scene","identity","resources"}):
             (protocol::members(manifest,{"version","revision","settings","scene","identity"})&&(separate||manifest["version"]=="0.1.0")))&&digest(manifest["settings"])&&digest(manifest["scene"]),"storage.manifest");
@@ -146,7 +149,7 @@ struct LinuxGenerationStore::Impl {
             if(separate)expected.insert("request.json");
             exact_files(dir.fd,expected);
         }
-        if(resources)value.resources=decode_resources(dir.fd,manifest["resources"],value.documents,synchronize);
+        if(resources)value.resources=decode_resources(dir.fd,manifest["resources"],value.documents,synchronize,themes);
         need(value.documents.settings["revision"]==manifest["revision"],"storage.revision");const auto& id=manifest["identity"];
         if(!id.is_null()){
             need(separate?protocol::members(id,{"principal","epoch","request","body_sha256"}):protocol::members(id,{"principal","epoch","request","body"}),"storage.identity");
@@ -160,7 +163,9 @@ struct LinuxGenerationStore::Impl {
                 body=id["body"].get<std::string>();
             }
             const auto command=c::parse_command(body);c::validate_command(command);
-            need((command["schema_version"]=="0.5.0"||command["schema_version"]=="0.6.0"||command["schema_version"]=="0.7.0")==separate,"storage.identity_version");
+            need((command["schema_version"]=="0.5.0"||command["schema_version"]=="0.6.0"||command["schema_version"]=="0.7.0"||command["schema_version"]=="0.8.0")==separate,"storage.identity_version");
+            need((command["schema_version"]=="0.8.0")==themes,"storage.identity_version");
+            if(themes){need(value.resources!=nullptr,"storage.resources");c::validate_theme_command_binding(command,*value.resources);}
             need(command.contains("content")==resources&&(!resources||command["content"]==value.resources->selection()),"storage.resource_identity");
             const auto expected=protocol::decimal(command["expected_revision"].get_ref<const std::string&>());
             need(command["request_id"]==id["request"]&&command["intent"]=="commit"&&*expected<c::authored_revision(value.documents)&&
@@ -194,12 +199,14 @@ struct LinuxGenerationStore::Impl {
             const auto settings=next.documents.settings.dump(),scene=next.documents.scene.dump();
             write(dir.fd,"settings.json",settings);step("settings");write(dir.fd,"scene.json",scene);step("scene");
             Json manifest_value={{"version",next.resources?"0.2.0":"0.1.0"},{"revision",next.documents.settings["revision"]},{"settings",c::sha256(settings)},{"scene",c::sha256(scene)},{"identity",identity(next.identity)}};
-            if(next.identity&&(c::parse_command(next.identity->body)["schema_version"]=="0.5.0"||c::parse_command(next.identity->body)["schema_version"]=="0.6.0"||c::parse_command(next.identity->body)["schema_version"]=="0.7.0")){
-                manifest_value["version"]="0.3.0";manifest_value["identity"].erase("body");
+            const bool themes=next.identity&&c::parse_command(next.identity->body)["schema_version"]=="0.8.0";
+            need(!themes||next.resources!=nullptr,"storage.resources");
+            if(next.identity&&(c::parse_command(next.identity->body)["schema_version"]=="0.5.0"||c::parse_command(next.identity->body)["schema_version"]=="0.6.0"||c::parse_command(next.identity->body)["schema_version"]=="0.7.0"||themes)){
+                manifest_value["version"]=themes?"0.4.0":"0.3.0";manifest_value["identity"].erase("body");
                 manifest_value["identity"]["body_sha256"]=c::sha256(next.identity->body);
                 write(dir.fd,"request.json",next.identity->body);step("request");
             }
-            if(next.resources){c::validate_resource_binding(*next.resources,next.documents);manifest_value["resources"]=write_resources(dir.fd,*next.resources,hook);}
+            if(next.resources){c::validate_resource_binding(*next.resources,next.documents);manifest_value["resources"]=write_resources(dir.fd,*next.resources,hook,themes);}
             const auto manifest=manifest_value.dump();
             need(manifest.size()<=65536,"storage.manifest_size");write(dir.fd,"manifest.json",manifest);step("manifest");flush(dir.fd);flush(root.fd);step("generation");
             const auto selector=Json{{"version","0.1.0"},{"generation",generation},{"manifest",c::sha256(manifest)}}.dump();

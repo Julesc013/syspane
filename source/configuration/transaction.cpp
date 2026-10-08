@@ -1,4 +1,5 @@
 #include "transaction.hpp"
+#include "theme_command.hpp"
 #include <limits>
 
 namespace syspane::configuration {
@@ -86,7 +87,7 @@ Json Transactions::submit_impl(const std::string& principal,const std::string& c
         if(retained->identity->body!=body)return reply(request,"conflict","request.changed");
         return reply(request,"accepted","",authored_revision(retained->documents));
     }
-    const auto admission=record?ledger_.admit(principal,connection,request,body,now,(command["schema_version"]=="0.5.0"||command["schema_version"]=="0.6.0"||command["schema_version"]=="0.7.0")):protocol::Admission::admitted;
+    const auto admission=record?ledger_.admit(principal,connection,request,body,now,(command["schema_version"]=="0.5.0"||command["schema_version"]=="0.6.0"||command["schema_version"]=="0.7.0"||command["schema_version"]=="0.8.0")):protocol::Admission::admitted;
     if(admission==protocol::Admission::conflict)return reply(request,"conflict","request.changed");
     if(admission==protocol::Admission::replay)return protocol::parse(ledger_.get(principal,request,now)->result);
     if(admission==protocol::Admission::busy||admission==protocol::Admission::pending)return reply(request,"busy","request.capacity");
@@ -97,7 +98,10 @@ Json Transactions::submit_impl(const std::string& principal,const std::string& c
         auto candidate=prepare_authored(current_.documents,command,authority,checked_policy);
         ResourceSnapshot resources;
         if(command.contains("content")){
-            require(supports_resources(),"resource.contract");resources=resource_provider_.prepare(candidate,command["content"]);
+            require(supports_resources(),"resource.contract");
+            if(command["schema_version"]=="0.8.0"){require(supports_theme_overrides()&&current_.resources,"resource.contract");resources=prepare_theme_command(*current_.resources,candidate,command,checked_policy,resource_provider_.capabilities);}
+            else resources=resource_provider_.prepare(candidate,command["content"]);
+            if(resource_provider_.after_prepare)resource_provider_.after_prepare();
             require(resources&&resources->selection()==command["content"],"resource.selection");
             validate_resource_binding(*resources,candidate);authorize_resources(*resources,checked_policy,resource_provider_.capabilities);
         }else{

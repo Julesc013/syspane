@@ -80,12 +80,15 @@ contracts and native tests; none is hidden in optional extensions.
 The [theme-authoring input/artifact contract](../delivery/packages/w-10-theme-authoring.md)
 preserves exact no-ops and authors complete base/role fonts without mutating an
 installed package. Generated identity binds the source license and edited content.
-A versioned durable override, atomic editor history and native controls remain required
-before these artifacts become saved theme edits. Construction is not publication.
+The durable command boundary below now publishes versioned overrides. Atomic editor
+history and native controls remain required before native theme editing is enabled.
 
 
 The [bounded theme override contract](../delivery/packages/w-10-theme-overrides.md)
 defines exact resource selection 0.2 and immutable replacement/reset beside the
-original preset closure. The explicit component API preserves image references and
-does not enable a wire command, native authoring or new generation recovery. Those
-require their own versioned admission and interrupted/replayed transaction evidence.
+original preset closure. The explicit component API preserves image references. The
+[durable theme command](../delivery/packages/w-08-theme-commands.md) now admits exact
+source-bound font intent through command 0.8 and Linux generation 0.4 recovery. It
+retains the original closure and one canonical override, including reset and exact
+request reconciliation. Native authoring still requires atomic editor resource history,
+font controls, independent pixels/save/reopen and policy-loss erasure evidence.

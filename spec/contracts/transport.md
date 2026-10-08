@@ -190,3 +190,17 @@ optional incompatibility removes visibility and a late 0.7 command returns
 feature.unsupported before publication. Denied configuration.visibility returns
 policy.denied. The 327680-byte body, framing, queues, 128 admissions, exact request
 bytes, cancellation and replay semantics retain their owners and limits.
+
+
+The [durable theme-command boundary](../delivery/packages/w-08-theme-commands.md)
+adds [command 0.8](command-v0.8.schema.json) with exact resource selection 0.2 and
+nullable source-bound base/role font intent. It requires command-result 0.1 and
+configuration.theme-overrides in addition to every command 0.7 feature dependency.
+The owner must also support theme.typography and configuration.theme-overrides.
+Current policy gates edits, resets, retained results and reconciliation; non-null
+font intent additionally requires theme.edit and the console or desktop role.
+Unknown required combinations fail negotiation; optional incompatibility removes
+the feature and late unsupported commands reject before preparation. Existing
+framing, parser/body/ledger bounds and raw request replay identity are unchanged.
+Linux generation 0.4/resource index 0.2 preserve exact request/artifact bytes and
+fulfilled font intent. Stored/durable facts do not assert activation or visibility.

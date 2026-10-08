@@ -3,7 +3,7 @@ import hashlib,json
 from pathlib import Path
 import sys
 ROOT=Path(__file__).resolve().parents[1]
-NAMES=('settings','scene-v0.2','scene-v0.3','scene-v0.4','scene-v0.5','layout','binding','visibility','command-v0.2','command-v0.3','command-v0.4','command-v0.5','command-v0.6','command-v0.7','command-result','content-package','content-catalog','preset','theme','theme-v0.2','resource-selection-v0.2')
+NAMES=('settings','scene-v0.2','scene-v0.3','scene-v0.4','scene-v0.5','layout','binding','visibility','command-v0.2','command-v0.3','command-v0.4','command-v0.5','command-v0.6','command-v0.7','command-v0.8','command-result','content-package','content-catalog','preset','theme','theme-v0.2','resource-selection-v0.2')
 KEYS={'$schema','$id','$defs','$ref','$comment','title','description','type','properties','required','additionalProperties',
       'const','enum','oneOf','anyOf','allOf','if','then','else','not','minLength','maxLength','pattern','propertyNames',
       'minItems','maxItems','uniqueItems','items','contains','minimum','maximum','maxProperties'}

@@ -216,7 +216,7 @@
         "SP-PROTOCOL",
         "SP-COMMANDS"
       ],
-      "sha256": "467422c949679dbf901cd51df04d014f7354b5a992ffdb91dd364f8a996dcd29"
+      "sha256": "af0e713cd0b6d7e48487df499002a7f4097c1565c3da07c058d40a4771a344a8"
     },
     {
       "id": "SP-VERSIONS",
@@ -489,7 +489,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "59dd94ed3ca9b371214f47ae1bb7d2cb5d59d206d10efb264c563c5ad764c69e"
+      "sha256": "a405f1e4f5421fbef3573c8103e33c5de9ed2da90612baadf6e33746d9186295"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -884,7 +884,7 @@
       "requires": [
         "SP-CURRENT"
       ],
-      "sha256": "1ef48695ac6ac46f8dd7069f106a6c6ac3a0a69c294ac4913aceb4d6236a09dc"
+      "sha256": "5468899d6bb33428c596af44523e995ca67b343c09b7d1fb7ed3a602022407e3"
     },
     {
       "id": "SP-KEYBOARD-INPUT-HANDOFF",
@@ -1489,6 +1489,17 @@
         "SP-RECOVERY"
       ],
       "sha256": "0840aff27adde95a1368eec6c6cc12a7bb8112a69d6f50392257e1a250066909"
+    },
+    {
+      "id": "SP-W08-THEME-COMMANDS",
+      "path": "delivery/packages/w-08-theme-commands.md",
+      "title": "Durable authored theme commands",
+      "description": "Negotiated font edits, versioned resource generations and exact restart reconciliation.",
+      "requires": [
+        "SP-W10-THEME-OVERRIDES",
+        "SP-W08-LARGE-COMMANDS"
+      ],
+      "sha256": "c16d450eea95c67e62995de72a5a1912de79bfd11843717954dba0e87310fcb0"
     },
     {
       "id": "SP-W09-BINDINGS",
@@ -2533,6 +2544,17 @@
       "sha256": "dbfd70621f055bae21d4df6c01263dffb920fd11b091036938b96c202558a443"
     },
     {
+      "id": "SP-THEME-COMMANDS-HANDOFF",
+      "path": "delivery/theme-commands-handoff.md",
+      "title": "Durable authored theme command checkpoint",
+      "description": "Negotiated font intent, versioned Linux publication and independent restart evidence.",
+      "requires": [
+        "SP-W08-THEME-COMMANDS",
+        "SP-THEME-OVERRIDES-HANDOFF"
+      ],
+      "sha256": "6a82900e34caa934f14d1348b118f3defdd9786d0ab5a5452ef111b6aa9776eb"
+    },
+    {
       "id": "SP-THEME-OVERRIDES-HANDOFF",
       "path": "delivery/theme-overrides-handoff.md",
       "title": "Bounded theme resource override checkpoint",
@@ -2834,7 +2856,7 @@
         "SP-STATE",
         "SP-RENDERING"
       ],
-      "sha256": "5f36e6c22693e161a4db7700a4a0fe5d7863965e07cae69e4d0658da230a1755"
+      "sha256": "ad34dd09e945c03845623682f90830a2b7cb64b822931ea3c213770de0e42d2d"
     },
     {
       "id": "SP-SETTINGS",

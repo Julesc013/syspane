@@ -4,7 +4,7 @@
 namespace syspane::configuration {
 using protocol::Error;
 namespace {
-protocol::Handshake server_hello(const std::string& epoch, const std::optional<InventorySource>& source,bool commands=false,bool resources=false,bool large=false,bool locks=false,bool visibility=false) {
+protocol::Handshake server_hello(const std::string& epoch, const std::optional<InventorySource>& source,bool commands=false,bool resources=false,bool large=false,bool locks=false,bool visibility=false,bool themes=false) {
     protocol::Handshake hello{1, protocol::frame_limit, "console", epoch,
         {{"command", "0.2.0"}, {"command-result", "0.1.0"}}, {}, {"settings.preview", "result.get", "cancel"}};
     if(commands){hello.optional.insert({"configuration.transactions","result.reconcile"});
@@ -13,6 +13,7 @@ protocol::Handshake server_hello(const std::string& epoch, const std::optional<I
     if(large){hello.documents.insert({"command","0.5.0"});hello.optional.insert("configuration.large-commands");}
     if(locks&&resources&&large){hello.documents.insert({"command","0.6.0"});hello.optional.insert("configuration.edit-locks");}
     if(visibility&&locks&&resources&&large){hello.documents.insert({"command","0.7.0"});hello.optional.insert("configuration.visibility");}
+    if(themes&&visibility&&locks&&resources&&large){hello.documents.insert({"command","0.8.0"});hello.optional.insert("configuration.theme-overrides");}
     if (source) {
         const auto& version = source->document_version;
         hello.documents.insert({{"telemetry",version},{"snapshot",version},{"observation",version}});
@@ -104,9 +105,9 @@ void Sessions::dispatch(Connection& c, const protocol::Message& message, std::ui
     if (!c.negotiated) {
         if (message.type != "hello") throw Error("session.expected_hello");
         const auto client = protocol::handshake(message.body);
-        c.selection = protocol::negotiate(server_hello(epoch_,source_,static_cast<bool>(commands_),commands_&&commands_->supports_resources(),commands_&&commands_->supports_large_commands(),commands_&&commands_->supports_edit_locks(),commands_&&commands_->supports_visibility()), client, c.authority.role_grants);
+        c.selection = protocol::negotiate(server_hello(epoch_,source_,static_cast<bool>(commands_),commands_&&commands_->supports_resources(),commands_&&commands_->supports_large_commands(),commands_&&commands_->supports_edit_locks(),commands_&&commands_->supports_visibility(),commands_&&commands_->supports_theme_overrides()), client, c.authority.role_grants);
         c.authority.role = client.role;
-        const bool has_commands = (c.selection.documents.count({"command", "0.2.0"})||c.selection.documents.count({"command", "0.3.0"})||c.selection.documents.count({"command", "0.4.0"})||c.selection.documents.count({"command", "0.5.0"})||c.selection.documents.count({"command", "0.6.0"})||c.selection.documents.count({"command", "0.7.0"})) && c.selection.documents.count({"command-result", "0.1.0"});
+        const bool has_commands = (c.selection.documents.count({"command", "0.2.0"})||c.selection.documents.count({"command", "0.3.0"})||c.selection.documents.count({"command", "0.4.0"})||c.selection.documents.count({"command", "0.5.0"})||c.selection.documents.count({"command", "0.6.0"})||c.selection.documents.count({"command", "0.7.0"})||c.selection.documents.count({"command", "0.8.0"})) && c.selection.documents.count({"command-result", "0.1.0"});
         if (!has_commands) {
             for (const auto& feature : {"settings.preview", "result.get", "cancel", "configuration.transactions"}) {
                 if (client.required.count(feature)) throw Error("handshake.document_version");
@@ -124,26 +125,30 @@ void Sessions::dispatch(Connection& c, const protocol::Message& message, std::ui
             if(client.required.count("result.reconcile"))throw Error("handshake.document_version");
             c.selection.features.erase("result.reconcile");
         }
-        if(!has_commands||(!c.selection.documents.count({"command","0.3.0"})&&!c.selection.documents.count({"command","0.4.0"})&&(!c.selection.documents.count({"command","0.5.0"})&&(!c.selection.documents.count({"command","0.6.0"})&&!c.selection.documents.count({"command","0.7.0"}))))||!c.selection.features.count("configuration.transactions")){
+        if(!has_commands||(!c.selection.documents.count({"command","0.3.0"})&&!c.selection.documents.count({"command","0.4.0"})&&(!c.selection.documents.count({"command","0.5.0"})&&(!c.selection.documents.count({"command","0.6.0"})&&(!c.selection.documents.count({"command","0.7.0"})&&!c.selection.documents.count({"command","0.8.0"})))))||!c.selection.features.count("configuration.transactions")){
             if(client.required.count("configuration.content"))throw Error("handshake.document_version");
             c.selection.features.erase("configuration.content");
         }
-        if((!c.selection.documents.count({"command","0.4.0"})&&(!c.selection.documents.count({"command","0.5.0"})&&(!c.selection.documents.count({"command","0.6.0"})&&!c.selection.documents.count({"command","0.7.0"}))))||!c.selection.features.count("configuration.content")){
+        if((!c.selection.documents.count({"command","0.4.0"})&&(!c.selection.documents.count({"command","0.5.0"})&&(!c.selection.documents.count({"command","0.6.0"})&&(!c.selection.documents.count({"command","0.7.0"})&&!c.selection.documents.count({"command","0.8.0"})))))||!c.selection.features.count("configuration.content")){
             if(client.required.count("configuration.scene-content"))throw Error("handshake.document_version");
             c.selection.features.erase("configuration.scene-content");
         }
-        if((!c.selection.documents.count({"command","0.5.0"})&&(!c.selection.documents.count({"command","0.6.0"})&&!c.selection.documents.count({"command","0.7.0"})))||!c.selection.documents.count({"command-result","0.1.0"})||
+        if((!c.selection.documents.count({"command","0.5.0"})&&(!c.selection.documents.count({"command","0.6.0"})&&(!c.selection.documents.count({"command","0.7.0"})&&!c.selection.documents.count({"command","0.8.0"}))))||!c.selection.documents.count({"command-result","0.1.0"})||
            !c.selection.features.count("configuration.transactions")||c.selection.max_frame_bytes<protocol::large_command_frame_floor){
             if(client.required.count("configuration.large-commands"))throw Error("handshake.large_commands");
             c.selection.features.erase("configuration.large-commands");
         }
-        if((!c.selection.documents.count({"command","0.6.0"})&&!c.selection.documents.count({"command","0.7.0"}))||!c.selection.features.count("configuration.large-commands")||!c.selection.features.count("configuration.content")||!c.selection.features.count("configuration.scene-content")){
+        if((!c.selection.documents.count({"command","0.6.0"})&&(!c.selection.documents.count({"command","0.7.0"})&&!c.selection.documents.count({"command","0.8.0"})))||!c.selection.features.count("configuration.large-commands")||!c.selection.features.count("configuration.content")||!c.selection.features.count("configuration.scene-content")){
             if(client.required.count("configuration.edit-locks"))throw Error("handshake.edit_locks");
             c.selection.features.erase("configuration.edit-locks");
         }
-        if(!c.selection.documents.count({"command","0.7.0"})||!c.selection.features.count("configuration.edit-locks")){
+        if((!c.selection.documents.count({"command","0.7.0"})&&!c.selection.documents.count({"command","0.8.0"}))||!c.selection.features.count("configuration.edit-locks")){
             if(client.required.count("configuration.visibility"))throw Error("handshake.visibility");
             c.selection.features.erase("configuration.visibility");
+        }
+        if(!c.selection.documents.count({"command","0.8.0"})||!c.selection.features.count("configuration.visibility")){
+            if(client.required.count("configuration.theme-overrides"))throw Error("handshake.theme_overrides");
+            c.selection.features.erase("configuration.theme-overrides");
         }
         const auto version = source_ ? source_->document_version : "0.1.0";
         if (!c.selection.documents.count({"telemetry",version}) || !c.selection.documents.count({"snapshot",version}) ||
@@ -175,7 +180,7 @@ void Sessions::dispatch(Connection& c, const protocol::Message& message, std::ui
         queue(c,"result.reconciled",commands_->reconcile(c.principal,c.authority,message.body,now));return;
     }
     if (message.type == "command") {
-        if (!c.selection.features.count("settings.preview")&&!c.selection.features.count("configuration.transactions")&&message.body.value("schema_version",Json())!="0.5.0"&&message.body.value("schema_version",Json())!="0.6.0"&&message.body.value("schema_version",Json())!="0.7.0") throw Error("feature.unsupported");
+        if (!c.selection.features.count("settings.preview")&&!c.selection.features.count("configuration.transactions")&&message.body.value("schema_version",Json())!="0.5.0"&&message.body.value("schema_version",Json())!="0.6.0"&&message.body.value("schema_version",Json())!="0.7.0"&&message.body.value("schema_version",Json())!="0.8.0") throw Error("feature.unsupported");
         const auto& body = message.body;
         if (!body.contains("request_id") || !body["request_id"].is_string() ||
             !protocol::identifier(body["request_id"].get_ref<const std::string&>())) throw Error("command.identity");
@@ -186,9 +191,9 @@ void Sessions::dispatch(Connection& c, const protocol::Message& message, std::ui
             (body["schema_version"]=="0.4.0"&&!c.selection.features.count("configuration.scene-content")))){
             queue(c,"result",result({"invalid","feature.unsupported"},request,epoch_,revision_));return;
         }
-        if((body.value("schema_version",Json())=="0.6.0"||body.value("schema_version",Json())=="0.7.0")&&!c.selection.features.count("configuration.edit-locks")){queue(c,"result",result({"invalid","feature.unsupported"},request,epoch_,revision_));return;}
-        if(body.value("schema_version",Json())=="0.7.0"&&!c.selection.features.count("configuration.visibility")){queue(c,"result",result({"invalid","feature.unsupported"},request,epoch_,revision_));return;}
-        if(body.value("schema_version",Json())=="0.5.0"||body.value("schema_version",Json())=="0.6.0"||body.value("schema_version",Json())=="0.7.0"){
+        if((body.value("schema_version",Json())=="0.6.0"||(body.value("schema_version",Json())=="0.7.0"||body.value("schema_version",Json())=="0.8.0"))&&!c.selection.features.count("configuration.edit-locks")){queue(c,"result",result({"invalid","feature.unsupported"},request,epoch_,revision_));return;}
+        if((body.value("schema_version",Json())=="0.7.0"||body.value("schema_version",Json())=="0.8.0")&&!c.selection.features.count("configuration.visibility")){queue(c,"result",result({"invalid","feature.unsupported"},request,epoch_,revision_));return;}
+        if(body.value("schema_version",Json())=="0.5.0"||body.value("schema_version",Json())=="0.6.0"||(body.value("schema_version",Json())=="0.7.0"||body.value("schema_version",Json())=="0.8.0")){
             bool scene_content=false;if(body.contains("operations")&&body["operations"].is_array())for(const auto& op:body["operations"])
                 if(op.is_object()&&op.value("op",Json())=="scene.replace"&&op.contains("scene")&&op["scene"].is_object()&&(op["scene"].value("schema_version",Json())=="0.3.0"||op["scene"].value("schema_version",Json())=="0.4.0"||op["scene"].value("schema_version",Json())=="0.5.0"))scene_content=true;
             if(!c.selection.features.count("configuration.large-commands")||
@@ -197,6 +202,7 @@ void Sessions::dispatch(Connection& c, const protocol::Message& message, std::ui
                 queue(c,"result",result({"invalid","feature.unsupported"},request,epoch_,revision_));return;
             }
         }
+        if(body.value("schema_version",Json())=="0.8.0"&&!c.selection.features.count("configuration.theme-overrides")){queue(c,"result",result({"invalid","feature.unsupported"},request,epoch_,revision_));return;}
         if(commands_){
             // Even legacy previews share this owner's admission/replay budget.
             // A smaller negotiated frame cannot carry this concrete async profile.

@@ -1,0 +1,312 @@
+{
+  "schema_version": "0.8.0",
+  "request_id": "theme:edit",
+  "expected_revision": "40",
+  "policy_generation": "7",
+  "intent": "commit",
+  "content": {
+    "package": {
+      "id": "package:settings",
+      "sha256": "2bd8a42456ffba67d97a551cc48642045b1491881eb8033af6f6b6d9b30954ee",
+      "version": "0.1.0"
+    },
+    "preset": {
+      "id": "preset:settings",
+      "sha256": "b3dd48620f136589a9a302f4c2219b82e55f359baf573fc13097c02e9670a123",
+      "version": "0.1.0"
+    }
+  },
+  "theme_edit": {
+    "source": {
+      "id": "theme:native",
+      "sha256": "679694cfa2833ee8d0cb50c524f7b762f6dcf1545d83fa65ed39967d9e362650",
+      "version": "0.1.0"
+    },
+    "font": {
+      "family": "Noto Sans",
+      "size_dip": 17.25,
+      "weight": 500,
+      "style": "normal"
+    },
+    "font_roles": {
+      "body": {
+        "family": "Noto Sans",
+        "size_dip": 19.5,
+        "weight": 400,
+        "style": "normal"
+      },
+      "label": {
+        "family": "Noto Sans",
+        "size_dip": 14.5,
+        "weight": 700,
+        "style": "normal"
+      },
+      "value": {
+        "family": "Noto Sans",
+        "size_dip": 32.5,
+        "weight": 800,
+        "style": "oblique"
+      },
+      "diagnostic": {
+        "family": "Noto Sans",
+        "size_dip": 16.5,
+        "weight": 600,
+        "style": "italic"
+      }
+    }
+  },
+  "operations": [
+    {
+      "op": "scene.replace",
+      "scene": {
+        "extensions": {
+          "author.note": {
+            "preserve": [
+              "x",
+              1,
+              false
+            ]
+          }
+        },
+        "revision": "40",
+        "roots": [
+          "widget:text",
+          "widget:value",
+          "widget:status",
+          "widget:group",
+          "widget:table",
+          "widget:chart",
+          "widget:image"
+        ],
+        "scene_id": "scene:content",
+        "schema_version": "0.3.0",
+        "theme_id": "theme:authored:859dcc9df372b35b0adc84042f012580a6c8f26b5cf16de9d88ae67a7f58fd86",
+        "widgets": [
+          {
+            "bindings": [],
+            "content": {
+              "body": "Plain body\nsecond line"
+            },
+            "display": {
+              "local_id": "D1"
+            },
+            "id": "widget:text",
+            "kind": "text",
+            "layout": {
+              "base": {
+                "height": 200,
+                "kind": "fixed",
+                "width": 400,
+                "x": 0,
+                "y": 0
+              }
+            },
+            "priority": "normal",
+            "title": "Text"
+          },
+          {
+            "bindings": [
+              {
+                "entity_type": "network.interface",
+                "field": "network.receive_bytes",
+                "kind": "selector",
+                "limit": 1,
+                "mode": "singleton",
+                "predicates": [],
+                "scope": {
+                  "kind": "local_host"
+                },
+                "sort": []
+              }
+            ],
+            "content": {},
+            "display": {
+              "local_id": "D1"
+            },
+            "id": "widget:value",
+            "kind": "value",
+            "layout": {
+              "base": {
+                "height": 200,
+                "kind": "fixed",
+                "width": 400,
+                "x": 20,
+                "y": 20
+              }
+            },
+            "priority": "normal",
+            "title": "Value"
+          },
+          {
+            "bindings": [
+              {
+                "entity_type": "network.interface",
+                "field": "network.receive_bytes",
+                "kind": "selector",
+                "limit": 1,
+                "mode": "singleton",
+                "predicates": [],
+                "scope": {
+                  "kind": "local_host"
+                },
+                "sort": []
+              }
+            ],
+            "content": {},
+            "display": {
+              "local_id": "D1"
+            },
+            "id": "widget:status",
+            "kind": "status",
+            "layout": {
+              "base": {
+                "height": 200,
+                "kind": "fixed",
+                "width": 400,
+                "x": 40,
+                "y": 40
+              }
+            },
+            "priority": "normal",
+            "title": "Status"
+          },
+          {
+            "bindings": [],
+            "children": [],
+            "content": {},
+            "display": {
+              "local_id": "D1"
+            },
+            "id": "widget:group",
+            "kind": "group",
+            "layout": {
+              "base": {
+                "height": 200,
+                "kind": "fixed",
+                "width": 400,
+                "x": 60,
+                "y": 60
+              }
+            },
+            "priority": "normal",
+            "title": "Group"
+          },
+          {
+            "bindings": [
+              {
+                "entity_type": "network.interface",
+                "field": "network.receive_bytes",
+                "kind": "selector",
+                "limit": 8,
+                "mode": "collection",
+                "predicates": [],
+                "scope": {
+                  "kind": "local_host"
+                },
+                "sort": []
+              }
+            ],
+            "content": {
+              "columns": [
+                {
+                  "label": "Receive"
+                }
+              ]
+            },
+            "display": {
+              "local_id": "D1"
+            },
+            "id": "widget:table",
+            "kind": "table",
+            "layout": {
+              "base": {
+                "height": 200,
+                "kind": "fixed",
+                "width": 400,
+                "x": 80,
+                "y": 80
+              }
+            },
+            "priority": "normal",
+            "title": "Table"
+          },
+          {
+            "bindings": [
+              {
+                "entity_type": "network.interface",
+                "field": "network.receive_bytes",
+                "kind": "selector",
+                "limit": 1,
+                "mode": "singleton",
+                "predicates": [],
+                "scope": {
+                  "kind": "local_host"
+                },
+                "sort": []
+              }
+            ],
+            "content": {
+              "axis": {
+                "include_zero": true,
+                "mode": "auto"
+              },
+              "interpolation": "linear",
+              "max_points": 256,
+              "window_ms": 60000
+            },
+            "display": {
+              "local_id": "D1"
+            },
+            "id": "widget:chart",
+            "kind": "chart",
+            "layout": {
+              "base": {
+                "height": 200,
+                "kind": "fixed",
+                "width": 400,
+                "x": 100,
+                "y": 100
+              }
+            },
+            "priority": "normal",
+            "title": "Chart"
+          },
+          {
+            "bindings": [],
+            "content": {
+              "alt": "Public sample image",
+              "asset": {
+                "package": {
+                  "id": "package:settings-native",
+                  "sha256": "82793f6c05865da00783ae14aa4468c5483d42f06cfbdabde757ba0b3bfdfb7b",
+                  "version": "0.1.0"
+                },
+                "path": "images/pixel.png",
+                "sha256": "78253200c249d4d84293b2a1e6fc803adedeba8645f38d6bc2f6734a2dfacec9"
+              },
+              "fit": "contain",
+              "height_dip": 64,
+              "width_dip": 64
+            },
+            "display": {
+              "local_id": "D1"
+            },
+            "id": "widget:image",
+            "kind": "image",
+            "layout": {
+              "base": {
+                "height": 200,
+                "kind": "fixed",
+                "width": 400,
+                "x": 120,
+                "y": 120
+              }
+            },
+            "priority": "normal",
+            "title": "Image"
+          }
+        ]
+      }
+    }
+  ]
+}

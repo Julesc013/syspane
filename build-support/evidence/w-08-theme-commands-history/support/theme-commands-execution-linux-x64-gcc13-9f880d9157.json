@@ -1,0 +1,74 @@
+[
+  {
+    "step": "configure",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-08T03:46:19.664283+00:00",
+    "finished_at": "2026-10-08T03:46:20.437571+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2454980749,\n  \"linux_campaign_bytes\": 4713554043,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "configure",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/theme_commands_step.py",
+      "linux-x64-gcc13",
+      "configure"
+    ],
+    "started_at": "2026-10-08T03:46:20.438133+00:00",
+    "finished_at": "2026-10-08T03:46:30.812699+00:00",
+    "exit": 0,
+    "stdout": "Preset CMake variables:\n\n  BUILD_TESTING=\"ON\"\n  CMAKE_BUILD_TYPE=\"Debug\"\n  CMAKE_CXX_COMPILER=\"g++\"\n  SYSPANE_PROFILE=\"linux-x64-gcc13\"\n\nprofile verified: linux-x64-gcc13\nvendored dependency digests: pass\ndiagnostic toolkit verified: GTK 3.24.41 / Ubuntu 3.24.41-4ubuntu1.3\nnative text dependency identity verified: 358 files\nnative image dependencies verified: 344 files\nnative GJS clock build dependencies verified\n-- Configuring done (5.7s)\n-- Generating done (0.1s)\n-- Build files have been written to: /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-08-theme-commands/linux-x64-gcc13-configure-a60cb30a51\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-08T03:46:30.813005+00:00",
+    "finished_at": "2026-10-08T03:46:31.480124+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2456774700,\n  \"linux_campaign_bytes\": 4713558924,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/theme_commands_step.py",
+      "linux-x64-gcc13",
+      "build"
+    ],
+    "started_at": "2026-10-08T03:46:31.480449+00:00",
+    "finished_at": "2026-10-08T03:47:00.895509+00:00",
+    "exit": 1,
+    "stdout": "/generation_store_linux.cpp.o\n[16/78] Linking CXX static library libsyspane_generation_store.a\n[17/78] Building CXX object CMakeFiles/syspane_configuration_probe.dir/source/application/configuration_probe.cpp.o\n[18/78] Linking CXX executable SysPane.NetworkProbe\n[19/78] Linking CXX executable SysPane.ConfigProbe\n[20/78] Linking CXX shared library libsyspane_gjs_clock.so\n[21/78] Building CXX object CMakeFiles/syspane_command_probe.dir/source/application/command_probe.cpp.o\n[22/78] Building CXX object CMakeFiles/syspane_demand_sessions.dir/source/runtime/demand_sessions.cpp.o\n[23/78] Linking CXX executable SysPane.CommandProbe\n[24/78] Linking CXX static library libsyspane_demand_sessions.a\n[25/78] Linking CXX executable SysPane.RecoveryProbe\n[26/78] Building CXX object CMakeFiles/syspane_ipc_probe.dir/source/application/ipc_probe.cpp.o\n[27/78] Linking CXX executable SysPane.IpcProbe\n[28/78] Building CXX object CMakeFiles/syspane_telemetry_probe.dir/source/application/telemetry_probe.cpp.o\n[29/78] Linking CXX executable SysPane.TelemetryProbe\n[30/78] Building CXX object CMakeFiles/syspane_collector_probe.dir/source/application/collector_probe.cpp.o\n[31/78] Linking CXX executable SysPane.CollectorProbe\n[32/78] Building CXX object CMakeFiles/syspane_large_command_tests.dir/tests/configuration/large_command_tests.cpp.o\n[33/78] Linking CXX executable syspane_large_command_tests\n[34/78] Building CXX object CMakeFiles/syspane_editor_tests.dir/tests/editor/editor_draft_tests.cpp.o\n[35/78] Building CXX object CMakeFiles/syspane_settings_tests.dir/tests/configuration/settings_draft_tests.cpp.o\n[36/78] Building CXX object CMakeFiles/syspane_editor_tests.dir/tests/editor/edit_lock_tests.cpp.o\n[37/78] Linking CXX executable syspane_theme_override_tests\n[38/78] Linking CXX executable syspane_theme_authoring_tests\n[39/78] Linking CXX executable syspane_typography_tests\n[40/78] Building CXX object CMakeFiles/syspane_editor_tests.dir/tests/editor/visibility_admission_tests.cpp.o\n[41/78] Building CXX object CMakeFiles/syspane_settings_tests.dir/tests/configuration/settings_content_tests.cpp.o\n[42/78] Linking CXX executable syspane_settings_tests\n[43/78] Linking CXX executable syspane_editor_tests\n[44/78] Building CXX object CMakeFiles/syspane_theme_command_tests.dir/tests/configuration/theme_command_tests.cpp.o\nFAILED: CMakeFiles/syspane_theme_command_tests.dir/tests/configuration/theme_command_tests.cpp.o \n/usr/bin/g++ -DJSON_DIAGNOSTICS=0 -DJSON_DIAGNOSTIC_POSITIONS=1 -I/mnt/d/Projects/SysPane/syspane/source/configuration -I/mnt/d/Projects/SysPane/syspane/source/protocol -I/mnt/d/Projects/SysPane/syspane/source/interfaces -isystem /mnt/d/Projects/SysPane/syspane/source/third_party -g -std=c++17 -Wall -Wextra -Wpedantic -Werror -march=x86-64 -mtune=generic -MD -MT CMakeFiles/syspane_theme_command_tests.dir/tests/configuration/theme_command_tests.cpp.o -MF CMakeFiles/syspane_theme_command_tests.dir/tests/configuration/theme_command_tests.cpp.o.d -o CMakeFiles/syspane_theme_command_tests.dir/tests/configuration/theme_command_tests.cpp.o -c /mnt/d/Projects/SysPane/syspane/tests/configuration/theme_command_tests.cpp\n/mnt/d/Projects/SysPane/syspane/tests/configuration/theme_command_tests.cpp: In function \u2018void {anonymous}::run(const std::string&, const std::string&)\u2019:\n/mnt/d/Projects/SysPane/syspane/tests/configuration/theme_command_tests.cpp:66:13: error: this \u2018if\u2019 clause does not guard... [-Werror=misleading-indentation]\n   66 |             if(mode>=1&&mode<=7)h[\"optional_features\"].erase(mode-1);if(mode==8)h[\"max_frame_bytes\"]=328703;if(mode==9)h[\"document_versions\"].push_back({{\"document\",\"command\"},{\"version\",\"0.7.0\"}});if(mode==10)h[\"document_versions\"].erase(1);if(mode==11)h[\"document_versions\"][0][\"version\"]=\"0.7.0\";if(mode==12){h[\"optional_features\"].erase(3);h[\"required_features\"].push_back(\"configuration.theme-overrides\");}\n      |             ^~\n/mnt/d/Projects/SysPane/syspane/tests/configuration/theme_command_tests.cpp:66:70: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the \u2018if\u2019\n   66 |             if(mode>=1&&mode<=7)h[\"optional_features\"].erase(mode-1);if(mode==8)h[\"max_frame_bytes\"]=328703;if(mode==9)h[\"document_versions\"].push_back({{\"document\",\"command\"},{\"version\",\"0.7.0\"}});if(mode==10)h[\"document_versions\"].erase(1);if(mode==11)h[\"document_versions\"][0][\"version\"]=\"0.7.0\";if(mode==12){h[\"optional_features\"].erase(3);h[\"required_features\"].push_back(\"configuration.theme-overrides\");}\n      |                                                                      ^~\ncc1plus: all warnings being treated as errors\n[45/78] Building CXX object CMakeFiles/syspane_authored_tests.dir/tests/configuration/authored_tests.cpp.o\n[46/78] Building CXX object CMakeFiles/syspane_authored_tests.dir/tests/configuration/scene_content_tests.cpp.o\n[47/78] Building CXX object CMakeFiles/syspane_authored_tests.dir/tests/configuration/content_tests.cpp.o\nninja: build stopped: subcommand failed.\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-08-theme-commands/linux-x64-gcc13-build-f84324d663\n",
+    "stderr": ""
+  }
+]

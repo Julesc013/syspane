@@ -12,24 +12,23 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-08T03:28:30.714664+00:00", "scope": "Bounded versioned theme selection and replacement verified; durable command/store integration remains next"}
+updated: {"by": "codex", "at": "2026-10-08T04:00:58.051175+00:00", "scope": "Negotiated theme commands and Linux durable recovery verified; atomic editor history and native controls remain next"}
 ---
 
 # Current state and next admitted boundary
 
-The [theme-override checkpoint](theme-overrides-handoff.md) adds an explicit
-versioned resource selection and immutable replacement of one authored theme. It
-preserves the original preset/image closure, bounds repeated edits and keeps existing
-command/store readers closed to the new format. Durable command/store integration,
-atomic editor resource history and native controls remain required. All five complete
+The [durable theme-command checkpoint](theme-commands-handoff.md) adds
+negotiated font edits and exact Linux persistence/recovery. It preserves the original
+preset/image closure and one immutable theme override. Interrupted writes, lost
+results, replay, cancellation and policy revocation have executable checks. Atomic
+editor resource history and native font controls remain next; all five complete
 editions remain open.
 
-The [theme-authoring prerequisite](theme-authoring-handoff.md) now validates
-lossless base/role font input and creates deterministic immutable theme artifacts.
-Exact no-ops retain the original document, and generated identities bind both theme
-content and preserved license metadata. The override component now has the checkpoint above. Native controls still require
-durable command/store integration; these helpers do not save or enable edited themes
-by themselves. All five complete editions remain open.
+The earlier [theme authoring](theme-authoring-handoff.md) and
+[resource override](theme-overrides-handoff.md) checkpoints supply lossless
+font input and deterministic artifacts whose identities preserve license metadata.
+Native controls still require editor integration and independent preview/save/reopen
+evidence before enabling edited theme rendering.
 
 The [role-composition checkpoint](role-composition-handoff.md) connects theme
 fonts to body text, labels, values and diagnostics in the Linux scene renderer.
@@ -742,6 +741,12 @@ ScreenSave are not adopted runtime dependencies. License, contribution and
 release-identity decisions remain open.
 
 ## Next work
+
+The immediate theme-editing boundary is atomic editor resource history: carry base,
+draft and undo/redo resources through Apply/reconcile/reload with bounded retained
+bytes, then add native font controls and independent pixels/save/reopen/erasure checks.
+Use the [theme-command handoff](theme-commands-handoff.md) and W-10 row; preserve
+the existing work graph and continue unrelated native tracks independently.
 
 Start with the [campaign coverage audit](campaign-coverage.md). W-03 now has a
 [read-only Windows observer](windows-host-inventory-handoff.md): native Explorer

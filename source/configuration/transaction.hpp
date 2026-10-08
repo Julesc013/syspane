@@ -9,6 +9,7 @@ struct Committed {Authored documents;std::optional<CommitIdentity> identity;Reso
 struct ResourceProvider {
     std::set<std::string> capabilities;
     std::function<ResourceSnapshot(const Authored&,const Json& selection)> prepare;
+    std::function<void()> after_prepare{};
 };
 struct CommitReceipt {CommitIdentity identity;std::uint64_t revision;};
 // Pure formatting; the caller must authorize disclosure of the receipt first.
@@ -33,6 +34,7 @@ public:
     Transactions(GenerationStore& store,std::string epoch,std::function<void(const Authored&)> prepare_resources);
     Transactions(GenerationStore& store,std::string epoch,ResourceProvider resources);
     bool supports_resources()const{return static_cast<bool>(resource_provider_.prepare);}
+    bool supports_theme_overrides()const{return supports_visibility()&&resource_provider_.capabilities.count("scene.content")&&resource_provider_.capabilities.count("theme.typography")&&resource_provider_.capabilities.count("configuration.theme-overrides");}
     bool supports_visibility()const{return supports_edit_locks()&&resource_provider_.capabilities.count("scene.visibility");}
     bool supports_edit_locks()const{return supports_resources()&&resource_provider_.capabilities.count("scene.edit-locks");}
     Json submit(const std::string& principal,const std::string& connection,std::string body,const Authority& authority,

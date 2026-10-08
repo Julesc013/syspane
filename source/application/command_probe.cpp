@@ -57,8 +57,8 @@ int main(int argc,char** argv){try{
     if(content){
         std::function<std::vector<c::ContentPackage>()> imports;
         if(*content!="-")imports=[path=*content]{return os::read_content_catalog(path);};
-        auto resources=c::make_resource_provider(store,{"scene.selector","scene.content"},std::move(imports));
-        resources.prepare=[prepare=std::move(resources.prepare),&prepared](const c::Authored& value,const Json& selection){auto result=prepare(value,selection);prepared();return result;};
+        auto resources=c::make_resource_provider(store,{"scene.selector","scene.content","scene.edit-locks","scene.visibility","theme.typography","configuration.theme-overrides"},std::move(imports));
+        resources.after_prepare=prepared;
         owner=std::make_shared<c::AsyncCommands>(store,epoch,std::move(resources));
     }else owner=std::make_shared<c::AsyncCommands>(store,epoch,[&](const c::Authored& value){
         if(value.settings["display"]["theme_id"]!="theme:native"||(!value.scene["theme_id"].is_null()&&value.scene["theme_id"]!="theme:native"))throw p::Error("resource.unavailable");

@@ -1,0 +1,399 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.example.invalid/syspane/0.8.0/command.schema.json",
+  "title": "SysPane authored theme command 0.8.0",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "0.8.0"
+    },
+    "request_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+    },
+    "expected_revision": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]{0,19})$",
+      "description": "Unsigned decimal; semantic validator also enforces <= 18446744073709551615."
+    },
+    "policy_generation": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]{0,19})$",
+      "description": "Unsigned decimal; semantic validator also enforces <= 18446744073709551615."
+    },
+    "intent": {
+      "enum": [
+        "preview",
+        "commit"
+      ]
+    },
+    "operations": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 128,
+      "items": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "op": {
+                "const": "settings.set"
+              },
+              "path": {
+                "const": "sampling.resources_ms"
+              },
+              "value": {
+                "type": "integer",
+                "minimum": 100,
+                "maximum": 60000
+              }
+            },
+            "required": [
+              "op",
+              "path",
+              "value"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "op": {
+                "const": "settings.set"
+              },
+              "path": {
+                "const": "sampling.reconcile_ms"
+              },
+              "value": {
+                "type": "integer",
+                "minimum": 1000,
+                "maximum": 3600000
+              }
+            },
+            "required": [
+              "op",
+              "path",
+              "value"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "op": {
+                "const": "settings.set"
+              },
+              "path": {
+                "const": "sampling.max_workers"
+              },
+              "value": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 32
+              }
+            },
+            "required": [
+              "op",
+              "path",
+              "value"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "op": {
+                "const": "settings.set"
+              },
+              "path": {
+                "const": "history.persistent"
+              },
+              "value": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "op",
+              "path",
+              "value"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "op": {
+                "const": "settings.set"
+              },
+              "path": {
+                "const": "history.segment_bytes"
+              },
+              "value": {
+                "type": "integer",
+                "minimum": 4096,
+                "maximum": 1073741824
+              }
+            },
+            "required": [
+              "op",
+              "path",
+              "value"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "op": {
+                "const": "settings.set"
+              },
+              "path": {
+                "const": "history.segments"
+              },
+              "value": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 100
+              }
+            },
+            "required": [
+              "op",
+              "path",
+              "value"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "op": {
+                "const": "settings.set"
+              },
+              "path": {
+                "const": "display.enabled"
+              },
+              "value": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "op",
+              "path",
+              "value"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "op": {
+                "const": "settings.set"
+              },
+              "path": {
+                "const": "display.theme_id"
+              },
+              "value": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 256,
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+              }
+            },
+            "required": [
+              "op",
+              "path",
+              "value"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "op": {
+                "const": "settings.set"
+              },
+              "path": {
+                "const": "display.reduced_motion"
+              },
+              "value": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "op",
+              "path",
+              "value"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "op": {
+                "const": "settings.set"
+              },
+              "path": {
+                "const": "privacy.remote_probes"
+              },
+              "value": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "op",
+              "path",
+              "value"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "op": {
+                "const": "settings.set"
+              },
+              "path": {
+                "const": "privacy.export_enabled"
+              },
+              "value": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "op",
+              "path",
+              "value"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "op": {
+                "const": "scene.replace"
+              },
+              "scene": {
+                "oneOf": [
+                  {
+                    "$ref": "https://schemas.example.invalid/syspane/0.2.0/scene.schema.json"
+                  },
+                  {
+                    "$ref": "https://schemas.example.invalid/syspane/0.3.0/scene.schema.json"
+                  },
+                  {
+                    "$ref": "https://schemas.example.invalid/syspane/0.4.0/scene.schema.json"
+                  },
+                  {
+                    "$ref": "https://schemas.example.invalid/syspane/0.5.0/scene.schema.json"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "op",
+              "scene"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      }
+    },
+    "extensions": {
+      "type": "object",
+      "maxProperties": 64,
+      "propertyNames": {
+        "pattern": "^[a-z][a-z0-9_.-]{0,127}$"
+      }
+    },
+    "content": {
+      "$ref": "https://schemas.example.invalid/syspane/0.2.0/resource-selection.schema.json"
+    },
+    "theme_edit": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "source": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 256,
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+                },
+                "version": {
+                  "type": "string",
+                  "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[A-Za-z0-9.-]+)?$",
+                  "maxLength": 64
+                },
+                "sha256": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                }
+              },
+              "required": [
+                "id",
+                "version",
+                "sha256"
+              ],
+              "additionalProperties": false
+            },
+            "font": {
+              "$ref": "https://schemas.example.invalid/syspane/0.2.0/theme.schema.json#/$defs/font"
+            },
+            "font_roles": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "object",
+                  "maxProperties": 4,
+                  "properties": {
+                    "body": {
+                      "$ref": "https://schemas.example.invalid/syspane/0.2.0/theme.schema.json#/$defs/font"
+                    },
+                    "label": {
+                      "$ref": "https://schemas.example.invalid/syspane/0.2.0/theme.schema.json#/$defs/font"
+                    },
+                    "value": {
+                      "$ref": "https://schemas.example.invalid/syspane/0.2.0/theme.schema.json#/$defs/font"
+                    },
+                    "diagnostic": {
+                      "$ref": "https://schemas.example.invalid/syspane/0.2.0/theme.schema.json#/$defs/font"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "required": [
+            "source",
+            "font",
+            "font_roles"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "request_id",
+    "expected_revision",
+    "policy_generation",
+    "intent",
+    "operations",
+    "content",
+    "theme_edit"
+  ],
+  "additionalProperties": false,
+  "$comment": "Setting constraint subtrees are generated from experience/settings-registry.json by specctl.py generate; other envelope fields are authored."
+}
