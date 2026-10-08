@@ -3209,6 +3209,7 @@
         "source/application/profile_supervisor_linux.cpp"
       ],
       "allowed_dependencies": [
+        "syspane_installation",
         "syspane_profile_owner",
         "syspane_child",
         "syspane_health",
@@ -3239,6 +3240,59 @@
       "allowed_dependencies": [
         "syspane_profile_supervisor",
         "syspane_profile_controller_runtime"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
+    },
+    {
+      "id": "installation",
+      "target": "syspane_installation",
+      "type": "STATIC_LIBRARY",
+      "source_owner": "source/platform/",
+      "public_interfaces": [
+        "source/platform/installation_linux.hpp"
+      ],
+      "private_interfaces": [],
+      "sources": [
+        "source/platform/installation_linux.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_authored",
+        "syspane_local_ipc",
+        "Threads::Threads"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
+    },
+    {
+      "id": "installation-probe",
+      "target": "syspane_installation_probe",
+      "type": "EXECUTABLE",
+      "source_owner": "tests/configuration/",
+      "public_interfaces": [],
+      "private_interfaces": [],
+      "sources": [
+        "tests/configuration/installation_probe.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_installation",
+        "syspane_profile_supervisor"
       ],
       "target_requirements": [
         "cxx17"

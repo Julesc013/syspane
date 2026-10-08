@@ -2,6 +2,7 @@
 #include "profile_owner_linux.hpp"
 #include "child.hpp"
 #include "recovery.hpp"
+#include "installation_linux.hpp"
 #include <vector>
 
 namespace syspane::application {
@@ -25,6 +26,8 @@ class LinuxProfileSupervisor {
 public:
     LinuxProfileSupervisor(std::string helper,std::string runtime,platform::ProfileLocation,
                            bool create,std::uint64_t console);
+    LinuxProfileSupervisor(std::shared_ptr<platform::LinuxInstallation>,std::string runtime,
+                           platform::ProfileLocation,bool create,std::uint64_t console);
     ~LinuxProfileSupervisor();
     LinuxProfileSupervisor(const LinuxProfileSupervisor&)=delete;
     LinuxProfileSupervisor& operator=(const LinuxProfileSupervisor&)=delete;

@@ -306,7 +306,8 @@
         "SP-W08-PROFILE-STARTUP",
         "SP-W08-PROFILE-WORKER",
         "SP-W08-PROFILE-CONTROLLER",
-        "SP-W08-PROFILE-SUPERVISOR"
+        "SP-W08-PROFILE-SUPERVISOR",
+        "SP-W26-HELPER-IDENTITY"
       ],
       "acceptance_tests": [
         "T-TRANSACTION",
@@ -367,7 +368,7 @@
       "status": "in_progress",
       "authority_class": "development",
       "execution_grant": "user:foundation-native-campaign-2026-10-05",
-      "notes": "LinuxProfileSupervisor now owns configuration-host startup, matching epochs, independent health/transaction deadlines, native exit proof, bounded restarts and terminal shutdown. Nineteen independent native cases cover real commit/reconciliation, timeouts, circuit preservation, policy change, malformed peers, parent death, cleanup substitutions and resource bounds. Existing controller/command/recovery regressions pass. Next connect verified installed helper lookup and the independently scheduled controller/inspector owner, coherent profile projection, native UI and import catalog. Positive protected-policy qualification, full layers/updates, non-Linux adapters and all five complete editions remain required.",
+      "notes": "LinuxProfileSupervisor now owns configuration-host startup, matching epochs, independent health/transaction deadlines, native exit proof, bounded restarts and terminal shutdown. Nineteen independent native cases cover real commit/reconciliation, timeouts, circuit preservation, policy change, malformed peers, parent death, cleanup substitutions and resource bounds. Existing controller/command/recovery regressions pass. W-26 now supplies verified installation lookup and immutable helper launch. Next connect the independently scheduled controller/inspector owner and explicit deployment/data/runtime ownership, coherent profile projection, native UI and import catalog. Positive protected-policy qualification, full layers/updates, non-Linux adapters and all five complete editions remain required.",
       "package": "delivery/packages/w-08-profile-supervisor.md",
       "evidence": "delivery/profile-supervisor-handoff.md"
     },
@@ -968,7 +969,8 @@
       "specs": [
         "SP-ARTIFACTS",
         "SP-TARGETS",
-        "SP-W26-PACKAGE"
+        "SP-W26-PACKAGE",
+        "SP-W26-HELPER-IDENTITY"
       ],
       "acceptance_tests": [
         "T-ARTIFACTS",
@@ -976,14 +978,20 @@
       ],
       "planned_outputs": [
         "packaging/",
-        "source/build/"
+        "source/build/",
+        "source/platform/installation_linux.hpp",
+        "source/platform/installation_linux.cpp",
+        "source/build/generate_helper_identity.py",
+        "tests/configuration/installation_probe.cpp",
+        "tests/configuration/native_helper_identity.py",
+        "tests/configuration/helper-identity-cases.json"
       ],
       "status": "in_progress",
       "authority_class": "development",
       "execution_grant": "user:foundation-native-campaign-2026-10-05",
-      "notes": "Initial local model smoke archives passed relocation on Windows/Linux. Broader payload, lifecycle and release qualification remain pending.",
-      "package": "delivery/packages/w-26-smoke.md",
-      "evidence": "delivery/foundation-handoff.md"
+      "notes": "Initial model smoke archives remain preserved. Linux helper closure generation now embeds the exact built configuration-host identity into its consumer. Native installation-relative discovery verifies current executable/path ownership, stable bytes and kernel execution permission; sealed descriptors prevent pathname substitution at launch. A relocated development test application and real helper pass 21 fixed identity cases, with supervisor/controller/recovery-queue regressions and three-profile shared checks. Connect the real frontend and explicit deployment/data/runtime ownership next; full payload/license closure, lifecycle, protected-policy deployment and all five release editions remain pending.",
+      "package": "delivery/packages/w-26-helper-identity.md",
+      "evidence": "delivery/helper-identity-handoff.md"
     },
     {
       "id": "W-27",

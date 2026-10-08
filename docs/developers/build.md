@@ -15,6 +15,33 @@ build` before configuring or building; use `test` or `package` for those actions
 The common active-output budget is unchanged; retained `out/evidence/` archives
 are measured separately. Never use the placeholder account from the example.
 
+The [helper identity package](../../spec/delivery/packages/w-26-helper-identity.md)
+adds LinuxInstallation and Child::launch_sealed. Linux builds generate helpers.json
+and helper_identity.hpp under the owned build's generated/ directory after producing
+the configuration host. The generator checks ELF/interpreter/import closure and
+pins the exact helper bytes. Depend on syspane_helper_identity_data before compiling
+a consumer of helper_identity.hpp; it is a build-generation utility, not an installed
+runtime component. Never obtain HelperExpectation from preferences or an adjacent file.
+
+The consuming application must be bin/syspane under the admitted prefix, with the
+helper at libexec/syspane/syspane-configuration-host and the record at
+share/syspane/helpers.json. Construct LinuxInstallation(built_helper_expectation())
+on the independent native owner, then pass its shared owner to LinuxProfileSupervisor.
+Native verification and copying happen outside GUI callbacks. Retain the owner
+through child launch and retire it after detected installation change. Original
+application acquisition, deployment/data/runtime ownership and complete release
+closure remain separate admission requirements.
+
+After ordinary budget/configure/build checks, run `ctest --preset linux-x64-gcc13 -R
+'^native[.](HELPER-IDENTITY|PROFILE-SUPERVISOR|PROFILE-CONTROLLER|RECOVERY-QUEUE)$'
+--output-on-failure`, the affected configuration DIGEST/COMMAND-/RECON-/INITIAL-PROFILE
+families and all three component graphs. The helper-identity oracle produces a local
+four-file development ZIP; its bin/syspane is a test application. Preserve the ZIP,
+per-step image inventories and compressed mutation blobs alongside its native result,
+including failed runs and the separately recorded short runtime root. See the
+[handoff](../../spec/delivery/helper-identity-handoff.md) for exact limits and remaining
+frontend, protected-policy and release work.
+
 The [supervisor package](../../spec/delivery/packages/w-08-profile-supervisor.md)
 provides LinuxProfileSupervisor for the native configuration helper. Supply a
 previously admitted canonical helper ELF, an empty canonical 0700 runtime directory
@@ -36,8 +63,9 @@ After budget preflight/configure/build, run `ctest --preset linux-x64-gcc13 -R
 independent supervisor test owns short runtime roots inside the existing Linux
 campaign (alongside the profile build directory) and records them with its evidence.
 Preserve those roots as well as native-evidence recordings, including failed runs.
-See the [handoff](../../spec/delivery/profile-supervisor-handoff.md). Installed
-lookup/frontend/profile projection and complete native editions remain pending.
+See the [handoff](../../spec/delivery/profile-supervisor-handoff.md). Verified
+installation lookup is supplied above; frontend/profile projection and complete
+native editions remain pending.
 
 The [native controller package](../../spec/delivery/packages/w-08-profile-controller.md)
 builds the private Linux `syspane-configuration-host` helper. Its sole argument is

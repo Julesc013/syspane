@@ -38,11 +38,19 @@ public:
     // The child entry point must close fd 3 and arm its parent lifetime.
     static Child launch_program(const std::string& path,const std::vector<std::string>& arguments,
                                 int input,int output,int error);
+    // Borrow an executable memfd sealed against writes/resizing/additional seals.
+    // Name is diagnostic argv[0], not a path to reopen or an authority claim.
+    static Child launch_sealed(int file,const std::string& name,const std::vector<std::string>& arguments,
+                               int input,int output,int error);
 #endif
 private:
     struct Impl;
     std::unique_ptr<Impl> impl_;
     explicit Child(std::unique_ptr<Impl> impl);
+#if defined(__linux__)
+    static Child launch_held(int file,const std::string& name,const std::vector<std::string>& arguments,
+                             int input,int output,int error,bool sealed);
+#endif
 };
 inline void check_child_arguments(const std::vector<std::string>& arguments) {
     if (arguments.empty() || arguments.size() > 16) throw ChildError("child.arguments");

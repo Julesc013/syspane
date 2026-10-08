@@ -46,4 +46,5 @@ std::string digest(std::string_view bytes){
 }
 std::string sha256(std::string_view bytes){if(bytes.size()>1048576)throw protocol::Error("digest.size");return digest(bytes);}
 std::string content_sha256(std::string_view bytes){if(bytes.size()>16777216)throw protocol::Error("digest.size");return digest(bytes);}
+std::string payload_sha256(std::string_view bytes){if(bytes.size()>67108864)throw protocol::Error("digest.size");return digest(bytes);}
 }

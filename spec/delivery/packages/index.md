@@ -112,4 +112,5 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [W-25 complete remote state import](w-25-state-import.md) — Connect bounded telemetry documents to the revocable model owner without reinterpreting reported state as a local acquisition.
 - [W-25 bounded subscription lifetime and native inventory experiment](w-25-subscriptions.md) — Admit one fixed inventory stream per authenticated connection, with demand expiry, policy-bound queues and complete-state receipt.
 - [W-25 bounded telemetry delivery document](w-25-telemetry-wire.md) — Close versioned subscription and snapshot delivery shapes without treating decoded documents as admitted native subscriptions.
+- [Installation-relative helper identity and immutable launch](w-26-helper-identity.md) — Bind private helper execution to the running application's compiled payload closure.
 - [W-26 early local smoke package](w-26-smoke.md) — Bind foundation payload bytes to a local archive and independently check relocated execution.

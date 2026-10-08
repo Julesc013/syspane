@@ -337,7 +337,7 @@
         "SP-COMPOSITION",
         "SP-TARGETS"
       ],
-      "sha256": "74dc36b1fda343a0382f02ee75f0284eec17263d231bf4c972b046dec067e549"
+      "sha256": "9cf94b004fafdc87136d58ad9e9477238671e3d8d7deb80b70be9f262519e3fe"
     },
     {
       "id": "SP-AUDIT-OCTOBER",
@@ -489,7 +489,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "03bfdbcd61efcf4115162b818522f7878a63594b6621d49fded36552d73036a7"
+      "sha256": "9abed143b132828c1f801a0828eb66a2ebea38fe68d745ede0033af0088b9669"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -853,6 +853,16 @@
         "SP-ARRANGE-HANDOFF"
       ],
       "sha256": "e910d4a8415822864e71ef4d3076802888feba919e8f1dd93496e856eb0ca2f4"
+    },
+    {
+      "id": "SP-HELPER-IDENTITY-HANDOFF",
+      "path": "delivery/helper-identity-handoff.md",
+      "title": "Verified installation-relative helper execution",
+      "description": "Compiled helper closure, immutable native execution and relocated development-package evidence.",
+      "requires": [
+        "SP-W26-HELPER-IDENTITY"
+      ],
+      "sha256": "d19a10534cba7cebd3f52fa8d563addf877ee3df5e8d668ebe8c9d0ca5428ecd"
     },
     {
       "id": "SP-HISTORICAL-BUILD-HANDOFF",
@@ -2464,6 +2474,19 @@
         "SP-STATE"
       ],
       "sha256": "f4bbdc89d7832fbaba2197128a655f56002c8173994d785c86fef967f7acfa61"
+    },
+    {
+      "id": "SP-W26-HELPER-IDENTITY",
+      "path": "delivery/packages/w-26-helper-identity.md",
+      "title": "Installation-relative helper identity and immutable launch",
+      "description": "Bind private helper execution to the running application's compiled payload closure.",
+      "requires": [
+        "SP-W26-PACKAGE",
+        "SP-W08-PROFILE-SUPERVISOR",
+        "SP-INSTALL-OWNERSHIP",
+        "SP-ARTIFACTS"
+      ],
+      "sha256": "3926821d5ee55c4e49bf65dd1f479c70ab32a68e5ca17131416deb96abc85047"
     },
     {
       "id": "SP-W26-PACKAGE",

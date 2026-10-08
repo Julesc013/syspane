@@ -12,7 +12,7 @@ sp_requires: ["SP-COMPOSITION", "SP-TARGETS"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-AUDIT-2026-10-04", "SRC-CONVERSATION"]
 sources: [{"id": "SRC-AUDIT-2026-10-04", "resource": "User-supplied SysPane audits and design reviews, 2026-10-04", "title": "October specification review inputs"}]
-updated: {"by": "codex", "at": "2026-10-08T18:37:15.505795+00:00", "scope": "Private Linux configuration host name; installed integration remains unqualified"}
+updated: {"by": "codex", "at": "2026-10-08T20:02:42+00:00", "scope": "Compiled Linux helper closure and immutable execution; complete installed integration remains unqualified"}
 ---
 
 # Binaries, packages and release identity
@@ -37,8 +37,11 @@ audit drafts are consolidated here before scripts depend on them.
 
 Helpers resolve relative to verified installation identity, never the current working
 directory or an arbitrary search path. CPU variants retain the same runtime basenames.
-Historical profiles can generate short-name aliases with collision checks. CLI stdout
-is machine-readable UTF-8, diagnostics go to stderr, exit statuses and cancellation
+Historical profiles can generate short-name aliases with collision checks. The
+[helper identity package](packages/w-26-helper-identity.md) closes the initial Linux
+compiled closure and immutable helper-launch boundary; it does not qualify a
+complete installed desktop package. CLI stdout is machine-readable UTF-8,
+diagnostics go to stderr, exit statuses and cancellation
 are documented before implementation. Version/capability queries do not start a
 permanent collector. Standalone means a complete deployment unit for its profile,
 not one file or no OS dependencies.

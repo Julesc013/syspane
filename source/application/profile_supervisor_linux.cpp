@@ -58,6 +58,7 @@ struct Call {
 struct LinuxProfileSupervisor::Impl {
     std::string helper,root,owner_nonce,leaf,endpoint,epoch,fault;
     os::ProfileLocation location;bool create=false,closing=false,killed=false,ready=false,hello=false,terminal=false;
+    std::shared_ptr<os::LinuxInstallation> installation;
     std::uint64_t console=0,generation=0,started=0,stop_started=0,last_sent=0,sequence=0,token=0;
     std::size_t sent=0,stderr_bytes=0;
     Fd root_fd,leaf_fd,channel,errors;
@@ -159,7 +160,12 @@ struct LinuxProfileSupervisor::Impl {
         sent=0;started=now;ready=hello=killed=false;sequence=last_sent=token=0;stderr_bytes=0;
         frames=p::Framer(4096);lease=std::make_unique<r::ProducerLease>();operation=std::make_unique<r::TransactionWatch>();
         health=std::make_unique<r::HealthLink>(true,"console",epoch,"G",started,true);
-        try{child=std::make_unique<os::Child>(os::Child::launch_program(helper,{std::to_string(os::current_process_id())},remote.value,remote.value,remote_errors.value));}
+        try{
+            const std::vector<std::string> args{std::to_string(os::current_process_id())};
+            child=std::make_unique<os::Child>(installation?
+                os::Child::launch_sealed(installation->verified_helper(),"syspane-configuration-host",args,remote.value,remote.value,remote_errors.value):
+                os::Child::launch_program(helper,args,remote.value,remote.value,remote_errors.value));
+        }
         catch(const os::ChildError&){throw p::Error("supervisor.launch");}
         state=ProfileSupervisorState::starting;event("launched",os::monotonic_ms());
     }
@@ -259,6 +265,10 @@ LinuxProfileSupervisor::LinuxProfileSupervisor(std::string helper,std::string ru
     s.verify_root();entries(s.root_fd.value,false);s.owner_nonce=nonce();
 }
 LinuxProfileSupervisor::~LinuxProfileSupervisor()=default;
+LinuxProfileSupervisor::LinuxProfileSupervisor(std::shared_ptr<os::LinuxInstallation> installation,std::string runtime,os::ProfileLocation location,bool create,std::uint64_t console)
+    :LinuxProfileSupervisor(std::string{},std::move(runtime),std::move(location),create,console){
+    need(static_cast<bool>(installation),"supervisor.installation");(void)installation->verified_helper();impl_->installation=std::move(installation);
+}
 ProfileSupervisorView LinuxProfileSupervisor::poll(){
     auto& s=*impl_;s.check();Call call(s.calling);
     try{s.poll();}catch(const std::exception& e){s.failed(std::string(e.what()).find("supervisor.")==0?e.what():"supervisor.protocol",os::monotonic_ms());}

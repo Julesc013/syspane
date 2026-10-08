@@ -87,14 +87,31 @@ Child Child::launch_program(const std::string& path,const std::vector<std::strin
     std::array<char,4096> canonical{};
     if(path.empty()||path.size()>512||path.front()!='/'||!::realpath(path.c_str(),canonical.data())||path!=canonical.data())throw ChildError("child.program_path");
     struct File{int fd;~File(){if(fd>=0)::close(fd);}} file{::open(path.c_str(),O_RDONLY|O_CLOEXEC|O_NOFOLLOW)};
+    return launch_held(file.fd,path,arguments,input,output,error,false);
+}
+Child Child::launch_sealed(int file,const std::string& name,const std::vector<std::string>& arguments,int input,int output,int error){
+    if(name.empty()||name.size()>64||name.find_first_not_of("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.-")!=std::string::npos)
+        throw ChildError("child.program_name");
+    return launch_held(file,name,arguments,input,output,error,true);
+}
+Child Child::launch_held(int file,const std::string& name,const std::vector<std::string>& arguments,int input,int output,int error,bool sealed){
+    check_child_arguments(arguments);
+    if(file<3||input<3||output<3||error<3||file==input||file==output||file==error)throw ChildError("child.descriptors");
+    struct sigaction action{};
+    if(::sigaction(SIGCHLD,nullptr,&action)||action.sa_handler!=SIG_DFL||(action.sa_flags&SA_NOCLDWAIT))throw ChildError("child.reaper_policy");
+    if(sealed){
+        constexpr int required=F_SEAL_WRITE|F_SEAL_SHRINK|F_SEAL_GROW|F_SEAL_SEAL;
+        const int seals=::fcntl(file,F_GET_SEALS);
+        if(seals<0||(seals&required)!=required)throw ChildError("child.program_seals");
+    }
     struct stat info{};std::array<unsigned char,4> magic{};
-    if(file.fd<3||::fstat(file.fd,&info)||!S_ISREG(info.st_mode)||(info.st_mode&(S_ISUID|S_ISGID))||!(info.st_mode&0111)||
-       ::pread(file.fd,magic.data(),magic.size(),0)!=4||magic!=std::array<unsigned char,4>{0x7f,'E','L','F'})throw ChildError("child.program_type");
+    if(::fstat(file,&info)||!S_ISREG(info.st_mode)||(info.st_mode&(S_ISUID|S_ISGID))||!(info.st_mode&0111)||
+       ::pread(file,magic.data(),magic.size(),0)!=4||magic!=std::array<unsigned char,4>{0x7f,'E','L','F'})throw ChildError("child.program_type");
     Actions actions;
     if(posix_spawn_file_actions_adddup2(&actions.value,input,0)||posix_spawn_file_actions_adddup2(&actions.value,output,1)||
-       posix_spawn_file_actions_adddup2(&actions.value,error,2)||posix_spawn_file_actions_adddup2(&actions.value,file.fd,3)||
+       posix_spawn_file_actions_adddup2(&actions.value,error,2)||posix_spawn_file_actions_adddup2(&actions.value,file,3)||
        posix_spawn_file_actions_addclosefrom_np(&actions.value,4))throw ChildError("child.actions");
-    std::vector<std::string> storage{path};storage.insert(storage.end(),arguments.begin(),arguments.end());std::vector<char*> argv;
+    std::vector<std::string> storage{name};storage.insert(storage.end(),arguments.begin(),arguments.end());std::vector<char*> argv;
     for(auto& argument:storage)argv.push_back(argument.data());
     argv.push_back(nullptr);char language[]="LANG=C.UTF-8";char* environment[]={language,nullptr};
     auto impl=std::make_unique<Impl>();
