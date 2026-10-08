@@ -2195,7 +2195,8 @@
         "source/interfaces/editor_create.hpp",
         "source/interfaces/editor_layout.hpp",
         "source/interfaces/editor_visibility.hpp",
-        "source/interfaces/editor_theme.hpp"
+        "source/interfaces/editor_theme.hpp",
+        "source/interfaces/editor_recovery.hpp"
       ],
       "private_interfaces": [
         "source/interfaces/editor_fragment.hpp"
@@ -2209,7 +2210,8 @@
         "source/interfaces/editor_layout.cpp",
         "source/interfaces/editor_visibility.cpp",
         "source/interfaces/editor_theme.cpp",
-        "source/interfaces/editor_fragment.cpp"
+        "source/interfaces/editor_fragment.cpp",
+        "source/interfaces/editor_recovery.cpp"
       ],
       "allowed_dependencies": [
         "syspane_settings_draft",
@@ -2676,6 +2678,61 @@
       "allowed_dependencies": [
         "PkgConfig::GTK3",
         "X11::X11"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
+    },
+    {
+      "id": "recovery-draft-tests",
+      "target": "syspane_recovery_draft_tests",
+      "type": "EXECUTABLE",
+      "source_owner": "tests/editor/",
+      "public_interfaces": [],
+      "private_interfaces": [
+        "tests/editor/theme_history_fixture.hpp"
+      ],
+      "sources": [
+        "tests/editor/recovery_draft_tests.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_editor_draft"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "windows-x64-gcc15",
+        "linux-x64-gcc13",
+        "windows-x86-v141-xp"
+      ]
+    },
+    {
+      "id": "editor-recovery-probe",
+      "target": "syspane_editor_recovery_probe",
+      "type": "EXECUTABLE",
+      "source_owner": "tests/editor/",
+      "public_interfaces": [],
+      "private_interfaces": [
+        "tests/editor/theme_history_fixture.hpp"
+      ],
+      "sources": [
+        "tests/editor/native_recovery_probe.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_editor_draft",
+        "syspane_generation_store"
       ],
       "target_requirements": [
         "cxx17"

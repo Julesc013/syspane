@@ -489,7 +489,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "829678790511af60f8caa6ded48858bd8f005b0738fe8b9c53c08241d51d708a"
+      "sha256": "7698fb8b05afe6349b26f268ea77c46b6f36d4396e08a6fa5d1f6a0018e477d0"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -1874,6 +1874,31 @@
       "sha256": "f73c48f2e792d0e8c973fa1cc75d260ee5dec97e487c1521b3dc3785e25abbf4"
     },
     {
+      "id": "SP-W10-RECOVERY-APPLY",
+      "path": "delivery/packages/w-10-recovery-apply.md",
+      "title": "Recovery draft native Apply boundary",
+      "description": "Verified generation identity and explicit recovered Apply through the private Linux store.",
+      "requires": [
+        "SP-W10-RECOVERY-DRAFT",
+        "SP-PERSISTENCE"
+      ],
+      "sha256": "1644df86d920df5de60a35be0cd227df3c5e2bedb11a790e83af270d73ae663f"
+    },
+    {
+      "id": "SP-W10-RECOVERY-DRAFT",
+      "path": "delivery/packages/w-10-recovery-draft.md",
+      "title": "Bounded editor recovery drafts",
+      "description": "Generation-bound unsaved scene intent restored explicitly through the existing draft and transaction owner.",
+      "requires": [
+        "SP-EDITOR",
+        "SP-PERSISTENCE",
+        "SP-W10-EDITOR-DRAFT",
+        "SP-W10-THEME-HISTORY",
+        "SP-POLICY"
+      ],
+      "sha256": "115e78faea132962a164afbf54c5f48b530374c994f0b3fafb2098c7f875f510"
+    },
+    {
       "id": "SP-W10-SCENE-FRAGMENTS",
       "path": "delivery/packages/w-10-scene-fragments.md",
       "title": "Bounded authored scene fragments",
@@ -2376,6 +2401,18 @@
         "SP-COMMAND-SESSIONS-HANDOFF"
       ],
       "sha256": "eedbb0b709d27f80314fca05fccd6410ec51ab45cda54498df2621f46c17b3eb"
+    },
+    {
+      "id": "SP-RECOVERY-DRAFT-HANDOFF",
+      "path": "delivery/recovery-draft-handoff.md",
+      "title": "Generation-bound recovery draft checkpoint",
+      "description": "Explicit scene recovery with current authority and verified native Apply identity.",
+      "requires": [
+        "SP-W10-RECOVERY-DRAFT",
+        "SP-W10-RECOVERY-APPLY",
+        "SP-NATIVE-CLIPBOARD-HANDOFF"
+      ],
+      "sha256": "29bb5549517bdc81f329b842b42e28ac66e6b6faab15ba94bb683161ddb45ad3"
     },
     {
       "id": "SP-RECOVERY-HANDOFF",
@@ -2902,7 +2939,7 @@
         "SP-RENDERING",
         "SP-COMMANDS"
       ],
-      "sha256": "d43974d9760f67d03cef02d2435128f051df3651dc70face26e5b3330922566e"
+      "sha256": "08a60041d5d29e6884ed4bb015d57e1c485754d59daf684d0a75396d1a8777e2"
     },
     {
       "id": "SP-POLICY",

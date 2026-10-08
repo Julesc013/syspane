@@ -18,6 +18,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [command-visibility.json](command-visibility.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [content-catalog.json](content-catalog.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [content-package.json](content-package.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
+- [editor-recovery.json](editor-recovery.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [evidence-not-run.json](evidence-not-run.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [extension-manifest.json](extension-manifest.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [gap-event.json](gap-event.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.

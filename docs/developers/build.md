@@ -15,6 +15,22 @@ build` before configuring or building; use `test` or `package` for those actions
 The common active-output budget is unchanged; retained `out/evidence/` archives
 are measured separately. Never use the placeholder account from the example.
 
+The [recovery-draft package](../../spec/delivery/packages/w-10-recovery-draft.md)
+adds EditorDraft::recovery_snapshot, inspect_recovery and restore_recovery. Admit
+editor.recovery only from trusted native context, with large commands and current
+history/sensitive disclosure. Supply a separately verified RecoveryIdentity; never
+trust the identity in the record. LinuxGenerationStore::generation_token identifies
+its loaded verified selection and refuses empty, damaged or indeterminate stores.
+Restore creates one ordinary undo step. Apply uses the existing transaction owner.
+
+After normal preflight/configure/build, run `ctest --preset <profile> -R
+'^editor[.]RECOVERY-' --output-on-failure`. The declared non-root ext4 laboratory
+also runs `ctest --preset linux-x64-gcc13 -R '^native[.]RECOVERY-APPLY$'
+--output-on-failure`. The native runner owns private stores and cuts its own commit
+process after durability; it checks exact bytes and stale-record refusal. This
+experiment does not implement product recovery-file retention or native offers.
+See the [handoff](../../spec/delivery/recovery-draft-handoff.md) for remaining gates.
+
 The [typography package](../../spec/delivery/packages/w-09-typography.md) introduces
 theme 0.2 and `configuration::theme_font(theme, role)`. It returns an owned family,
 DIP size, weight and style; `TextRequest.role` defaults to body. ContentCatalog adds

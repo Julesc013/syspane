@@ -38,7 +38,10 @@ behaviour has been implemented. See [audit disposition](spec/delivery/audit-2026
 - [x] W-10 Linux X11 development clipboard: bounded custom-target transfers, explicit controls, cancellation/revocation, independent peers and exact save/reopen. See the [handoff](spec/delivery/native-clipboard-handoff.md).
 - [ ] W-10 other native clipboard adapters and installed admission; retain bounded transfer, privacy and independent qualification requirements.
 - [ ] W-10 existing native editor shutdown warnings: resolve private-text selection-clipboard and duplicate gtk_main_quit diagnostics before complete-edition qualification; retain these known diagnostics in evidence.
-- [ ] W-10 remaining delivery: recovery drafts and installed controller/catalog/policy ownership, scene-aligned entry/restoration, full accessibility/performance and complete editions.
+- [x] W-10 recovery draft semantics and native Apply identity: bounded capture, explicit atomic restore, exact resources, lost-result reconciliation and stale-generation refusal. See the [handoff](spec/delivery/recovery-draft-handoff.md).
+- [ ] W-08/W-10 native observation reliability: explain the preserved recovery-checkpoint replacement-request timeout and content-properties dbind timeout; keep fixed deadlines and failed evidence. See the [record](spec/delivery/recovery-draft-handoff.md).
+- [ ] W-10 native recovery retention: private bounded file replacement/retirement, coalesced session-bound writes, crash cuts and explicit Restore/Discard recovery/Keep controls.
+- [ ] W-10 remaining delivery: native recovery integration and installed controller/catalog/policy ownership, scene-aligned entry/restoration, full accessibility/performance and complete editions.
 
 - [x] W-10 native visibility controls: private exact rule/source input, hidden-object selection, current held-gesture diagnostics and independent durable save/reopen/erasure checks. See the [handoff](spec/delivery/visibility-controls-handoff.md). Installed ownership and complete editions remain open.
 

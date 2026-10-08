@@ -63,6 +63,8 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Bounded native editor clipboard](w-10-native-clipboard.md) — Explicit authored Copy/Paste with revocable X11 transfers and independent peers.
 - [Native scene editing and independent exit](w-10-native-editor.md) — Connect the shared draft to real native pixels, input, transactions and recovery.
 - [Native observation error and focus boundary](w-10-native-observation.md) — Distinguish inaccessible observations from actual absent state without weakening native acceptance.
+- [Recovery draft native Apply boundary](w-10-recovery-apply.md) — Verified generation identity and explicit recovered Apply through the private Linux store.
+- [Bounded editor recovery drafts](w-10-recovery-draft.md) — Generation-bound unsaved scene intent restored explicitly through the existing draft and transaction owner.
 - [Bounded authored scene fragments](w-10-scene-fragments.md) — Portable copy ownership and atomic paste without implicit package import.
 - [Deterministic pointer snapping and visible alignment guides](w-10-snap.md) — Close bounded grid and guide projection through existing editor gestures and typed edits.
 - [Theme authoring input and immutable artifact boundary](w-10-theme-authoring.md) — Lossless font input and deterministic private theme artifacts before durable native integration.

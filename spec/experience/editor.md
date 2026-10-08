@@ -201,3 +201,21 @@ Private input erases on every lifetime boundary. Trusted Linux EditorForm typogr
 requires all seven capabilities and large-command admission; direct renderer defaults
 remain unchanged. The [checkpoint](../delivery/theme-controls-handoff.md) supplies
 independent pixels, exact durable artifacts, reopen, recovery and erasure evidence.
+
+## Recovery draft implementation boundary
+
+The [recovery-draft contract](../delivery/packages/w-10-recovery-draft.md) defines
+bounded capture, metadata-only inspection and explicit restoration in EditorDraft.
+The native owner supplies the verified profile/generation identity independently
+of the record. Current policy and all existing resource/version gates apply again
+at restore. Only a pristine editable draft may receive the recovered scene as one
+undo step; restoration never submits Apply or activates a surface.
+
+The [native Apply contract](../delivery/packages/w-10-recovery-apply.md) binds this
+identity to a verified Linux selecting record and checks exact scene/font persistence,
+lost acknowledgements and stale-record refusal. The
+[checkpoint](../delivery/recovery-draft-handoff.md) records executed scope and failures.
+Native recovery-file retention, interruption-safe replacement/retirement, session-bound
+queues and explicit Restore/Discard recovery/Keep controls remain required before
+the complete recovery feature is enabled. Keep unsaved intent separate from committed
+configuration and preserve the existing independent exit and current-policy boundaries.

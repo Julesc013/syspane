@@ -273,19 +273,22 @@ def semantic_errors(value: Any, schema_name: str, root: Path=ROOT) -> list[str]:
     def check_uint(n: Any) -> None:
         if isinstance(n, str) and n.isdigit() and int(n) > 18446744073709551615:
             errors.append('uint64 overflow')
-    def walk(item: Any) -> None:
+    def walk(item: Any, path: tuple=()) -> None:
         if isinstance(item, dict):
             for key, val in item.items():
-                if key in ('generation','revision','sequence','monotonic_ns','nanoseconds','sample_interval_ns','expected_revision','policy_generation','lost_count','transmit_bps','receive_bps'):
+                # This schema's identity is a digest, which may contain only digits.
+                # Keep numeric generation checks everywhere else, including nested data.
+                recovery_digest = schema_name == 'editor-recovery' and path == ('identity',) and key == 'generation'
+                if key in ('generation','revision','sequence','monotonic_ns','nanoseconds','sample_interval_ns','expected_revision','policy_generation','lost_count','transmit_bps','receive_bps') and not recovery_digest:
                     check_uint(val)
-                walk(val)
+                walk(val, path+(key,))
             if item.get('kind') == 'uint64':
                 check_uint(item.get('data'))
             if item.get('schema_version') == '0.2.0' and item.get('measured_at') is not None and 'measured_at' in item and item.get('value') is None:
                 errors.append('measurement without value')
         elif isinstance(item, list):
-            for val in item:
-                walk(val)
+            for index, val in enumerate(item):
+                walk(val, path+(index,))
     walk(value)
     if schema_name == 'transaction-watch':
         check_uint(value['ticket'])

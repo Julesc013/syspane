@@ -44,6 +44,15 @@ class PureFunctions(unittest.TestCase):
         self.assertIn('uint64 overflow',s.semantic_errors({'value':{'kind':'uint64','data':'18446744073709551616'}},'observation'))
     def test_uint64_maximum(self):
         self.assertEqual(s.semantic_errors({'value':{'kind':'uint64','data':'18446744073709551615'}},'observation'),[])
+    def test_recovery_digest_is_not_a_counter(self):
+        digest='4'*64
+        self.assertEqual(s.semantic_errors({'identity':{'generation':digest}},'editor-recovery'),[])
+        for value, schema in [({'identity':{'generation':digest}},'observation'),
+                              ({'generation':digest},'editor-recovery'),
+                              ({'nested':[{'identity':{'generation':digest}}]},'editor-recovery'),
+                              ({'identity':{'revision':digest}},'editor-recovery')]:
+            with self.subTest(value=value,schema=schema):
+                self.assertIn('uint64 overflow',s.semantic_errors(value,schema))
     def test_evidence_pass_requires_execution(self):
         self.assertTrue(s.semantic_errors({'outcome':'pass','executed_at':None},'evidence'))
     def test_unimplemented_capability_not_qualified(self):
@@ -224,6 +233,17 @@ class BundleTests(unittest.TestCase):
         x=s.validate_fixtures(self.root)
         self.assertEqual(x['status'],'pass',x)
         self.assertGreater(x['fixture_count'],20)
+    @unittest.skipUnless(HAVE_SCHEMAS,'full schema dependencies not installed')
+    def test_recovery_generation_digest_shape(self):
+        validators=s.schema_validators(self.root)
+        value=s.read_json(self.root/'fixtures/valid/editor-recovery.json')
+        for digest in ('4'*64,'f'*64,'a1'*32):
+            value['identity']['generation']=digest
+            self.assertFalse(list(validators['editor-recovery'].iter_errors(value)))
+            self.assertEqual(s.semantic_errors(value,'editor-recovery',self.root),[])
+        for digest in ('4'*63,'4'*65,'A'*64,'g'*64,'../current.json',40):
+            value['identity']['generation']=digest
+            self.assertTrue(list(validators['editor-recovery'].iter_errors(value)))
     @unittest.skipUnless(HAVE_SCHEMAS,'full schema dependencies not installed')
     def test_schema_unknown_ref_fails_offline(self):
         p=self.root/'contracts/theme.schema.json';x=s.read_json(p);x['$ref']='https://untrusted.invalid/schema'

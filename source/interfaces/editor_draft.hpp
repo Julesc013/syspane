@@ -1,5 +1,6 @@
 #pragma once
 #include "settings_draft.hpp"
+#include "editor_recovery.hpp"
 #include <deque>
 #include <variant>
 
@@ -39,6 +40,10 @@ public:
     const std::vector<std::string>& selection()const{return selected_;}
     void select(std::vector<std::string>);
     bool execute(const std::vector<SceneEdit>&);
+    bool recovery_available()const;
+    std::optional<std::string> recovery_snapshot(const RecoveryIdentity&)const;
+    RecoveryDescription inspect_recovery(std::string_view,const RecoveryIdentity&)const;
+    bool restore_recovery(std::string_view,const RecoveryIdentity&);
     bool clipboard_available()const;
     void copy_selection();
     // Recheck permission for each delivery. Borrow expires at the next operation.
@@ -78,6 +83,9 @@ private:
     std::deque<Change> undo_,redo_;
     std::string clipboard_;
     void admit_fragment_version(const Json&)const;
+    void authorize_recovery()const;
+    void recovery_destination()const;
+    std::pair<configuration::Authored,configuration::ResourceSnapshot> prepare_recovery(std::string_view,const RecoveryIdentity&)const;
     void clear_history();
     void settled(bool);
     bool travel(bool forward);

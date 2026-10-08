@@ -11,6 +11,11 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
+The [recovery-draft checkpoint](spec/delivery/recovery-draft-handoff.md) adds generation-bound capture and explicit
+restore through the shared editor. Native Linux checks verify exact Apply, durable
+lost-result reconciliation and rejection of stale recovery records. Recovery-file
+retention and native Restore/Discard/Keep controls remain the next integration gate.
+
 The [native clipboard checkpoint](spec/delivery/native-clipboard-handoff.md) adds explicit
 Copy/Paste to the admitted Linux X11 development editor. Transfers are bounded,
 cancellable and revocable; independent peers verify exact bytes, rejected input,

@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-08T12:48:46.607608+00:00", "scope": "Bounded Linux X11 clipboard checkpoint; other adapters, recovery drafts and complete editions remain open"}
+updated: {"by": "codex", "at": "2026-10-08T13:48:33.427185+00:00", "scope": "Generation-bound shared recovery and native Apply; recovery-file/UI integration and full editions remain open"}
 ---
 
 # Current state and next admitted boundary
@@ -21,6 +21,11 @@ Shared build tooling now lives in `source/build/`. Machine bindings and raw
 recordings are local ignored `out/` content; the retired root is absent from the
 tracked tree. See `docs/developers/build.md` in the repository for checkout
 setup and the [repository contract](../foundation/repository.md) for ownership.
+
+The [recovery-draft checkpoint](recovery-draft-handoff.md) adds generation-bound capture and explicit
+restore through the shared editor. Native Linux checks verify exact Apply, durable
+lost-result reconciliation and rejection of stale recovery records. Recovery-file
+retention and native Restore/Discard/Keep controls remain the next integration gate.
 
 The [native clipboard checkpoint](native-clipboard-handoff.md) adds explicit
 Copy/Paste to the admitted Linux X11 development editor. Transfers are bounded,
@@ -769,12 +774,11 @@ release-identity decisions remain open.
 
 ## Next work
 
-Native base/role fonts now have independent control, pixel, persistence and erasure
-evidence. Continue W-10 with bounded native clipboard transfers and independent requester/owner
-evidence, recovery-draft contracts and installed controller/catalog/policy ownership,
-including scene-aligned entry and restoration.
-Use the [font-controls handoff](theme-controls-handoff.md) and W-10 row; preserve
-the existing work graph and continue unrelated native tracks independently.
+Continue W-10 with native recovery-file retention and explicit Restore/Discard/Keep
+controls, using the [recovery-draft handoff](recovery-draft-handoff.md) and linked
+packages. Preserve the existing graph, frozen acceptance and unrelated native tracks.
+Installed controller/catalog/policy ownership, scene-aligned entry/restoration,
+full accessibility/performance and known GTK shutdown diagnostics remain open.
 
 Start with the [campaign coverage audit](campaign-coverage.md). W-03 now has a
 [read-only Windows observer](windows-host-inventory-handoff.md): native Explorer

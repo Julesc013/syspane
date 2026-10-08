@@ -13,6 +13,9 @@ public:
     LinuxGenerationStore& operator=(const LinuxGenerationStore&)=delete;
     void initialize(const configuration::Authored& documents);
     configuration::Committed load()const override;
+    // Identity of the verified loaded selecting record; unavailable for empty,
+    // indeterminate or read-only recovery states. Not a fresh filesystem read.
+    std::string generation_token()const;
     std::vector<configuration::CommitReceipt> receipts()const override;
     std::optional<configuration::Committed> reconcile(const std::string&,const std::string&,const std::string&)const override;
     configuration::Publication publish(const configuration::Committed&,const std::function<void()>&)override;

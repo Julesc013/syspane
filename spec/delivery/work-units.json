@@ -411,7 +411,9 @@
         "SP-W10-THEME-HISTORY",
         "SP-W10-THEME-CONTROLS",
         "SP-W10-SCENE-FRAGMENTS",
-        "SP-W10-NATIVE-CLIPBOARD"
+        "SP-W10-NATIVE-CLIPBOARD",
+        "SP-W10-RECOVERY-DRAFT",
+        "SP-W10-RECOVERY-APPLY"
       ],
       "acceptance_tests": [
         "T-EDITOR",
@@ -427,14 +429,19 @@
         "source/platform/linux/scene_clipboard_x11.cpp",
         "source/platform/linux/scene_clipboard_x11.hpp",
         "tests/editor/native_clipboard.py",
-        "tests/editor/clipboard_peer.py"
+        "tests/editor/clipboard_peer.py",
+        "source/interfaces/editor_recovery.cpp",
+        "source/interfaces/editor_recovery.hpp",
+        "tests/editor/recovery_draft_tests.cpp",
+        "tests/editor/native_recovery.py",
+        "tests/editor/native_recovery_probe.cpp"
       ],
       "status": "in_progress",
       "authority_class": "development",
       "execution_grant": "user:foundation-native-campaign-2026-10-05",
-      "notes": "Shared authored fragments now connect to explicit Linux X11 development Copy/Paste with bounded direct/INCR transfers, current per-chunk authority, cancellation and unique receiver lifetimes. Independent peers exercise exact bytes, malformed input, ownership, deadlines, capacity, revoked serving, undo and durable save/reopen. Other clipboard adapters, recovery drafts, installed ownership, scene-aligned entry/restoration, existing shutdown warnings, full accessibility/performance and all five complete editions remain required.",
-      "package": "delivery/packages/w-10-native-clipboard.md",
-      "evidence": "delivery/native-clipboard-handoff.md"
+      "notes": "Generation-bound shared recovery now has bounded exact capture, current-policy inspection and explicit one-step restore. Native Linux Apply verifies exact scene/font resources, killed durable acknowledgements, reconciliation and stale-record refusal. Continue private native recovery-file retention and Restore/Discard/Keep controls with interruption and late-write tests, then installed ownership, scene-aligned entry/restoration, existing shutdown warnings, full accessibility/performance and all five complete editions. Other clipboard adapters and historical native qualification remain required.",
+      "package": "delivery/packages/w-10-recovery-draft.md",
+      "evidence": "delivery/recovery-draft-handoff.md"
     },
     {
       "id": "W-11",

@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.example.invalid/syspane/0.1.0/editor-recovery.schema.json",
+  "title": "SysPane editor recovery draft experimental 0.1.0",
+  "type": "object",
+  "properties": {
+    "format": {
+      "const": "syspane.editor-recovery"
+    },
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "identity": {
+      "type": "object",
+      "properties": {
+        "profile": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+        },
+        "generation": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "profile",
+        "generation"
+      ],
+      "additionalProperties": false
+    },
+    "command": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 327680
+    }
+  },
+  "required": [
+    "format",
+    "schema_version",
+    "identity",
+    "command"
+  ],
+  "additionalProperties": false,
+  "description": "Envelope structure only. Bound UTF-8 byte length before parsing, then validate the decoded preview scene command and current native identity/authority as specified by W-10."
+}

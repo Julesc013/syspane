@@ -246,6 +246,10 @@ void LinuxGenerationStore::initialize(const c::Authored& documents){
     need(impl_->publish({documents,std::nullopt},[] {})==c::Publication::durable,"storage.bootstrap");
 }
 c::Committed LinuxGenerationStore::load()const{need(!impl_->poisoned&&impl_->current.has_value(),"storage.unavailable");return *impl_->current;}
+std::string LinuxGenerationStore::generation_token()const{
+    need(!impl_->poisoned&&!impl_->fallback&&!impl_->damaged&&impl_->current.has_value()&&impl_->selected.has_value(),"storage.unavailable");
+    return c::sha256(*impl_->selected);
+}
 std::vector<c::CommitReceipt> LinuxGenerationStore::receipts()const{
     need(!impl_->poisoned,"storage.unavailable");std::vector<c::CommitReceipt> result;
     for(const auto* record:{&impl_->current,&impl_->previous})if(*record&&(*record)->identity)

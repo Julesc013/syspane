@@ -1056,6 +1056,34 @@
       "expected": "invalid",
       "semantic": false,
       "reason": "Exact authored theme command fields and pins required."
+    },
+    {
+      "path": "fixtures/valid/editor-recovery.json",
+      "schema": "editor-recovery",
+      "expected": "valid",
+      "semantic": false,
+      "reason": ""
+    },
+    {
+      "path": "fixtures/invalid/editor-recovery-generation.json",
+      "schema": "editor-recovery",
+      "expected": "invalid",
+      "semantic": false,
+      "reason": "Closed recovery envelope and native generation identity required."
+    },
+    {
+      "path": "fixtures/invalid/editor-recovery-authority.json",
+      "schema": "editor-recovery",
+      "expected": "invalid",
+      "semantic": false,
+      "reason": "Closed recovery envelope and native generation identity required."
+    },
+    {
+      "path": "fixtures/invalid/editor-recovery-command-object.json",
+      "schema": "editor-recovery",
+      "expected": "invalid",
+      "semantic": false,
+      "reason": "Closed recovery envelope and native generation identity required."
     }
   ]
 }
