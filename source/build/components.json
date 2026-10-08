@@ -2322,7 +2322,8 @@
         "syspane_editor_draft",
         "syspane_scene_surface",
         "syspane_private_text",
-        "PkgConfig::GTK3"
+        "PkgConfig::GTK3",
+        "syspane_scene_clipboard"
       ],
       "target_requirements": [
         "cxx17"
@@ -2658,6 +2659,33 @@
         "windows-x64-gcc15",
         "linux-x64-gcc13",
         "windows-x86-v141-xp"
+      ]
+    },
+    {
+      "id": "scene-clipboard-x11",
+      "target": "syspane_scene_clipboard",
+      "type": "STATIC_LIBRARY",
+      "source_owner": "source/platform/linux/",
+      "public_interfaces": [
+        "source/platform/linux/scene_clipboard_x11.hpp"
+      ],
+      "private_interfaces": [],
+      "sources": [
+        "source/platform/linux/scene_clipboard_x11.cpp"
+      ],
+      "allowed_dependencies": [
+        "PkgConfig::GTK3",
+        "X11::X11"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
       ]
     }
   ]

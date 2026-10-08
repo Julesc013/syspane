@@ -257,3 +257,12 @@ not admit native clipboard controls. The next package must close bounded native
 transfer before allocation, outgoing per-chunk permission checks, cancellation and
 late responses, then exercise independent requester/owner and save/reopen cases.
 Recovery drafts and installed ownership remain separate required boundaries.
+
+
+The [native clipboard checkpoint](native-clipboard-handoff.md) now closes the
+bounded Linux X11 adapter and real controls described above. Its fixed package and
+fixtures precede production changes; independent peers exercise both transfer
+directions and exact durable results. Other clipboard backends, recovery drafts,
+installed ownership and all complete-edition qualification remain required. The
+existing GTK shutdown diagnostics remain open; they are not erased by a passing
+clipboard transfer test.

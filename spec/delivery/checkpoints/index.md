@@ -3,4 +3,5 @@
 Generated navigation; edit the referenced source documents, then run `specctl.py generate`.
 
 - [build-layout.json](build-layout.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
+- [native-clipboard.json](native-clipboard.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [scene-fragments.json](scene-fragments.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.

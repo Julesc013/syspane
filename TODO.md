@@ -35,7 +35,9 @@ behaviour has been implemented. See [audit disposition](spec/delivery/audit-2026
 - [x] W-10 atomic theme history: shared immutable package allocations, bounded scene/resource undo/redo, exact command 0.8 Apply/reconcile/reload and independent Linux save/reopen checks. See the [handoff](spec/delivery/theme-history-handoff.md).
 - [x] W-10 native theme editing: base/role fonts, current draft resource preview, exact pixels/artifact save/reopen, lost-result recovery and private erasure under explicit trusted admission. See the [handoff](spec/delivery/theme-controls-handoff.md).
 - [x] W-10 shared scene fragments: explicit sensitive copy admission, revocable snapshot, exact forest/pin preservation, atomic paste and transaction reconciliation. See the [handoff](spec/delivery/scene-fragments-handoff.md).
-- [ ] W-10 native clipboard: bounded asynchronous custom-target transfer, late/cancel/revocation handling, explicit controls and independent requester/owner/save/reopen evidence. Existing native clipboard export stays disabled.
+- [x] W-10 Linux X11 development clipboard: bounded custom-target transfers, explicit controls, cancellation/revocation, independent peers and exact save/reopen. See the [handoff](spec/delivery/native-clipboard-handoff.md).
+- [ ] W-10 other native clipboard adapters and installed admission; retain bounded transfer, privacy and independent qualification requirements.
+- [ ] W-10 existing native editor shutdown warnings: resolve private-text selection-clipboard and duplicate gtk_main_quit diagnostics before complete-edition qualification; retain these known diagnostics in evidence.
 - [ ] W-10 remaining delivery: recovery drafts and installed controller/catalog/policy ownership, scene-aligned entry/restoration, full accessibility/performance and complete editions.
 
 - [x] W-10 native visibility controls: private exact rule/source input, hidden-object selection, current held-gesture diagnostics and independent durable save/reopen/erasure checks. See the [handoff](spec/delivery/visibility-controls-handoff.md). Installed ownership and complete editions remain open.

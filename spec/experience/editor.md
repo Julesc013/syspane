@@ -49,8 +49,11 @@ Property panels provide precise numeric entry and accessible alternatives to ges
 The [scene-fragment package](../delivery/packages/w-10-scene-fragments.md) defines
 explicit sensitive copy admission, exact authored forests and atomic paste through
 the same draft owner. Destination resources must already contain every exact pin.
-Native clipboard transfer remains disabled until its own bounded adapter and
-independent revocation/save tests pass; this shared contract does not complete it.
+The [native clipboard package](../delivery/packages/w-10-native-clipboard.md) closes
+asynchronous X11 transfer, one incoming/eight outgoing slots, exact byte limits,
+per-chunk authority and lifetime cancellation. The [checkpoint](../delivery/native-clipboard-handoff.md)
+admits explicit controls in the trusted Linux X11 development editor. Other native
+adapters and installed enablement remain gated on their own bounded evidence.
 
 ## Working revision
 

@@ -2028,3 +2028,38 @@ After workspace preflight/configure/build, run `ctest --preset <profile> -R
 required adapter boundary: byte limits must be enforced before unbounded allocation,
 and outgoing chunks need fresh permission checks. These shared tests do not enable
 OS clipboard controls or qualify a complete edition.
+
+
+## Bounded native scene clipboard
+
+The [package](../../spec/delivery/packages/w-10-native-clipboard.md) connects the
+shared draft to `source/platform/linux/scene_clipboard_x11.*`. The GTK3/X11 adapter
+owns a separate X connection integrated with GLib. Outgoing borrows reauthorize the
+current draft for every chunk and must throw on denial; views never outlive their
+callback. The adapter retains no second outgoing payload. Incoming direct and INCR
+reads are bounded before allocation. One incoming/eight outgoing transfers use
+262144-byte payload, 16384-byte chunk, one-second idle and five-second total limits.
+Cancelling a paste destroys its unique receiver; old replies cannot reach a new draft.
+
+EditorForm requires explicit trusted `editor.clipboard` capability, current sensitive
+clipboard disclosure and an X11 display. Other backends remain unavailable. Copy/Paste
+and Cancel paste use the existing draft/history and durable Apply pipeline. Pending
+paste prevents draft edits and submission. Clipboard protocol metadata cannot overwrite
+an active transfer property. No generic text, PRIMARY or clipboard-manager persistence
+is exported. Existing private text handling is unchanged.
+
+After the normal workspace preflight/configure/build, run `ctest --preset
+linux-x64-gcc13 -R '^native[.]EDITOR-CLIPBOARD$' --output-on-failure`. The independent
+Xlib peer runs alongside native input/accessibility in private Xvfb/D-Bus laboratories.
+It compares exact frozen fragments/scenes and stored resources, including a deliberately
+wrong scene witness, and exercises malformed/oversized payloads, cancellation, late
+replies, ownership, per-chunk revocation, slot limits and deadlines. The observer must
+allow the specified five-second deadline before judging a transfer incomplete.
+
+Run all portable suites and native EDITOR-FORM, EDITOR-CONTENT-PROPERTIES,
+EDITOR-VISIBILITY, EDITOR-FONTS and THEME-HISTORY regressions. Raw attempts, source
+archives and native recordings stay in ignored `out/evidence/`; the compact
+[checkpoint](../../spec/delivery/checkpoints/native-clipboard.json) preserves source
+and artifact identities. Two pre-existing GTK shutdown warning families remain
+explicitly recorded; unknown critical diagnostics fail the clipboard oracle. This
+development checkpoint does not qualify an installed edition or another native backend.

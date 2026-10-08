@@ -489,7 +489,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "ec81b42e09ffd2cf185bb86d945607d0a26baa2f27ad02c92b7dc07140d4b0c8"
+      "sha256": "829678790511af60f8caa6ded48858bd8f005b0738fe8b9c53c08241d51d708a"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -884,7 +884,7 @@
       "requires": [
         "SP-CURRENT"
       ],
-      "sha256": "679012fd2ae41bd225f31c2ed5ea6096b59c56bbf95c7a9e54e941203f41b76b"
+      "sha256": "4a21e08b9c39ce302657a09a68a30f68e9990ab542e4e462182c1e87e4297b90"
     },
     {
       "id": "SP-KEYBOARD-INPUT-HANDOFF",
@@ -973,6 +973,17 @@
         "SP-CHART-HISTORY-HANDOFF"
       ],
       "sha256": "480548d18e5123216722bc249da9870c131195bd626e31bbe06acb964cdd16cc"
+    },
+    {
+      "id": "SP-NATIVE-CLIPBOARD-HANDOFF",
+      "path": "delivery/native-clipboard-handoff.md",
+      "title": "Bounded native clipboard checkpoint",
+      "description": "Explicit Linux X11 object transfers with independent peers and exact draft/persistence results.",
+      "requires": [
+        "SP-W10-NATIVE-CLIPBOARD",
+        "SP-SCENE-FRAGMENTS-HANDOFF"
+      ],
+      "sha256": "5347d2b8ff1917d80c1a5d3a9d4e3867abd29bd0440c67d08236bb9c223be2cd"
     },
     {
       "id": "SP-NATIVE-CONTENT-HANDOFF",
@@ -1827,6 +1838,17 @@
         "SP-W10-NATIVE-OBSERVATION"
       ],
       "sha256": "33858e685168ea85e261e8b37ee82fa937590f33332c692bb1af320151c4bdd9"
+    },
+    {
+      "id": "SP-W10-NATIVE-CLIPBOARD",
+      "path": "delivery/packages/w-10-native-clipboard.md",
+      "title": "Bounded native editor clipboard",
+      "description": "Explicit authored Copy/Paste with revocable X11 transfers and independent peers.",
+      "requires": [
+        "SP-W10-SCENE-FRAGMENTS",
+        "SP-W10-NATIVE-EDITOR"
+      ],
+      "sha256": "04870765d21473cbb8947f588549c355527bad46be2fb1a9b123ae64d5f276b6"
     },
     {
       "id": "SP-W10-NATIVE-EDITOR",
@@ -2880,7 +2902,7 @@
         "SP-RENDERING",
         "SP-COMMANDS"
       ],
-      "sha256": "3690b1ed9cb59479aea38489f5712f87b7c44bee0222580c1875f5acb4e9ca9a"
+      "sha256": "d43974d9760f67d03cef02d2435128f051df3651dc70face26e5b3330922566e"
     },
     {
       "id": "SP-POLICY",

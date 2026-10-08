@@ -1,5 +1,7 @@
 #include "editor_form.hpp"
 #include "editor_snap.hpp"
+#include "editor_fragment.hpp"
+#include "scene_clipboard_x11.hpp"
 #include "editor_content_form.hpp"
 #include "editor_binding_form.hpp"
 #include "editor_visibility_form.hpp"
@@ -39,6 +41,7 @@ struct EditorForm::Impl {
     EditorDraft draft;c::Authority authority;c::Policy current;Json settings;std::set<std::string> capabilities;s::Topology topology;std::string display,worker;
     std::vector<v::SurfaceProvider> providers;std::unique_ptr<v::SceneSurface> surface;std::map<std::string,model::Tick> ticks;
     Actions actions;std::thread::id thread=std::this_thread::get_id();bool closed=false,updating=false,dispatching=false,fields_dirty=false,drawing=false;std::string error;
+    std::unique_ptr<platform::SceneClipboardX11> clipboard;
     GtkWidget *root=nullptr,*canvas=nullptr,*tree=nullptr,*status=nullptr,*guidance=nullptr;GtkListStore* model=nullptr;std::vector<GtkWidget*> owned;
     std::map<std::string,GtkWidget*> buttons,fields;std::vector<s::Node> nodes;std::set<std::string> hidden,diagnostics;bool large_frames=false;
     std::unique_ptr<EditorThemeForm> theme;std::unique_ptr<EditorVisibilityForm> visibility;std::unique_ptr<EditorContentForm> content;std::unique_ptr<EditorBindingForm> binding;std::unique_ptr<EditorCreateForm> creation;std::unique_ptr<EditorLayoutForm> layout_form;int field_variant=-2;
@@ -57,7 +60,7 @@ struct EditorForm::Impl {
     bool visibility_supported()const{if(!large_frames||!draft.resources())return false;for(const char* cap:{"scene.content","scene.edit-locks","scene.visibility","configuration.edit-locks","configuration.visibility"})if(!capabilities.count(cap))return false;return true;}
     bool typography_supported()const{if(!visibility_supported()||!current.available)return false;for(const char* cap:{"theme.typography","configuration.theme-overrides"})if(!capabilities.count(cap)||current.denied_capabilities.count(cap))return false;return true;}
     void presentation(const v::SurfaceFrame& frame){nodes=frame.layout.nodes;hidden.clear();diagnostics.clear();for(const auto& w:frame.widgets){if(!w.presented)hidden.insert(w.id);if(w.diagnostic)diagnostics.insert(w.id);}}
-    bool editing()const{return draft.available()&&!draft.active_request()&&draft.state()!=DraftState::conflict&&(!content||!content->opened())&&(!binding||!binding->opened())&&(!creation||!creation->opened())&&(!layout_form||!layout_form->opened())&&(!visibility||!visibility->opened())&&(!theme||!theme->opened());}
+    bool editing()const{return draft.available()&&(!clipboard||!clipboard->busy())&&!draft.active_request()&&draft.state()!=DraftState::conflict&&(!content||!content->opened())&&(!binding||!binding->opened())&&(!creation||!creation->opened())&&(!layout_form||!layout_form->opened())&&(!visibility||!visibility->opened())&&(!theme||!theme->opened());}
     void ready()const{need(editing(),"editor.unavailable");need(!fields_dirty,"editor.properties_pending");}
     bool clear(){nodes.clear();hidden.clear();diagnostics.clear();if(canvas){atk_object_set_name(gtk_widget_get_accessible(canvas),"");if(!drawing)gtk_widget_queue_draw(canvas);}return true;}
     void stop_preview(){gesture.reset();ticks.clear();if(surface)surface->close();clear();}
@@ -109,7 +112,7 @@ struct EditorForm::Impl {
         // on every repaint cancels a keyboard activation held across that frame.
         for(auto& row:buttons){const auto& id=row.first;bool active=enabled;
             if(id=="undo")active=enabled&&draft.undo_count();else if(id=="redo")active=enabled&&draft.redo_count();
-            else if(id=="apply")active=!fields_dirty&&draft.may_submit("commit");else if(id=="cancel")active=editing();
+            else if(id=="apply")active=enabled&&draft.may_submit("commit");else if(id=="cancel")active=editing();
             else if(id=="cancel-request")active=draft.available()&&draft.active_request().has_value();else if(id=="reload")active=!closed&&!draft.active_request();
             else if(id=="properties")active=editing()&&selected&&fields_dirty;else if(id=="revert-fields")active=editing()&&fields_dirty;
             else if(id=="duplicate"||id=="delete")active=enabled&&!draft.selection().empty();
@@ -123,6 +126,8 @@ struct EditorForm::Impl {
             if(id=="layout")active=enabled&&selected;
             if(id=="insert")active=enabled&&draft.scene()&&draft.scene()->at("schema_version")!="0.2.0";
             if(id=="fonts")active=enabled&&draft.theme_fonts_available();
+            if(id=="copy"||id=="paste")active=enabled&&!gesture&&clipboard&&clipboard->available()&&draft.clipboard_available()&&(id=="paste"||!draft.selection().empty());
+            if(id=="cancel-paste")active=clipboard&&clipboard->busy();
             if(id=="visibility")active=enabled&&draft.visibility_available()&&!draft.selection().empty();
             if(id=="lock")active=enabled&&draft.locks_available()&&!draft.selection().empty();
             if(protected_ids&&(id=="properties"||id=="duplicate"||id=="delete"||id=="group"||id=="ungroup"||id=="wrap"||id=="unwrap"||id=="layout"||id=="bindings"||id=="content"||id=="visibility"||id.substr(0,6)=="align-"||id.substr(0,6)=="space-"))active=false;
@@ -138,6 +143,7 @@ struct EditorForm::Impl {
         else if(draft.state()==DraftState::unknown)value="Outcome unknown; retrieve the original request.";
         else if(draft.state()==DraftState::conflict)value="Configuration changed; reload before applying.";
         else if(fields_dirty)value="Property fields have not been applied to the draft.";
+        else if(clipboard&&clipboard->busy())value="Waiting for clipboard data. Cancel paste to continue editing.";
         else if(!draft.last_result().is_null()&&draft.last_result()["outcome"]=="accepted")value="Saved durably; activation pending. Visibility unconfirmed.";
         else value=draft.dirty()?"Draft changes have not been saved.":"No draft changes.";
         if(draft.revision())value+=" Revision "+std::to_string(*draft.revision());
@@ -183,7 +189,26 @@ struct EditorForm::Impl {
         execute({InsertWidget{w,std::nullopt,(*draft.scene())["roots"].size()}});selected({id});
     }
     void dispatch(const std::function<void()>& f){dispatching=true;try{f();dispatching=false;}catch(...){dispatching=false;throw;}}
-    void submit(){ready();const auto q=draft.begin("commit",actions.request_id());sync();if(q)try{dispatch([&]{actions.submit(*q);});}catch(...){draft.disconnected();sync();}}
+    void submit(){ready();const auto q=draft.begin("commit",actions.request_id());if(q&&clipboard)clipboard->invalidate();sync();if(q)try{dispatch([&]{actions.submit(*q);});}catch(...){draft.disconnected();sync();}}
+    void receive_clipboard(platform::ClipboardResult result,std::string bytes){
+        if(closed)return;
+        if(result==platform::ClipboardResult::received){
+            try{
+                ready();need(draft.clipboard_available(),"clipboard.unavailable");std::map<std::string,std::string> mapping;
+                for(const auto& id:detail::fragment_ids(bytes))mapping.emplace(id,actions.widget_id());
+                draft.execute({PasteWidgets{std::move(bytes),std::move(mapping),std::nullopt,draft.scene()->at("roots").size()}});changed();return;
+            }catch(const std::exception&){error="Clipboard content could not be pasted. Check its objects and required resources.";}
+        }else error=result==platform::ClipboardResult::cancelled?"Paste cancelled.":result==platform::ClipboardResult::timeout?"Clipboard transfer timed out. Try Paste again.":"Clipboard transfer was refused. Copy the objects again and retry.";
+        sync();
+    }
+    bool clipboard_key(GdkEventKey* e){
+        if(e->keyval==GDK_KEY_Escape&&clipboard&&clipboard->busy()){clipboard->cancel();return true;}
+        if(e->state&GDK_CONTROL_MASK){
+            if(e->keyval==GDK_KEY_c||e->keyval==GDK_KEY_C){command("copy");return true;}
+            if(e->keyval==GDK_KEY_v||e->keyval==GDK_KEY_V){command("paste");return true;}
+        }
+        return false;
+    }
     void arrange(const std::string& id){
         ready();gesture.reset();resolve_nodes();const auto ids=draft.selection();need(!ids.empty(),"editor.targets");const s::Node* first=nullptr;std::vector<int> indices;
         for(const auto& selected_id:ids){need(fixed(selected_id),"editor.arrange_geometry");const auto* n=node(selected_id);
@@ -231,7 +256,14 @@ struct EditorForm::Impl {
         guide_feedback();gtk_widget_queue_draw(canvas);
     }
     void command(const std::string& id){
-        if(id=="insert"){ready();gesture.reset();need(draft.resources()!=nullptr,"editor.resources");
+        if(id=="cancel-paste"){if(clipboard)clipboard->cancel();}
+        else if(id=="copy"||id=="paste"){
+            ready();need(!gesture&&clipboard&&clipboard->available()&&draft.clipboard_available(),"clipboard.unavailable");error.clear();
+            if(id=="copy"){draft.copy_selection();if(!clipboard->offer()){draft.clear_clipboard();error="The clipboard is unavailable. Try Copy again.";}}
+            else if(!clipboard->request())error="No copied objects are available to paste.";
+            sync();
+        }
+        else if(id=="insert"){ready();gesture.reset();need(draft.resources()!=nullptr,"editor.resources");
             if(!creation)creation=std::make_unique<EditorCreateForm>(root,[this](const CreateInput& input){
                 need(draft.resources()!=nullptr,"editor.resources");const auto* snapshot=draft.resources();
                 auto edit=create_widget(*draft.scene(),input,"editor:proposed",{{"local_id",viewport().id}},content_choices(*snapshot));edit.widget["id"]=actions.widget_id();return draft.execute({edit});
@@ -290,6 +322,7 @@ struct EditorForm::Impl {
         else {std::vector<int> indices;for(const auto& n:g.nodes)indices.push_back(n.variant);execute({MoveWidgets{draft.selection(),g.dx*scale,g.dy*scale,indices}});}
     }
     bool key(GdkEventKey* e){
+        if(clipboard_key(e))return true;
         if(e->keyval==GDK_KEY_Escape){gesture.reset();guide_feedback();gtk_widget_queue_draw(canvas);return true;}
         if((e->state&GDK_CONTROL_MASK)&&(e->keyval==GDK_KEY_z||e->keyval==GDK_KEY_Z)){command(e->state&GDK_SHIFT_MASK?"redo":"undo");return true;}
         if(e->keyval==GDK_KEY_Delete){command("delete");return true;}
@@ -336,7 +369,7 @@ struct EditorForm::Impl {
         const bool resolved_fields=!fields_dirty&&draft.selection().size()==1&&fixed(draft.selection()[0])&&field_variant!=node(draft.selection()[0])->variant;
         sync(resolved_fields);
     }
-    void shut(){if(closed)return;closed=true;if(content)content->erase();if(binding)binding->erase();if(creation)creation->erase();if(layout_form)layout_form->erase();if(visibility)visibility->erase();if(theme)theme->erase();draft.close();fields_dirty=false;settings=nullptr;capabilities.clear();stop_preview();if(tree){list();sync(true);}}
+    void shut(){if(closed)return;closed=true;if(clipboard)clipboard->close();if(content)content->erase();if(binding)binding->erase();if(creation)creation->erase();if(layout_form)layout_form->erase();if(visibility)visibility->erase();if(theme)theme->erase();draft.close();fields_dirty=false;settings=nullptr;capabilities.clear();stop_preview();if(tree){list();sync(true);}}
     template<class F> void event(F f)noexcept{try{if(!closed)f();}catch(const protocol::Error& e){gesture.reset();const std::string code=e.what();
         guide_feedback();error=code=="editor.number"?"Enter a number using digits and an optional decimal point.":code=="editor.layout_changed"?"Layout changed; Revert fields before applying.":
             code=="editor.arrange_geometry"||code=="editor.arrange_scope"?"Arrange needs fixed widgets in the same parent and display, with no size expansion.":
@@ -379,6 +412,14 @@ EditorForm::EditorForm(c::Authority a,c::Policy p,c::Authored value,std::string 
     button(bottom,"space-horizontal","Space horizontally");button(bottom,"space-vertical","Space vertically");
     button(bottom,"group","Group");button(bottom,"ungroup","Ungroup");
     i.status=i.label("");accessible(i.status,"","editor.status");gtk_label_set_line_wrap(GTK_LABEL(i.status),TRUE);gtk_box_pack_start(GTK_BOX(i.root),i.status,FALSE,FALSE,0);
+    auto* transfers=gtk_box_new(GTK_ORIENTATION_HORIZONTAL,4);gtk_box_pack_start(GTK_BOX(i.root),transfers,FALSE,FALSE,0);
+    button(transfers,"copy","Copy");button(transfers,"paste","Paste");button(transfers,"cancel-paste","Cancel paste");
+    gtk_widget_set_tooltip_text(i.buttons.at("paste"),"Paste copied objects at the end of this scene's root objects.");
+    if(i.capabilities.count("editor.clipboard"))i.clipboard=std::make_unique<platform::SceneClipboardX11>(platform::SceneClipboardX11::Callbacks{
+        [&i]{return !i.closed&&i.draft.clipboard_available();},[&i]{return i.draft.clipboard_data();},[&i]{i.draft.clear_clipboard();},
+        [&i](platform::ClipboardResult result,std::string bytes){i.receive_clipboard(result,std::move(bytes));}});
+    g_signal_connect(i.tree,"key-press-event",G_CALLBACK(+[](GtkWidget*,GdkEventKey* e,gpointer p)->gboolean{auto& o=*static_cast<Impl*>(p);bool handled=false;o.event([&]{handled=o.clipboard_key(e);});return handled;}),&i);
+    g_signal_connect(i.root,"key-press-event",G_CALLBACK(+[](GtkWidget*,GdkEventKey* e,gpointer p)->gboolean{auto& o=*static_cast<Impl*>(p);if(e->keyval!=GDK_KEY_Escape||!o.clipboard||!o.clipboard->busy())return FALSE;o.event([&]{o.clipboard->cancel();});return TRUE;}),&i);
     g_signal_connect(selection,"changed",G_CALLBACK(+[](GtkTreeSelection* selection,gpointer p){auto& o=*static_cast<Impl*>(p);if(o.updating)return;o.event([&]{std::vector<std::string> ids;GtkTreeModel* model=nullptr;auto* rows=gtk_tree_selection_get_selected_rows(selection,&model);
         for(auto* row=rows;row;row=row->next){GtkTreeIter it;if(gtk_tree_model_get_iter(model,&it,static_cast<GtkTreePath*>(row->data))){gchar* id=nullptr;gtk_tree_model_get(model,&it,0,&id,-1);ids.emplace_back(id);g_free(id);}}g_list_free_full(rows,reinterpret_cast<GDestroyNotify>(gtk_tree_path_free));o.selected(std::move(ids),true);});}),&i);
     g_signal_connect(i.canvas,"draw",G_CALLBACK(+[](GtkWidget*,cairo_t* cr,gpointer p)->gboolean{auto& o=*static_cast<Impl*>(p);if(o.closed){cairo_set_source_rgb(cr,0,0,0);cairo_paint(cr);}else o.event([&]{o.draw(cr);});return TRUE;}),&i);
@@ -403,10 +444,10 @@ EditorForm::~EditorForm()=default;
 GtkWidget* EditorForm::widget()const{impl_->owner();return impl_->root;}
 void EditorForm::complete(std::uint64_t ticket,const Json& result){auto& i=*impl_;i.owner();if(i.closed)return;try{if(i.draft.complete(ticket,result))i.changed();}catch(...){i.sync();throw;}}
 void EditorForm::reconciled(std::uint64_t ticket,const std::string& query,const std::string& epoch,const Json& result){auto& i=*impl_;i.owner();if(i.closed)return;try{if(i.draft.reconciled(ticket,query,epoch,result))i.changed();}catch(...){i.sync();throw;}}
-void EditorForm::disconnected(){auto& i=*impl_;i.owner();if(i.closed)return;if(i.content)i.content->erase();if(i.binding)i.binding->erase();if(i.creation)i.creation->erase();if(i.layout_form)i.layout_form->erase();if(i.visibility)i.visibility->erase();if(i.theme)i.theme->erase();i.draft.disconnected();i.gesture.reset();i.sync();}
-void EditorForm::policy(c::Policy policy){auto& i=*impl_;i.owner();if(i.closed)return;if(i.content)i.content->erase();if(i.binding)i.binding->erase();if(i.creation)i.creation->erase();if(i.layout_form)i.layout_form->erase();if(i.visibility)i.visibility->erase();if(i.theme)i.theme->erase();i.gesture.reset();i.draft.policy(policy);i.current=std::move(policy);if(i.surface)i.surface->policy(i.current,i.now());
+void EditorForm::disconnected(){auto& i=*impl_;i.owner();if(i.closed)return;if(i.clipboard)i.clipboard->invalidate();if(i.content)i.content->erase();if(i.binding)i.binding->erase();if(i.creation)i.creation->erase();if(i.layout_form)i.layout_form->erase();if(i.visibility)i.visibility->erase();if(i.theme)i.theme->erase();i.draft.disconnected();i.gesture.reset();i.sync();}
+void EditorForm::policy(c::Policy policy){auto& i=*impl_;i.owner();if(i.closed)return;if(i.clipboard)i.clipboard->invalidate();if(i.content)i.content->erase();if(i.binding)i.binding->erase();if(i.creation)i.creation->erase();if(i.layout_form)i.layout_form->erase();if(i.visibility)i.visibility->erase();if(i.theme)i.theme->erase();i.gesture.reset();i.draft.policy(policy);i.current=std::move(policy);if(i.surface)i.surface->policy(i.current,i.now());
     if(!i.draft.available()){i.settings=nullptr;i.capabilities.clear();i.stop_preview();i.list();}else i.resolve_nodes();i.sync();}
-void EditorForm::reload(c::Authored value,std::string epoch,SettingsResources resources){auto& i=*impl_;i.owner();if(i.closed)return;
+void EditorForm::reload(c::Authored value,std::string epoch,SettingsResources resources){auto& i=*impl_;i.owner();if(i.closed)return;if(i.clipboard)i.clipboard->invalidate();
     if(i.content)i.content->erase();
     if(i.binding)i.binding->erase();
     if(i.creation)i.creation->erase();
@@ -415,7 +456,7 @@ void EditorForm::reload(c::Authored value,std::string epoch,SettingsResources re
     if(i.theme)i.theme->erase();
     if(i.surface&&i.surface->status().code==v::SurfaceCode::closed)need(i.surface->poll_image_jobs(),"editor.renderer_stopping");
     i.draft.reload(value,std::move(epoch),resources);i.settings=std::move(value.settings);i.capabilities=std::move(resources.capabilities);i.fields_dirty=false;i.changed();}
-void EditorForm::topology(s::Topology topology,std::string display){auto& i=*impl_;i.owner();if(i.closed)return;if(i.content)i.content->erase();if(i.binding)i.binding->erase();if(i.creation)i.creation->erase();if(i.layout_form)i.layout_form->erase();if(i.visibility)i.visibility->erase();if(i.theme)i.theme->erase();i.gesture.reset();i.topology=std::move(topology);i.display=std::move(display);i.preview();i.sync(!i.fields_dirty);}
+void EditorForm::topology(s::Topology topology,std::string display){auto& i=*impl_;i.owner();if(i.closed)return;if(i.clipboard)i.clipboard->cancel();if(i.content)i.content->erase();if(i.binding)i.binding->erase();if(i.creation)i.creation->erase();if(i.layout_form)i.layout_form->erase();if(i.visibility)i.visibility->erase();if(i.theme)i.theme->erase();i.gesture.reset();i.topology=std::move(topology);i.display=std::move(display);i.preview();i.sync(!i.fields_dirty);}
 recovery::DataAttachment EditorForm::attach(const std::string& p,const protocol::TelemetryBinding& b,std::uint64_t now){auto& i=*impl_;i.owner();return i.surface?i.surface->attach(p,b,now):recovery::DataAttachment{recovery::DataCode::closed};}
 recovery::DataResult EditorForm::receive(const std::string& p,std::uint64_t t,std::uint64_t r,std::string_view bytes,std::uint64_t now,const model::Tick& tick){auto& i=*impl_;i.owner();if(!i.surface)return {recovery::DataCode::closed};const auto result=i.surface->receive(p,t,r,bytes,now,tick);i.ticks[p]=tick;return result;}
 recovery::DataCode EditorForm::heartbeat(const std::string& p,std::uint64_t t,std::uint64_t r,std::uint64_t q,std::uint64_t now){auto& i=*impl_;i.owner();return i.surface?i.surface->heartbeat(p,t,r,q,now):recovery::DataCode::closed;}

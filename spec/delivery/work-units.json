@@ -410,7 +410,8 @@
         "SP-W08-THEME-COMMANDS",
         "SP-W10-THEME-HISTORY",
         "SP-W10-THEME-CONTROLS",
-        "SP-W10-SCENE-FRAGMENTS"
+        "SP-W10-SCENE-FRAGMENTS",
+        "SP-W10-NATIVE-CLIPBOARD"
       ],
       "acceptance_tests": [
         "T-EDITOR",
@@ -422,14 +423,18 @@
         "source/commands/",
         "source/interfaces/editor_fragment.cpp",
         "source/interfaces/editor_fragment.hpp",
-        "tests/editor/scene_fragment_tests.cpp"
+        "tests/editor/scene_fragment_tests.cpp",
+        "source/platform/linux/scene_clipboard_x11.cpp",
+        "source/platform/linux/scene_clipboard_x11.hpp",
+        "tests/editor/native_clipboard.py",
+        "tests/editor/clipboard_peer.py"
       ],
       "status": "in_progress",
       "authority_class": "development",
       "execution_grant": "user:foundation-native-campaign-2026-10-05",
-      "notes": "Shared authored fragments now provide explicit sensitive clipboard admission, revocable copied snapshots and atomic PasteWidgets through existing history/resource/transaction owners. Exact source subtrees, fresh ID mapping, version promotion, bounds, policy and reconciliation have fixed portable evidence on three development profiles. Existing Linux editor/native history regressions pass; native clipboard controls remain disabled until bounded asynchronous transfers and independent requester/owner tests pass. Recovery drafts, installed ownership, scene-aligned entry/restoration, full accessibility/performance and all five complete editions remain required.",
-      "package": "delivery/packages/w-10-scene-fragments.md",
-      "evidence": "delivery/scene-fragments-handoff.md"
+      "notes": "Shared authored fragments now connect to explicit Linux X11 development Copy/Paste with bounded direct/INCR transfers, current per-chunk authority, cancellation and unique receiver lifetimes. Independent peers exercise exact bytes, malformed input, ownership, deadlines, capacity, revoked serving, undo and durable save/reopen. Other clipboard adapters, recovery drafts, installed ownership, scene-aligned entry/restoration, existing shutdown warnings, full accessibility/performance and all five complete editions remain required.",
+      "package": "delivery/packages/w-10-native-clipboard.md",
+      "evidence": "delivery/native-clipboard-handoff.md"
     },
     {
       "id": "W-11",

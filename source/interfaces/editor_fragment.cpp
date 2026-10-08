@@ -36,6 +36,11 @@ std::string selection_fragment(const Json& scene,const std::vector<std::string>&
     const Json f={{"format","syspane.scene-fragment"},{"schema_version","0.1.0"},{"scene_version",scene.at("schema_version")},{"roots",roots},{"widgets",std::move(widgets)}};
     auto bytes=f.dump();(void)read(bytes);return bytes;
 }
+std::vector<std::string> fragment_ids(std::string_view bytes){
+    const auto scene=read(bytes);std::vector<std::string> ids;
+    for(const auto& w:scene.at("widgets"))ids.push_back(w.at("id").get<std::string>());
+    return ids;
+}
 std::vector<std::string> paste_fragment(Json& scene,const PasteWidgets& edit){
     const auto fragment=read(edit.bytes);need(supported(scene.at("schema_version")),"clipboard.version");
     need(scene.at("widgets").size()+fragment.at("widgets").size()<=256,"clipboard.capacity");

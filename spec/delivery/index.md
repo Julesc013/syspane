@@ -63,6 +63,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Measured telemetry and freshness checkpoint](measured-time-handoff.md) — Bind versioned measurement times to consumer clock scope, replay history and native delayed-delivery evidence.
 - [Native measurement-clock checkpoint](measurement-clock-handoff.md) — Record causal clock brackets and peer-exit rejection without claiming measured telemetry or suspend qualification.
 - [Native chart checkpoint](native-chart-handoff.md) — Exact chart geometry, authorized history ownership and independently observed Linux pixels and accessibility.
+- [Bounded native clipboard checkpoint](native-clipboard-handoff.md) — Explicit Linux X11 object transfers with independent peers and exact draft/persistence results.
 - [Supervised native content checkpoint](native-content-handoff.md) — Retained resource editing through authenticated commands and exact controller replacement.
 - [Native scene editor checkpoint](native-editor-handoff.md) — Real GTK editing, resource-aware persistence, policy erasure and independent recovery.
 - [Native retained network cache checkpoint](native-network-cache-handoff.md) — Actual C++ projected counters and rates reach the owned native desktop with independently checked value pixels and policy erasure.

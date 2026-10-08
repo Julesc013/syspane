@@ -60,6 +60,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Reversible native grouping with explicit geometry](w-10-group.md) — Close group and ungroup transformations, selection history, drawing order and native persistence.
 - [Native keyboard input completion](w-10-keyboard-input.md) — Acknowledge navigation before requesting a different focus target.
 - [Native layout and responsive variant authoring](w-10-layout-authoring.md) — Author every existing layout kind, ordered breakpoint, display intent and active fixed variant through the shared draft.
+- [Bounded native editor clipboard](w-10-native-clipboard.md) — Explicit authored Copy/Paste with revocable X11 transfers and independent peers.
 - [Native scene editing and independent exit](w-10-native-editor.md) — Connect the shared draft to real native pixels, input, transactions and recovery.
 - [Native observation error and focus boundary](w-10-native-observation.md) — Distinguish inaccessible observations from actual absent state without weakening native acceptance.
 - [Bounded authored scene fragments](w-10-scene-fragments.md) — Portable copy ownership and atomic paste without implicit package import.

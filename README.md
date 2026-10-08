@@ -11,16 +11,20 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
-The [scene-fragment checkpoint](spec/delivery/scene-fragments-handoff.md) adds shared,
+The [native clipboard checkpoint](spec/delivery/native-clipboard-handoff.md) adds explicit
+Copy/Paste to the admitted Linux X11 development editor. Transfers are bounded,
+cancellable and revocable; independent peers verify exact bytes, rejected input,
+timeouts, undo and durable save/reopen. Other native clipboard adapters, recovery
+drafts, installed ownership and all five complete editions remain open.
+
+The [scene-fragment checkpoint](spec/delivery/scene-fragments-handoff.md) supplies shared,
 policy-bound object copying and atomic paste with fresh IDs, exact resource pins
-and undo/reconciliation. Native clipboard transfers and controls remain disabled
-pending their bounded adapter and independent evidence. Recovery drafts, installed
-ownership and all five complete editions remain open.
+and undo/reconciliation. The native checkpoint above connects that contract to X11.
 
 The [native font-controls checkpoint](spec/delivery/theme-controls-handoff.md) connects
 base and role fonts to the Linux editor's private controls, current draft preview,
 undo/redo and durable save/reopen. Independent pixels, exact stored artifacts,
-lost-result recovery and bounded erasure pass. Clipboard/recovery drafts, installed
+lost-result recovery and bounded erasure pass. Other clipboard adapters, recovery drafts, installed
 ownership and all five complete editions remain open.
 
 The [theme-history checkpoint](spec/delivery/theme-history-handoff.md) connects shared

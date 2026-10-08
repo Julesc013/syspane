@@ -32,7 +32,7 @@ GtkWidget* editor_control(GtkWidget* root,const char* description){
     g_list_free(children);return found;
 }
 struct Window {
-    std::string root,path,mode,behavior,input,epoch="E1";bool content=false,large=false,arrange=false,group=false,snap=false,properties=false,layout_mode=false,container_mode=false,locks_mode=false,visibility_mode=false,theme_mode=false;Json alternate_selection;c::Authored original;c::Policy current=policy();
+    std::string root,path,mode,behavior,input,epoch="E1";bool content=false,large=false,arrange=false,group=false,snap=false,properties=false,layout_mode=false,container_mode=false,locks_mode=false,visibility_mode=false,theme_mode=false,clipboard_mode=false;Json alternate_selection;c::Authored original;c::Policy current=policy();
     std::uint64_t data_token=0,data_sequence=0,last_heartbeat=0,data_generation=2;
     std::unique_ptr<os::LinuxGenerationStore> store;std::unique_ptr<c::AsyncCommands> owner;std::unique_ptr<ui::EditorForm> form;
     GtkWidget *window=nullptr,*canary=nullptr,*overlay=nullptr;bool recovery=false;std::uint64_t serial=0;std::optional<ui::EditRequest> request;
@@ -46,7 +46,7 @@ struct Window {
         emit({{"event","held"}});
         std::unique_lock<std::mutex> lock(mutex);need(condition.wait_for(lock,std::chrono::seconds(12),[&]{return released;}),"preparation deadline");released=false;
     }
-    std::set<std::string> capabilities()const{return theme_mode?std::set<std::string>{"scene.content","scene.edit-locks","scene.visibility","configuration.edit-locks","configuration.visibility","theme.typography","configuration.theme-overrides"}:visibility_mode?std::set<std::string>{"scene.content","scene.edit-locks","scene.visibility","configuration.edit-locks","configuration.visibility"}:locks_mode?std::set<std::string>{"scene.content","scene.edit-locks","configuration.edit-locks"}:std::set<std::string>{"scene.content"};}
+    std::set<std::string> capabilities()const{return clipboard_mode?std::set<std::string>{"scene.content","editor.clipboard"}:theme_mode?std::set<std::string>{"scene.content","scene.edit-locks","scene.visibility","configuration.edit-locks","configuration.visibility","theme.typography","configuration.theme-overrides"}:visibility_mode?std::set<std::string>{"scene.content","scene.edit-locks","scene.visibility","configuration.edit-locks","configuration.visibility"}:locks_mode?std::set<std::string>{"scene.content","scene.edit-locks","configuration.edit-locks"}:std::set<std::string>{"scene.content"};}
     std::optional<ui::SettingsResources> resource_context(){
         if(!content)return {};
         const auto saved=store->load();need(static_cast<bool>(saved.resources),"stored resource context absent");std::vector<c::ContentPackage> packages;
@@ -64,8 +64,10 @@ struct Window {
         owner->attach(epoch,c::authored_revision(store->load().documents),current);
     }
     void open_owner(){store=std::make_unique<os::LinuxGenerationStore>(path);attach_owner();}
+    c::Policy local_policy(std::uint64_t revision){auto p=policy(revision);if(clipboard_mode)p.disclosure[{"desktop","clipboard"}]={"sensitive"};return p;}
     void initialize(){
-        content=true;theme_mode=mode.substr(0,6)=="fonts-";visibility_mode=mode.substr(0,11)=="visibility-";locks_mode=mode.substr(0,6)=="locks-";container_mode=mode.substr(0,10)=="container-";layout_mode=mode.substr(0,7)=="layout-";large=theme_mode||visibility_mode||locks_mode||mode.substr(0,6)=="large-";arrange=mode.substr(0,8)=="arrange-";group=mode.substr(0,6)=="group-";snap=mode.substr(0,5)=="snap-";properties=mode.substr(0,11)=="properties-";behavior=theme_mode?mode.substr(6):visibility_mode?mode.substr(11):locks_mode?mode.substr(6):container_mode?mode.substr(10):layout_mode?mode.substr(7):large?mode.substr(6):arrange?mode.substr(8):group?mode.substr(6):snap?mode.substr(5):properties?mode.substr(11):mode;
+        content=true;clipboard_mode=mode.substr(0,10)=="clipboard-";theme_mode=mode.substr(0,6)=="fonts-";visibility_mode=mode.substr(0,11)=="visibility-";locks_mode=mode.substr(0,6)=="locks-";container_mode=mode.substr(0,10)=="container-";layout_mode=mode.substr(0,7)=="layout-";large=clipboard_mode||theme_mode||visibility_mode||locks_mode||mode.substr(0,6)=="large-";arrange=mode.substr(0,8)=="arrange-";group=mode.substr(0,6)=="group-";snap=mode.substr(0,5)=="snap-";properties=mode.substr(0,11)=="properties-";behavior=clipboard_mode?mode.substr(10):theme_mode?mode.substr(6):visibility_mode?mode.substr(11):locks_mode?mode.substr(6):container_mode?mode.substr(10):layout_mode?mode.substr(7):large?mode.substr(6):arrange?mode.substr(8):group?mode.substr(6):snap?mode.substr(5):properties?mode.substr(11):mode;
+        if(clipboard_mode)current=local_policy(7);
         if(properties)current.disclosure[{"desktop","history"}]={"operational"};
         if(behavior=="reopen")epoch="E2";
         original={read(root+"/spec/fixtures/valid/settings.json"),read(root+"/spec/fixtures/valid/scene-portable.json")};original.settings["revision"]=original.scene["revision"]="40";
@@ -73,7 +75,7 @@ struct Window {
         if(content&&behavior!="reopen"){
             settings_fixture::Fixture fixture(root,properties?"tests/editor/content-properties-fixture.json":"tests/configuration/settings-content-fixture.json");auto bare=original;bare.settings["revision"]=bare.scene["revision"]="39";store->initialize(bare);
             c::ResourceProvider imports{capabilities(),[&](const c::Authored& v,const Json& s){return fixture.catalog->resources(s,v);}};
-            c::Transactions bootstrap(*store,"E0",imports);auto scene=read(root+(theme_mode?"/tests/editor/theme-controls-cases.json":visibility_mode?"/tests/editor/visibility-controls-cases.json":locks_mode?"/tests/editor/edit-lock-cases.json":container_mode?"/tests/editor/container-cases.json":layout_mode?"/tests/editor/layout-authoring-cases.json":large?"/tests/configuration/large-command-cases.json":arrange?"/tests/editor/arrange-cases.json":group?"/tests/editor/group-cases.json":snap?"/tests/editor/snap-cases.json":properties?"/tests/editor/content-properties-cases.json":"/tests/editor/native-cases.json"))["authored"]["scene"];scene["revision"]="39";
+            c::Transactions bootstrap(*store,"E0",imports);auto scene=read(root+(clipboard_mode?"/tests/editor/native-clipboard-cases.json":theme_mode?"/tests/editor/theme-controls-cases.json":visibility_mode?"/tests/editor/visibility-controls-cases.json":locks_mode?"/tests/editor/edit-lock-cases.json":container_mode?"/tests/editor/container-cases.json":layout_mode?"/tests/editor/layout-authoring-cases.json":large?"/tests/configuration/large-command-cases.json":arrange?"/tests/editor/arrange-cases.json":group?"/tests/editor/group-cases.json":snap?"/tests/editor/snap-cases.json":properties?"/tests/editor/content-properties-cases.json":"/tests/editor/native-cases.json"))["authored"]["scene"];scene["revision"]="39";
             Json q={{"schema_version",visibility_mode?"0.7.0":locks_mode?"0.6.0":large?"0.5.0":"0.4.0"},{"request_id","bootstrap"},{"expected_revision","39"},{"policy_generation","7"},{"intent","commit"},{"content",fixture.document["selection"]},{"operations",Json::array({{{"op","scene.replace"},{"scene",scene}}})}};
             const auto result=bootstrap.submit("fixture:editor","bootstrap",q.dump(),authority(),[&]{return current;},0);need(result["outcome"]=="accepted"&&result["revision"]=="40","resource bootstrap");
             alternate_selection=fixture.document["alternate_selection"];original=store->load().documents;
@@ -89,7 +91,7 @@ struct Window {
         }
         attach_owner();
         ui::EditorForm::Actions actions;
-        actions.widget_id=[&]{if(locks_mode&&behavior=="nested"&&!serial){++serial;return std::string("widget:group");}return "widget:new"+std::to_string(++serial);};actions.exit=[&]{commands.push_back({"exit",{}});};actions.request_id=[&]{return "editor:"+std::to_string(++serial);};actions.submit=[&](const auto& q){need(commands.size()<4,"fixture queue");commands.push_back({"submit",q});if(behavior=="callback")throw std::runtime_error("ambiguous callback delivery");};
+        actions.widget_id=[&]{if(clipboard_mode)return "native:"+std::to_string(++serial);if(locks_mode&&behavior=="nested"&&!serial){++serial;return std::string("widget:group");}return "widget:new"+std::to_string(++serial);};actions.exit=[&]{commands.push_back({"exit",{}});};actions.request_id=[&]{return "editor:"+std::to_string(++serial);};actions.submit=[&](const auto& q){need(commands.size()<4,"fixture queue");commands.push_back({"submit",q});if(behavior=="callback")throw std::runtime_error("ambiguous callback delivery");};
         actions.cancel=[&](const auto& q){need(commands.size()<4,"fixture queue");commands.push_back({"cancel",q});};actions.reload=[&]{need(commands.size()<4,"fixture queue");commands.push_back({"reload",{}});};
         auto display=topology();if(properties){display.displays[0].bounds=display.displays[0].work={0,0,640*64,560*64};display.displays[0].scale_numerator=3;display.displays[0].scale_denominator=4;}
         form=std::make_unique<ui::EditorForm>(authority(),current,original,epoch,*resource_context(),display,"D1",(properties||visibility_mode||theme_mode)?std::vector<syspane::rendering::SurfaceProvider>{fixture::provider()}:std::vector<syspane::rendering::SurfaceProvider>{},image_worker(),std::move(actions),large);
@@ -150,16 +152,17 @@ struct Window {
             if(value=="condition-hide-select"){auto* tree=editor_control(form->widget(),"editor.objects");need(tree&&GTK_IS_TREE_VIEW(tree),"native authored list");auto* selection=gtk_tree_view_get_selection(GTK_TREE_VIEW(tree));gtk_tree_selection_unselect_all(selection);auto* path=gtk_tree_path_new_first();gtk_tree_selection_select_path(selection,path);gtk_tree_path_free(path);emit({{"event","selected-before-paint"}});}}
         else if(value=="condition-loss"){need(visibility_mode&&data_token,"visibility laboratory control");form->disconnect("P1",data_token,current.revision,now());data_token=0;}
         else if(value=="layout-narrow"||value=="layout-wide"){need(layout_mode||container_mode,"layout laboratory control");auto t=topology();t.displays[0].bounds.width=t.displays[0].work.width=(value=="layout-narrow"?399:500)*64;form->topology(t,"D1");}
+        else if(value=="deny-clipboard"){current=local_policy(current.revision+1);current.disclosure.erase({"desktop","clipboard"});owner->policy(current);form->policy(current);}
         else if(value=="disconnect"){form->disconnected();}
-        else if(value=="policy"){current=policy(current.revision+1);owner->policy(current);form->policy(current);}
-        else if(value=="deny-font"||value=="capability-loss"){current=policy(current.revision+1);current.denied_capabilities.insert(value=="deny-font"?"theme.edit":"theme.typography");owner->policy(current);form->policy(current);}
+        else if(value=="policy"){current=local_policy(current.revision+1);owner->policy(current);form->policy(current);}
+        else if(value=="deny-font"||value=="capability-loss"){current=local_policy(current.revision+1);current.denied_capabilities.insert(value=="deny-font"?"theme.edit":"theme.typography");owner->policy(current);form->policy(current);}
         else if(value=="topology"){form->topology(topology("D2"),"D2");}
         else if(value=="release")release();
-        else if(value=="revoke"){current=policy(current.revision+1);current.disclosure.clear();owner->policy(current);form->policy(current);}
-        else if(value=="regrant"){current=policy(current.revision+1);if(properties)current.disclosure[{"desktop","history"}]={"operational"};owner->policy(current);form->policy(current);}
-        else if(value=="deny"){current=policy(current.revision+1);current.denied_capabilities.insert(content?"content.select":"settings.commit");owner->policy(current);form->policy(current);}
+        else if(value=="revoke"){current=local_policy(current.revision+1);current.disclosure.clear();owner->policy(current);form->policy(current);}
+        else if(value=="regrant"){current=local_policy(current.revision+1);if(properties)current.disclosure[{"desktop","history"}]={"operational"};owner->policy(current);form->policy(current);}
+        else if(value=="deny"){current=local_policy(current.revision+1);current.denied_capabilities.insert(content?"content.select":"settings.commit");owner->policy(current);form->policy(current);}
         else if(value=="retrieve"){need(request.has_value()&&!worker.joinable(),"retrieve before stop");auto result=owner->query("fixture:editor",authority(),request->request,false,now());form->complete(request->ticket,result);emit({{"event","retrieved"},{"result",result}});}
-        else if(value=="restart"){need(request.has_value()&&!worker.joinable(),"restart before stop");owner.reset();store.reset();epoch="E2";current=policy(8);if(properties)current.disclosure[{"desktop","history"}]={"operational"};open_owner();form->policy(current);
+        else if(value=="restart"){need(request.has_value()&&!worker.joinable(),"restart before stop");owner.reset();store.reset();epoch="E2";current=local_policy(8);if(properties)current.disclosure[{"desktop","history"}]={"operational"};open_owner();form->policy(current);
             Json query={{"schema_version","0.1.0"},{"query_id","Q"},{"original_producer_epoch",request->epoch},{"request_id",request->request}};
             auto result=owner->reconcile("fixture:editor",authority(),query,now());form->reconciled(request->ticket,"Q",epoch,result);emit({{"event","reconciled"},{"response",result}});}
         else if(value=="close"){form->close();}

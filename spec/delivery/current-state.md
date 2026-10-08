@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-08T11:30:46.531139+00:00", "scope": "Portable fragment copy/paste implemented; native transfer admission, recovery drafts and complete editions remain open"}
+updated: {"by": "codex", "at": "2026-10-08T12:48:46.607608+00:00", "scope": "Bounded Linux X11 clipboard checkpoint; other adapters, recovery drafts and complete editions remain open"}
 ---
 
 # Current state and next admitted boundary
@@ -22,16 +22,20 @@ recordings are local ignored `out/` content; the retired root is absent from the
 tracked tree. See `docs/developers/build.md` in the repository for checkout
 setup and the [repository contract](../foundation/repository.md) for ownership.
 
-The [scene-fragment checkpoint](scene-fragments-handoff.md) adds shared,
+The [native clipboard checkpoint](native-clipboard-handoff.md) adds explicit
+Copy/Paste to the admitted Linux X11 development editor. Transfers are bounded,
+cancellable and revocable; independent peers verify exact bytes, rejected input,
+timeouts, undo and durable save/reopen. Other native clipboard adapters, recovery
+drafts, installed ownership and all five complete editions remain open.
+
+The [scene-fragment checkpoint](scene-fragments-handoff.md) supplies shared,
 policy-bound object copying and atomic paste with fresh IDs, exact resource pins
-and undo/reconciliation. Native clipboard transfers and controls remain disabled
-pending their bounded adapter and independent evidence. Recovery drafts, installed
-ownership and all five complete editions remain open.
+and undo/reconciliation. The native checkpoint above connects that contract to X11.
 
 The [native font-controls checkpoint](theme-controls-handoff.md) connects
 base and role fonts to the Linux editor's private controls, current draft preview,
 undo/redo and durable save/reopen. Independent pixels, exact stored artifacts,
-lost-result recovery and bounded erasure pass. Clipboard/recovery drafts, installed
+lost-result recovery and bounded erasure pass. Other clipboard adapters, recovery drafts, installed
 ownership and all five complete editions remain open.
 
 The [theme-history checkpoint](theme-history-handoff.md) connects shared

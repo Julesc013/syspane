@@ -163,14 +163,20 @@ panel. If a topology change switches a variant while numeric geometry is buffere
 controls are currently exercised in the owned Linux development editor, as scoped
 in the [handoff](../../spec/delivery/layout-authoring-handoff.md).
 
-Theme 0.2 font roles now have verified development scene composition. The editor
-still needs native font-authoring controls before this becomes an ordinary editing
-feature. Existing themes and settings remain usable. See the [checkpoint](../../spec/delivery/role-composition-handoff.md).
+The admitted Linux development editor also offers **Fonts** for base and role
+fonts. Set changes the draft; Apply saves. See the [checkpoint](../../spec/delivery/theme-controls-handoff.md).
 
 
-Object copy/paste now has a tested shared editing contract. It retains authored
-objects and exact image references, uses fresh object IDs and preserves the target
-scene's theme. Missing resources refuse the paste without changing the scene.
-Native clipboard buttons are still pending bounded transfer and privacy tests;
-current editor controls do not expose this feature yet. Copying live telemetry and
-automatic export from private property fields remain disabled.
+In the admitted Linux X11 development editor, select objects and choose **Copy**.
+Choose **Paste** to append copies at the end of the scene's root objects. Ctrl+C and
+Ctrl+V work when the canvas or object list has focus. Each paste is one undo step;
+**Apply** saves separately. **Cancel paste** or Escape abandons a pending transfer.
+
+Copies retain authored objects and exact image references, use fresh object IDs and
+preserve the destination scene's theme. Missing resources refuse the entire paste.
+Only SysPane object data is offered: ordinary text applications cannot paste it.
+Live telemetry and private property fields are excluded. Changing policy, reloading,
+saving, disconnecting or closing clears SysPane's copied snapshot; another app taking
+the clipboard also clears it. Data already delivered to another app cannot be recalled.
+Other native platforms and installed editions remain pending their own qualification.
+See the [clipboard checkpoint](../../spec/delivery/native-clipboard-handoff.md).
