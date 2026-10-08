@@ -16,7 +16,12 @@ int main(int argc,char** argv){
         }
         const auto j=Json::parse(bytes);
         syspane::rendering::TextRequest r;
-        r.text=j.at("text");r.theme=j.at("theme");
+        r.text=j.at("text");r.theme=j.at("theme");r.role=j.value("role",r.role);
+        if(j.value("fault",std::string())=="ignore-role")r.role="body";
+        if(j.value("fault",std::string())=="ignore-weight"){
+            r.theme["font"]["weight"]=400;
+            if(r.theme.contains("font_roles"))for(auto& f:r.theme["font_roles"])f["weight"]=400;
+        }
         if(j.contains("text_hex")){
             const auto hex=j.at("text_hex").get<std::string>();
             if(hex.size()>8192||hex.size()%2)throw syspane::protocol::Error("text.input");

@@ -3,7 +3,7 @@
 
 namespace syspane::rendering {
 struct TextRequest {
-    std::string text,language="en",token="foreground",contrast="authored";
+    std::string text,language="en",token="foreground",contrast="authored",role="body";
     configuration::Json theme;
     std::optional<scene::Unit> wrap_units;
     unsigned numerator=1,denominator=1;

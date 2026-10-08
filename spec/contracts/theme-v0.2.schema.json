@@ -1,0 +1,151 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.example.invalid/syspane/0.2.0/theme.schema.json",
+  "title": "SysPane theme typography 0.2",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "0.2.0"
+    },
+    "theme_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "tokens": {
+      "type": "object",
+      "properties": {
+        "foreground": {
+          "type": "string",
+          "pattern": "^#[0-9a-fA-F]{8}$",
+          "description": "sRGB red, green, blue, alpha bytes in that order; straight alpha."
+        },
+        "background": {
+          "type": "string",
+          "pattern": "^#[0-9a-fA-F]{8}$",
+          "description": "sRGB red, green, blue, alpha bytes in that order; straight alpha."
+        },
+        "warning": {
+          "type": "string",
+          "pattern": "^#[0-9a-fA-F]{8}$",
+          "description": "sRGB red, green, blue, alpha bytes in that order; straight alpha."
+        },
+        "error": {
+          "type": "string",
+          "pattern": "^#[0-9a-fA-F]{8}$",
+          "description": "sRGB red, green, blue, alpha bytes in that order; straight alpha."
+        },
+        "muted": {
+          "type": "string",
+          "pattern": "^#[0-9a-fA-F]{8}$",
+          "description": "sRGB red, green, blue, alpha bytes in that order; straight alpha."
+        }
+      },
+      "required": [
+        "foreground",
+        "background",
+        "warning",
+        "error",
+        "muted"
+      ],
+      "additionalProperties": false
+    },
+    "font": {
+      "$ref": "#/$defs/font"
+    },
+    "motion": {
+      "enum": [
+        "none",
+        "reduced",
+        "normal"
+      ]
+    },
+    "extensions": {
+      "type": "object",
+      "maxProperties": 64,
+      "propertyNames": {
+        "pattern": "^[a-z][a-z0-9_.-]{0,127}$"
+      }
+    },
+    "font_roles": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "$ref": "#/$defs/font"
+        },
+        "label": {
+          "$ref": "#/$defs/font"
+        },
+        "value": {
+          "$ref": "#/$defs/font"
+        },
+        "diagnostic": {
+          "$ref": "#/$defs/font"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "schema_version",
+    "theme_id",
+    "name",
+    "tokens",
+    "font",
+    "motion"
+  ],
+  "additionalProperties": false,
+  "description": "Versioned complete font roles. Family is one literal font-family name; missing roles use the base font. Current-policy resource capability theme.typography is required.",
+  "$defs": {
+    "font": {
+      "type": "object",
+      "properties": {
+        "family": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[^ \\u0000-\\u001f\\u007f,](?:[^\\u0000-\\u001f\\u007f,]*[^ \\u0000-\\u001f\\u007f,])?$",
+          "description": "C1 controls U+0080..U+009F and UTF-8 byte length over 512 are semantic validation errors. ASCII controls, comma and edge spaces are structural errors."
+        },
+        "size_dip": {
+          "type": "number",
+          "minimum": 9,
+          "maximum": 72
+        },
+        "weight": {
+          "enum": [
+            100,
+            200,
+            300,
+            400,
+            500,
+            600,
+            700,
+            800,
+            900
+          ]
+        },
+        "style": {
+          "enum": [
+            "normal",
+            "italic",
+            "oblique"
+          ]
+        }
+      },
+      "required": [
+        "family",
+        "size_dip",
+        "weight",
+        "style"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

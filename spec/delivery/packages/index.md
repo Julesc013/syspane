@@ -43,6 +43,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Policy-owned asynchronous scene images](w-09-scene-images.md) — Connect immutable image resources, bounded worker lifetime and native pixels to current scene authority.
 - [Policy-owned native scalar scene surface](w-09-scene-surface.md) — Compose authored scenes, pinned resources, scalar bindings and native text under one erasing presentation owner.
 - [Policy-owned collection tables](w-09-table-surface.md) — Render identity-aligned collection columns with bounded native grid geometry and explicit incomplete states.
+- [Versioned theme typography and native font roles](w-09-typography.md) — Exact authored font roles, bounded resolution and capability-bound native text rendering.
 - [Borrowed visibility composition](w-09-visibility-composition.md) — Compose bounded condition trees without nested reads or retained decisions.
 - [Policy-bound conditional visibility](w-09-visibility.md) — Close conditional visibility semantics before scene and native authoring admission.
 - [Deterministic native alignment and spacing](w-10-arrange.md) — Close fixed-base arrange operations through shared drafts and independent native evidence.

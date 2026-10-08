@@ -12,10 +12,17 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-08T01:42:39.633509+00:00", "scope": "Native visibility controls and trusted EditorForm integration verified; installed ownership and complete editions remain open"}
+updated: {"by": "codex", "at": "2026-10-08T02:15:13.857835+00:00", "scope": "Theme typography and native font roles verified; scene composition and theme-authoring controls remain open"}
 ---
 
 # Current state and next admitted boundary
+
+The [typography checkpoint](typography-handoff.md) adds theme 0.2 with
+explicit font weight/style and body, label, value and diagnostic roles. Exact
+resource pins and current policy govern admission; existing theme output is
+preserved. Native text rendering is verified. Role-aware scene composition and
+native theme-authoring controls are the next integration boundary; scene rendering
+explicitly refuses the new theme version until that boundary is verified.
 
 The [native visibility controls](visibility-controls-handoff.md) now edit
 bounded conditions through the existing draft and persistence owners. Hidden objects

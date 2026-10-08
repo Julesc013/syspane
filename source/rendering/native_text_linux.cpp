@@ -1,4 +1,5 @@
 #include "native_text.hpp"
+#include "theme_font.hpp"
 #include <pango/pangocairo.h>
 #include <algorithm>
 #include <cmath>
@@ -48,9 +49,9 @@ void native_ok(cairo_t* cr,cairo_surface_t* surface){
     if(cairo_status(cr)!=CAIRO_STATUS_SUCCESS||cairo_surface_status(surface)!=CAIRO_STATUS_SUCCESS)throw Error("text.native");
 }
 TextRaster render(const TextRequest& r){
-    configuration::validate_content_document(r.theme,"theme");
+    const auto resolved=configuration::theme_font(r.theme,r.role);
     text_valid(r.text,4096,1024,true);
-    const auto family=r.theme.at("font").at("family").get<std::string>();
+    const auto& family=resolved.family;
     text_valid(family,512,128,false);
     if(r.language.empty()||r.language.size()>35||!ascii_letter(r.language[0])||
        !std::all_of(r.language.begin(),r.language.end(),[](char c){return ascii_letter(c)||(c>='0'&&c<='9')||c=='-';})||
@@ -76,9 +77,9 @@ TextRaster render(const TextRequest& r){
     pango_context_set_language(context.get(),pango_language_from_string(r.language.c_str()));
     Owned<PangoFontDescription,pango_font_description_free> font(pango_font_description_new(),pango_font_description_free);
     pango_font_description_set_family(font.get(),family.c_str());
-    pango_font_description_set_weight(font.get(),PANGO_WEIGHT_NORMAL);
-    pango_font_description_set_style(font.get(),PANGO_STYLE_NORMAL);
-    pango_font_description_set_absolute_size(font.get(),r.theme.at("font").at("size_dip").get<double>()*PANGO_SCALE);
+    pango_font_description_set_weight(font.get(),static_cast<PangoWeight>(resolved.weight));
+    pango_font_description_set_style(font.get(),resolved.style=="italic"?PANGO_STYLE_ITALIC:resolved.style=="oblique"?PANGO_STYLE_OBLIQUE:PANGO_STYLE_NORMAL);
+    pango_font_description_set_absolute_size(font.get(),resolved.size_dip*PANGO_SCALE);
     Owned<PangoLayout,unref_layout> layout(pango_layout_new(context.get()),unref_layout);
     if(!layout)throw Error("text.native");
     pango_layout_set_font_description(layout.get(),font.get());

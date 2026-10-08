@@ -127,6 +127,7 @@ struct SceneSurface::Impl {
             if(reset){found->second.samples->clear();found->second.fault=fault;}else found->second.samples->gap();}}
     void prepare_histories(){
         need(allowed(),"policy.denied");c::authorize_resources(*config.resources,policy,config.capabilities);
+        need(config.resources->theme().at("schema_version")!="0.2.0","surface.typography_unavailable");
         need(config.authored.scene["schema_version"]!="0.5.0"||config.experimental_visibility,"surface.visibility_unavailable");
         std::size_t count=0,points=0;for(const auto& w:config.authored.scene["widgets"])if(w["kind"]=="chart"){
             need(w.contains("content"),"surface.unsupported");++count;points+=w["content"]["max_points"].get<std::size_t>();}
@@ -259,7 +260,7 @@ void SceneSurface::paint(std::uint64_t now,const std::map<std::string,m::Tick>& 
     auto& i=*impl_;i.owner();need(static_cast<bool>(sink),"surface.sink");
     if(i.start(now)){
         if(!i.allowed()){i.images->clear();i.histories.clear();i.status={SurfaceCode::restricted,0,0,"policy.denied"};}
-        else if((i.config.authored.scene["schema_version"]!="0.5.0"||i.config.experimental_visibility)&&!(i.policy.forced.count("display.enabled")?i.policy.forced.at("display.enabled")==true:
+        else if(i.config.resources->theme().at("schema_version")!="0.2.0"&&(i.config.authored.scene["schema_version"]!="0.5.0"||i.config.experimental_visibility)&&!(i.policy.forced.count("display.enabled")?i.policy.forced.at("display.enabled")==true:
                   i.config.authored.settings["display"]["enabled"].get<bool>())){i.images->clear();i.status={SurfaceCode::empty,0,0,{}};}
         else try{
             i.frame=i.compose(now,ticks);i.status.code=i.frame->layout.state==s::State::ready?SurfaceCode::ready:SurfaceCode::degraded;

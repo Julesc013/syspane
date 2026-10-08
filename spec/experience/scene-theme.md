@@ -61,6 +61,15 @@ remains gated until a typed AST, units and resource fixtures are specified.
 Authored colors are sRGB `#RRGGBBAA` with straight alpha; backend premultiplication
 is a deliberate conversion. [Resolution](configuration-resolution.md) defines default
 versus scene theme and most-restrictive motion/accessibility precedence. The current
-theme schema still represents five semantic colors, one font and motion. Expanded
-typography roles, spacing/density, chart styles and contrast variants require a
-versioned schema and native tests before enablement; they are not hidden in extensions.
+theme 0.1 schema represents five semantic colors, one font and motion. The
+[theme 0.2 typography contract](../delivery/packages/w-09-typography.md) adds complete
+font weight/style and named body, label, value and diagnostic roles. Absent roles
+use the base font; theme 0.1 retains normal weight/style for every role. Family
+names are literal data, native fallback preserves the authored name, and resource
+admission requires theme.typography under current policy. The
+[checkpoint](../delivery/typography-handoff.md) records native text evidence.
+
+Scene composition must refuse theme 0.2 until role mapping and mandatory diagnostic
+preservation are verified. Native theme authoring remains the following integration
+boundary. Spacing/density, chart styles and contrast variants still require versioned
+contracts and native tests; none is hidden in optional extensions.

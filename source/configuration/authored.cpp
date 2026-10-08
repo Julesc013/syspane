@@ -13,7 +13,7 @@ void require(bool value,const char* code){if(!value)throw Error(code);}
 const std::map<std::string,Json>& schemas(){
     static const std::map<std::string,Json> value=[] {
         std::map<std::string,Json> result;
-        for(const char* text:{settings_schema,scene_v0_2_schema,scene_v0_3_schema,scene_v0_4_schema,scene_v0_5_schema,layout_schema,binding_schema,visibility_schema,command_v0_2_schema,command_v0_3_schema,command_v0_4_schema,command_v0_5_schema,command_v0_6_schema,command_v0_7_schema,command_result_schema,content_package_schema,content_catalog_schema,preset_schema,theme_schema}){
+        for(const char* text:{settings_schema,scene_v0_2_schema,scene_v0_3_schema,scene_v0_4_schema,scene_v0_5_schema,layout_schema,binding_schema,visibility_schema,command_v0_2_schema,command_v0_3_schema,command_v0_4_schema,command_v0_5_schema,command_v0_6_schema,command_v0_7_schema,command_result_schema,content_package_schema,content_catalog_schema,preset_schema,theme_schema,theme_v0_2_schema}){
             auto item=Json::parse(text);result.emplace(item["$id"].get<std::string>(),std::move(item));
         }
         return result;
@@ -152,7 +152,16 @@ void scene_semantics(const Json& scene){
 std::uint64_t authored_revision(const Authored& value){return revision(value.settings.at("revision"));}
 void validate_content_document(const Json& value,const std::string& kind){
     require(kind=="content-catalog"||kind=="content-package"||kind=="preset"||kind=="theme","content.kind");
-    const auto name="0.1.0/"+kind;structural(value,name.c_str(),kind=="content-catalog"?16384:(kind=="content-package"?65536:262144));
+    const bool typography=kind=="theme"&&value.is_object()&&value.value("schema_version",Json())=="0.2.0";
+    const auto name=std::string(typography?"0.2.0/":"0.1.0/")+kind;structural(value,name.c_str(),kind=="content-catalog"?16384:(kind=="content-package"?65536:262144));
+    if(typography){
+        const auto check=[](const Json& font){const auto& family=font.at("family").get_ref<const std::string&>();require(!family.empty()&&family.size()<=512&&family.front()!=' '&&family.back()!=' ',"theme.family");
+            // Older native regex engines disagree on escaped control ranges.
+            // Enforce the literal-name contract over validated UTF-8 bytes too.
+            for(std::size_t i=0;i<family.size();++i){const auto c=static_cast<unsigned char>(family[i]);require(c>=32&&c!=127&&c!=',',"theme.family");
+                if(c==0xc2&&i+1<family.size()){const auto next=static_cast<unsigned char>(family[i+1]);require(next<0x80||next>0x9f,"theme.family");}}};
+        check(value.at("font"));if(value.contains("font_roles"))for(const auto& font:value.at("font_roles"))check(font);
+    }
 }
 void validate_scene_document(const Json& value){const auto version=value.is_object()?value.value("schema_version",Json()):Json();structural(value,version=="0.5.0"?"0.5.0/scene":version=="0.4.0"?"0.4.0/scene":version=="0.3.0"?"0.3.0/scene":"0.2.0/scene",262144);(void)revision(value["revision"]);scene_semantics(value);}
 Json upgrade_scene_content(const Json& value){

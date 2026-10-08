@@ -28,6 +28,12 @@ void cases(const std::string& root){
     test("BORROW",[&]{Owner f(root);f.attach();f.receive();unsigned calls=0;bool thrown=false;try{f.surface->paint(2,{{"P1",tick()}},[&](auto,const auto*){++calls;bool blocked=false;try{f.surface->close();}catch(const std::logic_error&){blocked=true;}need(blocked,"borrow reentry");throw std::runtime_error("sink");});}catch(const std::runtime_error& e){thrown=std::string(e.what())=="sink";}need(thrown&&calls==1,"sink exception once");f.paint(3);});
     test("CLOCK-CLOSE",[&]{Owner f(root);f.attach();f.receive();f.paint(10);check_empty(*f.surface,v::SurfaceCode::closed,9);});
     test("RESOURCE-BINDING",[&]{Owner f(root);auto cfg=f.cfg;cfg.authored.scene["theme_id"]="wrong";bool invalid=false;try{f.surface->replace(cfg,0);}catch(const p::Error&){invalid=true;}need(invalid,"theme pin binding");});
+    test("TYPOGRAPHY-GATE",[&]{Owner f(root);f.attach();f.receive();f.paint();auto theme=read(root,"theme-typography.json");theme["theme_id"]=f.cfg.resources->theme()["theme_id"];
+        auto cfg=config(root,theme);cfg.capabilities.insert("theme.typography");f.surface->replace(cfg,3);check_empty(*f.surface,v::SurfaceCode::alternative,4);
+        need(f.surface->status().reason=="surface.typography_unavailable","role composition must be admitted before new theme rendering");
+        f.surface->policy(policy(8,false),5);check_empty(*f.surface,v::SurfaceCode::restricted,6);f.surface->policy(policy(9),7);check_empty(*f.surface,v::SurfaceCode::alternative,8);
+        cfg.authored.settings["display"]["enabled"]=false;f.surface->replace(cfg,9);check_empty(*f.surface,v::SurfaceCode::alternative,10);need(f.surface->status().reason=="surface.typography_unavailable","disabled display preserves gate");
+        f.surface->replace(f.cfg,11);need(f.paint(12).widgets[0].text=="Receive\nWaiting","legacy resume has no old payload");});
     test("VISIBILITY-GATE",[&]{Owner f(root);f.attach();f.receive();f.paint();auto cfg=f.cfg;cfg.authored.scene=c::upgrade_scene_content(cfg.authored.scene);cfg.authored.scene["schema_version"]="0.5.0";
         cfg.authored.scene["widgets"][0]["visibility"]=read(root,"visibility-counter.json");std::vector<c::ContentPackage> packages;for(const auto& package:cfg.resources->packages())packages.push_back(*package);
         cfg.resources=c::ContentCatalog(std::move(packages)).resources(cfg.resources->selection(),cfg.authored);cfg.capabilities.insert({"scene.content","scene.edit-locks","scene.visibility"});

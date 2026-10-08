@@ -17,6 +17,11 @@ updated: {"by": "codex", "at": "2026-10-06T01:32:00Z", "scope": "Native focus co
 
 # Implementation readiness and gates
 
+The [typography checkpoint](typography-handoff.md) adds versioned theme fonts and
+native role rendering. Current policy and immutable resource identities gate their
+use. Scene composition and native authoring are still explicitly unavailable for
+theme 0.2; the next package must prove their role mapping and diagnostic behavior.
+
 The [visibility-controls checkpoint](visibility-controls-handoff.md) now adds
 native rule input and trusted EditorForm integration to the earlier authored and
 rendering contracts. Its executable cases preserve exact scenes, private erasure,

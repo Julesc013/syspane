@@ -26,6 +26,9 @@ behaviour has been implemented. See [audit disposition](spec/delivery/audit-2026
 
 ## First native campaign
 
+- [x] W-09 theme typography: versioned complete fonts/roles, exact resource admission and native raster evidence. See the [handoff](spec/delivery/typography-handoff.md).
+- [ ] Connect typography roles to scene composition and native theme-authoring controls through existing draft/resource/persistence owners; retain mandatory diagnostics and private-buffer erasure.
+
 - [x] W-10 native visibility controls: private exact rule/source input, hidden-object selection, current held-gesture diagnostics and independent durable save/reopen/erasure checks. See the [handoff](spec/delivery/visibility-controls-handoff.md). Installed ownership and complete editions remain open.
 
 - [x] W-09 shared conditional-visibility evaluator: bounded singleton comparisons, exact uint64/binary64 ordering, unit/type checks, current-policy borrowing and explicit unavailable outcomes. See the [handoff](spec/delivery/visibility-handoff.md).

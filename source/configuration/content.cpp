@@ -129,6 +129,7 @@ ResourceSnapshot ContentCatalog::resources(const Json& selection,const Authored&
     if(!pin.is_null()&&pin["id"]==id)theme=lookup(pin,"theme",scope);
     else for(auto i:scope)if(entries_[i].manifest["kind"]=="theme"&&entries_[i].pin["id"]==id){need(!theme,"content.ambiguous");theme=i;}
     need(theme.has_value(),"content.theme");result->theme_pin_=entries_[*theme].pin;result->theme_=entries_[*theme].document;
+    if(result->theme_["schema_version"]=="0.2.0")result->required_.insert("theme.typography");
     if(candidate.scene["schema_version"]!="0.2.0")result->required_.insert("scene.content");
     if((candidate.scene["schema_version"]=="0.4.0"||candidate.scene["schema_version"]=="0.5.0"))result->required_.insert("scene.edit-locks");
     if(candidate.scene["schema_version"]=="0.5.0")result->required_.insert("scene.visibility");
@@ -137,6 +138,7 @@ ResourceSnapshot ContentCatalog::resources(const Json& selection,const Authored&
 void validate_resource_binding(const ResourceSet& resources,const Authored& candidate){
     validate_authored(candidate);const auto id=candidate.scene["theme_id"].is_null()?candidate.settings["display"]["theme_id"]:candidate.scene["theme_id"];
     need(id==resources.theme()["theme_id"],"content.theme");
+    if(resources.theme()["schema_version"]=="0.2.0")need(resources.required().count("theme.typography")!=0,"resource.contract");
     if(candidate.scene["schema_version"]=="0.2.0")return;
     need(resources.required().count("scene.content")!=0,"resource.contract");
     if((candidate.scene["schema_version"]=="0.4.0"||candidate.scene["schema_version"]=="0.5.0"))need(resources.required().count("scene.edit-locks")!=0,"resource.contract");
@@ -192,6 +194,7 @@ PresetPlan ContentCatalog::preview(const Json& package_pin,const Json& selected,
     if(!leafdoc["theme"].is_null())theme=lookup(leafdoc["theme"],"theme",scope);
     else for(auto i:scope)if(entries_[i].manifest["kind"]=="theme"&&entries_[i].pin["id"]==theme_id){need(!theme,"content.ambiguous");theme=i;}
     need(theme.has_value(),"content.theme");result.theme=entries_[*theme].document;
+    if(result.theme["schema_version"]=="0.2.0")need(capabilities.count("theme.typography")&&!policy.denied_capabilities.count("theme.typography"),"content.capability");
     if(result.command.contains("content"))authorize_resources(*resources(result.command["content"],result.candidate),policy,capabilities);
     return result;
 }

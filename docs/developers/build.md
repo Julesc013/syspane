@@ -1,5 +1,19 @@
 # Developer setup and checks
 
+The [typography package](../../spec/delivery/packages/w-09-typography.md) introduces
+theme 0.2 and `configuration::theme_font(theme, role)`. It returns an owned family,
+DIP size, weight and style; `TextRequest.role` defaults to body. ContentCatalog adds
+the required `theme.typography` capability for a selected version 0.2 theme even
+when its manifest omitted it. Existing theme 0.1 output remains equivalent.
+
+After ordinary preflight/configure/build, run `ctest --preset <profile> -R
+'^configuration[.]TYPOGRAPHY-' --output-on-failure`. The owned Linux laboratory runs
+`ctest --preset linux-x64-gcc13 -R '^native[.](THEME-TYPOGRAPHY|TEXT-RASTER|SCENE-SURFACE)$'
+--output-on-failure`. The new native oracle preserves pixels and positive ignored-role
+and ignored-weight fault witnesses. SceneSurface explicitly refuses theme 0.2 pending
+role-aware composition. Read the [handoff](../../spec/delivery/typography-handoff.md)
+before enabling scene integration or adding native theme authoring.
+
 The [native visibility controls](../../spec/delivery/packages/w-10-visibility-controls.md)
 add the shared `VisibilityInput` parser and lazy GTK `EditorVisibilityForm`. Set routes
 through `SetWidgetVisibility`; nested binding input changes only the private buffer.

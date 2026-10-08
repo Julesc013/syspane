@@ -76,6 +76,10 @@ Contracts: [resolution](../../spec/experience/configuration-resolution.md),
 
 ## Content properties in the development editor
 
+Custom font editing is still under development. The new theme format supports
+font roles, but it is not yet enabled in scene previews or native theme controls.
+Continue using the existing theme choices until that integration is available.
+
 Choose **Content** with clean basic property fields. For a table, select a source
 column, edit its label and use Move column up/down to move the label and source
 together. Chart controls set the history window (1,000–3,600,000 ms), point limit
