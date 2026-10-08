@@ -1,0 +1,13 @@
+{
+  "family": "EDITOR-HELPER-WORKER",
+  "cases": ["ATTACH", "GUI-WHILE-HELD", "IMAGE-PIXELS", "IMAGE-INPUTS", "IMAGE-CAPACITY", "IMAGE-ORDER", "QUEUED-CANCEL", "ACTIVE-CANCEL", "RESULT-ERASURE", "ABANDONED-SLOTS", "RECOVERY-LOAD", "RECOVERY-COALESCE", "RECOVERY-RETIRE", "RECOVERY-DENIAL", "RECOVERY-CLOSE", "CONTEXT-ERASURE", "INSTALLATION-CHANGE", "WRONG-THREAD", "CLIENT-CLOSE", "CONSUMERS", "ORACLE"],
+  "maximum_image_handles": 4,
+  "maximum_active_images": 2,
+  "maximum_recovery_handles": 1,
+  "gui_operation_limit_ms": 100,
+  "case_timeout_seconds": 30,
+  "family_timeout_seconds": 300,
+  "images": ["rgba.png", "pattern.jpg", "red.svg"],
+  "image_expectations": "tests/scene/image-cases/native.json",
+  "recovery_records": "tests/editor/recovery-store-cases.json"
+}

@@ -3,6 +3,7 @@
 #include "bindings.hpp"
 #include "content.hpp"
 #include "chart_plot.hpp"
+#include "image_job.hpp"
 
 namespace syspane::rendering {
 enum class SurfaceCode { ready,degraded,empty,restricted,alternative,closed };
@@ -67,7 +68,7 @@ class SceneSurface {
 public:
     SceneSurface(configuration::Authority,configuration::Policy,SurfaceConfig,
                  std::vector<SurfaceProvider>,std::function<bool()> clear_native,std::string image_worker={},
-                 SurfaceAudience audience=SurfaceAudience::desktop);
+                 SurfaceAudience audience=SurfaceAudience::desktop,ImageFactory images={});
     ~SceneSurface();
     SceneSurface(const SceneSurface&)=delete;
     SceneSurface& operator=(const SceneSurface&)=delete;

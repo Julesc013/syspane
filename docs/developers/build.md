@@ -15,6 +15,33 @@ build` before configuring or building; use `test` or `package` for those actions
 The common active-output budget is unchanged; retained `out/evidence/` archives
 are measured separately. Never use the placeholder account from the example.
 
+The [editor helper worker](../../spec/delivery/packages/w-11-editor-helper-worker.md)
+provides EditorHelperClient on the GUI owner and LinuxEditorHelperOwner on the
+existing serialized native worker. Attach the latter with the shared verified bundle
+before admitting factory calls. Pass images() to SceneSurface/EditorForm and the
+stable shared recovery() factory to EditorRecoverySession/EditorForm. Factories
+have no helper pathname and confer no recovery retention or directory authority.
+
+Pump the native owner at least every 10 ms in the development host. GUI task poll()
+only reads state. Four retained image slots share two active native jobs; dropped
+active tasks retain slots until actual closure. Recovery admits one immutable context,
+requires GUI consumption of load, coalesces pending captures and fences retirement.
+Close GUI consumers/client, continue native pumping until stopped, release GUI task
+handles and destroy the native owner on its own worker. GUI destruction never joins it.
+
+After budget/configure/build checks, run
+`ctest --preset linux-x64-gcc13 -R '^native[.](EDITOR-HELPER-WORKER|IMAGE-JOB|RECOVERY-QUEUE|SCENE-IMAGE|IMAGE-ERASURE|EDITOR-RECOVERY|EDITOR-FORM|INSTALLED-SETTINGS)$' --output-on-failure`
+and the composition checks on all three development profiles. Run/archive larger
+native families separately under the quota. Forecast the worker family's five-file
+extracted payload plus ZIP (twice their combined bytes) and 16 MiB fixture allowance.
+Its test observer requires unprivileged ptrace and verifies held kernel exec stops.
+
+The actual task interface has the fixed 100 ms development observation bound.
+Consumer timings also include synchronous document validation/rasterization; record
+those separately. Recovery-offer validation exceeded that bound in the initial
+consumer run and remains an installed-editor performance issue. This worker does
+not enable installed recovery, authenticate its directory, or qualify whole-UI latency.
+
 The [editor helper bundle](../../spec/delivery/packages/w-26-editor-helper-bundle.md)
 adds explicitly selected helper record 0.2 and built_helper_bundle_expectation().
 Its fixed roles are configuration, image and recovery. Construct LinuxInstallation

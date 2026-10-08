@@ -40,7 +40,7 @@ void immediate_style(GtkWidget* widget,gpointer provider){
 }
 struct EditorForm::Impl {
     EditorDraft draft;c::Authority authority;c::Policy current;Json settings;std::set<std::string> capabilities;s::Topology topology;std::string display,worker;
-    std::vector<v::SurfaceProvider> providers;std::unique_ptr<v::SceneSurface> surface;std::map<std::string,model::Tick> ticks;
+    std::vector<v::SurfaceProvider> providers;v::ImageFactory images;std::unique_ptr<v::SceneSurface> surface;std::map<std::string,model::Tick> ticks;
     Actions actions;std::thread::id thread=std::this_thread::get_id();bool closed=false,updating=false,dispatching=false,fields_dirty=false,drawing=false;std::string error;
     std::unique_ptr<platform::SceneClipboardX11> clipboard;
     std::unique_ptr<EditorRecoverySession> recovery;GtkWidget* recovery_status=nullptr;bool cancel_pending=false;
@@ -50,8 +50,8 @@ struct EditorForm::Impl {
     bool snap_grid=false,snap_guides=false,show_grid=false;s::Unit grid_spacing=8*s::dip;
     struct Gesture {double x,y,dx=0,dy=0,pixel_per_unit=1.0/64;bool resize=false;std::vector<s::Node> nodes;std::optional<SnapInput> input;SnapResult result{0,0,{},{}};};std::optional<Gesture> gesture;
     guint timer=0;
-    Impl(c::Authority a,c::Policy p,c::Authored value,std::string epoch,SettingsResources r,s::Topology t,std::string d,std::vector<v::SurfaceProvider> ps,std::string w,Actions callbacks,bool large_commands)
-      :draft(a,p,value,std::move(epoch),r,large_commands),authority(std::move(a)),current(std::move(p)),settings(std::move(value.settings)),capabilities(std::move(r.capabilities)),topology(std::move(t)),display(std::move(d)),worker(std::move(w)),providers(std::move(ps)),actions(std::move(callbacks)){large_frames=large_commands;}
+    Impl(c::Authority a,c::Policy p,c::Authored value,std::string epoch,SettingsResources r,s::Topology t,std::string d,std::vector<v::SurfaceProvider> ps,std::string w,Actions callbacks,bool large_commands,v::ImageFactory factory)
+      :draft(a,p,value,std::move(epoch),r,large_commands),authority(std::move(a)),current(std::move(p)),settings(std::move(value.settings)),capabilities(std::move(r.capabilities)),topology(std::move(t)),display(std::move(d)),worker(std::move(w)),providers(std::move(ps)),images(std::move(factory)),actions(std::move(callbacks)){large_frames=large_commands;}
     void owner()const{if(thread!=std::this_thread::get_id()||dispatching)throw std::logic_error("editor.owner");}
     std::uint64_t now()const{return static_cast<std::uint64_t>(g_get_monotonic_time()/1000);}
     GtkWidget* own(GtkWidget* w){g_object_ref_sink(w);owned.push_back(w);return w;}
@@ -79,7 +79,7 @@ struct EditorForm::Impl {
         cfg.topology=topology;cfg.capabilities=capabilities;cfg.experimental_visibility=visibility_supported();cfg.experimental_typography=typography_supported();
         if(surface&&surface->status().code==v::SurfaceCode::closed){need(surface->poll_image_jobs(),"editor.renderer_stopping");surface.reset();}
         if(surface)surface->replace(std::move(cfg),now());
-        else surface=std::make_unique<v::SceneSurface>(authority,current,std::move(cfg),providers,[this]{return clear();},worker,v::SurfaceAudience::inspector);
+        else surface=std::make_unique<v::SceneSurface>(authority,current,std::move(cfg),providers,[this]{return clear();},worker,v::SurfaceAudience::inspector,images);
         if(resolve_now)resolve_nodes();
         gtk_widget_queue_draw(canvas);
     }
@@ -414,8 +414,8 @@ struct EditorForm::Impl {
         message(error);gtk_widget_queue_draw(canvas);}catch(...){try{shut();}catch(...){}}}
     ~Impl(){if(timer)g_source_remove(timer);try{shut();}catch(...){}surface.reset();if(root)gtk_widget_destroy(root);for(auto i=owned.rbegin();i!=owned.rend();++i)g_object_unref(*i);if(model)g_object_unref(model);}
 };
-EditorForm::EditorForm(c::Authority a,c::Policy p,c::Authored value,std::string epoch,SettingsResources resources,s::Topology topology,std::string display,std::vector<v::SurfaceProvider> providers,std::string worker,Actions actions,bool large_commands)
- :impl_(std::make_unique<Impl>(std::move(a),std::move(p),std::move(value),std::move(epoch),std::move(resources),std::move(topology),std::move(display),std::move(providers),std::move(worker),std::move(actions),large_commands)){
+EditorForm::EditorForm(c::Authority a,c::Policy p,c::Authored value,std::string epoch,SettingsResources resources,s::Topology topology,std::string display,std::vector<v::SurfaceProvider> providers,std::string worker,Actions actions,bool large_commands,v::ImageFactory images)
+ :impl_(std::make_unique<Impl>(std::move(a),std::move(p),std::move(value),std::move(epoch),std::move(resources),std::move(topology),std::move(display),std::move(providers),std::move(worker),std::move(actions),large_commands,std::move(images))){
     auto& i=*impl_;need(i.actions.request_id&&i.actions.widget_id&&i.actions.submit&&i.actions.cancel&&i.actions.reload&&i.actions.exit,"editor.actions");
     i.root=i.own(gtk_box_new(GTK_ORIENTATION_VERTICAL,4));auto* top=gtk_box_new(GTK_ORIENTATION_HORIZONTAL,4);gtk_box_pack_start(GTK_BOX(i.root),top,FALSE,FALSE,0);
     auto button=[&](GtkWidget* box,const char* id,const char* label){auto* w=i.own(gtk_button_new_with_label(label));i.buttons[id]=w;accessible(w,label,std::string("editor.")+id);g_object_set_data_full(G_OBJECT(w),"editor-action",g_strdup(id),g_free);gtk_box_pack_start(GTK_BOX(box),w,FALSE,FALSE,0);
@@ -510,5 +510,12 @@ void EditorForm::recovery(std::string worker,std::string directory,const EditorR
     if(!i.recovery)i.recovery=std::make_unique<EditorRecoverySession>(i.draft,std::move(worker),std::move(directory));
     i.recovery->bind(binding);i.sync();
 }
-bool EditorForm::stopped(){auto& i=*impl_;i.owner();i.poll_recovery();return !i.recovery||i.recovery->stopped();}
+void EditorForm::recovery(std::shared_ptr<const platform::RecoveryFactory> factory,std::string directory,const EditorRecoveryBinding& binding){
+    auto& i=*impl_;i.owner();need(!i.closed&&i.recovery_status&&binding.policy_revision==i.current.revision&&i.draft.recovery_available(),"recovery.denied");
+    need(!i.fields_dirty&&(!i.content||!i.content->opened())&&(!i.binding||!i.binding->opened())&&(!i.creation||!i.creation->opened())&&(!i.layout_form||!i.layout_form->opened())&&(!i.visibility||!i.visibility->opened())&&(!i.theme||!i.theme->opened()),"recovery.private_input");
+    need(!i.recovery||i.recovery->location(factory,directory),"recovery.location_changed");i.gesture.reset();
+    if(!i.recovery)i.recovery=std::make_unique<EditorRecoverySession>(i.draft,std::move(factory),std::move(directory));
+    i.recovery->bind(binding);i.sync();
+}
+bool EditorForm::stopped(){auto& i=*impl_;i.owner();i.poll_recovery();const bool images=!i.surface||i.surface->poll_image_jobs();return images&&(!i.recovery||i.recovery->stopped());}
 }

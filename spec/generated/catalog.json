@@ -489,7 +489,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "701acdba79b29232a5c439b9e06aa413bfc294c1666b7276c57e280667295bc0"
+      "sha256": "a62aa99e86a89072ab99587e6c8c1658ba436385555096fd9449857c0a76c35e"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -576,6 +576,16 @@
         "SP-W26-EDITOR-HELPERS"
       ],
       "sha256": "52f391b7bcb8681ac1def9b74a8e90968602fb4bd3ac0c79b0a6f8dacda5415d"
+    },
+    {
+      "id": "SP-EDITOR-HELPER-WORKER-HANDOFF",
+      "path": "delivery/editor-helper-worker-handoff.md",
+      "title": "Native editor helper worker bridge",
+      "description": "Bounded GUI task handles, independently owned native helpers and exact consumer results.",
+      "requires": [
+        "SP-W11-EDITOR-HELPER-WORKER"
+      ],
+      "sha256": "508d9c07442ee4cbf94fcd7eaccda87b860fce702395d287f0faa8512ce65adc"
     },
     {
       "id": "SP-FAILURE-METADATA-HANDOFF",
@@ -2153,6 +2163,18 @@
         "SP-W10-CONTENT-PROPERTIES"
       ],
       "sha256": "5ad9165c257386e0e6b1d909aa1395497f5c3ef3aa5189f4de5fa9d45208a342"
+    },
+    {
+      "id": "SP-W11-EDITOR-HELPER-WORKER",
+      "path": "delivery/packages/w-11-editor-helper-worker.md",
+      "title": "Native editor helper worker bridge",
+      "description": "Move verified image and recovery execution behind bounded GUI-owned task handles.",
+      "requires": [
+        "SP-W26-EDITOR-HELPERS",
+        "SP-W10-RECOVERY-CONTROLS",
+        "SP-W10-RECOVERY-QUEUE"
+      ],
+      "sha256": "7e92376c6cb9235d11448028bc0d536e622c0d911996b53df80cffad4b2ce1ef"
     },
     {
       "id": "SP-W11-INSTALLED-SETTINGS",

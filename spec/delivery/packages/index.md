@@ -84,6 +84,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Versioned visibility authoring and durable admission](w-10-visibility-admission.md) — Preserve conditional scene meaning through typed edits, negotiation and coherent recovery.
 - [Native conditional editing and enablement](w-10-visibility-controls.md) — Private rule input, hidden-object selection and durable conditional editing through the existing native owner.
 - [Native creation of every scene primitive](w-10-widget-creation.md) — Create bounded authored widgets through existing resource, draft and transaction owners.
+- [Native editor helper worker bridge](w-11-editor-helper-worker.md) — Move verified image and recovery execution behind bounded GUI-owned task handles.
 - [Installed native settings frontend](w-11-installed-settings.md) — Compose the real application entry point, independently supervised controller and authenticated settings client.
 - [Native settings drafts and transaction results](w-11-native-settings.md) — Connect every initial settings descriptor to native controls and the common authored transaction boundary.
 - [Private native text lifetime](w-11-private-text-lifetime.md) — Balance GTK selection registration across realization and destruction without exporting authored text.

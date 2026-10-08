@@ -14,7 +14,9 @@ enum class EditorRecoveryState {disabled,loading,offer,ready,capturing,retiring,
 class EditorRecoverySession {
 public:
     EditorRecoverySession(EditorDraft&,std::string worker,std::string directory);
+    EditorRecoverySession(EditorDraft&,std::shared_ptr<const platform::RecoveryFactory>,std::string directory);
     bool location(const std::string& worker,const std::string& directory)const{return worker_==worker&&directory_==directory;}
+    bool location(const std::shared_ptr<const platform::RecoveryFactory>& factory,const std::string& directory)const{return factory_==factory&&directory_==directory;}
     void bind(EditorRecoveryBinding);
     void invalidate();
     void changed();
@@ -37,7 +39,8 @@ private:
     EditorDraft& draft_;
     std::string worker_,directory_,offer_,session_,profile_;
     std::optional<EditorRecoveryBinding> binding_;
-    std::unique_ptr<platform::LinuxRecoveryQueue> queue_;
+    std::shared_ptr<const platform::RecoveryFactory> factory_;
+    std::unique_ptr<platform::RecoveryTask> queue_;
     std::optional<std::string> latest_,owned_,submitted_,cleanup_;
     EditorRecoveryState state_=EditorRecoveryState::disabled;
     bool restorable_=false,automatic_=false,closing_=false,reopen_=false,cancel_=false,cancelled_=false,closed_=false;

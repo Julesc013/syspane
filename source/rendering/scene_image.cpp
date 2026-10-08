@@ -43,7 +43,7 @@ void SceneImages::prepare(const SurfaceConfig& cfg){
             packages.emplace(pin.dump(),std::make_pair(std::move(m),bytes));}
         std::size_t count=0,encoded=0;std::map<std::string,Entry> next;
         for(const auto& w:cfg.authored.scene["widgets"])if(w["kind"]=="image"){
-            need(w.contains("content")&&!worker_.empty(),"surface.unsupported");need(++count<=32,"surface.capacity");
+            need(w.contains("content")&&factory_,"surface.unsupported");need(++count<=32,"surface.capacity");
             const auto& ref=w["content"]["asset"];const auto key=ref.dump();if(next.count(key))continue;
             const auto found=packages.find(ref["package"].dump());need(found!=packages.end(),"content.asset");
             const auto& pack=found->second;Entry entry;
@@ -55,7 +55,7 @@ void SceneImages::prepare(const SurfaceConfig& cfg){
     }
     poll();if(job_)return;
     for(auto& pair:entries_)if(pair.second.state=="loading"){
-        try{job_=std::make_unique<ImageJob>(worker_,pair.second.media,*pair.second.encoded);active_=pair.first;valid_job_=true;}
+        try{job_=factory_(pair.second.media,*pair.second.encoded);need(static_cast<bool>(job_),"image.startup");active_=pair.first;valid_job_=true;}
         catch(const platform::ChildError&){pair.second.state="failed";pair.second.reason="image.startup";}
         catch(const protocol::Error& e){pair.second.state="failed";pair.second.reason=e.what();}
         break;

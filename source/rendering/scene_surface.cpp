@@ -222,10 +222,10 @@ struct SceneSurface::Impl {
         return next;
     }
 };
-SceneSurface::SceneSurface(c::Authority authority,c::Policy policy,SurfaceConfig config,std::vector<SurfaceProvider> providers,std::function<bool()> clear_native,std::string image_worker,SurfaceAudience audience):impl_(std::make_unique<Impl>()){
+SceneSurface::SceneSurface(c::Authority authority,c::Policy policy,SurfaceConfig config,std::vector<SurfaceProvider> providers,std::function<bool()> clear_native,std::string image_worker,SurfaceAudience audience,ImageFactory images):impl_(std::make_unique<Impl>()){
     validate(config);need(static_cast<bool>(clear_native)&&providers.size()<=16,"surface.input");auto& i=*impl_;
     need(audience==SurfaceAudience::desktop||audience==SurfaceAudience::inspector,"surface.audience");i.channel=audience==SurfaceAudience::desktop?"desktop":"inspector";
-    i.images=std::make_unique<SceneImages>(std::move(image_worker));i.authority=std::move(authority);i.policy=std::move(policy);i.config=std::move(config);i.clear=std::move(clear_native);if(i.policy.available)i.highest=i.policy.revision;
+    i.images=images?std::make_unique<SceneImages>(std::move(images)):std::make_unique<SceneImages>(std::move(image_worker));i.authority=std::move(authority);i.policy=std::move(policy);i.config=std::move(config);i.clear=std::move(clear_native);if(i.policy.available)i.highest=i.policy.revision;
     std::set<std::string> ids;
     for(auto& p:providers){need(protocol::identifier(p.producer)&&ids.insert(p.producer).second,"surface.producer");
         auto view=std::make_unique<r::DataView>(i.authority,i.policy,i.channel,"operational",p.metrics);i.entries.push_back({std::move(p),std::move(view)});}

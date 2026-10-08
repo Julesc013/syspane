@@ -232,6 +232,9 @@ else()
     add_library(syspane_image_job STATIC source/rendering/image_job_linux.cpp)
     target_include_directories(syspane_image_job PUBLIC "${CMAKE_SOURCE_DIR}/source/rendering")
     target_link_libraries(syspane_image_job PUBLIC syspane_scene syspane_child syspane_installation)
+    add_library(syspane_editor_helpers STATIC source/application/editor_helpers_linux.cpp)
+    target_include_directories(syspane_editor_helpers PUBLIC "${CMAKE_SOURCE_DIR}/source/application")
+    target_link_libraries(syspane_editor_helpers PUBLIC syspane_image_job syspane_recovery_queue syspane_installation)
     add_custom_command(OUTPUT "${CMAKE_BINARY_DIR}/generated/helper-bundle/helpers.json" "${CMAKE_BINARY_DIR}/generated/helper-bundle/bundle_identity.hpp"
         COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/source/build/generate_helper_identity.py"
             --helper "$<TARGET_FILE:syspane_configuration_host>" --image-helper "$<TARGET_FILE:syspane_image_worker>" --recovery-helper "$<TARGET_FILE:syspane_recovery_worker>" --profile linux-x64-gcc13
@@ -559,6 +562,14 @@ if(BUILD_TESTING)
             "$<TARGET_FILE:syspane_editor_helper_probe>" "$<TARGET_FILE:syspane_configuration_host>" "$<TARGET_FILE:syspane_image_worker>" "$<TARGET_FILE:syspane_recovery_worker>"
             "${CMAKE_BINARY_DIR}/generated/helper-bundle/helpers.json" "${CMAKE_BINARY_DIR}/generated/helpers.json" "${CMAKE_BINARY_DIR}/native-evidence")
         set_tests_properties(native.EDITOR-HELPER-BUNDLE PROPERTIES TIMEOUT 180)
+        add_executable(syspane_editor_helper_worker_probe tests/configuration/editor_helper_worker_probe.cpp)
+        target_include_directories(syspane_editor_helper_worker_probe PRIVATE "${CMAKE_BINARY_DIR}/generated/helper-bundle")
+        target_link_libraries(syspane_editor_helper_worker_probe PRIVATE syspane_editor_helpers syspane_editor_form syspane_network_publication)
+        add_dependencies(syspane_editor_helper_worker_probe syspane_helper_bundle_identity)
+        add_test(NAME native.EDITOR-HELPER-WORKER COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/configuration/native_editor_helper_worker.py"
+            "$<TARGET_FILE:syspane_editor_helper_worker_probe>" "$<TARGET_FILE:syspane_configuration_host>" "$<TARGET_FILE:syspane_image_worker>" "$<TARGET_FILE:syspane_recovery_worker>"
+            "${CMAKE_BINARY_DIR}/generated/helper-bundle/helpers.json" "${CMAKE_BINARY_DIR}/native-evidence")
+        set_tests_properties(native.EDITOR-HELPER-WORKER PROPERTIES TIMEOUT 300)
         target_include_directories(syspane_installation_probe PRIVATE "${CMAKE_BINARY_DIR}/generated")
         target_link_libraries(syspane_installation_probe PRIVATE syspane_installation syspane_profile_supervisor)
         add_dependencies(syspane_installation_probe syspane_helper_identity_data)
@@ -878,6 +889,7 @@ list(APPEND component_targets syspane_runtime_directory syspane_runtime_director
 list(APPEND component_targets syspane_frontend_runtime syspane_frontend syspane_frontend_helper_fixture syspane_frontend_fixture)
 list(APPEND component_targets syspane_private_text_probe)
 list(APPEND component_targets syspane_editor_helper_probe)
+list(APPEND component_targets syspane_editor_helpers syspane_editor_helper_worker_probe)
 list(APPEND component_targets syspane_editor_refresh_probe)
 list(APPEND component_targets syspane_content_reader syspane_content_probe)
 list(APPEND component_targets syspane_profile_projection syspane_profile_projection_tests syspane_profile_projection_probe syspane_async_commands syspane_command_session_tests syspane_command_probe)

@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-08T22:36:11.030314+00:00", "scope": "Verified editor helper bundle; native worker/UI composition and all complete editions remain open"}
+updated: {"by": "codex", "at": "2026-10-08T23:19:41.275803+00:00", "scope": "Native editor helper worker; installed composition, recovery authority, whole-UI latency and all release editions remain open"}
 ---
 
 # Current state and next admitted boundary
@@ -21,6 +21,13 @@ Shared build tooling now lives in `source/build/`. Machine bindings and raw
 recordings are local ignored `out/` content; the retired root is absent from the
 tracked tree. See `docs/developers/build.md` in the repository for checkout
 setup and the [repository contract](../foundation/repository.md) for ownership.
+
+The [native editor helper worker](editor-helper-worker-handoff.md) now separates
+GUI task handles from verified native execution, with exact image/recovery consumer
+results and observed child closure. Integrate it into the existing frontend worker
+with authenticated recovery directory/session authority next. Consumer recovery
+validation remains synchronous and needs latency work before installed-editor
+qualification. All five complete release editions remain open.
 
 The [verified editor helper bundle](editor-helper-bundle-handoff.md) extends
 installation-bound sealed execution to image and recovery work. Exact native

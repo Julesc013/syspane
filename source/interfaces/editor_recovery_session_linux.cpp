@@ -9,6 +9,11 @@ void erase(std::string& value){std::string{}.swap(value);}
 EditorRecoverySession::EditorRecoverySession(EditorDraft& draft,std::string worker,std::string directory)
     :draft_(draft),worker_(std::move(worker)),directory_(std::move(directory)){
     need(!worker_.empty()&&worker_.front()=='/'&&worker_.size()<=512&&!directory_.empty()&&directory_.front()=='/'&&directory_.size()<=4096);
+    factory_=std::make_shared<const platform::RecoveryFactory>([path=worker_](std::string directory,platform::RecoveryContext context){return std::make_unique<platform::LinuxRecoveryQueue>(path,std::move(directory),std::move(context));});
+}
+EditorRecoverySession::EditorRecoverySession(EditorDraft& draft,std::shared_ptr<const platform::RecoveryFactory> factory,std::string directory)
+    :draft_(draft),directory_(std::move(directory)),factory_(std::move(factory)){
+    need(factory_&&*factory_&&!directory_.empty()&&directory_.front()=='/'&&directory_.size()<=4096);
 }
 RecoveryIdentity EditorRecoverySession::identity()const{need(binding_.has_value());return {binding_->profile,binding_->generation};}
 void EditorRecoverySession::stop(){
@@ -26,7 +31,7 @@ void EditorRecoverySession::bind(EditorRecoveryBinding binding){
 }
 void EditorRecoverySession::start(){
     need(binding_&&draft_.recovery_available());const auto& b=*binding_;
-    queue_=std::make_unique<platform::LinuxRecoveryQueue>(worker_,directory_,platform::RecoveryContext{b.session,b.profile,b.generation,b.policy_revision,true,true,b.erase});
+    queue_=(*factory_)(directory_,platform::RecoveryContext{b.session,b.profile,b.generation,b.policy_revision,true,true,b.erase});need(static_cast<bool>(queue_));
     state_=EditorRecoveryState::loading;closing_=false;
 }
 bool EditorRecoverySession::editing()const{return state_!=EditorRecoveryState::loading&&state_!=EditorRecoveryState::offer&&state_!=EditorRecoveryState::retiring;}

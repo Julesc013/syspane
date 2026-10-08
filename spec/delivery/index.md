@@ -28,6 +28,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Shared editor draft checkpoint](editor-draft-handoff.md) — Typed scene edits, bounded history and the common resource-aware transaction owner.
 - [Independent editor lifetime checkpoint](editor-exit-handoff.md) — An owned X11 candidate has independent keyboard and native exit with external process, pixel and input evidence.
 - [Verified editor helper bundle](editor-helper-bundle-handoff.md) — Installation-bound image and recovery execution with native closure, pixel and file evidence.
+- [Native editor helper worker bridge](editor-helper-worker-handoff.md) — Bounded GUI task handles, independently owned native helpers and exact consumer results.
 - [Independent recent-failure metadata checkpoint](failure-metadata-handoff.md) — Bind bounded native fault records, private file handling and policy-gated diagnostic projection to current evidence.
 - [Native editor refresh fairness checkpoint](focus-idle-handoff.md) — Observed GTK/ATK focus starvation, scoped style transitions and unchanged native acceptance.
 - [Foundation implementation handoff](foundation-handoff.md) — Resume the admitted campaign from tested model builds and local smoke packages.

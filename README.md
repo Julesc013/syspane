@@ -24,6 +24,11 @@ The [verified helper bundle](spec/delivery/editor-helper-bundle-handoff.md) exte
 installation-bound execution to image decoding and recovery storage. Native checks
 cover exact pixels, files and helper substitution; installed editor integration remains open.
 
+The [editor helper worker](spec/delivery/editor-helper-worker-handoff.md) now keeps
+verified image and recovery execution behind bounded GUI task handles. Native checks
+cover cancellation, exact results and existing renderer/recovery consumers. Installed
+editor composition, recovery authority and whole-UI responsiveness remain open.
+
 The [runtime directory checkpoint](spec/delivery/runtime-directory-handoff.md)
 adds private frontend runtime allocation and explicit retirement after supervisor
 release. Native checks preserve replacements and orphaned files and observe actual

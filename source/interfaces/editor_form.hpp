@@ -1,6 +1,7 @@
 #pragma once
 #include "editor_draft.hpp"
 #include "scene_surface.hpp"
+#include "recovery_queue_linux.hpp"
 typedef struct _GtkWidget GtkWidget;
 namespace syspane::interfaces {
 struct EditorRecoveryBinding;
@@ -12,7 +13,7 @@ public:
         std::function<void()> reload,exit;
     };
     EditorForm(configuration::Authority,configuration::Policy,configuration::Authored,std::string epoch,SettingsResources,
-        scene::Topology,std::string display,std::vector<rendering::SurfaceProvider>,std::string image_worker,Actions,bool large_commands=false);
+        scene::Topology,std::string display,std::vector<rendering::SurfaceProvider>,std::string image_worker,Actions,bool large_commands=false,rendering::ImageFactory images={});
     ~EditorForm();
     EditorForm(const EditorForm&)=delete;EditorForm& operator=(const EditorForm&)=delete;
     GtkWidget* widget()const;
@@ -28,6 +29,7 @@ public:
     recovery::DataCode disconnect(const std::string&,std::uint64_t token,std::uint64_t revision,std::uint64_t now);
     void close();
     void recovery(std::string worker,std::string directory,const EditorRecoveryBinding&);
+    void recovery(std::shared_ptr<const platform::RecoveryFactory>,std::string directory,const EditorRecoveryBinding&);
     // Continue the host loop after close until the held recovery helper is reaped.
     bool stopped();
 private:

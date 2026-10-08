@@ -28,7 +28,8 @@ behaviour has been implemented. See [audit disposition](spec/delivery/audit-2026
 ## First native campaign
 
 - [x] W-26 verified editor helper bundle: configuration/image/recovery closure, sealed execution and independent native pixels, files, tampering and child-exit checks. See the [handoff](spec/delivery/editor-helper-bundle-handoff.md).
-- [ ] Connect verified image/recovery jobs to the installed editor through its native worker, with policy-bound session/directory ownership and responsive GUI cancellation.
+- [x] W-11 native editor helper worker: bounded GUI factories, serialized native execution, cancellation/closure and exact renderer/recovery consumer evidence. See the [handoff](spec/delivery/editor-helper-worker-handoff.md).
+- [ ] Connect that worker to the installed editor/inspector and authenticated profile/session/directory ownership. Address the observed synchronous recovery validation latency before whole-UI qualification.
 
 - [x] W-11 shared private text lifetime: balanced realization/destruction, retained editing and independent verification that neither clipboard changes ownership. See the [handoff](spec/delivery/private-text-lifetime-handoff.md).
 

@@ -3607,6 +3607,60 @@
       "profiles": [
         "linux-x64-gcc13"
       ]
+    },
+    {
+      "id": "editor-helpers",
+      "target": "syspane_editor_helpers",
+      "type": "STATIC_LIBRARY",
+      "source_owner": "source/application/",
+      "public_interfaces": [
+        "source/application/editor_helpers_linux.hpp"
+      ],
+      "private_interfaces": [],
+      "sources": [
+        "source/application/editor_helpers_linux.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_image_job",
+        "syspane_recovery_queue",
+        "syspane_installation"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
+    },
+    {
+      "id": "editor-helper-worker-probe",
+      "target": "syspane_editor_helper_worker_probe",
+      "type": "EXECUTABLE",
+      "source_owner": "tests/configuration/",
+      "public_interfaces": [],
+      "private_interfaces": [],
+      "sources": [
+        "tests/configuration/editor_helper_worker_probe.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_editor_helpers",
+        "syspane_editor_form",
+        "syspane_network_publication"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
     }
   ]
 }
