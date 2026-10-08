@@ -2,6 +2,7 @@
 #include "scene_table.hpp"
 #include "scene_chart.hpp"
 #include "scene_image.hpp"
+#include "scene_visibility.hpp"
 #include <algorithm>
 #include <cmath>
 #include <limits>
@@ -38,11 +39,11 @@ SurfaceText text(const Json& w,const s::BindingFrame* frame){
     out.text=title+"\n";
     need(frame!=nullptr,"surface.frame");
     if(frame->code==s::BindingCode::denied)throw Error("policy.denied");
-    if(frame->code!=s::BindingCode::matched){out.text+=outcome(frame->code);out.accessible=out.text;return out;}
+    if(frame->code!=s::BindingCode::matched){out.notices.push_back(outcome(frame->code));out.text+=out.notices.back();out.accessible=out.text;return out;}
     need(frame->rows.size()==1&&!frame->truncated,"surface.unsupported");
     const auto& row=frame->rows[0];
     if(row.code==s::BindingCode::denied)throw Error("policy.denied");
-    if(row.code!=s::BindingCode::matched){out.text+=outcome(row.code);out.accessible=out.text;return out;}
+    if(row.code!=s::BindingCode::matched){out.notices.push_back(outcome(row.code));out.text+=out.notices.back();out.accessible=out.text;return out;}
     const auto& o=row.observation;out.text+=value(o.value);
     if(!o.unit.empty()&&o.unit!="1")out.text+=" "+o.unit;
     std::vector<std::string> states;
@@ -57,6 +58,7 @@ SurfaceText text(const Json& w,const s::BindingFrame* frame){
     if(o.presence==m::Presence::unknown)states.emplace_back("Presence unknown");
     if(o.support==m::Support::unsupported)states.emplace_back("Unsupported");
     if(o.support==m::Support::unknown)states.emplace_back("Support unknown");
+    std::string mandatory;for(const auto& state:states){if(!mandatory.empty())mandatory+=" | ";mandatory+=state;}if(!mandatory.empty())out.notices.push_back(mandatory);
     if(o.origin==m::Origin::derived)states.emplace_back("Derived");
     if(o.origin==m::Origin::configured)states.emplace_back("Configured");
     if(states.empty())states.emplace_back("Current");
@@ -125,7 +127,7 @@ struct SceneSurface::Impl {
             if(reset){found->second.samples->clear();found->second.fault=fault;}else found->second.samples->gap();}}
     void prepare_histories(){
         need(allowed(),"policy.denied");c::authorize_resources(*config.resources,policy,config.capabilities);
-        need(config.authored.scene["schema_version"]!="0.5.0","surface.visibility_unavailable");
+        need(config.authored.scene["schema_version"]!="0.5.0"||config.experimental_visibility,"surface.visibility_unavailable");
         std::size_t count=0,points=0;for(const auto& w:config.authored.scene["widgets"])if(w["kind"]=="chart"){
             need(w.contains("content"),"surface.unsupported");++count;points+=w["content"]["max_points"].get<std::size_t>();}
         need(count<=32&&points<=16384,"surface.capacity");
@@ -170,11 +172,12 @@ struct SceneSurface::Impl {
             if(!table)need(w["bindings"].size()==(bound?1u:0u),"surface.unsupported");
             queries+=w["bindings"].size();need(queries<=256,"surface.capacity");
             SurfaceText out;std::optional<s::ChartPlot> plot;
-            if(table){out=compose_table(w,catalog,now,[](const s::BindingRow& row){
+            if(table){std::vector<std::string> notices;out=compose_table(w,catalog,now,[&](const s::BindingRow& row){
                     s::BindingFrame frame;frame.code=s::BindingCode::matched;frame.rows.push_back(row);
                     const auto cell=text({{"id","cell"},{"kind","value"},{"title",""}},&frame);
+                    for(const auto& line:cell.notices)if(std::find(notices.begin(),notices.end(),line)==notices.end())notices.push_back(line);
                     return SurfaceCell{cell.text.substr(1),cell.accessible.substr(1),{}};
-                });
+                });out.notices=std::move(notices);if(out.table->rows.empty())out.notices.push_back(out.table->summary=="Showing 0 of 0 rows"?"Table has no rows":out.table->summary);
             }else if(bound){const auto& b=w["bindings"][0];need(b["kind"]!="selector"||b["mode"]=="singleton","surface.unsupported");
                 s::project_binding(b,catalog,now,[&](const auto& f){out=text(w,&f);
                     if(chart){const auto& d=display_for(w,config.topology);const auto width=(320*d.scale_numerator+d.scale_denominator-1)/d.scale_denominator;
@@ -195,9 +198,11 @@ struct SceneSurface::Impl {
             texts.emplace(out.id,std::move(out));
         }
         next->layout=s::resolve(config.authored.scene,config.topology,metrics);need(next->layout.state!=s::State::alternative,"surface.layout");
+        condition_surface(config,catalog,now,*next,texts,rasters,display_pixels,leaf_pixels);
         for(auto& d:next->displays)d.rgba.resize(static_cast<std::size_t>(d.width)*d.height*4);
+        for(bool diagnostic:{false,true})
         for(const auto& node:next->layout.nodes){
-            next->widgets.push_back(std::move(texts.at(node.id)));if(node.kind=="group")continue;
+            if(texts.at(node.id).diagnostic!=diagnostic||!rasters.count(node.id))continue;
             auto& raster=rasters.at(node.id);auto found=std::find_if(next->displays.begin(),next->displays.end(),[&](const auto& d){return d.display==node.display;});
             need(found!=next->displays.end(),"surface.display");auto& d=*found;const auto x=node.pixels.x-d.x,y=node.pixels.y-d.y;
             need(x>=0&&y>=0&&x+raster.width<=d.width&&y+raster.height<=d.height,"surface.layout");
@@ -208,6 +213,7 @@ struct SceneSurface::Impl {
                 for(unsigned channel=0;channel<4;++channel)d.rgba[dst+channel]=static_cast<unsigned char>(raster.rgba[src+channel]+(d.rgba[dst+channel]*inverse+127)/255);
             }
         }
+        for(const auto& node:next->layout.nodes)next->widgets.push_back(std::move(texts.at(node.id)));
         return next;
     }
 };
@@ -253,11 +259,12 @@ void SceneSurface::paint(std::uint64_t now,const std::map<std::string,m::Tick>& 
     auto& i=*impl_;i.owner();need(static_cast<bool>(sink),"surface.sink");
     if(i.start(now)){
         if(!i.allowed()){i.images->clear();i.histories.clear();i.status={SurfaceCode::restricted,0,0,"policy.denied"};}
-        else if(i.config.authored.scene["schema_version"]!="0.5.0"&&!(i.policy.forced.count("display.enabled")?i.policy.forced.at("display.enabled")==true:
+        else if((i.config.authored.scene["schema_version"]!="0.5.0"||i.config.experimental_visibility)&&!(i.policy.forced.count("display.enabled")?i.policy.forced.at("display.enabled")==true:
                   i.config.authored.settings["display"]["enabled"].get<bool>())){i.images->clear();i.status={SurfaceCode::empty,0,0,{}};}
         else try{
             i.frame=i.compose(now,ticks);i.status.code=i.frame->layout.state==s::State::ready?SurfaceCode::ready:SurfaceCode::degraded;
             for(const auto& w:i.frame->widgets)if(w.image&&w.image->state!="ready"){i.status.code=SurfaceCode::degraded;i.status.reason=w.image->state=="loading"?"image.pending":"image.failed";}
+            for(const auto& w:i.frame->widgets)if(w.diagnostic){i.status.code=SurfaceCode::degraded;i.status.reason="visibility.diagnostic";}
             i.status.widgets=i.frame->widgets.size();for(const auto& d:i.frame->displays)i.status.pixels+=static_cast<std::size_t>(d.width)*d.height;
         }catch(const Error& e){i.images->clear(e.what());i.histories.clear();i.frame.reset();i.status={std::string(e.what())=="policy.denied"?SurfaceCode::restricted:SurfaceCode::alternative,0,0,e.what()};}
         catch(const std::bad_alloc&){i.images->clear("surface.capacity");i.histories.clear();i.frame.reset();i.status={SurfaceCode::alternative,0,0,"surface.capacity"};}

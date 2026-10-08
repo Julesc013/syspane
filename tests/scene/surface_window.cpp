@@ -1,4 +1,5 @@
 #include "image_fixture.hpp"
+#include "native_visibility_fixture.hpp"
 #include <gtk/gtk.h>
 #include <glib-unix.h>
 #include <fcntl.h>
@@ -12,13 +13,17 @@ struct Window {
     gint64 start=g_get_monotonic_time();std::string input,mode,root;
     std::uint64_t revision=7,token=0,sequence=0,generation=0,chart_time=0;bool connected=true,drawing=false,table=false,chart=false,image=false,closing=false;int exit=0;
     std::vector<unsigned char> fault_pixels;
+    bool visibility=false;v::SurfaceConfig visibility_cfg;std::string fault_accessible;
     std::uint64_t now()const{return static_cast<std::uint64_t>((g_get_monotonic_time()-start)/1000);}
     m::Tick measured()const{return tick(chart?chart_time:100+now()*1000000);}
     c::Policy selected_policy(std::uint64_t rev=7,bool allow=true)const{return chart?chart_policy(rev,allow):policy(rev,allow);}
     bool clear(){if(mode!="ignore-accessible")atk_object_set_name(gtk_widget_get_accessible(area),"");if(!drawing)gtk_widget_queue_draw(area);return true;}
     void full(std::uint64_t number){++generation;auto d=chart?chart_document(number,generation,chart_time):table?table_document(number,generation):document(number,generation);const auto code=owner->receive("P1",token,revision,wire(d,link(revision)),now(),measured()).code;need(code==r::DataCode::accepted,"native full");}
     void command(const std::string& name){
-        if(image&&(name=="replace"||name=="fresh"||name=="fit-cover"||name=="fit-stretch")){auto cfg=name=="replace"?image_config(root,green_image(),"image/svg+xml","stretch"):image_config(root);if(name=="fit-cover"||name=="fit-stretch")cfg.authored.scene["widgets"][0]["content"]["fit"]=name.substr(4);owner->replace(std::move(cfg),now());}
+        if(visibility&&(name=="hide"||name=="show")){full(name=="hide"?124:123);}
+        else if(visibility&&(name=="mismatch"||name=="reset")){visibility_cfg=visibility_text_config(root);if(name=="mismatch")visibility_cfg.authored.scene["widgets"][0]["visibility"]["unit"]="1";owner->replace(visibility_cfg,now());if(name=="reset")full(123);}
+        else if(visibility&&name=="fresh"){token=owner->attach("P1",link(revision),now()).token;need(token!=0,"visibility fresh attach");generation=0;connected=true;full(123);}
+        else if(image&&(name=="replace"||name=="fresh"||name=="fit-cover"||name=="fit-stretch")){auto cfg=name=="replace"?image_config(root,green_image(),"image/svg+xml","stretch"):image_config(root);if(name=="fit-cover"||name=="fit-stretch")cfg.authored.scene["widgets"][0]["content"]["fit"]=name.substr(4);owner->replace(std::move(cfg),now());}
         else if(name=="revoke"){revision=8;owner->policy(selected_policy(revision,false),now());}
         else if(name=="regrant"){revision=9;owner->policy(selected_policy(revision),now());}
         else if(name=="fresh"){token=owner->attach("P1",link(revision),now()).token;need(token!=0,"native attach");generation=0;connected=true;chart_time=2000000000;full(chart?80:456);}
@@ -42,8 +47,9 @@ gboolean draw(GtkWidget*,cairo_t* cr,gpointer data){auto& w=*static_cast<Window*
         w.owner->paint(w.now(),{{"P1",w.measured()}},[&](auto,const v::SurfaceFrame* f){
             cairo_set_source_rgb(cr,0,0,0);cairo_paint(cr);
             if(f){std::string accessible;for(const auto& row:f->widgets){if(!accessible.empty())accessible+='\n';accessible+=row.accessible;}
+                if(w.visibility&&w.mode=="retain-hidden"&&!f->widgets[0].presented){atk_object_set_name(gtk_widget_get_accessible(w.area),w.fault_accessible.c_str());pixels(cr,w.fault_pixels);return;}
                 atk_object_set_name(gtk_widget_get_accessible(w.area),accessible.c_str());
-                if(w.mode=="ignore-pixels")w.fault_pixels=f->displays[0].rgba;
+                if(w.mode=="ignore-pixels"||(w.visibility&&w.mode=="retain-hidden")){w.fault_pixels=f->displays[0].rgba;w.fault_accessible=accessible;}
                 pixels(cr,f->displays[0].rgba);
             }else if(w.mode=="ignore-pixels")pixels(cr,w.fault_pixels);
         });
@@ -64,15 +70,16 @@ gboolean input(gint fd,GIOCondition condition,gpointer data){auto& w=*static_cas
 gboolean deadline(gpointer data){auto& w=*static_cast<Window*>(data);w.exit=1;w.owner->close();gtk_main_quit();return G_SOURCE_REMOVE;}
 }
 int surface_window(const std::string& root,const std::string& mode){
-    const bool image=mode.find("image-")==0,chart=mode.find("chart-")==0,content=mode.find("content-")==0,table=content||mode.find("table-")==0;const auto fault=content?mode.substr(8):(chart||table||image)?mode.substr(6):mode;
-    need(fault=="normal"||fault=="ignore-pixels"||fault=="ignore-accessible","native mode");
+    const bool visibility=mode.find("visibility-")==0,image=mode.find("image-")==0,chart=mode.find("chart-")==0,content=mode.find("content-")==0,table=content||mode.find("table-")==0;const auto fault=visibility?mode.substr(11):content?mode.substr(8):(chart||table||image)?mode.substr(6):mode;
+    need(fault=="normal"||fault=="ignore-pixels"||fault=="ignore-accessible"||(visibility&&(fault=="invert"||fault=="retain-hidden")),"native mode");
     g_set_prgname("syspane-scene-surface");g_set_application_name("SysPane Scene Surface");if(!gtk_init_check(nullptr,nullptr))return 69;
-    Window w;w.mode=fault;w.table=table;w.chart=chart;w.image=image;w.root=root;auto* window=gtk_window_new(GTK_WINDOW_TOPLEVEL);w.area=gtk_drawing_area_new();
+    Window w;w.mode=fault;w.table=table;w.chart=chart;w.image=image;w.visibility=visibility;w.root=root;auto* window=gtk_window_new(GTK_WINDOW_TOPLEVEL);w.area=gtk_drawing_area_new();
     gtk_window_set_title(GTK_WINDOW(window),"SysPane Scene Surface");gtk_window_set_decorated(GTK_WINDOW(window),FALSE);
     gtk_window_set_default_size(GTK_WINDOW(window),800,600);gtk_window_move(GTK_WINDOW(window),0,0);gtk_container_add(GTK_CONTAINER(window),w.area);
     atk_object_set_description(gtk_widget_get_accessible(w.area),"syspane.scene.surface");
     auto provider_spec=provider();for(auto& field:provider_spec.fields)field.second=5000000000000ULL;
-    auto cfg=image?image_config(root):chart?chart_config(root):table?table_config(root):config(root);if(content)labelled_content(cfg);
+    auto cfg=visibility?visibility_text_config(root):image?image_config(root):chart?chart_config(root):table?table_config(root):config(root);if(content)labelled_content(cfg);
+    if(visibility){if(fault=="invert")cfg.authored.scene["widgets"][0]["visibility"]["op"]="ne";w.visibility_cfg=cfg;}
     w.owner=std::make_unique<v::SceneSurface>(c::Authority{true,"desktop",{"desktop"}},w.selected_policy(),cfg,std::vector<v::SurfaceProvider>{provider_spec},[&]{return w.clear();},image?image_worker_path():std::string());
     w.token=w.owner->attach("P1",link(),w.now()).token;need(w.token!=0,"native initial attach");
     if(chart){w.full(10);w.chart_time=500000000;w.full(90);w.chart_time=1000000000;w.full(10);}else if(!image)w.full(123);

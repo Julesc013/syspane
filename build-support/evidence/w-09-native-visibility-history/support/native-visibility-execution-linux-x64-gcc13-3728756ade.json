@@ -1,0 +1,38 @@
+[
+  {
+    "step": "rendering",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-08T00:30:24.093486+00:00",
+    "finished_at": "2026-10-08T00:30:24.799747+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2364036376,\n  \"linux_campaign_bytes\": 4634092125,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "rendering",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/native_visibility_step.py",
+      "linux-x64-gcc13",
+      "rendering"
+    ],
+    "started_at": "2026-10-08T00:30:24.800132+00:00",
+    "finished_at": "2026-10-08T00:31:47.938009+00:00",
+    "exit": 0,
+    "stdout": "Test project /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n      Start 100: native.SETTINGS-FORM\n 1/15 Test #100: native.SETTINGS-FORM .............   Passed   38.59 sec\n      Start 114: native.SCENE-INSPECTOR-MODEL\n 2/15 Test #114: native.SCENE-INSPECTOR-MODEL .....   Passed    0.18 sec\n      Start 115: native.SCENE-INSPECTOR\n 3/15 Test #115: native.SCENE-INSPECTOR ...........   Passed    4.60 sec\n      Start 118: native.SCENE-SURFACE\n 4/15 Test #118: native.SCENE-SURFACE .............   Passed    0.76 sec\n      Start 119: native.SCENE-ERASURE\n 5/15 Test #119: native.SCENE-ERASURE .............   Passed    2.37 sec\n      Start 120: native.CHART-ERASURE\n 6/15 Test #120: native.CHART-ERASURE .............   Passed    2.65 sec\n      Start 121: native.IMAGE-ERASURE\n 7/15 Test #121: native.IMAGE-ERASURE .............   Passed    3.06 sec\n      Start 122: native.SCENE-IMAGE\n 8/15 Test #122: native.SCENE-IMAGE ...............   Passed    6.92 sec\n      Start 123: native.SCENE-CHART\n 9/15 Test #123: native.SCENE-CHART ...............   Passed    0.86 sec\n      Start 124: native.SCENE-TABLE\n10/15 Test #124: native.SCENE-TABLE ...............   Passed    1.11 sec\n      Start 125: native.TABLE-ERASURE\n11/15 Test #125: native.TABLE-ERASURE .............   Passed    3.79 sec\n      Start 126: native.CONTENT-ERASURE\n12/15 Test #126: native.CONTENT-ERASURE ...........   Passed    3.96 sec\n      Start 127: native.TEXT-RASTER\n13/15 Test #127: native.TEXT-RASTER ...............   Passed    0.97 sec\n      Start 128: native.IMAGE-DECODE\n14/15 Test #128: native.IMAGE-DECODE ..............   Passed    3.42 sec\n      Start 129: native.IMAGE-JOB\n15/15 Test #129: native.IMAGE-JOB .................   Passed    3.44 sec\n\n100% tests passed, 0 tests failed out of 15\n\nTotal Test time (real) =  76.68 sec\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-09-native-visibility/linux-x64-gcc13-rendering-273bd0c145\n",
+    "stderr": ""
+  }
+]

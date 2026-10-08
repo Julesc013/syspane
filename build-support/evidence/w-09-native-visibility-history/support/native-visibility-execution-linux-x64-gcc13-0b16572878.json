@@ -1,0 +1,74 @@
+[
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-08T00:23:46.641013+00:00",
+    "finished_at": "2026-10-08T00:23:54.114320+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2328351420,\n  \"linux_campaign_bytes\": 4844903113,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/native_visibility_step.py",
+      "linux-x64-gcc13",
+      "build"
+    ],
+    "started_at": "2026-10-08T00:23:54.114722+00:00",
+    "finished_at": "2026-10-08T00:24:05.696268+00:00",
+    "exit": 0,
+    "stdout": "[1/2] Building CXX object CMakeFiles/syspane_scene_surface_tests.dir/tests/scene/native_visibility_tests.cpp.o\n[2/2] Linking CXX executable syspane_scene_surface_tests\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-09-native-visibility/linux-x64-gcc13-build-fd66e520a0\n",
+    "stderr": ""
+  },
+  {
+    "step": "locks",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-08T00:24:05.696553+00:00",
+    "finished_at": "2026-10-08T00:24:06.388065+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2330048455,\n  \"linux_campaign_bytes\": 4845044687,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "locks",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/native_visibility_step.py",
+      "linux-x64-gcc13",
+      "locks"
+    ],
+    "started_at": "2026-10-08T00:24:06.388380+00:00",
+    "finished_at": "2026-10-08T00:24:11.157617+00:00",
+    "exit": 8,
+    "stdout": "Test project /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n    Start 116: native.SCENE-VISIBILITY\n1/1 Test #116: native.SCENE-VISIBILITY ..........***Failed    0.80 sec\nvisibility example \"shown\"\nvisibility example \"hidden\"\nvisibility example \"unit-mismatch\"\nvisibility example \"empty\"\nvisibility example \"failed-hidden\"\nvisibility example \"retained\"\nvisibility groups\nvisibility policy\nvisibility geometry\nauthored.schema\n\n\n0% tests passed, 1 tests failed out of 1\n\nTotal Test time (real) =   0.80 sec\n\nThe following tests FAILED:\n\t116 - native.SCENE-VISIBILITY (Failed)\n Errors while running CTest\n\nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-09-native-visibility/linux-x64-gcc13-locks-618b066462\n",
+    "stderr": ""
+  }
+]

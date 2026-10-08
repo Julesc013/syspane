@@ -7,16 +7,21 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
-The [borrowed visibility composition checkpoint](spec/delivery/visibility-composition-handoff.md)
-adds bounded batch reads and ordered group/child decisions under one protected
-telemetry borrow. Hidden ancestors cannot suppress unresolved child diagnostics.
-Native conditional pixels, accessibility and private controls remain the next gate;
-this shared component does not enable the native feature or complete an edition.
+The [native visibility experiment](spec/delivery/native-visibility-handoff.md) now preserves layout while hiding
+conditional content, keeps source/condition diagnostics visible and erases hidden
+pixels and inspector payloads. All seven primitive kinds and independent X11/AT-SPI
+fault controls pass. This requires an explicit development opt-in; native rule
+controls and ordinary editor/installed enablement remain the next gate. No complete
+edition or new target qualification is claimed.
+
+The earlier [borrowed visibility composition checkpoint](spec/delivery/visibility-composition-handoff.md)
+provides the bounded batch reads and group/child decisions used by that experiment.
+Hidden ancestors cannot suppress unresolved child diagnostics.
 
 The [visibility-admission checkpoint](spec/delivery/visibility-admission-handoff.md)
 adds scene 0.5, negotiated command 0.7, protected typed edits and exact durable
-recovery. Conditional scenes explicitly report an unavailable renderer until native
-composition and controls enforce the rules. This is a component checkpoint; the
+recovery. Ordinary conditional scenes still report an unavailable renderer until
+native controls and their integration checks pass; only the experiment opts in. This is a component checkpoint; the
 five complete editions and their release qualification remain open.
 
 The earlier [conditional-visibility evaluator](spec/delivery/visibility-handoff.md) now

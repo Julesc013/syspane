@@ -24,6 +24,10 @@ scene::ChartPlot compose_chart(const Json& widget,SurfaceText& text,const s::Cha
     if(view.capacity_truncated)chart.summary+=" | Capacity truncated";
     if(view.pending_break)chart.summary+=" | Gap pending";
     const auto why=fault(view.code);if(*why)chart.summary+=" | "+std::string(why);
+    if(*why)text.notices.push_back(why);
+    if(view.capacity_truncated)text.notices.push_back("Chart capacity truncated");
+    if(view.pending_break)text.notices.push_back("Chart gap pending");
+    if(plot.clipped)text.notices.push_back("Chart clipped");
     chart.summary+='\n';chart.summary+=plot.minimum?"Range "+number(*plot.minimum)+" .. "+number(*plot.maximum):"Range unavailable";
     if(!unit.empty()&&unit!="1")chart.summary+=" "+unit;
     if(plot.clipped)chart.summary+=" | Clipped "+std::to_string(plot.clipped);

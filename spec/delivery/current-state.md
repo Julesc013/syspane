@@ -12,21 +12,26 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-07T23:58:03.413898+00:00", "scope": "Borrowed visibility composition; native feature and complete editions remain open"}
+updated: {"by": "codex", "at": "2026-10-08T00:34:15.101366+00:00", "scope": "Native visibility experiment verified; private controls and complete editions remain open"}
 ---
 
 # Current state and next admitted boundary
 
-The [borrowed visibility composition checkpoint](visibility-composition-handoff.md)
-adds bounded batch reads and ordered group/child decisions under one protected
-telemetry borrow. Hidden ancestors cannot suppress unresolved child diagnostics.
-Native conditional pixels, accessibility and private controls remain the next gate;
-this shared component does not enable the native feature or complete an edition.
+The [native visibility experiment](native-visibility-handoff.md) now preserves layout while hiding
+conditional content, keeps source/condition diagnostics visible and erases hidden
+pixels and inspector payloads. All seven primitive kinds and independent X11/AT-SPI
+fault controls pass. This requires an explicit development opt-in; native rule
+controls and ordinary editor/installed enablement remain the next gate. No complete
+edition or new target qualification is claimed.
+
+The earlier [borrowed visibility composition checkpoint](visibility-composition-handoff.md)
+provides the bounded batch reads and group/child decisions used by that experiment.
+Hidden ancestors cannot suppress unresolved child diagnostics.
 
 The [visibility-admission checkpoint](visibility-admission-handoff.md)
 adds scene 0.5, negotiated command 0.7, protected typed edits and exact durable
-recovery. Conditional scenes explicitly report an unavailable renderer until native
-composition and controls enforce the rules. This is a component checkpoint; the
+recovery. Ordinary conditional scenes still report an unavailable renderer until
+native controls and their integration checks pass; only the experiment opts in. This is a component checkpoint; the
 five complete editions and their release qualification remain open.
 
 The earlier [conditional-visibility evaluator](visibility-handoff.md) now

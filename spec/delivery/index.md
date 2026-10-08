@@ -69,6 +69,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Native settings checkpoint](native-settings-handoff.md) — Portable drafts, native controls and independently observed transaction outcomes.
 - [Native Linux text checkpoint](native-text-handoff.md) — Bounded native shaping, readable metrics and semantic-color raster output with preserved independent checks.
 - [Native local IPC implementation handoff](native-transport-handoff.md) — Bind W-24's Windows and Linux adapter gate to real process and stream evidence.
+- [Native conditional presentation checkpoint](native-visibility-handoff.md) — Retained layout, status-only diagnostics and independently observed masking within the existing native erasure owner.
 - [Real native network acquisition checkpoint](network-acquisition-handoff.md) — Read bounded interface counters on Windows and Linux without claiming reconciled model identity or complete collection.
 - [Measured network presentation checkpoint](network-presentation-handoff.md) — Shared renderer inputs preserve exact selected values, measurement metadata, lease state and disclosure lifetime.
 - [Supervised real network publication checkpoint](network-publication-handoff.md) — Publish real Linux counters and rates through measured telemetry with independent child recovery.

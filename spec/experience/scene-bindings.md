@@ -12,7 +12,7 @@ sp_requires: ["SP-SCENE", "SP-STATE"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-AUDIT-2026-10-04"]
 sources: [{"id": "SRC-AUDIT-2026-10-04", "resource": "User-supplied SysPane audits and design reviews, 2026-10-04", "title": "October specification review inputs"}]
-updated: {"by": "codex", "at": "2026-10-04T19:32:52+11:00", "scope": "October audit amendments; no human review attested"}
+updated: {"by": "codex", "at": "2026-10-08T00:34:15.101366+00:00", "scope": "Native visibility experiment and unchanged default admission gate"}
 ---
 
 # Portable scene structure and binding
@@ -112,8 +112,15 @@ conditions. Version 0.5 requires scene.content, scene.edit-locks and scene.visib
 resources even when no widget carries a condition or lock.
 
 The [admission package](../delivery/packages/w-10-visibility-admission.md) defines
-preservation, promotion, current policy and coherent storage. SceneSurface currently
-returns alternative/surface.visibility_unavailable with no frame for this version;
-authored capability support must never bypass the native composition gate. Native
-condition evaluation, layout-space preservation, inherited group rules, unresolved
-diagnostics and mandatory status remain required before enablement.
+preservation, promotion, current policy and coherent storage. By default SceneSurface
+returns alternative/surface.visibility_unavailable with no frame for this version.
+Authored capability support alone cannot bypass that gate.
+
+The [native experiment](../delivery/packages/w-09-native-visibility.md) admits an
+explicit trusted development opt-in. It measures authorized unconditioned content,
+resolves unchanged layout, then masks payloads through the shared borrowed decision
+tree. Unresolved conditions and mandatory source states remain status-only diagnostics;
+hidden groups promote diagnostic descendants in the inspector. Warning overflow or
+intersection returns an explicit alternative instead of clipping or changing geometry.
+Private native controls, selection/gesture behavior and durable recovery integration
+remain required before ordinary editor or installed enablement.

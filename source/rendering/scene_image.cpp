@@ -65,6 +65,7 @@ TextRaster SceneImages::raster(const Json& w,const TextRequest& request,SurfaceT
     const auto& content=w["content"];const auto& e=entries_.at(content["asset"].dump());
     out.id=w["id"];out.kind="image";out.image.emplace();out.image->state=e.state;out.image->asset=content["asset"];out.image->width=e.pixels.width;out.image->height=e.pixels.height;
     out.accessible=content["alt"].get<std::string>()+"\nImage "+(e.state=="loading"?"loading":e.state=="ready"?"ready":"failed ("+e.reason+")");
+    if(e.state!="ready")out.notices.push_back(e.state=="loading"?"Image loading":"Image failed");
     const auto width=extent(content["width_dip"],request.numerator,request.denominator);
     const auto height=extent(content["height_dip"],request.numerator,request.denominator);
     need(width&&height&&width<=2048&&height<=2048&&width*height<=request.pixel_budget,"surface.capacity");

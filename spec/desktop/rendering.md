@@ -12,7 +12,7 @@ sp_requires: ["SP-DESKTOP", "SP-STATE"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-04T19:32:52+11:00", "scope": "October audit amendments; no human review attested"}
+updated: {"by": "codex", "at": "2026-10-08T00:34:15.101366+00:00", "scope": "Native conditional presentation contract and development admission"}
 ---
 
 # Rendering, text, layout and display recovery
@@ -70,3 +70,19 @@ font substitutions are derived output. Decode authored sRGB RRGGBBAA straight-al
 tokens consistently before backend conversion. Missing fonts, high contrast and
 reduced motion cannot hide mandatory states or rewrite source documents. Rendering
 progress and producer/metric freshness have separate timers and evidence.
+
+## Conditional native presentation
+
+The [native visibility package](../delivery/packages/w-09-native-visibility.md)
+closes masking, warning geometry and lifetime for the Linux development experiment.
+Measure authorized content before evaluating conditions; hidden content retains its
+layout node and may continue authorized bounded chart/image work. Consume shared
+condition decisions within the same serialized erasure owner. Hidden payloads leave
+no pixels, accessible values, table identities, chart points or image metadata.
+
+Unresolved and mandatory source states replace hidden content with status-only text.
+Relay group diagnostics to existing leaf bounds, promote them through hidden inspector
+groups and paint warnings after ordinary content. Reject warning overflow or overlap
+atomically as surface.visibility_layout. Policy denial erases the whole result.
+Ordinary scene 0.5 refusal remains until private native controls and integration
+checks pass; this experiment's explicit opt-in is not installed capability admission.

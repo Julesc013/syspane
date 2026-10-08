@@ -1,0 +1,74 @@
+[
+  {
+    "step": "configure",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-08T00:14:13.394334+00:00",
+    "finished_at": "2026-10-08T00:14:14.515717+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2318153471,\n  \"linux_campaign_bytes\": 4818279962,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "configure",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/native_visibility_step.py",
+      "linux-x64-gcc13",
+      "configure"
+    ],
+    "started_at": "2026-10-08T00:14:14.516107+00:00",
+    "finished_at": "2026-10-08T00:14:25.062849+00:00",
+    "exit": 0,
+    "stdout": "Preset CMake variables:\n\n  BUILD_TESTING=\"ON\"\n  CMAKE_BUILD_TYPE=\"Debug\"\n  CMAKE_CXX_COMPILER=\"g++\"\n  SYSPANE_PROFILE=\"linux-x64-gcc13\"\n\nprofile verified: linux-x64-gcc13\nvendored dependency digests: pass\ndiagnostic toolkit verified: GTK 3.24.41 / Ubuntu 3.24.41-4ubuntu1.3\nnative text dependency identity verified: 358 files\nnative image dependencies verified: 344 files\nnative GJS clock build dependencies verified\n-- Configuring done (6.0s)\n-- Generating done (0.1s)\n-- Build files have been written to: /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-09-native-visibility/linux-x64-gcc13-configure-cd71aa4128\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-08T00:14:25.063305+00:00",
+    "finished_at": "2026-10-08T00:14:25.827111+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2319850780,\n  \"linux_campaign_bytes\": 4818282367,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/native_visibility_step.py",
+      "linux-x64-gcc13",
+      "build"
+    ],
+    "started_at": "2026-10-08T00:14:25.827422+00:00",
+    "finished_at": "2026-10-08T00:14:57.913670+00:00",
+    "exit": 1,
+    "stdout": "r(auto& w:f.cfg.authored.scene[\"widgets\"])if(w[\"id\"]==\"g\")w[\"visibility\"]=visibility_rule(0);f.replace();auto frame=f.paint();hidden(frame);need(boxes(frame)==bounds,\"false group keeps children geometry\");\n      |     ^~~\n/mnt/d/Projects/SysPane/syspane/tests/scene/native_visibility_tests.cpp:39:100: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the \u2018for\u2019\n   39 |     for(auto& w:f.cfg.authored.scene[\"widgets\"])if(w[\"id\"]==\"g\")w[\"visibility\"]=visibility_rule(0);f.replace();auto frame=f.paint();hidden(frame);need(boxes(frame)==bounds,\"false group keeps children geometry\");\n      |                                                                                                    ^\n/mnt/d/Projects/SysPane/syspane/tests/scene/native_visibility_tests.cpp:40:5: error: this \u2018for\u2019 clause does not guard... [-Werror=misleading-indentation]\n   40 |     for(auto& w:f.cfg.authored.scene[\"widgets\"])if(w[\"id\"]==\"b\"){w[\"visibility\"]=visibility_rule();w[\"visibility\"][\"unit\"]=\"1\";}f.replace();frame=f.paint();\n      |     ^~~\n/mnt/d/Projects/SysPane/syspane/tests/scene/native_visibility_tests.cpp:40:129: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the \u2018for\u2019\n   40 |     for(auto& w:f.cfg.authored.scene[\"widgets\"])if(w[\"id\"]==\"b\"){w[\"visibility\"]=visibility_rule();w[\"visibility\"][\"unit\"]=\"1\";}f.replace();frame=f.paint();\n      |                                                                                                                                 ^\n/mnt/d/Projects/SysPane/syspane/tests/scene/native_visibility_tests.cpp:44:5: error: this \u2018for\u2019 clause does not guard... [-Werror=misleading-indentation]\n   44 |     for(const auto& w:frame.widgets)need(w.diagnostic&&w.text==fixed[\"group\"][\"parent_diagnostic\"],\"group diagnostic relay\");need(boxes(frame)==bounds,\"group relay retains layout\");\n      |     ^~~\n/mnt/d/Projects/SysPane/syspane/tests/scene/native_visibility_tests.cpp:44:126: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the \u2018for\u2019\n   44 |     for(const auto& w:frame.widgets)need(w.diagnostic&&w.text==fixed[\"group\"][\"parent_diagnostic\"],\"group diagnostic relay\");need(boxes(frame)==bounds,\"group relay retains layout\");\n      |                                                                                                                              ^~~~\n/mnt/d/Projects/SysPane/syspane/tests/scene/native_visibility_tests.cpp: In function \u2018void {anonymous}::geometry(const std::string&)\u2019:\n/mnt/d/Projects/SysPane/syspane/tests/scene/native_visibility_tests.cpp:60:5: error: this \u2018for\u2019 clause does not guard... [-Werror=misleading-indentation]\n   60 |     for(auto& w:f.cfg.authored.scene[\"widgets\"])if(w[\"id\"]==\"b\")w.erase(\"visibility\");f.replace();const auto overlap=f.paint();const auto expected=overlap.displays[0].rgba;\n      |     ^~~\n/mnt/d/Projects/SysPane/syspane/tests/scene/native_visibility_tests.cpp:60:87: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the \u2018for\u2019\n   60 |     for(auto& w:f.cfg.authored.scene[\"widgets\"])if(w[\"id\"]==\"b\")w.erase(\"visibility\");f.replace();const auto overlap=f.paint();const auto expected=overlap.displays[0].rgba;\n      |                                                                                       ^\n/mnt/d/Projects/SysPane/syspane/tests/scene/native_visibility_tests.cpp:61:5: error: this \u2018for\u2019 clause does not guard... [-Werror=misleading-indentation]\n   61 |     for(auto& w:f.cfg.authored.scene[\"widgets\"])if(w[\"id\"]==\"b\")w[\"visibility\"]=visibility_rule(0);f.replace();const auto only_warning=f.paint();const auto& node=only_warning.layout.nodes[1];\n      |     ^~~\n/mnt/d/Projects/SysPane/syspane/tests/scene/native_visibility_tests.cpp:61:100: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the \u2018for\u2019\n   61 |     for(auto& w:f.cfg.authored.scene[\"widgets\"])if(w[\"id\"]==\"b\")w[\"visibility\"]=visibility_rule(0);f.replace();const auto only_warning=f.paint();const auto& node=only_warning.layout.nodes[1];\n      |                                                                                                    ^\n/mnt/d/Projects/SysPane/syspane/tests/scene/native_visibility_tests.cpp: In function \u2018void {anonymous}::kinds(const std::string&)\u2019:\n/mnt/d/Projects/SysPane/syspane/tests/scene/native_visibility_tests.cpp:69:9: error: this \u2018if\u2019 clause does not guard... [-Werror=misleading-indentation]\n   69 |         if(kind==\"chart\")f.full(document(10,2));hidden(f.paint());\n      |         ^~\n/mnt/d/Projects/SysPane/syspane/tests/scene/native_visibility_tests.cpp:69:49: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the \u2018if\u2019\n   69 |         if(kind==\"chart\")f.full(document(10,2));hidden(f.paint());\n      |                                                 ^~~~~~\ncc1plus: all warnings being treated as errors\nninja: build stopped: subcommand failed.\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-09-native-visibility/linux-x64-gcc13-build-b59b73067c\n",
+    "stderr": ""
+  }
+]

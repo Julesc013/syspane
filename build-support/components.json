@@ -1830,13 +1830,15 @@
       "private_interfaces": [
         "source/rendering/scene_table.hpp",
         "source/rendering/scene_chart.hpp",
-        "source/rendering/scene_image.hpp"
+        "source/rendering/scene_image.hpp",
+        "source/rendering/scene_visibility.hpp"
       ],
       "sources": [
         "source/rendering/scene_surface.cpp",
         "source/rendering/scene_table.cpp",
         "source/rendering/scene_chart.cpp",
-        "source/rendering/scene_image.cpp"
+        "source/rendering/scene_image.cpp",
+        "source/rendering/scene_visibility.cpp"
       ],
       "allowed_dependencies": [
         "syspane_native_text",
@@ -1860,18 +1862,22 @@
       "type": "EXECUTABLE",
       "source_owner": "tests/scene/",
       "public_interfaces": [],
-      "private_interfaces": [],
+      "private_interfaces": [
+        "tests/scene/native_visibility_fixture.hpp"
+      ],
       "sources": [
         "tests/scene/surface_tests.cpp",
         "tests/scene/surface_window.cpp",
         "tests/scene/table_tests.cpp",
         "tests/scene/chart_surface_tests.cpp",
-        "tests/scene/image_surface_tests.cpp"
+        "tests/scene/image_surface_tests.cpp",
+        "tests/scene/native_visibility_tests.cpp"
       ],
       "allowed_dependencies": [
         "syspane_scene_surface",
         "syspane_network_publication",
-        "PkgConfig::GTK3"
+        "PkgConfig::GTK3",
+        "syspane_scene_inspector"
       ],
       "target_requirements": [
         "cxx17",

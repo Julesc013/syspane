@@ -1,0 +1,97 @@
+{
+  "bounds": [
+    0,
+    0,
+    320,
+    180
+  ],
+  "cases": [
+    {
+      "id": "shown",
+      "rule_value": 123,
+      "text": "Receive\n123 byte\nCurrent",
+      "presented": true,
+      "diagnostic": false
+    },
+    {
+      "id": "hidden",
+      "rule_value": 0,
+      "text": "",
+      "accessible": "",
+      "presented": false,
+      "diagnostic": false
+    },
+    {
+      "id": "unit-mismatch",
+      "rule_value": 123,
+      "unit": "1",
+      "text": "Visibility (value): Unit mismatch",
+      "accessible": "Receive\nVisibility (value): Unit mismatch",
+      "presented": true,
+      "diagnostic": true
+    },
+    {
+      "id": "empty",
+      "rule_value": 123,
+      "entity": "missing",
+      "text": "Visibility (value): No match",
+      "accessible": "Receive\nVisibility (value): No match",
+      "presented": true,
+      "diagnostic": true
+    },
+    {
+      "id": "failed-hidden",
+      "rule_value": 1,
+      "field": "network.transmit_bytes",
+      "failed": true,
+      "text": "Stale | Source failed (provider.failed)",
+      "accessible": "Receive\nStale | Source failed (provider.failed)",
+      "presented": true,
+      "diagnostic": true
+    },
+    {
+      "id": "retained",
+      "rule_value": 123,
+      "disconnect": true,
+      "text": "Visibility (value): Source lost\nRetained",
+      "accessible": "Receive\nVisibility (value): Source lost\nRetained",
+      "presented": true,
+      "diagnostic": true
+    }
+  ],
+  "group": {
+    "root": "g",
+    "hidden_members": [
+      "g",
+      "a",
+      "b"
+    ],
+    "child_diagnostic": "Visibility (b): Unit mismatch",
+    "parent_diagnostic": "Visibility (g): No match",
+    "a_bounds": [
+      0,
+      0,
+      320,
+      180
+    ],
+    "b_bounds": [
+      330,
+      0,
+      320,
+      180
+    ]
+  },
+  "labels": {
+    "pending": "Waiting",
+    "empty": "No match",
+    "unsupported": "Unsupported",
+    "ambiguous": "Ambiguous",
+    "invalid": "Invalid",
+    "capacity": "Capacity",
+    "lease_lost": "Source lost",
+    "unavailable": "Unavailable",
+    "stale": "Stale",
+    "unit_mismatch": "Unit mismatch",
+    "type_mismatch": "Type mismatch"
+  }
+}

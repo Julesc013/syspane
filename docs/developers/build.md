@@ -1,5 +1,22 @@
 # Developer setup and checks
 
+The [native visibility experiment](../../spec/delivery/packages/w-09-native-visibility.md)
+adds `SurfaceConfig.experimental_visibility`, default false. Only a trusted owned
+laboratory sets it for scene 0.5. Resource capability declarations do not enable it;
+ordinary editor and installed entry paths retain the refusal gate. SceneSurface owns
+conditional frames, hidden payload erasure and bounded chart/image continuation.
+Consume `SurfaceText.presented` and `diagnostic` through the registered native owner;
+use `inspector_rows` to omit hidden rows and promote diagnostic descendants.
+
+After ordinary preflight/configure/build, Linux runs `ctest --preset linux-x64-gcc13
+-R '^native[.](SCENE-VISIBILITY|VISIBILITY-PIXELS)$' --output-on-failure` under the
+existing non-root account. The first family covers all kinds, exact frozen examples,
+groups, status, geometry, retained work and revocation. The second owns Xvfb/private
+D-Bus, compares pixels and explicit AT-SPI names and detects inverted and retained
+content controls. Losslessly compressed RGB observations retain raw and archive
+hashes. Read the [handoff](../../spec/delivery/native-visibility-handoff.md) before
+continuing private rule controls, selection/gestures and native persistence/recovery.
+
 The [snapping package](../../spec/delivery/packages/w-10-snap.md) defines the
 pure `snap(SnapInput)` projection in editor_snap.hpp. Provide validated captured
 world geometry in 1/64-DIP units; consume deltas through existing typed draft edits.

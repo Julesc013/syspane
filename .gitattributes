@@ -101,3 +101,7 @@ build-support/evidence/w-09-visibility-composition-history/** -text whitespace=c
 
 # Keep the executed PowerShell cleanup helper byte-exact, including its final blank line.
 build-support/evidence/w-09-visibility-composition-history/support/prune_visibility_composition_attempt_duplicates.ps1 -whitespace
+
+# Preserve native visibility attempts, fixed examples and executed helpers.
+build-support/evidence/w-09-native-visibility-history/** -text whitespace=cr-at-eol
+build-support/evidence/w-09-native-visibility-history/support/prune_native_visibility_attempt_duplicates.ps1 -whitespace

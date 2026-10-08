@@ -13,6 +13,7 @@ struct SurfaceConfig {
     scene::Topology topology;
     std::string language="en",contrast="authored";
     std::set<std::string> capabilities;
+    bool experimental_visibility=false; // Trusted development admission, not an authored capability.
 };
 struct SurfaceProvider {
     std::string producer;
@@ -51,6 +52,8 @@ struct SurfaceText {
     std::optional<Chart> chart;
     struct Image {std::string state;configuration::Json asset;unsigned width=0,height=0;};
     std::optional<Image> image;
+    std::vector<std::string> notices; // Status only: no values, identities, ranges or asset references.
+    bool presented=true,diagnostic=false;
 };
 struct SurfaceFrame {
     scene::Plan layout;
