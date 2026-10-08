@@ -27,6 +27,8 @@ behaviour has been implemented. See [audit disposition](spec/delivery/audit-2026
 
 ## First native campaign
 
+- [x] W-08 Linux profile directory owner: XDG/portable roots, exact private markers, exclusive locks and interrupted initialization. See the [handoff](spec/delivery/profile-owner-handoff.md).
+- [ ] Connect profile ownership to the supervised installed controller, catalog/default generation and protected machine policy; retain independent native and release gates.
 - [x] W-09 theme typography: versioned complete fonts/roles, exact resource admission and native raster evidence. See the [handoff](spec/delivery/typography-handoff.md).
 - [x] W-09 role-aware scene composition: bounded semantic blocks, exact native pixels, preserved diagnostics and erasure; explicit development admission. See the [handoff](spec/delivery/role-composition-handoff.md).
 - [x] W-10 shared theme-authoring input and immutable artifact construction: exact no-op/reset, policy admission, preserved license and deterministic content pins. See the [handoff](spec/delivery/theme-authoring-handoff.md).

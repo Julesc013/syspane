@@ -28,6 +28,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Pinned content and preset preview](w-08-content-resolution.md) — Resolve immutable content bytes into a validated authored preview without granting installation or activation.
 - [Complete-scene command transport](w-08-large-commands.md) — Carry the full authored scene contract through negotiated commands, bounded admission and durable recovery.
 - [Supervised native content commands](w-08-native-content.md) — Connect retained resource preparation to authenticated native commands and exact controller replacement.
+- [Linux profile directory ownership](w-08-profile-owner.md) — Explicit paths, private atomic initialization and exclusive controller lifetime.
 - [Committed request reconciliation across producer epochs](w-08-reconciliation.md) — Recover durable outcomes through authenticated read-only IPC without resubmitting mutations.
 - [Durable pinned resource generations](w-08-resource-generations.md) — Bind command identity and generation recovery to the exact prepared content closure.
 - [Independent transaction deadlines and controller recovery](w-08-supervised-transactions.md) — Bound uncooperative transaction work without killing threads or replaying uncertain mutations.

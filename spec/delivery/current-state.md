@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-08T16:18:32+00:00", "scope": "Native editor recovery controls; installed ownership and all complete editions remain open"}
+updated: {"by": "codex", "at": "2026-10-08T17:03:20.473996+00:00", "scope": "Linux profile directory ownership; installed composition and all complete editions remain open"}
 ---
 
 # Current state and next admitted boundary
@@ -21,6 +21,11 @@ Shared build tooling now lives in `source/build/`. Machine bindings and raw
 recordings are local ignored `out/` content; the retired root is absent from the
 tracked tree. See `docs/developers/build.md` in the repository for checkout
 setup and the [repository contract](../foundation/repository.md) for ownership.
+
+The [Linux profile ownership checkpoint](profile-owner-handoff.md)
+adds explicit XDG/portable directory selection, private atomic initialization and
+exclusive controller locks. Installed controller/catalog/policy integration and
+all five complete desktop editions remain pending.
 
 The [native recovery controls checkpoint](recovery-controls-handoff.md)
 connects real editing to private recovery capture, crash startup offers and explicit

@@ -11,6 +11,11 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
+The [Linux profile ownership checkpoint](spec/delivery/profile-owner-handoff.md)
+adds explicit XDG/portable directory selection, private atomic initialization and
+exclusive controller locks. Installed controller/catalog/policy integration and
+all five complete desktop editions remain pending.
+
 The [native recovery controls checkpoint](spec/delivery/recovery-controls-handoff.md)
 connects real editing to private recovery capture, crash startup offers and explicit
 Restore, Discard and Keep controls. Native checks verify exact files, matching Apply

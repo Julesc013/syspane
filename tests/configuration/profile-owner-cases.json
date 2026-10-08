@@ -1,0 +1,18 @@
+{
+  "profile": "profile:main",
+  "key": "09011986a3fa5d18b745b365e028851e7c9b20d8254c571f8e015943a1c0d706",
+  "default_bases": {"configuration": "/home/tester/.config", "content": "/home/tester/.local/share", "state": "/home/tester/.local/state"},
+  "invalid_bases": ["", "relative", "/base/../other", "/base/./other", "/base//other", "/base\u0000other"],
+  "format": "SysPane.Profile",
+  "schema_version": "0.1.0",
+  "roles": {"configuration": "generations", "content": "packages", "state": "recovery"},
+  "entries": [".owner.json", ".lease"],
+  "phases": {"stage_created": false, "marker_flushed": false, "lease_flushed": false, "child_flushed": false, "stage_flushed": false, "publish_ready": false, "published": true, "parent_flushed": true},
+  "unsafe_file_kinds": ["symlink", "hardlink", "directory", "fifo", "permissions", "oversized"],
+  "substitutions": ["root", "marker", "lease", "child", "marker_bytes", "root_permissions", "ancestor_permissions"],
+  "maximum_pending": 8,
+  "maximum_parent_entries": 4096,
+  "configuration_fixture": "spec/fixtures/valid/settings.json",
+  "scene_fixture": "spec/fixtures/valid/scene-portable.json",
+  "recovery_bytes": "{\"fixture\":\"retained profile recovery\"}"
+}

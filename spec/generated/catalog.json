@@ -489,7 +489,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "57874557dc774915de93d226526f4bed70ac174b2da86e7bb0aa1babddd68367"
+      "sha256": "5688cce780a2bcd60d03d070d0baff868daaff6fa03269f880a6ba53e26d8113"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -1465,6 +1465,18 @@
       "sha256": "86559ae36c279b6470fa29582af8e1f16a650ceee0e91bfbfc89ed667bc49a23"
     },
     {
+      "id": "SP-W08-PROFILE-OWNER",
+      "path": "delivery/packages/w-08-profile-owner.md",
+      "title": "Linux profile directory ownership",
+      "description": "Explicit paths, private atomic initialization and exclusive controller lifetime.",
+      "requires": [
+        "SP-INSTALL-OWNERSHIP",
+        "SP-PERSISTENCE",
+        "SP-W10-RECOVERY-STORE"
+      ],
+      "sha256": "ae2f6dcafb7bb30dfb6c68dcebc8714c9688ecec533ba23303e7a224495c86a2"
+    },
+    {
       "id": "SP-W08-RECONCILIATION",
       "path": "delivery/packages/w-08-reconciliation.md",
       "title": "Committed request reconciliation across producer epochs",
@@ -2425,6 +2437,18 @@
         "SP-CAMPAIGN-ADMISSION"
       ],
       "sha256": "a1632148d8263133a81cf6d91eb769ba651a4ea035b6ecff7bee1f2b1c4d4704"
+    },
+    {
+      "id": "SP-PROFILE-OWNER-HANDOFF",
+      "path": "delivery/profile-owner-handoff.md",
+      "title": "Linux profile directory ownership checkpoint",
+      "description": "Private root selection, interrupted creation, lifetime locks and existing store composition.",
+      "requires": [
+        "SP-W08-PROFILE-OWNER",
+        "SP-INSTALL-OWNERSHIP",
+        "SP-RELEASE-0-1-0"
+      ],
+      "sha256": "5bc0600b9e6c7e9e4eac7af2a2356dd88594b977c077b165bd1da168f7d7923b"
     },
     {
       "id": "SP-RECONCILIATION-HANDOFF",

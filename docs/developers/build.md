@@ -15,6 +15,24 @@ build` before configuring or building; use `test` or `package` for those actions
 The common active-output budget is unchanged; retained `out/evidence/` archives
 are measured separately. Never use the placeholder account from the example.
 
+The [profile ownership package](../../spec/delivery/packages/w-08-profile-owner.md)
+adds LinuxProfileOwner. Resolve ProfileLocation from explicit native environment or
+an explicitly selected portable data root. Construct on a serialized worker with
+an explicit creation flag and current native authority guard. Retain the owner for
+the controller lifetime and call verified_paths before handing the generations,
+packages or recovery children to their existing owners. A failed verification
+invalidates the owner; regrant needs a fresh owner. Do not copy markers into stores,
+adopt unmarked directories, infer policy from environment strings or run filesystem
+work in GTK callbacks. Installed composition must use supervised workers.
+
+After preflight/configure/build, run `ctest --preset linux-x64-gcc13 -R
+'^(native[.]PROFILE-OWNER|composition[.])' --output-on-failure` in the admitted non-root
+ext4 environment. The runner observes exact metadata/bytes, competing processes,
+pre-publication substitutions and actual stopped-child termination. Run the existing
+CONFIG-STORE and RECOVERY-STORE/QUEUE/APPLY/STORED-APPLY families for storage
+regressions. See the [handoff](../../spec/delivery/profile-owner-handoff.md). No
+installed controller or default policy is enabled by this component checkpoint.
+
 The [recovery-draft package](../../spec/delivery/packages/w-10-recovery-draft.md)
 adds EditorDraft::recovery_snapshot, inspect_recovery and restore_recovery. Admit
 editor.recovery only from trusted native context, with large commands and current

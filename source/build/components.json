@@ -2929,6 +2929,59 @@
       "profiles": [
         "linux-x64-gcc13"
       ]
+    },
+    {
+      "id": "profile-owner",
+      "target": "syspane_profile_owner",
+      "type": "STATIC_LIBRARY",
+      "source_owner": "source/platform/",
+      "public_interfaces": [
+        "source/platform/profile_owner_linux.hpp"
+      ],
+      "private_interfaces": [],
+      "sources": [
+        "source/platform/profile_owner_linux.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_authored",
+        "Threads::Threads"
+      ],
+      "target_requirements": [
+        "cxx17",
+        "native_local_ipc"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
+    },
+    {
+      "id": "profile-owner-probe",
+      "target": "syspane_profile_owner_probe",
+      "type": "EXECUTABLE",
+      "source_owner": "tests/configuration/",
+      "public_interfaces": [],
+      "private_interfaces": [],
+      "sources": [
+        "tests/configuration/profile_owner_probe.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_profile_owner"
+      ],
+      "target_requirements": [
+        "cxx17",
+        "native_local_ipc"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
     }
   ]
 }
