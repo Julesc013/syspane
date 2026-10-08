@@ -1,0 +1,19 @@
+{
+  "family": "RUNTIME-DIRECTORY",
+  "cases": {
+    "CREATE": "Fresh private empty canonical root; successful cleanup removes only it; repeated cleanup succeeds and path refuses.",
+    "PARALLEL": "Two simultaneous owners have distinct inodes and paths; retiring one preserves the other.",
+    "INPUT": "Missing, relative, noncanonical, NUL and overlong bases fail without new nodes.",
+    "SYMLINK": "Selected symlink is rejected without mutation of its target.",
+    "PERMISSIONS": "Nonprivate base and writable ancestor refuse without repairing modes; restrictive umask never changes global state.",
+    "FILESYSTEM": "The Windows-mounted filesystem is refused and has no new nodes.",
+    "BUSY": "Independent flock blocks cleanup without deleting or invalidating; release permits cleanup.",
+    "CONTENTS": "Unexpected regular file, symlink and directory each survive failed cleanup; owner stays invalidated after contents are removed externally.",
+    "REPLACEMENT": "Leaf replacement, ancestor replacement and changed mode refuse and preserve both old and replacement nodes; restored paths do not restore authority.",
+    "OWNER": "Wrong-thread path and cleanup refuse while the legitimate owner remains usable.",
+    "ORPHAN": "Destructor and abrupt process death preserve their exact roots; new ownership never adopts them.",
+    "SUPERVISOR": "Cooperative exact child exit is independently observed; supervisor lock blocks retirement through closed state until destructor releases it.",
+    "FORCED": "Uncooperative shutdown requires exact SIGKILL and wait; retirement follows independently observed child death and supervisor destruction.",
+    "ORACLE": "An intentionally wrong expectation that a populated directory is empty must be detected."
+  }
+}

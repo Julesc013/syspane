@@ -11,6 +11,11 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
+The [runtime directory checkpoint](spec/delivery/runtime-directory-handoff.md)
+adds private frontend runtime allocation and explicit retirement after supervisor
+release. Native checks preserve replacements and orphaned files and observe actual
+child exit. Installed UI composition and all complete editions remain open.
+
 The [profile projection checkpoint](spec/delivery/profile-projection-handoff.md)
 connects the native controller to bounded, policy-checked reads of one saved scene
 and its exact resources, with a validating frontend receiver. Installed UI composition,

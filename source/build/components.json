@@ -3385,6 +3385,62 @@
       "profiles": [
         "linux-x64-gcc13"
       ]
+    },
+    {
+      "id": "runtime-directory",
+      "target": "syspane_runtime_directory",
+      "type": "STATIC_LIBRARY",
+      "source_owner": "source/platform/",
+      "public_interfaces": [
+        "source/platform/runtime_directory_linux.hpp"
+      ],
+      "private_interfaces": [],
+      "sources": [
+        "source/platform/runtime_directory_linux.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_local_ipc",
+        "syspane_protocol",
+        "Threads::Threads"
+      ],
+      "target_requirements": [
+        "cxx17",
+        "native_local_ipc"
+      ],
+      "roles": [
+        "console"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
+    },
+    {
+      "id": "runtime-directory-probe",
+      "target": "syspane_runtime_directory_probe",
+      "type": "EXECUTABLE",
+      "source_owner": "tests/configuration/",
+      "public_interfaces": [],
+      "private_interfaces": [],
+      "sources": [
+        "tests/configuration/runtime_directory_probe.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_runtime_directory",
+        "syspane_profile_supervisor",
+        "Threads::Threads"
+      ],
+      "target_requirements": [
+        "cxx17",
+        "native_local_ipc"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
     }
   ]
 }

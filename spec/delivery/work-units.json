@@ -308,7 +308,8 @@
         "SP-W08-PROFILE-CONTROLLER",
         "SP-W08-PROFILE-SUPERVISOR",
         "SP-W26-HELPER-IDENTITY",
-        "SP-W08-PROFILE-PROJECTION"
+        "SP-W08-PROFILE-PROJECTION",
+        "SP-W08-RUNTIME-DIRECTORY"
       ],
       "acceptance_tests": [
         "T-TRANSACTION",
@@ -374,14 +375,16 @@
         "tests/configuration/native_profile_projection.py",
         "tests/configuration/profile-projection-cases.json",
         "spec/contracts/profile-request.schema.json",
-        "spec/contracts/profile-result.schema.json"
+        "spec/contracts/profile-result.schema.json",
+        "source/platform/runtime_directory_linux.hpp",
+        "source/platform/runtime_directory_linux.cpp"
       ],
       "status": "in_progress",
       "authority_class": "development",
       "execution_grant": "user:foundation-native-campaign-2026-10-05",
-      "notes": "The native configuration controller now serves one coherent saved profile and exact resource closure through authenticated, currently authorized, bounded chunk reads. Worker-prepared immutable images publish only after actual join; a pinned transfer survives later commits without mixing revisions. The portable receiver verifies identities, every part and the complete selected catalog before exposing UI state. Fixed portable and native cases cover disclosure, contention, deadlines, corruption, reconnect and real stored bytes. W-26 supplies verified helper identity. Next compose the independently scheduled actual controller/inspector frontend with deployment/data/runtime ownership, all private helper identities, native UI, telemetry, activation, recovery context and import catalogs. Positive protected-policy qualification, full layers/updates, non-Linux adapters and all five complete editions remain required.",
-      "package": "delivery/packages/w-08-profile-projection.md",
-      "evidence": "delivery/profile-projection-handoff.md"
+      "notes": "The native configuration controller now serves one coherent saved profile and exact resource closure through authenticated, currently authorized, bounded chunk reads. Worker-prepared immutable images publish only after actual join; a pinned transfer survives later commits without mixing revisions. The portable receiver verifies identities, every part and the complete selected catalog before exposing UI state. Fixed portable and native cases cover disclosure, contention, deadlines, corruption, reconnect and real stored bytes. W-26 supplies verified helper identity. Next compose the independently scheduled actual controller/inspector frontend with deployment/data/runtime ownership, all private helper identities, native UI, telemetry, activation, recovery context and import catalogs. Positive protected-policy qualification, full layers/updates, non-Linux adapters and all five complete editions remain required. Native runtime ownership now allocates private bounded roots and retires them only after supervisor lock release, preserving substitution, contents and orphan evidence. Installed frontend composition and all full release gates remain open.",
+      "package": "delivery/packages/w-08-runtime-directory.md",
+      "evidence": "delivery/runtime-directory-handoff.md"
     },
     {
       "id": "W-09",

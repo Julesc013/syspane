@@ -15,6 +15,29 @@ build` before configuring or building; use `test` or `package` for those actions
 The common active-output budget is unchanged; retained `out/evidence/` archives
 are measured separately. Never use the placeholder account from the example.
 
+The [runtime directory package](../../spec/delivery/packages/w-08-runtime-directory.md)
+provides LinuxRuntimeDirectory for the frontend's independent native owner. Pass an
+explicit native runtime base; ordinary frontend composition should select
+XDG_RUNTIME_DIR and report unavailable when it is absent or inadmissible. There is
+no implicit path fallback. The base must already be private, canonical and on the
+admitted native filesystem, with at most 50 path bytes. The new empty root preserves
+the supervisor's existing 70-byte limit.
+
+Construct and use both owners on the supervisory worker. Pass runtime.path() to
+LinuxProfileSupervisor. On close, keep polling and draining the supervisor until
+it is closed, destroy it to release its flock, then call runtime.cleanup(). A busy
+lock is retryable. Changed identity or unexpected contents permanently invalidate
+the runtime owner and preserve the directory. Its destructor never deletes paths.
+
+Run `ctest --preset linux-x64-gcc13 -R '^native[.]RUNTIME-DIRECTORY$'
+--output-on-failure` after the ordinary build and test preflights. The independent
+oracle uses the owned campaign's private R lab base, retaining its marker, orphan
+directories and node snapshots. Its restrictive-umask case records the original
+unreadable node before restoring lab access for storage accounting; the production
+owner does not repair it. The composed cases use the existing dedicated supervisor
+helper, not a production policy override. Continue with authenticated frontend
+commands and reconciliation; this library is not an installed desktop application.
+
 The [profile projection package](../../spec/delivery/packages/w-08-profile-projection.md)
 adds configuration.profile with profile-request/profile-result 0.1 and a 12288-byte
 negotiated frame floor. The existing native controller exposes it only to its exact

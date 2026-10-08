@@ -36,6 +36,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Thread-bound profile storage for asynchronous commands](w-08-profile-worker.md) — Retain native profile ownership across joined command workers.
 - [Committed request reconciliation across producer epochs](w-08-reconciliation.md) — Recover durable outcomes through authenticated read-only IPC without resubmitting mutations.
 - [Durable pinned resource generations](w-08-resource-generations.md) — Bind command identity and generation recovery to the exact prepared content closure.
+- [Frontend runtime directory ownership](w-08-runtime-directory.md) — Give the native frontend a bounded private runtime root with explicit, identity-checked retirement.
 - [Independent transaction deadlines and controller recovery](w-08-supervised-transactions.md) — Bound uncooperative transaction work without killing threads or replaying uncertain mutations.
 - [Durable authored theme commands](w-08-theme-commands.md) — Negotiated font edits, versioned resource generations and exact restart reconciliation.
 - [Policy-bound authored scene bindings](w-09-bindings.md) — Resolve existing selectors and pins against scoped immutable producer views without name-based rebinding.

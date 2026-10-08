@@ -27,6 +27,7 @@ behaviour has been implemented. See [audit disposition](spec/delivery/audit-2026
 
 ## First native campaign
 
+- [x] W-08 frontend runtime ownership: bounded private allocation, identity checks and explicit cleanup after supervisor release, with native replacement/orphan/exit evidence. See the [handoff](spec/delivery/runtime-directory-handoff.md).
 - [x] W-08 coherent profile/resource reads: immutable saved revisions, authenticated policy checks, bounded transfer and typed frontend receiver. See the [handoff](spec/delivery/profile-projection-handoff.md).
 
 - [x] W-26 compiled helper closure, verified installation-relative lookup and immutable native execution; relocated development package and substitution evidence. See the [handoff](spec/delivery/helper-identity-handoff.md).

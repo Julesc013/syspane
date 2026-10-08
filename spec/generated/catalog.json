@@ -489,7 +489,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "7150d0f90938e2e5306b42bf84ece620cc58da50ce2bc509afab99f9de04d324"
+      "sha256": "05413eda67dd41640ffc7347d0a9096c29ecba568a678638a6ec35ef0b9cc4fc"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -1573,6 +1573,17 @@
         "SP-PERSISTENCE"
       ],
       "sha256": "0e0536fbe3cf5421a374efb25ddb84891c05539c5b2d06fd4ddb2e0f4e8f6307"
+    },
+    {
+      "id": "SP-W08-RUNTIME-DIRECTORY",
+      "path": "delivery/packages/w-08-runtime-directory.md",
+      "title": "Frontend runtime directory ownership",
+      "description": "Give the native frontend a bounded private runtime root with explicit, identity-checked retirement.",
+      "requires": [
+        "SP-W08-PROFILE-SUPERVISOR",
+        "SP-W26-HELPER-IDENTITY"
+      ],
+      "sha256": "c8de3976855947dcb0dca780e3030015dbffb9502a8359143f814bcd63af8845"
     },
     {
       "id": "SP-W08-SUPERVISION",
@@ -2701,6 +2712,16 @@
         "SP-TYPOGRAPHY-HANDOFF"
       ],
       "sha256": "ca39c8ce699f3a4352e5b7bcde6c89a91fb0a79d188e7cb4083f70db87f461f9"
+    },
+    {
+      "id": "SP-RUNTIME-DIRECTORY-HANDOFF",
+      "path": "delivery/runtime-directory-handoff.md",
+      "title": "Native frontend runtime directory ownership",
+      "description": "Private allocation and explicit retirement now compose with the existing controller supervisor.",
+      "requires": [
+        "SP-W08-RUNTIME-DIRECTORY"
+      ],
+      "sha256": "d6e3aa6807c13aa7e1d8d096d9ca371c136b42d7ce3e0dd9514a0c5a6eb9e06c"
     },
     {
       "id": "SP-RUNTIME-OBSERVATION-HANDOFF",

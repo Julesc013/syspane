@@ -96,6 +96,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Durable resource generation checkpoint](resource-generations-handoff.md) — Exact content closure, command identity and coherent Linux recovery.
 - [Greenfield implementation campaign](roadmap.md) — Build native vertical slices and contracts together in risk order.
 - [Semantic typography composition checkpoint](role-composition-handoff.md) — Bounded scene font roles with independent pixels and preserved diagnostics.
+- [Native frontend runtime directory ownership](runtime-directory-handoff.md) — Private allocation and explicit retirement now compose with the existing controller supervisor.
 - [Image validation cost and native observation checkpoint](runtime-observation-handoff.md) — Preserve complete image validation while reducing parent work and retaining unexplained accessibility failures.
 - [Versioned scene content checkpoint](scene-content-handoff.md) — Typed authored content crosses shared validation, negotiated commands and exact native resource recovery.
 - [Shared scene fragments checkpoint](scene-fragments-handoff.md) — Bounded authored copy/paste with explicit disclosure and atomic resource/history ownership.
