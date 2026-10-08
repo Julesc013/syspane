@@ -100,6 +100,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Portable transport and policy checkpoint](transport-handoff.md) — Resume W-24 from executable portable contracts without claiming native authentication.
 - [Visibility authoring and durable admission checkpoint](visibility-admission-handoff.md) — Versioned scenes and commands with protected history, coherent recovery and an explicit native rendering gate.
 - [Borrowed visibility composition checkpoint](visibility-composition-handoff.md) — Bounded shared telemetry reads and inherited condition decisions with native presentation still gated.
+- [Native conditional editing checkpoint](visibility-controls-handoff.md) — Exact private visibility input, hidden selection and current held-gesture diagnostics through the existing durable editor.
 - [Conditional visibility evaluator checkpoint](visibility-handoff.md) — Exact policy-bound comparison with explicit unresolved states and open native admission.
 - [Native widget-creation checkpoint](widget-creation-handoff.md) — All seven primitives through existing draft, resource, policy and transaction owners.
 - [Contemporary Windows host observation checkpoint](windows-host-inventory-handoff.md) — Read-only Explorer ownership and icon hierarchy, with native host execution still dependent on a designated laboratory.

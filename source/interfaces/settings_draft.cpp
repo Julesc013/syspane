@@ -1,4 +1,5 @@
 #include "settings_draft.hpp"
+#include "authored_equal.hpp"
 #include "settings_descriptors.hpp"
 #include "reconciliation.hpp"
 #include <algorithm>
@@ -28,7 +29,7 @@ SettingsDraft::SettingsDraft(c::Authority authority,c::Policy policy,c::Authored
 bool SettingsDraft::disclosure()const{return policy_.available&&c::permits(authority_,policy_,"inspector","operational")&&c::permits(authority_,policy_,"accessibility","operational");}
 void SettingsDraft::erase(){base_.reset();draft_.reset();context_.reset();base_resources_.reset();draft_resources_.reset();result_=nullptr;if(active_)active_->request.body.clear();state_=DraftState::unavailable;}
 void SettingsDraft::authorize_resources()const{if(context_)c::authorize_resources(*draft_resources_,policy_,context_->capabilities);}
-bool SettingsDraft::dirty()const{return available()&&(draft_->settings!=base_->settings||draft_->scene!=base_->scene);}
+bool SettingsDraft::dirty()const{return available()&&(!c::authored_equal(draft_->settings,base_->settings)||!c::authored_equal(draft_->scene,base_->scene));}
 std::optional<std::uint64_t> SettingsDraft::revision()const{return base_?std::optional<std::uint64_t>(c::authored_revision(*base_)):std::nullopt;}
 void SettingsDraft::editable()const{need(available(),"settings.unavailable");need(!active_,"settings.pending");need(state_!=DraftState::conflict,"settings.reload_required");}
 SettingValue SettingsDraft::value(const std::string& id)const{
@@ -53,7 +54,7 @@ void SettingsDraft::use_default(const std::string& id){set(id,descriptor(id).def
 void SettingsDraft::revert(){editable();draft_=base_;draft_resources_=base_resources_;result_=nullptr;state_=DraftState::clean;}
 Json SettingsDraft::command(const std::string& intent,const std::string& request)const{
     Json ops=Json::array();for(const auto& d:setting_descriptions())if(setting(*base_,d.id)!=setting(*draft_,d.id))ops.push_back({{"op","settings.set"},{"path",d.id},{"value",setting(*draft_,d.id)}});
-    const bool scene_changed=draft_->scene!=base_->scene;
+    const bool scene_changed=!c::authored_equal(draft_->scene,base_->scene);
     if(scene_changed)ops.push_back({{"op","scene.replace"},{"scene",draft_->scene}});
     Json result={{"schema_version",large_commands_?"0.5.0":context_?(scene_changed&&draft_->scene["schema_version"]!="0.2.0"?"0.4.0":"0.3.0"):"0.2.0"},{"request_id",request},{"expected_revision",base_->settings["revision"]},{"policy_generation",std::to_string(policy_.revision)},{"intent",intent},{"operations",std::move(ops)}};
     if(context_)result["content"]=context_->selection;

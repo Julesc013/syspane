@@ -151,8 +151,8 @@ The [shared visibility package](../delivery/packages/w-09-visibility.md) closes
 single-condition evaluation and fixes the next scene/native gates. Do not place
 visibility properties into existing scenes or reinterpret unavailable as hidden.
 The authored admission below supplies reversible draft edits and negotiated
-persistence. Native private input, mandatory status preservation and independent
-pixels/accessibility checks remain required.
+persistence. The native rendering and control packages below supply private input,
+mandatory status preservation and independent pixel/accessibility component checks.
 
 The [visibility-admission package](../delivery/packages/w-10-visibility-admission.md)
 now implements SetWidgetVisibility in the shared draft. It validates all targets
@@ -163,6 +163,17 @@ must preserve scene 0.5. Group/Wrap retain child rules and create an uncondition
 parent; Ungroup/Unwrap reject a parent's own rule until explicitly cleared.
 
 Apply for a scene 0.5 replacement requires command 0.7 negotiation. Settings-only
-changes preserve the existing conditional scene and its resource closure. Native
-condition dialogs and WYSIWYG composition remain open; retain unavailable-preview,
-authored recovery and durable/activation distinctions in the meantime.
+changes preserve the existing conditional scene and its resource closure. The
+[native controls package](../delivery/packages/w-10-visibility-controls.md) defines
+Always show, When condition matches and mixed Keep unchanged, with nested private
+source input and one atomic draft edit. The [checkpoint](../delivery/visibility-controls-handoff.md)
+records exact scene, pixel, accessibility and storage evidence.
+
+Trusted EditorForm admission requires the negotiated large-command context and
+scene.content/edit-locks/visibility plus configuration.edit-locks/visibility support.
+Hidden content keeps its authored-list row and geometry; canvas hits skip it.
+Current scene 0.5 content and mandatory diagnostics paint during a held gesture,
+while captured geometry and snap targets remain fixed. Private outer and nested
+buffers erase together on cancellation or authority/lifetime changes. Keep the
+existing unavailable-preview, recovery and durable/activation distinctions.
+Installed ownership, full accessibility and other native adapters remain open.

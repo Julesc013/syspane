@@ -2,6 +2,7 @@
 #include "editor_snap.hpp"
 #include "editor_content_form.hpp"
 #include "editor_binding_form.hpp"
+#include "editor_visibility_form.hpp"
 #include "editor_create_form.hpp"
 #include "editor_layout_form.hpp"
 #include "private_text.hpp"
@@ -38,13 +39,13 @@ struct EditorForm::Impl {
     std::vector<v::SurfaceProvider> providers;std::unique_ptr<v::SceneSurface> surface;std::map<std::string,model::Tick> ticks;
     Actions actions;std::thread::id thread=std::this_thread::get_id();bool closed=false,updating=false,dispatching=false,fields_dirty=false,drawing=false;std::string error;
     GtkWidget *root=nullptr,*canvas=nullptr,*tree=nullptr,*status=nullptr,*guidance=nullptr;GtkListStore* model=nullptr;std::vector<GtkWidget*> owned;
-    std::map<std::string,GtkWidget*> buttons,fields;std::vector<s::Node> nodes;
-    std::unique_ptr<EditorContentForm> content;std::unique_ptr<EditorBindingForm> binding;std::unique_ptr<EditorCreateForm> creation;std::unique_ptr<EditorLayoutForm> layout_form;int field_variant=-2;
+    std::map<std::string,GtkWidget*> buttons,fields;std::vector<s::Node> nodes;std::set<std::string> hidden,diagnostics;bool large_frames=false;
+    std::unique_ptr<EditorVisibilityForm> visibility;std::unique_ptr<EditorContentForm> content;std::unique_ptr<EditorBindingForm> binding;std::unique_ptr<EditorCreateForm> creation;std::unique_ptr<EditorLayoutForm> layout_form;int field_variant=-2;
     bool snap_grid=false,snap_guides=false,show_grid=false;s::Unit grid_spacing=8*s::dip;
     struct Gesture {double x,y,dx=0,dy=0,pixel_per_unit=1.0/64;bool resize=false;std::vector<s::Node> nodes;std::optional<SnapInput> input;SnapResult result{0,0,{},{}};};std::optional<Gesture> gesture;
     guint timer=0;
     Impl(c::Authority a,c::Policy p,c::Authored value,std::string epoch,SettingsResources r,s::Topology t,std::string d,std::vector<v::SurfaceProvider> ps,std::string w,Actions callbacks,bool large_commands)
-      :draft(a,p,value,std::move(epoch),r,large_commands),authority(std::move(a)),current(std::move(p)),settings(std::move(value.settings)),resources(std::move(r)),topology(std::move(t)),display(std::move(d)),worker(std::move(w)),providers(std::move(ps)),actions(std::move(callbacks)){}
+      :draft(a,p,value,std::move(epoch),r,large_commands),authority(std::move(a)),current(std::move(p)),settings(std::move(value.settings)),resources(std::move(r)),topology(std::move(t)),display(std::move(d)),worker(std::move(w)),providers(std::move(ps)),actions(std::move(callbacks)){large_frames=large_commands;}
     void owner()const{if(thread!=std::this_thread::get_id()||dispatching)throw std::logic_error("editor.owner");}
     std::uint64_t now()const{return static_cast<std::uint64_t>(g_get_monotonic_time()/1000);}
     GtkWidget* own(GtkWidget* w){g_object_ref_sink(w);owned.push_back(w);return w;}
@@ -52,19 +53,21 @@ struct EditorForm::Impl {
     const s::Display& viewport()const{for(const auto& d:topology.displays)if(d.id==display)return d;for(const auto& d:topology.displays)if(d.id==topology.fallback)return d;throw protocol::Error("editor.display");}
     bool protected_selection()const{if(!draft.scene())return false;for(const auto& id:draft.selection())if(edit_protected(*draft.scene(),id))return true;return false;}
     bool own_locks()const{if(!draft.scene()||draft.selection().empty())return false;for(const auto& id:draft.selection())if(!authored_widget(*draft.scene(),id).value("edit_locked",false))return false;return true;}
-    bool editing()const{return draft.available()&&!draft.active_request()&&draft.state()!=DraftState::conflict&&(!content||!content->opened())&&(!binding||!binding->opened())&&(!creation||!creation->opened())&&(!layout_form||!layout_form->opened());}
+    bool visibility_supported()const{if(!large_frames||!resources)return false;for(const char* cap:{"scene.content","scene.edit-locks","scene.visibility","configuration.edit-locks","configuration.visibility"})if(!resources->capabilities.count(cap))return false;return true;}
+    void presentation(const v::SurfaceFrame& frame){nodes=frame.layout.nodes;hidden.clear();diagnostics.clear();for(const auto& w:frame.widgets){if(!w.presented)hidden.insert(w.id);if(w.diagnostic)diagnostics.insert(w.id);}}
+    bool editing()const{return draft.available()&&!draft.active_request()&&draft.state()!=DraftState::conflict&&(!content||!content->opened())&&(!binding||!binding->opened())&&(!creation||!creation->opened())&&(!layout_form||!layout_form->opened())&&(!visibility||!visibility->opened());}
     void ready()const{need(editing(),"editor.unavailable");need(!fields_dirty,"editor.properties_pending");}
-    bool clear(){nodes.clear();if(canvas){atk_object_set_name(gtk_widget_get_accessible(canvas),"");if(!drawing)gtk_widget_queue_draw(canvas);}return true;}
+    bool clear(){nodes.clear();hidden.clear();diagnostics.clear();if(canvas){atk_object_set_name(gtk_widget_get_accessible(canvas),"");if(!drawing)gtk_widget_queue_draw(canvas);}return true;}
     void stop_preview(){gesture.reset();ticks.clear();if(surface)surface->close();clear();}
     void resolve_nodes(){
         // Input can arrive again before GTK's next draw. Resolve with the same
         // renderer now so a valid queued key is not mistaken for a hidden variant.
-        if(surface&&draft.available())surface->paint(now(),ticks,[this](auto,const v::SurfaceFrame* frame){if(frame)nodes=frame->layout.nodes;});
+        if(surface&&draft.available())surface->paint(now(),ticks,[this](auto,const v::SurfaceFrame* frame){if(frame)presentation(*frame);});
     }
     void preview(){
         if(!draft.available()||!resources){settings=nullptr;resources.reset();stop_preview();return;}
         settings["revision"]=(*draft.scene())["revision"];
-        v::SurfaceConfig cfg;cfg.authored={settings,*draft.scene()};cfg.resources=resources->catalog->resources(resources->selection,cfg.authored);cfg.topology=topology;cfg.capabilities=resources->capabilities;
+        v::SurfaceConfig cfg;cfg.authored={settings,*draft.scene()};cfg.resources=resources->catalog->resources(resources->selection,cfg.authored);cfg.topology=topology;cfg.capabilities=resources->capabilities;cfg.experimental_visibility=visibility_supported();
         if(surface&&surface->status().code==v::SurfaceCode::closed){need(surface->poll_image_jobs(),"editor.renderer_stopping");surface.reset();}
         if(surface)surface->replace(std::move(cfg),now());
         else surface=std::make_unique<v::SceneSurface>(authority,current,std::move(cfg),providers,[this]{return clear();},worker,v::SurfaceAudience::inspector);
@@ -114,9 +117,10 @@ struct EditorForm::Impl {
             if(id=="bindings")active=enabled&&selected&&draft.scene()->at("schema_version")!="0.2.0"&&(selected->at("kind")=="value"||selected->at("kind")=="status"||selected->at("kind")=="chart"||selected->at("kind")=="table");
             if(id=="layout")active=enabled&&selected;
             if(id=="insert")active=enabled&&draft.scene()&&draft.scene()->at("schema_version")!="0.2.0";
+            if(id=="visibility")active=enabled&&draft.visibility_available()&&!draft.selection().empty();
             if(id=="lock")active=enabled&&draft.locks_available()&&!draft.selection().empty();
-            if(protected_ids&&(id=="properties"||id=="duplicate"||id=="delete"||id=="group"||id=="ungroup"||id=="wrap"||id=="unwrap"||id=="layout"||id=="bindings"||id=="content"||id.substr(0,6)=="align-"||id.substr(0,6)=="space-"))active=false;
-            if((content&&content->opened())||(binding&&binding->opened())||(creation&&creation->opened())||(layout_form&&layout_form->opened()))active=false;
+            if(protected_ids&&(id=="properties"||id=="duplicate"||id=="delete"||id=="group"||id=="ungroup"||id=="wrap"||id=="unwrap"||id=="layout"||id=="bindings"||id=="content"||id=="visibility"||id.substr(0,6)=="align-"||id.substr(0,6)=="space-"))active=false;
+            if((content&&content->opened())||(binding&&binding->opened())||(creation&&creation->opened())||(layout_form&&layout_form->opened())||(visibility&&visibility->opened()))active=false;
             gtk_widget_set_sensitive(row.second,active);
         }
         const char* lock_label=own_locks()?"Unlock":"Lock";if(std::string(gtk_button_get_label(GTK_BUTTON(buttons.at("lock"))))!=lock_label){gtk_button_set_label(GTK_BUTTON(buttons.at("lock")),lock_label);accessible(buttons.at("lock"),lock_label,"editor.lock");}
@@ -136,6 +140,8 @@ struct EditorForm::Impl {
         else if(selected){const auto* n=node(draft.selection()[0]);value+=n?(n->variant<0?" Active layout: Base":" Active layout: Breakpoint "+std::to_string(n->variant+1)):" Not on this display";}
         if(selected&&edit_locked(*draft.scene(),draft.selection()[0]))value+=selected->value("edit_locked",false)?" Locked":" Locked by container";
         else if(protected_ids)value+=" Contains locked objects";
+        if(selected&&hidden.count(draft.selection()[0]))value+=" Content hidden by condition.";
+        else if(selected&&diagnostics.count(draft.selection()[0]))value+=" Conditional content has a diagnostic.";
         message(value);guide_feedback();updating=false;
     }
     void list(){
@@ -224,6 +230,9 @@ struct EditorForm::Impl {
                 auto edit=create_widget(*draft.scene(),input,"editor:proposed",{{"local_id",viewport().id}},content_choices(*snapshot));edit.widget["id"]=actions.widget_id();return draft.execute({edit});
             },[this](bool changed){if(changed)this->changed();else sync();},[this]{shut();});
             const auto snapshot=resources->catalog->resources(resources->selection,{settings,*draft.scene()});creation->open(*draft.scene(),draft.selection(),content_choices(*snapshot));sync();}
+        else if(id=="visibility"){ready();gesture.reset();need(draft.visibility_available()&&!draft.selection().empty()&&!protected_selection(),"editor.visibility_unavailable");
+            if(!visibility)visibility=std::make_unique<EditorVisibilityForm>(root,[this](const std::optional<SetWidgetVisibility>& edit){need(draft.visibility_available(),"editor.visibility_unavailable");return edit?draft.execute({*edit}):false;},[this](bool changed){if(changed)this->changed();else sync();},[this]{shut();});
+            visibility->open(*draft.scene(),draft.selection());sync();}
         else if(id=="bindings"){ready();gesture.reset();need(draft.selection().size()==1,"editor.selection");
             if(!binding)binding=std::make_unique<EditorBindingForm>(root,[this](const std::vector<SceneEdit>& edits){return draft.execute(edits);},[this](bool changed){if(changed)this->changed();else sync();},[this]{shut();});
             binding->open(authored_widget(*draft.scene(),draft.selection()[0]));sync();}
@@ -247,8 +256,8 @@ struct EditorForm::Impl {
         else {ready();if(id=="undo")draft.undo();else if(id=="redo")draft.redo();changed();}
     }
     void point(double x,double y,bool shift){
-        ready();gtk_widget_grab_focus(canvas);if(snap_grid||snap_guides)resolve_nodes();const auto& d=viewport();const double factor=gtk_widget_get_scale_factor(canvas);x=x*factor+d.pixel_x;y=y*factor+d.pixel_y;
-        const s::Node* hit=nullptr;for(auto i=nodes.rbegin();i!=nodes.rend();++i)if(i->display==d.id&&contains(i->pixels,x,y)){hit=&*i;break;}
+        ready();gtk_widget_grab_focus(canvas);if(visibility_supported()||snap_grid||snap_guides)resolve_nodes();const auto& d=viewport();const double factor=gtk_widget_get_scale_factor(canvas);x=x*factor+d.pixel_x;y=y*factor+d.pixel_y;
+        const s::Node* hit=nullptr;for(auto i=nodes.rbegin();i!=nodes.rend();++i)if(i->display==d.id&&!hidden.count(i->id)&&contains(i->pixels,x,y)){hit=&*i;break;}
         if(!hit){selected({});return;}const auto id=hit->id;auto ids=draft.selection();const auto found=std::find(ids.begin(),ids.end(),id);
         if(shift){if(found==ids.end())ids.push_back(id);else ids.erase(found);selected(std::move(ids));return;}
         if(found==ids.end())selected({id});
@@ -285,10 +294,10 @@ struct EditorForm::Impl {
         const auto d=viewport();const double factor=gtk_widget_get_scale_factor(canvas);cairo_save(cr);cairo_scale(cr,1/factor,1/factor);
         surface->paint(now(),ticks,[&](auto,const v::SurfaceFrame* frame){
             if(!frame)return;
-            nodes=frame->layout.nodes;std::string description;
-            for(const auto& w:frame->widgets){if(description.size()+w.accessible.size()>65536){description+="\nMore content in inspector";break;}description+=w.accessible+"\n";}
+            presentation(*frame);std::string description;
+            for(const auto& w:frame->widgets){if(!w.presented)continue;if(description.size()+w.accessible.size()>65536){description+="\nMore content in inspector";break;}description+=w.accessible+"\n";}
             atk_object_set_name(gtk_widget_get_accessible(canvas),description.c_str());
-            if(!gesture)for(const auto& image:frame->displays)if(image.display==d.id){
+            if(!gesture||draft.scene()->at("schema_version")=="0.5.0")for(const auto& image:frame->displays)if(image.display==d.id){
                 std::vector<std::uint32_t> argb(static_cast<std::size_t>(image.width)*image.height);for(std::size_t n=0;n<argb.size();++n)argb[n]=(static_cast<std::uint32_t>(image.rgba[n*4+3])<<24)|(static_cast<std::uint32_t>(image.rgba[n*4])<<16)|(static_cast<std::uint32_t>(image.rgba[n*4+1])<<8)|image.rgba[n*4+2];
                 auto* bitmap=cairo_image_surface_create_for_data(reinterpret_cast<unsigned char*>(argb.data()),CAIRO_FORMAT_ARGB32,static_cast<int>(image.width),static_cast<int>(image.height),static_cast<int>(image.width*4));cairo_set_source_surface(cr,bitmap,0,0);cairo_paint(cr);cairo_surface_destroy(bitmap);
             }
@@ -308,13 +317,19 @@ struct EditorForm::Impl {
             if(gesture&&gesture->input){const auto& r=gesture->result;cairo_set_source_rgb(cr,1,0,1);cairo_set_line_width(cr,1);
                 if(r.x){const double px=std::floor((r.x->position-d.bounds.x)*device_per_unit)+0.5;cairo_move_to(cr,px,0);cairo_line_to(cr,px,d.bounds.height*device_per_unit);}
                 if(r.y){const double py=std::floor((r.y->position-d.bounds.y)*device_per_unit)+0.5;cairo_move_to(cr,0,py);cairo_line_to(cr,d.bounds.width*device_per_unit,py);}cairo_stroke(cr);}
-        });cairo_restore(cr);sync();
+        });cairo_restore(cr);
+        // Selection can arrive after telemetry erased native caches but before
+        // this frame resolved them. Hydrate clean fields once geometry returns;
+        // never replace a user's pending property input during repaint.
+        const bool resolved_fields=!fields_dirty&&draft.selection().size()==1&&fixed(draft.selection()[0])&&field_variant!=node(draft.selection()[0])->variant;
+        sync(resolved_fields);
     }
-    void shut(){if(closed)return;closed=true;if(content)content->erase();if(binding)binding->erase();if(creation)creation->erase();if(layout_form)layout_form->erase();draft.close();fields_dirty=false;settings=nullptr;resources.reset();stop_preview();if(tree){list();sync(true);}}
+    void shut(){if(closed)return;closed=true;if(content)content->erase();if(binding)binding->erase();if(creation)creation->erase();if(layout_form)layout_form->erase();if(visibility)visibility->erase();draft.close();fields_dirty=false;settings=nullptr;resources.reset();stop_preview();if(tree){list();sync(true);}}
     template<class F> void event(F f)noexcept{try{if(!closed)f();}catch(const protocol::Error& e){gesture.reset();const std::string code=e.what();
         guide_feedback();error=code=="editor.number"?"Enter a number using digits and an optional decimal point.":code=="editor.layout_changed"?"Layout changed; Revert fields before applying.":
             code=="editor.arrange_geometry"||code=="editor.arrange_scope"?"Arrange needs fixed widgets in the same parent and display, with no size expansion.":
             code=="editor.group_geometry"||code=="editor.group_layout"||code=="editor.fixed"?"Grouping needs fixed layouts and a fixed or canvas parent, with no size expansion.":
+            code=="editor.visibility_container"?"Clear this container's visibility condition before removing it.":
             code=="editor.group_clip"?"Ungroup would reveal clipped content. Adjust the group or child layouts first.":
             code=="editor.spacing_overlap"?"There is not enough room for equal gaps between the endpoints.":"This edit could not be applied. Check the selection and property values.";
         message(error);gtk_widget_queue_draw(canvas);}catch(...){try{shut();}catch(...){}}}
@@ -342,7 +357,7 @@ EditorForm::EditorForm(c::Authority a,c::Policy p,c::Authored value,std::string 
     auto check=[&](GtkWidget* box,const char* id,const char* label){auto* w=i.own(gtk_check_button_new_with_label(label));i.buttons[id]=w;accessible(w,label,std::string("editor.")+id);g_object_set_data_full(G_OBJECT(w),"editor-action",g_strdup(id),g_free);gtk_box_pack_start(GTK_BOX(box),w,FALSE,FALSE,0);
         g_signal_connect(w,"toggled",G_CALLBACK(+[](GtkWidget* w,gpointer p){auto& o=*static_cast<Impl*>(p);o.event([&]{o.command(static_cast<const char*>(g_object_get_data(G_OBJECT(w),"editor-action")));});}),&i);};
     auto* snapping=gtk_box_new(GTK_ORIENTATION_HORIZONTAL,3);gtk_box_pack_start(GTK_BOX(side),snapping,FALSE,FALSE,0);check(snapping,"snap-grid","Snap to grid");check(snapping,"snap-guides","Snap to guides");
-    auto* grid=gtk_box_new(GTK_ORIENTATION_HORIZONTAL,3);gtk_box_pack_start(GTK_BOX(side),grid,FALSE,FALSE,0);check(grid,"show-grid","Show grid");button(grid,"grid-spacing","Grid 8 DIP");
+    auto* grid=gtk_box_new(GTK_ORIENTATION_HORIZONTAL,3);gtk_box_pack_start(GTK_BOX(side),grid,FALSE,FALSE,0);check(grid,"show-grid","Show grid");button(grid,"grid-spacing","Grid 8 DIP");button(grid,"visibility","Visibility");
     auto* containers=gtk_box_new(GTK_ORIENTATION_HORIZONTAL,3);gtk_box_pack_start(GTK_BOX(side),containers,FALSE,FALSE,0);button(containers,"wrap","Wrap...");button(containers,"unwrap","Unwrap...");button(containers,"lock","Lock");
     i.guidance=i.label("");accessible(i.guidance,"","editor.guidance");gtk_widget_set_size_request(i.guidance,-1,20);gtk_box_pack_start(GTK_BOX(containers),i.guidance,TRUE,TRUE,0);
     auto* bottom=gtk_box_new(GTK_ORIENTATION_HORIZONTAL,4);gtk_box_pack_start(GTK_BOX(i.root),bottom,FALSE,FALSE,0);button(bottom,"add","Add text");button(bottom,"duplicate","Duplicate");button(bottom,"delete","Delete");
@@ -375,17 +390,18 @@ EditorForm::~EditorForm()=default;
 GtkWidget* EditorForm::widget()const{impl_->owner();return impl_->root;}
 void EditorForm::complete(std::uint64_t ticket,const Json& result){auto& i=*impl_;i.owner();if(i.closed)return;try{if(i.draft.complete(ticket,result))i.changed();}catch(...){i.sync();throw;}}
 void EditorForm::reconciled(std::uint64_t ticket,const std::string& query,const std::string& epoch,const Json& result){auto& i=*impl_;i.owner();if(i.closed)return;try{if(i.draft.reconciled(ticket,query,epoch,result))i.changed();}catch(...){i.sync();throw;}}
-void EditorForm::disconnected(){auto& i=*impl_;i.owner();if(i.closed)return;if(i.content)i.content->erase();if(i.binding)i.binding->erase();if(i.creation)i.creation->erase();if(i.layout_form)i.layout_form->erase();i.draft.disconnected();i.gesture.reset();i.sync();}
-void EditorForm::policy(c::Policy policy){auto& i=*impl_;i.owner();if(i.closed)return;if(i.content)i.content->erase();if(i.binding)i.binding->erase();if(i.creation)i.creation->erase();if(i.layout_form)i.layout_form->erase();i.gesture.reset();i.draft.policy(policy);i.current=std::move(policy);if(i.surface)i.surface->policy(i.current,i.now());
+void EditorForm::disconnected(){auto& i=*impl_;i.owner();if(i.closed)return;if(i.content)i.content->erase();if(i.binding)i.binding->erase();if(i.creation)i.creation->erase();if(i.layout_form)i.layout_form->erase();if(i.visibility)i.visibility->erase();i.draft.disconnected();i.gesture.reset();i.sync();}
+void EditorForm::policy(c::Policy policy){auto& i=*impl_;i.owner();if(i.closed)return;if(i.content)i.content->erase();if(i.binding)i.binding->erase();if(i.creation)i.creation->erase();if(i.layout_form)i.layout_form->erase();if(i.visibility)i.visibility->erase();i.gesture.reset();i.draft.policy(policy);i.current=std::move(policy);if(i.surface)i.surface->policy(i.current,i.now());
     if(!i.draft.available()){i.settings=nullptr;i.resources.reset();i.stop_preview();i.list();}else i.resolve_nodes();i.sync();}
 void EditorForm::reload(c::Authored value,std::string epoch,SettingsResources resources){auto& i=*impl_;i.owner();if(i.closed)return;
     if(i.content)i.content->erase();
     if(i.binding)i.binding->erase();
     if(i.creation)i.creation->erase();
     if(i.layout_form)i.layout_form->erase();
+    if(i.visibility)i.visibility->erase();
     if(i.surface&&i.surface->status().code==v::SurfaceCode::closed)need(i.surface->poll_image_jobs(),"editor.renderer_stopping");
     i.draft.reload(value,std::move(epoch),resources);i.settings=std::move(value.settings);i.resources=std::move(resources);i.fields_dirty=false;i.changed();}
-void EditorForm::topology(s::Topology topology,std::string display){auto& i=*impl_;i.owner();if(i.closed)return;if(i.content)i.content->erase();if(i.binding)i.binding->erase();if(i.creation)i.creation->erase();if(i.layout_form)i.layout_form->erase();i.gesture.reset();i.topology=std::move(topology);i.display=std::move(display);i.preview();i.sync(!i.fields_dirty);}
+void EditorForm::topology(s::Topology topology,std::string display){auto& i=*impl_;i.owner();if(i.closed)return;if(i.content)i.content->erase();if(i.binding)i.binding->erase();if(i.creation)i.creation->erase();if(i.layout_form)i.layout_form->erase();if(i.visibility)i.visibility->erase();i.gesture.reset();i.topology=std::move(topology);i.display=std::move(display);i.preview();i.sync(!i.fields_dirty);}
 recovery::DataAttachment EditorForm::attach(const std::string& p,const protocol::TelemetryBinding& b,std::uint64_t now){auto& i=*impl_;i.owner();return i.surface?i.surface->attach(p,b,now):recovery::DataAttachment{recovery::DataCode::closed};}
 recovery::DataResult EditorForm::receive(const std::string& p,std::uint64_t t,std::uint64_t r,std::string_view bytes,std::uint64_t now,const model::Tick& tick){auto& i=*impl_;i.owner();if(!i.surface)return {recovery::DataCode::closed};const auto result=i.surface->receive(p,t,r,bytes,now,tick);i.ticks[p]=tick;return result;}
 recovery::DataCode EditorForm::heartbeat(const std::string& p,std::uint64_t t,std::uint64_t r,std::uint64_t q,std::uint64_t now){auto& i=*impl_;i.owner();return i.surface?i.surface->heartbeat(p,t,r,q,now):recovery::DataCode::closed;}

@@ -1,0 +1,74 @@
+[
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-08T01:21:12.317411+00:00",
+    "finished_at": "2026-10-08T01:21:18.674260+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2265101814,\n  \"linux_campaign_bytes\": 4568296794,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/visibility_controls_step.py",
+      "linux-x64-gcc13",
+      "build"
+    ],
+    "started_at": "2026-10-08T01:21:18.674668+00:00",
+    "finished_at": "2026-10-08T01:21:27.940883+00:00",
+    "exit": 0,
+    "stdout": "[1/2] Building CXX object CMakeFiles/syspane_editor_tests.dir/tests/editor/visibility_controls_tests.cpp.o\n[2/2] Linking CXX executable syspane_editor_tests\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-visibility-controls/linux-x64-gcc13-build-0fff420018\n",
+    "stderr": ""
+  },
+  {
+    "step": "test",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-08T01:21:27.941212+00:00",
+    "finished_at": "2026-10-08T01:21:28.602983+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2266820105,\n  \"linux_campaign_bytes\": 4568346357,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "test",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/visibility_controls_step.py",
+      "linux-x64-gcc13",
+      "test"
+    ],
+    "started_at": "2026-10-08T01:21:28.603265+00:00",
+    "finished_at": "2026-10-08T01:22:16.993113+00:00",
+    "exit": 8,
+    "stdout": "2: configuration.SCENE-CONTENT-SESSION .....   Passed    0.11 sec\n        Start 233: configuration.AUTH-SCHEMA\n122/159 Test #233: configuration.AUTH-SCHEMA ...............   Passed    0.05 sec\n        Start 234: configuration.TX-MIXED\n123/159 Test #234: configuration.TX-MIXED ..................   Passed    0.03 sec\n        Start 235: configuration.TX-CONFLICT\n124/159 Test #235: configuration.TX-CONFLICT ...............   Passed    0.03 sec\n        Start 236: configuration.TX-REPLAY\n125/159 Test #236: configuration.TX-REPLAY .................   Passed    0.04 sec\n        Start 237: configuration.TX-INTERRUPT\n126/159 Test #237: configuration.TX-INTERRUPT ..............   Passed    0.07 sec\n        Start 238: configuration.TX-BOUNDS\n127/159 Test #238: configuration.TX-BOUNDS .................   Passed    0.05 sec\n        Start 239: configuration.TX-CAPACITY\n128/159 Test #239: configuration.TX-CAPACITY ...............   Passed    1.14 sec\n        Start 240: configuration.DIGEST\n129/159 Test #240: configuration.DIGEST ....................   Passed    0.02 sec\n        Start 241: configuration.DIGEST-CONTENT\n130/159 Test #241: configuration.DIGEST-CONTENT ............   Passed    0.60 sec\n        Start 242: configuration.CONTENT-COMPOSE\n131/159 Test #242: configuration.CONTENT-COMPOSE ...........   Passed    0.06 sec\n        Start 243: configuration.CONTENT-PINS\n132/159 Test #243: configuration.CONTENT-PINS ..............   Passed    0.11 sec\n        Start 244: configuration.CONTENT-PATHS\n133/159 Test #244: configuration.CONTENT-PATHS .............   Passed    0.01 sec\n        Start 245: configuration.CONTENT-BOUNDS\n134/159 Test #245: configuration.CONTENT-BOUNDS ............   Passed    0.08 sec\n        Start 246: configuration.CONTENT-CAPABILITIES\n135/159 Test #246: configuration.CONTENT-CAPABILITIES ......   Passed    0.08 sec\n        Start 247: configuration.CONTENT-POLICY\n136/159 Test #247: configuration.CONTENT-POLICY ............   Passed    0.11 sec\n        Start 248: configuration.RESOURCE-COMMIT\n137/159 Test #248: configuration.RESOURCE-COMMIT ...........   Passed    0.13 sec\n        Start 249: configuration.RESOURCE-GUARDS\n138/159 Test #249: configuration.RESOURCE-GUARDS ...........   Passed    0.16 sec\n        Start 250: configuration.RESOURCE-SESSION\n139/159 Test #250: configuration.RESOURCE-SESSION ..........   Passed    0.09 sec\n        Start 251: configuration.RESOURCE-RETAINED\n140/159 Test #251: configuration.RESOURCE-RETAINED .........   Passed    0.21 sec\n        Start 288: composition.graph\n141/159 Test #288: composition.graph .......................   Passed    0.11 sec\n        Start 289: composition.reject_forbidden\n142/159 Test #289: composition.reject_forbidden ............   Passed    0.23 sec\n        Start 293: protocol.FRAME-01\n143/159 Test #293: protocol.FRAME-01 .......................   Passed    0.01 sec\n        Start 294: protocol.FRAME-02\n144/159 Test #294: protocol.FRAME-02 .......................   Passed    0.00 sec\n        Start 295: protocol.FRAME-03\n145/159 Test #295: protocol.FRAME-03 .......................   Passed    0.00 sec\n        Start 296: protocol.JSON-01\n146/159 Test #296: protocol.JSON-01 ........................   Passed    0.02 sec\n        Start 297: protocol.WIRE-01\n147/159 Test #297: protocol.WIRE-01 ........................   Passed    0.00 sec\n        Start 298: protocol.NEGOTIATE-01\n148/159 Test #298: protocol.NEGOTIATE-01 ...................   Passed    0.00 sec\n        Start 299: protocol.IPC-BUDGET-01\n149/159 Test #299: protocol.IPC-BUDGET-01 ..................   Passed    0.00 sec\n        Start 300: protocol.IPC-BUDGET-02\n150/159 Test #300: protocol.IPC-BUDGET-02 ..................   Passed    0.00 sec\n        Start 301: protocol.IPC-BUDGET-03\n151/159 Test #301: protocol.IPC-BUDGET-03 ..................   Passed    0.00 sec\n        Start 302: protocol.IPC-BUDGET-04\n152/159 Test #302: protocol.IPC-BUDGET-04 ..................   Passed    0.00 sec\n        Start 303: protocol.LEDGER-01\n153/159 Test #303: protocol.LEDGER-01 ......................   Passed    0.09 sec\n        Start 304: protocol.POLICY-01\n154/159 Test #304: protocol.POLICY-01 ......................   Passed    0.00 sec\n        Start 305: protocol.POLICY-02\n155/159 Test #305: protocol.POLICY-02 ......................   Passed    0.00 sec\n        Start 306: protocol.DISCLOSURE-01\n156/159 Test #306: protocol.DISCLOSURE-01 ..................   Passed    0.00 sec\n        Start 307: protocol.QUEUE-01\n157/159 Test #307: protocol.QUEUE-01 .......................   Passed    0.00 sec\n        Start 308: protocol.SESSION-01\n158/159 Test #308: protocol.SESSION-01 .....................   Passed    0.01 sec\n        Start 309: protocol.dependencies\n159/159 Test #309: protocol.dependencies ...................   Passed    0.04 sec\n\n99% tests passed, 2 tests failed out of 159\n\nTotal Test time (real) =  42.89 sec\n\nThe following tests FAILED:\n\t 83 - editor.VCTL-INPUT (Failed)\n\t 86 - editor.VCTL-ATOMIC (Failed)\n Errors while running CTest\n\nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-visibility-controls/linux-x64-gcc13-test-b158bb7e2c\n",
+    "stderr": ""
+  }
+]

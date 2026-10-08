@@ -1,0 +1,74 @@
+[
+  {
+    "step": "configure",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-08T00:54:03.032053+00:00",
+    "finished_at": "2026-10-08T00:54:09.793044+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2325231623,\n  \"linux_campaign_bytes\": 4605399294,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "configure",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/visibility_controls_step.py",
+      "linux-x64-gcc13",
+      "configure"
+    ],
+    "started_at": "2026-10-08T00:54:09.793752+00:00",
+    "finished_at": "2026-10-08T00:54:20.411622+00:00",
+    "exit": 0,
+    "stdout": "Preset CMake variables:\n\n  BUILD_TESTING=\"ON\"\n  CMAKE_BUILD_TYPE=\"Debug\"\n  CMAKE_CXX_COMPILER=\"g++\"\n  SYSPANE_PROFILE=\"linux-x64-gcc13\"\n\nprofile verified: linux-x64-gcc13\nvendored dependency digests: pass\ndiagnostic toolkit verified: GTK 3.24.41 / Ubuntu 3.24.41-4ubuntu1.3\nnative text dependency identity verified: 358 files\nnative image dependencies verified: 344 files\nnative GJS clock build dependencies verified\n-- Configuring done (5.9s)\n-- Generating done (0.1s)\n-- Build files have been written to: /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-visibility-controls/linux-x64-gcc13-configure-e7f9363728\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-08T00:54:20.411936+00:00",
+    "finished_at": "2026-10-08T00:54:21.072767+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2326949968,\n  \"linux_campaign_bytes\": 4605399040,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/visibility_controls_step.py",
+      "linux-x64-gcc13",
+      "build"
+    ],
+    "started_at": "2026-10-08T00:54:21.073062+00:00",
+    "finished_at": "2026-10-08T00:54:29.433538+00:00",
+    "exit": 1,
+    "stdout": "[1/7] Building CXX object CMakeFiles/syspane_editor_draft.dir/source/interfaces/editor_visibility.cpp.o\n[2/7] Linking CXX static library libsyspane_editor_draft.a\n[3/7] Linking CXX executable syspane_large_command_tests\n[4/7] Building CXX object CMakeFiles/syspane_editor_form.dir/source/interfaces/editor_visibility_form_linux.cpp.o\nFAILED: CMakeFiles/syspane_editor_form.dir/source/interfaces/editor_visibility_form_linux.cpp.o \n/usr/bin/g++ -DJSON_DIAGNOSTICS=0 -DJSON_DIAGNOSTIC_POSITIONS=1 -I/mnt/d/Projects/SysPane/syspane/source/interfaces -I/mnt/d/Projects/SysPane/syspane/source/configuration -I/mnt/d/Projects/SysPane/syspane/source/protocol -I/mnt/d/Projects/SysPane/syspane/source/scene -I/mnt/d/Projects/SysPane/syspane/source/diagnostics -I/mnt/d/Projects/SysPane/syspane/source/model -I/mnt/d/Projects/SysPane/syspane/source/rendering -I/mnt/d/Projects/SysPane/syspane/source/platform -isystem /mnt/d/Projects/SysPane/syspane/source/third_party -isystem /usr/include/gtk-3.0 -isystem /usr/include/pango-1.0 -isystem /usr/include/glib-2.0 -isystem /usr/lib/x86_64-linux-gnu/glib-2.0/include -isystem /usr/include/harfbuzz -isystem /usr/include/freetype2 -isystem /usr/include/libpng16 -isystem /usr/include/libmount -isystem /usr/include/blkid -isystem /usr/include/fribidi -isystem /usr/include/cairo -isystem /usr/include/pixman-1 -isystem /usr/include/gdk-pixbuf-2.0 -isystem /usr/include/webp -isystem /usr/include/gio-unix-2.0 -isystem /usr/include/atk-1.0 -isystem /usr/include/at-spi2-atk/2.0 -isystem /usr/include/at-spi-2.0 -isystem /usr/include/dbus-1.0 -isystem /usr/lib/x86_64-linux-gnu/dbus-1.0/include -g -std=c++17 -Wall -Wextra -Wpedantic -Werror -march=x86-64 -mtune=generic -pthread -MD -MT CMakeFiles/syspane_editor_form.dir/source/interfaces/editor_visibility_form_linux.cpp.o -MF CMakeFiles/syspane_editor_form.dir/source/interfaces/editor_visibility_form_linux.cpp.o.d -o CMakeFiles/syspane_editor_form.dir/source/interfaces/editor_visibility_form_linux.cpp.o -c /mnt/d/Projects/SysPane/syspane/source/interfaces/editor_visibility_form_linux.cpp\n/mnt/d/Projects/SysPane/syspane/source/interfaces/editor_visibility_form_linux.cpp:23:35: error: macro \"G_CALLBACK\" passed 2 arguments, but takes just 1\n   23 |         }),GUINT_TO_POINTER(limit));}\n      |                                   ^\nIn file included from /usr/include/glib-2.0/gobject/gobject.h:29,\n                 from /usr/include/glib-2.0/gobject/gbinding.h:31,\n                 from /usr/include/glib-2.0/glib-object.h:24,\n                 from /usr/include/glib-2.0/gio/gioenums.h:30,\n                 from /usr/include/glib-2.0/gio/giotypes.h:30,\n                 from /usr/include/glib-2.0/gio/gio.h:28,\n                 from /usr/include/gtk-3.0/gdk/gdkapplaunchcontext.h:28,\n                 from /usr/include/gtk-3.0/gdk/gdk.h:32,\n                 from /usr/include/gtk-3.0/gtk/gtk.h:30,\n                 from /mnt/d/Projects/SysPane/syspane/source/interfaces/editor_visibility_form_linux.cpp:4:\n/usr/include/glib-2.0/gobject/gclosure.h:73: note: macro \"G_CALLBACK\" defined here\n   73 | #define G_CALLBACK(f)                    ((GCallback) (f))\n      | \nIn file included from /usr/include/glib-2.0/gobject/gobject.h:30:\n/mnt/d/Projects/SysPane/syspane/source/interfaces/editor_visibility_form_linux.cpp: In member function \u2018void syspane::interfaces::EditorVisibilityForm::Impl::field(const char*, const char*, unsigned int, bool)\u2019:\n/mnt/d/Projects/SysPane/syspane/source/interfaces/editor_visibility_form_linux.cpp:20:83: error: \u2018G_CALLBACK\u2019 was not declared in this scope\n   20 |         g_signal_connect(gtk_text_view_get_buffer(GTK_TEXT_VIEW(w)),\"insert-text\",G_CALLBACK(+[](GtkTextBuffer* b,GtkTextIter*,gchar*,gint n,gpointer data){\n      |                                                                                   ^~~~~~~~~~\n[5/7] Linking CXX executable syspane_editor_tests\nninja: build stopped: subcommand failed.\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-visibility-controls/linux-x64-gcc13-build-1b2e26bb19\n",
+    "stderr": ""
+  }
+]

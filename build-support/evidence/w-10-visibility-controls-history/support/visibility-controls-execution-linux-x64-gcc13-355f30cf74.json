@@ -1,0 +1,74 @@
+[
+  {
+    "step": "configure",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-08T01:22:50.989272+00:00",
+    "finished_at": "2026-10-08T01:22:51.823526+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2268571449,\n  \"linux_campaign_bytes\": 4568444395,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "configure",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/visibility_controls_step.py",
+      "linux-x64-gcc13",
+      "configure"
+    ],
+    "started_at": "2026-10-08T01:22:51.824446+00:00",
+    "finished_at": "2026-10-08T01:23:02.482141+00:00",
+    "exit": 0,
+    "stdout": "Preset CMake variables:\n\n  BUILD_TESTING=\"ON\"\n  CMAKE_BUILD_TYPE=\"Debug\"\n  CMAKE_CXX_COMPILER=\"g++\"\n  SYSPANE_PROFILE=\"linux-x64-gcc13\"\n\nprofile verified: linux-x64-gcc13\nvendored dependency digests: pass\ndiagnostic toolkit verified: GTK 3.24.41 / Ubuntu 3.24.41-4ubuntu1.3\nnative text dependency identity verified: 358 files\nnative image dependencies verified: 344 files\nnative GJS clock build dependencies verified\n-- Configuring done (6.1s)\n-- Generating done (0.1s)\n-- Build files have been written to: /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-visibility-controls/linux-x64-gcc13-configure-b230c0a129\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-08T01:23:02.482442+00:00",
+    "finished_at": "2026-10-08T01:23:03.143389+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2270292085,\n  \"linux_campaign_bytes\": 4568445109,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/visibility_controls_step.py",
+      "linux-x64-gcc13",
+      "build"
+    ],
+    "started_at": "2026-10-08T01:23:03.143694+00:00",
+    "finished_at": "2026-10-08T01:23:11.395901+00:00",
+    "exit": 1,
+    "stdout": "[1/23] Building CXX object CMakeFiles/syspane_authored.dir/source/configuration/authored_equal.cpp.o\nFAILED: CMakeFiles/syspane_authored.dir/source/configuration/authored_equal.cpp.o \n/usr/bin/g++ -DJSON_DIAGNOSTICS=0 -DJSON_DIAGNOSTIC_POSITIONS=1 -I/mnt/d/Projects/SysPane/syspane/source/configuration -I/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/generated -I/mnt/d/Projects/SysPane/syspane/source/protocol -isystem /mnt/d/Projects/SysPane/syspane/source/third_party -g -std=c++17 -Wall -Wextra -Wpedantic -Werror -march=x86-64 -mtune=generic -MD -MT CMakeFiles/syspane_authored.dir/source/configuration/authored_equal.cpp.o -MF CMakeFiles/syspane_authored.dir/source/configuration/authored_equal.cpp.o.d -o CMakeFiles/syspane_authored.dir/source/configuration/authored_equal.cpp.o -c /mnt/d/Projects/SysPane/syspane/source/configuration/authored_equal.cpp\nIn file included from /usr/include/c++/13/algorithm:60,\n                 from /mnt/d/Projects/SysPane/syspane/source/third_party/nlohmann/json.hpp:21,\n                 from /mnt/d/Projects/SysPane/syspane/source/protocol/wire.hpp:2,\n                 from /mnt/d/Projects/SysPane/syspane/source/configuration/policy.hpp:2,\n                 from /mnt/d/Projects/SysPane/syspane/source/configuration/authored.hpp:2,\n                 from /mnt/d/Projects/SysPane/syspane/source/configuration/authored_equal.hpp:2,\n                 from /mnt/d/Projects/SysPane/syspane/source/configuration/authored_equal.cpp:1:\n/usr/include/c++/13/bits/stl_algobase.h: In instantiation of \u2018bool std::__equal_aux1(_II1, _II1, _II2) [with _II1 = nlohmann::json_abi_dp_v3_12_0::basic_json<>; _II2 = int]\u2019:\n/usr/include/c++/13/bits/stl_algobase.h:1227:31:   required from \u2018bool std::__equal_aux(_II1, _II1, _II2) [with _II1 = nlohmann::json_abi_dp_v3_12_0::basic_json<>; _II2 = int]\u2019\n/usr/include/c++/13/bits/stl_algobase.h:1557:30:   required from \u2018bool std::equal(_II1, _II1, _II2) [with _II1 = nlohmann::json_abi_dp_v3_12_0::basic_json<>; _II2 = int]\u2019\n/mnt/d/Projects/SysPane/syspane/source/configuration/authored_equal.cpp:32:69:   required from here\n/usr/include/c++/13/bits/stl_algobase.h:1215:58: error: no type named \u2018value_type\u2019 in \u2018struct std::iterator_traits<nlohmann::json_abi_dp_v3_12_0::basic_json<> >\u2019\n 1215 |       typedef typename iterator_traits<_II1>::value_type _ValueType1;\n      |                                                          ^~~~~~~~~~~\n/usr/include/c++/13/bits/stl_algobase.h:1216:58: error: no type named \u2018value_type\u2019 in \u2018struct std::iterator_traits<nlohmann::json_abi_dp_v3_12_0::basic_json<> >\u2019\n 1216 |       const bool __simple = ((__is_integer<_ValueType1>::__value\n      |                                                          ^~~~~~~\n/usr/include/c++/13/bits/stl_algobase.h:1217:61: error: no type named \u2018value_type\u2019 in \u2018struct std::iterator_traits<nlohmann::json_abi_dp_v3_12_0::basic_json<> >\u2019\n 1217 |                               || __is_pointer<_ValueType1>::__value)\n      |                                                             ^~~~~~~\n[2/23] Building CXX object CMakeFiles/syspane_editor_draft.dir/source/interfaces/editor_visibility.cpp.o\n[3/23] Building CXX object CMakeFiles/syspane_settings_draft.dir/source/interfaces/settings_draft.cpp.o\n[4/23] Building CXX object CMakeFiles/syspane_editor_draft.dir/source/interfaces/editor_draft.cpp.o\nninja: build stopped: subcommand failed.\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-visibility-controls/linux-x64-gcc13-build-489e47e531\n",
+    "stderr": ""
+  }
+]

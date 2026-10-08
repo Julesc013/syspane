@@ -98,8 +98,8 @@ The [visibility package](../delivery/packages/w-09-visibility.md) defines one bo
 comparison over a current policy-bound singleton, exact numeric/unit behavior and
 explicit unresolved outcomes. The standalone [visibility schema](../contracts/visibility.schema.json)
 and shared evaluator are a prerequisite, not an extension to existing scenes.
-Versioned authored admission is recorded below. Native status/group composition
-and editor controls remain required before enablement. The [evaluator handoff](../delivery/visibility-handoff.md)
+Versioned authored admission, native status/group composition and trusted editor
+integration are recorded below. The [evaluator handoff](../delivery/visibility-handoff.md)
 records the earlier shared prerequisite.
 
 ## Versioned conditional scenes
@@ -122,5 +122,9 @@ resolves unchanged layout, then masks payloads through the shared borrowed decis
 tree. Unresolved conditions and mandatory source states remain status-only diagnostics;
 hidden groups promote diagnostic descendants in the inspector. Warning overflow or
 intersection returns an explicit alternative instead of clipping or changing geometry.
-Private native controls, selection/gesture behavior and durable recovery integration
-remain required before ordinary editor or installed enablement.
+The [native controls package](../delivery/packages/w-10-visibility-controls.md) now
+admits the trusted EditorForm component after its capability gate. It preserves
+authored-list selection, captured gesture geometry, current conditional diagnostics
+and exact durable rules. Installed entry paths and other native adapters still need
+their own ownership and qualification evidence; direct SceneSurface default refusal
+remains unchanged.

@@ -7,12 +7,13 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
-The [native visibility experiment](spec/delivery/native-visibility-handoff.md) now preserves layout while hiding
-conditional content, keeps source/condition diagnostics visible and erases hidden
-pixels and inspector payloads. All seven primitive kinds and independent X11/AT-SPI
-fault controls pass. This requires an explicit development opt-in; native rule
-controls and ordinary editor/installed enablement remain the next gate. No complete
-edition or new target qualification is claimed.
+The [native visibility controls](spec/delivery/visibility-controls-handoff.md) now edit
+bounded conditions through the existing draft and persistence owners. Hidden objects
+remain selectable in the authored list; current condition diagnostics continue during
+held gestures. Nested private buffers erase on cancellation or loss of authority.
+The trusted Linux editor component can enable scene 0.5 after capability admission.
+Installed ownership, native platform qualification and all five complete editions
+remain open.
 
 The earlier [borrowed visibility composition checkpoint](spec/delivery/visibility-composition-handoff.md)
 provides the bounded batch reads and group/child decisions used by that experiment.
@@ -20,14 +21,14 @@ Hidden ancestors cannot suppress unresolved child diagnostics.
 
 The [visibility-admission checkpoint](spec/delivery/visibility-admission-handoff.md)
 adds scene 0.5, negotiated command 0.7, protected typed edits and exact durable
-recovery. Ordinary conditional scenes still report an unavailable renderer until
-native controls and their integration checks pass; only the experiment opts in. This is a component checkpoint; the
-five complete editions and their release qualification remain open.
+recovery. The native controls above now close the trusted EditorForm integration
+gate. Direct SceneSurface consumers retain default refusal unless explicitly admitted;
+installed ownership and release qualification remain open.
 
 The earlier [conditional-visibility evaluator](spec/delivery/visibility-handoff.md) now
 compares policy-bound singleton values with exact numeric and unit semantics.
 Missing, stale, denied and disconnected inputs remain explicit unresolved outcomes.
-Native controls/rendering remain required after the authored admission above;
+The native controls above supply the admitted Linux component integration;
 the evaluator alone does not enable conditional widgets.
 
 The [image-validation checkpoint](spec/delivery/runtime-observation-handoff.md)

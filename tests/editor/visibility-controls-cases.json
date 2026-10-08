@@ -1,0 +1,1121 @@
+{
+  "authored": {
+    "scene": {
+      "extensions": {
+        "author.note": {
+          "preserve": [
+            "x",
+            1,
+            false
+          ]
+        }
+      },
+      "revision": "40",
+      "roots": [
+        "widget:text",
+        "widget:second",
+        "widget:image"
+      ],
+      "scene_id": "scene:content",
+      "schema_version": "0.3.0",
+      "theme_id": null,
+      "widgets": [
+        {
+          "bindings": [],
+          "content": {
+            "body": "Editable pane\nMove me"
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:text",
+          "kind": "text",
+          "layout": {
+            "base": {
+              "height": 80,
+              "kind": "fixed",
+              "width": 180,
+              "x": 40,
+              "y": 40
+            }
+          },
+          "priority": "normal",
+          "title": "Editable pane"
+        },
+        {
+          "bindings": [],
+          "content": {
+            "body": "Second pane"
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:second",
+          "kind": "text",
+          "layout": {
+            "base": {
+              "height": 80,
+              "kind": "fixed",
+              "width": 180,
+              "x": 280,
+              "y": 40
+            }
+          },
+          "priority": "normal",
+          "title": "Second pane"
+        },
+        {
+          "bindings": [],
+          "content": {
+            "alt": "Public sample image",
+            "asset": {
+              "package": {
+                "id": "package:settings-native",
+                "sha256": "82793f6c05865da00783ae14aa4468c5483d42f06cfbdabde757ba0b3bfdfb7b",
+                "version": "0.1.0"
+              },
+              "path": "images/pixel.png",
+              "sha256": "78253200c249d4d84293b2a1e6fc803adedeba8645f38d6bc2f6734a2dfacec9"
+            },
+            "fit": "contain",
+            "height_dip": 64,
+            "width_dip": 64
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:image",
+          "kind": "image",
+          "layout": {
+            "base": {
+              "height": 100,
+              "kind": "fixed",
+              "width": 160,
+              "x": 40,
+              "y": 180
+            }
+          },
+          "priority": "normal",
+          "title": "Image"
+        }
+      ]
+    },
+    "settings": {
+      "display": {
+        "enabled": true,
+        "reduced_motion": true,
+        "theme_id": "theme:native"
+      },
+      "history": {
+        "persistent": false,
+        "segment_bytes": 10485760,
+        "segments": 5
+      },
+      "privacy": {
+        "export_enabled": false,
+        "remote_probes": false
+      },
+      "revision": "40",
+      "sampling": {
+        "max_workers": 4,
+        "reconcile_ms": 10000,
+        "resources_ms": 1000
+      },
+      "schema_version": "0.1.0"
+    }
+  },
+  "rule": {
+    "schema_version": "0.1.0",
+    "binding": {
+      "kind": "selector",
+      "scope": {
+        "kind": "local_host"
+      },
+      "entity_type": "network.interface",
+      "field": "network.receive_bytes",
+      "predicates": [],
+      "mode": "singleton",
+      "sort": [],
+      "limit": 1
+    },
+    "op": "gt",
+    "value": 0,
+    "unit": "byte"
+  },
+  "erase_ms": 200,
+  "conditional": {
+    "extensions": {
+      "author.note": {
+        "preserve": [
+          "x",
+          1,
+          false
+        ]
+      }
+    },
+    "revision": "40",
+    "roots": [
+      "widget:text",
+      "widget:second",
+      "widget:image"
+    ],
+    "scene_id": "scene:content",
+    "schema_version": "0.5.0",
+    "theme_id": null,
+    "widgets": [
+      {
+        "bindings": [],
+        "content": {
+          "body": "Editable pane\nMove me"
+        },
+        "display": {
+          "local_id": "D1"
+        },
+        "id": "widget:text",
+        "kind": "text",
+        "layout": {
+          "base": {
+            "height": 80,
+            "kind": "fixed",
+            "width": 180,
+            "x": 40,
+            "y": 40
+          }
+        },
+        "priority": "normal",
+        "title": "Editable pane",
+        "visibility": {
+          "schema_version": "0.1.0",
+          "binding": {
+            "kind": "selector",
+            "scope": {
+              "kind": "local_host"
+            },
+            "entity_type": "network.interface",
+            "field": "network.receive_bytes",
+            "predicates": [],
+            "mode": "singleton",
+            "sort": [],
+            "limit": 1
+          },
+          "op": "gt",
+          "value": 0,
+          "unit": "byte"
+        }
+      },
+      {
+        "bindings": [],
+        "content": {
+          "body": "Second pane"
+        },
+        "display": {
+          "local_id": "D1"
+        },
+        "id": "widget:second",
+        "kind": "text",
+        "layout": {
+          "base": {
+            "height": 80,
+            "kind": "fixed",
+            "width": 180,
+            "x": 280,
+            "y": 40
+          }
+        },
+        "priority": "normal",
+        "title": "Second pane"
+      },
+      {
+        "bindings": [],
+        "content": {
+          "alt": "Public sample image",
+          "asset": {
+            "package": {
+              "id": "package:settings-native",
+              "sha256": "82793f6c05865da00783ae14aa4468c5483d42f06cfbdabde757ba0b3bfdfb7b",
+              "version": "0.1.0"
+            },
+            "path": "images/pixel.png",
+            "sha256": "78253200c249d4d84293b2a1e6fc803adedeba8645f38d6bc2f6734a2dfacec9"
+          },
+          "fit": "contain",
+          "height_dip": 64,
+          "width_dip": 64
+        },
+        "display": {
+          "local_id": "D1"
+        },
+        "id": "widget:image",
+        "kind": "image",
+        "layout": {
+          "base": {
+            "height": 100,
+            "kind": "fixed",
+            "width": 160,
+            "x": 40,
+            "y": 180
+          }
+        },
+        "priority": "normal",
+        "title": "Image"
+      }
+    ]
+  },
+  "hidden_rule": {
+    "schema_version": "0.1.0",
+    "binding": {
+      "kind": "selector",
+      "scope": {
+        "kind": "local_host"
+      },
+      "entity_type": "network.interface",
+      "field": "network.receive_bytes",
+      "predicates": [],
+      "mode": "singleton",
+      "sort": [],
+      "limit": 1
+    },
+    "op": "eq",
+    "value": 0,
+    "unit": "byte"
+  },
+  "hidden": {
+    "extensions": {
+      "author.note": {
+        "preserve": [
+          "x",
+          1,
+          false
+        ]
+      }
+    },
+    "revision": "40",
+    "roots": [
+      "widget:text",
+      "widget:second",
+      "widget:image"
+    ],
+    "scene_id": "scene:content",
+    "schema_version": "0.5.0",
+    "theme_id": null,
+    "widgets": [
+      {
+        "bindings": [],
+        "content": {
+          "body": "Editable pane\nMove me"
+        },
+        "display": {
+          "local_id": "D1"
+        },
+        "id": "widget:text",
+        "kind": "text",
+        "layout": {
+          "base": {
+            "height": 80,
+            "kind": "fixed",
+            "width": 180,
+            "x": 40,
+            "y": 40
+          }
+        },
+        "priority": "normal",
+        "title": "Editable pane",
+        "visibility": {
+          "schema_version": "0.1.0",
+          "binding": {
+            "kind": "selector",
+            "scope": {
+              "kind": "local_host"
+            },
+            "entity_type": "network.interface",
+            "field": "network.receive_bytes",
+            "predicates": [],
+            "mode": "singleton",
+            "sort": [],
+            "limit": 1
+          },
+          "op": "eq",
+          "value": 0,
+          "unit": "byte"
+        }
+      },
+      {
+        "bindings": [],
+        "content": {
+          "body": "Second pane"
+        },
+        "display": {
+          "local_id": "D1"
+        },
+        "id": "widget:second",
+        "kind": "text",
+        "layout": {
+          "base": {
+            "height": 80,
+            "kind": "fixed",
+            "width": 180,
+            "x": 280,
+            "y": 40
+          }
+        },
+        "priority": "normal",
+        "title": "Second pane"
+      },
+      {
+        "bindings": [],
+        "content": {
+          "alt": "Public sample image",
+          "asset": {
+            "package": {
+              "id": "package:settings-native",
+              "sha256": "82793f6c05865da00783ae14aa4468c5483d42f06cfbdabde757ba0b3bfdfb7b",
+              "version": "0.1.0"
+            },
+            "path": "images/pixel.png",
+            "sha256": "78253200c249d4d84293b2a1e6fc803adedeba8645f38d6bc2f6734a2dfacec9"
+          },
+          "fit": "contain",
+          "height_dip": 64,
+          "width_dip": 64
+        },
+        "display": {
+          "local_id": "D1"
+        },
+        "id": "widget:image",
+        "kind": "image",
+        "layout": {
+          "base": {
+            "height": 100,
+            "kind": "fixed",
+            "width": 160,
+            "x": 40,
+            "y": 180
+          }
+        },
+        "priority": "normal",
+        "title": "Image"
+      }
+    ]
+  },
+  "multi": {
+    "extensions": {
+      "author.note": {
+        "preserve": [
+          "x",
+          1,
+          false
+        ]
+      }
+    },
+    "revision": "40",
+    "roots": [
+      "widget:text",
+      "widget:second",
+      "widget:image"
+    ],
+    "scene_id": "scene:content",
+    "schema_version": "0.5.0",
+    "theme_id": null,
+    "widgets": [
+      {
+        "bindings": [],
+        "content": {
+          "body": "Editable pane\nMove me"
+        },
+        "display": {
+          "local_id": "D1"
+        },
+        "id": "widget:text",
+        "kind": "text",
+        "layout": {
+          "base": {
+            "height": 80,
+            "kind": "fixed",
+            "width": 180,
+            "x": 40,
+            "y": 40
+          }
+        },
+        "priority": "normal",
+        "title": "Editable pane",
+        "visibility": {
+          "schema_version": "0.1.0",
+          "binding": {
+            "kind": "selector",
+            "scope": {
+              "kind": "local_host"
+            },
+            "entity_type": "network.interface",
+            "field": "network.receive_bytes",
+            "predicates": [],
+            "mode": "singleton",
+            "sort": [],
+            "limit": 1
+          },
+          "op": "eq",
+          "value": 0,
+          "unit": "byte"
+        }
+      },
+      {
+        "bindings": [],
+        "content": {
+          "body": "Second pane"
+        },
+        "display": {
+          "local_id": "D1"
+        },
+        "id": "widget:second",
+        "kind": "text",
+        "layout": {
+          "base": {
+            "height": 80,
+            "kind": "fixed",
+            "width": 180,
+            "x": 280,
+            "y": 40
+          }
+        },
+        "priority": "normal",
+        "title": "Second pane",
+        "visibility": {
+          "schema_version": "0.1.0",
+          "binding": {
+            "kind": "selector",
+            "scope": {
+              "kind": "local_host"
+            },
+            "entity_type": "network.interface",
+            "field": "network.receive_bytes",
+            "predicates": [],
+            "mode": "singleton",
+            "sort": [],
+            "limit": 1
+          },
+          "op": "eq",
+          "value": 0,
+          "unit": "byte"
+        }
+      },
+      {
+        "bindings": [],
+        "content": {
+          "alt": "Public sample image",
+          "asset": {
+            "package": {
+              "id": "package:settings-native",
+              "sha256": "82793f6c05865da00783ae14aa4468c5483d42f06cfbdabde757ba0b3bfdfb7b",
+              "version": "0.1.0"
+            },
+            "path": "images/pixel.png",
+            "sha256": "78253200c249d4d84293b2a1e6fc803adedeba8645f38d6bc2f6734a2dfacec9"
+          },
+          "fit": "contain",
+          "height_dip": 64,
+          "width_dip": 64
+        },
+        "display": {
+          "local_id": "D1"
+        },
+        "id": "widget:image",
+        "kind": "image",
+        "layout": {
+          "base": {
+            "height": 100,
+            "kind": "fixed",
+            "width": 160,
+            "x": 40,
+            "y": 180
+          }
+        },
+        "priority": "normal",
+        "title": "Image"
+      }
+    ]
+  },
+  "cleared": {
+    "extensions": {
+      "author.note": {
+        "preserve": [
+          "x",
+          1,
+          false
+        ]
+      }
+    },
+    "revision": "40",
+    "roots": [
+      "widget:text",
+      "widget:second",
+      "widget:image"
+    ],
+    "scene_id": "scene:content",
+    "schema_version": "0.5.0",
+    "theme_id": null,
+    "widgets": [
+      {
+        "bindings": [],
+        "content": {
+          "body": "Editable pane\nMove me"
+        },
+        "display": {
+          "local_id": "D1"
+        },
+        "id": "widget:text",
+        "kind": "text",
+        "layout": {
+          "base": {
+            "height": 80,
+            "kind": "fixed",
+            "width": 180,
+            "x": 40,
+            "y": 40
+          }
+        },
+        "priority": "normal",
+        "title": "Editable pane"
+      },
+      {
+        "bindings": [],
+        "content": {
+          "body": "Second pane"
+        },
+        "display": {
+          "local_id": "D1"
+        },
+        "id": "widget:second",
+        "kind": "text",
+        "layout": {
+          "base": {
+            "height": 80,
+            "kind": "fixed",
+            "width": 180,
+            "x": 280,
+            "y": 40
+          }
+        },
+        "priority": "normal",
+        "title": "Second pane"
+      },
+      {
+        "bindings": [],
+        "content": {
+          "alt": "Public sample image",
+          "asset": {
+            "package": {
+              "id": "package:settings-native",
+              "sha256": "82793f6c05865da00783ae14aa4468c5483d42f06cfbdabde757ba0b3bfdfb7b",
+              "version": "0.1.0"
+            },
+            "path": "images/pixel.png",
+            "sha256": "78253200c249d4d84293b2a1e6fc803adedeba8645f38d6bc2f6734a2dfacec9"
+          },
+          "fit": "contain",
+          "height_dip": 64,
+          "width_dip": 64
+        },
+        "display": {
+          "local_id": "D1"
+        },
+        "id": "widget:image",
+        "kind": "image",
+        "layout": {
+          "base": {
+            "height": 100,
+            "kind": "fixed",
+            "width": 160,
+            "x": 40,
+            "y": 180
+          }
+        },
+        "priority": "normal",
+        "title": "Image"
+      }
+    ]
+  },
+  "moved_hidden": {
+    "extensions": {
+      "author.note": {
+        "preserve": [
+          "x",
+          1,
+          false
+        ]
+      }
+    },
+    "revision": "40",
+    "roots": [
+      "widget:text",
+      "widget:second",
+      "widget:image"
+    ],
+    "scene_id": "scene:content",
+    "schema_version": "0.5.0",
+    "theme_id": null,
+    "widgets": [
+      {
+        "bindings": [],
+        "content": {
+          "body": "Editable pane\nMove me"
+        },
+        "display": {
+          "local_id": "D1"
+        },
+        "id": "widget:text",
+        "kind": "text",
+        "layout": {
+          "base": {
+            "height": 80,
+            "kind": "fixed",
+            "width": 180,
+            "x": 60,
+            "y": 40
+          }
+        },
+        "priority": "normal",
+        "title": "Editable pane",
+        "visibility": {
+          "schema_version": "0.1.0",
+          "binding": {
+            "kind": "selector",
+            "scope": {
+              "kind": "local_host"
+            },
+            "entity_type": "network.interface",
+            "field": "network.receive_bytes",
+            "predicates": [],
+            "mode": "singleton",
+            "sort": [],
+            "limit": 1
+          },
+          "op": "eq",
+          "value": 0,
+          "unit": "byte"
+        }
+      },
+      {
+        "bindings": [],
+        "content": {
+          "body": "Second pane"
+        },
+        "display": {
+          "local_id": "D1"
+        },
+        "id": "widget:second",
+        "kind": "text",
+        "layout": {
+          "base": {
+            "height": 80,
+            "kind": "fixed",
+            "width": 180,
+            "x": 280,
+            "y": 40
+          }
+        },
+        "priority": "normal",
+        "title": "Second pane"
+      },
+      {
+        "bindings": [],
+        "content": {
+          "alt": "Public sample image",
+          "asset": {
+            "package": {
+              "id": "package:settings-native",
+              "sha256": "82793f6c05865da00783ae14aa4468c5483d42f06cfbdabde757ba0b3bfdfb7b",
+              "version": "0.1.0"
+            },
+            "path": "images/pixel.png",
+            "sha256": "78253200c249d4d84293b2a1e6fc803adedeba8645f38d6bc2f6734a2dfacec9"
+          },
+          "fit": "contain",
+          "height_dip": 64,
+          "width_dip": 64
+        },
+        "display": {
+          "local_id": "D1"
+        },
+        "id": "widget:image",
+        "kind": "image",
+        "layout": {
+          "base": {
+            "height": 100,
+            "kind": "fixed",
+            "width": 160,
+            "x": 40,
+            "y": 180
+          }
+        },
+        "priority": "normal",
+        "title": "Image"
+      }
+    ]
+  },
+  "mismatch": {
+    "extensions": {
+      "author.note": {
+        "preserve": [
+          "x",
+          1,
+          false
+        ]
+      }
+    },
+    "revision": "40",
+    "roots": [
+      "widget:text",
+      "widget:second",
+      "widget:image"
+    ],
+    "scene_id": "scene:content",
+    "schema_version": "0.5.0",
+    "theme_id": null,
+    "widgets": [
+      {
+        "bindings": [],
+        "content": {
+          "body": "Editable pane\nMove me"
+        },
+        "display": {
+          "local_id": "D1"
+        },
+        "id": "widget:text",
+        "kind": "text",
+        "layout": {
+          "base": {
+            "height": 80,
+            "kind": "fixed",
+            "width": 180,
+            "x": 40,
+            "y": 40
+          }
+        },
+        "priority": "normal",
+        "title": "Editable pane",
+        "visibility": {
+          "schema_version": "0.1.0",
+          "binding": {
+            "kind": "selector",
+            "scope": {
+              "kind": "local_host"
+            },
+            "entity_type": "network.interface",
+            "field": "network.receive_bytes",
+            "predicates": [],
+            "mode": "singleton",
+            "sort": [],
+            "limit": 1
+          },
+          "op": "gt",
+          "value": 0,
+          "unit": "1"
+        }
+      },
+      {
+        "bindings": [],
+        "content": {
+          "body": "Second pane"
+        },
+        "display": {
+          "local_id": "D1"
+        },
+        "id": "widget:second",
+        "kind": "text",
+        "layout": {
+          "base": {
+            "height": 80,
+            "kind": "fixed",
+            "width": 180,
+            "x": 280,
+            "y": 40
+          }
+        },
+        "priority": "normal",
+        "title": "Second pane"
+      },
+      {
+        "bindings": [],
+        "content": {
+          "alt": "Public sample image",
+          "asset": {
+            "package": {
+              "id": "package:settings-native",
+              "sha256": "82793f6c05865da00783ae14aa4468c5483d42f06cfbdabde757ba0b3bfdfb7b",
+              "version": "0.1.0"
+            },
+            "path": "images/pixel.png",
+            "sha256": "78253200c249d4d84293b2a1e6fc803adedeba8645f38d6bc2f6734a2dfacec9"
+          },
+          "fit": "contain",
+          "height_dip": 64,
+          "width_dip": 64
+        },
+        "display": {
+          "local_id": "D1"
+        },
+        "id": "widget:image",
+        "kind": "image",
+        "layout": {
+          "base": {
+            "height": 100,
+            "kind": "fixed",
+            "width": 160,
+            "x": 40,
+            "y": 180
+          }
+        },
+        "priority": "normal",
+        "title": "Image"
+      }
+    ]
+  },
+  "source": {
+    "extensions": {
+      "author.note": {
+        "preserve": [
+          "x",
+          1,
+          false
+        ]
+      }
+    },
+    "revision": "40",
+    "roots": [
+      "widget:text",
+      "widget:second",
+      "widget:image"
+    ],
+    "scene_id": "scene:content",
+    "schema_version": "0.5.0",
+    "theme_id": null,
+    "widgets": [
+      {
+        "bindings": [],
+        "content": {
+          "body": "Editable pane\nMove me"
+        },
+        "display": {
+          "local_id": "D1"
+        },
+        "id": "widget:text",
+        "kind": "text",
+        "layout": {
+          "base": {
+            "height": 80,
+            "kind": "fixed",
+            "width": 180,
+            "x": 40,
+            "y": 40
+          }
+        },
+        "priority": "normal",
+        "title": "Editable pane",
+        "visibility": {
+          "schema_version": "0.1.0",
+          "binding": {
+            "kind": "direct",
+            "producer_id": "P1",
+            "producer_epoch": "E1",
+            "entity_id": "network:interface:1",
+            "field": "network.transmit_bytes"
+          },
+          "op": "gt",
+          "value": 0,
+          "unit": "byte"
+        }
+      },
+      {
+        "bindings": [],
+        "content": {
+          "body": "Second pane"
+        },
+        "display": {
+          "local_id": "D1"
+        },
+        "id": "widget:second",
+        "kind": "text",
+        "layout": {
+          "base": {
+            "height": 80,
+            "kind": "fixed",
+            "width": 180,
+            "x": 280,
+            "y": 40
+          }
+        },
+        "priority": "normal",
+        "title": "Second pane"
+      },
+      {
+        "bindings": [],
+        "content": {
+          "alt": "Public sample image",
+          "asset": {
+            "package": {
+              "id": "package:settings-native",
+              "sha256": "82793f6c05865da00783ae14aa4468c5483d42f06cfbdabde757ba0b3bfdfb7b",
+              "version": "0.1.0"
+            },
+            "path": "images/pixel.png",
+            "sha256": "78253200c249d4d84293b2a1e6fc803adedeba8645f38d6bc2f6734a2dfacec9"
+          },
+          "fit": "contain",
+          "height_dip": 64,
+          "width_dip": 64
+        },
+        "display": {
+          "local_id": "D1"
+        },
+        "id": "widget:image",
+        "kind": "image",
+        "layout": {
+          "base": {
+            "height": 100,
+            "kind": "fixed",
+            "width": 160,
+            "x": 40,
+            "y": 180
+          }
+        },
+        "priority": "normal",
+        "title": "Image"
+      }
+    ]
+  },
+  "exact": {
+    "extensions": {
+      "author.note": {
+        "preserve": [
+          "x",
+          1,
+          false
+        ]
+      }
+    },
+    "revision": "40",
+    "roots": [
+      "widget:text",
+      "widget:second",
+      "widget:image"
+    ],
+    "scene_id": "scene:content",
+    "schema_version": "0.5.0",
+    "theme_id": null,
+    "widgets": [
+      {
+        "bindings": [],
+        "content": {
+          "body": "Editable pane\nMove me"
+        },
+        "display": {
+          "local_id": "D1"
+        },
+        "id": "widget:text",
+        "kind": "text",
+        "layout": {
+          "base": {
+            "height": 80,
+            "kind": "fixed",
+            "width": 180,
+            "x": 40,
+            "y": 40
+          }
+        },
+        "priority": "normal",
+        "title": "Editable pane",
+        "visibility": {
+          "schema_version": "0.1.0",
+          "binding": {
+            "kind": "selector",
+            "scope": {
+              "kind": "local_host"
+            },
+            "entity_type": "network.interface",
+            "field": "network.receive_bytes",
+            "predicates": [],
+            "mode": "singleton",
+            "sort": [],
+            "limit": 1
+          },
+          "op": "gt",
+          "value": 18446744073709551615,
+          "unit": "byte"
+        }
+      },
+      {
+        "bindings": [],
+        "content": {
+          "body": "Second pane"
+        },
+        "display": {
+          "local_id": "D1"
+        },
+        "id": "widget:second",
+        "kind": "text",
+        "layout": {
+          "base": {
+            "height": 80,
+            "kind": "fixed",
+            "width": 180,
+            "x": 280,
+            "y": 40
+          }
+        },
+        "priority": "normal",
+        "title": "Second pane"
+      },
+      {
+        "bindings": [],
+        "content": {
+          "alt": "Public sample image",
+          "asset": {
+            "package": {
+              "id": "package:settings-native",
+              "sha256": "82793f6c05865da00783ae14aa4468c5483d42f06cfbdabde757ba0b3bfdfb7b",
+              "version": "0.1.0"
+            },
+            "path": "images/pixel.png",
+            "sha256": "78253200c249d4d84293b2a1e6fc803adedeba8645f38d6bc2f6734a2dfacec9"
+          },
+          "fit": "contain",
+          "height_dip": 64,
+          "width_dip": 64
+        },
+        "display": {
+          "local_id": "D1"
+        },
+        "id": "widget:image",
+        "kind": "image",
+        "layout": {
+          "base": {
+            "height": 100,
+            "kind": "fixed",
+            "width": 160,
+            "x": 40,
+            "y": 180
+          }
+        },
+        "priority": "normal",
+        "title": "Image"
+      }
+    ]
+  },
+  "native_cases": [
+    "hide",
+    "multi",
+    "clear",
+    "source",
+    "exact",
+    "invalid",
+    "cancel-buffer",
+    "nested-cancel",
+    "revoke",
+    "nested-revoke",
+    "held-hide",
+    "held-diagnostic",
+    "restart",
+    "wrong-visibility",
+    "frozen-preview",
+    "retain-visibility"
+  ]
+}

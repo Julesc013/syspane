@@ -1,9 +1,26 @@
 # Developer setup and checks
 
+The [native visibility controls](../../spec/delivery/packages/w-10-visibility-controls.md)
+add the shared `VisibilityInput` parser and lazy GTK `EditorVisibilityForm`. Set routes
+through `SetWidgetVisibility`; nested binding input changes only the private buffer.
+Trusted EditorForm explicitly enables conditional rendering after large-command and
+scene/configuration capability admission. Direct SceneSurface defaults false.
+Installed host entry has a separate ownership and qualification gate.
+
+Run the ordinary preflight/configure/build commands, then `ctest --preset <profile>
+-R '^(editor[.]|settings[.]|configuration[.]|composition[.]|protocol[.])' --output-on-failure`.
+The owned non-root Linux laboratory also runs `ctest --preset linux-x64-gcc13
+-R '^native[.]EDITOR-VISIBILITY$' --output-on-failure`. Its sixteen cases exercise
+real controls, exact scenes, held gestures, hidden pixels/names, nested erasure and
+save/reopen/reconciliation, with deliberate wrong-rule/frozen/retained-input controls.
+Frozen inputs are tests/editor/visibility-controls-cases.json. The
+[handoff](../../spec/delivery/visibility-controls-handoff.md) distinguishes component
+restart from a separate-process interruption and records the remaining release gates.
+
 The [native visibility experiment](../../spec/delivery/packages/w-09-native-visibility.md)
-adds `SurfaceConfig.experimental_visibility`, default false. Only a trusted owned
-laboratory sets it for scene 0.5. Resource capability declarations do not enable it;
-ordinary editor and installed entry paths retain the refusal gate. SceneSurface owns
+adds `SurfaceConfig.experimental_visibility`, default false. Trusted EditorForm now
+sets it after the admission above; resource declarations alone cannot enable it.
+Installed entry paths retain their separate integration gate. SceneSurface owns
 conditional frames, hidden payload erasure and bounded chart/image continuation.
 Consume `SurfaceText.presented` and `diagnostic` through the registered native owner;
 use `inspector_rows` to omit hidden rows and promote diagnostic descendants.
@@ -15,7 +32,7 @@ groups, status, geometry, retained work and revocation. The second owns Xvfb/pri
 D-Bus, compares pixels and explicit AT-SPI names and detects inverted and retained
 content controls. Losslessly compressed RGB observations retain raw and archive
 hashes. Read the [handoff](../../spec/delivery/native-visibility-handoff.md) before
-continuing private rule controls, selection/gestures and native persistence/recovery.
+continuing installed ownership and complete-edition integration.
 
 The [snapping package](../../spec/delivery/packages/w-10-snap.md) defines the
 pure `snap(SnapInput)` projection in editor_snap.hpp. Provide validated captured

@@ -1,0 +1,12 @@
+{
+  "recorded_at": "2026-10-08T01:29:53.744940+00:00",
+  "question": "Does selecting the first authored row after telemetry invalidation but before repaint leave clean geometry fields blank?",
+  "expected": "After the current frame is visible, x/y/width/height show authored values and the held gesture still reports x=40 before release.",
+  "stimulus": "condition-hide-select delivers a valid sample and emits native tree deselect/select events in the same UI callback before the queued draw.",
+  "production_repair_started": false,
+  "inputs": {
+    "tests/editor/native_visibility_controls.py": "fec951c1b960bae48f837e2d91b9787204aced39c25d295f78db63f3db73002e",
+    "tests/editor/editor_window.cpp": "285240a409de54be610f01f66b4febd7b47f4a91a1084677ad09d52a29f85186",
+    "source/interfaces/editor_form_linux.cpp": "f3bdbc7ccc8bc34d105404142224482f0dc9f812e66891a4768dcfb29332b765"
+  }
+}

@@ -1,0 +1,74 @@
+[
+  {
+    "step": "configure",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-08T00:47:15.224388+00:00",
+    "finished_at": "2026-10-08T00:47:15.988096+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2318340734,\n  \"linux_campaign_bytes\": 4576628836,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "configure",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/visibility_controls_step.py",
+      "linux-x64-gcc13",
+      "configure"
+    ],
+    "started_at": "2026-10-08T00:47:15.988498+00:00",
+    "finished_at": "2026-10-08T00:47:26.255843+00:00",
+    "exit": 0,
+    "stdout": "Preset CMake variables:\n\n  BUILD_TESTING=\"ON\"\n  CMAKE_BUILD_TYPE=\"Debug\"\n  CMAKE_CXX_COMPILER=\"g++\"\n  SYSPANE_PROFILE=\"linux-x64-gcc13\"\n\nprofile verified: linux-x64-gcc13\nvendored dependency digests: pass\ndiagnostic toolkit verified: GTK 3.24.41 / Ubuntu 3.24.41-4ubuntu1.3\nnative text dependency identity verified: 358 files\nnative image dependencies verified: 344 files\nnative GJS clock build dependencies verified\n-- Configuring done (5.9s)\n-- Generating done (0.1s)\n-- Build files have been written to: /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-visibility-controls/linux-x64-gcc13-configure-304998f350\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-08T00:47:26.256170+00:00",
+    "finished_at": "2026-10-08T00:47:26.927683+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2320054235,\n  \"linux_campaign_bytes\": 4576638306,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/visibility_controls_step.py",
+      "linux-x64-gcc13",
+      "build"
+    ],
+    "started_at": "2026-10-08T00:47:26.927990+00:00",
+    "finished_at": "2026-10-08T00:47:40.076320+00:00",
+    "exit": 1,
+    "stdout": "[1/11] Building CXX object CMakeFiles/syspane_editor_draft.dir/source/interfaces/editor_visibility.cpp.o\n[2/11] Linking CXX static library libsyspane_editor_draft.a\n[3/11] Linking CXX executable syspane_large_command_tests\n[4/11] Building CXX object CMakeFiles/syspane_editor_form.dir/source/interfaces/editor_visibility_form_linux.cpp.o\n[5/11] Building CXX object CMakeFiles/syspane_editor_form.dir/source/interfaces/editor_binding_form_linux.cpp.o\n[6/11] Building CXX object CMakeFiles/syspane_editor_tests.dir/tests/editor/visibility_controls_tests.cpp.o\n[7/11] Building CXX object CMakeFiles/syspane_editor_form.dir/source/interfaces/editor_form_linux.cpp.o\nFAILED: CMakeFiles/syspane_editor_form.dir/source/interfaces/editor_form_linux.cpp.o \n/usr/bin/g++ -DJSON_DIAGNOSTICS=0 -DJSON_DIAGNOSTIC_POSITIONS=1 -I/mnt/d/Projects/SysPane/syspane/source/interfaces -I/mnt/d/Projects/SysPane/syspane/source/configuration -I/mnt/d/Projects/SysPane/syspane/source/protocol -I/mnt/d/Projects/SysPane/syspane/source/scene -I/mnt/d/Projects/SysPane/syspane/source/diagnostics -I/mnt/d/Projects/SysPane/syspane/source/model -I/mnt/d/Projects/SysPane/syspane/source/rendering -I/mnt/d/Projects/SysPane/syspane/source/platform -isystem /mnt/d/Projects/SysPane/syspane/source/third_party -isystem /usr/include/gtk-3.0 -isystem /usr/include/pango-1.0 -isystem /usr/include/glib-2.0 -isystem /usr/lib/x86_64-linux-gnu/glib-2.0/include -isystem /usr/include/harfbuzz -isystem /usr/include/freetype2 -isystem /usr/include/libpng16 -isystem /usr/include/libmount -isystem /usr/include/blkid -isystem /usr/include/fribidi -isystem /usr/include/cairo -isystem /usr/include/pixman-1 -isystem /usr/include/gdk-pixbuf-2.0 -isystem /usr/include/webp -isystem /usr/include/gio-unix-2.0 -isystem /usr/include/atk-1.0 -isystem /usr/include/at-spi2-atk/2.0 -isystem /usr/include/at-spi-2.0 -isystem /usr/include/dbus-1.0 -isystem /usr/lib/x86_64-linux-gnu/dbus-1.0/include -g -std=c++17 -Wall -Wextra -Wpedantic -Werror -march=x86-64 -mtune=generic -pthread -MD -MT CMakeFiles/syspane_editor_form.dir/source/interfaces/editor_form_linux.cpp.o -MF CMakeFiles/syspane_editor_form.dir/source/interfaces/editor_form_linux.cpp.o.d -o CMakeFiles/syspane_editor_form.dir/source/interfaces/editor_form_linux.cpp.o -c /mnt/d/Projects/SysPane/syspane/source/interfaces/editor_form_linux.cpp\n/mnt/d/Projects/SysPane/syspane/source/interfaces/editor_form_linux.cpp: In member function \u2018void syspane::interfaces::EditorForm::reload(syspane::configuration::Authored, std::string, syspane::interfaces::SettingsResources)\u2019:\n/mnt/d/Projects/SysPane/syspane/source/interfaces/editor_form_linux.cpp:395:5: error: this \u2018if\u2019 clause does not guard... [-Werror=misleading-indentation]\n  395 |     if(i.layout_form)i.layout_form->erase();if(i.visibility)i.visibility->erase();\n      |     ^~\n/mnt/d/Projects/SysPane/syspane/source/interfaces/editor_form_linux.cpp:395:45: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the \u2018if\u2019\n  395 |     if(i.layout_form)i.layout_form->erase();if(i.visibility)i.visibility->erase();\n      |                                             ^~\ncc1plus: all warnings being treated as errors\n[8/11] Building CXX object CMakeFiles/syspane_editor_tests.dir/tests/editor/editor_draft_tests.cpp.o\nninja: build stopped: subcommand failed.\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-visibility-controls/linux-x64-gcc13-build-5b7e72dc38\n",
+    "stderr": ""
+  }
+]

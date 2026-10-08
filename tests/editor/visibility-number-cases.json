@@ -1,0 +1,16 @@
+{
+  "purpose": "Exact numeric identity for mixed rules, no-op detection and emitted scene changes",
+  "pairs": [
+    {"left": 18446744073709551615, "right": 18446744073709551616.0, "equal": false},
+    {"left": 9007199254740993, "right": 9007199254740992.0, "equal": false},
+    {"left": -1, "right": 18446744073709551615, "equal": false},
+    {"left": -9223372036854775808, "right": -9223372036854775808.0, "equal": true},
+    {"left": 9223372036854775807, "right": 9223372036854775808.0, "equal": false},
+    {"left": -9223372036854775808, "right": -9223372036854777856.0, "equal": false},
+    {"left": 1, "right": 1.0, "equal": true},
+    {"left": 0, "right": -0.0, "equal": true},
+    {"left": 1, "right": 1.25, "equal": false},
+    {"left": 18446744073709549568, "right": 18446744073709549568.0, "equal": true},
+    {"left": -9007199254740993, "right": -9007199254740992.0, "equal": false}
+  ]
+}

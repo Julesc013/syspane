@@ -9,6 +9,19 @@ Property fields become one draft edit when Set properties is selected. Apply sav
 the draft; activation and desktop visibility remain separate facts. This component
 is tested in a private laboratory and is not yet an installed desktop edition.
 
+Select an object and choose Visibility to edit its own condition. Always show
+removes that condition; a container's condition can still apply. When condition
+matches lets you choose a data source, comparison, typed value and unit. New rules
+start with this host's network receive bytes greater than 0 byte. Choose source
+opens the existing binding controls. Set visibility creates one reversible draft
+edit; Apply saves it. Cancel discards the private input.
+
+For objects with different own conditions, Keep unchanged preserves each rule.
+Choosing another mode replaces all selected own rules together. Hidden objects
+remain in the object list: select them there to change or clear their condition.
+Missing or failed source information remains visible as a diagnostic. During a drag,
+conditions and diagnostics update while the captured geometry remains fixed.
+
 Use Snap to grid or Snap to guides while dragging or resizing fixed widgets.
 Magenta lines and the guide text show the chosen positions before release.
 Hold Ctrl when releasing to bypass snapping. Arrow keys and numeric fields remain

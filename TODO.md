@@ -26,6 +26,8 @@ behaviour has been implemented. See [audit disposition](spec/delivery/audit-2026
 
 ## First native campaign
 
+- [x] W-10 native visibility controls: private exact rule/source input, hidden-object selection, current held-gesture diagnostics and independent durable save/reopen/erasure checks. See the [handoff](spec/delivery/visibility-controls-handoff.md). Installed ownership and complete editions remain open.
+
 - [x] W-09 shared conditional-visibility evaluator: bounded singleton comparisons, exact uint64/binary64 ordering, unit/type checks, current-policy borrowing and explicit unavailable outcomes. See the [handoff](spec/delivery/visibility-handoff.md).
 - [x] W-09/W-10 visibility authoring admission: scene 0.5, command 0.7 negotiation, protected typed edits/history, exact resource/persistence/replay and explicit renderer refusal. See the [handoff](spec/delivery/visibility-admission-handoff.md).
 - [x] W-09 borrowed visibility composition: bounded shared reads, ordered group inheritance, unsuppressed unresolved diagnostics and fail-closed denial. See the [handoff](spec/delivery/visibility-composition-handoff.md).

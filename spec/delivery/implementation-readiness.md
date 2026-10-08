@@ -17,6 +17,15 @@ updated: {"by": "codex", "at": "2026-10-06T01:32:00Z", "scope": "Native focus co
 
 # Implementation readiness and gates
 
+The [visibility-controls checkpoint](visibility-controls-handoff.md) now adds
+native rule input and trusted EditorForm integration to the earlier authored and
+rendering contracts. Its executable cases preserve exact scenes, private erasure,
+hidden selection, current held-gesture diagnostics and durable reconciliation.
+The repository supports continued package-by-package implementation. It does not
+establish complete editions or permission to publish. The source-bound handoff and
+work-unit row identify the next boundary; historical counts below describe their
+own checkpoints rather than current totals.
+
 The [supervised network publication checkpoint](network-publication-handoff.md)
 connects real Linux counters/rates, source lifetimes and measured receipt to
 independent child recovery. Demand release and typed revocation close the watch;
@@ -28,8 +37,9 @@ The [owned X11 manager-recovery experiment](x11-recovery-handoff.md) adds indepe
 exit/ownership, continuing-generation and wallpaper evidence. It preserves the
 existing candidates' failed visible placement; product desktop recovery remains open.
 
-The October revision closes bounded contract and documentation gaps. It does not
-implement the native product. Existing stable identities remain; new meanings have
+The October revision closed bounded contract and documentation gaps. Subsequent
+component checkpoints above add implementation; the complete native product remains
+unqualified. Existing stable identities remain; new meanings have
 new versioned schemas or explicit work-scope refinement.
 
 | Gate | Present as specification/checks | Pending implementation/evidence |

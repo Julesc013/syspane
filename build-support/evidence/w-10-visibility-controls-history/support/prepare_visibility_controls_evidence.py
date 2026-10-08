@@ -1,0 +1,21 @@
+from pathlib import Path
+r=Path.cwd();out=r/'out/campaign'
+def copy(old,new):
+    value=(out/old).read_text(encoding='utf-8').replace('w-09-native-visibility','w-10-visibility-controls').replace('native-visibility','visibility-controls').replace('native_visibility','visibility_controls')
+    (out/new).write_text(value,encoding='utf-8',newline='\n')
+copy('archive_native_visibility.py','archive_visibility_controls.py')
+p=out/'archive_visibility_controls.py';s=p.read_text(encoding='utf-8').replace("('VISIBILITY-PIXELS',","('EDITOR-VISIBILITY','VISIBILITY-PIXELS',");p.write_text(s,encoding='utf-8',newline='\n')
+copy('verify_native_visibility.py','verify_visibility_controls.py')
+copy('stage_native_visibility.py','stage_visibility_controls.py')
+p=out/'verify_visibility_controls.py';s=p.read_text(encoding='utf-8').replace('Native visibility is verified under explicit development opt-in; controls, installed enablement and full editions remain open.','Native rule input and trusted EditorForm integration are verified; installed ownership and full editions remain open.');p.write_text(s,encoding='utf-8',newline='\n')
+p=out/'stage_visibility_controls.py';s=p.read_text(encoding='utf-8').replace('Native controls, installed enablement and full editions remain open.','Installed ownership and full editions remain open.');p.write_text(s,encoding='utf-8',newline='\n')
+copy('preserve_native_visibility.py','preserve_visibility_controls.py')
+p=out/'preserve_visibility_controls.py';s=p.read_text(encoding='utf-8').replace('529c39bff13b10bbddfb8b2defb449ba1517c5a0','0cea8facb30a26aded0c7b7c6e25836ad97c85dc')
+s=s.replace("('linux-x64-gcc13',331),('windows-x64-gcc15',328),('windows-x86-v141-xp',325)","('linux-x64-gcc13',336),('windows-x64-gcc15',333),('windows-x86-v141-xp',330)")
+s=s.replace("('locks','native','focus','scalar','rendering')","('locks','native','editors','rendering')")
+s=s.replace("==90 and", "==159 and")
+s=s.replace("assert len(final['linux-x64-gcc13']['focus']['cases'])==4 and len(final['linux-x64-gcc13']['scalar']['cases'])==1", "assert len(final['linux-x64-gcc13']['editors']['cases'])==12")
+s=s.replace("row['family']=='VISIBILITY-PIXELS'", "row['family']=='EDITOR-VISIBILITY'")
+s=s.replace("allowed_actions={'native'} if native_row['family']=='VISIBILITY-PIXELS' else {'focus'} if native_row['family'] in ('EDITOR-LOCKS','EDITOR-CONTAINERS') else {'scalar','rendering'} if native_row['family']=='SCENE-ERASURE' else {'rendering'}", "allowed_actions={'native'} if native_row['family']=='EDITOR-VISIBILITY' else {'editors'} if native_row['family'].startswith('EDITOR-') or native_row['family'] in ('NATIVE-OBSERVATION','LARGE-COMMANDS') else {'rendering'}")
+s=s.replace('Native conditional presentation under explicit development opt-in; ordinary editor/installed enablement and full editions remain gated.', 'Native private visibility controls and explicitly admitted EditorForm presentation; installed ownership and full editions remain gated.')
+p.write_text(s,encoding='utf-8',newline='\n')

@@ -1,4 +1,5 @@
 #include "editor_draft.hpp"
+#include "authored_equal.hpp"
 #include <algorithm>
 #include <cmath>
 #include <functional>
@@ -282,7 +283,7 @@ bool EditorDraft::execute(const std::vector<SceneEdit>& edits){
     transaction_.editable();need(!edits.empty()&&edits.size()<=128,"editor.operations");auto candidate=*scene();auto selected=selected_;
     try{for(const auto& edit:edits){if(std::holds_alternative<SetWidgetVisibility>(edit))need(visibility_available(),"editor.visibility_unavailable");if(std::holds_alternative<SetWidgetLocks>(edit))need(locks_available(),"editor.lock_unavailable");std::visit([&](const auto& op){guard(candidate,op);edit_selection(candidate,selected,op);},edit);}}
     catch(const Json::exception&){throw protocol::Error("editor.operation");}
-    if(candidate==*scene())return false;
+    if(c::authored_equal(candidate,*scene()))return false;
     Change change{{*scene(),selected_},{candidate,surviving(candidate,selected)},0};
     change.bytes=change.before.scene.dump().size()+change.after.scene.dump().size()+Json(change.before.selection).dump().size()+Json(change.after.selection).dump().size();
     auto next=undo_;next.push_back(change);std::size_t bytes=0;for(const auto& entry:next)bytes+=entry.bytes;

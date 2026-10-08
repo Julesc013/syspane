@@ -1448,6 +1448,7 @@
       "source_owner": "source/configuration/",
       "public_interfaces": [
         "source/configuration/authored.hpp",
+        "source/configuration/authored_equal.hpp",
         "source/configuration/transaction.hpp",
         "source/configuration/digest.hpp",
         "source/configuration/content.hpp"
@@ -1455,6 +1456,7 @@
       "private_interfaces": [],
       "sources": [
         "source/configuration/authored.cpp",
+        "source/configuration/authored_equal.cpp",
         "source/configuration/transaction.cpp",
         "source/configuration/digest.cpp",
         "source/configuration/content.cpp"
@@ -2181,7 +2183,8 @@
         "source/interfaces/editor_content.hpp",
         "source/interfaces/editor_binding.hpp",
         "source/interfaces/editor_create.hpp",
-        "source/interfaces/editor_layout.hpp"
+        "source/interfaces/editor_layout.hpp",
+        "source/interfaces/editor_visibility.hpp"
       ],
       "private_interfaces": [],
       "sources": [
@@ -2190,7 +2193,8 @@
         "source/interfaces/editor_content.cpp",
         "source/interfaces/editor_binding.cpp",
         "source/interfaces/editor_create.cpp",
-        "source/interfaces/editor_layout.cpp"
+        "source/interfaces/editor_layout.cpp",
+        "source/interfaces/editor_visibility.cpp"
       ],
       "allowed_dependencies": [
         "syspane_settings_draft",
@@ -2227,7 +2231,8 @@
         "tests/editor/layout_authoring_tests.cpp",
         "tests/editor/container_tests.cpp",
         "tests/editor/edit_lock_tests.cpp",
-        "tests/editor/visibility_admission_tests.cpp"
+        "tests/editor/visibility_admission_tests.cpp",
+        "tests/editor/visibility_controls_tests.cpp"
       ],
       "allowed_dependencies": [
         "syspane_editor_draft",
@@ -2279,7 +2284,8 @@
       "type": "STATIC_LIBRARY",
       "source_owner": "source/interfaces/",
       "public_interfaces": [
-        "source/interfaces/editor_form.hpp"
+        "source/interfaces/editor_form.hpp",
+        "source/interfaces/editor_visibility_form.hpp"
       ],
       "private_interfaces": [
         "source/interfaces/editor_content_form.hpp",
@@ -2292,7 +2298,8 @@
         "source/interfaces/editor_content_form_linux.cpp",
         "source/interfaces/editor_binding_form_linux.cpp",
         "source/interfaces/editor_create_form_linux.cpp",
-        "source/interfaces/editor_layout_form_linux.cpp"
+        "source/interfaces/editor_layout_form_linux.cpp",
+        "source/interfaces/editor_visibility_form_linux.cpp"
       ],
       "allowed_dependencies": [
         "syspane_editor_draft",

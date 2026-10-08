@@ -12,17 +12,18 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-08T00:34:15.101366+00:00", "scope": "Native visibility experiment verified; private controls and complete editions remain open"}
+updated: {"by": "codex", "at": "2026-10-08T01:42:39.633509+00:00", "scope": "Native visibility controls and trusted EditorForm integration verified; installed ownership and complete editions remain open"}
 ---
 
 # Current state and next admitted boundary
 
-The [native visibility experiment](native-visibility-handoff.md) now preserves layout while hiding
-conditional content, keeps source/condition diagnostics visible and erases hidden
-pixels and inspector payloads. All seven primitive kinds and independent X11/AT-SPI
-fault controls pass. This requires an explicit development opt-in; native rule
-controls and ordinary editor/installed enablement remain the next gate. No complete
-edition or new target qualification is claimed.
+The [native visibility controls](visibility-controls-handoff.md) now edit
+bounded conditions through the existing draft and persistence owners. Hidden objects
+remain selectable in the authored list; current condition diagnostics continue during
+held gestures. Nested private buffers erase on cancellation or loss of authority.
+The trusted Linux editor component can enable scene 0.5 after capability admission.
+Installed ownership, native platform qualification and all five complete editions
+remain open.
 
 The earlier [borrowed visibility composition checkpoint](visibility-composition-handoff.md)
 provides the bounded batch reads and group/child decisions used by that experiment.
@@ -30,14 +31,14 @@ Hidden ancestors cannot suppress unresolved child diagnostics.
 
 The [visibility-admission checkpoint](visibility-admission-handoff.md)
 adds scene 0.5, negotiated command 0.7, protected typed edits and exact durable
-recovery. Ordinary conditional scenes still report an unavailable renderer until
-native controls and their integration checks pass; only the experiment opts in. This is a component checkpoint; the
-five complete editions and their release qualification remain open.
+recovery. The native controls above now close the trusted EditorForm integration
+gate. Direct SceneSurface consumers retain default refusal unless explicitly admitted;
+installed ownership and release qualification remain open.
 
 The earlier [conditional-visibility evaluator](visibility-handoff.md) now
 compares policy-bound singleton values with exact numeric and unit semantics.
 Missing, stale, denied and disconnected inputs remain explicit unresolved outcomes.
-Native controls/rendering remain required after the authored admission above;
+The native controls above supply the admitted Linux component integration;
 the evaluator alone does not enable conditional widgets.
 
 The earlier [image-validation checkpoint](runtime-observation-handoff.md) reduces
