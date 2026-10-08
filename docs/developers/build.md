@@ -1872,3 +1872,18 @@ Existing native SCENE-SURFACE, SCENE-INSPECTOR-MODEL, SCENE-ERASURE, EDITOR-LOCK
 and EDITOR-CONTAINERS remain regression checks; they do not qualify conditional
 native pixels. The [handoff](../../spec/delivery/visibility-composition-handoff.md)
 preserves the original failed fixture and the exact schema-based correction.
+
+
+The [theme-authoring package](../../spec/delivery/packages/w-10-theme-authoring.md)
+adds `interfaces::theme_input/theme_edit` and `configuration::author_theme`.
+Input hydration and editing return owned values; no-op returns the original theme.
+Artifact construction needs current resource policy and `theme.typography`, preserves
+the source license and emits exact theme/package pins. It performs no I/O, draft
+mutation or durable publication. A changed artifact alone cannot be submitted through
+old command schemas or enable EditorForm typography.
+
+After ordinary configure/build and workspace preflight, run
+`ctest --preset <profile> -R '^editor[.]THEME-' --output-on-failure` and the full
+portable suite. The pinned Linux laboratory also runs `native.THEME-TYPOGRAPHY` and
+`native.ROLE-COMPOSITION`. Read the [handoff](../../spec/delivery/theme-authoring-handoff.md)
+before extending resource selection, commands, generations and native controls.

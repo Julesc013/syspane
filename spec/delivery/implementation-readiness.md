@@ -17,6 +17,10 @@ updated: {"by": "codex", "at": "2026-10-06T01:32:00Z", "scope": "Native focus co
 
 # Implementation readiness and gates
 
+The [theme-authoring prerequisite](theme-authoring-handoff.md) closes lossless font
+input and deterministic immutable artifact construction. Durable resource override,
+command/store admission, draft/history and native controls remain the next boundary.
+
 The [typography checkpoint](typography-handoff.md) adds versioned theme fonts and
 native role rendering. Current policy and immutable resource identities gate their
 use. The [role-composition experiment](role-composition-handoff.md) now verifies scene

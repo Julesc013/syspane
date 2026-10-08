@@ -75,3 +75,10 @@ composition. Theme 0.2 requires explicit trusted development admission in additi
 to current resource authority; direct consumers still refuse by default. Native theme
 authoring and trusted editor integration remain the following boundary. Spacing/density, chart styles and contrast variants still require versioned
 contracts and native tests; none is hidden in optional extensions.
+
+
+The [theme-authoring input/artifact contract](../delivery/packages/w-10-theme-authoring.md)
+preserves exact no-ops and authors complete base/role fonts without mutating an
+installed package. Generated identity binds the source license and edited content.
+A versioned durable override, atomic editor history and native controls remain required
+before these artifacts become saved theme edits. Construction is not publication.

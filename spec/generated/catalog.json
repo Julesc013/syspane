@@ -489,7 +489,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "b923716234271f405ec59ed20f49b86da7b0d9ead47cdcd568fdd8b4b0a06bbf"
+      "sha256": "cc08d338a9f045fe976e90d302e94e8feea4fd9cd1df7081c89bc69d295f3155"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -884,7 +884,7 @@
       "requires": [
         "SP-CURRENT"
       ],
-      "sha256": "009e20065e963d3be4e55cdecac6539fc46a34b38837e2100aca7424622f6c05"
+      "sha256": "73273955595c16e6010f06aeb97678ca8cdc2e6148b36d37c9b0dfb6900a00bf"
     },
     {
       "id": "SP-KEYBOARD-INPUT-HANDOFF",
@@ -1852,6 +1852,18 @@
       "sha256": "d4bfa30d6be4b9dab6d9d13e3f5418e4f4645b15b4e2765e2f2ede86354458e4"
     },
     {
+      "id": "SP-W10-THEME-AUTHORING",
+      "path": "delivery/packages/w-10-theme-authoring.md",
+      "title": "Theme authoring input and immutable artifact boundary",
+      "description": "Lossless font input and deterministic private theme artifacts before durable native integration.",
+      "requires": [
+        "SP-W09-ROLE-COMPOSITION",
+        "SP-W09-TYPOGRAPHY",
+        "SP-W10-VISIBILITY-CONTROLS"
+      ],
+      "sha256": "7763ae05eca20567bd5c612f9e6202ddb7a54d949d230f468d7754f4d40f74f3"
+    },
+    {
       "id": "SP-W10-VISIBILITY-ADMISSION",
       "path": "delivery/packages/w-10-visibility-admission.md",
       "title": "Versioned visibility authoring and durable admission",
@@ -2500,6 +2512,17 @@
       "sha256": "93cd442117769a1c72fbc72c3481a2da32fb5551c7a014a1e7efe7750c3ce682"
     },
     {
+      "id": "SP-THEME-AUTHORING-HANDOFF",
+      "path": "delivery/theme-authoring-handoff.md",
+      "title": "Theme authoring input and immutable artifact checkpoint",
+      "description": "Exact font input and license-bound theme artifacts; durable and native integration remain open.",
+      "requires": [
+        "SP-W10-THEME-AUTHORING",
+        "SP-ROLE-COMPOSITION-HANDOFF"
+      ],
+      "sha256": "dbfd70621f055bae21d4df6c01263dffb920fd11b091036938b96c202558a443"
+    },
+    {
       "id": "SP-TRANSACTION-SUPERVISION-HANDOFF",
       "path": "delivery/transaction-supervision-handoff.md",
       "title": "Independent transaction supervision checkpoint",
@@ -2790,7 +2813,7 @@
         "SP-STATE",
         "SP-RENDERING"
       ],
-      "sha256": "5acb1c43fb2963143acfa7e40cc3f39bf286fed6b8ce9278bf2bb4b6ae8487ea"
+      "sha256": "32a3c6bdb56a55f663648f29a35524df3548abe00577a6f93583d3972d5baabe"
     },
     {
       "id": "SP-SETTINGS",

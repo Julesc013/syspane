@@ -1,0 +1,146 @@
+[
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-08T03:00:59.691276+00:00",
+    "finished_at": "2026-10-08T03:01:06.800344+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2406328586,\n  \"linux_campaign_bytes\": 4717761592,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/theme_authoring_step.py",
+      "linux-x64-gcc13",
+      "build"
+    ],
+    "started_at": "2026-10-08T03:01:06.800718+00:00",
+    "finished_at": "2026-10-08T03:01:17.067480+00:00",
+    "exit": 0,
+    "stdout": "[1/22] Building CXX object CMakeFiles/syspane_authored.dir/source/configuration/authored_theme.cpp.o\n[2/22] Linking CXX static library libsyspane_authored.a\n[3/22] Linking CXX executable SysPane.ContentProbe\n[4/22] Linking CXX executable SysPane.ConfigProbe\n[5/22] Linking CXX executable SysPane.CommandProbe\n[6/22] Linking CXX executable SysPane.ImageWorker\n[7/22] Linking CXX executable SysPane.TextProbe\n[8/22] Linking CXX executable syspane_large_command_tests\n[9/22] Linking CXX executable syspane_settings_tests\n[10/22] Linking CXX executable syspane_typography_tests\n[11/22] Linking CXX executable syspane_authored_tests\n[12/22] Building CXX object CMakeFiles/syspane_theme_authoring_tests.dir/tests/editor/theme_authoring_tests.cpp.o\n[13/22] Linking CXX executable syspane_editor_tests\n[14/22] Linking CXX executable syspane_settings_window\n[15/22] Linking CXX executable syspane_theme_authoring_tests\n[16/22] Linking CXX executable syspane_scene_inspector_tests\n[17/22] Linking CXX executable syspane_image_job_tests\n[18/22] Linking CXX executable syspane_role_composition_probe\n[19/22] Linking CXX executable syspane_editor_window\n[20/22] Linking CXX executable syspane_scene_surface_tests\n[21/22] Linking CXX executable syspane_command_session_tests\n[22/22] Linking CXX executable syspane_scene_tests\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-theme-authoring/linux-x64-gcc13-build-a210418b5b\n",
+    "stderr": ""
+  },
+  {
+    "step": "test",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-08T03:01:17.067866+00:00",
+    "finished_at": "2026-10-08T03:01:17.792640+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2408082851,\n  \"linux_campaign_bytes\": 4717804932,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "test",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/theme_authoring_step.py",
+      "linux-x64-gcc13",
+      "test"
+    ],
+    "started_at": "2026-10-08T03:01:17.792946+00:00",
+    "finished_at": "2026-10-08T03:02:11.222802+00:00",
+    "exit": 0,
+    "stdout": "....   Passed    0.15 sec\n        Start 241: configuration.SCENE-CONTENT-SESSION\n128/166 Test #241: configuration.SCENE-CONTENT-SESSION .....   Passed    0.11 sec\n        Start 242: configuration.AUTH-SCHEMA\n129/166 Test #242: configuration.AUTH-SCHEMA ...............   Passed    0.04 sec\n        Start 243: configuration.TX-MIXED\n130/166 Test #243: configuration.TX-MIXED ..................   Passed    0.03 sec\n        Start 244: configuration.TX-CONFLICT\n131/166 Test #244: configuration.TX-CONFLICT ...............   Passed    0.03 sec\n        Start 245: configuration.TX-REPLAY\n132/166 Test #245: configuration.TX-REPLAY .................   Passed    0.04 sec\n        Start 246: configuration.TX-INTERRUPT\n133/166 Test #246: configuration.TX-INTERRUPT ..............   Passed    0.07 sec\n        Start 247: configuration.TX-BOUNDS\n134/166 Test #247: configuration.TX-BOUNDS .................   Passed    0.05 sec\n        Start 248: configuration.TX-CAPACITY\n135/166 Test #248: configuration.TX-CAPACITY ...............   Passed    1.16 sec\n        Start 249: configuration.DIGEST\n136/166 Test #249: configuration.DIGEST ....................   Passed    0.02 sec\n        Start 250: configuration.DIGEST-CONTENT\n137/166 Test #250: configuration.DIGEST-CONTENT ............   Passed    0.56 sec\n        Start 251: configuration.CONTENT-COMPOSE\n138/166 Test #251: configuration.CONTENT-COMPOSE ...........   Passed    0.06 sec\n        Start 252: configuration.CONTENT-PINS\n139/166 Test #252: configuration.CONTENT-PINS ..............   Passed    0.12 sec\n        Start 253: configuration.CONTENT-PATHS\n140/166 Test #253: configuration.CONTENT-PATHS .............   Passed    0.01 sec\n        Start 254: configuration.CONTENT-BOUNDS\n141/166 Test #254: configuration.CONTENT-BOUNDS ............   Passed    0.09 sec\n        Start 255: configuration.CONTENT-CAPABILITIES\n142/166 Test #255: configuration.CONTENT-CAPABILITIES ......   Passed    0.08 sec\n        Start 256: configuration.CONTENT-POLICY\n143/166 Test #256: configuration.CONTENT-POLICY ............   Passed    0.11 sec\n        Start 257: configuration.RESOURCE-COMMIT\n144/166 Test #257: configuration.RESOURCE-COMMIT ...........   Passed    0.14 sec\n        Start 258: configuration.RESOURCE-GUARDS\n145/166 Test #258: configuration.RESOURCE-GUARDS ...........   Passed    0.15 sec\n        Start 259: configuration.RESOURCE-SESSION\n146/166 Test #259: configuration.RESOURCE-SESSION ..........   Passed    0.09 sec\n        Start 260: configuration.RESOURCE-RETAINED\n147/166 Test #260: configuration.RESOURCE-RETAINED .........   Passed    0.21 sec\n        Start 297: composition.graph\n148/166 Test #297: composition.graph .......................   Passed    0.11 sec\n        Start 298: composition.reject_forbidden\n149/166 Test #298: composition.reject_forbidden ............   Passed    0.27 sec\n        Start 302: protocol.FRAME-01\n150/166 Test #302: protocol.FRAME-01 .......................   Passed    0.01 sec\n        Start 303: protocol.FRAME-02\n151/166 Test #303: protocol.FRAME-02 .......................   Passed    0.00 sec\n        Start 304: protocol.FRAME-03\n152/166 Test #304: protocol.FRAME-03 .......................   Passed    0.00 sec\n        Start 305: protocol.JSON-01\n153/166 Test #305: protocol.JSON-01 ........................   Passed    0.02 sec\n        Start 306: protocol.WIRE-01\n154/166 Test #306: protocol.WIRE-01 ........................   Passed    0.00 sec\n        Start 307: protocol.NEGOTIATE-01\n155/166 Test #307: protocol.NEGOTIATE-01 ...................   Passed    0.00 sec\n        Start 308: protocol.IPC-BUDGET-01\n156/166 Test #308: protocol.IPC-BUDGET-01 ..................   Passed    0.00 sec\n        Start 309: protocol.IPC-BUDGET-02\n157/166 Test #309: protocol.IPC-BUDGET-02 ..................   Passed    0.00 sec\n        Start 310: protocol.IPC-BUDGET-03\n158/166 Test #310: protocol.IPC-BUDGET-03 ..................   Passed    0.00 sec\n        Start 311: protocol.IPC-BUDGET-04\n159/166 Test #311: protocol.IPC-BUDGET-04 ..................   Passed    0.00 sec\n        Start 312: protocol.LEDGER-01\n160/166 Test #312: protocol.LEDGER-01 ......................   Passed    0.10 sec\n        Start 313: protocol.POLICY-01\n161/166 Test #313: protocol.POLICY-01 ......................   Passed    0.00 sec\n        Start 314: protocol.POLICY-02\n162/166 Test #314: protocol.POLICY-02 ......................   Passed    0.00 sec\n        Start 315: protocol.DISCLOSURE-01\n163/166 Test #315: protocol.DISCLOSURE-01 ..................   Passed    0.00 sec\n        Start 316: protocol.QUEUE-01\n164/166 Test #316: protocol.QUEUE-01 .......................   Passed    0.00 sec\n        Start 317: protocol.SESSION-01\n165/166 Test #317: protocol.SESSION-01 .....................   Passed    0.01 sec\n        Start 318: protocol.dependencies\n166/166 Test #318: protocol.dependencies ...................   Passed    0.04 sec\n\n100% tests passed, 0 tests failed out of 166\n\nTotal Test time (real) =  46.69 sec\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-theme-authoring/linux-x64-gcc13-test-549de75317\n",
+    "stderr": ""
+  },
+  {
+    "step": "portable",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-08T03:02:11.223179+00:00",
+    "finished_at": "2026-10-08T03:02:12.460993+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2322398699,\n  \"linux_campaign_bytes\": 4717921239,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "portable",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/theme_authoring_step.py",
+      "linux-x64-gcc13",
+      "portable"
+    ],
+    "started_at": "2026-10-08T03:02:12.461307+00:00",
+    "finished_at": "2026-10-08T03:03:10.164787+00:00",
+    "exit": 0,
+    "stdout": "assed    0.00 sec\n        Start 305: presentation.NVIEW-VALUES\n305/343 Test #305: presentation.NVIEW-VALUES ...............   Passed    0.01 sec\n        Start 306: presentation.NVIEW-FORMAT\n306/343 Test #306: presentation.NVIEW-FORMAT ...............   Passed    0.07 sec\n        Start 307: presentation.NVIEW-STATES\n307/343 Test #307: presentation.NVIEW-STATES ...............   Passed    0.01 sec\n        Start 308: presentation.NVIEW-SELECTION\n308/343 Test #308: presentation.NVIEW-SELECTION ............   Passed    0.00 sec\n        Start 309: presentation.NVIEW-BOUNDS\n309/343 Test #309: presentation.NVIEW-BOUNDS ...............   Passed    0.01 sec\n        Start 310: presentation.NVIEW-LIFETIME\n310/343 Test #310: presentation.NVIEW-LIFETIME .............   Passed    0.00 sec\n        Start 311: network.PUBLICATION-VALUES\n311/343 Test #311: network.PUBLICATION-VALUES ..............   Passed    0.01 sec\n        Start 312: network.PUBLICATION-FAILURE\n312/343 Test #312: network.PUBLICATION-FAILURE .............   Passed    0.00 sec\n        Start 313: network.PUBLICATION-BOUNDARY\n313/343 Test #313: network.PUBLICATION-BOUNDARY ............   Passed    0.00 sec\n        Start 314: network.RECONCILE-IDENTITY\n314/343 Test #314: network.RECONCILE-IDENTITY ..............   Passed    0.00 sec\n        Start 315: network.RECONCILE-CLOCK-RATE\n315/343 Test #315: network.RECONCILE-CLOCK-RATE ............   Passed    0.00 sec\n        Start 316: network.RECONCILE-CANCEL-FAILURE\n316/343 Test #316: network.RECONCILE-CANCEL-FAILURE ........   Passed    0.00 sec\n        Start 317: network.RECONCILE-CAPACITY\n317/343 Test #317: network.RECONCILE-CAPACITY ..............   Passed    0.00 sec\n        Start 318: network.NETWORK-NETLINK\n318/343 Test #318: network.NETWORK-NETLINK .................   Passed    0.00 sec\n        Start 319: network.NETWORK-NETLINK-REJECT\n319/343 Test #319: network.NETWORK-NETLINK-REJECT ..........   Passed    0.00 sec\n        Start 320: network.NETWORK-WATCH-DECODE\n320/343 Test #320: network.NETWORK-WATCH-DECODE ............   Passed    0.00 sec\n        Start 321: measured.MEASURED-CODEC\n321/343 Test #321: measured.MEASURED-CODEC .................   Passed    0.01 sec\n        Start 322: measured.MEASURED-AGE\n322/343 Test #322: measured.MEASURED-AGE ...................   Passed    0.01 sec\n        Start 323: measured.MEASURED-REPLAY\n323/343 Test #323: measured.MEASURED-REPLAY ................   Passed    0.01 sec\n        Start 324: measured.MEASURED-LIFETIME\n324/343 Test #324: measured.MEASURED-LIFETIME ..............   Passed    0.01 sec\n        Start 325: measured.MEASURED-SESSION\n325/343 Test #325: measured.MEASURED-SESSION ...............   Passed    0.01 sec\n        Start 326: import.IMPORT-STATE\n326/343 Test #326: import.IMPORT-STATE .....................   Passed    0.01 sec\n        Start 327: import.IMPORT-RETAIN\n327/343 Test #327: import.IMPORT-RETAIN ....................   Passed    0.02 sec\n        Start 328: import.IMPORT-COVERAGE\n328/343 Test #328: import.IMPORT-COVERAGE ..................   Passed    0.01 sec\n        Start 329: import.IMPORT-REPLAY\n329/343 Test #329: import.IMPORT-REPLAY ....................   Passed    0.01 sec\n        Start 330: import.IMPORT-TIME\n330/343 Test #330: import.IMPORT-TIME ......................   Passed    0.01 sec\n        Start 331: import.IMPORT-LIFETIME\n331/343 Test #331: import.IMPORT-LIFETIME ..................   Passed    0.01 sec\n        Start 332: data.VIEW-ATOMIC\n332/343 Test #332: data.VIEW-ATOMIC ........................   Passed    0.01 sec\n        Start 333: data.VIEW-REPLAY\n333/343 Test #333: data.VIEW-REPLAY ........................   Passed    0.00 sec\n        Start 334: data.VIEW-RECONNECT\n334/343 Test #334: data.VIEW-RECONNECT .....................   Passed    0.00 sec\n        Start 335: data.VIEW-LEASE\n335/343 Test #335: data.VIEW-LEASE .........................   Passed    0.00 sec\n        Start 336: data.VIEW-POLICY\n336/343 Test #336: data.VIEW-POLICY ........................   Passed    0.00 sec\n        Start 337: data.VIEW-FAULT\n337/343 Test #337: data.VIEW-FAULT .........................   Passed    0.00 sec\n        Start 338: diagnostic.DIAG-POLICY\n338/343 Test #338: diagnostic.DIAG-POLICY ..................   Passed    0.02 sec\n        Start 339: diagnostic.DIAG-PROJECTION\n339/343 Test #339: diagnostic.DIAG-PROJECTION ..............   Passed    0.00 sec\n        Start 340: diagnostic.FAILURE-CODEC\n340/343 Test #340: diagnostic.FAILURE-CODEC ................   Passed    0.00 sec\n        Start 341: diagnostic.FAILURE-INTERRUPT\n341/343 Test #341: diagnostic.FAILURE-INTERRUPT ............   Passed    0.00 sec\n        Start 342: diagnostic.FAILURE-PROJECTION\n342/343 Test #342: diagnostic.FAILURE-PROJECTION ...........   Passed    0.00 sec\n        Start 343: diagnostic.PRESERVE-POLICY\n343/343 Test #343: diagnostic.PRESERVE-POLICY ..............   Passed    0.00 sec\n\n100% tests passed, 0 tests failed out of 343\n\nTotal Test time (real) =  50.46 sec\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-theme-authoring/linux-x64-gcc13-portable-1d0f74e18e\n",
+    "stderr": ""
+  },
+  {
+    "step": "native",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-08T03:03:10.165179+00:00",
+    "finished_at": "2026-10-08T03:03:10.865412+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2422214327,\n  \"linux_campaign_bytes\": 4718046620,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "native",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/theme_authoring_step.py",
+      "linux-x64-gcc13",
+      "native"
+    ],
+    "started_at": "2026-10-08T03:03:10.865760+00:00",
+    "finished_at": "2026-10-08T03:03:19.743189+00:00",
+    "exit": 0,
+    "stdout": "Test project /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n    Start 141: native.ROLE-COMPOSITION\n1/2 Test #141: native.ROLE-COMPOSITION ..........   Passed    3.66 sec\n    Start 142: native.THEME-TYPOGRAPHY\n2/2 Test #142: native.THEME-TYPOGRAPHY ..........   Passed    0.72 sec\n\n100% tests passed, 0 tests failed out of 2\n\nTotal Test time (real) =   4.39 sec\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-theme-authoring/linux-x64-gcc13-native-96f99ed270\n",
+    "stderr": ""
+  }
+]
