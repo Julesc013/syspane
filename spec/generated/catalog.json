@@ -392,7 +392,7 @@
         "SP-WORK-PACKAGES",
         "SP-W01-PACKAGE"
       ],
-      "sha256": "edf78fe0b642bebcf0dd30c51da8ba3ecb2758a03b5e8b61cd76dcb67168b9a7"
+      "sha256": "f57b3d095d066fb9ed74538affb4a8f386ffc1081ccacf58359117742af80f0e"
     },
     {
       "id": "SP-CAMPAIGN-COVERAGE",
@@ -489,7 +489,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "5d828318b8db30a66bea74f26bb900d93f41831623852ea00bebf346b9b1fc9f"
+      "sha256": "655e40e1669c5eaba43e3b8a90d4a4260d9a7c25af094d41e931d5af7eee08c9"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -1899,6 +1899,17 @@
       "sha256": "115e78faea132962a164afbf54c5f48b530374c994f0b3fafb2098c7f875f510"
     },
     {
+      "id": "SP-W10-RECOVERY-QUEUE",
+      "path": "delivery/packages/w-10-recovery-queue.md",
+      "title": "Bounded native recovery operation owner",
+      "description": "Coalesced private-file operations with held child lifetime, explicit grants and retirement fences.",
+      "requires": [
+        "SP-W10-RECOVERY-STORE",
+        "SP-W10-RECOVERY-DRAFT"
+      ],
+      "sha256": "b36ec5480186dcfbdf556068a057f5e6bc93b28fef03304210cd066188c164eb"
+    },
+    {
       "id": "SP-W10-RECOVERY-STORE",
       "path": "delivery/packages/w-10-recovery-store.md",
       "title": "Private native recovery record storage",
@@ -2438,6 +2449,17 @@
       "sha256": "5315c7c332fe0b2676e9371b0ad2b6d68aa4ac0c20dd25bd91668cf112daf3db"
     },
     {
+      "id": "SP-RECOVERY-QUEUE-HANDOFF",
+      "path": "delivery/recovery-queue-handoff.md",
+      "title": "Bounded native recovery queue checkpoint",
+      "description": "Coalesced recovery I/O with exact helper identity, retirement fences and observed process exit.",
+      "requires": [
+        "SP-W10-RECOVERY-QUEUE",
+        "SP-RECOVERY-STORE-HANDOFF"
+      ],
+      "sha256": "85c6bdf2022f99e2c973590138d161b5cc57efb09586cd15a8679544dfb50a79"
+    },
+    {
       "id": "SP-RECOVERY-STORE-HANDOFF",
       "path": "delivery/recovery-store-handoff.md",
       "title": "Private native recovery storage checkpoint",
@@ -2962,7 +2984,7 @@
         "SP-RENDERING",
         "SP-COMMANDS"
       ],
-      "sha256": "ca047bed314ea388f244516662fedcc07ecb54d9de83468150dbee5a3145bfdd"
+      "sha256": "5b2fa536ed0908436df2222c142bc78ddaa6b4ddf7d2a9bffd12e182a4afb1dd"
     },
     {
       "id": "SP-POLICY",

@@ -1,0 +1,75 @@
+{
+  "source_records": "tests/editor/recovery-store-cases.json",
+  "maximum_bytes": 786432,
+  "frame_limit": 819201,
+  "header_limit": 32768,
+  "deadline_ms": 5000,
+  "io_bytes_per_poll": 262144,
+  "receive_attempts_per_poll": 32,
+  "traces": [
+    {
+      "case": "load",
+      "initial": "old",
+      "expected": "old"
+    },
+    {
+      "case": "coalesce",
+      "initial": null,
+      "active": "old",
+      "superseded": "old-with-newline",
+      "latest": "new",
+      "expected": "new"
+    },
+    {
+      "case": "retire-active",
+      "initial": "old",
+      "active": "new",
+      "expected": null,
+      "sealed": true
+    },
+    {
+      "case": "retire-absent",
+      "initial": null,
+      "expected": null,
+      "sealed": true
+    },
+    {
+      "case": "changed-record",
+      "initial": "old",
+      "external": "foreign",
+      "expected": "foreign",
+      "outcome": "unchanged"
+    },
+    {
+      "case": "close-before-publication",
+      "initial": "old",
+      "active": "new",
+      "expected": "old"
+    },
+    {
+      "case": "close-after-publication",
+      "initial": "old",
+      "active": "new",
+      "expected": "new"
+    }
+  ],
+  "refusal_cases": [
+    "missing-read-grant",
+    "missing-retain-grant",
+    "missing-erase-grant",
+    "wrong-thread",
+    "empty-record",
+    "oversized-record",
+    "stale-grant",
+    "forged-binding",
+    "forged-ticket",
+    "duplicate-result",
+    "trailing-result",
+    "oversized-reply",
+    "nonzero-after-result",
+    "hung-worker",
+    "parent-death"
+  ],
+  "completion_rule": "matching result plus EOF plus zero held-child exit",
+  "fault_witness": "wrong final bytes must fail independent comparison"
+}

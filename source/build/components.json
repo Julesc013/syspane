@@ -2795,6 +2795,137 @@
       "profiles": [
         "linux-x64-gcc13"
       ]
+    },
+    {
+      "id": "recovery-queue",
+      "target": "syspane_recovery_queue",
+      "type": "STATIC_LIBRARY",
+      "source_owner": "source/platform/",
+      "public_interfaces": [
+        "source/platform/recovery_queue_linux.hpp"
+      ],
+      "private_interfaces": [
+        "source/platform/recovery_channel.hpp"
+      ],
+      "sources": [
+        "source/platform/recovery_queue_linux.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_authored",
+        "syspane_child"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
+    },
+    {
+      "id": "recovery-worker-runtime",
+      "target": "syspane_recovery_worker_runtime",
+      "type": "STATIC_LIBRARY",
+      "source_owner": "source/platform/",
+      "public_interfaces": [
+        "source/platform/recovery_worker_linux.hpp"
+      ],
+      "private_interfaces": [
+        "source/platform/recovery_channel.hpp"
+      ],
+      "sources": [
+        "source/platform/recovery_worker_linux.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_recovery_store",
+        "syspane_child"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
+    },
+    {
+      "id": "recovery-worker",
+      "target": "syspane_recovery_worker",
+      "type": "EXECUTABLE",
+      "source_owner": "source/application/",
+      "public_interfaces": [],
+      "private_interfaces": [],
+      "sources": [
+        "source/application/recovery_worker.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_recovery_worker_runtime"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
+    },
+    {
+      "id": "recovery-queue-probe",
+      "target": "syspane_recovery_queue_probe",
+      "type": "EXECUTABLE",
+      "source_owner": "tests/editor/",
+      "public_interfaces": [],
+      "private_interfaces": [],
+      "sources": [
+        "tests/editor/recovery_queue_probe.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_recovery_queue",
+        "Threads::Threads"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
+    },
+    {
+      "id": "recovery-worker-probe",
+      "target": "syspane_recovery_worker_probe",
+      "type": "EXECUTABLE",
+      "source_owner": "tests/editor/",
+      "public_interfaces": [],
+      "private_interfaces": [],
+      "sources": [
+        "tests/editor/recovery_worker_probe.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_recovery_worker_runtime"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
     }
   ]
 }

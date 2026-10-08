@@ -155,3 +155,15 @@ Cases in SP-ACCEPTANCE-TRACES retain their original oracles. Additional boundary
 checks cover capacity, malformed observations, replay exhaustion and epoch changes.
 Evidence and the handoff will identify exact commands, source/artifact inputs and
 remaining native work under the existing campaign IDs.
+
+The native recovery-queue checkpoint raises the owned development allocation to
+8 GiB. Its first build added about 23 MiB of new native objects, libraries and the
+I/O helper. Thirteen completed recording directories were archived with exact bytes
+and node metadata before reclaiming 11858810 duplicate bytes. The following build
+preflight still stopped at 2643201634 checkout-output bytes plus 4614592045 native
+bytes and the unchanged 268435456-byte reservation. Two native probes and their
+interruption/integration records require additional room. The measured checkout
+and native filesystems have more than 163 GB and 1002 GB free respectively. This
+is a bounded reversible development allocation; product limits, fixed acceptance
+criteria and build/test/package reservations remain unchanged. Exact measurement
+and the preserved stop are in ignored out/evidence/recovery-queue-workspace-allocation.json.

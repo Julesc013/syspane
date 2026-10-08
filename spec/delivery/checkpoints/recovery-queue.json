@@ -1,0 +1,671 @@
+{
+  "recorded_at": "2026-10-08T15:38:27.273378+00:00",
+  "source_base": "830d05d928c04a787af38fc2d0d1f65dac5f5062",
+  "scope": "Bounded coalesced native recovery I/O with held process lifetime and explicit retirement fences; actual editor capture, controls and all complete editions remain required.",
+  "fixed_inputs": [
+    {
+      "source_base": "830d05d928c04a787af38fc2d0d1f65dac5f5062",
+      "frozen_at": "2026-10-08T15:02:53.257555+00:00",
+      "inputs": {
+        "spec/delivery/packages/w-10-recovery-queue.md": "b36ec5480186dcfbdf556068a057f5e6bc93b28fef03304210cd066188c164eb",
+        "tests/editor/recovery-queue-cases.json": "2c5da74ef79fa60565fcd1cd874c3bcddf26850b9a08efff3876294e42336d94"
+      }
+    }
+  ],
+  "profile_checks": {
+    "linux-x64-gcc13": {
+      "graph": 2
+    },
+    "windows-x64-gcc15": {
+      "graph": 2
+    },
+    "windows-x86-v141-xp": {
+      "graph": 2
+    }
+  },
+  "native_case_counts": {
+    "RECOVERY-APPLY": 11,
+    "RECOVERY-QUEUE": 31,
+    "RECOVERY-STORE": 74,
+    "RECOVERY-STORED-APPLY": 11
+  },
+  "native_records": [
+    {
+      "family": "RECOVERY-APPLY",
+      "outcome": "pass",
+      "cases": 11,
+      "record": {
+        "local_path": "out/evidence/recovery-queue-native/recovery-apply-cc8edd352da0.json",
+        "sha256": "f2352584782dd07cf7c880b4aa23f421c40aefb4c6051f4480132747ddf98cbf"
+      },
+      "archive": {
+        "local_path": "out/evidence/recovery-queue-native/recovery-apply-cc8edd352da0.zip",
+        "sha256": "df2e38b1df9348b92af7155c8a10b682703d288afa7036f9b18cdca818e85f79"
+      },
+      "node_inventory": {
+        "local_path": "out/evidence/recovery-queue-native/recovery-apply-cc8edd352da0.index.json",
+        "sha256": "a3974da071c4ec0a549ff328d8caaffd4974986f8a0837c91d1c7bb4b6119e84"
+      }
+    },
+    {
+      "family": "RECOVERY-QUEUE",
+      "outcome": "pass",
+      "cases": 28,
+      "record": {
+        "local_path": "out/evidence/recovery-queue-native/recovery-queue-2832104a53b1.json",
+        "sha256": "9eace7054ea5f633a42dd54d3ba1bfefda7fe3ee0c7254de888a68bd52c077d2"
+      },
+      "archive": {
+        "local_path": "out/evidence/recovery-queue-native/recovery-queue-2832104a53b1.zip",
+        "sha256": "eceeb35d1a0f00ccb3c4f358d1977ad937e658d1c0250fab670ae9669084f5c7"
+      },
+      "node_inventory": {
+        "local_path": "out/evidence/recovery-queue-native/recovery-queue-2832104a53b1.index.json",
+        "sha256": "fc8d16d7d86b439867573b78e5a61975e77ca787037dce1d3350036d05a83ab2"
+      }
+    },
+    {
+      "family": "RECOVERY-QUEUE",
+      "outcome": "pass",
+      "cases": 31,
+      "record": {
+        "local_path": "out/evidence/recovery-queue-native/recovery-queue-6126071442cf.json",
+        "sha256": "aec18fede045164b1e1bef71f766ed82553183a7e790f886d90d928bb7fd7dfd"
+      },
+      "archive": {
+        "local_path": "out/evidence/recovery-queue-native/recovery-queue-6126071442cf.zip",
+        "sha256": "386d402020c05ec1991ba904ac37240be259562bf2c941e58f9bb84974cbeab2"
+      },
+      "node_inventory": {
+        "local_path": "out/evidence/recovery-queue-native/recovery-queue-6126071442cf.index.json",
+        "sha256": "aac01707d6e679f31af2da49d50f36f5d6997983fa8131fefac8bcf4f03c9b37"
+      }
+    },
+    {
+      "family": "RECOVERY-STORE",
+      "outcome": "pass",
+      "cases": 74,
+      "record": {
+        "local_path": "out/evidence/recovery-queue-native/recovery-store-1cdf63614624.json",
+        "sha256": "df9f0337f708bbc9f10ee1828047a22b576ac7a230e15029ad709f4e9f2285a3"
+      },
+      "archive": {
+        "local_path": "out/evidence/recovery-queue-native/recovery-store-1cdf63614624.zip",
+        "sha256": "cbe82559517b7ee1c81d0be475d5ba6d2ad34cf6d3e98bad27c4f42400a87c8d"
+      },
+      "node_inventory": {
+        "local_path": "out/evidence/recovery-queue-native/recovery-store-1cdf63614624.index.json",
+        "sha256": "c28cdd5b07b58f5221b1a0557f06895f94ca34621192fe25d1d8a6dd284759ec"
+      }
+    },
+    {
+      "family": "RECOVERY-STORED-APPLY",
+      "outcome": "pass",
+      "cases": 11,
+      "record": {
+        "local_path": "out/evidence/recovery-queue-native/recovery-stored-apply-50817cf5ae6a.json",
+        "sha256": "7b6e4f4dd523407c3685c800933786e3e921b37406af6add3b6b8ca70f87581c"
+      },
+      "archive": {
+        "local_path": "out/evidence/recovery-queue-native/recovery-stored-apply-50817cf5ae6a.zip",
+        "sha256": "4da616d712eb3dc660b80d6ce4687fa95b982b99f2a9590dbf2738ff9fc78f20"
+      },
+      "node_inventory": {
+        "local_path": "out/evidence/recovery-queue-native/recovery-stored-apply-50817cf5ae6a.index.json",
+        "sha256": "e1539de1e6feb97c93c9fb648c0129bbeb445681803e085cabbb3711d3fbf788"
+      }
+    }
+  ],
+  "executions": [
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "configure",
+      "command": [
+        "env",
+        "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+        "cmake",
+        "--preset",
+        "linux-x64-gcc13"
+      ],
+      "started_at": "2026-10-08T15:12:34.987820+00:00",
+      "finished_at": "2026-10-08T15:12:44.026594+00:00",
+      "exit": 0,
+      "passed_cases": 0,
+      "source_manifest_sha256": "a5eaa5a74b07ed9954d0f43dceac3074cc62b980428f7d2187597f5bbba22d91",
+      "source_archive": {
+        "local_path": "out/evidence/recovery-queue/linux-x64-gcc13-configure-36f8bece66/source-inputs.zip",
+        "sha256": "9a155d48f389c435a6128d0909ef18157e6bcb4f7c3012a6192306d90d673e66"
+      },
+      "record": {
+        "local_path": "out/evidence/recovery-queue/linux-x64-gcc13-configure-36f8bece66/result.json",
+        "sha256": "a3c528efdcb1973681682104ac051ab36537c11d3c9b35339ff0948f518325f8"
+      },
+      "later_changes": [
+        "CMakeLists.txt",
+        "source/build/campaign-workspace.json",
+        "source/build/components.json",
+        "spec/experience/editor.md"
+      ]
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "build",
+      "command": [
+        "env",
+        "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+        "cmake",
+        "--build",
+        "--preset",
+        "linux-x64-gcc13"
+      ],
+      "started_at": "2026-10-08T15:12:49.743378+00:00",
+      "finished_at": "2026-10-08T15:12:56.269902+00:00",
+      "exit": 0,
+      "passed_cases": 0,
+      "source_manifest_sha256": "a5eaa5a74b07ed9954d0f43dceac3074cc62b980428f7d2187597f5bbba22d91",
+      "source_archive": {
+        "local_path": "out/evidence/recovery-queue/linux-x64-gcc13-build-34b934c347/source-inputs.zip",
+        "sha256": "9a155d48f389c435a6128d0909ef18157e6bcb4f7c3012a6192306d90d673e66"
+      },
+      "record": {
+        "local_path": "out/evidence/recovery-queue/linux-x64-gcc13-build-34b934c347/result.json",
+        "sha256": "0320029b12fed2a789ccfb08e2a00ef4c0d021c7c1b8bcc87c4df556a361abf8"
+      },
+      "later_changes": [
+        "CMakeLists.txt",
+        "source/build/campaign-workspace.json",
+        "source/build/components.json",
+        "spec/experience/editor.md"
+      ]
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "configure",
+      "command": [
+        "env",
+        "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+        "cmake",
+        "--preset",
+        "linux-x64-gcc13"
+      ],
+      "started_at": "2026-10-08T15:23:49.930044+00:00",
+      "finished_at": "2026-10-08T15:23:59.423882+00:00",
+      "exit": 0,
+      "passed_cases": 0,
+      "source_manifest_sha256": "9c783381ea3936ba5b7c8857ee7fb69eeb6bd700ecadb821fdc8e817cd4695b8",
+      "source_archive": {
+        "local_path": "out/evidence/recovery-queue/linux-x64-gcc13-configure-1d003235bb/source-inputs.zip",
+        "sha256": "249d2b6315888f3abe5929a70c84dd3e0903ae3c159b7b98aafc1309bf2c9300"
+      },
+      "record": {
+        "local_path": "out/evidence/recovery-queue/linux-x64-gcc13-configure-1d003235bb/result.json",
+        "sha256": "6c1684a3dcf98580c964315eed4e9466ce76e0492e6afa7d846db77129ed5638"
+      },
+      "later_changes": [
+        "source/build/campaign-workspace.json",
+        "tests/editor/native_recovery_queue.py",
+        "tests/editor/recovery_queue_probe.cpp",
+        "spec/experience/editor.md"
+      ]
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "build",
+      "command": [
+        "env",
+        "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+        "cmake",
+        "--build",
+        "--preset",
+        "linux-x64-gcc13"
+      ],
+      "started_at": "2026-10-08T15:24:05.106909+00:00",
+      "finished_at": "2026-10-08T15:24:08.273852+00:00",
+      "exit": 0,
+      "passed_cases": 0,
+      "source_manifest_sha256": "9c783381ea3936ba5b7c8857ee7fb69eeb6bd700ecadb821fdc8e817cd4695b8",
+      "source_archive": {
+        "local_path": "out/evidence/recovery-queue/linux-x64-gcc13-build-2ef9d0b377/source-inputs.zip",
+        "sha256": "249d2b6315888f3abe5929a70c84dd3e0903ae3c159b7b98aafc1309bf2c9300"
+      },
+      "record": {
+        "local_path": "out/evidence/recovery-queue/linux-x64-gcc13-build-2ef9d0b377/result.json",
+        "sha256": "0b75db18592b95883d9d64a83ea85a80f7047feec39c555fabffb4710f5302c8"
+      },
+      "later_changes": [
+        "source/build/campaign-workspace.json",
+        "tests/editor/native_recovery_queue.py",
+        "tests/editor/recovery_queue_probe.cpp",
+        "spec/experience/editor.md"
+      ]
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "native",
+      "command": [
+        "env",
+        "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+        "ctest",
+        "--preset",
+        "linux-x64-gcc13",
+        "-R",
+        "^native[.]RECOVERY-QUEUE$",
+        "--output-on-failure"
+      ],
+      "started_at": "2026-10-08T15:24:13.948536+00:00",
+      "finished_at": "2026-10-08T15:24:24.266876+00:00",
+      "exit": 0,
+      "passed_cases": 1,
+      "source_manifest_sha256": "9c783381ea3936ba5b7c8857ee7fb69eeb6bd700ecadb821fdc8e817cd4695b8",
+      "source_archive": {
+        "local_path": "out/evidence/recovery-queue/linux-x64-gcc13-native-1d9c44342b/source-inputs.zip",
+        "sha256": "249d2b6315888f3abe5929a70c84dd3e0903ae3c159b7b98aafc1309bf2c9300"
+      },
+      "record": {
+        "local_path": "out/evidence/recovery-queue/linux-x64-gcc13-native-1d9c44342b/result.json",
+        "sha256": "8fef0d4ebb4297cf7619f0c15a67c7ef78e40b6dd2fe188b5ae8a6ba957c8fb1"
+      },
+      "later_changes": [
+        "source/build/campaign-workspace.json",
+        "tests/editor/native_recovery_queue.py",
+        "tests/editor/recovery_queue_probe.cpp",
+        "spec/experience/editor.md"
+      ],
+      "artifact": {
+        "name": "syspane_recovery_queue_probe",
+        "sha256": "802688ab5b280eee628c999c9886fc9f8d84cbbe3f5af08239c1e47662698648"
+      },
+      "ctest_log": {
+        "local_path": "out/evidence/recovery-queue/linux-x64-gcc13-native-1d9c44342b/ctest-log.zip",
+        "sha256": "51ae0789edff55f85c89ff86873546dd8536e671ab52fc2f970fd82ed2ab9489"
+      }
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "build",
+      "command": [
+        "env",
+        "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+        "cmake",
+        "--build",
+        "--preset",
+        "linux-x64-gcc13"
+      ],
+      "started_at": "2026-10-08T15:27:53.111897+00:00",
+      "finished_at": "2026-10-08T15:28:00.397394+00:00",
+      "exit": 0,
+      "passed_cases": 0,
+      "source_manifest_sha256": "606b585f653aa261278d1e452ee05c7874022acbc00eea17a9f5d5203cf0bbdf",
+      "source_archive": {
+        "local_path": "out/evidence/recovery-queue/linux-x64-gcc13-build-bed766d571/source-inputs.zip",
+        "sha256": "97c72ffc6a8e16e70c77177667a4c98c9a23c9344067ee8c4268d706171aa753"
+      },
+      "record": {
+        "local_path": "out/evidence/recovery-queue/linux-x64-gcc13-build-bed766d571/result.json",
+        "sha256": "c2216435209cb67990031a5c487c743885de2a49b65cae65a1bb009f682eeabd"
+      },
+      "later_changes": [
+        "spec/experience/editor.md"
+      ]
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "native",
+      "command": [
+        "env",
+        "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+        "ctest",
+        "--preset",
+        "linux-x64-gcc13",
+        "-R",
+        "^native[.]RECOVERY-(QUEUE|STORE)$",
+        "--output-on-failure"
+      ],
+      "started_at": "2026-10-08T15:28:06.213331+00:00",
+      "finished_at": "2026-10-08T15:28:14.593528+00:00",
+      "exit": 0,
+      "passed_cases": 2,
+      "source_manifest_sha256": "606b585f653aa261278d1e452ee05c7874022acbc00eea17a9f5d5203cf0bbdf",
+      "source_archive": {
+        "local_path": "out/evidence/recovery-queue/linux-x64-gcc13-native-d6ca55a230/source-inputs.zip",
+        "sha256": "97c72ffc6a8e16e70c77177667a4c98c9a23c9344067ee8c4268d706171aa753"
+      },
+      "record": {
+        "local_path": "out/evidence/recovery-queue/linux-x64-gcc13-native-d6ca55a230/result.json",
+        "sha256": "07d931322c352b5e3ebe29bb7e20b0b10526cd5342719cff07e49554074ff8a6"
+      },
+      "later_changes": [
+        "spec/experience/editor.md"
+      ],
+      "artifact": {
+        "name": "syspane_recovery_queue_probe",
+        "sha256": "bac1ecda2c35c947302cc4bb5d9cf5e28a87dce908f83c621e47876041ad2409"
+      },
+      "ctest_log": {
+        "local_path": "out/evidence/recovery-queue/linux-x64-gcc13-native-d6ca55a230/ctest-log.zip",
+        "sha256": "d614c6325d6cd2046ccc99f79cba36f2caddb0b3c094593cc072448bba709203"
+      }
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "apply",
+      "command": [
+        "env",
+        "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+        "ctest",
+        "--preset",
+        "linux-x64-gcc13",
+        "-R",
+        "^native[.]RECOVERY-(STORED-)?APPLY$",
+        "--output-on-failure"
+      ],
+      "started_at": "2026-10-08T15:28:20.523289+00:00",
+      "finished_at": "2026-10-08T15:28:56.597325+00:00",
+      "exit": 0,
+      "passed_cases": 2,
+      "source_manifest_sha256": "606b585f653aa261278d1e452ee05c7874022acbc00eea17a9f5d5203cf0bbdf",
+      "source_archive": {
+        "local_path": "out/evidence/recovery-queue/linux-x64-gcc13-apply-260a0bbc0f/source-inputs.zip",
+        "sha256": "97c72ffc6a8e16e70c77177667a4c98c9a23c9344067ee8c4268d706171aa753"
+      },
+      "record": {
+        "local_path": "out/evidence/recovery-queue/linux-x64-gcc13-apply-260a0bbc0f/result.json",
+        "sha256": "456c0141e617cf3146466930946fedb19ae95aa0b6d43f648a976bdb390fcb10"
+      },
+      "later_changes": [
+        "spec/experience/editor.md"
+      ],
+      "artifact": {
+        "name": "syspane_editor_recovery_probe",
+        "sha256": "9ef2be352793b39361a6de81ebe9fe494df5a19f7b30533c9aea9a210fef547e"
+      },
+      "ctest_log": {
+        "local_path": "out/evidence/recovery-queue/linux-x64-gcc13-apply-260a0bbc0f/ctest-log.zip",
+        "sha256": "ba657dfb5bd63d9011f1ec3dbfc7674e08c2488ace9440eea5cc6c1a5156c0db"
+      }
+    },
+    {
+      "profile": "windows-x64-gcc15",
+      "action": "configure",
+      "command": [
+        "cmake",
+        "--preset",
+        "windows-x64-gcc15"
+      ],
+      "started_at": "2026-10-08T15:28:42.391940+00:00",
+      "finished_at": "2026-10-08T15:28:43.912697+00:00",
+      "exit": 0,
+      "passed_cases": 0,
+      "source_manifest_sha256": "606b585f653aa261278d1e452ee05c7874022acbc00eea17a9f5d5203cf0bbdf",
+      "source_archive": {
+        "local_path": "out/evidence/recovery-queue/windows-x64-gcc15-configure-e3c6d01a7d/source-inputs.zip",
+        "sha256": "63042822f50b94c9925e8e8fefa218c19a6a26de1b4b1f0b1153dd0e78831270"
+      },
+      "record": {
+        "local_path": "out/evidence/recovery-queue/windows-x64-gcc15-configure-e3c6d01a7d/result.json",
+        "sha256": "74a8081af644919c15979777a2aff5aa92829444910a2ce42de35f1695659286"
+      },
+      "later_changes": [
+        "spec/experience/editor.md"
+      ]
+    },
+    {
+      "profile": "windows-x86-v141-xp",
+      "action": "configure",
+      "command": [
+        "cmake",
+        "--preset",
+        "windows-x86-v141-xp"
+      ],
+      "started_at": "2026-10-08T15:28:42.392270+00:00",
+      "finished_at": "2026-10-08T15:28:44.648374+00:00",
+      "exit": 0,
+      "passed_cases": 0,
+      "source_manifest_sha256": "606b585f653aa261278d1e452ee05c7874022acbc00eea17a9f5d5203cf0bbdf",
+      "source_archive": {
+        "local_path": "out/evidence/recovery-queue/windows-x86-v141-xp-configure-1ed86e30f2/source-inputs.zip",
+        "sha256": "63042822f50b94c9925e8e8fefa218c19a6a26de1b4b1f0b1153dd0e78831270"
+      },
+      "record": {
+        "local_path": "out/evidence/recovery-queue/windows-x86-v141-xp-configure-1ed86e30f2/result.json",
+        "sha256": "69a8599374165c45f4d9fd67d90990e027cc484ff83c2ab9b681466326eb2af8"
+      },
+      "later_changes": [
+        "spec/experience/editor.md"
+      ]
+    },
+    {
+      "profile": "windows-x64-gcc15",
+      "action": "build",
+      "command": [
+        "cmake",
+        "--build",
+        "--preset",
+        "windows-x64-gcc15"
+      ],
+      "started_at": "2026-10-08T15:28:46.114433+00:00",
+      "finished_at": "2026-10-08T15:28:46.261502+00:00",
+      "exit": 0,
+      "passed_cases": 0,
+      "source_manifest_sha256": "606b585f653aa261278d1e452ee05c7874022acbc00eea17a9f5d5203cf0bbdf",
+      "source_archive": {
+        "local_path": "out/evidence/recovery-queue/windows-x64-gcc15-build-98ce44ee2c/source-inputs.zip",
+        "sha256": "63042822f50b94c9925e8e8fefa218c19a6a26de1b4b1f0b1153dd0e78831270"
+      },
+      "record": {
+        "local_path": "out/evidence/recovery-queue/windows-x64-gcc15-build-98ce44ee2c/result.json",
+        "sha256": "681d32f6113020664edb1c3d5a3d7411dae3a3747644ec92373cfd4669933b1c"
+      },
+      "later_changes": [
+        "spec/experience/editor.md"
+      ]
+    },
+    {
+      "profile": "windows-x86-v141-xp",
+      "action": "build",
+      "command": [
+        "cmake",
+        "--build",
+        "--preset",
+        "windows-x86-v141-xp"
+      ],
+      "started_at": "2026-10-08T15:28:46.803947+00:00",
+      "finished_at": "2026-10-08T15:28:48.430951+00:00",
+      "exit": 0,
+      "passed_cases": 0,
+      "source_manifest_sha256": "606b585f653aa261278d1e452ee05c7874022acbc00eea17a9f5d5203cf0bbdf",
+      "source_archive": {
+        "local_path": "out/evidence/recovery-queue/windows-x86-v141-xp-build-da87070ab0/source-inputs.zip",
+        "sha256": "63042822f50b94c9925e8e8fefa218c19a6a26de1b4b1f0b1153dd0e78831270"
+      },
+      "record": {
+        "local_path": "out/evidence/recovery-queue/windows-x86-v141-xp-build-da87070ab0/result.json",
+        "sha256": "55a5b3871c31e9d18e4ddb8f8ccf390d51c1b4f4a8d8e782989e6fbd023eb561"
+      },
+      "later_changes": [
+        "spec/experience/editor.md"
+      ]
+    },
+    {
+      "profile": "windows-x64-gcc15",
+      "action": "graph",
+      "command": [
+        "ctest",
+        "--preset",
+        "windows-x64-gcc15",
+        "-R",
+        "^composition[.]",
+        "--output-on-failure"
+      ],
+      "started_at": "2026-10-08T15:28:48.953590+00:00",
+      "finished_at": "2026-10-08T15:28:49.184568+00:00",
+      "exit": 0,
+      "passed_cases": 2,
+      "source_manifest_sha256": "606b585f653aa261278d1e452ee05c7874022acbc00eea17a9f5d5203cf0bbdf",
+      "source_archive": {
+        "local_path": "out/evidence/recovery-queue/windows-x64-gcc15-graph-bcb2d9ae1e/source-inputs.zip",
+        "sha256": "63042822f50b94c9925e8e8fefa218c19a6a26de1b4b1f0b1153dd0e78831270"
+      },
+      "record": {
+        "local_path": "out/evidence/recovery-queue/windows-x64-gcc15-graph-bcb2d9ae1e/result.json",
+        "sha256": "dae77520aef11a2419cac3e60f309c56a40bb4f5263c89d00b62b81cb1afe5e7"
+      },
+      "later_changes": [
+        "spec/experience/editor.md"
+      ],
+      "artifact": {
+        "name": "syspane_scene_tests.exe",
+        "sha256": "541bd7efd516560379aa567c14da95ee7efa305b1c42e3d5ebae5f4359d59213"
+      },
+      "ctest_log": {
+        "local_path": "out/evidence/recovery-queue/windows-x64-gcc15-graph-bcb2d9ae1e/ctest-log.zip",
+        "sha256": "0e95fcc0be4045a59ac8b1755cc6965b5b9f96fa60c654aebbcde603c1d37702"
+      }
+    },
+    {
+      "profile": "windows-x86-v141-xp",
+      "action": "graph",
+      "command": [
+        "ctest",
+        "--preset",
+        "windows-x86-v141-xp",
+        "-R",
+        "^composition[.]",
+        "--output-on-failure"
+      ],
+      "started_at": "2026-10-08T15:28:50.630917+00:00",
+      "finished_at": "2026-10-08T15:28:50.909911+00:00",
+      "exit": 0,
+      "passed_cases": 2,
+      "source_manifest_sha256": "606b585f653aa261278d1e452ee05c7874022acbc00eea17a9f5d5203cf0bbdf",
+      "source_archive": {
+        "local_path": "out/evidence/recovery-queue/windows-x86-v141-xp-graph-3f2e0f8c15/source-inputs.zip",
+        "sha256": "63042822f50b94c9925e8e8fefa218c19a6a26de1b4b1f0b1153dd0e78831270"
+      },
+      "record": {
+        "local_path": "out/evidence/recovery-queue/windows-x86-v141-xp-graph-3f2e0f8c15/result.json",
+        "sha256": "b13d3baa1c5de5f3e8bed43370dabad378169e6662214d04838c5c9421eb5afb"
+      },
+      "later_changes": [
+        "spec/experience/editor.md"
+      ],
+      "artifact": {
+        "name": "syspane_scene_tests.exe",
+        "sha256": "bff55c840dde73e5186a6c9751f5b17ae2cf6fca07677e0babfab7dd4f7de190"
+      },
+      "ctest_log": {
+        "local_path": "out/evidence/recovery-queue/windows-x86-v141-xp-graph-3f2e0f8c15/ctest-log.zip",
+        "sha256": "19ca4fbb3ac5626a300b14304e9a5761092954efdfd2c415e2483577b5cbf69c"
+      }
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "graph",
+      "command": [
+        "env",
+        "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+        "ctest",
+        "--preset",
+        "linux-x64-gcc13",
+        "-R",
+        "^composition[.]",
+        "--output-on-failure"
+      ],
+      "started_at": "2026-10-08T15:29:02.389831+00:00",
+      "finished_at": "2026-10-08T15:29:02.796845+00:00",
+      "exit": 0,
+      "passed_cases": 2,
+      "source_manifest_sha256": "606b585f653aa261278d1e452ee05c7874022acbc00eea17a9f5d5203cf0bbdf",
+      "source_archive": {
+        "local_path": "out/evidence/recovery-queue/linux-x64-gcc13-graph-14325abccc/source-inputs.zip",
+        "sha256": "97c72ffc6a8e16e70c77177667a4c98c9a23c9344067ee8c4268d706171aa753"
+      },
+      "record": {
+        "local_path": "out/evidence/recovery-queue/linux-x64-gcc13-graph-14325abccc/result.json",
+        "sha256": "7a551ebb44e879a37df12f1a9aa2b3cdea423ad483c76b3d8997208f4e2efd50"
+      },
+      "later_changes": [
+        "spec/experience/editor.md"
+      ],
+      "artifact": {
+        "name": "syspane_scene_tests",
+        "sha256": "6b6e0653c0d9e0d7445407a5f9d12a863ec394159a3f092017c904cc919fad2c"
+      },
+      "ctest_log": {
+        "local_path": "out/evidence/recovery-queue/linux-x64-gcc13-graph-14325abccc/ctest-log.zip",
+        "sha256": "262702348b3660c367fddb8cd69305abd2cd9412ea7c4e942f86d01d2964d243"
+      }
+    }
+  ],
+  "flows": [
+    {
+      "local_path": "out/evidence/recovery-queue-execution-linux-x64-gcc13-002ad6839e.json",
+      "sha256": "9e066ab4e03e467032f08a964f8030024ba9f2d2b1014025816d67e93e44e8be"
+    },
+    {
+      "local_path": "out/evidence/recovery-queue-execution-linux-x64-gcc13-318933f84d.json",
+      "sha256": "24b6e4656e436dee4fa14aeb7895d6aa7e736ba3e1a352d974a43b57ea5c6330"
+    },
+    {
+      "local_path": "out/evidence/recovery-queue-execution-linux-x64-gcc13-3249422ed9.json",
+      "sha256": "88cc3960e20dc47572dac1f69c9a7ddbaf1d4c570f98d4c0dc7727debd444cef"
+    },
+    {
+      "local_path": "out/evidence/recovery-queue-execution-linux-x64-gcc13-efcc355d87.json",
+      "sha256": "176b47de8fd365db8a89d98739c8da2f5d3e3136eec753588eed709f38d42b06"
+    },
+    {
+      "local_path": "out/evidence/recovery-queue-execution-windows-x64-gcc15-ffd989ae36.json",
+      "sha256": "d18b9c633a6dd9e52336676d3fe8322c9213e7946adefee5cfad839156fb7a92"
+    },
+    {
+      "local_path": "out/evidence/recovery-queue-execution-windows-x86-v141-xp-51b950208e.json",
+      "sha256": "2720eed27b6f2923b28ea199e6929f22772484406519c2c83a05fcbc79d00990"
+    }
+  ],
+  "specification": {
+    "schemas": 46,
+    "fixtures": 158,
+    "tool_tests": 62,
+    "passed": 60,
+    "skipped": 2,
+    "record": {
+      "local_path": "out/evidence/recovery-queue-spec-checks.json",
+      "sha256": "86f6575609550cb8a7eb4c25b3a87a4062e6a7e442a936d9e9988c4d84ceb61f"
+    },
+    "tool_sources": {
+      "spec/tools/specctl.py": "2193fbaef2c886dbdcbb667c5f28bd85a1ed5db8711b03975a646911ac3572c6",
+      "spec/tools/tests/test_specctl.py": "4c43c4c05efcd51565766215d547fae6bf53e121cebeb2e954cdd6c48c678f7e"
+    }
+  },
+  "artifact_inventory": {
+    "local_path": "out/evidence/recovery-queue-artifacts.json",
+    "sha256": "58a5a8226c3422244470a6667194947a40d369b88ebeb0ab457fd254fcb43ec7"
+  },
+  "unchanged_existing_contract_files": 218,
+  "workspace_preservation": {
+    "local_path": "out/evidence/recovery-queue-preserved-prerequisites/index.json",
+    "sha256": "3fbb60b636a37517b87eb8a0895e316165c436f7c5f92016274cec5a76b0facc"
+  },
+  "workspace_allocation": {
+    "local_path": "out/evidence/recovery-queue-workspace-allocation.json",
+    "sha256": "3f8c876936a8666e8ebf144601b233386a998c8b931ec56bd53fd3a16420661b"
+  },
+  "preserved_failures": [
+    "Build reservation stopped after the new queue/runtime/helper artifacts. Thirteen completed recording directories were archived and verified before removing duplicate working copies. The subsequent reservation still stopped; a measured reversible 8 GiB development allocation preserves the unchanged action reservations and product limits.",
+    "Earlier CONTENT-COMMANDS and native accessibility timeouts and GTK shutdown diagnostics remain unresolved."
+  ],
+  "observations": [
+    "Initial 28-case queue run passed. Three additional empty/opaque-byte/early-refusal scenarios pass; the probe uses hex for exact binary observations.",
+    "The stopped-worker observer now requires the expected replacement ticket after SIGCONT; no observed failure or fixed outcome was removed."
+  ],
+  "limitations": [
+    "The 31 queue scenarios establish the named ext4 development experiment, not native editor/UI or other OS qualification.",
+    "The trusted host must supply current context/grants and close on policy/session/generation change; Keep/capture scheduling, crash startup offers and real Restore/Discard/Keep controls remain required.",
+    "A granted action can race close: unacknowledged publication remains unknown until verified reopen. Closing does not authorize deletion.",
+    "Normal host teardown closes and polls until verified child exit before destruction; the existing emergency Child destructor is not a GTK shutdown strategy.",
+    "Full portable results remain at earlier checkpoints; this addition runs the required native storage/Apply and all-profile component checks.",
+    "Historical toolset builds ran on contemporary Windows; historical native qualification, installed ownership, full accessibility/performance and all five complete editions remain required.",
+    "No privileged operation, public release or Git history rewrite performed."
+  ]
+}

@@ -414,7 +414,8 @@
         "SP-W10-NATIVE-CLIPBOARD",
         "SP-W10-RECOVERY-DRAFT",
         "SP-W10-RECOVERY-APPLY",
-        "SP-W10-RECOVERY-STORE"
+        "SP-W10-RECOVERY-STORE",
+        "SP-W10-RECOVERY-QUEUE"
       ],
       "acceptance_tests": [
         "T-EDITOR",
@@ -441,14 +442,24 @@
         "tests/editor/recovery_store_probe.cpp",
         "tests/editor/native_recovery_store.py",
         "tests/editor/recovery-store-cases.json",
-        "tests/editor/recovery-store-integration.json"
+        "tests/editor/recovery-store-integration.json",
+        "source/platform/recovery_queue_linux.hpp",
+        "source/platform/recovery_queue_linux.cpp",
+        "source/platform/recovery_worker_linux.hpp",
+        "source/platform/recovery_worker_linux.cpp",
+        "source/platform/recovery_channel.hpp",
+        "source/application/recovery_worker.cpp",
+        "tests/editor/recovery_queue_probe.cpp",
+        "tests/editor/recovery_worker_probe.cpp",
+        "tests/editor/native_recovery_queue.py",
+        "tests/editor/recovery-queue-cases.json"
       ],
       "status": "in_progress",
       "authority_class": "development",
       "execution_grant": "user:foundation-native-campaign-2026-10-05",
-      "notes": "Private Linux recovery storage now has bounded exact bytes, conditional retirement, stale-version refusal, explicit guards and native ext4 interruption evidence. Composed native tests retain exact editor scene/font Apply and lost-result outcomes through storage reopen. Continue one active/one latest pending owner queue, session/generation invalidation, recovery-unavailable reporting and actual Restore/Discard/Keep controls, then installed ownership, scene-aligned entry/restoration, known native diagnostics, full accessibility/performance and all five complete editions. Historical native qualification and other platform adapters remain required.",
-      "package": "delivery/packages/w-10-recovery-store.md",
-      "evidence": "delivery/recovery-store-handoff.md"
+      "notes": "Native recovery I/O now has one active/one latest pending operation, held-child lifetime, matching context/tickets, guarded private-file access and terminal retirement fences. Native coalescing, close/parent death, forged messages, deadline and stored-Apply checks pass. Continue actual editor capture and Keep rules, verified host generation/policy context, crash startup offers and Restore/Discard/Keep controls with independent observations. Installed ownership, scene-aligned entry/restoration, known native diagnostics, full accessibility/performance, historical qualification and all five complete editions remain required.",
+      "package": "delivery/packages/w-10-recovery-queue.md",
+      "evidence": "delivery/recovery-queue-handoff.md"
     },
     {
       "id": "W-11",

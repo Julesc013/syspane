@@ -65,6 +65,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Native observation error and focus boundary](w-10-native-observation.md) — Distinguish inaccessible observations from actual absent state without weakening native acceptance.
 - [Recovery draft native Apply boundary](w-10-recovery-apply.md) — Verified generation identity and explicit recovered Apply through the private Linux store.
 - [Bounded editor recovery drafts](w-10-recovery-draft.md) — Generation-bound unsaved scene intent restored explicitly through the existing draft and transaction owner.
+- [Bounded native recovery operation owner](w-10-recovery-queue.md) — Coalesced private-file operations with held child lifetime, explicit grants and retirement fences.
 - [Private native recovery record storage](w-10-recovery-store.md) — Bounded exact-byte retention with conditional replacement, retirement and process-cut evidence.
 - [Bounded authored scene fragments](w-10-scene-fragments.md) — Portable copy ownership and atomic paste without implicit package import.
 - [Deterministic pointer snapping and visible alignment guides](w-10-snap.md) — Close bounded grid and guide projection through existing editor gestures and typed edits.

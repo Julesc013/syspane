@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-08T14:47:10.781309+00:00", "scope": "Private Linux recovery storage and composed native Apply; bounded owner queue, controls and complete editions remain open"}
+updated: {"by": "codex", "at": "2026-10-08T15:33:50.064290+00:00", "scope": "Bounded native recovery queue and helper; actual editor capture, recovery controls and all complete editions remain open"}
 ---
 
 # Current state and next admitted boundary
@@ -22,11 +22,11 @@ recordings are local ignored `out/` content; the retired root is absent from the
 tracked tree. See `docs/developers/build.md` in the repository for checkout
 setup and the [repository contract](../foundation/repository.md) for ownership.
 
-The [native recovery storage checkpoint](recovery-store-handoff.md) adds
-private bounded files, conditional replacement/retirement and independently checked
-process interruption on Linux ext4. Stored drafts also pass exact native Restore/Apply
-and lost-result checks through the [shared recovery owner](recovery-draft-handoff.md).
-The background queue and actual Restore/Discard/Keep controls remain the next gate.
+The [native recovery queue checkpoint](recovery-queue-handoff.md) adds
+one active and one latest pending capture, guarded helper processes, exact completion
+identity and retirement fences. Native checks cover coalescing, process death, stale
+messages and closure. The [file store](recovery-store-handoff.md) retains exact
+bytes. Actual editor capture and Restore/Discard/Keep controls remain the next gate.
 
 The [native clipboard checkpoint](native-clipboard-handoff.md) adds explicit
 Copy/Paste to the admitted Linux X11 development editor. Transfers are bounded,
@@ -775,10 +775,11 @@ release-identity decisions remain open.
 
 ## Next work
 
-Continue W-10 with the bounded native recovery queue and explicit Restore/Discard/Keep
-controls, using the [recovery-store handoff](recovery-store-handoff.md) and linked
-packages. The file primitive and composed native Apply checks pass; product retention
-and UI integration still require session/generation guards and independent observations. Preserve the existing graph, frozen acceptance and unrelated native tracks.
+Continue W-10 with actual editor capture and Restore/Discard/Keep controls, using
+the [recovery-queue handoff](recovery-queue-handoff.md) and linked packages. The
+native queue, file primitive and composed Apply checks pass; product recovery still
+requires verified host context, Keep/capture rules, invalidation/reaping and
+independent native UI observations. Preserve the existing graph and fixed oracles.
 Installed controller/catalog/policy ownership, scene-aligned entry/restoration,
 full accessibility/performance and known GTK shutdown diagnostics remain open.
 

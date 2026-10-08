@@ -47,8 +47,25 @@ reopen state and checks unsafe files. The composed Apply oracle persists and reo
 real editor records through separate native owners while retaining the fixed Apply
 outcomes. Run the ten shared recovery cases above and `ctest --preset <profile> -R
 '^composition[.]' --output-on-failure` on all three development profiles. See the
-[storage handoff](../../spec/delivery/recovery-store-handoff.md). Product queue,
-startup offers and native Restore/Discard/Keep controls are still pending.
+[storage handoff](../../spec/delivery/recovery-store-handoff.md).
+
+The [queue package](../../spec/delivery/packages/w-10-recovery-queue.md) adds
+LinuxRecoveryQueue and SysPane.RecoveryWorker. Supply an explicitly authorized
+RecoveryContext with separately verified session/profile/generation, policy revision
+and read/retain/erase grants. Poll and consume the initial load before enqueueing a
+capture or retirement. Captures coalesce; retirement permanently seals that owner.
+Every successful completion requires matching bytes/context and verified helper exit.
+Close on any relevant authority or lifetime change, continue polling until reaped,
+then destroy the owner. Regrant does not resume it. The helper performs recovery
+filesystem operations; never move those calls into GTK callbacks.
+
+After ordinary preflight/configure/build, run `ctest --preset linux-x64-gcc13 -R
+'^native[.]RECOVERY-(QUEUE|STORE|APPLY|STORED-APPLY)$' --output-on-failure` in the
+admitted non-root ext4 environment. Queue tests include a separate development fault
+worker, real held-child stop/exit, forged protocol replies and exact final files.
+Run the component graph checks above on all three profiles. See the
+[queue handoff](../../spec/delivery/recovery-queue-handoff.md). Actual editor capture,
+startup offers, Keep semantics and native Restore/Discard/Keep controls remain pending.
 
 The [typography package](../../spec/delivery/packages/w-09-typography.md) introduces
 theme 0.2 and `configuration::theme_font(theme, role)`. It returns an owned family,

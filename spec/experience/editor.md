@@ -222,3 +222,11 @@ composed native Apply. Session-bound queues, policy/lifetime invalidation and ac
 Restore/Discard recovery/Keep controls remain required before enabling the complete
 recovery feature. Keep unsaved intent separate from committed
 configuration and preserve the existing independent exit and current-policy boundaries.
+
+The [native queue contract](../delivery/packages/w-10-recovery-queue.md) supplies
+coalesced helper I/O and terminal retirement fences. The trusted host must close it
+on relevant policy/session/generation changes and retain it until verified child
+exit; a regrant needs a fresh owner. Its [checkpoint](../delivery/recovery-queue-handoff.md)
+does not enable editor autosave or recovery offers. Define Keep for later against
+subsequent capture, inspect records with current EditorDraft authority, and verify
+real controls and crash startup behavior before that feature is admitted.
