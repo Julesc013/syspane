@@ -30,6 +30,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Supervised native content commands](w-08-native-content.md) — Connect retained resource preparation to authenticated native commands and exact controller replacement.
 - [Linux profile directory ownership](w-08-profile-owner.md) — Explicit paths, private atomic initialization and exclusive controller lifetime.
 - [Initial profile and policy-bound native store](w-08-profile-startup.md) — Shipped default content, atomic first generation and existing transaction composition.
+- [Thread-bound profile storage for asynchronous commands](w-08-profile-worker.md) — Retain native profile ownership across joined command workers.
 - [Committed request reconciliation across producer epochs](w-08-reconciliation.md) — Recover durable outcomes through authenticated read-only IPC without resubmitting mutations.
 - [Durable pinned resource generations](w-08-resource-generations.md) — Bind command identity and generation recovery to the exact prepared content closure.
 - [Independent transaction deadlines and controller recovery](w-08-supervised-transactions.md) — Bound uncooperative transaction work without killing threads or replaying uncertain mutations.

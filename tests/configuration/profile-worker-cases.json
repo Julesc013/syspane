@@ -1,0 +1,42 @@
+{
+  "version": "0.1.0",
+  "profile": "profile:default",
+  "principal": "fixture:principal",
+  "epoch": "E1",
+  "cases": [
+    "cold-start-thread-and-bytes",
+    "locks-held-between-commands",
+    "two-joined-command-workers",
+    "exact-replay-no-extra-generation",
+    "completion-before-exit-remains-pending",
+    "held-policy-concurrent-load-and-close",
+    "cancel-before-permit",
+    "guard-readback-and-recursive-refusal",
+    "policy-reentry-refuses",
+    "policy-revocation-invalidates",
+    "startup-failure-joins",
+    "native-policy-default",
+    "close-reopen-and-closed-calls",
+    "cut-before-selection",
+    "cut-after-durability",
+    "wrong-output-oracle-rejects"
+  ],
+  "commands": [
+    {"request_id": "R", "expected_revision": "0", "resources_ms": 1500},
+    {"request_id": "R2", "expected_revision": "1", "resources_ms": 2000}
+  ],
+  "expected": {
+    "initial_revision": "0",
+    "first_revision": "1",
+    "second_revision": "2",
+    "generations_after_two_commits": 3,
+    "concurrent_error": "profile_worker.busy",
+    "recursive_error": "profile_worker.reentrant",
+    "closed_error": "profile_worker.closed",
+    "pending_code": "request.pending"
+  },
+  "cuts": [
+    {"phase": "store.selector_ready", "revision": "0", "outcome": "unknown"},
+    {"phase": "store.durable", "revision": "1", "outcome": "accepted"}
+  ]
+}

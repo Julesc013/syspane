@@ -27,6 +27,7 @@ behaviour has been implemented. See [audit disposition](spec/delivery/audit-2026
 
 ## First native campaign
 
+- [x] W-08 native profile worker: one storage thread and held profile locks across joined asynchronous command workers, with exact persistence and crash reconciliation. See the [handoff](spec/delivery/profile-worker-handoff.md).
 - [x] W-08 shipped initial scene/theme, resource bootstrap 0.5 and policy-bound Linux profile store, with exact startup/interruption/reconciliation evidence. See the [handoff](spec/delivery/profile-startup-handoff.md).
 - [x] W-08 Linux profile directory owner: XDG/portable roots, exact private markers, exclusive locks and interrupted initialization. See the [handoff](spec/delivery/profile-owner-handoff.md).
 - [ ] Connect the composed profile store to the supervised installed controller, import catalog and native UI; qualify protected-policy deployment and retain all release gates.

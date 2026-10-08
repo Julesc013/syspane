@@ -303,7 +303,8 @@
         "SP-W08-LARGE-COMMANDS",
         "SP-W08-THEME-COMMANDS",
         "SP-W08-PROFILE-OWNER",
-        "SP-W08-PROFILE-STARTUP"
+        "SP-W08-PROFILE-STARTUP",
+        "SP-W08-PROFILE-WORKER"
       ],
       "acceptance_tests": [
         "T-TRANSACTION",
@@ -343,14 +344,19 @@
         "tests/configuration/profile_startup_probe.cpp",
         "tests/configuration/native_profile_startup.py",
         "tests/configuration/profile-startup-cases.json",
-        "tests/configuration/profile-startup-command-case.json"
+        "tests/configuration/profile-startup-command-case.json",
+        "source/platform/profile_worker_linux.hpp",
+        "source/platform/profile_worker_linux.cpp",
+        "tests/configuration/profile_worker_probe.cpp",
+        "tests/configuration/native_profile_worker.py",
+        "tests/configuration/profile-worker-cases.json"
       ],
       "status": "in_progress",
       "authority_class": "development",
       "execution_grant": "user:foundation-native-campaign-2026-10-05",
-      "notes": "Compiled product defaults, guarded resource bootstrap manifest 0.5 and LinuxProfileStore now connect profile ownership, existing generation/transaction owners and current protected-policy sampling. First configuration is published with a complete revision-zero resource generation; restarts never reseed existing roots. Native cuts, exact bytes, normal edit/reconciliation, same-revision policy drift and read-only recovery have fixed evidence. Positive protected-policy deployment remains unqualified. Next integrate the composed store with supervised installed controller/IPC, native UI and import catalog. Full layers/updates, non-Linux storage and all five complete editions remain required.",
-      "package": "delivery/packages/w-08-profile-startup.md",
-      "evidence": "delivery/profile-startup-handoff.md"
+      "notes": "LinuxProfileWorker now retains one thread-bound policy/profile/generation owner across real joined AsyncCommands transaction workers. A single blocking invocation slot rejects concurrent access; guarded readback and close preserve native affinity. Fixed native cases verify exact bytes, locks between jobs, pending results before actual join, policy invalidation and pre-selection/post-durability process recovery. Next connect installed controller/IPC and independent process supervision, native UI and import catalog. Protected-policy positive qualification, full layers/updates, non-Linux storage and all five complete editions remain required.",
+      "package": "delivery/packages/w-08-profile-worker.md",
+      "evidence": "delivery/profile-worker-handoff.md"
     },
     {
       "id": "W-09",

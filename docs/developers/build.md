@@ -15,6 +15,30 @@ build` before configuring or building; use `test` or `package` for those actions
 The common active-output budget is unchanged; retained `out/evidence/` archives
 are measured separately. Never use the placeholder account from the example.
 
+The [profile worker package](../../spec/delivery/packages/w-08-profile-worker.md)
+connects LinuxProfileStore to AsyncCommands without transferring a native owner
+between threads. LinuxProfileWorker implements the same blocking GenerationStore
+interface. Create it during supervised controller bootstrap; construct AsyncCommands
+with make_resource_provider(worker, capabilities), then keep subsequent store calls
+on the serialized command worker. Its dedicated storage thread retains all profile
+leases. Session queries continue to use the existing immutable receipt snapshot.
+
+Only one outer invocation is admitted; concurrent calls/close return
+profile_worker.busy. Publication guards may read through the facade on the native
+storage thread; recursive publication/lifecycle calls and other callback reentry
+refuse. After invalidating command admission and joining transaction workers, close
+the facade off the UI loop. close joins storage and releases leases; it does not
+bound a hung I/O operation. Installed composition still needs the existing exact
+process supervisor and transaction deadlines. Never detach or kill a C++ thread.
+
+After budget preflight/configure/build, run `ctest --preset linux-x64-gcc13 -R
+'^native[.]PROFILE-WORKER$' --output-on-failure` in the admitted non-root ext4 lab.
+Run profile/startup/storage regressions and configuration.COMMAND-/RECON- checks,
+plus component graphs. The [handoff](../../spec/delivery/profile-worker-handoff.md)
+records thread observations, exact stored bytes, actual process cuts and remaining
+installed lifecycle/policy requirements. Positive policy cases are in-process test
+fixtures; no product policy override or installed policy is introduced.
+
 The [initial profile package](../../spec/delivery/packages/w-08-profile-startup.md)
 provides initial_profile and LinuxProfileStore. Shipped scene/theme bytes come from
 configuration/defaults/profile.json; settings defaults come from the existing
