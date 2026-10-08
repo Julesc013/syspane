@@ -1,4 +1,5 @@
 #pragma once
+#include "transaction.hpp"
 #include <functional>
 #include <memory>
 #include <optional>
@@ -23,7 +24,8 @@ class LinuxProfileOwner {
 public:
     using Guard=std::function<bool()>;
     using Transition=std::function<void(const std::string&)>;
-    LinuxProfileOwner(const ProfileLocation&,bool create,const Guard&,Transition={});
+    using InitialProfile=std::function<configuration::Committed()>;
+    LinuxProfileOwner(const ProfileLocation&,bool create,const Guard&,Transition={},InitialProfile={});
     ~LinuxProfileOwner();
     LinuxProfileOwner(const LinuxProfileOwner&)=delete;
     LinuxProfileOwner& operator=(const LinuxProfileOwner&)=delete;

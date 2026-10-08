@@ -302,7 +302,8 @@
         "SP-W08-NATIVE-CONTENT",
         "SP-W08-LARGE-COMMANDS",
         "SP-W08-THEME-COMMANDS",
-        "SP-W08-PROFILE-OWNER"
+        "SP-W08-PROFILE-OWNER",
+        "SP-W08-PROFILE-STARTUP"
       ],
       "acceptance_tests": [
         "T-TRANSACTION",
@@ -332,14 +333,24 @@
         "tests/configuration/profile_owner_probe.cpp",
         "tests/configuration/native_profile_owner.py",
         "tests/configuration/profile-owner-cases.json",
-        "tests/configuration/profile-owner-stage-cases.json"
+        "tests/configuration/profile-owner-stage-cases.json",
+        "configuration/defaults/profile.json",
+        "source/configuration/initial_profile.hpp",
+        "source/configuration/initial_profile.cpp",
+        "source/platform/profile_store_linux.hpp",
+        "source/platform/profile_store_linux.cpp",
+        "tests/configuration/initial_profile_tests.cpp",
+        "tests/configuration/profile_startup_probe.cpp",
+        "tests/configuration/native_profile_startup.py",
+        "tests/configuration/profile-startup-cases.json",
+        "tests/configuration/profile-startup-command-case.json"
       ],
       "status": "in_progress",
       "authority_class": "development",
       "execution_grant": "user:foundation-native-campaign-2026-10-05",
-      "notes": "Linux profile ownership now selects explicit XDG/portable configuration/content/state roots, creates private absent-or-complete leaves without replacing collisions, and retains exclusive controller locks. Current guards, exact metadata, substitutions, process cuts and composition with the real generation/recovery stores have independent native checks. Existing authored/theme commands retain their previous contracts and evidence. Next connect this owner to the supervised installed controller, catalog/default generation and protected mandatory policy. Full layers/updates, non-Linux storage and all five complete desktop editions remain required.",
-      "package": "delivery/packages/w-08-profile-owner.md",
-      "evidence": "delivery/profile-owner-handoff.md"
+      "notes": "Compiled product defaults, guarded resource bootstrap manifest 0.5 and LinuxProfileStore now connect profile ownership, existing generation/transaction owners and current protected-policy sampling. First configuration is published with a complete revision-zero resource generation; restarts never reseed existing roots. Native cuts, exact bytes, normal edit/reconciliation, same-revision policy drift and read-only recovery have fixed evidence. Positive protected-policy deployment remains unqualified. Next integrate the composed store with supervised installed controller/IPC, native UI and import catalog. Full layers/updates, non-Linux storage and all five complete editions remain required.",
+      "package": "delivery/packages/w-08-profile-startup.md",
+      "evidence": "delivery/profile-startup-handoff.md"
     },
     {
       "id": "W-09",

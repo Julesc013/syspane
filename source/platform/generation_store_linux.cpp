@@ -134,9 +134,10 @@ struct LinuxGenerationStore::Impl {
         auto dir=directory_at(root.fd,name.c_str());const auto manifest_bytes=required(dir.fd,"manifest.json",65536,synchronize);
         need(c::sha256(manifest_bytes)==pointer["manifest"],"storage.manifest_digest");const auto manifest=protocol::parse(manifest_bytes);
         const bool themes=manifest.is_object()&&manifest.value("version",Json())=="0.4.0";
+        const bool bootstrap=manifest.is_object()&&manifest.value("version",Json())=="0.5.0";
         const bool separate=themes||(manifest.is_object()&&manifest.value("version",Json())=="0.3.0");
         need(!themes||manifest.contains("resources"),"storage.resources");
-        const bool resources=manifest.is_object()&&(manifest.value("version",Json())=="0.2.0"||(separate&&manifest.contains("resources")));
+        const bool resources=bootstrap||(manifest.is_object()&&(manifest.value("version",Json())=="0.2.0"||(separate&&manifest.contains("resources"))));
         need((resources?protocol::members(manifest,{"version","revision","settings","scene","identity","resources"}):
             (protocol::members(manifest,{"version","revision","settings","scene","identity"})&&(separate||manifest["version"]=="0.1.0")))&&digest(manifest["settings"])&&digest(manifest["scene"]),"storage.manifest");
         const auto settings=required(dir.fd,"settings.json",16384,synchronize),scene=required(dir.fd,"scene.json",262144,synchronize);
@@ -151,6 +152,7 @@ struct LinuxGenerationStore::Impl {
         }
         if(resources)value.resources=decode_resources(dir.fd,manifest["resources"],value.documents,synchronize,themes);
         need(value.documents.settings["revision"]==manifest["revision"],"storage.revision");const auto& id=manifest["identity"];
+        need(!bootstrap||(manifest["revision"]=="0"&&id.is_null()),"storage.bootstrap_identity");
         if(!id.is_null()){
             need(separate?protocol::members(id,{"principal","epoch","request","body_sha256"}):protocol::members(id,{"principal","epoch","request","body"}),"storage.identity");
             for(const char* key:{"principal","epoch","request"})need(id[key].is_string()&&protocol::identifier(id[key].get_ref<const std::string&>()),"storage.identity");
@@ -172,7 +174,7 @@ struct LinuxGenerationStore::Impl {
                  c::authored_revision(value.documents)-*expected==1,"storage.identity");
             value.identity=c::CommitIdentity{id["principal"],id["epoch"],id["request"],std::move(body)};
         }
-        need((!resources&&!separate)||value.identity.has_value(),"storage.resource_identity");
+        need(bootstrap||(!resources&&!separate)||value.identity.has_value(),"storage.resource_identity");
         if(synchronize){flush(dir.fd);flush(root.fd);}
         return value;
     }
@@ -190,7 +192,7 @@ struct LinuxGenerationStore::Impl {
         if(before_rename)before_rename();
         need(::renameat(root.fd,temp.c_str(),root.fd,destination)==0,"storage.replace");
     }
-    c::Publication publish(const c::Committed& next,const std::function<void()>& guard){
+    c::Publication publish(const c::Committed& next,const std::function<void()>& guard,bool bootstrap=false){
         need(!poisoned&&!fallback&&!damaged,"storage.recovery_required");c::validate_authored(next.documents);
         need(next.resources||next.documents.scene["schema_version"]=="0.2.0","storage.resource_required");
         need(generations()<32,"storage.capacity");bool published=false;std::exception_ptr guard_failure;
@@ -199,6 +201,7 @@ struct LinuxGenerationStore::Impl {
             const auto settings=next.documents.settings.dump(),scene=next.documents.scene.dump();
             write(dir.fd,"settings.json",settings);step("settings");write(dir.fd,"scene.json",scene);step("scene");
             Json manifest_value={{"version",next.resources?"0.2.0":"0.1.0"},{"revision",next.documents.settings["revision"]},{"settings",c::sha256(settings)},{"scene",c::sha256(scene)},{"identity",identity(next.identity)}};
+            if(bootstrap)manifest_value["version"]="0.5.0";
             const bool themes=next.identity&&c::parse_command(next.identity->body)["schema_version"]=="0.8.0";
             need(!themes||next.resources!=nullptr,"storage.resources");
             if(next.identity&&(c::parse_command(next.identity->body)["schema_version"]=="0.5.0"||c::parse_command(next.identity->body)["schema_version"]=="0.6.0"||c::parse_command(next.identity->body)["schema_version"]=="0.7.0"||themes)){
@@ -244,6 +247,13 @@ LinuxGenerationStore::~LinuxGenerationStore()=default;
 void LinuxGenerationStore::initialize(const c::Authored& documents){
     need(!impl_->current&&impl_->generations()==0,"storage.not_empty");
     need(impl_->publish({documents,std::nullopt},[] {})==c::Publication::durable,"storage.bootstrap");
+}
+void LinuxGenerationStore::bootstrap(const c::Committed& value,const std::function<void()>& guard){
+    need(!impl_->current&&impl_->generations()==0,"storage.not_empty");
+    c::validate_authored(value.documents);
+    need(value.resources&&!value.identity&&c::authored_revision(value.documents)==0&&protocol::members(value.resources->selection(),{"package","preset"}),"storage.bootstrap_identity");
+    need(static_cast<bool>(guard),"storage.bootstrap_guard");guard();
+    need(impl_->publish(value,guard,true)==c::Publication::durable,"storage.bootstrap");
 }
 c::Committed LinuxGenerationStore::load()const{need(!impl_->poisoned&&impl_->current.has_value(),"storage.unavailable");return *impl_->current;}
 std::string LinuxGenerationStore::generation_token()const{

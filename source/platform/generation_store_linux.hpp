@@ -12,6 +12,8 @@ public:
     LinuxGenerationStore(const LinuxGenerationStore&)=delete;
     LinuxGenerationStore& operator=(const LinuxGenerationStore&)=delete;
     void initialize(const configuration::Authored& documents);
+    // Explicit resource-backed revision zero, for an unpublished private profile stage.
+    void bootstrap(const configuration::Committed&,const std::function<void()>& guard);
     configuration::Committed load()const override;
     // Identity of the verified loaded selecting record; unavailable for empty,
     // indeterminate or read-only recovery states. Not a fresh filesystem read.

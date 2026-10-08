@@ -1,4 +1,5 @@
 #include "profile_owner_linux.hpp"
+#include "generation_store_linux.hpp"
 #include "digest.hpp"
 #include "wire.hpp"
 #include <array>
@@ -132,12 +133,25 @@ void validate(Role& r){
     bound(fresh.fd,".lease",r.lease_info,true);bound(fresh.fd,".owner.json",r.marker_info,true);bound(fresh.fd,r.child,r.child_info);
     need(read(r.marker_file.fd)==r.marker,"profile.marker");
 }
-void acquire(Role& r,bool create,const Guard& guard,const LinuxProfileOwner::Transition& transition){
+void initial_matches(const configuration::Committed& actual,const configuration::Committed& expected){
+    need(!actual.identity&&actual.resources&&actual.documents.settings.dump()==expected.documents.settings.dump()&&
+        actual.documents.scene.dump()==expected.documents.scene.dump()&&actual.resources->selection()==expected.resources->selection()&&
+        actual.resources->theme_pin()==expected.resources->theme_pin(),"profile.initial_changed");
+    auto pins=[](const configuration::ResourceSet& resources){std::set<std::string> result;for(const auto& p:resources.packages())result.insert(configuration::sha256(p->manifest));return result;};
+    need(pins(*actual.resources)==pins(*expected.resources),"profile.initial_changed");
+}
+void acquire(Role& r,bool create,const Guard& guard,const LinuxProfileOwner::Transition& transition,const LinuxProfileOwner::InitialProfile& initial){
     const auto slash=r.root.rfind('/');const auto parent_path=r.root.substr(0,slash);const auto key=r.root.substr(slash+1);
     authorized(guard);auto parent=walk(parent_path,create,guard);filesystem(parent.fd);
     r.directory=File(::openat(parent.fd,key.c_str(),O_RDONLY|O_DIRECTORY|O_NOFOLLOW|O_CLOEXEC));
     if(r.directory.fd>=0){capture(r);validate(r);authorized(guard);return;}
     need(errno==ENOENT&&create,"profile.path");
+    std::optional<configuration::Committed> seed;
+    if(initial&&r.name=="configuration"){
+        authorized(guard);seed=initial();
+        need(seed->resources&&!seed->identity&&configuration::authored_revision(seed->documents)==0,"profile.initial");
+        configuration::validate_resource_binding(*seed->resources,seed->documents);
+    }
     const std::string prefix="."+key+".pending-";std::size_t count=0;
     for(const auto& n:entries(parent.fd,4096))if(n.compare(0,prefix.size(),prefix)==0)++count;
     need(count<8,"profile.capacity");
@@ -152,12 +166,20 @@ void acquire(Role& r,bool create,const Guard& guard,const LinuxProfileOwner::Tra
     write(marker.fd,r.marker);flush(marker.fd);step("marker_flushed");check_stage();
     File lease(::openat(r.directory.fd,".lease",O_WRONLY|O_CREAT|O_EXCL|O_NOFOLLOW|O_CLOEXEC,0600));private_node(lease.fd,false,0);flush(lease.fd);
     step("lease_flushed");check_stage();need(::mkdirat(r.directory.fd,r.child.c_str(),0700)==0,"profile.mkdir");
-    File child(::openat(r.directory.fd,r.child.c_str(),O_RDONLY|O_DIRECTORY|O_NOFOLLOW|O_CLOEXEC));private_node(child.fd,true);flush(child.fd);
+    File child(::openat(r.directory.fd,r.child.c_str(),O_RDONLY|O_DIRECTORY|O_NOFOLLOW|O_CLOEXEC));private_node(child.fd,true);
+    const auto child_path=join(join(parent_path,staging),r.child);
+    if(seed){
+        LinuxGenerationStore store(child_path,[&](const char* phase){if(transition)transition(r.name+".initial."+phase);});
+        store.bootstrap(*seed,check_stage);
+    }
+    flush(child.fd);
     step("child_flushed");check_stage();capture(r);flush(r.directory.fd);step("stage_flushed");step("publish_ready");check_stage();
     // Validate immutable initialization bytes and exact child before the no-replace rename.
     bound(r.directory.fd,".owner.json",r.marker_info,true);bound(r.directory.fd,".lease",r.lease_info,true);bound(r.directory.fd,r.child,r.child_info);
     need(same(private_node(r.child_directory.fd,true),r.child_info),"profile.changed");
-    need(read(r.marker_file.fd)==r.marker&&entries(r.child_directory.fd,0).empty(),"profile.changed");layout(r.directory.fd,r.child);
+    need(read(r.marker_file.fd)==r.marker,"profile.changed");layout(r.directory.fd,r.child);
+    if(seed){LinuxGenerationStore reopened(child_path);initial_matches(reopened.load(),*seed);check_stage();}
+    else need(entries(r.child_directory.fd,0).empty(),"profile.changed");
     need(::syscall(SYS_renameat2,parent.fd,staging.c_str(),parent.fd,key.c_str(),RENAME_NOREPLACE)==0,"profile.publish");
     step("published");current_parent();validate(r);flush(parent.fd);step("parent_flushed");authorized(guard);validate(r);
 }
@@ -180,12 +202,12 @@ ProfileLocation profile_environment(std::string profile,std::optional<std::strin
 }
 struct LinuxProfileOwner::Impl {
     ProfilePaths paths;std::array<Role,3> roles;std::thread::id thread=std::this_thread::get_id();bool active=false,invalid=false;
-    Impl(const ProfileLocation& location,bool create,const Guard& guard,const Transition& transition):paths(profile_paths(location)){
+    Impl(const ProfileLocation& location,bool create,const Guard& guard,const Transition& transition,const InitialProfile& initial):paths(profile_paths(location)){
         need(::geteuid()!=0,"profile.identity");authorized(guard);
         const std::array<std::string,3> names={"configuration","content","state"},roots={paths.configuration,paths.content,paths.state},children={"generations","packages","recovery"};
         for(std::size_t i=0;i<roles.size();++i){auto& role=roles[i];role.name=names[i];role.root=roots[i];role.child=children[i];
             role.marker=protocol::Json{{"format","SysPane.Profile"},{"schema_version","0.1.0"},{"profile",paths.profile},{"kind",role.name},{"mode",paths.mode}}.dump();
-            need(role.marker.size()<=1024,"profile.size");acquire(role,create,guard,transition);}
+            need(role.marker.size()<=1024,"profile.size");acquire(role,create,guard,transition,initial);}
         verify(guard);
     }
     void verify(const Guard& guard){
@@ -198,7 +220,7 @@ struct LinuxProfileOwner::Impl {
         }catch(...){invalid=true;throw;}
     }
 };
-LinuxProfileOwner::LinuxProfileOwner(const ProfileLocation& location,bool create,const Guard& guard,Transition transition):impl_(std::make_unique<Impl>(location,create,guard,transition)){}
+LinuxProfileOwner::LinuxProfileOwner(const ProfileLocation& location,bool create,const Guard& guard,Transition transition,InitialProfile initial):impl_(std::make_unique<Impl>(location,create,guard,transition,initial)){}
 LinuxProfileOwner::~LinuxProfileOwner()=default;
 ProfilePaths LinuxProfileOwner::verified_paths(const Guard& guard)const{impl_->verify(guard);return impl_->paths;}
 }

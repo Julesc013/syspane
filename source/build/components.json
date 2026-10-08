@@ -1455,7 +1455,8 @@
         "source/configuration/theme_font.hpp",
         "source/configuration/authored_theme.hpp",
         "source/configuration/theme_resources.hpp",
-        "source/configuration/theme_command.hpp"
+        "source/configuration/theme_command.hpp",
+        "source/configuration/initial_profile.hpp"
       ],
       "private_interfaces": [],
       "sources": [
@@ -1467,7 +1468,8 @@
         "source/configuration/theme_font.cpp",
         "source/configuration/authored_theme.cpp",
         "source/configuration/theme_resources.cpp",
-        "source/configuration/theme_command.cpp"
+        "source/configuration/theme_command.cpp",
+        "source/configuration/initial_profile.cpp"
       ],
       "allowed_dependencies": [
         "syspane_configuration"
@@ -2944,7 +2946,8 @@
       ],
       "allowed_dependencies": [
         "syspane_authored",
-        "Threads::Threads"
+        "Threads::Threads",
+        "syspane_generation_store"
       ],
       "target_requirements": [
         "cxx17",
@@ -2974,6 +2977,83 @@
       "target_requirements": [
         "cxx17",
         "native_local_ipc"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
+    },
+    {
+      "id": "initial-profile-tests",
+      "target": "syspane_initial_profile_tests",
+      "type": "EXECUTABLE",
+      "source_owner": "tests/configuration/",
+      "public_interfaces": [],
+      "private_interfaces": [],
+      "sources": [
+        "tests/configuration/initial_profile_tests.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_authored"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13",
+        "windows-x64-gcc15",
+        "windows-x86-v141-xp"
+      ]
+    },
+    {
+      "id": "profile-store",
+      "target": "syspane_profile_store",
+      "type": "STATIC_LIBRARY",
+      "source_owner": "source/platform/",
+      "public_interfaces": [
+        "source/platform/profile_store_linux.hpp"
+      ],
+      "private_interfaces": [],
+      "sources": [
+        "source/platform/profile_store_linux.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_profile_owner",
+        "syspane_machine_policy"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
+    },
+    {
+      "id": "profile-startup-probe",
+      "target": "syspane_profile_startup_probe",
+      "type": "EXECUTABLE",
+      "source_owner": "tests/configuration/",
+      "public_interfaces": [],
+      "private_interfaces": [],
+      "sources": [
+        "tests/configuration/profile_startup_probe.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_profile_store"
+      ],
+      "target_requirements": [
+        "cxx17"
       ],
       "roles": [
         "development_test"

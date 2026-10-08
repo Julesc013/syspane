@@ -15,6 +15,29 @@ build` before configuring or building; use `test` or `package` for those actions
 The common active-output budget is unchanged; retained `out/evidence/` archives
 are measured separately. Never use the placeholder account from the example.
 
+The [initial profile package](../../spec/delivery/packages/w-08-profile-startup.md)
+provides initial_profile and LinuxProfileStore. Shipped scene/theme bytes come from
+configuration/defaults/profile.json; settings defaults come from the existing
+registry. No runtime test fixture or build path is needed. The composed store uses
+machine_policy by default, owns the three profile leases and seeds revision zero
+only within a new configuration leaf's private stage. Existing roots never reseed.
+
+Create and use it on one supervised worker, with the admitted capability set and
+explicit ProfileLocation/creation intent. Bind the existing Transactions and resource
+provider to this GenerationStore. A changed or unavailable policy permanently
+invalidates the owner; construct a fresh owner after verified stop/reap. load is a
+trusted authored-state read, not a policy-filtered UI projection. An accepted commit
+still has separate activation/visibility facts. Test injection is only a native
+in-process PolicySource; do not expose policy overrides in product arguments.
+
+After normal preflight/configure/build, run `ctest --preset <profile> -R
+'^configuration[.]INITIAL-PROFILE$' --output-on-failure` on each development profile.
+Linux additionally runs native.PROFILE-STARTUP, PROFILE-OWNER, CONFIG-STORE,
+RESOURCE-GENERATIONS, CONTENT-COMMANDS and RECOVERY-STORE. Run component graphs on
+all profiles. The [handoff](../../spec/delivery/profile-startup-handoff.md) records
+exact artifacts, native cuts and policy provenance limits. Bootstrap manifest 0.5
+has no client receipt; real later edits retain their existing command identities.
+
 The [profile ownership package](../../spec/delivery/packages/w-08-profile-owner.md)
 adds LinuxProfileOwner. Resolve ProfileLocation from explicit native environment or
 an explicitly selected portable data root. Construct on a serialized worker with

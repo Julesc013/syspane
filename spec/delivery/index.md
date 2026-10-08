@@ -80,6 +80,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Independent temporal oracle implementation checkpoint](oracle-handoff.md) — Bind external marker/time evaluation and native X11 fault calibration to source and raw capture evidence.
 - [Explicit private preservation checkpoint](preservation-handoff.md) — Bind opaque configuration copies, native controls and interrupted publication to measured development evidence.
 - [Linux profile directory ownership checkpoint](profile-owner-handoff.md) — Private root selection, interrupted creation, lifetime locks and existing store composition.
+- [Initial profile and native store checkpoint](profile-startup-handoff.md) — Compiled defaults, atomic first resource generation and policy-bound controller storage.
 - [Original-epoch request reconciliation checkpoint](reconciliation-handoff.md) — Recover committed outcomes across controller restart without replaying mutations.
 - [Native editor recovery controls checkpoint](recovery-controls-handoff.md) — Verified generation binding, native recovery decisions and matching capture retirement.
 - [Generation-bound recovery draft checkpoint](recovery-draft-handoff.md) — Explicit scene recovery with current authority and verified native Apply identity.

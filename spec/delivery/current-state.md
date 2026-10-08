@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-08T17:03:20.473996+00:00", "scope": "Linux profile directory ownership; installed composition and all complete editions remain open"}
+updated: {"by": "codex", "at": "2026-10-08T17:30:03.007223+00:00", "scope": "Resource-backed first startup; supervised installed composition and all complete editions remain open"}
 ---
 
 # Current state and next admitted boundary
@@ -21,6 +21,11 @@ Shared build tooling now lives in `source/build/`. Machine bindings and raw
 recordings are local ignored `out/` content; the retired root is absent from the
 tracked tree. See `docs/developers/build.md` in the repository for checkout
 setup and the [repository contract](../foundation/repository.md) for ownership.
+
+The [initial profile checkpoint](profile-startup-handoff.md) supplies
+compiled default content, atomic resource-backed first startup and a policy-bound
+Linux profile store. Existing transactions and recovery retain their contracts.
+Installed supervision, protected-policy deployment and all complete editions remain open.
 
 The [Linux profile ownership checkpoint](profile-owner-handoff.md)
 adds explicit XDG/portable directory selection, private atomic initialization and

@@ -11,6 +11,11 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
+The [initial profile checkpoint](spec/delivery/profile-startup-handoff.md) supplies
+compiled default content, atomic resource-backed first startup and a policy-bound
+Linux profile store. Existing transactions and recovery retain their contracts.
+Installed supervision, protected-policy deployment and all complete editions remain open.
+
 The [Linux profile ownership checkpoint](spec/delivery/profile-owner-handoff.md)
 adds explicit XDG/portable directory selection, private atomic initialization and
 exclusive controller locks. Installed controller/catalog/policy integration and

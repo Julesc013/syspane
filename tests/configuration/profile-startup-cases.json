@@ -1,0 +1,206 @@
+{
+  "documents": {
+    "settings": {
+      "schema_version": "0.1.0",
+      "revision": "0",
+      "sampling": {
+        "resources_ms": 1000,
+        "reconcile_ms": 10000,
+        "max_workers": 4
+      },
+      "history": {
+        "persistent": false,
+        "segment_bytes": 10485760,
+        "segments": 5
+      },
+      "display": {
+        "enabled": true,
+        "theme_id": "theme:native",
+        "reduced_motion": true
+      },
+      "privacy": {
+        "remote_probes": false,
+        "export_enabled": false
+      }
+    },
+    "scene": {
+      "schema_version": "0.3.0",
+      "revision": "0",
+      "scene_id": "scene:default",
+      "theme_id": null,
+      "roots": [
+        "group:network"
+      ],
+      "widgets": [
+        {
+          "id": "group:network",
+          "kind": "group",
+          "title": "Network",
+          "display": {
+            "role": "primary"
+          },
+          "layout": {
+            "base": {
+              "kind": "fixed",
+              "x": 24,
+              "y": 24,
+              "width": 720,
+              "height": 280
+            }
+          },
+          "bindings": [],
+          "priority": "essential",
+          "content": {},
+          "children": [
+            "widget:interfaces"
+          ]
+        },
+        {
+          "id": "widget:interfaces",
+          "kind": "table",
+          "title": "Network interfaces",
+          "display": {
+            "role": "primary"
+          },
+          "layout": {
+            "base": {
+              "kind": "fixed",
+              "x": 12,
+              "y": 32,
+              "width": 696,
+              "height": 236
+            }
+          },
+          "bindings": [
+            {
+              "kind": "selector",
+              "scope": {
+                "kind": "local_host"
+              },
+              "entity_type": "network.interface",
+              "field": "network.receive_bytes",
+              "predicates": [],
+              "mode": "collection",
+              "sort": [],
+              "limit": 8
+            },
+            {
+              "kind": "selector",
+              "scope": {
+                "kind": "local_host"
+              },
+              "entity_type": "network.interface",
+              "field": "network.transmit_bytes",
+              "predicates": [],
+              "mode": "collection",
+              "sort": [],
+              "limit": 8
+            },
+            {
+              "kind": "selector",
+              "scope": {
+                "kind": "local_host"
+              },
+              "entity_type": "network.interface",
+              "field": "network.receive_bytes_per_second",
+              "predicates": [],
+              "mode": "collection",
+              "sort": [],
+              "limit": 8
+            },
+            {
+              "kind": "selector",
+              "scope": {
+                "kind": "local_host"
+              },
+              "entity_type": "network.interface",
+              "field": "network.transmit_bytes_per_second",
+              "predicates": [],
+              "mode": "collection",
+              "sort": [],
+              "limit": 8
+            }
+          ],
+          "priority": "normal",
+          "content": {
+            "columns": [
+              {
+                "label": "Received"
+              },
+              {
+                "label": "Sent"
+              },
+              {
+                "label": "Receive rate"
+              },
+              {
+                "label": "Send rate"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "packages": [
+    {
+      "manifest": "{\"assets\":[{\"bytes\":255,\"media_type\":\"application/json\",\"path\":\"theme.json\",\"sha256\":\"0fcefa008efb79968d3176340fa6f79e16ac218ca470b2f4ce7dee635358c4d5\"}],\"dependencies\":[],\"kind\":\"theme\",\"license\":\"LicenseRef-SysPane-Pending\",\"optional_capabilities\":[],\"package_id\":\"package:syspane-default-theme\",\"required_capabilities\":[],\"schema_version\":\"0.1.0\",\"total_unpacked_bytes\":255,\"version\":\"0.1.0\"}",
+      "assets": {
+        "theme.json": "{\"font\":{\"family\":\"system-ui\",\"size_dip\":13},\"motion\":\"reduced\",\"name\":\"SysPane\",\"schema_version\":\"0.1.0\",\"theme_id\":\"theme:native\",\"tokens\":{\"background\":\"#14345acc\",\"error\":\"#ff8080ff\",\"foreground\":\"#ffffffff\",\"muted\":\"#d0d0d0ff\",\"warning\":\"#ffcf4aff\"}}"
+      }
+    },
+    {
+      "manifest": "{\"assets\":[{\"bytes\":1392,\"media_type\":\"application/json\",\"path\":\"scene.json\",\"sha256\":\"8048e9ab301585e5caed755812a7795c15a388a6c7de0b966c4502a662f6159b\"}],\"dependencies\":[],\"kind\":\"scene\",\"license\":\"LicenseRef-SysPane-Pending\",\"optional_capabilities\":[],\"package_id\":\"package:syspane-default-scene\",\"required_capabilities\":[\"scene.content\"],\"schema_version\":\"0.1.0\",\"total_unpacked_bytes\":1392,\"version\":\"0.1.0\"}",
+      "assets": {
+        "scene.json": "{\"revision\":\"0\",\"roots\":[\"group:network\"],\"scene_id\":\"scene:default\",\"schema_version\":\"0.3.0\",\"theme_id\":null,\"widgets\":[{\"bindings\":[],\"children\":[\"widget:interfaces\"],\"content\":{},\"display\":{\"role\":\"primary\"},\"id\":\"group:network\",\"kind\":\"group\",\"layout\":{\"base\":{\"height\":280,\"kind\":\"fixed\",\"width\":720,\"x\":24,\"y\":24}},\"priority\":\"essential\",\"title\":\"Network\"},{\"bindings\":[{\"entity_type\":\"network.interface\",\"field\":\"network.receive_bytes\",\"kind\":\"selector\",\"limit\":8,\"mode\":\"collection\",\"predicates\":[],\"scope\":{\"kind\":\"local_host\"},\"sort\":[]},{\"entity_type\":\"network.interface\",\"field\":\"network.transmit_bytes\",\"kind\":\"selector\",\"limit\":8,\"mode\":\"collection\",\"predicates\":[],\"scope\":{\"kind\":\"local_host\"},\"sort\":[]},{\"entity_type\":\"network.interface\",\"field\":\"network.receive_bytes_per_second\",\"kind\":\"selector\",\"limit\":8,\"mode\":\"collection\",\"predicates\":[],\"scope\":{\"kind\":\"local_host\"},\"sort\":[]},{\"entity_type\":\"network.interface\",\"field\":\"network.transmit_bytes_per_second\",\"kind\":\"selector\",\"limit\":8,\"mode\":\"collection\",\"predicates\":[],\"scope\":{\"kind\":\"local_host\"},\"sort\":[]}],\"content\":{\"columns\":[{\"label\":\"Received\"},{\"label\":\"Sent\"},{\"label\":\"Receive rate\"},{\"label\":\"Send rate\"}]},\"display\":{\"role\":\"primary\"},\"id\":\"widget:interfaces\",\"kind\":\"table\",\"layout\":{\"base\":{\"height\":236,\"kind\":\"fixed\",\"width\":696,\"x\":12,\"y\":32}},\"priority\":\"normal\",\"title\":\"Network interfaces\"}]}"
+      }
+    },
+    {
+      "manifest": "{\"assets\":[{\"bytes\":293,\"media_type\":\"application/json\",\"path\":\"preset.json\",\"sha256\":\"ad8d9d63699944afc8abcb0592736abb5ea36979477c70fc077bfaaabd1f8bd4\"}],\"dependencies\":[{\"id\":\"package:syspane-default-theme\",\"sha256\":\"3c673ce564d1423c7fa808e57f9874e5e6b10366b6cfe448b0cdde66f10bf24b\",\"version\":\"0.1.0\"},{\"id\":\"package:syspane-default-scene\",\"sha256\":\"009f0886e757f689543624f20a1a859761238fd13d9881fec1ab88311053d3d3\",\"version\":\"0.1.0\"}],\"kind\":\"preset\",\"license\":\"LicenseRef-SysPane-Pending\",\"optional_capabilities\":[],\"package_id\":\"package:syspane-default-preset\",\"required_capabilities\":[],\"schema_version\":\"0.1.0\",\"total_unpacked_bytes\":293,\"version\":\"0.1.0\"}",
+      "assets": {
+        "preset.json": "{\"optional_capabilities\":[],\"parent\":null,\"preset_id\":\"preset:default\",\"required_capabilities\":[],\"scene\":{\"id\":\"scene:default\",\"sha256\":\"8048e9ab301585e5caed755812a7795c15a388a6c7de0b966c4502a662f6159b\",\"version\":\"0.1.0\"},\"schema_version\":\"0.1.0\",\"settings\":[],\"theme\":null,\"version\":\"0.1.0\"}"
+      }
+    }
+  ],
+  "selection": {
+    "package": {
+      "id": "package:syspane-default-preset",
+      "version": "0.1.0",
+      "sha256": "82f86c294f533e43bff54f4f7a1cae882071901d142d77942d27726b6b28ed41"
+    },
+    "preset": {
+      "id": "preset:default",
+      "version": "0.1.0",
+      "sha256": "ad8d9d63699944afc8abcb0592736abb5ea36979477c70fc077bfaaabd1f8bd4"
+    }
+  },
+  "theme_pin": {
+    "id": "theme:native",
+    "version": "0.1.0",
+    "sha256": "0fcefa008efb79968d3176340fa6f79e16ac218ca470b2f4ce7dee635358c4d5"
+  },
+  "initial_manifest": "0.5.0",
+  "initial_revision": "0",
+  "changed_revision": "1",
+  "cut_phases": [
+    "created",
+    "settings",
+    "scene",
+    "resources_created",
+    "resource_manifest:0",
+    "resource_manifest:1",
+    "resource_manifest:2",
+    "resource_asset:0",
+    "resource_asset:1",
+    "resource_asset:2",
+    "resource_index",
+    "resources_flushed",
+    "manifest",
+    "generation",
+    "previous",
+    "selector_ready",
+    "authorized",
+    "selected",
+    "durable"
+  ]
+}
