@@ -15,6 +15,41 @@ build` before configuring or building; use `test` or `package` for those actions
 The common active-output budget is unchanged; retained `out/evidence/` archives
 are measured separately. Never use the placeholder account from the example.
 
+The [installed settings package](../../spec/delivery/packages/w-11-installed-settings.md)
+adds the real `syspane` frontend on the Linux development profile. After the ordinary
+configure/build preflight and preset commands, stage its unmanaged development
+payload into a fresh owned native prefix:
+
+```sh
+cmake --install "$SYSPANE_LINUX_BUILD_ROOT/linux-x64-gcc13" --prefix "<owned-native-prefix>" --component DevelopmentFrontend
+<owned-native-prefix>/bin/syspane --help
+<owned-native-prefix>/bin/syspane --profile profile:default
+```
+
+The payload contains `bin/syspane`, the private configuration host and its exact
+helper record. The main embeds that record's expected identity; its helper location
+does not depend on the working directory. Native library dependencies remain the
+pinned development runtime; these three files are not a self-contained release.
+Profile directories come from the existing XDG selector, and XDG_RUNTIME_DIR must
+already name a private admitted native base. Production still requires protected
+machine policy; absent authority produces an unavailable UI, not a policy bypass.
+
+The GTK owner handles controls. Separate client and supervisor threads handle
+authenticated framing/profile/command work and native process/runtime ownership.
+Reconnect preserves unresolved request identities and retrieves/reconciles them
+before reopening editing. Quit remains responsive while waiting for actual child
+exit. A conventional settings window does not provide desktop-host qualification.
+
+Run `ctest --preset linux-x64-gcc13 -R '^native[.]INSTALLED-SETTINGS$'
+--output-on-failure`. This creates and relocates production and dedicated fixture
+payloads in the owned laboratory, then observes native controls and actual stored
+documents. The separate fixture consumer compiles its own exact helper expectation;
+its policy/phase controls are absent from production. Preserve each native record,
+package and node inventory before reclaiming duplicate output. The F runtime lab
+base retains its marker and crash orphans. The ordinary 8 GiB allocation and fixed
+preflight reservations remain unchanged; account separately for the two extracted
+payloads and their ZIP archives before running the family.
+
 The [runtime directory package](../../spec/delivery/packages/w-08-runtime-directory.md)
 provides LinuxRuntimeDirectory for the frontend's independent native owner. Pass an
 explicit native runtime base; ordinary frontend composition should select

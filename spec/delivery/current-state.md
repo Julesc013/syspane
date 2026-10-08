@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-08T21:01:56.508664+00:00", "scope": "Native frontend runtime directory ownership; installed UI composition and all editions remain open"}
+updated: {"by": "codex", "at": "2026-10-08T21:44:15.159963+00:00", "scope": "Installed native settings frontend and authenticated recovery; full desktop/editor/telemetry integration and all editions remain open"}
 ---
 
 # Current state and next admitted boundary
@@ -21,6 +21,12 @@ Shared build tooling now lives in `source/build/`. Machine bindings and raw
 recordings are local ignored `out/` content; the retired root is absent from the
 tracked tree. See `docs/developers/build.md` in the repository for checkout
 setup and the [repository contract](../foundation/repository.md) for ownership.
+
+The [installed settings frontend](installed-settings-handoff.md) now composes the
+actual entry point, verified helper installation, runtime owner, independent
+supervisor/client workers and native controls. Real saved profiles, commands and
+lost-result recovery are observed through relocated payloads. Protected-policy
+deployment, desktop/editor/telemetry composition and all complete editions remain open.
 
 The [runtime directory checkpoint](runtime-directory-handoff.md) closes private
 allocation and explicit retirement around the supervisor's runtime root. Native
@@ -805,16 +811,16 @@ release-identity decisions remain open.
 
 ## Next work
 
-Compose the installed native frontend from the verified installation, new runtime
-directory owner, independently scheduled supervisor and authenticated profile client.
-Connect native settings/editor actions to command results and original-request
-reconciliation; keep GUI work separate from blocking native client/storage work.
-Preserve external unresolved request identity while clearing private UI state on
-policy or producer loss. Add verified installation closure for the editor's other
-private helpers before launching them. Protected-policy deployment, activation,
-telemetry, import catalogs, native accessibility/performance and every complete
-edition remain required. The recovery controls now have their own implemented
-[checkpoint](recovery-controls-handoff.md); installed recovery context remains open.
+Continue from the [installed settings handoff](installed-settings-handoff.md).
+Connect the existing editor and inspector to this actual frontend; extend verified
+installation closure to the image and recovery helpers before launching them.
+Bind native telemetry, presentation activation/visibility and independent desktop
+escape/recovery to the same product owners. Add installed recovery/draft context,
+import catalogs and persistence layers. Preserve original request reconciliation,
+private-state erasure and the current source-bound native oracles. Protected-policy
+deployment, representative accessibility/performance, historical/native target labs
+and every complete edition remain required. Known GTK selection-clipboard shutdown
+diagnostics remain visible in the evidence and need resolution before qualification.
 
 Start with the [campaign coverage audit](campaign-coverage.md). W-03 now has a
 [read-only Windows observer](windows-host-inventory-handoff.md): native Explorer

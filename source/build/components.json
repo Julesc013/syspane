@@ -3170,7 +3170,10 @@
       "roles": [
         "development_test"
       ],
-      "installed_files": [],
+      "installed_files": [
+        "libexec/syspane/syspane-configuration-host",
+        "share/syspane/helpers.json"
+      ],
       "profiles": [
         "linux-x64-gcc13"
       ]
@@ -3429,6 +3432,116 @@
         "syspane_runtime_directory",
         "syspane_profile_supervisor",
         "Threads::Threads"
+      ],
+      "target_requirements": [
+        "cxx17",
+        "native_local_ipc"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
+    },
+    {
+      "id": "frontend-runtime",
+      "target": "syspane_frontend_runtime",
+      "type": "STATIC_LIBRARY",
+      "source_owner": "source/application/",
+      "public_interfaces": [
+        "source/application/frontend_linux.hpp"
+      ],
+      "private_interfaces": [],
+      "sources": [
+        "source/application/frontend_backend_linux.cpp",
+        "source/application/frontend_linux.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_settings_form",
+        "syspane_profile_projection",
+        "syspane_profile_supervisor",
+        "syspane_runtime_directory",
+        "PkgConfig::GTK3",
+        "Threads::Threads"
+      ],
+      "target_requirements": [
+        "cxx17",
+        "native_local_ipc"
+      ],
+      "roles": [
+        "console"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
+    },
+    {
+      "id": "frontend",
+      "target": "syspane_frontend",
+      "type": "EXECUTABLE",
+      "source_owner": "source/application/",
+      "public_interfaces": [],
+      "private_interfaces": [],
+      "sources": [
+        "source/application/frontend_main_linux.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_frontend_runtime"
+      ],
+      "target_requirements": [
+        "cxx17",
+        "native_local_ipc"
+      ],
+      "roles": [
+        "console"
+      ],
+      "installed_files": [
+        "bin/syspane"
+      ],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
+    },
+    {
+      "id": "frontend-helper-fixture",
+      "target": "syspane_frontend_helper_fixture",
+      "type": "EXECUTABLE",
+      "source_owner": "tests/configuration/",
+      "public_interfaces": [],
+      "private_interfaces": [],
+      "sources": [
+        "tests/configuration/frontend_helper_fixture.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_profile_controller_runtime"
+      ],
+      "target_requirements": [
+        "cxx17",
+        "native_local_ipc"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
+    },
+    {
+      "id": "frontend-fixture",
+      "target": "syspane_frontend_fixture",
+      "type": "EXECUTABLE",
+      "source_owner": "source/application/",
+      "public_interfaces": [],
+      "private_interfaces": [],
+      "sources": [
+        "source/application/frontend_main_linux.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_frontend_runtime"
       ],
       "target_requirements": [
         "cxx17",

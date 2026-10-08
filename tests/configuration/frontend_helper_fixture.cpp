@@ -1,0 +1,20 @@
+#include "profile_controller_linux.hpp"
+#include <fstream>
+#include <thread>
+#include <unistd.h>
+namespace c=syspane::configuration;
+std::string read(const char* path){std::ifstream file(path);std::string value;std::getline(file,value);return value;}
+int main(int argc,char** argv){
+    if(argc!=2)return 2;
+    const auto parent=syspane::protocol::decimal(argv[1]);if(!parent||!*parent)return 2;
+    return syspane::application::run_profile_controller(*parent,[]{
+        c::Policy policy;policy.available=read("policy")=="allow";policy.revision=7;
+        if(read("reconcile")=="deny")policy.denied_capabilities.insert("result.reconcile");
+        for(const char* channel:{"inspector","accessibility"})policy.disclosure[{"console",channel}]={"public","operational","sensitive"};
+        return policy;
+    },[](const std::string& phase){
+        if(phase!=read("phase"))return;
+        std::ofstream("held")<<c::Json{{"pid",::getpid()},{"phase",phase}}.dump();
+        while(read("release")!="yes")std::this_thread::sleep_for(std::chrono::milliseconds(5));
+    });
+}

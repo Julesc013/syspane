@@ -489,7 +489,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "05413eda67dd41640ffc7347d0a9096c29ecba568a678638a6ec35ef0b9cc4fc"
+      "sha256": "4b7a944fa1cc05d731becdaf919ab8ce196d0a3173344480551bc7442958d3ac"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -895,6 +895,16 @@
         "SP-CURRENT"
       ],
       "sha256": "4a21e08b9c39ce302657a09a68a30f68e9990ab542e4e462182c1e87e4297b90"
+    },
+    {
+      "id": "SP-INSTALLED-SETTINGS-HANDOFF",
+      "path": "delivery/installed-settings-handoff.md",
+      "title": "Installed native settings frontend",
+      "description": "The development application composes native settings, authenticated profile reads and independent configuration supervision.",
+      "requires": [
+        "SP-W11-INSTALLED-SETTINGS"
+      ],
+      "sha256": "4640416a735ee24d1d911f5265af66e7181ac3fa0204562a1eae985758d7d798"
     },
     {
       "id": "SP-KEYBOARD-INPUT-HANDOFF",
@@ -2133,6 +2143,19 @@
         "SP-W10-CONTENT-PROPERTIES"
       ],
       "sha256": "5ad9165c257386e0e6b1d909aa1395497f5c3ef3aa5189f4de5fa9d45208a342"
+    },
+    {
+      "id": "SP-W11-INSTALLED-SETTINGS",
+      "path": "delivery/packages/w-11-installed-settings.md",
+      "title": "Installed native settings frontend",
+      "description": "Compose the real application entry point, independently supervised controller and authenticated settings client.",
+      "requires": [
+        "SP-W11-SETTINGS-RESOURCES",
+        "SP-W08-RUNTIME-DIRECTORY",
+        "SP-W08-PROFILE-PROJECTION",
+        "SP-W26-HELPER-IDENTITY"
+      ],
+      "sha256": "01f216d32577f1e848a5ad117130506ae10cef4f40fdd0e606722edf7efb0cb4"
     },
     {
       "id": "SP-W11-NATIVE-SETTINGS",

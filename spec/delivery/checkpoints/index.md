@@ -4,6 +4,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 
 - [build-layout.json](build-layout.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [helper-identity.json](helper-identity.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
+- [installed-settings.json](installed-settings.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [native-clipboard.json](native-clipboard.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [profile-controller.json](profile-controller.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [profile-owner.json](profile-owner.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
