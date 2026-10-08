@@ -162,3 +162,7 @@ panel. If a topology change switches a variant while numeric geometry is buffere
 **Set properties** rejects it; **Revert fields** loads the active variant. These
 controls are currently exercised in the owned Linux development editor, as scoped
 in the [handoff](../../spec/delivery/layout-authoring-handoff.md).
+
+Theme 0.2 font roles now have verified development scene composition. The editor
+still needs native font-authoring controls before this becomes an ordinary editing
+feature. Existing themes and settings remain usable. See the [checkpoint](../../spec/delivery/role-composition-handoff.md).

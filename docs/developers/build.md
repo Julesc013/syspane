@@ -10,9 +10,13 @@ After ordinary preflight/configure/build, run `ctest --preset <profile> -R
 '^configuration[.]TYPOGRAPHY-' --output-on-failure`. The owned Linux laboratory runs
 `ctest --preset linux-x64-gcc13 -R '^native[.](THEME-TYPOGRAPHY|TEXT-RASTER|SCENE-SURFACE)$'
 --output-on-failure`. The new native oracle preserves pixels and positive ignored-role
-and ignored-weight fault witnesses. SceneSurface explicitly refuses theme 0.2 pending
-role-aware composition. Read the [handoff](../../spec/delivery/typography-handoff.md)
-before enabling scene integration or adding native theme authoring.
+and ignored-weight fault witnesses. The [role-composition experiment](../../spec/delivery/role-composition-handoff.md)
+now connects those roles to semantic scene blocks. Set SurfaceConfig.experimental_typography
+only in a trusted development owner, alongside theme.typography capability/current policy.
+It defaults false; native authoring and trusted editor integration remain pending.
+Run `ctest --preset linux-x64-gcc13 -R '^native[.]ROLE-COMPOSITION$' --output-on-failure`
+after ordinary workspace preflight/configure/build. The oracle uses literal base fonts
+and independent raw-pixel composition, with exact table rectangles and diagnostic checks.
 
 The [native visibility controls](../../spec/delivery/packages/w-10-visibility-controls.md)
 add the shared `VisibilityInput` parser and lazy GTK `EditorVisibilityForm`. Set routes

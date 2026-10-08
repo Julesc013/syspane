@@ -82,6 +82,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [SysPane 0.1.0 release objective and unresolved admission](release-0.1.0.md) — Preserve the requested complete desktop release across Windows 9x, Windows NT, X11, Wayland and Mac OS X.
 - [Durable resource generation checkpoint](resource-generations-handoff.md) — Exact content closure, command identity and coherent Linux recovery.
 - [Greenfield implementation campaign](roadmap.md) — Build native vertical slices and contracts together in risk order.
+- [Semantic typography composition checkpoint](role-composition-handoff.md) — Bounded scene font roles with independent pixels and preserved diagnostics.
 - [Image validation cost and native observation checkpoint](runtime-observation-handoff.md) — Preserve complete image validation while reducing parent work and retaining unexplained accessibility failures.
 - [Versioned scene content checkpoint](scene-content-handoff.md) — Typed authored content crosses shared validation, negotiated commands and exact native resource recovery.
 - [Policy-owned native scene images checkpoint](scene-images-handoff.md) — Asynchronous pinned image presentation, native erasure and declared-size content hashing.

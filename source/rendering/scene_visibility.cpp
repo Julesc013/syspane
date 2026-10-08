@@ -44,7 +44,8 @@ void condition_surface(const SurfaceConfig& cfg,const std::vector<s::BindingInpu
             const auto display=std::find_if(cfg.topology.displays.begin(),cfg.topology.displays.end(),[&](const auto& d){return d.id==node.display;});
             need(display!=cfg.topology.displays.end(),"surface.display");
             need(node.pixels.width>2&&node.pixels.height>2,"surface.visibility_layout");
-            TextRequest q;q.text=out.text;q.theme=cfg.resources->theme();q.language=cfg.language;q.contrast=cfg.contrast;
+            if(cfg.resources->theme()["schema_version"]=="0.2.0")out.blocks.push_back({"diagnostic",out.text});
+            TextRequest q;q.role="diagnostic";q.text=out.text;q.theme=cfg.resources->theme();q.language=cfg.language;q.contrast=cfg.contrast;
             q.numerator=display->scale_numerator;q.denominator=display->scale_denominator;
             q.wrap_units=(node.pixels.width-2)*64*q.denominator/q.numerator;need(*q.wrap_units>=64,"surface.visibility_layout");
             q.pixel_budget=std::min(std::size_t{4194304},8388608-display_pixels-leaf_pixels);need(q.pixel_budget>0,"surface.capacity");

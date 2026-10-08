@@ -1,0 +1,29 @@
+{
+  "source_base": "e5ebf1b2f1d6fb65901d17c6c56e8ca58f01819a",
+  "at": "2026-10-08T02:34:40.769362+00:00",
+  "inputs": {
+    "spec/delivery/packages/w-09-role-composition.md": "af1a823d175938b5b3f6af3e56a93303d28f102e553b84a5073b26a568f63840",
+    "tests/scene/role-composition-cases.json": "93690a29ba5c7820b0b380a4ae35ae3d932cf33760f510bb5ec5cacaccaf5a0e",
+    "tests/scene/native_role_composition.py": "bd643a8dba0fe45c8626a5aaaef6c788d5c86face0f1cf5ec71d681fdd86e74b"
+  },
+  "corrections": [
+    {
+      "case": "chartgap",
+      "old": "Samples 1 | Segments 1 | Gap pending",
+      "new": "Samples 0 | Segments 0 | Gap pending",
+      "contract": "spec/delivery/packages/w-09-chart-history.md:64",
+      "reason": "Inclusive window [now - 1000 ms, now] advances for retained leases. The sample at 100 ns is outside [2000000100,3000000100]. Existing scene.CHART-WINDOW also verifies expiry. Production chart history and plot bytes are unchanged.",
+      "original_failure": "linux-x64-gcc13-native-db776f8199",
+      "original_expected_file": "original-role-composition-cases.json"
+    },
+    {
+      "case": "hiddenstale",
+      "old": "Visibility (value): Stale",
+      "new": "Visibility (value): Source lost",
+      "contract": "spec/delivery/packages/w-09-visibility.md:57; tests/scene/native-visibility-cases.json retained example",
+      "reason": "Nonactive presentation resolves lease_lost before freshness. The test explicitly disconnects and advances beyond freshness; both retained and stale remain in the mandatory status line. Production visibility logic unchanged.",
+      "original_failure": "linux-x64-gcc13-native-71a5f43208",
+      "original_expected_file": "original-v2-role-composition-cases.json"
+    }
+  ]
+}

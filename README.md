@@ -7,12 +7,12 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
-The [typography checkpoint](spec/delivery/typography-handoff.md) adds theme 0.2 with
-explicit font weight/style and body, label, value and diagnostic roles. Exact
-resource pins and current policy govern admission; existing theme output is
-preserved. Native text rendering is verified. Role-aware scene composition and
-native theme-authoring controls are the next integration boundary; scene rendering
-explicitly refuses the new theme version until that boundary is verified.
+The [role-composition checkpoint](spec/delivery/role-composition-handoff.md) connects theme
+fonts to body text, labels, values and diagnostics in the Linux scene renderer.
+Independent pixels, table geometry and policy/visibility erasure checks pass.
+Legacy themes keep their previous rendering. Theme 0.2 still requires explicit
+trusted development admission; native theme-authoring controls and their editor
+integration are next. Installed ownership and all five complete editions remain open.
 
 The [native visibility controls](spec/delivery/visibility-controls-handoff.md) now edit
 bounded conditions through the existing draft and persistence owners. Hidden objects

@@ -28,10 +28,15 @@ scene::ChartPlot compose_chart(const Json& widget,SurfaceText& text,const s::Cha
     if(view.capacity_truncated)text.notices.push_back("Chart capacity truncated");
     if(view.pending_break)text.notices.push_back("Chart gap pending");
     if(plot.clipped)text.notices.push_back("Chart clipped");
+    if(!text.blocks.empty())text.blocks.push_back({view.capacity_truncated||view.pending_break||*why?"diagnostic":"label",chart.summary});
+    const auto range_start=chart.summary.size()+1;
     chart.summary+='\n';chart.summary+=plot.minimum?"Range "+number(*plot.minimum)+" .. "+number(*plot.maximum):"Range unavailable";
     if(!unit.empty()&&unit!="1")chart.summary+=" "+unit;
     if(plot.clipped)chart.summary+=" | Clipped "+std::to_string(plot.clipped);
+    if(!text.blocks.empty())text.blocks.push_back({!plot.minimum||plot.clipped?"diagnostic":"value",chart.summary.substr(range_start)});
+    const auto window_start=chart.summary.size()+1;
     chart.summary+="\nWindow "+std::to_string(content["window_ms"].get<unsigned>())+" ms | "+interpolation;
+    if(!text.blocks.empty())text.blocks.push_back({"label",chart.summary.substr(window_start)});
     text.text+='\n'+chart.summary;text.accessible+='\n'+chart.summary;
     chart.accessible_summary=text.accessible;chart.identity=view.identity;chart.points=view.points;
     for(const auto& point:view.points){text.accessible+="\nPoint "+std::to_string(point.measured_ns)+": "+number(point.value)+"; generation "+std::to_string(point.generation)+(point.joins_previous?"; join":"; start");
@@ -45,7 +50,7 @@ TextRaster raster_chart(const TextRequest& request,SurfaceText& widget,const s::
     const auto fg=color(request.contrast=="light"?"#000000ff":request.contrast=="dark"?"#ffffffff":request.theme["tokens"]["foreground"].get<std::string>());
     const auto border=request.contrast=="authored"?color(request.theme["tokens"]["muted"]):fg;
     q.theme["tokens"]["foreground"]=request.contrast=="light"?"#000000ff":request.contrast=="dark"?"#ffffffff":request.theme["tokens"]["foreground"].get<std::string>();
-    q.theme["tokens"]["background"]="#00000000";q.contrast="authored";auto text=render_text(q);need(!text.missing_glyphs,"surface.glyphs");
+    q.theme["tokens"]["background"]="#00000000";q.contrast="authored";auto text=request.theme["schema_version"]=="0.2.0"?render_blocks(q,widget.blocks,capacity-mask_pixels):render_text(q);need(!text.missing_glyphs,"surface.glyphs");
     const auto gap=(4*q.numerator+q.denominator-1)/q.denominator,graph_y=text.height+gap;
     TextRaster result;result.width=std::max(text.width,plot.width);result.height=graph_y+plot.height;result.fonts=text.fonts;
     const auto pixels=static_cast<std::size_t>(result.width)*result.height,text_pixels=static_cast<std::size_t>(text.width)*text.height;

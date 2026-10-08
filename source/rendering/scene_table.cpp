@@ -13,12 +13,13 @@ Key key(const scene::BindingRow& r){return {r.producer,r.epoch,r.entity};}
 std::size_t surface_text_bytes(const SurfaceText& s){
     std::size_t size=s.id.size()+s.kind.size()+s.title.size()+s.text.size()+s.accessible.size();
     for(const auto& f:s.fonts)size+=f.size();
+    for(const auto& b:s.blocks)size+=b.role.size()+b.text.size();
     for(const auto& notice:s.notices)size+=notice.size();
     if(s.chart){size+=s.chart->summary.size()+s.chart->accessible_summary.size()+s.chart->points.size()*sizeof(scene::ChartPoint);
         if(s.chart->identity){const auto& i=*s.chart->identity;size+=i.producer.size()+i.epoch.size()+i.entity.size()+i.field.size()+i.source.size()+i.unit.size()+i.clock_id.size()+i.clock_scope.size();}}
     if(s.image)size+=s.image->state.size()+s.image->asset.dump().size();
     if(s.table){const auto& t=*s.table;size+=t.summary.size();for(const auto& c:t.columns)size+=c.size();for(const auto& c:t.labels)size+=c.size();
-        for(const auto& r:t.rows){size+=r.producer.size()+r.epoch.size()+r.entity.size();for(const auto& c:r.cells)size+=c.text.size()+c.accessible.size();}}
+        for(const auto& r:t.rows){size+=r.producer.size()+r.epoch.size()+r.entity.size();for(const auto& c:r.cells){size+=c.text.size()+c.accessible.size();for(const auto& b:c.blocks)size+=b.role.size()+b.text.size();}}}
     return size;
 }
 SurfaceText compose_table(const Json& w,const std::vector<scene::BindingInput>& inputs,std::uint64_t now,
@@ -62,12 +63,13 @@ TextRaster raster_table(const TextRequest& request,SurfaceText& widget,std::size
     if(request.contrast!="authored")q.theme["tokens"]["foreground"]=request.contrast=="light"?"#000000ff":"#ffffffff";
     q.contrast="authored";q.theme["tokens"]["background"]="#00000000";
     std::vector<TextRaster> parts;std::size_t retained=0;std::set<std::string> fonts;
-    const auto add=[&](const std::string& text){need(retained<capacity,"surface.capacity");q.text=text;q.pixel_budget=std::min(std::size_t{4194304},capacity-retained);
-        auto raster=render_text(q);need(!raster.missing_glyphs,"surface.glyphs");retained+=static_cast<std::size_t>(raster.width)*raster.height;
+    const bool typography=request.theme["schema_version"]=="0.2.0";
+    const auto add=[&](const std::string& text,const std::string& role,const std::vector<TextBlock>& blocks){need(retained<capacity,"surface.capacity");q.text=text;q.pixel_budget=std::min(std::size_t{4194304},capacity-retained);
+        q.role=typography?role:"body";auto raster=typography&&!blocks.empty()?render_blocks(q,blocks,capacity-retained):render_text(q);need(!raster.missing_glyphs,"surface.glyphs");retained+=static_cast<std::size_t>(raster.width)*raster.height;
         fonts.insert(raster.fonts.begin(),raster.fonts.end());parts.push_back(std::move(raster));return parts.size()-1;};
-    const auto title=add(widget.text),summary=add(table.summary);std::vector<std::size_t> headers;std::vector<std::vector<std::size_t>> cells;
-    for(const auto& name:table.labels)headers.push_back(add(name));
-    for(const auto& row:table.rows){cells.emplace_back();for(const auto& c:row.cells)cells.back().push_back(add(c.text));}
+    const auto title=add(widget.text,"label",{}),summary=add(table.summary,"diagnostic",{});std::vector<std::size_t> headers;std::vector<std::vector<std::size_t>> cells;
+    for(const auto& name:table.labels)headers.push_back(add(name,"label",{}));
+    for(const auto& row:table.rows){cells.emplace_back();for(const auto& c:row.cells)cells.back().push_back(add(c.text,"value",c.blocks));}
     const unsigned horizontal=(8*q.numerator+q.denominator-1)/q.denominator,vertical=(4*q.numerator+q.denominator-1)/q.denominator;
     struct Placement {unsigned x,y;std::size_t part;};std::vector<Placement> placements{{0,0,title},{0,parts[title].height+vertical,summary}};
     unsigned width=std::max(parts[title].width,parts[summary].width),height=parts[title].height+vertical+parts[summary].height;

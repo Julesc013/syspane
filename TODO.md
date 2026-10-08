@@ -27,7 +27,8 @@ behaviour has been implemented. See [audit disposition](spec/delivery/audit-2026
 ## First native campaign
 
 - [x] W-09 theme typography: versioned complete fonts/roles, exact resource admission and native raster evidence. See the [handoff](spec/delivery/typography-handoff.md).
-- [ ] Connect typography roles to scene composition and native theme-authoring controls through existing draft/resource/persistence owners; retain mandatory diagnostics and private-buffer erasure.
+- [x] W-09 role-aware scene composition: bounded semantic blocks, exact native pixels, preserved diagnostics and erasure; explicit development admission. See the [handoff](spec/delivery/role-composition-handoff.md).
+- [ ] W-10 native theme authoring and trusted editor admission through existing draft/resource/persistence owners; retain mandatory diagnostics and private-buffer erasure.
 
 - [x] W-10 native visibility controls: private exact rule/source input, hidden-object selection, current held-gesture diagnostics and independent durable save/reopen/erasure checks. See the [handoff](spec/delivery/visibility-controls-handoff.md). Installed ownership and complete editions remain open.
 

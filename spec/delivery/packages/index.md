@@ -38,6 +38,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Policy-owned native charts](w-09-native-chart.md) — Exact numeric geometry and every-publication history feed with native pixels and accessibility erasure.
 - [Native Linux text metrics and raster adapter](w-09-native-text.md) — Bounded plain-text shaping and painting with explicit native metrics, fallback and pixel ownership.
 - [Native conditional presentation experiment](w-09-native-visibility.md) — Preserve layout, mandatory status and policy erasure while masking conditional pixels and accessible content.
+- [Semantic typography in scene composition](w-09-role-composition.md) — Bounded role composition with preserved diagnostics and legacy pixels.
 - [Bounded rendering work and explicit native observations](w-09-runtime-observation.md) — Investigate the preserved image-paint and accessibility failures with fixed acceptance.
 - [Versioned widget content and transactions](w-09-scene-content.md) — Carry explicit text, columns, chart settings and pinned images through authored validation and durable resource-bound transactions.
 - [Policy-owned asynchronous scene images](w-09-scene-images.md) — Connect immutable image resources, bounded worker lifetime and native pixels to current scene authority.

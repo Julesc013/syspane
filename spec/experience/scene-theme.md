@@ -69,7 +69,9 @@ names are literal data, native fallback preserves the authored name, and resourc
 admission requires theme.typography under current policy. The
 [checkpoint](../delivery/typography-handoff.md) records native text evidence.
 
-Scene composition must refuse theme 0.2 until role mapping and mandatory diagnostic
-preservation are verified. Native theme authoring remains the following integration
-boundary. Spacing/density, chart styles and contrast variants still require versioned
+The [role-composition contract](../delivery/packages/w-09-role-composition.md)
+assigns semantic roles and preserves mandatory diagnostics with bounded native
+composition. Theme 0.2 requires explicit trusted development admission in addition
+to current resource authority; direct consumers still refuse by default. Native theme
+authoring and trusted editor integration remain the following boundary. Spacing/density, chart styles and contrast variants still require versioned
 contracts and native tests; none is hidden in optional extensions.

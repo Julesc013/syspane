@@ -32,20 +32,21 @@ const char* outcome(s::BindingCode code){switch(code){
     case s::BindingCode::ambiguous:return "Ambiguous selection";case s::BindingCode::capacity:return "Capacity exceeded";
     default:return "Invalid source";
 }}
-SurfaceText text(const Json& w,const s::BindingFrame* frame){
+SurfaceText text(const Json& w,const s::BindingFrame* frame,bool typography){
     SurfaceText out;out.id=w["id"];out.kind=w["kind"];const auto title=w["title"].get<std::string>();
     if(out.kind=="group"){out.accessible=title;return out;}
-    if(out.kind=="text"){out.text=out.accessible=w.contains("content")?w["content"]["body"].get<std::string>():title;return out;}
-    out.text=title+"\n";
+    if(out.kind=="text"){out.text=out.accessible=w.contains("content")?w["content"]["body"].get<std::string>():title;if(typography)out.blocks.push_back({"body",out.text});return out;}
+    out.text=title+"\n";if(typography)out.blocks.push_back({"label",title});
     need(frame!=nullptr,"surface.frame");
     if(frame->code==s::BindingCode::denied)throw Error("policy.denied");
-    if(frame->code!=s::BindingCode::matched){out.notices.push_back(outcome(frame->code));out.text+=out.notices.back();out.accessible=out.text;return out;}
+    if(frame->code!=s::BindingCode::matched){out.notices.push_back(outcome(frame->code));out.text+=out.notices.back();out.accessible=out.text;if(typography)out.blocks.push_back({"diagnostic",out.notices.back()});return out;}
     need(frame->rows.size()==1&&!frame->truncated,"surface.unsupported");
     const auto& row=frame->rows[0];
     if(row.code==s::BindingCode::denied)throw Error("policy.denied");
-    if(row.code!=s::BindingCode::matched){out.notices.push_back(outcome(row.code));out.text+=out.notices.back();out.accessible=out.text;return out;}
+    if(row.code!=s::BindingCode::matched){out.notices.push_back(outcome(row.code));out.text+=out.notices.back();out.accessible=out.text;if(typography)out.blocks.push_back({"diagnostic",out.notices.back()});return out;}
     const auto& o=row.observation;out.text+=value(o.value);
     if(!o.unit.empty()&&o.unit!="1")out.text+=" "+o.unit;
+    if(typography)out.blocks.push_back({"value",out.text.substr(title.size()+1)});
     std::vector<std::string> states;
     if(row.presentation==r::Presentation::retained)states.emplace_back("Retained");
     if(row.effective==m::Freshness::stale)states.emplace_back("Stale");
@@ -62,7 +63,8 @@ SurfaceText text(const Json& w,const s::BindingFrame* frame){
     if(o.origin==m::Origin::derived)states.emplace_back("Derived");
     if(o.origin==m::Origin::configured)states.emplace_back("Configured");
     if(states.empty())states.emplace_back("Current");
-    out.text+='\n';for(std::size_t i=0;i<states.size();++i){if(i)out.text+=" | ";out.text+=states[i];}
+    std::string state_text;for(std::size_t i=0;i<states.size();++i){if(i)state_text+=" | ";state_text+=states[i];}out.text+='\n'+state_text;
+    if(typography)out.blocks.push_back({"diagnostic",state_text});
     out.accessible=out.text+"\nsupport="+support(o.support)+"; acquisition="+acquisition(o.acquisition)+"; presence="+presence(o.presence)+
         "; freshness="+freshness(row.effective)+"; origin="+origin(o.origin)+"; lease="+lease(row.presentation)+
         "; age="+(row.age_ns?std::to_string(*row.age_ns)+" ns":"unknown");
@@ -127,7 +129,7 @@ struct SceneSurface::Impl {
             if(reset){found->second.samples->clear();found->second.fault=fault;}else found->second.samples->gap();}}
     void prepare_histories(){
         need(allowed(),"policy.denied");c::authorize_resources(*config.resources,policy,config.capabilities);
-        need(config.resources->theme().at("schema_version")!="0.2.0","surface.typography_unavailable");
+        need(config.resources->theme().at("schema_version")!="0.2.0"||config.experimental_typography,"surface.typography_unavailable");
         need(config.authored.scene["schema_version"]!="0.5.0"||config.experimental_visibility,"surface.visibility_unavailable");
         std::size_t count=0,points=0;for(const auto& w:config.authored.scene["widgets"])if(w["kind"]=="chart"){
             need(w.contains("content"),"surface.unsupported");++count;points+=w["content"]["max_points"].get<std::size_t>();}
@@ -165,6 +167,7 @@ struct SceneSurface::Impl {
             display_pixels+=static_cast<std::size_t>(w*h);need(display_pixels<=4194304,"surface.capacity");
             SurfacePixels p;p.display=d.id;p.x=d.pixel_x;p.y=d.pixel_y;p.width=static_cast<unsigned>(w);p.height=static_cast<unsigned>(h);next->displays.push_back(std::move(p));
         }
+        const bool typography=config.resources->theme().at("schema_version")=="0.2.0";
         const auto catalog=inputs(ticks);std::map<std::string,TextRaster> rasters;std::map<std::string,s::Metrics> metrics;std::map<std::string,SurfaceText> texts;
         for(const auto& w:config.authored.scene["widgets"]){
             const auto kind=w["kind"].get<std::string>();const bool chart=kind=="chart",bound=kind=="value"||kind=="status"||chart;
@@ -175,22 +178,23 @@ struct SceneSurface::Impl {
             SurfaceText out;std::optional<s::ChartPlot> plot;
             if(table){std::vector<std::string> notices;out=compose_table(w,catalog,now,[&](const s::BindingRow& row){
                     s::BindingFrame frame;frame.code=s::BindingCode::matched;frame.rows.push_back(row);
-                    const auto cell=text({{"id","cell"},{"kind","value"},{"title",""}},&frame);
+                    auto cell=text({{"id","cell"},{"kind","value"},{"title",""}},&frame,typography);
                     for(const auto& line:cell.notices)if(std::find(notices.begin(),notices.end(),line)==notices.end())notices.push_back(line);
-                    return SurfaceCell{cell.text.substr(1),cell.accessible.substr(1),{}};
+                    if(typography)cell.blocks.erase(cell.blocks.begin());
+                    return SurfaceCell{cell.text.substr(1),cell.accessible.substr(1),{},std::move(cell.blocks)};
                 });out.notices=std::move(notices);if(out.table->rows.empty())out.notices.push_back(out.table->summary=="Showing 0 of 0 rows"?"Table has no rows":out.table->summary);
             }else if(bound){const auto& b=w["bindings"][0];need(b["kind"]!="selector"||b["mode"]=="singleton","surface.unsupported");
-                s::project_binding(b,catalog,now,[&](const auto& f){out=text(w,&f);
+                s::project_binding(b,catalog,now,[&](const auto& f){out=text(w,&f,typography);
                     if(chart){const auto& d=display_for(w,config.topology);const auto width=(320*d.scale_numerator+d.scale_denominator-1)/d.scale_denominator;
                         const auto height=(120*d.scale_numerator+d.scale_denominator-1)/d.scale_denominator;
                         need(static_cast<std::size_t>(width)*height<8388608-display_pixels-leaf_pixels,"surface.capacity");
                         observe_chart(w,f,ticks,[&](const auto& view){plot=compose_chart(w,out,view,f.rows.size()==1?f.rows[0].observation.unit:std::string(),width,height,4194304-plot_work);});plot_work+=plot->work;}
                 });
-            }else if(image){out.id=w["id"];out.kind=kind;}else out=text(w,nullptr);
+            }else if(image){out.id=w["id"];out.kind=kind;}else out=text(w,nullptr,typography);
             if(kind!="group"){
                 const auto& d=display_for(w,config.topology);TextRequest q;q.text=out.text;q.theme=config.resources->theme();q.language=config.language;q.contrast=config.contrast;
                 q.numerator=d.scale_numerator;q.denominator=d.scale_denominator;q.pixel_budget=std::min(std::size_t{4194304},8388608-display_pixels-leaf_pixels);
-                need(q.pixel_budget>0,"surface.capacity");auto raster=image?images->raster(w,q,out):chart?raster_chart(q,out,*plot,8388608-display_pixels-leaf_pixels):table?raster_table(q,out,8388608-display_pixels-leaf_pixels):render_text(q);need(!raster.missing_glyphs,"surface.glyphs");
+                need(q.pixel_budget>0,"surface.capacity");auto raster=image?images->raster(w,q,out):chart?raster_chart(q,out,*plot,8388608-display_pixels-leaf_pixels):table?raster_table(q,out,8388608-display_pixels-leaf_pixels):typography?render_blocks(q,out.blocks,8388608-display_pixels-leaf_pixels):render_text(q);need(!raster.missing_glyphs,"surface.glyphs");
                 leaf_pixels+=static_cast<std::size_t>(raster.width)*raster.height;out.fonts=raster.fonts;
                 const auto units=[&](unsigned p){return (static_cast<s::Unit>(p)*64*d.scale_denominator+d.scale_numerator-1)/d.scale_numerator;};
                 const s::Size size{units(raster.width),units(raster.height)};metrics[out.id]={size,size};rasters.emplace(out.id,std::move(raster));
@@ -260,8 +264,11 @@ void SceneSurface::paint(std::uint64_t now,const std::map<std::string,m::Tick>& 
     auto& i=*impl_;i.owner();need(static_cast<bool>(sink),"surface.sink");
     if(i.start(now)){
         if(!i.allowed()){i.images->clear();i.histories.clear();i.status={SurfaceCode::restricted,0,0,"policy.denied"};}
-        else if(i.config.resources->theme().at("schema_version")!="0.2.0"&&(i.config.authored.scene["schema_version"]!="0.5.0"||i.config.experimental_visibility)&&!(i.policy.forced.count("display.enabled")?i.policy.forced.at("display.enabled")==true:
-                  i.config.authored.settings["display"]["enabled"].get<bool>())){i.images->clear();i.status={SurfaceCode::empty,0,0,{}};}
+        else if((i.config.resources->theme().at("schema_version")!="0.2.0"||i.config.experimental_typography)&&(i.config.authored.scene["schema_version"]!="0.5.0"||i.config.experimental_visibility)&&!(i.policy.forced.count("display.enabled")?i.policy.forced.at("display.enabled")==true:
+                  i.config.authored.settings["display"]["enabled"].get<bool>())){
+            try{if(i.config.resources->theme().at("schema_version")=="0.2.0")c::authorize_resources(*i.config.resources,i.policy,i.config.capabilities);
+                i.images->clear();i.status={SurfaceCode::empty,0,0,{}};
+            }catch(const Error& e){i.images->clear();i.histories.clear();i.status={std::string(e.what())=="policy.denied"?SurfaceCode::restricted:SurfaceCode::alternative,0,0,e.what()};}}
         else try{
             i.frame=i.compose(now,ticks);i.status.code=i.frame->layout.state==s::State::ready?SurfaceCode::ready:SurfaceCode::degraded;
             for(const auto& w:i.frame->widgets)if(w.image&&w.image->state!="ready"){i.status.code=SurfaceCode::degraded;i.status.reason=w.image->state=="loading"?"image.pending":"image.failed";}

@@ -19,8 +19,9 @@ updated: {"by": "codex", "at": "2026-10-06T01:32:00Z", "scope": "Native focus co
 
 The [typography checkpoint](typography-handoff.md) adds versioned theme fonts and
 native role rendering. Current policy and immutable resource identities gate their
-use. Scene composition and native authoring are still explicitly unavailable for
-theme 0.2; the next package must prove their role mapping and diagnostic behavior.
+use. The [role-composition experiment](role-composition-handoff.md) now verifies scene
+roles with explicit development admission. Native theme authoring and trusted editor
+integration remain the next gate.
 
 The [visibility-controls checkpoint](visibility-controls-handoff.md) now adds
 native rule input and trusted EditorForm integration to the earlier authored and

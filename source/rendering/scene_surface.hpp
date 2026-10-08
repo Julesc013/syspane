@@ -1,5 +1,5 @@
 #pragma once
-#include "native_text.hpp"
+#include "scene_text.hpp"
 #include "bindings.hpp"
 #include "content.hpp"
 #include "chart_plot.hpp"
@@ -13,6 +13,7 @@ struct SurfaceConfig {
     scene::Topology topology;
     std::string language="en",contrast="authored";
     std::set<std::string> capabilities;
+    bool experimental_typography=false; // Trusted development admission, not an authored capability.
     bool experimental_visibility=false; // Trusted development admission, not an authored capability.
 };
 struct SurfaceProvider {
@@ -29,7 +30,7 @@ struct SurfacePixels {
     unsigned width=0,height=0;
     std::vector<unsigned char> rgba;
 };
-struct SurfaceCell { std::string text,accessible;scene::Rect pixels; };
+struct SurfaceCell { std::string text,accessible;scene::Rect pixels;std::vector<TextBlock> blocks; };
 struct SurfaceRow {
     std::string producer,epoch,entity;
     std::uint64_t generation=0;
@@ -43,7 +44,7 @@ struct SurfaceTable {
     bool truncated=false;
 };
 struct SurfaceText {
-    std::string id,kind,title,text,accessible;std::vector<std::string> fonts;
+    std::string id,kind,title,text,accessible;std::vector<std::string> fonts;std::vector<TextBlock> blocks;
     std::optional<SurfaceTable> table;
     struct Chart {
         std::string summary,accessible_summary;std::size_t samples=0,segments=0;scene::Rect pixels;

@@ -1,0 +1,301 @@
+{
+  "theme": {
+    "schema_version": "0.2.0",
+    "theme_id": "theme:native",
+    "name": "Typography oracle",
+    "tokens": {
+      "foreground": "#ffffffc0",
+      "background": "#ff000080",
+      "warning": "#ffcf4aff",
+      "error": "#ff8080ff",
+      "muted": "#d0d0d0ff"
+    },
+    "font": {
+      "family": "Noto Sans",
+      "size_dip": 16,
+      "weight": 400,
+      "style": "normal"
+    },
+    "motion": "none",
+    "extensions": {
+      "author.note": {
+        "preserve": [
+          "font",
+          1,
+          false
+        ]
+      }
+    },
+    "font_roles": {
+      "body": {
+        "family": "Noto Sans",
+        "size_dip": 17,
+        "weight": 400,
+        "style": "normal"
+      },
+      "label": {
+        "family": "Noto Sans",
+        "size_dip": 12,
+        "weight": 700,
+        "style": "normal"
+      },
+      "value": {
+        "family": "Noto Sans",
+        "size_dip": 26,
+        "weight": 400,
+        "style": "normal"
+      },
+      "diagnostic": {
+        "family": "Noto Sans",
+        "size_dip": 14,
+        "weight": 400,
+        "style": "italic"
+      }
+    }
+  },
+  "expected_fonts": {
+    "body": {
+      "family": "Noto Sans",
+      "size_dip": 17,
+      "weight": 400,
+      "style": "normal"
+    },
+    "label": {
+      "family": "Noto Sans",
+      "size_dip": 12,
+      "weight": 700,
+      "style": "normal"
+    },
+    "value": {
+      "family": "Noto Sans",
+      "size_dip": 26,
+      "weight": 400,
+      "style": "normal"
+    },
+    "diagnostic": {
+      "family": "Noto Sans",
+      "size_dip": 14,
+      "weight": 400,
+      "style": "italic"
+    }
+  },
+  "cases": {
+    "value": [
+      {
+        "role": "label",
+        "text": "Receive"
+      },
+      {
+        "role": "value",
+        "text": "123 byte"
+      },
+      {
+        "role": "diagnostic",
+        "text": "Current"
+      }
+    ],
+    "status": [
+      {
+        "role": "label",
+        "text": "Receive"
+      },
+      {
+        "role": "value",
+        "text": "123 byte"
+      },
+      {
+        "role": "diagnostic",
+        "text": "Current"
+      }
+    ],
+    "pending": [
+      {
+        "role": "label",
+        "text": "Receive"
+      },
+      {
+        "role": "diagnostic",
+        "text": "Waiting"
+      }
+    ],
+    "failed": [
+      {
+        "role": "label",
+        "text": "Receive"
+      },
+      {
+        "role": "value",
+        "text": "123 byte"
+      },
+      {
+        "role": "diagnostic",
+        "text": "Stale | Source failed (provider.failed)"
+      }
+    ],
+    "retained": [
+      {
+        "role": "label",
+        "text": "Receive"
+      },
+      {
+        "role": "value",
+        "text": "123 byte"
+      },
+      {
+        "role": "diagnostic",
+        "text": "Retained | Stale"
+      }
+    ],
+    "newline": [
+      {
+        "role": "label",
+        "text": "Receive\nCurrent"
+      },
+      {
+        "role": "value",
+        "text": "123 byte"
+      },
+      {
+        "role": "diagnostic",
+        "text": "Current"
+      }
+    ],
+    "body": [
+      {
+        "role": "body",
+        "text": "Current\n<value> text"
+      }
+    ],
+    "chart": [
+      {
+        "role": "label",
+        "text": "Receive"
+      },
+      {
+        "role": "value",
+        "text": "23 byte"
+      },
+      {
+        "role": "diagnostic",
+        "text": "Current"
+      },
+      {
+        "role": "label",
+        "text": "Samples 1 | Segments 1"
+      },
+      {
+        "role": "value",
+        "text": "Range 0.0 .. 100.0 byte"
+      },
+      {
+        "role": "label",
+        "text": "Window 1000 ms | linear"
+      }
+    ],
+    "chartgap": [
+      {
+        "role": "label",
+        "text": "Receive"
+      },
+      {
+        "role": "value",
+        "text": "23 byte"
+      },
+      {
+        "role": "diagnostic",
+        "text": "Retained | Stale"
+      },
+      {
+        "role": "diagnostic",
+        "text": "Samples 1 | Segments 1 | Gap pending"
+      },
+      {
+        "role": "value",
+        "text": "Range 0.0 .. 100.0 byte"
+      },
+      {
+        "role": "label",
+        "text": "Window 1000 ms | linear"
+      }
+    ],
+    "hidden": [
+      {
+        "role": "diagnostic",
+        "text": "Visibility (value): Unit mismatch"
+      }
+    ],
+    "hiddenstale": [
+      {
+        "role": "diagnostic",
+        "text": "Visibility (value): Stale\nRetained | Stale"
+      }
+    ],
+    "empty": []
+  },
+  "table": {
+    "title": {
+      "role": "label",
+      "text": "Interfaces"
+    },
+    "summary": {
+      "role": "diagnostic",
+      "text": "Showing 2 of 2 rows"
+    },
+    "headers": [
+      {
+        "role": "label",
+        "text": "network.receive_bytes"
+      },
+      {
+        "role": "label",
+        "text": "network.transmit_bytes"
+      }
+    ],
+    "cells": [
+      [
+        [
+          {
+            "role": "value",
+            "text": "123 byte"
+          },
+          {
+            "role": "diagnostic",
+            "text": "Current"
+          }
+        ],
+        [
+          {
+            "role": "value",
+            "text": "7 byte"
+          },
+          {
+            "role": "diagnostic",
+            "text": "Current"
+          }
+        ]
+      ],
+      [
+        [
+          {
+            "role": "value",
+            "text": "124 byte"
+          },
+          {
+            "role": "diagnostic",
+            "text": "Current"
+          }
+        ],
+        [
+          {
+            "role": "value",
+            "text": "8 byte"
+          },
+          {
+            "role": "diagnostic",
+            "text": "Current"
+          }
+        ]
+      ]
+    ]
+  }
+}

@@ -1,0 +1,110 @@
+[
+  {
+    "step": "configure",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-08T02:30:05.434245+00:00",
+    "finished_at": "2026-10-08T02:30:12.394739+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2310533022,\n  \"linux_campaign_bytes\": 4591127675,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "configure",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/roles_step.py",
+      "linux-x64-gcc13",
+      "configure"
+    ],
+    "started_at": "2026-10-08T02:30:13.606341+00:00",
+    "finished_at": "2026-10-08T02:30:24.479873+00:00",
+    "exit": 0,
+    "stdout": "Preset CMake variables:\n\n  BUILD_TESTING=\"ON\"\n  CMAKE_BUILD_TYPE=\"Debug\"\n  CMAKE_CXX_COMPILER=\"g++\"\n  SYSPANE_PROFILE=\"linux-x64-gcc13\"\n\nprofile verified: linux-x64-gcc13\nvendored dependency digests: pass\ndiagnostic toolkit verified: GTK 3.24.41 / Ubuntu 3.24.41-4ubuntu1.3\nnative text dependency identity verified: 358 files\nnative image dependencies verified: 344 files\nnative GJS clock build dependencies verified\n-- Configuring done (6.2s)\n-- Generating done (0.1s)\n-- Build files have been written to: /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-09-role-composition/linux-x64-gcc13-configure-fa2b9d561f\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-08T02:30:24.480250+00:00",
+    "finished_at": "2026-10-08T02:30:25.279125+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2312277237,\n  \"linux_campaign_bytes\": 4591132449,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/roles_step.py",
+      "linux-x64-gcc13",
+      "build"
+    ],
+    "started_at": "2026-10-08T02:30:25.279481+00:00",
+    "finished_at": "2026-10-08T02:30:57.979981+00:00",
+    "exit": 0,
+    "stdout": "[1/25] Building CXX object CMakeFiles/syspane_scene_surface.dir/source/rendering/scene_text.cpp.o\n[2/25] Building CXX object CMakeFiles/syspane_scene_surface.dir/source/rendering/scene_chart.cpp.o\n[3/25] Building CXX object CMakeFiles/syspane_scene_surface.dir/source/rendering/scene_table.cpp.o\n[4/25] Building CXX object CMakeFiles/syspane_scene_surface.dir/source/rendering/scene_surface.cpp.o\n[5/25] Building CXX object CMakeFiles/syspane_scene_surface.dir/source/rendering/scene_image.cpp.o\n[6/25] Building CXX object CMakeFiles/syspane_scene_surface.dir/source/rendering/scene_visibility.cpp.o\n[7/25] Linking CXX static library libsyspane_scene_surface.a\n[8/25] Building CXX object CMakeFiles/syspane_scene_inspector.dir/source/interfaces/scene_inspector_model.cpp.o\n[9/25] Building CXX object CMakeFiles/syspane_scene_inspector.dir/source/interfaces/scene_inspector_linux.cpp.o\n[10/25] Linking CXX static library libsyspane_scene_inspector.a\n[11/25] Building CXX object CMakeFiles/syspane_editor_form.dir/source/interfaces/editor_form_linux.cpp.o\n[12/25] Linking CXX static library libsyspane_editor_form.a\n[13/25] Building CXX object CMakeFiles/syspane_editor_window.dir/tests/editor/editor_window.cpp.o\n[14/25] Linking CXX executable syspane_editor_window\n[15/25] Building CXX object CMakeFiles/syspane_scene_surface_tests.dir/tests/scene/surface_tests.cpp.o\n[16/25] Building CXX object CMakeFiles/syspane_scene_inspector_tests.dir/tests/scene/inspector_tests.cpp.o\n[17/25] Linking CXX executable syspane_scene_inspector_tests\n[18/25] Building CXX object CMakeFiles/syspane_scene_surface_tests.dir/tests/scene/surface_window.cpp.o\n[19/25] Building CXX object CMakeFiles/syspane_scene_surface_tests.dir/tests/scene/table_tests.cpp.o\n[20/25] Building CXX object CMakeFiles/syspane_scene_surface_tests.dir/tests/scene/chart_surface_tests.cpp.o\n[21/25] Building CXX object CMakeFiles/syspane_scene_surface_tests.dir/tests/scene/image_surface_tests.cpp.o\n[22/25] Building CXX object CMakeFiles/syspane_scene_surface_tests.dir/tests/scene/native_visibility_tests.cpp.o\n[23/25] Linking CXX executable syspane_scene_surface_tests\n[24/25] Building CXX object CMakeFiles/syspane_role_composition_probe.dir/tests/scene/role_composition_probe.cpp.o\n[25/25] Linking CXX executable syspane_role_composition_probe\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-09-role-composition/linux-x64-gcc13-build-a6e971ecea\n",
+    "stderr": ""
+  },
+  {
+    "step": "native",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-08T02:30:57.980371+00:00",
+    "finished_at": "2026-10-08T02:30:58.659187+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2314024920,\n  \"linux_campaign_bytes\": 4639288273,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "native",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/roles_step.py",
+      "linux-x64-gcc13",
+      "native"
+    ],
+    "started_at": "2026-10-08T02:30:58.659490+00:00",
+    "finished_at": "2026-10-08T02:31:11.106798+00:00",
+    "exit": 8,
+    "stdout": "Test project /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n    Start 125: native.SCENE-VISIBILITY\n1/6 Test #125: native.SCENE-VISIBILITY ..........   Passed    1.36 sec\n    Start 126: native.VISIBILITY-PIXELS\n2/6 Test #126: native.VISIBILITY-PIXELS .........   Passed    2.90 sec\n    Start 127: native.SCENE-SURFACE\n3/6 Test #127: native.SCENE-SURFACE .............   Passed    0.81 sec\n    Start 136: native.TEXT-RASTER\n4/6 Test #136: native.TEXT-RASTER ...............   Passed    0.98 sec\n    Start 137: native.ROLE-COMPOSITION\n5/6 Test #137: native.ROLE-COMPOSITION ..........***Failed    1.26 sec\n/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/roles-bcbf1c72523d/result.json fail\nTraceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/scene/native_role_composition.py\", line 103, in <module>\n    if __name__=='__main__':main()\n                            ^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/tests/scene/native_role_composition.py\", line 92, in main\n    for case in fixed['cases']: check(case)\n                                ^^^^^^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/tests/scene/native_role_composition.py\", line 81, in check\n    blocks=fixed['cases'][case]; assert result['blocks']==blocks,(case,result['blocks'],blocks)\n                                        ^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: ('chartgap', [{'role': 'label', 'text': 'Receive'}, {'role': 'value', 'text': '23 byte'}, {'role': 'diagnostic', 'text': 'Retained | Stale'}, {'role': 'diagnostic', 'text': 'Samples 0 | Segments 0 | Gap pending'}, {'role': 'value', 'text': 'Range 0.0 .. 100.0 byte'}, {'role': 'label', 'text': 'Window 1000 ms | linear'}], [{'role': 'label', 'text': 'Receive'}, {'role': 'value', 'text': '23 byte'}, {'role': 'diagnostic', 'text': 'Retained | Stale'}, {'role': 'diagnostic', 'text': 'Samples 1 | Segments 1 | Gap pending'}, {'role': 'value', 'text': 'Range 0.0 .. 100.0 byte'}, {'role': 'label', 'text': 'Window 1000 ms | linear'}])\n\n    Start 138: native.THEME-TYPOGRAPHY\n6/6 Test #138: native.THEME-TYPOGRAPHY ..........   Passed    0.72 sec\n\n83% tests passed, 1 tests failed out of 6\n\nTotal Test time (real) =   8.02 sec\n\nThe following tests FAILED:\n\t137 - native.ROLE-COMPOSITION (Failed)\n Errors while running CTest\n\nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-09-role-composition/linux-x64-gcc13-native-db776f8199\n",
+    "stderr": ""
+  }
+]

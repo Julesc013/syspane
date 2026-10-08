@@ -12,17 +12,17 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-08T02:15:13.857835+00:00", "scope": "Theme typography and native font roles verified; scene composition and theme-authoring controls remain open"}
+updated: {"by": "codex", "at": "2026-10-08T02:15:13.857835+00:00", "scope": "Role-aware scene composition verified with explicit development admission; native theme authoring remains next"}
 ---
 
 # Current state and next admitted boundary
 
-The [typography checkpoint](typography-handoff.md) adds theme 0.2 with
-explicit font weight/style and body, label, value and diagnostic roles. Exact
-resource pins and current policy govern admission; existing theme output is
-preserved. Native text rendering is verified. Role-aware scene composition and
-native theme-authoring controls are the next integration boundary; scene rendering
-explicitly refuses the new theme version until that boundary is verified.
+The [role-composition checkpoint](role-composition-handoff.md) connects theme
+fonts to body text, labels, values and diagnostics in the Linux scene renderer.
+Independent pixels, table geometry and policy/visibility erasure checks pass.
+Legacy themes keep their previous rendering. Theme 0.2 still requires explicit
+trusted development admission; native theme-authoring controls and their editor
+integration are next. Installed ownership and all five complete editions remain open.
 
 The [native visibility controls](visibility-controls-handoff.md) now edit
 bounded conditions through the existing draft and persistence owners. Hidden objects

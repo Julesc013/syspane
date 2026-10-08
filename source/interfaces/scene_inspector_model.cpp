@@ -21,7 +21,7 @@ struct Project {
         need(depth<=256&&visited.insert(node.id).second,"inspector.hierarchy");
         const auto& w=*widgets.at(node.id);Json key={frame.layout.scene_id,w.id};
         std::vector<InspectorRow> descendants;for(const auto* child:children[node.id]){auto next=widget(*child,depth+1);for(auto& item:next)descendants.push_back(std::move(item));}
-        if(!w.presented){need(w.title.empty()&&w.text.empty()&&w.accessible.empty()&&w.fonts.empty()&&!w.table&&!w.chart&&!w.image&&w.notices.empty()&&!w.diagnostic,"inspector.hidden_payload");return descendants;}
+        if(!w.presented){need(w.title.empty()&&w.text.empty()&&w.accessible.empty()&&w.fonts.empty()&&w.blocks.empty()&&!w.table&&!w.chart&&!w.image&&w.notices.empty()&&!w.diagnostic,"inspector.hidden_payload");return descendants;}
         auto out=row(key,w.title,w.table?w.table->summary:w.chart?w.chart->accessible_summary:w.accessible);out.children=std::move(descendants);
         if(w.table){need(w.kind=="table"&&w.table->columns.size()==w.table->labels.size(),"inspector.frame");const auto& table=*w.table;
             for(const auto& r:table.rows){need(r.cells.size()==table.columns.size(),"inspector.frame");auto rk=key;rk.push_back("row");rk.push_back(r.producer);rk.push_back(r.epoch);rk.push_back(r.entity);
