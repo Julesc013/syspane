@@ -1,4 +1,5 @@
 #include "content.hpp"
+#include "authored_theme.hpp"
 #include "digest.hpp"
 #include <algorithm>
 #include <functional>
@@ -118,15 +119,37 @@ ContentCatalog::Selection ContentCatalog::select(const Json& package_pin,const J
     std::reverse(chain.begin(),chain.end());return {leaf,std::move(chain)};
 }
 ResourceSnapshot ContentCatalog::resources(const Json& selection,const Authored& candidate)const{
-    need(protocol::members(selection,{"package","preset"}),"content.selection");validate_authored(candidate);
+    return resolve_resources(selection,candidate,false);
+}
+ResourceSnapshot ContentCatalog::theme_resources(const Json& selection,const Authored& candidate)const{
+    return resolve_resources(selection,candidate,true);
+}
+ResourceSnapshot ContentCatalog::resolve_resources(const Json& selection,const Authored& candidate,bool overrides)const{
+    if(overrides)validate_content_document(selection,"resource-selection");
+    else need(protocol::members(selection,{"package","preset"}),"content.selection");
+    validate_authored(candidate);
     const auto selected=select(selection["package"],selection["preset"]);const auto& scope=entries_[selected.leaf].closure;
     auto result=std::shared_ptr<ResourceSet>(new ResourceSet);result->selection_=selection;
-    for(auto i:scope){const auto& e=entries_[i];result->packages_.push_back(e.bytes);
+    for(auto i:scope)result->base_packages_.push_back(entries_[i].bytes);
+    auto retained=scope;std::optional<std::size_t> override_theme;
+    if(overrides&&!selection["theme_override"].is_null()){
+        const auto& value=selection["theme_override"];const auto& package=value["package"];
+        std::set<std::size_t> exact;
+        for(std::size_t i=0;i<entries_.size();++i){const auto& e=entries_[i];
+            if(e.manifest["package_id"]==package["id"]&&e.manifest["version"]==package["version"]&&sha256(e.bytes->manifest)==package["sha256"])exact.insert(i);}
+        override_theme=lookup(value["theme"],"theme",exact);
+        (void)validate_authored_theme(*entries_[*override_theme].bytes);
+        retained.insert(*override_theme);std::set<std::pair<std::string,std::string>> documents;
+        for(auto i:retained)need(documents.emplace(entries_[i].pin["id"].get<std::string>(),entries_[i].pin["version"].get<std::string>()).second,"content.ambiguous");
+    }
+    if(overrides)result->required_.insert("configuration.theme-overrides");
+    for(auto i:retained){const auto& e=entries_[i];result->packages_.push_back(e.bytes);
         for(const auto& cap:e.manifest["required_capabilities"])result->required_.insert(cap.get<std::string>());
         if(e.manifest["kind"]=="preset")for(const auto& cap:e.document["required_capabilities"])result->required_.insert(cap.get<std::string>());}
     const auto id=candidate.scene["theme_id"].is_null()?candidate.settings["display"]["theme_id"]:candidate.scene["theme_id"];
     const auto& pin=entries_[selected.leaf].document["theme"];std::optional<std::size_t> theme;
-    if(!pin.is_null()&&pin["id"]==id)theme=lookup(pin,"theme",scope);
+    if(override_theme){need(entries_[*override_theme].pin["id"]==id,"content.theme");theme=override_theme;}
+    else if(!pin.is_null()&&pin["id"]==id)theme=lookup(pin,"theme",scope);
     else for(auto i:scope)if(entries_[i].manifest["kind"]=="theme"&&entries_[i].pin["id"]==id){need(!theme,"content.ambiguous");theme=i;}
     need(theme.has_value(),"content.theme");result->theme_pin_=entries_[*theme].pin;result->theme_=entries_[*theme].document;
     if(result->theme_["schema_version"]=="0.2.0")result->required_.insert("theme.typography");

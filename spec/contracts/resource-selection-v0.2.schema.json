@@ -1,0 +1,139 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.example.invalid/syspane/0.2.0/resource-selection.schema.json",
+  "title": "SysPane theme resource selection 0.2",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "0.2.0"
+    },
+    "package": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[A-Za-z0-9.-]+)?$",
+          "maxLength": 64
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "id",
+        "version",
+        "sha256"
+      ],
+      "additionalProperties": false
+    },
+    "preset": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[A-Za-z0-9.-]+)?$",
+          "maxLength": 64
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "id",
+        "version",
+        "sha256"
+      ],
+      "additionalProperties": false
+    },
+    "theme_override": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "package": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 256,
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+                },
+                "version": {
+                  "type": "string",
+                  "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[A-Za-z0-9.-]+)?$",
+                  "maxLength": 64
+                },
+                "sha256": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                }
+              },
+              "required": [
+                "id",
+                "version",
+                "sha256"
+              ],
+              "additionalProperties": false
+            },
+            "theme": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 256,
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+                },
+                "version": {
+                  "type": "string",
+                  "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[A-Za-z0-9.-]+)?$",
+                  "maxLength": 64
+                },
+                "sha256": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                }
+              },
+              "required": [
+                "id",
+                "version",
+                "sha256"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "package",
+            "theme"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "package",
+    "preset",
+    "theme_override"
+  ],
+  "additionalProperties": false
+}

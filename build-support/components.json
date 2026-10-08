@@ -1453,7 +1453,8 @@
         "source/configuration/digest.hpp",
         "source/configuration/content.hpp",
         "source/configuration/theme_font.hpp",
-        "source/configuration/authored_theme.hpp"
+        "source/configuration/authored_theme.hpp",
+        "source/configuration/theme_resources.hpp"
       ],
       "private_interfaces": [],
       "sources": [
@@ -1463,7 +1464,8 @@
         "source/configuration/digest.cpp",
         "source/configuration/content.cpp",
         "source/configuration/theme_font.cpp",
-        "source/configuration/authored_theme.cpp"
+        "source/configuration/authored_theme.cpp",
+        "source/configuration/theme_resources.cpp"
       ],
       "allowed_dependencies": [
         "syspane_configuration"
@@ -2473,6 +2475,32 @@
       ],
       "allowed_dependencies": [
         "syspane_editor_draft"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "windows-x64-gcc15",
+        "linux-x64-gcc13",
+        "windows-x86-v141-xp"
+      ]
+    },
+    {
+      "id": "theme-override-tests",
+      "target": "syspane_theme_override_tests",
+      "type": "EXECUTABLE",
+      "source_owner": "tests/configuration/",
+      "public_interfaces": [],
+      "private_interfaces": [],
+      "sources": [
+        "tests/configuration/theme_override_tests.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_settings_draft"
       ],
       "target_requirements": [
         "cxx17"

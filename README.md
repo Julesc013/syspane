@@ -7,12 +7,19 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
+The [theme-override checkpoint](spec/delivery/theme-overrides-handoff.md) adds an explicit
+versioned resource selection and immutable replacement of one authored theme. It
+preserves the original preset/image closure, bounds repeated edits and keeps existing
+command/store readers closed to the new format. Durable command/store integration,
+atomic editor resource history and native controls remain required. All five complete
+editions remain open.
+
 The [theme-authoring prerequisite](spec/delivery/theme-authoring-handoff.md) now validates
 lossless base/role font input and creates deterministic immutable theme artifacts.
 Exact no-ops retain the original document, and generated identities bind both theme
-content and preserved license metadata. Native controls still require a versioned
-resource override and durable command/store integration; these helpers do not save
-or enable edited themes by themselves. All five complete editions remain open.
+content and preserved license metadata. The override component now has the checkpoint above. Native controls still require
+durable command/store integration; these helpers do not save or enable edited themes
+by themselves. All five complete editions remain open.
 
 The [role-composition checkpoint](spec/delivery/role-composition-handoff.md) connects theme
 fonts to body text, labels, values and diagnostics in the Linux scene renderer.

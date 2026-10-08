@@ -489,7 +489,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "cc08d338a9f045fe976e90d302e94e8feea4fd9cd1df7081c89bc69d295f3155"
+      "sha256": "59dd94ed3ca9b371214f47ae1bb7d2cb5d59d206d10efb264c563c5ad764c69e"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -884,7 +884,7 @@
       "requires": [
         "SP-CURRENT"
       ],
-      "sha256": "73273955595c16e6010f06aeb97678ca8cdc2e6148b36d37c9b0dfb6900a00bf"
+      "sha256": "1ef48695ac6ac46f8dd7069f106a6c6ac3a0a69c294ac4913aceb4d6236a09dc"
     },
     {
       "id": "SP-KEYBOARD-INPUT-HANDOFF",
@@ -1864,6 +1864,16 @@
       "sha256": "7763ae05eca20567bd5c612f9e6202ddb7a54d949d230f468d7754f4d40f74f3"
     },
     {
+      "id": "SP-W10-THEME-OVERRIDES",
+      "path": "delivery/packages/w-10-theme-overrides.md",
+      "title": "Bounded immutable theme resource overrides",
+      "description": "Keep one authored theme beside the original preset closure before versioned durable integration.",
+      "requires": [
+        "SP-W10-THEME-AUTHORING"
+      ],
+      "sha256": "2ffdc0c49f05b49f34b464a1250938a479ec024fbb747d17ab99ce4c7a2c180c"
+    },
+    {
       "id": "SP-W10-VISIBILITY-ADMISSION",
       "path": "delivery/packages/w-10-visibility-admission.md",
       "title": "Versioned visibility authoring and durable admission",
@@ -2523,6 +2533,17 @@
       "sha256": "dbfd70621f055bae21d4df6c01263dffb920fd11b091036938b96c202558a443"
     },
     {
+      "id": "SP-THEME-OVERRIDES-HANDOFF",
+      "path": "delivery/theme-overrides-handoff.md",
+      "title": "Bounded theme resource override checkpoint",
+      "description": "Versioned immutable selection and replacement before durable command/store integration.",
+      "requires": [
+        "SP-W10-THEME-OVERRIDES",
+        "SP-THEME-AUTHORING-HANDOFF"
+      ],
+      "sha256": "6bbeeaa5daecd4e997b060c3de8aec30f26e226d73b58e20660dcfb3d8e5436c"
+    },
+    {
       "id": "SP-TRANSACTION-SUPERVISION-HANDOFF",
       "path": "delivery/transaction-supervision-handoff.md",
       "title": "Independent transaction supervision checkpoint",
@@ -2813,7 +2834,7 @@
         "SP-STATE",
         "SP-RENDERING"
       ],
-      "sha256": "32a3c6bdb56a55f663648f29a35524df3548abe00577a6f93583d3972d5baabe"
+      "sha256": "5f36e6c22693e161a4db7700a4a0fe5d7863965e07cae69e4d0658da230a1755"
     },
     {
       "id": "SP-SETTINGS",

@@ -11,12 +11,14 @@ public:
     const Json& theme()const{return theme_;}
     const std::set<std::string>& required()const{return required_;}
     const std::vector<std::shared_ptr<const ContentPackage>>& packages()const{return packages_;}
+    const std::vector<std::shared_ptr<const ContentPackage>>& base_packages()const{return base_packages_;}
 private:
     friend class ContentCatalog;
     ResourceSet()=default;
     Json selection_,theme_pin_,theme_;
     std::set<std::string> required_;
     std::vector<std::shared_ptr<const ContentPackage>> packages_;
+    std::vector<std::shared_ptr<const ContentPackage>> base_packages_;
 };
 using ResourceSnapshot=std::shared_ptr<const ResourceSet>;
 void authorize_resources(const ResourceSet&,const Policy&,const std::set<std::string>& capabilities);
@@ -34,9 +36,12 @@ class ContentCatalog {
 public:
     explicit ContentCatalog(std::vector<ContentPackage> packages);
     ResourceSnapshot resources(const Json& selection,const Authored& candidate)const;
+    // Explicit experimental contract; legacy commands/stores use resources().
+    ResourceSnapshot theme_resources(const Json& selection,const Authored& candidate)const;
     PresetPlan preview(const Json& package_pin,const Json& preset_pin,const Authored& baseline,const std::string& request,
                        const Authority& authority,const Policy& policy,const std::set<std::string>& capabilities)const;
 private:
+    ResourceSnapshot resolve_resources(const Json&,const Authored&,bool overrides)const;
     struct Selection {std::size_t leaf;std::vector<std::size_t> chain;};
     Selection select(const Json& package_pin,const Json& preset_pin)const;
     std::size_t lookup(const Json& pin,const char* kind,const std::set<std::size_t>& scope)const;

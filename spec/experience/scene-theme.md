@@ -82,3 +82,10 @@ preserves exact no-ops and authors complete base/role fonts without mutating an
 installed package. Generated identity binds the source license and edited content.
 A versioned durable override, atomic editor history and native controls remain required
 before these artifacts become saved theme edits. Construction is not publication.
+
+
+The [bounded theme override contract](../delivery/packages/w-10-theme-overrides.md)
+defines exact resource selection 0.2 and immutable replacement/reset beside the
+original preset closure. The explicit component API preserves image references and
+does not enable a wire command, native authoring or new generation recovery. Those
+require their own versioned admission and interrupted/replayed transaction evidence.

@@ -98,6 +98,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Build targets and qualification profiles](target-profiles.md) — Bind concrete runtime floors to evidence instead of inferring support from platform names.
 - [Bounded telemetry document checkpoint](telemetry-wire-handoff.md) — Bind versioned delivery decoding and exact replay preservation to native-compiled portable cases without claiming a live subscription.
 - [Theme authoring input and immutable artifact checkpoint](theme-authoring-handoff.md) — Exact font input and license-bound theme artifacts; durable and native integration remain open.
+- [Bounded theme resource override checkpoint](theme-overrides-handoff.md) — Versioned immutable selection and replacement before durable command/store integration.
 - [Independent transaction supervision checkpoint](transaction-supervision-handoff.md) — Preserve exact process-stop and recovery boundaries for uncooperative native transactions.
 - [Portable transport and policy checkpoint](transport-handoff.md) — Resume W-24 from executable portable contracts without claiming native authentication.
 - [Theme typography and native font-role checkpoint](typography-handoff.md) — Versioned font roles with resource admission and native raster evidence; scene and authoring integration remain open.

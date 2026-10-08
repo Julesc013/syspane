@@ -33,6 +33,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Protocol, schema ownership and wire rules](protocol.md) — Define bounded language-independent records without forcing a runtime dependency.
 - [reconciliation-request.schema.json](reconciliation-request.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [reconciliation-result.schema.json](reconciliation-result.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
+- [resource-selection-v0.2.schema.json](resource-selection-v0.2.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [scene-v0.2.schema.json](scene-v0.2.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [scene-v0.3.schema.json](scene-v0.3.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [scene-v0.4.schema.json](scene-v0.4.schema.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.

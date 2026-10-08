@@ -29,7 +29,8 @@ behaviour has been implemented. See [audit disposition](spec/delivery/audit-2026
 - [x] W-09 theme typography: versioned complete fonts/roles, exact resource admission and native raster evidence. See the [handoff](spec/delivery/typography-handoff.md).
 - [x] W-09 role-aware scene composition: bounded semantic blocks, exact native pixels, preserved diagnostics and erasure; explicit development admission. See the [handoff](spec/delivery/role-composition-handoff.md).
 - [x] W-10 shared theme-authoring input and immutable artifact construction: exact no-op/reset, policy admission, preserved license and deterministic content pins. See the [handoff](spec/delivery/theme-authoring-handoff.md).
-- [ ] W-10 durable theme editing: versioned exact resource override, command/store publication and replay, atomic draft/history contexts, native font controls and trusted editor admission; preserve mandatory diagnostics and erasure.
+- [x] W-10 bounded theme resource override: exact versioned selection, immutable base/image closure, canonical artifact validation, repeated replacement/reset and unchanged capacity limits. See the [handoff](spec/delivery/theme-overrides-handoff.md).
+- [ ] W-10 durable theme editing: versioned command/store publication and replay, atomic draft/history contexts, native font controls and trusted editor admission; preserve mandatory diagnostics and erasure.
 
 - [x] W-10 native visibility controls: private exact rule/source input, hidden-object selection, current held-gesture diagnostics and independent durable save/reopen/erasure checks. See the [handoff](spec/delivery/visibility-controls-handoff.md). Installed ownership and complete editions remain open.
 

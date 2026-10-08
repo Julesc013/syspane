@@ -12,17 +12,24 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-08T03:06:00.812250+00:00", "scope": "Shared theme authoring input and immutable artifacts verified; versioned durable override and native controls remain next"}
+updated: {"by": "codex", "at": "2026-10-08T03:28:30.714664+00:00", "scope": "Bounded versioned theme selection and replacement verified; durable command/store integration remains next"}
 ---
 
 # Current state and next admitted boundary
 
+The [theme-override checkpoint](theme-overrides-handoff.md) adds an explicit
+versioned resource selection and immutable replacement of one authored theme. It
+preserves the original preset/image closure, bounds repeated edits and keeps existing
+command/store readers closed to the new format. Durable command/store integration,
+atomic editor resource history and native controls remain required. All five complete
+editions remain open.
+
 The [theme-authoring prerequisite](theme-authoring-handoff.md) now validates
 lossless base/role font input and creates deterministic immutable theme artifacts.
 Exact no-ops retain the original document, and generated identities bind both theme
-content and preserved license metadata. Native controls still require a versioned
-resource override and durable command/store integration; these helpers do not save
-or enable edited themes by themselves. All five complete editions remain open.
+content and preserved license metadata. The override component now has the checkpoint above. Native controls still require
+durable command/store integration; these helpers do not save or enable edited themes
+by themselves. All five complete editions remain open.
 
 The [role-composition checkpoint](role-composition-handoff.md) connects theme
 fonts to body text, labels, values and diagnostics in the Linux scene renderer.

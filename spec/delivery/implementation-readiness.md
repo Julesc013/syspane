@@ -17,9 +17,13 @@ updated: {"by": "codex", "at": "2026-10-06T01:32:00Z", "scope": "Native focus co
 
 # Implementation readiness and gates
 
+The [theme-override checkpoint](theme-overrides-handoff.md) closes bounded immutable
+resource selection/replacement. Its explicit component API is not yet a negotiated
+command or durable generation format; close those next before native controls.
+
 The [theme-authoring prerequisite](theme-authoring-handoff.md) closes lossless font
-input and deterministic immutable artifact construction. Durable resource override,
-command/store admission, draft/history and native controls remain the next boundary.
+input and deterministic immutable artifact construction. Resource overrides now have
+the checkpoint above; command/store admission, draft/history and native controls remain.
 
 The [typography checkpoint](typography-handoff.md) adds versioned theme fonts and
 native role rendering. Current policy and immutable resource identities gate their

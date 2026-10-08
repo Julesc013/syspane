@@ -13,7 +13,7 @@ void require(bool value,const char* code){if(!value)throw Error(code);}
 const std::map<std::string,Json>& schemas(){
     static const std::map<std::string,Json> value=[] {
         std::map<std::string,Json> result;
-        for(const char* text:{settings_schema,scene_v0_2_schema,scene_v0_3_schema,scene_v0_4_schema,scene_v0_5_schema,layout_schema,binding_schema,visibility_schema,command_v0_2_schema,command_v0_3_schema,command_v0_4_schema,command_v0_5_schema,command_v0_6_schema,command_v0_7_schema,command_result_schema,content_package_schema,content_catalog_schema,preset_schema,theme_schema,theme_v0_2_schema}){
+        for(const char* text:{settings_schema,scene_v0_2_schema,scene_v0_3_schema,scene_v0_4_schema,scene_v0_5_schema,layout_schema,binding_schema,visibility_schema,command_v0_2_schema,command_v0_3_schema,command_v0_4_schema,command_v0_5_schema,command_v0_6_schema,command_v0_7_schema,command_result_schema,content_package_schema,content_catalog_schema,preset_schema,theme_schema,theme_v0_2_schema,resource_selection_v0_2_schema}){
             auto item=Json::parse(text);result.emplace(item["$id"].get<std::string>(),std::move(item));
         }
         return result;
@@ -151,9 +151,9 @@ void scene_semantics(const Json& scene){
 }
 std::uint64_t authored_revision(const Authored& value){return revision(value.settings.at("revision"));}
 void validate_content_document(const Json& value,const std::string& kind){
-    require(kind=="content-catalog"||kind=="content-package"||kind=="preset"||kind=="theme","content.kind");
+    require(kind=="content-catalog"||kind=="content-package"||kind=="preset"||kind=="theme"||kind=="resource-selection","content.kind");
     const bool typography=kind=="theme"&&value.is_object()&&value.value("schema_version",Json())=="0.2.0";
-    const auto name=std::string(typography?"0.2.0/":"0.1.0/")+kind;structural(value,name.c_str(),kind=="content-catalog"?16384:(kind=="content-package"?65536:262144));
+    const auto name=std::string((typography||kind=="resource-selection")?"0.2.0/":"0.1.0/")+kind;structural(value,name.c_str(),kind=="resource-selection"?4096:kind=="content-catalog"?16384:(kind=="content-package"?65536:262144));
     if(typography){
         const auto check=[](const Json& font){const auto& family=font.at("family").get_ref<const std::string&>();require(!family.empty()&&family.size()<=512&&family.front()!=' '&&family.back()!=' ',"theme.family");
             // Older native regex engines disagree on escaped control ranges.

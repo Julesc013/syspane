@@ -1887,3 +1887,20 @@ After ordinary configure/build and workspace preflight, run
 portable suite. The pinned Linux laboratory also runs `native.THEME-TYPOGRAPHY` and
 `native.ROLE-COMPOSITION`. Read the [handoff](../../spec/delivery/theme-authoring-handoff.md)
 before extending resource selection, commands, generations and native controls.
+
+
+The [theme-override package](../../spec/delivery/packages/w-10-theme-overrides.md)
+adds explicit `ContentCatalog::theme_resources` for resource selection 0.2 and
+`replace_theme_resources` for one immutable authored override or reset. The latter
+requires current source/result policy and `configuration.theme-overrides` admission.
+It retains `ResourceSet::base_packages()` and validates canonical artifact bytes;
+it never appends a preset layer. `ContentCatalog::resources` keeps the legacy shape.
+Existing command/store/SettingsDraft consumers reject new selections. Do not route
+them through an old command or enable native authoring before the next admission.
+
+After ordinary workspace preflight/configure/build, run
+`ctest --preset <profile> -R '^configuration[.]THEME-OVERRIDE-' --output-on-failure`
+and the affected/full portable suites. The non-root Linux laboratory runs
+`ctest --preset linux-x64-gcc13 -R '^native[.](RESOURCE-GENERATIONS|CONTENT-COMMANDS)$'
+--output-on-failure` for legacy consumer regressions. These native checks do not
+qualify storage of new selections. See the [handoff](../../spec/delivery/theme-overrides-handoff.md).
