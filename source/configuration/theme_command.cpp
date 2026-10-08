@@ -24,8 +24,7 @@ ResourceSnapshot prepare_theme_command(const ResourceSet& source,const Authored&
         auto artifact=author_theme(source,proposed,policy,capabilities);need(artifact.has_value(),"theme.no_change");
         result=replace_theme_resources(source,candidate,artifact,policy,capabilities);
     }else{
-        std::vector<ContentPackage> packages;for(const auto& p:source.packages())packages.push_back(*p);
-        result=ContentCatalog(std::move(packages)).theme_resources(selection,candidate);authorize_resources(*result,policy,capabilities);
+        result=ContentCatalog::retained(source).theme_resources(selection,candidate);authorize_resources(*result,policy,capabilities);
     }
     validate_theme_command_binding(command,*result);return result;
 }

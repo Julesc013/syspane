@@ -1895,9 +1895,9 @@ adds explicit `ContentCatalog::theme_resources` for resource selection 0.2 and
 requires current source/result policy and `configuration.theme-overrides` admission.
 It retains `ResourceSet::base_packages()` and validates canonical artifact bytes;
 it never appends a preset layer. `ContentCatalog::resources` keeps the legacy shape.
-Legacy command/store formats and current SettingsDraft consumers reject new
-selections. The command 0.8 admission below now supplies durable storage; editor
-resource history and native authoring require the next integration.
+Legacy command/store formats and unadmitted SettingsDraft contexts reject new
+selections. Command 0.8 supplies durable storage; the theme-history integration below
+now admits shared drafts explicitly. Native controls still require their own evidence.
 
 After ordinary workspace preflight/configure/build, run
 `ctest --preset <profile> -R '^configuration[.]THEME-OVERRIDE-' --output-on-failure`
@@ -1929,3 +1929,30 @@ In the existing non-root ext4 Linux laboratory run
 The independent oracle compares literal artifact bytes, confirms stopped/killed owners,
 and preserves corruption and wrong-output witnesses. Read the
 [handoff](../../spec/delivery/theme-commands-handoff.md) before editor integration.
+
+
+The [theme-history package](../../spec/delivery/packages/w-10-theme-history.md)
+adds `EditorDraft::set_theme_fonts`, `theme_fonts_available` and a const `resources`
+borrow. Supply complete font and null/complete role-map values. Existing SceneThemeEdit
+retains the override or selects a base theme, preserving null versus explicit ID.
+History stores scene/selection/resource snapshots together. `history_bytes` includes
+unique additional resource bytes; count and byte limits remain 64 and 8 MiB.
+Borrowed resources expire on mutation, policy, reload or close, like the scene borrow.
+
+`ContentCatalog::retained` shares internally owned immutable packages from a validated
+ResourceSet. Its optional added package enters by value and receives ordinary checks.
+Use the existing explicit context capabilities and large-command admission before
+loading versioned selections or authoring fonts. Apply derives one final command 0.8
+from the accepted theme, even after several local edits. Selecting another base theme
+must be committed before changing its fonts when the final artifact cannot be derived
+from the accepted source. Do not bypass this with rewritten request pins.
+
+After ordinary preflight/configure/build run
+`ctest --preset <profile> -R '^editor[.]THEME-HISTORY-' --output-on-failure`, affected
+editor/settings/configuration/protocol/component tests and the full portable suite.
+In the existing non-root Linux laboratory run
+`ctest --preset linux-x64-gcc13 -R '^native[.](THEME-HISTORY|THEME-COMMANDS|RESOURCE-GENERATIONS|CONTENT-COMMANDS|SETTINGS-FORM|EDITOR-FORM)$' --output-on-failure`.
+The new native test emits requests from the actual EditorDraft, publishes through
+ConfigProbe, independently compares files/bytes, and verifies fresh reload and a
+lost-result reconciliation. It does not instantiate font controls. The
+[handoff](../../spec/delivery/theme-history-handoff.md) preserves failures and evidence.

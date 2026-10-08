@@ -35,12 +35,17 @@ struct PresetPlan {
 class ContentCatalog {
 public:
     explicit ContentCatalog(std::vector<ContentPackage> packages);
+    // Share only packages owned by an already validated ResourceSet. New bytes
+    // enter by value; callers cannot inject an aliased mutable allocation.
+    static ContentCatalog retained(const ResourceSet&,bool base_only=false,std::optional<ContentPackage> addition={});
     ResourceSnapshot resources(const Json& selection,const Authored& candidate)const;
     // Explicit experimental contract; legacy commands/stores use resources().
     ResourceSnapshot theme_resources(const Json& selection,const Authored& candidate)const;
     PresetPlan preview(const Json& package_pin,const Json& preset_pin,const Authored& baseline,const std::string& request,
                        const Authority& authority,const Policy& policy,const std::set<std::string>& capabilities)const;
 private:
+    struct Shared {};
+    ContentCatalog(std::vector<std::shared_ptr<const ContentPackage>>,Shared);
     ResourceSnapshot resolve_resources(const Json&,const Authored&,bool overrides)const;
     struct Selection {std::size_t leaf;std::vector<std::size_t> chain;};
     Selection select(const Json& package_pin,const Json& preset_pin)const;

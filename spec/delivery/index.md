@@ -99,6 +99,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Bounded telemetry document checkpoint](telemetry-wire-handoff.md) — Bind versioned delivery decoding and exact replay preservation to native-compiled portable cases without claiming a live subscription.
 - [Theme authoring input and immutable artifact checkpoint](theme-authoring-handoff.md) — Exact font input and license-bound theme artifacts; durable and native integration remain open.
 - [Durable authored theme command checkpoint](theme-commands-handoff.md) — Negotiated font intent, versioned Linux publication and independent restart evidence.
+- [Atomic theme resource history checkpoint](theme-history-handoff.md) — Shared package lifetimes, bounded undo/redo and exact durable editor requests.
 - [Bounded theme resource override checkpoint](theme-overrides-handoff.md) — Versioned immutable selection and replacement before durable command/store integration.
 - [Independent transaction supervision checkpoint](transaction-supervision-handoff.md) — Preserve exact process-stop and recovery boundaries for uncooperative native transactions.
 - [Portable transport and policy checkpoint](transport-handoff.md) — Resume W-24 from executable portable contracts without claiming native authentication.

@@ -60,10 +60,30 @@ Json validate_content_manifest(std::string_view bytes){
     for(const auto& asset:manifest["assets"])if(asset["path"]==entry){need(asset["media_type"]=="application/json","content.entry");found=true;}
     need(found,"content.entry");return manifest;
 }
-ContentCatalog::ContentCatalog(std::vector<ContentPackage> packages){
+namespace {
+std::vector<std::shared_ptr<const ContentPackage>> owned(std::vector<ContentPackage> packages){
+    need(!packages.empty()&&packages.size()<=64,"content.capacity");
+    std::vector<std::shared_ptr<const ContentPackage>> out;
+    for(auto& package:packages)out.push_back(std::make_shared<const ContentPackage>(std::move(package)));
+    return out;
+}
+}
+ContentCatalog::ContentCatalog(std::vector<ContentPackage> packages):ContentCatalog(owned(std::move(packages)),Shared{}){}
+ContentCatalog ContentCatalog::retained(const ResourceSet& source,bool base_only,std::optional<ContentPackage> addition){
+    auto packages=base_only?source.base_packages():source.packages();
+    if(addition){
+        const auto added=validate_content_manifest(addition->manifest);bool present=false;
+        for(const auto& package:packages){const auto manifest=parse_content_json(package->manifest,65536);
+            if(manifest.at("package_id")==added.at("package_id")&&manifest.at("version")==added.at("version")){
+                need(package->manifest==addition->manifest&&package->assets==addition->assets,"content.duplicate_package");present=true;}}
+        if(!present)packages.push_back(std::make_shared<const ContentPackage>(std::move(*addition)));
+    }
+    return ContentCatalog(std::move(packages),Shared{});
+}
+ContentCatalog::ContentCatalog(std::vector<std::shared_ptr<const ContentPackage>> packages,Shared){
     need(!packages.empty()&&packages.size()<=64,"content.capacity");std::size_t count=0,total=0;
     std::map<std::pair<std::string,std::string>,std::size_t> identities;
-    for(auto& bytes:packages){
+    for(const auto& package:packages){const auto& bytes=*package;
         auto manifest=validate_content_manifest(bytes.manifest);
         need(identities.emplace(std::make_pair(manifest["package_id"].get<std::string>(),manifest["version"].get<std::string>()),entries_.size()).second,"content.duplicate_package");
         need(bytes.assets.size()==manifest["assets"].size(),"content.assets");
@@ -82,7 +102,7 @@ ContentCatalog::ContentCatalog(std::vector<ContentPackage> packages){
                     {"operations",Json::array({{{"op","settings.set"},{"path",setting["path"]},{"value",setting["value"]}}})}};validate_command(q);}
         }
         Json pin={{"id",document[kind+"_id"]},{"version",manifest["version"]},{"sha256",sha256(raw)}};
-        entries_.push_back({std::make_shared<const ContentPackage>(std::move(bytes)),std::move(manifest),std::move(document),std::move(pin),{}});
+        entries_.push_back({package,std::move(manifest),std::move(document),std::move(pin),{}});
     }
     std::vector<unsigned> heights(entries_.size(),0);std::set<std::size_t> visiting;
     std::function<unsigned(std::size_t)> visit=[&](std::size_t i){

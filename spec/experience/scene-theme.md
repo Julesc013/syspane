@@ -90,5 +90,6 @@ original preset closure. The explicit component API preserves image references. 
 [durable theme command](../delivery/packages/w-08-theme-commands.md) now admits exact
 source-bound font intent through command 0.8 and Linux generation 0.4 recovery. It
 retains the original closure and one canonical override, including reset and exact
-request reconciliation. Native authoring still requires atomic editor resource history,
-font controls, independent pixels/save/reopen and policy-loss erasure evidence.
+request reconciliation. The [theme-history contract](../delivery/packages/w-10-theme-history.md) now connects
+atomic editor resources and Apply/reload. Native authoring still requires font controls,
+independent pixels/save/reopen and policy-loss erasure evidence.

@@ -177,3 +177,14 @@ while captured geometry and snap targets remain fixed. Private outer and nested
 buffers erase together on cancellation or authority/lifetime changes. Keep the
 existing unavailable-preview, recovery and durable/activation distinctions.
 Installed ownership, full accessibility and other native adapters remain open.
+
+
+The [theme resource history contract](../delivery/packages/w-10-theme-history.md)
+extends the existing shared draft with atomic scene/selection/resource undo states.
+Original immutable base packages share allocations. The existing 8-MiB history limit
+also charges unique additional resource metadata and package bytes, with the accepted
+baseline retained separately. Explicitly admitted font intent uses command 0.8 against
+the committed source. Undo/redo, Apply, unknown results, reload and policy erasure use
+the existing transaction owner. Native base/role font controls, borrowed-resource
+preview, independent pixels/accessibility and private-input erasure remain required
+before trusted EditorForm typography admission.

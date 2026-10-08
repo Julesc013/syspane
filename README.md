@@ -7,12 +7,18 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
+The [theme-history checkpoint](spec/delivery/theme-history-handoff.md) connects shared
+immutable theme resources to editor undo/redo, Apply, reconciliation and reload.
+It bounds retained resource bytes alongside scene history and preserves original
+package allocations. Native font controls and their independent preview/save/reopen
+evidence remain next; all five complete editions remain open.
+
 The [durable theme-command checkpoint](spec/delivery/theme-commands-handoff.md) adds
 negotiated font edits and exact Linux persistence/recovery. It preserves the original
 preset/image closure and one immutable theme override. Interrupted writes, lost
 results, replay, cancellation and policy revocation have executable checks. Atomic
-editor resource history and native font controls remain next; all five complete
-editions remain open.
+editor resource history now has the checkpoint above; native font controls and all
+five complete editions remain open.
 
 The earlier [theme authoring](spec/delivery/theme-authoring-handoff.md) and
 [resource override](spec/delivery/theme-overrides-handoff.md) checkpoints supply lossless

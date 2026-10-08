@@ -19,8 +19,9 @@ updated: {"by": "codex", "at": "2026-10-06T01:32:00Z", "scope": "Native focus co
 
 The [durable theme-command checkpoint](theme-commands-handoff.md) closes negotiated
 font intent, Linux publication and exact recovery using the earlier immutable
-authoring/override contracts. Atomic editor resource history and native controls
-remain the next boundary. This checkpoint does not qualify complete editions.
+authoring/override contracts. The [theme-history checkpoint](theme-history-handoff.md)
+now connects atomic editor resources, history and Apply/reload. Native font controls
+and their independent evidence remain next; complete editions remain unqualified.
 
 The [typography checkpoint](typography-handoff.md) adds versioned theme fonts and
 native role rendering. Current policy and immutable resource identities gate their

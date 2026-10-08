@@ -1,0 +1,74 @@
+[
+  {
+    "step": "configure",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-08T04:18:23.920435+00:00",
+    "finished_at": "2026-10-08T04:18:24.687844+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2541549527,\n  \"linux_campaign_bytes\": 4458983191,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "configure",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/theme_history_step.py",
+      "linux-x64-gcc13",
+      "configure"
+    ],
+    "started_at": "2026-10-08T04:18:24.688338+00:00",
+    "finished_at": "2026-10-08T04:18:35.264101+00:00",
+    "exit": 0,
+    "stdout": "Preset CMake variables:\n\n  BUILD_TESTING=\"ON\"\n  CMAKE_BUILD_TYPE=\"Debug\"\n  CMAKE_CXX_COMPILER=\"g++\"\n  SYSPANE_PROFILE=\"linux-x64-gcc13\"\n\nprofile verified: linux-x64-gcc13\nvendored dependency digests: pass\ndiagnostic toolkit verified: GTK 3.24.41 / Ubuntu 3.24.41-4ubuntu1.3\nnative text dependency identity verified: 358 files\nnative image dependencies verified: 344 files\nnative GJS clock build dependencies verified\n-- Configuring done (5.8s)\n-- Generating done (0.1s)\n-- Build files have been written to: /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-theme-history/linux-x64-gcc13-configure-d9f0f1671c\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-08T04:18:35.264430+00:00",
+    "finished_at": "2026-10-08T04:18:35.961645+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2543358266,\n  \"linux_campaign_bytes\": 4458989423,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/theme_history_step.py",
+      "linux-x64-gcc13",
+      "build"
+    ],
+    "started_at": "2026-10-08T04:18:35.961944+00:00",
+    "finished_at": "2026-10-08T04:20:03.148092+00:00",
+    "exit": 1,
+    "stdout": "[68/102] Building CXX object CMakeFiles/syspane_theme_command_tests.dir/tests/configuration/theme_command_tests.cpp.o\n[69/102] Linking CXX executable syspane_theme_command_tests\n[70/102] Building CXX object CMakeFiles/syspane_theme_override_tests.dir/tests/configuration/theme_override_tests.cpp.o\n[71/102] Building CXX object CMakeFiles/syspane_theme_history_tests.dir/tests/editor/theme_history_tests.cpp.o\n[72/102] Linking CXX executable syspane_theme_override_tests\n[73/102] Linking CXX executable syspane_theme_history_tests\n[74/102] Building CXX object CMakeFiles/syspane_theme_authoring_tests.dir/tests/editor/theme_authoring_tests.cpp.o\n[75/102] Linking CXX executable syspane_theme_authoring_tests\n[76/102] Building CXX object CMakeFiles/syspane_typography_tests.dir/tests/scene/typography_tests.cpp.o\n[77/102] Linking CXX executable syspane_typography_tests\n[78/102] Building CXX object CMakeFiles/syspane_authored_tests.dir/tests/configuration/authored_tests.cpp.o\n[79/102] Building CXX object CMakeFiles/syspane_authored_tests.dir/tests/configuration/scene_content_tests.cpp.o\n[80/102] Building CXX object CMakeFiles/syspane_authored_tests.dir/tests/configuration/content_tests.cpp.o\n[81/102] Linking CXX executable syspane_authored_tests\n[82/102] Building CXX object CMakeFiles/syspane_settings_window.dir/tests/configuration/settings_window.cpp.o\n[83/102] Linking CXX executable syspane_settings_window\n[84/102] Building CXX object CMakeFiles/syspane_scene_surface_tests.dir/tests/scene/surface_tests.cpp.o\n[85/102] Building CXX object CMakeFiles/syspane_editor_window.dir/tests/editor/editor_window.cpp.o\n[86/102] Linking CXX executable syspane_editor_window\n[87/102] Building CXX object CMakeFiles/syspane_scene_inspector_tests.dir/tests/scene/inspector_tests.cpp.o\n[88/102] Linking CXX executable syspane_scene_inspector_tests\n[89/102] Building CXX object CMakeFiles/syspane_scene_surface_tests.dir/tests/scene/surface_window.cpp.o\n[90/102] Building CXX object CMakeFiles/syspane_scene_surface_tests.dir/tests/scene/table_tests.cpp.o\n[91/102] Building CXX object CMakeFiles/syspane_scene_surface_tests.dir/tests/scene/chart_surface_tests.cpp.o\n[92/102] Linking CXX executable syspane_image_job_tests\n[93/102] Linking CXX executable syspane_scene_tests\n[94/102] Building CXX object CMakeFiles/syspane_scene_surface_tests.dir/tests/scene/image_surface_tests.cpp.o\n[95/102] Building CXX object CMakeFiles/syspane_scene_surface_tests.dir/tests/scene/native_visibility_tests.cpp.o\n[96/102] Linking CXX executable syspane_scene_surface_tests\n[97/102] Building CXX object CMakeFiles/syspane_role_composition_probe.dir/tests/scene/role_composition_probe.cpp.o\n[98/102] Building CXX object CMakeFiles/syspane_command_session_tests.dir/tests/configuration/command_session_tests.cpp.o\n[99/102] Linking CXX executable syspane_role_composition_probe\n[100/102] Building CXX object CMakeFiles/syspane_theme_history_probe.dir/tests/editor/native_theme_history_probe.cpp.o\nFAILED: CMakeFiles/syspane_theme_history_probe.dir/tests/editor/native_theme_history_probe.cpp.o \n/usr/bin/g++ -DJSON_DIAGNOSTICS=0 -DJSON_DIAGNOSTIC_POSITIONS=1 -I/mnt/d/Projects/SysPane/syspane/source/interfaces -I/mnt/d/Projects/SysPane/syspane/source/configuration -I/mnt/d/Projects/SysPane/syspane/source/protocol -I/mnt/d/Projects/SysPane/syspane/source/scene -I/mnt/d/Projects/SysPane/syspane/source/diagnostics -I/mnt/d/Projects/SysPane/syspane/source/model -I/mnt/d/Projects/SysPane/syspane/source/platform -isystem /mnt/d/Projects/SysPane/syspane/source/third_party -g -std=c++17 -Wall -Wextra -Wpedantic -Werror -march=x86-64 -mtune=generic -MD -MT CMakeFiles/syspane_theme_history_probe.dir/tests/editor/native_theme_history_probe.cpp.o -MF CMakeFiles/syspane_theme_history_probe.dir/tests/editor/native_theme_history_probe.cpp.o.d -o CMakeFiles/syspane_theme_history_probe.dir/tests/editor/native_theme_history_probe.cpp.o -c /mnt/d/Projects/SysPane/syspane/tests/editor/native_theme_history_probe.cpp\n/mnt/d/Projects/SysPane/syspane/tests/editor/native_theme_history_probe.cpp: In function \u2018int main(int, char**)\u2019:\n/mnt/d/Projects/SysPane/syspane/tests/editor/native_theme_history_probe.cpp:14:27: error: loop variable \u2018key\u2019 creates a copy from type \u2018const std::string\u2019 {aka \u2018const std::__cxx11::basic_string<char>\u2019} [-Werror=range-loop-construct]\n   14 |     for(const std::string key:mode==\"lost\"?std::vector<std::string>{\"first\"}:std::vector<std::string>{\"first\",\"second\",\"reset\"}){\n      |                           ^~~\n/mnt/d/Projects/SysPane/syspane/tests/editor/native_theme_history_probe.cpp:14:27: note: use reference type to prevent copying\n   14 |     for(const std::string key:mode==\"lost\"?std::vector<std::string>{\"first\"}:std::vector<std::string>{\"first\",\"second\",\"reset\"}){\n      |                           ^~~\n      |                           &\ncc1plus: all warnings being treated as errors\n[101/102] Linking CXX executable syspane_command_session_tests\nninja: build stopped: subcommand failed.\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-theme-history/linux-x64-gcc13-build-5d0277f55f\n",
+    "stderr": ""
+  }
+]

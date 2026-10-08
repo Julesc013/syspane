@@ -1,5 +1,6 @@
 #include "editor_draft.hpp"
 #include "authored_equal.hpp"
+#include "theme_resources.hpp"
 #include <algorithm>
 #include <cmath>
 #include <functional>
@@ -277,25 +278,60 @@ void EditorDraft::select(std::vector<std::string> ids){
     for(const auto& id:ids)need(unique.insert(id).second&&exists(*scene(),id),"editor.selection");
     selected_=surviving(*scene(),ids);
 }
-std::size_t EditorDraft::history_bytes()const{std::size_t n=0;for(const auto& e:undo_)n+=e.bytes;for(const auto& e:redo_)n+=e.bytes;return n;}
+bool EditorDraft::theme_fonts_available()const{
+    if(!available()||!resources()||!transaction_.theme_commands())return false;
+    try{transaction_.editable();transaction_.authorize_resources();transaction_.authorize_theme_resources();
+        c::authorize_authored({{"schema_version","0.8.0"},{"theme_edit",Json::object()},{"content",resources()->selection()},{"intent","preview"},{"policy_generation",std::to_string(transaction_.policy_.revision)},{"expected_revision",std::to_string(*revision())},{"operations",Json::array({{{"op","scene.replace"}}})}},transaction_.authority_,transaction_.policy_,*revision());return true;
+    }catch(const protocol::Error&){return false;}
+}
+bool EditorDraft::set_theme_fonts(const Json& font,const Json& roles){
+    transaction_.editable();need(theme_fonts_available(),"editor.theme_unavailable");auto proposed=resources()->theme();proposed["schema_version"]="0.2.0";proposed["font"]=font;
+    if(roles.is_null())proposed.erase("font_roles");else proposed["font_roles"]=roles;
+    const auto artifact=c::author_theme(*resources(),proposed,transaction_.policy_,transaction_.context_->capabilities);if(!artifact)return false;
+    auto candidate=*transaction_.draft_;candidate.scene["theme_id"]=artifact->theme["theme_id"];
+    auto retained=c::replace_theme_resources(*resources(),candidate,artifact,transaction_.policy_,transaction_.context_->capabilities);
+    return record(std::move(candidate.scene),selected_,std::move(retained));
+}
+std::size_t EditorDraft::history_bytes(const std::deque<Change>& undo,const std::deque<Change>& redo)const{
+    std::size_t bytes=0;std::set<const c::ResourceSet*> snapshots;std::set<const c::ContentPackage*> packages;
+    if(transaction_.base_resources_){snapshots.insert(transaction_.base_resources_.get());for(const auto& p:transaction_.base_resources_->packages())packages.insert(p.get());}
+    const auto charge=[&](const State& state){
+        if(!state.resources||!snapshots.insert(state.resources.get()).second)return;
+        const auto& resources=*state.resources;bytes+=state.resource_metadata_bytes;
+        for(const auto& p:resources.packages())if(packages.insert(p.get()).second){bytes+=p->manifest.size();for(const auto& asset:p->assets)bytes+=asset.first.size()+asset.second.size();}
+    };
+    for(const auto* stack:{&undo,&redo})for(const auto& entry:*stack){bytes+=entry.bytes;charge(entry.before);charge(entry.after);}
+    return bytes;
+}
+std::size_t EditorDraft::history_bytes()const{return history_bytes(undo_,redo_);}
 void EditorDraft::clear_history(){undo_.clear();redo_.clear();}
 bool EditorDraft::execute(const std::vector<SceneEdit>& edits){
     transaction_.editable();need(!edits.empty()&&edits.size()<=128,"editor.operations");auto candidate=*scene();auto selected=selected_;
     try{for(const auto& edit:edits){if(std::holds_alternative<SetWidgetVisibility>(edit))need(visibility_available(),"editor.visibility_unavailable");if(std::holds_alternative<SetWidgetLocks>(edit))need(locks_available(),"editor.lock_unavailable");std::visit([&](const auto& op){guard(candidate,op);edit_selection(candidate,selected,op);},edit);}}
     catch(const Json::exception&){throw protocol::Error("editor.operation");}
     if(c::authored_equal(candidate,*scene()))return false;
-    Change change{{*scene(),selected_},{candidate,surviving(candidate,selected)},0};
+    return record(std::move(candidate),std::move(selected));
+}
+bool EditorDraft::record(Json candidate,std::vector<std::string> selected,c::ResourceSnapshot resources){
+    auto prepared=transaction_.prepare_scene(std::move(candidate),std::move(resources));
+    if(c::authored_equal(prepared.first.scene,*scene())&&(!prepared.second||prepared.second->selection()==transaction_.draft_resources_->selection()))return false;
+    Change change{{*scene(),selected_,transaction_.draft_resources_},{prepared.first.scene,surviving(prepared.first.scene,selected),prepared.second},0};
+    // Immutable snapshots keep the same serialized accounting size throughout
+    // history. Measure once per captured state instead of reserializing every
+    // retained theme each time we query or enforce the history budget.
+    for(auto* state:{&change.before,&change.after})if(state->resources){const auto& r=*state->resources;
+        state->resource_metadata_bytes=r.selection().dump().size()+r.theme().dump().size()+r.theme_pin().dump().size()+Json(r.required()).dump().size();}
     change.bytes=change.before.scene.dump().size()+change.after.scene.dump().size()+Json(change.before.selection).dump().size()+Json(change.after.selection).dump().size();
-    auto next=undo_;next.push_back(change);std::size_t bytes=0;for(const auto& entry:next)bytes+=entry.bytes;
-    while(next.size()>64||bytes>8*1024*1024){bytes-=next.front().bytes;next.pop_front();}
-    auto selection=change.after.selection;transaction_.replace_scene(std::move(candidate));
+    auto next=undo_;next.push_back(change);const std::deque<Change> empty;
+    while(next.size()>64||history_bytes(next,empty)>8*1024*1024)next.pop_front();
+    auto selection=change.after.selection;transaction_.adopt_scene(std::move(prepared.first),std::move(prepared.second));
     selected_.swap(selection);undo_.swap(next);redo_.clear();return true;
 }
 bool EditorDraft::travel(bool forward){
     transaction_.editable();auto& from=forward?redo_:undo_;auto& to=forward?undo_:redo_;if(from.empty())return false;
     const auto& change=from.back();const auto& target=forward?change.after:change.before;
     auto destination=to;destination.push_back(change);auto selection=target.selection;
-    transaction_.replace_scene(target.scene);selected_.swap(selection);to.swap(destination);from.pop_back();return true;
+    auto prepared=transaction_.prepare_scene(target.scene,target.resources);transaction_.adopt_scene(std::move(prepared.first),std::move(prepared.second));selected_.swap(selection);to.swap(destination);from.pop_back();return true;
 }
 bool EditorDraft::undo(){return travel(false);}
 bool EditorDraft::redo(){return travel(true);}

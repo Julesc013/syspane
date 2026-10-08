@@ -47,11 +47,17 @@ private:
     friend class EditorDraft;
     // Shared scene staging for the editor; publication still uses begin/complete.
     void replace_scene(Json);
+    std::pair<configuration::Authored,configuration::ResourceSnapshot> prepare_scene(Json,configuration::ResourceSnapshot={})const;
+    void adopt_scene(configuration::Authored,configuration::ResourceSnapshot);
+    configuration::ResourceSnapshot resolve_resources(const configuration::Authored&)const;
+    bool theme_commands()const;
+    void authorize_theme_resources()const;
     void editable()const;
     bool disclosure()const;
     void erase();
     void authorize_resources()const;
     Json command(const std::string&,const std::string&)const;
+    Json command(const configuration::Authored&,const configuration::ResourceSnapshot&,const std::string&,const std::string&)const;
     bool finish(std::uint64_t,const Json&,const std::string& expected_epoch);
     configuration::Authority authority_;configuration::Policy policy_;
     std::optional<configuration::Authored> base_,draft_;

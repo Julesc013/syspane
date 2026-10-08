@@ -489,7 +489,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "a405f1e4f5421fbef3573c8103e33c5de9ed2da90612baadf6e33746d9186295"
+      "sha256": "8c54edf4280ed25231ceadd4923bf0f01e70930b5e2db840b474304508adf23c"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -884,7 +884,7 @@
       "requires": [
         "SP-CURRENT"
       ],
-      "sha256": "5468899d6bb33428c596af44523e995ca67b343c09b7d1fb7ed3a602022407e3"
+      "sha256": "b6485203f1254c13df52b39bba076642d834d508f774afb2c8405e871b288ced"
     },
     {
       "id": "SP-KEYBOARD-INPUT-HANDOFF",
@@ -1875,6 +1875,17 @@
       "sha256": "7763ae05eca20567bd5c612f9e6202ddb7a54d949d230f468d7754f4d40f74f3"
     },
     {
+      "id": "SP-W10-THEME-HISTORY",
+      "path": "delivery/packages/w-10-theme-history.md",
+      "title": "Atomic theme resource history and Apply",
+      "description": "Bounded shared resources, reversible local fonts and exact durable command generation.",
+      "requires": [
+        "SP-W08-THEME-COMMANDS",
+        "SP-W10-EDITOR-DRAFT"
+      ],
+      "sha256": "e1b80fe5ff4f63cadb3f7c59f0e9d97ba8bf83600f33edcbaf7409077b797876"
+    },
+    {
       "id": "SP-W10-THEME-OVERRIDES",
       "path": "delivery/packages/w-10-theme-overrides.md",
       "title": "Bounded immutable theme resource overrides",
@@ -2555,6 +2566,17 @@
       "sha256": "6a82900e34caa934f14d1348b118f3defdd9786d0ab5a5452ef111b6aa9776eb"
     },
     {
+      "id": "SP-THEME-HISTORY-HANDOFF",
+      "path": "delivery/theme-history-handoff.md",
+      "title": "Atomic theme resource history checkpoint",
+      "description": "Shared package lifetimes, bounded undo/redo and exact durable editor requests.",
+      "requires": [
+        "SP-W10-THEME-HISTORY",
+        "SP-THEME-COMMANDS-HANDOFF"
+      ],
+      "sha256": "b3c4dce6da5f9cbe9425c42294dcd8b2e1615b0710b4a0bbe1f36e02b17bdf8a"
+    },
+    {
       "id": "SP-THEME-OVERRIDES-HANDOFF",
       "path": "delivery/theme-overrides-handoff.md",
       "title": "Bounded theme resource override checkpoint",
@@ -2812,7 +2834,7 @@
         "SP-RENDERING",
         "SP-COMMANDS"
       ],
-      "sha256": "b2ec1d208f41625d0de654aeaca0dae0c994bb06a3bfe122c02c275985aa77dc"
+      "sha256": "bd84f86b6eb987d548d043cd71f5e64b103667e3730da45b30706d8d5d368e11"
     },
     {
       "id": "SP-POLICY",
@@ -2856,7 +2878,7 @@
         "SP-STATE",
         "SP-RENDERING"
       ],
-      "sha256": "ad34dd09e945c03845623682f90830a2b7cb64b822931ea3c213770de0e42d2d"
+      "sha256": "0d4189c683e02eb94865aaf9e5150a6dc07866fae345578e30b7d6bc94ff137c"
     },
     {
       "id": "SP-SETTINGS",

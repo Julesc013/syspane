@@ -2543,6 +2543,61 @@
         "linux-x64-gcc13",
         "windows-x86-v141-xp"
       ]
+    },
+    {
+      "id": "theme-history-tests",
+      "target": "syspane_theme_history_tests",
+      "type": "EXECUTABLE",
+      "source_owner": "tests/editor/",
+      "public_interfaces": [],
+      "private_interfaces": [
+        "tests/editor/theme_history_fixture.hpp"
+      ],
+      "sources": [
+        "tests/editor/theme_history_tests.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_editor_draft"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "windows-x64-gcc15",
+        "linux-x64-gcc13",
+        "windows-x86-v141-xp"
+      ]
+    },
+    {
+      "id": "theme-history-probe",
+      "target": "syspane_theme_history_probe",
+      "type": "EXECUTABLE",
+      "source_owner": "tests/editor/",
+      "public_interfaces": [],
+      "private_interfaces": [
+        "tests/editor/theme_history_fixture.hpp"
+      ],
+      "sources": [
+        "tests/editor/native_theme_history_probe.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_editor_draft",
+        "syspane_generation_store"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
     }
   ]
 }

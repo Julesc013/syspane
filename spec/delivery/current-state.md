@@ -12,17 +12,23 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-08T04:00:58.051175+00:00", "scope": "Negotiated theme commands and Linux durable recovery verified; atomic editor history and native controls remain next"}
+updated: {"by": "codex", "at": "2026-10-08T05:09:49.857875+00:00", "scope": "Atomic theme resource history and durable editor Apply/reload verified; native font controls remain next"}
 ---
 
 # Current state and next admitted boundary
+
+The [theme-history checkpoint](theme-history-handoff.md) connects shared
+immutable theme resources to editor undo/redo, Apply, reconciliation and reload.
+It bounds retained resource bytes alongside scene history and preserves original
+package allocations. Native font controls and their independent preview/save/reopen
+evidence remain next; all five complete editions remain open.
 
 The [durable theme-command checkpoint](theme-commands-handoff.md) adds
 negotiated font edits and exact Linux persistence/recovery. It preserves the original
 preset/image closure and one immutable theme override. Interrupted writes, lost
 results, replay, cancellation and policy revocation have executable checks. Atomic
-editor resource history and native font controls remain next; all five complete
-editions remain open.
+editor resource history now has the checkpoint above; native font controls and all
+five complete editions remain open.
 
 The earlier [theme authoring](theme-authoring-handoff.md) and
 [resource override](theme-overrides-handoff.md) checkpoints supply lossless
@@ -742,10 +748,10 @@ release-identity decisions remain open.
 
 ## Next work
 
-The immediate theme-editing boundary is atomic editor resource history: carry base,
-draft and undo/redo resources through Apply/reconcile/reload with bounded retained
-bytes, then add native font controls and independent pixels/save/reopen/erasure checks.
-Use the [theme-command handoff](theme-commands-handoff.md) and W-10 row; preserve
+The immediate theme-editing boundary is native base/role font controls: use the
+shared atomic history and command owner, then prove preview pixels, accessibility,
+save/reopen, lost results and private-input erasure before trusted editor admission.
+Use the [theme-history handoff](theme-history-handoff.md) and W-10 row; preserve
 the existing work graph and continue unrelated native tracks independently.
 
 Start with the [campaign coverage audit](campaign-coverage.md). W-03 now has a

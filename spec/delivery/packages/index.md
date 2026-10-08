@@ -64,6 +64,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Native observation error and focus boundary](w-10-native-observation.md) — Distinguish inaccessible observations from actual absent state without weakening native acceptance.
 - [Deterministic pointer snapping and visible alignment guides](w-10-snap.md) — Close bounded grid and guide projection through existing editor gestures and typed edits.
 - [Theme authoring input and immutable artifact boundary](w-10-theme-authoring.md) — Lossless font input and deterministic private theme artifacts before durable native integration.
+- [Atomic theme resource history and Apply](w-10-theme-history.md) — Bounded shared resources, reversible local fonts and exact durable command generation.
 - [Bounded immutable theme resource overrides](w-10-theme-overrides.md) — Keep one authored theme beside the original preset closure before versioned durable integration.
 - [Versioned visibility authoring and durable admission](w-10-visibility-admission.md) — Preserve conditional scene meaning through typed edits, negotiation and coherent recovery.
 - [Native conditional editing and enablement](w-10-visibility-controls.md) — Private rule input, hidden-object selection and durable conditional editing through the existing native owner.

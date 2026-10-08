@@ -1,0 +1,66 @@
+[
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-08T04:43:46.444429+00:00",
+    "finished_at": "2026-10-08T04:43:47.161225+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2570786162,\n  \"linux_campaign_bytes\": 4611453512,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "out/campaign/theme_history_step.py",
+      "windows-x64-gcc15",
+      "build"
+    ],
+    "started_at": "2026-10-08T04:43:47.161647+00:00",
+    "finished_at": "2026-10-08T04:45:04.721267+00:00",
+    "exit": 0,
+    "stdout": "pp.obj\n[2/54] Building CXX object CMakeFiles/syspane_authored.dir/source/configuration/theme_resources.cpp.obj\n[3/54] Building CXX object CMakeFiles/syspane_authored.dir/source/configuration/authored_theme.cpp.obj\n[4/54] Building CXX object CMakeFiles/syspane_authored.dir/source/configuration/transaction.cpp.obj\n[5/54] Building CXX object CMakeFiles/syspane_authored.dir/source/configuration/authored.cpp.obj\n[6/54] Building CXX object CMakeFiles/syspane_authored.dir/source/configuration/content.cpp.obj\n[7/54] Building CXX object CMakeFiles/syspane_settings_draft.dir/source/interfaces/settings_draft.cpp.obj\n[8/54] Linking CXX static library libsyspane_authored.a\n[9/54] Linking CXX static library libsyspane_settings_draft.a\n[10/54] Building CXX object CMakeFiles/syspane_editor_draft.dir/source/interfaces/editor_theme.cpp.obj\n[11/54] Building CXX object CMakeFiles/syspane_editor_draft.dir/source/interfaces/editor_draft.cpp.obj\n[12/54] Building CXX object CMakeFiles/syspane_editor_draft.dir/source/interfaces/editor_content.cpp.obj\n[13/54] Building CXX object CMakeFiles/syspane_editor_draft.dir/source/interfaces/editor_create.cpp.obj\n[14/54] Building CXX object CMakeFiles/syspane_editor_draft.dir/source/interfaces/editor_binding.cpp.obj\n[15/54] Building CXX object CMakeFiles/syspane_editor_draft.dir/source/interfaces/editor_visibility.cpp.obj\n[16/54] Building CXX object CMakeFiles/syspane_editor_draft.dir/source/interfaces/editor_layout.cpp.obj\n[17/54] Building CXX object CMakeFiles/syspane_async_commands.dir/source/configuration/async_commands.cpp.obj\n[18/54] Linking CXX static library libsyspane_async_commands.a\n[19/54] Linking CXX static library libsyspane_editor_draft.a\n[20/54] Building CXX object CMakeFiles/syspane_large_command_tests.dir/tests/configuration/large_command_tests.cpp.obj\n[21/54] Building CXX object CMakeFiles/syspane_editor_tests.dir/tests/editor/arrange_tests.cpp.obj\n[22/54] Building CXX object CMakeFiles/syspane_editor_tests.dir/tests/editor/editor_draft_tests.cpp.obj\n[23/54] Building CXX object CMakeFiles/syspane_editor_tests.dir/tests/editor/group_tests.cpp.obj\n[24/54] Building CXX object CMakeFiles/syspane_editor_tests.dir/tests/editor/snap_tests.cpp.obj\n[25/54] Building CXX object CMakeFiles/syspane_editor_tests.dir/tests/editor/content_properties_tests.cpp.obj\n[26/54] Building CXX object CMakeFiles/syspane_editor_tests.dir/tests/editor/binding_authoring_tests.cpp.obj\n[27/54] Building CXX object CMakeFiles/syspane_editor_tests.dir/tests/editor/widget_creation_tests.cpp.obj\n[28/54] Building CXX object CMakeFiles/syspane_editor_tests.dir/tests/editor/layout_authoring_tests.cpp.obj\n[29/54] Building CXX object CMakeFiles/syspane_editor_tests.dir/tests/editor/container_tests.cpp.obj\n[30/54] Building CXX object CMakeFiles/syspane_editor_tests.dir/tests/editor/edit_lock_tests.cpp.obj\n[31/54] Building CXX object CMakeFiles/syspane_editor_tests.dir/tests/editor/visibility_admission_tests.cpp.obj\n[32/54] Building CXX object CMakeFiles/syspane_editor_tests.dir/tests/editor/visibility_controls_tests.cpp.obj\n[33/54] Building CXX object CMakeFiles/syspane_settings_tests.dir/tests/configuration/settings_draft_tests.cpp.obj\n[34/54] Building CXX object CMakeFiles/syspane_settings_tests.dir/tests/configuration/settings_content_tests.cpp.obj\n[35/54] Building CXX object CMakeFiles/syspane_theme_command_tests.dir/tests/configuration/theme_command_tests.cpp.obj\n[36/54] Building CXX object CMakeFiles/syspane_theme_override_tests.dir/tests/configuration/theme_override_tests.cpp.obj\n[37/54] Building CXX object CMakeFiles/syspane_theme_authoring_tests.dir/tests/editor/theme_authoring_tests.cpp.obj\n[38/54] Building CXX object CMakeFiles/syspane_theme_history_tests.dir/tests/editor/theme_history_tests.cpp.obj\n[39/54] Building CXX object CMakeFiles/syspane_typography_tests.dir/tests/scene/typography_tests.cpp.obj\n[40/54] Building CXX object CMakeFiles/syspane_authored_tests.dir/tests/configuration/authored_tests.cpp.obj\n[41/54] Building CXX object CMakeFiles/syspane_authored_tests.dir/tests/configuration/scene_content_tests.cpp.obj\n[42/54] Building CXX object CMakeFiles/syspane_authored_tests.dir/tests/configuration/content_tests.cpp.obj\n[43/54] Linking CXX executable syspane_large_command_tests.exe\n[44/54] Building CXX object CMakeFiles/syspane_command_session_tests.dir/tests/configuration/command_session_tests.cpp.obj\n[45/54] Linking CXX executable syspane_settings_tests.exe\n[46/54] Linking CXX executable syspane_theme_history_tests.exe\n[47/54] Linking CXX executable syspane_theme_command_tests.exe\n[48/54] Linking CXX executable syspane_theme_override_tests.exe\n[49/54] Linking CXX executable syspane_typography_tests.exe\n[50/54] Linking CXX executable syspane_theme_authoring_tests.exe\n[51/54] Linking CXX executable syspane_authored_tests.exe\n[52/54] Linking CXX executable syspane_editor_tests.exe\n[53/54] Linking CXX executable syspane_command_session_tests.exe\n[54/54] Linking CXX executable syspane_scene_tests.exe\n \nAttempt: D:\\Projects\\SysPane\\syspane\\out\\campaign\\w-10-theme-history\\windows-x64-gcc15-build-7bdbe9d71e\n",
+    "stderr": ""
+  },
+  {
+    "step": "test",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-08T04:45:04.721576+00:00",
+    "finished_at": "2026-10-08T04:45:11.608288+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2643046416,\n  \"linux_campaign_bytes\": 4611453512,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "test",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "out/campaign/theme_history_step.py",
+      "windows-x64-gcc15",
+      "test"
+    ],
+    "started_at": "2026-10-08T04:45:11.608634+00:00",
+    "finished_at": "2026-10-08T04:46:34.316521+00:00",
+    "exit": 8,
+    "stdout": "8 sec\n        Start 226: configuration.AUTH-SCHEMA\n146/183 Test #226: configuration.AUTH-SCHEMA .................   Passed    0.04 sec\n        Start 227: configuration.TX-MIXED\n147/183 Test #227: configuration.TX-MIXED ....................   Passed    0.04 sec\n        Start 228: configuration.TX-CONFLICT\n148/183 Test #228: configuration.TX-CONFLICT .................   Passed    0.04 sec\n        Start 229: configuration.TX-REPLAY\n149/183 Test #229: configuration.TX-REPLAY ...................   Passed    0.04 sec\n        Start 230: configuration.TX-INTERRUPT\n150/183 Test #230: configuration.TX-INTERRUPT ................   Passed    0.05 sec\n        Start 231: configuration.TX-BOUNDS\n151/183 Test #231: configuration.TX-BOUNDS ...................   Passed    0.04 sec\n        Start 232: configuration.TX-CAPACITY\n152/183 Test #232: configuration.TX-CAPACITY .................   Passed    0.59 sec\n        Start 233: configuration.DIGEST\n153/183 Test #233: configuration.DIGEST ......................   Passed    0.04 sec\n        Start 234: configuration.DIGEST-CONTENT\n154/183 Test #234: configuration.DIGEST-CONTENT ..............   Passed    0.70 sec\n        Start 235: configuration.CONTENT-COMPOSE\n155/183 Test #235: configuration.CONTENT-COMPOSE .............   Passed    0.05 sec\n        Start 236: configuration.CONTENT-PINS\n156/183 Test #236: configuration.CONTENT-PINS ................   Passed    0.07 sec\n        Start 237: configuration.CONTENT-PATHS\n157/183 Test #237: configuration.CONTENT-PATHS ...............   Passed    0.03 sec\n        Start 238: configuration.CONTENT-BOUNDS\n158/183 Test #238: configuration.CONTENT-BOUNDS ..............   Passed    0.06 sec\n        Start 239: configuration.CONTENT-CAPABILITIES\n159/183 Test #239: configuration.CONTENT-CAPABILITIES ........   Passed    0.06 sec\n        Start 240: configuration.CONTENT-POLICY\n160/183 Test #240: configuration.CONTENT-POLICY ..............   Passed    0.07 sec\n        Start 241: configuration.RESOURCE-COMMIT\n161/183 Test #241: configuration.RESOURCE-COMMIT .............   Passed    0.09 sec\n        Start 242: configuration.RESOURCE-GUARDS\n162/183 Test #242: configuration.RESOURCE-GUARDS .............   Passed    0.10 sec\n        Start 243: configuration.RESOURCE-SESSION\n163/183 Test #243: configuration.RESOURCE-SESSION ............   Passed    0.06 sec\n        Start 244: configuration.RESOURCE-RETAINED\n164/183 Test #244: configuration.RESOURCE-RETAINED ...........   Passed    0.12 sec\n        Start 267: composition.graph\n165/183 Test #267: composition.graph .........................   Passed    0.06 sec\n        Start 268: composition.reject_forbidden\n166/183 Test #268: composition.reject_forbidden ..............   Passed    0.05 sec\n        Start 272: protocol.FRAME-01\n167/183 Test #272: protocol.FRAME-01 .........................   Passed    0.02 sec\n        Start 273: protocol.FRAME-02\n168/183 Test #273: protocol.FRAME-02 .........................   Passed    0.02 sec\n        Start 274: protocol.FRAME-03\n169/183 Test #274: protocol.FRAME-03 .........................   Passed    0.02 sec\n        Start 275: protocol.JSON-01\n170/183 Test #275: protocol.JSON-01 ..........................   Passed    0.04 sec\n        Start 276: protocol.WIRE-01\n171/183 Test #276: protocol.WIRE-01 ..........................   Passed    0.02 sec\n        Start 277: protocol.NEGOTIATE-01\n172/183 Test #277: protocol.NEGOTIATE-01 .....................   Passed    0.02 sec\n        Start 278: protocol.IPC-BUDGET-01\n173/183 Test #278: protocol.IPC-BUDGET-01 ....................   Passed    0.02 sec\n        Start 279: protocol.IPC-BUDGET-02\n174/183 Test #279: protocol.IPC-BUDGET-02 ....................   Passed    0.02 sec\n        Start 280: protocol.IPC-BUDGET-03\n175/183 Test #280: protocol.IPC-BUDGET-03 ....................   Passed    0.02 sec\n        Start 281: protocol.IPC-BUDGET-04\n176/183 Test #281: protocol.IPC-BUDGET-04 ....................   Passed    0.02 sec\n        Start 282: protocol.LEDGER-01\n177/183 Test #282: protocol.LEDGER-01 ........................   Passed    0.16 sec\n        Start 283: protocol.POLICY-01\n178/183 Test #283: protocol.POLICY-01 ........................   Passed    0.02 sec\n        Start 284: protocol.POLICY-02\n179/183 Test #284: protocol.POLICY-02 ........................   Passed    0.02 sec\n        Start 285: protocol.DISCLOSURE-01\n180/183 Test #285: protocol.DISCLOSURE-01 ....................   Passed    0.02 sec\n        Start 286: protocol.QUEUE-01\n181/183 Test #286: protocol.QUEUE-01 .........................   Passed    0.02 sec\n        Start 287: protocol.SESSION-01\n182/183 Test #287: protocol.SESSION-01 .......................   Passed    0.03 sec\n        Start 288: protocol.dependencies\n183/183 Test #288: protocol.dependencies .....................   Passed    0.05 sec\n\n99% tests passed, 1 tests failed out of 183\n\nTotal Test time (real) =  82.15 sec\n\nThe following tests FAILED:\n\t112 - editor.THEME-HISTORY-RESOURCE-LIMIT (Timeout)\n Errors while running CTest\n\nAttempt: D:\\Projects\\SysPane\\syspane\\out\\campaign\\w-10-theme-history\\windows-x64-gcc15-test-82738ae41c\n",
+    "stderr": ""
+  }
+]

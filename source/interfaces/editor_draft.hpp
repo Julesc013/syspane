@@ -38,6 +38,9 @@ public:
     const std::vector<std::string>& selection()const{return selected_;}
     void select(std::vector<std::string>);
     bool execute(const std::vector<SceneEdit>&);
+    bool theme_fonts_available()const;
+    bool set_theme_fonts(const Json& font,const Json& font_roles);
+    const configuration::ResourceSet* resources()const{return available()?transaction_.draft_resources_.get():nullptr;}
     bool locks_available()const;
     bool visibility_available()const;
     bool undo();
@@ -62,7 +65,7 @@ public:
     const Json& last_result()const{return transaction_.last_result();}
     std::optional<std::uint64_t> revision()const{return transaction_.revision();}
 private:
-    struct State {Json scene;std::vector<std::string> selection;};
+    struct State {Json scene;std::vector<std::string> selection;configuration::ResourceSnapshot resources;std::size_t resource_metadata_bytes=0;};
     struct Change {State before,after;std::size_t bytes;};
     SettingsDraft transaction_;
     std::vector<std::string> selected_;
@@ -70,5 +73,7 @@ private:
     void clear_history();
     void settled(bool);
     bool travel(bool forward);
+    bool record(Json,std::vector<std::string>,configuration::ResourceSnapshot={});
+    std::size_t history_bytes(const std::deque<Change>&,const std::deque<Change>&)const;
 };
 }
