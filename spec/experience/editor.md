@@ -215,7 +215,10 @@ The [native Apply contract](../delivery/packages/w-10-recovery-apply.md) binds t
 identity to a verified Linux selecting record and checks exact scene/font persistence,
 lost acknowledgements and stale-record refusal. The
 [checkpoint](../delivery/recovery-draft-handoff.md) records executed scope and failures.
-Native recovery-file retention, interruption-safe replacement/retirement, session-bound
-queues and explicit Restore/Discard recovery/Keep controls remain required before
-the complete recovery feature is enabled. Keep unsaved intent separate from committed
+The [native file contract](../delivery/packages/w-10-recovery-store.md) now supplies
+private bounded conditional replacement/retirement and verified reopen. Its
+[checkpoint](../delivery/recovery-store-handoff.md) covers ext4 process cuts and
+composed native Apply. Session-bound queues, policy/lifetime invalidation and actual
+Restore/Discard recovery/Keep controls remain required before enabling the complete
+recovery feature. Keep unsaved intent separate from committed
 configuration and preserve the existing independent exit and current-policy boundaries.

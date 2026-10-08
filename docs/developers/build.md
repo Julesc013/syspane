@@ -29,7 +29,26 @@ also runs `ctest --preset linux-x64-gcc13 -R '^native[.]RECOVERY-APPLY$'
 --output-on-failure`. The native runner owns private stores and cuts its own commit
 process after durability; it checks exact bytes and stale-record refusal. This
 experiment does not implement product recovery-file retention or native offers.
-See the [handoff](../../spec/delivery/recovery-draft-handoff.md) for remaining gates.
+See the [shared handoff](../../spec/delivery/recovery-draft-handoff.md) for that scope.
+
+The [native storage package](../../spec/delivery/packages/w-10-recovery-store.md)
+adds LinuxRecoveryStore for one existing caller-selected private directory. Construct,
+use and destroy it on its serialized worker thread. Supply a current guard for every
+snapshot, replacement and retirement. Pass the exact returned RecoveryVersion when
+mutating; obtain a fresh version after an admitted attempt. An unknown outcome poisons
+the owner and requires verified reopen. The store accepts opaque bounded bytes; use
+EditorDraft inspection with separately verified identity before offering restoration.
+Keep file I/O off the GTK thread and keep development fault hooks out of product flows.
+
+After the same preflight/configure/build, the admitted non-root ext4 environment runs
+`ctest --preset linux-x64-gcc13 -R '^native[.]RECOVERY-(STORE|STORED-APPLY)$'
+--output-on-failure`. The storage oracle kills only its held child, observes exact
+reopen state and checks unsafe files. The composed Apply oracle persists and reopens
+real editor records through separate native owners while retaining the fixed Apply
+outcomes. Run the ten shared recovery cases above and `ctest --preset <profile> -R
+'^composition[.]' --output-on-failure` on all three development profiles. See the
+[storage handoff](../../spec/delivery/recovery-store-handoff.md). Product queue,
+startup offers and native Restore/Discard/Keep controls are still pending.
 
 The [typography package](../../spec/delivery/packages/w-09-typography.md) introduces
 theme 0.2 and `configuration::theme_font(theme, role)`. It returns an owned family,

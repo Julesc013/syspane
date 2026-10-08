@@ -1,12 +1,13 @@
 """Independent literal recovery, real generation identity, Apply and lost-result checks."""
 from pathlib import Path
 from datetime import datetime,timezone
-import copy,json,os,select,signal,subprocess,sys,uuid
+import copy,hashlib,json,os,select,signal,subprocess,sys,uuid
 from native_theme_history import HistoryStore,inspect as inspect_theme,encoded,generation,sha,write,FIXTURE
 from native_settings import check_resources
 ROOT=Path(__file__).resolve().parents[2]
 CASES=json.loads((ROOT/'tests/editor/recovery-draft-cases.json').read_bytes())
 NATIVE=json.loads((ROOT/'tests/editor/recovery-apply-cases.json').read_bytes())
+STORAGE=json.loads((ROOT/'tests/editor/recovery-store-integration.json').read_bytes())
 
 def inspect(store,body,theme):
     if theme:return inspect_theme(store,body,'first',41)
@@ -22,9 +23,11 @@ def inspect(store,body,theme):
 
 def main():
     exe,probe,evidence=map(lambda s:Path(s).resolve(),sys.argv[1:4]);assert os.geteuid()!=0 and evidence.is_relative_to(exe.parent)
-    folder=evidence/('recovery-apply-'+uuid.uuid4().hex[:12]);folder.mkdir(mode=0o700,parents=True)
+    storage=Path(sys.argv[4]).resolve() if len(sys.argv)==5 else None
+    folder=evidence/(('recovery-stored-apply-' if storage else 'recovery-apply-')+uuid.uuid4().hex[:12]);folder.mkdir(mode=0o700,parents=True)
     assert subprocess.check_output(['findmnt','--target',str(folder),'--noheadings','--output','FSTYPE'],text=True).strip()=='ext4'
     report=dict(family='RECOVERY-APPLY',outcome='fail',started_at=datetime.now(timezone.utc).isoformat(),oracle_sha256=sha(Path(__file__)),executable_sha256=sha(exe),store_executable_sha256=sha(probe),fixture_sha256=sha(ROOT/'tests/editor/recovery-draft-cases.json'),native_fixture_sha256=sha(ROOT/'tests/editor/recovery-apply-cases.json'),cases=[])
+    if storage:report.update(family=STORAGE['family'],recovery_store_executable_sha256=sha(storage),storage_fixture_sha256=sha(ROOT/'tests/editor/recovery-store-integration.json'))
     def one(path,mode):
         p=subprocess.run([str(exe),str(ROOT),str(path),mode],capture_output=True,timeout=8)
         assert p.returncode==0,(mode,p.returncode,p.stderr);return json.loads(p.stdout)
@@ -37,6 +40,20 @@ def main():
             assert sha(f.path/'current.json')==token
             write(f.folder/'capture.json',encoded(capture))
             if mode=='wrong-generation':envelope['identity']['generation']='0'*64;record=encoded(envelope).decode()
+            if storage:
+                retained=f.folder/'retained';retained.mkdir(mode=0o700);storage_events=[]
+                def stored(operation='export',payload='-'):
+                    q=subprocess.run([str(storage),str(retained),operation,str(payload),'-','-'],capture_output=True,timeout=8)
+                    v=json.loads(q.stdout);storage_events.append(dict(operation=operation,exit=q.returncode,reply=v,stderr=q.stderr.decode()))
+                    write(f.folder/'recovery-store-events.json',encoded(storage_events))
+                    assert q.returncode==0,(operation,q.returncode,v,q.stderr)
+                    return v
+                write(f.folder/'record-input.json',record.encode())
+                assert stored('replace',f.folder/'record-input.json')['outcome']==STORAGE['publication']
+                reopened=stored();assert reopened['record']==record and reopened['pending']==STORAGE['staging_after_publication']
+                assert (retained/'draft.json').read_bytes()==record.encode() and reopened['sha256']==hashlib.sha256(record.encode()).hexdigest()
+                assert reopened['version']['digest']==reopened['sha256'] and reopened['bytes']==len(record.encode())
+                record=reopened['record'];assert sha(f.path/'current.json')==token
             p=subprocess.Popen([str(exe),str(ROOT),str(f.path),mode],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,bufsize=0);events=[]
             def receive():
                 assert select.select([p.stdout],[],[],8)[0],'recovery observation timeout'
@@ -48,6 +65,7 @@ def main():
                     assert v==dict(event='refused',scene=CASES['authored']['scene'],token=token)
                     assert p.wait(timeout=5)==0 and sha(f.path/'current.json')==token
                     assert sorted(x.name for x in f.path.glob('g-*'))==initial_dirs
+                    if storage:assert stored()['record']==record
                     report['cases'].append(dict(case=mode,outcome='pass',events=events));continue
                 restored=CASES['theme_scenes']['first'] if theme else CASES['scene']
                 selection=CASES['theme_selections']['first'] if theme else CASES['selection']
@@ -84,6 +102,11 @@ def main():
                 assert p.wait(timeout=5)==0
                 assert len(list(f.path.glob('g-*')))==len(initial_dirs)+1
                 assert one(f.path,'token-read')==dict(event='token',token=new_token,scene=scene)
+                if storage:
+                    assert stored()['record']==record and (retained/'draft.json').read_bytes()==record.encode()
+                    assert stored('retire')['outcome']==STORAGE['retirement']
+                    erased=stored();assert erased['record'] is None and erased['sha256'] is None and not erased['pending']
+                    assert not (retained/'draft.json').exists() and sha(f.path/'current.json')==new_token
                 report['cases'].append(dict(case=mode,outcome='pass',fault_detected=detected,events=events))
             finally:
                 if p.poll() is None:p.kill();p.wait(timeout=3)

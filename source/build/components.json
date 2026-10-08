@@ -2744,6 +2744,57 @@
       "profiles": [
         "linux-x64-gcc13"
       ]
+    },
+    {
+      "id": "recovery-store",
+      "target": "syspane_recovery_store",
+      "type": "STATIC_LIBRARY",
+      "source_owner": "source/platform/",
+      "public_interfaces": [
+        "source/platform/recovery_store_linux.hpp"
+      ],
+      "private_interfaces": [],
+      "sources": [
+        "source/platform/recovery_store_linux.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_authored"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
+    },
+    {
+      "id": "recovery-store-probe",
+      "target": "syspane_recovery_store_probe",
+      "type": "EXECUTABLE",
+      "source_owner": "tests/editor/",
+      "public_interfaces": [],
+      "private_interfaces": [],
+      "sources": [
+        "tests/editor/recovery_store_probe.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_recovery_store",
+        "Threads::Threads"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
     }
   ]
 }

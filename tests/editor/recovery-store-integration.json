@@ -1,0 +1,18 @@
+{
+  "family": "RECOVERY-STORED-APPLY",
+  "source_cases": "tests/editor/recovery-apply-cases.json",
+  "source_records": "tests/editor/recovery-draft-cases.json",
+  "storage_contract": "SP-W10-RECOVERY-STORE",
+  "sequence": [
+    "Capture exact existing scene or font recovery bytes using the verified committed generation.",
+    "Publish those bytes through LinuxRecoveryStore in a separate process and exit that owner.",
+    "Reopen through another LinuxRecoveryStore process; its returned bytes, digest and published file must exactly match the fixed record.",
+    "Restore those returned bytes through the existing EditorDraft native Apply experiment with all original outcomes unchanged.",
+    "For accepted Apply, the retained old record must remain unchanged until explicit retirement; it must not change the committed configuration.",
+    "Explicitly retire that exact retained record under a new storage owner and verify its absence and unchanged committed selection."
+  ],
+  "publication": "durable",
+  "staging_after_publication": false,
+  "retirement": "durable",
+  "scope": "Composed native component experiment; native queue and Restore/Discard/Keep UI remain required."
+}

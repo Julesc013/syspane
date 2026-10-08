@@ -413,7 +413,8 @@
         "SP-W10-SCENE-FRAGMENTS",
         "SP-W10-NATIVE-CLIPBOARD",
         "SP-W10-RECOVERY-DRAFT",
-        "SP-W10-RECOVERY-APPLY"
+        "SP-W10-RECOVERY-APPLY",
+        "SP-W10-RECOVERY-STORE"
       ],
       "acceptance_tests": [
         "T-EDITOR",
@@ -434,14 +435,20 @@
         "source/interfaces/editor_recovery.hpp",
         "tests/editor/recovery_draft_tests.cpp",
         "tests/editor/native_recovery.py",
-        "tests/editor/native_recovery_probe.cpp"
+        "tests/editor/native_recovery_probe.cpp",
+        "source/platform/recovery_store_linux.hpp",
+        "source/platform/recovery_store_linux.cpp",
+        "tests/editor/recovery_store_probe.cpp",
+        "tests/editor/native_recovery_store.py",
+        "tests/editor/recovery-store-cases.json",
+        "tests/editor/recovery-store-integration.json"
       ],
       "status": "in_progress",
       "authority_class": "development",
       "execution_grant": "user:foundation-native-campaign-2026-10-05",
-      "notes": "Generation-bound shared recovery now has bounded exact capture, current-policy inspection and explicit one-step restore. Native Linux Apply verifies exact scene/font resources, killed durable acknowledgements, reconciliation and stale-record refusal. Continue private native recovery-file retention and Restore/Discard/Keep controls with interruption and late-write tests, then installed ownership, scene-aligned entry/restoration, existing shutdown warnings, full accessibility/performance and all five complete editions. Other clipboard adapters and historical native qualification remain required.",
-      "package": "delivery/packages/w-10-recovery-draft.md",
-      "evidence": "delivery/recovery-draft-handoff.md"
+      "notes": "Private Linux recovery storage now has bounded exact bytes, conditional retirement, stale-version refusal, explicit guards and native ext4 interruption evidence. Composed native tests retain exact editor scene/font Apply and lost-result outcomes through storage reopen. Continue one active/one latest pending owner queue, session/generation invalidation, recovery-unavailable reporting and actual Restore/Discard/Keep controls, then installed ownership, scene-aligned entry/restoration, known native diagnostics, full accessibility/performance and all five complete editions. Historical native qualification and other platform adapters remain required.",
+      "package": "delivery/packages/w-10-recovery-store.md",
+      "evidence": "delivery/recovery-store-handoff.md"
     },
     {
       "id": "W-11",

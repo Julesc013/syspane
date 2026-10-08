@@ -489,7 +489,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "7698fb8b05afe6349b26f268ea77c46b6f36d4396e08a6fa5d1f6a0018e477d0"
+      "sha256": "5d828318b8db30a66bea74f26bb900d93f41831623852ea00bebf346b9b1fc9f"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -1899,6 +1899,18 @@
       "sha256": "115e78faea132962a164afbf54c5f48b530374c994f0b3fafb2098c7f875f510"
     },
     {
+      "id": "SP-W10-RECOVERY-STORE",
+      "path": "delivery/packages/w-10-recovery-store.md",
+      "title": "Private native recovery record storage",
+      "description": "Bounded exact-byte retention with conditional replacement, retirement and process-cut evidence.",
+      "requires": [
+        "SP-W10-RECOVERY-DRAFT",
+        "SP-W10-RECOVERY-APPLY",
+        "SP-PERSISTENCE"
+      ],
+      "sha256": "a7449db90cdc3d7f5cd554be793b6fd67c8e730be915678d034e17341bb07517"
+    },
+    {
       "id": "SP-W10-SCENE-FRAGMENTS",
       "path": "delivery/packages/w-10-scene-fragments.md",
       "title": "Bounded authored scene fragments",
@@ -2426,6 +2438,17 @@
       "sha256": "5315c7c332fe0b2676e9371b0ad2b6d68aa4ac0c20dd25bd91668cf112daf3db"
     },
     {
+      "id": "SP-RECOVERY-STORE-HANDOFF",
+      "path": "delivery/recovery-store-handoff.md",
+      "title": "Private native recovery storage checkpoint",
+      "description": "Exact bounded recovery files, conditional retirement and independent ext4 process-cut evidence.",
+      "requires": [
+        "SP-W10-RECOVERY-STORE",
+        "SP-RECOVERY-DRAFT-HANDOFF"
+      ],
+      "sha256": "7c5086819daabb10abc35e5c9c6483d2f45f4a06875e7e6d372ac3d3f4025a3f"
+    },
+    {
       "id": "SP-RELEASE-0-1-0",
       "path": "delivery/release-0.1.0.md",
       "title": "SysPane 0.1.0 release objective and unresolved admission",
@@ -2939,7 +2962,7 @@
         "SP-RENDERING",
         "SP-COMMANDS"
       ],
-      "sha256": "08a60041d5d29e6884ed4bb015d57e1c485754d59daf684d0a75396d1a8777e2"
+      "sha256": "ca047bed314ea388f244516662fedcc07ecb54d9de83468150dbee5a3145bfdd"
     },
     {
       "id": "SP-POLICY",
