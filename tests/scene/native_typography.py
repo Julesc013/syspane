@@ -3,7 +3,7 @@ from datetime import datetime,timezone
 from pathlib import Path
 import copy,hashlib,json,subprocess,sys,uuid
 ROOT=Path(__file__).resolve().parents[2]
-sys.path.insert(0,str(ROOT/'build-support'))
+sys.path.insert(0,str(ROOT/'source/build'))
 from check_text_runtime import verify
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
 def main():
@@ -28,7 +28,7 @@ def main():
         t=copy.deepcopy(cases['theme']);t.pop('font_roles');t['font']=copy.deepcopy(font);return run(t,**options)
     def pass_case(name):record['cases'].append(dict(case=name,outcome='pass'))
     try:
-        verify();record['runtime_identity_sha256']=sha(ROOT/'build-support/text-runtime.json')
+        verify();record['runtime_identity_sha256']=sha(ROOT/'source/build/text-runtime.json')
         assert run(cases['legacy'])==equivalent(cases['expected_base']);pass_case('legacy-equivalence')
         for role,font in cases['expected_roles'].items():
             expected=equivalent(font);actual=run(cases['theme'],role=role);assert expected==actual,role

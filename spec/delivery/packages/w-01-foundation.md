@@ -33,7 +33,7 @@ native controls, persistence and distribution qualification belong to later unit
 
 Own `source/model/`, the smoke composition root in `source/application/`,
 `tests/model/`, `CMakeLists.txt`, `CMakePresets.json`,
-`build-support/components.json` and `build-support/targets/`. Extend the work row
+`source/build/components.json` and `source/build/targets/`. Extend the work row
 with real additional outputs if a delegated design requires them. Create
 directories only with real content. Keep build products under ignored `out/`.
 
@@ -90,8 +90,8 @@ out/build/windows-x64-gcc15/SysPane.ModelSmoke.exe
 ```
 
 These Windows commands exist. The Linux preset is `linux-x64-gcc13`, with its native
-cache root set as documented in `build-support/targets/README.md`; the optional
-`build-support/run_foundation.sh` wrapper runs the same commands. Tests return nonzero on any failed required
+cache root set as documented in `source/build/targets/README.md`; the optional
+`source/build/run_foundation.sh` wrapper runs the same commands. Tests return nonzero on any failed required
 assertion; a runner with zero discovered cases is a failure. Expected smoke output
 includes the accepted epoch/generation and explicit unavailable/stale observations.
 Version the exact output fixture with the implementation before accepting it.

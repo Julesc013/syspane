@@ -6,7 +6,7 @@ import sys
 import unittest
 
 ROOT=Path(__file__).resolve().parents[2]
-sys.path.insert(0,str(ROOT/'build-support'))
+sys.path.insert(0,str(ROOT/'source/build'))
 from record_gnome_focus import validate, compare
 from gnome_focus_baseline import keyboard
 

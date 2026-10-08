@@ -12,6 +12,7 @@ struct InsertWidget {Json widget;std::optional<std::string> parent;std::size_t i
 struct RemoveWidgets {std::vector<std::string> ids;};
 struct ReparentWidgets {std::vector<std::string> ids;std::optional<std::string> parent;std::size_t index;};
 struct DuplicateWidgets {std::vector<std::string> ids;std::map<std::string,std::string> mapping;};
+struct PasteWidgets {std::string bytes;std::map<std::string,std::string> mapping;std::optional<std::string> parent;std::size_t index;};
 struct MoveWidgets {std::vector<std::string> ids;double dx,dy;std::vector<int> variants={};};
 struct ResizeWidget {std::string id;double width,height;int variant=-1;};
 struct RootDisplayEdit {std::string root;Json display;};
@@ -27,7 +28,7 @@ struct SetWidgetVisibility {std::vector<std::string> ids;std::optional<Json> rul
 struct SetWidgetLocks {std::vector<std::string> ids;bool locked;};
 bool edit_locked(const Json& scene,const std::string& id);
 bool edit_protected(const Json& scene,const std::string& id);
-using SceneEdit=std::variant<WidgetPropertyEdit,WidgetContentEdit,SceneThemeEdit,InsertWidget,RemoveWidgets,ReparentWidgets,DuplicateWidgets,MoveWidgets,ResizeWidget,AlignWidgets,DistributeWidgets,GroupWidgets,UngroupWidget,RootDisplayEdit,WrapWidgets,UnwrapWidget,SetWidgetLocks,SetWidgetVisibility>;
+using SceneEdit=std::variant<WidgetPropertyEdit,WidgetContentEdit,SceneThemeEdit,InsertWidget,RemoveWidgets,ReparentWidgets,DuplicateWidgets,MoveWidgets,ResizeWidget,AlignWidgets,DistributeWidgets,GroupWidgets,UngroupWidget,RootDisplayEdit,WrapWidgets,UnwrapWidget,SetWidgetLocks,SetWidgetVisibility,PasteWidgets>;
 
 // One serialized native owner. Scene/selection borrows expire on every mutation,
 // policy update or close; adapters must erase their own caches on disclosure loss.
@@ -38,6 +39,11 @@ public:
     const std::vector<std::string>& selection()const{return selected_;}
     void select(std::vector<std::string>);
     bool execute(const std::vector<SceneEdit>&);
+    bool clipboard_available()const;
+    void copy_selection();
+    // Recheck permission for each delivery. Borrow expires at the next operation.
+    std::string_view clipboard_data();
+    void clear_clipboard(){clipboard_.clear();}
     bool theme_fonts_available()const;
     bool set_theme_fonts(const Json& font,const Json& font_roles);
     const configuration::ResourceSet* resources()const{return available()?transaction_.draft_resources_.get():nullptr;}
@@ -54,10 +60,10 @@ public:
     void reload(configuration::Authored,std::string epoch,std::optional<SettingsResources> resources={});
     bool complete(std::uint64_t ticket,const Json&);
     bool reconciled(std::uint64_t ticket,const std::string& query,const std::string& epoch,const Json&);
-    std::optional<EditRequest> begin(const std::string& intent,const std::string& request){return transaction_.begin(intent,request);}
+    std::optional<EditRequest> begin(const std::string& intent,const std::string& request);
     std::optional<EditRequest> active_request()const{return transaction_.active_request();}
     std::optional<EditRequest> cancel_request(){return transaction_.cancel_request();}
-    void disconnected(){transaction_.disconnected();}
+    void disconnected(){clear_clipboard();transaction_.disconnected();}
     DraftState state()const{return transaction_.state();}
     bool available()const{return transaction_.available();}
     bool dirty()const{return transaction_.dirty();}
@@ -70,6 +76,8 @@ private:
     SettingsDraft transaction_;
     std::vector<std::string> selected_;
     std::deque<Change> undo_,redo_;
+    std::string clipboard_;
+    void admit_fragment_version(const Json&)const;
     void clear_history();
     void settled(bool);
     bool travel(bool forward);

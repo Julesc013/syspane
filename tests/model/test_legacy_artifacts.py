@@ -3,7 +3,7 @@ from pathlib import Path
 import struct
 import sys
 import unittest
-sys.path.insert(0, str(Path(__file__).resolve().parents[2]/'build-support'))
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]/'source/build'))
 from check_legacy_artifacts import verify
 
 DATA = Path(sys.argv.pop(1)).read_bytes()

@@ -78,11 +78,11 @@ The form now applies each final state once. Native checks preserve focus and
 activation across repaints without relaxing policy or pending-state gates.
 
 Repository evidence (outside the standalone specification bundle):
-`build-support/evidence/w-10-arrange-attempts.json`,
-`build-support/evidence/w-10-arrange-native-index.json`,
-`build-support/evidence/w-10-arrange-verification.json`,
-`build-support/evidence/w-10-arrange-staging.json` and
-`build-support/evidence/arrange-handoff.json`.
+`out/evidence/w-10-arrange-attempts.json`,
+`out/evidence/w-10-arrange-native-index.json`,
+`out/evidence/w-10-arrange-verification.json`,
+`out/evidence/w-10-arrange-staging.json` and
+`out/evidence/arrange-handoff.json`.
 
 ## Next admitted boundary
 

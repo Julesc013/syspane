@@ -6,7 +6,7 @@ import sys
 import unittest
 from unittest.mock import patch
 
-ROOT=Path(__file__).resolve().parents[2];sys.path.insert(0,str(ROOT/'build-support'))
+ROOT=Path(__file__).resolve().parents[2];sys.path.insert(0,str(ROOT/'source/build'))
 import record_gnome_network_cache as verifier
 from gnome_network_cache import judge,templates,decode
 from native_x11_host import rgb_record

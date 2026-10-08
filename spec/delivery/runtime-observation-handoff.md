@@ -67,9 +67,9 @@ rethrow the original error; no failed result can become a successful observation
 The two historical accessibility timeouts remain unexplained. Neither these trials
 nor the successful full matrices establish that the image change repaired them.
 
-Records: `build-support/evidence/w-09-runtime-observation-attempts.json`,
+Records: `out/evidence/w-09-runtime-observation-attempts.json`,
 `w-09-runtime-observation-native-index.json`, `w-09-runtime-observation-verification.json`,
-`w-09-runtime-observation-staging.json` and `build-support/evidence/runtime-observation-handoff.json`.
+`w-09-runtime-observation-staging.json` and `out/evidence/runtime-observation-handoff.json`.
 They retain the frozen inputs, before/after diagnostic executables and measurements,
 source archives, original query traces, CTest logs and exact artifact identities.
 Original failures remain in the previous committed checkpoint.

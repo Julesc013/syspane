@@ -25,7 +25,7 @@ def run(build):
     workspace=evidence/('RENDER-DEADLINE-'+uuid.uuid4().hex); workspace.mkdir(mode=0o700)
     inputs={p.relative_to(ROOT).as_posix():sha(p) for folder in ('source','tests/fault','spec/contracts')
             for p in (ROOT/folder).rglob('*') if p.is_file() and '__pycache__' not in p.parts}
-    inputs.update({p:sha(ROOT/p) for p in ('CMakeLists.txt','build-support/components.json','build-support/targets/linux-x64-gcc13.json','spec/delivery/packages/w-25-gnome-render-watch.md')})
+    inputs.update({p:sha(ROOT/p) for p in ('CMakeLists.txt','source/build/components.json','source/build/targets/linux-x64-gcc13.json','spec/delivery/packages/w-25-gnome-render-watch.md')})
     archive=workspace/'source-inputs.zip'
     with zipfile.ZipFile(archive,'x',zipfile.ZIP_DEFLATED) as z:
         for p in inputs:z.write(ROOT/p,p)

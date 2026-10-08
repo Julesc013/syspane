@@ -333,7 +333,7 @@ def main():
     sources = ['tests/desktop/native_editor_exit.py', 'tests/desktop/native_oracle.py', 'tests/fault/native_diagnostic.py',
                'source/interfaces/editor_exit_x11.cpp', 'source/interfaces/editor_exit_x11.hpp', 'source/application/editor_exit_probe.cpp',
                'source/platform/child_linux.cpp', 'source/platform/child.hpp', 'spec/delivery/packages/w-25-editor-exit.md',
-               'CMakeLists.txt', 'build-support/components.json', 'build-support/targets/linux-x64-gcc13.json']
+               'CMakeLists.txt', 'source/build/components.json', 'source/build/targets/linux-x64-gcc13.json']
     record = {'family': 'EDITOR-EXIT-01', 'recorded_at': datetime.now(timezone.utc).isoformat(),
               'source_base': subprocess.check_output(['git', '-c', 'safe.directory=' + str(ROOT), 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
               'source_inputs': {path: sha(ROOT / path) for path in sources}, 'executable_sha256': sha(executable),

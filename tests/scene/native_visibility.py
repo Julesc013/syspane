@@ -13,7 +13,7 @@ import uuid
 import zlib
 
 ROOT = Path(__file__).resolve().parents[2]
-sys.path[:0] = [str(ROOT/'tests/desktop'), str(ROOT/'tests/fault'), str(ROOT/'tests/scene'), str(ROOT/'build-support')]
+sys.path[:0] = [str(ROOT/'tests/desktop'), str(ROOT/'tests/fault'), str(ROOT/'tests/scene'), str(ROOT/'source/build')]
 from native_diagnostic import launch_xvfb
 from native_oracle import Display
 from check_text_runtime import verify
@@ -35,8 +35,8 @@ def observe(exe, probe, folder, mode):
     folder.mkdir()
     report = dict(mode=mode, outcome='fail', observations=[], executable_sha256=sha(exe),
                   text_probe_sha256=sha(probe), oracle_sha256=sha(Path(__file__)),
-                  runtime_identity_sha256=sha(ROOT/'build-support/text-runtime.json'),
-                  surface_runtime_sha256=sha(ROOT/'build-support/surface-runtime.json'))
+                  runtime_identity_sha256=sha(ROOT/'source/build/text-runtime.json'),
+                  surface_runtime_sha256=sha(ROOT/'source/build/surface-runtime.json'))
     stderr = (folder/'stderr').open('wb')
     proc = subprocess.Popen([str(exe), str(ROOT/'spec/fixtures/valid'), 'WINDOW', 'visibility-'+mode],
                             stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=stderr)

@@ -28,7 +28,7 @@ expiry and separately bounded data/control queues. The configuration library
 implements eleven generated setting descriptors, current-policy preview checks,
 disclosure decisions and a portable connection state machine. The model does not
 depend on JSON or the configuration layer. The vendored nlohmann/json 3.12.0 header
-and MIT license are pinned and verified offline by `build-support/dependencies.json`.
+and MIT license are pinned and verified offline by `source/build/dependencies.json`.
 This third-party license does not choose the project's own licensing terms.
 
 The initial controller has no durable mutator: settings preview is enabled only
@@ -47,8 +47,8 @@ role/channel disclosure, queue exhaustion, policy revocation and reconnect.
 
 Case commands, original log hashes, normalized logs, source inputs, generated
 descriptor and executable/library hashes are recorded in
-`build-support/evidence/w-24-portable-windows-x64-gcc15.json` and
-`build-support/evidence/w-24-portable-linux-x64-gcc13.json`. W-01's historical
+`out/evidence/w-24-portable-windows-x64-gcc15.json` and
+`out/evidence/w-24-portable-linux-x64-gcc13.json`. W-01's historical
 records remain unchanged. These are implementation checks with injected clocks
 and authority contexts, not native IPC or desktop qualification.
 

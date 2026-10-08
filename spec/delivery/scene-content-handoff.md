@@ -69,7 +69,7 @@ and complete accessible names cover replacement, policy loss, stale delivery,
 regrant, fresh attachment and retained source loss. Deliberate old-pixel and old-name
 controls must expose the corresponding erasure failure.
 
-`build-support/evidence/w-09-scene-content-attempts.json` records exact archived
+`out/evidence/w-09-scene-content-attempts.json` records exact archived
 source inputs, executable identities and native reports; `scene-content-handoff.json`
 records actual check outcomes. Specification/tool checks and final staged identities
 are separate records. Historical-toolset execution on the modern Windows host does

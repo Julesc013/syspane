@@ -40,7 +40,7 @@ Native theme and chrome translation hooks are used; full localization remains op
 
 ## Evidence and corrections
 
-`build-support/evidence/w-11-scene-inspector-attempts.json` binds 40 configure/build/
+`out/evidence/w-11-scene-inspector-attempts.json` binds 40 configure/build/
 test attempts to exact source archives, commands, artifacts and retained logs.
 Final affected scene, policy, DataView and component checks passed 84 entries on
 Linux and 79 on each contemporary and historical-toolset Windows profile. The latter

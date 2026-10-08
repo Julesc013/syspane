@@ -60,9 +60,9 @@ erasure at the old location are checked. The frozen scenes, geometry, deadlines
 and storage expectations did not change, and no production change addressed these
 oracle failures. The independent calibration and original snapshots are retained.
 
-Records: `build-support/evidence/w-10-containers-attempts.json`,
+Records: `out/evidence/w-10-containers-attempts.json`,
 `w-10-containers-native-index.json`, `w-10-containers-verification.json`,
-`w-10-containers-staging.json` and `build-support/evidence/containers-handoff.json`.
+`w-10-containers-staging.json` and `out/evidence/containers-handoff.json`.
 Exact source snapshots, frozen inputs, executable identities, every attempt and
 oracle corrections are preserved. Workspace cleanup removed only duplicates
 verified against committed archives; the existing output limit is unchanged.

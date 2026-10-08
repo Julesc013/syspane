@@ -85,9 +85,9 @@ Original failure, original/corrected probe and oracle, unchanged fixture and
 unchanged production identity for that correction are retained. This is distinct
 from the genuine focus and erasure failures described above.
 
-Records: `build-support/evidence/w-10-focus-idle-attempts.json`,
+Records: `out/evidence/w-10-focus-idle-attempts.json`,
 `w-10-focus-idle-native-index.json`, `w-10-focus-idle-verification.json`,
-`w-10-focus-idle-staging.json` and `build-support/evidence/focus-idle-handoff.json`.
+`w-10-focus-idle-staging.json` and `out/evidence/focus-idle-handoff.json`.
 Source archives, CTest logs, diagnostic arms, failures, executable identities,
 fixed inputs and support scripts remain independently inspectable. The workspace
 bound is unchanged; cleanup removed only duplicates verified against committed

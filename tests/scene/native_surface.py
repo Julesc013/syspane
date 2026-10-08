@@ -13,7 +13,7 @@ import time
 import uuid
 
 ROOT=Path(__file__).resolve().parents[2]
-sys.path[:0]=[str(ROOT/'tests/desktop'),str(ROOT/'tests/fault'),str(ROOT/'tests/scene'),str(ROOT/'build-support')]
+sys.path[:0]=[str(ROOT/'tests/desktop'),str(ROOT/'tests/fault'),str(ROOT/'tests/scene'),str(ROOT/'source/build')]
 from native_diagnostic import launch_xvfb
 from native_oracle import Display
 from check_text_runtime import verify
@@ -29,12 +29,12 @@ def observe(exe,text_probe,folder,mode,table=False,content=False,chart=False,ima
     Atspi.set_timeout(500,1000)
     verify();verify_surface();folder.mkdir()
     report=dict(mode=mode,outcome='fail',observations=[],executable_sha256=sha(exe),text_probe_sha256=sha(text_probe),
-                oracle_sha256=sha(Path(__file__)),runtime_identity_sha256=sha(ROOT/'build-support/text-runtime.json'))
+                oracle_sha256=sha(Path(__file__)),runtime_identity_sha256=sha(ROOT/'source/build/text-runtime.json'))
     if image_mode:
         report['image_worker_sha256']=sha(exe.with_name('SysPane.ImageWorker'))
         report['image_oracle_sha256']=sha(ROOT/'tests/scene/image-cases/surface.json')
-        report['image_runtime_sha256']=sha(ROOT/'build-support/image-runtime.json')
-    report['surface_runtime_sha256']=sha(ROOT/'build-support/surface-runtime.json')
+        report['image_runtime_sha256']=sha(ROOT/'source/build/image-runtime.json')
+    report['surface_runtime_sha256']=sha(ROOT/'source/build/surface-runtime.json')
     err=(folder/'stderr').open('wb')
     proc=subprocess.Popen([str(exe),str(ROOT/'spec/fixtures/valid'),'WINDOW',('image-' if image_mode else 'chart-' if chart else 'content-' if content else 'table-' if table else '')+mode],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=err)
     display=None;sequence=0;last_ack=None

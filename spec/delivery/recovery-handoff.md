@@ -47,7 +47,7 @@ quarantine, stale callbacks, clock regression and uint64 boundary arithmetic.
 Expected times/results are literal test oracles, not values imported from runtime
 constants. Both compilers retain warnings as errors.
 
-Records are `build-support/evidence/w-25-portable-<profile>.json`, matching CTest
+Records are `out/evidence/w-25-portable-<profile>.json`, matching CTest
 logs and the exact native IPC report copies. The recorder requires all named cases
 and binds contract, source, dependency, profile, artifact and oracle digests. The
 native reports remain IPC regression evidence; their cross-user/logon and desktop

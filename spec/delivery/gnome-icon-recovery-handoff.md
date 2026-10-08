@@ -80,7 +80,7 @@ marker regressions supply 134 existing verifier checks, for **170 checks** in th
 checkpoint. The original live Show Desktop case still fails foreground-focus
 restoration. Verification confirms that failure; it does not waive it.
 
-The final comparison is `build-support/evidence/w-05-gnome-icon-recovery-calibration.json`.
+The final comparison is `out/evidence/w-05-gnome-icon-recovery-calibration.json`.
 Files with the same prefix preserve 22 native attempts and exact source archives,
 raw journals, regression PNG artifacts and invocation/verification records.
 Completed workspace preflights precede each run, and owned process groups finish

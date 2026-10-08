@@ -1,0 +1,143 @@
+{
+  "schema_version": "0.1.0",
+  "profile_id": "linux-x64-gcc13",
+  "revision": "45",
+  "example_only": false,
+  "os": {
+    "family": "linux",
+    "minimum_version": "Ubuntu-24.04-WSL2-kernel-6.18.40.1",
+    "api_floor": "glibc-2.39-Linux-x86_64-SO_PEERPIDFD-procfs"
+  },
+  "cpu": {
+    "architecture": "x86_64",
+    "isa_floor": "x86-64 baseline, SSE2; no host tuning",
+    "word_bits": 64,
+    "endianness": "little"
+  },
+  "abi": {
+    "name": "GNU-Linux-libstdc++",
+    "runtime": "glibc/libstdc++",
+    "runtime_version": "glibc 2.39-0ubuntu8.9; libstdc++6 14.2.0-4ubuntu2~24.04.1; compiler GCC 13.3.0-6ubuntu2~24.04.1"
+  },
+  "toolchain": {
+    "compiler": "GNU C++",
+    "version": "13.3.0",
+    "sdk": "Ubuntu noble libc6-dev 2.39, GCC 13",
+    "recipe": "source/build/targets/README.md",
+    "flags": [
+      "-std=c++17",
+      "-g",
+      "-Wall",
+      "-Wextra",
+      "-Wpedantic",
+      "-Werror",
+      "-march=x86-64",
+      "-mtune=generic"
+    ]
+  },
+  "dependencies": [
+    {
+      "id": "nlohmann-json",
+      "version": "3.12.0",
+      "sha256": "aaf127c04cb31c406e5b04a63f1ae89369fccde6d8fa7cdda1ed4f32dfc5de63",
+      "license": "MIT"
+    },
+    {
+      "id": "gtk3-system-runtime",
+      "version": "3.24.41-4ubuntu1.3",
+      "sha256": "0611fd19d1354a39a7cfafceffa3bdf4289d4c497c7f69ff337f86e99cf37d93",
+      "license": "LGPL-2.0-or-later AND LGPL-2.1-or-later AND MIT"
+    },
+    {
+      "id": "x11-system-runtime",
+      "version": "2:1.8.7-1build1",
+      "sha256": "c5b5d782bd9cab3420a62df88f5c991507edf3331a89f98464ddbc538c37b879",
+      "license": "MIT/X11 (installed system package; no redistribution claim)"
+    },
+    {
+      "id": "xext-system-runtime",
+      "version": "2:1.3.4-1build2",
+      "sha256": "2907e6a996465de5b32a0dd10534d4416b87f1dee5670aaa7b19301a1fc93f44",
+      "license": "MIT/X11 (installed system package; no redistribution claim)"
+    },
+    {
+      "id": "gi-compile-repository",
+      "version": "2.80.0-6ubuntu3.9",
+      "sha256": "223a704d5ef6c0c860a630295b4cc061f376d14032833ab7c4aa4d7337155474",
+      "license": "LGPL-2.1-or-later; system tool, no redistribution"
+    },
+    {
+      "id": "native-text-development-runtime",
+      "version": "Pango 1.52.1 / Cairo 1.18.0",
+      "sha256": "6191cbd92c0af172029e30c48647fc19c69a29e68243c9d82d0f6f0260eefefc",
+      "license": "Installed system libraries/fonts; package copyright files apply; no redistribution claim"
+    },
+    {
+      "id": "native-scene-accessibility-observer",
+      "version": "AT-SPI/ATK 2.52.0-1build1",
+      "sha256": "51f6e73d3d07c5ab284e50f6cd8ee8b525837d8c9f8f12d3ef5751895838340d",
+      "license": "Installed system components; package copyright files apply; no redistribution claim"
+    },
+    {
+      "id": "native-image-development-runtime",
+      "version": "GdkPixbuf 2.42.10 / librsvg 2.58.0; Linux Landlock ABI >= 3",
+      "sha256": "968be67e47aa971d76b580c1f3c0b2364d87756f27aed0d53b40548a3087d6c6",
+      "license": "Installed system libraries; package copyright files apply; no redistribution claim"
+    }
+  ],
+  "ui": "GTK 3.24.41 (diagnostic only)",
+  "shell_host": "none",
+  "renderer": "Experimental policy-owned scalar and collection-table surface with Pango/Cairo text",
+  "roles": [
+    "console",
+    "diagnostic"
+  ],
+  "isolation": {
+    "tier": "none",
+    "controls": []
+  },
+  "limitations": [
+    "Development model, protocol/policy and native single-connection IPC probe only; desktop and supported product qualification pending.",
+    "Exceptions and RTTI enabled; single-writer model and controller; native monotonic deadline checks do not qualify telemetry clock semantics.",
+    "Compiler/tool/archive fingerprints pin this installed environment; complete vendor archive and all header hashes are not available, so bit-for-bit reproduction is unproven.",
+    "Runtime floors are restricted to the observed host environment, not inferred backward compatibility.",
+    "Native IPC is exercised without elevation; cross-user/logon and desktop-session qualification require separate laboratories.",
+    "Initial IPC probe permits one live connection and at most two sequential clients; telemetry subscriptions and persistent commits are disabled.",
+    "SO_PEERPIDFD is required; peer POSIX-session identity is a launched-process boundary, not a desktop-login-session claim.",
+    "Native self-child supervision and independent diagnostic inspector; no actual renderer pixels or desktop qualification.",
+    "Protected-policy adapters perform read-only checks; positive installed machine-policy qualification needs an admitted administrative lab. Explicit recent-failure metadata is operational and policy-gated; explicit private preservation is policy-gated; live recovery controls remain pending.",
+    "GTK runtime fingerprint and selected development package versions are checked; full transitive UI runtime/header closure and Wayland qualification remain pending. Native close test uses owned authenticated Xvfb/X11; WSLg connection timeout remains preserved and unqualified.",
+    "Portable external marker/temporal oracle calibration is implemented. Native root capture runs only on owned Xvfb; the optional pinned Openbox/PCManFM laboratory adds a real Show Desktop investigation, not a wall qualification.",
+    "The EWMH/XShape desktop candidate is an experiment only. Lab archives are extracted locally by an explicit preparation command; they are neither installed system packages nor a SysPane product payload.",
+    "Bounded recent-failure codec is shared; native private-file recording/reading runs only on modern Windows/Linux profiles and has no product retention or power-loss guarantee.",
+    "Explicit private opaque preservation and native controls run only on this modern profile; typed positive policy fixtures do not qualify installed policy, foreign-owner input, unsupported filesystems or power-loss durability.",
+    "Synchronized data view/model reconciliation is tested as a typed in-process consumer; no telemetry wire feature, real collector, renderer or native data-erasure qualification is enabled.",
+    "Telemetry document codec preserves complete wire state and exact body replay bytes; codec validation alone does not publish model state or authorize a subscription.",
+    "Complete remote state import is an in-process policy-bound receive component; native subscription/demand and producer-monotonic freshness mapping remain unqualified.",
+    "Bounded subscription sessions are tested portably; the modern native probe exchanges synthetic inventory only, with no measured-field freshness, real collector or product capability qualification.",
+    "Native measurement-clock investigation checks causal brackets and held-peer exit; no measured telemetry, TTL/rate mapping, suspend/resume or namespace-mismatch qualification is enabled.",
+    "Measured telemetry 0.2 has explicit native clock scope and portable freshness/replay tests; native synthetic delivery is enabled only in modern profiles, without real collector, suspend or namespace-migration qualification.",
+    "Real raw network acquisition reads native interface keys/types and 64-bit counters; identity reconciliation, event continuity, cancellation during native calls and supervised measured publication remain unqualified.",
+    "Shared network lifetimes, demand cancellation and integer counter intervals are implemented; Linux watched acquisition has native registration/read evidence, while real topology fault induction, Windows notification coverage and supervised measured publication remain open.",
+    "Measured network projection is shared; Linux runs the finite real collector/supervision composition. Product service wiring, installed policy distribution, full network inventory, actual kernel faults and other native platform publication remain unqualified.",
+    "Shared measured network presentation preserves exact selected lifetime, status axes, deterministic rate text and current-policy borrowing. Native renderer delivery/cache erasure and visible operational telemetry remain unqualified.",
+    "Standalone GJS clock adapter duplicates a caller-authorized connected Unix stream and reuses held-peer/time-namespace checks; desktop live freshness, suspend and namespace changes remain unqualified.",
+    "The native GJS module now includes the existing measured network DataView/projection with explicit typed development policy; standalone consumer tests do not qualify operational desktop freshness or installed policy.",
+    "The finite live collector session forwards original measured frames to an asynchronous GJS owner; standalone session evidence does not qualify displayed network age, installed policy, general routing or complete native recovery.",
+    "The existing health protocol now supports bounded asynchronous input/output as well as its native stream adapter. Render completion remains instrumented progress; independent visible evidence and full product recovery are separate gates.",
+    "One independently owned real collector continues through native consumer crashes, lease expiry, bounded replacement and typed consumer-policy denial. This finite same-POSIX-session experiment does not qualify desktop/session replacement or installed policy.",
+    "The admitted GNOME controller experiment uses an owned same-session native ELF child and attached GJS consumer. It does not authorize installed session control, privileged exec or complete desktop qualification.",
+    "The finite persistent controller independently supervises attached shell render progress; native render-failure recovery still requires exact operational evidence and does not qualify installed sessions or editor recovery.",
+    "Independent owned-X11 editor exit is a development lifetime experiment, not a scene editor, installed recovery service, Wayland shortcut or full desktop qualification.",
+    "Pinned content and preset composition produce policy-checked previews; external resource persistence, media decoding and activation remain open. Native private-directory reading is Linux-only.",
+    "Command 0.3 binds selected content to immutable resource snapshots. Resource-bearing Linux generations recover exact bytes; installed ownership, media decoding and actual activation remain open.",
+    "The common resource provider retains the exact current closure for further edits. Linux additionally composes command 0.3 with native supervision and private catalog discovery; installed policy/store ownership, media decoding and activation remain open.",
+    "Shared scene layout resolves every admitted layout kind using explicit topology and readable metrics. Exact geometry/pixel-bound tests do not qualify native fonts, raster rendering, direct editing, host placement or activation.",
+    "Authored selectors and pins now project scoped policy-bound DataViews with bounded exact ordering and explicit incomplete outcomes. Native routing/mapping ownership, text measurement, drawing and retained-cache erasure remain integration requirements.",
+    "Native text raster and metric evidence covers authored/public or synthetic text only. General widget content/composition, current-policy cache erasure, accessibility, Windows/Mac text adapters and external desktop visibility remain unqualified.",
+    "Scalar authored scene composition and reachable cache erasure are verified in one owned synthetic GTK/X11/AT-SPI laboratory. Full widget capabilities, actual authenticated catalog/policy ownership, complete native accessibility and independent desktop activation/recovery remain open.",
+    "Collection tables preserve scoped row identity, bounded native cell geometry and explicit incomplete/truncated states. Synthetic grid/accessible-name checks do not qualify a native accessibility table interface, installed ownership, editing or host activation.",
+    "Shared scene 0.3 content and command 0.4 validate explicit text/labels/chart settings/image pins. Native text and label rendering/recovery evidence is Linux-only; chart/image drawing and complete editions remain unqualified.",
+    "Image decoding and fit are bounded worker/component experiments. Operational image widgets require asynchronous policy-bound scene integration and independent native erasure; historical/native release qualification remains open."
+  ]
+}

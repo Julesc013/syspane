@@ -44,7 +44,7 @@ rejections: the continuous-source oracle correctly rejected missing collection,
 but the test reported that rejection as its own failure. The correction preserves
 that assertion and the original failed test record.
 
-Evidence is indexed in `build-support/evidence/w-25-gnome-editor-exit-attempts.json`.
+Evidence is indexed in `out/evidence/w-25-gnome-editor-exit-attempts.json`.
 The five-control matrix, independent revalidation, earlier eight controller controls
 and their 33 evidence tests retain exact native artifacts and original private
 journals. The Linux CTest regression covers 115 entries, including the original nine
@@ -52,8 +52,8 @@ owned-Xvfb exit cases. The complete-suite archive precedes only the corruption-t
 runner's exception-handling correction; the final desktop matrix archives that
 corrected runner separately. Native implementation bytes are identical.
 Specification validation and integrity results are recorded in
-`build-support/evidence/w-25-gnome-editor-exit-verification.json`; the source-bound
-handoff is `build-support/evidence/gnome-editor-exit-handoff.json`.
+`out/evidence/w-25-gnome-editor-exit-verification.json`; the source-bound
+handoff is `out/evidence/gnome-editor-exit-handoff.json`.
 
 Operational measurements, interface records and pixel crops remain mode 0600 in
 the owned private laboratory directories. Public records retain their hashes and

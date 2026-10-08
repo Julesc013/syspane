@@ -98,7 +98,7 @@ pass** in total. Default focus restoration remains failed, as required by its
 unchanged control. Specification tooling is verified separately.
 
 The final comparison is
-`build-support/evidence/w-05-gnome-focus-integration-calibration.json`. Files with
+`out/evidence/w-05-gnome-focus-integration-calibration.json`. Files with
 that prefix preserve native reports, exact source archives, raw journals,
 regression artifacts and all invocation/verification failures. Every native/test
 launch uses a completed workspace preflight. Owned process groups finish without

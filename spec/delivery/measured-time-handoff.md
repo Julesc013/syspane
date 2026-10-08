@@ -70,7 +70,7 @@ acceptance requirement changed. `measured-time-oracle-review.json` and the adjac
 original source archives remain in owned output. This is agent review, not a claim
 of independent human approval.
 
-Records in `build-support/evidence/w-25-measured-time-<profile>.json` bind final
+Records in `out/evidence/w-25-measured-time-<profile>.json` bind final
 artifacts, exact cases and native process output. The attempts/verification records
 and machine `measured-time-handoff.json` supply the resumption evidence. Specification
 checks now cover 29 schemas and 85 fixtures, including eleven new measured examples.

@@ -46,6 +46,12 @@ Support add/remove, drag/resize, multi-selection, keyboard movement, snap/grid/g
 
 Property panels provide precise numeric entry and accessible alternatives to gestures. Common operations are possible directly on the desktop, not solely in a detached configuration file. The native settings application is still available for detailed policy/source/history controls.
 
+The [scene-fragment package](../delivery/packages/w-10-scene-fragments.md) defines
+explicit sensitive copy admission, exact authored forests and atomic paste through
+the same draft owner. Destination resources must already contain every exact pin.
+Native clipboard transfer remains disabled until its own bounded adapter and
+independent revocation/save tests pass; this shared contract does not complete it.
+
 ## Working revision
 
 Begin with an explicit scene/settings revision and create a draft. Preview changes are local to that editing session until Apply. Apply validates and commits a transaction; Cancel restores the exact accepted document and removes the editor. Undo/redo modifies reversible authored state, not physical events or diagnostic probes.

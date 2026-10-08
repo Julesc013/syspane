@@ -85,7 +85,7 @@ native regression evidence: 100 existing verifier checks pass, giving **134 chec
 in this checkpoint**. The native live reveal case still fails foreground-focus
 restoration. Validation confirms that failure; it does not turn it into a pass.
 
-The final comparison is `build-support/evidence/w-05-gnome-switcher-calibration.json`.
+The final comparison is `out/evidence/w-05-gnome-switcher-calibration.json`.
 Files with the same prefix preserve 20 native attempts and exact source archives,
 37 raw journals, 12 PNG regression artifacts, execution records and two reviewer
 images decoded from the live native captures. Completed workspace preflights precede every run;

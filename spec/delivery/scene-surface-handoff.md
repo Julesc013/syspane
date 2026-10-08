@@ -73,11 +73,11 @@ The normal 200 ms deadline is measured from the native acknowledgement, not from
 completion of reference generation. Raw synthetic captures and negative controls
 are preserved; ephemeral X authorization cookies are excluded.
 
-`build-support/evidence/w-09-surface-attempts.json` indexes complete source/oracle
+`out/evidence/w-09-surface-attempts.json` indexes complete source/oracle
 archives, attempts, native captures and final regression runs. The machine handoff
 is `surface-handoff.json`; `w-09-surface-staging.json` binds final staged inputs and
 artifact identities. Selected installed accessibility/observer identities are in
-`build-support/surface-runtime.json`; font/runtime pins remain separately checked.
+`source/build/surface-runtime.json`; font/runtime pins remain separately checked.
 No dependencies were installed or redistributed. The previous unexplained content-
 command timeout remains in the binding handoff; later passes do not erase it.
 

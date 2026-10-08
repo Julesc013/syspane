@@ -51,7 +51,7 @@ The lost-acknowledgement case preserves one preview request reservation and retu
 that result on reconnect. It changes no stored configuration. W-08's durable
 generation/journal crash trace remains pending; this case does not substitute for it.
 
-Current records are `build-support/evidence/w-24-native-<profile>.json`, matching
+Current records are `out/evidence/w-24-native-<profile>.json`, matching
 normalized CTest logs and `NATIVE-01`/`NATIVE-02` JSON transcripts. They bind case
 commands, source/dependency/profile inputs, probe/library hashes and actual process
 outcomes. The recorder requires every named child case and refuses missing/failing
@@ -62,7 +62,7 @@ evidence. No third-party native laboratory result is inherited from API document
 The first Windows adapter compilation failed because MinGW's C++ headers already
 define NOMINMAX. The source now guards that macro; warnings remain errors. The
 original diagnostic and source digest are preserved in
-`build-support/evidence/w-24-native-attempts.json`. No acceptance oracle was relaxed.
+`out/evidence/w-24-native-attempts.json`. No acceptance oracle was relaxed.
 
 Cross-user execution and a second Windows logon/terminal session are unavailable
 in the admitted laboratory and remain blocked qualification. DACL inspection and

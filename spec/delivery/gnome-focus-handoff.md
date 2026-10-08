@@ -56,7 +56,7 @@ It does not prove that DING consumed the key. The explicit click is a diagnostic
 positive control, not a proposed focus workaround or repair of earlier acceptance.
 
 The recorder at repository path
-`build-support/evidence/w-05-gnome-focus-comparison.json` recomputes the observations,
+`out/evidence/w-05-gnome-focus-comparison.json` recomputes the observations,
 extension absence, exact native inputs, keyboard receipts and repeated comparison.
 All three repetitions per mode agree. It rejects missing repetitions and reports
 inconclusive attribution if their results differ. Its successful completion is
@@ -79,7 +79,7 @@ source archive, logs and failure journal are retained. An initial complete
 three-mode comparison remains separate from the final nine-run matrix.
 
 Eighteen native attempts, eighteen source archives and forty raw journals/event
-files are preserved under `build-support/evidence/w-05-gnome-focus-*`. Completed
+files are preserved under `out/evidence/w-05-gnome-focus-*`. Completed
 preflights precede all final native invocations. Final retained processes and their
 groups exit with no surviving members. No C++ artifact, profile, workspace limit,
 user desktop, wallpaper, shell, VM or public release changed. Earlier CTest/smoke

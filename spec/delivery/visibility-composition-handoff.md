@@ -56,7 +56,7 @@ boundary test incorrectly assumed 256 nested levels; it now exercises 256 widget
 at the existing depth limit of 16 and explicitly rejects depth 17. No production
 schema or prior acceptance oracle was weakened.
 
-Records: build-support/evidence/w-09-visibility-composition-attempts.json,
+Records: out/evidence/w-09-visibility-composition-attempts.json,
 w-09-visibility-composition-native-index.json, w-09-visibility-composition-verification.json,
 w-09-visibility-composition-staging.json and visibility-composition-handoff.json.
 They bind source archives, commands, artifacts, failures and fixed examples.

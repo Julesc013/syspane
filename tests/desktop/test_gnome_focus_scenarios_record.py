@@ -6,7 +6,7 @@ import sys
 import unittest
 from unittest.mock import patch
 
-ROOT=Path(__file__).resolve().parents[2];sys.path.insert(0,str(ROOT/'build-support'))
+ROOT=Path(__file__).resolve().parents[2];sys.path.insert(0,str(ROOT/'source/build'))
 import record_gnome_focus_scenarios as recorder
 from gnome_focus_scenarios import judge_step
 from native_x11_host import rgb_record

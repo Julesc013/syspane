@@ -1,4 +1,5 @@
 #include "editor_draft.hpp"
+#include "editor_fragment.hpp"
 #include "authored_equal.hpp"
 #include "theme_resources.hpp"
 #include <algorithm>
@@ -227,8 +228,10 @@ template<class T>void guard(const Json& scene,const T& edit){for(const auto& id:
 void guard(const Json&,const SceneThemeEdit&){}
 void guard(const Json&,const SetWidgetLocks&){}
 void guard(const Json& scene,const InsertWidget& edit){if(edit.parent)need(!edit_locked(scene,*edit.parent),"editor.locked");}
+void guard(const Json& scene,const PasteWidgets& edit){if(edit.parent)need(!edit_locked(scene,*edit.parent),"editor.locked");}
 void guard(const Json& scene,const ReparentWidgets& edit){for(const auto& id:edit.ids)need(!edit_protected(scene,id),"editor.locked");if(edit.parent)need(!edit_locked(scene,*edit.parent),"editor.locked");}
 template<class T> void edit_selection(Json& scene,std::vector<std::string>&,const T& edit){apply(scene,edit);}
+void edit_selection(Json& scene,std::vector<std::string>& selection,const PasteWidgets& edit){selection=detail::paste_fragment(scene,edit);}
 void edit_selection(Json& scene,std::vector<std::string>& selection,const WrapWidgets& edit){apply(scene,edit);selection={edit.id};}
 void edit_selection(Json& scene,std::vector<std::string>& selection,const UnwrapWidget& edit){
     const auto members=widget(scene,edit.id).at("children").get<std::vector<std::string>>();apply(scene,edit);selection=members;
@@ -307,7 +310,9 @@ std::size_t EditorDraft::history_bytes()const{return history_bytes(undo_,redo_);
 void EditorDraft::clear_history(){undo_.clear();redo_.clear();}
 bool EditorDraft::execute(const std::vector<SceneEdit>& edits){
     transaction_.editable();need(!edits.empty()&&edits.size()<=128,"editor.operations");auto candidate=*scene();auto selected=selected_;
-    try{for(const auto& edit:edits){if(std::holds_alternative<SetWidgetVisibility>(edit))need(visibility_available(),"editor.visibility_unavailable");if(std::holds_alternative<SetWidgetLocks>(edit))need(locks_available(),"editor.lock_unavailable");std::visit([&](const auto& op){guard(candidate,op);edit_selection(candidate,selected,op);},edit);}}
+    try{for(const auto& edit:edits){if(std::holds_alternative<SetWidgetVisibility>(edit))need(visibility_available(),"editor.visibility_unavailable");if(std::holds_alternative<SetWidgetLocks>(edit))need(locks_available(),"editor.lock_unavailable");
+        const bool paste=std::holds_alternative<PasteWidgets>(edit);if(paste)need(clipboard_available(),"clipboard.unavailable");
+        std::visit([&](const auto& op){guard(candidate,op);edit_selection(candidate,selected,op);},edit);if(paste)admit_fragment_version(candidate.at("schema_version"));}}
     catch(const Json::exception&){throw protocol::Error("editor.operation");}
     if(c::authored_equal(candidate,*scene()))return false;
     return record(std::move(candidate),std::move(selected));
@@ -335,10 +340,32 @@ bool EditorDraft::travel(bool forward){
 }
 bool EditorDraft::undo(){return travel(false);}
 bool EditorDraft::redo(){return travel(true);}
-void EditorDraft::discard(){transaction_.revert();clear_history();selected_=surviving(*scene(),selected_);}
-void EditorDraft::close(){transaction_.close();clear_history();selected_.clear();}
-void EditorDraft::policy(c::Policy policy){transaction_.policy(std::move(policy));if(!available()){clear_history();selected_.clear();}}
-void EditorDraft::reload(c::Authored v,std::string epoch,std::optional<SettingsResources> resources){transaction_.reload(std::move(v),std::move(epoch),std::move(resources));clear_history();selected_.clear();}
+void EditorDraft::discard(){transaction_.revert();clear_clipboard();clear_history();selected_=surviving(*scene(),selected_);}
+void EditorDraft::close(){clear_clipboard();transaction_.close();clear_history();selected_.clear();}
+void EditorDraft::policy(c::Policy policy){clear_clipboard();transaction_.policy(std::move(policy));if(!available()){clear_history();selected_.clear();}}
+void EditorDraft::reload(c::Authored v,std::string epoch,std::optional<SettingsResources> resources){transaction_.reload(std::move(v),std::move(epoch),std::move(resources));clear_clipboard();clear_history();selected_.clear();}
+std::optional<EditRequest> EditorDraft::begin(const std::string& intent,const std::string& request){auto result=transaction_.begin(intent,request);if(result)clear_clipboard();return result;}
+void EditorDraft::admit_fragment_version(const Json& version)const{
+    need(version=="0.3.0"||version=="0.4.0"||version=="0.5.0","clipboard.version");
+    if(version=="0.3.0")return;
+    need(transaction_.large_commands_&&transaction_.context_,"clipboard.version_admission");
+    for(const char* cap:{"scene.edit-locks","configuration.edit-locks","scene.visibility","configuration.visibility"}){
+        if(version=="0.4.0"&&(std::string(cap)=="scene.visibility"||std::string(cap)=="configuration.visibility"))continue;
+        need(transaction_.context_->capabilities.count(cap)&&!transaction_.policy_.denied_capabilities.count(cap),"clipboard.version_admission");
+    }
+}
+bool EditorDraft::clipboard_available()const{
+    if(!available()||!transaction_.context_||!transaction_.context_->capabilities.count("editor.clipboard"))return false;
+    const auto& a=transaction_.authority_;const auto& p=transaction_.policy_;
+    if(!p.available||(a.role!="desktop"&&a.role!="console")||p.denied_capabilities.count("editor.clipboard")||!c::permits(a,p,"clipboard","sensitive"))return false;
+    try{transaction_.editable();admit_fragment_version(scene()->at("schema_version"));(void)transaction_.prepare_scene(*scene());return true;}
+    catch(const protocol::Error&){return false;}
+}
+void EditorDraft::copy_selection(){need(clipboard_available(),"clipboard.unavailable");auto bytes=detail::selection_fragment(*scene(),selected_);clipboard_.swap(bytes);}
+std::string_view EditorDraft::clipboard_data(){
+    if(!clipboard_available()){clear_clipboard();throw protocol::Error("clipboard.unavailable");}
+    need(!clipboard_.empty(),"clipboard.no_copy");return clipboard_;
+}
 void EditorDraft::settled(bool changed){if(changed&&available()&&last_result()["outcome"]=="accepted")clear_history();}
 bool EditorDraft::complete(std::uint64_t ticket,const Json& result){const bool changed=transaction_.complete(ticket,result);settled(changed);return changed;}
 bool EditorDraft::reconciled(std::uint64_t ticket,const std::string& query,const std::string& epoch,const Json& result){const bool changed=transaction_.reconciled(ticket,query,epoch,result);settled(changed);return changed;}

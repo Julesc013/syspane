@@ -6,7 +6,7 @@ import sys
 import unittest
 
 ROOT=Path(__file__).resolve().parents[2]
-sys.path.insert(0,str(ROOT/'build-support'))
+sys.path.insert(0,str(ROOT/'source/build'))
 from record_gnome_focus_trace import validate, interpret, compare, HANDLER, PREFIX
 
 BUILD=Path(sys.argv.pop(1)).resolve(strict=True)

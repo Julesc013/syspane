@@ -42,7 +42,7 @@ Durable storage remains distinct from pending activation and unconfirmed visibil
 
 ## Evidence and preserved failures
 
-`build-support/evidence/w-11-settings-resources-attempts.json` binds exact source
+`out/evidence/w-11-settings-resources-attempts.json` binds exact source
 archives, commands, artifacts and CTest logs. The six new portable families cover
 selection/version, themes and overrides, capability denial, atomic reload/reference
 release, reconciliation and required-context boundaries. Existing settings, authored,

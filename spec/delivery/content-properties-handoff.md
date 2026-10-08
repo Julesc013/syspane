@@ -68,11 +68,11 @@ storage witnesses; timeout or process failure alone cannot pass. The original
 timeout and observer are archived.
 
 Repository evidence paths (outside the standalone specification bundle):
-`build-support/evidence/w-10-content-properties-attempts.json`,
-`build-support/evidence/w-10-content-properties-native-index.json`,
-`build-support/evidence/w-10-content-properties-verification.json`,
-`build-support/evidence/w-10-content-properties-staging.json` and
-`build-support/evidence/content-properties-handoff.json`.
+`out/evidence/w-10-content-properties-attempts.json`,
+`out/evidence/w-10-content-properties-native-index.json`,
+`out/evidence/w-10-content-properties-verification.json`,
+`out/evidence/w-10-content-properties-staging.json` and
+`out/evidence/content-properties-handoff.json`.
 
 Only verified duplicates of committed native archives were removed to retain the
 existing 7 GiB workspace budget. Cleanup identity records accompany the attempts.

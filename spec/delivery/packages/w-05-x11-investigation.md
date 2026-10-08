@@ -38,7 +38,7 @@ accommodate a candidate. No production capability is enabled by this experiment.
 ## Laboratory and authority
 
 Use the admitted unprivileged Ubuntu 24.04 WSL account and owned Linux build root.
-`build-support/x11-lab-packages.json` pins Openbox 3.6.1, PCManFM 1.3.2 and the missing
+`source/build/x11-lab-packages.json` pins Openbox 3.6.1, PCManFM 1.3.2 and the missing
 Ubuntu package closure by exact versions, archive SHA-256 and bytes. The explicit
 `prepare_x11_lab.py` command downloads at most 64 MiB and extracts only into the
 build's `x11-lab/sysroot`. It runs no package installation/maintainer scripts, changes

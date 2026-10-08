@@ -1,6 +1,0 @@
-from pathlib import Path
-from datetime import datetime,timezone
-import hashlib,json
-r=Path.cwd();p=r/'tests/editor/native_edit_locks.py';before=p.read_bytes();s=before.decode();s=s.replace("h.value('x')=='40'","h.number('x')==40").replace("h.value('x')=='60'","h.number('x')==60")
-assert s!=before.decode();p.write_text(s,encoding='utf-8',newline='\n')
-out=r/'out/campaign/w-10-edit-locks/oracle-correction.json';assert not out.exists();out.write_text(json.dumps(dict(recorded_at=datetime.now(timezone.utc).isoformat(),failure_attempt='linux-x64-gcc13-locks-041ca46f92',native_failure='edit-locks-65ab6adc4440/unlock-move',original_oracle_sha256=hashlib.sha256(before).hexdigest(),corrected_oracle_sha256=hashlib.sha256(p.read_bytes()).hexdigest(),unchanged_fixture_sha256=hashlib.sha256((r/'tests/editor/edit-lock-cases.json').read_bytes()).hexdigest(),reason='The preserved native screenshot shows x=60.0 and the pane at the expected 60-DIP origin. The new test mistakenly required the exact label string 60; the established numeric-field contract permits equivalent round-trip decimal forms.',correction='Read numeric dimensions through the existing independent Harness.number conversion. Keep exact numeric targets, full expected scenes, pixel comparisons, storage, deadlines and production code unchanged.'),indent=2)+'\n',encoding='utf-8',newline='\n')

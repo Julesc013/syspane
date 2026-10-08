@@ -73,12 +73,12 @@ the console encoding; ASCII-escaped invocation logging corrected that observer
 failure. Both original failures, their commands/source snapshots and later complete
 runs are retained. No acceptance oracle changed to turn either failure into a pass.
 
-Records use `build-support/evidence/w-25-failure-<profile>.json`, with adjacent
+Records use `out/evidence/w-25-failure-<profile>.json`, with adjacent
 native reports/CTest logs. `w-25-failure-attempts.json` retains build/test attempts;
 source archives remain in the bounded owned campaign cache. The original failed
 diagnostic report is stored separately. `w-25-failure-verification.json` records
 specification generation, schema/tool checks and integrity. The machine handoff is
-`build-support/evidence/failure-metadata-handoff.json`.
+`out/evidence/failure-metadata-handoff.json`.
 
 ## Remaining work
 

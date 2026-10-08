@@ -18,7 +18,7 @@ sp_sources: ["SRC-CONVERSATION"]
 Use the existing unprivileged, authenticated Xvfb/Openbox/PCManFM laboratory and
 its single host-investigation runner. Add an optional `--restart-window-manager`
 experiment after the unchanged reveal interval. Own the observer in
-`tests/desktop/`, with independent evidence verification in `build-support/`.
+`tests/desktop/`, with independent evidence verification in `source/build/`.
 This boundary does not authorize control of an inherited display or user shell.
 The campaign's current combined 2 GiB allocation applies.
 

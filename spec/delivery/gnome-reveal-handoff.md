@@ -65,7 +65,7 @@ final appearance cannot erase earlier failure. The omitted-action control leaves
 the normal window visible and correctly fails the transition requirement.
 
 The recorder result at repository path
-`build-support/evidence/w-05-gnome-reveal-calibration.json` recomputes the raw
+`out/evidence/w-05-gnome-reveal-calibration.json` recomputes the raw
 observations, source identity, native ownership and journals.
 Recorder success means the controls/evidence are valid, not that the live candidate
 passed. Twenty-two adversarial reveal checks pass, including visible pixels without
@@ -92,7 +92,7 @@ identical current source inputs. Earlier passing calibration records remain sepa
 from the final record; their live candidate acceptance was also failed.
 
 Thirteen native attempts, thirteen source ZIPs and twenty composition/reveal journal
-files are retained under `build-support/evidence/w-05-gnome-reveal-*`, along with
+files are retained under `out/evidence/w-05-gnome-reveal-*`, along with
 invocation/preflight and verification records. The bootstrap runner now allows the
 observer to exit naturally after sending its result before applying bounded cleanup,
 avoiding a race that previously terminated an already-completed observer. It still

@@ -65,11 +65,11 @@ documents remain unchanged. Both original failures and observers are archived;
 neither correction changes the frozen geometry or product implementation.
 
 Repository evidence paths (outside the standalone specification bundle):
-`build-support/evidence/w-10-snap-attempts.json`,
-`build-support/evidence/w-10-snap-native-index.json`,
-`build-support/evidence/w-10-snap-verification.json`,
-`build-support/evidence/w-10-snap-staging.json` and
-`build-support/evidence/snap-handoff.json`.
+`out/evidence/w-10-snap-attempts.json`,
+`out/evidence/w-10-snap-native-index.json`,
+`out/evidence/w-10-snap-verification.json`,
+`out/evidence/w-10-snap-staging.json` and
+`out/evidence/snap-handoff.json`.
 
 ## Next admitted boundary
 

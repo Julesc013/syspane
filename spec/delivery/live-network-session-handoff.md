@@ -64,8 +64,8 @@ and were not rerun or represented as new full-suite evidence.
 
 ## Evidence and preserved failure
 
-Evidence uses `build-support/evidence/w-25-live-network-session-`; the machine
-handoff is `build-support/evidence/live-network-session-handoff.json`. Six original
+Evidence uses `out/evidence/w-25-live-network-session-`; the machine
+handoff is `out/evidence/live-network-session-handoff.json`. Six original
 configure/build/test attempts, three native session reports and eleven public case
 records preserve the failed and passing runs with source archives. Raw operational
 files remain in their owned mode-0700 directories, with mode-0600 files; committed

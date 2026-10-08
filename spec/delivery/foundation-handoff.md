@@ -17,7 +17,7 @@ sp_sources: ["SRC-CONVERSATION"]
 
 The full campaign remains active. The base is
 `229a49850a657a76b0201532b4ea61ddfd92a3aa`; the containing commit identifies the
-integration. Per-profile records in `build-support/evidence/` bind actual artifact
+integration. Per-profile records in `out/evidence/` bind actual artifact
 hashes and source input hashes without guessing a future commit hash.
 
 ## Delivered and verified
@@ -43,8 +43,8 @@ PATH and fixed expected JSON. Windows imports only KERNEL32 and UCRT API sets;
 Linux direct imports are libstdc++, libgcc_s and libc. These are local development
 artifacts, not usable desktop editions, installers or public releases.
 
-Case/artifact records: `build-support/evidence/w-01-windows-x64-gcc15.json` and
-`build-support/evidence/w-01-linux-x64-gcc13.json`. Package records use the matching
+Case/artifact records: `out/evidence/w-01-windows-x64-gcc15.json` and
+`out/evidence/w-01-linux-x64-gcc13.json`. Package records use the matching
 `w-26-<profile>.json` names. Remaining family-wide T-TARGETS/T-CLOCK/native package
 qualification is not promoted by these bounded synthetic results.
 
@@ -57,7 +57,7 @@ invocation expanded a build-root variable too early, then a later run encountere
 Git's shared-checkout ownership check. A shell script now owns Linux expansion;
 the read-only Git query trusts only this exact admitted checkout for that command.
 No global Git trust, credentials, user identities or filesystem privileges changed.
-Failures are recorded in `build-support/evidence/foundation-attempts.json`.
+Failures are recorded in `out/evidence/foundation-attempts.json`.
 
 The installed WinLibs UCRT toolchain is not an XP candidate: its own package record
 excludes pre-Windows-7-SP1 UCRT support, and the built PE imports UCRT API sets.

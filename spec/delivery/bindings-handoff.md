@@ -58,9 +58,9 @@ by this work. A separate preserved workspace reservation stop led to the measure
 6 GiB development allocation, retaining standard reservations and product limits.
 
 Final suites and exact staged-source checks are recorded in
-`build-support/evidence/w-09-bindings-attempts.json` and
-`build-support/evidence/w-09-bindings-staging.json`. The machine handoff is
-`build-support/evidence/bindings-handoff.json`. Historical-toolset checks run on the
+`out/evidence/w-09-bindings-attempts.json` and
+`out/evidence/w-09-bindings-staging.json`. The machine handoff is
+`out/evidence/bindings-handoff.json`. Historical-toolset checks run on the
 modern Windows host; they are not historical OS qualification.
 
 ## Next integration

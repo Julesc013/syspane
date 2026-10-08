@@ -67,11 +67,11 @@ concurrent Windows builds. Its unchanged native matrix was rerun after those
 builds finished; the failed record remains evidence of laboratory timing limits.
 
 Repository evidence paths (outside the standalone specification bundle):
-`build-support/evidence/w-10-group-attempts.json`,
-`build-support/evidence/w-10-group-native-index.json`,
-`build-support/evidence/w-10-group-verification.json`,
-`build-support/evidence/w-10-group-staging.json` and
-`build-support/evidence/group-handoff.json`.
+`out/evidence/w-10-group-attempts.json`,
+`out/evidence/w-10-group-native-index.json`,
+`out/evidence/w-10-group-verification.json`,
+`out/evidence/w-10-group-staging.json` and
+`out/evidence/group-handoff.json`.
 
 ## Next admitted boundary
 

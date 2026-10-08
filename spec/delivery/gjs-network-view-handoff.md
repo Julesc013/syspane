@@ -61,8 +61,8 @@ smoke archives pass relocated execution. Historical checks ran on Windows 10/WOW
 XP/7 guest qualification remains unresolved. MSB8051 remains the recorded vendor
 warning for the historical toolset, not a compiler warning accepted by the project.
 
-Evidence uses `build-support/evidence/w-25-gjs-network-view-`; the machine handoff
-is `build-support/evidence/gjs-network-view-handoff.json`. Thirteen configure/build/
+Evidence uses `out/evidence/w-25-gjs-network-view-`; the machine handoff
+is `out/evidence/gjs-network-view-handoff.json`. Thirteen configure/build/
 test attempts and all three native consumer reports retain their source archives.
 All executed attempts passed. Earlier passing consumer runs had narrower checks;
 the final full-suite record binds the complete twelve-case source and artifacts.

@@ -43,10 +43,10 @@ fault observations. Existing observation (7), creation (17), binding (15), conte
 matrices pass: 157 native cases across ten matrices.
 
 Every failed and successful attempt retains source snapshots and binary identities.
-The evidence is under `build-support/evidence/w-10-layout-authoring-attempts.json`,
+The evidence is under `out/evidence/w-10-layout-authoring-attempts.json`,
 `w-10-layout-authoring-native-index.json`, `w-10-layout-authoring-verification.json`
 and `w-10-layout-authoring-staging.json`; the machine handoff is
-`build-support/evidence/layout-authoring-handoff.json`.
+`out/evidence/layout-authoring-handoff.json`.
 
 The first strict build rejected misleading indentation; the initial portable test
 incorrectly reloaded a pending request. Both failures are preserved. Native setup

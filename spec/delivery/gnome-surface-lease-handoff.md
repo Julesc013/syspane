@@ -60,7 +60,7 @@ checks include missing, changed and extra native module identities. The original
 default Show Desktop focus-restoration failure remains failed; optional restoration
 passes its existing guards and remains disabled by default.
 
-Evidence uses `build-support/evidence/w-25-gnome-surface-lease-`: calibration,
+Evidence uses `out/evidence/w-25-gnome-surface-lease-`: calibration,
 execution, verification, ten raw native attempts, ten source archives and 31 raw
 journals. The attempt manifest also hashes 16 verifier-history artifacts. All owned
 process groups have confirmed cleanup. No user desktop, settings, system service,

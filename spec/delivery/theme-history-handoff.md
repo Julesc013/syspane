@@ -69,7 +69,7 @@ states instead of repeatedly serializing retained themes. Current binding/policy
 validation remains. Fixed artifact expectations, history limits and the existing
 test deadline were not changed.
 
-Evidence under build-support/evidence uses prefix w-10-theme-history: attempts,
+Evidence under out/evidence uses prefix w-10-theme-history: attempts,
 native-index, verification, staging and theme-history-handoff.json. The attempts
 index retains 35 source-bound executions and original outcomes,
 fixed inputs, source archives and artifact identities. All 199 baseline schema/fixture

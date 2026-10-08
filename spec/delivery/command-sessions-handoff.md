@@ -53,9 +53,9 @@ updates. Final affected checks cover those changes separately. Seventeen histori
 executables receive the expanded standard PE/header/linker-input/import audit;
 actual historical OS execution remains unqualified.
 
-`build-support/evidence/w-08-command-attempts.json` indexes all build/test attempts,
+`out/evidence/w-08-command-attempts.json` indexes all build/test attempts,
 source archives, native reports and artifact hashes. The machine handoff is
-`build-support/evidence/command-sessions-handoff.json`. Specification and staging
+`out/evidence/command-sessions-handoff.json`. Specification and staging
 checks are recorded separately under the same evidence prefix.
 
 The initial invocation had a helper package-path typo before compilation; its flow

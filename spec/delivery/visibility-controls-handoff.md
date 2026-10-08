@@ -85,7 +85,7 @@ while preserving dirty private property input. Original and deterministic failur
 screenshots, explicit field values and the unchanged acceptance outcomes are retained.
 This establishes that race separately from older unexplained accessibility timeouts.
 
-Records: build-support/evidence/w-10-visibility-controls-attempts.json,
+Records: out/evidence/w-10-visibility-controls-attempts.json,
 w-10-visibility-controls-native-index.json, w-10-visibility-controls-verification.json,
 w-10-visibility-controls-staging.json and visibility-controls-handoff.json. They bind
 source archives, commands, fixed inputs, native observations and artifact identities.

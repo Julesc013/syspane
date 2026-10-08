@@ -75,9 +75,9 @@ the corrected observer first records the native worker's timed-sleep wait channe
 and then tests cancellation without confusing it with proof of process exit.
 No expected scene, budget, recovery deadline or outcome was weakened.
 
-`build-support/evidence/w-08-large-commands-attempts.json` binds every preserved
+`out/evidence/w-08-large-commands-attempts.json` binds every preserved
 attempt, exact source archive, binary identity, CTest log and native record.
-`build-support/evidence/large-commands-handoff.json` separately records schema/tool
+`out/evidence/large-commands-handoff.json` separately records schema/tool
 checks, staged identity verification and remaining qualifications. Documentation
 and independent observer changes after compilation are identified explicitly.
 

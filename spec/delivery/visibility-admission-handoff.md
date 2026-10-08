@@ -68,7 +68,7 @@ The first specification validation rejected command 0.7 because its schema-ident
 allowlist still stopped at 0.6. The allowlist now includes the new version; the
 failed output and exact earlier validator are preserved alongside the final checks.
 
-Records: build-support/evidence/w-10-visibility-admission-attempts.json,
+Records: out/evidence/w-10-visibility-admission-attempts.json,
 w-10-visibility-admission-native-index.json, w-10-visibility-admission-verification.json,
 w-10-visibility-admission-staging.json and visibility-admission-handoff.json. They
 bind commands, exact source archives, failed attempts, fixtures and final artifacts.

@@ -54,7 +54,7 @@ their exit. The parent-loss case kills only the harness's own supervisor.
 
 ## Evidence and failure preservation
 
-Current records are `build-support/evidence/w-25-supervision-<profile>.json`, matching
+Current records are `out/evidence/w-25-supervision-<profile>.json`, matching
 CTest logs and NATIVE-01/NATIVE-02/RECOVERY-01 report copies. The recorder requires
 the exact complete case set and reports named in that CTest log. It checks recovery
 probe/source digests against the run and requires every child to have independent
@@ -63,7 +63,7 @@ identities remain bound to the actual development environment.
 
 The first Windows build failed on dependent template parsing in a generic callback.
 The callback now declares its actual `string_view` parameter. The original diagnostic
-and source digest are preserved in `build-support/evidence/w-25-supervision-attempts.json`.
+and source digest are preserved in `out/evidence/w-25-supervision-attempts.json`.
 Warnings remain errors. No native case failed and no timing criterion was relaxed.
 The initial eight-case runs preceded the added wrong-generation regression; the
 final evidence requires all nine. Per-attempt reports remain in owned build output.

@@ -2,6 +2,7 @@
 
 Generated navigation; edit the referenced source documents, then run `specctl.py generate`.
 
+- [checkpoints](checkpoints/index.md) — browse this responsibility.
 - [packages](packages/index.md) — browse this responsibility.
 - [Native alignment and spacing checkpoint](arrange-handoff.md) — Deterministic shared arrangement with native controls and independently observed persistence.
 - [Binaries, packages and release identity](artifacts.md) — Choose stable binary roles and exact offline payload closure.
@@ -85,6 +86,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Semantic typography composition checkpoint](role-composition-handoff.md) — Bounded scene font roles with independent pixels and preserved diagnostics.
 - [Image validation cost and native observation checkpoint](runtime-observation-handoff.md) — Preserve complete image validation while reducing parent work and retaining unexplained accessibility failures.
 - [Versioned scene content checkpoint](scene-content-handoff.md) — Typed authored content crosses shared validation, negotiated commands and exact native resource recovery.
+- [Shared scene fragments checkpoint](scene-fragments-handoff.md) — Bounded authored copy/paste with explicit disclosure and atomic resource/history ownership.
 - [Policy-owned native scene images checkpoint](scene-images-handoff.md) — Asynchronous pinned image presentation, native erasure and declared-size content hashing.
 - [Native scene inspector checkpoint](scene-inspector-handoff.md) — Identity-stable native navigation and independently observed inspector disclosure.
 - [Policy-owned scalar scene surface checkpoint](scene-surface-handoff.md) — Native composed scene pixels and accessible names follow current policy, source lifetime and pinned authored resources.

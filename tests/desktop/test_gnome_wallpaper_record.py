@@ -7,7 +7,7 @@ import unittest
 from unittest.mock import patch
 
 ROOT=Path(__file__).resolve().parents[2]
-sys.path.insert(0,str(ROOT/'build-support'))
+sys.path.insert(0,str(ROOT/'source/build'))
 from record_gnome_wallpaper import validate
 from gnome_wallpaper import judge,parse_settings,crop,FIXTURE
 from native_x11_host import rgb_record

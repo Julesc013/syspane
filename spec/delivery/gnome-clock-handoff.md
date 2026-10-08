@@ -54,8 +54,8 @@ capture timing and coverage limits; self-reported update counters cannot satisfy
 
 ## Evidence and preserved failures
 
-Evidence uses `build-support/evidence/w-25-gnome-clock-`; the machine handoff is
-`build-support/evidence/gnome-clock-handoff.json`. Public reports, clock/pixel
+Evidence uses `out/evidence/w-25-gnome-clock-`; the machine handoff is
+`out/evidence/gnome-clock-handoff.json`. Public reports, clock/pixel
 journals, commands, preflights, source archives and artifact hashes identify each
 attempt. Source archives are deduplicated by their exact archive digest. Operational
 network documents, receipts and pixel crops remain in owned ignored directories;

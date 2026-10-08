@@ -27,7 +27,7 @@ the shell. No product capability is enabled by this laboratory investigation.
 Use only the existing unprivileged Ubuntu 24.04 WSL account, an owned authenticated
 800x600 Xvfb display and the declared Linux build root. Pin GNOME Shell 46, its
 Mutter/GJS dependencies and Desktop Icons NG through the exact Ubuntu package
-versions, archive sizes and SHA-256 values in `build-support/gnome-lab-packages.json`.
+versions, archive sizes and SHA-256 values in `source/build/gnome-lab-packages.json`.
 The lock is a snapshot of locally available APT metadata with recommends disabled.
 Preparation downloads at most 128 MiB and extracts at most 512 MiB in a new
 `gnome-lab/sysroot`; it never installs packages or runs their scripts. Record the
@@ -106,7 +106,7 @@ this package. Keep W-05 open until the remaining platform/capability gates are m
 
 ## Execution and handoff
 
-Prepare with `python3 build-support/prepare_gnome_lab.py <owned-build-directory>`
+Prepare with `python3 source/build/prepare_gnome_lab.py <owned-build-directory>`
 after the workspace preflight. Run the bounded bootstrap with
 `python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory>`.
 Record the source base plus exact changed inputs, archives/runtime, commands,

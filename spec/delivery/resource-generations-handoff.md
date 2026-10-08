@@ -49,8 +49,8 @@ historical executables pass the PE/header/import and actual linker-input audit.
 Specification/schema/generation/integrity checks pass; 56 tooling tests pass with
 two existing Windows symlink skips. Historical native OS behavior is not qualified.
 
-Validation is indexed in `build-support/evidence/w-08-resources-attempts.json`;
-the machine handoff is `build-support/evidence/resource-generations-handoff.json`.
+Validation is indexed in `out/evidence/w-08-resources-attempts.json`;
+the machine handoff is `out/evidence/resource-generations-handoff.json`.
 Source archives, native reports, artifact hashes, failures and staged-byte identity
 are retained with this checkpoint.
 The initial build failure from two misleadingly indented test-helper returns is

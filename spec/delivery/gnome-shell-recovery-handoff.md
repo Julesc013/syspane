@@ -83,7 +83,7 @@ reveal/composition/marker regressions add 170 checks, giving **215 desktop verif
 checks** for this checkpoint. The original Show Desktop foreground-focus failure
 remains failed; recovery and new-desktop input do not override that requirement.
 
-The final comparison is `build-support/evidence/w-05-gnome-shell-recovery-calibration.json`.
+The final comparison is `out/evidence/w-05-gnome-shell-recovery-calibration.json`.
 Files with the same prefix preserve 22 native attempts, their exact source archives,
 raw journals, regression PNG artifacts and invocation/verification records. Each
 native/test launch has a completed workspace preflight. Every owned process group

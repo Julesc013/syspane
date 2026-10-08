@@ -65,7 +65,7 @@ policy. All original inputs and attempt records are preserved. Review additional
 covered malformed intermediate operations, group/ungroup restoration and pending
 revocation followed by a late accepted result. No fixed expected scene was changed.
 
-`build-support/evidence/w-10-editor-draft-attempts.json` binds source archives,
+`out/evidence/w-10-editor-draft-attempts.json` binds source archives,
 commands, native artifacts and CTest logs. The affected portable run contains 69
 entries per development profile: eleven editor, seventeen settings and the existing
 authored/configuration/policy/component checks. The eighteen-mode independent Linux

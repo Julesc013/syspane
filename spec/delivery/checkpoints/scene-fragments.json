@@ -1,0 +1,82 @@
+{
+  "schema_version": "0.1.0",
+  "work_id": "W-10",
+  "source_ref": "8e1beba8b20f8fb5d05f95e55887ea955e7beeb4",
+  "objective": "Bounded authored copy/paste through existing editor ownership; retain shared build tooling under source/build and keep generated evidence local.",
+  "changed_files": [
+    "source/interfaces/editor_fragment.cpp",
+    "source/interfaces/editor_fragment.hpp",
+    "source/interfaces/editor_draft.cpp",
+    "source/interfaces/editor_draft.hpp",
+    "tests/editor/scene_fragment_tests.cpp",
+    "tests/editor/scene-fragment-cases.json",
+    "source/build/",
+    "build-support/ (removed tree)",
+    ".gitignore",
+    "CMakeLists.txt",
+    "README.md",
+    "TODO.md",
+    "docs/",
+    "spec/"
+  ],
+  "decisions": [
+    "Copy complete authored subtrees and exact resource pins; omit scene metadata, packages and live telemetry.",
+    "Require explicit editor.clipboard admission and current sensitive clipboard disclosure; recheck every outgoing borrow.",
+    "Paste through a complete fresh-ID map and existing history/resource/transaction owners; reject missing destination pins atomically.",
+    "Keep native clipboard controls disabled until bounded transfer and independent requester/owner tests pass.",
+    "Version shared build scripts, locks and profiles in source/build; keep local workspace bindings and raw archives in ignored out/. Preserve compact checkpoint summaries in spec/delivery."
+  ],
+  "checks": [
+    {
+      "name": "Portable suites after relocation: 372 Linux, 369 Windows GCC15, 366 v141_xp",
+      "outcome": "pass",
+      "evidence": "spec/delivery/checkpoints/build-layout.json"
+    },
+    {
+      "name": "Linux editor/font/visibility/history native regressions after relocation",
+      "outcome": "pass",
+      "evidence": "spec/delivery/checkpoints/build-layout.json"
+    },
+    {
+      "name": "45 schemas, 154 fixtures, 58 tooling checks passed; 2 existing privilege skips",
+      "outcome": "pass",
+      "evidence": "spec/delivery/checkpoints/build-layout.json"
+    },
+    {
+      "name": "Three smoke packages, launcher guards and documentation links",
+      "outcome": "pass",
+      "evidence": "spec/delivery/checkpoints/build-layout.json"
+    },
+    {
+      "name": "Specification integrity inventory",
+      "outcome": "pass",
+      "evidence": "out/evidence/build-layout-integrity.json"
+    },
+    {
+      "name": "Staged source identity and absence of retired/generated roots",
+      "outcome": "pass",
+      "evidence": "out/evidence/build-layout-staging.json"
+    },
+    {
+      "name": "Native clipboard transfer, recovery drafts, installed ownership and five complete editions",
+      "outcome": "not_run",
+      "evidence": null
+    }
+  ],
+  "open_questions": [
+    "Historical target floors and Mac laboratories remain unresolved."
+  ],
+  "next_step": "Close and implement bounded native clipboard transfer, per-chunk revocation, cancellation and late-result ownership; add explicit controls and independent requester/owner/save/reopen tests. Continue recovery drafts, installed ownership and independent platform tracks.",
+  "authority_used": [
+    "user:foundation-native-campaign-2026-10-05",
+    "User-expanded SysPane 0.1.0 objective",
+    "User instruction to retire build-support, retain necessary files in an authorized subtree, commit and sync main"
+  ],
+  "limitations": [
+    "Shared fragments do not enable an OS clipboard or export private modal text.",
+    "v141_xp was executed on contemporary Windows; historical OS qualification remains open.",
+    "Raw evidence paths are local archive locators, not files supplied by a fresh checkout.",
+    "No complete edition or public release is qualified.",
+    "Two existing Windows symlink assertions were skipped; raw failed attempts remain locally preserved."
+  ]
+}

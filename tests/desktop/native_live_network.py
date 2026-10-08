@@ -21,8 +21,8 @@ from native_network import linux_rows
 from native_recovery import ObservedChild
 from native_collector import route_sockets
 
-SOURCES = ['CMakeLists.txt', 'CMakePresets.json', 'build-support/components.json', 'build-support/targets/linux-x64-gcc13.json',
-    'build-support/check_gjs_clock_dependencies.py', 'build-support/prepare_gnome_lab.py', 'build-support/gnome-lab-packages.json',
+SOURCES = ['CMakeLists.txt', 'CMakePresets.json', 'source/build/components.json', 'source/build/targets/linux-x64-gcc13.json',
+    'source/build/check_gjs_clock_dependencies.py', 'source/build/prepare_gnome_lab.py', 'source/build/gnome-lab-packages.json',
     'spec/delivery/packages/w-25-live-network-session.md', 'spec/delivery/packages/w-25-gjs-network-view.md',
     'tests/desktop/native_live_network.py', 'tests/desktop/gjs_live_network.js', 'tests/desktop/native_gjs_clock.py',
     'tests/protocol/native_network.py', 'tests/protocol/native_collector.py', 'tests/protocol/native_ipc.py', 'tests/fault/native_recovery.py']
@@ -199,7 +199,7 @@ def main():
     report['source_archive_sha256']=sha(archive)
     try:
         report['build_dependencies']=verify();lab=build/'gnome-lab';identity=json.loads((lab/'identity.json').read_text())
-        assert identity['lock_sha256']==sha(ROOT/'build-support/gnome-lab-packages.json') and identity['files']==inventory(lab/'sysroot'),'runtime identity'
+        assert identity['lock_sha256']==sha(ROOT/'source/build/gnome-lab-packages.json') and identity['files']==inventory(lab/'sysroot'),'runtime identity'
         executable=lab/'sysroot/usr/bin/gjs';lib=lab/'sysroot/usr/lib/x86_64-linux-gnu'
         report['artifacts']={str(p):sha(p) for p in [build/'libsyspane_gjs_clock.so',build/'SysPaneClock-0.1.typelib',build/'SysPane.CollectorProbe',executable,lab/'identity.json']}
         env={k:v for k,v in os.environ.items() if k not in ('DISPLAY','WAYLAND_DISPLAY','DBUS_SESSION_BUS_ADDRESS','GI_TYPELIB_PATH','LD_LIBRARY_PATH')}

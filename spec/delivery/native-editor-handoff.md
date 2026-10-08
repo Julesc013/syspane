@@ -77,7 +77,7 @@ corrections distinguish destroyed accessibility cells from stale text and tolera
 an indexed child disappearing during list traversal. They do not accept timeouts,
 connection failures or changed pixel/storage expectations as success.
 
-The repository's `build-support/evidence/w-10-native-editor-attempts.json`
+The repository's `out/evidence/w-10-native-editor-attempts.json`
 binds exact source archives, commands, binary identities, logs, original failures
 and native reports. Sixty-nine affected checks pass on each development toolchain.
 Existing native settings, independent exit, inspector and renderer erasure checks

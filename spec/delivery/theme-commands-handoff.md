@@ -57,7 +57,7 @@ tool's missing 0.8 schema-identity admission are also retained; its version list
 includes the new contract. These
 are distinct from the final passing records; original source archives/logs remain.
 
-Evidence under build-support/evidence uses prefix w-08-theme-commands: attempts,
+Evidence under out/evidence uses prefix w-08-theme-commands: attempts,
 native-index, verification, staging and theme-commands-handoff.json. It preserves
 18 source-bound executions, both native attempts, frozen expectations
 and artifact identities. All 191 baseline schema/fixture files retain their bytes.

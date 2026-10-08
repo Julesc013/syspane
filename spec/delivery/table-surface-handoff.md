@@ -54,7 +54,7 @@ stale delivery, regrant without data, fresh attachment and retained source loss.
 The deliberate old-pixel and old-name controls must fail the relevant erasure
 observation. Every original scalar family and native control remains exercised.
 
-`build-support/evidence/w-09-table-attempts.json` binds source/oracle archives,
+`out/evidence/w-09-table-attempts.json` binds source/oracle archives,
 failed and passing attempts, raw native observations and exact artifact/runtime
 identities. The machine handoff is `table-handoff.json`; `w-09-table-staging.json`
 verifies final staged inputs. Ephemeral X authorization cookies are never archived.

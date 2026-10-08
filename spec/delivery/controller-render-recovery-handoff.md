@@ -64,7 +64,7 @@ normal shutdown cannot erase expiry. The earlier GNOME live render-watch case
 passes on the rebuilt artifacts, and both development model packages pass relocated
 smoke execution. These checks retain their exact limited scopes.
 
-Public evidence uses `build-support/evidence/w-25-controller-render-recovery-`.
+Public evidence uses `out/evidence/w-25-controller-render-recovery-`.
 Operational source, delivery, counter bracket and pixel originals remain private
 in their owned native attempt directories. No user desktop, guest, privileged
 service, public release or AIDE grant was activated.

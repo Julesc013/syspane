@@ -52,8 +52,8 @@ Specification/schema/generation/integrity checks pass; 56 tooling tests pass and
 two existing Windows symlink assertions are skipped. These results do not qualify
 historical native operating systems. Source archives, every build/test attempt,
 native reports and artifact hashes are indexed in
-`build-support/evidence/w-08-content-attempts.json`. The machine handoff is
-`build-support/evidence/content-resolution-handoff.json`; specification checks
+`out/evidence/w-08-content-attempts.json`. The machine handoff is
+`out/evidence/content-resolution-handoff.json`; specification checks
 and staged-byte verification use the same evidence prefix.
 
 ## Remaining boundary

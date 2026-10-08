@@ -21,7 +21,7 @@ updated: {"by": "codex", "at": "2026-10-05T23:39:47+11:00", "scope": "Admitted m
 The [target-profile schema](../contracts/target-profile.schema.json) describes exact
 OS/API minimum, architecture/ISA/word width/endianness, ABI/libc/runtime, compiler/SDK,
 dependencies, native toolkit, renderer, shell host, roles and isolation. Authored
-build profiles live in `build-support/targets/`. Windows/Linux foundation development
+build profiles live in `source/build/targets/`. Windows/Linux foundation development
 profiles are populated and exercised; no supported desktop product profile exists
 yet. Synthetic fixtures remain explicitly examples, never download rows.
 

@@ -5,7 +5,7 @@ from pathlib import Path
 import sys
 import unittest
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[2] / 'build-support'))
+sys.path.insert(0, str(Path(__file__).resolve().parents[2] / 'source/build'))
 from record_editor_exit import validate_facts
 
 REPORT = json.loads(Path(sys.argv.pop(1)).read_text())

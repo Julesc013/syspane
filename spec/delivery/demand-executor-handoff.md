@@ -55,10 +55,10 @@ acquisitions, replay, demand release, native source/consumer exit and replacemen
 Windows configure plus 11 existing demand/component checks pass; no Windows native
 collector or historical runtime qualification follows from this Linux-only change.
 
-`build-support/evidence/w-07-demand-executor-attempts.json` indexes commands, source
+`out/evidence/w-07-demand-executor-attempts.json` indexes commands, source
 archives, native reports and the tested artifact. Tooling/integrity results are in
-`build-support/evidence/w-07-demand-executor-verification.json`; the machine handoff
-is `build-support/evidence/demand-executor-handoff.json`. Raw operational probe
+`out/evidence/w-07-demand-executor-verification.json`; the machine handoff
+is `out/evidence/demand-executor-handoff.json`. Raw operational probe
 output remains in owned ignored storage; committed native records contain outcomes
 and counts, not telemetry values. No real-user shell, VM or privileged policy was
 changed, and no release was published.

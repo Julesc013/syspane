@@ -4,7 +4,7 @@ from datetime import datetime,timezone
 import ctypes as C
 import hashlib,json,os,select,signal,struct,subprocess,sys,time,uuid,zlib
 ROOT=Path(__file__).resolve().parents[2]
-sys.path[:0]=[str(ROOT/'tests/fault'),str(ROOT/'tests/desktop'),str(ROOT/'build-support')]
+sys.path[:0]=[str(ROOT/'tests/fault'),str(ROOT/'tests/desktop'),str(ROOT/'source/build')]
 from native_diagnostic import launch_xvfb
 from native_oracle import Display
 from check_surface_runtime import verify
@@ -53,7 +53,7 @@ def observe(exe,folder,mode):
     from gi.repository import Atspi,GLib
     Atspi.set_timeout(200,500);verify();folder.mkdir()
     report=dict(outcome='fail',mode=mode,observations=[],executable_sha256=sha(exe),oracle_sha256=sha(Path(__file__)),
-        fixture_sha256=sha(ROOT/'tests/scene/inspector-cases.json'),surface_runtime_sha256=sha(ROOT/'build-support/surface-runtime.json'),
+        fixture_sha256=sha(ROOT/'tests/scene/inspector-cases.json'),surface_runtime_sha256=sha(ROOT/'source/build/surface-runtime.json'),
         xtest_sha256=sha(Path('/usr/lib/x86_64-linux-gnu/libXtst.so.6')),worker_sha256=sha(exe.with_name('SysPane.ImageWorker')))
     err=(folder/'stderr').open('wb');proc=subprocess.Popen([str(exe),str(ROOT/'spec/fixtures/valid'),mode],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=err)
     keys=None;stage='startup';started=time.monotonic()

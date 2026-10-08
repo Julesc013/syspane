@@ -60,7 +60,7 @@ remain skipped. Historical compiler checks ran on contemporary Windows, not XP.
 
 Cleanup verified committed bytes before removing 24 duplicated native folders
 (439813107 bytes) and 23 duplicated attempt folders (40437806 bytes). The 7-GiB
-workspace bound is unchanged. Evidence is under build-support/evidence with prefix
+workspace bound is unchanged. Evidence is under out/evidence with prefix
 w-10-theme-authoring (attempts, native-index, verification, staging), plus
 theme-authoring-handoff.json.
 

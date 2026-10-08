@@ -80,7 +80,7 @@ preflight completed before its corresponding native launch. No workspace allocat
 or product resource limit changed in this checkpoint.
 
 Nine native attempts, original source ZIPs and eight raw composition journals are
-preserved under `build-support/evidence/w-05-gnome-composition-*`. The successful
+preserved under `out/evidence/w-05-gnome-composition-*`. The successful
 marker regression has no composition journal. Existing C++ binaries, build profiles
 and earlier CTest/smoke evidence retain their previous checkpoint identities; no
 unrelated C++ rebuild or product package qualification is claimed here.

@@ -3,7 +3,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 import copy, hashlib, json, subprocess, sys, uuid
 ROOT = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(ROOT / 'build-support'))
+sys.path.insert(0, str(ROOT / 'source/build'))
 from check_text_runtime import verify
 sha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
 
@@ -88,7 +88,7 @@ def main():
                 assert wrong!=expected,('all-body fault not detected',case)
         record['cases'].append(dict(case=case,scale=scale,contrast=contrast,outcome='pass'))
     try:
-        verify();record['runtime_identity_sha256']=sha(ROOT/'build-support/text-runtime.json')
+        verify();record['runtime_identity_sha256']=sha(ROOT/'source/build/text-runtime.json')
         for case in fixed['cases']: check(case)
         check('table')
         for contrast in ('light','dark'): check('value',contrast=contrast);check('table',contrast=contrast)

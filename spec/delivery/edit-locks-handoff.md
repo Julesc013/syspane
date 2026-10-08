@@ -65,10 +65,10 @@ this time while focusing Undo after the drag. The original failures, diagnostic
 runs and failed full-suite rerun remain separate records. No production or
 acceptance change was made to hide the failure; this checkpoint is not qualified.
 
-Records: `build-support/evidence/w-10-edit-locks-attempts.json`,
+Records: `out/evidence/w-10-edit-locks-attempts.json`,
 `w-10-edit-locks-native-index.json`, `w-10-edit-locks-verification.json`,
 `w-10-edit-locks-staging.json`, `w-10-edit-locks-focus.json` and
-`build-support/evidence/edit-locks-handoff.json`.
+`out/evidence/edit-locks-handoff.json`.
 Exact source archives, input identities, executable identities and failed/successful
 native observations are preserved. Cleanup removed only duplicates verified against
 committed archives, within the unchanged workspace bound.

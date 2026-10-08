@@ -50,7 +50,7 @@ acceptance criteria were preserved.
 
 ## Evidence
 
-`build-support/evidence/w-04-historical-build.json` binds the exact source/profile,
+`out/evidence/w-04-historical-build.json` binds the exact source/profile,
 five executable identities, actual linker inputs, all 51 cases and relocated smoke.
 The raw CTest log and smoke record are adjacent. Modern regression records use the
 `w-04-regression-` prefix; their captured native reports remain separately scoped.

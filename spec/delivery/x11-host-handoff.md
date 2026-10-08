@@ -61,7 +61,7 @@ All 54 existing CTest entries pass, preserving the model, IPC, recovery, diagnos
 and oracle calibrations. Windows remains revision 7; configure and the two affected
 component graph checks pass. Its earlier 53-entry full run remains historical.
 
-`build-support/evidence/w-05-x11-experiment.json` binds the final native reports and
+`out/evidence/w-05-x11-experiment.json` binds the final native reports and
 extracted dependency identity. The recorder recomputes temporal verdicts and icon
 concealment from raw RGB bytes, and verifies exact source/artifact/runtime digests,
 named-action states, wallpaper scope and cleanup. It never converts experiment

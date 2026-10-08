@@ -70,9 +70,9 @@ the product-pass count. Production bytes match the baseline, whose 132 affected
 checks per development toolchain remain the portable evidence. No new Windows
 runtime or historical qualification is claimed.
 
-Records: `build-support/evidence/w-10-modal-focus-attempts.json`,
+Records: `out/evidence/w-10-modal-focus-attempts.json`,
 `w-10-modal-focus-native-index.json`, `w-10-modal-focus-verification.json`,
-`w-10-modal-focus-staging.json` and `build-support/evidence/keyboard-input-handoff.json`.
+`w-10-modal-focus-staging.json` and `out/evidence/keyboard-input-handoff.json`.
 They preserve every attempt, frozen package/inputs, exact diagnostic scripts,
 native traces, source snapshots, executable identities and specification checks.
 Twenty-one duplicate native folders were reclaimed only after verifying their

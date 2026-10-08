@@ -45,8 +45,8 @@ suite remains Windows 10/WOW64 execution, not XP/7 guest qualification. The loca
 model smoke archives pass relocated execution on all three profiles; they do not
 include or qualify a complete desktop product.
 
-Evidence records use `build-support/evidence/w-25-gjs-clock-`; the machine handoff
-is `build-support/evidence/gjs-clock-handoff.json`. They bind original commands,
+Evidence records use `out/evidence/w-25-gjs-clock-`; the machine handoff
+is `out/evidence/gjs-clock-handoff.json`. They bind original commands,
 source archives, native reports, library/typelib identities, complete CTest logs and
 smoke artifacts. Synthetic clock observations contain no network payload or desktop
 capture. Prior native desktop evidence retains its original source/artifact identity.

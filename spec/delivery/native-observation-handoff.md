@@ -73,11 +73,11 @@ identical to the previous checkpoint; no new Windows or historical execution cla
 is made. Schema/fixture, specification-tool and integrity results are recorded
 separately from native evidence.
 
-Records: `build-support/evidence/w-10-native-observation-attempts.json`,
-`build-support/evidence/w-10-native-observation-native-index.json`,
-`build-support/evidence/w-10-native-observation-verification.json`,
-`build-support/evidence/w-10-native-observation-staging.json` and
-`build-support/evidence/native-observation-handoff.json`. Source archives retain
+Records: `out/evidence/w-10-native-observation-attempts.json`,
+`out/evidence/w-10-native-observation-native-index.json`,
+`out/evidence/w-10-native-observation-verification.json`,
+`out/evidence/w-10-native-observation-staging.json` and
+`out/evidence/native-observation-handoff.json`. Source archives retain
 each original attempt and frozen product/calibration inputs. Twenty duplicate native
 folders (246,621,430 bytes) were removed only after matching their already committed
 creation-checkpoint archives. The existing 7 GiB output budget remains in force.

@@ -51,13 +51,13 @@ the distribution's default root identity is not needed for building.
 The initial allocation was 1 GiB. The subscription checkpoint measured 1,108,437,093
 bytes after expanding all three debug/toolset builds; that overrun is preserved,
 not described as compliance with the old ceiling. That checkpoint raised the allocation to 2 GiB
-combined, recorded in `build-support/campaign-workspace.json`. This is a reversible
+combined, recorded in `source/build/campaign-workspace.json`. This is a reversible
 development-workspace allocation within the admitted campaign, not a product memory
 limit or relaxed acceptance condition. The checkout drive had 68,639,891,456 free
 bytes at this decision. Retain the exact debug artifacts and original evidence.
 
 Before each build, test or package launch, run the Windows coordinator
-`python build-support/check_workspace_budget.py --action build|test|package` with
+`python source/build/check_workspace_budget.py --action build|test|package` with
 one action selected. It reserves respectively 256, 64 or 32 MiB of growth under
 the combined ceiling; inspect again afterward. Stop on a failed check and preserve
 it before archiving verified owned outputs or explicitly revising the allocation.
@@ -147,7 +147,7 @@ invalidates interval calculation. UTC does not determine elapsed intervals.
 
 Target recipes select actual installed Windows GCC 15.2 and Linux GCC 13.3 tools.
 No downloaded dependency or external native library is needed for this package.
-Exact tool/runtime fingerprints and declared flags are in `build-support/targets/`.
+Exact tool/runtime fingerprints and declared flags are in `source/build/targets/`.
 The Windows profile targets this Windows 10 x64 host; the Linux profile targets
 Ubuntu 24.04 x64 under WSL. Neither is a desktop-host or historical support claim.
 

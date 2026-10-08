@@ -7,7 +7,7 @@ import unittest
 from unittest.mock import patch
 
 ROOT=Path(__file__).resolve().parents[2]
-sys.path.insert(0,str(ROOT/'build-support'))
+sys.path.insert(0,str(ROOT/'source/build'))
 from record_gnome_shell_recovery import validate
 from record_gnome_host import validate_runtime
 from gnome_shell_recovery import judge

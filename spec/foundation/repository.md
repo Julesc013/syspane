@@ -31,7 +31,6 @@ syspane/
   resources/             Native resources and translations
   configuration/         Shipped product scenes, themes and profiles
   sdk/                   Consumer examples and packaging, not duplicate implementations
-  build-support/         Toolchains and product build adapters
   packaging/             Portable and managed packaging
   tools/                 Product developer utilities, only when needed
   .aide/                 Admitted control records/binding; not a copied AIDE engine
@@ -49,6 +48,21 @@ Do not mirror private headers into `include/`. Do not split all code into arbitr
 ## Build outputs and assets
 
 Ignore `out/`, local caches, `.aide.local/`, private recordings and `dist/`; do not commit release binaries. Tests needing a large artifact record a digest and retrieval method, not a volatile machine path. Imported assets need provenance and redistribution review. Do not copy font files into this specification archive.
+
+Shared build scripts, dependency locks, component manifests and target profiles live
+under `source/build/`. The user retired the root build-support directory on
+2026-10-08; it must not return to the remote tree. Machine bindings belong in
+`out/campaign/workspace.json`, populated from the versioned example. Generated logs,
+source snapshots, native recordings and archived evidence belong in ignored
+`out/evidence/` or other owned `out/` subtrees, never in the source tree.
+
+Keep compact checkpoint summaries, test commands and limitations in `spec/delivery/`.
+Historical evidence locators describe local archives, not portable repository links.
+A fresh checkout must build and run deterministic tests without those archives;
+native qualification produces its own source-bound prerequisite records. Preserve
+existing failures locally when relocating records. The active workspace allowance
+continues to exclude archived evidence, as it did before the location change;
+report retained archive bytes separately rather than silently enlarging the quota.
 
 ## Branches and history
 

@@ -58,8 +58,8 @@ comparison against unchanged committed evidence; the unexpected empty attempt
 remains untouched. The reservation then passed and the historical checks resumed.
 Both reclamation audits and the original preflight stop are preserved.
 
-Evidence is indexed in `build-support/evidence/w-09-layout-attempts.json`; the
-machine handoff is `build-support/evidence/layout-handoff.json`. Final staged input
+Evidence is indexed in `out/evidence/w-09-layout-attempts.json`; the
+machine handoff is `out/evidence/layout-handoff.json`. Final staged input
 hashes bind all three full runs and the fixed expected cases to this checkpoint.
 
 ## Remaining boundary

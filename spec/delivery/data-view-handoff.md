@@ -65,7 +65,7 @@ previous native placement and preservation failures remain preserved separately.
 All three profiles receive a fresh relocated unsigned model smoke package. The
 package smoke covers the model executable, not a packaged data-view application or
 desktop edition. Evidence is recorded in
-`build-support/evidence/w-25-data-view-<profile>.json`, adjacent CTest/native records
+`out/evidence/w-25-data-view-<profile>.json`, adjacent CTest/native records
 and `.smoke.json` results. `w-25-data-view-attempts.json` binds source archives and
 command attempts; `w-25-data-view-verification.json` records specification checks.
 `data-view-handoff.json` is the machine-readable continuation record. Source

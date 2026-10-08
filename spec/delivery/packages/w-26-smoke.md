@@ -20,9 +20,9 @@ profile. The first artifact is explicitly `model-development`, not a desktop
 edition, installer or public release. The campaign admits local creation and
 execution; publication, signing and privileged installation remain excluded.
 
-The recipe is `build-support/package_smoke.py --profile <profile> --build-dir
+The recipe is `source/build/package_smoke.py --profile <profile> --build-dir
 <owned-build-root>`, run through an available Python 3.11+ interpreter from the
-repository root. `build-support/targets/README.md` supplies exact profile commands.
+repository root. `source/build/targets/README.md` supplies exact profile commands.
 The Linux shell wrapper avoids forwarding nested variable expansion through WSL.
 
 The ZIP contains exactly one component-owned executable under `bin/`, plus

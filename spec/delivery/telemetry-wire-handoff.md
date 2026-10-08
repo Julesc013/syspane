@@ -53,7 +53,7 @@ The package links the API reference and keeps actual XP/7 execution unqualified.
 
 ## Evidence and workspace
 
-Records are `build-support/evidence/w-25-telemetry-wire-<profile>.json` with adjacent
+Records are `out/evidence/w-25-telemetry-wire-<profile>.json` with adjacent
 native reports, CTest logs and smoke results. `telemetry-original-import-failure.json`
 preserves the initial executable/import identities. `w-25-telemetry-wire-attempts.json`
 binds command output and source archives; `w-25-telemetry-wire-verification.json`

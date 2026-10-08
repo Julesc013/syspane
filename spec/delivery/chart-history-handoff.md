@@ -40,7 +40,7 @@ existing scalar/table native component families. The historical profile runs its
 PE/import and rejection controls on the modern Windows host. These are selected
 regressions, not reruns of the entire product suite or historical OS qualification.
 
-`build-support/evidence/w-09-chart-history-attempts.json` binds archived inputs,
+`out/evidence/w-09-chart-history-attempts.json` binds archived inputs,
 actual commands, failures, final executable hashes and CTest logs. The separate
 verification/staging records cover specification integrity, unchanged older
 contracts and the exact committed source inputs. No older scene schema, fixture,

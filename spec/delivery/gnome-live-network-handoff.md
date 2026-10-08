@@ -66,8 +66,8 @@ checks. Its rejected transcript and original verifier are preserved. A separate
 coordinator exit-code expectation for observation mode was corrected; the native
 report and independent focus oracle were unchanged. Default focus still fails.
 
-Public evidence uses `build-support/evidence/w-25-gnome-live-network-`; the machine
-handoff is `build-support/evidence/gnome-live-network-handoff.json`. Twenty-eight
+Public evidence uses `out/evidence/w-25-gnome-live-network-`; the machine
+handoff is `out/evidence/gnome-live-network-handoff.json`. Twenty-eight
 native attempts include the first failed live run, the final nine network cases
 and eighteen regressions. Source archives, public journals, original verifier
 history and private artifact hashes make each result independently traceable.

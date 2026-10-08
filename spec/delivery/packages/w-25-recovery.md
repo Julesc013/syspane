@@ -172,7 +172,7 @@ using the developer commands in `docs/developers/build.md`.
 Expected new outputs are `libsyspane_recovery.a`, `syspane_recovery_tests` (plus
 `.exe` on Windows), component graph and CTest case results. A bad/unknown case exits
 nonzero. Keep source/artifact/profile digests, exact commands, logs and failures in
-the existing `build-support/evidence/` ownership. Profile qualification stays at the
+the existing `out/evidence/` ownership. Profile qualification stays at the
 observed development environment; no older target floor is inferred.
 
 W-25 remains in progress until native producer freeze/crash and renderer stall

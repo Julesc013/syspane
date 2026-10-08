@@ -59,7 +59,7 @@ source snapshots precede later desktop-observer corrections, which are separatel
 bound by the native matrix archives. No compiled or GJS implementation changed
 after these suites. The first Linux suite also passed before the activation-latch
 correction; its original source snapshot remains distinct. Public evidence uses
-`build-support/evidence/w-25-gnome-controller-recovery-`; original operational
+`out/evidence/w-25-gnome-controller-recovery-`; original operational
 journals and crops stay private in their owned native attempt directories.
 The existing GNOME live render-watch case also revalidates on the rebuilt artifacts;
 both development model packages pass relocated smoke execution. These regression

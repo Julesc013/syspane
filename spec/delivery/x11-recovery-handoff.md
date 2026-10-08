@@ -56,7 +56,7 @@ evidence checks are also rerun against the changed harness. Specification checks
 and exact source/artifact/journal/runtime identities accompany the handoff.
 
 The native report, verification and attempts records are under
-`build-support/evidence/w-05-shell-recovery-*`. This is additional optional laboratory
+`out/evidence/w-05-shell-recovery-*`. This is additional optional laboratory
 evidence; the preceding 96/101/88 CTest results and model smoke packages belong to
 their recorded collector checkpoint, not a new run or product qualification here.
 

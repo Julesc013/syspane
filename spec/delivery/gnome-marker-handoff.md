@@ -78,7 +78,7 @@ also makes the in-process isolation limit explicit. No foreign installation path
 shell binary or acceptance oracle was patched to obtain the working result.
 
 Eleven native attempts, including preliminary successes, six failures and the final
-three controls, are preserved under `build-support/evidence/w-05-gnome-*`, with their
+three controls, are preserved under `out/evidence/w-05-gnome-*`, with their
 original source ZIPs committed beside the records. The source archive never contains
 display authorization cookies. The previous C++ CTest/smoke results retain their own
 checkpoint identity; those suites were not rerun for this optional shell experiment.

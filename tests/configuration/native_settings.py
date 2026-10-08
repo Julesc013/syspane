@@ -4,7 +4,7 @@ from datetime import datetime,timezone
 import ctypes as C
 import copy,hashlib,json,os,queue,signal,struct,subprocess,sys,threading,time,uuid,zlib
 ROOT=Path(__file__).resolve().parents[2]
-sys.path[:0]=[str(ROOT/'tests/fault'),str(ROOT/'tests/desktop'),str(ROOT/'build-support')]
+sys.path[:0]=[str(ROOT/'tests/fault'),str(ROOT/'tests/desktop'),str(ROOT/'source/build')]
 from native_diagnostic import launch_xvfb
 from native_oracle import Display
 from check_surface_runtime import verify
@@ -90,7 +90,7 @@ def observe(exe,folder,mode):
     resource=mode.startswith('resource-');behavior=mode[9:] if resource else mode
     directory=folder/'store';directory.mkdir(mode=0o700)
     assert subprocess.check_output(['findmnt','--target',str(directory),'--noheadings','--output','FSTYPE'],text=True).strip()=='ext4'
-    report=dict(outcome='fail',mode=mode,events=[],observations=[],executable_sha256=sha(exe),oracle_sha256=sha(Path(__file__)),fixture_sha256=sha(ROOT/'tests/configuration/settings-cases.json'),surface_runtime_sha256=sha(ROOT/'build-support/surface-runtime.json'),xtest_sha256=sha(Path('/usr/lib/x86_64-linux-gnu/libXtst.so.6')))
+    report=dict(outcome='fail',mode=mode,events=[],observations=[],executable_sha256=sha(exe),oracle_sha256=sha(Path(__file__)),fixture_sha256=sha(ROOT/'tests/configuration/settings-cases.json'),surface_runtime_sha256=sha(ROOT/'source/build/surface-runtime.json'),xtest_sha256=sha(Path('/usr/lib/x86_64-linux-gnu/libXtst.so.6')))
     if resource:report.update(resource_fixture_sha256=sha(ROOT/'tests/configuration/settings-content-fixture.json'),resource_cases_sha256=sha(ROOT/'tests/configuration/settings-content-cases.json'))
     err=(folder/'stderr').open('wb');proc=None;keys=None;stage='startup';events=queue.Queue();inbox=[]
     def launch(which):

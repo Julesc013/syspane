@@ -58,7 +58,7 @@ Windows development profile revision 16 pins `libiphlpapi.a` through lock revisi
 3; Linux is revision 17. Native network targets remain absent from historical x86
 revision 8. Existing historical host/import checks remain distinct from XP/7 tests.
 
-Per-profile `build-support/evidence/w-25-network-acquisition-*.json`, attempts and
+Per-profile `out/evidence/w-25-network-acquisition-*.json`, attempts and
 verification records identify the actual runs, artifacts and source hashes. Public
 native-network evidence includes case outcomes and comparison counts, with no
 native keys or counter values. Failed raw exchanges, if any, are retained only in

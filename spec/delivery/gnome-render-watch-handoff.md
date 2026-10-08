@@ -53,7 +53,7 @@ suite and smoke keep their original identity. Thirty-five adversarial render
 evidence checks reject missing drawing/paint, false completion, erased/rebased
 faults, missing process exits, retained pixels and forged success.
 
-Public evidence uses `build-support/evidence/w-25-gnome-render-watch-*`;
+Public evidence uses `out/evidence/w-25-gnome-render-watch-*`;
 `render-calibration.json` verifies the eight current native reports, and
 `compiled-attempts.json` preserves builds, full suites and smoke invocations.
 The attempt index retains earlier sources and failed outcomes. Operational

@@ -47,8 +47,8 @@ needs the existing content-aware command contract before this form can control i
 ## Evidence and corrections
 
 The source-bound attempt index is
-`build-support/evidence/w-11-native-settings-attempts.json`; the machine handoff is
-`build-support/evidence/native-settings-handoff.json`. Configure/build/test records
+`out/evidence/w-11-native-settings-attempts.json`; the machine handoff is
+`out/evidence/native-settings-handoff.json`. Configure/build/test records
 retain exact source archives, commands, artifacts and CTest logs. The eleven portable
 draft families accompany affected authored, policy and component-dependency checks
 on Linux and both Windows development toolchains. Historical-toolset execution on

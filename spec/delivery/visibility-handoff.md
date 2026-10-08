@@ -64,9 +64,9 @@ the line split and explicit container construction. The package's provisional
 generated timestamp was corrected to its actual preimplementation freeze time;
 the frozen original and correction record are retained, with no contract-body change.
 
-Records: `build-support/evidence/w-09-visibility-attempts.json`,
+Records: `out/evidence/w-09-visibility-attempts.json`,
 `w-09-visibility-native-index.json`, `w-09-visibility-verification.json`,
-`w-09-visibility-staging.json` and `build-support/evidence/visibility-handoff.json`.
+`w-09-visibility-staging.json` and `out/evidence/visibility-handoff.json`.
 They bind original inputs, exact source archives, commands, logs and artifact
 identities. The workspace maximum is unchanged. Cleanup verified twelve duplicate
 native folders against the prior commit before reclaiming 345,440,527 file bytes.

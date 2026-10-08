@@ -52,10 +52,10 @@ The original source and failed public report remain preserved. The final full ru
 passes all eight collector, five demand-executor and five consumer-continuity cases
 with their original oracle files unchanged.
 
-`build-support/evidence/w-07-session-demand-attempts.json` indexes attempts, archives,
+`out/evidence/w-07-session-demand-attempts.json` indexes attempts, archives,
 artifact identities, public native reports and the historical audit. Specification
-checks are in `build-support/evidence/w-07-session-demand-verification.json`; the
-machine handoff is `build-support/evidence/session-demand-handoff.json`. Operational
+checks are in `out/evidence/w-07-session-demand-verification.json`; the
+machine handoff is `out/evidence/session-demand-handoff.json`. Operational
 continuity journals remain ignored; public projections retain outcomes/counts and
 the original private record hashes. No real-user desktop, VM or protected policy
 was changed, and no release was published.

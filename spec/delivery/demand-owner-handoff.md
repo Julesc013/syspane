@@ -55,11 +55,11 @@ of delivery-history size, with an added exact-limit/one-character-short boundary
 The tool still rejects insufficient budgets without truncating mandatory content.
 The network-context example now supplies an explicit sufficient budget.
 
-Evidence is indexed in `build-support/evidence/w-07-demand-owner-attempts.json`,
+Evidence is indexed in `out/evidence/w-07-demand-owner-attempts.json`,
 including commands, source archives, target records, executable/library hashes and
 the historical import audit. Specification/tooling/integrity results are in
-`build-support/evidence/w-07-demand-owner-verification.json`; the source-bound
-handoff is `build-support/evidence/demand-owner-handoff.json`.
+`out/evidence/w-07-demand-owner-verification.json`; the source-bound
+handoff is `out/evidence/demand-owner-handoff.json`.
 
 The user's expanded [0.1.0 objective](release-0.1.0.md) now requires full desktop
 releases for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X. It is recorded

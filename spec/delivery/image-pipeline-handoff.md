@@ -50,7 +50,7 @@ also runs existing native scalar/table/chart components, image worker/job famili
 recovery and transaction-supervision regressions. Contemporary Windows also runs
 native child recovery; the historical profile includes its PE/import controls on
 the modern host. Exact final counts and commands are in
-`build-support/evidence/w-09-image-pipeline-attempts.json`.
+`out/evidence/w-09-image-pipeline-attempts.json`.
 
 The decoder family contains 51 fixed native inputs plus OS restriction, wall-time
 and cancellation controls. It covers PNG color/alpha/palette/16-bit channels,

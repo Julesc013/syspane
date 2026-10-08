@@ -92,7 +92,7 @@ The original optional integration and default reveal/composition/marker regressi
 add 44 and 46 checks respectively, for **135 desktop verifier checks passed**.
 Their original positive/negative outcomes
 remain unchanged, including the failed default focus restoration. The final
-comparison is `build-support/evidence/w-05-gnome-focus-scenarios-calibration.json`;
+comparison is `out/evidence/w-05-gnome-focus-scenarios-calibration.json`;
 the same prefix preserves 13 current-base attempts, their exact source archives,
 54 raw journals and invocation/verification records. Owned process groups have no surviving
 members after cleanup.

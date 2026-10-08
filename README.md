@@ -3,9 +3,19 @@
 A native operational desktop for seeing host identity, network connections,
 resources and connected devices at a glance, without replacing your wallpaper.
 
+Shared build scripts, profiles and dependency locks live in
+[source/build](source/build/README.md). Build products, raw test recordings and
+machine-specific workspace settings stay in ignored `out/` directories.
+
 The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete native
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
+
+The [scene-fragment checkpoint](spec/delivery/scene-fragments-handoff.md) adds shared,
+policy-bound object copying and atomic paste with fresh IDs, exact resource pins
+and undo/reconciliation. Native clipboard transfers and controls remain disabled
+pending their bounded adapter and independent evidence. Recovery drafts, installed
+ownership and all five complete editions remain open.
 
 The [native font-controls checkpoint](spec/delivery/theme-controls-handoff.md) connects
 base and role fonts to the Linux editor's private controls, current draft preview,

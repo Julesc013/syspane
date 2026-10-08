@@ -12,6 +12,7 @@ editions and their release gates; foundation experiments alone cannot complete t
 
 ## Completed specification work
 
+- [x] Move shared build tooling into `source/build/`; remove the retired root and generated evidence from Git tracking, with machine settings and archives under ignored `out/`.
 - [x] Preserve the native architecture, one `source/` tree and Windows controller/surface isolation.
 - [x] Add the product README and user, operator and developer documentation.
 - [x] Define configuration precedence, policy, persistence and recovery contracts.
@@ -33,7 +34,9 @@ behaviour has been implemented. See [audit disposition](spec/delivery/audit-2026
 - [x] W-08 durable theme commands: exact command 0.8 negotiation, Linux generation 0.4/resource index 0.2, independent interrupted-write/replay/recovery checks and unchanged bounds. See the [handoff](spec/delivery/theme-commands-handoff.md).
 - [x] W-10 atomic theme history: shared immutable package allocations, bounded scene/resource undo/redo, exact command 0.8 Apply/reconcile/reload and independent Linux save/reopen checks. See the [handoff](spec/delivery/theme-history-handoff.md).
 - [x] W-10 native theme editing: base/role fonts, current draft resource preview, exact pixels/artifact save/reopen, lost-result recovery and private erasure under explicit trusted admission. See the [handoff](spec/delivery/theme-controls-handoff.md).
-- [ ] W-10 remaining delivery: close bounded clipboard/recovery-draft contracts and installed controller/catalog/policy ownership, then scene-aligned entry/restoration, full accessibility/performance and complete editions.
+- [x] W-10 shared scene fragments: explicit sensitive copy admission, revocable snapshot, exact forest/pin preservation, atomic paste and transaction reconciliation. See the [handoff](spec/delivery/scene-fragments-handoff.md).
+- [ ] W-10 native clipboard: bounded asynchronous custom-target transfer, late/cancel/revocation handling, explicit controls and independent requester/owner/save/reopen evidence. Existing native clipboard export stays disabled.
+- [ ] W-10 remaining delivery: recovery drafts and installed controller/catalog/policy ownership, scene-aligned entry/restoration, full accessibility/performance and complete editions.
 
 - [x] W-10 native visibility controls: private exact rule/source input, hidden-object selection, current held-gesture diagnostics and independent durable save/reopen/erasure checks. See the [handoff](spec/delivery/visibility-controls-handoff.md). Installed ownership and complete editions remain open.
 

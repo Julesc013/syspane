@@ -69,11 +69,11 @@ standalone specification bundle. Evidence is now identified by repository paths;
 the failed report and original document are preserved.
 
 Detailed attempts preserve source snapshots, binary identities, original failures,
-native records and frozen inputs. See the `build-support/evidence/w-10-widget-creation-attempts.json`,
-`build-support/evidence/w-10-widget-creation-native-index.json`,
-`build-support/evidence/w-10-widget-creation-verification.json`,
-`build-support/evidence/w-10-widget-creation-staging.json`
-and `build-support/evidence/widget-creation-handoff.json`.
+native records and frozen inputs. See the `out/evidence/w-10-widget-creation-attempts.json`,
+`out/evidence/w-10-widget-creation-native-index.json`,
+`out/evidence/w-10-widget-creation-verification.json`,
+`out/evidence/w-10-widget-creation-staging.json`
+and `out/evidence/widget-creation-handoff.json`.
 
 The existing 7 GiB output limit was retained. Fifteen duplicate native output
 directories (55,185,203 bytes) were removed only after exact files and links were

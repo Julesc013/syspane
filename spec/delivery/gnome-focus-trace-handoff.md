@@ -66,7 +66,7 @@ MRU selection cannot substitute for the restore decision.
 
 ## Verification and evidence identity
 
-`build-support/evidence/w-05-gnome-focus-trace-comparison.json` contains recomputed
+`out/evidence/w-05-gnome-focus-trace-comparison.json` contains recomputed
 native observations, pair comparisons, exact source/runtime identities and
 decision excerpts. Twenty-three evidence checks pass, covering handler count,
 window ownership, missing/ambiguous decisions, assignment/show events, late and
@@ -76,7 +76,7 @@ instrumentation differences. The comparison permits a native selection to
 disagree with the external result; it does not force the hypothesis to pass.
 
 Seven native attempts, seven source archives and 22 raw journals/event files/logs
-are preserved under `build-support/evidence/w-05-gnome-focus-trace-*`. The first
+are preserved under `out/evidence/w-05-gnome-focus-trace-*`. The first
 DING-only trace predates the package's explicit mouse/time association bounds;
 its source archive remains separate from the final six-case matrix. Successful
 completed budget preflights precede the native executions and verifier checks.

@@ -51,8 +51,8 @@ PE/header/import and actual linker-input audit. Specification checks and 56 tool
 tests pass, with two existing Windows symlink skips. This does not qualify execution
 on a historical OS.
 
-Evidence is indexed in `build-support/evidence/w-08-native-content-attempts.json`;
-the machine handoff is `build-support/evidence/native-content-handoff.json`.
+Evidence is indexed in `out/evidence/w-08-native-content-attempts.json`;
+the machine handoff is `out/evidence/native-content-handoff.json`.
 The initial native oracle syntax failure is preserved with its exact source archive;
 the correction separates function definitions without changing expected behavior.
 The next attempt exposed an overly narrow oracle for external SIGKILL observation:

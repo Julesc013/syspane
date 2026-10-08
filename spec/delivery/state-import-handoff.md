@@ -56,7 +56,7 @@ XP/7 guest or actual collector/renderer is exercised by these checks.
 
 ## Evidence and workspace
 
-Profile records are `build-support/evidence/w-25-state-import-<profile>.json`, with
+Profile records are `out/evidence/w-25-state-import-<profile>.json`, with
 adjacent CTest logs, native reports and smoke results. `w-25-state-import-attempts.json`
 binds command output, exact source archives and package identities.
 `w-25-state-import-verification.json` records specification/tooling checks;

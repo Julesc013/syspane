@@ -511,7 +511,7 @@ def main():
         raise ValueError('owned unprivileged Linux build required')
     lab = build / 'x11-lab'
     identity = json.loads((lab / 'identity.json').read_text(encoding='utf-8'))
-    if identity['lock_sha256'] != sha(ROOT / 'build-support/x11-lab-packages.json'):
+    if identity['lock_sha256'] != sha(ROOT / 'source/build/x11-lab-packages.json'):
         raise ValueError('prepared lab lock changed')
     sysroot = lab / 'sysroot'
     for name, digest in identity['files'].items():
@@ -522,11 +522,11 @@ def main():
     inputs = [Path(__file__), ROOT / 'tests/desktop/native_oracle.py', ROOT / 'tests/desktop/oracle.py',
               ROOT / 'tests/fault/native_diagnostic.py', ROOT / 'source/diagnostics/oracle_probe_x11.cpp',
               ROOT / 'source/desktop/x11/desktop_candidate.cpp', ROOT / 'source/desktop/x11/desktop_candidate.hpp',
-              ROOT / 'build-support/x11-lab-packages.json', ROOT / 'spec/delivery/packages/w-05-x11-investigation.md',
-              ROOT / 'tests/desktop/x11_input.py', ROOT / 'build-support/x11-input-runtime.json',
-              ROOT / 'build-support/record_x11_host.py', ROOT / 'tests/desktop/test_x11_record.py',
+              ROOT / 'source/build/x11-lab-packages.json', ROOT / 'spec/delivery/packages/w-05-x11-investigation.md',
+              ROOT / 'tests/desktop/x11_input.py', ROOT / 'source/build/x11-input-runtime.json',
+              ROOT / 'source/build/record_x11_host.py', ROOT / 'tests/desktop/test_x11_record.py',
               ROOT / 'tests/desktop/x11_recovery.py', ROOT / 'spec/delivery/packages/w-05-shell-recovery.md',
-              ROOT / 'build-support/x11-recovery-runtime.json', ROOT / 'tests/desktop/test_x11_recovery_record.py']
+              ROOT / 'source/build/x11-recovery-runtime.json', ROOT / 'tests/desktop/test_x11_recovery_record.py']
     report = {'family': 'X11-HOST-01', 'execution': 'failed', 'executed_at': datetime.now(timezone.utc).isoformat(),
               'profile': 'linux-x64-gcc13 / Openbox 3.6.1 / PCManFM 1.3.2 / owned Xvfb 800x600x24',
               'qualification': 'Bounded X11 candidate investigation; no production or other desktop support claim.',
@@ -544,7 +544,7 @@ def main():
     loader_environment = {**os.environ, 'LD_LIBRARY_PATH': str(sysroot / 'usr/lib/x86_64-linux-gnu')}
     binaries = [sysroot / 'usr/bin/openbox', sysroot / 'usr/bin/pcmanfm', build / 'SysPane.OracleProbe']
     if args.restart_window_manager:
-        runtime = json.loads((ROOT / 'build-support/x11-recovery-runtime.json').read_text(encoding='utf-8'))
+        runtime = json.loads((ROOT / 'source/build/x11-recovery-runtime.json').read_text(encoding='utf-8'))
         versions = dict(line.split('\t') for line in subprocess.check_output(['dpkg-query', '-W', *runtime['packages']], text=True, timeout=3).splitlines())
         if versions != runtime['packages'] or any(sha(Path(p)) != digest for p, digest in runtime['files'].items()):
             raise ValueError('optional native recovery runtime differs from its pinned identity')
@@ -552,7 +552,7 @@ def main():
         report['system_binaries'].update(runtime['files'])
         binaries.extend(Path(p) for p in runtime['files'])
     if args.icon_input:
-        runtime = json.loads((ROOT / 'build-support/x11-input-runtime.json').read_text(encoding='utf-8'))
+        runtime = json.loads((ROOT / 'source/build/x11-input-runtime.json').read_text(encoding='utf-8'))
         versions = dict(line.split('\t') for line in subprocess.check_output(
             ['dpkg-query', '-W', *runtime['packages']], text=True, timeout=3).splitlines())
         if versions != runtime['packages'] or any(sha(Path(p)) != digest for p, digest in runtime['files'].items()):

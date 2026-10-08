@@ -22,7 +22,7 @@ LOCKS = ''.join('/org/gnome/desktop/background/' + key + '\n' for key in KEYS)
 def prepare(workspace, environment, build, mode):
     from prepare_gnome_lab import inventory, sha
     runtime = build / 'gnome-policy-runtime'
-    lock_path = ROOT / 'build-support/gnome-policy-runtime.json'
+    lock_path = ROOT / 'source/build/gnome-policy-runtime.json'
     lock = json.loads(lock_path.read_text())
     identity = json.loads((runtime / 'identity.json').read_text())
     if identity['lock_sha256'] != sha(lock_path) or identity['files'] != inventory(runtime / 'sysroot'):

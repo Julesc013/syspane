@@ -246,7 +246,7 @@ Use the existing Windows/Linux development configure/build/CTest commands in the
 W-01 package. New cases use the `protocol.` CTest prefix. The model cases must still
 pass. The vendored JSON dependency must have a fixed version, upstream identity,
 license and verified digest; builds do not fetch it. Register targets and dependency
-edges in `build-support/components.json`, and record new source/artifact hashes and
+edges in `source/build/components.json`, and record new source/artifact hashes and
 actual case results without overwriting historical W-01 evidence.
 
 | Case | Fixed observable expectation |

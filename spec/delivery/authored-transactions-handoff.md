@@ -75,10 +75,10 @@ All sixteen historical executables then pass PE/header/import and pinned actual
 SDK/static-CRT input checks; rejection mutations remain passing. These checks and
 host execution do not prove exports or behavior on an XP, 9x or older NT guest.
 
-`build-support/evidence/w-08-authored-attempts.json` indexes archives, native reports,
+`out/evidence/w-08-authored-attempts.json` indexes archives, native reports,
 artifact identities, original failures and the historical audit. Specification/tool
-checks are in `build-support/evidence/w-08-authored-verification.json`; the machine
-handoff is `build-support/evidence/authored-transactions-handoff.json`. All native
+checks are in `out/evidence/w-08-authored-verification.json`; the machine
+handoff is `out/evidence/authored-transactions-handoff.json`. All native
 documents in this experiment are synthetic. No installed configuration, real-user
 desktop, VM or protected policy was modified, and no release was published.
 

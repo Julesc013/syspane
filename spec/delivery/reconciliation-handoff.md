@@ -64,8 +64,8 @@ requiring identical implementation, schemas, fixtures, package and oracle inputs
 The original audit failure and helper are preserved. No product test failed or
 acceptance expectation changed during this checkpoint.
 
-Verification is recorded in `build-support/evidence/w-08-reconciliation-attempts.json`;
-the machine handoff is `build-support/evidence/reconciliation-handoff.json`.
+Verification is recorded in `out/evidence/w-08-reconciliation-attempts.json`;
+the machine handoff is `out/evidence/reconciliation-handoff.json`.
 The attempt index binds source archives, native reports and compiled artifacts.
 Specification/tool and staged-byte checks use the same evidence prefix.
 

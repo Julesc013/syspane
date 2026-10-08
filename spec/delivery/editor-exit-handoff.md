@@ -54,13 +54,13 @@ checks pass; no Windows native source changed and no Windows editor qualificatio
 follows.
 
 Evidence is indexed in
-`build-support/evidence/w-25-editor-exit-attempts.json`.
+`out/evidence/w-25-editor-exit-attempts.json`.
 Current independent checks are in
-`build-support/evidence/w-25-editor-exit-evidence-check.json`;
+`out/evidence/w-25-editor-exit-evidence-check.json`;
 the source-bound handoff is
-`build-support/evidence/editor-exit-handoff.json`.
+`out/evidence/editor-exit-handoff.json`.
 Specification generation, schemas/fixtures, tooling and integrity outcomes are in
-`build-support/evidence/w-25-editor-exit-verification.json`.
+`out/evidence/w-25-editor-exit-verification.json`.
 
 W-25 remains in progress. This public-pixel candidate uses owned Xvfb and a reserved
 recovery strip. It does not implement the scene editor, fullscreen escape discovery

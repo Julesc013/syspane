@@ -249,3 +249,11 @@ Private implementation differences are permissible. Missing laboratories remain
 blocked qualification. A finite release scope must identify exact profiles,
 capabilities, packages, document versions, mandatory tests and deferred work before
 claiming completion; the full product direction remains in the campaign.
+
+
+The [scene-fragment checkpoint](scene-fragments-handoff.md) closes shared authored
+copy/paste semantics, resource/ID preservation and policy-bound lifetime. It does
+not admit native clipboard controls. The next package must close bounded native
+transfer before allocation, outgoing per-chunk permission checks, cancellation and
+late responses, then exercise independent requester/owner and save/reopen cases.
+Recovery drafts and installed ownership remain separate required boundaries.

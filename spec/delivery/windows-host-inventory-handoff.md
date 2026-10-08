@@ -35,11 +35,11 @@ duplicate hierarchy/handle, missing icons and disconnected parent chain. The nat
 child exited normally, and the parent independently recomputed its decision. Output
 contains no window titles, icon labels, user files or pixel capture.
 
-Evidence uses `build-support/evidence/w-03-windows-inventory-`. Both native attempts,
+Evidence uses `out/evidence/w-03-windows-inventory-`. Both native attempts,
 execution/preflight records and source snapshots remain. The first run also passed;
 the final source avoids resolving an arbitrary custom shell image path and corrects
 the package authoring timestamp. Neither attempt is desktop-host acceptance. The
-machine handoff is `build-support/evidence/windows-host-inventory-handoff.json`.
+machine handoff is `out/evidence/windows-host-inventory-handoff.json`.
 
 ## Required continuation
 

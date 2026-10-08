@@ -50,7 +50,7 @@ Forty-six default reveal/composition/marker regression checks also pass, for
 **81 desktop verifier checks passed** in this checkpoint.
 The original default focus-restoration failure remains a failed acceptance result;
 its calibrated controls are not converted into product passes. The evidence prefix
-is `build-support/evidence/w-05-gnome-wallpaper-policy-`; raw journals, policy bytes,
+is `out/evidence/w-05-gnome-wallpaper-policy-`; raw journals, policy bytes,
 source archives, runtime identities and execution records are retained there:
 eight attempts, 13 journals, 18 policy artifacts and two runtime artifacts.
 

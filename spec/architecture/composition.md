@@ -48,7 +48,7 @@ own authored changes; projection consumes accepted state; hosts own placement.
 Composition roots select concrete adapters. Use in-memory typed structures inside a
 process; serialize only at interchange boundaries. Private headers stay with owners.
 
-Before source targets are admitted, a component manifest under `build-support/`
+Before source targets are admitted, a component manifest under `source/build/`
 records ID, source owner, public/private interfaces, allowed dependencies, target
 requirements, role membership and installed-file owner. Explicit CMake targets and
 dependency checks enforce the graph. This is build metadata, not another build system.

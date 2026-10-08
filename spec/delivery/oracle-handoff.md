@@ -59,7 +59,7 @@ fixed portable marker/time cases. Linux additionally executes five native cases:
 | Occlude | A second owned test window obstructs the live marker | Pass only when observation fails |
 | Gap | Deliberately omitted capture exceeds the time-coverage budget | Pass only when observation is inconclusive |
 
-`build-support/evidence/w-02-oracle-<profile>.json` binds full regression case sets,
+`out/evidence/w-02-oracle-<profile>.json` binds full regression case sets,
 source/dependency/profile hashes, artifacts/imports and the exact reports named by
 CTest. Its `--oracle` recorder recomputes native observations from embedded frame
 bytes, verifies capture-journal identity and checks cleanup/root restoration. Native

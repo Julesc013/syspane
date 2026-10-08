@@ -20,36 +20,36 @@ from native_x11_host import DesktopDisplay, rgb_record
 from x11_recovery import ResourceOwner, manager_identity
 from oracle import evaluate, pack_frame
 
-sys.path.insert(0, str(ROOT / 'build-support'))
+sys.path.insert(0, str(ROOT / 'source/build'))
 from prepare_gnome_lab import owned_build, sha, inventory
 
-LIVE_BUILD_RECORD = 'build-support/evidence/w-25-controller-render-recovery-linux-x64-gcc13.json'
+LIVE_BUILD_RECORD = 'out/evidence/w-25-controller-render-recovery-linux-x64-gcc13.json'
 CONTROLLER_RENDER_MODES = ('render-stall','hidden','false-progress','shell-freeze','render-revoke')
 EDITOR_MODES = ('editor-key','editor-button','editor-owner-loss','editor-controller-freeze','editor-no-exit')
-EDITOR_BUILD_RECORD = 'build-support/evidence/w-25-gnome-editor-exit-native-build.json'
+EDITOR_BUILD_RECORD = 'out/evidence/w-25-gnome-editor-exit-native-build.json'
 
 SOURCES = ['tests/desktop/gnome_render_watch.py', 'spec/delivery/packages/w-25-gnome-render-watch.md',
-           'build-support/record_gnome_render_watch.py', 'tests/desktop/test_gnome_render_watch_record.py',
+           'source/build/record_gnome_render_watch.py', 'tests/desktop/test_gnome_render_watch_record.py',
            'source/desktop/gnome/native_health_view.cpp', 'source/desktop/gnome/native_health_view.hpp',
            'source/desktop/gnome/networkSession.js', 'source/desktop/gnome/lab-marker/networkLive.js',
            'tests/desktop/gnome_live_network.py', 'spec/delivery/packages/w-25-gnome-live-network.md',
-           'build-support/record_gnome_live_network.py', 'tests/desktop/test_gnome_live_network_record.py',
+           'source/build/record_gnome_live_network.py', 'tests/desktop/test_gnome_live_network_record.py',
            'tests/desktop/native_gnome_bootstrap.py', 'tests/desktop/native_oracle.py',
            'tests/desktop/native_x11_host.py', 'tests/desktop/x11_recovery.py',
            'tests/desktop/oracle.py', 'tests/fault/native_diagnostic.py',
-           'build-support/prepare_gnome_lab.py', 'build-support/gnome-lab-packages.json',
+           'source/build/prepare_gnome_lab.py', 'source/build/gnome-lab-packages.json',
            'spec/delivery/packages/w-05-gnome-investigation.md',
            'source/desktop/gnome/lab-marker/extension.js', 'source/desktop/gnome/lab-marker/metadata.json',
            'spec/delivery/packages/w-05-gnome-composition.md', 'tests/desktop/gnome_composition.py',
            'tests/desktop/fixtures/gnome-composition.json', 'tests/desktop/fixtures/gnome-composition-0.2.json',
-           'build-support/record_gnome_host.py', 'spec/delivery/packages/w-05-gnome-reveal.md',
+           'source/build/record_gnome_host.py', 'spec/delivery/packages/w-05-gnome-reveal.md',
            'tests/desktop/gnome_reveal.py', 'tests/desktop/gnome_foreground.py',
            'tests/desktop/fixtures/gnome-reveal.json', 'tests/desktop/gnome_focus_baseline.py',
            'spec/delivery/packages/w-05-gnome-focus-baseline.md',
            'spec/delivery/packages/w-05-gnome-focus-trace.md',
            'spec/delivery/packages/w-05-gnome-input.md', 'tests/desktop/gnome_input.py',
-           'tests/desktop/x11_input.py', 'build-support/x11-input-runtime.json',
-           'build-support/x11-lab-packages.json', 'tests/desktop/gnome_wallpaper.py',
+           'tests/desktop/x11_input.py', 'source/build/x11-input-runtime.json',
+           'source/build/x11-lab-packages.json', 'tests/desktop/gnome_wallpaper.py',
            'tests/desktop/fixtures/gnome-wallpaper.json', 'spec/delivery/packages/w-05-gnome-wallpaper.md',
            'tests/desktop/gnome_switcher.py', 'tests/desktop/gnome_switcher_app.py',
            'tests/desktop/fixtures/gnome-switcher.json', 'spec/delivery/packages/w-05-gnome-switcher.md',
@@ -58,19 +58,19 @@ SOURCES = ['tests/desktop/gnome_render_watch.py', 'spec/delivery/packages/w-25-g
            'tests/desktop/gnome_focus_integration.py', 'spec/delivery/packages/w-05-gnome-focus-integration.md',
            'tests/desktop/gnome_focus_scenarios.py', 'tests/desktop/gnome_focus_controls.py',
            'spec/delivery/packages/w-05-gnome-focus-scenarios.md',
-           'tests/desktop/gnome_wallpaper_policy.py', 'build-support/gnome-policy-runtime.json',
-           'build-support/prepare_gnome_policy.py', 'spec/delivery/packages/w-05-gnome-wallpaper-policy.md',
+           'tests/desktop/gnome_wallpaper_policy.py', 'source/build/gnome-policy-runtime.json',
+           'source/build/prepare_gnome_policy.py', 'spec/delivery/packages/w-05-gnome-wallpaper-policy.md',
            'source/desktop/gnome/lab-marker/surfaceLease.js', 'tests/desktop/gnome_lease_producer.py',
            'tests/desktop/gnome_surface_lease.py', 'spec/delivery/packages/w-25-gnome-surface-lease.md',
            'source/desktop/gnome/lab-marker/networkCache.js', 'tests/desktop/gnome_network_relay.py',
            'tests/desktop/gnome_network_cache.py', 'spec/delivery/packages/w-25-native-network-cache.md',
            'tests/protocol/native_collector.py', 'tests/protocol/native_network.py', 'tests/protocol/native_ipc.py',
-           'tests/fault/native_recovery.py', 'build-support/record_gnome_network_cache.py',
+           'tests/fault/native_recovery.py', 'source/build/record_gnome_network_cache.py',
            'tests/desktop/test_gnome_network_cache_record.py',
            'source/desktop/gnome/lab-marker/clockExperiment.js', 'tests/desktop/gnome_clock_peer.py',
            'tests/desktop/gnome_clock_age.py', 'spec/delivery/packages/w-25-gnome-clock.md',
            'source/desktop/gnome/native_clock.cpp', 'source/desktop/gnome/native_clock.hpp',
-           'source/desktop/gnome/SysPaneClock-0.1.gir', 'build-support/record_gnome_clock.py',
+           'source/desktop/gnome/SysPaneClock-0.1.gir', 'source/build/record_gnome_clock.py',
            'tests/desktop/test_gnome_clock_record.py']
 
 
@@ -250,11 +250,11 @@ def group_members(group):
 
 
 SOURCES += ['tests/desktop/gnome_controller_recovery.py', 'tests/desktop/test_gnome_controller_recovery_record.py',
-            'build-support/record_gnome_controller_recovery.py', 'build-support/record_gnome_composition.py',
+            'source/build/record_gnome_controller_recovery.py', 'source/build/record_gnome_composition.py',
             'tests/protocol/native_consumer_continuity.py', 'source/application/collector_probe.cpp',
             'spec/delivery/packages/w-25-gnome-controller-recovery.md', 'source/platform/child.hpp', 'source/platform/child_linux.cpp',
             'spec/delivery/packages/w-25-controller-render-recovery.md', 'source/diagnostics/health_link.cpp', 'source/diagnostics/health_link.hpp']
-SOURCES += ['tests/desktop/gnome_editor_exit.py', 'tests/desktop/test_gnome_editor_exit_record.py', 'build-support/record_gnome_editor_exit.py',
+SOURCES += ['tests/desktop/gnome_editor_exit.py', 'tests/desktop/test_gnome_editor_exit_record.py', 'source/build/record_gnome_editor_exit.py',
             'source/application/editor_exit_probe.cpp', 'source/interfaces/editor_exit_x11.cpp',
             'source/interfaces/editor_exit_x11.hpp', 'spec/delivery/packages/w-25-gnome-editor-exit.md']
 SOURCES = list(dict.fromkeys(SOURCES))
@@ -269,7 +269,7 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
     lab = build / 'gnome-lab'
     sysroot = lab / 'sysroot'
     identity = json.loads((lab / 'identity.json').read_text())
-    if identity['lock_sha256'] != sha(ROOT / 'build-support/gnome-lab-packages.json') or identity['files'] != inventory(sysroot):
+    if identity['lock_sha256'] != sha(ROOT / 'source/build/gnome-lab-packages.json') or identity['files'] != inventory(sysroot):
         raise ValueError('pinned GNOME runtime identity changed')
     evidence = build / 'native-evidence'
     evidence.mkdir(exist_ok=True)
@@ -486,7 +486,7 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
             environment['SYSPANE_GNOME_SHELL_RECOVERY'] = shell_recovery
         if switcher:
             import gnome_switcher
-            input_runtime = json.loads((ROOT / 'build-support/x11-input-runtime.json').read_text())
+            input_runtime = json.loads((ROOT / 'source/build/x11-input-runtime.json').read_text())
             if any(sha(Path(p)) != expected for p, expected in input_runtime['files'].items()):
                 raise ValueError('pinned accessibility runtime differs')
             report['input_runtime_files'] = input_runtime['files']
@@ -497,11 +497,11 @@ def run(build, marker=False, control='live', composition=None, reveal=None, focu
         if icon_input:
             x11 = build / 'x11-lab'
             x11_identity = json.loads((x11 / 'identity.json').read_text())
-            if x11_identity['lock_sha256'] != sha(ROOT / 'build-support/x11-lab-packages.json') or any(
+            if x11_identity['lock_sha256'] != sha(ROOT / 'source/build/x11-lab-packages.json') or any(
                     sha(x11 / 'sysroot' / p) != expected for p, expected in x11_identity['files'].items()):
                 raise ValueError('pinned folder runtime identity changed')
             report['folder_runtime_identity'] = {'path': str(x11 / 'identity.json'), 'sha256': sha(x11 / 'identity.json')}
-            input_runtime = json.loads((ROOT / 'build-support/x11-input-runtime.json').read_text())
+            input_runtime = json.loads((ROOT / 'source/build/x11-input-runtime.json').read_text())
             if any(sha(Path(p)) != expected for p, expected in input_runtime['files'].items()):
                 raise ValueError('pinned accessibility runtime differs')
             report['input_runtime_files'] = input_runtime['files']

@@ -51,14 +51,14 @@ dependency change, not inferred historical compatibility.
 
 ## Preserved evidence
 
-`build-support/evidence/w-25-measurement-clock-<profile>.json` binds complete suites
+`out/evidence/w-25-measurement-clock-<profile>.json` binds complete suites
 to source and artifact hashes. Adjacent native reports retain exact process output,
 native peer PIDs, causal counts, failures and cleanup. The attempts record preserves
 the failed link and successful retries, with original source archives in owned
 ignored output. Fresh model-only relocated smoke packages are recorded separately;
 the development probes are not distribution payloads.
 
-The machine handoff is `build-support/evidence/measurement-clock-handoff.json`;
+The machine handoff is `out/evidence/measurement-clock-handoff.json`;
 the verification and attempts records share the `w-25-measurement-clock-` prefix.
 Specification validation remains separate from product qualification. The current
 2 GiB combined workspace allocation and preflight reservations apply; no further

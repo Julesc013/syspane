@@ -1,4 +1,4 @@
-# Reconstructable local development state; source and evidence stay versioned.
+# Reconstructable machine-local state; shared tooling lives in source/build.
 .venv/
 __pycache__/
 *.py[cod]
@@ -6,9 +6,12 @@ __pycache__/
 .cache/
 .aide.local/
 out/
-build/
+/build/
 dist/
 coverage/
 CMakeUserPresets.json
 .DS_Store
 Thumbs.db
+
+# Retired root: never reintroduce shared tooling or generated archives here.
+/build-support/

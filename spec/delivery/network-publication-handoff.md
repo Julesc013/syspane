@@ -74,7 +74,7 @@ Profiles are Windows x64 revision 18, Linux x64 revision 19 and historical x86
 revision 10. The historical audit covers twelve executables on Windows 10/WOW64;
 it does not qualify XP/7 execution. Only Linux builds the native collector probe.
 All three relocated model smoke packages pass; their payload is still the development
-model. `build-support/evidence/w-25-network-publication-*.json`, preserved attempts,
+model. `out/evidence/w-25-network-publication-*.json`, preserved attempts,
 verification and the machine handoff identify exact source/package/artifact inputs.
 
 ## Next admitted work

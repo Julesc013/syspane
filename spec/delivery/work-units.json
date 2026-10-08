@@ -58,8 +58,8 @@
         "source/application/",
         "CMakeLists.txt",
         "CMakePresets.json",
-        "build-support/targets/",
-        "build-support/components.json",
+        "source/build/targets/",
+        "source/build/components.json",
         "tests/model/"
       ],
       "status": "complete",
@@ -161,7 +161,7 @@
         "T-WALLPAPER"
       ],
       "planned_outputs": [
-        "build-support/windows/",
+        "source/build/windows/",
         "source/desktop/windows/"
       ],
       "status": "in_progress",
@@ -409,7 +409,8 @@
         "SP-W10-THEME-OVERRIDES",
         "SP-W08-THEME-COMMANDS",
         "SP-W10-THEME-HISTORY",
-        "SP-W10-THEME-CONTROLS"
+        "SP-W10-THEME-CONTROLS",
+        "SP-W10-SCENE-FRAGMENTS"
       ],
       "acceptance_tests": [
         "T-EDITOR",
@@ -418,14 +419,17 @@
       ],
       "planned_outputs": [
         "source/interfaces/",
-        "source/commands/"
+        "source/commands/",
+        "source/interfaces/editor_fragment.cpp",
+        "source/interfaces/editor_fragment.hpp",
+        "tests/editor/scene_fragment_tests.cpp"
       ],
       "status": "in_progress",
       "authority_class": "development",
       "execution_grant": "user:foundation-native-campaign-2026-10-05",
-      "notes": "Native Linux base/role font controls now use shared atomic history, current borrowed resources and command 0.8. Independent literal-font pixels, exact package bytes, save/reopen, reset, policy denial, lost-result reconciliation and private erasure pass; all seven capabilities and large commands gate trusted typography. W-10 remains in progress: bounded clipboard/recovery drafts, installed controller/catalog/policy ownership and scene-aligned entry/restoration remain, followed by full accessibility/performance and other adapters. Preserve historical observation failures and all five complete-edition gates.",
-      "package": "delivery/packages/w-10-theme-controls.md",
-      "evidence": "delivery/theme-controls-handoff.md"
+      "notes": "Shared authored fragments now provide explicit sensitive clipboard admission, revocable copied snapshots and atomic PasteWidgets through existing history/resource/transaction owners. Exact source subtrees, fresh ID mapping, version promotion, bounds, policy and reconciliation have fixed portable evidence on three development profiles. Existing Linux editor/native history regressions pass; native clipboard controls remain disabled until bounded asynchronous transfers and independent requester/owner tests pass. Recovery drafts, installed ownership, scene-aligned entry/restoration, full accessibility/performance and all five complete editions remain required.",
+      "package": "delivery/packages/w-10-scene-fragments.md",
+      "evidence": "delivery/scene-fragments-handoff.md"
     },
     {
       "id": "W-11",
@@ -709,7 +713,7 @@
       ],
       "planned_outputs": [
         "packaging/",
-        "build-support/",
+        "source/build/",
         "docs/"
       ],
       "status": "planned",
@@ -758,7 +762,7 @@
       "planned_outputs": [
         "source/platform/",
         "source/interfaces/",
-        "build-support/"
+        "source/build/"
       ],
       "status": "planned",
       "authority_class": "native_lab",
@@ -788,7 +792,7 @@
         "source/platform/",
         "source/configuration/",
         "tests/protocol/",
-        "build-support/dependencies.json",
+        "source/build/dependencies.json",
         "source/application/ipc_probe.cpp"
       ],
       "status": "complete",
@@ -873,7 +877,7 @@
         "source/application/editor_exit_probe.cpp",
         "tests/desktop/native_editor_exit.py",
         "tests/desktop/gnome_editor_exit.py",
-        "build-support/record_gnome_editor_exit.py"
+        "source/build/record_gnome_editor_exit.py"
       ],
       "status": "in_progress",
       "authority_class": "development",
@@ -899,7 +903,7 @@
       ],
       "planned_outputs": [
         "packaging/",
-        "build-support/"
+        "source/build/"
       ],
       "status": "in_progress",
       "authority_class": "development",

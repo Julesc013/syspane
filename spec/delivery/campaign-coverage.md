@@ -24,7 +24,7 @@ counts do not establish a later integration claim.
 
 | Required campaign outcome | Evidence inspected | Remaining boundary |
 |---|---|---|
-| Actual component targets and pinned development profiles | [Foundation](foundation-handoff.md), [historical build](historical-build-handoff.md), `CMakeLists.txt`, `CMakePresets.json`, `build-support/components.json`, `build-support/targets/` | Implemented on Windows/Linux and the historical toolset host; these are experimental profiles, not every product/platform qualification |
+| Actual component targets and pinned development profiles | [Foundation](foundation-handoff.md), [historical build](historical-build-handoff.md), `CMakeLists.txt`, `CMakePresets.json`, `source/build/components.json`, `source/build/targets/` | Implemented on Windows/Linux and the historical toolset host; these are experimental profiles, not every product/platform qualification |
 | Minimal model and executable behavior | Foundation/model checks; [measured semantics](measured-time-handoff.md), [network projection](network-presentation-handoff.md) | Implemented tested foundation; full configuration/persistence/layout/editor belongs to later work and remains required for the complete product |
 | Transport and policy boundary | [Native transport](native-transport-handoff.md), [subscription](subscriptions-handoff.md), [data ownership](data-view-handoff.md) | Initial native gate implemented; protected policy deployment, cross-user/logon qualification and complete product controller distribution remain open |
 | Independent recovery and diagnosis | [Native supervision](supervision-handoff.md), [diagnostic](diagnostic-handoff.md), [real collector supervision](network-publication-handoff.md), [surface lease](gnome-surface-lease-handoff.md) | W-25 remains partial: actual product renderer/editor visible recovery, current-policy integration and acknowledged lifecycle still need closure and evidence |
@@ -33,7 +33,7 @@ counts do not establish a later integration claim.
 | XP/7 track | Historical toolset build/import audit, modern-host execution and relocated smoke | W-04 guest scope/usability remains unresolved. Neither XP nor Windows 7 runtime/host qualification has run |
 | Linux native-host track | X11 and GNOME/DING experiments, original failures and negative controls, [measured network tile](gnome-live-network-handoff.md) | Initial experiments and finite operational freshness/lease pixels ran. Default focus restoration fails; optional integration is restricted. Product renderer supervision/recovery and complete host qualification remain open |
 | Contemporary/older macOS track | Platform contract and prior laboratory inventory; no admitted endpoint | W-06 native compiler/SDK/profile, AppKit candidate, build and desktop experiment are missing. Lack of a Mac runner is not compatibility evidence |
-| Early smoke packages | `build-support/evidence/w-25-gjs-clock-*.smoke.json` and [smoke contract](packages/w-26-smoke.md) | Three local model packages passed relocated execution. Complete desktop payloads, installer/lifecycle and release qualification remain later gates |
+| Early smoke packages | `out/evidence/w-25-gjs-clock-*.smoke.json` and [smoke contract](packages/w-26-smoke.md) | Three local model packages passed relocated execution. Complete desktop payloads, installer/lifecycle and release qualification remain later gates |
 | Bounded, resumable execution | Campaign workspace/preflight records, ordinary developer commands, source archives and per-increment handoffs | Continue preserving failures and exact inputs. A preflight is not an OS quota; agent text does not enforce sandbox/signing policy |
 | Authority and acceptance preserved | Campaign admission, explicit native scopes, failed candidate records, disabled AIDE/release paths | No privilege or public release is admitted. Missing laboratory scope blocks only dependent native actions, not independent implementation |
 
@@ -47,7 +47,7 @@ expanding optional GNOME scenarios further.
 The subsequent [native GJS consumer](gjs-network-view-handoff.md) closes the shared
 model/projection prerequisite inside that runtime with standalone synthetic checks.
 Live supervised forwarding and actual operational shell age remain open. Its three
-new model smoke records use `build-support/evidence/w-25-gjs-network-view-*.smoke.json`;
+new model smoke records use `out/evidence/w-25-gjs-network-view-*.smoke.json`;
 the earlier records above remain historical.
 
 The [live native session](live-network-session-handoff.md) subsequently connects

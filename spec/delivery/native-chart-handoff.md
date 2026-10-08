@@ -49,7 +49,7 @@ is unchanged. Charts use a controlled synthetic producer clock; the independent
 observer uses real monotonic deadlines. Expected chart coordinates and coverage are
 independently composed with Fraction arithmetic and native TextProbe glyphs.
 
-The attempt index at `build-support/evidence/w-09-native-chart-attempts.json`
+The attempt index at `out/evidence/w-09-native-chart-attempts.json`
 binds source archives, actual commands, outputs, artifact hashes and final checks.
 The native index retains all five complete capture archives, including the earlier
 chart run before final source changes. Later attempts also capture their CTest log;

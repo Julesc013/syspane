@@ -55,7 +55,7 @@ own hidden window is closed; no desktop pixels or unrelated user content is capt
 Policy fixtures test denial and replacement snapshots independently of the native
 source. Native tests observe unavailable policy; no protected policy is installed.
 
-Records are `build-support/evidence/w-25-diagnostic-<profile>.json`, corresponding
+Records are `out/evidence/w-25-diagnostic-<profile>.json`, corresponding
 CTest logs and exact NATIVE-01/NATIVE-02/RECOVERY-01/DIAG-01 report copies. The recorder
 checks the complete case set, source/executable hashes and native close identity.
 The original Windows compile failure (narrow IDC_ARROW macro passed to a wide API)

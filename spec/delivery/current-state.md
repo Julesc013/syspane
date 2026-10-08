@@ -12,10 +12,21 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-08T06:01:29.597900+00:00", "scope": "Native base/role font controls and independent preview/save/reopen/erasure verified; installed ownership and complete editions remain open"}
+updated: {"by": "codex", "at": "2026-10-08T11:30:46.531139+00:00", "scope": "Portable fragment copy/paste implemented; native transfer admission, recovery drafts and complete editions remain open"}
 ---
 
 # Current state and next admitted boundary
+
+Shared build tooling now lives in `source/build/`. Machine bindings and raw
+recordings are local ignored `out/` content; the retired root is absent from the
+tracked tree. See `docs/developers/build.md` in the repository for checkout
+setup and the [repository contract](../foundation/repository.md) for ownership.
+
+The [scene-fragment checkpoint](scene-fragments-handoff.md) adds shared,
+policy-bound object copying and atomic paste with fresh IDs, exact resource pins
+and undo/reconciliation. Native clipboard transfers and controls remain disabled
+pending their bounded adapter and independent evidence. Recovery drafts, installed
+ownership and all five complete editions remain open.
 
 The [native font-controls checkpoint](theme-controls-handoff.md) connects
 base and role fonts to the Linux editor's private controls, current draft preview,
@@ -730,7 +741,7 @@ October 4 [validation record](../generated/amendment-2026-10-04-validation.json)
 is also retained separately. The [documentation validation report](../generated/validation-report.json)
 records the earlier identified documentation run; it does not attest subsequent
 native implementation. Current campaign checks and build results are recorded
-separately under `build-support/evidence/`.
+separately under `out/evidence/`.
 
 [Work-package closure](work-packages.md), the [W-01 package](packages/w-01-foundation.md)
 and [acceptance traces](../assurance/acceptance-traces.md) now define completion gates,
@@ -755,8 +766,9 @@ release-identity decisions remain open.
 ## Next work
 
 Native base/role fonts now have independent control, pixel, persistence and erasure
-evidence. Continue W-10 with bounded clipboard/recovery-draft contracts and installed
-controller/catalog/policy ownership, including scene-aligned entry and restoration.
+evidence. Continue W-10 with bounded native clipboard transfers and independent requester/owner
+evidence, recovery-draft contracts and installed controller/catalog/policy ownership,
+including scene-aligned entry and restoration.
 Use the [font-controls handoff](theme-controls-handoff.md) and W-10 row; preserve
 the existing work graph and continue unrelated native tracks independently.
 

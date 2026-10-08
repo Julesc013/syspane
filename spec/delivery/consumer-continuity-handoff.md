@@ -36,7 +36,7 @@ and independently recomputed rates. Public records disclose lifecycle facts and
 hashes, not operational values.
 
 The final checks and exact commands are in
-`build-support/evidence/w-25-consumer-continuity-compiled-attempts.json`; complete
+`out/evidence/w-25-consumer-continuity-compiled-attempts.json`; complete
 114-entry Linux and 105-entry Windows records use the same prefix and profile name.
 Specification validation and integrity are recorded in the prefixed verification
 file. The initial successful focused experiment is retained with its earlier

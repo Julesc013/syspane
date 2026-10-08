@@ -14,13 +14,13 @@ import uuid
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(ROOT / 'build-support'))
+sys.path.insert(0, str(ROOT / 'source/build'))
 from prepare_gnome_lab import owned_build, inventory
 from check_gjs_clock_dependencies import verify
 
-SOURCES = ['CMakeLists.txt', 'build-support/components.json',
-    'build-support/check_gjs_clock_dependencies.py', 'build-support/prepare_gnome_lab.py',
-    'build-support/gnome-lab-packages.json', 'build-support/targets/linux-x64-gcc13.json',
+SOURCES = ['CMakeLists.txt', 'source/build/components.json',
+    'source/build/check_gjs_clock_dependencies.py', 'source/build/prepare_gnome_lab.py',
+    'source/build/gnome-lab-packages.json', 'source/build/targets/linux-x64-gcc13.json',
     'source/platform/local_ipc.hpp', 'source/platform/local_ipc_linux.cpp',
     'source/desktop/gnome/native_clock.hpp', 'source/desktop/gnome/native_clock.cpp',
     'source/desktop/gnome/SysPaneClock-0.1.gir', 'tests/desktop/gjs_clock.js',
@@ -85,7 +85,7 @@ def main():
         report['build_dependencies'] = verify()
         lab = build/'gnome-lab'
         identity = json.loads((lab/'identity.json').read_text())
-        assert identity['lock_sha256'] == sha(ROOT/'build-support/gnome-lab-packages.json')
+        assert identity['lock_sha256'] == sha(ROOT/'source/build/gnome-lab-packages.json')
         assert identity['files'] == inventory(lab/'sysroot'), 'extracted GJS laboratory identity differs'
         executable = lab/'sysroot/usr/bin/gjs'
         report['artifacts'] = {str(p): sha(p) for p in [build/'libsyspane_gjs_clock.so', build/'SysPaneClock-0.1.typelib', executable, lab/'identity.json']}

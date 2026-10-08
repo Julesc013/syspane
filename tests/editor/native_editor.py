@@ -3,7 +3,7 @@ from pathlib import Path
 from datetime import datetime,timezone
 import copy,ctypes as C,hashlib,json,os,queue,select,signal,struct,subprocess,sys,threading,time,uuid,zlib
 ROOT=Path(__file__).resolve().parents[2]
-sys.path[:0]=[str(ROOT/'tests/configuration'),str(ROOT/'tests/desktop'),str(ROOT/'tests/fault'),str(ROOT/'build-support')]
+sys.path[:0]=[str(ROOT/'tests/configuration'),str(ROOT/'tests/desktop'),str(ROOT/'tests/fault'),str(ROOT/'source/build')]
 from native_settings import stored,check_resources
 from native_diagnostic import launch_xvfb
 from native_editor_exit import Observer

@@ -72,7 +72,7 @@ Modal tests await actual showing state; positive canvas observations await repai
 Denied results remain unknown with hidden facts, then retrieve the original conflict
 after regrant. Original failures and diagnostic source snapshots remain intact.
 
-Evidence uses build-support/evidence/w-10-theme-controls: attempts, native-index,
+Evidence uses out/evidence/w-10-theme-controls: attempts, native-index,
 verification and staging, plus theme-controls-handoff.json. The attempt index preserves
 29 executions, source archives, fixed and corrected inputs, native
 fault witnesses and final artifact identities. All 199 baseline schema/fixture files

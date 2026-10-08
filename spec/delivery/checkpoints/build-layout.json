@@ -1,0 +1,407 @@
+{
+  "recorded_at": "2026-10-08T11:55:45.618980+00:00",
+  "source_base": "8e1beba8b20f8fb5d05f95e55887ea955e7beeb4",
+  "scope": "Compact resumption/evidence summary; raw results, source archives, rasters and machine bindings are intentionally not versioned.",
+  "relocation": {
+    "retired_root": "build-support/",
+    "shared_tooling": "source/build/",
+    "local_archive": "out/evidence/",
+    "machine_binding": "out/campaign/workspace.json",
+    "removed_tracked_evidence_files": 9903,
+    "removed_tracked_evidence_bytes": 3111908777,
+    "relocated_shared_files": 61,
+    "history": "Current tree cleanup only; no history rewrite performed."
+  },
+  "frozen_fragment_inputs": {
+    "spec/delivery/packages/w-10-scene-fragments.md": "dd72fffec6633879152f3a908c5d0e29547a2cae459da93472e0455ffdc6f4e4",
+    "tests/editor/scene-fragment-cases.json": "0281e93a7d03ba401542705a48a05ee24f6f7545652d009e409a92723620d281"
+  },
+  "original_fragment_execution": {
+    "attempt_count": 16,
+    "attempt_index": {
+      "local_path": "out/evidence/w-10-scene-fragments-attempts.json",
+      "sha256": "c2504a47ab0b8a80f1fd878876d88302c97c6706be84b3a40218c39f7cd833b3"
+    },
+    "native_index": {
+      "local_path": "out/evidence/w-10-scene-fragments-native-index.json",
+      "sha256": "bbfb129bd54cd078e8921566ed319fc43777602a8c1c9d4e3adb3e349ed86bd5"
+    },
+    "portable_counts": {
+      "linux-x64-gcc13": 372,
+      "windows-x64-gcc15": 369,
+      "windows-x86-v141-xp": 366
+    },
+    "affected_cases_per_profile": 195
+  },
+  "relocation_executions": [
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "build",
+      "command": [
+        "env",
+        "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+        "cmake",
+        "--build",
+        "--preset",
+        "linux-x64-gcc13"
+      ],
+      "started_at": "2026-10-08T11:44:40.625307+00:00",
+      "finished_at": "2026-10-08T11:44:40.834369+00:00",
+      "exit": 0,
+      "passed_cases": 0,
+      "source_manifest_sha256": "625e1b2115e61244d6eaf7cfbf22030f58cde27dabf4e799a53013efb5e536c9",
+      "source_archive": {
+        "local_path": "out/evidence/build-layout/linux-x64-gcc13-build-9d6eae791f/source-inputs.zip",
+        "sha256": "29a9f3324e0f2a5779acc4330db1a46365c847955ca71344230e4877f5db8186"
+      },
+      "record": {
+        "local_path": "out/evidence/build-layout/linux-x64-gcc13-build-9d6eae791f/result.json",
+        "sha256": "3c2c42d08b3672bfbcb507f51267882b739c6a1570146374a51083fd10b93f10"
+      },
+      "later_changes": [
+        "source/build/prepare_gnome_lab.py",
+        "source/build/run_foundation.sh",
+        "source/build/targets/README.md"
+      ]
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "configure",
+      "command": [
+        "env",
+        "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+        "cmake",
+        "--preset",
+        "linux-x64-gcc13"
+      ],
+      "started_at": "2026-10-08T11:44:25.292802+00:00",
+      "finished_at": "2026-10-08T11:44:35.038148+00:00",
+      "exit": 0,
+      "passed_cases": 0,
+      "source_manifest_sha256": "625e1b2115e61244d6eaf7cfbf22030f58cde27dabf4e799a53013efb5e536c9",
+      "source_archive": {
+        "local_path": "out/evidence/build-layout/linux-x64-gcc13-configure-25b1d417f8/source-inputs.zip",
+        "sha256": "29a9f3324e0f2a5779acc4330db1a46365c847955ca71344230e4877f5db8186"
+      },
+      "record": {
+        "local_path": "out/evidence/build-layout/linux-x64-gcc13-configure-25b1d417f8/result.json",
+        "sha256": "38ac1af37f1dc29e7de39105eddf48ab22eea7aec0e1723149ecb73a770d6c31"
+      },
+      "later_changes": [
+        "source/build/prepare_gnome_lab.py",
+        "source/build/run_foundation.sh",
+        "source/build/targets/README.md"
+      ]
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "native",
+      "command": [
+        "env",
+        "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+        "ctest",
+        "--preset",
+        "linux-x64-gcc13",
+        "-R",
+        "^native[.](EDITOR-FONTS|EDITOR-VISIBILITY|EDITOR-FORM|THEME-HISTORY)$",
+        "--output-on-failure"
+      ],
+      "started_at": "2026-10-08T11:47:11.025400+00:00",
+      "finished_at": "2026-10-08T11:49:32.265218+00:00",
+      "exit": 0,
+      "passed_cases": 4,
+      "source_manifest_sha256": "625e1b2115e61244d6eaf7cfbf22030f58cde27dabf4e799a53013efb5e536c9",
+      "source_archive": {
+        "local_path": "out/evidence/build-layout/linux-x64-gcc13-native-570a270074/source-inputs.zip",
+        "sha256": "29a9f3324e0f2a5779acc4330db1a46365c847955ca71344230e4877f5db8186"
+      },
+      "record": {
+        "local_path": "out/evidence/build-layout/linux-x64-gcc13-native-570a270074/result.json",
+        "sha256": "51d3c50fc7b2c8bffc3838520768f510e4bac6bb7152fe8262f05c1f6b8ed735"
+      },
+      "later_changes": [
+        "source/build/prepare_gnome_lab.py",
+        "source/build/run_foundation.sh",
+        "source/build/targets/README.md"
+      ],
+      "test_artifact": {
+        "name": "SysPane.CommandProbe",
+        "sha256": "7bb6a63e5f44437104075480139a5051fb67d9c0240cdc9f2c91b457cacc286a"
+      },
+      "ctest_log_archive": {
+        "local_path": "out/evidence/build-layout/linux-x64-gcc13-native-570a270074/ctest-log.zip",
+        "sha256": "1659f20d15e650c15c7f9cb3dc209e81732989096913a396a83bf3a013147fa8"
+      }
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "portable",
+      "command": [
+        "env",
+        "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+        "ctest",
+        "--preset",
+        "linux-x64-gcc13",
+        "-E",
+        "^native[.]",
+        "--output-on-failure"
+      ],
+      "started_at": "2026-10-08T11:44:46.383194+00:00",
+      "finished_at": "2026-10-08T11:47:02.923202+00:00",
+      "exit": 0,
+      "passed_cases": 372,
+      "source_manifest_sha256": "625e1b2115e61244d6eaf7cfbf22030f58cde27dabf4e799a53013efb5e536c9",
+      "source_archive": {
+        "local_path": "out/evidence/build-layout/linux-x64-gcc13-portable-a83cf799b8/source-inputs.zip",
+        "sha256": "29a9f3324e0f2a5779acc4330db1a46365c847955ca71344230e4877f5db8186"
+      },
+      "record": {
+        "local_path": "out/evidence/build-layout/linux-x64-gcc13-portable-a83cf799b8/result.json",
+        "sha256": "788c6c8cb358b5d705dd94cb36c0fbb1cd43385eec43b2cd9100d811bd8be041"
+      },
+      "later_changes": [
+        "source/build/prepare_gnome_lab.py",
+        "source/build/run_foundation.sh",
+        "source/build/targets/README.md"
+      ],
+      "test_artifact": {
+        "name": "syspane_scene_tests",
+        "sha256": "6b6e0653c0d9e0d7445407a5f9d12a863ec394159a3f092017c904cc919fad2c"
+      },
+      "ctest_log_archive": {
+        "local_path": "out/evidence/build-layout/linux-x64-gcc13-portable-a83cf799b8/ctest-log.zip",
+        "sha256": "7484e471480c9ade92198ce189f884077ded72f11368daa16546900562d70a71"
+      }
+    },
+    {
+      "profile": "windows-x64-gcc15",
+      "action": "build",
+      "command": [
+        "cmake",
+        "--build",
+        "--preset",
+        "windows-x64-gcc15"
+      ],
+      "started_at": "2026-10-08T11:41:47.388783+00:00",
+      "finished_at": "2026-10-08T11:41:48.797209+00:00",
+      "exit": 0,
+      "passed_cases": 0,
+      "source_manifest_sha256": "b234c3ee71204257207d4345bc80e236665e39619c8e5eb9b747eb62b3516bbd",
+      "source_archive": {
+        "local_path": "out/evidence/build-layout/windows-x64-gcc15-build-ebd2b5093e/source-inputs.zip",
+        "sha256": "edf66c07ece26457b27f43703c4df2247179164349f6b2bd032d9abb6a5f57ef"
+      },
+      "record": {
+        "local_path": "out/evidence/build-layout/windows-x64-gcc15-build-ebd2b5093e/result.json",
+        "sha256": "3da2270851ce299e6135022a12985a75cb382b71151874100363723e499c2055"
+      },
+      "later_changes": [
+        "source/build/prepare_gnome_lab.py",
+        "source/build/run_foundation.sh",
+        "source/build/targets/README.md"
+      ]
+    },
+    {
+      "profile": "windows-x64-gcc15",
+      "action": "configure",
+      "command": [
+        "cmake",
+        "--preset",
+        "windows-x64-gcc15"
+      ],
+      "started_at": "2026-10-08T11:41:43.878736+00:00",
+      "finished_at": "2026-10-08T11:41:45.503837+00:00",
+      "exit": 0,
+      "passed_cases": 0,
+      "source_manifest_sha256": "b234c3ee71204257207d4345bc80e236665e39619c8e5eb9b747eb62b3516bbd",
+      "source_archive": {
+        "local_path": "out/evidence/build-layout/windows-x64-gcc15-configure-d84f98c77e/source-inputs.zip",
+        "sha256": "edf66c07ece26457b27f43703c4df2247179164349f6b2bd032d9abb6a5f57ef"
+      },
+      "record": {
+        "local_path": "out/evidence/build-layout/windows-x64-gcc15-configure-d84f98c77e/result.json",
+        "sha256": "c7f37a4edbf67ba987e5461ab75ad6a86fadd1e8ab9cfe91bd18ff766be0d631"
+      },
+      "later_changes": [
+        "source/build/prepare_gnome_lab.py",
+        "source/build/run_foundation.sh",
+        "source/build/targets/README.md"
+      ]
+    },
+    {
+      "profile": "windows-x64-gcc15",
+      "action": "portable",
+      "command": [
+        "ctest",
+        "--preset",
+        "windows-x64-gcc15",
+        "-E",
+        "^native[.]",
+        "--output-on-failure"
+      ],
+      "started_at": "2026-10-08T11:41:50.673151+00:00",
+      "finished_at": "2026-10-08T11:43:28.348669+00:00",
+      "exit": 0,
+      "passed_cases": 369,
+      "source_manifest_sha256": "b234c3ee71204257207d4345bc80e236665e39619c8e5eb9b747eb62b3516bbd",
+      "source_archive": {
+        "local_path": "out/evidence/build-layout/windows-x64-gcc15-portable-81553bc6dd/source-inputs.zip",
+        "sha256": "edf66c07ece26457b27f43703c4df2247179164349f6b2bd032d9abb6a5f57ef"
+      },
+      "record": {
+        "local_path": "out/evidence/build-layout/windows-x64-gcc15-portable-81553bc6dd/result.json",
+        "sha256": "671af3c23284f6483d1881d3e2ff9ecfb85478baaa541e603f8814c6e2080c10"
+      },
+      "later_changes": [
+        "source/build/prepare_gnome_lab.py",
+        "source/build/run_foundation.sh",
+        "source/build/targets/README.md"
+      ],
+      "test_artifact": {
+        "name": "syspane_scene_tests.exe",
+        "sha256": "541bd7efd516560379aa567c14da95ee7efa305b1c42e3d5ebae5f4359d59213"
+      },
+      "ctest_log_archive": {
+        "local_path": "out/evidence/build-layout/windows-x64-gcc15-portable-81553bc6dd/ctest-log.zip",
+        "sha256": "f91fe0a40362539f65fb6d95d729ca4536955f5dff67fae2ffc1d03a60342c95"
+      }
+    },
+    {
+      "profile": "windows-x86-v141-xp",
+      "action": "build",
+      "command": [
+        "cmake",
+        "--build",
+        "--preset",
+        "windows-x86-v141-xp"
+      ],
+      "started_at": "2026-10-08T11:50:20.509610+00:00",
+      "finished_at": "2026-10-08T11:50:45.164881+00:00",
+      "exit": 0,
+      "passed_cases": 0,
+      "source_manifest_sha256": "26599710be5c3450c3de69c61d58b664841c045f1e353fd933ea58a048b791eb",
+      "source_archive": {
+        "local_path": "out/evidence/build-layout/windows-x86-v141-xp-build-ca1cf15ad7/source-inputs.zip",
+        "sha256": "3f0c6d03a54f092ba74a39dfa71a736b9f954df6ea26f77bcc11e1dd309e3b1d"
+      },
+      "record": {
+        "local_path": "out/evidence/build-layout/windows-x86-v141-xp-build-ca1cf15ad7/result.json",
+        "sha256": "a5f9cdd28a20525e526562d00225fce077ba0e2e2df88d9471ce09fe87bbed79"
+      },
+      "later_changes": []
+    },
+    {
+      "profile": "windows-x86-v141-xp",
+      "action": "configure",
+      "command": [
+        "cmake",
+        "--preset",
+        "windows-x86-v141-xp"
+      ],
+      "started_at": "2026-10-08T11:50:12.986370+00:00",
+      "finished_at": "2026-10-08T11:50:18.275580+00:00",
+      "exit": 0,
+      "passed_cases": 0,
+      "source_manifest_sha256": "26599710be5c3450c3de69c61d58b664841c045f1e353fd933ea58a048b791eb",
+      "source_archive": {
+        "local_path": "out/evidence/build-layout/windows-x86-v141-xp-configure-fff2c578dc/source-inputs.zip",
+        "sha256": "3f0c6d03a54f092ba74a39dfa71a736b9f954df6ea26f77bcc11e1dd309e3b1d"
+      },
+      "record": {
+        "local_path": "out/evidence/build-layout/windows-x86-v141-xp-configure-fff2c578dc/result.json",
+        "sha256": "41d1ebad320d0678ff58337d3a1372a893493fecc7d35da26c4ac0611c6682d1"
+      },
+      "later_changes": []
+    },
+    {
+      "profile": "windows-x86-v141-xp",
+      "action": "portable",
+      "command": [
+        "ctest",
+        "--preset",
+        "windows-x86-v141-xp",
+        "-E",
+        "^native[.]",
+        "--output-on-failure"
+      ],
+      "started_at": "2026-10-08T11:50:47.431802+00:00",
+      "finished_at": "2026-10-08T11:51:23.132439+00:00",
+      "exit": 0,
+      "passed_cases": 366,
+      "source_manifest_sha256": "26599710be5c3450c3de69c61d58b664841c045f1e353fd933ea58a048b791eb",
+      "source_archive": {
+        "local_path": "out/evidence/build-layout/windows-x86-v141-xp-portable-11d199486d/source-inputs.zip",
+        "sha256": "3f0c6d03a54f092ba74a39dfa71a736b9f954df6ea26f77bcc11e1dd309e3b1d"
+      },
+      "record": {
+        "local_path": "out/evidence/build-layout/windows-x86-v141-xp-portable-11d199486d/result.json",
+        "sha256": "b9f971a013bcc6594e760a34067549a7807d2d1b079f4121da8139772085332a"
+      },
+      "later_changes": [],
+      "test_artifact": {
+        "name": "syspane_scene_tests.exe",
+        "sha256": "bff55c840dde73e5186a6c9751f5b17ae2cf6fca07677e0babfab7dd4f7de190"
+      },
+      "ctest_log_archive": {
+        "local_path": "out/evidence/build-layout/windows-x86-v141-xp-portable-11d199486d/ctest-log.zip",
+        "sha256": "4acaa57d874598c13e1a8204e26530bed1ea74212a02dee8913c73645272c176"
+      }
+    }
+  ],
+  "later_change_verification": {
+    "explanation": "After the full Windows/Linux suites, documentation links and launcher workspace defaults were corrected. Product implementation and test expectations were unchanged. Focused guards and the actual Linux configure/package wrapper verify the launcher changes.",
+    "launcher_checks": {
+      "local_path": "out/evidence/build-layout-launcher-checks.json",
+      "sha256": "e3f730a72fe1a196fb6ff9163348ae34415b996f3452639b2838be055472ef9b"
+    },
+    "packaging": {
+      "local_path": "out/evidence/build-layout-packaging.json",
+      "sha256": "a8ef106ac27cb939c35abce9a0714168a2015861afde8ca96e356dc5bac4c750"
+    },
+    "static_checks": {
+      "local_path": "out/evidence/build-layout-static.json",
+      "sha256": "99628d4ed9b9ea7a9db2d76bef3e31993ed43c4753269a25e506230ac85f6aad"
+    }
+  },
+  "specification": {
+    "schemas": 45,
+    "fixtures": 154,
+    "tool_tests": 60,
+    "passed": 58,
+    "skipped": 2,
+    "skipped_reason": "Existing Windows symlink privilege requirements",
+    "checks": {
+      "local_path": "out/evidence/build-layout-spec-checks.json",
+      "sha256": "b2f4d5df6ac4c4db88eb7cc2f315609de4ee66778b9d0a71dca3ac1adc825c1e"
+    },
+    "preserved_initial_link_failure": {
+      "local_path": "out/evidence/build-layout-spec-checks-first-failure.json",
+      "sha256": "137f201070dbfc0ce46f098a226e1b469f1eee6e110217047b2e2e010c73e0cb"
+    }
+  },
+  "native_regressions": {
+    "cases": [
+      "EDITOR-FORM",
+      "EDITOR-FONTS",
+      "THEME-HISTORY",
+      "EDITOR-VISIBILITY"
+    ],
+    "index": {
+      "local_path": "out/evidence/build-layout-native-index.json",
+      "sha256": "fdf4741ae614d9b9ad73b6d2577b116c3061ca14c995ba632dd1b81a14bac50c"
+    }
+  },
+  "unchanged_existing_contracts": 195,
+  "fixture_path_only_changes": [
+    "spec/fixtures/invalid/capability-no-evidence.json",
+    "spec/fixtures/invalid/target-self-qualified.json",
+    "spec/fixtures/valid/capability-target.json",
+    "spec/fixtures/valid/target-profile.json"
+  ],
+  "limitations": [
+    "Raw evidence is local to the recorded laboratory; a new checkout regenerates its own records.",
+    "Native clipboard controls remain disabled.",
+    "Historical toolchain tests on modern Windows do not qualify XP.",
+    "All five full desktop editions and public release qualification remain open."
+  ]
+}

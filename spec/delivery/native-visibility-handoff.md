@@ -72,7 +72,7 @@ five original build/test failures:
 - The first external runner omitted the existing tests/fault helper import path.
   Adding that path leaves every expected pixel/name and deadline unchanged.
 
-Records: build-support/evidence/w-09-native-visibility-attempts.json,
+Records: out/evidence/w-09-native-visibility-attempts.json,
 w-09-native-visibility-native-index.json, w-09-native-visibility-verification.json,
 w-09-native-visibility-staging.json and native-visibility-handoff.json. They bind
 source archives, commands, fixed inputs, runtime identities, artifacts and outcomes.

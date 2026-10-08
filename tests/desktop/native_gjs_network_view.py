@@ -15,11 +15,11 @@ import zipfile
 from native_gjs_clock import ROOT, sha, receive, descriptors, owned_build, inventory, verify
 
 EPOCH = 'fixture:network'
-SOURCES = ['CMakeLists.txt', 'build-support/components.json', 'build-support/targets/linux-x64-gcc13.json',
+SOURCES = ['CMakeLists.txt', 'source/build/components.json', 'source/build/targets/linux-x64-gcc13.json',
            'source/desktop/gnome/SysPaneClock-0.1.gir', 'tests/desktop/native_gjs_clock.py',
            'tests/desktop/native_gjs_network_view.py', 'tests/desktop/gjs_network_view.js',
-           'spec/delivery/packages/w-25-gjs-network-view.md', 'build-support/prepare_gnome_lab.py',
-           'build-support/check_gjs_clock_dependencies.py', 'build-support/gnome-lab-packages.json']
+           'spec/delivery/packages/w-25-gjs-network-view.md', 'source/build/prepare_gnome_lab.py',
+           'source/build/check_gjs_clock_dependencies.py', 'source/build/gnome-lab-packages.json']
 SOURCES += sorted(p.relative_to(ROOT).as_posix() for p in (ROOT/'source').rglob('*') if p.suffix in ('.cpp', '.hpp'))
 
 
@@ -102,7 +102,7 @@ def main():
     try:
         report['build_dependencies'] = verify()
         lab = build/'gnome-lab'; identity = json.loads((lab/'identity.json').read_text())
-        assert identity['lock_sha256'] == sha(ROOT/'build-support/gnome-lab-packages.json') and identity['files'] == inventory(lab/'sysroot')
+        assert identity['lock_sha256'] == sha(ROOT/'source/build/gnome-lab-packages.json') and identity['files'] == inventory(lab/'sysroot')
         executable = lab/'sysroot/usr/bin/gjs'; lib = lab/'sysroot/usr/lib/x86_64-linux-gnu'
         report['artifacts'] = {str(p): sha(p) for p in [build/'libsyspane_gjs_clock.so', build/'SysPaneClock-0.1.typelib', executable, lab/'identity.json']}
         peer = subprocess.Popen(['/usr/bin/python3', str(Path(__file__).resolve()), '--server', endpoint],

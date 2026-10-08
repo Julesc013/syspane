@@ -84,7 +84,7 @@ negative-control verdicts. Semantic mutation fixtures keep their report and jour
 copies consistent so a trivial mismatch cannot substitute for the actual check.
 
 The native comparison is at repository path
-`build-support/evidence/w-05-gnome-input-calibration.json`; raw attempts, source
+`out/evidence/w-05-gnome-input-calibration.json`; raw attempts, source
 archives, journals, invocations and validation records use the same prefix.
 Twenty-two native attempts, 22 exact source archives and 38 raw journals are retained.
 The earlier complete matrix remains separate from the final runs after correcting

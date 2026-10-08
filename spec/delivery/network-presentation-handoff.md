@@ -49,10 +49,10 @@ edition. Profile revisions are 19, 20 and 11 respectively; pinned toolchains are
 unchanged. The developer guide `docs/developers/build.md`, under Shared measured
 network presentation, contains the runner and evidence commands.
 
-Evidence is retained under `build-support/evidence/w-25-network-presentation-`:
+Evidence is retained under `out/evidence/w-25-network-presentation-`:
 profile records and logs, native public records, smoke records, the attempt manifest
 and specification verification. The machine handoff is
-`build-support/evidence/network-presentation-handoff.json`. Original attempt source
+`out/evidence/network-presentation-handoff.json`. Original attempt source
 archives and private operational failure data remain in their owned ignored roots;
 the public manifest identifies exact hashes and paths.
 

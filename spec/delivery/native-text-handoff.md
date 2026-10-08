@@ -41,7 +41,7 @@ original assertion passes without changing its expectation. No prior case was
 relaxed. Package timestamp and explicit color-font wording were clarified after
 the original archive; the original bytes remain preserved.
 
-`build-support/evidence/w-09-text-attempts.json` indexes exact source/oracle archives,
+`out/evidence/w-09-text-attempts.json` indexes exact source/oracle archives,
 commands, native input/output archives and final full suites. The native oracle
 checks 27 families. `w-09-text-staging.json` verifies final staged source/evidence
 identities; `text-handoff.json` is the machine-readable continuation record.

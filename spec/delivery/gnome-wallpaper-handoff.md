@@ -75,7 +75,7 @@ nine marker verifier checks pass: **100 verifier checks in this checkpoint**.
 The live reveal result still fails foreground-focus restoration. Passing evidence
 validation means that failure was detected and preserved, not that acceptance passed.
 
-The final comparison is `build-support/evidence/w-05-gnome-wallpaper-calibration.json`.
+The final comparison is `out/evidence/w-05-gnome-wallpaper-calibration.json`.
 Files with the same prefix retain 13 native attempts, 13 exact source archives,
 23 raw journals, 15 PNG artifacts and execution/verification records. The first
 successful live image run remains separate from the final four-control matrix.

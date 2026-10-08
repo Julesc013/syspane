@@ -72,7 +72,7 @@ eight different lengths. Expectations, no-overwrite rules and compiler warnings
 were not weakened. Original native reports and source-bound build/test attempts
 remain distinct from the final passing checkpoint.
 
-Records are `build-support/evidence/w-25-preservation-<profile>.json` and adjacent
+Records are `out/evidence/w-25-preservation-<profile>.json` and adjacent
 native reports/CTest logs. `w-25-preservation-attempts.json` binds preserved attempts
 and failures. `w-25-preservation-verification.json` records spec/tool/integrity checks;
 `preservation-handoff.json` is the machine-readable handoff. Ignored source archives

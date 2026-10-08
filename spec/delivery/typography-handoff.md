@@ -61,7 +61,7 @@ failure exposed null IDs produced by a temporary JSON reference inside the test
 pin helper's conditional expression under this compiler. The preserved diagnostic
 prints those malformed pins. Owning the parsed document and copying its ID before
 constructing the pin fixes the fixture without changing the expected resource
-identity or production resolver. Evidence lives in build-support/evidence under
+identity or production resolver. Evidence lives in out/evidence under
 w-09-typography-attempts.json, w-09-typography-native-index.json,
 w-09-typography-verification.json, w-09-typography-staging.json and
 typography-handoff.json.

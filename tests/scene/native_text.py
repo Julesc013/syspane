@@ -9,7 +9,7 @@ import sys
 import uuid
 
 ROOT = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(ROOT/'build-support'))
+sys.path.insert(0, str(ROOT/'source/build'))
 from check_text_runtime import verify
 THEME = dict(schema_version='0.1.0', theme_id='test', name='Native text oracle',
              tokens=dict(foreground='#ffffffff', background='#00000000',
@@ -29,7 +29,7 @@ def main():
                   executable_sha256=sha(exe), oracle_sha256=sha(Path(__file__)),
                   cases=[], outcome='fail')
     verify()
-    record['runtime_identity_sha256'] = sha(ROOT/'build-support/text-runtime.json')
+    record['runtime_identity_sha256'] = sha(ROOT/'source/build/text-runtime.json')
     counter = 0
 
     def run(text='SysPane', **options):

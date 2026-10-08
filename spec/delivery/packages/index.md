@@ -62,6 +62,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Native layout and responsive variant authoring](w-10-layout-authoring.md) — Author every existing layout kind, ordered breakpoint, display intent and active fixed variant through the shared draft.
 - [Native scene editing and independent exit](w-10-native-editor.md) — Connect the shared draft to real native pixels, input, transactions and recovery.
 - [Native observation error and focus boundary](w-10-native-observation.md) — Distinguish inaccessible observations from actual absent state without weakening native acceptance.
+- [Bounded authored scene fragments](w-10-scene-fragments.md) — Portable copy ownership and atomic paste without implicit package import.
 - [Deterministic pointer snapping and visible alignment guides](w-10-snap.md) — Close bounded grid and guide projection through existing editor gestures and typed edits.
 - [Theme authoring input and immutable artifact boundary](w-10-theme-authoring.md) — Lossless font input and deterministic private theme artifacts before durable native integration.
 - [Native font controls and draft resource preview](w-10-theme-controls.md) — Lossless base/role editing, current immutable preview and independent durable native evidence.

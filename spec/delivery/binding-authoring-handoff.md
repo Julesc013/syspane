@@ -68,11 +68,11 @@ held-focus failure is still recorded in the previous checkpoint; these passing
 matrices do not establish its original cause.
 
 Repository evidence paths (outside the standalone specification bundle):
-`build-support/evidence/w-10-binding-authoring-attempts.json`,
-`build-support/evidence/w-10-binding-authoring-native-index.json`,
-`build-support/evidence/w-10-binding-authoring-verification.json`,
-`build-support/evidence/w-10-binding-authoring-staging.json` and
-`build-support/evidence/binding-authoring-handoff.json`.
+`out/evidence/w-10-binding-authoring-attempts.json`,
+`out/evidence/w-10-binding-authoring-native-index.json`,
+`out/evidence/w-10-binding-authoring-verification.json`,
+`out/evidence/w-10-binding-authoring-staging.json` and
+`out/evidence/binding-authoring-handoff.json`.
 
 The workspace guard stopped a build before its reservation exceeded 7 GiB. Only
 verified duplicates of committed native archives were removed; original archives,

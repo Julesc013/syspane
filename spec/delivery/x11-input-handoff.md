@@ -65,7 +65,7 @@ through explicit private-bus calls with deadlines and activation disabled.
 
 ## Evidence and validation
 
-`build-support/evidence/w-05-x11-input.json` binds the final report and prepared lab.
+`out/evidence/w-05-x11-input.json` binds the final report and prepared lab.
 Its raw report includes compressed independent frames, semantic/focus snapshots,
 clipboard bytes, flushed stimulus/observation journals and confirmed process cleanup.
 The recorder independently recomputes temporal/placement/input outcomes, exact image
@@ -73,7 +73,7 @@ pixels and fixture URI meaning, checking source/artifact/runtime identity.
 Fifteen evidence tests pass, including rejection of wrong files, stale clipboard
 owners, hidden menus, title-only folder claims, focus theft and corrupted journals.
 
-`build-support/x11-input-runtime.json` pins the optional installed AT-SPI/GI runtime.
+`source/build/x11-input-runtime.json` pins the optional installed AT-SPI/GI runtime.
 No system installation or privilege was used. All services, clipboard operations and
 captures belong to the synthetic private display. The user's desktop and clipboard
 were not accessed. Owned output remains below the admitted 1 GiB limit.
@@ -87,7 +87,7 @@ Changes here affect the optional Python experiment and documentation. C++ target
 and the ordinary regression suite are unchanged; the prior Linux 54-entry and Windows
 composition runs remain historical, rather than being presented as fresh runs.
 Specification generation, schema/fixture validation, tooling tests and integrity are
-recorded separately in `build-support/evidence/w-05-x11-input-verification.json`.
+recorded separately in `out/evidence/w-05-x11-input-verification.json`.
 
 ## Next admitted boundary
 

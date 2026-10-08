@@ -61,7 +61,7 @@ these remain model-only local archives.
 
 ## Evidence and workspace allocation
 
-Records are `build-support/evidence/w-25-subscriptions-<profile>.json`, adjacent
+Records are `out/evidence/w-25-subscriptions-<profile>.json`, adjacent
 native reports/CTest logs/smoke results, `w-25-subscriptions-attempts.json`,
 `w-25-subscriptions-verification.json` and the machine `subscriptions-handoff.json`.
 Original build/test source archives and binary artifacts remain in ignored owned

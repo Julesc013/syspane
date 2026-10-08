@@ -54,9 +54,9 @@ Specification/schema/generation/integrity checks pass; 56 tooling tests pass and
 two existing Windows symlink assertions are skipped. None of these host checks
 qualifies historical native OS behavior.
 
-`build-support/evidence/w-08-supervision-attempts.json` indexes source archives,
+`out/evidence/w-08-supervision-attempts.json` indexes source archives,
 actual build/test results, native reports and artifact hashes. The machine handoff
-is `build-support/evidence/transaction-supervision-handoff.json`. Specification
+is `out/evidence/transaction-supervision-handoff.json`. Specification
 checks and staged-byte verification use the same evidence prefix.
 
 The initial build caught an exhaustive GNOME health-event switch missing the new

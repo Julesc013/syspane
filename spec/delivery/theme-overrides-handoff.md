@@ -48,7 +48,7 @@ RESOURCE-GENERATIONS and CONTENT-COMMANDS regressions pass for existing formats.
 These are not new-format durable tests. The historical compiler ran on contemporary
 Windows, not XP. The two existing Windows symlink tooling assertions remain skipped.
 
-Evidence under build-support/evidence uses prefix w-10-theme-overrides: attempts,
+Evidence under out/evidence uses prefix w-10-theme-overrides: attempts,
 native-index, verification, staging and theme-overrides-handoff.json. The attempts
 index retains 13 exact source-bound executions, fixed inputs,
 artifact identities and all original outcomes. Schema/fixture checks, generated

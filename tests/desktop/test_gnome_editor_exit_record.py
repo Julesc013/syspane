@@ -6,7 +6,7 @@ import sys
 import unittest
 
 ROOT = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(ROOT/'build-support'))
+sys.path.insert(0, str(ROOT/'source/build'))
 from record_gnome_editor_exit import judge, MODES
 
 ORIGINALS = {}

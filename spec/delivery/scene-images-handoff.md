@@ -43,7 +43,7 @@ content entry point. This repairs an implementation limit; no schema limit is ra
 
 ## Evidence and corrections
 
-The evidence index `build-support/evidence/w-09-scene-images-attempts.json` records
+The evidence index `out/evidence/w-09-scene-images-attempts.json` records
 commands, exact source snapshots, artifacts and final affected test results. Separate
 native archives retain observations and original failures. Fixed Fraction-derived
 image pixels remain unchanged. Final affected CTest runs passed 114 cases on Linux,

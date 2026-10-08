@@ -1,0 +1,1694 @@
+{
+  "source": {
+    "extensions": {
+      "author.note": {
+        "preserve": [
+          "x",
+          1,
+          false
+        ]
+      }
+    },
+    "revision": "40",
+    "roots": [
+      "widget:image",
+      "widget:chart",
+      "widget:table",
+      "widget:group",
+      "widget:status",
+      "widget:value"
+    ],
+    "scene_id": "scene:content",
+    "schema_version": "0.5.0",
+    "theme_id": null,
+    "widgets": [
+      {
+        "bindings": [],
+        "content": {
+          "body": "Plain body\nsecond line"
+        },
+        "display": {
+          "local_id": "D1"
+        },
+        "id": "widget:text",
+        "kind": "text",
+        "layout": {
+          "base": {
+            "height": 200,
+            "kind": "fixed",
+            "width": 400,
+            "x": 0,
+            "y": 0
+          }
+        },
+        "priority": "normal",
+        "title": "Text",
+        "extensions": {
+          "author.clipboard": {
+            "literal": "widget:text",
+            "note": "私の text"
+          }
+        }
+      },
+      {
+        "bindings": [
+          {
+            "entity_type": "network.interface",
+            "field": "network.receive_bytes",
+            "kind": "selector",
+            "limit": 1,
+            "mode": "singleton",
+            "predicates": [],
+            "scope": {
+              "kind": "local_host"
+            },
+            "sort": []
+          }
+        ],
+        "content": {},
+        "display": {
+          "local_id": "D1"
+        },
+        "id": "widget:value",
+        "kind": "value",
+        "layout": {
+          "base": {
+            "height": 200,
+            "kind": "fixed",
+            "width": 400,
+            "x": 20,
+            "y": 20
+          }
+        },
+        "priority": "normal",
+        "title": "Value"
+      },
+      {
+        "bindings": [
+          {
+            "entity_type": "network.interface",
+            "field": "network.receive_bytes",
+            "kind": "selector",
+            "limit": 1,
+            "mode": "singleton",
+            "predicates": [],
+            "scope": {
+              "kind": "local_host"
+            },
+            "sort": []
+          }
+        ],
+        "content": {},
+        "display": {
+          "local_id": "D1"
+        },
+        "id": "widget:status",
+        "kind": "status",
+        "layout": {
+          "base": {
+            "height": 200,
+            "kind": "fixed",
+            "width": 400,
+            "x": 40,
+            "y": 40
+          }
+        },
+        "priority": "normal",
+        "title": "Status"
+      },
+      {
+        "bindings": [],
+        "children": [
+          "widget:text"
+        ],
+        "content": {},
+        "display": {
+          "local_id": "D1"
+        },
+        "id": "widget:group",
+        "kind": "group",
+        "layout": {
+          "base": {
+            "height": 200,
+            "kind": "fixed",
+            "width": 400,
+            "x": 60,
+            "y": 60
+          }
+        },
+        "priority": "normal",
+        "title": "Group",
+        "edit_locked": true,
+        "visibility": {
+          "schema_version": "0.1.0",
+          "binding": {
+            "kind": "selector",
+            "scope": {
+              "kind": "local_host"
+            },
+            "entity_type": "network.interface",
+            "field": "network.receive_bytes",
+            "predicates": [],
+            "mode": "singleton",
+            "sort": [],
+            "limit": 1
+          },
+          "op": "gt",
+          "value": 0,
+          "unit": "byte"
+        }
+      },
+      {
+        "bindings": [
+          {
+            "entity_type": "network.interface",
+            "field": "network.receive_bytes",
+            "kind": "selector",
+            "limit": 8,
+            "mode": "collection",
+            "predicates": [],
+            "scope": {
+              "kind": "local_host"
+            },
+            "sort": []
+          }
+        ],
+        "content": {
+          "columns": [
+            {
+              "label": "Receive"
+            }
+          ]
+        },
+        "display": {
+          "local_id": "D1"
+        },
+        "id": "widget:table",
+        "kind": "table",
+        "layout": {
+          "base": {
+            "height": 200,
+            "kind": "fixed",
+            "width": 400,
+            "x": 80,
+            "y": 80
+          }
+        },
+        "priority": "normal",
+        "title": "Table"
+      },
+      {
+        "bindings": [
+          {
+            "entity_type": "network.interface",
+            "field": "network.receive_bytes",
+            "kind": "selector",
+            "limit": 1,
+            "mode": "singleton",
+            "predicates": [],
+            "scope": {
+              "kind": "local_host"
+            },
+            "sort": []
+          }
+        ],
+        "content": {
+          "axis": {
+            "include_zero": true,
+            "mode": "auto"
+          },
+          "interpolation": "linear",
+          "max_points": 256,
+          "window_ms": 60000
+        },
+        "display": {
+          "local_id": "D1"
+        },
+        "id": "widget:chart",
+        "kind": "chart",
+        "layout": {
+          "base": {
+            "height": 200,
+            "kind": "fixed",
+            "width": 400,
+            "x": 100,
+            "y": 100
+          }
+        },
+        "priority": "normal",
+        "title": "Chart"
+      },
+      {
+        "bindings": [],
+        "content": {
+          "alt": "Public sample image",
+          "asset": {
+            "package": {
+              "id": "package:settings-native",
+              "sha256": "82793f6c05865da00783ae14aa4468c5483d42f06cfbdabde757ba0b3bfdfb7b",
+              "version": "0.1.0"
+            },
+            "path": "images/pixel.png",
+            "sha256": "78253200c249d4d84293b2a1e6fc803adedeba8645f38d6bc2f6734a2dfacec9"
+          },
+          "fit": "contain",
+          "height_dip": 64,
+          "width_dip": 64
+        },
+        "display": {
+          "local_id": "D1"
+        },
+        "id": "widget:image",
+        "kind": "image",
+        "layout": {
+          "base": {
+            "height": 200,
+            "kind": "fixed",
+            "width": 400,
+            "x": 120,
+            "y": 120
+          }
+        },
+        "priority": "normal",
+        "title": "Image"
+      }
+    ]
+  },
+  "destination": {
+    "scene": {
+      "extensions": {
+        "author.note": {
+          "preserve": [
+            "x",
+            1,
+            false
+          ]
+        }
+      },
+      "revision": "40",
+      "roots": [
+        "widget:text",
+        "widget:value",
+        "widget:status",
+        "widget:group",
+        "widget:table",
+        "widget:chart",
+        "widget:image"
+      ],
+      "scene_id": "scene:content",
+      "schema_version": "0.3.0",
+      "theme_id": null,
+      "widgets": [
+        {
+          "bindings": [],
+          "content": {
+            "body": "Plain body\nsecond line"
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:text",
+          "kind": "text",
+          "layout": {
+            "base": {
+              "height": 200,
+              "kind": "fixed",
+              "width": 400,
+              "x": 0,
+              "y": 0
+            }
+          },
+          "priority": "normal",
+          "title": "Text"
+        },
+        {
+          "bindings": [
+            {
+              "entity_type": "network.interface",
+              "field": "network.receive_bytes",
+              "kind": "selector",
+              "limit": 1,
+              "mode": "singleton",
+              "predicates": [],
+              "scope": {
+                "kind": "local_host"
+              },
+              "sort": []
+            }
+          ],
+          "content": {},
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:value",
+          "kind": "value",
+          "layout": {
+            "base": {
+              "height": 200,
+              "kind": "fixed",
+              "width": 400,
+              "x": 20,
+              "y": 20
+            }
+          },
+          "priority": "normal",
+          "title": "Value"
+        },
+        {
+          "bindings": [
+            {
+              "entity_type": "network.interface",
+              "field": "network.receive_bytes",
+              "kind": "selector",
+              "limit": 1,
+              "mode": "singleton",
+              "predicates": [],
+              "scope": {
+                "kind": "local_host"
+              },
+              "sort": []
+            }
+          ],
+          "content": {},
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:status",
+          "kind": "status",
+          "layout": {
+            "base": {
+              "height": 200,
+              "kind": "fixed",
+              "width": 400,
+              "x": 40,
+              "y": 40
+            }
+          },
+          "priority": "normal",
+          "title": "Status"
+        },
+        {
+          "bindings": [],
+          "children": [],
+          "content": {},
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:group",
+          "kind": "group",
+          "layout": {
+            "base": {
+              "height": 200,
+              "kind": "fixed",
+              "width": 400,
+              "x": 60,
+              "y": 60
+            }
+          },
+          "priority": "normal",
+          "title": "Group"
+        },
+        {
+          "bindings": [
+            {
+              "entity_type": "network.interface",
+              "field": "network.receive_bytes",
+              "kind": "selector",
+              "limit": 8,
+              "mode": "collection",
+              "predicates": [],
+              "scope": {
+                "kind": "local_host"
+              },
+              "sort": []
+            }
+          ],
+          "content": {
+            "columns": [
+              {
+                "label": "Receive"
+              }
+            ]
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:table",
+          "kind": "table",
+          "layout": {
+            "base": {
+              "height": 200,
+              "kind": "fixed",
+              "width": 400,
+              "x": 80,
+              "y": 80
+            }
+          },
+          "priority": "normal",
+          "title": "Table"
+        },
+        {
+          "bindings": [
+            {
+              "entity_type": "network.interface",
+              "field": "network.receive_bytes",
+              "kind": "selector",
+              "limit": 1,
+              "mode": "singleton",
+              "predicates": [],
+              "scope": {
+                "kind": "local_host"
+              },
+              "sort": []
+            }
+          ],
+          "content": {
+            "axis": {
+              "include_zero": true,
+              "mode": "auto"
+            },
+            "interpolation": "linear",
+            "max_points": 256,
+            "window_ms": 60000
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:chart",
+          "kind": "chart",
+          "layout": {
+            "base": {
+              "height": 200,
+              "kind": "fixed",
+              "width": 400,
+              "x": 100,
+              "y": 100
+            }
+          },
+          "priority": "normal",
+          "title": "Chart"
+        },
+        {
+          "bindings": [],
+          "content": {
+            "alt": "Public sample image",
+            "asset": {
+              "package": {
+                "id": "package:settings-native",
+                "sha256": "82793f6c05865da00783ae14aa4468c5483d42f06cfbdabde757ba0b3bfdfb7b",
+                "version": "0.1.0"
+              },
+              "path": "images/pixel.png",
+              "sha256": "78253200c249d4d84293b2a1e6fc803adedeba8645f38d6bc2f6734a2dfacec9"
+            },
+            "fit": "contain",
+            "height_dip": 64,
+            "width_dip": 64
+          },
+          "display": {
+            "local_id": "D1"
+          },
+          "id": "widget:image",
+          "kind": "image",
+          "layout": {
+            "base": {
+              "height": 200,
+              "kind": "fixed",
+              "width": 400,
+              "x": 120,
+              "y": 120
+            }
+          },
+          "priority": "normal",
+          "title": "Image"
+        }
+      ]
+    },
+    "settings": {
+      "display": {
+        "enabled": true,
+        "reduced_motion": true,
+        "theme_id": "theme:native"
+      },
+      "history": {
+        "persistent": false,
+        "segment_bytes": 10485760,
+        "segments": 5
+      },
+      "privacy": {
+        "export_enabled": false,
+        "remote_probes": false
+      },
+      "revision": "40",
+      "sampling": {
+        "max_workers": 4,
+        "reconcile_ms": 10000,
+        "resources_ms": 1000
+      },
+      "schema_version": "0.1.0"
+    }
+  },
+  "selection": [
+    "widget:image",
+    "widget:text",
+    "widget:group"
+  ],
+  "fragment": {
+    "format": "syspane.scene-fragment",
+    "schema_version": "0.1.0",
+    "scene_version": "0.5.0",
+    "roots": [
+      "widget:group",
+      "widget:image"
+    ],
+    "widgets": [
+      {
+        "bindings": [],
+        "content": {
+          "body": "Plain body\nsecond line"
+        },
+        "display": {
+          "local_id": "D1"
+        },
+        "id": "widget:text",
+        "kind": "text",
+        "layout": {
+          "base": {
+            "height": 200,
+            "kind": "fixed",
+            "width": 400,
+            "x": 0,
+            "y": 0
+          }
+        },
+        "priority": "normal",
+        "title": "Text",
+        "extensions": {
+          "author.clipboard": {
+            "literal": "widget:text",
+            "note": "私の text"
+          }
+        }
+      },
+      {
+        "bindings": [],
+        "children": [
+          "widget:text"
+        ],
+        "content": {},
+        "display": {
+          "local_id": "D1"
+        },
+        "id": "widget:group",
+        "kind": "group",
+        "layout": {
+          "base": {
+            "height": 200,
+            "kind": "fixed",
+            "width": 400,
+            "x": 60,
+            "y": 60
+          }
+        },
+        "priority": "normal",
+        "title": "Group",
+        "edit_locked": true,
+        "visibility": {
+          "schema_version": "0.1.0",
+          "binding": {
+            "kind": "selector",
+            "scope": {
+              "kind": "local_host"
+            },
+            "entity_type": "network.interface",
+            "field": "network.receive_bytes",
+            "predicates": [],
+            "mode": "singleton",
+            "sort": [],
+            "limit": 1
+          },
+          "op": "gt",
+          "value": 0,
+          "unit": "byte"
+        }
+      },
+      {
+        "bindings": [],
+        "content": {
+          "alt": "Public sample image",
+          "asset": {
+            "package": {
+              "id": "package:settings-native",
+              "sha256": "82793f6c05865da00783ae14aa4468c5483d42f06cfbdabde757ba0b3bfdfb7b",
+              "version": "0.1.0"
+            },
+            "path": "images/pixel.png",
+            "sha256": "78253200c249d4d84293b2a1e6fc803adedeba8645f38d6bc2f6734a2dfacec9"
+          },
+          "fit": "contain",
+          "height_dip": 64,
+          "width_dip": 64
+        },
+        "display": {
+          "local_id": "D1"
+        },
+        "id": "widget:image",
+        "kind": "image",
+        "layout": {
+          "base": {
+            "height": 200,
+            "kind": "fixed",
+            "width": 400,
+            "x": 120,
+            "y": 120
+          }
+        },
+        "priority": "normal",
+        "title": "Image"
+      }
+    ]
+  },
+  "all_fragment": {
+    "format": "syspane.scene-fragment",
+    "schema_version": "0.1.0",
+    "scene_version": "0.5.0",
+    "roots": [
+      "widget:value",
+      "widget:status",
+      "widget:group",
+      "widget:table",
+      "widget:chart",
+      "widget:image"
+    ],
+    "widgets": [
+      {
+        "bindings": [],
+        "content": {
+          "body": "Plain body\nsecond line"
+        },
+        "display": {
+          "local_id": "D1"
+        },
+        "id": "widget:text",
+        "kind": "text",
+        "layout": {
+          "base": {
+            "height": 200,
+            "kind": "fixed",
+            "width": 400,
+            "x": 0,
+            "y": 0
+          }
+        },
+        "priority": "normal",
+        "title": "Text",
+        "extensions": {
+          "author.clipboard": {
+            "literal": "widget:text",
+            "note": "私の text"
+          }
+        }
+      },
+      {
+        "bindings": [
+          {
+            "entity_type": "network.interface",
+            "field": "network.receive_bytes",
+            "kind": "selector",
+            "limit": 1,
+            "mode": "singleton",
+            "predicates": [],
+            "scope": {
+              "kind": "local_host"
+            },
+            "sort": []
+          }
+        ],
+        "content": {},
+        "display": {
+          "local_id": "D1"
+        },
+        "id": "widget:value",
+        "kind": "value",
+        "layout": {
+          "base": {
+            "height": 200,
+            "kind": "fixed",
+            "width": 400,
+            "x": 20,
+            "y": 20
+          }
+        },
+        "priority": "normal",
+        "title": "Value"
+      },
+      {
+        "bindings": [
+          {
+            "entity_type": "network.interface",
+            "field": "network.receive_bytes",
+            "kind": "selector",
+            "limit": 1,
+            "mode": "singleton",
+            "predicates": [],
+            "scope": {
+              "kind": "local_host"
+            },
+            "sort": []
+          }
+        ],
+        "content": {},
+        "display": {
+          "local_id": "D1"
+        },
+        "id": "widget:status",
+        "kind": "status",
+        "layout": {
+          "base": {
+            "height": 200,
+            "kind": "fixed",
+            "width": 400,
+            "x": 40,
+            "y": 40
+          }
+        },
+        "priority": "normal",
+        "title": "Status"
+      },
+      {
+        "bindings": [],
+        "children": [
+          "widget:text"
+        ],
+        "content": {},
+        "display": {
+          "local_id": "D1"
+        },
+        "id": "widget:group",
+        "kind": "group",
+        "layout": {
+          "base": {
+            "height": 200,
+            "kind": "fixed",
+            "width": 400,
+            "x": 60,
+            "y": 60
+          }
+        },
+        "priority": "normal",
+        "title": "Group",
+        "edit_locked": true,
+        "visibility": {
+          "schema_version": "0.1.0",
+          "binding": {
+            "kind": "selector",
+            "scope": {
+              "kind": "local_host"
+            },
+            "entity_type": "network.interface",
+            "field": "network.receive_bytes",
+            "predicates": [],
+            "mode": "singleton",
+            "sort": [],
+            "limit": 1
+          },
+          "op": "gt",
+          "value": 0,
+          "unit": "byte"
+        }
+      },
+      {
+        "bindings": [
+          {
+            "entity_type": "network.interface",
+            "field": "network.receive_bytes",
+            "kind": "selector",
+            "limit": 8,
+            "mode": "collection",
+            "predicates": [],
+            "scope": {
+              "kind": "local_host"
+            },
+            "sort": []
+          }
+        ],
+        "content": {
+          "columns": [
+            {
+              "label": "Receive"
+            }
+          ]
+        },
+        "display": {
+          "local_id": "D1"
+        },
+        "id": "widget:table",
+        "kind": "table",
+        "layout": {
+          "base": {
+            "height": 200,
+            "kind": "fixed",
+            "width": 400,
+            "x": 80,
+            "y": 80
+          }
+        },
+        "priority": "normal",
+        "title": "Table"
+      },
+      {
+        "bindings": [
+          {
+            "entity_type": "network.interface",
+            "field": "network.receive_bytes",
+            "kind": "selector",
+            "limit": 1,
+            "mode": "singleton",
+            "predicates": [],
+            "scope": {
+              "kind": "local_host"
+            },
+            "sort": []
+          }
+        ],
+        "content": {
+          "axis": {
+            "include_zero": true,
+            "mode": "auto"
+          },
+          "interpolation": "linear",
+          "max_points": 256,
+          "window_ms": 60000
+        },
+        "display": {
+          "local_id": "D1"
+        },
+        "id": "widget:chart",
+        "kind": "chart",
+        "layout": {
+          "base": {
+            "height": 200,
+            "kind": "fixed",
+            "width": 400,
+            "x": 100,
+            "y": 100
+          }
+        },
+        "priority": "normal",
+        "title": "Chart"
+      },
+      {
+        "bindings": [],
+        "content": {
+          "alt": "Public sample image",
+          "asset": {
+            "package": {
+              "id": "package:settings-native",
+              "sha256": "82793f6c05865da00783ae14aa4468c5483d42f06cfbdabde757ba0b3bfdfb7b",
+              "version": "0.1.0"
+            },
+            "path": "images/pixel.png",
+            "sha256": "78253200c249d4d84293b2a1e6fc803adedeba8645f38d6bc2f6734a2dfacec9"
+          },
+          "fit": "contain",
+          "height_dip": 64,
+          "width_dip": 64
+        },
+        "display": {
+          "local_id": "D1"
+        },
+        "id": "widget:image",
+        "kind": "image",
+        "layout": {
+          "base": {
+            "height": 200,
+            "kind": "fixed",
+            "width": 400,
+            "x": 120,
+            "y": 120
+          }
+        },
+        "priority": "normal",
+        "title": "Image"
+      }
+    ]
+  },
+  "child_fragment": {
+    "format": "syspane.scene-fragment",
+    "schema_version": "0.1.0",
+    "scene_version": "0.5.0",
+    "roots": [
+      "widget:text"
+    ],
+    "widgets": [
+      {
+        "bindings": [],
+        "content": {
+          "body": "Plain body\nsecond line"
+        },
+        "display": {
+          "local_id": "D1"
+        },
+        "id": "widget:text",
+        "kind": "text",
+        "layout": {
+          "base": {
+            "height": 200,
+            "kind": "fixed",
+            "width": 400,
+            "x": 0,
+            "y": 0
+          }
+        },
+        "priority": "normal",
+        "title": "Text",
+        "extensions": {
+          "author.clipboard": {
+            "literal": "widget:text",
+            "note": "私の text"
+          }
+        }
+      }
+    ]
+  },
+  "mapping": {
+    "widget:text": "pasted:text",
+    "widget:group": "pasted:group",
+    "widget:image": "pasted:image"
+  },
+  "pasted": {
+    "extensions": {
+      "author.note": {
+        "preserve": [
+          "x",
+          1,
+          false
+        ]
+      }
+    },
+    "revision": "40",
+    "roots": [
+      "widget:text",
+      "widget:value",
+      "pasted:group",
+      "pasted:image",
+      "widget:status",
+      "widget:group",
+      "widget:table",
+      "widget:chart",
+      "widget:image"
+    ],
+    "scene_id": "scene:content",
+    "schema_version": "0.5.0",
+    "theme_id": null,
+    "widgets": [
+      {
+        "bindings": [],
+        "content": {
+          "body": "Plain body\nsecond line"
+        },
+        "display": {
+          "local_id": "D1"
+        },
+        "id": "widget:text",
+        "kind": "text",
+        "layout": {
+          "base": {
+            "height": 200,
+            "kind": "fixed",
+            "width": 400,
+            "x": 0,
+            "y": 0
+          }
+        },
+        "priority": "normal",
+        "title": "Text"
+      },
+      {
+        "bindings": [
+          {
+            "entity_type": "network.interface",
+            "field": "network.receive_bytes",
+            "kind": "selector",
+            "limit": 1,
+            "mode": "singleton",
+            "predicates": [],
+            "scope": {
+              "kind": "local_host"
+            },
+            "sort": []
+          }
+        ],
+        "content": {},
+        "display": {
+          "local_id": "D1"
+        },
+        "id": "widget:value",
+        "kind": "value",
+        "layout": {
+          "base": {
+            "height": 200,
+            "kind": "fixed",
+            "width": 400,
+            "x": 20,
+            "y": 20
+          }
+        },
+        "priority": "normal",
+        "title": "Value"
+      },
+      {
+        "bindings": [
+          {
+            "entity_type": "network.interface",
+            "field": "network.receive_bytes",
+            "kind": "selector",
+            "limit": 1,
+            "mode": "singleton",
+            "predicates": [],
+            "scope": {
+              "kind": "local_host"
+            },
+            "sort": []
+          }
+        ],
+        "content": {},
+        "display": {
+          "local_id": "D1"
+        },
+        "id": "widget:status",
+        "kind": "status",
+        "layout": {
+          "base": {
+            "height": 200,
+            "kind": "fixed",
+            "width": 400,
+            "x": 40,
+            "y": 40
+          }
+        },
+        "priority": "normal",
+        "title": "Status"
+      },
+      {
+        "bindings": [],
+        "children": [],
+        "content": {},
+        "display": {
+          "local_id": "D1"
+        },
+        "id": "widget:group",
+        "kind": "group",
+        "layout": {
+          "base": {
+            "height": 200,
+            "kind": "fixed",
+            "width": 400,
+            "x": 60,
+            "y": 60
+          }
+        },
+        "priority": "normal",
+        "title": "Group"
+      },
+      {
+        "bindings": [
+          {
+            "entity_type": "network.interface",
+            "field": "network.receive_bytes",
+            "kind": "selector",
+            "limit": 8,
+            "mode": "collection",
+            "predicates": [],
+            "scope": {
+              "kind": "local_host"
+            },
+            "sort": []
+          }
+        ],
+        "content": {
+          "columns": [
+            {
+              "label": "Receive"
+            }
+          ]
+        },
+        "display": {
+          "local_id": "D1"
+        },
+        "id": "widget:table",
+        "kind": "table",
+        "layout": {
+          "base": {
+            "height": 200,
+            "kind": "fixed",
+            "width": 400,
+            "x": 80,
+            "y": 80
+          }
+        },
+        "priority": "normal",
+        "title": "Table"
+      },
+      {
+        "bindings": [
+          {
+            "entity_type": "network.interface",
+            "field": "network.receive_bytes",
+            "kind": "selector",
+            "limit": 1,
+            "mode": "singleton",
+            "predicates": [],
+            "scope": {
+              "kind": "local_host"
+            },
+            "sort": []
+          }
+        ],
+        "content": {
+          "axis": {
+            "include_zero": true,
+            "mode": "auto"
+          },
+          "interpolation": "linear",
+          "max_points": 256,
+          "window_ms": 60000
+        },
+        "display": {
+          "local_id": "D1"
+        },
+        "id": "widget:chart",
+        "kind": "chart",
+        "layout": {
+          "base": {
+            "height": 200,
+            "kind": "fixed",
+            "width": 400,
+            "x": 100,
+            "y": 100
+          }
+        },
+        "priority": "normal",
+        "title": "Chart"
+      },
+      {
+        "bindings": [],
+        "content": {
+          "alt": "Public sample image",
+          "asset": {
+            "package": {
+              "id": "package:settings-native",
+              "sha256": "82793f6c05865da00783ae14aa4468c5483d42f06cfbdabde757ba0b3bfdfb7b",
+              "version": "0.1.0"
+            },
+            "path": "images/pixel.png",
+            "sha256": "78253200c249d4d84293b2a1e6fc803adedeba8645f38d6bc2f6734a2dfacec9"
+          },
+          "fit": "contain",
+          "height_dip": 64,
+          "width_dip": 64
+        },
+        "display": {
+          "local_id": "D1"
+        },
+        "id": "widget:image",
+        "kind": "image",
+        "layout": {
+          "base": {
+            "height": 200,
+            "kind": "fixed",
+            "width": 400,
+            "x": 120,
+            "y": 120
+          }
+        },
+        "priority": "normal",
+        "title": "Image"
+      },
+      {
+        "bindings": [],
+        "content": {
+          "body": "Plain body\nsecond line"
+        },
+        "display": {
+          "local_id": "D1"
+        },
+        "id": "pasted:text",
+        "kind": "text",
+        "layout": {
+          "base": {
+            "height": 200,
+            "kind": "fixed",
+            "width": 400,
+            "x": 0,
+            "y": 0
+          }
+        },
+        "priority": "normal",
+        "title": "Text",
+        "extensions": {
+          "author.clipboard": {
+            "literal": "widget:text",
+            "note": "私の text"
+          }
+        }
+      },
+      {
+        "bindings": [],
+        "children": [
+          "pasted:text"
+        ],
+        "content": {},
+        "display": {
+          "local_id": "D1"
+        },
+        "id": "pasted:group",
+        "kind": "group",
+        "layout": {
+          "base": {
+            "height": 200,
+            "kind": "fixed",
+            "width": 400,
+            "x": 60,
+            "y": 60
+          }
+        },
+        "priority": "normal",
+        "title": "Group",
+        "edit_locked": true,
+        "visibility": {
+          "schema_version": "0.1.0",
+          "binding": {
+            "kind": "selector",
+            "scope": {
+              "kind": "local_host"
+            },
+            "entity_type": "network.interface",
+            "field": "network.receive_bytes",
+            "predicates": [],
+            "mode": "singleton",
+            "sort": [],
+            "limit": 1
+          },
+          "op": "gt",
+          "value": 0,
+          "unit": "byte"
+        }
+      },
+      {
+        "bindings": [],
+        "content": {
+          "alt": "Public sample image",
+          "asset": {
+            "package": {
+              "id": "package:settings-native",
+              "sha256": "82793f6c05865da00783ae14aa4468c5483d42f06cfbdabde757ba0b3bfdfb7b",
+              "version": "0.1.0"
+            },
+            "path": "images/pixel.png",
+            "sha256": "78253200c249d4d84293b2a1e6fc803adedeba8645f38d6bc2f6734a2dfacec9"
+          },
+          "fit": "contain",
+          "height_dip": 64,
+          "width_dip": 64
+        },
+        "display": {
+          "local_id": "D1"
+        },
+        "id": "pasted:image",
+        "kind": "image",
+        "layout": {
+          "base": {
+            "height": 200,
+            "kind": "fixed",
+            "width": 400,
+            "x": 120,
+            "y": 120
+          }
+        },
+        "priority": "normal",
+        "title": "Image"
+      }
+    ]
+  },
+  "nested": {
+    "extensions": {
+      "author.note": {
+        "preserve": [
+          "x",
+          1,
+          false
+        ]
+      }
+    },
+    "revision": "40",
+    "roots": [
+      "widget:text",
+      "widget:value",
+      "widget:status",
+      "widget:group",
+      "widget:table",
+      "widget:chart",
+      "widget:image"
+    ],
+    "scene_id": "scene:content",
+    "schema_version": "0.5.0",
+    "theme_id": null,
+    "widgets": [
+      {
+        "bindings": [],
+        "content": {
+          "body": "Plain body\nsecond line"
+        },
+        "display": {
+          "local_id": "D1"
+        },
+        "id": "widget:text",
+        "kind": "text",
+        "layout": {
+          "base": {
+            "height": 200,
+            "kind": "fixed",
+            "width": 400,
+            "x": 0,
+            "y": 0
+          }
+        },
+        "priority": "normal",
+        "title": "Text"
+      },
+      {
+        "bindings": [
+          {
+            "entity_type": "network.interface",
+            "field": "network.receive_bytes",
+            "kind": "selector",
+            "limit": 1,
+            "mode": "singleton",
+            "predicates": [],
+            "scope": {
+              "kind": "local_host"
+            },
+            "sort": []
+          }
+        ],
+        "content": {},
+        "display": {
+          "local_id": "D1"
+        },
+        "id": "widget:value",
+        "kind": "value",
+        "layout": {
+          "base": {
+            "height": 200,
+            "kind": "fixed",
+            "width": 400,
+            "x": 20,
+            "y": 20
+          }
+        },
+        "priority": "normal",
+        "title": "Value"
+      },
+      {
+        "bindings": [
+          {
+            "entity_type": "network.interface",
+            "field": "network.receive_bytes",
+            "kind": "selector",
+            "limit": 1,
+            "mode": "singleton",
+            "predicates": [],
+            "scope": {
+              "kind": "local_host"
+            },
+            "sort": []
+          }
+        ],
+        "content": {},
+        "display": {
+          "local_id": "D1"
+        },
+        "id": "widget:status",
+        "kind": "status",
+        "layout": {
+          "base": {
+            "height": 200,
+            "kind": "fixed",
+            "width": 400,
+            "x": 40,
+            "y": 40
+          }
+        },
+        "priority": "normal",
+        "title": "Status"
+      },
+      {
+        "bindings": [],
+        "children": [
+          "pasted:group",
+          "pasted:image"
+        ],
+        "content": {},
+        "display": {
+          "local_id": "D1"
+        },
+        "id": "widget:group",
+        "kind": "group",
+        "layout": {
+          "base": {
+            "height": 200,
+            "kind": "fixed",
+            "width": 400,
+            "x": 60,
+            "y": 60
+          }
+        },
+        "priority": "normal",
+        "title": "Group"
+      },
+      {
+        "bindings": [
+          {
+            "entity_type": "network.interface",
+            "field": "network.receive_bytes",
+            "kind": "selector",
+            "limit": 8,
+            "mode": "collection",
+            "predicates": [],
+            "scope": {
+              "kind": "local_host"
+            },
+            "sort": []
+          }
+        ],
+        "content": {
+          "columns": [
+            {
+              "label": "Receive"
+            }
+          ]
+        },
+        "display": {
+          "local_id": "D1"
+        },
+        "id": "widget:table",
+        "kind": "table",
+        "layout": {
+          "base": {
+            "height": 200,
+            "kind": "fixed",
+            "width": 400,
+            "x": 80,
+            "y": 80
+          }
+        },
+        "priority": "normal",
+        "title": "Table"
+      },
+      {
+        "bindings": [
+          {
+            "entity_type": "network.interface",
+            "field": "network.receive_bytes",
+            "kind": "selector",
+            "limit": 1,
+            "mode": "singleton",
+            "predicates": [],
+            "scope": {
+              "kind": "local_host"
+            },
+            "sort": []
+          }
+        ],
+        "content": {
+          "axis": {
+            "include_zero": true,
+            "mode": "auto"
+          },
+          "interpolation": "linear",
+          "max_points": 256,
+          "window_ms": 60000
+        },
+        "display": {
+          "local_id": "D1"
+        },
+        "id": "widget:chart",
+        "kind": "chart",
+        "layout": {
+          "base": {
+            "height": 200,
+            "kind": "fixed",
+            "width": 400,
+            "x": 100,
+            "y": 100
+          }
+        },
+        "priority": "normal",
+        "title": "Chart"
+      },
+      {
+        "bindings": [],
+        "content": {
+          "alt": "Public sample image",
+          "asset": {
+            "package": {
+              "id": "package:settings-native",
+              "sha256": "82793f6c05865da00783ae14aa4468c5483d42f06cfbdabde757ba0b3bfdfb7b",
+              "version": "0.1.0"
+            },
+            "path": "images/pixel.png",
+            "sha256": "78253200c249d4d84293b2a1e6fc803adedeba8645f38d6bc2f6734a2dfacec9"
+          },
+          "fit": "contain",
+          "height_dip": 64,
+          "width_dip": 64
+        },
+        "display": {
+          "local_id": "D1"
+        },
+        "id": "widget:image",
+        "kind": "image",
+        "layout": {
+          "base": {
+            "height": 200,
+            "kind": "fixed",
+            "width": 400,
+            "x": 120,
+            "y": 120
+          }
+        },
+        "priority": "normal",
+        "title": "Image"
+      },
+      {
+        "bindings": [],
+        "content": {
+          "body": "Plain body\nsecond line"
+        },
+        "display": {
+          "local_id": "D1"
+        },
+        "id": "pasted:text",
+        "kind": "text",
+        "layout": {
+          "base": {
+            "height": 200,
+            "kind": "fixed",
+            "width": 400,
+            "x": 0,
+            "y": 0
+          }
+        },
+        "priority": "normal",
+        "title": "Text",
+        "extensions": {
+          "author.clipboard": {
+            "literal": "widget:text",
+            "note": "私の text"
+          }
+        }
+      },
+      {
+        "bindings": [],
+        "children": [
+          "pasted:text"
+        ],
+        "content": {},
+        "display": {
+          "local_id": "D1"
+        },
+        "id": "pasted:group",
+        "kind": "group",
+        "layout": {
+          "base": {
+            "height": 200,
+            "kind": "fixed",
+            "width": 400,
+            "x": 60,
+            "y": 60
+          }
+        },
+        "priority": "normal",
+        "title": "Group",
+        "edit_locked": true,
+        "visibility": {
+          "schema_version": "0.1.0",
+          "binding": {
+            "kind": "selector",
+            "scope": {
+              "kind": "local_host"
+            },
+            "entity_type": "network.interface",
+            "field": "network.receive_bytes",
+            "predicates": [],
+            "mode": "singleton",
+            "sort": [],
+            "limit": 1
+          },
+          "op": "gt",
+          "value": 0,
+          "unit": "byte"
+        }
+      },
+      {
+        "bindings": [],
+        "content": {
+          "alt": "Public sample image",
+          "asset": {
+            "package": {
+              "id": "package:settings-native",
+              "sha256": "82793f6c05865da00783ae14aa4468c5483d42f06cfbdabde757ba0b3bfdfb7b",
+              "version": "0.1.0"
+            },
+            "path": "images/pixel.png",
+            "sha256": "78253200c249d4d84293b2a1e6fc803adedeba8645f38d6bc2f6734a2dfacec9"
+          },
+          "fit": "contain",
+          "height_dip": 64,
+          "width_dip": 64
+        },
+        "display": {
+          "local_id": "D1"
+        },
+        "id": "pasted:image",
+        "kind": "image",
+        "layout": {
+          "base": {
+            "height": 200,
+            "kind": "fixed",
+            "width": 400,
+            "x": 120,
+            "y": 120
+          }
+        },
+        "priority": "normal",
+        "title": "Image"
+      }
+    ]
+  },
+  "selected_after": [
+    "pasted:group",
+    "pasted:image"
+  ]
+}

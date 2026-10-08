@@ -62,8 +62,8 @@ the cache controls and default reveal failure retain their failed candidate outc
 Every owned process group has confirmed cleanup. The original default focus failure
 has not been reclassified as a pass.
 
-Evidence uses `build-support/evidence/w-25-native-network-cache-`; the machine
-handoff is `build-support/evidence/native-network-cache-handoff.json`. Source archives,
+Evidence uses `out/evidence/w-25-native-network-cache-`; the machine
+handoff is `out/evidence/native-network-cache-handoff.json`. Source archives,
 public native attempts, execution/preflight records, private artifact identities and
 verification results identify the tested state. Prior C++ build/profile/smoke evidence
 retains its exact source/artifact identity; no C++ code or build target changed here.

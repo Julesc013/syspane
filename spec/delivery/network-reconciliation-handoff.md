@@ -64,7 +64,7 @@ callback alone does not establish coverage of every raw interface-table entry.
 The three fresh relocated model smoke packages pass. Their payload is still the
 development model, not a collector or complete product. All fifteen configure/build/test
 attempts passed; their source archives and outputs are preserved. Per-profile
-`build-support/evidence/w-25-network-reconciliation-*.json`, attempts, verification
+`out/evidence/w-25-network-reconciliation-*.json`, attempts, verification
 and the machine handoff bind results to actual source/package/artifact identities.
 Public native evidence contains outcomes and counts without raw keys or counters.
 

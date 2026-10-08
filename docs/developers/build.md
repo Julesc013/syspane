@@ -1,5 +1,20 @@
 # Developer setup and checks
 
+Shared build scripts, target profiles and dependency locks live in
+[source/build](../../source/build/README.md). Generated artifacts and raw evidence
+are local, ignored `out/` content. A fresh checkout does not include historical
+recordings; deterministic build/tests do not require them. Native experiments that
+validate a prerequisite build record must generate that record for their own source,
+artifacts and environment before execution.
+
+For the Windows/WSL campaign coordinator, create `out/campaign/`, copy
+`source/build/workspace.example.json` to `out/campaign/workspace.json`, and explicitly
+set the admitted distribution, non-root user and owned Linux campaign directory.
+Keep that binding local. Run `python source/build/check_workspace_budget.py --action
+build` before configuring or building; use `test` or `package` for those actions.
+The common active-output budget is unchanged; retained `out/evidence/` archives
+are measured separately. Never use the placeholder account from the example.
+
 The [typography package](../../spec/delivery/packages/w-09-typography.md) introduces
 theme 0.2 and `configuration::theme_font(theme, role)`. It returns an owned family,
 DIP size, weight and style; `TextRequest.role` defaults to body. ContentCatalog adds
@@ -228,7 +243,7 @@ The [image pipeline package](../../spec/delivery/packages/w-09-image-pipeline.md
 adds shared premultiplied bilinear fit/orientation and the Linux
 `SysPane.ImageWorker` / `rendering::ImageJob` boundary. The worker accepts PNG,
 JPEG and the declared static SVG profile from bounded bytes. Its installed codec,
-loader, relevant header and kernel identities are in `build-support/image-runtime.json`.
+loader, relevant header and kernel identities are in `source/build/image-runtime.json`.
 Linux requires Landlock ABI >= 3, seccomp and the pinned runtime; startup fails
 when containment cannot be installed. No privileged installation is involved.
 
@@ -333,7 +348,7 @@ private D-Bus session, compares root pixels with fixed expected text, and reads
 actual GTK names through AT-SPI. Intentional pixel/name retention controls must be
 rejected. Synthetic captures are under `native-evidence/surface-*`; the temporary
 X authorization file must never be copied into committed evidence. Installed
-AT-SPI/ATK/observer identities are checked against `build-support/surface-runtime.json`.
+AT-SPI/ATK/observer identities are checked against `source/build/surface-runtime.json`.
 This experiment does not install a renderer or qualify behind-icons placement.
 
 The [native text package](../../spec/delivery/packages/w-09-native-text.md) adds
@@ -349,7 +364,7 @@ linux-x64-gcc13 -R '^native[.]TEXT-RASTER$' --output-on-failure` with the existi
 Linux build-root environment. The independent Python oracle inspects raw pixels
 and rejects malformed/bounded input. Reports and synthetic rasters are written
 under `native-evidence/text-*`. Configure and native tests verify installed text
-libraries, fonts and font configuration against `build-support/text-runtime.json`.
+libraries, fonts and font configuration against `source/build/text-runtime.json`.
 Dependency changes require an explicit identity revision; no package installation
 is performed. The probe accepts one bounded JSON input on stdin and one owned raw
 output path; its `text_hex` input is malformed-UTF-8 laboratory instrumentation.
@@ -613,7 +628,7 @@ complete suites using `--subscriptions`. Product demand, real collectors and
 measured-field freshness remain unqualified.
 
 Before a build, test or package launch, run the Windows coordinator
-`python build-support/check_workspace_budget.py --action build` (select `test` or
+`python source/build/check_workspace_budget.py --action build` (select `test` or
 `package` as appropriate); require exit zero. Run it afterward with `--action inspect`.
 The combined checkout/native-Linux allocation is 5 GiB with growth reservations;
 this is a preflight check, not an OS quota. The original 1 GiB overrun is preserved
@@ -658,14 +673,14 @@ runs the same cases. Native UI tests use typed policy fixtures in a separate tes
 executable; they programmatically activate the same Win32/GTK controls without
 changing machine policy. Linux uses an owned authenticated Xvfb server. Preserve
 failures and unexecuted privilege/filesystem cases. Record a complete final run with
-`build-support/record_protocol.py --preservation --profile <profile> --build-dir
+`source/build/record_protocol.py --preservation --profile <profile> --build-dir
 <build> --output <record>`. Historical recording accepts `--preservation` for the
 portable predicate only; its file/UI adapters stay disabled.
 
 The repository builds the C++17 model, portable protocol/configuration libraries
 and a deterministic development smoke program. A usable desktop application
 remains pending. Use the pinned tools in
-[the development profiles](../../build-support/targets/README.md). From the repository
+[the development profiles](../../source/build/targets/README.md). From the repository
 root on Windows:
 
 ```powershell
@@ -677,22 +692,24 @@ out/build/windows-x64-gcc15/SysPane.ModelSmoke.exe
 
 The Linux preset uses an unprivileged account and a native cache directory for
 build products. The same source checkout and expectations are used. From the
-repository root in the admitted Ubuntu environment, `sh build-support/run_foundation.sh`
-runs the documented configure/build/test/package commands. Individual `configure`,
-`build`, `test` and `package` arguments are available. The wrapper sets the bounded
-cache root; it does not install dependencies or require root.
+repository root in the admitted Ubuntu environment, `sh source/build/run_foundation.sh`
+runs the documented configure/build/test/package commands. Set
+`SYSPANE_LINUX_BUILD_ROOT` to the admitted owned campaign directory first;
+the wrapper refuses an unset value. Individual `configure`, `build`, `test` and
+`package` arguments are available. The wrapper does not install dependencies or
+require root.
 
 Create a local Windows smoke archive and check relocation with:
 
 ```powershell
-python build-support/package_smoke.py --profile windows-x64-gcc15 --build-dir out/build/windows-x64-gcc15
+python source/build/package_smoke.py --profile windows-x64-gcc15 --build-dir out/build/windows-x64-gcc15
 ```
 
 The W-24 checkpoint ran 37 CTest entries: the original 18 model/smoke/component checks,
 17 portable protocol/policy checks and two native IPC families. Run portable cases with
 `ctest --preset windows-x64-gcc15 -R '^protocol\.' --output-on-failure`.
 The original W-01 results remain historical; W-24 case/artifact records are
-`build-support/evidence/w-24-native-<profile>.json`. The two native families contain
+`out/evidence/w-24-native-<profile>.json`. The two native families contain
 15 concrete Windows cases and 16 Linux cases, with raw process transcripts. Run
 them alone with `ctest --preset windows-x64-gcc15 -R '^native\.' --output-on-failure`.
 `SysPane.IpcProbe` is a finite development probe; it is not the SysPane product.
@@ -710,7 +727,7 @@ The recorder's `--native` mode binds the exact reports named in the complete CTe
 log; it does not choose an arbitrary latest passing file.
 
 The protocol boundary vendors nlohmann/json 3.12.0 under its upstream MIT license.
-[Dependency identities](../../build-support/dependencies.json) pin the header and
+[Dependency identities](../../source/build/dependencies.json) pin the header and
 license digests; configure verifies them offline. The model has no JSON dependency.
 `generate_settings.py` projects the canonical eleven-descriptor registry into the
 build directory and rejects constraints it cannot implement. Never hand-edit that
@@ -723,13 +740,13 @@ native-handle dependency. Tests link the model separately to verify that produce
 heartbeats leave observation freshness unchanged. Run just these cases with
 `ctest --preset windows-x64-gcc15 -R '^recovery\.' --output-on-failure`.
 The Linux wrapper's `test` action runs the full suite in its owned native build root.
-Portable checkpoint records are `build-support/evidence/w-25-portable-<profile>.json`.
+Portable checkpoint records are `out/evidence/w-25-portable-<profile>.json`.
 
 The [W-25 package](../../spec/delivery/packages/w-25-recovery.md) defines the time,
 ownership, expiry and restart boundaries. Guard objects are single-owner and cannot
 be copied/moved. Their time inputs are local invocation times; views do not sample
 a clock. The caller must advance time and apply current policy before presentation.
-`build-support/record_protocol.py --recovery --profile <profile> --build-dir <build>
+`source/build/record_protocol.py --recovery --profile <profile> --build-dir <build>
 --output <record>` records a completed full run, requiring all 48 cases and the
 native IPC reports named in its log. It labels recovery evidence as portable only.
 At that portable checkpoint, native supervision, diagnostic startup/inspector,
@@ -744,7 +761,7 @@ family with `ctest --preset windows-x64-gcc15 -R '^native.RECOVERY-01$' --output
 It takes approximately 35 seconds; the full suite takes approximately 65 seconds.
 The Linux wrapper uses the same test family in its owned build root.
 
-Supervision checkpoint records are `build-support/evidence/w-25-supervision-<profile>.json`.
+Supervision checkpoint records are `out/evidence/w-25-supervision-<profile>.json`.
 Use the recorder's `--supervision` option to require the complete 49-entry run and
 its nine native recovery cases. Per-attempt reports remain in `native-evidence/`;
 the recorder binds the exact files named by CTest, checks the probe/source digests
@@ -767,7 +784,7 @@ do not qualify visible desktop behavior or full accessibility. Run this boundary
 with `ctest --preset windows-x64-gcc15 -R 'diagnostic|DIAG-01' --output-on-failure`.
 
 Linux configure verifies GTK 3.24.41 and the installed package/runtime identities
-in `build-support/check_diagnostic_dependencies.py`. It installs nothing. GTK is
+in `source/build/check_diagnostic_dependencies.py`. It installs nothing. GTK is
 dynamically linked; the report skips toolkit initialization but still needs its
 installed loader dependencies. The measured native close test uses owned authenticated Xvfb/X11;
 Wayland and full transitive packaging remain unqualified.
@@ -778,7 +795,7 @@ and native revocation qualification need an admitted administrative lab. Portabl
 fixtures test parsing/projection semantics, not policy provenance. Diagnostic
 preservation, recent-failure metadata and recovery actions remain pending.
 
-Diagnostic checkpoint records are `build-support/evidence/w-25-diagnostic-<profile>.json`.
+Diagnostic checkpoint records are `out/evidence/w-25-diagnostic-<profile>.json`.
 `record_protocol.py --diagnostic --profile <profile> --build-dir <build> --output
 <record>` requires the exact 52-entry suite and its IPC, supervision and diagnostic
 reports, checking source and executable identity. See the
@@ -804,7 +821,7 @@ Task-owned `oracle-case-<id>/` journals also preserve each flushed frame/stimulu
 including an interrupted prefix. The recorder's `--oracle` mode recomputes every
 temporal result from the captured bytes, verifies journal/source/artifact identity
 and checks confirmed cleanup/root restoration. Current records are
-`build-support/evidence/w-02-oracle-<profile>.json`; see the
+`out/evidence/w-02-oracle-<profile>.json`; see the
 [oracle handoff](../../spec/delivery/oracle-handoff.md) and
 [package](../../spec/delivery/packages/w-02-desktop-oracle.md).
 
@@ -818,7 +835,7 @@ The optional W-05 X11 investigation uses an extracted Openbox/PCManFM lab. From
 the admitted Linux checkout, with the owned build directory as `<build>`:
 
 ```sh
-python3 build-support/prepare_x11_lab.py <build> --refresh-metadata
+python3 source/build/prepare_x11_lab.py <build> --refresh-metadata
 python3 tests/desktop/native_x11_host.py <build>
 python3 tests/desktop/native_x11_host.py <build> --wallpaper-mode color
 python3 tests/desktop/native_x11_host.py <build> --delayed-wallpaper --icon-input
@@ -826,7 +843,7 @@ python3 tests/desktop/native_x11_host.py <build> --wallpaper-mode color --restar
 python3 tests/desktop/native_x11_host.py <build> --delayed-wallpaper --restart-window-manager
 ```
 
-Preparation downloads only the exact archives in `build-support/x11-lab-packages.json`
+Preparation downloads only the exact archives in `source/build/x11-lab-packages.json`
 and verifies their sizes/digests before extraction. Metadata refresh uses a task-local
 APT list directory. No system installation or maintainer script runs. The ordinary
 configure/build/test commands neither prepare nor launch this optional desktop lab.
@@ -846,12 +863,12 @@ native Super+D actions. It captures through reveal/restore, measures actual icon
 concealment, preserves frame journals and checks owned-process cleanup.
 `--delayed-wallpaper` configures the fixture after PCManFM initializes and requires
 captured image pixels to match the PPM exactly. `--icon-input` checks the installed
-runtime against `build-support/x11-input-runtime.json`, starts an owned accessibility
+runtime against `source/build/x11-input-runtime.json`, starts an owned accessibility
 registry and observes native pointer/keyboard routing through exact private clipboard
 URIs, AT-SPI, focus and root pixels. It never uses the user's clipboard or desktop.
 Missing/mismatched optional runtime is a lab limitation, not an installation request.
 
-Use `python3 build-support/record_x11_host.py --build-dir <build>
+Use `python3 source/build/record_x11_host.py --build-dir <build>
 --report <exact-report> --output <record>` to bind evidence and recompute outcomes.
 The optional `--failed-image-report <exact-default-report>` accepts a failure from
 the same source/runtime checkpoint. Historical reports retain their original source
@@ -866,7 +883,7 @@ profiles, product shell recovery and wallpaper policy remain unqualified.
 `--restart-window-manager` adds a separate recovery interval after the unchanged
 reveal trace. It stops only the owned Openbox child, requires independent pidfd exit
 proof, starts one replacement and binds its supporting window through X-Resource.
-The optional runtime is pinned in `build-support/x11-recovery-runtime.json`.
+The optional runtime is pinned in `source/build/x11-recovery-runtime.json`.
 It cannot be combined with `--icon-input` under the current lifetime contract.
 Inspect `recovery_observation.outcomes`: manager recovery and continuing generations
 can pass while visible recovery fails. Every captured frame/journal is preserved.
@@ -881,12 +898,12 @@ runtime archives, signed metadata and preserved attempts. Preparation is the exp
 network step; ordinary builds and the native experiment stay offline.
 
 ```sh
-python3 build-support/prepare_gnome_lab.py <owned-build-directory>
+python3 source/build/prepare_gnome_lab.py <owned-build-directory>
 python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory>
 python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --marker
 python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --marker --marker-control hidden
 python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --marker --marker-control frozen
-python3 build-support/record_gnome_host.py --build-dir <owned-build-directory> --reports <live-report> <hidden-report> <frozen-report> --output <new-owned-record>
+python3 source/build/record_gnome_host.py --build-dir <owned-build-directory> --reports <live-report> <hidden-report> <frozen-report> --output <new-owned-record>
 python3 tests/desktop/test_gnome_record.py <owned-build-directory> <live-report> -v
 ```
 
@@ -904,7 +921,7 @@ The same owned GNOME runner now has a separate DING composition fixture:
 python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --composition live
 python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --composition above-icons
 python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --composition below-wallpaper
-python3 build-support/record_gnome_composition.py --build-dir <owned-build-directory> --reports <live-report> <above-report> <below-report> --output <new-owned-record>
+python3 source/build/record_gnome_composition.py --build-dir <owned-build-directory> --reports <live-report> <above-report> <below-report> --output <new-owned-record>
 python3 tests/desktop/test_gnome_composition_record.py <owned-build-directory> <live-report> -v
 ```
 
@@ -923,7 +940,7 @@ The configured GNOME reveal experiment adds a normal owned GTK foreground window
 python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --reveal live
 python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --reveal no-action
 python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --reveal transient-blank
-python3 build-support/record_gnome_reveal.py --build-dir <owned-build-directory> --reports <live-report> <no-action-report> <blank-report> --output <new-owned-record>
+python3 source/build/record_gnome_reveal.py --build-dir <owned-build-directory> --reports <live-report> <no-action-report> <blank-report> --output <new-owned-record>
 python3 tests/desktop/test_gnome_reveal_record.py <owned-build-directory> <live-report> <no-action-report> <blank-report> -v
 ```
 
@@ -942,7 +959,7 @@ The independent focus comparison runs three modes, each in a fresh owned desktop
 python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --focus-baseline shell
 python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --focus-baseline ding
 python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --focus-baseline candidate
-python3 build-support/record_gnome_focus.py --build-dir <owned-build-directory> --reports <nine-reports> --output <new-owned-record>
+python3 source/build/record_gnome_focus.py --build-dir <owned-build-directory> --reports <nine-reports> --output <new-owned-record>
 python3 tests/desktop/test_gnome_focus_record.py <owned-build-directory> <nine-reports> -v
 ```
 
@@ -960,7 +977,7 @@ without `--focus-trace`, completing the normal workspace preflight before each r
 
 ```sh
 python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --focus-baseline ding --focus-trace
-python3 build-support/record_gnome_focus_trace.py --build-dir <owned-build-directory> --reports <six-paired-reports> --output <new-owned-record>
+python3 source/build/record_gnome_focus_trace.py --build-dir <owned-build-directory> --reports <six-paired-reports> --output <new-owned-record>
 python3 tests/desktop/test_gnome_focus_trace_record.py <owned-build-directory> <six-paired-reports> -v
 ```
 
@@ -978,7 +995,7 @@ before each invocation; no packages or user settings are installed:
 python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --icon-input live
 python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --icon-input block-pointer
 python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --icon-input no-selection
-python3 build-support/record_gnome_input.py --build-dir <owned-build-directory> --reports <three-input-reports> --output <new-owned-record>
+python3 source/build/record_gnome_input.py --build-dir <owned-build-directory> --reports <three-input-reports> --output <new-owned-record>
 python3 tests/desktop/test_gnome_input_record.py <owned-build-directory> <three-input-reports> -v
 ```
 
@@ -995,7 +1012,7 @@ python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --wallpa
 python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --wallpaper replace-file
 python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --wallpaper redirect-setting
 python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --wallpaper cover-wallpaper
-python3 build-support/record_gnome_wallpaper.py --build-dir <owned-build-directory> --reports <four-wallpaper-reports> --output <new-owned-record>
+python3 source/build/record_gnome_wallpaper.py --build-dir <owned-build-directory> --reports <four-wallpaper-reports> --output <new-owned-record>
 python3 tests/desktop/test_gnome_wallpaper_record.py <owned-build-directory> <four-wallpaper-reports> -v
 ```
 
@@ -1015,7 +1032,7 @@ running-app dash, using two private normal applications and their native icons:
 python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --switcher live
 python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --switcher ordinary-window
 python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --switcher no-switcher
-python3 build-support/record_gnome_switcher.py --build-dir <owned-build-directory> --reports <three-switcher-reports> --output <new-owned-record>
+python3 source/build/record_gnome_switcher.py --build-dir <owned-build-directory> --reports <three-switcher-reports> --output <new-owned-record>
 python3 tests/desktop/test_gnome_switcher_record.py <owned-build-directory> <three-switcher-reports> -v
 ```
 
@@ -1037,7 +1054,7 @@ full icon input on the replacement:
 python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --icon-recovery live
 python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --icon-recovery frozen-surface
 python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --icon-recovery no-stop
-python3 build-support/record_gnome_icon_recovery.py --build-dir <owned-build-directory> --reports <three-recovery-reports> --output <new-owned-record>
+python3 source/build/record_gnome_icon_recovery.py --build-dir <owned-build-directory> --reports <three-recovery-reports> --output <new-owned-record>
 python3 tests/desktop/test_gnome_icon_recovery_record.py <owned-build-directory> <three-recovery-reports> -v
 ```
 
@@ -1059,7 +1076,7 @@ retaining Xvfb and private buses, then checks bridge reattachment and new-deskto
 python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --shell-recovery live
 python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --shell-recovery no-reattach
 python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --shell-recovery no-restart
-python3 build-support/record_gnome_shell_recovery.py --build-dir <owned-build-directory> --reports <three-shell-recovery-reports> --output <new-owned-record>
+python3 source/build/record_gnome_shell_recovery.py --build-dir <owned-build-directory> --reports <three-shell-recovery-reports> --output <new-owned-record>
 python3 tests/desktop/test_gnome_shell_recovery_record.py <owned-build-directory> <three-shell-recovery-reports> -v
 ```
 
@@ -1079,7 +1096,7 @@ native interaction guards. It leaves the default bridge behavior unchanged:
 ```text
 python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --focus-baseline candidate --focus-integration observe
 python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --focus-baseline candidate --focus-integration restore
-python3 build-support/record_gnome_focus_integration.py --build-dir <owned-build-directory> --reports <observe-report> <restore-report> --output <new-owned-record>
+python3 source/build/record_gnome_focus_integration.py --build-dir <owned-build-directory> --reports <observe-report> <restore-report> --output <new-owned-record>
 python3 tests/desktop/test_gnome_focus_integration_record.py <owned-build-directory> <observe-report> <restore-report> -v
 ```
 
@@ -1100,7 +1117,7 @@ closed targets and static-workspace changes using the same optional controller:
 python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --focus-scenarios restore
 python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --focus-scenarios observe
 python3 tests/desktop/native_gnome_bootstrap.py <owned-build-directory> --focus-scenarios helper-exit
-python3 build-support/record_gnome_focus_scenarios.py --build-dir <owned-build-directory> --reports <restore-report> <observe-report> <helper-exit-report> --output <new-owned-record>
+python3 source/build/record_gnome_focus_scenarios.py --build-dir <owned-build-directory> --reports <restore-report> <observe-report> <helper-exit-report> --output <new-owned-record>
 python3 tests/desktop/test_gnome_focus_scenarios_record.py <owned-build-directory> <restore-report> <observe-report> <helper-exit-report> -v
 ```
 
@@ -1121,7 +1138,7 @@ and diagnostic projection sources; modern native adapters require separate closu
 cmake --preset windows-x86-v141-xp
 cmake --build --preset windows-x86-v141-xp
 ctest --preset windows-x86-v141-xp --output-on-failure
-python build-support/package_smoke.py --profile windows-x86-v141-xp --build-dir out/build/windows-x86-v141-xp
+python source/build/package_smoke.py --profile windows-x86-v141-xp --build-dir out/build/windows-x86-v141-xp
 ```
 
 This is an x86 Release/static-runtime build. Its current 54 checks execute on the current
@@ -1146,7 +1163,7 @@ The development recovery probe accepts `supervisor <endpoint> <scenario>
 private file exclusively and never overwrites one. This is not a product retention
 or configuration-preservation command. See the [closed boundary](../../spec/delivery/packages/w-25-failure-metadata.md).
 
-Collect current full runs with `build-support/record_protocol.py --failure-metadata
+Collect current full runs with `source/build/record_protocol.py --failure-metadata
 --profile <profile> --build-dir <build> --output <record>`. That flag includes all
 existing native/oracle regression families and requires the new concrete records.
 For the historical build, use `record_legacy_build.py --failure-metadata` with its
@@ -1155,7 +1172,7 @@ raw failures and explicitly unexecuted Windows symlink qualification.
 
 The [native wallpaper-policy checkpoint](../../spec/delivery/gnome-wallpaper-policy-handoff.md)
 uses the private dconf backend only under `--wallpaper-policy`. Prepare its pinned
-CLI with `python3 build-support/prepare_gnome_policy.py <owned-linux-build>` after
+CLI with `python3 source/build/prepare_gnome_policy.py <owned-linux-build>` after
 a successful Windows coordinator `--action package` preflight. No packages are
 installed. After a `--action test` preflight before each invocation, run:
 
@@ -1166,7 +1183,7 @@ python3 tests/desktop/native_gnome_bootstrap.py <owned-linux-build> --wallpaper-
 ```
 
 The locked mode returns 0; the two completed negative controls return 1. Use the
-three exact emitted report paths with `build-support/record_gnome_wallpaper_policy.py
+three exact emitted report paths with `source/build/record_gnome_wallpaper_policy.py
 --build-dir <build> --reports <locked> <unlocked> <replacement> --output
 <build>/native-evidence/<unique-record>.json`, then run
 `tests/desktop/test_gnome_wallpaper_policy_record.py <build> <locked> <unlocked>
@@ -1223,7 +1240,7 @@ then use `wsl -d Ubuntu-24.04 -u ir4runner --` for these Linux commands:
 python3 tests/desktop/native_gnome_bootstrap.py <owned-linux-build> --surface-lease live
 python3 tests/desktop/native_gnome_bootstrap.py <owned-linux-build> --surface-lease ignore-expiry
 python3 tests/desktop/native_gnome_bootstrap.py <owned-linux-build> --surface-lease disconnect
-python3 build-support/record_gnome_surface_lease.py --build-dir <owned-linux-build> --reports <live-report> <ignore-expiry-report> <disconnect-report> --output <new-owned-record>
+python3 source/build/record_gnome_surface_lease.py --build-dir <owned-linux-build> --reports <live-report> <ignore-expiry-report> <disconnect-report> --output <new-owned-record>
 python3 tests/desktop/test_gnome_surface_lease_record.py <owned-linux-build> <live-report> <ignore-expiry-report> <disconnect-report> -v
 ```
 
@@ -1279,7 +1296,7 @@ python3 tests/desktop/native_gnome_bootstrap.py <owned-linux-build> --network-ca
 python3 tests/desktop/native_gnome_bootstrap.py <owned-linux-build> --network-cache ignore-clear
 python3 tests/desktop/native_gnome_bootstrap.py <owned-linux-build> --network-cache wrong-value
 python3 tests/desktop/native_gnome_bootstrap.py <owned-linux-build> --network-cache owner-loss
-python3 build-support/record_gnome_network_cache.py --build-dir <owned-linux-build> --reports <live> <ignore-clear> <wrong-value> <owner-loss> --output <new-owned-record>
+python3 source/build/record_gnome_network_cache.py --build-dir <owned-linux-build> --reports <live> <ignore-clear> <wrong-value> <owner-loss> --output <new-owned-record>
 python3 tests/desktop/test_gnome_network_cache_record.py <owned-linux-build> <live> <ignore-clear> <wrong-value> <owner-loss> -v
 ```
 
@@ -1421,7 +1438,7 @@ the public composition prerequisite finishes. The observer then brackets origina
 native counters, derives rates, decodes values/age/status pixels without diagnostic
 queries during capture, and confirms erasure and actual descendant exits.
 
-`build-support/record_gnome_live_network.py --build-dir "$BUILD" --output
+`source/build/record_gnome_live_network.py --build-dir "$BUILD" --output
 <new-record> <nine-native-reports>` verifies source-identical controls against their
 original private journals. `tests/desktop/test_gnome_live_network_record.py
 <nine-network-live.private.json-files> -v` challenges that verifier with altered
@@ -1461,7 +1478,7 @@ confirmed resume. The stopped shell's surviving pixels are recorded honestly.
 The native shell-side view also expires a silent watcher, then the existing owner
 enforces its bounded teardown. Neither experiment restarts an installed desktop.
 
-`build-support/record_gnome_render_watch.py --build-dir "$BUILD" --output
+`source/build/record_gnome_render_watch.py --build-dir "$BUILD" --output
 <new-record> <eight-native-reports>` recomputes acceptance from original health
 journals and private glyph crops. Run `tests/desktop/test_gnome_render_watch_record.py
 <eight-network-render-watch.private.json-files> -v` for adversarial evidence checks.
@@ -1552,7 +1569,7 @@ render-health lifetime. `false-progress` deliberately acknowledges from the wron
 path while pixels remain frozen; its expected exit is 1. The other four new controls
 expect exit 0, including denied replacement in `render-revoke`.
 
-Run `build-support/record_gnome_controller_recovery.py --build-dir "$BUILD"
+Run `source/build/record_gnome_controller_recovery.py --build-dir "$BUILD"
 --output <new-owned-record> <eight-reports>` and
 `tests/desktop/test_gnome_controller_recovery_record.py <eight-reports>` to recompute
 the original private evidence and challenge the acceptance checks. Complete native
@@ -1592,7 +1609,7 @@ title and geometry. Reports are `native-evidence/EDITOR-EXIT-01-<attempt>.json`;
 original native/observer records remain alongside each report. No user desktop,
 window manager or installed shortcut is modified.
 
-Revalidate an existing report with `python3 build-support/record_editor_exit.py
+Revalidate an existing report with `python3 source/build/record_editor_exit.py
 <absolute-report> <absolute-EditorExitProbe>`. After a test preflight, the independent
 evidence tests run with `python3 tests/desktop/test_editor_exit_record.py
 <absolute-report> -v`. The profile remains experimental; scene transactions,
@@ -1619,9 +1636,9 @@ The last command returns 1 for its required failed recovery, with complete healt
 collection and native observation. The others return 0. Original icon obstruction,
 native exit, restored input and original measured pixels are separate requirements.
 The editor artifact must match `w-25-gnome-editor-exit-native-build.json` under
-`build-support/evidence/`, in addition to the existing measured-controller build pin.
+`out/evidence/`, in addition to the existing measured-controller build pin.
 
-Use `build-support/record_gnome_editor_exit.py --build-dir "$BUILD" --output
+Use `source/build/record_gnome_editor_exit.py --build-dir "$BUILD" --output
 <new-owned-record> <five-reports>` and
 `tests/desktop/test_gnome_editor_exit_record.py <five-reports>` to verify the exact
 matrix and challenge its evidence. Keep sources identical across the native matrix.
@@ -1985,3 +2002,29 @@ the committed store. Held text objects are positively identified before the stim
 independent explicit GetText replies are dispatched together within one 200-ms bound.
 Timeouts and unavailable replies cannot count as erasure. The
 [handoff](../../spec/delivery/theme-controls-handoff.md) records failures and corrections.
+
+
+The [scene-fragment package](../../spec/delivery/packages/w-10-scene-fragments.md)
+adds `EditorDraft::copy_selection`, `clipboard_data`, `clear_clipboard` and typed
+`PasteWidgets`. A trusted resource context must admit `editor.clipboard`, and
+current authenticated desktop/console policy must explicitly permit sensitive
+clipboard disclosure. Default editor construction remains disabled. Each byte
+borrow rechecks permission and expires at the next operation. Clear native ownership
+when the draft clears its snapshot; never clear a foreign application's selection.
+
+Fragments include authored selected subtrees, with exact bindings, image pins and
+opaque extensions. They exclude scene metadata, settings, packages and live values.
+Paste supplies a complete fresh-ID map, destination group/root and index. Coordinates
+stay parent-local; the destination theme and admitted resource closure remain in
+force. Missing pins reject atomically. Scene 0.3..0.5 promotion requires the existing
+capabilities; there is no implicit scene 0.2 migration. Apply uses existing commands.
+
+After workspace preflight/configure/build, run `ctest --preset <profile> -R
+'^(editor[.]|settings[.]|configuration[.]|composition[.]|protocol[.])'
+--output-on-failure` and the full portable suite. The Linux regression command is
+`ctest --preset linux-x64-gcc13 -R '^native[.](EDITOR-FONTS|EDITOR-VISIBILITY|EDITOR-FORM|THEME-HISTORY)$'
+--output-on-failure` in the owned non-root laboratory. Frozen complete examples are
+`tests/editor/scene-fragment-cases.json`. Native clipboard transfer is a separate
+required adapter boundary: byte limits must be enforced before unbounded allocation,
+and outgoing chunks need fresh permission checks. These shared tests do not enable
+OS clipboard controls or qualify a complete edition.

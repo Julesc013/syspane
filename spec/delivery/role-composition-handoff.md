@@ -71,7 +71,7 @@ Native results cover the pinned Linux development adapter; historical-toolset ch
 on contemporary Windows do not qualify historical systems. The two pre-existing
 Windows symlink tooling skips and historical accessibility timeout questions remain.
 
-Evidence: build-support/evidence/w-09-role-composition-attempts.json,
+Evidence: out/evidence/w-09-role-composition-attempts.json,
 w-09-role-composition-native-index.json, w-09-role-composition-verification.json,
 w-09-role-composition-staging.json and role-composition-handoff.json.
 
