@@ -1,0 +1,74 @@
+[
+  {
+    "step": "configure",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-07T23:47:40.610224+00:00",
+    "finished_at": "2026-10-07T23:47:41.597654+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2306541022,\n  \"linux_campaign_bytes\": 4811143294,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "configure",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/visibility_composition_step.py",
+      "linux-x64-gcc13",
+      "configure"
+    ],
+    "started_at": "2026-10-07T23:47:41.598035+00:00",
+    "finished_at": "2026-10-07T23:47:59.210677+00:00",
+    "exit": 0,
+    "stdout": "Preset CMake variables:\n\n  BUILD_TESTING=\"ON\"\n  CMAKE_BUILD_TYPE=\"Debug\"\n  CMAKE_CXX_COMPILER=\"g++\"\n  SYSPANE_PROFILE=\"linux-x64-gcc13\"\n\nprofile verified: linux-x64-gcc13\nvendored dependency digests: pass\ndiagnostic toolkit verified: GTK 3.24.41 / Ubuntu 3.24.41-4ubuntu1.3\nnative text dependency identity verified: 358 files\nnative image dependencies verified: 344 files\nnative GJS clock build dependencies verified\n-- Configuring done (6.0s)\n-- Generating done (0.1s)\n-- Build files have been written to: /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-09-visibility-composition/linux-x64-gcc13-configure-25e7bb24be\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-07T23:47:59.210995+00:00",
+    "finished_at": "2026-10-07T23:47:59.899210+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2308228968,\n  \"linux_campaign_bytes\": 4811134163,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/visibility_composition_step.py",
+      "linux-x64-gcc13",
+      "build"
+    ],
+    "started_at": "2026-10-07T23:47:59.899506+00:00",
+    "finished_at": "2026-10-07T23:48:32.662275+00:00",
+    "exit": 1,
+    "stdout": "ng CXX object CMakeFiles/syspane_scene.dir/source/scene/chart_plot.cpp.o\n[2/35] Building CXX object CMakeFiles/syspane_scene.dir/source/scene/chart_history.cpp.o\n[3/35] Building CXX object CMakeFiles/syspane_scene.dir/source/scene/visibility.cpp.o\n[4/35] Building CXX object CMakeFiles/syspane_scene.dir/source/scene/bindings.cpp.o\n[5/35] Linking CXX static library libsyspane_scene.a\n[6/35] Linking CXX executable SysPane.TextProbe\n[7/35] Building CXX object CMakeFiles/syspane_scene_surface.dir/source/rendering/scene_table.cpp.o\n[8/35] Building CXX object CMakeFiles/syspane_scene_surface.dir/source/rendering/scene_chart.cpp.o\n[9/35] Building CXX object CMakeFiles/syspane_scene_surface.dir/source/rendering/scene_surface.cpp.o\n[10/35] Building CXX object CMakeFiles/syspane_scene_surface.dir/source/rendering/scene_image.cpp.o\n[11/35] Linking CXX static library libsyspane_scene_surface.a\n[12/35] Linking CXX executable SysPane.ImageWorker\n[13/35] Linking CXX executable syspane_large_command_tests\n[14/35] Linking CXX executable syspane_editor_tests\n[15/35] Building CXX object CMakeFiles/syspane_scene_inspector.dir/source/interfaces/scene_inspector_model.cpp.o\n[16/35] Building CXX object CMakeFiles/syspane_scene_inspector.dir/source/interfaces/scene_inspector_linux.cpp.o\n[17/35] Linking CXX static library libsyspane_scene_inspector.a\n[18/35] Building CXX object CMakeFiles/syspane_editor_form.dir/source/interfaces/editor_form_linux.cpp.o\n[19/35] Linking CXX static library libsyspane_editor_form.a\n[20/35] Building CXX object CMakeFiles/syspane_editor_window.dir/tests/editor/editor_window.cpp.o\n[21/35] Building CXX object CMakeFiles/syspane_scene_inspector_tests.dir/tests/scene/inspector_tests.cpp.o\n[22/35] Building CXX object CMakeFiles/syspane_scene_surface_tests.dir/tests/scene/surface_tests.cpp.o\n[23/35] Linking CXX executable syspane_scene_inspector_tests\n[24/35] Linking CXX executable syspane_editor_window\n[25/35] Building CXX object CMakeFiles/syspane_scene_surface_tests.dir/tests/scene/surface_window.cpp.o\n[26/35] Linking CXX executable syspane_image_job_tests\n[27/35] Building CXX object CMakeFiles/syspane_scene_surface_tests.dir/tests/scene/table_tests.cpp.o\n[28/35] Building CXX object CMakeFiles/syspane_scene_surface_tests.dir/tests/scene/chart_surface_tests.cpp.o\n[29/35] Building CXX object CMakeFiles/syspane_scene_surface_tests.dir/tests/scene/image_surface_tests.cpp.o\n[30/35] Linking CXX executable syspane_scene_surface_tests\n[31/35] Building CXX object CMakeFiles/syspane_scene_tests.dir/tests/scene/binding_tests.cpp.o\n[32/35] Building CXX object CMakeFiles/syspane_scene_tests.dir/tests/scene/chart_plot_tests.cpp.o\n[33/35] Building CXX object CMakeFiles/syspane_scene_tests.dir/tests/scene/chart_history_tests.cpp.o\n[34/35] Building CXX object CMakeFiles/syspane_scene_tests.dir/tests/scene/visibility_tests.cpp.o\nFAILED: CMakeFiles/syspane_scene_tests.dir/tests/scene/visibility_tests.cpp.o \n/usr/bin/g++ -DJSON_DIAGNOSTICS=0 -DJSON_DIAGNOSTIC_POSITIONS=1 -I/mnt/d/Projects/SysPane/syspane/source/scene -I/mnt/d/Projects/SysPane/syspane/source/configuration -I/mnt/d/Projects/SysPane/syspane/source/protocol -I/mnt/d/Projects/SysPane/syspane/source/diagnostics -I/mnt/d/Projects/SysPane/syspane/source/model -I/mnt/d/Projects/SysPane/syspane/source/runtime -I/mnt/d/Projects/SysPane/syspane/source/platform -isystem /mnt/d/Projects/SysPane/syspane/source/third_party -g -std=c++17 -Wall -Wextra -Wpedantic -Werror -march=x86-64 -mtune=generic -MD -MT CMakeFiles/syspane_scene_tests.dir/tests/scene/visibility_tests.cpp.o -MF CMakeFiles/syspane_scene_tests.dir/tests/scene/visibility_tests.cpp.o.d -o CMakeFiles/syspane_scene_tests.dir/tests/scene/visibility_tests.cpp.o -c /mnt/d/Projects/SysPane/syspane/tests/scene/visibility_tests.cpp\n/mnt/d/Projects/SysPane/syspane/tests/scene/visibility_tests.cpp: In function \u2018syspane::protocol::Json {anonymous}::scene_result(const syspane::scene::VisibilityScene&)\u2019:\n/mnt/d/Projects/SysPane/syspane/tests/scene/visibility_tests.cpp:167:5: error: this \u2018for\u2019 clause does not guard... [-Werror=misleading-indentation]\n  167 |     for(const auto& n:view.nodes)out[\"nodes\"].push_back(Json::array({n.id,n.parent,code(n.own),n.show_content,n.blocker}));for(const auto& d:view.diagnostics)out[\"diagnostics\"].push_back(Json::array({d.id,code(d.code)}));return out;\n      |     ^~~\n/mnt/d/Projects/SysPane/syspane/tests/scene/visibility_tests.cpp:167:124: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the \u2018for\u2019\n  167 |     for(const auto& n:view.nodes)out[\"nodes\"].push_back(Json::array({n.id,n.parent,code(n.own),n.show_content,n.blocker}));for(const auto& d:view.diagnostics)out[\"diagnostics\"].push_back(Json::array({d.id,code(d.code)}));return out;\n      |                                                                                                                            ^~~\ncc1plus: all warnings being treated as errors\nninja: build stopped: subcommand failed.\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-09-visibility-composition/linux-x64-gcc13-build-7efa202c6a\n",
+    "stderr": ""
+  }
+]

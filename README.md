@@ -7,6 +7,12 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
+The [borrowed visibility composition checkpoint](spec/delivery/visibility-composition-handoff.md)
+adds bounded batch reads and ordered group/child decisions under one protected
+telemetry borrow. Hidden ancestors cannot suppress unresolved child diagnostics.
+Native conditional pixels, accessibility and private controls remain the next gate;
+this shared component does not enable the native feature or complete an edition.
+
 The [visibility-admission checkpoint](spec/delivery/visibility-admission-handoff.md)
 adds scene 0.5, negotiated command 0.7, protected typed edits and exact durable
 recovery. Conditional scenes explicitly report an unavailable renderer until native

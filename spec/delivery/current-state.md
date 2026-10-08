@@ -12,10 +12,16 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-07T23:31:04.147035+00:00", "scope": "Visibility authoring admission; native conditional rendering and full editions remain open"}
+updated: {"by": "codex", "at": "2026-10-07T23:58:03.413898+00:00", "scope": "Borrowed visibility composition; native feature and complete editions remain open"}
 ---
 
 # Current state and next admitted boundary
+
+The [borrowed visibility composition checkpoint](visibility-composition-handoff.md)
+adds bounded batch reads and ordered group/child decisions under one protected
+telemetry borrow. Hidden ancestors cannot suppress unresolved child diagnostics.
+Native conditional pixels, accessibility and private controls remain the next gate;
+this shared component does not enable the native feature or complete an edition.
 
 The [visibility-admission checkpoint](visibility-admission-handoff.md)
 adds scene 0.5, negotiated command 0.7, protected typed edits and exact durable

@@ -1801,3 +1801,22 @@ laboratory mode. It installs nothing and does not enable a native visibility UI.
 Regress native storage/IPC, SCENE-SURFACE, SCENE-INSPECTOR-MODEL, EDITOR-LOCKS and
 EDITOR-CONTAINERS. Exact input examples live in tests/editor/visibility-admission-cases.json;
 the [handoff](../../spec/delivery/visibility-admission-handoff.md) binds executed evidence.
+
+
+The [borrowed composition package](../../spec/delivery/packages/w-09-visibility-composition.md)
+adds `scene::project_bindings` for ordered queries sharing one union of protected
+DataView borrows. Its work/output limits apply to the whole batch. Use
+`scene::project_scene_visibility` for authored preorder, inherited content gates
+and independent unresolved diagnostics. Neither callback may retain payload or
+decisions or reenter contributing views; these helpers create no native cache.
+A content composer must also preserve current content authorization and mandatory
+status. SceneSurface's refusal gate remains in force until that owner is verified.
+
+Run `ctest --preset <profile> -R '^(scene[.]|editor[.]VIS-|composition[.])'
+--output-on-failure`, followed by the full non-native suite. The new families are
+VISIBILITY-BATCH-ORDER/ISOLATION/BOUNDS/LIFETIME and VISIBILITY-TREE-CASES/LIFETIME.
+The frozen hierarchy examples are tests/scene/visibility-composition-cases.json.
+Existing native SCENE-SURFACE, SCENE-INSPECTOR-MODEL, SCENE-ERASURE, EDITOR-LOCKS
+and EDITOR-CONTAINERS remain regression checks; they do not qualify conditional
+native pixels. The [handoff](../../spec/delivery/visibility-composition-handoff.md)
+preserves the original failed fixture and the exact schema-based correction.

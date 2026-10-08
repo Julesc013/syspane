@@ -1,0 +1,528 @@
+{
+  "scene": {
+    "schema_version": "0.5.0",
+    "revision": "40",
+    "scene_id": "scene:layout",
+    "theme_id": null,
+    "roots": [
+      "g",
+      "z"
+    ],
+    "widgets": [
+      {
+        "id": "z",
+        "kind": "text",
+        "title": "z",
+        "display": {
+          "role": "primary"
+        },
+        "layout": {
+          "base": {
+            "kind": "flow",
+            "width": {
+              "min": 32,
+              "preferred": 64,
+              "max": 512
+            },
+            "height": {
+              "min": 16,
+              "preferred": 32,
+              "max": 512
+            },
+            "anchor": "center"
+          }
+        },
+        "bindings": [],
+        "priority": "normal",
+        "content": {
+          "body": "z"
+        }
+      },
+      {
+        "id": "b",
+        "kind": "text",
+        "title": "b",
+        "display": {
+          "role": "primary"
+        },
+        "layout": {
+          "base": {
+            "kind": "flow",
+            "width": {
+              "min": 32,
+              "preferred": 64,
+              "max": 512
+            },
+            "height": {
+              "min": 16,
+              "preferred": 32,
+              "max": 512
+            },
+            "anchor": "center"
+          }
+        },
+        "bindings": [],
+        "priority": "normal",
+        "content": {
+          "body": "b"
+        }
+      },
+      {
+        "id": "h",
+        "kind": "group",
+        "title": "h",
+        "display": {
+          "role": "primary"
+        },
+        "layout": {
+          "base": {
+            "kind": "stack",
+            "axis": "vertical",
+            "gap_dip": 0,
+            "overflow": "diagnose"
+          }
+        },
+        "bindings": [],
+        "priority": "normal",
+        "children": [
+          "b"
+        ]
+      },
+      {
+        "id": "a",
+        "kind": "text",
+        "title": "a",
+        "display": {
+          "role": "primary"
+        },
+        "layout": {
+          "base": {
+            "kind": "flow",
+            "width": {
+              "min": 32,
+              "preferred": 64,
+              "max": 512
+            },
+            "height": {
+              "min": 16,
+              "preferred": 32,
+              "max": 512
+            },
+            "anchor": "center"
+          }
+        },
+        "bindings": [],
+        "priority": "normal",
+        "content": {
+          "body": "a"
+        }
+      },
+      {
+        "id": "g",
+        "kind": "group",
+        "title": "g",
+        "display": {
+          "role": "primary"
+        },
+        "layout": {
+          "base": {
+            "kind": "stack",
+            "axis": "vertical",
+            "gap_dip": 0,
+            "overflow": "diagnose"
+          }
+        },
+        "bindings": [],
+        "priority": "normal",
+        "children": [
+          "a",
+          "h"
+        ]
+      }
+    ]
+  },
+  "rules": {
+    "shown": {
+      "schema_version": "0.1.0",
+      "binding": {
+        "kind": "direct",
+        "producer_id": "P1",
+        "producer_epoch": "E1",
+        "entity_id": "a",
+        "field": "test.value"
+      },
+      "op": "eq",
+      "value": 3,
+      "unit": "byte"
+    },
+    "hidden": {
+      "schema_version": "0.1.0",
+      "binding": {
+        "kind": "direct",
+        "producer_id": "P1",
+        "producer_epoch": "E1",
+        "entity_id": "a",
+        "field": "test.value"
+      },
+      "op": "eq",
+      "value": 4,
+      "unit": "byte"
+    },
+    "empty": {
+      "schema_version": "0.1.0",
+      "binding": {
+        "kind": "direct",
+        "producer_id": "P1",
+        "producer_epoch": "E1",
+        "entity_id": "missing",
+        "field": "test.value"
+      },
+      "op": "eq",
+      "value": 3,
+      "unit": "byte"
+    },
+    "pending": {
+      "schema_version": "0.1.0",
+      "binding": {
+        "kind": "unresolved_pin",
+        "source_schema_version": "0.1.0",
+        "entity_id": "a",
+        "field": "test.value",
+        "reason": "producer_context_required"
+      },
+      "op": "eq",
+      "value": 3,
+      "unit": "byte"
+    },
+    "unit_mismatch": {
+      "schema_version": "0.1.0",
+      "binding": {
+        "kind": "direct",
+        "producer_id": "P1",
+        "producer_epoch": "E1",
+        "entity_id": "a",
+        "field": "test.value"
+      },
+      "op": "eq",
+      "value": 3,
+      "unit": "1"
+    }
+  },
+  "cases": [
+    {
+      "id": "all-unconditional",
+      "rules": {},
+      "nodes": [
+        [
+          "g",
+          "",
+          "shown",
+          true,
+          ""
+        ],
+        [
+          "a",
+          "g",
+          "shown",
+          true,
+          ""
+        ],
+        [
+          "h",
+          "g",
+          "shown",
+          true,
+          ""
+        ],
+        [
+          "b",
+          "h",
+          "shown",
+          true,
+          ""
+        ],
+        [
+          "z",
+          "",
+          "shown",
+          true,
+          ""
+        ]
+      ],
+      "diagnostics": []
+    },
+    {
+      "id": "hidden-parent",
+      "rules": {
+        "g": "hidden",
+        "a": "shown",
+        "b": "shown",
+        "z": "shown"
+      },
+      "nodes": [
+        [
+          "g",
+          "",
+          "hidden",
+          false,
+          "g"
+        ],
+        [
+          "a",
+          "g",
+          "shown",
+          false,
+          "g"
+        ],
+        [
+          "h",
+          "g",
+          "shown",
+          false,
+          "g"
+        ],
+        [
+          "b",
+          "h",
+          "shown",
+          false,
+          "g"
+        ],
+        [
+          "z",
+          "",
+          "shown",
+          true,
+          ""
+        ]
+      ],
+      "diagnostics": []
+    },
+    {
+      "id": "hidden-child-group",
+      "rules": {
+        "g": "shown",
+        "h": "hidden",
+        "b": "hidden"
+      },
+      "nodes": [
+        [
+          "g",
+          "",
+          "shown",
+          true,
+          ""
+        ],
+        [
+          "a",
+          "g",
+          "shown",
+          true,
+          ""
+        ],
+        [
+          "h",
+          "g",
+          "hidden",
+          false,
+          "h"
+        ],
+        [
+          "b",
+          "h",
+          "hidden",
+          false,
+          "h"
+        ],
+        [
+          "z",
+          "",
+          "shown",
+          true,
+          ""
+        ]
+      ],
+      "diagnostics": []
+    },
+    {
+      "id": "unresolved-under-false",
+      "rules": {
+        "g": "hidden",
+        "b": "unit_mismatch"
+      },
+      "nodes": [
+        [
+          "g",
+          "",
+          "hidden",
+          false,
+          "g"
+        ],
+        [
+          "a",
+          "g",
+          "shown",
+          false,
+          "g"
+        ],
+        [
+          "h",
+          "g",
+          "shown",
+          false,
+          "g"
+        ],
+        [
+          "b",
+          "h",
+          "unit_mismatch",
+          false,
+          "g"
+        ],
+        [
+          "z",
+          "",
+          "shown",
+          true,
+          ""
+        ]
+      ],
+      "diagnostics": [
+        [
+          "b",
+          "unit_mismatch"
+        ]
+      ]
+    },
+    {
+      "id": "nested-diagnostics",
+      "rules": {
+        "g": "pending",
+        "h": "hidden",
+        "b": "empty",
+        "z": "unit_mismatch"
+      },
+      "nodes": [
+        [
+          "g",
+          "",
+          "pending",
+          false,
+          "g"
+        ],
+        [
+          "a",
+          "g",
+          "shown",
+          false,
+          "g"
+        ],
+        [
+          "h",
+          "g",
+          "hidden",
+          false,
+          "g"
+        ],
+        [
+          "b",
+          "h",
+          "empty",
+          false,
+          "g"
+        ],
+        [
+          "z",
+          "",
+          "unit_mismatch",
+          false,
+          "z"
+        ]
+      ],
+      "diagnostics": [
+        [
+          "g",
+          "pending"
+        ],
+        [
+          "b",
+          "empty"
+        ],
+        [
+          "z",
+          "unit_mismatch"
+        ]
+      ]
+    },
+    {
+      "id": "revoked",
+      "rules": {
+        "b": "shown"
+      },
+      "policy": "revoked",
+      "state": "restricted",
+      "nodes": [],
+      "diagnostics": []
+    },
+    {
+      "id": "regranted",
+      "rules": {
+        "b": "shown"
+      },
+      "policy": "regranted",
+      "nodes": [
+        [
+          "g",
+          "",
+          "shown",
+          true,
+          ""
+        ],
+        [
+          "a",
+          "g",
+          "shown",
+          true,
+          ""
+        ],
+        [
+          "h",
+          "g",
+          "shown",
+          true,
+          ""
+        ],
+        [
+          "b",
+          "h",
+          "pending",
+          false,
+          "b"
+        ],
+        [
+          "z",
+          "",
+          "shown",
+          true,
+          ""
+        ]
+      ],
+      "diagnostics": [
+        [
+          "b",
+          "pending"
+        ]
+      ]
+    },
+    {
+      "id": "capacity",
+      "rules": {
+        "b": "shown"
+      },
+      "output_bytes": 0,
+      "state": "capacity",
+      "nodes": [],
+      "diagnostics": []
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+[
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-07T23:49:38.414286+00:00",
+    "finished_at": "2026-10-07T23:49:39.103448+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2313330733,\n  \"linux_campaign_bytes\": 4818200898,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/visibility_composition_step.py",
+      "linux-x64-gcc13",
+      "build"
+    ],
+    "started_at": "2026-10-07T23:49:39.103847+00:00",
+    "finished_at": "2026-10-07T23:49:48.878027+00:00",
+    "exit": 0,
+    "stdout": "[1/2] Building CXX object CMakeFiles/syspane_scene_tests.dir/tests/scene/visibility_tests.cpp.o\n[2/2] Linking CXX executable syspane_scene_tests\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-09-visibility-composition/linux-x64-gcc13-build-b01f1e0ff1\n",
+    "stderr": ""
+  },
+  {
+    "step": "test",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-07T23:49:48.878329+00:00",
+    "finished_at": "2026-10-07T23:49:49.595371+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2315017808,\n  \"linux_campaign_bytes\": 4818197025,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "test",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/visibility_composition_step.py",
+      "linux-x64-gcc13",
+      "test"
+    ],
+    "started_at": "2026-10-07T23:49:49.595656+00:00",
+    "finished_at": "2026-10-07T23:49:58.118664+00:00",
+    "exit": 8,
+    "stdout": ": scene.BIND-AXES ....................   Passed    0.01 sec\n      Start 167: scene.BIND-POLICY\n48/90 Test #167: scene.BIND-POLICY ..................   Passed    0.01 sec\n      Start 168: scene.BIND-BOUNDS\n49/90 Test #168: scene.BIND-BOUNDS ..................   Passed    0.01 sec\n      Start 169: scene.BIND-LIFETIME\n50/90 Test #169: scene.BIND-LIFETIME ................   Passed    0.01 sec\n      Start 170: scene.BIND-INVALID\n51/90 Test #170: scene.BIND-INVALID .................   Passed    0.01 sec\n      Start 171: scene.BIND-MULTISOURCE\n52/90 Test #171: scene.BIND-MULTISOURCE .............   Passed    0.01 sec\n      Start 172: scene.BIND-RESTART\n53/90 Test #172: scene.BIND-RESTART .................   Passed    0.01 sec\n      Start 173: scene.BIND-REAL-SORT\n54/90 Test #173: scene.BIND-REAL-SORT ...............   Passed    0.01 sec\n      Start 174: scene.BIND-COLLECTION-BOUND\n55/90 Test #174: scene.BIND-COLLECTION-BOUND ........   Passed    0.08 sec\n      Start 175: scene.ROOT-FLOW\n56/90 Test #175: scene.ROOT-FLOW ....................   Passed    0.01 sec\n      Start 176: scene.STACK-V\n57/90 Test #176: scene.STACK-V ......................   Passed    0.01 sec\n      Start 177: scene.STACK-H\n58/90 Test #177: scene.STACK-H ......................   Passed    0.01 sec\n      Start 178: scene.PRIORITY\n59/90 Test #178: scene.PRIORITY .....................   Passed    0.01 sec\n      Start 179: scene.FAIR-SHRINK\n60/90 Test #179: scene.FAIR-SHRINK ..................   Passed    0.01 sec\n      Start 180: scene.OVERFLOW\n61/90 Test #180: scene.OVERFLOW .....................   Passed    0.01 sec\n      Start 181: scene.FIXED-GROUP\n62/90 Test #181: scene.FIXED-GROUP ..................   Passed    0.01 sec\n      Start 182: scene.CANVAS\n63/90 Test #182: scene.CANVAS .......................   Passed    0.01 sec\n      Start 183: scene.GRID\n64/90 Test #183: scene.GRID .........................   Passed    0.01 sec\n      Start 184: scene.GRID-OVERFLOW\n65/90 Test #184: scene.GRID-OVERFLOW ................   Passed    0.01 sec\n      Start 185: scene.NESTED\n66/90 Test #185: scene.NESTED .......................   Passed    0.01 sec\n      Start 186: scene.BREAKPOINT-EQUAL\n67/90 Test #186: scene.BREAKPOINT-EQUAL .............   Passed    0.01 sec\n      Start 187: scene.BREAKPOINT-BELOW\n68/90 Test #187: scene.BREAKPOINT-BELOW .............   Passed    0.01 sec\n      Start 188: scene.DISPLAY-MISSING\n69/90 Test #188: scene.DISPLAY-MISSING ..............   Passed    0.01 sec\n      Start 189: scene.DISPLAY-AMBIGUOUS\n70/90 Test #189: scene.DISPLAY-AMBIGUOUS ............   Passed    0.01 sec\n      Start 190: scene.DISPLAY-REMOVED\n71/90 Test #190: scene.DISPLAY-REMOVED ..............   Passed    0.01 sec\n      Start 191: scene.SAFE-REGION\n72/90 Test #191: scene.SAFE-REGION ..................   Passed    0.01 sec\n      Start 192: scene.EXCLUSION-TIE\n73/90 Test #192: scene.EXCLUSION-TIE ................   Passed    0.01 sec\n      Start 193: scene.NO-REGION\n74/90 Test #193: scene.NO-REGION ....................   Passed    0.01 sec\n      Start 194: scene.PIXELS\n75/90 Test #194: scene.PIXELS .......................   Passed    0.01 sec\n      Start 195: scene.PIXEL-CLIP\n76/90 Test #195: scene.PIXEL-CLIP ...................   Passed    0.01 sec\n      Start 196: scene.READABLE-FIXED\n77/90 Test #196: scene.READABLE-FIXED ...............   Passed    0.01 sec\n      Start 197: scene.READABLE-FLOW\n78/90 Test #197: scene.READABLE-FLOW ................   Passed    0.01 sec\n      Start 198: scene.OVERLAP\n79/90 Test #198: scene.OVERLAP ......................   Passed    0.01 sec\n      Start 199: scene.DISPLAY-CONFLICT\n80/90 Test #199: scene.DISPLAY-CONFLICT .............   Passed    0.01 sec\n      Start 200: scene.MISSING-METRICS\n81/90 Test #200: scene.MISSING-METRICS ..............   Passed    0.01 sec\n      Start 201: scene.EXCLUSION-ORDER\n82/90 Test #201: scene.EXCLUSION-ORDER ..............   Passed    0.01 sec\n      Start 202: scene.QUANTIZED-FIXED\n83/90 Test #202: scene.QUANTIZED-FIXED ..............   Passed    0.01 sec\n      Start 203: scene.QUANTIZED-GAP\n84/90 Test #203: scene.QUANTIZED-GAP ................   Passed    0.01 sec\n      Start 204: scene.NESTED-BREAKPOINT\n85/90 Test #204: scene.NESTED-BREAKPOINT ............   Passed    0.01 sec\n      Start 205: scene.NATIVE-METRICS\n86/90 Test #205: scene.NATIVE-METRICS ...............   Passed    0.01 sec\n      Start 206: scene.LIMITS\n87/90 Test #206: scene.LIMITS .......................   Passed    0.23 sec\n      Start 207: scene.EXCLUSION-EXHAUSTIVE\n88/90 Test #207: scene.EXCLUSION-EXHAUSTIVE .........   Passed    0.40 sec\n      Start 280: composition.graph\n89/90 Test #280: composition.graph ..................   Passed    0.11 sec\n      Start 281: composition.reject_forbidden\n90/90 Test #281: composition.reject_forbidden .......   Passed    0.24 sec\n\n99% tests passed, 1 tests failed out of 90\n\nTotal Test time (real) =   4.46 sec\n\nThe following tests FAILED:\n\t133 - scene.VISIBILITY-TREE-LIFETIME (Failed)\n Errors while running CTest\n\nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-09-visibility-composition/linux-x64-gcc13-test-452074a733\n",
+    "stderr": ""
+  }
+]

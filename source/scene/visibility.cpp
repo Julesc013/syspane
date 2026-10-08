@@ -51,4 +51,31 @@ void project_visibility(const Json& rule,const std::vector<BindingInput>& inputs
     if(!sink)throw protocol::Error("binding.context");
     project_binding(rule.at("binding"),inputs,now_ms,[&](const BindingFrame& frame){sink({evaluate(rule,frame)});},limits);
 }
+void project_scene_visibility(const Json& scene,const std::vector<BindingInput>& inputs,std::uint64_t now_ms,
+                             const std::function<void(const VisibilityScene&)>& sink,BindingLimits limits){
+    configuration::validate_scene_document(scene);
+    if(!sink)throw protocol::Error("binding.context");
+    std::map<std::string,const Json*> widgets;std::vector<const Json*> ordered;std::vector<std::string> parents;
+    for(const auto& w:scene.at("widgets"))widgets.emplace(w.at("id").get<std::string>(),&w);
+    std::function<void(const std::string&,const std::string&)> visit=[&](const std::string& id,const std::string& parent){
+        const auto& w=*widgets.at(id);ordered.push_back(&w);parents.push_back(parent);
+        if(w.at("kind")=="group")for(const auto& child:w.at("children"))visit(child.get<std::string>(),id);
+    };
+    for(const auto& root:scene.at("roots"))visit(root.get<std::string>(),"");
+    std::vector<Json> queries;for(const auto* w:ordered)if(w->contains("visibility"))queries.push_back(w->at("visibility").at("binding"));
+    project_bindings(queries,inputs,now_ms,[&](const BindingBatch& batch){
+        if(batch.code==BindingBatchCode::capacity){sink({VisibilitySceneCode::capacity,{},{}});return;}
+        VisibilityScene out;std::map<std::string,std::string> blockers;std::size_t index=0;bool denied=false;
+        for(std::size_t n=0;n<ordered.size();++n){const auto& w=*ordered[n];VisibilityNode node;node.id=w.at("id");node.parent=parents[n];
+            if(w.contains("visibility"))node.own=evaluate(w.at("visibility"),batch.frames.at(index++));
+            denied=denied||node.own==Code::denied;
+            if(!node.parent.empty())node.blocker=blockers.at(node.parent);
+            if(node.blocker.empty()&&node.own!=Code::shown)node.blocker=node.id;
+            node.show_content=node.blocker.empty();blockers.emplace(node.id,node.blocker);
+            if(node.own!=Code::shown&&node.own!=Code::hidden)out.diagnostics.push_back({node.id,node.own});
+            out.nodes.push_back(std::move(node));
+        }
+        if(denied)sink({VisibilitySceneCode::restricted,{},{}});else sink(out);
+    },limits);
+}
 }

@@ -489,7 +489,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "59700f2c200755a1243f9eb77b54613453a0fcbe9637cb944ea8845acef924ea"
+      "sha256": "238ebf74cab78239e28a4df4078935e5dd35ab5357ac3573c0ac8ec87fdb6ec6"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -1607,6 +1607,18 @@
       "sha256": "7fb876ed52e3b865800726c35fff7f3349c8841c1a50f4a444f24d6479782ca3"
     },
     {
+      "id": "SP-W09-VISIBILITY-COMPOSITION",
+      "path": "delivery/packages/w-09-visibility-composition.md",
+      "title": "Borrowed visibility composition",
+      "description": "Compose bounded condition trees without nested reads or retained decisions.",
+      "requires": [
+        "SP-W09-VISIBILITY",
+        "SP-W10-VISIBILITY-ADMISSION",
+        "SP-W09-BINDINGS"
+      ],
+      "sha256": "51e270aa0141df67e69be1c37b34715b7c92c34841f964d0818f038f9dcddda7"
+    },
+    {
       "id": "SP-W09-VISIBILITY",
       "path": "delivery/packages/w-09-visibility.md",
       "title": "Policy-bound conditional visibility",
@@ -2449,6 +2461,17 @@
         "SP-VISIBILITY-HANDOFF"
       ],
       "sha256": "6f9a9bf675537bf24085edfd82645810dae1e574da47425561d0e2dd40028be0"
+    },
+    {
+      "id": "SP-VISIBILITY-COMPOSITION-HANDOFF",
+      "path": "delivery/visibility-composition-handoff.md",
+      "title": "Borrowed visibility composition checkpoint",
+      "description": "Bounded shared telemetry reads and inherited condition decisions with native presentation still gated.",
+      "requires": [
+        "SP-W09-VISIBILITY-COMPOSITION",
+        "SP-VISIBILITY-ADMISSION-HANDOFF"
+      ],
+      "sha256": "8741e953834236543b47182cbfc0246ebe793d31f45d77d424fafe4a317e5c85"
     },
     {
       "id": "SP-VISIBILITY-HANDOFF",

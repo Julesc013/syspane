@@ -38,4 +38,13 @@ struct BindingLimits { std::size_t output_bytes=4*1024*1024,index_bytes=8*1024*1
 // Invalid grammar/context throws before delivery. Sink exceptions propagate exactly once.
 void project_binding(const configuration::Json& binding,const std::vector<BindingInput>& inputs,
     std::uint64_t now_ms,const std::function<void(const BindingFrame&)>& sink,BindingLimits limits={});
+enum class BindingBatchCode { ready,capacity };
+struct BindingBatch {
+    BindingBatchCode code=BindingBatchCode::ready;
+    std::vector<BindingFrame> frames;
+};
+// Ordered queries, one union borrow. Limits account the entire batch (128 bytes
+// per frame plus rows); sink lifetime and exception rules match project_binding.
+void project_bindings(const std::vector<configuration::Json>& bindings,const std::vector<BindingInput>& inputs,
+    std::uint64_t now_ms,const std::function<void(const BindingBatch&)>& sink,BindingLimits limits={});
 }

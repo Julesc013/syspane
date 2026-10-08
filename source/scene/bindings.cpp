@@ -108,6 +108,7 @@ public:
             result.accounted_bytes+=bytes;result.rows.push_back(row(candidate));}
         return result;
     }
+    std::size_t work()const{return work_;}
 private:
     void step(){if(work_==limits_.work_steps)throw Stop{Code::capacity};++work_;}
     Datum datum(const Borrow& borrow,const model::Entity& entity,const Index& index,const std::string& field)const{
@@ -170,6 +171,21 @@ private:
     bool selector_=false,pin_=false,collection_=false;std::size_t limit_=1,work_=0;
 };
 BindingFrame empty(Code code){BindingFrame frame;frame.code=code;return frame;}
+std::vector<const BindingInput*> route(const Json& binding,const std::vector<BindingInput>& inputs,std::uint64_t now_ms){
+    if(binding["kind"]=="unresolved_pin")throw Stop{Code::pending};
+    std::vector<const BindingInput*> routed;
+    for(const auto& input:inputs)if(binding["kind"]=="direct"?input.producer==binding["producer_id"]:
+        scope_matches(input.scope,binding["scope"])&&input.entity_types.count(binding["entity_type"].get<std::string>()))routed.push_back(&input);
+    if(routed.empty())throw Stop{Code::unsupported};
+    bool waiting=false;
+    for(const auto* input:routed){const auto state=input->view->status(now_ms);if(!state.permitted)throw Stop{Code::denied};
+        waiting=waiting||!state.payload_available||(!input->now&&state.presentation!=recovery::Presentation::retained);}
+    if(waiting)throw Stop{Code::pending};
+    std::set<std::string> fields{binding["field"].get<std::string>()};
+    if(binding["kind"]=="selector")for(const char* key:{"predicates","sort"})for(const auto& item:binding[key])fields.insert(item["field"]);
+    for(const auto* input:routed)for(const auto& field:fields)if(!metadata(field)&&!input->fields.count(field))throw Stop{Code::unsupported};
+    return routed;
+}
 }
 void project_binding(const Json& binding,const std::vector<BindingInput>& inputs,std::uint64_t now_ms,
     const std::function<void(const BindingFrame&)>& sink,BindingLimits limits){
@@ -177,18 +193,7 @@ void project_binding(const Json& binding,const std::vector<BindingInput>& inputs
     bool delivered=false;
     const auto deliver=[&](const BindingFrame& frame){delivered=true;sink(frame);};
     try{
-        if(binding["kind"]=="unresolved_pin")throw Stop{Code::pending};
-        std::vector<const BindingInput*> routed;
-        for(const auto& input:inputs)if(binding["kind"]=="direct"?input.producer==binding["producer_id"]:
-            scope_matches(input.scope,binding["scope"])&&input.entity_types.count(binding["entity_type"].get<std::string>()))routed.push_back(&input);
-        if(routed.empty())throw Stop{Code::unsupported};
-        bool waiting=false;
-        for(const auto* input:routed){const auto state=input->view->status(now_ms);if(!state.permitted)throw Stop{Code::denied};
-            waiting=waiting||!state.payload_available||(!input->now&&state.presentation!=recovery::Presentation::retained);}
-        if(waiting)throw Stop{Code::pending};
-        std::set<std::string> fields{binding["field"].get<std::string>()};
-        if(binding["kind"]=="selector")for(const char* key:{"predicates","sort"})for(const auto& item:binding[key])fields.insert(item["field"]);
-        for(const auto* input:routed)for(const auto& field:fields)if(!metadata(field)&&!input->fields.count(field))throw Stop{Code::unsupported};
+        const auto routed=route(binding,inputs,now_ms);
         std::vector<Borrow> borrows;borrows.reserve(routed.size());
         std::function<void(std::size_t)> borrow=[&](std::size_t index){
             if(index==routed.size()){deliver(Resolver(binding,borrows,limits).run());return;}
@@ -200,5 +205,48 @@ void project_binding(const Json& binding,const std::vector<BindingInput>& inputs
         borrow(0);
     }catch(const Stop& stop){if(delivered)throw;deliver(empty(stop.code));}
     catch(const std::bad_alloc&){if(delivered)throw;deliver(empty(Code::capacity));}
+}
+void project_bindings(const std::vector<Json>& bindings,const std::vector<BindingInput>& inputs,std::uint64_t now_ms,
+    const std::function<void(const BindingBatch&)>& sink,BindingLimits limits){
+    validate(inputs,limits);need(static_cast<bool>(sink)&&bindings.size()<=512);
+    std::size_t document_bytes=0;
+    for(const auto& q:bindings){configuration::validate_binding_document(q);const auto bytes=q.dump().size();
+        need(bytes<=262144-document_bytes);document_bytes+=bytes;}
+    bool delivered=false;
+    const auto deliver=[&](const BindingBatch& batch){delivered=true;sink(batch);};
+    try{
+        if(bindings.size()>limits.output_bytes/128)throw Stop{Code::capacity};
+        struct Query {std::vector<const BindingInput*> inputs;std::optional<Code> outcome;};
+        std::vector<Query> queries;queries.reserve(bindings.size());std::set<const BindingInput*> required;
+        for(const auto& q:bindings){Query query;
+            try{query.inputs=route(q,inputs,now_ms);required.insert(query.inputs.begin(),query.inputs.end());}
+            catch(const Stop& stop){query.outcome=stop.code;}
+            queries.push_back(std::move(query));}
+        std::vector<const BindingInput*> routed;for(const auto& input:inputs)if(required.count(&input))routed.push_back(&input);
+        std::map<const BindingInput*,Borrow> available;
+        const auto resolve=[&]{
+            BindingBatch batch;batch.frames.reserve(bindings.size());std::size_t used=bindings.size()*128,work=0;
+            for(std::size_t n=0;n<bindings.size();++n){const auto& q=queries[n];
+                if(q.outcome){batch.frames.push_back(empty(*q.outcome));continue;}
+                std::vector<Borrow> borrows;bool waiting=false;
+                for(const auto* input:q.inputs){const auto found=available.find(input);if(found==available.end())waiting=true;else borrows.push_back(found->second);}
+                if(waiting){batch.frames.push_back(empty(Code::pending));continue;}
+                auto remaining=limits;remaining.output_bytes-=used;remaining.work_steps-=work;
+                Resolver resolver(bindings[n],borrows,remaining);BindingFrame frame;
+                try{frame=resolver.run();}catch(const Stop& stop){if(stop.code==Code::capacity)throw;frame=empty(stop.code);}
+                work+=resolver.work();used+=frame.accounted_bytes;batch.frames.push_back(std::move(frame));
+            }
+            deliver(batch);
+        };
+        std::function<void(std::size_t)> borrow=[&](std::size_t index){
+            if(index==routed.size()){resolve();return;}
+            const auto* input=routed[index];const auto next=[&](const model::Snapshot& snapshot,const recovery::LeaseView& lease){
+                available.emplace(input,Borrow{input,&snapshot,&lease});borrow(index+1);available.erase(input);};
+            const bool accepted=input->now?input->view->project_measured(now_ms,*input->now,[&](const auto& snapshot,const auto& lease,const auto&){next(snapshot,lease);}):input->view->project(now_ms,next);
+            if(!accepted)borrow(index+1);
+        };
+        borrow(0);
+    }catch(const Stop& stop){if(delivered)throw;need(stop.code==Code::capacity);deliver({BindingBatchCode::capacity,{}});}
+    catch(const std::bad_alloc&){if(delivered)throw;deliver({BindingBatchCode::capacity,{}});}
 }
 }
