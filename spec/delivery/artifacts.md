@@ -10,9 +10,9 @@ sp_profile: "syspane-spec/0.1.0"
 sp_authority: "normative-proposal"
 sp_requires: ["SP-COMPOSITION", "SP-TARGETS"]
 sp_review: "unreviewed"
-sp_sources: ["SRC-AUDIT-2026-10-04"]
+sp_sources: ["SRC-AUDIT-2026-10-04", "SRC-CONVERSATION"]
 sources: [{"id": "SRC-AUDIT-2026-10-04", "resource": "User-supplied SysPane audits and design reviews, 2026-10-04", "title": "October specification review inputs"}]
-updated: {"by": "codex", "at": "2026-10-04T19:32:52+11:00", "scope": "October audit amendments; no human review attested"}
+updated: {"by": "codex", "at": "2026-10-08T18:37:15.505795+00:00", "scope": "Private Linux configuration host name; installed integration remains unqualified"}
 ---
 
 # Binaries, packages and release identity
@@ -29,6 +29,7 @@ audit drafts are consolidated here before scripts depend on them.
 | Isolated surface | `SysPane.Surface.exe` | Private libexec/bundle helper where needed | Host-dependent |
 | CLI/TUI | `spctl.exe` | `spctl` | Desktop or console |
 | Independent diagnostic | `SysPane.Diag.exe` | `syspane-diag` | Recovery capability |
+| Configuration transaction host | Private helper where admitted | Private `syspane-configuration-host` on Linux | Controller runtime; installed integration pending |
 | Provider worker | `SysPane.Provider.exe` | Private `syspane-provider-host` | On-demand admitted providers |
 | Privileged broker | `SysPane.Service.exe` | Admitted native service/helper | Optional, explicit installation |
 | Maintenance frontend | `SysPane.Setup.exe` | Qualified setup frontend/native package action | Separate maintenance |

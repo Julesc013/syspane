@@ -1,0 +1,29 @@
+{
+  "version": "0.1.0",
+  "profile": "profile:default",
+  "epoch": "controller:E1",
+  "replacement_epoch": "controller:E2",
+  "cases": [
+    "cold-start-exact-profile",
+    "production-policy-refuses-overrides",
+    "bootstrap-rejects-unknown-fields",
+    "wrong-parent-refused",
+    "work-waits-for-independent-arm",
+    "sequential-commits-and-replay",
+    "disconnect-and-reconnect",
+    "held-storage-heartbeat-and-cancel",
+    "revoked-policy-prevents-disclosure",
+    "same-revision-policy-change",
+    "held-policy-expires-independent-watch",
+    "durable-hang-restart-reconciliation",
+    "guardian-loss-exits",
+    "cooperative-shutdown-releases-profile",
+    "blocked-shutdown-exits",
+    "foreign-client-refused",
+    "wrong-output-oracle-rejects"
+  ],
+  "bootstrap": {"format": "SysPane.ProfileController", "schema_version": "0.1.0"},
+  "deadlines_ms": {"startup": 5000, "operation": 5000, "shutdown": 2000},
+  "expected": {"initial_revision": "0", "committed_revision": "1", "second_revision": "2", "first_resources_ms": 1500, "second_resources_ms": 2000},
+  "exit_codes": {"startup": 2, "guardian": 124, "active_fault": 125, "policy": 126, "normal": 0}
+}

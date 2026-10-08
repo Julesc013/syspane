@@ -15,6 +15,31 @@ build` before configuring or building; use `test` or `package` for those actions
 The common active-output budget is unchanged; retained `out/evidence/` archives
 are measured separately. Never use the placeholder account from the example.
 
+The [native controller package](../../spec/delivery/packages/w-08-profile-controller.md)
+builds the private Linux `syspane-configuration-host` helper. Its sole argument is
+its actual parent PID; descriptors 0/1 carry the inherited nonblocking authenticated
+Unix channel. A verified parent supplies the exact bounded bootstrap, then the
+existing recovery.health/recovery.transaction handshake. The production entry uses
+fixed native machine policy and offers no fixture or environment policy override.
+The helper is not a standalone desktop or an installed supervisor.
+
+Resolve profile locations in the trusted frontend and keep the advertised client
+endpoint within the existing Unix path limit in a private 0700 runtime directory.
+The independent parent owns startup/operation deadlines and actual child stop/reap.
+Arm each watch before native execution; finish never extends its absolute deadline.
+Policy-only refreshes also require watches. Reconnect under a new producer epoch
+and reconcile original requests after replacement; do not resubmit mutations.
+Shutdown returns zero only after normal worker/profile closure. The package defines
+fixed startup, guardian-loss, active-fault and policy-invalidated exit codes.
+
+After budget preflight/configure/build, run `ctest --preset linux-x64-gcc13 -R
+'^native[.]PROFILE-CONTROLLER$' --output-on-failure`. The separate fixture entry
+injects positive policy and held I/O; it does not qualify protected-policy deployment.
+Run PROFILE-WORKER/STARTUP/OWNER, command IPC/reconciliation/supervision, storage
+regressions, shared command cases and component graphs. See the
+[handoff](../../spec/delivery/profile-controller-handoff.md) for preserved failures
+and the remaining frontend, profile projection, native UI and package work.
+
 The [profile worker package](../../spec/delivery/packages/w-08-profile-worker.md)
 connects LinuxProfileStore to AsyncCommands without transferring a native owner
 between threads. LinuxProfileWorker implements the same blocking GenerationStore

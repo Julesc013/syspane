@@ -34,6 +34,8 @@ public:
     void invalidate()override;
     std::size_t request_count()const override{return ledger_.size();}
     std::uint64_t revision()const override{return revision_;}
+    // Owning loop only; a latched native fault requires a fresh process/store.
+    bool storage_faulted()const{return storage_fault_;}
     // All methods on the owning loop except run(), which executes exactly once
     // on the one native worker. finish requires actual join/process-stop proof.
     std::optional<std::uint64_t> take();

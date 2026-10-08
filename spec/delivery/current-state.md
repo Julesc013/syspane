@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-08T17:55:22.967236+00:00", "scope": "Native profile worker and asynchronous command connection; installed supervision remains open"}
+updated: {"by": "codex", "at": "2026-10-08T18:35:25.684052+00:00", "scope": "Native configuration process entry; installed frontend/supervisor and complete editions remain open"}
 ---
 
 # Current state and next admitted boundary
@@ -22,9 +22,9 @@ recordings are local ignored `out/` content; the retired root is absent from the
 tracked tree. See `docs/developers/build.md` in the repository for checkout
 setup and the [repository contract](../foundation/repository.md) for ownership.
 
-The [profile command connection](profile-worker-handoff.md) retains one policy-bound native
-profile owner across asynchronous transactions, with real worker joins, exact
-persistence and interrupted-commit reconciliation. Installed controller supervision,
+The [native configuration process](profile-controller-handoff.md) now authenticates startup,
+checks current policy before result disclosure and preserves interrupted command
+recovery under independent supervision. Installed frontend/supervisor integration,
 protected-policy deployment and all complete editions remain open.
 
 The [Linux profile ownership checkpoint](profile-owner-handoff.md)

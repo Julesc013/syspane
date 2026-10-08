@@ -304,7 +304,8 @@
         "SP-W08-THEME-COMMANDS",
         "SP-W08-PROFILE-OWNER",
         "SP-W08-PROFILE-STARTUP",
-        "SP-W08-PROFILE-WORKER"
+        "SP-W08-PROFILE-WORKER",
+        "SP-W08-PROFILE-CONTROLLER"
       ],
       "acceptance_tests": [
         "T-TRANSACTION",
@@ -349,14 +350,20 @@
         "source/platform/profile_worker_linux.cpp",
         "tests/configuration/profile_worker_probe.cpp",
         "tests/configuration/native_profile_worker.py",
-        "tests/configuration/profile-worker-cases.json"
+        "tests/configuration/profile-worker-cases.json",
+        "source/application/profile_controller_linux.hpp",
+        "source/application/profile_controller_linux.cpp",
+        "source/application/profile_controller_main.cpp",
+        "tests/configuration/profile_controller_probe.cpp",
+        "tests/configuration/native_profile_controller.py",
+        "tests/configuration/profile-controller-cases.json"
       ],
       "status": "in_progress",
       "authority_class": "development",
       "execution_grant": "user:foundation-native-campaign-2026-10-05",
-      "notes": "LinuxProfileWorker now retains one thread-bound policy/profile/generation owner across real joined AsyncCommands transaction workers. A single blocking invocation slot rejects concurrent access; guarded readback and close preserve native affinity. Fixed native cases verify exact bytes, locks between jobs, pending results before actual join, policy invalidation and pre-selection/post-durability process recovery. Next connect installed controller/IPC and independent process supervision, native UI and import catalog. Protected-policy positive qualification, full layers/updates, non-Linux storage and all five complete editions remain required.",
-      "package": "delivery/packages/w-08-profile-worker.md",
-      "evidence": "delivery/profile-worker-handoff.md"
+      "notes": "The private Linux configuration host now authenticates inherited startup, opens the native profile and serves existing command sessions under health/transaction supervision. Native policy is refreshed off-loop before dispatch/disclosure; same-revision changes invalidate, joined completion and bounded process shutdown preserve actual facts. Independent parent/client/native-byte cases cover failed startup, withheld arm, blocked I/O/policy, cancellation, wrong peer, restart reconciliation and closure. Next integrate the real installed frontend/supervisor and verified helper lookup, coherent profile projection, native UI and import catalog. Positive protected-policy qualification, full layers/updates, non-Linux adapters and all five complete editions remain required.",
+      "package": "delivery/packages/w-08-profile-controller.md",
+      "evidence": "delivery/profile-controller-handoff.md"
     },
     {
       "id": "W-09",

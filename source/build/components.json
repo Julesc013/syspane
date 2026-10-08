@@ -3114,6 +3114,87 @@
       "profiles": [
         "linux-x64-gcc13"
       ]
+    },
+    {
+      "id": "profile-controller-runtime",
+      "target": "syspane_profile_controller_runtime",
+      "type": "STATIC_LIBRARY",
+      "source_owner": "source/application/",
+      "public_interfaces": [
+        "source/application/profile_controller_linux.hpp"
+      ],
+      "private_interfaces": [],
+      "sources": [
+        "source/application/profile_controller_linux.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_profile_worker",
+        "syspane_async_commands",
+        "syspane_machine_policy",
+        "syspane_local_ipc",
+        "syspane_child",
+        "syspane_health",
+        "syspane_recovery",
+        "Threads::Threads"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
+    },
+    {
+      "id": "configuration-host",
+      "target": "syspane_configuration_host",
+      "type": "EXECUTABLE",
+      "source_owner": "source/application/",
+      "public_interfaces": [],
+      "private_interfaces": [],
+      "sources": [
+        "source/application/profile_controller_main.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_profile_controller_runtime"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
+    },
+    {
+      "id": "profile-controller-probe",
+      "target": "syspane_profile_controller_probe",
+      "type": "EXECUTABLE",
+      "source_owner": "tests/configuration/",
+      "public_interfaces": [],
+      "private_interfaces": [],
+      "sources": [
+        "tests/configuration/profile_controller_probe.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_profile_controller_runtime"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
     }
   ]
 }

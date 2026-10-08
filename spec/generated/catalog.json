@@ -337,7 +337,7 @@
         "SP-COMPOSITION",
         "SP-TARGETS"
       ],
-      "sha256": "ddceed68791c536b61310e078c775678edda856d6728745f03f5f09ba50847a1"
+      "sha256": "74dc36b1fda343a0382f02ee75f0284eec17263d231bf4c972b046dec067e549"
     },
     {
       "id": "SP-AUDIT-OCTOBER",
@@ -489,7 +489,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "0703cd3443d13b814a59c3ec3450d7af5f7d9f3028410e92f9c82f58ff12e140"
+      "sha256": "8e55c16f45cfec5196229ed21ebc2fd41964d80e546399357edfd10bfe5d1ac1"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -1463,6 +1463,19 @@
         "SP-W08-COMMAND-SESSIONS"
       ],
       "sha256": "86559ae36c279b6470fa29582af8e1f16a650ceee0e91bfbfc89ed667bc49a23"
+    },
+    {
+      "id": "SP-W08-PROFILE-CONTROLLER",
+      "path": "delivery/packages/w-08-profile-controller.md",
+      "title": "Supervised native profile controller entry",
+      "description": "Authenticate startup, keep native policy current at disclosure and retain transaction recovery.",
+      "requires": [
+        "SP-W08-PROFILE-WORKER",
+        "SP-W08-SUPERVISION",
+        "SP-POLICY",
+        "SP-ARTIFACTS"
+      ],
+      "sha256": "925d32ffed56ffa85f29ec77df16df88c27c627d97783e53424c589f58214743"
     },
     {
       "id": "SP-W08-PROFILE-OWNER",
@@ -2462,6 +2475,16 @@
         "SP-CAMPAIGN-ADMISSION"
       ],
       "sha256": "a1632148d8263133a81cf6d91eb769ba651a4ea035b6ecff7bee1f2b1c4d4704"
+    },
+    {
+      "id": "SP-PROFILE-CONTROLLER-HANDOFF",
+      "path": "delivery/profile-controller-handoff.md",
+      "title": "Supervised native profile controller process",
+      "description": "Authenticated startup, current-policy result disclosure and interrupted command recovery.",
+      "requires": [
+        "SP-W08-PROFILE-CONTROLLER"
+      ],
+      "sha256": "90c62f303c7027b928c757872950e87d6f74441f4ae72fd07c4615cfe1880868"
     },
     {
       "id": "SP-PROFILE-OWNER-HANDOFF",

@@ -28,6 +28,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Pinned content and preset preview](w-08-content-resolution.md) — Resolve immutable content bytes into a validated authored preview without granting installation or activation.
 - [Complete-scene command transport](w-08-large-commands.md) — Carry the full authored scene contract through negotiated commands, bounded admission and durable recovery.
 - [Supervised native content commands](w-08-native-content.md) — Connect retained resource preparation to authenticated native commands and exact controller replacement.
+- [Supervised native profile controller entry](w-08-profile-controller.md) — Authenticate startup, keep native policy current at disclosure and retain transaction recovery.
 - [Linux profile directory ownership](w-08-profile-owner.md) — Explicit paths, private atomic initialization and exclusive controller lifetime.
 - [Initial profile and policy-bound native store](w-08-profile-startup.md) — Shipped default content, atomic first generation and existing transaction composition.
 - [Thread-bound profile storage for asynchronous commands](w-08-profile-worker.md) — Retain native profile ownership across joined command workers.

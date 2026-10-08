@@ -27,10 +27,11 @@ behaviour has been implemented. See [audit disposition](spec/delivery/audit-2026
 
 ## First native campaign
 
+- [x] W-08 private native configuration process: authenticated startup, current-policy disclosure, independently armed work, bounded shutdown and interrupted-commit reconciliation. See the [handoff](spec/delivery/profile-controller-handoff.md).
 - [x] W-08 native profile worker: one storage thread and held profile locks across joined asynchronous command workers, with exact persistence and crash reconciliation. See the [handoff](spec/delivery/profile-worker-handoff.md).
 - [x] W-08 shipped initial scene/theme, resource bootstrap 0.5 and policy-bound Linux profile store, with exact startup/interruption/reconciliation evidence. See the [handoff](spec/delivery/profile-startup-handoff.md).
 - [x] W-08 Linux profile directory owner: XDG/portable roots, exact private markers, exclusive locks and interrupted initialization. See the [handoff](spec/delivery/profile-owner-handoff.md).
-- [ ] Connect the composed profile store to the supervised installed controller, import catalog and native UI; qualify protected-policy deployment and retain all release gates.
+- [ ] Connect the private configuration process to the installed controller frontend/supervisor and verified helper lookup; add coherent profile projection, native UI and import catalog; qualify protected-policy deployment and retain all release gates.
 - [x] W-09 theme typography: versioned complete fonts/roles, exact resource admission and native raster evidence. See the [handoff](spec/delivery/typography-handoff.md).
 - [x] W-09 role-aware scene composition: bounded semantic blocks, exact native pixels, preserved diagnostics and erasure; explicit development admission. See the [handoff](spec/delivery/role-composition-handoff.md).
 - [x] W-10 shared theme-authoring input and immutable artifact construction: exact no-op/reset, policy admission, preserved license and deterministic content pins. See the [handoff](spec/delivery/theme-authoring-handoff.md).

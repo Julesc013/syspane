@@ -11,9 +11,9 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
-The [profile command connection](spec/delivery/profile-worker-handoff.md) retains one policy-bound native
-profile owner across asynchronous transactions, with real worker joins, exact
-persistence and interrupted-commit reconciliation. Installed controller supervision,
+The [native configuration process](spec/delivery/profile-controller-handoff.md) now authenticates startup,
+checks current policy before result disclosure and preserves interrupted command
+recovery under independent supervision. Installed frontend/supervisor integration,
 protected-policy deployment and all complete editions remain open.
 
 The [Linux profile ownership checkpoint](spec/delivery/profile-owner-handoff.md)
