@@ -305,7 +305,8 @@
         "SP-W08-PROFILE-OWNER",
         "SP-W08-PROFILE-STARTUP",
         "SP-W08-PROFILE-WORKER",
-        "SP-W08-PROFILE-CONTROLLER"
+        "SP-W08-PROFILE-CONTROLLER",
+        "SP-W08-PROFILE-SUPERVISOR"
       ],
       "acceptance_tests": [
         "T-TRANSACTION",
@@ -356,14 +357,19 @@
         "source/application/profile_controller_main.cpp",
         "tests/configuration/profile_controller_probe.cpp",
         "tests/configuration/native_profile_controller.py",
-        "tests/configuration/profile-controller-cases.json"
+        "tests/configuration/profile-controller-cases.json",
+        "source/application/profile_supervisor_linux.hpp",
+        "source/application/profile_supervisor_linux.cpp",
+        "tests/configuration/profile_supervisor_probe.cpp",
+        "tests/configuration/native_profile_supervisor.py",
+        "tests/configuration/profile-supervisor-cases.json"
       ],
       "status": "in_progress",
       "authority_class": "development",
       "execution_grant": "user:foundation-native-campaign-2026-10-05",
-      "notes": "The private Linux configuration host now authenticates inherited startup, opens the native profile and serves existing command sessions under health/transaction supervision. Native policy is refreshed off-loop before dispatch/disclosure; same-revision changes invalidate, joined completion and bounded process shutdown preserve actual facts. Independent parent/client/native-byte cases cover failed startup, withheld arm, blocked I/O/policy, cancellation, wrong peer, restart reconciliation and closure. Next integrate the real installed frontend/supervisor and verified helper lookup, coherent profile projection, native UI and import catalog. Positive protected-policy qualification, full layers/updates, non-Linux adapters and all five complete editions remain required.",
-      "package": "delivery/packages/w-08-profile-controller.md",
-      "evidence": "delivery/profile-controller-handoff.md"
+      "notes": "LinuxProfileSupervisor now owns configuration-host startup, matching epochs, independent health/transaction deadlines, native exit proof, bounded restarts and terminal shutdown. Nineteen independent native cases cover real commit/reconciliation, timeouts, circuit preservation, policy change, malformed peers, parent death, cleanup substitutions and resource bounds. Existing controller/command/recovery regressions pass. Next connect verified installed helper lookup and the independently scheduled controller/inspector owner, coherent profile projection, native UI and import catalog. Positive protected-policy qualification, full layers/updates, non-Linux adapters and all five complete editions remain required.",
+      "package": "delivery/packages/w-08-profile-supervisor.md",
+      "evidence": "delivery/profile-supervisor-handoff.md"
     },
     {
       "id": "W-09",

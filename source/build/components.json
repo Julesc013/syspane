@@ -3195,6 +3195,61 @@
       "profiles": [
         "linux-x64-gcc13"
       ]
+    },
+    {
+      "id": "profile-supervisor",
+      "target": "syspane_profile_supervisor",
+      "type": "STATIC_LIBRARY",
+      "source_owner": "source/application/",
+      "public_interfaces": [
+        "source/application/profile_supervisor_linux.hpp"
+      ],
+      "private_interfaces": [],
+      "sources": [
+        "source/application/profile_supervisor_linux.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_profile_owner",
+        "syspane_child",
+        "syspane_health",
+        "syspane_recovery",
+        "Threads::Threads"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
+    },
+    {
+      "id": "profile-supervisor-probe",
+      "target": "syspane_profile_supervisor_probe",
+      "type": "EXECUTABLE",
+      "source_owner": "tests/configuration/",
+      "public_interfaces": [],
+      "private_interfaces": [],
+      "sources": [
+        "tests/configuration/profile_supervisor_probe.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_profile_supervisor",
+        "syspane_profile_controller_runtime"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
     }
   ]
 }

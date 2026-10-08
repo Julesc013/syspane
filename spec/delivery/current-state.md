@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-08T18:35:25.684052+00:00", "scope": "Native configuration process entry; installed frontend/supervisor and complete editions remain open"}
+updated: {"by": "codex", "at": "2026-10-08T19:11:12.537848+00:00", "scope": "Native configuration supervision with exact exit proof; installed integration and complete editions remain open"}
 ---
 
 # Current state and next admitted boundary
@@ -21,6 +21,11 @@ Shared build tooling now lives in `source/build/`. Machine bindings and raw
 recordings are local ignored `out/` content; the retired root is absent from the
 tracked tree. See `docs/developers/build.md` in the repository for checkout
 setup and the [repository contract](../foundation/repository.md) for ownership.
+
+The [native configuration supervisor](profile-supervisor-handoff.md) now enforces
+startup and operation deadlines, confirms exact child exit and bounds replacement.
+Real commit/recovery and failure cases pass. Installed helper lookup, frontend
+integration, protected-policy deployment and all complete editions remain open.
 
 The [native configuration process](profile-controller-handoff.md) now authenticates startup,
 checks current policy before result disclosure and preserves interrupted command

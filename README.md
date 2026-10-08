@@ -11,6 +11,11 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
+The [native configuration supervisor](spec/delivery/profile-supervisor-handoff.md) now enforces
+startup and operation deadlines, confirms exact child exit and bounds replacement.
+Real commit/recovery and failure cases pass. Installed helper lookup, frontend
+integration, protected-policy deployment and all complete editions remain open.
+
 The [native configuration process](spec/delivery/profile-controller-handoff.md) now authenticates startup,
 checks current policy before result disclosure and preserves interrupted command
 recovery under independent supervision. Installed frontend/supervisor integration,

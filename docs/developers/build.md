@@ -15,6 +15,30 @@ build` before configuring or building; use `test` or `package` for those actions
 The common active-output budget is unchanged; retained `out/evidence/` archives
 are measured separately. Never use the placeholder account from the example.
 
+The [supervisor package](../../spec/delivery/packages/w-08-profile-supervisor.md)
+provides LinuxProfileSupervisor for the native configuration helper. Supply a
+previously admitted canonical helper ELF, an empty canonical 0700 runtime directory
+on ext4/tmpfs (at most 70 path bytes), ProfileLocation, creation intent and the exact
+console PID. The helper path is a trusted native input, never a wire/environment
+lookup or evidence of installation provenance. Run this owner independently of
+storage and outside GUI callbacks, polling at least every 100 ms.
+
+Drain take() regularly; its bounded native events support owner diagnostics. Use
+status().endpoint only while ready. On loss of readiness invalidate the command
+connection; after a new epoch reconnect and reconcile original requests without
+repeating mutations. close() is terminal: continue polling until closed before
+destruction, and inspect the actual last_exit and any cleanup fault. Never infer
+non-commit from a stopped controller. The empty runtime root remains caller-owned.
+
+After budget preflight/configure/build, run `ctest --preset linux-x64-gcc13 -R
+'^native[.](PROFILE-SUPERVISOR|PROFILE-CONTROLLER|COMMAND-IPC|RECONCILIATION|TRANSACTION-SUPERVISION)$'
+--output-on-failure` and the component graph checks on all three profiles. The
+independent supervisor test owns short runtime roots inside the existing Linux
+campaign (alongside the profile build directory) and records them with its evidence.
+Preserve those roots as well as native-evidence recordings, including failed runs.
+See the [handoff](../../spec/delivery/profile-supervisor-handoff.md). Installed
+lookup/frontend/profile projection and complete native editions remain pending.
+
 The [native controller package](../../spec/delivery/packages/w-08-profile-controller.md)
 builds the private Linux `syspane-configuration-host` helper. Its sole argument is
 its actual parent PID; descriptors 0/1 carry the inherited nonblocking authenticated

@@ -31,6 +31,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Supervised native profile controller entry](w-08-profile-controller.md) — Authenticate startup, keep native policy current at disclosure and retain transaction recovery.
 - [Linux profile directory ownership](w-08-profile-owner.md) — Explicit paths, private atomic initialization and exclusive controller lifetime.
 - [Initial profile and policy-bound native store](w-08-profile-startup.md) — Shipped default content, atomic first generation and existing transaction composition.
+- [Native configuration process supervision](w-08-profile-supervisor.md) — Own controller startup, absolute watches, exact exit proof and bounded replacement.
 - [Thread-bound profile storage for asynchronous commands](w-08-profile-worker.md) — Retain native profile ownership across joined command workers.
 - [Committed request reconciliation across producer epochs](w-08-reconciliation.md) — Recover durable outcomes through authenticated read-only IPC without resubmitting mutations.
 - [Durable pinned resource generations](w-08-resource-generations.md) — Bind command identity and generation recovery to the exact prepared content closure.
