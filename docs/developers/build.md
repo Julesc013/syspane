@@ -15,6 +15,31 @@ build` before configuring or building; use `test` or `package` for those actions
 The common active-output budget is unchanged; retained `out/evidence/` archives
 are measured separately. Never use the placeholder account from the example.
 
+The [editor helper bundle](../../spec/delivery/packages/w-26-editor-helper-bundle.md)
+adds explicitly selected helper record 0.2 and built_helper_bundle_expectation().
+Its fixed roles are configuration, image and recovery. Construct LinuxInstallation
+with that expectation on a serialized native worker, then pass its shared owner to
+ImageJob or LinuxRecoveryQueue. Verification covers the entire bundle on every launch;
+failure has no pathname fallback. A failed image constructor creates no child. The
+recovery queue reports its existing unavailable/failure outcome, with no storage
+success claim. Keep filesystem verification off the GTK thread.
+
+After the ordinary build/test preflights, run
+`ctest --preset linux-x64-gcc13 -R '^native[.](EDITOR-HELPER-BUNDLE|HELPER-IDENTITY|IMAGE-JOB|RECOVERY-QUEUE|INSTALLED-SETTINGS)$' --output-on-failure`.
+Account for each native family's extracted payload/archive growth before running;
+under the campaign quota, run and archive the larger families separately. The bundle
+family forecasts twice the combined five-file payload size plus 16 MiB. It uses one
+reusable relocated payload and exact mutation snapshots. Its unprivileged tracer
+observes helper exec before image containment disables inspection, detaches before
+worker instructions run and holds independent pidfds through exit. Tests require
+that native tracing capability; absence is a blocked check, never an inferred pass.
+
+Record 0.1 and the three-file DevelopmentFrontend settings payload remain unchanged.
+The five-file bundle consumer is a development probe. Its passing helpers do not
+enable the installed editor, grant recovery retention authority or qualify a desktop
+edition. Next connect worker-owned results/cancellation to the native editor and
+bind recovery to the authenticated profile, session and current policy.
+
 The shared private text control owns one GtkTextBuffer. Callers may edit its contents,
 but must not replace/share the buffer or alter its clipboard registrations. Its native
 lifecycle wrappers balance GTK's bookkeeping without enabling implicit PRIMARY or

@@ -3,6 +3,7 @@
 #include <memory>
 
 namespace syspane::platform {
+class LinuxInstallation;
 struct RecoveryContext {
     std::string session,profile,generation;
     std::uint64_t policy_revision=0;
@@ -28,6 +29,9 @@ struct RecoveryCompletion {
 class LinuxRecoveryQueue {
 public:
     LinuxRecoveryQueue(std::string worker,std::string directory,RecoveryContext);
+    // Construct/poll on the installation's native worker; each operation
+    // revalidates the bundle before sealed launch, without a pathname fallback.
+    LinuxRecoveryQueue(std::shared_ptr<LinuxInstallation>,std::string directory,RecoveryContext);
     ~LinuxRecoveryQueue();
     LinuxRecoveryQueue(const LinuxRecoveryQueue&)=delete;
     LinuxRecoveryQueue& operator=(const LinuxRecoveryQueue&)=delete;

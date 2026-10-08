@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-08T22:02:57.712172+00:00", "scope": "Private GTK text lifetime repair; installed editor/helper composition and all complete editions remain open"}
+updated: {"by": "codex", "at": "2026-10-08T22:36:11.030314+00:00", "scope": "Verified editor helper bundle; native worker/UI composition and all complete editions remain open"}
 ---
 
 # Current state and next admitted boundary
@@ -21,6 +21,12 @@ Shared build tooling now lives in `source/build/`. Machine bindings and raw
 recordings are local ignored `out/` content; the retired root is absent from the
 tracked tree. See `docs/developers/build.md` in the repository for checkout
 setup and the [repository contract](../foundation/repository.md) for ownership.
+
+The [verified editor helper bundle](editor-helper-bundle-handoff.md) extends
+installation-bound sealed execution to image and recovery work. Exact native
+pixels/files, substitution and lifetime cases pass. Connect these owners to the
+installed editor through a serialized native worker and policy-bound recovery
+context next; all five complete desktop editions remain open.
 
 The [private text lifetime repair](private-text-lifetime-handoff.md) closes the
 shared GTK selection-registration teardown defect while retaining text selection

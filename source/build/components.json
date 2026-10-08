@@ -1977,7 +1977,8 @@
       ],
       "allowed_dependencies": [
         "syspane_scene",
-        "syspane_child"
+        "syspane_child",
+        "syspane_installation"
       ],
       "target_requirements": [
         "cxx17",
@@ -2820,7 +2821,8 @@
       ],
       "allowed_dependencies": [
         "syspane_authored",
-        "syspane_child"
+        "syspane_child",
+        "syspane_installation"
       ],
       "target_requirements": [
         "cxx17"
@@ -3568,6 +3570,32 @@
       "allowed_dependencies": [
         "syspane_private_text",
         "PkgConfig::GTK3"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
+    },
+    {
+      "id": "editor-helper-probe",
+      "target": "syspane_editor_helper_probe",
+      "type": "EXECUTABLE",
+      "source_owner": "tests/configuration/",
+      "public_interfaces": [],
+      "private_interfaces": [],
+      "sources": [
+        "tests/configuration/editor_helper_probe.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_installation",
+        "syspane_image_job",
+        "syspane_recovery_queue"
       ],
       "target_requirements": [
         "cxx17"

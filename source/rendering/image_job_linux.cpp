@@ -1,5 +1,6 @@
 #include "image_job.hpp"
 #include "child.hpp"
+#include "installation_linux.hpp"
 #include "digest.hpp"
 #include <algorithm>
 #include <array>
@@ -17,19 +18,26 @@ struct Fd{int fd=-1;~Fd(){close();}void close(){if(fd>=0)::close(fd);fd=-1;}};
 unsigned word(const unsigned char* b){return (static_cast<unsigned>(b[0])<<24)|(static_cast<unsigned>(b[1])<<16)|(static_cast<unsigned>(b[2])<<8)|b[3];}
 }
 struct ImageJob::Impl {
+    std::shared_ptr<platform::LinuxInstallation> installation;
     Fd channel,error;std::unique_ptr<platform::Child> child;ImageJobStatus status;Clock::time_point started;
     std::string digest,input,errors;std::size_t sent=0,expected=16;bool eof=false,error_eof=false,shutdown=false,cancelled=false;
     std::vector<unsigned char> output;scene::Image result;
     void stop(const char* reason){if(status.reaped)return;status.state=ImageJobState::stopping;status.reason=reason;input.clear();output.clear();errors.clear();result={};channel.close();error.close();child->request_stop();}
 };
-ImageJob::ImageJob(const std::string& worker,std::string media,std::string encoded):impl_(std::make_unique<Impl>()){
+ImageJob::ImageJob(const std::string& worker,std::string media,std::string encoded):ImageJob(worker,std::move(media),std::move(encoded),{}){}
+ImageJob::ImageJob(std::shared_ptr<platform::LinuxInstallation> owner,std::string media,std::string encoded):ImageJob("",std::move(media),std::move(encoded),std::move(owner)){}
+ImageJob::ImageJob(const std::string& worker,std::string media,std::string encoded,std::shared_ptr<platform::LinuxInstallation> owner):impl_(std::make_unique<Impl>()){
+    need(!worker.empty()||owner,"image.installation");impl_->installation=std::move(owner);
     need(media=="image/png"||media=="image/jpeg"||media=="image/svg+xml","image.media");need(!encoded.empty()&&encoded.size()<=8388608,"image.capacity");
     auto& i=*impl_;i.digest=configuration::content_sha256(encoded);const auto size=static_cast<unsigned>(encoded.size());
     i.input.resize(4);for(unsigned n=0;n<4;++n)i.input[n]=static_cast<char>(size>>(24-n*8));i.input+=encoded;
     int socket[2],errors[2];need(!::socketpair(AF_UNIX,SOCK_STREAM|SOCK_CLOEXEC,0,socket),"image.channel");Fd remote;remote.fd=socket[1];i.channel.fd=socket[0];
     need(!::pipe2(errors,O_CLOEXEC),"image.channel");Fd remote_error;remote_error.fd=errors[1];i.error.fd=errors[0];
     need(!::fcntl(i.channel.fd,F_SETFL,O_NONBLOCK)&&!::fcntl(i.error.fd,F_SETFL,O_NONBLOCK),"image.channel");
-    i.started=Clock::now();i.child=std::make_unique<platform::Child>(platform::Child::launch_program(worker,{media,std::to_string(platform::current_process_id())},remote.fd,remote.fd,remote_error.fd));
+    i.started=Clock::now();const std::vector<std::string> arguments{media,std::to_string(platform::current_process_id())};
+    i.child=std::make_unique<platform::Child>(i.installation?
+        platform::Child::launch_sealed(i.installation->verified_helper(platform::HelperKind::image),"syspane-image-worker",arguments,remote.fd,remote.fd,remote_error.fd):
+        platform::Child::launch_program(worker,arguments,remote.fd,remote.fd,remote_error.fd));
 }
 ImageJob::~ImageJob()=default;
 ImageJobStatus ImageJob::poll(){auto& i=*impl_;

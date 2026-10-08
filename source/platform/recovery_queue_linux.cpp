@@ -1,6 +1,7 @@
 #include "recovery_queue_linux.hpp"
 #include "recovery_channel.hpp"
 #include "child.hpp"
+#include "installation_linux.hpp"
 #include "local_ipc.hpp"
 #include "digest.hpp"
 #include <array>
@@ -22,6 +23,7 @@ Json binding(const RecoveryContext& c){return {{"session",c.session},{"profile",
 struct LinuxRecoveryQueue::Impl {
     struct Job {std::uint64_t ticket;std::string operation,bytes;std::optional<std::string> digest;};
     std::string worker,path;RecoveryContext context;Json identity;
+    std::shared_ptr<LinuxInstallation> installation;
     std::thread::id owner=std::this_thread::get_id();mutable bool calling=false;
     std::uint64_t tickets=1,started=0;unsigned guards=0;
     bool initialized=false,sealed=false,closed=false,fault=false,eof=false,error_eof=false;
@@ -59,7 +61,10 @@ struct LinuxRecoveryQueue::Impl {
         int sockets[2],pipes[2];need(::socketpair(AF_UNIX,SOCK_STREAM|SOCK_CLOEXEC,0,sockets)==0,"recovery_queue.channel");Fd remote;remote.value=sockets[1];channel.value=sockets[0];
         need(::pipe2(pipes,O_CLOEXEC)==0,"recovery_queue.channel");Fd remote_errors;remote_errors.value=pipes[1];errors.value=pipes[0];
         need(::fcntl(channel.value,F_SETFL,O_NONBLOCK)==0&&::fcntl(errors.value,F_SETFL,O_NONBLOCK)==0,"recovery_queue.channel");
-        started=monotonic_ms();child=std::make_unique<Child>(Child::launch_program(worker,{std::to_string(current_process_id())},remote.value,remote.value,remote_errors.value));
+        started=monotonic_ms();const std::vector<std::string> arguments{std::to_string(current_process_id())};
+        child=std::make_unique<Child>(installation?
+            Child::launch_sealed(installation->verified_helper(HelperKind::recovery),"syspane-recovery-worker",arguments,remote.value,remote.value,remote_errors.value):
+            Child::launch_program(worker,arguments,remote.value,remote.value,remote_errors.value));
     }
     void packet(std::string_view raw){
         auto p=decode(raw);const auto& h=p.header;need(matches(h,request)&&h.contains("kind")&&!reply,"recovery_queue.reply");
@@ -131,6 +136,10 @@ LinuxRecoveryQueue::LinuxRecoveryQueue(std::string worker,std::string path,Recov
     need(!s.path.empty()&&s.path.front()=='/'&&s.path.size()<=4096,"recovery_queue.path");
 }
 LinuxRecoveryQueue::~LinuxRecoveryQueue()=default;
+LinuxRecoveryQueue::LinuxRecoveryQueue(std::shared_ptr<LinuxInstallation> owner,std::string path,RecoveryContext context)
+    :LinuxRecoveryQueue(std::string{},std::move(path),std::move(context)){
+    need(static_cast<bool>(owner),"recovery_queue.installation");impl_->installation=std::move(owner);
+}
 std::uint64_t LinuxRecoveryQueue::replace(std::string bytes){
     auto& s=*impl_;s.check();Call call(s.calling);need(s.initialized&&!s.sealed&&s.permitted("replace"),"recovery_queue.denied");
     need(!bytes.empty()&&bytes.size()<=record_limit,"recovery_queue.size");need(s.tickets<std::numeric_limits<std::uint64_t>::max(),"recovery_queue.capacity");

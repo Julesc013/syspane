@@ -20,6 +20,10 @@ integration and all five complete editions remain open.
 The [shared private-text repair](spec/delivery/private-text-lifetime-handoff.md)
 resolves the reproduced GTK shutdown diagnostic while preserving selection privacy.
 
+The [verified helper bundle](spec/delivery/editor-helper-bundle-handoff.md) extends
+installation-bound execution to image decoding and recovery storage. Native checks
+cover exact pixels, files and helper substitution; installed editor integration remains open.
+
 The [runtime directory checkpoint](spec/delivery/runtime-directory-handoff.md)
 adds private frontend runtime allocation and explicit retirement after supervisor
 release. Native checks preserve replacements and orphaned files and observe actual
