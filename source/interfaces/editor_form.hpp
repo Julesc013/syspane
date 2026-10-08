@@ -3,6 +3,7 @@
 #include "scene_surface.hpp"
 typedef struct _GtkWidget GtkWidget;
 namespace syspane::interfaces {
+struct EditorRecoveryBinding;
 class EditorForm {
 public:
     struct Actions {
@@ -26,6 +27,9 @@ public:
     recovery::DataCode heartbeat(const std::string&,std::uint64_t token,std::uint64_t revision,std::uint64_t sequence,std::uint64_t now);
     recovery::DataCode disconnect(const std::string&,std::uint64_t token,std::uint64_t revision,std::uint64_t now);
     void close();
+    void recovery(std::string worker,std::string directory,const EditorRecoveryBinding&);
+    // Continue the host loop after close until the held recovery helper is reaped.
+    bool stopped();
 private:
     struct Impl;std::unique_ptr<Impl> impl_;
 };

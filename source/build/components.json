@@ -2302,7 +2302,8 @@
       "source_owner": "source/interfaces/",
       "public_interfaces": [
         "source/interfaces/editor_form.hpp",
-        "source/interfaces/editor_visibility_form.hpp"
+        "source/interfaces/editor_visibility_form.hpp",
+        "source/interfaces/editor_recovery_session.hpp"
       ],
       "private_interfaces": [
         "source/interfaces/editor_content_form.hpp",
@@ -2318,14 +2319,16 @@
         "source/interfaces/editor_create_form_linux.cpp",
         "source/interfaces/editor_layout_form_linux.cpp",
         "source/interfaces/editor_visibility_form_linux.cpp",
-        "source/interfaces/editor_theme_form_linux.cpp"
+        "source/interfaces/editor_theme_form_linux.cpp",
+        "source/interfaces/editor_recovery_session_linux.cpp"
       ],
       "allowed_dependencies": [
         "syspane_editor_draft",
         "syspane_scene_surface",
         "syspane_private_text",
         "PkgConfig::GTK3",
-        "syspane_scene_clipboard"
+        "syspane_scene_clipboard",
+        "syspane_recovery_queue"
       ],
       "target_requirements": [
         "cxx17"

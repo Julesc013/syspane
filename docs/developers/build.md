@@ -64,8 +64,29 @@ After ordinary preflight/configure/build, run `ctest --preset linux-x64-gcc13 -R
 admitted non-root ext4 environment. Queue tests include a separate development fault
 worker, real held-child stop/exit, forged protocol replies and exact final files.
 Run the component graph checks above on all three profiles. See the
-[queue handoff](../../spec/delivery/recovery-queue-handoff.md). Actual editor capture,
-startup offers, Keep semantics and native Restore/Discard/Keep controls remain pending.
+[queue handoff](../../spec/delivery/recovery-queue-handoff.md).
+
+The [recovery controls package](../../spec/delivery/packages/w-10-recovery-controls.md)
+connects the queue to EditorForm under explicit trusted admission. After constructing
+the form, call recovery with the immutable worker/private directory and a separate
+EditorRecoveryBinding: session, profile, verified generation, current policy revision
+and explicit erase authority. Bind only outside private modal/property input. Policy,
+disconnect and reload invalidate the old owner. After accepted Apply/reconciliation,
+supply the newly verified generation; never use the record's own identity. Changing
+session/profile clears earlier cleanup intent. Regrant alone does not restart capture.
+
+Call close without waiting; continue the serialized host loop and poll stopped until
+true before destroying the form or quitting GTK. A failed capture leaves Apply usable
+and the retained file potentially present. Keep prevents later captures for that
+binding. Restore uses the existing draft/undo path, and Apply uses its existing owner.
+
+After ordinary preflight/configure/build, run `ctest --preset linux-x64-gcc13 -R
+'^native[.]EDITOR-RECOVERY$' --output-on-failure`. The native runner uses private
+non-root ext4 directories, real GTK input, an independent observer and held fault
+workers. Run the existing native editor/clipboard and recovery layers plus shared
+recovery and component checks on their declared profiles. The
+[handoff](../../spec/delivery/recovery-controls-handoff.md) describes failures and
+scope. Installed profile-directory and mandatory-policy ownership remain pending.
 
 The [typography package](../../spec/delivery/packages/w-09-typography.md) introduces
 theme 0.2 and `configuration::theme_font(theme, role)`. It returns an owned family,

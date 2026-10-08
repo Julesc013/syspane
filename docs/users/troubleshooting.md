@@ -21,6 +21,15 @@ reset, restore or support-bundle action is implemented yet. Available policy
 can restrict report or inspector disclosure. The Linux report works without a
 display server; the native inspector needs the development profile's GTK/display.
 
+The Linux development editor can now offer a separate unsaved recovery draft after
+a crash. Restore opens it as an editable preview; Apply saves it. Discard recovery
+draft removes that record without changing the saved scene. Keep for later preserves
+the record, and later edits in that session will not overwrite it. Recovery status
+is separate from saved configuration and desktop visibility. An invalid or outdated
+record cannot be restored. These controls currently require the admitted development
+host; there is no installed end-user recovery workflow yet. See the
+[development checkpoint](../../spec/delivery/recovery-controls-handoff.md).
+
 The following product recovery behavior remains under implementation:
 
 | Condition | Intended response |

@@ -489,7 +489,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "655e40e1669c5eaba43e3b8a90d4a4260d9a7c25af094d41e931d5af7eee08c9"
+      "sha256": "57874557dc774915de93d226526f4bed70ac174b2da86e7bb0aa1babddd68367"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -1885,6 +1885,18 @@
       "sha256": "1644df86d920df5de60a35be0cd227df3c5e2bedb11a790e83af270d73ae663f"
     },
     {
+      "id": "SP-W10-RECOVERY-CONTROLS",
+      "path": "delivery/packages/w-10-recovery-controls.md",
+      "title": "Native editor recovery controls and capture lifetime",
+      "description": "Connect verified editor identity to bounded captures and explicit recovery decisions.",
+      "requires": [
+        "SP-W10-RECOVERY-QUEUE",
+        "SP-W10-RECOVERY-DRAFT",
+        "SP-W10-RECOVERY-APPLY"
+      ],
+      "sha256": "9f41b6906645d67a92a1a667268777f2d3b5103de5ca3cf9a52deed2e456033a"
+    },
+    {
       "id": "SP-W10-RECOVERY-DRAFT",
       "path": "delivery/packages/w-10-recovery-draft.md",
       "title": "Bounded editor recovery drafts",
@@ -2424,6 +2436,17 @@
         "SP-COMMAND-SESSIONS-HANDOFF"
       ],
       "sha256": "eedbb0b709d27f80314fca05fccd6410ec51ab45cda54498df2621f46c17b3eb"
+    },
+    {
+      "id": "SP-RECOVERY-CONTROLS-HANDOFF",
+      "path": "delivery/recovery-controls-handoff.md",
+      "title": "Native editor recovery controls checkpoint",
+      "description": "Verified generation binding, native recovery decisions and matching capture retirement.",
+      "requires": [
+        "SP-W10-RECOVERY-CONTROLS",
+        "SP-RECOVERY-QUEUE-HANDOFF"
+      ],
+      "sha256": "3800d891252be75ee29d1d00c07e9cc0afdf7a182ffdf70dcb622273843a646a"
     },
     {
       "id": "SP-RECOVERY-DRAFT-HANDOFF",
@@ -2984,7 +3007,7 @@
         "SP-RENDERING",
         "SP-COMMANDS"
       ],
-      "sha256": "5b2fa536ed0908436df2222c142bc78ddaa6b4ddf7d2a9bffd12e182a4afb1dd"
+      "sha256": "93aa26a7b058cb1457cdb7c1a42bae5ceaf0804c2be78ec910970c1b77682988"
     },
     {
       "id": "SP-POLICY",

@@ -415,7 +415,8 @@
         "SP-W10-RECOVERY-DRAFT",
         "SP-W10-RECOVERY-APPLY",
         "SP-W10-RECOVERY-STORE",
-        "SP-W10-RECOVERY-QUEUE"
+        "SP-W10-RECOVERY-QUEUE",
+        "SP-W10-RECOVERY-CONTROLS"
       ],
       "acceptance_tests": [
         "T-EDITOR",
@@ -452,14 +453,19 @@
         "tests/editor/recovery_queue_probe.cpp",
         "tests/editor/recovery_worker_probe.cpp",
         "tests/editor/native_recovery_queue.py",
-        "tests/editor/recovery-queue-cases.json"
+        "tests/editor/recovery-queue-cases.json",
+        "source/interfaces/editor_recovery_session.hpp",
+        "source/interfaces/editor_recovery_session_linux.cpp",
+        "tests/editor/native_recovery_controls.py",
+        "tests/editor/recovery-controls-cases.json",
+        "tests/editor/recovery-controls-scope-case.json"
       ],
       "status": "in_progress",
       "authority_class": "development",
       "execution_grant": "user:foundation-native-campaign-2026-10-05",
-      "notes": "Native recovery I/O now has one active/one latest pending operation, held-child lifetime, matching context/tickets, guarded private-file access and terminal retirement fences. Native coalescing, close/parent death, forged messages, deadline and stored-Apply checks pass. Continue actual editor capture and Keep rules, verified host generation/policy context, crash startup offers and Restore/Discard/Keep controls with independent observations. Installed ownership, scene-aligned entry/restoration, known native diagnostics, full accessibility/performance, historical qualification and all five complete editions remain required.",
-      "package": "delivery/packages/w-10-recovery-queue.md",
-      "evidence": "delivery/recovery-queue-handoff.md"
+      "notes": "Admitted Linux editor recovery now captures atomic edits, offers explicit Restore/Discard/Keep after verified startup, fences matching retirement across Apply and cancellation, and closes/reaps on invalidation. Exact native files, crash/reopen, current policy, scope change and held-helper exit have executable evidence. Continue installed controller/catalog/mandatory-policy and private profile-directory ownership, scene-aligned entry/restoration, native layout/accessibility/performance and all platform editions. Preserve known native diagnostics and blocked historical qualification.",
+      "package": "delivery/packages/w-10-recovery-controls.md",
+      "evidence": "delivery/recovery-controls-handoff.md"
     },
     {
       "id": "W-11",

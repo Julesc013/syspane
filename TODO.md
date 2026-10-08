@@ -42,8 +42,8 @@ behaviour has been implemented. See [audit disposition](spec/delivery/audit-2026
 - [ ] W-08/W-10 native observation reliability: explain the preserved recovery-checkpoint replacement-request timeout and content-properties dbind timeout; keep fixed deadlines and failed evidence. See the [record](spec/delivery/recovery-draft-handoff.md).
 - [x] W-10 private Linux recovery storage: bounded conditional replacement/retirement, native process cuts, unsafe-node refusal and composed stored-draft Apply. See the [handoff](spec/delivery/recovery-store-handoff.md).
 - [x] W-10 bounded native recovery queue: coalesced captures, exact helper/context identity, guarded I/O, verified exit and terminal retirement fences. See the [handoff](spec/delivery/recovery-queue-handoff.md).
-- [ ] W-10 native recovery integration: verified editor context, capture/Keep scheduling, crash startup offers, close/reap on invalidation, recovery-unavailable reporting and actual Restore/Discard recovery/Keep controls.
-- [ ] W-10 remaining delivery: native recovery integration and installed controller/catalog/policy ownership, scene-aligned entry/restoration, full accessibility/performance and complete editions.
+- [x] W-10 Linux development recovery integration: verified context, exact capture/crash reopen, Restore/Discard/Keep, matching retirement and observed closure. See the [handoff](spec/delivery/recovery-controls-handoff.md).
+- [ ] W-10 remaining delivery: installed controller/catalog/policy ownership, scene-aligned entry/restoration, full accessibility/performance and complete editions.
 
 - [x] W-10 native visibility controls: private exact rule/source input, hidden-object selection, current held-gesture diagnostics and independent durable save/reopen/erasure checks. See the [handoff](spec/delivery/visibility-controls-handoff.md). Installed ownership and complete editions remain open.
 

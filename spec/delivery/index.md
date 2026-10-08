@@ -80,6 +80,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Independent temporal oracle implementation checkpoint](oracle-handoff.md) — Bind external marker/time evaluation and native X11 fault calibration to source and raw capture evidence.
 - [Explicit private preservation checkpoint](preservation-handoff.md) — Bind opaque configuration copies, native controls and interrupted publication to measured development evidence.
 - [Original-epoch request reconciliation checkpoint](reconciliation-handoff.md) — Recover committed outcomes across controller restart without replaying mutations.
+- [Native editor recovery controls checkpoint](recovery-controls-handoff.md) — Verified generation binding, native recovery decisions and matching capture retirement.
 - [Generation-bound recovery draft checkpoint](recovery-draft-handoff.md) — Explicit scene recovery with current authority and verified native Apply identity.
 - [Portable recovery implementation checkpoint](recovery-handoff.md) — Record lease, render-progress and restart decisions while preserving native recovery gates.
 - [Bounded native recovery queue checkpoint](recovery-queue-handoff.md) — Coalesced recovery I/O with exact helper identity, retirement fences and observed process exit.

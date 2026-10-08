@@ -11,11 +11,11 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
-The [native recovery queue checkpoint](spec/delivery/recovery-queue-handoff.md) adds
-one active and one latest pending capture, guarded helper processes, exact completion
-identity and retirement fences. Native checks cover coalescing, process death, stale
-messages and closure. The [file store](spec/delivery/recovery-store-handoff.md) retains exact
-bytes. Actual editor capture and Restore/Discard/Keep controls remain the next gate.
+The [native recovery controls checkpoint](spec/delivery/recovery-controls-handoff.md)
+connects real editing to private recovery capture, crash startup offers and explicit
+Restore, Discard and Keep controls. Native checks verify exact files, matching Apply
+retirement, policy changes and child closure. Installed profile/controller/policy
+ownership, complete native qualification and all five desktop editions remain open.
 
 The [native clipboard checkpoint](spec/delivery/native-clipboard-handoff.md) adds explicit
 Copy/Paste to the admitted Linux X11 development editor. Transfers are bounded,

@@ -64,6 +64,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Native scene editing and independent exit](w-10-native-editor.md) — Connect the shared draft to real native pixels, input, transactions and recovery.
 - [Native observation error and focus boundary](w-10-native-observation.md) — Distinguish inaccessible observations from actual absent state without weakening native acceptance.
 - [Recovery draft native Apply boundary](w-10-recovery-apply.md) — Verified generation identity and explicit recovered Apply through the private Linux store.
+- [Native editor recovery controls and capture lifetime](w-10-recovery-controls.md) — Connect verified editor identity to bounded captures and explicit recovery decisions.
 - [Bounded editor recovery drafts](w-10-recovery-draft.md) — Generation-bound unsaved scene intent restored explicitly through the existing draft and transaction owner.
 - [Bounded native recovery operation owner](w-10-recovery-queue.md) — Coalesced private-file operations with held child lifetime, explicit grants and retirement fences.
 - [Private native recovery record storage](w-10-recovery-store.md) — Bounded exact-byte retention with conditional replacement, retirement and process-cut evidence.

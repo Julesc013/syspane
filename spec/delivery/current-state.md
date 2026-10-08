@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-08T15:33:50.064290+00:00", "scope": "Bounded native recovery queue and helper; actual editor capture, recovery controls and all complete editions remain open"}
+updated: {"by": "codex", "at": "2026-10-08T16:18:32+00:00", "scope": "Native editor recovery controls; installed ownership and all complete editions remain open"}
 ---
 
 # Current state and next admitted boundary
@@ -22,11 +22,11 @@ recordings are local ignored `out/` content; the retired root is absent from the
 tracked tree. See `docs/developers/build.md` in the repository for checkout
 setup and the [repository contract](../foundation/repository.md) for ownership.
 
-The [native recovery queue checkpoint](recovery-queue-handoff.md) adds
-one active and one latest pending capture, guarded helper processes, exact completion
-identity and retirement fences. Native checks cover coalescing, process death, stale
-messages and closure. The [file store](recovery-store-handoff.md) retains exact
-bytes. Actual editor capture and Restore/Discard/Keep controls remain the next gate.
+The [native recovery controls checkpoint](recovery-controls-handoff.md)
+connects real editing to private recovery capture, crash startup offers and explicit
+Restore, Discard and Keep controls. Native checks verify exact files, matching Apply
+retirement, policy changes and child closure. Installed profile/controller/policy
+ownership, complete native qualification and all five desktop editions remain open.
 
 The [native clipboard checkpoint](native-clipboard-handoff.md) adds explicit
 Copy/Paste to the admitted Linux X11 development editor. Transfers are bounded,
