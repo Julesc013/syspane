@@ -185,6 +185,10 @@ Original immutable base packages share allocations. The existing 8-MiB history l
 also charges unique additional resource metadata and package bytes, with the accepted
 baseline retained separately. Explicitly admitted font intent uses command 0.8 against
 the committed source. Undo/redo, Apply, unknown results, reload and policy erasure use
-the existing transaction owner. Native base/role font controls, borrowed-resource
-preview, independent pixels/accessibility and private-input erasure remain required
-before trusted EditorForm typography admission.
+the existing transaction owner. The [native font-control contract](../delivery/packages/w-10-theme-controls.md)
+connects a scene-wide Fonts modal to that draft and its matching resources. Unchanged
+Set preserves exact bytes; explicit empty and omitted role overrides remain distinct.
+Private input erases on every lifetime boundary. Trusted Linux EditorForm typography
+requires all seven capabilities and large-command admission; direct renderer defaults
+remain unchanged. The [checkpoint](../delivery/theme-controls-handoff.md) supplies
+independent pixels, exact durable artifacts, reopen, recovery and erasure evidence.

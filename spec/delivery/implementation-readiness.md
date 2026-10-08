@@ -20,14 +20,16 @@ updated: {"by": "codex", "at": "2026-10-06T01:32:00Z", "scope": "Native focus co
 The [durable theme-command checkpoint](theme-commands-handoff.md) closes negotiated
 font intent, Linux publication and exact recovery using the earlier immutable
 authoring/override contracts. The [theme-history checkpoint](theme-history-handoff.md)
-now connects atomic editor resources, history and Apply/reload. Native font controls
-and their independent evidence remain next; complete editions remain unqualified.
+now connects atomic editor resources, history and Apply/reload. The
+[font-controls checkpoint](theme-controls-handoff.md) adds explicitly admitted Linux
+controls and independent pixels, exact storage, restart and erasure checks. Installed
+ownership and complete editions remain unqualified.
 
 The [typography checkpoint](typography-handoff.md) adds versioned theme fonts and
 native role rendering. Current policy and immutable resource identities gate their
 use. The [role-composition experiment](role-composition-handoff.md) now verifies scene
-roles with explicit development admission. Native theme authoring and trusted editor
-integration remain the next gate.
+roles with explicit development admission. The font-controls checkpoint now closes
+that Linux editor integration gate; other adapters and full qualification remain open.
 
 The [visibility-controls checkpoint](visibility-controls-handoff.md) now adds
 native rule input and trusted EditorForm integration to the earlier authored and

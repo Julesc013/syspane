@@ -1956,3 +1956,32 @@ The new native test emits requests from the actual EditorDraft, publishes throug
 ConfigProbe, independently compares files/bytes, and verifies fresh reload and a
 lost-result reconciliation. It does not instantiate font controls. The
 [handoff](../../spec/delivery/theme-history-handoff.md) preserves failures and evidence.
+
+
+The [native font-controls package](../../spec/delivery/packages/w-10-theme-controls.md)
+adds the scene-wide Fonts modal to the Linux EditorForm. `theme_control_input` and
+`theme_control_edit` preserve exact no-ops and distinguish inherited roles from an
+explicit empty map. Set authors one atomic draft edit; Apply publishes command 0.8.
+Use settings theme restores scene inheritance and ignores uncommitted private input.
+Each role retains its raw private values while switching targets; inactive roles do
+not invalidate Set. Private buffers, models and snapshots erase on every close,
+policy, disconnection, topology and reload boundary.
+
+Preview, content choices and widget creation borrow the draft's matching resources.
+SceneSurface owns a validated snapshot sharing immutable package allocations.
+EditorForm retains capability admission, not a second original catalog. Font-only
+changes resolve new intrinsic metrics in the queued native paint, avoiding a duplicate
+immediate render before private-erasure observations. Existing geometry-edit paths
+retain immediate resolution. Display permission remains distinct from theme.edit.
+
+After workspace preflight/configure/build, run
+`ctest --preset <profile> -R '^editor[.]THEME-CONTROLS-' --output-on-failure`, the
+affected editor/settings/configuration/protocol/component families and full portable
+suite. In the existing non-root Linux laboratory run
+`ctest --preset linux-x64-gcc13 -R '^native[.](EDITOR-FONTS|EDITOR-VISIBILITY|EDITOR-CONTENT-PROPERTIES|EDITOR-WIDGET-CREATION|THEME-HISTORY|THEME-COMMANDS|ROLE-COMPOSITION|RESOURCE-GENERATIONS|CONTENT-COMMANDS|SETTINGS-FORM|EDITOR-FORM)$' --output-on-failure`.
+The 19 font cases operate native controls, compare literal independent TextProbe
+requests with observed canvas pixels, inspect every selected package byte and reopen
+the committed store. Held text objects are positively identified before the stimulus;
+independent explicit GetText replies are dispatched together within one 200-ms bound.
+Timeouts and unavailable replies cannot count as erasure. The
+[handoff](../../spec/delivery/theme-controls-handoff.md) records failures and corrections.

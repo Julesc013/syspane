@@ -73,7 +73,8 @@ The [role-composition contract](../delivery/packages/w-09-role-composition.md)
 assigns semantic roles and preserves mandatory diagnostics with bounded native
 composition. Theme 0.2 requires explicit trusted development admission in addition
 to current resource authority; direct consumers still refuse by default. Native theme
-authoring and trusted editor integration remain the following boundary. Spacing/density, chart styles and contrast variants still require versioned
+authoring and trusted Linux editor integration now have the
+[font-controls checkpoint](../delivery/theme-controls-handoff.md). Spacing/density, chart styles and contrast variants still require versioned
 contracts and native tests; none is hidden in optional extensions.
 
 
@@ -81,7 +82,8 @@ The [theme-authoring input/artifact contract](../delivery/packages/w-10-theme-au
 preserves exact no-ops and authors complete base/role fonts without mutating an
 installed package. Generated identity binds the source license and edited content.
 The durable command boundary below now publishes versioned overrides. Atomic editor
-history and native controls remain required before native theme editing is enabled.
+history and native controls now have their linked contracts and independent
+Linux evidence; other adapters and installed ownership remain required.
 
 
 The [bounded theme override contract](../delivery/packages/w-10-theme-overrides.md)
@@ -91,5 +93,6 @@ original preset closure. The explicit component API preserves image references. 
 source-bound font intent through command 0.8 and Linux generation 0.4 recovery. It
 retains the original closure and one canonical override, including reset and exact
 request reconciliation. The [theme-history contract](../delivery/packages/w-10-theme-history.md) now connects
-atomic editor resources and Apply/reload. Native authoring still requires font controls,
-independent pixels/save/reopen and policy-loss erasure evidence.
+atomic editor resources and Apply/reload. The [font-controls contract](../delivery/packages/w-10-theme-controls.md)
+adds exact base/role input, current resource preview and private erasure. Its native
+evidence permits explicitly admitted Linux component integration, not release qualification.

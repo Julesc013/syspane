@@ -2303,7 +2303,8 @@
         "source/interfaces/editor_content_form.hpp",
         "source/interfaces/editor_binding_form.hpp",
         "source/interfaces/editor_create_form.hpp",
-        "source/interfaces/editor_layout_form.hpp"
+        "source/interfaces/editor_layout_form.hpp",
+        "source/interfaces/editor_theme_form.hpp"
       ],
       "sources": [
         "source/interfaces/editor_form_linux.cpp",
@@ -2311,7 +2312,8 @@
         "source/interfaces/editor_binding_form_linux.cpp",
         "source/interfaces/editor_create_form_linux.cpp",
         "source/interfaces/editor_layout_form_linux.cpp",
-        "source/interfaces/editor_visibility_form_linux.cpp"
+        "source/interfaces/editor_visibility_form_linux.cpp",
+        "source/interfaces/editor_theme_form_linux.cpp"
       ],
       "allowed_dependencies": [
         "syspane_editor_draft",
@@ -2597,6 +2599,34 @@
       "installed_files": [],
       "profiles": [
         "linux-x64-gcc13"
+      ]
+    },
+    {
+      "id": "theme-controls-tests",
+      "target": "syspane_theme_controls_tests",
+      "type": "EXECUTABLE",
+      "source_owner": "tests/editor/",
+      "public_interfaces": [],
+      "private_interfaces": [
+        "tests/editor/theme_history_fixture.hpp"
+      ],
+      "sources": [
+        "tests/editor/theme_controls_tests.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_editor_draft"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "windows-x64-gcc15",
+        "linux-x64-gcc13",
+        "windows-x86-v141-xp"
       ]
     }
   ]

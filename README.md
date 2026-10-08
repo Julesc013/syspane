@@ -7,31 +7,37 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
+The [native font-controls checkpoint](spec/delivery/theme-controls-handoff.md) connects
+base and role fonts to the Linux editor's private controls, current draft preview,
+undo/redo and durable save/reopen. Independent pixels, exact stored artifacts,
+lost-result recovery and bounded erasure pass. Clipboard/recovery drafts, installed
+ownership and all five complete editions remain open.
+
 The [theme-history checkpoint](spec/delivery/theme-history-handoff.md) connects shared
 immutable theme resources to editor undo/redo, Apply, reconciliation and reload.
 It bounds retained resource bytes alongside scene history and preserves original
-package allocations. Native font controls and their independent preview/save/reopen
-evidence remain next; all five complete editions remain open.
+package allocations. Native font controls now have the checkpoint above; all five
+complete editions remain open.
 
 The [durable theme-command checkpoint](spec/delivery/theme-commands-handoff.md) adds
 negotiated font edits and exact Linux persistence/recovery. It preserves the original
 preset/image closure and one immutable theme override. Interrupted writes, lost
 results, replay, cancellation and policy revocation have executable checks. Atomic
-editor resource history now has the checkpoint above; native font controls and all
-five complete editions remain open.
+editor resource history and native font controls now have the checkpoints above;
+all five complete editions remain open.
 
 The earlier [theme authoring](spec/delivery/theme-authoring-handoff.md) and
 [resource override](spec/delivery/theme-overrides-handoff.md) checkpoints supply lossless
 font input and deterministic artifacts whose identities preserve license metadata.
-Native controls still require editor integration and independent preview/save/reopen
-evidence before enabling edited theme rendering.
+The font-controls checkpoint above supplies explicitly admitted Linux editor
+integration and independent preview/save/reopen evidence.
 
 The [role-composition checkpoint](spec/delivery/role-composition-handoff.md) connects theme
 fonts to body text, labels, values and diagnostics in the Linux scene renderer.
 Independent pixels, table geometry and policy/visibility erasure checks pass.
 Legacy themes keep their previous rendering. Theme 0.2 still requires explicit
-trusted development admission; native theme-authoring controls and their editor
-integration are next. Installed ownership and all five complete editions remain open.
+trusted development admission; the native font-controls checkpoint above supplies
+editor integration. Installed ownership and all five complete editions remain open.
 
 The [native visibility controls](spec/delivery/visibility-controls-handoff.md) now edit
 bounded conditions through the existing draft and persistence owners. Hidden objects

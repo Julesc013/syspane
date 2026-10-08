@@ -32,7 +32,8 @@ behaviour has been implemented. See [audit disposition](spec/delivery/audit-2026
 - [x] W-10 bounded theme resource override: exact versioned selection, immutable base/image closure, canonical artifact validation, repeated replacement/reset and unchanged capacity limits. See the [handoff](spec/delivery/theme-overrides-handoff.md).
 - [x] W-08 durable theme commands: exact command 0.8 negotiation, Linux generation 0.4/resource index 0.2, independent interrupted-write/replay/recovery checks and unchanged bounds. See the [handoff](spec/delivery/theme-commands-handoff.md).
 - [x] W-10 atomic theme history: shared immutable package allocations, bounded scene/resource undo/redo, exact command 0.8 Apply/reconcile/reload and independent Linux save/reopen checks. See the [handoff](spec/delivery/theme-history-handoff.md).
-- [ ] W-10 native theme editing: base/role font controls, borrowed draft resource preview, independent pixels/accessibility/save/reopen/lost-result/erasure evidence and trusted editor admission. Preserve mandatory diagnostics and existing limits.
+- [x] W-10 native theme editing: base/role fonts, current draft resource preview, exact pixels/artifact save/reopen, lost-result recovery and private erasure under explicit trusted admission. See the [handoff](spec/delivery/theme-controls-handoff.md).
+- [ ] W-10 remaining delivery: close bounded clipboard/recovery-draft contracts and installed controller/catalog/policy ownership, then scene-aligned entry/restoration, full accessibility/performance and complete editions.
 
 - [x] W-10 native visibility controls: private exact rule/source input, hidden-object selection, current held-gesture diagnostics and independent durable save/reopen/erasure checks. See the [handoff](spec/delivery/visibility-controls-handoff.md). Installed ownership and complete editions remain open.
 

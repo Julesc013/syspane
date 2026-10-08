@@ -25,4 +25,14 @@ Json theme_edit(const Json& theme,const ThemeInput& input){
     if(c::authored_equal(out.at("font"),normalized(theme.at("font")))&&c::authored_equal(roles,theme.value("font_roles",Json::object())))return theme;
     return out;
 }
+ThemeControlInput theme_control_input(const Json& theme){return {theme_input(theme),theme.contains("font_roles")};}
+Json theme_control_edit(const Json& theme,const ThemeControlInput& input){
+    auto fonts=input.fonts;if(!input.explicit_roles)fonts.roles.clear();
+    auto out=theme_edit(theme,fonts);
+    if(c::authored_equal(out,theme)&&input.explicit_roles==theme.contains("font_roles"))return theme;
+    out["schema_version"]="0.2.0";out["font"]=parse(fonts.font);
+    if(input.explicit_roles){out["font_roles"]=Json::object();for(const auto& role:fonts.roles)out["font_roles"][role.first]=parse(role.second);}
+    else out.erase("font_roles");
+    c::validate_content_document(out,"theme");return out;
+}
 }

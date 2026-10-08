@@ -1,0 +1,74 @@
+[
+  {
+    "step": "build",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "build"
+    ],
+    "started_at": "2026-10-08T05:41:26.928453+00:00",
+    "finished_at": "2026-10-08T05:41:27.604756+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"build\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2580290998,\n  \"linux_campaign_bytes\": 4561399622,\n  \"reserved_growth_bytes\": 268435456,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "build",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/theme_controls_step.py",
+      "linux-x64-gcc13",
+      "build"
+    ],
+    "started_at": "2026-10-08T05:41:27.605168+00:00",
+    "finished_at": "2026-10-08T05:41:41.732164+00:00",
+    "exit": 0,
+    "stdout": "[1/4] Building CXX object CMakeFiles/syspane_editor_form.dir/source/interfaces/editor_theme_form_linux.cpp.o\n[2/4] Building CXX object CMakeFiles/syspane_editor_form.dir/source/interfaces/editor_form_linux.cpp.o\n[3/4] Linking CXX static library libsyspane_editor_form.a\n[4/4] Linking CXX executable syspane_editor_window\n \nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-theme-controls/linux-x64-gcc13-build-669ea1644f\n",
+    "stderr": ""
+  },
+  {
+    "step": "fonts",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-08T05:41:41.732475+00:00",
+    "finished_at": "2026-10-08T05:41:42.404415+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2582116535,\n  \"linux_campaign_bytes\": 4561406256,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "fonts",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/theme_controls_step.py",
+      "linux-x64-gcc13",
+      "fonts"
+    ],
+    "started_at": "2026-10-08T05:41:42.404738+00:00",
+    "finished_at": "2026-10-08T05:41:52.108506+00:00",
+    "exit": 8,
+    "stdout": "Test project /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n    Start 282: native.EDITOR-FONTS\n1/1 Test #282: native.EDITOR-FONTS ..............***Failed    5.01 sec\n/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/theme-controls-1a94e6f815b9/result.json fail\nTraceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_theme_controls.py\", line 412, in <module>\n    main()\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_theme_controls.py\", line 400, in main\n    assert child.returncode == 0 and detail['outcome'] == 'pass', (mode, err.decode(errors='replace'))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: ('roles', 'dbus-daemon[838186]: [session uid=1000 pid=838186] Activating service name=\\'org.a11y.Bus\\' requested by \\':1.0\\' (uid=1000 pid=838187 comm=\"/usr/bin/python3 /mnt/d/Projects/SysPane/syspane/t\" label=\"kernel\")\\ndbus-daemon[838186]: [session uid=1000 pid=838186] Successfully activated service \\'org.a11y.Bus\\'\\ndbus-daemon[838195]: Activating service name=\\'org.a11y.atspi.Registry\\' requested by \\':1.2\\' (uid=1000 pid=838201 comm=\"/home/ir4runner/.cache/syspane/campaign-229a498/li\" label=\"kernel\")\\ndbus-daemon[838195]: Successfully activated service \\'org.a11y.atspi.Registry\\'\\nTraceback (most recent call last):\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_theme_controls.py\", line 412, in <module>\\n    main()\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_theme_controls.py\", line 372, in main\\n    observe(*map(Path, sys.argv[2:6]), sys.argv[6])\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_theme_controls.py\", line 356, in observe\\n    exercise(h)\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_theme_controls.py\", line 318, in exercise\\n    stage(h, \\'roles\\' if h.mode == \\'inherit\\' else key)\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_theme_controls.py\", line 89, in stage\\n    finish_modal(h)\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_theme_controls.py\", line 58, in finish_modal\\n    h.wait(lambda: erased_text(h, held), max(.001, issued+.2-time.monotonic()))\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_editor.py\", line 80, in wait\\n    assert time.monotonic()<end,self.stage+\\' observation deadline\\'\\n           ^^^^^^^^^^^^^^^^^^^^\\nAssertionError: BUFFER observation deadline\\n')\n\n\n0% tests passed, 1 tests failed out of 1\n\nTotal Test time (real) =   5.01 sec\n\nThe following tests FAILED:\n\t282 - native.EDITOR-FONTS (Failed)\n Errors while running CTest\n\nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-theme-controls/linux-x64-gcc13-fonts-58ec32e622\n",
+    "stderr": ""
+  }
+]

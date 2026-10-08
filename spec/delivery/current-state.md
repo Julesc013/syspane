@@ -12,36 +12,42 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-08T05:09:49.857875+00:00", "scope": "Atomic theme resource history and durable editor Apply/reload verified; native font controls remain next"}
+updated: {"by": "codex", "at": "2026-10-08T06:01:29.597900+00:00", "scope": "Native base/role font controls and independent preview/save/reopen/erasure verified; installed ownership and complete editions remain open"}
 ---
 
 # Current state and next admitted boundary
 
+The [native font-controls checkpoint](theme-controls-handoff.md) connects
+base and role fonts to the Linux editor's private controls, current draft preview,
+undo/redo and durable save/reopen. Independent pixels, exact stored artifacts,
+lost-result recovery and bounded erasure pass. Clipboard/recovery drafts, installed
+ownership and all five complete editions remain open.
+
 The [theme-history checkpoint](theme-history-handoff.md) connects shared
 immutable theme resources to editor undo/redo, Apply, reconciliation and reload.
 It bounds retained resource bytes alongside scene history and preserves original
-package allocations. Native font controls and their independent preview/save/reopen
-evidence remain next; all five complete editions remain open.
+package allocations. Native font controls now have the checkpoint above; all five
+complete editions remain open.
 
 The [durable theme-command checkpoint](theme-commands-handoff.md) adds
 negotiated font edits and exact Linux persistence/recovery. It preserves the original
 preset/image closure and one immutable theme override. Interrupted writes, lost
 results, replay, cancellation and policy revocation have executable checks. Atomic
-editor resource history now has the checkpoint above; native font controls and all
-five complete editions remain open.
+editor resource history and native font controls now have the checkpoints above;
+all five complete editions remain open.
 
 The earlier [theme authoring](theme-authoring-handoff.md) and
 [resource override](theme-overrides-handoff.md) checkpoints supply lossless
 font input and deterministic artifacts whose identities preserve license metadata.
-Native controls still require editor integration and independent preview/save/reopen
-evidence before enabling edited theme rendering.
+The font-controls checkpoint above supplies explicitly admitted Linux editor
+integration and independent preview/save/reopen evidence.
 
 The [role-composition checkpoint](role-composition-handoff.md) connects theme
 fonts to body text, labels, values and diagnostics in the Linux scene renderer.
 Independent pixels, table geometry and policy/visibility erasure checks pass.
 Legacy themes keep their previous rendering. Theme 0.2 still requires explicit
-trusted development admission; native theme-authoring controls and their editor
-integration are next. Installed ownership and all five complete editions remain open.
+trusted development admission; the native font-controls checkpoint above supplies
+editor integration. Installed ownership and all five complete editions remain open.
 
 The [native visibility controls](visibility-controls-handoff.md) now edit
 bounded conditions through the existing draft and persistence owners. Hidden objects
@@ -748,10 +754,10 @@ release-identity decisions remain open.
 
 ## Next work
 
-The immediate theme-editing boundary is native base/role font controls: use the
-shared atomic history and command owner, then prove preview pixels, accessibility,
-save/reopen, lost results and private-input erasure before trusted editor admission.
-Use the [theme-history handoff](theme-history-handoff.md) and W-10 row; preserve
+Native base/role fonts now have independent control, pixel, persistence and erasure
+evidence. Continue W-10 with bounded clipboard/recovery-draft contracts and installed
+controller/catalog/policy ownership, including scene-aligned entry and restoration.
+Use the [font-controls handoff](theme-controls-handoff.md) and W-10 row; preserve
 the existing work graph and continue unrelated native tracks independently.
 
 Start with the [campaign coverage audit](campaign-coverage.md). W-03 now has a

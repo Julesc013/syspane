@@ -1,0 +1,38 @@
+[
+  {
+    "step": "fonts",
+    "command": [
+      "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "build-support/check_workspace_budget.py",
+      "--action",
+      "test"
+    ],
+    "started_at": "2026-10-08T05:43:02.415380+00:00",
+    "finished_at": "2026-10-08T05:43:03.277587+00:00",
+    "exit": 0,
+    "stdout": "{\n  \"action\": \"test\",\n  \"maximum_bytes\": 7516192768,\n  \"checkout_out_bytes\": 2585779894,\n  \"linux_campaign_bytes\": 4562505221,\n  \"reserved_growth_bytes\": 67108864,\n  \"status\": \"pass\",\n  \"scope\": \"Preflight reservation, not an OS quota or continuous filesystem monitor.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "step": "fonts",
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "-u",
+      "ir4runner",
+      "--",
+      "python3",
+      "/mnt/d/Projects/SysPane/syspane/out/campaign/theme_controls_step.py",
+      "linux-x64-gcc13",
+      "fonts"
+    ],
+    "started_at": "2026-10-08T05:43:03.278244+00:00",
+    "finished_at": "2026-10-08T05:43:16.162276+00:00",
+    "exit": 8,
+    "stdout": "Test project /home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13\n    Start 282: native.EDITOR-FONTS\n1/1 Test #282: native.EDITOR-FONTS ..............***Failed    7.80 sec\n/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/theme-controls-25ec1c8800e7/result.json fail\nTraceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_theme_controls.py\", line 433, in <module>\n    main()\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_theme_controls.py\", line 421, in main\n    assert child.returncode == 0 and detail['outcome'] == 'pass', (mode, err.decode(errors='replace'))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: ('empty', 'dbus-daemon[839794]: [session uid=1000 pid=839794] Activating service name=\\'org.a11y.Bus\\' requested by \\':1.0\\' (uid=1000 pid=839795 comm=\"/usr/bin/python3 /mnt/d/Projects/SysPane/syspane/t\" label=\"kernel\")\\ndbus-daemon[839794]: [session uid=1000 pid=839794] Successfully activated service \\'org.a11y.Bus\\'\\ndbus-daemon[839803]: Activating service name=\\'org.a11y.atspi.Registry\\' requested by \\':1.2\\' (uid=1000 pid=839809 comm=\"/home/ir4runner/.cache/syspane/campaign-229a498/li\" label=\"kernel\")\\ndbus-daemon[839803]: Successfully activated service \\'org.a11y.atspi.Registry\\'\\nTraceback (most recent call last):\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_theme_controls.py\", line 433, in <module>\\n    main()\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_theme_controls.py\", line 393, in main\\n    observe(*map(Path, sys.argv[2:6]), sys.argv[6])\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_theme_controls.py\", line 377, in observe\\n    exercise(h)\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_theme_controls.py\", line 352, in exercise\\n    pixels(h, key)\\n  File \"/mnt/d/Projects/SysPane/syspane/tests/editor/native_theme_controls.py\", line 165, in pixels\\n    assert \\'80 byte\\' in h.text(h.find(\\'canvas\\')) and \\'Current\\' in h.text(h.find(\\'canvas\\'))\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\nAssertionError\\n')\n\n\n0% tests passed, 1 tests failed out of 1\n\nTotal Test time (real) =   7.80 sec\n\nThe following tests FAILED:\n\t282 - native.EDITOR-FONTS (Failed)\n Errors while running CTest\n\nAttempt: /mnt/d/Projects/SysPane/syspane/out/campaign/w-10-theme-controls/linux-x64-gcc13-fonts-728847f3ae\n",
+    "stderr": ""
+  }
+]
