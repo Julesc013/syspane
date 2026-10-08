@@ -27,6 +27,8 @@ behaviour has been implemented. See [audit disposition](spec/delivery/audit-2026
 
 ## First native campaign
 
+- [x] W-08 coherent profile/resource reads: immutable saved revisions, authenticated policy checks, bounded transfer and typed frontend receiver. See the [handoff](spec/delivery/profile-projection-handoff.md).
+
 - [x] W-26 compiled helper closure, verified installation-relative lookup and immutable native execution; relocated development package and substitution evidence. See the [handoff](spec/delivery/helper-identity-handoff.md).
 
 - [x] W-08 Linux configuration supervisor: exact child ownership, independent deadlines, actual exit proof, bounded restart and terminal close. See the [handoff](spec/delivery/profile-supervisor-handoff.md).
@@ -35,7 +37,7 @@ behaviour has been implemented. See [audit disposition](spec/delivery/audit-2026
 - [x] W-08 native profile worker: one storage thread and held profile locks across joined asynchronous command workers, with exact persistence and crash reconciliation. See the [handoff](spec/delivery/profile-worker-handoff.md).
 - [x] W-08 shipped initial scene/theme, resource bootstrap 0.5 and policy-bound Linux profile store, with exact startup/interruption/reconciliation evidence. See the [handoff](spec/delivery/profile-startup-handoff.md).
 - [x] W-08 Linux profile directory owner: XDG/portable roots, exact private markers, exclusive locks and interrupted initialization. See the [handoff](spec/delivery/profile-owner-handoff.md).
-- [ ] Connect the private configuration process to the installed controller frontend with independently scheduled supervision and the verified installation owner; add coherent profile projection, native UI and import catalog; qualify protected-policy deployment and retain all release gates.
+- [ ] Connect the private configuration process to the installed controller frontend with independently scheduled supervision, verified helpers and coherent profile reads; add native UI and import catalog; qualify protected-policy deployment and retain all release gates.
 - [x] W-09 theme typography: versioned complete fonts/roles, exact resource admission and native raster evidence. See the [handoff](spec/delivery/typography-handoff.md).
 - [x] W-09 role-aware scene composition: bounded semantic blocks, exact native pixels, preserved diagnostics and erasure; explicit development admission. See the [handoff](spec/delivery/role-composition-handoff.md).
 - [x] W-10 shared theme-authoring input and immutable artifact construction: exact no-op/reset, policy admission, preserved license and deterministic content pins. See the [handoff](spec/delivery/theme-authoring-handoff.md).

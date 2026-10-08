@@ -1084,6 +1084,62 @@
       "expected": "invalid",
       "semantic": false,
       "reason": "Closed recovery envelope and native generation identity required."
+    },
+    {
+      "path": "fixtures/valid/profile-open.json",
+      "schema": "profile-request",
+      "expected": "valid",
+      "semantic": false,
+      "reason": "Bounded profile transfer shapes convey no caller authority; refusal conceals profile identity."
+    },
+    {
+      "path": "fixtures/valid/profile-read.json",
+      "schema": "profile-request",
+      "expected": "valid",
+      "semantic": false,
+      "reason": "Bounded profile transfer shapes convey no caller authority; refusal conceals profile identity."
+    },
+    {
+      "path": "fixtures/valid/profile-chunk.json",
+      "schema": "profile-result",
+      "expected": "valid",
+      "semantic": false,
+      "reason": "Bounded profile transfer shapes convey no caller authority; refusal conceals profile identity."
+    },
+    {
+      "path": "fixtures/valid/profile-denied.json",
+      "schema": "profile-result",
+      "expected": "valid",
+      "semantic": false,
+      "reason": "Bounded profile transfer shapes convey no caller authority; refusal conceals profile identity."
+    },
+    {
+      "path": "fixtures/invalid/profile-path.json",
+      "schema": "profile-request",
+      "expected": "invalid",
+      "semantic": false,
+      "reason": "Bounded profile transfer shapes convey no caller authority; refusal conceals profile identity."
+    },
+    {
+      "path": "fixtures/invalid/profile-zero-transfer.json",
+      "schema": "profile-request",
+      "expected": "invalid",
+      "semantic": false,
+      "reason": "Bounded profile transfer shapes convey no caller authority; refusal conceals profile identity."
+    },
+    {
+      "path": "fixtures/invalid/profile-odd-hex.json",
+      "schema": "profile-result",
+      "expected": "invalid",
+      "semantic": false,
+      "reason": "Bounded profile transfer shapes convey no caller authority; refusal conceals profile identity."
+    },
+    {
+      "path": "fixtures/invalid/profile-denied-leak.json",
+      "schema": "profile-result",
+      "expected": "invalid",
+      "semantic": false,
+      "reason": "Bounded profile transfer shapes convey no caller authority; refusal conceals profile identity."
     }
   ]
 }

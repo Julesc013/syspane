@@ -307,7 +307,8 @@
         "SP-W08-PROFILE-WORKER",
         "SP-W08-PROFILE-CONTROLLER",
         "SP-W08-PROFILE-SUPERVISOR",
-        "SP-W26-HELPER-IDENTITY"
+        "SP-W26-HELPER-IDENTITY",
+        "SP-W08-PROFILE-PROJECTION"
       ],
       "acceptance_tests": [
         "T-TRANSACTION",
@@ -363,14 +364,24 @@
         "source/application/profile_supervisor_linux.cpp",
         "tests/configuration/profile_supervisor_probe.cpp",
         "tests/configuration/native_profile_supervisor.py",
-        "tests/configuration/profile-supervisor-cases.json"
+        "tests/configuration/profile-supervisor-cases.json",
+        "source/protocol/profile.hpp",
+        "source/protocol/profile.cpp",
+        "source/configuration/profile_projection.hpp",
+        "source/configuration/profile_projection.cpp",
+        "tests/configuration/profile_projection_tests.cpp",
+        "tests/configuration/profile_projection_probe.cpp",
+        "tests/configuration/native_profile_projection.py",
+        "tests/configuration/profile-projection-cases.json",
+        "spec/contracts/profile-request.schema.json",
+        "spec/contracts/profile-result.schema.json"
       ],
       "status": "in_progress",
       "authority_class": "development",
       "execution_grant": "user:foundation-native-campaign-2026-10-05",
-      "notes": "LinuxProfileSupervisor now owns configuration-host startup, matching epochs, independent health/transaction deadlines, native exit proof, bounded restarts and terminal shutdown. Nineteen independent native cases cover real commit/reconciliation, timeouts, circuit preservation, policy change, malformed peers, parent death, cleanup substitutions and resource bounds. Existing controller/command/recovery regressions pass. W-26 now supplies verified installation lookup and immutable helper launch. Next connect the independently scheduled controller/inspector owner and explicit deployment/data/runtime ownership, coherent profile projection, native UI and import catalog. Positive protected-policy qualification, full layers/updates, non-Linux adapters and all five complete editions remain required.",
-      "package": "delivery/packages/w-08-profile-supervisor.md",
-      "evidence": "delivery/profile-supervisor-handoff.md"
+      "notes": "The native configuration controller now serves one coherent saved profile and exact resource closure through authenticated, currently authorized, bounded chunk reads. Worker-prepared immutable images publish only after actual join; a pinned transfer survives later commits without mixing revisions. The portable receiver verifies identities, every part and the complete selected catalog before exposing UI state. Fixed portable and native cases cover disclosure, contention, deadlines, corruption, reconnect and real stored bytes. W-26 supplies verified helper identity. Next compose the independently scheduled actual controller/inspector frontend with deployment/data/runtime ownership, all private helper identities, native UI, telemetry, activation, recovery context and import catalogs. Positive protected-policy qualification, full layers/updates, non-Linux adapters and all five complete editions remain required.",
+      "package": "delivery/packages/w-08-profile-projection.md",
+      "evidence": "delivery/profile-projection-handoff.md"
     },
     {
       "id": "W-09",

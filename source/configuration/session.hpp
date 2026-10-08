@@ -61,6 +61,7 @@ private:
         std::optional<std::uint64_t> heartbeat = {}, generation = {};
         std::uint64_t lifetime=0;
         std::set<std::uint64_t> pending={};
+        bool profile_disclosed=false;
     };
     std::string envelope(const Connection& connection, const std::string& type, Json body) const;
     bool queue(Connection& connection, const std::string& type, Json body);

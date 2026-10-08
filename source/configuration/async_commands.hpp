@@ -1,6 +1,7 @@
 #pragma once
 #include "command_service.hpp"
 #include "transaction.hpp"
+#include "profile_projection.hpp"
 #include <deque>
 #include <memory>
 #include <mutex>
@@ -13,10 +14,11 @@ public:
         Completion& operator=(Completion&&)=default;
     private:
         friend class AsyncCommands;
-        Completion(const AsyncCommands* o,std::uint64_t t,Json r,std::uint64_t v,bool f,std::vector<CommitReceipt> receipts={})
-            :owner(o),ticket(t),reply(std::move(r)),revision(v),fault(f),receipts(std::move(receipts)){}
+        Completion(const AsyncCommands* o,std::uint64_t t,Json r,std::uint64_t v,bool f,std::vector<CommitReceipt> receipts={},ProfileSnapshot image={})
+            :owner(o),ticket(t),reply(std::move(r)),revision(v),fault(f),receipts(std::move(receipts)),image(std::move(image)){}
         const AsyncCommands* owner;std::uint64_t ticket;Json reply;std::uint64_t revision;bool fault;
         std::vector<CommitReceipt> receipts;
+        ProfileSnapshot image;
     };
     AsyncCommands(GenerationStore&,std::string epoch,std::function<void(const Authored&)>);
     AsyncCommands(GenerationStore&,std::string epoch,ResourceProvider);
@@ -25,6 +27,11 @@ public:
     bool supports_theme_overrides()const override{return transactions_.supports_theme_overrides();}
     bool supports_visibility()const override{return transactions_.supports_visibility();}
     bool supports_edit_locks()const override{return transactions_.supports_edit_locks();}
+    bool supports_profile()const override{return transactions_.supports_resources();}
+    bool may_disclose_profile(const Authority&)const override;
+    Json read_profile(const std::string&,std::uint64_t,const Authority&,const Json&,std::uint64_t)override;
+    bool profile_expired(const std::string& id,std::uint64_t lifetime,std::uint64_t now)const override{return profile_.expired(id,lifetime,now);}
+    void drop_profile(const std::string& id,std::uint64_t lifetime)override{profile_.disconnect(id,lifetime);}
     void attach(const std::string&,std::uint64_t,Policy)override;
     CommandAdmission submit(const std::string&,const std::string&,std::uint64_t,const Authority&,std::string,bool,std::uint64_t)override;
     Json query(const std::string&,const Authority&,const std::string&,bool,std::uint64_t)override;
@@ -61,5 +68,6 @@ private:
     bool attached_=false,invalid_=false,storage_fault_=false;
     std::map<std::uint64_t,std::shared_ptr<Job>> jobs_;
     std::deque<std::shared_ptr<Job>> ready_;
+    ProfileSnapshot image_;ProfileTransfer profile_;
 };
 }

@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.example.invalid/syspane/0.1.0/profile-request.schema.json",
+  "title": "SysPane profile-request 0.1",
+  "description": "Exact message shapes; native codec additionally enforces uint64, transfer, size, cursor and completion relationships.",
+  "oneOf": [
+    {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "0.1.0"
+        },
+        "query_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+        },
+        "op": {
+          "const": "open"
+        }
+      },
+      "required": [
+        "schema_version",
+        "query_id",
+        "op"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "0.1.0"
+        },
+        "query_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+        },
+        "op": {
+          "const": "read"
+        },
+        "transfer_id": {
+          "type": "string",
+          "pattern": "^[1-9][0-9]{0,19}$",
+          "description": "Positive uint64; the codec enforces its numeric ceiling."
+        },
+        "part": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]{0,19})$",
+          "description": "Canonical uint64; the codec enforces numeric bounds and cursor relationships."
+        },
+        "offset": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]{0,19})$",
+          "description": "Canonical uint64; the codec enforces numeric bounds and cursor relationships."
+        }
+      },
+      "required": [
+        "schema_version",
+        "query_id",
+        "op",
+        "transfer_id",
+        "part",
+        "offset"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "0.1.0"
+        },
+        "query_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+        },
+        "op": {
+          "const": "close"
+        },
+        "transfer_id": {
+          "type": "string",
+          "pattern": "^[1-9][0-9]{0,19}$",
+          "description": "Positive uint64; the codec enforces its numeric ceiling."
+        }
+      },
+      "required": [
+        "schema_version",
+        "query_id",
+        "op",
+        "transfer_id"
+      ],
+      "additionalProperties": false
+    }
+  ]
+}

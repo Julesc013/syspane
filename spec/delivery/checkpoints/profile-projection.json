@@ -1,0 +1,1205 @@
+{
+  "recorded_at": "2026-10-08T20:36:56.202781+00:00",
+  "source_base": "6c6a992034f928cbc3d621201f28b5fe23a2c988",
+  "scope": "Authenticated coherent authored-profile/resource projection, immutable revision pinning and validated frontend assembly. Installed frontend and all five complete editions remain open.",
+  "fixed_inputs": {
+    "spec/delivery/packages/w-08-profile-projection.md": "50fb6f078de97bbba785670393c21544bfd0cc5ebc39728d02bc5c79cc502472",
+    "tests/configuration/profile-projection-cases.json": "f12171ec64fd159d8825ce21d8ce41bf91fb1f95588bed77e299ce0c95f12acc",
+    "tests/configuration/profile-startup-cases.json": "778d20398d8db479a21b10e081c377ca85dabe11199b2c4918b03c6e6fc7cd2b",
+    "tests/configuration/profile-startup-command-case.json": "27883896af8cffb6ccb4346bfd7b25a01af8ca730f2848c29fcfcb4a00439f36"
+  },
+  "executions": [
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "configure",
+      "command": [
+        "env",
+        "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+        "cmake",
+        "--preset",
+        "linux-x64-gcc13"
+      ],
+      "started_at": "2026-10-08T20:23:08.041363+00:00",
+      "finished_at": "2026-10-08T20:23:18.366234+00:00",
+      "exit": 0,
+      "artifacts": {},
+      "record": {
+        "local_path": "out/evidence/profile-projection/linux-x64-gcc13-configure-c1ce77762f/result.json",
+        "sha256": "658dc8f736e733ad9b0f18a177a7f51b7d71deeb23a0de6efcbcb5beb578443f"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/profile-projection/linux-x64-gcc13-configure-c1ce77762f/source-inputs.zip",
+        "sha256": "39ef755773f147898b576c93524a9b79ca0d30fc417d696ffc0cea19d1ad275e"
+      },
+      "passed_ctest_families": 0,
+      "later_changes": [
+        "source/configuration/profile_projection.cpp",
+        "tests/configuration/profile_projection_tests.cpp",
+        "spec/contracts/index.md",
+        "spec/fixtures/invalid/index.md",
+        "spec/fixtures/valid/index.md"
+      ]
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "build",
+      "command": [
+        "env",
+        "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+        "cmake",
+        "--build",
+        "--preset",
+        "linux-x64-gcc13"
+      ],
+      "started_at": "2026-10-08T20:23:28.660094+00:00",
+      "finished_at": "2026-10-08T20:23:34.167711+00:00",
+      "exit": 1,
+      "artifacts": {},
+      "record": {
+        "local_path": "out/evidence/profile-projection/linux-x64-gcc13-build-ee0c56cf6d/result.json",
+        "sha256": "e8d7b874daf4640938b9f3b4fdcd31ebde2fd9d1d3b03b3063d74494791c5caa"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/profile-projection/linux-x64-gcc13-build-ee0c56cf6d/source-inputs.zip",
+        "sha256": "39ef755773f147898b576c93524a9b79ca0d30fc417d696ffc0cea19d1ad275e"
+      },
+      "passed_ctest_families": 0,
+      "later_changes": [
+        "source/configuration/profile_projection.cpp",
+        "tests/configuration/profile_projection_tests.cpp",
+        "spec/contracts/index.md",
+        "spec/fixtures/invalid/index.md",
+        "spec/fixtures/valid/index.md"
+      ]
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "build",
+      "command": [
+        "env",
+        "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+        "cmake",
+        "--build",
+        "--preset",
+        "linux-x64-gcc13"
+      ],
+      "started_at": "2026-10-08T20:24:04.903454+00:00",
+      "finished_at": "2026-10-08T20:24:40.971457+00:00",
+      "exit": 0,
+      "artifacts": {},
+      "record": {
+        "local_path": "out/evidence/profile-projection/linux-x64-gcc13-build-f89edbda1f/result.json",
+        "sha256": "411b17ff78025ee58e1a5fb59282457f88c46d5a85aa54fabf76377759cb07af"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/profile-projection/linux-x64-gcc13-build-f89edbda1f/source-inputs.zip",
+        "sha256": "70c549fbc59bdcf4a3d9fcd6a1daa382ddfaa08d2e2099ed1624727ffcbbeab4"
+      },
+      "passed_ctest_families": 0,
+      "later_changes": [
+        "source/configuration/profile_projection.cpp",
+        "tests/configuration/profile_projection_tests.cpp",
+        "spec/contracts/index.md",
+        "spec/fixtures/invalid/index.md",
+        "spec/fixtures/valid/index.md"
+      ]
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "test",
+      "command": [
+        "env",
+        "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+        "ctest",
+        "--preset",
+        "linux-x64-gcc13",
+        "-R",
+        "^(configuration[.](PROFILE-|COMMAND-|RECON-|INITIAL-PROFILE|DIGEST)|protocol[.])",
+        "--output-on-failure"
+      ],
+      "started_at": "2026-10-08T20:25:41.196697+00:00",
+      "finished_at": "2026-10-08T20:25:45.109483+00:00",
+      "exit": 0,
+      "artifacts": {
+        "syspane_profile_projection_tests": "353333d056c3924eb805235deb7e879f7f69a3cba0ca92f761afd7edd85d4ecc",
+        "syspane_profile_projection_probe": "43367a6981d56dfb48869ff7b0ac1837b46e3ea9d9ff907325211c6a92f27b9b",
+        "syspane_installation_probe": "4e7fc065021d549e2edfe77301c48c231561c4d1c7f0fb79148b8e5d81c3dfe6",
+        "generated/helpers.json": "92f935aa2516f43cb3b6e893163828b6a492bc49f8da027eb57de8fee7e1697b",
+        "generated/helper_identity.hpp": "22559f2f9bd1a438e8c944fb91c7c8c417cc9a4c4e7913db0db8b6a131a0c40f",
+        "syspane_profile_supervisor_probe": "1e2ff5b974e3de445b97eb8a2b4212c1b528833b657956f48489f0be8a00b094",
+        "syspane_command_session_tests": "b3685b5015ebf3dcc15cf94072a57ec180164c1b1cdda2ebb2925553b3a3c08e",
+        "SysPane.CommandProbe": "dd1f09e3804c855e6ffe1080f2f5c85b4b828d812071b256c449290013f37bbb",
+        "syspane_profile_controller_probe": "3cfbd3e9da4fe99e1ea41ece6a781ac893139db208a3ca7fa48a31405db185e5",
+        "syspane-configuration-host": "2f6baf34730b432dc53186df1bb06f46410cf28302ca6d619d91119f21cd4ac4",
+        "syspane_profile_worker_probe": "df2d561600e4371830cce79cbc8f0188bc33e09ebefbe972f7235941a2c30356",
+        "syspane_profile_startup_probe": "145a3ce5c09311d6a609999c991745d9758d9b05f7ee9f38a883b43d0defcec2",
+        "syspane_initial_profile_tests": "838073eab447aed20d094267ea3fcafa4a326f7d4f5acded0d26516ab647f861",
+        "syspane_profile_owner_probe": "759534e30a693b4d9b44ab57fccb6df1d3f7a13443ca59fa93b246d3d19bbd22",
+        "SysPane.ConfigProbe": "c580bf00f2fab061ee50b0fa79f9baf72e375301542d4c6b140e4876bc6586f5",
+        "syspane_recovery_store_probe": "e9d40bdd2d4b772a90fa5202538b8d2370666f662dc02e795be635a9ba0af757",
+        "syspane_recovery_queue_probe": "3631c62afc43f78539cfa5ca2698d8d0115cc0286dee5f22a9428bb16ff987f6",
+        "syspane_editor_recovery_probe": "3727c4ce1e2deaef7c4026fecd1102ceac4b7ee8fb213594f4477bf3766957a9"
+      },
+      "record": {
+        "local_path": "out/evidence/profile-projection/linux-x64-gcc13-test-5c6c7b0707/result.json",
+        "sha256": "ba609a208c04825b3269bce68bec98b05edbac3b2ec39b149f49c8fd487a147b"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/profile-projection/linux-x64-gcc13-test-5c6c7b0707/source-inputs.zip",
+        "sha256": "70c549fbc59bdcf4a3d9fcd6a1daa382ddfaa08d2e2099ed1624727ffcbbeab4"
+      },
+      "passed_ctest_families": 47,
+      "later_changes": [
+        "source/configuration/profile_projection.cpp",
+        "tests/configuration/profile_projection_tests.cpp",
+        "spec/contracts/index.md",
+        "spec/fixtures/invalid/index.md",
+        "spec/fixtures/valid/index.md"
+      ],
+      "ctest_log": {
+        "local_path": "out/evidence/profile-projection/linux-x64-gcc13-test-5c6c7b0707/ctest-log.zip",
+        "sha256": "f202a10268628d7c61219d3bb2ee7ce2b75b8ae74113ff13ae9601e492afe464"
+      }
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "native",
+      "command": [
+        "env",
+        "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+        "ctest",
+        "--preset",
+        "linux-x64-gcc13",
+        "-R",
+        "^native[.]PROFILE-PROJECTION$",
+        "--output-on-failure"
+      ],
+      "started_at": "2026-10-08T20:25:54.617173+00:00",
+      "finished_at": "2026-10-08T20:26:01.359772+00:00",
+      "exit": 0,
+      "artifacts": {
+        "syspane_profile_projection_tests": "353333d056c3924eb805235deb7e879f7f69a3cba0ca92f761afd7edd85d4ecc",
+        "syspane_profile_projection_probe": "43367a6981d56dfb48869ff7b0ac1837b46e3ea9d9ff907325211c6a92f27b9b",
+        "syspane_installation_probe": "4e7fc065021d549e2edfe77301c48c231561c4d1c7f0fb79148b8e5d81c3dfe6",
+        "generated/helpers.json": "92f935aa2516f43cb3b6e893163828b6a492bc49f8da027eb57de8fee7e1697b",
+        "generated/helper_identity.hpp": "22559f2f9bd1a438e8c944fb91c7c8c417cc9a4c4e7913db0db8b6a131a0c40f",
+        "syspane_profile_supervisor_probe": "1e2ff5b974e3de445b97eb8a2b4212c1b528833b657956f48489f0be8a00b094",
+        "syspane_command_session_tests": "b3685b5015ebf3dcc15cf94072a57ec180164c1b1cdda2ebb2925553b3a3c08e",
+        "SysPane.CommandProbe": "dd1f09e3804c855e6ffe1080f2f5c85b4b828d812071b256c449290013f37bbb",
+        "syspane_profile_controller_probe": "3cfbd3e9da4fe99e1ea41ece6a781ac893139db208a3ca7fa48a31405db185e5",
+        "syspane-configuration-host": "2f6baf34730b432dc53186df1bb06f46410cf28302ca6d619d91119f21cd4ac4",
+        "syspane_profile_worker_probe": "df2d561600e4371830cce79cbc8f0188bc33e09ebefbe972f7235941a2c30356",
+        "syspane_profile_startup_probe": "145a3ce5c09311d6a609999c991745d9758d9b05f7ee9f38a883b43d0defcec2",
+        "syspane_initial_profile_tests": "838073eab447aed20d094267ea3fcafa4a326f7d4f5acded0d26516ab647f861",
+        "syspane_profile_owner_probe": "759534e30a693b4d9b44ab57fccb6df1d3f7a13443ca59fa93b246d3d19bbd22",
+        "SysPane.ConfigProbe": "c580bf00f2fab061ee50b0fa79f9baf72e375301542d4c6b140e4876bc6586f5",
+        "syspane_recovery_store_probe": "e9d40bdd2d4b772a90fa5202538b8d2370666f662dc02e795be635a9ba0af757",
+        "syspane_recovery_queue_probe": "3631c62afc43f78539cfa5ca2698d8d0115cc0286dee5f22a9428bb16ff987f6",
+        "syspane_editor_recovery_probe": "3727c4ce1e2deaef7c4026fecd1102ceac4b7ee8fb213594f4477bf3766957a9"
+      },
+      "record": {
+        "local_path": "out/evidence/profile-projection/linux-x64-gcc13-native-b11855c111/result.json",
+        "sha256": "1d95ef0a88f2eb9685267b3fcfd6b7c42713592847f95bf95da87f23e25fdfb7"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/profile-projection/linux-x64-gcc13-native-b11855c111/source-inputs.zip",
+        "sha256": "70c549fbc59bdcf4a3d9fcd6a1daa382ddfaa08d2e2099ed1624727ffcbbeab4"
+      },
+      "passed_ctest_families": 1,
+      "later_changes": [
+        "source/configuration/profile_projection.cpp",
+        "tests/configuration/profile_projection_tests.cpp",
+        "spec/contracts/index.md",
+        "spec/fixtures/invalid/index.md",
+        "spec/fixtures/valid/index.md"
+      ],
+      "ctest_log": {
+        "local_path": "out/evidence/profile-projection/linux-x64-gcc13-native-b11855c111/ctest-log.zip",
+        "sha256": "4a8d03f7f2c96d414f9e44fecbca7d557e1b861df72323460fc65a54662b833e"
+      }
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "supervision",
+      "command": [
+        "env",
+        "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+        "ctest",
+        "--preset",
+        "linux-x64-gcc13",
+        "-R",
+        "^native[.](PROFILE-SUPERVISOR|PROFILE-CONTROLLER|COMMAND-IPC|RECONCILIATION|TRANSACTION-SUPERVISION)$",
+        "--output-on-failure"
+      ],
+      "started_at": "2026-10-08T20:26:07.353460+00:00",
+      "finished_at": "2026-10-08T20:27:57.323165+00:00",
+      "exit": 0,
+      "artifacts": {
+        "syspane_profile_projection_tests": "353333d056c3924eb805235deb7e879f7f69a3cba0ca92f761afd7edd85d4ecc",
+        "syspane_profile_projection_probe": "43367a6981d56dfb48869ff7b0ac1837b46e3ea9d9ff907325211c6a92f27b9b",
+        "syspane_installation_probe": "4e7fc065021d549e2edfe77301c48c231561c4d1c7f0fb79148b8e5d81c3dfe6",
+        "generated/helpers.json": "92f935aa2516f43cb3b6e893163828b6a492bc49f8da027eb57de8fee7e1697b",
+        "generated/helper_identity.hpp": "22559f2f9bd1a438e8c944fb91c7c8c417cc9a4c4e7913db0db8b6a131a0c40f",
+        "syspane_profile_supervisor_probe": "1e2ff5b974e3de445b97eb8a2b4212c1b528833b657956f48489f0be8a00b094",
+        "syspane_command_session_tests": "b3685b5015ebf3dcc15cf94072a57ec180164c1b1cdda2ebb2925553b3a3c08e",
+        "SysPane.CommandProbe": "dd1f09e3804c855e6ffe1080f2f5c85b4b828d812071b256c449290013f37bbb",
+        "syspane_profile_controller_probe": "3cfbd3e9da4fe99e1ea41ece6a781ac893139db208a3ca7fa48a31405db185e5",
+        "syspane-configuration-host": "2f6baf34730b432dc53186df1bb06f46410cf28302ca6d619d91119f21cd4ac4",
+        "syspane_profile_worker_probe": "df2d561600e4371830cce79cbc8f0188bc33e09ebefbe972f7235941a2c30356",
+        "syspane_profile_startup_probe": "145a3ce5c09311d6a609999c991745d9758d9b05f7ee9f38a883b43d0defcec2",
+        "syspane_initial_profile_tests": "838073eab447aed20d094267ea3fcafa4a326f7d4f5acded0d26516ab647f861",
+        "syspane_profile_owner_probe": "759534e30a693b4d9b44ab57fccb6df1d3f7a13443ca59fa93b246d3d19bbd22",
+        "SysPane.ConfigProbe": "c580bf00f2fab061ee50b0fa79f9baf72e375301542d4c6b140e4876bc6586f5",
+        "syspane_recovery_store_probe": "e9d40bdd2d4b772a90fa5202538b8d2370666f662dc02e795be635a9ba0af757",
+        "syspane_recovery_queue_probe": "3631c62afc43f78539cfa5ca2698d8d0115cc0286dee5f22a9428bb16ff987f6",
+        "syspane_editor_recovery_probe": "3727c4ce1e2deaef7c4026fecd1102ceac4b7ee8fb213594f4477bf3766957a9"
+      },
+      "record": {
+        "local_path": "out/evidence/profile-projection/linux-x64-gcc13-supervision-08673a6e00/result.json",
+        "sha256": "bf15c0df7fea3304d18934b14653ce7d7658b24ca819519cd35e28d9099e5d21"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/profile-projection/linux-x64-gcc13-supervision-08673a6e00/source-inputs.zip",
+        "sha256": "70c549fbc59bdcf4a3d9fcd6a1daa382ddfaa08d2e2099ed1624727ffcbbeab4"
+      },
+      "passed_ctest_families": 5,
+      "later_changes": [
+        "source/configuration/profile_projection.cpp",
+        "tests/configuration/profile_projection_tests.cpp",
+        "spec/contracts/index.md",
+        "spec/fixtures/invalid/index.md",
+        "spec/fixtures/valid/index.md"
+      ],
+      "ctest_log": {
+        "local_path": "out/evidence/profile-projection/linux-x64-gcc13-supervision-08673a6e00/ctest-log.zip",
+        "sha256": "84be4d7fb671ea936dbd3428f24cd3851acfe4fc1dd48aba73de3f76c7acf5ac"
+      }
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "graph",
+      "command": [
+        "env",
+        "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+        "ctest",
+        "--preset",
+        "linux-x64-gcc13",
+        "-R",
+        "^composition[.]",
+        "--output-on-failure"
+      ],
+      "started_at": "2026-10-08T20:28:06.594353+00:00",
+      "finished_at": "2026-10-08T20:28:07.083657+00:00",
+      "exit": 0,
+      "artifacts": {
+        "syspane_profile_projection_tests": "353333d056c3924eb805235deb7e879f7f69a3cba0ca92f761afd7edd85d4ecc",
+        "syspane_profile_projection_probe": "43367a6981d56dfb48869ff7b0ac1837b46e3ea9d9ff907325211c6a92f27b9b",
+        "syspane_installation_probe": "4e7fc065021d549e2edfe77301c48c231561c4d1c7f0fb79148b8e5d81c3dfe6",
+        "generated/helpers.json": "92f935aa2516f43cb3b6e893163828b6a492bc49f8da027eb57de8fee7e1697b",
+        "generated/helper_identity.hpp": "22559f2f9bd1a438e8c944fb91c7c8c417cc9a4c4e7913db0db8b6a131a0c40f",
+        "syspane_profile_supervisor_probe": "1e2ff5b974e3de445b97eb8a2b4212c1b528833b657956f48489f0be8a00b094",
+        "syspane_command_session_tests": "b3685b5015ebf3dcc15cf94072a57ec180164c1b1cdda2ebb2925553b3a3c08e",
+        "SysPane.CommandProbe": "dd1f09e3804c855e6ffe1080f2f5c85b4b828d812071b256c449290013f37bbb",
+        "syspane_profile_controller_probe": "3cfbd3e9da4fe99e1ea41ece6a781ac893139db208a3ca7fa48a31405db185e5",
+        "syspane-configuration-host": "2f6baf34730b432dc53186df1bb06f46410cf28302ca6d619d91119f21cd4ac4",
+        "syspane_profile_worker_probe": "df2d561600e4371830cce79cbc8f0188bc33e09ebefbe972f7235941a2c30356",
+        "syspane_profile_startup_probe": "145a3ce5c09311d6a609999c991745d9758d9b05f7ee9f38a883b43d0defcec2",
+        "syspane_initial_profile_tests": "838073eab447aed20d094267ea3fcafa4a326f7d4f5acded0d26516ab647f861",
+        "syspane_profile_owner_probe": "759534e30a693b4d9b44ab57fccb6df1d3f7a13443ca59fa93b246d3d19bbd22",
+        "SysPane.ConfigProbe": "c580bf00f2fab061ee50b0fa79f9baf72e375301542d4c6b140e4876bc6586f5",
+        "syspane_recovery_store_probe": "e9d40bdd2d4b772a90fa5202538b8d2370666f662dc02e795be635a9ba0af757",
+        "syspane_recovery_queue_probe": "3631c62afc43f78539cfa5ca2698d8d0115cc0286dee5f22a9428bb16ff987f6",
+        "syspane_editor_recovery_probe": "3727c4ce1e2deaef7c4026fecd1102ceac4b7ee8fb213594f4477bf3766957a9"
+      },
+      "record": {
+        "local_path": "out/evidence/profile-projection/linux-x64-gcc13-graph-79b304589e/result.json",
+        "sha256": "fb66c85a3f20acf3707b66c5aa2dbf059f5fb9b086925b6b665466e4f0e197b6"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/profile-projection/linux-x64-gcc13-graph-79b304589e/source-inputs.zip",
+        "sha256": "70c549fbc59bdcf4a3d9fcd6a1daa382ddfaa08d2e2099ed1624727ffcbbeab4"
+      },
+      "passed_ctest_families": 2,
+      "later_changes": [
+        "source/configuration/profile_projection.cpp",
+        "tests/configuration/profile_projection_tests.cpp",
+        "spec/contracts/index.md",
+        "spec/fixtures/invalid/index.md",
+        "spec/fixtures/valid/index.md"
+      ],
+      "ctest_log": {
+        "local_path": "out/evidence/profile-projection/linux-x64-gcc13-graph-79b304589e/ctest-log.zip",
+        "sha256": "d430395ed39d2f95aad9bec18041c545b7c2629a48ffe1c42e675fde522f442d"
+      }
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "build",
+      "command": [
+        "env",
+        "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+        "cmake",
+        "--build",
+        "--preset",
+        "linux-x64-gcc13"
+      ],
+      "started_at": "2026-10-08T20:29:23.966389+00:00",
+      "finished_at": "2026-10-08T20:29:36.369884+00:00",
+      "exit": 0,
+      "artifacts": {},
+      "record": {
+        "local_path": "out/evidence/profile-projection/linux-x64-gcc13-build-bc9400f645/result.json",
+        "sha256": "78486bdec19cdbef0ead109e2cbcd383d9ce58de0569d9062e7048d66e925a30"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/profile-projection/linux-x64-gcc13-build-bc9400f645/source-inputs.zip",
+        "sha256": "0920a14c62a0a1b8ca8e033289602a049e25fbdb8f9161411c57cdabe525df92"
+      },
+      "passed_ctest_families": 0,
+      "later_changes": [
+        "spec/contracts/index.md",
+        "spec/fixtures/invalid/index.md",
+        "spec/fixtures/valid/index.md"
+      ]
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "test",
+      "command": [
+        "env",
+        "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+        "ctest",
+        "--preset",
+        "linux-x64-gcc13",
+        "-R",
+        "^(configuration[.](PROFILE-|COMMAND-|RECON-|INITIAL-PROFILE|DIGEST)|protocol[.])",
+        "--output-on-failure"
+      ],
+      "started_at": "2026-10-08T20:29:42.157781+00:00",
+      "finished_at": "2026-10-08T20:29:46.097324+00:00",
+      "exit": 0,
+      "artifacts": {
+        "syspane_profile_projection_tests": "a1beb41d89fba19a2b6ce15cf06750cc4f27df53a1172a9f2b63a6adc3c0e169",
+        "syspane_profile_projection_probe": "f3e547eec3f3462e23b084cb3a02c6add0fbb88b76105481a45493225a3176bc",
+        "syspane_installation_probe": "a9c66500587e4dd78b67be1b33c6f4aeb67ed41d9f67ea29079f6b48e13171de",
+        "generated/helpers.json": "e0c1f9986ccc5b6e19a2999a8fe9ed2b2327d0d4f7bda006756c98006c2bf1a7",
+        "generated/helper_identity.hpp": "3a045addee2963f2f32a889980a8da0194555d690f7936516ef8c54f0f6ce8f3",
+        "syspane_profile_supervisor_probe": "f8f26180ce565b3fbb2570673c66e9b3ae12bc0a59c54950f0fd8ecb540659b6",
+        "syspane_command_session_tests": "ea7804669f3d865850c15b5323254f0a14ce592060e370e395f0873df6be4bd4",
+        "SysPane.CommandProbe": "7473d66e09505fe4887ff4510529c18dbcf30bb0ebc430edfe8c6423a1e6e5f1",
+        "syspane_profile_controller_probe": "ee84ec60f6e4f82f10b8f8d91fefd4c9fff2bb53caa8d68d5dd067155c4fcbb0",
+        "syspane-configuration-host": "f1bd7200fcf83abc7a4f6f5155110bc9a7dd960e13fc32f11118012eb5f5d000",
+        "syspane_profile_worker_probe": "6e9af624d450580280caf936bd406c8f0be3b90ae5f40b00b77345ab300b1399",
+        "syspane_profile_startup_probe": "145a3ce5c09311d6a609999c991745d9758d9b05f7ee9f38a883b43d0defcec2",
+        "syspane_initial_profile_tests": "838073eab447aed20d094267ea3fcafa4a326f7d4f5acded0d26516ab647f861",
+        "syspane_profile_owner_probe": "759534e30a693b4d9b44ab57fccb6df1d3f7a13443ca59fa93b246d3d19bbd22",
+        "SysPane.ConfigProbe": "c580bf00f2fab061ee50b0fa79f9baf72e375301542d4c6b140e4876bc6586f5",
+        "syspane_recovery_store_probe": "e9d40bdd2d4b772a90fa5202538b8d2370666f662dc02e795be635a9ba0af757",
+        "syspane_recovery_queue_probe": "3631c62afc43f78539cfa5ca2698d8d0115cc0286dee5f22a9428bb16ff987f6",
+        "syspane_editor_recovery_probe": "3727c4ce1e2deaef7c4026fecd1102ceac4b7ee8fb213594f4477bf3766957a9"
+      },
+      "record": {
+        "local_path": "out/evidence/profile-projection/linux-x64-gcc13-test-4a9f855dd5/result.json",
+        "sha256": "1b78dbb73eabca7fd0c31234bcc90920f101bcd10b44303b43bfc334378532c0"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/profile-projection/linux-x64-gcc13-test-4a9f855dd5/source-inputs.zip",
+        "sha256": "0920a14c62a0a1b8ca8e033289602a049e25fbdb8f9161411c57cdabe525df92"
+      },
+      "passed_ctest_families": 47,
+      "later_changes": [
+        "spec/contracts/index.md",
+        "spec/fixtures/invalid/index.md",
+        "spec/fixtures/valid/index.md"
+      ],
+      "ctest_log": {
+        "local_path": "out/evidence/profile-projection/linux-x64-gcc13-test-4a9f855dd5/ctest-log.zip",
+        "sha256": "ab09b5fa9f7c5f9d0219d3f86a8ee8b2742313de72e38b80141eb7c39418bc8c"
+      }
+    },
+    {
+      "profile": "windows-x64-gcc15",
+      "action": "configure",
+      "command": [
+        "cmake",
+        "--preset",
+        "windows-x64-gcc15"
+      ],
+      "started_at": "2026-10-08T20:29:50.144035+00:00",
+      "finished_at": "2026-10-08T20:29:51.569793+00:00",
+      "exit": 0,
+      "artifacts": {},
+      "record": {
+        "local_path": "out/evidence/profile-projection/windows-x64-gcc15-configure-05dd60bd0c/result.json",
+        "sha256": "b4fc7234842fb09c3ebd26710d4f4567bee83294297f2c995f158c594b8aeee3"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/profile-projection/windows-x64-gcc15-configure-05dd60bd0c/source-inputs.zip",
+        "sha256": "2e24379c3520e208b8d7d5b4aeb1dd2e4a78745e34be93c45dad74fce67bf5c8"
+      },
+      "passed_ctest_families": 0,
+      "later_changes": [
+        "spec/contracts/index.md",
+        "spec/fixtures/invalid/index.md",
+        "spec/fixtures/valid/index.md"
+      ]
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "native",
+      "command": [
+        "env",
+        "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+        "ctest",
+        "--preset",
+        "linux-x64-gcc13",
+        "-R",
+        "^native[.]PROFILE-PROJECTION$",
+        "--output-on-failure"
+      ],
+      "started_at": "2026-10-08T20:29:52.130004+00:00",
+      "finished_at": "2026-10-08T20:29:59.018733+00:00",
+      "exit": 0,
+      "artifacts": {
+        "syspane_profile_projection_tests": "a1beb41d89fba19a2b6ce15cf06750cc4f27df53a1172a9f2b63a6adc3c0e169",
+        "syspane_profile_projection_probe": "f3e547eec3f3462e23b084cb3a02c6add0fbb88b76105481a45493225a3176bc",
+        "syspane_installation_probe": "a9c66500587e4dd78b67be1b33c6f4aeb67ed41d9f67ea29079f6b48e13171de",
+        "generated/helpers.json": "e0c1f9986ccc5b6e19a2999a8fe9ed2b2327d0d4f7bda006756c98006c2bf1a7",
+        "generated/helper_identity.hpp": "3a045addee2963f2f32a889980a8da0194555d690f7936516ef8c54f0f6ce8f3",
+        "syspane_profile_supervisor_probe": "f8f26180ce565b3fbb2570673c66e9b3ae12bc0a59c54950f0fd8ecb540659b6",
+        "syspane_command_session_tests": "ea7804669f3d865850c15b5323254f0a14ce592060e370e395f0873df6be4bd4",
+        "SysPane.CommandProbe": "7473d66e09505fe4887ff4510529c18dbcf30bb0ebc430edfe8c6423a1e6e5f1",
+        "syspane_profile_controller_probe": "ee84ec60f6e4f82f10b8f8d91fefd4c9fff2bb53caa8d68d5dd067155c4fcbb0",
+        "syspane-configuration-host": "f1bd7200fcf83abc7a4f6f5155110bc9a7dd960e13fc32f11118012eb5f5d000",
+        "syspane_profile_worker_probe": "6e9af624d450580280caf936bd406c8f0be3b90ae5f40b00b77345ab300b1399",
+        "syspane_profile_startup_probe": "145a3ce5c09311d6a609999c991745d9758d9b05f7ee9f38a883b43d0defcec2",
+        "syspane_initial_profile_tests": "838073eab447aed20d094267ea3fcafa4a326f7d4f5acded0d26516ab647f861",
+        "syspane_profile_owner_probe": "759534e30a693b4d9b44ab57fccb6df1d3f7a13443ca59fa93b246d3d19bbd22",
+        "SysPane.ConfigProbe": "c580bf00f2fab061ee50b0fa79f9baf72e375301542d4c6b140e4876bc6586f5",
+        "syspane_recovery_store_probe": "e9d40bdd2d4b772a90fa5202538b8d2370666f662dc02e795be635a9ba0af757",
+        "syspane_recovery_queue_probe": "3631c62afc43f78539cfa5ca2698d8d0115cc0286dee5f22a9428bb16ff987f6",
+        "syspane_editor_recovery_probe": "3727c4ce1e2deaef7c4026fecd1102ceac4b7ee8fb213594f4477bf3766957a9"
+      },
+      "record": {
+        "local_path": "out/evidence/profile-projection/linux-x64-gcc13-native-1fa89a4def/result.json",
+        "sha256": "85e19cf07a417b7043f7ec7781b1f769fcc700f8f52f3cd37ea6c73e00bb3031"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/profile-projection/linux-x64-gcc13-native-1fa89a4def/source-inputs.zip",
+        "sha256": "0920a14c62a0a1b8ca8e033289602a049e25fbdb8f9161411c57cdabe525df92"
+      },
+      "passed_ctest_families": 1,
+      "later_changes": [
+        "spec/contracts/index.md",
+        "spec/fixtures/invalid/index.md",
+        "spec/fixtures/valid/index.md"
+      ],
+      "ctest_log": {
+        "local_path": "out/evidence/profile-projection/linux-x64-gcc13-native-1fa89a4def/ctest-log.zip",
+        "sha256": "2c663d0c2152496d7a54b6d9077878a28dff47f29fbe73c2a7af1eabf268393c"
+      }
+    },
+    {
+      "profile": "windows-x64-gcc15",
+      "action": "build",
+      "command": [
+        "cmake",
+        "--build",
+        "--preset",
+        "windows-x64-gcc15"
+      ],
+      "started_at": "2026-10-08T20:29:53.833078+00:00",
+      "finished_at": "2026-10-08T20:32:13.900161+00:00",
+      "exit": 0,
+      "artifacts": {},
+      "record": {
+        "local_path": "out/evidence/profile-projection/windows-x64-gcc15-build-5698d059ed/result.json",
+        "sha256": "7d90c1c9ab3f265ca723743d1d2b880bfb4cff5ebae1b5417dbaecaaaff54fd7"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/profile-projection/windows-x64-gcc15-build-5698d059ed/source-inputs.zip",
+        "sha256": "2e24379c3520e208b8d7d5b4aeb1dd2e4a78745e34be93c45dad74fce67bf5c8"
+      },
+      "passed_ctest_families": 0,
+      "later_changes": [
+        "spec/contracts/index.md",
+        "spec/fixtures/invalid/index.md",
+        "spec/fixtures/valid/index.md"
+      ]
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "supervision",
+      "command": [
+        "env",
+        "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+        "ctest",
+        "--preset",
+        "linux-x64-gcc13",
+        "-R",
+        "^native[.](PROFILE-SUPERVISOR|PROFILE-CONTROLLER|COMMAND-IPC|RECONCILIATION|TRANSACTION-SUPERVISION)$",
+        "--output-on-failure"
+      ],
+      "started_at": "2026-10-08T20:30:15.090176+00:00",
+      "finished_at": "2026-10-08T20:32:04.915278+00:00",
+      "exit": 0,
+      "artifacts": {
+        "syspane_profile_projection_tests": "a1beb41d89fba19a2b6ce15cf06750cc4f27df53a1172a9f2b63a6adc3c0e169",
+        "syspane_profile_projection_probe": "f3e547eec3f3462e23b084cb3a02c6add0fbb88b76105481a45493225a3176bc",
+        "syspane_installation_probe": "a9c66500587e4dd78b67be1b33c6f4aeb67ed41d9f67ea29079f6b48e13171de",
+        "generated/helpers.json": "e0c1f9986ccc5b6e19a2999a8fe9ed2b2327d0d4f7bda006756c98006c2bf1a7",
+        "generated/helper_identity.hpp": "3a045addee2963f2f32a889980a8da0194555d690f7936516ef8c54f0f6ce8f3",
+        "syspane_profile_supervisor_probe": "f8f26180ce565b3fbb2570673c66e9b3ae12bc0a59c54950f0fd8ecb540659b6",
+        "syspane_command_session_tests": "ea7804669f3d865850c15b5323254f0a14ce592060e370e395f0873df6be4bd4",
+        "SysPane.CommandProbe": "7473d66e09505fe4887ff4510529c18dbcf30bb0ebc430edfe8c6423a1e6e5f1",
+        "syspane_profile_controller_probe": "ee84ec60f6e4f82f10b8f8d91fefd4c9fff2bb53caa8d68d5dd067155c4fcbb0",
+        "syspane-configuration-host": "f1bd7200fcf83abc7a4f6f5155110bc9a7dd960e13fc32f11118012eb5f5d000",
+        "syspane_profile_worker_probe": "6e9af624d450580280caf936bd406c8f0be3b90ae5f40b00b77345ab300b1399",
+        "syspane_profile_startup_probe": "145a3ce5c09311d6a609999c991745d9758d9b05f7ee9f38a883b43d0defcec2",
+        "syspane_initial_profile_tests": "838073eab447aed20d094267ea3fcafa4a326f7d4f5acded0d26516ab647f861",
+        "syspane_profile_owner_probe": "759534e30a693b4d9b44ab57fccb6df1d3f7a13443ca59fa93b246d3d19bbd22",
+        "SysPane.ConfigProbe": "c580bf00f2fab061ee50b0fa79f9baf72e375301542d4c6b140e4876bc6586f5",
+        "syspane_recovery_store_probe": "e9d40bdd2d4b772a90fa5202538b8d2370666f662dc02e795be635a9ba0af757",
+        "syspane_recovery_queue_probe": "3631c62afc43f78539cfa5ca2698d8d0115cc0286dee5f22a9428bb16ff987f6",
+        "syspane_editor_recovery_probe": "3727c4ce1e2deaef7c4026fecd1102ceac4b7ee8fb213594f4477bf3766957a9"
+      },
+      "record": {
+        "local_path": "out/evidence/profile-projection/linux-x64-gcc13-supervision-bc0708f307/result.json",
+        "sha256": "56d36c729bbf15d21b2ee13dd7a704196fd0a7f70ed6cdaf733d204319d79255"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/profile-projection/linux-x64-gcc13-supervision-bc0708f307/source-inputs.zip",
+        "sha256": "0920a14c62a0a1b8ca8e033289602a049e25fbdb8f9161411c57cdabe525df92"
+      },
+      "passed_ctest_families": 5,
+      "later_changes": [
+        "spec/contracts/index.md",
+        "spec/fixtures/invalid/index.md",
+        "spec/fixtures/valid/index.md"
+      ],
+      "ctest_log": {
+        "local_path": "out/evidence/profile-projection/linux-x64-gcc13-supervision-bc0708f307/ctest-log.zip",
+        "sha256": "ebc2b9eed14cfd26528a4a2b1f85272433695f509bc53bab2ce682dbe1386eda"
+      }
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "graph",
+      "command": [
+        "env",
+        "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+        "ctest",
+        "--preset",
+        "linux-x64-gcc13",
+        "-R",
+        "^composition[.]",
+        "--output-on-failure"
+      ],
+      "started_at": "2026-10-08T20:32:13.669659+00:00",
+      "finished_at": "2026-10-08T20:32:14.119508+00:00",
+      "exit": 0,
+      "artifacts": {
+        "syspane_profile_projection_tests": "a1beb41d89fba19a2b6ce15cf06750cc4f27df53a1172a9f2b63a6adc3c0e169",
+        "syspane_profile_projection_probe": "f3e547eec3f3462e23b084cb3a02c6add0fbb88b76105481a45493225a3176bc",
+        "syspane_installation_probe": "a9c66500587e4dd78b67be1b33c6f4aeb67ed41d9f67ea29079f6b48e13171de",
+        "generated/helpers.json": "e0c1f9986ccc5b6e19a2999a8fe9ed2b2327d0d4f7bda006756c98006c2bf1a7",
+        "generated/helper_identity.hpp": "3a045addee2963f2f32a889980a8da0194555d690f7936516ef8c54f0f6ce8f3",
+        "syspane_profile_supervisor_probe": "f8f26180ce565b3fbb2570673c66e9b3ae12bc0a59c54950f0fd8ecb540659b6",
+        "syspane_command_session_tests": "ea7804669f3d865850c15b5323254f0a14ce592060e370e395f0873df6be4bd4",
+        "SysPane.CommandProbe": "7473d66e09505fe4887ff4510529c18dbcf30bb0ebc430edfe8c6423a1e6e5f1",
+        "syspane_profile_controller_probe": "ee84ec60f6e4f82f10b8f8d91fefd4c9fff2bb53caa8d68d5dd067155c4fcbb0",
+        "syspane-configuration-host": "f1bd7200fcf83abc7a4f6f5155110bc9a7dd960e13fc32f11118012eb5f5d000",
+        "syspane_profile_worker_probe": "6e9af624d450580280caf936bd406c8f0be3b90ae5f40b00b77345ab300b1399",
+        "syspane_profile_startup_probe": "145a3ce5c09311d6a609999c991745d9758d9b05f7ee9f38a883b43d0defcec2",
+        "syspane_initial_profile_tests": "838073eab447aed20d094267ea3fcafa4a326f7d4f5acded0d26516ab647f861",
+        "syspane_profile_owner_probe": "759534e30a693b4d9b44ab57fccb6df1d3f7a13443ca59fa93b246d3d19bbd22",
+        "SysPane.ConfigProbe": "c580bf00f2fab061ee50b0fa79f9baf72e375301542d4c6b140e4876bc6586f5",
+        "syspane_recovery_store_probe": "e9d40bdd2d4b772a90fa5202538b8d2370666f662dc02e795be635a9ba0af757",
+        "syspane_recovery_queue_probe": "3631c62afc43f78539cfa5ca2698d8d0115cc0286dee5f22a9428bb16ff987f6",
+        "syspane_editor_recovery_probe": "3727c4ce1e2deaef7c4026fecd1102ceac4b7ee8fb213594f4477bf3766957a9"
+      },
+      "record": {
+        "local_path": "out/evidence/profile-projection/linux-x64-gcc13-graph-ae59cc06d9/result.json",
+        "sha256": "99f40159a5f03f0c231bebba233b368e59ed4d4109d0a9233310fc4028e2e134"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/profile-projection/linux-x64-gcc13-graph-ae59cc06d9/source-inputs.zip",
+        "sha256": "0920a14c62a0a1b8ca8e033289602a049e25fbdb8f9161411c57cdabe525df92"
+      },
+      "passed_ctest_families": 2,
+      "later_changes": [
+        "spec/contracts/index.md",
+        "spec/fixtures/invalid/index.md",
+        "spec/fixtures/valid/index.md"
+      ],
+      "ctest_log": {
+        "local_path": "out/evidence/profile-projection/linux-x64-gcc13-graph-ae59cc06d9/ctest-log.zip",
+        "sha256": "21130d8da58883b468ca4fa043a86d840fcfc98e5ab094533972ee446984c92d"
+      }
+    },
+    {
+      "profile": "windows-x64-gcc15",
+      "action": "test",
+      "command": [
+        "ctest",
+        "--preset",
+        "windows-x64-gcc15",
+        "-R",
+        "^(configuration[.](PROFILE-|COMMAND-|RECON-|INITIAL-PROFILE|DIGEST)|protocol[.])",
+        "--output-on-failure"
+      ],
+      "started_at": "2026-10-08T20:32:16.192007+00:00",
+      "finished_at": "2026-10-08T20:32:21.625118+00:00",
+      "exit": 0,
+      "artifacts": {
+        "syspane_profile_projection_tests.exe": "4831ebf883c25f519def9a32e709034c15297b7bd5129068c0b79adaf7dc22b0",
+        "syspane_initial_profile_tests.exe": "6efaad3c5c03625f7a5274bf12d67caf51db5f551f9e982f12ebcb679c8b84f3",
+        "syspane_command_session_tests.exe": "3814952a6b0d00884783d538d460386560742a2b2dddd2f1ec7d8c860ae61c8f"
+      },
+      "record": {
+        "local_path": "out/evidence/profile-projection/windows-x64-gcc15-test-bd2ffb0d22/result.json",
+        "sha256": "80ed032335c5b7a15d4578835ddc85f1df6186199bf74e433433a0005a852ab2"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/profile-projection/windows-x64-gcc15-test-bd2ffb0d22/source-inputs.zip",
+        "sha256": "2e24379c3520e208b8d7d5b4aeb1dd2e4a78745e34be93c45dad74fce67bf5c8"
+      },
+      "passed_ctest_families": 47,
+      "later_changes": [
+        "spec/contracts/index.md",
+        "spec/fixtures/invalid/index.md",
+        "spec/fixtures/valid/index.md"
+      ],
+      "ctest_log": {
+        "local_path": "out/evidence/profile-projection/windows-x64-gcc15-test-bd2ffb0d22/ctest-log.zip",
+        "sha256": "8a81b1d16b088bceeee64ec216e15cbff8909fee73a81dcdf1fb39f0598212e5"
+      }
+    },
+    {
+      "profile": "windows-x64-gcc15",
+      "action": "graph",
+      "command": [
+        "ctest",
+        "--preset",
+        "windows-x64-gcc15",
+        "-R",
+        "^composition[.]",
+        "--output-on-failure"
+      ],
+      "started_at": "2026-10-08T20:32:23.993357+00:00",
+      "finished_at": "2026-10-08T20:32:24.675006+00:00",
+      "exit": 0,
+      "artifacts": {
+        "syspane_profile_projection_tests.exe": "4831ebf883c25f519def9a32e709034c15297b7bd5129068c0b79adaf7dc22b0",
+        "syspane_initial_profile_tests.exe": "6efaad3c5c03625f7a5274bf12d67caf51db5f551f9e982f12ebcb679c8b84f3",
+        "syspane_command_session_tests.exe": "3814952a6b0d00884783d538d460386560742a2b2dddd2f1ec7d8c860ae61c8f"
+      },
+      "record": {
+        "local_path": "out/evidence/profile-projection/windows-x64-gcc15-graph-fabdca354e/result.json",
+        "sha256": "1980da93965c02dfcad9a3fb2c92e85a062622dc93e93d9e0c065f3aa78348b0"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/profile-projection/windows-x64-gcc15-graph-fabdca354e/source-inputs.zip",
+        "sha256": "2e24379c3520e208b8d7d5b4aeb1dd2e4a78745e34be93c45dad74fce67bf5c8"
+      },
+      "passed_ctest_families": 2,
+      "later_changes": [
+        "spec/contracts/index.md",
+        "spec/fixtures/invalid/index.md",
+        "spec/fixtures/valid/index.md"
+      ],
+      "ctest_log": {
+        "local_path": "out/evidence/profile-projection/windows-x64-gcc15-graph-fabdca354e/ctest-log.zip",
+        "sha256": "9e6b9a1fbb7ac85c1ae49af214b2c62ed536d4f1e1bf32e0defc7c6e59047128"
+      }
+    },
+    {
+      "profile": "windows-x86-v141-xp",
+      "action": "configure",
+      "command": [
+        "cmake",
+        "--preset",
+        "windows-x86-v141-xp"
+      ],
+      "started_at": "2026-10-08T20:32:32.628769+00:00",
+      "finished_at": "2026-10-08T20:32:37.159052+00:00",
+      "exit": 0,
+      "artifacts": {},
+      "record": {
+        "local_path": "out/evidence/profile-projection/windows-x86-v141-xp-configure-d8cc3e9973/result.json",
+        "sha256": "714d47f2ff91a965d14fb2c819fe747abe0c6f30828cb20f9a0b312a10e4c4f4"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/profile-projection/windows-x86-v141-xp-configure-d8cc3e9973/source-inputs.zip",
+        "sha256": "2e24379c3520e208b8d7d5b4aeb1dd2e4a78745e34be93c45dad74fce67bf5c8"
+      },
+      "passed_ctest_families": 0,
+      "later_changes": [
+        "spec/contracts/index.md",
+        "spec/fixtures/invalid/index.md",
+        "spec/fixtures/valid/index.md"
+      ]
+    },
+    {
+      "profile": "windows-x86-v141-xp",
+      "action": "build",
+      "command": [
+        "cmake",
+        "--build",
+        "--preset",
+        "windows-x86-v141-xp"
+      ],
+      "started_at": "2026-10-08T20:32:39.268215+00:00",
+      "finished_at": "2026-10-08T20:33:28.679321+00:00",
+      "exit": 0,
+      "artifacts": {},
+      "record": {
+        "local_path": "out/evidence/profile-projection/windows-x86-v141-xp-build-06694846e1/result.json",
+        "sha256": "7bf56f0bc4f7adf58911387080b1fb3bdde8ce2d3924f9f568a54fa1b4f5347e"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/profile-projection/windows-x86-v141-xp-build-06694846e1/source-inputs.zip",
+        "sha256": "2e24379c3520e208b8d7d5b4aeb1dd2e4a78745e34be93c45dad74fce67bf5c8"
+      },
+      "passed_ctest_families": 0,
+      "later_changes": [
+        "spec/contracts/index.md",
+        "spec/fixtures/invalid/index.md",
+        "spec/fixtures/valid/index.md"
+      ]
+    },
+    {
+      "profile": "windows-x86-v141-xp",
+      "action": "test",
+      "command": [
+        "ctest",
+        "--preset",
+        "windows-x86-v141-xp",
+        "-R",
+        "^(configuration[.](PROFILE-|COMMAND-|RECON-|INITIAL-PROFILE|DIGEST)|protocol[.])",
+        "--output-on-failure"
+      ],
+      "started_at": "2026-10-08T20:33:31.713878+00:00",
+      "finished_at": "2026-10-08T20:33:34.215368+00:00",
+      "exit": 0,
+      "artifacts": {
+        "syspane_profile_projection_tests.exe": "ab8887f77b759ece3282ea0fdc3897a2656cef1770e18860a716badca73d3e83",
+        "syspane_initial_profile_tests.exe": "9731ca17cdc3ffa362145b13a1b00f5357888ba618a44078e1209dbdddec342d",
+        "syspane_command_session_tests.exe": "7b716166aaa67ec36cde264e94075cef8dea9c04def139a469035551aec1674b"
+      },
+      "record": {
+        "local_path": "out/evidence/profile-projection/windows-x86-v141-xp-test-fb46dfe768/result.json",
+        "sha256": "fd2ca29e977eeff78ace9bfc46843d497bb4b75464b525ec88ea1f62e7a87044"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/profile-projection/windows-x86-v141-xp-test-fb46dfe768/source-inputs.zip",
+        "sha256": "2e24379c3520e208b8d7d5b4aeb1dd2e4a78745e34be93c45dad74fce67bf5c8"
+      },
+      "passed_ctest_families": 47,
+      "later_changes": [
+        "spec/contracts/index.md",
+        "spec/fixtures/invalid/index.md",
+        "spec/fixtures/valid/index.md"
+      ],
+      "ctest_log": {
+        "local_path": "out/evidence/profile-projection/windows-x86-v141-xp-test-fb46dfe768/ctest-log.zip",
+        "sha256": "888a56d72de50079c6182b6a87f7c39e5430c804765bcd8f4eb34dda78e7308b"
+      }
+    },
+    {
+      "profile": "windows-x86-v141-xp",
+      "action": "graph",
+      "command": [
+        "ctest",
+        "--preset",
+        "windows-x86-v141-xp",
+        "-R",
+        "^composition[.]",
+        "--output-on-failure"
+      ],
+      "started_at": "2026-10-08T20:33:36.444301+00:00",
+      "finished_at": "2026-10-08T20:33:36.839419+00:00",
+      "exit": 0,
+      "artifacts": {
+        "syspane_profile_projection_tests.exe": "ab8887f77b759ece3282ea0fdc3897a2656cef1770e18860a716badca73d3e83",
+        "syspane_initial_profile_tests.exe": "9731ca17cdc3ffa362145b13a1b00f5357888ba618a44078e1209dbdddec342d",
+        "syspane_command_session_tests.exe": "7b716166aaa67ec36cde264e94075cef8dea9c04def139a469035551aec1674b"
+      },
+      "record": {
+        "local_path": "out/evidence/profile-projection/windows-x86-v141-xp-graph-6bf30c3f6d/result.json",
+        "sha256": "17ddb3e6a6677ae72a3d461f4ec5a8be78a260cd7e58156cefa269cf79bcd54f"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/profile-projection/windows-x86-v141-xp-graph-6bf30c3f6d/source-inputs.zip",
+        "sha256": "2e24379c3520e208b8d7d5b4aeb1dd2e4a78745e34be93c45dad74fce67bf5c8"
+      },
+      "passed_ctest_families": 2,
+      "later_changes": [
+        "spec/contracts/index.md",
+        "spec/fixtures/invalid/index.md",
+        "spec/fixtures/valid/index.md"
+      ],
+      "ctest_log": {
+        "local_path": "out/evidence/profile-projection/windows-x86-v141-xp-graph-6bf30c3f6d/ctest-log.zip",
+        "sha256": "27da1931377d010725b9fd40508fad68d11d736194d5d2a537eecf54335a0369"
+      }
+    }
+  ],
+  "coordinators": [
+    {
+      "record": {
+        "local_path": "out/evidence/profile-projection-flow-0b42167b4ebd.json",
+        "sha256": "c8101de9d0bca67dd1fe624c2761209fe212feacc8d3dc864878225abc6247b4"
+      },
+      "outcome": "pass",
+      "failed_commands": []
+    },
+    {
+      "record": {
+        "local_path": "out/evidence/profile-projection-flow-58a11db8fbec.json",
+        "sha256": "461950472b0ec8a9cab127543d3130b9215013b1a2e6e0a91baa8c78d81da6b8"
+      },
+      "outcome": "pass",
+      "failed_commands": []
+    },
+    {
+      "record": {
+        "local_path": "out/evidence/profile-projection-flow-6d07c8ff138d.json",
+        "sha256": "0748617b11b9222d3ff3a52b29cfda1248f4d8f5b9d041f25ab37f9fef5133ac"
+      },
+      "outcome": "pass",
+      "failed_commands": []
+    },
+    {
+      "record": {
+        "local_path": "out/evidence/profile-projection-flow-7df1996e8d95.json",
+        "sha256": "208b1baf6b89b7e6e02ac9b9c81d09bdb5bc549f98c6f73d0719afe30b600837"
+      },
+      "outcome": "stopped",
+      "failed_commands": [
+        [
+          "wsl",
+          "-d",
+          "Ubuntu-24.04",
+          "-u",
+          "ir4runner",
+          "--",
+          "python3",
+          "/mnt/d/Projects/SysPane/syspane/out/campaign/profile_projection_step.py",
+          "linux-x64-gcc13",
+          "test"
+        ]
+      ]
+    },
+    {
+      "record": {
+        "local_path": "out/evidence/profile-projection-flow-9674df215a61.json",
+        "sha256": "c9950073dce259486b1227b83d9fc407a5574a0ac9b5e5c8e2b2f0f6c0ab91c8"
+      },
+      "outcome": "pass",
+      "failed_commands": []
+    },
+    {
+      "record": {
+        "local_path": "out/evidence/profile-projection-flow-f3998fee3ad6.json",
+        "sha256": "7e8faaefdf485791ccbeae470ffe02d242665bc575fd0f214a480aecdcc8f246"
+      },
+      "outcome": "stopped",
+      "failed_commands": [
+        [
+          "wsl",
+          "-d",
+          "Ubuntu-24.04",
+          "-u",
+          "ir4runner",
+          "--",
+          "python3",
+          "/mnt/d/Projects/SysPane/syspane/out/campaign/profile_projection_step.py",
+          "linux-x64-gcc13",
+          "build"
+        ]
+      ]
+    }
+  ],
+  "unexecuted_attempts": [
+    {
+      "source_archive": {
+        "local_path": "out/evidence/profile-projection/linux-x64-gcc13-test-bd59e1d05a/source-inputs.zip",
+        "sha256": "70c549fbc59bdcf4a3d9fcd6a1daa382ddfaa08d2e2099ed1624727ffcbbeab4"
+      },
+      "reason": "Coordinator stopped while capturing artifact identities before launching a test; no product test outcome claimed."
+    }
+  ],
+  "native": [
+    {
+      "family": "COMMAND-IPC",
+      "outcome": "pass",
+      "cases": 6,
+      "archive": {
+        "local_path": "out/evidence/profile-projection-native/commands-011ac209bdce.zip",
+        "sha256": "6bb413e80c738752a50a625b72ca32554c7503d98b5e7a94c218cd6bdcf6935d"
+      },
+      "record": {
+        "local_path": "out/evidence/profile-projection-native/commands-011ac209bdce.json",
+        "sha256": "db580a413ab2f675d5186bc86afc2977c0a52c9802d8c66cf760f263d1cfabe8"
+      },
+      "node_inventory": {
+        "local_path": "out/evidence/profile-projection-native/commands-011ac209bdce.index.json",
+        "sha256": "f35c62cbd5ba2114d2f69dd9f3079d1642af288411849db4b7f5f729a52494f2"
+      }
+    },
+    {
+      "family": "COMMAND-IPC",
+      "outcome": "pass",
+      "cases": 6,
+      "archive": {
+        "local_path": "out/evidence/profile-projection-native/commands-1c17ac094e0c.zip",
+        "sha256": "bd8de762f02d7ba5191cdbed16bb752aa6c16fefed73e2480de062b4fa98c10e"
+      },
+      "record": {
+        "local_path": "out/evidence/profile-projection-native/commands-1c17ac094e0c.json",
+        "sha256": "bc2ce9a885c42763998e76df35ebf7c0d4dca2d73657e91ab568d869c25a1637"
+      },
+      "node_inventory": {
+        "local_path": "out/evidence/profile-projection-native/commands-1c17ac094e0c.index.json",
+        "sha256": "adb9c608ee5f0108dbb018fb83fd4c2b1cd6626508e527b5fc1c8fefa7218781"
+      }
+    },
+    {
+      "family": "PROFILE-CONTROLLER",
+      "outcome": "pass",
+      "cases": 17,
+      "archive": {
+        "local_path": "out/evidence/profile-projection-native/pc-10ed11141a.zip",
+        "sha256": "a73f77dc5b820d194b7ecd4506e4e4881afc121b03a23c51286dd42283083b8a"
+      },
+      "record": {
+        "local_path": "out/evidence/profile-projection-native/pc-10ed11141a.json",
+        "sha256": "84194bf05057221110dda5820acd7330e6709170068983cc83c3f7d8d9652f1a"
+      },
+      "node_inventory": {
+        "local_path": "out/evidence/profile-projection-native/pc-10ed11141a.index.json",
+        "sha256": "cdcc2d17b8205a3baec58161343e9d3fb30458c3a1b91ac29b567da74c1ba542"
+      }
+    },
+    {
+      "family": "PROFILE-CONTROLLER",
+      "outcome": "pass",
+      "cases": 17,
+      "archive": {
+        "local_path": "out/evidence/profile-projection-native/pc-49d18ef77c.zip",
+        "sha256": "81e09a02489d9464455bca46186cded4f8c5ae272b3966637bba775b208988cc"
+      },
+      "record": {
+        "local_path": "out/evidence/profile-projection-native/pc-49d18ef77c.json",
+        "sha256": "3d7d41c6e8df9a0966dde43727deb1c1a4f717f94ea81bfc544ca8fb322b4431"
+      },
+      "node_inventory": {
+        "local_path": "out/evidence/profile-projection-native/pc-49d18ef77c.index.json",
+        "sha256": "cc7bf29770d9fd3070296665af04c56fa61caca9c89cc34568c04688836f10a9"
+      }
+    },
+    {
+      "family": "PROFILE-PROJECTION",
+      "outcome": "pass",
+      "cases": 7,
+      "archive": {
+        "local_path": "out/evidence/profile-projection-native/pp-273b031bde.zip",
+        "sha256": "2c2910c72a920dbc1c920c6d2a798d64ffa8c26fea0305cf0c2233306a612be4"
+      },
+      "record": {
+        "local_path": "out/evidence/profile-projection-native/pp-273b031bde.json",
+        "sha256": "17bc3722778007f675115d5c2fd28b0018620701126b3de1a7aaa05b36597e71"
+      },
+      "node_inventory": {
+        "local_path": "out/evidence/profile-projection-native/pp-273b031bde.index.json",
+        "sha256": "24bc5810a4bfbe4b8830104ae7655404c31ae9db2cfa6398969cabac6defcea0"
+      }
+    },
+    {
+      "family": "PROFILE-PROJECTION",
+      "outcome": "pass",
+      "cases": 7,
+      "archive": {
+        "local_path": "out/evidence/profile-projection-native/pp-350f28dd36.zip",
+        "sha256": "f8fe8cd06564c55c4b8eb439aa25f5bbf7cc3ca13370b6f6431ba28914d8823b"
+      },
+      "record": {
+        "local_path": "out/evidence/profile-projection-native/pp-350f28dd36.json",
+        "sha256": "a8ed59b17c327fb5d1f098955cbd4953533af9c5ebb4c86db02f68c406ff29e7"
+      },
+      "node_inventory": {
+        "local_path": "out/evidence/profile-projection-native/pp-350f28dd36.index.json",
+        "sha256": "b9cd9762da9d24e36dc717e2a06505471c8faf4358c2ed9994f4afb34ba480a5"
+      }
+    },
+    {
+      "family": "PROFILE-SUPERVISOR",
+      "outcome": "pass",
+      "cases": 19,
+      "archive": {
+        "local_path": "out/evidence/profile-projection-native/ps-265c28eb17.zip",
+        "sha256": "632e35295f346a4ba41c788d1de64eea42a951e612d2be0b352225dce3eec7ec"
+      },
+      "record": {
+        "local_path": "out/evidence/profile-projection-native/ps-265c28eb17.json",
+        "sha256": "455e8c72d03103469ac1d9c04e3727ac86b6076eb236b24cced40e24bce8bcc4"
+      },
+      "node_inventory": {
+        "local_path": "out/evidence/profile-projection-native/ps-265c28eb17.index.json",
+        "sha256": "8c9c787e3cd9e1d552e9447c621051faf74a551a8dea0e02322023baaf0a5cb2"
+      }
+    },
+    {
+      "family": "PROFILE-SUPERVISOR",
+      "outcome": "pass",
+      "cases": 19,
+      "archive": {
+        "local_path": "out/evidence/profile-projection-native/ps-6d529ce88a.zip",
+        "sha256": "81c1fff99f498ef8850f3a967844b9146403189a3ae27870b01f9b88384ec15c"
+      },
+      "record": {
+        "local_path": "out/evidence/profile-projection-native/ps-6d529ce88a.json",
+        "sha256": "814e5d9910e7b1f31d6a646505b6a3f358e751c4da9de4426139ed023645fbb3"
+      },
+      "node_inventory": {
+        "local_path": "out/evidence/profile-projection-native/ps-6d529ce88a.index.json",
+        "sha256": "00cb7f5f22809a4952ab93a860fa03a2b910a88fe3cdbfad0c7a84a750d0aed6"
+      }
+    },
+    {
+      "family": "RECONCILIATION",
+      "outcome": "pass",
+      "cases": 6,
+      "archive": {
+        "local_path": "out/evidence/profile-projection-native/reconciliation-590a31c3fb45.zip",
+        "sha256": "5e796c6b0f5ebc7da2df455cc762bd1f6d5bc5af5b6aea636f3b4619c5186e6f"
+      },
+      "record": {
+        "local_path": "out/evidence/profile-projection-native/reconciliation-590a31c3fb45.json",
+        "sha256": "4c310060646920fd44e981bd790681e2dc05cad297cf3f95084123e34510534c"
+      },
+      "node_inventory": {
+        "local_path": "out/evidence/profile-projection-native/reconciliation-590a31c3fb45.index.json",
+        "sha256": "44b9876d6724fa8774e294d354f6c9d602e49c67cb16d837d05f0e9babb35e48"
+      }
+    },
+    {
+      "family": "RECONCILIATION",
+      "outcome": "pass",
+      "cases": 6,
+      "archive": {
+        "local_path": "out/evidence/profile-projection-native/reconciliation-688f0b1eb935.zip",
+        "sha256": "019b14c163e1efbbc84f3087ecb8b05fc63833956d4d9a38ad48b53ec320541d"
+      },
+      "record": {
+        "local_path": "out/evidence/profile-projection-native/reconciliation-688f0b1eb935.json",
+        "sha256": "0a6bba6f8a779869b36939981f183a5d83c78cde23b4eca701093f0c59a5c12b"
+      },
+      "node_inventory": {
+        "local_path": "out/evidence/profile-projection-native/reconciliation-688f0b1eb935.index.json",
+        "sha256": "ad566eae2c985bb321490558e29ff8e5c247946d3cd2a7d348d54cb7bcbfe99e"
+      }
+    },
+    {
+      "family": "PROFILE-SUPERVISOR-RUNTIME",
+      "outcome": "pass",
+      "cases": 0,
+      "archive": {
+        "local_path": "out/evidence/profile-projection-native/s-813854f4.zip",
+        "sha256": "7a6f31ebf08e033e8a17965c0c8a4d51ad64d517202a60970fd80f921141c88e"
+      },
+      "record": {
+        "local_path": "out/evidence/profile-projection-native/s-813854f4.json",
+        "sha256": "8ff6b1accaf7f79b8ba3bf487457090e745e6773e8e80d8c92866139b6a2c028"
+      },
+      "node_inventory": {
+        "local_path": "out/evidence/profile-projection-native/s-813854f4.index.json",
+        "sha256": "38f9be6d494cd7069a67ba271916a686c06e57756949e910df3279b4e2323d9c"
+      }
+    },
+    {
+      "family": "PROFILE-SUPERVISOR-RUNTIME",
+      "outcome": "pass",
+      "cases": 0,
+      "archive": {
+        "local_path": "out/evidence/profile-projection-native/s-bfd26297.zip",
+        "sha256": "0ad96442a655469789ca6e77902f1fc5ce458328d8fc114c8ea65e85dca64515"
+      },
+      "record": {
+        "local_path": "out/evidence/profile-projection-native/s-bfd26297.json",
+        "sha256": "4f87ba29610defc681853b7b0ce33379dd8875a3b0a92889473390002136a44a"
+      },
+      "node_inventory": {
+        "local_path": "out/evidence/profile-projection-native/s-bfd26297.index.json",
+        "sha256": "34bcf92df22165c1d4c3ab02a87fb460fe7ad787e06104e6302979503b035ef4"
+      }
+    },
+    {
+      "family": "TRANSACTION-SUPERVISION",
+      "outcome": "pass",
+      "cases": 7,
+      "archive": {
+        "local_path": "out/evidence/profile-projection-native/supervision-0e5b166aaf0f.zip",
+        "sha256": "8d4315744bc5cfa02322f5386d73587ecb449bd965a5c4d13423618f2a7fbe3e"
+      },
+      "record": {
+        "local_path": "out/evidence/profile-projection-native/supervision-0e5b166aaf0f.json",
+        "sha256": "a7d34e0a0968ac167ab1588506df02c4891aca7942cba34476f3f652d2c4f7b6"
+      },
+      "node_inventory": {
+        "local_path": "out/evidence/profile-projection-native/supervision-0e5b166aaf0f.index.json",
+        "sha256": "28e5154def0db596dadccd4acb222b9913bf0ff6bfb7b7fef65f8dd019b3a13c"
+      }
+    },
+    {
+      "family": "TRANSACTION-SUPERVISION",
+      "outcome": "pass",
+      "cases": 7,
+      "archive": {
+        "local_path": "out/evidence/profile-projection-native/supervision-c500e4983499.zip",
+        "sha256": "6cd94f3eae4b565f3ff8fbff07fd0bdf631c776484bf93678e1fc34ff73a6e8a"
+      },
+      "record": {
+        "local_path": "out/evidence/profile-projection-native/supervision-c500e4983499.json",
+        "sha256": "46d5454bc0b67bc85fa919f05767de5a245d78fc7e629deab3ed9eb738845375"
+      },
+      "node_inventory": {
+        "local_path": "out/evidence/profile-projection-native/supervision-c500e4983499.index.json",
+        "sha256": "cb2f5fddb7add7d4aeda1a99239177aa80bf736a51a4a10713ac291ea4c1af4a"
+      }
+    }
+  ],
+  "native_case_counts": {
+    "COMMAND-IPC": 6,
+    "PROFILE-CONTROLLER": 17,
+    "PROFILE-PROJECTION": 7,
+    "PROFILE-SUPERVISOR": 19,
+    "RECONCILIATION": 6,
+    "TRANSACTION-SUPERVISION": 7
+  },
+  "specification": {
+    "record": {
+      "local_path": "out/evidence/profile-projection-spec-checks.json",
+      "sha256": "9e2a2022a00c1cb1b651ec67b9403fd4e9f9747c4b48876353f198570206bcb7"
+    },
+    "schemas": 48,
+    "fixtures": 166,
+    "tests": 62,
+    "passed": 60,
+    "skipped": 2,
+    "tool_sources": {
+      "spec/tools/specctl.py": "2193fbaef2c886dbdcbb667c5f28bd85a1ed5db8711b03975a646911ac3572c6",
+      "spec/tools/tests/test_specctl.py": "4c43c4c05efcd51565766215d547fae6bf53e121cebeb2e954cdd6c48c678f7e"
+    }
+  },
+  "later_change_verification": "The first build stopped on misleading indentation under -Werror; formatting was corrected. The next coordinator stopped before tests because a copied artifact list named generated/profile_projection.hpp instead of generated/helper_identity.hpp. Its source archive and coordinator trace remain preserved. Final review tightened ordered capability and exact closure validation and added a self-consistent malformed-header rejection within the frozen corruption family. Frozen package/case/expected startup/command bytes are unchanged. Each executed run retains exact source inputs; later_changes records subsequent edits. Final native and regression artifacts agree. After execution, specctl updates only the generated navigation indexes in contracts and valid/invalid fixtures; code, schemas and actual fixture bytes remain the tested inputs.",
+  "limitations": [
+    "Native transfer evidence covers the shipped profile in the non-root ext4 laboratory; maximum-size native transfer throughput is not qualified.",
+    "Large/binary/empty resource assembly is tested portably; it does not qualify installed GUI behavior.",
+    "ProfileDownload requires an already authenticated native connection and caller invalidation/erasure on transport, producer or policy loss.",
+    "Positive native policy is a dedicated test fixture; protected-policy deployment remains unqualified.",
+    "Actual frontend scheduling, deployment/data/runtime ownership, other private helper identities, UI/telemetry/activation/recovery/import composition remain open.",
+    "Windows shared builds and checks do not qualify Windows 9x/NT historical runtime behavior, and all five complete desktop editions retain their release/lifecycle gates."
+  ]
+}

@@ -237,14 +237,16 @@
         "source/protocol/ledger.hpp",
         "source/protocol/outbox.hpp",
         "source/protocol/telemetry.hpp",
-        "source/protocol/reconciliation.hpp"
+        "source/protocol/reconciliation.hpp",
+        "source/protocol/profile.hpp"
       ],
       "private_interfaces": [],
       "sources": [
         "source/protocol/wire.cpp",
         "source/protocol/ledger.cpp",
         "source/protocol/outbox.cpp",
-        "source/protocol/telemetry.cpp"
+        "source/protocol/telemetry.cpp",
+        "source/protocol/profile.cpp"
       ],
       "allowed_dependencies": [
         "syspane_json"
@@ -1582,7 +1584,8 @@
       ],
       "allowed_dependencies": [
         "syspane_authored",
-        "Threads::Threads"
+        "Threads::Threads",
+        "syspane_profile_projection"
       ],
       "target_requirements": [
         "cxx17"
@@ -3293,6 +3296,84 @@
       "allowed_dependencies": [
         "syspane_installation",
         "syspane_profile_supervisor"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
+    },
+    {
+      "id": "profile-projection",
+      "target": "syspane_profile_projection",
+      "type": "STATIC_LIBRARY",
+      "source_owner": "source/configuration/",
+      "public_interfaces": [
+        "source/configuration/profile_projection.hpp"
+      ],
+      "private_interfaces": [],
+      "sources": [
+        "source/configuration/profile_projection.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_authored"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "windows-x64-gcc15",
+        "linux-x64-gcc13",
+        "windows-x86-v141-xp"
+      ]
+    },
+    {
+      "id": "profile-projection-tests",
+      "target": "syspane_profile_projection_tests",
+      "type": "EXECUTABLE",
+      "source_owner": "tests/configuration/",
+      "public_interfaces": [],
+      "private_interfaces": [],
+      "sources": [
+        "tests/configuration/profile_projection_tests.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_async_commands"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "windows-x64-gcc15",
+        "linux-x64-gcc13",
+        "windows-x86-v141-xp"
+      ]
+    },
+    {
+      "id": "profile-projection-probe",
+      "target": "syspane_profile_projection_probe",
+      "type": "EXECUTABLE",
+      "source_owner": "tests/configuration/",
+      "public_interfaces": [],
+      "private_interfaces": [],
+      "sources": [
+        "tests/configuration/profile_projection_probe.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_profile_controller_runtime"
       ],
       "target_requirements": [
         "cxx17"

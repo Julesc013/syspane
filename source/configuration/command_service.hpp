@@ -14,6 +14,11 @@ public:
     virtual bool supports_edit_locks()const{return false;}
     virtual bool supports_theme_overrides()const{return false;}
     virtual bool supports_visibility()const{return false;}
+    virtual bool supports_profile()const{return false;}
+    virtual bool may_disclose_profile(const Authority&)const{return false;}
+    virtual Json read_profile(const std::string&,std::uint64_t,const Authority&,const Json&,std::uint64_t){throw protocol::Error("feature.unsupported");}
+    virtual bool profile_expired(const std::string&,std::uint64_t,std::uint64_t)const{return false;}
+    virtual void drop_profile(const std::string&,std::uint64_t){}
     virtual void attach(const std::string& epoch,std::uint64_t revision,Policy policy)=0;
     virtual CommandAdmission submit(const std::string& principal,const std::string& connection,std::uint64_t lifetime,
         const Authority&,std::string body,bool transactions,std::uint64_t now)=0;

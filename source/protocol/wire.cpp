@@ -1,4 +1,5 @@
 #include "wire.hpp"
+#include "profile.hpp"
 #include "reconciliation.hpp"
 #include <algorithm>
 #include <cmath>
@@ -155,7 +156,7 @@ Message decode(std::string_view payload,bool large_commands) {
     message.type = root["type"].get<std::string>();
     const std::set<std::string> types = {"hello", "welcome", "command", "result", "subscribe", "unsubscribe",
         "snapshot", "delta", "gap", "heartbeat", "cancel", "result.get", "result.reconcile", "result.reconciled", "shutdown", "render.challenge", "render.progress",
-        "transaction.started","transaction.armed","transaction.finished"};
+        "transaction.started","transaction.armed","transaction.finished","profile.read","profile.chunk"};
     if (!types.count(message.type)) throw Error("message.unknown");
     if (message.type == "hello") {
         if (!members(root, {"type", "body"})) throw Error("envelope.invalid");
@@ -172,6 +173,8 @@ Message decode(std::string_view payload,bool large_commands) {
     message.body_bytes = std::string(payload.substr(first, end - first));
     message.body = body;
     if (message.type == "hello" || message.type == "welcome") handshake(body);
+    if(message.type=="profile.read")validate_profile_request(body);
+    if(message.type=="profile.chunk")validate_profile_result(body);
     if(message.type=="result.reconcile"){
         if(message.body_bytes.size()>2048)throw Error("reconciliation.size");
         validate_reconciliation_request(body);

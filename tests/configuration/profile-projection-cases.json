@@ -1,0 +1,19 @@
+{
+  "family": "PROFILE-PROJECTION",
+  "portable": [
+    "exact-profile-and-resources", "read-only-forced-policy", "disclosure-denials",
+    "negotiation-and-frame-floor", "global-transfer-busy-close", "foreign-transfer-and-lifetime",
+    "invalid-cursors", "idle-and-absolute-expiry", "policy-clears-queued-bytes",
+    "current-and-pinned-revision", "join-and-unknown-outcome", "bounded-control-queue",
+    "binary-large-empty-parts", "receiver-corruption-and-identity", "receiver-invalidation",
+    "schema-and-size-bounds"
+  ],
+  "native": [
+    "real-controller-exact-profile", "commit-keeps-old-transfer-coherent",
+    "reconnect-needs-new-transfer", "current-policy-before-disclosure",
+    "same-revision-policy-invalidates", "held-policy-deadline", "native-disconnect-releases-transfer"
+  ],
+  "expected_startup": "tests/configuration/profile-startup-cases.json",
+  "expected_command": "tests/configuration/profile-startup-command-case.json",
+  "limits": {"part_count": 1092, "decoded_bytes": 73400320, "chunk_bytes": 4096, "frame_floor": 12288, "idle_ms": 5000, "absolute_ms": 60000}
+}

@@ -14,16 +14,19 @@ Decision decision(const std::string& code){
 AsyncCommands::AsyncCommands(GenerationStore& store,std::string epoch,std::function<void(const Authored&)> prepare)
     :epoch_(std::move(epoch)),transactions_(store,epoch_,std::move(prepare)),receipts_(transactions_.receipts()),revision_(authored_revision(transactions_.authored())){}
 AsyncCommands::AsyncCommands(GenerationStore& store,std::string epoch,ResourceProvider prepare)
-    :epoch_(std::move(epoch)),transactions_(store,epoch_,std::move(prepare)),receipts_(transactions_.receipts()),revision_(authored_revision(transactions_.authored())){}
+    :epoch_(std::move(epoch)),transactions_(store,epoch_,std::move(prepare)),receipts_(transactions_.receipts()),revision_(authored_revision(transactions_.authored())){
+    if(transactions_.current_.resources)image_=std::make_shared<ProfileImage>(transactions_.current_,transactions_.resource_provider_.capabilities);
+}
 void AsyncCommands::attach(const std::string& epoch,std::uint64_t revision,Policy policy){
     std::lock_guard<std::mutex> lock(mutex_);
     if(attached_||invalid_||epoch!=epoch_||revision!=revision_)throw Error("command.owner");
     policy_=std::move(policy);attached_=true;
 }
 Policy AsyncCommands::snapshot()const{std::lock_guard<std::mutex> lock(mutex_);return policy_;}
-void AsyncCommands::invalidate(){std::lock_guard<std::mutex> lock(mutex_);invalid_=true;policy_.available=false;}
+void AsyncCommands::invalidate(){std::lock_guard<std::mutex> lock(mutex_);invalid_=true;policy_.available=false;profile_.invalidate();image_.reset();}
 void AsyncCommands::policy(Policy next){
     std::lock_guard<std::mutex> lock(mutex_);
+    profile_.invalidate();
     if(!attached_||invalid_||next.revision<=policy_.revision){invalid_=true;policy_.available=false;throw Error("policy.revision");}
     policy_=std::move(next);
 }
@@ -120,7 +123,7 @@ AsyncCommands::Completion AsyncCommands::run(std::uint64_t ticket){
         job=found->second;job->started=true;
     }
     const auto cancelled=[&]{std::lock_guard<std::mutex> lock(mutex_);return job->cancelled||invalid_;};
-    Json answer;std::vector<CommitReceipt> receipts;
+    Json answer;std::vector<CommitReceipt> receipts;ProfileSnapshot image;
     try{
         answer=transactions_.submit_impl(job->principal,job->connection,job->body,job->authority,[&]{return snapshot();},0,cancelled,false,[&]{
             std::lock_guard<std::mutex> lock(mutex_);
@@ -128,13 +131,16 @@ AsyncCommands::Completion AsyncCommands::run(std::uint64_t ticket){
             authorize_authored(parse_command(job->body),job->authority,policy_,authored_revision(transactions_.authored()));
             job->committing=true;
         });
-        if(!transactions_.faulted())receipts=transactions_.receipts();
+        if(!transactions_.faulted()){
+            receipts=transactions_.receipts();
+            if(transactions_.current_.resources)image=std::make_shared<ProfileImage>(transactions_.current_,transactions_.resource_provider_.capabilities);
+        }
     }catch(...){
         // A native exception may follow publication; never manufacture unsaved facts.
         answer=result({"unknown","storage.reconcile"},job->request,epoch_,0);
         return Completion(this,ticket,std::move(answer),authored_revision(transactions_.authored()),true);
     }
-    return Completion(this,ticket,std::move(answer),authored_revision(transactions_.authored()),transactions_.faulted(),std::move(receipts));
+    return Completion(this,ticket,std::move(answer),authored_revision(transactions_.authored()),transactions_.faulted(),std::move(receipts),std::move(image));
 }
 bool AsyncCommands::finish(Completion&& done,std::uint64_t now,bool confirmed_stopped){
     if(!confirmed_stopped||done.owner!=this)return false;
@@ -147,11 +153,20 @@ bool AsyncCommands::finish(Completion&& done,std::uint64_t now,bool confirmed_st
     ledger_.finish(job->principal,job->request,done.reply.dump(),done.reply["outcome"]=="accepted",now);
     revision_=done.revision;storage_fault_=storage_fault_||done.fault;
     receipts_=storage_fault_?std::vector<CommitReceipt>{}:std::move(done.receipts);
+    image_=storage_fault_||invalid_?ProfileSnapshot{}:std::move(done.image);
+    if(storage_fault_||invalid_)profile_.invalidate();
     ready_.push_back(job);jobs_.erase(found);active_=0;done.ticket=0;return true;
 }
 std::optional<CommandDelivery> AsyncCommands::delivery(std::uint64_t now){
     advance(now);if(ready_.empty())return {};
     auto job=ready_.front();ready_.pop_front();
     return CommandDelivery{job->connection,job->lifetime,job->ticket,query(job->principal,job->authority,job->request,false,now)};
+}
+bool AsyncCommands::may_disclose_profile(const Authority& authority)const{
+    if(!attached_||invalid_||storage_fault_||!image_)return false;
+    try{image_->authorize(authority,snapshot());return true;}catch(const protocol::Error&){return false;}
+}
+Json AsyncCommands::read_profile(const std::string& connection,std::uint64_t lifetime,const Authority& authority,const Json& request,std::uint64_t now){
+    advance(now);return profile_.receive(connection,lifetime,authority,snapshot(),!invalid_&&!storage_fault_?image_:ProfileSnapshot{},request,now);
 }
 }

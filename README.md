@@ -11,6 +11,11 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
+The [profile projection checkpoint](spec/delivery/profile-projection-handoff.md)
+connects the native controller to bounded, policy-checked reads of one saved scene
+and its exact resources, with a validating frontend receiver. Installed UI composition,
+protected-policy qualification and all complete editions remain open.
+
 The [helper identity checkpoint](spec/delivery/helper-identity-handoff.md) now verifies installation-relative
 helper lookup against compiled identities and launches immutable verified bytes.
 Relocation and substitution cases pass. The real frontend, deployment ownership,

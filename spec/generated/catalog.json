@@ -489,7 +489,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "9abed143b132828c1f801a0828eb66a2ebea38fe68d745ede0033af0088b9669"
+      "sha256": "7150d0f90938e2e5306b42bf84ece620cc58da50ce2bc509afab99f9de04d324"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -1498,6 +1498,19 @@
         "SP-W10-RECOVERY-STORE"
       ],
       "sha256": "ae2f6dcafb7bb30dfb6c68dcebc8714c9688ecec533ba23303e7a224495c86a2"
+    },
+    {
+      "id": "SP-W08-PROFILE-PROJECTION",
+      "path": "delivery/packages/w-08-profile-projection.md",
+      "title": "Coherent profile projection over authenticated local sessions",
+      "description": "Deliver saved authoring data and exact resources to the native frontend with bounded disclosure.",
+      "requires": [
+        "SP-W08-PROFILE-CONTROLLER",
+        "SP-W08-COMMAND-SESSIONS",
+        "SP-POLICY",
+        "SP-TRANSPORT"
+      ],
+      "sha256": "50fb6f078de97bbba785670393c21544bfd0cc5ebc39728d02bc5c79cc502472"
     },
     {
       "id": "SP-W08-PROFILE-STARTUP",
@@ -2532,6 +2545,16 @@
         "SP-RELEASE-0-1-0"
       ],
       "sha256": "5bc0600b9e6c7e9e4eac7af2a2356dd88594b977c077b165bd1da168f7d7923b"
+    },
+    {
+      "id": "SP-PROFILE-PROJECTION-HANDOFF",
+      "path": "delivery/profile-projection-handoff.md",
+      "title": "Coherent authored profile and resource projection",
+      "description": "Bounded authenticated reads connect the native command controller to a typed frontend receiver.",
+      "requires": [
+        "SP-W08-PROFILE-PROJECTION"
+      ],
+      "sha256": "755e00d13e8dcff66d674ba797a4c1c669cab899fca670f82761f6d97baf53c4"
     },
     {
       "id": "SP-PROFILE-STARTUP-HANDOFF",

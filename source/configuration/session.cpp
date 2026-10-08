@@ -1,10 +1,11 @@
 #include "session.hpp"
 #include "reconciliation.hpp"
+#include "profile.hpp"
 
 namespace syspane::configuration {
 using protocol::Error;
 namespace {
-protocol::Handshake server_hello(const std::string& epoch, const std::optional<InventorySource>& source,bool commands=false,bool resources=false,bool large=false,bool locks=false,bool visibility=false,bool themes=false) {
+protocol::Handshake server_hello(const std::string& epoch, const std::optional<InventorySource>& source,bool commands=false,bool resources=false,bool large=false,bool locks=false,bool visibility=false,bool themes=false,bool profile=false) {
     protocol::Handshake hello{1, protocol::frame_limit, "console", epoch,
         {{"command", "0.2.0"}, {"command-result", "0.1.0"}}, {}, {"settings.preview", "result.get", "cancel"}};
     if(commands){hello.optional.insert({"configuration.transactions","result.reconcile"});
@@ -14,6 +15,7 @@ protocol::Handshake server_hello(const std::string& epoch, const std::optional<I
     if(locks&&resources&&large){hello.documents.insert({"command","0.6.0"});hello.optional.insert("configuration.edit-locks");}
     if(visibility&&locks&&resources&&large){hello.documents.insert({"command","0.7.0"});hello.optional.insert("configuration.visibility");}
     if(themes&&visibility&&locks&&resources&&large){hello.documents.insert({"command","0.8.0"});hello.optional.insert("configuration.theme-overrides");}
+    if(profile){hello.documents.insert({{"profile-request","0.1.0"},{"profile-result","0.1.0"}});hello.optional.insert("configuration.profile");}
     if (source) {
         const auto& version = source->document_version;
         hello.documents.insert({{"telemetry",version},{"snapshot",version},{"observation",version}});
@@ -57,7 +59,7 @@ void Sessions::open(const std::string& id, std::string principal, Authority auth
     auto inserted=connections_.emplace(id, Connection{id, std::move(principal), std::move(authority), now, false, {}, {1, protocol::frame_limit, {}, {}}, {}});
     inserted.first->second.lifetime=++lifetimes_;
 }
-void Sessions::shut(Connection& c, const char* reason) { c.ticket = 0; c.generation.reset(); c.pending.clear(); c.reason = reason; c.outbox.close(); }
+void Sessions::shut(Connection& c, const char* reason) { if(commands_)commands_->drop_profile(c.id,c.lifetime);c.ticket = 0; c.generation.reset(); c.pending.clear(); c.reason = reason; c.outbox.close(); }
 void Sessions::tick(std::uint64_t now) {
     if (clock_fault_ || (last_ && now < *last_)) {
         clock_fault_ = true;
@@ -76,6 +78,10 @@ void Sessions::tick(std::uint64_t now) {
     }
     for (auto& entry : connections_) {
         auto& c = entry.second;
+        if(commands_&&!c.outbox.closed()){
+            if(commands_->profile_expired(c.id,c.lifetime,now))shut(c,"profile.expired");
+            else if(c.profile_disclosed&&!commands_->may_disclose_profile(c.authority))shut(c,"profile.unavailable");
+        }
         if (!c.negotiated && !c.outbox.closed() && now - c.opened >= protocol::deadline_ms) shut(c, "handshake.timeout");
         if (c.ticket && now - c.renewed >= 3000) shut(c,"subscription.expired");
     }
@@ -105,8 +111,12 @@ void Sessions::dispatch(Connection& c, const protocol::Message& message, std::ui
     if (!c.negotiated) {
         if (message.type != "hello") throw Error("session.expected_hello");
         const auto client = protocol::handshake(message.body);
-        c.selection = protocol::negotiate(server_hello(epoch_,source_,static_cast<bool>(commands_),commands_&&commands_->supports_resources(),commands_&&commands_->supports_large_commands(),commands_&&commands_->supports_edit_locks(),commands_&&commands_->supports_visibility(),commands_&&commands_->supports_theme_overrides()), client, c.authority.role_grants);
+        c.selection = protocol::negotiate(server_hello(epoch_,source_,static_cast<bool>(commands_),commands_&&commands_->supports_resources(),commands_&&commands_->supports_large_commands(),commands_&&commands_->supports_edit_locks(),commands_&&commands_->supports_visibility(),commands_&&commands_->supports_theme_overrides(),commands_&&commands_->supports_profile()), client, c.authority.role_grants);
         c.authority.role = client.role;
+        if(!c.selection.documents.count({"profile-request","0.1.0"})||!c.selection.documents.count({"profile-result","0.1.0"})||c.selection.max_frame_bytes<protocol::profile_frame_floor){
+            if(client.required.count("configuration.profile"))throw Error("handshake.profile");
+            c.selection.features.erase("configuration.profile");
+        }
         const bool has_commands = (c.selection.documents.count({"command", "0.2.0"})||c.selection.documents.count({"command", "0.3.0"})||c.selection.documents.count({"command", "0.4.0"})||c.selection.documents.count({"command", "0.5.0"})||c.selection.documents.count({"command", "0.6.0"})||c.selection.documents.count({"command", "0.7.0"})||c.selection.documents.count({"command", "0.8.0"})) && c.selection.documents.count({"command-result", "0.1.0"});
         if (!has_commands) {
             for (const auto& feature : {"settings.preview", "result.get", "cancel", "configuration.transactions"}) {
@@ -174,6 +184,13 @@ void Sessions::dispatch(Connection& c, const protocol::Message& message, std::ui
         queue(c, "heartbeat", message.body); return;
     }
     if (message.type == "subscribe" || message.type == "unsubscribe") { subscribe(c,message,now); return; }
+    if(message.type=="profile.read"){
+        if(!commands_||!c.selection.features.count("configuration.profile"))throw Error("feature.unsupported");
+        if(!c.outbox.can_control(protocol::profile_frame_floor)){shut(c,"queue.control_full");return;}
+        auto result=commands_->read_profile(c.id,c.lifetime,c.authority,message.body,now);
+        if(result["outcome"]=="chunk")c.profile_disclosed=true;
+        queue(c,"profile.chunk",std::move(result));return;
+    }
     if(message.type=="result.reconcile"){
         if(!commands_||!c.selection.features.count("result.reconcile"))throw Error("feature.unsupported");
         if(!c.outbox.can_control(protocol::reconciliation_frame_bound)){shut(c,"queue.control_full");return;}
@@ -268,7 +285,7 @@ std::optional<std::string> Sessions::pop(const std::string& id, std::uint64_t no
     if (c.ticket && !may_subscribe(c)) shut(c,"policy.denied");
     return c.outbox.pop();
 }
-void Sessions::disconnect(const std::string& id) { connections_.erase(id); }
+void Sessions::disconnect(const std::string& id) {const auto found=connections_.find(id);if(found!=connections_.end()&&commands_)commands_->drop_profile(id,found->second.lifetime);connections_.erase(id);}
 void Sessions::policy(Policy next, std::uint64_t now) {
     // Invalidate before any fallible revision/time check. Never retain old data
     // because the caller's clock or policy adapter failed.

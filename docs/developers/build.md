@@ -15,6 +15,35 @@ build` before configuring or building; use `test` or `package` for those actions
 The common active-output budget is unchanged; retained `out/evidence/` archives
 are measured separately. Never use the placeholder account from the example.
 
+The [profile projection package](../../spec/delivery/packages/w-08-profile-projection.md)
+adds configuration.profile with profile-request/profile-result 0.1 and a 12288-byte
+negotiated frame floor. The existing native controller exposes it only to its exact
+authenticated console peer with current operational and sensitive inspector and
+accessibility disclosure. No new endpoint or policy override is introduced.
+
+Use ProfileDownload on the independent native client worker after authenticating
+the controller, fixing the connection/producer epoch and admitting local capabilities.
+Send request(query_id) in profile.read and pass the decoded profile.chunk to receive.
+Wait for complete() before obtaining view(); its documents, resources and effective
+UI policy belong to one saved revision. Build SettingsResources from
+ContentCatalog::retained(*view.resources), the exact selection and admitted
+capabilities before handing it to SettingsDraft/EditorForm. Native IO, decoding and
+catalog validation stay outside GUI callbacks. The view is not proof of activation.
+
+Await each response, preserve the fixed transfer deadlines and call invalidate()
+on transport/epoch/policy loss, including after completion. Clear every UI-owned copy
+through existing erasure paths. Reconnect starts a new read; command reconciliation
+continues separately with the original mutation identity. The projected policy
+describes UI constraints and never supplies controller/native Authority.
+
+After budget preflight/configure/build, run `ctest --preset <profile> -R
+'^(configuration[.](PROFILE-|COMMAND-|RECON-|INITIAL-PROFILE|DIGEST)|protocol[.])'
+--output-on-failure`. Linux also runs native.PROFILE-PROJECTION and the existing
+controller/supervisor/command/reconciliation/supervision families. Run component
+graphs on all profiles. Preserve exact source/artifact/native records; the
+[handoff](../../spec/delivery/profile-projection-handoff.md) states remaining
+frontend, protected-policy and complete-edition requirements.
+
 The [helper identity package](../../spec/delivery/packages/w-26-helper-identity.md)
 adds LinuxInstallation and Child::launch_sealed. Linux builds generate helpers.json
 and helper_identity.hpp under the owned build's generated/ directory after producing
