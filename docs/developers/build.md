@@ -15,6 +15,14 @@ build` before configuring or building; use `test` or `package` for those actions
 The common active-output budget is unchanged; retained `out/evidence/` archives
 are measured separately. Never use the placeholder account from the example.
 
+The [schema hot-path package](../../spec/delivery/packages/w-11-recovery-hotpaths.md)
+compiles the finite trusted schema graph once, without retaining authored values or
+validation results. Run `ctest --preset <profile> -R '^configuration[.]AUTH-SCHEMA-EQUIVALENCE$'
+after building. Its 5823 fixed public-API cases compare against results captured on
+all three toolchains before the evaluator change. The runner cannot regenerate its
+expectations. Preserve a discrepancy and investigate it alongside the independent
+schema fixtures and semantic tests. This check does not qualify GUI responsiveness.
+
 The [recovery limits package](../../spec/delivery/packages/w-11-recovery-limits.md)
 and [GTK observation contract](../../spec/delivery/packages/w-11-recovery-gui-limits.md)
 freeze maximum valid inputs independently of product output. After ordinary preflight,

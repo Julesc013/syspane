@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-09T04:09:28.374295+00:00", "scope": "Maximum recovery evidence, preserved GTK timing failures and immutable schema-pattern reuse"}
+updated: {"by": "codex", "at": "2026-10-09T04:35:52.762922+00:00", "scope": "Compiled schema graph, frozen equivalence and preserved GTK failures"}
 ---
 
 # Current state and next admitted boundary
@@ -22,12 +22,13 @@ recordings are local ignored `out/` content; the retired root is absent from the
 tracked tree. See `docs/developers/build.md` in the repository for checkout
 setup and the [repository contract](../foundation/repository.md) for ownership.
 
-The [maximum-input recovery qualification](recovery-limits-handoff.md) now records
-six passing backend cases and a failing complete GTK qualification: three cases pass,
-four fail. Reusing immutable schema patterns reduces validation cost, but synchronous
-preview/layout work still exceeds 100 ms. Next close and repair that boundary,
-investigate the Apply state/restart observations, and rerun the fixed cases.
-Production recovery remains disabled; W-11 and all five complete editions remain open.
+The [compiled-schema checkpoint](recovery-hotpaths-handoff.md) preserves 5823
+pre-change outcomes on all three toolchains and passes 960 selected checks plus
+83 native regression cases. The immutable graph retains no authored data or
+validation results. Full GTK recovery qualification still fails; production remains
+disabled. Next repair synchronous text/preview work under the linked package,
+investigate the Apply/controller observations, and rerun the unchanged GUI cases.
+W-11 and all five complete editions remain open.
 
 The [frontend recovery backend](frontend-recovery-handoff.md) now uses authenticated
 profile 0.2, current native admission and exact accepted-request retirement metadata.

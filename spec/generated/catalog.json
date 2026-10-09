@@ -489,7 +489,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "54282e1d22d7375eab09995c48365b8e357adad0f071d15d6cf5f1518f1fe43e"
+      "sha256": "3be638e41a84f6826471e12ef2c2db2260e255480e4ad1fb881d2d56b474b45d"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -2325,6 +2325,16 @@
       "sha256": "61a74b77b17f2c30f5b91538172b50a7639aa76cb9544d8dfbefa224b3604522"
     },
     {
+      "id": "SP-W11-RECOVERY-HOTPATHS",
+      "path": "delivery/packages/w-11-recovery-hotpaths.md",
+      "title": "Recovery preview validation and text setup costs",
+      "description": "Reduce measured GUI work without relaxing validation, private-data lifetime or the frozen maximum-input oracle.",
+      "requires": [
+        "SP-W11-RECOVERY-GUI-LIMITS"
+      ],
+      "sha256": "5c982abd7acb63a7d5e557b2df167a1aeac21dcc13945e31a3ebc31998c56435"
+    },
+    {
       "id": "SP-W11-RECOVERY-LIMITS",
       "path": "delivery/packages/w-11-recovery-limits.md",
       "title": "Recovery limits and installed scheduling qualification",
@@ -2887,6 +2897,17 @@
         "SP-W25-PACKAGE"
       ],
       "sha256": "5315c7c332fe0b2676e9371b0ad2b6d68aa4ac0c20dd25bd91668cf112daf3db"
+    },
+    {
+      "id": "SP-RECOVERY-HOTPATHS-HANDOFF",
+      "path": "delivery/recovery-hotpaths-handoff.md",
+      "title": "Compiled authored-schema validation handoff",
+      "description": "Frozen pre-change equivalence, reduced schema navigation cost and remaining GTK qualification failures.",
+      "requires": [
+        "SP-W11-RECOVERY-HOTPATHS",
+        "SP-RECOVERY-LIMITS-HANDOFF"
+      ],
+      "sha256": "c025c4c689855aaa912fd3c2ee310334d9ca96bf579aa2c725716b4519517664"
     },
     {
       "id": "SP-RECOVERY-LIMITS-HANDOFF",

@@ -135,7 +135,29 @@ void digest(){
     CHECK(c::sha256(std::string(1000000,'a'))=="cdc76e5c9914fb9281a1c7e284d73e67f1809a48a497200e046d39ccc7112cd0");
 }
 void scene_content_tests(const std::string&,const std::string&);
-int main(int argc,char** argv){try{CHECK(argc==3);fixtures=argv[2];const std::string name=argv[1];
+// Test-only streaming adapter for the frozen differential corpus. No alternate
+// evaluator: every case enters the same public APIs used by the product.
+int schema_stream(){
+    std::string line;unsigned count=0;
+    while(std::getline(std::cin,line)){
+        CHECK(++count<=12000&&line.size()<=1048576);const auto q=Json::parse(line);
+        const auto kind=q.at("kind").get<std::string>();const auto& value=q.at("value");
+        std::string outcome="accepted";
+        try{
+            if(kind=="settings")c::validate_authored({value,q.at("scene")});
+            else if(kind=="scene")c::validate_scene_document(value);
+            else if(kind=="command")c::validate_command(value);
+            else if(kind=="command-result")c::validate_command_result(value);
+            else if(kind=="binding")c::validate_binding_document(value);
+            else if(kind=="visibility")c::validate_visibility_document(value);
+            else c::validate_content_document(value,kind);
+        }catch(const p::Error& e){outcome=e.what();}
+        std::cout<<Json({{"id",q.at("id")},{"outcome",outcome}}).dump()<<'\n';
+    }
+    CHECK(std::cin.eof()&&count>0);return 0;
+}
+int main(int argc,char** argv){try{if(argc==2&&std::string(argv[1])=="--schema-stream")return schema_stream();
+    CHECK(argc==3);fixtures=argv[2];const std::string name=argv[1];
     if(name.rfind("SCENE-CONTENT-",0)==0)scene_content_tests(name,fixtures);else if(name=="AUTH-SCHEMA")schemas();else if(name=="TX-MIXED")mixed();else if(name=="TX-CONFLICT")conflicts();else if(name=="TX-REPLAY")replay();
     else if(name=="TX-INTERRUPT")interruption();else if(name=="TX-BOUNDS")bounds();else if(name=="TX-CAPACITY")capacity();else if(name=="DIGEST")digest();else if(name=="DIGEST-CONTENT")content_digest();
     else if(name.substr(0,8)=="CONTENT-"||name.substr(0,9)=="RESOURCE-")content_tests(name,fixtures);else CHECK(false);

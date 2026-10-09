@@ -11,10 +11,10 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
-The [maximum-input recovery qualification](spec/delivery/recovery-limits-handoff.md)
-now has executable backend and installed GTK cases. Backend checks pass; the GUI
-still exceeds its 100 ms limit. Shared schema validation is faster, and the original
-failures remain recorded. Production recovery and all five complete editions remain open.
+The [recovery validation checkpoint](spec/delivery/recovery-hotpaths-handoff.md)
+preserves 5823 original validator outcomes and reduces repeated schema work.
+Native regression checks pass; the complete GTK loop still exceeds its 100 ms
+limit. Production recovery and all five complete editions remain open.
 
 The [installed settings frontend](spec/delivery/installed-settings-handoff.md)
 now runs from a relocated development payload, supervises its verified configuration

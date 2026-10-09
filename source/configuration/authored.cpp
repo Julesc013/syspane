@@ -4,6 +4,8 @@
 #include <algorithm>
 #include <cmath>
 #include <functional>
+#include <limits>
+#include <memory>
 #include <regex>
 
 namespace syspane::configuration {
@@ -37,79 +39,140 @@ const std::regex& pattern(const std::string& text){
     }();
     return patterns.at(text);
 }
-bool type(const Json& v,const std::string& kind){
-    if(kind=="object")return v.is_object();
-    if(kind=="array")return v.is_array();
-    if(kind=="string")return v.is_string();
-    if(kind=="null")return v.is_null();
-    if(kind=="boolean")return v.is_boolean();
-    if(kind=="number")return v.is_number()&&std::isfinite(v.get<double>());
-    if(kind=="integer")return v.is_number()&&std::isfinite(v.get<double>())&&std::floor(v.get<double>())==v.get<double>();
+enum SchemaType:unsigned {NoType=0,Object=1,Array=2,String=4,Null=8,Boolean=16,Number=32,Integer=64};
+unsigned schema_type(const std::string& kind){
+    if(kind=="object")return Object;
+    if(kind=="array")return Array;
+    if(kind=="string")return String;
+    if(kind=="null")return Null;
+    if(kind=="boolean")return Boolean;
+    if(kind=="number")return Number;
+    if(kind=="integer")return Integer;
     throw Error("schema.unsupported");
 }
-bool matches(const Json& s,const Json& v,const Json& root,unsigned depth=0){
+struct CompiledSchema {
+    using Children=std::vector<const CompiledSchema*>;
+    const CompiledSchema *ref=nullptr,*negation=nullptr,*condition=nullptr,*then_branch=nullptr,*else_branch=nullptr;
+    const CompiledSchema *property_names=nullptr,*items=nullptr,*contains=nullptr;
+    const Json *constant=nullptr,*enumeration=nullptr;
+    const std::regex* pattern=nullptr;
+    std::optional<unsigned> types;
+    std::optional<Children> one,any,all;
+    std::map<std::string,const CompiledSchema*> properties;
+    std::vector<std::string> required;
+    bool additional=true,unique=false;
+    std::size_t max_properties=std::numeric_limits<std::size_t>::max(),min_items=0,max_items=std::numeric_limits<std::size_t>::max();
+    std::size_t min_length=0,max_length=std::numeric_limits<std::size_t>::max();
+    std::optional<double> minimum,maximum;
+};
+class SchemaGraph {
+    // Addresses refer only to immutable compiled-in schemas. Insert a stable node
+    // before following references so cycles cannot recurse during construction.
+    std::map<const Json*,std::unique_ptr<CompiledSchema>> nodes;
+    const CompiledSchema* compile(const Json& s,const Json& root){
+        const auto found=nodes.find(&s);if(found!=nodes.end())return found->second.get();
+        auto owned=std::make_unique<CompiledSchema>();auto* n=owned.get();nodes.emplace(&s,std::move(owned));
+        if(s.contains("$ref")){
+            const auto ref=s["$ref"].get<std::string>();const auto hash=ref.find('#');
+            const auto name=ref.substr(0,hash);const auto& doc=name.empty()?root:schemas().at(name);
+            const auto& target=hash==std::string::npos?doc:doc.at(Json::json_pointer(ref.substr(hash+1)));
+            n->ref=compile(target,doc);
+        }
+        if(s.contains("type")){
+            unsigned mask=0;const auto& t=s["type"];
+            if(t.is_string())mask=schema_type(t.get<std::string>());else for(const auto& k:t)mask|=schema_type(k.get<std::string>());
+            n->types=mask;
+        }
+        if(s.contains("const"))n->constant=&s["const"];
+        if(s.contains("enum"))n->enumeration=&s["enum"];
+        const auto children=[&](const char* key,std::optional<CompiledSchema::Children>& out){
+            if(s.contains(key)){out.emplace();for(const auto& child:s[key])out->push_back(compile(child,root));}
+        };
+        children("oneOf",n->one);children("anyOf",n->any);children("allOf",n->all);
+        const auto child=[&](const char* key){return s.contains(key)?compile(s[key],root):nullptr;};
+        n->negation=child("not");n->condition=child("if");n->then_branch=child("then");n->else_branch=child("else");
+        n->property_names=child("propertyNames");n->items=child("items");n->contains=child("contains");
+        if(s.contains("required"))n->required=s["required"].get<std::vector<std::string>>();
+        if(s.contains("properties"))for(auto it=s["properties"].begin();it!=s["properties"].end();++it)n->properties.emplace(it.key(),compile(it.value(),root));
+        n->additional=s.value("additionalProperties",true);n->unique=s.value("uniqueItems",false);
+        n->max_properties=s.value("maxProperties",n->max_properties);
+        n->min_items=s.value("minItems",n->min_items);n->max_items=s.value("maxItems",n->max_items);
+        n->min_length=s.value("minLength",n->min_length);n->max_length=s.value("maxLength",n->max_length);
+        if(s.contains("minimum"))n->minimum=s["minimum"].get<double>();
+        if(s.contains("maximum"))n->maximum=s["maximum"].get<double>();
+        if(s.contains("pattern"))n->pattern=&pattern(s["pattern"].get_ref<const std::string&>());
+        return n;
+    }
+public:
+    SchemaGraph(){for(const auto& entry:schemas())compile(entry.second,entry.second);}
+    const CompiledSchema& at(const Json& s)const{return *nodes.at(&s);}
+};
+const CompiledSchema& compiled_schema(const char* name){
+    // C++ static initialization publishes only the completed immutable graph.
+    // No authored value or evaluation result is retained here.
+    static const SchemaGraph graph;return graph.at(schema(name));
+}
+bool matches(const CompiledSchema& s,const Json& v,unsigned depth=0){
     require(depth<64,"schema.depth");
-    if(s.contains("$ref")){
-        const auto ref=s["$ref"].get<std::string>();const auto hash=ref.find('#');
-        const auto name=ref.substr(0,hash);const auto& doc=name.empty()?root:schemas().at(name);
-        const auto& target=hash==std::string::npos?doc:doc.at(Json::json_pointer(ref.substr(hash+1)));
-        if(!matches(target,v,doc,depth+1))return false;
+    if(s.ref&&!matches(*s.ref,v,depth+1))return false;
+    if(s.types){
+        unsigned actual=v.is_object()?Object:v.is_array()?Array:v.is_string()?String:v.is_null()?Null:v.is_boolean()?Boolean:NoType;
+        if(v.is_number()){
+            const double n=v.get<double>();
+            if(std::isfinite(n))actual=Number|(std::floor(n)==n?Integer:NoType);
+        }
+        if(!(actual&*s.types))return false;
     }
-    if(s.contains("type")){
-        bool valid=false;const auto& t=s["type"];
-        if(t.is_string())valid=type(v,t.get<std::string>());else for(const auto& k:t)valid=valid||type(v,k.get<std::string>());
-        if(!valid)return false;
+    if(s.constant&&*s.constant!=v)return false;
+    if(s.enumeration&&std::find(s.enumeration->begin(),s.enumeration->end(),v)==s.enumeration->end())return false;
+    for(const auto* group:{&s.one,&s.any,&s.all})if(*group){
+        std::size_t count=0;for(const auto* child:**group)if(matches(*child,v,depth+1))++count;
+        if((group==&s.one&&count!=1)||(group==&s.any&&!count)||(group==&s.all&&count!=(**group).size()))return false;
     }
-    if(s.contains("const")&&s["const"]!=v)return false;
-    if(s.contains("enum")&&std::find(s["enum"].begin(),s["enum"].end(),v)==s["enum"].end())return false;
-    for(const char* key:{"oneOf","anyOf","allOf"})if(s.contains(key)){
-        std::size_t count=0;for(const auto& child:s[key])if(matches(child,v,root,depth+1))++count;
-        if((std::string(key)=="oneOf"&&count!=1)||(std::string(key)=="anyOf"&&!count)||
-           (std::string(key)=="allOf"&&count!=s[key].size()))return false;
-    }
-    if(s.contains("not")&&matches(s["not"],v,root,depth+1))return false;
-    if(s.contains("if")){
-        const char* branch=matches(s["if"],v,root,depth+1)?"then":"else";
-        if(s.contains(branch)&&!matches(s[branch],v,root,depth+1))return false;
+    if(s.negation&&matches(*s.negation,v,depth+1))return false;
+    if(s.condition){
+        const auto* branch=matches(*s.condition,v,depth+1)?s.then_branch:s.else_branch;
+        if(branch&&!matches(*branch,v,depth+1))return false;
     }
     if(v.is_object()){
-        if(s.contains("maxProperties")&&v.size()>s["maxProperties"].get<std::size_t>())return false;
-        if(s.contains("required"))for(const auto& k:s["required"])if(!v.contains(k.get<std::string>()))return false;
+        if(v.size()>s.max_properties)return false;
+        for(const auto& k:s.required)if(!v.contains(k))return false;
         for(auto it=v.begin();it!=v.end();++it){
-            if(s.contains("propertyNames")&&!matches(s["propertyNames"],it.key(),root,depth+1))return false;
-            if(s.contains("properties")&&s["properties"].contains(it.key())){
-                if(!matches(s["properties"][it.key()],it.value(),root,depth+1))return false;
-            }else if(s.contains("additionalProperties")&&!s["additionalProperties"].get<bool>())return false;
+            if(s.property_names&&!matches(*s.property_names,it.key(),depth+1))return false;
+            const auto property=s.properties.find(it.key());
+            if(property!=s.properties.end()){
+                if(!matches(*property->second,it.value(),depth+1))return false;
+            }else if(!s.additional)return false;
         }
     }
     if(v.is_array()){
-        if(s.contains("contains")){
-            bool found=false;for(const auto& item:v)if(matches(s["contains"],item,root,depth+1)){found=true;break;}
+        if(s.contains){
+            bool found=false;for(const auto& item:v)if(matches(*s.contains,item,depth+1)){found=true;break;}
             if(!found)return false;
         }
-        if((s.contains("minItems")&&v.size()<s["minItems"].get<std::size_t>())||
-           (s.contains("maxItems")&&v.size()>s["maxItems"].get<std::size_t>()))return false;
+        if(v.size()<s.min_items||v.size()>s.max_items)return false;
         for(std::size_t i=0;i<v.size();++i){
-            if(s.contains("items")&&!matches(s["items"],v[i],root,depth+1))return false;
-            if(s.value("uniqueItems",false))for(std::size_t j=0;j<i;++j)if(v[i]==v[j])return false;
+            if(s.items&&!matches(*s.items,v[i],depth+1))return false;
+            if(s.unique)for(std::size_t j=0;j<i;++j)if(v[i]==v[j])return false;
         }
     }
     if(v.is_string()){
         const auto& text=v.get_ref<const std::string&>();
-        const auto length=static_cast<std::size_t>(std::count_if(text.begin(),text.end(),[](unsigned char c){return (c&0xc0)!=0x80;}));
-        if((s.contains("minLength")&&length<s["minLength"].get<std::size_t>())||
-           (s.contains("maxLength")&&length>s["maxLength"].get<std::size_t>()))return false;
-        if(s.contains("pattern")&&!std::regex_search(text,pattern(s["pattern"].get_ref<const std::string&>())))return false;
+        if(s.min_length||s.max_length!=std::numeric_limits<std::size_t>::max()){
+            const auto length=static_cast<std::size_t>(std::count_if(text.begin(),text.end(),[](unsigned char c){return (c&0xc0)!=0x80;}));
+            if(length<s.min_length||length>s.max_length)return false;
+        }
+        if(s.pattern&&!std::regex_search(text,*s.pattern))return false;
     }
     if(v.is_number()){
         const auto n=v.get<double>();if(!std::isfinite(n))return false;
-        if((s.contains("minimum")&&n<s["minimum"].get<double>())||(s.contains("maximum")&&n>s["maximum"].get<double>()))return false;
+        if((s.minimum&&n<*s.minimum)||(s.maximum&&n>*s.maximum))return false;
     }
     return true;
 }
 void structural(const Json& value,const char* name,std::size_t limit,protocol::ParseProfile profile=protocol::ParseProfile::ordinary){
     const auto text=value.dump();require(text.size()<=limit,"authored.size");require(protocol::parse(text,profile)==value,"authored.encoding");
-    const auto& s=schema(name);require(matches(s,value,s),"authored.schema");
+    require(matches(compiled_schema(name),value),"authored.schema");
 }
 std::uint64_t revision(const Json& v){
     require(v.is_string(),"authored.revision");const auto n=protocol::decimal(v.get_ref<const std::string&>());

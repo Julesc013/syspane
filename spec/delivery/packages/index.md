@@ -95,6 +95,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Private native text lifetime](w-11-private-text-lifetime.md) — Balance GTK selection registration across realization and destruction without exporting authored text.
 - [Native recovery helper admission](w-11-recovery-admission.md) — Verify transferred recovery observations against local session and held native directory identities.
 - [Installed GTK recovery timing observations](w-11-recovery-gui-limits.md) — Observe the actual GUI loop with maximum admitted recovery inputs without adding a production runtime override.
+- [Recovery preview validation and text setup costs](w-11-recovery-hotpaths.md) — Reduce measured GUI work without relaxing validation, private-data lifetime or the frozen maximum-input oracle.
 - [Recovery limits and installed scheduling qualification](w-11-recovery-limits.md) — Measure admitted maximum inputs before enabling production recovery; preserve every missed deadline.
 - [Asynchronous editor recovery preparation](w-11-recovery-preparation.md) — Move recovery reconstruction to the existing worker without granting stale prepared results authority.
 - [Native scene inspector navigation and disclosure](w-11-scene-inspector.md) — Expose scene semantics through native controls with identity-stable navigation and current inspector authority.
