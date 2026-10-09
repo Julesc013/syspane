@@ -3,6 +3,7 @@
 #include "profile_owner_linux.hpp"
 #include "profile_projection.hpp"
 #include "settings_draft.hpp"
+#include "editor_draft.hpp"
 #include "image_job.hpp"
 #include "editor_recovery.hpp"
 #include "recovery_queue_linux.hpp"
@@ -35,11 +36,14 @@ struct FrontendView {
 // live on separate supervisory and client workers. Close, await stopped, then join.
 class LinuxFrontendBackend {
 public:
-    LinuxFrontendBackend(platform::HelperBundleExpectation,std::string runtime_base,platform::ProfileLocation);
+    LinuxFrontendBackend(platform::HelperBundleExpectation,std::string runtime_base,platform::ProfileLocation,bool experimental_recovery=false);
     ~LinuxFrontendBackend();
     LinuxFrontendBackend(const LinuxFrontendBackend&)=delete;
     LinuxFrontendBackend& operator=(const LinuxFrontendBackend&)=delete;
     FrontendView take();
+    // Consumes only the exact current profile's initial editor, once. Empty means
+    // unavailable/stale/already consumed; it never falls back to GTK preparation.
+    std::unique_ptr<interfaces::PreparedEditor> take_editor(const std::shared_ptr<const FrontendProfile>&);
     std::string request_id();
     rendering::ImageFactory images()const;
     std::shared_ptr<const platform::RecoveryFactory> recovery()const;

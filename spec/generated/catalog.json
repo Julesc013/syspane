@@ -489,7 +489,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "033ebbf63d05e28f6f5eefd090aadfaa39eea7099f1e4f759196989b9368696c"
+      "sha256": "6af19246b98f6430de002d510b35e3db1b7e933cff89a5072631fc6e039c29bf"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -2336,6 +2336,18 @@
       "sha256": "313e8a57bd7e44f821ce6a6f5b2102a53735a4eef4038fb0c5c9f0c98c90f81e"
     },
     {
+      "id": "SP-W11-PREPARED-EDITOR",
+      "path": "delivery/packages/w-11-prepared-editor.md",
+      "title": "Prepared initial editor ownership",
+      "description": "Move validated draft construction off GTK while preserving current profile ownership and native rendering checks.",
+      "requires": [
+        "SP-W11-FRONTEND-PHASES",
+        "SP-W11-FRONTEND-RECOVERY",
+        "SP-W11-INSTALLED-EDITOR"
+      ],
+      "sha256": "289b2d31528ec42a137f63da9d8eb21cfb5a0527962ac447281ff8a49232820e"
+    },
+    {
       "id": "SP-W11-PRIVATE-TEXT-LIFETIME",
       "path": "delivery/packages/w-11-private-text-lifetime.md",
       "title": "Private native text lifetime",
@@ -2801,6 +2813,17 @@
         "SP-TARGETS"
       ],
       "sha256": "f168d3d4ae3fa758ffe82f04630f019f732c585af229cd3aff68e814b2c98f4f"
+    },
+    {
+      "id": "SP-PREPARED-EDITOR-HANDOFF",
+      "path": "delivery/prepared-editor-handoff.md",
+      "title": "Prepared initial editor ownership handoff",
+      "description": "Validated worker preparation, current-profile consumption and measured remaining GTK costs.",
+      "requires": [
+        "SP-W11-PREPARED-EDITOR",
+        "SP-FRONTEND-PHASES-HANDOFF"
+      ],
+      "sha256": "2c8e1e7c8d27046c4e60da19e8d8e9c120ac09cdad9bba4766112a35293847f9"
     },
     {
       "id": "SP-PRESERVATION-HANDOFF",

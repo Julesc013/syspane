@@ -87,6 +87,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Network lifetimes and Linux watched acquisition checkpoint](network-reconciliation-handoff.md) — Preserve observation identity and measurement age before supervised native publication.
 - [Open decisions, risks and resolving experiments](open-questions.md) — Keep unresolved choices discoverable without blocking unrelated work.
 - [Independent temporal oracle implementation checkpoint](oracle-handoff.md) — Bind external marker/time evaluation and native X11 fault calibration to source and raw capture evidence.
+- [Prepared initial editor ownership handoff](prepared-editor-handoff.md) — Validated worker preparation, current-profile consumption and measured remaining GTK costs.
 - [Explicit private preservation checkpoint](preservation-handoff.md) — Bind opaque configuration copies, native controls and interrupted publication to measured development evidence.
 - [Private native text lifetime repair](private-text-lifetime-handoff.md) — Balanced GTK teardown preserves selection and prevents implicit clipboard export.
 - [Supervised native profile controller process](profile-controller-handoff.md) — Authenticated startup, current-policy result disclosure and interrupted command recovery.

@@ -1,6 +1,6 @@
 // Native component assertions; installed tests separately observe persistence,
 // helper retirement and pixels through external input/accessibility.
-int reply_lifecycle(const std::string& root){
+int reply_lifecycle(const std::string& root,bool prepared=false){
     const auto close=ui::EditorForm::ReplyView::close_on_accepted;
     for(const std::string mode:{"direct","reconciled","default","cancelled","unknown","ticket","epoch","revision","facts","query","withdrawn"}){
         settings_fixture::Fixture fixture(root);
@@ -13,12 +13,26 @@ int reply_lifecycle(const std::string& root){
         actions.widget_id=[] {throw std::runtime_error("unexpected widget creation");return std::string{};};
         actions.cancel=[](const auto&){throw std::runtime_error("unexpected cancellation callback");};
         actions.reload=actions.exit=[] {throw std::runtime_error("unexpected navigation callback");};
-        ui::EditorForm form(authority(),policy(),authored,"E1",fixture.resources(),topology(),"D1",{},"",std::move(actions));
+        std::unique_ptr<ui::EditorForm> owner;
+        if(prepared){
+            std::unique_ptr<ui::PreparedEditor> value;std::exception_ptr failure;
+            std::thread worker([&]{try{value=std::make_unique<ui::PreparedEditor>(authority(),policy(),authored,"E1",fixture.resources());}catch(...){failure=std::current_exception();}});
+            worker.join();if(failure)std::rethrow_exception(failure);
+            authored.scene["widgets"][0]["title"]="Changed after preparation";
+            owner=std::make_unique<ui::EditorForm>(std::move(value),topology(),"D1",std::vector<syspane::rendering::SurfaceProvider>{},"",std::move(actions));
+            need(!value,"prepared owner not consumed");
+        }else owner=std::make_unique<ui::EditorForm>(authority(),policy(),authored,"E1",fixture.resources(),topology(),"D1",std::vector<syspane::rendering::SurfaceProvider>{},"",std::move(actions));
+        auto& form=*owner;
         auto control=[&](const char* name){auto* w=editor_control(form.widget(),name);need(w!=nullptr,"missing lifecycle control");return w;};
         auto* tree=GTK_TREE_VIEW(control("editor.objects"));
         const auto rows=[&]{return gtk_tree_model_iter_n_children(gtk_tree_view_get_model(tree),nullptr);};
         need(rows()>0,"empty initial editor");
         auto* path=gtk_tree_path_new_first();gtk_tree_selection_select_path(gtk_tree_view_get_selection(tree),path);gtk_tree_path_free(path);
+        if(prepared){
+            auto* buffer=gtk_text_view_get_buffer(GTK_TEXT_VIEW(control("editor.value.title")));GtkTextIter first,last;gtk_text_buffer_get_bounds(buffer,&first,&last);
+            auto* text=gtk_text_buffer_get_text(buffer,&first,&last,FALSE);const std::string title=text;g_free(text);
+            need(title==read(root+"/tests/editor/native-cases.json")["authored"]["scene"]["widgets"][0]["title"],"prepared state retained mutable input");
+        }
         gtk_text_buffer_set_text(gtk_text_view_get_buffer(GTK_TEXT_VIEW(control("editor.value.title"))),"Reply lifecycle",-1);
         for(const char* name:{"editor.properties","editor.apply"}){auto* b=control(name);need(gtk_widget_get_sensitive(b),"submission disabled");gtk_button_clicked(GTK_BUTTON(b));}
         need(request.has_value(),"missing actual form request");
@@ -54,6 +68,11 @@ int reply_lifecycle(const std::string& root){
         }
         form.close();need(form.stopped(),"component did not stop");
         emit({{"case",mode},{"outcome","pass"}});
+    }
+    if(prepared){
+        bool refused=false;
+        try{ui::EditorForm form(std::unique_ptr<ui::PreparedEditor>{},topology(),"D1",{},"",{});}catch(const p::Error& e){refused=std::string(e.what())=="editor.prepared";}
+        need(refused,"null prepared state accepted");emit({{"case","null"},{"outcome","pass"}});
     }
     return 0;
 }

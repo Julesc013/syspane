@@ -96,7 +96,8 @@ struct Window {
         for(auto* button:{retry,quit,settings_button,editor_button})gtk_widget_set_sensitive(button,FALSE);
         gtk_label_set_text(GTK_LABEL(status),"Closing; waiting for configuration service to stop. Closing cannot undo a submitted change.");
     }
-    void populate(const FrontendProfile& snapshot){
+    void populate(const std::shared_ptr<const FrontendProfile>& profile){
+        const auto& snapshot=*profile;
         const configuration::Authority authority{true,"console",{"console"}};
         editor_unavailable=false;retirement_serial.reset();recovery_enabled=editor_mode&&experimental_recovery&&snapshot.view.recovery.has_value();
         if(editor_mode){
@@ -108,8 +109,8 @@ struct Window {
             actions.submit=[this](const auto& request){backend.submit(request);};actions.cancel=[this](const auto& request){backend.cancel(request);};
             actions.submit_recovery=[this](const auto& request,auto digest){saved_notice.clear();retirement_serial.reset();backend.submit(request,std::move(digest));};
             actions.reload=[this]{saved_notice.clear();retirement_serial.reset();backend.reload();};actions.exit=[this]{exit_requested=true;};
-            auto resources=snapshot.resources;if(recovery_enabled)resources.capabilities.insert("editor.recovery");
-            measure(FrontendPhase::editor,[&]{editor=std::make_unique<interfaces::EditorForm>(authority,snapshot.view.policy,snapshot.view.documents,snapshot.epoch,std::move(resources),std::move(current),selected,std::vector<rendering::SurfaceProvider>{},"",std::move(actions),true,backend.images());});
+            auto prepared=backend.take_editor(profile);if(!prepared)return;
+            measure(FrontendPhase::editor,[&]{editor=std::make_unique<interfaces::EditorForm>(std::move(prepared),std::move(current),selected,std::vector<rendering::SurfaceProvider>{},"",std::move(actions),backend.images());});
             if(recovery_enabled)measure(FrontendPhase::recovery,[&]{const auto& v=*snapshot.view.recovery;const auto& a=v.admission;
                 editor->recovery(backend.recovery(),a.directory.path,{v.editor_session,a.profile,a.generation,a.policy_revision,a.erase},backend.preparations(),snapshot.recovery_retirement);
                 if(snapshot.recovery_retirement)retirement_serial=snapshot.serial;
@@ -164,7 +165,7 @@ struct Window {
             if(exit_requested){exit_requested=false;saved_notice.clear();retirement_serial.reset();backend.reload();close_forms();editor_mode=false;transition=true;state.loading=true;}
             if(state.profile&&!state.loading&&!state.pending&&(shown!=state.profile->serial||erased||transition||(!editor&&editor_unavailable&&topology_dirty))){
                 measure(FrontendPhase::populate,[&]{close_forms();
-                    if(!editor||editor->stopped()){editor.reset();form.reset();populate(*state.profile);}
+                    if(!editor||editor->stopped()){editor.reset();form.reset();populate(state.profile);}
                 });
             }
             const bool current=state.profile&&!state.loading&&!state.pending&&!transition&&!erased;
@@ -198,7 +199,7 @@ int run_frontend(int argc,char** argv,platform::HelperBundleExpectation expectat
         }
         if(!gtk_init_check(nullptr,nullptr)){std::cerr<<"frontend.display_unavailable\n";return 2;}
         const char* selected=std::getenv("XDG_RUNTIME_DIR");
-        LinuxFrontendBackend backend(std::move(expectation),selected?selected:"",platform::profile_environment(profile));
+        LinuxFrontendBackend backend(std::move(expectation),selected?selected:"",platform::profile_environment(profile),experimental_recovery);
         Window window(backend,experimental_recovery,std::move(timing),std::move(phases));g_timeout_add_full(G_PRIORITY_DEFAULT,20,+[](gpointer value)->gboolean{return static_cast<Window*>(value)->observed_tick();},&window,nullptr);
         gtk_main();return window.result;
     }catch(...){std::cerr<<"frontend.startup\n";return 2;}

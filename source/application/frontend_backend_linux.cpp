@@ -46,14 +46,16 @@ struct LinuxFrontendBackend::Impl {
     std::atomic<bool> closing{false},supervisor_done{false},client_done{false};
     ProfileSupervisorView controller;std::uint64_t generation=0,requests=0,profiles=0,sessions=0,retries=0,last_retry=0;
     FrontendView view;std::optional<Pending> pending;bool reload_requested=false;
+    std::unique_ptr<ui::PreparedEditor> prepared_editor;const bool experimental_recovery;
     std::optional<RecoverySessionAuthority> recovery_authority;
     std::optional<Capture> retirement;
-    Impl(os::HelperBundleExpectation e,std::string base,os::ProfileLocation l):expectation(std::move(e)),runtime_base(std::move(base)),location(std::move(l)){
+    Impl(os::HelperBundleExpectation e,std::string base,os::ProfileLocation l,bool recovery):expectation(std::move(e)),runtime_base(std::move(base)),location(std::move(l)),experimental_recovery(recovery){
         view.status="Starting configuration service.";
     }
     bool valid_unlocked(std::uint64_t token)const{return !closing&&generation==token&&controller.state==ProfileSupervisorState::ready;}
     void valid(std::uint64_t token){std::lock_guard<std::mutex> lock(mutex);need(valid_unlocked(token),"frontend.withdrawn");}
     void withdraw(const char* status){
+        prepared_editor.reset();
         recovery_authority.reset();
         view.profile.reset();view.reply.reset();view.loading=true;view.status=status;increment(view.withdrawal);
         if(pending){pending->request.body.clear();if(!pending->dispatched)pending.reset();}
@@ -143,6 +145,7 @@ struct LinuxFrontendBackend::Impl {
         }
         void profile(){
             {std::lock_guard<std::mutex> lock(owner.mutex);need(owner.valid_unlocked(token),"frontend.withdrawn");
+                owner.prepared_editor.reset();
                 owner.recovery_authority.reset();increment(owner.sessions);editor_session=controller.epoch+":editor:"+std::to_string(owner.sessions);}
             download=std::make_unique<c::ProfileDownload>(id,controller.epoch,capabilities,c::ProfileRecoveryScope{owner.location.profile,editor_session});profile_reading=true;
             profile_started=profile_last=os::monotonic_ms();
@@ -192,8 +195,12 @@ struct LinuxFrontendBackend::Impl {
             auto profile=std::make_shared<FrontendProfile>();profile->view=download->view();profile->epoch=controller.epoch;
             auto caps=profile->view.capabilities;caps.insert(selected.features.begin(),selected.features.end());
             profile->resources={std::make_shared<const c::ContentCatalog>(c::ContentCatalog::retained(*profile->view.resources)),profile->view.resources->selection(),std::move(caps)};
+            auto resources=profile->resources;
+            if(owner.experimental_recovery&&profile->view.recovery)resources.capabilities.insert("editor.recovery");
+            auto prepared=std::make_unique<ui::PreparedEditor>(c::Authority{true,"console",{"console"}},profile->view.policy,profile->view.documents,profile->epoch,std::move(resources),true);
             deadlines();
             {std::lock_guard<std::mutex> lock(owner.mutex);need(owner.valid_unlocked(token)&&!owner.pending,"frontend.withdrawn");
+                if(owner.reload_requested){download.reset();profile_reading=false;return;}
                 const auto revision=c::authored_revision(profile->view.documents);const auto& policy=profile->view.policy;
                 if(profile->view.recovery){
                     const bool retain=policy.available&&!policy.denied_capabilities.count("editor.recovery")&&c::permits({true,"console",{"console"}},policy,"history","sensitive");
@@ -206,7 +213,7 @@ struct LinuxFrontendBackend::Impl {
                         }else owner.retirement.reset();
                     }
                 }
-                increment(owner.profiles);profile->serial=owner.profiles;owner.view.profile=std::move(profile);owner.view.loading=false;owner.view.status="Settings connected.";}
+                increment(owner.profiles);profile->serial=owner.profiles;owner.view.profile=std::move(profile);owner.prepared_editor=std::move(prepared);owner.view.loading=false;owner.view.status="Settings connected.";}
             download.reset();profile_reading=false;recovering=false;
         }
         void actions(){
@@ -271,13 +278,18 @@ struct LinuxFrontendBackend::Impl {
         client_done=true;
     }
 };
-LinuxFrontendBackend::LinuxFrontendBackend(os::HelperBundleExpectation expectation,std::string base,os::ProfileLocation location)
-    :impl_(std::make_unique<Impl>(std::move(expectation),std::move(base),std::move(location))){
+LinuxFrontendBackend::LinuxFrontendBackend(os::HelperBundleExpectation expectation,std::string base,os::ProfileLocation location,bool recovery)
+    :impl_(std::make_unique<Impl>(std::move(expectation),std::move(base),std::move(location),recovery)){
     auto& s=*impl_;s.supervisor_worker=std::thread([&s]{s.supervise();});
     try{s.client_worker=std::thread([&s]{s.client();});}catch(...){s.closing=true;s.supervisor_worker.join();throw;}
 }
 LinuxFrontendBackend::~LinuxFrontendBackend(){close();if(impl_->client_worker.joinable())impl_->client_worker.join();if(impl_->supervisor_worker.joinable())impl_->supervisor_worker.join();}
 FrontendView LinuxFrontendBackend::take(){auto& s=*impl_;std::lock_guard<std::mutex> lock(s.mutex);auto out=s.view;s.view.reply.reset();out.pending=s.pending.has_value();out.closing=s.closing;out.stopped=s.supervisor_done&&s.client_done;return out;}
+std::unique_ptr<ui::PreparedEditor> LinuxFrontendBackend::take_editor(const std::shared_ptr<const FrontendProfile>& profile){
+    auto& s=*impl_;std::lock_guard<std::mutex> lock(s.mutex);
+    if(!profile||s.closing||s.pending||s.view.loading||s.controller.state!=ProfileSupervisorState::ready||s.view.profile!=profile)return {};
+    return std::move(s.prepared_editor);
+}
 rendering::ImageFactory LinuxFrontendBackend::images()const{return impl_->helpers.images();}
 std::shared_ptr<const os::RecoveryFactory> LinuxFrontendBackend::recovery()const{return impl_->helpers.recovery();}
 std::shared_ptr<const ui::RecoveryPreparationFactory> LinuxFrontendBackend::preparations()const{return impl_->helpers.preparations();}
@@ -288,7 +300,7 @@ void LinuxFrontendBackend::submit(const ui::EditRequest& request,std::optional<s
     need(request.ticket&&p::identifier(request.request),"frontend.request");std::optional<Impl::Capture> capture;
     if(digest){need(digest->size()==64&&digest->find_first_not_of("0123456789abcdef")==std::string::npos&&s.recovery_authority&&s.recovery_authority->retain&&s.view.profile->view.recovery,"frontend.recovery_capture");
         capture=Impl::Capture{*s.view.profile->view.recovery,std::move(*digest)};}
-    s.pending=Impl::Pending{request,"",0,false,false,false,std::move(capture)};s.view.reply.reset();s.retirement.reset();s.recovery_authority.reset();
+    s.pending=Impl::Pending{request,"",0,false,false,false,std::move(capture)};s.prepared_editor.reset();s.view.reply.reset();s.retirement.reset();s.recovery_authority.reset();
 }
 void LinuxFrontendBackend::acknowledge_retirement(std::uint64_t serial){
     auto& s=*impl_;std::lock_guard<std::mutex> lock(s.mutex);
@@ -296,7 +308,7 @@ void LinuxFrontendBackend::acknowledge_retirement(std::uint64_t serial){
          s.view.profile->recovery_retirement==std::optional<std::string>{s.retirement->digest},"frontend.retirement_scope");s.retirement.reset();
 }
 void LinuxFrontendBackend::cancel(const ui::EditRequest& request){auto& s=*impl_;std::lock_guard<std::mutex> lock(s.mutex);if(!s.closing&&s.pending&&s.pending->request.request==request.request&&s.pending->request.epoch==request.epoch)s.pending->cancel=true;}
-void LinuxFrontendBackend::reload(){auto& s=*impl_;std::lock_guard<std::mutex> lock(s.mutex);need(!s.closing&&!s.pending&&s.view.profile,"frontend.pending");s.recovery_authority.reset();s.reload_requested=true;s.view.loading=true;s.view.status="Loading saved settings.";}
+void LinuxFrontendBackend::reload(){auto& s=*impl_;std::lock_guard<std::mutex> lock(s.mutex);need(!s.closing&&!s.pending&&s.view.profile,"frontend.pending");s.prepared_editor.reset();s.recovery_authority.reset();s.reload_requested=true;s.view.loading=true;s.view.status="Loading saved settings.";}
 void LinuxFrontendBackend::retrieve(){const auto now=os::monotonic_ms();auto& s=*impl_;std::lock_guard<std::mutex> lock(s.mutex);if(s.closing)return;if(s.last_retry&&now-s.last_retry<1000)return;s.last_retry=now;increment(s.retries);if(s.pending)s.pending->retrieve=true;}
 void LinuxFrontendBackend::close(){auto& s=*impl_;s.helpers.close();std::lock_guard<std::mutex> lock(s.mutex);if(s.closing.exchange(true))return;s.withdraw("Closing; waiting for configuration service to stop.");}
 }

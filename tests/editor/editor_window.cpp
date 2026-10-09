@@ -192,8 +192,8 @@ gboolean input(gint fd,GIOCondition cond,gpointer data){auto& w=*static_cast<Win
     return G_SOURCE_CONTINUE;
 }catch(const std::exception& e){emit({{"event","error"},{"reason",e.what()}});w.code=1;gtk_main_quit();return G_SOURCE_REMOVE;}}
 #include "reply_lifecycle.hpp"
-int main(int argc,char** argv){try{const bool lifecycle=argc==3&&std::string(argv[1])=="--reply-lifecycle";const bool recovery=argc==6&&std::string(argv[1])=="--recovery-child";need((argc==4||recovery||lifecycle)&&geteuid()!=0,"unprivileged fixture arguments");if(recovery)os::arm_parent_lifetime(std::stoull(argv[2]));g_set_prgname("syspane-editor");need(gtk_init_check(nullptr,nullptr),"GTK unavailable");
-    if(lifecycle)return reply_lifecycle(argv[2]);
+int main(int argc,char** argv){try{const bool prepared=argc==3&&std::string(argv[1])=="--prepared-editor";const bool lifecycle=argc==3&&std::string(argv[1])=="--reply-lifecycle";const bool recovery=argc==6&&std::string(argv[1])=="--recovery-child";need((argc==4||recovery||lifecycle||prepared)&&geteuid()!=0,"unprivileged fixture arguments");if(recovery)os::arm_parent_lifetime(std::stoull(argv[2]));g_set_prgname("syspane-editor");need(gtk_init_check(nullptr,nullptr),"GTK unavailable");
+    if(lifecycle||prepared)return reply_lifecycle(argv[2],prepared);
     Window w;w.recovery=recovery;const int offset=recovery?2:0;w.root=argv[1+offset];w.path=argv[2+offset];w.mode=argv[3+offset];w.initialize();need(fcntl(STDIN_FILENO,F_SETFL,fcntl(STDIN_FILENO,F_GETFL)|O_NONBLOCK)==0,"control pipe");
     const auto timer=g_timeout_add(10,tick,&w),reader=recovery?0:g_unix_fd_add(STDIN_FILENO,static_cast<GIOCondition>(G_IO_IN|G_IO_HUP|G_IO_ERR),input,&w);
     const auto deadline=g_timeout_add_seconds(40,+[](gpointer p)->gboolean{static_cast<Window*>(p)->code=1;gtk_main_quit();return G_SOURCE_REMOVE;},&w);

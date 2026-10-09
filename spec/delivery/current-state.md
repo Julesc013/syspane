@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-09T06:03:51.878799+00:00", "scope": "Frontend phase evidence and validated accepted-reply closure"}
+updated: {"by": "codex", "at": "2026-10-09T06:39:01.569213+00:00", "scope": "Prepared editor ownership and fixed GTK timing evidence"}
 ---
 
 # Current state and next admitted boundary
@@ -22,12 +22,12 @@ recordings are local ignored `out/` content; the retired root is absent from the
 tracked tree. See `docs/developers/build.md` in the repository for checkout
 setup and the [repository contract](../foundation/repository.md) for ownership.
 
-The [frontend phase checkpoint](frontend-phases-handoff.md) attributes remaining
-GTK stalls and closes accepted replacement replies without rebuilding an obsolete
-preview. All 323 selected Linux portable checks, both Windows component checks and
-new/affected native families pass. Fixed GUI timing still fails; production recovery
-stays disabled. Next close prepared-editor ownership and remaining history/edit
-callback costs. W-11 and all five complete editions remain open.
+The [prepared editor checkpoint](prepared-editor-handoff.md) moves complete initial
+draft validation to the existing client worker and consumes it only for the exact
+current profile. All 969 selected portable checks and the listed native regression families
+pass. Measured GTK construction falls to 78–105 ms, but four fixed GUI cases still
+fail. Next attribute initial preview/layout and history/edit callback costs.
+Production recovery stays disabled; W-11 and all five full editions remain open.
 
 The [frontend recovery backend](frontend-recovery-handoff.md) now uses authenticated
 profile 0.2, current native admission and exact accepted-request retirement metadata.

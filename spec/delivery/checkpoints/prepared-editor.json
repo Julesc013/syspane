@@ -1,0 +1,1377 @@
+{
+  "recorded_at": "2026-10-09T06:38:49.315666+00:00",
+  "source_base": "fb15bfac4c9fd9bbfb45444b02b0e83cb2ddfb3e",
+  "scope": "Validated initial editor preparation on the existing client worker and single-consumption current-profile adoption in GTK.",
+  "fixed_inputs": {
+    "spec/delivery/packages/w-11-installed-recovery.md": "04d3385d832a3fc75ba8fd56b2e18f5844157209e0cbc145244fd9400b5fa810",
+    "tests/configuration/installed-recovery-cases.json": "e5e75b327314911b4ff52f8521be9e04fa65f821f7b000431d3f62f63863792e",
+    "tests/configuration/installed-editor-cases.json": "9a3b26dc4001e0aa0dd1662802c18e73628d33b28527b3fd5c6a4ca364e6bac6",
+    "tests/configuration/installed-editor-scene.json": "45dea42b875ffd68e36282bd9df5cbcdee67f9093a774ef29b8ddaef58d4e7fa",
+    "tests/configuration/frontend-recovery-command.json": "f37c0bffe6b7cb22dd96733b15ad5669beaf63dbdfde5ad27f98b206bff47f0e",
+    "tests/configuration/profile-startup-cases.json": "778d20398d8db479a21b10e081c377ca85dabe11199b2c4918b03c6e6fc7cd2b",
+    "spec/delivery/packages/w-11-recovery-limits.md": "86c72bd00ca125faa35470642100b3f3f3410a856a84fb193dd6357fc98d61f5",
+    "tests/configuration/recovery-limits-cases.json": "9404f8bd7cf316dccc767c37158d4be352aef457a95382bfc576b10f766b2ab4",
+    "tests/configuration/recovery_limits_inputs.py": "8dece3e0096c62951cdd742e9a3b03176dc263d8005f575b546dd0be8c1eceef",
+    "spec/delivery/packages/w-11-recovery-gui-limits.md": "61a74b77b17f2c30f5b91538172b50a7639aa76cb9544d8dfbefa224b3604522",
+    "tests/configuration/recovery-gui-limits-cases.json": "43263df79f8dd55fc2446f6edf4128416dc200eb348c9bc0a05c2d780e68c9b4"
+  },
+  "executions": [
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "backend",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/prepared-editor/linux-x64-gcc13-backend-7960618a05/result.json",
+        "sha256": "b7a7d430f68ed994f72d9ffac4845b71ba873565fc8362dd821942047138e303"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/prepared-editor/linux-x64-gcc13-backend-7960618a05/source-inputs.zip",
+        "sha256": "cc39172c1e04894803021f25921626d6dd5f5dfd84e4074804b4cbefd92d219f"
+      },
+      "later_changes": [],
+      "passed_checks": 1
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "build",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/prepared-editor/linux-x64-gcc13-build-4386a1ed75/result.json",
+        "sha256": "3872fb4676a0ce2899ebacdd69106431353f9a435f0ef5dd459ca64e3e0b3449"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/prepared-editor/linux-x64-gcc13-build-4386a1ed75/source-inputs.zip",
+        "sha256": "cc39172c1e04894803021f25921626d6dd5f5dfd84e4074804b4cbefd92d219f"
+      },
+      "later_changes": [],
+      "passed_checks": 0
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "configure",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/prepared-editor/linux-x64-gcc13-configure-95207e17ed/result.json",
+        "sha256": "893b03a2adfb28647d6baf63d1a1bf3054d6b9a775ca749fad49cf3108a2d4dd"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/prepared-editor/linux-x64-gcc13-configure-95207e17ed/source-inputs.zip",
+        "sha256": "cc39172c1e04894803021f25921626d6dd5f5dfd84e4074804b4cbefd92d219f"
+      },
+      "later_changes": [],
+      "passed_checks": 0
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "consumers",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/prepared-editor/linux-x64-gcc13-consumers-cdc752f7f7/result.json",
+        "sha256": "a94be4412ee2c1b214ed4be096b2d0295fae3358444e8ae7bd2a90503f3141a0"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/prepared-editor/linux-x64-gcc13-consumers-cdc752f7f7/source-inputs.zip",
+        "sha256": "cc39172c1e04894803021f25921626d6dd5f5dfd84e4074804b4cbefd92d219f"
+      },
+      "later_changes": [],
+      "passed_checks": 3
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "controls",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/prepared-editor/linux-x64-gcc13-controls-cdb460086b/result.json",
+        "sha256": "8a08097c602b5a821741a7ce957c0ddb6f93e65116d383b570479be6b9c64744"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/prepared-editor/linux-x64-gcc13-controls-cdb460086b/source-inputs.zip",
+        "sha256": "cc39172c1e04894803021f25921626d6dd5f5dfd84e4074804b4cbefd92d219f"
+      },
+      "later_changes": [],
+      "passed_checks": 1
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "editor",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/prepared-editor/linux-x64-gcc13-editor-32d7a6ff56/result.json",
+        "sha256": "8ff21231261d9dc1683ea8fc8da0c9f00ca2650e20e59655cab62a3b88e4584c"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/prepared-editor/linux-x64-gcc13-editor-32d7a6ff56/source-inputs.zip",
+        "sha256": "cc39172c1e04894803021f25921626d6dd5f5dfd84e4074804b4cbefd92d219f"
+      },
+      "later_changes": [],
+      "passed_checks": 1
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "frontend",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/prepared-editor/linux-x64-gcc13-frontend-be045274a3/result.json",
+        "sha256": "e955d50489a11b07ecc943ba5298468465b02469df84c4aae748cd90f7dcc5e1"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/prepared-editor/linux-x64-gcc13-frontend-be045274a3/source-inputs.zip",
+        "sha256": "cc39172c1e04894803021f25921626d6dd5f5dfd84e4074804b4cbefd92d219f"
+      },
+      "later_changes": [],
+      "passed_checks": 1
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "gui",
+      "exit": 8,
+      "record": {
+        "local_path": "out/evidence/prepared-editor/linux-x64-gcc13-gui-fbfb509dce/result.json",
+        "sha256": "5ed7f67f757f0b71eb917d31ac5f9fa93156d7cc550e6e7b92d90d62c0156cdb"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/prepared-editor/linux-x64-gcc13-gui-fbfb509dce/source-inputs.zip",
+        "sha256": "cc39172c1e04894803021f25921626d6dd5f5dfd84e4074804b4cbefd92d219f"
+      },
+      "later_changes": [],
+      "passed_checks": 0
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "installed",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/prepared-editor/linux-x64-gcc13-installed-65a8db7aa0/result.json",
+        "sha256": "057b3591ac1ebf5cbe265177388f201d3aec3ab93f6f47f1a0d11acd2e30aa24"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/prepared-editor/linux-x64-gcc13-installed-65a8db7aa0/source-inputs.zip",
+        "sha256": "cc39172c1e04894803021f25921626d6dd5f5dfd84e4074804b4cbefd92d219f"
+      },
+      "later_changes": [],
+      "passed_checks": 1
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "native",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/prepared-editor/linux-x64-gcc13-native-2a58cf558f/result.json",
+        "sha256": "96025645bb795df01cc92b6be00bb810af0cf6d598e64df8511d7ec2d1d5a4bb"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/prepared-editor/linux-x64-gcc13-native-2a58cf558f/source-inputs.zip",
+        "sha256": "cc39172c1e04894803021f25921626d6dd5f5dfd84e4074804b4cbefd92d219f"
+      },
+      "later_changes": [],
+      "passed_checks": 1
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "phase-failure",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/prepared-editor/linux-x64-gcc13-phase-failure-fd11d03cef/result.json",
+        "sha256": "fa2b8a6e5269bdc5004ab07b89dc7e6b128fbbfa21c380e652ff4c7eac3ed02e"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/prepared-editor/linux-x64-gcc13-phase-failure-fd11d03cef/source-inputs.zip",
+        "sha256": "cc39172c1e04894803021f25921626d6dd5f5dfd84e4074804b4cbefd92d219f"
+      },
+      "later_changes": [],
+      "passed_checks": 1
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "phases",
+      "exit": 1,
+      "record": {
+        "local_path": "out/evidence/prepared-editor/linux-x64-gcc13-phases-42e9471215/result.json",
+        "sha256": "57f176d5e567662e5cd528f964ec6809cae731e749fb599a25540c1e8cb65d2e"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/prepared-editor/linux-x64-gcc13-phases-42e9471215/source-inputs.zip",
+        "sha256": "cc39172c1e04894803021f25921626d6dd5f5dfd84e4074804b4cbefd92d219f"
+      },
+      "later_changes": [],
+      "passed_checks": 0
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "prepared",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/prepared-editor/linux-x64-gcc13-prepared-8458e0807b/result.json",
+        "sha256": "7db1472d0f917da4af172ad196ee2033e9cffd5b75625db9587be4bd57885398"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/prepared-editor/linux-x64-gcc13-prepared-8458e0807b/source-inputs.zip",
+        "sha256": "cc39172c1e04894803021f25921626d6dd5f5dfd84e4074804b4cbefd92d219f"
+      },
+      "later_changes": [],
+      "passed_checks": 2
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "reply",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/prepared-editor/linux-x64-gcc13-reply-b37aaef85c/result.json",
+        "sha256": "8ea4dbbb829d0ca927f69afe86fbb93a36787ad46152141f3a662f22c6042517"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/prepared-editor/linux-x64-gcc13-reply-b37aaef85c/source-inputs.zip",
+        "sha256": "cc39172c1e04894803021f25921626d6dd5f5dfd84e4074804b4cbefd92d219f"
+      },
+      "later_changes": [],
+      "passed_checks": 1
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "test",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/prepared-editor/linux-x64-gcc13-test-768cee756b/result.json",
+        "sha256": "2b62b8b89fec203f2b6014a494a19e907d292b33600265277c549c943581c2cc"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/prepared-editor/linux-x64-gcc13-test-768cee756b/source-inputs.zip",
+        "sha256": "cc39172c1e04894803021f25921626d6dd5f5dfd84e4074804b4cbefd92d219f"
+      },
+      "later_changes": [],
+      "passed_checks": 323
+    },
+    {
+      "profile": "windows-x64-gcc15",
+      "action": "build",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/prepared-editor/windows-x64-gcc15-build-37d942f318/result.json",
+        "sha256": "b2b9df91ea42706ffba98c2f8bf5bde9b999fc3c548d53c4d53e7748a166b6a0"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/prepared-editor/windows-x64-gcc15-build-37d942f318/source-inputs.zip",
+        "sha256": "87e820a2fcde2ae1244a8f50278ebcb41d0d4e7a601dbc12b5ad3175b3e09f5e"
+      },
+      "later_changes": [],
+      "passed_checks": 0
+    },
+    {
+      "profile": "windows-x64-gcc15",
+      "action": "configure",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/prepared-editor/windows-x64-gcc15-configure-be2b243cae/result.json",
+        "sha256": "a38674cfadf31c13e8a3ee83b0d1072b54a6c55349b0d2798305a90e30931327"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/prepared-editor/windows-x64-gcc15-configure-be2b243cae/source-inputs.zip",
+        "sha256": "87e820a2fcde2ae1244a8f50278ebcb41d0d4e7a601dbc12b5ad3175b3e09f5e"
+      },
+      "later_changes": [],
+      "passed_checks": 0
+    },
+    {
+      "profile": "windows-x64-gcc15",
+      "action": "test",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/prepared-editor/windows-x64-gcc15-test-605582b984/result.json",
+        "sha256": "3c8b56e6527a84e3c6f9fdc4619a2475c38619c0ab48bb916db7258093788157"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/prepared-editor/windows-x64-gcc15-test-605582b984/source-inputs.zip",
+        "sha256": "87e820a2fcde2ae1244a8f50278ebcb41d0d4e7a601dbc12b5ad3175b3e09f5e"
+      },
+      "later_changes": [],
+      "passed_checks": 323
+    },
+    {
+      "profile": "windows-x86-v141-xp",
+      "action": "build",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/prepared-editor/windows-x86-v141-xp-build-7e3d69009a/result.json",
+        "sha256": "99538f796319301bbbccec72b4997c2ab411a971eddca2bd1498b20b89d2e7eb"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/prepared-editor/windows-x86-v141-xp-build-7e3d69009a/source-inputs.zip",
+        "sha256": "87e820a2fcde2ae1244a8f50278ebcb41d0d4e7a601dbc12b5ad3175b3e09f5e"
+      },
+      "later_changes": [],
+      "passed_checks": 0
+    },
+    {
+      "profile": "windows-x86-v141-xp",
+      "action": "configure",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/prepared-editor/windows-x86-v141-xp-configure-94576612ca/result.json",
+        "sha256": "b8e1e3faf5f74a9ec2d0484f433caa489061e5506753c8e35127cc164929c3b4"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/prepared-editor/windows-x86-v141-xp-configure-94576612ca/source-inputs.zip",
+        "sha256": "87e820a2fcde2ae1244a8f50278ebcb41d0d4e7a601dbc12b5ad3175b3e09f5e"
+      },
+      "later_changes": [],
+      "passed_checks": 0
+    },
+    {
+      "profile": "windows-x86-v141-xp",
+      "action": "legacy",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/prepared-editor/windows-x86-v141-xp-legacy-5d9521fb2a/result.json",
+        "sha256": "dba36465f49a5fd7134b8ab968c206721067411efddbc54d36be7ea3a556a99c"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/prepared-editor/windows-x86-v141-xp-legacy-5d9521fb2a/source-inputs.zip",
+        "sha256": "87e820a2fcde2ae1244a8f50278ebcb41d0d4e7a601dbc12b5ad3175b3e09f5e"
+      },
+      "later_changes": [],
+      "passed_checks": 2
+    },
+    {
+      "profile": "windows-x86-v141-xp",
+      "action": "test",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/prepared-editor/windows-x86-v141-xp-test-86c51600f0/result.json",
+        "sha256": "f220b9be14b37b69699ad55c34eeea0f88f0bd89064d0e6dc07cdb6aa27d8a18"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/prepared-editor/windows-x86-v141-xp-test-86c51600f0/source-inputs.zip",
+        "sha256": "87e820a2fcde2ae1244a8f50278ebcb41d0d4e7a601dbc12b5ad3175b3e09f5e"
+      },
+      "later_changes": [],
+      "passed_checks": 323
+    }
+  ],
+  "portable_checks": {
+    "linux-x64-gcc13": 323,
+    "windows-x64-gcc15": 323,
+    "windows-x86-v141-xp": 323
+  },
+  "legacy_checks": 2,
+  "baseline_checkpoint": {
+    "local_path": "spec/delivery/checkpoints/frontend-phases.json",
+    "sha256": "5fce3220c21a2ceabfb7cc4b5f5ae3dd4c16d5dc3238c38e7767d61a7987d9b5"
+  },
+  "native_case_families": {
+    "PREPARED-EDITOR": 12,
+    "FRONTEND-PREPARED-EDITOR": 7,
+    "FRONTEND-RECOVERY": 14,
+    "RECOVERY-LIMITS": 6,
+    "EDITOR-REPLY-LIFECYCLE": 11,
+    "FRONTEND-PHASE-FAILURE": 2,
+    "INSTALLED-RECOVERY": 14,
+    "INSTALLED-EDITOR": 15,
+    "INSTALLED-SETTINGS": 12,
+    "EDITOR-RECOVERY": 14,
+    "EDITOR-FORM": 20,
+    "IMAGE-ERASURE": 3
+  },
+  "native": [
+    {
+      "family": "EDITOR-FORM",
+      "outcome": "pass",
+      "cases": 20,
+      "archive": {
+        "local_path": "out/evidence/prepared-editor-native/editor-39a9b5517106.zip",
+        "sha256": "a460c9d7c58b7df2e78cd9b7ee5ce02959c74151956cfb5f2157ec4fcd2f6537"
+      },
+      "record": {
+        "local_path": "out/evidence/prepared-editor-native/editor-39a9b5517106.json",
+        "sha256": "7ddcb15c8bf37f62c5d574b8a3ebc8f8ae342c1e5b4b27c4b3856a67578d5c42"
+      },
+      "inventory": {
+        "local_path": "out/evidence/prepared-editor-native/editor-39a9b5517106.index.json",
+        "sha256": "43238e43657f1cdac328a688e9ebeb8596f4569aa94af9f1521ad08bee25bc8d"
+      }
+    },
+    {
+      "family": "INSTALLED-EDITOR",
+      "outcome": "pass",
+      "cases": 15,
+      "archive": {
+        "local_path": "out/evidence/prepared-editor-native/editor-frontend-a30b1f817f.zip",
+        "sha256": "7d8de59783120443503a8b0d67c54c8cfa9c0326655440f3640ec8bb9437abdc"
+      },
+      "record": {
+        "local_path": "out/evidence/prepared-editor-native/editor-frontend-a30b1f817f.json",
+        "sha256": "2b5eee9a581f41dd9a21a0b7ad794b148608910b2e58753c0cfba0171660c7d0"
+      },
+      "inventory": {
+        "local_path": "out/evidence/prepared-editor-native/editor-frontend-a30b1f817f.index.json",
+        "sha256": "f0e766da2d28c43b91691899fa2a41ac52474ae00be59cfe5408b103b65393e1"
+      }
+    },
+    {
+      "family": "FRONTEND-PHASES",
+      "outcome": "fail",
+      "cases": 7,
+      "archive": {
+        "local_path": "out/evidence/prepared-editor-native/fp-137630b986.zip",
+        "sha256": "e3f5a2045fe31a47c73764b86d43bb21bb2f04b9b80bd1297c01db35830f9e19"
+      },
+      "record": {
+        "local_path": "out/evidence/prepared-editor-native/fp-137630b986.json",
+        "sha256": "f562c1a4c7f62cad9aba0526d416be765c1e282fc7253e1a69be88d4f58b740b"
+      },
+      "inventory": {
+        "local_path": "out/evidence/prepared-editor-native/fp-137630b986.index.json",
+        "sha256": "1d44d0227c710e104ffb7c4df2597466bc48176fafdbaa60a11c580aa20694eb"
+      }
+    },
+    {
+      "family": "FRONTEND-RECOVERY",
+      "outcome": "pass",
+      "cases": 14,
+      "archive": {
+        "local_path": "out/evidence/prepared-editor-native/fr-bb225c3950.zip",
+        "sha256": "59e1b66dda5f20223470cf89a3b5bb68df21b519a82e26e13742e12471bf69d3"
+      },
+      "record": {
+        "local_path": "out/evidence/prepared-editor-native/fr-bb225c3950.json",
+        "sha256": "e883b6362f670aa99c1ad3d58083dd00dfb32a67f976969ca616adb5e8502676"
+      },
+      "inventory": {
+        "local_path": "out/evidence/prepared-editor-native/fr-bb225c3950.index.json",
+        "sha256": "690f23d8e022689f6726d552bb1a7ecf2a669d75e43ec0a626034644d801bbc9"
+      }
+    },
+    {
+      "family": "INSTALLED-SETTINGS",
+      "outcome": "pass",
+      "cases": 12,
+      "archive": {
+        "local_path": "out/evidence/prepared-editor-native/frontend-5509dd5295.zip",
+        "sha256": "eee52959afc5cccd2e246eaee9ed266932455fde2c113840aa336b3ec3d38492"
+      },
+      "record": {
+        "local_path": "out/evidence/prepared-editor-native/frontend-5509dd5295.json",
+        "sha256": "367e45560f7f801a030e7651ba4eaaadc5c0bfee1b8435b588d61e63d6610982"
+      },
+      "inventory": {
+        "local_path": "out/evidence/prepared-editor-native/frontend-5509dd5295.index.json",
+        "sha256": "cd3a102810e686daff144bf110dbc28b3bc79d1039ea1c5404b47d4b75b766a4"
+      }
+    },
+    {
+      "family": "INSTALLED-RECOVERY",
+      "outcome": "pass",
+      "cases": 14,
+      "archive": {
+        "local_path": "out/evidence/prepared-editor-native/ir-fed9c3dd63.zip",
+        "sha256": "b3c82cd52e1c012c59dd5f1417a7f419f68edb335db2129441a2a3b491107c7b"
+      },
+      "record": {
+        "local_path": "out/evidence/prepared-editor-native/ir-fed9c3dd63.json",
+        "sha256": "5227684124ebf632e618f119e9a48a4bcb388fe03c7d29c9fe8a2cf07529ccb3"
+      },
+      "inventory": {
+        "local_path": "out/evidence/prepared-editor-native/ir-fed9c3dd63.index.json",
+        "sha256": "784c548e525fd55c828bb27c8a8f254062f6085bcf2cd71a673c347cd7e487e0"
+      }
+    },
+    {
+      "family": "FRONTEND-PHASE-FAILURE",
+      "outcome": "pass",
+      "cases": 2,
+      "archive": {
+        "local_path": "out/evidence/prepared-editor-native/pff-0ab6d8494a.zip",
+        "sha256": "d8d35e4f045d10f22732984fbaec12cd0d35ede9c8de3c18c73636b257364e0e"
+      },
+      "record": {
+        "local_path": "out/evidence/prepared-editor-native/pff-0ab6d8494a.json",
+        "sha256": "addb4cc2a4dcf37e0d26843ca3a64b6c173b7fc15ad512395be2d73d36688443"
+      },
+      "inventory": {
+        "local_path": "out/evidence/prepared-editor-native/pff-0ab6d8494a.index.json",
+        "sha256": "083e39c057e4c3ae656278a795ee887e1da8220632f06e8d25140b6207f9452a"
+      }
+    },
+    {
+      "family": "EDITOR-RECOVERY",
+      "outcome": "pass",
+      "cases": 14,
+      "archive": {
+        "local_path": "out/evidence/prepared-editor-native/recovery-controls-178e77246480.zip",
+        "sha256": "a5a4058526d571c80421b126149af7c62cfec3b808bf3bef74c0ac45cb22164a"
+      },
+      "record": {
+        "local_path": "out/evidence/prepared-editor-native/recovery-controls-178e77246480.json",
+        "sha256": "8956357ab5498f217d58eb5285cc3562f8ed641014010d22d42b99c2cfcad9b6"
+      },
+      "inventory": {
+        "local_path": "out/evidence/prepared-editor-native/recovery-controls-178e77246480.index.json",
+        "sha256": "2ecdec2765c109193a3b495374f2f25cd88479023e0028d0e8abbcd6f6050c27"
+      }
+    },
+    {
+      "family": "EDITOR-REPLY-LIFECYCLE",
+      "outcome": "pass",
+      "cases": 11,
+      "archive": {
+        "local_path": "out/evidence/prepared-editor-native/reply-91e61aeb569e.zip",
+        "sha256": "742b20b6b544b2401164ade34cfeeac3805070f0256700062fd93c5e199dccf4"
+      },
+      "record": {
+        "local_path": "out/evidence/prepared-editor-native/reply-91e61aeb569e.json",
+        "sha256": "3032d60ace6f849b6c30009e4cfc26d63bafae2ab6756984fbaf4116b7222824"
+      },
+      "inventory": {
+        "local_path": "out/evidence/prepared-editor-native/reply-91e61aeb569e.index.json",
+        "sha256": "93df8a0f2ec935b963c9939848d8f087713f214ea4d04bf436713700e82f5582"
+      }
+    },
+    {
+      "family": "PREPARED-EDITOR",
+      "outcome": "pass",
+      "cases": 12,
+      "archive": {
+        "local_path": "out/evidence/prepared-editor-native/reply-f44edade925d.zip",
+        "sha256": "c9499a67a20b803fa904ae49f13823fece822271ee12812eb2f97cef95be5f66"
+      },
+      "record": {
+        "local_path": "out/evidence/prepared-editor-native/reply-f44edade925d.json",
+        "sha256": "2e26aca955a349474736aadc10ee1cd808498ed555af0a1db9b89a51bb439158"
+      },
+      "inventory": {
+        "local_path": "out/evidence/prepared-editor-native/reply-f44edade925d.index.json",
+        "sha256": "b3b721033600c67daabdaaa85f96ecb590722fdac65bd0a0ea0a4542d22d0383"
+      }
+    },
+    {
+      "family": "RECOVERY-GUI-LIMITS",
+      "outcome": "fail",
+      "cases": 7,
+      "archive": {
+        "local_path": "out/evidence/prepared-editor-native/rgl-0e5e5e31d3.zip",
+        "sha256": "acf51fb8888e43c79f97464972b540fa01eb719a1fbe83d2c7293250a2e73d77"
+      },
+      "record": {
+        "local_path": "out/evidence/prepared-editor-native/rgl-0e5e5e31d3.json",
+        "sha256": "7c461110b85a8d5e22f0dc40fd9c9343092209f466562b54faef807d10f9028f"
+      },
+      "inventory": {
+        "local_path": "out/evidence/prepared-editor-native/rgl-0e5e5e31d3.index.json",
+        "sha256": "45f14a90269b728d859df5c16f45b23a5667a444b49cab1a71220b9615391e5a"
+      }
+    },
+    {
+      "family": "FRONTEND-PREPARED-EDITOR",
+      "outcome": "pass",
+      "cases": 7,
+      "archive": {
+        "local_path": "out/evidence/prepared-editor-native/rl-0d08efaf88.zip",
+        "sha256": "bf34ec36882b0ab9ed82de44674c518acea713610281c84d85172187ea7832f2"
+      },
+      "record": {
+        "local_path": "out/evidence/prepared-editor-native/rl-0d08efaf88.json",
+        "sha256": "f0a2f7c4cd94d753c82f00272eb7694e42c93be54a5b54a7bdd6ba38b362e883"
+      },
+      "inventory": {
+        "local_path": "out/evidence/prepared-editor-native/rl-0d08efaf88.index.json",
+        "sha256": "d8d4c1db3edf668be15b412ce51ebaaac23fdc8d48481d862f2f7ad467b2c9b8"
+      }
+    },
+    {
+      "family": "RECOVERY-LIMITS",
+      "outcome": "pass",
+      "cases": 6,
+      "archive": {
+        "local_path": "out/evidence/prepared-editor-native/rl-b7eb849182.zip",
+        "sha256": "6d5777edc4fb143cc361b3e77ed7619346a5ada0cfbd0c079b78551f8ccf9eca"
+      },
+      "record": {
+        "local_path": "out/evidence/prepared-editor-native/rl-b7eb849182.json",
+        "sha256": "3da400bdabdaa67c271af99ae38f8f1b3b5ddf9cd8c76224c2aff4b126ae0042"
+      },
+      "inventory": {
+        "local_path": "out/evidence/prepared-editor-native/rl-b7eb849182.index.json",
+        "sha256": "38c96621b30747db40589338cddddf74bbb9e66aca3e61233bc691c1386b00f0"
+      }
+    },
+    {
+      "family": "IMAGE-ERASURE",
+      "outcome": "pass",
+      "cases": 3,
+      "archive": {
+        "local_path": "out/evidence/prepared-editor-native/surface-916c0a38f401.zip",
+        "sha256": "e8ec985108458627922c343e6fd6f71ef0216273d2c32caf83a8071250b96724"
+      },
+      "record": {
+        "local_path": "out/evidence/prepared-editor-native/surface-916c0a38f401.json",
+        "sha256": "54665c0fe05ff2690602f0ec626d55181ddfc4545c8d39b0eb7d605e6ea3b9c5"
+      },
+      "inventory": {
+        "local_path": "out/evidence/prepared-editor-native/surface-916c0a38f401.index.json",
+        "sha256": "92ac78b041275d6b636d41f9c8a3f5aa508f6a7bb26450bece1c1f134ea59dc4"
+      }
+    }
+  ],
+  "phase_experiments": [
+    {
+      "started_at": "2026-10-09T05:55:48.302031+00:00",
+      "archive": {
+        "local_path": "out/evidence/frontend-phases-native/fp-bca24905c8.zip",
+        "sha256": "239d4901234bb855382706aad40cac41327948a46bfddfc21bd086b842f983cb"
+      },
+      "cases": [
+        {
+          "case": "MAX-WIDGETS",
+          "outcome": "fail",
+          "maxima_us": {
+            "attach": 7612,
+            "controls": 788,
+            "editor": 156109,
+            "populate": 172534,
+            "recovery": 2217,
+            "reply": 34946,
+            "reply_reload": 4,
+            "settings": 13743,
+            "take": 19,
+            "topology": 0,
+            "withdrawal": 4
+          },
+          "slow": [
+            {
+              "completed": true,
+              "microseconds": 156109,
+              "phase": "editor",
+              "pid": 1116508,
+              "tick": 194
+            },
+            {
+              "completed": true,
+              "microseconds": 172534,
+              "phase": "populate",
+              "pid": 1116508,
+              "tick": 194
+            }
+          ]
+        },
+        {
+          "case": "MAX-SCENE",
+          "outcome": "fail",
+          "maxima_us": {
+            "attach": 7462,
+            "controls": 1408,
+            "editor": 194743,
+            "populate": 215061,
+            "recovery": 3750,
+            "reply": 37575,
+            "reply_reload": 6,
+            "settings": 8946,
+            "take": 27,
+            "topology": 0,
+            "withdrawal": 4
+          },
+          "slow": [
+            {
+              "completed": true,
+              "microseconds": 194743,
+              "phase": "editor",
+              "pid": 1116718,
+              "tick": 329
+            },
+            {
+              "completed": true,
+              "microseconds": 215061,
+              "phase": "populate",
+              "pid": 1116718,
+              "tick": 329
+            }
+          ]
+        },
+        {
+          "case": "MAX-RECORD",
+          "outcome": "fail",
+          "maxima_us": {
+            "attach": 8526,
+            "controls": 1062,
+            "editor": 176866,
+            "populate": 196511,
+            "recovery": 2540,
+            "reply": 34852,
+            "reply_reload": 3,
+            "settings": 8356,
+            "take": 21,
+            "topology": 0,
+            "withdrawal": 5
+          },
+          "slow": [
+            {
+              "completed": true,
+              "microseconds": 176866,
+              "phase": "editor",
+              "pid": 1116915,
+              "tick": 307
+            },
+            {
+              "completed": true,
+              "microseconds": 196511,
+              "phase": "populate",
+              "pid": 1116915,
+              "tick": 307
+            }
+          ]
+        },
+        {
+          "case": "MAX-COMMAND-REJECT",
+          "outcome": "pass",
+          "maxima_us": {
+            "attach": 6441,
+            "controls": 137,
+            "editor": 15072,
+            "populate": 34699,
+            "recovery": 650,
+            "reply": 0,
+            "reply_reload": 0,
+            "settings": 8441,
+            "take": 21,
+            "topology": 0,
+            "withdrawal": 5
+          },
+          "slow": []
+        },
+        {
+          "case": "OVER-RECORD-REJECT",
+          "outcome": "pass",
+          "maxima_us": {
+            "attach": 6373,
+            "controls": 156,
+            "editor": 14545,
+            "populate": 30470,
+            "recovery": 701,
+            "reply": 0,
+            "reply_reload": 0,
+            "settings": 8415,
+            "take": 17,
+            "topology": 0,
+            "withdrawal": 4
+          },
+          "slow": []
+        },
+        {
+          "case": "CLOSE-PREPARING",
+          "outcome": "pass",
+          "maxima_us": {
+            "attach": 6217,
+            "controls": 89,
+            "editor": 15838,
+            "populate": 32324,
+            "recovery": 646,
+            "reply": 0,
+            "reply_reload": 0,
+            "settings": 8008,
+            "take": 20,
+            "topology": 0,
+            "withdrawal": 4
+          },
+          "slow": []
+        },
+        {
+          "case": "POLICY",
+          "outcome": "fail",
+          "maxima_us": {
+            "attach": 5988,
+            "controls": 90,
+            "editor": 14820,
+            "populate": 31421,
+            "recovery": 659,
+            "reply": 0,
+            "reply_reload": 0,
+            "settings": 8014,
+            "take": 45,
+            "topology": 0,
+            "withdrawal": 38168
+          },
+          "slow": []
+        }
+      ],
+      "gui": [
+        {
+          "case": "MAX-WIDGETS",
+          "outcome": "fail",
+          "elapsed_seconds": 9.95048299699556,
+          "timing_max_us": {
+            "delay_us": 187085,
+            "work_us": 173423
+          },
+          "failure": "Traceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_installed_editor.py\", line 228, in observe\n    extension(dict(locals(),process=lambda:proc));report['outcome']='pass';return\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_frontend_phases.py\", line 13, in exercise\n    limits.exercise(e)\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_recovery_gui_limits.py\", line 73, in exercise\n    assert not violations,('GUI timing limit exceeded',violations)\n           ^^^^^^^^^^^^^^\nAssertionError: ('GUI timing limit exceeded', [{'index': 171, 'pid': 1116508, 'work_us': 361, 'delay_us': 130308}, {'index': 207, 'pid': 1116508, 'work_us': 245, 'delay_us': 187085}, {'index': 261, 'pid': 1116508, 'work_us': 173423, 'delay_us': 0}])\n",
+          "input_bytes": 76361,
+          "input_sha256": "56bf93b1f8073611ed6b5334b6be20e69a9a31c2ba4509a7f25b12bd762a2f47",
+          "scene_sha256": "0b93e8e7d3652e9c6bbd715eadef1f094f2e4b4e4b6e0dc2ffe95da6257ecc5f",
+          "timing_samples": 288,
+          "timing_violations": 3,
+          "native_children": 6,
+          "all_children_exited": true
+        },
+        {
+          "case": "MAX-SCENE",
+          "outcome": "fail",
+          "elapsed_seconds": 9.840109342010692,
+          "timing_max_us": {
+            "delay_us": 189047,
+            "work_us": 216280
+          },
+          "failure": "Traceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_installed_editor.py\", line 228, in observe\n    extension(dict(locals(),process=lambda:proc));report['outcome']='pass';return\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_frontend_phases.py\", line 13, in exercise\n    limits.exercise(e)\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_recovery_gui_limits.py\", line 73, in exercise\n    assert not violations,('GUI timing limit exceeded',violations)\n           ^^^^^^^^^^^^^^\nAssertionError: ('GUI timing limit exceeded', [{'index': 170, 'pid': 1116718, 'work_us': 380, 'delay_us': 146240}, {'index': 222, 'pid': 1116718, 'work_us': 354, 'delay_us': 189047}, {'index': 395, 'pid': 1116718, 'work_us': 216280, 'delay_us': 0}])\n",
+          "input_bytes": 275281,
+          "input_sha256": "3c6778dd1805acef1b6eab5968487633ab04dc1b8cb0b7ecfcd611a80b31afcb",
+          "scene_sha256": "0f113fe0107be93ae5c6c4238afd2be1ee43b6d63cfb82d01ff25a62ee96c2e8",
+          "timing_samples": 437,
+          "timing_violations": 3,
+          "native_children": 7,
+          "all_children_exited": true
+        },
+        {
+          "case": "MAX-RECORD",
+          "outcome": "fail",
+          "elapsed_seconds": 9.439562346000457,
+          "timing_max_us": {
+            "delay_us": 228935,
+            "work_us": 197633
+          },
+          "failure": "Traceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_installed_editor.py\", line 228, in observe\n    extension(dict(locals(),process=lambda:proc));report['outcome']='pass';return\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_frontend_phases.py\", line 13, in exercise\n    limits.exercise(e)\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_recovery_gui_limits.py\", line 73, in exercise\n    assert not violations,('GUI timing limit exceeded',violations)\n           ^^^^^^^^^^^^^^\nAssertionError: ('GUI timing limit exceeded', [{'index': 165, 'pid': 1116915, 'work_us': 202, 'delay_us': 150418}, {'index': 226, 'pid': 1116915, 'work_us': 520, 'delay_us': 228935}, {'index': 374, 'pid': 1116915, 'work_us': 197633, 'delay_us': 0}])\n",
+          "input_bytes": 786432,
+          "input_sha256": "615c3107fd35fd61cf24943865cd68fc9c5b89f8fddd8bd87507df87a843b93b",
+          "scene_sha256": "0f113fe0107be93ae5c6c4238afd2be1ee43b6d63cfb82d01ff25a62ee96c2e8",
+          "timing_samples": 414,
+          "timing_violations": 3,
+          "native_children": 7,
+          "all_children_exited": true
+        },
+        {
+          "case": "MAX-COMMAND-REJECT",
+          "outcome": "pass",
+          "elapsed_seconds": 3.656235166999977,
+          "timing_max_us": {
+            "delay_us": 7081,
+            "work_us": 35079
+          },
+          "input_bytes": 340369,
+          "input_sha256": "52a5340034b5b8587361de4a60d84e52c8bee4e9f04922c98e074831dc1a650c",
+          "scene_sha256": "0f113fe0107be93ae5c6c4238afd2be1ee43b6d63cfb82d01ff25a62ee96c2e8",
+          "timing_samples": 167,
+          "timing_violations": 0,
+          "native_children": 3,
+          "all_children_exited": true
+        },
+        {
+          "case": "OVER-RECORD-REJECT",
+          "outcome": "pass",
+          "elapsed_seconds": 3.496136845991714,
+          "timing_max_us": {
+            "delay_us": 6783,
+            "work_us": 30737
+          },
+          "input_bytes": 786433,
+          "input_sha256": "c3399ecf960cb6e4b1534415a767711aed1649343f93fc91b9ab7d0fa9be1c62",
+          "scene_sha256": "0f113fe0107be93ae5c6c4238afd2be1ee43b6d63cfb82d01ff25a62ee96c2e8",
+          "timing_samples": 160,
+          "timing_violations": 0,
+          "native_children": 3,
+          "all_children_exited": true
+        },
+        {
+          "case": "CLOSE-PREPARING",
+          "outcome": "pass",
+          "elapsed_seconds": 2.955502903991146,
+          "timing_max_us": {
+            "delay_us": 4741,
+            "work_us": 32681
+          },
+          "observed_loading": true,
+          "input_bytes": 275281,
+          "input_sha256": "784ea7d4552e9a2aacd6c0d8426dc405c3b69b560ed593a9256bc97eb63b2bb2",
+          "scene_sha256": "0f113fe0107be93ae5c6c4238afd2be1ee43b6d63cfb82d01ff25a62ee96c2e8",
+          "timing_samples": 134,
+          "timing_violations": 0,
+          "native_children": 3,
+          "all_children_exited": true
+        },
+        {
+          "case": "POLICY",
+          "outcome": "fail",
+          "elapsed_seconds": 4.500216746004298,
+          "timing_max_us": {
+            "delay_us": 143849,
+            "work_us": 38817
+          },
+          "erasure_ms": 74.12664699950255,
+          "erasure_limit_ms": 200,
+          "failure": "Traceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_installed_editor.py\", line 228, in observe\n    extension(dict(locals(),process=lambda:proc));report['outcome']='pass';return\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_frontend_phases.py\", line 13, in exercise\n    limits.exercise(e)\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_recovery_gui_limits.py\", line 73, in exercise\n    assert not violations,('GUI timing limit exceeded',violations)\n           ^^^^^^^^^^^^^^\nAssertionError: ('GUI timing limit exceeded', [{'index': 152, 'pid': 1117347, 'work_us': 205, 'delay_us': 143849}])\n",
+          "input_bytes": 275281,
+          "input_sha256": "298694387db8c2dc7e48cf952bbc041db6773bd63474d7f258fe71ff3f9292e9",
+          "scene_sha256": "0f113fe0107be93ae5c6c4238afd2be1ee43b6d63cfb82d01ff25a62ee96c2e8",
+          "timing_samples": 201,
+          "timing_violations": 1,
+          "native_children": 3,
+          "all_children_exited": true
+        }
+      ]
+    },
+    {
+      "started_at": "2026-10-09T06:20:55.590527+00:00",
+      "archive": {
+        "local_path": "out/evidence/prepared-editor-native/fp-137630b986.zip",
+        "sha256": "e3f5a2045fe31a47c73764b86d43bb21bb2f04b9b80bd1297c01db35830f9e19"
+      },
+      "cases": [
+        {
+          "case": "MAX-WIDGETS",
+          "outcome": "fail",
+          "maxima_us": {
+            "attach": 8164,
+            "controls": 747,
+            "editor": 104509,
+            "populate": 121366,
+            "recovery": 2227,
+            "reply": 36619,
+            "reply_reload": 4,
+            "settings": 7917,
+            "take": 15,
+            "topology": 0,
+            "withdrawal": 4
+          },
+          "slow": [
+            {
+              "completed": true,
+              "microseconds": 104509,
+              "phase": "editor",
+              "pid": 1125506,
+              "tick": 170
+            },
+            {
+              "completed": true,
+              "microseconds": 121366,
+              "phase": "populate",
+              "pid": 1125506,
+              "tick": 170
+            }
+          ]
+        },
+        {
+          "case": "MAX-SCENE",
+          "outcome": "fail",
+          "maxima_us": {
+            "attach": 6010,
+            "controls": 682,
+            "editor": 78249,
+            "populate": 94821,
+            "recovery": 2264,
+            "reply": 38028,
+            "reply_reload": 4,
+            "settings": 7862,
+            "take": 22,
+            "topology": 0,
+            "withdrawal": 3
+          },
+          "slow": []
+        },
+        {
+          "case": "MAX-RECORD",
+          "outcome": "fail",
+          "maxima_us": {
+            "attach": 5849,
+            "controls": 1085,
+            "editor": 78333,
+            "populate": 95151,
+            "recovery": 2284,
+            "reply": 35760,
+            "reply_reload": 4,
+            "settings": 8031,
+            "take": 22,
+            "topology": 0,
+            "withdrawal": 4
+          },
+          "slow": []
+        },
+        {
+          "case": "MAX-COMMAND-REJECT",
+          "outcome": "pass",
+          "maxima_us": {
+            "attach": 6606,
+            "controls": 105,
+            "editor": 12574,
+            "populate": 28371,
+            "recovery": 624,
+            "reply": 0,
+            "reply_reload": 0,
+            "settings": 8884,
+            "take": 20,
+            "topology": 0,
+            "withdrawal": 4
+          },
+          "slow": []
+        },
+        {
+          "case": "OVER-RECORD-REJECT",
+          "outcome": "pass",
+          "maxima_us": {
+            "attach": 5927,
+            "controls": 121,
+            "editor": 12949,
+            "populate": 28761,
+            "recovery": 605,
+            "reply": 0,
+            "reply_reload": 0,
+            "settings": 8024,
+            "take": 10,
+            "topology": 0,
+            "withdrawal": 4
+          },
+          "slow": []
+        },
+        {
+          "case": "CLOSE-PREPARING",
+          "outcome": "pass",
+          "maxima_us": {
+            "attach": 6855,
+            "controls": 138,
+            "editor": 13965,
+            "populate": 31620,
+            "recovery": 611,
+            "reply": 0,
+            "reply_reload": 0,
+            "settings": 8061,
+            "take": 16,
+            "topology": 0,
+            "withdrawal": 6
+          },
+          "slow": []
+        },
+        {
+          "case": "POLICY",
+          "outcome": "fail",
+          "maxima_us": {
+            "attach": 6135,
+            "controls": 97,
+            "editor": 14310,
+            "populate": 30439,
+            "recovery": 546,
+            "reply": 0,
+            "reply_reload": 0,
+            "settings": 8032,
+            "take": 138,
+            "topology": 0,
+            "withdrawal": 39796
+          },
+          "slow": []
+        }
+      ],
+      "gui": [
+        {
+          "case": "MAX-WIDGETS",
+          "outcome": "fail",
+          "elapsed_seconds": 8.781144442007644,
+          "timing_max_us": {
+            "delay_us": 166700,
+            "work_us": 122188
+          },
+          "failure": "Traceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_installed_editor.py\", line 228, in observe\n    extension(dict(locals(),process=lambda:proc));report['outcome']='pass';return\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_frontend_phases.py\", line 13, in exercise\n    limits.exercise(e)\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_recovery_gui_limits.py\", line 73, in exercise\n    assert not violations,('GUI timing limit exceeded',violations)\n           ^^^^^^^^^^^^^^\nAssertionError: ('GUI timing limit exceeded', [{'index': 143, 'pid': 1125506, 'work_us': 199, 'delay_us': 130070}, {'index': 180, 'pid': 1125506, 'work_us': 237, 'delay_us': 166700}, {'index': 229, 'pid': 1125506, 'work_us': 122188, 'delay_us': 0}])\n",
+          "input_bytes": 76361,
+          "input_sha256": "fb8754da69f7b79ec564fcf2d340a99c979717cb04beb31bc8c4c4e82833a660",
+          "scene_sha256": "0b93e8e7d3652e9c6bbd715eadef1f094f2e4b4e4b6e0dc2ffe95da6257ecc5f",
+          "timing_samples": 255,
+          "timing_violations": 3,
+          "native_children": 6,
+          "all_children_exited": true
+        },
+        {
+          "case": "MAX-SCENE",
+          "outcome": "fail",
+          "elapsed_seconds": 8.3844653069973,
+          "timing_max_us": {
+            "delay_us": 179570,
+            "work_us": 95658
+          },
+          "failure": "Traceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_installed_editor.py\", line 228, in observe\n    extension(dict(locals(),process=lambda:proc));report['outcome']='pass';return\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_frontend_phases.py\", line 13, in exercise\n    limits.exercise(e)\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_recovery_gui_limits.py\", line 73, in exercise\n    assert not violations,('GUI timing limit exceeded',violations)\n           ^^^^^^^^^^^^^^\nAssertionError: ('GUI timing limit exceeded', [{'index': 147, 'pid': 1125709, 'work_us': 295, 'delay_us': 142527}, {'index': 196, 'pid': 1125709, 'work_us': 381, 'delay_us': 179570}])\n",
+          "input_bytes": 275281,
+          "input_sha256": "8748d88cb703462ccae2feda0bdc566e2c8ff93165ff2519af028b31291ea8ac",
+          "scene_sha256": "0f113fe0107be93ae5c6c4238afd2be1ee43b6d63cfb82d01ff25a62ee96c2e8",
+          "timing_samples": 374,
+          "timing_violations": 2,
+          "native_children": 7,
+          "all_children_exited": true
+        },
+        {
+          "case": "MAX-RECORD",
+          "outcome": "fail",
+          "elapsed_seconds": 8.695760540984338,
+          "timing_max_us": {
+            "delay_us": 168872,
+            "work_us": 96029
+          },
+          "failure": "Traceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_installed_editor.py\", line 228, in observe\n    extension(dict(locals(),process=lambda:proc));report['outcome']='pass';return\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_frontend_phases.py\", line 13, in exercise\n    limits.exercise(e)\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_recovery_gui_limits.py\", line 73, in exercise\n    assert not violations,('GUI timing limit exceeded',violations)\n           ^^^^^^^^^^^^^^\nAssertionError: ('GUI timing limit exceeded', [{'index': 157, 'pid': 1125901, 'work_us': 203, 'delay_us': 145295}, {'index': 216, 'pid': 1125901, 'work_us': 280, 'delay_us': 168872}])\n",
+          "input_bytes": 786432,
+          "input_sha256": "b2848a50c9c1bbbf169fbf767e03896add95a31dbc78ffc8d1d24ac578e0948e",
+          "scene_sha256": "0f113fe0107be93ae5c6c4238afd2be1ee43b6d63cfb82d01ff25a62ee96c2e8",
+          "timing_samples": 389,
+          "timing_violations": 2,
+          "native_children": 8,
+          "all_children_exited": true
+        },
+        {
+          "case": "MAX-COMMAND-REJECT",
+          "outcome": "pass",
+          "elapsed_seconds": 3.401466872979654,
+          "timing_max_us": {
+            "delay_us": 6377,
+            "work_us": 28649
+          },
+          "input_bytes": 340369,
+          "input_sha256": "d0945ef5ad5f97e65bf52c26adb8a0d64a19198e8f85b1f7f81bba9295efd1f4",
+          "scene_sha256": "0f113fe0107be93ae5c6c4238afd2be1ee43b6d63cfb82d01ff25a62ee96c2e8",
+          "timing_samples": 155,
+          "timing_violations": 0,
+          "native_children": 3,
+          "all_children_exited": true
+        },
+        {
+          "case": "OVER-RECORD-REJECT",
+          "outcome": "pass",
+          "elapsed_seconds": 2.9288543660077266,
+          "timing_max_us": {
+            "delay_us": 5728,
+            "work_us": 29030
+          },
+          "input_bytes": 786433,
+          "input_sha256": "e1cf48d140e5c4fa913be315bacff4390707485074bcf01fa94957ee92615e27",
+          "scene_sha256": "0f113fe0107be93ae5c6c4238afd2be1ee43b6d63cfb82d01ff25a62ee96c2e8",
+          "timing_samples": 133,
+          "timing_violations": 0,
+          "native_children": 3,
+          "all_children_exited": true
+        },
+        {
+          "case": "CLOSE-PREPARING",
+          "outcome": "pass",
+          "elapsed_seconds": 2.8686050709802657,
+          "timing_max_us": {
+            "delay_us": 3894,
+            "work_us": 32019
+          },
+          "observed_loading": true,
+          "input_bytes": 275281,
+          "input_sha256": "5ffc546224dd1f3472d1dc698622aa200f78e74eb555ea28462f3fea23a15e9d",
+          "scene_sha256": "0f113fe0107be93ae5c6c4238afd2be1ee43b6d63cfb82d01ff25a62ee96c2e8",
+          "timing_samples": 130,
+          "timing_violations": 0,
+          "native_children": 2,
+          "all_children_exited": true
+        },
+        {
+          "case": "POLICY",
+          "outcome": "fail",
+          "elapsed_seconds": 4.845983601000626,
+          "timing_max_us": {
+            "delay_us": 150476,
+            "work_us": 40465
+          },
+          "erasure_ms": 84.15337800397538,
+          "erasure_limit_ms": 200,
+          "failure": "Traceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_installed_editor.py\", line 228, in observe\n    extension(dict(locals(),process=lambda:proc));report['outcome']='pass';return\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_frontend_phases.py\", line 13, in exercise\n    limits.exercise(e)\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_recovery_gui_limits.py\", line 73, in exercise\n    assert not violations,('GUI timing limit exceeded',violations)\n           ^^^^^^^^^^^^^^\nAssertionError: ('GUI timing limit exceeded', [{'index': 170, 'pid': 1126330, 'work_us': 343, 'delay_us': 150476}])\n",
+          "input_bytes": 275281,
+          "input_sha256": "c622d4aa4de5ff159ab419463d55afabbb82cded8f79bdfe1250deda35bb3cfc",
+          "scene_sha256": "0f113fe0107be93ae5c6c4238afd2be1ee43b6d63cfb82d01ff25a62ee96c2e8",
+          "timing_samples": 216,
+          "timing_violations": 1,
+          "native_children": 3,
+          "all_children_exited": true
+        }
+      ]
+    }
+  ],
+  "gui": {
+    "started_at": "2026-10-09T06:21:57.629049+00:00",
+    "outcome": "fail",
+    "cases": [
+      {
+        "case": "MAX-WIDGETS",
+        "outcome": "fail",
+        "elapsed_seconds": 8.926598435005872,
+        "timing_max_us": {
+          "delay_us": 173368,
+          "work_us": 121724
+        },
+        "failure": "Traceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_installed_editor.py\", line 228, in observe\n    extension(dict(locals(),process=lambda:proc));report['outcome']='pass';return\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_recovery_gui_limits.py\", line 73, in exercise\n    assert not violations,('GUI timing limit exceeded',violations)\n           ^^^^^^^^^^^^^^\nAssertionError: ('GUI timing limit exceeded', [{'index': 144, 'pid': 1126450, 'work_us': 281, 'delay_us': 130195}, {'index': 182, 'pid': 1126450, 'work_us': 239, 'delay_us': 173368}, {'index': 230, 'pid': 1126450, 'work_us': 121724, 'delay_us': 0}])\n",
+        "input_bytes": 76361,
+        "input_sha256": "07de054d503958a5ef87f09b6b991c0c2ec87b8cf81c2617e585e14efde09525",
+        "scene_sha256": "0b93e8e7d3652e9c6bbd715eadef1f094f2e4b4e4b6e0dc2ffe95da6257ecc5f",
+        "timing_samples": 256,
+        "timing_violations": 3,
+        "native_children": 6,
+        "all_children_exited": true
+      },
+      {
+        "case": "MAX-SCENE",
+        "outcome": "fail",
+        "elapsed_seconds": 8.518864165991545,
+        "timing_max_us": {
+          "delay_us": 174557,
+          "work_us": 95989
+        },
+        "failure": "Traceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_installed_editor.py\", line 228, in observe\n    extension(dict(locals(),process=lambda:proc));report['outcome']='pass';return\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_recovery_gui_limits.py\", line 73, in exercise\n    assert not violations,('GUI timing limit exceeded',violations)\n           ^^^^^^^^^^^^^^\nAssertionError: ('GUI timing limit exceeded', [{'index': 159, 'pid': 1126656, 'work_us': 292, 'delay_us': 127084}, {'index': 209, 'pid': 1126656, 'work_us': 342, 'delay_us': 174557}])\n",
+        "input_bytes": 275281,
+        "input_sha256": "0f3398a27ccf7f79f00f91afc8ca265a17df21bf34bdf23c96744a81bf435e0a",
+        "scene_sha256": "0f113fe0107be93ae5c6c4238afd2be1ee43b6d63cfb82d01ff25a62ee96c2e8",
+        "timing_samples": 380,
+        "timing_violations": 2,
+        "native_children": 7,
+        "all_children_exited": true
+      },
+      {
+        "case": "MAX-RECORD",
+        "outcome": "fail",
+        "elapsed_seconds": 9.17521456599934,
+        "timing_max_us": {
+          "delay_us": 223095,
+          "work_us": 96560
+        },
+        "failure": "Traceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_installed_editor.py\", line 228, in observe\n    extension(dict(locals(),process=lambda:proc));report['outcome']='pass';return\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_recovery_gui_limits.py\", line 73, in exercise\n    assert not violations,('GUI timing limit exceeded',violations)\n           ^^^^^^^^^^^^^^\nAssertionError: ('GUI timing limit exceeded', [{'index': 151, 'pid': 1126848, 'work_us': 322, 'delay_us': 151968}, {'index': 210, 'pid': 1126848, 'work_us': 439, 'delay_us': 223095}, {'index': 255, 'pid': 1126848, 'work_us': 387, 'delay_us': 222159}])\n",
+        "input_bytes": 786432,
+        "input_sha256": "4c6d8795390b196aa30c4e31671ae293f19751dfddc9f905aff63fbadf82650b",
+        "scene_sha256": "0f113fe0107be93ae5c6c4238afd2be1ee43b6d63cfb82d01ff25a62ee96c2e8",
+        "timing_samples": 404,
+        "timing_violations": 3,
+        "native_children": 8,
+        "all_children_exited": true
+      },
+      {
+        "case": "MAX-COMMAND-REJECT",
+        "outcome": "pass",
+        "elapsed_seconds": 3.47635704302229,
+        "timing_max_us": {
+          "delay_us": 7335,
+          "work_us": 29888
+        },
+        "input_bytes": 340369,
+        "input_sha256": "31f1f4c5d5421f8bc8ce5d421c309a94c5ae6bddf4cd2282067bac625a68573f",
+        "scene_sha256": "0f113fe0107be93ae5c6c4238afd2be1ee43b6d63cfb82d01ff25a62ee96c2e8",
+        "timing_samples": 159,
+        "timing_violations": 0,
+        "native_children": 3,
+        "all_children_exited": true
+      },
+      {
+        "case": "OVER-RECORD-REJECT",
+        "outcome": "pass",
+        "elapsed_seconds": 3.0737698980083223,
+        "timing_max_us": {
+          "delay_us": 6974,
+          "work_us": 30592
+        },
+        "input_bytes": 786433,
+        "input_sha256": "7865a5afb16a03824f60ce46dd597874a3b80aee214edbcdf5cb0d3b96f1f28c",
+        "scene_sha256": "0f113fe0107be93ae5c6c4238afd2be1ee43b6d63cfb82d01ff25a62ee96c2e8",
+        "timing_samples": 140,
+        "timing_violations": 0,
+        "native_children": 3,
+        "all_children_exited": true
+      },
+      {
+        "case": "CLOSE-PREPARING",
+        "outcome": "pass",
+        "elapsed_seconds": 2.9666306319995783,
+        "timing_max_us": {
+          "delay_us": 1917,
+          "work_us": 30727
+        },
+        "observed_loading": true,
+        "input_bytes": 275281,
+        "input_sha256": "f6c33a62e899bf1247cfad9c2ce97c2c399954eb23cf373d536bd6fcce78774a",
+        "scene_sha256": "0f113fe0107be93ae5c6c4238afd2be1ee43b6d63cfb82d01ff25a62ee96c2e8",
+        "timing_samples": 135,
+        "timing_violations": 0,
+        "native_children": 3,
+        "all_children_exited": true
+      },
+      {
+        "case": "POLICY",
+        "outcome": "fail",
+        "elapsed_seconds": 4.741644601977896,
+        "timing_max_us": {
+          "delay_us": 139806,
+          "work_us": 38134
+        },
+        "erasure_ms": 78.47265197779052,
+        "erasure_limit_ms": 200,
+        "failure": "Traceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_installed_editor.py\", line 228, in observe\n    extension(dict(locals(),process=lambda:proc));report['outcome']='pass';return\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_recovery_gui_limits.py\", line 73, in exercise\n    assert not violations,('GUI timing limit exceeded',violations)\n           ^^^^^^^^^^^^^^\nAssertionError: ('GUI timing limit exceeded', [{'index': 163, 'pid': 1127278, 'work_us': 225, 'delay_us': 139806}])\n",
+        "input_bytes": 275281,
+        "input_sha256": "8f4a57ee9557294abb9c818e566afaf9df58a2475acc57f5bc394add7b8c0a50",
+        "scene_sha256": "0f113fe0107be93ae5c6c4238afd2be1ee43b6d63cfb82d01ff25a62ee96c2e8",
+        "timing_samples": 212,
+        "timing_violations": 1,
+        "native_children": 3,
+        "all_children_exited": true
+      }
+    ],
+    "archive": {
+      "local_path": "out/evidence/prepared-editor-native/rgl-0e5e5e31d3.zip",
+      "sha256": "acf51fb8888e43c79f97464972b540fa01eb719a1fbe83d2c7293250a2e73d77"
+    }
+  },
+  "workspace": {
+    "maximum_bytes": 8589934592,
+    "reservations_unchanged": true,
+    "archived_native_bytes": 1522896011
+  },
+  "preserved_failures": [
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "gui",
+      "exit": 8,
+      "record": {
+        "local_path": "out/evidence/prepared-editor/linux-x64-gcc13-gui-fbfb509dce/result.json",
+        "sha256": "5ed7f67f757f0b71eb917d31ac5f9fa93156d7cc550e6e7b92d90d62c0156cdb"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/prepared-editor/linux-x64-gcc13-gui-fbfb509dce/source-inputs.zip",
+        "sha256": "cc39172c1e04894803021f25921626d6dd5f5dfd84e4074804b4cbefd92d219f"
+      },
+      "later_changes": [],
+      "passed_checks": 0
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "phases",
+      "exit": 1,
+      "record": {
+        "local_path": "out/evidence/prepared-editor/linux-x64-gcc13-phases-42e9471215/result.json",
+        "sha256": "57f176d5e567662e5cd528f964ec6809cae731e749fb599a25540c1e8cb65d2e"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/prepared-editor/linux-x64-gcc13-phases-42e9471215/source-inputs.zip",
+        "sha256": "cc39172c1e04894803021f25921626d6dd5f5dfd84e4074804b4cbefd92d219f"
+      },
+      "later_changes": [],
+      "passed_checks": 0
+    }
+  ],
+  "limitations": [
+    "Earlier failed attempts remain bound by the preceding frontend-phase checkpoint. Shared construction compiles on all three toolchains; native prepared ownership/adoption is currently exercised on Linux.",
+    "Reply-phase measurements overlap nested phases; they must not be added together. Phase observation is experimental and retains original timing failures.",
+    "Replacement editor construction and callbacks/painting still require timing qualification.",
+    "Production recovery remains disabled. Native inspector, desktop integration and all five complete 0.1.0 editions remain open."
+  ],
+  "next_step": "Attribute remaining history/edit callback and native preview/layout costs under the existing GUI oracle, then close any required prepared-edit ownership boundary before moving work. Keep current authorization, native erasure and production recovery gates unchanged.",
+  "spec_checks": {
+    "record": {
+      "local_path": "out/evidence/prepared-editor-spec-checks.json",
+      "sha256": "07b6446bffa1f51a7764d5fa045907eff176eca7c9f86946253581fdc3a5a366"
+    },
+    "counts": {
+      "files": 664,
+      "concepts": 343,
+      "requirements": 131,
+      "planned_tests": 61,
+      "work_units": 49
+    },
+    "schemas": 51,
+    "fixtures": 183,
+    "native_tests_executed": 0
+  }
+}

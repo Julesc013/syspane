@@ -420,6 +420,9 @@ if(BUILD_TESTING)
         add_test(NAME native.EDITOR-REPLY-LIFECYCLE COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/editor/native_reply_lifecycle.py"
             "$<TARGET_FILE:syspane_editor_window>" "${CMAKE_BINARY_DIR}/native-evidence")
         set_tests_properties(native.EDITOR-REPLY-LIFECYCLE PROPERTIES TIMEOUT 60)
+        add_test(NAME native.PREPARED-EDITOR COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/editor/native_reply_lifecycle.py"
+            "$<TARGET_FILE:syspane_editor_window>" "${CMAKE_BINARY_DIR}/native-evidence" --prepared)
+        set_tests_properties(native.PREPARED-EDITOR PROPERTIES TIMEOUT 60)
         add_test(NAME native.EDITOR-RECOVERY COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/editor/native_recovery_controls.py"
             "$<TARGET_FILE:syspane_editor_window>" "$<TARGET_FILE:syspane_editor_exit_probe>" "${CMAKE_BINARY_DIR}/native-evidence")
         set_tests_properties(native.EDITOR-RECOVERY PROPERTIES TIMEOUT 300)
@@ -640,6 +643,9 @@ if(BUILD_TESTING)
         add_test(NAME native.FRONTEND-PHASE-FAILURE COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/configuration/native_frontend_phase_failure.py"
             "$<TARGET_FILE:syspane_frontend>" "$<TARGET_FILE:syspane_frontend_fixture>" "$<TARGET_FILE:syspane_frontend_helper_fixture>" "${CMAKE_BINARY_DIR}/native-evidence")
         set_tests_properties(native.FRONTEND-PHASE-FAILURE PROPERTIES TIMEOUT 600)
+        add_test(NAME native.FRONTEND-PREPARED-EDITOR COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/configuration/native_prepared_editor.py"
+            "$<TARGET_FILE:syspane_frontend_recovery_probe>" "$<TARGET_FILE:syspane_frontend_helper_fixture>" "${CMAKE_BINARY_DIR}/native-evidence")
+        set_tests_properties(native.FRONTEND-PREPARED-EDITOR PROPERTIES TIMEOUT 600)
         add_test(NAME native.INSTALLED-RECOVERY COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/configuration/native_installed_recovery.py"
             "$<TARGET_FILE:syspane_frontend>" "$<TARGET_FILE:syspane_frontend_fixture>" "$<TARGET_FILE:syspane_frontend_helper_fixture>" "${CMAKE_BINARY_DIR}/native-evidence")
         set_tests_properties(native.INSTALLED-RECOVERY PROPERTIES TIMEOUT 600)

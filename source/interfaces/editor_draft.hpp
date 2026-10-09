@@ -111,4 +111,21 @@ private:
     bool record_prepared(std::pair<configuration::Authored,configuration::ResourceSnapshot>,std::vector<std::string>);
     std::size_t history_bytes(const std::deque<Change>&,const std::deque<Change>&)const;
 };
+
+// A validated initial state with one owner. Construction and destruction need no
+// native UI. Only EditorForm may consume it; it exposes no mutable preparation.
+class PreparedEditor {
+public:
+    PreparedEditor(configuration::Authority,configuration::Policy,configuration::Authored,std::string epoch,SettingsResources,bool large_commands=false);
+    PreparedEditor(const PreparedEditor&)=delete;
+    PreparedEditor& operator=(const PreparedEditor&)=delete;
+private:
+    friend class EditorForm;
+    EditorDraft draft_;
+    configuration::Authority authority_;
+    configuration::Policy policy_;
+    Json settings_;
+    std::set<std::string> capabilities_;
+    bool large_commands_;
+};
 }

@@ -15,6 +15,23 @@ build` before configuring or building; use `test` or `package` for those actions
 The common active-output budget is unchanged; retained `out/evidence/` archives
 are measured separately. Never use the placeholder account from the example.
 
+The [prepared editor package](../../spec/delivery/packages/w-11-prepared-editor.md)
+constructs an opaque PreparedEditor using ordinary full validation, without GTK.
+Transfer its unique owner only after construction ends. EditorForm consumes it as
+the sole initial semantic state; the traditional constructor remains synchronous.
+The installed backend's take_editor requires the exact current shared profile and
+returns empty for stale/loading/pending/closed/already-consumed state. Do not fall
+back to GTK draft construction or infer current recovery authority from preparation.
+
+After ordinary preflight/configure/build, run `ctest --preset linux-x64-gcc13
+-R '^native[.](PREPARED-EDITOR|FRONTEND-PREPARED-EDITOR)$' --output-on-failure`.
+Run all selected portable families on the three profiles and legacy PE checks,
+then native backend/maximum-input, installed recovery/editor/settings, standalone
+editor/recovery, reply lifecycle, observer-failure and image/erasure regressions.
+Use the existing phase command below and ordinary GUI qualification separately;
+current prepared construction improves latency but does not pass all fixed limits.
+The [handoff](../../spec/delivery/prepared-editor-handoff.md) records exact evidence.
+
 The [frontend phase package](../../spec/delivery/packages/w-11-frontend-phases.md)
 adds optional numeric attribution inside the existing GTK tick. After ordinary
 preflight/configure/build, run `ctest --preset linux-x64-gcc13 -R

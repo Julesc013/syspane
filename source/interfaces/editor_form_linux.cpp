@@ -39,7 +39,7 @@ void immediate_style(GtkWidget* widget,gpointer provider){
 }
 }
 struct EditorForm::Impl {
-    EditorDraft draft;c::Authority authority;c::Policy current;Json settings;std::set<std::string> capabilities;s::Topology topology;std::string display,worker;
+    std::unique_ptr<PreparedEditor> prepared;EditorDraft& draft;c::Authority authority;c::Policy current;Json settings;std::set<std::string> capabilities;s::Topology topology;std::string display,worker;
     std::vector<v::SurfaceProvider> providers;v::ImageFactory images;std::unique_ptr<v::SceneSurface> surface;std::map<std::string,model::Tick> ticks;
     Actions actions;std::thread::id thread=std::this_thread::get_id();bool closed=false,updating=false,dispatching=false,fields_dirty=false,drawing=false;std::string error;
     std::unique_ptr<platform::SceneClipboardX11> clipboard;
@@ -50,8 +50,9 @@ struct EditorForm::Impl {
     bool snap_grid=false,snap_guides=false,show_grid=false;s::Unit grid_spacing=8*s::dip;
     struct Gesture {double x,y,dx=0,dy=0,pixel_per_unit=1.0/64;bool resize=false;std::vector<s::Node> nodes;std::optional<SnapInput> input;SnapResult result{0,0,{},{}};};std::optional<Gesture> gesture;
     guint timer=0;
-    Impl(c::Authority a,c::Policy p,c::Authored value,std::string epoch,SettingsResources r,s::Topology t,std::string d,std::vector<v::SurfaceProvider> ps,std::string w,Actions callbacks,bool large_commands,v::ImageFactory factory)
-      :draft(a,p,value,std::move(epoch),r,large_commands),authority(std::move(a)),current(std::move(p)),settings(std::move(value.settings)),capabilities(std::move(r.capabilities)),topology(std::move(t)),display(std::move(d)),worker(std::move(w)),providers(std::move(ps)),images(std::move(factory)),actions(std::move(callbacks)){large_frames=large_commands;}
+    static std::unique_ptr<PreparedEditor> checked(std::unique_ptr<PreparedEditor> value){need(static_cast<bool>(value),"editor.prepared");return value;}
+    Impl(std::unique_ptr<PreparedEditor> value,s::Topology t,std::string d,std::vector<v::SurfaceProvider> ps,std::string w,Actions callbacks,v::ImageFactory factory)
+      :prepared(checked(std::move(value))),draft(prepared->draft_),authority(std::move(prepared->authority_)),current(std::move(prepared->policy_)),settings(std::move(prepared->settings_)),capabilities(std::move(prepared->capabilities_)),topology(std::move(t)),display(std::move(d)),worker(std::move(w)),providers(std::move(ps)),images(std::move(factory)),actions(std::move(callbacks)){large_frames=prepared->large_commands_;}
     void owner()const{if(thread!=std::this_thread::get_id()||dispatching)throw std::logic_error("editor.owner");}
     std::uint64_t now()const{return static_cast<std::uint64_t>(g_get_monotonic_time()/1000);}
     GtkWidget* own(GtkWidget* w){g_object_ref_sink(w);owned.push_back(w);return w;}
@@ -414,7 +415,9 @@ struct EditorForm::Impl {
     ~Impl(){if(timer)g_source_remove(timer);try{shut();}catch(...){}surface.reset();if(root)gtk_widget_destroy(root);for(auto i=owned.rbegin();i!=owned.rend();++i)g_object_unref(*i);if(model)g_object_unref(model);}
 };
 EditorForm::EditorForm(c::Authority a,c::Policy p,c::Authored value,std::string epoch,SettingsResources resources,s::Topology topology,std::string display,std::vector<v::SurfaceProvider> providers,std::string worker,Actions actions,bool large_commands,v::ImageFactory images)
- :impl_(std::make_unique<Impl>(std::move(a),std::move(p),std::move(value),std::move(epoch),std::move(resources),std::move(topology),std::move(display),std::move(providers),std::move(worker),std::move(actions),large_commands,std::move(images))){
+ :EditorForm(std::make_unique<PreparedEditor>(std::move(a),std::move(p),std::move(value),std::move(epoch),std::move(resources),large_commands),std::move(topology),std::move(display),std::move(providers),std::move(worker),std::move(actions),std::move(images)){}
+EditorForm::EditorForm(std::unique_ptr<PreparedEditor> prepared,s::Topology topology,std::string display,std::vector<v::SurfaceProvider> providers,std::string worker,Actions actions,v::ImageFactory images)
+ :impl_(std::make_unique<Impl>(std::move(prepared),std::move(topology),std::move(display),std::move(providers),std::move(worker),std::move(actions),std::move(images))){
     auto& i=*impl_;need(i.actions.request_id&&i.actions.widget_id&&i.actions.submit&&i.actions.cancel&&i.actions.reload&&i.actions.exit,"editor.actions");
     i.root=i.own(gtk_box_new(GTK_ORIENTATION_VERTICAL,4));auto* top=gtk_box_new(GTK_ORIENTATION_HORIZONTAL,4);gtk_box_pack_start(GTK_BOX(i.root),top,FALSE,FALSE,0);
     auto button=[&](GtkWidget* box,const char* id,const char* label){auto* w=i.own(gtk_button_new_with_label(label));i.buttons[id]=w;accessible(w,label,std::string("editor.")+id);g_object_set_data_full(G_OBJECT(w),"editor-action",g_strdup(id),g_free);gtk_box_pack_start(GTK_BOX(box),w,FALSE,FALSE,0);
