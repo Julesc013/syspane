@@ -92,6 +92,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Native configuration process supervisor](profile-supervisor-handoff.md) — Independent deadlines, exact child exit proof and bounded profile-controller replacement.
 - [Native profile storage and asynchronous command ownership](profile-worker-handoff.md) — One native profile thread across joined transaction workers.
 - [Original-epoch request reconciliation checkpoint](reconciliation-handoff.md) — Recover committed outcomes across controller restart without replaying mutations.
+- [Coherent native recovery admission snapshot](recovery-context-handoff.md) — Accepted saved state paired with held directory identity and current retention permission.
 - [Native editor recovery controls checkpoint](recovery-controls-handoff.md) — Verified generation binding, native recovery decisions and matching capture retirement.
 - [Generation-bound recovery draft checkpoint](recovery-draft-handoff.md) — Explicit scene recovery with current authority and verified native Apply identity.
 - [Portable recovery implementation checkpoint](recovery-handoff.md) — Record lease, render-progress and restart decisions while preserving native recovery gates.

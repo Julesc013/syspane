@@ -42,6 +42,21 @@ LinuxProfileStore::LinuxProfileStore(const ProfileLocation& location,bool create
     :impl_(std::make_unique<Impl>(location,create,std::move(capabilities),std::move(source),std::move(transition))){}
 LinuxProfileStore::~LinuxProfileStore()=default;
 c::Committed LinuxProfileStore::load()const{impl_->verify();auto value=impl_->store->load();impl_->authorize(value);return value;}
+ProfileRecoverySnapshot LinuxProfileStore::recovery_snapshot(const c::Authority& authority)const{
+    impl_->verify();ProfileRecoverySnapshot snapshot{impl_->store->load(),{}};impl_->authorize(snapshot.committed);
+    if(impl_->capabilities.count("editor.recovery")&&authority.role=="console"&&
+       !impl_->policy.denied_capabilities.count("editor.recovery")&&c::permits(authority,impl_->policy,"history","sensitive")){
+        std::optional<std::string> generation;
+        try{generation=impl_->store->generation_token();}
+        catch(const protocol::Error& error){if(std::string(error.what())!="storage.unavailable")throw;}
+        if(generation){
+            try{snapshot.recovery=ProfileRecoveryAdmission{impl_->profile->verified_recovery([&]{return impl_->permitted();}),
+                *generation,impl_->policy.revision,!impl_->policy.denied_capabilities.count("editor.recovery.erase")};}
+            catch(...){impl_->invalid=true;throw;}
+        }
+    }
+    impl_->verify();return snapshot;
+}
 std::vector<c::CommitReceipt> LinuxProfileStore::receipts()const{impl_->verify();return impl_->store->receipts();}
 std::optional<c::Committed> LinuxProfileStore::reconcile(const std::string& principal,const std::string& epoch,const std::string& request)const{
     impl_->verify();auto value=impl_->store->reconcile(principal,epoch,request);if(value)impl_->authorize(*value);return value;

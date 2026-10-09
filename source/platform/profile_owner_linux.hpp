@@ -1,5 +1,6 @@
 #pragma once
 #include "transaction.hpp"
+#include <cstdint>
 #include <functional>
 #include <memory>
 #include <optional>
@@ -13,6 +14,11 @@ struct ProfileLocation {
 struct ProfilePaths {
     std::string profile,mode,configuration,content,state;
     std::string generations,packages,recovery;
+};
+// Native observations under this owner's locks; not transferable authority.
+struct ProfileRecoveryDirectory {
+    std::string profile,path;
+    std::uint64_t uid,state_device,state_inode,recovery_device,recovery_inode;
 };
 // Pure selection; returned strings are not filesystem or policy authority.
 ProfilePaths profile_paths(const ProfileLocation&);
@@ -30,6 +36,7 @@ public:
     LinuxProfileOwner(const LinuxProfileOwner&)=delete;
     LinuxProfileOwner& operator=(const LinuxProfileOwner&)=delete;
     ProfilePaths verified_paths(const Guard&)const;
+    ProfileRecoveryDirectory verified_recovery(const Guard&)const;
 private:
     struct Impl;std::unique_ptr<Impl> impl_;
 };

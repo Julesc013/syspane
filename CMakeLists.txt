@@ -619,6 +619,11 @@ if(BUILD_TESTING)
         add_test(NAME native.PROFILE-WORKER COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/configuration/native_profile_worker.py"
             "$<TARGET_FILE:syspane_profile_worker_probe>" "$<TARGET_FILE:syspane_profile_startup_probe>" "${CMAKE_BINARY_DIR}/native-evidence")
         set_tests_properties(native.PROFILE-WORKER PROPERTIES TIMEOUT 120)
+        add_executable(syspane_recovery_context_probe tests/configuration/recovery_context_probe.cpp)
+        target_link_libraries(syspane_recovery_context_probe PRIVATE syspane_profile_worker)
+        add_test(NAME native.RECOVERY-CONTEXT COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/configuration/native_recovery_context.py"
+            "$<TARGET_FILE:syspane_recovery_context_probe>" "${CMAKE_BINARY_DIR}/native-evidence")
+        set_tests_properties(native.RECOVERY-CONTEXT PROPERTIES TIMEOUT 180)
         add_executable(syspane_profile_startup_probe tests/configuration/profile_startup_probe.cpp)
         target_link_libraries(syspane_profile_startup_probe PRIVATE syspane_profile_store)
         add_test(NAME native.PROFILE-STARTUP COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/configuration/native_profile_startup.py"
@@ -893,6 +898,7 @@ list(APPEND component_targets syspane_frontend_runtime syspane_frontend syspane_
 list(APPEND component_targets syspane_private_text_probe)
 list(APPEND component_targets syspane_editor_helper_probe)
 list(APPEND component_targets syspane_editor_helpers syspane_editor_helper_worker_probe)
+list(APPEND component_targets syspane_recovery_context_probe)
 list(APPEND component_targets syspane_editor_refresh_probe)
 list(APPEND component_targets syspane_content_reader syspane_content_probe)
 list(APPEND component_targets syspane_profile_projection syspane_profile_projection_tests syspane_profile_projection_probe syspane_async_commands syspane_command_session_tests syspane_command_probe)

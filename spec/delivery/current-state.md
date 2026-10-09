@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-09T00:00:18.819470+00:00", "scope": "Installed editor composition; recovery authority, inspector, telemetry, desktop integration and all release editions remain open"}
+updated: {"by": "codex", "at": "2026-10-09T00:22:39.860865+00:00", "scope": "Coherent native recovery snapshot; authenticated transfer, installed recovery and all five release editions remain open"}
 ---
 
 # Current state and next admitted boundary
@@ -21,6 +21,13 @@ Shared build tooling now lives in `source/build/`. Machine bindings and raw
 recordings are local ignored `out/` content; the retired root is absent from the
 tracked tree. See `docs/developers/build.md` in the repository for checkout
 setup and the [repository contract](../foundation/repository.md) for ownership.
+
+The [native recovery snapshot](recovery-context-handoff.md) now pairs accepted
+saved state with the exact generation, held directory identities and current
+retention/erase permission in one existing worker call. Native cases and owner/
+startup/worker/controller regressions pass. Bind that coherent state to an
+authenticated profile/session/epoch transfer and helper admission next; installed
+recovery and all five complete release editions remain open.
 
 The [installed native scene editor](installed-editor-handoff.md) now connects real
 frontend navigation and authoring to authenticated persistence and the existing
@@ -836,17 +843,18 @@ release-identity decisions remain open.
 
 ## Next work
 
-Continue from the [installed settings handoff](installed-settings-handoff.md).
-Connect the existing editor and inspector to this actual frontend; extend verified
-installation closure to the image and recovery helpers before launching them.
-Bind native telemetry, presentation activation/visibility and independent desktop
-escape/recovery to the same product owners. Add installed recovery/draft context,
-import catalogs and persistence layers. Preserve original request reconciliation,
-private-state erasure and the current source-bound native oracles. Protected-policy
-deployment, representative accessibility/performance, historical/native target labs
-and every complete edition remain required. The private-text lifetime checkpoint above resolves the reproduced selection-clipboard
-shutdown critical; earlier diagnostic evidence remains preserved. Full native
-accessibility and lifecycle qualification still require their own evidence.
+Continue from the [recovery snapshot handoff](recovery-context-handoff.md) and the
+[installed editor handoff](installed-editor-handoff.md). Close authenticated transfer
+of coherent profile/recovery state and bind it to exact peer, epoch, profile and
+editor session. Revalidate held native directory identity before admitting helpers,
+preserve current-policy publication guards and original-request reconciliation,
+and address synchronous recovery validation before whole-UI latency qualification.
+Connect the native inspector, actual telemetry, presentation activation/visibility
+and independent desktop escape/recovery to the same installed product owners.
+Complete import catalogs, persistence layers, accessibility/performance, lifecycle
+and historical/native target qualification. All five full release editions remain
+required. The private-text lifetime checkpoint resolves the reproduced clipboard
+shutdown critical; earlier diagnostic evidence remains preserved.
 
 Start with the [campaign coverage audit](campaign-coverage.md). W-03 now has a
 [read-only Windows observer](windows-host-inventory-handoff.md): native Explorer

@@ -35,6 +35,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Native configuration process supervision](w-08-profile-supervisor.md) — Own controller startup, absolute watches, exact exit proof and bounded replacement.
 - [Thread-bound profile storage for asynchronous commands](w-08-profile-worker.md) — Retain native profile ownership across joined command workers.
 - [Committed request reconciliation across producer epochs](w-08-reconciliation.md) — Recover durable outcomes through authenticated read-only IPC without resubmitting mutations.
+- [Coherent native recovery admission snapshot](w-08-recovery-context.md) — Pair accepted documents with verified profile-directory identity and current retention permission.
 - [Durable pinned resource generations](w-08-resource-generations.md) — Bind command identity and generation recovery to the exact prepared content closure.
 - [Frontend runtime directory ownership](w-08-runtime-directory.md) — Give the native frontend a bounded private runtime root with explicit, identity-checked retirement.
 - [Independent transaction deadlines and controller recovery](w-08-supervised-transactions.md) — Bound uncooperative transaction work without killing threads or replaying uncertain mutations.

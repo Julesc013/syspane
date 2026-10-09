@@ -34,6 +34,10 @@ authenticated save/reopen. The development payload includes all three verified h
 Draft recovery is visibly unavailable until its authority contract closes. Recovery,
 whole-UI responsiveness, native inspector, telemetry and desktop hosting remain open.
 
+The [native recovery snapshot](spec/delivery/recovery-context-handoff.md) now pairs
+saved state with its verified generation, directory identity and current retention
+permission. Authenticated transfer to the installed editor remains the next boundary.
+
 The [runtime directory checkpoint](spec/delivery/runtime-directory-handoff.md)
 adds private frontend runtime allocation and explicit retirement after supervisor
 release. Native checks preserve replacements and orphaned files and observe actual

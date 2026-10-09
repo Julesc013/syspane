@@ -1,6 +1,16 @@
 #pragma once
 #include "profile_owner_linux.hpp"
 namespace syspane::platform {
+struct ProfileRecoveryAdmission {
+    ProfileRecoveryDirectory directory;
+    std::string generation;
+    std::uint64_t policy_revision;
+    bool erase;
+};
+struct ProfileRecoverySnapshot {
+    configuration::Committed committed;
+    std::optional<ProfileRecoveryAdmission> recovery;
+};
 // Trusted controller worker composition. Returned authored data is not an external projection.
 class LinuxProfileStore final:public configuration::GenerationStore {
 public:
@@ -11,6 +21,8 @@ public:
     LinuxProfileStore(const LinuxProfileStore&)=delete;
     LinuxProfileStore& operator=(const LinuxProfileStore&)=delete;
     configuration::Committed load()const override;
+    // Coherent native observation; external disclosure/session binding is separate.
+    ProfileRecoverySnapshot recovery_snapshot(const configuration::Authority&)const;
     std::vector<configuration::CommitReceipt> receipts()const override;
     std::optional<configuration::Committed> reconcile(const std::string&,const std::string&,const std::string&)const override;
     configuration::Publication publish(const configuration::Committed&,const std::function<void()>&)override;

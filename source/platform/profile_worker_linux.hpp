@@ -13,6 +13,7 @@ public:
     LinuxProfileWorker(const LinuxProfileWorker&)=delete;
     LinuxProfileWorker& operator=(const LinuxProfileWorker&)=delete;
     configuration::Committed load()const override;
+    ProfileRecoverySnapshot recovery_snapshot(const configuration::Authority&)const;
     std::vector<configuration::CommitReceipt> receipts()const override;
     std::optional<configuration::Committed> reconcile(const std::string&,const std::string&,const std::string&)const override;
     configuration::Publication publish(const configuration::Committed&,const std::function<void()>&)override;

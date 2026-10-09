@@ -16,6 +16,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [profile-startup.json](profile-startup.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [profile-supervisor.json](profile-supervisor.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [profile-worker.json](profile-worker.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
+- [recovery-context.json](recovery-context.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [recovery-controls.json](recovery-controls.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [recovery-draft.json](recovery-draft.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [recovery-queue.json](recovery-queue.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.

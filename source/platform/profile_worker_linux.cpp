@@ -64,6 +64,9 @@ LinuxProfileWorker::LinuxProfileWorker(ProfileLocation location,bool create,std:
     :impl_(std::make_unique<Impl>(std::move(location),create,std::move(caps),std::move(source),std::move(transition))){}
 LinuxProfileWorker::~LinuxProfileWorker()=default;
 c::Committed LinuxProfileWorker::load()const{return impl_->call(true,[](auto& s){return s.load();});}
+ProfileRecoverySnapshot LinuxProfileWorker::recovery_snapshot(const c::Authority& authority)const{
+    return impl_->call(true,[&](auto& s){return s.recovery_snapshot(authority);});
+}
 std::vector<c::CommitReceipt> LinuxProfileWorker::receipts()const{return impl_->call(true,[](auto& s){return s.receipts();});}
 std::optional<c::Committed> LinuxProfileWorker::reconcile(const std::string& principal,const std::string& epoch,const std::string& request)const{
     return impl_->call(true,[&](auto& s){return s.reconcile(principal,epoch,request);});

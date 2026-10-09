@@ -223,4 +223,10 @@ struct LinuxProfileOwner::Impl {
 LinuxProfileOwner::LinuxProfileOwner(const ProfileLocation& location,bool create,const Guard& guard,Transition transition,InitialProfile initial):impl_(std::make_unique<Impl>(location,create,guard,transition,initial)){}
 LinuxProfileOwner::~LinuxProfileOwner()=default;
 ProfilePaths LinuxProfileOwner::verified_paths(const Guard& guard)const{impl_->verify(guard);return impl_->paths;}
+ProfileRecoveryDirectory LinuxProfileOwner::verified_recovery(const Guard& guard)const{
+    impl_->verify(guard);const auto& state=impl_->roles[2];
+    return {impl_->paths.profile,impl_->paths.recovery,static_cast<std::uint64_t>(state.directory_info.st_uid),
+        static_cast<std::uint64_t>(state.directory_info.st_dev),static_cast<std::uint64_t>(state.directory_info.st_ino),
+        static_cast<std::uint64_t>(state.child_info.st_dev),static_cast<std::uint64_t>(state.child_info.st_ino)};
+}
 }

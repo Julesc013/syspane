@@ -489,7 +489,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "57f42397508fc85c45e67cdc7b993dec1cdab3c09f4e0bc70e47941f7711df5a"
+      "sha256": "aa8c49d47ab780e15f5838cffe34e6f37919bc7eade21a6aa70245355421d792"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -1600,6 +1600,18 @@
         "SP-ACCEPTANCE-TRACES"
       ],
       "sha256": "df5a351611a330da28666ecff1279c820f4ce1997eecee1dbeca8ed0ab58cdc5"
+    },
+    {
+      "id": "SP-W08-RECOVERY-CONTEXT",
+      "path": "delivery/packages/w-08-recovery-context.md",
+      "title": "Coherent native recovery admission snapshot",
+      "description": "Pair accepted documents with verified profile-directory identity and current retention permission.",
+      "requires": [
+        "SP-W08-PROFILE-WORKER",
+        "SP-W08-PROFILE-OWNER",
+        "SP-W10-RECOVERY-DRAFT"
+      ],
+      "sha256": "49f13c0dccff593024053a16b48451e4691087a94ad2c49c65395eebbc27cd43"
     },
     {
       "id": "SP-W08-RESOURCES",
@@ -2720,6 +2732,16 @@
         "SP-COMMAND-SESSIONS-HANDOFF"
       ],
       "sha256": "eedbb0b709d27f80314fca05fccd6410ec51ab45cda54498df2621f46c17b3eb"
+    },
+    {
+      "id": "SP-RECOVERY-CONTEXT-HANDOFF",
+      "path": "delivery/recovery-context-handoff.md",
+      "title": "Coherent native recovery admission snapshot",
+      "description": "Accepted saved state paired with held directory identity and current retention permission.",
+      "requires": [
+        "SP-W08-RECOVERY-CONTEXT"
+      ],
+      "sha256": "798c0b1e6d7e4e987f0308fd8daa0dbd197a810f62ca181c9d140698cd056630"
     },
     {
       "id": "SP-RECOVERY-CONTROLS-HANDOFF",

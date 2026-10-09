@@ -15,6 +15,27 @@ build` before configuring or building; use `test` or `package` for those actions
 The common active-output budget is unchanged; retained `out/evidence/` archives
 are measured separately. Never use the placeholder account from the example.
 
+The [native recovery snapshot](../../spec/delivery/packages/w-08-recovery-context.md)
+is available through LinuxProfileStore::recovery_snapshot(authority) and the blocking
+LinuxProfileWorker facade. Call it from a trusted controller worker. Its committed
+documents and optional admission describe one accepted generation; resources retain
+their shared immutable allocations. Admission includes verified native directory
+identities and current retention/erase permission. It is absent for recovery denial
+or damaged-selector fallback. Policy/path changes invalidate the profile owner.
+
+After the ordinary budget/configure/build checks, run
+`ctest --preset linux-x64-gcc13 -R '^native[.](RECOVERY-CONTEXT|PROFILE-OWNER|PROFILE-STARTUP|PROFILE-WORKER|PROFILE-CONTROLLER)$' --output-on-failure`
+and the component graph checks on all three development profiles. The new observer
+requires a non-root native ext4 laboratory and independently checks selector bytes,
+directory identities, shared resources and actual process exit.
+
+The API returns trusted internal state, like load(). Do not disclose it directly,
+infer a client session from it or enable installed recovery from its paths alone.
+The next transfer contract must bind the coherent state to authenticated peer/epoch/
+profile/session and independently revalidate directories before helper operations.
+Existing editing checks, revocation guards and recovery validation latency remain
+separate requirements.
+
 The [installed scene editor](../../spec/delivery/packages/w-11-installed-editor.md)
 uses the actual frontend entry point and the existing supervisor/client workers.
 DevelopmentFrontend installs bin/syspane, libexec/syspane/syspane-configuration-host,
