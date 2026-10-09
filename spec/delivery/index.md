@@ -32,6 +32,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Independent recent-failure metadata checkpoint](failure-metadata-handoff.md) — Bind bounded native fault records, private file handling and policy-gated diagnostic projection to current evidence.
 - [Native editor refresh fairness checkpoint](focus-idle-handoff.md) — Observed GTK/ATK focus starvation, scoped style transitions and unchanged native acceptance.
 - [Foundation implementation handoff](foundation-handoff.md) — Resume the admitted campaign from tested model builds and local smoke packages.
+- [Frontend recovery authority and accepted-request identity](frontend-recovery-handoff.md) — The actual frontend backend now supplies scoped native admission and exact accepted-draft metadata.
 - [Standalone native GJS measurement-clock checkpoint](gjs-clock-handoff.md) — Exact native clock strings, authenticated peer lifetime and deterministic resource cleanup before live desktop freshness.
 - [Native GJS measured network consumer checkpoint](gjs-network-view-handoff.md) — Shared measured model, policy and lease semantics inside the native GJS runtime before operational shell delivery.
 - [Asynchronous GNOME clock and visible age checkpoint](gnome-clock-handoff.md) — Native authenticated clock ownership, independently observed public age and expiry, and bounded startup/exit cleanup.

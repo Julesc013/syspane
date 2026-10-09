@@ -3744,6 +3744,31 @@
       "profiles": [
         "linux-x64-gcc13"
       ]
+    },
+    {
+      "id": "frontend-recovery-probe",
+      "target": "syspane_frontend_recovery_probe",
+      "type": "EXECUTABLE",
+      "source_owner": "tests/configuration/",
+      "public_interfaces": [],
+      "private_interfaces": [],
+      "sources": [
+        "tests/configuration/frontend_recovery_probe.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_frontend_runtime"
+      ],
+      "target_requirements": [
+        "cxx17",
+        "native_local_ipc"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
     }
   ]
 }

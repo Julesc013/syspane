@@ -40,8 +40,13 @@ permission. The [authenticated transfer](spec/delivery/recovery-transfer-handoff
 binds those observations to one saved profile and editor session. The
 [native helper admission](spec/delivery/recovery-admission-handoff.md) independently
 holds directory identities and checks current session authority through helper work.
-Installed recovery still needs frontend session composition, exact applied-draft
+Installed recovery still needs editor-form session composition, exact applied-draft
 retirement and responsiveness qualification.
+
+The [frontend recovery backend](spec/delivery/frontend-recovery-handoff.md)
+now downloads scoped recovery context and binds native helpers to the live session.
+Accepted requests preserve only their exact captured-draft metadata for conditional
+retirement. Installed recovery controls and full responsiveness qualification remain open.
 
 The [recovery preparation worker](spec/delivery/recovery-preparation-handoff.md)
 now validates detached editor recovery inputs on the existing native worker. Restore

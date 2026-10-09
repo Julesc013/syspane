@@ -4,6 +4,8 @@
 #include "profile_projection.hpp"
 #include "settings_draft.hpp"
 #include "image_job.hpp"
+#include "editor_recovery.hpp"
+#include "recovery_queue_linux.hpp"
 #include <memory>
 
 namespace syspane::application {
@@ -12,6 +14,9 @@ struct FrontendProfile {
     interfaces::SettingsResources resources;
     std::string epoch;
     std::uint64_t serial=0;
+    // Accepted original-request metadata, not permission to delete. A fresh
+    // admitted load must match this digest before conditional retirement.
+    std::optional<std::string> recovery_retirement;
 };
 struct FrontendReply {
     std::uint64_t ticket=0;
@@ -36,7 +41,10 @@ public:
     FrontendView take();
     std::string request_id();
     rendering::ImageFactory images()const;
-    void submit(const interfaces::EditRequest&);
+    std::shared_ptr<const platform::RecoveryFactory> recovery()const;
+    std::shared_ptr<const interfaces::RecoveryPreparationFactory> preparations()const;
+    void submit(const interfaces::EditRequest&,std::optional<std::string> captured_digest={});
+    void acknowledge_retirement(std::uint64_t profile_serial);
     void cancel(const interfaces::EditRequest&);
     void reload();
     void retrieve();

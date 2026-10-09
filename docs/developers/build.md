@@ -15,6 +15,29 @@ build` before configuring or building; use `test` or `package` for those actions
 The common active-output budget is unchanged; retained `out/evidence/` archives
 are measured separately. Never use the placeholder account from the example.
 
+The [frontend recovery backend](../../spec/delivery/packages/w-11-frontend-recovery.md)
+now negotiates profile 0.2 and supplies current session authority to its existing
+native helper worker. Use recovery()/preparations() from the GUI owner; their factory
+parameters do not grant authority. Each reload creates a fresh session and withdraws
+old tasks. Null context keeps ordinary settings and editing available.
+
+Pass submit() an optional digest only for the editor's completed durable capture.
+The client worker matches it to the actual scene commit before dispatch. After an
+accepted result/reconciliation, reload for a current FrontendProfile. Its optional
+recovery_retirement is metadata: load through fresh admission, compare the exact
+digest and conditionally retire only a match. Preserve a replacement or denial.
+After the decision, acknowledge_retirement(profile.serial); a stale or missing
+receipt is refused. The installed EditorForm still needs this consumer connection
+and complete scheduling/latency qualification before its recovery UI is enabled.
+
+After ordinary preflight/configure/build, run `ctest --preset linux-x64-gcc13
+-R '^native[.](FRONTEND-RECOVERY|INSTALLED-SETTINGS|INSTALLED-EDITOR|RECOVERY-ADMISSION|EDITOR-HELPER-WORKER|RECOVERY-PREPARATION)$'
+--output-on-failure`. Run/archive these families separately under the unchanged
+quota. The new family stages one relocated five-file bundle plus ZIP; forecast twice
+the combined artifact sizes and 16 MiB of fixtures. Use the existing marker-verified
+short runtime root; profile state roots admit only their specified three entries.
+Run both composition checks on all three profiles. Preserve original failed attempts.
+
 The [recovery preparation package](../../spec/delivery/packages/w-11-recovery-preparation.md)
 adds EditorDraft::recovery_capture_work/recovery_restore_work and opaque prepared
 results. Run RecoveryWork::run off the GUI, then consume only through the original
@@ -54,9 +77,9 @@ worker outside shared locks, and its immutable context must match the requested 
 The parent checks current authority through each operation and result delivery; the
 sealed child independently checks expected directory identities before creating its
 writer file. Existing explicit path experiments keep their original constructor.
-The installed frontend still has recovery disabled until its live callback and
-post-commit retirement compose with original-request reconciliation and consumer
-validation no longer stalls GTK.
+The backend now supplies that live callback. Installed recovery remains disabled
+until the form connects capture, submission and post-commit retirement to the backend
+and complete worker/GUI scheduling is qualified.
 
 After the ordinary configure/build and budget checks, run
 `ctest --preset linux-x64-gcc13 -R '^native[.](RECOVERY-ADMISSION|EDITOR-HELPER-WORKER|RECOVERY-QUEUE|RECOVERY-STORE|PROFILE-OWNER|RECOVERY-CONTEXT|RECOVERY-TRANSFER)$' --output-on-failure`.
@@ -134,8 +157,8 @@ fields, modal editor, gesture or pending command. Navigation requests a new cohe
 profile; Cancel session explicitly discards and returns to Settings. GDK topology
 uses session monitor identities. The outer form scrolls within the initial work area,
 leaving application navigation and Quit accessible. Recovery remains visibly unavailable:
-the installed frontend still uses the 0.1 profile transfer. Its native helper owner
-must admit the bound 0.2 recovery observations before that UI can enable recovery.
+the backend now uses scoped 0.2 transfer and live native admission, while the installed
+form still needs capture/submission/retirement composition and scheduling qualification.
 Do not infer authority from a revision or XDG path. Missing telemetry is not synthetic data.
 
 The [editor helper worker](../../spec/delivery/packages/w-11-editor-helper-worker.md)

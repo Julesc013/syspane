@@ -489,7 +489,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "6928e756799070dfd22aa30da08531921dfeb43f061d68265cea20361b13d6cf"
+      "sha256": "b7a79ad5d5e95d103764feb00a674d92e42982011a84f2fda62ce809a2ec4a7d"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -619,6 +619,16 @@
         "SP-W26-PACKAGE"
       ],
       "sha256": "d35a30b07a9fef001ce7c9bd340bb02565caf429f07b3aea495391e18f082909"
+    },
+    {
+      "id": "SP-FRONTEND-RECOVERY-HANDOFF",
+      "path": "delivery/frontend-recovery-handoff.md",
+      "title": "Frontend recovery authority and accepted-request identity",
+      "description": "The actual frontend backend now supplies scoped native admission and exact accepted-draft metadata.",
+      "requires": [
+        "SP-W11-FRONTEND-RECOVERY"
+      ],
+      "sha256": "150b841f0251d4de8c2dfd6935d0bebc85235346a7300028cd6bd8671d11551b"
     },
     {
       "id": "SP-GJS-CLOCK-HANDOFF",
@@ -2208,6 +2218,18 @@
         "SP-W10-RECOVERY-QUEUE"
       ],
       "sha256": "7e92376c6cb9235d11448028bc0d536e622c0d911996b53df80cffad4b2ce1ef"
+    },
+    {
+      "id": "SP-W11-FRONTEND-RECOVERY",
+      "path": "delivery/packages/w-11-frontend-recovery.md",
+      "title": "Frontend recovery authority and accepted-request identity",
+      "description": "Connect the actual frontend backend to scoped recovery admission and preserve exact accepted-draft metadata.",
+      "requires": [
+        "SP-W11-RECOVERY-PREPARATION",
+        "SP-W11-RECOVERY-ADMISSION",
+        "SP-W11-INSTALLED-EDITOR"
+      ],
+      "sha256": "8011d5134f29059f80501dc345d903a7ddc524f817b2fcd76aeea0280787ac33"
     },
     {
       "id": "SP-W11-INSTALLED-EDITOR",

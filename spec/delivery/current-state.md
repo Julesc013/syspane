@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-09T02:26:59.812423+00:00", "scope": "Asynchronous recovery preparation; installed composition, scheduling and complete release editions remain open"}
+updated: {"by": "codex", "at": "2026-10-09T02:55:28.137718+00:00", "scope": "Frontend recovery authority and accepted-request identity; installed controls and full release remain open"}
 ---
 
 # Current state and next admitted boundary
@@ -22,18 +22,24 @@ recordings are local ignored `out/` content; the retired root is absent from the
 tracked tree. See `docs/developers/build.md` in the repository for checkout
 setup and the [repository contract](../foundation/repository.md) for ownership.
 
+The [frontend recovery backend](frontend-recovery-handoff.md) now uses authenticated
+profile 0.2, current native admission and exact accepted-request retirement metadata.
+Connect the installed EditorForm's capture/submission and receipt consumption next,
+then qualify complete worker/supervisor scheduling and maximum-size GUI operations.
+Recovery controls remain disabled; all five complete editions remain unfinished.
+
 The [asynchronous recovery preparation](recovery-preparation-handoff.md) now moves
 capture and restoration validation to the existing native worker, with current-draft
-proofs, coalescing and cancellation. Compose the installed 0.2 download/live authority,
-exact applied-draft retirement and complete loop scheduling next. Preserve the
+proofs, coalescing and cancellation. The backend above now provides the scoped download
+and live authority; connect installed form consumption and qualify loop scheduling next. Preserve the
 Windows GCC resource-limit timeout and installed AT-SPI focus timeout; their causes remain open.
 All five full editions remain unfinished.
 
 The [native recovery helper admission](recovery-admission-handoff.md) now binds
 transferred observations to current host session authority and independently held
 state/recovery directories. The sealed child also refuses substituted nodes before
-creating its writer file. Compose the installed frontend callback, exact applied-draft
-retirement and asynchronous consumer validation next. All five full release editions
+creating its writer file. The backend callback and asynchronous preparation now exist;
+installed form consumption and complete scheduling remain open. All five full release editions
 remain open.
 
 The [authenticated recovery transfer](recovery-transfer-handoff.md) now carries

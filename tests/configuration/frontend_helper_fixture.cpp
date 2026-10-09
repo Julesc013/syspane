@@ -11,6 +11,9 @@ int main(int argc,char** argv){
         c::Policy policy;policy.available=read("policy")=="allow";policy.revision=7;
         if(read("reconcile")=="deny")policy.denied_capabilities.insert("result.reconcile");
         for(const char* channel:{"inspector","accessibility"})policy.disclosure[{"console",channel}]={"public","operational","sensitive"};
+        const auto history=read("history");
+        if(history=="allow"||history=="erase-denied")policy.disclosure[{"console","history"}]={"public","operational","sensitive"};
+        if(history=="erase-denied")policy.denied_capabilities.insert("editor.recovery.erase");
         return policy;
     },[](const std::string& phase){
         if(phase!=read("phase"))return;
