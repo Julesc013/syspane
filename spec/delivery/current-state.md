@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-09T05:28:54.384266+00:00", "scope": "Current draft eligibility, immutable preview resources and fixed GUI evidence"}
+updated: {"by": "codex", "at": "2026-10-09T06:03:51.878799+00:00", "scope": "Frontend phase evidence and validated accepted-reply closure"}
 ---
 
 # Current state and next admitted boundary
@@ -22,13 +22,12 @@ recordings are local ignored `out/` content; the retired root is absent from the
 tracked tree. See `docs/developers/build.md` in the repository for checkout
 setup and the [repository contract](../foundation/repository.md) for ownership.
 
-The [draft admission checkpoint](draft-admission-handoff.md) now avoids repeated
-structural eligibility validation and redundant preview resource reconstruction.
-All 966 selected portable checks, 83 recovery cases and native renderer/erasure,
-clipboard and theme-history checks pass. Four fixed GTK cases still exceed their
-timing limits; production recovery stays disabled. Next repair remaining
-first-admission, history/edit and preview/layout costs under unchanged limits.
-W-11 and all five complete editions remain open.
+The [frontend phase checkpoint](frontend-phases-handoff.md) attributes remaining
+GTK stalls and closes accepted replacement replies without rebuilding an obsolete
+preview. All 323 selected Linux portable checks, both Windows component checks and
+new/affected native families pass. Fixed GUI timing still fails; production recovery
+stays disabled. Next close prepared-editor ownership and remaining history/edit
+callback costs. W-11 and all five complete editions remain open.
 
 The [frontend recovery backend](frontend-recovery-handoff.md) now uses authenticated
 profile 0.2, current native admission and exact accepted-request retirement metadata.

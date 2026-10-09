@@ -19,6 +19,18 @@ struct Window {
     bool experimental_recovery=false,recovery_enabled=false;std::optional<std::uint64_t> retirement_serial;
     std::string saved_notice;
     FrontendTimingObserver timing;gint64 previous_tick=0;
+    FrontendPhaseObserver phases;std::uint64_t tick_sequence=0;
+    void observe_phase(FrontendPhase phase,gint64 begin,bool completed){
+        bool accepted=false;
+        try{accepted=phases({tick_sequence,phase,static_cast<std::uint64_t>(g_get_monotonic_time()-begin),completed});}catch(...){}
+        if(!accepted){phases={};throw protocol::Error("frontend.phase_observer");}
+    }
+    template<class F>void measure(FrontendPhase phase,F action){
+        if(!phases){action();return;}
+        const auto begin=g_get_monotonic_time();
+        try{action();}catch(...){if(phases)observe_phase(phase,begin,false);throw;}
+        if(phases)observe_phase(phase,begin,true);
+    }
     scene::Topology topology(){
         scene::Topology out;const auto count=gdk_display_get_n_monitors(display);need(count>0&&count<=16,"frontend.topology");
         auto* primary=gdk_display_get_primary_monitor(display);if(!primary)primary=gdk_display_get_monitor(display,0);
@@ -41,7 +53,8 @@ struct Window {
         }
         need(!out.fallback.empty(),"frontend.topology");topology_dirty=false;return out;
     }
-    explicit Window(LinuxFrontendBackend& value,bool recover,FrontendTimingObserver observer):backend(value),experimental_recovery(recover),timing(std::move(observer)){
+    explicit Window(LinuxFrontendBackend& value,bool recover,FrontendTimingObserver observer,FrontendPhaseObserver phase_observer):backend(value),experimental_recovery(recover),timing(std::move(observer)),phases(std::move(phase_observer)){
+        need(!phases||static_cast<bool>(timing),"frontend.phase_timing");
         display=gdk_display_get_default();need(display!=nullptr,"frontend.display");
         for(const char* event:{"monitor-added","monitor-removed"})g_signal_connect(display,event,G_CALLBACK(+[](GdkDisplay*,GdkMonitor*,gpointer p){static_cast<Window*>(p)->topology_dirty=true;}),this);
         window=gtk_window_new(GTK_WINDOW_TOPLEVEL);gtk_window_set_title(GTK_WINDOW(window),"SysPane Settings");
@@ -96,24 +109,25 @@ struct Window {
             actions.submit_recovery=[this](const auto& request,auto digest){saved_notice.clear();retirement_serial.reset();backend.submit(request,std::move(digest));};
             actions.reload=[this]{saved_notice.clear();retirement_serial.reset();backend.reload();};actions.exit=[this]{exit_requested=true;};
             auto resources=snapshot.resources;if(recovery_enabled)resources.capabilities.insert("editor.recovery");
-            editor=std::make_unique<interfaces::EditorForm>(authority,snapshot.view.policy,snapshot.view.documents,snapshot.epoch,std::move(resources),std::move(current),selected,std::vector<rendering::SurfaceProvider>{},"",std::move(actions),true,backend.images());
-            if(recovery_enabled){const auto& v=*snapshot.view.recovery;const auto& a=v.admission;
+            measure(FrontendPhase::editor,[&]{editor=std::make_unique<interfaces::EditorForm>(authority,snapshot.view.policy,snapshot.view.documents,snapshot.epoch,std::move(resources),std::move(current),selected,std::vector<rendering::SurfaceProvider>{},"",std::move(actions),true,backend.images());});
+            if(recovery_enabled)measure(FrontendPhase::recovery,[&]{const auto& v=*snapshot.view.recovery;const auto& a=v.admission;
                 editor->recovery(backend.recovery(),a.directory.path,{v.editor_session,a.profile,a.generation,a.policy_revision,a.erase},backend.preparations(),snapshot.recovery_retirement);
                 if(snapshot.recovery_retirement)retirement_serial=snapshot.serial;
-            }
-            gtk_box_pack_start(GTK_BOX(forms),editor->widget(),TRUE,TRUE,0);gtk_widget_show_all(editor->widget());
+            });
+            measure(FrontendPhase::attach,[&]{gtk_box_pack_start(GTK_BOX(forms),editor->widget(),TRUE,TRUE,0);gtk_widget_show_all(editor->widget());});
         }else{
             interfaces::SettingsForm::Actions actions;
             actions.request_id=[this]{return backend.request_id();};actions.submit=[this](const auto& request){backend.submit(request);};
             actions.cancel=[this](const auto& request){backend.cancel(request);};actions.reload=[this]{backend.reload();};
-            form=std::make_unique<interfaces::SettingsForm>(authority,snapshot.view.policy,snapshot.view.documents,snapshot.epoch,std::move(actions),interfaces::SettingsForm::Translator{},snapshot.resources,true);
-            gtk_box_pack_start(GTK_BOX(forms),form->widget(),TRUE,TRUE,0);gtk_widget_show_all(form->widget());
+            measure(FrontendPhase::settings,[&]{form=std::make_unique<interfaces::SettingsForm>(authority,snapshot.view.policy,snapshot.view.documents,snapshot.epoch,std::move(actions),interfaces::SettingsForm::Translator{},snapshot.resources,true);});
+            measure(FrontendPhase::attach,[&]{gtk_box_pack_start(GTK_BOX(forms),form->widget(),TRUE,TRUE,0);gtk_widget_show_all(form->widget());});
         }
         gtk_widget_set_visible(recovery_notice,editor_mode&&!recovery_enabled);gtk_window_set_title(GTK_WINDOW(window),editor_mode?"SysPane Scene Editor":"SysPane Settings");
         shown=snapshot.serial;erased=false;transition=false;
     }
     gboolean observed_tick()noexcept{
         if(!timing)return tick();
+        if(phases&&++tick_sequence==0){phases={};result=2;stop();}
         const auto begin=g_get_monotonic_time();
         const auto delay=previous_tick?std::max<gint64>(0,begin-previous_tick-20000):0;
         const auto keep=tick();const auto end=g_get_monotonic_time();
@@ -123,27 +137,35 @@ struct Window {
     }
     gboolean tick()noexcept{
         try{
-            auto state=backend.take();if(state.failed)result=2;
-            if(state.withdrawal!=withdrawal){withdrawal=state.withdrawal;saved_notice.clear();retirement_serial.reset();if(form)form->policy({});if(editor)editor->policy({});erased=true;}
+            FrontendView state;measure(FrontendPhase::take,[&]{state=backend.take();});if(state.failed)result=2;
+            if(state.withdrawal!=withdrawal)measure(FrontendPhase::withdrawal,[&]{withdrawal=state.withdrawal;saved_notice.clear();retirement_serial.reset();if(form)form->policy({});if(editor)editor->policy({});erased=true;});
             if(closing){if(state.stopped&&(!editor||editor->stopped())){gtk_main_quit();return G_SOURCE_REMOVE;}return G_SOURCE_CONTINUE;}
             const auto notice=state.status+(saved_notice.empty()?"":" "+saved_notice);
             gtk_label_set_text(GTK_LABEL(status),editor_unavailable?"Scene editor unavailable for the current displays.":notice.c_str());
             gtk_button_set_label(GTK_BUTTON(retry),state.pending?"Retrieve original request":"Reconnect");gtk_widget_set_sensitive(retry,state.pending||!state.profile);
             if(state.reply){const auto& r=*state.reply;
-                if(form){if(r.query.empty())form->complete(r.ticket,r.body);else form->reconciled(r.ticket,r.query,r.epoch,r.body);}
-                if(editor){if(r.query.empty())editor->complete(r.ticket,r.body);else editor->reconciled(r.ticket,r.query,r.epoch,r.body);}
                 const auto& result=r.query.empty()?r.body:r.body.at("result");
-                if(editor&&recovery_enabled&&result.at("outcome")=="accepted"){
+                const bool replacing=editor&&recovery_enabled&&result.at("outcome")=="accepted"&&
+                    (state.loading||(state.profile&&(shown!=state.profile->serial||erased||transition||
+                     std::to_string(configuration::authored_revision(state.profile->view.documents))!=result.at("revision"))));
+                const auto disposition=replacing?interfaces::EditorForm::ReplyView::close_on_accepted:interfaces::EditorForm::ReplyView::refresh;
+                bool consumed=false;
+                measure(FrontendPhase::reply,[&]{
+                    if(form){if(r.query.empty())form->complete(r.ticket,r.body);else form->reconciled(r.ticket,r.query,r.epoch,r.body);}
+                    if(editor)consumed=r.query.empty()?editor->complete(r.ticket,r.body,disposition):editor->reconciled(r.ticket,r.query,r.epoch,r.body,disposition);
+                });
+                if(consumed&&recovery_enabled&&result.at("outcome")=="accepted"){
                     saved_notice="Configuration saved durably at revision "+result.at("revision").get<std::string>()+". Activation and visibility remain unconfirmed.";
                     if(!state.loading&&state.profile&&std::to_string(configuration::authored_revision(state.profile->view.documents))!=result.at("revision")){
-                        backend.reload();close_forms();transition=true;state.loading=true;
+                        measure(FrontendPhase::reply_reload,[&]{backend.reload();close_forms();transition=true;state.loading=true;});
                     }
                 }
             }
             if(exit_requested){exit_requested=false;saved_notice.clear();retirement_serial.reset();backend.reload();close_forms();editor_mode=false;transition=true;state.loading=true;}
             if(state.profile&&!state.loading&&!state.pending&&(shown!=state.profile->serial||erased||transition||(!editor&&editor_unavailable&&topology_dirty))){
-                close_forms();
-                if(!editor||editor->stopped()){editor.reset();form.reset();populate(*state.profile);}
+                measure(FrontendPhase::populate,[&]{close_forms();
+                    if(!editor||editor->stopped()){editor.reset();form.reset();populate(*state.profile);}
+                });
             }
             const bool current=state.profile&&!state.loading&&!state.pending&&!transition&&!erased;
             if(editor&&current&&retirement_serial&&*retirement_serial==state.profile->serial&&editor->retirement_decided()){
@@ -153,18 +175,20 @@ struct Window {
                 scene::Topology next;
                 try{next=topology();editor_unavailable=false;}
                 catch(const protocol::Error&){editor_unavailable=true;topology_dirty=false;}
-                if(!editor_unavailable){const auto selected=next.fallback;editor->topology(std::move(next),selected);}
+                if(!editor_unavailable)measure(FrontendPhase::topology,[&]{const auto selected=next.fallback;editor->topology(std::move(next),selected);});
             }
-            const bool navigate=current&&can_leave();gtk_widget_set_sensitive(settings_button,navigate&&editor_mode);gtk_widget_set_sensitive(editor_button,navigate&&!editor_mode);
-            if(form)gtk_widget_set_sensitive(form->widget(),state.profile&&!state.loading&&!transition);
-            if(editor)gtk_widget_set_sensitive(editor->widget(),state.profile&&!state.loading&&!transition&&!editor_unavailable);
+            measure(FrontendPhase::controls,[&]{
+                const bool navigate=current&&can_leave();gtk_widget_set_sensitive(settings_button,navigate&&editor_mode);gtk_widget_set_sensitive(editor_button,navigate&&!editor_mode);
+                if(form)gtk_widget_set_sensitive(form->widget(),state.profile&&!state.loading&&!transition);
+                if(editor)gtk_widget_set_sensitive(editor->widget(),state.profile&&!state.loading&&!transition&&!editor_unavailable);
+            });
             return G_SOURCE_CONTINUE;
         }catch(...){result=2;stop();return G_SOURCE_CONTINUE;}
     }
     ~Window(){editor.reset();form.reset();if(window)gtk_widget_destroy(window);if(display)g_signal_handlers_disconnect_by_data(display,this);for(auto* monitor:monitors){g_signal_handlers_disconnect_by_data(monitor,this);g_object_unref(monitor);}}
 };
 }
-int run_frontend(int argc,char** argv,platform::HelperBundleExpectation expectation,bool experimental_recovery,FrontendTimingObserver timing){
+int run_frontend(int argc,char** argv,platform::HelperBundleExpectation expectation,bool experimental_recovery,FrontendTimingObserver timing,FrontendPhaseObserver phases){
     try{
         std::string profile="profile:default";
         for(int i=1;i<argc;++i){const std::string option=argv[i];
@@ -175,7 +199,7 @@ int run_frontend(int argc,char** argv,platform::HelperBundleExpectation expectat
         if(!gtk_init_check(nullptr,nullptr)){std::cerr<<"frontend.display_unavailable\n";return 2;}
         const char* selected=std::getenv("XDG_RUNTIME_DIR");
         LinuxFrontendBackend backend(std::move(expectation),selected?selected:"",platform::profile_environment(profile));
-        Window window(backend,experimental_recovery,std::move(timing));g_timeout_add_full(G_PRIORITY_DEFAULT,20,+[](gpointer value)->gboolean{return static_cast<Window*>(value)->observed_tick();},&window,nullptr);
+        Window window(backend,experimental_recovery,std::move(timing),std::move(phases));g_timeout_add_full(G_PRIORITY_DEFAULT,20,+[](gpointer value)->gboolean{return static_cast<Window*>(value)->observed_tick();},&window,nullptr);
         gtk_main();return window.result;
     }catch(...){std::cerr<<"frontend.startup\n";return 2;}
 }

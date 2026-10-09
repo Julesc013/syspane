@@ -417,6 +417,9 @@ if(BUILD_TESTING)
         set_tests_properties(native.SETTINGS-FORM PROPERTIES TIMEOUT 300)
         add_executable(syspane_editor_window tests/editor/editor_window.cpp)
         target_link_libraries(syspane_editor_window PRIVATE syspane_editor_form syspane_network_publication syspane_async_commands syspane_generation_store syspane_child PkgConfig::GTK3 Threads::Threads)
+        add_test(NAME native.EDITOR-REPLY-LIFECYCLE COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/editor/native_reply_lifecycle.py"
+            "$<TARGET_FILE:syspane_editor_window>" "${CMAKE_BINARY_DIR}/native-evidence")
+        set_tests_properties(native.EDITOR-REPLY-LIFECYCLE PROPERTIES TIMEOUT 60)
         add_test(NAME native.EDITOR-RECOVERY COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/editor/native_recovery_controls.py"
             "$<TARGET_FILE:syspane_editor_window>" "$<TARGET_FILE:syspane_editor_exit_probe>" "${CMAKE_BINARY_DIR}/native-evidence")
         set_tests_properties(native.EDITOR-RECOVERY PROPERTIES TIMEOUT 300)
@@ -634,6 +637,9 @@ if(BUILD_TESTING)
         add_test(NAME native.RECOVERY-GUI-LIMITS COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/configuration/native_recovery_gui_limits.py"
             "$<TARGET_FILE:syspane_frontend>" "$<TARGET_FILE:syspane_frontend_fixture>" "$<TARGET_FILE:syspane_frontend_helper_fixture>" "${CMAKE_BINARY_DIR}/native-evidence")
         set_tests_properties(native.RECOVERY-GUI-LIMITS PROPERTIES TIMEOUT 600)
+        add_test(NAME native.FRONTEND-PHASE-FAILURE COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/configuration/native_frontend_phase_failure.py"
+            "$<TARGET_FILE:syspane_frontend>" "$<TARGET_FILE:syspane_frontend_fixture>" "$<TARGET_FILE:syspane_frontend_helper_fixture>" "${CMAKE_BINARY_DIR}/native-evidence")
+        set_tests_properties(native.FRONTEND-PHASE-FAILURE PROPERTIES TIMEOUT 600)
         add_test(NAME native.INSTALLED-RECOVERY COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/configuration/native_installed_recovery.py"
             "$<TARGET_FILE:syspane_frontend>" "$<TARGET_FILE:syspane_frontend_fixture>" "$<TARGET_FILE:syspane_frontend_helper_fixture>" "${CMAKE_BINARY_DIR}/native-evidence")
         set_tests_properties(native.INSTALLED-RECOVERY PROPERTIES TIMEOUT 600)
@@ -785,6 +791,7 @@ if(BUILD_TESTING)
         add_test(NAME "model.${case}" COMMAND syspane_model_tests "${case}")
     endforeach()
     add_test(NAME model.smoke COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/model/check_smoke.py" "$<TARGET_FILE:syspane_model_smoke>")
+    add_test(NAME configuration.FRONTEND-PHASE-DECODER COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/configuration/frontend_phases_tests.py")
     add_test(NAME composition.graph COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/source/build/check_components.py" "${CMAKE_BINARY_DIR}/component-graph.txt")
     add_test(NAME composition.reject_forbidden COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/source/build/check_components.py" "${CMAKE_BINARY_DIR}/component-graph.txt" --negative-test)
     add_executable(syspane_protocol_tests tests/protocol/protocol_tests.cpp)

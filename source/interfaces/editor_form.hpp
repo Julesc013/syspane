@@ -19,8 +19,10 @@ public:
     EditorForm(const EditorForm&)=delete;EditorForm& operator=(const EditorForm&)=delete;
     GtkWidget* widget()const;
     bool can_leave()const;
-    void complete(std::uint64_t,const Json&);
-    void reconciled(std::uint64_t,const std::string& query,const std::string& epoch,const Json&);
+    enum class ReplyView { refresh, close_on_accepted };
+    // Closing still validates the reply and requires stopped() before destruction.
+    bool complete(std::uint64_t,const Json&,ReplyView=ReplyView::refresh);
+    bool reconciled(std::uint64_t,const std::string& query,const std::string& epoch,const Json&,ReplyView=ReplyView::refresh);
     void disconnected();
     void policy(configuration::Policy);
     void reload(configuration::Authored,std::string epoch,SettingsResources);

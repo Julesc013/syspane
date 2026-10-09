@@ -484,8 +484,26 @@ EditorForm::~EditorForm()=default;
 GtkWidget* EditorForm::widget()const{impl_->owner();return impl_->root;}
 // A withdrawn draft still validates replies for its original request, but has
 // erased its cached result. Use the reply only after that validation succeeds.
-void EditorForm::complete(std::uint64_t ticket,const Json& result){auto& i=*impl_;i.owner();if(i.closed)return;try{if(i.draft.complete(ticket,result)){if(i.recovery)i.recovery->settled(result.at("outcome")=="accepted");i.changed();}}catch(...){i.sync();throw;}}
-void EditorForm::reconciled(std::uint64_t ticket,const std::string& query,const std::string& epoch,const Json& result){auto& i=*impl_;i.owner();if(i.closed)return;try{if(i.draft.reconciled(ticket,query,epoch,result)){if(i.recovery)i.recovery->settled(result.at("result").at("outcome")=="accepted");i.changed();}}catch(...){i.sync();throw;}}
+bool EditorForm::complete(std::uint64_t ticket,const Json& result,ReplyView view){
+    auto& i=*impl_;i.owner();if(i.closed)return false;
+    try{
+        if(!i.draft.complete(ticket,result))return false;
+        const bool accepted=result.at("outcome")=="accepted";
+        if(i.recovery)i.recovery->settled(accepted);
+        if(accepted&&view==ReplyView::close_on_accepted)i.shut();else i.changed();
+        return true;
+    }catch(...){i.sync();throw;}
+}
+bool EditorForm::reconciled(std::uint64_t ticket,const std::string& query,const std::string& epoch,const Json& result,ReplyView view){
+    auto& i=*impl_;i.owner();if(i.closed)return false;
+    try{
+        if(!i.draft.reconciled(ticket,query,epoch,result))return false;
+        const bool accepted=result.at("result").at("outcome")=="accepted";
+        if(i.recovery)i.recovery->settled(accepted);
+        if(accepted&&view==ReplyView::close_on_accepted)i.shut();else i.changed();
+        return true;
+    }catch(...){i.sync();throw;}
+}
 void EditorForm::disconnected(){auto& i=*impl_;i.owner();if(i.closed)return;if(i.recovery)i.recovery->invalidate();i.cancel_pending=false;if(i.clipboard)i.clipboard->invalidate();if(i.content)i.content->erase();if(i.binding)i.binding->erase();if(i.creation)i.creation->erase();if(i.layout_form)i.layout_form->erase();if(i.visibility)i.visibility->erase();if(i.theme)i.theme->erase();i.draft.disconnected();i.gesture.reset();i.sync();}
 void EditorForm::policy(c::Policy policy){auto& i=*impl_;i.owner();if(i.closed)return;if(i.recovery)i.recovery->invalidate();i.cancel_pending=false;if(i.clipboard)i.clipboard->invalidate();if(i.content)i.content->erase();if(i.binding)i.binding->erase();if(i.creation)i.creation->erase();if(i.layout_form)i.layout_form->erase();if(i.visibility)i.visibility->erase();if(i.theme)i.theme->erase();i.gesture.reset();i.draft.policy(policy);i.current=std::move(policy);if(i.surface)i.surface->policy(i.current,i.now());
     if(!i.draft.available()){i.settings=nullptr;i.capabilities.clear();i.stop_preview();i.list();}else i.resolve_nodes();i.sync();}

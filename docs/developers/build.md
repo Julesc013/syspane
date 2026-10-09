@@ -15,6 +15,32 @@ build` before configuring or building; use `test` or `package` for those actions
 The common active-output budget is unchanged; retained `out/evidence/` archives
 are measured separately. Never use the placeholder account from the example.
 
+The [frontend phase package](../../spec/delivery/packages/w-11-frontend-phases.md)
+adds optional numeric attribution inside the existing GTK tick. After ordinary
+preflight/configure/build, run `ctest --preset linux-x64-gcc13 -R
+'^native[.](EDITOR-REPLY-LIFECYCLE|FRONTEND-PHASE-FAILURE)$' --output-on-failure`.
+Run the installed recovery/editor/settings, native recovery controls and original
+editor/scene-image/erasure regressions when changing accepted-reply closure.
+EditorForm's default reply behavior refreshes the form; close_on_accepted is for a
+validated reply whose owner is replacing that form. Keep polling stopped() before
+destruction and obtain fresh profile/recovery authority before constructing another.
+
+For phase diagnosis run `python3 tests/configuration/native_frontend_phases.py
+<build>/syspane <build>/syspane_frontend_fixture
+<build>/syspane_frontend_helper_fixture <build>/native-evidence` in the admitted
+non-root Linux laboratory. The wrapper enables the fixture-only phase/timing
+observers and preserves the original GUI exercise and its failures. Inspect the
+separate phases.json after all owned processes exit. Nested durations overlap.
+The bounded decoder has a portable configuration.FRONTEND-PHASE-DECODER check.
+Observer refusal/exception must fail the host while allowing normal child closure.
+Production does not read any SYSPANE_TEST_PHASES or SYSPANE_TEST_PHASE_FAULT variables.
+
+Always run ordinary native.RECOVERY-GUI-LIMITS without phase attribution as the
+qualification check. Phase completion or reduced reply cost cannot qualify the
+remaining construction/callback/painting work or enable production recovery.
+The [handoff](../../spec/delivery/frontend-phases-handoff.md) records measured
+differences, source-bound regressions and remaining failures.
+
 The [draft admission package](../../spec/delivery/packages/w-11-draft-admission.md)
 keeps submit eligibility structural results private to the current SettingsDraft;
 every eligible call still authorizes current policy, and begin always revalidates.

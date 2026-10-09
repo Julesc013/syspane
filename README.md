@@ -11,10 +11,10 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
-The [draft admission checkpoint](spec/delivery/draft-admission-handoff.md) reduces
-repeated editor validation and preview setup while preserving current-policy checks.
-Selected portable and native regressions pass; the fixed GTK timing suite still
-fails. Production recovery and all five complete editions remain open.
+The [frontend reply checkpoint](spec/delivery/frontend-phases-handoff.md) removes
+redundant preview work after an accepted save and records the remaining GTK stalls.
+Portable and native regressions pass; fixed timing qualification, production recovery
+and all five complete editions remain open.
 
 The [installed settings frontend](spec/delivery/installed-settings-handoff.md)
 now runs from a relocated development payload, supervises its verified configuration

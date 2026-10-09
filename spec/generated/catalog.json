@@ -489,7 +489,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "debf8f45dde7f872b3d0eddebf20a8bd27d66192c7dffcff6a5e9cd1632ccb3f"
+      "sha256": "033ebbf63d05e28f6f5eefd090aadfaa39eea7099f1e4f759196989b9368696c"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -630,6 +630,17 @@
         "SP-W26-PACKAGE"
       ],
       "sha256": "d35a30b07a9fef001ce7c9bd340bb02565caf429f07b3aea495391e18f082909"
+    },
+    {
+      "id": "SP-FRONTEND-PHASES-HANDOFF",
+      "path": "delivery/frontend-phases-handoff.md",
+      "title": "Frontend phase diagnosis and accepted reply closure",
+      "description": "Attribute remaining GUI stalls and avoid rebuilding an editor that is being replaced.",
+      "requires": [
+        "SP-W11-FRONTEND-PHASES",
+        "SP-DRAFT-ADMISSION-HANDOFF"
+      ],
+      "sha256": "20663a4a13a73ae1bfc5653e0b264f29a4ff6aea05089714c50fe3922f7e6c25"
     },
     {
       "id": "SP-FRONTEND-RECOVERY-HANDOFF",
@@ -2250,6 +2261,17 @@
         "SP-W10-RECOVERY-QUEUE"
       ],
       "sha256": "7e92376c6cb9235d11448028bc0d536e622c0d911996b53df80cffad4b2ce1ef"
+    },
+    {
+      "id": "SP-W11-FRONTEND-PHASES",
+      "path": "delivery/packages/w-11-frontend-phases.md",
+      "title": "Bounded frontend phase diagnosis",
+      "description": "Attribute remaining GTK stalls without changing the fixed timing oracle or admitting a runtime override.",
+      "requires": [
+        "SP-W11-DRAFT-ADMISSION",
+        "SP-W11-RECOVERY-GUI-LIMITS"
+      ],
+      "sha256": "b31ead6fe499b69767d960d8320f649c4c17d96d0297dd35c3004349f3615975"
     },
     {
       "id": "SP-W11-FRONTEND-RECOVERY",
