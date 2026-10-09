@@ -15,6 +15,17 @@ build` before configuring or building; use `test` or `package` for those actions
 The common active-output budget is unchanged; retained `out/evidence/` archives
 are measured separately. Never use the placeholder account from the example.
 
+The [recovery submission package](../../spec/delivery/packages/w-11-recovery-submission.md)
+prepares structural eligibility while preserving current authorization and full Apply
+validation. Run `ctest --preset <profile> -R
+'^(editor[.](RECOVERY-|HISTORY-PREPARATION-|FRAGMENT-ADMISSION)|settings[.]|composition[.])'
+--output-on-failure` after rebuilding all three profiles, then legacy artifact checks.
+On Linux run the recovery limits/preparation, history worker/form, recovery controls,
+frontend recovery and installed editor/recovery families. The unchanged ordinary
+native.RECOVERY-GUI-LIMITS now passes for the source/artifacts in the
+[handoff](../../spec/delivery/recovery-submission-handoff.md). Preserve earlier failures
+and evaluate production admission separately from this development qualification.
+
 The [history-form package](../../spec/delivery/packages/w-11-history-form.md) connects
 the existing native worker to the experimental frontend's Undo/Redo. After ordinary
 preflight/configure/build, run `ctest --preset linux-x64-gcc13 -R
@@ -35,8 +46,8 @@ helper-worker, recovery-preparation/admission, installed editor/recovery, fronte
 recovery and recovery-control cases. Run portable history and component checks on
 all three profiles. Task-interface timing does not qualify complete GTK behavior.
 The [handoff](../../spec/delivery/history-worker-handoff.md) records this boundary;
-current-form integration now exists in the experimental frontend; ordinary GUI
-qualification remains open.
+current-form integration and ordinary GUI qualification now pass in the experimental
+frontend; production admission remains the next boundary.
 
 The [history-preparation package](../../spec/delivery/packages/w-11-history-preparation.md)
 adds detached HistoryWork and opaque current-owner adoption. After ordinary profile
@@ -46,7 +57,7 @@ and existing native preparation/recovery/editor consumers. Keep the original tra
 expectations; supplemental guards must not redefine their results.
 
 The experimental installed GUI now consumes this API through the existing worker.
-Production keeps synchronous history until the unchanged ordinary GUI gates pass;
+Production still keeps synchronous history pending the next admission change;
 current native preview validation/composition remains on the form owner.
 The [handoff](../../spec/delivery/history-preparation-handoff.md) records the exact
 implemented boundary, source-bound verification and remaining integration.
@@ -58,8 +69,9 @@ preflight/configure/build, run `ctest --preset linux-x64-gcc13 -R
 GTK controls without a first draw and compare exact submitted scenes. Preserve the
 original pre-change expectations and all existing layout/refresh/installed/recovery
 and image/erasure checks. Rerun the phase/paint diagnostics and ordinary GUI limits
-separately; four delay failures remain. The [handoff](../../spec/delivery/initial-preview-handoff.md)
-records scope, source-bound evidence and the next history/edit preparation work.
+separately. The [handoff](../../spec/delivery/initial-preview-handoff.md) preserves
+the four delay failures at that checkpoint; the recovery submission checkpoint above
+records the later passing ordinary qualification and remaining admission work.
 
 The [native paint trace package](../../spec/delivery/packages/w-11-editor-paint-trace.md)
 uses a test-only preload probe against the unchanged compiled frontend. After

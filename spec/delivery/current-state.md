@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-09T08:57:53.435058+00:00", "scope": "Experimental native history form and remaining GUI qualification"}
+updated: {"by": "codex", "at": "2026-10-09T09:27:39.668706+00:00", "scope": "Prepared recovery submission and passing installed GUI qualification"}
 ---
 
 # Current state and next admitted boundary
@@ -22,27 +22,27 @@ recordings are local ignored `out/` content; the retired root is absent from the
 tracked tree. See `docs/developers/build.md` in the repository for checkout
 setup and the [repository contract](../foundation/repository.md) for ownership.
 
-The [prepared history form](history-form-handoff.md) now integrates worker tasks,
-current-owner adoption, conflicting-input refusal and recovery capture suspension
-in the existing experimental frontend. All 17 new form cases and 157 named native
-cases overall pass, plus SCENE-IMAGE, 27 portable history and six component checks.
-The unchanged ordinary GUI exercise still fails 4 cases. Inspect its exact
-records to select the next preview/scheduling repair; preserve the original limits.
-Production history/recovery gates, W-11 and all five full editions remain open.
+The [prepared recovery submission change](recovery-submission-handoff.md) now
+closes the remaining measured restore eligibility cost. All seven unchanged ordinary
+installed GUI timing/erasure cases pass, alongside 144 selected portable checks and
+native recovery/history/installed consumers. Earlier failures remain preserved.
+Next audit the production history/recovery admission conditions and verify their
+production composition; continue general authoring/preview and desktop integration.
+W-11 and all five complete editions remain open.
 
 The [frontend recovery backend](frontend-recovery-handoff.md) now uses authenticated
 profile 0.2, current native admission and exact accepted-request retirement metadata.
 The [installed recovery UI](installed-recovery-handoff.md) now connects capture,
 submission and receipt consumption in the actual frontend's experimental fixture.
 All 14 native cases pass, including a repaired lost-result reconciliation exit.
-Next qualify maximum-size GUI operations and complete worker/supervisor scheduling,
-then enable production recovery and rerun acceptance. Production controls remain
+Maximum-size backend and installed GUI qualification now pass at the submission
+checkpoint above. Next enable admitted production recovery and rerun acceptance. Controls remain
 disabled; W-11 and all five complete editions remain unfinished.
 
 The [asynchronous recovery preparation](recovery-preparation-handoff.md) now moves
 capture and restoration validation to the existing native worker, with current-draft
 proofs, coalescing and cancellation. The backend above now provides the scoped download
-and live authority; installed fixture consumption is connected and loop qualification remains open. Preserve the
+and live authority; installed fixture consumption and its loop qualification now pass. Preserve the
 Windows GCC resource-limit timeout and installed AT-SPI focus timeout; their causes remain open.
 All five full editions remain unfinished.
 
@@ -50,14 +50,14 @@ The [native recovery helper admission](recovery-admission-handoff.md) now binds
 transferred observations to current host session authority and independently held
 state/recovery directories. The sealed child also refuses substituted nodes before
 creating its writer file. The backend callback and asynchronous preparation now exist;
-installed fixture consumption now exists; complete scheduling remains open. All five full release editions
+installed fixture consumption and maximum-input scheduling checks now pass. All five full release editions
 remain open.
 
 The [authenticated recovery transfer](recovery-transfer-handoff.md) now carries
 coherent saved state and native recovery observations bound to connection, epoch,
 profile, editor session, transfer and revision. Original 0.1 transfers stay unchanged.
 The helper admission above now verifies those native directory identities and current
-session authority. Production recovery enablement, maximum-size validation latency and
+session authority. Production recovery enablement, general authoring responsiveness and
 all five complete release editions remain open.
 
 The [native recovery snapshot](recovery-context-handoff.md) now pairs accepted

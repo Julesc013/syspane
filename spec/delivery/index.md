@@ -112,6 +112,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Asynchronous editor recovery preparation](recovery-preparation-handoff.md) — Validate detached recovery work on the existing native worker and consume only current opaque results.
 - [Bounded native recovery queue checkpoint](recovery-queue-handoff.md) — Coalesced recovery I/O with exact helper identity, retirement fences and observed process exit.
 - [Private native recovery storage checkpoint](recovery-store-handoff.md) — Exact bounded recovery files, conditional retirement and independent ext4 process-cut evidence.
+- [Prepared recovery submission handoff](recovery-submission-handoff.md) — Recovery prepares structural submission hints and the unchanged installed GUI qualification passes.
 - [Authenticated coherent recovery context transfer](recovery-transfer-handoff.md) — Negotiated profile transfer binds saved generations and native recovery observations to the authenticated editor session.
 - [SysPane 0.1.0 release objective and unresolved admission](release-0.1.0.md) — Preserve the requested complete desktop release across Windows 9x, Windows NT, X11, Wayland and Mac OS X.
 - [Durable resource generation checkpoint](resource-generations-handoff.md) — Exact content closure, command identity and coherent Linux recovery.

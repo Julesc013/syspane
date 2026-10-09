@@ -106,6 +106,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Recovery preview validation and text setup costs](w-11-recovery-hotpaths.md) — Reduce measured GUI work without relaxing validation, private-data lifetime or the frozen maximum-input oracle.
 - [Recovery limits and installed scheduling qualification](w-11-recovery-limits.md) — Measure admitted maximum inputs before enabling production recovery; preserve every missed deadline.
 - [Asynchronous editor recovery preparation](w-11-recovery-preparation.md) — Move recovery reconstruction to the existing worker without granting stale prepared results authority.
+- [Prepared submission checks for recovery restore](w-11-recovery-submission.md) — Keep structural Apply eligibility on the recovery worker while preserving live authorization and full transaction validation.
 - [Native scene inspector navigation and disclosure](w-11-scene-inspector.md) — Expose scene semantics through native controls with identity-stable navigation and current inspector authority.
 - [Resource-aware native settings](w-11-settings-resources.md) — Preserve exact resource selection through settings drafts, native commits and restart.
 - [Composition-scoped native font setup](w-11-text-session.md) — Reuse Linux font setup within one synchronous composition while preserving exact rendering and erasure.

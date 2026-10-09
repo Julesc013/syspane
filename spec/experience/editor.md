@@ -260,3 +260,11 @@ task lifetime, cancellation and recovery coexistence on the existing worker. Cur
 form adoption and recovery capture suspension now exist under the
 [experimental form contract](../delivery/packages/w-11-history-form.md). General
 asynchronous authoring, native preview handoff and complete GUI qualification remain required.
+
+## Prepared recovery submission eligibility
+
+The [recovery submission contract](../delivery/packages/w-11-recovery-submission.md)
+permits worker preparation of structural preview/commit hints only for the exact
+opaque recovery candidate. Current-owner adoption, live authorization and full Apply
+validation remain mandatory. The [handoff](../delivery/recovery-submission-handoff.md)
+records the passing installed GUI qualification and remaining production admission.

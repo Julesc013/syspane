@@ -1,0 +1,1057 @@
+{
+  "recorded_at": "2026-10-09T09:27:39.538196+00:00",
+  "source_base": "59936739db26a23c6d13eb0e9bd94477a4f3fa95",
+  "scope": "Prepare exact structural submission hints on recovery reconstruction and consume them only under the original current-owner proof.",
+  "fixed_inputs": {
+    "recorded_at": "2026-10-09T09:09:13.384963+00:00",
+    "source_base": "59936739db26a23c6d13eb0e9bd94477a4f3fa95",
+    "inputs": {
+      "spec/delivery/packages/w-11-recovery-submission.md": "a6c1846738f1ef25e2a07da11bbd75c58c4941155c3cda2a78bbac22ef29230c",
+      "tests/editor/recovery_submission.hpp": "0cb1ed78335c50c71ed20243c11a8a7b21f92e2c59b0d13ff86bfae564af2404",
+      "tests/editor/recovery_preparation_tests.cpp": "92d33638a54824a7421e6d7c1ee86f1d01a4805ee97af0116e269632cb378383",
+      "tests/editor/recovery-preparation-cases.json": "305525843b343e008b78297c0361c7b9797d7f9f5b7ccdb6f4f3d49eece264de",
+      "tests/editor/recovery-draft-cases.json": "3300acb221afd4232573fde77935d3944704e68125eada76005e61208b9cbc8a"
+    }
+  },
+  "baseline_submission": {
+    "local_path": "out/evidence/recovery-submission/linux-x64-gcc13-submission-d4175bc1b7/result.json",
+    "sha256": "f71ad59385b5a7273a832642e5225eb0ce043d442b85b4dfeb89990af462462d"
+  },
+  "original_oracles": [
+    {
+      "local_path": "out/evidence/installed-recovery-fixed-inputs.json",
+      "sha256": "a3a2db574502cd2420607524d211d6d1dfb5584a9d1f679e1603a346b3b11ee5"
+    },
+    {
+      "local_path": "out/evidence/recovery-limits-fixed-inputs.json",
+      "sha256": "c69f06a57ead0b63ec1c9d40e80649cf4f5dfd69859e0779f5f0b41410000f57"
+    },
+    {
+      "local_path": "out/evidence/recovery-gui-limits-fixed-inputs.json",
+      "sha256": "fe9e1733e07c3bfd873dee28ad0f021bacf8b754e43d7e502374f006204b95df"
+    }
+  ],
+  "legacy_preparation_expectations_unchanged": true,
+  "executions": [
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "backend",
+      "started_at": "2026-10-09T09:26:45.941950+00:00",
+      "exit": 0,
+      "passed_checks": 1,
+      "record": {
+        "local_path": "out/evidence/recovery-submission/linux-x64-gcc13-backend-a4cf98fee0/result.json",
+        "sha256": "a213151e58d715b683cbcac14cc86e30b0fc92eca51603c5a4647036ea15a0ff"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/recovery-submission/linux-x64-gcc13-backend-a4cf98fee0/source-inputs.zip",
+        "sha256": "931457333ca69abf43fe5192af05bac03ff4500ba5ac55037a87e0d05fe20ec4"
+      },
+      "later_source_changes": []
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "build",
+      "started_at": "2026-10-09T09:10:40.545594+00:00",
+      "exit": 0,
+      "passed_checks": 0,
+      "record": {
+        "local_path": "out/evidence/recovery-submission/linux-x64-gcc13-build-780d95278b/result.json",
+        "sha256": "0e9759f5f24dc842dfd5b240d27420e22b71893b4336126010638bad1cafbd23"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/recovery-submission/linux-x64-gcc13-build-780d95278b/source-inputs.zip",
+        "sha256": "931457333ca69abf43fe5192af05bac03ff4500ba5ac55037a87e0d05fe20ec4"
+      },
+      "later_source_changes": []
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "configure",
+      "started_at": "2026-10-09T09:10:24.540817+00:00",
+      "exit": 0,
+      "passed_checks": 0,
+      "record": {
+        "local_path": "out/evidence/recovery-submission/linux-x64-gcc13-configure-b3864df333/result.json",
+        "sha256": "2f1b2642fea34f08c26b86462e1e5c519721735c1f896e306fd923c602160ea7"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/recovery-submission/linux-x64-gcc13-configure-b3864df333/source-inputs.zip",
+        "sha256": "931457333ca69abf43fe5192af05bac03ff4500ba5ac55037a87e0d05fe20ec4"
+      },
+      "later_source_changes": []
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "configure",
+      "started_at": "2026-10-09T09:09:22.119095+00:00",
+      "exit": 0,
+      "passed_checks": 0,
+      "record": {
+        "local_path": "out/evidence/recovery-submission/linux-x64-gcc13-configure-eba43bebe4/result.json",
+        "sha256": "47226236f59111066e1fb230e2b3af615fa13abeebf6c90256ee3242764874b0"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/recovery-submission/linux-x64-gcc13-configure-eba43bebe4/source-inputs.zip",
+        "sha256": "da101dd8ccd7e61b0c803609e20bf9d80f4c1acf276633d94620a3b5eb788ceb"
+      },
+      "later_source_changes": [
+        "source/build/targets/linux-x64-gcc13.json",
+        "source/build/targets/windows-x64-gcc15.json",
+        "source/build/targets/windows-x86-v141-xp.json",
+        "source/interfaces/editor_recovery.cpp",
+        "source/interfaces/settings_draft.hpp"
+      ]
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "controls",
+      "started_at": "2026-10-09T09:23:23.226465+00:00",
+      "exit": 0,
+      "passed_checks": 1,
+      "record": {
+        "local_path": "out/evidence/recovery-submission/linux-x64-gcc13-controls-a1f616acd5/result.json",
+        "sha256": "6088171a422d19fcbd02be99e087f4b0dd70ce4e20d0cc203eea5d5e88251efe"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/recovery-submission/linux-x64-gcc13-controls-a1f616acd5/source-inputs.zip",
+        "sha256": "931457333ca69abf43fe5192af05bac03ff4500ba5ac55037a87e0d05fe20ec4"
+      },
+      "later_source_changes": []
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "editor",
+      "started_at": "2026-10-09T09:25:29.764084+00:00",
+      "exit": 0,
+      "passed_checks": 1,
+      "record": {
+        "local_path": "out/evidence/recovery-submission/linux-x64-gcc13-editor-fddbe7d48d/result.json",
+        "sha256": "bff9a28ff935baf3d64d876f351192518e3da706f93a7dda8662976ba1f6d2c0"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/recovery-submission/linux-x64-gcc13-editor-fddbe7d48d/source-inputs.zip",
+        "sha256": "931457333ca69abf43fe5192af05bac03ff4500ba5ac55037a87e0d05fe20ec4"
+      },
+      "later_source_changes": []
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "form-history",
+      "started_at": "2026-10-09T09:23:14.789871+00:00",
+      "exit": 0,
+      "passed_checks": 1,
+      "record": {
+        "local_path": "out/evidence/recovery-submission/linux-x64-gcc13-form-history-c4ab4efa15/result.json",
+        "sha256": "bc7825b45b6271dbfd53f40996052b54a68fafdf10254156018ce74eebe4a73b"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/recovery-submission/linux-x64-gcc13-form-history-c4ab4efa15/source-inputs.zip",
+        "sha256": "931457333ca69abf43fe5192af05bac03ff4500ba5ac55037a87e0d05fe20ec4"
+      },
+      "later_source_changes": []
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "gui",
+      "started_at": "2026-10-09T09:12:11.490592+00:00",
+      "exit": 0,
+      "passed_checks": 1,
+      "record": {
+        "local_path": "out/evidence/recovery-submission/linux-x64-gcc13-gui-1e748d7b7e/result.json",
+        "sha256": "a0c0a819e97f62364106a1fd3f68151cc4c4972e189f3697de4da8d554f92282"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/recovery-submission/linux-x64-gcc13-gui-1e748d7b7e/source-inputs.zip",
+        "sha256": "931457333ca69abf43fe5192af05bac03ff4500ba5ac55037a87e0d05fe20ec4"
+      },
+      "later_source_changes": []
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "history-build",
+      "started_at": "2026-10-09T09:09:38.475463+00:00",
+      "exit": 0,
+      "passed_checks": 0,
+      "record": {
+        "local_path": "out/evidence/recovery-submission/linux-x64-gcc13-history-build-f58e704cb5/result.json",
+        "sha256": "2c24056877fdc9dd54cfb352b402c9c065dc957f10c2fb856a31466f289332b7"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/recovery-submission/linux-x64-gcc13-history-build-f58e704cb5/source-inputs.zip",
+        "sha256": "da101dd8ccd7e61b0c803609e20bf9d80f4c1acf276633d94620a3b5eb788ceb"
+      },
+      "later_source_changes": [
+        "source/build/targets/linux-x64-gcc13.json",
+        "source/build/targets/windows-x64-gcc15.json",
+        "source/build/targets/windows-x86-v141-xp.json",
+        "source/interfaces/editor_recovery.cpp",
+        "source/interfaces/settings_draft.hpp"
+      ]
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "installed",
+      "started_at": "2026-10-09T09:24:07.899335+00:00",
+      "exit": 0,
+      "passed_checks": 1,
+      "record": {
+        "local_path": "out/evidence/recovery-submission/linux-x64-gcc13-installed-fbaa6f5f94/result.json",
+        "sha256": "ea6a6686d16773f17bcdf5cf1223d742993333d2b7a497a9ea501c74daf2b17b"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/recovery-submission/linux-x64-gcc13-installed-fbaa6f5f94/source-inputs.zip",
+        "sha256": "931457333ca69abf43fe5192af05bac03ff4500ba5ac55037a87e0d05fe20ec4"
+      },
+      "later_source_changes": []
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "native",
+      "started_at": "2026-10-09T09:21:39.992382+00:00",
+      "exit": 0,
+      "passed_checks": 1,
+      "record": {
+        "local_path": "out/evidence/recovery-submission/linux-x64-gcc13-native-8cbdb7841f/result.json",
+        "sha256": "496c4098a6863bdfb66d0d1b835d3d223ed60b4a2eb63f673c3ec923b3ac8c9a"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/recovery-submission/linux-x64-gcc13-native-8cbdb7841f/source-inputs.zip",
+        "sha256": "931457333ca69abf43fe5192af05bac03ff4500ba5ac55037a87e0d05fe20ec4"
+      },
+      "later_source_changes": []
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "preparation",
+      "started_at": "2026-10-09T09:22:42.029885+00:00",
+      "exit": 0,
+      "passed_checks": 1,
+      "record": {
+        "local_path": "out/evidence/recovery-submission/linux-x64-gcc13-preparation-1b9e3fccaf/result.json",
+        "sha256": "7540e1e4262f02b2fa8814fef29309ffbbd73c4308de31e275b7f87784682d2e"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/recovery-submission/linux-x64-gcc13-preparation-1b9e3fccaf/source-inputs.zip",
+        "sha256": "931457333ca69abf43fe5192af05bac03ff4500ba5ac55037a87e0d05fe20ec4"
+      },
+      "later_source_changes": []
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "recovery-portable",
+      "started_at": "2026-10-09T09:11:55.357835+00:00",
+      "exit": 0,
+      "passed_checks": 48,
+      "record": {
+        "local_path": "out/evidence/recovery-submission/linux-x64-gcc13-recovery-portable-7fdf5d142d/result.json",
+        "sha256": "2469e6da19c7b7abfcf0144e18ca801b836b1f0617b744bd30aadb2942e6c4a7"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/recovery-submission/linux-x64-gcc13-recovery-portable-7fdf5d142d/source-inputs.zip",
+        "sha256": "931457333ca69abf43fe5192af05bac03ff4500ba5ac55037a87e0d05fe20ec4"
+      },
+      "later_source_changes": []
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "submission",
+      "started_at": "2026-10-09T09:09:50.106817+00:00",
+      "exit": 0,
+      "passed_checks": 1,
+      "record": {
+        "local_path": "out/evidence/recovery-submission/linux-x64-gcc13-submission-d4175bc1b7/result.json",
+        "sha256": "f71ad59385b5a7273a832642e5225eb0ce043d442b85b4dfeb89990af462462d"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/recovery-submission/linux-x64-gcc13-submission-d4175bc1b7/source-inputs.zip",
+        "sha256": "da101dd8ccd7e61b0c803609e20bf9d80f4c1acf276633d94620a3b5eb788ceb"
+      },
+      "later_source_changes": [
+        "source/build/targets/linux-x64-gcc13.json",
+        "source/build/targets/windows-x64-gcc15.json",
+        "source/build/targets/windows-x86-v141-xp.json",
+        "source/interfaces/editor_recovery.cpp",
+        "source/interfaces/settings_draft.hpp"
+      ]
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "worker-history",
+      "started_at": "2026-10-09T09:22:06.096097+00:00",
+      "exit": 0,
+      "passed_checks": 1,
+      "record": {
+        "local_path": "out/evidence/recovery-submission/linux-x64-gcc13-worker-history-5ffbf84073/result.json",
+        "sha256": "081fba611016a0d2b532184fcc710aeaee993185300525cd01a51d4b0776a734"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/recovery-submission/linux-x64-gcc13-worker-history-5ffbf84073/source-inputs.zip",
+        "sha256": "931457333ca69abf43fe5192af05bac03ff4500ba5ac55037a87e0d05fe20ec4"
+      },
+      "later_source_changes": []
+    },
+    {
+      "profile": "windows-x64-gcc15",
+      "action": "build",
+      "started_at": "2026-10-09T09:13:32.014846+00:00",
+      "exit": 0,
+      "passed_checks": 0,
+      "record": {
+        "local_path": "out/evidence/recovery-submission/windows-x64-gcc15-build-8d935340ad/result.json",
+        "sha256": "8cfa5878adfd334ea69081c32306b33985b9ee6bd57b203596de8520e6c871ac"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/recovery-submission/windows-x64-gcc15-build-8d935340ad/source-inputs.zip",
+        "sha256": "1753da17f0827dc22979541b5d82be1ac80d915948e90670c274369e5b861cfe"
+      },
+      "later_source_changes": []
+    },
+    {
+      "profile": "windows-x64-gcc15",
+      "action": "configure",
+      "started_at": "2026-10-09T09:13:25.465514+00:00",
+      "exit": 0,
+      "passed_checks": 0,
+      "record": {
+        "local_path": "out/evidence/recovery-submission/windows-x64-gcc15-configure-a5590da605/result.json",
+        "sha256": "16d98a13c9ae89d07737e3eb54d850a819e5f8432c0eaf97de4f8f1e2e1be4cd"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/recovery-submission/windows-x64-gcc15-configure-a5590da605/source-inputs.zip",
+        "sha256": "1753da17f0827dc22979541b5d82be1ac80d915948e90670c274369e5b861cfe"
+      },
+      "later_source_changes": []
+    },
+    {
+      "profile": "windows-x64-gcc15",
+      "action": "recovery-portable",
+      "started_at": "2026-10-09T09:15:19.425005+00:00",
+      "exit": 0,
+      "passed_checks": 48,
+      "record": {
+        "local_path": "out/evidence/recovery-submission/windows-x64-gcc15-recovery-portable-d963905e2c/result.json",
+        "sha256": "af86aeca3a678a8689ce8fd1f1b6453b029037137f773a0b9c6e810a31bb0bbe"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/recovery-submission/windows-x64-gcc15-recovery-portable-d963905e2c/source-inputs.zip",
+        "sha256": "1753da17f0827dc22979541b5d82be1ac80d915948e90670c274369e5b861cfe"
+      },
+      "later_source_changes": []
+    },
+    {
+      "profile": "windows-x86-v141-xp",
+      "action": "build",
+      "started_at": "2026-10-09T09:20:15.623100+00:00",
+      "exit": 0,
+      "passed_checks": 0,
+      "record": {
+        "local_path": "out/evidence/recovery-submission/windows-x86-v141-xp-build-d9fb91a070/result.json",
+        "sha256": "6863f3641da9b2e3d082c638c2bae552f37fc28aadbcb5b93f6b4fc27fbe6e66"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/recovery-submission/windows-x86-v141-xp-build-d9fb91a070/source-inputs.zip",
+        "sha256": "1753da17f0827dc22979541b5d82be1ac80d915948e90670c274369e5b861cfe"
+      },
+      "later_source_changes": []
+    },
+    {
+      "profile": "windows-x86-v141-xp",
+      "action": "configure",
+      "started_at": "2026-10-09T09:20:11.731875+00:00",
+      "exit": 0,
+      "passed_checks": 0,
+      "record": {
+        "local_path": "out/evidence/recovery-submission/windows-x86-v141-xp-configure-3919199abf/result.json",
+        "sha256": "dd5626230b768815ecc4e05df75c6bb35c0ed4e59182794dbfe76ea932935ef5"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/recovery-submission/windows-x86-v141-xp-configure-3919199abf/source-inputs.zip",
+        "sha256": "1753da17f0827dc22979541b5d82be1ac80d915948e90670c274369e5b861cfe"
+      },
+      "later_source_changes": []
+    },
+    {
+      "profile": "windows-x86-v141-xp",
+      "action": "legacy",
+      "started_at": "2026-10-09T09:21:33.931543+00:00",
+      "exit": 0,
+      "passed_checks": 2,
+      "record": {
+        "local_path": "out/evidence/recovery-submission/windows-x86-v141-xp-legacy-6748b9833d/result.json",
+        "sha256": "2e3934f69029480406117497fc1f9fde0ef54888f116559ac4d94e3292b13f19"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/recovery-submission/windows-x86-v141-xp-legacy-6748b9833d/source-inputs.zip",
+        "sha256": "1753da17f0827dc22979541b5d82be1ac80d915948e90670c274369e5b861cfe"
+      },
+      "later_source_changes": []
+    },
+    {
+      "profile": "windows-x86-v141-xp",
+      "action": "recovery-portable",
+      "started_at": "2026-10-09T09:21:27.927665+00:00",
+      "exit": 0,
+      "passed_checks": 48,
+      "record": {
+        "local_path": "out/evidence/recovery-submission/windows-x86-v141-xp-recovery-portable-d77a65b8d0/result.json",
+        "sha256": "3ded5ecb825d2fb48dc57ae4694ddf7ee0e6ad3387bbcb47cf602aadde635091"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/recovery-submission/windows-x86-v141-xp-recovery-portable-d77a65b8d0/source-inputs.zip",
+        "sha256": "1753da17f0827dc22979541b5d82be1ac80d915948e90670c274369e5b861cfe"
+      },
+      "later_source_changes": []
+    }
+  ],
+  "portable_checks": {
+    "linux-x64-gcc13": 48,
+    "windows-x64-gcc15": 48,
+    "windows-x86-v141-xp": 48
+  },
+  "legacy_checks": 2,
+  "native_case_families": {
+    "INSTALLED-EDITOR": 15,
+    "FRONTEND-RECOVERY": 14,
+    "HISTORY-WORKER": 13,
+    "INSTALLED-RECOVERY": 14,
+    "EDITOR-RECOVERY": 14,
+    "EDITOR-HISTORY": 17,
+    "RECOVERY-GUI-LIMITS": 7,
+    "RECOVERY-LIMITS": 6,
+    "RECOVERY-PREPARATION": 8
+  },
+  "native": [
+    {
+      "family": "INSTALLED-EDITOR",
+      "cases": [
+        "OPEN",
+        "PROPERTIES",
+        "SAVE-REOPEN",
+        "SETTINGS-NAV",
+        "PRIVATE-NAV",
+        "REQUEST-NAV",
+        "UNDO-REDO",
+        "CANCEL-DRAFT",
+        "RELOAD",
+        "LOST-RESULT",
+        "POLICY",
+        "REPLACEMENT",
+        "HELPER-FAILURE",
+        "CLOSE-HELD",
+        "ORACLE"
+      ],
+      "outcome": "pass",
+      "archive": {
+        "local_path": "out/evidence/recovery-submission-native/editor-frontend-08e33c8759.zip",
+        "sha256": "d7270b73572bd88f92c455c3924497ef81865ace39394104ee3b67d9a0ee98c3"
+      },
+      "record": {
+        "local_path": "out/evidence/recovery-submission-native/editor-frontend-08e33c8759.json",
+        "sha256": "06fcd711d537a9d93a8823f92ef74e01ca7d229e205f832f690fcee8fffd6332"
+      },
+      "inventory": {
+        "local_path": "out/evidence/recovery-submission-native/editor-frontend-08e33c8759.index.json",
+        "sha256": "c3f0d3250d45939def46b6759a6cace2321032c0bf3fa4cc3e265c858b1fd28a"
+      },
+      "execution_record": {
+        "local_path": "out/evidence/recovery-submission/linux-x64-gcc13-editor-fddbe7d48d/result.json",
+        "sha256": "bff9a28ff935baf3d64d876f351192518e3da706f93a7dda8662976ba1f6d2c0"
+      },
+      "artifact_identities_matched": {
+        "SysPane.ImageWorker": "65b38c368c9472405163a244c7f1b0ddf2c8702bb5e7945e147cb4a5935e777c",
+        "SysPane.RecoveryWorker": "6256fa4cd28d6263ea9e1f182da9e2a75b5a187bda6f9ed0efa1d51f10b99537",
+        "syspane": "ce6ef27615e10ce596616019c8f84db1f902d207fb57eb7e86d0518547a3b658",
+        "syspane_frontend_fixture": "466801623bbf5f0a7f5cdcfd367574df24e5c216cac7204fce158929170248d1",
+        "syspane_frontend_helper_fixture": "6e9df5690ba2b0bec818fc33c9d36ec07c14d0951b6f997a8a9e2b9b07c3cb32"
+      }
+    },
+    {
+      "family": "FRONTEND-RECOVERY",
+      "cases": [
+        "SCOPED-CONTEXT",
+        "NULL-CONTEXT",
+        "CAPTURE-AND-RETIRE",
+        "INVALID-METADATA",
+        "RELOAD-WITHDRAWAL",
+        "KEPT-RECORD",
+        "REPLACEMENT-RECORD",
+        "LOST-ACCEPTANCE",
+        "UNKNOWN-RESULT",
+        "ERASE-DENIED",
+        "DIRECTORY-REPLACED",
+        "POLICY-WITHDRAWAL",
+        "CLOSE",
+        "ORACLE"
+      ],
+      "outcome": "pass",
+      "archive": {
+        "local_path": "out/evidence/recovery-submission-native/fr-8cb655b9f9.zip",
+        "sha256": "d3a75c635f9552bfd73c0be3a4b5b624741406f42f34a3f27e5bacd583b932ec"
+      },
+      "record": {
+        "local_path": "out/evidence/recovery-submission-native/fr-8cb655b9f9.json",
+        "sha256": "aa3b736c890fe49725ebcb308233604bc7e8644fc3def5f8e6f2466f3173bf76"
+      },
+      "inventory": {
+        "local_path": "out/evidence/recovery-submission-native/fr-8cb655b9f9.index.json",
+        "sha256": "472f41f4e13ba012ee3bf2b18c235d1ac1ef11ca316f39b83f2057508adee666"
+      },
+      "execution_record": {
+        "local_path": "out/evidence/recovery-submission/linux-x64-gcc13-backend-a4cf98fee0/result.json",
+        "sha256": "a213151e58d715b683cbcac14cc86e30b0fc92eca51603c5a4647036ea15a0ff"
+      },
+      "artifact_identities_matched": {
+        "bin/syspane": "53a185da9c083be4cb4a02a292b2aabc6a37c5d4bbbd6baa684f646fd937a274",
+        "libexec/syspane/syspane-configuration-host": "6e9df5690ba2b0bec818fc33c9d36ec07c14d0951b6f997a8a9e2b9b07c3cb32",
+        "libexec/syspane/syspane-image-worker": "65b38c368c9472405163a244c7f1b0ddf2c8702bb5e7945e147cb4a5935e777c",
+        "libexec/syspane/syspane-recovery-worker": "6256fa4cd28d6263ea9e1f182da9e2a75b5a187bda6f9ed0efa1d51f10b99537",
+        "share/syspane/helpers.json": "cacd709b73aec39d2540fcd437d14324440cc2b6d6cc7e5918ba182a712bbb73"
+      }
+    },
+    {
+      "family": "HISTORY-WORKER",
+      "cases": [
+        "HELD",
+        "TRACE",
+        "CAPACITY",
+        "INPUTS",
+        "QUEUED-CANCEL",
+        "READY-CANCEL",
+        "RUNNING-CANCEL",
+        "DROP",
+        "CLOSE",
+        "STALE",
+        "COEXISTENCE",
+        "OWNER",
+        "ORACLE"
+      ],
+      "outcome": "pass",
+      "archive": {
+        "local_path": "out/evidence/recovery-submission-native/hw-3a9afd89ea.zip",
+        "sha256": "ebfd951c112a1d90621f4b222cad20269a9277a595a527a552147331ce8b3e2a"
+      },
+      "record": {
+        "local_path": "out/evidence/recovery-submission-native/hw-3a9afd89ea.json",
+        "sha256": "e6114925ead2464c5c63bafbac4826702c6aadf51c8d8a024bbcd0488e4df874"
+      },
+      "inventory": {
+        "local_path": "out/evidence/recovery-submission-native/hw-3a9afd89ea.index.json",
+        "sha256": "3f1899f64f5d3aa2046866a26a398774cbe67bef8ecb30a2c8335fb7a5bf6f9e"
+      },
+      "execution_record": {
+        "local_path": "out/evidence/recovery-submission/linux-x64-gcc13-worker-history-5ffbf84073/result.json",
+        "sha256": "081fba611016a0d2b532184fcc710aeaee993185300525cd01a51d4b0776a734"
+      },
+      "artifact_identities_matched": {
+        "SysPane.ImageWorker": "65b38c368c9472405163a244c7f1b0ddf2c8702bb5e7945e147cb4a5935e777c",
+        "SysPane.RecoveryWorker": "6256fa4cd28d6263ea9e1f182da9e2a75b5a187bda6f9ed0efa1d51f10b99537",
+        "helpers.json": "8c4c4be109d38e4d318d439e3210d27a2ad844770fb2bd5b0e7fa54af6474902",
+        "syspane-configuration-host": "4f0ef658d9d2c1497d9f3d2bf65cccc54bd6d7994eb6bb24c3f1b26ccc8b52c5",
+        "syspane_editor_helper_worker_probe": "e3d008e63fa714e7712773c65ad096e4d9a608b03f5c7aaf4ca9cfbe3ec08aeb"
+      }
+    },
+    {
+      "family": "INSTALLED-RECOVERY",
+      "cases": [
+        "CAPTURE-APPLY",
+        "CRASH-RESTORE",
+        "KEEP-APPLY",
+        "DISCARD",
+        "CANCEL",
+        "PRIVATE-FIELD",
+        "INVALID-RECORD",
+        "REPLACEMENT-RECORD",
+        "LOST-RESULT",
+        "UNKNOWN-RESULT",
+        "ERASE-DENIED",
+        "POLICY",
+        "CLOSE",
+        "ORACLE"
+      ],
+      "outcome": "pass",
+      "archive": {
+        "local_path": "out/evidence/recovery-submission-native/ir-a37796e2f9.zip",
+        "sha256": "7e9e19441da6cfa686681424235802966ee5fd7f86fb81bfe3023584e8181528"
+      },
+      "record": {
+        "local_path": "out/evidence/recovery-submission-native/ir-a37796e2f9.json",
+        "sha256": "7bd74997f052acde93539783ab91184a6ea509bed0b2224087b6cb9a0289e482"
+      },
+      "inventory": {
+        "local_path": "out/evidence/recovery-submission-native/ir-a37796e2f9.index.json",
+        "sha256": "fc4e4c3d1b590bc1d22c6c617efcc3c9a3d47e5c0267f2704afb5856e5335486"
+      },
+      "execution_record": {
+        "local_path": "out/evidence/recovery-submission/linux-x64-gcc13-installed-fbaa6f5f94/result.json",
+        "sha256": "ea6a6686d16773f17bcdf5cf1223d742993333d2b7a497a9ea501c74daf2b17b"
+      },
+      "artifact_identities_matched": {
+        "SysPane.ImageWorker": "65b38c368c9472405163a244c7f1b0ddf2c8702bb5e7945e147cb4a5935e777c",
+        "SysPane.RecoveryWorker": "6256fa4cd28d6263ea9e1f182da9e2a75b5a187bda6f9ed0efa1d51f10b99537",
+        "syspane": "ce6ef27615e10ce596616019c8f84db1f902d207fb57eb7e86d0518547a3b658",
+        "syspane_frontend_fixture": "466801623bbf5f0a7f5cdcfd367574df24e5c216cac7204fce158929170248d1",
+        "syspane_frontend_helper_fixture": "6e9df5690ba2b0bec818fc33c9d36ec07c14d0951b6f997a8a9e2b9b07c3cb32"
+      }
+    },
+    {
+      "family": "EDITOR-RECOVERY",
+      "cases": [
+        "restore-apply",
+        "keep-apply",
+        "discard",
+        "undo-clean",
+        "cancel",
+        "private-fields",
+        "invalid",
+        "stale",
+        "policy",
+        "unknown",
+        "replacement",
+        "worker-failure",
+        "held-close",
+        "scope-change"
+      ],
+      "outcome": "pass",
+      "archive": {
+        "local_path": "out/evidence/recovery-submission-native/recovery-controls-a0f4e3e914ce.zip",
+        "sha256": "2ec562ef56b3319ea48fc8269ebec7bdcd61a3ed8ec96f6a510e9243304b4847"
+      },
+      "record": {
+        "local_path": "out/evidence/recovery-submission-native/recovery-controls-a0f4e3e914ce.json",
+        "sha256": "3e27f9c517e83cdd1ced7bcad633c4c7738bbb26c92832f9c5fd3ebc65048640"
+      },
+      "inventory": {
+        "local_path": "out/evidence/recovery-submission-native/recovery-controls-a0f4e3e914ce.index.json",
+        "sha256": "22d7e29014389a4eed63dfbe4f5db8729d2442ba39c16402ee85aad5eb7a9949"
+      },
+      "execution_record": {
+        "local_path": "out/evidence/recovery-submission/linux-x64-gcc13-controls-a1f616acd5/result.json",
+        "sha256": "6088171a422d19fcbd02be99e087f4b0dd70ce4e20d0cc203eea5d5e88251efe"
+      },
+      "artifact_identities_matched": {
+        "executable_sha256": "a4b9538c064b646bfd05fe2fb7a71c99f1feb35db1b94e7361a4499fa4945d74",
+        "worker_sha256": "6256fa4cd28d6263ea9e1f182da9e2a75b5a187bda6f9ed0efa1d51f10b99537"
+      }
+    },
+    {
+      "family": "EDITOR-HISTORY",
+      "cases": [
+        "trace",
+        "pending",
+        "factory-failure",
+        "run-failure",
+        "cancel-queued",
+        "cancel-ready",
+        "cancel-running",
+        "reload-button",
+        "reload",
+        "topology",
+        "policy",
+        "disconnect",
+        "close",
+        "late-result",
+        "recovery-capture",
+        "recovery-cancel",
+        "recovery-withdrawal"
+      ],
+      "outcome": "pass",
+      "archive": {
+        "local_path": "out/evidence/recovery-submission-native/reply-3da0340df37f.zip",
+        "sha256": "0a5372666325fed54b7897d8e3452e802fabaa14b465dcf5d109aba20ff1376f"
+      },
+      "record": {
+        "local_path": "out/evidence/recovery-submission-native/reply-3da0340df37f.json",
+        "sha256": "9cfc51cfb7f48eb3a7691ec2c729382471f921b7b7f96a4210cd9d2848647487"
+      },
+      "inventory": {
+        "local_path": "out/evidence/recovery-submission-native/reply-3da0340df37f.index.json",
+        "sha256": "4e28ab28fdbdb8e2699166ea7dcdbd0f8a8cc5a5f76b57a78ee7ac65aef870b4"
+      },
+      "execution_record": {
+        "local_path": "out/evidence/recovery-submission/linux-x64-gcc13-form-history-c4ab4efa15/result.json",
+        "sha256": "bc7825b45b6271dbfd53f40996052b54a68fafdf10254156018ce74eebe4a73b"
+      },
+      "artifact_identities_matched": {
+        "executable_sha256": "a4b9538c064b646bfd05fe2fb7a71c99f1feb35db1b94e7361a4499fa4945d74"
+      }
+    },
+    {
+      "family": "RECOVERY-GUI-LIMITS",
+      "cases": [
+        "MAX-WIDGETS",
+        "MAX-SCENE",
+        "MAX-RECORD",
+        "MAX-COMMAND-REJECT",
+        "OVER-RECORD-REJECT",
+        "CLOSE-PREPARING",
+        "POLICY"
+      ],
+      "outcome": "pass",
+      "archive": {
+        "local_path": "out/evidence/recovery-submission-native/rgl-473c48427d.zip",
+        "sha256": "0c14b49703024258f96667ed4f6da1981f65c1cf2b4370e8cd45df07c67293e4"
+      },
+      "record": {
+        "local_path": "out/evidence/recovery-submission-native/rgl-473c48427d.json",
+        "sha256": "91215bc0b3677d51e2eb947b38c19df70d7f1b06c973508b53932c9b1987790d"
+      },
+      "inventory": {
+        "local_path": "out/evidence/recovery-submission-native/rgl-473c48427d.index.json",
+        "sha256": "08dadd910b5f5443149a2047584fcc85cd34466a86a75433b3dae26d38ccd742"
+      },
+      "execution_record": {
+        "local_path": "out/evidence/recovery-submission/linux-x64-gcc13-gui-1e748d7b7e/result.json",
+        "sha256": "a0c0a819e97f62364106a1fd3f68151cc4c4972e189f3697de4da8d554f92282"
+      },
+      "artifact_identities_matched": {
+        "SysPane.ImageWorker": "65b38c368c9472405163a244c7f1b0ddf2c8702bb5e7945e147cb4a5935e777c",
+        "SysPane.RecoveryWorker": "6256fa4cd28d6263ea9e1f182da9e2a75b5a187bda6f9ed0efa1d51f10b99537",
+        "syspane": "ce6ef27615e10ce596616019c8f84db1f902d207fb57eb7e86d0518547a3b658",
+        "syspane_frontend_fixture": "466801623bbf5f0a7f5cdcfd367574df24e5c216cac7204fce158929170248d1",
+        "syspane_frontend_helper_fixture": "6e9df5690ba2b0bec818fc33c9d36ec07c14d0951b6f997a8a9e2b9b07c3cb32"
+      }
+    },
+    {
+      "family": "RECOVERY-LIMITS",
+      "cases": [
+        "MAX-WIDGETS",
+        "MAX-SCENE",
+        "MAX-RECORD",
+        "MAX-COMMAND-REJECT",
+        "OVER-RECORD-REJECT",
+        "SUPERVISOR-CLOSE"
+      ],
+      "outcome": "pass",
+      "archive": {
+        "local_path": "out/evidence/recovery-submission-native/rl-6a6ff952e6.zip",
+        "sha256": "e18b174bcb4c8070c1d4597826fdfeeee33ade8b138c598f5d52cef13b546b6d"
+      },
+      "record": {
+        "local_path": "out/evidence/recovery-submission-native/rl-6a6ff952e6.json",
+        "sha256": "57659f32d1fb75c0e0623620459582297719c6932f3542d2f45e455498b5990b"
+      },
+      "inventory": {
+        "local_path": "out/evidence/recovery-submission-native/rl-6a6ff952e6.index.json",
+        "sha256": "4754d303584858f745ca323afb57b565a9a260c357ee19012b82837c53d7b013"
+      },
+      "execution_record": {
+        "local_path": "out/evidence/recovery-submission/linux-x64-gcc13-native-8cbdb7841f/result.json",
+        "sha256": "496c4098a6863bdfb66d0d1b835d3d223ed60b4a2eb63f673c3ec923b3ac8c9a"
+      },
+      "artifact_identities_matched": {
+        "bin/syspane": "53a185da9c083be4cb4a02a292b2aabc6a37c5d4bbbd6baa684f646fd937a274",
+        "libexec/syspane/syspane-configuration-host": "6e9df5690ba2b0bec818fc33c9d36ec07c14d0951b6f997a8a9e2b9b07c3cb32",
+        "libexec/syspane/syspane-image-worker": "65b38c368c9472405163a244c7f1b0ddf2c8702bb5e7945e147cb4a5935e777c",
+        "libexec/syspane/syspane-recovery-worker": "6256fa4cd28d6263ea9e1f182da9e2a75b5a187bda6f9ed0efa1d51f10b99537",
+        "share/syspane/helpers.json": "cacd709b73aec39d2540fcd437d14324440cc2b6d6cc7e5918ba182a712bbb73"
+      }
+    },
+    {
+      "family": "RECOVERY-PREPARATION",
+      "cases": [
+        "HELD-PREPARATION",
+        "PREPARED-OFFER",
+        "PREPARED-CAPTURE",
+        "PREPARATION-CANCEL",
+        "PREPARATION-ERASURE",
+        "COALESCED-CAPTURE",
+        "INVALID-OFFER",
+        "ORACLE"
+      ],
+      "outcome": "pass",
+      "archive": {
+        "local_path": "out/evidence/recovery-submission-native/rp-9430468c68.zip",
+        "sha256": "3d45c7739d5f19a77c4c485982b13db97ef029ae92ea6ffce535414c86e1dc2d"
+      },
+      "record": {
+        "local_path": "out/evidence/recovery-submission-native/rp-9430468c68.json",
+        "sha256": "f55af87ea6139aee3893ae69561fba3dd309d6f30c225cdea57320e7785b8022"
+      },
+      "inventory": {
+        "local_path": "out/evidence/recovery-submission-native/rp-9430468c68.index.json",
+        "sha256": "5ef42f37e67d28c07c0360df1622795abc135dc669482da6efd46c17099eaa60"
+      },
+      "execution_record": {
+        "local_path": "out/evidence/recovery-submission/linux-x64-gcc13-preparation-1b9e3fccaf/result.json",
+        "sha256": "7540e1e4262f02b2fa8814fef29309ffbbd73c4308de31e275b7f87784682d2e"
+      },
+      "artifact_identities_matched": {
+        "SysPane.ImageWorker": "65b38c368c9472405163a244c7f1b0ddf2c8702bb5e7945e147cb4a5935e777c",
+        "SysPane.RecoveryWorker": "6256fa4cd28d6263ea9e1f182da9e2a75b5a187bda6f9ed0efa1d51f10b99537",
+        "helpers.json": "8c4c4be109d38e4d318d439e3210d27a2ad844770fb2bd5b0e7fa54af6474902",
+        "syspane-configuration-host": "4f0ef658d9d2c1497d9f3d2bf65cccc54bd6d7994eb6bb24c3f1b26ccc8b52c5",
+        "syspane_editor_helper_worker_probe": "e3d008e63fa714e7712773c65ad096e4d9a608b03f5c7aaf4ca9cfbe3ec08aeb"
+      }
+    }
+  ],
+  "gui_qualification": [
+    {
+      "case": "MAX-WIDGETS",
+      "outcome": "pass",
+      "maximum_work_us": 75892,
+      "maximum_delay_us": 93094,
+      "timing_violations": [],
+      "erasure_ms": null,
+      "failure": null,
+      "archive_path": "MAX-WIDGETS/result.json",
+      "record_sha256": "2d69e3498e94cc692a79fd294c2173c80f80b68f78385a69d3606d1746c15812"
+    },
+    {
+      "case": "MAX-SCENE",
+      "outcome": "pass",
+      "maximum_work_us": 90831,
+      "maximum_delay_us": 77011,
+      "timing_violations": [],
+      "erasure_ms": null,
+      "failure": null,
+      "archive_path": "MAX-SCENE/result.json",
+      "record_sha256": "3df7ec3ee5400ba92a938bc4f75ae2423390905dbaffcd9db2fb5007e24ae716"
+    },
+    {
+      "case": "MAX-RECORD",
+      "outcome": "pass",
+      "maximum_work_us": 91274,
+      "maximum_delay_us": 97055,
+      "timing_violations": [],
+      "erasure_ms": null,
+      "failure": null,
+      "archive_path": "MAX-RECORD/result.json",
+      "record_sha256": "6720e38984a113b270973564d1fcfb4c843058aaf988f72df05a0055d9b2d99e"
+    },
+    {
+      "case": "MAX-COMMAND-REJECT",
+      "outcome": "pass",
+      "maximum_work_us": 24658,
+      "maximum_delay_us": 6159,
+      "timing_violations": [],
+      "erasure_ms": null,
+      "failure": null,
+      "archive_path": "MAX-COMMAND-REJECT/result.json",
+      "record_sha256": "d1ed2cdcf595370d4febfccd98dace1f376592418bc08229ad54007dfbb39c69"
+    },
+    {
+      "case": "OVER-RECORD-REJECT",
+      "outcome": "pass",
+      "maximum_work_us": 24815,
+      "maximum_delay_us": 7176,
+      "timing_violations": [],
+      "erasure_ms": null,
+      "failure": null,
+      "archive_path": "OVER-RECORD-REJECT/result.json",
+      "record_sha256": "3a735a93538d8e550159c3045ca6c7dd7e7d26e052acc75639287f8ae6559f92"
+    },
+    {
+      "case": "CLOSE-PREPARING",
+      "outcome": "pass",
+      "maximum_work_us": 24665,
+      "maximum_delay_us": 5598,
+      "timing_violations": [],
+      "erasure_ms": null,
+      "failure": null,
+      "archive_path": "CLOSE-PREPARING/result.json",
+      "record_sha256": "b2450135368d26611f3c89ebc78da5a3d9a5063b9f57030bcd693315003181a2"
+    },
+    {
+      "case": "POLICY",
+      "outcome": "pass",
+      "maximum_work_us": 36017,
+      "maximum_delay_us": 83173,
+      "timing_violations": [],
+      "erasure_ms": 101.58709701499902,
+      "failure": null,
+      "archive_path": "POLICY/result.json",
+      "record_sha256": "8008571133e376d589dbf2b5377b90741129403d2e6f0c05d440d67cd789f67c"
+    }
+  ],
+  "diagnostics": [
+    {
+      "family": "EDITOR-PAINT-TRACE",
+      "outcome": "fail",
+      "diagnostic_only": true,
+      "archive": {
+        "local_path": "out/evidence/history-preview-native/paint-trace-4a9440e9b0.zip",
+        "sha256": "ad5200cec7436b179191d0a5c9aadceb57f42620e3da94216968459595ee4372"
+      },
+      "record": {
+        "local_path": "out/evidence/history-preview-native/paint-trace-4a9440e9b0.json",
+        "sha256": "1f4ffc32189a351379bb780e1e07dc29f163d5d303b37d7e3b5919ee63617fb7"
+      },
+      "execution_record": {
+        "local_path": "out/evidence/history-preview/linux-x64-gcc13-paint-c5b2d58782/result.json",
+        "sha256": "ca98ed23b26d6968493b57e0e856c1c5d8131b6fda1f4163d8db678f0f7636dc"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/history-preview/linux-x64-gcc13-paint-c5b2d58782/source-inputs.zip",
+        "sha256": "7198e260398580e0173d127726149539ef8f588ce5af4871ac92b238a98d3ad9"
+      },
+      "paint_calls": [
+        {
+          "case": "MAX-WIDGETS",
+          "counts": {
+            "construction": 2,
+            "draw": 16440,
+            "command": 257,
+            "poll_history": 260
+          }
+        },
+        {
+          "case": "MAX-SCENE",
+          "counts": {
+            "construction": 2,
+            "draw": 64,
+            "command": 3,
+            "poll_history": 6
+          }
+        },
+        {
+          "case": "MAX-RECORD",
+          "counts": {
+            "construction": 2,
+            "draw": 66,
+            "command": 3,
+            "poll_history": 6
+          }
+        },
+        {
+          "case": "MAX-COMMAND-REJECT",
+          "counts": {
+            "construction": 1,
+            "draw": 28
+          }
+        },
+        {
+          "case": "OVER-RECORD-REJECT",
+          "counts": {
+            "construction": 1,
+            "draw": 10
+          }
+        },
+        {
+          "case": "CLOSE-PREPARING",
+          "counts": {
+            "construction": 1,
+            "draw": 4
+          }
+        },
+        {
+          "case": "POLICY",
+          "counts": {
+            "construction": 1,
+            "draw": 28,
+            "command": 3
+          }
+        }
+      ]
+    },
+    {
+      "family": "RECOVERY-PREVIEW-COST",
+      "outcome": "pass",
+      "diagnostic_only": true,
+      "archive": {
+        "local_path": "out/evidence/history-preview-native/rl-a6af57f237.zip",
+        "sha256": "c26b42f649b826246d2b6b7860ddba742f6c8eb8d770e15eb516c3c65ada4000"
+      },
+      "record": {
+        "local_path": "out/evidence/history-preview-native/rl-a6af57f237.json",
+        "sha256": "b9d478e22ab6ef2a5a2480dc43d5b53e80e00099d23fb8f6f039021b4b9d21e3"
+      },
+      "execution_record": {
+        "local_path": "out/evidence/history-preview/linux-x64-gcc13-preview-e833512479/result.json",
+        "sha256": "3a13b328e316eaefed4a8ebc322b0df39c1082aa2e417142a45db1c9ba21a6e0"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/history-preview/linux-x64-gcc13-preview-e833512479/source-inputs.zip",
+        "sha256": "7198e260398580e0173d127726149539ef8f588ce5af4871ac92b238a98d3ad9"
+      },
+      "measurements": [
+        {
+          "case": "MAX-WIDGETS",
+          "measurements": {
+            "base_us": 1531,
+            "binding_us": 17495,
+            "catalog_us": 1375,
+            "clean_clipboard": false,
+            "clean_clipboard_us": 2,
+            "dirty_clipboard": false,
+            "dirty_clipboard_us": 3,
+            "draft_us": 53104,
+            "edit_us": 78696,
+            "may_submit": true,
+            "may_submit_again": true,
+            "may_submit_again_us": 1285,
+            "may_submit_us": 36577,
+            "owns_current_resources": true,
+            "paint_us": 42969,
+            "resources_us": 35204,
+            "snapshot_us": 2,
+            "surface_close_us": 628,
+            "surface_state": 1,
+            "surface_us": 42259
+          },
+          "outcome": "observed"
+        },
+        {
+          "case": "MAX-SCENE",
+          "measurements": {
+            "base_us": 1516,
+            "binding_us": 25906,
+            "catalog_us": 1431,
+            "clean_clipboard": false,
+            "clean_clipboard_us": 5,
+            "dirty_clipboard": false,
+            "dirty_clipboard_us": 3,
+            "draft_us": 79070,
+            "edit_us": 117496,
+            "may_submit": true,
+            "may_submit_again": true,
+            "may_submit_again_us": 1366,
+            "may_submit_us": 53847,
+            "owns_current_resources": true,
+            "paint_us": 2496,
+            "resources_us": 52368,
+            "snapshot_us": 2,
+            "surface_close_us": 604,
+            "surface_state": 4,
+            "surface_us": 59954
+          },
+          "outcome": "observed"
+        }
+      ]
+    }
+  ],
+  "prior_gui_qualification": {
+    "local_path": "spec/delivery/checkpoints/history-form.json",
+    "sha256": "240c08434d1e0745a3203ce7a8acb1ec9f99452c49967dc93433997a9ef8705b"
+  },
+  "workspace": {
+    "maximum_bytes": 8589934592,
+    "reservations_unchanged": true,
+    "archived_native_bytes": 1014584608,
+    "preserved_preflight_stops": [
+      {
+        "local_path": "out/evidence/recovery-submission-verification-37b367c55f.json",
+        "sha256": "a02d992e48fc88530af48abe72b30738713c490a2a88a5a7af633fb65faaf43a"
+      }
+    ],
+    "windows_native_archive": {
+      "local_path": "out/evidence/recovery-submission-windows-native.zip",
+      "sha256": "0bf1bd4cdab6e8b90fe48f82c47d2eb3b084706021da0f9a67509b6d70adfe57"
+    },
+    "windows_native_inventory": {
+      "local_path": "out/evidence/recovery-submission-windows-native.json",
+      "sha256": "a5ad26897fa70824318a38c580e4691409b652c68ca98c122dfbcf0a54b18b9b"
+    },
+    "windows_native_pruning": {
+      "local_path": "out/evidence/recovery-submission-windows-native-pruned.json",
+      "sha256": "8012fd9c5bf605878b0b71da8c04fe460cd7bfd8f20a95b9a3f9cbd3e93df8e8"
+    }
+  },
+  "limitations": [
+    "One ordinary installed GUI qualification passed in the pinned Linux development laboratory; this does not qualify other targets or complete desktop editions.",
+    "Production recovery/history admission has not been changed in this package. The previously failing GUI gate is now satisfied for the recorded artifacts; review the remaining admission conditions next.",
+    "General asynchronous authoring, native preview handoff, native inspector and desktop/telemetry/lifecycle integration remain required.",
+    "Earlier failures and diagnostic-only timings are preserved, not reclassified as passing qualification."
+  ],
+  "next_step": "Audit the now-passing backend and installed-loop recovery gates and implement the next production admission boundary; continue general authoring/preview work and all five complete release editions."
+}

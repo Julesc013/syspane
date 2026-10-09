@@ -489,7 +489,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "c567ede5bfeaa83ca61ee4d8e9b1d132cf026652c40cc361156be208b9553f87"
+      "sha256": "c326b8c2bb98542896663203e5c972dc4cb75c98018222ee91963b1b52c02f4a"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -2530,6 +2530,18 @@
       "sha256": "f6abf663a201b016a2fad18e01169075b22fb3805de77386cf934a71594d85e0"
     },
     {
+      "id": "SP-W11-RECOVERY-SUBMISSION",
+      "path": "delivery/packages/w-11-recovery-submission.md",
+      "title": "Prepared submission checks for recovery restore",
+      "description": "Keep structural Apply eligibility on the recovery worker while preserving live authorization and full transaction validation.",
+      "requires": [
+        "SP-W11-RECOVERY-PREPARATION",
+        "SP-W11-DRAFT-ADMISSION",
+        "SP-W11-HISTORY-FORM"
+      ],
+      "sha256": "a6c1846738f1ef25e2a07da11bbd75c58c4941155c3cda2a78bbac22ef29230c"
+    },
+    {
       "id": "SP-W11-SCENE-INSPECTOR",
       "path": "delivery/packages/w-11-scene-inspector.md",
       "title": "Native scene inspector navigation and disclosure",
@@ -3144,6 +3156,17 @@
       "sha256": "7c5086819daabb10abc35e5c9c6483d2f45f4a06875e7e6d372ac3d3f4025a3f"
     },
     {
+      "id": "SP-RECOVERY-SUBMISSION-HANDOFF",
+      "path": "delivery/recovery-submission-handoff.md",
+      "title": "Prepared recovery submission handoff",
+      "description": "Recovery prepares structural submission hints and the unchanged installed GUI qualification passes.",
+      "requires": [
+        "SP-W11-RECOVERY-SUBMISSION",
+        "SP-HISTORY-FORM-HANDOFF"
+      ],
+      "sha256": "32b4cdd74ae2f0b5877b58829ce5130ee59c93fc0f9b70c6a036636171803f74"
+    },
+    {
       "id": "SP-RECOVERY-TRANSFER-HANDOFF",
       "path": "delivery/recovery-transfer-handoff.md",
       "title": "Authenticated coherent recovery context transfer",
@@ -3688,7 +3711,7 @@
         "SP-RENDERING",
         "SP-COMMANDS"
       ],
-      "sha256": "38579feff3fbbdf4cbee47ad965fa45e0c65279c583b21d3770a57adecc10b69"
+      "sha256": "3d9810da4e4db8254bf049a6a1b3231a29bc06d9100c33e046454702fa41b102"
     },
     {
       "id": "SP-POLICY",

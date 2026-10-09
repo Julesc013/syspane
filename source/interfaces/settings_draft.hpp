@@ -44,7 +44,7 @@ public:
     const Json& last_result()const{return result_;}
     std::optional<std::uint64_t> revision()const;
 private:
-    friend class EditorDraft;friend class HistoryWork;
+    friend class EditorDraft;friend class HistoryWork;friend class RecoveryWork;
     // Detached recovery work carries authored state and authority, never request
     // tickets, results or an active transaction.
     struct RecoveryCopy {};

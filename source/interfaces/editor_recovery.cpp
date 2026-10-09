@@ -95,6 +95,7 @@ struct RecoveryWork::Impl {
 struct RecoveryPrepared::Impl {
     std::weak_ptr<const char> validity;RecoveryIdentity identity;bool capture=false;
     std::optional<std::string> bytes;std::pair<c::Authored,c::ResourceSnapshot> candidate;RecoveryDescription description;
+    std::optional<bool> preview,commit;
 };
 RecoveryWork::RecoveryWork(std::unique_ptr<Impl> value):impl_(std::move(value)){}
 RecoveryWork::~RecoveryWork()=default;
@@ -108,6 +109,13 @@ std::unique_ptr<RecoveryPrepared> RecoveryWork::run(){
         input->draft->recovery_destination();result->candidate=input->draft->prepare_recovery(input->bytes,input->identity);
         const auto& value=result->candidate;result->description={value.first.scene.at("scene_id").get<std::string>(),c::authored_revision(value.first),
             value.first.scene.at("widgets").size(),value.second->theme_pin()!=input->draft->resources()->theme_pin()};
+        auto& draft=input->draft->transaction_;
+        draft.adopt_scene(std::move(result->candidate.first),std::move(result->candidate.second));
+        // Reuse only structural UI hints for this exact opaque candidate. Live
+        // eligibility still authorizes current policy; begin fully validates.
+        (void)draft.may_submit("preview");(void)draft.may_submit("commit");
+        result->preview=draft.submission_validation_.preview;result->commit=draft.submission_validation_.commit;
+        result->candidate={std::move(*draft.draft_),std::move(draft.draft_resources_)};
     }
     return std::unique_ptr<RecoveryPrepared>(new RecoveryPrepared(std::move(result)));
 }
@@ -138,6 +146,8 @@ bool EditorDraft::restore_recovery(std::unique_ptr<RecoveryPrepared> prepared,co
     try{need(static_cast<bool>(prepared),"recovery.prepared");check_recovery(*prepared,expected,false);}
     catch(...){invalidate_recovery();throw;}
     invalidate_recovery();
-    return record_prepared(std::move(prepared->impl_->candidate),{});
+    const bool changed=record_prepared(std::move(prepared->impl_->candidate),{});
+    if(changed){transaction_.submission_validation_.preview=prepared->impl_->preview;transaction_.submission_validation_.commit=prepared->impl_->commit;}
+    return changed;
 }
 }
