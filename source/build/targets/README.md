@@ -1,6 +1,12 @@
 # Foundation development profiles
 
-Current revisions are Windows x64 18, Linux x64 19 and historical x86 10. The
+Current revisions are Windows x64 41, Linux x64 72 and historical x86 32. The
+[request preparation checkpoint](../../../spec/delivery/request-preparation-handoff.md)
+adds full detached command preparation and current-owner adoption. All three
+profiles pass 342 selected portable checks. Native worker/form integration and
+ordinary GUI qualification remain open; these are development profiles.
+
+Earlier revisions were Windows x64 18, Linux x64 19 and historical x86 10. The
 [network publication checkpoint](../../../spec/delivery/network-publication-handoff.md)
 passes 96/101 modern and 88 historical host checks. All profiles build measured
 counter/rate projection; Linux also builds the finite supervised collector probe.

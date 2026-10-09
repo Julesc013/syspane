@@ -568,7 +568,8 @@
         "SP-W11-PRODUCTION-RECOVERY",
         "SP-W11-RECOVERY-ADMISSION-INVESTIGATION",
         "SP-W11-VALIDATED-AUTHORED",
-        "SP-W11-EDITOR-CALLBACK-TRACE"
+        "SP-W11-EDITOR-CALLBACK-TRACE",
+        "SP-W11-REQUEST-PREPARATION"
       ],
       "acceptance_tests": [
         "T-SETTINGS",
@@ -643,14 +644,16 @@
         "tests/configuration/editor_callback_fixture.c",
         "tests/configuration/editor_callback_trace.py",
         "tests/configuration/editor_callback_trace_tests.py",
-        "tests/configuration/native_editor_callback_trace.py"
+        "tests/configuration/native_editor_callback_trace.py",
+        "source/interfaces/editor_request.cpp",
+        "tests/editor/request_preparation_tests.cpp"
       ],
       "status": "in_progress",
       "authority_class": "development",
       "execution_grant": "user:foundation-native-campaign-2026-10-05",
-      "notes": "Validated test-only callback tracing identifies long Apply, recovery-restore and form-timer work in 2798 source-resolved invocations. All seven instrumented cases pass but do not supersede the ordinary MAX-RECORD failure. CPU-over-wall discrepancies remain recorded without utilization inference. Isolate Apply preparation costs and close the existing-worker/current-owner boundary, preserving full validation, current authority and request/recovery semantics, before another ordinary qualification attempt. Product binaries are unchanged; production recovery and all five complete releases remain open.",
-      "package": "delivery/packages/w-11-editor-callback-trace.md",
-      "evidence": "delivery/editor-callback-trace-handoff.md"
+      "notes": "Portable request preparation now executes full validation on detached state and adopts only into the unchanged originating draft under current authority. Frozen expectations and all 342 selected portable checks pass on three profiles; six native regression families pass 88 cases. Implement the finite request slot on the existing native worker, then form cancellation/current-policy integration. Installed Apply remains synchronous; original GUI failures, production admission and all five full editions remain open.",
+      "package": "delivery/packages/w-11-request-preparation.md",
+      "evidence": "delivery/request-preparation-handoff.md"
     },
     {
       "id": "W-12",

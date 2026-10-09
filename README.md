@@ -11,6 +11,11 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
+The [request preparation boundary](spec/delivery/request-preparation-handoff.md)
+now validates commands on detached state and adopts them only into the unchanged
+originating draft. Native worker/form integration remains required before it can
+remove Apply preparation from the installed GUI thread.
+
 The [immutable authored validation](spec/delivery/validated-authored-handoff.md)
 reduces repeated scene validation during native composition while preserving current
 layout and policy checks. Six of seven ordinary GUI cases pass; MAX-RECORD still exceeds the 100 ms delay limit.

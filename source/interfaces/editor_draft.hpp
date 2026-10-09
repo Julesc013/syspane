@@ -55,6 +55,30 @@ private:
     std::unique_ptr<Impl> impl_;
 };
 
+// Full command preparation on detached state. Adoption alone creates a live
+// request, after exact owner/mutation and current authority checks.
+class RequestPrepared {
+public:
+    ~RequestPrepared();
+    RequestPrepared(const RequestPrepared&)=delete;
+    RequestPrepared& operator=(const RequestPrepared&)=delete;
+private:
+    friend class EditorDraft;friend class RequestWork;
+    struct Impl;explicit RequestPrepared(std::unique_ptr<Impl>);
+    std::unique_ptr<Impl> impl_;
+};
+class RequestWork {
+public:
+    ~RequestWork();
+    RequestWork(const RequestWork&)=delete;
+    RequestWork& operator=(const RequestWork&)=delete;
+    std::unique_ptr<RequestPrepared> run();
+private:
+    friend class EditorDraft;
+    struct Impl;explicit RequestWork(std::unique_ptr<Impl>);
+    std::unique_ptr<Impl> impl_;
+};
+
 // One serialized native owner. Scene/selection borrows expire on every mutation,
 // policy update or close; adapters must erase their own caches on disclosure loss.
 class EditorDraft {
@@ -100,6 +124,8 @@ public:
     bool complete(std::uint64_t ticket,const Json&);
     bool reconciled(std::uint64_t ticket,const std::string& query,const std::string& epoch,const Json&);
     std::optional<EditRequest> begin(const std::string& intent,const std::string& request);
+    std::unique_ptr<RequestWork> request_work(const std::string& intent,const std::string& request);
+    EditRequest adopt_request(std::unique_ptr<RequestPrepared>);
     std::optional<EditRequest> active_request()const{return transaction_.active_request();}
     std::optional<EditRequest> cancel_request(){invalidate_recovery();return transaction_.cancel_request();}
     void disconnected(){invalidate_recovery();clear_clipboard();transaction_.disconnected();}

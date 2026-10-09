@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-09T11:16:16+00:00", "scope": "Independent callback trace and preserved ordinary qualification failure"}
+updated: {"by": "codex", "at": "2026-10-09T11:37:14+00:00", "scope": "Portable request preparation and remaining native integration boundary"}
 ---
 
 # Current state and next admitted boundary
@@ -21,6 +21,14 @@ Shared build tooling now lives in `source/build/`. Machine bindings and raw
 recordings are local ignored `out/` content; the retired root is absent from the
 tracked tree. See `docs/developers/build.md` in the repository for checkout
 setup and the [repository contract](../foundation/repository.md) for ownership.
+
+The [request preparation boundary](request-preparation-handoff.md) now validates
+and serializes commands on detached state, then rechecks current owner/authority
+before allocating a live ticket. Frozen reference cases and all 342 selected
+portable checks pass on three profiles. Integrate one finite request slot into the
+existing native worker, then connect form cancellation/current-policy handling.
+Installed Apply remains synchronous. Production recovery and all five complete
+editions remain open; original ordinary GUI timing failures are preserved.
 
 The [callback trace](editor-callback-trace-handoff.md) identifies long synchronous
 Apply, recovery-restore and form-timer work in the unchanged native frontend. Its

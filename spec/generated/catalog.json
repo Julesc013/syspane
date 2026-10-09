@@ -489,7 +489,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "3436bbb8fee91b993cff5c822bbeb34d95a5b17d6b02dd8a1e2a0899ae1f16ad"
+      "sha256": "ecfc0b74784a7fca19333989f99a225b96965e72f18903915cc2ca2b00bcd06f"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -2589,6 +2589,18 @@
       "sha256": "a6c1846738f1ef25e2a07da11bbd75c58c4941155c3cda2a78bbac22ef29230c"
     },
     {
+      "id": "SP-W11-REQUEST-PREPARATION",
+      "path": "delivery/packages/w-11-request-preparation.md",
+      "title": "Detached editor request preparation",
+      "description": "Move full Apply command preparation off the GUI while retaining exact current-owner publication.",
+      "requires": [
+        "SP-W11-EDITOR-CALLBACK-TRACE",
+        "SP-W11-HISTORY-PREPARATION",
+        "SP-W11-RECOVERY-SUBMISSION"
+      ],
+      "sha256": "8a548e12f18e0b5b979dd8394b7f30e062b5898dc69d76bc33908d4f7ae9a213"
+    },
+    {
       "id": "SP-W11-SCENE-INSPECTOR",
       "path": "delivery/packages/w-11-scene-inspector.md",
       "title": "Native scene inspector navigation and disclosure",
@@ -3257,6 +3269,17 @@
         "SP-TARGETS"
       ],
       "sha256": "e7119811fcd8a2d45457876576c709da36f56fc56cdc9b3567d9427b7f04e244"
+    },
+    {
+      "id": "SP-REQUEST-PREPARATION-HANDOFF",
+      "path": "delivery/request-preparation-handoff.md",
+      "title": "Detached editor request preparation handoff",
+      "description": "Portable full command preparation and exact owner adoption, with native integration still required.",
+      "requires": [
+        "SP-W11-REQUEST-PREPARATION",
+        "SP-EDITOR-CALLBACK-TRACE-HANDOFF"
+      ],
+      "sha256": "4c51cf061d5deb255a4fc2e49b323b42f7c6e336a68d4a796c9982337e4e1806"
     },
     {
       "id": "SP-RESOURCE-GENERATIONS-HANDOFF",

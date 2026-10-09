@@ -1,0 +1,748 @@
+{
+  "recorded_at": "2026-10-09T11:42:55.839441+00:00",
+  "source_base": "100a34ff497bf1391de0501d044a7b825b06fc8b",
+  "scope": "Portable detached request preparation; installed worker/form integration remains pending.",
+  "frozen_expectations": {
+    "path": "tests/editor/request_preparation_tests.cpp",
+    "sha256": "cdf1332efdcc57244d4f0ee9e5527f274d8213875ecd35d17a5f00ee2bdecedb",
+    "reference_cases": 5,
+    "prepared_cases": 8,
+    "unchanged_between_reference_and_final": true
+  },
+  "profiles": {
+    "linux-x64-gcc13": {
+      "revision": "72",
+      "portable_checks": 342,
+      "request_cases": 8
+    },
+    "windows-x64-gcc15": {
+      "revision": "41",
+      "portable_checks": 342,
+      "request_cases": 8
+    },
+    "windows-x86-v141-xp": {
+      "revision": "32",
+      "portable_checks": 342,
+      "request_cases": 8
+    }
+  },
+  "legacy_checks": 2,
+  "attempts": [
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "configure",
+      "started_at": "2026-10-09T11:27:32.130817+00:00",
+      "finished_at": "2026-10-09T11:27:39.763948+00:00",
+      "exit": 0,
+      "command": [
+        "env",
+        "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+        "cmake",
+        "--preset",
+        "linux-x64-gcc13"
+      ],
+      "record": "out/evidence/request-preparation/linux-x64-gcc13-configure-3c33a2eb2e/result.json",
+      "record_sha256": "f2a97dea37b7e90b653a3c8311b00640dcea89647a312b4861bb63ad0e86fb0f",
+      "source_archive": "out/evidence/request-preparation/linux-x64-gcc13-configure-3c33a2eb2e/source-inputs.zip",
+      "source_archive_sha256": "0cdc8af870f6711acefafed9037ddfd48e5ee46dcc11c06cc3448502870ebfa4",
+      "stage": "reference",
+      "passed_cases": 0,
+      "measurements": []
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "history-build",
+      "started_at": "2026-10-09T11:28:03.695340+00:00",
+      "finished_at": "2026-10-09T11:28:08.354100+00:00",
+      "exit": 0,
+      "command": [
+        "env",
+        "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+        "cmake",
+        "--build",
+        "--preset",
+        "linux-x64-gcc13",
+        "--target",
+        "syspane_history_preparation_tests"
+      ],
+      "record": "out/evidence/request-preparation/linux-x64-gcc13-history-build-969b139ff0/result.json",
+      "record_sha256": "85b6e03a09779dbafcc5d0287369c59fdee5756bcd3c926a1ff675552c52b685",
+      "source_archive": "out/evidence/request-preparation/linux-x64-gcc13-history-build-969b139ff0/source-inputs.zip",
+      "source_archive_sha256": "0cdc8af870f6711acefafed9037ddfd48e5ee46dcc11c06cc3448502870ebfa4",
+      "stage": "reference",
+      "passed_cases": 0,
+      "measurements": []
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "request",
+      "started_at": "2026-10-09T11:28:14.901269+00:00",
+      "finished_at": "2026-10-09T11:28:15.602937+00:00",
+      "exit": 0,
+      "command": [
+        "env",
+        "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+        "ctest",
+        "--preset",
+        "linux-x64-gcc13",
+        "-R",
+        "^editor[.]REQUEST-PREPARATION-",
+        "--output-on-failure",
+        "-V"
+      ],
+      "record": "out/evidence/request-preparation/linux-x64-gcc13-request-235700e337/result.json",
+      "record_sha256": "9e4411c1671cc2860bbb255316a5bcc94d5db75268e2f658c09a9d2150e9dbe6",
+      "source_archive": "out/evidence/request-preparation/linux-x64-gcc13-request-235700e337/source-inputs.zip",
+      "source_archive_sha256": "0cdc8af870f6711acefafed9037ddfd48e5ee46dcc11c06cc3448502870ebfa4",
+      "stage": "reference",
+      "passed_cases": 5,
+      "measurements": [
+        "request-cost synchronous begin_us=102560"
+      ],
+      "test_artifact": {
+        "syspane_history_preparation_tests": "a41889d941f56998a3f99a172fb6a5e0d6fdb8a7171dd716293e797ba41fbea0"
+      },
+      "ctest_log_archive": {
+        "path": "out/evidence/request-preparation/linux-x64-gcc13-request-235700e337/ctest-log.zip",
+        "sha256": "90fea6a720ff31abecdf29fd542710231c958a6a403fbea8613942de0e3f2670"
+      }
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "configure",
+      "started_at": "2026-10-09T11:29:36.105000+00:00",
+      "finished_at": "2026-10-09T11:29:43.453368+00:00",
+      "exit": 0,
+      "command": [
+        "env",
+        "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+        "cmake",
+        "--preset",
+        "linux-x64-gcc13"
+      ],
+      "record": "out/evidence/request-preparation/linux-x64-gcc13-configure-8dff2c81bc/result.json",
+      "record_sha256": "49249717e94849d96ada9bb0a9bd4b4a6a43aecc86be549c33e995f11cb7fde2",
+      "source_archive": "out/evidence/request-preparation/linux-x64-gcc13-configure-8dff2c81bc/source-inputs.zip",
+      "source_archive_sha256": "22eb65dda81fe3f92c617dff641fdb11465570465c401950cf30bd64687a0d4a",
+      "stage": "preliminary",
+      "passed_cases": 0,
+      "measurements": []
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "history-build",
+      "started_at": "2026-10-09T11:29:52.140805+00:00",
+      "finished_at": "2026-10-09T11:30:05.345762+00:00",
+      "exit": 0,
+      "command": [
+        "env",
+        "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+        "cmake",
+        "--build",
+        "--preset",
+        "linux-x64-gcc13",
+        "--target",
+        "syspane_history_preparation_tests"
+      ],
+      "record": "out/evidence/request-preparation/linux-x64-gcc13-history-build-12bf265699/result.json",
+      "record_sha256": "11b12fb5a68b891a029cd4e04db852567942c4a4da30fe2fd88a098c2ba76c91",
+      "source_archive": "out/evidence/request-preparation/linux-x64-gcc13-history-build-12bf265699/source-inputs.zip",
+      "source_archive_sha256": "22eb65dda81fe3f92c617dff641fdb11465570465c401950cf30bd64687a0d4a",
+      "stage": "preliminary",
+      "passed_cases": 0,
+      "measurements": []
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "request",
+      "started_at": "2026-10-09T11:30:11.368860+00:00",
+      "finished_at": "2026-10-09T11:30:12.725431+00:00",
+      "exit": 0,
+      "command": [
+        "env",
+        "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+        "ctest",
+        "--preset",
+        "linux-x64-gcc13",
+        "-R",
+        "^editor[.]REQUEST-PREPARATION-",
+        "--output-on-failure",
+        "-V"
+      ],
+      "record": "out/evidence/request-preparation/linux-x64-gcc13-request-e623c4cd42/result.json",
+      "record_sha256": "37e95d9b2a6d70a1ffd6c8da0a90d36f0b3ec32de295aa2a9b62041cbf13b293",
+      "source_archive": "out/evidence/request-preparation/linux-x64-gcc13-request-e623c4cd42/source-inputs.zip",
+      "source_archive_sha256": "22eb65dda81fe3f92c617dff641fdb11465570465c401950cf30bd64687a0d4a",
+      "stage": "preliminary",
+      "passed_cases": 8,
+      "measurements": [
+        "request-cost prepared capture_us=1429 run_and_join_us=117836 adopt_us=849"
+      ],
+      "test_artifact": {
+        "syspane_history_preparation_tests": "811e3442843aee4b220e52e529499e3cf893f746366ec82d18d5da6f6dd8443e"
+      },
+      "ctest_log_archive": {
+        "path": "out/evidence/request-preparation/linux-x64-gcc13-request-e623c4cd42/ctest-log.zip",
+        "sha256": "f698fe17d930e9689ba7abbe2a7ab7e49c8110f9b90ebd9ae569030d0ea0458b"
+      }
+    },
+    {
+      "profile": "windows-x64-gcc15",
+      "action": "configure",
+      "started_at": "2026-10-09T11:30:54.248215+00:00",
+      "finished_at": "2026-10-09T11:30:55.750939+00:00",
+      "exit": 0,
+      "command": [
+        "cmake",
+        "--preset",
+        "windows-x64-gcc15"
+      ],
+      "record": "out/evidence/request-preparation/windows-x64-gcc15-configure-307e75d8fb/result.json",
+      "record_sha256": "604ec1d861fda737b1270c26d2c68ae510c67d861d2945693665dc37173a2d58",
+      "source_archive": "out/evidence/request-preparation/windows-x64-gcc15-configure-307e75d8fb/source-inputs.zip",
+      "source_archive_sha256": "3cc39457b25c37d1be0d2c855085a8cfc3bed2c0ad4f32bf4f86e1aa9f25cbcc",
+      "stage": "final",
+      "passed_cases": 0,
+      "measurements": []
+    },
+    {
+      "profile": "windows-x86-v141-xp",
+      "action": "configure",
+      "started_at": "2026-10-09T11:30:54.254540+00:00",
+      "finished_at": "2026-10-09T11:30:56.239729+00:00",
+      "exit": 0,
+      "command": [
+        "cmake",
+        "--preset",
+        "windows-x86-v141-xp"
+      ],
+      "record": "out/evidence/request-preparation/windows-x86-v141-xp-configure-c2c4da05a3/result.json",
+      "record_sha256": "3ed544ed00555aee503c843557b94e55a05a3cacf48d27f99f4fe167bd406f3b",
+      "source_archive": "out/evidence/request-preparation/windows-x86-v141-xp-configure-c2c4da05a3/source-inputs.zip",
+      "source_archive_sha256": "3cc39457b25c37d1be0d2c855085a8cfc3bed2c0ad4f32bf4f86e1aa9f25cbcc",
+      "stage": "final",
+      "passed_cases": 0,
+      "measurements": []
+    },
+    {
+      "profile": "windows-x64-gcc15",
+      "action": "build",
+      "started_at": "2026-10-09T11:30:58.043015+00:00",
+      "finished_at": "2026-10-09T11:32:11.760946+00:00",
+      "exit": 0,
+      "command": [
+        "cmake",
+        "--build",
+        "--preset",
+        "windows-x64-gcc15"
+      ],
+      "record": "out/evidence/request-preparation/windows-x64-gcc15-build-9a8f0de75e/result.json",
+      "record_sha256": "4ec4053025e7a6d59dcee0855bd12d9c5b113e32438265967c947c5882d7a24a",
+      "source_archive": "out/evidence/request-preparation/windows-x64-gcc15-build-9a8f0de75e/source-inputs.zip",
+      "source_archive_sha256": "3cc39457b25c37d1be0d2c855085a8cfc3bed2c0ad4f32bf4f86e1aa9f25cbcc",
+      "stage": "final",
+      "passed_cases": 0,
+      "measurements": []
+    },
+    {
+      "profile": "windows-x86-v141-xp",
+      "action": "build",
+      "started_at": "2026-10-09T11:30:58.356145+00:00",
+      "finished_at": "2026-10-09T11:32:28.199879+00:00",
+      "exit": 0,
+      "command": [
+        "cmake",
+        "--build",
+        "--preset",
+        "windows-x86-v141-xp"
+      ],
+      "record": "out/evidence/request-preparation/windows-x86-v141-xp-build-3ffd142a4f/result.json",
+      "record_sha256": "d25b2db5a4da6b7a9b014f7ca079bd2ad94d85f5180f92540c04a52cebf7717d",
+      "source_archive": "out/evidence/request-preparation/windows-x86-v141-xp-build-3ffd142a4f/source-inputs.zip",
+      "source_archive_sha256": "3cc39457b25c37d1be0d2c855085a8cfc3bed2c0ad4f32bf4f86e1aa9f25cbcc",
+      "stage": "final",
+      "passed_cases": 0,
+      "measurements": []
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "build",
+      "started_at": "2026-10-09T11:31:00.163462+00:00",
+      "finished_at": "2026-10-09T11:32:23.675301+00:00",
+      "exit": 0,
+      "command": [
+        "env",
+        "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+        "cmake",
+        "--build",
+        "--preset",
+        "linux-x64-gcc13"
+      ],
+      "record": "out/evidence/request-preparation/linux-x64-gcc13-build-5ce02aa146/result.json",
+      "record_sha256": "13a9987a03a4f23b07f31ff6a7909bbfa7174b7a9f7361050cbc6d5615f4213f",
+      "source_archive": "out/evidence/request-preparation/linux-x64-gcc13-build-5ce02aa146/source-inputs.zip",
+      "source_archive_sha256": "1ba9a80e6f574336e30a4338aaaedc6747c19419d1b8b1f9a3c6662601040ae3",
+      "stage": "final",
+      "passed_cases": 0,
+      "measurements": []
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "request",
+      "started_at": "2026-10-09T11:34:02.073386+00:00",
+      "finished_at": "2026-10-09T11:34:03.424408+00:00",
+      "exit": 0,
+      "command": [
+        "env",
+        "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+        "ctest",
+        "--preset",
+        "linux-x64-gcc13",
+        "-R",
+        "^editor[.]REQUEST-PREPARATION-",
+        "--output-on-failure",
+        "-V"
+      ],
+      "record": "out/evidence/request-preparation/linux-x64-gcc13-request-55188328ba/result.json",
+      "record_sha256": "ce8604127bab356b9250d31026d6f2222a8d00054158494c5575260183fc0f3f",
+      "source_archive": "out/evidence/request-preparation/linux-x64-gcc13-request-55188328ba/source-inputs.zip",
+      "source_archive_sha256": "1ba9a80e6f574336e30a4338aaaedc6747c19419d1b8b1f9a3c6662601040ae3",
+      "stage": "final",
+      "passed_cases": 8,
+      "measurements": [
+        "request-cost prepared capture_us=1460 run_and_join_us=117999 adopt_us=966"
+      ],
+      "test_artifact": {
+        "syspane_history_preparation_tests": "b5b668dc83b3d2c07b349daea00a5dfbae84701ca169102bcbc7901a234ff7cc"
+      },
+      "ctest_log_archive": {
+        "path": "out/evidence/request-preparation/linux-x64-gcc13-request-55188328ba/ctest-log.zip",
+        "sha256": "302df8f763b8f59a4dab7ff52bcf38530e54b4d08721880b27437117c612e4c5"
+      }
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "test",
+      "started_at": "2026-10-09T11:34:11.502419+00:00",
+      "finished_at": "2026-10-09T11:35:20.141805+00:00",
+      "exit": 0,
+      "command": [
+        "env",
+        "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+        "ctest",
+        "--preset",
+        "linux-x64-gcc13",
+        "-R",
+        "^(editor|settings|configuration|scene|protocol|composition)[.]",
+        "--output-on-failure"
+      ],
+      "record": "out/evidence/request-preparation/linux-x64-gcc13-test-410f2162a1/result.json",
+      "record_sha256": "db9481961739bf88031e844bbac125860e95e50390b811c9a47dc592fed4db83",
+      "source_archive": "out/evidence/request-preparation/linux-x64-gcc13-test-410f2162a1/source-inputs.zip",
+      "source_archive_sha256": "1ba9a80e6f574336e30a4338aaaedc6747c19419d1b8b1f9a3c6662601040ae3",
+      "stage": "final",
+      "passed_cases": 342,
+      "measurements": [],
+      "ctest_log_archive": {
+        "path": "out/evidence/request-preparation/linux-x64-gcc13-test-410f2162a1/ctest-log.zip",
+        "sha256": "de3b14857f9a802dad3fd4c509dbcb3583e03ccb98ead3dffcca7b19a8d900fe"
+      }
+    },
+    {
+      "profile": "windows-x64-gcc15",
+      "action": "request",
+      "started_at": "2026-10-09T11:35:24.542043+00:00",
+      "finished_at": "2026-10-09T11:35:26.403047+00:00",
+      "exit": 0,
+      "command": [
+        "ctest",
+        "--preset",
+        "windows-x64-gcc15",
+        "-R",
+        "^editor[.]REQUEST-PREPARATION-",
+        "--output-on-failure",
+        "-V"
+      ],
+      "record": "out/evidence/request-preparation/windows-x64-gcc15-request-690a55ea21/result.json",
+      "record_sha256": "c92b44919a3df42f0c15de6d40742c5b9be9f995640fbfdf30ad599208e3639d",
+      "source_archive": "out/evidence/request-preparation/windows-x64-gcc15-request-690a55ea21/source-inputs.zip",
+      "source_archive_sha256": "3cc39457b25c37d1be0d2c855085a8cfc3bed2c0ad4f32bf4f86e1aa9f25cbcc",
+      "stage": "final",
+      "passed_cases": 8,
+      "measurements": [
+        "request-cost prepared capture_us=1645 run_and_join_us=168103 adopt_us=734"
+      ],
+      "test_artifact": {
+        "syspane_history_preparation_tests.exe": "0304ae32c726cff1dabf3967d6be8911606939b088055b9115f75ff94a0b4915"
+      },
+      "ctest_log_archive": {
+        "path": "out/evidence/request-preparation/windows-x64-gcc15-request-690a55ea21/ctest-log.zip",
+        "sha256": "afd10977f0a679e2859a5b67b1e829e535fc018332ed62aca3ef376f1e396a54"
+      }
+    },
+    {
+      "profile": "windows-x64-gcc15",
+      "action": "test",
+      "started_at": "2026-10-09T11:35:42.073096+00:00",
+      "finished_at": "2026-10-09T11:37:00.177529+00:00",
+      "exit": 0,
+      "command": [
+        "ctest",
+        "--preset",
+        "windows-x64-gcc15",
+        "-R",
+        "^(editor|settings|configuration|scene|protocol|composition)[.]",
+        "--output-on-failure"
+      ],
+      "record": "out/evidence/request-preparation/windows-x64-gcc15-test-e175fcbde0/result.json",
+      "record_sha256": "e028bf6fc90e7b33e428f83f4895daecebaae00e54226f441fa3719e3cd42d43",
+      "source_archive": "out/evidence/request-preparation/windows-x64-gcc15-test-e175fcbde0/source-inputs.zip",
+      "source_archive_sha256": "3cc39457b25c37d1be0d2c855085a8cfc3bed2c0ad4f32bf4f86e1aa9f25cbcc",
+      "stage": "final",
+      "passed_cases": 342,
+      "measurements": [],
+      "ctest_log_archive": {
+        "path": "out/evidence/request-preparation/windows-x64-gcc15-test-e175fcbde0/ctest-log.zip",
+        "sha256": "a6e89d7f1e7bda9d849d213b79d6d4953d70cf006dc6e50e3249b7a95aae0dc8"
+      }
+    },
+    {
+      "profile": "windows-x86-v141-xp",
+      "action": "request",
+      "started_at": "2026-10-09T11:37:03.953272+00:00",
+      "finished_at": "2026-10-09T11:37:04.649325+00:00",
+      "exit": 0,
+      "command": [
+        "ctest",
+        "--preset",
+        "windows-x86-v141-xp",
+        "-R",
+        "^editor[.]REQUEST-PREPARATION-",
+        "--output-on-failure",
+        "-V"
+      ],
+      "record": "out/evidence/request-preparation/windows-x86-v141-xp-request-7b2b5d2b34/result.json",
+      "record_sha256": "f447fb55ea317e9eac94b95d4e283270fdfa2e3a0ed2ac8364f329e727b469fb",
+      "source_archive": "out/evidence/request-preparation/windows-x86-v141-xp-request-7b2b5d2b34/source-inputs.zip",
+      "source_archive_sha256": "3cc39457b25c37d1be0d2c855085a8cfc3bed2c0ad4f32bf4f86e1aa9f25cbcc",
+      "stage": "final",
+      "passed_cases": 8,
+      "measurements": [
+        "request-cost prepared capture_us=1050 run_and_join_us=32430 adopt_us=342"
+      ],
+      "test_artifact": {
+        "syspane_history_preparation_tests.exe": "9bdd862184bda71a2f64ebd4876ea3c160b285ccd9634d0a4e747ae9fcc24c9f"
+      },
+      "ctest_log_archive": {
+        "path": "out/evidence/request-preparation/windows-x86-v141-xp-request-7b2b5d2b34/ctest-log.zip",
+        "sha256": "18834dbb9f95b3aae1ca98f2468fbe6f7c793da6bf7298281568fd2a9229e59c"
+      }
+    },
+    {
+      "profile": "windows-x86-v141-xp",
+      "action": "test",
+      "started_at": "2026-10-09T11:37:08.403660+00:00",
+      "finished_at": "2026-10-09T11:37:33.075948+00:00",
+      "exit": 0,
+      "command": [
+        "ctest",
+        "--preset",
+        "windows-x86-v141-xp",
+        "-R",
+        "^(editor|settings|configuration|scene|protocol|composition)[.]",
+        "--output-on-failure"
+      ],
+      "record": "out/evidence/request-preparation/windows-x86-v141-xp-test-a627a749f5/result.json",
+      "record_sha256": "adddc978201ffe96829d85f3516b6e88b36505b35a13a42fc2d4f7553e54c412",
+      "source_archive": "out/evidence/request-preparation/windows-x86-v141-xp-test-a627a749f5/source-inputs.zip",
+      "source_archive_sha256": "3cc39457b25c37d1be0d2c855085a8cfc3bed2c0ad4f32bf4f86e1aa9f25cbcc",
+      "stage": "final",
+      "passed_cases": 342,
+      "measurements": [],
+      "ctest_log_archive": {
+        "path": "out/evidence/request-preparation/windows-x86-v141-xp-test-a627a749f5/ctest-log.zip",
+        "sha256": "14e3192f236c5f2b74332292c7f7a72399d68ec08628f9c46f29bff1e20aa4b9"
+      }
+    },
+    {
+      "profile": "windows-x86-v141-xp",
+      "action": "legacy",
+      "started_at": "2026-10-09T11:37:40.548876+00:00",
+      "finished_at": "2026-10-09T11:37:40.948871+00:00",
+      "exit": 0,
+      "command": [
+        "ctest",
+        "--preset",
+        "windows-x86-v141-xp",
+        "-R",
+        "^legacy[.]",
+        "--output-on-failure"
+      ],
+      "record": "out/evidence/request-preparation/windows-x86-v141-xp-legacy-1b4b04dc2d/result.json",
+      "record_sha256": "a9ec2cecd8194632c396545f97028978d3dca12edbdb418ce1cf25a63d682498",
+      "source_archive": "out/evidence/request-preparation/windows-x86-v141-xp-legacy-1b4b04dc2d/source-inputs.zip",
+      "source_archive_sha256": "3cc39457b25c37d1be0d2c855085a8cfc3bed2c0ad4f32bf4f86e1aa9f25cbcc",
+      "stage": "final",
+      "passed_cases": 2,
+      "measurements": [],
+      "ctest_log_archive": {
+        "path": "out/evidence/request-preparation/windows-x86-v141-xp-legacy-1b4b04dc2d/ctest-log.zip",
+        "sha256": "b3e984a32c4e569a22ec7db3867bb9991358da6454a1b07195b171912a136a7c"
+      }
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "worker-history",
+      "started_at": "2026-10-09T11:37:51.170514+00:00",
+      "finished_at": "2026-10-09T11:38:17.093365+00:00",
+      "exit": 0,
+      "command": [
+        "env",
+        "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+        "ctest",
+        "--preset",
+        "linux-x64-gcc13",
+        "-R",
+        "^native[.]HISTORY-WORKER$",
+        "--output-on-failure"
+      ],
+      "record": "out/evidence/request-preparation/linux-x64-gcc13-worker-history-7051c180c3/result.json",
+      "record_sha256": "c1cc6aef0b4de5602f34798e4ebc34a83e6bf3f0ccc8e39c1f4db154c6dff597",
+      "source_archive": "out/evidence/request-preparation/linux-x64-gcc13-worker-history-7051c180c3/source-inputs.zip",
+      "source_archive_sha256": "1ba9a80e6f574336e30a4338aaaedc6747c19419d1b8b1f9a3c6662601040ae3",
+      "stage": "final",
+      "passed_cases": 1,
+      "measurements": [],
+      "ctest_log_archive": {
+        "path": "out/evidence/request-preparation/linux-x64-gcc13-worker-history-7051c180c3/ctest-log.zip",
+        "sha256": "debd0d00d068f9d7bd587175955879023704ed5395b09217b2171529374b509c"
+      }
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "form-history",
+      "started_at": "2026-10-09T11:38:28.791732+00:00",
+      "finished_at": "2026-10-09T11:38:29.845331+00:00",
+      "exit": 0,
+      "command": [
+        "env",
+        "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+        "ctest",
+        "--preset",
+        "linux-x64-gcc13",
+        "-R",
+        "^native[.]EDITOR-HISTORY$",
+        "--output-on-failure"
+      ],
+      "record": "out/evidence/request-preparation/linux-x64-gcc13-form-history-76cc38fa39/result.json",
+      "record_sha256": "c2b20cd717a36f939dd0ec0acda56756d7fb5185ad57d971977ab6973dd33666",
+      "source_archive": "out/evidence/request-preparation/linux-x64-gcc13-form-history-76cc38fa39/source-inputs.zip",
+      "source_archive_sha256": "1ba9a80e6f574336e30a4338aaaedc6747c19419d1b8b1f9a3c6662601040ae3",
+      "stage": "final",
+      "passed_cases": 1,
+      "measurements": [],
+      "ctest_log_archive": {
+        "path": "out/evidence/request-preparation/linux-x64-gcc13-form-history-76cc38fa39/ctest-log.zip",
+        "sha256": "916865bfaed35cb009c7af2ea2a2fec397a7144501af6e81a8e5c46f27474fdb"
+      }
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "preparation",
+      "started_at": "2026-10-09T11:38:36.730760+00:00",
+      "finished_at": "2026-10-09T11:38:59.375292+00:00",
+      "exit": 0,
+      "command": [
+        "env",
+        "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+        "ctest",
+        "--preset",
+        "linux-x64-gcc13",
+        "-R",
+        "^native[.]RECOVERY-PREPARATION$",
+        "--output-on-failure"
+      ],
+      "record": "out/evidence/request-preparation/linux-x64-gcc13-preparation-0f868ef9f7/result.json",
+      "record_sha256": "b2eac3c2919778881321653dc9c9276c4293d13006a46bfff1d6d824c20d8534",
+      "source_archive": "out/evidence/request-preparation/linux-x64-gcc13-preparation-0f868ef9f7/source-inputs.zip",
+      "source_archive_sha256": "1ba9a80e6f574336e30a4338aaaedc6747c19419d1b8b1f9a3c6662601040ae3",
+      "stage": "final",
+      "passed_cases": 1,
+      "measurements": [],
+      "ctest_log_archive": {
+        "path": "out/evidence/request-preparation/linux-x64-gcc13-preparation-0f868ef9f7/ctest-log.zip",
+        "sha256": "7c71339157d4e4f8ec2831910b3fdda4bfc3de616a1098a10409ec131538f49d"
+      }
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "worker",
+      "started_at": "2026-10-09T11:39:09.678785+00:00",
+      "finished_at": "2026-10-09T11:39:35.774677+00:00",
+      "exit": 0,
+      "command": [
+        "env",
+        "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+        "ctest",
+        "--preset",
+        "linux-x64-gcc13",
+        "-R",
+        "^native[.]EDITOR-HELPER-WORKER$",
+        "--output-on-failure"
+      ],
+      "record": "out/evidence/request-preparation/linux-x64-gcc13-worker-0be513bf8e/result.json",
+      "record_sha256": "daa66667ec8e0dd0d872c1245176fa66d1d285ab2d6cdb38d372747cfbd8a2af",
+      "source_archive": "out/evidence/request-preparation/linux-x64-gcc13-worker-0be513bf8e/source-inputs.zip",
+      "source_archive_sha256": "1ba9a80e6f574336e30a4338aaaedc6747c19419d1b8b1f9a3c6662601040ae3",
+      "stage": "final",
+      "passed_cases": 1,
+      "measurements": [],
+      "ctest_log_archive": {
+        "path": "out/evidence/request-preparation/linux-x64-gcc13-worker-0be513bf8e/ctest-log.zip",
+        "sha256": "e6f52b8fb17040b03540006211491eccd4f0b21fbbf5b4a6e4aa195c4fbba2a3"
+      }
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "installed",
+      "started_at": "2026-10-09T11:39:46.364894+00:00",
+      "finished_at": "2026-10-09T11:40:53.182077+00:00",
+      "exit": 0,
+      "command": [
+        "env",
+        "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+        "ctest",
+        "--preset",
+        "linux-x64-gcc13",
+        "-R",
+        "^native[.]INSTALLED-RECOVERY$",
+        "--output-on-failure"
+      ],
+      "record": "out/evidence/request-preparation/linux-x64-gcc13-installed-265a6576cb/result.json",
+      "record_sha256": "2ab655f155150209959dbf6d3b040f8172bfa113ef4f328392488e99ab3a807a",
+      "source_archive": "out/evidence/request-preparation/linux-x64-gcc13-installed-265a6576cb/source-inputs.zip",
+      "source_archive_sha256": "1ba9a80e6f574336e30a4338aaaedc6747c19419d1b8b1f9a3c6662601040ae3",
+      "stage": "final",
+      "passed_cases": 1,
+      "measurements": [],
+      "ctest_log_archive": {
+        "path": "out/evidence/request-preparation/linux-x64-gcc13-installed-265a6576cb/ctest-log.zip",
+        "sha256": "35e0e3e5506088da511f8f6d1ac3eac8cebd2aa91d3147ea6d01944f561d603e"
+      }
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "editor",
+      "started_at": "2026-10-09T11:41:04.891940+00:00",
+      "finished_at": "2026-10-09T11:42:05.053998+00:00",
+      "exit": 0,
+      "command": [
+        "env",
+        "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+        "ctest",
+        "--preset",
+        "linux-x64-gcc13",
+        "-R",
+        "^native[.]INSTALLED-EDITOR$",
+        "--output-on-failure"
+      ],
+      "record": "out/evidence/request-preparation/linux-x64-gcc13-editor-4c9b6bcadf/result.json",
+      "record_sha256": "fca1fcb9d1a1cf8efaac4d755809093c1783e053f89374edbfb616013381b870",
+      "source_archive": "out/evidence/request-preparation/linux-x64-gcc13-editor-4c9b6bcadf/source-inputs.zip",
+      "source_archive_sha256": "1ba9a80e6f574336e30a4338aaaedc6747c19419d1b8b1f9a3c6662601040ae3",
+      "stage": "final",
+      "passed_cases": 1,
+      "measurements": [],
+      "ctest_log_archive": {
+        "path": "out/evidence/request-preparation/linux-x64-gcc13-editor-4c9b6bcadf/ctest-log.zip",
+        "sha256": "4002869c34d905ed346ce8020272ad0402d3edab5aa13efbd67538be014cfcf7"
+      }
+    }
+  ],
+  "native_regressions": [
+    {
+      "family": "INSTALLED-EDITOR",
+      "outcome": "pass",
+      "cases": 15,
+      "archive": "out/evidence/request-preparation-native/editor-frontend-a9ebe93c89.zip",
+      "archive_sha256": "0e7836281f15e0610ce2016d3bc841f189ad1ab59d264a76adb2997b1a7ea11d",
+      "bytes": 265756662
+    },
+    {
+      "family": "EDITOR-HELPER-WORKER",
+      "outcome": "pass",
+      "cases": 21,
+      "archive": "out/evidence/request-preparation-native/ew-8f8d097965.zip",
+      "archive_sha256": "9aaa0c2b6e750507c3673fca5470f3a8a2691ab06ea38b6bb76259e52511003d",
+      "bytes": 124171863
+    },
+    {
+      "family": "HISTORY-WORKER",
+      "outcome": "pass",
+      "cases": 13,
+      "archive": "out/evidence/request-preparation-native/hw-c340a01b49.zip",
+      "archive_sha256": "a57c0d310fea03df8ec3f1aa9975dfefbd79aa2f4680983e06ca495c2d028894",
+      "bytes": 116941269
+    },
+    {
+      "family": "INSTALLED-RECOVERY",
+      "outcome": "pass",
+      "cases": 14,
+      "archive": "out/evidence/request-preparation-native/ir-3d24e504d0.zip",
+      "archive_sha256": "f8e5b136819a1a22c83128410328df43380fb86e42b900361d94da138b65e210",
+      "bytes": 133326284
+    },
+    {
+      "family": "EDITOR-HISTORY",
+      "outcome": "pass",
+      "cases": 17,
+      "archive": "out/evidence/request-preparation-native/reply-6600bb69c1fb.zip",
+      "archive_sha256": "e72583f04636bf5c339c23c0787d3e33140bd235db90940027c37aeba6a3ff2b",
+      "bytes": 2783
+    },
+    {
+      "family": "RECOVERY-PREPARATION",
+      "outcome": "pass",
+      "cases": 8,
+      "archive": "out/evidence/request-preparation-native/rp-d10b211d48.zip",
+      "archive_sha256": "be064c4271fd52caa2473429266e937767c214b439f0ab9f108047776fb14a84",
+      "bytes": 117850648
+    }
+  ],
+  "budget_preservation": {
+    "index": "out/evidence/request-preparation-budget/index.json",
+    "sha256": "396c03aaf9e22d96683ac41921f34a7fb17326c576ab4e844db4275dd55e2223",
+    "freed_active_bytes": 13953112
+  },
+  "next_step": "Implement a finite request-preparation task slot ordered with recovery/history on the existing native worker, then connect owner adoption and form cancellation/current-policy handling. Preserve recovery digest and original-request reconciliation; ordinary GUI qualification follows integration.",
+  "limitations": [
+    "Joined test-thread measurements are component diagnostics, not installed GUI qualification.",
+    "Ordinary installed Apply remains synchronous; no production recovery/history admission.",
+    "Earlier failed ordinary GUI and clock-disagreement evidence remains authoritative; no unchanged GUI qualification replay.",
+    "Historical toolchain build/PE checks do not qualify an actual historical OS.",
+    "All five full SysPane 0.1.0 editions remain incomplete."
+  ],
+  "post_execution_documentation_changes": [
+    "source/build/targets/README.md: current profile revision/handoff guidance only",
+    "spec/delivery/packages/w-11-request-preparation.md: generated timestamp corrected to observed filesystem creation time; contract body unchanged"
+  ],
+  "specification": {
+    "schemas": 51,
+    "fixtures": 183,
+    "tool_tests": 62,
+    "passed": 60,
+    "skipped": 2,
+    "skipped_reason": "Existing Windows symlink creation privilege requirements; assertions not executed.",
+    "tool_record": {
+      "local_path": "out/evidence/request-preparation-tool-tests.json",
+      "sha256": "e6913e97199cf3df92555dd26e5f75afe62eec7d2fc1526a27c4e3cc4398d76a"
+    },
+    "checks": [
+      "generate",
+      "validate --schemas",
+      "generate --check",
+      "seal --apply",
+      "verify-integrity"
+    ]
+  }
+}

@@ -2,6 +2,8 @@
 #include <iostream>
 #include <thread>
 
+void run_request_preparation(const std::string&,const std::string&);
+
 namespace {
 using namespace theme_history_fixture;
 void check(bool ok,int line){if(!ok)throw std::runtime_error("history preparation assertion:"+std::to_string(line));}
@@ -122,4 +124,4 @@ void run(const std::string& name,const std::string& root){
     }else throw std::runtime_error("unknown history preparation family");
 }
 }
-int main(int argc,char** argv){try{CHECK(argc==3);run(argv[1],argv[2]);std::cout<<argv[1]<<" pass\n";return 0;}catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}}
+int main(int argc,char** argv){try{CHECK(argc==3);if(std::string(argv[1]).find("REQUEST-PREPARATION-")==0)run_request_preparation(argv[1],argv[2]);else run(argv[1],argv[2]);std::cout<<argv[1]<<" pass\n";return 0;}catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}}
