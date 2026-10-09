@@ -14,7 +14,9 @@ These are development targets; supported versions and release qualification rema
 The [immutable authored validation](spec/delivery/validated-authored-handoff.md)
 reduces repeated scene validation during native composition while preserving current
 layout and policy checks. Six of seven ordinary GUI cases pass; MAX-RECORD still exceeds the 100 ms delay limit.
-Production recovery remains disabled while that timing failure is investigated.
+The [callback investigation](spec/delivery/editor-callback-trace-handoff.md) now
+identifies long Apply and recovery callbacks. Its instrumented pass preserves the
+earlier ordinary failure; production recovery remains disabled pending a measured repair.
 All five complete desktop editions remain unfinished.
 
 The [installed settings frontend](spec/delivery/installed-settings-handoff.md)

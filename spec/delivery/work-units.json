@@ -567,7 +567,8 @@
         "SP-W11-RECOVERY-SUBMISSION",
         "SP-W11-PRODUCTION-RECOVERY",
         "SP-W11-RECOVERY-ADMISSION-INVESTIGATION",
-        "SP-W11-VALIDATED-AUTHORED"
+        "SP-W11-VALIDATED-AUTHORED",
+        "SP-W11-EDITOR-CALLBACK-TRACE"
       ],
       "acceptance_tests": [
         "T-SETTINGS",
@@ -637,14 +638,19 @@
         "tests/editor/history-form-cases.json",
         "tests/editor/recovery_submission.hpp",
         "tests/configuration/native_admitted_frontend.py",
-        "tests/scene/validated_authored_tests.cpp"
+        "tests/scene/validated_authored_tests.cpp",
+        "tests/configuration/editor_callback_trace.c",
+        "tests/configuration/editor_callback_fixture.c",
+        "tests/configuration/editor_callback_trace.py",
+        "tests/configuration/editor_callback_trace_tests.py",
+        "tests/configuration/native_editor_callback_trace.py"
       ],
       "status": "in_progress",
       "authority_class": "development",
       "execution_grant": "user:foundation-native-campaign-2026-10-05",
-      "notes": "Immutable authored snapshots remove repeated scene validation; current layout/resource/policy and native regression checks remain intact. Both Windows profiles pass 334 checks; Linux passes 333 plus its single isolated resource-limit comparison. Preserve the initial timeout and refresh deadline failure alongside isolated passes. Ordinary GUI qualification passes six cases and fails MAX-RECORD at 143870 us excess delay. Production admission remains disabled. Measure the remaining GTK signal-handler and drawing work around Apply/recovery/history, correlated with periodic callback timing, before another ordinary qualification attempt or production admission. All five full editions remain unfinished.",
-      "package": "delivery/packages/w-11-validated-authored.md",
-      "evidence": "delivery/validated-authored-handoff.md"
+      "notes": "Validated test-only callback tracing identifies long Apply, recovery-restore and form-timer work in 2798 source-resolved invocations. All seven instrumented cases pass but do not supersede the ordinary MAX-RECORD failure. CPU-over-wall discrepancies remain recorded without utilization inference. Isolate Apply preparation costs and close the existing-worker/current-owner boundary, preserving full validation, current authority and request/recovery semantics, before another ordinary qualification attempt. Product binaries are unchanged; production recovery and all five complete releases remain open.",
+      "package": "delivery/packages/w-11-editor-callback-trace.md",
+      "evidence": "delivery/editor-callback-trace-handoff.md"
     },
     {
       "id": "W-12",

@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-09T10:54:09.908758+00:00", "scope": "Immutable authored validation and recorded native qualification"}
+updated: {"by": "codex", "at": "2026-10-09T11:16:16+00:00", "scope": "Independent callback trace and preserved ordinary qualification failure"}
 ---
 
 # Current state and next admitted boundary
@@ -22,11 +22,20 @@ recordings are local ignored `out/` content; the retired root is absent from the
 tracked tree. See `docs/developers/build.md` in the repository for checkout
 setup and the [repository contract](../foundation/repository.md) for ownership.
 
+The [callback trace](editor-callback-trace-handoff.md) identifies long synchronous
+Apply, recovery-restore and form-timer work in the unchanged native frontend. Its
+seven instrumented cases pass, with 2798 source-resolved invocations; this does not
+supersede the ordinary MAX-RECORD delay failure. Raw CPU/wall clock disagreement is
+preserved and prevents CPU-utilization inference. Isolate Apply preparation costs
+and close its existing-worker/current-owner boundary before the next repair.
+Production recovery remains disabled and all five complete editions remain open.
+
 The [immutable authored validation](validated-authored-handoff.md) reduces repeated
 structural validation in surface construction and painting. Current layout, resource,
 authority and erasure checks remain. Ordinary GUI qualification passes six cases and fails MAX-RECORD at 143870 us excess delay.
 Production admission remains disabled. Preserve the first portable timeout and refresh
-deadline failure alongside their single isolated comparisons. Measure the remaining GTK signal-handler and drawing work around Apply/recovery/history, correlated with periodic callback timing, before another ordinary qualification attempt or production admission.
+deadline failure alongside their single isolated comparisons. The callback experiment
+above now records the remaining action/timer work; ordinary qualification remains failed.
 All five complete desktop editions remain unfinished.
 
 The earlier [recovery admission investigation](recovery-admission-investigation-handoff.md)

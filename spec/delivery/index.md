@@ -26,6 +26,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Independent diagnostic implementation checkpoint](diagnostic-handoff.md) — Bind independent public reporting and native inspector startup to scoped Windows/Linux evidence.
 - [Current draft admission and preview resource handoff](draft-admission-handoff.md) — Measured repeated eligibility cost, immutable resource ownership and preserved full GUI qualification.
 - [Persistent editor lock checkpoint](edit-locks-handoff.md) — Versioned own/inherited locks through shared guards, native editing and durable transactions.
+- [Editor callback timing handoff](editor-callback-trace-handoff.md) — Source-resolved GTK action and timer spans with preserved ordinary qualification failure.
 - [Shared editor draft checkpoint](editor-draft-handoff.md) — Typed scene edits, bounded history and the common resource-aware transaction owner.
 - [Independent editor lifetime checkpoint](editor-exit-handoff.md) — An owned X11 candidate has independent keyboard and native exit with external process, pixel and input evidence.
 - [Verified editor helper bundle](editor-helper-bundle-handoff.md) — Installation-bound image and recovery execution with native closure, pixel and file evidence.

@@ -4,6 +4,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 
 - [build-layout.json](build-layout.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [draft-admission.json](draft-admission.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
+- [editor-callback-trace.json](editor-callback-trace.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [editor-helper-bundle.json](editor-helper-bundle.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [editor-helper-worker.json](editor-helper-worker.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [editor-paint-trace.json](editor-paint-trace.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.

@@ -10,8 +10,10 @@ The user-expanded [0.1.0 release scope](spec/delivery/release-0.1.0.md) now requ
 Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X. Finish the full native desktop
 editions and their release gates; foundation experiments alone cannot complete this goal.
 
-The [immutable authored validation checkpoint](spec/delivery/validated-authored-handoff.md)
-records the current native repair and retained failures. Measure the remaining GTK signal-handler and drawing work around Apply/recovery/history, correlated with periodic callback timing, before another ordinary qualification attempt or production admission.
+The [callback timing checkpoint](spec/delivery/editor-callback-trace-handoff.md)
+identifies long synchronous Apply, recovery and form-timer work. Isolate Apply's
+preparation costs and close the existing-worker/current-owner boundary before the
+next repair. The earlier ordinary GUI failure and fixed limits remain in force.
 
 ## Completed specification work
 
@@ -52,6 +54,8 @@ behaviour has been implemented. See [audit disposition](spec/delivery/audit-2026
 - [x] Integrate prepared history into the experimental native form, suspend obsolete recovery capture, refuse conflicting input and verify cancellation/current preview refresh. See the [handoff](spec/delivery/history-form-handoff.md).
 - [x] Prepare structural recovery submission checks; pass all seven unchanged installed GUI timing/erasure cases and preserve earlier failures. See the [handoff](spec/delivery/recovery-submission-handoff.md).
 - [x] Separate fixture observers from candidate recovery; execute ordinary-entry functional/refusal cases and preserve exact compiled gate comparisons. See the [investigation](spec/delivery/recovery-admission-investigation-handoff.md).
+- [x] Trace GTK signal handlers and application timers with validated test-only instrumentation; preserve raw clock discrepancies and source-bound evidence. See the [handoff](spec/delivery/editor-callback-trace-handoff.md).
+- [ ] Close and implement asynchronous Apply preparation without changing current authority, request identity, full validation or unknown-outcome recovery. Preserve measured restore/form-timer/paint costs and original GUI limits.
 - [ ] Explain and repair the repeated MAX-WIDGETS delay and MAX-RECORD callback/delay failures before admitting production recovery/history. Preserve both failed ordinary attempts and fixed limits.
 - [ ] Complete asynchronous authoring and native preview handoff; retain full validation and the original GUI timing gates.
 - [ ] Repair measured preview/layout/validation stalls and investigate the transient Apply state and controller restart; pass all seven fixed GTK limit cases without weakening deadlines or erasure.

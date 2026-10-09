@@ -15,6 +15,29 @@ build` before configuring or building; use `test` or `package` for those actions
 The common active-output budget is unchanged; retained `out/evidence/` archives
 are measured separately. Never use the placeholder account from the example.
 
+The [callback trace package](../../spec/delivery/packages/w-11-editor-callback-trace.md)
+attributes GTK actions, drawing and application timers against the unchanged
+installed GUI cases. Run `python3 tests/configuration/native_editor_callback_trace.py
+--self-test` in the admitted non-root Linux laboratory. This compiles the test-only
+preload probe and compares ordinary/instrumented GObject and timer behavior. Run
+`python tests/configuration/editor_callback_trace_tests.py` for transcript checks.
+
+After the ordinary workspace test preflight, run `python3
+tests/configuration/native_editor_callback_trace.py <build>/syspane
+<build>/syspane_frontend_fixture <build>/syspane_frontend_helper_fixture
+<build>/native-evidence`. The driver repeats its probe preflight, records the
+compiler and libraries, injects the probe only into the experiment and writes
+callback-trace.json alongside the original result. It retains original GUI failure
+exits. Complete frontend traces, callback symbols and per-process timer coverage
+are required; overflow or missing records invalidate diagnosis. Inspect both
+reports even when the command fails.
+
+Wall spans and interval unions support attribution. The current WSL laboratory
+reports substantial CPU-over-wall disagreement, so retain raw CPU values without
+inferring utilization or blocked time. An instrumented pass cannot qualify latency.
+The [handoff](../../spec/delivery/editor-callback-trace-handoff.md) identifies long
+Apply/restore/form-timer work and preserves the earlier ordinary GUI failure.
+
 The [immutable authored package](../../spec/delivery/packages/w-11-validated-authored.md)
 adds a deep validated snapshot for surface layout. It carries no policy authority.
 New topology and metrics are validated on every resolution; binding and current
