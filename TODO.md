@@ -10,11 +10,11 @@ The user-expanded [0.1.0 release scope](spec/delivery/release-0.1.0.md) now requ
 Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X. Finish the full native desktop
 editions and their release gates; foundation experiments alone cannot complete this goal.
 
-The [native Apply checkpoint](spec/delivery/request-form-handoff.md) connects
-request preparation, current recovery digest and cancellation to the installed
-form. The final 123 native cases include all seven original GUI timing/erasure
-cases. Revalidate ordinary-entry recovery/history admission next; preserve prior
-failures and continue all five full editions.
+The [ordinary recovery checkpoint](spec/delivery/ordinary-recovery-handoff.md)
+admits recovery and prepared history in the common Linux entry. All 200 native
+cases pass with unchanged oracles, including ordinary-entry isolation and the seven
+GUI timing/erasure cases. Compose the installed native inspector and authenticated
+telemetry next; preserve prior failures and all five full release editions.
 
 ## Completed specification work
 
@@ -62,7 +62,8 @@ behaviour has been implemented. See [audit disposition](spec/delivery/audit-2026
 - [x] Isolate synchronous Apply preparation and pass all seven original ordinary GUI cases after worker integration; retain the earlier MAX-WIDGETS and MAX-RECORD failures and fixed limits.
 - [ ] Complete asynchronous authoring and native preview handoff; retain full validation and the original GUI timing gates.
 - [ ] Continue general preview/layout responsiveness and investigate preserved transient Apply/controller-restart observations; retain the now-passing seven GTK cases and original failures.
-- [ ] Revalidate ordinary-entry production recovery/history admission after the request-form repair; qualify protected deployment with its authority and integrate the native inspector.
+- [x] Admit ordinary-entry recovery/history after the Apply repair; verify original installed, maximum-input, observer-isolation and ownership checks. See the [handoff](spec/delivery/ordinary-recovery-handoff.md).
+- [ ] Integrate the native inspector and authenticated telemetry into the installed frontend; qualify protected deployment with its authority.
 - [ ] Explain the preserved Windows GCC15 THEME-HISTORY-RESOURCE-LIMIT 20-second timeout and installed-editor AT-SPI grab_focus timeout; retain original failures and distinguish unchanged replays from causal evidence.
 
 - [x] W-11 shared private text lifetime: balanced realization/destruction, retained editing and independent verification that neither clipboard changes ownership. See the [handoff](spec/delivery/private-text-lifetime-handoff.md).
@@ -79,7 +80,7 @@ behaviour has been implemented. See [audit disposition](spec/delivery/audit-2026
 - [x] W-08 native profile worker: one storage thread and held profile locks across joined asynchronous command workers, with exact persistence and crash reconciliation. See the [handoff](spec/delivery/profile-worker-handoff.md).
 - [x] W-08 shipped initial scene/theme, resource bootstrap 0.5 and policy-bound Linux profile store, with exact startup/interruption/reconciliation evidence. See the [handoff](spec/delivery/profile-startup-handoff.md).
 - [x] W-08 Linux profile directory owner: XDG/portable roots, exact private markers, exclusive locks and interrupted initialization. See the [handoff](spec/delivery/profile-owner-handoff.md).
-- [ ] Extend the installed frontend with authenticated recovery, native inspector, telemetry, activation and import catalog; qualify protected-policy deployment and retain all release gates.
+- [ ] Extend the installed frontend with native inspector, telemetry, activation and import catalog; qualify protected-policy deployment and retain all release gates.
 - [x] W-09 theme typography: versioned complete fonts/roles, exact resource admission and native raster evidence. See the [handoff](spec/delivery/typography-handoff.md).
 - [x] W-09 role-aware scene composition: bounded semantic blocks, exact native pixels, preserved diagnostics and erasure; explicit development admission. See the [handoff](spec/delivery/role-composition-handoff.md).
 - [x] W-10 shared theme-authoring input and immutable artifact construction: exact no-op/reset, policy admission, preserved license and deterministic content pins. See the [handoff](spec/delivery/theme-authoring-handoff.md).

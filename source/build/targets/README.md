@@ -1,6 +1,11 @@
 # Foundation development profiles
 
-Current revisions are Windows x64 43, Linux x64 74 and historical x86 34. The
+Current revisions are Windows x64 44, Linux x64 75 and historical x86 35. The
+[ordinary recovery package](../../../spec/delivery/packages/w-11-production-recovery.md)
+admits recovery/history in the common entry while retaining current native policy
+and fixture-only observers. Complete release qualification remains separate.
+
+Earlier revisions were Windows x64 43, Linux x64 74 and historical x86 34. The
 [request form package](../../../spec/delivery/packages/w-11-request-form.md)
 connects Apply to the native worker while preserving exact recovery context.
 Ordinary GUI qualification and complete release editions remain separate gates.

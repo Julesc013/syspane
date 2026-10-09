@@ -22,6 +22,19 @@ enablement prerequisites in SP-W11-INSTALLED-RECOVERY. Enable the same qualified
 path in the ordinary frontend entry point; do not publish a release or deploy
 protected policy as part of this package.
 
+The subsequent admission investigation preserved two failed GUI attempts and kept
+production disabled. Resume this package after the request-form checkpoint
+`d5970fd5`: its repaired Apply path passes all seven unchanged ordinary GUI cases,
+including MAX-RECORD, and its exit oracle now requires complete task acknowledgement.
+Retain the original disabled-entry failure and both failed GUI attempts. Recheck
+the ordinary-entry, original installed, backend-limit and GUI cases on the final
+enabled build; no earlier pass replaces this verification.
+
+Remove the experimental recovery compile switch after admission. Production and
+both development entries pass the same literal feature admission to the common
+runtime. Only the observer fixture retains its diagnostic compile definition.
+Keep existing test drivers, exact expected files and timing/erasure limits unchanged.
+
 ## Feature and authority boundary
 
 The ordinary entry point admits recovery and prepared history without reading a

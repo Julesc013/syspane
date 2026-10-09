@@ -1,8 +1,5 @@
 #include "frontend_linux.hpp"
 #include "bundle_identity.hpp"
-#ifndef SYSPANE_EXPERIMENTAL_RECOVERY
-#define SYSPANE_EXPERIMENTAL_RECOVERY 0
-#endif
 #ifndef SYSPANE_FRONTEND_TEST_OBSERVERS
 #define SYSPANE_FRONTEND_TEST_OBSERVERS 0
 #endif
@@ -46,7 +43,7 @@ int main(int argc,char** argv){
         };
     }
 #endif
-    const auto result=syspane::application::run_frontend(argc,argv,syspane::platform::built_helper_bundle_expectation(),SYSPANE_EXPERIMENTAL_RECOVERY!=0,std::move(timing),std::move(phases));
+    const auto result=syspane::application::run_frontend(argc,argv,syspane::platform::built_helper_bundle_expectation(),true,std::move(timing),std::move(phases));
 #if SYSPANE_FRONTEND_TEST_OBSERVERS
     if(phase_enabled){
         // The GTK loop and all frontend owners have ended. No recording I/O is

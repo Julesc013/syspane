@@ -11,12 +11,16 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
-The [native Apply integration](spec/delivery/request-form-handoff.md) now prepares
+The [ordinary recovery checkpoint](spec/delivery/ordinary-recovery-handoff.md)
+enables recovery and prepared history in the Linux application entry. Current
+authenticated policy and verified helpers still control access; diagnostic controls
+remain confined to the test fixture. Original installed and maximum-input GUI
+checks pass, with earlier failures preserved. Native inspector/telemetry/desktop
+composition, protected deployment and all five complete editions remain unfinished.
+
+The [native Apply integration](spec/delivery/request-form-handoff.md) prepares
 commands on the existing worker and submits only after current authority and the
-exact recovery draft still agree. Cancellation and exit wait for owned work to
-stop. All 123 final native cases pass, including the seven unchanged ordinary GUI
-timing/erasure cases. Earlier failures remain preserved. Production recovery/history
-admission and all five complete desktop editions remain unfinished.
+exact recovery draft still agree. Cancellation and exit wait for owned work to stop.
 
 The [installed settings frontend](spec/delivery/installed-settings-handoff.md)
 now runs from a relocated development payload, supervises its verified configuration
@@ -38,8 +42,8 @@ cover cancellation, exact results and existing renderer/recovery consumers.
 The [installed scene editor](spec/delivery/installed-editor-handoff.md) now uses this
 worker in the actual frontend, with native Settings/Edit scene navigation and
 authenticated save/reopen. The development payload includes all three verified helpers.
-Draft recovery is connected in the installed experimental fixture. Production
-enablement, whole-UI responsiveness, native inspector, telemetry and desktop hosting remain open.
+Draft recovery is admitted in the ordinary Linux entry. Whole-UI responsiveness,
+native inspector, telemetry, desktop hosting and protected deployment remain open.
 
 The [native recovery snapshot](spec/delivery/recovery-context-handoff.md) now pairs
 saved state with its verified generation, directory identity and current retention
@@ -48,16 +52,16 @@ binds those observations to one saved profile and editor session. The
 [native helper admission](spec/delivery/recovery-admission-handoff.md) independently
 holds directory identities and checks current session authority through helper work.
 Installed recovery now composes editor sessions and exact applied-draft retirement
-in the experimental fixture. Isolated backend limits and the current installed GUI
-cases pass; production admission remains a separate pending boundary.
+through the ordinary Linux entry. Isolated backend limits and the current installed
+GUI cases pass; protected deployment remains unqualified.
 
 The [frontend recovery backend](spec/delivery/frontend-recovery-handoff.md)
 now downloads scoped recovery context and binds native helpers to the live session.
 Accepted requests preserve only their exact captured-draft metadata for conditional
 retirement. The [installed recovery UI](spec/delivery/installed-recovery-handoff.md)
 now exercises Restore, Keep, Discard and exact retirement through the actual frontend.
-Production controls remain disabled pending ordinary-entry admission. The request
-form checkpoint passes current GUI cases and preserves the earlier failed attempts.
+Ordinary-entry recovery/history admission now passes the existing checks. The
+request-form and admission checkpoints preserve the earlier failed attempts.
 
 The [recovery preparation worker](spec/delivery/recovery-preparation-handoff.md)
 now validates detached editor recovery inputs on the existing native worker. Restore

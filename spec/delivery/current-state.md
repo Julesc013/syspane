@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-09T12:42:46.558856+00:00", "scope": "Native Apply integration, exit acknowledgement and next ordinary-entry admission"}
+updated: {"by": "codex", "at": "2026-10-09T13:02:11.656470+00:00", "scope": "Ordinary recovery/history admission and installed inspector next boundary"}
 ---
 
 # Current state and next admitted boundary
@@ -21,6 +21,20 @@ Shared build tooling now lives in `source/build/`. Machine bindings and raw
 recordings are local ignored `out/` content; the retired root is absent from the
 tracked tree. See `docs/developers/build.md` in the repository for checkout
 setup and the [repository contract](../foundation/repository.md) for ownership.
+
+The [ordinary recovery checkpoint](ordinary-recovery-handoff.md) now admits
+recovery and prepared history in the common Linux entry. Production has no
+diagnostic environment handling or runtime feature bypass. Current authenticated
+policy and verified helper identity still govern access. All 200 native cases
+pass across 15 report families, plus native image-job supervision, including
+ordinary-entry recovery/settings, original
+installed consumers and the seven GUI timing/erasure cases. Three development
+builds each pass 56 selected portable checks; historical import checks also pass.
+
+Next compose the existing native scene inspector into the installed frontend with
+inspector audience authority and authenticated telemetry, then desktop/lifecycle
+integration. Protected deployment and all five full release editions remain open.
+The checkpoint preserves the original disabled-entry and GUI failures.
 
 The [native Apply integration](request-form-handoff.md) now captures the final
 request and exact recovery digest, prepares through the existing worker and
@@ -32,9 +46,9 @@ All 123 final native cases pass, including the seven original ordinary GUI timin
 and erasure cases. All three development builds pass 19 selected portable checks,
 with two additional historical artifact checks. The checkpoint preserves earlier
 compile, fixture and product failures and their exact source/artifact identities.
-Production recovery/history remains disabled; revalidate its ordinary-entry
-admission package next, then continue native inspector and desktop/telemetry
-composition. All five complete release editions remain unfinished.
+The ordinary-entry checkpoint above now completes recovery/history admission.
+Continue native inspector and desktop/telemetry composition. All five complete
+release editions remain unfinished.
 
 The [callback trace](editor-callback-trace-handoff.md) and
 [immutable validation checkpoint](validated-authored-handoff.md) preserve the
@@ -45,7 +59,7 @@ or resolve the raw CPU/wall clock discrepancy. No CPU-utilization claim is made.
 The earlier [recovery admission investigation](recovery-admission-investigation-handoff.md)
 preserves two failed ordinary GUI attempts and separates fixture observers from
 candidate admission. The subsequent request-form repair passes current GUI qualification;
-production recovery remains disabled pending ordinary-entry admission. Preserve the
+ordinary-entry admission now passes the current checks above. Preserve the
 historical failures and compiled gate evidence in that handoff.
 
 The [frontend recovery backend](frontend-recovery-handoff.md) now uses authenticated
@@ -55,7 +69,8 @@ submission and receipt consumption in the actual frontend's experimental fixture
 All 14 native cases pass, including a repaired lost-result reconciliation exit.
 Maximum-size backend cases pass. The earlier submission checkpoint passed its GUI
 run, but the admission investigation above preserves repeated timing failures.
-Controls remain disabled; W-11 and all five complete editions remain unfinished.
+Controls are now admitted by the ordinary entry above; W-11 and all five complete
+editions remain unfinished.
 
 The [asynchronous recovery preparation](recovery-preparation-handoff.md) now moves
 capture and restoration validation to the existing native worker, with current-draft
@@ -77,7 +92,7 @@ The [authenticated recovery transfer](recovery-transfer-handoff.md) now carries
 coherent saved state and native recovery observations bound to connection, epoch,
 profile, editor session, transfer and revision. Original 0.1 transfers stay unchanged.
 The helper admission above now verifies those native directory identities and current
-session authority. Production recovery enablement, general authoring responsiveness and
+session authority. General authoring responsiveness, protected deployment and
 all five complete release editions remain open.
 
 The [native recovery snapshot](recovery-context-handoff.md) now pairs accepted
@@ -98,7 +113,7 @@ The [native editor helper worker](editor-helper-worker-handoff.md) now separates
 GUI task handles from verified native execution, with exact image/recovery consumer
 results and observed child closure. The installed editor uses that bridge on its
 existing worker, with authenticated recovery authority and detached preparation now
-connected in the installed fixture. Complete consumer scheduling/latency qualification
+connected in the installed fixture. Continue general consumer scheduling/latency qualification
 and all five release editions remain open.
 
 The [verified editor helper bundle](editor-helper-bundle-handoff.md) extends

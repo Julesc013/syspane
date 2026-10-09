@@ -15,6 +15,23 @@ build` before configuring or building; use `test` or `package` for those actions
 The common active-output budget is unchanged; retained `out/evidence/` archives
 are measured separately. Never use the placeholder account from the example.
 
+The [ordinary recovery package](../../spec/delivery/packages/w-11-production-recovery.md)
+admits recovery/history through the common entry. After normal preflight/configure/
+build, run `ctest --preset linux-x64-gcc13 -R
+'^native[.](ADMITTED-RECOVERY|ADMITTED-SETTINGS)$' --output-on-failure`. Run/archive
+each family separately within the active-output allowance. These use the unchanged
+installed oracles with hostile diagnostic environment controls and a separately
+compiled ordinary entry whose helper identity is supplied by the development fixture.
+Production policy/helper refusal remains part of the original settings checks.
+
+Run the original installed editor/recovery/settings, backend/GUI limits,
+observer-failure, history/form/recovery and helper-supervision families. On all three
+profiles run `ctest --preset <profile> -R
+'^(editor[.](RECOVERY-|REQUEST-PREPARATION-|HISTORY-PREPARATION-|FRAGMENT-ADMISSION)|settings[.]|composition[.])'
+--output-on-failure`; retain v141_xp artifact checks. The
+[handoff](../../spec/delivery/ordinary-recovery-handoff.md) binds native evidence,
+entry-code comparison and the still-unqualified protected deployment boundary.
+
 The [native Apply package](../../spec/delivery/packages/w-11-request-form.md)
 connects the existing request worker to the form. After ordinary preflight, configure
 and build, run `ctest --preset linux-x64-gcc13 -R
@@ -28,7 +45,7 @@ families, then `ctest --preset linux-x64-gcc13 -R '^native[.]RECOVERY-GUI-LIMITS
 three profiles run the request/history/component expression below and retain v141_xp
 artifact checks. The [handoff](../../spec/delivery/request-form-handoff.md) records
 123 final native cases and original failures. Ordinary-entry recovery/history
-admission remains the next boundary; these are development qualification commands.
+admission now passes separately above; these are development qualification commands.
 
 The [native request package](../../spec/delivery/packages/w-11-request-worker.md)
 adds one request slot to the existing Linux helper worker. After normal
@@ -97,35 +114,27 @@ Use the existing preview-cost diagnostic and unchanged ordinary GUI limits below
 diagnostic improvement alone does not enable production recovery. Preserve timeouts
 and record concurrent workload when investigating timing-sensitive results.
 
-The [admission investigation](../../spec/delivery/packages/w-11-recovery-admission-investigation.md)
-keeps production recovery/history disabled after two failed ordinary GUI runs. Both
-development fixtures define SYSPANE_EXPERIMENTAL_RECOVERY=1; only
-syspane_frontend_fixture defines SYSPANE_FRONTEND_TEST_OBSERVERS=1. The separate
-syspane_frontend_entry_fixture has candidate admission and the existing fixture
-helper identity without observers. It is not installed or represented as production.
+The earlier [admission investigation](../../spec/delivery/recovery-admission-investigation-handoff.md)
+preserves two failed ordinary GUI runs and the disabled production gate at that
+checkpoint. The later Apply repair and ordinary-entry admission now pass current
+qualification. The experimental recovery switch has been removed; only
+syspane_frontend_fixture defines SYSPANE_FRONTEND_TEST_OBSERVERS=1.
+syspane_frontend_entry_fixture has the ordinary main source and fixture helper
+identity without observer support. It is not installed or represented as production.
 
-After ordinary preflight/configure/build, run `ctest --preset linux-x64-gcc13 -R
-'^native[.](ADMITTED-RECOVERY|ADMITTED-SETTINGS)$' --output-on-failure`. Run/archive
-each family separately within the active-output allowance. They reuse the original
-fourteen recovery and twelve settings cases with hostile observer variables. The
-settings cases include actual production policy/helper refusal. Candidate success
-does not enable production or qualify protected policy deployment.
-
-For compiled gate comparison, use `objdump -dr --disassemble=main` on
+For entry comparison, use `objdump -dr --disassemble=main` on
 `<build>/CMakeFiles/syspane_frontend.dir/source/application/frontend_main_linux.cpp.o`
 and `<build>/CMakeFiles/syspane_frontend_entry_fixture.dir/source/application/frontend_main_linux.cpp.o`.
-The final main bodies differ only in the false/true admission argument. Inspect
-`ninja -C <build> -t commands syspane` and the corresponding entry-fixture commands;
-record compiler/flags, generated identities and common runtime library hashes.
-Production has neither the candidate nor observer definition. Compare final loaded
-ELF code/data with the recorded artifacts, retaining build-ID differences explicitly.
-This proves the stated compiled boundary, not a full rerun or latency qualification.
+The main code and relocations now match. Inspect `ninja -C <build> -t commands
+syspane` and the corresponding entry-fixture command; record compiler/flags,
+generated helper identities and common runtime library hashes. Only generated
+identity include paths and object/executable destinations differ after normalization.
+Production and the ordinary fixture contain no diagnostic environment handlers.
 
-The [handoff](../../spec/delivery/recovery-admission-investigation-handoff.md) records
-both failed ordinary runs and the bounded diagnostic follow-up. Use the existing
-phase/paint commands below to attribute remaining work, select a measured repair,
-then rerun unchanged ordinary GUI qualification. Preserve original pixel, authority,
-erasure and lifetime oracles. Do not repeat unchanged qualification until a pass.
+Keep the original failed GUI/diagnostic records and fixed expectations. The current
+qualification follows a measured Apply repair; it is not inferred from byte equality
+or a diagnostic pass. General authoring/preview responsiveness, protected deployment
+and all complete release editions remain open.
 
 The [recovery submission package](../../spec/delivery/packages/w-11-recovery-submission.md)
 prepares structural eligibility while preserving current authorization and full Apply
@@ -159,7 +168,7 @@ recovery and recovery-control cases. Run portable history and component checks o
 all three profiles. Task-interface timing does not qualify complete GTK behavior.
 The [handoff](../../spec/delivery/history-worker-handoff.md) records this boundary;
 current-form integration and ordinary GUI qualification now pass in the experimental
-frontend; production admission remains the next boundary.
+frontend; ordinary-entry admission is now recorded above.
 
 The [history-preparation package](../../spec/delivery/packages/w-11-history-preparation.md)
 adds detached HistoryWork and opaque current-owner adoption. After ordinary profile
@@ -169,7 +178,7 @@ and existing native preparation/recovery/editor consumers. Keep the original tra
 expectations; supplemental guards must not redefine their results.
 
 The experimental installed GUI now consumes this API through the existing worker.
-Production still keeps synchronous history pending the next admission change;
+The ordinary entry now also admits the existing history worker;
 current native preview validation/composition remains on the form owner.
 The [handoff](../../spec/delivery/history-preparation-handoff.md) records the exact
 implemented boundary, source-bound verification and remaining integration.
@@ -310,11 +319,10 @@ Bind retirement metadata with fresh admission and acknowledge the current profil
 serial only after retirement_decided(). Policy withdrawal erases cached results;
 completion handlers use reply outcomes only after original-request validation.
 
-Production recovery remains disabled. The separately compiled frontend fixture uses
-SYSPANE_EXPERIMENTAL_RECOVERY=1 to exercise the same UI path under fixture policy,
-and SYSPANE_FRONTEND_TEST_OBSERVERS=1 separately for diagnostic controls.
-There is no runtime override. Qualify maximum admitted inputs and complete existing
-worker/supervisor scheduling under unchanged deadlines before production enablement.
+The ordinary entry now admits the qualified recovery/history path. Both development
+entries use that same admission; only the observer fixture defines
+SYSPANE_FRONTEND_TEST_OBSERVERS=1. There is no runtime feature override. Current
+policy and helper authority remain mandatory; protected deployment is unqualified.
 
 After ordinary preflight/configure/build, run `ctest --preset linux-x64-gcc13
 -R '^native[.](INSTALLED-RECOVERY|INSTALLED-EDITOR|INSTALLED-SETTINGS|FRONTEND-RECOVERY|RECOVERY-PREPARATION|EDITOR-RECOVERY)$'
@@ -389,9 +397,9 @@ worker outside shared locks, and its immutable context must match the requested 
 The parent checks current authority through each operation and result delivery; the
 sealed child independently checks expected directory identities before creating its
 writer file. Existing explicit path experiments keep their original constructor.
-The backend now supplies that live callback. The installed experimental form connects
-capture, submission and post-commit retirement. Production recovery remains disabled
-until complete worker/GUI scheduling and maximum-size operations are qualified.
+The backend now supplies that live callback. The ordinary installed form connects
+capture, submission and post-commit retirement after worker/GUI and maximum-input
+qualification. Protected deployment remains a separate authority boundary.
 
 After the ordinary configure/build and budget checks, run
 `ctest --preset linux-x64-gcc13 -R '^native[.](RECOVERY-ADMISSION|EDITOR-HELPER-WORKER|RECOVERY-QUEUE|RECOVERY-STORE|PROFILE-OWNER|RECOVERY-CONTEXT|RECOVERY-TRANSFER)$' --output-on-failure`.
