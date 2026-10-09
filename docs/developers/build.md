@@ -15,6 +15,31 @@ build` before configuring or building; use `test` or `package` for those actions
 The common active-output budget is unchanged; retained `out/evidence/` archives
 are measured separately. Never use the placeholder account from the example.
 
+The [recovery preparation package](../../spec/delivery/packages/w-11-recovery-preparation.md)
+adds EditorDraft::recovery_capture_work/recovery_restore_work and opaque prepared
+results. Run RecoveryWork::run off the GUI, then consume only through the original
+draft's recovery_capture, inspect_recovery or restore_recovery overload. Every
+authored/request/policy/connection/baseline attempt invalidates older proofs, even
+when rejected or unchanged. Selection alone is permitted. No caller-built candidate
+can replace the opaque proof, and current authority is rechecked at consumption.
+
+Pass EditorHelperClient::preparations() alongside its recovery factory to
+EditorRecoverySession or EditorForm::recovery for asynchronous consumption. The
+existing native owner pumps both; factories/handles remain on the GUI. Keep one
+active preparation and one latest pending input, and continue closure polling until
+the worker acknowledges acquired computation. Apply waits for durable capture,
+not just completed preparation. Do not enable installed recovery before live scope,
+matching applied-draft retirement and complete native scheduling are qualified.
+
+After ordinary workspace preflight/configure/build, run `ctest --preset <profile>
+-R '^(editor[.]|settings[.]|configuration[.]|protocol[.]|composition[.])'
+--output-on-failure` on all three development profiles. On non-root Linux run
+`ctest --preset linux-x64-gcc13 -R '^native[.](RECOVERY-PREPARATION|RECOVERY-ADMISSION|EDITOR-HELPER-WORKER|RECOVERY-QUEUE|RECOVERY-STORE|PROFILE-OWNER|RECOVERY-CONTEXT|RECOVERY-TRANSFER|EDITOR-RECOVERY|EDITOR-FORM|IMAGE-JOB|SCENE-IMAGE|IMAGE-ERASURE|INSTALLED-SETTINGS|INSTALLED-EDITOR)$'
+--output-on-failure`, splitting families and archiving completed owned recordings
+when the unchanged workspace budget requires it. Preserve failed runs; the
+[handoff](../../spec/delivery/recovery-preparation-handoff.md) records the Windows
+resource-limit timing failure separately from its isolated passing rerun.
+
 The [native recovery admission](../../spec/delivery/packages/w-11-recovery-admission.md)
 adds LinuxRecoveryAdmission on the existing helper worker. Supply the locally selected
 ProfileLocation, the validated transferred view and a Current callback from the live

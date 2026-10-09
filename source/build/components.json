@@ -2728,6 +2728,35 @@
       ]
     },
     {
+      "id": "recovery-preparation-tests",
+      "target": "syspane_recovery_preparation_tests",
+      "type": "EXECUTABLE",
+      "source_owner": "tests/editor/",
+      "public_interfaces": [],
+      "private_interfaces": [
+        "tests/editor/theme_history_fixture.hpp"
+      ],
+      "sources": [
+        "tests/editor/recovery_preparation_tests.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_editor_draft",
+        "Threads::Threads"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "windows-x64-gcc15",
+        "linux-x64-gcc13",
+        "windows-x86-v141-xp"
+      ]
+    },
+    {
       "id": "editor-recovery-probe",
       "target": "syspane_editor_recovery_probe",
       "type": "EXECUTABLE",
@@ -3628,7 +3657,8 @@
         "syspane_image_job",
         "syspane_recovery_queue",
         "syspane_installation",
-        "syspane_profile_projection"
+        "syspane_profile_projection",
+        "syspane_editor_draft"
       ],
       "target_requirements": [
         "cxx17"

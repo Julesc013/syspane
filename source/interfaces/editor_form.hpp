@@ -30,7 +30,7 @@ public:
     recovery::DataCode disconnect(const std::string&,std::uint64_t token,std::uint64_t revision,std::uint64_t now);
     void close();
     void recovery(std::string worker,std::string directory,const EditorRecoveryBinding&);
-    void recovery(std::shared_ptr<const platform::RecoveryFactory>,std::string directory,const EditorRecoveryBinding&);
+    void recovery(std::shared_ptr<const platform::RecoveryFactory>,std::string directory,const EditorRecoveryBinding&,std::shared_ptr<const RecoveryPreparationFactory> preparations={});
     // Continue the host loop after close until the held recovery helper is reaped.
     bool stopped();
 private:

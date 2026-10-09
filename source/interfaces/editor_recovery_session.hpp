@@ -14,9 +14,9 @@ enum class EditorRecoveryState {disabled,loading,offer,ready,capturing,retiring,
 class EditorRecoverySession {
 public:
     EditorRecoverySession(EditorDraft&,std::string worker,std::string directory);
-    EditorRecoverySession(EditorDraft&,std::shared_ptr<const platform::RecoveryFactory>,std::string directory);
+    EditorRecoverySession(EditorDraft&,std::shared_ptr<const platform::RecoveryFactory>,std::string directory,std::shared_ptr<const RecoveryPreparationFactory> preparations={});
     bool location(const std::string& worker,const std::string& directory)const{return worker_==worker&&directory_==directory;}
-    bool location(const std::shared_ptr<const platform::RecoveryFactory>& factory,const std::string& directory)const{return factory_==factory&&directory_==directory;}
+    bool location(const std::shared_ptr<const platform::RecoveryFactory>& factory,const std::string& directory,const std::shared_ptr<const RecoveryPreparationFactory>& preparations={})const{return factory_==factory&&directory_==directory&&preparations_==preparations;}
     void bind(EditorRecoveryBinding);
     void invalidate();
     void changed();
@@ -41,6 +41,11 @@ private:
     std::optional<EditorRecoveryBinding> binding_;
     std::shared_ptr<const platform::RecoveryFactory> factory_;
     std::unique_ptr<platform::RecoveryTask> queue_;
+    std::shared_ptr<const RecoveryPreparationFactory> preparations_;
+    std::unique_ptr<RecoveryPreparationTask> preparation_;
+    std::unique_ptr<RecoveryWork> pending_;
+    std::unique_ptr<RecoveryPrepared> prepared_offer_;
+    bool preparation_capture_=false,pending_capture_=false,preparation_obsolete_=false;
     std::optional<std::string> latest_,owned_,submitted_,cleanup_;
     EditorRecoveryState state_=EditorRecoveryState::disabled;
     bool restorable_=false,automatic_=false,closing_=false,reopen_=false,cancel_=false,cancelled_=false,closed_=false;
@@ -49,5 +54,9 @@ private:
     void fail();
     void start();
     void retire(bool reopen);
+    void stop_preparation();
+    void prepare(std::unique_ptr<RecoveryWork>,bool capture);
+    void poll_preparation();
+    void capture(std::optional<std::string>);
 };
 }

@@ -45,6 +45,13 @@ public:
     std::optional<std::uint64_t> revision()const;
 private:
     friend class EditorDraft;
+    // Detached recovery work carries authored state and authority, never request
+    // tickets, results or an active transaction.
+    struct RecoveryCopy {};
+    SettingsDraft(const SettingsDraft& v,RecoveryCopy)
+        :authority_(v.authority_),policy_(v.policy_),base_(v.base_),draft_(v.draft_),context_(v.context_),
+        base_resources_(v.base_resources_),draft_resources_(v.draft_resources_),requires_resources_(v.requires_resources_),
+        large_commands_(v.large_commands_),epoch_(v.epoch_),highest_policy_(v.highest_policy_),state_(v.state_){}
     // Shared scene staging for the editor; publication still uses begin/complete.
     void replace_scene(Json);
     std::pair<configuration::Authored,configuration::ResourceSnapshot> prepare_scene(Json,configuration::ResourceSnapshot={})const;

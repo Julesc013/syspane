@@ -288,6 +288,7 @@ bool EditorDraft::theme_fonts_available()const{
     }catch(const protocol::Error&){return false;}
 }
 bool EditorDraft::set_theme_fonts(const Json& font,const Json& roles){
+    invalidate_recovery();
     transaction_.editable();need(theme_fonts_available(),"editor.theme_unavailable");auto proposed=resources()->theme();proposed["schema_version"]="0.2.0";proposed["font"]=font;
     if(roles.is_null())proposed.erase("font_roles");else proposed["font_roles"]=roles;
     const auto artifact=c::author_theme(*resources(),proposed,transaction_.policy_,transaction_.context_->capabilities);if(!artifact)return false;
@@ -309,6 +310,7 @@ std::size_t EditorDraft::history_bytes(const std::deque<Change>& undo,const std:
 std::size_t EditorDraft::history_bytes()const{return history_bytes(undo_,redo_);}
 void EditorDraft::clear_history(){undo_.clear();redo_.clear();}
 bool EditorDraft::execute(const std::vector<SceneEdit>& edits){
+    invalidate_recovery();
     transaction_.editable();need(!edits.empty()&&edits.size()<=128,"editor.operations");auto candidate=*scene();auto selected=selected_;
     try{for(const auto& edit:edits){if(std::holds_alternative<SetWidgetVisibility>(edit))need(visibility_available(),"editor.visibility_unavailable");if(std::holds_alternative<SetWidgetLocks>(edit))need(locks_available(),"editor.lock_unavailable");
         const bool paste=std::holds_alternative<PasteWidgets>(edit);if(paste)need(clipboard_available(),"clipboard.unavailable");
@@ -319,6 +321,9 @@ bool EditorDraft::execute(const std::vector<SceneEdit>& edits){
 }
 bool EditorDraft::record(Json candidate,std::vector<std::string> selected,c::ResourceSnapshot resources){
     auto prepared=transaction_.prepare_scene(std::move(candidate),std::move(resources));
+    return record_prepared(std::move(prepared),std::move(selected));
+}
+bool EditorDraft::record_prepared(std::pair<c::Authored,c::ResourceSnapshot> prepared,std::vector<std::string> selected){
     if(c::authored_equal(prepared.first.scene,*scene())&&(!prepared.second||prepared.second->selection()==transaction_.draft_resources_->selection()))return false;
     Change change{{*scene(),selected_,transaction_.draft_resources_},{prepared.first.scene,surviving(prepared.first.scene,selected),prepared.second},0};
     // Immutable snapshots keep the same serialized accounting size throughout
@@ -333,6 +338,7 @@ bool EditorDraft::record(Json candidate,std::vector<std::string> selected,c::Res
     selected_.swap(selection);undo_.swap(next);redo_.clear();return true;
 }
 bool EditorDraft::travel(bool forward){
+    invalidate_recovery();
     transaction_.editable();auto& from=forward?redo_:undo_;auto& to=forward?undo_:redo_;if(from.empty())return false;
     const auto& change=from.back();const auto& target=forward?change.after:change.before;
     auto destination=to;destination.push_back(change);auto selection=target.selection;
@@ -340,11 +346,11 @@ bool EditorDraft::travel(bool forward){
 }
 bool EditorDraft::undo(){return travel(false);}
 bool EditorDraft::redo(){return travel(true);}
-void EditorDraft::discard(){transaction_.revert();clear_clipboard();clear_history();selected_=surviving(*scene(),selected_);}
-void EditorDraft::close(){clear_clipboard();transaction_.close();clear_history();selected_.clear();}
-void EditorDraft::policy(c::Policy policy){clear_clipboard();transaction_.policy(std::move(policy));if(!available()){clear_history();selected_.clear();}}
-void EditorDraft::reload(c::Authored v,std::string epoch,std::optional<SettingsResources> resources){transaction_.reload(std::move(v),std::move(epoch),std::move(resources));clear_clipboard();clear_history();selected_.clear();}
-std::optional<EditRequest> EditorDraft::begin(const std::string& intent,const std::string& request){auto result=transaction_.begin(intent,request);if(result)clear_clipboard();return result;}
+void EditorDraft::discard(){invalidate_recovery();transaction_.revert();clear_clipboard();clear_history();selected_=surviving(*scene(),selected_);}
+void EditorDraft::close(){invalidate_recovery();clear_clipboard();transaction_.close();clear_history();selected_.clear();}
+void EditorDraft::policy(c::Policy policy){invalidate_recovery();clear_clipboard();transaction_.policy(std::move(policy));if(!available()){clear_history();selected_.clear();}}
+void EditorDraft::reload(c::Authored v,std::string epoch,std::optional<SettingsResources> resources){invalidate_recovery();transaction_.reload(std::move(v),std::move(epoch),std::move(resources));clear_clipboard();clear_history();selected_.clear();}
+std::optional<EditRequest> EditorDraft::begin(const std::string& intent,const std::string& request){invalidate_recovery();auto result=transaction_.begin(intent,request);if(result)clear_clipboard();return result;}
 void EditorDraft::admit_fragment_version(const Json& version)const{
     need(version=="0.3.0"||version=="0.4.0"||version=="0.5.0","clipboard.version");
     if(version=="0.3.0")return;
@@ -367,6 +373,6 @@ std::string_view EditorDraft::clipboard_data(){
     need(!clipboard_.empty(),"clipboard.no_copy");return clipboard_;
 }
 void EditorDraft::settled(bool changed){if(changed&&available()&&last_result()["outcome"]=="accepted")clear_history();}
-bool EditorDraft::complete(std::uint64_t ticket,const Json& result){const bool changed=transaction_.complete(ticket,result);settled(changed);return changed;}
-bool EditorDraft::reconciled(std::uint64_t ticket,const std::string& query,const std::string& epoch,const Json& result){const bool changed=transaction_.reconciled(ticket,query,epoch,result);settled(changed);return changed;}
+bool EditorDraft::complete(std::uint64_t ticket,const Json& result){invalidate_recovery();const bool changed=transaction_.complete(ticket,result);settled(changed);return changed;}
+bool EditorDraft::reconciled(std::uint64_t ticket,const std::string& query,const std::string& epoch,const Json& result){invalidate_recovery();const bool changed=transaction_.reconciled(ticket,query,epoch,result);settled(changed);return changed;}
 }

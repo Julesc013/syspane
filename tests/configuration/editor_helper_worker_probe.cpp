@@ -40,6 +40,14 @@ struct TimedRecovery final:os::RecoveryTask {
     std::optional<os::RecoveryCompletion> take()override{return times.measure("recovery.take",[&]{return task->take();});}
     void close()override{times.measure("recovery.close",[&]{task->close();});}
 };
+struct TimedPreparation final:ui::RecoveryPreparationTask {
+    TaskTimes& times;std::unique_ptr<ui::RecoveryPreparationTask> task;
+    TimedPreparation(TaskTimes& t,std::unique_ptr<ui::RecoveryPreparationTask> p):times(t),task(std::move(p)){}
+    ~TimedPreparation() override{times.measure("preparation.destroy",[&]{task.reset();});}
+    ui::RecoveryPreparationStatus status()const override{return times.measure("preparation.status",[&]{return task->status();});}
+    std::unique_ptr<ui::RecoveryPrepared> take()override{return times.measure("preparation.take",[&]{return task->take();});}
+    void cancel()override{times.measure("preparation.cancel",[&]{task->cancel();});}
+};
 void need(bool ok,const char* code){if(!ok)throw syspane::protocol::Error(code);}
 std::string read(const std::string& path){std::ifstream f(path,std::ios::binary);need(static_cast<bool>(f),"probe.input");std::string bytes{std::istreambuf_iterator<char>(f),{}};need(bytes.size()<=8388609,"probe.capacity");return bytes;}
 void emit(const Json& value){std::cout<<value.dump()<<std::endl;}
@@ -69,6 +77,8 @@ struct Worker {
         }
     }catch(const std::exception& e){std::lock_guard<std::mutex> lock(mutex);error=e.what();ready=true;condition.notify_all();}}
     void step(){std::unique_lock<std::mutex> lock(mutex);++requested;condition.notify_all();need(condition.wait_for(lock,std::chrono::seconds(8),[&]{return completed==requested||!error.empty();})&&error.empty(),"probe.worker_timeout");}
+    void start(){std::lock_guard<std::mutex> lock(mutex);need(requested==completed,"probe.worker_busy");++requested;condition.notify_all();}
+    bool busy(){std::lock_guard<std::mutex> lock(mutex);need(error.empty(),"probe.worker_error");return completed!=requested;}
     ~Worker(){client.close();{std::lock_guard<std::mutex> lock(mutex);quit=true;condition.notify_all();}if(thread.joinable())thread.join();}
 };
 }
@@ -90,10 +100,18 @@ int main(int argc,char** argv){try{
     TaskTimes times;
     const v::ImageFactory image_factory=[&](std::string media,std::string bytes){auto task=times.measure("image.create",[&]{return client.images()(std::move(media),std::move(bytes));});return std::make_unique<TimedImage>(times,std::move(task));};
     auto recovery_factory=std::make_shared<const os::RecoveryFactory>([&](std::string path,os::RecoveryContext context){auto task=times.measure("recovery.create",[&]{return (*client.recovery())(std::move(path),std::move(context));});return std::make_unique<TimedRecovery>(times,std::move(task));});
+    auto preparations=std::make_shared<const ui::RecoveryPreparationFactory>([&](std::unique_ptr<ui::RecoveryWork> input){auto task=times.measure("preparation.create",[&]{return (*client.preparations())(std::move(input));});return std::make_unique<TimedPreparation>(times,std::move(task));});
     Worker worker(client,std::move(admission));emit({{"event","ready"},{"worker",worker.tid},{"before_attach",before},{"status",state(client.status())}});
     std::map<std::uint64_t,std::unique_ptr<v::ImageTask>> images;std::uint64_t ids=0;
     std::unique_ptr<os::RecoveryTask> recovery;std::unique_ptr<v::SceneSurface> surface;
     std::unique_ptr<ui::EditorDraft> draft;std::unique_ptr<ui::EditorRecoverySession> session;std::uint64_t clock=0;
+    std::unique_ptr<ui::RecoveryPreparationTask> preparation;std::unique_ptr<ui::RecoveryPrepared> prepared;bool capture=false,asynchronous=false;
+    const auto recovery_cases=settings_fixture::read(root+"/tests/editor/recovery-draft-cases.json");
+    const ui::RecoveryIdentity recovery_identity{recovery_cases["identity"]["profile"],recovery_cases["identity"]["generation"]};
+    auto make_draft=[&]{
+        need(!draft,"probe.active");settings_fixture::Fixture f(root);auto grant=theme_history_fixture::policy();grant.disclosure[{"desktop","history"}]={"sensitive"};
+        auto resources=theme_history_fixture::context(f);resources.capabilities.insert("editor.recovery");draft=std::make_unique<ui::EditorDraft>(theme_history_fixture::authority(),grant,f.authored,"E1",resources,true);
+    };
     std::string line;
     while(std::getline(std::cin,line)){
         need(line.size()<=65536,"probe.capacity");const auto q=Json::parse(line);const std::string op=q.at("op");Json reply;std::string input;
@@ -101,7 +119,35 @@ int main(int argc,char** argv){try{
         times.calls=Json::array();const auto began=Clock::now();
         try{
             if(op=="pump"){worker.step();reply=state(client.status());}
+            else if(op=="pump-start"){worker.start();reply={{"started",true}};}
+            else if(op=="worker-state")reply={{"busy",worker.busy()}};
             else if(op=="status")reply=state(client.status());
+            else if(op=="draft"){make_draft();reply={{"created",true}};}
+            else if(op=="prepare"){
+                need(draft&&!preparation&&!prepared,"probe.active");capture=q.value("capture",false);
+                auto work=times.measure("draft.work",[&]{return capture?draft->recovery_capture_work(recovery_identity):draft->recovery_restore_work(std::move(input),recovery_identity);});
+                preparation=(*preparations)(std::move(work));reply={{"created",true}};
+            }else if(op=="preparation-poll"){
+                need(static_cast<bool>(preparation),"probe.preparation");const auto s=preparation->status();reply={{"ready",s.ready},{"stopped",s.stopped},{"running",s.running},{"error",s.error},{"handles",client.status().preparation_handles}};
+            }else if(op=="preparation-capacity"){
+                need(static_cast<bool>(draft),"probe.draft");auto work=times.measure("draft.work",[&]{return draft->recovery_capture_work(recovery_identity);});auto extra=(*preparations)(std::move(work));reply={{"created",true}};
+            }else if(op=="preparation-take"){
+                need(static_cast<bool>(preparation),"probe.preparation");prepared=preparation->take();
+                if(capture){auto bytes=times.measure("draft.capture",[&]{return draft->recovery_capture(std::move(prepared),recovery_identity);});reply={{"bytes",bytes?Json(*bytes):Json()}};}
+                else{const auto info=times.measure("draft.inspect",[&]{return draft->inspect_recovery(*prepared,recovery_identity);});reply={{"revision",info.revision},{"widgets",info.widgets},{"theme_changed",info.theme_changed}};}
+            }else if(op=="preparation-restore"){
+                need(draft&&prepared,"probe.preparation");const bool changed=times.measure("draft.restore",[&]{return draft->restore_recovery(std::move(prepared),recovery_identity);});reply={{"changed",changed},{"scene",*draft->scene()},{"undo",draft->undo_count()}};
+            }else if(op=="preparation-cancel"){need(static_cast<bool>(preparation),"probe.preparation");preparation->cancel();prepared.reset();reply={{"cancelled",true}};}
+            else if(op=="preparation-drop"){prepared.reset();preparation.reset();reply={{"dropped",true},{"handles",client.status().preparation_handles}};}
+            else if(op=="draft-edit"){
+                need(draft&&(!session||session->editing()),"probe.draft");
+                if(q.contains("title"))draft->execute({ui::WidgetPropertyEdit{"widget:text",ui::WidgetProperty::title,q.at("title")}});
+                else{std::vector<ui::SceneEdit> edits{ui::RemoveWidgets{draft->scene()->at("roots").get<std::vector<std::string>>()}};std::size_t index=0;
+                    for(const auto& w:recovery_cases["scene"]["widgets"])edits.push_back(ui::InsertWidget{w,std::nullopt,index++});
+                    draft->execute(edits);}
+                if(session)times.measure("session.changed",[&]{session->changed();});
+                reply={{"scene",*draft->scene()}};
+            }else if(op=="draft-discard"){need(static_cast<bool>(draft),"probe.draft");draft->discard();if(session)times.measure("session.changed",[&]{session->changed();});reply={{"scene",*draft->scene()}};}
             else if(op=="image"){auto task=image_factory(q.at("media"),std::move(input));const auto id=++ids;images.emplace(id,std::move(task));reply={{"id",id}};}
             else if(op=="image-poll"){auto& image=*images.at(q.at("id"));const auto s=image.poll();reply={{"state",image_state(s.state)},{"reaped",s.reaped},{"reason",s.reason},{"pid",image.process_id()}};}
             else if(op=="image-take"){auto result=images.at(q.at("id"))->take();need(result.rgba.size()<=65536,"probe.capacity");reply={{"width",result.width},{"height",result.height},{"rgba",result.rgba}};}
@@ -136,17 +182,20 @@ int main(int argc,char** argv){try{
                 });
             }else if(op=="surface-close"){need(static_cast<bool>(surface),"probe.surface");surface->close();const bool done=surface->poll_image_jobs();if(done)surface.reset();reply={{"stopped",done}};
             }else if(op=="session"){
-                need(!session&&!draft,"probe.active");settings_fixture::Fixture f(root);auto grant=theme_history_fixture::policy();grant.disclosure[{"desktop","history"}]={"sensitive"};
-                auto resources=theme_history_fixture::context(f);resources.capabilities.insert("editor.recovery");
-                draft=std::make_unique<ui::EditorDraft>(theme_history_fixture::authority(),grant,f.authored,"E1",resources,true);
-                const auto cases=settings_fixture::read(root+"/tests/editor/recovery-draft-cases.json");session=std::make_unique<ui::EditorRecoverySession>(*draft,recovery_factory,q.at("directory"));
+                need(!session&&!draft,"probe.active");make_draft();asynchronous=q.value("asynchronous",false);
+                const auto& cases=recovery_cases;session=std::make_unique<ui::EditorRecoverySession>(*draft,recovery_factory,q.at("directory"),asynchronous?preparations:nullptr);
                 session->bind({"editor:worker",cases["identity"]["profile"],cases["identity"]["generation"],7,true});reply={{"created",true}};
             }else if(op=="session-poll"){
-                need(static_cast<bool>(session),"probe.session");session->poll();reply={{"state",session_state(session->state())},{"editing",session->editing()},{"restorable",session->restorable()},{"stopped",session->stopped()},{"scene",draft->scene()?*draft->scene():Json()},{"undo",draft->undo_count()}};
-            }else if(op=="session-restore"){need(static_cast<bool>(session),"probe.session");session->restore();reply={{"restored",true}};}
+                need(static_cast<bool>(session),"probe.session");if(asynchronous)times.measure("session.poll",[&]{session->poll();});else session->poll();
+                reply={{"state",session_state(session->state())},{"editing",session->editing()},{"may_apply",session->may_apply()},{"restorable",session->restorable()},{"stopped",session->stopped()},{"scene",draft->scene()?*draft->scene():Json()},{"undo",draft->undo_count()},{"preparations",client.status().preparation_handles},{"cancelled",session->cancelled()}};
+            }else if(op=="session-restore"){need(static_cast<bool>(session),"probe.session");if(asynchronous)times.measure("session.restore",[&]{session->restore();});else session->restore();reply={{"restored",true}};}
+            else if(op=="session-keep"){need(static_cast<bool>(session),"probe.session");times.measure("session.keep",[&]{session->keep();});reply={{"kept",true}};}
+            else if(op=="session-discard"){need(static_cast<bool>(session),"probe.session");times.measure("session.discard",[&]{session->discard();});reply={{"discarded",true}};}
+            else if(op=="session-cancel"){need(static_cast<bool>(session),"probe.session");times.measure("session.cancel",[&]{session->cancel_session();});reply={{"cancelled",true}};}
+            else if(op=="session-invalidate"){need(static_cast<bool>(session),"probe.session");times.measure("session.invalidate",[&]{session->invalidate();});draft->disconnected();reply={{"invalidated",true}};}
             else if(op=="session-close"){need(static_cast<bool>(session),"probe.session");session->close();session->poll();const bool done=session->stopped();if(done){session.reset();draft.reset();}reply={{"stopped",done}};}
             else if(op=="close"){client.close();reply=state(client.status());}
-            else if(op=="quit"){need(client.status().stopped&&images.empty()&&!recovery&&!surface&&!session,"probe.active");emit({{"reply",{{"exit",true}}},{"elapsed_us",0},{"task_calls",times.calls}});return 0;}
+            else if(op=="quit"){need(client.status().stopped&&images.empty()&&!recovery&&!surface&&!session&&!preparation&&!prepared,"probe.active");emit({{"reply",{{"exit",true}}},{"elapsed_us",0},{"task_calls",times.calls}});return 0;}
             else throw syspane::protocol::Error("probe.operation");
         }catch(const std::exception& e){reply={{"error",e.what()}};}
         const auto elapsed=std::chrono::duration_cast<std::chrono::microseconds>(Clock::now()-began).count();emit({{"reply",reply},{"elapsed_us",elapsed},{"task_calls",times.calls}});

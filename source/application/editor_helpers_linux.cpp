@@ -8,6 +8,7 @@
 
 namespace syspane::application {
 namespace os=platform;namespace r=rendering;namespace p=protocol;
+namespace ui=interfaces;
 namespace {
 void need(bool ok,const char* code){if(!ok)throw p::Error(code);}
 void erase(std::string& value){std::string{}.swap(value);}
@@ -29,6 +30,15 @@ struct RecoverySlot {
     std::uint64_t latest=1;
     bool loaded=false,sealed=false,closed=false,released=false,fault=false;
 };
+struct PreparationSlot {
+    std::unique_ptr<ui::RecoveryWork> input;std::unique_ptr<ui::RecoveryPrepared> result;
+    ui::RecoveryPreparationStatus status;
+    bool claimed=false,cancelled=false,released=false;
+};
+void cancel(PreparationSlot& s){
+    s.cancelled=true;s.input.reset();s.result.reset();s.status.ready=false;s.status.error="recovery.cancelled";
+    if(!s.claimed)s.status.stopped=true;
+}
 void cancel(ImageSlot& s){s.cancelled=true;erase(s.encoded);s.pixels={};s.status={r::ImageJobState::stopping,"image.cancelled",false};}
 void close(RecoverySlot& s){s.closed=true;s.intent.reset();s.completion.reset();s.status.state=os::RecoveryQueueState::closing;s.status.pending=0;s.status.reaped=false;}
 }
@@ -73,14 +83,34 @@ struct EditorHelperChannel {
     std::uint64_t sequence=0;
     std::map<std::uint64_t,std::shared_ptr<ImageSlot>> images;
     std::shared_ptr<RecoverySlot> recovery;
+    std::shared_ptr<PreparationSlot> preparation;
     void owner()const{need(std::this_thread::get_id()==gui,"helpers.owner");}
     void admit()const{need(attached&&!closed,"helpers.unavailable");}
     void stop(){
         if(closed)return;
-        closed=true;for(auto& row:images)cancel(*row.second);if(recovery)close(*recovery);
+        closed=true;for(auto& row:images)cancel(*row.second);if(recovery)close(*recovery);if(preparation)cancel(*preparation);
     }
 };
 namespace {
+class PreparationProxy final:public ui::RecoveryPreparationTask {
+    std::shared_ptr<EditorHelperChannel> channel_;std::shared_ptr<PreparationSlot> slot_;
+public:
+    PreparationProxy(std::shared_ptr<EditorHelperChannel> channel,std::unique_ptr<ui::RecoveryWork> input):channel_(std::move(channel)){
+        channel_->owner();need(static_cast<bool>(input),"recovery.work");std::lock_guard<std::mutex> lock(channel_->mutex);
+        channel_->admit();need(!channel_->preparation,"helpers.capacity");slot_=std::make_shared<PreparationSlot>();slot_->input=std::move(input);channel_->preparation=slot_;
+    }
+    ~PreparationProxy() override{
+        std::lock_guard<std::mutex> lock(channel_->mutex);slot_->released=true;syspane::application::cancel(*slot_);
+        if(slot_->status.stopped&&channel_->preparation==slot_)channel_->preparation.reset();
+    }
+    ui::RecoveryPreparationStatus status()const override{channel_->owner();std::lock_guard<std::mutex> lock(channel_->mutex);return slot_->status;}
+    std::unique_ptr<ui::RecoveryPrepared> take() override{
+        channel_->owner();std::lock_guard<std::mutex> lock(channel_->mutex);
+        need(!slot_->cancelled&&slot_->status.ready&&slot_->status.stopped&&slot_->result,"recovery.not_ready");
+        slot_->status.ready=false;return std::move(slot_->result);
+    }
+    void cancel() override{channel_->owner();std::lock_guard<std::mutex> lock(channel_->mutex);syspane::application::cancel(*slot_);}
+};
 class ImageProxy final:public r::ImageTask {
     std::shared_ptr<EditorHelperChannel> channel_;std::shared_ptr<ImageSlot> slot_;
 public:
@@ -148,17 +178,20 @@ public:
 }
 EditorHelperClient::EditorHelperClient():channel_(std::make_shared<EditorHelperChannel>()){
     recovery_=std::make_shared<const os::RecoveryFactory>([channel=channel_](std::string path,os::RecoveryContext context){return std::make_unique<RecoveryProxy>(channel,std::move(path),std::move(context));});
+    preparations_=std::make_shared<const ui::RecoveryPreparationFactory>([channel=channel_](std::unique_ptr<ui::RecoveryWork> input){return std::make_unique<PreparationProxy>(channel,std::move(input));});
 }
 EditorHelperClient::~EditorHelperClient(){std::lock_guard<std::mutex> lock(channel_->mutex);channel_->stop();}
 r::ImageFactory EditorHelperClient::images()const{
     channel_->owner();return [channel=channel_](std::string media,std::string bytes){return std::make_unique<ImageProxy>(channel,std::move(media),std::move(bytes));};
 }
 std::shared_ptr<const os::RecoveryFactory> EditorHelperClient::recovery()const{channel_->owner();return recovery_;}
+std::shared_ptr<const ui::RecoveryPreparationFactory> EditorHelperClient::preparations()const{channel_->owner();return preparations_;}
 void EditorHelperClient::close(){channel_->owner();std::lock_guard<std::mutex> lock(channel_->mutex);channel_->stop();}
 EditorHelperStatus EditorHelperClient::status()const{
     channel_->owner();std::lock_guard<std::mutex> lock(channel_->mutex);EditorHelperStatus value;
     value.attached=channel_->attached;value.closing=channel_->closed;value.stopped=channel_->closed&&(!channel_->attached||channel_->drained);
     value.image_handles=channel_->images.size();value.recovery_handles=channel_->recovery?1:0;
+    value.preparation_handles=channel_->preparation?1:0;
     for(const auto& row:channel_->images){const auto& s=*row.second;value.retained_bytes+=s.encoded.size()+s.pixels.rgba.size();if(s.process&&!s.status.reaped)value.processes.push_back(s.process);}
     if(channel_->recovery){const auto& s=*channel_->recovery;value.retained_bytes+=s.status.retained_bytes+(s.intent?s.intent->bytes.size():0)+(s.completion&&s.completion->bytes?s.completion->bytes->size():0);if(s.status.process&&!s.status.reaped)value.processes.push_back(s.status.process);}
     return value;
@@ -170,6 +203,23 @@ struct LinuxEditorHelperOwner::Impl {
     RecoveryAdmissionFactory admit_recovery;std::shared_ptr<LinuxRecoveryAdmission> admission;
     std::map<std::uint64_t,std::uint64_t> tickets;
     void check()const{need(std::this_thread::get_id()==owner,"helpers.worker_owner");}
+    void prepare(const std::shared_ptr<PreparationSlot>& slot){
+        if(!slot)return;
+        std::unique_ptr<ui::RecoveryWork> input;
+        {
+            std::lock_guard<std::mutex> lock(channel->mutex);
+            if(slot->status.stopped||slot->claimed)return;
+            if(slot->cancelled){slot->status.stopped=true;return;}
+            slot->claimed=true;slot->status.running=true;input=std::move(slot->input);
+        }
+        std::unique_ptr<ui::RecoveryPrepared> result;std::string error;
+        try{result=input->run();}catch(const std::exception& e){error=reason(e,"recovery.preparation");}catch(...){error="recovery.preparation";}
+        input.reset();
+        std::lock_guard<std::mutex> lock(channel->mutex);
+        if(slot->cancelled||channel->closed){result.reset();slot->status={false,true,"recovery.cancelled"};}
+        else{slot->result=std::move(result);slot->status={static_cast<bool>(slot->result),true,std::move(error)};}
+        if(slot->released&&channel->preparation==slot)channel->preparation.reset();
+    }
     void image(const std::shared_ptr<ImageSlot>& slot){
         std::string media,bytes;bool stop=false,start=false;
         {
@@ -276,13 +326,15 @@ LinuxEditorHelperOwner::LinuxEditorHelperOwner(EditorHelperClient& client,std::s
 }
 void LinuxEditorHelperOwner::close(){impl_->check();std::lock_guard<std::mutex> lock(impl_->channel->mutex);impl_->channel->stop();}
 bool LinuxEditorHelperOwner::poll(){
-    auto& s=*impl_;s.check();std::vector<std::shared_ptr<ImageSlot>> images;std::shared_ptr<RecoverySlot> recovery;
-    {std::lock_guard<std::mutex> lock(s.channel->mutex);for(const auto& row:s.channel->images)images.push_back(row.second);recovery=s.channel->recovery;}
+    auto& s=*impl_;s.check();std::vector<std::shared_ptr<ImageSlot>> images;std::shared_ptr<RecoverySlot> recovery;std::shared_ptr<PreparationSlot> preparation;
+    {std::lock_guard<std::mutex> lock(s.channel->mutex);for(const auto& row:s.channel->images)images.push_back(row.second);recovery=s.channel->recovery;preparation=s.channel->preparation;}
     for(const auto& slot:images)s.image(slot);
     s.recover(recovery);
+    s.prepare(preparation);
     std::lock_guard<std::mutex> lock(s.channel->mutex);
     s.channel->drained=s.channel->closed&&s.images.empty()&&(!s.channel->recovery||s.channel->recovery->status.reaped)&&
-        std::all_of(s.channel->images.begin(),s.channel->images.end(),[](const auto& row){return row.second->status.reaped;});
+        std::all_of(s.channel->images.begin(),s.channel->images.end(),[](const auto& row){return row.second->status.reaped;})&&
+        (!s.channel->preparation||s.channel->preparation->status.stopped);
     return s.channel->drained;
 }
 LinuxEditorHelperOwner::~LinuxEditorHelperOwner(){
@@ -294,6 +346,7 @@ LinuxEditorHelperOwner::~LinuxEditorHelperOwner(){
     std::lock_guard<std::mutex> lock(s.channel->mutex);
     for(auto& row:s.channel->images){row.second->pixels={};row.second->status={r::ImageJobState::cancelled,"image.cancelled",true};}
     if(s.channel->recovery)s.channel->recovery->status={os::RecoveryQueueState::closed,0,0,0,0,true,{}};
+    if(s.channel->preparation)s.channel->preparation->status={false,true,"recovery.cancelled"};
     s.channel->drained=true;s.channel->attached=false;
 }
 }

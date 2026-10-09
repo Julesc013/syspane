@@ -489,7 +489,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "a08ecbd0e29bc8e315031aff2d3384a665e5fa25339f4c3c793faff0a60486e3"
+      "sha256": "6928e756799070dfd22aa30da08531921dfeb43f061d68265cea20361b13d6cf"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -2271,6 +2271,19 @@
       "sha256": "d843687222ee972cd7e115893800fa96563778c0f0c6406f6fcca82aefe43cc9"
     },
     {
+      "id": "SP-W11-RECOVERY-PREPARATION",
+      "path": "delivery/packages/w-11-recovery-preparation.md",
+      "title": "Asynchronous editor recovery preparation",
+      "description": "Move recovery reconstruction to the existing worker without granting stale prepared results authority.",
+      "requires": [
+        "SP-W11-RECOVERY-ADMISSION",
+        "SP-W11-EDITOR-HELPER-WORKER",
+        "SP-W10-RECOVERY-DRAFT",
+        "SP-W10-RECOVERY-CONTROLS"
+      ],
+      "sha256": "f6abf663a201b016a2fad18e01169075b22fb3805de77386cf934a71594d85e0"
+    },
+    {
       "id": "SP-W11-SCENE-INSPECTOR",
       "path": "delivery/packages/w-11-scene-inspector.md",
       "title": "Native scene inspector navigation and disclosure",
@@ -2808,6 +2821,16 @@
         "SP-W25-PACKAGE"
       ],
       "sha256": "5315c7c332fe0b2676e9371b0ad2b6d68aa4ac0c20dd25bd91668cf112daf3db"
+    },
+    {
+      "id": "SP-RECOVERY-PREPARATION-HANDOFF",
+      "path": "delivery/recovery-preparation-handoff.md",
+      "title": "Asynchronous editor recovery preparation",
+      "description": "Validate detached recovery work on the existing native worker and consume only current opaque results.",
+      "requires": [
+        "SP-W11-RECOVERY-PREPARATION"
+      ],
+      "sha256": "13d8ed76ecae9d060b1a6dde12ba2504612bdd965d8f1cb328f5a8ddcbd1896e"
     },
     {
       "id": "SP-RECOVERY-QUEUE-HANDOFF",

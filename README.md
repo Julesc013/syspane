@@ -43,6 +43,12 @@ holds directory identities and checks current session authority through helper w
 Installed recovery still needs frontend session composition, exact applied-draft
 retirement and responsiveness qualification.
 
+The [recovery preparation worker](spec/delivery/recovery-preparation-handoff.md)
+now validates detached editor recovery inputs on the existing native worker. Restore
+consumes only a current prepared result, and Apply waits for durable background
+capture. Fixed native checks cover cancellation, coalescing and exact files;
+installed session composition and whole-frontend qualification remain open.
+
 The [runtime directory checkpoint](spec/delivery/runtime-directory-handoff.md)
 adds private frontend runtime allocation and explicit retirement after supervisor
 release. Native checks preserve replacements and orphaned files and observe actual

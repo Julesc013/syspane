@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-09T01:10:41.845330+00:00", "scope": "Native recovery helper admission; installed session composition, recovery latency and all five complete editions remain open"}
+updated: {"by": "codex", "at": "2026-10-09T02:26:59.812423+00:00", "scope": "Asynchronous recovery preparation; installed composition, scheduling and complete release editions remain open"}
 ---
 
 # Current state and next admitted boundary
@@ -21,6 +21,13 @@ Shared build tooling now lives in `source/build/`. Machine bindings and raw
 recordings are local ignored `out/` content; the retired root is absent from the
 tracked tree. See `docs/developers/build.md` in the repository for checkout
 setup and the [repository contract](../foundation/repository.md) for ownership.
+
+The [asynchronous recovery preparation](recovery-preparation-handoff.md) now moves
+capture and restoration validation to the existing native worker, with current-draft
+proofs, coalescing and cancellation. Compose the installed 0.2 download/live authority,
+exact applied-draft retirement and complete loop scheduling next. Preserve the
+Windows GCC resource-limit timeout and installed AT-SPI focus timeout; their causes remain open.
+All five full editions remain unfinished.
 
 The [native recovery helper admission](recovery-admission-handoff.md) now binds
 transferred observations to current host session authority and independently held

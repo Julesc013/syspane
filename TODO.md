@@ -33,7 +33,9 @@ behaviour has been implemented. See [audit disposition](spec/delivery/audit-2026
 - [x] W-08 coherent native recovery snapshot: exact accepted generation, held directory identities, current permission and one serialized worker call. See the [handoff](spec/delivery/recovery-context-handoff.md).
 - [x] W-08 authenticated recovery context transfer: explicit version negotiation, coherent saved generation and exact connection/epoch/profile/editor-session binding. See the [handoff](spec/delivery/recovery-transfer-handoff.md).
 - [x] W-11 native recovery helper admission: independently held directory identities, current session checks, child-side substitution refusal and result erasure. See the [handoff](spec/delivery/recovery-admission-handoff.md).
-- [ ] Compose recovery admission with the installed frontend's live authenticated session, preserve exact applied-draft retirement through reconciliation, and address synchronous recovery validation before qualifying the actual recovery flow. Integrate the native inspector.
+- [x] W-11 asynchronous recovery preparation: detached validation on the existing native worker, current-draft proofs, coalesced capture and cancellation/erasure. See the [handoff](spec/delivery/recovery-preparation-handoff.md).
+- [ ] Compose recovery admission/preparation with the installed frontend's live session and explicit 0.2 download; preserve exact applied-draft retirement through reconciliation and qualify complete worker/GUI scheduling. Integrate the native inspector.
+- [ ] Explain the preserved Windows GCC15 THEME-HISTORY-RESOURCE-LIMIT 20-second timeout and installed-editor AT-SPI grab_focus timeout; retain original failures and distinguish unchanged replays from causal evidence.
 
 - [x] W-11 shared private text lifetime: balanced realization/destruction, retained editing and independent verification that neither clipboard changes ownership. See the [handoff](spec/delivery/private-text-lifetime-handoff.md).
 

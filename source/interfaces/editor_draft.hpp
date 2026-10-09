@@ -44,6 +44,11 @@ public:
     std::optional<std::string> recovery_snapshot(const RecoveryIdentity&)const;
     RecoveryDescription inspect_recovery(std::string_view,const RecoveryIdentity&)const;
     bool restore_recovery(std::string_view,const RecoveryIdentity&);
+    std::unique_ptr<RecoveryWork> recovery_capture_work(const RecoveryIdentity&)const;
+    std::unique_ptr<RecoveryWork> recovery_restore_work(std::string,const RecoveryIdentity&)const;
+    std::optional<std::string> recovery_capture(std::unique_ptr<RecoveryPrepared>,const RecoveryIdentity&)const;
+    RecoveryDescription inspect_recovery(const RecoveryPrepared&,const RecoveryIdentity&)const;
+    bool restore_recovery(std::unique_ptr<RecoveryPrepared>,const RecoveryIdentity&);
     bool clipboard_available()const;
     void copy_selection();
     // Recheck permission for each delivery. Borrow expires at the next operation.
@@ -67,8 +72,8 @@ public:
     bool reconciled(std::uint64_t ticket,const std::string& query,const std::string& epoch,const Json&);
     std::optional<EditRequest> begin(const std::string& intent,const std::string& request);
     std::optional<EditRequest> active_request()const{return transaction_.active_request();}
-    std::optional<EditRequest> cancel_request(){return transaction_.cancel_request();}
-    void disconnected(){clear_clipboard();transaction_.disconnected();}
+    std::optional<EditRequest> cancel_request(){invalidate_recovery();return transaction_.cancel_request();}
+    void disconnected(){invalidate_recovery();clear_clipboard();transaction_.disconnected();}
     DraftState state()const{return transaction_.state();}
     bool available()const{return transaction_.available();}
     bool dirty()const{return transaction_.dirty();}
@@ -76,6 +81,16 @@ public:
     const Json& last_result()const{return transaction_.last_result();}
     std::optional<std::uint64_t> revision()const{return transaction_.revision();}
 private:
+    friend class RecoveryWork;
+    struct RecoveryValidity {
+        std::shared_ptr<const char> value=std::make_shared<const char>(char{});
+        RecoveryValidity()=default;
+        RecoveryValidity(const RecoveryValidity&){}
+        RecoveryValidity& operator=(const RecoveryValidity&){value=std::make_shared<const char>(char{});return *this;}
+    } recovery_validity_;
+    EditorDraft(const SettingsDraft& value,int):transaction_(value,SettingsDraft::RecoveryCopy{}){}
+    void invalidate_recovery(){recovery_validity_.value=std::make_shared<const char>(char{});}
+    void check_recovery(const RecoveryPrepared&,const RecoveryIdentity&,bool capture)const;
     struct State {Json scene;std::vector<std::string> selection;configuration::ResourceSnapshot resources;std::size_t resource_metadata_bytes=0;};
     struct Change {State before,after;std::size_t bytes;};
     SettingsDraft transaction_;
@@ -90,6 +105,7 @@ private:
     void settled(bool);
     bool travel(bool forward);
     bool record(Json,std::vector<std::string>,configuration::ResourceSnapshot={});
+    bool record_prepared(std::pair<configuration::Authored,configuration::ResourceSnapshot>,std::vector<std::string>);
     std::size_t history_bytes(const std::deque<Change>&,const std::deque<Change>&)const;
 };
 }

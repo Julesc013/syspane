@@ -510,11 +510,11 @@ void EditorForm::recovery(std::string worker,std::string directory,const EditorR
     if(!i.recovery)i.recovery=std::make_unique<EditorRecoverySession>(i.draft,std::move(worker),std::move(directory));
     i.recovery->bind(binding);i.sync();
 }
-void EditorForm::recovery(std::shared_ptr<const platform::RecoveryFactory> factory,std::string directory,const EditorRecoveryBinding& binding){
+void EditorForm::recovery(std::shared_ptr<const platform::RecoveryFactory> factory,std::string directory,const EditorRecoveryBinding& binding,std::shared_ptr<const RecoveryPreparationFactory> preparations){
     auto& i=*impl_;i.owner();need(!i.closed&&i.recovery_status&&binding.policy_revision==i.current.revision&&i.draft.recovery_available(),"recovery.denied");
     need(!i.fields_dirty&&(!i.content||!i.content->opened())&&(!i.binding||!i.binding->opened())&&(!i.creation||!i.creation->opened())&&(!i.layout_form||!i.layout_form->opened())&&(!i.visibility||!i.visibility->opened())&&(!i.theme||!i.theme->opened()),"recovery.private_input");
-    need(!i.recovery||i.recovery->location(factory,directory),"recovery.location_changed");i.gesture.reset();
-    if(!i.recovery)i.recovery=std::make_unique<EditorRecoverySession>(i.draft,std::move(factory),std::move(directory));
+    need(!i.recovery||i.recovery->location(factory,directory,preparations),"recovery.location_changed");i.gesture.reset();
+    if(!i.recovery)i.recovery=std::make_unique<EditorRecoverySession>(i.draft,std::move(factory),std::move(directory),std::move(preparations));
     i.recovery->bind(binding);i.sync();
 }
 bool EditorForm::can_leave()const{

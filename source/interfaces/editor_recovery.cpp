@@ -36,7 +36,10 @@ void EditorDraft::authorize_recovery()const{
     need((a.role=="desktop"||a.role=="console")&&p.available&&!p.denied_capabilities.count("editor.recovery")&&
         c::permits(a,p,"history","sensitive"),"recovery.denied");
     if(scene()->at("schema_version")!="0.2.0")admit_fragment_version(scene()->at("schema_version"));
-    (void)transaction_.prepare_scene(*scene());
+    transaction_.authorize_resources();
+    auto check=transaction_.command("preview",request);
+    if(check["operations"].empty())check["operations"].push_back({{"op","scene.replace"}});
+    c::authorize_authored(check,a,p,*revision());
 }
 bool EditorDraft::recovery_available()const{
     try{authorize_recovery();return true;}catch(const protocol::Error&){return false;}
@@ -81,7 +84,60 @@ RecoveryDescription EditorDraft::inspect_recovery(std::string_view bytes,const R
         prepared.first.scene.at("widgets").size(),prepared.second->theme_pin()!=transaction_.base_resources_->theme_pin()};
 }
 bool EditorDraft::restore_recovery(std::string_view bytes,const RecoveryIdentity& expected){
+    invalidate_recovery();
     authorize_recovery();recovery_destination();auto prepared=prepare_recovery(bytes,expected);
     return record(std::move(prepared.first.scene),{},std::move(prepared.second));
+}
+struct RecoveryWork::Impl {
+    std::unique_ptr<EditorDraft> draft;std::weak_ptr<const char> validity;RecoveryIdentity identity;
+    bool capture=false;std::string bytes;
+};
+struct RecoveryPrepared::Impl {
+    std::weak_ptr<const char> validity;RecoveryIdentity identity;bool capture=false;
+    std::optional<std::string> bytes;std::pair<c::Authored,c::ResourceSnapshot> candidate;RecoveryDescription description;
+};
+RecoveryWork::RecoveryWork(std::unique_ptr<Impl> value):impl_(std::move(value)){}
+RecoveryWork::~RecoveryWork()=default;
+RecoveryPrepared::RecoveryPrepared(std::unique_ptr<Impl> value):impl_(std::move(value)){}
+RecoveryPrepared::~RecoveryPrepared()=default;
+std::unique_ptr<RecoveryPrepared> RecoveryWork::run(){
+    auto input=std::move(impl_);need(input&&input->draft,"recovery.work_consumed");
+    auto result=std::make_unique<RecoveryPrepared::Impl>();result->validity=input->validity;result->identity=input->identity;result->capture=input->capture;
+    if(input->capture)result->bytes=input->draft->recovery_snapshot(input->identity);
+    else{
+        input->draft->recovery_destination();result->candidate=input->draft->prepare_recovery(input->bytes,input->identity);
+        const auto& value=result->candidate;result->description={value.first.scene.at("scene_id").get<std::string>(),c::authored_revision(value.first),
+            value.first.scene.at("widgets").size(),value.second->theme_pin()!=input->draft->resources()->theme_pin()};
+    }
+    return std::unique_ptr<RecoveryPrepared>(new RecoveryPrepared(std::move(result)));
+}
+std::unique_ptr<RecoveryWork> EditorDraft::recovery_capture_work(const RecoveryIdentity& expected)const{
+    authorize_recovery();identity(expected);auto value=std::make_unique<RecoveryWork::Impl>();
+    value->draft=std::unique_ptr<EditorDraft>(new EditorDraft(transaction_,0));
+    value->validity=recovery_validity_.value;value->identity=expected;value->capture=true;
+    return std::unique_ptr<RecoveryWork>(new RecoveryWork(std::move(value)));
+}
+std::unique_ptr<RecoveryWork> EditorDraft::recovery_restore_work(std::string bytes,const RecoveryIdentity& expected)const{
+    authorize_recovery();identity(expected);recovery_destination();need(bytes.size()<=recovery_record_limit,"recovery.size");
+    auto value=std::make_unique<RecoveryWork::Impl>();value->draft=std::unique_ptr<EditorDraft>(new EditorDraft(transaction_,0));
+    value->validity=recovery_validity_.value;value->identity=expected;value->bytes=std::move(bytes);
+    return std::unique_ptr<RecoveryWork>(new RecoveryWork(std::move(value)));
+}
+void EditorDraft::check_recovery(const RecoveryPrepared& prepared,const RecoveryIdentity& expected,bool capture)const{
+    authorize_recovery();identity(expected);need(prepared.impl_&&prepared.impl_->capture==capture,"recovery.prepared_kind");const auto& value=*prepared.impl_;
+    need(value.identity.profile==expected.profile&&value.identity.generation==expected.generation&&value.validity.lock()==recovery_validity_.value,"recovery.prepared_stale");
+    if(!capture)recovery_destination();
+}
+std::optional<std::string> EditorDraft::recovery_capture(std::unique_ptr<RecoveryPrepared> prepared,const RecoveryIdentity& expected)const{
+    need(static_cast<bool>(prepared),"recovery.prepared");check_recovery(*prepared,expected,true);return std::move(prepared->impl_->bytes);
+}
+RecoveryDescription EditorDraft::inspect_recovery(const RecoveryPrepared& prepared,const RecoveryIdentity& expected)const{
+    check_recovery(prepared,expected,false);return prepared.impl_->description;
+}
+bool EditorDraft::restore_recovery(std::unique_ptr<RecoveryPrepared> prepared,const RecoveryIdentity& expected){
+    try{need(static_cast<bool>(prepared),"recovery.prepared");check_recovery(*prepared,expected,false);}
+    catch(...){invalidate_recovery();throw;}
+    invalidate_recovery();
+    return record_prepared(std::move(prepared->impl_->candidate),{});
 }
 }
