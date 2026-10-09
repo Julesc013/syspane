@@ -558,7 +558,8 @@
         "SP-W11-TEXT-SESSION",
         "SP-W11-DRAFT-ADMISSION",
         "SP-W11-FRONTEND-PHASES",
-        "SP-W11-PREPARED-EDITOR"
+        "SP-W11-PREPARED-EDITOR",
+        "SP-W11-EDITOR-PAINT-TRACE"
       ],
       "acceptance_tests": [
         "T-SETTINGS",
@@ -614,14 +615,17 @@
         "tests/editor/reply_lifecycle.hpp",
         "tests/editor/native_reply_lifecycle.py",
         "tests/configuration/native_prepared_editor.py",
-        "tests/configuration/prepared-editor-cases.json"
+        "tests/configuration/prepared-editor-cases.json",
+        "tests/configuration/editor_paint_trace.c",
+        "tests/configuration/native_editor_paint_trace.py",
+        "tests/configuration/editor_paint_trace_tests.py"
       ],
       "status": "in_progress",
       "authority_class": "development",
       "execution_grant": "user:foundation-native-campaign-2026-10-05",
-      "notes": "The Linux frontend composes verified helpers, authenticated profiles, native settings/editor controls and experimental recovery with live native admission and exact receipt retirement. The current worker now prepares the complete initial draft outside the backend mutex. GTK consumes its opaque unique owner only for the exact current profile; copied/stale identities, reload, pending requests, withdrawal and shutdown cannot reuse it. Original native validation remains in the form. Measured GTK construction falls from 156\u2013195 ms to 78\u2013105 ms. All 969 selected portable checks, legacy PE checks and the listed native regression families pass. Four fixed GUI cases still fail: remaining maximum-widget work and history/edit/painting delay require attribution and repair under unchanged limits. Inspect duplicate initial layout painting before changing readiness, and close any prepared-edit ownership contract before implementation. Production recovery remains disabled. Prior Apply/controller, resource-limit and accessibility failures remain preserved in the checkpoint chain. Native inspector, telemetry/desktop integration, lifecycle, imports/layers, accessibility/performance, other native adapters and all five complete 0.1.0 editions remain required.",
-      "package": "delivery/packages/w-11-prepared-editor.md",
-      "evidence": "delivery/prepared-editor-handoff.md"
+      "notes": "The Linux frontend composes verified helpers, authenticated profiles, native settings/editor controls and experimental recovery with live native admission and exact receipt retirement. The current worker now prepares the complete initial draft outside the backend mutex. GTK consumes its opaque unique owner only for the exact current profile; copied/stale identities, reload, pending requests, withdrawal and shutdown cannot reuse it. Original native validation remains in the form. Measured GTK construction falls from 156\u2013195 ms to 78\u2013105 ms. All 969 selected portable checks, legacy PE checks and the listed native regression families pass. Four fixed GUI cases still fail: remaining maximum-widget work and history/edit/painting delay require attribution and repair under unchanged limits. Inspect duplicate initial layout painting before changing readiness, and close any prepared-edit ownership contract before implementation. Production recovery remains disabled. Prior Apply/controller, resource-limit and accessibility failures remain preserved in the checkpoint chain. Native inspector, telemetry/desktop integration, lifecycle, imports/layers, accessibility/performance, other native adapters and all five complete 0.1.0 editions remain required. Independent native call stacks now confirm rasterization during constructor geometry resolution, recovery/history callbacks and GTK drawing, without changing product binaries. Preserve the first unwind overflow and both subsequent complete traces; all retain the same four GUI timing failures. Before implementation, close first-preview readiness and freeze before-first-draw input expectations. Then close current-owner asynchronous history/edit preparation; call counts alone cannot justify timing or release qualification.",
+      "package": "delivery/packages/w-11-editor-paint-trace.md",
+      "evidence": "delivery/editor-paint-trace-handoff.md"
     },
     {
       "id": "W-12",

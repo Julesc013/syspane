@@ -489,7 +489,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "6af19246b98f6430de002d510b35e3db1b7e933cff89a5072631fc6e039c29bf"
+      "sha256": "31e7b1c06b59b2501953e732bf04980ea29e46a5b2a6be3285d0048bb647bddd"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -597,6 +597,17 @@
         "SP-W11-EDITOR-HELPER-WORKER"
       ],
       "sha256": "508d9c07442ee4cbf94fcd7eaccda87b860fce702395d287f0faa8512ce65adc"
+    },
+    {
+      "id": "SP-EDITOR-PAINT-TRACE-HANDOFF",
+      "path": "delivery/editor-paint-trace-handoff.md",
+      "title": "Editor native paint attribution handoff",
+      "description": "Independent call stacks confirm full rasterization during geometry-only editor work.",
+      "requires": [
+        "SP-W11-EDITOR-PAINT-TRACE",
+        "SP-PREPARED-EDITOR-HANDOFF"
+      ],
+      "sha256": "bda1bfd88bbdccfd560bcae8c35d32381e50561f117a7df8e276fe3a76f46daf"
     },
     {
       "id": "SP-FAILURE-METADATA-HANDOFF",
@@ -2261,6 +2272,17 @@
         "SP-W10-RECOVERY-QUEUE"
       ],
       "sha256": "7e92376c6cb9235d11448028bc0d536e622c0d911996b53df80cffad4b2ce1ef"
+    },
+    {
+      "id": "SP-W11-EDITOR-PAINT-TRACE",
+      "path": "delivery/packages/w-11-editor-paint-trace.md",
+      "title": "Independent editor paint call trace",
+      "description": "Resolve whether geometry-only editor work performs native rasterization before choosing a repair.",
+      "requires": [
+        "SP-W11-PREPARED-EDITOR",
+        "SP-W11-RECOVERY-GUI-LIMITS"
+      ],
+      "sha256": "27905c824b60e83f161376078dbc0128d53ebbdbf78e30fe6e2adeb2f2276382"
     },
     {
       "id": "SP-W11-FRONTEND-PHASES",

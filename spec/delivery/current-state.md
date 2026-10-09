@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-09T06:39:01.569213+00:00", "scope": "Prepared editor ownership and fixed GTK timing evidence"}
+updated: {"by": "codex", "at": "2026-10-09T06:57:04.923418+00:00", "scope": "Independent native paint trace and next readiness boundary"}
 ---
 
 # Current state and next admitted boundary
@@ -22,12 +22,13 @@ recordings are local ignored `out/` content; the retired root is absent from the
 tracked tree. See `docs/developers/build.md` in the repository for checkout
 setup and the [repository contract](../foundation/repository.md) for ownership.
 
-The [prepared editor checkpoint](prepared-editor-handoff.md) moves complete initial
-draft validation to the existing client worker and consumes it only for the exact
-current profile. All 969 selected portable checks and the listed native regression families
-pass. Measured GTK construction falls to 78–105 ms, but four fixed GUI cases still
-fail. Next attribute initial preview/layout and history/edit callback costs.
-Production recovery stays disabled; W-11 and all five full editions remain open.
+The [native paint trace](editor-paint-trace-handoff.md) confirms full native
+rasterization during constructor and recovery/history geometry resolution, followed
+by GTK drawing. Two bounded traces completed; the original overflow and all four
+GUI timing failures are preserved. Product sources/binaries remain at the preceding
+prepared-editor checkpoint. Next close initial-preview readiness with before-draw
+input cases, then current-owner asynchronous history/edit preparation. Production
+recovery stays disabled; W-11 and all five complete editions remain open.
 
 The [frontend recovery backend](frontend-recovery-handoff.md) now uses authenticated
 profile 0.2, current native admission and exact accepted-request retirement metadata.

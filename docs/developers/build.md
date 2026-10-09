@@ -15,6 +15,23 @@ build` before configuring or building; use `test` or `package` for those actions
 The common active-output budget is unchanged; retained `out/evidence/` archives
 are measured separately. Never use the placeholder account from the example.
 
+The [native paint trace package](../../spec/delivery/packages/w-11-editor-paint-trace.md)
+uses a test-only preload probe against the unchanged compiled frontend. After
+ordinary preflight/configure/build, run `python3 tests/configuration/native_editor_paint_trace.py
+<build>/syspane <build>/syspane_frontend_fixture
+<build>/syspane_frontend_helper_fixture <build>/native-evidence` in the admitted
+non-root Linux laboratory. The driver compiles the bounded probe under ignored
+out/campaign/editor-paint-trace, supplies it only to this exercise and resolves
+executable-relative stacks after process exit. It uses the profile compiler and
+records compiler/library/symbolizer identities. The original failing GUI result
+remains a nonzero exit even when paint-trace.json is complete. Inspect both.
+
+Run `python tests/configuration/editor_paint_trace_tests.py` for transcript checks.
+Capacity overflow or incomplete symbolization invalidates diagnosis. Never use
+instrumented durations as qualification; retain the ordinary GUI command below.
+The [handoff](../../spec/delivery/editor-paint-trace-handoff.md) records confirmed
+call paths and the next initial-readiness/history-preparation boundaries.
+
 The [prepared editor package](../../spec/delivery/packages/w-11-prepared-editor.md)
 constructs an opaque PreparedEditor using ordinary full validation, without GTK.
 Transfer its unique owner only after construction ends. EditorForm consumes it as

@@ -1,0 +1,3800 @@
+{
+  "recorded_at": "2026-10-09T06:54:45.247602+00:00",
+  "source_base": "c4834121db7f606e1dfb163dcd1c7f8d66dd7d8c",
+  "scope": "Independent native paint-call attribution; product sources and binaries unchanged.",
+  "baseline_checkpoint": {
+    "local_path": "spec/delivery/checkpoints/prepared-editor.json",
+    "sha256": "5cbd10021faaa4a58884953e50dfbdda63130cc38714702abcd19c1214b8ac43"
+  },
+  "attempts": [
+    {
+      "started_at": "2026-10-09T06:52:13.000500+00:00",
+      "record": {
+        "local_path": "out/evidence/editor-paint-trace/linux-x64-gcc13-phases-9a2a96d035/result.json",
+        "sha256": "f1e09e0705dd47909e07fe88b0da16a6fe8c41a152d4e8d362d62b363fad8415"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/editor-paint-trace/linux-x64-gcc13-phases-9a2a96d035/source-inputs.zip",
+        "sha256": "ffc69123a085f70fa3b94cb15babaddf12750f691342f73e90a3a193387b94bd"
+      },
+      "exit": 1,
+      "later_source_changes": []
+    },
+    {
+      "started_at": "2026-10-09T06:45:33.385957+00:00",
+      "record": {
+        "local_path": "out/evidence/editor-paint-trace/linux-x64-gcc13-phases-e7c302509f/result.json",
+        "sha256": "87f52591106c48eda481585ce713f416f07ce9c3be9567ab7b8a39fb1208955d"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/editor-paint-trace/linux-x64-gcc13-phases-e7c302509f/source-inputs.zip",
+        "sha256": "933e9813c98e32e076f7e5766eebbea18c0c7ef92526f042de1fac4cbc462f14"
+      },
+      "exit": 1,
+      "later_source_changes": [
+        "spec/delivery/packages/w-11-editor-paint-trace.md",
+        "tests/configuration/editor_paint_trace.c",
+        "tests/configuration/native_editor_paint_trace.py"
+      ]
+    },
+    {
+      "started_at": "2026-10-09T06:47:42.359168+00:00",
+      "record": {
+        "local_path": "out/evidence/editor-paint-trace/linux-x64-gcc13-phases-ed1c81b24d/result.json",
+        "sha256": "1326cdf5077fea7a004350724aa82c0e15c5157952150f437917f4245f464304"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/editor-paint-trace/linux-x64-gcc13-phases-ed1c81b24d/source-inputs.zip",
+        "sha256": "df4a308d5ec8a32c825ae0c6e81060e9203304a2d0c753121238ef35eadc07a9"
+      },
+      "exit": 1,
+      "later_source_changes": [
+        "tests/configuration/native_editor_paint_trace.py"
+      ]
+    }
+  ],
+  "native": [
+    {
+      "archive": {
+        "local_path": "out/evidence/editor-paint-trace-native/paint-trace-85d8f51972.zip",
+        "sha256": "8386ec6bcb062e7829d8dc3053387c8d64c9f3b3705678cadfe41af7ad3bd724"
+      },
+      "record": {
+        "local_path": "out/evidence/editor-paint-trace-native/paint-trace-85d8f51972.json",
+        "sha256": "4792156600eb3b34b6eec885f329188e524e0f00f6065856f5800af11fe15c02"
+      },
+      "inventory": {
+        "local_path": "out/evidence/editor-paint-trace-native/paint-trace-85d8f51972.index.json",
+        "sha256": "7e23d57632efc989b88177ce85dd101ea22c33bfb9593a65bbb53895a6cc43ff"
+      },
+      "trace_valid": false,
+      "bytes": 137423177,
+      "cases": [
+        {
+          "case": "MAX-WIDGETS",
+          "outcome": "fail",
+          "native_children": 6,
+          "all_children_exited": true,
+          "timing_max_us": {
+            "delay_us": 157173,
+            "work_us": 119760
+          }
+        },
+        {
+          "case": "MAX-SCENE",
+          "outcome": "fail",
+          "native_children": 6,
+          "all_children_exited": true,
+          "timing_max_us": {
+            "delay_us": 161802,
+            "work_us": 94058
+          }
+        },
+        {
+          "case": "MAX-RECORD",
+          "outcome": "fail",
+          "native_children": 8,
+          "all_children_exited": true,
+          "timing_max_us": {
+            "delay_us": 178923,
+            "work_us": 100073
+          }
+        },
+        {
+          "case": "MAX-COMMAND-REJECT",
+          "outcome": "pass",
+          "native_children": 3,
+          "all_children_exited": true,
+          "timing_max_us": {
+            "delay_us": 9175,
+            "work_us": 29740
+          }
+        },
+        {
+          "case": "OVER-RECORD-REJECT",
+          "outcome": "pass",
+          "native_children": 3,
+          "all_children_exited": true,
+          "timing_max_us": {
+            "delay_us": 7564,
+            "work_us": 30908
+          }
+        },
+        {
+          "case": "CLOSE-PREPARING",
+          "outcome": "pass",
+          "native_children": 3,
+          "all_children_exited": true,
+          "timing_max_us": {
+            "delay_us": 2758,
+            "work_us": 27154
+          }
+        },
+        {
+          "case": "POLICY",
+          "outcome": "fail",
+          "native_children": 3,
+          "all_children_exited": true,
+          "timing_max_us": {
+            "delay_us": 149568,
+            "work_us": 34844
+          }
+        }
+      ]
+    },
+    {
+      "archive": {
+        "local_path": "out/evidence/editor-paint-trace-native/paint-trace-c24c660799.zip",
+        "sha256": "93d56558d8433f56c7b5f1c1d04f7e67dcd0bc873129fa84db2208fcee2417dc"
+      },
+      "record": {
+        "local_path": "out/evidence/editor-paint-trace-native/paint-trace-c24c660799.json",
+        "sha256": "546c9d2cae957b028bda576e159bcf01f94e14b6a32ac37bf1b1671f2b5998c3"
+      },
+      "inventory": {
+        "local_path": "out/evidence/editor-paint-trace-native/paint-trace-c24c660799.index.json",
+        "sha256": "07ad69d96e907147bee6ba79353ff1d4871a3db71f01cdb8f633d4fc685e0424"
+      },
+      "trace_valid": true,
+      "bytes": 137965170,
+      "cases": [
+        {
+          "case": "MAX-WIDGETS",
+          "outcome": "fail",
+          "native_children": 7,
+          "all_children_exited": true,
+          "timing_max_us": {
+            "delay_us": 209613,
+            "work_us": 134288
+          }
+        },
+        {
+          "case": "MAX-SCENE",
+          "outcome": "fail",
+          "native_children": 7,
+          "all_children_exited": true,
+          "timing_max_us": {
+            "delay_us": 175706,
+            "work_us": 106120
+          }
+        },
+        {
+          "case": "MAX-RECORD",
+          "outcome": "fail",
+          "native_children": 7,
+          "all_children_exited": true,
+          "timing_max_us": {
+            "delay_us": 180240,
+            "work_us": 101366
+          }
+        },
+        {
+          "case": "MAX-COMMAND-REJECT",
+          "outcome": "pass",
+          "native_children": 3,
+          "all_children_exited": true,
+          "timing_max_us": {
+            "delay_us": 8412,
+            "work_us": 31890
+          }
+        },
+        {
+          "case": "OVER-RECORD-REJECT",
+          "outcome": "pass",
+          "native_children": 3,
+          "all_children_exited": true,
+          "timing_max_us": {
+            "delay_us": 7014,
+            "work_us": 30746
+          }
+        },
+        {
+          "case": "CLOSE-PREPARING",
+          "outcome": "pass",
+          "native_children": 3,
+          "all_children_exited": true,
+          "timing_max_us": {
+            "delay_us": 5564,
+            "work_us": 29854
+          }
+        },
+        {
+          "case": "POLICY",
+          "outcome": "fail",
+          "native_children": 3,
+          "all_children_exited": true,
+          "timing_max_us": {
+            "delay_us": 137975,
+            "work_us": 39059
+          }
+        }
+      ]
+    },
+    {
+      "archive": {
+        "local_path": "out/evidence/editor-paint-trace-native/paint-trace-fe9f1641d0.zip",
+        "sha256": "624754e74a5106f1f7dbbe41817155e76de6b0f5e75dbdbb90734b983bcb99ce"
+      },
+      "record": {
+        "local_path": "out/evidence/editor-paint-trace-native/paint-trace-fe9f1641d0.json",
+        "sha256": "ae0fe0d3c71ee40c80cc993dc8fcf42bba2f6595e8e703af00b963dd8a654267"
+      },
+      "inventory": {
+        "local_path": "out/evidence/editor-paint-trace-native/paint-trace-fe9f1641d0.index.json",
+        "sha256": "378ec51398c1a723c6c3c5d967fbda6cde21631d4557aa3d26ff9e179bb22302"
+      },
+      "trace_valid": true,
+      "bytes": 137962339,
+      "cases": [
+        {
+          "case": "MAX-WIDGETS",
+          "outcome": "fail",
+          "native_children": 6,
+          "all_children_exited": true,
+          "timing_max_us": {
+            "delay_us": 181187,
+            "work_us": 132176
+          }
+        },
+        {
+          "case": "MAX-SCENE",
+          "outcome": "fail",
+          "native_children": 7,
+          "all_children_exited": true,
+          "timing_max_us": {
+            "delay_us": 189054,
+            "work_us": 92578
+          }
+        },
+        {
+          "case": "MAX-RECORD",
+          "outcome": "fail",
+          "native_children": 8,
+          "all_children_exited": true,
+          "timing_max_us": {
+            "delay_us": 161485,
+            "work_us": 91671
+          }
+        },
+        {
+          "case": "MAX-COMMAND-REJECT",
+          "outcome": "pass",
+          "native_children": 3,
+          "all_children_exited": true,
+          "timing_max_us": {
+            "delay_us": 7191,
+            "work_us": 28443
+          }
+        },
+        {
+          "case": "OVER-RECORD-REJECT",
+          "outcome": "pass",
+          "native_children": 3,
+          "all_children_exited": true,
+          "timing_max_us": {
+            "delay_us": 7245,
+            "work_us": 30613
+          }
+        },
+        {
+          "case": "CLOSE-PREPARING",
+          "outcome": "pass",
+          "native_children": 3,
+          "all_children_exited": true,
+          "timing_max_us": {
+            "delay_us": 1209,
+            "work_us": 28513
+          }
+        },
+        {
+          "case": "POLICY",
+          "outcome": "fail",
+          "native_children": 3,
+          "all_children_exited": true,
+          "timing_max_us": {
+            "delay_us": 124760,
+            "work_us": 35230
+          }
+        }
+      ]
+    }
+  ],
+  "analyses": [
+    {
+      "started_at": "2026-10-09T06:47:42.644713+00:00",
+      "archive": {
+        "local_path": "out/evidence/editor-paint-trace-native/paint-trace-fe9f1641d0.zip",
+        "sha256": "624754e74a5106f1f7dbbe41817155e76de6b0f5e75dbdbb90734b983bcb99ce"
+      },
+      "trace_sha256": "b737b812a3a70e9ae698715dabc80aba7340a0d1fe65645a04d1928683639646",
+      "cases": [
+        {
+          "case": "MAX-WIDGETS",
+          "calls": {
+            "surface_validation": 5,
+            "constructor_geometry": 258,
+            "gtk_draw": 15410,
+            "edit_callback_geometry": 514
+          },
+          "proofs": {
+            "surface_validation": [
+              {
+                "pid": 1135350,
+                "calls": 2,
+                "first": 1,
+                "last": 10299,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692340,
+                  1349016,
+                  1349339,
+                  637290,
+                  551547,
+                  514762,
+                  152805,
+                  106230,
+                  120146,
+                  109210,
+                  112640,
+                  122631,
+                  115980,
+                  110779,
+                  117636,
+                  117671,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1135350,
+                "calls": 1,
+                "first": 28,
+                "last": 28,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692340,
+                  1349016,
+                  1355630,
+                  551375,
+                  565505,
+                  604647,
+                  500207,
+                  524975,
+                  500404,
+                  500452,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1135350,
+                "calls": 2,
+                "first": 3357,
+                "last": 3386,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692340,
+                  1349016,
+                  1355630,
+                  551375,
+                  565505,
+                  605976,
+                  500207,
+                  524975,
+                  500404,
+                  500452,
+                  118886,
+                  87038,
+                  85541
+                ]
+              }
+            ],
+            "constructor_geometry": [
+              {
+                "pid": 1135350,
+                "calls": 2,
+                "first": 2,
+                "last": 10300,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553486,
+                  1387280,
+                  1357769,
+                  549042,
+                  551622,
+                  514762,
+                  152805,
+                  106230,
+                  120146,
+                  109210,
+                  112640,
+                  122631,
+                  115980,
+                  110779,
+                  117636,
+                  117671,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1135350,
+                "calls": 2,
+                "first": 3,
+                "last": 10301,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553661,
+                  1387280,
+                  1357769,
+                  549042,
+                  551622,
+                  514762,
+                  152805,
+                  106230,
+                  120146,
+                  109210,
+                  112640,
+                  122631,
+                  115980,
+                  110779,
+                  117636,
+                  117671,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1135350,
+                "calls": 254,
+                "first": 10302,
+                "last": 10555,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1387401,
+                  1357769,
+                  549042,
+                  551622,
+                  514762,
+                  152805,
+                  106230,
+                  120146,
+                  109210,
+                  112640,
+                  122631,
+                  115980,
+                  110779,
+                  117636,
+                  117671,
+                  118886,
+                  87038,
+                  85541
+                ]
+              }
+            ],
+            "gtk_draw": [
+              {
+                "pid": 1135350,
+                "calls": 85,
+                "first": 4,
+                "last": 15932,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553486,
+                  1387280,
+                  1357769,
+                  622155,
+                  504309,
+                  530013,
+                  504444,
+                  504504,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1135350,
+                "calls": 85,
+                "first": 5,
+                "last": 15933,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553661,
+                  1387280,
+                  1357769,
+                  622155,
+                  504309,
+                  530013,
+                  504444,
+                  504504,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1135350,
+                "calls": 15240,
+                "first": 287,
+                "last": 16187,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1387401,
+                  1357769,
+                  622155,
+                  504309,
+                  530013,
+                  504444,
+                  504504,
+                  118886,
+                  87038,
+                  85541
+                ]
+              }
+            ],
+            "edit_callback_geometry": [
+              {
+                "pid": 1135350,
+                "calls": 1,
+                "first": 29,
+                "last": 29,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553486,
+                  1387280,
+                  1357769,
+                  549042,
+                  551622,
+                  565505,
+                  604647,
+                  500207,
+                  524975,
+                  500404,
+                  500452,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1135350,
+                "calls": 1,
+                "first": 30,
+                "last": 30,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553661,
+                  1387280,
+                  1357769,
+                  549042,
+                  551622,
+                  565505,
+                  604647,
+                  500207,
+                  524975,
+                  500404,
+                  500452,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1135350,
+                "calls": 254,
+                "first": 31,
+                "last": 284,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1387401,
+                  1357769,
+                  549042,
+                  551622,
+                  565505,
+                  604647,
+                  500207,
+                  524975,
+                  500404,
+                  500452,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1135350,
+                "calls": 2,
+                "first": 3358,
+                "last": 3387,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553486,
+                  1387280,
+                  1357769,
+                  549042,
+                  551622,
+                  565505,
+                  605976,
+                  500207,
+                  524975,
+                  500404,
+                  500452,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1135350,
+                "calls": 2,
+                "first": 3359,
+                "last": 3388,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553661,
+                  1387280,
+                  1357769,
+                  549042,
+                  551622,
+                  565505,
+                  605976,
+                  500207,
+                  524975,
+                  500404,
+                  500452,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1135350,
+                "calls": 254,
+                "first": 3389,
+                "last": 3642,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1387401,
+                  1357769,
+                  549042,
+                  551622,
+                  565505,
+                  605976,
+                  500207,
+                  524975,
+                  500404,
+                  500452,
+                  118886,
+                  87038,
+                  85541
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "case": "MAX-SCENE",
+          "calls": {
+            "surface_validation": 5,
+            "constructor_geometry": 4,
+            "gtk_draw": 58,
+            "edit_callback_geometry": 6
+          },
+          "proofs": {
+            "surface_validation": [
+              {
+                "pid": 1135551,
+                "calls": 2,
+                "first": 1,
+                "last": 71,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692340,
+                  1349016,
+                  1349339,
+                  637290,
+                  551547,
+                  514762,
+                  152805,
+                  106230,
+                  120146,
+                  109210,
+                  112640,
+                  122631,
+                  115980,
+                  110779,
+                  117636,
+                  117671,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1135551,
+                "calls": 1,
+                "first": 36,
+                "last": 36,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692340,
+                  1349016,
+                  1355630,
+                  551375,
+                  565505,
+                  604647,
+                  500207,
+                  524975,
+                  500404,
+                  500452,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1135551,
+                "calls": 2,
+                "first": 39,
+                "last": 68,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692340,
+                  1349016,
+                  1355630,
+                  551375,
+                  565505,
+                  605976,
+                  500207,
+                  524975,
+                  500404,
+                  500452,
+                  118886,
+                  87038,
+                  85541
+                ]
+              }
+            ],
+            "constructor_geometry": [
+              {
+                "pid": 1135551,
+                "calls": 2,
+                "first": 2,
+                "last": 72,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553486,
+                  1387280,
+                  1357769,
+                  549042,
+                  551622,
+                  514762,
+                  152805,
+                  106230,
+                  120146,
+                  109210,
+                  112640,
+                  122631,
+                  115980,
+                  110779,
+                  117636,
+                  117671,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1135551,
+                "calls": 2,
+                "first": 3,
+                "last": 73,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553661,
+                  1387280,
+                  1357769,
+                  549042,
+                  551622,
+                  514762,
+                  152805,
+                  106230,
+                  120146,
+                  109210,
+                  112640,
+                  122631,
+                  115980,
+                  110779,
+                  117636,
+                  117671,
+                  118886,
+                  87038,
+                  85541
+                ]
+              }
+            ],
+            "gtk_draw": [
+              {
+                "pid": 1135551,
+                "calls": 29,
+                "first": 4,
+                "last": 66,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553486,
+                  1387280,
+                  1357769,
+                  622155,
+                  504309,
+                  530013,
+                  504444,
+                  504504,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1135551,
+                "calls": 29,
+                "first": 5,
+                "last": 67,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553661,
+                  1387280,
+                  1357769,
+                  622155,
+                  504309,
+                  530013,
+                  504444,
+                  504504,
+                  118886,
+                  87038,
+                  85541
+                ]
+              }
+            ],
+            "edit_callback_geometry": [
+              {
+                "pid": 1135551,
+                "calls": 1,
+                "first": 37,
+                "last": 37,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553486,
+                  1387280,
+                  1357769,
+                  549042,
+                  551622,
+                  565505,
+                  604647,
+                  500207,
+                  524975,
+                  500404,
+                  500452,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1135551,
+                "calls": 1,
+                "first": 38,
+                "last": 38,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553661,
+                  1387280,
+                  1357769,
+                  549042,
+                  551622,
+                  565505,
+                  604647,
+                  500207,
+                  524975,
+                  500404,
+                  500452,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1135551,
+                "calls": 2,
+                "first": 40,
+                "last": 69,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553486,
+                  1387280,
+                  1357769,
+                  549042,
+                  551622,
+                  565505,
+                  605976,
+                  500207,
+                  524975,
+                  500404,
+                  500452,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1135551,
+                "calls": 2,
+                "first": 41,
+                "last": 70,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553661,
+                  1387280,
+                  1357769,
+                  549042,
+                  551622,
+                  565505,
+                  605976,
+                  500207,
+                  524975,
+                  500404,
+                  500452,
+                  118886,
+                  87038,
+                  85541
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "case": "MAX-RECORD",
+          "calls": {
+            "surface_validation": 5,
+            "constructor_geometry": 4,
+            "gtk_draw": 56,
+            "edit_callback_geometry": 6
+          },
+          "proofs": {
+            "surface_validation": [
+              {
+                "pid": 1135745,
+                "calls": 2,
+                "first": 1,
+                "last": 69,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692340,
+                  1349016,
+                  1349339,
+                  637290,
+                  551547,
+                  514762,
+                  152805,
+                  106230,
+                  120146,
+                  109210,
+                  112640,
+                  122631,
+                  115980,
+                  110779,
+                  117636,
+                  117671,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1135745,
+                "calls": 1,
+                "first": 34,
+                "last": 34,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692340,
+                  1349016,
+                  1355630,
+                  551375,
+                  565505,
+                  604647,
+                  500207,
+                  524975,
+                  500404,
+                  500452,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1135745,
+                "calls": 2,
+                "first": 37,
+                "last": 66,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692340,
+                  1349016,
+                  1355630,
+                  551375,
+                  565505,
+                  605976,
+                  500207,
+                  524975,
+                  500404,
+                  500452,
+                  118886,
+                  87038,
+                  85541
+                ]
+              }
+            ],
+            "constructor_geometry": [
+              {
+                "pid": 1135745,
+                "calls": 2,
+                "first": 2,
+                "last": 70,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553486,
+                  1387280,
+                  1357769,
+                  549042,
+                  551622,
+                  514762,
+                  152805,
+                  106230,
+                  120146,
+                  109210,
+                  112640,
+                  122631,
+                  115980,
+                  110779,
+                  117636,
+                  117671,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1135745,
+                "calls": 2,
+                "first": 3,
+                "last": 71,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553661,
+                  1387280,
+                  1357769,
+                  549042,
+                  551622,
+                  514762,
+                  152805,
+                  106230,
+                  120146,
+                  109210,
+                  112640,
+                  122631,
+                  115980,
+                  110779,
+                  117636,
+                  117671,
+                  118886,
+                  87038,
+                  85541
+                ]
+              }
+            ],
+            "gtk_draw": [
+              {
+                "pid": 1135745,
+                "calls": 28,
+                "first": 4,
+                "last": 64,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553486,
+                  1387280,
+                  1357769,
+                  622155,
+                  504309,
+                  530013,
+                  504444,
+                  504504,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1135745,
+                "calls": 28,
+                "first": 5,
+                "last": 65,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553661,
+                  1387280,
+                  1357769,
+                  622155,
+                  504309,
+                  530013,
+                  504444,
+                  504504,
+                  118886,
+                  87038,
+                  85541
+                ]
+              }
+            ],
+            "edit_callback_geometry": [
+              {
+                "pid": 1135745,
+                "calls": 1,
+                "first": 35,
+                "last": 35,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553486,
+                  1387280,
+                  1357769,
+                  549042,
+                  551622,
+                  565505,
+                  604647,
+                  500207,
+                  524975,
+                  500404,
+                  500452,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1135745,
+                "calls": 1,
+                "first": 36,
+                "last": 36,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553661,
+                  1387280,
+                  1357769,
+                  549042,
+                  551622,
+                  565505,
+                  604647,
+                  500207,
+                  524975,
+                  500404,
+                  500452,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1135745,
+                "calls": 2,
+                "first": 38,
+                "last": 67,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553486,
+                  1387280,
+                  1357769,
+                  549042,
+                  551622,
+                  565505,
+                  605976,
+                  500207,
+                  524975,
+                  500404,
+                  500452,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1135745,
+                "calls": 2,
+                "first": 39,
+                "last": 68,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553661,
+                  1387280,
+                  1357769,
+                  549042,
+                  551622,
+                  565505,
+                  605976,
+                  500207,
+                  524975,
+                  500404,
+                  500452,
+                  118886,
+                  87038,
+                  85541
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "case": "MAX-COMMAND-REJECT",
+          "calls": {
+            "surface_validation": 1,
+            "constructor_geometry": 2,
+            "gtk_draw": 30
+          },
+          "proofs": {
+            "surface_validation": [
+              {
+                "pid": 1135939,
+                "calls": 1,
+                "first": 1,
+                "last": 1,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692340,
+                  1349016,
+                  1349339,
+                  637290,
+                  551547,
+                  514762,
+                  152805,
+                  106230,
+                  120146,
+                  109210,
+                  112640,
+                  122631,
+                  115980,
+                  110779,
+                  117636,
+                  117671,
+                  118886,
+                  87038,
+                  85541
+                ]
+              }
+            ],
+            "constructor_geometry": [
+              {
+                "pid": 1135939,
+                "calls": 1,
+                "first": 2,
+                "last": 2,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553486,
+                  1387280,
+                  1357769,
+                  549042,
+                  551622,
+                  514762,
+                  152805,
+                  106230,
+                  120146,
+                  109210,
+                  112640,
+                  122631,
+                  115980,
+                  110779,
+                  117636,
+                  117671,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1135939,
+                "calls": 1,
+                "first": 3,
+                "last": 3,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553661,
+                  1387280,
+                  1357769,
+                  549042,
+                  551622,
+                  514762,
+                  152805,
+                  106230,
+                  120146,
+                  109210,
+                  112640,
+                  122631,
+                  115980,
+                  110779,
+                  117636,
+                  117671,
+                  118886,
+                  87038,
+                  85541
+                ]
+              }
+            ],
+            "gtk_draw": [
+              {
+                "pid": 1135939,
+                "calls": 15,
+                "first": 4,
+                "last": 32,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553486,
+                  1387280,
+                  1357769,
+                  622155,
+                  504309,
+                  530013,
+                  504444,
+                  504504,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1135939,
+                "calls": 15,
+                "first": 5,
+                "last": 33,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553661,
+                  1387280,
+                  1357769,
+                  622155,
+                  504309,
+                  530013,
+                  504444,
+                  504504,
+                  118886,
+                  87038,
+                  85541
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "case": "OVER-RECORD-REJECT",
+          "calls": {
+            "surface_validation": 1,
+            "constructor_geometry": 2,
+            "gtk_draw": 10
+          },
+          "proofs": {
+            "surface_validation": [
+              {
+                "pid": 1136024,
+                "calls": 1,
+                "first": 1,
+                "last": 1,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692340,
+                  1349016,
+                  1349339,
+                  637290,
+                  551547,
+                  514762,
+                  152805,
+                  106230,
+                  120146,
+                  109210,
+                  112640,
+                  122631,
+                  115980,
+                  110779,
+                  117636,
+                  117671,
+                  118886,
+                  87038,
+                  85541
+                ]
+              }
+            ],
+            "constructor_geometry": [
+              {
+                "pid": 1136024,
+                "calls": 1,
+                "first": 2,
+                "last": 2,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553486,
+                  1387280,
+                  1357769,
+                  549042,
+                  551622,
+                  514762,
+                  152805,
+                  106230,
+                  120146,
+                  109210,
+                  112640,
+                  122631,
+                  115980,
+                  110779,
+                  117636,
+                  117671,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1136024,
+                "calls": 1,
+                "first": 3,
+                "last": 3,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553661,
+                  1387280,
+                  1357769,
+                  549042,
+                  551622,
+                  514762,
+                  152805,
+                  106230,
+                  120146,
+                  109210,
+                  112640,
+                  122631,
+                  115980,
+                  110779,
+                  117636,
+                  117671,
+                  118886,
+                  87038,
+                  85541
+                ]
+              }
+            ],
+            "gtk_draw": [
+              {
+                "pid": 1136024,
+                "calls": 5,
+                "first": 4,
+                "last": 12,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553486,
+                  1387280,
+                  1357769,
+                  622155,
+                  504309,
+                  530013,
+                  504444,
+                  504504,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1136024,
+                "calls": 5,
+                "first": 5,
+                "last": 13,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553661,
+                  1387280,
+                  1357769,
+                  622155,
+                  504309,
+                  530013,
+                  504444,
+                  504504,
+                  118886,
+                  87038,
+                  85541
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "case": "CLOSE-PREPARING",
+          "calls": {
+            "surface_validation": 1,
+            "constructor_geometry": 2,
+            "gtk_draw": 4
+          },
+          "proofs": {
+            "surface_validation": [
+              {
+                "pid": 1136099,
+                "calls": 1,
+                "first": 1,
+                "last": 1,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692340,
+                  1349016,
+                  1349339,
+                  637290,
+                  551547,
+                  514762,
+                  152805,
+                  106230,
+                  120146,
+                  109210,
+                  112640,
+                  122631,
+                  115980,
+                  110779,
+                  117636,
+                  117671,
+                  118886,
+                  87038,
+                  85541
+                ]
+              }
+            ],
+            "constructor_geometry": [
+              {
+                "pid": 1136099,
+                "calls": 1,
+                "first": 2,
+                "last": 2,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553486,
+                  1387280,
+                  1357769,
+                  549042,
+                  551622,
+                  514762,
+                  152805,
+                  106230,
+                  120146,
+                  109210,
+                  112640,
+                  122631,
+                  115980,
+                  110779,
+                  117636,
+                  117671,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1136099,
+                "calls": 1,
+                "first": 3,
+                "last": 3,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553661,
+                  1387280,
+                  1357769,
+                  549042,
+                  551622,
+                  514762,
+                  152805,
+                  106230,
+                  120146,
+                  109210,
+                  112640,
+                  122631,
+                  115980,
+                  110779,
+                  117636,
+                  117671,
+                  118886,
+                  87038,
+                  85541
+                ]
+              }
+            ],
+            "gtk_draw": [
+              {
+                "pid": 1136099,
+                "calls": 2,
+                "first": 4,
+                "last": 6,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553486,
+                  1387280,
+                  1357769,
+                  622155,
+                  504309,
+                  530013,
+                  504444,
+                  504504,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1136099,
+                "calls": 2,
+                "first": 5,
+                "last": 7,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553661,
+                  1387280,
+                  1357769,
+                  622155,
+                  504309,
+                  530013,
+                  504444,
+                  504504,
+                  118886,
+                  87038,
+                  85541
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "case": "POLICY",
+          "calls": {
+            "surface_validation": 2,
+            "constructor_geometry": 2,
+            "gtk_draw": 30,
+            "edit_callback_geometry": 2
+          },
+          "proofs": {
+            "surface_validation": [
+              {
+                "pid": 1136171,
+                "calls": 1,
+                "first": 1,
+                "last": 1,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692340,
+                  1349016,
+                  1349339,
+                  637290,
+                  551547,
+                  514762,
+                  152805,
+                  106230,
+                  120146,
+                  109210,
+                  112640,
+                  122631,
+                  115980,
+                  110779,
+                  117636,
+                  117671,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1136171,
+                "calls": 1,
+                "first": 34,
+                "last": 34,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692340,
+                  1349016,
+                  1355630,
+                  551375,
+                  565505,
+                  604647,
+                  500207,
+                  524975,
+                  500404,
+                  500452,
+                  118886,
+                  87038,
+                  85541
+                ]
+              }
+            ],
+            "constructor_geometry": [
+              {
+                "pid": 1136171,
+                "calls": 1,
+                "first": 2,
+                "last": 2,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553486,
+                  1387280,
+                  1357769,
+                  549042,
+                  551622,
+                  514762,
+                  152805,
+                  106230,
+                  120146,
+                  109210,
+                  112640,
+                  122631,
+                  115980,
+                  110779,
+                  117636,
+                  117671,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1136171,
+                "calls": 1,
+                "first": 3,
+                "last": 3,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553661,
+                  1387280,
+                  1357769,
+                  549042,
+                  551622,
+                  514762,
+                  152805,
+                  106230,
+                  120146,
+                  109210,
+                  112640,
+                  122631,
+                  115980,
+                  110779,
+                  117636,
+                  117671,
+                  118886,
+                  87038,
+                  85541
+                ]
+              }
+            ],
+            "gtk_draw": [
+              {
+                "pid": 1136171,
+                "calls": 15,
+                "first": 4,
+                "last": 32,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553486,
+                  1387280,
+                  1357769,
+                  622155,
+                  504309,
+                  530013,
+                  504444,
+                  504504,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1136171,
+                "calls": 15,
+                "first": 5,
+                "last": 33,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553661,
+                  1387280,
+                  1357769,
+                  622155,
+                  504309,
+                  530013,
+                  504444,
+                  504504,
+                  118886,
+                  87038,
+                  85541
+                ]
+              }
+            ],
+            "edit_callback_geometry": [
+              {
+                "pid": 1136171,
+                "calls": 1,
+                "first": 35,
+                "last": 35,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553486,
+                  1387280,
+                  1357769,
+                  549042,
+                  551622,
+                  565505,
+                  604647,
+                  500207,
+                  524975,
+                  500404,
+                  500452,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1136171,
+                "calls": 1,
+                "first": 36,
+                "last": 36,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553661,
+                  1387280,
+                  1357769,
+                  549042,
+                  551622,
+                  565505,
+                  604647,
+                  500207,
+                  524975,
+                  500404,
+                  500452,
+                  118886,
+                  87038,
+                  85541
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "started_at": "2026-10-09T06:52:13.596519+00:00",
+      "archive": {
+        "local_path": "out/evidence/editor-paint-trace-native/paint-trace-c24c660799.zip",
+        "sha256": "93d56558d8433f56c7b5f1c1d04f7e67dcd0bc873129fa84db2208fcee2417dc"
+      },
+      "trace_sha256": "082af142f5f9d8065b0b97285e6370a08e272b0e8f4b106a3d1558618df11be0",
+      "cases": [
+        {
+          "case": "MAX-WIDGETS",
+          "calls": {
+            "surface_validation": 5,
+            "constructor_geometry": 258,
+            "gtk_draw": 17458,
+            "edit_callback_geometry": 514
+          },
+          "proofs": {
+            "surface_validation": [
+              {
+                "pid": 1136396,
+                "calls": 2,
+                "first": 1,
+                "last": 11323,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692340,
+                  1349016,
+                  1349339,
+                  637290,
+                  551547,
+                  514762,
+                  152805,
+                  106230,
+                  120146,
+                  109210,
+                  112640,
+                  122631,
+                  115980,
+                  110779,
+                  117636,
+                  117671,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1136396,
+                "calls": 1,
+                "first": 28,
+                "last": 28,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692340,
+                  1349016,
+                  1355630,
+                  551375,
+                  565505,
+                  604647,
+                  500207,
+                  524975,
+                  500404,
+                  500452,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1136396,
+                "calls": 2,
+                "first": 3869,
+                "last": 3898,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692340,
+                  1349016,
+                  1355630,
+                  551375,
+                  565505,
+                  605976,
+                  500207,
+                  524975,
+                  500404,
+                  500452,
+                  118886,
+                  87038,
+                  85541
+                ]
+              }
+            ],
+            "constructor_geometry": [
+              {
+                "pid": 1136396,
+                "calls": 2,
+                "first": 2,
+                "last": 11324,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553486,
+                  1387280,
+                  1357769,
+                  549042,
+                  551622,
+                  514762,
+                  152805,
+                  106230,
+                  120146,
+                  109210,
+                  112640,
+                  122631,
+                  115980,
+                  110779,
+                  117636,
+                  117671,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1136396,
+                "calls": 2,
+                "first": 3,
+                "last": 11325,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553661,
+                  1387280,
+                  1357769,
+                  549042,
+                  551622,
+                  514762,
+                  152805,
+                  106230,
+                  120146,
+                  109210,
+                  112640,
+                  122631,
+                  115980,
+                  110779,
+                  117636,
+                  117671,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1136396,
+                "calls": 254,
+                "first": 11326,
+                "last": 11579,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1387401,
+                  1357769,
+                  549042,
+                  551622,
+                  514762,
+                  152805,
+                  106230,
+                  120146,
+                  109210,
+                  112640,
+                  122631,
+                  115980,
+                  110779,
+                  117636,
+                  117671,
+                  118886,
+                  87038,
+                  85541
+                ]
+              }
+            ],
+            "gtk_draw": [
+              {
+                "pid": 1136396,
+                "calls": 93,
+                "first": 4,
+                "last": 17980,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553486,
+                  1387280,
+                  1357769,
+                  622155,
+                  504309,
+                  530013,
+                  504444,
+                  504504,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1136396,
+                "calls": 93,
+                "first": 5,
+                "last": 17981,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553661,
+                  1387280,
+                  1357769,
+                  622155,
+                  504309,
+                  530013,
+                  504444,
+                  504504,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1136396,
+                "calls": 17272,
+                "first": 287,
+                "last": 18235,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1387401,
+                  1357769,
+                  622155,
+                  504309,
+                  530013,
+                  504444,
+                  504504,
+                  118886,
+                  87038,
+                  85541
+                ]
+              }
+            ],
+            "edit_callback_geometry": [
+              {
+                "pid": 1136396,
+                "calls": 1,
+                "first": 29,
+                "last": 29,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553486,
+                  1387280,
+                  1357769,
+                  549042,
+                  551622,
+                  565505,
+                  604647,
+                  500207,
+                  524975,
+                  500404,
+                  500452,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1136396,
+                "calls": 1,
+                "first": 30,
+                "last": 30,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553661,
+                  1387280,
+                  1357769,
+                  549042,
+                  551622,
+                  565505,
+                  604647,
+                  500207,
+                  524975,
+                  500404,
+                  500452,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1136396,
+                "calls": 254,
+                "first": 31,
+                "last": 284,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1387401,
+                  1357769,
+                  549042,
+                  551622,
+                  565505,
+                  604647,
+                  500207,
+                  524975,
+                  500404,
+                  500452,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1136396,
+                "calls": 2,
+                "first": 3870,
+                "last": 3899,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553486,
+                  1387280,
+                  1357769,
+                  549042,
+                  551622,
+                  565505,
+                  605976,
+                  500207,
+                  524975,
+                  500404,
+                  500452,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1136396,
+                "calls": 2,
+                "first": 3871,
+                "last": 3900,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553661,
+                  1387280,
+                  1357769,
+                  549042,
+                  551622,
+                  565505,
+                  605976,
+                  500207,
+                  524975,
+                  500404,
+                  500452,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1136396,
+                "calls": 254,
+                "first": 3901,
+                "last": 4154,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1387401,
+                  1357769,
+                  549042,
+                  551622,
+                  565505,
+                  605976,
+                  500207,
+                  524975,
+                  500404,
+                  500452,
+                  118886,
+                  87038,
+                  85541
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "case": "MAX-SCENE",
+          "calls": {
+            "surface_validation": 5,
+            "constructor_geometry": 4,
+            "gtk_draw": 58,
+            "edit_callback_geometry": 6
+          },
+          "proofs": {
+            "surface_validation": [
+              {
+                "pid": 1136609,
+                "calls": 2,
+                "first": 1,
+                "last": 71,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692340,
+                  1349016,
+                  1349339,
+                  637290,
+                  551547,
+                  514762,
+                  152805,
+                  106230,
+                  120146,
+                  109210,
+                  112640,
+                  122631,
+                  115980,
+                  110779,
+                  117636,
+                  117671,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1136609,
+                "calls": 1,
+                "first": 36,
+                "last": 36,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692340,
+                  1349016,
+                  1355630,
+                  551375,
+                  565505,
+                  604647,
+                  500207,
+                  524975,
+                  500404,
+                  500452,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1136609,
+                "calls": 2,
+                "first": 39,
+                "last": 68,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692340,
+                  1349016,
+                  1355630,
+                  551375,
+                  565505,
+                  605976,
+                  500207,
+                  524975,
+                  500404,
+                  500452,
+                  118886,
+                  87038,
+                  85541
+                ]
+              }
+            ],
+            "constructor_geometry": [
+              {
+                "pid": 1136609,
+                "calls": 2,
+                "first": 2,
+                "last": 72,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553486,
+                  1387280,
+                  1357769,
+                  549042,
+                  551622,
+                  514762,
+                  152805,
+                  106230,
+                  120146,
+                  109210,
+                  112640,
+                  122631,
+                  115980,
+                  110779,
+                  117636,
+                  117671,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1136609,
+                "calls": 2,
+                "first": 3,
+                "last": 73,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553661,
+                  1387280,
+                  1357769,
+                  549042,
+                  551622,
+                  514762,
+                  152805,
+                  106230,
+                  120146,
+                  109210,
+                  112640,
+                  122631,
+                  115980,
+                  110779,
+                  117636,
+                  117671,
+                  118886,
+                  87038,
+                  85541
+                ]
+              }
+            ],
+            "gtk_draw": [
+              {
+                "pid": 1136609,
+                "calls": 29,
+                "first": 4,
+                "last": 66,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553486,
+                  1387280,
+                  1357769,
+                  622155,
+                  504309,
+                  530013,
+                  504444,
+                  504504,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1136609,
+                "calls": 29,
+                "first": 5,
+                "last": 67,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553661,
+                  1387280,
+                  1357769,
+                  622155,
+                  504309,
+                  530013,
+                  504444,
+                  504504,
+                  118886,
+                  87038,
+                  85541
+                ]
+              }
+            ],
+            "edit_callback_geometry": [
+              {
+                "pid": 1136609,
+                "calls": 1,
+                "first": 37,
+                "last": 37,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553486,
+                  1387280,
+                  1357769,
+                  549042,
+                  551622,
+                  565505,
+                  604647,
+                  500207,
+                  524975,
+                  500404,
+                  500452,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1136609,
+                "calls": 1,
+                "first": 38,
+                "last": 38,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553661,
+                  1387280,
+                  1357769,
+                  549042,
+                  551622,
+                  565505,
+                  604647,
+                  500207,
+                  524975,
+                  500404,
+                  500452,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1136609,
+                "calls": 2,
+                "first": 40,
+                "last": 69,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553486,
+                  1387280,
+                  1357769,
+                  549042,
+                  551622,
+                  565505,
+                  605976,
+                  500207,
+                  524975,
+                  500404,
+                  500452,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1136609,
+                "calls": 2,
+                "first": 41,
+                "last": 70,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553661,
+                  1387280,
+                  1357769,
+                  549042,
+                  551622,
+                  565505,
+                  605976,
+                  500207,
+                  524975,
+                  500404,
+                  500452,
+                  118886,
+                  87038,
+                  85541
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "case": "MAX-RECORD",
+          "calls": {
+            "surface_validation": 5,
+            "constructor_geometry": 4,
+            "gtk_draw": 60,
+            "edit_callback_geometry": 6
+          },
+          "proofs": {
+            "surface_validation": [
+              {
+                "pid": 1136803,
+                "calls": 2,
+                "first": 1,
+                "last": 73,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692340,
+                  1349016,
+                  1349339,
+                  637290,
+                  551547,
+                  514762,
+                  152805,
+                  106230,
+                  120146,
+                  109210,
+                  112640,
+                  122631,
+                  115980,
+                  110779,
+                  117636,
+                  117671,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1136803,
+                "calls": 1,
+                "first": 38,
+                "last": 38,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692340,
+                  1349016,
+                  1355630,
+                  551375,
+                  565505,
+                  604647,
+                  500207,
+                  524975,
+                  500404,
+                  500452,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1136803,
+                "calls": 2,
+                "first": 41,
+                "last": 70,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692340,
+                  1349016,
+                  1355630,
+                  551375,
+                  565505,
+                  605976,
+                  500207,
+                  524975,
+                  500404,
+                  500452,
+                  118886,
+                  87038,
+                  85541
+                ]
+              }
+            ],
+            "constructor_geometry": [
+              {
+                "pid": 1136803,
+                "calls": 2,
+                "first": 2,
+                "last": 74,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553486,
+                  1387280,
+                  1357769,
+                  549042,
+                  551622,
+                  514762,
+                  152805,
+                  106230,
+                  120146,
+                  109210,
+                  112640,
+                  122631,
+                  115980,
+                  110779,
+                  117636,
+                  117671,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1136803,
+                "calls": 2,
+                "first": 3,
+                "last": 75,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553661,
+                  1387280,
+                  1357769,
+                  549042,
+                  551622,
+                  514762,
+                  152805,
+                  106230,
+                  120146,
+                  109210,
+                  112640,
+                  122631,
+                  115980,
+                  110779,
+                  117636,
+                  117671,
+                  118886,
+                  87038,
+                  85541
+                ]
+              }
+            ],
+            "gtk_draw": [
+              {
+                "pid": 1136803,
+                "calls": 30,
+                "first": 4,
+                "last": 68,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553486,
+                  1387280,
+                  1357769,
+                  622155,
+                  504309,
+                  530013,
+                  504444,
+                  504504,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1136803,
+                "calls": 30,
+                "first": 5,
+                "last": 69,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553661,
+                  1387280,
+                  1357769,
+                  622155,
+                  504309,
+                  530013,
+                  504444,
+                  504504,
+                  118886,
+                  87038,
+                  85541
+                ]
+              }
+            ],
+            "edit_callback_geometry": [
+              {
+                "pid": 1136803,
+                "calls": 1,
+                "first": 39,
+                "last": 39,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553486,
+                  1387280,
+                  1357769,
+                  549042,
+                  551622,
+                  565505,
+                  604647,
+                  500207,
+                  524975,
+                  500404,
+                  500452,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1136803,
+                "calls": 1,
+                "first": 40,
+                "last": 40,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553661,
+                  1387280,
+                  1357769,
+                  549042,
+                  551622,
+                  565505,
+                  604647,
+                  500207,
+                  524975,
+                  500404,
+                  500452,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1136803,
+                "calls": 2,
+                "first": 42,
+                "last": 71,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553486,
+                  1387280,
+                  1357769,
+                  549042,
+                  551622,
+                  565505,
+                  605976,
+                  500207,
+                  524975,
+                  500404,
+                  500452,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1136803,
+                "calls": 2,
+                "first": 43,
+                "last": 72,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553661,
+                  1387280,
+                  1357769,
+                  549042,
+                  551622,
+                  565505,
+                  605976,
+                  500207,
+                  524975,
+                  500404,
+                  500452,
+                  118886,
+                  87038,
+                  85541
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "case": "MAX-COMMAND-REJECT",
+          "calls": {
+            "surface_validation": 1,
+            "constructor_geometry": 2,
+            "gtk_draw": 30
+          },
+          "proofs": {
+            "surface_validation": [
+              {
+                "pid": 1136999,
+                "calls": 1,
+                "first": 1,
+                "last": 1,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692340,
+                  1349016,
+                  1349339,
+                  637290,
+                  551547,
+                  514762,
+                  152805,
+                  106230,
+                  120146,
+                  109210,
+                  112640,
+                  122631,
+                  115980,
+                  110779,
+                  117636,
+                  117671,
+                  118886,
+                  87038,
+                  85541
+                ]
+              }
+            ],
+            "constructor_geometry": [
+              {
+                "pid": 1136999,
+                "calls": 1,
+                "first": 2,
+                "last": 2,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553486,
+                  1387280,
+                  1357769,
+                  549042,
+                  551622,
+                  514762,
+                  152805,
+                  106230,
+                  120146,
+                  109210,
+                  112640,
+                  122631,
+                  115980,
+                  110779,
+                  117636,
+                  117671,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1136999,
+                "calls": 1,
+                "first": 3,
+                "last": 3,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553661,
+                  1387280,
+                  1357769,
+                  549042,
+                  551622,
+                  514762,
+                  152805,
+                  106230,
+                  120146,
+                  109210,
+                  112640,
+                  122631,
+                  115980,
+                  110779,
+                  117636,
+                  117671,
+                  118886,
+                  87038,
+                  85541
+                ]
+              }
+            ],
+            "gtk_draw": [
+              {
+                "pid": 1136999,
+                "calls": 15,
+                "first": 4,
+                "last": 32,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553486,
+                  1387280,
+                  1357769,
+                  622155,
+                  504309,
+                  530013,
+                  504444,
+                  504504,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1136999,
+                "calls": 15,
+                "first": 5,
+                "last": 33,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553661,
+                  1387280,
+                  1357769,
+                  622155,
+                  504309,
+                  530013,
+                  504444,
+                  504504,
+                  118886,
+                  87038,
+                  85541
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "case": "OVER-RECORD-REJECT",
+          "calls": {
+            "surface_validation": 1,
+            "constructor_geometry": 2,
+            "gtk_draw": 10
+          },
+          "proofs": {
+            "surface_validation": [
+              {
+                "pid": 1137084,
+                "calls": 1,
+                "first": 1,
+                "last": 1,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692340,
+                  1349016,
+                  1349339,
+                  637290,
+                  551547,
+                  514762,
+                  152805,
+                  106230,
+                  120146,
+                  109210,
+                  112640,
+                  122631,
+                  115980,
+                  110779,
+                  117636,
+                  117671,
+                  118886,
+                  87038,
+                  85541
+                ]
+              }
+            ],
+            "constructor_geometry": [
+              {
+                "pid": 1137084,
+                "calls": 1,
+                "first": 2,
+                "last": 2,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553486,
+                  1387280,
+                  1357769,
+                  549042,
+                  551622,
+                  514762,
+                  152805,
+                  106230,
+                  120146,
+                  109210,
+                  112640,
+                  122631,
+                  115980,
+                  110779,
+                  117636,
+                  117671,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1137084,
+                "calls": 1,
+                "first": 3,
+                "last": 3,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553661,
+                  1387280,
+                  1357769,
+                  549042,
+                  551622,
+                  514762,
+                  152805,
+                  106230,
+                  120146,
+                  109210,
+                  112640,
+                  122631,
+                  115980,
+                  110779,
+                  117636,
+                  117671,
+                  118886,
+                  87038,
+                  85541
+                ]
+              }
+            ],
+            "gtk_draw": [
+              {
+                "pid": 1137084,
+                "calls": 5,
+                "first": 4,
+                "last": 12,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553486,
+                  1387280,
+                  1357769,
+                  622155,
+                  504309,
+                  530013,
+                  504444,
+                  504504,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1137084,
+                "calls": 5,
+                "first": 5,
+                "last": 13,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553661,
+                  1387280,
+                  1357769,
+                  622155,
+                  504309,
+                  530013,
+                  504444,
+                  504504,
+                  118886,
+                  87038,
+                  85541
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "case": "CLOSE-PREPARING",
+          "calls": {
+            "surface_validation": 1,
+            "constructor_geometry": 2,
+            "gtk_draw": 6
+          },
+          "proofs": {
+            "surface_validation": [
+              {
+                "pid": 1137159,
+                "calls": 1,
+                "first": 1,
+                "last": 1,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692340,
+                  1349016,
+                  1349339,
+                  637290,
+                  551547,
+                  514762,
+                  152805,
+                  106230,
+                  120146,
+                  109210,
+                  112640,
+                  122631,
+                  115980,
+                  110779,
+                  117636,
+                  117671,
+                  118886,
+                  87038,
+                  85541
+                ]
+              }
+            ],
+            "constructor_geometry": [
+              {
+                "pid": 1137159,
+                "calls": 1,
+                "first": 2,
+                "last": 2,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553486,
+                  1387280,
+                  1357769,
+                  549042,
+                  551622,
+                  514762,
+                  152805,
+                  106230,
+                  120146,
+                  109210,
+                  112640,
+                  122631,
+                  115980,
+                  110779,
+                  117636,
+                  117671,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1137159,
+                "calls": 1,
+                "first": 3,
+                "last": 3,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553661,
+                  1387280,
+                  1357769,
+                  549042,
+                  551622,
+                  514762,
+                  152805,
+                  106230,
+                  120146,
+                  109210,
+                  112640,
+                  122631,
+                  115980,
+                  110779,
+                  117636,
+                  117671,
+                  118886,
+                  87038,
+                  85541
+                ]
+              }
+            ],
+            "gtk_draw": [
+              {
+                "pid": 1137159,
+                "calls": 3,
+                "first": 4,
+                "last": 8,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553486,
+                  1387280,
+                  1357769,
+                  622155,
+                  504309,
+                  530013,
+                  504444,
+                  504504,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1137159,
+                "calls": 3,
+                "first": 5,
+                "last": 9,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553661,
+                  1387280,
+                  1357769,
+                  622155,
+                  504309,
+                  530013,
+                  504444,
+                  504504,
+                  118886,
+                  87038,
+                  85541
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "case": "POLICY",
+          "calls": {
+            "surface_validation": 2,
+            "constructor_geometry": 2,
+            "gtk_draw": 30,
+            "edit_callback_geometry": 2
+          },
+          "proofs": {
+            "surface_validation": [
+              {
+                "pid": 1137232,
+                "calls": 1,
+                "first": 1,
+                "last": 1,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692340,
+                  1349016,
+                  1349339,
+                  637290,
+                  551547,
+                  514762,
+                  152805,
+                  106230,
+                  120146,
+                  109210,
+                  112640,
+                  122631,
+                  115980,
+                  110779,
+                  117636,
+                  117671,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1137232,
+                "calls": 1,
+                "first": 34,
+                "last": 34,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692340,
+                  1349016,
+                  1355630,
+                  551375,
+                  565505,
+                  604647,
+                  500207,
+                  524975,
+                  500404,
+                  500452,
+                  118886,
+                  87038,
+                  85541
+                ]
+              }
+            ],
+            "constructor_geometry": [
+              {
+                "pid": 1137232,
+                "calls": 1,
+                "first": 2,
+                "last": 2,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553486,
+                  1387280,
+                  1357769,
+                  549042,
+                  551622,
+                  514762,
+                  152805,
+                  106230,
+                  120146,
+                  109210,
+                  112640,
+                  122631,
+                  115980,
+                  110779,
+                  117636,
+                  117671,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1137232,
+                "calls": 1,
+                "first": 3,
+                "last": 3,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553661,
+                  1387280,
+                  1357769,
+                  549042,
+                  551622,
+                  514762,
+                  152805,
+                  106230,
+                  120146,
+                  109210,
+                  112640,
+                  122631,
+                  115980,
+                  110779,
+                  117636,
+                  117671,
+                  118886,
+                  87038,
+                  85541
+                ]
+              }
+            ],
+            "gtk_draw": [
+              {
+                "pid": 1137232,
+                "calls": 15,
+                "first": 4,
+                "last": 32,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553486,
+                  1387280,
+                  1357769,
+                  622155,
+                  504309,
+                  530013,
+                  504444,
+                  504504,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1137232,
+                "calls": 15,
+                "first": 5,
+                "last": 33,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553661,
+                  1387280,
+                  1357769,
+                  622155,
+                  504309,
+                  530013,
+                  504444,
+                  504504,
+                  118886,
+                  87038,
+                  85541
+                ]
+              }
+            ],
+            "edit_callback_geometry": [
+              {
+                "pid": 1137232,
+                "calls": 1,
+                "first": 35,
+                "last": 35,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553486,
+                  1387280,
+                  1357769,
+                  549042,
+                  551622,
+                  565505,
+                  604647,
+                  500207,
+                  524975,
+                  500404,
+                  500452,
+                  118886,
+                  87038,
+                  85541
+                ]
+              },
+              {
+                "pid": 1137232,
+                "calls": 1,
+                "first": 36,
+                "last": 36,
+                "offsets": [
+                  1689716,
+                  1691957,
+                  1692303,
+                  1551946,
+                  1553661,
+                  1387280,
+                  1357769,
+                  549042,
+                  551622,
+                  565505,
+                  604647,
+                  500207,
+                  524975,
+                  500404,
+                  500452,
+                  118886,
+                  87038,
+                  85541
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "fixed_inputs": {
+    "spec/delivery/packages/w-11-installed-recovery.md": "04d3385d832a3fc75ba8fd56b2e18f5844157209e0cbc145244fd9400b5fa810",
+    "tests/configuration/installed-recovery-cases.json": "e5e75b327314911b4ff52f8521be9e04fa65f821f7b000431d3f62f63863792e",
+    "tests/configuration/installed-editor-cases.json": "9a3b26dc4001e0aa0dd1662802c18e73628d33b28527b3fd5c6a4ca364e6bac6",
+    "tests/configuration/installed-editor-scene.json": "45dea42b875ffd68e36282bd9df5cbcdee67f9093a774ef29b8ddaef58d4e7fa",
+    "tests/configuration/frontend-recovery-command.json": "f37c0bffe6b7cb22dd96733b15ad5669beaf63dbdfde5ad27f98b206bff47f0e",
+    "tests/configuration/profile-startup-cases.json": "778d20398d8db479a21b10e081c377ca85dabe11199b2c4918b03c6e6fc7cd2b",
+    "spec/delivery/packages/w-11-recovery-limits.md": "86c72bd00ca125faa35470642100b3f3f3410a856a84fb193dd6357fc98d61f5",
+    "tests/configuration/recovery-limits-cases.json": "9404f8bd7cf316dccc767c37158d4be352aef457a95382bfc576b10f766b2ab4",
+    "tests/configuration/recovery_limits_inputs.py": "8dece3e0096c62951cdd742e9a3b03176dc263d8005f575b546dd0be8c1eceef",
+    "spec/delivery/packages/w-11-recovery-gui-limits.md": "61a74b77b17f2c30f5b91538172b50a7639aa76cb9544d8dfbefa224b3604522",
+    "tests/configuration/recovery-gui-limits-cases.json": "43263df79f8dd55fc2446f6edf4128416dc200eb348c9bc0a05c2d780e68c9b4"
+  },
+  "decoder_checks": {
+    "local_path": "out/evidence/editor-paint-trace-decoder.json",
+    "sha256": "e723a4354c68dedcc1ce1198d7513aea17a8f4c2299516a454c660aa91f2e596"
+  },
+  "conclusions": [
+    "Native rasterization occurs in initial geometry resolution, synchronous recovery/history geometry refresh and GTK drawing.",
+    "The 256-widget case paints 258 text layouts in constructors and 514 in recovery/undo/redo geometry callbacks; these counts are not durations.",
+    "Initial composition may move to the first draw only if earlier geometry-dependent input explicitly resolves current geometry.",
+    "History/edit validation and composition remain separate unresolved callback costs."
+  ],
+  "limitations": [
+    "Initial 64-frame trace overflowed and is invalid; it is preserved. Two later bounded traces completed.",
+    "All experiments retain the same four original GUI timing failures. Interposition perturbs timing, so none qualifies responsiveness.",
+    "Production recovery remains disabled; W-11 and all five complete editions remain unfinished."
+  ],
+  "next_step": "Close and implement initial-preview readiness with before-first-draw input cases; then move expensive history/edit preparation behind current-owner proofs and repeat ordinary GUI qualification.",
+  "spec_checks": {
+    "record": {
+      "local_path": "out/evidence/editor-paint-trace-spec-validation-c571904e0ddb.json",
+      "sha256": "c571904e0ddbc8b85003738b4fe567d1a4acd126d83e951bbafda81912eca7e8"
+    },
+    "counts": {
+      "files": 667,
+      "concepts": 345,
+      "requirements": 131,
+      "planned_tests": 61,
+      "work_units": 49
+    },
+    "schemas": 51,
+    "fixtures": 183
+  }
+}

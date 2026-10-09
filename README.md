@@ -11,10 +11,10 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
-The [prepared editor checkpoint](spec/delivery/prepared-editor-handoff.md) moves
-validated initial draft construction to the existing worker and reduces GTK setup
-cost. Portable and native regressions pass; four fixed GUI timing failures keep
-production recovery and all five complete editions open.
+The [native paint trace](spec/delivery/editor-paint-trace-handoff.md) confirms
+repeated rasterization during editor construction and edit callbacks. Initial
+preview readiness and asynchronous edit preparation are the next repairs. Four
+fixed GUI timing failures, production recovery and all five full editions remain open.
 
 The [installed settings frontend](spec/delivery/installed-settings-handoff.md)
 now runs from a relocated development payload, supervises its verified configuration
