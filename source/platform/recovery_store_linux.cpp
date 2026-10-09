@@ -88,9 +88,11 @@ struct Active {bool& value;explicit Active(bool& v):value(v){need(!value,"recove
 struct LinuxRecoveryStore::Impl {
     std::string path,instance=nonce();File root,lock;struct stat root_id{},lock_id{};std::thread::id owner=std::this_thread::get_id();
     std::uint64_t sequence=0;bool poisoned=false;mutable bool active=false;std::function<void(const char*)> hook;
+    std::unique_ptr<LinuxRecoveryDirectory> admission;
     void check_owner()const{need(std::this_thread::get_id()==owner,"recovery_store.owner");need(!poisoned,"recovery_store.unknown");}
     void step(const char* name){if(hook)hook(name);}
     void validate()const{
+        if(admission)admission->verify();
         const auto reopened=root_directory(path);need(same_node(private_node(reopened.fd,true),root_id)&&same_node(private_node(root.fd,true),root_id),"recovery_store.external_change");
         const auto current=private_node(lock.fd,false,0);need(same_file(current,lock_id),"recovery_store.external_change");bound_name(root.fd,".writer",current);layout(root.fd);
     }
@@ -131,8 +133,11 @@ struct LinuxRecoveryStore::Impl {
         }catch(...){if(published)poisoned=true;return {published?Publication::unknown:Publication::unchanged,published?"recovery_store.unknown":"recovery_store.io"};}
     }
 };
-LinuxRecoveryStore::LinuxRecoveryStore(const std::string& path,std::function<void(const char*)> hook):impl_(std::make_unique<Impl>()){
-    auto& s=*impl_;s.path=path;s.hook=std::move(hook);s.root=root_directory(path);s.root_id=private_node(s.root.fd,true);layout(s.root.fd);
+LinuxRecoveryStore::LinuxRecoveryStore(const std::string& path,std::function<void(const char*)> hook,std::optional<ProfileRecoveryDirectory> expected):impl_(std::make_unique<Impl>()){
+    auto& s=*impl_;s.path=path;s.hook=std::move(hook);
+    if(expected){need(expected->path==path,"recovery_store.identity");s.admission=std::make_unique<LinuxRecoveryDirectory>(*expected);}
+    s.root=root_directory(path);s.root_id=private_node(s.root.fd,true);layout(s.root.fd);
+    if(expected)need(static_cast<std::uint64_t>(s.root_id.st_dev)==expected->recovery_device&&static_cast<std::uint64_t>(s.root_id.st_ino)==expected->recovery_inode,"recovery_store.identity");
     s.lock=File(::openat(s.root.fd,".writer",O_RDWR|O_CREAT|O_NOFOLLOW|O_NONBLOCK|O_CLOEXEC,0600));s.lock_id=private_node(s.lock.fd,false,0);
     need(::flock(s.lock.fd,LOCK_EX|LOCK_NB)==0,"recovery_store.busy");s.validate();
 }

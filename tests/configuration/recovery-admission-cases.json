@@ -1,0 +1,14 @@
+{
+  "family": "RECOVERY-ADMISSION",
+  "cases": ["ADMITTED-FILES", "SESSION-SCOPE", "TASK-SCOPE", "PERMISSIONS", "DIRECTORY-IDENTITY", "DIRECTORY-REPLACEMENT", "NATIVE-PERMISSIONS", "CHILD-SUBSTITUTION", "HELD-WITHDRAWAL", "RESULT-WITHDRAWAL", "NO-REVIVAL", "ORACLE"],
+  "maximum_image_handles": 4,
+  "maximum_active_images": 2,
+  "maximum_recovery_handles": 1,
+  "gui_operation_limit_ms": 100,
+  "case_timeout_seconds": 30,
+  "family_timeout_seconds": 300,
+  "image_expectations": "tests/scene/image-cases/native.json",
+  "recovery_records": "tests/editor/recovery-store-cases.json",
+  "scope": {"connection":"connection:1", "epoch":"epoch:1", "profile":"profile:primary", "session":"editor:worker", "revision":40, "policy_revision":7, "retain":true, "erase":true},
+  "generation": "4444444444444444444444444444444444444444444444444444444444444444"
+}

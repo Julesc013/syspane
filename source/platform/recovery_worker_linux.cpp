@@ -53,7 +53,12 @@ int run_recovery_worker(std::uint64_t parent,const std::function<void(const char
             need(answer.bytes.empty()&&protocol::members(h,{"kind","binding","ticket","operation","guard","allow"})&&h["kind"]=="grant"&&matches(h,input.header)&&h["guard"]==std::to_string(sequence)&&h["allow"].is_boolean(),"recovery_queue.guard");return h["allow"].get<bool>();
         };
         try{
-            LinuxRecoveryStore store(input.header["root"],transition);auto before=store.snapshot(guard);
+            std::optional<ProfileRecoveryDirectory> expected;
+            if(input.header.contains("directory")){
+                const auto& d=input.header["directory"];auto n=[&](const char* key){return *protocol::decimal(d[key].get_ref<const std::string&>());};
+                expected=ProfileRecoveryDirectory{input.header["binding"]["profile"],input.header["root"],n("uid"),n("state_device"),n("state_inode"),n("recovery_device"),n("recovery_inode")};
+            }
+            LinuxRecoveryStore store(input.header["root"],transition,std::move(expected));auto before=store.snapshot(guard);
             if(input.header["operation"]=="load"){
                 result["outcome"]="loaded";result["present"]=before.bytes.has_value();result["pending"]=before.pending;result["digest"]=before.version.digest?Json(*before.version.digest):Json();
                 if(before.bytes)body=std::move(*before.bytes);

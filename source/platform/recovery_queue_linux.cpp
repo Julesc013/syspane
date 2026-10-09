@@ -24,6 +24,7 @@ struct LinuxRecoveryQueue::Impl {
     struct Job {std::uint64_t ticket;std::string operation,bytes;std::optional<std::string> digest;};
     std::string worker,path;RecoveryContext context;Json identity;
     std::shared_ptr<LinuxInstallation> installation;
+    std::optional<ProfileRecoveryDirectory> directory;Guard guard;
     std::thread::id owner=std::this_thread::get_id();mutable bool calling=false;
     std::uint64_t tickets=1,started=0;unsigned guards=0;
     bool initialized=false,sealed=false,closed=false,fault=false,eof=false,error_eof=false;
@@ -35,7 +36,10 @@ struct LinuxRecoveryQueue::Impl {
     protocol::Framer framer{frame_limit};std::string output,diagnostics;std::size_t sent=0;
     Json request;std::optional<Packet> reply;
     void check()const{need(std::this_thread::get_id()==owner,"recovery_queue.owner");}
-    bool permitted(const std::string& operation)const{return !closed&&!fault&&(operation=="load"?context.read:operation=="replace"?context.retain:context.erase);}
+    bool permitted(const std::string& operation)const{
+        if(closed||fault||!(operation=="load"?context.read:operation=="replace"?context.retain:context.erase))return false;
+        try{return !guard||guard(operation);}catch(...){return false;}
+    }
     RecoveryQueueStatus view()const{
         std::size_t bytes=output.size()+diagnostics.size()+framer.buffered();
         if(pending)bytes+=pending->bytes.size();
@@ -56,7 +60,10 @@ struct LinuxRecoveryQueue::Impl {
     }
     void start(){
         need(!child&&!active&&pending,"recovery_queue.owner");active=std::move(pending);pending.reset();
+        need(permitted(active->operation),"recovery_queue.denied");
         request={{"kind","request"},{"binding",identity},{"ticket",std::to_string(active->ticket)},{"operation",active->operation},{"root",path},{"expected",expected?Json(*expected):Json()}};
+        if(directory){const auto& d=*directory;request["directory"]={{"uid",std::to_string(d.uid)},{"state_device",std::to_string(d.state_device)},
+            {"state_inode",std::to_string(d.state_inode)},{"recovery_device",std::to_string(d.recovery_device)},{"recovery_inode",std::to_string(d.recovery_inode)}};}
         output=encode(request,active->bytes);erase(active->bytes);sent=0;guards=0;reply.reset();framer=protocol::Framer(frame_limit);eof=error_eof=false;
         int sockets[2],pipes[2];need(::socketpair(AF_UNIX,SOCK_STREAM|SOCK_CLOEXEC,0,sockets)==0,"recovery_queue.channel");Fd remote;remote.value=sockets[1];channel.value=sockets[0];
         need(::pipe2(pipes,O_CLOEXEC)==0,"recovery_queue.channel");Fd remote_errors;remote_errors.value=pipes[1];errors.value=pipes[0];
@@ -105,6 +112,7 @@ struct LinuxRecoveryQueue::Impl {
     }
     void finished(){
         need(active&&reply&&output.empty()&&diagnostics.empty(),"recovery_queue.reply");
+        need(permitted(active->operation),"recovery_queue.denied");
         const auto& h=reply->header;RecoveryCompletion done{context,active->ticket,active->operation,h["outcome"],h["error"],std::nullopt,std::nullopt,h["pending"]};
         if(h["digest"].is_string())done.digest=h["digest"].get<std::string>();
         if(done.operation=="load"&&h["present"]==true)done.bytes=std::move(reply->bytes);
@@ -122,6 +130,7 @@ struct LinuxRecoveryQueue::Impl {
             if(closed&&!child)state=RecoveryQueueState::closed;
             return;
         }
+        if(guard&&!permitted(active?active->operation:pending?pending->operation:"load")){stop("recovery_queue.denied",true);return;}
         if(!child){if(pending)start();return;}
         if(monotonic_ms()-started>=5000){stop("recovery_queue.timeout");return;}
         transfer();const auto exited=child->wait();if(!exited)return;
@@ -139,6 +148,10 @@ LinuxRecoveryQueue::~LinuxRecoveryQueue()=default;
 LinuxRecoveryQueue::LinuxRecoveryQueue(std::shared_ptr<LinuxInstallation> owner,std::string path,RecoveryContext context)
     :LinuxRecoveryQueue(std::string{},std::move(path),std::move(context)){
     need(static_cast<bool>(owner),"recovery_queue.installation");impl_->installation=std::move(owner);
+}
+LinuxRecoveryQueue::LinuxRecoveryQueue(std::shared_ptr<LinuxInstallation> owner,ProfileRecoveryDirectory directory,RecoveryContext context,Guard guard)
+    :LinuxRecoveryQueue(std::move(owner),directory.path,std::move(context)){
+    need(guard&&directory.profile==impl_->context.profile,"recovery_queue.identity");impl_->directory=std::move(directory);impl_->guard=std::move(guard);
 }
 std::uint64_t LinuxRecoveryQueue::replace(std::string bytes){
     auto& s=*impl_;s.check();Call call(s.calling);need(s.initialized&&!s.sealed&&s.permitted("replace"),"recovery_queue.denied");

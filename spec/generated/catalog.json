@@ -489,7 +489,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "691c9fa2d9cfcae6b10934f1bf20285ff1686dc8f6ab13be138fee030c2eb4ad"
+      "sha256": "a08ecbd0e29bc8e315031aff2d3384a665e5fa25339f4c3c793faff0a60486e3"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -2260,6 +2260,17 @@
       "sha256": "ced9e137dfea7576ce698d1aaee5b286de9d2743ffab2f87e240e8ae031c0fdd"
     },
     {
+      "id": "SP-W11-RECOVERY-ADMISSION",
+      "path": "delivery/packages/w-11-recovery-admission.md",
+      "title": "Native recovery helper admission",
+      "description": "Verify transferred recovery observations against local session and held native directory identities.",
+      "requires": [
+        "SP-W08-RECOVERY-TRANSFER",
+        "SP-W11-EDITOR-HELPER-WORKER"
+      ],
+      "sha256": "d843687222ee972cd7e115893800fa96563778c0f0c6406f6fcca82aefe43cc9"
+    },
+    {
       "id": "SP-W11-SCENE-INSPECTOR",
       "path": "delivery/packages/w-11-scene-inspector.md",
       "title": "Native scene inspector navigation and disclosure",
@@ -2743,6 +2754,16 @@
         "SP-COMMAND-SESSIONS-HANDOFF"
       ],
       "sha256": "eedbb0b709d27f80314fca05fccd6410ec51ab45cda54498df2621f46c17b3eb"
+    },
+    {
+      "id": "SP-RECOVERY-ADMISSION-HANDOFF",
+      "path": "delivery/recovery-admission-handoff.md",
+      "title": "Native recovery helper admission",
+      "description": "Bind helper work to current authenticated scope and independently held directory identities.",
+      "requires": [
+        "SP-W11-RECOVERY-ADMISSION"
+      ],
+      "sha256": "012f98c3abaf57b771ec6ae3625075dbfe8ac41ea077fd076e29fcae815123d3"
     },
     {
       "id": "SP-RECOVERY-CONTEXT-HANDOFF",

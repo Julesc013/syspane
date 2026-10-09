@@ -1,5 +1,6 @@
 #pragma once
 #include "wire.hpp"
+#include "profile_owner_linux.hpp"
 #include <memory>
 #include <functional>
 
@@ -40,10 +41,12 @@ using RecoveryFactory=std::function<std::unique_ptr<RecoveryTask>(std::string di
 // directory I/O runs on this loop; existing Child owns each native helper.
 class LinuxRecoveryQueue final:public RecoveryTask {
 public:
+    using Guard=std::function<bool(const std::string& operation)>;
     LinuxRecoveryQueue(std::string worker,std::string directory,RecoveryContext);
     // Construct/poll on the installation's native worker; each operation
     // revalidates the bundle before sealed launch, without a pathname fallback.
     LinuxRecoveryQueue(std::shared_ptr<LinuxInstallation>,std::string directory,RecoveryContext);
+    LinuxRecoveryQueue(std::shared_ptr<LinuxInstallation>,ProfileRecoveryDirectory,RecoveryContext,Guard);
     ~LinuxRecoveryQueue() override;
     LinuxRecoveryQueue(const LinuxRecoveryQueue&)=delete;
     LinuxRecoveryQueue& operator=(const LinuxRecoveryQueue&)=delete;

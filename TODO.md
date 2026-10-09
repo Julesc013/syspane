@@ -32,7 +32,8 @@ behaviour has been implemented. See [audit disposition](spec/delivery/audit-2026
 - [x] W-11 installed native scene editor: shared verified helpers, clean draft navigation, native authoring and authenticated Apply/reopen. See the [handoff](spec/delivery/installed-editor-handoff.md).
 - [x] W-08 coherent native recovery snapshot: exact accepted generation, held directory identities, current permission and one serialized worker call. See the [handoff](spec/delivery/recovery-context-handoff.md).
 - [x] W-08 authenticated recovery context transfer: explicit version negotiation, coherent saved generation and exact connection/epoch/profile/editor-session binding. See the [handoff](spec/delivery/recovery-transfer-handoff.md).
-- [ ] Admit received recovery context on the installed native helper worker with independent directory verification and revocation/publication guards. Address synchronous recovery validation, qualify the actual recovery flow and integrate the inspector.
+- [x] W-11 native recovery helper admission: independently held directory identities, current session checks, child-side substitution refusal and result erasure. See the [handoff](spec/delivery/recovery-admission-handoff.md).
+- [ ] Compose recovery admission with the installed frontend's live authenticated session, preserve exact applied-draft retirement through reconciliation, and address synchronous recovery validation before qualifying the actual recovery flow. Integrate the native inspector.
 
 - [x] W-11 shared private text lifetime: balanced realization/destruction, retained editing and independent verification that neither clipboard changes ownership. See the [handoff](spec/delivery/private-text-lifetime-handoff.md).
 

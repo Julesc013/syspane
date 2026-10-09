@@ -200,6 +200,34 @@ ProfileLocation profile_environment(std::string profile,std::optional<std::strin
     auto env=[](const char* name){const auto* p=std::getenv(name);return p?std::string(p):std::string();};
     return {std::move(profile),env("HOME"),env("XDG_CONFIG_HOME"),env("XDG_DATA_HOME"),env("XDG_STATE_HOME"),std::move(portable)};
 }
+struct LinuxRecoveryDirectory::Impl {
+    ProfileRecoveryDirectory expected;std::string state_path;File state,recovery;
+    std::thread::id thread=std::this_thread::get_id();mutable bool invalid=false;
+    void match(int fd,bool child)const{
+        const auto s=private_node(fd,true);filesystem(fd);
+        need(static_cast<std::uint64_t>(s.st_uid)==expected.uid&&
+             static_cast<std::uint64_t>(s.st_dev)==(child?expected.recovery_device:expected.state_device)&&
+             static_cast<std::uint64_t>(s.st_ino)==(child?expected.recovery_inode:expected.state_inode),"profile.recovery_identity");
+    }
+    void verify()const{
+        need(thread==std::this_thread::get_id(),"profile.thread");need(!invalid,"profile.invalidated");
+        try{
+            auto fresh=walk(state_path);match(fresh.fd,false);match(state.fd,false);match(recovery.fd,true);
+            File child(::openat(fresh.fd,"recovery",O_RDONLY|O_DIRECTORY|O_NOFOLLOW|O_CLOEXEC));match(child.fd,true);
+            bound(fresh.fd,"recovery",info(recovery.fd));
+        }catch(...){invalid=true;throw;}
+    }
+};
+LinuxRecoveryDirectory::LinuxRecoveryDirectory(ProfileRecoveryDirectory expected):impl_(std::make_unique<Impl>()){
+    auto& s=*impl_;s.expected=std::move(expected);const auto& e=s.expected;
+    need(::geteuid()!=0&&protocol::identifier(e.profile)&&e.uid==static_cast<std::uint64_t>(::geteuid())&&
+         e.state_inode&&e.recovery_inode&&e.state_device==e.recovery_device,"profile.recovery_identity");
+    need(path(e.path)==e.path&&e.path.size()>9&&e.path.substr(e.path.size()-9)=="/recovery","profile.path");
+    s.state_path=e.path.substr(0,e.path.size()-9);s.state=walk(s.state_path);s.match(s.state.fd,false);
+    s.recovery=File(::openat(s.state.fd,"recovery",O_RDONLY|O_DIRECTORY|O_NOFOLLOW|O_CLOEXEC));s.verify();
+}
+LinuxRecoveryDirectory::~LinuxRecoveryDirectory()=default;
+void LinuxRecoveryDirectory::verify()const{impl_->verify();}
 struct LinuxProfileOwner::Impl {
     ProfilePaths paths;std::array<Role,3> roles;std::thread::id thread=std::this_thread::get_id();bool active=false,invalid=false;
     Impl(const ProfileLocation& location,bool create,const Guard& guard,const Transition& transition,const InitialProfile& initial):paths(profile_paths(location)){

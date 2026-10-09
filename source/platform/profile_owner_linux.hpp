@@ -24,6 +24,19 @@ struct ProfileRecoveryDirectory {
 ProfilePaths profile_paths(const ProfileLocation&);
 ProfileLocation profile_environment(std::string profile,std::optional<std::string> portable_root={});
 
+// Read-only native witness; no controller lease acquisition or directory creation.
+// Serialized worker only. A failed verification permanently withdraws the witness.
+class LinuxRecoveryDirectory {
+public:
+    explicit LinuxRecoveryDirectory(ProfileRecoveryDirectory);
+    ~LinuxRecoveryDirectory();
+    LinuxRecoveryDirectory(const LinuxRecoveryDirectory&)=delete;
+    LinuxRecoveryDirectory& operator=(const LinuxRecoveryDirectory&)=delete;
+    void verify()const;
+private:
+    struct Impl;std::unique_ptr<Impl> impl_;
+};
+
 // Serialized worker only. Hold for the controller lifetime; never inherit across fork.
 // Installed composition must supply current native policy and supervise filesystem work.
 class LinuxProfileOwner {

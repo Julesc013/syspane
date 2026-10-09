@@ -32,6 +32,41 @@ struct RecoverySlot {
 void cancel(ImageSlot& s){s.cancelled=true;erase(s.encoded);s.pixels={};s.status={r::ImageJobState::stopping,"image.cancelled",false};}
 void close(RecoverySlot& s){s.closed=true;s.intent.reset();s.completion.reset();s.status.state=os::RecoveryQueueState::closing;s.status.pending=0;s.status.reaped=false;}
 }
+struct LinuxRecoveryAdmission::Impl {
+    configuration::ProfileRecoveryView view;Current current;os::ProfileRecoveryDirectory directory;
+    std::unique_ptr<os::LinuxRecoveryDirectory> witness;std::thread::id owner=std::this_thread::get_id();
+    bool invalid=false,calling=false;
+    std::optional<RecoverySessionAuthority> sample(){
+        auto a=current?current():std::nullopt;const auto& v=view;
+        need(a&&a->retain&&a->connection==v.connection&&a->epoch==v.epoch&&a->profile==v.admission.profile&&a->session==v.editor_session&&
+            a->revision==v.revision&&a->policy_revision==v.admission.policy_revision,"helpers.recovery_scope");return a;
+    }
+    bool permitted(const std::string& operation){
+        need(owner==std::this_thread::get_id(),"helpers.worker_owner");if(invalid)return false;
+        if(calling){invalid=true;return false;}
+        struct Call{bool& v;explicit Call(bool& value):v(value){v=true;}~Call(){v=false;}} call(calling);
+        try{
+            need(operation=="load"||operation=="replace"||operation=="retire","helpers.recovery_operation");
+            (void)sample();witness->verify();const auto a=sample();need(!invalid,"helpers.recovery_scope");
+            return operation!="retire"||(view.admission.erase&&a->erase);
+        }catch(...){invalid=true;return false;}
+    }
+};
+LinuxRecoveryAdmission::LinuxRecoveryAdmission(const os::ProfileLocation& location,configuration::ProfileRecoveryView view,Current current):impl_(std::make_unique<Impl>()){
+    auto& s=*impl_;s.view=std::move(view);s.current=std::move(current);const auto& v=s.view;const auto& d=v.admission.directory;
+    need(p::identifier(v.connection)&&p::identifier(v.epoch)&&p::identifier(v.editor_session)&&v.transfer>0&&
+        v.admission.generation.size()==64&&v.admission.generation.find_first_not_of("0123456789abcdef")==std::string::npos,"helpers.recovery_identity");
+    const auto paths=os::profile_paths(location);need(paths.profile==v.admission.profile&&paths.recovery==d.path,"helpers.recovery_path");
+    (void)s.sample();s.directory={v.admission.profile,d.path,d.uid,d.state_device,d.state_inode,d.recovery_device,d.recovery_inode};
+    s.witness=std::make_unique<os::LinuxRecoveryDirectory>(s.directory);need(s.permitted("load"),"helpers.recovery_denied");
+}
+LinuxRecoveryAdmission::~LinuxRecoveryAdmission()=default;
+bool LinuxRecoveryAdmission::permitted(const std::string& operation){return impl_->permitted(operation);}
+const os::ProfileRecoveryDirectory& LinuxRecoveryAdmission::directory()const{need(impl_->owner==std::this_thread::get_id(),"helpers.worker_owner");return impl_->directory;}
+os::RecoveryContext LinuxRecoveryAdmission::context()const{
+    need(impl_->owner==std::this_thread::get_id(),"helpers.worker_owner");const auto& v=impl_->view;
+    return {v.editor_session,v.admission.profile,v.admission.generation,v.admission.policy_revision,true,true,v.admission.erase};
+}
 struct EditorHelperChannel {
     std::thread::id gui=std::this_thread::get_id();mutable std::mutex mutex;
     bool attached=false,closed=false,drained=false;
@@ -132,6 +167,7 @@ struct LinuxEditorHelperOwner::Impl {
     std::shared_ptr<EditorHelperChannel> channel;std::shared_ptr<os::LinuxInstallation> installation;
     std::thread::id owner=std::this_thread::get_id();std::map<std::uint64_t,std::unique_ptr<r::ImageJob>> images;
     std::shared_ptr<RecoverySlot> recovery;std::unique_ptr<os::LinuxRecoveryQueue> queue;
+    RecoveryAdmissionFactory admit_recovery;std::shared_ptr<LinuxRecoveryAdmission> admission;
     std::map<std::uint64_t,std::uint64_t> tickets;
     void check()const{need(std::this_thread::get_id()==owner,"helpers.worker_owner");}
     void image(const std::shared_ptr<ImageSlot>& slot){
@@ -161,7 +197,7 @@ struct LinuxEditorHelperOwner::Impl {
     void recover(const std::shared_ptr<RecoverySlot>& selected){
         if(recovery!=selected){
             if(queue){queue->close();if(!queue->poll().reaped)return;queue.reset();}
-            recovery=selected;tickets.clear();
+            recovery=selected;tickets.clear();admission.reset();
         }
         if(!recovery)return;
         bool stop;std::optional<RecoverySlot::Intent> intent;
@@ -171,7 +207,20 @@ struct LinuxEditorHelperOwner::Impl {
         }
         os::RecoveryQueueStatus state;std::optional<os::RecoveryCompletion> completion;
         try{
-            if(!stop&&!queue){queue=std::make_unique<os::LinuxRecoveryQueue>(installation,recovery->directory,recovery->context);tickets.emplace(1,1);}
+            if(!stop&&!queue){
+                if(admit_recovery){
+                    admission=admit_recovery();need(admission&&admission->permitted("load"),"helpers.recovery_denied");
+                    const auto expected=admission->context();const auto& actual=recovery->context;
+                    need(recovery->directory==admission->directory().path&&actual.profile==expected.profile&&actual.session==expected.session&&
+                        actual.generation==expected.generation&&actual.policy_revision==expected.policy_revision&&actual.read==expected.read&&
+                        actual.retain==expected.retain&&actual.erase==expected.erase,"helpers.recovery_scope");
+                    queue=std::make_unique<os::LinuxRecoveryQueue>(installation,admission->directory(),actual,[this](const std::string& operation){
+                        {std::lock_guard<std::mutex> lock(channel->mutex);if(channel->closed||recovery->closed||recovery->fault)return false;}
+                        return admission&&admission->permitted(operation);
+                    });
+                }else queue=std::make_unique<os::LinuxRecoveryQueue>(installation,recovery->directory,recovery->context);
+                tickets.emplace(1,1);
+            }
             {std::lock_guard<std::mutex> lock(channel->mutex);stop=recovery->closed||recovery->fault;}
             if(queue){
                 if(stop)queue->close();
@@ -179,6 +228,10 @@ struct LinuxEditorHelperOwner::Impl {
                     const auto id=intent->operation=="replace"?queue->replace(std::move(intent->bytes)):queue->retire();tickets[id]=intent->ticket;
                 }
                 state=queue->poll();completion=queue->take();
+                if(admission&&(state.state==os::RecoveryQueueState::closed||state.state==os::RecoveryQueueState::closing||!admission->permitted("load"))){
+                    queue->close();state=queue->poll();completion.reset();
+                    std::lock_guard<std::mutex> lock(channel->mutex);syspane::application::close(*recovery);
+                }
                 if(completion){
                     completion->ticket=tickets.at(completion->ticket);
                     if(completion->bytes){need(state.retained_bytes>=completion->bytes->size(),"helpers.capacity");state.retained_bytes-=completion->bytes->size();}
@@ -206,7 +259,7 @@ struct LinuxEditorHelperOwner::Impl {
         if(recovery->fault||state.state==os::RecoveryQueueState::unavailable){
             if(recovery->fault)state.error=recovery->status.error;
             recovery->fault=true;state.state=os::RecoveryQueueState::unavailable;
-            recovery->intent.reset();recovery->status=state;
+            recovery->intent.reset();recovery->status=state;recovery->completion.reset();
             if(completion&&completion->ticket==recovery->latest)recovery->completion=std::move(completion);
             return;
         }
@@ -215,8 +268,8 @@ struct LinuxEditorHelperOwner::Impl {
         if(completion&&completion->ticket==recovery->latest&&!recovery->intent)recovery->completion=std::move(completion);
     }
 };
-LinuxEditorHelperOwner::LinuxEditorHelperOwner(EditorHelperClient& client,std::shared_ptr<os::LinuxInstallation> installation):impl_(std::make_unique<Impl>()){
-    auto& s=*impl_;s.channel=client.channel_;s.installation=std::move(installation);
+LinuxEditorHelperOwner::LinuxEditorHelperOwner(EditorHelperClient& client,std::shared_ptr<os::LinuxInstallation> installation,RecoveryAdmissionFactory factory):impl_(std::make_unique<Impl>()){
+    auto& s=*impl_;s.channel=client.channel_;s.installation=std::move(installation);s.admit_recovery=std::move(factory);
     need(std::this_thread::get_id()!=s.channel->gui&&s.installation,"helpers.worker_owner");
     s.installation->verified_helper(os::HelperKind::image);s.installation->verified_helper(os::HelperKind::recovery);
     std::lock_guard<std::mutex> lock(s.channel->mutex);need(!s.channel->attached&&!s.channel->closed,"helpers.unavailable");s.channel->attached=true;

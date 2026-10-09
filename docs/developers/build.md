@@ -15,6 +15,31 @@ build` before configuring or building; use `test` or `package` for those actions
 The common active-output budget is unchanged; retained `out/evidence/` archives
 are measured separately. Never use the placeholder account from the example.
 
+The [native recovery admission](../../spec/delivery/packages/w-11-recovery-admission.md)
+adds LinuxRecoveryAdmission on the existing helper worker. Supply the locally selected
+ProfileLocation, the validated transferred view and a Current callback from the live
+authenticated connection owner. That callback returns no authority on connection,
+epoch, profile, session or policy loss. Return the exact current document/policy
+revisions and current retention/erase permission; never construct authority from the
+GUI task's parameters. The admission compares local path selection, holds native
+directory nodes and permanently withdraws on a failed verification.
+
+Pass a trusted RecoveryAdmissionFactory to LinuxEditorHelperOwner. It runs on that
+worker outside shared locks, and its immutable context must match the requested task.
+The parent checks current authority through each operation and result delivery; the
+sealed child independently checks expected directory identities before creating its
+writer file. Existing explicit path experiments keep their original constructor.
+The installed frontend still has recovery disabled until its live callback and
+post-commit retirement compose with original-request reconciliation and consumer
+validation no longer stalls GTK.
+
+After the ordinary configure/build and budget checks, run
+`ctest --preset linux-x64-gcc13 -R '^native[.](RECOVERY-ADMISSION|EDITOR-HELPER-WORKER|RECOVERY-QUEUE|RECOVERY-STORE|PROFILE-OWNER|RECOVERY-CONTEXT|RECOVERY-TRANSFER)$' --output-on-failure`.
+The new family observes real sealed children in a relocated five-file bundle. Keep
+its fixed cases and preserve actual files after withdrawal; a previously dispatched
+publication guard can race withdrawal, which is not rollback. Archive and verify
+completed recordings before reclaiming duplicates when workspace headroom is needed.
+
 The [recovery transfer](../../spec/delivery/packages/w-08-recovery-transfer.md)
 extends the existing authenticated profile session with configuration.recovery-context
 and profile-request/profile-result 0.2. Negotiate both versions and configuration.profile

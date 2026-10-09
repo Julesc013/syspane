@@ -1,5 +1,6 @@
 #pragma once
 #include "transaction.hpp"
+#include "profile_owner_linux.hpp"
 #include <memory>
 
 namespace syspane::platform {
@@ -23,7 +24,7 @@ class LinuxRecoveryStore {
 public:
     using Guard=std::function<bool()>;
     static constexpr std::size_t maximum_bytes=786432;
-    explicit LinuxRecoveryStore(const std::string& directory,std::function<void(const char*)> transition={});
+    explicit LinuxRecoveryStore(const std::string& directory,std::function<void(const char*)> transition={},std::optional<ProfileRecoveryDirectory> expected={});
     ~LinuxRecoveryStore();
     LinuxRecoveryStore(const LinuxRecoveryStore&)=delete;
     LinuxRecoveryStore& operator=(const LinuxRecoveryStore&)=delete;

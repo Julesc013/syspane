@@ -51,8 +51,8 @@ Json state(const app::EditorHelperStatus& s){return {{"attached",s.attached},{"c
 struct Worker {
     app::EditorHelperClient& client;std::mutex mutex;std::condition_variable condition;
     bool ready=false,quit=false;std::uint64_t requested=0,completed=0;long tid=0;std::string error;
-    std::thread thread;
-    explicit Worker(app::EditorHelperClient& c):client(c),thread([this]{run();}){
+    app::RecoveryAdmissionFactory admission;std::thread thread;
+    explicit Worker(app::EditorHelperClient& c,app::RecoveryAdmissionFactory a={}):client(c),admission(std::move(a)),thread([this]{run();}){
         std::unique_lock<std::mutex> lock(mutex);
         if(!condition.wait_for(lock,std::chrono::seconds(10),[&]{return ready;})){
             quit=true;condition.notify_all();lock.unlock();thread.join();throw syspane::protocol::Error("probe.worker_timeout");
@@ -60,7 +60,7 @@ struct Worker {
         if(!error.empty()){lock.unlock();thread.join();throw std::runtime_error(error);}
     }
     void run(){try{
-        auto installation=std::make_shared<os::LinuxInstallation>(os::built_helper_bundle_expectation());app::LinuxEditorHelperOwner owner(client,installation);
+        auto installation=std::make_shared<os::LinuxInstallation>(os::built_helper_bundle_expectation());app::LinuxEditorHelperOwner owner(client,installation,admission);
         {std::lock_guard<std::mutex> lock(mutex);tid=::syscall(SYS_gettid);ready=true;condition.notify_all();}
         for(;;){
             {std::unique_lock<std::mutex> lock(mutex);condition.wait(lock,[&]{return quit||requested!=completed;});if(quit)break;}
@@ -73,12 +73,24 @@ struct Worker {
 };
 }
 int main(int argc,char** argv){try{
-    need(argc==2&&os::unprivileged_context(),"probe.arguments");const std::string root=argv[1];app::EditorHelperClient client;
+    need((argc==2||argc==3)&&os::unprivileged_context(),"probe.arguments");const std::string root=argv[1];app::EditorHelperClient client;
+    app::RecoveryAdmissionFactory admission;
+    if(argc==3){
+        const std::string file=argv[2];const auto data=Json::parse(read(file));const auto& v=data.at("observation");const auto& d=v.at("directory");
+        os::ProfileLocation location{data["location"]["profile"],"","","","",data["location"]["portable_root"].get<std::string>()};
+        c::ProfileRecoveryView view{{v["profile"],v["generation"],{d["path"],d["uid"],d["state_device"],d["state_inode"],d["recovery_device"],d["recovery_inode"]},v["policy_revision"],v["erase"]},v["connection"],v["epoch"],v["session"],v["transfer"],v["revision"]};
+        admission=[location,view,file,cached=std::shared_ptr<app::LinuxRecoveryAdmission>{}]()mutable{
+            if(!cached)cached=std::make_shared<app::LinuxRecoveryAdmission>(location,view,[file]()->std::optional<app::RecoverySessionAuthority>{
+                const auto a=Json::parse(read(file)).at("current");if(a.is_null())return {};
+                return app::RecoverySessionAuthority{a["connection"],a["epoch"],a["profile"],a["session"],a["revision"],a["policy_revision"],a["retain"],a["erase"]};
+            });return cached;
+        };
+    }
     std::string before;try{client.images()("image/png","x");}catch(const std::exception& e){before=e.what();}
     TaskTimes times;
     const v::ImageFactory image_factory=[&](std::string media,std::string bytes){auto task=times.measure("image.create",[&]{return client.images()(std::move(media),std::move(bytes));});return std::make_unique<TimedImage>(times,std::move(task));};
     auto recovery_factory=std::make_shared<const os::RecoveryFactory>([&](std::string path,os::RecoveryContext context){auto task=times.measure("recovery.create",[&]{return (*client.recovery())(std::move(path),std::move(context));});return std::make_unique<TimedRecovery>(times,std::move(task));});
-    Worker worker(client);emit({{"event","ready"},{"worker",worker.tid},{"before_attach",before},{"status",state(client.status())}});
+    Worker worker(client,std::move(admission));emit({{"event","ready"},{"worker",worker.tid},{"before_attach",before},{"status",state(client.status())}});
     std::map<std::uint64_t,std::unique_ptr<v::ImageTask>> images;std::uint64_t ids=0;
     std::unique_ptr<os::RecoveryTask> recovery;std::unique_ptr<v::SceneSurface> surface;
     std::unique_ptr<ui::EditorDraft> draft;std::unique_ptr<ui::EditorRecoverySession> session;std::uint64_t clock=0;
@@ -97,7 +109,7 @@ int main(int argc,char** argv){try{
             else if(op=="image-drop"){need(images.erase(q.at("id"))==1,"probe.image");reply={{"dropped",true}};}
             else if(op=="recovery"){
                 need(!recovery,"probe.active");const std::string grant=q.value("grants",std::string("rwe"));
-                recovery=(*recovery_factory)(q.at("directory"),os::RecoveryContext{"editor:worker","profile:primary",std::string(64,'4'),7,grant.find('r')!=std::string::npos,grant.find('w')!=std::string::npos,grant.find('e')!=std::string::npos});reply=state(recovery->status());
+                recovery=(*recovery_factory)(q.at("directory"),os::RecoveryContext{q.value("session",std::string("editor:worker")),q.value("profile",std::string("profile:primary")),q.value("generation",std::string(64,'4')),q.value("policy_revision",std::uint64_t{7}),grant.find('r')!=std::string::npos,grant.find('w')!=std::string::npos,grant.find('e')!=std::string::npos});reply=state(recovery->status());
             }else if(op=="recovery-poll"){need(static_cast<bool>(recovery),"probe.recovery");reply=state(recovery->poll());}
             else if(op=="replace"){need(static_cast<bool>(recovery),"probe.recovery");reply={{"ticket",recovery->replace(std::move(input))}};}
             else if(op=="retire"){need(static_cast<bool>(recovery),"probe.recovery");reply={{"ticket",recovery->retire()}};}

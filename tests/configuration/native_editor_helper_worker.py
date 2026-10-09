@@ -16,10 +16,12 @@ def write(p,b,mode=0o600):p.write_bytes(b);p.chmod(mode)
 def pixels(value,expected):assert value==dict(width=expected['size'][0],height=expected['size'][1],rgba=expected['rgba']),('pixel mismatch',value,expected)
 def file_bytes(path,expected):assert (path.read_bytes() if path.exists() else None)==expected,'recovery file mismatch'
 
-def main():
+def main(extension=None,definitions=None):
+ global CASES
+ if definitions is not None:CASES=json.loads(definitions.read_bytes())
  probe,config,image_worker,recovery_worker,record,evidence=[Path(x).resolve() for x in sys.argv[1:]]
  assert os.geteuid() and evidence.parent==probe.parent and json.loads((probe.parent/'.syspane-owner.json').read_bytes())['profile']=='linux-x64-gcc13'
- folder=evidence/('ew-'+uuid.uuid4().hex[:10]);folder.mkdir(mode=0o700,parents=True)
+ folder=evidence/(('ra-' if extension else 'ew-')+uuid.uuid4().hex[:10]);folder.mkdir(mode=0o700,parents=True)
  assert subprocess.check_output(['findmnt','--target',str(folder),'--noheadings','--output','FSTYPE'],text=True).strip()=='ext4'
  names=['syspane-configuration-host','syspane-image-worker','syspane-recovery-worker'];helper_bytes=[p.read_bytes() for p in (config,image_worker,recovery_worker)]
  entries={'bin/syspane':probe.read_bytes(),'share/syspane/helpers.json':record.read_bytes(),**{'libexec/syspane/'+n:b for n,b in zip(names,helper_bytes)}}
@@ -35,7 +37,7 @@ def main():
  relocated=folder/'relocated image';image.rename(relocated);image=relocated;cwd=folder/'cwd';cwd.mkdir(mode=0o700)
  report=dict(family=CASES['family'],outcome='fail',started_at=datetime.now(timezone.utc).isoformat(),uid=os.geteuid(),kernel=list(os.uname()),
   artifacts={p.name:sha(p.read_bytes()) for p in (probe,config,image_worker,recovery_worker,record)},package_sha256=sha(archive.read_bytes()),
-  oracle_sha256=sha(Path(__file__).read_bytes()),fixture_sha256=sha((ROOT/'tests/configuration/editor-helper-worker-cases.json').read_bytes()),cases=[],runs=[],mutations=[])
+  oracle_sha256=sha(Path(__file__).read_bytes()),fixture_sha256=sha((definitions or ROOT/'tests/configuration/editor-helper-worker-cases.json').read_bytes()),cases=[],runs=[],mutations=[])
  start=time.monotonic();deadline=start+CASES['family_timeout_seconds'];runs=[]
  def save():write(folder/'result.json',encoded(report))
  def left():
@@ -56,10 +58,10 @@ def main():
  for name,raw in {**RECORDS,'middle':RECORDS['old']+b'\n','empty':b'','oversized':b'x'*8388609}.items():
   inputs[name]=folder/(name+'.input');write(inputs[name],raw)
  class Run:
-  def __init__(self,hold=()):
+  def __init__(self,hold=(),admission=None):
    self.hold=set(hold);self.pending=b'';self.images=set();self.recovery=False;self.surface=False;self.session=False;self.closed=False
    env=dict(os.environ,PATH='/nonexistent');env.pop('LD_PRELOAD',None);env.pop('LD_LIBRARY_PATH',None)
-   self.proc=subprocess.Popen(['irrelevant-name',str(ROOT)],executable=str(image/'bin/syspane'),cwd=cwd,env=env,stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,bufsize=0)
+   self.proc=subprocess.Popen(['irrelevant-name',str(ROOT),*([str(admission)] if admission else [])],executable=str(image/'bin/syspane'),cwd=cwd,env=env,stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,bufsize=0)
    self.pidfd=os.pidfd_open(self.proc.pid);self.traced=set();self.children={};self.observed={};self.parent_threads=set();self.held=set();self.cleaning=False
    self.row=dict(pid=self.proc.pid,events=[],children=[]);report['runs'].append(self.row);runs.append(self)
    initial=self.receive();assert initial['event']=='ready',initial;self.row['initial']=initial
@@ -182,6 +184,8 @@ def main():
  def alarm(*unused):raise TimeoutError('fixed worker case deadline')
  prior=signal.signal(signal.SIGALRM,alarm)
  try:
+  if extension:
+   extension(locals());assert [x['case'] for x in report['cases']]==CASES['cases'];report['outcome']='pass';return
   with case('ATTACH'):
    with Run() as q:assert q.call('status')==dict(attached=True,closing=False,stopped=False,images=0,recovery=0,bytes=0,processes=[])
   with case('GUI-WHILE-HELD'):

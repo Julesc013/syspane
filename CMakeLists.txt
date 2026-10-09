@@ -132,10 +132,10 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
     add_custom_target(syspane_helper_identity_data DEPENDS "${CMAKE_BINARY_DIR}/generated/helpers.json" "${CMAKE_BINARY_DIR}/generated/helper_identity.hpp")
     add_library(syspane_recovery_store STATIC source/platform/recovery_store_linux.cpp)
     target_include_directories(syspane_recovery_store PUBLIC "${CMAKE_SOURCE_DIR}/source/platform")
-    target_link_libraries(syspane_recovery_store PUBLIC syspane_authored)
+    target_link_libraries(syspane_recovery_store PUBLIC syspane_authored syspane_profile_owner)
     add_library(syspane_recovery_queue STATIC source/platform/recovery_queue_linux.cpp)
     target_include_directories(syspane_recovery_queue PUBLIC "${CMAKE_SOURCE_DIR}/source/platform")
-    target_link_libraries(syspane_recovery_queue PUBLIC syspane_authored syspane_child syspane_installation)
+    target_link_libraries(syspane_recovery_queue PUBLIC syspane_authored syspane_child syspane_installation syspane_profile_owner)
     add_library(syspane_recovery_worker_runtime STATIC source/platform/recovery_worker_linux.cpp)
     target_include_directories(syspane_recovery_worker_runtime PUBLIC "${CMAKE_SOURCE_DIR}/source/platform")
     target_link_libraries(syspane_recovery_worker_runtime PUBLIC syspane_recovery_store syspane_child)
@@ -234,7 +234,7 @@ else()
     target_link_libraries(syspane_image_job PUBLIC syspane_scene syspane_child syspane_installation)
     add_library(syspane_editor_helpers STATIC source/application/editor_helpers_linux.cpp)
     target_include_directories(syspane_editor_helpers PUBLIC "${CMAKE_SOURCE_DIR}/source/application")
-    target_link_libraries(syspane_editor_helpers PUBLIC syspane_image_job syspane_recovery_queue syspane_installation)
+    target_link_libraries(syspane_editor_helpers PUBLIC syspane_image_job syspane_recovery_queue syspane_installation syspane_profile_projection)
     add_custom_command(OUTPUT "${CMAKE_BINARY_DIR}/generated/helper-bundle/helpers.json" "${CMAKE_BINARY_DIR}/generated/helper-bundle/bundle_identity.hpp"
         COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/source/build/generate_helper_identity.py"
             --helper "$<TARGET_FILE:syspane_configuration_host>" --image-helper "$<TARGET_FILE:syspane_image_worker>" --recovery-helper "$<TARGET_FILE:syspane_recovery_worker>" --profile linux-x64-gcc13
@@ -573,6 +573,10 @@ if(BUILD_TESTING)
             "$<TARGET_FILE:syspane_editor_helper_worker_probe>" "$<TARGET_FILE:syspane_configuration_host>" "$<TARGET_FILE:syspane_image_worker>" "$<TARGET_FILE:syspane_recovery_worker>"
             "${CMAKE_BINARY_DIR}/generated/helper-bundle/helpers.json" "${CMAKE_BINARY_DIR}/native-evidence")
         set_tests_properties(native.EDITOR-HELPER-WORKER PROPERTIES TIMEOUT 300)
+        add_test(NAME native.RECOVERY-ADMISSION COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/configuration/native_recovery_admission.py"
+            "$<TARGET_FILE:syspane_editor_helper_worker_probe>" "$<TARGET_FILE:syspane_configuration_host>" "$<TARGET_FILE:syspane_image_worker>"
+            "$<TARGET_FILE:syspane_recovery_worker>" "${CMAKE_BINARY_DIR}/generated/helper-bundle/helpers.json" "${CMAKE_BINARY_DIR}/native-evidence")
+        set_tests_properties(native.RECOVERY-ADMISSION PROPERTIES TIMEOUT 300)
         target_include_directories(syspane_installation_probe PRIVATE "${CMAKE_BINARY_DIR}/generated")
         target_link_libraries(syspane_installation_probe PRIVATE syspane_installation syspane_profile_supervisor)
         add_dependencies(syspane_installation_probe syspane_helper_identity_data)
