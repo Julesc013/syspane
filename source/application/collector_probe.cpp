@@ -1,3 +1,4 @@
+#include "network_task_linux.hpp"
 #include "child.hpp"
 #include "health_link.hpp"
 #include "data_view.hpp"
@@ -29,11 +30,6 @@ volatile std::sig_atomic_t desktop_stop=0;
 void need(bool ok,const char* code){if(!ok)throw p::Error(code);}
 std::uint64_t emit(Json value){const auto now=os::monotonic_ms();value["observed_ms"]=now;std::cout<<value.dump()<<std::endl;return now;}
 void pause(unsigned ms){std::this_thread::sleep_for(std::chrono::milliseconds(ms));}
-std::string utc(){
-    const auto value=std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());std::tm calendar{};
-    need(::gmtime_r(&value,&calendar)!=nullptr,"collector.utc");std::array<char,32> buffer{};
-    need(std::strftime(buffer.data(),buffer.size(),"%Y-%m-%dT%H:%M:%SZ",&calendar)>0,"collector.utc");return buffer.data();
-}
 c::Policy policy(bool permitted=true){c::Policy value;value.available=permitted;value.revision=permitted?7:8;
     value.disclosure[{"desktop","desktop"}]={"operational"};value.disclosure[{"desktop","accessibility"}]={"operational"};return value;}
 Json hello(){return {{"type","hello"},{"body",{{"wire_major",0},{"wire_minor",1},{"role","desktop"},{"producer_epoch","collector:consumer"},
@@ -67,41 +63,7 @@ n::DemandRequest network_request(const std::string& channel="desktop",bool recor
     for(const auto& metric:n::network_metrics())request.selections.push_back({metric.field,{}});
     return request;
 }
-// One held native task. Publication and all DemandOwner/NetworkState mutations
-// stay on the caller. Joining is mandatory before releasing or reusing its slot.
-class AcquisitionTask {
-public:
-    struct Result {os::WatchedNetworkResult acquired; m::Tick begin,end;std::string sampled_utc;};
-    const std::uint64_t ticket,revision;
-    AcquisitionTask(os::NetworkWatch& watch,std::uint64_t id,std::uint64_t rev,
-                    std::function<m::Tick()> clock,bool failure=false,unsigned hold_ms=0)
-        :ticket(id),revision(rev){
-        need(hold_ms<=1500,"collector.task_hold");
-        thread_=std::thread([this,&watch,clock=std::move(clock),failure,hold_ms]{
-            native_thread_.store(static_cast<std::uint64_t>(::syscall(SYS_gettid)));
-            try{
-                result_.sampled_utc=utc();result_.begin=clock();
-                if(failure){result_.acquired.sample={os::NetworkCode::failed,5};result_.acquired.continuity=true;}
-                else result_.acquired=watch.read({std::chrono::steady_clock::now()+std::chrono::seconds(2),cancelled_});
-                result_.end=clock();read_ready_.store(true);
-                // Test-only late completion after an actual acquisition. Deliberately
-                // ignores cancellation; a cancelled result must never be published.
-                if(hold_ms)pause(hold_ms);
-            }catch(...){error_=std::current_exception();}
-            done_.store(true);
-        });
-    }
-    ~AcquisitionTask(){cancel();if(thread_.joinable())thread_.join();}
-    void cancel(){cancelled_.store(true);}
-    bool done()const{return done_.load();}
-    bool read_ready()const{return read_ready_.load();}
-    std::uint64_t native_thread()const{return native_thread_.load();}
-    Result finish(){need(done(),"collector.task_pending");thread_.join();if(error_)std::rethrow_exception(error_);return std::move(result_);}
-private:
-    std::atomic_bool cancelled_{false},done_{false},read_ready_{false};
-    std::atomic<std::uint64_t> native_thread_{0};
-    Result result_{};std::exception_ptr error_;std::thread thread_;
-};
+using AcquisitionTask=syspane::collectors::NetworkTask;
 
 // Finite native acceptance composition. The same task and demand owner are used
 // by worker(); this entry adds fixed fault stimuli and public lifecycle metadata.

@@ -18,6 +18,7 @@ GUI timing/erasure cases. The installed saved-scene inspector now has a separate
 inspector telemetry next; preserve prior failures and all five full release editions.
 
 - [x] Compose installed saved-scene inspection, guarded navigation, current-policy erasure and verified image-task ownership.
+- [x] Provide the authenticated, supervised native network service; preserve measured counters, demand, policy and exact child lifetime. See the [handoff](spec/delivery/network-service-handoff.md).
 - [ ] Connect authenticated inspector telemetry; qualify installed image/topology cases, maximum-input inspector responsiveness and human accessibility.
 
 ## Completed specification work

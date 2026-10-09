@@ -1149,7 +1149,8 @@
         "syspane_child",
         "syspane_network_view",
         "syspane_demand",
-        "syspane_demand_sessions"
+        "syspane_demand_sessions",
+        "syspane_network_task"
       ],
       "target_requirements": [
         "cxx17"
@@ -3203,7 +3204,8 @@
         "source/application/profile_controller_main.cpp"
       ],
       "allowed_dependencies": [
-        "syspane_profile_controller_runtime"
+        "syspane_profile_controller_runtime",
+        "syspane_network_controller"
       ],
       "target_requirements": [
         "cxx17"
@@ -3560,7 +3562,8 @@
         "tests/configuration/frontend_helper_fixture.cpp"
       ],
       "allowed_dependencies": [
-        "syspane_profile_controller_runtime"
+        "syspane_profile_controller_runtime",
+        "syspane_network_controller"
       ],
       "target_requirements": [
         "cxx17",
@@ -3821,6 +3824,92 @@
       ],
       "allowed_dependencies": [
         "syspane_frontend_runtime"
+      ],
+      "target_requirements": [
+        "cxx17",
+        "native_local_ipc"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
+    },
+    {
+      "id": "network-task",
+      "target": "syspane_network_task",
+      "type": "STATIC_LIBRARY",
+      "source_owner": "source/collectors/",
+      "public_interfaces": [
+        "source/collectors/network_task_linux.hpp"
+      ],
+      "private_interfaces": [],
+      "sources": [
+        "source/collectors/network_task_linux.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_network",
+        "syspane_network_publication",
+        "Threads::Threads"
+      ],
+      "target_requirements": [
+        "cxx17",
+        "native_local_ipc"
+      ],
+      "roles": [
+        "collector"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
+    },
+    {
+      "id": "network-controller",
+      "target": "syspane_network_controller",
+      "type": "STATIC_LIBRARY",
+      "source_owner": "source/application/",
+      "public_interfaces": [
+        "source/application/network_controller_linux.hpp"
+      ],
+      "private_interfaces": [],
+      "sources": [
+        "source/application/network_controller_linux.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_network_task",
+        "syspane_demand_sessions",
+        "syspane_machine_policy",
+        "syspane_child",
+        "syspane_health",
+        "syspane_recovery"
+      ],
+      "target_requirements": [
+        "cxx17",
+        "native_local_ipc"
+      ],
+      "roles": [
+        "collector"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
+    },
+    {
+      "id": "network-supervisor-probe",
+      "target": "syspane_network_supervisor_probe",
+      "type": "EXECUTABLE",
+      "source_owner": "tests/configuration/",
+      "public_interfaces": [],
+      "private_interfaces": [],
+      "sources": [
+        "tests/configuration/network_supervisor_probe.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_profile_supervisor"
       ],
       "target_requirements": [
         "cxx17",

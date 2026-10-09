@@ -12,10 +12,18 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-09T13:33:39.137220+00:00", "scope": "Installed saved-scene inspector; authenticated telemetry next"}
+updated: {"by": "codex", "at": "2026-10-09T14:21:37.569718+00:00", "scope": "Supervised native network service; installed consumer next"}
 ---
 
 # Current state and next admitted boundary
+
+The [native network service](network-service-handoff.md) now reuses verified helper
+installation, independent supervision, native acquisition and demand/session owners.
+Eighteen new native cases pass, including real counters/rates, held-read timeout,
+policy denial, sealed launch, crash/restart and exact child exit. The ordinary
+inspector still needs its telemetry consumer, bounded delivery and current-profile
+lease/erasure integration. Continue from that handoff; all five complete editions
+remain unfinished.
 
 The [installed inspector checkpoint](installed-inspector-handoff.md) now connects
 saved scenes to native inspection in the common Linux frontend, alongside Settings
@@ -927,8 +935,8 @@ release-identity decisions remain open.
 
 ## Next work
 
-Continue from the [installed inspector handoff](installed-inspector-handoff.md).
-Compose authenticated inspector telemetry using the existing native producer,
+Continue from the [network service handoff](network-service-handoff.md).
+Compose authenticated inspector telemetry using the supervised native producer,
 session and demand owners. Preserve channel-specific disclosure, exact measurement
 clocks, full-state synchronization, leases, queue bounds and current-policy erasure.
 Qualify installed image/topology cases and maximum-input inspector responsiveness.

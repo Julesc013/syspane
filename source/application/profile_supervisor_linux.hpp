@@ -6,6 +6,7 @@
 #include <vector>
 
 namespace syspane::application {
+enum class LocalService {configuration,network};
 enum class ProfileSupervisorState {starting,ready,quarantined,waiting,circuit_open,unavailable,closing,closed};
 struct ProfileSupervisorView {
     ProfileSupervisorState state=ProfileSupervisorState::starting;
@@ -25,9 +26,9 @@ struct ProfileSupervisorEvent {
 class LinuxProfileSupervisor {
 public:
     LinuxProfileSupervisor(std::string helper,std::string runtime,platform::ProfileLocation,
-                           bool create,std::uint64_t console);
+                           bool create,std::uint64_t console,LocalService service=LocalService::configuration);
     LinuxProfileSupervisor(std::shared_ptr<platform::LinuxInstallation>,std::string runtime,
-                           platform::ProfileLocation,bool create,std::uint64_t console);
+                           platform::ProfileLocation,bool create,std::uint64_t console,LocalService service=LocalService::configuration);
     ~LinuxProfileSupervisor();
     LinuxProfileSupervisor(const LinuxProfileSupervisor&)=delete;
     LinuxProfileSupervisor& operator=(const LinuxProfileSupervisor&)=delete;

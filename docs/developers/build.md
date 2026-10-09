@@ -1,5 +1,22 @@
 # Developer setup and checks
 
+The [network service package](../../spec/delivery/packages/w-25-network-service.md)
+defines the independently supervised producer for inspector integration. After
+ordinary workspace preflight and Linux configure/build, run:
+
+```sh
+ctest --preset linux-x64-gcc13 -R '^native[.]NETWORK-(SERVICE|SUPERVISOR)$' --output-on-failure
+```
+
+Retain the original native collector/demand, profile-supervisor, runtime-directory,
+helper-identity and installed settings/inspector regressions. Archive completed
+native families before the next workspace preflight. Run the portable demand,
+session, network, measured-time, telemetry and component checks on all three
+development profiles. Positive service cases use a compiled policy fixture;
+ordinary production policy still requires its protected deployment authority.
+The [handoff](../../spec/delivery/network-service-handoff.md) records failures and
+the remaining frontend delivery/clock/lease integration.
+
 The [installed inspector package](../../spec/delivery/packages/w-11-installed-inspector.md)
 connects saved-profile inspection to the common frontend. After ordinary workspace
 preflight/configure/build, run `ctest --preset linux-x64-gcc13 -R

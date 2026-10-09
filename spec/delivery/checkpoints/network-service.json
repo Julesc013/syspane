@@ -1,0 +1,842 @@
+{
+  "source_base": "e575844d7ee9d22c98f176d970e2056beaafda8d",
+  "scope": "Native network service prerequisite; installed telemetry consumer and complete editions remain open.",
+  "source_files": {
+    "source/application/network_controller_linux.cpp": "c9ab36c3b5c711b36afaec02a3286ebedd37279986e22566494c9ff6c15aa72b",
+    "source/application/network_controller_linux.hpp": "fee8610afa63ae6b5f7a95a92584db2be8f73e3f0287b24372197e558c90b867",
+    "source/collectors/network_task_linux.cpp": "238334a98fbbd1760b555bffca261adfc073ceab8a8ef6d1fdce94995219e19f",
+    "source/collectors/network_task_linux.hpp": "665de0b7c339185502296c6bcc6009ec2453a67c2bbc0d53bf2f2243dfd34aef",
+    "source/application/profile_supervisor_linux.cpp": "24e0996ed803c545ecb6f5adf5351d8dac4305dd42e18a968efc4add467ab2fe",
+    "source/application/profile_supervisor_linux.hpp": "d8919f25ce897bc74283d37d8f434233af1b0e4b3943665470a4173b277eb28a",
+    "source/application/profile_controller_main.cpp": "eb490a3ba4bbd0b7f8560ee3fc383c904d8395649191317ade1a2ac6588693c1",
+    "source/application/collector_probe.cpp": "349769243205925890074ac92d06b514266c2d9af79277541c4f23e32f04d704",
+    "source/runtime/demand_sessions.hpp": "297d83cea10016b7140c18e235eb846739f02cece812f7afea4931d76f704d52",
+    "CMakeLists.txt": "64937664853ecfda814d5948106be0e2d2e8879169f601b9c35db57feac08ca9",
+    "source/build/components.json": "2dae7b563e943cf284402ec2beab2a6ff604b1305abe253a459b859822bb26c2"
+  },
+  "executions": [
+    {
+      "stage": "archive",
+      "path": "out/evidence/network-service-checks/archive-10e3c622/result.json",
+      "sha256": "f20686179adbab09fdedd66865719dd7c7a06f4f6ef747e9562e9ed903b01dbe",
+      "source_archive": {
+        "path": "out/evidence/network-service-checks/archive-10e3c622/source.zip",
+        "sha256": "b6446d908040a8ff5bc746889334a5a0ca36a3037564085d8b83077007d5a783"
+      },
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "python3",
+            "/mnt/d/Projects/SysPane/syspane/out/campaign/archive_network_service.py",
+            "package"
+          ],
+          "started_at": "2026-10-09T14:22:52.023593+00:00",
+          "finished_at": "2026-10-09T14:22:57.111459+00:00",
+          "exit": 0,
+          "log_sha256": "05cf7538226d0552a25843c902c2d0e5604579eec1155f6440c642e12c410f37"
+        }
+      ]
+    },
+    {
+      "stage": "archive",
+      "path": "out/evidence/network-service-checks/archive-61e79a3d/result.json",
+      "sha256": "cc26b4d625ec154dc131d96aee776691ff517e8b1663fbecf960254929f1a913",
+      "source_archive": {
+        "path": "out/evidence/network-service-checks/archive-61e79a3d/source.zip",
+        "sha256": "d31327dcb450b22052209be5c8a627c681f52d9b2fc6feaa301a3fbc8958196c"
+      },
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "python3",
+            "/mnt/d/Projects/SysPane/syspane/out/campaign/archive_network_service.py",
+            "service-final"
+          ],
+          "started_at": "2026-10-09T14:09:52.659137+00:00",
+          "finished_at": "2026-10-09T14:09:56.931975+00:00",
+          "exit": 0,
+          "log_sha256": "ce735ee3c111683f23b2de5a0d4e325677190d10806f5f2ed73dedafb5431f6a"
+        }
+      ]
+    },
+    {
+      "stage": "archive",
+      "path": "out/evidence/network-service-checks/archive-94f402a8/result.json",
+      "sha256": "8e17b33baf461d2fefc08c1162d29cd7881b7f37848fd2b68fda801d89d45f10",
+      "source_archive": {
+        "path": "out/evidence/network-service-checks/archive-94f402a8/source.zip",
+        "sha256": "96a223a8d6529a326b9a633382fac009c3eb354407d4b8213cbc2b86152c72d4"
+      },
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "python3",
+            "/mnt/d/Projects/SysPane/syspane/out/campaign/archive_network_service.py",
+            "installed"
+          ],
+          "started_at": "2026-10-09T14:15:03.384120+00:00",
+          "finished_at": "2026-10-09T14:15:09.215708+00:00",
+          "exit": 0,
+          "log_sha256": "e1ca5f7f6092eaf472eb867a2aba15f7386f2c1d661534f9bb76d6c3d31766d5"
+        }
+      ]
+    },
+    {
+      "stage": "archive",
+      "path": "out/evidence/network-service-checks/archive-97192afc/result.json",
+      "sha256": "ce16d45c6303f1173536d90de9645b7a6faea3644ad27b21871ecde4ee5d1017",
+      "source_archive": {
+        "path": "out/evidence/network-service-checks/archive-97192afc/source.zip",
+        "sha256": "406ace13680f8cfc76e0cc71d5610c36ac2d80dbe4891716613e0ec784e3eb88"
+      },
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "python3",
+            "/mnt/d/Projects/SysPane/syspane/out/campaign/archive_network_service.py",
+            "regressions"
+          ],
+          "started_at": "2026-10-09T14:12:13.720001+00:00",
+          "finished_at": "2026-10-09T14:12:17.203127+00:00",
+          "exit": 0,
+          "log_sha256": "d410922c54f5308550f318859ec990d7f87e80ab594df78ee076faa36bc1539f"
+        }
+      ]
+    },
+    {
+      "stage": "archive",
+      "path": "out/evidence/network-service-checks/archive-9f2ecff6/result.json",
+      "sha256": "f882d0dfd96b7ab1d0e0aef1e79870a54047ac8db9e535848d7da417a4fba2d8",
+      "source_archive": {
+        "path": "out/evidence/network-service-checks/archive-9f2ecff6/source.zip",
+        "sha256": "e76f57986ad60ee865d9358ff7eb1e0e5a917ebcf049680b8283fe8bfa1a46d9"
+      },
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "python3",
+            "/mnt/d/Projects/SysPane/syspane/out/campaign/archive_network_service.py",
+            "settings"
+          ],
+          "started_at": "2026-10-09T14:16:35.792687+00:00",
+          "finished_at": "2026-10-09T14:16:46.343642+00:00",
+          "exit": 0,
+          "log_sha256": "b97832b1067b3d991f274de75794caf87baa6b37411e8667255d6aef8be78d3e"
+        }
+      ]
+    },
+    {
+      "stage": "build",
+      "path": "out/evidence/network-service-checks/build-ad3b831c/result.json",
+      "sha256": "f293c9a0cfe557ae8ca0aa62225ce7574df21141c6e0a2b7f55ebb86f7e4d8f7",
+      "source_archive": {
+        "path": "out/evidence/network-service-checks/build-ad3b831c/source.zip",
+        "sha256": "9f0ed9394f54502d9fa559a96aacffcf064b58ed1c5815cf06710e00c5b43648"
+      },
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "cmake",
+            "--build",
+            "--preset",
+            "linux-x64-gcc13"
+          ],
+          "started_at": "2026-10-09T14:08:15.575762+00:00",
+          "finished_at": "2026-10-09T14:08:35.114600+00:00",
+          "exit": 0,
+          "log_sha256": "950064e060c44def367a604e57068d21701c0e596a802a2496aa95368573f272"
+        }
+      ]
+    },
+    {
+      "stage": "build",
+      "path": "out/evidence/network-service-checks/build-edc0136c/result.json",
+      "sha256": "7828e422932cfd7c6103110226cecd5b2b3447880f8f62aff2e7aabf03aeba04",
+      "source_archive": {
+        "path": "out/evidence/network-service-checks/build-edc0136c/source.zip",
+        "sha256": "96a223a8d6529a326b9a633382fac009c3eb354407d4b8213cbc2b86152c72d4"
+      },
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "cmake",
+            "--build",
+            "--preset",
+            "linux-x64-gcc13"
+          ],
+          "started_at": "2026-10-09T14:12:44.360281+00:00",
+          "finished_at": "2026-10-09T14:13:10.570804+00:00",
+          "exit": 0,
+          "log_sha256": "32091035e7114369961a155820bb8013c33cdf071766ec6b019981f51f9fdcae"
+        }
+      ]
+    },
+    {
+      "stage": "imports",
+      "path": "out/evidence/network-service-checks/imports-6456b882/result.json",
+      "sha256": "b9d9c30c00bc8c8d8281f0b765b1028bbe66122ab006634f80a48178e5f52a5d",
+      "source_archive": {
+        "path": "out/evidence/network-service-checks/imports-6456b882/source.zip",
+        "sha256": "e76f57986ad60ee865d9358ff7eb1e0e5a917ebcf049680b8283fe8bfa1a46d9"
+      },
+      "commands": [
+        {
+          "command": [
+            "ctest",
+            "--preset",
+            "windows-x86-v141-xp",
+            "-R",
+            "^legacy[.]",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-09T14:20:02.081464+00:00",
+          "finished_at": "2026-10-09T14:20:02.452381+00:00",
+          "exit": 0,
+          "log_sha256": "02d7726c2048e6ff54395f2beaca8a1dab8cb3c89e17725ee2bb9d1b50780843"
+        }
+      ]
+    },
+    {
+      "stage": "installed",
+      "path": "out/evidence/network-service-checks/installed-031d630a/result.json",
+      "sha256": "b20b67f981459f47c90519e01f87025e0ecce59b76efc42edfbf8ad8b57a8d29",
+      "source_archive": {
+        "path": "out/evidence/network-service-checks/installed-031d630a/source.zip",
+        "sha256": "96a223a8d6529a326b9a633382fac009c3eb354407d4b8213cbc2b86152c72d4"
+      },
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]INSTALLED-INSPECTOR$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-09T14:13:20.549498+00:00",
+          "finished_at": "2026-10-09T14:14:46.801068+00:00",
+          "exit": 0,
+          "log_sha256": "1b1cc4843f5957bf0fda7f6d4827e55156e1cb79847b609488d0725a518ee041"
+        }
+      ]
+    },
+    {
+      "stage": "legacy",
+      "path": "out/evidence/network-service-checks/legacy-f64b1ca0/result.json",
+      "sha256": "89d6ceb37868fb9e59a024a914a0c9b9f62c8c9014c903076e8e8bd135e8bf27",
+      "source_archive": {
+        "path": "out/evidence/network-service-checks/legacy-f64b1ca0/source.zip",
+        "sha256": "e76f57986ad60ee865d9358ff7eb1e0e5a917ebcf049680b8283fe8bfa1a46d9"
+      },
+      "commands": [
+        {
+          "command": [
+            "cmake",
+            "--preset",
+            "windows-x86-v141-xp"
+          ],
+          "started_at": "2026-10-09T14:17:47.005230+00:00",
+          "finished_at": "2026-10-09T14:17:49.209820+00:00",
+          "exit": 0,
+          "log_sha256": "606f5f4194d3527e4bd7d0f85dc8f508aef2f568fe2df89743477f164b34764e"
+        },
+        {
+          "command": [
+            "cmake",
+            "--build",
+            "--preset",
+            "windows-x86-v141-xp"
+          ],
+          "started_at": "2026-10-09T14:17:51.215458+00:00",
+          "finished_at": "2026-10-09T14:17:58.294117+00:00",
+          "exit": 0,
+          "log_sha256": "0ebdb4a242acc9d79c0367500269e5a9a8947de0a8486d453b57ca18d85ae64b"
+        },
+        {
+          "command": [
+            "ctest",
+            "--preset",
+            "windows-x86-v141-xp",
+            "-R",
+            "^((composition|demand|demand-session|telemetry|measured|network|recovery|import|data-view)[.]|target[.])",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-09T14:18:00.252127+00:00",
+          "finished_at": "2026-10-09T14:18:03.275539+00:00",
+          "exit": 0,
+          "log_sha256": "96e24194dbd568d662252b2a7e7465d0add7d6ff8958d384d28e562dcd65ac38"
+        }
+      ]
+    },
+    {
+      "stage": "portable",
+      "path": "out/evidence/network-service-checks/portable-c588220c/result.json",
+      "sha256": "689995feda04f3e4000e120c41cfd09bdf2b57c772b4c08ee19ded5342a7704b",
+      "source_archive": {
+        "path": "out/evidence/network-service-checks/portable-c588220c/source.zip",
+        "sha256": "e76f57986ad60ee865d9358ff7eb1e0e5a917ebcf049680b8283fe8bfa1a46d9"
+      },
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^(composition|demand|demand-session|telemetry|measured|network|recovery|import|data-view)[.]",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-09T14:16:48.749049+00:00",
+          "finished_at": "2026-10-09T14:16:50.312365+00:00",
+          "exit": 0,
+          "log_sha256": "76fee12bba39a6f767df14036ac97200ce1094bf7a53b62fad0e47af5b3a902c"
+        }
+      ]
+    },
+    {
+      "stage": "regressions",
+      "path": "out/evidence/network-service-checks/regressions-1ab9541d/result.json",
+      "sha256": "a35fa12bc7dd359bf8729cc0254bd53164cd68acfeaf6f4fc0e9ef49f6788373",
+      "source_archive": {
+        "path": "out/evidence/network-service-checks/regressions-1ab9541d/source.zip",
+        "sha256": "d31327dcb450b22052209be5c8a627c681f52d9b2fc6feaa301a3fbc8958196c"
+      },
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.](NATIVE-COLLECTOR|NATIVE-DEMAND-EXECUTOR|PROFILE-SUPERVISOR|RUNTIME-DIRECTORY|HELPER-IDENTITY)$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-09T14:09:59.269202+00:00",
+          "finished_at": "2026-10-09T14:11:20.029678+00:00",
+          "exit": 0,
+          "log_sha256": "0977734ecbef9e0fe2a539a3e49d2f548798021c1859368333daeb66b2e98a5f"
+        }
+      ]
+    },
+    {
+      "stage": "service",
+      "path": "out/evidence/network-service-checks/service-552609c6/result.json",
+      "sha256": "93897cbc3ffb56a85deaf4893b6ca6bcbb2f5411ba1027066c6f530379b3e8ce",
+      "source_archive": {
+        "path": "out/evidence/network-service-checks/service-552609c6/source.zip",
+        "sha256": "9f0ed9394f54502d9fa559a96aacffcf064b58ed1c5815cf06710e00c5b43648"
+      },
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]NETWORK-(SERVICE|SUPERVISOR)$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-09T14:08:49.895598+00:00",
+          "finished_at": "2026-10-09T14:08:57.160974+00:00",
+          "exit": 8,
+          "log_sha256": "ee3e800dfb0482fae2126bb9b6f992909f5fe4f459af52ff9e0925ae9d40d981"
+        }
+      ]
+    },
+    {
+      "stage": "service",
+      "path": "out/evidence/network-service-checks/service-62c6f22b/result.json",
+      "sha256": "4d36958af5b20cb6b4de25169827aa1311d0cecac8caa22c6de08d6c062095b9",
+      "source_archive": {
+        "path": "out/evidence/network-service-checks/service-62c6f22b/source.zip",
+        "sha256": "d31327dcb450b22052209be5c8a627c681f52d9b2fc6feaa301a3fbc8958196c"
+      },
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]NETWORK-(SERVICE|SUPERVISOR)$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-09T14:09:25.963748+00:00",
+          "finished_at": "2026-10-09T14:09:42.959634+00:00",
+          "exit": 0,
+          "log_sha256": "8f2d84d0218854d9b640361a0c58c27a51ff56b9b7b87a7903ef4ac96907b726"
+        }
+      ]
+    },
+    {
+      "stage": "settings",
+      "path": "out/evidence/network-service-checks/settings-8940e61a/result.json",
+      "sha256": "218bb0cfc0e62f729bec4c57104e393890757a86fe4576d473ee7d5d907ad4a0",
+      "source_archive": {
+        "path": "out/evidence/network-service-checks/settings-8940e61a/source.zip",
+        "sha256": "96a223a8d6529a326b9a633382fac009c3eb354407d4b8213cbc2b86152c72d4"
+      },
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]INSTALLED-SETTINGS$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-09T14:15:11.624678+00:00",
+          "finished_at": "2026-10-09T14:16:02.000444+00:00",
+          "exit": 0,
+          "log_sha256": "583a60e99fa16c1c1acba3c1797cc40312f267162e22a2b90f1d12236ed05607"
+        }
+      ]
+    },
+    {
+      "stage": "windows",
+      "path": "out/evidence/network-service-checks/windows-8417081a/result.json",
+      "sha256": "c13d9aa2266a1e84b33cdc8f71bee3b906771e6412ae77b258aff8a474712d16",
+      "source_archive": {
+        "path": "out/evidence/network-service-checks/windows-8417081a/source.zip",
+        "sha256": "e76f57986ad60ee865d9358ff7eb1e0e5a917ebcf049680b8283fe8bfa1a46d9"
+      },
+      "commands": [
+        {
+          "command": [
+            "cmake",
+            "--preset",
+            "windows-x64-gcc15"
+          ],
+          "started_at": "2026-10-09T14:16:52.801619+00:00",
+          "finished_at": "2026-10-09T14:16:54.028404+00:00",
+          "exit": 0,
+          "log_sha256": "7991e23b732f285f39f09458a067b7102edc4729412634744b608b791b546e7d"
+        },
+        {
+          "command": [
+            "cmake",
+            "--build",
+            "--preset",
+            "windows-x64-gcc15"
+          ],
+          "started_at": "2026-10-09T14:16:55.955193+00:00",
+          "finished_at": "2026-10-09T14:17:02.647380+00:00",
+          "exit": 0,
+          "log_sha256": "2907804c841d849f19489015945ebf106ce3eb38d7d1fba5ad35132a8701f69b"
+        },
+        {
+          "command": [
+            "ctest",
+            "--preset",
+            "windows-x64-gcc15",
+            "-R",
+            "^(composition|demand|demand-session|telemetry|measured|network|recovery|import|data-view)[.]",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-09T14:17:04.485017+00:00",
+          "finished_at": "2026-10-09T14:17:07.204655+00:00",
+          "exit": 0,
+          "log_sha256": "db1bf6be7bd016b2ffc5d58ca86679907db8c0e90375a2a0dcf0d4d250b2ad46"
+        }
+      ]
+    }
+  ],
+  "native_archives": [
+    {
+      "path": "out/evidence/network-service-native/initial-attempts/native-evidence.zip",
+      "sha256": "c1b6163180c818dd82ed35641ebdb83126da6eb0f54333304d59e65e8b7e9813",
+      "index": {
+        "path": "out/evidence/network-service-native/initial-attempts/index.json",
+        "sha256": "bf681899d05ea2ec4935bed9647837f99c82064488366c8895188f04d020c6b3"
+      },
+      "reports": [
+        {
+          "path": "network-service-41788568/result.json",
+          "sha256": "de750aeb25f44016ed5a14edd37fce2d45ba23db449f3a7690820b3ae6121e5b",
+          "family": "NETWORK-SERVICE",
+          "outcome": "fail",
+          "cases": 7
+        },
+        {
+          "path": "network-service-43917c57/result.json",
+          "sha256": "d990ebc4c4a3c82989af1cdc3d7acb0dba3cd5de657494755a02b059d95c9f95",
+          "family": "NETWORK-SERVICE",
+          "outcome": "fail",
+          "cases": 0
+        },
+        {
+          "path": "network-service-c098f4d7/result.json",
+          "sha256": "de623cfca951fd3d6135709494910e9f5e165db470114fac618260a21d1b3b60",
+          "family": "NETWORK-SERVICE",
+          "outcome": "fail",
+          "cases": 0
+        },
+        {
+          "path": "network-service-cc9b7938/result.json",
+          "sha256": "211845cef86923612c393e850b66b7a119eb01267c1d7bf56eb3e883bc597e5a",
+          "family": "NETWORK-SERVICE",
+          "outcome": "pass",
+          "cases": 11
+        },
+        {
+          "path": "network-supervisor-2553246b/result.json",
+          "sha256": "0cd1900fb284af59f3c6fe4dba4db60c6679d58c71195ed787c9c80a5a3a538a",
+          "family": "NETWORK-SUPERVISOR",
+          "outcome": "fail",
+          "cases": 0
+        },
+        {
+          "path": "network-supervisor-444b41ae/result.json",
+          "sha256": "a9d11935a2f1827b840667aa47f872cacd7d60360fbfa0d804a0f342029571d7",
+          "family": "NETWORK-SUPERVISOR",
+          "outcome": "pass",
+          "cases": 5
+        },
+        {
+          "path": "network-supervisor-69e31a1a/result.json",
+          "sha256": "1105c6b54b3c7f08ae12bd93dce96a88c49a4176baabb4fd3d0f96b2a4dbe009",
+          "family": "NETWORK-SUPERVISOR",
+          "outcome": "fail",
+          "cases": 0
+        }
+      ]
+    },
+    {
+      "path": "out/evidence/network-service-native/installed/native-evidence.zip",
+      "sha256": "713c90cef5c4ee569fc677f08d4cd3e6fc0b1ace229fefa9e5653d5773b20d03",
+      "index": {
+        "path": "out/evidence/network-service-native/installed/index.json",
+        "sha256": "0a7b37f58d62f4000e028b121dd43f901a2335f6da1c53b15441a4040a8f2649"
+      },
+      "reports": [
+        {
+          "path": "inspector-frontend-1355705ffd/result.json",
+          "sha256": "97d17707248de146dc6a8cdd81291afbdf2ba8d527ff020b82dae7330f204771",
+          "family": "INSTALLED-INSPECTOR",
+          "outcome": "pass",
+          "cases": 12
+        }
+      ]
+    },
+    {
+      "path": "out/evidence/network-service-native/package/native-evidence.zip",
+      "sha256": "128bf9a646d1d9c714d8781404860aa3f830f6a8f2a9c25940b3cc61f2fd1513",
+      "index": {
+        "path": "out/evidence/network-service-native/package/index.json",
+        "sha256": "c473807ec0d5d76362378c5cf90783abfb1758dba0edcce0659ff935432d5e89"
+      },
+      "reports": [
+        {
+          "path": "network-package-f1121c30/result.json",
+          "sha256": "857797bfd2e4e2fd062bc191c64ffddf65955ff3e7ce9c61692f2b57d88babe3",
+          "family": "local-development-frontend-install-smoke",
+          "outcome": "pass",
+          "cases": 0
+        }
+      ]
+    },
+    {
+      "path": "out/evidence/network-service-native/regressions/native-evidence.zip",
+      "sha256": "d1fac0b9bc25e2547837cbf4a71f1dda49911ad16785ecf9a519afbc8a754ffe",
+      "index": {
+        "path": "out/evidence/network-service-native/regressions/index.json",
+        "sha256": "bba15eb4f20ef2f82a05fc9034927dc608398841b71c152cc565fc2a796cef86"
+      },
+      "reports": [
+        {
+          "path": "NATIVE-COLLECTOR-6f7b58123e46.json",
+          "sha256": "7972a55dfa5742a4b066a6ba0c63449bae5adaf6907c58b9fd06298c439b297c",
+          "family": "NATIVE-COLLECTOR",
+          "outcome": "pass",
+          "cases": 8
+        },
+        {
+          "path": "NATIVE-DEMAND-EXECUTOR-010cee1a9cae488b96293b4d6c068b11.json",
+          "sha256": "0fb6c30ee7ded9df03fdd476f18cfb6f55b749c9096b25ea442e0f997ba8d59d",
+          "family": "NATIVE-DEMAND-EXECUTOR",
+          "outcome": "pass",
+          "cases": 5
+        },
+        {
+          "path": "hi-f233e1f0c2/result.json",
+          "sha256": "537f67b65d0cc2be7cdbb82dd750ec519a3bbfe6212b348d8cb4a36ce7761c91",
+          "family": "HELPER-IDENTITY",
+          "outcome": "pass",
+          "cases": 21
+        },
+        {
+          "path": "ps-b91efd7511/result.json",
+          "sha256": "5d3c1fec3a004d44f434f7b76caec188339156ae94bf84c1f0621981acfbe18c",
+          "family": "PROFILE-SUPERVISOR",
+          "outcome": "pass",
+          "cases": 19
+        },
+        {
+          "path": "runtime-db03c8be8d/result.json",
+          "sha256": "e37913c9d6479c0e1de10fe3aa621235c803df6a2bb558d47fc9f2c67b98a777",
+          "family": "RUNTIME-DIRECTORY",
+          "outcome": "pass",
+          "cases": 14
+        }
+      ]
+    },
+    {
+      "path": "out/evidence/network-service-native/service-final/native-evidence.zip",
+      "sha256": "71dbcc66db52fa0863fce325ba619d5278536953763f8ca2665b985b108c56a2",
+      "index": {
+        "path": "out/evidence/network-service-native/service-final/index.json",
+        "sha256": "02126aa0d4c9f8e42424a140944f7154632ea09c37f0996132d8702981dcf37b"
+      },
+      "reports": [
+        {
+          "path": "network-service-e9147fcc/result.json",
+          "sha256": "e55a1ab3134f6eb9a439ea9781f8c1323d50218228d0af49113c98cf9d437158",
+          "family": "NETWORK-SERVICE",
+          "outcome": "fail",
+          "cases": 0
+        },
+        {
+          "path": "network-service-f3be5fcf/result.json",
+          "sha256": "94e5961438dbf404c8fd18a747d1f932c1cb1eb413178508c71bae2c1458863a",
+          "family": "NETWORK-SERVICE",
+          "outcome": "pass",
+          "cases": 13
+        },
+        {
+          "path": "network-supervisor-7a4533d0/result.json",
+          "sha256": "723f8236a240a940afe1dd2620fde86192ac351369b6d79fcb1788c2805062b2",
+          "family": "NETWORK-SUPERVISOR",
+          "outcome": "pass",
+          "cases": 5
+        },
+        {
+          "path": "network-supervisor-8832009d/result.json",
+          "sha256": "7393e01149dadf86702e15c00babf19b59514815f1f0ad9784378750c8958dd2",
+          "family": "NETWORK-SUPERVISOR",
+          "outcome": "pass",
+          "cases": 5
+        }
+      ]
+    },
+    {
+      "path": "out/evidence/network-service-native/settings/native-evidence.zip",
+      "sha256": "17d1beb698043b581f6f6e8b49592fe52cd12c8979df6f1efcdc0572aadd0f5b",
+      "index": {
+        "path": "out/evidence/network-service-native/settings/index.json",
+        "sha256": "6e24ed29f150f3a0b71a460e58e8a48f3c33d6d259de00c5ccc258a1bf4aeabc"
+      },
+      "reports": [
+        {
+          "path": "frontend-695b3a8c0b/result.json",
+          "sha256": "d666bbb0443193203986f9e67db97e8bb241ab6e0aad5ba049b7d2f4dc7615b2",
+          "family": "INSTALLED-SETTINGS",
+          "outcome": "pass",
+          "cases": 12
+        }
+      ]
+    }
+  ],
+  "new_native_cases": 18,
+  "preserved_failures": [
+    "Absent --network entry returns 2 on original helper.",
+    "First direct observer supplied blocking inherited socket; changed to existing native nonblocking contract.",
+    "Service ignored cancelled demand task and failed fixed hung-read deadline; product termination repaired.",
+    "Sealed executable observer expected role-specific memfd name; shared verified image retains original label, exact argv identifies network role.",
+    "A short-lived policy/clock descriptor vanished during procfs enumeration; discard incomplete observation within original deadline.",
+    "Compile errors: misleading indentation, extracted unused UTC function, missing local IPC clock declaration.",
+    "Initial documentation validation preceded writing this checkpoint and reported its missing link.",
+    "Package reservation initially followed symlink targets and double-counted hard links; use the unchanged coordinator du -sb calculation, no budget increase."
+  ],
+  "frozen_inputs": {
+    "path": "out/evidence/network-service/frozen.json",
+    "sha256": "68d617833c86bcb302bf0b463a228dd44449dff5713d26e5143572662e0c9d00"
+  },
+  "normalization": {
+    "path": "out/evidence/network-service/normalization.json",
+    "sha256": "d655fad39fd3046c1b5409c666564f17dc0d8d65c5bab32194cd69b0c4399d26",
+    "note": "Rebuilt native service, supervisor and collector artifacts remain byte-identical after canonical LF conversion.",
+    "artifact_comparison": "All seven service/collector/supervisor/helper/runtime probe identities used by the affected native regressions match the rebuilt bytes."
+  },
+  "artifacts": {
+    "current": {
+      "syspane_frontend_helper_fixture": "0688adadac5cc2e3ead4b0efd56d1b977064a59f5758dd125e720823052aeedb",
+      "syspane_network_supervisor_probe": "47de8a3693a21ae693a9f44352eeb7052fa713fcbf4b5a48bbd9874eb1f89e37",
+      "syspane_profile_supervisor_probe": "c5b6269f0480a95ab469e772ea6d149e3dc0a3bdc898911b2f2915cd9960798f",
+      "syspane_runtime_directory_probe": "ae9e56d640ef1e7bea036b8810a915dc8cecd88a985d302a3a8f78e4ff992cd2",
+      "syspane_installation_probe": "388cb684510f9b632ad7613afac6aa26f76bccae8b4a3892caaea6341e2cd0e9",
+      "SysPane.CollectorProbe": "45f3f28210ff301e1d93fabc2b9868b11d0ec21a234cd3957102bbe07a3425bb",
+      "syspane-configuration-host": "7bbc096bd4a49de5022540e54f8162c9d4a53038198f4636d09945148ec73bd4",
+      "syspane_frontend_entry_fixture": "ffc028836048bf354b3ed50072fa5455274e61ca495e10814f9b8bc70f9322bd",
+      "syspane_frontend_fixture": "aa8520081f5267b0d3d600da294a88f0bc0e52383ea2f3a8c3cc00a21c0afd87",
+      "syspane": "da0e110f89d0ccf400803eb7b9651b7c882e0a6ddfb190858b164c323a1d1f29"
+    },
+    "tested": {
+      "SysPane.CollectorProbe": "45f3f28210ff301e1d93fabc2b9868b11d0ec21a234cd3957102bbe07a3425bb",
+      "syspane_profile_supervisor_probe": "c5b6269f0480a95ab469e772ea6d149e3dc0a3bdc898911b2f2915cd9960798f",
+      "syspane_frontend_helper_fixture": "0688adadac5cc2e3ead4b0efd56d1b977064a59f5758dd125e720823052aeedb",
+      "syspane_network_supervisor_probe": "47de8a3693a21ae693a9f44352eeb7052fa713fcbf4b5a48bbd9874eb1f89e37",
+      "syspane-configuration-host": "7bbc096bd4a49de5022540e54f8162c9d4a53038198f4636d09945148ec73bd4",
+      "syspane_installation_probe": "388cb684510f9b632ad7613afac6aa26f76bccae8b4a3892caaea6341e2cd0e9",
+      "syspane_runtime_directory_probe": "ae9e56d640ef1e7bea036b8810a915dc8cecd88a985d302a3a8f78e4ff992cd2"
+    }
+  },
+  "limitations": [
+    "Positive native policy is a compiled nonprivileged fixture; protected production deployment is unqualified.",
+    "Installed inspector still lacks service consumer, queue/clock/lease integration and operational pixels.",
+    "Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X complete editions and releases remain unfinished."
+  ],
+  "recorded_at": "2026-10-09T14:24:15.932329+00:00",
+  "package_smoke": {
+    "outcome": "pass",
+    "files": {
+      "bin/syspane": "da0e110f89d0ccf400803eb7b9651b7c882e0a6ddfb190858b164c323a1d1f29",
+      "libexec/syspane/syspane-configuration-host": "7bbc096bd4a49de5022540e54f8162c9d4a53038198f4636d09945148ec73bd4",
+      "libexec/syspane/syspane-image-worker": "65b38c368c9472405163a244c7f1b0ddf2c8702bb5e7945e147cb4a5935e777c",
+      "libexec/syspane/syspane-recovery-worker": "542b2fcb0aa20f674b98e5039af0e2ca512c43c5325c08cd286a03248a07416b",
+      "share/syspane/helpers.json": "877713b188a294fa920a735c1af08d6187676c5e3c17b59ed4a6cc9da1373e94"
+    },
+    "archive_sha256": "9bfb9ee6c7bb9a6144c74a16eec7b530317d51e3121a2e9bf6c14952598a95d4",
+    "production_network_refusal": {
+      "exit": 2,
+      "ready": false,
+      "snapshots": 0,
+      "local_fixture_file_did_not_grant": true
+    },
+    "reservation": {
+      "windows": 3003411884,
+      "linux": 5125548862,
+      "extra": 326666866,
+      "maximum": 8589934592
+    }
+  },
+  "final_native_families": {
+    "INSTALLED-INSPECTOR": 12,
+    "NATIVE-COLLECTOR": 8,
+    "NATIVE-DEMAND-EXECUTOR": 5,
+    "HELPER-IDENTITY": 21,
+    "PROFILE-SUPERVISOR": 19,
+    "RUNTIME-DIRECTORY": 14,
+    "NETWORK-SERVICE": 13,
+    "NETWORK-SUPERVISOR": 5,
+    "INSTALLED-SETTINGS": 12
+  },
+  "final_native_cases": 109,
+  "portable": {
+    "linux-x64-gcc13": 56,
+    "windows-x64-gcc15": 53,
+    "windows-x86-v141-xp": 53,
+    "legacy_artifact_checks": 2
+  },
+  "specification": {
+    "schemas": 51,
+    "fixtures": 183,
+    "tool_tests": 62,
+    "passed": 60,
+    "skipped": 2,
+    "skip_reason": "Existing Windows symlink privilege requirement",
+    "validation": {
+      "path": "out/evidence/network-service/spec-checks/validation.json",
+      "sha256": "5853fd89d9b82a420d72ff573327f8181ba616343abd9c75ba2805b0d22081eb"
+    },
+    "tool_log": {
+      "path": "out/evidence/network-service/spec-checks/tool-tests.log",
+      "sha256": "59430b7d7adb6f61d6b61b52be8a289169ac969b4a4d4c388ebd54b5c4d653c2"
+    }
+  }
+}

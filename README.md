@@ -11,6 +11,11 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
+The [native network service](spec/delivery/network-service-handoff.md) now collects
+real measured counters in a verified, supervised Linux child with authenticated
+demand and current-policy checks. Connecting those data to the installed inspector
+is the next integration step; no complete desktop edition is qualified yet.
+
 The [installed scene inspector](spec/delivery/installed-inspector-handoff.md)
 adds native inspection of saved scenes alongside Settings and Edit scene in the
 Linux frontend. It preserves unsaved-edit navigation guards and uses the verified

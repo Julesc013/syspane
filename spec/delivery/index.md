@@ -92,6 +92,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Measured network presentation checkpoint](network-presentation-handoff.md) — Shared renderer inputs preserve exact selected values, measurement metadata, lease state and disclosure lifetime.
 - [Supervised real network publication checkpoint](network-publication-handoff.md) — Publish real Linux counters and rates through measured telemetry with independent child recovery.
 - [Network lifetimes and Linux watched acquisition checkpoint](network-reconciliation-handoff.md) — Preserve observation identity and measurement age before supervised native publication.
+- [Supervised native network service](network-service-handoff.md) — Authenticated measured acquisition for the installed inspector's next integration.
 - [Open decisions, risks and resolving experiments](open-questions.md) — Keep unresolved choices discoverable without blocking unrelated work.
 - [Independent temporal oracle implementation checkpoint](oracle-handoff.md) — Bind external marker/time evaluation and native X11 fault calibration to source and raw capture evidence.
 - [Ordinary frontend recovery and history admission](ordinary-recovery-handoff.md) — Enable the qualified common entry path while retaining native authority and fixture observer isolation.

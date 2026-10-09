@@ -18,6 +18,7 @@ public:
     void policy(configuration::Policy next,std::uint64_t now);
     void tick(std::uint64_t now);
     bool closed(const std::string& id)const{return sessions_.closed(id);}
+    std::size_t frame_bound(const std::string& id)const{return sessions_.frame_bound(id);}
     std::string close_reason(const std::string& id)const{return sessions_.close_reason(id);}
     std::optional<configuration::Subscription> subscription(const std::string& id)const{return sessions_.subscription(id);}
     std::optional<DemandJob> take(std::uint64_t now);

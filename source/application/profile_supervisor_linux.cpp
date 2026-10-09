@@ -57,6 +57,7 @@ struct Call {
 }
 struct LinuxProfileSupervisor::Impl {
     std::string helper,root,owner_nonce,leaf,endpoint,epoch,fault;
+    LocalService service=LocalService::configuration;
     os::ProfileLocation location;bool create=false,closing=false,killed=false,ready=false,hello=false,terminal=false;
     std::shared_ptr<os::LinuxInstallation> installation;
     std::uint64_t console=0,generation=0,started=0,stop_started=0,last_sent=0,sequence=0,token=0;
@@ -145,7 +146,7 @@ struct LinuxProfileSupervisor::Impl {
     void start(std::uint64_t now){
         need(!child&&leaf.empty(),"supervisor.ownership");verify_root();
         need(generation<std::numeric_limits<std::uint64_t>::max(),"supervisor.generation");
-        ++generation;epoch="configuration:"+owner_nonce+":"+std::to_string(generation);leaf="g"+std::to_string(generation);
+        ++generation;epoch=std::string(service==LocalService::network?"network:":"configuration:")+owner_nonce+":"+std::to_string(generation);leaf="g"+std::to_string(generation);
         endpoint=root+"/"+leaf+"/s";need(endpoint.size()<108,"supervisor.endpoint");
         need(::mkdirat(root_fd.value,leaf.c_str(),0700)==0,"supervisor.runtime");
         leaf_fd.value=::openat(root_fd.value,leaf.c_str(),O_RDONLY|O_DIRECTORY|O_NOFOLLOW|O_CLOEXEC);
@@ -157,13 +158,16 @@ struct LinuxProfileSupervisor::Impl {
             {"data_home",location.data_home},{"state_home",location.state_home},{"portable_root",location.portable_root?p::Json(*location.portable_root):p::Json()}};
         output=p::frame(p::Json{{"format","SysPane.ProfileController"},{"schema_version","0.1.0"},{"producer_epoch",epoch},
             {"client_pid",std::to_string(console)},{"endpoint",endpoint},{"create",create},{"profile",profile}}.dump(),32768);
+        if(service==LocalService::network)output=p::frame(p::Json{{"format","SysPane.NetworkController"},{"schema_version","0.1.0"},
+            {"producer_epoch",epoch},{"client_pid",std::to_string(console)},{"endpoint",endpoint}}.dump(),32768);
         sent=0;started=now;ready=hello=killed=false;sequence=last_sent=token=0;stderr_bytes=0;
         frames=p::Framer(4096);lease=std::make_unique<r::ProducerLease>();operation=std::make_unique<r::TransactionWatch>();
-        health=std::make_unique<r::HealthLink>(true,"console",epoch,"G",started,true);
+        health=std::make_unique<r::HealthLink>(true,service==LocalService::network?"collector":"console",epoch,"G",started,service==LocalService::configuration);
         try{
-            const std::vector<std::string> args{std::to_string(os::current_process_id())};
+            std::vector<std::string> args{std::to_string(os::current_process_id())};
+            if(service==LocalService::network)args.insert(args.begin(),"--network");
             child=std::make_unique<os::Child>(installation?
-                os::Child::launch_sealed(installation->verified_helper(),"syspane-configuration-host",args,remote.value,remote.value,remote_errors.value):
+                os::Child::launch_sealed(installation->verified_helper(),service==LocalService::network?"syspane-network-host":"syspane-configuration-host",args,remote.value,remote.value,remote_errors.value):
                 os::Child::launch_program(helper,args,remote.value,remote.value,remote_errors.value));
         }
         catch(const os::ChildError&){throw p::Error("supervisor.launch");}
@@ -188,7 +192,7 @@ struct LinuxProfileSupervisor::Impl {
         for(const auto& e:observed){
             deadlines(now);
             if(e.kind==r::HealthKind::ready){
-                record_socket();token=lease->attach("configuration-host",epoch,now).token;need(token!=0,"supervisor.lease");
+                record_socket();token=lease->attach(service==LocalService::network?"network-host":"configuration-host",epoch,now).token;need(token!=0,"supervisor.lease");
                 ready=true;state=ProfileSupervisorState::ready;event("ready",now);
             }else if(e.kind==r::HealthKind::heartbeat){
                 need(lease->heartbeat(token,e.value,now)==r::Code::accepted,"supervisor.heartbeat");
@@ -252,9 +256,11 @@ struct LinuxProfileSupervisor::Impl {
         }else kill();
     }
 };
-LinuxProfileSupervisor::LinuxProfileSupervisor(std::string helper,std::string runtime,os::ProfileLocation location,bool create,std::uint64_t console)
+LinuxProfileSupervisor::LinuxProfileSupervisor(std::string helper,std::string runtime,os::ProfileLocation location,bool create,std::uint64_t console,LocalService service)
     :impl_(std::make_unique<Impl>()){
-    auto& s=*impl_;need(os::unprivileged_context()&&console,"supervisor.context");(void)os::profile_paths(location);
+    auto& s=*impl_;need(os::unprivileged_context()&&console,"supervisor.context");need(service==LocalService::configuration||service==LocalService::network,"supervisor.service");
+    if(service==LocalService::configuration)(void)os::profile_paths(location);
+    s.service=service;
     s.helper=std::move(helper);s.root=std::move(runtime);s.location=std::move(location);s.create=create;s.console=console;
     need(!s.root.empty()&&s.root.size()<=70&&std::filesystem::canonical(s.root)==s.root,"supervisor.runtime");
     s.root_fd.value=::open(s.root.c_str(),O_RDONLY|O_DIRECTORY|O_NOFOLLOW|O_CLOEXEC);
@@ -265,8 +271,8 @@ LinuxProfileSupervisor::LinuxProfileSupervisor(std::string helper,std::string ru
     s.verify_root();entries(s.root_fd.value,false);s.owner_nonce=nonce();
 }
 LinuxProfileSupervisor::~LinuxProfileSupervisor()=default;
-LinuxProfileSupervisor::LinuxProfileSupervisor(std::shared_ptr<os::LinuxInstallation> installation,std::string runtime,os::ProfileLocation location,bool create,std::uint64_t console)
-    :LinuxProfileSupervisor(std::string{},std::move(runtime),std::move(location),create,console){
+LinuxProfileSupervisor::LinuxProfileSupervisor(std::shared_ptr<os::LinuxInstallation> installation,std::string runtime,os::ProfileLocation location,bool create,std::uint64_t console,LocalService service)
+    :LinuxProfileSupervisor(std::string{},std::move(runtime),std::move(location),create,console,service){
     need(static_cast<bool>(installation),"supervisor.installation");(void)installation->verified_helper();impl_->installation=std::move(installation);
 }
 ProfileSupervisorView LinuxProfileSupervisor::poll(){

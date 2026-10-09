@@ -1,3 +1,4 @@
+#include "network_controller_linux.hpp"
 #include "profile_controller_linux.hpp"
 #include <fstream>
 #include <thread>
@@ -5,6 +6,17 @@
 namespace c=syspane::configuration;
 std::string read(const char* path){std::ifstream file(path);std::string value;std::getline(file,value);return value;}
 int main(int argc,char** argv){
+    if(argc==3&&std::string(argv[1])=="--network"){
+        const auto parent=syspane::protocol::decimal(argv[2]);if(!parent||!*parent)return 2;
+        return syspane::application::run_network_controller(*parent,[]{
+            c::Policy p;p.available=read("policy")!="deny";p.revision=7;
+            if(read("policy")=="allow")for(const char* channel:{"inspector","accessibility"})p.disclosure[{"console",channel}]={"operational"};
+            return p;
+        },[]{if(read("network-mode")=="hold"){
+            std::ofstream("network-held")<<::getpid();
+            while(read("network-release")!="yes")std::this_thread::sleep_for(std::chrono::milliseconds(5));
+        }});
+    }
     if(argc!=2)return 2;
     const auto parent=syspane::protocol::decimal(argv[1]);if(!parent||!*parent)return 2;
     return syspane::application::run_profile_controller(*parent,[]{
