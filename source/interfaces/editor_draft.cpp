@@ -280,6 +280,7 @@ bool EditorDraft::visibility_available()const{
     return true;
 }
 void EditorDraft::select(std::vector<std::string> ids){
+    invalidate_history();
     transaction_.editable();need(ids.size()<=256,"editor.targets");std::set<std::string> unique;
     for(const auto& id:ids)need(unique.insert(id).second&&exists(*scene(),id),"editor.selection");
     selected_=surviving(*scene(),ids);

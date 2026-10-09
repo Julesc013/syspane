@@ -31,6 +31,30 @@ bool edit_locked(const Json& scene,const std::string& id);
 bool edit_protected(const Json& scene,const std::string& id);
 using SceneEdit=std::variant<WidgetPropertyEdit,WidgetContentEdit,SceneThemeEdit,InsertWidget,RemoveWidgets,ReparentWidgets,DuplicateWidgets,MoveWidgets,ResizeWidget,AlignWidgets,DistributeWidgets,GroupWidgets,UngroupWidget,RootDisplayEdit,WrapWidgets,UnwrapWidget,SetWidgetLocks,SetWidgetVisibility,PasteWidgets>;
 
+// Detached one-shot history validation. Only the originating unchanged draft may
+// adopt its opaque result; it grants no permission and contains no history stack.
+class HistoryPrepared {
+public:
+    ~HistoryPrepared();
+    HistoryPrepared(const HistoryPrepared&)=delete;
+    HistoryPrepared& operator=(const HistoryPrepared&)=delete;
+private:
+    friend class EditorDraft;friend class HistoryWork;
+    struct Impl;explicit HistoryPrepared(std::unique_ptr<Impl>);
+    std::unique_ptr<Impl> impl_;
+};
+class HistoryWork {
+public:
+    ~HistoryWork();
+    HistoryWork(const HistoryWork&)=delete;
+    HistoryWork& operator=(const HistoryWork&)=delete;
+    std::unique_ptr<HistoryPrepared> run();
+private:
+    friend class EditorDraft;
+    struct Impl;explicit HistoryWork(std::unique_ptr<Impl>);
+    std::unique_ptr<Impl> impl_;
+};
+
 // One serialized native owner. Scene/selection borrows expire on every mutation,
 // policy update or close; adapters must erase their own caches on disclosure loss.
 class EditorDraft {
@@ -64,6 +88,8 @@ public:
     bool visibility_available()const;
     bool undo();
     bool redo();
+    std::unique_ptr<HistoryWork> history_work(bool forward);
+    bool adopt_history(std::unique_ptr<HistoryPrepared>);
     std::size_t undo_count()const{return undo_.size();}
     std::size_t redo_count()const{return redo_.size();}
     std::size_t history_bytes()const;
@@ -84,15 +110,17 @@ public:
     const Json& last_result()const{return transaction_.last_result();}
     std::optional<std::uint64_t> revision()const{return transaction_.revision();}
 private:
-    friend class RecoveryWork;
+    friend class RecoveryWork;friend class HistoryWork;
     struct RecoveryValidity {
         std::shared_ptr<const char> value=std::make_shared<const char>(char{});
         RecoveryValidity()=default;
         RecoveryValidity(const RecoveryValidity&){}
         RecoveryValidity& operator=(const RecoveryValidity&){value=std::make_shared<const char>(char{});return *this;}
     } recovery_validity_;
+    RecoveryValidity history_validity_;
     EditorDraft(const SettingsDraft& value,int):transaction_(value,SettingsDraft::RecoveryCopy{}){}
-    void invalidate_recovery(){recovery_validity_.value=std::make_shared<const char>(char{});}
+    void invalidate_history(){history_validity_.value=std::make_shared<const char>(char{});}
+    void invalidate_recovery(){recovery_validity_.value=std::make_shared<const char>(char{});invalidate_history();}
     void check_recovery(const RecoveryPrepared&,const RecoveryIdentity&,bool capture)const;
     struct State {Json scene;std::vector<std::string> selection;configuration::ResourceSnapshot resources;std::size_t resource_metadata_bytes=0;};
     struct Change {State before,after;std::size_t bytes;};

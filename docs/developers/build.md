@@ -15,6 +15,18 @@ build` before configuring or building; use `test` or `package` for those actions
 The common active-output budget is unchanged; retained `out/evidence/` archives
 are measured separately. Never use the placeholder account from the example.
 
+The [history-preparation package](../../spec/delivery/packages/w-11-history-preparation.md)
+adds detached HistoryWork and opaque current-owner adoption. After ordinary profile
+configure/build, run `ctest --preset <profile> -R '^editor[.]HISTORY-PREPARATION-'
+--output-on-failure` on all three development profiles, then the affected portable
+and existing native preparation/recovery/editor consumers. Keep the original trace
+expectations; supplemental guards must not redefine their results.
+
+The installed GUI does not use this API yet. Close native slot/cancellation/closure
+and preview ownership before enabling it, then run the unchanged ordinary GUI gates.
+The [handoff](../../spec/delivery/history-preparation-handoff.md) records the exact
+implemented boundary, source-bound verification and remaining integration.
+
 The [initial-preview package](../../spec/delivery/packages/w-11-initial-preview.md)
 defers first composition to drawing or guarded earlier input. After ordinary
 preflight/configure/build, run `ctest --preset linux-x64-gcc13 -R

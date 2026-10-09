@@ -246,3 +246,13 @@ run before resolution; unavailable or failed frames provide no editable geometry
 This does not authorize frame reuse across changed content, authority, topology or
 telemetry. The [handoff](../delivery/initial-preview-handoff.md) records frozen native
 input checks and remaining responsiveness failures.
+
+## Prepared history ownership
+
+The [prepared-history contract](../delivery/packages/w-11-history-preparation.md)
+permits full undo/redo validation on detached state. Only the exact unchanged origin
+may adopt its opaque result, with current authorization and existing history bounds.
+Structural submit hints never carry permission. Selection invalidates history work
+while retaining the distinct recovery-selection rule. The
+[handoff](../delivery/history-preparation-handoff.md) records portable implementation;
+installed worker/GUI scheduling and complete native qualification remain required.

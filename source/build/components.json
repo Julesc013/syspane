@@ -2217,7 +2217,8 @@
         "source/interfaces/editor_visibility.cpp",
         "source/interfaces/editor_theme.cpp",
         "source/interfaces/editor_fragment.cpp",
-        "source/interfaces/editor_recovery.cpp"
+        "source/interfaces/editor_recovery.cpp",
+        "source/interfaces/editor_history.cpp"
       ],
       "allowed_dependencies": [
         "syspane_settings_draft",
@@ -3768,6 +3769,35 @@
       "installed_files": [],
       "profiles": [
         "linux-x64-gcc13"
+      ]
+    },
+    {
+      "id": "history-preparation-tests",
+      "target": "syspane_history_preparation_tests",
+      "type": "EXECUTABLE",
+      "source_owner": "tests/editor/",
+      "public_interfaces": [],
+      "private_interfaces": [
+        "tests/editor/theme_history_fixture.hpp"
+      ],
+      "sources": [
+        "tests/editor/history_preparation_tests.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_editor_draft",
+        "Threads::Threads"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "windows-x64-gcc15",
+        "linux-x64-gcc13",
+        "windows-x86-v141-xp"
       ]
     }
   ]

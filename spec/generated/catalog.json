@@ -489,7 +489,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "8f69121e32e4cc62e475a5f8d40f5542d9cc2dbc2016ca0e90f81039c73a7d14"
+      "sha256": "09ab9c0a10a27fc1a6eeac1725da10179dc80fc09653f8dde61336a7ed193e9f"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -937,6 +937,17 @@
         "SP-W04-PACKAGE"
       ],
       "sha256": "24762660d5dde2f8327187dd910945acabf885979b0a1de9690a3104428e16de"
+    },
+    {
+      "id": "SP-HISTORY-PREPARATION-HANDOFF",
+      "path": "delivery/history-preparation-handoff.md",
+      "title": "Prepared history transition handoff",
+      "description": "Detached undo/redo validation and current-owner adoption are implemented; native scheduling remains next.",
+      "requires": [
+        "SP-W11-HISTORY-PREPARATION",
+        "SP-INITIAL-PREVIEW-HANDOFF"
+      ],
+      "sha256": "1c1f7f49ddcdb47c1a68c547e507f07a682d74bfe6742a147200cdc758e0c74b"
     },
     {
       "id": "SP-IMAGE-PIPELINE-HANDOFF",
@@ -2319,6 +2330,19 @@
       "sha256": "8011d5134f29059f80501dc345d903a7ddc524f817b2fcd76aeea0280787ac33"
     },
     {
+      "id": "SP-W11-HISTORY-PREPARATION",
+      "path": "delivery/packages/w-11-history-preparation.md",
+      "title": "Prepared editor history transitions",
+      "description": "Validate undo/redo off the GUI without transferring stale draft or permission proofs.",
+      "requires": [
+        "SP-W11-INITIAL-PREVIEW",
+        "SP-W11-RECOVERY-PREPARATION",
+        "SP-W11-DRAFT-ADMISSION",
+        "SP-W10-THEME-HISTORY"
+      ],
+      "sha256": "40e3f949df5bd8ea56891d22ee71937f10479ac4764a2c4b517993f06a18013e"
+    },
+    {
       "id": "SP-W11-INITIAL-PREVIEW",
       "path": "delivery/packages/w-11-initial-preview.md",
       "title": "Initial editor preview readiness",
@@ -3618,7 +3642,7 @@
         "SP-RENDERING",
         "SP-COMMANDS"
       ],
-      "sha256": "ecb914e7e854a1009afc574fe154f71af8e7b47291d23ce5dc991dd48de652a9"
+      "sha256": "31f48f9582e2c3107e3b221e160f82c8a39df533e15c15d2b723d41780d8ac2f"
     },
     {
       "id": "SP-POLICY",

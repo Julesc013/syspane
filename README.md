@@ -11,10 +11,10 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
-The [initial preview repair](spec/delivery/initial-preview-handoff.md) defers full
-painting until drawing or earlier input, preserving exact selection and editing.
-Four fixed GUI delay failures remain; asynchronous history/edit preparation is next.
-Production recovery and all five full editions remain open.
+The [prepared history checkpoint](spec/delivery/history-preparation-handoff.md)
+adds validated background work and exact current-draft adoption for undo/redo.
+Connecting it to the installed worker and GUI is next. Four fixed GUI delay failures,
+production recovery and all five full editions remain open.
 
 The [installed settings frontend](spec/delivery/installed-settings-handoff.md)
 now runs from a relocated development payload, supervises its verified configuration

@@ -1,0 +1,1097 @@
+{
+  "recorded_at": "2026-10-09T07:57:02.663231+00:00",
+  "source_base": "fe5ef3529807b88570c328260276e1c7b4ee38e7",
+  "scope": "Opaque detached history validation and current-owner adoption; native worker/GUI integration is not enabled.",
+  "baseline": {
+    "profile": "linux-x64-gcc13",
+    "action": "history",
+    "started_at": "2026-10-09T07:36:03.795228+00:00",
+    "exit": 0,
+    "passed_checks": 5,
+    "record": {
+      "local_path": "out/evidence/history-preparation/linux-x64-gcc13-history-0726ec2cba/result.json",
+      "sha256": "0e9d0bac77bbac9e656ef71dcff348176e82e18b8433d8c6ca14b771c276d8f2"
+    },
+    "source_archive": {
+      "local_path": "out/evidence/history-preparation/linux-x64-gcc13-history-0726ec2cba/source-inputs.zip",
+      "sha256": "e421d6309acb26791c0a5aa907148dc85d48e1f1e77d47defc825554c22b73b1"
+    },
+    "later_source_changes": [
+      "CMakeLists.txt",
+      "source/build/components.json",
+      "source/build/targets/linux-x64-gcc13.json",
+      "source/build/targets/windows-x64-gcc15.json",
+      "source/build/targets/windows-x86-v141-xp.json",
+      "source/interfaces/editor_draft.cpp",
+      "source/interfaces/editor_draft.hpp",
+      "source/interfaces/settings_draft.hpp",
+      "tests/editor/history_preparation_tests.cpp"
+    ]
+  },
+  "fixed_inputs": {
+    "tests/editor/history_preparation_tests.cpp": "91b562c04554bf7a4424f5055b570d7b520b538b9dea91aedeaeb9f31f53507f",
+    "tests/editor/theme_history_fixture.hpp": "7e0e33b6bf5694f73262ef3411166d02820df73c7605cbd156d4c085104a3bb5",
+    "tests/editor/theme-history-cases.json": "c586804fa2dd1d54ad38454c58ce5a0c0a20831bb966d4fe8e74b4f91c260e85",
+    "tests/configuration/settings-content-fixture.json": "958d460a55a55ab42a9d6d3ce148cb11533377f3040600378346309bf990b8b5",
+    "spec/delivery/packages/w-11-history-preparation.md": "40e3f949df5bd8ea56891d22ee71937f10479ac4764a2c4b517993f06a18013e"
+  },
+  "additional_guards": {
+    "source": "tests/editor/history_preparation_tests.cpp",
+    "original_sha256": "91b562c04554bf7a4424f5055b570d7b520b538b9dea91aedeaeb9f31f53507f",
+    "current_sha256": "e4191fedfbd9b3952896a0ed137e3041bafacc9df4b2f67a025db7999a913a95",
+    "synchronous_oracle_sha256": "1fec965ccad976c31fadafaabe24bfea2d9ebbf121de98678f350da7aad6425e",
+    "scope": "Added prepared-only GUARDS cases; the original synchronous translation and five observable trace families are unchanged."
+  },
+  "executions": [
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "build",
+      "started_at": "2026-10-09T07:42:48.272932+00:00",
+      "exit": 0,
+      "passed_checks": 0,
+      "record": {
+        "local_path": "out/evidence/history-preparation/linux-x64-gcc13-build-2d9b5e6089/result.json",
+        "sha256": "3c8ee41890d41772cd992122333579f48c376d36dab6dbc57d053743f2431eee"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/history-preparation/linux-x64-gcc13-build-2d9b5e6089/source-inputs.zip",
+        "sha256": "005755258774e2c8b2ec8e4947f211126b20264777facf80a522a1c6b8b23551"
+      },
+      "later_source_changes": []
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "configure",
+      "started_at": "2026-10-09T07:42:31.670982+00:00",
+      "exit": 0,
+      "passed_checks": 0,
+      "record": {
+        "local_path": "out/evidence/history-preparation/linux-x64-gcc13-configure-48dc59735e/result.json",
+        "sha256": "19277025c1e61a5991d96d29c1ad3cb9bdff04fabafbd908fa15d8a146a8173d"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/history-preparation/linux-x64-gcc13-configure-48dc59735e/source-inputs.zip",
+        "sha256": "005755258774e2c8b2ec8e4947f211126b20264777facf80a522a1c6b8b23551"
+      },
+      "later_source_changes": []
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "configure",
+      "started_at": "2026-10-09T07:33:23.979990+00:00",
+      "exit": 0,
+      "passed_checks": 0,
+      "record": {
+        "local_path": "out/evidence/history-preparation/linux-x64-gcc13-configure-9b001b9aca/result.json",
+        "sha256": "d1003fc559f21688d62a3164c212f3e5445a22243adf6b0425f60deaf3fa7059"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/history-preparation/linux-x64-gcc13-configure-9b001b9aca/source-inputs.zip",
+        "sha256": "83e919ce03509811222f94165f37c3f46de3aa405256f7131820af91703bf756"
+      },
+      "later_source_changes": [
+        "CMakeLists.txt",
+        "source/build/components.json",
+        "source/build/targets/linux-x64-gcc13.json",
+        "source/build/targets/windows-x64-gcc15.json",
+        "source/build/targets/windows-x86-v141-xp.json",
+        "source/interfaces/editor_draft.cpp",
+        "source/interfaces/editor_draft.hpp",
+        "source/interfaces/settings_draft.hpp",
+        "tests/editor/history_preparation_tests.cpp"
+      ]
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "configure",
+      "started_at": "2026-10-09T07:38:07.933689+00:00",
+      "exit": 0,
+      "passed_checks": 0,
+      "record": {
+        "local_path": "out/evidence/history-preparation/linux-x64-gcc13-configure-c136647b59/result.json",
+        "sha256": "59b1c1c3999eda519c73d1c1659933f4d2f7d6d2f23451ba04f2c161c35c09c9"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/history-preparation/linux-x64-gcc13-configure-c136647b59/source-inputs.zip",
+        "sha256": "9227510cb9e1e2d80139689aadac2bc10b1c41a77773edd51ac5f3b4977e14dd"
+      },
+      "later_source_changes": [
+        "CMakeLists.txt",
+        "tests/editor/history_preparation_tests.cpp"
+      ]
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "consumers",
+      "started_at": "2026-10-09T07:56:18.516930+00:00",
+      "exit": 0,
+      "passed_checks": 3,
+      "record": {
+        "local_path": "out/evidence/history-preparation/linux-x64-gcc13-consumers-07106ea13b/result.json",
+        "sha256": "bbd701d4ce7d17d77d6276b9984180f75455db729552795b025307efb4469b3a"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/history-preparation/linux-x64-gcc13-consumers-07106ea13b/source-inputs.zip",
+        "sha256": "005755258774e2c8b2ec8e4947f211126b20264777facf80a522a1c6b8b23551"
+      },
+      "later_source_changes": []
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "controls",
+      "started_at": "2026-10-09T07:52:51.395888+00:00",
+      "exit": 0,
+      "passed_checks": 1,
+      "record": {
+        "local_path": "out/evidence/history-preparation/linux-x64-gcc13-controls-c37217cc52/result.json",
+        "sha256": "58d5f161e85e496388d5e86f850c7af6a324c60f6a0834beae68b3886d52a767"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/history-preparation/linux-x64-gcc13-controls-c37217cc52/source-inputs.zip",
+        "sha256": "005755258774e2c8b2ec8e4947f211126b20264777facf80a522a1c6b8b23551"
+      },
+      "later_source_changes": []
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "editor",
+      "started_at": "2026-10-09T07:54:59.759071+00:00",
+      "exit": 0,
+      "passed_checks": 1,
+      "record": {
+        "local_path": "out/evidence/history-preparation/linux-x64-gcc13-editor-bd34c248d9/result.json",
+        "sha256": "460979e946f52531ccc4da2401343a1cc300de4668572fcb0e76f36928f1f7a7"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/history-preparation/linux-x64-gcc13-editor-bd34c248d9/source-inputs.zip",
+        "sha256": "005755258774e2c8b2ec8e4947f211126b20264777facf80a522a1c6b8b23551"
+      },
+      "later_source_changes": []
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "history",
+      "started_at": "2026-10-09T07:36:03.795228+00:00",
+      "exit": 0,
+      "passed_checks": 5,
+      "record": {
+        "local_path": "out/evidence/history-preparation/linux-x64-gcc13-history-0726ec2cba/result.json",
+        "sha256": "0e9d0bac77bbac9e656ef71dcff348176e82e18b8433d8c6ca14b771c276d8f2"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/history-preparation/linux-x64-gcc13-history-0726ec2cba/source-inputs.zip",
+        "sha256": "e421d6309acb26791c0a5aa907148dc85d48e1f1e77d47defc825554c22b73b1"
+      },
+      "later_source_changes": [
+        "CMakeLists.txt",
+        "source/build/components.json",
+        "source/build/targets/linux-x64-gcc13.json",
+        "source/build/targets/windows-x64-gcc15.json",
+        "source/build/targets/windows-x86-v141-xp.json",
+        "source/interfaces/editor_draft.cpp",
+        "source/interfaces/editor_draft.hpp",
+        "source/interfaces/settings_draft.hpp",
+        "tests/editor/history_preparation_tests.cpp"
+      ]
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "history",
+      "started_at": "2026-10-09T07:44:01.287002+00:00",
+      "exit": 0,
+      "passed_checks": 9,
+      "record": {
+        "local_path": "out/evidence/history-preparation/linux-x64-gcc13-history-2063b323dc/result.json",
+        "sha256": "0fa30cec1568cec70d4713fdb41f009a28fc7086765a52979e143a8fba6a60c1"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/history-preparation/linux-x64-gcc13-history-2063b323dc/source-inputs.zip",
+        "sha256": "005755258774e2c8b2ec8e4947f211126b20264777facf80a522a1c6b8b23551"
+      },
+      "later_source_changes": []
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "history",
+      "started_at": "2026-10-09T07:38:44.896605+00:00",
+      "exit": 0,
+      "passed_checks": 8,
+      "record": {
+        "local_path": "out/evidence/history-preparation/linux-x64-gcc13-history-5be36a510c/result.json",
+        "sha256": "d5917190488a36441f4ae229a00582043bc2671fce98dc5a4f88a3165951becd"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/history-preparation/linux-x64-gcc13-history-5be36a510c/source-inputs.zip",
+        "sha256": "9227510cb9e1e2d80139689aadac2bc10b1c41a77773edd51ac5f3b4977e14dd"
+      },
+      "later_source_changes": [
+        "CMakeLists.txt",
+        "tests/editor/history_preparation_tests.cpp"
+      ]
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "history",
+      "started_at": "2026-10-09T07:34:55.686145+00:00",
+      "exit": 8,
+      "passed_checks": 4,
+      "record": {
+        "local_path": "out/evidence/history-preparation/linux-x64-gcc13-history-9445bd49db/result.json",
+        "sha256": "f0cfe46ad2205e150e485a0bae22d597be1032a5465a63a8c5ca911ac37f1335"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/history-preparation/linux-x64-gcc13-history-9445bd49db/source-inputs.zip",
+        "sha256": "61db18d48be55f4d17704e65292b0fdeefdb541645b4d91c44773c9d286a75e4"
+      },
+      "later_source_changes": [
+        "CMakeLists.txt",
+        "source/build/components.json",
+        "source/build/targets/linux-x64-gcc13.json",
+        "source/build/targets/windows-x64-gcc15.json",
+        "source/build/targets/windows-x86-v141-xp.json",
+        "source/interfaces/editor_draft.cpp",
+        "source/interfaces/editor_draft.hpp",
+        "source/interfaces/settings_draft.hpp",
+        "tests/editor/history_preparation_tests.cpp"
+      ]
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "history-build",
+      "started_at": "2026-10-09T07:38:25.164626+00:00",
+      "exit": 0,
+      "passed_checks": 0,
+      "record": {
+        "local_path": "out/evidence/history-preparation/linux-x64-gcc13-history-build-366eadbeb9/result.json",
+        "sha256": "51dcc274d0f9ef6e074d5aaab426795298b290e8c80ffad07eaf178dbbb0f13b"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/history-preparation/linux-x64-gcc13-history-build-366eadbeb9/source-inputs.zip",
+        "sha256": "9227510cb9e1e2d80139689aadac2bc10b1c41a77773edd51ac5f3b4977e14dd"
+      },
+      "later_source_changes": [
+        "CMakeLists.txt",
+        "tests/editor/history_preparation_tests.cpp"
+      ]
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "history-build",
+      "started_at": "2026-10-09T07:34:40.382138+00:00",
+      "exit": 0,
+      "passed_checks": 0,
+      "record": {
+        "local_path": "out/evidence/history-preparation/linux-x64-gcc13-history-build-4c9e901ec0/result.json",
+        "sha256": "d0f3a81a5ddbdc358cc5cc4f8f8b4a117bb06c15a1c4c5888a20fa60c54ee2e6"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/history-preparation/linux-x64-gcc13-history-build-4c9e901ec0/source-inputs.zip",
+        "sha256": "61db18d48be55f4d17704e65292b0fdeefdb541645b4d91c44773c9d286a75e4"
+      },
+      "later_source_changes": [
+        "CMakeLists.txt",
+        "source/build/components.json",
+        "source/build/targets/linux-x64-gcc13.json",
+        "source/build/targets/windows-x64-gcc15.json",
+        "source/build/targets/windows-x86-v141-xp.json",
+        "source/interfaces/editor_draft.cpp",
+        "source/interfaces/editor_draft.hpp",
+        "source/interfaces/settings_draft.hpp",
+        "tests/editor/history_preparation_tests.cpp"
+      ]
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "history-build",
+      "started_at": "2026-10-09T07:33:42.005000+00:00",
+      "exit": 1,
+      "passed_checks": 0,
+      "record": {
+        "local_path": "out/evidence/history-preparation/linux-x64-gcc13-history-build-d4403fbfbf/result.json",
+        "sha256": "841d55d009702e57a1f72c0586a52b19cf8340af89b28054179bf67bd3ad2fad"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/history-preparation/linux-x64-gcc13-history-build-d4403fbfbf/source-inputs.zip",
+        "sha256": "83e919ce03509811222f94165f37c3f46de3aa405256f7131820af91703bf756"
+      },
+      "later_source_changes": [
+        "CMakeLists.txt",
+        "source/build/components.json",
+        "source/build/targets/linux-x64-gcc13.json",
+        "source/build/targets/windows-x64-gcc15.json",
+        "source/build/targets/windows-x86-v141-xp.json",
+        "source/interfaces/editor_draft.cpp",
+        "source/interfaces/editor_draft.hpp",
+        "source/interfaces/settings_draft.hpp",
+        "tests/editor/history_preparation_tests.cpp"
+      ]
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "history-build",
+      "started_at": "2026-10-09T07:35:49.075304+00:00",
+      "exit": 0,
+      "passed_checks": 0,
+      "record": {
+        "local_path": "out/evidence/history-preparation/linux-x64-gcc13-history-build-e418cae74f/result.json",
+        "sha256": "56a0e0482d1da6701f90ad0e7491ff26d53df936e64f5701c567318f04605885"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/history-preparation/linux-x64-gcc13-history-build-e418cae74f/source-inputs.zip",
+        "sha256": "e421d6309acb26791c0a5aa907148dc85d48e1f1e77d47defc825554c22b73b1"
+      },
+      "later_source_changes": [
+        "CMakeLists.txt",
+        "source/build/components.json",
+        "source/build/targets/linux-x64-gcc13.json",
+        "source/build/targets/windows-x64-gcc15.json",
+        "source/build/targets/windows-x86-v141-xp.json",
+        "source/interfaces/editor_draft.cpp",
+        "source/interfaces/editor_draft.hpp",
+        "source/interfaces/settings_draft.hpp",
+        "tests/editor/history_preparation_tests.cpp"
+      ]
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "initial",
+      "started_at": "2026-10-09T07:52:01.675238+00:00",
+      "exit": 0,
+      "passed_checks": 1,
+      "record": {
+        "local_path": "out/evidence/history-preparation/linux-x64-gcc13-initial-4c5015e574/result.json",
+        "sha256": "e42512f2c1f8e975bf933d3243ea1563fd0e3fb6fbb78459216f66c25723fb24"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/history-preparation/linux-x64-gcc13-initial-4c5015e574/source-inputs.zip",
+        "sha256": "005755258774e2c8b2ec8e4947f211126b20264777facf80a522a1c6b8b23551"
+      },
+      "later_source_changes": []
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "installed",
+      "started_at": "2026-10-09T07:53:36.305841+00:00",
+      "exit": 0,
+      "passed_checks": 1,
+      "record": {
+        "local_path": "out/evidence/history-preparation/linux-x64-gcc13-installed-846e941508/result.json",
+        "sha256": "852d8697d3d0681c2e007518dae8d4ba759b51e9e93d936b106ce26af48be5ee"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/history-preparation/linux-x64-gcc13-installed-846e941508/source-inputs.zip",
+        "sha256": "005755258774e2c8b2ec8e4947f211126b20264777facf80a522a1c6b8b23551"
+      },
+      "later_source_changes": []
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "preparation",
+      "started_at": "2026-10-09T07:52:10.765068+00:00",
+      "exit": 0,
+      "passed_checks": 1,
+      "record": {
+        "local_path": "out/evidence/history-preparation/linux-x64-gcc13-preparation-4ece1e436c/result.json",
+        "sha256": "c10c9e9d8664983e4fc429f7e397dcdfa9197f151696b71cf356d35e06f1b6a7"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/history-preparation/linux-x64-gcc13-preparation-4ece1e436c/source-inputs.zip",
+        "sha256": "005755258774e2c8b2ec8e4947f211126b20264777facf80a522a1c6b8b23551"
+      },
+      "later_source_changes": []
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "prepared",
+      "started_at": "2026-10-09T07:51:21.347408+00:00",
+      "exit": 0,
+      "passed_checks": 2,
+      "record": {
+        "local_path": "out/evidence/history-preparation/linux-x64-gcc13-prepared-4a26294721/result.json",
+        "sha256": "817d27e5eb4e040bea8c76706514407da8afffc8499e710d633069d548471554"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/history-preparation/linux-x64-gcc13-prepared-4a26294721/source-inputs.zip",
+        "sha256": "005755258774e2c8b2ec8e4947f211126b20264777facf80a522a1c6b8b23551"
+      },
+      "later_source_changes": []
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "reply",
+      "started_at": "2026-10-09T07:51:50.204644+00:00",
+      "exit": 0,
+      "passed_checks": 1,
+      "record": {
+        "local_path": "out/evidence/history-preparation/linux-x64-gcc13-reply-fc2b291fdf/result.json",
+        "sha256": "776ab5bf211adb34dc40d700515ee7060e9d0593f480facdbe1d284dff2cb088"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/history-preparation/linux-x64-gcc13-reply-fc2b291fdf/source-inputs.zip",
+        "sha256": "005755258774e2c8b2ec8e4947f211126b20264777facf80a522a1c6b8b23551"
+      },
+      "later_source_changes": []
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "test",
+      "started_at": "2026-10-09T07:49:58.777962+00:00",
+      "exit": 0,
+      "passed_checks": 332,
+      "record": {
+        "local_path": "out/evidence/history-preparation/linux-x64-gcc13-test-645f29e180/result.json",
+        "sha256": "ad3088355858a10699f343de8fb8c207475f9ee8bc3e133a40eaf8f8b1c4875a"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/history-preparation/linux-x64-gcc13-test-645f29e180/source-inputs.zip",
+        "sha256": "005755258774e2c8b2ec8e4947f211126b20264777facf80a522a1c6b8b23551"
+      },
+      "later_source_changes": []
+    },
+    {
+      "profile": "windows-x64-gcc15",
+      "action": "build",
+      "started_at": "2026-10-09T07:44:21.219019+00:00",
+      "exit": 0,
+      "passed_checks": 0,
+      "record": {
+        "local_path": "out/evidence/history-preparation/windows-x64-gcc15-build-6714cf658b/result.json",
+        "sha256": "0f8df5f6bd2263d15adb5662931d172fde08604f54e21f68db92f3afa7c5b323"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/history-preparation/windows-x64-gcc15-build-6714cf658b/source-inputs.zip",
+        "sha256": "4abda74dbfb6fafb91413e44c8d747277b458b55ef595ae014343798c484d491"
+      },
+      "later_source_changes": []
+    },
+    {
+      "profile": "windows-x64-gcc15",
+      "action": "configure",
+      "started_at": "2026-10-09T07:44:14.691524+00:00",
+      "exit": 0,
+      "passed_checks": 0,
+      "record": {
+        "local_path": "out/evidence/history-preparation/windows-x64-gcc15-configure-271bcb08e3/result.json",
+        "sha256": "84f20cb465b1f94cb91faea66b4f610b1855a3d4c1cd03040d8c938399c44516"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/history-preparation/windows-x64-gcc15-configure-271bcb08e3/source-inputs.zip",
+        "sha256": "4abda74dbfb6fafb91413e44c8d747277b458b55ef595ae014343798c484d491"
+      },
+      "later_source_changes": []
+    },
+    {
+      "profile": "windows-x64-gcc15",
+      "action": "test",
+      "started_at": "2026-10-09T07:46:23.041128+00:00",
+      "exit": 0,
+      "passed_checks": 332,
+      "record": {
+        "local_path": "out/evidence/history-preparation/windows-x64-gcc15-test-f0e0b490b0/result.json",
+        "sha256": "c11d0a5bc0d8b802ce0b331dc8a8d80b7470d45d4e3611ac78c638e695c9f04b"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/history-preparation/windows-x64-gcc15-test-f0e0b490b0/source-inputs.zip",
+        "sha256": "4abda74dbfb6fafb91413e44c8d747277b458b55ef595ae014343798c484d491"
+      },
+      "later_source_changes": []
+    },
+    {
+      "profile": "windows-x86-v141-xp",
+      "action": "build",
+      "started_at": "2026-10-09T07:48:01.879710+00:00",
+      "exit": 0,
+      "passed_checks": 0,
+      "record": {
+        "local_path": "out/evidence/history-preparation/windows-x86-v141-xp-build-744b911e71/result.json",
+        "sha256": "9ead9571f6dbbbd3f35193cce704684d9a891567232fcf558e628a60c1af12c0"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/history-preparation/windows-x86-v141-xp-build-744b911e71/source-inputs.zip",
+        "sha256": "4abda74dbfb6fafb91413e44c8d747277b458b55ef595ae014343798c484d491"
+      },
+      "later_source_changes": []
+    },
+    {
+      "profile": "windows-x86-v141-xp",
+      "action": "configure",
+      "started_at": "2026-10-09T07:47:54.839632+00:00",
+      "exit": 0,
+      "passed_checks": 0,
+      "record": {
+        "local_path": "out/evidence/history-preparation/windows-x86-v141-xp-configure-785aa82c3b/result.json",
+        "sha256": "214a3f11b82e86651b7d133a75a549ef96bbc8be8bd1873e311262c80e49b377"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/history-preparation/windows-x86-v141-xp-configure-785aa82c3b/source-inputs.zip",
+        "sha256": "4abda74dbfb6fafb91413e44c8d747277b458b55ef595ae014343798c484d491"
+      },
+      "later_source_changes": []
+    },
+    {
+      "profile": "windows-x86-v141-xp",
+      "action": "legacy",
+      "started_at": "2026-10-09T07:49:49.020591+00:00",
+      "exit": 0,
+      "passed_checks": 2,
+      "record": {
+        "local_path": "out/evidence/history-preparation/windows-x86-v141-xp-legacy-515eacec33/result.json",
+        "sha256": "ba024c62adac13b2a9f4e25b8a7bb0ecc58caa63aa22d0f4a9dba3f434c35c86"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/history-preparation/windows-x86-v141-xp-legacy-515eacec33/source-inputs.zip",
+        "sha256": "4abda74dbfb6fafb91413e44c8d747277b458b55ef595ae014343798c484d491"
+      },
+      "later_source_changes": []
+    },
+    {
+      "profile": "windows-x86-v141-xp",
+      "action": "test",
+      "started_at": "2026-10-09T07:49:21.163539+00:00",
+      "exit": 0,
+      "passed_checks": 332,
+      "record": {
+        "local_path": "out/evidence/history-preparation/windows-x86-v141-xp-test-8d580edf95/result.json",
+        "sha256": "bd1acd0a89e3682d1403653449a025cd306791aef84d92835c4998f2a4e66b3c"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/history-preparation/windows-x86-v141-xp-test-8d580edf95/source-inputs.zip",
+        "sha256": "4abda74dbfb6fafb91413e44c8d747277b458b55ef595ae014343798c484d491"
+      },
+      "later_source_changes": []
+    }
+  ],
+  "portable_checks": {
+    "linux-x64-gcc13": 332,
+    "windows-x64-gcc15": 332,
+    "windows-x86-v141-xp": 332
+  },
+  "legacy_checks": 2,
+  "native_case_families": {
+    "EDITOR-FORM": 20,
+    "INSTALLED-EDITOR": 15,
+    "INSTALLED-RECOVERY": 14,
+    "EDITOR-RECOVERY": 14,
+    "PREPARED-EDITOR": 12,
+    "EDITOR-REPLY-LIFECYCLE": 11,
+    "EDITOR-INITIAL-INPUT": 9,
+    "FRONTEND-PREPARED-EDITOR": 7,
+    "RECOVERY-PREPARATION": 8,
+    "IMAGE-ERASURE": 3
+  },
+  "native": [
+    {
+      "family": "EDITOR-FORM",
+      "cases": [
+        "drag",
+        "keyboard",
+        "resize",
+        "properties",
+        "multi",
+        "structure",
+        "cancel",
+        "conflict",
+        "deny",
+        "revoke",
+        "restart",
+        "topology",
+        "frozen-preview",
+        "wrong-commit",
+        "retain",
+        "recovery-key-frozen",
+        "recovery-button-frozen",
+        "recovery-drag-frozen",
+        "recovery-owner-loss",
+        "recovery-conflict"
+      ],
+      "outcome": "pass",
+      "archive": {
+        "local_path": "out/evidence/history-preparation-native/editor-7fd191a62933.zip",
+        "sha256": "3efbe9ee60dcb6f5420606132218ba15f20decdd6720512a4bc7e0dce45e9245"
+      },
+      "record": {
+        "local_path": "out/evidence/history-preparation-native/editor-7fd191a62933.json",
+        "sha256": "caaf3acb3764a1b21e470c65779e52033140cf7f04c994a3c0d1f66eb0ef74e6"
+      },
+      "inventory": {
+        "local_path": "out/evidence/history-preparation-native/editor-7fd191a62933.index.json",
+        "sha256": "987637c9824ac8a19a33bf9e0d3cc80292ef4f261074b144bdef5a92935db91c"
+      }
+    },
+    {
+      "family": "INSTALLED-EDITOR",
+      "cases": [
+        "OPEN",
+        "PROPERTIES",
+        "SAVE-REOPEN",
+        "SETTINGS-NAV",
+        "PRIVATE-NAV",
+        "REQUEST-NAV",
+        "UNDO-REDO",
+        "CANCEL-DRAFT",
+        "RELOAD",
+        "LOST-RESULT",
+        "POLICY",
+        "REPLACEMENT",
+        "HELPER-FAILURE",
+        "CLOSE-HELD",
+        "ORACLE"
+      ],
+      "outcome": "pass",
+      "archive": {
+        "local_path": "out/evidence/history-preparation-native/editor-frontend-96e6b743d1.zip",
+        "sha256": "8b9c7b9e19306c9256a9241e40247496ed3de4e67e2777ed0ca6c9ec69717dec"
+      },
+      "record": {
+        "local_path": "out/evidence/history-preparation-native/editor-frontend-96e6b743d1.json",
+        "sha256": "e93e68e1a7a1620b1c9cfd2b8a66f216696a61a042c1b34b850ca7536a987d2f"
+      },
+      "inventory": {
+        "local_path": "out/evidence/history-preparation-native/editor-frontend-96e6b743d1.index.json",
+        "sha256": "1c0523bea6f22864454729e8d2d71183845bff235435b71495e2854140e3a993"
+      }
+    },
+    {
+      "family": "INSTALLED-RECOVERY",
+      "cases": [
+        "CAPTURE-APPLY",
+        "CRASH-RESTORE",
+        "KEEP-APPLY",
+        "DISCARD",
+        "CANCEL",
+        "PRIVATE-FIELD",
+        "INVALID-RECORD",
+        "REPLACEMENT-RECORD",
+        "LOST-RESULT",
+        "UNKNOWN-RESULT",
+        "ERASE-DENIED",
+        "POLICY",
+        "CLOSE",
+        "ORACLE"
+      ],
+      "outcome": "pass",
+      "archive": {
+        "local_path": "out/evidence/history-preparation-native/ir-9838cf93d9.zip",
+        "sha256": "def8dd77ee9e26e6b67bf0258b806c7153de9673ebccbeb21ac628bfd25514f0"
+      },
+      "record": {
+        "local_path": "out/evidence/history-preparation-native/ir-9838cf93d9.json",
+        "sha256": "725f5adab1168e7c7e4dcf31db92db756a0f07c461609011618931fe0b45066c"
+      },
+      "inventory": {
+        "local_path": "out/evidence/history-preparation-native/ir-9838cf93d9.index.json",
+        "sha256": "7f8be13cd9d535722d55b4d162d16403a46398c29f5f9827b1dc2d69afa6b03d"
+      }
+    },
+    {
+      "family": "EDITOR-RECOVERY",
+      "cases": [
+        "restore-apply",
+        "keep-apply",
+        "discard",
+        "undo-clean",
+        "cancel",
+        "private-fields",
+        "invalid",
+        "stale",
+        "policy",
+        "unknown",
+        "replacement",
+        "worker-failure",
+        "held-close",
+        "scope-change"
+      ],
+      "outcome": "pass",
+      "archive": {
+        "local_path": "out/evidence/history-preparation-native/recovery-controls-ceb2df326f05.zip",
+        "sha256": "d6ca7312b843cf8a715eac62841d3a2832c007f2402b9b2c3d401ab3fa6a281a"
+      },
+      "record": {
+        "local_path": "out/evidence/history-preparation-native/recovery-controls-ceb2df326f05.json",
+        "sha256": "b056612f509b363d7ede523bc27f0ca1cd686c642f09410418ae83269ccd2b54"
+      },
+      "inventory": {
+        "local_path": "out/evidence/history-preparation-native/recovery-controls-ceb2df326f05.index.json",
+        "sha256": "1ad64111a37a67cfefa4ad4f95f8e260998a9f3ad59ab43252b15ef0aec8ff4b"
+      }
+    },
+    {
+      "family": "PREPARED-EDITOR",
+      "cases": [
+        "direct",
+        "reconciled",
+        "default",
+        "cancelled",
+        "unknown",
+        "ticket",
+        "epoch",
+        "revision",
+        "facts",
+        "query",
+        "withdrawn",
+        "null"
+      ],
+      "outcome": "pass",
+      "archive": {
+        "local_path": "out/evidence/history-preparation-native/reply-1469c02d6220.zip",
+        "sha256": "aad46e413d0847c21c3321ee66dd9eba80b823cf8ad9f5e04599863bae4a8da4"
+      },
+      "record": {
+        "local_path": "out/evidence/history-preparation-native/reply-1469c02d6220.json",
+        "sha256": "0e6db3fce877c306b104e8d4a7b2586a1973df5d785f1124d12c08181eb5494d"
+      },
+      "inventory": {
+        "local_path": "out/evidence/history-preparation-native/reply-1469c02d6220.index.json",
+        "sha256": "eabd9589115ee31b6007cb13370fbcd0043965f853b59a44f13810b1ad34fe32"
+      }
+    },
+    {
+      "family": "EDITOR-REPLY-LIFECYCLE",
+      "cases": [
+        "direct",
+        "reconciled",
+        "default",
+        "cancelled",
+        "unknown",
+        "ticket",
+        "epoch",
+        "revision",
+        "facts",
+        "query",
+        "withdrawn"
+      ],
+      "outcome": "pass",
+      "archive": {
+        "local_path": "out/evidence/history-preparation-native/reply-37fa8a9a27af.zip",
+        "sha256": "8148b3e3b8ff82a177dd71e11ac3341820d301b01f82eae1320e0937c4582b95"
+      },
+      "record": {
+        "local_path": "out/evidence/history-preparation-native/reply-37fa8a9a27af.json",
+        "sha256": "b9e5247681d3f232de047ebb2da518a4850cb8bcb6bc84c05e0117291f00643e"
+      },
+      "inventory": {
+        "local_path": "out/evidence/history-preparation-native/reply-37fa8a9a27af.index.json",
+        "sha256": "0fca2e8dd3110b3215c1211c9a35676d0797be8310d5ebb2b7d19429f4cf28d1"
+      }
+    },
+    {
+      "family": "EDITOR-INITIAL-INPUT",
+      "cases": [
+        "tree",
+        "pointer",
+        "topology-tree",
+        "topology-pointer",
+        "reload",
+        "withdrawal",
+        "empty-click",
+        "no-selection-key",
+        "fallback"
+      ],
+      "outcome": "pass",
+      "archive": {
+        "local_path": "out/evidence/history-preparation-native/reply-7dffbddf7218.zip",
+        "sha256": "921bc4dbe7772241e9a72c84c952d4491e7c652e7658eab6968490954c73f13d"
+      },
+      "record": {
+        "local_path": "out/evidence/history-preparation-native/reply-7dffbddf7218.json",
+        "sha256": "849fa5845d635eda4b26d859af3b468350a8deaff713f42a6fbb78b01b4d1ed3"
+      },
+      "inventory": {
+        "local_path": "out/evidence/history-preparation-native/reply-7dffbddf7218.index.json",
+        "sha256": "6baedd98bb176affee4274d2818ac1d16f2a50ad85eaa9155bc85a5554836ed3"
+      }
+    },
+    {
+      "family": "FRONTEND-PREPARED-EDITOR",
+      "cases": [
+        "SINGLE",
+        "RELOAD",
+        "REPEATED-RELOAD",
+        "PENDING",
+        "POLICY",
+        "RESTART",
+        "CLOSE"
+      ],
+      "outcome": "pass",
+      "archive": {
+        "local_path": "out/evidence/history-preparation-native/rl-08eca7d8f2.zip",
+        "sha256": "e9666fbb6cfb6b5bd3bb2f12788b1d28521d8dafec68c89f937ded15b9e04a7e"
+      },
+      "record": {
+        "local_path": "out/evidence/history-preparation-native/rl-08eca7d8f2.json",
+        "sha256": "b2c96ae39ddcbf6fad120c814b573ba76b9e5224684fb2518eee7f369ccc068b"
+      },
+      "inventory": {
+        "local_path": "out/evidence/history-preparation-native/rl-08eca7d8f2.index.json",
+        "sha256": "68f266ac19da022d7962ed4b5d80088d6558ed11cb003689bdd37242e95779a1"
+      }
+    },
+    {
+      "family": "RECOVERY-PREPARATION",
+      "cases": [
+        "HELD-PREPARATION",
+        "PREPARED-OFFER",
+        "PREPARED-CAPTURE",
+        "PREPARATION-CANCEL",
+        "PREPARATION-ERASURE",
+        "COALESCED-CAPTURE",
+        "INVALID-OFFER",
+        "ORACLE"
+      ],
+      "outcome": "pass",
+      "archive": {
+        "local_path": "out/evidence/history-preparation-native/rp-883a833df0.zip",
+        "sha256": "26dafbdd2d97eb6b55b1902639315b17045d33d5654ddd656957289d5f2db201"
+      },
+      "record": {
+        "local_path": "out/evidence/history-preparation-native/rp-883a833df0.json",
+        "sha256": "157ff53773e2df82155c6733fcb455c468f938a054b8da573830cf1fa4a703df"
+      },
+      "inventory": {
+        "local_path": "out/evidence/history-preparation-native/rp-883a833df0.index.json",
+        "sha256": "c91e9ec892df0ec71562e96a614f6b89c49c11ab2e7c6298310ca09529aecbb3"
+      }
+    },
+    {
+      "family": "IMAGE-ERASURE",
+      "cases": [
+        "normal",
+        "ignore-pixels",
+        "ignore-accessible"
+      ],
+      "outcome": "pass",
+      "archive": {
+        "local_path": "out/evidence/history-preparation-native/surface-219e89db389c.zip",
+        "sha256": "993e870e93cc18e465a400946393df0aaf1a87bd3c38fa1c1460161925725f30"
+      },
+      "record": {
+        "local_path": "out/evidence/history-preparation-native/surface-219e89db389c.json",
+        "sha256": "309e9d6f3ad6a5a9d54d35c73a2a5c8c37ab782cf814ddb23fea43fe0ed96d60"
+      },
+      "inventory": {
+        "local_path": "out/evidence/history-preparation-native/surface-219e89db389c.index.json",
+        "sha256": "b6232cc3e7ef4463027bd5e4aa6342c9f9169123a7fab563d1cee584c74ea249"
+      }
+    }
+  ],
+  "preserved_failures": [
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "history",
+      "started_at": "2026-10-09T07:34:55.686145+00:00",
+      "exit": 8,
+      "passed_checks": 4,
+      "record": {
+        "local_path": "out/evidence/history-preparation/linux-x64-gcc13-history-9445bd49db/result.json",
+        "sha256": "f0cfe46ad2205e150e485a0bae22d597be1032a5465a63a8c5ca911ac37f1335"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/history-preparation/linux-x64-gcc13-history-9445bd49db/source-inputs.zip",
+        "sha256": "61db18d48be55f4d17704e65292b0fdeefdb541645b4d91c44773c9d286a75e4"
+      },
+      "later_source_changes": [
+        "CMakeLists.txt",
+        "source/build/components.json",
+        "source/build/targets/linux-x64-gcc13.json",
+        "source/build/targets/windows-x64-gcc15.json",
+        "source/build/targets/windows-x86-v141-xp.json",
+        "source/interfaces/editor_draft.cpp",
+        "source/interfaces/editor_draft.hpp",
+        "source/interfaces/settings_draft.hpp",
+        "tests/editor/history_preparation_tests.cpp"
+      ]
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "history-build",
+      "started_at": "2026-10-09T07:33:42.005000+00:00",
+      "exit": 1,
+      "passed_checks": 0,
+      "record": {
+        "local_path": "out/evidence/history-preparation/linux-x64-gcc13-history-build-d4403fbfbf/result.json",
+        "sha256": "841d55d009702e57a1f72c0586a52b19cf8340af89b28054179bf67bd3ad2fad"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/history-preparation/linux-x64-gcc13-history-build-d4403fbfbf/source-inputs.zip",
+        "sha256": "83e919ce03509811222f94165f37c3f46de3aa405256f7131820af91703bf756"
+      },
+      "later_source_changes": [
+        "CMakeLists.txt",
+        "source/build/components.json",
+        "source/build/targets/linux-x64-gcc13.json",
+        "source/build/targets/windows-x64-gcc15.json",
+        "source/build/targets/windows-x86-v141-xp.json",
+        "source/interfaces/editor_draft.cpp",
+        "source/interfaces/editor_draft.hpp",
+        "source/interfaces/settings_draft.hpp",
+        "tests/editor/history_preparation_tests.cpp"
+      ]
+    }
+  ],
+  "prior_gui_qualification": {
+    "local_path": "spec/delivery/checkpoints/initial-preview.json",
+    "sha256": "e2bc22ab3ba799ea0c8b967a450ba602096f27ed90c87492ac566ca791980451"
+  },
+  "workspace": {
+    "cleanup": {
+      "local_path": "out/evidence/history-preparation-object-cache-cleanup.json",
+      "sha256": "e906b80d852a2b99e62a68a68a71cd554c8ea27868d69c80a119603b14813e98"
+    },
+    "freed_compiler_cache_bytes": 178947572,
+    "maximum_bytes": 8589934592,
+    "reservations_unchanged": true,
+    "archived_native_bytes": 742926044
+  },
+  "limitations": [
+    "The initial baseline test build failed on warning-as-error formatting; its replacement then exposed an invalid oversized single-widget fixture. Both failures preceded product changes and are retained.",
+    "Five synchronous trace families passed before product changes. Prepared-only supplemental guards do not change the synchronous test source with prepared branches excluded or its expected values.",
+    "The installed GUI still uses synchronous history. No new responsiveness result or production recovery enablement is claimed.",
+    "W-11 and all five complete editions remain open."
+  ],
+  "next_step": "Close bounded history-task ownership and cancellation on the existing editor worker, integrate current-form adoption and native preview refresh, then rerun the unchanged ordinary GUI timing/erasure gates.",
+  "native_execution_bindings": [
+    {
+      "family": "EDITOR-FORM",
+      "execution_record": {
+        "local_path": "out/evidence/history-preparation/linux-x64-gcc13-consumers-07106ea13b/result.json",
+        "sha256": "bbd701d4ce7d17d77d6276b9984180f75455db729552795b025307efb4469b3a"
+      },
+      "artifact_identities_matched": {
+        "executable_sha256": "230f3edaeec4afacfeb233b7dce9910bc057feec12f8c3b61d888e31afbdba97",
+        "exit_executable_sha256": "a8516c35e53e85d9d666755ffc15ebeb8ba2679465b132ce9c99bea553bbec7f"
+      }
+    },
+    {
+      "family": "INSTALLED-EDITOR",
+      "execution_record": {
+        "local_path": "out/evidence/history-preparation/linux-x64-gcc13-editor-bd34c248d9/result.json",
+        "sha256": "460979e946f52531ccc4da2401343a1cc300de4668572fcb0e76f36928f1f7a7"
+      },
+      "artifact_identities_matched": {
+        "SysPane.ImageWorker": "65b38c368c9472405163a244c7f1b0ddf2c8702bb5e7945e147cb4a5935e777c",
+        "SysPane.RecoveryWorker": "6256fa4cd28d6263ea9e1f182da9e2a75b5a187bda6f9ed0efa1d51f10b99537",
+        "syspane": "3b2bbe50f3793dfb07673d6aaeca880a6012e35480eae6a87ca909f048b9fe55",
+        "syspane_frontend_fixture": "9ddae221e244c9ec87edab1e9e57a09162721724c688818cce93d43913d38866",
+        "syspane_frontend_helper_fixture": "6e9df5690ba2b0bec818fc33c9d36ec07c14d0951b6f997a8a9e2b9b07c3cb32",
+        "bin/syspane": "9ddae221e244c9ec87edab1e9e57a09162721724c688818cce93d43913d38866",
+        "libexec/syspane/syspane-configuration-host": "6e9df5690ba2b0bec818fc33c9d36ec07c14d0951b6f997a8a9e2b9b07c3cb32",
+        "libexec/syspane/syspane-image-worker": "65b38c368c9472405163a244c7f1b0ddf2c8702bb5e7945e147cb4a5935e777c",
+        "libexec/syspane/syspane-recovery-worker": "6256fa4cd28d6263ea9e1f182da9e2a75b5a187bda6f9ed0efa1d51f10b99537",
+        "share/syspane/helpers.json": "cacd709b73aec39d2540fcd437d14324440cc2b6d6cc7e5918ba182a712bbb73"
+      }
+    },
+    {
+      "family": "INSTALLED-RECOVERY",
+      "execution_record": {
+        "local_path": "out/evidence/history-preparation/linux-x64-gcc13-installed-846e941508/result.json",
+        "sha256": "852d8697d3d0681c2e007518dae8d4ba759b51e9e93d936b106ce26af48be5ee"
+      },
+      "artifact_identities_matched": {
+        "SysPane.ImageWorker": "65b38c368c9472405163a244c7f1b0ddf2c8702bb5e7945e147cb4a5935e777c",
+        "SysPane.RecoveryWorker": "6256fa4cd28d6263ea9e1f182da9e2a75b5a187bda6f9ed0efa1d51f10b99537",
+        "syspane": "3b2bbe50f3793dfb07673d6aaeca880a6012e35480eae6a87ca909f048b9fe55",
+        "syspane_frontend_fixture": "9ddae221e244c9ec87edab1e9e57a09162721724c688818cce93d43913d38866",
+        "syspane_frontend_helper_fixture": "6e9df5690ba2b0bec818fc33c9d36ec07c14d0951b6f997a8a9e2b9b07c3cb32",
+        "bin/syspane": "9ddae221e244c9ec87edab1e9e57a09162721724c688818cce93d43913d38866",
+        "libexec/syspane/syspane-configuration-host": "6e9df5690ba2b0bec818fc33c9d36ec07c14d0951b6f997a8a9e2b9b07c3cb32",
+        "libexec/syspane/syspane-image-worker": "65b38c368c9472405163a244c7f1b0ddf2c8702bb5e7945e147cb4a5935e777c",
+        "libexec/syspane/syspane-recovery-worker": "6256fa4cd28d6263ea9e1f182da9e2a75b5a187bda6f9ed0efa1d51f10b99537",
+        "share/syspane/helpers.json": "cacd709b73aec39d2540fcd437d14324440cc2b6d6cc7e5918ba182a712bbb73"
+      }
+    },
+    {
+      "family": "EDITOR-RECOVERY",
+      "execution_record": {
+        "local_path": "out/evidence/history-preparation/linux-x64-gcc13-controls-c37217cc52/result.json",
+        "sha256": "58d5f161e85e496388d5e86f850c7af6a324c60f6a0834beae68b3886d52a767"
+      },
+      "artifact_identities_matched": {
+        "executable_sha256": "230f3edaeec4afacfeb233b7dce9910bc057feec12f8c3b61d888e31afbdba97",
+        "worker_sha256": "6256fa4cd28d6263ea9e1f182da9e2a75b5a187bda6f9ed0efa1d51f10b99537"
+      }
+    },
+    {
+      "family": "PREPARED-EDITOR",
+      "execution_record": {
+        "local_path": "out/evidence/history-preparation/linux-x64-gcc13-prepared-4a26294721/result.json",
+        "sha256": "817d27e5eb4e040bea8c76706514407da8afffc8499e710d633069d548471554"
+      },
+      "artifact_identities_matched": {
+        "executable_sha256": "230f3edaeec4afacfeb233b7dce9910bc057feec12f8c3b61d888e31afbdba97"
+      }
+    },
+    {
+      "family": "EDITOR-REPLY-LIFECYCLE",
+      "execution_record": {
+        "local_path": "out/evidence/history-preparation/linux-x64-gcc13-reply-fc2b291fdf/result.json",
+        "sha256": "776ab5bf211adb34dc40d700515ee7060e9d0593f480facdbe1d284dff2cb088"
+      },
+      "artifact_identities_matched": {
+        "executable_sha256": "230f3edaeec4afacfeb233b7dce9910bc057feec12f8c3b61d888e31afbdba97"
+      }
+    },
+    {
+      "family": "EDITOR-INITIAL-INPUT",
+      "execution_record": {
+        "local_path": "out/evidence/history-preparation/linux-x64-gcc13-initial-4c5015e574/result.json",
+        "sha256": "e42512f2c1f8e975bf933d3243ea1563fd0e3fb6fbb78459216f66c25723fb24"
+      },
+      "artifact_identities_matched": {
+        "executable_sha256": "230f3edaeec4afacfeb233b7dce9910bc057feec12f8c3b61d888e31afbdba97"
+      }
+    },
+    {
+      "family": "FRONTEND-PREPARED-EDITOR",
+      "execution_record": {
+        "local_path": "out/evidence/history-preparation/linux-x64-gcc13-prepared-4a26294721/result.json",
+        "sha256": "817d27e5eb4e040bea8c76706514407da8afffc8499e710d633069d548471554"
+      },
+      "artifact_identities_matched": {
+        "bin/syspane": "d4d2bde603530658cef323a7bfa65418dfdd930350a0459d5c5a1c486b3169e5",
+        "libexec/syspane/syspane-configuration-host": "6e9df5690ba2b0bec818fc33c9d36ec07c14d0951b6f997a8a9e2b9b07c3cb32",
+        "libexec/syspane/syspane-image-worker": "65b38c368c9472405163a244c7f1b0ddf2c8702bb5e7945e147cb4a5935e777c",
+        "libexec/syspane/syspane-recovery-worker": "6256fa4cd28d6263ea9e1f182da9e2a75b5a187bda6f9ed0efa1d51f10b99537",
+        "share/syspane/helpers.json": "cacd709b73aec39d2540fcd437d14324440cc2b6d6cc7e5918ba182a712bbb73"
+      }
+    },
+    {
+      "family": "RECOVERY-PREPARATION",
+      "execution_record": {
+        "local_path": "out/evidence/history-preparation/linux-x64-gcc13-preparation-4ece1e436c/result.json",
+        "sha256": "c10c9e9d8664983e4fc429f7e397dcdfa9197f151696b71cf356d35e06f1b6a7"
+      },
+      "artifact_identities_matched": {
+        "SysPane.ImageWorker": "65b38c368c9472405163a244c7f1b0ddf2c8702bb5e7945e147cb4a5935e777c",
+        "SysPane.RecoveryWorker": "6256fa4cd28d6263ea9e1f182da9e2a75b5a187bda6f9ed0efa1d51f10b99537",
+        "helpers.json": "8c4c4be109d38e4d318d439e3210d27a2ad844770fb2bd5b0e7fa54af6474902",
+        "syspane-configuration-host": "4f0ef658d9d2c1497d9f3d2bf65cccc54bd6d7994eb6bb24c3f1b26ccc8b52c5",
+        "syspane_editor_helper_worker_probe": "66554a9989e0f6c515c1e1752bc378a0d888f28d666cb35a890d6f14fc2db1db"
+      }
+    },
+    {
+      "family": "IMAGE-ERASURE",
+      "execution_record": {
+        "local_path": "out/evidence/history-preparation/linux-x64-gcc13-consumers-07106ea13b/result.json",
+        "sha256": "bbd701d4ce7d17d77d6276b9984180f75455db729552795b025307efb4469b3a"
+      },
+      "artifact_identities_matched": {
+        "executable_sha256": "17cff6dbf1fbe35f92d4cf4060be7b2134a79e33cbb77451c63231ec6cb60e6b"
+      }
+    }
+  ],
+  "spec_checks": {
+    "record": {
+      "local_path": "out/evidence/history-preparation-spec-validation-011832f3bd52.json",
+      "sha256": "011832f3bd52758731bcf7ef82531d0c01b553f0f16711f450ffc406c45b6477"
+    },
+    "counts": {
+      "files": 673,
+      "concepts": 349,
+      "requirements": 131,
+      "planned_tests": 61,
+      "work_units": 49
+    },
+    "schemas": 51,
+    "fixtures": 183
+  }
+}

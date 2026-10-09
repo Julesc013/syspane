@@ -560,7 +560,8 @@
         "SP-W11-FRONTEND-PHASES",
         "SP-W11-PREPARED-EDITOR",
         "SP-W11-EDITOR-PAINT-TRACE",
-        "SP-W11-INITIAL-PREVIEW"
+        "SP-W11-INITIAL-PREVIEW",
+        "SP-W11-HISTORY-PREPARATION"
       ],
       "acceptance_tests": [
         "T-SETTINGS",
@@ -620,14 +621,16 @@
         "tests/configuration/editor_paint_trace.c",
         "tests/configuration/native_editor_paint_trace.py",
         "tests/configuration/editor_paint_trace_tests.py",
-        "tests/editor/initial_input.hpp"
+        "tests/editor/initial_input.hpp",
+        "source/interfaces/editor_history.cpp",
+        "tests/editor/history_preparation_tests.cpp"
       ],
       "status": "in_progress",
       "authority_class": "development",
       "execution_grant": "user:foundation-native-campaign-2026-10-05",
-      "notes": "The installed Linux frontend composes verified helpers, authenticated profiles, native settings/editor controls and experimental recovery. Initial semantic preparation runs on the existing worker. The native form now defers first full preview composition to drawing or guarded earlier input; all nine frozen pre-change input expectations pass unchanged. Independent native tracing confirms zero constructor-geometry paints. The current Linux run passes 323 selected portable checks and 220 named native cases plus SCENE-IMAGE; both Windows component pairs pass. Maximum observed tick work is below 100 ms, but four fixed GUI cases still fail excess delay. Close current-owner asynchronous history/edit preparation, including structural submit eligibility and native preview handoff, before further scheduling changes. Preserve full validation, the original timing/erasure gates and earlier failures; production recovery stays disabled. Native inspector, telemetry/desktop integration, lifecycle, imports/layers, accessibility/performance, other native adapters and all five complete 0.1.0 editions remain required.",
-      "package": "delivery/packages/w-11-initial-preview.md",
-      "evidence": "delivery/initial-preview-handoff.md"
+      "notes": "Detached one-shot history validation and exact current-owner adoption now preserve scene/resource checks, selection, request continuity, history bounds and current authorization. Structural submit hints are prepared separately from permission. All 996 selected portable checks, two legacy PE checks and 113 named native regression cases plus SCENE-IMAGE pass. The installed frontend still uses synchronous history. Next close bounded history-task ownership, recovery coexistence, cancellation and shutdown on the existing worker; integrate current-form adoption and native preview rebuilding, then rerun the unchanged ordinary GUI limits. Four earlier GUI delay failures remain prior evidence and production recovery stays disabled. General asynchronous authoring, native inspector, telemetry/desktop integration, lifecycle, imports/layers, accessibility/performance, other adapters and all five complete editions remain required.",
+      "package": "delivery/packages/w-11-history-preparation.md",
+      "evidence": "delivery/history-preparation-handoff.md"
     },
     {
       "id": "W-12",

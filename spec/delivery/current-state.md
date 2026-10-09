@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-09T07:25:48.890502+00:00", "scope": "Initial preview readiness and remaining delay qualification"}
+updated: {"by": "codex", "at": "2026-10-09T07:57:06.259246+00:00", "scope": "Portable prepared history and next native worker boundary"}
 ---
 
 # Current state and next admitted boundary
@@ -22,13 +22,13 @@ recordings are local ignored `out/` content; the retired root is absent from the
 tracked tree. See `docs/developers/build.md` in the repository for checkout
 setup and the [repository contract](../foundation/repository.md) for ownership.
 
-The [initial preview repair](initial-preview-handoff.md) defers first full composition
-to GTK drawing or guarded earlier input. Nine frozen native cases pass before and
-after the change. Constructor-geometry paint calls fall to zero; maximum observed
-tick work is below 100 ms, while four ordinary GUI cases still fail excess delay.
-Next close current-owner asynchronous history/edit preparation, including structural
-submit eligibility and native preview handoff. Production recovery stays disabled;
-W-11 and all five complete editions remain open. Preserve the original failures.
+The [prepared history checkpoint](history-preparation-handoff.md) implements detached
+undo/redo validation and exact current-draft adoption, including structural submit
+hints. All three development toolchains and the listed native regressions pass.
+The installed GUI still uses synchronous history. Next close bounded worker-task
+ownership and cancellation, then current-form adoption and native preview refresh.
+The initial-preview checkpoint's four GUI delay failures remain prior evidence;
+production recovery stays disabled and W-11/all five complete editions remain open.
 
 The [frontend recovery backend](frontend-recovery-handoff.md) now uses authenticated
 profile 0.2, current native admission and exact accepted-request retirement metadata.
