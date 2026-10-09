@@ -97,6 +97,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Native history preparation ownership](w-11-history-worker.md) — Bound history work on the existing helper worker and preserve current-draft adoption.
 - [Initial editor preview readiness](w-11-initial-preview.md) — Defer the first composition while preserving geometry-dependent input before GTK draws.
 - [Installed native scene editor](w-11-installed-editor.md) — Connect native scene authoring to the actual frontend, verified helpers and authenticated commands.
+- [Installed scene inspector ownership](w-11-installed-inspector.md) — Compose saved scenes, native navigation and verified image tasks in the ordinary frontend.
 - [Installed editor recovery consumption](w-11-installed-recovery.md) — Connect native recovery decisions, captured request identity and fresh accepted-draft retirement to the installed editor.
 - [Installed native settings frontend](w-11-installed-settings.md) — Compose the real application entry point, independently supervised controller and authenticated settings client.
 - [Native settings drafts and transaction results](w-11-native-settings.md) — Connect every initial settings descriptor to native controls and the common authored transaction boundary.

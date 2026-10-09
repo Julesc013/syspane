@@ -11,11 +11,17 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
+The [installed scene inspector](spec/delivery/installed-inspector-handoff.md)
+adds native inspection of saved scenes alongside Settings and Edit scene in the
+Linux frontend. It preserves unsaved-edit navigation guards and uses the verified
+image worker. Authenticated live telemetry, complete desktop integration and
+release qualification remain unfinished.
+
 The [ordinary recovery checkpoint](spec/delivery/ordinary-recovery-handoff.md)
 enables recovery and prepared history in the Linux application entry. Current
 authenticated policy and verified helpers still control access; diagnostic controls
 remain confined to the test fixture. Original installed and maximum-input GUI
-checks pass, with earlier failures preserved. Native inspector/telemetry/desktop
+checks pass, with earlier failures preserved. Live inspector telemetry and desktop
 composition, protected deployment and all five complete editions remain unfinished.
 
 The [native Apply integration](spec/delivery/request-form-handoff.md) prepares
@@ -43,7 +49,7 @@ The [installed scene editor](spec/delivery/installed-editor-handoff.md) now uses
 worker in the actual frontend, with native Settings/Edit scene navigation and
 authenticated save/reopen. The development payload includes all three verified helpers.
 Draft recovery is admitted in the ordinary Linux entry. Whole-UI responsiveness,
-native inspector, telemetry, desktop hosting and protected deployment remain open.
+live inspector telemetry, desktop hosting and protected deployment remain open.
 
 The [native recovery snapshot](spec/delivery/recovery-context-handoff.md) now pairs
 saved state with its verified generation, directory identity and current retention

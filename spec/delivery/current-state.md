@@ -12,10 +12,21 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-09T13:02:11.656470+00:00", "scope": "Ordinary recovery/history admission and installed inspector next boundary"}
+updated: {"by": "codex", "at": "2026-10-09T13:33:39.137220+00:00", "scope": "Installed saved-scene inspector; authenticated telemetry next"}
 ---
 
 # Current state and next admitted boundary
+
+The [installed inspector checkpoint](installed-inspector-handoff.md) now connects
+saved scenes to native inspection in the common Linux frontend, alongside Settings
+and Edit scene. Exact rows, summary, guarded navigation, save/reopen, policy loss,
+controller replacement and image-factory ownership have executable evidence.
+The final checks pass 100 native cases across eight report families, plus native
+inspector-model/image-job binaries, and 83 scene/component checks on each of three
+development profiles. All seven original GUI timing/erasure cases pass.
+The default network binding is explicitly unsupported: authenticated telemetry
+is the next required integration, followed by installed image/topology/performance
+qualification and desktop/lifecycle composition. All five complete editions remain open.
 
 Shared build tooling now lives in `source/build/`. Machine bindings and raw
 recordings are local ignored `out/` content; the retired root is absent from the
@@ -31,9 +42,9 @@ ordinary-entry recovery/settings, original
 installed consumers and the seven GUI timing/erasure cases. Three development
 builds each pass 56 selected portable checks; historical import checks also pass.
 
-Next compose the existing native scene inspector into the installed frontend with
-inspector audience authority and authenticated telemetry, then desktop/lifecycle
-integration. Protected deployment and all five full release editions remain open.
+Saved-scene inspector composition now has the checkpoint above. Continue with
+authenticated inspector telemetry, then desktop/lifecycle integration. Protected
+deployment and all five full release editions remain open.
 The checkpoint preserves the original disabled-entry and GUI failures.
 
 The [native Apply integration](request-form-handoff.md) now captures the final
@@ -916,15 +927,14 @@ release-identity decisions remain open.
 
 ## Next work
 
-Continue from the [native recovery admission](recovery-admission-handoff.md) and
-[installed editor handoff](installed-editor-handoff.md). Compose the received context
-with the installed owner's live authenticated peer, epoch, profile and editor session.
-Use the existing native admission factory and independent directory witness; keep
-revocation/publication guards and original-request reconciliation. Preserve exact
-applied-draft retirement across a new saved revision, and move expensive recovery
-validation off GTK before enabling and qualifying the installed flow. Connect the
-native inspector, real telemetry, presentation activation/visibility and independent
-desktop escape/recovery to the same product owners. Complete import catalogs,
+Continue from the [installed inspector handoff](installed-inspector-handoff.md).
+Compose authenticated inspector telemetry using the existing native producer,
+session and demand owners. Preserve channel-specific disclosure, exact measurement
+clocks, full-state synchronization, leases, queue bounds and current-policy erasure.
+Qualify installed image/topology cases and maximum-input inspector responsiveness.
+Connect presentation activation/visibility and independent desktop escape/recovery
+to the same product owners. Ordinary recovery/history admission remains implemented
+with its recorded native evidence. Complete import catalogs,
 persistence layers, accessibility/performance, lifecycle and historical/native target
 qualification. All five full release editions remain required. Earlier failures remain
 preserved.

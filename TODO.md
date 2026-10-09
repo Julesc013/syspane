@@ -13,8 +13,12 @@ editions and their release gates; foundation experiments alone cannot complete t
 The [ordinary recovery checkpoint](spec/delivery/ordinary-recovery-handoff.md)
 admits recovery and prepared history in the common Linux entry. All 200 native
 cases pass with unchanged oracles, including ordinary-entry isolation and the seven
-GUI timing/erasure cases. Compose the installed native inspector and authenticated
-telemetry next; preserve prior failures and all five full release editions.
+GUI timing/erasure cases. The installed saved-scene inspector now has a separate
+[checkpoint](spec/delivery/installed-inspector-handoff.md). Connect authenticated
+inspector telemetry next; preserve prior failures and all five full release editions.
+
+- [x] Compose installed saved-scene inspection, guarded navigation, current-policy erasure and verified image-task ownership.
+- [ ] Connect authenticated inspector telemetry; qualify installed image/topology cases, maximum-input inspector responsiveness and human accessibility.
 
 ## Completed specification work
 

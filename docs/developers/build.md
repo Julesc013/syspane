@@ -1,5 +1,21 @@
 # Developer setup and checks
 
+The [installed inspector package](../../spec/delivery/packages/w-11-installed-inspector.md)
+connects saved-profile inspection to the common frontend. After ordinary workspace
+preflight/configure/build, run `ctest --preset linux-x64-gcc13 -R
+'^native[.](INSTALLED-INSPECTOR|SCENE-INSPECTOR)' --output-on-failure`. The installed
+case uses a relocated ordinary-entry fixture and independent AT-SPI/XTest and
+saved-document observations. The component image case additionally checks held
+factory tasks, loading/ready information and cancellation before reap.
+
+Run original INSTALLED-EDITOR, INSTALLED-RECOVERY, INSTALLED-SETTINGS,
+RECOVERY-GUI-LIMITS, EDITOR-REQUEST-EXIT and IMAGE-JOB/RECOVERY-QUEUE families.
+Archive each completed native family before the next workspace preflight. On all
+three development profiles run `ctest --preset <profile> -R
+'^(scene[.]|composition[.])' --output-on-failure`, retaining v141_xp artifact checks.
+The [handoff](../../spec/delivery/installed-inspector-handoff.md) preserves failures
+and the remaining authenticated telemetry and qualification boundaries.
+
 Shared build scripts, target profiles and dependency locks live in
 [source/build](../../source/build/README.md). Generated artifacts and raw evidence
 are local, ignored `out/` content. A fresh checkout does not include historical

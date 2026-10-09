@@ -7,7 +7,7 @@ class SceneInspector {
 public:
     using Translator=std::function<std::string(const std::string&)>;
     SceneInspector(configuration::Authority,configuration::Policy,rendering::SurfaceConfig,
-                   std::vector<rendering::SurfaceProvider>,std::string image_worker={},Translator translate={});
+                   std::vector<rendering::SurfaceProvider>,std::string image_worker={},Translator translate={},rendering::ImageFactory images={});
     ~SceneInspector();
     SceneInspector(const SceneInspector&)=delete;SceneInspector& operator=(const SceneInspector&)=delete;
     GtkWidget* widget()const;

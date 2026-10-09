@@ -1,6 +1,7 @@
 #include "frontend_linux.hpp"
 #include "settings_form.hpp"
 #include "editor_form.hpp"
+#include "scene_inspector.hpp"
 #include "editor_recovery_session.hpp"
 #include <gtk/gtk.h>
 #include <algorithm>
@@ -12,14 +13,28 @@ namespace {
 void need(bool ok,const char* code){if(!ok)throw protocol::Error(code);}
 void accessible(GtkWidget* widget,const char* description){atk_object_set_description(gtk_widget_get_accessible(widget),description);}
 struct Window {
-    LinuxFrontendBackend& backend;GtkWidget *window=nullptr,*box=nullptr,*forms=nullptr,*status=nullptr,*retry=nullptr,*quit=nullptr,*settings_button=nullptr,*editor_button=nullptr,*recovery_notice=nullptr;
+    enum class Mode {settings,editor,inspector};
+    LinuxFrontendBackend& backend;GtkWidget *window=nullptr,*box=nullptr,*forms=nullptr,*status=nullptr,*retry=nullptr,*quit=nullptr,*settings_button=nullptr,*editor_button=nullptr,*inspector_button=nullptr,*recovery_notice=nullptr;
     std::unique_ptr<interfaces::SettingsForm> form;std::unique_ptr<interfaces::EditorForm> editor;
+    std::unique_ptr<interfaces::SceneInspector> inspector;Mode mode=Mode::settings;std::uint64_t next_inspector=0;
     std::vector<GdkMonitor*> monitors;GdkDisplay* display=nullptr;bool topology_dirty=true;
-    std::uint64_t shown=0,withdrawal=0;bool erased=false,closing=false,editor_mode=false,transition=false,exit_requested=false,editor_unavailable=false;int result=0;
+    std::uint64_t shown=0,withdrawal=0;bool erased=false,closing=false,transition=false,exit_requested=false,view_unavailable=false;int result=0;
     bool recovery_admitted=false,recovery_enabled=false;std::optional<std::uint64_t> retirement_serial;
     std::string saved_notice;
     FrontendTimingObserver timing;gint64 previous_tick=0;
     FrontendPhaseObserver phases;std::uint64_t tick_sequence=0;
+    std::uint64_t now()const{return static_cast<std::uint64_t>(g_get_monotonic_time()/1000);}
+    rendering::SurfaceConfig scene_config(const FrontendProfile& profile,scene::Topology current){
+        rendering::SurfaceConfig cfg;cfg.authored=profile.view.documents;cfg.resources=profile.view.resources;
+        cfg.capabilities=profile.view.capabilities;cfg.topology=std::move(current);
+        cfg.experimental_visibility=true;
+        for(const char* cap:{"scene.content","scene.edit-locks","scene.visibility","configuration.edit-locks","configuration.visibility"})
+            if(!cfg.capabilities.count(cap))cfg.experimental_visibility=false;
+        cfg.experimental_typography=cfg.experimental_visibility&&profile.view.policy.available;
+        for(const char* cap:{"theme.typography","configuration.theme-overrides"})
+            if(!cfg.capabilities.count(cap)||profile.view.policy.denied_capabilities.count(cap))cfg.experimental_typography=false;
+        return cfg;
+    }
     void observe_phase(FrontendPhase phase,gint64 begin,bool completed){
         bool accepted=false;
         try{accepted=phases({tick_sequence,phase,static_cast<std::uint64_t>(g_get_monotonic_time()-begin),completed});}catch(...){}
@@ -66,8 +81,10 @@ struct Window {
         auto* navigation=gtk_box_new(GTK_ORIENTATION_HORIZONTAL,8);gtk_box_pack_start(GTK_BOX(box),navigation,FALSE,FALSE,0);
         settings_button=gtk_button_new_with_label("Settings");accessible(settings_button,"frontend.settings");gtk_box_pack_start(GTK_BOX(navigation),settings_button,FALSE,FALSE,0);
         editor_button=gtk_button_new_with_label("Edit scene");accessible(editor_button,"frontend.editor");gtk_box_pack_start(GTK_BOX(navigation),editor_button,FALSE,FALSE,0);
-        g_signal_connect(settings_button,"clicked",G_CALLBACK(+[](GtkWidget*,gpointer p){auto& s=*static_cast<Window*>(p);try{s.select(false);}catch(...){s.stop();}}),this);
-        g_signal_connect(editor_button,"clicked",G_CALLBACK(+[](GtkWidget*,gpointer p){auto& s=*static_cast<Window*>(p);try{s.select(true);}catch(...){s.stop();}}),this);
+        inspector_button=gtk_button_new_with_label("Inspect scene");accessible(inspector_button,"frontend.inspector");gtk_box_pack_start(GTK_BOX(navigation),inspector_button,FALSE,FALSE,0);
+        g_signal_connect(settings_button,"clicked",G_CALLBACK(+[](GtkWidget*,gpointer p){auto& s=*static_cast<Window*>(p);try{s.select(Mode::settings);}catch(...){s.stop();}}),this);
+        g_signal_connect(editor_button,"clicked",G_CALLBACK(+[](GtkWidget*,gpointer p){auto& s=*static_cast<Window*>(p);try{s.select(Mode::editor);}catch(...){s.stop();}}),this);
+        g_signal_connect(inspector_button,"clicked",G_CALLBACK(+[](GtkWidget*,gpointer p){auto& s=*static_cast<Window*>(p);try{s.select(Mode::inspector);}catch(...){s.stop();}}),this);
         recovery_notice=gtk_label_new("Draft recovery unavailable. Apply saves the configuration.");accessible(recovery_notice,"frontend.recovery");gtk_label_set_xalign(GTK_LABEL(recovery_notice),0);gtk_box_pack_start(GTK_BOX(box),recovery_notice,FALSE,FALSE,0);
         gtk_widget_set_no_show_all(recovery_notice,TRUE);
         status=gtk_label_new("Starting configuration service.");gtk_label_set_xalign(GTK_LABEL(status),0);gtk_label_set_line_wrap(GTK_LABEL(status),TRUE);accessible(status,"frontend.status");gtk_box_pack_start(GTK_BOX(box),status,FALSE,FALSE,0);
@@ -80,30 +97,36 @@ struct Window {
         g_signal_connect(retry,"clicked",G_CALLBACK(+[](GtkWidget*,gpointer p){auto& s=*static_cast<Window*>(p);try{s.backend.retrieve();}catch(...){s.stop();}}),this);
         g_signal_connect(quit,"clicked",G_CALLBACK(+[](GtkWidget*,gpointer p){static_cast<Window*>(p)->stop();}),this);
         g_signal_connect(window,"delete-event",G_CALLBACK(+[](GtkWidget*,GdkEvent*,gpointer p)->gboolean{static_cast<Window*>(p)->stop();return TRUE;}),this);
-        gtk_widget_set_sensitive(settings_button,FALSE);gtk_widget_set_sensitive(editor_button,FALSE);gtk_widget_show_all(window);
+        gtk_widget_set_sensitive(settings_button,FALSE);gtk_widget_set_sensitive(editor_button,FALSE);gtk_widget_set_sensitive(inspector_button,FALSE);gtk_widget_show_all(window);
     }
-    bool can_leave()const{return editor?editor->can_leave():editor_unavailable||(form&&form->can_leave());}
-    void close_forms(){if(form)form->close();if(editor)editor->close();}
-    void select(bool next){
-        if(closing||transition||next==editor_mode||!can_leave())return;
-        saved_notice.clear();retirement_serial.reset();backend.reload();close_forms();editor_mode=next;transition=true;
-        gtk_widget_set_sensitive(settings_button,FALSE);gtk_widget_set_sensitive(editor_button,FALSE);
+    bool can_leave()const{return editor?editor->can_leave():inspector||view_unavailable||(form&&form->can_leave());}
+    void close_forms(){if(form)form->close();if(editor)editor->close();if(inspector)inspector->close();}
+    bool forms_stopped(){return (!editor||editor->stopped())&&(!inspector||inspector->poll_image_jobs());}
+    void select(Mode next){
+        if(closing||transition||next==mode||!can_leave())return;
+        saved_notice.clear();retirement_serial.reset();backend.reload();close_forms();mode=next;transition=true;
+        for(auto* button:{settings_button,editor_button,inspector_button})gtk_widget_set_sensitive(button,FALSE);
     }
     void stop()noexcept{
         if(closing)return;
         closing=true;
         try{close_forms();backend.close();}catch(...){result=2;}
-        for(auto* button:{retry,quit,settings_button,editor_button})gtk_widget_set_sensitive(button,FALSE);
+        for(auto* button:{retry,quit,settings_button,editor_button,inspector_button})gtk_widget_set_sensitive(button,FALSE);
         gtk_label_set_text(GTK_LABEL(status),"Closing; waiting for configuration service to stop. Closing cannot undo a submitted change.");
     }
     void populate(const std::shared_ptr<const FrontendProfile>& profile){
         const auto& snapshot=*profile;
         const configuration::Authority authority{true,"console",{"console"}};
-        editor_unavailable=false;retirement_serial.reset();recovery_enabled=editor_mode&&recovery_admitted&&snapshot.view.recovery.has_value();
-        if(editor_mode){
+        view_unavailable=false;retirement_serial.reset();recovery_enabled=mode==Mode::editor&&recovery_admitted&&snapshot.view.recovery.has_value();
+        if(mode==Mode::editor||mode==Mode::inspector){
             scene::Topology current;
             try{current=topology();}
-            catch(const protocol::Error&){editor_unavailable=true;topology_dirty=false;shown=snapshot.serial;erased=false;transition=false;gtk_widget_hide(recovery_notice);return;}
+            catch(const protocol::Error&){view_unavailable=true;topology_dirty=false;shown=snapshot.serial;erased=false;transition=false;gtk_widget_hide(recovery_notice);return;}
+            if(mode==Mode::inspector){
+                inspector=std::make_unique<interfaces::SceneInspector>(authority,snapshot.view.policy,scene_config(snapshot,std::move(current)),std::vector<rendering::SurfaceProvider>{},"",interfaces::SceneInspector::Translator{},backend.images());
+                inspector->refresh(now());next_inspector=now()+100;
+                gtk_box_pack_start(GTK_BOX(forms),inspector->widget(),TRUE,TRUE,0);gtk_widget_show_all(inspector->widget());
+            }else{
             const auto selected=current.fallback;interfaces::EditorForm::Actions actions;
             actions.request_id=[this]{return backend.request_id();};actions.widget_id=actions.request_id;
             actions.submit=[this](const auto& request){backend.submit(request);};actions.cancel=[this](const auto& request){backend.cancel(request);};
@@ -116,6 +139,7 @@ struct Window {
                 if(snapshot.recovery_retirement)retirement_serial=snapshot.serial;
             });
             measure(FrontendPhase::attach,[&]{gtk_box_pack_start(GTK_BOX(forms),editor->widget(),TRUE,TRUE,0);gtk_widget_show_all(editor->widget());});
+            }
         }else{
             interfaces::SettingsForm::Actions actions;
             actions.request_id=[this]{return backend.request_id();};actions.submit=[this](const auto& request){backend.submit(request);};
@@ -123,7 +147,7 @@ struct Window {
             measure(FrontendPhase::settings,[&]{form=std::make_unique<interfaces::SettingsForm>(authority,snapshot.view.policy,snapshot.view.documents,snapshot.epoch,std::move(actions),interfaces::SettingsForm::Translator{},snapshot.resources,true);});
             measure(FrontendPhase::attach,[&]{gtk_box_pack_start(GTK_BOX(forms),form->widget(),TRUE,TRUE,0);gtk_widget_show_all(form->widget());});
         }
-        gtk_widget_set_visible(recovery_notice,editor_mode&&!recovery_enabled);gtk_window_set_title(GTK_WINDOW(window),editor_mode?"SysPane Scene Editor":"SysPane Settings");
+        gtk_widget_set_visible(recovery_notice,mode==Mode::editor&&!recovery_enabled);gtk_window_set_title(GTK_WINDOW(window),mode==Mode::editor?"SysPane Scene Editor":mode==Mode::inspector?"SysPane Scene Inspector":"SysPane Settings");
         shown=snapshot.serial;erased=false;transition=false;
     }
     gboolean observed_tick()noexcept{
@@ -139,10 +163,10 @@ struct Window {
     gboolean tick()noexcept{
         try{
             FrontendView state;measure(FrontendPhase::take,[&]{state=backend.take();});if(state.failed)result=2;
-            if(state.withdrawal!=withdrawal)measure(FrontendPhase::withdrawal,[&]{withdrawal=state.withdrawal;saved_notice.clear();retirement_serial.reset();if(form)form->policy({});if(editor)editor->policy({});erased=true;});
-            if(closing){if(state.stopped&&(!editor||editor->stopped())){gtk_main_quit();return G_SOURCE_REMOVE;}return G_SOURCE_CONTINUE;}
+            if(state.withdrawal!=withdrawal)measure(FrontendPhase::withdrawal,[&]{withdrawal=state.withdrawal;saved_notice.clear();retirement_serial.reset();if(form)form->policy({});if(editor)editor->policy({});if(inspector)inspector->policy({},now());erased=true;});
+            if(closing){if(state.stopped&&forms_stopped()){gtk_main_quit();return G_SOURCE_REMOVE;}return G_SOURCE_CONTINUE;}
             const auto notice=state.status+(saved_notice.empty()?"":" "+saved_notice);
-            gtk_label_set_text(GTK_LABEL(status),editor_unavailable?"Scene editor unavailable for the current displays.":notice.c_str());
+            gtk_label_set_text(GTK_LABEL(status),view_unavailable?"Scene view unavailable for the current displays.":notice.c_str());
             gtk_button_set_label(GTK_BUTTON(retry),state.pending?"Retrieve original request":"Reconnect");gtk_widget_set_sensitive(retry,state.pending||!state.profile);
             if(state.reply){const auto& r=*state.reply;
                 const auto& result=r.query.empty()?r.body:r.body.at("result");
@@ -162,31 +186,41 @@ struct Window {
                     }
                 }
             }
-            if(exit_requested){exit_requested=false;saved_notice.clear();retirement_serial.reset();backend.reload();close_forms();editor_mode=false;transition=true;state.loading=true;}
-            if(state.profile&&!state.loading&&!state.pending&&(shown!=state.profile->serial||erased||transition||(!editor&&editor_unavailable&&topology_dirty))){
+            if(exit_requested){exit_requested=false;saved_notice.clear();retirement_serial.reset();backend.reload();close_forms();mode=Mode::settings;transition=true;state.loading=true;}
+            if(state.profile&&!state.loading&&!state.pending&&(shown!=state.profile->serial||erased||transition||(view_unavailable&&topology_dirty))){
                 measure(FrontendPhase::populate,[&]{close_forms();
-                    if(!editor||editor->stopped()){editor.reset();form.reset();populate(state.profile);}
+                    if(forms_stopped()){editor.reset();form.reset();inspector.reset();populate(state.profile);}
                 });
             }
             const bool current=state.profile&&!state.loading&&!state.pending&&!transition&&!erased;
             if(editor&&current&&retirement_serial&&*retirement_serial==state.profile->serial&&editor->retirement_decided()){
                 backend.acknowledge_retirement(*retirement_serial);retirement_serial.reset();
             }
-            if(editor&&current&&topology_dirty){
+            if((editor||inspector)&&current&&topology_dirty){
                 scene::Topology next;
-                try{next=topology();editor_unavailable=false;}
-                catch(const protocol::Error&){editor_unavailable=true;topology_dirty=false;}
-                if(!editor_unavailable)measure(FrontendPhase::topology,[&]{const auto selected=next.fallback;editor->topology(std::move(next),selected);});
+                try{next=topology();view_unavailable=false;}
+                catch(const protocol::Error&){view_unavailable=true;topology_dirty=false;if(inspector)inspector->close();}
+                if(!view_unavailable)measure(FrontendPhase::topology,[&]{
+                    if(editor){const auto selected=next.fallback;editor->topology(std::move(next),selected);}
+                    if(inspector){inspector->replace(scene_config(*state.profile,std::move(next)),now());next_inspector=now()+100;}
+                });
+            }
+            if(inspector&&current&&!view_unavailable){
+                const auto stamp=now();if(stamp>=next_inspector){inspector->refresh(stamp);next_inspector=now()+100;}
+                const auto code=inspector->status().code;
+                if(code==rendering::SurfaceCode::restricted)gtk_label_set_text(GTK_LABEL(status),"Scene inspection unavailable under the current policy.");
+                else if(code==rendering::SurfaceCode::alternative||code==rendering::SurfaceCode::closed)gtk_label_set_text(GTK_LABEL(status),"Scene inspection unavailable for this scene or display configuration.");
             }
             measure(FrontendPhase::controls,[&]{
-                const bool navigate=current&&can_leave();gtk_widget_set_sensitive(settings_button,navigate&&editor_mode);gtk_widget_set_sensitive(editor_button,navigate&&!editor_mode);
+                const bool navigate=current&&can_leave();gtk_widget_set_sensitive(settings_button,navigate&&mode!=Mode::settings);gtk_widget_set_sensitive(editor_button,navigate&&mode!=Mode::editor);gtk_widget_set_sensitive(inspector_button,navigate&&mode!=Mode::inspector);
                 if(form)gtk_widget_set_sensitive(form->widget(),state.profile&&!state.loading&&!transition);
-                if(editor)gtk_widget_set_sensitive(editor->widget(),state.profile&&!state.loading&&!transition&&!editor_unavailable);
+                if(editor)gtk_widget_set_sensitive(editor->widget(),state.profile&&!state.loading&&!transition&&!view_unavailable);
+                if(inspector)gtk_widget_set_sensitive(inspector->widget(),current&&!view_unavailable);
             });
             return G_SOURCE_CONTINUE;
         }catch(...){result=2;stop();return G_SOURCE_CONTINUE;}
     }
-    ~Window(){editor.reset();form.reset();if(window)gtk_widget_destroy(window);if(display)g_signal_handlers_disconnect_by_data(display,this);for(auto* monitor:monitors){g_signal_handlers_disconnect_by_data(monitor,this);g_object_unref(monitor);}}
+    ~Window(){editor.reset();form.reset();inspector.reset();if(window)gtk_widget_destroy(window);if(display)g_signal_handlers_disconnect_by_data(display,this);for(auto* monitor:monitors){g_signal_handlers_disconnect_by_data(monitor,this);g_object_unref(monitor);}}
 };
 }
 int run_frontend(int argc,char** argv,platform::HelperBundleExpectation expectation,bool recovery_admitted,FrontendTimingObserver timing,FrontendPhaseObserver phases){

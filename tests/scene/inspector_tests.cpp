@@ -6,6 +6,7 @@
 #include <fcntl.h>
 #include <algorithm>
 #include <iostream>
+#include "inspector_image_owner.hpp"
 using namespace fixture;
 namespace ui=syspane::interfaces;
 namespace {
@@ -71,6 +72,7 @@ gboolean input(gint fd,GIOCondition cond,gpointer data){auto& w=*static_cast<Win
 gboolean timer(gpointer data){auto& w=*static_cast<Window*>(data);try{w.view->poll_image_jobs();if(!w.closed){w.view->heartbeat("P1",w.token,w.revision,++w.sequence,w.now(),w.ticks());w.view->refresh(w.now(),w.ticks());}}
     catch(const std::exception& e){std::cerr<<e.what()<<'\n';w.exit=1;gtk_main_quit();return G_SOURCE_REMOVE;}return G_SOURCE_CONTINUE;}
 int window(const std::string& root,const std::string& mode){g_set_prgname("syspane-scene-inspector");g_set_application_name("SysPane Scene Inspector");need(gtk_init_check(nullptr,nullptr),"native GTK unavailable");Window w;w.root=root;w.mode=mode;
+    if(mode=="image")inspector_image_owner::run(root);
     w.window=gtk_window_new(GTK_WINDOW_TOPLEVEL);gtk_window_set_title(GTK_WINDOW(w.window),"SysPane Scene Inspector");gtk_window_set_default_size(GTK_WINDOW(w.window),740,540);gtk_window_move(GTK_WINDOW(w.window),0,0);
     ui::SceneInspector::Translator translate;if(mode=="translated"){const auto labels=read(root+"/../../../tests/scene","inspector-cases.json")["translation"];translate=[labels](const std::string& id){return labels.at(id).get<std::string>();};}
     w.view=std::make_unique<ui::SceneInspector>(c::Authority{true,"desktop",{"desktop"}},inspector_policy(),w.cfg(),std::vector<v::SurfaceProvider>{provider()},image_worker_path(),translate);

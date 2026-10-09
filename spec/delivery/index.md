@@ -68,6 +68,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Implementation readiness and gates](implementation-readiness.md) — Distinguish implemented specification checks from pending native and release work.
 - [Initial editor preview readiness handoff](initial-preview-handoff.md) — First composition now waits for drawing or guarded earlier input; fixed timing failures remain.
 - [Installed native scene editor](installed-editor-handoff.md) — Real frontend authoring, authenticated persistence and shared verified helper ownership.
+- [Installed saved-scene inspector](installed-inspector-handoff.md) — Connect native scene inspection to authenticated saved profiles and the verified image worker.
 - [Installed editor recovery consumption handoff](installed-recovery-handoff.md) — Verified experimental UI composition and the remaining production responsiveness gate.
 - [Installed native settings frontend](installed-settings-handoff.md) — The development application composes native settings, authenticated profile reads and independent configuration supervision.
 - [Native keyboard-input checkpoint](keyboard-input-handoff.md) — Queued navigation completion explains the recorded layout-button focus failure.

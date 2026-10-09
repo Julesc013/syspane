@@ -1,6 +1,12 @@
 # Foundation development profiles
 
-Current revisions are Windows x64 44, Linux x64 75 and historical x86 35. The
+Current revisions are Windows x64 44, Linux x64 76 and historical x86 35. The
+[installed inspector package](../../../spec/delivery/packages/w-11-installed-inspector.md)
+connects saved-scene inspection to the common Linux frontend and its verified image
+worker. All profiles pass 83 selected scene/component checks; authenticated live
+telemetry and complete release qualification remain required.
+
+Earlier revisions were Windows x64 44, Linux x64 75 and historical x86 35. The
 [ordinary recovery package](../../../spec/delivery/packages/w-11-production-recovery.md)
 admits recovery/history in the common entry while retaining current native policy
 and fixture-only observers. Complete release qualification remains separate.

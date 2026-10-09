@@ -489,7 +489,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "0dc748f27ff1dcf7b0ca39b240c2d87726e970fe365852a9808f1d7b8481bd1f"
+      "sha256": "84e3649c33b7865eeff9cd190766c29a5dc656a988f3e060e5d2238fd73c7eb6"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -1023,6 +1023,17 @@
         "SP-W11-INSTALLED-EDITOR"
       ],
       "sha256": "a7c781dbfbef09d6d8362aafd563ae068a6592500e58490c5f4bfa949038bcf4"
+    },
+    {
+      "id": "SP-INSTALLED-INSPECTOR-HANDOFF",
+      "path": "delivery/installed-inspector-handoff.md",
+      "title": "Installed saved-scene inspector",
+      "description": "Connect native scene inspection to authenticated saved profiles and the verified image worker.",
+      "requires": [
+        "SP-W11-INSTALLED-INSPECTOR",
+        "SP-ORDINARY-RECOVERY-HANDOFF"
+      ],
+      "sha256": "f72b53dacc64875bd72f2053648b9fdb1b4ac218ba2896ae8f0a1c74cc9c4230"
     },
     {
       "id": "SP-INSTALLED-RECOVERY-HANDOFF",
@@ -2443,6 +2454,18 @@
         "SP-W10-RECOVERY-CONTROLS"
       ],
       "sha256": "104311dc82f2481fd939b184298a645f27e02d36070523fc43acc8edb5338978"
+    },
+    {
+      "id": "SP-W11-INSTALLED-INSPECTOR",
+      "path": "delivery/packages/w-11-installed-inspector.md",
+      "title": "Installed scene inspector ownership",
+      "description": "Compose saved scenes, native navigation and verified image tasks in the ordinary frontend.",
+      "requires": [
+        "SP-W11-SCENE-INSPECTOR",
+        "SP-W11-INSTALLED-EDITOR",
+        "SP-W11-PRODUCTION-RECOVERY"
+      ],
+      "sha256": "3357c3b14b44c04e20bfad9f52a713d335650db5cd25fa293c96f10fe55f7852"
     },
     {
       "id": "SP-W11-INSTALLED-RECOVERY",

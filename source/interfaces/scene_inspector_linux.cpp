@@ -69,10 +69,10 @@ struct SceneInspector::Impl {
         summary_key=text(model(),&selected,key_column);const auto value=text(model(),&selected,item_column)+"\n"+text(model(),&selected,information_column);
         gtk_label_set_text(GTK_LABEL(summary),value.c_str());}
 };
-SceneInspector::SceneInspector(c::Authority authority,c::Policy policy,r::SurfaceConfig config,std::vector<r::SurfaceProvider> providers,std::string worker,Translator translate):impl_(std::make_unique<Impl>()){
+SceneInspector::SceneInspector(c::Authority authority,c::Policy policy,r::SurfaceConfig config,std::vector<r::SurfaceProvider> providers,std::string worker,Translator translate,r::ImageFactory images):impl_(std::make_unique<Impl>()){
     auto& i=*impl_;std::map<std::string,std::string> labels={{"inspector.item","Item"},{"inspector.information","Information"},{"inspector.summary","_Summary"},{"inspector.requested_summary","Requested summary"}};
     for(auto& label:labels){if(translate)label.second=translate(label.first);if(label.second.empty()||label.second.size()>1024||label.second.find('\0')!=std::string::npos||!g_utf8_validate(label.second.data(),static_cast<gssize>(label.second.size()),nullptr))throw protocol::Error("inspector.translation");}
-    i.surface=std::make_unique<r::SceneSurface>(std::move(authority),std::move(policy),std::move(config),std::move(providers),[&i]{return i.invalidated();},std::move(worker),r::SurfaceAudience::inspector);
+    i.surface=std::make_unique<r::SceneSurface>(std::move(authority),std::move(policy),std::move(config),std::move(providers),[&i]{return i.invalidated();},std::move(worker),r::SurfaceAudience::inspector,std::move(images));
     i.store=gtk_tree_store_new(3,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING);i.root=gtk_box_new(GTK_ORIENTATION_VERTICAL,8);g_object_ref_sink(i.root);
     auto* scroll=gtk_scrolled_window_new(nullptr,nullptr);gtk_box_pack_start(GTK_BOX(i.root),scroll,TRUE,TRUE,0);
     i.tree=gtk_tree_view_new_with_model(i.model());g_object_ref_sink(i.tree);gtk_container_add(GTK_CONTAINER(scroll),i.tree);gtk_tree_view_set_enable_search(GTK_TREE_VIEW(i.tree),FALSE);

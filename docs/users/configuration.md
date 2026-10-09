@@ -1,7 +1,14 @@
 # Configuration, scenes and presets
 
-These are planned controls. Every advertised setting must be editable through
-the native UI as well as the shared command API; hand-editing a file is optional.
+The Linux development frontend provides the authoring controls described below;
+complete desktop and other-platform qualification remain pending. Every advertised
+setting must be editable through the native UI as well as the shared command API;
+hand-editing a file is optional.
+
+Inspect scene shows the saved arrangement in a native tree, with a requested
+Summary for the selected row. Apply saves your edits before you inspect them.
+Unapplied property fields, unsaved drafts and pending requests keep navigation
+disabled until resolved. Inspection currently has no connected live telemetry.
 
 The current Linux development editor supports selection, drag/resize, keyboard
 movement, title/text/geometry fields, duplicate/delete, undo/redo and Apply/Cancel.
