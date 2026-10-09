@@ -15,6 +15,21 @@ build` before configuring or building; use `test` or `package` for those actions
 The common active-output budget is unchanged; retained `out/evidence/` archives
 are measured separately. Never use the placeholder account from the example.
 
+The [native Apply package](../../spec/delivery/packages/w-11-request-form.md)
+connects the existing request worker to the form. After ordinary preflight, configure
+and build, run `ctest --preset linux-x64-gcc13 -R
+'^native[.](EDITOR-REQUEST|EDITOR-REQUEST-EXIT)$' --output-on-failure`. The fixed real
+GTK cases include held tasks, exact recovery digest, cancellation/late results,
+unknown transport outcome and exit acknowledgement while image work is held.
+
+Run the original history, reply, recovery-control, form and installed editor/recovery
+families, then `ctest --preset linux-x64-gcc13 -R '^native[.]RECOVERY-GUI-LIMITS$'
+--output-on-failure`. Preserve its original timing and erasure expectations. On all
+three profiles run the request/history/component expression below and retain v141_xp
+artifact checks. The [handoff](../../spec/delivery/request-form-handoff.md) records
+123 final native cases and original failures. Ordinary-entry recovery/history
+admission remains the next boundary; these are development qualification commands.
+
 The [native request package](../../spec/delivery/packages/w-11-request-worker.md)
 adds one request slot to the existing Linux helper worker. After normal
 preflight/configure/build, run `ctest --preset linux-x64-gcc13 -R

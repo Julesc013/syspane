@@ -570,7 +570,8 @@
         "SP-W11-VALIDATED-AUTHORED",
         "SP-W11-EDITOR-CALLBACK-TRACE",
         "SP-W11-REQUEST-PREPARATION",
-        "SP-W11-REQUEST-WORKER"
+        "SP-W11-REQUEST-WORKER",
+        "SP-W11-REQUEST-FORM"
       ],
       "acceptance_tests": [
         "T-SETTINGS",
@@ -650,14 +651,20 @@
         "tests/editor/request_preparation_tests.cpp",
         "source/interfaces/editor_request_task.hpp",
         "tests/configuration/native_request_worker.py",
-        "tests/configuration/request-worker-cases.json"
+        "tests/configuration/request-worker-cases.json",
+        "tests/editor/request_form.hpp",
+        "tests/editor/native_request_form.py",
+        "tests/editor/request-form-cases.json",
+        "tests/editor/request_exit.hpp",
+        "tests/editor/native_request_exit.py",
+        "tests/editor/request-exit-cases.json"
       ],
       "status": "in_progress",
       "authority_class": "development",
       "execution_grant": "user:foundation-native-campaign-2026-10-05",
-      "notes": "The finite native request-preparation slot passes all 14 frozen task cases, including running cancellation, closure and all six admission orders with history/recovery. Portable validation and current-owner adoption remain unchanged. Integrate the native form with current policy and an exact recovery digest before submitting. Installed Apply remains synchronous; original GUI timing failures, production admission and all five full editions remain open.",
-      "package": "delivery/packages/w-11-request-worker.md",
-      "evidence": "delivery/request-worker-handoff.md"
+      "notes": "Native Apply now uses existing-worker preparation, exact current recovery digest and owner-only adoption. Exit waits for all owned work. All 123 final native cases, including original GUI timing/erasure, pass; failures are preserved. Revalidate ordinary-entry recovery/history admission, then native inspector and desktop/telemetry composition. All five complete release editions remain open.",
+      "package": "delivery/packages/w-11-request-form.md",
+      "evidence": "delivery/request-form-handoff.md"
     },
     {
       "id": "W-12",

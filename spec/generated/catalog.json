@@ -489,7 +489,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "845b1ed5df9f6c60c8a14f579a7a35bc187cf72ac98c3b5f100e8f39412f368d"
+      "sha256": "618b45daca6fe35052cac12ddd1240a760c4d6a2d2e32e91a69401f0329d87e8"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -2589,6 +2589,18 @@
       "sha256": "a6c1846738f1ef25e2a07da11bbd75c58c4941155c3cda2a78bbac22ef29230c"
     },
     {
+      "id": "SP-W11-REQUEST-FORM",
+      "path": "delivery/packages/w-11-request-form.md",
+      "title": "Native form request preparation",
+      "description": "Integrate detached Apply with exact recovery context and cancellation before submission.",
+      "requires": [
+        "SP-W11-REQUEST-WORKER",
+        "SP-W11-HISTORY-FORM",
+        "SP-W11-RECOVERY-SUBMISSION"
+      ],
+      "sha256": "1c09c2062592da0fa62816e865fe25551b10bc07dd12828228c68d677c659a5e"
+    },
+    {
       "id": "SP-W11-REQUEST-PREPARATION",
       "path": "delivery/packages/w-11-request-preparation.md",
       "title": "Detached editor request preparation",
@@ -3281,6 +3293,17 @@
         "SP-TARGETS"
       ],
       "sha256": "e7119811fcd8a2d45457876576c709da36f56fc56cdc9b3567d9427b7f04e244"
+    },
+    {
+      "id": "SP-REQUEST-FORM-HANDOFF",
+      "path": "delivery/request-form-handoff.md",
+      "title": "Native form request preparation handoff",
+      "description": "Asynchronous Apply, exact recovery digest and complete exit acknowledgement, with original GUI evidence.",
+      "requires": [
+        "SP-W11-REQUEST-FORM",
+        "SP-REQUEST-WORKER-HANDOFF"
+      ],
+      "sha256": "e4cccdca8f13fb104fa24e6cf459e599937ddaf4d09f587de172a39d57cd5012"
     },
     {
       "id": "SP-REQUEST-PREPARATION-HANDOFF",

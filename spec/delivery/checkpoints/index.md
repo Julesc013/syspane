@@ -39,6 +39,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [recovery-store.json](recovery-store.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [recovery-submission.json](recovery-submission.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [recovery-transfer.json](recovery-transfer.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
+- [request-form.json](request-form.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [request-preparation.json](request-preparation.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [request-worker.json](request-worker.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [runtime-directory.json](runtime-directory.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.

@@ -110,6 +110,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Recovery limits and installed scheduling qualification](w-11-recovery-limits.md) — Measure admitted maximum inputs before enabling production recovery; preserve every missed deadline.
 - [Asynchronous editor recovery preparation](w-11-recovery-preparation.md) — Move recovery reconstruction to the existing worker without granting stale prepared results authority.
 - [Prepared submission checks for recovery restore](w-11-recovery-submission.md) — Keep structural Apply eligibility on the recovery worker while preserving live authorization and full transaction validation.
+- [Native form request preparation](w-11-request-form.md) — Integrate detached Apply with exact recovery context and cancellation before submission.
 - [Detached editor request preparation](w-11-request-preparation.md) — Move full Apply command preparation off the GUI while retaining exact current-owner publication.
 - [Native request preparation ownership](w-11-request-worker.md) — Bound request preparation on the existing native worker without granting submission authority.
 - [Native scene inspector navigation and disclosure](w-11-scene-inspector.md) — Expose scene semantics through native controls with identity-stable navigation and current inspector authority.

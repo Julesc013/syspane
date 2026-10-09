@@ -194,7 +194,11 @@ gboolean input(gint fd,GIOCondition cond,gpointer data){auto& w=*static_cast<Win
 #include "reply_lifecycle.hpp"
 #include "initial_input.hpp"
 #include "history_form.hpp"
-int main(int argc,char** argv){try{const bool history=argc==3&&std::string(argv[1])=="--history-form";const bool initial=argc==3&&std::string(argv[1])=="--initial-input";const bool prepared=argc==3&&std::string(argv[1])=="--prepared-editor";const bool lifecycle=argc==3&&std::string(argv[1])=="--reply-lifecycle";const bool recovery=argc==6&&std::string(argv[1])=="--recovery-child";need((argc==4||recovery||lifecycle||prepared||initial||history)&&geteuid()!=0,"unprivileged fixture arguments");if(recovery)os::arm_parent_lifetime(std::stoull(argv[2]));g_set_prgname("syspane-editor");need(gtk_init_check(nullptr,nullptr),"GTK unavailable");
+#include "request_form.hpp"
+#include "request_exit.hpp"
+int main(int argc,char** argv){try{const bool request_exit_mode=argc==3&&std::string(argv[1])=="--request-exit";const bool request=argc==3&&std::string(argv[1])=="--request-form";const bool history=argc==3&&std::string(argv[1])=="--history-form";const bool initial=argc==3&&std::string(argv[1])=="--initial-input";const bool prepared=argc==3&&std::string(argv[1])=="--prepared-editor";const bool lifecycle=argc==3&&std::string(argv[1])=="--reply-lifecycle";const bool recovery=argc==6&&std::string(argv[1])=="--recovery-child";need((argc==4||recovery||lifecycle||prepared||initial||history||request||request_exit_mode)&&geteuid()!=0,"unprivileged fixture arguments");if(recovery)os::arm_parent_lifetime(std::stoull(argv[2]));g_set_prgname("syspane-editor");need(gtk_init_check(nullptr,nullptr),"GTK unavailable");
+    if(request_exit_mode)return request_exit(argv[2]);
+    if(request)return request_form(argv[2]);
     if(history)return history_form(argv[2]);
     if(initial)return initial_input(argv[2]);
     if(lifecycle||prepared)return reply_lifecycle(argv[2],prepared);

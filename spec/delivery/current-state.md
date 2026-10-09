@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-09T12:03:17.698586+00:00", "scope": "Native request task ownership and remaining form integration"}
+updated: {"by": "codex", "at": "2026-10-09T12:42:46.558856+00:00", "scope": "Native Apply integration, exit acknowledgement and next ordinary-entry admission"}
 ---
 
 # Current state and next admitted boundary
@@ -22,41 +22,30 @@ recordings are local ignored `out/` content; the retired root is absent from the
 tracked tree. See `docs/developers/build.md` in the repository for checkout
 setup and the [repository contract](../foundation/repository.md) for ownership.
 
-The [native request worker](request-worker-handoff.md) now has one finite slot on
-the existing worker and shares admission order with history/recovery preparation.
-All 14 fixed native task cases pass, including running cancellation and close.
-Integrate the form's cancellation/current-policy state and exact recovery digest
-before submitting. Installed Apply remains synchronous; the original ordinary GUI
-failure, production recovery admission and all five full editions remain open.
+The [native Apply integration](request-form-handoff.md) now captures the final
+request and exact recovery digest, prepares through the existing worker and
+rechecks live ownership before one submission. Cancellation and exit wait for
+request/history/recovery/image work. The fixed held-image oracle reproduced early
+exit before the repair and now passes unchanged.
 
-The [request preparation boundary](request-preparation-handoff.md) validates
-and serializes commands on detached state, then rechecks current owner/authority
-before allocating a live ticket. Frozen reference cases and all 342 selected
-portable checks pass on three profiles. The native slot above is implemented;
-form cancellation/current-policy handling remains the next boundary.
-Installed Apply remains synchronous. Production recovery and all five complete
-editions remain open; original ordinary GUI timing failures are preserved.
+All 123 final native cases pass, including the seven original ordinary GUI timing
+and erasure cases. All three development builds pass 19 selected portable checks,
+with two additional historical artifact checks. The checkpoint preserves earlier
+compile, fixture and product failures and their exact source/artifact identities.
+Production recovery/history remains disabled; revalidate its ordinary-entry
+admission package next, then continue native inspector and desktop/telemetry
+composition. All five complete release editions remain unfinished.
 
-The [callback trace](editor-callback-trace-handoff.md) identifies long synchronous
-Apply, recovery-restore and form-timer work in the unchanged native frontend. Its
-seven instrumented cases pass, with 2798 source-resolved invocations; this does not
-supersede the ordinary MAX-RECORD delay failure. Raw CPU/wall clock disagreement is
-preserved and prevents CPU-utilization inference. Isolate Apply preparation costs
-and close its existing-worker/current-owner boundary before the next repair.
-Production recovery remains disabled and all five complete editions remain open.
-
-The [immutable authored validation](validated-authored-handoff.md) reduces repeated
-structural validation in surface construction and painting. Current layout, resource,
-authority and erasure checks remain. Ordinary GUI qualification passes six cases and fails MAX-RECORD at 143870 us excess delay.
-Production admission remains disabled. Preserve the first portable timeout and refresh
-deadline failure alongside their single isolated comparisons. The callback experiment
-above now records the remaining action/timer work; ordinary qualification remains failed.
-All five complete desktop editions remain unfinished.
+The [callback trace](editor-callback-trace-handoff.md) and
+[immutable validation checkpoint](validated-authored-handoff.md) preserve the
+earlier synchronous Apply/restore/timer costs and MAX-RECORD failure. The current
+ordinary GUI result above follows a code repair; it does not erase those failures
+or resolve the raw CPU/wall clock discrepancy. No CPU-utilization claim is made.
 
 The earlier [recovery admission investigation](recovery-admission-investigation-handoff.md)
 preserves two failed ordinary GUI attempts and separates fixture observers from
-candidate admission. The current repair above reduces repeated validation costs,
-but has not closed GUI qualification or enabled production recovery. Preserve the
+candidate admission. The subsequent request-form repair passes current GUI qualification;
+production recovery remains disabled pending ordinary-entry admission. Preserve the
 historical failures and compiled gate evidence in that handoff.
 
 The [frontend recovery backend](frontend-recovery-handoff.md) now uses authenticated

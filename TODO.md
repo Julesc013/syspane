@@ -10,10 +10,11 @@ The user-expanded [0.1.0 release scope](spec/delivery/release-0.1.0.md) now requ
 Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X. Finish the full native desktop
 editions and their release gates; foundation experiments alone cannot complete this goal.
 
-The [native request checkpoint](spec/delivery/request-worker-handoff.md) implements
-one finite request slot on the existing worker. Integrate form cancellation,
-current-policy handling and the exact recovery digest before submitting. The
-earlier ordinary GUI failure and fixed limits remain.
+The [native Apply checkpoint](spec/delivery/request-form-handoff.md) connects
+request preparation, current recovery digest and cancellation to the installed
+form. The final 123 native cases include all seven original GUI timing/erasure
+cases. Revalidate ordinary-entry recovery/history admission next; preserve prior
+failures and continue all five full editions.
 
 ## Completed specification work
 
@@ -57,11 +58,11 @@ behaviour has been implemented. See [audit disposition](spec/delivery/audit-2026
 - [x] Trace GTK signal handlers and application timers with validated test-only instrumentation; preserve raw clock discrepancies and source-bound evidence. See the [handoff](spec/delivery/editor-callback-trace-handoff.md).
 - [x] Implement portable detached request preparation and current-owner adoption; preserve frozen command, theme, transaction and limit expectations on all three profiles. See the [handoff](spec/delivery/request-preparation-handoff.md).
 - [x] Integrate request preparation with the existing native worker; verify all 14 fixed task cases, running cancellation and three-kind admission order. See the [handoff](spec/delivery/request-worker-handoff.md).
-- [ ] Integrate asynchronous Apply preparation with the native form, preserving current authority, request identity, full validation, exact recovery digest and unknown-outcome recovery. Preserve measured restore/form-timer/paint costs and original GUI limits.
-- [ ] Explain and repair the repeated MAX-WIDGETS delay and MAX-RECORD callback/delay failures before admitting production recovery/history. Preserve both failed ordinary attempts and fixed limits.
+- [x] Integrate asynchronous Apply with current authority, exact recovery digest, cancellation and unknown-outcome recovery; wait for all owned work before exit. Pass 123 final native cases with unchanged limits. See the [handoff](spec/delivery/request-form-handoff.md).
+- [x] Isolate synchronous Apply preparation and pass all seven original ordinary GUI cases after worker integration; retain the earlier MAX-WIDGETS and MAX-RECORD failures and fixed limits.
 - [ ] Complete asynchronous authoring and native preview handoff; retain full validation and the original GUI timing gates.
-- [ ] Repair measured preview/layout/validation stalls and investigate the transient Apply state and controller restart; pass all seven fixed GTK limit cases without weakening deadlines or erasure.
-- [ ] Complete production recovery admission after the current GUI failures are repaired; qualify protected deployment with its authority and integrate the native inspector.
+- [ ] Continue general preview/layout responsiveness and investigate preserved transient Apply/controller-restart observations; retain the now-passing seven GTK cases and original failures.
+- [ ] Revalidate ordinary-entry production recovery/history admission after the request-form repair; qualify protected deployment with its authority and integrate the native inspector.
 - [ ] Explain the preserved Windows GCC15 THEME-HISTORY-RESOURCE-LIMIT 20-second timeout and installed-editor AT-SPI grab_focus timeout; retain original failures and distinguish unchanged replays from causal evidence.
 
 - [x] W-11 shared private text lifetime: balanced realization/destruction, retained editing and independent verification that neither clipboard changes ownership. See the [handoff](spec/delivery/private-text-lifetime-handoff.md).

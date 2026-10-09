@@ -117,6 +117,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Prepared recovery submission handoff](recovery-submission-handoff.md) — Recovery prepares structural submission hints and the unchanged installed GUI qualification passes.
 - [Authenticated coherent recovery context transfer](recovery-transfer-handoff.md) — Negotiated profile transfer binds saved generations and native recovery observations to the authenticated editor session.
 - [SysPane 0.1.0 release objective and unresolved admission](release-0.1.0.md) — Preserve the requested complete desktop release across Windows 9x, Windows NT, X11, Wayland and Mac OS X.
+- [Native form request preparation handoff](request-form-handoff.md) — Asynchronous Apply, exact recovery digest and complete exit acknowledgement, with original GUI evidence.
 - [Detached editor request preparation handoff](request-preparation-handoff.md) — Portable full command preparation and exact owner adoption, with native integration still required.
 - [Native request preparation handoff](request-worker-handoff.md) — One finite request slot on the existing worker, with owner-only adoption and form integration still required.
 - [Durable resource generation checkpoint](resource-generations-handoff.md) — Exact content closure, command identity and coherent Linux recovery.

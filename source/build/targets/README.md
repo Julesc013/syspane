@@ -1,6 +1,11 @@
 # Foundation development profiles
 
-Current revisions are Windows x64 42, Linux x64 73 and historical x86 33. The
+Current revisions are Windows x64 43, Linux x64 74 and historical x86 34. The
+[request form package](../../../spec/delivery/packages/w-11-request-form.md)
+connects Apply to the native worker while preserving exact recovery context.
+Ordinary GUI qualification and complete release editions remain separate gates.
+
+Earlier revisions were Windows x64 42, Linux x64 73 and historical x86 33. The
 [request worker package](../../../spec/delivery/packages/w-11-request-worker.md)
 adds a finite request-preparation slot to the existing native helper worker.
 Form integration and ordinary GUI qualification remain separate gates.

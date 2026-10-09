@@ -11,18 +11,12 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
-The [native request worker](spec/delivery/request-worker-handoff.md) now prepares
-commands in one finite slot on the existing worker, retaining current-owner adoption
-and cancellation. Form integration remains required before it can remove Apply
-preparation from the installed GUI thread.
-
-The [immutable authored validation](spec/delivery/validated-authored-handoff.md)
-reduces repeated scene validation during native composition while preserving current
-layout and policy checks. Six of seven ordinary GUI cases pass; MAX-RECORD still exceeds the 100 ms delay limit.
-The [callback investigation](spec/delivery/editor-callback-trace-handoff.md) now
-identifies long Apply and recovery callbacks. Its instrumented pass preserves the
-earlier ordinary failure; production recovery remains disabled pending a measured repair.
-All five complete desktop editions remain unfinished.
+The [native Apply integration](spec/delivery/request-form-handoff.md) now prepares
+commands on the existing worker and submits only after current authority and the
+exact recovery draft still agree. Cancellation and exit wait for owned work to
+stop. All 123 final native cases pass, including the seven unchanged ordinary GUI
+timing/erasure cases. Earlier failures remain preserved. Production recovery/history
+admission and all five complete desktop editions remain unfinished.
 
 The [installed settings frontend](spec/delivery/installed-settings-handoff.md)
 now runs from a relocated development payload, supervises its verified configuration
@@ -54,16 +48,16 @@ binds those observations to one saved profile and editor session. The
 [native helper admission](spec/delivery/recovery-admission-handoff.md) independently
 holds directory identities and checks current session authority through helper work.
 Installed recovery now composes editor sessions and exact applied-draft retirement
-in the experimental fixture. Isolated backend limits pass; repeated installed GUI
-timing failures keep production admission open.
+in the experimental fixture. Isolated backend limits and the current installed GUI
+cases pass; production admission remains a separate pending boundary.
 
 The [frontend recovery backend](spec/delivery/frontend-recovery-handoff.md)
 now downloads scoped recovery context and binds native helpers to the live session.
 Accepted requests preserve only their exact captured-draft metadata for conditional
 retirement. The [installed recovery UI](spec/delivery/installed-recovery-handoff.md)
 now exercises Restore, Keep, Discard and exact retirement through the actual frontend.
-Production controls remain disabled: the admission investigation preserves repeated
-maximum-input GUI failures despite an earlier passing development checkpoint.
+Production controls remain disabled pending ordinary-entry admission. The request
+form checkpoint passes current GUI cases and preserves the earlier failed attempts.
 
 The [recovery preparation worker](spec/delivery/recovery-preparation-handoff.md)
 now validates detached editor recovery inputs on the existing native worker. Restore
