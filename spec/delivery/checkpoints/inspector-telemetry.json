@@ -1,0 +1,1639 @@
+{
+  "source_base": "01533cf271f382289348dd26106af34c759a9a20",
+  "scope": "W-11 native consumer and bounded delivery prerequisite. Ordinary frontend/UI integration is not implemented.",
+  "recorded_at": "2026-10-09T15:03:38.767645+00:00",
+  "source_files": {
+    "CMakeLists.txt": "8a01bd1ef3c24879b8c41a5126986594e112761f113d22a11cab7b1efa2438b2",
+    "source/build/components.json": "0ba7059c78885e04cc00bcbdbda69297ac892069a2504e661db15faed3cbbb20",
+    "source/application/network_controller_linux.cpp": "3c9515decd951fe85eabab3a6ea532680963046f0e0bde91631504730452cf6e",
+    "source/application/network_consumer_linux.cpp": "dad808ecf629679b87e22be06099c5ff3ecaf3dda5237c17430ae35ecfdbbe13",
+    "source/application/network_consumer_linux.hpp": "e675d93eb634dd888ded69902c03fb5d3e458c87ba4ffae21e1ff904d46e0439",
+    "source/diagnostics/telemetry_delivery.cpp": "c89e1fbe17bb78d441a5e6e1062af089e66e8ce204985328e5b59eee4b084ad1",
+    "source/diagnostics/telemetry_delivery.hpp": "65472e83c105eac4bb8fac4abe9dcf50e814730ec973000ebe1ca4f24d693138",
+    "tests/fault/telemetry_delivery_tests.cpp": "63f165f8d400c47332c3e92a0b95ffd548af266853bc04b08725792ef83bf94f",
+    "tests/configuration/network_consumer_probe.cpp": "31b3a7208435d165938a1ffefc95996b4a0892c6fc54b0b521d99513ca0a70eb",
+    "tests/configuration/native_network_consumer.py": "1d11bd7d5790bd44e9fa0ae5809dcc7b6b5fb5b4e922f784752dbc3797e61151"
+  },
+  "executions": [
+    {
+      "stage": "archive",
+      "record": {
+        "path": "out/evidence/inspector-telemetry-checks/archive-0f1f82c1/result.json",
+        "sha256": "facba4ee625ee4987f7775b8d64ed12afee30fbd318665046e378498ce037f09"
+      },
+      "source_archive": {
+        "path": "out/evidence/inspector-telemetry-checks/archive-0f1f82c1/source.zip",
+        "sha256": "3403b01c685067f219acc006217db619957036c33c6c6839d2449b1b5de9c517"
+      },
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "python3",
+            "/mnt/d/Projects/SysPane/syspane/out/campaign/archive_inspector_telemetry.py",
+            "installed"
+          ],
+          "exit": 0,
+          "started_at": "2026-10-09T14:58:22.116210+00:00",
+          "finished_at": "2026-10-09T14:58:27.926620+00:00",
+          "log": {
+            "path": "out/evidence/inspector-telemetry-checks/archive-0f1f82c1/0.log",
+            "sha256": "d3eaefdceab6344a0e82675cf101c323feca55697719c721c7124601958dcda4"
+          },
+          "captured_text_sha256": "d3eaefdceab6344a0e82675cf101c323feca55697719c721c7124601958dcda4"
+        }
+      ]
+    },
+    {
+      "stage": "archive",
+      "record": {
+        "path": "out/evidence/inspector-telemetry-checks/archive-1c982280/result.json",
+        "sha256": "f0b2087abdf919fae82644ae3db6b8de5600e052f0e5f1fd85fe7a1fd684a958"
+      },
+      "source_archive": {
+        "path": "out/evidence/inspector-telemetry-checks/archive-1c982280/source.zip",
+        "sha256": "2782a43ece1f38cf172881d3de87c2a618679ecb3281f19531ab95fc166ae396"
+      },
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "python3",
+            "/mnt/d/Projects/SysPane/syspane/out/campaign/archive_inspector_telemetry.py",
+            "regressions"
+          ],
+          "exit": 0,
+          "started_at": "2026-10-09T14:54:05.177691+00:00",
+          "finished_at": "2026-10-09T14:54:08.749852+00:00",
+          "log": {
+            "path": "out/evidence/inspector-telemetry-checks/archive-1c982280/0.log",
+            "sha256": "f44f8c283d3d5e8425e96d09de89aff062347e213c2cfcb7f2c11090a2b57afa"
+          },
+          "captured_text_sha256": "029af38f4bff0a7599459cfce5e8550c413d913bda3b20012a5e5a477eb1eb00"
+        }
+      ]
+    },
+    {
+      "stage": "archive",
+      "record": {
+        "path": "out/evidence/inspector-telemetry-checks/archive-494c0866/result.json",
+        "sha256": "e1264e7ba2d61d556864d448d521555f57ea29e205070a6a55927c38a6579be1"
+      },
+      "source_archive": {
+        "path": "out/evidence/inspector-telemetry-checks/archive-494c0866/source.zip",
+        "sha256": "b10562762bc7e8563f86332917b58e65a8aa6b89362cc8754bc2dad104a2fe59"
+      },
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "python3",
+            "/mnt/d/Projects/SysPane/syspane/out/campaign/archive_inspector_telemetry.py",
+            "service"
+          ],
+          "exit": 0,
+          "started_at": "2026-10-09T14:51:17.595200+00:00",
+          "finished_at": "2026-10-09T14:51:19.821716+00:00",
+          "log": {
+            "path": "out/evidence/inspector-telemetry-checks/archive-494c0866/0.log",
+            "sha256": "50a38e189bfde106f4249369f867eb57091f8ba609f209532bee3d27ffacad38"
+          },
+          "captured_text_sha256": "b765162b04f76666a4cc891df69438eedda8e4bfbea1e51f5c734c258e509aac"
+        }
+      ]
+    },
+    {
+      "stage": "archive",
+      "record": {
+        "path": "out/evidence/inspector-telemetry-checks/archive-5926c2e1/result.json",
+        "sha256": "1b89dcbccd8959e17f009d7dbdde976eefe78a65a0ce91a71b6707f6e32e2c5f"
+      },
+      "source_archive": {
+        "path": "out/evidence/inspector-telemetry-checks/archive-5926c2e1/source.zip",
+        "sha256": "e248ad057abab84c681506eec299287964f36f6ef485e0465dd837d30e5e539c"
+      },
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "python3",
+            "/mnt/d/Projects/SysPane/syspane/out/campaign/archive_inspector_telemetry.py",
+            "package"
+          ],
+          "exit": 0,
+          "started_at": "2026-10-09T15:01:44.714210+00:00",
+          "finished_at": "2026-10-09T15:01:49.794712+00:00",
+          "log": {
+            "path": "out/evidence/inspector-telemetry-checks/archive-5926c2e1/0.log",
+            "sha256": "fc8521d6c8ad7b6a26c1acb4cc735a9591b6bd5448a7d2813848226d56816e31"
+          },
+          "captured_text_sha256": "fc8521d6c8ad7b6a26c1acb4cc735a9591b6bd5448a7d2813848226d56816e31"
+        }
+      ]
+    },
+    {
+      "stage": "archive",
+      "record": {
+        "path": "out/evidence/inspector-telemetry-checks/archive-5fd81147/result.json",
+        "sha256": "6dce6fe1e979ea74d2d9a428dc123b0c8ec0fe8cbca3f87f0bab07e33bbd9b3a"
+      },
+      "source_archive": {
+        "path": "out/evidence/inspector-telemetry-checks/archive-5fd81147/source.zip",
+        "sha256": "b10562762bc7e8563f86332917b58e65a8aa6b89362cc8754bc2dad104a2fe59"
+      },
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "python3",
+            "/mnt/d/Projects/SysPane/syspane/out/campaign/archive_inspector_telemetry.py",
+            "consumer-final"
+          ],
+          "exit": 0,
+          "started_at": "2026-10-09T14:50:35.482986+00:00",
+          "finished_at": "2026-10-09T14:50:37.989321+00:00",
+          "log": {
+            "path": "out/evidence/inspector-telemetry-checks/archive-5fd81147/0.log",
+            "sha256": "e4beab5ddb014f2e2ce3fd4baa7c617fd0c956b2f86bc30ec10f292f62fe75c5"
+          },
+          "captured_text_sha256": "f54586300ca7669bdf31114b8c633ad1d54e943eb10ceed0be3071b656f3d4b0"
+        }
+      ]
+    },
+    {
+      "stage": "archive",
+      "record": {
+        "path": "out/evidence/inspector-telemetry-checks/archive-7cb9a072/result.json",
+        "sha256": "0faec456faed67739576f10a786a3b542145e31c617ede85653ef0254702d14f"
+      },
+      "source_archive": {
+        "path": "out/evidence/inspector-telemetry-checks/archive-7cb9a072/source.zip",
+        "sha256": "de5be46081084eaa202e833fbaeaba8f52d458def7b6da919071d82b0f697d20"
+      },
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "python3",
+            "/mnt/d/Projects/SysPane/syspane/out/campaign/archive_inspector_telemetry.py",
+            "consumer-deadline-final"
+          ],
+          "exit": 0,
+          "started_at": "2026-10-09T15:00:19.923922+00:00",
+          "finished_at": "2026-10-09T15:00:22.421986+00:00",
+          "log": {
+            "path": "out/evidence/inspector-telemetry-checks/archive-7cb9a072/0.log",
+            "sha256": "9f787b9ab9565e57c00f0b6005076c141ec920e2c2c96dfc8ea2f3b49b90f019"
+          },
+          "captured_text_sha256": "9f787b9ab9565e57c00f0b6005076c141ec920e2c2c96dfc8ea2f3b49b90f019"
+        }
+      ]
+    },
+    {
+      "stage": "archive",
+      "record": {
+        "path": "out/evidence/inspector-telemetry-checks/archive-f480531e/result.json",
+        "sha256": "2ed3701771d5bfa518737317a207411b1307dd0188c3121e7ca1e9756de15578"
+      },
+      "source_archive": {
+        "path": "out/evidence/inspector-telemetry-checks/archive-f480531e/source.zip",
+        "sha256": "de5be46081084eaa202e833fbaeaba8f52d458def7b6da919071d82b0f697d20"
+      },
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "python3",
+            "/mnt/d/Projects/SysPane/syspane/out/campaign/archive_inspector_telemetry.py",
+            "settings"
+          ],
+          "exit": 0,
+          "started_at": "2026-10-09T14:59:29.074596+00:00",
+          "finished_at": "2026-10-09T14:59:39.385872+00:00",
+          "log": {
+            "path": "out/evidence/inspector-telemetry-checks/archive-f480531e/0.log",
+            "sha256": "c2521e7d941c3ce181f6a3c618a1d8cf8ba162b7bfb84a8138c3912217ffdec8"
+          },
+          "captured_text_sha256": "c2521e7d941c3ce181f6a3c618a1d8cf8ba162b7bfb84a8138c3912217ffdec8"
+        }
+      ]
+    },
+    {
+      "stage": "archive",
+      "record": {
+        "path": "out/evidence/inspector-telemetry-checks/archive-f6cc39e2/result.json",
+        "sha256": "8d769bcc651b2f8f997ff2df1416a9bdb4aa1af35bf2074e37de02d9f095803b"
+      },
+      "source_archive": {
+        "path": "out/evidence/inspector-telemetry-checks/archive-f6cc39e2/source.zip",
+        "sha256": "b10562762bc7e8563f86332917b58e65a8aa6b89362cc8754bc2dad104a2fe59"
+      },
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "python3",
+            "/mnt/d/Projects/SysPane/syspane/out/campaign/archive_inspector_telemetry.py",
+            "native-attempt-1"
+          ],
+          "exit": 0,
+          "started_at": "2026-10-09T14:49:21.257167+00:00",
+          "finished_at": "2026-10-09T14:49:23.740147+00:00",
+          "log": {
+            "path": "out/evidence/inspector-telemetry-checks/archive-f6cc39e2/0.log",
+            "sha256": "fcaf1b691c8f1fe963280147875ddcf2e849e82382f4132aed57ba6dbb5d8a35"
+          },
+          "captured_text_sha256": "d3fd2bda45cd9755fc69da8944c534d34f0c748efb499f683d0c3fae9b876f29"
+        }
+      ]
+    },
+    {
+      "stage": "build",
+      "record": {
+        "path": "out/evidence/inspector-telemetry-checks/build-355c8ccb/result.json",
+        "sha256": "4d4ddfdff2e1a378697830abe0897d199490c6d0b599577ae656f3295a98c9d1"
+      },
+      "source_archive": {
+        "path": "out/evidence/inspector-telemetry-checks/build-355c8ccb/source.zip",
+        "sha256": "91349bdd5d32d7ce9f04b1e01100d18d70531e85404e758e4304f937b9a2c132"
+      },
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "cmake",
+            "--preset",
+            "linux-x64-gcc13"
+          ],
+          "exit": 0,
+          "started_at": "2026-10-09T14:43:26.264495+00:00",
+          "finished_at": "2026-10-09T14:43:37.269086+00:00",
+          "log": {
+            "path": "out/evidence/inspector-telemetry-checks/build-355c8ccb/0.log",
+            "sha256": "cf7a257a55da1876a3e7ac3ade60ec5139537bcacc5021dd92af1eec76bf8453"
+          },
+          "captured_text_sha256": "53ed9df0b47806e4ffb3f73f9a31dba781127e688ccde425610d52cf080c525f",
+          "workspace_preflight": {
+            "action": "build",
+            "maximum_bytes": 8589934592,
+            "checkout_out_bytes": 3003418960,
+            "linux_campaign_bytes": 5148233339,
+            "retained_local_evidence_bytes": 22942676133,
+            "reserved_growth_bytes": 268435456,
+            "status": "pass",
+            "scope": "Active-output reservation, not an OS quota. Retained evidence is reported separately, preserving its previous exclusion before relocation."
+          }
+        },
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "cmake",
+            "--build",
+            "--preset",
+            "linux-x64-gcc13"
+          ],
+          "exit": 0,
+          "started_at": "2026-10-09T14:43:39.630515+00:00",
+          "finished_at": "2026-10-09T14:43:47.108793+00:00",
+          "log": {
+            "path": "out/evidence/inspector-telemetry-checks/build-355c8ccb/1.log",
+            "sha256": "8f9cdc1a47bb5df99e10ca92d87a4c6bf75c608e12912b627a36608c1c6c5378"
+          },
+          "captured_text_sha256": "67ba76d48305f17c57c2adde7f72c7ac24c249ee5080fe2c1646da352d05a61e",
+          "workspace_preflight": {
+            "action": "build",
+            "maximum_bytes": 8589934592,
+            "checkout_out_bytes": 3003418960,
+            "linux_campaign_bytes": 5148233339,
+            "retained_local_evidence_bytes": 22942677867,
+            "reserved_growth_bytes": 268435456,
+            "status": "pass",
+            "scope": "Active-output reservation, not an OS quota. Retained evidence is reported separately, preserving its previous exclusion before relocation."
+          }
+        }
+      ]
+    },
+    {
+      "stage": "build",
+      "record": {
+        "path": "out/evidence/inspector-telemetry-checks/build-64ab3341/result.json",
+        "sha256": "8acb896b687d5660c9cb0b5bfc61cf9d9f372b22c2a22f7ab12587674d2d72b8"
+      },
+      "source_archive": {
+        "path": "out/evidence/inspector-telemetry-checks/build-64ab3341/source.zip",
+        "sha256": "de5be46081084eaa202e833fbaeaba8f52d458def7b6da919071d82b0f697d20"
+      },
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "cmake",
+            "--preset",
+            "linux-x64-gcc13"
+          ],
+          "exit": 0,
+          "started_at": "2026-10-09T14:59:41.914322+00:00",
+          "finished_at": "2026-10-09T14:59:50.289987+00:00",
+          "log": {
+            "path": "out/evidence/inspector-telemetry-checks/build-64ab3341/0.log",
+            "sha256": "10b0e1a2f1d2796f3564c699c2ce3d328c91fcc7c664830d89c817532f5c4444"
+          },
+          "captured_text_sha256": "10b0e1a2f1d2796f3564c699c2ce3d328c91fcc7c664830d89c817532f5c4444",
+          "workspace_preflight": {
+            "action": "build",
+            "maximum_bytes": 8589934592,
+            "checkout_out_bytes": 3050496037,
+            "linux_campaign_bytes": 5188166020,
+            "retained_local_evidence_bytes": 23315724447,
+            "reserved_growth_bytes": 268435456,
+            "status": "pass",
+            "scope": "Active-output reservation, not an OS quota. Retained evidence is reported separately, preserving its previous exclusion before relocation."
+          }
+        },
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "cmake",
+            "--build",
+            "--preset",
+            "linux-x64-gcc13"
+          ],
+          "exit": 0,
+          "started_at": "2026-10-09T14:59:51.950481+00:00",
+          "finished_at": "2026-10-09T14:59:56.201062+00:00",
+          "log": {
+            "path": "out/evidence/inspector-telemetry-checks/build-64ab3341/1.log",
+            "sha256": "ad70eb2cfa34e48394f387c8fdd3401e873793c6bb793d328f32456ed1a7af08"
+          },
+          "captured_text_sha256": "ad70eb2cfa34e48394f387c8fdd3401e873793c6bb793d328f32456ed1a7af08",
+          "workspace_preflight": {
+            "action": "build",
+            "maximum_bytes": 8589934592,
+            "checkout_out_bytes": 3050496037,
+            "linux_campaign_bytes": 5188162540,
+            "retained_local_evidence_bytes": 23315726165,
+            "reserved_growth_bytes": 268435456,
+            "status": "pass",
+            "scope": "Active-output reservation, not an OS quota. Retained evidence is reported separately, preserving its previous exclusion before relocation."
+          }
+        }
+      ]
+    },
+    {
+      "stage": "build",
+      "record": {
+        "path": "out/evidence/inspector-telemetry-checks/build-6b72741b/result.json",
+        "sha256": "bb30e96d499d6eade538d8d2e3147ef5db455fea5b3823ea7c3fdfc3f2705316"
+      },
+      "source_archive": {
+        "path": "out/evidence/inspector-telemetry-checks/build-6b72741b/source.zip",
+        "sha256": "306175648ab5a6c255d4c3ca6f5597cf39172d135fdfb6ad994a6b6f1d7116f3"
+      },
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "cmake",
+            "--preset",
+            "linux-x64-gcc13"
+          ],
+          "exit": 0,
+          "started_at": "2026-10-09T14:47:23.217711+00:00",
+          "finished_at": "2026-10-09T14:47:31.685865+00:00",
+          "log": {
+            "path": "out/evidence/inspector-telemetry-checks/build-6b72741b/0.log",
+            "sha256": "9d9dc5058cb1e8d33ab60ac04744dc85acf431f4b6b9331b510d52c61857c34e"
+          },
+          "captured_text_sha256": "10b0e1a2f1d2796f3564c699c2ce3d328c91fcc7c664830d89c817532f5c4444",
+          "workspace_preflight": {
+            "action": "build",
+            "maximum_bytes": 8589934592,
+            "checkout_out_bytes": 3003419076,
+            "linux_campaign_bytes": 5148137944,
+            "retained_local_evidence_bytes": 22951040861,
+            "reserved_growth_bytes": 268435456,
+            "status": "pass",
+            "scope": "Active-output reservation, not an OS quota. Retained evidence is reported separately, preserving its previous exclusion before relocation."
+          }
+        },
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "cmake",
+            "--build",
+            "--preset",
+            "linux-x64-gcc13"
+          ],
+          "exit": 0,
+          "started_at": "2026-10-09T14:47:33.323668+00:00",
+          "finished_at": "2026-10-09T14:47:51.787366+00:00",
+          "log": {
+            "path": "out/evidence/inspector-telemetry-checks/build-6b72741b/1.log",
+            "sha256": "e6182c818a8858260cc6a11c206cf2625b494211c25b944205328f120bb1f9ff"
+          },
+          "captured_text_sha256": "aef44f98dffdffd805facc5b377a3ec1a8924546029eaa3807ff7208165aa219",
+          "workspace_preflight": {
+            "action": "build",
+            "maximum_bytes": 8589934592,
+            "checkout_out_bytes": 3003419076,
+            "linux_campaign_bytes": 5148149996,
+            "retained_local_evidence_bytes": 22951042595,
+            "reserved_growth_bytes": 268435456,
+            "status": "pass",
+            "scope": "Active-output reservation, not an OS quota. Retained evidence is reported separately, preserving its previous exclusion before relocation."
+          }
+        }
+      ]
+    },
+    {
+      "stage": "build",
+      "record": {
+        "path": "out/evidence/inspector-telemetry-checks/build-a17c22ba/result.json",
+        "sha256": "b360627659707cf8c3cc0a846154c1b9e72835829097a9c273ee2963c79cd45e"
+      },
+      "source_archive": {
+        "path": "out/evidence/inspector-telemetry-checks/build-a17c22ba/source.zip",
+        "sha256": "d8c4e22d012f84d68b9027cd3976851481314701ed8379328ea1012636ec3769"
+      },
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "cmake",
+            "--preset",
+            "linux-x64-gcc13"
+          ],
+          "exit": 0,
+          "started_at": "2026-10-09T14:42:40.382498+00:00",
+          "finished_at": "2026-10-09T14:42:48.828799+00:00",
+          "log": {
+            "path": "out/evidence/inspector-telemetry-checks/build-a17c22ba/0.log",
+            "sha256": "9d9dc5058cb1e8d33ab60ac04744dc85acf431f4b6b9331b510d52c61857c34e"
+          },
+          "captured_text_sha256": "10b0e1a2f1d2796f3564c699c2ce3d328c91fcc7c664830d89c817532f5c4444",
+          "workspace_preflight": {
+            "action": "build",
+            "maximum_bytes": 8589934592,
+            "checkout_out_bytes": 3003418960,
+            "linux_campaign_bytes": 5125548817,
+            "retained_local_evidence_bytes": 22934321092,
+            "reserved_growth_bytes": 268435456,
+            "status": "pass",
+            "scope": "Active-output reservation, not an OS quota. Retained evidence is reported separately, preserving its previous exclusion before relocation."
+          }
+        },
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "cmake",
+            "--build",
+            "--preset",
+            "linux-x64-gcc13"
+          ],
+          "exit": 0,
+          "started_at": "2026-10-09T14:42:50.489658+00:00",
+          "finished_at": "2026-10-09T14:42:54.098550+00:00",
+          "log": {
+            "path": "out/evidence/inspector-telemetry-checks/build-a17c22ba/1.log",
+            "sha256": "110a29e566e719f80b27400e6578cc97c95ac408b2113f20085187f87a28d655"
+          },
+          "captured_text_sha256": "b251a05decc4fb43e28a6d5080db76e30235636689684aca5c426fb2f5e8e009",
+          "workspace_preflight": {
+            "action": "build",
+            "maximum_bytes": 8589934592,
+            "checkout_out_bytes": 3003418960,
+            "linux_campaign_bytes": 5125559313,
+            "retained_local_evidence_bytes": 22934322826,
+            "reserved_growth_bytes": 268435456,
+            "status": "pass",
+            "scope": "Active-output reservation, not an OS quota. Retained evidence is reported separately, preserving its previous exclusion before relocation."
+          }
+        }
+      ]
+    },
+    {
+      "stage": "consumer",
+      "record": {
+        "path": "out/evidence/inspector-telemetry-checks/consumer-823dc660/result.json",
+        "sha256": "3cb332299420a44ba501e49db3a69b896142c4f5e48618c84318ec820e69a5fd"
+      },
+      "source_archive": {
+        "path": "out/evidence/inspector-telemetry-checks/consumer-823dc660/source.zip",
+        "sha256": "de5be46081084eaa202e833fbaeaba8f52d458def7b6da919071d82b0f697d20"
+      },
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]NETWORK-CONSUMER$",
+            "--output-on-failure"
+          ],
+          "exit": 0,
+          "started_at": "2026-10-09T15:00:15.390029+00:00",
+          "finished_at": "2026-10-09T15:00:19.268705+00:00",
+          "log": {
+            "path": "out/evidence/inspector-telemetry-checks/consumer-823dc660/0.log",
+            "sha256": "d3c0c42689603e0651e8cb6a4ae95ce86957f35ff6731cd52979b4de4ae6c57d"
+          },
+          "captured_text_sha256": "d3c0c42689603e0651e8cb6a4ae95ce86957f35ff6731cd52979b4de4ae6c57d",
+          "workspace_preflight": {
+            "action": "test",
+            "maximum_bytes": 8589934592,
+            "checkout_out_bytes": 3050496037,
+            "linux_campaign_bytes": 5188165846,
+            "retained_local_evidence_bytes": 23319917946,
+            "reserved_growth_bytes": 67108864,
+            "status": "pass",
+            "scope": "Active-output reservation, not an OS quota. Retained evidence is reported separately, preserving its previous exclusion before relocation."
+          }
+        }
+      ]
+    },
+    {
+      "stage": "consumer",
+      "record": {
+        "path": "out/evidence/inspector-telemetry-checks/consumer-bdddcbd0/result.json",
+        "sha256": "5a0a393b12701721fcac174664aa7c08f92d2ea15b8956362da49b4bded8d816"
+      },
+      "source_archive": {
+        "path": "out/evidence/inspector-telemetry-checks/consumer-bdddcbd0/source.zip",
+        "sha256": "b10562762bc7e8563f86332917b58e65a8aa6b89362cc8754bc2dad104a2fe59"
+      },
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]NETWORK-CONSUMER$",
+            "--output-on-failure"
+          ],
+          "exit": 0,
+          "started_at": "2026-10-09T14:49:29.113002+00:00",
+          "finished_at": "2026-10-09T14:49:40.392323+00:00",
+          "log": {
+            "path": "out/evidence/inspector-telemetry-checks/consumer-bdddcbd0/0.log",
+            "sha256": "1b85ca1ecd8e5f4f3bb7c8ba150792b86924445c0c9758e1751a307f1c00acff"
+          },
+          "captured_text_sha256": "a1d508e804b7fb1168e6b46080a45d09fef194b73812724a0c6f5ee3b1911413",
+          "workspace_preflight": {
+            "action": "test",
+            "maximum_bytes": 8589934592,
+            "checkout_out_bytes": 3003422579,
+            "linux_campaign_bytes": 5188165645,
+            "retained_local_evidence_bytes": 22983857618,
+            "reserved_growth_bytes": 67108864,
+            "status": "pass",
+            "scope": "Active-output reservation, not an OS quota. Retained evidence is reported separately, preserving its previous exclusion before relocation."
+          }
+        }
+      ]
+    },
+    {
+      "stage": "consumer",
+      "record": {
+        "path": "out/evidence/inspector-telemetry-checks/consumer-fcdd9fb6/result.json",
+        "sha256": "1d0a68261e59b5d29d66b960ed11df08ce61940f4e6856fd6e7b7c4129c74ce4"
+      },
+      "source_archive": {
+        "path": "out/evidence/inspector-telemetry-checks/consumer-fcdd9fb6/source.zip",
+        "sha256": "306175648ab5a6c255d4c3ca6f5597cf39172d135fdfb6ad994a6b6f1d7116f3"
+      },
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]NETWORK-CONSUMER$",
+            "--output-on-failure"
+          ],
+          "exit": 8,
+          "started_at": "2026-10-09T14:48:22.910239+00:00",
+          "finished_at": "2026-10-09T14:48:32.276452+00:00",
+          "log": {
+            "path": "out/evidence/inspector-telemetry-checks/consumer-fcdd9fb6/0.log",
+            "sha256": "4c0c83f75179bf6928794011e54e62f54c4e2d103ca8a278bc5517d33eb8a067"
+          },
+          "captured_text_sha256": "dd1712a686d83cb08a737317ad12a15721db2d44f6eec3d6f1d877c8138fb684",
+          "workspace_preflight": {
+            "action": "test",
+            "maximum_bytes": 8589934592,
+            "checkout_out_bytes": 3003419076,
+            "linux_campaign_bytes": 5188185316,
+            "retained_local_evidence_bytes": 22955224661,
+            "reserved_growth_bytes": 67108864,
+            "status": "pass",
+            "scope": "Active-output reservation, not an OS quota. Retained evidence is reported separately, preserving its previous exclusion before relocation."
+          }
+        }
+      ]
+    },
+    {
+      "stage": "imports",
+      "record": {
+        "path": "out/evidence/inspector-telemetry-checks/imports-7dfbb9e1/result.json",
+        "sha256": "aa28e71eee1e6ac7c95a2e9f9e533cf83a8c393a3be0fc50533cdbc2974994bf"
+      },
+      "source_archive": {
+        "path": "out/evidence/inspector-telemetry-checks/imports-7dfbb9e1/source.zip",
+        "sha256": "de5be46081084eaa202e833fbaeaba8f52d458def7b6da919071d82b0f697d20"
+      },
+      "commands": [
+        {
+          "command": [
+            "ctest",
+            "--preset",
+            "windows-x86-v141-xp",
+            "-R",
+            "^legacy[.]",
+            "--output-on-failure"
+          ],
+          "exit": 0,
+          "started_at": "2026-10-09T15:00:24.879123+00:00",
+          "finished_at": "2026-10-09T15:00:25.238391+00:00",
+          "log": {
+            "path": "out/evidence/inspector-telemetry-checks/imports-7dfbb9e1/0.log",
+            "sha256": "b1ab48071d94402d9da24ed67b545f714b9f7699be1015a9eda9d8099ae419ea"
+          },
+          "captured_text_sha256": "b1ab48071d94402d9da24ed67b545f714b9f7699be1015a9eda9d8099ae419ea",
+          "workspace_preflight": {
+            "action": "test",
+            "maximum_bytes": 8589934592,
+            "checkout_out_bytes": 3050496037,
+            "linux_campaign_bytes": 5188165864,
+            "retained_local_evidence_bytes": 23348570900,
+            "reserved_growth_bytes": 67108864,
+            "status": "pass",
+            "scope": "Active-output reservation, not an OS quota. Retained evidence is reported separately, preserving its previous exclusion before relocation."
+          }
+        }
+      ]
+    },
+    {
+      "stage": "installed",
+      "record": {
+        "path": "out/evidence/inspector-telemetry-checks/installed-16f3bad0/result.json",
+        "sha256": "458016bf4eaf39fccfbd6780552a28d87a7778060196075088aaccc572a2ae33"
+      },
+      "source_archive": {
+        "path": "out/evidence/inspector-telemetry-checks/installed-16f3bad0/source.zip",
+        "sha256": "2782a43ece1f38cf172881d3de87c2a618679ecb3281f19531ab95fc166ae396"
+      },
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]INSTALLED-INSPECTOR$",
+            "--output-on-failure"
+          ],
+          "exit": 0,
+          "started_at": "2026-10-09T14:55:57.887081+00:00",
+          "finished_at": "2026-10-09T14:56:39.927670+00:00",
+          "log": {
+            "path": "out/evidence/inspector-telemetry-checks/installed-16f3bad0/0.log",
+            "sha256": "8dbc1a92345f8605f322292ceaca8255f487cac7f8829265fa1b91beb8ff13d3"
+          },
+          "captured_text_sha256": "427ff58c7ac79d8fb8f5cbcb1113e80109e611ca6667f25b43c28f1844825442",
+          "workspace_preflight": {
+            "action": "test",
+            "maximum_bytes": 8589934592,
+            "checkout_out_bytes": 3050486059,
+            "linux_campaign_bytes": 5188170376,
+            "retained_local_evidence_bytes": 23098793132,
+            "reserved_growth_bytes": 67108864,
+            "status": "pass",
+            "scope": "Active-output reservation, not an OS quota. Retained evidence is reported separately, preserving its previous exclusion before relocation."
+          }
+        }
+      ]
+    },
+    {
+      "stage": "legacy",
+      "record": {
+        "path": "out/evidence/inspector-telemetry-checks/legacy-3120def0/result.json",
+        "sha256": "5529560c25c532a4f7ca3ae027554d346a85cb5a666cfc4fe3783de3ec35f70d"
+      },
+      "source_archive": {
+        "path": "out/evidence/inspector-telemetry-checks/legacy-3120def0/source.zip",
+        "sha256": "2782a43ece1f38cf172881d3de87c2a618679ecb3281f19531ab95fc166ae396"
+      },
+      "commands": [
+        {
+          "command": [
+            "cmake",
+            "--preset",
+            "windows-x86-v141-xp"
+          ],
+          "exit": 0,
+          "started_at": "2026-10-09T14:54:54.959995+00:00",
+          "finished_at": "2026-10-09T14:54:56.536491+00:00",
+          "log": {
+            "path": "out/evidence/inspector-telemetry-checks/legacy-3120def0/0.log",
+            "sha256": "01b8f22a42d748592e17f2f606d784f44f63c11a999b5ab9e0bb7449f81ee239"
+          },
+          "captured_text_sha256": "e3540c3bcd5ba9d1969db31b46f1f434fe8b191eb1187e81c83104af19098b3c",
+          "workspace_preflight": {
+            "action": "build",
+            "maximum_bytes": 8589934592,
+            "checkout_out_bytes": 3043512571,
+            "linux_campaign_bytes": 5188170376,
+            "retained_local_evidence_bytes": 23094572307,
+            "reserved_growth_bytes": 268435456,
+            "status": "pass",
+            "scope": "Active-output reservation, not an OS quota. Retained evidence is reported separately, preserving its previous exclusion before relocation."
+          }
+        },
+        {
+          "command": [
+            "cmake",
+            "--build",
+            "--preset",
+            "windows-x86-v141-xp"
+          ],
+          "exit": 0,
+          "started_at": "2026-10-09T14:54:58.177822+00:00",
+          "finished_at": "2026-10-09T14:55:04.008042+00:00",
+          "log": {
+            "path": "out/evidence/inspector-telemetry-checks/legacy-3120def0/1.log",
+            "sha256": "674f01d40e4a070752e1f7ae005d9069e4e3ac5a6c3b196643f3de2c27a54fb6"
+          },
+          "captured_text_sha256": "154c1bb8178a3e9865c9d24caad709ab73a1f3e3bd52b5f38f90ce1c36536e3f",
+          "workspace_preflight": {
+            "action": "build",
+            "maximum_bytes": 8589934592,
+            "checkout_out_bytes": 3043552806,
+            "linux_campaign_bytes": 5188170376,
+            "retained_local_evidence_bytes": 23094573548,
+            "reserved_growth_bytes": 268435456,
+            "status": "pass",
+            "scope": "Active-output reservation, not an OS quota. Retained evidence is reported separately, preserving its previous exclusion before relocation."
+          }
+        },
+        {
+          "command": [
+            "ctest",
+            "--preset",
+            "windows-x86-v141-xp",
+            "-R",
+            "^((composition|delivery|data|measured|telemetry)[.]|target[.])",
+            "--output-on-failure"
+          ],
+          "exit": 0,
+          "started_at": "2026-10-09T14:55:05.673582+00:00",
+          "finished_at": "2026-10-09T14:55:06.624775+00:00",
+          "log": {
+            "path": "out/evidence/inspector-telemetry-checks/legacy-3120def0/2.log",
+            "sha256": "01afbb2df630a6638798c604c17e9bd1499fbbdcb3ecb04692040c524af5b34e"
+          },
+          "captured_text_sha256": "025424d77ae917be40b757577f00be34d6f2eb9475095a798bb6a81578a02132",
+          "workspace_preflight": {
+            "action": "test",
+            "maximum_bytes": 8589934592,
+            "checkout_out_bytes": 3050465051,
+            "linux_campaign_bytes": 5188170376,
+            "retained_local_evidence_bytes": 23094606826,
+            "reserved_growth_bytes": 67108864,
+            "status": "pass",
+            "scope": "Active-output reservation, not an OS quota. Retained evidence is reported separately, preserving its previous exclusion before relocation."
+          }
+        }
+      ]
+    },
+    {
+      "stage": "package",
+      "record": {
+        "path": "out/evidence/inspector-telemetry-checks/package-d18385af/result.json",
+        "sha256": "380e82c1f74c1721b2277f33c572298884fe9ec9e3ea5ff83e9fb38d9613f7a5"
+      },
+      "source_archive": {
+        "path": "out/evidence/inspector-telemetry-checks/package-d18385af/source.zip",
+        "sha256": "de5be46081084eaa202e833fbaeaba8f52d458def7b6da919071d82b0f697d20"
+      },
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "python3",
+            "/mnt/d/Projects/SysPane/syspane/out/campaign/package_inspector_telemetry.py"
+          ],
+          "exit": 0,
+          "started_at": "2026-10-09T15:00:54.346627+00:00",
+          "finished_at": "2026-10-09T15:01:26.695839+00:00",
+          "log": {
+            "path": "out/evidence/inspector-telemetry-checks/package-d18385af/0.log",
+            "sha256": "5af1c134b8a4202f1a83f482211df46201b5b2c10a3229073c0e86826f523864"
+          },
+          "captured_text_sha256": "5af1c134b8a4202f1a83f482211df46201b5b2c10a3229073c0e86826f523864",
+          "workspace_preflight": {
+            "action": "package",
+            "maximum_bytes": 8589934592,
+            "checkout_out_bytes": 3050475363,
+            "linux_campaign_bytes": 5188165864,
+            "retained_local_evidence_bytes": 23352762727,
+            "reserved_growth_bytes": 33554432,
+            "status": "pass",
+            "scope": "Active-output reservation, not an OS quota. Retained evidence is reported separately, preserving its previous exclusion before relocation."
+          }
+        }
+      ]
+    },
+    {
+      "stage": "portable",
+      "record": {
+        "path": "out/evidence/inspector-telemetry-checks/portable-8363aded/result.json",
+        "sha256": "699f78c62bd00c447ca2189b1ad8c85c59dd26325beb7b2020945d5392262d64"
+      },
+      "source_archive": {
+        "path": "out/evidence/inspector-telemetry-checks/portable-8363aded/source.zip",
+        "sha256": "91349bdd5d32d7ce9f04b1e01100d18d70531e85404e758e4304f937b9a2c132"
+      },
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^(composition|delivery|data|measured|telemetry)[.]",
+            "--output-on-failure"
+          ],
+          "exit": 0,
+          "started_at": "2026-10-09T14:44:31.425809+00:00",
+          "finished_at": "2026-10-09T14:44:32.711892+00:00",
+          "log": {
+            "path": "out/evidence/inspector-telemetry-checks/portable-8363aded/0.log",
+            "sha256": "94535ed8b32fbbf7b2e9c75c09cd6a85f755f1710efba7853e1e0b373184e677"
+          },
+          "captured_text_sha256": "3a4d5cdf65c776368030bb3107644c24110f00e160d8325045f287abc0497aa7",
+          "workspace_preflight": {
+            "action": "test",
+            "maximum_bytes": 8589934592,
+            "checkout_out_bytes": 3003418960,
+            "linux_campaign_bytes": 5148138428,
+            "retained_local_evidence_bytes": 22946848788,
+            "reserved_growth_bytes": 67108864,
+            "status": "pass",
+            "scope": "Active-output reservation, not an OS quota. Retained evidence is reported separately, preserving its previous exclusion before relocation."
+          }
+        }
+      ]
+    },
+    {
+      "stage": "portable",
+      "record": {
+        "path": "out/evidence/inspector-telemetry-checks/portable-a6c2c253/result.json",
+        "sha256": "922d3476482e6639cb9e4edb73399cee7e2460df8fdb203ce2ae784f6b41eb70"
+      },
+      "source_archive": {
+        "path": "out/evidence/inspector-telemetry-checks/portable-a6c2c253/source.zip",
+        "sha256": "d8c4e22d012f84d68b9027cd3976851481314701ed8379328ea1012636ec3769"
+      },
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^(composition|delivery|data|measured|telemetry)[.]",
+            "--output-on-failure"
+          ],
+          "exit": 8,
+          "started_at": "2026-10-09T14:43:01.534643+00:00",
+          "finished_at": "2026-10-09T14:43:02.851088+00:00",
+          "log": {
+            "path": "out/evidence/inspector-telemetry-checks/portable-a6c2c253/0.log",
+            "sha256": "d7e37b9be32cbead5d694dc5fae93786010911f9db3b2734709b9e3a7de29d51"
+          },
+          "captured_text_sha256": "dc242361fa8adf60be63d3827ace71d39aa9dcdafeeb59fedaf812742149b2eb",
+          "workspace_preflight": {
+            "action": "test",
+            "maximum_bytes": 8589934592,
+            "checkout_out_bytes": 3003418960,
+            "linux_campaign_bytes": 5148250375,
+            "retained_local_evidence_bytes": 22938493939,
+            "reserved_growth_bytes": 67108864,
+            "status": "pass",
+            "scope": "Active-output reservation, not an OS quota. Retained evidence is reported separately, preserving its previous exclusion before relocation."
+          }
+        }
+      ]
+    },
+    {
+      "stage": "regressions",
+      "record": {
+        "path": "out/evidence/inspector-telemetry-checks/regressions-3a35c09a/result.json",
+        "sha256": "21889a566888e0106aea3966edd3fea87077ae11a28f92ec035d8c6fd98ea632"
+      },
+      "source_archive": {
+        "path": "out/evidence/inspector-telemetry-checks/regressions-3a35c09a/source.zip",
+        "sha256": "b10562762bc7e8563f86332917b58e65a8aa6b89362cc8754bc2dad104a2fe59"
+      },
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.](NATIVE-COLLECTOR|NATIVE-DEMAND-EXECUTOR|PROFILE-SUPERVISOR|RUNTIME-DIRECTORY|HELPER-IDENTITY)$",
+            "--output-on-failure"
+          ],
+          "exit": 0,
+          "started_at": "2026-10-09T14:51:22.260925+00:00",
+          "finished_at": "2026-10-09T14:52:42.827956+00:00",
+          "log": {
+            "path": "out/evidence/inspector-telemetry-checks/regressions-3a35c09a/0.log",
+            "sha256": "9e912c5e44f1dd92cb963df415c6d08a5f16245536d7302f2f4af2c652bd28b0"
+          },
+          "captured_text_sha256": "c36bde530f94571311fe4b4eec447050b128c18f57e4a280b06f9b09b97f90cc",
+          "workspace_preflight": {
+            "action": "test",
+            "maximum_bytes": 8589934592,
+            "checkout_out_bytes": 3003422579,
+            "linux_campaign_bytes": 5188166535,
+            "retained_local_evidence_bytes": 23038777603,
+            "reserved_growth_bytes": 67108864,
+            "status": "pass",
+            "scope": "Active-output reservation, not an OS quota. Retained evidence is reported separately, preserving its previous exclusion before relocation."
+          }
+        }
+      ]
+    },
+    {
+      "stage": "service",
+      "record": {
+        "path": "out/evidence/inspector-telemetry-checks/service-a1106580/result.json",
+        "sha256": "850d10f5957337e64d297b04b5add887c20341dfc988e840a0da568186cbec6f"
+      },
+      "source_archive": {
+        "path": "out/evidence/inspector-telemetry-checks/service-a1106580/source.zip",
+        "sha256": "b10562762bc7e8563f86332917b58e65a8aa6b89362cc8754bc2dad104a2fe59"
+      },
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]NETWORK-(SERVICE|SUPERVISOR)$",
+            "--output-on-failure"
+          ],
+          "exit": 0,
+          "started_at": "2026-10-09T14:50:40.312766+00:00",
+          "finished_at": "2026-10-09T14:50:57.123303+00:00",
+          "log": {
+            "path": "out/evidence/inspector-telemetry-checks/service-a1106580/0.log",
+            "sha256": "0c21570cc1dda80a6c2430a65fdceeafa7af1c402b0b7b6a935bc3b0d23c2424"
+          },
+          "captured_text_sha256": "124072021cc915041a861fbd3a652e9d1e7a559b2aba734c139323d2f24acae4",
+          "workspace_preflight": {
+            "action": "test",
+            "maximum_bytes": 8589934592,
+            "checkout_out_bytes": 3003422579,
+            "linux_campaign_bytes": 5188165094,
+            "retained_local_evidence_bytes": 23012486648,
+            "reserved_growth_bytes": 67108864,
+            "status": "pass",
+            "scope": "Active-output reservation, not an OS quota. Retained evidence is reported separately, preserving its previous exclusion before relocation."
+          }
+        }
+      ]
+    },
+    {
+      "stage": "settings",
+      "record": {
+        "path": "out/evidence/inspector-telemetry-checks/settings-2a90a6bb/result.json",
+        "sha256": "f4e0d9d3cc15621ff8e83908b6a9c174c91842c6de1066953f19cc1bbb95efca"
+      },
+      "source_archive": {
+        "path": "out/evidence/inspector-telemetry-checks/settings-2a90a6bb/source.zip",
+        "sha256": "3403b01c685067f219acc006217db619957036c33c6c6839d2449b1b5de9c517"
+      },
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]INSTALLED-SETTINGS$",
+            "--output-on-failure"
+          ],
+          "exit": 0,
+          "started_at": "2026-10-09T14:58:30.764969+00:00",
+          "finished_at": "2026-10-09T14:59:20.949426+00:00",
+          "log": {
+            "path": "out/evidence/inspector-telemetry-checks/settings-2a90a6bb/0.log",
+            "sha256": "2d2ff0607edee916fd58cf07e92c51c0d6f4953fed71d7e54d247adb606610ea"
+          },
+          "captured_text_sha256": "2d2ff0607edee916fd58cf07e92c51c0d6f4953fed71d7e54d247adb606610ea",
+          "workspace_preflight": {
+            "action": "test",
+            "maximum_bytes": 8589934592,
+            "checkout_out_bytes": 3050496037,
+            "linux_campaign_bytes": 5188165998,
+            "retained_local_evidence_bytes": 23174322873,
+            "reserved_growth_bytes": 67108864,
+            "status": "pass",
+            "scope": "Active-output reservation, not an OS quota. Retained evidence is reported separately, preserving its previous exclusion before relocation."
+          }
+        }
+      ]
+    },
+    {
+      "stage": "windows",
+      "record": {
+        "path": "out/evidence/inspector-telemetry-checks/windows-0f276d46/result.json",
+        "sha256": "550dd1f5cc7ff7d72b866b326295d7bf02caddeff3788c76df38f7cb159ebac4"
+      },
+      "source_archive": {
+        "path": "out/evidence/inspector-telemetry-checks/windows-0f276d46/source.zip",
+        "sha256": "2782a43ece1f38cf172881d3de87c2a618679ecb3281f19531ab95fc166ae396"
+      },
+      "commands": [
+        {
+          "command": [
+            "cmake",
+            "--preset",
+            "windows-x64-gcc15"
+          ],
+          "exit": 0,
+          "started_at": "2026-10-09T14:54:14.979482+00:00",
+          "finished_at": "2026-10-09T14:54:16.133123+00:00",
+          "log": {
+            "path": "out/evidence/inspector-telemetry-checks/windows-0f276d46/0.log",
+            "sha256": "04023f23e594b5d7b351b27e985b8eaca60a8cdd6d2f67bcc59605eb44da3ec4"
+          },
+          "captured_text_sha256": "7991e23b732f285f39f09458a067b7102edc4729412634744b608b791b546e7d",
+          "workspace_preflight": {
+            "action": "build",
+            "maximum_bytes": 8589934592,
+            "checkout_out_bytes": 3003422579,
+            "linux_campaign_bytes": 5188170376,
+            "retained_local_evidence_bytes": 23090383738,
+            "reserved_growth_bytes": 268435456,
+            "status": "pass",
+            "scope": "Active-output reservation, not an OS quota. Retained evidence is reported separately, preserving its previous exclusion before relocation."
+          }
+        },
+        {
+          "command": [
+            "cmake",
+            "--build",
+            "--preset",
+            "windows-x64-gcc15"
+          ],
+          "exit": 0,
+          "started_at": "2026-10-09T14:54:17.813473+00:00",
+          "finished_at": "2026-10-09T14:54:21.508337+00:00",
+          "log": {
+            "path": "out/evidence/inspector-telemetry-checks/windows-0f276d46/1.log",
+            "sha256": "6bbd078882693f23ed5e719c38b4b3cd097ec6f81995a151813dcc2c5d829b4f"
+          },
+          "captured_text_sha256": "efb78b249a253193e76b379d89bcc30532dac943c83c61d61142a016e42d8c24",
+          "workspace_preflight": {
+            "action": "build",
+            "maximum_bytes": 8589934592,
+            "checkout_out_bytes": 3003437180,
+            "linux_campaign_bytes": 5188170376,
+            "retained_local_evidence_bytes": 23090384897,
+            "reserved_growth_bytes": 268435456,
+            "status": "pass",
+            "scope": "Active-output reservation, not an OS quota. Retained evidence is reported separately, preserving its previous exclusion before relocation."
+          }
+        },
+        {
+          "command": [
+            "ctest",
+            "--preset",
+            "windows-x64-gcc15",
+            "-R",
+            "^(composition|delivery|data|measured|telemetry)[.]",
+            "--output-on-failure"
+          ],
+          "exit": 0,
+          "started_at": "2026-10-09T14:54:23.258609+00:00",
+          "finished_at": "2026-10-09T14:54:27.120664+00:00",
+          "log": {
+            "path": "out/evidence/inspector-telemetry-checks/windows-0f276d46/2.log",
+            "sha256": "cf54b60ce86044180d861e1c91422fb6f546a572ee0102e60adb34703af29e18"
+          },
+          "captured_text_sha256": "f0e8754986fd7b9871c675829bc8a27b56d41f71584e7bf5fe4ed57b3be028c3",
+          "workspace_preflight": {
+            "action": "test",
+            "maximum_bytes": 8589934592,
+            "checkout_out_bytes": 3043529167,
+            "linux_campaign_bytes": 5188170376,
+            "retained_local_evidence_bytes": 23090386017,
+            "reserved_growth_bytes": 67108864,
+            "status": "pass",
+            "scope": "Active-output reservation, not an OS quota. Retained evidence is reported separately, preserving its previous exclusion before relocation."
+          }
+        }
+      ]
+    }
+  ],
+  "native_archives": [
+    {
+      "index": {
+        "path": "out/evidence/inspector-telemetry-native/consumer-deadline-final/index.json",
+        "sha256": "6f5eb643d3654c7f236eba66f08c5867c25e832d9057fd5fc3c27d3a8f8d0594"
+      },
+      "archive": {
+        "path": "out/evidence/inspector-telemetry-native/consumer-deadline-final/native-evidence.zip",
+        "sha256": "4c85ee9db72c11db31ff465fb6be7d1a834ffe041279fcc155ef46ad1956e754"
+      },
+      "preserved_bytes": 67517148,
+      "results": [
+        {
+          "path": "network-consumer-81a2c535/result.json",
+          "sha256": "3a84e007402450af82d2e3bb090de5919aee7d23b50ce20f91e7829583d3afbc",
+          "family": "NETWORK-CONSUMER",
+          "outcome": "pass",
+          "cases": 11
+        }
+      ]
+    },
+    {
+      "index": {
+        "path": "out/evidence/inspector-telemetry-native/consumer-final/index.json",
+        "sha256": "61809279356e82588426af45936acb071084c4f21f7c4d9890132303cf1c54a1"
+      },
+      "archive": {
+        "path": "out/evidence/inspector-telemetry-native/consumer-final/native-evidence.zip",
+        "sha256": "c508ab55ec5ce125df6832a9aa14eceb19793124de0329f0387a73c8a4166c78"
+      },
+      "preserved_bytes": 67517120,
+      "results": [
+        {
+          "path": "network-consumer-33114fbb/result.json",
+          "sha256": "a445e7e84730b8a02fd0780e7493b0d08365a199bb4e033e7a260f84884694b9",
+          "family": "NETWORK-CONSUMER",
+          "outcome": "pass",
+          "cases": 11
+        }
+      ]
+    },
+    {
+      "index": {
+        "path": "out/evidence/inspector-telemetry-native/installed/index.json",
+        "sha256": "7098abfe610b10158e639b23ac6264c39a31f3dcd3c2a74eac1ac4ed7f152306"
+      },
+      "archive": {
+        "path": "out/evidence/inspector-telemetry-native/installed/native-evidence.zip",
+        "sha256": "96614e23b998c5dc0e5e71f0abe129a2c407563462cd76e6449bd79124ff490d"
+      },
+      "preserved_bytes": 142623831,
+      "results": [
+        {
+          "path": "inspector-frontend-f44a6dae64/result.json",
+          "sha256": "26f4001245680b97351ee55ec9b09a8ce0ea25e2c053bf2f1f82b3029b9302a3",
+          "family": "INSTALLED-INSPECTOR",
+          "outcome": "pass",
+          "cases": 12
+        }
+      ]
+    },
+    {
+      "index": {
+        "path": "out/evidence/inspector-telemetry-native/native-attempt-1/index.json",
+        "sha256": "e72e921a8428bb7d6ac14a759b5831796a002dc0e1e97f3f4d050ba43f70c6fa"
+      },
+      "archive": {
+        "path": "out/evidence/inspector-telemetry-native/native-attempt-1/native-evidence.zip",
+        "sha256": "f07ea2bf7bca5d85577b17a0c3ed4dfea2205430af4d034c7cd262c954c42a38"
+      },
+      "preserved_bytes": 67515420,
+      "results": [
+        {
+          "path": "network-consumer-80172456/result.json",
+          "sha256": "70103f1b135899abd5ae4805923c0919fd93f43a088931edbd161b4b49eb86c7",
+          "family": "NETWORK-CONSUMER",
+          "outcome": "fail",
+          "cases": 5
+        }
+      ]
+    },
+    {
+      "index": {
+        "path": "out/evidence/inspector-telemetry-native/package/index.json",
+        "sha256": "5f06683c1e65f0942ee9f5428d33e8bd5a695a4ee628f6d2bbd48efbced67547"
+      },
+      "archive": {
+        "path": "out/evidence/inspector-telemetry-native/package/native-evidence.zip",
+        "sha256": "250dcb93fd0b0265440b3758b4dd63e6d8ceb409e314a8811ce0995daea61afe"
+      },
+      "preserved_bytes": 141653190,
+      "results": []
+    },
+    {
+      "index": {
+        "path": "out/evidence/inspector-telemetry-native/regressions/index.json",
+        "sha256": "67e42584c1e8b32c5b5afec4411ca8064f414f0acab5ad093e73eab0673f0075"
+      },
+      "archive": {
+        "path": "out/evidence/inspector-telemetry-native/regressions/native-evidence.zip",
+        "sha256": "778911fc64ab8408be9c810e165bb86ec840836a89cc4b72dc3166dd58bb06c3"
+      },
+      "preserved_bytes": 91905358,
+      "results": [
+        {
+          "path": "NATIVE-COLLECTOR-002edf020241.json",
+          "sha256": "008846ded2c7dcee7224347ab37926c7adbf3cd3708cd886e7a3dbf881ae10ca",
+          "family": "NATIVE-COLLECTOR",
+          "outcome": "pass",
+          "cases": 8
+        },
+        {
+          "path": "NATIVE-DEMAND-EXECUTOR-269cfd070c854b11b42d78ff3e425037.json",
+          "sha256": "9f9c1b6a54956a6504913c341dd312190bd29af972e1c3d39482128b60bbc60e",
+          "family": "NATIVE-DEMAND-EXECUTOR",
+          "outcome": "pass",
+          "cases": 5
+        },
+        {
+          "path": "hi-260bc32040/result.json",
+          "sha256": "6063046bb359b7616416e420df7b5073819bb614876e7fed79a5f1a333e16af4",
+          "family": "HELPER-IDENTITY",
+          "outcome": "pass",
+          "cases": 21
+        },
+        {
+          "path": "ps-57b77f9f08/result.json",
+          "sha256": "5546750fe2fd8d07378af5cc4b8b6b0f53151278a6cbe45904208c8f748571f8",
+          "family": "PROFILE-SUPERVISOR",
+          "outcome": "pass",
+          "cases": 19
+        },
+        {
+          "path": "runtime-6dc3bf7d5a/result.json",
+          "sha256": "fcf1ae207c2f6fa55223c3a40f3f94a25c25d64e760c78acb7d4c8a9e7e1933e",
+          "family": "RUNTIME-DIRECTORY",
+          "outcome": "pass",
+          "cases": 14
+        }
+      ]
+    },
+    {
+      "index": {
+        "path": "out/evidence/inspector-telemetry-native/service/index.json",
+        "sha256": "4dea92d11adf73541f7e13bed6140465cd6ccca5ebbbcfbbda6feac708edf379"
+      },
+      "archive": {
+        "path": "out/evidence/inspector-telemetry-native/service/native-evidence.zip",
+        "sha256": "463b48ac5237b97a2c0df34ab7881d82305e77dcd165088a6ad5acf59c5d60f8"
+      },
+      "preserved_bytes": 60187898,
+      "results": [
+        {
+          "path": "network-service-5040ecca/result.json",
+          "sha256": "cc4e4c5b96fd40e0f4a35f9c1afbbc5dbc4f2f90cdc80882d0f58a1aefced34a",
+          "family": "NETWORK-SERVICE",
+          "outcome": "pass",
+          "cases": 13
+        },
+        {
+          "path": "network-supervisor-fa6d073d/result.json",
+          "sha256": "9f396b86ea9ca98b70feef63fa37f14567043e7eb8b12cfccfd5548c4bb5a856",
+          "family": "NETWORK-SUPERVISOR",
+          "outcome": "pass",
+          "cases": 5
+        }
+      ]
+    },
+    {
+      "index": {
+        "path": "out/evidence/inspector-telemetry-native/settings/index.json",
+        "sha256": "e83a838fe1ac2690887921013a09dff20bf852d93047e2e82d907871265d66ab"
+      },
+      "archive": {
+        "path": "out/evidence/inspector-telemetry-native/settings/native-evidence.zip",
+        "sha256": "215f8c6de6edcbbfa9c00c2ff69ab1cd32c2c771114304505d57df23271078d3"
+      },
+      "preserved_bytes": 284099671,
+      "results": [
+        {
+          "path": "frontend-49e9139a4f/result.json",
+          "sha256": "56b08d767a0aecbfc8a05fad0d248e2434370147848dd1ede83cd65d71a5f31a",
+          "family": "INSTALLED-SETTINGS",
+          "outcome": "pass",
+          "cases": 12
+        }
+      ]
+    }
+  ],
+  "package_smoke": {
+    "kind": "local-development-frontend-install-smoke",
+    "outcome": "pass",
+    "publication": "none",
+    "reservation": {
+      "windows": 3050475363,
+      "linux": 5188165864,
+      "extra": 326666938,
+      "maximum": 8589934592
+    },
+    "command": [
+      "cmake",
+      "--install",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13",
+      "--component",
+      "DevelopmentFrontend",
+      "--prefix",
+      "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence/consumer-package-98961078/stage"
+    ],
+    "exit": 0,
+    "files": {
+      "bin/syspane": "183116690ec5fb9ddad033b9145bac9845c4cecde51afe45a22dcea684ade773",
+      "libexec/syspane/syspane-configuration-host": "edc9c99d8d41d2cbf35bff419659240a3ecea302424dc16f2f2689f43ecdf31a",
+      "libexec/syspane/syspane-image-worker": "65b38c368c9472405163a244c7f1b0ddf2c8702bb5e7945e147cb4a5935e777c",
+      "libexec/syspane/syspane-recovery-worker": "542b2fcb0aa20f674b98e5039af0e2ca512c43c5325c08cd286a03248a07416b",
+      "share/syspane/helpers.json": "5db06c1ee663b1cf4c62ac5f0e93325ef70108753074e8234bb5b47a76c3319f"
+    },
+    "archive_sha256": "5a19229e0c30f922900a84d802c8cca7acfeaf43e73f189001be4196ca78e471",
+    "production_network_refusal": {
+      "exit": 2,
+      "ready": false,
+      "snapshots": 0,
+      "local_fixture_file_did_not_grant": true
+    }
+  },
+  "final_native_families": {
+    "NETWORK-CONSUMER": 11,
+    "INSTALLED-INSPECTOR": 12,
+    "NATIVE-COLLECTOR": 8,
+    "NATIVE-DEMAND-EXECUTOR": 5,
+    "HELPER-IDENTITY": 21,
+    "PROFILE-SUPERVISOR": 19,
+    "RUNTIME-DIRECTORY": 14,
+    "NETWORK-SERVICE": 13,
+    "NETWORK-SUPERVISOR": 5,
+    "INSTALLED-SETTINGS": 12
+  },
+  "final_native_cases": 120,
+  "frozen_oracles_and_corrections": [
+    {
+      "path": "out/evidence/inspector-telemetry/delivery-frozen.json",
+      "sha256": "8f67b713aa4c446a5b29239b65dd58e18ddfee1e021e6fee78021bc4fcebd0f5"
+    },
+    {
+      "path": "out/evidence/inspector-telemetry/delivery-oracle-correction.json",
+      "sha256": "77f9ad9c6a92cec268f5c3669fe8cbee8efbfdd655bcee7eb3c2eae2b32e2fc1"
+    },
+    {
+      "path": "out/evidence/inspector-telemetry/native-consumer-frozen.json",
+      "sha256": "11f32fad24fe3e5471736c80a0ab78af3ded1c2a87c3c86ac097bab8d1d28cd3"
+    },
+    {
+      "path": "out/evidence/inspector-telemetry/native-oracle-correction.json",
+      "sha256": "f51afa15d022f13aee0a460eecc0ebc6f541bee53383c6a4d23be7ec8e5ee0d5"
+    },
+    {
+      "path": "out/evidence/inspector-telemetry/source-binding.json",
+      "sha256": "1d386a62ea0e793206d58146ef772ac1f3bc3456d2b07de039eb2b3e1819bc28"
+    }
+  ],
+  "portable": {
+    "legacy_artifact_checks": 2,
+    "windows-x86-v141-xp": 30,
+    "linux-x64-gcc13": 30,
+    "windows-x64-gcc15": 30
+  },
+  "artifacts": {
+    "linux-x64-gcc13": {
+      "syspane_network_consumer_probe": "64eba50cd05171436632ee78f704e6fda99ab6fcb1d2ce2720cc3531d2610c97",
+      "syspane_telemetry_delivery_tests": "35d5cde195f5d18af9252f4fd0ef9558111978f4d46779fe9ac1d1b2b9935765",
+      "syspane_frontend_helper_fixture": "dd08e10f4f6bfa5d42549d7437e410139a2c6c88e9552ff89a2c016a3f62ed23",
+      "syspane-configuration-host": "edc9c99d8d41d2cbf35bff419659240a3ecea302424dc16f2f2689f43ecdf31a",
+      "syspane": "183116690ec5fb9ddad033b9145bac9845c4cecde51afe45a22dcea684ade773",
+      "libsyspane_network_consumer.a": "6151e8235838067095a1d9a16f09bad6b2def048f8c7a8b672abd65c1c46b178",
+      "libsyspane_telemetry_delivery.a": "6d5343f326a8d435be4e926f121b5b3e94fc12137a8be40f4136474921242ec2"
+    },
+    "windows-x64-gcc15": {
+      "syspane_telemetry_delivery_tests.exe": "ed21d0e9fcc57217e5c338f21e13730f9086e1b0a803b78d6e42b066854829dc"
+    },
+    "windows-x86-v141-xp": {
+      "syspane_telemetry_delivery_tests.exe": "85123e9693bac68d2e012d1f1ae89dca1dbdaf47ca80ea728fbcd439cf37e4f1"
+    }
+  },
+  "limitations": [
+    "The ordinary Linux frontend does not yet instantiate the new consumer, second supervisor or delivery object. W-11 remains in progress.",
+    "Installed live inspector UI oracle, batching, current-profile intent, navigation/erasure, maximum-input responsiveness and topology/image qualification remain required.",
+    "Native positive policy is compiled into an unprivileged test fixture; protected deployment and all five complete native release editions remain unqualified.",
+    "Windows toolchain host tests are not execution qualification on Windows 9x/XP/7 or another historical system.",
+    "Ignored local evidence locators are not portable build dependencies; a fresh checkout reruns the declared commands in its own admitted workspace."
+  ],
+  "specification_checks": {
+    "generate.json": {
+      "path": "out/evidence/inspector-telemetry/spec-checks/generate.json",
+      "sha256": "6a3b28598ebdf6143ae5ff1bb4c66d560c971f00b0e1e2d0f2835470caa2af58"
+    },
+    "tool-tests.log": {
+      "path": "out/evidence/inspector-telemetry/spec-checks/tool-tests.log",
+      "sha256": "67b489d117b6d0fd4d93cf512a85000abf498cdd92922bacda4b5356d66a38db"
+    },
+    "validation-final.json": {
+      "path": "out/evidence/inspector-telemetry/spec-checks/validation-final.json",
+      "sha256": "588b624956c11089708a5a1b8b7334e2fa3b22435e2063f7b1c90714a11343dc"
+    },
+    "validation.json": {
+      "path": "out/evidence/inspector-telemetry/spec-checks/validation.json",
+      "sha256": "588b624956c11089708a5a1b8b7334e2fa3b22435e2063f7b1c90714a11343dc"
+    }
+  },
+  "tooling_attempts": [
+    {
+      "outcome": "fail",
+      "operation": "seal --apply",
+      "reason": "Generated catalog was stale after the final checkpoint/current-state edits. No native result changed. Regenerate the catalog, then validate and reseal.",
+      "record": {
+        "path": "out/evidence/inspector-telemetry/spec-checks/seal.json",
+        "sha256": "b8291728f832dc514e00baa5e88c57cc23e9cd88eca0fa5435a16464dab09666"
+      },
+      "observer_error": "Wrapper assumed stdout JSON; refusal was written to stderr. Preserve the combined original output and inspect process exit first."
+    }
+  ]
+}

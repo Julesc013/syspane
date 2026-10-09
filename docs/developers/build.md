@@ -1,5 +1,21 @@
 # Developer setup and checks
 
+The [inspector telemetry package](../../spec/delivery/packages/w-11-inspector-telemetry.md)
+now has a native consumer and portable delivery receiver. After ordinary workspace
+preflight and configure/build, run:
+
+```sh
+ctest --preset linux-x64-gcc13 -R '^native[.]NETWORK-(CONSUMER|SERVICE|SUPERVISOR)$' --output-on-failure
+ctest --preset <profile> -R '^(delivery|data|measured|telemetry|composition)[.]' --output-on-failure
+```
+
+Run the portable selection on all three development profiles. Native cases use
+an owned relocated helper fixture and independent peers/kernel counters. Preserve
+raw records and failures before reclaiming duplicate output files. The
+[handoff](../../spec/delivery/inspector-telemetry-handoff.md) records the current
+receiver boundary; ordinary inspector integration and its installed GUI oracles
+remain mandatory next work. No production policy or release is installed.
+
 The [network service package](../../spec/delivery/packages/w-25-network-service.md)
 defines the independently supervised producer for inspector integration. After
 ordinary workspace preflight and Linux configure/build, run:

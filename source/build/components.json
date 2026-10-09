@@ -3922,6 +3922,115 @@
       "profiles": [
         "linux-x64-gcc13"
       ]
+    },
+    {
+      "id": "telemetry-delivery",
+      "target": "syspane_telemetry_delivery",
+      "type": "STATIC_LIBRARY",
+      "source_owner": "source/diagnostics/",
+      "public_interfaces": [
+        "source/diagnostics/telemetry_delivery.hpp"
+      ],
+      "private_interfaces": [],
+      "sources": [
+        "source/diagnostics/telemetry_delivery.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_data_view"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "console"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "windows-x64-gcc15",
+        "linux-x64-gcc13",
+        "windows-x86-v141-xp"
+      ]
+    },
+    {
+      "id": "telemetry-delivery-tests",
+      "target": "syspane_telemetry_delivery_tests",
+      "type": "EXECUTABLE",
+      "source_owner": "tests/fault/",
+      "public_interfaces": [],
+      "private_interfaces": [],
+      "sources": [
+        "tests/fault/telemetry_delivery_tests.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_telemetry_delivery"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "windows-x64-gcc15",
+        "linux-x64-gcc13",
+        "windows-x86-v141-xp"
+      ]
+    },
+    {
+      "id": "network-consumer",
+      "target": "syspane_network_consumer",
+      "type": "STATIC_LIBRARY",
+      "source_owner": "source/application/",
+      "public_interfaces": [
+        "source/application/network_consumer_linux.hpp"
+      ],
+      "private_interfaces": [],
+      "sources": [
+        "source/application/network_consumer_linux.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_telemetry_delivery",
+        "syspane_network_publication",
+        "syspane_local_ipc"
+      ],
+      "target_requirements": [
+        "cxx17",
+        "native_local_ipc"
+      ],
+      "roles": [
+        "console"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
+    },
+    {
+      "id": "network-consumer-probe",
+      "target": "syspane_network_consumer_probe",
+      "type": "EXECUTABLE",
+      "source_owner": "tests/configuration/",
+      "public_interfaces": [],
+      "private_interfaces": [],
+      "sources": [
+        "tests/configuration/network_consumer_probe.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_network_consumer",
+        "syspane_profile_supervisor"
+      ],
+      "target_requirements": [
+        "cxx17",
+        "native_local_ipc"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
     }
   ]
 }

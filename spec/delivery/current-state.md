@@ -12,10 +12,18 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-09T14:21:37.569718+00:00", "scope": "Supervised native network service; installed consumer next"}
+updated: {"by": "codex", "at": "2026-10-09T15:01:36.011136+00:00", "scope": "Native inspector consumer and bounded delivery; ordinary UI adoption next"}
 ---
 
 # Current state and next admitted boundary
+
+The [inspector telemetry receiver](inspector-telemetry-handoff.md) now authenticates
+and consumes the measured native service, preserving original receipt/measurement
+identity in a bounded latest-full delivery object. Native peer/counter and portable
+lease/clock cases pass. Continue the existing W-11 package by connecting this
+receiver to the ordinary frontend's current-profile intent and independent owners,
+then batch inspector rendering and qualify its installed live UI. That integration
+and all five complete editions remain unfinished.
 
 The [native network service](network-service-handoff.md) now reuses verified helper
 installation, independent supervision, native acquisition and demand/session owners.

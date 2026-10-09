@@ -46,7 +46,7 @@ int run_network_controller(std::uint64_t parent,std::function<c::Policy()> polic
         std::optional<os::Stream> client;std::unique_ptr<p::Framer> decoder;std::unique_ptr<n::DemandSessions> sessions;
         std::unique_ptr<os::NetworkWatch> watch;std::unique_ptr<n::NetworkState> state;
         std::unique_ptr<collectors::NetworkTask> task;std::string sampled_utc;
-        const auto check_policy=[&]{const auto current=policy();need(current.available&&same(current,baseline),"network.policy");last_policy=os::monotonic_ms();};
+        const auto check_policy=[&]{const auto current=policy();if(!current.available||!same(current,baseline))std::_Exit(126);last_policy=os::monotonic_ms();};
         const auto stop=[&]{
             if(stopping)return;
             stopping=true;stop_at=os::monotonic_ms();if(task)task->cancel();
