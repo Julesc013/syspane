@@ -489,7 +489,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "09ab9c0a10a27fc1a6eeac1725da10179dc80fc09653f8dde61336a7ed193e9f"
+      "sha256": "0e1b50f0faee8074473066c49c7182add2d629de09a5c3e5ac3e63b93880bd2a"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -948,6 +948,17 @@
         "SP-INITIAL-PREVIEW-HANDOFF"
       ],
       "sha256": "1c1f7f49ddcdb47c1a68c547e507f07a682d74bfe6742a147200cdc758e0c74b"
+    },
+    {
+      "id": "SP-HISTORY-WORKER-HANDOFF",
+      "path": "delivery/history-worker-handoff.md",
+      "title": "Native history worker handoff",
+      "description": "Bounded native history computation is verified; current-form integration remains next.",
+      "requires": [
+        "SP-W11-HISTORY-WORKER",
+        "SP-HISTORY-PREPARATION-HANDOFF"
+      ],
+      "sha256": "9da2c3034c1db9579e10c9968f510030132009a8ae574cf63970e9581439fbf6"
     },
     {
       "id": "SP-IMAGE-PIPELINE-HANDOFF",
@@ -2343,6 +2354,18 @@
       "sha256": "40e3f949df5bd8ea56891d22ee71937f10479ac4764a2c4b517993f06a18013e"
     },
     {
+      "id": "SP-W11-HISTORY-WORKER",
+      "path": "delivery/packages/w-11-history-worker.md",
+      "title": "Native history preparation ownership",
+      "description": "Bound history work on the existing helper worker and preserve current-draft adoption.",
+      "requires": [
+        "SP-W11-HISTORY-PREPARATION",
+        "SP-W11-EDITOR-HELPER-WORKER",
+        "SP-W11-RECOVERY-PREPARATION"
+      ],
+      "sha256": "0198d187096cf21ce9eb5cc83739bdafd4a1a662a8df5c8d5471810b4302f03c"
+    },
+    {
       "id": "SP-W11-INITIAL-PREVIEW",
       "path": "delivery/packages/w-11-initial-preview.md",
       "title": "Initial editor preview readiness",
@@ -3642,7 +3665,7 @@
         "SP-RENDERING",
         "SP-COMMANDS"
       ],
-      "sha256": "31f48f9582e2c3107e3b221e160f82c8a39df533e15c15d2b723d41780d8ac2f"
+      "sha256": "9e6f606abe5cff0bc6e4a28ed1d4f9e6a87283495a9d67093316cd0c1570142f"
     },
     {
       "id": "SP-POLICY",

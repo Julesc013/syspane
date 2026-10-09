@@ -254,5 +254,7 @@ permits full undo/redo validation on detached state. Only the exact unchanged or
 may adopt its opaque result, with current authorization and existing history bounds.
 Structural submit hints never carry permission. Selection invalidates history work
 while retaining the distinct recovery-selection rule. The
-[handoff](../delivery/history-preparation-handoff.md) records portable implementation;
-installed worker/GUI scheduling and complete native qualification remain required.
+[portable handoff](../delivery/history-preparation-handoff.md) records draft behavior.
+The [native worker contract](../delivery/packages/w-11-history-worker.md) now bounds
+task lifetime, cancellation and recovery coexistence on the existing worker. Current
+form adoption, preview scheduling and complete GUI qualification remain required.

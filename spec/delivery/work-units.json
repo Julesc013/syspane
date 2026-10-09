@@ -561,7 +561,8 @@
         "SP-W11-PREPARED-EDITOR",
         "SP-W11-EDITOR-PAINT-TRACE",
         "SP-W11-INITIAL-PREVIEW",
-        "SP-W11-HISTORY-PREPARATION"
+        "SP-W11-HISTORY-PREPARATION",
+        "SP-W11-HISTORY-WORKER"
       ],
       "acceptance_tests": [
         "T-SETTINGS",
@@ -623,14 +624,17 @@
         "tests/configuration/editor_paint_trace_tests.py",
         "tests/editor/initial_input.hpp",
         "source/interfaces/editor_history.cpp",
-        "tests/editor/history_preparation_tests.cpp"
+        "tests/editor/history_preparation_tests.cpp",
+        "source/interfaces/editor_history_task.hpp",
+        "tests/configuration/history-worker-cases.json",
+        "tests/configuration/native_history_worker.py"
       ],
       "status": "in_progress",
       "authority_class": "development",
       "execution_grant": "user:foundation-native-campaign-2026-10-05",
-      "notes": "Detached one-shot history validation and exact current-owner adoption now preserve scene/resource checks, selection, request continuity, history bounds and current authorization. Structural submit hints are prepared separately from permission. All 996 selected portable checks, two legacy PE checks and 113 named native regression cases plus SCENE-IMAGE pass. The installed frontend still uses synchronous history. Next close bounded history-task ownership, recovery coexistence, cancellation and shutdown on the existing worker; integrate current-form adoption and native preview rebuilding, then rerun the unchanged ordinary GUI limits. Four earlier GUI delay failures remain prior evidence and production recovery stays disabled. General asynchronous authoring, native inspector, telemetry/desktop integration, lifecycle, imports/layers, accessibility/performance, other adapters and all five complete editions remain required.",
-      "package": "delivery/packages/w-11-history-preparation.md",
-      "evidence": "delivery/history-preparation-handoff.md"
+      "notes": "The existing native helper worker now admits one history task alongside one recovery preparation, runs the oldest eligible pure task per poll and preserves cancellation/reservation ownership until stopped. Exact scenes, current-draft proofs, capacity, owner checks, running cancellation/release/close and both coexistence orders pass 13 new cases; 111 named native cases overall, 27 unchanged portable history checks and six component checks pass. Two invalid large-fixture setup attempts and a local coordinator failure remain preserved. The installed GUI still uses synchronous history. Next freeze and implement current-form admission, recovery capture suspension, conflicting-action refusal, current-owner adoption and native preview refresh, then run unchanged ordinary GUI timing/erasure qualification. Four earlier GUI delay failures remain prior evidence; production recovery stays disabled. General asynchronous authoring, native inspector, telemetry/desktop integration, lifecycle, imports/layers, accessibility/performance, other adapters and all five complete editions remain required.",
+      "package": "delivery/packages/w-11-history-worker.md",
+      "evidence": "delivery/history-worker-handoff.md"
     },
     {
       "id": "W-12",

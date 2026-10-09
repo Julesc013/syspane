@@ -48,6 +48,14 @@ struct TimedPreparation final:ui::RecoveryPreparationTask {
     std::unique_ptr<ui::RecoveryPrepared> take()override{return times.measure("preparation.take",[&]{return task->take();});}
     void cancel()override{times.measure("preparation.cancel",[&]{task->cancel();});}
 };
+struct TimedHistory final:ui::HistoryPreparationTask {
+    TaskTimes& times;std::unique_ptr<ui::HistoryPreparationTask> task;
+    TimedHistory(TaskTimes& t,std::unique_ptr<ui::HistoryPreparationTask> p):times(t),task(std::move(p)){}
+    ~TimedHistory() override{times.measure("history.destroy",[&]{task.reset();});}
+    ui::HistoryPreparationStatus status()const override{return times.measure("history.status",[&]{return task->status();});}
+    std::unique_ptr<ui::HistoryPrepared> take()override{return times.measure("history.take",[&]{return task->take();});}
+    void cancel()override{times.measure("history.cancel",[&]{task->cancel();});}
+};
 void need(bool ok,const char* code){if(!ok)throw syspane::protocol::Error(code);}
 std::string read(const std::string& path){std::ifstream f(path,std::ios::binary);need(static_cast<bool>(f),"probe.input");std::string bytes{std::istreambuf_iterator<char>(f),{}};need(bytes.size()<=8388609,"probe.capacity");return bytes;}
 void emit(const Json& value){std::cout<<value.dump()<<std::endl;}
@@ -79,7 +87,8 @@ struct Worker {
     void step(){std::unique_lock<std::mutex> lock(mutex);++requested;condition.notify_all();need(condition.wait_for(lock,std::chrono::seconds(8),[&]{return completed==requested||!error.empty();})&&error.empty(),"probe.worker_timeout");}
     void start(){std::lock_guard<std::mutex> lock(mutex);need(requested==completed,"probe.worker_busy");++requested;condition.notify_all();}
     bool busy(){std::lock_guard<std::mutex> lock(mutex);need(error.empty(),"probe.worker_error");return completed!=requested;}
-    ~Worker(){client.close();{std::lock_guard<std::mutex> lock(mutex);quit=true;condition.notify_all();}if(thread.joinable())thread.join();}
+    void stop(){client.close();{std::lock_guard<std::mutex> lock(mutex);quit=true;condition.notify_all();}if(thread.joinable())thread.join();}
+    ~Worker(){stop();}
 };
 }
 int main(int argc,char** argv){try{
@@ -101,17 +110,20 @@ int main(int argc,char** argv){try{
     const v::ImageFactory image_factory=[&](std::string media,std::string bytes){auto task=times.measure("image.create",[&]{return client.images()(std::move(media),std::move(bytes));});return std::make_unique<TimedImage>(times,std::move(task));};
     auto recovery_factory=std::make_shared<const os::RecoveryFactory>([&](std::string path,os::RecoveryContext context){auto task=times.measure("recovery.create",[&]{return (*client.recovery())(std::move(path),std::move(context));});return std::make_unique<TimedRecovery>(times,std::move(task));});
     auto preparations=std::make_shared<const ui::RecoveryPreparationFactory>([&](std::unique_ptr<ui::RecoveryWork> input){auto task=times.measure("preparation.create",[&]{return (*client.preparations())(std::move(input));});return std::make_unique<TimedPreparation>(times,std::move(task));});
+    const ui::HistoryPreparationFactory histories=[&](std::unique_ptr<ui::HistoryWork> input){auto task=times.measure("history.create",[&]{return (*client.history_preparations())(std::move(input));});return std::make_unique<TimedHistory>(times,std::move(task));};
     Worker worker(client,std::move(admission));emit({{"event","ready"},{"worker",worker.tid},{"before_attach",before},{"status",state(client.status())}});
     std::map<std::uint64_t,std::unique_ptr<v::ImageTask>> images;std::uint64_t ids=0;
     std::unique_ptr<os::RecoveryTask> recovery;std::unique_ptr<v::SceneSurface> surface;
     std::unique_ptr<ui::EditorDraft> draft;std::unique_ptr<ui::EditorRecoverySession> session;std::uint64_t clock=0;
     std::unique_ptr<ui::RecoveryPreparationTask> preparation;std::unique_ptr<ui::RecoveryPrepared> prepared;bool capture=false,asynchronous=false;
+    std::unique_ptr<ui::HistoryPreparationTask> history;std::unique_ptr<ui::HistoryPrepared> history_result;std::unique_ptr<ui::EditorDraft> capacity_draft;
     const auto recovery_cases=settings_fixture::read(root+"/tests/editor/recovery-draft-cases.json");
     const ui::RecoveryIdentity recovery_identity{recovery_cases["identity"]["profile"],recovery_cases["identity"]["generation"]};
     auto make_draft=[&]{
         need(!draft,"probe.active");settings_fixture::Fixture f(root);auto grant=theme_history_fixture::policy();grant.disclosure[{"desktop","history"}]={"sensitive"};
         auto resources=theme_history_fixture::context(f);resources.capabilities.insert("editor.recovery");draft=std::make_unique<ui::EditorDraft>(theme_history_fixture::authority(),grant,f.authored,"E1",resources,true);
     };
+    auto history_snapshot=[&]()->Json{need(static_cast<bool>(draft),"probe.draft");return {{"scene",*draft->scene()},{"selection",draft->selection()},{"undo",draft->undo_count()},{"redo",draft->redo_count()}};};
     std::string line;
     while(std::getline(std::cin,line)){
         need(line.size()<=65536,"probe.capacity");const auto q=Json::parse(line);const std::string op=q.at("op");Json reply;std::string input;
@@ -121,7 +133,48 @@ int main(int argc,char** argv){try{
             if(op=="pump"){worker.step();reply=state(client.status());}
             else if(op=="pump-start"){worker.start();reply={{"started",true}};}
             else if(op=="worker-state")reply={{"busy",worker.busy()}};
+            else if(op=="worker-exit"){worker.stop();reply={{"stopped",true}};}
             else if(op=="status")reply=state(client.status());
+            else if(op=="history-fixture"){
+                make_draft();capacity_draft=std::make_unique<ui::EditorDraft>(*draft);
+                capacity_draft->execute({ui::WidgetPropertyEdit{"widget:text",ui::WidgetProperty::title,"Capacity"}});
+                if(q.value("large",false)){
+                    std::vector<ui::SceneEdit> edits;const auto initial=draft->scene()->at("widgets").size(),roots=draft->scene()->at("roots").size();
+                    for(std::size_t n=initial;n<256;++n){
+                        auto w=draft->scene()->at("widgets")[0];w["id"]="history:"+std::to_string(n);w["content"]["body"]=std::string(512,'x');edits.push_back(ui::InsertWidget{w,std::nullopt,roots+n-initial});
+                        if(edits.size()==128){draft->execute(edits);edits.clear();}
+                    }
+                    if(!edits.empty())draft->execute(edits);
+                }
+                draft->select({"widget:text"});draft->execute({ui::WidgetPropertyEdit{"widget:text",ui::WidgetProperty::title,"First"}});
+                draft->select({});draft->execute({ui::WidgetPropertyEdit{"widget:text",ui::WidgetProperty::title,"Second"}});reply={{"created",true}};
+            }else if(op=="history-create"||op=="history-consumed"){
+                need(draft&&!history&&!history_result,"probe.active");auto work=times.measure("history.work",[&]{return draft->history_work(q.value("forward",false));});
+                if(work&&op=="history-consumed"){
+                    std::exception_ptr error;std::thread first([&]{try{(void)work->run();}catch(...){error=std::current_exception();}});first.join();if(error)std::rethrow_exception(error);
+                }
+                if(work){history=histories(std::move(work));reply={{"created",true}};}else reply={{"created",false}};
+            }else if(op=="history-null"){auto extra=histories({});reply={{"created",true}};
+            }else if(op=="history-capacity"){
+                need(static_cast<bool>(capacity_draft),"probe.draft");auto extra=histories(capacity_draft->history_work(false));reply={{"created",true}};
+            }else if(op=="history-poll"){
+                need(static_cast<bool>(history),"probe.history");const auto s=history->status();reply={{"ready",s.ready},{"stopped",s.stopped},{"running",s.running},{"error",s.error},{"handles",client.status().history_handles}};
+            }else if(op=="history-handles")reply={{"handles",client.status().history_handles}};
+            else if(op=="history-take"){need(static_cast<bool>(history),"probe.history");history_result=history->take();reply={{"taken",true}};}
+            else if(op=="history-adopt"){need(draft&&history_result,"probe.history");times.measure("history.adopt",[&]{draft->adopt_history(std::move(history_result));});reply=history_snapshot();}
+            else if(op=="history-snapshot")reply=history_snapshot();
+            else if(op=="history-select"){need(static_cast<bool>(draft),"probe.draft");draft->select({});reply={{"selected",true}};}
+            else if(op=="history-cancel"){need(static_cast<bool>(history),"probe.history");history->cancel();reply={{"cancelled",true}};}
+            else if(op=="history-drop"){history_result.reset();history.reset();reply={{"dropped",true},{"handles",client.status().history_handles}};}
+            else if(op=="history-wrong-thread"){
+                need(history&&capacity_draft,"probe.history");std::vector<std::string> errors;auto work=capacity_draft->history_work(false);const auto factory=client.history_preparations();
+                std::thread other([&]{
+                    try{history->status();}catch(const std::exception& e){errors.emplace_back(e.what());}
+                    try{history->take();}catch(const std::exception& e){errors.emplace_back(e.what());}
+                    try{history->cancel();}catch(const std::exception& e){errors.emplace_back(e.what());}
+                    try{(*factory)(std::move(work));}catch(const std::exception& e){errors.emplace_back(e.what());}
+                });other.join();reply={{"errors",errors}};
+            }
             else if(op=="draft"){make_draft();reply={{"created",true}};}
             else if(op=="prepare"){
                 need(draft&&!preparation&&!prepared,"probe.active");capture=q.value("capture",false);
@@ -195,7 +248,7 @@ int main(int argc,char** argv){try{
             else if(op=="session-invalidate"){need(static_cast<bool>(session),"probe.session");times.measure("session.invalidate",[&]{session->invalidate();});draft->disconnected();reply={{"invalidated",true}};}
             else if(op=="session-close"){need(static_cast<bool>(session),"probe.session");session->close();session->poll();const bool done=session->stopped();if(done){session.reset();draft.reset();}reply={{"stopped",done}};}
             else if(op=="close"){client.close();reply=state(client.status());}
-            else if(op=="quit"){need(client.status().stopped&&images.empty()&&!recovery&&!surface&&!session&&!preparation&&!prepared,"probe.active");emit({{"reply",{{"exit",true}}},{"elapsed_us",0},{"task_calls",times.calls}});return 0;}
+            else if(op=="quit"){need(client.status().stopped&&images.empty()&&!recovery&&!surface&&!session&&!preparation&&!prepared&&!history&&!history_result,"probe.active");emit({{"reply",{{"exit",true}}},{"elapsed_us",0},{"task_calls",times.calls}});return 0;}
             else throw syspane::protocol::Error("probe.operation");
         }catch(const std::exception& e){reply={{"error",e.what()}};}
         const auto elapsed=std::chrono::duration_cast<std::chrono::microseconds>(Clock::now()-began).count();emit({{"reply",reply},{"elapsed_us",elapsed},{"task_calls",times.calls}});

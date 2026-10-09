@@ -92,6 +92,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Bounded frontend phase diagnosis](w-11-frontend-phases.md) — Attribute remaining GTK stalls without changing the fixed timing oracle or admitting a runtime override.
 - [Frontend recovery authority and accepted-request identity](w-11-frontend-recovery.md) — Connect the actual frontend backend to scoped recovery admission and preserve exact accepted-draft metadata.
 - [Prepared editor history transitions](w-11-history-preparation.md) — Validate undo/redo off the GUI without transferring stale draft or permission proofs.
+- [Native history preparation ownership](w-11-history-worker.md) — Bound history work on the existing helper worker and preserve current-draft adoption.
 - [Initial editor preview readiness](w-11-initial-preview.md) — Defer the first composition while preserving geometry-dependent input before GTK draws.
 - [Installed native scene editor](w-11-installed-editor.md) — Connect native scene authoring to the actual frontend, verified helpers and authenticated commands.
 - [Installed editor recovery consumption](w-11-installed-recovery.md) — Connect native recovery decisions, captured request identity and fresh accepted-draft retirement to the installed editor.

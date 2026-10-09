@@ -1,0 +1,936 @@
+{
+  "recorded_at": "2026-10-09T08:30:53.959872+00:00",
+  "source_base": "d404f793c2689ce297d0118045e345e037ebfed4",
+  "scope": "Native bounded history preparation on the existing Linux worker; installed form integration is pending.",
+  "fixed_inputs": {
+    "source_base": "d404f793c2689ce297d0118045e345e037ebfed4",
+    "inputs": {
+      "spec/delivery/packages/w-11-history-worker.md": "0198d187096cf21ce9eb5cc83739bdafd4a1a662a8df5c8d5471810b4302f03c",
+      "tests/configuration/history-worker-cases.json": "0472270a5509eefabb6f9a97b89188e802bf30b1cdca46e7a6fa81d8e00c9f53",
+      "tests/configuration/native_history_worker.py": "b8f7edbd3c400941739ad082c430c9fdbf48f1110daaaffd3039dfbf273995a3"
+    }
+  },
+  "oracle_spelling_review": {
+    "recorded_at": "2026-10-09T08:18:21.994888+00:00",
+    "source": "tests/configuration/native_history_worker.py",
+    "original_sha256": "b8f7edbd3c400941739ad082c430c9fdbf48f1110daaaffd3039dfbf273995a3",
+    "current_sha256": "6937e5d4cb8106bf039f4d8b338ef31a387fdace634908c90155f7a696511a60",
+    "reason": "Before native execution, source inspection found the draft recovery check has always used recovery.prepared_stale. Correct the invented spelling only; stale-result refusal, scene and history expectations are unchanged.",
+    "existing_contract_source": "source/interfaces/editor_recovery.cpp",
+    "existing_contract_sha256": "0a53733feab249483bab357f4c21b53a2055684e4b888d48b010ba1e83068df8"
+  },
+  "executions": [
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "admission",
+      "started_at": "2026-10-09T08:25:16.956158+00:00",
+      "exit": 0,
+      "passed_checks": 1,
+      "record": {
+        "local_path": "out/evidence/history-worker/linux-x64-gcc13-admission-ce1f106caf/result.json",
+        "sha256": "65ff2d6f53a29a8e7013a2be6af5108efe03369f65125da7df6501b1b5ba7e06"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/history-worker/linux-x64-gcc13-admission-ce1f106caf/source-inputs.zip",
+        "sha256": "a675f55f4e3758703d12ac865fd5b4fc295f1e84df6ee8bfabb854017e31e470"
+      },
+      "later_source_changes": []
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "backend",
+      "started_at": "2026-10-09T08:29:24.783249+00:00",
+      "exit": 0,
+      "passed_checks": 1,
+      "record": {
+        "local_path": "out/evidence/history-worker/linux-x64-gcc13-backend-81c924a521/result.json",
+        "sha256": "2d1f3287f83be18d7f92953916efef011f4dfa7aa52d55fec669184895ad2df4"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/history-worker/linux-x64-gcc13-backend-81c924a521/source-inputs.zip",
+        "sha256": "a675f55f4e3758703d12ac865fd5b4fc295f1e84df6ee8bfabb854017e31e470"
+      },
+      "later_source_changes": []
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "build",
+      "started_at": "2026-10-09T08:22:35.555034+00:00",
+      "exit": 0,
+      "passed_checks": 0,
+      "record": {
+        "local_path": "out/evidence/history-worker/linux-x64-gcc13-build-abdb51be1d/result.json",
+        "sha256": "e7fef4f2916f9cd52a9b42e49ebae35270797cb7d08dce2c06c444cf9b4e508b"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/history-worker/linux-x64-gcc13-build-abdb51be1d/source-inputs.zip",
+        "sha256": "a675f55f4e3758703d12ac865fd5b4fc295f1e84df6ee8bfabb854017e31e470"
+      },
+      "later_source_changes": []
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "configure",
+      "started_at": "2026-10-09T08:18:26.359286+00:00",
+      "exit": 0,
+      "passed_checks": 0,
+      "record": {
+        "local_path": "out/evidence/history-worker/linux-x64-gcc13-configure-53a83153cd/result.json",
+        "sha256": "585ea45fa507b7a5123030a93158c8341557277514e7083f836dfd8440ffe879"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/history-worker/linux-x64-gcc13-configure-53a83153cd/source-inputs.zip",
+        "sha256": "bf44d69672f3f6224f4f325d7d6d59754f59c0dad50e259a8c4532fed62c5122"
+      },
+      "later_source_changes": [
+        "tests/configuration/editor_helper_worker_probe.cpp"
+      ]
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "controls",
+      "started_at": "2026-10-09T08:28:40.555139+00:00",
+      "exit": 0,
+      "passed_checks": 1,
+      "record": {
+        "local_path": "out/evidence/history-worker/linux-x64-gcc13-controls-c6f409e196/result.json",
+        "sha256": "99b8a8455edc4fbb1a4747c68b951f87e72f601a208cc4681becf3d67da4c5be"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/history-worker/linux-x64-gcc13-controls-c6f409e196/source-inputs.zip",
+        "sha256": "a675f55f4e3758703d12ac865fd5b4fc295f1e84df6ee8bfabb854017e31e470"
+      },
+      "later_source_changes": []
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "editor",
+      "started_at": "2026-10-09T08:27:21.637041+00:00",
+      "exit": 0,
+      "passed_checks": 1,
+      "record": {
+        "local_path": "out/evidence/history-worker/linux-x64-gcc13-editor-a905b53d89/result.json",
+        "sha256": "78fef6b860eada893d6f8f6565602a2fea860aec126058499fb1292e2933d52e"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/history-worker/linux-x64-gcc13-editor-a905b53d89/source-inputs.zip",
+        "sha256": "a675f55f4e3758703d12ac865fd5b4fc295f1e84df6ee8bfabb854017e31e470"
+      },
+      "later_source_changes": []
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "graph",
+      "started_at": "2026-10-09T08:23:35.604458+00:00",
+      "exit": 0,
+      "passed_checks": 2,
+      "record": {
+        "local_path": "out/evidence/history-worker/linux-x64-gcc13-graph-cef11fc847/result.json",
+        "sha256": "4172fe9c2a59607599684fc1fa085fa4677b6d8194c12c6ba40e7883e003a764"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/history-worker/linux-x64-gcc13-graph-cef11fc847/source-inputs.zip",
+        "sha256": "a675f55f4e3758703d12ac865fd5b4fc295f1e84df6ee8bfabb854017e31e470"
+      },
+      "later_source_changes": []
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "history",
+      "started_at": "2026-10-09T08:23:26.193038+00:00",
+      "exit": 0,
+      "passed_checks": 9,
+      "record": {
+        "local_path": "out/evidence/history-worker/linux-x64-gcc13-history-123a18ad23/result.json",
+        "sha256": "4678ca8c376c8b53fb4e00ef22c2f7e9fe43bf5d7b22cd63df6e9827beec7742"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/history-worker/linux-x64-gcc13-history-123a18ad23/source-inputs.zip",
+        "sha256": "a675f55f4e3758703d12ac865fd5b4fc295f1e84df6ee8bfabb854017e31e470"
+      },
+      "later_source_changes": []
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "history-build",
+      "started_at": "2026-10-09T08:19:54.964632+00:00",
+      "exit": 0,
+      "passed_checks": 0,
+      "record": {
+        "local_path": "out/evidence/history-worker/linux-x64-gcc13-history-build-3774a693b4/result.json",
+        "sha256": "eabc6413c933ae172623d94061fa01802332e45285a7dee3f710a11c8515a95e"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/history-worker/linux-x64-gcc13-history-build-3774a693b4/source-inputs.zip",
+        "sha256": "93676718f84c3d27e41a58dc8ba18e71df83660f7f0c7c138cd10e5c447e9747"
+      },
+      "later_source_changes": [
+        "tests/configuration/editor_helper_worker_probe.cpp"
+      ]
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "history-build",
+      "started_at": "2026-10-09T08:21:03.596424+00:00",
+      "exit": 0,
+      "passed_checks": 0,
+      "record": {
+        "local_path": "out/evidence/history-worker/linux-x64-gcc13-history-build-932fd06192/result.json",
+        "sha256": "746e3796b73c62c766771996b56ccbb0f10794cec031e9e76e508afa12bbaf75"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/history-worker/linux-x64-gcc13-history-build-932fd06192/source-inputs.zip",
+        "sha256": "a675f55f4e3758703d12ac865fd5b4fc295f1e84df6ee8bfabb854017e31e470"
+      },
+      "later_source_changes": []
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "history-build",
+      "started_at": "2026-10-09T08:18:42.658345+00:00",
+      "exit": 0,
+      "passed_checks": 0,
+      "record": {
+        "local_path": "out/evidence/history-worker/linux-x64-gcc13-history-build-acd4e8e095/result.json",
+        "sha256": "15d52af59e604681796d86cab17764de2c7928059daa8c0d8356bcac89161a96"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/history-worker/linux-x64-gcc13-history-build-acd4e8e095/source-inputs.zip",
+        "sha256": "bf44d69672f3f6224f4f325d7d6d59754f59c0dad50e259a8c4532fed62c5122"
+      },
+      "later_source_changes": [
+        "tests/configuration/editor_helper_worker_probe.cpp"
+      ]
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "installed",
+      "started_at": "2026-10-09T08:26:05.378979+00:00",
+      "exit": 0,
+      "passed_checks": 1,
+      "record": {
+        "local_path": "out/evidence/history-worker/linux-x64-gcc13-installed-7f6ada1a71/result.json",
+        "sha256": "ae353722dc8ca37bac6575a4f372a2caec7a75e8b35a490e6c6d1e4546112d22"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/history-worker/linux-x64-gcc13-installed-7f6ada1a71/source-inputs.zip",
+        "sha256": "a675f55f4e3758703d12ac865fd5b4fc295f1e84df6ee8bfabb854017e31e470"
+      },
+      "later_source_changes": []
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "preparation",
+      "started_at": "2026-10-09T08:24:43.702137+00:00",
+      "exit": 0,
+      "passed_checks": 1,
+      "record": {
+        "local_path": "out/evidence/history-worker/linux-x64-gcc13-preparation-688ca91975/result.json",
+        "sha256": "93f193e0126a844c5098ef8dc190853845db3e4848782a59a69e17c6d0038922"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/history-worker/linux-x64-gcc13-preparation-688ca91975/source-inputs.zip",
+        "sha256": "a675f55f4e3758703d12ac865fd5b4fc295f1e84df6ee8bfabb854017e31e470"
+      },
+      "later_source_changes": []
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "worker",
+      "started_at": "2026-10-09T08:24:05.902031+00:00",
+      "exit": 0,
+      "passed_checks": 1,
+      "record": {
+        "local_path": "out/evidence/history-worker/linux-x64-gcc13-worker-b96d356198/result.json",
+        "sha256": "3941a88dc6b1e4a7bbadebfa6203d36404f1df27d40126ff39fd40dd18fca480"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/history-worker/linux-x64-gcc13-worker-b96d356198/source-inputs.zip",
+        "sha256": "a675f55f4e3758703d12ac865fd5b4fc295f1e84df6ee8bfabb854017e31e470"
+      },
+      "later_source_changes": []
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "worker-history",
+      "started_at": "2026-10-09T08:20:09.073062+00:00",
+      "exit": 8,
+      "passed_checks": 0,
+      "record": {
+        "local_path": "out/evidence/history-worker/linux-x64-gcc13-worker-history-73cc43f59a/result.json",
+        "sha256": "59c49bdf466787f963f2a913d3c82000513f5404551a54402eb162405505c0ff"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/history-worker/linux-x64-gcc13-worker-history-73cc43f59a/source-inputs.zip",
+        "sha256": "93676718f84c3d27e41a58dc8ba18e71df83660f7f0c7c138cd10e5c447e9747"
+      },
+      "later_source_changes": [
+        "tests/configuration/editor_helper_worker_probe.cpp"
+      ]
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "worker-history",
+      "started_at": "2026-10-09T08:21:17.437722+00:00",
+      "exit": 0,
+      "passed_checks": 1,
+      "record": {
+        "local_path": "out/evidence/history-worker/linux-x64-gcc13-worker-history-c5b1ceba22/result.json",
+        "sha256": "a69e098818caa2f0c723020bb6b021ca9784923459d8418fb57893e8d9c3cc51"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/history-worker/linux-x64-gcc13-worker-history-c5b1ceba22/source-inputs.zip",
+        "sha256": "a675f55f4e3758703d12ac865fd5b4fc295f1e84df6ee8bfabb854017e31e470"
+      },
+      "later_source_changes": []
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "worker-history",
+      "started_at": "2026-10-09T08:18:56.829991+00:00",
+      "exit": 8,
+      "passed_checks": 0,
+      "record": {
+        "local_path": "out/evidence/history-worker/linux-x64-gcc13-worker-history-cc632fe005/result.json",
+        "sha256": "4b3f3e757f73bd62d53e1fd35e55fa6d8c4651c3aba217489d34a868eac9e769"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/history-worker/linux-x64-gcc13-worker-history-cc632fe005/source-inputs.zip",
+        "sha256": "bf44d69672f3f6224f4f325d7d6d59754f59c0dad50e259a8c4532fed62c5122"
+      },
+      "later_source_changes": [
+        "tests/configuration/editor_helper_worker_probe.cpp"
+      ]
+    },
+    {
+      "profile": "windows-x64-gcc15",
+      "action": "configure",
+      "started_at": "2026-10-09T08:23:39.986441+00:00",
+      "exit": 0,
+      "passed_checks": 0,
+      "record": {
+        "local_path": "out/evidence/history-worker/windows-x64-gcc15-configure-6d49e302f2/result.json",
+        "sha256": "db2089e93b5bff6405d9c094570658b2b6fd756bc033da99019706a96b6171a7"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/history-worker/windows-x64-gcc15-configure-6d49e302f2/source-inputs.zip",
+        "sha256": "61d215c8081969dd06e467cd52ee4bab25bb0f24b069bde031bbed2a860d87ab"
+      },
+      "later_source_changes": []
+    },
+    {
+      "profile": "windows-x64-gcc15",
+      "action": "graph",
+      "started_at": "2026-10-09T08:23:49.314399+00:00",
+      "exit": 0,
+      "passed_checks": 2,
+      "record": {
+        "local_path": "out/evidence/history-worker/windows-x64-gcc15-graph-e86bf5dc7f/result.json",
+        "sha256": "f9a2b7b9fe7c4d5d1aa50e879c4bcb4c98337d440b5c2b85e2f9599a514e4cb1"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/history-worker/windows-x64-gcc15-graph-e86bf5dc7f/source-inputs.zip",
+        "sha256": "61d215c8081969dd06e467cd52ee4bab25bb0f24b069bde031bbed2a860d87ab"
+      },
+      "later_source_changes": []
+    },
+    {
+      "profile": "windows-x64-gcc15",
+      "action": "history",
+      "started_at": "2026-10-09T08:23:43.609437+00:00",
+      "exit": 0,
+      "passed_checks": 9,
+      "record": {
+        "local_path": "out/evidence/history-worker/windows-x64-gcc15-history-f7ed9f7306/result.json",
+        "sha256": "650e7d4f73d94e9530c8c07fc4a35723977f45f266a339755ddc8a21be93fd37"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/history-worker/windows-x64-gcc15-history-f7ed9f7306/source-inputs.zip",
+        "sha256": "61d215c8081969dd06e467cd52ee4bab25bb0f24b069bde031bbed2a860d87ab"
+      },
+      "later_source_changes": []
+    },
+    {
+      "profile": "windows-x86-v141-xp",
+      "action": "configure",
+      "started_at": "2026-10-09T08:23:51.921592+00:00",
+      "exit": 0,
+      "passed_checks": 0,
+      "record": {
+        "local_path": "out/evidence/history-worker/windows-x86-v141-xp-configure-8d1d7f70c5/result.json",
+        "sha256": "be2dcf52355e3881b143a30a72ab46020e5d3885a64a256ff1e37d1daf85278d"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/history-worker/windows-x86-v141-xp-configure-8d1d7f70c5/source-inputs.zip",
+        "sha256": "61d215c8081969dd06e467cd52ee4bab25bb0f24b069bde031bbed2a860d87ab"
+      },
+      "later_source_changes": []
+    },
+    {
+      "profile": "windows-x86-v141-xp",
+      "action": "graph",
+      "started_at": "2026-10-09T08:23:59.224250+00:00",
+      "exit": 0,
+      "passed_checks": 2,
+      "record": {
+        "local_path": "out/evidence/history-worker/windows-x86-v141-xp-graph-8b1bd58643/result.json",
+        "sha256": "75e01a8bd46372d6b30aa9777fdacb9ba5e51fd03e6a2b09e83e7b8b9917ae89"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/history-worker/windows-x86-v141-xp-graph-8b1bd58643/source-inputs.zip",
+        "sha256": "61d215c8081969dd06e467cd52ee4bab25bb0f24b069bde031bbed2a860d87ab"
+      },
+      "later_source_changes": []
+    },
+    {
+      "profile": "windows-x86-v141-xp",
+      "action": "history",
+      "started_at": "2026-10-09T08:23:55.773550+00:00",
+      "exit": 0,
+      "passed_checks": 9,
+      "record": {
+        "local_path": "out/evidence/history-worker/windows-x86-v141-xp-history-d45d4ea8ce/result.json",
+        "sha256": "43d5d4facc61bbbf254100385e2b2e7aca6a02537a0bc3caacac9594f1893b75"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/history-worker/windows-x86-v141-xp-history-d45d4ea8ce/source-inputs.zip",
+        "sha256": "61d215c8081969dd06e467cd52ee4bab25bb0f24b069bde031bbed2a860d87ab"
+      },
+      "later_source_changes": []
+    }
+  ],
+  "portable_history_checks": {
+    "linux-x64-gcc13": 9,
+    "windows-x64-gcc15": 9,
+    "windows-x86-v141-xp": 9
+  },
+  "component_checks": 6,
+  "unchanged_portable_sources": {
+    "source/interfaces/editor_draft.cpp": "c8aad3a8c125fa91da33e062d027abce1ebe323263e3eb7d337666b3257f4b6b",
+    "source/interfaces/editor_draft.hpp": "1365fb4f9149a8a8645368e7b13ff2fde81849cf936ee4504e6af703779d22da",
+    "source/interfaces/editor_history.cpp": "08f08d1a1fc3e07e5ff3b7bf1e3551cbc715cc6890cea8ef0d166d1f941cf47b",
+    "source/interfaces/settings_draft.cpp": "6562ea26ba5dc301c60619b3cb5e0e9a80cbad279eb0e7e25d27420c63bf1c0e",
+    "tests/editor/history_preparation_tests.cpp": "e4191fedfbd9b3952896a0ed137e3041bafacc9df4b2f67a025db7999a913a95"
+  },
+  "native_case_families": {
+    "INSTALLED-EDITOR": 15,
+    "EDITOR-HELPER-WORKER": 21,
+    "FRONTEND-RECOVERY": 14,
+    "HISTORY-WORKER": 13,
+    "INSTALLED-RECOVERY": 14,
+    "RECOVERY-ADMISSION": 12,
+    "EDITOR-RECOVERY": 14,
+    "RECOVERY-PREPARATION": 8
+  },
+  "native": [
+    {
+      "family": "INSTALLED-EDITOR",
+      "cases": [
+        "OPEN",
+        "PROPERTIES",
+        "SAVE-REOPEN",
+        "SETTINGS-NAV",
+        "PRIVATE-NAV",
+        "REQUEST-NAV",
+        "UNDO-REDO",
+        "CANCEL-DRAFT",
+        "RELOAD",
+        "LOST-RESULT",
+        "POLICY",
+        "REPLACEMENT",
+        "HELPER-FAILURE",
+        "CLOSE-HELD",
+        "ORACLE"
+      ],
+      "outcome": "pass",
+      "archive": {
+        "local_path": "out/evidence/history-worker-native/editor-frontend-0cb2ad9f5e.zip",
+        "sha256": "2cc067cfcde2a66fa47b6779c07046022a59ea80d84d2fd7b150b6826ef58d3e"
+      },
+      "record": {
+        "local_path": "out/evidence/history-worker-native/editor-frontend-0cb2ad9f5e.json",
+        "sha256": "d6d21f4d2a3eacc7cddd99b1f3dbd34319b9c13b56cb772315e0287dbe3cf85d"
+      },
+      "inventory": {
+        "local_path": "out/evidence/history-worker-native/editor-frontend-0cb2ad9f5e.index.json",
+        "sha256": "db258624ab95bfc4a0caa5af3c08c53773bcbe74dd502eeca29bb1945edba70e"
+      },
+      "execution_record": {
+        "local_path": "out/evidence/history-worker/linux-x64-gcc13-editor-a905b53d89/result.json",
+        "sha256": "78fef6b860eada893d6f8f6565602a2fea860aec126058499fb1292e2933d52e"
+      },
+      "artifact_identities_matched": {
+        "SysPane.ImageWorker": "65b38c368c9472405163a244c7f1b0ddf2c8702bb5e7945e147cb4a5935e777c",
+        "SysPane.RecoveryWorker": "6256fa4cd28d6263ea9e1f182da9e2a75b5a187bda6f9ed0efa1d51f10b99537",
+        "syspane": "2acc7fb8005665a68efc40e486d6e26b19b8982489f0564466eb74d0b9b8c276",
+        "syspane_frontend_fixture": "efa6613747d78e41d1484e929c93bae7f48f03b356323164572ab330d5f690b6",
+        "syspane_frontend_helper_fixture": "6e9df5690ba2b0bec818fc33c9d36ec07c14d0951b6f997a8a9e2b9b07c3cb32"
+      }
+    },
+    {
+      "family": "EDITOR-HELPER-WORKER",
+      "cases": [
+        "ATTACH",
+        "GUI-WHILE-HELD",
+        "IMAGE-PIXELS",
+        "IMAGE-INPUTS",
+        "IMAGE-CAPACITY",
+        "IMAGE-ORDER",
+        "QUEUED-CANCEL",
+        "ACTIVE-CANCEL",
+        "RESULT-ERASURE",
+        "ABANDONED-SLOTS",
+        "RECOVERY-LOAD",
+        "RECOVERY-COALESCE",
+        "RECOVERY-RETIRE",
+        "RECOVERY-DENIAL",
+        "RECOVERY-CLOSE",
+        "CONTEXT-ERASURE",
+        "INSTALLATION-CHANGE",
+        "WRONG-THREAD",
+        "CLIENT-CLOSE",
+        "CONSUMERS",
+        "ORACLE"
+      ],
+      "outcome": "pass",
+      "archive": {
+        "local_path": "out/evidence/history-worker-native/ew-783f0d5048.zip",
+        "sha256": "16c977714df6273af03d4ad5670a17950f9c5c4f2434918a5237e1bc9ec4d374"
+      },
+      "record": {
+        "local_path": "out/evidence/history-worker-native/ew-783f0d5048.json",
+        "sha256": "af1379ffc515a8e3d239ea734f286d4445f9403c1ddd145cfbe87d1e1bc39716"
+      },
+      "inventory": {
+        "local_path": "out/evidence/history-worker-native/ew-783f0d5048.index.json",
+        "sha256": "da23e585ea42176e37acb61c936a1b2127f1380bef9e66106da0fc03767e6713"
+      },
+      "execution_record": {
+        "local_path": "out/evidence/history-worker/linux-x64-gcc13-worker-b96d356198/result.json",
+        "sha256": "3941a88dc6b1e4a7bbadebfa6203d36404f1df27d40126ff39fd40dd18fca480"
+      },
+      "artifact_identities_matched": {
+        "SysPane.ImageWorker": "65b38c368c9472405163a244c7f1b0ddf2c8702bb5e7945e147cb4a5935e777c",
+        "SysPane.RecoveryWorker": "6256fa4cd28d6263ea9e1f182da9e2a75b5a187bda6f9ed0efa1d51f10b99537",
+        "helpers.json": "8c4c4be109d38e4d318d439e3210d27a2ad844770fb2bd5b0e7fa54af6474902",
+        "syspane-configuration-host": "4f0ef658d9d2c1497d9f3d2bf65cccc54bd6d7994eb6bb24c3f1b26ccc8b52c5",
+        "syspane_editor_helper_worker_probe": "b8ba665ab4c355fbf6ad66d74c2ebe938e16b90dda19561104985f72aa601ac1"
+      }
+    },
+    {
+      "family": "FRONTEND-RECOVERY",
+      "cases": [
+        "SCOPED-CONTEXT",
+        "NULL-CONTEXT",
+        "CAPTURE-AND-RETIRE",
+        "INVALID-METADATA",
+        "RELOAD-WITHDRAWAL",
+        "KEPT-RECORD",
+        "REPLACEMENT-RECORD",
+        "LOST-ACCEPTANCE",
+        "UNKNOWN-RESULT",
+        "ERASE-DENIED",
+        "DIRECTORY-REPLACED",
+        "POLICY-WITHDRAWAL",
+        "CLOSE",
+        "ORACLE"
+      ],
+      "outcome": "pass",
+      "archive": {
+        "local_path": "out/evidence/history-worker-native/fr-2a732922ba.zip",
+        "sha256": "b547aeebc33fafd10822329d38247dff21f3aa8434eea8bd4649428709bebc53"
+      },
+      "record": {
+        "local_path": "out/evidence/history-worker-native/fr-2a732922ba.json",
+        "sha256": "f3d3b994748e07a5439ee775f1c6661eb61c16cd6ed017bb4e8979ec2513fbf4"
+      },
+      "inventory": {
+        "local_path": "out/evidence/history-worker-native/fr-2a732922ba.index.json",
+        "sha256": "7395a9e04d71e2835825df6a80a60030993bbaa402738fc604a827860cc17931"
+      },
+      "execution_record": {
+        "local_path": "out/evidence/history-worker/linux-x64-gcc13-backend-81c924a521/result.json",
+        "sha256": "2d1f3287f83be18d7f92953916efef011f4dfa7aa52d55fec669184895ad2df4"
+      },
+      "artifact_identities_matched": {
+        "bin/syspane": "4724e0655a9d07261ce00e21bdd9744903941bc8279852df33d6d991d023547c",
+        "libexec/syspane/syspane-configuration-host": "6e9df5690ba2b0bec818fc33c9d36ec07c14d0951b6f997a8a9e2b9b07c3cb32",
+        "libexec/syspane/syspane-image-worker": "65b38c368c9472405163a244c7f1b0ddf2c8702bb5e7945e147cb4a5935e777c",
+        "libexec/syspane/syspane-recovery-worker": "6256fa4cd28d6263ea9e1f182da9e2a75b5a187bda6f9ed0efa1d51f10b99537",
+        "share/syspane/helpers.json": "cacd709b73aec39d2540fcd437d14324440cc2b6d6cc7e5918ba182a712bbb73"
+      }
+    },
+    {
+      "family": "HISTORY-WORKER",
+      "cases": [
+        "HELD",
+        "TRACE",
+        "CAPACITY",
+        "INPUTS",
+        "QUEUED-CANCEL",
+        "READY-CANCEL"
+      ],
+      "outcome": "fail",
+      "archive": {
+        "local_path": "out/evidence/history-worker-native/hw-ba5ec643ad.zip",
+        "sha256": "d427da480551e9a26f0462bfe6ac4fbf6656c7290bb219a783611c0cab67ed2c"
+      },
+      "record": {
+        "local_path": "out/evidence/history-worker-native/hw-ba5ec643ad.json",
+        "sha256": "8f5a150d8fd9e39ca0fa0af539e69aba1c90ed9db18caf0ec8c29340ae36f937"
+      },
+      "inventory": {
+        "local_path": "out/evidence/history-worker-native/hw-ba5ec643ad.index.json",
+        "sha256": "61ebd9e39c6351fd188c5e989dd38ae8720a3a0ff3939c06d53f7b1832b83980"
+      },
+      "execution_record": {
+        "local_path": "out/evidence/history-worker/linux-x64-gcc13-worker-history-73cc43f59a/result.json",
+        "sha256": "59c49bdf466787f963f2a913d3c82000513f5404551a54402eb162405505c0ff"
+      },
+      "artifact_identities_matched": {
+        "SysPane.ImageWorker": "65b38c368c9472405163a244c7f1b0ddf2c8702bb5e7945e147cb4a5935e777c",
+        "SysPane.RecoveryWorker": "6256fa4cd28d6263ea9e1f182da9e2a75b5a187bda6f9ed0efa1d51f10b99537",
+        "helpers.json": "8c4c4be109d38e4d318d439e3210d27a2ad844770fb2bd5b0e7fa54af6474902",
+        "syspane-configuration-host": "4f0ef658d9d2c1497d9f3d2bf65cccc54bd6d7994eb6bb24c3f1b26ccc8b52c5",
+        "syspane_editor_helper_worker_probe": "03c64f8ce7d874e0293f45c0e205652c786299510039687d39deb9355755afa0"
+      }
+    },
+    {
+      "family": "HISTORY-WORKER",
+      "cases": [
+        "HELD",
+        "TRACE",
+        "CAPACITY",
+        "INPUTS",
+        "QUEUED-CANCEL",
+        "READY-CANCEL"
+      ],
+      "outcome": "fail",
+      "archive": {
+        "local_path": "out/evidence/history-worker-native/hw-cbc908a055.zip",
+        "sha256": "86118aa8d8837c7260aa7613b3fbedc04c93d9d286a5008843fc9dca88257abb"
+      },
+      "record": {
+        "local_path": "out/evidence/history-worker-native/hw-cbc908a055.json",
+        "sha256": "65d7a0616ff42751a0acc053acfeb5ecb9eae42855c10bcdded1b59eee4b262f"
+      },
+      "inventory": {
+        "local_path": "out/evidence/history-worker-native/hw-cbc908a055.index.json",
+        "sha256": "c45d658881f22dcfaeff42b006c08c14356e9f09380d759a8fed936beb8cd0c3"
+      },
+      "execution_record": {
+        "local_path": "out/evidence/history-worker/linux-x64-gcc13-worker-history-cc632fe005/result.json",
+        "sha256": "4b3f3e757f73bd62d53e1fd35e55fa6d8c4651c3aba217489d34a868eac9e769"
+      },
+      "artifact_identities_matched": {
+        "SysPane.ImageWorker": "65b38c368c9472405163a244c7f1b0ddf2c8702bb5e7945e147cb4a5935e777c",
+        "SysPane.RecoveryWorker": "6256fa4cd28d6263ea9e1f182da9e2a75b5a187bda6f9ed0efa1d51f10b99537",
+        "helpers.json": "8c4c4be109d38e4d318d439e3210d27a2ad844770fb2bd5b0e7fa54af6474902",
+        "syspane-configuration-host": "4f0ef658d9d2c1497d9f3d2bf65cccc54bd6d7994eb6bb24c3f1b26ccc8b52c5",
+        "syspane_editor_helper_worker_probe": "d6441180e5497404978cf3b5b11754e868ebef824b211572c4f4667ac1588333"
+      }
+    },
+    {
+      "family": "HISTORY-WORKER",
+      "cases": [
+        "HELD",
+        "TRACE",
+        "CAPACITY",
+        "INPUTS",
+        "QUEUED-CANCEL",
+        "READY-CANCEL",
+        "RUNNING-CANCEL",
+        "DROP",
+        "CLOSE",
+        "STALE",
+        "COEXISTENCE",
+        "OWNER",
+        "ORACLE"
+      ],
+      "outcome": "pass",
+      "archive": {
+        "local_path": "out/evidence/history-worker-native/hw-d3fc22aef9.zip",
+        "sha256": "ab01938005afc2b9cb6dff08db86580f2214cb0ac59348209ecba0e4e735ff35"
+      },
+      "record": {
+        "local_path": "out/evidence/history-worker-native/hw-d3fc22aef9.json",
+        "sha256": "a2d8e017391538e75b7a4c560135fde19c242b492993b499bfa59afe1142d630"
+      },
+      "inventory": {
+        "local_path": "out/evidence/history-worker-native/hw-d3fc22aef9.index.json",
+        "sha256": "6563ba4cc4eaad35e46e714bc1e5832750a602a293c82f77857bb2952193ac0e"
+      },
+      "execution_record": {
+        "local_path": "out/evidence/history-worker/linux-x64-gcc13-worker-history-c5b1ceba22/result.json",
+        "sha256": "a69e098818caa2f0c723020bb6b021ca9784923459d8418fb57893e8d9c3cc51"
+      },
+      "artifact_identities_matched": {
+        "SysPane.ImageWorker": "65b38c368c9472405163a244c7f1b0ddf2c8702bb5e7945e147cb4a5935e777c",
+        "SysPane.RecoveryWorker": "6256fa4cd28d6263ea9e1f182da9e2a75b5a187bda6f9ed0efa1d51f10b99537",
+        "helpers.json": "8c4c4be109d38e4d318d439e3210d27a2ad844770fb2bd5b0e7fa54af6474902",
+        "syspane-configuration-host": "4f0ef658d9d2c1497d9f3d2bf65cccc54bd6d7994eb6bb24c3f1b26ccc8b52c5",
+        "syspane_editor_helper_worker_probe": "b8ba665ab4c355fbf6ad66d74c2ebe938e16b90dda19561104985f72aa601ac1"
+      }
+    },
+    {
+      "family": "INSTALLED-RECOVERY",
+      "cases": [
+        "CAPTURE-APPLY",
+        "CRASH-RESTORE",
+        "KEEP-APPLY",
+        "DISCARD",
+        "CANCEL",
+        "PRIVATE-FIELD",
+        "INVALID-RECORD",
+        "REPLACEMENT-RECORD",
+        "LOST-RESULT",
+        "UNKNOWN-RESULT",
+        "ERASE-DENIED",
+        "POLICY",
+        "CLOSE",
+        "ORACLE"
+      ],
+      "outcome": "pass",
+      "archive": {
+        "local_path": "out/evidence/history-worker-native/ir-fd8b06e6e7.zip",
+        "sha256": "9cd8a855c4519dd749fcc5b9ca62438f85868b4d63b640613df30cfd002bc081"
+      },
+      "record": {
+        "local_path": "out/evidence/history-worker-native/ir-fd8b06e6e7.json",
+        "sha256": "b9252bc4784334754e18fab35bb4783c37fcc4bc276075bd906f66094940407b"
+      },
+      "inventory": {
+        "local_path": "out/evidence/history-worker-native/ir-fd8b06e6e7.index.json",
+        "sha256": "7b127d0c28afef83991d1e91bc6f38c09e4ca5b88a30962b86de46fb35183315"
+      },
+      "execution_record": {
+        "local_path": "out/evidence/history-worker/linux-x64-gcc13-installed-7f6ada1a71/result.json",
+        "sha256": "ae353722dc8ca37bac6575a4f372a2caec7a75e8b35a490e6c6d1e4546112d22"
+      },
+      "artifact_identities_matched": {
+        "SysPane.ImageWorker": "65b38c368c9472405163a244c7f1b0ddf2c8702bb5e7945e147cb4a5935e777c",
+        "SysPane.RecoveryWorker": "6256fa4cd28d6263ea9e1f182da9e2a75b5a187bda6f9ed0efa1d51f10b99537",
+        "syspane": "2acc7fb8005665a68efc40e486d6e26b19b8982489f0564466eb74d0b9b8c276",
+        "syspane_frontend_fixture": "efa6613747d78e41d1484e929c93bae7f48f03b356323164572ab330d5f690b6",
+        "syspane_frontend_helper_fixture": "6e9df5690ba2b0bec818fc33c9d36ec07c14d0951b6f997a8a9e2b9b07c3cb32"
+      }
+    },
+    {
+      "family": "RECOVERY-ADMISSION",
+      "cases": [
+        "ADMITTED-FILES",
+        "SESSION-SCOPE",
+        "TASK-SCOPE",
+        "PERMISSIONS",
+        "DIRECTORY-IDENTITY",
+        "DIRECTORY-REPLACEMENT",
+        "NATIVE-PERMISSIONS",
+        "CHILD-SUBSTITUTION",
+        "HELD-WITHDRAWAL",
+        "RESULT-WITHDRAWAL",
+        "NO-REVIVAL",
+        "ORACLE"
+      ],
+      "outcome": "pass",
+      "archive": {
+        "local_path": "out/evidence/history-worker-native/ra-c194c05435.zip",
+        "sha256": "168d5d9c124212bebdabd101c0d3bc9e256fdd191b2780e76a1bf76f68b1af43"
+      },
+      "record": {
+        "local_path": "out/evidence/history-worker-native/ra-c194c05435.json",
+        "sha256": "b06822b7ade72cd41a5ffffb26940a5cbca954a0eff414834011443a0e068bd5"
+      },
+      "inventory": {
+        "local_path": "out/evidence/history-worker-native/ra-c194c05435.index.json",
+        "sha256": "558f2586b96d95f38a27fd30f5922c20acc1ba871e462c1a84d2abc84c8db4ff"
+      },
+      "execution_record": {
+        "local_path": "out/evidence/history-worker/linux-x64-gcc13-admission-ce1f106caf/result.json",
+        "sha256": "65ff2d6f53a29a8e7013a2be6af5108efe03369f65125da7df6501b1b5ba7e06"
+      },
+      "artifact_identities_matched": {
+        "SysPane.ImageWorker": "65b38c368c9472405163a244c7f1b0ddf2c8702bb5e7945e147cb4a5935e777c",
+        "SysPane.RecoveryWorker": "6256fa4cd28d6263ea9e1f182da9e2a75b5a187bda6f9ed0efa1d51f10b99537",
+        "helpers.json": "8c4c4be109d38e4d318d439e3210d27a2ad844770fb2bd5b0e7fa54af6474902",
+        "syspane-configuration-host": "4f0ef658d9d2c1497d9f3d2bf65cccc54bd6d7994eb6bb24c3f1b26ccc8b52c5",
+        "syspane_editor_helper_worker_probe": "b8ba665ab4c355fbf6ad66d74c2ebe938e16b90dda19561104985f72aa601ac1"
+      }
+    },
+    {
+      "family": "EDITOR-RECOVERY",
+      "cases": [
+        "restore-apply",
+        "keep-apply",
+        "discard",
+        "undo-clean",
+        "cancel",
+        "private-fields",
+        "invalid",
+        "stale",
+        "policy",
+        "unknown",
+        "replacement",
+        "worker-failure",
+        "held-close",
+        "scope-change"
+      ],
+      "outcome": "pass",
+      "archive": {
+        "local_path": "out/evidence/history-worker-native/recovery-controls-5c24b7ef5c17.zip",
+        "sha256": "07bd867a640514d559014d1e994f42e7dd39c28321c5a81dbf825f4c84fd6ac5"
+      },
+      "record": {
+        "local_path": "out/evidence/history-worker-native/recovery-controls-5c24b7ef5c17.json",
+        "sha256": "9eb5155b334e465cff0e2e2ff302b74b2049e393d30be6183a6ebfcd39ff5f81"
+      },
+      "inventory": {
+        "local_path": "out/evidence/history-worker-native/recovery-controls-5c24b7ef5c17.index.json",
+        "sha256": "f57f8860bd59a2fc2f340e1e4ea8b648ed3868c3bd90d40dcfba7eee5ceb05cd"
+      },
+      "execution_record": {
+        "local_path": "out/evidence/history-worker/linux-x64-gcc13-controls-c6f409e196/result.json",
+        "sha256": "99b8a8455edc4fbb1a4747c68b951f87e72f601a208cc4681becf3d67da4c5be"
+      },
+      "artifact_identities_matched": {
+        "executable_sha256": "230f3edaeec4afacfeb233b7dce9910bc057feec12f8c3b61d888e31afbdba97",
+        "worker_sha256": "6256fa4cd28d6263ea9e1f182da9e2a75b5a187bda6f9ed0efa1d51f10b99537"
+      }
+    },
+    {
+      "family": "RECOVERY-PREPARATION",
+      "cases": [
+        "HELD-PREPARATION",
+        "PREPARED-OFFER",
+        "PREPARED-CAPTURE",
+        "PREPARATION-CANCEL",
+        "PREPARATION-ERASURE",
+        "COALESCED-CAPTURE",
+        "INVALID-OFFER",
+        "ORACLE"
+      ],
+      "outcome": "pass",
+      "archive": {
+        "local_path": "out/evidence/history-worker-native/rp-ff4542568e.zip",
+        "sha256": "612306aff337f1f63246e3f1d182616899a4522642b017b61f15987cd6efff35"
+      },
+      "record": {
+        "local_path": "out/evidence/history-worker-native/rp-ff4542568e.json",
+        "sha256": "c829a8a83c3e83ccd2bfcc6154468b199932375280f75b6a20000678fcdaf89c"
+      },
+      "inventory": {
+        "local_path": "out/evidence/history-worker-native/rp-ff4542568e.index.json",
+        "sha256": "bebb0e3793f93cc1a2e8d6f37da1a4fc8f2648718af9c1435e8a7ba6da809e9c"
+      },
+      "execution_record": {
+        "local_path": "out/evidence/history-worker/linux-x64-gcc13-preparation-688ca91975/result.json",
+        "sha256": "93f193e0126a844c5098ef8dc190853845db3e4848782a59a69e17c6d0038922"
+      },
+      "artifact_identities_matched": {
+        "SysPane.ImageWorker": "65b38c368c9472405163a244c7f1b0ddf2c8702bb5e7945e147cb4a5935e777c",
+        "SysPane.RecoveryWorker": "6256fa4cd28d6263ea9e1f182da9e2a75b5a187bda6f9ed0efa1d51f10b99537",
+        "helpers.json": "8c4c4be109d38e4d318d439e3210d27a2ad844770fb2bd5b0e7fa54af6474902",
+        "syspane-configuration-host": "4f0ef658d9d2c1497d9f3d2bf65cccc54bd6d7994eb6bb24c3f1b26ccc8b52c5",
+        "syspane_editor_helper_worker_probe": "b8ba665ab4c355fbf6ad66d74c2ebe938e16b90dda19561104985f72aa601ac1"
+      }
+    }
+  ],
+  "history_worker_observations": {
+    "cases": 13,
+    "process_runs": 21,
+    "observed_running_cancellations": 3,
+    "maximum_task_call_us": 1479
+  },
+  "preserved_failures": [
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "worker-history",
+      "started_at": "2026-10-09T08:20:09.073062+00:00",
+      "exit": 8,
+      "passed_checks": 0,
+      "record": {
+        "local_path": "out/evidence/history-worker/linux-x64-gcc13-worker-history-73cc43f59a/result.json",
+        "sha256": "59c49bdf466787f963f2a913d3c82000513f5404551a54402eb162405505c0ff"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/history-worker/linux-x64-gcc13-worker-history-73cc43f59a/source-inputs.zip",
+        "sha256": "93676718f84c3d27e41a58dc8ba18e71df83660f7f0c7c138cd10e5c447e9747"
+      },
+      "later_source_changes": [
+        "tests/configuration/editor_helper_worker_probe.cpp"
+      ]
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "worker-history",
+      "started_at": "2026-10-09T08:18:56.829991+00:00",
+      "exit": 8,
+      "passed_checks": 0,
+      "record": {
+        "local_path": "out/evidence/history-worker/linux-x64-gcc13-worker-history-cc632fe005/result.json",
+        "sha256": "4b3f3e757f73bd62d53e1fd35e55fa6d8c4651c3aba217489d34a868eac9e769"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/history-worker/linux-x64-gcc13-worker-history-cc632fe005/source-inputs.zip",
+        "sha256": "bf44d69672f3f6224f4f325d7d6d59754f59c0dad50e259a8c4532fed62c5122"
+      },
+      "later_source_changes": [
+        "tests/configuration/editor_helper_worker_probe.cpp"
+      ]
+    }
+  ],
+  "failed_coordinator_records": [
+    {
+      "local_path": "out/evidence/history-worker-flow-b8545dff71b9.json",
+      "sha256": "076086e4aa52497b4e2feca38e3070e764e6bd026affc3a37329c502e6a732e9"
+    },
+    {
+      "local_path": "out/evidence/history-worker-flow-dd6a6f6cb051.json",
+      "sha256": "d71d960822eb018f3b867893719d66d6eb1a6da008b1a131f501de276d0472db"
+    },
+    {
+      "local_path": "out/evidence/history-worker-flow-e2daffb6d0f6.json",
+      "sha256": "5f8e929c528e7e7491bfd5497b8202986c558accf3180726d16f3f27f1458fee"
+    }
+  ],
+  "prior_gui_qualification": {
+    "local_path": "spec/delivery/checkpoints/initial-preview.json",
+    "sha256": "e2bc22ab3ba799ea0c8b967a450ba602096f27ed90c87492ac566ca791980451"
+  },
+  "workspace": {
+    "maximum_bytes": 8589934592,
+    "reservations_unchanged": true,
+    "archived_native_bytes": 1234592637
+  },
+  "limitations": [
+    "Two new native attempts failed constructing the maximum-widget fixture: a batch exceeded 128 edits, then combined scene bytes exceeded the authored limit. Only the fixture builder changed; all 13 fixed outcomes remain unchanged.",
+    "The original frozen oracle used an invented recovery error spelling; before native execution it was corrected against unchanged source. Original bytes and the review remain preserved.",
+    "One local coordinator attempt stopped before executing a portable test because it named a nonexistent test executable. The successful resume used the existing history-preparation binary.",
+    "Native worker changes were rebuilt on Linux. Unchanged portable history binaries and component checks were rerun on all three profiles; this is not Windows 9x/XP guest or Mac qualification.",
+    "Installed Undo/Redo is still synchronous. No new ordinary GUI timing result or production recovery enablement is claimed. W-11 and all five complete editions remain open."
+  ],
+  "next_step": "Suspend obsolete recovery capture, connect task admission/current-form adoption and conflicting-action refusal in EditorForm on its existing timer, refresh current native preview, and verify cancellation/replacement before running unchanged GUI qualification.",
+  "incomplete_attempt_archives": [
+    {
+      "source_archive": {
+        "local_path": "out/evidence/history-worker/linux-x64-gcc13-history-aa14b4ada6/source-inputs.zip",
+        "sha256": "a675f55f4e3758703d12ac865fd5b4fc295f1e84df6ee8bfabb854017e31e470"
+      },
+      "reason": "Coordinator failed gathering the nonexistent copied executable name before test execution. See failed coordinator records."
+    }
+  ],
+  "spec_checks": {
+    "record": {
+      "local_path": "out/evidence/history-worker-spec-validation-6b8b48768348.json",
+      "sha256": "6b8b48768348c53ca4b6cde8026a0b567d806f8608adf26736c820efc5f2511e"
+    },
+    "counts": {
+      "files": 676,
+      "concepts": 351,
+      "requirements": 131,
+      "planned_tests": 61,
+      "work_units": 49
+    },
+    "schemas": 51,
+    "fixtures": 183
+  }
+}

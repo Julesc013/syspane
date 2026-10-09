@@ -4,6 +4,7 @@
 #include "installation_linux.hpp"
 #include "profile_projection.hpp"
 #include "editor_recovery.hpp"
+#include "editor_history_task.hpp"
 
 namespace syspane::application {
 struct RecoverySessionAuthority {
@@ -30,6 +31,7 @@ struct EditorHelperStatus {
     std::size_t image_handles=0,recovery_handles=0,retained_bytes=0;
     // Preparation owns bounded authored snapshots, not encoded helper payloads.
     std::size_t preparation_handles=0;
+    std::size_t history_handles=0;
     std::vector<std::uint64_t> processes;
 };
 struct EditorHelperChannel;
@@ -44,6 +46,7 @@ public:
     rendering::ImageFactory images()const;
     std::shared_ptr<const platform::RecoveryFactory> recovery()const;
     std::shared_ptr<const interfaces::RecoveryPreparationFactory> preparations()const;
+    std::shared_ptr<const interfaces::HistoryPreparationFactory> history_preparations()const;
     EditorHelperStatus status()const;
     void close();
 private:
@@ -51,6 +54,7 @@ private:
     std::shared_ptr<EditorHelperChannel> channel_;
     std::shared_ptr<const platform::RecoveryFactory> recovery_;
     std::shared_ptr<const interfaces::RecoveryPreparationFactory> preparations_;
+    std::shared_ptr<const interfaces::HistoryPreparationFactory> history_preparations_;
 };
 // Existing host native worker pumps this object; it creates no additional thread.
 // Installation and all concrete native tasks remain on this same worker.

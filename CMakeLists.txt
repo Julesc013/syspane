@@ -607,6 +607,10 @@ if(BUILD_TESTING)
             "$<TARGET_FILE:syspane_editor_helper_worker_probe>" "$<TARGET_FILE:syspane_configuration_host>" "$<TARGET_FILE:syspane_image_worker>"
             "$<TARGET_FILE:syspane_recovery_worker>" "${CMAKE_BINARY_DIR}/generated/helper-bundle/helpers.json" "${CMAKE_BINARY_DIR}/native-evidence")
         set_tests_properties(native.RECOVERY-PREPARATION PROPERTIES TIMEOUT 300)
+        add_test(NAME native.HISTORY-WORKER COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/configuration/native_history_worker.py"
+            "$<TARGET_FILE:syspane_editor_helper_worker_probe>" "$<TARGET_FILE:syspane_configuration_host>" "$<TARGET_FILE:syspane_image_worker>"
+            "$<TARGET_FILE:syspane_recovery_worker>" "${CMAKE_BINARY_DIR}/generated/helper-bundle/helpers.json" "${CMAKE_BINARY_DIR}/native-evidence")
+        set_tests_properties(native.HISTORY-WORKER PROPERTIES TIMEOUT 300)
         target_include_directories(syspane_installation_probe PRIVATE "${CMAKE_BINARY_DIR}/generated")
         target_link_libraries(syspane_installation_probe PRIVATE syspane_installation syspane_profile_supervisor)
         add_dependencies(syspane_installation_probe syspane_helper_identity_data)

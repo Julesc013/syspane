@@ -61,6 +61,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Verified installation-relative helper execution](helper-identity-handoff.md) — Compiled helper closure, immutable native execution and relocated development-package evidence.
 - [Historical Windows shared-subset build checkpoint](historical-build-handoff.md) — Record the pinned v141_xp build, unchanged shared behavior, resolved runtime inputs and pending guest qualification.
 - [Prepared history transition handoff](history-preparation-handoff.md) — Detached undo/redo validation and current-owner adoption are implemented; native scheduling remains next.
+- [Native history worker handoff](history-worker-handoff.md) — Bounded native history computation is verified; current-form integration remains next.
 - [Bounded image pipeline checkpoint](image-pipeline-handoff.md) — Exact portable fit and isolated Linux PNG/JPEG/static-SVG decoding with nonblocking child ownership.
 - [Implementation readiness and gates](implementation-readiness.md) — Distinguish implemented specification checks from pending native and release work.
 - [Initial editor preview readiness handoff](initial-preview-handoff.md) — First composition now waits for drawing or guarded earlier input; fixed timing failures remain.
