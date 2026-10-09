@@ -489,7 +489,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "c326b8c2bb98542896663203e5c972dc4cb75c98018222ee91963b1b52c02f4a"
+      "sha256": "e9c5b639cf45fe76b0ff77488c97bbd4b590392027a81a70fb8da59909a576d2"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -2474,6 +2474,31 @@
       "sha256": "ced9e137dfea7576ce698d1aaee5b286de9d2743ffab2f87e240e8ae031c0fdd"
     },
     {
+      "id": "SP-W11-PRODUCTION-RECOVERY",
+      "path": "delivery/packages/w-11-production-recovery.md",
+      "title": "Ordinary frontend recovery admission",
+      "description": "Enable qualified recovery and prepared history in the ordinary entry path while retaining native authority and fixture isolation.",
+      "requires": [
+        "SP-W11-INSTALLED-RECOVERY",
+        "SP-W11-RECOVERY-LIMITS",
+        "SP-W11-RECOVERY-GUI-LIMITS",
+        "SP-W11-RECOVERY-SUBMISSION"
+      ],
+      "sha256": "4890e031d3c4362cc70872894cf8d737e445f05118570ef47128cd86a687eb74"
+    },
+    {
+      "id": "SP-W11-RECOVERY-ADMISSION-INVESTIGATION",
+      "path": "delivery/packages/w-11-recovery-admission-investigation.md",
+      "title": "Recovery admission investigation and closed production gate",
+      "description": "Preserve the ordinary-entry experiment and repeated timing failures while separating fixture observers from candidate admission.",
+      "requires": [
+        "SP-W11-PRODUCTION-RECOVERY",
+        "SP-W11-RECOVERY-GUI-LIMITS",
+        "SP-W11-EDITOR-PAINT-TRACE"
+      ],
+      "sha256": "97276b694c60c5feac5b83690a2c08a1de64ab403b91168e810eef512c7b5895"
+    },
+    {
       "id": "SP-W11-RECOVERY-ADMISSION",
       "path": "delivery/packages/w-11-recovery-admission.md",
       "title": "Native recovery helper admission",
@@ -3056,6 +3081,17 @@
         "SP-W11-RECOVERY-ADMISSION"
       ],
       "sha256": "012f98c3abaf57b771ec6ae3625075dbfe8ac41ea077fd076e29fcae815123d3"
+    },
+    {
+      "id": "SP-RECOVERY-ADMISSION-INVESTIGATION-HANDOFF",
+      "path": "delivery/recovery-admission-investigation-handoff.md",
+      "title": "Recovery admission investigation handoff",
+      "description": "Candidate entry checks pass, repeated ordinary timing failures keep production recovery disabled.",
+      "requires": [
+        "SP-W11-RECOVERY-ADMISSION-INVESTIGATION",
+        "SP-RECOVERY-SUBMISSION-HANDOFF"
+      ],
+      "sha256": "553f9c8ed93767791ee9b696ec3bc6c699ce428fdef89364041719dd6c88b3fd"
     },
     {
       "id": "SP-RECOVERY-CONTEXT-HANDOFF",
@@ -3711,7 +3747,7 @@
         "SP-RENDERING",
         "SP-COMMANDS"
       ],
-      "sha256": "3d9810da4e4db8254bf049a6a1b3231a29bc06d9100c33e046454702fa41b102"
+      "sha256": "cc886b3b001214f5704883f1f186403312372b17310ce887370330e4167ec250"
     },
     {
       "id": "SP-POLICY",

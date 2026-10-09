@@ -11,11 +11,11 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
-The [prepared recovery submission change](spec/delivery/recovery-submission-handoff.md)
-now moves structural Apply-eligibility checks onto the existing recovery worker.
-All seven unchanged installed GUI timing/erasure cases pass in the Linux development
-laboratory, alongside portable and native regressions. Production admission is the
-next boundary; all five complete desktop editions remain unfinished.
+The [recovery admission investigation](spec/delivery/recovery-admission-investigation-handoff.md)
+separates fixture diagnostics from candidate recovery and prepared-history admission.
+Functional entry checks pass, but two ordinary maximum-input GUI attempts failed
+the unchanged timing limits. Production recovery remains disabled while those costs
+are investigated. All five complete desktop editions remain unfinished.
 
 The [installed settings frontend](spec/delivery/installed-settings-handoff.md)
 now runs from a relocated development payload, supervises its verified configuration
@@ -47,15 +47,16 @@ binds those observations to one saved profile and editor session. The
 [native helper admission](spec/delivery/recovery-admission-handoff.md) independently
 holds directory identities and checks current session authority through helper work.
 Installed recovery now composes editor sessions and exact applied-draft retirement
-in the experimental fixture; its maximum-input responsiveness checks now pass.
+in the experimental fixture. Isolated backend limits pass; repeated installed GUI
+timing failures keep production admission open.
 
 The [frontend recovery backend](spec/delivery/frontend-recovery-handoff.md)
 now downloads scoped recovery context and binds native helpers to the live session.
 Accepted requests preserve only their exact captured-draft metadata for conditional
 retirement. The [installed recovery UI](spec/delivery/installed-recovery-handoff.md)
 now exercises Restore, Keep, Discard and exact retirement through the actual frontend.
-Production controls remain disabled pending admission and production acceptance;
-the recorded development scheduling and maximum-size checks now pass.
+Production controls remain disabled: the admission investigation preserves repeated
+maximum-input GUI failures despite an earlier passing development checkpoint.
 
 The [recovery preparation worker](spec/delivery/recovery-preparation-handoff.md)
 now validates detached editor recovery inputs on the existing native worker. Restore

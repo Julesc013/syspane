@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-09T09:27:39.668706+00:00", "scope": "Prepared recovery submission and passing installed GUI qualification"}
+updated: {"by": "codex", "at": "2026-10-09T10:07:13.837163+00:00", "scope": "Recovery admission investigation, repeated GUI failures and closed production gate"}
 ---
 
 # Current state and next admitted boundary
@@ -22,27 +22,30 @@ recordings are local ignored `out/` content; the retired root is absent from the
 tracked tree. See `docs/developers/build.md` in the repository for checkout
 setup and the [repository contract](../foundation/repository.md) for ownership.
 
-The [prepared recovery submission change](recovery-submission-handoff.md) now
-closes the remaining measured restore eligibility cost. All seven unchanged ordinary
-installed GUI timing/erasure cases pass, alongside 144 selected portable checks and
-native recovery/history/installed consumers. Earlier failures remain preserved.
-Next audit the production history/recovery admission conditions and verify their
-production composition; continue general authoring/preview and desktop integration.
-W-11 and all five complete editions remain open.
+The [recovery admission investigation](recovery-admission-investigation-handoff.md)
+keeps production recovery/history disabled. Candidate entry and refusal cases pass,
+alongside 144 selected portable checks and 141 distinct native functional cases, but
+two ordinary GUI attempts failed the unchanged timing limits. MAX-WIDGETS exceeded
+the delay bound; the confirmation also exceeded MAX-RECORD work and delay bounds.
+Fixture observers are now separate from candidate admission. Final compiled gate
+comparisons, twelve rerun settings cases and all six component checks pass.
+Next attribute and repair those costs before more ordinary qualification or admission.
+Native inspector, desktop/telemetry/lifecycle and all five editions remain open.
 
 The [frontend recovery backend](frontend-recovery-handoff.md) now uses authenticated
 profile 0.2, current native admission and exact accepted-request retirement metadata.
 The [installed recovery UI](installed-recovery-handoff.md) now connects capture,
 submission and receipt consumption in the actual frontend's experimental fixture.
 All 14 native cases pass, including a repaired lost-result reconciliation exit.
-Maximum-size backend and installed GUI qualification now pass at the submission
-checkpoint above. Next enable admitted production recovery and rerun acceptance. Controls remain
-disabled; W-11 and all five complete editions remain unfinished.
+Maximum-size backend cases pass. The earlier submission checkpoint passed its GUI
+run, but the admission investigation above preserves repeated timing failures.
+Controls remain disabled; W-11 and all five complete editions remain unfinished.
 
 The [asynchronous recovery preparation](recovery-preparation-handoff.md) now moves
 capture and restoration validation to the existing native worker, with current-draft
 proofs, coalescing and cancellation. The backend above now provides the scoped download
-and live authority; installed fixture consumption and its loop qualification now pass. Preserve the
+and live authority; installed fixture functionality passes, while its current loop
+qualification failures are recorded above. Preserve the
 Windows GCC resource-limit timeout and installed AT-SPI focus timeout; their causes remain open.
 All five full editions remain unfinished.
 
@@ -50,7 +53,8 @@ The [native recovery helper admission](recovery-admission-handoff.md) now binds
 transferred observations to current host session authority and independently held
 state/recovery directories. The sealed child also refuses substituted nodes before
 creating its writer file. The backend callback and asynchronous preparation now exist;
-installed fixture consumption and maximum-input scheduling checks now pass. All five full release editions
+installed fixture consumption and isolated maximum-input cases pass; installed-loop
+timing remains unqualified. All five full release editions
 remain open.
 
 The [authenticated recovery transfer](recovery-transfer-handoff.md) now carries

@@ -268,3 +268,13 @@ permits worker preparation of structural preview/commit hints only for the exact
 opaque recovery candidate. Current-owner adoption, live authorization and full Apply
 validation remain mandatory. The [handoff](../delivery/recovery-submission-handoff.md)
 records the passing installed GUI qualification and remaining production admission.
+
+## Production recovery admission investigation
+
+The [admission package](../delivery/packages/w-11-production-recovery.md) remains
+unfinished. The [investigation](../delivery/packages/w-11-recovery-admission-investigation.md)
+preserves two failed ordinary GUI attempts and keeps production recovery/history
+disabled. Candidate entry fixtures isolate diagnostic controls from feature admission;
+they do not grant policy or deployment authority. See the
+[handoff](../delivery/recovery-admission-investigation-handoff.md) for fixed failures,
+compiled gate evidence and the next bounded performance investigation.

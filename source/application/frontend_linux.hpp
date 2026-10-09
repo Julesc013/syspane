@@ -37,7 +37,7 @@ struct FrontendView {
 // live on separate supervisory and client workers. Close, await stopped, then join.
 class LinuxFrontendBackend {
 public:
-    LinuxFrontendBackend(platform::HelperBundleExpectation,std::string runtime_base,platform::ProfileLocation,bool experimental_recovery=false);
+    LinuxFrontendBackend(platform::HelperBundleExpectation,std::string runtime_base,platform::ProfileLocation,bool recovery_admitted=false);
     ~LinuxFrontendBackend();
     LinuxFrontendBackend(const LinuxFrontendBackend&)=delete;
     LinuxFrontendBackend& operator=(const LinuxFrontendBackend&)=delete;
@@ -67,5 +67,5 @@ struct FrontendPhaseObservation {std::uint64_t tick;FrontendPhase phase;std::uin
 // Optional synchronous diagnosis only. Nested durations overlap. Refusal fails
 // the host and disables observation so ordinary shutdown can still finish.
 using FrontendPhaseObserver=std::function<bool(const FrontendPhaseObservation&)>;
-int run_frontend(int argc,char** argv,platform::HelperBundleExpectation,bool experimental_recovery=false,FrontendTimingObserver={},FrontendPhaseObserver={});
+int run_frontend(int argc,char** argv,platform::HelperBundleExpectation,bool recovery_admitted=false,FrontendTimingObserver={},FrontendPhaseObserver={});
 }

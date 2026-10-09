@@ -48,10 +48,11 @@ behaviour has been implemented. See [audit disposition](spec/delivery/audit-2026
 - [x] Bind prepared history to the existing native worker with one bounded slot, ordered recovery coexistence and cancellation/closure evidence. See the [handoff](spec/delivery/history-worker-handoff.md).
 - [x] Integrate prepared history into the experimental native form, suspend obsolete recovery capture, refuse conflicting input and verify cancellation/current preview refresh. See the [handoff](spec/delivery/history-form-handoff.md).
 - [x] Prepare structural recovery submission checks; pass all seven unchanged installed GUI timing/erasure cases and preserve earlier failures. See the [handoff](spec/delivery/recovery-submission-handoff.md).
-- [ ] Audit the passed recovery backend/installed-loop gates, enable admitted production history/recovery and rerun production acceptance.
+- [x] Separate fixture observers from candidate recovery; execute ordinary-entry functional/refusal cases and preserve exact compiled gate comparisons. See the [investigation](spec/delivery/recovery-admission-investigation-handoff.md).
+- [ ] Explain and repair the repeated MAX-WIDGETS delay and MAX-RECORD callback/delay failures before admitting production recovery/history. Preserve both failed ordinary attempts and fixed limits.
 - [ ] Complete asynchronous authoring and native preview handoff; retain full validation and the original GUI timing gates.
 - [ ] Repair measured preview/layout/validation stalls and investigate the transient Apply state and controller restart; pass all seven fixed GTK limit cases without weakening deadlines or erasure.
-- [ ] Complete production recovery admission and acceptance from the qualified development backend/GUI cases. Integrate the native inspector.
+- [ ] Complete production recovery admission after the current GUI failures are repaired; qualify protected deployment with its authority and integrate the native inspector.
 - [ ] Explain the preserved Windows GCC15 THEME-HISTORY-RESOURCE-LIMIT 20-second timeout and installed-editor AT-SPI grab_focus timeout; retain original failures and distinguish unchanged replays from causal evidence.
 
 - [x] W-11 shared private text lifetime: balanced realization/destruction, retained editing and independent verification that neither clipboard changes ownership. See the [handoff](spec/delivery/private-text-lifetime-handoff.md).

@@ -3,7 +3,10 @@
 #ifndef SYSPANE_EXPERIMENTAL_RECOVERY
 #define SYSPANE_EXPERIMENTAL_RECOVERY 0
 #endif
-#if SYSPANE_EXPERIMENTAL_RECOVERY
+#ifndef SYSPANE_FRONTEND_TEST_OBSERVERS
+#define SYSPANE_FRONTEND_TEST_OBSERVERS 0
+#endif
+#if SYSPANE_FRONTEND_TEST_OBSERVERS
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
@@ -15,7 +18,7 @@
 int main(int argc,char** argv){
     syspane::application::FrontendTimingObserver timing;
     syspane::application::FrontendPhaseObserver phases;
-#if SYSPANE_EXPERIMENTAL_RECOVERY
+#if SYSPANE_FRONTEND_TEST_OBSERVERS
     std::vector<syspane::application::FrontendPhaseObservation> journal;
     const auto* phase_option=std::getenv("SYSPANE_TEST_PHASES");const bool phase_enabled=phase_option&&std::strcmp(phase_option,"1")==0;
     const auto* observe=std::getenv("SYSPANE_TEST_TIMING");
@@ -44,7 +47,7 @@ int main(int argc,char** argv){
     }
 #endif
     const auto result=syspane::application::run_frontend(argc,argv,syspane::platform::built_helper_bundle_expectation(),SYSPANE_EXPERIMENTAL_RECOVERY!=0,std::move(timing),std::move(phases));
-#if SYSPANE_EXPERIMENTAL_RECOVERY
+#if SYSPANE_FRONTEND_TEST_OBSERVERS
     if(phase_enabled){
         // The GTK loop and all frontend owners have ended. No recording I/O is
         // performed inside GTK; ordinary stderr diagnostics remain untouched.

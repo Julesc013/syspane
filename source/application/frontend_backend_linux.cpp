@@ -46,10 +46,10 @@ struct LinuxFrontendBackend::Impl {
     std::atomic<bool> closing{false},supervisor_done{false},client_done{false};
     ProfileSupervisorView controller;std::uint64_t generation=0,requests=0,profiles=0,sessions=0,retries=0,last_retry=0;
     FrontendView view;std::optional<Pending> pending;bool reload_requested=false;
-    std::unique_ptr<ui::PreparedEditor> prepared_editor;const bool experimental_recovery;
+    std::unique_ptr<ui::PreparedEditor> prepared_editor;const bool recovery_admitted;
     std::optional<RecoverySessionAuthority> recovery_authority;
     std::optional<Capture> retirement;
-    Impl(os::HelperBundleExpectation e,std::string base,os::ProfileLocation l,bool recovery):expectation(std::move(e)),runtime_base(std::move(base)),location(std::move(l)),experimental_recovery(recovery){
+    Impl(os::HelperBundleExpectation e,std::string base,os::ProfileLocation l,bool recovery):expectation(std::move(e)),runtime_base(std::move(base)),location(std::move(l)),recovery_admitted(recovery){
         view.status="Starting configuration service.";
     }
     bool valid_unlocked(std::uint64_t token)const{return !closing&&generation==token&&controller.state==ProfileSupervisorState::ready;}
@@ -196,7 +196,7 @@ struct LinuxFrontendBackend::Impl {
             auto caps=profile->view.capabilities;caps.insert(selected.features.begin(),selected.features.end());
             profile->resources={std::make_shared<const c::ContentCatalog>(c::ContentCatalog::retained(*profile->view.resources)),profile->view.resources->selection(),std::move(caps)};
             auto resources=profile->resources;
-            if(owner.experimental_recovery&&profile->view.recovery)resources.capabilities.insert("editor.recovery");
+            if(owner.recovery_admitted&&profile->view.recovery)resources.capabilities.insert("editor.recovery");
             auto prepared=std::make_unique<ui::PreparedEditor>(c::Authority{true,"console",{"console"}},profile->view.policy,profile->view.documents,profile->epoch,std::move(resources),true);
             deadlines();
             {std::lock_guard<std::mutex> lock(owner.mutex);need(owner.valid_unlocked(token)&&!owner.pending,"frontend.withdrawn");

@@ -15,6 +15,36 @@ build` before configuring or building; use `test` or `package` for those actions
 The common active-output budget is unchanged; retained `out/evidence/` archives
 are measured separately. Never use the placeholder account from the example.
 
+The [admission investigation](../../spec/delivery/packages/w-11-recovery-admission-investigation.md)
+keeps production recovery/history disabled after two failed ordinary GUI runs. Both
+development fixtures define SYSPANE_EXPERIMENTAL_RECOVERY=1; only
+syspane_frontend_fixture defines SYSPANE_FRONTEND_TEST_OBSERVERS=1. The separate
+syspane_frontend_entry_fixture has candidate admission and the existing fixture
+helper identity without observers. It is not installed or represented as production.
+
+After ordinary preflight/configure/build, run `ctest --preset linux-x64-gcc13 -R
+'^native[.](ADMITTED-RECOVERY|ADMITTED-SETTINGS)$' --output-on-failure`. Run/archive
+each family separately within the active-output allowance. They reuse the original
+fourteen recovery and twelve settings cases with hostile observer variables. The
+settings cases include actual production policy/helper refusal. Candidate success
+does not enable production or qualify protected policy deployment.
+
+For compiled gate comparison, use `objdump -dr --disassemble=main` on
+`<build>/CMakeFiles/syspane_frontend.dir/source/application/frontend_main_linux.cpp.o`
+and `<build>/CMakeFiles/syspane_frontend_entry_fixture.dir/source/application/frontend_main_linux.cpp.o`.
+The final main bodies differ only in the false/true admission argument. Inspect
+`ninja -C <build> -t commands syspane` and the corresponding entry-fixture commands;
+record compiler/flags, generated identities and common runtime library hashes.
+Production has neither the candidate nor observer definition. Compare final loaded
+ELF code/data with the recorded artifacts, retaining build-ID differences explicitly.
+This proves the stated compiled boundary, not a full rerun or latency qualification.
+
+The [handoff](../../spec/delivery/recovery-admission-investigation-handoff.md) records
+both failed ordinary runs and the bounded diagnostic follow-up. Use the existing
+phase/paint commands below to attribute remaining work, select a measured repair,
+then rerun unchanged ordinary GUI qualification. Preserve original pixel, authority,
+erasure and lifetime oracles. Do not repeat unchanged qualification until a pass.
+
 The [recovery submission package](../../spec/delivery/packages/w-11-recovery-submission.md)
 prepares structural eligibility while preserving current authorization and full Apply
 validation. Run `ctest --preset <profile> -R
@@ -199,7 +229,8 @@ serial only after retirement_decided(). Policy withdrawal erases cached results;
 completion handlers use reply outcomes only after original-request validation.
 
 Production recovery remains disabled. The separately compiled frontend fixture uses
-SYSPANE_EXPERIMENTAL_RECOVERY=1 to exercise the same UI path under fixture policy.
+SYSPANE_EXPERIMENTAL_RECOVERY=1 to exercise the same UI path under fixture policy,
+and SYSPANE_FRONTEND_TEST_OBSERVERS=1 separately for diagnostic controls.
 There is no runtime override. Qualify maximum admitted inputs and complete existing
 worker/supervisor scheduling under unchanged deadlines before production enablement.
 

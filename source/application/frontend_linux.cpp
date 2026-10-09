@@ -16,7 +16,7 @@ struct Window {
     std::unique_ptr<interfaces::SettingsForm> form;std::unique_ptr<interfaces::EditorForm> editor;
     std::vector<GdkMonitor*> monitors;GdkDisplay* display=nullptr;bool topology_dirty=true;
     std::uint64_t shown=0,withdrawal=0;bool erased=false,closing=false,editor_mode=false,transition=false,exit_requested=false,editor_unavailable=false;int result=0;
-    bool experimental_recovery=false,recovery_enabled=false;std::optional<std::uint64_t> retirement_serial;
+    bool recovery_admitted=false,recovery_enabled=false;std::optional<std::uint64_t> retirement_serial;
     std::string saved_notice;
     FrontendTimingObserver timing;gint64 previous_tick=0;
     FrontendPhaseObserver phases;std::uint64_t tick_sequence=0;
@@ -53,7 +53,7 @@ struct Window {
         }
         need(!out.fallback.empty(),"frontend.topology");topology_dirty=false;return out;
     }
-    explicit Window(LinuxFrontendBackend& value,bool recover,FrontendTimingObserver observer,FrontendPhaseObserver phase_observer):backend(value),experimental_recovery(recover),timing(std::move(observer)),phases(std::move(phase_observer)){
+    explicit Window(LinuxFrontendBackend& value,bool recover,FrontendTimingObserver observer,FrontendPhaseObserver phase_observer):backend(value),recovery_admitted(recover),timing(std::move(observer)),phases(std::move(phase_observer)){
         need(!phases||static_cast<bool>(timing),"frontend.phase_timing");
         display=gdk_display_get_default();need(display!=nullptr,"frontend.display");
         for(const char* event:{"monitor-added","monitor-removed"})g_signal_connect(display,event,G_CALLBACK(+[](GdkDisplay*,GdkMonitor*,gpointer p){static_cast<Window*>(p)->topology_dirty=true;}),this);
@@ -99,7 +99,7 @@ struct Window {
     void populate(const std::shared_ptr<const FrontendProfile>& profile){
         const auto& snapshot=*profile;
         const configuration::Authority authority{true,"console",{"console"}};
-        editor_unavailable=false;retirement_serial.reset();recovery_enabled=editor_mode&&experimental_recovery&&snapshot.view.recovery.has_value();
+        editor_unavailable=false;retirement_serial.reset();recovery_enabled=editor_mode&&recovery_admitted&&snapshot.view.recovery.has_value();
         if(editor_mode){
             scene::Topology current;
             try{current=topology();}
@@ -110,7 +110,7 @@ struct Window {
             actions.submit_recovery=[this](const auto& request,auto digest){saved_notice.clear();retirement_serial.reset();backend.submit(request,std::move(digest));};
             actions.reload=[this]{saved_notice.clear();retirement_serial.reset();backend.reload();};actions.exit=[this]{exit_requested=true;};
             auto prepared=backend.take_editor(profile);if(!prepared)return;
-            measure(FrontendPhase::editor,[&]{editor=std::make_unique<interfaces::EditorForm>(std::move(prepared),std::move(current),selected,std::vector<rendering::SurfaceProvider>{},"",std::move(actions),backend.images(),experimental_recovery?backend.history_preparations():nullptr);});
+            measure(FrontendPhase::editor,[&]{editor=std::make_unique<interfaces::EditorForm>(std::move(prepared),std::move(current),selected,std::vector<rendering::SurfaceProvider>{},"",std::move(actions),backend.images(),recovery_admitted?backend.history_preparations():nullptr);});
             if(recovery_enabled)measure(FrontendPhase::recovery,[&]{const auto& v=*snapshot.view.recovery;const auto& a=v.admission;
                 editor->recovery(backend.recovery(),a.directory.path,{v.editor_session,a.profile,a.generation,a.policy_revision,a.erase},backend.preparations(),snapshot.recovery_retirement);
                 if(snapshot.recovery_retirement)retirement_serial=snapshot.serial;
@@ -189,7 +189,7 @@ struct Window {
     ~Window(){editor.reset();form.reset();if(window)gtk_widget_destroy(window);if(display)g_signal_handlers_disconnect_by_data(display,this);for(auto* monitor:monitors){g_signal_handlers_disconnect_by_data(monitor,this);g_object_unref(monitor);}}
 };
 }
-int run_frontend(int argc,char** argv,platform::HelperBundleExpectation expectation,bool experimental_recovery,FrontendTimingObserver timing,FrontendPhaseObserver phases){
+int run_frontend(int argc,char** argv,platform::HelperBundleExpectation expectation,bool recovery_admitted,FrontendTimingObserver timing,FrontendPhaseObserver phases){
     try{
         std::string profile="profile:default";
         for(int i=1;i<argc;++i){const std::string option=argv[i];
@@ -199,8 +199,8 @@ int run_frontend(int argc,char** argv,platform::HelperBundleExpectation expectat
         }
         if(!gtk_init_check(nullptr,nullptr)){std::cerr<<"frontend.display_unavailable\n";return 2;}
         const char* selected=std::getenv("XDG_RUNTIME_DIR");
-        LinuxFrontendBackend backend(std::move(expectation),selected?selected:"",platform::profile_environment(profile),experimental_recovery);
-        Window window(backend,experimental_recovery,std::move(timing),std::move(phases));g_timeout_add_full(G_PRIORITY_DEFAULT,20,+[](gpointer value)->gboolean{return static_cast<Window*>(value)->observed_tick();},&window,nullptr);
+        LinuxFrontendBackend backend(std::move(expectation),selected?selected:"",platform::profile_environment(profile),recovery_admitted);
+        Window window(backend,recovery_admitted,std::move(timing),std::move(phases));g_timeout_add_full(G_PRIORITY_DEFAULT,20,+[](gpointer value)->gboolean{return static_cast<Window*>(value)->observed_tick();},&window,nullptr);
         gtk_main();return window.result;
     }catch(...){std::cerr<<"frontend.startup\n";return 2;}
 }

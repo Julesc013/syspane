@@ -101,6 +101,8 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Native settings drafts and transaction results](w-11-native-settings.md) — Connect every initial settings descriptor to native controls and the common authored transaction boundary.
 - [Prepared initial editor ownership](w-11-prepared-editor.md) — Move validated draft construction off GTK while preserving current profile ownership and native rendering checks.
 - [Private native text lifetime](w-11-private-text-lifetime.md) — Balance GTK selection registration across realization and destruction without exporting authored text.
+- [Ordinary frontend recovery admission](w-11-production-recovery.md) — Enable qualified recovery and prepared history in the ordinary entry path while retaining native authority and fixture isolation.
+- [Recovery admission investigation and closed production gate](w-11-recovery-admission-investigation.md) — Preserve the ordinary-entry experiment and repeated timing failures while separating fixture observers from candidate admission.
 - [Native recovery helper admission](w-11-recovery-admission.md) — Verify transferred recovery observations against local session and held native directory identities.
 - [Installed GTK recovery timing observations](w-11-recovery-gui-limits.md) — Observe the actual GUI loop with maximum admitted recovery inputs without adding a production runtime override.
 - [Recovery preview validation and text setup costs](w-11-recovery-hotpaths.md) — Reduce measured GUI work without relaxing validation, private-data lifetime or the frozen maximum-input oracle.

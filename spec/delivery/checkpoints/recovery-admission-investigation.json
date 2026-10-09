@@ -1,0 +1,1813 @@
+{
+  "recorded_at": "2026-10-09T10:05:03.673104+00:00",
+  "source_base": "64963ed506b84548700a6edbb1b00ddd6cbde70b",
+  "scope": "Separate candidate recovery admission from fixture diagnostics; preserve failed ordinary timing qualification and retain the disabled production entry.",
+  "production_admission": "disabled; SP-W11-PRODUCTION-RECOVERY unfinished",
+  "fixed_inputs": {
+    "source_base": "64963ed506b84548700a6edbb1b00ddd6cbde70b",
+    "recorded_at": "2026-10-09T09:33:52.478498+00:00",
+    "inputs": {
+      "spec/delivery/packages/w-11-production-recovery.md": "4890e031d3c4362cc70872894cf8d737e445f05118570ef47128cd86a687eb74",
+      "tests/configuration/native_admitted_frontend.py": "ae3e364a81424e6117771f939f9524b7d381056f2811591d02427ec0473d42b3",
+      "tests/configuration/native_installed_recovery.py": "65524b5fa4ee5090ada7ecb2d4f8ee50c15330763526f8413a3602becf68c5d4",
+      "tests/configuration/native_installed_settings.py": "6eef5d138446937c73fd168ca8f1f5d4e0b7227f5a4a5baef63e26e2572d6f68",
+      "tests/configuration/native_installed_editor.py": "a4a630a8ec0d2a93730467b78bf627e0d689a3a2b81da328cb330724069a8bce",
+      "tests/configuration/installed-recovery-cases.json": "e5e75b327314911b4ff52f8521be9e04fa65f821f7b000431d3f62f63863792e",
+      "tests/configuration/installed-settings-cases.json": "fcec0479816f7276d8c2b4d7c012cab9249547e2c2cf33b8505d012b33129119",
+      "tests/configuration/native_recovery_gui_limits.py": "a29d1ae1c897ffdecf7d0a4ffd98e64b083b083189e6d92718071b229979a986"
+    }
+  },
+  "baseline_failure": {
+    "local_path": "out/evidence/production-recovery/linux-x64-gcc13-admitted-recovery-0b913d8b3e/result.json",
+    "sha256": "04e403bac948c75ec2adc69a60075f81c2d8705c566e9c97b7148b9e6a7c5143"
+  },
+  "original_oracles": [
+    {
+      "local_path": "out/evidence/installed-recovery-fixed-inputs.json",
+      "sha256": "a3a2db574502cd2420607524d211d6d1dfb5584a9d1f679e1603a346b3b11ee5"
+    },
+    {
+      "local_path": "out/evidence/recovery-limits-fixed-inputs.json",
+      "sha256": "c69f06a57ead0b63ec1c9d40e80649cf4f5dfd69859e0779f5f0b41410000f57"
+    },
+    {
+      "local_path": "out/evidence/recovery-gui-limits-fixed-inputs.json",
+      "sha256": "fe9e1733e07c3bfd873dee28ad0f021bacf8b754e43d7e502374f006204b95df"
+    }
+  ],
+  "executions": [
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "admitted-recovery",
+      "started_at": "2026-10-09T09:34:44.243476+00:00",
+      "exit": 8,
+      "passed_checks": 0,
+      "record": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-admitted-recovery-0b913d8b3e/result.json",
+        "sha256": "04e403bac948c75ec2adc69a60075f81c2d8705c566e9c97b7148b9e6a7c5143"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-admitted-recovery-0b913d8b3e/source-inputs.zip",
+        "sha256": "9b60c763f16a271de30a8d184977d00bbeca2092e3635f33d31547c73ffa01c0"
+      },
+      "later_source_changes": [
+        "CMakeLists.txt",
+        "source/application/frontend_backend_linux.cpp",
+        "source/application/frontend_linux.cpp",
+        "source/application/frontend_linux.hpp",
+        "source/application/frontend_main_linux.cpp",
+        "source/build/targets/linux-x64-gcc13.json"
+      ]
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "admitted-recovery",
+      "started_at": "2026-10-09T09:38:57.237166+00:00",
+      "exit": 0,
+      "passed_checks": 1,
+      "record": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-admitted-recovery-68da244ae3/result.json",
+        "sha256": "d19e9cca399704086741ad90989e044858355e758921f70c9a64a8d407873c3b"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-admitted-recovery-68da244ae3/source-inputs.zip",
+        "sha256": "bebedce18b698bcc88a389108266f5243d73298551962a0a39929491b76ac951"
+      },
+      "later_source_changes": [
+        "CMakeLists.txt",
+        "source/application/frontend_main_linux.cpp",
+        "source/build/targets/linux-x64-gcc13.json"
+      ]
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "admitted-settings",
+      "started_at": "2026-10-09T10:02:31.057240+00:00",
+      "exit": 0,
+      "passed_checks": 1,
+      "record": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-admitted-settings-7ac095604e/result.json",
+        "sha256": "c11ac6fd1b307305bcf8d7a58412a85a8e4ae01968679166836185fe6158ffd4"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-admitted-settings-7ac095604e/source-inputs.zip",
+        "sha256": "d6d9aff263ccd8d209241951e83065f86e19bca92d07e7b2592e3597c48011f6"
+      },
+      "later_source_changes": []
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "admitted-settings",
+      "started_at": "2026-10-09T09:40:28.634247+00:00",
+      "exit": 0,
+      "passed_checks": 1,
+      "record": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-admitted-settings-84903a8ae2/result.json",
+        "sha256": "ced961485a9b2888e75cfe32822e004a39ebe8de1b7bb1ec04d1f94ce75b91df"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-admitted-settings-84903a8ae2/source-inputs.zip",
+        "sha256": "bebedce18b698bcc88a389108266f5243d73298551962a0a39929491b76ac951"
+      },
+      "later_source_changes": [
+        "CMakeLists.txt",
+        "source/application/frontend_main_linux.cpp",
+        "source/build/targets/linux-x64-gcc13.json"
+      ]
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "backend",
+      "started_at": "2026-10-09T09:46:34.877999+00:00",
+      "exit": 0,
+      "passed_checks": 1,
+      "record": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-backend-4bd16eb2cd/result.json",
+        "sha256": "6039e8a956f2f170b36fc072215b466876efffcb059a4c44ecead380c46ca20e"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-backend-4bd16eb2cd/source-inputs.zip",
+        "sha256": "bebedce18b698bcc88a389108266f5243d73298551962a0a39929491b76ac951"
+      },
+      "later_source_changes": [
+        "CMakeLists.txt",
+        "source/application/frontend_main_linux.cpp",
+        "source/build/targets/linux-x64-gcc13.json"
+      ]
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "build",
+      "started_at": "2026-10-09T09:38:12.898186+00:00",
+      "exit": 0,
+      "passed_checks": 0,
+      "record": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-build-7c4e598d6b/result.json",
+        "sha256": "7153c6d0957f8bf9bd3dc8d62999e0dfcf8c2a2a3bfce2f78f5d7a51549dbfde"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-build-7c4e598d6b/source-inputs.zip",
+        "sha256": "bebedce18b698bcc88a389108266f5243d73298551962a0a39929491b76ac951"
+      },
+      "later_source_changes": [
+        "CMakeLists.txt",
+        "source/application/frontend_main_linux.cpp",
+        "source/build/targets/linux-x64-gcc13.json"
+      ]
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "build",
+      "started_at": "2026-10-09T10:01:01.583460+00:00",
+      "exit": 0,
+      "passed_checks": 0,
+      "record": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-build-e2932c9984/result.json",
+        "sha256": "1b4734a9117b4a3938a6ca86db4afa846ae0f441179ba100802be14c03898634"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-build-e2932c9984/source-inputs.zip",
+        "sha256": "8aff6e5856f6e4de47bd902f9d44c5f620263603e0b9b8a0f446e0dbf6083ed3"
+      },
+      "later_source_changes": []
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "configure",
+      "started_at": "2026-10-09T09:37:59.578957+00:00",
+      "exit": 0,
+      "passed_checks": 0,
+      "record": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-configure-33c4aeb0ae/result.json",
+        "sha256": "7df31d629fac855ec84c412665299a84c9e6c43558920f721320970c16002081"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-configure-33c4aeb0ae/source-inputs.zip",
+        "sha256": "bebedce18b698bcc88a389108266f5243d73298551962a0a39929491b76ac951"
+      },
+      "later_source_changes": [
+        "CMakeLists.txt",
+        "source/application/frontend_main_linux.cpp",
+        "source/build/targets/linux-x64-gcc13.json"
+      ]
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "configure",
+      "started_at": "2026-10-09T10:00:47.531659+00:00",
+      "exit": 0,
+      "passed_checks": 0,
+      "record": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-configure-66db517062/result.json",
+        "sha256": "cb0ee0df9c227aebcf1f21bba5a1c7e06ccd4bd6886ecbf21f2292263550047c"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-configure-66db517062/source-inputs.zip",
+        "sha256": "8aff6e5856f6e4de47bd902f9d44c5f620263603e0b9b8a0f446e0dbf6083ed3"
+      },
+      "later_source_changes": []
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "configure",
+      "started_at": "2026-10-09T09:34:17.797079+00:00",
+      "exit": 0,
+      "passed_checks": 0,
+      "record": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-configure-70f6651ec3/result.json",
+        "sha256": "d6cb9f355adc73235d6e3c76fc9084d951bc9ae8bda4b3a5f298733f4125530a"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-configure-70f6651ec3/source-inputs.zip",
+        "sha256": "9b60c763f16a271de30a8d184977d00bbeca2092e3635f33d31547c73ffa01c0"
+      },
+      "later_source_changes": [
+        "CMakeLists.txt",
+        "source/application/frontend_backend_linux.cpp",
+        "source/application/frontend_linux.cpp",
+        "source/application/frontend_linux.hpp",
+        "source/application/frontend_main_linux.cpp",
+        "source/build/targets/linux-x64-gcc13.json"
+      ]
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "controls",
+      "started_at": "2026-10-09T09:47:53.671929+00:00",
+      "exit": 0,
+      "passed_checks": 1,
+      "record": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-controls-2b04c9be57/result.json",
+        "sha256": "8e48006f579bfdd2cf8886a0390d97d61edcdef8de3865cdd5f111489ee2e824"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-controls-2b04c9be57/source-inputs.zip",
+        "sha256": "bebedce18b698bcc88a389108266f5243d73298551962a0a39929491b76ac951"
+      },
+      "later_source_changes": [
+        "CMakeLists.txt",
+        "source/application/frontend_main_linux.cpp",
+        "source/build/targets/linux-x64-gcc13.json"
+      ]
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "editor",
+      "started_at": "2026-10-09T09:44:08.690937+00:00",
+      "exit": 0,
+      "passed_checks": 1,
+      "record": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-editor-9db74a3e53/result.json",
+        "sha256": "513fa78c2990e8533927defb75aad7b23702c70daaf7dbd7f187c33eff7e497b"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-editor-9db74a3e53/source-inputs.zip",
+        "sha256": "bebedce18b698bcc88a389108266f5243d73298551962a0a39929491b76ac951"
+      },
+      "later_source_changes": [
+        "CMakeLists.txt",
+        "source/application/frontend_main_linux.cpp",
+        "source/build/targets/linux-x64-gcc13.json"
+      ]
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "entry-build",
+      "started_at": "2026-10-09T09:34:34.485431+00:00",
+      "exit": 0,
+      "passed_checks": 0,
+      "record": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-entry-build-77a7dfbc6a/result.json",
+        "sha256": "f245caa146c545ac200b79773f10cacc199730724b9fd3995eedb419ecee4a85"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-entry-build-77a7dfbc6a/source-inputs.zip",
+        "sha256": "9b60c763f16a271de30a8d184977d00bbeca2092e3635f33d31547c73ffa01c0"
+      },
+      "later_source_changes": [
+        "CMakeLists.txt",
+        "source/application/frontend_backend_linux.cpp",
+        "source/application/frontend_linux.cpp",
+        "source/application/frontend_linux.hpp",
+        "source/application/frontend_main_linux.cpp",
+        "source/build/targets/linux-x64-gcc13.json"
+      ]
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "form-history",
+      "started_at": "2026-10-09T09:48:42.388586+00:00",
+      "exit": 0,
+      "passed_checks": 1,
+      "record": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-form-history-a6871b2519/result.json",
+        "sha256": "367a24b480cb533a04b859085f0732f0e9d24f257eb2a29f62c9c0ca7ff158a6"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-form-history-a6871b2519/source-inputs.zip",
+        "sha256": "bebedce18b698bcc88a389108266f5243d73298551962a0a39929491b76ac951"
+      },
+      "later_source_changes": [
+        "CMakeLists.txt",
+        "source/application/frontend_main_linux.cpp",
+        "source/build/targets/linux-x64-gcc13.json"
+      ]
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "frontend",
+      "started_at": "2026-10-09T09:45:28.201064+00:00",
+      "exit": 0,
+      "passed_checks": 1,
+      "record": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-frontend-b6a815ddb3/result.json",
+        "sha256": "1a24e9f6965a8a7619109db24dd9638b9f85d4df8a7d2959f4da8f1b6a458028"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-frontend-b6a815ddb3/source-inputs.zip",
+        "sha256": "bebedce18b698bcc88a389108266f5243d73298551962a0a39929491b76ac951"
+      },
+      "later_source_changes": [
+        "CMakeLists.txt",
+        "source/application/frontend_main_linux.cpp",
+        "source/build/targets/linux-x64-gcc13.json"
+      ]
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "graph",
+      "started_at": "2026-10-09T10:03:33.643709+00:00",
+      "exit": 0,
+      "passed_checks": 2,
+      "record": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-graph-c52744ece1/result.json",
+        "sha256": "856ada62431b2d6804458acf1c652114d1824d0c398830c6c4ec214437db2089"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-graph-c52744ece1/source-inputs.zip",
+        "sha256": "d6d9aff263ccd8d209241951e83065f86e19bca92d07e7b2592e3597c48011f6"
+      },
+      "later_source_changes": []
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "gui",
+      "started_at": "2026-10-09T09:54:52.553493+00:00",
+      "exit": 8,
+      "passed_checks": 0,
+      "record": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-gui-4eca024160/result.json",
+        "sha256": "15ef462a1b5841bacec3b97dc8ed1c1b9fe63dd941f393e8f99480494eec0634"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-gui-4eca024160/source-inputs.zip",
+        "sha256": "bebedce18b698bcc88a389108266f5243d73298551962a0a39929491b76ac951"
+      },
+      "later_source_changes": [
+        "CMakeLists.txt",
+        "source/application/frontend_main_linux.cpp",
+        "source/build/targets/linux-x64-gcc13.json"
+      ]
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "gui",
+      "started_at": "2026-10-09T09:50:15.287574+00:00",
+      "exit": 8,
+      "passed_checks": 0,
+      "record": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-gui-c03856cd94/result.json",
+        "sha256": "634e9a7712ceb3a7818c7801e5541716b0f6db94b12b2e1a428c0ea87ac2ed02"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-gui-c03856cd94/source-inputs.zip",
+        "sha256": "bebedce18b698bcc88a389108266f5243d73298551962a0a39929491b76ac951"
+      },
+      "later_source_changes": [
+        "CMakeLists.txt",
+        "source/application/frontend_main_linux.cpp",
+        "source/build/targets/linux-x64-gcc13.json"
+      ]
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "installed",
+      "started_at": "2026-10-09T09:42:49.587253+00:00",
+      "exit": 0,
+      "passed_checks": 1,
+      "record": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-installed-c5c4b43ffb/result.json",
+        "sha256": "4a5e6d1cc5a9f67c2f2fec26fbba1bd24872c38f1a2fadcb768008d7dfc13fab"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-installed-c5c4b43ffb/source-inputs.zip",
+        "sha256": "bebedce18b698bcc88a389108266f5243d73298551962a0a39929491b76ac951"
+      },
+      "later_source_changes": [
+        "CMakeLists.txt",
+        "source/application/frontend_main_linux.cpp",
+        "source/build/targets/linux-x64-gcc13.json"
+      ]
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "native",
+      "started_at": "2026-10-09T09:49:28.536156+00:00",
+      "exit": 0,
+      "passed_checks": 1,
+      "record": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-native-5d468b8bf1/result.json",
+        "sha256": "f004433a2f015a6d2bb0c3b28d9c696fb30046036ab4bdc9836e451c0bbb0457"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-native-5d468b8bf1/source-inputs.zip",
+        "sha256": "bebedce18b698bcc88a389108266f5243d73298551962a0a39929491b76ac951"
+      },
+      "later_source_changes": [
+        "CMakeLists.txt",
+        "source/application/frontend_main_linux.cpp",
+        "source/build/targets/linux-x64-gcc13.json"
+      ]
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "paint",
+      "started_at": "2026-10-09T09:52:05.728677+00:00",
+      "exit": 0,
+      "passed_checks": 0,
+      "record": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-paint-b846d9f528/result.json",
+        "sha256": "994ed23f8fe24bfc228e3d0483f89031eef6081b11178bbeb02bcafdff6c9213"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-paint-b846d9f528/source-inputs.zip",
+        "sha256": "bebedce18b698bcc88a389108266f5243d73298551962a0a39929491b76ac951"
+      },
+      "later_source_changes": [
+        "CMakeLists.txt",
+        "source/application/frontend_main_linux.cpp",
+        "source/build/targets/linux-x64-gcc13.json"
+      ]
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "phase-failure",
+      "started_at": "2026-10-09T09:49:56.132414+00:00",
+      "exit": 0,
+      "passed_checks": 1,
+      "record": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-phase-failure-d417444f9d/result.json",
+        "sha256": "8adda274593f5d8e1a87cc03a90a3a1fbf846833e0b6c89fc675b5bcf05854b7"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-phase-failure-d417444f9d/source-inputs.zip",
+        "sha256": "bebedce18b698bcc88a389108266f5243d73298551962a0a39929491b76ac951"
+      },
+      "later_source_changes": [
+        "CMakeLists.txt",
+        "source/application/frontend_main_linux.cpp",
+        "source/build/targets/linux-x64-gcc13.json"
+      ]
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "preparation",
+      "started_at": "2026-10-09T09:47:20.928725+00:00",
+      "exit": 0,
+      "passed_checks": 1,
+      "record": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-preparation-3f9e93f635/result.json",
+        "sha256": "699e8b870c6b33b3327e940b112f817fd6d1bde0b0e183994e09e36380c71cf2"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-preparation-3f9e93f635/source-inputs.zip",
+        "sha256": "bebedce18b698bcc88a389108266f5243d73298551962a0a39929491b76ac951"
+      },
+      "later_source_changes": [
+        "CMakeLists.txt",
+        "source/application/frontend_main_linux.cpp",
+        "source/build/targets/linux-x64-gcc13.json"
+      ]
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "recovery-portable",
+      "started_at": "2026-10-09T09:42:00.744368+00:00",
+      "exit": 0,
+      "passed_checks": 48,
+      "record": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-recovery-portable-1921b9e4e8/result.json",
+        "sha256": "3688e7803be9612838f20727156a44f6419e66addb5cba08baedfa1ad3e7bb8c"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-recovery-portable-1921b9e4e8/source-inputs.zip",
+        "sha256": "bebedce18b698bcc88a389108266f5243d73298551962a0a39929491b76ac951"
+      },
+      "later_source_changes": [
+        "CMakeLists.txt",
+        "source/application/frontend_main_linux.cpp",
+        "source/build/targets/linux-x64-gcc13.json"
+      ]
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "worker-history",
+      "started_at": "2026-10-09T09:48:50.584495+00:00",
+      "exit": 0,
+      "passed_checks": 1,
+      "record": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-worker-history-25b1393e79/result.json",
+        "sha256": "dc84c091bcc0dd242951c9abeba73491ae28eecc9fa15076bd872d3a3263f970"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-worker-history-25b1393e79/source-inputs.zip",
+        "sha256": "bebedce18b698bcc88a389108266f5243d73298551962a0a39929491b76ac951"
+      },
+      "later_source_changes": [
+        "CMakeLists.txt",
+        "source/application/frontend_main_linux.cpp",
+        "source/build/targets/linux-x64-gcc13.json"
+      ]
+    },
+    {
+      "profile": "windows-x64-gcc15",
+      "action": "configure",
+      "started_at": "2026-10-09T09:42:15.807391+00:00",
+      "exit": 0,
+      "passed_checks": 0,
+      "record": {
+        "local_path": "out/evidence/production-recovery/windows-x64-gcc15-configure-86f19f2062/result.json",
+        "sha256": "ed8abd6eec3112ed3fea38187a6c998153c97c7bcf1af4c77fafc7afd09ea2a2"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/production-recovery/windows-x64-gcc15-configure-86f19f2062/source-inputs.zip",
+        "sha256": "2372935660352a54b44cd4bf03774a14af278c65f4eb922ea1f41b84d7c60c7b"
+      },
+      "later_source_changes": [
+        "CMakeLists.txt",
+        "source/application/frontend_main_linux.cpp",
+        "source/build/targets/linux-x64-gcc13.json"
+      ]
+    },
+    {
+      "profile": "windows-x64-gcc15",
+      "action": "configure",
+      "started_at": "2026-10-09T10:03:39.605149+00:00",
+      "exit": 0,
+      "passed_checks": 0,
+      "record": {
+        "local_path": "out/evidence/production-recovery/windows-x64-gcc15-configure-e9f3fc1227/result.json",
+        "sha256": "92d7a2a6fc8d1416e5c799e86f1fb4049182b46b8007eef66c12e7def22953fc"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/production-recovery/windows-x64-gcc15-configure-e9f3fc1227/source-inputs.zip",
+        "sha256": "f099c7f6445c4175062a06e70e8e8214a30b1efa9cc98453aec66c571433723b"
+      },
+      "later_source_changes": []
+    },
+    {
+      "profile": "windows-x64-gcc15",
+      "action": "graph",
+      "started_at": "2026-10-09T10:03:42.963679+00:00",
+      "exit": 0,
+      "passed_checks": 2,
+      "record": {
+        "local_path": "out/evidence/production-recovery/windows-x64-gcc15-graph-5a235175a4/result.json",
+        "sha256": "fd116ede5d7b5944deb95de6c51dfb4a7d2f9f8529c84f3b4789ef9db89d1750"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/production-recovery/windows-x64-gcc15-graph-5a235175a4/source-inputs.zip",
+        "sha256": "f099c7f6445c4175062a06e70e8e8214a30b1efa9cc98453aec66c571433723b"
+      },
+      "later_source_changes": []
+    },
+    {
+      "profile": "windows-x64-gcc15",
+      "action": "recovery-portable",
+      "started_at": "2026-10-09T09:42:20.601612+00:00",
+      "exit": 0,
+      "passed_checks": 48,
+      "record": {
+        "local_path": "out/evidence/production-recovery/windows-x64-gcc15-recovery-portable-6a7ac67d31/result.json",
+        "sha256": "fe0cf2721f855cf6ff8cc5850fe6dc3b3a6baae05973e1ca738c1f732ba693fd"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/production-recovery/windows-x64-gcc15-recovery-portable-6a7ac67d31/source-inputs.zip",
+        "sha256": "2372935660352a54b44cd4bf03774a14af278c65f4eb922ea1f41b84d7c60c7b"
+      },
+      "later_source_changes": [
+        "CMakeLists.txt",
+        "source/application/frontend_main_linux.cpp",
+        "source/build/targets/linux-x64-gcc13.json"
+      ]
+    },
+    {
+      "profile": "windows-x86-v141-xp",
+      "action": "configure",
+      "started_at": "2026-10-09T09:42:33.666368+00:00",
+      "exit": 0,
+      "passed_checks": 0,
+      "record": {
+        "local_path": "out/evidence/production-recovery/windows-x86-v141-xp-configure-961f73b41b/result.json",
+        "sha256": "836f0c79ace34acab55b7b658356a1bdfd4cf8334ae2b5e1562f2d3bd931f8c0"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/production-recovery/windows-x86-v141-xp-configure-961f73b41b/source-inputs.zip",
+        "sha256": "2372935660352a54b44cd4bf03774a14af278c65f4eb922ea1f41b84d7c60c7b"
+      },
+      "later_source_changes": [
+        "CMakeLists.txt",
+        "source/application/frontend_main_linux.cpp",
+        "source/build/targets/linux-x64-gcc13.json"
+      ]
+    },
+    {
+      "profile": "windows-x86-v141-xp",
+      "action": "configure",
+      "started_at": "2026-10-09T10:03:45.584484+00:00",
+      "exit": 0,
+      "passed_checks": 0,
+      "record": {
+        "local_path": "out/evidence/production-recovery/windows-x86-v141-xp-configure-a2624d7918/result.json",
+        "sha256": "e694b78acf050bb68857ddb323397509d2e1de976742b5f6bdd3d5cc550a20bc"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/production-recovery/windows-x86-v141-xp-configure-a2624d7918/source-inputs.zip",
+        "sha256": "f099c7f6445c4175062a06e70e8e8214a30b1efa9cc98453aec66c571433723b"
+      },
+      "later_source_changes": []
+    },
+    {
+      "profile": "windows-x86-v141-xp",
+      "action": "graph",
+      "started_at": "2026-10-09T10:03:49.247790+00:00",
+      "exit": 0,
+      "passed_checks": 2,
+      "record": {
+        "local_path": "out/evidence/production-recovery/windows-x86-v141-xp-graph-f2e1ac379c/result.json",
+        "sha256": "489ef0e17080b92b59c29fdb8e29c2ad56d170711fa3dd97f413aeca7b9c571d"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/production-recovery/windows-x86-v141-xp-graph-f2e1ac379c/source-inputs.zip",
+        "sha256": "f099c7f6445c4175062a06e70e8e8214a30b1efa9cc98453aec66c571433723b"
+      },
+      "later_source_changes": []
+    },
+    {
+      "profile": "windows-x86-v141-xp",
+      "action": "recovery-portable",
+      "started_at": "2026-10-09T09:42:37.465372+00:00",
+      "exit": 0,
+      "passed_checks": 48,
+      "record": {
+        "local_path": "out/evidence/production-recovery/windows-x86-v141-xp-recovery-portable-6f9b5adcdb/result.json",
+        "sha256": "86cf431c6752985bfbb2223dbb02202a9ce9b995b76124f7d0219cb5b59677bb"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/production-recovery/windows-x86-v141-xp-recovery-portable-6f9b5adcdb/source-inputs.zip",
+        "sha256": "2372935660352a54b44cd4bf03774a14af278c65f4eb922ea1f41b84d7c60c7b"
+      },
+      "later_source_changes": [
+        "CMakeLists.txt",
+        "source/application/frontend_main_linux.cpp",
+        "source/build/targets/linux-x64-gcc13.json"
+      ]
+    }
+  ],
+  "portable_checks": {
+    "linux-x64-gcc13": 48,
+    "windows-x64-gcc15": 48,
+    "windows-x86-v141-xp": 48
+  },
+  "final_component_checks": {
+    "linux-x64-gcc13": 2,
+    "windows-x64-gcc15": 2,
+    "windows-x86-v141-xp": 2
+  },
+  "windows_artifacts_reused": [
+    {
+      "profile": "windows-x64-gcc15",
+      "reason": "Windows portable artifacts remain identical to the preceding rebuilt checkpoint; current graph checks run after final configuration.",
+      "artifacts": {
+        "syspane_recovery_preparation_tests.exe": "2e96934c47406a9390ff174f746dfdba39e613b1dda1a82540ad316910929dcb",
+        "syspane_recovery_draft_tests.exe": "fcd357a0088bebc3b56aeb1607e4ef2cb41583d0b5085af05a80ad1cb685325d",
+        "syspane_profile_projection_tests.exe": "3134cdd7ef4bc6e4900bef9b0da3d76871ac26d5a6b26ecc9038161536f07b89",
+        "syspane_initial_profile_tests.exe": "c50f5d5a135f530d22267c003f0dd56651bddc011a8242de8d5472c4502aaad5",
+        "syspane_command_session_tests.exe": "e8e2f353f79d2b51aab858cc69bad7754829471b3efe34fadf680a7dab108a08",
+        "libsyspane_async_commands.a": "5d82b33c03d7c90704cd7a9189fdd8079ee2a84bce5419b1817a5e01ac9a5bf4",
+        "libsyspane_authored.a": "447f611c6c375ae1c53484332fdff49d586071b03133ba348d539daea34b5df6",
+        "libsyspane_child.a": "f8e66405783cb61cdc2cf60a1dd7bbd823ccff4b8a7f705d68ebd3ffe9172eea",
+        "libsyspane_configuration.a": "4127ae7b3e8ff67bfe03b7b43596c8e140e2671481c9408e6df167a845ce09e7",
+        "libsyspane_data_view.a": "e15df1376e041769f33160f856209aa6c30d5081482c3ccaf84b2781a6ba8383",
+        "libsyspane_demand.a": "e9f3982081ae32f1dbff8f91b75a277c56c364d396d76b10ccb7edd25971736b",
+        "libsyspane_demand_sessions.a": "a2524a1d5b7b54b64103319ec8ee6eb8803b54de91d937fa1030a40d3911149f",
+        "libsyspane_diagnostic.a": "d5f2b83fbb1e06fbdbaa475a050f1d2f3b971aeb50bda27364749ed85b805c5d",
+        "libsyspane_diagnostic_inspector.a": "539ae92223838c6b420ee1cd2855a9936f9188d4a3bd7f1115823db359178713",
+        "libsyspane_editor_draft.a": "53475a43993f7f3099042678d4fd1e815bee651e5a3f9fae388afc76b221d6eb",
+        "libsyspane_failure_store.a": "65011c2f8945465033eda2580287530fc1f04a5246cf1d367bfa099adbc84f67",
+        "libsyspane_health.a": "c18c55e6231606914e2379d4e142de01a08f1041b68218e4ee9dbcd785a37e1b",
+        "libsyspane_local_ipc.a": "065e0ed5853950d9d1452edd49389068fed3585a0c6c1284915396bef0788518",
+        "libsyspane_machine_policy.a": "1ae3fb4bda9084917a8121b757564db91a19afcafbe3e976f6512741da910ecc",
+        "libsyspane_model.a": "f821398832c82276b9a4cc69da10e02cf475cc07d833ed467058cd26827dac78",
+        "libsyspane_network.a": "b9e86e79eefbfba86a37287b1dbf1528fd923eb6932a24eb74c77cea5e33873c",
+        "libsyspane_network_publication.a": "3f2ff523b4cee73c4c8086c0c514781af543dccad10992a8d39350f365bad6d4",
+        "libsyspane_network_state.a": "fd9bf5e722758441b0111aa534407411d8b51711913a2a91318cd90564e7a78c",
+        "libsyspane_network_view.a": "9d8d7c4ac6e55e03c4fdd1a13d9f1dd75ab50d1613622531faa10241774e33dd",
+        "libsyspane_preservation_job.a": "fc5c7b64f15a0da3d043cffdc9f084a37582b88cec80324fcebc8462ed6d0a83",
+        "libsyspane_profile_projection.a": "72f458d9ad2d14ffca3bbc9584ce5cf53cf18512a08fecb7741d7be669497e36",
+        "libsyspane_protocol.a": "0a60601c4ca7b8979c27513b042474cd8c3f4d69fca5108948775625c8a26b21",
+        "libsyspane_recovery.a": "de125e25001b3600be23b0b4784a93923f99721a480a26515502f081da492413",
+        "libsyspane_scene.a": "852067ee6bb87b1b56d2471f609a1c15d40c6e2ad434d2e5a9c28c7c3b58f5a6",
+        "libsyspane_settings_draft.a": "7ea8d4722be6089fc5ba76b57f7a7e96d46e1a0db0476afaa6c2f39d015c7690",
+        "SysPane.Diag.exe": "c59158659ba797f4319f97c70e5060f9e2fb61792f38e77e3783b020cfbfa956",
+        "SysPane.IpcProbe.exe": "232eb1d108375c20a7be22a1626dcb2c232794459124a344f07b9e9f61324675",
+        "SysPane.ModelSmoke.exe": "3595d41d3efa77189b420e0d447a35b90cc53fb9418d81492a0a6f19b502cdbb",
+        "SysPane.NetworkProbe.exe": "d5d7c549c802108cbf6ad71d37d1cdc0eca7bb649142d2c6efbf4d83771000d5",
+        "SysPane.RecoveryProbe.exe": "93ca69fbd0246ce3746ba90220a3ce03c0846ec894efcdcd880b87d1bf461787",
+        "SysPane.TelemetryProbe.exe": "bf569122b9578a4e83d223e44f6fa1e2239b4d03ebf0604d2af891ff9f8758b3",
+        "syspane_authored_tests.exe": "1b0a4e94ec8715c5eb2be837ff73783b4e59b6435dca240d4a5d8cc60a707a2c",
+        "syspane_data_view_tests.exe": "8da63aceb3f8e7b9dd048950cc98cd642db7447a812024c4982edf508e71854e",
+        "syspane_demand_session_tests.exe": "8a9196055ee7212cdb4a4cf58bcc9e52d191089f425923d8250ffb1c0d5753ea",
+        "syspane_demand_tests.exe": "90ac2fbe61febb7fc79a80913a8694bee99b3c8f7041d4019319b065c3e09a78",
+        "syspane_diagnostic_tests.exe": "1185675d1b53726ba72c9ab1eae21ced91fdf7f8fc04cef911d7ad18989b8ba7",
+        "syspane_editor_tests.exe": "3a1d79c53352bb36e42f01e5f39f2dc9bca38803b59bcccbd0a9ec2de4519682",
+        "syspane_failure_store_tests.exe": "3b32eb18edd349babd2cde596004932b6c7b088612702941a1011da867acd74d",
+        "syspane_health_tests.exe": "9c26d38032ccc4fed7751de0e793fc95c3832ff394573cb88517a9b234d2b984",
+        "syspane_history_preparation_tests.exe": "26176a31532faa12b3ebfa76f992b73874e188bd7419653ffb8284a9a57f9024",
+        "syspane_large_command_tests.exe": "cb0ddf9ebd34fe08592ccb9f9de7403e6db08ba5143eeeafb18c861a6dd47f6d",
+        "syspane_measured_time_tests.exe": "996d04f4d122e9f488b74cdc9ff09475442338a566f418aa8c610ecfe9d233bf",
+        "syspane_model_tests.exe": "3dddc594668b045ce7ce90e3e2b423eb4c06eca82f40ebd5872f437c7251b651",
+        "syspane_network_publication_tests.exe": "5461b38766aac9e18e2ed70b392b25d19a3f020dd11726371a212645541b636f",
+        "syspane_network_state_tests.exe": "7a787d34d7433a5c50423abf24bb242f78bd7620c8a2d866f0230c8c5f68a556",
+        "syspane_network_view_tests.exe": "e18faccf00773e9b73288752c7a5938fc697cb2cb26b6aad1f1d1ee503e6d62a",
+        "syspane_preservation_tests.exe": "3e1676e6cdc1af49bd506a4a3578334d1e40913c03041e569019d33bc8568e58",
+        "syspane_protocol_tests.exe": "bf4b6f5aace3f7ddbdfb07e72a57ca1df9e1fcb6f8b91b8965470614df1b0842",
+        "syspane_recovery_tests.exe": "555b7b7dd7b5fbf41d103897ac51a682b849d69d3d3c208ad5cd795ea82c9af5",
+        "syspane_scene_fragment_tests.exe": "768edd156743c21d74873abdea9b1e38068ffd31f3938f7ebe7c9997d9ef29db",
+        "syspane_scene_tests.exe": "c68a9bfdd8561f969fea4590b27ed6980b1efc3243fa99d618e3cd62535938d5",
+        "syspane_settings_tests.exe": "dd26e7102417b17b338796f222235ab4058e5c3fb48883108b907e135b1dcce5",
+        "syspane_state_import_tests.exe": "712df439b000e5c8e36a0170ed7607dc96bd7610937762938885d37dd4194bb8",
+        "syspane_subscription_tests.exe": "81ef2ae9f333c6ab66f1afee373182e86a7d48b6cca4e567cafeb9e104f9d0f0",
+        "syspane_telemetry_tests.exe": "a16e66c7aafa0d5fb4e69f9664024162675c0e36d8fa1864e5232688c0042411",
+        "syspane_theme_authoring_tests.exe": "df23e5842e49e68c22d91f764377c8cc3924bdb06953bfedaa92797f9d3b99da",
+        "syspane_theme_command_tests.exe": "cad4d3f77996f055b0c8fbdcdd3137bf9760a067a7d8c4fd7ef796f7ed412e04",
+        "syspane_theme_controls_tests.exe": "6dfae4a2778a03eebaebcd030f4fdcff695f9fb37cdeba8fce995b19a6d7bc86",
+        "syspane_theme_history_tests.exe": "d5351009069c65f86c06c12ac56e4f55134cd5141a4c0f98d3ae323363c312fa",
+        "syspane_theme_override_tests.exe": "171feb20f4da5e3cf132360b03a3ba6e2784a39cc9e6a4ccb2614592a32cbc46",
+        "syspane_typography_tests.exe": "599328ec3f44dcf3b414dbf27da90a97128dc897bdfce6e1eafdac4f5d89e081"
+      }
+    },
+    {
+      "profile": "windows-x86-v141-xp",
+      "reason": "Windows portable artifacts remain identical to the preceding rebuilt checkpoint; current graph checks run after final configuration.",
+      "artifacts": {
+        "syspane_recovery_preparation_tests.exe": "ce15cbeb9e65eb765c0774aa4209a4e7ea4eea501a09e3aa4ad4bf008433f1ae",
+        "syspane_recovery_draft_tests.exe": "19caeb3b74cde188217e4ceccb5b0048aad04bf43d9fae985b9d82e699ad1dba",
+        "syspane_profile_projection_tests.exe": "92d2a77a46a4d9643f861da8cf2820d512c2d137118e36891d9ff42c48dd2dd5",
+        "syspane_initial_profile_tests.exe": "4bff9bc9fb945b757d1abcdfce302811e91e3f5ceb9dc2ae55df90d141bc7788",
+        "syspane_command_session_tests.exe": "0cbbeeca4bf1d9a83b1595d3b36cecdc2d4568a180493a3efabf160be81c7568",
+        "SysPane.ModelSmoke.exe": "0b4a9b5df2b9947c4014c3202040acac8903297af5f3ea830d7e0e72b0bf76c2",
+        "syspane_async_commands.lib": "40f92e5deb78a48df242bfe495298d9da8ed1fe6a0479a660dce374f8cb47d3b",
+        "syspane_authored.lib": "80426814744b0252ac1e8c391b0277aa34433e8b4b96ad184632921479c20a2f",
+        "syspane_authored_tests.exe": "4e9aa96761d51f402bf083252ac109e89f80147bc763876b8dcafc6ae6893e94",
+        "syspane_configuration.lib": "c91a0b0c8d3a6c5d6399beac91c2d6c07d76e2bba45de8cb6060b8286402d3e5",
+        "syspane_data_view.lib": "28d809c7f0c0e93a0d486b75cc186064f9a7b84543c499965584b458b0d665e0",
+        "syspane_data_view_tests.exe": "876db347d3da0aa3bd9e45cb3789324c16f8728ef23120eb0d8e5034b5ee5125",
+        "syspane_demand.lib": "e8f71e265d1c643aac8b56c826cb77ca4982c70b5a921819cdf56eec7efd166a",
+        "syspane_demand_sessions.lib": "bf52f0ed56adc1054c9d30c112b512918a7127a3164c5b89731aac9934a8f129",
+        "syspane_demand_session_tests.exe": "a78969f24c771c18c56e4af3d200319d5fe3accdfad79ef8985a2ad0162a50bd",
+        "syspane_demand_tests.exe": "9535493d710eef5b198d4e22b30e7c333849b143320312f0779630acf0250dbf",
+        "syspane_diagnostic.lib": "aeb110662ec2b8d74d5e602ab96a7c39371b38c7d6fa37c095cf711454631611",
+        "syspane_diagnostic_tests.exe": "c2698199089ace65d77a4c318cd6ca5a2bf973e11c40998b1286fe8f2d3abe66",
+        "syspane_editor_draft.lib": "449b67574c80523a8caf23f4414b0cc73450a07867b67013a5287bfc6360cd88",
+        "syspane_editor_tests.exe": "7fb18815bdd350f7a4ad5be3a562ed9ae49e057ae5c41d26c6c8052be8f40be3",
+        "syspane_history_preparation_tests.exe": "2afd4c966931476eecafad1f9ff9b6add690c6ca022e55405208eb19ee5fa7e1",
+        "syspane_large_command_tests.exe": "646c5b174dd1345ba76c9cfc576cc2fa272620c96205ddcc8d6af8e5b423efbc",
+        "syspane_measured_time_tests.exe": "a677b1e5f04a79475bc80762f116305bebb752cf0a36390e619b802341c8f80e",
+        "syspane_model.lib": "3478a73994b95300645d942e6dc7513c9fcc7025599908ecaa557a458e0a75b3",
+        "syspane_model_tests.exe": "99cb4e26fb8d883c8e3593687e1ba5ba3e6558f3ef0d6e37f92444aaaa7a99ca",
+        "syspane_network_publication.lib": "773e8f13127fab1b3138ab4fb90309e47376fd149c537e2059ff5ea249bc1a2d",
+        "syspane_network_publication_tests.exe": "b77a7f1b1411da5b5c2ca056e77e62def2cdc31d584d110b83dd7d8b52f7dfc4",
+        "syspane_network_state.lib": "dc8f83a4673891e67ca5edd29950137d0942afe7dde64d9503296fada737f33b",
+        "syspane_network_state_tests.exe": "d20600ad8d2328255958850cf4a1f43bf389a4aeb02c4396d1669135a2b1c286",
+        "syspane_network_view.lib": "c9082c7cef2284d7cb6393ecb763ede8c6c5203869769759849cf73ae3277926",
+        "syspane_network_view_tests.exe": "bb5ad0e159430756b48e15fccc6495b716367d069ce7e7d915e96084b37143d3",
+        "syspane_profile_projection.lib": "a452f8c80e31f51f9f415f91623384aa6d13a1acb8693f37612e73b7eb26aef9",
+        "syspane_protocol.lib": "269a5f455d4808c7e3a6e58e20c8434d02f8922fcfa1a9bfe3e001800b2d8fdb",
+        "syspane_protocol_tests.exe": "8be71266cb2c4a34312cefe46e18aa2acac3b8f92a3d701ba3849d2fdc1d167f",
+        "syspane_recovery.lib": "fd825d0012373568d280eeeb809ecc17d3610a53018368cbdab32fe5aa96b664",
+        "syspane_recovery_tests.exe": "5f09ba852045b6c140dcdbd96d1972c6f0cff024369fd96232ef9fbbb23aa6ac",
+        "syspane_scene.lib": "d7754df525883f9b981b13da485ba4ede174ea71e0e9e623e525f0e16d7a6e21",
+        "syspane_scene_fragment_tests.exe": "cf80531c67ee365b3720965a20ce05af61356b196c7dd61430406c1df8e02ce4",
+        "syspane_scene_tests.exe": "2522b08b8c3f8a25a7732dd05dbcbf4d734598e5acdbd81edb3a452e0b758d22",
+        "syspane_settings_draft.lib": "399f75501a6dc010a75773e5990292950eec39f0d4027a88e8b720abc18bd0e6",
+        "syspane_settings_tests.exe": "89f7b41371fce44e6a9d07a4a041899f425e1ca5d93b77e39ee572c00c7eb2e9",
+        "syspane_state_import_tests.exe": "9f7d98353a78a0d2f18baac1543edf0ca49bb49937537a768f0207307cd96e55",
+        "syspane_subscription_tests.exe": "931109537f52fc19b7079f8e8f63782c11be14cb2c2fe104cfd9f7d14553fc86",
+        "syspane_telemetry_tests.exe": "7b63f1b176dd95e2838e6743177da2ac882572b93d87d78d1e48620094a0ace5",
+        "syspane_theme_authoring_tests.exe": "340fc253d9b5259a5ba90b22bb153e0420eb8c3d59534a8ba30cf8ea5b43a251",
+        "syspane_theme_command_tests.exe": "05eea8b3087859fd4eb5c4cf4e518e849355444ed47238ef78fa740ead520b40",
+        "syspane_theme_controls_tests.exe": "7416cf172438a243b1270d6307e51b988d1e40f42fba2a774d06d2796ac5b770",
+        "syspane_theme_history_tests.exe": "bf241745cdeeb6701ac3ece891b72bca6e1172ba792d046007de900c27b1050e",
+        "syspane_theme_override_tests.exe": "9faea7cf70f1899e76aa5198b00b66c594b34dd32c2883a3751b05762eb2095a",
+        "syspane_typography_tests.exe": "74b7e98af30bfae1fa078a1b821d76edd77a2539a304387c38ae7cce46f3527a"
+      }
+    }
+  ],
+  "passed_native_case_families": {
+    "ADMITTED-RECOVERY": 14,
+    "INSTALLED-EDITOR": 15,
+    "FRONTEND-RECOVERY": 14,
+    "ADMITTED-SETTINGS": 12,
+    "INSTALLED-SETTINGS": 12,
+    "HISTORY-WORKER": 13,
+    "INSTALLED-RECOVERY": 14,
+    "FRONTEND-PHASE-FAILURE": 2,
+    "EDITOR-RECOVERY": 14,
+    "EDITOR-HISTORY": 17,
+    "RECOVERY-LIMITS": 6,
+    "RECOVERY-PREPARATION": 8
+  },
+  "native": [
+    {
+      "family": "ADMITTED-RECOVERY",
+      "cases": [
+        "CAPTURE-APPLY",
+        "CRASH-RESTORE",
+        "KEEP-APPLY",
+        "DISCARD",
+        "CANCEL",
+        "PRIVATE-FIELD",
+        "INVALID-RECORD",
+        "REPLACEMENT-RECORD",
+        "LOST-RESULT",
+        "UNKNOWN-RESULT",
+        "ERASE-DENIED",
+        "POLICY",
+        "CLOSE",
+        "ORACLE"
+      ],
+      "outcome": "pass",
+      "archive": {
+        "local_path": "out/evidence/production-recovery-native/ar-5736caa187.zip",
+        "sha256": "89f3763238c7c47f554d1720774058de25b4b01e1d6c334043d0922ac5081ff8"
+      },
+      "record": {
+        "local_path": "out/evidence/production-recovery-native/ar-5736caa187.json",
+        "sha256": "100733387a30881e06cd3988944cbb0b5384b9c35b4ae2ba0e5e48ba318d2188"
+      },
+      "inventory": {
+        "local_path": "out/evidence/production-recovery-native/ar-5736caa187.index.json",
+        "sha256": "5ce1a41473feba72b097765ddae25183b06bc0070bb9d712a1fb5bef49e6cf4a"
+      },
+      "execution_record": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-admitted-recovery-68da244ae3/result.json",
+        "sha256": "d19e9cca399704086741ad90989e044858355e758921f70c9a64a8d407873c3b"
+      },
+      "artifact_identities_matched": {
+        "SysPane.ImageWorker": "65b38c368c9472405163a244c7f1b0ddf2c8702bb5e7945e147cb4a5935e777c",
+        "SysPane.RecoveryWorker": "6256fa4cd28d6263ea9e1f182da9e2a75b5a187bda6f9ed0efa1d51f10b99537",
+        "syspane": "1495f0f66d8450f7fe1860953850b621dbae4030d071ead5e5a2f86943358b3b",
+        "syspane_frontend_entry_fixture": "bc3f472b052770aa8d6eb8b8cce8ed64c563e27dd21f09768cc772dfae6a8cdc",
+        "syspane_frontend_helper_fixture": "6e9df5690ba2b0bec818fc33c9d36ec07c14d0951b6f997a8a9e2b9b07c3cb32"
+      },
+      "diagnostic_only": false
+    },
+    {
+      "family": "ADMITTED-RECOVERY",
+      "cases": [
+        "CAPTURE-APPLY"
+      ],
+      "outcome": "fail",
+      "archive": {
+        "local_path": "out/evidence/production-recovery-native/ar-68695140a4.zip",
+        "sha256": "7e3bae8788254cc747c4c6f6066a94734658a84901bbbe8d08473e4462604dc4"
+      },
+      "record": {
+        "local_path": "out/evidence/production-recovery-native/ar-68695140a4.json",
+        "sha256": "b62b8abc37d61d32b9981104d9d7e90b6f3d70fd1e58f03453c32740e54c5c77"
+      },
+      "inventory": {
+        "local_path": "out/evidence/production-recovery-native/ar-68695140a4.index.json",
+        "sha256": "dcfe70ed897fd41b0d70abca57f496c369b0fe4e48eef6a3fa166ecc7f419bbc"
+      },
+      "execution_record": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-admitted-recovery-0b913d8b3e/result.json",
+        "sha256": "04e403bac948c75ec2adc69a60075f81c2d8705c566e9c97b7148b9e6a7c5143"
+      },
+      "artifact_identities_matched": {
+        "SysPane.ImageWorker": "65b38c368c9472405163a244c7f1b0ddf2c8702bb5e7945e147cb4a5935e777c",
+        "SysPane.RecoveryWorker": "6256fa4cd28d6263ea9e1f182da9e2a75b5a187bda6f9ed0efa1d51f10b99537",
+        "syspane": "ce6ef27615e10ce596616019c8f84db1f902d207fb57eb7e86d0518547a3b658",
+        "syspane_frontend_entry_fixture": "c330b7e4dfcbfe17035e96fbb90b1953770a9e25c983d212e0b56446504965cc",
+        "syspane_frontend_helper_fixture": "6e9df5690ba2b0bec818fc33c9d36ec07c14d0951b6f997a8a9e2b9b07c3cb32"
+      },
+      "diagnostic_only": false
+    },
+    {
+      "family": "INSTALLED-EDITOR",
+      "cases": [
+        "OPEN",
+        "PROPERTIES",
+        "SAVE-REOPEN",
+        "SETTINGS-NAV",
+        "PRIVATE-NAV",
+        "REQUEST-NAV",
+        "UNDO-REDO",
+        "CANCEL-DRAFT",
+        "RELOAD",
+        "LOST-RESULT",
+        "POLICY",
+        "REPLACEMENT",
+        "HELPER-FAILURE",
+        "CLOSE-HELD",
+        "ORACLE"
+      ],
+      "outcome": "pass",
+      "archive": {
+        "local_path": "out/evidence/production-recovery-native/editor-frontend-864daff5fa.zip",
+        "sha256": "d4425ac51c53104499975beb01cb30235272b190b97f6a25d45f1345f7ed1a61"
+      },
+      "record": {
+        "local_path": "out/evidence/production-recovery-native/editor-frontend-864daff5fa.json",
+        "sha256": "56a18d69f6c7605f3f19facc3cf270ba35e49ae0d983ed3fe0f182bcd100867d"
+      },
+      "inventory": {
+        "local_path": "out/evidence/production-recovery-native/editor-frontend-864daff5fa.index.json",
+        "sha256": "344720255a4c13bb9b17b9a6536211a64376c139118903e0954c5aeb209e1dcc"
+      },
+      "execution_record": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-editor-9db74a3e53/result.json",
+        "sha256": "513fa78c2990e8533927defb75aad7b23702c70daaf7dbd7f187c33eff7e497b"
+      },
+      "artifact_identities_matched": {
+        "SysPane.ImageWorker": "65b38c368c9472405163a244c7f1b0ddf2c8702bb5e7945e147cb4a5935e777c",
+        "SysPane.RecoveryWorker": "6256fa4cd28d6263ea9e1f182da9e2a75b5a187bda6f9ed0efa1d51f10b99537",
+        "syspane": "1495f0f66d8450f7fe1860953850b621dbae4030d071ead5e5a2f86943358b3b",
+        "syspane_frontend_fixture": "3c7801f46feaa4ad64e67d7776e48c2698cf107abd2564172b7370a2a2d48a19",
+        "syspane_frontend_helper_fixture": "6e9df5690ba2b0bec818fc33c9d36ec07c14d0951b6f997a8a9e2b9b07c3cb32"
+      },
+      "diagnostic_only": false
+    },
+    {
+      "family": "FRONTEND-RECOVERY",
+      "cases": [
+        "SCOPED-CONTEXT",
+        "NULL-CONTEXT",
+        "CAPTURE-AND-RETIRE",
+        "INVALID-METADATA",
+        "RELOAD-WITHDRAWAL",
+        "KEPT-RECORD",
+        "REPLACEMENT-RECORD",
+        "LOST-ACCEPTANCE",
+        "UNKNOWN-RESULT",
+        "ERASE-DENIED",
+        "DIRECTORY-REPLACED",
+        "POLICY-WITHDRAWAL",
+        "CLOSE",
+        "ORACLE"
+      ],
+      "outcome": "pass",
+      "archive": {
+        "local_path": "out/evidence/production-recovery-native/fr-118c634d1f.zip",
+        "sha256": "34a020dd5fcb1b0ea792bc2184af6d884ae6386a165cdcb3e50381171a42980c"
+      },
+      "record": {
+        "local_path": "out/evidence/production-recovery-native/fr-118c634d1f.json",
+        "sha256": "fb57008f23f91ecab26c978e715315d1c989f9db5838f5643deca4a9eb33b1df"
+      },
+      "inventory": {
+        "local_path": "out/evidence/production-recovery-native/fr-118c634d1f.index.json",
+        "sha256": "127127eb81ff236d88f2750bc41f5487a589df845f1b96c8e456bf607ad7d3a2"
+      },
+      "execution_record": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-backend-4bd16eb2cd/result.json",
+        "sha256": "6039e8a956f2f170b36fc072215b466876efffcb059a4c44ecead380c46ca20e"
+      },
+      "artifact_identities_matched": {
+        "bin/syspane": "f51a0b7dd8748856e72ceaa78851e23c1281203bd387c9d2d78f07271ea0564f",
+        "libexec/syspane/syspane-configuration-host": "6e9df5690ba2b0bec818fc33c9d36ec07c14d0951b6f997a8a9e2b9b07c3cb32",
+        "libexec/syspane/syspane-image-worker": "65b38c368c9472405163a244c7f1b0ddf2c8702bb5e7945e147cb4a5935e777c",
+        "libexec/syspane/syspane-recovery-worker": "6256fa4cd28d6263ea9e1f182da9e2a75b5a187bda6f9ed0efa1d51f10b99537",
+        "share/syspane/helpers.json": "cacd709b73aec39d2540fcd437d14324440cc2b6d6cc7e5918ba182a712bbb73"
+      },
+      "diagnostic_only": false
+    },
+    {
+      "family": "ADMITTED-SETTINGS",
+      "cases": [
+        "STARTUP",
+        "VALIDATION-PREVIEW-REVERT",
+        "SAVE-REOPEN",
+        "CANCEL",
+        "REPLACEMENT",
+        "LOST-RESULT",
+        "POLICY",
+        "RUNTIME-UNAVAILABLE",
+        "PRODUCTION-POLICY",
+        "HELPER-IDENTITY",
+        "CLOSE-PENDING",
+        "ORACLE"
+      ],
+      "outcome": "pass",
+      "archive": {
+        "local_path": "out/evidence/production-recovery-native/frontend-886c2d557f.zip",
+        "sha256": "31e27f30f5cf17e26980df30800c54e5d5ee3f0859c47ac6ee74fe75a7b9e085"
+      },
+      "record": {
+        "local_path": "out/evidence/production-recovery-native/frontend-886c2d557f.json",
+        "sha256": "95e84e7fcfd19eca73ea54530b9ac683a143d2a9f7b2470134b2e3d0d517b30c"
+      },
+      "inventory": {
+        "local_path": "out/evidence/production-recovery-native/frontend-886c2d557f.index.json",
+        "sha256": "3c1cff33848a849f31cdd7bbcbdc71c53a88d6005b6d5f7a09ebce32812e5ec5"
+      },
+      "execution_record": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-admitted-settings-84903a8ae2/result.json",
+        "sha256": "ced961485a9b2888e75cfe32822e004a39ebe8de1b7bb1ec04d1f94ce75b91df"
+      },
+      "artifact_identities_matched": {
+        "syspane": "1495f0f66d8450f7fe1860953850b621dbae4030d071ead5e5a2f86943358b3b",
+        "syspane_frontend_entry_fixture": "bc3f472b052770aa8d6eb8b8cce8ed64c563e27dd21f09768cc772dfae6a8cdc",
+        "syspane_frontend_helper_fixture": "6e9df5690ba2b0bec818fc33c9d36ec07c14d0951b6f997a8a9e2b9b07c3cb32"
+      },
+      "diagnostic_only": false
+    },
+    {
+      "family": "ADMITTED-SETTINGS",
+      "cases": [
+        "STARTUP",
+        "VALIDATION-PREVIEW-REVERT",
+        "SAVE-REOPEN",
+        "CANCEL",
+        "REPLACEMENT",
+        "LOST-RESULT",
+        "POLICY",
+        "RUNTIME-UNAVAILABLE",
+        "PRODUCTION-POLICY",
+        "HELPER-IDENTITY",
+        "CLOSE-PENDING",
+        "ORACLE"
+      ],
+      "outcome": "pass",
+      "archive": {
+        "local_path": "out/evidence/production-recovery-native/frontend-9931776074.zip",
+        "sha256": "e2dda578cba5c9a71081d272d1ad10f59262073019fd6a439266f9556e93bb7f"
+      },
+      "record": {
+        "local_path": "out/evidence/production-recovery-native/frontend-9931776074.json",
+        "sha256": "d865fe950271ccb0d0f736de9be48bc0b6c66551a5c6b9a38f87d3f2f7436031"
+      },
+      "inventory": {
+        "local_path": "out/evidence/production-recovery-native/frontend-9931776074.index.json",
+        "sha256": "c8e7baf7b56e33ed4c231ce66d7d76b691df0454cb32a686340e4a3905e59fda"
+      },
+      "execution_record": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-admitted-settings-7ac095604e/result.json",
+        "sha256": "c11ac6fd1b307305bcf8d7a58412a85a8e4ae01968679166836185fe6158ffd4"
+      },
+      "artifact_identities_matched": {
+        "syspane": "3923671f4b8b7c4e90fe9cf22e955900c0d31e5f999fd0182efc920fe6a59dcc",
+        "syspane_frontend_entry_fixture": "b81f6711d04d6efd35ce2cfc0b9b5fe38e40829a8655bb4d50d6b980a088782f",
+        "syspane_frontend_helper_fixture": "6e9df5690ba2b0bec818fc33c9d36ec07c14d0951b6f997a8a9e2b9b07c3cb32"
+      },
+      "diagnostic_only": false
+    },
+    {
+      "family": "INSTALLED-SETTINGS",
+      "cases": [
+        "STARTUP",
+        "VALIDATION-PREVIEW-REVERT",
+        "SAVE-REOPEN",
+        "CANCEL",
+        "REPLACEMENT",
+        "LOST-RESULT",
+        "POLICY",
+        "RUNTIME-UNAVAILABLE",
+        "PRODUCTION-POLICY",
+        "HELPER-IDENTITY",
+        "CLOSE-PENDING",
+        "ORACLE"
+      ],
+      "outcome": "pass",
+      "archive": {
+        "local_path": "out/evidence/production-recovery-native/frontend-d7d7a6fd85.zip",
+        "sha256": "83374d17cc0004afa9f7bb131cff2865d597946c4503a14650dea2203406d3fb"
+      },
+      "record": {
+        "local_path": "out/evidence/production-recovery-native/frontend-d7d7a6fd85.json",
+        "sha256": "1597aeae7b8c823708be81d0719f6d2e6b51419f20605cab480baa0b11e91092"
+      },
+      "inventory": {
+        "local_path": "out/evidence/production-recovery-native/frontend-d7d7a6fd85.index.json",
+        "sha256": "03475e05da2393e36d50349f8bf5f8cdf7469698905caccfe5faeebf0fe6f598"
+      },
+      "execution_record": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-frontend-b6a815ddb3/result.json",
+        "sha256": "1a24e9f6965a8a7619109db24dd9638b9f85d4df8a7d2959f4da8f1b6a458028"
+      },
+      "artifact_identities_matched": {
+        "syspane": "1495f0f66d8450f7fe1860953850b621dbae4030d071ead5e5a2f86943358b3b",
+        "syspane_frontend_fixture": "3c7801f46feaa4ad64e67d7776e48c2698cf107abd2564172b7370a2a2d48a19",
+        "syspane_frontend_helper_fixture": "6e9df5690ba2b0bec818fc33c9d36ec07c14d0951b6f997a8a9e2b9b07c3cb32"
+      },
+      "diagnostic_only": false
+    },
+    {
+      "family": "HISTORY-WORKER",
+      "cases": [
+        "HELD",
+        "TRACE",
+        "CAPACITY",
+        "INPUTS",
+        "QUEUED-CANCEL",
+        "READY-CANCEL",
+        "RUNNING-CANCEL",
+        "DROP",
+        "CLOSE",
+        "STALE",
+        "COEXISTENCE",
+        "OWNER",
+        "ORACLE"
+      ],
+      "outcome": "pass",
+      "archive": {
+        "local_path": "out/evidence/production-recovery-native/hw-a3405fe3fc.zip",
+        "sha256": "637ea402582b2a32236a49ff8e9bc0f89e817981680b7fdc410727fa04c5b571"
+      },
+      "record": {
+        "local_path": "out/evidence/production-recovery-native/hw-a3405fe3fc.json",
+        "sha256": "1b9148e1750230b708bb4db32eed7a85f7d35ad2a5b4da378849233d48ef8251"
+      },
+      "inventory": {
+        "local_path": "out/evidence/production-recovery-native/hw-a3405fe3fc.index.json",
+        "sha256": "6df1a5ec9eee0fa9685504236c60f0a63d75f515d5f02f03e145191f00ba1914"
+      },
+      "execution_record": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-worker-history-25b1393e79/result.json",
+        "sha256": "dc84c091bcc0dd242951c9abeba73491ae28eecc9fa15076bd872d3a3263f970"
+      },
+      "artifact_identities_matched": {
+        "SysPane.ImageWorker": "65b38c368c9472405163a244c7f1b0ddf2c8702bb5e7945e147cb4a5935e777c",
+        "SysPane.RecoveryWorker": "6256fa4cd28d6263ea9e1f182da9e2a75b5a187bda6f9ed0efa1d51f10b99537",
+        "helpers.json": "8c4c4be109d38e4d318d439e3210d27a2ad844770fb2bd5b0e7fa54af6474902",
+        "syspane-configuration-host": "4f0ef658d9d2c1497d9f3d2bf65cccc54bd6d7994eb6bb24c3f1b26ccc8b52c5",
+        "syspane_editor_helper_worker_probe": "e3d008e63fa714e7712773c65ad096e4d9a608b03f5c7aaf4ca9cfbe3ec08aeb"
+      },
+      "diagnostic_only": false
+    },
+    {
+      "family": "INSTALLED-RECOVERY",
+      "cases": [
+        "CAPTURE-APPLY",
+        "CRASH-RESTORE",
+        "KEEP-APPLY",
+        "DISCARD",
+        "CANCEL",
+        "PRIVATE-FIELD",
+        "INVALID-RECORD",
+        "REPLACEMENT-RECORD",
+        "LOST-RESULT",
+        "UNKNOWN-RESULT",
+        "ERASE-DENIED",
+        "POLICY",
+        "CLOSE",
+        "ORACLE"
+      ],
+      "outcome": "pass",
+      "archive": {
+        "local_path": "out/evidence/production-recovery-native/ir-4f21a6f400.zip",
+        "sha256": "ba380a92b3f93cea848f23f5cfee6c0cb605f1ae2e21bd08ae6eb8e5a7ffbad8"
+      },
+      "record": {
+        "local_path": "out/evidence/production-recovery-native/ir-4f21a6f400.json",
+        "sha256": "99d91bc5268ca0976ea5b817349917f396ff44c7ae47e73df512faf8e55f5aed"
+      },
+      "inventory": {
+        "local_path": "out/evidence/production-recovery-native/ir-4f21a6f400.index.json",
+        "sha256": "2add8f705b11eedf086f59d3f94c803e2c7c2c1dcd3dd8f72e5797eae28a0bc4"
+      },
+      "execution_record": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-installed-c5c4b43ffb/result.json",
+        "sha256": "4a5e6d1cc5a9f67c2f2fec26fbba1bd24872c38f1a2fadcb768008d7dfc13fab"
+      },
+      "artifact_identities_matched": {
+        "SysPane.ImageWorker": "65b38c368c9472405163a244c7f1b0ddf2c8702bb5e7945e147cb4a5935e777c",
+        "SysPane.RecoveryWorker": "6256fa4cd28d6263ea9e1f182da9e2a75b5a187bda6f9ed0efa1d51f10b99537",
+        "syspane": "1495f0f66d8450f7fe1860953850b621dbae4030d071ead5e5a2f86943358b3b",
+        "syspane_frontend_fixture": "3c7801f46feaa4ad64e67d7776e48c2698cf107abd2564172b7370a2a2d48a19",
+        "syspane_frontend_helper_fixture": "6e9df5690ba2b0bec818fc33c9d36ec07c14d0951b6f997a8a9e2b9b07c3cb32"
+      },
+      "diagnostic_only": false
+    },
+    {
+      "family": "EDITOR-PAINT-TRACE",
+      "cases": [
+        "MAX-WIDGETS",
+        "MAX-SCENE",
+        "MAX-RECORD",
+        "MAX-COMMAND-REJECT",
+        "OVER-RECORD-REJECT",
+        "CLOSE-PREPARING",
+        "POLICY"
+      ],
+      "outcome": "pass",
+      "archive": {
+        "local_path": "out/evidence/production-recovery-native/paint-trace-4868badf97.zip",
+        "sha256": "681e480febd1953554f7b0ecd92e48c4184aa0545193165b44f9fbafd5c07d08"
+      },
+      "record": {
+        "local_path": "out/evidence/production-recovery-native/paint-trace-4868badf97.json",
+        "sha256": "ebee9d4f220dc9f1eae301208b500ce97d02e3c52f9ee8fc9df87da7a3ff4010"
+      },
+      "inventory": {
+        "local_path": "out/evidence/production-recovery-native/paint-trace-4868badf97.index.json",
+        "sha256": "11c9ae70270de63ea9d7870641f278315050fa9b9c55034a34d0c6be4109ce78"
+      },
+      "execution_record": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-paint-b846d9f528/result.json",
+        "sha256": "994ed23f8fe24bfc228e3d0483f89031eef6081b11178bbeb02bcafdff6c9213"
+      },
+      "artifact_identities_matched": {
+        "SysPane.ImageWorker": "65b38c368c9472405163a244c7f1b0ddf2c8702bb5e7945e147cb4a5935e777c",
+        "SysPane.RecoveryWorker": "6256fa4cd28d6263ea9e1f182da9e2a75b5a187bda6f9ed0efa1d51f10b99537",
+        "syspane": "1495f0f66d8450f7fe1860953850b621dbae4030d071ead5e5a2f86943358b3b",
+        "syspane_frontend_fixture": "3c7801f46feaa4ad64e67d7776e48c2698cf107abd2564172b7370a2a2d48a19",
+        "syspane_frontend_helper_fixture": "6e9df5690ba2b0bec818fc33c9d36ec07c14d0951b6f997a8a9e2b9b07c3cb32"
+      },
+      "diagnostic_only": true
+    },
+    {
+      "family": "FRONTEND-PHASE-FAILURE",
+      "cases": [
+        "REFUSE",
+        "THROW"
+      ],
+      "outcome": "pass",
+      "archive": {
+        "local_path": "out/evidence/production-recovery-native/pff-2967f04122.zip",
+        "sha256": "2368193c0897f3b710915d3d5c3c273ac5d2a0e5676aafba9d8be0283eac7ac2"
+      },
+      "record": {
+        "local_path": "out/evidence/production-recovery-native/pff-2967f04122.json",
+        "sha256": "061af9a07ee1b9e47922341cbc4770ea4bc67b7611cb8e57cbec2473fcf0dd9a"
+      },
+      "inventory": {
+        "local_path": "out/evidence/production-recovery-native/pff-2967f04122.index.json",
+        "sha256": "ab445a8abdb08e332db149c8aa5ec2fc36a068cdfa44d436dd9e0e8a377563bb"
+      },
+      "execution_record": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-phase-failure-d417444f9d/result.json",
+        "sha256": "8adda274593f5d8e1a87cc03a90a3a1fbf846833e0b6c89fc675b5bcf05854b7"
+      },
+      "artifact_identities_matched": {
+        "SysPane.ImageWorker": "65b38c368c9472405163a244c7f1b0ddf2c8702bb5e7945e147cb4a5935e777c",
+        "SysPane.RecoveryWorker": "6256fa4cd28d6263ea9e1f182da9e2a75b5a187bda6f9ed0efa1d51f10b99537",
+        "syspane": "1495f0f66d8450f7fe1860953850b621dbae4030d071ead5e5a2f86943358b3b",
+        "syspane_frontend_fixture": "3c7801f46feaa4ad64e67d7776e48c2698cf107abd2564172b7370a2a2d48a19",
+        "syspane_frontend_helper_fixture": "6e9df5690ba2b0bec818fc33c9d36ec07c14d0951b6f997a8a9e2b9b07c3cb32"
+      },
+      "diagnostic_only": false
+    },
+    {
+      "family": "EDITOR-RECOVERY",
+      "cases": [
+        "restore-apply",
+        "keep-apply",
+        "discard",
+        "undo-clean",
+        "cancel",
+        "private-fields",
+        "invalid",
+        "stale",
+        "policy",
+        "unknown",
+        "replacement",
+        "worker-failure",
+        "held-close",
+        "scope-change"
+      ],
+      "outcome": "pass",
+      "archive": {
+        "local_path": "out/evidence/production-recovery-native/recovery-controls-0974dc8acf2e.zip",
+        "sha256": "0300b7de5312f500ce617b7a90e683110566904d2eb1ad21ffabf60bfb34dad2"
+      },
+      "record": {
+        "local_path": "out/evidence/production-recovery-native/recovery-controls-0974dc8acf2e.json",
+        "sha256": "6da63d2e6957941a5025f965b518b67f96202806b1116c310ad26f8e8535e547"
+      },
+      "inventory": {
+        "local_path": "out/evidence/production-recovery-native/recovery-controls-0974dc8acf2e.index.json",
+        "sha256": "6d93070802311b9ceaf01917a525742ac3cb43a77d316fb713a03f699e9bf348"
+      },
+      "execution_record": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-controls-2b04c9be57/result.json",
+        "sha256": "8e48006f579bfdd2cf8886a0390d97d61edcdef8de3865cdd5f111489ee2e824"
+      },
+      "artifact_identities_matched": {
+        "executable_sha256": "a4b9538c064b646bfd05fe2fb7a71c99f1feb35db1b94e7361a4499fa4945d74",
+        "worker_sha256": "6256fa4cd28d6263ea9e1f182da9e2a75b5a187bda6f9ed0efa1d51f10b99537"
+      },
+      "diagnostic_only": false
+    },
+    {
+      "family": "EDITOR-HISTORY",
+      "cases": [
+        "trace",
+        "pending",
+        "factory-failure",
+        "run-failure",
+        "cancel-queued",
+        "cancel-ready",
+        "cancel-running",
+        "reload-button",
+        "reload",
+        "topology",
+        "policy",
+        "disconnect",
+        "close",
+        "late-result",
+        "recovery-capture",
+        "recovery-cancel",
+        "recovery-withdrawal"
+      ],
+      "outcome": "pass",
+      "archive": {
+        "local_path": "out/evidence/production-recovery-native/reply-833cbfe4ff37.zip",
+        "sha256": "5c17d5584933bc516907492a7f399fe3857e0a04182560481aab15f9b42cc646"
+      },
+      "record": {
+        "local_path": "out/evidence/production-recovery-native/reply-833cbfe4ff37.json",
+        "sha256": "3fe88530d8014e3ab76d9384106bcba041dc29422f35d5096ba718c3b962657f"
+      },
+      "inventory": {
+        "local_path": "out/evidence/production-recovery-native/reply-833cbfe4ff37.index.json",
+        "sha256": "1b1f5b3f4f5c4bd8854a67af73b07d0adb11bec9c943b2ae16742e0d3008adce"
+      },
+      "execution_record": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-form-history-a6871b2519/result.json",
+        "sha256": "367a24b480cb533a04b859085f0732f0e9d24f257eb2a29f62c9c0ca7ff158a6"
+      },
+      "artifact_identities_matched": {
+        "executable_sha256": "a4b9538c064b646bfd05fe2fb7a71c99f1feb35db1b94e7361a4499fa4945d74"
+      },
+      "diagnostic_only": false
+    },
+    {
+      "family": "RECOVERY-GUI-LIMITS",
+      "cases": [
+        "MAX-WIDGETS",
+        "MAX-SCENE",
+        "MAX-RECORD",
+        "MAX-COMMAND-REJECT",
+        "OVER-RECORD-REJECT",
+        "CLOSE-PREPARING",
+        "POLICY"
+      ],
+      "outcome": "fail",
+      "archive": {
+        "local_path": "out/evidence/production-recovery-native/rgl-bf25b9dfb3.zip",
+        "sha256": "036083ad4ec778591336442e042dea0c6651f0bf3fce4ee99a3c269f0ec8b4b8"
+      },
+      "record": {
+        "local_path": "out/evidence/production-recovery-native/rgl-bf25b9dfb3.json",
+        "sha256": "a86ec971365f62698e4df1dc55dd25ed34d10827717600a90a687699ff9f4f45"
+      },
+      "inventory": {
+        "local_path": "out/evidence/production-recovery-native/rgl-bf25b9dfb3.index.json",
+        "sha256": "b2738a8fd2a054788053164b1da90a46b476c3cab175c3d2cd127b0345f34b43"
+      },
+      "execution_record": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-gui-c03856cd94/result.json",
+        "sha256": "634e9a7712ceb3a7818c7801e5541716b0f6db94b12b2e1a428c0ea87ac2ed02"
+      },
+      "artifact_identities_matched": {
+        "SysPane.ImageWorker": "65b38c368c9472405163a244c7f1b0ddf2c8702bb5e7945e147cb4a5935e777c",
+        "SysPane.RecoveryWorker": "6256fa4cd28d6263ea9e1f182da9e2a75b5a187bda6f9ed0efa1d51f10b99537",
+        "syspane": "1495f0f66d8450f7fe1860953850b621dbae4030d071ead5e5a2f86943358b3b",
+        "syspane_frontend_fixture": "3c7801f46feaa4ad64e67d7776e48c2698cf107abd2564172b7370a2a2d48a19",
+        "syspane_frontend_helper_fixture": "6e9df5690ba2b0bec818fc33c9d36ec07c14d0951b6f997a8a9e2b9b07c3cb32"
+      },
+      "diagnostic_only": false
+    },
+    {
+      "family": "RECOVERY-GUI-LIMITS",
+      "cases": [
+        "MAX-WIDGETS",
+        "MAX-SCENE",
+        "MAX-RECORD",
+        "MAX-COMMAND-REJECT",
+        "OVER-RECORD-REJECT",
+        "CLOSE-PREPARING",
+        "POLICY"
+      ],
+      "outcome": "fail",
+      "archive": {
+        "local_path": "out/evidence/production-recovery-native/rgl-ebf076a6f1.zip",
+        "sha256": "4ff23637609ad56dd5de9d101bee008b2939a91a8c8b335b030255c52e5b7fcc"
+      },
+      "record": {
+        "local_path": "out/evidence/production-recovery-native/rgl-ebf076a6f1.json",
+        "sha256": "830940764758882a9d19f306299029562a2d50be1ad6b514c721aea132d8ec76"
+      },
+      "inventory": {
+        "local_path": "out/evidence/production-recovery-native/rgl-ebf076a6f1.index.json",
+        "sha256": "cef749ef3808f6d44de0e58e76c13ac62b29cf9af7620b7fa5a5aca0407294f1"
+      },
+      "execution_record": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-gui-4eca024160/result.json",
+        "sha256": "15ef462a1b5841bacec3b97dc8ed1c1b9fe63dd941f393e8f99480494eec0634"
+      },
+      "artifact_identities_matched": {
+        "SysPane.ImageWorker": "65b38c368c9472405163a244c7f1b0ddf2c8702bb5e7945e147cb4a5935e777c",
+        "SysPane.RecoveryWorker": "6256fa4cd28d6263ea9e1f182da9e2a75b5a187bda6f9ed0efa1d51f10b99537",
+        "syspane": "1495f0f66d8450f7fe1860953850b621dbae4030d071ead5e5a2f86943358b3b",
+        "syspane_frontend_fixture": "3c7801f46feaa4ad64e67d7776e48c2698cf107abd2564172b7370a2a2d48a19",
+        "syspane_frontend_helper_fixture": "6e9df5690ba2b0bec818fc33c9d36ec07c14d0951b6f997a8a9e2b9b07c3cb32"
+      },
+      "diagnostic_only": false
+    },
+    {
+      "family": "RECOVERY-LIMITS",
+      "cases": [
+        "MAX-WIDGETS",
+        "MAX-SCENE",
+        "MAX-RECORD",
+        "MAX-COMMAND-REJECT",
+        "OVER-RECORD-REJECT",
+        "SUPERVISOR-CLOSE"
+      ],
+      "outcome": "pass",
+      "archive": {
+        "local_path": "out/evidence/production-recovery-native/rl-bb601cb546.zip",
+        "sha256": "a1edc87b34246fa9d9a698f92fdcdc90220c3511b3fad125cfb01c713aea0144"
+      },
+      "record": {
+        "local_path": "out/evidence/production-recovery-native/rl-bb601cb546.json",
+        "sha256": "0939be989981c71700b83310aaca98e36c9e0ac60e5bf9c7c2524cf8bba0934c"
+      },
+      "inventory": {
+        "local_path": "out/evidence/production-recovery-native/rl-bb601cb546.index.json",
+        "sha256": "e603be1bedb85deb1ea59f26c311270ac792611bb4f2c38c5ddedc1f617f0298"
+      },
+      "execution_record": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-native-5d468b8bf1/result.json",
+        "sha256": "f004433a2f015a6d2bb0c3b28d9c696fb30046036ab4bdc9836e451c0bbb0457"
+      },
+      "artifact_identities_matched": {
+        "bin/syspane": "f51a0b7dd8748856e72ceaa78851e23c1281203bd387c9d2d78f07271ea0564f",
+        "libexec/syspane/syspane-configuration-host": "6e9df5690ba2b0bec818fc33c9d36ec07c14d0951b6f997a8a9e2b9b07c3cb32",
+        "libexec/syspane/syspane-image-worker": "65b38c368c9472405163a244c7f1b0ddf2c8702bb5e7945e147cb4a5935e777c",
+        "libexec/syspane/syspane-recovery-worker": "6256fa4cd28d6263ea9e1f182da9e2a75b5a187bda6f9ed0efa1d51f10b99537",
+        "share/syspane/helpers.json": "cacd709b73aec39d2540fcd437d14324440cc2b6d6cc7e5918ba182a712bbb73"
+      },
+      "diagnostic_only": false
+    },
+    {
+      "family": "RECOVERY-PREPARATION",
+      "cases": [
+        "HELD-PREPARATION",
+        "PREPARED-OFFER",
+        "PREPARED-CAPTURE",
+        "PREPARATION-CANCEL",
+        "PREPARATION-ERASURE",
+        "COALESCED-CAPTURE",
+        "INVALID-OFFER",
+        "ORACLE"
+      ],
+      "outcome": "pass",
+      "archive": {
+        "local_path": "out/evidence/production-recovery-native/rp-e77da9e80c.zip",
+        "sha256": "06ea98e18326eaedf665b63d46ba081a548058f433779fbe7101b9b073c5e53b"
+      },
+      "record": {
+        "local_path": "out/evidence/production-recovery-native/rp-e77da9e80c.json",
+        "sha256": "e42bec1bbe7245eab68731b3a6204b9d143d922b590c0a1cba366ee7670f3467"
+      },
+      "inventory": {
+        "local_path": "out/evidence/production-recovery-native/rp-e77da9e80c.index.json",
+        "sha256": "4d339a7253f02de72b3a8797b7738e6ca3d78f389f71cd64c7a1d2a77df27d07"
+      },
+      "execution_record": {
+        "local_path": "out/evidence/production-recovery/linux-x64-gcc13-preparation-3f9e93f635/result.json",
+        "sha256": "699e8b870c6b33b3327e940b112f817fd6d1bde0b0e183994e09e36380c71cf2"
+      },
+      "artifact_identities_matched": {
+        "SysPane.ImageWorker": "65b38c368c9472405163a244c7f1b0ddf2c8702bb5e7945e147cb4a5935e777c",
+        "SysPane.RecoveryWorker": "6256fa4cd28d6263ea9e1f182da9e2a75b5a187bda6f9ed0efa1d51f10b99537",
+        "helpers.json": "8c4c4be109d38e4d318d439e3210d27a2ad844770fb2bd5b0e7fa54af6474902",
+        "syspane-configuration-host": "4f0ef658d9d2c1497d9f3d2bf65cccc54bd6d7994eb6bb24c3f1b26ccc8b52c5",
+        "syspane_editor_helper_worker_probe": "e3d008e63fa714e7712773c65ad096e4d9a608b03f5c7aaf4ca9cfbe3ec08aeb"
+      },
+      "diagnostic_only": false
+    }
+  ],
+  "gui_attempts": [
+    {
+      "case": "MAX-WIDGETS",
+      "outcome": "fail",
+      "maximum_work_us": 76999,
+      "maximum_delay_us": 108851,
+      "timing_violations": [
+        {
+          "delay_us": 108851,
+          "index": 154,
+          "pid": 1192840,
+          "work_us": 394
+        }
+      ],
+      "erasure_ms": null,
+      "failure": "Traceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_installed_editor.py\", line 228, in observe\n    extension(dict(locals(),process=lambda:proc));report['outcome']='pass';return\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_recovery_gui_limits.py\", line 73, in exercise\n    assert not violations,('GUI timing limit exceeded',violations)\n           ^^^^^^^^^^^^^^\nAssertionError: ('GUI timing limit exceeded', [{'index': 154, 'pid': 1192840, 'work_us': 394, 'delay_us': 108851}])\n",
+      "archive": {
+        "local_path": "out/evidence/production-recovery-native/rgl-bf25b9dfb3.zip",
+        "sha256": "036083ad4ec778591336442e042dea0c6651f0bf3fce4ee99a3c269f0ec8b4b8"
+      },
+      "started_at": "2026-10-09T09:50:15.442507+00:00",
+      "archive_path": "MAX-WIDGETS/result.json",
+      "record_sha256": "3a90358220840c6a6097c49a006e84792898b9a287d31cae1640dbf0e9b733d6"
+    },
+    {
+      "case": "MAX-SCENE",
+      "outcome": "pass",
+      "maximum_work_us": 98708,
+      "maximum_delay_us": 81748,
+      "timing_violations": [],
+      "erasure_ms": null,
+      "failure": null,
+      "archive": {
+        "local_path": "out/evidence/production-recovery-native/rgl-bf25b9dfb3.zip",
+        "sha256": "036083ad4ec778591336442e042dea0c6651f0bf3fce4ee99a3c269f0ec8b4b8"
+      },
+      "started_at": "2026-10-09T09:50:15.442507+00:00",
+      "archive_path": "MAX-SCENE/result.json",
+      "record_sha256": "a3fe6c20179ab3fbc3d07d83b26788d73f92a836aa72256bb78fcedeaa9d605b"
+    },
+    {
+      "case": "MAX-RECORD",
+      "outcome": "pass",
+      "maximum_work_us": 98676,
+      "maximum_delay_us": 97014,
+      "timing_violations": [],
+      "erasure_ms": null,
+      "failure": null,
+      "archive": {
+        "local_path": "out/evidence/production-recovery-native/rgl-bf25b9dfb3.zip",
+        "sha256": "036083ad4ec778591336442e042dea0c6651f0bf3fce4ee99a3c269f0ec8b4b8"
+      },
+      "started_at": "2026-10-09T09:50:15.442507+00:00",
+      "archive_path": "MAX-RECORD/result.json",
+      "record_sha256": "369a91610223af211bfbd9434779516565638e9a1c436b32fb3f7a996fc50d3a"
+    },
+    {
+      "case": "MAX-COMMAND-REJECT",
+      "outcome": "pass",
+      "maximum_work_us": 25532,
+      "maximum_delay_us": 7474,
+      "timing_violations": [],
+      "erasure_ms": null,
+      "failure": null,
+      "archive": {
+        "local_path": "out/evidence/production-recovery-native/rgl-bf25b9dfb3.zip",
+        "sha256": "036083ad4ec778591336442e042dea0c6651f0bf3fce4ee99a3c269f0ec8b4b8"
+      },
+      "started_at": "2026-10-09T09:50:15.442507+00:00",
+      "archive_path": "MAX-COMMAND-REJECT/result.json",
+      "record_sha256": "87d2a908d8e817fef243395b7b0b153a56d8ee2e34b638dd72908a54771c7f21"
+    },
+    {
+      "case": "OVER-RECORD-REJECT",
+      "outcome": "pass",
+      "maximum_work_us": 26644,
+      "maximum_delay_us": 5257,
+      "timing_violations": [],
+      "erasure_ms": null,
+      "failure": null,
+      "archive": {
+        "local_path": "out/evidence/production-recovery-native/rgl-bf25b9dfb3.zip",
+        "sha256": "036083ad4ec778591336442e042dea0c6651f0bf3fce4ee99a3c269f0ec8b4b8"
+      },
+      "started_at": "2026-10-09T09:50:15.442507+00:00",
+      "archive_path": "OVER-RECORD-REJECT/result.json",
+      "record_sha256": "3a8a4dd3f922795fdbba3b4f2adc508d5fd5a244fc35cd5028a9875284da8062"
+    },
+    {
+      "case": "CLOSE-PREPARING",
+      "outcome": "pass",
+      "maximum_work_us": 25468,
+      "maximum_delay_us": 1664,
+      "timing_violations": [],
+      "erasure_ms": null,
+      "failure": null,
+      "archive": {
+        "local_path": "out/evidence/production-recovery-native/rgl-bf25b9dfb3.zip",
+        "sha256": "036083ad4ec778591336442e042dea0c6651f0bf3fce4ee99a3c269f0ec8b4b8"
+      },
+      "started_at": "2026-10-09T09:50:15.442507+00:00",
+      "archive_path": "CLOSE-PREPARING/result.json",
+      "record_sha256": "f2c97a819ad9f731a9725625f48a02750977ac97d1006c5375165df4329a6eef"
+    },
+    {
+      "case": "POLICY",
+      "outcome": "pass",
+      "maximum_work_us": 33037,
+      "maximum_delay_us": 92532,
+      "timing_violations": [],
+      "erasure_ms": 74.46571200853214,
+      "failure": null,
+      "archive": {
+        "local_path": "out/evidence/production-recovery-native/rgl-bf25b9dfb3.zip",
+        "sha256": "036083ad4ec778591336442e042dea0c6651f0bf3fce4ee99a3c269f0ec8b4b8"
+      },
+      "started_at": "2026-10-09T09:50:15.442507+00:00",
+      "archive_path": "POLICY/result.json",
+      "record_sha256": "39bec33e5752b3a14298ae30d70ad16fcd41a6fb7fd78e46a8a52eb7ad45cc5f"
+    },
+    {
+      "case": "MAX-WIDGETS",
+      "outcome": "fail",
+      "maximum_work_us": 77169,
+      "maximum_delay_us": 102235,
+      "timing_violations": [
+        {
+          "delay_us": 102235,
+          "index": 147,
+          "pid": 1194767,
+          "work_us": 210
+        }
+      ],
+      "erasure_ms": null,
+      "failure": "Traceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_installed_editor.py\", line 228, in observe\n    extension(dict(locals(),process=lambda:proc));report['outcome']='pass';return\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_recovery_gui_limits.py\", line 73, in exercise\n    assert not violations,('GUI timing limit exceeded',violations)\n           ^^^^^^^^^^^^^^\nAssertionError: ('GUI timing limit exceeded', [{'index': 147, 'pid': 1194767, 'work_us': 210, 'delay_us': 102235}])\n",
+      "archive": {
+        "local_path": "out/evidence/production-recovery-native/rgl-ebf076a6f1.zip",
+        "sha256": "4ff23637609ad56dd5de9d101bee008b2939a91a8c8b335b030255c52e5b7fcc"
+      },
+      "started_at": "2026-10-09T09:54:52.687631+00:00",
+      "archive_path": "MAX-WIDGETS/result.json",
+      "record_sha256": "0f663d360bee9806be36699df609be7aba70337d9091175953644ee807066075"
+    },
+    {
+      "case": "MAX-SCENE",
+      "outcome": "pass",
+      "maximum_work_us": 95368,
+      "maximum_delay_us": 87298,
+      "timing_violations": [],
+      "erasure_ms": null,
+      "failure": null,
+      "archive": {
+        "local_path": "out/evidence/production-recovery-native/rgl-ebf076a6f1.zip",
+        "sha256": "4ff23637609ad56dd5de9d101bee008b2939a91a8c8b335b030255c52e5b7fcc"
+      },
+      "started_at": "2026-10-09T09:54:52.687631+00:00",
+      "archive_path": "MAX-SCENE/result.json",
+      "record_sha256": "8bb3807e465774dddc369f2b616c126c2b60a86908ce1f0ac912c272c5900d9b"
+    },
+    {
+      "case": "MAX-RECORD",
+      "outcome": "fail",
+      "maximum_work_us": 112718,
+      "maximum_delay_us": 102714,
+      "timing_violations": [
+        {
+          "delay_us": 102714,
+          "index": 167,
+          "pid": 1195173,
+          "work_us": 212
+        },
+        {
+          "delay_us": 0,
+          "index": 384,
+          "pid": 1195173,
+          "work_us": 112718
+        }
+      ],
+      "erasure_ms": null,
+      "failure": "Traceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_installed_editor.py\", line 228, in observe\n    extension(dict(locals(),process=lambda:proc));report['outcome']='pass';return\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_recovery_gui_limits.py\", line 73, in exercise\n    assert not violations,('GUI timing limit exceeded',violations)\n           ^^^^^^^^^^^^^^\nAssertionError: ('GUI timing limit exceeded', [{'index': 167, 'pid': 1195173, 'work_us': 212, 'delay_us': 102714}, {'index': 384, 'pid': 1195173, 'work_us': 112718, 'delay_us': 0}])\n",
+      "archive": {
+        "local_path": "out/evidence/production-recovery-native/rgl-ebf076a6f1.zip",
+        "sha256": "4ff23637609ad56dd5de9d101bee008b2939a91a8c8b335b030255c52e5b7fcc"
+      },
+      "started_at": "2026-10-09T09:54:52.687631+00:00",
+      "archive_path": "MAX-RECORD/result.json",
+      "record_sha256": "51297f0e647696e625af7718a7a21c6d8b9fe0656e78e8cbffc786e977379f01"
+    },
+    {
+      "case": "MAX-COMMAND-REJECT",
+      "outcome": "pass",
+      "maximum_work_us": 26118,
+      "maximum_delay_us": 9292,
+      "timing_violations": [],
+      "erasure_ms": null,
+      "failure": null,
+      "archive": {
+        "local_path": "out/evidence/production-recovery-native/rgl-ebf076a6f1.zip",
+        "sha256": "4ff23637609ad56dd5de9d101bee008b2939a91a8c8b335b030255c52e5b7fcc"
+      },
+      "started_at": "2026-10-09T09:54:52.687631+00:00",
+      "archive_path": "MAX-COMMAND-REJECT/result.json",
+      "record_sha256": "ff80210fe27f4979147017e9f5afec0aec7dc7d520c2f93615ff815759bc7cb7"
+    },
+    {
+      "case": "OVER-RECORD-REJECT",
+      "outcome": "pass",
+      "maximum_work_us": 25486,
+      "maximum_delay_us": 5210,
+      "timing_violations": [],
+      "erasure_ms": null,
+      "failure": null,
+      "archive": {
+        "local_path": "out/evidence/production-recovery-native/rgl-ebf076a6f1.zip",
+        "sha256": "4ff23637609ad56dd5de9d101bee008b2939a91a8c8b335b030255c52e5b7fcc"
+      },
+      "started_at": "2026-10-09T09:54:52.687631+00:00",
+      "archive_path": "OVER-RECORD-REJECT/result.json",
+      "record_sha256": "ded2b7c2970c47b48daa9a45e05e2b2c0d0e7987730bcfa0598b2711f9574319"
+    },
+    {
+      "case": "CLOSE-PREPARING",
+      "outcome": "pass",
+      "maximum_work_us": 24340,
+      "maximum_delay_us": 2276,
+      "timing_violations": [],
+      "erasure_ms": null,
+      "failure": null,
+      "archive": {
+        "local_path": "out/evidence/production-recovery-native/rgl-ebf076a6f1.zip",
+        "sha256": "4ff23637609ad56dd5de9d101bee008b2939a91a8c8b335b030255c52e5b7fcc"
+      },
+      "started_at": "2026-10-09T09:54:52.687631+00:00",
+      "archive_path": "CLOSE-PREPARING/result.json",
+      "record_sha256": "7f185087ac0aa26c8bc1bbacdc86424608ba2b5c5f913d5e9afff04451615dac"
+    },
+    {
+      "case": "POLICY",
+      "outcome": "pass",
+      "maximum_work_us": 35313,
+      "maximum_delay_us": 71179,
+      "timing_violations": [],
+      "erasure_ms": 68.09382000938058,
+      "failure": null,
+      "archive": {
+        "local_path": "out/evidence/production-recovery-native/rgl-ebf076a6f1.zip",
+        "sha256": "4ff23637609ad56dd5de9d101bee008b2939a91a8c8b335b030255c52e5b7fcc"
+      },
+      "started_at": "2026-10-09T09:54:52.687631+00:00",
+      "archive_path": "POLICY/result.json",
+      "record_sha256": "dcf27c41b9df51148135e50730f67fa402bd3d5ac7babb7fc98da258642b5c40"
+    }
+  ],
+  "final_gate_parity": {
+    "local_path": "out/evidence/production-recovery-closed-parity-60e954f474/result.json",
+    "sha256": "d39ce0bd624a7b9c5830cc868e2781d2cb136c458618406f4b53a31a556bc019"
+  },
+  "final_gate_objects_archive": {
+    "local_path": "out/evidence/production-recovery-closed-parity-60e954f474/objects.zip",
+    "sha256": "37a18045b0c2b4f2acb8972ca5f727ba881c90c908825c6745491790995fce4b"
+  },
+  "final_loaded_artifact_comparison": {
+    "local_path": "out/evidence/production-recovery-closed-artifact-comparison.json",
+    "sha256": "3d3da951acf4d7b88b1320c9ad813a87fc2a5068967fc31a290dba08dc16f261"
+  },
+  "enabled_candidate_parity": {
+    "local_path": "out/evidence/production-recovery-parity-0bb6bbbd8f/result.json",
+    "sha256": "6361a2adfb5c7b279afb1a54cc56d361b3492e68f4167ef6cef221af73bdf61b"
+  },
+  "prior_observer_comparison": {
+    "local_path": "out/evidence/production-recovery-observer-comparison.json",
+    "sha256": "51f544a654ce0ded8bebf6a9aa84412e2a563db6b4ddb8145dd732846fed9255"
+  },
+  "bounded_confirmation_plan": {
+    "local_path": "out/evidence/production-recovery-gui-confirmation-plan.json",
+    "sha256": "1428abd707d3b7c51b548c612e058426b2b8bdb09ff4a47f2a1abadc497d99f8"
+  },
+  "pixel_probe_diagnostics": [
+    {
+      "local_path": "out/evidence/production-recovery-pixel-probe-44f1091089/result.json",
+      "sha256": "ecd0585768f19ac4c73f518e38d55dedaf2b688382d087a44465ae3297c52a75"
+    },
+    {
+      "local_path": "out/evidence/production-recovery-pixel-probe-e252681941/result.json",
+      "sha256": "8a42872e415ecbd3e0dd3d0b076bb1bdbdaa9ff40850fb965a7fee73e688e9f7"
+    }
+  ],
+  "parity_recorder_error": {
+    "local_path": "out/evidence/production-recovery-parity/recorder-error.json",
+    "sha256": "468b715ea046e1d17b8c76ad319ce137e4eee2581bc68b0153ee2d96db50de98"
+  },
+  "coordinator_review": {
+    "local_path": "out/evidence/production-recovery-runner-review.json",
+    "sha256": "1acdc2c862708be2450a9b32f9656699626b38e2c86e227c2280bfed382268c1"
+  },
+  "workspace": {
+    "maximum_bytes": 8589934592,
+    "reservations_unchanged": true,
+    "archived_native_bytes": 2486502288
+  },
+  "limitations": [
+    "Both ordinary GUI attempts failed unchanged qualification; no third unchanged qualification run was attempted. Three failed case observations remain failures.",
+    "The paint diagnostic passed its seven scenarios but is instrumented and cannot qualify latency. The isolated pixel packing probe is diagnostic only; no product pixel code changed.",
+    "Final production remains disabled. Its allocated code/data match the preceding disabled production artifact except ELF build ID. Candidate/observer fixtures likewise match their recorded experimental artifacts; no complete final native rerun is inferred.",
+    "144 portable checks and 141 distinct passing native functional cases ran during the candidate experiment. Final gate closure was followed by rebuilt Linux entries, actual production settings/refusal checks and all six component graph checks.",
+    "Positive policy remains a separately compiled nonprivileged helper fixture. Protected deployment and all five complete native editions remain unqualified."
+  ],
+  "next_step": "Attribute the retained MAX-WIDGETS delay and MAX-RECORD callback/delay failures using existing phase/paint diagnostics and exact inputs; select a measured repair before any further ordinary qualification and production admission. Continue general authoring/preview, native inspector, desktop/telemetry/lifecycle and all five editions."
+}
