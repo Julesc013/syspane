@@ -74,8 +74,7 @@ struct EditorForm::Impl {
     void preview(bool resolve_now=true){
         if(!draft.available()||!draft.resources()){settings=nullptr;capabilities.clear();stop_preview();return;}
         settings["revision"]=(*draft.scene())["revision"];
-        v::SurfaceConfig cfg;cfg.authored={settings,*draft.scene()};const auto* borrowed=draft.resources();auto catalog=c::ContentCatalog::retained(*borrowed);
-        cfg.resources=borrowed->selection().contains("schema_version")?catalog.theme_resources(borrowed->selection(),cfg.authored):catalog.resources(borrowed->selection(),cfg.authored);
+        v::SurfaceConfig cfg;cfg.authored={settings,*draft.scene()};cfg.resources=draft.resource_snapshot();
         cfg.topology=topology;cfg.capabilities=capabilities;cfg.experimental_visibility=visibility_supported();cfg.experimental_typography=typography_supported();
         if(surface&&surface->status().code==v::SurfaceCode::closed){need(surface->poll_image_jobs(),"editor.renderer_stopping");surface.reset();}
         if(surface)surface->replace(std::move(cfg),now());

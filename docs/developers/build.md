@@ -15,6 +15,17 @@ build` before configuring or building; use `test` or `package` for those actions
 The common active-output budget is unchanged; retained `out/evidence/` archives
 are measured separately. Never use the placeholder account from the example.
 
+The [draft admission package](../../spec/delivery/packages/w-11-draft-admission.md)
+keeps submit eligibility structural results private to the current SettingsDraft;
+every eligible call still authorizes current policy, and begin always revalidates.
+Run `ctest --preset <profile> -R '^(editor[.](FRAGMENT|THEME-HISTORY)-|settings[.])'
+after building. FRAGMENT-ADMISSION freezes observable outcomes from the original
+implementation; THEME-HISTORY-SNAPSHOT verifies actual immutable owners and release.
+Retain the broader portable suite and native clipboard, theme history, renderer,
+erasure and recovery regressions when changing invalidation or preview ownership.
+The existing preview-cost diagnostic records repeated/first submit costs and owning
+snapshot transfer separately from its retained old catalog/resource measurements.
+
 The [schema hot-path package](../../spec/delivery/packages/w-11-recovery-hotpaths.md)
 compiles the finite trusted schema graph once, without retaining authored values or
 validation results. Run `ctest --preset <profile> -R '^configuration[.]AUTH-SCHEMA-EQUIVALENCE$'

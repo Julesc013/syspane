@@ -78,6 +78,15 @@ int main(int argc,char** argv){
                     v::SceneSurface surface({true,"console",{"console"}},profile->view.policy,std::move(config),{},[]{return true;},"",v::SurfaceAudience::inspector,backend.images());mark("surface_us");
                     surface.paint(0,{},[](auto,const v::SurfaceFrame*){});mark("paint_us");
                     answer["surface_state"]=static_cast<int>(surface.status().code);surface.close();
+                    mark("surface_close_us");
+                    ui::EditorDraft admitted({true,"console",{"console"}},profile->view.policy,authored,profile->epoch,profile->resources,true);mark("draft_us");
+                    auto owned=admitted.resource_snapshot();answer["owns_current_resources"]=owned.get()==admitted.resources();mark("snapshot_us");
+                    answer["clean_clipboard"]=admitted.clipboard_available();mark("clean_clipboard_us");
+                    const auto& first=authored.scene.at("widgets").at(0);auto title=first.at("title").get<std::string>();need(!title.empty());title[0]=title[0]=='X'?'Y':'X';
+                    admitted.execute({ui::WidgetPropertyEdit{first.at("id"),ui::WidgetProperty::title,title}});mark("edit_us");
+                    answer["dirty_clipboard"]=admitted.clipboard_available();mark("dirty_clipboard_us");
+                    answer["may_submit"]=admitted.may_submit("commit");mark("may_submit_us");
+                    answer["may_submit_again"]=admitted.may_submit("commit");mark("may_submit_again_us");
                 }else if(op=="close"){backend.close();if(preparation)preparation->cancel();answer={{"closing",true}};}
                 else if(op=="end"){need(backend.take().stopped);recovery.reset();preparation.reset();draft.reset();ended=true;answer={{"ended",true}};}
                 else need(false);

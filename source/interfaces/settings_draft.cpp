@@ -36,7 +36,7 @@ SettingsDraft::SettingsDraft(c::Authority authority,c::Policy policy,c::Authored
     reload(std::move(value),std::move(epoch),std::move(resources));
 }
 bool SettingsDraft::disclosure()const{return policy_.available&&c::permits(authority_,policy_,"inspector","operational")&&c::permits(authority_,policy_,"accessibility","operational");}
-void SettingsDraft::erase(){base_.reset();draft_.reset();context_.reset();base_resources_.reset();draft_resources_.reset();result_=nullptr;if(active_)active_->request.body.clear();state_=DraftState::unavailable;}
+void SettingsDraft::erase(){submission_validation_.clear();base_.reset();draft_.reset();context_.reset();base_resources_.reset();draft_resources_.reset();result_=nullptr;if(active_)active_->request.body.clear();state_=DraftState::unavailable;}
 bool SettingsDraft::theme_commands()const{return admitted(context_,large_commands_);}
 void SettingsDraft::authorize_theme_resources()const{
     need(theme_commands(),"settings.theme_commands");need(policy_.available&&!policy_.denied_capabilities.count("configuration.theme-overrides")&&!policy_.denied_capabilities.count("theme.typography"),"policy.denied");
@@ -65,6 +65,7 @@ SettingValue SettingsDraft::value(const std::string& id)const{
     catch(const p::Error& e){result.reason=e.what();}return result;
 }
 void SettingsDraft::set(const std::string& id,Json v){
+    submission_validation_.clear();
     descriptor(id);editable();need(value(id).editable,"settings.locked");auto next=c::prepare_authored(*draft_,one(*draft_,policy_,id,std::move(v),context_,draft_resources_),authority_,policy_);
     auto resources=resolve_resources(next);
     if(resources){c::validate_resource_binding(*resources,next);c::authorize_resources(*resources,policy_,context_->capabilities);}
@@ -77,7 +78,7 @@ void SettingsDraft::set_text(const std::string& id,std::string_view text){
     else{need(p::identifier(text),"settings.identifier");set(id,std::string(text));}
 }
 void SettingsDraft::use_default(const std::string& id){set(id,descriptor(id).default_value);}
-void SettingsDraft::revert(){editable();draft_=base_;draft_resources_=base_resources_;result_=nullptr;state_=DraftState::clean;}
+void SettingsDraft::revert(){submission_validation_.clear();editable();draft_=base_;draft_resources_=base_resources_;result_=nullptr;state_=DraftState::clean;}
 Json SettingsDraft::command(const std::string& intent,const std::string& request)const{return command(*draft_,draft_resources_,intent,request);}
 Json SettingsDraft::command(const c::Authored& candidate,const c::ResourceSnapshot& resources,const std::string& intent,const std::string& request)const{
     Json ops=Json::array();for(const auto& d:setting_descriptions())if(setting(*base_,d.id)!=setting(candidate,d.id))ops.push_back({{"op","settings.set"},{"path",d.id},{"value",setting(candidate,d.id)}});
@@ -120,20 +121,24 @@ std::pair<c::Authored,c::ResourceSnapshot> SettingsDraft::prepare_scene(Json sce
     // old wire envelope. Versioned theme commands have the admitted full envelope.
     c::authorize_authored(check,authority_,policy_,*revision());return {std::move(next),std::move(resources)};
 }
-void SettingsDraft::adopt_scene(c::Authored next,c::ResourceSnapshot resources){draft_=std::move(next);draft_resources_=std::move(resources);result_=nullptr;state_=dirty()?DraftState::dirty:DraftState::clean;}
+void SettingsDraft::adopt_scene(c::Authored next,c::ResourceSnapshot resources){submission_validation_.clear();draft_=std::move(next);draft_resources_=std::move(resources);result_=nullptr;state_=dirty()?DraftState::dirty:DraftState::clean;}
 void SettingsDraft::replace_scene(Json scene){auto next=prepare_scene(std::move(scene));adopt_scene(std::move(next.first),std::move(next.second));}
 std::optional<EditRequest> SettingsDraft::begin(const std::string& intent,const std::string& request){
+    submission_validation_.clear();
     editable();need(intent=="preview"||intent=="commit","settings.intent");need(p::identifier(request),"settings.request");if(!dirty())return {};
     const auto body=command(intent,request);(void)c::prepare_authored(*base_,body,authority_,policy_);authorize_resources();if(body["schema_version"]=="0.8.0")(void)c::prepare_theme_command(*base_resources_,*draft_,body,policy_,context_->capabilities);need(tickets_<std::numeric_limits<std::uint64_t>::max(),"settings.capacity");
     EditRequest q{++tickets_,epoch_,request,body.dump()};active_=Active{q,intent,*revision(),false};result_=nullptr;state_=DraftState::pending;return q;
 }
 bool SettingsDraft::may_submit(const std::string& intent)const{
     if(!available()||active_||state_==DraftState::conflict||!dirty()||(intent!="preview"&&intent!="commit"))return false;
-    try{const auto body=command(intent,"draft.check");c::validate_command(body);c::authorize_authored(body,authority_,policy_,*revision());authorize_resources();return true;}catch(const p::Error&){return false;}
+    try{const auto body=command(intent,"draft.check");auto& structural=intent=="commit"?submission_validation_.commit:submission_validation_.preview;
+        if(!structural){try{c::validate_command(body);structural=true;}catch(const p::Error&){structural=false;}}
+        if(!*structural)return false;
+        c::authorize_authored(body,authority_,policy_,*revision());authorize_resources();return true;}catch(const p::Error&){return false;}
 }
 std::optional<EditRequest> SettingsDraft::active_request()const{return active_?std::optional<EditRequest>(active_->request):std::nullopt;}
-std::optional<EditRequest> SettingsDraft::cancel_request(){if(!active_||active_->cancelled||state_==DraftState::closed)return {};active_->cancelled=true;return active_->request;}
-void SettingsDraft::disconnected(){if(active_&&available()){state_=DraftState::unknown;result_=nullptr;}}
+std::optional<EditRequest> SettingsDraft::cancel_request(){submission_validation_.clear();if(!active_||active_->cancelled||state_==DraftState::closed)return {};active_->cancelled=true;return active_->request;}
+void SettingsDraft::disconnected(){submission_validation_.clear();if(active_&&available()){state_=DraftState::unknown;result_=nullptr;}}
 bool SettingsDraft::complete(std::uint64_t ticket,const Json& result){return finish(ticket,result,active_?active_->request.epoch:std::string{});}
 bool SettingsDraft::reconciled(std::uint64_t ticket,const std::string& query_id,const std::string& current_epoch,const Json& response){
     if(!active_||active_->request.ticket!=ticket||state_==DraftState::closed)return false;
@@ -143,6 +148,7 @@ bool SettingsDraft::reconciled(std::uint64_t ticket,const std::string& query_id,
     }catch(...){disconnected();throw;}
 }
 bool SettingsDraft::finish(std::uint64_t ticket,const Json& result,const std::string& expected_epoch){
+    submission_validation_.clear();
     if(!active_||active_->request.ticket!=ticket||state_==DraftState::closed)return false;
     try{
         c::validate_command_result(result);need(result["request_id"]==active_->request.request&&result["producer_epoch"]==expected_epoch,"settings.result_scope");
@@ -170,6 +176,7 @@ bool SettingsDraft::finish(std::uint64_t ticket,const Json& result,const std::st
     }catch(...){disconnected();throw;}
 }
 void SettingsDraft::policy(c::Policy next){
+    submission_validation_.clear();
     if(state_==DraftState::closed)return;
     if(next.available&&highest_policy_&&next.revision<=*highest_policy_)next.available=false;
     if(next.available)highest_policy_=next.revision;
@@ -177,6 +184,7 @@ void SettingsDraft::policy(c::Policy next){
     else if(versioned(base_resources_)||versioned(draft_resources_)){try{authorize_resources();}catch(const p::Error&){erase();}}
 }
 void SettingsDraft::reload(c::Authored value,std::string epoch,std::optional<SettingsResources> resources){
+    submission_validation_.clear();
     need(state_!=DraftState::closed,"settings.closed");need(!active_,"settings.pending");c::validate_authored(value);need(p::identifier(epoch),"settings.epoch");
     need(resources.has_value()||(!requires_resources_&&value.scene["schema_version"]=="0.2.0"),"resource.contract");
     c::ResourceSnapshot prepared;

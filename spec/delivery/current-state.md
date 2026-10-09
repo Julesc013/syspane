@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-09T04:56:50.472455+00:00", "scope": "Composition-scoped native text, frozen pixels and preserved GUI timing failures"}
+updated: {"by": "codex", "at": "2026-10-09T05:28:54.384266+00:00", "scope": "Current draft eligibility, immutable preview resources and fixed GUI evidence"}
 ---
 
 # Current state and next admitted boundary
@@ -22,13 +22,13 @@ recordings are local ignored `out/` content; the retired root is absent from the
 tracked tree. See `docs/developers/build.md` in the repository for checkout
 setup and the [repository contract](../foundation/repository.md) for ownership.
 
-The [native text session checkpoint](text-session-handoff.md) preserves exact
-standalone rendering while reusing font setup within one composition. First paint
-for 256 widgets now measures about 53 ms; 960 selected portable checks, 83 recovery
-cases and the native renderer/erasure checks pass. Full GTK timing still fails,
-so production recovery remains disabled. Next close and repair remaining large-scene
-preview/validation/control work, preserve the Apply/controller observations, and
-rerun the fixed GUI cases. W-11 and all five complete editions remain open.
+The [draft admission checkpoint](draft-admission-handoff.md) now avoids repeated
+structural eligibility validation and redundant preview resource reconstruction.
+All 966 selected portable checks, 83 recovery cases and native renderer/erasure,
+clipboard and theme-history checks pass. Four fixed GTK cases still exceed their
+timing limits; production recovery stays disabled. Next repair remaining
+first-admission, history/edit and preview/layout costs under unchanged limits.
+W-11 and all five complete editions remain open.
 
 The [frontend recovery backend](frontend-recovery-handoff.md) now uses authenticated
 profile 0.2, current native admission and exact accepted-request retirement metadata.

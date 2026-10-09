@@ -1,0 +1,1308 @@
+{
+  "recorded_at": "2026-10-09T05:28:54.246007+00:00",
+  "source_base": "f81f2370d2516aa35fc82800bdd9525b90cf74a7",
+  "scope": "Current-owner structural submit eligibility and immutable preview resource ownership; no cached authorization or production recovery enablement.",
+  "fixed_inputs": {
+    "spec/delivery/packages/w-11-installed-recovery.md": "04d3385d832a3fc75ba8fd56b2e18f5844157209e0cbc145244fd9400b5fa810",
+    "tests/configuration/installed-recovery-cases.json": "e5e75b327314911b4ff52f8521be9e04fa65f821f7b000431d3f62f63863792e",
+    "tests/configuration/installed-editor-cases.json": "9a3b26dc4001e0aa0dd1662802c18e73628d33b28527b3fd5c6a4ca364e6bac6",
+    "tests/configuration/installed-editor-scene.json": "45dea42b875ffd68e36282bd9df5cbcdee67f9093a774ef29b8ddaef58d4e7fa",
+    "tests/configuration/frontend-recovery-command.json": "f37c0bffe6b7cb22dd96733b15ad5669beaf63dbdfde5ad27f98b206bff47f0e",
+    "tests/configuration/profile-startup-cases.json": "778d20398d8db479a21b10e081c377ca85dabe11199b2c4918b03c6e6fc7cd2b",
+    "spec/delivery/packages/w-11-recovery-limits.md": "86c72bd00ca125faa35470642100b3f3f3410a856a84fb193dd6357fc98d61f5",
+    "tests/configuration/recovery-limits-cases.json": "9404f8bd7cf316dccc767c37158d4be352aef457a95382bfc576b10f766b2ab4",
+    "tests/configuration/recovery_limits_inputs.py": "8dece3e0096c62951cdd742e9a3b03176dc263d8005f575b546dd0be8c1eceef",
+    "spec/delivery/packages/w-11-recovery-gui-limits.md": "61a74b77b17f2c30f5b91538172b50a7639aa76cb9544d8dfbefa224b3604522",
+    "tests/configuration/recovery-gui-limits-cases.json": "43263df79f8dd55fc2446f6edf4128416dc200eb348c9bc0a05c2d780e68c9b4"
+  },
+  "baseline": {
+    "record": {
+      "local_path": "out/evidence/draft-admission-baseline/result.json",
+      "sha256": "a4a04fff09a96f85d6e93bbbc00213926af6fbddec8150b776ca55747a04e6d5"
+    },
+    "artifacts": {
+      "local_path": "out/evidence/draft-admission-baseline/artifacts.zip",
+      "sha256": "dbd73471b1102b3020a76da971f78e16bbefd32f91e1abd056923c4f5b70d9cc"
+    },
+    "fragment": {
+      "local_path": "out/evidence/draft-admission/linux-x64-gcc13-fragment-249746dc83/result.json",
+      "sha256": "d39a561bf4edc389484efef0086ed7d65bd9858b1bd33e6c05e88041b817292a"
+    },
+    "preview": {
+      "local_path": "out/evidence/draft-admission/linux-x64-gcc13-preview-ae2dec10ee/result.json",
+      "sha256": "7697183ebe24d5ef23827530adade5b30b6ee833bb912db3cfa6bf3bb640d1aa"
+    },
+    "measurements": [
+      {
+        "case": "MAX-WIDGETS",
+        "measurements": {
+          "base_us": 1540,
+          "binding_us": 17845,
+          "catalog_us": 1411,
+          "clean_clipboard": false,
+          "clean_clipboard_us": 4,
+          "dirty_clipboard": false,
+          "dirty_clipboard_us": 5,
+          "draft_us": 53955,
+          "edit_us": 78854,
+          "may_submit": true,
+          "may_submit_again": true,
+          "may_submit_again_us": 37271,
+          "may_submit_us": 37547,
+          "paint_us": 44850,
+          "resources_us": 35386,
+          "surface_close_us": 714,
+          "surface_state": 1,
+          "surface_us": 43758
+        },
+        "outcome": "observed"
+      },
+      {
+        "case": "MAX-SCENE",
+        "measurements": {
+          "base_us": 1527,
+          "binding_us": 26049,
+          "catalog_us": 1387,
+          "clean_clipboard": false,
+          "clean_clipboard_us": 4,
+          "dirty_clipboard": false,
+          "dirty_clipboard_us": 6,
+          "draft_us": 79032,
+          "edit_us": 117206,
+          "may_submit": true,
+          "may_submit_again": true,
+          "may_submit_again_us": 53843,
+          "may_submit_us": 55286,
+          "paint_us": 2808,
+          "resources_us": 52329,
+          "surface_close_us": 676,
+          "surface_state": 4,
+          "surface_us": 62477
+        },
+        "outcome": "observed"
+      }
+    ]
+  },
+  "executions": [
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "admission",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/draft-admission/linux-x64-gcc13-admission-ad33a7d0e8/result.json",
+        "sha256": "2eb4bdb05b1baf6fcc3ffe04c16ab8400749d25141683d4febe845231a9bd93e"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/draft-admission/linux-x64-gcc13-admission-ad33a7d0e8/source-inputs.zip",
+        "sha256": "ae88857915ba26b7ca1674ffb441612a42e391706a93e748cda0bed0e710f375"
+      },
+      "later_changes": [
+        "CMakeLists.txt",
+        "spec/delivery/packages/w-11-draft-admission.md",
+        "source/build/targets/linux-x64-gcc13.json",
+        "source/build/targets/windows-x64-gcc15.json",
+        "source/build/targets/windows-x86-v141-xp.json",
+        "source/interfaces/editor_draft.hpp",
+        "source/interfaces/editor_form_linux.cpp",
+        "source/interfaces/settings_draft.cpp",
+        "source/interfaces/settings_draft.hpp",
+        "tests/configuration/frontend_recovery_probe.cpp",
+        "tests/editor/scene_fragment_tests.cpp",
+        "tests/editor/theme_history_tests.cpp"
+      ],
+      "passed_checks": 1
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "admission-build",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/draft-admission/linux-x64-gcc13-admission-build-569cec8c0a/result.json",
+        "sha256": "a4f8b51af3d0608f2f2dd889bcc8b1989541bcda9638f57cefa5b7007c0c1ad5"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/draft-admission/linux-x64-gcc13-admission-build-569cec8c0a/source-inputs.zip",
+        "sha256": "eed77138e8b152cd11bac2dabc4a8ebc543dbd91a7c80c032ebbf410da885abc"
+      },
+      "later_changes": [
+        "CMakeLists.txt",
+        "spec/delivery/packages/w-11-draft-admission.md",
+        "source/build/targets/linux-x64-gcc13.json",
+        "source/build/targets/windows-x64-gcc15.json",
+        "source/build/targets/windows-x86-v141-xp.json",
+        "source/interfaces/editor_draft.hpp",
+        "source/interfaces/editor_form_linux.cpp",
+        "source/interfaces/settings_draft.cpp",
+        "source/interfaces/settings_draft.hpp",
+        "tests/configuration/frontend_recovery_probe.cpp",
+        "tests/editor/theme_history_tests.cpp"
+      ],
+      "passed_checks": 0
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "admission-build",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/draft-admission/linux-x64-gcc13-admission-build-920a20932d/result.json",
+        "sha256": "0de6efb970a49ef52c99e9ccf571fe0970f6d7f16f9adba4fecb5435ce522c9e"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/draft-admission/linux-x64-gcc13-admission-build-920a20932d/source-inputs.zip",
+        "sha256": "ae88857915ba26b7ca1674ffb441612a42e391706a93e748cda0bed0e710f375"
+      },
+      "later_changes": [
+        "CMakeLists.txt",
+        "spec/delivery/packages/w-11-draft-admission.md",
+        "source/build/targets/linux-x64-gcc13.json",
+        "source/build/targets/windows-x64-gcc15.json",
+        "source/build/targets/windows-x86-v141-xp.json",
+        "source/interfaces/editor_draft.hpp",
+        "source/interfaces/editor_form_linux.cpp",
+        "source/interfaces/settings_draft.cpp",
+        "source/interfaces/settings_draft.hpp",
+        "tests/configuration/frontend_recovery_probe.cpp",
+        "tests/editor/scene_fragment_tests.cpp",
+        "tests/editor/theme_history_tests.cpp"
+      ],
+      "passed_checks": 0
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "backend",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/draft-admission/linux-x64-gcc13-backend-6c5f349e09/result.json",
+        "sha256": "e3962736185e9f71fd2e205230a5007a0b5b76c4499b5875cd852e209e753c60"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/draft-admission/linux-x64-gcc13-backend-6c5f349e09/source-inputs.zip",
+        "sha256": "c33aed2ed35e2f1cdb20f78bb42ed0fd4dc88832546e9aa8a6d921320265ac56"
+      },
+      "later_changes": [
+        "spec/delivery/packages/w-11-draft-admission.md"
+      ],
+      "passed_checks": 1
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "build",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/draft-admission/linux-x64-gcc13-build-6b84a533c9/result.json",
+        "sha256": "1a6bba8ca476c8a93cabf7e38beb2175410fd7b23e721e9e2a17bb27ef5d24cb"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/draft-admission/linux-x64-gcc13-build-6b84a533c9/source-inputs.zip",
+        "sha256": "c33aed2ed35e2f1cdb20f78bb42ed0fd4dc88832546e9aa8a6d921320265ac56"
+      },
+      "later_changes": [
+        "spec/delivery/packages/w-11-draft-admission.md"
+      ],
+      "passed_checks": 0
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "clipboard",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/draft-admission/linux-x64-gcc13-clipboard-a529d54203/result.json",
+        "sha256": "5d7cbf1602412b67a9d8a400ee9997bad6950fe3f5b4f5405fc6ea7c4b5c957f"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/draft-admission/linux-x64-gcc13-clipboard-a529d54203/source-inputs.zip",
+        "sha256": "c33aed2ed35e2f1cdb20f78bb42ed0fd4dc88832546e9aa8a6d921320265ac56"
+      },
+      "later_changes": [
+        "spec/delivery/packages/w-11-draft-admission.md"
+      ],
+      "passed_checks": 2
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "configure",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/draft-admission/linux-x64-gcc13-configure-1df4db43c1/result.json",
+        "sha256": "0923363e4582e41a45c5925f45e577ae94277bc436fd464bb794e7b6694eb446"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/draft-admission/linux-x64-gcc13-configure-1df4db43c1/source-inputs.zip",
+        "sha256": "ae88857915ba26b7ca1674ffb441612a42e391706a93e748cda0bed0e710f375"
+      },
+      "later_changes": [
+        "CMakeLists.txt",
+        "spec/delivery/packages/w-11-draft-admission.md",
+        "source/build/targets/linux-x64-gcc13.json",
+        "source/build/targets/windows-x64-gcc15.json",
+        "source/build/targets/windows-x86-v141-xp.json",
+        "source/interfaces/editor_draft.hpp",
+        "source/interfaces/editor_form_linux.cpp",
+        "source/interfaces/settings_draft.cpp",
+        "source/interfaces/settings_draft.hpp",
+        "tests/configuration/frontend_recovery_probe.cpp",
+        "tests/editor/scene_fragment_tests.cpp",
+        "tests/editor/theme_history_tests.cpp"
+      ],
+      "passed_checks": 0
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "configure",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/draft-admission/linux-x64-gcc13-configure-edfc04e7fc/result.json",
+        "sha256": "a8308d9eb57231d6908b3b1869b2d2ac24f726e2005310750e5803c8e925ccba"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/draft-admission/linux-x64-gcc13-configure-edfc04e7fc/source-inputs.zip",
+        "sha256": "c33aed2ed35e2f1cdb20f78bb42ed0fd4dc88832546e9aa8a6d921320265ac56"
+      },
+      "later_changes": [
+        "spec/delivery/packages/w-11-draft-admission.md"
+      ],
+      "passed_checks": 0
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "controls",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/draft-admission/linux-x64-gcc13-controls-1bc68a979d/result.json",
+        "sha256": "d3354107d139113b554d4a1e65fab9feea75eaaebad5ab2ad48082ff4285dc02"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/draft-admission/linux-x64-gcc13-controls-1bc68a979d/source-inputs.zip",
+        "sha256": "c33aed2ed35e2f1cdb20f78bb42ed0fd4dc88832546e9aa8a6d921320265ac56"
+      },
+      "later_changes": [
+        "spec/delivery/packages/w-11-draft-admission.md"
+      ],
+      "passed_checks": 1
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "editor",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/draft-admission/linux-x64-gcc13-editor-14f5aaee2a/result.json",
+        "sha256": "92f59151a8e63d0b15e10c84cdfe3bc75655f4e049bf55a6aef94d2de9ba1959"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/draft-admission/linux-x64-gcc13-editor-14f5aaee2a/source-inputs.zip",
+        "sha256": "c33aed2ed35e2f1cdb20f78bb42ed0fd4dc88832546e9aa8a6d921320265ac56"
+      },
+      "later_changes": [
+        "spec/delivery/packages/w-11-draft-admission.md"
+      ],
+      "passed_checks": 1
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "fragment",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/draft-admission/linux-x64-gcc13-fragment-249746dc83/result.json",
+        "sha256": "d39a561bf4edc389484efef0086ed7d65bd9858b1bd33e6c05e88041b817292a"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/draft-admission/linux-x64-gcc13-fragment-249746dc83/source-inputs.zip",
+        "sha256": "eed77138e8b152cd11bac2dabc4a8ebc543dbd91a7c80c032ebbf410da885abc"
+      },
+      "later_changes": [
+        "CMakeLists.txt",
+        "spec/delivery/packages/w-11-draft-admission.md",
+        "source/build/targets/linux-x64-gcc13.json",
+        "source/build/targets/windows-x64-gcc15.json",
+        "source/build/targets/windows-x86-v141-xp.json",
+        "source/interfaces/editor_draft.hpp",
+        "source/interfaces/editor_form_linux.cpp",
+        "source/interfaces/settings_draft.cpp",
+        "source/interfaces/settings_draft.hpp",
+        "tests/configuration/frontend_recovery_probe.cpp",
+        "tests/editor/theme_history_tests.cpp"
+      ],
+      "passed_checks": 9
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "fragment",
+      "exit": 8,
+      "record": {
+        "local_path": "out/evidence/draft-admission/linux-x64-gcc13-fragment-efe32f26c4/result.json",
+        "sha256": "ae571e41ba6dcd30eab067a5836610af38bedce4dc28ba1b4cddf1214bbbadda"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/draft-admission/linux-x64-gcc13-fragment-efe32f26c4/source-inputs.zip",
+        "sha256": "ae88857915ba26b7ca1674ffb441612a42e391706a93e748cda0bed0e710f375"
+      },
+      "later_changes": [
+        "CMakeLists.txt",
+        "spec/delivery/packages/w-11-draft-admission.md",
+        "source/build/targets/linux-x64-gcc13.json",
+        "source/build/targets/windows-x64-gcc15.json",
+        "source/build/targets/windows-x86-v141-xp.json",
+        "source/interfaces/editor_draft.hpp",
+        "source/interfaces/editor_form_linux.cpp",
+        "source/interfaces/settings_draft.cpp",
+        "source/interfaces/settings_draft.hpp",
+        "tests/configuration/frontend_recovery_probe.cpp",
+        "tests/editor/scene_fragment_tests.cpp",
+        "tests/editor/theme_history_tests.cpp"
+      ],
+      "passed_checks": 8
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "frontend",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/draft-admission/linux-x64-gcc13-frontend-96a31732a2/result.json",
+        "sha256": "9e1bd376c83235cca31121fc421079e380074df2392e7828b9eddfe738f3cf1c"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/draft-admission/linux-x64-gcc13-frontend-96a31732a2/source-inputs.zip",
+        "sha256": "c33aed2ed35e2f1cdb20f78bb42ed0fd4dc88832546e9aa8a6d921320265ac56"
+      },
+      "later_changes": [
+        "spec/delivery/packages/w-11-draft-admission.md"
+      ],
+      "passed_checks": 1
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "gui",
+      "exit": 8,
+      "record": {
+        "local_path": "out/evidence/draft-admission/linux-x64-gcc13-gui-bd078d9f30/result.json",
+        "sha256": "95540af718a320522b17d22221a56bca2da539f85d6175b9e3b677d3d7810fa2"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/draft-admission/linux-x64-gcc13-gui-bd078d9f30/source-inputs.zip",
+        "sha256": "c33aed2ed35e2f1cdb20f78bb42ed0fd4dc88832546e9aa8a6d921320265ac56"
+      },
+      "later_changes": [
+        "spec/delivery/packages/w-11-draft-admission.md"
+      ],
+      "passed_checks": 0
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "installed",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/draft-admission/linux-x64-gcc13-installed-0e36b2e6d3/result.json",
+        "sha256": "45160a27622440ead66a317382fb03e415f4691354b48a38e29e8d6e5368d74e"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/draft-admission/linux-x64-gcc13-installed-0e36b2e6d3/source-inputs.zip",
+        "sha256": "c33aed2ed35e2f1cdb20f78bb42ed0fd4dc88832546e9aa8a6d921320265ac56"
+      },
+      "later_changes": [
+        "spec/delivery/packages/w-11-draft-admission.md"
+      ],
+      "passed_checks": 1
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "native",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/draft-admission/linux-x64-gcc13-native-0bdc6c4e6b/result.json",
+        "sha256": "854f6abe1e4d62181c0663fd5e3895a970763adf0fa315f70ded2b3919f28704"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/draft-admission/linux-x64-gcc13-native-0bdc6c4e6b/source-inputs.zip",
+        "sha256": "c33aed2ed35e2f1cdb20f78bb42ed0fd4dc88832546e9aa8a6d921320265ac56"
+      },
+      "later_changes": [
+        "spec/delivery/packages/w-11-draft-admission.md"
+      ],
+      "passed_checks": 1
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "preparation",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/draft-admission/linux-x64-gcc13-preparation-9e043c0788/result.json",
+        "sha256": "daf5f26db54939439b3a9850202d0b6d5c9d6ad7501be78fc0009852a22e7b79"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/draft-admission/linux-x64-gcc13-preparation-9e043c0788/source-inputs.zip",
+        "sha256": "c33aed2ed35e2f1cdb20f78bb42ed0fd4dc88832546e9aa8a6d921320265ac56"
+      },
+      "later_changes": [
+        "spec/delivery/packages/w-11-draft-admission.md"
+      ],
+      "passed_checks": 1
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "preview",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/draft-admission/linux-x64-gcc13-preview-5ebdea5f48/result.json",
+        "sha256": "5d4d387754ac85459259b116d0e7171eba946c0d218e0635bc0a22506ab5350a"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/draft-admission/linux-x64-gcc13-preview-5ebdea5f48/source-inputs.zip",
+        "sha256": "c33aed2ed35e2f1cdb20f78bb42ed0fd4dc88832546e9aa8a6d921320265ac56"
+      },
+      "later_changes": [
+        "spec/delivery/packages/w-11-draft-admission.md"
+      ],
+      "passed_checks": 0
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "preview",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/draft-admission/linux-x64-gcc13-preview-5ef96d3878/result.json",
+        "sha256": "b5999eb0382655c9eff2f7712e7dc789441cd750129f97d857b5db50aa767784"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/draft-admission/linux-x64-gcc13-preview-5ef96d3878/source-inputs.zip",
+        "sha256": "ae88857915ba26b7ca1674ffb441612a42e391706a93e748cda0bed0e710f375"
+      },
+      "later_changes": [
+        "CMakeLists.txt",
+        "spec/delivery/packages/w-11-draft-admission.md",
+        "source/build/targets/linux-x64-gcc13.json",
+        "source/build/targets/windows-x64-gcc15.json",
+        "source/build/targets/windows-x86-v141-xp.json",
+        "source/interfaces/editor_draft.hpp",
+        "source/interfaces/editor_form_linux.cpp",
+        "source/interfaces/settings_draft.cpp",
+        "source/interfaces/settings_draft.hpp",
+        "tests/configuration/frontend_recovery_probe.cpp",
+        "tests/editor/scene_fragment_tests.cpp",
+        "tests/editor/theme_history_tests.cpp"
+      ],
+      "passed_checks": 0
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "preview",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/draft-admission/linux-x64-gcc13-preview-ae2dec10ee/result.json",
+        "sha256": "7697183ebe24d5ef23827530adade5b30b6ee833bb912db3cfa6bf3bb640d1aa"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/draft-admission/linux-x64-gcc13-preview-ae2dec10ee/source-inputs.zip",
+        "sha256": "eed77138e8b152cd11bac2dabc4a8ebc543dbd91a7c80c032ebbf410da885abc"
+      },
+      "later_changes": [
+        "CMakeLists.txt",
+        "spec/delivery/packages/w-11-draft-admission.md",
+        "source/build/targets/linux-x64-gcc13.json",
+        "source/build/targets/windows-x64-gcc15.json",
+        "source/build/targets/windows-x86-v141-xp.json",
+        "source/interfaces/editor_draft.hpp",
+        "source/interfaces/editor_form_linux.cpp",
+        "source/interfaces/settings_draft.cpp",
+        "source/interfaces/settings_draft.hpp",
+        "tests/configuration/frontend_recovery_probe.cpp",
+        "tests/editor/theme_history_tests.cpp"
+      ],
+      "passed_checks": 0
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "render",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/draft-admission/linux-x64-gcc13-render-0d841457c3/result.json",
+        "sha256": "1ff122a904ec3f39652f17fb6d8e88a8d69ecab2deb3c2fa74e68579ba9b73af"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/draft-admission/linux-x64-gcc13-render-0d841457c3/source-inputs.zip",
+        "sha256": "c33aed2ed35e2f1cdb20f78bb42ed0fd4dc88832546e9aa8a6d921320265ac56"
+      },
+      "later_changes": [
+        "spec/delivery/packages/w-11-draft-admission.md"
+      ],
+      "passed_checks": 12
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "test",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/draft-admission/linux-x64-gcc13-test-a81a889480/result.json",
+        "sha256": "b967221220b849dfc4d33ad05489b77c362db48bd4da6cf08ea52007b4b3f669"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/draft-admission/linux-x64-gcc13-test-a81a889480/source-inputs.zip",
+        "sha256": "c33aed2ed35e2f1cdb20f78bb42ed0fd4dc88832546e9aa8a6d921320265ac56"
+      },
+      "later_changes": [
+        "spec/delivery/packages/w-11-draft-admission.md"
+      ],
+      "passed_checks": 322
+    },
+    {
+      "profile": "windows-x64-gcc15",
+      "action": "build",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/draft-admission/windows-x64-gcc15-build-17603e65f9/result.json",
+        "sha256": "7f63ae7b87008d08ab8b98da2ce2dc943ed94508c592f566449f9ea564b7e0bd"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/draft-admission/windows-x64-gcc15-build-17603e65f9/source-inputs.zip",
+        "sha256": "e5c57927cfab3e5b01f32e614250776658a9a19f1c3aa8f2961f93400ebd4e30"
+      },
+      "later_changes": [
+        "spec/delivery/packages/w-11-draft-admission.md"
+      ],
+      "passed_checks": 0
+    },
+    {
+      "profile": "windows-x64-gcc15",
+      "action": "configure",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/draft-admission/windows-x64-gcc15-configure-eb6bfd5ec4/result.json",
+        "sha256": "2900a0295942d7b80a07c7002a9f4953b31bf4f50908da022d96f7b39e20fac7"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/draft-admission/windows-x64-gcc15-configure-eb6bfd5ec4/source-inputs.zip",
+        "sha256": "e5c57927cfab3e5b01f32e614250776658a9a19f1c3aa8f2961f93400ebd4e30"
+      },
+      "later_changes": [
+        "spec/delivery/packages/w-11-draft-admission.md"
+      ],
+      "passed_checks": 0
+    },
+    {
+      "profile": "windows-x64-gcc15",
+      "action": "test",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/draft-admission/windows-x64-gcc15-test-691f33441c/result.json",
+        "sha256": "5e45b5a3f309c86f93698fe5587a8a5a646c4ad9ce232d9a425673c240438e9a"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/draft-admission/windows-x64-gcc15-test-691f33441c/source-inputs.zip",
+        "sha256": "e5c57927cfab3e5b01f32e614250776658a9a19f1c3aa8f2961f93400ebd4e30"
+      },
+      "later_changes": [
+        "spec/delivery/packages/w-11-draft-admission.md"
+      ],
+      "passed_checks": 322
+    },
+    {
+      "profile": "windows-x86-v141-xp",
+      "action": "build",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/draft-admission/windows-x86-v141-xp-build-ad8891c2c6/result.json",
+        "sha256": "054a39ce0bcb19b20795f360b7f63d590e09ad7f7606d69a1a46db9e7d4c65f1"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/draft-admission/windows-x86-v141-xp-build-ad8891c2c6/source-inputs.zip",
+        "sha256": "e5c57927cfab3e5b01f32e614250776658a9a19f1c3aa8f2961f93400ebd4e30"
+      },
+      "later_changes": [
+        "spec/delivery/packages/w-11-draft-admission.md"
+      ],
+      "passed_checks": 0
+    },
+    {
+      "profile": "windows-x86-v141-xp",
+      "action": "configure",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/draft-admission/windows-x86-v141-xp-configure-216ab97ac7/result.json",
+        "sha256": "eef293e1c7d67a240c0bd284566bfab3b4e4ad59994aa6ad967f3ccf753a8a7a"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/draft-admission/windows-x86-v141-xp-configure-216ab97ac7/source-inputs.zip",
+        "sha256": "e5c57927cfab3e5b01f32e614250776658a9a19f1c3aa8f2961f93400ebd4e30"
+      },
+      "later_changes": [
+        "spec/delivery/packages/w-11-draft-admission.md"
+      ],
+      "passed_checks": 0
+    },
+    {
+      "profile": "windows-x86-v141-xp",
+      "action": "legacy",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/draft-admission/windows-x86-v141-xp-legacy-d6e2020fc4/result.json",
+        "sha256": "36a72441d67c2c8892fadc14a2ea7096120fcb24c9cc42aa96d1e9b5bb33230a"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/draft-admission/windows-x86-v141-xp-legacy-d6e2020fc4/source-inputs.zip",
+        "sha256": "e5c57927cfab3e5b01f32e614250776658a9a19f1c3aa8f2961f93400ebd4e30"
+      },
+      "later_changes": [
+        "spec/delivery/packages/w-11-draft-admission.md"
+      ],
+      "passed_checks": 2
+    },
+    {
+      "profile": "windows-x86-v141-xp",
+      "action": "test",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/draft-admission/windows-x86-v141-xp-test-bd8c73f003/result.json",
+        "sha256": "9a46dd466e561597045b9778aedb4cfe59e04c07d419383dc66f5043355e5739"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/draft-admission/windows-x86-v141-xp-test-bd8c73f003/source-inputs.zip",
+        "sha256": "e5c57927cfab3e5b01f32e614250776658a9a19f1c3aa8f2961f93400ebd4e30"
+      },
+      "later_changes": [
+        "spec/delivery/packages/w-11-draft-admission.md"
+      ],
+      "passed_checks": 322
+    }
+  ],
+  "portable_checks": {
+    "linux-x64-gcc13": 322,
+    "windows-x64-gcc15": 322,
+    "windows-x86-v141-xp": 322
+  },
+  "legacy_artifact_checks": 2,
+  "render_checks": 12,
+  "recovery_case_families": {
+    "RECOVERY-LIMITS": 6,
+    "INSTALLED-RECOVERY": 14,
+    "INSTALLED-EDITOR": 15,
+    "INSTALLED-SETTINGS": 12,
+    "FRONTEND-RECOVERY": 14,
+    "RECOVERY-PREPARATION": 8,
+    "EDITOR-RECOVERY": 14
+  },
+  "recovery_native_cases": 83,
+  "additional_native_case_families": {
+    "EDITOR-CLIPBOARD": 6,
+    "THEME-HISTORY": 3,
+    "ROLE-COMPOSITION": 19,
+    "VISIBILITY-PIXELS": 3,
+    "SCENE-ERASURE": 3,
+    "CHART-ERASURE": 3,
+    "TABLE-ERASURE": 3,
+    "IMAGE-ERASURE": 3,
+    "CONTENT-ERASURE": 3
+  },
+  "native": [
+    {
+      "family": "EDITOR-CLIPBOARD",
+      "outcome": "pass",
+      "cases": 6,
+      "archive": {
+        "local_path": "out/evidence/draft-admission-native/clipboard-b8b58b31d209.zip",
+        "sha256": "fd95758dd0a732ccc317cda637cd06f4506c3a2cc0ba6d343d833a4f0c6ee044"
+      },
+      "record": {
+        "local_path": "out/evidence/draft-admission-native/clipboard-b8b58b31d209.json",
+        "sha256": "eb359305f27c20b2c61bbf727e0eda5e1581849628e6f0f66ebffbeebaa57deb"
+      },
+      "inventory": {
+        "local_path": "out/evidence/draft-admission-native/clipboard-b8b58b31d209.index.json",
+        "sha256": "431477b1bfd6deab78a140d924edc92e1d635d05b1878abff92ce2dabf402a0c"
+      }
+    },
+    {
+      "family": "INSTALLED-EDITOR",
+      "outcome": "pass",
+      "cases": 15,
+      "archive": {
+        "local_path": "out/evidence/draft-admission-native/editor-frontend-747bd66bf5.zip",
+        "sha256": "c90e9a31878a6cc3706c5d9bf2fb64b0b0d4b6c66ab69b14d7bb9ce3710c4c87"
+      },
+      "record": {
+        "local_path": "out/evidence/draft-admission-native/editor-frontend-747bd66bf5.json",
+        "sha256": "79c816b4aad4c697be5b864e2fc6b0e6a1c8ed3cd22dc1070a0d7b914360b296"
+      },
+      "inventory": {
+        "local_path": "out/evidence/draft-admission-native/editor-frontend-747bd66bf5.index.json",
+        "sha256": "6bb26f390c954badc8cf9fdf2f24d607e928b200dde0d18853191453b72700da"
+      }
+    },
+    {
+      "family": "FRONTEND-RECOVERY",
+      "outcome": "pass",
+      "cases": 14,
+      "archive": {
+        "local_path": "out/evidence/draft-admission-native/fr-147e5700fd.zip",
+        "sha256": "9597bfd978d190e4f4d036223524b4a41177ddb8534ce726fb25a8ee0997718c"
+      },
+      "record": {
+        "local_path": "out/evidence/draft-admission-native/fr-147e5700fd.json",
+        "sha256": "b81b624c9e3137998679691b98cfcf53eab6f446acad639daab40bdb0f25b71b"
+      },
+      "inventory": {
+        "local_path": "out/evidence/draft-admission-native/fr-147e5700fd.index.json",
+        "sha256": "f72641c231bede83f0bc974176db208dd353f523aee5d7600877ea9f2facd4fa"
+      }
+    },
+    {
+      "family": "INSTALLED-SETTINGS",
+      "outcome": "pass",
+      "cases": 12,
+      "archive": {
+        "local_path": "out/evidence/draft-admission-native/frontend-5deafe0154.zip",
+        "sha256": "d15f5026d0940a83a981297aa4854a7e5016b4936950d483839a7626e89f46b5"
+      },
+      "record": {
+        "local_path": "out/evidence/draft-admission-native/frontend-5deafe0154.json",
+        "sha256": "9da2ebac616dc66fa353de8e4df79f79cc3a278c41c7c1bb82e9e8c98d54cc34"
+      },
+      "inventory": {
+        "local_path": "out/evidence/draft-admission-native/frontend-5deafe0154.index.json",
+        "sha256": "205ee02969c182cf69a1b3401eefab50bee439288bdf6e931362a3d6bffd6d80"
+      }
+    },
+    {
+      "family": "INSTALLED-RECOVERY",
+      "outcome": "pass",
+      "cases": 14,
+      "archive": {
+        "local_path": "out/evidence/draft-admission-native/ir-226d58f3a7.zip",
+        "sha256": "a53946e64212d68eeaab76e62fdee10c1ca129a0b9c8d3b37b27b45c151d98c8"
+      },
+      "record": {
+        "local_path": "out/evidence/draft-admission-native/ir-226d58f3a7.json",
+        "sha256": "37e9c9200edfebe78c35ddb0b5d7ca1a538044636d3658a1028a360d968f8c9e"
+      },
+      "inventory": {
+        "local_path": "out/evidence/draft-admission-native/ir-226d58f3a7.index.json",
+        "sha256": "d3669c2f191615b4d6fb22a0255a0b345c7e862cc8a87c894bf090a3d83ca396"
+      }
+    },
+    {
+      "family": "RECOVERY-ADMISSION",
+      "outcome": "pass",
+      "cases": 12,
+      "archive": {
+        "local_path": "out/evidence/draft-admission-native/ra-d06a54dfb7.zip",
+        "sha256": "a54ef32fea777db51ea658983bd6753741c8fbbdcf46ed644c7619bddf44e552"
+      },
+      "record": {
+        "local_path": "out/evidence/draft-admission-native/ra-d06a54dfb7.json",
+        "sha256": "957f305c38587693d12a1cdb532c80399b7f22dbaaccd37e9afe96533befbae9"
+      },
+      "inventory": {
+        "local_path": "out/evidence/draft-admission-native/ra-d06a54dfb7.index.json",
+        "sha256": "b7f0e95b8aed46bf92d327999404e72ca995948e2cc2ae4c1be8516be1d2c4be"
+      }
+    },
+    {
+      "family": "EDITOR-RECOVERY",
+      "outcome": "pass",
+      "cases": 14,
+      "archive": {
+        "local_path": "out/evidence/draft-admission-native/recovery-controls-3a0f38363e99.zip",
+        "sha256": "0d7feb7b28dc4954be42cfaadf346b160f7ce464e8a17a9adf8905e6c0dd578f"
+      },
+      "record": {
+        "local_path": "out/evidence/draft-admission-native/recovery-controls-3a0f38363e99.json",
+        "sha256": "bef63af639679b78da09efdcb9c2ee976d4842dee89c213c57de9837d8eadc6c"
+      },
+      "inventory": {
+        "local_path": "out/evidence/draft-admission-native/recovery-controls-3a0f38363e99.index.json",
+        "sha256": "76cc0e931b20d7e805d7527116581563473342718fb79da34087d11a615aed16"
+      }
+    },
+    {
+      "family": "RECOVERY-GUI-LIMITS",
+      "outcome": "fail",
+      "cases": 7,
+      "archive": {
+        "local_path": "out/evidence/draft-admission-native/rgl-8b349e6187.zip",
+        "sha256": "7e787345df380aa7e780500bf6285f0fdd145377b1ec66a4092f9b699d078cfd"
+      },
+      "record": {
+        "local_path": "out/evidence/draft-admission-native/rgl-8b349e6187.json",
+        "sha256": "5a18f72257b765e3cf8b3f8cfa3debba707df58939f817efa03ba517e2094976"
+      },
+      "inventory": {
+        "local_path": "out/evidence/draft-admission-native/rgl-8b349e6187.index.json",
+        "sha256": "83d8423a06d1720db099a29569e7059c4287849c66f735bdc82ab142cc6c946b"
+      }
+    },
+    {
+      "family": "RECOVERY-PREVIEW-COST",
+      "outcome": "pass",
+      "cases": 2,
+      "archive": {
+        "local_path": "out/evidence/draft-admission-native/rl-1a203def22.zip",
+        "sha256": "67a236077e8bc4ee59b7532abe092939c7c517b356f32c538c797b796aee19b5"
+      },
+      "record": {
+        "local_path": "out/evidence/draft-admission-native/rl-1a203def22.json",
+        "sha256": "8a8fd565c65fbb20be39bf56c651a6eb456ff75540ce4e4800b5dc0e0fc808e5"
+      },
+      "inventory": {
+        "local_path": "out/evidence/draft-admission-native/rl-1a203def22.index.json",
+        "sha256": "afad1642bb7345f5f3c9d5a3ff47c7969a693512e9fc199505d0967487f5dec7"
+      }
+    },
+    {
+      "family": "RECOVERY-LIMITS",
+      "outcome": "pass",
+      "cases": 6,
+      "archive": {
+        "local_path": "out/evidence/draft-admission-native/rl-4027cdb76b.zip",
+        "sha256": "3daef96387b80ba17fd286786c05d2fc743424d8a583fa008d4d78d0d00308eb"
+      },
+      "record": {
+        "local_path": "out/evidence/draft-admission-native/rl-4027cdb76b.json",
+        "sha256": "2d3e50de5088a8d518df7868d548c93999946b976d1a9117fcba2eec7fa0bcd4"
+      },
+      "inventory": {
+        "local_path": "out/evidence/draft-admission-native/rl-4027cdb76b.index.json",
+        "sha256": "572c905a3e99edcd8602538e82317d7f88283203e9739cb32e90bba8a7e54393"
+      }
+    },
+    {
+      "family": "RECOVERY-PREVIEW-COST",
+      "outcome": "pass",
+      "cases": 2,
+      "archive": {
+        "local_path": "out/evidence/draft-admission-native/rl-4e8fe07762.zip",
+        "sha256": "18cb0336aff2be1d8377861757c1150167e43ff9861093690d47554c73781187"
+      },
+      "record": {
+        "local_path": "out/evidence/draft-admission-native/rl-4e8fe07762.json",
+        "sha256": "9efd182946210dd943bab0e5c7770bccc6e9228221fa438f4e4c4a5274d804e3"
+      },
+      "inventory": {
+        "local_path": "out/evidence/draft-admission-native/rl-4e8fe07762.index.json",
+        "sha256": "fe835222921fedec104dcf491f4b48bbd5ad60461001d188e2fb818de6034d0d"
+      }
+    },
+    {
+      "family": "RECOVERY-PREVIEW-COST",
+      "outcome": "pass",
+      "cases": 2,
+      "archive": {
+        "local_path": "out/evidence/draft-admission-native/rl-eef81a738f.zip",
+        "sha256": "804c3e3efb3bc5a868ff438e1b5f9e567515023f1d80b0fd7d8de223cf03ef77"
+      },
+      "record": {
+        "local_path": "out/evidence/draft-admission-native/rl-eef81a738f.json",
+        "sha256": "8330d7ba457a359962ac9b25a7ea2af3b2e9c8a9597b42f5b90f54e63f1f457f"
+      },
+      "inventory": {
+        "local_path": "out/evidence/draft-admission-native/rl-eef81a738f.index.json",
+        "sha256": "8db9f2282e4c3d958d14b83671e850c27c4763629a60905ecc022612819e8cac"
+      }
+    },
+    {
+      "family": "ROLE-COMPOSITION",
+      "outcome": "pass",
+      "cases": 19,
+      "archive": {
+        "local_path": "out/evidence/draft-admission-native/roles-ab9f7f9b19d5.zip",
+        "sha256": "786a79fd5bb239bc7d81ce2cd35d428bb5b5168cf99315021c79a821b1d0bc12"
+      },
+      "record": {
+        "local_path": "out/evidence/draft-admission-native/roles-ab9f7f9b19d5.json",
+        "sha256": "c4742d3b0e29a8f1b0a7f2e445478bd42e243d22fae025fea76355d3aedf2af9"
+      },
+      "inventory": {
+        "local_path": "out/evidence/draft-admission-native/roles-ab9f7f9b19d5.index.json",
+        "sha256": "c6e41c7f109f3a03d6bc591a45512c19cf80c458b336d2ee0b2aff4326ebcbfa"
+      }
+    },
+    {
+      "family": "RECOVERY-PREPARATION",
+      "outcome": "pass",
+      "cases": 8,
+      "archive": {
+        "local_path": "out/evidence/draft-admission-native/rp-2b686db2a5.zip",
+        "sha256": "045af1739d192c2e61dde0c2bf942b8f89fecfde939987cb5a9e74f442c53871"
+      },
+      "record": {
+        "local_path": "out/evidence/draft-admission-native/rp-2b686db2a5.json",
+        "sha256": "a4d156abcd246dbceb91b863b512d700dc3b0938135b3117c4b747e128e5c51e"
+      },
+      "inventory": {
+        "local_path": "out/evidence/draft-admission-native/rp-2b686db2a5.index.json",
+        "sha256": "886218661ebc14e92f65e365cd4d8139ccf8dfa5f51e7b4424341ee998203d58"
+      }
+    },
+    {
+      "family": "CHART-ERASURE",
+      "outcome": "pass",
+      "cases": 3,
+      "archive": {
+        "local_path": "out/evidence/draft-admission-native/surface-1cbdcc90020a.zip",
+        "sha256": "28b4d11d09fdc25969c27b623570f0e209e5b412cf9be6cf4a1027cbebe19b19"
+      },
+      "record": {
+        "local_path": "out/evidence/draft-admission-native/surface-1cbdcc90020a.json",
+        "sha256": "cc70cb1d291e5d13b5c1e41c708fed1352c3ffad50730e0f012f5ecdbb866508"
+      },
+      "inventory": {
+        "local_path": "out/evidence/draft-admission-native/surface-1cbdcc90020a.index.json",
+        "sha256": "e3433e7b0518eea1b9089764c6c175c6b9f4fb7380ac3b8aaec5f4f2648be9d4"
+      }
+    },
+    {
+      "family": "IMAGE-ERASURE",
+      "outcome": "pass",
+      "cases": 3,
+      "archive": {
+        "local_path": "out/evidence/draft-admission-native/surface-2718a9476850.zip",
+        "sha256": "1e6fd070f6971a91bdfaffef5e81178cf3f0bb0b1cd94412af892c6da9153bb1"
+      },
+      "record": {
+        "local_path": "out/evidence/draft-admission-native/surface-2718a9476850.json",
+        "sha256": "50a1310ca063b016c93b6b4581fe59d749e044d2912aa8dd5117760aacc150b9"
+      },
+      "inventory": {
+        "local_path": "out/evidence/draft-admission-native/surface-2718a9476850.index.json",
+        "sha256": "1468db0ed17341b34954619451225e87744e177742d2fd0c6367a7253485418f"
+      }
+    },
+    {
+      "family": "TABLE-ERASURE",
+      "outcome": "pass",
+      "cases": 3,
+      "archive": {
+        "local_path": "out/evidence/draft-admission-native/surface-73a296331a00.zip",
+        "sha256": "4a33fe71cda19e6b7714791fa781c6f2f52a28814fda9ff6ca4d45604fdd6d80"
+      },
+      "record": {
+        "local_path": "out/evidence/draft-admission-native/surface-73a296331a00.json",
+        "sha256": "0f084026aee39deaada935356bb61fc7d1125153840d40ad0118dd11c95b586b"
+      },
+      "inventory": {
+        "local_path": "out/evidence/draft-admission-native/surface-73a296331a00.index.json",
+        "sha256": "a6f9dc3ca5434bcddc41931c2b6eaea938e21e5fa34b310651b50a50946f8135"
+      }
+    },
+    {
+      "family": "CONTENT-ERASURE",
+      "outcome": "pass",
+      "cases": 3,
+      "archive": {
+        "local_path": "out/evidence/draft-admission-native/surface-d5311b20f091.zip",
+        "sha256": "2ab6ce3a36e15ae681194e3b7cd2554cb6a39d1ec918fe98982bbc0dfff17799"
+      },
+      "record": {
+        "local_path": "out/evidence/draft-admission-native/surface-d5311b20f091.json",
+        "sha256": "8eb92c034e9560bd6cd64108ba4ac7ff40b165efc9da2602d6d04fe51c55b8d1"
+      },
+      "inventory": {
+        "local_path": "out/evidence/draft-admission-native/surface-d5311b20f091.index.json",
+        "sha256": "9f952a6d8e662cfddb20e92f9c8f66509d7be6acd4ebee087146627735681bd0"
+      }
+    },
+    {
+      "family": "SCENE-ERASURE",
+      "outcome": "pass",
+      "cases": 3,
+      "archive": {
+        "local_path": "out/evidence/draft-admission-native/surface-fd0f73e14248.zip",
+        "sha256": "2b8a4c8bdd2dcdca12d2e2f48999bf420a5206499636239a896d9c6e1affa6f9"
+      },
+      "record": {
+        "local_path": "out/evidence/draft-admission-native/surface-fd0f73e14248.json",
+        "sha256": "7302ea51d7eec123adfa25f6916b789d84e12fd6668c28727faceca153792a01"
+      },
+      "inventory": {
+        "local_path": "out/evidence/draft-admission-native/surface-fd0f73e14248.index.json",
+        "sha256": "6b49df97b89613bc4b214d9d7936f82f3bc41836783911ae11668fd70fc650b4"
+      }
+    },
+    {
+      "family": "THEME-HISTORY",
+      "outcome": "pass",
+      "cases": 3,
+      "archive": {
+        "local_path": "out/evidence/draft-admission-native/theme-history-26d3c5cd3210.zip",
+        "sha256": "f4f2a281c2e3d28db75fd8c3b893183c96f566366c953893d9ae95e063fd8d80"
+      },
+      "record": {
+        "local_path": "out/evidence/draft-admission-native/theme-history-26d3c5cd3210.json",
+        "sha256": "6c7b4068ca8745bb3e970b4ebb403cbfba130d78b23965a7aefcab947c24998c"
+      },
+      "inventory": {
+        "local_path": "out/evidence/draft-admission-native/theme-history-26d3c5cd3210.index.json",
+        "sha256": "126128a45ac2d724971af2d127eb896ec8a9c4e580568f31fa3f4b31b5cff15a"
+      }
+    },
+    {
+      "family": "VISIBILITY-PIXELS",
+      "outcome": "pass",
+      "cases": 3,
+      "archive": {
+        "local_path": "out/evidence/draft-admission-native/visibility-b2b5771977f3.zip",
+        "sha256": "e1f552801e5c10446d7bdfd26139c7af79230e27fb2630369d395a75509c927e"
+      },
+      "record": {
+        "local_path": "out/evidence/draft-admission-native/visibility-b2b5771977f3.json",
+        "sha256": "690c22fced1e297eb295d14f77d6c1c43a56df698d948981ddcd62eee57f5fa6"
+      },
+      "inventory": {
+        "local_path": "out/evidence/draft-admission-native/visibility-b2b5771977f3.index.json",
+        "sha256": "dd07b2b49e57ffbcfea202ba52a595f3891f9175cb91dd0ffb00181f28a69541"
+      }
+    }
+  ],
+  "gui_outcome": "fail",
+  "gui_cases": [
+    {
+      "case": "MAX-WIDGETS",
+      "outcome": "fail",
+      "elapsed_seconds": 9.760102792992257,
+      "timing_max_us": {
+        "delay_us": 162078,
+        "work_us": 288492
+      },
+      "failure": "Traceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_installed_editor.py\", line 228, in observe\n    extension(dict(locals(),process=lambda:proc));report['outcome']='pass';return\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_recovery_gui_limits.py\", line 73, in exercise\n    assert not violations,('GUI timing limit exceeded',violations)\n           ^^^^^^^^^^^^^^\nAssertionError: ('GUI timing limit exceeded', [{'index': 154, 'pid': 1105142, 'work_us': 194, 'delay_us': 130372}, {'index': 190, 'pid': 1105142, 'work_us': 245, 'delay_us': 162078}, {'index': 222, 'pid': 1105142, 'work_us': 288492, 'delay_us': 55065}, {'index': 239, 'pid': 1105142, 'work_us': 195492, 'delay_us': 0}, {'index': 254, 'pid': 1105142, 'work_us': 1268, 'delay_us': 118701}])\n",
+      "input_bytes": 76361,
+      "input_sha256": "655e114491ce5f953fa3539ceea849c0a938944c99f49725a1eb0691e1957daa",
+      "scene_sha256": "0b93e8e7d3652e9c6bbd715eadef1f094f2e4b4e4b6e0dc2ffe95da6257ecc5f",
+      "timing_samples": 270,
+      "timing_violations": 5,
+      "native_children": 6,
+      "all_children_exited": true
+    },
+    {
+      "case": "MAX-SCENE",
+      "outcome": "fail",
+      "elapsed_seconds": 8.508549022983061,
+      "timing_max_us": {
+        "delay_us": 176786,
+        "work_us": 183030
+      },
+      "failure": "Traceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_installed_editor.py\", line 228, in observe\n    extension(dict(locals(),process=lambda:proc));report['outcome']='pass';return\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_recovery_gui_limits.py\", line 73, in exercise\n    assert not violations,('GUI timing limit exceeded',violations)\n           ^^^^^^^^^^^^^^\nAssertionError: ('GUI timing limit exceeded', [{'index': 156, 'pid': 1105351, 'work_us': 287, 'delay_us': 121127}, {'index': 203, 'pid': 1105351, 'work_us': 324, 'delay_us': 176786}, {'index': 295, 'pid': 1105351, 'work_us': 120697, 'delay_us': 0}, {'index': 338, 'pid': 1105351, 'work_us': 183030, 'delay_us': 0}])\n",
+      "input_bytes": 275281,
+      "input_sha256": "8db423fcd2899e9516b37c770191004549b62675f66f7befc884e6ab6ece1133",
+      "scene_sha256": "0f113fe0107be93ae5c6c4238afd2be1ee43b6d63cfb82d01ff25a62ee96c2e8",
+      "timing_samples": 373,
+      "timing_violations": 4,
+      "native_children": 6,
+      "all_children_exited": true
+    },
+    {
+      "case": "MAX-RECORD",
+      "outcome": "fail",
+      "elapsed_seconds": 8.77176730701467,
+      "timing_max_us": {
+        "delay_us": 174811,
+        "work_us": 173987
+      },
+      "failure": "Traceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_installed_editor.py\", line 228, in observe\n    extension(dict(locals(),process=lambda:proc));report['outcome']='pass';return\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_recovery_gui_limits.py\", line 73, in exercise\n    assert not violations,('GUI timing limit exceeded',violations)\n           ^^^^^^^^^^^^^^\nAssertionError: ('GUI timing limit exceeded', [{'index': 157, 'pid': 1105544, 'work_us': 271, 'delay_us': 136261}, {'index': 217, 'pid': 1105544, 'work_us': 341, 'delay_us': 174811}, {'index': 308, 'pid': 1105544, 'work_us': 123624, 'delay_us': 416}, {'index': 351, 'pid': 1105544, 'work_us': 173987, 'delay_us': 0}])\n",
+      "input_bytes": 786432,
+      "input_sha256": "374bb7745f01b247dc30564d3e2ed10fd973e8fb666c6385fc661af0613ec2aa",
+      "scene_sha256": "0f113fe0107be93ae5c6c4238afd2be1ee43b6d63cfb82d01ff25a62ee96c2e8",
+      "timing_samples": 386,
+      "timing_violations": 4,
+      "native_children": 8,
+      "all_children_exited": true
+    },
+    {
+      "case": "MAX-COMMAND-REJECT",
+      "outcome": "pass",
+      "elapsed_seconds": 3.4404419749916997,
+      "timing_max_us": {
+        "delay_us": 5191,
+        "work_us": 29989
+      },
+      "input_bytes": 340369,
+      "input_sha256": "9769fe5e0a9b6bbe7e4cf1587d48953fdca2aa1ee9fe170706c6195278969c7b",
+      "scene_sha256": "0f113fe0107be93ae5c6c4238afd2be1ee43b6d63cfb82d01ff25a62ee96c2e8",
+      "timing_samples": 158,
+      "timing_violations": 0,
+      "native_children": 3,
+      "all_children_exited": true
+    },
+    {
+      "case": "OVER-RECORD-REJECT",
+      "outcome": "pass",
+      "elapsed_seconds": 3.073316480003996,
+      "timing_max_us": {
+        "delay_us": 6019,
+        "work_us": 29964
+      },
+      "input_bytes": 786433,
+      "input_sha256": "da0f7becab8b3dda3cba609baedc45f1a854d7aa74f28f0f734f0aef15fa5852",
+      "scene_sha256": "0f113fe0107be93ae5c6c4238afd2be1ee43b6d63cfb82d01ff25a62ee96c2e8",
+      "timing_samples": 140,
+      "timing_violations": 0,
+      "native_children": 3,
+      "all_children_exited": true
+    },
+    {
+      "case": "CLOSE-PREPARING",
+      "outcome": "pass",
+      "elapsed_seconds": 2.938811328000156,
+      "timing_max_us": {
+        "delay_us": 2844,
+        "work_us": 30190
+      },
+      "observed_loading": true,
+      "input_bytes": 275281,
+      "input_sha256": "c3b7b9988b28e4f4b1b5dab955ddb5cb20620aeef7f0e13b314639ccc61aa587",
+      "scene_sha256": "0f113fe0107be93ae5c6c4238afd2be1ee43b6d63cfb82d01ff25a62ee96c2e8",
+      "timing_samples": 134,
+      "timing_violations": 0,
+      "native_children": 3,
+      "all_children_exited": true
+    },
+    {
+      "case": "POLICY",
+      "outcome": "fail",
+      "elapsed_seconds": 4.639753533003386,
+      "timing_max_us": {
+        "delay_us": 127858,
+        "work_us": 36739
+      },
+      "erasure_ms": 70.48274198314175,
+      "erasure_limit_ms": 200,
+      "failure": "Traceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_installed_editor.py\", line 228, in observe\n    extension(dict(locals(),process=lambda:proc));report['outcome']='pass';return\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_recovery_gui_limits.py\", line 73, in exercise\n    assert not violations,('GUI timing limit exceeded',violations)\n           ^^^^^^^^^^^^^^\nAssertionError: ('GUI timing limit exceeded', [{'index': 158, 'pid': 1105971, 'work_us': 282, 'delay_us': 127858}])\n",
+      "input_bytes": 275281,
+      "input_sha256": "b3faab6317affb1bbc14fb33c09632211357e4e981139e640352804ce598bce4",
+      "scene_sha256": "0f113fe0107be93ae5c6c4238afd2be1ee43b6d63cfb82d01ff25a62ee96c2e8",
+      "timing_samples": 209,
+      "timing_violations": 1,
+      "native_children": 3,
+      "all_children_exited": true
+    }
+  ],
+  "gui_observed_children": 32,
+  "gui_all_children_exited": true,
+  "preview_diagnostics": [
+    {
+      "case": "MAX-WIDGETS",
+      "measurements": {
+        "base_us": 1582,
+        "binding_us": 17724,
+        "catalog_us": 1408,
+        "clean_clipboard": false,
+        "clean_clipboard_us": 2,
+        "dirty_clipboard": false,
+        "dirty_clipboard_us": 6,
+        "draft_us": 53820,
+        "edit_us": 79455,
+        "may_submit": true,
+        "may_submit_again": true,
+        "may_submit_again_us": 1259,
+        "may_submit_us": 37155,
+        "owns_current_resources": true,
+        "paint_us": 44462,
+        "resources_us": 35691,
+        "snapshot_us": 2,
+        "surface_close_us": 667,
+        "surface_state": 1,
+        "surface_us": 56321
+      },
+      "outcome": "observed"
+    },
+    {
+      "case": "MAX-SCENE",
+      "measurements": {
+        "base_us": 1550,
+        "binding_us": 26524,
+        "catalog_us": 1392,
+        "clean_clipboard": false,
+        "clean_clipboard_us": 2,
+        "dirty_clipboard": false,
+        "dirty_clipboard_us": 4,
+        "draft_us": 78679,
+        "edit_us": 117547,
+        "may_submit": true,
+        "may_submit_again": true,
+        "may_submit_again_us": 1442,
+        "may_submit_us": 54125,
+        "owns_current_resources": true,
+        "paint_us": 2500,
+        "resources_us": 52762,
+        "snapshot_us": 3,
+        "surface_close_us": 626,
+        "surface_state": 4,
+        "surface_us": 59481
+      },
+      "outcome": "observed"
+    }
+  ],
+  "workspace": {
+    "maximum_bytes": 8589934592,
+    "reservations_unchanged": true,
+    "archived_native_bytes": 1966811267
+  },
+  "preserved_failures": [
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "fragment",
+      "exit": 8,
+      "record": {
+        "local_path": "out/evidence/draft-admission/linux-x64-gcc13-fragment-efe32f26c4/result.json",
+        "sha256": "ae571e41ba6dcd30eab067a5836610af38bedce4dc28ba1b4cddf1214bbbadda"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/draft-admission/linux-x64-gcc13-fragment-efe32f26c4/source-inputs.zip",
+        "sha256": "ae88857915ba26b7ca1674ffb441612a42e391706a93e748cda0bed0e710f375"
+      },
+      "later_changes": [
+        "CMakeLists.txt",
+        "spec/delivery/packages/w-11-draft-admission.md",
+        "source/build/targets/linux-x64-gcc13.json",
+        "source/build/targets/windows-x64-gcc15.json",
+        "source/build/targets/windows-x86-v141-xp.json",
+        "source/interfaces/editor_draft.hpp",
+        "source/interfaces/editor_form_linux.cpp",
+        "source/interfaces/settings_draft.cpp",
+        "source/interfaces/settings_draft.hpp",
+        "tests/configuration/frontend_recovery_probe.cpp",
+        "tests/editor/scene_fragment_tests.cpp",
+        "tests/editor/theme_history_tests.cpp"
+      ],
+      "passed_checks": 8
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "gui",
+      "exit": 8,
+      "record": {
+        "local_path": "out/evidence/draft-admission/linux-x64-gcc13-gui-bd078d9f30/result.json",
+        "sha256": "95540af718a320522b17d22221a56bca2da539f85d6175b9e3b677d3d7810fa2"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/draft-admission/linux-x64-gcc13-gui-bd078d9f30/source-inputs.zip",
+        "sha256": "c33aed2ed35e2f1cdb20f78bb42ed0fd4dc88832546e9aa8a6d921320265ac56"
+      },
+      "later_changes": [],
+      "passed_checks": 0
+    }
+  ],
+  "limitations": [
+    "The first submit eligibility check after mutation still validates the full envelope; actual begin/submission always revalidates independently.",
+    "Clipboard was refused immediately in the measured recovery profile and its implementation is unchanged.",
+    "The initial new rejection test incorrectly assumed a 300-character title was invalid; the original failure is preserved and a structurally invalid numeric title now supplies that negative case.",
+    "Earlier Apply/controller and native timing failures remain unexplained and preserved.",
+    "Production recovery, native inspector and all five complete 0.1.0 editions remain open."
+  ],
+  "next_step": "Add bounded phase diagnostics for frontend reply settlement/population and editor actions; the largest work sample is inside the existing frontend tick, while callbacks/painting appear as delay. Test the source-derived duplicate-preview/repopulation hypothesis, then close any validation proof or off-thread ownership contract before changing first-admission, history/edit or layout.",
+  "specification_checks": {
+    "status": "pass",
+    "schemas": 51,
+    "fixtures": 183,
+    "record": {
+      "local_path": "out/evidence/draft-admission-spec-checks.json",
+      "sha256": "45fe5e74f32f4792a2a86712e50eadff7230ad3e22a2a839a8c5af4b9b75b4ca"
+    }
+  },
+  "additional_native_artifacts_match_render_build": true,
+  "package_metadata_correction": {
+    "field": "generated.at",
+    "previous": "2026-10-09T06:00:00+00:00",
+    "corrected": "2026-10-09T05:04:13.9612684Z",
+    "basis": "Actual Windows file CreationTimeUtc; the originally entered timestamp was in the future. Only this metadata value changes; the complete tested contract body is byte-identical.",
+    "tested_package_sha256": "399b15b8e4fa85995637ef9f93aa0d5be79ddd57a1f4621d0673ff305890fff1",
+    "current_package_sha256": "b4889497136e16f097464ecc9b93c0a7baf09d1aa4385c4088618c46b7040bc7",
+    "matched_execution_records": 21
+  }
+}

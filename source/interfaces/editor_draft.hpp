@@ -57,6 +57,9 @@ public:
     bool theme_fonts_available()const;
     bool set_theme_fonts(const Json& font,const Json& font_roles);
     const configuration::ResourceSet* resources()const{return available()?transaction_.draft_resources_.get():nullptr;}
+    // Lifetime only, not a binding/permission proof. Consumers still validate
+    // authored bindings and must release their owner on disclosure loss/close.
+    configuration::ResourceSnapshot resource_snapshot()const{return available()?transaction_.draft_resources_:nullptr;}
     bool locks_available()const;
     bool visibility_available()const;
     bool undo();

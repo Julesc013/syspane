@@ -86,6 +86,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Versioned visibility authoring and durable admission](w-10-visibility-admission.md) — Preserve conditional scene meaning through typed edits, negotiation and coherent recovery.
 - [Native conditional editing and enablement](w-10-visibility-controls.md) — Private rule input, hidden-object selection and durable conditional editing through the existing native owner.
 - [Native creation of every scene primitive](w-10-widget-creation.md) — Create bounded authored widgets through existing resource, draft and transaction owners.
+- [Current draft admission and preview resource ownership](w-11-draft-admission.md) — Remove repeated reconstruction of owned draft state while retaining current authorization and full mutation validation.
 - [Native editor helper worker bridge](w-11-editor-helper-worker.md) — Move verified image and recovery execution behind bounded GUI-owned task handles.
 - [Frontend recovery authority and accepted-request identity](w-11-frontend-recovery.md) — Connect the actual frontend backend to scoped recovery admission and preserve exact accepted-draft metadata.
 - [Installed native scene editor](w-11-installed-editor.md) — Connect native scene authoring to the actual frontend, verified helpers and authenticated commands.

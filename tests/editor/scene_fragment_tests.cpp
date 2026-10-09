@@ -111,6 +111,50 @@ void run(const std::string& family,const std::string& root){
         }
         d.select({"widget:text"});d.copy_selection();auto p=grant(8);p.disclosure[{"desktop","clipboard"}]={};d.policy(p);CHECK(!d.clipboard_available());rejects([&]{d.clipboard_data();});d.policy(grant(9));CHECK(d.clipboard_available());rejects([&]{d.clipboard_data();});
         d.copy_selection();d.policy(grant(9));CHECK(!d.available());d.policy(grant(10));d.reload(original,"E2",admitted(f));rejects([&]{d.clipboard_data();});
+    }else if(family=="ADMISSION"){
+        const auto change=ui::WidgetPropertyEdit{"widget:text",ui::WidgetProperty::title,"Changed"};
+        CHECK(d.clipboard_available()&&!d.may_submit("commit"));d.select({"widget:text"});CHECK(d.clipboard_available());
+        CHECK(d.execute({change})&&d.clipboard_available()&&d.may_submit("commit"));
+        unchanged(d,cases,{ui::WidgetPropertyEdit{"widget:text",ui::WidgetProperty::title,7}});CHECK(d.clipboard_available());
+        CHECK(d.undo()&&d.clipboard_available()&&!d.may_submit("commit"));CHECK(d.redo()&&d.clipboard_available());
+        d.discard();CHECK(d.clipboard_available()&&!d.dirty());d.execute({change});
+        auto q=*d.begin("commit","admission");CHECK(!d.clipboard_available());d.disconnected();CHECK(!d.clipboard_available());
+        CHECK(d.complete(q.ticket,c::committed_result("admission","E1",41))&&d.clipboard_available());
+        d.reload(original,"E2",admitted(f));CHECK(d.clipboard_available());d.execute({change});q=*d.begin("commit","conflict");
+        CHECK(d.complete(q.ticket,c::result({"conflict","revision.changed"},"conflict","E2",41))&&!d.clipboard_available());
+        d.reload(original,"E3",admitted(f));CHECK(d.clipboard_available());d.close();CHECK(!d.clipboard_available());
+        ui::EditorDraft submit(authority(),grant(),original,"E1",admitted(f),false);
+        submit.execute({change});CHECK(submit.may_submit("commit")&&submit.may_submit("preview"));
+        auto large=original.scene.at("widgets").at(0);large["content"]["body"]=std::string(1024,'x');
+        std::vector<ui::SceneEdit> additions;
+        for(unsigned n=0;n<70;++n){large["id"]="large:"+std::to_string(n);additions.push_back(ui::InsertWidget{large,std::nullopt,2+n});}
+        submit.execute(additions);CHECK(!submit.may_submit("commit")&&!submit.may_submit("preview"));
+        CHECK(submit.undo()&&submit.may_submit("commit")&&submit.may_submit("preview"));
+        CHECK(submit.redo()&&!submit.may_submit("commit"));submit.discard();CHECK(!submit.may_submit("commit"));
+        submit.execute({change});auto deny=grant(8);deny.denied_capabilities.insert("settings.commit");submit.policy(deny);
+        CHECK(!submit.may_submit("commit")&&submit.may_submit("preview"));submit.policy(grant(9));CHECK(submit.may_submit("commit"));
+        q=*submit.begin("preview","preview");CHECK(!submit.may_submit("commit"));
+        CHECK(submit.complete(q.ticket,c::result({"preview",""},"preview","E1",40))&&submit.may_submit("commit"));
+        submit.reload(original,"E2",admitted(f));CHECK(!submit.may_submit("commit"));
+        for(const char* version:{"0.3.0","0.4.0","0.5.0"}){
+            auto value=original;value.scene["schema_version"]=version;
+            ui::EditorDraft current(authority(),grant(),value,"E1",admitted(f),true);CHECK(current.clipboard_available());
+            for(const char* cap:{"settings.preview","scene.replace","content.select","editor.clipboard","scene.content"}){
+                auto denied=grant(8);denied.denied_capabilities.insert(cap);current.policy(denied);CHECK(!current.clipboard_available());
+                current.policy(grant(9));CHECK(current.clipboard_available());current.reload(value,"E1",admitted(f));
+                // Each independent owner starts with the same monotonic policy baseline.
+                current=ui::EditorDraft(authority(),grant(),value,"E1",admitted(f),true);
+            }
+            for(const char* cap:{"configuration.edit-locks","scene.edit-locks","configuration.visibility","scene.visibility"}){
+                const bool relevant=std::string(version)=="0.5.0"||(std::string(version)=="0.4.0"&&std::string(cap).find("edit-locks")!=std::string::npos);
+                auto denied=grant();denied.denied_capabilities.insert(cap);ui::EditorDraft candidate(authority(),denied,value,"E1",admitted(f),true);CHECK(candidate.clipboard_available()==!relevant);
+                auto ctx=admitted(f);ctx.capabilities.erase(cap);ui::EditorDraft absent(authority(),grant(),value,"E1",ctx,true);CHECK(absent.clipboard_available()==!relevant);
+            }
+            auto forced=grant(8);forced.forced["sampling.resources_ms"]=2000;current.policy(forced);CHECK(current.clipboard_available());
+            auto commit=grant(9);commit.denied_capabilities.insert("settings.commit");current.policy(commit);CHECK(current.clipboard_available());
+            current.policy(grant(9));CHECK(!current.clipboard_available()&&!current.available());
+            current.policy(grant(10));CHECK(!current.clipboard_available());current.reload(value,"E2",admitted(f));CHECK(current.clipboard_available());
+        }
     }else if(family=="TRANSACTION"){
         CHECK(d.execute({paste(cases)}));Store store(f);c::Transactions tx(store,"E1",store.provider());auto q=*d.begin("commit","paste");CHECK(!d.clipboard_available());
         const auto body=c::parse_command(q.body);CHECK(body["schema_version"]=="0.7.0"&&body["operations"][0]["scene"]==cases["pasted"]);

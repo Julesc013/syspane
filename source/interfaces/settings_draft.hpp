@@ -74,5 +74,14 @@ private:
     std::string epoch_;std::uint64_t tickets_=0;std::optional<std::uint64_t> highest_policy_;
     struct Active {EditRequest request;std::string intent;std::uint64_t revision;bool cancelled=false;};
     std::optional<Active> active_;DraftState state_=DraftState::unavailable;Json result_;
+    // UI hints only: no authored bytes or permission result. Every owned-state
+    // mutation clears them; copies (including detached work) start unvalidated.
+    struct SubmissionValidation {
+        std::optional<bool> preview,commit;
+        SubmissionValidation()=default;
+        SubmissionValidation(const SubmissionValidation&){}
+        SubmissionValidation& operator=(const SubmissionValidation&){clear();return *this;}
+        void clear(){preview.reset();commit.reset();}
+    } mutable submission_validation_;
 };
 }

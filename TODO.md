@@ -39,6 +39,7 @@ behaviour has been implemented. See [audit disposition](spec/delivery/audit-2026
 - [x] Freeze maximum recovery inputs, execute six backend and seven installed GTK cases, preserve measured failures, and reuse immutable trusted schema patterns. See the [qualification handoff](spec/delivery/recovery-limits-handoff.md).
 - [x] Compile trusted schema navigation without caching authored data; preserve 5823 pre-change outcomes and validate all three toolchains. See the [handoff](spec/delivery/recovery-hotpaths-handoff.md).
 - [x] Reuse native font setup within one composition, preserve frozen pixels/errors and pass renderer/erasure and recovery regressions. See the [handoff](spec/delivery/text-session-handoff.md).
+- [x] Retain only current-owner structural submit eligibility, reuse immutable preview resources, and verify original admission outcomes and native regressions. See the [handoff](spec/delivery/draft-admission-handoff.md).
 - [ ] Repair measured preview/layout/validation stalls and investigate the transient Apply state and controller restart; pass all seven fixed GTK limit cases without weakening deadlines or erasure.
 - [ ] Qualify complete recovery worker/supervisor scheduling and maximum-size GUI operations under existing limits; then enable production recovery and rerun acceptance. Integrate the native inspector.
 - [ ] Explain the preserved Windows GCC15 THEME-HISTORY-RESOURCE-LIMIT 20-second timeout and installed-editor AT-SPI grab_focus timeout; retain original failures and distinguish unchanged replays from causal evidence.

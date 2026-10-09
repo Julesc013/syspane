@@ -3,6 +3,7 @@
 Generated navigation; edit the referenced source documents, then run `specctl.py generate`.
 
 - [build-layout.json](build-layout.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
+- [draft-admission.json](draft-admission.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [editor-helper-bundle.json](editor-helper-bundle.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [editor-helper-worker.json](editor-helper-worker.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [frontend-recovery.json](frontend-recovery.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.

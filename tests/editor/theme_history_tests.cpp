@@ -25,7 +25,19 @@ void matching(const ui::EditorDraft& d,const Json& cases,const std::string& key)
 void run(const std::string& name,const std::string& root){
     settings_fixture::Fixture f(root);const auto cases=settings_fixture::read(root+"/tests/editor/theme-history-cases.json");const auto first=cases["artifacts"]["first"],second=cases["artifacts"]["second"];
     auto resources=context(f);ui::EditorDraft d(authority(),policy(),f.authored,"E1",resources,true);
-    if(name=="SHARING"){
+    if(name=="SNAPSHOT"){
+        auto base=d.resource_snapshot();CHECK(base&&base.get()==d.resources());
+        CHECK(fonts(d,first));auto one=d.resource_snapshot();CHECK(one.get()==d.resources()&&one!=base&&one->theme()==first["theme"]);
+        CHECK(fonts(d,second));auto two=d.resource_snapshot();CHECK(two.get()==d.resources()&&two!=one&&two->theme()==second["theme"]);
+        CHECK(one->theme()==first["theme"]&&base->theme()!=one->theme());
+        CHECK(d.undo()&&d.resource_snapshot()==one);CHECK(d.redo()&&d.resource_snapshot()==two);
+        auto value=f.authored;value.scene=*d.scene();c::validate_resource_binding(*two,value);
+        d.discard();CHECK(d.resource_snapshot()==base);d.reload(f.authored,"E2",resources);
+        CHECK(d.resource_snapshot().get()==d.resources()&&d.resource_snapshot()->theme()==base->theme());
+        auto denied=policy(8);denied.disclosure.clear();d.policy(denied);CHECK(!d.resource_snapshot());
+        CHECK(one->theme()==first["theme"]&&two->theme()==second["theme"]);d.close();CHECK(!d.resource_snapshot());
+        std::weak_ptr<const c::ResourceSet> witness=two;two.reset();CHECK(witness.expired());
+    }else if(name=="SHARING"){
         const auto base=d.resources()->base_packages();CHECK(d.theme_fonts_available());CHECK(fonts(d,first));
         for(const auto& b:base){bool found=false;for(const auto& a:d.resources()->base_packages())if(a.get()==b.get())found=true;CHECK(found);}
         const auto current=d.resources();auto catalog=c::ContentCatalog::retained(*current);auto authored=f.authored;authored.scene=*d.scene();auto snapshot=catalog.theme_resources(current->selection(),authored);
