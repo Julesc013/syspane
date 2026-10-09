@@ -125,6 +125,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Collection table surface checkpoint](table-surface-handoff.md) — Identity-aligned table cells and bounded native grids share the current-policy scene owner.
 - [Build targets and qualification profiles](target-profiles.md) — Bind concrete runtime floors to evidence instead of inferring support from platform names.
 - [Bounded telemetry document checkpoint](telemetry-wire-handoff.md) — Bind versioned delivery decoding and exact replay preservation to native-compiled portable cases without claiming a live subscription.
+- [Composition-scoped native text handoff](text-session-handoff.md) — Exact standalone/session rendering evidence, lower paint cost and remaining recovery qualification.
 - [Theme authoring input and immutable artifact checkpoint](theme-authoring-handoff.md) — Exact font input and license-bound theme artifacts; durable and native integration remain open.
 - [Durable authored theme command checkpoint](theme-commands-handoff.md) — Negotiated font intent, versioned Linux publication and independent restart evidence.
 - [Native font controls checkpoint](theme-controls-handoff.md) — Exact private base/role input, current resource preview and independent durable native evidence.

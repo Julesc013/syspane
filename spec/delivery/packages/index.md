@@ -100,6 +100,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Asynchronous editor recovery preparation](w-11-recovery-preparation.md) — Move recovery reconstruction to the existing worker without granting stale prepared results authority.
 - [Native scene inspector navigation and disclosure](w-11-scene-inspector.md) — Expose scene semantics through native controls with identity-stable navigation and current inspector authority.
 - [Resource-aware native settings](w-11-settings-resources.md) — Preserve exact resource selection through settings drafts, native commits and restart.
+- [Composition-scoped native font setup](w-11-text-session.md) — Reuse Linux font setup within one synchronous composition while preserving exact rendering and erasure.
 - [W-24 authenticated transport and policy boundary](w-24-transport.md) — Close the initial local protocol, admission and preview boundary before native integration.
 - [W-25 collection continuity across consumer replacement](w-25-consumer-continuity.md) — Keep real collection independently owned while admitting bounded replacement consumers.
 - [W-25 automatic recovery from independent render failure](w-25-controller-render-recovery.md) — Connect the existing render and health guards to the persistent native desktop replacement owner.

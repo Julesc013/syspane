@@ -56,7 +56,7 @@ SurfaceText compose_table(const Json& w,const std::vector<scene::BindingInput>& 
         for(std::size_t i=0;i<row.cells.size();++i){out.accessible+="\n"+(t.labels[i]==t.columns[i]?t.columns[i]:t.labels[i]+" ["+t.columns[i]+"]")+": "+row.cells[i].accessible;need(surface_text_bytes(out)<=262144,"surface.capacity");}}
     return out;
 }
-TextRaster raster_table(const TextRequest& request,SurfaceText& widget,std::size_t capacity){
+TextRaster raster_table(const TextRequest& request,SurfaceText& widget,std::size_t capacity,TextSession* session){
     need(widget.table.has_value(),"surface.table_identity");auto& table=*widget.table;
     TextRequest q=request;q.wrap_units.reset();
     const auto bg=request.contrast=="light"?"#ffffffff":request.contrast=="dark"?"#000000ff":request.theme["tokens"]["background"].get<std::string>();
@@ -65,7 +65,7 @@ TextRaster raster_table(const TextRequest& request,SurfaceText& widget,std::size
     std::vector<TextRaster> parts;std::size_t retained=0;std::set<std::string> fonts;
     const bool typography=request.theme["schema_version"]=="0.2.0";
     const auto add=[&](const std::string& text,const std::string& role,const std::vector<TextBlock>& blocks){need(retained<capacity,"surface.capacity");q.text=text;q.pixel_budget=std::min(std::size_t{4194304},capacity-retained);
-        q.role=typography?role:"body";auto raster=typography&&!blocks.empty()?render_blocks(q,blocks,capacity-retained):render_text(q);need(!raster.missing_glyphs,"surface.glyphs");retained+=static_cast<std::size_t>(raster.width)*raster.height;
+        q.role=typography?role:"body";auto raster=typography&&!blocks.empty()?render_blocks(q,blocks,capacity-retained,session):render_text(q,session);need(!raster.missing_glyphs,"surface.glyphs");retained+=static_cast<std::size_t>(raster.width)*raster.height;
         fonts.insert(raster.fonts.begin(),raster.fonts.end());parts.push_back(std::move(raster));return parts.size()-1;};
     const auto title=add(widget.text,"label",{}),summary=add(table.summary,"diagnostic",{});std::vector<std::size_t> headers;std::vector<std::vector<std::size_t>> cells;
     for(const auto& name:table.labels)headers.push_back(add(name,"label",{}));

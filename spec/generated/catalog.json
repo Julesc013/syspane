@@ -489,7 +489,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "3be638e41a84f6826471e12ef2c2db2260e255480e4ad1fb881d2d56b474b45d"
+      "sha256": "883f3794f5fc0ff0ec11eee91a499836a071b6ec8dbc401d020be02f2ade83e8"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -2384,6 +2384,16 @@
       "sha256": "69446ce4994a15aa8e2df10be9edf146e83f733de2d8ffbfb0eb646ae21ef611"
     },
     {
+      "id": "SP-W11-TEXT-SESSION",
+      "path": "delivery/packages/w-11-text-session.md",
+      "title": "Composition-scoped native font setup",
+      "description": "Reuse Linux font setup within one synchronous composition while preserving exact rendering and erasure.",
+      "requires": [
+        "SP-W11-RECOVERY-HOTPATHS"
+      ],
+      "sha256": "3989ffd50f97e50b2c7ff2aa67833102e25b653e64cc49d9209bf9be7a650c59"
+    },
+    {
       "id": "SP-W24-PACKAGE",
       "path": "delivery/packages/w-24-transport.md",
       "title": "W-24 authenticated transport and policy boundary",
@@ -3183,6 +3193,17 @@
         "SP-CAMPAIGN-ADMISSION"
       ],
       "sha256": "0c0cf199bbe641a2037e704483880bd969bcf1e01e65a0ed04b9c0acb2f5b31c"
+    },
+    {
+      "id": "SP-TEXT-SESSION-HANDOFF",
+      "path": "delivery/text-session-handoff.md",
+      "title": "Composition-scoped native text handoff",
+      "description": "Exact standalone/session rendering evidence, lower paint cost and remaining recovery qualification.",
+      "requires": [
+        "SP-W11-TEXT-SESSION",
+        "SP-RECOVERY-HOTPATHS-HANDOFF"
+      ],
+      "sha256": "166d0438792ef5d098add69ded20e71acd6a0483145672afcaf2fa37d72a4f51"
     },
     {
       "id": "SP-THEME-AUTHORING-HANDOFF",

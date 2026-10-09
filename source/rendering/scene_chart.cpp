@@ -43,14 +43,14 @@ scene::ChartPlot compose_chart(const Json& widget,SurfaceText& text,const s::Cha
         need(text.accessible.size()+text.text.size()+chart.summary.size()<=262144,"surface.capacity");}
     return plot;
 }
-TextRaster raster_chart(const TextRequest& request,SurfaceText& widget,const s::ChartPlot& plot,std::size_t capacity){
+TextRaster raster_chart(const TextRequest& request,SurfaceText& widget,const s::ChartPlot& plot,std::size_t capacity,TextSession* session){
     need(widget.chart.has_value(),"surface.chart");const auto mask_pixels=static_cast<std::size_t>(plot.width)*plot.height;
     need(mask_pixels<capacity,"surface.capacity");TextRequest q=request;q.wrap_units.reset();q.pixel_budget=std::min(std::size_t{4194304},capacity-mask_pixels);
     const auto bg=color(request.contrast=="light"?"#ffffffff":request.contrast=="dark"?"#000000ff":request.theme["tokens"]["background"].get<std::string>());
     const auto fg=color(request.contrast=="light"?"#000000ff":request.contrast=="dark"?"#ffffffff":request.theme["tokens"]["foreground"].get<std::string>());
     const auto border=request.contrast=="authored"?color(request.theme["tokens"]["muted"]):fg;
     q.theme["tokens"]["foreground"]=request.contrast=="light"?"#000000ff":request.contrast=="dark"?"#ffffffff":request.theme["tokens"]["foreground"].get<std::string>();
-    q.theme["tokens"]["background"]="#00000000";q.contrast="authored";auto text=request.theme["schema_version"]=="0.2.0"?render_blocks(q,widget.blocks,capacity-mask_pixels):render_text(q);need(!text.missing_glyphs,"surface.glyphs");
+    q.theme["tokens"]["background"]="#00000000";q.contrast="authored";auto text=request.theme["schema_version"]=="0.2.0"?render_blocks(q,widget.blocks,capacity-mask_pixels,session):render_text(q,session);need(!text.missing_glyphs,"surface.glyphs");
     const auto gap=(4*q.numerator+q.denominator-1)/q.denominator,graph_y=text.height+gap;
     TextRaster result;result.width=std::max(text.width,plot.width);result.height=graph_y+plot.height;result.fonts=text.fonts;
     const auto pixels=static_cast<std::size_t>(result.width)*result.height,text_pixels=static_cast<std::size_t>(text.width)*text.height;

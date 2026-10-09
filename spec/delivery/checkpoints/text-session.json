@@ -1,0 +1,935 @@
+{
+  "recorded_at": "2026-10-09T04:56:20.393455+00:00",
+  "source_base": "c854d9148cc1e62ed3fa74bc2d355dfb3822a493",
+  "scope": "Composition-scoped Linux native font setup; standalone frozen equivalence, scene/erasure and unchanged recovery qualification. No production recovery enablement.",
+  "fixed_inputs": {
+    "spec/delivery/packages/w-11-installed-recovery.md": "04d3385d832a3fc75ba8fd56b2e18f5844157209e0cbc145244fd9400b5fa810",
+    "tests/configuration/installed-recovery-cases.json": "e5e75b327314911b4ff52f8521be9e04fa65f821f7b000431d3f62f63863792e",
+    "tests/configuration/installed-editor-cases.json": "9a3b26dc4001e0aa0dd1662802c18e73628d33b28527b3fd5c6a4ca364e6bac6",
+    "tests/configuration/installed-editor-scene.json": "45dea42b875ffd68e36282bd9df5cbcdee67f9093a774ef29b8ddaef58d4e7fa",
+    "tests/configuration/frontend-recovery-command.json": "f37c0bffe6b7cb22dd96733b15ad5669beaf63dbdfde5ad27f98b206bff47f0e",
+    "tests/configuration/profile-startup-cases.json": "778d20398d8db479a21b10e081c377ca85dabe11199b2c4918b03c6e6fc7cd2b",
+    "spec/delivery/packages/w-11-recovery-limits.md": "86c72bd00ca125faa35470642100b3f3f3410a856a84fb193dd6357fc98d61f5",
+    "tests/configuration/recovery-limits-cases.json": "9404f8bd7cf316dccc767c37158d4be352aef457a95382bfc576b10f766b2ab4",
+    "tests/configuration/recovery_limits_inputs.py": "8dece3e0096c62951cdd742e9a3b03176dc263d8005f575b546dd0be8c1eceef",
+    "spec/delivery/packages/w-11-recovery-gui-limits.md": "61a74b77b17f2c30f5b91538172b50a7639aa76cb9544d8dfbefa224b3604522",
+    "tests/configuration/recovery-gui-limits-cases.json": "43263df79f8dd55fc2446f6edf4128416dc200eb348c9bc0a05c2d780e68c9b4"
+  },
+  "baseline": {
+    "record": {
+      "local_path": "out/evidence/text-session-baseline/result.json",
+      "sha256": "ee252a57b219944c652871b57b74398de0d4190839582821910ac46dde3c5966"
+    },
+    "source_archive": {
+      "local_path": "out/evidence/text-session-baseline/source-inputs.zip",
+      "sha256": "cbf8c07876de3439259990917c7bc1eca35e4c2f599fd7a908af2049a4fb5ce3"
+    },
+    "outputs": {
+      "local_path": "out/evidence/text-session-baseline/baseline.zip",
+      "sha256": "9bd1cbd7e091aa94e66ce79b464c2183116e2e4dcd7e9dc761d691756817d2b2"
+    },
+    "expectations": {
+      "local_path": "tests/scene/text-session-expectations.json",
+      "sha256": "714c2f45f370258308d7b902ea6e59c0113f685c56d76c8e1f7064cfab833460"
+    }
+  },
+  "executions": [
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "backend",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/text-session/linux-x64-gcc13-backend-cf84428199/result.json",
+        "sha256": "389b3ef884b73dccec70720bf9adc783271949ca3c74179eaeb8fe25f8db6b2f"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/text-session/linux-x64-gcc13-backend-cf84428199/source-inputs.zip",
+        "sha256": "b4715943ab5c66cc7870c49d4ec8ce4e06af0dc10b2024d6198874903e347838"
+      },
+      "later_changes": [],
+      "passed_checks": 1
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "build",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/text-session/linux-x64-gcc13-build-f8a7f812fa/result.json",
+        "sha256": "0c693493532bdd31446bc8b7408939f0c89045f8ca826e3cee7dc4cb4c0d0e93"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/text-session/linux-x64-gcc13-build-f8a7f812fa/source-inputs.zip",
+        "sha256": "b4715943ab5c66cc7870c49d4ec8ce4e06af0dc10b2024d6198874903e347838"
+      },
+      "later_changes": [],
+      "passed_checks": 0
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "configure",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/text-session/linux-x64-gcc13-configure-a2ce48d76e/result.json",
+        "sha256": "c994d357d95c335e787eaa5027be1e0f379722399cf4c914dbe615038c592898"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/text-session/linux-x64-gcc13-configure-a2ce48d76e/source-inputs.zip",
+        "sha256": "dc5a122d40b505d72ce1ec07b2bbdf433518446c61dc576ffa3e5a5a5e9e7538"
+      },
+      "later_changes": [
+        "source/rendering/scene_chart.cpp",
+        "source/rendering/scene_chart.hpp",
+        "source/rendering/scene_surface.cpp",
+        "source/rendering/scene_table.cpp",
+        "source/rendering/scene_table.hpp",
+        "source/rendering/scene_text.cpp",
+        "source/rendering/scene_text.hpp",
+        "source/rendering/scene_visibility.cpp",
+        "source/rendering/scene_visibility.hpp"
+      ],
+      "passed_checks": 0
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "controls",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/text-session/linux-x64-gcc13-controls-1ea03d4bc2/result.json",
+        "sha256": "19d35bdc00e9c7173b5406712c3459fe2c9b3f104468797883c44447347ef6e9"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/text-session/linux-x64-gcc13-controls-1ea03d4bc2/source-inputs.zip",
+        "sha256": "b4715943ab5c66cc7870c49d4ec8ce4e06af0dc10b2024d6198874903e347838"
+      },
+      "later_changes": [],
+      "passed_checks": 1
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "editor",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/text-session/linux-x64-gcc13-editor-ac2f053643/result.json",
+        "sha256": "3ffd5d5f8ebb94a5037e30033df9a46cb74c4fcdc8ee47268764f671c777cf4d"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/text-session/linux-x64-gcc13-editor-ac2f053643/source-inputs.zip",
+        "sha256": "b4715943ab5c66cc7870c49d4ec8ce4e06af0dc10b2024d6198874903e347838"
+      },
+      "later_changes": [],
+      "passed_checks": 1
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "frontend",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/text-session/linux-x64-gcc13-frontend-9080b09250/result.json",
+        "sha256": "d9694f7710d40599ba9828898e24d1acb3cd1aa070e95839555cbf7c32e2c43b"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/text-session/linux-x64-gcc13-frontend-9080b09250/source-inputs.zip",
+        "sha256": "b4715943ab5c66cc7870c49d4ec8ce4e06af0dc10b2024d6198874903e347838"
+      },
+      "later_changes": [],
+      "passed_checks": 1
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "gui",
+      "exit": 8,
+      "record": {
+        "local_path": "out/evidence/text-session/linux-x64-gcc13-gui-ff44a43bfe/result.json",
+        "sha256": "c83b4686b959409f2b3fe20ddf16bd6133e072593d162d18ccd3212bb5d24883"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/text-session/linux-x64-gcc13-gui-ff44a43bfe/source-inputs.zip",
+        "sha256": "b4715943ab5c66cc7870c49d4ec8ce4e06af0dc10b2024d6198874903e347838"
+      },
+      "later_changes": [],
+      "passed_checks": 0
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "installed",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/text-session/linux-x64-gcc13-installed-d9e275eddd/result.json",
+        "sha256": "411b6bb7ca586501cee12abc1e2a37221007d07d255aad160272e65a9efabb03"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/text-session/linux-x64-gcc13-installed-d9e275eddd/source-inputs.zip",
+        "sha256": "b4715943ab5c66cc7870c49d4ec8ce4e06af0dc10b2024d6198874903e347838"
+      },
+      "later_changes": [],
+      "passed_checks": 1
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "native",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/text-session/linux-x64-gcc13-native-02ad2abeec/result.json",
+        "sha256": "e30d11dc68eaddecc9f94626bdae8dc8d043acf8122fe26cf9778b9ad3c3173b"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/text-session/linux-x64-gcc13-native-02ad2abeec/source-inputs.zip",
+        "sha256": "b4715943ab5c66cc7870c49d4ec8ce4e06af0dc10b2024d6198874903e347838"
+      },
+      "later_changes": [],
+      "passed_checks": 1
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "preparation",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/text-session/linux-x64-gcc13-preparation-5fd3767143/result.json",
+        "sha256": "cd41092c02036c4152605016f57d8c8ca5d93f43741be497756bb800d773df60"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/text-session/linux-x64-gcc13-preparation-5fd3767143/source-inputs.zip",
+        "sha256": "b4715943ab5c66cc7870c49d4ec8ce4e06af0dc10b2024d6198874903e347838"
+      },
+      "later_changes": [],
+      "passed_checks": 1
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "preview",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/text-session/linux-x64-gcc13-preview-a1a1d1239b/result.json",
+        "sha256": "f11e9a3dbb5db032ea6af77b8731020a48bee7dca4fdc82e526b654286f56562"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/text-session/linux-x64-gcc13-preview-a1a1d1239b/source-inputs.zip",
+        "sha256": "b4715943ab5c66cc7870c49d4ec8ce4e06af0dc10b2024d6198874903e347838"
+      },
+      "later_changes": [],
+      "passed_checks": 0
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "render",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/text-session/linux-x64-gcc13-render-e62b839ab9/result.json",
+        "sha256": "6407def9659381f3d0cbaa5a63de4a6850a977bbcdbb9d6b2445acff9ae9e1bf"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/text-session/linux-x64-gcc13-render-e62b839ab9/source-inputs.zip",
+        "sha256": "b4715943ab5c66cc7870c49d4ec8ce4e06af0dc10b2024d6198874903e347838"
+      },
+      "later_changes": [],
+      "passed_checks": 12
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "test",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/text-session/linux-x64-gcc13-test-8ec784fdb6/result.json",
+        "sha256": "70edabd54f888cfb8ca0f645116458db17c086a63c502b4c1758fdbcff34e5e2"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/text-session/linux-x64-gcc13-test-8ec784fdb6/source-inputs.zip",
+        "sha256": "b4715943ab5c66cc7870c49d4ec8ce4e06af0dc10b2024d6198874903e347838"
+      },
+      "later_changes": [],
+      "passed_checks": 320
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "text",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/text-session/linux-x64-gcc13-text-ab3becff54/result.json",
+        "sha256": "d37b0451288274be88dfbd3b5d84453a13412054d5b198a88ee98a85604a8262"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/text-session/linux-x64-gcc13-text-ab3becff54/source-inputs.zip",
+        "sha256": "dc5a122d40b505d72ce1ec07b2bbdf433518446c61dc576ffa3e5a5a5e9e7538"
+      },
+      "later_changes": [
+        "source/rendering/scene_chart.cpp",
+        "source/rendering/scene_chart.hpp",
+        "source/rendering/scene_surface.cpp",
+        "source/rendering/scene_table.cpp",
+        "source/rendering/scene_table.hpp",
+        "source/rendering/scene_text.cpp",
+        "source/rendering/scene_text.hpp",
+        "source/rendering/scene_visibility.cpp",
+        "source/rendering/scene_visibility.hpp"
+      ],
+      "passed_checks": 3
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "text-build",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/text-session/linux-x64-gcc13-text-build-a8e5b792a6/result.json",
+        "sha256": "866f0ffaca8c9eaf5e06e16188be5dfaf169f5da836c95db9cd32ca76daf0e91"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/text-session/linux-x64-gcc13-text-build-a8e5b792a6/source-inputs.zip",
+        "sha256": "dc5a122d40b505d72ce1ec07b2bbdf433518446c61dc576ffa3e5a5a5e9e7538"
+      },
+      "later_changes": [
+        "source/rendering/scene_chart.cpp",
+        "source/rendering/scene_chart.hpp",
+        "source/rendering/scene_surface.cpp",
+        "source/rendering/scene_table.cpp",
+        "source/rendering/scene_table.hpp",
+        "source/rendering/scene_text.cpp",
+        "source/rendering/scene_text.hpp",
+        "source/rendering/scene_visibility.cpp",
+        "source/rendering/scene_visibility.hpp"
+      ],
+      "passed_checks": 0
+    },
+    {
+      "profile": "windows-x64-gcc15",
+      "action": "build",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/text-session/windows-x64-gcc15-build-2a777fbac5/result.json",
+        "sha256": "5b6ba81bda979555fe04bf46661bfe56363278574cccf49f26ddefe3d4bd64b9"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/text-session/windows-x64-gcc15-build-2a777fbac5/source-inputs.zip",
+        "sha256": "7cfc6232c7015222d7c76197f143b3909b335464cf0ba1f5d6d7d23fa9a93f58"
+      },
+      "later_changes": [],
+      "passed_checks": 0
+    },
+    {
+      "profile": "windows-x64-gcc15",
+      "action": "configure",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/text-session/windows-x64-gcc15-configure-cebbc24bf1/result.json",
+        "sha256": "20f6edf558cb8b60f07422362b8749bbc62c81e2af992341027b166d6362473b"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/text-session/windows-x64-gcc15-configure-cebbc24bf1/source-inputs.zip",
+        "sha256": "7cfc6232c7015222d7c76197f143b3909b335464cf0ba1f5d6d7d23fa9a93f58"
+      },
+      "later_changes": [],
+      "passed_checks": 0
+    },
+    {
+      "profile": "windows-x64-gcc15",
+      "action": "test",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/text-session/windows-x64-gcc15-test-a479d536ee/result.json",
+        "sha256": "78bce06de508963192f4db0e4042aefd4e4cb99420423766eb7a4c6486841166"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/text-session/windows-x64-gcc15-test-a479d536ee/source-inputs.zip",
+        "sha256": "7cfc6232c7015222d7c76197f143b3909b335464cf0ba1f5d6d7d23fa9a93f58"
+      },
+      "later_changes": [],
+      "passed_checks": 320
+    },
+    {
+      "profile": "windows-x86-v141-xp",
+      "action": "build",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/text-session/windows-x86-v141-xp-build-da9713d8c0/result.json",
+        "sha256": "a62373577eb03135907bf127359a5481399a6999aa18695d7f589bbb5417e7e2"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/text-session/windows-x86-v141-xp-build-da9713d8c0/source-inputs.zip",
+        "sha256": "7cfc6232c7015222d7c76197f143b3909b335464cf0ba1f5d6d7d23fa9a93f58"
+      },
+      "later_changes": [],
+      "passed_checks": 0
+    },
+    {
+      "profile": "windows-x86-v141-xp",
+      "action": "configure",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/text-session/windows-x86-v141-xp-configure-b35fcab36e/result.json",
+        "sha256": "b734269892096c6cc3a31b79732bdd42f67ae07c93bf67197960b04d17605704"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/text-session/windows-x86-v141-xp-configure-b35fcab36e/source-inputs.zip",
+        "sha256": "7cfc6232c7015222d7c76197f143b3909b335464cf0ba1f5d6d7d23fa9a93f58"
+      },
+      "later_changes": [],
+      "passed_checks": 0
+    },
+    {
+      "profile": "windows-x86-v141-xp",
+      "action": "legacy",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/text-session/windows-x86-v141-xp-legacy-42750708b4/result.json",
+        "sha256": "a205991f21ed30a2c4aa6ae604439b6604fc0625b8a6885b232ed1d9d2515e99"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/text-session/windows-x86-v141-xp-legacy-42750708b4/source-inputs.zip",
+        "sha256": "7cfc6232c7015222d7c76197f143b3909b335464cf0ba1f5d6d7d23fa9a93f58"
+      },
+      "later_changes": [],
+      "passed_checks": 2
+    },
+    {
+      "profile": "windows-x86-v141-xp",
+      "action": "test",
+      "exit": 0,
+      "record": {
+        "local_path": "out/evidence/text-session/windows-x86-v141-xp-test-973ae21aec/result.json",
+        "sha256": "1213848f1955d6fb921e8bdc0968dd84e36f430f6856ae96330a292aeb64d136"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/text-session/windows-x86-v141-xp-test-973ae21aec/source-inputs.zip",
+        "sha256": "7cfc6232c7015222d7c76197f143b3909b335464cf0ba1f5d6d7d23fa9a93f58"
+      },
+      "later_changes": [],
+      "passed_checks": 320
+    }
+  ],
+  "portable_checks": {
+    "linux-x64-gcc13": 320,
+    "windows-x64-gcc15": 320,
+    "windows-x86-v141-xp": 320
+  },
+  "legacy_artifact_checks": 2,
+  "text_checks": 3,
+  "render_checks": 12,
+  "recovery_case_families": {
+    "INSTALLED-EDITOR": 15,
+    "FRONTEND-RECOVERY": 14,
+    "INSTALLED-SETTINGS": 12,
+    "INSTALLED-RECOVERY": 14,
+    "EDITOR-RECOVERY": 14,
+    "RECOVERY-LIMITS": 6,
+    "RECOVERY-PREPARATION": 8
+  },
+  "recovery_native_cases": 83,
+  "text_and_render_case_families": {
+    "ROLE-COMPOSITION": 19,
+    "SCENE-ERASURE": 3,
+    "IMAGE-ERASURE": 3,
+    "CHART-ERASURE": 3,
+    "TABLE-ERASURE": 3,
+    "CONTENT-ERASURE": 3,
+    "TEXT-RASTER": 27,
+    "TEXT-SESSION": 4,
+    "THEME-TYPOGRAPHY": 11,
+    "VISIBILITY-PIXELS": 3
+  },
+  "native": [
+    {
+      "family": "INSTALLED-EDITOR",
+      "outcome": "pass",
+      "cases": 15,
+      "archive": {
+        "local_path": "out/evidence/text-session-native/editor-frontend-019fb0a472.zip",
+        "sha256": "448f75a8825f6fd63b8fb31f750b9ba4449dd539a4efbcc676f98a9132d761b1"
+      },
+      "record": {
+        "local_path": "out/evidence/text-session-native/editor-frontend-019fb0a472.json",
+        "sha256": "046f5445d505b04c9135bdeddf6f7263464cf4ff0a0d69b5c232b8b6862ca165"
+      },
+      "inventory": {
+        "local_path": "out/evidence/text-session-native/editor-frontend-019fb0a472.index.json",
+        "sha256": "efcfc23498b53fa1b79f96a0ff6d71f25fbb0dc269b819ef18cfaf643ff6b20e"
+      }
+    },
+    {
+      "family": "FRONTEND-RECOVERY",
+      "outcome": "pass",
+      "cases": 14,
+      "archive": {
+        "local_path": "out/evidence/text-session-native/fr-c04f3b480c.zip",
+        "sha256": "d6d5b8c19feb9ae236266461cc1f3fa8f4f2ddd9f5a12edd1b6a4ec7f283bd3d"
+      },
+      "record": {
+        "local_path": "out/evidence/text-session-native/fr-c04f3b480c.json",
+        "sha256": "0c7eece373c13155da3fa5d9f0e721a633acab4283deee6e9fce5104c79042cd"
+      },
+      "inventory": {
+        "local_path": "out/evidence/text-session-native/fr-c04f3b480c.index.json",
+        "sha256": "a88be235ce005118d9575959812a4898f049bba680c4106b411aa4a6dc9315fc"
+      }
+    },
+    {
+      "family": "INSTALLED-SETTINGS",
+      "outcome": "pass",
+      "cases": 12,
+      "archive": {
+        "local_path": "out/evidence/text-session-native/frontend-1254b51c16.zip",
+        "sha256": "d4c256aa22d55a4f09e18bf6306218130a24764240bb1d291024bc8a7d5773cf"
+      },
+      "record": {
+        "local_path": "out/evidence/text-session-native/frontend-1254b51c16.json",
+        "sha256": "4d1544ef32fa14404acbe888e14cd3abc7272d2b8ff55bdc2e63619845b03dfc"
+      },
+      "inventory": {
+        "local_path": "out/evidence/text-session-native/frontend-1254b51c16.index.json",
+        "sha256": "71413c023a5e09ba34786af7a182a5d5d948cc227c99dfed24fa8048e6c2c80d"
+      }
+    },
+    {
+      "family": "INSTALLED-RECOVERY",
+      "outcome": "pass",
+      "cases": 14,
+      "archive": {
+        "local_path": "out/evidence/text-session-native/ir-7d36a6d27a.zip",
+        "sha256": "8fdd58af7168e51ca547775fd3d17f0afa23d627dab96c966d31214289af26d3"
+      },
+      "record": {
+        "local_path": "out/evidence/text-session-native/ir-7d36a6d27a.json",
+        "sha256": "930bb881954874cc5cb89e3c7d8f7f2482c9e299013ee6771b284bade7e4170e"
+      },
+      "inventory": {
+        "local_path": "out/evidence/text-session-native/ir-7d36a6d27a.index.json",
+        "sha256": "3af4f205c3b520179156f6007008edcdbc3853f48802a678627537759e6dd8c7"
+      }
+    },
+    {
+      "family": "EDITOR-RECOVERY",
+      "outcome": "pass",
+      "cases": 14,
+      "archive": {
+        "local_path": "out/evidence/text-session-native/recovery-controls-abd956b68777.zip",
+        "sha256": "4297cce141ff31402c531ea9bead5ac9948b7042a53226ffbee4721f84a0290d"
+      },
+      "record": {
+        "local_path": "out/evidence/text-session-native/recovery-controls-abd956b68777.json",
+        "sha256": "4a68f5948738be74357d91a3300430395fabb953100fd037db7584f7d067e361"
+      },
+      "inventory": {
+        "local_path": "out/evidence/text-session-native/recovery-controls-abd956b68777.index.json",
+        "sha256": "9dd77df4d94b9e2d32b502f85843b59dc9a93e196a9aaafc525d6f5d4cbbf38e"
+      }
+    },
+    {
+      "family": "RECOVERY-GUI-LIMITS",
+      "outcome": "fail",
+      "cases": 7,
+      "archive": {
+        "local_path": "out/evidence/text-session-native/rgl-2ee5c5033f.zip",
+        "sha256": "64a53bc2b8d9b758b3e036b5869adbd65baea67ddc6c4199c6dc3b9ff3c5117e"
+      },
+      "record": {
+        "local_path": "out/evidence/text-session-native/rgl-2ee5c5033f.json",
+        "sha256": "39f45586115e8157cf1cde71c183ac8e1cd9be38d36d40319885e2f264c82f24"
+      },
+      "inventory": {
+        "local_path": "out/evidence/text-session-native/rgl-2ee5c5033f.index.json",
+        "sha256": "f68214dad6cf7d0f074a2c1f30f2531cec9aaa73b02411b27feb4373ef587dd7"
+      }
+    },
+    {
+      "family": "RECOVERY-LIMITS",
+      "outcome": "pass",
+      "cases": 6,
+      "archive": {
+        "local_path": "out/evidence/text-session-native/rl-6385dd7a4b.zip",
+        "sha256": "66a2aee80b719a7025361fc97f6a4f4971b91fc0e2b2dfa710fc0666bdb2ad07"
+      },
+      "record": {
+        "local_path": "out/evidence/text-session-native/rl-6385dd7a4b.json",
+        "sha256": "ee9423c51bbc77032132d02f04710745374ea892d85a3ade82c07389e33a1a2a"
+      },
+      "inventory": {
+        "local_path": "out/evidence/text-session-native/rl-6385dd7a4b.index.json",
+        "sha256": "0b1750df059fa4cbde8b1c3aa2f9a3336203919035b0da6016586a81fd7a8716"
+      }
+    },
+    {
+      "family": "RECOVERY-PREVIEW-COST",
+      "outcome": "pass",
+      "cases": 2,
+      "archive": {
+        "local_path": "out/evidence/text-session-native/rl-901b641bfd.zip",
+        "sha256": "2cf8c6952c75b3295f3ac68e1966dd388219834fa7c4f4d92362151d15a38e7a"
+      },
+      "record": {
+        "local_path": "out/evidence/text-session-native/rl-901b641bfd.json",
+        "sha256": "b92ec2d426ae2afdec33f729c0caa1f21d2ee6e9296f14628bdf12ab3919d33c"
+      },
+      "inventory": {
+        "local_path": "out/evidence/text-session-native/rl-901b641bfd.index.json",
+        "sha256": "457ad562f1174ba8683c964a6037af26001f2d4a8a97ae8a9768771d9a0fbbcb"
+      }
+    },
+    {
+      "family": "ROLE-COMPOSITION",
+      "outcome": "pass",
+      "cases": 19,
+      "archive": {
+        "local_path": "out/evidence/text-session-native/roles-d20a8d3e148c.zip",
+        "sha256": "5d1ecf92c6dd7900587bbd7cc69361246c6b04e9b95536326cdacc96481124f3"
+      },
+      "record": {
+        "local_path": "out/evidence/text-session-native/roles-d20a8d3e148c.json",
+        "sha256": "e5da6fa9dbd70e28837d614bd9df0055931997d1030e5298c347334bef4b06b8"
+      },
+      "inventory": {
+        "local_path": "out/evidence/text-session-native/roles-d20a8d3e148c.index.json",
+        "sha256": "935fff65e7d99c530a9b968507fd130464c745f7a8b15e2ea298dedf98e2df53"
+      }
+    },
+    {
+      "family": "RECOVERY-PREPARATION",
+      "outcome": "pass",
+      "cases": 8,
+      "archive": {
+        "local_path": "out/evidence/text-session-native/rp-26cbadafa2.zip",
+        "sha256": "c0ad0b3dbf5250068bbdef704af97817e828cf06c5f6bd79e238f9ab74acfbee"
+      },
+      "record": {
+        "local_path": "out/evidence/text-session-native/rp-26cbadafa2.json",
+        "sha256": "cc67a0a9dbdc491e2b47c9d9e7b987ccc879bb04a6c67b91bc51ec849cfcdd10"
+      },
+      "inventory": {
+        "local_path": "out/evidence/text-session-native/rp-26cbadafa2.index.json",
+        "sha256": "3dc9010688f72e9b870d87e99d7da7da010e6f834d30fbc39dc7a24edd34c931"
+      }
+    },
+    {
+      "family": "SCENE-ERASURE",
+      "outcome": "pass",
+      "cases": 3,
+      "archive": {
+        "local_path": "out/evidence/text-session-native/surface-0a14a6d158c6.zip",
+        "sha256": "aeac20cd90f19cbb6f3ef1463b24bfa1cd47522367fdef4e9fa63da743acf9c7"
+      },
+      "record": {
+        "local_path": "out/evidence/text-session-native/surface-0a14a6d158c6.json",
+        "sha256": "f7a7f7fb916fbb8e626b374e57ef95b3c2448c1d2c297094ed44403939c0151d"
+      },
+      "inventory": {
+        "local_path": "out/evidence/text-session-native/surface-0a14a6d158c6.index.json",
+        "sha256": "bb4714878e292410dc10c9cc7f0fc5addaf3ee7d7656396c607c6fcb133beba3"
+      }
+    },
+    {
+      "family": "IMAGE-ERASURE",
+      "outcome": "pass",
+      "cases": 3,
+      "archive": {
+        "local_path": "out/evidence/text-session-native/surface-38b3843a64c0.zip",
+        "sha256": "087c44645fd379556986789e4185405d0261d14942c549eafe79c9ad8fd036e7"
+      },
+      "record": {
+        "local_path": "out/evidence/text-session-native/surface-38b3843a64c0.json",
+        "sha256": "122daf2b07c8f6b5b26648de8a1c50173e85ccd451cc0a1788e37e6988d4bbea"
+      },
+      "inventory": {
+        "local_path": "out/evidence/text-session-native/surface-38b3843a64c0.index.json",
+        "sha256": "28eed20401b690fac8184c394a9bce76deb95fdd8ed9911bbfca8808f258f3a3"
+      }
+    },
+    {
+      "family": "CHART-ERASURE",
+      "outcome": "pass",
+      "cases": 3,
+      "archive": {
+        "local_path": "out/evidence/text-session-native/surface-8fa75b4b5492.zip",
+        "sha256": "33e940e75b130aaee013960f5c619360a931de6e7f87721b50aeb669796e84e4"
+      },
+      "record": {
+        "local_path": "out/evidence/text-session-native/surface-8fa75b4b5492.json",
+        "sha256": "24a4f742f8c14a39018204141dd3c2d77d968d45dc2fad8d81b43eb4d4121e2d"
+      },
+      "inventory": {
+        "local_path": "out/evidence/text-session-native/surface-8fa75b4b5492.index.json",
+        "sha256": "4bcb79e365b42755b4f5c89864db949f649ee93d1b48fb7c4fc1d173ac76768c"
+      }
+    },
+    {
+      "family": "TABLE-ERASURE",
+      "outcome": "pass",
+      "cases": 3,
+      "archive": {
+        "local_path": "out/evidence/text-session-native/surface-d6df18fbbdff.zip",
+        "sha256": "6db5fd28270de4438643f7939707280ab2b28241d8ff361c8c9ca5868cdc5fde"
+      },
+      "record": {
+        "local_path": "out/evidence/text-session-native/surface-d6df18fbbdff.json",
+        "sha256": "18ca234069bbb627d8d33d079412e84644bc3fe27b2d08a51dfad3f4a16dea70"
+      },
+      "inventory": {
+        "local_path": "out/evidence/text-session-native/surface-d6df18fbbdff.index.json",
+        "sha256": "ab505e5f948e632312e3bc8e716c08ddb4818dec09c58e17e115b40562fc5eee"
+      }
+    },
+    {
+      "family": "CONTENT-ERASURE",
+      "outcome": "pass",
+      "cases": 3,
+      "archive": {
+        "local_path": "out/evidence/text-session-native/surface-e93ef676157b.zip",
+        "sha256": "173188d674b647e997db7beb057fb165abde3d9fc2ee2190fa43647e7930d924"
+      },
+      "record": {
+        "local_path": "out/evidence/text-session-native/surface-e93ef676157b.json",
+        "sha256": "62e3ac90f54987c9213cb70b63838dc4a5ea75089dea526c62d30cf8d8233187"
+      },
+      "inventory": {
+        "local_path": "out/evidence/text-session-native/surface-e93ef676157b.index.json",
+        "sha256": "2ff6cdecc893ba429c2506089d13b5ae99bd6f0a21d6ee1359c3cd5b2216db21"
+      }
+    },
+    {
+      "family": "TEXT-RASTER",
+      "outcome": "pass",
+      "cases": 27,
+      "archive": {
+        "local_path": "out/evidence/text-session-native/text-64c320eb17d8.zip",
+        "sha256": "28d4fb3195c33c8730ebdbbc17b6b8e4de488c43e47a7d947cd77cc0f4427a7d"
+      },
+      "record": {
+        "local_path": "out/evidence/text-session-native/text-64c320eb17d8.json",
+        "sha256": "464b39e576cb4248edfd66335245fe8925e0f63d0e5e3838ec6597f3c6bcf9fe"
+      },
+      "inventory": {
+        "local_path": "out/evidence/text-session-native/text-64c320eb17d8.index.json",
+        "sha256": "de455a73b1d4025eefb51d46dacb93783569097744a0e5b166ef60a336b6112e"
+      }
+    },
+    {
+      "family": "TEXT-SESSION",
+      "outcome": "pass",
+      "cases": 4,
+      "archive": {
+        "local_path": "out/evidence/text-session-native/text-session-65edbca1922a.zip",
+        "sha256": "e703c8e19eeb3c95d5f9d83bea2c4e8dfaa217038eacab51a195e47b10e5f6e9"
+      },
+      "record": {
+        "local_path": "out/evidence/text-session-native/text-session-65edbca1922a.json",
+        "sha256": "cac721eb029b43ca1891027e9ff58979d59ae9688d4f0ca39e707cdd09ff3e06"
+      },
+      "inventory": {
+        "local_path": "out/evidence/text-session-native/text-session-65edbca1922a.index.json",
+        "sha256": "d8422f341883fd029040becfcfe868910af5f13a9e35e09108ce628ab83bea4d"
+      }
+    },
+    {
+      "family": "THEME-TYPOGRAPHY",
+      "outcome": "pass",
+      "cases": 11,
+      "archive": {
+        "local_path": "out/evidence/text-session-native/typography-ef89ef2f6147.zip",
+        "sha256": "0d1ad6f7a748aca57efc630b2eb68e7b8f66251eb46953bba21495651ff9720b"
+      },
+      "record": {
+        "local_path": "out/evidence/text-session-native/typography-ef89ef2f6147.json",
+        "sha256": "e9e979c4d90ea6607df68d3d14afc4ae458b4acb7885b0dc5c9fb7ebfb5b26a6"
+      },
+      "inventory": {
+        "local_path": "out/evidence/text-session-native/typography-ef89ef2f6147.index.json",
+        "sha256": "11abd2cbfbb1b477587b6554cb322950abf2d6002e1e68a4a0daa3625553c2c4"
+      }
+    },
+    {
+      "family": "VISIBILITY-PIXELS",
+      "outcome": "pass",
+      "cases": 3,
+      "archive": {
+        "local_path": "out/evidence/text-session-native/visibility-e84624ca9c53.zip",
+        "sha256": "8784ef15a153158107d19444feddc315c7223478e467f2233c03b9d8869edf0c"
+      },
+      "record": {
+        "local_path": "out/evidence/text-session-native/visibility-e84624ca9c53.json",
+        "sha256": "821c4f38a00fb40453851058a4f9bd740c08b8fc0d487c0494657480d6f90c3b"
+      },
+      "inventory": {
+        "local_path": "out/evidence/text-session-native/visibility-e84624ca9c53.index.json",
+        "sha256": "9e02b8887dc9d93bf37c936360c0155cbdd1bbebc48d645682468e6347725244"
+      }
+    }
+  ],
+  "gui_outcome": "fail",
+  "gui_cases": [
+    {
+      "case": "MAX-WIDGETS",
+      "outcome": "fail",
+      "elapsed_seconds": 10.411774527980015,
+      "timing_max_us": {
+        "delay_us": 224224,
+        "work_us": 209836
+      },
+      "failure": "Traceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_installed_editor.py\", line 228, in observe\n    extension(dict(locals(),process=lambda:proc));report['outcome']='pass';return\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_recovery_gui_limits.py\", line 73, in exercise\n    assert not violations,('GUI timing limit exceeded',violations)\n           ^^^^^^^^^^^^^^\nAssertionError: ('GUI timing limit exceeded', [{'index': 160, 'pid': 1102816, 'work_us': 220, 'delay_us': 195180}, {'index': 197, 'pid': 1102816, 'work_us': 261, 'delay_us': 224224}, {'index': 227, 'pid': 1102816, 'work_us': 181146, 'delay_us': 47187}, {'index': 244, 'pid': 1102816, 'work_us': 209836, 'delay_us': 0}])\n",
+      "input_bytes": 76361,
+      "input_sha256": "9021dfedefb32a85d6334222fd581b7ff05f719b3d6b4d43c6878332b0705927",
+      "scene_sha256": "0b93e8e7d3652e9c6bbd715eadef1f094f2e4b4e4b6e0dc2ffe95da6257ecc5f",
+      "timing_samples": 269,
+      "timing_violations": 4,
+      "native_children": 6
+    },
+    {
+      "case": "MAX-SCENE",
+      "outcome": "fail",
+      "elapsed_seconds": 10.690028602984967,
+      "timing_max_us": {
+        "delay_us": 250549,
+        "work_us": 238066
+      },
+      "failure": "Traceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_installed_editor.py\", line 228, in observe\n    extension(dict(locals(),process=lambda:proc));report['outcome']='pass';return\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_recovery_gui_limits.py\", line 73, in exercise\n    assert not violations,('GUI timing limit exceeded',violations)\n           ^^^^^^^^^^^^^^\nAssertionError: ('GUI timing limit exceeded', [{'index': 156, 'pid': 1103023, 'work_us': 197, 'delay_us': 186365}, {'index': 209, 'pid': 1103023, 'work_us': 255, 'delay_us': 250549}, {'index': 286, 'pid': 1103023, 'work_us': 178139, 'delay_us': 0}, {'index': 330, 'pid': 1103023, 'work_us': 238066, 'delay_us': 0}])\n",
+      "input_bytes": 275281,
+      "input_sha256": "d844740dbf64c5c3f7afad00bcaf690b351348bd6af6d359d918e9b7099fd448",
+      "scene_sha256": "0f113fe0107be93ae5c6c4238afd2be1ee43b6d63cfb82d01ff25a62ee96c2e8",
+      "timing_samples": 371,
+      "timing_violations": 4,
+      "native_children": 5
+    },
+    {
+      "case": "MAX-RECORD",
+      "outcome": "fail",
+      "elapsed_seconds": 11.217092235019663,
+      "timing_max_us": {
+        "delay_us": 226609,
+        "work_us": 218802
+      },
+      "failure": "Traceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_installed_editor.py\", line 228, in observe\n    extension(dict(locals(),process=lambda:proc));report['outcome']='pass';return\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_recovery_gui_limits.py\", line 73, in exercise\n    assert not violations,('GUI timing limit exceeded',violations)\n           ^^^^^^^^^^^^^^\nAssertionError: ('GUI timing limit exceeded', [{'index': 176, 'pid': 1103226, 'work_us': 212, 'delay_us': 209210}, {'index': 229, 'pid': 1103226, 'work_us': 405, 'delay_us': 226609}, {'index': 310, 'pid': 1103226, 'work_us': 175885, 'delay_us': 0}, {'index': 353, 'pid': 1103226, 'work_us': 218802, 'delay_us': 0}])\n",
+      "input_bytes": 786432,
+      "input_sha256": "3aa1004502ff8dc93355097c5559164910c169fae1000948f7381c1f794f77fd",
+      "scene_sha256": "0f113fe0107be93ae5c6c4238afd2be1ee43b6d63cfb82d01ff25a62ee96c2e8",
+      "timing_samples": 398,
+      "timing_violations": 4,
+      "native_children": 7
+    },
+    {
+      "case": "MAX-COMMAND-REJECT",
+      "outcome": "pass",
+      "elapsed_seconds": 3.4274434499966446,
+      "timing_max_us": {
+        "delay_us": 8045,
+        "work_us": 31495
+      },
+      "input_bytes": 340369,
+      "input_sha256": "43737613060562b93d56718e4116945ee0dda334936a4bc347fea2816bec0a55",
+      "scene_sha256": "0f113fe0107be93ae5c6c4238afd2be1ee43b6d63cfb82d01ff25a62ee96c2e8",
+      "timing_samples": 157,
+      "timing_violations": 0,
+      "native_children": 3
+    },
+    {
+      "case": "OVER-RECORD-REJECT",
+      "outcome": "pass",
+      "elapsed_seconds": 3.023342158005107,
+      "timing_max_us": {
+        "delay_us": 7786,
+        "work_us": 32191
+      },
+      "input_bytes": 786433,
+      "input_sha256": "0e86b9b8d3e8a35e1d109b68ef07fee38eb4ec75d83b34f84aee0d35f466db78",
+      "scene_sha256": "0f113fe0107be93ae5c6c4238afd2be1ee43b6d63cfb82d01ff25a62ee96c2e8",
+      "timing_samples": 138,
+      "timing_violations": 0,
+      "native_children": 3
+    },
+    {
+      "case": "CLOSE-PREPARING",
+      "outcome": "pass",
+      "elapsed_seconds": 2.9879031350137666,
+      "timing_max_us": {
+        "delay_us": 3130,
+        "work_us": 32110
+      },
+      "observed_loading": true,
+      "input_bytes": 275281,
+      "input_sha256": "9261a04d5d6c6b7d8e0b767a1472364b348b4ad58a45d5e7a17dc35e183ee003",
+      "scene_sha256": "0f113fe0107be93ae5c6c4238afd2be1ee43b6d63cfb82d01ff25a62ee96c2e8",
+      "timing_samples": 136,
+      "timing_violations": 0,
+      "native_children": 3
+    },
+    {
+      "case": "POLICY",
+      "outcome": "fail",
+      "elapsed_seconds": 5.684854507009732,
+      "timing_max_us": {
+        "delay_us": 220026,
+        "work_us": 38320
+      },
+      "erasure_ms": 123.3738980081398,
+      "erasure_limit_ms": 200,
+      "failure": "Traceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_installed_editor.py\", line 228, in observe\n    extension(dict(locals(),process=lambda:proc));report['outcome']='pass';return\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_recovery_gui_limits.py\", line 73, in exercise\n    assert not violations,('GUI timing limit exceeded',violations)\n           ^^^^^^^^^^^^^^\nAssertionError: ('GUI timing limit exceeded', [{'index': 169, 'pid': 1103657, 'work_us': 216, 'delay_us': 220026}])\n",
+      "input_bytes": 275281,
+      "input_sha256": "b840685a44967d51e15a3bc22671c8e0b5ab96e94fd9ded071b4181dd080e14c",
+      "scene_sha256": "0f113fe0107be93ae5c6c4238afd2be1ee43b6d63cfb82d01ff25a62ee96c2e8",
+      "timing_samples": 201,
+      "timing_violations": 1,
+      "native_children": 3
+    }
+  ],
+  "gui_observed_children": 30,
+  "preview_diagnostics": [
+    {
+      "case": "MAX-WIDGETS",
+      "measurements": {
+        "base_us": 1684,
+        "binding_us": 19330,
+        "catalog_us": 1531,
+        "paint_us": 52939,
+        "resources_us": 38052,
+        "surface_state": 1,
+        "surface_us": 45817
+      },
+      "outcome": "observed"
+    },
+    {
+      "case": "MAX-SCENE",
+      "measurements": {
+        "base_us": 1623,
+        "binding_us": 26881,
+        "catalog_us": 1506,
+        "paint_us": 2647,
+        "resources_us": 57549,
+        "surface_state": 4,
+        "surface_us": 63574
+      },
+      "outcome": "observed"
+    }
+  ],
+  "workspace": {
+    "maximum_bytes": 8589934592,
+    "reservations_unchanged": true,
+    "archived_native_bytes": 1611088732
+  },
+  "preserved_failures": [
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "gui",
+      "exit": 8,
+      "record": {
+        "local_path": "out/evidence/text-session/linux-x64-gcc13-gui-ff44a43bfe/result.json",
+        "sha256": "c83b4686b959409f2b3fe20ddf16bd6133e072593d162d18ccd3212bb5d24883"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/text-session/linux-x64-gcc13-gui-ff44a43bfe/source-inputs.zip",
+        "sha256": "b4715943ab5c66cc7870c49d4ec8ce4e06af0dc10b2024d6198874903e347838"
+      },
+      "later_changes": [],
+      "passed_checks": 0
+    }
+  ],
+  "limitations": [
+    "Standalone/session byte equivalence supplements the unchanged independent text and composition oracles.",
+    "Production recovery stays disabled until full GTK qualification and its production/fixture checks pass.",
+    "Earlier transient Apply/controller replacement and native timeout failures remain preserved; later success does not explain them.",
+    "The backend change is Linux-only. Modern-host v141_xp compilation is not historical runtime qualification.",
+    "Native inspector, complete desktop/provider/lifecycle integration and all five full 0.1.0 editions remain open."
+  ],
+  "next_step": "Measure and close the ownership/proof boundary for remaining synchronous preview reconstruction and large-scene validation; preserve exact acceptance and current-policy erasure before enabling production recovery.",
+  "specification_checks": {
+    "record": {
+      "local_path": "out/evidence/text-session-spec-checks.json",
+      "sha256": "a8813422a0a852401d4d7bfcf4897994e10232d224558f60156e459a5c70d319"
+    },
+    "schemas": 51,
+    "fixtures": 183
+  }
+}

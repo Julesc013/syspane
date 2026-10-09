@@ -1,5 +1,6 @@
 #pragma once
 #include "layout.hpp"
+#include <memory>
 
 namespace syspane::rendering {
 struct TextRequest {
@@ -20,5 +21,20 @@ struct TextRaster {
 // Synchronous Linux native backend. Public/authored or synthetic text only until
 // the caller has an admitted current-policy pixel/text cache erasure owner.
 // No application cache or pointers escape; caller owns all returned bytes.
-TextRaster render_text(const TextRequest&);
+class TextSession {
+public:
+    TextSession();
+    ~TextSession();
+    TextSession(const TextSession&)=delete;
+    TextSession& operator=(const TextSession&)=delete;
+    TextSession(TextSession&&)=delete;
+    TextSession& operator=(TextSession&&)=delete;
+    // Internal, creating-thread-only scope. Owns font setup, never request data.
+    // Destroy before publishing the composition; no returned native references.
+    TextRaster render(const TextRequest&);
+private:
+    struct Impl;std::unique_ptr<Impl> impl_;
+};
+// Optional borrowed session is used only for this synchronous call.
+TextRaster render_text(const TextRequest&,TextSession* session=nullptr);
 }

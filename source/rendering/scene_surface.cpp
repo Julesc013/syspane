@@ -157,6 +157,9 @@ struct SceneSurface::Impl {
     }
     std::unique_ptr<SurfaceFrame> compose(std::uint64_t now,const std::map<std::string,m::Tick>& ticks){
         prepare_histories();
+        // Font setup lives only until this composition returns (including failures).
+        // Contexts and layouts remain independent for every request.
+        TextSession text_session;
         if(policy.forced.count("display.theme_id"))need(policy.forced.at("display.theme_id")==config.resources->theme()["theme_id"],"surface.theme_policy");
         images->prepare(config);
         auto next=std::make_unique<SurfaceFrame>();next->theme_pin=config.resources->theme_pin();
@@ -194,7 +197,7 @@ struct SceneSurface::Impl {
             if(kind!="group"){
                 const auto& d=display_for(w,config.topology);TextRequest q;q.text=out.text;q.theme=config.resources->theme();q.language=config.language;q.contrast=config.contrast;
                 q.numerator=d.scale_numerator;q.denominator=d.scale_denominator;q.pixel_budget=std::min(std::size_t{4194304},8388608-display_pixels-leaf_pixels);
-                need(q.pixel_budget>0,"surface.capacity");auto raster=image?images->raster(w,q,out):chart?raster_chart(q,out,*plot,8388608-display_pixels-leaf_pixels):table?raster_table(q,out,8388608-display_pixels-leaf_pixels):typography?render_blocks(q,out.blocks,8388608-display_pixels-leaf_pixels):render_text(q);need(!raster.missing_glyphs,"surface.glyphs");
+                need(q.pixel_budget>0,"surface.capacity");auto raster=image?images->raster(w,q,out):chart?raster_chart(q,out,*plot,8388608-display_pixels-leaf_pixels,&text_session):table?raster_table(q,out,8388608-display_pixels-leaf_pixels,&text_session):typography?render_blocks(q,out.blocks,8388608-display_pixels-leaf_pixels,&text_session):render_text(q,&text_session);need(!raster.missing_glyphs,"surface.glyphs");
                 leaf_pixels+=static_cast<std::size_t>(raster.width)*raster.height;out.fonts=raster.fonts;
                 const auto units=[&](unsigned p){return (static_cast<s::Unit>(p)*64*d.scale_denominator+d.scale_numerator-1)/d.scale_numerator;};
                 const s::Size size{units(raster.width),units(raster.height)};metrics[out.id]={size,size};rasters.emplace(out.id,std::move(raster));
@@ -203,7 +206,7 @@ struct SceneSurface::Impl {
             texts.emplace(out.id,std::move(out));
         }
         next->layout=s::resolve(config.authored.scene,config.topology,metrics);need(next->layout.state!=s::State::alternative,"surface.layout");
-        condition_surface(config,catalog,now,*next,texts,rasters,display_pixels,leaf_pixels);
+        condition_surface(config,catalog,now,*next,texts,rasters,display_pixels,leaf_pixels,&text_session);
         for(auto& d:next->displays)d.rgba.resize(static_cast<std::size_t>(d.width)*d.height*4);
         for(bool diagnostic:{false,true})
         for(const auto& node:next->layout.nodes){

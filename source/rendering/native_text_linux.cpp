@@ -5,6 +5,7 @@
 #include <cmath>
 #include <cstring>
 #include <memory>
+#include <thread>
 
 namespace syspane::rendering {
 namespace {
@@ -12,6 +13,7 @@ using U=scene::Unit;
 using protocol::Error;
 template<class T,void(*Free)(T*)> using Owned=std::unique_ptr<T,decltype(Free)>;
 void unref_map(PangoFontMap* p){g_object_unref(p);}
+using FontMap=Owned<PangoFontMap,unref_map>;
 void unref_context(PangoContext* p){g_object_unref(p);}
 void unref_layout(PangoLayout* p){g_object_unref(p);}
 bool ascii_letter(char c){return (c>='a'&&c<='z')||(c>='A'&&c<='Z');}
@@ -48,7 +50,7 @@ void color(cairo_t* cr,const std::string& s){
 void native_ok(cairo_t* cr,cairo_surface_t* surface){
     if(cairo_status(cr)!=CAIRO_STATUS_SUCCESS||cairo_surface_status(surface)!=CAIRO_STATUS_SUCCESS)throw Error("text.native");
 }
-TextRaster render(const TextRequest& r){
+TextRaster render_native(const TextRequest& r,FontMap& map){
     const auto resolved=configuration::theme_font(r.theme,r.role);
     text_valid(r.text,4096,1024,true);
     const auto& family=resolved.family;
@@ -62,9 +64,11 @@ TextRaster render(const TextRequest& r){
        (r.wrap_units&&(*r.wrap_units<64||*r.wrap_units>32768*64))||
        !r.pixel_budget||r.pixel_budget>4194304)throw Error("text.input");
 
-    Owned<PangoFontMap,unref_map> map(pango_cairo_font_map_new(),unref_map);
-    if(!map)throw Error("text.native");
-    pango_cairo_font_map_set_resolution(PANGO_CAIRO_FONT_MAP(map.get()),96);
+    if(!map){
+        map.reset(pango_cairo_font_map_new());
+        if(!map)throw Error("text.native");
+        pango_cairo_font_map_set_resolution(PANGO_CAIRO_FONT_MAP(map.get()),96);
+    }
     Owned<PangoContext,unref_context> context(pango_font_map_create_context(map.get()),unref_context);
     if(!context)throw Error("text.native");
     Owned<cairo_font_options_t,cairo_font_options_destroy> options(cairo_font_options_create(),cairo_font_options_destroy);
@@ -148,7 +152,18 @@ TextRaster render(const TextRequest& r){
     return result;
 }
 }
-TextRaster render_text(const TextRequest& r){
-    try{return render(r);}catch(const std::bad_alloc&){throw Error("text.capacity");}
+struct TextSession::Impl {
+    const std::thread::id owner=std::this_thread::get_id();
+    FontMap map{nullptr,unref_map};
+};
+TextSession::TextSession(){try{impl_=std::make_unique<Impl>();}catch(const std::bad_alloc&){throw Error("text.capacity");}}
+TextSession::~TextSession()=default;
+TextRaster TextSession::render(const TextRequest& r){
+    if(std::this_thread::get_id()!=impl_->owner)throw Error("text.owner");
+    try{return render_native(r,impl_->map);}catch(const std::bad_alloc&){throw Error("text.capacity");}
+}
+TextRaster render_text(const TextRequest& r,TextSession* session){
+    if(session)return session->render(r);
+    TextSession isolated;return isolated.render(r);
 }
 }

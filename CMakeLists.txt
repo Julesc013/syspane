@@ -508,6 +508,9 @@ if(BUILD_TESTING)
         add_test(NAME native.TEXT-RASTER COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/scene/native_text.py"
             "$<TARGET_FILE:syspane_text_probe>" "${CMAKE_BINARY_DIR}/native-evidence")
         set_tests_properties(native.TEXT-RASTER PROPERTIES TIMEOUT 90)
+        add_test(NAME native.TEXT-SESSION COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/scene/native_text_session.py"
+            "$<TARGET_FILE:syspane_text_probe>" "${CMAKE_BINARY_DIR}/native-evidence")
+        set_tests_properties(native.TEXT-SESSION PROPERTIES TIMEOUT 90)
         add_executable(syspane_role_composition_probe tests/scene/role_composition_probe.cpp)
         target_link_libraries(syspane_role_composition_probe PRIVATE syspane_scene_surface syspane_scene_inspector syspane_network_publication)
         add_test(NAME native.ROLE-COMPOSITION COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/scene/native_role_composition.py"

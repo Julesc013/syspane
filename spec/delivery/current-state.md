@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-09T04:35:52.762922+00:00", "scope": "Compiled schema graph, frozen equivalence and preserved GTK failures"}
+updated: {"by": "codex", "at": "2026-10-09T04:56:50.472455+00:00", "scope": "Composition-scoped native text, frozen pixels and preserved GUI timing failures"}
 ---
 
 # Current state and next admitted boundary
@@ -22,13 +22,13 @@ recordings are local ignored `out/` content; the retired root is absent from the
 tracked tree. See `docs/developers/build.md` in the repository for checkout
 setup and the [repository contract](../foundation/repository.md) for ownership.
 
-The [compiled-schema checkpoint](recovery-hotpaths-handoff.md) preserves 5823
-pre-change outcomes on all three toolchains and passes 960 selected checks plus
-83 native regression cases. The immutable graph retains no authored data or
-validation results. Full GTK recovery qualification still fails; production remains
-disabled. Next repair synchronous text/preview work under the linked package,
-investigate the Apply/controller observations, and rerun the unchanged GUI cases.
-W-11 and all five complete editions remain open.
+The [native text session checkpoint](text-session-handoff.md) preserves exact
+standalone rendering while reusing font setup within one composition. First paint
+for 256 widgets now measures about 53 ms; 960 selected portable checks, 83 recovery
+cases and the native renderer/erasure checks pass. Full GTK timing still fails,
+so production recovery remains disabled. Next close and repair remaining large-scene
+preview/validation/control work, preserve the Apply/controller observations, and
+rerun the fixed GUI cases. W-11 and all five complete editions remain open.
 
 The [frontend recovery backend](frontend-recovery-handoff.md) now uses authenticated
 profile 0.2, current native admission and exact accepted-request retirement metadata.

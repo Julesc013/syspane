@@ -23,6 +23,17 @@ all three toolchains before the evaluator change. The runner cannot regenerate i
 expectations. Preserve a discrepancy and investigate it alongside the independent
 schema fixtures and semantic tests. This check does not qualify GUI responsiveness.
 
+The [native text session package](../../spec/delivery/packages/w-11-text-session.md)
+reuses Linux font setup within one synchronous composition. Run `ctest --preset
+linux-x64-gcc13 -R '^native[.](TEXT-RASTER|TEXT-SESSION|THEME-TYPOGRAPHY)$'
+after building. TEXT-SESSION compares 30 frozen original requests in isolation and
+three shared-session orders, including exact pixels/errors, rejection recovery and
+wrong-thread refusal. Expected results are pinned to the recorded font runtime.
+Retain the scene/role/visibility/table/chart/image and erasure checks when changing
+composition. A TextSession must die before frame publication; requests and retained
+objects must never store its borrowed pointer. The test-only probe joins its
+wrong-thread witness before continuing; production gains no thread or scheduler.
+
 The [recovery limits package](../../spec/delivery/packages/w-11-recovery-limits.md)
 and [GTK observation contract](../../spec/delivery/packages/w-11-recovery-gui-limits.md)
 freeze maximum valid inputs independently of product output. After ordinary preflight,

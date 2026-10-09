@@ -18,7 +18,7 @@ bool intersects(const s::Rect& a,const s::Rect& b){return a.x<b.x+b.width&&b.x<a
 }
 void condition_surface(const SurfaceConfig& cfg,const std::vector<s::BindingInput>& inputs,std::uint64_t now,
     SurfaceFrame& frame,std::map<std::string,SurfaceText>& texts,std::map<std::string,TextRaster>& rasters,
-    std::size_t display_pixels,std::size_t& leaf_pixels){
+    std::size_t display_pixels,std::size_t& leaf_pixels,TextSession* session){
     if(cfg.authored.scene.at("schema_version")!="0.5.0")return;
     need(cfg.experimental_visibility,"surface.visibility_unavailable");
     s::project_scene_visibility(cfg.authored.scene,inputs,now,[&](const s::VisibilityScene& view){
@@ -49,7 +49,7 @@ void condition_surface(const SurfaceConfig& cfg,const std::vector<s::BindingInpu
             q.numerator=display->scale_numerator;q.denominator=display->scale_denominator;
             q.wrap_units=(node.pixels.width-2)*64*q.denominator/q.numerator;need(*q.wrap_units>=64,"surface.visibility_layout");
             q.pixel_budget=std::min(std::size_t{4194304},8388608-display_pixels-leaf_pixels);need(q.pixel_budget>0,"surface.capacity");
-            auto raster=render_text(q);need(!raster.missing_glyphs,"surface.glyphs");
+            auto raster=render_text(q,session);need(!raster.missing_glyphs,"surface.glyphs");
             need(raster.width<=node.pixels.width&&raster.height<=node.pixels.height,"surface.visibility_layout");
             const s::Rect rect{node.pixels.x,node.pixels.y,raster.width,raster.height};
             for(const auto& existing:warnings)need(existing.first!=node.display||!intersects(existing.second,rect),"surface.visibility_layout");
