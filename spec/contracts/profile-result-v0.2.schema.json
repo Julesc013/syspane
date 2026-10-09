@@ -1,0 +1,144 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.example.invalid/syspane/0.2.0/profile-result.schema.json",
+  "title": "SysPane profile-result 0.2",
+  "description": "Exact message shapes; native codec additionally enforces uint64, transfer, size, cursor and completion relationships.",
+  "oneOf": [
+    {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "0.2.0"
+        },
+        "query_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+        },
+        "outcome": {
+          "enum": [
+            "busy",
+            "denied",
+            "unavailable"
+          ]
+        }
+      },
+      "required": [
+        "schema_version",
+        "query_id",
+        "outcome"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "0.2.0"
+        },
+        "query_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+        },
+        "outcome": {
+          "const": "closed"
+        },
+        "transfer_id": {
+          "type": "string",
+          "pattern": "^[1-9][0-9]{0,19}$",
+          "description": "Positive uint64; the codec enforces its numeric ceiling."
+        }
+      },
+      "required": [
+        "schema_version",
+        "query_id",
+        "outcome",
+        "transfer_id"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "0.2.0"
+        },
+        "query_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+        },
+        "outcome": {
+          "const": "chunk"
+        },
+        "transfer_id": {
+          "type": "string",
+          "pattern": "^[1-9][0-9]{0,19}$",
+          "description": "Positive uint64; the codec enforces its numeric ceiling."
+        },
+        "revision": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]{0,19})$",
+          "description": "Canonical uint64; the codec enforces numeric bounds and cursor relationships."
+        },
+        "policy_generation": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]{0,19})$",
+          "description": "Canonical uint64; the codec enforces numeric bounds and cursor relationships."
+        },
+        "part": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]{0,19})$",
+          "description": "Canonical uint64; the codec enforces numeric bounds and cursor relationships."
+        },
+        "offset": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]{0,19})$",
+          "description": "Canonical uint64; the codec enforces numeric bounds and cursor relationships."
+        },
+        "part_count": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]{0,19})$",
+          "description": "Canonical uint64; the codec enforces numeric bounds and cursor relationships."
+        },
+        "part_bytes": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]{0,19})$",
+          "description": "Canonical uint64; the codec enforces numeric bounds and cursor relationships."
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "hex": {
+          "type": "string",
+          "maxLength": 8192,
+          "pattern": "^(?:[0-9a-f]{2})*$"
+        },
+        "complete": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "schema_version",
+        "query_id",
+        "outcome",
+        "transfer_id",
+        "revision",
+        "policy_generation",
+        "part",
+        "offset",
+        "part_count",
+        "part_bytes",
+        "sha256",
+        "hex",
+        "complete"
+      ],
+      "additionalProperties": false
+    }
+  ]
+}

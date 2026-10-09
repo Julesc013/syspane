@@ -216,7 +216,7 @@
         "SP-PROTOCOL",
         "SP-COMMANDS"
       ],
-      "sha256": "af0e713cd0b6d7e48487df499002a7f4097c1565c3da07c058d40a4771a344a8"
+      "sha256": "a5fe75792ec1b699ee16b07c6c60628d021fbe09f56eef128cb35a8cded60e17"
     },
     {
       "id": "SP-VERSIONS",
@@ -227,7 +227,7 @@
         "SP-PROTOCOL",
         "SP-CHANGES"
       ],
-      "sha256": "bf379bd165e6b832d0b33979e1c9a1c5b94e65e439e79ad17dd101cd154db18b"
+      "sha256": "a1e8e9e2664d9f0e8317c2bf74ca3227c3c55bde3d41575cce835ac44809dadb"
     },
     {
       "id": "SP-ADR-001",
@@ -489,7 +489,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "aa8c49d47ab780e15f5838cffe34e6f37919bc7eade21a6aa70245355421d792"
+      "sha256": "691c9fa2d9cfcae6b10934f1bf20285ff1686dc8f6ab13be138fee030c2eb4ad"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -1612,6 +1612,17 @@
         "SP-W10-RECOVERY-DRAFT"
       ],
       "sha256": "49f13c0dccff593024053a16b48451e4691087a94ad2c49c65395eebbc27cd43"
+    },
+    {
+      "id": "SP-W08-RECOVERY-TRANSFER",
+      "path": "delivery/packages/w-08-recovery-transfer.md",
+      "title": "Authenticated coherent recovery context transfer",
+      "description": "Extend the existing profile transfer with explicitly negotiated recovery observations and exact session binding.",
+      "requires": [
+        "SP-W08-RECOVERY-CONTEXT",
+        "SP-W08-PROFILE-PROJECTION"
+      ],
+      "sha256": "d4cff2f5aaffdc13f8255fb8636064d0180576880ae2608c017de4190b89e071"
     },
     {
       "id": "SP-W08-RESOURCES",
@@ -2798,6 +2809,16 @@
         "SP-RECOVERY-DRAFT-HANDOFF"
       ],
       "sha256": "7c5086819daabb10abc35e5c9c6483d2f45f4a06875e7e6d372ac3d3f4025a3f"
+    },
+    {
+      "id": "SP-RECOVERY-TRANSFER-HANDOFF",
+      "path": "delivery/recovery-transfer-handoff.md",
+      "title": "Authenticated coherent recovery context transfer",
+      "description": "Negotiated profile transfer binds saved generations and native recovery observations to the authenticated editor session.",
+      "requires": [
+        "SP-W08-RECOVERY-TRANSFER"
+      ],
+      "sha256": "77ca71329b66f20a00b442e27cc90b10b9dde1420a50cc338f76c2d7586b354e"
     },
     {
       "id": "SP-RELEASE-0-1-0",

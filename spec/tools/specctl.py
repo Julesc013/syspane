@@ -278,7 +278,8 @@ def semantic_errors(value: Any, schema_name: str, root: Path=ROOT) -> list[str]:
             for key, val in item.items():
                 # This schema's identity is a digest, which may contain only digits.
                 # Keep numeric generation checks everywhere else, including nested data.
-                recovery_digest = schema_name == 'editor-recovery' and path == ('identity',) and key == 'generation'
+                recovery_digest = key == 'generation' and ((schema_name == 'editor-recovery' and path == ('identity',)) or
+                    (schema_name == 'profile-recovery-v0.2' and path == ()))
                 if key in ('generation','revision','sequence','monotonic_ns','nanoseconds','sample_interval_ns','expected_revision','policy_generation','lost_count','transmit_bps','receive_bps') and not recovery_digest:
                     check_uint(val)
                 walk(val, path+(key,))
@@ -290,6 +291,17 @@ def semantic_errors(value: Any, schema_name: str, root: Path=ROOT) -> list[str]:
             for index, val in enumerate(item):
                 walk(val, path+(index,))
     walk(value)
+    if schema_name in ('profile-request-v0.2', 'profile-result-v0.2'):
+        for key in ('transfer_id', 'part', 'offset', 'part_count', 'part_bytes'):
+            if key in value: check_uint(value[key])
+    if schema_name == 'profile-recovery-v0.2':
+        check_uint(value['transfer_id'])
+        directory = value['directory']
+        for key in ('uid', 'state_device', 'state_inode', 'recovery_device', 'recovery_inode'):
+            check_uint(directory[key])
+        if int(directory['uid']) > 4294967295: errors.append('native uid overflow')
+        if directory['state_device'] != directory['recovery_device']: errors.append('recovery crosses native device')
+        if len(directory['path'].encode('utf-8')) > 4096: errors.append('native recovery path byte limit')
     if schema_name == 'transaction-watch':
         check_uint(value['ticket'])
     if schema_name in ('snapshot', 'snapshot-v0.2'):

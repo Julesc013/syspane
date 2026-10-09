@@ -204,3 +204,26 @@ the feature and late unsupported commands reject before preparation. Existing
 framing, parser/body/ledger bounds and raw request replay identity are unchanged.
 Linux generation 0.4/resource index 0.2 preserve exact request/artifact bytes and
 fulfilled font intent. Stored/durable facts do not assert activation or visibility.
+
+The [coherent recovery transfer](../delivery/packages/w-08-recovery-transfer.md)
+extends the existing authenticated profile endpoint with optional
+`configuration.recovery-context`, [profile-request 0.2](profile-request-v0.2.schema.json)
+and [profile-result 0.2](profile-result-v0.2.schema.json). It requires
+`configuration.profile`, both 0.2 documents and the existing 12288-byte frame floor.
+Missing required support rejects the handshake; optional incompatibility removes
+the feature. An unnegotiated 0.2 request closes the connection. A 0.2 open includes
+the expected profile and editor-session identifiers; read/close keep their existing
+fields. The single transfer slot pins its version, image and original generation.
+
+ProfileImage 0.2 part 3 contains exactly policy and recovery. The
+[recovery context](profile-recovery-v0.2.schema.json) is null or binds the connection,
+producer epoch, requested profile/editor session, transfer, revision, current policy,
+accepted selecting-record digest and native directory observations. Prepare these
+with the same committed image on the existing worker and publish only after join.
+Current disclosure/retention policy and explicit local recovery capability gate
+non-null recovery; erase permission can only tighten. The complete part retains
+the 65536-byte ceiling, and original total-image, queue, deadline and request limits
+remain unchanged. Denials reveal no recovery identity. Receiver invalidation follows
+connection, epoch and policy loss. The installed helper owner must independently
+verify directory identities and current session authority before file operations;
+received observations alone cannot enable installed recovery.

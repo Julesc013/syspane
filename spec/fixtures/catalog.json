@@ -1140,6 +1140,125 @@
       "expected": "invalid",
       "semantic": false,
       "reason": "Bounded profile transfer shapes convey no caller authority; refusal conceals profile identity."
+    },
+    {
+      "path": "fixtures/valid/profile-recovery-open.json",
+      "schema": "profile-request-v0.2",
+      "expected": "valid",
+      "semantic": true,
+      "reason": "Recovery transfer preserves exact version, session scope and native observation bounds; received paths convey no native authority."
+    },
+    {
+      "path": "fixtures/invalid/profile-recovery-no-session.json",
+      "schema": "profile-request-v0.2",
+      "expected": "invalid",
+      "semantic": true,
+      "reason": "Recovery transfer preserves exact version, session scope and native observation bounds; received paths convey no native authority."
+    },
+    {
+      "path": "fixtures/invalid/profile-recovery-open-path.json",
+      "schema": "profile-request-v0.2",
+      "expected": "invalid",
+      "semantic": true,
+      "reason": "Recovery transfer preserves exact version, session scope and native observation bounds; received paths convey no native authority."
+    },
+    {
+      "path": "fixtures/valid/profile-recovery-read.json",
+      "schema": "profile-request-v0.2",
+      "expected": "valid",
+      "semantic": true,
+      "reason": "Recovery transfer preserves exact version, session scope and native observation bounds; received paths convey no native authority."
+    },
+    {
+      "path": "fixtures/valid/profile-recovery-close.json",
+      "schema": "profile-request-v0.2",
+      "expected": "valid",
+      "semantic": true,
+      "reason": "Recovery transfer preserves exact version, session scope and native observation bounds; received paths convey no native authority."
+    },
+    {
+      "path": "fixtures/valid/profile-recovery-chunk.json",
+      "schema": "profile-result-v0.2",
+      "expected": "valid",
+      "semantic": true,
+      "reason": "Recovery transfer preserves exact version, session scope and native observation bounds; received paths convey no native authority."
+    },
+    {
+      "path": "fixtures/valid/profile-recovery-denied.json",
+      "schema": "profile-result-v0.2",
+      "expected": "valid",
+      "semantic": true,
+      "reason": "Recovery transfer preserves exact version, session scope and native observation bounds; received paths convey no native authority."
+    },
+    {
+      "path": "fixtures/invalid/profile-recovery-denied-leak.json",
+      "schema": "profile-result-v0.2",
+      "expected": "invalid",
+      "semantic": true,
+      "reason": "Recovery transfer preserves exact version, session scope and native observation bounds; received paths convey no native authority."
+    },
+    {
+      "path": "fixtures/valid/profile-recovery-context.json",
+      "schema": "profile-recovery-v0.2",
+      "expected": "valid",
+      "semantic": true,
+      "reason": "Recovery transfer preserves exact version, session scope and native observation bounds; received paths convey no native authority."
+    },
+    {
+      "path": "fixtures/valid/profile-recovery-digit-digest.json",
+      "schema": "profile-recovery-v0.2",
+      "expected": "valid",
+      "semantic": true,
+      "reason": "Recovery transfer preserves exact version, session scope and native observation bounds; received paths convey no native authority."
+    },
+    {
+      "path": "fixtures/invalid/profile-recovery-unknown-kind.json",
+      "schema": "profile-recovery-v0.2",
+      "expected": "invalid",
+      "semantic": true,
+      "reason": "Recovery transfer preserves exact version, session scope and native observation bounds; received paths convey no native authority."
+    },
+    {
+      "path": "fixtures/invalid/profile-recovery-dot-path.json",
+      "schema": "profile-recovery-v0.2",
+      "expected": "invalid",
+      "semantic": true,
+      "reason": "Recovery transfer preserves exact version, session scope and native observation bounds; received paths convey no native authority."
+    },
+    {
+      "path": "fixtures/invalid/profile-recovery-empty-path-part.json",
+      "schema": "profile-recovery-v0.2",
+      "expected": "invalid",
+      "semantic": true,
+      "reason": "Recovery transfer preserves exact version, session scope and native observation bounds; received paths convey no native authority."
+    },
+    {
+      "path": "fixtures/invalid/profile-recovery-uid-overflow.json",
+      "schema": "profile-recovery-v0.2",
+      "expected": "invalid",
+      "semantic": true,
+      "reason": "Recovery transfer preserves exact version, session scope and native observation bounds; received paths convey no native authority."
+    },
+    {
+      "path": "fixtures/invalid/profile-recovery-inode-overflow.json",
+      "schema": "profile-recovery-v0.2",
+      "expected": "invalid",
+      "semantic": true,
+      "reason": "Recovery transfer preserves exact version, session scope and native observation bounds; received paths convey no native authority."
+    },
+    {
+      "path": "fixtures/invalid/profile-recovery-device-mismatch.json",
+      "schema": "profile-recovery-v0.2",
+      "expected": "invalid",
+      "semantic": true,
+      "reason": "Recovery transfer preserves exact version, session scope and native observation bounds; received paths convey no native authority."
+    },
+    {
+      "path": "fixtures/invalid/profile-recovery-authority.json",
+      "schema": "profile-recovery-v0.2",
+      "expected": "invalid",
+      "semantic": true,
+      "reason": "Recovery transfer preserves exact version, session scope and native observation bounds; received paths convey no native authority."
     }
   ]
 }

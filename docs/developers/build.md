@@ -15,6 +15,33 @@ build` before configuring or building; use `test` or `package` for those actions
 The common active-output budget is unchanged; retained `out/evidence/` archives
 are measured separately. Never use the placeholder account from the example.
 
+The [recovery transfer](../../spec/delivery/packages/w-08-recovery-transfer.md)
+extends the existing authenticated profile session with configuration.recovery-context
+and profile-request/profile-result 0.2. Negotiate both versions and configuration.profile
+before constructing ProfileDownload with an explicit ProfileRecoveryScope containing
+the expected profile and editor session. Include editor.recovery in the receiver's
+locally admitted capabilities. The default mode remains the 0.1 reader.
+
+After completion, ProfileView::recovery is optional. Its typed admission is bound
+to the authenticated connection/epoch, requested scope, exact transfer, revision and
+policy generation. Null means recovery is unavailable. Resource capability headers
+retain their legacy contents; native recovery capability admission belongs to the
+trusted recovery provider. Never convert the projected policy or directory pathname
+into native authority. The installed owner must match its current session and verify
+the directory nodes before helper work; invalidate every received view on authority loss.
+
+Run `ctest --preset <profile> -R '^configuration[.](RECOVERY-TRANSFER-|PROFILE-|COMMAND-|RECON-)' --output-on-failure`
+on all three development profiles after their ordinary budget/build checks. On Linux,
+run `ctest --preset linux-x64-gcc13 -R '^native[.](RECOVERY-TRANSFER|RECOVERY-CONTEXT|PROFILE-PROJECTION|PROFILE-CONTROLLER|PROFILE-WORKER)$' --output-on-failure`.
+Keep the original 0.1 byte oracle and raw failed attempts. The native test uses the
+existing unprivileged controller harness and independent filesystem observations.
+
+When specification-tool tests use an owned temporary root under out/, set TMP and
+TEMP to that root and GIT_CEILING_DIRECTORIES to the same absolute root. This prevents
+the no-repository fixture from discovering the enclosing checkout. Let temporary-file
+cleanup finish before workspace accounting; a disappearing node makes that inspection
+unavailable and must not be converted into an assumed capacity pass.
+
 The [native recovery snapshot](../../spec/delivery/packages/w-08-recovery-context.md)
 is available through LinuxProfileStore::recovery_snapshot(authority) and the blocking
 LinuxProfileWorker facade. Call it from a trusted controller worker. Its committed
@@ -31,9 +58,9 @@ directory identities, shared resources and actual process exit.
 
 The API returns trusted internal state, like load(). Do not disclose it directly,
 infer a client session from it or enable installed recovery from its paths alone.
-The next transfer contract must bind the coherent state to authenticated peer/epoch/
-profile/session and independently revalidate directories before helper operations.
-Existing editing checks, revocation guards and recovery validation latency remain
+The transfer contract above now binds coherent state to authenticated peer/epoch/
+profile/session. Independent native directory verification before helper operations,
+existing editing checks, revocation guards and recovery validation latency remain
 separate requirements.
 
 The [installed scene editor](../../spec/delivery/packages/w-11-installed-editor.md)
@@ -57,8 +84,9 @@ fields, modal editor, gesture or pending command. Navigation requests a new cohe
 profile; Cancel session explicitly discards and returns to Settings. GDK topology
 uses session monitor identities. The outer form scrolls within the initial work area,
 leaving application navigation and Quit accessible. Recovery remains visibly unavailable:
-the current profile transfer has no authenticated generation/directory/session binding.
-Do not infer it from a revision or XDG path. Missing telemetry is not synthetic data.
+the installed frontend still uses the 0.1 profile transfer. Its native helper owner
+must admit the bound 0.2 recovery observations before that UI can enable recovery.
+Do not infer authority from a revision or XDG path. Missing telemetry is not synthetic data.
 
 The [editor helper worker](../../spec/delivery/packages/w-11-editor-helper-worker.md)
 provides EditorHelperClient on the GUI owner and LinuxEditorHelperOwner on the

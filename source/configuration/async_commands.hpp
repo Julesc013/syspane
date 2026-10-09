@@ -9,6 +9,7 @@
 namespace syspane::configuration {
 class AsyncCommands final:public CommandService {
 public:
+    using RecoveryProvider=std::function<std::optional<ProfileRecoveryData>(const Committed&)>;
     struct Completion {
         Completion(Completion&&)=default;
         Completion& operator=(Completion&&)=default;
@@ -21,13 +22,14 @@ public:
         ProfileSnapshot image;
     };
     AsyncCommands(GenerationStore&,std::string epoch,std::function<void(const Authored&)>);
-    AsyncCommands(GenerationStore&,std::string epoch,ResourceProvider);
+    AsyncCommands(GenerationStore&,std::string epoch,ResourceProvider,RecoveryProvider={});
     bool supports_resources()const override{return transactions_.supports_resources();}
     bool supports_large_commands()const override{return true;}
     bool supports_theme_overrides()const override{return transactions_.supports_theme_overrides();}
     bool supports_visibility()const override{return transactions_.supports_visibility();}
     bool supports_edit_locks()const override{return transactions_.supports_edit_locks();}
     bool supports_profile()const override{return transactions_.supports_resources();}
+    bool supports_profile_recovery()const override{return supports_profile()&&static_cast<bool>(recovery_provider_);}
     bool may_disclose_profile(const Authority&)const override;
     Json read_profile(const std::string&,std::uint64_t,const Authority&,const Json&,std::uint64_t)override;
     bool profile_expired(const std::string& id,std::uint64_t lifetime,std::uint64_t now)const override{return profile_.expired(id,lifetime,now);}
@@ -69,5 +71,7 @@ private:
     std::map<std::uint64_t,std::shared_ptr<Job>> jobs_;
     std::deque<std::shared_ptr<Job>> ready_;
     ProfileSnapshot image_;ProfileTransfer profile_;
+    RecoveryProvider recovery_provider_;
+    ProfileSnapshot prepare_image();
 };
 }

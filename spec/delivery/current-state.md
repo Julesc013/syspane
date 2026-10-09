@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-09T00:22:39.860865+00:00", "scope": "Coherent native recovery snapshot; authenticated transfer, installed recovery and all five release editions remain open"}
+updated: {"by": "codex", "at": "2026-10-09T00:50:53.329864+00:00", "scope": "Authenticated coherent recovery transfer; installed helper admission, responsiveness and all five release editions remain open"}
 ---
 
 # Current state and next admitted boundary
@@ -22,12 +22,19 @@ recordings are local ignored `out/` content; the retired root is absent from the
 tracked tree. See `docs/developers/build.md` in the repository for checkout
 setup and the [repository contract](../foundation/repository.md) for ownership.
 
+The [authenticated recovery transfer](recovery-transfer-handoff.md) now carries
+coherent saved state and native recovery observations bound to connection, epoch,
+profile, editor session, transfer and revision. Original 0.1 transfers stay unchanged.
+Admit the received context on the installed native helper worker with independent
+directory verification and revocation/publication guards next; recovery validation
+latency and all five complete release editions remain open.
+
 The [native recovery snapshot](recovery-context-handoff.md) now pairs accepted
 saved state with the exact generation, held directory identities and current
 retention/erase permission in one existing worker call. Native cases and owner/
-startup/worker/controller regressions pass. Bind that coherent state to an
-authenticated profile/session/epoch transfer and helper admission next; installed
-recovery and all five complete release editions remain open.
+startup/worker/controller regressions pass. The authenticated transfer above now
+binds that coherent state; native helper admission, installed recovery and all five
+complete release editions remain open.
 
 The [installed native scene editor](installed-editor-handoff.md) now connects real
 frontend navigation and authoring to authenticated persistence and the existing
@@ -843,18 +850,17 @@ release-identity decisions remain open.
 
 ## Next work
 
-Continue from the [recovery snapshot handoff](recovery-context-handoff.md) and the
-[installed editor handoff](installed-editor-handoff.md). Close authenticated transfer
-of coherent profile/recovery state and bind it to exact peer, epoch, profile and
-editor session. Revalidate held native directory identity before admitting helpers,
-preserve current-policy publication guards and original-request reconciliation,
-and address synchronous recovery validation before whole-UI latency qualification.
-Connect the native inspector, actual telemetry, presentation activation/visibility
-and independent desktop escape/recovery to the same installed product owners.
-Complete import catalogs, persistence layers, accessibility/performance, lifecycle
-and historical/native target qualification. All five full release editions remain
-required. The private-text lifetime checkpoint resolves the reproduced clipboard
-shutdown critical; earlier diagnostic evidence remains preserved.
+Continue from the [recovery transfer handoff](recovery-transfer-handoff.md) and
+[installed editor handoff](installed-editor-handoff.md). Match the received context
+to the installed owner's authenticated peer, epoch, profile and editor session.
+Independently hold and revalidate its native state/recovery directory identities
+before admitting helpers. Preserve current-policy publication guards, original-request
+reconciliation and exact-generation draft retirement; address synchronous validation
+before enabling and qualifying the installed recovery flow. Connect the native
+inspector, real telemetry, presentation activation/visibility and independent desktop
+escape/recovery to the same product owners. Complete import catalogs, persistence
+layers, accessibility/performance, lifecycle and historical/native target qualification.
+All five full release editions remain required. Earlier failures remain preserved.
 
 Start with the [campaign coverage audit](campaign-coverage.md). W-03 now has a
 [read-only Windows observer](windows-host-inventory-handoff.md): native Explorer

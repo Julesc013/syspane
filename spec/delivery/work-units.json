@@ -310,7 +310,8 @@
         "SP-W26-HELPER-IDENTITY",
         "SP-W08-PROFILE-PROJECTION",
         "SP-W08-RUNTIME-DIRECTORY",
-        "SP-W08-RECOVERY-CONTEXT"
+        "SP-W08-RECOVERY-CONTEXT",
+        "SP-W08-RECOVERY-TRANSFER"
       ],
       "acceptance_tests": [
         "T-TRANSACTION",
@@ -381,14 +382,20 @@
         "source/platform/runtime_directory_linux.cpp",
         "tests/configuration/recovery_context_probe.cpp",
         "tests/configuration/native_recovery_context.py",
-        "tests/configuration/recovery-context-cases.json"
+        "tests/configuration/recovery-context-cases.json",
+        "spec/contracts/profile-request-v0.2.schema.json",
+        "spec/contracts/profile-result-v0.2.schema.json",
+        "spec/contracts/profile-recovery-v0.2.schema.json",
+        "tests/configuration/recovery-transfer-cases.json",
+        "tests/configuration/recovery_transfer_probe.cpp",
+        "tests/configuration/native_recovery_transfer.py"
       ],
       "status": "in_progress",
       "authority_class": "development",
       "execution_grant": "user:foundation-native-campaign-2026-10-05",
-      "notes": "The native configuration controller serves coherent saved profiles and exact resources through authenticated, currently authorized bounded reads. Pinned transfers preserve one revision across commits; the receiver verifies the full selected catalog before exposing UI state. Native runtime/profile ownership and the existing serialized worker preserve private directories, locks, original-request reconciliation and explicit retirement. The worker now also returns one coherent native recovery snapshot with accepted documents/resources, exact selector generation, held state/recovery directory identities, current history permission and erase permission. Independent startup/commit, policy/role, replacement/fallback/thread and oracle cases pass. The installed settings/editor frontend and verified helpers have separate W-11/W-26 checkpoints. Next bind external profile/recovery transfer to the authenticated peer, epoch, profile and editor session; revalidate directories before helper admission and preserve current-policy publication guards and lost-result retirement. Protected-policy deployment, synchronous recovery validation latency, import catalogs, full configuration layers/updates, non-Linux adapters and all five complete editions remain required.",
-      "package": "delivery/packages/w-08-recovery-context.md",
-      "evidence": "delivery/recovery-context-handoff.md"
+      "notes": "The native controller serves coherent saved profiles through authenticated, currently authorized bounded transfers. Its serialized storage owner now supplies exact recovery generations, held directory identities and retention/erase permission. Explicitly negotiated profile transfer 0.2 binds those observations to connection/epoch/profile/editor session, transfer ID and committed revision; the receiver validates the complete closure before exposure. Old 0.1 bytes remain unchanged. Native and portable checks cover exact data, commit/pinned generations, negotiation, scope corruption, provider/join failure, reconnect, denial and current-policy withdrawal. Installed settings/editor and verified helpers have separate W-11/W-26 checkpoints. Next admit the received context on the installed native helper owner, independently verify directory identities, enforce revocation/publication guards and exact-generation draft retirement, and address synchronous recovery validation latency before enabling the actual recovery flow. Protected-policy deployment, inspector/telemetry/desktop integration, imports, complete layers/updates, non-Linux adapters and all five full release editions remain required.",
+      "package": "delivery/packages/w-08-recovery-transfer.md",
+      "evidence": "delivery/recovery-transfer-handoff.md"
     },
     {
       "id": "W-09",

@@ -3687,6 +3687,30 @@
       "profiles": [
         "linux-x64-gcc13"
       ]
+    },
+    {
+      "id": "recovery-transfer-probe",
+      "target": "syspane_recovery_transfer_probe",
+      "type": "EXECUTABLE",
+      "source_owner": "tests/configuration/",
+      "public_interfaces": [],
+      "private_interfaces": [],
+      "sources": [
+        "tests/configuration/recovery_transfer_probe.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_profile_controller_runtime"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
     }
   ]
 }

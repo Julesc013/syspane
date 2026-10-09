@@ -5,7 +5,7 @@
 namespace syspane::configuration {
 using protocol::Error;
 namespace {
-protocol::Handshake server_hello(const std::string& epoch, const std::optional<InventorySource>& source,bool commands=false,bool resources=false,bool large=false,bool locks=false,bool visibility=false,bool themes=false,bool profile=false) {
+protocol::Handshake server_hello(const std::string& epoch, const std::optional<InventorySource>& source,bool commands=false,bool resources=false,bool large=false,bool locks=false,bool visibility=false,bool themes=false,bool profile=false,bool recovery=false) {
     protocol::Handshake hello{1, protocol::frame_limit, "console", epoch,
         {{"command", "0.2.0"}, {"command-result", "0.1.0"}}, {}, {"settings.preview", "result.get", "cancel"}};
     if(commands){hello.optional.insert({"configuration.transactions","result.reconcile"});
@@ -16,6 +16,7 @@ protocol::Handshake server_hello(const std::string& epoch, const std::optional<I
     if(visibility&&locks&&resources&&large){hello.documents.insert({"command","0.7.0"});hello.optional.insert("configuration.visibility");}
     if(themes&&visibility&&locks&&resources&&large){hello.documents.insert({"command","0.8.0"});hello.optional.insert("configuration.theme-overrides");}
     if(profile){hello.documents.insert({{"profile-request","0.1.0"},{"profile-result","0.1.0"}});hello.optional.insert("configuration.profile");}
+    if(profile&&recovery){hello.documents.insert({{"profile-request","0.2.0"},{"profile-result","0.2.0"}});hello.optional.insert("configuration.recovery-context");}
     if (source) {
         const auto& version = source->document_version;
         hello.documents.insert({{"telemetry",version},{"snapshot",version},{"observation",version}});
@@ -111,11 +112,17 @@ void Sessions::dispatch(Connection& c, const protocol::Message& message, std::ui
     if (!c.negotiated) {
         if (message.type != "hello") throw Error("session.expected_hello");
         const auto client = protocol::handshake(message.body);
-        c.selection = protocol::negotiate(server_hello(epoch_,source_,static_cast<bool>(commands_),commands_&&commands_->supports_resources(),commands_&&commands_->supports_large_commands(),commands_&&commands_->supports_edit_locks(),commands_&&commands_->supports_visibility(),commands_&&commands_->supports_theme_overrides(),commands_&&commands_->supports_profile()), client, c.authority.role_grants);
+        c.selection = protocol::negotiate(server_hello(epoch_,source_,static_cast<bool>(commands_),commands_&&commands_->supports_resources(),commands_&&commands_->supports_large_commands(),commands_&&commands_->supports_edit_locks(),commands_&&commands_->supports_visibility(),commands_&&commands_->supports_theme_overrides(),commands_&&commands_->supports_profile(),commands_&&commands_->supports_profile_recovery()), client, c.authority.role_grants);
         c.authority.role = client.role;
-        if(!c.selection.documents.count({"profile-request","0.1.0"})||!c.selection.documents.count({"profile-result","0.1.0"})||c.selection.max_frame_bytes<protocol::profile_frame_floor){
+        const bool profile1=c.selection.documents.count({"profile-request","0.1.0"})&&c.selection.documents.count({"profile-result","0.1.0"});
+        const bool profile2=c.selection.documents.count({"profile-request","0.2.0"})&&c.selection.documents.count({"profile-result","0.2.0"});
+        if((!profile1&&!profile2)||c.selection.max_frame_bytes<protocol::profile_frame_floor){
             if(client.required.count("configuration.profile"))throw Error("handshake.profile");
             c.selection.features.erase("configuration.profile");
+        }
+        if(!profile2||!c.selection.features.count("configuration.profile")){
+            if(client.required.count("configuration.recovery-context"))throw Error("handshake.profile");
+            c.selection.features.erase("configuration.recovery-context");
         }
         const bool has_commands = (c.selection.documents.count({"command", "0.2.0"})||c.selection.documents.count({"command", "0.3.0"})||c.selection.documents.count({"command", "0.4.0"})||c.selection.documents.count({"command", "0.5.0"})||c.selection.documents.count({"command", "0.6.0"})||c.selection.documents.count({"command", "0.7.0"})||c.selection.documents.count({"command", "0.8.0"})) && c.selection.documents.count({"command-result", "0.1.0"});
         if (!has_commands) {
@@ -186,6 +193,9 @@ void Sessions::dispatch(Connection& c, const protocol::Message& message, std::ui
     if (message.type == "subscribe" || message.type == "unsubscribe") { subscribe(c,message,now); return; }
     if(message.type=="profile.read"){
         if(!commands_||!c.selection.features.count("configuration.profile"))throw Error("feature.unsupported");
+        const auto version=message.body["schema_version"].get<std::string>();
+        if(!c.selection.documents.count({"profile-request",version})||!c.selection.documents.count({"profile-result",version})||
+           (version=="0.2.0"&&!c.selection.features.count("configuration.recovery-context")))throw Error("feature.unsupported");
         if(!c.outbox.can_control(protocol::profile_frame_floor)){shut(c,"queue.control_full");return;}
         auto result=commands_->read_profile(c.id,c.lifetime,c.authority,message.body,now);
         if(result["outcome"]=="chunk")c.profile_disclosed=true;

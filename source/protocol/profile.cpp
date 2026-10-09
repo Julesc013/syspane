@@ -4,11 +4,16 @@ namespace syspane::protocol {
 namespace {
 void need(bool v){if(!v)throw Error("profile.body");}
 std::uint64_t number(const Json& v){need(v.is_string());const auto n=decimal(v.get_ref<const std::string&>());need(n.has_value());return *n;}
-void common(const Json& v){need(v.is_object()&&v.value("schema_version",Json())=="0.1.0"&&v.contains("query_id")&&v["query_id"].is_string()&&identifier(v["query_id"].get_ref<const std::string&>()));}
+void common(const Json& v){need(v.is_object()&&(v.value("schema_version",Json())=="0.1.0"||v.value("schema_version",Json())=="0.2.0")&&v.contains("query_id")&&v["query_id"].is_string()&&identifier(v["query_id"].get_ref<const std::string&>()));}
 }
 void validate_profile_request(const Json& v){
     common(v);const auto op=v.value("op",Json());
-    if(op=="open")need(members(v,{"schema_version","query_id","op"}));
+    if(op=="open"){
+        if(v["schema_version"]=="0.2.0"){
+            need(members(v,{"schema_version","query_id","op","profile","editor_session"}));
+            for(const char* field:{"profile","editor_session"})need(v[field].is_string()&&identifier(v[field].get_ref<const std::string&>()));
+        }else need(members(v,{"schema_version","query_id","op"}));
+    }
     else if(op=="read"){
         need(members(v,{"schema_version","query_id","op","transfer_id","part","offset"}));
         need(number(v["transfer_id"])>0&&number(v["part"])<profile_part_limit&&number(v["offset"])<=16777216);

@@ -47,12 +47,13 @@ def wait_for(check, seconds=5):
     raise AssertionError('independent observation timeout')
 
 
-def main():
+def main(extension=None, definitions=None):
+    definitions = definitions or DEFINITIONS
     probe, production, startup, evidence = [Path(v).resolve() for v in sys.argv[1:5]]
     assert os.geteuid() and evidence.is_relative_to(probe.parent)
-    folder = evidence/('pp-'+uuid.uuid4().hex[:10]); folder.mkdir(mode=0o700, parents=True)
+    folder = evidence/(('rt-' if extension else 'pp-')+uuid.uuid4().hex[:10]); folder.mkdir(mode=0o700, parents=True)
     assert subprocess.check_output(['findmnt', '--target', str(folder), '--noheadings', '--output', 'FSTYPE'], text=True).strip() == 'ext4'
-    record = dict(family='PROFILE-PROJECTION', outcome='fail', uid=os.geteuid(), filesystem='ext4', kernel=list(os.uname()),
+    record = dict(family=definitions['family'], outcome='fail', uid=os.geteuid(), filesystem='ext4', kernel=list(os.uname()),
                   started_at=datetime.now(timezone.utc).isoformat(), artifacts={p.name: sha(p.read_bytes()) for p in (probe, production, startup)},
                   oracle_sha256=sha(Path(__file__).read_bytes()), cases=[], children=[])
     schemas = {v['$id']: v for p in (ROOT/'spec/contracts').glob('*.schema.json') for v in [json.loads(p.read_bytes())]}
@@ -66,7 +67,7 @@ def main():
     def save(): (folder/'result.json').write_bytes(encoded(record))
 
     def passed(name, **facts):
-        assert name in DEFINITIONS['native'] and name not in [v['case'] for v in record['cases']]
+        assert name in definitions['native'] and name not in [v['case'] for v in record['cases']]
         record['cases'].append(dict(case=name, outcome='pass', **facts)); save()
 
     def root(name):
@@ -233,7 +234,7 @@ def main():
                     more = self.socket.recv(n-len(data)); assert more, 'client EOF'; data += more
                 return data
             n = struct.unpack('!I', exact(4))[0]; assert 0 < n <= 328704; value = json.loads(exact(n))
-            if value['type'] == 'profile.chunk': validate(value['body'], 'profile-result')
+            if value['type'] == 'profile.chunk': validate(value['body'], 'profile-result-v0.2' if value['body']['schema_version']=='0.2.0' else 'profile-result')
             if value['type'] == 'result': validate(value['body'], 'command-result')
             if value['type'] == 'result.reconciled': validate(value['body'], 'reconciliation-result')
             return value
@@ -291,6 +292,11 @@ def main():
         return transfer
 
     try:
+        if extension:
+            extension(locals())
+            assert set(definitions['native']) == {case['case'] for case in record['cases']}
+            record['outcome'] = 'pass'
+            return
         data = root('basic')
         with parent(data) as p:
             p.await_ready(); client = Client(p); download(client); inspect(data); passed('real-controller-exact-profile')

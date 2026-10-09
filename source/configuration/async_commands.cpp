@@ -13,9 +13,14 @@ Decision decision(const std::string& code){
 }
 AsyncCommands::AsyncCommands(GenerationStore& store,std::string epoch,std::function<void(const Authored&)> prepare)
     :epoch_(std::move(epoch)),transactions_(store,epoch_,std::move(prepare)),receipts_(transactions_.receipts()),revision_(authored_revision(transactions_.authored())){}
-AsyncCommands::AsyncCommands(GenerationStore& store,std::string epoch,ResourceProvider prepare)
-    :epoch_(std::move(epoch)),transactions_(store,epoch_,std::move(prepare)),receipts_(transactions_.receipts()),revision_(authored_revision(transactions_.authored())){
-    if(transactions_.current_.resources)image_=std::make_shared<ProfileImage>(transactions_.current_,transactions_.resource_provider_.capabilities);
+AsyncCommands::AsyncCommands(GenerationStore& store,std::string epoch,ResourceProvider prepare,RecoveryProvider recovery)
+    :epoch_(std::move(epoch)),transactions_(store,epoch_,std::move(prepare)),receipts_(transactions_.receipts()),revision_(authored_revision(transactions_.authored())),recovery_provider_(std::move(recovery)){
+    image_=prepare_image();
+}
+ProfileSnapshot AsyncCommands::prepare_image(){
+    if(!transactions_.current_.resources)return {};
+    auto recovery=recovery_provider_?recovery_provider_(transactions_.current_):std::optional<ProfileRecoveryData>{};
+    return std::make_shared<ProfileImage>(transactions_.current_,transactions_.resource_provider_.capabilities,std::move(recovery));
 }
 void AsyncCommands::attach(const std::string& epoch,std::uint64_t revision,Policy policy){
     std::lock_guard<std::mutex> lock(mutex_);
@@ -133,7 +138,7 @@ AsyncCommands::Completion AsyncCommands::run(std::uint64_t ticket){
         });
         if(!transactions_.faulted()){
             receipts=transactions_.receipts();
-            if(transactions_.current_.resources)image=std::make_shared<ProfileImage>(transactions_.current_,transactions_.resource_provider_.capabilities);
+            image=prepare_image();
         }
     }catch(...){
         // A native exception may follow publication; never manufacture unsaved facts.
@@ -167,6 +172,7 @@ bool AsyncCommands::may_disclose_profile(const Authority& authority)const{
     try{image_->authorize(authority,snapshot());return true;}catch(const protocol::Error&){return false;}
 }
 Json AsyncCommands::read_profile(const std::string& connection,std::uint64_t lifetime,const Authority& authority,const Json& request,std::uint64_t now){
-    advance(now);return profile_.receive(connection,lifetime,authority,snapshot(),!invalid_&&!storage_fault_?image_:ProfileSnapshot{},request,now);
+    if(request.value("schema_version",Json())=="0.2.0"&&!supports_profile_recovery())throw Error("feature.unsupported");
+    advance(now);return profile_.receive(connection,lifetime,authority,snapshot(),!invalid_&&!storage_fault_?image_:ProfileSnapshot{},request,now,epoch_);
 }
 }

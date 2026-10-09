@@ -15,6 +15,7 @@ public:
     virtual bool supports_theme_overrides()const{return false;}
     virtual bool supports_visibility()const{return false;}
     virtual bool supports_profile()const{return false;}
+    virtual bool supports_profile_recovery()const{return false;}
     virtual bool may_disclose_profile(const Authority&)const{return false;}
     virtual Json read_profile(const std::string&,std::uint64_t,const Authority&,const Json&,std::uint64_t){throw protocol::Error("feature.unsupported");}
     virtual bool profile_expired(const std::string&,std::uint64_t,std::uint64_t)const{return false;}

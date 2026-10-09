@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.example.invalid/syspane/0.2.0/profile-recovery.schema.json",
+  "title": "SysPane bound recovery observations 0.2",
+  "description": "ProfileImage 0.2 part 3 recovery object. Native codec additionally validates exact authenticated scope, current permission, uint64/uid ceilings, equal devices and UTF-8 path byte limits. This is not native filesystem authority.",
+  "type": "object",
+  "properties": {
+    "connection_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+    },
+    "producer_epoch": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+    },
+    "profile": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+    },
+    "editor_session": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]*$"
+    },
+    "transfer_id": {
+      "type": "string",
+      "pattern": "^[1-9][0-9]{0,19}$"
+    },
+    "revision": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]{0,19})$"
+    },
+    "policy_generation": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]{0,19})$"
+    },
+    "generation": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "erase": {
+      "type": "boolean"
+    },
+    "directory": {
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]{0,19})$"
+        },
+        "state_device": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]{0,19})$"
+        },
+        "recovery_device": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]{0,19})$"
+        },
+        "state_inode": {
+          "type": "string",
+          "pattern": "^[1-9][0-9]{0,19}$"
+        },
+        "recovery_inode": {
+          "type": "string",
+          "pattern": "^[1-9][0-9]{0,19}$"
+        },
+        "kind": {
+          "const": "linux-profile/0.1"
+        },
+        "path": {
+          "type": "string",
+          "maxLength": 4096,
+          "pattern": "^/(?:[^/\u0000]+/)*recovery$",
+          "not": {
+            "pattern": "/(?:\\.|\\.\\.)(?:/|$)"
+          }
+        }
+      },
+      "required": [
+        "uid",
+        "state_device",
+        "recovery_device",
+        "state_inode",
+        "recovery_inode",
+        "kind",
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "connection_id",
+    "producer_epoch",
+    "profile",
+    "editor_session",
+    "transfer_id",
+    "revision",
+    "policy_generation",
+    "generation",
+    "erase",
+    "directory"
+  ],
+  "additionalProperties": false
+}

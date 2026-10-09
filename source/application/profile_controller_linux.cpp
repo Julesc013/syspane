@@ -49,9 +49,18 @@ int run_profile_controller(std::uint64_t parent,os::LinuxProfileStore::PolicySou
         std::optional<c::Policy> baseline;
         const auto sample=[&]{auto value=source();if(!baseline)baseline=value;return value;};
         const std::set<std::string> caps={"scene.selector","scene.content","scene.edit-locks","scene.visibility","theme.typography","configuration.theme-overrides"};
-        os::LinuxProfileWorker store(startup.location,startup.create,caps,sample,std::move(transition));
+        auto native_caps=caps;native_caps.insert("editor.recovery");
+        os::LinuxProfileWorker store(startup.location,startup.create,std::move(native_caps),sample,std::move(transition));
         need(baseline&&baseline->available,"controller.policy");
-        auto owner=std::make_shared<c::AsyncCommands>(store,startup.epoch,c::make_resource_provider(store,caps));
+        auto owner=std::make_shared<c::AsyncCommands>(store,startup.epoch,c::make_resource_provider(store,caps),[&](const c::Committed& value)->std::optional<c::ProfileRecoveryData>{
+            auto snapshot=store.recovery_snapshot({true,"console",{"console"}});
+            need(snapshot.committed.documents.settings==value.documents.settings&&snapshot.committed.documents.scene==value.documents.scene&&
+                 snapshot.committed.resources==value.resources,"controller.recovery_coherence");
+            if(!snapshot.recovery)return {};
+            const auto& admission=*snapshot.recovery;const auto& directory=admission.directory;
+            return c::ProfileRecoveryData{directory.profile,admission.generation,{directory.path,directory.uid,directory.state_device,directory.state_inode,
+                directory.recovery_device,directory.recovery_inode},admission.policy_revision,admission.erase};
+        });
         c::Sessions sessions(startup.epoch,owner->revision(),*baseline,{},owner);
         os::Listener listener(startup.endpoint);r::HealthLink health(guardian,false,"console",startup.epoch,"",true);
         r::ProducerLease lease;std::uint64_t lease_token=0,sequence=0,last_heartbeat=0;

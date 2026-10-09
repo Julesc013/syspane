@@ -36,7 +36,9 @@ whole-UI responsiveness, native inspector, telemetry and desktop hosting remain 
 
 The [native recovery snapshot](spec/delivery/recovery-context-handoff.md) now pairs
 saved state with its verified generation, directory identity and current retention
-permission. Authenticated transfer to the installed editor remains the next boundary.
+permission. The [authenticated transfer](spec/delivery/recovery-transfer-handoff.md)
+binds those observations to one saved profile and editor session. Installed recovery
+still needs native helper admission and responsiveness qualification.
 
 The [runtime directory checkpoint](spec/delivery/runtime-directory-handoff.md)
 adds private frontend runtime allocation and explicit retirement after supervisor

@@ -1,0 +1,17 @@
+{
+  "family": "RECOVERY-TRANSFER",
+  "portable": ["exact-and-legacy", "permission-and-null", "negotiation", "version-lifetime", "scope-and-corruption", "provider-and-join", "pinned-generation", "invalidation", "bounds-and-oracle"],
+  "native": ["exact-native-context", "commit-and-pinned-generation", "reconnect-new-scope", "retention-and-erase", "policy-withdrawal", "wrong-generation-oracle"],
+  "expected_context": {
+    "connection_id": "C", "producer_epoch": "E", "profile": "profile:default", "editor_session": "editor:S",
+    "transfer_id": "1", "revision": "0", "policy_generation": "7",
+    "generation": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "directory": {"kind": "linux-profile/0.1", "path": "/fixture/state/recovery", "uid": "1000", "state_device": "2096", "state_inode": "101", "recovery_device": "2096", "recovery_inode": "102"},
+    "erase": true
+  },
+  "next_generation": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "initial_documents": "tests/configuration/profile-startup-cases.json",
+  "commit": "tests/configuration/profile-startup-command-case.json",
+  "native_case_timeout_seconds": 30,
+  "native_family_timeout_seconds": 180
+}

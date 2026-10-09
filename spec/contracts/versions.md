@@ -62,3 +62,14 @@ observation/snapshot/telemetry 0.2 as one explicitly selected triple plus the
 qualified shared native domain; consumer-local scope is never serialized. Version
 changes cannot silently discard same-epoch replay/tombstone history. Existing 0.1
 documents remain inventory-capable and do not acquire implicit measurement times.
+
+Experimental [recovery transfer](../delivery/packages/w-08-recovery-transfer.md)
+adds profile-request/profile-result and ProfileImage 0.2 through the explicitly
+negotiated `configuration.recovery-context` feature. It also requires
+`configuration.profile` and both 0.2 message versions. ProfileImage 0.2 changes the
+declared header version and replaces the policy part with `{policy, recovery}`;
+other parts, resource capability declarations and existing bounds retain their
+0.1 meanings. Recovery is null or a session-bound observation in the declared
+`linux-profile/0.1` directory format. This format does not authorize native file
+operations. Original 0.1 requests, results and image bytes remain supported without
+implicit recovery admission. An active transfer pins its selected version.
