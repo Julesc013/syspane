@@ -1,8 +1,17 @@
 #pragma once
 #include "policy.hpp"
+#include <memory>
 
 namespace syspane::configuration {
 struct Authored { Json settings,scene; };
+// Owns a deep, fully validated const copy. This is not a policy/authority proof.
+class ValidatedAuthored {
+public:
+    explicit ValidatedAuthored(const Authored&);
+    const Authored& documents()const;
+private:
+    std::shared_ptr<const Authored> documents_;
+};
 // Throws a bounded protocol::Error; optional annotations remain authored content.
 void validate_authored(const Authored& value);
 void validate_command(const Json& value);

@@ -77,9 +77,10 @@ struct Item {
     std::vector<std::string> children;
 };
 class Engine {
-public:
-    Engine(const Json& scene,const Topology& topology,const std::map<std::string,Metrics>& metrics):scene_(scene),topology_(topology),metrics_(metrics){
-        configuration::validate_scene_document(scene_);validate_environment();
+    struct Checked {};
+    static const Json& checked(const Json& scene){configuration::validate_scene_document(scene);return scene;}
+    Engine(const Json& scene,const Topology& topology,const std::map<std::string,Metrics>& metrics,Checked):scene_(scene),topology_(topology),metrics_(metrics){
+        validate_environment();
         for(const auto& widget:scene_["widgets"])widgets_.emplace(widget["id"].get<std::string>(),&widget);
         std::size_t leaves=0;for(const auto& row:widgets_)if((*row.second)["kind"]!="group")++leaves;
         need(metrics_.size()==leaves,"layout.metrics");
@@ -90,6 +91,9 @@ public:
         for(const auto& root:scene_["roots"])select(root.get<std::string>(),"","");
         for(const auto& root:scene_["roots"])measure(items_.at(root.get<std::string>()));
     }
+public:
+    Engine(const Json& scene,const Topology& topology,const std::map<std::string,Metrics>& metrics):Engine(checked(scene),topology,metrics,Checked{}){}
+    Engine(const configuration::ValidatedAuthored& value,const Topology& topology,const std::map<std::string,Metrics>& metrics):Engine(value.documents().scene,topology,metrics,Checked{}){}
     Plan run(){
         for(const auto& root:scene_["roots"]){auto& item=items_.at(root.get<std::string>());const auto area=regions_.at(item.display->id);place(item,box_in(item,area,true),area);}
         for(std::size_t a=0;a<plan_.nodes.size();++a)for(std::size_t b=a+1;b<plan_.nodes.size();++b){
@@ -238,4 +242,5 @@ private:
 };
 }
 Plan resolve(const configuration::Json& scene,const Topology& topology,const std::map<std::string,Metrics>& metrics){return Engine(scene,topology,metrics).run();}
+Plan resolve(const configuration::ValidatedAuthored& value,const Topology& topology,const std::map<std::string,Metrics>& metrics){return Engine(value,topology,metrics).run();}
 }

@@ -23,6 +23,7 @@ private:
 using ResourceSnapshot=std::shared_ptr<const ResourceSet>;
 void authorize_resources(const ResourceSet&,const Policy&,const std::set<std::string>& capabilities);
 void validate_resource_binding(const ResourceSet&,const Authored&);
+void validate_resource_binding(const ResourceSet&,const ValidatedAuthored&);
 // Both reader and resolver validate names before using them as filesystem paths.
 void validate_content_path(const std::string& path);
 Json parse_content_json(std::string_view bytes,std::size_t maximum=262144);

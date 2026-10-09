@@ -41,4 +41,7 @@ struct Plan {
 // Throws protocol::Error on invalid input, without a partial result or side effect.
 Plan resolve(const configuration::Json& scene,const Topology& topology,
              const std::map<std::string,Metrics>& metrics);
+// Reuses only immutable document validation; topology/metrics are checked anew.
+Plan resolve(const configuration::ValidatedAuthored&,const Topology& topology,
+             const std::map<std::string,Metrics>& metrics);
 }

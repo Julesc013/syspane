@@ -41,3 +41,4 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [runtime-directory.json](runtime-directory.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [scene-fragments.json](scene-fragments.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [text-session.json](text-session.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
+- [validated-authored.json](validated-authored.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.

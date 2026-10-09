@@ -15,6 +15,22 @@ build` before configuring or building; use `test` or `package` for those actions
 The common active-output budget is unchanged; retained `out/evidence/` archives
 are measured separately. Never use the placeholder account from the example.
 
+The [immutable authored package](../../spec/delivery/packages/w-11-validated-authored.md)
+adds a deep validated snapshot for surface layout. It carries no policy authority.
+New topology and metrics are validated on every resolution; binding and current
+authorization remain separate checks. Each live surface retains one extra bounded
+authored pair, and each paint still measures current content and composes pixels.
+
+After rebuilding all three development profiles, run `ctest --preset <profile> -R
+'^(configuration|scene|editor|settings|protocol|composition)[.]' --output-on-failure`.
+The new scene.AUTHORED-SNAPSHOT case uses the same 31 literal layout fixtures as its
+pre-change reference adapter, plus ownership and invalid/current-input cases. Keep
+SYSPANE_VALIDATED_AUTHORED_TEST confined to the scene test target. Run the v141_xp
+legacy checks and the package's native rendering/editor/recovery regressions too.
+Use the existing preview-cost diagnostic and unchanged ordinary GUI limits below;
+diagnostic improvement alone does not enable production recovery. Preserve timeouts
+and record concurrent workload when investigating timing-sensitive results.
+
 The [admission investigation](../../spec/delivery/packages/w-11-recovery-admission-investigation.md)
 keeps production recovery/history disabled after two failed ordinary GUI runs. Both
 development fixtures define SYSPANE_EXPERIMENTAL_RECOVERY=1; only

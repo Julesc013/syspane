@@ -178,8 +178,9 @@ ResourceSnapshot ContentCatalog::resolve_resources(const Json& selection,const A
     if(candidate.scene["schema_version"]=="0.5.0")result->required_.insert("scene.visibility");
     validate_resource_binding(*result,candidate);return result;
 }
-void validate_resource_binding(const ResourceSet& resources,const Authored& candidate){
-    validate_authored(candidate);const auto id=candidate.scene["theme_id"].is_null()?candidate.settings["display"]["theme_id"]:candidate.scene["theme_id"];
+namespace {
+void bind_resources(const ResourceSet& resources,const Authored& candidate){
+    const auto id=candidate.scene["theme_id"].is_null()?candidate.settings["display"]["theme_id"]:candidate.scene["theme_id"];
     need(id==resources.theme()["theme_id"],"content.theme");
     if(resources.theme()["schema_version"]=="0.2.0")need(resources.required().count("theme.typography")!=0,"resource.contract");
     if(candidate.scene["schema_version"]=="0.2.0")return;
@@ -201,6 +202,9 @@ void validate_resource_binding(const ResourceSet& resources,const Authored& cand
         need(found,"content.asset");
     }
 }
+}
+void validate_resource_binding(const ResourceSet& resources,const Authored& candidate){validate_authored(candidate);bind_resources(resources,candidate);}
+void validate_resource_binding(const ResourceSet& resources,const ValidatedAuthored& candidate){bind_resources(resources,candidate.documents());}
 void authorize_resources(const ResourceSet& resources,const Policy& policy,const std::set<std::string>& capabilities){
     need(policy.available,"policy.denied");
     for(const auto& cap:resources.required())need(capabilities.count(cap)&&!policy.denied_capabilities.count(cap),"policy.denied");

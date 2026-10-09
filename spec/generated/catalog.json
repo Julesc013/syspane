@@ -489,7 +489,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "e9c5b639cf45fe76b0ff77488c97bbd4b590392027a81a70fb8da59909a576d2"
+      "sha256": "a038097ba33bf134618f4a66eb94652576b1ad39dd83b22f599157ac48eea0ad"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -2601,6 +2601,17 @@
       "sha256": "3989ffd50f97e50b2c7ff2aa67833102e25b653e64cc49d9209bf9be7a650c59"
     },
     {
+      "id": "SP-W11-VALIDATED-AUTHORED",
+      "path": "delivery/packages/w-11-validated-authored.md",
+      "title": "Immutable authored validation for native composition",
+      "description": "Remove repeated structural validation while retaining current geometry, resource and policy checks.",
+      "requires": [
+        "SP-W11-RECOVERY-ADMISSION-INVESTIGATION",
+        "SP-W11-RECOVERY-GUI-LIMITS"
+      ],
+      "sha256": "8c33bd09b670ce2de65bd9f32c605d4aa3ed017833a0fdef6382f12ad58f1887"
+    },
+    {
       "id": "SP-W24-PACKAGE",
       "path": "delivery/packages/w-24-transport.md",
       "title": "W-24 authenticated transport and policy boundary",
@@ -3532,6 +3543,17 @@
         "SP-VISIBILITY-CONTROLS-HANDOFF"
       ],
       "sha256": "022b795611e4aaa35cf798f5f7ee3cc07f1a6d3ad2b0438947c3cad577afb685"
+    },
+    {
+      "id": "SP-VALIDATED-AUTHORED-HANDOFF",
+      "path": "delivery/validated-authored-handoff.md",
+      "title": "Immutable authored validation handoff",
+      "description": "Reuse structural proof during native composition while retaining fresh inputs and current authority.",
+      "requires": [
+        "SP-W11-VALIDATED-AUTHORED",
+        "SP-RECOVERY-ADMISSION-INVESTIGATION-HANDOFF"
+      ],
+      "sha256": "f56ed7fc1f80a80e21af06e09e738e645b060c5f191cd03918305e78ccfadd8d"
     },
     {
       "id": "SP-VISIBILITY-ADMISSION-HANDOFF",

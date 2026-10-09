@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-09T10:07:13.837163+00:00", "scope": "Recovery admission investigation, repeated GUI failures and closed production gate"}
+updated: {"by": "codex", "at": "2026-10-09T10:54:09.908758+00:00", "scope": "Immutable authored validation and recorded native qualification"}
 ---
 
 # Current state and next admitted boundary
@@ -22,15 +22,18 @@ recordings are local ignored `out/` content; the retired root is absent from the
 tracked tree. See `docs/developers/build.md` in the repository for checkout
 setup and the [repository contract](../foundation/repository.md) for ownership.
 
-The [recovery admission investigation](recovery-admission-investigation-handoff.md)
-keeps production recovery/history disabled. Candidate entry and refusal cases pass,
-alongside 144 selected portable checks and 141 distinct native functional cases, but
-two ordinary GUI attempts failed the unchanged timing limits. MAX-WIDGETS exceeded
-the delay bound; the confirmation also exceeded MAX-RECORD work and delay bounds.
-Fixture observers are now separate from candidate admission. Final compiled gate
-comparisons, twelve rerun settings cases and all six component checks pass.
-Next attribute and repair those costs before more ordinary qualification or admission.
-Native inspector, desktop/telemetry/lifecycle and all five editions remain open.
+The [immutable authored validation](validated-authored-handoff.md) reduces repeated
+structural validation in surface construction and painting. Current layout, resource,
+authority and erasure checks remain. Ordinary GUI qualification passes six cases and fails MAX-RECORD at 143870 us excess delay.
+Production admission remains disabled. Preserve the first portable timeout and refresh
+deadline failure alongside their single isolated comparisons. Measure the remaining GTK signal-handler and drawing work around Apply/recovery/history, correlated with periodic callback timing, before another ordinary qualification attempt or production admission.
+All five complete desktop editions remain unfinished.
+
+The earlier [recovery admission investigation](recovery-admission-investigation-handoff.md)
+preserves two failed ordinary GUI attempts and separates fixture observers from
+candidate admission. The current repair above reduces repeated validation costs,
+but has not closed GUI qualification or enabled production recovery. Preserve the
+historical failures and compiled gate evidence in that handoff.
 
 The [frontend recovery backend](frontend-recovery-handoff.md) now uses authenticated
 profile 0.2, current native admission and exact accepted-request retirement metadata.

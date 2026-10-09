@@ -11,11 +11,11 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
-The [recovery admission investigation](spec/delivery/recovery-admission-investigation-handoff.md)
-separates fixture diagnostics from candidate recovery and prepared-history admission.
-Functional entry checks pass, but two ordinary maximum-input GUI attempts failed
-the unchanged timing limits. Production recovery remains disabled while those costs
-are investigated. All five complete desktop editions remain unfinished.
+The [immutable authored validation](spec/delivery/validated-authored-handoff.md)
+reduces repeated scene validation during native composition while preserving current
+layout and policy checks. Six of seven ordinary GUI cases pass; MAX-RECORD still exceeds the 100 ms delay limit.
+Production recovery remains disabled while that timing failure is investigated.
+All five complete desktop editions remain unfinished.
 
 The [installed settings frontend](spec/delivery/installed-settings-handoff.md)
 now runs from a relocated development payload, supervises its verified configuration

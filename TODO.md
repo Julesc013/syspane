@@ -10,6 +10,9 @@ The user-expanded [0.1.0 release scope](spec/delivery/release-0.1.0.md) now requ
 Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X. Finish the full native desktop
 editions and their release gates; foundation experiments alone cannot complete this goal.
 
+The [immutable authored validation checkpoint](spec/delivery/validated-authored-handoff.md)
+records the current native repair and retained failures. Measure the remaining GTK signal-handler and drawing work around Apply/recovery/history, correlated with periodic callback timing, before another ordinary qualification attempt or production admission.
+
 ## Completed specification work
 
 - [x] Move shared build tooling into `source/build/`; remove the retired root and generated evidence from Git tracking, with machine settings and archives under ignored `out/`.

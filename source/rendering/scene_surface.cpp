@@ -83,18 +83,22 @@ const s::Display& display_for(const Json& widget,const s::Topology& topology){
     for(const auto& d:topology.displays)if(d.id==topology.fallback)return d;
     throw Error("surface.display");
 }
-void validate(const SurfaceConfig& cfg){
-    need(cfg.resources!=nullptr,"surface.resources");c::validate_resource_binding(*cfg.resources,cfg.authored);
+c::ValidatedAuthored validate(SurfaceConfig& cfg){
+    need(cfg.resources!=nullptr,"surface.resources");c::ValidatedAuthored validated(cfg.authored);c::validate_resource_binding(*cfg.resources,validated);
     std::map<std::string,s::Metrics> metrics;
     for(const auto& w:cfg.authored.scene["widgets"])if(w["kind"]!="group")metrics[w["id"]]={{64,64},{64,64}};
-    (void)s::resolve(cfg.authored.scene,cfg.topology,metrics);
+    (void)s::resolve(validated,cfg.topology,metrics);
     TextRequest q;q.theme=cfg.resources->theme();q.language=cfg.language;q.contrast=cfg.contrast;(void)render_text(q);
+    // Other composition helpers use SurfaceConfig. Detach its private copy from
+    // any references into a caller's moved JSON and keep it equal to the proof.
+    cfg.authored=validated.documents();return validated;
 }
 }
 struct SceneSurface::Impl {
     struct Entry {SurfaceProvider declaration;std::unique_ptr<r::DataView> view;};
     struct History {std::unique_ptr<s::ChartHistory> samples;std::optional<s::ChartCode> fault;};
     c::Authority authority;c::Policy policy;SurfaceConfig config;std::vector<Entry> entries;std::string channel;
+    std::optional<c::ValidatedAuthored> validated;
     std::function<bool()> clear;std::unique_ptr<SurfaceFrame> frame;SurfaceStatus status;
     std::optional<std::uint64_t> highest,last_time;bool busy=false,closed=false;
     std::map<std::string,History> histories;std::unique_ptr<SceneImages> images;
@@ -104,11 +108,11 @@ struct SceneSurface::Impl {
         if(closed)return false;
         bool ok=false;
         try{Busy guard(busy);ok=clear();}catch(...){ok=false;}
-        if(!ok){closed=true;images->clear();histories.clear();entries.clear();status={SurfaceCode::closed,0,0,"surface.clear"};}
+        if(!ok){closed=true;images->clear();histories.clear();entries.clear();config={};validated.reset();status={SurfaceCode::closed,0,0,"surface.clear"};}
         else status={SurfaceCode::empty,0,0,{}};
         return ok;
     }
-    void shut(const char* why){images->clear();histories.clear();erase();closed=true;entries.clear();config={};status={SurfaceCode::closed,0,0,why};}
+    void shut(const char* why){images->clear();histories.clear();erase();closed=true;entries.clear();config={};validated.reset();status={SurfaceCode::closed,0,0,why};}
     bool advance(std::uint64_t now){owner();if(closed)return false;if(last_time&&now<*last_time){shut("surface.clock");return false;}last_time=now;return true;}
     bool start(std::uint64_t now){if(!advance(now)||!erase())return false;
         for(auto& e:entries){const auto state=e.view->status(now);if(state.presentation==r::Presentation::retained||state.snapshot_required)discontinuity(e.declaration.producer,false);}
@@ -205,7 +209,7 @@ struct SceneSurface::Impl {
             out.title=w["title"];text_bytes+=surface_text_bytes(out);need(text_bytes<=262144,"surface.capacity");
             texts.emplace(out.id,std::move(out));
         }
-        next->layout=s::resolve(config.authored.scene,config.topology,metrics);need(next->layout.state!=s::State::alternative,"surface.layout");
+        next->layout=s::resolve(*validated,config.topology,metrics);need(next->layout.state!=s::State::alternative,"surface.layout");
         condition_surface(config,catalog,now,*next,texts,rasters,display_pixels,leaf_pixels,&text_session);
         for(auto& d:next->displays)d.rgba.resize(static_cast<std::size_t>(d.width)*d.height*4);
         for(bool diagnostic:{false,true})
@@ -226,9 +230,10 @@ struct SceneSurface::Impl {
     }
 };
 SceneSurface::SceneSurface(c::Authority authority,c::Policy policy,SurfaceConfig config,std::vector<SurfaceProvider> providers,std::function<bool()> clear_native,std::string image_worker,SurfaceAudience audience,ImageFactory images):impl_(std::make_unique<Impl>()){
-    validate(config);need(static_cast<bool>(clear_native)&&providers.size()<=16,"surface.input");auto& i=*impl_;
+    auto validated=validate(config);need(static_cast<bool>(clear_native)&&providers.size()<=16,"surface.input");auto& i=*impl_;
     need(audience==SurfaceAudience::desktop||audience==SurfaceAudience::inspector,"surface.audience");i.channel=audience==SurfaceAudience::desktop?"desktop":"inspector";
     i.images=images?std::make_unique<SceneImages>(std::move(images)):std::make_unique<SceneImages>(std::move(image_worker));i.authority=std::move(authority);i.policy=std::move(policy);i.config=std::move(config);i.clear=std::move(clear_native);if(i.policy.available)i.highest=i.policy.revision;
+    i.validated=std::move(validated);
     std::set<std::string> ids;
     for(auto& p:providers){need(protocol::identifier(p.producer)&&ids.insert(p.producer).second,"surface.producer");
         auto view=std::make_unique<r::DataView>(i.authority,i.policy,i.channel,"operational",p.metrics);i.entries.push_back({std::move(p),std::move(view)});}
@@ -259,7 +264,7 @@ void SceneSurface::policy(c::Policy next,std::uint64_t now){
     for(auto& e:i.entries)e.view->policy(next,now);
     i.policy=std::move(next);i.status.code=i.allowed()?SurfaceCode::empty:SurfaceCode::restricted;
 }
-void SceneSurface::replace(SurfaceConfig config,std::uint64_t now){auto& i=*impl_;if(!i.start(now))return;i.images->clear();i.histories.clear();validate(config);i.config=std::move(config);}
+void SceneSurface::replace(SurfaceConfig config,std::uint64_t now){auto& i=*impl_;if(!i.start(now))return;i.images->clear();i.histories.clear();auto validated=validate(config);i.config=std::move(config);i.validated=std::move(validated);}
 void SceneSurface::close(){auto& i=*impl_;i.owner();if(!i.closed)i.shut("surface.closed");}
 bool SceneSurface::poll_image_jobs(){auto& i=*impl_;i.owner();try{return i.images->poll();}catch(const Error&){i.images->clear("surface.capacity");if(i.erase())i.status={SurfaceCode::alternative,0,0,"surface.capacity"};return true;}}
 SurfaceStatus SceneSurface::status()const{impl_->owner();return impl_->status;}

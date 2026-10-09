@@ -257,6 +257,10 @@ void validate_authored(const Authored& value){
     structural(value.settings,"0.1.0/settings",16384);validate_scene_document(value.scene);
     require(revision(value.settings["revision"])==revision(value.scene["revision"]),"authored.mixed_revision");
 }
+ValidatedAuthored::ValidatedAuthored(const Authored& value):documents_(std::make_shared<const Authored>(value)){
+    validate_authored(*documents_);
+}
+const Authored& ValidatedAuthored::documents()const{require(static_cast<bool>(documents_),"authored.snapshot");return *documents_;}
 Json parse_command(std::string_view bytes){
     require(!bytes.empty()&&bytes.size()<=protocol::large_command_limit,"command.size");
     auto value=protocol::parse(bytes,protocol::ParseProfile::large_command);
