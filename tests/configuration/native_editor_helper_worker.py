@@ -23,7 +23,7 @@ def main(extension=None,definitions=None):
   if 'cases' not in CASES:CASES['cases']=CASES['native']
  probe,config,image_worker,recovery_worker,record,evidence=[Path(x).resolve() for x in sys.argv[1:]]
  assert os.geteuid() and evidence.parent==probe.parent and json.loads((probe.parent/'.syspane-owner.json').read_bytes())['profile']=='linux-x64-gcc13'
- prefix='hw-' if CASES['family']=='HISTORY-WORKER' else 'rp-' if CASES['family']=='RECOVERY-PREPARATION' else 'ra-' if extension else 'ew-'
+ prefix='rw-' if CASES['family']=='REQUEST-WORKER' else 'hw-' if CASES['family']=='HISTORY-WORKER' else 'rp-' if CASES['family']=='RECOVERY-PREPARATION' else 'ra-' if extension else 'ew-'
  folder=evidence/(prefix+uuid.uuid4().hex[:10]);folder.mkdir(mode=0o700,parents=True)
  assert subprocess.check_output(['findmnt','--target',str(folder),'--noheadings','--output','FSTYPE'],text=True).strip()=='ext4'
  names=['syspane-configuration-host','syspane-image-worker','syspane-recovery-worker'];helper_bytes=[p.read_bytes() for p in (config,image_worker,recovery_worker)]
@@ -62,7 +62,7 @@ def main(extension=None,definitions=None):
   inputs[name]=folder/(name+'.input');write(inputs[name],raw)
  class Run:
   def __init__(self,hold=(),admission=None):
-   self.hold=set(hold);self.pending=b'';self.images=set();self.recovery=False;self.surface=False;self.session=False;self.preparation=False;self.history=False;self.closed=False
+   self.hold=set(hold);self.pending=b'';self.images=set();self.recovery=False;self.surface=False;self.session=False;self.preparation=False;self.history=False;self.request=False;self.closed=False
    env=dict(os.environ,PATH='/nonexistent');env.pop('LD_PRELOAD',None);env.pop('LD_LIBRARY_PATH',None)
    self.proc=subprocess.Popen(['irrelevant-name',str(ROOT),*([str(admission)] if admission else [])],executable=str(image/'bin/syspane'),cwd=cwd,env=env,stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,bufsize=0)
    self.pidfd=os.pidfd_open(self.proc.pid);self.traced=set();self.children={};self.observed={};self.parent_threads=set();self.held=set();self.cleaning=False
@@ -109,7 +109,7 @@ def main(extension=None,definitions=None):
    # The fixed bound covers the GUI-owned task interface. Consumer timings also
    # include existing document validation/rasterization; retain these separately
    # instead of presenting them as helper latency or qualifying installed UI.
-   if op not in ('pump','quit','draft','draft-edit','draft-discard','history-fixture','history-consumed') and not op.startswith(('surface','session')):assert v['elapsed_us']<CASES['gui_operation_limit_ms']*1000,(op,'GUI blocked',v)
+   if op not in ('pump','quit','draft','draft-edit','draft-discard','history-fixture','history-consumed','request-consumed') and not op.startswith(('surface','session')):assert v['elapsed_us']<CASES['gui_operation_limit_ms']*1000,(op,'GUI blocked',v)
    out=v['reply']
    if op=='image' and 'id' in out:self.images.add(out['id'])
    if op=='image-drop' and out.get('dropped'):self.images.remove(args['id'])
@@ -123,6 +123,8 @@ def main(extension=None,definitions=None):
    if op=='preparation-drop':self.preparation=False
    if op in ('history-create','history-consumed') and out.get('created'):self.history=True
    if op=='history-drop':self.history=False
+   if op in ('request-create','request-consumed','request-reuse') and out.get('created'):self.request=True
+   if op=='request-drop':self.request=False
    return out
   def pump(self):return self.call('pump')
   def image(self,name='rgba.png'):
@@ -163,6 +165,7 @@ def main(extension=None,definitions=None):
      if self.recovery:self.call('recovery-drop')
      if self.preparation:self.call('preparation-drop')
      if self.history:self.call('history-drop')
+     if self.request:self.call('request-drop')
      while self.surface or self.session or not self.call('status')['stopped']:
       if self.surface:self.call('surface-close')
       if self.session:self.call('session-close')

@@ -10,10 +10,10 @@ The user-expanded [0.1.0 release scope](spec/delivery/release-0.1.0.md) now requ
 Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X. Finish the full native desktop
 editions and their release gates; foundation experiments alone cannot complete this goal.
 
-The [request preparation checkpoint](spec/delivery/request-preparation-handoff.md)
-implements detached full command validation and current-owner adoption. Connect
-its finite task slot to the existing native worker, then integrate form cancellation
-and current-policy handling. The earlier ordinary GUI failure and fixed limits remain.
+The [native request checkpoint](spec/delivery/request-worker-handoff.md) implements
+one finite request slot on the existing worker. Integrate form cancellation,
+current-policy handling and the exact recovery digest before submitting. The
+earlier ordinary GUI failure and fixed limits remain.
 
 ## Completed specification work
 
@@ -56,7 +56,8 @@ behaviour has been implemented. See [audit disposition](spec/delivery/audit-2026
 - [x] Separate fixture observers from candidate recovery; execute ordinary-entry functional/refusal cases and preserve exact compiled gate comparisons. See the [investigation](spec/delivery/recovery-admission-investigation-handoff.md).
 - [x] Trace GTK signal handlers and application timers with validated test-only instrumentation; preserve raw clock discrepancies and source-bound evidence. See the [handoff](spec/delivery/editor-callback-trace-handoff.md).
 - [x] Implement portable detached request preparation and current-owner adoption; preserve frozen command, theme, transaction and limit expectations on all three profiles. See the [handoff](spec/delivery/request-preparation-handoff.md).
-- [ ] Integrate asynchronous Apply preparation with the existing native worker and form, preserving current authority, request identity, full validation and unknown-outcome recovery. Preserve measured restore/form-timer/paint costs and original GUI limits.
+- [x] Integrate request preparation with the existing native worker; verify all 14 fixed task cases, running cancellation and three-kind admission order. See the [handoff](spec/delivery/request-worker-handoff.md).
+- [ ] Integrate asynchronous Apply preparation with the native form, preserving current authority, request identity, full validation, exact recovery digest and unknown-outcome recovery. Preserve measured restore/form-timer/paint costs and original GUI limits.
 - [ ] Explain and repair the repeated MAX-WIDGETS delay and MAX-RECORD callback/delay failures before admitting production recovery/history. Preserve both failed ordinary attempts and fixed limits.
 - [ ] Complete asynchronous authoring and native preview handoff; retain full validation and the original GUI timing gates.
 - [ ] Repair measured preview/layout/validation stalls and investigate the transient Apply state and controller restart; pass all seven fixed GTK limit cases without weakening deadlines or erasure.

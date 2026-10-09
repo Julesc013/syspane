@@ -15,6 +15,20 @@ build` before configuring or building; use `test` or `package` for those actions
 The common active-output budget is unchanged; retained `out/evidence/` archives
 are measured separately. Never use the placeholder account from the example.
 
+The [native request package](../../spec/delivery/packages/w-11-request-worker.md)
+adds one request slot to the existing Linux helper worker. After normal
+preflight/configure/build, run `ctest --preset linux-x64-gcc13 -R
+'^native[.]REQUEST-WORKER$' --output-on-failure`. Its fixed observer verifies
+held/running cancellation, exact owner adoption and all three-kind admission orders.
+Run the original history, helper-worker, recovery-preparation/admission and installed
+editor/recovery consumers. Keep the unchanged 100-ms task-interface limits.
+
+On all three development profiles, run `ctest --preset <profile> -R
+'^(editor[.](REQUEST-PREPARATION-|HISTORY-PREPARATION-)|composition[.])'
+--output-on-failure`, plus historical artifact checks on v141_xp. The
+[handoff](../../spec/delivery/request-worker-handoff.md) preserves source-bound
+results and the remaining form/recovery-digest integration boundary.
+
 The [request preparation package](../../spec/delivery/packages/w-11-request-preparation.md)
 adds portable detached command validation and current-owner adoption. After normal
 preflight/configure/build on all three profiles, run `ctest --preset <profile> -R
@@ -26,7 +40,7 @@ Run the affected editor/settings/configuration/scene/protocol/component families
 and legacy artifact checks, then native history, recovery preparation, helper and
 installed editor/recovery consumers. The original synchronous begin entry remains.
 The [handoff](../../spec/delivery/request-preparation-handoff.md) records portable
-evidence; worker-slot/form integration and ordinary GUI qualification are pending.
+evidence; form integration and ordinary GUI qualification are pending.
 Do not enable production recovery from these component measurements.
 
 The [callback trace package](../../spec/delivery/packages/w-11-editor-callback-trace.md)

@@ -489,7 +489,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "ecfc0b74784a7fca19333989f99a225b96965e72f18903915cc2ca2b00bcd06f"
+      "sha256": "845b1ed5df9f6c60c8a14f579a7a35bc187cf72ac98c3b5f100e8f39412f368d"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -2601,6 +2601,18 @@
       "sha256": "8a548e12f18e0b5b979dd8394b7f30e062b5898dc69d76bc33908d4f7ae9a213"
     },
     {
+      "id": "SP-W11-REQUEST-WORKER",
+      "path": "delivery/packages/w-11-request-worker.md",
+      "title": "Native request preparation ownership",
+      "description": "Bound request preparation on the existing native worker without granting submission authority.",
+      "requires": [
+        "SP-W11-REQUEST-PREPARATION",
+        "SP-W11-HISTORY-WORKER",
+        "SP-W11-EDITOR-HELPER-WORKER"
+      ],
+      "sha256": "5ccb8f57f4f5bd5954f40e5e29b5fab38094e4047df95b2f59ad3cb36831f1d9"
+    },
+    {
       "id": "SP-W11-SCENE-INSPECTOR",
       "path": "delivery/packages/w-11-scene-inspector.md",
       "title": "Native scene inspector navigation and disclosure",
@@ -3280,6 +3292,17 @@
         "SP-EDITOR-CALLBACK-TRACE-HANDOFF"
       ],
       "sha256": "4c51cf061d5deb255a4fc2e49b323b42f7c6e336a68d4a796c9982337e4e1806"
+    },
+    {
+      "id": "SP-REQUEST-WORKER-HANDOFF",
+      "path": "delivery/request-worker-handoff.md",
+      "title": "Native request preparation handoff",
+      "description": "One finite request slot on the existing worker, with owner-only adoption and form integration still required.",
+      "requires": [
+        "SP-W11-REQUEST-WORKER",
+        "SP-REQUEST-PREPARATION-HANDOFF"
+      ],
+      "sha256": "87c322b30c371facd10dfdf7d46a217d52fd3924c0548540cda244f96c7450ad"
     },
     {
       "id": "SP-RESOURCE-GENERATIONS-HANDOFF",

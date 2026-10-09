@@ -1,6 +1,11 @@
 # Foundation development profiles
 
-Current revisions are Windows x64 41, Linux x64 72 and historical x86 32. The
+Current revisions are Windows x64 42, Linux x64 73 and historical x86 33. The
+[request worker package](../../../spec/delivery/packages/w-11-request-worker.md)
+adds a finite request-preparation slot to the existing native helper worker.
+Form integration and ordinary GUI qualification remain separate gates.
+
+Earlier revisions were Windows x64 41, Linux x64 72 and historical x86 32. The
 [request preparation checkpoint](../../../spec/delivery/request-preparation-handoff.md)
 adds full detached command preparation and current-owner adoption. All three
 profiles pass 342 selected portable checks. Native worker/form integration and

@@ -569,7 +569,8 @@
         "SP-W11-RECOVERY-ADMISSION-INVESTIGATION",
         "SP-W11-VALIDATED-AUTHORED",
         "SP-W11-EDITOR-CALLBACK-TRACE",
-        "SP-W11-REQUEST-PREPARATION"
+        "SP-W11-REQUEST-PREPARATION",
+        "SP-W11-REQUEST-WORKER"
       ],
       "acceptance_tests": [
         "T-SETTINGS",
@@ -646,14 +647,17 @@
         "tests/configuration/editor_callback_trace_tests.py",
         "tests/configuration/native_editor_callback_trace.py",
         "source/interfaces/editor_request.cpp",
-        "tests/editor/request_preparation_tests.cpp"
+        "tests/editor/request_preparation_tests.cpp",
+        "source/interfaces/editor_request_task.hpp",
+        "tests/configuration/native_request_worker.py",
+        "tests/configuration/request-worker-cases.json"
       ],
       "status": "in_progress",
       "authority_class": "development",
       "execution_grant": "user:foundation-native-campaign-2026-10-05",
-      "notes": "Portable request preparation now executes full validation on detached state and adopts only into the unchanged originating draft under current authority. Frozen expectations and all 342 selected portable checks pass on three profiles; six native regression families pass 88 cases. Implement the finite request slot on the existing native worker, then form cancellation/current-policy integration. Installed Apply remains synchronous; original GUI failures, production admission and all five full editions remain open.",
-      "package": "delivery/packages/w-11-request-preparation.md",
-      "evidence": "delivery/request-preparation-handoff.md"
+      "notes": "The finite native request-preparation slot passes all 14 frozen task cases, including running cancellation, closure and all six admission orders with history/recovery. Portable validation and current-owner adoption remain unchanged. Integrate the native form with current policy and an exact recovery digest before submitting. Installed Apply remains synchronous; original GUI timing failures, production admission and all five full editions remain open.",
+      "package": "delivery/packages/w-11-request-worker.md",
+      "evidence": "delivery/request-worker-handoff.md"
     },
     {
       "id": "W-12",

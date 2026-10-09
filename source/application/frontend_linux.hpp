@@ -7,6 +7,7 @@
 #include "image_job.hpp"
 #include "editor_recovery.hpp"
 #include "editor_history_task.hpp"
+#include "editor_request_task.hpp"
 #include "recovery_queue_linux.hpp"
 #include <memory>
 #include <functional>
@@ -50,6 +51,7 @@ public:
     std::shared_ptr<const platform::RecoveryFactory> recovery()const;
     std::shared_ptr<const interfaces::RecoveryPreparationFactory> preparations()const;
     std::shared_ptr<const interfaces::HistoryPreparationFactory> history_preparations()const;
+    std::shared_ptr<const interfaces::RequestPreparationFactory> request_preparations()const;
     void submit(const interfaces::EditRequest&,std::optional<std::string> captured_digest={});
     void acknowledge_retirement(std::uint64_t profile_serial);
     void cancel(const interfaces::EditRequest&);

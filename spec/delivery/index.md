@@ -118,6 +118,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Authenticated coherent recovery context transfer](recovery-transfer-handoff.md) — Negotiated profile transfer binds saved generations and native recovery observations to the authenticated editor session.
 - [SysPane 0.1.0 release objective and unresolved admission](release-0.1.0.md) — Preserve the requested complete desktop release across Windows 9x, Windows NT, X11, Wayland and Mac OS X.
 - [Detached editor request preparation handoff](request-preparation-handoff.md) — Portable full command preparation and exact owner adoption, with native integration still required.
+- [Native request preparation handoff](request-worker-handoff.md) — One finite request slot on the existing worker, with owner-only adoption and form integration still required.
 - [Durable resource generation checkpoint](resource-generations-handoff.md) — Exact content closure, command identity and coherent Linux recovery.
 - [Greenfield implementation campaign](roadmap.md) — Build native vertical slices and contracts together in risk order.
 - [Semantic typography composition checkpoint](role-composition-handoff.md) — Bounded scene font roles with independent pixels and preserved diagnostics.

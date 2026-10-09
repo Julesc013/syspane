@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-09T11:37:14+00:00", "scope": "Portable request preparation and remaining native integration boundary"}
+updated: {"by": "codex", "at": "2026-10-09T12:03:17.698586+00:00", "scope": "Native request task ownership and remaining form integration"}
 ---
 
 # Current state and next admitted boundary
@@ -22,11 +22,18 @@ recordings are local ignored `out/` content; the retired root is absent from the
 tracked tree. See `docs/developers/build.md` in the repository for checkout
 setup and the [repository contract](../foundation/repository.md) for ownership.
 
-The [request preparation boundary](request-preparation-handoff.md) now validates
+The [native request worker](request-worker-handoff.md) now has one finite slot on
+the existing worker and shares admission order with history/recovery preparation.
+All 14 fixed native task cases pass, including running cancellation and close.
+Integrate the form's cancellation/current-policy state and exact recovery digest
+before submitting. Installed Apply remains synchronous; the original ordinary GUI
+failure, production recovery admission and all five full editions remain open.
+
+The [request preparation boundary](request-preparation-handoff.md) validates
 and serializes commands on detached state, then rechecks current owner/authority
 before allocating a live ticket. Frozen reference cases and all 342 selected
-portable checks pass on three profiles. Integrate one finite request slot into the
-existing native worker, then connect form cancellation/current-policy handling.
+portable checks pass on three profiles. The native slot above is implemented;
+form cancellation/current-policy handling remains the next boundary.
 Installed Apply remains synchronous. Production recovery and all five complete
 editions remain open; original ordinary GUI timing failures are preserved.
 

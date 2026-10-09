@@ -57,6 +57,14 @@ struct TimedHistory final:ui::HistoryPreparationTask {
     void cancel()override{times.measure("history.cancel",[&]{task->cancel();});}
 };
 void need(bool ok,const char* code){if(!ok)throw syspane::protocol::Error(code);}
+struct TimedRequest final:ui::RequestPreparationTask {
+    TaskTimes& times;std::unique_ptr<ui::RequestPreparationTask> task;
+    TimedRequest(TaskTimes& t,std::unique_ptr<ui::RequestPreparationTask> p):times(t),task(std::move(p)){}
+    ~TimedRequest() override{times.measure("request.destroy",[&]{task.reset();});}
+    ui::RequestPreparationStatus status()const override{return times.measure("request.status",[&]{return task->status();});}
+    std::unique_ptr<ui::RequestPrepared> take()override{return times.measure("request.take",[&]{return task->take();});}
+    void cancel()override{times.measure("request.cancel",[&]{task->cancel();});}
+};
 std::string read(const std::string& path){std::ifstream f(path,std::ios::binary);need(static_cast<bool>(f),"probe.input");std::string bytes{std::istreambuf_iterator<char>(f),{}};need(bytes.size()<=8388609,"probe.capacity");return bytes;}
 void emit(const Json& value){std::cout<<value.dump()<<std::endl;}
 const char* image_state(v::ImageJobState s){switch(s){case v::ImageJobState::running:return "running";case v::ImageJobState::stopping:return "stopping";case v::ImageJobState::ready:return "ready";case v::ImageJobState::failed:return "failed";case v::ImageJobState::cancelled:return "cancelled";case v::ImageJobState::consumed:return "consumed";}return "invalid";}
@@ -111,12 +119,14 @@ int main(int argc,char** argv){try{
     auto recovery_factory=std::make_shared<const os::RecoveryFactory>([&](std::string path,os::RecoveryContext context){auto task=times.measure("recovery.create",[&]{return (*client.recovery())(std::move(path),std::move(context));});return std::make_unique<TimedRecovery>(times,std::move(task));});
     auto preparations=std::make_shared<const ui::RecoveryPreparationFactory>([&](std::unique_ptr<ui::RecoveryWork> input){auto task=times.measure("preparation.create",[&]{return (*client.preparations())(std::move(input));});return std::make_unique<TimedPreparation>(times,std::move(task));});
     const ui::HistoryPreparationFactory histories=[&](std::unique_ptr<ui::HistoryWork> input){auto task=times.measure("history.create",[&]{return (*client.history_preparations())(std::move(input));});return std::make_unique<TimedHistory>(times,std::move(task));};
+    const ui::RequestPreparationFactory requests=[&](std::unique_ptr<ui::RequestWork> input){auto task=times.measure("request.create",[&]{return (*client.request_preparations())(std::move(input));});return std::make_unique<TimedRequest>(times,std::move(task));};
     Worker worker(client,std::move(admission));emit({{"event","ready"},{"worker",worker.tid},{"before_attach",before},{"status",state(client.status())}});
     std::map<std::uint64_t,std::unique_ptr<v::ImageTask>> images;std::uint64_t ids=0;
     std::unique_ptr<os::RecoveryTask> recovery;std::unique_ptr<v::SceneSurface> surface;
     std::unique_ptr<ui::EditorDraft> draft;std::unique_ptr<ui::EditorRecoverySession> session;std::uint64_t clock=0;
     std::unique_ptr<ui::RecoveryPreparationTask> preparation;std::unique_ptr<ui::RecoveryPrepared> prepared;bool capture=false,asynchronous=false;
     std::unique_ptr<ui::HistoryPreparationTask> history;std::unique_ptr<ui::HistoryPrepared> history_result;std::unique_ptr<ui::EditorDraft> capacity_draft;
+    std::unique_ptr<ui::RequestPreparationTask> request;std::unique_ptr<ui::RequestPrepared> request_result;
     const auto recovery_cases=settings_fixture::read(root+"/tests/editor/recovery-draft-cases.json");
     const ui::RecoveryIdentity recovery_identity{recovery_cases["identity"]["profile"],recovery_cases["identity"]["generation"]};
     auto make_draft=[&]{
@@ -173,6 +183,45 @@ int main(int argc,char** argv){try{
                     try{history->take();}catch(const std::exception& e){errors.emplace_back(e.what());}
                     try{history->cancel();}catch(const std::exception& e){errors.emplace_back(e.what());}
                     try{(*factory)(std::move(work));}catch(const std::exception& e){errors.emplace_back(e.what());}
+                });other.join();reply={{"errors",errors}};
+            }
+            else if(op=="request-create"||op=="request-consumed"||op=="request-reuse"){
+                need(draft&&!request&&!request_result,"probe.active");
+                auto& origin=op=="request-reuse"?*capacity_draft:*draft;
+                auto work=times.measure("request.work",[&]{return origin.request_work(q.value("intent",std::string("commit")),"request:native");});
+                if(work&&op=="request-consumed"){
+                    std::exception_ptr error;std::thread first([&]{try{(void)work->run();}catch(...){error=std::current_exception();}});first.join();if(error)std::rethrow_exception(error);
+                }
+                if(work){request=requests(std::move(work));reply={{"created",true}};}else reply={{"created",false}};
+            }else if(op=="request-null"){auto extra=requests({});reply={{"created",true}};
+            }else if(op=="request-unattached"){
+                need(static_cast<bool>(capacity_draft),"probe.draft");app::EditorHelperClient other;
+                auto extra=(*other.request_preparations())(capacity_draft->request_work("commit","unattached"));reply={{"created",true}};
+            }else if(op=="request-capacity"){
+                need(static_cast<bool>(capacity_draft),"probe.draft");auto extra=requests(capacity_draft->request_work("commit","capacity"));reply={{"created",true}};
+            }else if(op=="request-poll"){
+                need(static_cast<bool>(request),"probe.request");const auto s=request->status();reply={{"ready",s.ready},{"stopped",s.stopped},{"running",s.running},{"error",s.error},{"handles",client.status().request_handles}};
+            }else if(op=="request-handles")reply={{"handles",client.status().request_handles}};
+            else if(op=="request-take"){need(static_cast<bool>(request),"probe.request");request_result=request->take();reply={{"taken",true}};}
+            else if(op=="request-adopt"){
+                need(draft&&request_result,"probe.request");auto value=times.measure("request.adopt",[&]{return draft->adopt_request(std::move(request_result));});
+                reply={{"ticket",value.ticket},{"epoch",value.epoch},{"request",value.request},{"command",c::parse_command(value.body)}};
+            }else if(op=="request-active"){need(static_cast<bool>(draft),"probe.draft");reply={{"active",draft->active_request().has_value()}};}
+            else if(op=="request-cancel"){need(static_cast<bool>(request),"probe.request");request->cancel();reply={{"cancelled",true}};}
+            else if(op=="request-drop"){request_result.reset();request.reset();reply={{"dropped",true},{"handles",client.status().request_handles}};}
+            else if(op=="request-policy"){
+                need(static_cast<bool>(draft),"probe.draft");auto p=theme_history_fixture::policy(q.value("deny",true)?8:9);
+                p.disclosure[{"desktop","history"}]={"sensitive"};if(q.value("deny",true))p.denied_capabilities.insert("settings.commit");
+                draft->policy(std::move(p));reply={{"changed",true}};
+            }else if(op=="request-wrong-thread"){
+                need(request&&capacity_draft,"probe.request");std::vector<std::string> errors;
+                auto work=capacity_draft->request_work("commit","other");const auto factory=client.request_preparations();
+                std::thread other([&]{
+                    try{request->status();}catch(const std::exception& e){errors.emplace_back(e.what());}
+                    try{request->take();}catch(const std::exception& e){errors.emplace_back(e.what());}
+                    try{request->cancel();}catch(const std::exception& e){errors.emplace_back(e.what());}
+                    try{(*factory)(std::move(work));}catch(const std::exception& e){errors.emplace_back(e.what());}
+                    try{client.request_preparations();}catch(const std::exception& e){errors.emplace_back(e.what());}
                 });other.join();reply={{"errors",errors}};
             }
             else if(op=="draft"){make_draft();reply={{"created",true}};}
@@ -248,7 +297,7 @@ int main(int argc,char** argv){try{
             else if(op=="session-invalidate"){need(static_cast<bool>(session),"probe.session");times.measure("session.invalidate",[&]{session->invalidate();});draft->disconnected();reply={{"invalidated",true}};}
             else if(op=="session-close"){need(static_cast<bool>(session),"probe.session");session->close();session->poll();const bool done=session->stopped();if(done){session.reset();draft.reset();}reply={{"stopped",done}};}
             else if(op=="close"){client.close();reply=state(client.status());}
-            else if(op=="quit"){need(client.status().stopped&&images.empty()&&!recovery&&!surface&&!session&&!preparation&&!prepared&&!history&&!history_result,"probe.active");emit({{"reply",{{"exit",true}}},{"elapsed_us",0},{"task_calls",times.calls}});return 0;}
+            else if(op=="quit"){need(client.status().stopped&&images.empty()&&!recovery&&!surface&&!session&&!preparation&&!prepared&&!history&&!history_result&&!request&&!request_result,"probe.active");emit({{"reply",{{"exit",true}}},{"elapsed_us",0},{"task_calls",times.calls}});return 0;}
             else throw syspane::protocol::Error("probe.operation");
         }catch(const std::exception& e){reply={{"error",e.what()}};}
         const auto elapsed=std::chrono::duration_cast<std::chrono::microseconds>(Clock::now()-began).count();emit({{"reply",reply},{"elapsed_us",elapsed},{"task_calls",times.calls}});
