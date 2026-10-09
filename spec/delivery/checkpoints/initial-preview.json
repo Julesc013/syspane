@@ -1,0 +1,3242 @@
+{
+  "recorded_at": "2026-10-09T07:25:45.054655+00:00",
+  "source_base": "ea0ed79f74ecf753708314a7356f0f219ea868d2",
+  "scope": "Initial full composition is deferred to drawing or guarded earlier input; subsequent rendering and authorization remain unchanged.",
+  "fixed_inputs": {
+    "spec/delivery/packages/w-11-installed-recovery.md": "04d3385d832a3fc75ba8fd56b2e18f5844157209e0cbc145244fd9400b5fa810",
+    "tests/configuration/installed-recovery-cases.json": "e5e75b327314911b4ff52f8521be9e04fa65f821f7b000431d3f62f63863792e",
+    "tests/configuration/installed-editor-cases.json": "9a3b26dc4001e0aa0dd1662802c18e73628d33b28527b3fd5c6a4ca364e6bac6",
+    "tests/configuration/installed-editor-scene.json": "45dea42b875ffd68e36282bd9df5cbcdee67f9093a774ef29b8ddaef58d4e7fa",
+    "tests/configuration/frontend-recovery-command.json": "f37c0bffe6b7cb22dd96733b15ad5669beaf63dbdfde5ad27f98b206bff47f0e",
+    "tests/configuration/profile-startup-cases.json": "778d20398d8db479a21b10e081c377ca85dabe11199b2c4918b03c6e6fc7cd2b",
+    "spec/delivery/packages/w-11-recovery-limits.md": "86c72bd00ca125faa35470642100b3f3f3410a856a84fb193dd6357fc98d61f5",
+    "tests/configuration/recovery-limits-cases.json": "9404f8bd7cf316dccc767c37158d4be352aef457a95382bfc576b10f766b2ab4",
+    "tests/configuration/recovery_limits_inputs.py": "8dece3e0096c62951cdd742e9a3b03176dc263d8005f575b546dd0be8c1eceef",
+    "spec/delivery/packages/w-11-recovery-gui-limits.md": "61a74b77b17f2c30f5b91538172b50a7639aa76cb9544d8dfbefa224b3604522",
+    "tests/configuration/recovery-gui-limits-cases.json": "43263df79f8dd55fc2446f6edf4128416dc200eb348c9bc0a05c2d780e68c9b4",
+    "tests/editor/initial_input.hpp": "1f8b0d2f7bf5def69d709bad79dce2d56f0d7e8dbae0b0f8dedaeb51dcc3a748",
+    "tests/editor/native_reply_lifecycle.py": "d49827b105da3cb5baad06594bfe807ecfb1bba1744ecafb443daaadef8ace62",
+    "tests/editor/editor_window.cpp": "2ff26246c7c023544d58c187f23d59658fcee3baf6d4565132c00d52dc0f42bf",
+    "tests/editor/native-cases.json": "478e0d455313965dc0afa360fa694c6be02f9bbfc1a63145f95a48c3e932b48a"
+  },
+  "executions": [
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "arrange",
+      "exit": 0,
+      "started_at": "2026-10-09T07:17:18.879928+00:00",
+      "record": {
+        "local_path": "out/evidence/initial-preview/linux-x64-gcc13-arrange-ca15742fa0/result.json",
+        "sha256": "a3852af7cd1b514bd7312541022e824a3642ba3238b59d9b7f8b63093ef42115"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/initial-preview/linux-x64-gcc13-arrange-ca15742fa0/source-inputs.zip",
+        "sha256": "5244f10e5318a5449dd61e4ad2fd09853dc1d52fd5559913a5b190ff2c947a85"
+      },
+      "later_source_changes": [],
+      "passed_checks": 1
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "build",
+      "exit": 0,
+      "started_at": "2026-10-09T07:06:36.419088+00:00",
+      "record": {
+        "local_path": "out/evidence/initial-preview/linux-x64-gcc13-build-8a656368c4/result.json",
+        "sha256": "44172a4a22b7fdb7498c286abbeed09d94c2f84967f8d1a0ac08329ca4a22852"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/initial-preview/linux-x64-gcc13-build-8a656368c4/source-inputs.zip",
+        "sha256": "5244f10e5318a5449dd61e4ad2fd09853dc1d52fd5559913a5b190ff2c947a85"
+      },
+      "later_source_changes": [],
+      "passed_checks": 0
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "configure",
+      "exit": 0,
+      "started_at": "2026-10-09T07:05:08.009584+00:00",
+      "record": {
+        "local_path": "out/evidence/initial-preview/linux-x64-gcc13-configure-7fe053f34c/result.json",
+        "sha256": "c81dc010e32206cfb155abe366beed998efa58c9b92d6d78b6e688aab4e20212"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/initial-preview/linux-x64-gcc13-configure-7fe053f34c/source-inputs.zip",
+        "sha256": "d7eb6f4f92374ea72e7ea1425a4bbb7d9d9780350a0967585a4c9bec60c07ac5"
+      },
+      "later_source_changes": [
+        "source/interfaces/editor_form_linux.cpp"
+      ],
+      "passed_checks": 0
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "consumers",
+      "exit": 0,
+      "started_at": "2026-10-09T07:24:35.288702+00:00",
+      "record": {
+        "local_path": "out/evidence/initial-preview/linux-x64-gcc13-consumers-edfd1a2228/result.json",
+        "sha256": "2119b97a32da589b7443192bf5b0a6e6fadf644785011b948232f1e15873e47d"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/initial-preview/linux-x64-gcc13-consumers-edfd1a2228/source-inputs.zip",
+        "sha256": "5244f10e5318a5449dd61e4ad2fd09853dc1d52fd5559913a5b190ff2c947a85"
+      },
+      "later_source_changes": [],
+      "passed_checks": 3
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "containers",
+      "exit": 0,
+      "started_at": "2026-10-09T07:18:36.279880+00:00",
+      "record": {
+        "local_path": "out/evidence/initial-preview/linux-x64-gcc13-containers-62e66b05d5/result.json",
+        "sha256": "1b8ec37f73c3cb8d638ffad61552fa8f96a0e513d3840aa80b002ea98168c081"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/initial-preview/linux-x64-gcc13-containers-62e66b05d5/source-inputs.zip",
+        "sha256": "5244f10e5318a5449dd61e4ad2fd09853dc1d52fd5559913a5b190ff2c947a85"
+      },
+      "later_source_changes": [],
+      "passed_checks": 1
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "controls",
+      "exit": 0,
+      "started_at": "2026-10-09T07:23:50.454258+00:00",
+      "record": {
+        "local_path": "out/evidence/initial-preview/linux-x64-gcc13-controls-07e9d34f5c/result.json",
+        "sha256": "6eee4fa56a57fa03e024ca261f2856e424af26e0f14f42d8b449d69c3c53b7d1"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/initial-preview/linux-x64-gcc13-controls-07e9d34f5c/source-inputs.zip",
+        "sha256": "5244f10e5318a5449dd61e4ad2fd09853dc1d52fd5559913a5b190ff2c947a85"
+      },
+      "later_source_changes": [],
+      "passed_checks": 1
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "editor",
+      "exit": 0,
+      "started_at": "2026-10-09T07:21:21.487618+00:00",
+      "record": {
+        "local_path": "out/evidence/initial-preview/linux-x64-gcc13-editor-90d62f91b6/result.json",
+        "sha256": "f067de4489eef5469b74aca61f76853a33883be24cb89640757bf52f12af7a5d"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/initial-preview/linux-x64-gcc13-editor-90d62f91b6/source-inputs.zip",
+        "sha256": "5244f10e5318a5449dd61e4ad2fd09853dc1d52fd5559913a5b190ff2c947a85"
+      },
+      "later_source_changes": [],
+      "passed_checks": 1
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "frontend",
+      "exit": 0,
+      "started_at": "2026-10-09T07:22:42.133829+00:00",
+      "record": {
+        "local_path": "out/evidence/initial-preview/linux-x64-gcc13-frontend-86b4354009/result.json",
+        "sha256": "c5ed3c574616765ca189424d81f678675feaef1ce4ed5c634cbd6923d5afd7c1"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/initial-preview/linux-x64-gcc13-frontend-86b4354009/source-inputs.zip",
+        "sha256": "5244f10e5318a5449dd61e4ad2fd09853dc1d52fd5559913a5b190ff2c947a85"
+      },
+      "later_source_changes": [],
+      "passed_checks": 1
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "group",
+      "exit": 0,
+      "started_at": "2026-10-09T07:17:47.785560+00:00",
+      "record": {
+        "local_path": "out/evidence/initial-preview/linux-x64-gcc13-group-edbde2543d/result.json",
+        "sha256": "9ad23b98c522990e5c5f76fe74c11cdd800969f7cc5d9a99b9abf872538aefe2"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/initial-preview/linux-x64-gcc13-group-edbde2543d/source-inputs.zip",
+        "sha256": "5244f10e5318a5449dd61e4ad2fd09853dc1d52fd5559913a5b190ff2c947a85"
+      },
+      "later_source_changes": [],
+      "passed_checks": 1
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "gui",
+      "exit": 8,
+      "started_at": "2026-10-09T07:13:56.405231+00:00",
+      "record": {
+        "local_path": "out/evidence/initial-preview/linux-x64-gcc13-gui-91af5afc46/result.json",
+        "sha256": "72a603314f9f58499625c85162466aacf9e969f7b200fb1f5d0e297aecd6abbe"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/initial-preview/linux-x64-gcc13-gui-91af5afc46/source-inputs.zip",
+        "sha256": "5244f10e5318a5449dd61e4ad2fd09853dc1d52fd5559913a5b190ff2c947a85"
+      },
+      "later_source_changes": [],
+      "passed_checks": 0
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "initial",
+      "exit": 0,
+      "started_at": "2026-10-09T07:06:57.894399+00:00",
+      "record": {
+        "local_path": "out/evidence/initial-preview/linux-x64-gcc13-initial-6395f856aa/result.json",
+        "sha256": "c102c5e13a392f351f4675c4fea8f54c53eca14195d069e997864fb03646be81"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/initial-preview/linux-x64-gcc13-initial-6395f856aa/source-inputs.zip",
+        "sha256": "5244f10e5318a5449dd61e4ad2fd09853dc1d52fd5559913a5b190ff2c947a85"
+      },
+      "later_source_changes": [],
+      "passed_checks": 1
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "initial",
+      "exit": 0,
+      "started_at": "2026-10-09T07:05:43.618545+00:00",
+      "record": {
+        "local_path": "out/evidence/initial-preview/linux-x64-gcc13-initial-a9ccbe1567/result.json",
+        "sha256": "4d5d21b4eed57644d43c22ce89abd10c0ac71bd7f2cacf2e545859b8a963d82a"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/initial-preview/linux-x64-gcc13-initial-a9ccbe1567/source-inputs.zip",
+        "sha256": "d7eb6f4f92374ea72e7ea1425a4bbb7d9d9780350a0967585a4c9bec60c07ac5"
+      },
+      "later_source_changes": [
+        "source/interfaces/editor_form_linux.cpp"
+      ],
+      "passed_checks": 1
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "initial-build",
+      "exit": 0,
+      "started_at": "2026-10-09T07:05:25.470471+00:00",
+      "record": {
+        "local_path": "out/evidence/initial-preview/linux-x64-gcc13-initial-build-26a30c19a9/result.json",
+        "sha256": "26692539a3eb3582ade1286d11fbbb61009c0143a2b422749e52c93b3f66978e"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/initial-preview/linux-x64-gcc13-initial-build-26a30c19a9/source-inputs.zip",
+        "sha256": "d7eb6f4f92374ea72e7ea1425a4bbb7d9d9780350a0967585a4c9bec60c07ac5"
+      },
+      "later_source_changes": [
+        "source/interfaces/editor_form_linux.cpp"
+      ],
+      "passed_checks": 0
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "installed",
+      "exit": 0,
+      "started_at": "2026-10-09T07:19:54.043731+00:00",
+      "record": {
+        "local_path": "out/evidence/initial-preview/linux-x64-gcc13-installed-03f0f102cd/result.json",
+        "sha256": "9fd1b2561025cf98a0febf70bde7f19b472fec2409cc0036209c4a372eb03e08"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/initial-preview/linux-x64-gcc13-installed-03f0f102cd/source-inputs.zip",
+        "sha256": "5244f10e5318a5449dd61e4ad2fd09853dc1d52fd5559913a5b190ff2c947a85"
+      },
+      "later_source_changes": [],
+      "passed_checks": 1
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "layout",
+      "exit": 0,
+      "started_at": "2026-10-09T07:16:37.982481+00:00",
+      "record": {
+        "local_path": "out/evidence/initial-preview/linux-x64-gcc13-layout-5a2504d21d/result.json",
+        "sha256": "1a1636ca8be16e1036c16a7645a43e77c4e9bf5686f7a8f9e78c7d8ad0517556"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/initial-preview/linux-x64-gcc13-layout-5a2504d21d/source-inputs.zip",
+        "sha256": "5244f10e5318a5449dd61e4ad2fd09853dc1d52fd5559913a5b190ff2c947a85"
+      },
+      "later_source_changes": [],
+      "passed_checks": 1
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "locks",
+      "exit": 0,
+      "started_at": "2026-10-09T07:19:38.015642+00:00",
+      "record": {
+        "local_path": "out/evidence/initial-preview/linux-x64-gcc13-locks-f91d8343cf/result.json",
+        "sha256": "5cb290f4d742cf0d2af88736b877358fd7d09842f6ed07b0965d1f3f607b284c"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/initial-preview/linux-x64-gcc13-locks-f91d8343cf/source-inputs.zip",
+        "sha256": "5244f10e5318a5449dd61e4ad2fd09853dc1d52fd5559913a5b190ff2c947a85"
+      },
+      "later_source_changes": [],
+      "passed_checks": 1
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "paint",
+      "exit": 1,
+      "started_at": "2026-10-09T07:12:50.009191+00:00",
+      "record": {
+        "local_path": "out/evidence/initial-preview/linux-x64-gcc13-paint-13dcad22a3/result.json",
+        "sha256": "c6d29c4046f03c282c9ab2dd835f633e7e9ef6062d73a0cecff6c149759fefb0"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/initial-preview/linux-x64-gcc13-paint-13dcad22a3/source-inputs.zip",
+        "sha256": "5244f10e5318a5449dd61e4ad2fd09853dc1d52fd5559913a5b190ff2c947a85"
+      },
+      "later_source_changes": [],
+      "passed_checks": 0
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "phase-failure",
+      "exit": 0,
+      "started_at": "2026-10-09T07:25:15.739467+00:00",
+      "record": {
+        "local_path": "out/evidence/initial-preview/linux-x64-gcc13-phase-failure-e9873d895a/result.json",
+        "sha256": "967cee18d1ace55e93d9a9f9f73d45b604d397e11f359479c0c407f812717e89"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/initial-preview/linux-x64-gcc13-phase-failure-e9873d895a/source-inputs.zip",
+        "sha256": "5244f10e5318a5449dd61e4ad2fd09853dc1d52fd5559913a5b190ff2c947a85"
+      },
+      "later_source_changes": [],
+      "passed_checks": 1
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "phases",
+      "exit": 1,
+      "started_at": "2026-10-09T07:11:46.730065+00:00",
+      "record": {
+        "local_path": "out/evidence/initial-preview/linux-x64-gcc13-phases-d9d081e716/result.json",
+        "sha256": "eaca95f3e5d966201eea6629305627752ce5e6d5b87f8f02748047d3b6d7ffb3"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/initial-preview/linux-x64-gcc13-phases-d9d081e716/source-inputs.zip",
+        "sha256": "5244f10e5318a5449dd61e4ad2fd09853dc1d52fd5559913a5b190ff2c947a85"
+      },
+      "later_source_changes": [],
+      "passed_checks": 0
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "prepared",
+      "exit": 0,
+      "started_at": "2026-10-09T07:07:05.829586+00:00",
+      "record": {
+        "local_path": "out/evidence/initial-preview/linux-x64-gcc13-prepared-1a191fbdbd/result.json",
+        "sha256": "5bc6af1b0da018ad98e0e317b8c947595717b80df208b35dd483b0603ced5c81"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/initial-preview/linux-x64-gcc13-prepared-1a191fbdbd/source-inputs.zip",
+        "sha256": "5244f10e5318a5449dd61e4ad2fd09853dc1d52fd5559913a5b190ff2c947a85"
+      },
+      "later_source_changes": [],
+      "passed_checks": 2
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "refresh",
+      "exit": 0,
+      "started_at": "2026-10-09T07:16:15.850290+00:00",
+      "record": {
+        "local_path": "out/evidence/initial-preview/linux-x64-gcc13-refresh-bb784c9054/result.json",
+        "sha256": "18acb0debda88ceefa6568c38dbbfcb702b8b33f72569e47f6e2b53e8d8f7bc3"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/initial-preview/linux-x64-gcc13-refresh-bb784c9054/source-inputs.zip",
+        "sha256": "5244f10e5318a5449dd61e4ad2fd09853dc1d52fd5559913a5b190ff2c947a85"
+      },
+      "later_source_changes": [],
+      "passed_checks": 1
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "reply",
+      "exit": 0,
+      "started_at": "2026-10-09T07:07:33.822667+00:00",
+      "record": {
+        "local_path": "out/evidence/initial-preview/linux-x64-gcc13-reply-6e9dff482b/result.json",
+        "sha256": "18e6f2f2c0e6ca4ffef3725307104283ba7a5cecbbb8068d644fa3b47ef97167"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/initial-preview/linux-x64-gcc13-reply-6e9dff482b/source-inputs.zip",
+        "sha256": "5244f10e5318a5449dd61e4ad2fd09853dc1d52fd5559913a5b190ff2c947a85"
+      },
+      "later_source_changes": [],
+      "passed_checks": 1
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "snap",
+      "exit": 0,
+      "started_at": "2026-10-09T07:18:09.381444+00:00",
+      "record": {
+        "local_path": "out/evidence/initial-preview/linux-x64-gcc13-snap-904242f73f/result.json",
+        "sha256": "c37281325c5ac894dc1451fc1a412f3b54841c731f507f95c0718e3f1f007647"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/initial-preview/linux-x64-gcc13-snap-904242f73f/source-inputs.zip",
+        "sha256": "5244f10e5318a5449dd61e4ad2fd09853dc1d52fd5559913a5b190ff2c947a85"
+      },
+      "later_source_changes": [],
+      "passed_checks": 1
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "test",
+      "exit": 0,
+      "started_at": "2026-10-09T07:15:02.506054+00:00",
+      "record": {
+        "local_path": "out/evidence/initial-preview/linux-x64-gcc13-test-81d6f033c0/result.json",
+        "sha256": "326aaf3d880a8cb03b61d9bf04a723a980b8a774bc44b8f94c9ba3c0b39e59c7"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/initial-preview/linux-x64-gcc13-test-81d6f033c0/source-inputs.zip",
+        "sha256": "5244f10e5318a5449dd61e4ad2fd09853dc1d52fd5559913a5b190ff2c947a85"
+      },
+      "later_source_changes": [],
+      "passed_checks": 323
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "action": "visibility",
+      "exit": 0,
+      "started_at": "2026-10-09T07:19:06.524831+00:00",
+      "record": {
+        "local_path": "out/evidence/initial-preview/linux-x64-gcc13-visibility-d883a58391/result.json",
+        "sha256": "6f9f8da2bc99cafa06265e8a09428f0bf6e01953f61682514d83bb1aef4408c4"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/initial-preview/linux-x64-gcc13-visibility-d883a58391/source-inputs.zip",
+        "sha256": "5244f10e5318a5449dd61e4ad2fd09853dc1d52fd5559913a5b190ff2c947a85"
+      },
+      "later_source_changes": [],
+      "passed_checks": 1
+    },
+    {
+      "profile": "windows-x64-gcc15",
+      "action": "graph",
+      "exit": 0,
+      "started_at": "2026-10-09T07:07:17.645783+00:00",
+      "record": {
+        "local_path": "out/evidence/initial-preview/windows-x64-gcc15-graph-8f59ddc026/result.json",
+        "sha256": "28434fd84cb026113fa22f5f360d2739440f4b2e73faa4c40e831f57e7abb955"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/initial-preview/windows-x64-gcc15-graph-8f59ddc026/source-inputs.zip",
+        "sha256": "06147299611b91e71885eb4452e81c4744a882c6177e10abf205fd48700911d7"
+      },
+      "later_source_changes": [],
+      "passed_checks": 2
+    },
+    {
+      "profile": "windows-x86-v141-xp",
+      "action": "graph",
+      "exit": 0,
+      "started_at": "2026-10-09T07:07:21.290163+00:00",
+      "record": {
+        "local_path": "out/evidence/initial-preview/windows-x86-v141-xp-graph-53feebc80c/result.json",
+        "sha256": "a186cf0115a138651274256ea97c734ac5b5a1996fe90c95b475555c264d0bdd"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/initial-preview/windows-x86-v141-xp-graph-53feebc80c/source-inputs.zip",
+        "sha256": "06147299611b91e71885eb4452e81c4744a882c6177e10abf205fd48700911d7"
+      },
+      "later_source_changes": [],
+      "passed_checks": 2
+    }
+  ],
+  "baseline_initial": {
+    "profile": "linux-x64-gcc13",
+    "action": "initial",
+    "exit": 0,
+    "started_at": "2026-10-09T07:05:43.618545+00:00",
+    "record": {
+      "local_path": "out/evidence/initial-preview/linux-x64-gcc13-initial-a9ccbe1567/result.json",
+      "sha256": "4d5d21b4eed57644d43c22ce89abd10c0ac71bd7f2cacf2e545859b8a963d82a"
+    },
+    "source_archive": {
+      "local_path": "out/evidence/initial-preview/linux-x64-gcc13-initial-a9ccbe1567/source-inputs.zip",
+      "sha256": "d7eb6f4f92374ea72e7ea1425a4bbb7d9d9780350a0967585a4c9bec60c07ac5"
+    },
+    "later_source_changes": [
+      "source/interfaces/editor_form_linux.cpp"
+    ],
+    "passed_checks": 1
+  },
+  "baseline_checkpoints": [
+    {
+      "local_path": "spec/delivery/checkpoints/prepared-editor.json",
+      "sha256": "5cbd10021faaa4a58884953e50dfbdda63130cc38714702abcd19c1214b8ac43"
+    },
+    {
+      "local_path": "spec/delivery/checkpoints/editor-paint-trace.json",
+      "sha256": "4fdaa20fc68506309ed17449b3024bc7be8db5d49b284295d378374b91547912"
+    }
+  ],
+  "baseline_phase": {
+    "started_at": "2026-10-09T06:20:55.590527+00:00",
+    "archive": {
+      "local_path": "out/evidence/prepared-editor-native/fp-137630b986.zip",
+      "sha256": "e3f5a2045fe31a47c73764b86d43bb21bb2f04b9b80bd1297c01db35830f9e19"
+    },
+    "cases": [
+      {
+        "case": "MAX-WIDGETS",
+        "outcome": "fail",
+        "maxima_us": {
+          "attach": 8164,
+          "controls": 747,
+          "editor": 104509,
+          "populate": 121366,
+          "recovery": 2227,
+          "reply": 36619,
+          "reply_reload": 4,
+          "settings": 7917,
+          "take": 15,
+          "topology": 0,
+          "withdrawal": 4
+        },
+        "slow": [
+          {
+            "completed": true,
+            "microseconds": 104509,
+            "phase": "editor",
+            "pid": 1125506,
+            "tick": 170
+          },
+          {
+            "completed": true,
+            "microseconds": 121366,
+            "phase": "populate",
+            "pid": 1125506,
+            "tick": 170
+          }
+        ]
+      },
+      {
+        "case": "MAX-SCENE",
+        "outcome": "fail",
+        "maxima_us": {
+          "attach": 6010,
+          "controls": 682,
+          "editor": 78249,
+          "populate": 94821,
+          "recovery": 2264,
+          "reply": 38028,
+          "reply_reload": 4,
+          "settings": 7862,
+          "take": 22,
+          "topology": 0,
+          "withdrawal": 3
+        },
+        "slow": []
+      },
+      {
+        "case": "MAX-RECORD",
+        "outcome": "fail",
+        "maxima_us": {
+          "attach": 5849,
+          "controls": 1085,
+          "editor": 78333,
+          "populate": 95151,
+          "recovery": 2284,
+          "reply": 35760,
+          "reply_reload": 4,
+          "settings": 8031,
+          "take": 22,
+          "topology": 0,
+          "withdrawal": 4
+        },
+        "slow": []
+      },
+      {
+        "case": "MAX-COMMAND-REJECT",
+        "outcome": "pass",
+        "maxima_us": {
+          "attach": 6606,
+          "controls": 105,
+          "editor": 12574,
+          "populate": 28371,
+          "recovery": 624,
+          "reply": 0,
+          "reply_reload": 0,
+          "settings": 8884,
+          "take": 20,
+          "topology": 0,
+          "withdrawal": 4
+        },
+        "slow": []
+      },
+      {
+        "case": "OVER-RECORD-REJECT",
+        "outcome": "pass",
+        "maxima_us": {
+          "attach": 5927,
+          "controls": 121,
+          "editor": 12949,
+          "populate": 28761,
+          "recovery": 605,
+          "reply": 0,
+          "reply_reload": 0,
+          "settings": 8024,
+          "take": 10,
+          "topology": 0,
+          "withdrawal": 4
+        },
+        "slow": []
+      },
+      {
+        "case": "CLOSE-PREPARING",
+        "outcome": "pass",
+        "maxima_us": {
+          "attach": 6855,
+          "controls": 138,
+          "editor": 13965,
+          "populate": 31620,
+          "recovery": 611,
+          "reply": 0,
+          "reply_reload": 0,
+          "settings": 8061,
+          "take": 16,
+          "topology": 0,
+          "withdrawal": 6
+        },
+        "slow": []
+      },
+      {
+        "case": "POLICY",
+        "outcome": "fail",
+        "maxima_us": {
+          "attach": 6135,
+          "controls": 97,
+          "editor": 14310,
+          "populate": 30439,
+          "recovery": 546,
+          "reply": 0,
+          "reply_reload": 0,
+          "settings": 8032,
+          "take": 138,
+          "topology": 0,
+          "withdrawal": 39796
+        },
+        "slow": []
+      }
+    ],
+    "gui": [
+      {
+        "case": "MAX-WIDGETS",
+        "outcome": "fail",
+        "elapsed_seconds": 8.781144442007644,
+        "timing_max_us": {
+          "delay_us": 166700,
+          "work_us": 122188
+        },
+        "failure": "Traceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_installed_editor.py\", line 228, in observe\n    extension(dict(locals(),process=lambda:proc));report['outcome']='pass';return\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_frontend_phases.py\", line 13, in exercise\n    limits.exercise(e)\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_recovery_gui_limits.py\", line 73, in exercise\n    assert not violations,('GUI timing limit exceeded',violations)\n           ^^^^^^^^^^^^^^\nAssertionError: ('GUI timing limit exceeded', [{'index': 143, 'pid': 1125506, 'work_us': 199, 'delay_us': 130070}, {'index': 180, 'pid': 1125506, 'work_us': 237, 'delay_us': 166700}, {'index': 229, 'pid': 1125506, 'work_us': 122188, 'delay_us': 0}])\n",
+        "input_bytes": 76361,
+        "input_sha256": "fb8754da69f7b79ec564fcf2d340a99c979717cb04beb31bc8c4c4e82833a660",
+        "scene_sha256": "0b93e8e7d3652e9c6bbd715eadef1f094f2e4b4e4b6e0dc2ffe95da6257ecc5f",
+        "timing_samples": 255,
+        "timing_violations": 3,
+        "native_children": 6,
+        "all_children_exited": true
+      },
+      {
+        "case": "MAX-SCENE",
+        "outcome": "fail",
+        "elapsed_seconds": 8.3844653069973,
+        "timing_max_us": {
+          "delay_us": 179570,
+          "work_us": 95658
+        },
+        "failure": "Traceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_installed_editor.py\", line 228, in observe\n    extension(dict(locals(),process=lambda:proc));report['outcome']='pass';return\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_frontend_phases.py\", line 13, in exercise\n    limits.exercise(e)\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_recovery_gui_limits.py\", line 73, in exercise\n    assert not violations,('GUI timing limit exceeded',violations)\n           ^^^^^^^^^^^^^^\nAssertionError: ('GUI timing limit exceeded', [{'index': 147, 'pid': 1125709, 'work_us': 295, 'delay_us': 142527}, {'index': 196, 'pid': 1125709, 'work_us': 381, 'delay_us': 179570}])\n",
+        "input_bytes": 275281,
+        "input_sha256": "8748d88cb703462ccae2feda0bdc566e2c8ff93165ff2519af028b31291ea8ac",
+        "scene_sha256": "0f113fe0107be93ae5c6c4238afd2be1ee43b6d63cfb82d01ff25a62ee96c2e8",
+        "timing_samples": 374,
+        "timing_violations": 2,
+        "native_children": 7,
+        "all_children_exited": true
+      },
+      {
+        "case": "MAX-RECORD",
+        "outcome": "fail",
+        "elapsed_seconds": 8.695760540984338,
+        "timing_max_us": {
+          "delay_us": 168872,
+          "work_us": 96029
+        },
+        "failure": "Traceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_installed_editor.py\", line 228, in observe\n    extension(dict(locals(),process=lambda:proc));report['outcome']='pass';return\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_frontend_phases.py\", line 13, in exercise\n    limits.exercise(e)\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_recovery_gui_limits.py\", line 73, in exercise\n    assert not violations,('GUI timing limit exceeded',violations)\n           ^^^^^^^^^^^^^^\nAssertionError: ('GUI timing limit exceeded', [{'index': 157, 'pid': 1125901, 'work_us': 203, 'delay_us': 145295}, {'index': 216, 'pid': 1125901, 'work_us': 280, 'delay_us': 168872}])\n",
+        "input_bytes": 786432,
+        "input_sha256": "b2848a50c9c1bbbf169fbf767e03896add95a31dbc78ffc8d1d24ac578e0948e",
+        "scene_sha256": "0f113fe0107be93ae5c6c4238afd2be1ee43b6d63cfb82d01ff25a62ee96c2e8",
+        "timing_samples": 389,
+        "timing_violations": 2,
+        "native_children": 8,
+        "all_children_exited": true
+      },
+      {
+        "case": "MAX-COMMAND-REJECT",
+        "outcome": "pass",
+        "elapsed_seconds": 3.401466872979654,
+        "timing_max_us": {
+          "delay_us": 6377,
+          "work_us": 28649
+        },
+        "input_bytes": 340369,
+        "input_sha256": "d0945ef5ad5f97e65bf52c26adb8a0d64a19198e8f85b1f7f81bba9295efd1f4",
+        "scene_sha256": "0f113fe0107be93ae5c6c4238afd2be1ee43b6d63cfb82d01ff25a62ee96c2e8",
+        "timing_samples": 155,
+        "timing_violations": 0,
+        "native_children": 3,
+        "all_children_exited": true
+      },
+      {
+        "case": "OVER-RECORD-REJECT",
+        "outcome": "pass",
+        "elapsed_seconds": 2.9288543660077266,
+        "timing_max_us": {
+          "delay_us": 5728,
+          "work_us": 29030
+        },
+        "input_bytes": 786433,
+        "input_sha256": "e1cf48d140e5c4fa913be315bacff4390707485074bcf01fa94957ee92615e27",
+        "scene_sha256": "0f113fe0107be93ae5c6c4238afd2be1ee43b6d63cfb82d01ff25a62ee96c2e8",
+        "timing_samples": 133,
+        "timing_violations": 0,
+        "native_children": 3,
+        "all_children_exited": true
+      },
+      {
+        "case": "CLOSE-PREPARING",
+        "outcome": "pass",
+        "elapsed_seconds": 2.8686050709802657,
+        "timing_max_us": {
+          "delay_us": 3894,
+          "work_us": 32019
+        },
+        "observed_loading": true,
+        "input_bytes": 275281,
+        "input_sha256": "5ffc546224dd1f3472d1dc698622aa200f78e74eb555ea28462f3fea23a15e9d",
+        "scene_sha256": "0f113fe0107be93ae5c6c4238afd2be1ee43b6d63cfb82d01ff25a62ee96c2e8",
+        "timing_samples": 130,
+        "timing_violations": 0,
+        "native_children": 2,
+        "all_children_exited": true
+      },
+      {
+        "case": "POLICY",
+        "outcome": "fail",
+        "elapsed_seconds": 4.845983601000626,
+        "timing_max_us": {
+          "delay_us": 150476,
+          "work_us": 40465
+        },
+        "erasure_ms": 84.15337800397538,
+        "erasure_limit_ms": 200,
+        "failure": "Traceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_installed_editor.py\", line 228, in observe\n    extension(dict(locals(),process=lambda:proc));report['outcome']='pass';return\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_frontend_phases.py\", line 13, in exercise\n    limits.exercise(e)\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_recovery_gui_limits.py\", line 73, in exercise\n    assert not violations,('GUI timing limit exceeded',violations)\n           ^^^^^^^^^^^^^^\nAssertionError: ('GUI timing limit exceeded', [{'index': 170, 'pid': 1126330, 'work_us': 343, 'delay_us': 150476}])\n",
+        "input_bytes": 275281,
+        "input_sha256": "c622d4aa4de5ff159ab419463d55afabbb82cded8f79bdfe1250deda35bb3cfc",
+        "scene_sha256": "0f113fe0107be93ae5c6c4238afd2be1ee43b6d63cfb82d01ff25a62ee96c2e8",
+        "timing_samples": 216,
+        "timing_violations": 1,
+        "native_children": 3,
+        "all_children_exited": true
+      }
+    ]
+  },
+  "baseline_paint": {
+    "started_at": "2026-10-09T06:52:13.596519+00:00",
+    "archive": {
+      "local_path": "out/evidence/editor-paint-trace-native/paint-trace-c24c660799.zip",
+      "sha256": "93d56558d8433f56c7b5f1c1d04f7e67dcd0bc873129fa84db2208fcee2417dc"
+    },
+    "trace_sha256": "082af142f5f9d8065b0b97285e6370a08e272b0e8f4b106a3d1558618df11be0",
+    "cases": [
+      {
+        "case": "MAX-WIDGETS",
+        "calls": {
+          "surface_validation": 5,
+          "constructor_geometry": 258,
+          "gtk_draw": 17458,
+          "edit_callback_geometry": 514
+        },
+        "proofs": {
+          "surface_validation": [
+            {
+              "pid": 1136396,
+              "calls": 2,
+              "first": 1,
+              "last": 11323,
+              "offsets": [
+                1689716,
+                1691957,
+                1692340,
+                1349016,
+                1349339,
+                637290,
+                551547,
+                514762,
+                152805,
+                106230,
+                120146,
+                109210,
+                112640,
+                122631,
+                115980,
+                110779,
+                117636,
+                117671,
+                118886,
+                87038,
+                85541
+              ]
+            },
+            {
+              "pid": 1136396,
+              "calls": 1,
+              "first": 28,
+              "last": 28,
+              "offsets": [
+                1689716,
+                1691957,
+                1692340,
+                1349016,
+                1355630,
+                551375,
+                565505,
+                604647,
+                500207,
+                524975,
+                500404,
+                500452,
+                118886,
+                87038,
+                85541
+              ]
+            },
+            {
+              "pid": 1136396,
+              "calls": 2,
+              "first": 3869,
+              "last": 3898,
+              "offsets": [
+                1689716,
+                1691957,
+                1692340,
+                1349016,
+                1355630,
+                551375,
+                565505,
+                605976,
+                500207,
+                524975,
+                500404,
+                500452,
+                118886,
+                87038,
+                85541
+              ]
+            }
+          ],
+          "constructor_geometry": [
+            {
+              "pid": 1136396,
+              "calls": 2,
+              "first": 2,
+              "last": 11324,
+              "offsets": [
+                1689716,
+                1691957,
+                1692303,
+                1551946,
+                1553486,
+                1387280,
+                1357769,
+                549042,
+                551622,
+                514762,
+                152805,
+                106230,
+                120146,
+                109210,
+                112640,
+                122631,
+                115980,
+                110779,
+                117636,
+                117671,
+                118886,
+                87038,
+                85541
+              ]
+            },
+            {
+              "pid": 1136396,
+              "calls": 2,
+              "first": 3,
+              "last": 11325,
+              "offsets": [
+                1689716,
+                1691957,
+                1692303,
+                1551946,
+                1553661,
+                1387280,
+                1357769,
+                549042,
+                551622,
+                514762,
+                152805,
+                106230,
+                120146,
+                109210,
+                112640,
+                122631,
+                115980,
+                110779,
+                117636,
+                117671,
+                118886,
+                87038,
+                85541
+              ]
+            },
+            {
+              "pid": 1136396,
+              "calls": 254,
+              "first": 11326,
+              "last": 11579,
+              "offsets": [
+                1689716,
+                1691957,
+                1692303,
+                1387401,
+                1357769,
+                549042,
+                551622,
+                514762,
+                152805,
+                106230,
+                120146,
+                109210,
+                112640,
+                122631,
+                115980,
+                110779,
+                117636,
+                117671,
+                118886,
+                87038,
+                85541
+              ]
+            }
+          ],
+          "gtk_draw": [
+            {
+              "pid": 1136396,
+              "calls": 93,
+              "first": 4,
+              "last": 17980,
+              "offsets": [
+                1689716,
+                1691957,
+                1692303,
+                1551946,
+                1553486,
+                1387280,
+                1357769,
+                622155,
+                504309,
+                530013,
+                504444,
+                504504,
+                118886,
+                87038,
+                85541
+              ]
+            },
+            {
+              "pid": 1136396,
+              "calls": 93,
+              "first": 5,
+              "last": 17981,
+              "offsets": [
+                1689716,
+                1691957,
+                1692303,
+                1551946,
+                1553661,
+                1387280,
+                1357769,
+                622155,
+                504309,
+                530013,
+                504444,
+                504504,
+                118886,
+                87038,
+                85541
+              ]
+            },
+            {
+              "pid": 1136396,
+              "calls": 17272,
+              "first": 287,
+              "last": 18235,
+              "offsets": [
+                1689716,
+                1691957,
+                1692303,
+                1387401,
+                1357769,
+                622155,
+                504309,
+                530013,
+                504444,
+                504504,
+                118886,
+                87038,
+                85541
+              ]
+            }
+          ],
+          "edit_callback_geometry": [
+            {
+              "pid": 1136396,
+              "calls": 1,
+              "first": 29,
+              "last": 29,
+              "offsets": [
+                1689716,
+                1691957,
+                1692303,
+                1551946,
+                1553486,
+                1387280,
+                1357769,
+                549042,
+                551622,
+                565505,
+                604647,
+                500207,
+                524975,
+                500404,
+                500452,
+                118886,
+                87038,
+                85541
+              ]
+            },
+            {
+              "pid": 1136396,
+              "calls": 1,
+              "first": 30,
+              "last": 30,
+              "offsets": [
+                1689716,
+                1691957,
+                1692303,
+                1551946,
+                1553661,
+                1387280,
+                1357769,
+                549042,
+                551622,
+                565505,
+                604647,
+                500207,
+                524975,
+                500404,
+                500452,
+                118886,
+                87038,
+                85541
+              ]
+            },
+            {
+              "pid": 1136396,
+              "calls": 254,
+              "first": 31,
+              "last": 284,
+              "offsets": [
+                1689716,
+                1691957,
+                1692303,
+                1387401,
+                1357769,
+                549042,
+                551622,
+                565505,
+                604647,
+                500207,
+                524975,
+                500404,
+                500452,
+                118886,
+                87038,
+                85541
+              ]
+            },
+            {
+              "pid": 1136396,
+              "calls": 2,
+              "first": 3870,
+              "last": 3899,
+              "offsets": [
+                1689716,
+                1691957,
+                1692303,
+                1551946,
+                1553486,
+                1387280,
+                1357769,
+                549042,
+                551622,
+                565505,
+                605976,
+                500207,
+                524975,
+                500404,
+                500452,
+                118886,
+                87038,
+                85541
+              ]
+            },
+            {
+              "pid": 1136396,
+              "calls": 2,
+              "first": 3871,
+              "last": 3900,
+              "offsets": [
+                1689716,
+                1691957,
+                1692303,
+                1551946,
+                1553661,
+                1387280,
+                1357769,
+                549042,
+                551622,
+                565505,
+                605976,
+                500207,
+                524975,
+                500404,
+                500452,
+                118886,
+                87038,
+                85541
+              ]
+            },
+            {
+              "pid": 1136396,
+              "calls": 254,
+              "first": 3901,
+              "last": 4154,
+              "offsets": [
+                1689716,
+                1691957,
+                1692303,
+                1387401,
+                1357769,
+                549042,
+                551622,
+                565505,
+                605976,
+                500207,
+                524975,
+                500404,
+                500452,
+                118886,
+                87038,
+                85541
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "case": "MAX-SCENE",
+        "calls": {
+          "surface_validation": 5,
+          "constructor_geometry": 4,
+          "gtk_draw": 58,
+          "edit_callback_geometry": 6
+        },
+        "proofs": {
+          "surface_validation": [
+            {
+              "pid": 1136609,
+              "calls": 2,
+              "first": 1,
+              "last": 71,
+              "offsets": [
+                1689716,
+                1691957,
+                1692340,
+                1349016,
+                1349339,
+                637290,
+                551547,
+                514762,
+                152805,
+                106230,
+                120146,
+                109210,
+                112640,
+                122631,
+                115980,
+                110779,
+                117636,
+                117671,
+                118886,
+                87038,
+                85541
+              ]
+            },
+            {
+              "pid": 1136609,
+              "calls": 1,
+              "first": 36,
+              "last": 36,
+              "offsets": [
+                1689716,
+                1691957,
+                1692340,
+                1349016,
+                1355630,
+                551375,
+                565505,
+                604647,
+                500207,
+                524975,
+                500404,
+                500452,
+                118886,
+                87038,
+                85541
+              ]
+            },
+            {
+              "pid": 1136609,
+              "calls": 2,
+              "first": 39,
+              "last": 68,
+              "offsets": [
+                1689716,
+                1691957,
+                1692340,
+                1349016,
+                1355630,
+                551375,
+                565505,
+                605976,
+                500207,
+                524975,
+                500404,
+                500452,
+                118886,
+                87038,
+                85541
+              ]
+            }
+          ],
+          "constructor_geometry": [
+            {
+              "pid": 1136609,
+              "calls": 2,
+              "first": 2,
+              "last": 72,
+              "offsets": [
+                1689716,
+                1691957,
+                1692303,
+                1551946,
+                1553486,
+                1387280,
+                1357769,
+                549042,
+                551622,
+                514762,
+                152805,
+                106230,
+                120146,
+                109210,
+                112640,
+                122631,
+                115980,
+                110779,
+                117636,
+                117671,
+                118886,
+                87038,
+                85541
+              ]
+            },
+            {
+              "pid": 1136609,
+              "calls": 2,
+              "first": 3,
+              "last": 73,
+              "offsets": [
+                1689716,
+                1691957,
+                1692303,
+                1551946,
+                1553661,
+                1387280,
+                1357769,
+                549042,
+                551622,
+                514762,
+                152805,
+                106230,
+                120146,
+                109210,
+                112640,
+                122631,
+                115980,
+                110779,
+                117636,
+                117671,
+                118886,
+                87038,
+                85541
+              ]
+            }
+          ],
+          "gtk_draw": [
+            {
+              "pid": 1136609,
+              "calls": 29,
+              "first": 4,
+              "last": 66,
+              "offsets": [
+                1689716,
+                1691957,
+                1692303,
+                1551946,
+                1553486,
+                1387280,
+                1357769,
+                622155,
+                504309,
+                530013,
+                504444,
+                504504,
+                118886,
+                87038,
+                85541
+              ]
+            },
+            {
+              "pid": 1136609,
+              "calls": 29,
+              "first": 5,
+              "last": 67,
+              "offsets": [
+                1689716,
+                1691957,
+                1692303,
+                1551946,
+                1553661,
+                1387280,
+                1357769,
+                622155,
+                504309,
+                530013,
+                504444,
+                504504,
+                118886,
+                87038,
+                85541
+              ]
+            }
+          ],
+          "edit_callback_geometry": [
+            {
+              "pid": 1136609,
+              "calls": 1,
+              "first": 37,
+              "last": 37,
+              "offsets": [
+                1689716,
+                1691957,
+                1692303,
+                1551946,
+                1553486,
+                1387280,
+                1357769,
+                549042,
+                551622,
+                565505,
+                604647,
+                500207,
+                524975,
+                500404,
+                500452,
+                118886,
+                87038,
+                85541
+              ]
+            },
+            {
+              "pid": 1136609,
+              "calls": 1,
+              "first": 38,
+              "last": 38,
+              "offsets": [
+                1689716,
+                1691957,
+                1692303,
+                1551946,
+                1553661,
+                1387280,
+                1357769,
+                549042,
+                551622,
+                565505,
+                604647,
+                500207,
+                524975,
+                500404,
+                500452,
+                118886,
+                87038,
+                85541
+              ]
+            },
+            {
+              "pid": 1136609,
+              "calls": 2,
+              "first": 40,
+              "last": 69,
+              "offsets": [
+                1689716,
+                1691957,
+                1692303,
+                1551946,
+                1553486,
+                1387280,
+                1357769,
+                549042,
+                551622,
+                565505,
+                605976,
+                500207,
+                524975,
+                500404,
+                500452,
+                118886,
+                87038,
+                85541
+              ]
+            },
+            {
+              "pid": 1136609,
+              "calls": 2,
+              "first": 41,
+              "last": 70,
+              "offsets": [
+                1689716,
+                1691957,
+                1692303,
+                1551946,
+                1553661,
+                1387280,
+                1357769,
+                549042,
+                551622,
+                565505,
+                605976,
+                500207,
+                524975,
+                500404,
+                500452,
+                118886,
+                87038,
+                85541
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "case": "MAX-RECORD",
+        "calls": {
+          "surface_validation": 5,
+          "constructor_geometry": 4,
+          "gtk_draw": 60,
+          "edit_callback_geometry": 6
+        },
+        "proofs": {
+          "surface_validation": [
+            {
+              "pid": 1136803,
+              "calls": 2,
+              "first": 1,
+              "last": 73,
+              "offsets": [
+                1689716,
+                1691957,
+                1692340,
+                1349016,
+                1349339,
+                637290,
+                551547,
+                514762,
+                152805,
+                106230,
+                120146,
+                109210,
+                112640,
+                122631,
+                115980,
+                110779,
+                117636,
+                117671,
+                118886,
+                87038,
+                85541
+              ]
+            },
+            {
+              "pid": 1136803,
+              "calls": 1,
+              "first": 38,
+              "last": 38,
+              "offsets": [
+                1689716,
+                1691957,
+                1692340,
+                1349016,
+                1355630,
+                551375,
+                565505,
+                604647,
+                500207,
+                524975,
+                500404,
+                500452,
+                118886,
+                87038,
+                85541
+              ]
+            },
+            {
+              "pid": 1136803,
+              "calls": 2,
+              "first": 41,
+              "last": 70,
+              "offsets": [
+                1689716,
+                1691957,
+                1692340,
+                1349016,
+                1355630,
+                551375,
+                565505,
+                605976,
+                500207,
+                524975,
+                500404,
+                500452,
+                118886,
+                87038,
+                85541
+              ]
+            }
+          ],
+          "constructor_geometry": [
+            {
+              "pid": 1136803,
+              "calls": 2,
+              "first": 2,
+              "last": 74,
+              "offsets": [
+                1689716,
+                1691957,
+                1692303,
+                1551946,
+                1553486,
+                1387280,
+                1357769,
+                549042,
+                551622,
+                514762,
+                152805,
+                106230,
+                120146,
+                109210,
+                112640,
+                122631,
+                115980,
+                110779,
+                117636,
+                117671,
+                118886,
+                87038,
+                85541
+              ]
+            },
+            {
+              "pid": 1136803,
+              "calls": 2,
+              "first": 3,
+              "last": 75,
+              "offsets": [
+                1689716,
+                1691957,
+                1692303,
+                1551946,
+                1553661,
+                1387280,
+                1357769,
+                549042,
+                551622,
+                514762,
+                152805,
+                106230,
+                120146,
+                109210,
+                112640,
+                122631,
+                115980,
+                110779,
+                117636,
+                117671,
+                118886,
+                87038,
+                85541
+              ]
+            }
+          ],
+          "gtk_draw": [
+            {
+              "pid": 1136803,
+              "calls": 30,
+              "first": 4,
+              "last": 68,
+              "offsets": [
+                1689716,
+                1691957,
+                1692303,
+                1551946,
+                1553486,
+                1387280,
+                1357769,
+                622155,
+                504309,
+                530013,
+                504444,
+                504504,
+                118886,
+                87038,
+                85541
+              ]
+            },
+            {
+              "pid": 1136803,
+              "calls": 30,
+              "first": 5,
+              "last": 69,
+              "offsets": [
+                1689716,
+                1691957,
+                1692303,
+                1551946,
+                1553661,
+                1387280,
+                1357769,
+                622155,
+                504309,
+                530013,
+                504444,
+                504504,
+                118886,
+                87038,
+                85541
+              ]
+            }
+          ],
+          "edit_callback_geometry": [
+            {
+              "pid": 1136803,
+              "calls": 1,
+              "first": 39,
+              "last": 39,
+              "offsets": [
+                1689716,
+                1691957,
+                1692303,
+                1551946,
+                1553486,
+                1387280,
+                1357769,
+                549042,
+                551622,
+                565505,
+                604647,
+                500207,
+                524975,
+                500404,
+                500452,
+                118886,
+                87038,
+                85541
+              ]
+            },
+            {
+              "pid": 1136803,
+              "calls": 1,
+              "first": 40,
+              "last": 40,
+              "offsets": [
+                1689716,
+                1691957,
+                1692303,
+                1551946,
+                1553661,
+                1387280,
+                1357769,
+                549042,
+                551622,
+                565505,
+                604647,
+                500207,
+                524975,
+                500404,
+                500452,
+                118886,
+                87038,
+                85541
+              ]
+            },
+            {
+              "pid": 1136803,
+              "calls": 2,
+              "first": 42,
+              "last": 71,
+              "offsets": [
+                1689716,
+                1691957,
+                1692303,
+                1551946,
+                1553486,
+                1387280,
+                1357769,
+                549042,
+                551622,
+                565505,
+                605976,
+                500207,
+                524975,
+                500404,
+                500452,
+                118886,
+                87038,
+                85541
+              ]
+            },
+            {
+              "pid": 1136803,
+              "calls": 2,
+              "first": 43,
+              "last": 72,
+              "offsets": [
+                1689716,
+                1691957,
+                1692303,
+                1551946,
+                1553661,
+                1387280,
+                1357769,
+                549042,
+                551622,
+                565505,
+                605976,
+                500207,
+                524975,
+                500404,
+                500452,
+                118886,
+                87038,
+                85541
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "case": "MAX-COMMAND-REJECT",
+        "calls": {
+          "surface_validation": 1,
+          "constructor_geometry": 2,
+          "gtk_draw": 30
+        },
+        "proofs": {
+          "surface_validation": [
+            {
+              "pid": 1136999,
+              "calls": 1,
+              "first": 1,
+              "last": 1,
+              "offsets": [
+                1689716,
+                1691957,
+                1692340,
+                1349016,
+                1349339,
+                637290,
+                551547,
+                514762,
+                152805,
+                106230,
+                120146,
+                109210,
+                112640,
+                122631,
+                115980,
+                110779,
+                117636,
+                117671,
+                118886,
+                87038,
+                85541
+              ]
+            }
+          ],
+          "constructor_geometry": [
+            {
+              "pid": 1136999,
+              "calls": 1,
+              "first": 2,
+              "last": 2,
+              "offsets": [
+                1689716,
+                1691957,
+                1692303,
+                1551946,
+                1553486,
+                1387280,
+                1357769,
+                549042,
+                551622,
+                514762,
+                152805,
+                106230,
+                120146,
+                109210,
+                112640,
+                122631,
+                115980,
+                110779,
+                117636,
+                117671,
+                118886,
+                87038,
+                85541
+              ]
+            },
+            {
+              "pid": 1136999,
+              "calls": 1,
+              "first": 3,
+              "last": 3,
+              "offsets": [
+                1689716,
+                1691957,
+                1692303,
+                1551946,
+                1553661,
+                1387280,
+                1357769,
+                549042,
+                551622,
+                514762,
+                152805,
+                106230,
+                120146,
+                109210,
+                112640,
+                122631,
+                115980,
+                110779,
+                117636,
+                117671,
+                118886,
+                87038,
+                85541
+              ]
+            }
+          ],
+          "gtk_draw": [
+            {
+              "pid": 1136999,
+              "calls": 15,
+              "first": 4,
+              "last": 32,
+              "offsets": [
+                1689716,
+                1691957,
+                1692303,
+                1551946,
+                1553486,
+                1387280,
+                1357769,
+                622155,
+                504309,
+                530013,
+                504444,
+                504504,
+                118886,
+                87038,
+                85541
+              ]
+            },
+            {
+              "pid": 1136999,
+              "calls": 15,
+              "first": 5,
+              "last": 33,
+              "offsets": [
+                1689716,
+                1691957,
+                1692303,
+                1551946,
+                1553661,
+                1387280,
+                1357769,
+                622155,
+                504309,
+                530013,
+                504444,
+                504504,
+                118886,
+                87038,
+                85541
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "case": "OVER-RECORD-REJECT",
+        "calls": {
+          "surface_validation": 1,
+          "constructor_geometry": 2,
+          "gtk_draw": 10
+        },
+        "proofs": {
+          "surface_validation": [
+            {
+              "pid": 1137084,
+              "calls": 1,
+              "first": 1,
+              "last": 1,
+              "offsets": [
+                1689716,
+                1691957,
+                1692340,
+                1349016,
+                1349339,
+                637290,
+                551547,
+                514762,
+                152805,
+                106230,
+                120146,
+                109210,
+                112640,
+                122631,
+                115980,
+                110779,
+                117636,
+                117671,
+                118886,
+                87038,
+                85541
+              ]
+            }
+          ],
+          "constructor_geometry": [
+            {
+              "pid": 1137084,
+              "calls": 1,
+              "first": 2,
+              "last": 2,
+              "offsets": [
+                1689716,
+                1691957,
+                1692303,
+                1551946,
+                1553486,
+                1387280,
+                1357769,
+                549042,
+                551622,
+                514762,
+                152805,
+                106230,
+                120146,
+                109210,
+                112640,
+                122631,
+                115980,
+                110779,
+                117636,
+                117671,
+                118886,
+                87038,
+                85541
+              ]
+            },
+            {
+              "pid": 1137084,
+              "calls": 1,
+              "first": 3,
+              "last": 3,
+              "offsets": [
+                1689716,
+                1691957,
+                1692303,
+                1551946,
+                1553661,
+                1387280,
+                1357769,
+                549042,
+                551622,
+                514762,
+                152805,
+                106230,
+                120146,
+                109210,
+                112640,
+                122631,
+                115980,
+                110779,
+                117636,
+                117671,
+                118886,
+                87038,
+                85541
+              ]
+            }
+          ],
+          "gtk_draw": [
+            {
+              "pid": 1137084,
+              "calls": 5,
+              "first": 4,
+              "last": 12,
+              "offsets": [
+                1689716,
+                1691957,
+                1692303,
+                1551946,
+                1553486,
+                1387280,
+                1357769,
+                622155,
+                504309,
+                530013,
+                504444,
+                504504,
+                118886,
+                87038,
+                85541
+              ]
+            },
+            {
+              "pid": 1137084,
+              "calls": 5,
+              "first": 5,
+              "last": 13,
+              "offsets": [
+                1689716,
+                1691957,
+                1692303,
+                1551946,
+                1553661,
+                1387280,
+                1357769,
+                622155,
+                504309,
+                530013,
+                504444,
+                504504,
+                118886,
+                87038,
+                85541
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "case": "CLOSE-PREPARING",
+        "calls": {
+          "surface_validation": 1,
+          "constructor_geometry": 2,
+          "gtk_draw": 6
+        },
+        "proofs": {
+          "surface_validation": [
+            {
+              "pid": 1137159,
+              "calls": 1,
+              "first": 1,
+              "last": 1,
+              "offsets": [
+                1689716,
+                1691957,
+                1692340,
+                1349016,
+                1349339,
+                637290,
+                551547,
+                514762,
+                152805,
+                106230,
+                120146,
+                109210,
+                112640,
+                122631,
+                115980,
+                110779,
+                117636,
+                117671,
+                118886,
+                87038,
+                85541
+              ]
+            }
+          ],
+          "constructor_geometry": [
+            {
+              "pid": 1137159,
+              "calls": 1,
+              "first": 2,
+              "last": 2,
+              "offsets": [
+                1689716,
+                1691957,
+                1692303,
+                1551946,
+                1553486,
+                1387280,
+                1357769,
+                549042,
+                551622,
+                514762,
+                152805,
+                106230,
+                120146,
+                109210,
+                112640,
+                122631,
+                115980,
+                110779,
+                117636,
+                117671,
+                118886,
+                87038,
+                85541
+              ]
+            },
+            {
+              "pid": 1137159,
+              "calls": 1,
+              "first": 3,
+              "last": 3,
+              "offsets": [
+                1689716,
+                1691957,
+                1692303,
+                1551946,
+                1553661,
+                1387280,
+                1357769,
+                549042,
+                551622,
+                514762,
+                152805,
+                106230,
+                120146,
+                109210,
+                112640,
+                122631,
+                115980,
+                110779,
+                117636,
+                117671,
+                118886,
+                87038,
+                85541
+              ]
+            }
+          ],
+          "gtk_draw": [
+            {
+              "pid": 1137159,
+              "calls": 3,
+              "first": 4,
+              "last": 8,
+              "offsets": [
+                1689716,
+                1691957,
+                1692303,
+                1551946,
+                1553486,
+                1387280,
+                1357769,
+                622155,
+                504309,
+                530013,
+                504444,
+                504504,
+                118886,
+                87038,
+                85541
+              ]
+            },
+            {
+              "pid": 1137159,
+              "calls": 3,
+              "first": 5,
+              "last": 9,
+              "offsets": [
+                1689716,
+                1691957,
+                1692303,
+                1551946,
+                1553661,
+                1387280,
+                1357769,
+                622155,
+                504309,
+                530013,
+                504444,
+                504504,
+                118886,
+                87038,
+                85541
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "case": "POLICY",
+        "calls": {
+          "surface_validation": 2,
+          "constructor_geometry": 2,
+          "gtk_draw": 30,
+          "edit_callback_geometry": 2
+        },
+        "proofs": {
+          "surface_validation": [
+            {
+              "pid": 1137232,
+              "calls": 1,
+              "first": 1,
+              "last": 1,
+              "offsets": [
+                1689716,
+                1691957,
+                1692340,
+                1349016,
+                1349339,
+                637290,
+                551547,
+                514762,
+                152805,
+                106230,
+                120146,
+                109210,
+                112640,
+                122631,
+                115980,
+                110779,
+                117636,
+                117671,
+                118886,
+                87038,
+                85541
+              ]
+            },
+            {
+              "pid": 1137232,
+              "calls": 1,
+              "first": 34,
+              "last": 34,
+              "offsets": [
+                1689716,
+                1691957,
+                1692340,
+                1349016,
+                1355630,
+                551375,
+                565505,
+                604647,
+                500207,
+                524975,
+                500404,
+                500452,
+                118886,
+                87038,
+                85541
+              ]
+            }
+          ],
+          "constructor_geometry": [
+            {
+              "pid": 1137232,
+              "calls": 1,
+              "first": 2,
+              "last": 2,
+              "offsets": [
+                1689716,
+                1691957,
+                1692303,
+                1551946,
+                1553486,
+                1387280,
+                1357769,
+                549042,
+                551622,
+                514762,
+                152805,
+                106230,
+                120146,
+                109210,
+                112640,
+                122631,
+                115980,
+                110779,
+                117636,
+                117671,
+                118886,
+                87038,
+                85541
+              ]
+            },
+            {
+              "pid": 1137232,
+              "calls": 1,
+              "first": 3,
+              "last": 3,
+              "offsets": [
+                1689716,
+                1691957,
+                1692303,
+                1551946,
+                1553661,
+                1387280,
+                1357769,
+                549042,
+                551622,
+                514762,
+                152805,
+                106230,
+                120146,
+                109210,
+                112640,
+                122631,
+                115980,
+                110779,
+                117636,
+                117671,
+                118886,
+                87038,
+                85541
+              ]
+            }
+          ],
+          "gtk_draw": [
+            {
+              "pid": 1137232,
+              "calls": 15,
+              "first": 4,
+              "last": 32,
+              "offsets": [
+                1689716,
+                1691957,
+                1692303,
+                1551946,
+                1553486,
+                1387280,
+                1357769,
+                622155,
+                504309,
+                530013,
+                504444,
+                504504,
+                118886,
+                87038,
+                85541
+              ]
+            },
+            {
+              "pid": 1137232,
+              "calls": 15,
+              "first": 5,
+              "last": 33,
+              "offsets": [
+                1689716,
+                1691957,
+                1692303,
+                1551946,
+                1553661,
+                1387280,
+                1357769,
+                622155,
+                504309,
+                530013,
+                504444,
+                504504,
+                118886,
+                87038,
+                85541
+              ]
+            }
+          ],
+          "edit_callback_geometry": [
+            {
+              "pid": 1137232,
+              "calls": 1,
+              "first": 35,
+              "last": 35,
+              "offsets": [
+                1689716,
+                1691957,
+                1692303,
+                1551946,
+                1553486,
+                1387280,
+                1357769,
+                549042,
+                551622,
+                565505,
+                604647,
+                500207,
+                524975,
+                500404,
+                500452,
+                118886,
+                87038,
+                85541
+              ]
+            },
+            {
+              "pid": 1137232,
+              "calls": 1,
+              "first": 36,
+              "last": 36,
+              "offsets": [
+                1689716,
+                1691957,
+                1692303,
+                1551946,
+                1553661,
+                1387280,
+                1357769,
+                549042,
+                551622,
+                565505,
+                604647,
+                500207,
+                524975,
+                500404,
+                500452,
+                118886,
+                87038,
+                85541
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "portable_checks": {
+    "linux_x64_gcc13": 323
+  },
+  "component_checks": {
+    "windows-x64-gcc15": 2,
+    "windows-x86-v141-xp": 2
+  },
+  "native_case_families": {
+    "EDITOR-INITIAL-INPUT": 9,
+    "PREPARED-EDITOR": 12,
+    "FRONTEND-PREPARED-EDITOR": 7,
+    "EDITOR-REPLY-LIFECYCLE": 11,
+    "EDITOR-REFRESH": 3,
+    "EDITOR-LAYOUT": 21,
+    "EDITOR-ARRANGE": 14,
+    "EDITOR-GROUP": 11,
+    "EDITOR-SNAP": 13,
+    "EDITOR-CONTAINERS": 16,
+    "EDITOR-VISIBILITY": 16,
+    "EDITOR-LOCKS": 7,
+    "INSTALLED-RECOVERY": 14,
+    "INSTALLED-EDITOR": 15,
+    "INSTALLED-SETTINGS": 12,
+    "EDITOR-RECOVERY": 14,
+    "EDITOR-FORM": 20,
+    "IMAGE-ERASURE": 3,
+    "FRONTEND-PHASE-FAILURE": 2
+  },
+  "native": [
+    {
+      "family": "EDITOR-ARRANGE",
+      "outcome": "pass",
+      "cases": 14,
+      "archive": {
+        "local_path": "out/evidence/initial-preview-native/arrange-ce6ba345d89f.zip",
+        "sha256": "ec9962b63f51a263f747d04fd939dd90cfe4d2bcf35acd7ce38564a1bf48f85d"
+      },
+      "record": {
+        "local_path": "out/evidence/initial-preview-native/arrange-ce6ba345d89f.json",
+        "sha256": "a0cdc27538cb914790d1322d5bb12893ea18d73841ee3dae613ce3589f2a45a4"
+      },
+      "inventory": {
+        "local_path": "out/evidence/initial-preview-native/arrange-ce6ba345d89f.index.json",
+        "sha256": "47cdcfb5325bd0aec11aafade9628f6d0d05d1e6ddd22b3d0575627d70fb0168"
+      }
+    },
+    {
+      "family": "EDITOR-CONTAINERS",
+      "outcome": "pass",
+      "cases": 16,
+      "archive": {
+        "local_path": "out/evidence/initial-preview-native/containers-e86b27673fec.zip",
+        "sha256": "1806fee56144255e78bb21af77a4fe76379340d6099d0ec82b5531b529bbab6e"
+      },
+      "record": {
+        "local_path": "out/evidence/initial-preview-native/containers-e86b27673fec.json",
+        "sha256": "659a1caeafbfeb7a9b20231d5751c013a75e0a0ab93a9463ffd83ffc4df0bdb1"
+      },
+      "inventory": {
+        "local_path": "out/evidence/initial-preview-native/containers-e86b27673fec.index.json",
+        "sha256": "8c222fed2bff66fa98944de55c44a4b7f1e53a91bf4d1bd6311be08d31740fe2"
+      }
+    },
+    {
+      "family": "EDITOR-LOCKS",
+      "outcome": "pass",
+      "cases": 7,
+      "archive": {
+        "local_path": "out/evidence/initial-preview-native/edit-locks-61b05aa75654.zip",
+        "sha256": "37faef30901dfe79b993b1f5c753f4d8fa933243438786cf7db7be6145fcb3d7"
+      },
+      "record": {
+        "local_path": "out/evidence/initial-preview-native/edit-locks-61b05aa75654.json",
+        "sha256": "14037ae857be1b9be5175a6e4268f9b456aa451bded246d73ba0a4462301d2b5"
+      },
+      "inventory": {
+        "local_path": "out/evidence/initial-preview-native/edit-locks-61b05aa75654.index.json",
+        "sha256": "ba0209b2f7edae5f11c674f3bb7c059feb8de52c4d45e14f27ba955aae74b6e1"
+      }
+    },
+    {
+      "family": "EDITOR-FORM",
+      "outcome": "pass",
+      "cases": 20,
+      "archive": {
+        "local_path": "out/evidence/initial-preview-native/editor-87ca50a15bd6.zip",
+        "sha256": "e03be2e2adc9dbd10f6cd5e11e14a580daf3257a4c7ff19c780ada2c4e3f46be"
+      },
+      "record": {
+        "local_path": "out/evidence/initial-preview-native/editor-87ca50a15bd6.json",
+        "sha256": "13bb7637ddcf3e0849f836fb939f511904ae9a69c8f8ef7fbe0b2be5c6b04c94"
+      },
+      "inventory": {
+        "local_path": "out/evidence/initial-preview-native/editor-87ca50a15bd6.index.json",
+        "sha256": "8c5915c9344ae1b008fe40a534c5911abc0d27e84b6c60357aa2d3192606487b"
+      }
+    },
+    {
+      "family": "INSTALLED-EDITOR",
+      "outcome": "pass",
+      "cases": 15,
+      "archive": {
+        "local_path": "out/evidence/initial-preview-native/editor-frontend-a34ef35b71.zip",
+        "sha256": "a406144c38d922e49421f0044a61fa413251074db4c1ac6bda8d66fbb8e01b31"
+      },
+      "record": {
+        "local_path": "out/evidence/initial-preview-native/editor-frontend-a34ef35b71.json",
+        "sha256": "4ebd9ce7d3c2b4574dd7ee54be6d0bca42a47c20c9450d263b8647c59c31343c"
+      },
+      "inventory": {
+        "local_path": "out/evidence/initial-preview-native/editor-frontend-a34ef35b71.index.json",
+        "sha256": "c4f0278c88f6e36bb4587869c0db4334f51c0311c696e91ce508af9d6d606638"
+      }
+    },
+    {
+      "family": "EDITOR-REFRESH",
+      "outcome": "pass",
+      "cases": 3,
+      "archive": {
+        "local_path": "out/evidence/initial-preview-native/editor-refresh-5c7825b4fc5d.zip",
+        "sha256": "7714d24c4a8c8d76a43bf01344f78d8221f7568f2d0dec352bd657672a5fa670"
+      },
+      "record": {
+        "local_path": "out/evidence/initial-preview-native/editor-refresh-5c7825b4fc5d.json",
+        "sha256": "a9b9f9d30d46e5db5b826444fe3bef7a73bc4bea33e3368edfa4b135f4d9b666"
+      },
+      "inventory": {
+        "local_path": "out/evidence/initial-preview-native/editor-refresh-5c7825b4fc5d.index.json",
+        "sha256": "1d62b28a7ec676ff0a957e493d09fbb7d39ff5b5bdea3033f91ab426ac875594"
+      }
+    },
+    {
+      "family": "FRONTEND-PHASES",
+      "outcome": "fail",
+      "cases": 7,
+      "archive": {
+        "local_path": "out/evidence/initial-preview-native/fp-e96cc71299.zip",
+        "sha256": "3fc38990c52ee00bd36fb99257fa38d95b2548201378bea19e05d05f2c470d89"
+      },
+      "record": {
+        "local_path": "out/evidence/initial-preview-native/fp-e96cc71299.json",
+        "sha256": "af13675c4d54bc43bb1ed3609a9ae6b5a660f36ed573d7168abc6e5cdd417f24"
+      },
+      "inventory": {
+        "local_path": "out/evidence/initial-preview-native/fp-e96cc71299.index.json",
+        "sha256": "de0c6a8611e51d67f6c8fac4ca3e07ef82e59073dd2cff0e362433002fccb245"
+      }
+    },
+    {
+      "family": "INSTALLED-SETTINGS",
+      "outcome": "pass",
+      "cases": 12,
+      "archive": {
+        "local_path": "out/evidence/initial-preview-native/frontend-a44a0b10a3.zip",
+        "sha256": "3f9569b69c6db390e2117d5d397060ea17a542a9002b795a0134d174e3159624"
+      },
+      "record": {
+        "local_path": "out/evidence/initial-preview-native/frontend-a44a0b10a3.json",
+        "sha256": "2fdcc63101caaa017b06fcc04369d726fb6dc8f73b770f3121fc4b9e087fc0b0"
+      },
+      "inventory": {
+        "local_path": "out/evidence/initial-preview-native/frontend-a44a0b10a3.index.json",
+        "sha256": "febd196aba2b7def2d1c919f6784be0f2cd0e6d01514374e1bc0dab022d67874"
+      }
+    },
+    {
+      "family": "EDITOR-GROUP",
+      "outcome": "pass",
+      "cases": 11,
+      "archive": {
+        "local_path": "out/evidence/initial-preview-native/group-d238be8f4c74.zip",
+        "sha256": "5c1ce1f8b680408b6b5c8482aa86b1e7fc9f298a6f7ecc269dea10301f736968"
+      },
+      "record": {
+        "local_path": "out/evidence/initial-preview-native/group-d238be8f4c74.json",
+        "sha256": "7d70091ea51f51452a110d79fff122c4bb29175f3ab7d473f0d3e44f1cfebb2d"
+      },
+      "inventory": {
+        "local_path": "out/evidence/initial-preview-native/group-d238be8f4c74.index.json",
+        "sha256": "1958b1c8198e02bd4d49a1b6cb3ac429f6293006728ab57cd97c7239e5e8ae76"
+      }
+    },
+    {
+      "family": "INSTALLED-RECOVERY",
+      "outcome": "pass",
+      "cases": 14,
+      "archive": {
+        "local_path": "out/evidence/initial-preview-native/ir-ede5a47b93.zip",
+        "sha256": "2e676092678e6a9ea9b366a382fb57863ecb2648f61409eff835ea4a3f4976b9"
+      },
+      "record": {
+        "local_path": "out/evidence/initial-preview-native/ir-ede5a47b93.json",
+        "sha256": "58153ca71575993f2a4081b4cc1e0facfd15cb3a54fde2126dcfd7a8f4e3ad1d"
+      },
+      "inventory": {
+        "local_path": "out/evidence/initial-preview-native/ir-ede5a47b93.index.json",
+        "sha256": "ebe543727bc617740a94d63d2c4f38fe4fc06649cf6294dcdaf9154339c88c8f"
+      }
+    },
+    {
+      "family": "EDITOR-LAYOUT",
+      "outcome": "pass",
+      "cases": 21,
+      "archive": {
+        "local_path": "out/evidence/initial-preview-native/layout-384ad32bcc58.zip",
+        "sha256": "1df4016edf6944dbd903cef0ad90b25f606693fdfcd5fa095d9e2d8abd26923e"
+      },
+      "record": {
+        "local_path": "out/evidence/initial-preview-native/layout-384ad32bcc58.json",
+        "sha256": "19bb930ecb31cf2622563eee287218078c6d01708a938050ebb14dfbf6ec2bc1"
+      },
+      "inventory": {
+        "local_path": "out/evidence/initial-preview-native/layout-384ad32bcc58.index.json",
+        "sha256": "1e4316100a359e6d59df8bf9da108ea2075235100e699ef4d2354e74ea8ef61d"
+      }
+    },
+    {
+      "family": "EDITOR-PAINT-TRACE",
+      "outcome": "fail",
+      "cases": 7,
+      "archive": {
+        "local_path": "out/evidence/initial-preview-native/paint-trace-ab5076bdb8.zip",
+        "sha256": "968337b5f3fb786a3a0074d675f97bf26060b47dcf289d3a62a6ced5fee2c00e"
+      },
+      "record": {
+        "local_path": "out/evidence/initial-preview-native/paint-trace-ab5076bdb8.json",
+        "sha256": "12319cccff06dfd791f911398ceae0badc06ea8195380c61f4a3b07b29f966c6"
+      },
+      "inventory": {
+        "local_path": "out/evidence/initial-preview-native/paint-trace-ab5076bdb8.index.json",
+        "sha256": "160f62de138b661d6bf79de4bd65eb48fca8cee4ce6deb2d060d2d5f5780cbd0"
+      }
+    },
+    {
+      "family": "FRONTEND-PHASE-FAILURE",
+      "outcome": "pass",
+      "cases": 2,
+      "archive": {
+        "local_path": "out/evidence/initial-preview-native/pff-3e4fb392df.zip",
+        "sha256": "2ccb7420c8f9a680bf91bfc155cbe53a92492c552fd5d44c340dee1172dc3cb7"
+      },
+      "record": {
+        "local_path": "out/evidence/initial-preview-native/pff-3e4fb392df.json",
+        "sha256": "962c2ce70a79a6a59bbf5c9b09dae3af3bdef6056731ad0b9f456f6f2e704a57"
+      },
+      "inventory": {
+        "local_path": "out/evidence/initial-preview-native/pff-3e4fb392df.index.json",
+        "sha256": "c3185c36d0bb98eda347bc4446929d007dc95a27b25037a87e1ccf4a334ba0b8"
+      }
+    },
+    {
+      "family": "EDITOR-RECOVERY",
+      "outcome": "pass",
+      "cases": 14,
+      "archive": {
+        "local_path": "out/evidence/initial-preview-native/recovery-controls-ec804feeaebc.zip",
+        "sha256": "f155b6f5371680b48409a845b3324b31e3bfcf84700c6e4e269f4211536c0666"
+      },
+      "record": {
+        "local_path": "out/evidence/initial-preview-native/recovery-controls-ec804feeaebc.json",
+        "sha256": "70a862fe9d9103aa93efc547f5cc7665a79ea46e737a07c5ba937bfe66141672"
+      },
+      "inventory": {
+        "local_path": "out/evidence/initial-preview-native/recovery-controls-ec804feeaebc.index.json",
+        "sha256": "1e1ef5bf4f00ce4c96ca402798160f5f13143bf7ea59c4ef4f26515f20074446"
+      }
+    },
+    {
+      "family": "EDITOR-INITIAL-INPUT",
+      "outcome": "pass",
+      "cases": 9,
+      "archive": {
+        "local_path": "out/evidence/initial-preview-native/reply-13d755a4401c.zip",
+        "sha256": "c280fdc4dc28179ea78ca037b4d2b831ce133acd02403e9c112557ce2da7e15e"
+      },
+      "record": {
+        "local_path": "out/evidence/initial-preview-native/reply-13d755a4401c.json",
+        "sha256": "13c73af0bd828975860cabee188a08510107f2624ee3ae8a93fb85215e0fec5b"
+      },
+      "inventory": {
+        "local_path": "out/evidence/initial-preview-native/reply-13d755a4401c.index.json",
+        "sha256": "9a22313f7e28ac803ef050b814053b5d91347a2e9b139b4dfbceb97711647f4d"
+      }
+    },
+    {
+      "family": "EDITOR-REPLY-LIFECYCLE",
+      "outcome": "pass",
+      "cases": 11,
+      "archive": {
+        "local_path": "out/evidence/initial-preview-native/reply-a2dceab16d39.zip",
+        "sha256": "6af624b86d217bc2a9e4c1d43188fbacee87941b59597dd72613667662d9d717"
+      },
+      "record": {
+        "local_path": "out/evidence/initial-preview-native/reply-a2dceab16d39.json",
+        "sha256": "0505d15b0f5aae7fcc2e4533f0d3015cfb2d967d948d29176a777fe7f51df756"
+      },
+      "inventory": {
+        "local_path": "out/evidence/initial-preview-native/reply-a2dceab16d39.index.json",
+        "sha256": "54c8a10e12d00742d88a3d3425d5e2a74a868ef4653a4a0a2c52098bffb0c272"
+      }
+    },
+    {
+      "family": "PREPARED-EDITOR",
+      "outcome": "pass",
+      "cases": 12,
+      "archive": {
+        "local_path": "out/evidence/initial-preview-native/reply-b513ae97925e.zip",
+        "sha256": "f0bddc3e4594ee3c26b847d8df81520ede18f7ffb9d884cb6765c4981f814cd9"
+      },
+      "record": {
+        "local_path": "out/evidence/initial-preview-native/reply-b513ae97925e.json",
+        "sha256": "f9f344ccbfac01e5a14390050cd2b60276377ba8197484567b546fcf59cf24c5"
+      },
+      "inventory": {
+        "local_path": "out/evidence/initial-preview-native/reply-b513ae97925e.index.json",
+        "sha256": "b548cd60917a2704bc6b5846daf0e843d4c14882844cc93f0c8a546e395381b4"
+      }
+    },
+    {
+      "family": "EDITOR-INITIAL-INPUT",
+      "outcome": "pass",
+      "cases": 9,
+      "archive": {
+        "local_path": "out/evidence/initial-preview-native/reply-bac8d3934a39.zip",
+        "sha256": "223f96d4ddfa58b549095d26eb89b8a23d551e2ef8e3319366858cfad39a22e8"
+      },
+      "record": {
+        "local_path": "out/evidence/initial-preview-native/reply-bac8d3934a39.json",
+        "sha256": "43c163e5cc3adb37f884a9939547dbed7f91e332efa0cb8eb7e32399a8eb013f"
+      },
+      "inventory": {
+        "local_path": "out/evidence/initial-preview-native/reply-bac8d3934a39.index.json",
+        "sha256": "8735f89272cbec1d5e12f364b82674819bb06f1632ef51ba77a86aeec0387369"
+      }
+    },
+    {
+      "family": "RECOVERY-GUI-LIMITS",
+      "outcome": "fail",
+      "cases": 7,
+      "archive": {
+        "local_path": "out/evidence/initial-preview-native/rgl-75e842be5c.zip",
+        "sha256": "da4755929e45fc09dea00160eb534df8ecbdf699725698d13de3cbbc646bfc71"
+      },
+      "record": {
+        "local_path": "out/evidence/initial-preview-native/rgl-75e842be5c.json",
+        "sha256": "b7c9ab673433e70bd27ea330a2cc2901932d455a0e572226c726b2381b1e4ce5"
+      },
+      "inventory": {
+        "local_path": "out/evidence/initial-preview-native/rgl-75e842be5c.index.json",
+        "sha256": "bdf12ca2e1bd9943c0c461fa8d03706c0ab1577019108d109fc9cd02aeb03dcf"
+      }
+    },
+    {
+      "family": "FRONTEND-PREPARED-EDITOR",
+      "outcome": "pass",
+      "cases": 7,
+      "archive": {
+        "local_path": "out/evidence/initial-preview-native/rl-5d8ab7a509.zip",
+        "sha256": "8bdb8d3007ade0a901993f1ae2570c9434d7bcd008764407101e216c79a9bc90"
+      },
+      "record": {
+        "local_path": "out/evidence/initial-preview-native/rl-5d8ab7a509.json",
+        "sha256": "8b4aa7ebfa38ac83b3315cdd1b9a960b5845432f1673249c3652d2d55c35d499"
+      },
+      "inventory": {
+        "local_path": "out/evidence/initial-preview-native/rl-5d8ab7a509.index.json",
+        "sha256": "97fb83d090cc482146da922e5006c893cdf20a9eaaf119f8fb871c11ef589399"
+      }
+    },
+    {
+      "family": "EDITOR-SNAP",
+      "outcome": "pass",
+      "cases": 13,
+      "archive": {
+        "local_path": "out/evidence/initial-preview-native/snap-feccd145ae55.zip",
+        "sha256": "c32a02fd9be6db06819714ffd650cb1dfe745118cfe7a630c79c6ca3f2631bb4"
+      },
+      "record": {
+        "local_path": "out/evidence/initial-preview-native/snap-feccd145ae55.json",
+        "sha256": "97a3f2fc3bb3b91c31c5b4ecc2acbf49dd130055356820651654444e4f1431d2"
+      },
+      "inventory": {
+        "local_path": "out/evidence/initial-preview-native/snap-feccd145ae55.index.json",
+        "sha256": "06810c671ee184187d29e898ab7eb21c1088d6852ef16a555dd86aee6e79f92b"
+      }
+    },
+    {
+      "family": "IMAGE-ERASURE",
+      "outcome": "pass",
+      "cases": 3,
+      "archive": {
+        "local_path": "out/evidence/initial-preview-native/surface-63488aa9c78c.zip",
+        "sha256": "83ed1a494091bea28e7903df844624f49eb520111f6cb018bee8c7385553efce"
+      },
+      "record": {
+        "local_path": "out/evidence/initial-preview-native/surface-63488aa9c78c.json",
+        "sha256": "6900c19360d7472f348f4c7dfedc61ae07e761e1d745b57268965f41d8d697e4"
+      },
+      "inventory": {
+        "local_path": "out/evidence/initial-preview-native/surface-63488aa9c78c.index.json",
+        "sha256": "5feaa983844d6363c2ac696f1a06985533623d9e2f95e8c1a6337b1aaf5eec4b"
+      }
+    },
+    {
+      "family": "EDITOR-VISIBILITY",
+      "outcome": "pass",
+      "cases": 16,
+      "archive": {
+        "local_path": "out/evidence/initial-preview-native/visibility-controls-d342fa29f1a7.zip",
+        "sha256": "ed7911bde93782bb3200e732f0afa7adb0a2b3be29ca609cf79b5557e9340eb5"
+      },
+      "record": {
+        "local_path": "out/evidence/initial-preview-native/visibility-controls-d342fa29f1a7.json",
+        "sha256": "903a5deb3cf27df85f0154c8d8fe747280fdb3e375c56c46f0b2955758f5a781"
+      },
+      "inventory": {
+        "local_path": "out/evidence/initial-preview-native/visibility-controls-d342fa29f1a7.index.json",
+        "sha256": "dda25dbd9a1526e3148540d79bc66b858d04d6bf7c679a3af27075fda372a76a"
+      }
+    }
+  ],
+  "phase": {
+    "archive": {
+      "local_path": "out/evidence/initial-preview-native/fp-e96cc71299.zip",
+      "sha256": "3fc38990c52ee00bd36fb99257fa38d95b2548201378bea19e05d05f2c470d89"
+    },
+    "cases": [
+      {
+        "case": "MAX-WIDGETS",
+        "maxima_us": {
+          "attach": 7723,
+          "controls": 609,
+          "editor": 57528,
+          "populate": 73799,
+          "recovery": 2150,
+          "reply": 35283,
+          "reply_reload": 3,
+          "settings": 8008,
+          "take": 25,
+          "topology": 0,
+          "withdrawal": 3
+        },
+        "slow": []
+      },
+      {
+        "case": "MAX-SCENE",
+        "maxima_us": {
+          "attach": 5717,
+          "controls": 632,
+          "editor": 72529,
+          "populate": 88806,
+          "recovery": 2207,
+          "reply": 35121,
+          "reply_reload": 3,
+          "settings": 7480,
+          "take": 23,
+          "topology": 0,
+          "withdrawal": 3
+        },
+        "slow": []
+      },
+      {
+        "case": "MAX-RECORD",
+        "maxima_us": {
+          "attach": 5611,
+          "controls": 661,
+          "editor": 72412,
+          "populate": 88267,
+          "recovery": 2165,
+          "reply": 34928,
+          "reply_reload": 3,
+          "settings": 7557,
+          "take": 77,
+          "topology": 0,
+          "withdrawal": 3
+        },
+        "slow": []
+      },
+      {
+        "case": "MAX-COMMAND-REJECT",
+        "maxima_us": {
+          "attach": 5971,
+          "controls": 123,
+          "editor": 10271,
+          "populate": 26399,
+          "recovery": 626,
+          "reply": 0,
+          "reply_reload": 0,
+          "settings": 8007,
+          "take": 51,
+          "topology": 0,
+          "withdrawal": 3
+        },
+        "slow": []
+      },
+      {
+        "case": "OVER-RECORD-REJECT",
+        "maxima_us": {
+          "attach": 5940,
+          "controls": 120,
+          "editor": 9951,
+          "populate": 26441,
+          "recovery": 639,
+          "reply": 0,
+          "reply_reload": 0,
+          "settings": 8252,
+          "take": 13,
+          "topology": 0,
+          "withdrawal": 3
+        },
+        "slow": []
+      },
+      {
+        "case": "CLOSE-PREPARING",
+        "maxima_us": {
+          "attach": 5841,
+          "controls": 92,
+          "editor": 9346,
+          "populate": 24441,
+          "recovery": 535,
+          "reply": 0,
+          "reply_reload": 0,
+          "settings": 7937,
+          "take": 10,
+          "topology": 0,
+          "withdrawal": 3
+        },
+        "slow": []
+      },
+      {
+        "case": "POLICY",
+        "maxima_us": {
+          "attach": 5724,
+          "controls": 105,
+          "editor": 9552,
+          "populate": 24750,
+          "recovery": 622,
+          "reply": 0,
+          "reply_reload": 0,
+          "settings": 7633,
+          "take": 19,
+          "topology": 0,
+          "withdrawal": 35478
+        },
+        "slow": []
+      }
+    ]
+  },
+  "paint": {
+    "archive": {
+      "local_path": "out/evidence/initial-preview-native/paint-trace-ab5076bdb8.zip",
+      "sha256": "968337b5f3fb786a3a0074d675f97bf26060b47dcf289d3a62a6ced5fee2c00e"
+    },
+    "trace_sha256": "f327294c94b3e74b4680844ddb9ea30df3a543bff64f540156374c1e7291cc2b",
+    "cases": [
+      {
+        "case": "MAX-WIDGETS",
+        "calls": {
+          "constructor_geometry": 0,
+          "edit_callback_geometry": 514,
+          "gtk_draw": 13874,
+          "other_composition": 0
+        }
+      },
+      {
+        "case": "MAX-SCENE",
+        "calls": {
+          "constructor_geometry": 0,
+          "edit_callback_geometry": 6,
+          "gtk_draw": 58,
+          "other_composition": 0
+        }
+      },
+      {
+        "case": "MAX-RECORD",
+        "calls": {
+          "constructor_geometry": 0,
+          "edit_callback_geometry": 6,
+          "gtk_draw": 60,
+          "other_composition": 0
+        }
+      },
+      {
+        "case": "MAX-COMMAND-REJECT",
+        "calls": {
+          "constructor_geometry": 0,
+          "edit_callback_geometry": 0,
+          "gtk_draw": 28,
+          "other_composition": 0
+        }
+      },
+      {
+        "case": "OVER-RECORD-REJECT",
+        "calls": {
+          "constructor_geometry": 0,
+          "edit_callback_geometry": 0,
+          "gtk_draw": 8,
+          "other_composition": 0
+        }
+      },
+      {
+        "case": "CLOSE-PREPARING",
+        "calls": {
+          "constructor_geometry": 0,
+          "edit_callback_geometry": 0,
+          "gtk_draw": 4,
+          "other_composition": 0
+        }
+      },
+      {
+        "case": "POLICY",
+        "calls": {
+          "constructor_geometry": 0,
+          "edit_callback_geometry": 2,
+          "gtk_draw": 28,
+          "other_composition": 0
+        }
+      }
+    ]
+  },
+  "gui": {
+    "started_at": "2026-10-09T07:13:56.571181+00:00",
+    "outcome": "fail",
+    "archive": {
+      "local_path": "out/evidence/initial-preview-native/rgl-75e842be5c.zip",
+      "sha256": "da4755929e45fc09dea00160eb534df8ecbdf699725698d13de3cbbc646bfc71"
+    },
+    "cases": [
+      {
+        "case": "MAX-WIDGETS",
+        "outcome": "fail",
+        "failure": "Traceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_installed_editor.py\", line 228, in observe\n    extension(dict(locals(),process=lambda:proc));report['outcome']='pass';return\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_recovery_gui_limits.py\", line 73, in exercise\n    assert not violations,('GUI timing limit exceeded',violations)\n           ^^^^^^^^^^^^^^\nAssertionError: ('GUI timing limit exceeded', [{'index': 148, 'pid': 1140018, 'work_us': 199, 'delay_us': 130088}, {'index': 184, 'pid': 1140018, 'work_us': 352, 'delay_us': 166800}])\n",
+        "timing_max_us": {
+          "delay_us": 166800,
+          "work_us": 76261
+        },
+        "input_sha256": "d7909570bbb0aae98e8ceaab13d7fa9877380ee5c874bb7f67d71a8250f51178",
+        "scene_sha256": "0b93e8e7d3652e9c6bbd715eadef1f094f2e4b4e4b6e0dc2ffe95da6257ecc5f",
+        "native_children": 6,
+        "all_children_exited": true
+      },
+      {
+        "case": "MAX-SCENE",
+        "outcome": "fail",
+        "failure": "Traceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_installed_editor.py\", line 228, in observe\n    extension(dict(locals(),process=lambda:proc));report['outcome']='pass';return\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_recovery_gui_limits.py\", line 73, in exercise\n    assert not violations,('GUI timing limit exceeded',violations)\n           ^^^^^^^^^^^^^^\nAssertionError: ('GUI timing limit exceeded', [{'index': 153, 'pid': 1140219, 'work_us': 311, 'delay_us': 126447}, {'index': 202, 'pid': 1140219, 'work_us': 346, 'delay_us': 176743}])\n",
+        "timing_max_us": {
+          "delay_us": 176743,
+          "work_us": 92262
+        },
+        "input_sha256": "f7a14a4c38799c71c3d6c11864dee6b570d61e064e52b5758d578960e8b0df22",
+        "scene_sha256": "0f113fe0107be93ae5c6c4238afd2be1ee43b6d63cfb82d01ff25a62ee96c2e8",
+        "native_children": 6,
+        "all_children_exited": true
+      },
+      {
+        "case": "MAX-RECORD",
+        "outcome": "fail",
+        "failure": "Traceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_installed_editor.py\", line 228, in observe\n    extension(dict(locals(),process=lambda:proc));report['outcome']='pass';return\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_recovery_gui_limits.py\", line 73, in exercise\n    assert not violations,('GUI timing limit exceeded',violations)\n           ^^^^^^^^^^^^^^\nAssertionError: ('GUI timing limit exceeded', [{'index': 154, 'pid': 1140411, 'work_us': 293, 'delay_us': 134512}, {'index': 215, 'pid': 1140411, 'work_us': 330, 'delay_us': 173549}])\n",
+        "timing_max_us": {
+          "delay_us": 173549,
+          "work_us": 91964
+        },
+        "input_sha256": "9bd46b3a2c8be9cc097c0fc4e39fc014e357b6d40f7696d8f88c68346528956d",
+        "scene_sha256": "0f113fe0107be93ae5c6c4238afd2be1ee43b6d63cfb82d01ff25a62ee96c2e8",
+        "native_children": 8,
+        "all_children_exited": true
+      },
+      {
+        "case": "MAX-COMMAND-REJECT",
+        "outcome": "pass",
+        "timing_max_us": {
+          "delay_us": 5954,
+          "work_us": 25335
+        },
+        "input_sha256": "adb34c7907ab074272a74221a001ec2367833875a448ea334f1624eedf10e207",
+        "scene_sha256": "0f113fe0107be93ae5c6c4238afd2be1ee43b6d63cfb82d01ff25a62ee96c2e8",
+        "native_children": 3,
+        "all_children_exited": true
+      },
+      {
+        "case": "OVER-RECORD-REJECT",
+        "outcome": "pass",
+        "timing_max_us": {
+          "delay_us": 4299,
+          "work_us": 25062
+        },
+        "input_sha256": "b1d87584338e9bb12d1b8b60245e37cc0e7e6a5bae4a99ef2bc2335a57cc5d02",
+        "scene_sha256": "0f113fe0107be93ae5c6c4238afd2be1ee43b6d63cfb82d01ff25a62ee96c2e8",
+        "native_children": 3,
+        "all_children_exited": true
+      },
+      {
+        "case": "CLOSE-PREPARING",
+        "outcome": "pass",
+        "timing_max_us": {
+          "delay_us": 6032,
+          "work_us": 26910
+        },
+        "input_sha256": "c935f4530ce4839bba69f752c1d132eabe1e11a95c79a66ccc099f7e05eafe30",
+        "scene_sha256": "0f113fe0107be93ae5c6c4238afd2be1ee43b6d63cfb82d01ff25a62ee96c2e8",
+        "native_children": 3,
+        "all_children_exited": true
+      },
+      {
+        "case": "POLICY",
+        "outcome": "fail",
+        "failure": "Traceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_installed_editor.py\", line 228, in observe\n    extension(dict(locals(),process=lambda:proc));report['outcome']='pass';return\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_recovery_gui_limits.py\", line 73, in exercise\n    assert not violations,('GUI timing limit exceeded',violations)\n           ^^^^^^^^^^^^^^\nAssertionError: ('GUI timing limit exceeded', [{'index': 158, 'pid': 1140835, 'work_us': 293, 'delay_us': 130530}])\n",
+        "timing_max_us": {
+          "delay_us": 130530,
+          "work_us": 35839
+        },
+        "erasure_ms": 105.28794201673009,
+        "erasure_limit_ms": 200,
+        "input_sha256": "e74d8359639840ff6657a9e64f7841c9fbb13921eb3803f532c6e9d8694c17e6",
+        "scene_sha256": "0f113fe0107be93ae5c6c4238afd2be1ee43b6d63cfb82d01ff25a62ee96c2e8",
+        "native_children": 3,
+        "all_children_exited": true
+      }
+    ]
+  },
+  "preserved_orchestration_failures": [
+    {
+      "local_path": "out/evidence/initial-preview-flow-11f2eac721ea.json",
+      "sha256": "e47f52677b2b6b590a9772cd552407b91659661f09d3ce7991cc58cb98954761"
+    },
+    {
+      "local_path": "out/evidence/initial-preview-flow-44a01ce13fbe.json",
+      "sha256": "f8af201712f00799dceec05bc2d4aad3613377b8f7851dcf97e898cf97442c26"
+    },
+    {
+      "local_path": "out/evidence/initial-preview-flow-456b18ffb02e.json",
+      "sha256": "f8c21d68eda4c009c1ad796cd3f8afa0730a9b640b4df4b94ffa2a5e9635d27d"
+    },
+    {
+      "local_path": "out/evidence/initial-preview-flow-6b0ec73fa620.json",
+      "sha256": "3713cf1a53e8176695f90d9d16b0faae44030055521204aaab5e9eb868d0bb8e"
+    }
+  ],
+  "workspace": {
+    "maximum_bytes": 8589934592,
+    "reservations_unchanged": true,
+    "archived_native_bytes": 1447465834
+  },
+  "limitations": [
+    "Original nine first-input expectations passed before and after the scheduling change; no GTK draw occurred in those component cases.",
+    "Four fixed GUI cases still fail excess delay; native phase and paint diagnostics are not qualification.",
+    "An ignored coordinator initially named the editor-exit artifact incorrectly; four attempts stopped before test execution and are preserved.",
+    "Production recovery remains disabled; W-11 and all five complete editions remain open."
+  ],
+  "next_step": "Close current-owner asynchronous history/edit preparation, including structural submit eligibility and native preview handoff; preserve the same GUI timing and erasure gates.",
+  "spec_checks": {
+    "record": {
+      "local_path": "out/evidence/initial-preview-spec-validation-70c50dfe2026.json",
+      "sha256": "70c50dfe20269d1b57128e2ecc5be6c32603f834ceccbf65ec76702954224488"
+    },
+    "counts": {
+      "files": 670,
+      "concepts": 347,
+      "requirements": 131,
+      "planned_tests": 61,
+      "work_units": 49
+    },
+    "schemas": 51,
+    "fixtures": 183
+  }
+}

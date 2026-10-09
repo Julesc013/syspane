@@ -43,7 +43,8 @@ behaviour has been implemented. See [audit disposition](spec/delivery/audit-2026
 - [x] Attribute frontend tick phases and close validated accepted replacement replies without rebuilding the old preview; retain native lifecycle/erasure checks and fixed timing failures. See the [handoff](spec/delivery/frontend-phases-handoff.md).
 - [x] Prepare validated initial editor state on the existing client worker; verify exclusive current-profile adoption and preserve native rendering/erasure checks. See the [handoff](spec/delivery/prepared-editor-handoff.md).
 - [x] Trace native paint calls through unchanged installed GUI cases; confirm constructor and edit-callback rasterization and preserve the invalid overflow attempt. See the [handoff](spec/delivery/editor-paint-trace-handoff.md).
-- [ ] Close initial-preview readiness with before-first-draw input cases, then current-owner asynchronous history/edit preparation.
+- [x] Defer initial preview composition while preserving nine frozen before-first-draw input cases and native regressions. See the [handoff](spec/delivery/initial-preview-handoff.md).
+- [ ] Close current-owner asynchronous history/edit preparation, including first structural submit eligibility and native preview handoff.
 - [ ] Repair measured preview/layout/validation stalls and investigate the transient Apply state and controller restart; pass all seven fixed GTK limit cases without weakening deadlines or erasure.
 - [ ] Qualify complete recovery worker/supervisor scheduling and maximum-size GUI operations under existing limits; then enable production recovery and rerun acceptance. Integrate the native inspector.
 - [ ] Explain the preserved Windows GCC15 THEME-HISTORY-RESOURCE-LIMIT 20-second timeout and installed-editor AT-SPI grab_focus timeout; retain original failures and distinguish unchanged replays from causal evidence.

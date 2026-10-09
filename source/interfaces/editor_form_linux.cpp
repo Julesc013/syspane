@@ -41,7 +41,7 @@ void immediate_style(GtkWidget* widget,gpointer provider){
 struct EditorForm::Impl {
     std::unique_ptr<PreparedEditor> prepared;EditorDraft& draft;c::Authority authority;c::Policy current;Json settings;std::set<std::string> capabilities;s::Topology topology;std::string display,worker;
     std::vector<v::SurfaceProvider> providers;v::ImageFactory images;std::unique_ptr<v::SceneSurface> surface;std::map<std::string,model::Tick> ticks;
-    Actions actions;std::thread::id thread=std::this_thread::get_id();bool closed=false,updating=false,dispatching=false,fields_dirty=false,drawing=false;std::string error;
+    Actions actions;std::thread::id thread=std::this_thread::get_id();bool closed=false,updating=false,dispatching=false,fields_dirty=false,drawing=false,initial_resolution_pending=true;std::string error;
     std::unique_ptr<platform::SceneClipboardX11> clipboard;
     std::unique_ptr<EditorRecoverySession> recovery;GtkWidget* recovery_status=nullptr;bool cancel_pending=false;
     GtkWidget *root=nullptr,*canvas=nullptr,*tree=nullptr,*status=nullptr,*guidance=nullptr;GtkListStore* model=nullptr;std::vector<GtkWidget*> owned;
@@ -64,13 +64,14 @@ struct EditorForm::Impl {
     bool typography_supported()const{if(!visibility_supported()||!current.available)return false;for(const char* cap:{"theme.typography","configuration.theme-overrides"})if(!capabilities.count(cap)||current.denied_capabilities.count(cap))return false;return true;}
     void presentation(const v::SurfaceFrame& frame){nodes=frame.layout.nodes;hidden.clear();diagnostics.clear();for(const auto& w:frame.widgets){if(!w.presented)hidden.insert(w.id);if(w.diagnostic)diagnostics.insert(w.id);}}
     bool editing()const{return draft.available()&&(!recovery||recovery->editing())&&!cancel_pending&&(!clipboard||!clipboard->busy())&&!draft.active_request()&&draft.state()!=DraftState::conflict&&(!content||!content->opened())&&(!binding||!binding->opened())&&(!creation||!creation->opened())&&(!layout_form||!layout_form->opened())&&(!visibility||!visibility->opened())&&(!theme||!theme->opened());}
-    void ready()const{need(editing(),"editor.unavailable");need(!fields_dirty,"editor.properties_pending");}
+    void ready(){need(editing(),"editor.unavailable");need(!fields_dirty,"editor.properties_pending");if(initial_resolution_pending)resolve_nodes();}
     bool clear(){nodes.clear();hidden.clear();diagnostics.clear();if(canvas){atk_object_set_name(gtk_widget_get_accessible(canvas),"");if(!drawing)gtk_widget_queue_draw(canvas);}return true;}
     void stop_preview(){gesture.reset();ticks.clear();if(surface)surface->close();clear();}
     void resolve_nodes(){
         // Input can arrive again before GTK's next draw. Resolve with the same
         // renderer now so a valid queued key is not mistaken for a hidden variant.
         if(surface&&draft.available())surface->paint(now(),ticks,[this](auto,const v::SurfaceFrame* frame){if(frame)presentation(*frame);});
+        initial_resolution_pending=false;
     }
     void preview(bool resolve_now=true){
         if(!draft.available()||!draft.resources()){settings=nullptr;capabilities.clear();stop_preview();return;}
@@ -374,7 +375,7 @@ struct EditorForm::Impl {
             if(gesture&&gesture->input){const auto& r=gesture->result;cairo_set_source_rgb(cr,1,0,1);cairo_set_line_width(cr,1);
                 if(r.x){const double px=std::floor((r.x->position-d.bounds.x)*device_per_unit)+0.5;cairo_move_to(cr,px,0);cairo_line_to(cr,px,d.bounds.height*device_per_unit);}
                 if(r.y){const double py=std::floor((r.y->position-d.bounds.y)*device_per_unit)+0.5;cairo_move_to(cr,0,py);cairo_line_to(cr,d.bounds.width*device_per_unit,py);}cairo_stroke(cr);}
-        });cairo_restore(cr);
+        });initial_resolution_pending=false;cairo_restore(cr);
         // Selection can arrive after telemetry erased native caches but before
         // this frame resolved them. Hydrate clean fields once geometry returns;
         // never replace a user's pending property input during repaint.
@@ -481,7 +482,9 @@ EditorForm::EditorForm(std::unique_ptr<PreparedEditor> prepared,s::Topology topo
     // longer than this interval; periodic refresh must yield to that work rather
     // than keeping higher-priority drawing continuously ready. Unavailable drafts
     // already queued their clearing paint; do not keep repainting that empty view.
-    i.preview();i.list();i.sync(true);i.timer=g_timeout_add_full(G_PRIORITY_LOW,40,+[](gpointer p)->gboolean{auto& o=*static_cast<Impl*>(p);try{o.poll_recovery();if(o.surface)o.surface->poll_image_jobs();if(!o.closed&&o.draft.available())gtk_widget_queue_draw(o.canvas);}catch(...){o.shut();}return G_SOURCE_CONTINUE;},&i,nullptr);
+    // First drawing resolves the preview. Earlier admitted input resolves it in
+    // ready(), so queued selection/hit testing never observes missing geometry.
+    i.preview(false);i.list();i.sync(true);i.timer=g_timeout_add_full(G_PRIORITY_LOW,40,+[](gpointer p)->gboolean{auto& o=*static_cast<Impl*>(p);try{o.poll_recovery();if(o.surface)o.surface->poll_image_jobs();if(!o.closed&&o.draft.available())gtk_widget_queue_draw(o.canvas);}catch(...){o.shut();}return G_SOURCE_CONTINUE;},&i,nullptr);
 }
 EditorForm::~EditorForm()=default;
 GtkWidget* EditorForm::widget()const{impl_->owner();return impl_->root;}

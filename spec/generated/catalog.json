@@ -489,7 +489,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "31e7b1c06b59b2501953e732bf04980ea29e46a5b2a6be3285d0048bb647bddd"
+      "sha256": "8f69121e32e4cc62e475a5f8d40f5542d9cc2dbc2016ca0e90f81039c73a7d14"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -958,6 +958,17 @@
         "SP-CURRENT"
       ],
       "sha256": "4a21e08b9c39ce302657a09a68a30f68e9990ab542e4e462182c1e87e4297b90"
+    },
+    {
+      "id": "SP-INITIAL-PREVIEW-HANDOFF",
+      "path": "delivery/initial-preview-handoff.md",
+      "title": "Initial editor preview readiness handoff",
+      "description": "First composition now waits for drawing or guarded earlier input; fixed timing failures remain.",
+      "requires": [
+        "SP-W11-INITIAL-PREVIEW",
+        "SP-EDITOR-PAINT-TRACE-HANDOFF"
+      ],
+      "sha256": "ffa3b099884b0df1afcd6c44975b9c654b66a3a7809b0118d8196cda1f9b478c"
     },
     {
       "id": "SP-INSTALLED-EDITOR-HANDOFF",
@@ -2308,6 +2319,17 @@
       "sha256": "8011d5134f29059f80501dc345d903a7ddc524f817b2fcd76aeea0280787ac33"
     },
     {
+      "id": "SP-W11-INITIAL-PREVIEW",
+      "path": "delivery/packages/w-11-initial-preview.md",
+      "title": "Initial editor preview readiness",
+      "description": "Defer the first composition while preserving geometry-dependent input before GTK draws.",
+      "requires": [
+        "SP-W11-EDITOR-PAINT-TRACE",
+        "SP-W11-PREPARED-EDITOR"
+      ],
+      "sha256": "94ded9e9909abf8746b1545f7706ca1eeccfbc754204a86f9de193494f13c239"
+    },
+    {
       "id": "SP-W11-INSTALLED-EDITOR",
       "path": "delivery/packages/w-11-installed-editor.md",
       "title": "Installed native scene editor",
@@ -3596,7 +3618,7 @@
         "SP-RENDERING",
         "SP-COMMANDS"
       ],
-      "sha256": "93aa26a7b058cb1457cdb7c1a42bae5ceaf0804c2be78ec910970c1b77682988"
+      "sha256": "ecb914e7e854a1009afc574fe154f71af8e7b47291d23ce5dc991dd48de652a9"
     },
     {
       "id": "SP-POLICY",

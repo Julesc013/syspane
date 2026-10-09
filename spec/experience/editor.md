@@ -235,3 +235,14 @@ an explicit fresh binding; the host polls closure until the helper is reaped bef
 teardown. The [checkpoint](../delivery/recovery-controls-handoff.md) records native
 observations. Installed ownership, other platforms and complete native qualification
 remain open.
+
+## Initial native preview readiness
+
+The [initial-preview contract](../delivery/packages/w-11-initial-preview.md) permits
+first full composition to wait for GTK drawing only when earlier admitted input
+resolves current geometry first. Selection, pointer hits and queued keys must retain
+exact active-layout behavior before any draw. Existing editing/policy/field guards
+run before resolution; unavailable or failed frames provide no editable geometry.
+This does not authorize frame reuse across changed content, authority, topology or
+telemetry. The [handoff](../delivery/initial-preview-handoff.md) records frozen native
+input checks and remaining responsiveness failures.

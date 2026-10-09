@@ -15,6 +15,16 @@ build` before configuring or building; use `test` or `package` for those actions
 The common active-output budget is unchanged; retained `out/evidence/` archives
 are measured separately. Never use the placeholder account from the example.
 
+The [initial-preview package](../../spec/delivery/packages/w-11-initial-preview.md)
+defers first composition to drawing or guarded earlier input. After ordinary
+preflight/configure/build, run `ctest --preset linux-x64-gcc13 -R
+'^native[.]EDITOR-INITIAL-INPUT$' --output-on-failure`. Its nine fixed cases use real
+GTK controls without a first draw and compare exact submitted scenes. Preserve the
+original pre-change expectations and all existing layout/refresh/installed/recovery
+and image/erasure checks. Rerun the phase/paint diagnostics and ordinary GUI limits
+separately; four delay failures remain. The [handoff](../../spec/delivery/initial-preview-handoff.md)
+records scope, source-bound evidence and the next history/edit preparation work.
+
 The [native paint trace package](../../spec/delivery/packages/w-11-editor-paint-trace.md)
 uses a test-only preload probe against the unchanged compiled frontend. After
 ordinary preflight/configure/build, run `python3 tests/configuration/native_editor_paint_trace.py
