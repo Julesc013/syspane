@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-09T02:55:28.137718+00:00", "scope": "Frontend recovery authority and accepted-request identity; installed controls and full release remain open"}
+updated: {"by": "codex", "at": "2026-10-09T03:28:09.539873+00:00", "scope": "Installed recovery fixture consumption and reconciliation repair; production and full release gates remain open"}
 ---
 
 # Current state and next admitted boundary
@@ -24,14 +24,17 @@ setup and the [repository contract](../foundation/repository.md) for ownership.
 
 The [frontend recovery backend](frontend-recovery-handoff.md) now uses authenticated
 profile 0.2, current native admission and exact accepted-request retirement metadata.
-Connect the installed EditorForm's capture/submission and receipt consumption next,
-then qualify complete worker/supervisor scheduling and maximum-size GUI operations.
-Recovery controls remain disabled; all five complete editions remain unfinished.
+The [installed recovery UI](installed-recovery-handoff.md) now connects capture,
+submission and receipt consumption in the actual frontend's experimental fixture.
+All 14 native cases pass, including a repaired lost-result reconciliation exit.
+Next qualify maximum-size GUI operations and complete worker/supervisor scheduling,
+then enable production recovery and rerun acceptance. Production controls remain
+disabled; W-11 and all five complete editions remain unfinished.
 
 The [asynchronous recovery preparation](recovery-preparation-handoff.md) now moves
 capture and restoration validation to the existing native worker, with current-draft
 proofs, coalescing and cancellation. The backend above now provides the scoped download
-and live authority; connect installed form consumption and qualify loop scheduling next. Preserve the
+and live authority; installed fixture consumption is connected and loop qualification remains open. Preserve the
 Windows GCC resource-limit timeout and installed AT-SPI focus timeout; their causes remain open.
 All five full editions remain unfinished.
 
@@ -39,36 +42,36 @@ The [native recovery helper admission](recovery-admission-handoff.md) now binds
 transferred observations to current host session authority and independently held
 state/recovery directories. The sealed child also refuses substituted nodes before
 creating its writer file. The backend callback and asynchronous preparation now exist;
-installed form consumption and complete scheduling remain open. All five full release editions
+installed fixture consumption now exists; complete scheduling remains open. All five full release editions
 remain open.
 
 The [authenticated recovery transfer](recovery-transfer-handoff.md) now carries
 coherent saved state and native recovery observations bound to connection, epoch,
 profile, editor session, transfer and revision. Original 0.1 transfers stay unchanged.
 The helper admission above now verifies those native directory identities and current
-session authority. Installed frontend composition, recovery validation latency and
+session authority. Production recovery enablement, maximum-size validation latency and
 all five complete release editions remain open.
 
 The [native recovery snapshot](recovery-context-handoff.md) now pairs accepted
 saved state with the exact generation, held directory identities and current
 retention/erase permission in one existing worker call. Native cases and owner/
 startup/worker/controller regressions pass. The authenticated transfer above now
-binds that coherent state; native helper admission, installed recovery and all five
+binds that coherent state. Native admission and experimental installed recovery exist; all five
 complete release editions remain open.
 
 The [installed native scene editor](installed-editor-handoff.md) now connects real
 frontend navigation and authoring to authenticated persistence and the existing
-verified helper worker. Draft recovery remains explicitly unavailable until its
-profile/session/generation/directory authority closes. Finish that boundary,
-consumer latency, native inspector, telemetry and desktop composition next. All
+verified helper worker. Experimental recovery now closes its scoped authority and
+form consumption boundary. Finish production recovery qualification, consumer
+latency, native inspector, telemetry and desktop composition next. All
 five complete release editions remain open.
 
 The [native editor helper worker](editor-helper-worker-handoff.md) now separates
 GUI task handles from verified native execution, with exact image/recovery consumer
 results and observed child closure. The installed editor uses that bridge on its
-existing worker; authenticated recovery directory/session authority remains open. Consumer recovery
-validation remains synchronous and needs latency work before installed-editor
-qualification. All five complete release editions remain open.
+existing worker, with authenticated recovery authority and detached preparation now
+connected in the installed fixture. Complete consumer scheduling/latency qualification
+and all five release editions remain open.
 
 The [verified editor helper bundle](editor-helper-bundle-handoff.md) extends
 installation-bound sealed execution to image and recovery work. Exact native

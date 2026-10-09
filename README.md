@@ -31,8 +31,8 @@ cover cancellation, exact results and existing renderer/recovery consumers.
 The [installed scene editor](spec/delivery/installed-editor-handoff.md) now uses this
 worker in the actual frontend, with native Settings/Edit scene navigation and
 authenticated save/reopen. The development payload includes all three verified helpers.
-Draft recovery is visibly unavailable until its authority contract closes. Recovery,
-whole-UI responsiveness, native inspector, telemetry and desktop hosting remain open.
+Draft recovery is connected in the installed experimental fixture. Production
+enablement, whole-UI responsiveness, native inspector, telemetry and desktop hosting remain open.
 
 The [native recovery snapshot](spec/delivery/recovery-context-handoff.md) now pairs
 saved state with its verified generation, directory identity and current retention
@@ -40,19 +40,21 @@ permission. The [authenticated transfer](spec/delivery/recovery-transfer-handoff
 binds those observations to one saved profile and editor session. The
 [native helper admission](spec/delivery/recovery-admission-handoff.md) independently
 holds directory identities and checks current session authority through helper work.
-Installed recovery still needs editor-form session composition, exact applied-draft
-retirement and responsiveness qualification.
+Installed recovery now composes editor sessions and exact applied-draft retirement
+in the experimental fixture; responsiveness qualification remains open.
 
 The [frontend recovery backend](spec/delivery/frontend-recovery-handoff.md)
 now downloads scoped recovery context and binds native helpers to the live session.
 Accepted requests preserve only their exact captured-draft metadata for conditional
-retirement. Installed recovery controls and full responsiveness qualification remain open.
+retirement. The [installed recovery UI](spec/delivery/installed-recovery-handoff.md)
+now exercises Restore, Keep, Discard and exact retirement through the actual frontend.
+Production controls remain disabled pending full scheduling and maximum-size checks.
 
 The [recovery preparation worker](spec/delivery/recovery-preparation-handoff.md)
 now validates detached editor recovery inputs on the existing native worker. Restore
 consumes only a current prepared result, and Apply waits for durable background
 capture. Fixed native checks cover cancellation, coalescing and exact files;
-installed session composition and whole-frontend qualification remain open.
+installed fixture composition now exists; whole-frontend qualification remains open.
 
 The [runtime directory checkpoint](spec/delivery/runtime-directory-handoff.md)
 adds private frontend runtime allocation and explicit retirement after supervisor

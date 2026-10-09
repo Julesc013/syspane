@@ -15,6 +15,30 @@ build` before configuring or building; use `test` or `package` for those actions
 The common active-output budget is unchanged; retained `out/evidence/` archives
 are measured separately. Never use the placeholder account from the example.
 
+The [installed recovery package](../../spec/delivery/packages/w-11-installed-recovery.md)
+connects the actual GTK editor to recovery()/preparations(), authenticated current
+binding and accepted-draft metadata. EditorForm::Actions::submit_recovery receives
+the capture digest before callback dispatch; do not reenter the form from callbacks.
+Bind retirement metadata with fresh admission and acknowledge the current profile
+serial only after retirement_decided(). Policy withdrawal erases cached results;
+completion handlers use reply outcomes only after original-request validation.
+
+Production recovery remains disabled. The separately compiled frontend fixture uses
+SYSPANE_EXPERIMENTAL_RECOVERY=1 to exercise the same UI path under fixture policy.
+There is no runtime override. Qualify maximum admitted inputs and complete existing
+worker/supervisor scheduling under unchanged deadlines before production enablement.
+
+After ordinary preflight/configure/build, run `ctest --preset linux-x64-gcc13
+-R '^native[.](INSTALLED-RECOVERY|INSTALLED-EDITOR|INSTALLED-SETTINGS|FRONTEND-RECOVERY|RECOVERY-PREPARATION|EDITOR-RECOVERY)$'
+--output-on-failure`. Run/archive families separately within the existing quota and
+run both composition checks on all three profiles. The new family stages one relocated
+five-file fixture and verified ZIP. Original installed families also cover production
+packaging and helper substitution. Native observations verify exact recovery bytes,
+documents, selecting records and child exit. Preserve crash orphan roots explicitly;
+clean-close assertions apply to each subsequent newly owned runtime allocation.
+Raw archives and the original failures are indexed by the
+[handoff](../../spec/delivery/installed-recovery-handoff.md).
+
 The [frontend recovery backend](../../spec/delivery/packages/w-11-frontend-recovery.md)
 now negotiates profile 0.2 and supplies current session authority to its existing
 native helper worker. Use recovery()/preparations() from the GUI owner; their factory
@@ -27,8 +51,8 @@ accepted result/reconciliation, reload for a current FrontendProfile. Its option
 recovery_retirement is metadata: load through fresh admission, compare the exact
 digest and conditionally retire only a match. Preserve a replacement or denial.
 After the decision, acknowledge_retirement(profile.serial); a stale or missing
-receipt is refused. The installed EditorForm still needs this consumer connection
-and complete scheduling/latency qualification before its recovery UI is enabled.
+receipt is refused. The installed EditorForm now consumes this in the experimental
+fixture; complete scheduling/latency qualification still gates production enablement.
 
 After ordinary preflight/configure/build, run `ctest --preset linux-x64-gcc13
 -R '^native[.](FRONTEND-RECOVERY|INSTALLED-SETTINGS|INSTALLED-EDITOR|RECOVERY-ADMISSION|EDITOR-HELPER-WORKER|RECOVERY-PREPARATION)$'
@@ -77,9 +101,9 @@ worker outside shared locks, and its immutable context must match the requested 
 The parent checks current authority through each operation and result delivery; the
 sealed child independently checks expected directory identities before creating its
 writer file. Existing explicit path experiments keep their original constructor.
-The backend now supplies that live callback. Installed recovery remains disabled
-until the form connects capture, submission and post-commit retirement to the backend
-and complete worker/GUI scheduling is qualified.
+The backend now supplies that live callback. The installed experimental form connects
+capture, submission and post-commit retirement. Production recovery remains disabled
+until complete worker/GUI scheduling and maximum-size operations are qualified.
 
 After the ordinary configure/build and budget checks, run
 `ctest --preset linux-x64-gcc13 -R '^native[.](RECOVERY-ADMISSION|EDITOR-HELPER-WORKER|RECOVERY-QUEUE|RECOVERY-STORE|PROFILE-OWNER|RECOVERY-CONTEXT|RECOVERY-TRANSFER)$' --output-on-failure`.
@@ -156,9 +180,9 @@ Settings and Edit scene navigation requires a current clean draft and no private
 fields, modal editor, gesture or pending command. Navigation requests a new coherent
 profile; Cancel session explicitly discards and returns to Settings. GDK topology
 uses session monitor identities. The outer form scrolls within the initial work area,
-leaving application navigation and Quit accessible. Recovery remains visibly unavailable:
-the backend now uses scoped 0.2 transfer and live native admission, while the installed
-form still needs capture/submission/retirement composition and scheduling qualification.
+leaving application navigation and Quit accessible. Production recovery remains visibly
+unavailable pending full scheduling/latency qualification. The installed experimental
+form now connects scoped 0.2 transfer, native admission and exact capture retirement.
 Do not infer authority from a revision or XDG path. Missing telemetry is not synthetic data.
 
 The [editor helper worker](../../spec/delivery/packages/w-11-editor-helper-worker.md)

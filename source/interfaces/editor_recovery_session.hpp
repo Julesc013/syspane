@@ -17,10 +17,10 @@ public:
     EditorRecoverySession(EditorDraft&,std::shared_ptr<const platform::RecoveryFactory>,std::string directory,std::shared_ptr<const RecoveryPreparationFactory> preparations={});
     bool location(const std::string& worker,const std::string& directory)const{return worker_==worker&&directory_==directory;}
     bool location(const std::shared_ptr<const platform::RecoveryFactory>& factory,const std::string& directory,const std::shared_ptr<const RecoveryPreparationFactory>& preparations={})const{return factory_==factory&&directory_==directory&&preparations_==preparations;}
-    void bind(EditorRecoveryBinding);
+    void bind(EditorRecoveryBinding,std::optional<std::string> retirement={});
     void invalidate();
     void changed();
-    void submitting();
+    std::optional<std::string> submitting();
     void settled(bool accepted);
     void restore();
     void keep();
@@ -34,6 +34,7 @@ public:
     bool restorable()const{return restorable_;}
     bool erasable()const;
     bool cancelled()const{return cancelled_;}
+    bool retirement_decided()const{return retirement_decided_;}
     EditorRecoveryState state()const{return state_;}
 private:
     EditorDraft& draft_;
@@ -49,6 +50,7 @@ private:
     std::optional<std::string> latest_,owned_,submitted_,cleanup_;
     EditorRecoveryState state_=EditorRecoveryState::disabled;
     bool restorable_=false,automatic_=false,closing_=false,reopen_=false,cancel_=false,cancelled_=false,closed_=false;
+    bool retiring_receipt_=false,retirement_decided_=false;
     RecoveryIdentity identity()const;
     void stop();
     void fail();

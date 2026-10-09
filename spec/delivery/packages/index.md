@@ -89,6 +89,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Native editor helper worker bridge](w-11-editor-helper-worker.md) — Move verified image and recovery execution behind bounded GUI-owned task handles.
 - [Frontend recovery authority and accepted-request identity](w-11-frontend-recovery.md) — Connect the actual frontend backend to scoped recovery admission and preserve exact accepted-draft metadata.
 - [Installed native scene editor](w-11-installed-editor.md) — Connect native scene authoring to the actual frontend, verified helpers and authenticated commands.
+- [Installed editor recovery consumption](w-11-installed-recovery.md) — Connect native recovery decisions, captured request identity and fresh accepted-draft retirement to the installed editor.
 - [Installed native settings frontend](w-11-installed-settings.md) — Compose the real application entry point, independently supervised controller and authenticated settings client.
 - [Native settings drafts and transaction results](w-11-native-settings.md) — Connect every initial settings descriptor to native controls and the common authored transaction boundary.
 - [Private native text lifetime](w-11-private-text-lifetime.md) — Balance GTK selection registration across realization and destruction without exporting authored text.

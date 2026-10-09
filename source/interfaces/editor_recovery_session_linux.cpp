@@ -22,13 +22,16 @@ void EditorRecoverySession::stop(){
     erase(offer_);restorable_=false;automatic_=false;latest_.reset();owned_.reset();reopen_=false;
     if(queue_){queue_->close();closing_=true;}
 }
-void EditorRecoverySession::invalidate(){stop();binding_.reset();cleanup_.reset();cancel_=false;state_=EditorRecoveryState::disabled;}
-void EditorRecoverySession::fail(){stop();binding_.reset();cleanup_.reset();cancel_=false;state_=EditorRecoveryState::unavailable;}
-void EditorRecoverySession::bind(EditorRecoveryBinding binding){
+void EditorRecoverySession::invalidate(){stop();binding_.reset();cleanup_.reset();retiring_receipt_=retirement_decided_=false;cancel_=false;state_=EditorRecoveryState::disabled;}
+void EditorRecoverySession::fail(){stop();binding_.reset();cleanup_.reset();retiring_receipt_=retirement_decided_=false;cancel_=false;state_=EditorRecoveryState::unavailable;}
+void EditorRecoverySession::bind(EditorRecoveryBinding binding,std::optional<std::string> retirement){
     need(!closed_&&draft_.recovery_available()&&protocol::identifier(binding.session)&&protocol::identifier(binding.profile)&&
         binding.generation.size()==64&&binding.generation.find_first_not_of("0123456789abcdef")==std::string::npos);
+    need(!retirement||(binding.erase&&retirement->size()==64&&retirement->find_first_not_of("0123456789abcdef")==std::string::npos));
     if(binding.session!=session_||binding.profile!=profile_){submitted_.reset();cleanup_.reset();}
     session_=binding.session;profile_=binding.profile;
+    if(retirement)cleanup_=std::move(retirement);
+    retiring_receipt_=retirement_decided_=false;
     stop();binding_=std::move(binding);cancel_=false;cancelled_=false;state_=EditorRecoveryState::loading;
 }
 void EditorRecoverySession::start(){
@@ -80,7 +83,7 @@ void EditorRecoverySession::changed(){
         else capture(draft_.recovery_snapshot(identity()));
     }catch(...){fail();}
 }
-void EditorRecoverySession::submitting(){need(may_apply());submitted_=automatic_?owned_:std::nullopt;}
+std::optional<std::string> EditorRecoverySession::submitting(){need(may_apply());submitted_=automatic_?owned_:std::nullopt;return submitted_;}
 void EditorRecoverySession::settled(bool accepted){
     if(accepted){auto digest=submitted_;invalidate();cleanup_=std::move(digest);}submitted_.reset();
 }
@@ -116,7 +119,8 @@ void EditorRecoverySession::poll(){
         if(!done)return;
         if(done->operation=="load"){
             need(done->outcome=="loaded"&&draft_.recovery_available());
-            if(cleanup_&&done->digest==cleanup_){cleanup_.reset();retire(true);return;}
+            if(cleanup_&&done->digest==cleanup_){cleanup_.reset();retiring_receipt_=true;retire(true);return;}
+            if(cleanup_)retirement_decided_=true;
             cleanup_.reset();
             if(done->bytes){
                 offer_=std::move(*done->bytes);state_=EditorRecoveryState::offer;automatic_=false;
@@ -129,6 +133,7 @@ void EditorRecoverySession::poll(){
             need(done->outcome=="durable"&&done->digest==latest_);owned_=done->digest;state_=(preparation_||pending_)?EditorRecoveryState::capturing:EditorRecoveryState::ready;
         }else{
             need(done->operation=="retire"&&done->outcome=="durable");
+            if(retiring_receipt_){need(status.reaped);retiring_receipt_=false;retirement_decided_=true;}
             const bool reopen=reopen_;stop();cancelled_=cancel_;state_=reopen?EditorRecoveryState::loading:EditorRecoveryState::ready;
         }
     }catch(...){fail();}

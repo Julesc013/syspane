@@ -1,0 +1,15 @@
+{
+  "family": "INSTALLED-RECOVERY",
+  "case_file": "tests/configuration/installed-recovery-cases.json",
+  "cases": ["CAPTURE-APPLY", "CRASH-RESTORE", "KEEP-APPLY", "DISCARD", "CANCEL", "PRIVATE-FIELD", "INVALID-RECORD", "REPLACEMENT-RECORD", "LOST-RESULT", "UNKNOWN-RESULT", "ERASE-DENIED", "POLICY", "CLOSE", "ORACLE"],
+  "profile": "profile:default",
+  "initial_documents": "tests/configuration/profile-startup-cases.json",
+  "expected_scene": "tests/configuration/installed-editor-scene.json",
+  "expected_command": "tests/configuration/frontend-recovery-command.json",
+  "title": "Local network",
+  "x": 40,
+  "erasure_after_observed_loss_ms": 250,
+  "gui_operation_limit_ms": 100,
+  "case_timeout_seconds": 45,
+  "family_timeout_seconds": 600
+}

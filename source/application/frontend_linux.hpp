@@ -52,5 +52,5 @@ public:
 private:
     struct Impl;std::unique_ptr<Impl> impl_;
 };
-int run_frontend(int argc,char** argv,platform::HelperBundleExpectation);
+int run_frontend(int argc,char** argv,platform::HelperBundleExpectation,bool experimental_recovery=false);
 }

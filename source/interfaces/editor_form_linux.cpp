@@ -195,7 +195,7 @@ struct EditorForm::Impl {
         execute({InsertWidget{w,std::nullopt,(*draft.scene())["roots"].size()}});selected({id});
     }
     void dispatch(const std::function<void()>& f){dispatching=true;try{f();dispatching=false;}catch(...){dispatching=false;throw;}}
-    void submit(){ready();if(recovery)recovery->submitting();const auto q=draft.begin("commit",actions.request_id());if(q&&clipboard)clipboard->invalidate();sync();if(q)try{dispatch([&]{actions.submit(*q);});}catch(...){if(recovery)recovery->invalidate();draft.disconnected();sync();}}
+    void submit(){ready();const auto digest=recovery?recovery->submitting():std::nullopt;const auto q=draft.begin("commit",actions.request_id());if(q&&clipboard)clipboard->invalidate();sync();if(q)try{dispatch([&]{if(actions.submit_recovery)actions.submit_recovery(*q,digest);else actions.submit(*q);});}catch(...){if(recovery)recovery->invalidate();draft.disconnected();sync();}}
     void receive_clipboard(platform::ClipboardResult result,std::string bytes){
         if(closed)return;
         if(result==platform::ClipboardResult::received){
@@ -483,8 +483,10 @@ EditorForm::EditorForm(c::Authority a,c::Policy p,c::Authored value,std::string 
 }
 EditorForm::~EditorForm()=default;
 GtkWidget* EditorForm::widget()const{impl_->owner();return impl_->root;}
-void EditorForm::complete(std::uint64_t ticket,const Json& result){auto& i=*impl_;i.owner();if(i.closed)return;try{if(i.draft.complete(ticket,result)){if(i.recovery)i.recovery->settled(i.draft.last_result()["outcome"]=="accepted");i.changed();}}catch(...){i.sync();throw;}}
-void EditorForm::reconciled(std::uint64_t ticket,const std::string& query,const std::string& epoch,const Json& result){auto& i=*impl_;i.owner();if(i.closed)return;try{if(i.draft.reconciled(ticket,query,epoch,result)){if(i.recovery)i.recovery->settled(i.draft.last_result()["outcome"]=="accepted");i.changed();}}catch(...){i.sync();throw;}}
+// A withdrawn draft still validates replies for its original request, but has
+// erased its cached result. Use the reply only after that validation succeeds.
+void EditorForm::complete(std::uint64_t ticket,const Json& result){auto& i=*impl_;i.owner();if(i.closed)return;try{if(i.draft.complete(ticket,result)){if(i.recovery)i.recovery->settled(result.at("outcome")=="accepted");i.changed();}}catch(...){i.sync();throw;}}
+void EditorForm::reconciled(std::uint64_t ticket,const std::string& query,const std::string& epoch,const Json& result){auto& i=*impl_;i.owner();if(i.closed)return;try{if(i.draft.reconciled(ticket,query,epoch,result)){if(i.recovery)i.recovery->settled(result.at("result").at("outcome")=="accepted");i.changed();}}catch(...){i.sync();throw;}}
 void EditorForm::disconnected(){auto& i=*impl_;i.owner();if(i.closed)return;if(i.recovery)i.recovery->invalidate();i.cancel_pending=false;if(i.clipboard)i.clipboard->invalidate();if(i.content)i.content->erase();if(i.binding)i.binding->erase();if(i.creation)i.creation->erase();if(i.layout_form)i.layout_form->erase();if(i.visibility)i.visibility->erase();if(i.theme)i.theme->erase();i.draft.disconnected();i.gesture.reset();i.sync();}
 void EditorForm::policy(c::Policy policy){auto& i=*impl_;i.owner();if(i.closed)return;if(i.recovery)i.recovery->invalidate();i.cancel_pending=false;if(i.clipboard)i.clipboard->invalidate();if(i.content)i.content->erase();if(i.binding)i.binding->erase();if(i.creation)i.creation->erase();if(i.layout_form)i.layout_form->erase();if(i.visibility)i.visibility->erase();if(i.theme)i.theme->erase();i.gesture.reset();i.draft.policy(policy);i.current=std::move(policy);if(i.surface)i.surface->policy(i.current,i.now());
     if(!i.draft.available()){i.settings=nullptr;i.capabilities.clear();i.stop_preview();i.list();}else i.resolve_nodes();i.sync();}
@@ -510,13 +512,14 @@ void EditorForm::recovery(std::string worker,std::string directory,const EditorR
     if(!i.recovery)i.recovery=std::make_unique<EditorRecoverySession>(i.draft,std::move(worker),std::move(directory));
     i.recovery->bind(binding);i.sync();
 }
-void EditorForm::recovery(std::shared_ptr<const platform::RecoveryFactory> factory,std::string directory,const EditorRecoveryBinding& binding,std::shared_ptr<const RecoveryPreparationFactory> preparations){
+void EditorForm::recovery(std::shared_ptr<const platform::RecoveryFactory> factory,std::string directory,const EditorRecoveryBinding& binding,std::shared_ptr<const RecoveryPreparationFactory> preparations,std::optional<std::string> retirement){
     auto& i=*impl_;i.owner();need(!i.closed&&i.recovery_status&&binding.policy_revision==i.current.revision&&i.draft.recovery_available(),"recovery.denied");
     need(!i.fields_dirty&&(!i.content||!i.content->opened())&&(!i.binding||!i.binding->opened())&&(!i.creation||!i.creation->opened())&&(!i.layout_form||!i.layout_form->opened())&&(!i.visibility||!i.visibility->opened())&&(!i.theme||!i.theme->opened()),"recovery.private_input");
     need(!i.recovery||i.recovery->location(factory,directory,preparations),"recovery.location_changed");i.gesture.reset();
     if(!i.recovery)i.recovery=std::make_unique<EditorRecoverySession>(i.draft,std::move(factory),std::move(directory),std::move(preparations));
-    i.recovery->bind(binding);i.sync();
+    i.recovery->bind(binding,std::move(retirement));i.sync();
 }
+bool EditorForm::retirement_decided()const{const auto& i=*impl_;i.owner();return !i.closed&&i.recovery&&i.recovery->retirement_decided();}
 bool EditorForm::can_leave()const{
     const auto& i=*impl_;i.owner();return !i.closed&&i.draft.available()&&!i.draft.dirty()&&!i.draft.active_request()&&!i.fields_dirty&&!i.gesture&&!i.cancel_pending&&
         (!i.recovery||i.recovery->may_apply())&&(!i.content||!i.content->opened())&&(!i.binding||!i.binding->opened())&&(!i.creation||!i.creation->opened())&&

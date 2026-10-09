@@ -611,6 +611,7 @@ if(BUILD_TESTING)
             DEPENDS syspane_frontend_helper_fixture syspane_image_worker syspane_recovery_worker "${CMAKE_SOURCE_DIR}/source/build/generate_helper_identity.py" VERBATIM)
         add_custom_target(syspane_frontend_fixture_identity DEPENDS "${CMAKE_BINARY_DIR}/generated/frontend-fixture/helpers.json" "${CMAKE_BINARY_DIR}/generated/frontend-fixture/bundle_identity.hpp")
         add_executable(syspane_frontend_fixture source/application/frontend_main_linux.cpp)
+        target_compile_definitions(syspane_frontend_fixture PRIVATE SYSPANE_EXPERIMENTAL_RECOVERY=1)
         target_include_directories(syspane_frontend_fixture PRIVATE "${CMAKE_BINARY_DIR}/generated/frontend-fixture")
         target_link_libraries(syspane_frontend_fixture PRIVATE syspane_frontend_runtime)
         add_dependencies(syspane_frontend_fixture syspane_frontend_fixture_identity)
@@ -621,6 +622,9 @@ if(BUILD_TESTING)
         add_test(NAME native.FRONTEND-RECOVERY COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/configuration/native_frontend_recovery.py"
             "$<TARGET_FILE:syspane_frontend_recovery_probe>" "$<TARGET_FILE:syspane_frontend_helper_fixture>" "${CMAKE_BINARY_DIR}/native-evidence")
         set_tests_properties(native.FRONTEND-RECOVERY PROPERTIES TIMEOUT 600)
+        add_test(NAME native.INSTALLED-RECOVERY COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/configuration/native_installed_recovery.py"
+            "$<TARGET_FILE:syspane_frontend>" "$<TARGET_FILE:syspane_frontend_fixture>" "$<TARGET_FILE:syspane_frontend_helper_fixture>" "${CMAKE_BINARY_DIR}/native-evidence")
+        set_tests_properties(native.INSTALLED-RECOVERY PROPERTIES TIMEOUT 600)
         add_test(NAME native.INSTALLED-SETTINGS COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/configuration/native_installed_settings.py"
             "$<TARGET_FILE:syspane_frontend>" "$<TARGET_FILE:syspane_frontend_fixture>" "$<TARGET_FILE:syspane_frontend_helper_fixture>" "${CMAKE_BINARY_DIR}/native-evidence")
         set_tests_properties(native.INSTALLED-SETTINGS PROPERTIES TIMEOUT 300)

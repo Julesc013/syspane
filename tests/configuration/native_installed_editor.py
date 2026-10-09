@@ -31,7 +31,7 @@ sha=lambda raw:hashlib.sha256(raw).hexdigest()
 encoded=lambda value:json.dumps(value,sort_keys=True,separators=(',',':')).encode()
 
 
-def observe(exe,folder,runtime,mode):
+def observe(exe,folder,runtime,mode,extension=None):
     import gi
     gi.require_version('Atspi','2.0');gi.require_version('Gtk','3.0')
     from gi.repository import Atspi,GLib,Gtk
@@ -42,9 +42,23 @@ def observe(exe,folder,runtime,mode):
     (folder/'home').mkdir(mode=0o700)
     generations=folder/'config/syspane/configuration'/sha(CASES['profile'].encode())/'generations'
     report=dict(case=mode,outcome='fail',observations=[],controllers=[],frontend_sha256=sha(exe.read_bytes()),started_at=datetime.now(timezone.utc).isoformat())
-    proc=None;keys=None;err=(folder/'stderr').open('wb');pidfds={};roots=set(runtime.glob('sp-*'))
+    proc=None;keys=None;err=(folder/'stderr').open('wb');pidfds={};helper_pidfds={};roots=set(runtime.glob('sp-*'))
     def save(): (folder/'result.json').write_bytes(encoded(report))
     def pump():
+        if extension and proc and proc.poll() is None:
+            children=set()
+            for task in Path('/proc',str(proc.pid),'task').iterdir():
+                try:children.update(int(v) for v in (task/'children').read_text().split())
+                except FileNotFoundError:pass
+            for pid in children:
+                if pid in helper_pidfds:continue
+                try:
+                    path=Path('/proc',str(pid),'exe');target=os.readlink(path)
+                    if 'memfd:syspane-' not in target:continue
+                    fd=os.pidfd_open(pid);digest=sha(path.read_bytes())
+                except FileNotFoundError:continue
+                helper_pidfds[pid]=fd
+                report.setdefault('native_children',[]).append(dict(pid=pid,image=target,sha256=digest))
         context=GLib.MainContext.default()
         for _ in range(100):
             if not context.pending():break
@@ -164,6 +178,7 @@ def observe(exe,folder,runtime,mode):
         click('frontend.quit');wait(lambda:proc.poll() is not None,8);assert proc.returncode==expected,(proc.returncode,(folder/'stderr').read_text())
         assert set(runtime.glob('sp-*'))==roots,'runtime not retired'
         for fd in pidfds.values():assert select.select([fd],[],[],1)[0],'controller not reaped'
+        for fd in helper_pidfds.values():assert select.select([fd],[],[],1)[0],'native child not exited'
         keys.close();keys=None
     def hold(phase): (folder/'phase').write_text(phase+'\n')
     def held():
@@ -176,7 +191,20 @@ def observe(exe,folder,runtime,mode):
         fields=[o for o in observed if (o.get_description() or '').startswith('editor.value.')]
         canvases=[o for o in observed if o.get_description()=='editor.canvas']
         return all(text(o)=='' for o in fields+canvases) and not any(CASES['title'] in (o.get_name() or '') for o in observed)
+    def crash():
+        nonlocal keys,roots
+        proc.kill();proc.wait(timeout=8)
+        for fd in pidfds.values():wait(lambda:bool(select.select([fd],[],[],0)[0]),8)
+        for fd in helper_pidfds.values():wait(lambda:bool(select.select([fd],[],[],0)[0]),8)
+        if keys:keys.close();keys=None
+        # Process death cannot run the runtime owner's destructor. Preserve and
+        # record orphan roots; subsequent clean exits must retire only new roots.
+        after=set(runtime.glob('sp-*'))
+        report.setdefault('crash_runtime_roots',[]).extend(str(p) for p in sorted(after-roots))
+        roots=after
     try:
+        if extension:
+            extension(dict(locals(),process=lambda:proc));report['outcome']='pass';return
         launch()
         if mode=='HELPER-FAILURE':
             wait(lambda:'Settings unavailable. Check installation, runtime and policy configuration.' in status(),12)
@@ -261,11 +289,19 @@ def observe(exe,folder,runtime,mode):
             if not select.select([fd],[],[],1)[0]:signal.pidfd_send_signal(fd,signal.SIGKILL)
             assert select.select([fd],[],[],2)[0],'owned controller still live during teardown'
             os.close(fd)
+        for pid,fd in helper_pidfds.items():
+            exited=bool(select.select([fd],[],[],1)[0])
+            next(v for v in report['native_children'] if v['pid']==pid)['exited']=exited
+            if not exited:
+                report.setdefault('forced_native_cleanup',[]).append(pid);signal.pidfd_send_signal(fd,signal.SIGKILL)
+                assert select.select([fd],[],[],2)[0]
+            os.close(fd)
         err.close();report['finished_at']=datetime.now(timezone.utc).isoformat();report['elapsed_seconds']=time.monotonic()-started;save()
 
 
-def main():
-    if sys.argv[1]=='--observe':observe(*[Path(p) for p in sys.argv[2:5]],sys.argv[5]);return
+def main(extension=None,script=None,case_file='tests/configuration/installed-editor-cases.json',prefix='editor-frontend-'):
+    script=Path(script or __file__).resolve()
+    if sys.argv[1]=='--observe':observe(*[Path(p) for p in sys.argv[2:5]],sys.argv[5],extension);return
     production,fixture,helper,evidence=[Path(p).resolve() for p in sys.argv[1:5]];build=production.parent
     assert os.geteuid() and fixture.parent==helper.parent==evidence.parent==build
     assert json.loads((build/'.syspane-owner.json').read_bytes())['profile']=='linux-x64-gcc13'
@@ -273,10 +309,10 @@ def main():
     runtime=build.parent/'F';marker=encoded(dict(format='SysPane.InstalledSettingsLab',root=str(build.parent)))
     if not runtime.exists():runtime.mkdir(mode=0o700);(runtime/'.owner.json').write_bytes(marker)
     assert runtime.resolve()==runtime and (runtime/'.owner.json').read_bytes()==marker and stat.S_IMODE(runtime.stat().st_mode)==0o700
-    folder=evidence/('editor-frontend-'+uuid.uuid4().hex[:10]);folder.mkdir(mode=0o700)
+    folder=evidence/(prefix+uuid.uuid4().hex[:10]);folder.mkdir(mode=0o700)
     report=dict(family=CASES['family'],outcome='fail',started_at=datetime.now(timezone.utc).isoformat(),cases=[],packages=[],
         artifacts={p.name:sha(p.read_bytes()) for p in (production,fixture,helper,build/'SysPane.ImageWorker',build/'SysPane.RecoveryWorker')},
-        oracle_sha256=sha(Path(__file__).read_bytes()),cases_sha256=sha((ROOT/'tests/configuration/installed-editor-cases.json').read_bytes()),expected_scene_sha256=sha((ROOT/CASES['expected_scene']).read_bytes()),runtime_directory=str(runtime))
+        oracle_sha256=sha(script.read_bytes()),harness_sha256=sha(Path(__file__).read_bytes()),cases_sha256=sha((ROOT/case_file).read_bytes()),expected_scene_sha256=sha((ROOT/CASES['expected_scene']).read_bytes()),runtime_directory=str(runtime))
     def package(name,exe,host,record):
         stage=folder/(name+' original');stage.mkdir(mode=0o700)
         if name=='production':subprocess.run(['cmake','--install',str(build),'--prefix',str(stage),'--component','DevelopmentFrontend'],check=True,capture_output=True)
@@ -298,16 +334,16 @@ def main():
         return target/'bin/syspane'
     server=None
     try:
-        real=package('production',production,build/'syspane-configuration-host',build/'generated/helper-bundle/helpers.json')
+        real=package('production',production,build/'syspane-configuration-host',build/'generated/helper-bundle/helpers.json') if 'HELPER-FAILURE' in CASES['cases'] else None
         test=package('fixture',fixture,helper,build/'generated/frontend-fixture/helpers.json')
         server,env=launch_xvfb(folder);env.update(NO_AT_BRIDGE='0',XDG_RUNTIME_DIR=str(runtime));env.pop('AT_SPI_BUS_ADDRESS',None)
         for mode in CASES['cases']:
             exe=real if mode=='HELPER-FAILURE' else test
-            installed=real.parent.parent/'libexec/syspane/syspane-image-worker';original=installed.read_bytes() if mode=='HELPER-FAILURE' else None
+            installed=real.parent.parent/'libexec/syspane/syspane-image-worker' if real else None;original=installed.read_bytes() if mode=='HELPER-FAILURE' else None
             if original is not None:
                 installed.write_bytes(original+b'\0');report['substitution']=dict(path=str(installed),original_sha256=sha(original),substituted_sha256=sha(installed.read_bytes()))
             try:
-                args=['dbus-run-session','--',sys.executable,str(Path(__file__)),'--observe',str(exe),str(folder/mode),str(runtime),mode]
+                args=['dbus-run-session','--',sys.executable,str(script),'--observe',str(exe),str(folder/mode),str(runtime),mode]
                 p=subprocess.Popen(args,env=env,stdout=subprocess.PIPE,stderr=subprocess.PIPE,start_new_session=True)
                 try:stdout,stderr=p.communicate(timeout=CASES['case_timeout_seconds'])
                 except subprocess.TimeoutExpired:

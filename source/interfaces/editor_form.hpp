@@ -11,6 +11,7 @@ public:
         std::function<std::string()> request_id,widget_id;
         std::function<void(const EditRequest&)> submit,cancel;
         std::function<void()> reload,exit;
+        std::function<void(const EditRequest&,std::optional<std::string>)> submit_recovery;
     };
     EditorForm(configuration::Authority,configuration::Policy,configuration::Authored,std::string epoch,SettingsResources,
         scene::Topology,std::string display,std::vector<rendering::SurfaceProvider>,std::string image_worker,Actions,bool large_commands=false,rendering::ImageFactory images={});
@@ -30,7 +31,8 @@ public:
     recovery::DataCode disconnect(const std::string&,std::uint64_t token,std::uint64_t revision,std::uint64_t now);
     void close();
     void recovery(std::string worker,std::string directory,const EditorRecoveryBinding&);
-    void recovery(std::shared_ptr<const platform::RecoveryFactory>,std::string directory,const EditorRecoveryBinding&,std::shared_ptr<const RecoveryPreparationFactory> preparations={});
+    void recovery(std::shared_ptr<const platform::RecoveryFactory>,std::string directory,const EditorRecoveryBinding&,std::shared_ptr<const RecoveryPreparationFactory> preparations={},std::optional<std::string> retirement={});
+    bool retirement_decided()const;
     // Continue the host loop after close until the held recovery helper is reaped.
     bool stopped();
 private:
