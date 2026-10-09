@@ -46,7 +46,8 @@ behaviour has been implemented. See [audit disposition](spec/delivery/audit-2026
 - [x] Defer initial preview composition while preserving nine frozen before-first-draw input cases and native regressions. See the [handoff](spec/delivery/initial-preview-handoff.md).
 - [x] Implement detached undo/redo validation, structural submit hints and current-owner adoption; verify all three toolchains. See the [handoff](spec/delivery/history-preparation-handoff.md).
 - [x] Bind prepared history to the existing native worker with one bounded slot, ordered recovery coexistence and cancellation/closure evidence. See the [handoff](spec/delivery/history-worker-handoff.md).
-- [ ] Integrate prepared history into the current native form, suspend obsolete recovery capture, refuse conflicting actions and refresh the current preview; pass fixed cancellation and GUI qualification cases.
+- [x] Integrate prepared history into the experimental native form, suspend obsolete recovery capture, refuse conflicting input and verify cancellation/current preview refresh. See the [handoff](spec/delivery/history-form-handoff.md).
+- [ ] Resolve the remaining unchanged ordinary GUI qualification failures before enabling prepared history or recovery in production.
 - [ ] Complete asynchronous authoring and native preview handoff; retain full validation and the original GUI timing gates.
 - [ ] Repair measured preview/layout/validation stalls and investigate the transient Apply state and controller restart; pass all seven fixed GTK limit cases without weakening deadlines or erasure.
 - [ ] Qualify complete recovery worker/supervisor scheduling and maximum-size GUI operations under existing limits; then enable production recovery and rerun acceptance. Integrate the native inspector.

@@ -60,6 +60,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Native grouping checkpoint](group-handoff.md) — Exact hierarchy transformations, selection history and independently observed native persistence.
 - [Verified installation-relative helper execution](helper-identity-handoff.md) — Compiled helper closure, immutable native execution and relocated development-package evidence.
 - [Historical Windows shared-subset build checkpoint](historical-build-handoff.md) — Record the pinned v141_xp build, unchanged shared behavior, resolved runtime inputs and pending guest qualification.
+- [Prepared history form handoff](history-form-handoff.md) — Experimental native history adoption and capture coexistence are implemented; GUI qualification remains open.
 - [Prepared history transition handoff](history-preparation-handoff.md) — Detached undo/redo validation and current-owner adoption are implemented; native scheduling remains next.
 - [Native history worker handoff](history-worker-handoff.md) — Bounded native history computation is verified; current-form integration remains next.
 - [Bounded image pipeline checkpoint](image-pipeline-handoff.md) — Exact portable fit and isolated Linux PNG/JPEG/static-SVG decoding with nonblocking child ownership.

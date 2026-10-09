@@ -12,7 +12,7 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-09T08:31:00.479108+00:00", "scope": "Native history worker ownership and next current-form boundary"}
+updated: {"by": "codex", "at": "2026-10-09T08:57:53.435058+00:00", "scope": "Experimental native history form and remaining GUI qualification"}
 ---
 
 # Current state and next admitted boundary
@@ -22,13 +22,13 @@ recordings are local ignored `out/` content; the retired root is absent from the
 tracked tree. See `docs/developers/build.md` in the repository for checkout
 setup and the [repository contract](../foundation/repository.md) for ownership.
 
-The [native history worker](history-worker-handoff.md) now owns one bounded history
-task alongside recovery preparation on the existing worker. All 13 new native cases,
-111 named native cases overall, 27 portable history checks and six component checks pass.
-Next integrate current-form adoption, suspend obsolete recovery capture, refuse
-conflicting actions and rebuild the current native preview. Freeze those cases first.
-The installed GUI still uses synchronous history. Four earlier GUI delay failures
-remain prior evidence; production recovery, W-11 and all five editions remain open.
+The [prepared history form](history-form-handoff.md) now integrates worker tasks,
+current-owner adoption, conflicting-input refusal and recovery capture suspension
+in the existing experimental frontend. All 17 new form cases and 157 named native
+cases overall pass, plus SCENE-IMAGE, 27 portable history and six component checks.
+The unchanged ordinary GUI exercise still fails 4 cases. Inspect its exact
+records to select the next preview/scheduling repair; preserve the original limits.
+Production history/recovery gates, W-11 and all five full editions remain open.
 
 The [frontend recovery backend](frontend-recovery-handoff.md) now uses authenticated
 profile 0.2, current native admission and exact accepted-request retirement metadata.

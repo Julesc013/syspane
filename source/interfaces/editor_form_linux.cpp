@@ -44,6 +44,8 @@ struct EditorForm::Impl {
     Actions actions;std::thread::id thread=std::this_thread::get_id();bool closed=false,updating=false,dispatching=false,fields_dirty=false,drawing=false,initial_resolution_pending=true;std::string error;
     std::unique_ptr<platform::SceneClipboardX11> clipboard;
     std::unique_ptr<EditorRecoverySession> recovery;GtkWidget* recovery_status=nullptr;bool cancel_pending=false;
+    std::shared_ptr<const HistoryPreparationFactory> histories;std::unique_ptr<HistoryPreparationTask> history;
+    bool history_obsolete=false,exit_after_history=false;
     GtkWidget *root=nullptr,*canvas=nullptr,*tree=nullptr,*status=nullptr,*guidance=nullptr;GtkListStore* model=nullptr;std::vector<GtkWidget*> owned;
     std::map<std::string,GtkWidget*> buttons,fields;std::vector<s::Node> nodes;std::set<std::string> hidden,diagnostics;bool large_frames=false;
     std::unique_ptr<EditorThemeForm> theme;std::unique_ptr<EditorVisibilityForm> visibility;std::unique_ptr<EditorContentForm> content;std::unique_ptr<EditorBindingForm> binding;std::unique_ptr<EditorCreateForm> creation;std::unique_ptr<EditorLayoutForm> layout_form;int field_variant=-2;
@@ -51,8 +53,8 @@ struct EditorForm::Impl {
     struct Gesture {double x,y,dx=0,dy=0,pixel_per_unit=1.0/64;bool resize=false;std::vector<s::Node> nodes;std::optional<SnapInput> input;SnapResult result{0,0,{},{}};};std::optional<Gesture> gesture;
     guint timer=0;
     static std::unique_ptr<PreparedEditor> checked(std::unique_ptr<PreparedEditor> value){need(static_cast<bool>(value),"editor.prepared");return value;}
-    Impl(std::unique_ptr<PreparedEditor> value,s::Topology t,std::string d,std::vector<v::SurfaceProvider> ps,std::string w,Actions callbacks,v::ImageFactory factory)
-      :prepared(checked(std::move(value))),draft(prepared->draft_),authority(std::move(prepared->authority_)),current(std::move(prepared->policy_)),settings(std::move(prepared->settings_)),capabilities(std::move(prepared->capabilities_)),topology(std::move(t)),display(std::move(d)),worker(std::move(w)),providers(std::move(ps)),images(std::move(factory)),actions(std::move(callbacks)){large_frames=prepared->large_commands_;}
+    Impl(std::unique_ptr<PreparedEditor> value,s::Topology t,std::string d,std::vector<v::SurfaceProvider> ps,std::string w,Actions callbacks,v::ImageFactory factory,std::shared_ptr<const HistoryPreparationFactory> h)
+      :prepared(checked(std::move(value))),draft(prepared->draft_),authority(std::move(prepared->authority_)),current(std::move(prepared->policy_)),settings(std::move(prepared->settings_)),capabilities(std::move(prepared->capabilities_)),topology(std::move(t)),display(std::move(d)),worker(std::move(w)),providers(std::move(ps)),images(std::move(factory)),actions(std::move(callbacks)),histories(std::move(h)){need(!histories||*histories,"history.factory");large_frames=prepared->large_commands_;}
     void owner()const{if(thread!=std::this_thread::get_id()||dispatching)throw std::logic_error("editor.owner");}
     std::uint64_t now()const{return static_cast<std::uint64_t>(g_get_monotonic_time()/1000);}
     GtkWidget* own(GtkWidget* w){g_object_ref_sink(w);owned.push_back(w);return w;}
@@ -63,7 +65,7 @@ struct EditorForm::Impl {
     bool visibility_supported()const{if(!large_frames||!draft.resources())return false;for(const char* cap:{"scene.content","scene.edit-locks","scene.visibility","configuration.edit-locks","configuration.visibility"})if(!capabilities.count(cap))return false;return true;}
     bool typography_supported()const{if(!visibility_supported()||!current.available)return false;for(const char* cap:{"theme.typography","configuration.theme-overrides"})if(!capabilities.count(cap)||current.denied_capabilities.count(cap))return false;return true;}
     void presentation(const v::SurfaceFrame& frame){nodes=frame.layout.nodes;hidden.clear();diagnostics.clear();for(const auto& w:frame.widgets){if(!w.presented)hidden.insert(w.id);if(w.diagnostic)diagnostics.insert(w.id);}}
-    bool editing()const{return draft.available()&&(!recovery||recovery->editing())&&!cancel_pending&&(!clipboard||!clipboard->busy())&&!draft.active_request()&&draft.state()!=DraftState::conflict&&(!content||!content->opened())&&(!binding||!binding->opened())&&(!creation||!creation->opened())&&(!layout_form||!layout_form->opened())&&(!visibility||!visibility->opened())&&(!theme||!theme->opened());}
+    bool editing()const{return !history&&draft.available()&&(!recovery||recovery->editing())&&!cancel_pending&&(!clipboard||!clipboard->busy())&&!draft.active_request()&&draft.state()!=DraftState::conflict&&(!content||!content->opened())&&(!binding||!binding->opened())&&(!creation||!creation->opened())&&(!layout_form||!layout_form->opened())&&(!visibility||!visibility->opened())&&(!theme||!theme->opened());}
     void ready(){need(editing(),"editor.unavailable");need(!fields_dirty,"editor.properties_pending");if(initial_resolution_pending)resolve_nodes();}
     bool clear(){nodes.clear();hidden.clear();diagnostics.clear();if(canvas){atk_object_set_name(gtk_widget_get_accessible(canvas),"");if(!drawing)gtk_widget_queue_draw(canvas);}return true;}
     void stop_preview(){gesture.reset();ticks.clear();if(surface)surface->close();clear();}
@@ -139,6 +141,7 @@ struct EditorForm::Impl {
             if(id=="recovery-discard")active=recovery&&recovery->erasable();
             if(id=="recovery-keep")active=recovery&&recovery->state()==EditorRecoveryState::offer;
             if(id=="cancel"&&recovery&&(recovery->state()==EditorRecoveryState::offer||recovery->state()==EditorRecoveryState::loading))active=draft.available()&&!draft.active_request();
+            if(history)active=(id=="cancel"||id=="reload")&&draft.available()&&!draft.active_request();
             gtk_widget_set_sensitive(row.second,active&&!closed&&!cancel_pending);
         }
         gtk_widget_set_tooltip_text(buttons.at("fonts"),!typography_supported()?"Font editing is unavailable in this connection's capabilities.":fields_dirty?"Set or revert property fields before editing fonts.":!draft.theme_fonts_available()?"Font editing is unavailable while a request, conflict or current permission prevents it.":"Edit the scene's base font and role overrides.");
@@ -146,6 +149,7 @@ struct EditorForm::Impl {
         gtk_widget_set_sensitive(tree,enabled);gtk_widget_set_sensitive(canvas,enabled);
         std::string value;
         if(!draft.available())value="Editor unavailable";
+        else if(history)value=history_obsolete?"Waiting for cancelled history work to stop.":"Preparing history change...";
         else if(draft.state()==DraftState::pending)value="Request pending; storage outcome is not known.";
         else if(draft.state()==DraftState::unknown)value="Outcome unknown; retrieve the original request.";
         else if(draft.state()==DraftState::conflict)value="Configuration changed; reload before applying.";
@@ -172,6 +176,28 @@ struct EditorForm::Impl {
         updating=false;
     }
     void changed(bool resolve_now=true){gesture.reset();error.clear();if(recovery)recovery->changed();preview(resolve_now);list();sync(true);}
+    void cancel_history(){if(history){history_obsolete=true;history->cancel();}}
+    void travel(bool forward){
+        ready();gesture.reset();error.clear();if(!histories){if(forward)draft.redo();else draft.undo();changed();return;}
+        if(recovery)recovery->pause_capture();
+        try{
+            auto work=draft.history_work(forward);
+            if(work){history=(*histories)(std::move(work));need(static_cast<bool>(history),"history.unavailable");history_obsolete=false;}
+        }catch(...){if(recovery)recovery->resume_capture();error="History change could not be prepared. Try again.";sync();return;}
+        if(!history&&recovery){recovery->resume_capture();}sync();
+    }
+    void poll_history(){
+        if(!history)return;
+        const auto state=history->status();if(!state.stopped)return;
+        const bool current=!history_obsolete&&!closed&&!cancel_pending;bool adopted=false;
+        try{
+            auto result=current&&state.ready?history->take():nullptr;history.reset();
+            if(current){need(static_cast<bool>(result),"history.unavailable");adopted=draft.adopt_history(std::move(result));}
+        }catch(const protocol::Error&){history.reset();error="History change could not be prepared. Try again.";}
+        if(recovery&&!closed&&!cancel_pending)recovery->resume_capture();
+        if(!closed)event([&]{if(adopted){error.clear();preview();list();}sync(true);});
+        if(exit_after_history){exit_after_history=false;dispatch(actions.exit);}
+    }
     void selected(std::vector<std::string> ids,bool from_tree=false){ready();draft.select(std::move(ids));if(!from_tree)list();sync(true);gtk_widget_queue_draw(canvas);}
     void execute(const std::vector<SceneEdit>& edits){ready();draft.execute(edits);changed();}
     void properties(){
@@ -263,6 +289,7 @@ struct EditorForm::Impl {
         guide_feedback();gtk_widget_queue_draw(canvas);
     }
     void command(const std::string& id){
+        if(history&&id!="cancel"&&id!="reload")return;
         if(id=="cancel-paste"){if(clipboard)clipboard->cancel();}
         else if(id=="copy"||id=="paste"){
             ready();need(!gesture&&clipboard&&clipboard->available()&&draft.clipboard_available(),"clipboard.unavailable");error.clear();
@@ -297,11 +324,12 @@ struct EditorForm::Impl {
             if(id=="wrap")layout_form->wrap(*draft.scene(),draft.selection(),actions.widget_id());else if(id=="unwrap")layout_form->unwrap(*draft.scene(),draft.selection()[0]);else layout_form->open(*draft.scene(),draft.selection()[0]);sync();}
         else if(id=="lock"){ready();gesture.reset();execute({SetWidgetLocks{draft.selection(),!own_locks()}});}
         else if(id=="properties")properties();else if(id=="revert-fields"){fields_dirty=false;error.clear();sync(true);}
-        else if(id=="apply")submit();else if(id=="reload")dispatch(actions.reload);
+        else if(id=="apply")submit();else if(id=="reload"){cancel_history();dispatch(actions.reload);}
         else if(id=="cancel-request"){const auto q=draft.cancel_request();if(q)try{dispatch([&]{actions.cancel(*q);});}catch(...){if(recovery)recovery->invalidate();draft.disconnected();sync();}}
         else if(id=="cancel"){
+            cancel_history();
             if(recovery&&draft.recovery_available()){recovery->cancel_session();draft.discard();cancel_pending=true;changed();}
-            else {draft.discard();shut();dispatch(actions.exit);}
+            else {draft.discard();shut();if(history)exit_after_history=true;else dispatch(actions.exit);}
         }
         else if(id=="recovery-restore"){need(recovery!=nullptr,"recovery.unavailable");recovery->restore();changed();}
         else if(id=="recovery-discard"){need(recovery!=nullptr,"recovery.unavailable");recovery->discard();sync();}
@@ -310,9 +338,10 @@ struct EditorForm::Impl {
         else if(id=="group"||id=="ungroup")group(id=="ungroup");
         else if(id=="snap-grid"||id=="snap-guides"||id=="show-grid"||id=="grid-spacing")option(id);
         else if(id.substr(0,6)=="align-"||id.substr(0,6)=="space-")arrange(id);
-        else {ready();if(id=="undo")draft.undo();else if(id=="redo")draft.redo();changed();}
+        else if(id=="undo"||id=="redo")travel(id=="redo");
     }
     void point(double x,double y,bool shift){
+        if(history)return;
         ready();gtk_widget_grab_focus(canvas);if(visibility_supported()||snap_grid||snap_guides)resolve_nodes();const auto& d=viewport();const double factor=gtk_widget_get_scale_factor(canvas);x=x*factor+d.pixel_x;y=y*factor+d.pixel_y;
         const s::Node* hit=nullptr;for(auto i=nodes.rbegin();i!=nodes.rend();++i)if(i->display==d.id&&!hidden.count(i->id)&&contains(i->pixels,x,y)){hit=&*i;break;}
         if(!hit){selected({});return;}const auto id=hit->id;auto ids=draft.selection();const auto found=std::find(ids.begin(),ids.end(),id);
@@ -335,6 +364,7 @@ struct EditorForm::Impl {
         else {std::vector<int> indices;for(const auto& n:g.nodes)indices.push_back(n.variant);execute({MoveWidgets{draft.selection(),g.dx*scale,g.dy*scale,indices}});}
     }
     bool key(GdkEventKey* e){
+        if(history)return false;
         if(clipboard_key(e))return true;
         if(e->keyval==GDK_KEY_Escape){gesture.reset();guide_feedback();gtk_widget_queue_draw(canvas);return true;}
         if((e->state&GDK_CONTROL_MASK)&&(e->keyval==GDK_KEY_z||e->keyval==GDK_KEY_Z)){command(e->state&GDK_SHIFT_MASK?"redo":"undo");return true;}
@@ -400,11 +430,11 @@ struct EditorForm::Impl {
     void poll_recovery(){
         if(!recovery)return;
         const auto before=recovery->state();recovery->poll();
-        if(cancel_pending&&recovery->cancelled()){cancel_pending=false;shut();dispatch(actions.exit);}
+        if(cancel_pending&&recovery->cancelled()&&!history){cancel_pending=false;shut();dispatch(actions.exit);}
         else if(cancel_pending&&recovery->state()==EditorRecoveryState::unavailable)cancel_pending=false;
         if(before!=recovery->state()&&!closed)sync();
     }
-    void shut(){if(closed)return;closed=true;cancel_pending=false;if(recovery)recovery->close();if(clipboard)clipboard->close();if(content)content->erase();if(binding)binding->erase();if(creation)creation->erase();if(layout_form)layout_form->erase();if(visibility)visibility->erase();if(theme)theme->erase();draft.close();fields_dirty=false;settings=nullptr;capabilities.clear();stop_preview();if(tree){list();sync(true);}}
+    void shut(){if(closed)return;closed=true;cancel_history();cancel_pending=false;if(recovery)recovery->close();if(clipboard)clipboard->close();if(content)content->erase();if(binding)binding->erase();if(creation)creation->erase();if(layout_form)layout_form->erase();if(visibility)visibility->erase();if(theme)theme->erase();draft.close();fields_dirty=false;settings=nullptr;capabilities.clear();stop_preview();if(tree){list();sync(true);}}
     template<class F> void event(F f)noexcept{try{if(!closed&&!cancel_pending)f();}catch(const protocol::Error& e){gesture.reset();const std::string code=e.what();
         guide_feedback();error=code=="editor.number"?"Enter a number using digits and an optional decimal point.":code=="editor.layout_changed"?"Layout changed; Revert fields before applying.":
             code=="editor.arrange_geometry"||code=="editor.arrange_scope"?"Arrange needs fixed widgets in the same parent and display, with no size expansion.":
@@ -415,10 +445,10 @@ struct EditorForm::Impl {
         message(error);gtk_widget_queue_draw(canvas);}catch(...){try{shut();}catch(...){}}}
     ~Impl(){if(timer)g_source_remove(timer);try{shut();}catch(...){}surface.reset();if(root)gtk_widget_destroy(root);for(auto i=owned.rbegin();i!=owned.rend();++i)g_object_unref(*i);if(model)g_object_unref(model);}
 };
-EditorForm::EditorForm(c::Authority a,c::Policy p,c::Authored value,std::string epoch,SettingsResources resources,s::Topology topology,std::string display,std::vector<v::SurfaceProvider> providers,std::string worker,Actions actions,bool large_commands,v::ImageFactory images)
- :EditorForm(std::make_unique<PreparedEditor>(std::move(a),std::move(p),std::move(value),std::move(epoch),std::move(resources),large_commands),std::move(topology),std::move(display),std::move(providers),std::move(worker),std::move(actions),std::move(images)){}
-EditorForm::EditorForm(std::unique_ptr<PreparedEditor> prepared,s::Topology topology,std::string display,std::vector<v::SurfaceProvider> providers,std::string worker,Actions actions,v::ImageFactory images)
- :impl_(std::make_unique<Impl>(std::move(prepared),std::move(topology),std::move(display),std::move(providers),std::move(worker),std::move(actions),std::move(images))){
+EditorForm::EditorForm(c::Authority a,c::Policy p,c::Authored value,std::string epoch,SettingsResources resources,s::Topology topology,std::string display,std::vector<v::SurfaceProvider> providers,std::string worker,Actions actions,bool large_commands,v::ImageFactory images,std::shared_ptr<const HistoryPreparationFactory> history)
+ :EditorForm(std::make_unique<PreparedEditor>(std::move(a),std::move(p),std::move(value),std::move(epoch),std::move(resources),large_commands),std::move(topology),std::move(display),std::move(providers),std::move(worker),std::move(actions),std::move(images),std::move(history)){}
+EditorForm::EditorForm(std::unique_ptr<PreparedEditor> prepared,s::Topology topology,std::string display,std::vector<v::SurfaceProvider> providers,std::string worker,Actions actions,v::ImageFactory images,std::shared_ptr<const HistoryPreparationFactory> history)
+ :impl_(std::make_unique<Impl>(std::move(prepared),std::move(topology),std::move(display),std::move(providers),std::move(worker),std::move(actions),std::move(images),std::move(history))){
     auto& i=*impl_;need(i.actions.request_id&&i.actions.widget_id&&i.actions.submit&&i.actions.cancel&&i.actions.reload&&i.actions.exit,"editor.actions");
     i.root=i.own(gtk_box_new(GTK_ORIENTATION_VERTICAL,4));auto* top=gtk_box_new(GTK_ORIENTATION_HORIZONTAL,4);gtk_box_pack_start(GTK_BOX(i.root),top,FALSE,FALSE,0);
     auto button=[&](GtkWidget* box,const char* id,const char* label){auto* w=i.own(gtk_button_new_with_label(label));i.buttons[id]=w;accessible(w,label,std::string("editor.")+id);g_object_set_data_full(G_OBJECT(w),"editor-action",g_strdup(id),g_free);gtk_box_pack_start(GTK_BOX(box),w,FALSE,FALSE,0);
@@ -433,7 +463,10 @@ EditorForm::EditorForm(std::unique_ptr<PreparedEditor> prepared,s::Topology topo
     for(const auto& row:std::vector<std::pair<const char*,const char*>>{{"title","Title"},{"body","Text body"},{"x","X (DIP)"},{"y","Y (DIP)"},{"width","Width (DIP)"},{"height","Height (DIP)"}}){
         auto* line=gtk_box_new(GTK_ORIENTATION_HORIZONTAL,4);auto* label=i.label(row.second);gtk_widget_set_size_request(label,85,-1);gtk_box_pack_start(GTK_BOX(line),label,FALSE,FALSE,0);
         const std::string id=row.first;auto* field=i.own(private_text(id=="title"?512:id=="body"?1024:64,id=="body"));i.fields[id]=field;gtk_widget_set_size_request(field,150,id=="body"?50:25);accessible(field,row.second,"editor.value."+id);gtk_label_set_mnemonic_widget(GTK_LABEL(label),field);gtk_box_pack_start(GTK_BOX(line),field,TRUE,TRUE,0);gtk_box_pack_start(GTK_BOX(side),line,FALSE,FALSE,0);
-        g_signal_connect(gtk_text_view_get_buffer(GTK_TEXT_VIEW(field)),"changed",G_CALLBACK(+[](GtkTextBuffer*,gpointer p){auto& o=*static_cast<Impl*>(p);if(!o.updating)o.event([&]{o.fields_dirty=true;o.sync();});}),&i);
+        auto* buffer=gtk_text_view_get_buffer(GTK_TEXT_VIEW(field));
+        g_signal_connect(buffer,"insert-text",G_CALLBACK(+[](GtkTextBuffer* b,GtkTextIter*,gchar*,gint,gpointer p){const auto& o=*static_cast<Impl*>(p);if(o.history&&!o.updating)g_signal_stop_emission_by_name(b,"insert-text");}),&i);
+        g_signal_connect(buffer,"delete-range",G_CALLBACK(+[](GtkTextBuffer* b,GtkTextIter*,GtkTextIter*,gpointer p){const auto& o=*static_cast<Impl*>(p);if(o.history&&!o.updating)g_signal_stop_emission_by_name(b,"delete-range");}),&i);
+        g_signal_connect(buffer,"changed",G_CALLBACK(+[](GtkTextBuffer*,gpointer p){auto& o=*static_cast<Impl*>(p);if(!o.updating&&!o.history)o.event([&]{o.fields_dirty=true;o.sync();});}),&i);
     }
     auto* prop=gtk_box_new(GTK_ORIENTATION_HORIZONTAL,3);gtk_box_pack_start(GTK_BOX(side),prop,FALSE,FALSE,0);button(prop,"properties","Set properties");button(prop,"revert-fields","Revert fields");
     auto check=[&](GtkWidget* box,const char* id,const char* label){auto* w=i.own(gtk_check_button_new_with_label(label));i.buttons[id]=w;accessible(w,label,std::string("editor.")+id);g_object_set_data_full(G_OBJECT(w),"editor-action",g_strdup(id),g_free);gtk_box_pack_start(GTK_BOX(box),w,FALSE,FALSE,0);
@@ -464,7 +497,7 @@ EditorForm::EditorForm(std::unique_ptr<PreparedEditor> prepared,s::Topology topo
         [&i](platform::ClipboardResult result,std::string bytes){i.receive_clipboard(result,std::move(bytes));}});
     g_signal_connect(i.tree,"key-press-event",G_CALLBACK(+[](GtkWidget*,GdkEventKey* e,gpointer p)->gboolean{auto& o=*static_cast<Impl*>(p);bool handled=false;o.event([&]{handled=o.clipboard_key(e);});return handled;}),&i);
     g_signal_connect(i.root,"key-press-event",G_CALLBACK(+[](GtkWidget*,GdkEventKey* e,gpointer p)->gboolean{auto& o=*static_cast<Impl*>(p);if(e->keyval!=GDK_KEY_Escape||!o.clipboard||!o.clipboard->busy())return FALSE;o.event([&]{o.clipboard->cancel();});return TRUE;}),&i);
-    g_signal_connect(selection,"changed",G_CALLBACK(+[](GtkTreeSelection* selection,gpointer p){auto& o=*static_cast<Impl*>(p);if(o.updating)return;o.event([&]{std::vector<std::string> ids;GtkTreeModel* model=nullptr;auto* rows=gtk_tree_selection_get_selected_rows(selection,&model);
+    g_signal_connect(selection,"changed",G_CALLBACK(+[](GtkTreeSelection* selection,gpointer p){auto& o=*static_cast<Impl*>(p);if(o.updating)return;o.event([&]{if(o.history){o.list();return;}std::vector<std::string> ids;GtkTreeModel* model=nullptr;auto* rows=gtk_tree_selection_get_selected_rows(selection,&model);
         for(auto* row=rows;row;row=row->next){GtkTreeIter it;if(gtk_tree_model_get_iter(model,&it,static_cast<GtkTreePath*>(row->data))){gchar* id=nullptr;gtk_tree_model_get(model,&it,0,&id,-1);ids.emplace_back(id);g_free(id);}}g_list_free_full(rows,reinterpret_cast<GDestroyNotify>(gtk_tree_path_free));o.selected(std::move(ids),true);});}),&i);
     g_signal_connect(i.canvas,"draw",G_CALLBACK(+[](GtkWidget*,cairo_t* cr,gpointer p)->gboolean{auto& o=*static_cast<Impl*>(p);if(o.closed){cairo_set_source_rgb(cr,0,0,0);cairo_paint(cr);}else o.event([&]{o.draw(cr);});return TRUE;}),&i);
     g_signal_connect(i.canvas,"button-press-event",G_CALLBACK(+[](GtkWidget*,GdkEventButton* e,gpointer p)->gboolean{auto& o=*static_cast<Impl*>(p);if(e->button!=1)return FALSE;o.event([&]{o.point(e->x,e->y,e->state&GDK_SHIFT_MASK);});return TRUE;}),&i);
@@ -484,7 +517,7 @@ EditorForm::EditorForm(std::unique_ptr<PreparedEditor> prepared,s::Topology topo
     // already queued their clearing paint; do not keep repainting that empty view.
     // First drawing resolves the preview. Earlier admitted input resolves it in
     // ready(), so queued selection/hit testing never observes missing geometry.
-    i.preview(false);i.list();i.sync(true);i.timer=g_timeout_add_full(G_PRIORITY_LOW,40,+[](gpointer p)->gboolean{auto& o=*static_cast<Impl*>(p);try{o.poll_recovery();if(o.surface)o.surface->poll_image_jobs();if(!o.closed&&o.draft.available())gtk_widget_queue_draw(o.canvas);}catch(...){o.shut();}return G_SOURCE_CONTINUE;},&i,nullptr);
+    i.preview(false);i.list();i.sync(true);i.timer=g_timeout_add_full(G_PRIORITY_LOW,40,+[](gpointer p)->gboolean{auto& o=*static_cast<Impl*>(p);try{o.poll_history();o.poll_recovery();if(o.surface)o.surface->poll_image_jobs();if(!o.closed&&o.draft.available())gtk_widget_queue_draw(o.canvas);}catch(...){o.shut();}return G_SOURCE_CONTINUE;},&i,nullptr);
 }
 EditorForm::~EditorForm()=default;
 GtkWidget* EditorForm::widget()const{impl_->owner();return impl_->root;}
@@ -510,10 +543,10 @@ bool EditorForm::reconciled(std::uint64_t ticket,const std::string& query,const 
         return true;
     }catch(...){i.sync();throw;}
 }
-void EditorForm::disconnected(){auto& i=*impl_;i.owner();if(i.closed)return;if(i.recovery)i.recovery->invalidate();i.cancel_pending=false;if(i.clipboard)i.clipboard->invalidate();if(i.content)i.content->erase();if(i.binding)i.binding->erase();if(i.creation)i.creation->erase();if(i.layout_form)i.layout_form->erase();if(i.visibility)i.visibility->erase();if(i.theme)i.theme->erase();i.draft.disconnected();i.gesture.reset();i.sync();}
-void EditorForm::policy(c::Policy policy){auto& i=*impl_;i.owner();if(i.closed)return;if(i.recovery)i.recovery->invalidate();i.cancel_pending=false;if(i.clipboard)i.clipboard->invalidate();if(i.content)i.content->erase();if(i.binding)i.binding->erase();if(i.creation)i.creation->erase();if(i.layout_form)i.layout_form->erase();if(i.visibility)i.visibility->erase();if(i.theme)i.theme->erase();i.gesture.reset();i.draft.policy(policy);i.current=std::move(policy);if(i.surface)i.surface->policy(i.current,i.now());
+void EditorForm::disconnected(){auto& i=*impl_;i.owner();if(i.closed)return;i.cancel_history();if(i.recovery)i.recovery->invalidate();i.cancel_pending=false;if(i.clipboard)i.clipboard->invalidate();if(i.content)i.content->erase();if(i.binding)i.binding->erase();if(i.creation)i.creation->erase();if(i.layout_form)i.layout_form->erase();if(i.visibility)i.visibility->erase();if(i.theme)i.theme->erase();i.draft.disconnected();i.gesture.reset();i.sync();}
+void EditorForm::policy(c::Policy policy){auto& i=*impl_;i.owner();if(i.closed)return;i.cancel_history();if(i.recovery)i.recovery->invalidate();i.cancel_pending=false;if(i.clipboard)i.clipboard->invalidate();if(i.content)i.content->erase();if(i.binding)i.binding->erase();if(i.creation)i.creation->erase();if(i.layout_form)i.layout_form->erase();if(i.visibility)i.visibility->erase();if(i.theme)i.theme->erase();i.gesture.reset();i.draft.policy(policy);i.current=std::move(policy);if(i.surface)i.surface->policy(i.current,i.now());
     if(!i.draft.available()){i.settings=nullptr;i.capabilities.clear();i.stop_preview();i.list();}else i.resolve_nodes();i.sync();}
-void EditorForm::reload(c::Authored value,std::string epoch,SettingsResources resources){auto& i=*impl_;i.owner();if(i.closed)return;if(i.recovery)i.recovery->invalidate();i.cancel_pending=false;if(i.clipboard)i.clipboard->invalidate();
+void EditorForm::reload(c::Authored value,std::string epoch,SettingsResources resources){auto& i=*impl_;i.owner();if(i.closed)return;i.cancel_history();if(i.recovery)i.recovery->invalidate();i.cancel_pending=false;if(i.clipboard)i.clipboard->invalidate();
     if(i.content)i.content->erase();
     if(i.binding)i.binding->erase();
     if(i.creation)i.creation->erase();
@@ -522,7 +555,7 @@ void EditorForm::reload(c::Authored value,std::string epoch,SettingsResources re
     if(i.theme)i.theme->erase();
     if(i.surface&&i.surface->status().code==v::SurfaceCode::closed)need(i.surface->poll_image_jobs(),"editor.renderer_stopping");
     i.draft.reload(value,std::move(epoch),resources);i.settings=std::move(value.settings);i.capabilities=std::move(resources.capabilities);i.fields_dirty=false;i.changed();}
-void EditorForm::topology(s::Topology topology,std::string display){auto& i=*impl_;i.owner();if(i.closed)return;if(i.clipboard)i.clipboard->cancel();if(i.content)i.content->erase();if(i.binding)i.binding->erase();if(i.creation)i.creation->erase();if(i.layout_form)i.layout_form->erase();if(i.visibility)i.visibility->erase();if(i.theme)i.theme->erase();i.gesture.reset();i.topology=std::move(topology);i.display=std::move(display);i.preview();i.sync(!i.fields_dirty);}
+void EditorForm::topology(s::Topology topology,std::string display){auto& i=*impl_;i.owner();if(i.closed)return;i.cancel_history();if(i.clipboard)i.clipboard->cancel();if(i.content)i.content->erase();if(i.binding)i.binding->erase();if(i.creation)i.creation->erase();if(i.layout_form)i.layout_form->erase();if(i.visibility)i.visibility->erase();if(i.theme)i.theme->erase();i.gesture.reset();i.topology=std::move(topology);i.display=std::move(display);i.preview();i.sync(!i.fields_dirty);}
 recovery::DataAttachment EditorForm::attach(const std::string& p,const protocol::TelemetryBinding& b,std::uint64_t now){auto& i=*impl_;i.owner();return i.surface?i.surface->attach(p,b,now):recovery::DataAttachment{recovery::DataCode::closed};}
 recovery::DataResult EditorForm::receive(const std::string& p,std::uint64_t t,std::uint64_t r,std::string_view bytes,std::uint64_t now,const model::Tick& tick){auto& i=*impl_;i.owner();if(!i.surface)return {recovery::DataCode::closed};const auto result=i.surface->receive(p,t,r,bytes,now,tick);i.ticks[p]=tick;return result;}
 recovery::DataCode EditorForm::heartbeat(const std::string& p,std::uint64_t t,std::uint64_t r,std::uint64_t q,std::uint64_t now){auto& i=*impl_;i.owner();return i.surface?i.surface->heartbeat(p,t,r,q,now):recovery::DataCode::closed;}
@@ -531,22 +564,22 @@ void EditorForm::close(){impl_->owner();impl_->shut();}
 void EditorForm::recovery(std::string worker,std::string directory,const EditorRecoveryBinding& binding){
     auto& i=*impl_;i.owner();need(!i.closed&&i.recovery_status&&binding.policy_revision==i.current.revision&&i.draft.recovery_available(),"recovery.denied");
     need(!i.fields_dirty&&(!i.content||!i.content->opened())&&(!i.binding||!i.binding->opened())&&(!i.creation||!i.creation->opened())&&(!i.layout_form||!i.layout_form->opened())&&(!i.visibility||!i.visibility->opened())&&(!i.theme||!i.theme->opened()),"recovery.private_input");
-    need(!i.recovery||i.recovery->location(worker,directory),"recovery.location_changed");i.gesture.reset();
+    need(!i.recovery||i.recovery->location(worker,directory),"recovery.location_changed");i.cancel_history();i.gesture.reset();
     if(!i.recovery)i.recovery=std::make_unique<EditorRecoverySession>(i.draft,std::move(worker),std::move(directory));
     i.recovery->bind(binding);i.sync();
 }
 void EditorForm::recovery(std::shared_ptr<const platform::RecoveryFactory> factory,std::string directory,const EditorRecoveryBinding& binding,std::shared_ptr<const RecoveryPreparationFactory> preparations,std::optional<std::string> retirement){
     auto& i=*impl_;i.owner();need(!i.closed&&i.recovery_status&&binding.policy_revision==i.current.revision&&i.draft.recovery_available(),"recovery.denied");
     need(!i.fields_dirty&&(!i.content||!i.content->opened())&&(!i.binding||!i.binding->opened())&&(!i.creation||!i.creation->opened())&&(!i.layout_form||!i.layout_form->opened())&&(!i.visibility||!i.visibility->opened())&&(!i.theme||!i.theme->opened()),"recovery.private_input");
-    need(!i.recovery||i.recovery->location(factory,directory,preparations),"recovery.location_changed");i.gesture.reset();
+    need(!i.recovery||i.recovery->location(factory,directory,preparations),"recovery.location_changed");i.cancel_history();i.gesture.reset();
     if(!i.recovery)i.recovery=std::make_unique<EditorRecoverySession>(i.draft,std::move(factory),std::move(directory),std::move(preparations));
     i.recovery->bind(binding,std::move(retirement));i.sync();
 }
 bool EditorForm::retirement_decided()const{const auto& i=*impl_;i.owner();return !i.closed&&i.recovery&&i.recovery->retirement_decided();}
 bool EditorForm::can_leave()const{
-    const auto& i=*impl_;i.owner();return !i.closed&&i.draft.available()&&!i.draft.dirty()&&!i.draft.active_request()&&!i.fields_dirty&&!i.gesture&&!i.cancel_pending&&
+    const auto& i=*impl_;i.owner();return !i.closed&&!i.history&&i.draft.available()&&!i.draft.dirty()&&!i.draft.active_request()&&!i.fields_dirty&&!i.gesture&&!i.cancel_pending&&
         (!i.recovery||i.recovery->may_apply())&&(!i.content||!i.content->opened())&&(!i.binding||!i.binding->opened())&&(!i.creation||!i.creation->opened())&&
         (!i.layout_form||!i.layout_form->opened())&&(!i.visibility||!i.visibility->opened())&&(!i.theme||!i.theme->opened());
 }
-bool EditorForm::stopped(){auto& i=*impl_;i.owner();i.poll_recovery();const bool images=!i.surface||i.surface->poll_image_jobs();return images&&(!i.recovery||i.recovery->stopped());}
+bool EditorForm::stopped(){auto& i=*impl_;i.owner();i.poll_history();i.poll_recovery();const bool images=!i.surface||i.surface->poll_image_jobs();return !i.history&&images&&(!i.recovery||i.recovery->stopped());}
 }

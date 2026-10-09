@@ -91,6 +91,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Independent editor paint call trace](w-11-editor-paint-trace.md) — Resolve whether geometry-only editor work performs native rasterization before choosing a repair.
 - [Bounded frontend phase diagnosis](w-11-frontend-phases.md) — Attribute remaining GTK stalls without changing the fixed timing oracle or admitting a runtime override.
 - [Frontend recovery authority and accepted-request identity](w-11-frontend-recovery.md) — Connect the actual frontend backend to scoped recovery admission and preserve exact accepted-draft metadata.
+- [Prepared history in the current native form](w-11-history-form.md) — Integrate bounded history tasks with current-form adoption, capture suspension and preview refresh.
 - [Prepared editor history transitions](w-11-history-preparation.md) — Validate undo/redo off the GUI without transferring stale draft or permission proofs.
 - [Native history preparation ownership](w-11-history-worker.md) — Bound history work on the existing helper worker and preserve current-draft adoption.
 - [Initial editor preview readiness](w-11-initial-preview.md) — Defer the first composition while preserving geometry-dependent input before GTK draws.

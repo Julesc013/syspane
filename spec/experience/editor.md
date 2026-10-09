@@ -257,4 +257,6 @@ while retaining the distinct recovery-selection rule. The
 [portable handoff](../delivery/history-preparation-handoff.md) records draft behavior.
 The [native worker contract](../delivery/packages/w-11-history-worker.md) now bounds
 task lifetime, cancellation and recovery coexistence on the existing worker. Current
-form adoption, preview scheduling and complete GUI qualification remain required.
+form adoption and recovery capture suspension now exist under the
+[experimental form contract](../delivery/packages/w-11-history-form.md). General
+asynchronous authoring, native preview handoff and complete GUI qualification remain required.

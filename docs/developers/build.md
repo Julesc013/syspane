@@ -15,6 +15,17 @@ build` before configuring or building; use `test` or `package` for those actions
 The common active-output budget is unchanged; retained `out/evidence/` archives
 are measured separately. Never use the placeholder account from the example.
 
+The [history-form package](../../spec/delivery/packages/w-11-history-form.md) connects
+the existing native worker to the experimental frontend's Undo/Redo. After ordinary
+preflight/configure/build, run `ctest --preset linux-x64-gcc13 -R
+'^native[.]EDITOR-HISTORY$' --output-on-failure`, then the worker, recovery, standalone
+and installed editor, initial-input and reply lifecycle regressions. The component
+mode uses real GTK and controlled tasks; the installed and worker cases exercise
+actual native execution separately. Run portable history and component checks on
+all three profiles. Finally run the unchanged native.RECOVERY-GUI-LIMITS command.
+The [handoff](../../spec/delivery/history-form-handoff.md) records the failures; do not
+substitute component success or diagnostic timings for ordinary GUI qualification.
+
 The [history-worker package](../../spec/delivery/packages/w-11-history-worker.md)
 adds bounded HistoryPreparationTask handles to the existing Linux helper worker.
 After ordinary profile preflight/configure/build, run `ctest --preset linux-x64-gcc13
@@ -24,7 +35,8 @@ helper-worker, recovery-preparation/admission, installed editor/recovery, fronte
 recovery and recovery-control cases. Run portable history and component checks on
 all three profiles. Task-interface timing does not qualify complete GTK behavior.
 The [handoff](../../spec/delivery/history-worker-handoff.md) records this boundary;
-current-form integration and ordinary GUI qualification remain next.
+current-form integration now exists in the experimental frontend; ordinary GUI
+qualification remains open.
 
 The [history-preparation package](../../spec/delivery/packages/w-11-history-preparation.md)
 adds detached HistoryWork and opaque current-owner adoption. After ordinary profile
@@ -33,9 +45,9 @@ configure/build, run `ctest --preset <profile> -R '^editor[.]HISTORY-PREPARATION
 and existing native preparation/recovery/editor consumers. Keep the original trace
 expectations; supplemental guards must not redefine their results.
 
-The installed GUI does not use this API yet. Native task ownership is now implemented;
-close current-form capture/adoption and preview ownership before enabling it, then
-run the unchanged ordinary GUI gates.
+The experimental installed GUI now consumes this API through the existing worker.
+Production keeps synchronous history until the unchanged ordinary GUI gates pass;
+current native preview validation/composition remains on the form owner.
 The [handoff](../../spec/delivery/history-preparation-handoff.md) records the exact
 implemented boundary, source-bound verification and remaining integration.
 

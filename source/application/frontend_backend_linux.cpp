@@ -293,6 +293,7 @@ std::unique_ptr<ui::PreparedEditor> LinuxFrontendBackend::take_editor(const std:
 rendering::ImageFactory LinuxFrontendBackend::images()const{return impl_->helpers.images();}
 std::shared_ptr<const os::RecoveryFactory> LinuxFrontendBackend::recovery()const{return impl_->helpers.recovery();}
 std::shared_ptr<const ui::RecoveryPreparationFactory> LinuxFrontendBackend::preparations()const{return impl_->helpers.preparations();}
+std::shared_ptr<const ui::HistoryPreparationFactory> LinuxFrontendBackend::history_preparations()const{return impl_->helpers.history_preparations();}
 std::string LinuxFrontendBackend::request_id(){auto& s=*impl_;std::lock_guard<std::mutex> lock(s.mutex);need(!s.closing&&s.view.profile&&!s.view.loading&&!s.pending,"frontend.unavailable");increment(s.requests);return s.controller.epoch+":request:"+std::to_string(s.requests);}
 void LinuxFrontendBackend::submit(const ui::EditRequest& request,std::optional<std::string> digest){
     auto& s=*impl_;std::lock_guard<std::mutex> lock(s.mutex);

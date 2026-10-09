@@ -18,7 +18,7 @@ EditorRecoverySession::EditorRecoverySession(EditorDraft& draft,std::shared_ptr<
 }
 RecoveryIdentity EditorRecoverySession::identity()const{need(binding_.has_value());return {binding_->profile,binding_->generation};}
 void EditorRecoverySession::stop(){
-    stop_preparation();
+    stop_preparation();capture_paused_=false;
     erase(offer_);restorable_=false;automatic_=false;latest_.reset();owned_.reset();reopen_=false;
     if(queue_){queue_->close();closing_=true;}
 }
@@ -40,11 +40,11 @@ void EditorRecoverySession::start(){
     state_=EditorRecoveryState::loading;closing_=false;
 }
 bool EditorRecoverySession::editing()const{return state_!=EditorRecoveryState::loading&&state_!=EditorRecoveryState::offer&&state_!=EditorRecoveryState::retiring;}
-bool EditorRecoverySession::may_apply()const{return editing()&&state_!=EditorRecoveryState::capturing;}
+bool EditorRecoverySession::may_apply()const{return !capture_paused_&&editing()&&state_!=EditorRecoveryState::capturing;}
 bool EditorRecoverySession::erasable()const{return binding_&&binding_->erase&&state_==EditorRecoveryState::offer;}
 bool EditorRecoverySession::stopped()const{return (!queue_||queue_->status().reaped)&&(!preparation_||preparation_->status().stopped)&&!pending_;}
 void EditorRecoverySession::retire(bool reopen){
-    need(queue_&&binding_&&binding_->erase);stop_preparation();queue_->retire();erase(offer_);restorable_=false;automatic_=false;reopen_=reopen;state_=EditorRecoveryState::retiring;
+    need(queue_&&binding_&&binding_->erase);stop_preparation();capture_paused_=false;queue_->retire();erase(offer_);restorable_=false;automatic_=false;reopen_=reopen;state_=EditorRecoveryState::retiring;
 }
 void EditorRecoverySession::stop_preparation(){
     pending_.reset();prepared_offer_.reset();preparation_obsolete_=true;if(preparation_)preparation_->cancel();
@@ -76,13 +76,15 @@ void EditorRecoverySession::poll_preparation(){
     if(pending_){preparation_capture_=pending_capture_;preparation_obsolete_=false;preparation_=(*preparations_)(std::move(pending_));need(static_cast<bool>(preparation_));}
 }
 void EditorRecoverySession::changed(){
-    if(!automatic_||!queue_||closing_||state_==EditorRecoveryState::retiring)return;
+    if(capture_paused_||!automatic_||!queue_||closing_||state_==EditorRecoveryState::retiring)return;
     try{
         need(draft_.recovery_available());
         if(preparations_)prepare(draft_.recovery_capture_work(identity()),true);
         else capture(draft_.recovery_snapshot(identity()));
     }catch(...){fail();}
 }
+void EditorRecoverySession::pause_capture(){need(!closed_&&editing());stop_preparation();capture_paused_=true;}
+void EditorRecoverySession::resume_capture(){if(!capture_paused_)return;capture_paused_=false;changed();}
 std::optional<std::string> EditorRecoverySession::submitting(){need(may_apply());submitted_=automatic_?owned_:std::nullopt;return submitted_;}
 void EditorRecoverySession::settled(bool accepted){
     if(accepted){auto digest=submitted_;invalidate();cleanup_=std::move(digest);}submitted_.reset();

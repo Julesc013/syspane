@@ -10,6 +10,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [frontend-phases.json](frontend-phases.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [frontend-recovery.json](frontend-recovery.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [helper-identity.json](helper-identity.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
+- [history-form.json](history-form.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [history-preparation.json](history-preparation.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [history-worker.json](history-worker.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [initial-preview.json](initial-preview.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.

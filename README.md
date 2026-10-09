@@ -11,11 +11,11 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
-The [native history worker](spec/delivery/history-worker-handoff.md) now runs prepared
-undo/redo through bounded, cancellable tasks on the existing worker. Native ownership,
-exact results and recovery coexistence pass their fixed cases. Current-form adoption
-and preview refresh are next; the installed GUI still uses synchronous history.
-Four fixed GUI delay failures, production recovery and all five full editions remain open.
+The [experimental editor history integration](spec/delivery/history-form-handoff.md)
+now prepares Undo/Redo on the existing worker, with current-form adoption, cancellation
+and recovery capture suspension. Functional native cases pass; 4 ordinary GUI
+qualification cases still fail. Production history/recovery gates and all five full
+editions remain open.
 
 The [installed settings frontend](spec/delivery/installed-settings-handoff.md)
 now runs from a relocated development payload, supervises its verified configuration

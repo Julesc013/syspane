@@ -110,7 +110,7 @@ struct Window {
             actions.submit_recovery=[this](const auto& request,auto digest){saved_notice.clear();retirement_serial.reset();backend.submit(request,std::move(digest));};
             actions.reload=[this]{saved_notice.clear();retirement_serial.reset();backend.reload();};actions.exit=[this]{exit_requested=true;};
             auto prepared=backend.take_editor(profile);if(!prepared)return;
-            measure(FrontendPhase::editor,[&]{editor=std::make_unique<interfaces::EditorForm>(std::move(prepared),std::move(current),selected,std::vector<rendering::SurfaceProvider>{},"",std::move(actions),backend.images());});
+            measure(FrontendPhase::editor,[&]{editor=std::make_unique<interfaces::EditorForm>(std::move(prepared),std::move(current),selected,std::vector<rendering::SurfaceProvider>{},"",std::move(actions),backend.images(),experimental_recovery?backend.history_preparations():nullptr);});
             if(recovery_enabled)measure(FrontendPhase::recovery,[&]{const auto& v=*snapshot.view.recovery;const auto& a=v.admission;
                 editor->recovery(backend.recovery(),a.directory.path,{v.editor_session,a.profile,a.generation,a.policy_revision,a.erase},backend.preparations(),snapshot.recovery_retirement);
                 if(snapshot.recovery_retirement)retirement_serial=snapshot.serial;

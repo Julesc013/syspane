@@ -8,30 +8,32 @@ from native_diagnostic import launch_xvfb
 from check_surface_runtime import verify
 
 exe, evidence = map(Path, sys.argv[1:3])
+history = len(sys.argv)==4 and sys.argv[3]=='--history-form'
 prepared = len(sys.argv)==4 and sys.argv[3]=='--prepared'
 initial = len(sys.argv)==4 and sys.argv[3]=='--initial-input'
 assert os.geteuid() != 0 and evidence.resolve().is_relative_to(exe.parent.resolve())
 verify()
 folder = evidence/('reply-'+uuid.uuid4().hex[:12]); folder.mkdir(mode=0o700)
 sha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
-report = dict(family='EDITOR-INITIAL-INPUT' if initial else 'PREPARED-EDITOR' if prepared else 'EDITOR-REPLY-LIFECYCLE', outcome='fail', started_at=datetime.now(timezone.utc).isoformat(),
+report = dict(family='EDITOR-HISTORY' if history else 'EDITOR-INITIAL-INPUT' if initial else 'PREPARED-EDITOR' if prepared else 'EDITOR-REPLY-LIFECYCLE', outcome='fail', started_at=datetime.now(timezone.utc).isoformat(),
               executable_sha256=sha(exe), oracle_sha256=sha(Path(__file__)),
-              component_checks_sha256=sha(Path(__file__).with_name('initial_input.hpp' if initial else 'reply_lifecycle.hpp')), cases=[])
+              component_checks_sha256=sha(Path(__file__).with_name('history_form.hpp' if history else 'initial_input.hpp' if initial else 'reply_lifecycle.hpp')), cases=[])
 server = child = None
 try:
     server, env = launch_xvfb(folder)
-    child = subprocess.Popen(['dbus-run-session', '--', str(exe), '--initial-input' if initial else '--prepared-editor' if prepared else '--reply-lifecycle', str(ROOT)],
+    child = subprocess.Popen(['dbus-run-session', '--', str(exe), '--history-form' if history else '--initial-input' if initial else '--prepared-editor' if prepared else '--reply-lifecycle', str(ROOT)],
                              env=env, stdout=subprocess.PIPE, stderr=subprocess.PIPE, start_new_session=True)
     try:
-        stdout, stderr = child.communicate(timeout=30)
+        stdout, stderr = child.communicate(timeout=90 if history else 30)
     except subprocess.TimeoutExpired:
         os.killpg(child.pid, signal.SIGKILL); stdout, stderr = child.communicate(timeout=5)
         (folder/'stdout').write_bytes(stdout); (folder/'stderr').write_bytes(stderr)
         raise AssertionError('native reply check deadline')
     (folder/'stdout').write_bytes(stdout); (folder/'stderr').write_bytes(stderr)
     assert child.returncode == 0, stderr.decode(errors='replace')
+    if history:assert b"Gtk-WARNING" not in stderr and b"Gtk-CRITICAL" not in stderr, stderr.decode(errors="replace")
     report['cases'] = [json.loads(line) for line in stdout.splitlines()]
-    expected = ('tree','pointer','topology-tree','topology-pointer','reload','withdrawal','empty-click','no-selection-key','fallback') if initial else ('direct','reconciled','default','cancelled','unknown','ticket','epoch','revision','facts','query','withdrawn',*(('null',) if prepared else ()))
+    expected = json.loads((ROOT/'tests/editor/history-form-cases.json').read_bytes())['cases'] if history else ('tree','pointer','topology-tree','topology-pointer','reload','withdrawal','empty-click','no-selection-key','fallback') if initial else ('direct','reconciled','default','cancelled','unknown','ticket','epoch','revision','facts','query','withdrawn',*(('null',) if prepared else ()))
     assert report['cases'] == [dict(case=c, outcome='pass') for c in expected]
     report['outcome'] = 'pass'
 except Exception as exc:

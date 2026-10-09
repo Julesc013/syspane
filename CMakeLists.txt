@@ -432,6 +432,9 @@ if(BUILD_TESTING)
         add_test(NAME native.EDITOR-INITIAL-INPUT COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/editor/native_reply_lifecycle.py"
             "$<TARGET_FILE:syspane_editor_window>" "${CMAKE_BINARY_DIR}/native-evidence" --initial-input)
         set_tests_properties(native.EDITOR-INITIAL-INPUT PROPERTIES TIMEOUT 60)
+        add_test(NAME native.EDITOR-HISTORY COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/editor/native_reply_lifecycle.py"
+            "$<TARGET_FILE:syspane_editor_window>" "${CMAKE_BINARY_DIR}/native-evidence" "--history-form")
+        set_tests_properties(native.EDITOR-HISTORY PROPERTIES TIMEOUT 120)
         add_test(NAME native.EDITOR-RECOVERY COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/editor/native_recovery_controls.py"
             "$<TARGET_FILE:syspane_editor_window>" "$<TARGET_FILE:syspane_editor_exit_probe>" "${CMAKE_BINARY_DIR}/native-evidence")
         set_tests_properties(native.EDITOR-RECOVERY PROPERTIES TIMEOUT 300)

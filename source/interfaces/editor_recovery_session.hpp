@@ -20,6 +20,8 @@ public:
     void bind(EditorRecoveryBinding,std::optional<std::string> retirement={});
     void invalidate();
     void changed();
+    void pause_capture();
+    void resume_capture();
     std::optional<std::string> submitting();
     void settled(bool accepted);
     void restore();
@@ -47,6 +49,7 @@ private:
     std::unique_ptr<RecoveryWork> pending_;
     std::unique_ptr<RecoveryPrepared> prepared_offer_;
     bool preparation_capture_=false,pending_capture_=false,preparation_obsolete_=false;
+    bool capture_paused_=false;
     std::optional<std::string> latest_,owned_,submitted_,cleanup_;
     EditorRecoveryState state_=EditorRecoveryState::disabled;
     bool restorable_=false,automatic_=false,closing_=false,reopen_=false,cancel_=false,cancelled_=false,closed_=false;

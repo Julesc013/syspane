@@ -1,5 +1,6 @@
 #pragma once
 #include "editor_draft.hpp"
+#include "editor_history_task.hpp"
 #include "scene_surface.hpp"
 #include "recovery_queue_linux.hpp"
 typedef struct _GtkWidget GtkWidget;
@@ -14,8 +15,8 @@ public:
         std::function<void(const EditRequest&,std::optional<std::string>)> submit_recovery;
     };
     EditorForm(configuration::Authority,configuration::Policy,configuration::Authored,std::string epoch,SettingsResources,
-        scene::Topology,std::string display,std::vector<rendering::SurfaceProvider>,std::string image_worker,Actions,bool large_commands=false,rendering::ImageFactory images={});
-    EditorForm(std::unique_ptr<PreparedEditor>,scene::Topology,std::string display,std::vector<rendering::SurfaceProvider>,std::string image_worker,Actions,rendering::ImageFactory images={});
+        scene::Topology,std::string display,std::vector<rendering::SurfaceProvider>,std::string image_worker,Actions,bool large_commands=false,rendering::ImageFactory images={},std::shared_ptr<const HistoryPreparationFactory> history={});
+    EditorForm(std::unique_ptr<PreparedEditor>,scene::Topology,std::string display,std::vector<rendering::SurfaceProvider>,std::string image_worker,Actions,rendering::ImageFactory images={},std::shared_ptr<const HistoryPreparationFactory> history={});
     ~EditorForm();
     EditorForm(const EditorForm&)=delete;EditorForm& operator=(const EditorForm&)=delete;
     GtkWidget* widget()const;
