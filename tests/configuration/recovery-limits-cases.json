@@ -1,0 +1,35 @@
+{
+  "family": "RECOVERY-LIMITS",
+  "cases": [
+    "MAX-WIDGETS",
+    "MAX-SCENE",
+    "MAX-RECORD",
+    "MAX-COMMAND-REJECT",
+    "OVER-RECORD-REJECT",
+    "SUPERVISOR-CLOSE"
+  ],
+  "profile": "profile:default",
+  "initial_documents": "tests/configuration/profile-startup-cases.json",
+  "expected_scene": "tests/configuration/installed-editor-scene.json",
+  "expected_command": "tests/configuration/frontend-recovery-command.json",
+  "recipe": "tests/configuration/recovery_limits_inputs.py",
+  "inputs": {
+    "MAX-WIDGETS": {
+      "widgets": 256,
+      "scene_bytes": 63224,
+      "scene_sha256": "0b93e8e7d3652e9c6bbd715eadef1f094f2e4b4e4b6e0dc2ffe95da6257ecc5f",
+      "command_bytes": 63678,
+      "record_bytes": 76361
+    },
+    "MAX-SCENE": {
+      "widgets": 256,
+      "scene_bytes": 262144,
+      "scene_sha256": "0f113fe0107be93ae5c6c4238afd2be1ee43b6d63cfb82d01ff25a62ee96c2e8",
+      "command_bytes": 262598,
+      "record_bytes": 275281
+    }
+  },
+  "gui_operation_limit_ms": 100,
+  "case_timeout_seconds": 45,
+  "family_timeout_seconds": 600
+}

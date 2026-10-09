@@ -489,7 +489,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "26c5b332e326ea56c9d4a00e33073e7e505ce81d6c571e2ea0528255064a7713"
+      "sha256": "54282e1d22d7375eab09995c48365b8e357adad0f071d15d6cf5f1518f1fe43e"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -2315,6 +2315,28 @@
       "sha256": "d843687222ee972cd7e115893800fa96563778c0f0c6406f6fcca82aefe43cc9"
     },
     {
+      "id": "SP-W11-RECOVERY-GUI-LIMITS",
+      "path": "delivery/packages/w-11-recovery-gui-limits.md",
+      "title": "Installed GTK recovery timing observations",
+      "description": "Observe the actual GUI loop with maximum admitted recovery inputs without adding a production runtime override.",
+      "requires": [
+        "SP-W11-RECOVERY-LIMITS"
+      ],
+      "sha256": "61a74b77b17f2c30f5b91538172b50a7639aa76cb9544d8dfbefa224b3604522"
+    },
+    {
+      "id": "SP-W11-RECOVERY-LIMITS",
+      "path": "delivery/packages/w-11-recovery-limits.md",
+      "title": "Recovery limits and installed scheduling qualification",
+      "description": "Measure admitted maximum inputs before enabling production recovery; preserve every missed deadline.",
+      "requires": [
+        "SP-W11-INSTALLED-RECOVERY",
+        "SP-W11-RECOVERY-PREPARATION",
+        "SP-PERFORMANCE"
+      ],
+      "sha256": "86c72bd00ca125faa35470642100b3f3f3410a856a84fb193dd6357fc98d61f5"
+    },
+    {
       "id": "SP-W11-RECOVERY-PREPARATION",
       "path": "delivery/packages/w-11-recovery-preparation.md",
       "title": "Asynchronous editor recovery preparation",
@@ -2865,6 +2887,17 @@
         "SP-W25-PACKAGE"
       ],
       "sha256": "5315c7c332fe0b2676e9371b0ad2b6d68aa4ac0c20dd25bd91668cf112daf3db"
+    },
+    {
+      "id": "SP-RECOVERY-LIMITS-HANDOFF",
+      "path": "delivery/recovery-limits-handoff.md",
+      "title": "Recovery maximum-input qualification handoff",
+      "description": "Measured backend success, installed GTK failures and a validation cost repair.",
+      "requires": [
+        "SP-W11-RECOVERY-GUI-LIMITS",
+        "SP-W11-INSTALLED-RECOVERY"
+      ],
+      "sha256": "4853e88c73759961107381ad9f5c5d3a6d9add1a44ce898481f6e56c1827bdd3"
     },
     {
       "id": "SP-RECOVERY-PREPARATION-HANDOFF",

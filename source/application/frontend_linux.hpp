@@ -7,6 +7,7 @@
 #include "editor_recovery.hpp"
 #include "recovery_queue_linux.hpp"
 #include <memory>
+#include <functional>
 
 namespace syspane::application {
 struct FrontendProfile {
@@ -52,5 +53,8 @@ public:
 private:
     struct Impl;std::unique_ptr<Impl> impl_;
 };
-int run_frontend(int argc,char** argv,platform::HelperBundleExpectation,bool experimental_recovery=false);
+// Optional experiment observer: tick work and excess interval delay, in microseconds.
+// Returning false fails the host and initiates ordinary supervised shutdown.
+using FrontendTimingObserver=std::function<bool(std::uint64_t,std::uint64_t)>;
+int run_frontend(int argc,char** argv,platform::HelperBundleExpectation,bool experimental_recovery=false,FrontendTimingObserver={});
 }

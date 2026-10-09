@@ -22,6 +22,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [recovery-context.json](recovery-context.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [recovery-controls.json](recovery-controls.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [recovery-draft.json](recovery-draft.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
+- [recovery-limits.json](recovery-limits.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [recovery-preparation.json](recovery-preparation.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [recovery-queue.json](recovery-queue.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [recovery-store.json](recovery-store.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.

@@ -15,6 +15,33 @@ build` before configuring or building; use `test` or `package` for those actions
 The common active-output budget is unchanged; retained `out/evidence/` archives
 are measured separately. Never use the placeholder account from the example.
 
+The [recovery limits package](../../spec/delivery/packages/w-11-recovery-limits.md)
+and [GTK observation contract](../../spec/delivery/packages/w-11-recovery-gui-limits.md)
+freeze maximum valid inputs independently of product output. After ordinary preflight,
+configure and build, run `ctest --preset linux-x64-gcc13 -R '^native[.]RECOVERY-LIMITS$'
+--output-on-failure` and then `ctest --preset linux-x64-gcc13
+-R '^native[.]RECOVERY-GUI-LIMITS$' --output-on-failure`. Run/archive families separately
+under the unchanged workspace budget. The latter is currently a failing qualification
+gate, not a passing product acceptance claim; its observer preserves all seven cases.
+
+The GTK fixture enables the optional timing callback with SYSPANE_TEST_TIMING=1 and
+passes a nonblocking stdout pipe. The production entry point never reads this variable.
+No additional timer or worker is created. Individual work and excess-delay samples
+must each stay within 100 ms, including failed semantic cases. The observer records
+bounded numeric output and exact files; malformed/missing output cannot mean a pass.
+
+For stage diagnostics, run `python3 tests/configuration/native_recovery_preview_cost.py
+<build>/syspane_frontend_recovery_probe <build>/syspane_frontend_helper_fixture
+<build>/native-evidence` in the admitted non-root environment. Diagnostic completion
+only records stage costs. It does not satisfy any latency criterion. Existing schema
+patterns are compiled once from the trusted finite schema set; no authored string
+may create a cache entry. Original validation and matching rules remain required.
+
+Run `ctest --preset <profile> -R '^(editor|settings|configuration|scene|protocol|composition)[.]'
+--output-on-failure` on all three development profiles after changing shared validation.
+Retain the installed recovery/settings/editor, backend, preparation and recovery-controls
+native regressions. See the [measured results and next repair](../../spec/delivery/recovery-limits-handoff.md).
+
 The [installed recovery package](../../spec/delivery/packages/w-11-installed-recovery.md)
 connects the actual GTK editor to recovery()/preparations(), authenticated current
 binding and accepted-draft metadata. EditorForm::Actions::submit_recovery receives

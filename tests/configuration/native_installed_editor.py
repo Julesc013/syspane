@@ -43,8 +43,25 @@ def observe(exe,folder,runtime,mode,extension=None):
     generations=folder/'config/syspane/configuration'/sha(CASES['profile'].encode())/'generations'
     report=dict(case=mode,outcome='fail',observations=[],controllers=[],frontend_sha256=sha(exe.read_bytes()),started_at=datetime.now(timezone.utc).isoformat())
     proc=None;keys=None;err=(folder/'stderr').open('wb');pidfds={};helper_pidfds={};roots=set(runtime.glob('sp-*'))
+    timing_streams=[]
+    def timings():
+        for stream in timing_streams:
+            while True:
+                try:raw=os.read(stream['pipe'].fileno(),4096)
+                except BlockingIOError:break
+                if not raw:break
+                stream['pending']+=raw
+                assert len(stream['pending'])<=8192,'timing output buffer exceeded'
+                while b'\n' in stream['pending']:
+                    line,stream['pending']=stream['pending'].split(b'\n',1)
+                    match=re.fullmatch(rb'timing ([0-9]{1,20}) ([0-9]{1,20})',line)
+                    assert match,('invalid timing output',line)
+                    rows=report.setdefault('timings',[])
+                    assert len(rows)<CASES['maximum_timing_records'],'timing record limit exceeded'
+                    rows.append(dict(pid=stream['pid'],work_us=int(match[1]),delay_us=int(match[2])))
     def save(): (folder/'result.json').write_bytes(encoded(report))
     def pump():
+        timings()
         if extension and proc and proc.poll() is None:
             children=set()
             for task in Path('/proc',str(proc.pid),'task').iterdir():
@@ -85,7 +102,7 @@ def observe(exe,folder,runtime,mode,extension=None):
         while pending:
             obj,depth=pending.pop()
             if obj is None:continue
-            obj.clear_cache();out.append(obj);assert len(out)<=512 and depth<=20
+            obj.clear_cache();out.append(obj);assert len(out)<=CASES.get('observer_objects',512) and depth<=20
             for n in range(obj.get_child_count()):pending.append((obj.get_child_at_index(n),depth+1))
         return out
     def find(name):return next((o for o in objects() if o.get_description()==name),None)
@@ -132,7 +149,11 @@ def observe(exe,folder,runtime,mode,extension=None):
         return pid,pidfds[pid]
     def launch():
         nonlocal proc,keys
-        proc=subprocess.Popen([str(exe),'--profile',CASES['profile']],cwd=folder,env=env,stdin=subprocess.DEVNULL,stdout=subprocess.DEVNULL,stderr=err)
+        observe=bool(extension and getattr(extension,'capture_timings',False))
+        proc=subprocess.Popen([str(exe),'--profile',CASES['profile']],cwd=folder,env=env,stdin=subprocess.DEVNULL,stdout=subprocess.PIPE if observe else subprocess.DEVNULL,stderr=err)
+        if observe:
+            os.set_blocking(proc.stdout.fileno(),False)
+            timing_streams.append(dict(pipe=proc.stdout,pid=proc.pid,pending=b''))
         wait(lambda:find('frontend.status'));keys=Keys(proc.pid)
     def settings_ready():
         wait(lambda:value('settings.value.sampling.resources_ms')=='1000' and sensitive(find('frontend.editor')),12);child()
@@ -296,7 +317,17 @@ def observe(exe,folder,runtime,mode,extension=None):
                 report.setdefault('forced_native_cleanup',[]).append(pid);signal.pidfd_send_signal(fd,signal.SIGKILL)
                 assert select.select([fd],[],[],2)[0]
             os.close(fd)
-        err.close();report['finished_at']=datetime.now(timezone.utc).isoformat();report['elapsed_seconds']=time.monotonic()-started;save()
+        try:
+            timings()
+            for stream in timing_streams:assert not stream['pending'],'incomplete timing record'
+            if timing_streams:
+                rows=report.get('timings',[])
+                report['timing_violations']=[dict(index=i,**v) for i,v in enumerate(rows) if max(v['work_us'],v['delay_us'])>CASES['gui_operation_limit_ms']*1000]
+                report['timing_max_us']={key:max((v[key] for v in rows),default=0) for key in ('work_us','delay_us')}
+        except Exception:report['timing_failure']=traceback.format_exc();report['outcome']='fail';raise
+        finally:
+            for stream in timing_streams:stream['pipe'].close()
+            err.close();report['finished_at']=datetime.now(timezone.utc).isoformat();report['elapsed_seconds']=time.monotonic()-started;save()
 
 
 def main(extension=None,script=None,case_file='tests/configuration/installed-editor-cases.json',prefix='editor-frontend-'):
@@ -351,11 +382,14 @@ def main(extension=None,script=None,case_file='tests/configuration/installed-edi
                     (folder/(mode+'.stdout')).write_bytes(stdout);(folder/(mode+'.stderr')).write_bytes(stderr)
                     raise AssertionError('observer deadline')
                 (folder/(mode+'.stdout')).write_bytes(stdout);(folder/(mode+'.stderr')).write_bytes(stderr)
-                assert p.returncode==0,(mode,stderr.decode(errors='replace'))
-                case=json.loads((folder/mode/'result.json').read_bytes());assert case['outcome']=='pass'
-                report['cases'].append(dict(case=mode,outcome='pass',record_sha256=sha((folder/mode/'result.json').read_bytes())))
+                case_path=folder/mode/'result.json'
+                case=json.loads(case_path.read_bytes()) if case_path.exists() else {'outcome':'fail'}
+                passed=p.returncode==0 and case['outcome']=='pass'
+                report['cases'].append(dict(case=mode,outcome='pass' if passed else 'fail',record_sha256=sha(case_path.read_bytes()) if case_path.exists() else None))
+                assert passed or (extension and getattr(extension,'continue_after_case_failure',False)),(mode,stderr.decode(errors='replace'))
             finally:
                 if original is not None:installed.write_bytes(original)
+        assert all(v['outcome']=='pass' for v in report['cases']),('failed cases',[v['case'] for v in report['cases'] if v['outcome']!='pass'])
         report['outcome']='pass'
     except Exception:report['failure']=traceback.format_exc();raise
     finally:

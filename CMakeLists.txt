@@ -622,6 +622,12 @@ if(BUILD_TESTING)
         add_test(NAME native.FRONTEND-RECOVERY COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/configuration/native_frontend_recovery.py"
             "$<TARGET_FILE:syspane_frontend_recovery_probe>" "$<TARGET_FILE:syspane_frontend_helper_fixture>" "${CMAKE_BINARY_DIR}/native-evidence")
         set_tests_properties(native.FRONTEND-RECOVERY PROPERTIES TIMEOUT 600)
+        add_test(NAME native.RECOVERY-LIMITS COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/configuration/native_recovery_limits.py"
+            "$<TARGET_FILE:syspane_frontend_recovery_probe>" "$<TARGET_FILE:syspane_frontend_helper_fixture>" "${CMAKE_BINARY_DIR}/native-evidence")
+        set_tests_properties(native.RECOVERY-LIMITS PROPERTIES TIMEOUT 600)
+        add_test(NAME native.RECOVERY-GUI-LIMITS COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/configuration/native_recovery_gui_limits.py"
+            "$<TARGET_FILE:syspane_frontend>" "$<TARGET_FILE:syspane_frontend_fixture>" "$<TARGET_FILE:syspane_frontend_helper_fixture>" "${CMAKE_BINARY_DIR}/native-evidence")
+        set_tests_properties(native.RECOVERY-GUI-LIMITS PROPERTIES TIMEOUT 600)
         add_test(NAME native.INSTALLED-RECOVERY COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/configuration/native_installed_recovery.py"
             "$<TARGET_FILE:syspane_frontend>" "$<TARGET_FILE:syspane_frontend_fixture>" "$<TARGET_FILE:syspane_frontend_helper_fixture>" "${CMAKE_BINARY_DIR}/native-evidence")
         set_tests_properties(native.INSTALLED-RECOVERY PROPERTIES TIMEOUT 600)

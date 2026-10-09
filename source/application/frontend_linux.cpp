@@ -18,6 +18,7 @@ struct Window {
     std::uint64_t shown=0,withdrawal=0;bool erased=false,closing=false,editor_mode=false,transition=false,exit_requested=false,editor_unavailable=false;int result=0;
     bool experimental_recovery=false,recovery_enabled=false;std::optional<std::uint64_t> retirement_serial;
     std::string saved_notice;
+    FrontendTimingObserver timing;gint64 previous_tick=0;
     scene::Topology topology(){
         scene::Topology out;const auto count=gdk_display_get_n_monitors(display);need(count>0&&count<=16,"frontend.topology");
         auto* primary=gdk_display_get_primary_monitor(display);if(!primary)primary=gdk_display_get_monitor(display,0);
@@ -40,7 +41,7 @@ struct Window {
         }
         need(!out.fallback.empty(),"frontend.topology");topology_dirty=false;return out;
     }
-    explicit Window(LinuxFrontendBackend& value,bool recover):backend(value),experimental_recovery(recover){
+    explicit Window(LinuxFrontendBackend& value,bool recover,FrontendTimingObserver observer):backend(value),experimental_recovery(recover),timing(std::move(observer)){
         display=gdk_display_get_default();need(display!=nullptr,"frontend.display");
         for(const char* event:{"monitor-added","monitor-removed"})g_signal_connect(display,event,G_CALLBACK(+[](GdkDisplay*,GdkMonitor*,gpointer p){static_cast<Window*>(p)->topology_dirty=true;}),this);
         window=gtk_window_new(GTK_WINDOW_TOPLEVEL);gtk_window_set_title(GTK_WINDOW(window),"SysPane Settings");
@@ -111,6 +112,15 @@ struct Window {
         gtk_widget_set_visible(recovery_notice,editor_mode&&!recovery_enabled);gtk_window_set_title(GTK_WINDOW(window),editor_mode?"SysPane Scene Editor":"SysPane Settings");
         shown=snapshot.serial;erased=false;transition=false;
     }
+    gboolean observed_tick()noexcept{
+        if(!timing)return tick();
+        const auto begin=g_get_monotonic_time();
+        const auto delay=previous_tick?std::max<gint64>(0,begin-previous_tick-20000):0;
+        const auto keep=tick();const auto end=g_get_monotonic_time();
+        try{if(!timing(static_cast<std::uint64_t>(end-begin),static_cast<std::uint64_t>(delay))){result=2;stop();}}
+        catch(...){result=2;stop();}
+        previous_tick=g_get_monotonic_time();return keep;
+    }
     gboolean tick()noexcept{
         try{
             auto state=backend.take();if(state.failed)result=2;
@@ -154,7 +164,7 @@ struct Window {
     ~Window(){editor.reset();form.reset();if(window)gtk_widget_destroy(window);if(display)g_signal_handlers_disconnect_by_data(display,this);for(auto* monitor:monitors){g_signal_handlers_disconnect_by_data(monitor,this);g_object_unref(monitor);}}
 };
 }
-int run_frontend(int argc,char** argv,platform::HelperBundleExpectation expectation,bool experimental_recovery){
+int run_frontend(int argc,char** argv,platform::HelperBundleExpectation expectation,bool experimental_recovery,FrontendTimingObserver timing){
     try{
         std::string profile="profile:default";
         for(int i=1;i<argc;++i){const std::string option=argv[i];
@@ -165,7 +175,7 @@ int run_frontend(int argc,char** argv,platform::HelperBundleExpectation expectat
         if(!gtk_init_check(nullptr,nullptr)){std::cerr<<"frontend.display_unavailable\n";return 2;}
         const char* selected=std::getenv("XDG_RUNTIME_DIR");
         LinuxFrontendBackend backend(std::move(expectation),selected?selected:"",platform::profile_environment(profile));
-        Window window(backend,experimental_recovery);g_timeout_add_full(G_PRIORITY_DEFAULT,20,+[](gpointer value)->gboolean{return static_cast<Window*>(value)->tick();},&window,nullptr);
+        Window window(backend,experimental_recovery,std::move(timing));g_timeout_add_full(G_PRIORITY_DEFAULT,20,+[](gpointer value)->gboolean{return static_cast<Window*>(value)->observed_tick();},&window,nullptr);
         gtk_main();return window.result;
     }catch(...){std::cerr<<"frontend.startup\n";return 2;}
 }

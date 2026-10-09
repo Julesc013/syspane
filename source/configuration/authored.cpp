@@ -20,6 +20,23 @@ const std::map<std::string,Json>& schemas(){
     }();return value;
 }
 const Json& schema(const char* name){return schemas().at(std::string("https://schemas.example.invalid/syspane/")+name+".schema.json");}
+const std::regex& pattern(const std::string& text){
+    // Only the compiled-in schemas supply patterns. Compile that finite set once;
+    // authored strings never add cache entries. The immutable map is shared safely
+    // by independent configuration and recovery workers.
+    static const std::map<std::string,std::regex> patterns=[] {
+        std::map<std::string,std::regex> result;
+        const std::function<void(const Json&)> collect=[&](const Json& node){
+            if(node.is_object()&&node.contains("pattern")&&node["pattern"].is_string()){
+                const auto value=node["pattern"].get<std::string>();result.emplace(value,std::regex(value));
+            }
+            if(node.is_structured())for(const auto& child:node)collect(child);
+        };
+        for(const auto& entry:schemas())collect(entry.second);
+        return result;
+    }();
+    return patterns.at(text);
+}
 bool type(const Json& v,const std::string& kind){
     if(kind=="object")return v.is_object();
     if(kind=="array")return v.is_array();
@@ -82,7 +99,7 @@ bool matches(const Json& s,const Json& v,const Json& root,unsigned depth=0){
         const auto length=static_cast<std::size_t>(std::count_if(text.begin(),text.end(),[](unsigned char c){return (c&0xc0)!=0x80;}));
         if((s.contains("minLength")&&length<s["minLength"].get<std::size_t>())||
            (s.contains("maxLength")&&length>s["maxLength"].get<std::size_t>()))return false;
-        if(s.contains("pattern")&&!std::regex_search(text,std::regex(s["pattern"].get<std::string>())))return false;
+        if(s.contains("pattern")&&!std::regex_search(text,pattern(s["pattern"].get_ref<const std::string&>())))return false;
     }
     if(v.is_number()){
         const auto n=v.get<double>();if(!std::isfinite(n))return false;

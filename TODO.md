@@ -36,6 +36,8 @@ behaviour has been implemented. See [audit disposition](spec/delivery/audit-2026
 - [x] W-11 asynchronous recovery preparation: detached validation on the existing native worker, current-draft proofs, coalesced capture and cancellation/erasure. See the [handoff](spec/delivery/recovery-preparation-handoff.md).
 - [x] W-11 frontend recovery backend: scoped 0.2 download, live native admission and exact accepted-request retirement metadata, including lost-result reconciliation. See the [handoff](spec/delivery/frontend-recovery-handoff.md).
 - [x] Connect installed EditorForm recovery capture, submission and retirement in the experimental fixture; verify 14 native cases and repair reconciliation after cached-result erasure. See the [handoff](spec/delivery/installed-recovery-handoff.md).
+- [x] Freeze maximum recovery inputs, execute six backend and seven installed GTK cases, preserve measured failures, and reuse immutable trusted schema patterns. See the [qualification handoff](spec/delivery/recovery-limits-handoff.md).
+- [ ] Repair measured preview/layout/validation stalls and investigate the transient Apply state and controller restart; pass all seven fixed GTK limit cases without weakening deadlines or erasure.
 - [ ] Qualify complete recovery worker/supervisor scheduling and maximum-size GUI operations under existing limits; then enable production recovery and rerun acceptance. Integrate the native inspector.
 - [ ] Explain the preserved Windows GCC15 THEME-HISTORY-RESOURCE-LIMIT 20-second timeout and installed-editor AT-SPI grab_focus timeout; retain original failures and distinguish unchanged replays from causal evidence.
 

@@ -12,16 +12,18 @@ encoded=lambda v:json.dumps(v,sort_keys=True,separators=(',',':')).encode()
 sys.path.insert(0,str(ROOT/'tests/configuration'))
 from native_settings import stored
 
-def main():
+def main(extension=None,definitions=None):
+    global CASES
+    if definitions is not None:CASES=json.loads(definitions.read_bytes())
     probe,helper,evidence=[Path(p).resolve() for p in sys.argv[1:4]];build=probe.parent
     assert os.geteuid() and helper.parent==evidence.parent==build
     assert json.loads((build/'.syspane-owner.json').read_bytes())['profile']=='linux-x64-gcc13'
     runtime=build.parent/'F';marker=encoded(dict(format='SysPane.InstalledSettingsLab',root=str(build.parent)))
     if not runtime.exists():runtime.mkdir(mode=0o700);(runtime/'.owner.json').write_bytes(marker)
     assert runtime.resolve()==runtime and (runtime/'.owner.json').read_bytes()==marker and stat.S_IMODE(runtime.stat().st_mode)==0o700
-    folder=evidence/('fr-'+uuid.uuid4().hex[:10]);folder.mkdir(mode=0o700)
+    folder=evidence/(('rl-' if extension else 'fr-')+uuid.uuid4().hex[:10]);folder.mkdir(mode=0o700)
     report=dict(family=CASES['family'],outcome='fail',started_at=datetime.now(timezone.utc).isoformat(),cases=[],runs=[],
-        oracle_sha256=sha(Path(__file__).read_bytes()),cases_sha256=sha((ROOT/'tests/configuration/frontend-recovery-cases.json').read_bytes()),command_sha256=sha((ROOT/CASES['expected_command']).read_bytes()))
+        oracle_sha256=sha(Path(__file__).read_bytes()),cases_sha256=sha((definitions or ROOT/'tests/configuration/frontend-recovery-cases.json').read_bytes()),command_sha256=sha((ROOT/CASES['expected_command']).read_bytes()))
     def save():(folder/'result.json').write_bytes(encoded(report))
     stage=folder/'original';stage.mkdir(mode=0o700)
     files={'bin/syspane':probe,'libexec/syspane/syspane-configuration-host':helper,'libexec/syspane/syspane-image-worker':build/'SysPane.ImageWorker',
@@ -40,7 +42,8 @@ def main():
     relocated=folder/'relocated';assert stage.parent==relocated.parent==folder;stage.rename(relocated);exe=relocated/'bin/syspane'
     started=time.monotonic()
     class Run:
-        def __init__(self,name,history='allow'):
+        def __init__(self,name,history='allow',enforce_timing=True):
+            self.enforce_timing=enforce_timing
             self.root=folder/name;self.root.mkdir(mode=0o700);self.deadline=time.monotonic()+CASES['case_timeout_seconds'];self.children={};self.events=[];self.buffer=b'';self.queue=False;self.closed=False
             for n,v in dict(policy='allow',history=history,phase='',release='',reconcile='allow').items():(self.root/n).write_text(v+'\n')
             self.runtime=runtime;self.runtime_roots=set(runtime.glob('sp-*'));(self.root/'home').mkdir(mode=0o700)
@@ -70,7 +73,9 @@ def main():
                 self.left();assert select.select([self.proc.stdout],[],[],min(5,max(.001,self.deadline-time.monotonic())))[0],('response timeout',op)
                 raw=os.read(self.proc.stdout.fileno(),65536);assert raw,(op,self.proc.poll(),(self.root/'stderr').read_text());self.buffer+=raw
             line,self.buffer=self.buffer.split(b'\n',1);value=json.loads(line);self.events.append(dict(op=op,response=value));self.inspect_children()
-            assert value['elapsed_us']<CASES['gui_operation_limit_ms']*1000,(op,value['elapsed_us'])
+            if value['elapsed_us']>=CASES['gui_operation_limit_ms']*1000:
+                self.record.setdefault('timing_violations',[]).append(dict(op=op,elapsed_us=value['elapsed_us']))
+                assert not self.enforce_timing,(op,value['elapsed_us'])
             return value['result']
         def wait(self,predicate):
             while True:
@@ -129,6 +134,9 @@ def main():
             if result:assert result['outcome']=='accepted' and result['stored'] and result['durable'] and result['revision']=='1';return reply
         return q.wait(sample)
     try:
+        if extension:
+            extension(dict(Run=Run,report=report,folder=folder,save=save,documents=documents,scope=scope))
+            report['outcome']='pass';return
         for case in CASES['cases']:
             begin=time.monotonic();q=Run(case,'none' if case=='NULL-CONTEXT' else 'erase-denied' if case=='ERASE-DENIED' else 'allow')
             try:

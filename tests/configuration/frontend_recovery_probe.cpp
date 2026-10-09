@@ -1,6 +1,7 @@
 #include "frontend_linux.hpp"
 #include "bundle_identity.hpp"
 #include "editor_draft.hpp"
+#include "scene_surface.hpp"
 #include <chrono>
 #include <iostream>
 #include <thread>
@@ -50,11 +51,33 @@ int main(int argc,char** argv){
                 else if(op=="retrieve"){backend.retrieve();answer={{"requested",true}};}
                 else if(op=="prepare"){
                     need(profile&&profile->view.recovery&&!preparation);auto resources=profile->resources;resources.capabilities.insert("editor.recovery");
+                    const auto begin=std::chrono::steady_clock::now();
                     draft=std::make_unique<ui::EditorDraft>(c::Authority{true,"console",{"console"}},profile->view.policy,profile->view.documents,profile->epoch,resources,true);
-                    const auto& a=profile->view.recovery->admission;preparation=(*backend.preparations())(draft->recovery_restore_work(q.at("bytes"),{a.profile,a.generation}));answer={{"created",true}};
+                    const auto initialized=std::chrono::steady_clock::now();const auto& a=profile->view.recovery->admission;
+                    auto work=draft->recovery_restore_work(q.at("bytes"),{a.profile,a.generation});const auto copied=std::chrono::steady_clock::now();
+                    preparation=(*backend.preparations())(std::move(work));const auto dispatched=std::chrono::steady_clock::now();
+                    const auto us=[](auto a,auto b){return std::chrono::duration_cast<std::chrono::microseconds>(b-a).count();};
+                    answer={{"created",true},{"timings_us",{{"draft",us(begin,initialized)},{"input",us(initialized,copied)},{"dispatch",us(copied,dispatched)}}}};
                 }else if(op=="prepared"){
-                    need(preparation&&profile&&profile->view.recovery);const auto status=preparation->status();answer={{"ready",status.ready},{"stopped",status.stopped}};
-                    if(status.ready){const auto& a=profile->view.recovery->admission;auto prepared=preparation->take();draft->restore_recovery(std::move(prepared),{a.profile,a.generation});answer["scene"]=*draft->scene();preparation.reset();draft.reset();}
+                    need(preparation&&profile&&profile->view.recovery);const auto status=preparation->status();answer={{"ready",status.ready},{"stopped",status.stopped},{"running",status.running},{"error",status.error}};
+                    if(status.ready){const auto& a=profile->view.recovery->admission;auto prepared=preparation->take();const auto begin=std::chrono::steady_clock::now();
+                        draft->restore_recovery(std::move(prepared),{a.profile,a.generation});const auto restored=std::chrono::steady_clock::now();answer["scene"]=*draft->scene();preparation.reset();draft.reset();
+                        answer["restore_us"]=std::chrono::duration_cast<std::chrono::microseconds>(restored-begin).count();}
+                }else if(op=="preview-cost"){
+                    need(static_cast<bool>(profile));auto authored=profile->view.documents;authored.scene=q.at("scene");
+                    auto previous=std::chrono::steady_clock::now();answer=J::object();
+                    const auto mark=[&](const char* name){const auto next=std::chrono::steady_clock::now();answer[name]=std::chrono::duration_cast<std::chrono::microseconds>(next-previous).count();previous=next;};
+                    ui::EditorDraft base({true,"console",{"console"}},profile->view.policy,profile->view.documents,profile->epoch,profile->resources,true);mark("base_us");
+                    auto borrowed=base.resources();auto catalog=c::ContentCatalog::retained(*borrowed);mark("catalog_us");
+                    auto resources=borrowed->selection().contains("schema_version")?catalog.theme_resources(borrowed->selection(),authored):catalog.resources(borrowed->selection(),authored);mark("resources_us");
+                    c::validate_resource_binding(*resources,authored);mark("binding_us");
+                    namespace s=syspane::scene;namespace v=syspane::rendering;
+                    s::Display display;display.id="display:primary";display.bounds=display.work={0,0,800*s::dip,600*s::dip};
+                    v::SurfaceConfig config;config.authored=authored;config.resources=resources;config.capabilities=profile->resources.capabilities;
+                    config.topology.displays={display};config.topology.fallback=display.id;config.topology.roles["primary"]={display.id};
+                    v::SceneSurface surface({true,"console",{"console"}},profile->view.policy,std::move(config),{},[]{return true;},"",v::SurfaceAudience::inspector,backend.images());mark("surface_us");
+                    surface.paint(0,{},[](auto,const v::SurfaceFrame*){});mark("paint_us");
+                    answer["surface_state"]=static_cast<int>(surface.status().code);surface.close();
                 }else if(op=="close"){backend.close();if(preparation)preparation->cancel();answer={{"closing",true}};}
                 else if(op=="end"){need(backend.take().stopped);recovery.reset();preparation.reset();draft.reset();ended=true;answer={{"ended",true}};}
                 else need(false);
