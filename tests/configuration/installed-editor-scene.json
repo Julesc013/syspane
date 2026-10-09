@@ -1,0 +1,118 @@
+{
+  "schema_version": "0.3.0",
+  "revision": "1",
+  "scene_id": "scene:default",
+  "theme_id": null,
+  "roots": [
+    "group:network"
+  ],
+  "widgets": [
+    {
+      "id": "group:network",
+      "kind": "group",
+      "title": "Local network",
+      "display": {
+        "role": "primary"
+      },
+      "layout": {
+        "base": {
+          "kind": "fixed",
+          "x": 40,
+          "y": 24,
+          "width": 720,
+          "height": 280
+        }
+      },
+      "bindings": [],
+      "priority": "essential",
+      "content": {},
+      "children": [
+        "widget:interfaces"
+      ]
+    },
+    {
+      "id": "widget:interfaces",
+      "kind": "table",
+      "title": "Network interfaces",
+      "display": {
+        "role": "primary"
+      },
+      "layout": {
+        "base": {
+          "kind": "fixed",
+          "x": 12,
+          "y": 32,
+          "width": 696,
+          "height": 236
+        }
+      },
+      "bindings": [
+        {
+          "kind": "selector",
+          "scope": {
+            "kind": "local_host"
+          },
+          "entity_type": "network.interface",
+          "field": "network.receive_bytes",
+          "predicates": [],
+          "mode": "collection",
+          "sort": [],
+          "limit": 8
+        },
+        {
+          "kind": "selector",
+          "scope": {
+            "kind": "local_host"
+          },
+          "entity_type": "network.interface",
+          "field": "network.transmit_bytes",
+          "predicates": [],
+          "mode": "collection",
+          "sort": [],
+          "limit": 8
+        },
+        {
+          "kind": "selector",
+          "scope": {
+            "kind": "local_host"
+          },
+          "entity_type": "network.interface",
+          "field": "network.receive_bytes_per_second",
+          "predicates": [],
+          "mode": "collection",
+          "sort": [],
+          "limit": 8
+        },
+        {
+          "kind": "selector",
+          "scope": {
+            "kind": "local_host"
+          },
+          "entity_type": "network.interface",
+          "field": "network.transmit_bytes_per_second",
+          "predicates": [],
+          "mode": "collection",
+          "sort": [],
+          "limit": 8
+        }
+      ],
+      "priority": "normal",
+      "content": {
+        "columns": [
+          {
+            "label": "Received"
+          },
+          {
+            "label": "Sent"
+          },
+          {
+            "label": "Receive rate"
+          },
+          {
+            "label": "Send rate"
+          }
+        ]
+      }
+    }
+  ]
+}

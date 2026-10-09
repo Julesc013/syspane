@@ -15,6 +15,30 @@ build` before configuring or building; use `test` or `package` for those actions
 The common active-output budget is unchanged; retained `out/evidence/` archives
 are measured separately. Never use the placeholder account from the example.
 
+The [installed scene editor](../../spec/delivery/packages/w-11-installed-editor.md)
+uses the actual frontend entry point and the existing supervisor/client workers.
+DevelopmentFrontend installs bin/syspane, libexec/syspane/syspane-configuration-host,
+libexec/syspane/syspane-image-worker, libexec/syspane/syspane-recovery-worker and
+share/syspane/helpers.json. Move the complete payload together; helper record 0.2
+and the executable's compiled expectations cover all roles. Record 0.1 is retained
+only for its other explicit consumers.
+
+After ordinary budget/configure/build checks, run
+`ctest --preset linux-x64-gcc13 -R '^native[.]INSTALLED-EDITOR$' --output-on-failure`.
+Run INSTALLED-SETTINGS, EDITOR-FORM and EDITOR-HELPER-WORKER regressions and the
+configuration/profile/command and composition checks. The editor family packages
+both production and fixture payloads; forecast twice their combined five-file sizes
+for extracted files and ZIPs, plus 16 MiB fixtures. Archive completed recordings
+before launching another large family if the unchanged workspace limit requires it.
+
+Settings and Edit scene navigation requires a current clean draft and no private
+fields, modal editor, gesture or pending command. Navigation requests a new coherent
+profile; Cancel session explicitly discards and returns to Settings. GDK topology
+uses session monitor identities. The outer form scrolls within the initial work area,
+leaving application navigation and Quit accessible. Recovery remains visibly unavailable:
+the current profile transfer has no authenticated generation/directory/session binding.
+Do not infer it from a revision or XDG path. Missing telemetry is not synthetic data.
+
 The [editor helper worker](../../spec/delivery/packages/w-11-editor-helper-worker.md)
 provides EditorHelperClient on the GUI owner and LinuxEditorHelperOwner on the
 existing serialized native worker. Attach the latter with the shared verified bundle
@@ -61,11 +85,10 @@ observes helper exec before image containment disables inspection, detaches befo
 worker instructions run and holds independent pidfds through exit. Tests require
 that native tracing capability; absence is a blocked check, never an inferred pass.
 
-Record 0.1 and the three-file DevelopmentFrontend settings payload remain unchanged.
-The five-file bundle consumer is a development probe. Its passing helpers do not
-enable the installed editor, grant recovery retention authority or qualify a desktop
-edition. Next connect worker-owned results/cancellation to the native editor and
-bind recovery to the authenticated profile, session and current policy.
+The installed-editor package above advances DevelopmentFrontend to five files.
+Record 0.1 remains for its other explicit consumers. Verified helpers do not grant
+recovery retention authority or qualify a desktop edition. Bind installed recovery
+to the authenticated profile, session, generation and current policy next.
 
 The shared private text control owns one GtkTextBuffer. Callers may edit its contents,
 but must not replace/share the buffer or alter its clipboard registrations. Its native
@@ -90,10 +113,10 @@ cmake --install "$SYSPANE_LINUX_BUILD_ROOT/linux-x64-gcc13" --prefix "<owned-nat
 <owned-native-prefix>/bin/syspane --profile profile:default
 ```
 
-The payload contains `bin/syspane`, the private configuration host and its exact
-helper record. The main embeds that record's expected identity; its helper location
-does not depend on the working directory. Native library dependencies remain the
-pinned development runtime; these three files are not a self-contained release.
+The payload now contains `bin/syspane`, all three private helpers and their exact
+bundle record, as specified by the installed-editor package above. The main embeds
+that record's expected identity; lookup does not depend on the working directory.
+Native libraries remain the pinned development runtime; this is not a self-contained release.
 Profile directories come from the existing XDG selector, and XDG_RUNTIME_DIR must
 already name a private admitted native base. Production still requires protected
 machine policy; absent authority produces an unavailable UI, not a policy bypass.

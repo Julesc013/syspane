@@ -224,10 +224,12 @@ def main():
         stage=folder/(name+' original');stage.mkdir(mode=0o700)
         if name=='production':subprocess.run(['cmake','--install',str(build),'--prefix',str(stage),'--component','DevelopmentFrontend'],check=True,capture_output=True)
         else:
-            for path,source in [('bin/syspane',exe),('libexec/syspane/syspane-configuration-host',host),('share/syspane/helpers.json',record)]:
+            for path,source in [('bin/syspane',exe),('libexec/syspane/syspane-configuration-host',host),('share/syspane/helpers.json',record),('libexec/syspane/syspane-image-worker',build/'SysPane.ImageWorker'),('libexec/syspane/syspane-recovery-worker',build/'SysPane.RecoveryWorker')]:
                 dest=stage/path;dest.parent.mkdir(mode=0o755,parents=True,exist_ok=True);shutil.copyfile(source,dest);dest.chmod(0o644 if path.endswith('.json') else 0o755)
         files={p.relative_to(stage).as_posix():p for p in stage.rglob('*') if p.is_file()}
-        assert set(files)=={'bin/syspane','libexec/syspane/syspane-configuration-host','share/syspane/helpers.json'}
+        assert set(files)=={'bin/syspane','libexec/syspane/syspane-configuration-host','share/syspane/helpers.json','libexec/syspane/syspane-image-worker','libexec/syspane/syspane-recovery-worker'}
+        manifest=json.loads(files['share/syspane/helpers.json'].read_bytes());assert manifest['schema_version']=='0.2.0'
+        for role in manifest['helpers'].values():assert sha(files[role['path']].read_bytes())==role['sha256']
         archive=folder/(name+'.zip')
         with zipfile.ZipFile(archive,'x',zipfile.ZIP_DEFLATED) as z:
             for path,file in sorted(files.items()):z.write(file,path)
@@ -236,7 +238,7 @@ def main():
         return target/'bin/syspane'
     server=None
     try:
-        real=package('production',production,build/'syspane-configuration-host',build/'generated/helpers.json')
+        real=package('production',production,build/'syspane-configuration-host',build/'generated/helper-bundle/helpers.json')
         test=package('fixture',fixture,helper,build/'generated/frontend-fixture/helpers.json')
         server,env=launch_xvfb(folder);env.update(NO_AT_BRIDGE='0',XDG_RUNTIME_DIR=str(runtime));env.pop('AT_SPI_BUS_ADDRESS',None)
         for mode in CASES['cases']:

@@ -517,5 +517,10 @@ void EditorForm::recovery(std::shared_ptr<const platform::RecoveryFactory> facto
     if(!i.recovery)i.recovery=std::make_unique<EditorRecoverySession>(i.draft,std::move(factory),std::move(directory));
     i.recovery->bind(binding);i.sync();
 }
+bool EditorForm::can_leave()const{
+    const auto& i=*impl_;i.owner();return !i.closed&&i.draft.available()&&!i.draft.dirty()&&!i.draft.active_request()&&!i.fields_dirty&&!i.gesture&&!i.cancel_pending&&
+        (!i.recovery||i.recovery->may_apply())&&(!i.content||!i.content->opened())&&(!i.binding||!i.binding->opened())&&(!i.creation||!i.creation->opened())&&
+        (!i.layout_form||!i.layout_form->opened())&&(!i.visibility||!i.visibility->opened())&&(!i.theme||!i.theme->opened());
+}
 bool EditorForm::stopped(){auto& i=*impl_;i.owner();i.poll_recovery();const bool images=!i.surface||i.surface->poll_image_jobs();return images&&(!i.recovery||i.recovery->stopped());}
 }

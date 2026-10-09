@@ -15,19 +15,24 @@ The [installed settings frontend](spec/delivery/installed-settings-handoff.md)
 now runs from a relocated development payload, supervises its verified configuration
 helper and loads real saved profiles into native controls. Preview, Apply, cancel,
 save/reopen and original-request recovery use authenticated IPC. Production policy
-still fails closed without protected deployment authority. Desktop/editor/telemetry
+still fails closed without protected deployment authority. Desktop/telemetry
 integration and all five complete editions remain open.
 The [shared private-text repair](spec/delivery/private-text-lifetime-handoff.md)
 resolves the reproduced GTK shutdown diagnostic while preserving selection privacy.
 
 The [verified helper bundle](spec/delivery/editor-helper-bundle-handoff.md) extends
 installation-bound execution to image decoding and recovery storage. Native checks
-cover exact pixels, files and helper substitution; installed editor integration remains open.
+cover exact pixels, files and helper substitution.
 
 The [editor helper worker](spec/delivery/editor-helper-worker-handoff.md) now keeps
 verified image and recovery execution behind bounded GUI task handles. Native checks
-cover cancellation, exact results and existing renderer/recovery consumers. Installed
-editor composition, recovery authority and whole-UI responsiveness remain open.
+cover cancellation, exact results and existing renderer/recovery consumers.
+
+The [installed scene editor](spec/delivery/installed-editor-handoff.md) now uses this
+worker in the actual frontend, with native Settings/Edit scene navigation and
+authenticated save/reopen. The development payload includes all three verified helpers.
+Draft recovery is visibly unavailable until its authority contract closes. Recovery,
+whole-UI responsiveness, native inspector, telemetry and desktop hosting remain open.
 
 The [runtime directory checkpoint](spec/delivery/runtime-directory-handoff.md)
 adds private frontend runtime allocation and explicit retirement after supervisor

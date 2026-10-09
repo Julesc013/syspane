@@ -3,6 +3,7 @@
 #include "profile_owner_linux.hpp"
 #include "profile_projection.hpp"
 #include "settings_draft.hpp"
+#include "image_job.hpp"
 #include <memory>
 
 namespace syspane::application {
@@ -28,12 +29,13 @@ struct FrontendView {
 // live on separate supervisory and client workers. Close, await stopped, then join.
 class LinuxFrontendBackend {
 public:
-    LinuxFrontendBackend(platform::HelperExpectation,std::string runtime_base,platform::ProfileLocation);
+    LinuxFrontendBackend(platform::HelperBundleExpectation,std::string runtime_base,platform::ProfileLocation);
     ~LinuxFrontendBackend();
     LinuxFrontendBackend(const LinuxFrontendBackend&)=delete;
     LinuxFrontendBackend& operator=(const LinuxFrontendBackend&)=delete;
     FrontendView take();
     std::string request_id();
+    rendering::ImageFactory images()const;
     void submit(const interfaces::EditRequest&);
     void cancel(const interfaces::EditRequest&);
     void reload();
@@ -42,5 +44,5 @@ public:
 private:
     struct Impl;std::unique_ptr<Impl> impl_;
 };
-int run_frontend(int argc,char** argv,platform::HelperExpectation);
+int run_frontend(int argc,char** argv,platform::HelperBundleExpectation);
 }

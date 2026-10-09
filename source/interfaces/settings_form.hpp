@@ -15,6 +15,7 @@ public:
     ~SettingsForm();
     SettingsForm(const SettingsForm&)=delete;SettingsForm& operator=(const SettingsForm&)=delete;
     GtkWidget* widget()const;
+    bool can_leave()const;
     void complete(std::uint64_t,const Json&);
     void reconciled(std::uint64_t,const std::string& query_id,const std::string& current_epoch,const Json&);
     void disconnected();

@@ -1,6 +1,7 @@
 #include "frontend_linux.hpp"
 #include "profile_supervisor_linux.hpp"
 #include "runtime_directory_linux.hpp"
+#include "editor_helpers_linux.hpp"
 #include "local_ipc.hpp"
 #include "reconciliation.hpp"
 #include "digest.hpp"
@@ -34,12 +35,13 @@ c::Json hello(const p::Handshake& h){
 }
 struct LinuxFrontendBackend::Impl {
     struct Pending {ui::EditRequest request;std::string intent;std::uint64_t revision=0;bool dispatched=false,cancel=false,retrieve=false;};
-    os::HelperExpectation expectation;std::string runtime_base;os::ProfileLocation location;
+    os::HelperBundleExpectation expectation;std::string runtime_base;os::ProfileLocation location;
+    EditorHelperClient helpers;
     std::mutex mutex;std::thread supervisor_worker,client_worker;
     std::atomic<bool> closing{false},supervisor_done{false},client_done{false};
     ProfileSupervisorView controller;std::uint64_t generation=0,requests=0,profiles=0,retries=0,last_retry=0;
     FrontendView view;std::optional<Pending> pending;bool reload_requested=false;
-    Impl(os::HelperExpectation e,std::string base,os::ProfileLocation l):expectation(std::move(e)),runtime_base(std::move(base)),location(std::move(l)){
+    Impl(os::HelperBundleExpectation e,std::string base,os::ProfileLocation l):expectation(std::move(e)),runtime_base(std::move(base)),location(std::move(l)){
         view.status="Starting configuration service.";
     }
     bool valid_unlocked(std::uint64_t token)const{return !closing&&generation==token&&controller.state==ProfileSupervisorState::ready;}
@@ -53,18 +55,20 @@ struct LinuxFrontendBackend::Impl {
             auto installation=std::make_shared<os::LinuxInstallation>(expectation);
             os::LinuxRuntimeDirectory runtime(runtime_base);
             {
+                LinuxEditorHelperOwner helper(helpers,installation);
                 LinuxProfileSupervisor owner(installation,runtime.path(),location,true,static_cast<std::uint64_t>(::getpid()));
                 bool stopped=false;
                 while(!stopped){
-                    if(closing)owner.close();
+                    if(closing){owner.close();helper.close();}
                     auto next=owner.poll();owner.take();
+                    const bool helpers_stopped=helper.poll();
                     {
                         std::lock_guard<std::mutex> lock(mutex);
                         if(next.epoch!=controller.epoch||next.process!=controller.process||
                            (next.state==ProfileSupervisorState::ready)!=(controller.state==ProfileSupervisorState::ready)){
                             increment(generation);withdraw(closing?"Closing; waiting for configuration service to stop.":"Configuration connection unavailable.");
                         }
-                        controller=std::move(next);stopped=controller.state==ProfileSupervisorState::closed;
+                        controller=std::move(next);stopped=controller.state==ProfileSupervisorState::closed&&helpers_stopped;
                         if(controller.state==ProfileSupervisorState::circuit_open||controller.state==ProfileSupervisorState::unavailable)
                             view.status="Configuration service unavailable. Close and restart after checking installation and policy.";
                     }
@@ -224,13 +228,14 @@ struct LinuxFrontendBackend::Impl {
         client_done=true;
     }
 };
-LinuxFrontendBackend::LinuxFrontendBackend(os::HelperExpectation expectation,std::string base,os::ProfileLocation location)
+LinuxFrontendBackend::LinuxFrontendBackend(os::HelperBundleExpectation expectation,std::string base,os::ProfileLocation location)
     :impl_(std::make_unique<Impl>(std::move(expectation),std::move(base),std::move(location))){
     auto& s=*impl_;s.supervisor_worker=std::thread([&s]{s.supervise();});
     try{s.client_worker=std::thread([&s]{s.client();});}catch(...){s.closing=true;s.supervisor_worker.join();throw;}
 }
 LinuxFrontendBackend::~LinuxFrontendBackend(){close();if(impl_->client_worker.joinable())impl_->client_worker.join();if(impl_->supervisor_worker.joinable())impl_->supervisor_worker.join();}
 FrontendView LinuxFrontendBackend::take(){auto& s=*impl_;std::lock_guard<std::mutex> lock(s.mutex);auto out=s.view;s.view.reply.reset();out.pending=s.pending.has_value();out.closing=s.closing;out.stopped=s.supervisor_done&&s.client_done;return out;}
+rendering::ImageFactory LinuxFrontendBackend::images()const{return impl_->helpers.images();}
 std::string LinuxFrontendBackend::request_id(){auto& s=*impl_;std::lock_guard<std::mutex> lock(s.mutex);need(!s.closing&&s.view.profile&&!s.view.loading&&!s.pending,"frontend.unavailable");increment(s.requests);return s.controller.epoch+":request:"+std::to_string(s.requests);}
 void LinuxFrontendBackend::submit(const ui::EditRequest& request){
     auto& s=*impl_;std::lock_guard<std::mutex> lock(s.mutex);
@@ -240,5 +245,5 @@ void LinuxFrontendBackend::submit(const ui::EditRequest& request){
 void LinuxFrontendBackend::cancel(const ui::EditRequest& request){auto& s=*impl_;std::lock_guard<std::mutex> lock(s.mutex);if(!s.closing&&s.pending&&s.pending->request.request==request.request&&s.pending->request.epoch==request.epoch)s.pending->cancel=true;}
 void LinuxFrontendBackend::reload(){auto& s=*impl_;std::lock_guard<std::mutex> lock(s.mutex);need(!s.closing&&!s.pending&&s.view.profile,"frontend.pending");s.reload_requested=true;s.view.loading=true;s.view.status="Loading saved settings.";}
 void LinuxFrontendBackend::retrieve(){const auto now=os::monotonic_ms();auto& s=*impl_;std::lock_guard<std::mutex> lock(s.mutex);if(s.closing)return;if(s.last_retry&&now-s.last_retry<1000)return;s.last_retry=now;increment(s.retries);if(s.pending)s.pending->retrieve=true;}
-void LinuxFrontendBackend::close(){auto& s=*impl_;std::lock_guard<std::mutex> lock(s.mutex);if(s.closing.exchange(true))return;s.withdraw("Closing; waiting for configuration service to stop.");}
+void LinuxFrontendBackend::close(){auto& s=*impl_;s.helpers.close();std::lock_guard<std::mutex> lock(s.mutex);if(s.closing.exchange(true))return;s.withdraw("Closing; waiting for configuration service to stop.");}
 }

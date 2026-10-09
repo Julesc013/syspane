@@ -214,11 +214,11 @@ else()
     target_link_libraries(syspane_settings_form PUBLIC syspane_settings_draft PRIVATE syspane_private_text PkgConfig::GTK3)
     add_library(syspane_frontend_runtime STATIC source/application/frontend_backend_linux.cpp source/application/frontend_linux.cpp)
     target_include_directories(syspane_frontend_runtime PUBLIC "${CMAKE_SOURCE_DIR}/source/application")
-    target_link_libraries(syspane_frontend_runtime PUBLIC syspane_settings_form syspane_profile_projection syspane_profile_supervisor syspane_runtime_directory PRIVATE PkgConfig::GTK3 Threads::Threads)
+    target_link_libraries(syspane_frontend_runtime PUBLIC syspane_settings_form syspane_editor_form syspane_editor_helpers syspane_profile_projection syspane_profile_supervisor syspane_runtime_directory PRIVATE PkgConfig::GTK3 Threads::Threads)
     add_executable(syspane_frontend source/application/frontend_main_linux.cpp)
-    target_include_directories(syspane_frontend PRIVATE "${CMAKE_BINARY_DIR}/generated")
+    target_include_directories(syspane_frontend PRIVATE "${CMAKE_BINARY_DIR}/generated/helper-bundle")
     target_link_libraries(syspane_frontend PRIVATE syspane_frontend_runtime)
-    add_dependencies(syspane_frontend syspane_helper_identity_data)
+    add_dependencies(syspane_frontend syspane_helper_bundle_identity)
     set_target_properties(syspane_frontend PROPERTIES OUTPUT_NAME "syspane")
     add_library(syspane_scene_inspector STATIC source/interfaces/scene_inspector_model.cpp source/interfaces/scene_inspector_linux.cpp)
     target_include_directories(syspane_scene_inspector PUBLIC "${CMAKE_SOURCE_DIR}/source/interfaces")
@@ -588,12 +588,12 @@ if(BUILD_TESTING)
         set_tests_properties(native.RUNTIME-DIRECTORY PROPERTIES TIMEOUT 90)
         add_executable(syspane_frontend_helper_fixture tests/configuration/frontend_helper_fixture.cpp)
         target_link_libraries(syspane_frontend_helper_fixture PRIVATE syspane_profile_controller_runtime)
-        add_custom_command(OUTPUT "${CMAKE_BINARY_DIR}/generated/frontend-fixture/helpers.json" "${CMAKE_BINARY_DIR}/generated/frontend-fixture/helper_identity.hpp"
+        add_custom_command(OUTPUT "${CMAKE_BINARY_DIR}/generated/frontend-fixture/helpers.json" "${CMAKE_BINARY_DIR}/generated/frontend-fixture/bundle_identity.hpp"
             COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/source/build/generate_helper_identity.py"
-                --helper "$<TARGET_FILE:syspane_frontend_helper_fixture>" --profile linux-x64-gcc13
-                --record "${CMAKE_BINARY_DIR}/generated/frontend-fixture/helpers.json" --header "${CMAKE_BINARY_DIR}/generated/frontend-fixture/helper_identity.hpp"
-            DEPENDS syspane_frontend_helper_fixture "${CMAKE_SOURCE_DIR}/source/build/generate_helper_identity.py" VERBATIM)
-        add_custom_target(syspane_frontend_fixture_identity DEPENDS "${CMAKE_BINARY_DIR}/generated/frontend-fixture/helpers.json" "${CMAKE_BINARY_DIR}/generated/frontend-fixture/helper_identity.hpp")
+                --helper "$<TARGET_FILE:syspane_frontend_helper_fixture>" --image-helper "$<TARGET_FILE:syspane_image_worker>" --recovery-helper "$<TARGET_FILE:syspane_recovery_worker>" --profile linux-x64-gcc13
+                --record "${CMAKE_BINARY_DIR}/generated/frontend-fixture/helpers.json" --header "${CMAKE_BINARY_DIR}/generated/frontend-fixture/bundle_identity.hpp"
+            DEPENDS syspane_frontend_helper_fixture syspane_image_worker syspane_recovery_worker "${CMAKE_SOURCE_DIR}/source/build/generate_helper_identity.py" VERBATIM)
+        add_custom_target(syspane_frontend_fixture_identity DEPENDS "${CMAKE_BINARY_DIR}/generated/frontend-fixture/helpers.json" "${CMAKE_BINARY_DIR}/generated/frontend-fixture/bundle_identity.hpp")
         add_executable(syspane_frontend_fixture source/application/frontend_main_linux.cpp)
         target_include_directories(syspane_frontend_fixture PRIVATE "${CMAKE_BINARY_DIR}/generated/frontend-fixture")
         target_link_libraries(syspane_frontend_fixture PRIVATE syspane_frontend_runtime)
@@ -601,6 +601,9 @@ if(BUILD_TESTING)
         add_test(NAME native.INSTALLED-SETTINGS COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/configuration/native_installed_settings.py"
             "$<TARGET_FILE:syspane_frontend>" "$<TARGET_FILE:syspane_frontend_fixture>" "$<TARGET_FILE:syspane_frontend_helper_fixture>" "${CMAKE_BINARY_DIR}/native-evidence")
         set_tests_properties(native.INSTALLED-SETTINGS PROPERTIES TIMEOUT 300)
+        add_test(NAME native.INSTALLED-EDITOR COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/configuration/native_installed_editor.py"
+            "$<TARGET_FILE:syspane_frontend>" "$<TARGET_FILE:syspane_frontend_fixture>" "$<TARGET_FILE:syspane_frontend_helper_fixture>" "${CMAKE_BINARY_DIR}/native-evidence")
+        set_tests_properties(native.INSTALLED-EDITOR PROPERTIES TIMEOUT 600)
         add_executable(syspane_profile_controller_probe tests/configuration/profile_controller_probe.cpp)
         add_executable(syspane_profile_projection_probe tests/configuration/profile_projection_probe.cpp)
         target_link_libraries(syspane_profile_projection_probe PRIVATE syspane_profile_controller_runtime)
@@ -931,5 +934,7 @@ install(TARGETS syspane_model_smoke RUNTIME DESTINATION bin COMPONENT Developmen
 if(TARGET syspane_frontend)
     install(TARGETS syspane_frontend RUNTIME DESTINATION bin COMPONENT DevelopmentFrontend)
     install(TARGETS syspane_configuration_host RUNTIME DESTINATION libexec/syspane COMPONENT DevelopmentFrontend)
-    install(FILES "${CMAKE_BINARY_DIR}/generated/helpers.json" DESTINATION share/syspane COMPONENT DevelopmentFrontend)
+    install(PROGRAMS "$<TARGET_FILE:syspane_image_worker>" DESTINATION libexec/syspane RENAME syspane-image-worker COMPONENT DevelopmentFrontend)
+    install(PROGRAMS "$<TARGET_FILE:syspane_recovery_worker>" DESTINATION libexec/syspane RENAME syspane-recovery-worker COMPONENT DevelopmentFrontend)
+    install(FILES "${CMAKE_BINARY_DIR}/generated/helper-bundle/helpers.json" DESTINATION share/syspane COMPONENT DevelopmentFrontend)
 endif()

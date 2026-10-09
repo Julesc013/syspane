@@ -29,7 +29,8 @@ behaviour has been implemented. See [audit disposition](spec/delivery/audit-2026
 
 - [x] W-26 verified editor helper bundle: configuration/image/recovery closure, sealed execution and independent native pixels, files, tampering and child-exit checks. See the [handoff](spec/delivery/editor-helper-bundle-handoff.md).
 - [x] W-11 native editor helper worker: bounded GUI factories, serialized native execution, cancellation/closure and exact renderer/recovery consumer evidence. See the [handoff](spec/delivery/editor-helper-worker-handoff.md).
-- [ ] Connect that worker to the installed editor/inspector and authenticated profile/session/directory ownership. Address the observed synchronous recovery validation latency before whole-UI qualification.
+- [x] W-11 installed native scene editor: shared verified helpers, clean draft navigation, native authoring and authenticated Apply/reopen. See the [handoff](spec/delivery/installed-editor-handoff.md).
+- [ ] Connect authenticated profile/session/generation/directory authority to installed recovery and integrate the inspector. Address synchronous recovery validation before whole-UI qualification.
 
 - [x] W-11 shared private text lifetime: balanced realization/destruction, retained editing and independent verification that neither clipboard changes ownership. See the [handoff](spec/delivery/private-text-lifetime-handoff.md).
 
@@ -45,7 +46,7 @@ behaviour has been implemented. See [audit disposition](spec/delivery/audit-2026
 - [x] W-08 native profile worker: one storage thread and held profile locks across joined asynchronous command workers, with exact persistence and crash reconciliation. See the [handoff](spec/delivery/profile-worker-handoff.md).
 - [x] W-08 shipped initial scene/theme, resource bootstrap 0.5 and policy-bound Linux profile store, with exact startup/interruption/reconciliation evidence. See the [handoff](spec/delivery/profile-startup-handoff.md).
 - [x] W-08 Linux profile directory owner: XDG/portable roots, exact private markers, exclusive locks and interrupted initialization. See the [handoff](spec/delivery/profile-owner-handoff.md).
-- [ ] Extend the installed settings frontend with the native editor/inspector, verified image/recovery helpers, telemetry, activation and import catalog; qualify protected-policy deployment and retain all release gates.
+- [ ] Extend the installed frontend with authenticated recovery, native inspector, telemetry, activation and import catalog; qualify protected-policy deployment and retain all release gates.
 - [x] W-09 theme typography: versioned complete fonts/roles, exact resource admission and native raster evidence. See the [handoff](spec/delivery/typography-handoff.md).
 - [x] W-09 role-aware scene composition: bounded semantic blocks, exact native pixels, preserved diagnostics and erasure; explicit development admission. See the [handoff](spec/delivery/role-composition-handoff.md).
 - [x] W-10 shared theme-authoring input and immutable artifact construction: exact no-op/reset, policy admission, preserved license and deterministic content pins. See the [handoff](spec/delivery/theme-authoring-handoff.md).

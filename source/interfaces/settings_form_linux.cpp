@@ -111,6 +111,11 @@ SettingsForm::SettingsForm(c::Authority a,c::Policy p,c::Authored v,std::string 
 }
 SettingsForm::~SettingsForm()=default;
 GtkWidget* SettingsForm::widget()const{impl_->owner();return impl_->root;}
+bool SettingsForm::can_leave()const{
+    const auto& i=*impl_;i.owner();if(i.closed||!i.draft.available()||i.draft.active_request()||i.draft.dirty())return false;
+    for(const auto& row:i.rows)if(!row->invalid.empty())return false;
+    return true;
+}
 void SettingsForm::complete(std::uint64_t ticket,const Json& result){auto& i=*impl_;i.owner();if(i.closed)return;try{if(i.draft.complete(ticket,result))i.render(true);}catch(...){i.render();throw;}}
 void SettingsForm::reconciled(std::uint64_t ticket,const std::string& query_id,const std::string& epoch,const Json& response){auto& i=*impl_;i.owner();if(i.closed)return;try{if(i.draft.reconciled(ticket,query_id,epoch,response))i.render(true);}catch(...){i.render();throw;}}
 void SettingsForm::disconnected(){auto& i=*impl_;i.owner();if(i.closed)return;i.draft.disconnected();i.render();}

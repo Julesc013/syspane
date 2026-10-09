@@ -58,6 +58,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Historical Windows shared-subset build checkpoint](historical-build-handoff.md) — Record the pinned v141_xp build, unchanged shared behavior, resolved runtime inputs and pending guest qualification.
 - [Bounded image pipeline checkpoint](image-pipeline-handoff.md) — Exact portable fit and isolated Linux PNG/JPEG/static-SVG decoding with nonblocking child ownership.
 - [Implementation readiness and gates](implementation-readiness.md) — Distinguish implemented specification checks from pending native and release work.
+- [Installed native scene editor](installed-editor-handoff.md) — Real frontend authoring, authenticated persistence and shared verified helper ownership.
 - [Installed native settings frontend](installed-settings-handoff.md) — The development application composes native settings, authenticated profile reads and independent configuration supervision.
 - [Native keyboard-input checkpoint](keyboard-input-handoff.md) — Queued navigation completion explains the recorded layout-button focus failure.
 - [Complete-scene command checkpoint](large-commands-handoff.md) — Negotiated full-scene edits, bounded admission and coherent native request recovery.
