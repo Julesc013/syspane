@@ -12,19 +12,28 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-10T04:14:24.920468+00:00", "scope": "Installed image and logical-monitor qualification"}
+updated: {"by": "codex", "at": "2026-10-10T05:14:43.580697+00:00", "scope": "Prepared Settings and authored inspector limit qualification"}
 ---
 
 # Current state and next admitted boundary
+
+The [authored inspector checkpoint](inspector-authored-limits-handoff.md) moves
+initial Settings preparation onto the existing client worker after measured GUI
+timing failures. Eight authored/static limit cases and seven exact-profile
+ownership cases now pass with their original expectations. Preserve the failed
+timing, AT-SPI and build attempts. Next qualify maximum live table/chart semantic
+workloads, human accessibility and long-text usability, then desktop/lifecycle
+composition. All five full release editions remain open.
 
 The [installed image/topology checkpoint](inspector-assets-handoff.md) passes all
 twelve native cases through the ordinary Linux entry fixture with unchanged product
 binaries. It verifies maximum encoded image input, explicit decoder refusals,
 summary/navigation/reopen, policy erasure, held-child exit and real logical monitor
 unavailability/restoration. Two failed observer attempts and the topology experiments
-remain preserved. Continue W-11 with maximum-input installed inspector responsiveness
-and human accessibility, then desktop/lifecycle composition. Physical hotplug and
-the other native environments retain separate qualification requirements.
+remain preserved. The authored-limit checkpoint above extends this evidence; live
+semantic workload performance, human accessibility and desktop/lifecycle composition
+remain open. Physical hotplug and the other native environments retain separate
+qualification requirements.
 
 The [prepared surface checkpoint](prepared-surface-handoff.md) moves repeated
 preview structure validation onto existing initial editor, history and recovery

@@ -97,6 +97,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Native history preparation ownership](w-11-history-worker.md) — Bound history work on the existing helper worker and preserve current-draft adoption.
 - [Initial editor preview readiness](w-11-initial-preview.md) — Defer the first composition while preserving geometry-dependent input before GTK draws.
 - [Installed inspector image and topology qualification](w-11-inspector-assets.md) — Exercise pinned saved images, exact native child ownership and actual monitor changes.
+- [Installed inspector authored-input responsiveness](w-11-inspector-authored-limits.md) — Qualify complete visible maximum authored scenes and explicit frame refusal on the real GTK loop.
 - [W-11 installed inspector telemetry delivery](w-11-inspector-telemetry.md) — Connect supervised measured network acquisition to the saved-scene inspector.
 - [Installed native scene editor](w-11-installed-editor.md) — Connect native scene authoring to the actual frontend, verified helpers and authenticated commands.
 - [Installed scene inspector ownership](w-11-installed-inspector.md) — Compose saved scenes, native navigation and verified image tasks in the ordinary frontend.

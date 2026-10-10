@@ -30,10 +30,10 @@ int main(int argc,char** argv){
                     if(profile)answer["profile"]={{"serial",profile->serial},{"epoch",profile->epoch},{"revision",c::authored_revision(profile->view.documents)},
                         {"recovery",profile->view.recovery?context(*profile->view.recovery):J()},{"retirement",profile->recovery_retirement?J(*profile->recovery_retirement):J()}};
                     if(v.reply)answer["reply"]={{"body",v.reply->body},{"query",v.reply->query},{"epoch",v.reply->epoch},{"ticket",v.reply->ticket}};
-                }else if(op=="editor-ready"){
+                }else if(op=="editor-ready"||op=="settings-ready"){
                     auto selected=q.value("old",false)?remembered:profile;
                     if(q.value("copied",false)&&selected)selected=std::make_shared<const app::FrontendProfile>(*selected);
-                    answer={{"consumed",static_cast<bool>(backend.take_editor(selected))}};
+                    answer={{"consumed",op=="editor-ready"?static_cast<bool>(backend.take_editor(selected)):static_cast<bool>(backend.take_settings(selected))}};
                 }else if(op=="remember"){need(static_cast<bool>(profile));remembered=profile;answer={{"remembered",true}};}
                 else if(op=="load"){
                     const auto selected=q.value("old",false)?remembered:profile;need(selected&&selected->view.recovery&&!recovery);const auto& v=*selected->view.recovery;const auto& a=v.admission;

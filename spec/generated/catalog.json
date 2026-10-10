@@ -489,7 +489,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "5def94714ea83e6f2c078646d7576122eba12a034c32b7c98d65021cf35270e2"
+      "sha256": "4f9521ec71e5eac66c15cfc88ba8762a9d51781307efdda9728c93c6b7a7d1c7"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -1024,6 +1024,17 @@
         "SP-PREPARED-SURFACE-HANDOFF"
       ],
       "sha256": "bbdfdbd18b894235e34e97766b808fade71c3bb6464e63046632d3fc10539595"
+    },
+    {
+      "id": "SP-INSPECTOR-AUTHORED-LIMITS-HANDOFF",
+      "path": "delivery/inspector-authored-limits-handoff.md",
+      "title": "Prepared Settings and authored inspector limits",
+      "description": "Move measured Settings preparation off GTK and qualify the unchanged authored-limit oracles.",
+      "requires": [
+        "SP-W11-INSPECTOR-AUTHORED-LIMITS",
+        "SP-INSPECTOR-ASSETS-HANDOFF"
+      ],
+      "sha256": "3e22a7548755a07f8c94db15ffb8a4aaeae29ded22140fa94fd4b768b824ad6e"
     },
     {
       "id": "SP-INSPECTOR-TELEMETRY-HANDOFF",
@@ -2498,6 +2509,18 @@
         "SP-W11-INSPECTOR-TELEMETRY"
       ],
       "sha256": "1114f8b94e817592a84c992cdc5b803e5a8dc431ada4581218cc50d36af82acf"
+    },
+    {
+      "id": "SP-W11-INSPECTOR-AUTHORED-LIMITS",
+      "path": "delivery/packages/w-11-inspector-authored-limits.md",
+      "title": "Installed inspector authored-input responsiveness",
+      "description": "Qualify complete visible maximum authored scenes and explicit frame refusal on the real GTK loop.",
+      "requires": [
+        "SP-W11-SCENE-INSPECTOR",
+        "SP-W11-INSPECTOR-ASSETS",
+        "SP-W11-RECOVERY-GUI-LIMITS"
+      ],
+      "sha256": "68555fa99058e1db4d7c938680f02bf8376ccade32559538faccc7c89b7644af"
     },
     {
       "id": "SP-W11-INSPECTOR-TELEMETRY",

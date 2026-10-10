@@ -49,6 +49,8 @@ public:
     // Consumes only the exact current profile's initial editor, once. Empty means
     // unavailable/stale/already consumed; it never falls back to GTK preparation.
     std::unique_ptr<interfaces::PreparedEditor> take_editor(const std::shared_ptr<const FrontendProfile>&);
+    // Independent one-shot owner, with the same exact-current-profile checks.
+    std::unique_ptr<interfaces::PreparedSettings> take_settings(const std::shared_ptr<const FrontendProfile>&);
     // Empty intent stops collection. A grant belongs to this exact loaded profile.
     bool inspect(const std::shared_ptr<const FrontendProfile>&);
     bool inspection_stopped()const;

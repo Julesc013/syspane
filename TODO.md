@@ -23,7 +23,8 @@ telemetry is now integrated; preserve prior failures and all five full release e
 - [x] Connect authenticated inspector telemetry, active-profile demand, independent supervision and batched native rendering; see the [handoff](spec/delivery/installed-telemetry-handoff.md).
 - [x] Reuse prepared authored snapshots for editor previews and pass all seven unchanged ordinary GUI timing/erasure cases after the measured repair; preserve earlier failures. See the [handoff](spec/delivery/prepared-surface-handoff.md).
 - [x] Qualify installed image input/refusal, summary/navigation/reopen, policy erasure, held-child exit and real logical monitor changes. See the [handoff](spec/delivery/inspector-assets-handoff.md).
-- [ ] Qualify maximum-input installed inspector responsiveness and human accessibility, physical hotplug and other native backends, then desktop/lifecycle composition.
+- [x] Prepare initial Settings on the client worker and qualify authored/static inspector limits and exact-profile adoption. Preserve original failures; see the [handoff](spec/delivery/inspector-authored-limits-handoff.md).
+- [ ] Qualify maximum live table/chart semantic workloads, human accessibility and long-text usability, physical hotplug and other native backends, then desktop/lifecycle composition.
 
 ## Completed specification work
 

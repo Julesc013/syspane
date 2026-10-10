@@ -1,5 +1,25 @@
 # Developer setup and checks
 
+The [authored inspector package](../../spec/delivery/packages/w-11-inspector-authored-limits.md)
+qualifies full authored/static inputs and prepares initial Settings on the existing
+client worker. After workspace preflight and ordinary configure/build, run:
+
+```sh
+ctest --preset linux-x64-gcc13 -R '^native[.]INSPECTOR-AUTHORED-LIMITS$' --output-on-failure
+ctest --preset <profile> -R '^(settings|editor|composition)[.]' --output-on-failure
+```
+
+Also run `native.FRONTEND-PREPARED-SETTINGS` and `native.FRONTEND-PREPARED-EDITOR`
+separately, archiving completed output before the next reservation. The phase
+diagnostic uses `tests/configuration/native_inspector_authored_phases.py`
+with production frontend, timing frontend fixture, configuration helper fixture
+and owned native-evidence directory as its four arguments. It retains the same
+qualification oracle; its phase spans do not replace whole-tick results.
+Run the original installed/ordinary Settings and recovery, editor, inspector,
+telemetry, image/topology, observer-failure and GUI-limit families after backend
+or form ownership changes. Preserve failed attempts. Live semantic workloads and
+human accessibility remain separate from authored/static qualification.
+
 The [installed inspector asset package](../../spec/delivery/packages/w-11-inspector-assets.md)
 uses deterministic saved image generations and actual RandR monitor changes in an
 owned Xvfb display. After workspace preflight and ordinary configure/build, run:

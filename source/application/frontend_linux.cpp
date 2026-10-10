@@ -152,7 +152,8 @@ struct Window {
             interfaces::SettingsForm::Actions actions;
             actions.request_id=[this]{return backend.request_id();};actions.submit=[this](const auto& request){backend.submit(request);};
             actions.cancel=[this](const auto& request){backend.cancel(request);};actions.reload=[this]{backend.reload();};
-            measure(FrontendPhase::settings,[&]{form=std::make_unique<interfaces::SettingsForm>(authority,snapshot.view.policy,snapshot.view.documents,snapshot.epoch,std::move(actions),interfaces::SettingsForm::Translator{},snapshot.resources,true);});
+            auto prepared=backend.take_settings(profile);if(!prepared)return;
+            measure(FrontendPhase::settings,[&]{form=std::make_unique<interfaces::SettingsForm>(std::move(prepared),std::move(actions));});
             measure(FrontendPhase::attach,[&]{gtk_box_pack_start(GTK_BOX(forms),form->widget(),TRUE,TRUE,0);gtk_widget_show_all(form->widget());});
         }
         gtk_widget_set_visible(recovery_notice,mode==Mode::editor&&!recovery_enabled);gtk_window_set_title(GTK_WINDOW(window),mode==Mode::editor?"SysPane Scene Editor":mode==Mode::inspector?"SysPane Scene Inspector":"SysPane Settings");

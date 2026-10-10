@@ -717,6 +717,9 @@ if(BUILD_TESTING)
         add_test(NAME native.FRONTEND-PREPARED-EDITOR COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/configuration/native_prepared_editor.py"
             "$<TARGET_FILE:syspane_frontend_recovery_probe>" "$<TARGET_FILE:syspane_frontend_helper_fixture>" "${CMAKE_BINARY_DIR}/native-evidence")
         set_tests_properties(native.FRONTEND-PREPARED-EDITOR PROPERTIES TIMEOUT 600)
+        add_test(NAME native.FRONTEND-PREPARED-SETTINGS COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/configuration/native_prepared_settings.py"
+            "$<TARGET_FILE:syspane_frontend_recovery_probe>" "$<TARGET_FILE:syspane_frontend_helper_fixture>" "${CMAKE_BINARY_DIR}/native-evidence")
+        set_tests_properties(native.FRONTEND-PREPARED-SETTINGS PROPERTIES TIMEOUT 600)
         add_test(NAME native.INSTALLED-RECOVERY COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/configuration/native_installed_recovery.py"
             "$<TARGET_FILE:syspane_frontend>" "$<TARGET_FILE:syspane_frontend_fixture>" "$<TARGET_FILE:syspane_frontend_helper_fixture>" "${CMAKE_BINARY_DIR}/native-evidence")
         set_tests_properties(native.INSTALLED-RECOVERY PROPERTIES TIMEOUT 600)
@@ -732,6 +735,9 @@ if(BUILD_TESTING)
         add_test(NAME native.INSTALLED-INSPECTOR-ASSETS COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/configuration/native_installed_inspector_assets.py"
             "$<TARGET_FILE:syspane_frontend>" "$<TARGET_FILE:syspane_frontend_entry_fixture>" "$<TARGET_FILE:syspane_frontend_helper_fixture>" "${CMAKE_BINARY_DIR}/native-evidence")
         set_tests_properties(native.INSTALLED-INSPECTOR-ASSETS PROPERTIES TIMEOUT 1200)
+        add_test(NAME native.INSPECTOR-AUTHORED-LIMITS COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/configuration/native_inspector_authored_limits.py"
+            "$<TARGET_FILE:syspane_frontend>" "$<TARGET_FILE:syspane_frontend_fixture>" "$<TARGET_FILE:syspane_frontend_helper_fixture>" "${CMAKE_BINARY_DIR}/native-evidence")
+        set_tests_properties(native.INSPECTOR-AUTHORED-LIMITS PROPERTIES TIMEOUT 700)
         add_test(NAME native.INSTALLED-TELEMETRY COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/configuration/native_installed_telemetry.py"
             "$<TARGET_FILE:syspane_frontend>" "$<TARGET_FILE:syspane_frontend_entry_fixture>" "$<TARGET_FILE:syspane_frontend_helper_fixture>" "${CMAKE_BINARY_DIR}/native-evidence")
         set_tests_properties(native.INSTALLED-TELEMETRY PROPERTIES TIMEOUT 360)

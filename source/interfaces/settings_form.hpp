@@ -12,6 +12,7 @@ public:
     };
     using Translator=std::function<std::string(const std::string&,const std::string&)>;
     SettingsForm(configuration::Authority,configuration::Policy,configuration::Authored,std::string epoch,Actions,Translator={},std::optional<SettingsResources> resources={},bool large_commands=false);
+    SettingsForm(std::unique_ptr<PreparedSettings>,Actions,Translator={});
     ~SettingsForm();
     SettingsForm(const SettingsForm&)=delete;SettingsForm& operator=(const SettingsForm&)=delete;
     GtkWidget* widget()const;

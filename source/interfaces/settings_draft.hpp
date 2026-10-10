@@ -84,4 +84,15 @@ private:
         void clear(){preview.reset();commit.reset();}
     } mutable submission_validation_;
 };
+// Detached initial state, fully validated without native controls. A host must
+// transfer this owner only for its exact current authenticated profile.
+class PreparedSettings {
+public:
+    PreparedSettings(configuration::Authority,configuration::Policy,configuration::Authored,std::string epoch,std::optional<SettingsResources> resources={},bool large_commands=false);
+    PreparedSettings(const PreparedSettings&)=delete;
+    PreparedSettings& operator=(const PreparedSettings&)=delete;
+private:
+    friend class SettingsForm;
+    SettingsDraft draft_;
+};
 }

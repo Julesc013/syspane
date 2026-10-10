@@ -35,6 +35,8 @@ SettingsDraft::SettingsDraft(c::Authority authority,c::Policy policy,c::Authored
     if(policy_.available)highest_policy_=policy_.revision;
     reload(std::move(value),std::move(epoch),std::move(resources));
 }
+PreparedSettings::PreparedSettings(c::Authority a,c::Policy p,c::Authored value,std::string epoch,std::optional<SettingsResources> resources,bool large)
+    :draft_(std::move(a),std::move(p),std::move(value),std::move(epoch),std::move(resources),large){}
 bool SettingsDraft::disclosure()const{return policy_.available&&c::permits(authority_,policy_,"inspector","operational")&&c::permits(authority_,policy_,"accessibility","operational");}
 void SettingsDraft::erase(){submission_validation_.clear();base_.reset();draft_.reset();context_.reset();base_resources_.reset();draft_resources_.reset();result_=nullptr;if(active_)active_->request.body.clear();state_=DraftState::unavailable;}
 bool SettingsDraft::theme_commands()const{return admitted(context_,large_commands_);}

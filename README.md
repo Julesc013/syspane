@@ -21,8 +21,10 @@ remain open.
 [Prepared editor previews](spec/delivery/prepared-surface-handoff.md) now reuse
 validated authored snapshots from existing workers. All seven ordinary maximum-input
 GUI timing and erasure cases pass after this repair, with their original limits.
-Earlier failures remain preserved. Maximum-input inspector responsiveness and full
-desktop qualification still require further work.
+Earlier failures remain preserved. The [authored inspector checks](spec/delivery/inspector-authored-limits-handoff.md)
+now pass after moving initial Settings preparation onto the existing worker.
+Maximum live table/chart workloads, human accessibility and full desktop
+qualification still require further work.
 
 The [installed scene inspector](spec/delivery/installed-inspector-handoff.md)
 adds native inspection of saved scenes alongside Settings and Edit scene in the
