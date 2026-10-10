@@ -7,7 +7,7 @@ bool TelemetryDelivery::live(DeliveryScope current,std::uint64_t now)const{
         current.generation==scope.generation&&now<live_until_ms;
 }
 bool TelemetryDelivery::deliverable(DeliveryScope current,std::uint64_t now)const{
-    return live(current,now)&&frame&&clock&&now>=clock_ms&&now-clock_ms<=250&&now>=frame->received_ms;
+    return live(current,now)&&frame&&frame->ordinal&&clock&&now>=clock_ms&&now-clock_ms<=250&&now>=frame->received_ms;
 }
 TelemetryReceiver::TelemetryReceiver(DeliveryScope scope,configuration::Policy policy,std::vector<model::Metric> metrics,
     protocol::TelemetryBinding binding,std::uint64_t now):
@@ -47,9 +47,13 @@ DataResult TelemetryReceiver::receive(std::string_view bytes,std::uint64_t now,c
         // The slot is a complete-state replacement. Even a valid delta cannot
         // be dropped/coalesced into it without changing the protocol meaning.
         if(protocol::decode(bytes).type!="snapshot"){disconnect(now);return {DataCode::invalid};}
-        auto next=std::make_shared<const DeliveredFrame>(DeliveredFrame{std::string(bytes),now,tick});
+        const bool exhausted=ordinal_==std::numeric_limits<std::uint64_t>::max();
+        auto next=std::make_shared<const DeliveredFrame>(DeliveredFrame{std::string(bytes),now,tick,exhausted?ordinal_:ordinal_+1});
         const auto result=model_.receive(token_,delivery_.binding->policy_revision,bytes,now,tick);
-        if(result.code==DataCode::accepted)delivery_.frame=std::move(next);
+        if(result.code==DataCode::accepted){
+            if(exhausted){disconnect(now);return {DataCode::capacity};}
+            ++ordinal_;delivery_.frame=std::move(next);
+        }
         else if(result.code!=DataCode::duplicate)disconnect(now);
         return result;
     }catch(const protocol::Error&){disconnect(now);return {DataCode::invalid};}

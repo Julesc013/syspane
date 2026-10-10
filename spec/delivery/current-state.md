@@ -12,10 +12,18 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-10T05:14:43.580697+00:00", "scope": "Prepared Settings and authored inspector limit qualification"}
+updated: {"by": "codex", "at": "2026-10-10T05:33:19.872295+00:00", "scope": "Inspector chart continuity across coalesced delivery"}
 ---
 
 # Current state and next admitted boundary
+
+The [inspector continuity checkpoint](inspector-delivery-gaps-handoff.md) fixes a
+reproduced false chart join across coalesced delivery. Seven controlled native
+chart scenarios and the original inspector, installed telemetry, consumer and
+chart/erasure regressions pass; 111 shared checks pass on each development profile.
+Preserve the original product failure and the corrected invalid timestamp stimulus.
+Continue maximum live table/chart workloads, human accessibility and long-text
+usability, then desktop/lifecycle composition. All five release editions remain open.
 
 The [authored inspector checkpoint](inspector-authored-limits-handoff.md) moves
 initial Settings preparation onto the existing client worker after measured GUI

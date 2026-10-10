@@ -489,7 +489,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "4f9521ec71e5eac66c15cfc88ba8762a9d51781307efdda9728c93c6b7a7d1c7"
+      "sha256": "82dcce406db46f94c9d0bd125758d976908fa05947e2061f34411b89a6ab1c6e"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -1035,6 +1035,16 @@
         "SP-INSPECTOR-ASSETS-HANDOFF"
       ],
       "sha256": "3e22a7548755a07f8c94db15ffb8a4aaeae29ded22140fa94fd4b768b824ad6e"
+    },
+    {
+      "id": "SP-INSPECTOR-DELIVERY-GAPS-HANDOFF",
+      "path": "delivery/inspector-delivery-gaps-handoff.md",
+      "title": "Inspector chart continuity after skipped delivery",
+      "description": "Preserve a reproduced false chart join and verify explicit gaps across coalesced complete frames.",
+      "requires": [
+        "SP-W11-INSPECTOR-DELIVERY-GAPS"
+      ],
+      "sha256": "dea7f4ff55e42a1e3165b30382638a5bac0d0674aea8c52b5d04ebb0e6db0aa2"
     },
     {
       "id": "SP-INSPECTOR-TELEMETRY-HANDOFF",
@@ -2523,6 +2533,17 @@
       "sha256": "68555fa99058e1db4d7c938680f02bf8376ccade32559538faccc7c89b7644af"
     },
     {
+      "id": "SP-W11-INSPECTOR-DELIVERY-GAPS",
+      "path": "delivery/packages/w-11-inspector-delivery-gaps.md",
+      "title": "Inspector chart continuity across coalesced delivery",
+      "description": "Forward known skipped admission context without inventing samples or changing the bounded latest-state receiver.",
+      "requires": [
+        "SP-W11-INSPECTOR-TELEMETRY",
+        "SP-W11-SCENE-INSPECTOR"
+      ],
+      "sha256": "37b87cfbc644ab0b494db25f46259376af05f8b95bd6b4d9f29e90320a568842"
+    },
+    {
       "id": "SP-W11-INSPECTOR-TELEMETRY",
       "path": "delivery/packages/w-11-inspector-telemetry.md",
       "title": "W-11 installed inspector telemetry delivery",
@@ -2531,7 +2552,7 @@
         "SP-W11-INSTALLED-INSPECTOR",
         "SP-W25-NETWORK-SERVICE"
       ],
-      "sha256": "bf16be09115278547672cb03df9fec2e7e22834c51f051bc0ece5ad2f344f3a1"
+      "sha256": "ae0f8967d4e7b34cf6e0d0ae9bc978fe1d57f3578e92e4a0ce084a9c041ad673"
     },
     {
       "id": "SP-W11-INSTALLED-EDITOR",

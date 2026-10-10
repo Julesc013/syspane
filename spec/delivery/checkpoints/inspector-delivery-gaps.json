@@ -1,0 +1,1476 @@
+{
+  "recorded_at": "2026-10-10T05:33:19.872295+00:00",
+  "source_base": "1d59859f7b20a3ca9bb6b4b9723d9103f2cdd240",
+  "scope": "Chart continuity correctness across receiver coalescing; not maximum-input or full native-edition qualification.",
+  "current_inputs": {
+    "source/diagnostics/telemetry_delivery.cpp": "675eb033ed091db099b1d8ed369400c762e8f33bc7201e54a8618e6a36e43c48",
+    "source/diagnostics/telemetry_delivery.hpp": "593edbed8c67bde2884e75b1626996b47b2cdf0b91f0fe206f19718e95a406a5",
+    "source/interfaces/scene_inspector_linux.cpp": "ad753ac1fdeefc76c4ad716068405d5393c87d56af46df595ff99987abc86e83",
+    "tests/fault/telemetry_delivery_tests.cpp": "feaad0c5078b92f5842b3e26f879737147b42f8ddfbec5bb29ea2f8bf550e51e",
+    "tests/scene/inspector_tests.cpp": "1c2c066d1a56c7cd156adbc67fe4d8c6cbd1b1b44dcb5268ec655a8aef71aa55",
+    "tests/scene/inspector_delivery_chart_tests.hpp": "e00b7e247af5221c34efff8f34f240fff1909dfefd340479225dc6158313bec9",
+    "tests/scene/inspector-delivery-cases.json": "9ab6bff8d12ada77244af6ae421c83b20af329e81613ce0d3bb4b480d082dcda"
+  },
+  "artifacts": {
+    "windows-x64-gcc15": {
+      "syspane_telemetry_delivery_tests.exe": "f376cc6acf0c484b1b0f1cb26249e82d435c43f1c5d9e600d7488c57ce0359ab",
+      "syspane_scene_tests.exe": "6c05ac472f53fa0d9cbd060ce02a09d91f87c17bd7d017620b1aef695d9ac417"
+    },
+    "windows-x86-v141-xp": {
+      "syspane_telemetry_delivery_tests.exe": "41e12d1223ef6d629d0dbe18864fe42cdd624c0629167409fd1e5a0ac16e9e1b",
+      "syspane_scene_tests.exe": "33ecafe85998191063c6daee4e60462933c433c00c3c16bcbe2762bd5a517a8a"
+    },
+    "linux-x64-gcc13": {
+      "syspane": "0af92abde20372976aaf7131919f0736c64d4c561559be2bc4d018000ee212ea",
+      "syspane_frontend_fixture": "e8e274d3ec6b75be46b3084ab3c3d127939a6db8560ebd8687eefb27e64f1ff8",
+      "syspane_frontend_helper_fixture": "34514fb1341d3f1bbc2b458080de785928a8f500c178147f825a1084895ddc9a",
+      "syspane_telemetry_delivery_tests": "0f0d9311ceacba7591c095f9c1c352839a67bc6cd2ba0e346bdd337b22151764",
+      "syspane_scene_tests": "3df9b0ef6334d66916fb3d74ccb1d60663085fe2efe1cfbb903f0d927bb058c7",
+      "syspane_scene_inspector_tests": "2e8c015f3a94b6e8e11d1a3588a3924d0ee8203f2276c8d49e53ee937fff6cd1",
+      "syspane_network_consumer_probe": "388a1a35b7b592951d9153ebc5a83788e33c2aaedc38527fa448fa40efc7f594"
+    }
+  },
+  "executions": [
+    {
+      "stage": "archive",
+      "source_base": "1d59859f7b20a3ca9bb6b4b9723d9103f2cdd240",
+      "source_archive_sha256": "f32c97d382e67cb40e7ff51db9a5bae5862f1188256a60fb4abb7e51feb8e55f",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "python3",
+            "out/campaign/archive_inspector_gaps.py",
+            "baseline"
+          ],
+          "started_at": "2026-10-10T05:25:15.332132+00:00",
+          "finished_at": "2026-10-10T05:25:15.495067+00:00",
+          "exit": 0,
+          "log_sha256": "217c89cc6745ba93b16e8bcb7a64d3a69ca29b61ead3a4021688bd92f40af1d6",
+          "passed_ctest_count": null
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/inspector-gaps-checks/archive-178fcaf5/result.json",
+        "sha256": "fa7cdd66348c939160a7a337552e3ab4e032c95326bd79bdebe54bb10ac235c8"
+      },
+      "manifest": {
+        "local_path": "out/evidence/inspector-gaps-checks/archive-178fcaf5/source-manifest.json",
+        "sha256": "650bc4e8a4f611c8d83b8f8df94458e9c5ddcad10fc6eed658d20d59307c063d"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-gaps-checks/archive-178fcaf5/source.zip",
+        "sha256": "f32c97d382e67cb40e7ff51db9a5bae5862f1188256a60fb4abb7e51feb8e55f"
+      }
+    },
+    {
+      "stage": "archive",
+      "source_base": "1d59859f7b20a3ca9bb6b4b9723d9103f2cdd240",
+      "source_archive_sha256": "6830c48a384686cb1237af8b2c07140a4adb97dbf2e75ff62d7f4e4611213d04",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "python3",
+            "out/campaign/archive_inspector_gaps.py",
+            "installed-telemetry-final"
+          ],
+          "started_at": "2026-10-10T05:29:52.114793+00:00",
+          "finished_at": "2026-10-10T05:29:59.121940+00:00",
+          "exit": 0,
+          "log_sha256": "af6599288dda7eb8eb3f3e2c8f88c8b56c136717a197f33c6008d22f0ea012e0",
+          "passed_ctest_count": null
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/inspector-gaps-checks/archive-45abc433/result.json",
+        "sha256": "2e48894bece6267c9ce463130e482ca5c7249f8fefab9b80850aec7885892628"
+      },
+      "manifest": {
+        "local_path": "out/evidence/inspector-gaps-checks/archive-45abc433/source-manifest.json",
+        "sha256": "b71cebd20ab5d8bdf79c2688f040f554f202a07d56388ee839d483df32076a7c"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-gaps-checks/archive-45abc433/source.zip",
+        "sha256": "6830c48a384686cb1237af8b2c07140a4adb97dbf2e75ff62d7f4e4611213d04"
+      }
+    },
+    {
+      "stage": "archive",
+      "source_base": "1d59859f7b20a3ca9bb6b4b9723d9103f2cdd240",
+      "source_archive_sha256": "330d99972fa39d5eaec91e972b991d7d017cd31ab30ee1ed7f75692c77cdcee4",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "python3",
+            "out/campaign/archive_inspector_gaps.py",
+            "first-repair"
+          ],
+          "started_at": "2026-10-10T05:26:51.495292+00:00",
+          "finished_at": "2026-10-10T05:26:51.659838+00:00",
+          "exit": 0,
+          "log_sha256": "d358c88ec253f010d03d4d2fa1d11c973f00f56d04ae86a3a99b2e109b60a777",
+          "passed_ctest_count": null
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/inspector-gaps-checks/archive-70ba6c61/result.json",
+        "sha256": "0582efee7a10e5991be35b517257852a129ff0604a7a679f531e5d145dce8db9"
+      },
+      "manifest": {
+        "local_path": "out/evidence/inspector-gaps-checks/archive-70ba6c61/source-manifest.json",
+        "sha256": "6852f0a81edd5ce50c7e4722507ce17bd077f829719b4af507012b89ddc68096"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-gaps-checks/archive-70ba6c61/source.zip",
+        "sha256": "330d99972fa39d5eaec91e972b991d7d017cd31ab30ee1ed7f75692c77cdcee4"
+      }
+    },
+    {
+      "stage": "archive",
+      "source_base": "1d59859f7b20a3ca9bb6b4b9723d9103f2cdd240",
+      "source_archive_sha256": "6830c48a384686cb1237af8b2c07140a4adb97dbf2e75ff62d7f4e4611213d04",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "python3",
+            "out/campaign/archive_inspector_gaps.py",
+            "consumer-final"
+          ],
+          "started_at": "2026-10-10T05:30:16.600920+00:00",
+          "finished_at": "2026-10-10T05:30:19.444539+00:00",
+          "exit": 0,
+          "log_sha256": "7b63ed0386c5964f0702d9f03554cf4d06d7098dd43b724771596bc2ca198b7c",
+          "passed_ctest_count": null
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/inspector-gaps-checks/archive-8dac6d81/result.json",
+        "sha256": "9b7bf06f75c3f75fe5ea6ebafc60605662700e385bbf4ce0e9aeb698a58afe27"
+      },
+      "manifest": {
+        "local_path": "out/evidence/inspector-gaps-checks/archive-8dac6d81/source-manifest.json",
+        "sha256": "b71cebd20ab5d8bdf79c2688f040f554f202a07d56388ee839d483df32076a7c"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-gaps-checks/archive-8dac6d81/source.zip",
+        "sha256": "6830c48a384686cb1237af8b2c07140a4adb97dbf2e75ff62d7f4e4611213d04"
+      }
+    },
+    {
+      "stage": "archive",
+      "source_base": "1d59859f7b20a3ca9bb6b4b9723d9103f2cdd240",
+      "source_archive_sha256": "6830c48a384686cb1237af8b2c07140a4adb97dbf2e75ff62d7f4e4611213d04",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "python3",
+            "out/campaign/archive_inspector_gaps.py",
+            "chart-final"
+          ],
+          "started_at": "2026-10-10T05:30:37.188119+00:00",
+          "finished_at": "2026-10-10T05:30:37.784100+00:00",
+          "exit": 0,
+          "log_sha256": "12369f0bbb24b36ad3e845260d32262924f4683537775391d8e677406e9c0552",
+          "passed_ctest_count": null
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/inspector-gaps-checks/archive-c58076d8/result.json",
+        "sha256": "fe591ebdb239ca2066d3b99236a3f562b12caa427bf8a08d64307b8afd2b6f18"
+      },
+      "manifest": {
+        "local_path": "out/evidence/inspector-gaps-checks/archive-c58076d8/source-manifest.json",
+        "sha256": "b71cebd20ab5d8bdf79c2688f040f554f202a07d56388ee839d483df32076a7c"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-gaps-checks/archive-c58076d8/source.zip",
+        "sha256": "6830c48a384686cb1237af8b2c07140a4adb97dbf2e75ff62d7f4e4611213d04"
+      }
+    },
+    {
+      "stage": "archive",
+      "source_base": "1d59859f7b20a3ca9bb6b4b9723d9103f2cdd240",
+      "source_archive_sha256": "487961cbbbf1a06bb321afca7a9e09c1434cb03a816a8595bf9b6ab72243e746",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "python3",
+            "out/campaign/archive_inspector_gaps.py",
+            "scene-final"
+          ],
+          "started_at": "2026-10-10T05:28:20.998301+00:00",
+          "finished_at": "2026-10-10T05:28:21.238887+00:00",
+          "exit": 0,
+          "log_sha256": "47f5e4a4c1e39945cc97061226d14ac7ebce94513e9ec89f713d0209a25a9f01",
+          "passed_ctest_count": null
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/inspector-gaps-checks/archive-dae33e9a/result.json",
+        "sha256": "f2863be41a77f22680ca8882c476af597e0ef1245a75c630cfdd23f56a2a3916"
+      },
+      "manifest": {
+        "local_path": "out/evidence/inspector-gaps-checks/archive-dae33e9a/source-manifest.json",
+        "sha256": "083b5fbb61f4bda1068ccea4659078aebefae0397ae121edcb0b08adc3c2d5ae"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-gaps-checks/archive-dae33e9a/source.zip",
+        "sha256": "487961cbbbf1a06bb321afca7a9e09c1434cb03a816a8595bf9b6ab72243e746"
+      }
+    },
+    {
+      "stage": "build",
+      "source_base": "1d59859f7b20a3ca9bb6b4b9723d9103f2cdd240",
+      "source_archive_sha256": "487961cbbbf1a06bb321afca7a9e09c1434cb03a816a8595bf9b6ab72243e746",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "cmake",
+            "--preset",
+            "linux-x64-gcc13"
+          ],
+          "started_at": "2026-10-10T05:27:21.950714+00:00",
+          "finished_at": "2026-10-10T05:27:33.659144+00:00",
+          "exit": 0,
+          "log_sha256": "7d90b882a5b5f1c0770c1ada549e51f3346b6c834a737983ced6e43c2330c735",
+          "passed_ctest_count": null
+        },
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "cmake",
+            "--build",
+            "--preset",
+            "linux-x64-gcc13"
+          ],
+          "started_at": "2026-10-10T05:27:35.771388+00:00",
+          "finished_at": "2026-10-10T05:28:02.445284+00:00",
+          "exit": 0,
+          "log_sha256": "6adf91c1a4a361a747ae71773186e173a4950f2cb6979978677f6a651e92a982",
+          "passed_ctest_count": null
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/inspector-gaps-checks/build-4127bc6c/result.json",
+        "sha256": "79b8a14b47c6955df09979b468b1d6f859744be3e9aed8bb8e80596573ff8b58"
+      },
+      "manifest": {
+        "local_path": "out/evidence/inspector-gaps-checks/build-4127bc6c/source-manifest.json",
+        "sha256": "083b5fbb61f4bda1068ccea4659078aebefae0397ae121edcb0b08adc3c2d5ae"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-gaps-checks/build-4127bc6c/source.zip",
+        "sha256": "487961cbbbf1a06bb321afca7a9e09c1434cb03a816a8595bf9b6ab72243e746"
+      }
+    },
+    {
+      "stage": "build",
+      "source_base": "1d59859f7b20a3ca9bb6b4b9723d9103f2cdd240",
+      "source_archive_sha256": "330d99972fa39d5eaec91e972b991d7d017cd31ab30ee1ed7f75692c77cdcee4",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "cmake",
+            "--preset",
+            "linux-x64-gcc13"
+          ],
+          "started_at": "2026-10-10T05:25:54.244095+00:00",
+          "finished_at": "2026-10-10T05:26:04.195753+00:00",
+          "exit": 0,
+          "log_sha256": "4fd4c9a555b1d73b7dd7605380391a251cd78e8761e29a03c0f76c08c34210ec",
+          "passed_ctest_count": null
+        },
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "cmake",
+            "--build",
+            "--preset",
+            "linux-x64-gcc13"
+          ],
+          "started_at": "2026-10-10T05:26:06.142456+00:00",
+          "finished_at": "2026-10-10T05:26:28.265791+00:00",
+          "exit": 0,
+          "log_sha256": "3f090334dc247ad452b50f65b50d9972de79761fdab777eee7f60d5401a03117",
+          "passed_ctest_count": null
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/inspector-gaps-checks/build-94afac96/result.json",
+        "sha256": "4665f0bdf38f8ce0bce5665ee322fd4e0241241640ae10bf892e4bd3d0dfe746"
+      },
+      "manifest": {
+        "local_path": "out/evidence/inspector-gaps-checks/build-94afac96/source-manifest.json",
+        "sha256": "6852f0a81edd5ce50c7e4722507ce17bd077f829719b4af507012b89ddc68096"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-gaps-checks/build-94afac96/source.zip",
+        "sha256": "330d99972fa39d5eaec91e972b991d7d017cd31ab30ee1ed7f75692c77cdcee4"
+      }
+    },
+    {
+      "stage": "build",
+      "source_base": "1d59859f7b20a3ca9bb6b4b9723d9103f2cdd240",
+      "source_archive_sha256": "f32c97d382e67cb40e7ff51db9a5bae5862f1188256a60fb4abb7e51feb8e55f",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "cmake",
+            "--preset",
+            "linux-x64-gcc13"
+          ],
+          "started_at": "2026-10-10T05:24:26.376514+00:00",
+          "finished_at": "2026-10-10T05:24:36.550849+00:00",
+          "exit": 0,
+          "log_sha256": "55a751accb6b4e4c8bf36a8484d64de5dd9ade141733db6e40c00c6ab2c07f62",
+          "passed_ctest_count": null
+        },
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "cmake",
+            "--build",
+            "--preset",
+            "linux-x64-gcc13"
+          ],
+          "started_at": "2026-10-10T05:24:38.433622+00:00",
+          "finished_at": "2026-10-10T05:25:00.925445+00:00",
+          "exit": 0,
+          "log_sha256": "6adf91c1a4a361a747ae71773186e173a4950f2cb6979978677f6a651e92a982",
+          "passed_ctest_count": null
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/inspector-gaps-checks/build-ef455d7e/result.json",
+        "sha256": "b99c399bb8e1463194d767c5acca95e6140d20373b65e9889db4960b9c97162f"
+      },
+      "manifest": {
+        "local_path": "out/evidence/inspector-gaps-checks/build-ef455d7e/source-manifest.json",
+        "sha256": "650bc4e8a4f611c8d83b8f8df94458e9c5ddcad10fc6eed658d20d59307c063d"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-gaps-checks/build-ef455d7e/source.zip",
+        "sha256": "f32c97d382e67cb40e7ff51db9a5bae5862f1188256a60fb4abb7e51feb8e55f"
+      }
+    },
+    {
+      "stage": "chart",
+      "source_base": "1d59859f7b20a3ca9bb6b4b9723d9103f2cdd240",
+      "source_archive_sha256": "6830c48a384686cb1237af8b2c07140a4adb97dbf2e75ff62d7f4e4611213d04",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.](SCENE-CHART|CHART-ERASURE)$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-10T05:30:22.635529+00:00",
+          "finished_at": "2026-10-10T05:30:28.052200+00:00",
+          "exit": 0,
+          "log_sha256": "dd8119531808273dd9ce73fb1560101525e95aa6ae821b4bc5ae7deb855c4342",
+          "passed_ctest_count": 2
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/inspector-gaps-checks/chart-73d75804/result.json",
+        "sha256": "0d86fb3a6470fa3a1ad6bb1715572aa83c0ef164887748865e7f5dbc30b612ac"
+      },
+      "manifest": {
+        "local_path": "out/evidence/inspector-gaps-checks/chart-73d75804/source-manifest.json",
+        "sha256": "b71cebd20ab5d8bdf79c2688f040f554f202a07d56388ee839d483df32076a7c"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-gaps-checks/chart-73d75804/source.zip",
+        "sha256": "6830c48a384686cb1237af8b2c07140a4adb97dbf2e75ff62d7f4e4611213d04"
+      }
+    },
+    {
+      "stage": "consumer",
+      "source_base": "1d59859f7b20a3ca9bb6b4b9723d9103f2cdd240",
+      "source_archive_sha256": "6830c48a384686cb1237af8b2c07140a4adb97dbf2e75ff62d7f4e4611213d04",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]NETWORK-CONSUMER$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-10T05:30:07.434398+00:00",
+          "finished_at": "2026-10-10T05:30:11.435985+00:00",
+          "exit": 0,
+          "log_sha256": "5ff11ce8ec461de5bb614462b3d4c3a2c5b157baeeefb3a865141c1e0eee4a42",
+          "passed_ctest_count": 1
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/inspector-gaps-checks/consumer-ddbfa330/result.json",
+        "sha256": "4483c10fffe735ad7e38806d5020d7e977d345fd0b4c890aadbdcc37d7018a97"
+      },
+      "manifest": {
+        "local_path": "out/evidence/inspector-gaps-checks/consumer-ddbfa330/source-manifest.json",
+        "sha256": "b71cebd20ab5d8bdf79c2688f040f554f202a07d56388ee839d483df32076a7c"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-gaps-checks/consumer-ddbfa330/source.zip",
+        "sha256": "6830c48a384686cb1237af8b2c07140a4adb97dbf2e75ff62d7f4e4611213d04"
+      }
+    },
+    {
+      "stage": "legacy",
+      "source_base": "1d59859f7b20a3ca9bb6b4b9723d9103f2cdd240",
+      "source_archive_sha256": "6830c48a384686cb1237af8b2c07140a4adb97dbf2e75ff62d7f4e4611213d04",
+      "commands": [
+        {
+          "command": [
+            "cmake",
+            "--preset",
+            "windows-x86-v141-xp"
+          ],
+          "started_at": "2026-10-10T05:31:07.440539+00:00",
+          "finished_at": "2026-10-10T05:31:12.693558+00:00",
+          "exit": 0,
+          "log_sha256": "93392244fec25d02e28792ebc08ef5aecb441660f1b163d488a349cf5f981d64",
+          "passed_ctest_count": null
+        },
+        {
+          "command": [
+            "cmake",
+            "--build",
+            "--preset",
+            "windows-x86-v141-xp"
+          ],
+          "started_at": "2026-10-10T05:31:14.493713+00:00",
+          "finished_at": "2026-10-10T05:31:22.225897+00:00",
+          "exit": 0,
+          "log_sha256": "caccd757f99d284d95f7ae2ed1a20ced632baf0ff164220b63adc619ab70950f",
+          "passed_ctest_count": null
+        },
+        {
+          "command": [
+            "ctest",
+            "--preset",
+            "windows-x86-v141-xp",
+            "-R",
+            "^(delivery|data|measured|telemetry|scene|composition)[.]",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-10T05:31:24.576216+00:00",
+          "finished_at": "2026-10-10T05:31:29.978188+00:00",
+          "exit": 0,
+          "log_sha256": "f8a8174256fd3519d5ff2f2222e6cd2c78b974672ec8938dd1357b22276c509c",
+          "passed_ctest_count": 111
+        },
+        {
+          "command": [
+            "ctest",
+            "--preset",
+            "windows-x86-v141-xp",
+            "-R",
+            "^legacy[.]",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-10T05:31:31.773144+00:00",
+          "finished_at": "2026-10-10T05:31:33.589570+00:00",
+          "exit": 0,
+          "log_sha256": "5a11f305e39bd3db4762deb558d4f3764d5b244cc67412116cb8a78c8ff36aa8",
+          "passed_ctest_count": 2
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/inspector-gaps-checks/legacy-38fa4dbd/result.json",
+        "sha256": "5efb15079ca5fc3212542595f75f582ebb7659db2cfe7133847c132edd7f923f"
+      },
+      "manifest": {
+        "local_path": "out/evidence/inspector-gaps-checks/legacy-38fa4dbd/source-manifest.json",
+        "sha256": "b71cebd20ab5d8bdf79c2688f040f554f202a07d56388ee839d483df32076a7c"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-gaps-checks/legacy-38fa4dbd/source.zip",
+        "sha256": "6830c48a384686cb1237af8b2c07140a4adb97dbf2e75ff62d7f4e4611213d04"
+      }
+    },
+    {
+      "stage": "live",
+      "source_base": "1d59859f7b20a3ca9bb6b4b9723d9103f2cdd240",
+      "source_archive_sha256": "487961cbbbf1a06bb321afca7a9e09c1434cb03a816a8595bf9b6ab72243e746",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]INSTALLED-TELEMETRY$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-10T05:28:49.826759+00:00",
+          "finished_at": "2026-10-10T05:29:38.344220+00:00",
+          "exit": 0,
+          "log_sha256": "2b82d91cde883bad91c2575e60d7f37bea3525726039cda2b5d87bee72d79fde",
+          "passed_ctest_count": 1
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/inspector-gaps-checks/live-7a2ff1b7/result.json",
+        "sha256": "5bb8fbe29a8d4355e61d62e3faecc7ae2e9b44401f2c5bae1a423e1062a4795a"
+      },
+      "manifest": {
+        "local_path": "out/evidence/inspector-gaps-checks/live-7a2ff1b7/source-manifest.json",
+        "sha256": "083b5fbb61f4bda1068ccea4659078aebefae0397ae121edcb0b08adc3c2d5ae"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-gaps-checks/live-7a2ff1b7/source.zip",
+        "sha256": "487961cbbbf1a06bb321afca7a9e09c1434cb03a816a8595bf9b6ab72243e746"
+      }
+    },
+    {
+      "stage": "portable",
+      "source_base": "1d59859f7b20a3ca9bb6b4b9723d9103f2cdd240",
+      "source_archive_sha256": "487961cbbbf1a06bb321afca7a9e09c1434cb03a816a8595bf9b6ab72243e746",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^(delivery|data|measured|telemetry|scene|composition)[.]",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-10T05:28:25.220098+00:00",
+          "finished_at": "2026-10-10T05:28:32.255642+00:00",
+          "exit": 0,
+          "log_sha256": "31176032e5e860049f8ff9b8399879f32349ea4e38179de624bb43db751794d3",
+          "passed_ctest_count": 111
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/inspector-gaps-checks/portable-5b4e126b/result.json",
+        "sha256": "defe52007faa1259e1b3472b48f217438ca5c6af30d18fd13d1c6b112adcd69a"
+      },
+      "manifest": {
+        "local_path": "out/evidence/inspector-gaps-checks/portable-5b4e126b/source-manifest.json",
+        "sha256": "083b5fbb61f4bda1068ccea4659078aebefae0397ae121edcb0b08adc3c2d5ae"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-gaps-checks/portable-5b4e126b/source.zip",
+        "sha256": "487961cbbbf1a06bb321afca7a9e09c1434cb03a816a8595bf9b6ab72243e746"
+      }
+    },
+    {
+      "stage": "scene",
+      "source_base": "1d59859f7b20a3ca9bb6b4b9723d9103f2cdd240",
+      "source_archive_sha256": "f32c97d382e67cb40e7ff51db9a5bae5862f1188256a60fb4abb7e51feb8e55f",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]SCENE-INSPECTOR",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-10T05:25:06.863629+00:00",
+          "finished_at": "2026-10-10T05:25:09.716406+00:00",
+          "exit": 8,
+          "log_sha256": "1465b166945e3c69a96c34368e2e3e77df3477acda1cf88e68f6cfc335dbd46c",
+          "passed_ctest_count": null
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/inspector-gaps-checks/scene-12063609/result.json",
+        "sha256": "b1ae3e3be3e1c65488b90536275f44f3bf1fabf18e320185807fe93127c91a8f"
+      },
+      "manifest": {
+        "local_path": "out/evidence/inspector-gaps-checks/scene-12063609/source-manifest.json",
+        "sha256": "650bc4e8a4f611c8d83b8f8df94458e9c5ddcad10fc6eed658d20d59307c063d"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-gaps-checks/scene-12063609/source.zip",
+        "sha256": "f32c97d382e67cb40e7ff51db9a5bae5862f1188256a60fb4abb7e51feb8e55f"
+      }
+    },
+    {
+      "stage": "scene",
+      "source_base": "1d59859f7b20a3ca9bb6b4b9723d9103f2cdd240",
+      "source_archive_sha256": "487961cbbbf1a06bb321afca7a9e09c1434cb03a816a8595bf9b6ab72243e746",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]SCENE-INSPECTOR",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-10T05:28:08.348592+00:00",
+          "finished_at": "2026-10-10T05:28:13.989140+00:00",
+          "exit": 0,
+          "log_sha256": "72c77b8d84e8d499ae21e82a61a0a55d43195f2c4fed4606da6ad72f3c72d025",
+          "passed_ctest_count": 2
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/inspector-gaps-checks/scene-af0cdb79/result.json",
+        "sha256": "80fb78196dcfc95ee2189b99cefb059129a913e976156aa66b1d92e5a1655663"
+      },
+      "manifest": {
+        "local_path": "out/evidence/inspector-gaps-checks/scene-af0cdb79/source-manifest.json",
+        "sha256": "083b5fbb61f4bda1068ccea4659078aebefae0397ae121edcb0b08adc3c2d5ae"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-gaps-checks/scene-af0cdb79/source.zip",
+        "sha256": "487961cbbbf1a06bb321afca7a9e09c1434cb03a816a8595bf9b6ab72243e746"
+      }
+    },
+    {
+      "stage": "scene",
+      "source_base": "1d59859f7b20a3ca9bb6b4b9723d9103f2cdd240",
+      "source_archive_sha256": "330d99972fa39d5eaec91e972b991d7d017cd31ab30ee1ed7f75692c77cdcee4",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]SCENE-INSPECTOR",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-10T05:26:42.136347+00:00",
+          "finished_at": "2026-10-10T05:26:45.056884+00:00",
+          "exit": 8,
+          "log_sha256": "cf5e06bb00aa1e5fe4831af5781048bfeab4652f504f2ef286ecdd82957902ba",
+          "passed_ctest_count": null
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/inspector-gaps-checks/scene-efef8448/result.json",
+        "sha256": "bd8271dd297330fb3e5a741822dd33deaabe372b138cad831713b0e687c4daa2"
+      },
+      "manifest": {
+        "local_path": "out/evidence/inspector-gaps-checks/scene-efef8448/source-manifest.json",
+        "sha256": "6852f0a81edd5ce50c7e4722507ce17bd077f829719b4af507012b89ddc68096"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-gaps-checks/scene-efef8448/source.zip",
+        "sha256": "330d99972fa39d5eaec91e972b991d7d017cd31ab30ee1ed7f75692c77cdcee4"
+      }
+    },
+    {
+      "stage": "windows",
+      "source_base": "1d59859f7b20a3ca9bb6b4b9723d9103f2cdd240",
+      "source_archive_sha256": "6830c48a384686cb1237af8b2c07140a4adb97dbf2e75ff62d7f4e4611213d04",
+      "commands": [
+        {
+          "command": [
+            "cmake",
+            "--preset",
+            "windows-x64-gcc15"
+          ],
+          "started_at": "2026-10-10T05:30:40.655668+00:00",
+          "finished_at": "2026-10-10T05:30:42.849786+00:00",
+          "exit": 0,
+          "log_sha256": "fcc9463be934a95ac0110efde617d5fb432e4ae29ac58ecd1a0185a1d9b37ace",
+          "passed_ctest_count": null
+        },
+        {
+          "command": [
+            "cmake",
+            "--build",
+            "--preset",
+            "windows-x64-gcc15"
+          ],
+          "started_at": "2026-10-10T05:30:44.736003+00:00",
+          "finished_at": "2026-10-10T05:30:52.021797+00:00",
+          "exit": 0,
+          "log_sha256": "6bbd078882693f23ed5e719c38b4b3cd097ec6f81995a151813dcc2c5d829b4f",
+          "passed_ctest_count": null
+        },
+        {
+          "command": [
+            "ctest",
+            "--preset",
+            "windows-x64-gcc15",
+            "-R",
+            "^(delivery|data|measured|telemetry|scene|composition)[.]",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-10T05:30:53.870199+00:00",
+          "finished_at": "2026-10-10T05:31:00.586904+00:00",
+          "exit": 0,
+          "log_sha256": "24edc14fd4ad38f6b6d3d99d35e45b55599bf397b5887257be303f5141cf7277",
+          "passed_ctest_count": 111
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/inspector-gaps-checks/windows-eeab9055/result.json",
+        "sha256": "6daa188bdcb8d24d5aeaf85d351b8f1d2760801c2449b75eac35b23a6bf2796d"
+      },
+      "manifest": {
+        "local_path": "out/evidence/inspector-gaps-checks/windows-eeab9055/source-manifest.json",
+        "sha256": "b71cebd20ab5d8bdf79c2688f040f554f202a07d56388ee839d483df32076a7c"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-gaps-checks/windows-eeab9055/source.zip",
+        "sha256": "6830c48a384686cb1237af8b2c07140a4adb97dbf2e75ff62d7f4e4611213d04"
+      }
+    }
+  ],
+  "final_executions": {
+    "scene": "out/evidence/inspector-gaps-checks/scene-af0cdb79/result.json",
+    "portable": "out/evidence/inspector-gaps-checks/portable-5b4e126b/result.json",
+    "live": "out/evidence/inspector-gaps-checks/live-7a2ff1b7/result.json",
+    "consumer": "out/evidence/inspector-gaps-checks/consumer-ddbfa330/result.json",
+    "chart": "out/evidence/inspector-gaps-checks/chart-73d75804/result.json",
+    "windows": "out/evidence/inspector-gaps-checks/windows-eeab9055/result.json",
+    "legacy": "out/evidence/inspector-gaps-checks/legacy-38fa4dbd/result.json"
+  },
+  "native_archives": [
+    {
+      "label": "baseline",
+      "index": {
+        "local_path": "out/evidence/inspector-gaps-native/baseline/index.json",
+        "sha256": "4d735c901490405c18beb535ecb875cad777639e55bc8e452597d98c1ef85ee8"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-gaps-native/baseline/native-evidence.zip",
+        "sha256": "d65f0c719ae5e58583531d8d25374ee859026f3fad91f72580931682cad0e488"
+      },
+      "preserved_bytes": 68262,
+      "reports": [
+        {
+          "path": "inspector-34bd0af87df2/result.json",
+          "sha256": "c8c409e98cd36bca1ff4e0e91e9fbb9e0e602f553f1febe33fb7ec5430616214",
+          "family": "SCENE-INSPECTOR",
+          "outcome": "fail",
+          "cases": [
+            {
+              "case": "scalar",
+              "outcome": "pass",
+              "fault_detected": false,
+              "record_sha256": "8b441bbd32b5b036074ed04ecae3f854d94320f452184b66d7a2386c32dcac56"
+            },
+            {
+              "case": "table",
+              "outcome": "pass",
+              "fault_detected": false,
+              "record_sha256": "e251bf25f53bf57429958175e0d6ccb8005939a2fc6dfe94b68880577e383aba"
+            }
+          ]
+        }
+      ],
+      "chart_diagnostics": [
+        {
+          "path": "inspector-34bd0af87df2/chart/stderr",
+          "sha256": "1a9ff39344dd9aea78c8f7488961513f5b96f9bf5326916392f1d9be8616a578",
+          "delivery_lines": [
+            "delivery-chart CONTIGUOUS-GENERATION-JUMP: pass",
+            "COALESCED-SUCCESS: expected Point 300 ns | 30 byte; generation 3; start; actual Point 300 ns | 30 byte; generation 3; join"
+          ]
+        }
+      ]
+    },
+    {
+      "label": "chart-final",
+      "index": {
+        "local_path": "out/evidence/inspector-gaps-native/chart-final/index.json",
+        "sha256": "261d2e388876c085c58fbb8af3de3be597fa022648873305e6e2137cd874956a"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-gaps-native/chart-final/native-evidence.zip",
+        "sha256": "3c35ce2044358ea147a209a46e4f317eb6e014d4a02e58661f4705b7a381af04"
+      },
+      "preserved_bytes": 57310914,
+      "reports": [
+        {
+          "path": "surface-4456955ada4f/result.json",
+          "sha256": "eac35efd8a15602d6aeb97b86a242ac682a6ec459094b94a8fdd2e15b00a12b3",
+          "family": "CHART-ERASURE",
+          "outcome": "pass",
+          "cases": [
+            {
+              "case": "normal",
+              "outcome": "pass",
+              "record_sha256": "311963217f2a17e54b0a6f90efd60bf16747cf444ef61cb9b139cbd73c9e2f52"
+            },
+            {
+              "case": "ignore-pixels",
+              "outcome": "pass",
+              "record_sha256": "8acce320b303c6626dd959d69f539e0a73b5f3c5cda60b27b9316b4941bd3edd"
+            },
+            {
+              "case": "ignore-accessible",
+              "outcome": "pass",
+              "record_sha256": "65f9d8d378dc163c6b14070ae858cb35e018660f3fe57d01508b23657c3d74e7"
+            }
+          ]
+        }
+      ],
+      "chart_diagnostics": []
+    },
+    {
+      "label": "consumer-final",
+      "index": {
+        "local_path": "out/evidence/inspector-gaps-native/consumer-final/index.json",
+        "sha256": "17bc045f8f96cdde77918720a3aa119fda527b5aa9530bd7d200e2f1904664c6"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-gaps-native/consumer-final/native-evidence.zip",
+        "sha256": "79412d64ffaf9277328cdf98422f7a9f4b00fb571f31b92d4dceb623fcc7f9e1"
+      },
+      "preserved_bytes": 67517804,
+      "reports": [
+        {
+          "path": "network-consumer-eb5afb9f/result.json",
+          "sha256": "43300a9741fec030c82402f30db52c8189b03f458566f76919171b7497a239aa",
+          "family": "NETWORK-CONSUMER",
+          "outcome": "pass",
+          "cases": [
+            {
+              "case": "LIVE",
+              "outcome": "pass"
+            },
+            {
+              "case": "RECEIPT",
+              "outcome": "pass"
+            },
+            {
+              "case": "ORACLE",
+              "outcome": "pass"
+            },
+            {
+              "case": "CLOSE-REAP",
+              "outcome": "pass"
+            },
+            {
+              "case": "POLICY-WITHDRAWAL",
+              "outcome": "pass"
+            },
+            {
+              "case": "ORIGINAL-BYTES",
+              "outcome": "pass"
+            },
+            {
+              "case": "FUTURE",
+              "outcome": "pass"
+            },
+            {
+              "case": "WRONG-ROLE",
+              "outcome": "pass"
+            },
+            {
+              "case": "WRONG-EPOCH",
+              "outcome": "pass"
+            },
+            {
+              "case": "UNSOLICITED-HEARTBEAT",
+              "outcome": "pass"
+            },
+            {
+              "case": "WRONG-PID",
+              "outcome": "pass"
+            }
+          ]
+        }
+      ],
+      "chart_diagnostics": []
+    },
+    {
+      "label": "first-repair",
+      "index": {
+        "local_path": "out/evidence/inspector-gaps-native/first-repair/index.json",
+        "sha256": "efd3d88c6206f8f9aaf2a786b2ea270a3a450f18be73f05459cbba5a0fa067f9"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-gaps-native/first-repair/native-evidence.zip",
+        "sha256": "6768af1d6975b857abea0d26c6ff479d5bb9edadf72d425b66d3eef78ad2b168"
+      },
+      "preserved_bytes": 68309,
+      "reports": [
+        {
+          "path": "inspector-180cd2e5f440/result.json",
+          "sha256": "902c8d0af31ca5548ca9c2ddf95f380263f7dc327cd3026380c25150f11869c5",
+          "family": "SCENE-INSPECTOR",
+          "outcome": "fail",
+          "cases": [
+            {
+              "case": "scalar",
+              "outcome": "pass",
+              "fault_detected": false,
+              "record_sha256": "2a02904d277632dfc6611994acd86b2c38f36400c6d1b14d347223ddfa5d9d38"
+            },
+            {
+              "case": "table",
+              "outcome": "pass",
+              "fault_detected": false,
+              "record_sha256": "f9939ec3b68fb791700cffb417d16f8f896f05f5f5489c59df108f7f31b2b0bd"
+            }
+          ]
+        }
+      ],
+      "chart_diagnostics": [
+        {
+          "path": "inspector-180cd2e5f440/chart/stderr",
+          "sha256": "c5b02b29d63e7c9dfbeebfe182e49917cdc36ee02b652bdebe9dbe4fbe4f6a77",
+          "delivery_lines": [
+            "delivery-chart CONTIGUOUS-GENERATION-JUMP: pass",
+            "delivery-chart COALESCED-SUCCESS: pass",
+            "delivery-chart COALESCED-FAILURE: pass",
+            "delivery-chart DUPLICATE-WIRE: pass",
+            "DUPLICATE-POINT-KEEPS-BREAK: chart receiver admission"
+          ]
+        }
+      ]
+    },
+    {
+      "label": "installed-telemetry-final",
+      "index": {
+        "local_path": "out/evidence/inspector-gaps-native/installed-telemetry-final/index.json",
+        "sha256": "8edc868e43311422537c4093c3f2ba4f3636aea09ee1b74e6f090076401045f7"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-gaps-native/installed-telemetry-final/native-evidence.zip",
+        "sha256": "e0b612993e80d2d26855e196a67eb77351127832601f47d94d08501b4d5427de"
+      },
+      "preserved_bytes": 146094498,
+      "reports": [
+        {
+          "path": "telemetry-frontend-e7cc124680/result.json",
+          "sha256": "6402dc400c33852d25844bc0991e6852e67c098b067a368d574f669ff82a8349",
+          "family": "INSTALLED-TELEMETRY",
+          "outcome": "pass",
+          "cases": [
+            {
+              "case": "LIVE",
+              "outcome": "pass",
+              "record_sha256": "7850255bb8dade169fc3665279101c6192bbff31fa3b4574160314b6803ffd8f"
+            },
+            {
+              "case": "NAVIGATION",
+              "outcome": "pass",
+              "record_sha256": "8cf3d3c19c306df43c3e681701bf832d554e3f81225e9ec3be6c26cba1ccfb56"
+            },
+            {
+              "case": "REPLACEMENT",
+              "outcome": "pass",
+              "record_sha256": "ce27398d2648d4d210eb86113c28153df913c9f2081043ffc5f3a68c7fd95a13"
+            },
+            {
+              "case": "POLICY",
+              "outcome": "pass",
+              "record_sha256": "c329e86efb9ad434f53245a21531ba01c3e974cf46e799a94a154a3b4acb130f"
+            },
+            {
+              "case": "CONFIGURATION-LOSS",
+              "outcome": "pass",
+              "record_sha256": "e6d467bbc248beca5fc1ccad0960af6f24a743b174ea4d0709fd6d6828e84e7c"
+            },
+            {
+              "case": "CLOSE-HELD",
+              "outcome": "pass",
+              "record_sha256": "4cc1481d201cb8e9e2f001dea29433dcd97a944acea8a2a47e026f8f0ef889fb"
+            },
+            {
+              "case": "ORACLE",
+              "outcome": "pass",
+              "record_sha256": "8d1244daaff08d4446ca055e9e26f6971a08f6e4c500548d20b676193a9974fe"
+            }
+          ]
+        }
+      ],
+      "chart_diagnostics": []
+    },
+    {
+      "label": "scene-final",
+      "index": {
+        "local_path": "out/evidence/inspector-gaps-native/scene-final/index.json",
+        "sha256": "6e4825cca1a94e75150bb5a80070e33be9c622e662f6b9a32ea3169c3dd5cbc5"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-gaps-native/scene-final/native-evidence.zip",
+        "sha256": "30946f850f6d81a0dae3c3984571d5f7cb46f235a6614fa9d873d8ea56f3d4a9"
+      },
+      "preserved_bytes": 249003,
+      "reports": [
+        {
+          "path": "inspector-dbb437048ff6/result.json",
+          "sha256": "0a0a0fbcf5c42ab180613b1c78606ffe7ffda76553960e44b9b5c7e435a0219c",
+          "family": "SCENE-INSPECTOR",
+          "outcome": "pass",
+          "cases": [
+            {
+              "case": "scalar",
+              "outcome": "pass",
+              "fault_detected": false,
+              "record_sha256": "537f875d92d1531b7d527eb4123f6b1c0effdad9dd8cf8390795333b9398b487"
+            },
+            {
+              "case": "table",
+              "outcome": "pass",
+              "fault_detected": false,
+              "record_sha256": "c3709c6aa7eb1664b8ac73b7180081348fc26a15d8b9d322969fccaaef078790"
+            },
+            {
+              "case": "chart",
+              "outcome": "pass",
+              "fault_detected": false,
+              "record_sha256": "44dc4c01ac2565e218ab12c6ae3d7ff2aaa72058c179e0a93d4e5cb47ceec2bf"
+            },
+            {
+              "case": "image",
+              "outcome": "pass",
+              "fault_detected": false,
+              "record_sha256": "be3cf6bdb285efe5c77588a07c4626a809bd306acdb286a0490ada0b16432480"
+            },
+            {
+              "case": "translated",
+              "outcome": "pass",
+              "fault_detected": false,
+              "record_sha256": "1f7dafd4b2b726f29d61ea87a20c014bcf75c0fa1b17a9d72df1558a637a872b"
+            },
+            {
+              "case": "retain",
+              "outcome": "pass",
+              "fault_detected": true,
+              "record_sha256": "3e5791b63ba5861921ab629e074b6b3eba0f14a89a78d76cd168c0af94b8026d"
+            },
+            {
+              "case": "wrong-selection",
+              "outcome": "pass",
+              "fault_detected": true,
+              "record_sha256": "5ee5c0cf30f6127058e184f277b185fe48b05448d81df0668951bc7b467c7d00"
+            }
+          ]
+        }
+      ],
+      "chart_diagnostics": [
+        {
+          "path": "inspector-dbb437048ff6/chart/stderr",
+          "sha256": "3297ce16eb0be5c649d4ab46b2ad8dc7c6de06f60711ff7e965d5a96198483d3",
+          "delivery_lines": [
+            "delivery-chart CONTIGUOUS-GENERATION-JUMP: pass",
+            "delivery-chart COALESCED-SUCCESS: pass",
+            "delivery-chart COALESCED-FAILURE: pass",
+            "delivery-chart DUPLICATE-WIRE: pass",
+            "delivery-chart DUPLICATE-POINT-KEEPS-BREAK: pass",
+            "delivery-chart FIRST-LATEST: pass",
+            "delivery-chart REPEATED-DELIVERY: pass"
+          ]
+        }
+      ]
+    }
+  ],
+  "fixture_correction": {
+    "original_sha256": "26d9129e04659876db6b6e56c3cc9a2311a955eed4d9fff30731de7ccbf3cc50",
+    "corrected_sha256": "9ab6bff8d12ada77244af6ae421c83b20af329e81613ce0d3bb4b480d082dcda",
+    "expected_points_and_pending_breaks_unchanged": true,
+    "reason": "DUPLICATE-POINT-KEEPS-BREAK originally violated the established measurement high-water rule (100,200,100). Replace only the skipped second input with a failed acquisition retaining measurement/value 100/10. Preserve both failed attempts; do not weaken chronology or expected rows."
+  },
+  "environments": [
+    {
+      "local_path": "out/evidence/inspector-gaps/environment-before.json",
+      "sha256": "db989aee5bf3e45cb7fdb6d3a0d20de8a02822ce59a18f6eb8777706dd01c9d0"
+    },
+    {
+      "local_path": "out/evidence/inspector-gaps/environment-after.json",
+      "sha256": "22420ca50a20fa3a495f1274cf76e969c3b52b934e4c9fb9498c1035be593251"
+    }
+  ],
+  "qualification": {
+    "controlled_chart_scenarios": 7,
+    "original_inspector_modes": 7,
+    "installed_telemetry_cases": 7,
+    "network_consumer_cases": 11,
+    "chart_erasure_cases": 3,
+    "shared_ctest_count_per_profile": 111,
+    "legacy_import_checks": 2
+  },
+  "remaining": [
+    "Maximum live table/chart semantic workloads and updates",
+    "Human accessibility and long-text usability",
+    "Physical hotplug and other native adapters",
+    "Desktop/lifecycle composition and protected deployment",
+    "All five complete 0.1.0 editions and release gates"
+  ],
+  "specification_checks": {
+    "original": [
+      {
+        "step": "budget",
+        "command": [
+          "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+          "-X",
+          "utf8",
+          "source/build/check_workspace_budget.py",
+          "--action",
+          "test"
+        ],
+        "started_at": "2026-10-10T05:33:49.737112+00:00",
+        "finished_at": "2026-10-10T05:33:55.807378+00:00",
+        "exit": 0,
+        "stdout_sha256": "b80f9c1b248fa723f46b9e9e3dd789ac78aeda633c7b706de38b7354b70bef10",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "step": "generate",
+        "command": [
+          "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+          "-X",
+          "utf8",
+          "spec/tools/specctl.py",
+          "generate"
+        ],
+        "started_at": "2026-10-10T05:33:55.808003+00:00",
+        "finished_at": "2026-10-10T05:33:56.070728+00:00",
+        "exit": 0,
+        "stdout_sha256": "433bc9cf0ed9aecb0fd853cd594a7f65c16c5c44afa00c08968558a32d5656c9",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "step": "validate",
+        "command": [
+          "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+          "-X",
+          "utf8",
+          "spec/tools/specctl.py",
+          "validate",
+          "--schemas"
+        ],
+        "started_at": "2026-10-10T05:33:56.070976+00:00",
+        "finished_at": "2026-10-10T05:33:57.907271+00:00",
+        "exit": 0,
+        "stdout_sha256": "bfe62d4aa45e638b673f575806d5717d00bde3feee3631d2b3ed4c922f7383ac",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "step": "tools",
+        "command": [
+          "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+          "-X",
+          "utf8",
+          "spec/tools/tests/test_specctl.py",
+          "-v"
+        ],
+        "started_at": "2026-10-10T05:33:57.907554+00:00",
+        "finished_at": "2026-10-10T05:34:59.678398+00:00",
+        "exit": 1,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "680216812399f2e4ab4993edfced8256ab93d60748a55575d819b158588edf1d"
+      }
+    ],
+    "isolated": [
+      {
+        "step": "budget",
+        "command": [
+          "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+          "-X",
+          "utf8",
+          "source/build/check_workspace_budget.py",
+          "--action",
+          "test"
+        ],
+        "environment": {
+          "TMP": "D:\\Projects\\SysPane\\syspane\\out\\test-tmp\\inspector-gaps",
+          "TEMP": "D:\\Projects\\SysPane\\syspane\\out\\test-tmp\\inspector-gaps",
+          "GIT_CEILING_DIRECTORIES": "D:/Projects/SysPane/syspane/out/test-tmp/inspector-gaps"
+        },
+        "started_at": "2026-10-10T05:35:41.609954+00:00",
+        "finished_at": "2026-10-10T05:35:43.592482+00:00",
+        "exit": 0,
+        "stdout_sha256": "a3cafc780bfe0416dd5167bfdd7d5e39e07703f8158f1bf09eb481356ad39988",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "step": "generate",
+        "command": [
+          "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+          "-X",
+          "utf8",
+          "spec/tools/specctl.py",
+          "generate"
+        ],
+        "environment": {
+          "TMP": "D:\\Projects\\SysPane\\syspane\\out\\test-tmp\\inspector-gaps",
+          "TEMP": "D:\\Projects\\SysPane\\syspane\\out\\test-tmp\\inspector-gaps",
+          "GIT_CEILING_DIRECTORIES": "D:/Projects/SysPane/syspane/out/test-tmp/inspector-gaps"
+        },
+        "started_at": "2026-10-10T05:35:43.593393+00:00",
+        "finished_at": "2026-10-10T05:35:43.834498+00:00",
+        "exit": 0,
+        "stdout_sha256": "0fb71ab325e6eecde407f8f3e8d5ec3222d246818f7b3c455b910b02284591b6",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "step": "validate",
+        "command": [
+          "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+          "-X",
+          "utf8",
+          "spec/tools/specctl.py",
+          "validate",
+          "--schemas"
+        ],
+        "environment": {
+          "TMP": "D:\\Projects\\SysPane\\syspane\\out\\test-tmp\\inspector-gaps",
+          "TEMP": "D:\\Projects\\SysPane\\syspane\\out\\test-tmp\\inspector-gaps",
+          "GIT_CEILING_DIRECTORIES": "D:/Projects/SysPane/syspane/out/test-tmp/inspector-gaps"
+        },
+        "started_at": "2026-10-10T05:35:43.834748+00:00",
+        "finished_at": "2026-10-10T05:35:45.634105+00:00",
+        "exit": 0,
+        "stdout_sha256": "bfe62d4aa45e638b673f575806d5717d00bde3feee3631d2b3ed4c922f7383ac",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "step": "tools",
+        "command": [
+          "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+          "-X",
+          "utf8",
+          "spec/tools/tests/test_specctl.py",
+          "-v"
+        ],
+        "environment": {
+          "TMP": "D:\\Projects\\SysPane\\syspane\\out\\test-tmp\\inspector-gaps",
+          "TEMP": "D:\\Projects\\SysPane\\syspane\\out\\test-tmp\\inspector-gaps",
+          "GIT_CEILING_DIRECTORIES": "D:/Projects/SysPane/syspane/out/test-tmp/inspector-gaps"
+        },
+        "started_at": "2026-10-10T05:35:45.634424+00:00",
+        "finished_at": "2026-10-10T05:36:44.782894+00:00",
+        "exit": 0,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "8a105702d0ada805ad9147b6064cc35b05328374aaa64bb02871bce8fdc9d331"
+      }
+    ],
+    "schemas": 51,
+    "fixtures": 183,
+    "tools": {
+      "total": 62,
+      "passed": 60,
+      "skipped": 2
+    },
+    "failure": "A no-Git context fixture under the owned out/ temporary root inherited the checkout HEAD. Preserve the failing run; scope GIT_CEILING_DIRECTORIES to that temporary root for the unchanged suite. Product code and test expectations are unchanged.",
+    "logs": [
+      {
+        "local_path": "out/evidence/inspector-gaps/spec-checks/budget.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "local_path": "out/evidence/inspector-gaps/spec-checks/budget.stdout",
+        "sha256": "b80f9c1b248fa723f46b9e9e3dd789ac78aeda633c7b706de38b7354b70bef10"
+      },
+      {
+        "local_path": "out/evidence/inspector-gaps/spec-checks/coordinator.py",
+        "sha256": "8fe0c69ce6fc83d6d35e60891e56912f14c3529f597e4e8f21906768f3f1c5fb"
+      },
+      {
+        "local_path": "out/evidence/inspector-gaps/spec-checks/generate.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "local_path": "out/evidence/inspector-gaps/spec-checks/generate.stdout",
+        "sha256": "433bc9cf0ed9aecb0fd853cd594a7f65c16c5c44afa00c08968558a32d5656c9"
+      },
+      {
+        "local_path": "out/evidence/inspector-gaps/spec-checks/result.json",
+        "sha256": "86fca73a8d39d918f4613857e7dcbc9cc711337b7cbe9d1a05e1bccdcfc23c25"
+      },
+      {
+        "local_path": "out/evidence/inspector-gaps/spec-checks/tools.stderr",
+        "sha256": "680216812399f2e4ab4993edfced8256ab93d60748a55575d819b158588edf1d"
+      },
+      {
+        "local_path": "out/evidence/inspector-gaps/spec-checks/tools.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "local_path": "out/evidence/inspector-gaps/spec-checks/validate.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "local_path": "out/evidence/inspector-gaps/spec-checks/validate.stdout",
+        "sha256": "bfe62d4aa45e638b673f575806d5717d00bde3feee3631d2b3ed4c922f7383ac"
+      },
+      {
+        "local_path": "out/evidence/inspector-gaps/spec-checks-isolated/budget.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "local_path": "out/evidence/inspector-gaps/spec-checks-isolated/budget.stdout",
+        "sha256": "a3cafc780bfe0416dd5167bfdd7d5e39e07703f8158f1bf09eb481356ad39988"
+      },
+      {
+        "local_path": "out/evidence/inspector-gaps/spec-checks-isolated/generate.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "local_path": "out/evidence/inspector-gaps/spec-checks-isolated/generate.stdout",
+        "sha256": "0fb71ab325e6eecde407f8f3e8d5ec3222d246818f7b3c455b910b02284591b6"
+      },
+      {
+        "local_path": "out/evidence/inspector-gaps/spec-checks-isolated/result.json",
+        "sha256": "8e327a34be316db8ce627f63fe970b6dcd011438fe2c9b751a75e632fde6d168"
+      },
+      {
+        "local_path": "out/evidence/inspector-gaps/spec-checks-isolated/tools.stderr",
+        "sha256": "8a105702d0ada805ad9147b6064cc35b05328374aaa64bb02871bce8fdc9d331"
+      },
+      {
+        "local_path": "out/evidence/inspector-gaps/spec-checks-isolated/tools.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "local_path": "out/evidence/inspector-gaps/spec-checks-isolated/validate.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "local_path": "out/evidence/inspector-gaps/spec-checks-isolated/validate.stdout",
+        "sha256": "bfe62d4aa45e638b673f575806d5717d00bde3feee3631d2b3ed4c922f7383ac"
+      }
+    ]
+  }
+}

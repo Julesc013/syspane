@@ -18,6 +18,10 @@ loss and clears revoked data. Collection follows the active inspector and stops
 on navigation or exit. Complete desktop integration and release qualification
 remain open.
 
+The [chart continuity checks](spec/delivery/inspector-delivery-gaps-handoff.md)
+now verify that skipped display updates break chart lines instead of implying
+continuous observations. Maximum live workloads still need qualification.
+
 [Prepared editor previews](spec/delivery/prepared-surface-handoff.md) now reuse
 validated authored snapshots from existing workers. All seven ordinary maximum-input
 GUI timing and erasure cases pass after this repair, with their original limits.

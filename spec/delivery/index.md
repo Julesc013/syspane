@@ -69,6 +69,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Initial editor preview readiness handoff](initial-preview-handoff.md) — First composition now waits for drawing or guarded earlier input; fixed timing failures remain.
 - [Installed inspector image and logical-monitor qualification](inspector-assets-handoff.md) — Twelve native cases with unchanged product binaries and preserved observer failures.
 - [Prepared Settings and authored inspector limits](inspector-authored-limits-handoff.md) — Move measured Settings preparation off GTK and qualify the unchanged authored-limit oracles.
+- [Inspector chart continuity after skipped delivery](inspector-delivery-gaps-handoff.md) — Preserve a reproduced false chart join and verify explicit gaps across coalesced complete frames.
 - [Inspector telemetry receiver and bounded delivery](inspector-telemetry-handoff.md) — Native consumer evidence and the remaining ordinary-inspector integration.
 - [Installed native scene editor](installed-editor-handoff.md) — Real frontend authoring, authenticated persistence and shared verified helper ownership.
 - [Installed saved-scene inspector](installed-inspector-handoff.md) — Connect native scene inspection to authenticated saved profiles and the verified image worker.

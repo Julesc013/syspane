@@ -34,10 +34,15 @@ void run(const std::string& name,const std::string& root){
     CHECK(receiver.receive(first,1001,tick(100)).code==D::accepted);
     if(name=="COALESCE"){
         const auto saved=receiver.view(1001).frame;CHECK(saved&&saved->bytes==first&&saved->received_ms==1001&&saved->received_tick==tick(100));
+        CHECK(saved->ordinal==1);
         const auto second=full(root,2,110).dump();CHECK(receiver.receive(second,1002,tick(110)).code==D::accepted);
         CHECK(receiver.view(1002).frame->bytes==second);CHECK(saved->bytes==first);
+        CHECK(receiver.view(1002).frame->ordinal==2&&saved->ordinal==1);
         CHECK(receiver.receive(first,1003,tick(120)).code==D::duplicate);
         CHECK(receiver.view(1003).frame->bytes==second);CHECK(receiver.view(1003).frame->received_tick==tick(110));
+        CHECK(receiver.view(1003).frame->ordinal==2);
+        CHECK(receiver.receive(full(root,99,130).dump(),1004,tick(130)).code==D::accepted);
+        CHECK(receiver.view(1004).frame->ordinal==3);
     }else if(name=="LEASE"){
         CHECK(receiver.receive(full(root,2,110).dump(),3999,tick(110)).code==D::accepted);
         const auto queued=receiver.view(3999);CHECK(queued.live(current,3999));CHECK(!queued.live(current,4000));
@@ -60,6 +65,8 @@ void run(const std::string& name,const std::string& root){
     }else if(name=="SCOPE"){
         const auto queued=receiver.view(1001);CHECK(queued.deliverable(current,1001));
         CHECK(!queued.deliverable({12,4},1001));CHECK(!queued.deliverable({11,5},1001));CHECK(!queued.deliverable({},1001));
+        auto invalid=queued;auto frame=*queued.frame;frame.ordinal=0;
+        invalid.frame=std::make_shared<const r::DeliveredFrame>(std::move(frame));CHECK(!invalid.deliverable(current,1001));
         receiver.disconnect(1002);CHECK(!receiver.view(1002).frame);CHECK(!receiver.view(1002).clock);
         CHECK(queued.frame->bytes==first); // A UI may retain only its own already displayed state.
     }else if(name=="POLICY"){

@@ -45,6 +45,10 @@ Keep one immutable latest complete frame of at most 1 MiB, plus the existing
 bounded model and at most 16 pending frames/2 MiB. A newer accepted complete frame
 may replace an older undelivered frame; no delta or partial-table merge is invented.
 Each frame retains the original bytes, receipt time and receipt measurement tick.
+The [delivery continuity boundary](w-11-inspector-delivery-gaps.md) also records a
+receiver-local admission ordinal. Before importing a newer coalesced frame, the
+inspector marks skipped admission context as a chart break; source generations
+and sampling cadence cannot substitute for that ordinal.
 Queue access carries the exact profile and supervisor generation; stale producers
 cannot publish into a replacement profile. No operational payload is logged by
 production. Raw test observations stay in ignored private evidence.

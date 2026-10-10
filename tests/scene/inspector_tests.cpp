@@ -1,6 +1,7 @@
 #include "image_fixture.hpp"
 #include "scene_inspector.hpp"
 #include "inspector_delivery_tests.hpp"
+#include "inspector_delivery_chart_tests.hpp"
 #include "scene_inspector_model.hpp"
 #include <gtk/gtk.h>
 #include <glib-unix.h>
@@ -75,6 +76,7 @@ gboolean timer(gpointer data){auto& w=*static_cast<Window*>(data);try{w.view->po
 int window(const std::string& root,const std::string& mode){g_set_prgname("syspane-scene-inspector");g_set_application_name("SysPane Scene Inspector");need(gtk_init_check(nullptr,nullptr),"native GTK unavailable");Window w;w.root=root;w.mode=mode;
     if(mode=="image")inspector_image_owner::run(root);
     if(mode=="scalar")inspector_delivery_test::run(root);
+    if(mode=="chart")inspector_delivery_chart_test::run(root);
     w.window=gtk_window_new(GTK_WINDOW_TOPLEVEL);gtk_window_set_title(GTK_WINDOW(w.window),"SysPane Scene Inspector");gtk_window_set_default_size(GTK_WINDOW(w.window),740,540);gtk_window_move(GTK_WINDOW(w.window),0,0);
     ui::SceneInspector::Translator translate;if(mode=="translated"){const auto labels=read(root+"/../../../tests/scene","inspector-cases.json")["translation"];translate=[labels](const std::string& id){return labels.at(id).get<std::string>();};}
     w.view=std::make_unique<ui::SceneInspector>(c::Authority{true,"desktop",{"desktop"}},inspector_policy(),w.cfg(),std::vector<v::SurfaceProvider>{provider()},image_worker_path(),translate);

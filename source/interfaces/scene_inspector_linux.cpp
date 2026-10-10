@@ -122,6 +122,13 @@ void SceneInspector::deliver(const d::TelemetryDelivery& value,d::DeliveryScope 
         }
         ticks[binding.producer]=*value.clock;
         if(i.delivery_frame!=value.frame){
+            if(i.delivery_frame){
+                const auto before=i.delivery_frame->ordinal,after=value.frame->ordinal;
+                if(after<=before){detach();return;}
+                // Complete-state replacement is allowed, but missing admission
+                // context cannot establish chart continuity across that loss.
+                if(after-before>1&&i.surface->gap(binding.producer,i.delivery_token,binding.policy_revision,now)!=d::DataCode::accepted){detach();return;}
+            }
             const auto accepted=i.surface->receive(binding.producer,i.delivery_token,binding.policy_revision,value.frame->bytes,now,*value.clock);
             if(accepted.code!=d::DataCode::accepted&&accepted.code!=d::DataCode::duplicate){detach();return;}
             i.delivery_frame=value.frame;

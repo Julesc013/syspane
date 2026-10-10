@@ -1,5 +1,16 @@
 # Developer setup and checks
 
+The [inspector continuity package](../../spec/delivery/packages/w-11-inspector-delivery-gaps.md)
+adds seven controlled chart-delivery scenarios inside the existing native inspector
+runner. After workspace preflight and ordinary configure/build, run
+`ctest --preset linux-x64-gcc13 -R '^native[.]SCENE-INSPECTOR' --output-on-failure`.
+Run `native.INSTALLED-TELEMETRY`, `native.NETWORK-CONSUMER`, `native.SCENE-CHART`
+and `native.CHART-ERASURE` separately, archiving completed native evidence between
+families. On all three development profiles run
+`ctest --preset <profile> -R '^(delivery|data|measured|telemetry|scene|composition)[.]' --output-on-failure`.
+The controlled chart rows prove continuity handling, not maximum-input performance
+or real acquisition; retain the separate native-counter and accessibility evidence.
+
 The [authored inspector package](../../spec/delivery/packages/w-11-inspector-authored-limits.md)
 qualifies full authored/static inputs and prepares initial Settings on the existing
 client worker. After workspace preflight and ordinary configure/build, run:

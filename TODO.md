@@ -25,6 +25,7 @@ telemetry is now integrated; preserve prior failures and all five full release e
 - [x] Qualify installed image input/refusal, summary/navigation/reopen, policy erasure, held-child exit and real logical monitor changes. See the [handoff](spec/delivery/inspector-assets-handoff.md).
 - [x] Prepare initial Settings on the client worker and qualify authored/static inspector limits and exact-profile adoption. Preserve original failures; see the [handoff](spec/delivery/inspector-authored-limits-handoff.md).
 - [ ] Qualify maximum live table/chart semantic workloads, human accessibility and long-text usability, physical hotplug and other native backends, then desktop/lifecycle composition.
+- [x] Forward coalesced inspector delivery gaps to chart history; preserve the reproduced false join and verify seven exact native scenarios and existing regressions. See the [handoff](spec/delivery/inspector-delivery-gaps-handoff.md).
 
 ## Completed specification work
 

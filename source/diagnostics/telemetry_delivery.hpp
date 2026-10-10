@@ -7,6 +7,9 @@ struct DeliveredFrame {
     std::string bytes;
     std::uint64_t received_ms;
     model::Tick received_tick;
+    // Receiver-local admission order, independent of snapshot generation.
+    // Zero is invalid; duplicate wire frames never advance this ordinal.
+    std::uint64_t ordinal=0;
 };
 // A bounded, immutable transfer from a serialized native receiver to the UI.
 // The UI must supply its CURRENT scope at every use, including refresh without
@@ -38,7 +41,7 @@ public:
 private:
     DataView model_;
     TelemetryDelivery delivery_;
-    std::uint64_t token_=0,last_ms_=0;
+    std::uint64_t token_=0,last_ms_=0,ordinal_=0;
     DataCode advance(std::uint64_t now);
     bool deadline(std::uint64_t now);
 };

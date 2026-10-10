@@ -1,0 +1,44 @@
+{
+  "schema_version": "0.1.0",
+  "scope": "Controlled native GTK chart delivery; synthetic measurements, no native acquisition claim.",
+  "cases": [
+    {"id": "CONTIGUOUS-GENERATION-JUMP", "steps": [
+      {"generation": 1, "time": 100, "value": 10, "points": [[100, 10, 1, "start"]]},
+      {"generation": 50, "time": 200, "value": 20, "points": [[100, 10, 1, "start"], [200, 20, 50, "join"]]}
+    ]},
+    {"id": "COALESCED-SUCCESS", "steps": [
+      {"generation": 1, "time": 100, "value": 10, "points": [[100, 10, 1, "start"]]},
+      {"generation": 2, "time": 200, "value": 20},
+      {"generation": 3, "time": 300, "value": 30, "points": [[100, 10, 1, "start"], [300, 30, 3, "start"]]},
+      {"generation": 4, "time": 400, "value": 40, "points": [[100, 10, 1, "start"], [300, 30, 3, "start"], [400, 40, 4, "join"]]}
+    ]},
+    {"id": "COALESCED-FAILURE", "steps": [
+      {"generation": 1, "time": 100, "value": 10, "points": [[100, 10, 1, "start"]]},
+      {"generation": 2, "time": 200, "value": 20, "failed": true},
+      {"generation": 3, "time": 300, "value": 30, "points": [[100, 10, 1, "start"], [300, 30, 3, "start"]]}
+    ]},
+    {"id": "DUPLICATE-WIRE", "steps": [
+      {"generation": 1, "time": 100, "value": 10, "points": [[100, 10, 1, "start"]]},
+      {"generation": 1, "time": 100, "value": 10, "duplicate": true},
+      {"generation": 2, "time": 200, "value": 20, "points": [[100, 10, 1, "start"], [200, 20, 2, "join"]]}
+    ]},
+    {"id": "DUPLICATE-POINT-KEEPS-BREAK", "steps": [
+      {"generation": 1, "time": 100, "value": 10, "points": [[100, 10, 1, "start"]]},
+      {"generation": 2, "time": 100, "value": 10, "failed": true},
+      {"generation": 3, "time": 100, "value": 10, "points": [[100, 10, 1, "start"]], "gap_pending": true},
+      {"generation": 4, "time": 300, "value": 30, "points": [[100, 10, 1, "start"], [300, 30, 4, "start"]]}
+    ]},
+    {"id": "FIRST-LATEST", "steps": [
+      {"generation": 1, "time": 100, "value": 10},
+      {"generation": 2, "time": 200, "value": 20},
+      {"generation": 3, "time": 300, "value": 30, "points": [[300, 30, 3, "start"]]}
+    ]},
+    {"id": "REPEATED-DELIVERY", "steps": [
+      {"generation": 1, "time": 100, "value": 10, "points": [[100, 10, 1, "start"]]},
+      {"generation": 2, "time": 200, "value": 20},
+      {"generation": 3, "time": 300, "value": 30, "points": [[100, 10, 1, "start"], [300, 30, 3, "start"]]},
+      {"generation": 3, "time": 300, "value": 30, "duplicate": true, "points": [[100, 10, 1, "start"], [300, 30, 3, "start"]]},
+      {"generation": 4, "time": 400, "value": 40, "points": [[100, 10, 1, "start"], [300, 30, 3, "start"], [400, 40, 4, "join"]]}
+    ]}
+  ]
+}
