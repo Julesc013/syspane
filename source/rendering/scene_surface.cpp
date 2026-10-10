@@ -224,12 +224,16 @@ struct SceneSurface::Impl {
             auto& raster=rasters.at(node.id);auto found=std::find_if(next->displays.begin(),next->displays.end(),[&](const auto& d){return d.display==node.display;});
             need(found!=next->displays.end(),"surface.display");auto& d=*found;const auto x=node.pixels.x-d.x,y=node.pixels.y-d.y;
             need(x>=0&&y>=0&&x+raster.width<=d.width&&y+raster.height<=d.height,"surface.layout");
-            for(unsigned row=0;row<raster.height;++row)for(unsigned col=0;col<raster.width;++col){
-                const auto src=(static_cast<std::size_t>(row)*raster.width+col)*4;
-                const auto dst=(static_cast<std::size_t>(y+row)*d.width+static_cast<std::size_t>(x+col))*4;
-                const auto inverse=255-raster.rgba[src+3];
-                for(unsigned channel=0;channel<4;++channel)d.rgba[dst+channel]=static_cast<unsigned char>(raster.rgba[src+channel]+(d.rgba[dst+channel]*inverse+127)/255);
-            }
+            for(unsigned row=0;row<raster.height;++row){
+                const auto* input=raster.rgba.data()+static_cast<std::size_t>(row)*raster.width*4;
+                auto* target=d.rgba.data()+(static_cast<std::size_t>(y+row)*d.width+static_cast<std::size_t>(x))*4;
+                for(unsigned col=0;col<raster.width;++col,input+=4,target+=4){
+                const auto alpha=input[3];
+                if(!alpha&&!(input[0]|input[1]|input[2]))continue;
+                if(alpha==255){for(unsigned channel=0;channel<4;++channel)target[channel]=input[channel];continue;}
+                const auto inverse=255-alpha;
+                for(unsigned channel=0;channel<4;++channel)target[channel]=static_cast<unsigned char>(input[channel]+(target[channel]*inverse+127)/255);
+            }}
         }
         for(const auto& node:next->layout.nodes)next->widgets.push_back(std::move(texts.at(node.id)));
         return next;

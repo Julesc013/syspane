@@ -141,13 +141,15 @@ TextRaster render_native(const TextRequest& r,FontMap& map){
     const auto stride=cairo_image_surface_get_stride(surface.get());
     if(!data||stride<static_cast<int>(w*4))throw Error("text.native");
     result.rgba.resize(static_cast<std::size_t>(w*h*4));
-    for(U y=0;y<h;++y)for(U x=0;x<w;++x){
-        std::uint32_t pixel=0;std::memcpy(&pixel,data+y*stride+x*4,4);
-        const auto offset=static_cast<std::size_t>((y*w+x)*4);
-        result.rgba[offset]=static_cast<unsigned char>(pixel>>16);
-        result.rgba[offset+1]=static_cast<unsigned char>(pixel>>8);
-        result.rgba[offset+2]=static_cast<unsigned char>(pixel);
-        result.rgba[offset+3]=static_cast<unsigned char>(pixel>>24);
+    for(U y=0;y<h;++y){
+        const auto* input=data+y*stride;auto* target=result.rgba.data()+static_cast<std::size_t>(y*w*4);
+        for(U x=0;x<w;++x,input+=4,target+=4){
+            std::uint32_t pixel=0;std::memcpy(&pixel,input,4);
+            target[0]=static_cast<unsigned char>(pixel>>16);
+            target[1]=static_cast<unsigned char>(pixel>>8);
+            target[2]=static_cast<unsigned char>(pixel);
+            target[3]=static_cast<unsigned char>(pixel>>24);
+        }
     }
     return result;
 }

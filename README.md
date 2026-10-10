@@ -11,6 +11,11 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
+The [maximum live-table checkpoint](spec/delivery/inspector-live-tables-handoff.md)
+adds exact native workload tests and preserves a remaining GUI timing failure.
+Maximum-table performance is not yet qualified; chart/mixed workloads and complete
+native editions remain unfinished.
+
 The [installed live inspector](spec/delivery/installed-telemetry-handoff.md) now
 shows real network counters and rates from the independently supervised Linux
 service. It preserves measurement identity, reports retained data after source

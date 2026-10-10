@@ -489,7 +489,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "82dcce406db46f94c9d0bd125758d976908fa05947e2061f34411b89a6ab1c6e"
+      "sha256": "2aca4ceb204b22f5feff0222021f32163abb666f12b6eb9653f7c436009e3790"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -1045,6 +1045,16 @@
         "SP-W11-INSPECTOR-DELIVERY-GAPS"
       ],
       "sha256": "dea7f4ff55e42a1e3165b30382638a5bac0d0674aea8c52b5d04ebb0e6db0aa2"
+    },
+    {
+      "id": "SP-INSPECTOR-LIVE-TABLES-HANDOFF",
+      "path": "delivery/inspector-live-tables-handoff.md",
+      "title": "Installed live table workloads",
+      "description": "Preserve maximum-table GUI failures, exact native results and composition repairs.",
+      "requires": [
+        "SP-W11-INSPECTOR-LIVE-TABLES"
+      ],
+      "sha256": "975fc162ead4e9d6dad1d4e872b8163ea20c414cb0a7835905be659fbcccfffa"
     },
     {
       "id": "SP-INSPECTOR-TELEMETRY-HANDOFF",
@@ -2542,6 +2552,18 @@
         "SP-W11-SCENE-INSPECTOR"
       ],
       "sha256": "37b87cfbc644ab0b494db25f46259376af05f8b95bd6b4d9f29e90320a568842"
+    },
+    {
+      "id": "SP-W11-INSPECTOR-LIVE-TABLES",
+      "path": "delivery/packages/w-11-inspector-live-tables.md",
+      "title": "Installed inspector live table limits",
+      "description": "Exercise complete maximum table rows and cells, live replacement and explicit refusal through the installed frontend.",
+      "requires": [
+        "SP-W11-INSPECTOR-TELEMETRY",
+        "SP-W11-INSPECTOR-AUTHORED-LIMITS",
+        "SP-W11-INSPECTOR-DELIVERY-GAPS"
+      ],
+      "sha256": "8ee12683a1758a85b8260d5f837267d2dddb4c940d681fc52cfadfc23ebe3ac8"
     },
     {
       "id": "SP-W11-INSPECTOR-TELEMETRY",

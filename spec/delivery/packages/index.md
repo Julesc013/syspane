@@ -99,6 +99,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Installed inspector image and topology qualification](w-11-inspector-assets.md) — Exercise pinned saved images, exact native child ownership and actual monitor changes.
 - [Installed inspector authored-input responsiveness](w-11-inspector-authored-limits.md) — Qualify complete visible maximum authored scenes and explicit frame refusal on the real GTK loop.
 - [Inspector chart continuity across coalesced delivery](w-11-inspector-delivery-gaps.md) — Forward known skipped admission context without inventing samples or changing the bounded latest-state receiver.
+- [Installed inspector live table limits](w-11-inspector-live-tables.md) — Exercise complete maximum table rows and cells, live replacement and explicit refusal through the installed frontend.
 - [W-11 installed inspector telemetry delivery](w-11-inspector-telemetry.md) — Connect supervised measured network acquisition to the saved-scene inspector.
 - [Installed native scene editor](w-11-installed-editor.md) — Connect native scene authoring to the actual frontend, verified helpers and authenticated commands.
 - [Installed scene inspector ownership](w-11-installed-inspector.md) — Compose saved scenes, native navigation and verified image tasks in the ordinary frontend.

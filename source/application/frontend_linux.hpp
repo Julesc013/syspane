@@ -72,7 +72,7 @@ private:
 // Optional experiment observer: tick work and excess interval delay, in microseconds.
 // Returning false fails the host and initiates ordinary supervised shutdown.
 using FrontendTimingObserver=std::function<bool(std::uint64_t,std::uint64_t)>;
-enum class FrontendPhase : unsigned {take=1,withdrawal,reply,reply_reload,populate,editor,settings,recovery,attach,topology,controls};
+enum class FrontendPhase : unsigned {take=1,withdrawal,reply,reply_reload,populate,editor,settings,recovery,attach,topology,controls,inspector,inspector_prepare};
 struct FrontendPhaseObservation {std::uint64_t tick;FrontendPhase phase;std::uint64_t microseconds;bool completed;};
 // Optional synchronous diagnosis only. Nested durations overlap. Refusal fails
 // the host and disables observation so ordinary shutdown can still finish.

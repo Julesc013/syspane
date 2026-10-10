@@ -1,5 +1,26 @@
 # Developer setup and checks
 
+The [live table package](../../spec/delivery/packages/w-11-inspector-live-tables.md)
+qualifies 64 rows and 256 cells through the installed inspector with a compiled
+synthetic acquisition fixture. After the ordinary preflight/configure/build, run:
+
+```sh
+ctest --preset linux-x64-gcc13 -R '^native[.]INSPECTOR-LIVE-TABLES$' --output-on-failure
+ctest --preset linux-x64-gcc13 -R '^configuration[.]FRONTEND-PHASE-DECODER$' --output-on-failure
+```
+
+The native family owns a 1600-by-2048 Xvfb screen and retains the original 100-ms
+GUI and 200-ms erasure bounds. Counters are controlled inputs; real native
+acquisition remains covered separately. Use
+`tests/configuration/native_inspector_live_table_phases.py` with the production
+frontend, timing fixture, helper fixture and owned evidence directory to attribute
+costs with the same oracle. Incomplete phase journals remain failed diagnostics.
+Archive each completed family before the next workspace reservation. The
+[handoff](../../spec/delivery/inspector-live-tables-handoff.md) records failures and
+qualification limits. Maximum chart/mixed workloads and human readability remain
+separate required work.
+
+
 The [inspector continuity package](../../spec/delivery/packages/w-11-inspector-delivery-gaps.md)
 adds seven controlled chart-delivery scenarios inside the existing native inspector
 runner. After workspace preflight and ordinary configure/build, run

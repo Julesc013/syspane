@@ -41,9 +41,9 @@ def scene(mode):
     return value, expected
 
 
-def generation(root, mode):
+def generation(root, mode, authored=None, font_size=None):
     initial = json.loads((root / 'tests/configuration/profile-startup-cases.json').read_bytes())
-    document, expected = scene(mode)
+    document, expected = scene(mode) if authored is None else (authored, [])
     packages = copy.deepcopy(initial['packages'])
     theme = next(p for p in packages if 'theme.json' in p['assets'])
     scene_package = next(p for p in packages if 'scene.json' in p['assets'])
@@ -61,12 +61,17 @@ def generation(root, mode):
         package['assets'] = {kind + '.json': raw.decode()}; package['manifest'] = encode(manifest).decode()
         return dict(id=value[kind + '_id'], version='0.1.0', sha256=sha(raw))
 
+    theme_pin = initial['theme_pin']
+    if font_size is not None:
+        theme_document = json.loads(theme['assets']['theme.json'])
+        theme_document['font']['size_dip'] = font_size
+        theme_pin = replace(theme, 'theme', theme_document)
     scene_pin = replace(scene_package, 'scene', document)
     preset = json.loads(preset_package['assets']['preset.json'])
-    preset['scene'] = scene_pin; preset['theme'] = initial['theme_pin']
+    preset['scene'] = scene_pin; preset['theme'] = theme_pin
     preset_pin = replace(preset_package, 'preset', preset, [pin(theme), pin(scene_package)])
     index = dict(version='0.1.0', selection=dict(package=pin(preset_package), preset=preset_pin),
-                 theme=initial['theme_pin'], packages=sorted(pin(p)['sha256'] for p in packages))
+                 theme=theme_pin, packages=sorted(pin(p)['sha256'] for p in packages))
     files = {'settings.json': encode(initial['documents']['settings']), 'scene.json': encode(document), 'resources.json': encode(index)}
     files['manifest.json'] = encode(dict(version='0.5.0', revision='0', identity=None,
                                         **{name: sha(files[name + '.json']) for name in ('settings', 'scene', 'resources')}))

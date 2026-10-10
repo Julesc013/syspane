@@ -9,6 +9,11 @@ void need(bool ok,const char* why){if(!ok)throw protocol::Error(why);}
 int rank(Code c){switch(c){case Code::matched:return 0;case Code::empty:return 1;case Code::pending:return 2;case Code::unsupported:return 3;case Code::ambiguous:return 4;case Code::capacity:return 5;case Code::invalid:return 6;default:return 7;}}
 const char* label(Code c){switch(c){case Code::pending:return "Waiting";case Code::unsupported:return "Unsupported field";case Code::ambiguous:return "Ambiguous selection";case Code::capacity:return "Capacity exceeded";default:return "Invalid source";}}
 Key key(const scene::BindingRow& r){return {r.producer,r.epoch,r.entity};}
+std::size_t cell_bytes(const SurfaceCell& cell){
+    std::size_t size=cell.text.size()+cell.accessible.size();
+    for(const auto& block:cell.blocks)size+=block.role.size()+block.text.size();
+    return size;
+}
 }
 std::size_t surface_text_bytes(const SurfaceText& s){
     std::size_t size=s.id.size()+s.kind.size()+s.title.size()+s.text.size()+s.accessible.size();
@@ -19,7 +24,7 @@ std::size_t surface_text_bytes(const SurfaceText& s){
         if(s.chart->identity){const auto& i=*s.chart->identity;size+=i.producer.size()+i.epoch.size()+i.entity.size()+i.field.size()+i.source.size()+i.unit.size()+i.clock_id.size()+i.clock_scope.size();}}
     if(s.image)size+=s.image->state.size()+s.image->asset.dump().size();
     if(s.table){const auto& t=*s.table;size+=t.summary.size();for(const auto& c:t.columns)size+=c.size();for(const auto& c:t.labels)size+=c.size();
-        for(const auto& r:t.rows){size+=r.producer.size()+r.epoch.size()+r.entity.size();for(const auto& c:r.cells){size+=c.text.size()+c.accessible.size();for(const auto& b:c.blocks)size+=b.role.size()+b.text.size();}}}
+        for(const auto& r:t.rows){size+=r.producer.size()+r.epoch.size()+r.entity.size();for(const auto& c:r.cells)size+=cell_bytes(c);}}
     return size;
 }
 SurfaceText compose_table(const Json& w,const std::vector<scene::BindingInput>& inputs,std::uint64_t now,
@@ -31,8 +36,12 @@ SurfaceText compose_table(const Json& w,const std::vector<scene::BindingInput>& 
         if(shape.is_null())shape=query;else need(query==shape,"surface.unsupported");
         need(fields.insert(b["field"].get<std::string>()).second,"surface.unsupported");}
     SurfaceText out;out.id=w["id"];out.kind="table";out.text=w["title"];out.table.emplace();auto& t=*out.table;
+    // Account each append once. The same bound is checked at the same cell
+    // boundaries without rescanning all previously formatted rows each time.
+    std::size_t bytes=surface_text_bytes(out);
     Code state=Code::matched;bool first=true;std::map<Key,std::size_t> indexes;
     for(const auto& b:bindings){t.labels.push_back(w.contains("content")?w["content"]["columns"][t.columns.size()]["label"]:b["field"]);t.columns.push_back(b["field"]);
+        bytes+=t.labels.back().size()+t.columns.back().size();
         scene::project_binding(b,inputs,now,[&](const auto& frame){
             if(frame.code==Code::denied)throw protocol::Error("policy.denied");
             if(rank(frame.code)>rank(state))state=frame.code;
@@ -40,20 +49,22 @@ SurfaceText compose_table(const Json& w,const std::vector<scene::BindingInput>& 
             need(frame.rows.size()*bindings.size()<=256,"surface.capacity");
             if(first){t.total=frame.total;t.truncated=frame.truncated;
                 for(const auto& row:frame.rows){need(indexes.emplace(key(row),t.rows.size()).second,"surface.table_identity");
-                    t.rows.push_back({row.producer,row.epoch,row.entity,row.generation,{}});}}
+                    t.rows.push_back({row.producer,row.epoch,row.entity,row.generation,{}});
+                    bytes+=row.producer.size()+row.epoch.size()+row.entity.size();}}
             else need(frame.total==t.total&&frame.truncated==t.truncated&&frame.rows.size()==t.rows.size(),"surface.table_identity");
             std::set<Key> seen;
             for(const auto& row:frame.rows){auto found=indexes.find(key(row));need(found!=indexes.end()&&seen.insert(key(row)).second,"surface.table_identity");
                 auto& target=t.rows[found->second];need(target.generation==row.generation,"surface.table_identity");target.cells.push_back(format(row));
-                need(surface_text_bytes(out)<=262144,"surface.capacity");}
+                bytes+=cell_bytes(target.cells.back());need(bytes<=262144,"surface.capacity");}
         });first=false;
     }
-    if(state!=Code::matched){t.rows.clear();t.columns.clear();t.labels.clear();t.total=0;t.truncated=false;}
+    if(state!=Code::matched){t.rows.clear();t.columns.clear();t.labels.clear();t.total=0;t.truncated=false;bytes=surface_text_bytes(out);}
     t.summary=state==Code::matched||state==Code::empty?"Showing "+std::to_string(t.rows.size())+" of "+std::to_string(t.total)+" rows":label(state);
+    bytes+=t.summary.size();
     out.accessible=out.text+"\n"+t.summary;
     for(const auto& row:t.rows){need(row.cells.size()==t.columns.size(),"surface.table_identity");
         out.accessible+="\nRow "+row.producer+"/"+row.epoch+"/"+row.entity;
-        for(std::size_t i=0;i<row.cells.size();++i){out.accessible+="\n"+(t.labels[i]==t.columns[i]?t.columns[i]:t.labels[i]+" ["+t.columns[i]+"]")+": "+row.cells[i].accessible;need(surface_text_bytes(out)<=262144,"surface.capacity");}}
+        for(std::size_t i=0;i<row.cells.size();++i){out.accessible+="\n"+(t.labels[i]==t.columns[i]?t.columns[i]:t.labels[i]+" ["+t.columns[i]+"]")+": "+row.cells[i].accessible;need(bytes+out.accessible.size()<=262144,"surface.capacity");}}
     return out;
 }
 TextRaster raster_table(const TextRequest& request,SurfaceText& widget,std::size_t capacity,TextSession* session){
@@ -91,11 +102,20 @@ TextRaster raster_table(const TextRequest& request,SurfaceText& widget,std::size
     TextRaster result;result.width=width;result.height=height;result.fonts.assign(fonts.begin(),fonts.end());result.rgba.resize(pixels*4);
     std::array<unsigned,4> background{};for(unsigned c=0;c<4;++c)background[c]=static_cast<unsigned>(std::stoul(bg.substr(1+c*2,2),nullptr,16));
     for(unsigned c=0;c<3;++c)background[c]=(background[c]*background[3]+127)/255;
-    for(std::size_t p=0;p<pixels;++p)for(unsigned c=0;c<4;++c)result.rgba[p*4+c]=static_cast<unsigned char>(background[c]);
+    // resize already supplied the exact transparent premultiplied background.
+    if(background[3]){auto* target=result.rgba.data();for(std::size_t p=0;p<pixels;++p){
+        for(unsigned c=0;c<4;++c)target[c]=static_cast<unsigned char>(background[c]);
+        target+=4;
+    }}
     for(const auto& place:placements){const auto& src=parts[place.part];
-        for(unsigned y=0;y<src.height;++y)for(unsigned x=0;x<src.width;++x){const auto a=(static_cast<std::size_t>(y)*src.width+x)*4;
-            const auto b=(static_cast<std::size_t>(place.y+y)*width+place.x+x)*4;const auto inverse=255-src.rgba[a+3];
-            for(unsigned c=0;c<4;++c)result.rgba[b+c]=static_cast<unsigned char>(src.rgba[a+c]+(result.rgba[b+c]*inverse+127)/255);}}
+        for(unsigned y=0;y<src.height;++y){
+            const auto* input=src.rgba.data()+static_cast<std::size_t>(y)*src.width*4;
+            auto* target=result.rgba.data()+(static_cast<std::size_t>(place.y+y)*width+place.x)*4;
+            for(unsigned x=0;x<src.width;++x,input+=4,target+=4){const auto alpha=input[3];
+            if(!alpha&&!(input[0]|input[1]|input[2]))continue;
+            if(alpha==255){for(unsigned c=0;c<4;++c)target[c]=input[c];continue;}
+            const auto inverse=255-alpha;
+            for(unsigned c=0;c<4;++c)target[c]=static_cast<unsigned char>(input[c]+(target[c]*inverse+127)/255);}}}
     return result;
 }
 }

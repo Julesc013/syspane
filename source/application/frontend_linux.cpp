@@ -131,8 +131,10 @@ struct Window {
                     for(const auto& metric:provider.metrics)provider.fields[metric.field]=3000000000ULL;
                     providers.push_back(std::move(provider));
                 }
-                inspector=std::make_unique<interfaces::SceneInspector>(authority,snapshot.view.policy,scene_config(snapshot,std::move(current)),std::move(providers),"",interfaces::SceneInspector::Translator{},backend.images());
-                inspector->refresh(now());next_inspector=now()+100;
+                measure(FrontendPhase::inspector_prepare,[&]{
+                    inspector=std::make_unique<interfaces::SceneInspector>(authority,snapshot.view.policy,scene_config(snapshot,std::move(current)),std::move(providers),"",interfaces::SceneInspector::Translator{},backend.images());
+                    inspector->refresh(now());
+                });next_inspector=now()+100;
                 gtk_box_pack_start(GTK_BOX(forms),inspector->widget(),TRUE,TRUE,0);gtk_widget_show_all(inspector->widget());
             }else{
             const auto selected=current.fallback;interfaces::EditorForm::Actions actions;
@@ -216,7 +218,7 @@ struct Window {
             }
             if(inspector&&current&&!view_unavailable){
                 const auto stamp=now();if(stamp>=next_inspector){
-                    if(inspecting)inspector->deliver(state.telemetry,state.telemetry_scope,stamp);else inspector->refresh(stamp);
+                    measure(FrontendPhase::inspector,[&]{if(inspecting)inspector->deliver(state.telemetry,state.telemetry_scope,stamp);else inspector->refresh(stamp);});
                     next_inspector=now()+100;
                 }
                 const auto code=inspector->status().code;

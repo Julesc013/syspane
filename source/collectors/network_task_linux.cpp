@@ -16,16 +16,20 @@ std::string utc(){
 }
 }
 NetworkTask::NetworkTask(platform::NetworkWatch& watch,std::uint64_t id,std::uint64_t rev,
-    std::function<model::Tick()> clock,bool failure,unsigned hold_ms,std::function<void()> before_read)
+    std::function<model::Tick()> clock,bool failure,unsigned hold_ms,std::function<void()> before_read,
+    std::function<platform::WatchedNetworkResult(const platform::NetworkRequest&)> read)
     :ticket(id),revision(rev){
     if(hold_ms>1500)throw protocol::Error("collector.task_hold");
-    thread_=std::thread([this,&watch,clock=std::move(clock),failure,hold_ms,before_read=std::move(before_read)]{
+    thread_=std::thread([this,&watch,clock=std::move(clock),failure,hold_ms,before_read=std::move(before_read),read=std::move(read)]{
         native_thread_.store(static_cast<std::uint64_t>(::syscall(SYS_gettid)));
         try{
             if(before_read)before_read();
             result_.sampled_utc=utc();result_.begin=clock();
             if(failure){result_.acquired.sample={platform::NetworkCode::failed,5};result_.acquired.continuity=true;}
-            else result_.acquired=watch.read({std::chrono::steady_clock::now()+std::chrono::seconds(2),cancelled_});
+            else {
+                const platform::NetworkRequest request{std::chrono::steady_clock::now()+std::chrono::seconds(2),cancelled_};
+                result_.acquired=read?read(request):watch.read(request);
+            }
             result_.end=clock();read_ready_.store(true);
             // Trusted finite fault injection: preserve the original late-result test.
             if(hold_ms)std::this_thread::sleep_for(std::chrono::milliseconds(hold_ms));

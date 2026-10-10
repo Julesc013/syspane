@@ -12,10 +12,19 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-10T05:33:19.872295+00:00", "scope": "Inspector chart continuity across coalesced delivery"}
+updated: {"by": "codex", "at": "2026-10-10T06:13:19.047042+00:00", "scope": "Installed maximum-table evidence and remaining GUI timing failure"}
 ---
 
 # Current state and next admitted boundary
+
+The [live-table checkpoint](inspector-live-tables-handoff.md) adds exact maximum
+row/cell cases and preserves several measured GUI failures. The latest ordinary
+run passes six cases but navigation takes 109.450 ms; the complete phase run also
+fails truncation/navigation. Maximum-table performance remains **unqualified**.
+Pixel/text equivalence passes after bounded composition repairs. Next separate
+surface composition from GTK presentation cost and close the remaining GUI work
+before claiming this boundary; retain the fixed 100-ms/200-ms limits. Maximum
+chart/mixed workloads, human accessibility and all five release editions remain open.
 
 The [inspector continuity checkpoint](inspector-delivery-gaps-handoff.md) fixes a
 reproduced false chart join across coalesced delivery. Seven controlled native

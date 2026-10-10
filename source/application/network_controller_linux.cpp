@@ -34,7 +34,8 @@ Bootstrap bootstrap(os::Stream& parent){
     const auto client=p::decimal(v["client_pid"].get<std::string>());need(client&&*client,"network.client");out.client=*client;return out;
 }
 }
-int run_network_controller(std::uint64_t parent,std::function<c::Policy()> policy,std::function<void()> before_read){
+int run_network_controller(std::uint64_t parent,std::function<c::Policy()> policy,std::function<void()> before_read,
+    std::function<os::WatchedNetworkResult(const os::NetworkRequest&)> read){
     try{
         need(os::unprivileged_context(),"network.context");os::arm_parent_lifetime(parent);::close(3);
         auto guardian=os::Stream::from_connected_socket(0,parent);const auto startup=bootstrap(guardian);
@@ -138,7 +139,7 @@ int run_network_controller(std::uint64_t parent,std::function<c::Policy()> polic
                         need(state->demand(job->ticket)==n::NetworkStateCode::accepted,"network.demand");
                         task=std::make_unique<collectors::NetworkTask>(*watch,job->ticket,state->revision(),[&]{
                             const auto clock=client->measurement_clock();return model::Tick{startup.epoch,clock.nanoseconds,clock.clock_id,clock.local_scope};
-                        },false,0,before_read);
+                        },false,0,before_read,read);
                     }
                 }
                 for(unsigned i=0;i<4;++i){

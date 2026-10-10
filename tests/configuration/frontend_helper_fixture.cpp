@@ -8,6 +8,23 @@ std::string read(const char* path){std::ifstream file(path);std::string value;st
 int main(int argc,char** argv){
     if(argc==3&&std::string(argv[1])=="--network"){
         const auto parent=syspane::protocol::decimal(argv[2]);if(!parent||!*parent)return 2;
+        namespace os=syspane::platform;
+        std::function<os::WatchedNetworkResult(const os::NetworkRequest&)> acquisition;
+        const auto count_text=read("workload-rows");
+        if(!count_text.empty()){
+            const auto count=syspane::protocol::decimal(count_text);if(!count||(*count!=64&&*count!=65))return 2;
+            acquisition=[count=*count,calls=std::make_shared<unsigned>(0)](const os::NetworkRequest& request){
+                os::WatchedNetworkResult result{{os::NetworkCode::success},{},0,0,true};
+                if(const auto stopped=os::network_stopped(request)){result.sample.code=*stopped;return result;}
+                if(count>request.row_limit||++*calls>128){result.sample.code=os::NetworkCode::capacity;return result;}
+                const auto round=syspane::protocol::decimal(read("workload-round"));
+                if(!round||(*round!=1&&*round!=2)){result.sample.code=os::NetworkCode::malformed;return result;}
+                for(std::uint64_t i=1;i<=count;++i)result.sample.rows.push_back({i,static_cast<std::uint32_t>(i),6,os::NetworkCounters{1000 * *round+i,2000 * *round+i}});
+                if(const auto stopped=os::network_stopped(request)){result.sample.code=*stopped;result.sample.rows.clear();return result;}
+                std::ofstream("workload-read")<<*calls<<' '<<*round<<' '<<count;
+                return result;
+            };
+        }
         return syspane::application::run_network_controller(*parent,[]{
             c::Policy p;p.available=read("policy")!="deny"&&read("network-policy")!="deny";p.revision=7;
             if(read("policy")=="allow")for(const char* channel:{"inspector","accessibility"})p.disclosure[{"console",channel}]={"operational"};
@@ -15,7 +32,7 @@ int main(int argc,char** argv){
         },[]{if(read("network-mode")=="hold"){
             std::ofstream("network-held")<<::getpid();
             while(read("network-release")!="yes")std::this_thread::sleep_for(std::chrono::milliseconds(5));
-        }});
+        }},std::move(acquisition));
     }
     if(argc!=2)return 2;
     const auto parent=syspane::protocol::decimal(argv[1]);if(!parent||!*parent)return 2;

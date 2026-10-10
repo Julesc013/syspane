@@ -738,6 +738,9 @@ if(BUILD_TESTING)
         add_test(NAME native.INSPECTOR-AUTHORED-LIMITS COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/configuration/native_inspector_authored_limits.py"
             "$<TARGET_FILE:syspane_frontend>" "$<TARGET_FILE:syspane_frontend_fixture>" "$<TARGET_FILE:syspane_frontend_helper_fixture>" "${CMAKE_BINARY_DIR}/native-evidence")
         set_tests_properties(native.INSPECTOR-AUTHORED-LIMITS PROPERTIES TIMEOUT 700)
+        add_test(NAME native.INSPECTOR-LIVE-TABLES COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/configuration/native_inspector_live_tables.py"
+            "$<TARGET_FILE:syspane_frontend>" "$<TARGET_FILE:syspane_frontend_fixture>" "$<TARGET_FILE:syspane_frontend_helper_fixture>" "${CMAKE_BINARY_DIR}/native-evidence")
+        set_tests_properties(native.INSPECTOR-LIVE-TABLES PROPERTIES TIMEOUT 800)
         add_test(NAME native.INSTALLED-TELEMETRY COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/configuration/native_installed_telemetry.py"
             "$<TARGET_FILE:syspane_frontend>" "$<TARGET_FILE:syspane_frontend_entry_fixture>" "$<TARGET_FILE:syspane_frontend_helper_fixture>" "${CMAKE_BINARY_DIR}/native-evidence")
         set_tests_properties(native.INSTALLED-TELEMETRY PROPERTIES TIMEOUT 360)

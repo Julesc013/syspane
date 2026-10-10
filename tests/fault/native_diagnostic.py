@@ -160,7 +160,8 @@ def bounded_close_x11(process, environment):
             observer.kill()
             observer.join(2)
 
-def launch_xvfb(workspace):
+def launch_xvfb(workspace, screen=(800,600)):
+    assert len(screen)==2 and all(isinstance(n,int) and 1<=n<=2048 for n in screen) and screen[0]*screen[1]<=4194304
     # Cookie authorizes only this private test server; it is never printed or recorded.
     cookie = secrets.token_bytes(16)
     def field(value): return struct.pack('!H', len(value)) + value
@@ -171,7 +172,7 @@ def launch_xvfb(workspace):
     number = str(30000 + secrets.randbelow(20000))
     if Path('/tmp/.X' + number + '-lock').exists() or Path('/tmp/.X11-unix/X' + number).exists():
         raise AssertionError('chosen test display already exists; refusing replacement')
-    server = subprocess.Popen(['/usr/bin/Xvfb', ':' + number, '-nolisten', 'tcp', '-nolisten', 'unix', '-listen', 'local', '-noreset', '-auth', str(auth), '-screen', '0', '800x600x24'],
+    server = subprocess.Popen(['/usr/bin/Xvfb', ':' + number, '-nolisten', 'tcp', '-nolisten', 'unix', '-listen', 'local', '-noreset', '-auth', str(auth), '-screen', '0', f'{screen[0]}x{screen[1]}x24'],
                               cwd=workspace, stdin=subprocess.DEVNULL, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     try:
         deadline = time.monotonic() + 5

@@ -24,6 +24,8 @@ telemetry is now integrated; preserve prior failures and all five full release e
 - [x] Reuse prepared authored snapshots for editor previews and pass all seven unchanged ordinary GUI timing/erasure cases after the measured repair; preserve earlier failures. See the [handoff](spec/delivery/prepared-surface-handoff.md).
 - [x] Qualify installed image input/refusal, summary/navigation/reopen, policy erasure, held-child exit and real logical monitor changes. See the [handoff](spec/delivery/inspector-assets-handoff.md).
 - [x] Prepare initial Settings on the client worker and qualify authored/static inspector limits and exact-profile adoption. Preserve original failures; see the [handoff](spec/delivery/inspector-authored-limits-handoff.md).
+- [x] Add installed maximum-table inputs, exact counter/identity oracles, native timing and complete failure records; see the [handoff](spec/delivery/inspector-live-tables-handoff.md).
+- [ ] Resolve the remaining maximum-table GUI overruns (latest ordinary navigation: 109.450 ms); attribute composition versus GTK presentation before further repair. Preserve the original 100-ms timing and 200-ms erasure limits.
 - [ ] Qualify maximum live table/chart semantic workloads, human accessibility and long-text usability, physical hotplug and other native backends, then desktop/lifecycle composition.
 - [x] Forward coalesced inspector delivery gaps to chart history; preserve the reproduced false join and verify seven exact native scenarios and existing regressions. See the [handoff](spec/delivery/inspector-delivery-gaps-handoff.md).
 
