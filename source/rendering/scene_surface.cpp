@@ -3,6 +3,7 @@
 #include "scene_chart.hpp"
 #include "scene_image.hpp"
 #include "scene_visibility.hpp"
+#include "theme_font.hpp"
 #include <algorithm>
 #include <cmath>
 #include <limits>
@@ -170,6 +171,7 @@ struct SceneSurface::Impl {
         // Font setup lives only until this composition returns (including failures).
         // Contexts and layouts remain independent for every request.
         TextSession text_session;
+        const c::ValidatedTheme theme(config.resources->theme());
         if(policy.forced.count("display.theme_id"))need(policy.forced.at("display.theme_id")==config.resources->theme()["theme_id"],"surface.theme_policy");
         images->prepare(config);
         auto next=std::make_unique<SurfaceFrame>();next->theme_pin=config.resources->theme_pin();
@@ -205,7 +207,7 @@ struct SceneSurface::Impl {
                 });
             }else if(image){out.id=w["id"];out.kind=kind;}else out=text(w,nullptr,typography);
             if(kind!="group"){
-                const auto& d=display_for(w,config.topology);TextRequest q;q.text=out.text;q.theme=config.resources->theme();q.language=config.language;q.contrast=config.contrast;
+                const auto& d=display_for(w,config.topology);TextRequest q;q.text=out.text;q.theme=config.resources->theme();q.prepared_theme=&theme;q.language=config.language;q.contrast=config.contrast;
                 q.numerator=d.scale_numerator;q.denominator=d.scale_denominator;q.pixel_budget=std::min(std::size_t{4194304},8388608-display_pixels-leaf_pixels);
                 need(q.pixel_budget>0,"surface.capacity");auto raster=image?images->raster(w,q,out):chart?raster_chart(q,out,*plot,8388608-display_pixels-leaf_pixels,&text_session):table?raster_table(q,out,8388608-display_pixels-leaf_pixels,&text_session):typography?render_blocks(q,out.blocks,8388608-display_pixels-leaf_pixels,&text_session):render_text(q,&text_session);need(!raster.missing_glyphs,"surface.glyphs");
                 leaf_pixels+=static_cast<std::size_t>(raster.width)*raster.height;out.fonts=raster.fonts;

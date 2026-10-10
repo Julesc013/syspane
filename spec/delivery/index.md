@@ -159,6 +159,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Portable transport and policy checkpoint](transport-handoff.md) — Resume W-24 from executable portable contracts without claiming native authentication.
 - [Theme typography and native font-role checkpoint](typography-handoff.md) — Versioned font roles with resource admission and native raster evidence; scene and authoring integration remain open.
 - [Immutable authored validation handoff](validated-authored-handoff.md) — Reuse structural proof during native composition while retaining fresh inputs and current authority.
+- [Maximum live tables after exact theme validation reuse](validated-theme-handoff.md) — Attribute native inspector costs, preserve the failure and qualify unchanged table inputs after bounded validation reuse.
 - [Visibility authoring and durable admission checkpoint](visibility-admission-handoff.md) — Versioned scenes and commands with protected history, coherent recovery and an explicit native rendering gate.
 - [Borrowed visibility composition checkpoint](visibility-composition-handoff.md) — Bounded shared telemetry reads and inherited condition decisions with native presentation still gated.
 - [Native conditional editing checkpoint](visibility-controls-handoff.md) — Exact private visibility input, hidden selection and current held-gesture diagnostics through the existing durable editor.

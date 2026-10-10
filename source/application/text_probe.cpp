@@ -1,4 +1,5 @@
 #include "native_text.hpp"
+#include "theme_font.hpp"
 #include <fstream>
 #include <iostream>
 #include <thread>
@@ -31,6 +32,8 @@ Json run(const Json& j,const std::string& path,syspane::rendering::TextSession* 
         r.numerator=j.value("numerator",r.numerator);r.denominator=j.value("denominator",r.denominator);
         r.pixel_budget=j.value("pixel_budget",r.pixel_budget);
         if(j.contains("wrap_units"))r.wrap_units=j.at("wrap_units").get<syspane::scene::Unit>();
+        std::optional<syspane::configuration::ValidatedTheme> prepared;
+        if(j.contains("prepared_theme")){prepared.emplace(j.at("prepared_theme"));r.prepared_theme=&*prepared;}
         const auto original=r.theme;
         const auto a=syspane::rendering::render_text(r,session);
         std::ofstream f(path,std::ios::binary);

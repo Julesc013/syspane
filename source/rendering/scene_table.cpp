@@ -1,4 +1,5 @@
 #include "scene_table.hpp"
+#include "theme_font.hpp"
 #include <algorithm>
 #include <array>
 #include <tuple>
@@ -73,6 +74,8 @@ TextRaster raster_table(const TextRequest& request,SurfaceText& widget,std::size
     const auto bg=request.contrast=="light"?"#ffffffff":request.contrast=="dark"?"#000000ff":request.theme["tokens"]["background"].get<std::string>();
     if(request.contrast!="authored")q.theme["tokens"]["foreground"]=request.contrast=="light"?"#000000ff":"#ffffffff";
     q.contrast="authored";q.theme["tokens"]["background"]="#00000000";
+    std::optional<configuration::ValidatedTheme> prepared;
+    if(!q.prepared_theme||!q.prepared_theme->matches(q.theme)){prepared.emplace(q.theme);q.prepared_theme=&*prepared;}
     std::vector<TextRaster> parts;std::size_t retained=0;std::set<std::string> fonts;
     const bool typography=request.theme["schema_version"]=="0.2.0";
     const auto add=[&](const std::string& text,const std::string& role,const std::vector<TextBlock>& blocks){need(retained<capacity,"surface.capacity");q.text=text;q.pixel_budget=std::min(std::size_t{4194304},capacity-retained);

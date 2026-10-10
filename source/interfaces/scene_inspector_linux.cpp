@@ -65,9 +65,22 @@ struct SceneInspector::Impl {
         if(state->second){gtk_tree_view_expand_row(GTK_TREE_VIEW(tree),p,FALSE);expand(row.children);}
         else gtk_tree_view_collapse_row(GTK_TREE_VIEW(tree),p);
         gtk_tree_path_free(p);}}
-    void run(std::uint64_t now,const std::map<std::string,model::Tick>& ticks,const std::function<void()>& action){
+    void run(std::uint64_t now,const std::map<std::string,model::Tick>& ticks,const std::function<void()>& action,const PhaseObserver& observer={}){
         owner();if(closed)return;batch=true;
-        try{action();if(!closed)surface->paint(now,ticks,[&](auto,const auto* frame){present(frame);});batch=false;if(closed)surface->close();}
+        bool observing=static_cast<bool>(observer);
+        const auto emit=[&](Phase phase,gint64 begin,bool completed){
+            if(!observing)return;
+            bool accepted=false;
+            try{accepted=observer(phase,static_cast<std::uint64_t>(g_get_monotonic_time()-begin),completed);}catch(...){}
+            if(!accepted){observing=false;throw protocol::Error("inspector.phase_observer");}
+        };
+        const auto measure=[&](Phase phase,const auto& operation){
+            if(!observing){operation();return;}
+            const auto begin=g_get_monotonic_time();
+            try{operation();}catch(...){emit(phase,begin,false);throw;}
+            emit(phase,begin,true);
+        };
+        try{measure(Phase::admission,action);if(!closed)measure(Phase::paint,[&]{surface->paint(now,ticks,[&](auto,const auto* frame){measure(Phase::presentation,[&]{present(frame);});});});batch=false;if(closed)surface->close();}
         catch(...){batch=false;shut();throw;}
     }
     void request(){if(closed||batch)return;GtkTreeIter selected;auto* selection=gtk_tree_view_get_selection(GTK_TREE_VIEW(tree));
@@ -101,8 +114,8 @@ d::DataResult SceneInspector::receive(const std::string& producer,std::uint64_t 
 d::DataCode SceneInspector::heartbeat(const std::string& producer,std::uint64_t token,std::uint64_t revision,std::uint64_t sequence,std::uint64_t now,const std::map<std::string,model::Tick>& ticks){auto& i=*impl_;d::DataCode result=d::DataCode::closed;i.run(now,ticks,[&]{result=i.surface->heartbeat(producer,token,revision,sequence,now);});return result;}
 d::DataCode SceneInspector::gap(const std::string& producer,std::uint64_t token,std::uint64_t revision,std::uint64_t now,const std::map<std::string,model::Tick>& ticks){auto& i=*impl_;d::DataCode result=d::DataCode::closed;i.run(now,ticks,[&]{result=i.surface->gap(producer,token,revision,now);});return result;}
 d::DataCode SceneInspector::disconnect(const std::string& producer,std::uint64_t token,std::uint64_t revision,std::uint64_t now,const std::map<std::string,model::Tick>& ticks){auto& i=*impl_;d::DataCode result=d::DataCode::closed;i.run(now,ticks,[&]{result=i.surface->disconnect(producer,token,revision,now);});return result;}
-void SceneInspector::refresh(std::uint64_t now,const std::map<std::string,model::Tick>& ticks){impl_->run(now,ticks,[]{});}
-void SceneInspector::deliver(const d::TelemetryDelivery& value,d::DeliveryScope current,std::uint64_t now){
+void SceneInspector::refresh(std::uint64_t now,const std::map<std::string,model::Tick>& ticks,const PhaseObserver& observer){impl_->run(now,ticks,[]{},observer);}
+void SceneInspector::deliver(const d::TelemetryDelivery& value,d::DeliveryScope current,std::uint64_t now,const PhaseObserver& observer){
     auto& i=*impl_;i.owner();if(i.closed)return;
     if(!current.profile||(i.delivery_scope.profile&&i.delivery_scope.profile!=current.profile)){i.shut();return;}
     std::map<std::string,model::Tick> ticks;
@@ -139,7 +152,7 @@ void SceneInspector::deliver(const d::TelemetryDelivery& value,d::DeliveryScope 
             if(accepted==d::DataCode::accepted)i.delivery_until=now+3000;
             i.delivery_heartbeat=value.heartbeat;
         }
-    });
+    },observer);
 }
 void SceneInspector::policy(c::Policy policy,std::uint64_t now){auto& i=*impl_;i.owner();if(i.closed)return;i.clear();try{i.surface->policy(std::move(policy),now);i.run(now,{},[]{});}catch(...){i.shut();throw;}}
 void SceneInspector::replace(r::SurfaceConfig config,std::uint64_t now){auto& i=*impl_;i.owner();if(i.closed)return;i.clear();try{i.surface->replace(std::move(config),now);i.run(now,{},[]{});}catch(...){i.shut();throw;}}

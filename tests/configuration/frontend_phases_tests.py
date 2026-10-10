@@ -18,12 +18,12 @@ class PhaseTests(unittest.TestCase):
         self.assertEqual(len(decode(self.valid + self.valid.replace(b'123', b'124'))), 2)
 
     def test_inspector_phases(self):
-        block = decode(b'phase-begin 123 2\nphase 1 12 20 1\nphase 1 13 30 1\nphase-end 123 2 0\n')[0]
-        self.assertEqual([r['phase'] for r in block['rows']], ['inspector', 'inspector_prepare'])
+        block = decode(b'phase-begin 123 5\nphase 1 12 20 1\nphase 1 13 30 1\nphase 1 14 3 1\nphase 1 16 5 1\nphase 1 15 12 1\nphase-end 123 5 0\n')[0]
+        self.assertEqual([r['phase'] for r in block['rows']], ['inspector', 'inspector_prepare', 'inspector_admission', 'inspector_presentation', 'inspector_paint'])
 
     def test_invalid(self):
         bad = [b'', self.valid + self.valid, self.valid[:-1], self.valid[:-20], self.valid.replace(b'123 3 0', b'124 3 0'),
-               self.valid.replace(b'123 3\n', b'123 8193\n'), self.valid.replace(b'1 6 40', b'1 14 40'),
+               self.valid.replace(b'123 3\n', b'123 8193\n'), self.valid.replace(b'1 6 40', b'1 17 40'),
                self.valid.replace(b'1 6 40', b'0 6 40'), self.valid.replace(b'1 6 40', b'01 6 40'),
                self.valid.replace(b'1 6 40', b'1 1 40'), self.valid.replace(b'1 6 40 1', b'1 6 40 2'),
                self.valid.replace(b'1 6 40', b'2 6 40'), self.valid.replace(b'40 1', b'18446744073709551616 1'),

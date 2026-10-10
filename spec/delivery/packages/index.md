@@ -97,6 +97,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Native history preparation ownership](w-11-history-worker.md) — Bound history work on the existing helper worker and preserve current-draft adoption.
 - [Initial editor preview readiness](w-11-initial-preview.md) — Defer the first composition while preserving geometry-dependent input before GTK draws.
 - [Installed inspector image and topology qualification](w-11-inspector-assets.md) — Exercise pinned saved images, exact native child ownership and actual monitor changes.
+- [Inspector admission, painting and presentation attribution](w-11-inspector-attribution.md) — Separate nested native inspector costs before selecting the remaining maximum-table repair.
 - [Installed inspector authored-input responsiveness](w-11-inspector-authored-limits.md) — Qualify complete visible maximum authored scenes and explicit frame refusal on the real GTK loop.
 - [Inspector chart continuity across coalesced delivery](w-11-inspector-delivery-gaps.md) — Forward known skipped admission context without inventing samples or changing the bounded latest-state receiver.
 - [Installed inspector live table limits](w-11-inspector-live-tables.md) — Exercise complete maximum table rows and cells, live replacement and explicit refusal through the installed frontend.
@@ -124,6 +125,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Resource-aware native settings](w-11-settings-resources.md) — Preserve exact resource selection through settings drafts, native commits and restart.
 - [Composition-scoped native font setup](w-11-text-session.md) — Reuse Linux font setup within one synchronous composition while preserving exact rendering and erasure.
 - [Immutable authored validation for native composition](w-11-validated-authored.md) — Remove repeated structural validation while retaining current geometry, resource and policy checks.
+- [Exact validated theme reuse during composition](w-11-validated-theme.md) — Remove repeated theme schema walks without changing request validation, typography or pixel output.
 - [W-24 authenticated transport and policy boundary](w-24-transport.md) — Close the initial local protocol, admission and preview boundary before native integration.
 - [W-25 collection continuity across consumer replacement](w-25-consumer-continuity.md) — Keep real collection independently owned while admitting bounded replacement consumers.
 - [W-25 automatic recovery from independent render failure](w-25-controller-render-recovery.md) — Connect the existing render and health guards to the persistent native desktop replacement owner.

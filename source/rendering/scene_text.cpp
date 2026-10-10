@@ -1,4 +1,5 @@
 #include "scene_text.hpp"
+#include "theme_font.hpp"
 #include <algorithm>
 #include <array>
 #include <set>
@@ -13,6 +14,8 @@ TextRaster render_blocks(const TextRequest& request,const std::vector<TextBlock>
     TextRequest q=request;q.theme["tokens"]["background"]="#00000000";
     if(q.contrast!="authored")q.theme["tokens"][q.token]=q.contrast=="light"?"#000000ff":"#ffffffff";
     q.contrast="authored";
+    std::optional<configuration::ValidatedTheme> prepared;
+    if(!q.prepared_theme||!q.prepared_theme->matches(q.theme)){prepared.emplace(q.theme);q.prepared_theme=&*prepared;}
     const auto gap=(4*q.numerator+q.denominator-1)/q.denominator;
     std::vector<TextRaster> parts;std::set<std::string> fonts;std::size_t retained=0;
     TextRaster result;

@@ -12,18 +12,24 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-10T06:13:19.047042+00:00", "scope": "Installed maximum-table evidence and remaining GUI timing failure"}
+updated: {"by": "codex", "at": "2026-10-10T06:41:07.406106+00:00", "scope": "Inspector attribution and exact validated theme reuse"}
 ---
 
 # Current state and next admitted boundary
 
-The [live-table checkpoint](inspector-live-tables-handoff.md) adds exact maximum
-row/cell cases and preserves several measured GUI failures. The latest ordinary
+The [validated-theme checkpoint](validated-theme-handoff.md) passes all seven
+unchanged maximum live-table cases in ordinary and complete phase runs after
+reusing exact immutable theme validation within one composition. GUI work peaks
+at 73.467/77.783 ms and policy erasure at 84.045/97.474 ms. The earlier failures
+remain preserved. Continue maximum chart/mixed workloads, human accessibility and
+long-text usability, then desktop/lifecycle composition. All five editions remain open.
+
+The earlier [live-table checkpoint](inspector-live-tables-handoff.md) adds exact maximum
+row/cell cases and preserves several measured GUI failures. Its final ordinary
 run passes six cases but navigation takes 109.450 ms; the complete phase run also
-fails truncation/navigation. Maximum-table performance remains **unqualified**.
-Pixel/text equivalence passes after bounded composition repairs. Next separate
-surface composition from GTK presentation cost and close the remaining GUI work
-before claiming this boundary; retain the fixed 100-ms/200-ms limits. Maximum
+fails truncation/navigation. That candidate left maximum-table performance **unqualified**.
+Pixel/text equivalence passes after bounded composition repairs. The new checkpoint above separates
+composition from GTK presentation and passes the fixed 100-ms/200-ms limits. Maximum
 chart/mixed workloads, human accessibility and all five release editions remain open.
 
 The [inspector continuity checkpoint](inspector-delivery-gaps-handoff.md) fixes a

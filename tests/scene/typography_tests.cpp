@@ -12,8 +12,11 @@ Json read(const std::string& path){std::ifstream f(path);need(f.good(),"fixture 
 Json font(const c::ThemeFont& f){return {{"family",f.family},{"size_dip",f.size_dip},{"weight",f.weight},{"style",f.style}};}
 void resolution(const Json& cases){
     const auto theme=cases.at("theme");
+    const c::ValidatedTheme prepared(theme);
     for(const auto& role:{"body","label","value","diagnostic"}){
         need(font(c::theme_font(theme,role))==cases.at("expected_roles").at(role),"literal role");
+        need(prepared.matches(theme)&&font(prepared.font(theme,role))==cases.at("expected_roles").at(role),"prepared literal role");
+        need(!prepared.matches(cases.at("legacy"))&&font(prepared.font(cases.at("legacy"),role))==cases.at("expected_base"),"prepared mismatch fallback");
         need(font(c::theme_font(cases.at("legacy"),role))==cases.at("expected_base"),"legacy default");
         auto absent=theme;absent.erase("font_roles");need(font(c::theme_font(absent,role))==cases.at("expected_base"),"absent fallback");
         absent["font_roles"]=Json::object();need(font(c::theme_font(absent,role))==cases.at("expected_base"),"empty fallback");
@@ -21,6 +24,11 @@ void resolution(const Json& cases){
     }
     auto changed=theme;const auto owned=c::theme_font(changed,"body");changed["font_roles"]["body"]["family"]="Changed";
     need(font(owned)==cases.at("expected_roles").at("body")&&theme==cases.at("theme"),"owned exact result");
+    c::ValidatedTheme frozen(changed);const auto original=changed;changed["font_roles"]["body"]["family"]="Mutated";
+    need(frozen.matches(original)&&!frozen.matches(changed)&&frozen.font(changed,"body").family=="Mutated", "owned proof and current mismatch");
+    auto integer=theme;integer["font"]["size_dip"]=24;const c::ValidatedTheme numeric(integer);
+    auto real=integer;real["font"]["size_dip"]=24.0;need(!numeric.matches(real),"real representation cannot reuse integer proof");
+    auto unsigned_value=integer;unsigned_value["font"]["size_dip"]=std::uint64_t{24};need(!numeric.matches(unsigned_value),"unsigned representation cannot reuse signed proof");
     for(unsigned weight=100;weight<=900;weight+=100)for(const auto& style:{"normal","italic","oblique"}){
         auto t=theme;t.erase("font_roles");t["font"]["weight"]=weight;t["font"]["style"]=style;t["font"]["size_dip"]=9.25;
         auto f=c::theme_font(t,"body");need(f.weight==weight&&f.style==style&&f.size_dip==9.25,"font choices");
@@ -29,14 +37,19 @@ void resolution(const Json& cases){
     unicode["font"]["family"]="\xe6\x97\xa5\xe6\x9c\xac\xe8\xaa\x9e";c::validate_content_document(unicode,"theme");
 }
 void invalid(const Json& cases){
+    const c::ValidatedTheme prepared(cases.at("theme"));
     for(const auto& f:cases.at("invalid_fonts")){
         auto t=cases.at("theme");t["font"]=f;reject([&]{c::validate_content_document(t,"theme");},"base "+f.dump());
         t=cases.at("theme");t["font_roles"]["body"]=f;reject([&]{c::theme_font(t,"body");},"body "+f.dump());
+        reject([&]{c::ValidatedTheme invalid(t);});reject([&]{prepared.font(t,"body");});
     }
     for(const auto& role:cases.at("invalid_roles"))for(const auto* theme:{"theme","legacy"})reject([&]{c::theme_font(cases.at(theme),role);});
     auto t=cases.at("theme");t["font_roles"]["caption"]=t["font"];reject([&]{c::validate_content_document(t,"theme");});
     t=cases.at("theme");t["schema_version"]="0.1.0";reject([&]{c::validate_content_document(t,"theme");});
     t=cases.at("theme");t["font_roles"]=nullptr;reject([&]{c::validate_content_document(t,"theme");});
+    t=cases.at("theme");t["tokens"]["foreground"]="invalid";need(!prepared.matches(t),"whole theme proof binding");reject([&]{prepared.font(t,"body");});
+    bool role_first=false;try{prepared.font(t,"invalid");}catch(const syspane::protocol::Error& e){role_first=std::string(e.what())=="theme.role";}need(role_first,"invalid role precedence");
+    need(font(prepared.font(cases.at("theme"),"body"))==cases.at("expected_roles").at("body"),"rejection does not poison proof");
 }
 c::ContentPackage pack(const char* id,const char* kind,const Json& doc,Json dependencies=Json::array()){
     const auto bytes=doc.dump()+"\n",path=std::string(kind)+".json";

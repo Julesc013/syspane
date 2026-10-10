@@ -51,7 +51,7 @@ void native_ok(cairo_t* cr,cairo_surface_t* surface){
     if(cairo_status(cr)!=CAIRO_STATUS_SUCCESS||cairo_surface_status(surface)!=CAIRO_STATUS_SUCCESS)throw Error("text.native");
 }
 TextRaster render_native(const TextRequest& r,FontMap& map){
-    const auto resolved=configuration::theme_font(r.theme,r.role);
+    const auto resolved=r.prepared_theme?r.prepared_theme->font(r.theme,r.role):configuration::theme_font(r.theme,r.role);
     text_valid(r.text,4096,1024,true);
     const auto& family=resolved.family;
     text_valid(family,512,128,false);

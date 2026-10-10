@@ -2,6 +2,7 @@
 #include "layout.hpp"
 #include <memory>
 
+namespace syspane::configuration {class ValidatedTheme;}
 namespace syspane::rendering {
 struct TextRequest {
     std::string text,language="en",token="foreground",contrast="authored",role="body";
@@ -9,6 +10,8 @@ struct TextRequest {
     std::optional<scene::Unit> wrap_units;
     unsigned numerator=1,denominator=1;
     std::size_t pixel_budget=4194304;
+    // Borrowed only during synchronous render; mismatch uses full validation.
+    const configuration::ValidatedTheme* prepared_theme=nullptr;
 };
 struct TextRaster {
     scene::Rect ink,logical,extent;

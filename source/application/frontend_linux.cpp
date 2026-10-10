@@ -37,11 +37,12 @@ struct Window {
             if(!cfg.capabilities.count(cap)||profile.view.policy.denied_capabilities.count(cap))cfg.experimental_typography=false;
         return cfg;
     }
-    void observe_phase(FrontendPhase phase,gint64 begin,bool completed){
+    void observe_duration(FrontendPhase phase,std::uint64_t elapsed,bool completed){
         bool accepted=false;
-        try{accepted=phases({tick_sequence,phase,static_cast<std::uint64_t>(g_get_monotonic_time()-begin),completed});}catch(...){}
+        try{accepted=phases({tick_sequence,phase,elapsed,completed});}catch(...){}
         if(!accepted){phases={};throw protocol::Error("frontend.phase_observer");}
     }
+    void observe_phase(FrontendPhase phase,gint64 begin,bool completed){observe_duration(phase,static_cast<std::uint64_t>(g_get_monotonic_time()-begin),completed);}
     template<class F>void measure(FrontendPhase phase,F action){
         if(!phases){action();return;}
         const auto begin=g_get_monotonic_time();
@@ -218,7 +219,12 @@ struct Window {
             }
             if(inspector&&current&&!view_unavailable){
                 const auto stamp=now();if(stamp>=next_inspector){
-                    measure(FrontendPhase::inspector,[&]{if(inspecting)inspector->deliver(state.telemetry,state.telemetry_scope,stamp);else inspector->refresh(stamp);});
+                    interfaces::SceneInspector::PhaseObserver observer;
+                    if(phases)observer=[&](auto phase,std::uint64_t elapsed,bool completed){
+                        using Phase=interfaces::SceneInspector::Phase;
+                        observe_duration(phase==Phase::admission?FrontendPhase::inspector_admission:phase==Phase::paint?FrontendPhase::inspector_paint:FrontendPhase::inspector_presentation,elapsed,completed);return true;
+                    };
+                    measure(FrontendPhase::inspector,[&]{if(inspecting)inspector->deliver(state.telemetry,state.telemetry_scope,stamp,observer);else inspector->refresh(stamp,{},observer);});
                     next_inspector=now()+100;
                 }
                 const auto code=inspector->status().code;

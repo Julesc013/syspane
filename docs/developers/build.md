@@ -1,5 +1,22 @@
 # Developer setup and checks
 
+The [validated-theme package](../../spec/delivery/packages/w-11-validated-theme.md)
+reuses exact theme validation within a single composition. After ordinary workspace
+preflight/configure/build, check shared typography on every development profile:
+
+```sh
+ctest --preset <profile> -R '^configuration[.]TYPOGRAPHY-' --output-on-failure
+ctest --preset linux-x64-gcc13 -R '^native[.](TEXT-SESSION|TEXT-RASTER|THEME-TYPOGRAPHY)$' --output-on-failure
+```
+
+TEXT-SESSION compares matching and deliberately mismatched proof inputs with the
+original frozen pixels/errors. The internal TextProbe prepared_theme field is
+experiment-only. Inspector phase IDs 14–16 report admission, painting and GTK
+presentation; painting includes presentation. Preserve whole-tick qualification
+and complete journals when using the existing live-table phase runner. See the
+[handoff](../../spec/delivery/validated-theme-handoff.md) for current evidence.
+
+
 The [live table package](../../spec/delivery/packages/w-11-inspector-live-tables.md)
 qualifies 64 rows and 256 cells through the installed inspector with a compiled
 synthetic acquisition fixture. After the ordinary preflight/configure/build, run:

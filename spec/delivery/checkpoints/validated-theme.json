@@ -1,0 +1,3822 @@
+{
+  "recorded_at": "2026-10-10T06:48:53.207034+00:00",
+  "source_base": "f99ef4c005cae6a10852385bb2df845c72b184dd",
+  "scope": "Inspector cost attribution and exact composition-scoped theme validation reuse; all seven ordinary and complete-phase live table cases pass. Maximum chart/mixed workloads and full release editions remain incomplete.",
+  "current_product_inputs": {
+    "source/application/frontend_linux.cpp": "4017eb2a78b00307b364697bd0d265653ecee9a498ea5a180959a094bf03a481",
+    "source/application/frontend_linux.hpp": "84b3f7c30773198c1f48a3b94ff2a188a07e23e27224c25521aabacb94dc8688",
+    "source/application/text_probe.cpp": "c2660d4b0f5faab6d88f9aa1f99e16ce0bdebdb2f4ab9a1dddd4c8ef635fa38b",
+    "source/configuration/theme_font.cpp": "04e7648ac881cfb8798ad7abbd469d94a2a56f4fe40f2df09861f99699d553ea",
+    "source/configuration/theme_font.hpp": "f1836f769db0593b1f2267ee1eeb431d22f0d3b587bf5737ef82f5080eea54e0",
+    "source/interfaces/scene_inspector.hpp": "411dfbbe63d57f67cc627ad9a283bb5ce06e5611e155680b4554a0e31aa85db6",
+    "source/interfaces/scene_inspector_linux.cpp": "c1273f2d60d3aa46cd2f93557e321cb263cdbab24652a0dfb0f310c4b64245c7",
+    "source/rendering/native_text.hpp": "3fff62b0a0234b78334ecbb11835f4684159494dccf3029ff55ae388ad1dc826",
+    "source/rendering/native_text_linux.cpp": "593d04bd478743f808847d798e8274397c9caf916067293e6ac118c9122180cc",
+    "source/rendering/scene_surface.cpp": "68291c4ae8f23fb4d937a72dde657384690cf1fda0fad22fb8b3ea76ee98c3d1",
+    "source/rendering/scene_table.cpp": "aea7f6dc79e7f62761d6f7f974a4cd3bbdd1c8a6fdf363b43f7446f60454fbfb",
+    "source/rendering/scene_text.cpp": "b69500778628bd9bce06fb99ec617df9595a19e92f4143450eb3117d5b0b6b8d",
+    "tests/configuration/frontend_phases.py": "f46008b0ab5bc68affa9da9cc919d5353602094b89fe15bbd83165a1160b96a9",
+    "tests/configuration/frontend_phases_tests.py": "c574bb64b907ecf369eeb934d56a23520c98e53f3d48eb4fc438a56553682faa",
+    "tests/scene/inspector_phase_tests.hpp": "719ef44f6d53a9394e3c0a40ce7b0deb1ef1c47d8d2c8b883542b82874eab5a4",
+    "tests/scene/inspector_tests.cpp": "517cc36144e9e7c5c8d15cc366449f10f1be666d1a925191ef1c16461486da54",
+    "tests/scene/native_text_session.py": "cfb3a601f39c5952aadc9b678b35cb30e13241f26089fe272b53b54cc7484726",
+    "tests/scene/typography_tests.cpp": "0f320fbdb53e7932cfd09c194504595ad1471ca6d50a5e89a1350923746cea76"
+  },
+  "artifacts": {
+    "windows-x64-gcc15": {
+      "syspane_typography_tests.exe": "c4a13c987c927a5755a099e34ab97df220dfe7c132ad5bf825da392ef4d00f62",
+      "syspane_scene_tests.exe": "3b98c974ee346d86108f5e3194e2be18466892ab4825dd43672b7dea9f6e8cff"
+    },
+    "windows-x86-v141-xp": {
+      "syspane_typography_tests.exe": "2752e45bfc613aff68ab3732d3228631c9d5be1b3c0db4d1a3ffdbbe723d62d6",
+      "syspane_scene_tests.exe": "c97b177e3e937ec9b50800ff2e62bed70f9eae4745cb88feef52bc8a51e04cb2"
+    },
+    "linux-x64-gcc13": {
+      "syspane": "c0be3bcbeae4c4160a29093cf0b8c95493a46d9f14cf4015ae961360ca32c40a",
+      "syspane_frontend_fixture": "27aafdc595c7cf82d004c9b35bc03e7a6a12e084bc67a513e4f7cb514e889cbe",
+      "syspane_frontend_helper_fixture": "db15b9b7677b0ed6b8f96866e9628f71654346a8a354264e98b37d970c7d0a84",
+      "syspane_scene_inspector_tests": "a5c836ba6cff0d667c4861a810ad1284a93f57393c0e96cf962796936db1865a",
+      "syspane_scene_surface_tests": "0b22731f60a977ed735752def78568523dcbb84f00680853724416c95f2e3cd4",
+      "syspane_typography_tests": "3feca26ffea64d8e51b1a4d391526e53466f4d167598a84c3cf16edc0d351142",
+      "SysPane.TextProbe": "dee5bd182a794d5eef7a27add6ca34bfa71e31daa96602a08602aca9175f7cc0"
+    }
+  },
+  "executions": [
+    {
+      "stage": "authored",
+      "source_base": "f99ef4c005cae6a10852385bb2df845c72b184dd",
+      "source_archive_sha256": "464c73d9523dc34b8f75d261d0a4320b26e24b9bf5926a8367899d5398dd6b07",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]INSPECTOR-AUTHORED-LIMITS$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-10T06:43:36.959527+00:00",
+          "finished_at": "2026-10-10T06:45:15.590240+00:00",
+          "exit": 0,
+          "log_sha256": "acc55cec1fe9e46c1275125d8238c550fa9d0d913e4aaf89f2cccbedb83b103e",
+          "passed_ctest_count": 1
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/inspector-attribution-checks/authored-04f779a7/result.json",
+        "sha256": "64b6ccd9124604d7f61eb24d8ee248d58139a89cc636bcd5662380b3575007ab"
+      },
+      "manifest": {
+        "local_path": "out/evidence/inspector-attribution-checks/authored-04f779a7/source-manifest.json",
+        "sha256": "f410933f53cdc8bf041ea58edad0cc9191b7896c46e5e89c3e9eea17b1793565"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-attribution-checks/authored-04f779a7/source.zip",
+        "sha256": "464c73d9523dc34b8f75d261d0a4320b26e24b9bf5926a8367899d5398dd6b07"
+      },
+      "product_inputs_differing_from_current": []
+    },
+    {
+      "stage": "build",
+      "source_base": "f99ef4c005cae6a10852385bb2df845c72b184dd",
+      "source_archive_sha256": "cc8fc11510ea808d497299a9614df65776c6b8e9c1b0510f2f0cca733d229f4d",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "cmake",
+            "--preset",
+            "linux-x64-gcc13"
+          ],
+          "started_at": "2026-10-10T06:26:37.052102+00:00",
+          "finished_at": "2026-10-10T06:26:48.550639+00:00",
+          "exit": 0,
+          "log_sha256": "7cdc517472e7a48f8b38582505d3ba2de8697f1c4a527c5ebc26b212066d04ce",
+          "passed_ctest_count": null
+        },
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "cmake",
+            "--build",
+            "--preset",
+            "linux-x64-gcc13"
+          ],
+          "started_at": "2026-10-10T06:26:50.537038+00:00",
+          "finished_at": "2026-10-10T06:27:08.321768+00:00",
+          "exit": 0,
+          "log_sha256": "5b0e42fad83a9248da503c05cf600b457b800285fd1dda81125b9e91021680cc",
+          "passed_ctest_count": null
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/inspector-attribution-checks/build-d26d3c1d/result.json",
+        "sha256": "f7d6ceffee7bba6b8d20e8e54fc47cb504daec2e0f78d42e6dd50a9e664754c7"
+      },
+      "manifest": {
+        "local_path": "out/evidence/inspector-attribution-checks/build-d26d3c1d/source-manifest.json",
+        "sha256": "d0c79a9aeb3053d61cce1cc1d9e23bdfebde2f0dc620aff5d2cd9e8a23d738ef"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-attribution-checks/build-d26d3c1d/source.zip",
+        "sha256": "cc8fc11510ea808d497299a9614df65776c6b8e9c1b0510f2f0cca733d229f4d"
+      },
+      "product_inputs_differing_from_current": [
+        "source/application/text_probe.cpp",
+        "source/configuration/theme_font.cpp",
+        "source/configuration/theme_font.hpp",
+        "source/rendering/native_text.hpp",
+        "source/rendering/native_text_linux.cpp",
+        "source/rendering/scene_surface.cpp",
+        "source/rendering/scene_table.cpp",
+        "source/rendering/scene_text.cpp",
+        "tests/scene/native_text_session.py",
+        "tests/scene/typography_tests.cpp"
+      ]
+    },
+    {
+      "stage": "build",
+      "source_base": "f99ef4c005cae6a10852385bb2df845c72b184dd",
+      "source_archive_sha256": "d5584797ee18c080f1f45842c2ad310d9542899b76068df44e49cb45f6b26d3d",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "cmake",
+            "--preset",
+            "linux-x64-gcc13"
+          ],
+          "started_at": "2026-10-10T06:34:43.068218+00:00",
+          "finished_at": "2026-10-10T06:34:52.245475+00:00",
+          "exit": 0,
+          "log_sha256": "08d1646488873b3f2e26a95d203210956dd61728bfe2af83d84e18139cf83a91",
+          "passed_ctest_count": null
+        },
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "cmake",
+            "--build",
+            "--preset",
+            "linux-x64-gcc13"
+          ],
+          "started_at": "2026-10-10T06:34:54.109380+00:00",
+          "finished_at": "2026-10-10T06:35:44.808673+00:00",
+          "exit": 0,
+          "log_sha256": "a6ca90c76e4281c8635e5005642350dd4baada5a04e2a4c29291331db9298100",
+          "passed_ctest_count": null
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/inspector-attribution-checks/build-eafd8cf0/result.json",
+        "sha256": "24a083f1fecd7e4c8d1efad9f133a7c5c1c144add21bd9ea2b826c7be88e961f"
+      },
+      "manifest": {
+        "local_path": "out/evidence/inspector-attribution-checks/build-eafd8cf0/source-manifest.json",
+        "sha256": "e688cb8809e35bb54242ad5242141d2fcb1285c56bf5605827797ccf82370c96"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-attribution-checks/build-eafd8cf0/source.zip",
+        "sha256": "d5584797ee18c080f1f45842c2ad310d9542899b76068df44e49cb45f6b26d3d"
+      },
+      "product_inputs_differing_from_current": []
+    },
+    {
+      "stage": "decoder",
+      "source_base": "f99ef4c005cae6a10852385bb2df845c72b184dd",
+      "source_archive_sha256": "cc8fc11510ea808d497299a9614df65776c6b8e9c1b0510f2f0cca733d229f4d",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^configuration[.]FRONTEND-PHASE-DECODER$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-10T06:27:34.268565+00:00",
+          "finished_at": "2026-10-10T06:27:34.586772+00:00",
+          "exit": 0,
+          "log_sha256": "b0cfa2dc58a7a36418a72c2322bf8d04d682f5b7ac98b023c858092aee2fa73b",
+          "passed_ctest_count": 1
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/inspector-attribution-checks/decoder-f204e9f3/result.json",
+        "sha256": "5a07722cabf138e73dce304456bd1b595d96a97e0d6cf86d190023b55b111409"
+      },
+      "manifest": {
+        "local_path": "out/evidence/inspector-attribution-checks/decoder-f204e9f3/source-manifest.json",
+        "sha256": "d0c79a9aeb3053d61cce1cc1d9e23bdfebde2f0dc620aff5d2cd9e8a23d738ef"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-attribution-checks/decoder-f204e9f3/source.zip",
+        "sha256": "cc8fc11510ea808d497299a9614df65776c6b8e9c1b0510f2f0cca733d229f4d"
+      },
+      "product_inputs_differing_from_current": [
+        "source/application/text_probe.cpp",
+        "source/configuration/theme_font.cpp",
+        "source/configuration/theme_font.hpp",
+        "source/rendering/native_text.hpp",
+        "source/rendering/native_text_linux.cpp",
+        "source/rendering/scene_surface.cpp",
+        "source/rendering/scene_table.cpp",
+        "source/rendering/scene_text.cpp",
+        "tests/scene/native_text_session.py",
+        "tests/scene/typography_tests.cpp"
+      ]
+    },
+    {
+      "stage": "legacy",
+      "source_base": "f99ef4c005cae6a10852385bb2df845c72b184dd",
+      "source_archive_sha256": "464c73d9523dc34b8f75d261d0a4320b26e24b9bf5926a8367899d5398dd6b07",
+      "commands": [
+        {
+          "command": [
+            "cmake",
+            "--preset",
+            "windows-x86-v141-xp"
+          ],
+          "started_at": "2026-10-10T06:41:31.973224+00:00",
+          "finished_at": "2026-10-10T06:41:36.474908+00:00",
+          "exit": 0,
+          "log_sha256": "f40147f6d829f8dbe43f4072a547d98b52e0f6fa46f638cb55c65c03173ee9f1",
+          "passed_ctest_count": null
+        },
+        {
+          "command": [
+            "cmake",
+            "--build",
+            "--preset",
+            "windows-x86-v141-xp"
+          ],
+          "started_at": "2026-10-10T06:41:38.355501+00:00",
+          "finished_at": "2026-10-10T06:42:12.079569+00:00",
+          "exit": 0,
+          "log_sha256": "9b22f9e34ccf5ccd647ca4fc86788f1a714d1a109b054d01deeb5fb49ddc787f",
+          "passed_ctest_count": null
+        },
+        {
+          "command": [
+            "ctest",
+            "--preset",
+            "windows-x86-v141-xp",
+            "-R",
+            "^((delivery|data|measured|telemetry|scene|composition)[.]|configuration[.]TYPOGRAPHY-)",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-10T06:42:13.933540+00:00",
+          "finished_at": "2026-10-10T06:42:18.854649+00:00",
+          "exit": 0,
+          "log_sha256": "50bc56c34bb6a04ada3db1f980f14c243391fb744e5f8132456d8424cbb5bcc5",
+          "passed_ctest_count": 114
+        },
+        {
+          "command": [
+            "ctest",
+            "--preset",
+            "windows-x86-v141-xp",
+            "-R",
+            "^legacy[.]",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-10T06:42:20.748366+00:00",
+          "finished_at": "2026-10-10T06:42:23.017128+00:00",
+          "exit": 0,
+          "log_sha256": "a54500633cad145fcdd41630ebcd403bd27d9b409efa64c6ac9afc23ebb6066e",
+          "passed_ctest_count": 2
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/inspector-attribution-checks/legacy-a4752f51/result.json",
+        "sha256": "c72e2cb0454e5783b075b11096ec820d0e628e02a44fdaaf1baad8a4493509b5"
+      },
+      "manifest": {
+        "local_path": "out/evidence/inspector-attribution-checks/legacy-a4752f51/source-manifest.json",
+        "sha256": "f410933f53cdc8bf041ea58edad0cc9191b7896c46e5e89c3e9eea17b1793565"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-attribution-checks/legacy-a4752f51/source.zip",
+        "sha256": "464c73d9523dc34b8f75d261d0a4320b26e24b9bf5926a8367899d5398dd6b07"
+      },
+      "product_inputs_differing_from_current": []
+    },
+    {
+      "stage": "live",
+      "source_base": "f99ef4c005cae6a10852385bb2df845c72b184dd",
+      "source_archive_sha256": "464c73d9523dc34b8f75d261d0a4320b26e24b9bf5926a8367899d5398dd6b07",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]INSTALLED-TELEMETRY$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-10T06:42:42.024085+00:00",
+          "finished_at": "2026-10-10T06:43:26.043820+00:00",
+          "exit": 0,
+          "log_sha256": "b30135677a84c7e42472dae06fa0858eb5d84e27def6175681054e0abe2d873a",
+          "passed_ctest_count": 1
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/inspector-attribution-checks/live-86ca5edb/result.json",
+        "sha256": "6a9a43ceb03f71d097beaef3f742d02de2b1c58a304667230a1977b18aeca786"
+      },
+      "manifest": {
+        "local_path": "out/evidence/inspector-attribution-checks/live-86ca5edb/source-manifest.json",
+        "sha256": "f410933f53cdc8bf041ea58edad0cc9191b7896c46e5e89c3e9eea17b1793565"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-attribution-checks/live-86ca5edb/source.zip",
+        "sha256": "464c73d9523dc34b8f75d261d0a4320b26e24b9bf5926a8367899d5398dd6b07"
+      },
+      "product_inputs_differing_from_current": []
+    },
+    {
+      "stage": "native-CHART-ERASURE",
+      "source_base": "f99ef4c005cae6a10852385bb2df845c72b184dd",
+      "source_archive_sha256": "a3ab8029cbdc2097a1c8a0a5356765bf49284577662ff3597c8ec4c76e7c5a92",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]CHART-ERASURE$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-10T06:46:15.590115+00:00",
+          "finished_at": "2026-10-10T06:46:19.612893+00:00",
+          "exit": 0,
+          "log_sha256": "c1d5bbdffbd6159018bf3b4655235e27574029319262ad3293b7b568d11ada43",
+          "passed_ctest_count": 1
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/inspector-attribution-checks/native-CHART-ERASURE-2a67efdc/result.json",
+        "sha256": "ae794b15e18ef2fdcadf94839e25150085567f6cb6052dc3fd73ed45f4dd9494"
+      },
+      "manifest": {
+        "local_path": "out/evidence/inspector-attribution-checks/native-CHART-ERASURE-2a67efdc/source-manifest.json",
+        "sha256": "0400abc6a128e661f144e9e9c5004cc4214bd4d841a3b702520dfe921009a657"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-attribution-checks/native-CHART-ERASURE-2a67efdc/source.zip",
+        "sha256": "a3ab8029cbdc2097a1c8a0a5356765bf49284577662ff3597c8ec4c76e7c5a92"
+      },
+      "product_inputs_differing_from_current": []
+    },
+    {
+      "stage": "native-CONTENT-ERASURE",
+      "source_base": "f99ef4c005cae6a10852385bb2df845c72b184dd",
+      "source_archive_sha256": "a3ab8029cbdc2097a1c8a0a5356765bf49284577662ff3597c8ec4c76e7c5a92",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]CONTENT-ERASURE$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-10T06:46:33.210009+00:00",
+          "finished_at": "2026-10-10T06:46:42.122255+00:00",
+          "exit": 0,
+          "log_sha256": "3587e7643be82859c204fd1eb13f9daa4ba700bef171c42799be7af014789130",
+          "passed_ctest_count": 1
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/inspector-attribution-checks/native-CONTENT-ERASURE-a00bdbfe/result.json",
+        "sha256": "b8830702830c5a69195a68e0b96d57f028bdccd0737275b2fe93848ec4029052"
+      },
+      "manifest": {
+        "local_path": "out/evidence/inspector-attribution-checks/native-CONTENT-ERASURE-a00bdbfe/source-manifest.json",
+        "sha256": "0400abc6a128e661f144e9e9c5004cc4214bd4d841a3b702520dfe921009a657"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-attribution-checks/native-CONTENT-ERASURE-a00bdbfe/source.zip",
+        "sha256": "a3ab8029cbdc2097a1c8a0a5356765bf49284577662ff3597c8ec4c76e7c5a92"
+      },
+      "product_inputs_differing_from_current": []
+    },
+    {
+      "stage": "native-FRONTEND-PHASE-FAILURE",
+      "source_base": "f99ef4c005cae6a10852385bb2df845c72b184dd",
+      "source_archive_sha256": "cc8fc11510ea808d497299a9614df65776c6b8e9c1b0510f2f0cca733d229f4d",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]FRONTEND-PHASE-FAILURE$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-10T06:29:10.057786+00:00",
+          "finished_at": "2026-10-10T06:29:18.423839+00:00",
+          "exit": 0,
+          "log_sha256": "d58bd0d2c82417846e109f3478cd4aad8c2c7061ade0953dc31ce29bd36a48c9",
+          "passed_ctest_count": 1
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/inspector-attribution-checks/native-FRONTEND-PHASE-FAILURE-3c2416f9/result.json",
+        "sha256": "92552ce85a41cd8efebc0e8c80dda9310bf09ac717b45ac3ce72ba846cac3c48"
+      },
+      "manifest": {
+        "local_path": "out/evidence/inspector-attribution-checks/native-FRONTEND-PHASE-FAILURE-3c2416f9/source-manifest.json",
+        "sha256": "d0c79a9aeb3053d61cce1cc1d9e23bdfebde2f0dc620aff5d2cd9e8a23d738ef"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-attribution-checks/native-FRONTEND-PHASE-FAILURE-3c2416f9/source.zip",
+        "sha256": "cc8fc11510ea808d497299a9614df65776c6b8e9c1b0510f2f0cca733d229f4d"
+      },
+      "product_inputs_differing_from_current": [
+        "source/application/text_probe.cpp",
+        "source/configuration/theme_font.cpp",
+        "source/configuration/theme_font.hpp",
+        "source/rendering/native_text.hpp",
+        "source/rendering/native_text_linux.cpp",
+        "source/rendering/scene_surface.cpp",
+        "source/rendering/scene_table.cpp",
+        "source/rendering/scene_text.cpp",
+        "tests/scene/native_text_session.py",
+        "tests/scene/typography_tests.cpp"
+      ]
+    },
+    {
+      "stage": "native-IMAGE-ERASURE",
+      "source_base": "f99ef4c005cae6a10852385bb2df845c72b184dd",
+      "source_archive_sha256": "a3ab8029cbdc2097a1c8a0a5356765bf49284577662ff3597c8ec4c76e7c5a92",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]IMAGE-ERASURE$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-10T06:46:23.690875+00:00",
+          "finished_at": "2026-10-10T06:46:28.773858+00:00",
+          "exit": 0,
+          "log_sha256": "dc0ed707eb5d143f7a2ec20bdd6a3eaed1fbabe11d1d56c45604fc96cb7c965a",
+          "passed_ctest_count": 1
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/inspector-attribution-checks/native-IMAGE-ERASURE-73fe7f41/result.json",
+        "sha256": "0872a0094a352323e90381d1b7f9962781fc3c7824d15d5d5f686980a18baae3"
+      },
+      "manifest": {
+        "local_path": "out/evidence/inspector-attribution-checks/native-IMAGE-ERASURE-73fe7f41/source-manifest.json",
+        "sha256": "0400abc6a128e661f144e9e9c5004cc4214bd4d841a3b702520dfe921009a657"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-attribution-checks/native-IMAGE-ERASURE-73fe7f41/source.zip",
+        "sha256": "a3ab8029cbdc2097a1c8a0a5356765bf49284577662ff3597c8ec4c76e7c5a92"
+      },
+      "product_inputs_differing_from_current": []
+    },
+    {
+      "stage": "native-RECOVERY-GUI-LIMITS",
+      "source_base": "f99ef4c005cae6a10852385bb2df845c72b184dd",
+      "source_archive_sha256": "a3ab8029cbdc2097a1c8a0a5356765bf49284577662ff3597c8ec4c76e7c5a92",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]RECOVERY-GUI-LIMITS$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-10T06:46:56.202486+00:00",
+          "finished_at": "2026-10-10T06:47:48.075127+00:00",
+          "exit": 0,
+          "log_sha256": "7f687364e701fc06589e9e24f0c453df67c070d8a3aa26dfdd09ee268f7c19fa",
+          "passed_ctest_count": 1
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/inspector-attribution-checks/native-RECOVERY-GUI-LIMITS-0affc4d7/result.json",
+        "sha256": "449397f8e9cba81a28d25ce6539bcf8e02f8b30fc3efdcc97f512ced05650d0d"
+      },
+      "manifest": {
+        "local_path": "out/evidence/inspector-attribution-checks/native-RECOVERY-GUI-LIMITS-0affc4d7/source-manifest.json",
+        "sha256": "0400abc6a128e661f144e9e9c5004cc4214bd4d841a3b702520dfe921009a657"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-attribution-checks/native-RECOVERY-GUI-LIMITS-0affc4d7/source.zip",
+        "sha256": "a3ab8029cbdc2097a1c8a0a5356765bf49284577662ff3597c8ec4c76e7c5a92"
+      },
+      "product_inputs_differing_from_current": []
+    },
+    {
+      "stage": "native-SCENE-CHART",
+      "source_base": "f99ef4c005cae6a10852385bb2df845c72b184dd",
+      "source_archive_sha256": "a3ab8029cbdc2097a1c8a0a5356765bf49284577662ff3597c8ec4c76e7c5a92",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]SCENE-CHART$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-10T06:45:36.131977+00:00",
+          "finished_at": "2026-10-10T06:45:36.613870+00:00",
+          "exit": 0,
+          "log_sha256": "dcde717d1c5dbbe7577107f22312de58a54ef9276baeac05c47701c649f964e0",
+          "passed_ctest_count": 1
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/inspector-attribution-checks/native-SCENE-CHART-a5752de7/result.json",
+        "sha256": "dabcc6c7c9bf3126df021a0dca53289b9e25996573d1c31861e16937b4e86f95"
+      },
+      "manifest": {
+        "local_path": "out/evidence/inspector-attribution-checks/native-SCENE-CHART-a5752de7/source-manifest.json",
+        "sha256": "0400abc6a128e661f144e9e9c5004cc4214bd4d841a3b702520dfe921009a657"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-attribution-checks/native-SCENE-CHART-a5752de7/source.zip",
+        "sha256": "a3ab8029cbdc2097a1c8a0a5356765bf49284577662ff3597c8ec4c76e7c5a92"
+      },
+      "product_inputs_differing_from_current": []
+    },
+    {
+      "stage": "native-SCENE-ERASURE",
+      "source_base": "f99ef4c005cae6a10852385bb2df845c72b184dd",
+      "source_archive_sha256": "a3ab8029cbdc2097a1c8a0a5356765bf49284577662ff3597c8ec4c76e7c5a92",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]SCENE-ERASURE$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-10T06:45:56.016826+00:00",
+          "finished_at": "2026-10-10T06:46:00.236775+00:00",
+          "exit": 0,
+          "log_sha256": "882c1b33e3df8d37bc4920501f091057862f0153ffbcd7dfffafb385e8a8c33b",
+          "passed_ctest_count": 1
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/inspector-attribution-checks/native-SCENE-ERASURE-6b6939ce/result.json",
+        "sha256": "f24c327886a691955346393ddb9e160c860fe5d88059fdc3bdd2275998189da3"
+      },
+      "manifest": {
+        "local_path": "out/evidence/inspector-attribution-checks/native-SCENE-ERASURE-6b6939ce/source-manifest.json",
+        "sha256": "0400abc6a128e661f144e9e9c5004cc4214bd4d841a3b702520dfe921009a657"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-attribution-checks/native-SCENE-ERASURE-6b6939ce/source.zip",
+        "sha256": "a3ab8029cbdc2097a1c8a0a5356765bf49284577662ff3597c8ec4c76e7c5a92"
+      },
+      "product_inputs_differing_from_current": []
+    },
+    {
+      "stage": "native-SCENE-IMAGE",
+      "source_base": "f99ef4c005cae6a10852385bb2df845c72b184dd",
+      "source_archive_sha256": "a3ab8029cbdc2097a1c8a0a5356765bf49284577662ff3597c8ec4c76e7c5a92",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]SCENE-IMAGE$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-10T06:45:42.764872+00:00",
+          "finished_at": "2026-10-10T06:45:48.068306+00:00",
+          "exit": 0,
+          "log_sha256": "42fa9f67c0e726946bee536a0a1a1bbc7dc4e25e4803d4122e851df519bda43f",
+          "passed_ctest_count": 1
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/inspector-attribution-checks/native-SCENE-IMAGE-2009e6c2/result.json",
+        "sha256": "a2ca3377c38be81bb4e6aa2e425560baa91bb73c63acc71618da2bf1d9ac5b4f"
+      },
+      "manifest": {
+        "local_path": "out/evidence/inspector-attribution-checks/native-SCENE-IMAGE-2009e6c2/source-manifest.json",
+        "sha256": "0400abc6a128e661f144e9e9c5004cc4214bd4d841a3b702520dfe921009a657"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-attribution-checks/native-SCENE-IMAGE-2009e6c2/source.zip",
+        "sha256": "a3ab8029cbdc2097a1c8a0a5356765bf49284577662ff3597c8ec4c76e7c5a92"
+      },
+      "product_inputs_differing_from_current": []
+    },
+    {
+      "stage": "native-SCENE-SURFACE",
+      "source_base": "f99ef4c005cae6a10852385bb2df845c72b184dd",
+      "source_archive_sha256": "a3ab8029cbdc2097a1c8a0a5356765bf49284577662ff3597c8ec4c76e7c5a92",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]SCENE-SURFACE$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-10T06:45:28.057554+00:00",
+          "finished_at": "2026-10-10T06:45:28.558711+00:00",
+          "exit": 0,
+          "log_sha256": "4fc37eab2c81761a40c6ce985acef3ffc4d539856e93d75180c0295ea36f453f",
+          "passed_ctest_count": 1
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/inspector-attribution-checks/native-SCENE-SURFACE-eda729e6/result.json",
+        "sha256": "ec94cd7de575f2bb8a8a9b128992636c301461d301e74b96eceaddae1f18b219"
+      },
+      "manifest": {
+        "local_path": "out/evidence/inspector-attribution-checks/native-SCENE-SURFACE-eda729e6/source-manifest.json",
+        "sha256": "0400abc6a128e661f144e9e9c5004cc4214bd4d841a3b702520dfe921009a657"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-attribution-checks/native-SCENE-SURFACE-eda729e6/source.zip",
+        "sha256": "a3ab8029cbdc2097a1c8a0a5356765bf49284577662ff3597c8ec4c76e7c5a92"
+      },
+      "product_inputs_differing_from_current": []
+    },
+    {
+      "stage": "native-SCENE-TABLE",
+      "source_base": "f99ef4c005cae6a10852385bb2df845c72b184dd",
+      "source_archive_sha256": "a3ab8029cbdc2097a1c8a0a5356765bf49284577662ff3597c8ec4c76e7c5a92",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]SCENE-TABLE$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-10T06:45:32.116115+00:00",
+          "finished_at": "2026-10-10T06:45:32.675487+00:00",
+          "exit": 0,
+          "log_sha256": "e01a496ccb28611f57e1e4e7f4b579726554b3254ed19035b4e1208ce2cd53d0",
+          "passed_ctest_count": 1
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/inspector-attribution-checks/native-SCENE-TABLE-1b7a117e/result.json",
+        "sha256": "c90d9af3a91ee0d5a343424c6db97df6e5664edc19518e5884476edfe04c3ece"
+      },
+      "manifest": {
+        "local_path": "out/evidence/inspector-attribution-checks/native-SCENE-TABLE-1b7a117e/source-manifest.json",
+        "sha256": "0400abc6a128e661f144e9e9c5004cc4214bd4d841a3b702520dfe921009a657"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-attribution-checks/native-SCENE-TABLE-1b7a117e/source.zip",
+        "sha256": "a3ab8029cbdc2097a1c8a0a5356765bf49284577662ff3597c8ec4c76e7c5a92"
+      },
+      "product_inputs_differing_from_current": []
+    },
+    {
+      "stage": "native-SCENE-VISIBILITY",
+      "source_base": "f99ef4c005cae6a10852385bb2df845c72b184dd",
+      "source_archive_sha256": "a3ab8029cbdc2097a1c8a0a5356765bf49284577662ff3597c8ec4c76e7c5a92",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]SCENE-VISIBILITY$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-10T06:45:51.508372+00:00",
+          "finished_at": "2026-10-10T06:45:52.056863+00:00",
+          "exit": 0,
+          "log_sha256": "8cba51ba06a3347eb7f08e416c339e1dc7a83d696d8944754c2fb1d1d803d7c4",
+          "passed_ctest_count": 1
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/inspector-attribution-checks/native-SCENE-VISIBILITY-b01fbfe6/result.json",
+        "sha256": "1779a6b4092be51c118f320676de6cf5c8b1e4f8d1353488437d4d5489951923"
+      },
+      "manifest": {
+        "local_path": "out/evidence/inspector-attribution-checks/native-SCENE-VISIBILITY-b01fbfe6/source-manifest.json",
+        "sha256": "0400abc6a128e661f144e9e9c5004cc4214bd4d841a3b702520dfe921009a657"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-attribution-checks/native-SCENE-VISIBILITY-b01fbfe6/source.zip",
+        "sha256": "a3ab8029cbdc2097a1c8a0a5356765bf49284577662ff3597c8ec4c76e7c5a92"
+      },
+      "product_inputs_differing_from_current": []
+    },
+    {
+      "stage": "native-TABLE-ERASURE",
+      "source_base": "f99ef4c005cae6a10852385bb2df845c72b184dd",
+      "source_archive_sha256": "a3ab8029cbdc2097a1c8a0a5356765bf49284577662ff3597c8ec4c76e7c5a92",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]TABLE-ERASURE$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-10T06:46:03.984324+00:00",
+          "finished_at": "2026-10-10T06:46:11.681904+00:00",
+          "exit": 0,
+          "log_sha256": "4e3e04230004ec610dc92bc35efbe1b1c6113d77f2790c9985443ef24dcc0d2a",
+          "passed_ctest_count": 1
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/inspector-attribution-checks/native-TABLE-ERASURE-cc2e9536/result.json",
+        "sha256": "b97ef0f848919824a8cbe961f80204bf387ebb9e31a7688350291faad7878856"
+      },
+      "manifest": {
+        "local_path": "out/evidence/inspector-attribution-checks/native-TABLE-ERASURE-cc2e9536/source-manifest.json",
+        "sha256": "0400abc6a128e661f144e9e9c5004cc4214bd4d841a3b702520dfe921009a657"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-attribution-checks/native-TABLE-ERASURE-cc2e9536/source.zip",
+        "sha256": "a3ab8029cbdc2097a1c8a0a5356765bf49284577662ff3597c8ec4c76e7c5a92"
+      },
+      "product_inputs_differing_from_current": []
+    },
+    {
+      "stage": "native-TEXT-RASTER",
+      "source_base": "f99ef4c005cae6a10852385bb2df845c72b184dd",
+      "source_archive_sha256": "d5584797ee18c080f1f45842c2ad310d9542899b76068df44e49cb45f6b26d3d",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]TEXT-RASTER$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-10T06:36:30.176806+00:00",
+          "finished_at": "2026-10-10T06:36:33.414784+00:00",
+          "exit": 0,
+          "log_sha256": "d6f7197f123e16bcca90e3b0d6c9fb3aaa60dab6f5cbfead597c6f2dd6b7203d",
+          "passed_ctest_count": 1
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/inspector-attribution-checks/native-TEXT-RASTER-802953e8/result.json",
+        "sha256": "6590c0ed86cb4dd9109f9b8342a3da5daa0668a88710afb7fbc64a4cb12e967a"
+      },
+      "manifest": {
+        "local_path": "out/evidence/inspector-attribution-checks/native-TEXT-RASTER-802953e8/source-manifest.json",
+        "sha256": "e688cb8809e35bb54242ad5242141d2fcb1285c56bf5605827797ccf82370c96"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-attribution-checks/native-TEXT-RASTER-802953e8/source.zip",
+        "sha256": "d5584797ee18c080f1f45842c2ad310d9542899b76068df44e49cb45f6b26d3d"
+      },
+      "product_inputs_differing_from_current": []
+    },
+    {
+      "stage": "native-TEXT-SESSION",
+      "source_base": "f99ef4c005cae6a10852385bb2df845c72b184dd",
+      "source_archive_sha256": "d5584797ee18c080f1f45842c2ad310d9542899b76068df44e49cb45f6b26d3d",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]TEXT-SESSION$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-10T06:36:21.584141+00:00",
+          "finished_at": "2026-10-10T06:36:26.132843+00:00",
+          "exit": 0,
+          "log_sha256": "d35cb4da009cb3c3181e33eefde6835ac823a8b9d289655fae1d428e641c18dd",
+          "passed_ctest_count": 1
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/inspector-attribution-checks/native-TEXT-SESSION-ed6173ab/result.json",
+        "sha256": "d8fab1fe85edc324497bc2fc163bbd1970acc7b88980706377b344d28edd23ec"
+      },
+      "manifest": {
+        "local_path": "out/evidence/inspector-attribution-checks/native-TEXT-SESSION-ed6173ab/source-manifest.json",
+        "sha256": "e688cb8809e35bb54242ad5242141d2fcb1285c56bf5605827797ccf82370c96"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-attribution-checks/native-TEXT-SESSION-ed6173ab/source.zip",
+        "sha256": "d5584797ee18c080f1f45842c2ad310d9542899b76068df44e49cb45f6b26d3d"
+      },
+      "product_inputs_differing_from_current": []
+    },
+    {
+      "stage": "native-THEME-TYPOGRAPHY",
+      "source_base": "f99ef4c005cae6a10852385bb2df845c72b184dd",
+      "source_archive_sha256": "d5584797ee18c080f1f45842c2ad310d9542899b76068df44e49cb45f6b26d3d",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]THEME-TYPOGRAPHY$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-10T06:36:38.772331+00:00",
+          "finished_at": "2026-10-10T06:36:41.108310+00:00",
+          "exit": 0,
+          "log_sha256": "41ca56bcc9653fae80818c7ef3f726a7e9820bf6686952f9e102270e15af0a61",
+          "passed_ctest_count": 1
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/inspector-attribution-checks/native-THEME-TYPOGRAPHY-c32632ec/result.json",
+        "sha256": "4cfd465c9f3ae90264cf5fb42ad015b0bc4ba71850a548094c40930c6877ca4e"
+      },
+      "manifest": {
+        "local_path": "out/evidence/inspector-attribution-checks/native-THEME-TYPOGRAPHY-c32632ec/source-manifest.json",
+        "sha256": "e688cb8809e35bb54242ad5242141d2fcb1285c56bf5605827797ccf82370c96"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-attribution-checks/native-THEME-TYPOGRAPHY-c32632ec/source.zip",
+        "sha256": "d5584797ee18c080f1f45842c2ad310d9542899b76068df44e49cb45f6b26d3d"
+      },
+      "product_inputs_differing_from_current": []
+    },
+    {
+      "stage": "native-VISIBILITY-PIXELS",
+      "source_base": "f99ef4c005cae6a10852385bb2df845c72b184dd",
+      "source_archive_sha256": "a3ab8029cbdc2097a1c8a0a5356765bf49284577662ff3597c8ec4c76e7c5a92",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]VISIBILITY-PIXELS$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-10T06:46:46.625987+00:00",
+          "finished_at": "2026-10-10T06:46:50.947930+00:00",
+          "exit": 0,
+          "log_sha256": "94f69fc029d4c87e05d502e3aef39279e24914b1fa8618d5f385e3bd76f11ec8",
+          "passed_ctest_count": 1
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/inspector-attribution-checks/native-VISIBILITY-PIXELS-9cc75ae6/result.json",
+        "sha256": "e95bd372eb3127a67bcf4166ebf664f344c596688e6b4bd6c06196c54fa9324c"
+      },
+      "manifest": {
+        "local_path": "out/evidence/inspector-attribution-checks/native-VISIBILITY-PIXELS-9cc75ae6/source-manifest.json",
+        "sha256": "0400abc6a128e661f144e9e9c5004cc4214bd4d841a3b702520dfe921009a657"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-attribution-checks/native-VISIBILITY-PIXELS-9cc75ae6/source.zip",
+        "sha256": "a3ab8029cbdc2097a1c8a0a5356765bf49284577662ff3597c8ec4c76e7c5a92"
+      },
+      "product_inputs_differing_from_current": []
+    },
+    {
+      "stage": "phases",
+      "source_base": "f99ef4c005cae6a10852385bb2df845c72b184dd",
+      "source_archive_sha256": "8684051ac07f8db7e914e506b9d884c0f9b893377813f2ad3bce5bc9bcdf2491",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "python3",
+            "tests/configuration/native_inspector_live_table_phases.py",
+            "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/syspane",
+            "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/syspane_frontend_fixture",
+            "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/syspane_frontend_helper_fixture",
+            "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence"
+          ],
+          "started_at": "2026-10-10T06:38:01.851036+00:00",
+          "finished_at": "2026-10-10T06:39:06.687071+00:00",
+          "exit": 0,
+          "log_sha256": "7747c7738097cc443d7e4f04c8b75b12a3b61343cf9ccd8aad40ad344ac386ea",
+          "passed_ctest_count": null
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/inspector-attribution-checks/phases-458d9432/result.json",
+        "sha256": "20d75490c831fb673eb9060634c2faf9cb5dac7667b44cfe90b514fe495aca37"
+      },
+      "manifest": {
+        "local_path": "out/evidence/inspector-attribution-checks/phases-458d9432/source-manifest.json",
+        "sha256": "bdf75c5fcd2ed21eae4fe39c5f382700f20492c78b0312f1b5c3743f0c7bcf27"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-attribution-checks/phases-458d9432/source.zip",
+        "sha256": "8684051ac07f8db7e914e506b9d884c0f9b893377813f2ad3bce5bc9bcdf2491"
+      },
+      "product_inputs_differing_from_current": []
+    },
+    {
+      "stage": "phases",
+      "source_base": "f99ef4c005cae6a10852385bb2df845c72b184dd",
+      "source_archive_sha256": "cc8fc11510ea808d497299a9614df65776c6b8e9c1b0510f2f0cca733d229f4d",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "python3",
+            "tests/configuration/native_inspector_live_table_phases.py",
+            "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/syspane",
+            "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/syspane_frontend_fixture",
+            "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/syspane_frontend_helper_fixture",
+            "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence"
+          ],
+          "started_at": "2026-10-10T06:27:45.665084+00:00",
+          "finished_at": "2026-10-10T06:28:58.463252+00:00",
+          "exit": 1,
+          "log_sha256": "1926eb738cc9ccefa701a4f3ded53e8150aa0901e8f6f85574ddb848be453d14",
+          "passed_ctest_count": null
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/inspector-attribution-checks/phases-91155222/result.json",
+        "sha256": "d667ab6857706eff59a0f32b367fa626225b840e28c31623843c8362287dbb6c"
+      },
+      "manifest": {
+        "local_path": "out/evidence/inspector-attribution-checks/phases-91155222/source-manifest.json",
+        "sha256": "d0c79a9aeb3053d61cce1cc1d9e23bdfebde2f0dc620aff5d2cd9e8a23d738ef"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-attribution-checks/phases-91155222/source.zip",
+        "sha256": "cc8fc11510ea808d497299a9614df65776c6b8e9c1b0510f2f0cca733d229f4d"
+      },
+      "product_inputs_differing_from_current": [
+        "source/application/text_probe.cpp",
+        "source/configuration/theme_font.cpp",
+        "source/configuration/theme_font.hpp",
+        "source/rendering/native_text.hpp",
+        "source/rendering/native_text_linux.cpp",
+        "source/rendering/scene_surface.cpp",
+        "source/rendering/scene_table.cpp",
+        "source/rendering/scene_text.cpp",
+        "tests/scene/native_text_session.py",
+        "tests/scene/typography_tests.cpp"
+      ]
+    },
+    {
+      "stage": "portable",
+      "source_base": "f99ef4c005cae6a10852385bb2df845c72b184dd",
+      "source_archive_sha256": "464c73d9523dc34b8f75d261d0a4320b26e24b9bf5926a8367899d5398dd6b07",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^((delivery|data|measured|telemetry|scene|composition)[.]|configuration[.]TYPOGRAPHY-)",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-10T06:42:25.614207+00:00",
+          "finished_at": "2026-10-10T06:42:30.714138+00:00",
+          "exit": 0,
+          "log_sha256": "376eaa8d75970e285bdb4408f64a0265251e5acf65e22b64c8ca1d55956295db",
+          "passed_ctest_count": 114
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/inspector-attribution-checks/portable-19fdff9a/result.json",
+        "sha256": "8f2a8f3ea70cd1e843a8994526a009653c7571ac6cc423fa095461ffc23181f8"
+      },
+      "manifest": {
+        "local_path": "out/evidence/inspector-attribution-checks/portable-19fdff9a/source-manifest.json",
+        "sha256": "f410933f53cdc8bf041ea58edad0cc9191b7896c46e5e89c3e9eea17b1793565"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-attribution-checks/portable-19fdff9a/source.zip",
+        "sha256": "464c73d9523dc34b8f75d261d0a4320b26e24b9bf5926a8367899d5398dd6b07"
+      },
+      "product_inputs_differing_from_current": []
+    },
+    {
+      "stage": "scene",
+      "source_base": "f99ef4c005cae6a10852385bb2df845c72b184dd",
+      "source_archive_sha256": "cc8fc11510ea808d497299a9614df65776c6b8e9c1b0510f2f0cca733d229f4d",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]SCENE-INSPECTOR",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-10T06:27:37.165852+00:00",
+          "finished_at": "2026-10-10T06:27:42.077528+00:00",
+          "exit": 0,
+          "log_sha256": "c0ea34eacd9535ffa8fa4769dae65dd03c78c210a23e3c46174f7afa71689ba7",
+          "passed_ctest_count": 2
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/inspector-attribution-checks/scene-85cb1454/result.json",
+        "sha256": "d37a50e1daa63b63980a4978e3b850787477d3ff3f1b02682fcc7f296981dc44"
+      },
+      "manifest": {
+        "local_path": "out/evidence/inspector-attribution-checks/scene-85cb1454/source-manifest.json",
+        "sha256": "d0c79a9aeb3053d61cce1cc1d9e23bdfebde2f0dc620aff5d2cd9e8a23d738ef"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-attribution-checks/scene-85cb1454/source.zip",
+        "sha256": "cc8fc11510ea808d497299a9614df65776c6b8e9c1b0510f2f0cca733d229f4d"
+      },
+      "product_inputs_differing_from_current": [
+        "source/application/text_probe.cpp",
+        "source/configuration/theme_font.cpp",
+        "source/configuration/theme_font.hpp",
+        "source/rendering/native_text.hpp",
+        "source/rendering/native_text_linux.cpp",
+        "source/rendering/scene_surface.cpp",
+        "source/rendering/scene_table.cpp",
+        "source/rendering/scene_text.cpp",
+        "tests/scene/native_text_session.py",
+        "tests/scene/typography_tests.cpp"
+      ]
+    },
+    {
+      "stage": "scene",
+      "source_base": "f99ef4c005cae6a10852385bb2df845c72b184dd",
+      "source_archive_sha256": "464c73d9523dc34b8f75d261d0a4320b26e24b9bf5926a8367899d5398dd6b07",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]SCENE-INSPECTOR",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-10T06:42:33.255524+00:00",
+          "finished_at": "2026-10-10T06:42:37.957205+00:00",
+          "exit": 0,
+          "log_sha256": "58bccc47f10641eead25741ab13971f261fc4e8c35000cc21eb9117e61922e2c",
+          "passed_ctest_count": 2
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/inspector-attribution-checks/scene-8630f79e/result.json",
+        "sha256": "05bc8e8ff888a68cc527fa2922efae8c196f93dde46b17a1f28741b08d0ed632"
+      },
+      "manifest": {
+        "local_path": "out/evidence/inspector-attribution-checks/scene-8630f79e/source-manifest.json",
+        "sha256": "f410933f53cdc8bf041ea58edad0cc9191b7896c46e5e89c3e9eea17b1793565"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-attribution-checks/scene-8630f79e/source.zip",
+        "sha256": "464c73d9523dc34b8f75d261d0a4320b26e24b9bf5926a8367899d5398dd6b07"
+      },
+      "product_inputs_differing_from_current": []
+    },
+    {
+      "stage": "tables",
+      "source_base": "f99ef4c005cae6a10852385bb2df845c72b184dd",
+      "source_archive_sha256": "d5584797ee18c080f1f45842c2ad310d9542899b76068df44e49cb45f6b26d3d",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]INSPECTOR-LIVE-TABLES$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-10T06:36:44.707859+00:00",
+          "finished_at": "2026-10-10T06:37:50.570468+00:00",
+          "exit": 0,
+          "log_sha256": "feef3f4206ed5624a6f1f9bd9a6f4fee4f58f948b21baf533d5c7b3438da2b44",
+          "passed_ctest_count": 1
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/inspector-attribution-checks/tables-ad2db8dc/result.json",
+        "sha256": "157b35cd10d15f8183995073d045f365d90bb25c5f9f1aca26c9bdef9e9bb8a2"
+      },
+      "manifest": {
+        "local_path": "out/evidence/inspector-attribution-checks/tables-ad2db8dc/source-manifest.json",
+        "sha256": "e688cb8809e35bb54242ad5242141d2fcb1285c56bf5605827797ccf82370c96"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-attribution-checks/tables-ad2db8dc/source.zip",
+        "sha256": "d5584797ee18c080f1f45842c2ad310d9542899b76068df44e49cb45f6b26d3d"
+      },
+      "product_inputs_differing_from_current": []
+    },
+    {
+      "stage": "typography",
+      "source_base": "f99ef4c005cae6a10852385bb2df845c72b184dd",
+      "source_archive_sha256": "d5584797ee18c080f1f45842c2ad310d9542899b76068df44e49cb45f6b26d3d",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^configuration[.]TYPOGRAPHY-",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-10T06:36:18.699472+00:00",
+          "finished_at": "2026-10-10T06:36:18.996938+00:00",
+          "exit": 0,
+          "log_sha256": "87d6e1a32ea771a190a9531c2446f6d33f42e24044343d649326bdcd8a971b26",
+          "passed_ctest_count": 3
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/inspector-attribution-checks/typography-b0b0fceb/result.json",
+        "sha256": "093f029baafe424621ca6b43529a0507840d9f498445f34109c69b03e93d38f8"
+      },
+      "manifest": {
+        "local_path": "out/evidence/inspector-attribution-checks/typography-b0b0fceb/source-manifest.json",
+        "sha256": "e688cb8809e35bb54242ad5242141d2fcb1285c56bf5605827797ccf82370c96"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-attribution-checks/typography-b0b0fceb/source.zip",
+        "sha256": "d5584797ee18c080f1f45842c2ad310d9542899b76068df44e49cb45f6b26d3d"
+      },
+      "product_inputs_differing_from_current": []
+    },
+    {
+      "stage": "windows",
+      "source_base": "f99ef4c005cae6a10852385bb2df845c72b184dd",
+      "source_archive_sha256": "8684051ac07f8db7e914e506b9d884c0f9b893377813f2ad3bce5bc9bcdf2491",
+      "commands": [
+        {
+          "command": [
+            "cmake",
+            "--preset",
+            "windows-x64-gcc15"
+          ],
+          "started_at": "2026-10-10T06:39:49.681281+00:00",
+          "finished_at": "2026-10-10T06:39:51.207932+00:00",
+          "exit": 0,
+          "log_sha256": "cc99681f25a6e63302d036879c40d53abb8af7415103801e12ada547b66d6ee1",
+          "passed_ctest_count": null
+        },
+        {
+          "command": [
+            "cmake",
+            "--build",
+            "--preset",
+            "windows-x64-gcc15"
+          ],
+          "started_at": "2026-10-10T06:39:53.122262+00:00",
+          "finished_at": "2026-10-10T06:41:14.361735+00:00",
+          "exit": 0,
+          "log_sha256": "fec5a67a15c4dde3e5c13d6d18b892a72a03c6fc5764c1c07cd03b748bf89243",
+          "passed_ctest_count": null
+        },
+        {
+          "command": [
+            "ctest",
+            "--preset",
+            "windows-x64-gcc15",
+            "-R",
+            "^((delivery|data|measured|telemetry|scene|composition)[.]|configuration[.]TYPOGRAPHY-)",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-10T06:41:16.280996+00:00",
+          "finished_at": "2026-10-10T06:41:25.131326+00:00",
+          "exit": 0,
+          "log_sha256": "6ec11a32ffbbb0622435be8495c6b4a765ec8df1de930c82d4c633816778949c",
+          "passed_ctest_count": 114
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/inspector-attribution-checks/windows-a34054c5/result.json",
+        "sha256": "79e52ad8f6330cb1e8dd3874b4b3301452ec649d1a558e231e3cffa72ee828f9"
+      },
+      "manifest": {
+        "local_path": "out/evidence/inspector-attribution-checks/windows-a34054c5/source-manifest.json",
+        "sha256": "bdf75c5fcd2ed21eae4fe39c5f382700f20492c78b0312f1b5c3743f0c7bcf27"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-attribution-checks/windows-a34054c5/source.zip",
+        "sha256": "8684051ac07f8db7e914e506b9d884c0f9b893377813f2ad3bce5bc9bcdf2491"
+      },
+      "product_inputs_differing_from_current": []
+    }
+  ],
+  "latest_executions": {
+    "build": "out/evidence/inspector-attribution-checks/build-eafd8cf0/result.json",
+    "decoder": "out/evidence/inspector-attribution-checks/decoder-f204e9f3/result.json",
+    "scene": "out/evidence/inspector-attribution-checks/scene-8630f79e/result.json",
+    "phases": "out/evidence/inspector-attribution-checks/phases-458d9432/result.json",
+    "native-FRONTEND-PHASE-FAILURE": "out/evidence/inspector-attribution-checks/native-FRONTEND-PHASE-FAILURE-3c2416f9/result.json",
+    "typography": "out/evidence/inspector-attribution-checks/typography-b0b0fceb/result.json",
+    "native-TEXT-SESSION": "out/evidence/inspector-attribution-checks/native-TEXT-SESSION-ed6173ab/result.json",
+    "native-TEXT-RASTER": "out/evidence/inspector-attribution-checks/native-TEXT-RASTER-802953e8/result.json",
+    "native-THEME-TYPOGRAPHY": "out/evidence/inspector-attribution-checks/native-THEME-TYPOGRAPHY-c32632ec/result.json",
+    "tables": "out/evidence/inspector-attribution-checks/tables-ad2db8dc/result.json",
+    "windows": "out/evidence/inspector-attribution-checks/windows-a34054c5/result.json",
+    "legacy": "out/evidence/inspector-attribution-checks/legacy-a4752f51/result.json",
+    "portable": "out/evidence/inspector-attribution-checks/portable-19fdff9a/result.json",
+    "live": "out/evidence/inspector-attribution-checks/live-86ca5edb/result.json",
+    "authored": "out/evidence/inspector-attribution-checks/authored-04f779a7/result.json",
+    "native-SCENE-SURFACE": "out/evidence/inspector-attribution-checks/native-SCENE-SURFACE-eda729e6/result.json",
+    "native-SCENE-TABLE": "out/evidence/inspector-attribution-checks/native-SCENE-TABLE-1b7a117e/result.json",
+    "native-SCENE-CHART": "out/evidence/inspector-attribution-checks/native-SCENE-CHART-a5752de7/result.json",
+    "native-SCENE-IMAGE": "out/evidence/inspector-attribution-checks/native-SCENE-IMAGE-2009e6c2/result.json",
+    "native-SCENE-VISIBILITY": "out/evidence/inspector-attribution-checks/native-SCENE-VISIBILITY-b01fbfe6/result.json",
+    "native-SCENE-ERASURE": "out/evidence/inspector-attribution-checks/native-SCENE-ERASURE-6b6939ce/result.json",
+    "native-TABLE-ERASURE": "out/evidence/inspector-attribution-checks/native-TABLE-ERASURE-cc2e9536/result.json",
+    "native-CHART-ERASURE": "out/evidence/inspector-attribution-checks/native-CHART-ERASURE-2a67efdc/result.json",
+    "native-IMAGE-ERASURE": "out/evidence/inspector-attribution-checks/native-IMAGE-ERASURE-73fe7f41/result.json",
+    "native-CONTENT-ERASURE": "out/evidence/inspector-attribution-checks/native-CONTENT-ERASURE-a00bdbfe/result.json",
+    "native-VISIBILITY-PIXELS": "out/evidence/inspector-attribution-checks/native-VISIBILITY-PIXELS-9cc75ae6/result.json",
+    "native-RECOVERY-GUI-LIMITS": "out/evidence/inspector-attribution-checks/native-RECOVERY-GUI-LIMITS-0affc4d7/result.json"
+  },
+  "archival_executions": [
+    {
+      "local_path": "out/evidence/inspector-attribution-checks/archive-014de3d7/result.json",
+      "sha256": "67cb648a24ca1056fefcd12a17a5206f909cf97564f3336511ac318c94a16b53"
+    },
+    {
+      "local_path": "out/evidence/inspector-attribution-checks/archive-03321afb/result.json",
+      "sha256": "5403cac4bfe01e8a271749b963546a14168f7fe71b11e4ccd203005917cfd7e7"
+    },
+    {
+      "local_path": "out/evidence/inspector-attribution-checks/archive-18dd45dc/result.json",
+      "sha256": "2fcc48f419cbde7f23f2f31305728068053fb284d9093f2ab3b30ec2cbb2580e"
+    },
+    {
+      "local_path": "out/evidence/inspector-attribution-checks/archive-30aa781d/result.json",
+      "sha256": "618926b320e95d06b2918c2af161dce40e76e08a23e8982986b74bfc7953a41c"
+    },
+    {
+      "local_path": "out/evidence/inspector-attribution-checks/archive-376c4002/result.json",
+      "sha256": "8d0e82de171135ef1571a629a162bb23f9dcd9a64939a230d50db817ef9d6c0c"
+    },
+    {
+      "local_path": "out/evidence/inspector-attribution-checks/archive-3b86c204/result.json",
+      "sha256": "c2caa11eea1e76d689ecec311c3123d8eac1ba7fd4f1ff21225a6b5bffbce2e4"
+    },
+    {
+      "local_path": "out/evidence/inspector-attribution-checks/archive-474e9cf6/result.json",
+      "sha256": "8fe4ea68a482c238324a8b37c00be67ab62ea6fe98a4f27949b6c23e83aa6895"
+    },
+    {
+      "local_path": "out/evidence/inspector-attribution-checks/archive-4a4031ea/result.json",
+      "sha256": "2e788976f237d61a87d82298b635719a903ffed987ab855089f0051d54499b3f"
+    },
+    {
+      "local_path": "out/evidence/inspector-attribution-checks/archive-53258e16/result.json",
+      "sha256": "d25b3867cd535b2979e237872b14b8700215369fb284998c23980b0b9f983788"
+    },
+    {
+      "local_path": "out/evidence/inspector-attribution-checks/archive-6da2c268/result.json",
+      "sha256": "d84ab0aeb8c62b0474917e8346e6cc76650e345263278ca17ad591ed9eccd635"
+    },
+    {
+      "local_path": "out/evidence/inspector-attribution-checks/archive-79d40f0a/result.json",
+      "sha256": "67feb5b19c4650e73daa40f7f01d68fc4afbe0ecde0d10befcebd263e3b7cbbc"
+    },
+    {
+      "local_path": "out/evidence/inspector-attribution-checks/archive-8d84db50/result.json",
+      "sha256": "923ae2afcf4d1844a305f517d9d88a71e44dc6bfce59ae3f2ac117410a91d15e"
+    },
+    {
+      "local_path": "out/evidence/inspector-attribution-checks/archive-9f7fa5c2/result.json",
+      "sha256": "66d2dad616273695e057b2f753d6b3d39276e33933221ab0dedda374a9b39bc3"
+    },
+    {
+      "local_path": "out/evidence/inspector-attribution-checks/archive-a4082a6a/result.json",
+      "sha256": "711851d274c9bd9b21c18dc43e9f964cfd0a38039d1710a13ae8349af4f58691"
+    },
+    {
+      "local_path": "out/evidence/inspector-attribution-checks/archive-a5d6bdea/result.json",
+      "sha256": "095bab3dbed5ef2f348efeb1a84743f529324c04eff5798deb9003c63b73f014"
+    },
+    {
+      "local_path": "out/evidence/inspector-attribution-checks/archive-af516e6e/result.json",
+      "sha256": "ffab7c8dfbeecc44b24e98285242459575180f3170c08cd813d5e2d0c703646c"
+    },
+    {
+      "local_path": "out/evidence/inspector-attribution-checks/archive-b1251554/result.json",
+      "sha256": "08b57acb754e996c881eded8df970915e2724b8a4cd875593e21f41e7b33bda8"
+    },
+    {
+      "local_path": "out/evidence/inspector-attribution-checks/archive-b25c5e7f/result.json",
+      "sha256": "b3864154be80bac5e0ba0d9c2b6c525cd1754efc7cbdb7d2286da8f11c5a5c50"
+    },
+    {
+      "local_path": "out/evidence/inspector-attribution-checks/archive-b532ff57/result.json",
+      "sha256": "c52c01cc9949dafc219bb4c169714ef5765443128775a29a1626b112d3138150"
+    },
+    {
+      "local_path": "out/evidence/inspector-attribution-checks/archive-e4962c4d/result.json",
+      "sha256": "a7cb902644391d15b602a7eebcdea2904569114d7fabb77486a44a1d522f79ae"
+    },
+    {
+      "local_path": "out/evidence/inspector-attribution-checks/archive-e6e9eca6/result.json",
+      "sha256": "1d88ec2df07d69e067f92fb8af7c633971ba47fc0148778d25e43a7d5c1eedff"
+    },
+    {
+      "local_path": "out/evidence/inspector-attribution-checks/archive-e9b49b15/result.json",
+      "sha256": "359c99c3c5cbe2a7d0f4c1a36b418bdd3ddd9258e85ce01d3a6ea2c519fef538"
+    },
+    {
+      "local_path": "out/evidence/inspector-attribution-checks/archive-f983d0c5/result.json",
+      "sha256": "e4e25c8cdafd47ca63394f40541bf885ee5e91e5e539db240b20badba7bf95b0"
+    }
+  ],
+  "native_archives": [
+    {
+      "label": "authored-theme-regression",
+      "index": {
+        "local_path": "out/evidence/inspector-attribution-native/authored-theme-regression/index.json",
+        "sha256": "9e535929a7cfd4fa6f00629319f1deea038d9f2fac4c9d0360a31300868f5c42"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-attribution-native/authored-theme-regression/native-evidence.zip",
+        "sha256": "def36eff010f55378aaa71f274f78b5ed14720946ab112cb1b180d21e380c741"
+      },
+      "preserved_bytes": 149381999,
+      "reports": [
+        {
+          "path": "inspector-authored-d81b095102/result.json",
+          "sha256": "a1bbbab216a322d34e2d0342f1dc224c5babff6d191e8f8d089abe823408566e",
+          "family": "INSPECTOR-AUTHORED-LIMITS",
+          "outcome": "pass",
+          "cases": [
+            {
+              "case": "MAX-WIDGETS",
+              "outcome": "pass",
+              "record_sha256": "586e5c87ad62c9884d860e84ee8ecc4a2709e518cbb3fcb388672a103f8e517c",
+              "timing_max_us": {
+                "delay_us": 59457,
+                "work_us": 60668
+              },
+              "timing_violations": [],
+              "finished_at": "2026-10-10T06:43:50.665573+00:00"
+            },
+            {
+              "case": "MAX-FRAME",
+              "outcome": "pass",
+              "record_sha256": "5a6fb8c6a727fc814c7b528869a6813cd9e31996ead42fee22548cb926dd002f",
+              "timing_max_us": {
+                "delay_us": 63985,
+                "work_us": 58058
+              },
+              "timing_violations": [],
+              "finished_at": "2026-10-10T06:44:00.455483+00:00"
+            },
+            {
+              "case": "MAX-SCENE",
+              "outcome": "pass",
+              "record_sha256": "7ee4790cc6eaa4fd7c0a3daf572dad56f9ebdcb9a9b7bfc18cd580555b3cb245",
+              "timing_max_us": {
+                "delay_us": 70913,
+                "work_us": 64232
+              },
+              "timing_violations": [],
+              "finished_at": "2026-10-10T06:44:11.471163+00:00"
+            },
+            {
+              "case": "MAX-DEPTH",
+              "outcome": "pass",
+              "record_sha256": "ab3e3985d3bc9a31bea8a1f23058079e16ee89d5ece4b1b1bc8101a4dcfe46f8",
+              "timing_max_us": {
+                "delay_us": 61695,
+                "work_us": 57448
+              },
+              "timing_violations": [],
+              "finished_at": "2026-10-10T06:44:23.867376+00:00"
+            },
+            {
+              "case": "OVER-FRAME",
+              "outcome": "pass",
+              "record_sha256": "cd1ab34af6a4712f14e3d4d007aabba8e053c2e3c6487ad7688d60bc4f20bb87",
+              "timing_max_us": {
+                "delay_us": 4794,
+                "work_us": 47519
+              },
+              "timing_violations": [],
+              "finished_at": "2026-10-10T06:44:32.690553+00:00"
+            },
+            {
+              "case": "NAVIGATION",
+              "outcome": "pass",
+              "record_sha256": "97b27835ac5bf612b202fdd696e29a307b45f2b40f92867b17a1bd174cf9f8d3",
+              "timing_max_us": {
+                "delay_us": 71489,
+                "work_us": 62372
+              },
+              "timing_violations": [],
+              "finished_at": "2026-10-10T06:44:46.229664+00:00"
+            },
+            {
+              "case": "REOPEN",
+              "outcome": "pass",
+              "record_sha256": "ff2c8234619124a1b3a9bf4df984f795d6d1303dce4715980c726fab5cc8441a",
+              "timing_max_us": {
+                "delay_us": 46730,
+                "work_us": 61415
+              },
+              "timing_violations": [],
+              "finished_at": "2026-10-10T06:45:04.479775+00:00"
+            },
+            {
+              "case": "POLICY",
+              "outcome": "pass",
+              "record_sha256": "063818a677de5f6bbf8a8fe8f493ae8f36eeaa0b3cc6e1644c6bcb0e6f9d6f5e",
+              "timing_max_us": {
+                "delay_us": 4010,
+                "work_us": 61853
+              },
+              "timing_violations": [],
+              "erasure_ms": 145.65967704402283,
+              "finished_at": "2026-10-10T06:45:14.876805+00:00"
+            }
+          ]
+        }
+      ],
+      "diagnostics": []
+    },
+    {
+      "label": "live-theme-regression",
+      "index": {
+        "local_path": "out/evidence/inspector-attribution-native/live-theme-regression/index.json",
+        "sha256": "4551fefeeb1373d6de5063c12da5d2e5a91d505d3c3ddc967f76ddca7f728528"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-attribution-native/live-theme-regression/native-evidence.zip",
+        "sha256": "e7fcd86449c6290377fbea97a86962d23520d96e9cc72a3fdb7072d9785f973d"
+      },
+      "preserved_bytes": 146506329,
+      "reports": [
+        {
+          "path": "telemetry-frontend-fa7db3406e/result.json",
+          "sha256": "331c962f052bca769567e4ffbdccc66b4e764ed9955e446c6161fe34677298c8",
+          "family": "INSTALLED-TELEMETRY",
+          "outcome": "pass",
+          "cases": [
+            {
+              "case": "LIVE",
+              "outcome": "pass",
+              "record_sha256": "76d9551ab7233793b1898e4f8faebf7b6d069bc87dbb5c9dd9c447a5d7e1d334",
+              "finished_at": "2026-10-10T06:42:50.264999+00:00"
+            },
+            {
+              "case": "NAVIGATION",
+              "outcome": "pass",
+              "record_sha256": "5c73b0254b49bf9dde71f60272ca9d635ee58a5ec06d73d34dcaae227aec5752",
+              "finished_at": "2026-10-10T06:42:55.499348+00:00"
+            },
+            {
+              "case": "REPLACEMENT",
+              "outcome": "pass",
+              "record_sha256": "1a98e240bc8f78219f7cf8b3ddd014392c572906d76fa6e9873b948fb5ac82cf",
+              "finished_at": "2026-10-10T06:43:01.411086+00:00"
+            },
+            {
+              "case": "POLICY",
+              "outcome": "pass",
+              "record_sha256": "ff43b5ef6e8093c3184a4d2875b4dd1985f52484dc0519425dcf77f83ef5fdcd",
+              "erasure_ms": 42.35805798089132,
+              "finished_at": "2026-10-10T06:43:09.409909+00:00"
+            },
+            {
+              "case": "CONFIGURATION-LOSS",
+              "outcome": "pass",
+              "record_sha256": "78ef28c6ea58772015c05493afd25d601d97dddf270dc571e2df338612f68c2f",
+              "finished_at": "2026-10-10T06:43:15.497786+00:00"
+            },
+            {
+              "case": "CLOSE-HELD",
+              "outcome": "pass",
+              "record_sha256": "5b1bc094311422a2aa9bcbd04271e919d66459ef309743809ea3d6828664aec5",
+              "finished_at": "2026-10-10T06:43:21.965405+00:00"
+            },
+            {
+              "case": "ORACLE",
+              "outcome": "pass",
+              "record_sha256": "0167a47d52e4631b0f0a0934d7c73c18bf71251442ef73cccf541343edbb9d19",
+              "finished_at": "2026-10-10T06:43:25.646105+00:00"
+            }
+          ]
+        }
+      ],
+      "diagnostics": []
+    },
+    {
+      "label": "native-CHART-ERASURE-theme-regression",
+      "index": {
+        "local_path": "out/evidence/inspector-attribution-native/native-CHART-ERASURE-theme-regression/index.json",
+        "sha256": "88ad597b655c2d9f985d4a7e7f22aa27853b05e9a30926d1d060bc65c99ca931"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-attribution-native/native-CHART-ERASURE-theme-regression/native-evidence.zip",
+        "sha256": "d9ba01e34cdbf248dbd47c96ed114c983191b8c0ff0f183f94c6b4cd6f686a3d"
+      },
+      "preserved_bytes": 58750790,
+      "reports": [
+        {
+          "path": "surface-8f0fbc8690e8/result.json",
+          "sha256": "d7bbcc148e447d3ef52677f0106e22d346bea683c5ea90a49750f6b67d7140ee",
+          "family": "CHART-ERASURE",
+          "outcome": "pass",
+          "cases": [
+            {
+              "case": "normal",
+              "outcome": "pass",
+              "record_sha256": "ee97d1b0b32fab58471708e248ea1e082c493ec46a16d9e0c8dc08d2506c9a4a"
+            },
+            {
+              "case": "ignore-pixels",
+              "outcome": "pass",
+              "record_sha256": "109b2d0d99d10a17d4ec5bb6907ff99af109a4e6c146939bc3369c22871b69cd"
+            },
+            {
+              "case": "ignore-accessible",
+              "outcome": "pass",
+              "record_sha256": "e2bf52ffa023a91bbfab330099c91519437804f346d4a011b0f4a14bbd266ace"
+            }
+          ]
+        }
+      ],
+      "diagnostics": []
+    },
+    {
+      "label": "native-CONTENT-ERASURE-theme-regression",
+      "index": {
+        "local_path": "out/evidence/inspector-attribution-native/native-CONTENT-ERASURE-theme-regression/index.json",
+        "sha256": "07ea2c0efd10293712a5fd696cd1c53499240218b081f1c290e12312c984f069"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-attribution-native/native-CONTENT-ERASURE-theme-regression/native-evidence.zip",
+        "sha256": "7baad7441860064d801714cb849fb5e33f74edf04e292340e53194db933e0bff"
+      },
+      "preserved_bytes": 54443484,
+      "reports": [
+        {
+          "path": "surface-326db0c3c22e/result.json",
+          "sha256": "c8fb8809ec8570398fca15f3a956b9f062635b9f245e512b6abf0a82f0da381e",
+          "family": "CONTENT-ERASURE",
+          "outcome": "pass",
+          "cases": [
+            {
+              "case": "normal",
+              "outcome": "pass",
+              "record_sha256": "27eaec6c89415a7cf8a34b5f98cc8585bcf8bc56c685bc2b71d4402c2832fb42"
+            },
+            {
+              "case": "ignore-pixels",
+              "outcome": "pass",
+              "record_sha256": "2fe44a77b6a50a223cf4482a79720ca909377159a86f213e30b8e76d788ff866"
+            },
+            {
+              "case": "ignore-accessible",
+              "outcome": "pass",
+              "record_sha256": "039647df693b3e2aa3e3bc4b8d13337c808946c508663b2f633eba88f11710c9"
+            }
+          ]
+        }
+      ],
+      "diagnostics": []
+    },
+    {
+      "label": "native-FRONTEND-PHASE-FAILURE-initial",
+      "index": {
+        "local_path": "out/evidence/inspector-attribution-native/native-FRONTEND-PHASE-FAILURE-initial/index.json",
+        "sha256": "0b152e7274f34fbf6ba50d527eb56f503c1d0e908b91364e46e0484b39af361d"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-attribution-native/native-FRONTEND-PHASE-FAILURE-initial/native-evidence.zip",
+        "sha256": "154deb14c5a2a0fb5bc66650243687d93a0dacbcefe4f69b10521cdbc6c9bd8e"
+      },
+      "preserved_bytes": 146057568,
+      "reports": [
+        {
+          "path": "pff-1c0bc3c4b8/result.json",
+          "sha256": "493e4616116d1fd72deedd5f65a0c01bd13f2b5d251269652a8f803702136bd9",
+          "family": "FRONTEND-PHASE-FAILURE",
+          "outcome": "pass",
+          "cases": [
+            {
+              "case": "REFUSE",
+              "outcome": "pass",
+              "record_sha256": "9ce9224db0730bfe6e5db0a26ef3bd3a5c5847812cdc9409c9e22d18417292f6",
+              "timing_max_us": {
+                "delay_us": 5099,
+                "work_us": 12862
+              },
+              "timing_violations": [],
+              "finished_at": "2026-10-10T06:29:15.463947+00:00"
+            },
+            {
+              "case": "THROW",
+              "outcome": "pass",
+              "record_sha256": "f922fb9bfeb2ee1dde32218dd422d9432f69186e371d1533541c0c530b931a80",
+              "timing_max_us": {
+                "delay_us": 3853,
+                "work_us": 12942
+              },
+              "timing_violations": [],
+              "finished_at": "2026-10-10T06:29:17.498709+00:00"
+            }
+          ]
+        }
+      ],
+      "diagnostics": []
+    },
+    {
+      "label": "native-IMAGE-ERASURE-theme-regression",
+      "index": {
+        "local_path": "out/evidence/inspector-attribution-native/native-IMAGE-ERASURE-theme-regression/index.json",
+        "sha256": "404ac9561ee5334eee99a112b19477af121ee6ec40c3468b97568875afdbd9c1"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-attribution-native/native-IMAGE-ERASURE-theme-regression/native-evidence.zip",
+        "sha256": "339673e511b2b5fbf0671e17578eb4e7fba227064245380f1d9109878a2de14d"
+      },
+      "preserved_bytes": 86432474,
+      "reports": [
+        {
+          "path": "surface-d65acf40db33/result.json",
+          "sha256": "dd15de1182b50cd7d10163edac2d4feb6a754008b937bda84807c673b817a09f",
+          "family": "IMAGE-ERASURE",
+          "outcome": "pass",
+          "cases": [
+            {
+              "case": "normal",
+              "outcome": "pass",
+              "record_sha256": "70cd70437893f64e8f0c3b9fd207fd2cc72a6bff2e0370608434ff76c6cc39a2"
+            },
+            {
+              "case": "ignore-pixels",
+              "outcome": "pass",
+              "record_sha256": "0c5948d0ead1323d48f2d50fcfc07e29c47ca7d4b2299b07afe1b216d3cf3800"
+            },
+            {
+              "case": "ignore-accessible",
+              "outcome": "pass",
+              "record_sha256": "ffddfb2a8b230a2dea4cf71946b35ebf45bc1578246999e0e443ff56805b7c33"
+            }
+          ]
+        }
+      ],
+      "diagnostics": []
+    },
+    {
+      "label": "native-RECOVERY-GUI-LIMITS-theme-regression",
+      "index": {
+        "local_path": "out/evidence/inspector-attribution-native/native-RECOVERY-GUI-LIMITS-theme-regression/index.json",
+        "sha256": "9ea620db2574d49ef7d4dff30ac58f4a803d00b6fd240422400e520ac5e720e5"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-attribution-native/native-RECOVERY-GUI-LIMITS-theme-regression/native-evidence.zip",
+        "sha256": "a75d8ab43c68e418094b33a3be804cfb737fcd6a38752dd703a977ed0080e853"
+      },
+      "preserved_bytes": 152046823,
+      "reports": [
+        {
+          "path": "rgl-32409f44ce/result.json",
+          "sha256": "d164daa27e2c6ed100719f35752f49ff33dfc4edca3c68a9b1cf9b7aaa1d22e1",
+          "family": "RECOVERY-GUI-LIMITS",
+          "outcome": "pass",
+          "cases": [
+            {
+              "case": "MAX-WIDGETS",
+              "outcome": "pass",
+              "record_sha256": "6ab21173f919a14d5f526af99941d01cb122f4da074c027accdd9c9b49e4fc84",
+              "timing_max_us": {
+                "delay_us": 57608,
+                "work_us": 58702
+              },
+              "timing_violations": [],
+              "finished_at": "2026-10-10T06:47:09.266148+00:00"
+            },
+            {
+              "case": "MAX-SCENE",
+              "outcome": "pass",
+              "record_sha256": "edbb9a00e734911ba0ebaeec3db99ba82583b4e7fbe989be812351536321adc3",
+              "timing_max_us": {
+                "delay_us": 41760,
+                "work_us": 55635
+              },
+              "timing_violations": [],
+              "finished_at": "2026-10-10T06:47:20.158410+00:00"
+            },
+            {
+              "case": "MAX-RECORD",
+              "outcome": "pass",
+              "record_sha256": "941042d2c69e43f705e6778650ca4d556e3fcdb33a38ffe148f3164359c3e415",
+              "timing_max_us": {
+                "delay_us": 48281,
+                "work_us": 44757
+              },
+              "timing_violations": [],
+              "finished_at": "2026-10-10T06:47:33.055456+00:00"
+            },
+            {
+              "case": "MAX-COMMAND-REJECT",
+              "outcome": "pass",
+              "record_sha256": "f3ac9f807ec19f8ce8c755d193336f1ee3a130d62cb472626b333fd8fb0fc9b3",
+              "timing_max_us": {
+                "delay_us": 9122,
+                "work_us": 26823
+              },
+              "timing_violations": [],
+              "finished_at": "2026-10-10T06:47:37.334697+00:00"
+            },
+            {
+              "case": "OVER-RECORD-REJECT",
+              "outcome": "pass",
+              "record_sha256": "13eb77fc5894156ee2404e694fc29eaaf4e6ab48370be98b5dd7d18cd8ba4237",
+              "timing_max_us": {
+                "delay_us": 4695,
+                "work_us": 26614
+              },
+              "timing_violations": [],
+              "finished_at": "2026-10-10T06:47:41.107590+00:00"
+            },
+            {
+              "case": "CLOSE-PREPARING",
+              "outcome": "pass",
+              "record_sha256": "49f6716110c81713833f4b577957cb179c47a2e6e097b894c43fd73d02ae0e53",
+              "timing_max_us": {
+                "delay_us": 3230,
+                "work_us": 26167
+              },
+              "timing_violations": [],
+              "finished_at": "2026-10-10T06:47:44.791490+00:00"
+            },
+            {
+              "case": "POLICY",
+              "outcome": "pass",
+              "record_sha256": "62eb84c8049a3d75e29da188910f67552f7ce0e7e0ff2ae5748ebb02c5e872fb",
+              "timing_max_us": {
+                "delay_us": 36623,
+                "work_us": 39584
+              },
+              "timing_violations": [],
+              "erasure_ms": 78.65488395327702,
+              "finished_at": "2026-10-10T06:47:50.059446+00:00"
+            }
+          ]
+        }
+      ],
+      "diagnostics": []
+    },
+    {
+      "label": "native-SCENE-CHART-theme-regression",
+      "index": {
+        "local_path": "out/evidence/inspector-attribution-native/native-SCENE-CHART-theme-regression/index.json",
+        "sha256": "4bdf5bad6119234f29601a9ab68263e183b08167758e773e783eeb83a545c7b0"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-attribution-native/native-SCENE-CHART-theme-regression/native-evidence.zip",
+        "sha256": "ccdb1c4dbc99c8807b8135069a62d66627eb6a89c9dc2efbc9e84a88c0b3d7e2"
+      },
+      "preserved_bytes": 0,
+      "reports": [],
+      "diagnostics": []
+    },
+    {
+      "label": "native-SCENE-ERASURE-theme-regression",
+      "index": {
+        "local_path": "out/evidence/inspector-attribution-native/native-SCENE-ERASURE-theme-regression/index.json",
+        "sha256": "1315f5b6b9c9e8b80f856681d9e3b9632f8d84389dafbb2433d87c920b3cf2df"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-attribution-native/native-SCENE-ERASURE-theme-regression/native-evidence.zip",
+        "sha256": "c3bd1a261b4d96edcf7f48fe3ee4e1f41dcd7cf1c9edeeb5afc4313f87c3beff"
+      },
+      "preserved_bytes": 55303065,
+      "reports": [
+        {
+          "path": "surface-e6bf9b354066/result.json",
+          "sha256": "28868d0f3fc1d0ad958a738fd05336737d07cb5e5b321d0c4101d21cade8581c",
+          "family": "SCENE-ERASURE",
+          "outcome": "pass",
+          "cases": [
+            {
+              "case": "normal",
+              "outcome": "pass",
+              "record_sha256": "d7bdb398b89d8881a00f7ce737d15574b312edcdc996569e98e35a427d412fd8"
+            },
+            {
+              "case": "ignore-pixels",
+              "outcome": "pass",
+              "record_sha256": "ee8449084d27f35a59934762facd58cba0b01f18a2ce42ee1df0715148eb3276"
+            },
+            {
+              "case": "ignore-accessible",
+              "outcome": "pass",
+              "record_sha256": "59a46c2871be34efa4ecc6fd12218d1ea28c4e5ed515cd6fb3484d0bf5d74eb6"
+            }
+          ]
+        }
+      ],
+      "diagnostics": []
+    },
+    {
+      "label": "native-SCENE-IMAGE-theme-regression",
+      "index": {
+        "local_path": "out/evidence/inspector-attribution-native/native-SCENE-IMAGE-theme-regression/index.json",
+        "sha256": "b6d8a50a3f9442d16cb497dade4547d78137c6992547613917166f0e73a7540e"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-attribution-native/native-SCENE-IMAGE-theme-regression/native-evidence.zip",
+        "sha256": "f8946380cfa3c3d329612d8f06eae1cbd3eacb71a74f1bb9d1b90bf28b273d56"
+      },
+      "preserved_bytes": 0,
+      "reports": [],
+      "diagnostics": []
+    },
+    {
+      "label": "native-SCENE-SURFACE-theme-regression",
+      "index": {
+        "local_path": "out/evidence/inspector-attribution-native/native-SCENE-SURFACE-theme-regression/index.json",
+        "sha256": "ce44dc4f1049b2b7738c3aee98016f5c0f85da9d38eec8777a78a89e15533dca"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-attribution-native/native-SCENE-SURFACE-theme-regression/native-evidence.zip",
+        "sha256": "000edc47f133d1235a1792ef9ab59e1792b2545f3ca0d9b23917998abceeec8e"
+      },
+      "preserved_bytes": 0,
+      "reports": [],
+      "diagnostics": []
+    },
+    {
+      "label": "native-SCENE-TABLE-theme-regression",
+      "index": {
+        "local_path": "out/evidence/inspector-attribution-native/native-SCENE-TABLE-theme-regression/index.json",
+        "sha256": "17cac0b673561ecd218e0c490e4b92582b5f7c7c087f06f154e0b274a25a0de2"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-attribution-native/native-SCENE-TABLE-theme-regression/native-evidence.zip",
+        "sha256": "f10c550bf2c199690f6d4ffe89a3549d28c7a4c18b00313469c7893c84c9e566"
+      },
+      "preserved_bytes": 0,
+      "reports": [],
+      "diagnostics": []
+    },
+    {
+      "label": "native-SCENE-VISIBILITY-theme-regression",
+      "index": {
+        "local_path": "out/evidence/inspector-attribution-native/native-SCENE-VISIBILITY-theme-regression/index.json",
+        "sha256": "2f2271c54a51aa72a15e9ac5bf3ac0b9579777873b410e65efd0037bd478ca0c"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-attribution-native/native-SCENE-VISIBILITY-theme-regression/native-evidence.zip",
+        "sha256": "e3724fd8ddec99948516c1ec1eb64d3aca1c46e3ce39d3430f9a44613479e9c0"
+      },
+      "preserved_bytes": 0,
+      "reports": [],
+      "diagnostics": []
+    },
+    {
+      "label": "native-TABLE-ERASURE-theme-regression",
+      "index": {
+        "local_path": "out/evidence/inspector-attribution-native/native-TABLE-ERASURE-theme-regression/index.json",
+        "sha256": "cb73992958283334bb885b7bdf7078b581ba71123ffe542608f9cdee45487bed"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-attribution-native/native-TABLE-ERASURE-theme-regression/native-evidence.zip",
+        "sha256": "8295e13489365db39e6e4f037b2160767b4384833e5675b603cb8554911a18ab"
+      },
+      "preserved_bytes": 54527807,
+      "reports": [
+        {
+          "path": "surface-77e1024c3de7/result.json",
+          "sha256": "e79eb0299040f472e2ce752e8a01e7b7d3aceeb23053589c131272dadd3f3939",
+          "family": "TABLE-ERASURE",
+          "outcome": "pass",
+          "cases": [
+            {
+              "case": "normal",
+              "outcome": "pass",
+              "record_sha256": "a3f4a4b51e31164b364264a5e3502635a0c84448056250400bc445c366a10b76"
+            },
+            {
+              "case": "ignore-pixels",
+              "outcome": "pass",
+              "record_sha256": "d14bb6d301eaeb14c8acca7c642e22aa6d4ea78efdac99e131b3f8bbb02942a3"
+            },
+            {
+              "case": "ignore-accessible",
+              "outcome": "pass",
+              "record_sha256": "68212a37cc2d29d1ff6ff1ebe16a557ad647dde61f7ddb5fa55572eba03e4bf3"
+            }
+          ]
+        }
+      ],
+      "diagnostics": []
+    },
+    {
+      "label": "native-TEXT-RASTER-theme",
+      "index": {
+        "local_path": "out/evidence/inspector-attribution-native/native-TEXT-RASTER-theme/index.json",
+        "sha256": "71ce4445d0292d4289a6f8be2fa0853db8515d978aad85f2d3306c42fbd133b5"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-attribution-native/native-TEXT-RASTER-theme/native-evidence.zip",
+        "sha256": "3d624aed9288308a998777528a7c120d9b39ce10c65ab617884ef718e82a5449"
+      },
+      "preserved_bytes": 533801,
+      "reports": [
+        {
+          "path": "text-bf560b348360/result.json",
+          "sha256": "a22c472cfc189139e9929ee1e29165c88c7a86787563095438f445c80ee18e09",
+          "family": "TEXT-RASTER",
+          "outcome": "pass",
+          "cases": [
+            {
+              "case": "EMPTY",
+              "outcome": "pass"
+            },
+            {
+              "case": "BACKGROUND",
+              "outcome": "pass"
+            },
+            {
+              "case": "INK-BOUNDS",
+              "outcome": "pass"
+            },
+            {
+              "case": "ALPHA",
+              "outcome": "pass"
+            },
+            {
+              "case": "PLAIN-TEXT",
+              "outcome": "pass"
+            },
+            {
+              "case": "COMBINING",
+              "outcome": "pass"
+            },
+            {
+              "case": "BIDI",
+              "outcome": "pass"
+            },
+            {
+              "case": "WRAP",
+              "outcome": "pass"
+            },
+            {
+              "case": "SCALE",
+              "outcome": "pass"
+            },
+            {
+              "case": "FALLBACK",
+              "outcome": "pass"
+            },
+            {
+              "case": "CONTRAST",
+              "outcome": "pass"
+            },
+            {
+              "case": "TOKENS",
+              "outcome": "pass"
+            },
+            {
+              "case": "COLOR-FONT",
+              "outcome": "pass"
+            },
+            {
+              "case": "NATIVE-UTF8",
+              "outcome": "pass"
+            },
+            {
+              "case": "REPEAT",
+              "outcome": "pass"
+            },
+            {
+              "case": "CONTROLS",
+              "outcome": "pass"
+            },
+            {
+              "case": "UTF8",
+              "outcome": "pass"
+            },
+            {
+              "case": "TEXT-LIMIT",
+              "outcome": "pass"
+            },
+            {
+              "case": "LINE-LIMIT",
+              "outcome": "pass"
+            },
+            {
+              "case": "FONT-CONTROL",
+              "outcome": "pass"
+            },
+            {
+              "case": "LANGUAGE",
+              "outcome": "pass"
+            },
+            {
+              "case": "SCALE-LIMIT",
+              "outcome": "pass"
+            },
+            {
+              "case": "WRAP-LIMIT",
+              "outcome": "pass"
+            },
+            {
+              "case": "RASTER-LIMIT",
+              "outcome": "pass"
+            },
+            {
+              "case": "BUDGET",
+              "outcome": "pass"
+            },
+            {
+              "case": "TOKEN-LIMIT",
+              "outcome": "pass"
+            },
+            {
+              "case": "CONTRAST-LIMIT",
+              "outcome": "pass"
+            }
+          ]
+        }
+      ],
+      "diagnostics": []
+    },
+    {
+      "label": "native-TEXT-SESSION-theme",
+      "index": {
+        "local_path": "out/evidence/inspector-attribution-native/native-TEXT-SESSION-theme/index.json",
+        "sha256": "7283a4e4ddadf4e9fb71b27c5c7b99a5d49557fb6cd41361e8233839dcd57974"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-attribution-native/native-TEXT-SESSION-theme/native-evidence.zip",
+        "sha256": "a4ee65c4f3bf5a53a23d152da529875da285482251dec00a823c5673679c778f"
+      },
+      "preserved_bytes": 2701639,
+      "reports": [
+        {
+          "path": "text-session-a6b7276bd13a/result.json",
+          "sha256": "22681b33b845305d1b07c7ff9fb848575a9828ce7a63fb005ff2c61e1251d8b8",
+          "family": "TEXT-SESSION",
+          "outcome": "pass",
+          "cases": [
+            {
+              "case": "STANDALONE",
+              "outcome": "pass",
+              "requests": 30
+            },
+            {
+              "case": "FORWARD",
+              "outcome": "pass",
+              "requests": 30,
+              "wrong_thread_refused": true
+            },
+            {
+              "case": "REVERSE",
+              "outcome": "pass",
+              "requests": 30,
+              "wrong_thread_refused": true
+            },
+            {
+              "case": "ALTERNATING",
+              "outcome": "pass",
+              "requests": 30,
+              "wrong_thread_refused": true
+            },
+            {
+              "case": "PREPARED",
+              "outcome": "pass",
+              "requests": 30
+            },
+            {
+              "case": "PREPARED-MISMATCH",
+              "outcome": "pass",
+              "requests": 30
+            }
+          ]
+        }
+      ],
+      "diagnostics": []
+    },
+    {
+      "label": "native-THEME-TYPOGRAPHY-theme",
+      "index": {
+        "local_path": "out/evidence/inspector-attribution-native/native-THEME-TYPOGRAPHY-theme/index.json",
+        "sha256": "d2c9814279496ecb35500f526b2e40e4944df2015974d051f205d1ca4db480b4"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-attribution-native/native-THEME-TYPOGRAPHY-theme/native-evidence.zip",
+        "sha256": "0255542fc55a99005cca50806fa80ea5255987c632ba02386514fc94b27198a4"
+      },
+      "preserved_bytes": 464005,
+      "reports": [
+        {
+          "path": "typography-0f0aede64b93/result.json",
+          "sha256": "0816dd5f4b2189a1e1db10beed3cad90a2ccf8b3a85068347d4f5d5a1b2d7b1d",
+          "family": "THEME-TYPOGRAPHY",
+          "outcome": "pass",
+          "cases": [
+            {
+              "case": "legacy-equivalence",
+              "outcome": "pass"
+            },
+            {
+              "case": "role-body",
+              "outcome": "pass"
+            },
+            {
+              "case": "role-label",
+              "outcome": "pass"
+            },
+            {
+              "case": "role-value",
+              "outcome": "pass"
+            },
+            {
+              "case": "role-diagnostic",
+              "outcome": "pass"
+            },
+            {
+              "case": "weight-style-and-fault",
+              "outcome": "pass"
+            },
+            {
+              "case": "fractional-size-scale",
+              "outcome": "pass"
+            },
+            {
+              "case": "literal-family-fallback",
+              "outcome": "pass"
+            },
+            {
+              "case": "contrast-light",
+              "outcome": "pass"
+            },
+            {
+              "case": "contrast-dark",
+              "outcome": "pass"
+            },
+            {
+              "case": "invalid-no-partial-output",
+              "outcome": "pass"
+            }
+          ]
+        }
+      ],
+      "diagnostics": []
+    },
+    {
+      "label": "native-VISIBILITY-PIXELS-theme-regression",
+      "index": {
+        "local_path": "out/evidence/inspector-attribution-native/native-VISIBILITY-PIXELS-theme-regression/index.json",
+        "sha256": "911f165c9176ac855347f5e4ea1872645f51c7bf8fbc202a06658da0921a45c6"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-attribution-native/native-VISIBILITY-PIXELS-theme-regression/native-evidence.zip",
+        "sha256": "9e2087440ce8e0bb19762006aa71266f1fb76ed49806b6b9e957f8fcb948ef85"
+      },
+      "preserved_bytes": 689740,
+      "reports": [
+        {
+          "path": "visibility-b6307ecf8fb7/result.json",
+          "sha256": "832a535f6ae1d111423b58352837a6e47a72b27e7a24abe0736996f05172e4da",
+          "family": "VISIBILITY-PIXELS",
+          "outcome": "pass",
+          "cases": [
+            {
+              "case": "normal",
+              "outcome": "pass",
+              "record_sha256": "3f8182e7606605003b88a51ca5029adeade563614ea29f00e144ab0efd68d7ee"
+            },
+            {
+              "case": "invert",
+              "outcome": "pass",
+              "record_sha256": "b4ac348c4814a0447b51ef983f11ab1dffe20d03a4b4ff7e1bd903b1b1d8e55c"
+            },
+            {
+              "case": "retain-hidden",
+              "outcome": "pass",
+              "record_sha256": "dcd41b765add77aa7f229e5db4aa894788997cef35df47d8645d94a359f5aa63"
+            }
+          ]
+        }
+      ],
+      "diagnostics": []
+    },
+    {
+      "label": "phases-initial",
+      "index": {
+        "local_path": "out/evidence/inspector-attribution-native/phases-initial/index.json",
+        "sha256": "adacfd695224dfdfd4c3c52194a23e26ef6cdc00e1d9d2e39842b9dc1908dc17"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-attribution-native/phases-initial/native-evidence.zip",
+        "sha256": "d4b5e4962f9df3d8e8d5f91a635c12e4da2a2f44fdbc1e89e0c0f6d987fab977"
+      },
+      "preserved_bytes": 149094578,
+      "reports": [
+        {
+          "path": "inspector-table-phases-c5f15450e2/result.json",
+          "sha256": "c15b52db4e38b6db466cfe9c4f91b0a2653606eb95b2e6f81070264bfb1b3b80",
+          "family": "INSPECTOR-LIVE-TABLE-PHASES",
+          "outcome": "fail",
+          "cases": [
+            {
+              "case": "MAX-ROWS",
+              "outcome": "pass",
+              "record_sha256": "c631c32feac3751b99f0fee1e2e542aaee113d67f1144bf3a6ab580b4587128a",
+              "timing_max_us": {
+                "delay_us": 12915,
+                "work_us": 46767
+              },
+              "timing_violations": [],
+              "finished_at": "2026-10-10T06:27:57.192487+00:00"
+            },
+            {
+              "case": "MAX-CELLS",
+              "outcome": "fail",
+              "record_sha256": "9592fc678246c004a707d262fbb8f0f89063e5a716356991b65003a690bddaab",
+              "timing_max_us": {
+                "delay_us": 70832,
+                "work_us": 101728
+              },
+              "timing_violations": [
+                {
+                  "delay_us": 0,
+                  "index": 232,
+                  "pid": 1421475,
+                  "work_us": 101728
+                }
+              ],
+              "failure": "Traceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_installed_editor.py\", line 243, in observe\n    extension(dict(locals(),process=lambda:proc));report['outcome']='pass';return\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_inspector_live_table_phases.py\", line 12, in exercise\n    limits.exercise(e)\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_inspector_live_tables.py\", line 89, in exercise\n    assert not report['timing_violations'],('GUI timing limit exceeded',report['timing_violations'])\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: ('GUI timing limit exceeded', [{'index': 232, 'pid': 1421475, 'work_us': 101728, 'delay_us': 0}])\n",
+              "finished_at": "2026-10-10T06:28:07.002903+00:00"
+            },
+            {
+              "case": "TRUNCATION",
+              "outcome": "pass",
+              "record_sha256": "140381a34eb63825c8d9960ad86099797d6d43deb79951c01198e2eb481c9304",
+              "timing_max_us": {
+                "delay_us": 69999,
+                "work_us": 87950
+              },
+              "timing_violations": [],
+              "finished_at": "2026-10-10T06:28:20.120215+00:00"
+            },
+            {
+              "case": "OVER-CELLS",
+              "outcome": "pass",
+              "record_sha256": "d42d66eaefbf5aba77e5b8bb70711fb4ad054fd8f8ec4299cecc78c629b5160b",
+              "timing_max_us": {
+                "delay_us": 2494,
+                "work_us": 21399
+              },
+              "timing_violations": [],
+              "finished_at": "2026-10-10T06:28:23.650638+00:00"
+            },
+            {
+              "case": "NAVIGATION",
+              "outcome": "pass",
+              "record_sha256": "9a39162a10d5c69c4a746d26ba62ef8bbb12823568f68495a4f8094197192503",
+              "timing_max_us": {
+                "delay_us": 61962,
+                "work_us": 90642
+              },
+              "timing_violations": [],
+              "finished_at": "2026-10-10T06:28:34.924861+00:00"
+            },
+            {
+              "case": "POLICY",
+              "outcome": "fail",
+              "record_sha256": "be260bb69114dbb7f30ff7f8dd75b30b51f402416a2b174ad5dd46b764f18b74",
+              "timing_max_us": {
+                "delay_us": 10082,
+                "work_us": 102742
+              },
+              "timing_violations": [
+                {
+                  "delay_us": 0,
+                  "index": 236,
+                  "pid": 1421966,
+                  "work_us": 102742
+                }
+              ],
+              "erasure_ms": 95.25130997644737,
+              "failure": "Traceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_installed_editor.py\", line 243, in observe\n    extension(dict(locals(),process=lambda:proc));report['outcome']='pass';return\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_inspector_live_table_phases.py\", line 12, in exercise\n    limits.exercise(e)\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_inspector_live_tables.py\", line 89, in exercise\n    assert not report['timing_violations'],('GUI timing limit exceeded',report['timing_violations'])\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: ('GUI timing limit exceeded', [{'index': 236, 'pid': 1421966, 'work_us': 102742, 'delay_us': 0}])\n",
+              "finished_at": "2026-10-10T06:28:45.867324+00:00"
+            },
+            {
+              "case": "ORACLE",
+              "outcome": "pass",
+              "record_sha256": "927f836cc61da72c3987fd597d169f319a1be80cae69efee0dd7a2b8a0b85c39",
+              "timing_max_us": {
+                "delay_us": 57750,
+                "work_us": 90742
+              },
+              "timing_violations": [],
+              "finished_at": "2026-10-10T06:28:59.128894+00:00"
+            }
+          ]
+        }
+      ],
+      "diagnostics": [
+        {
+          "path": "inspector-table-phases-c5f15450e2/phases.json",
+          "sha256": "292f6ea2a9e69005eaf7618eef818dc2528eae7f7874b98d02262c98271d89fe",
+          "original_outcome": "fail",
+          "cases": [
+            {
+              "case": "MAX-ROWS",
+              "outcome": "pass",
+              "samples": 28,
+              "maxima": {
+                "attach": 6707,
+                "controls": 111,
+                "editor": 0,
+                "inspector": 46468,
+                "inspector_admission": 23102,
+                "inspector_paint": 26043,
+                "inspector_prepare": 7828,
+                "inspector_presentation": 12670,
+                "populate": 17881,
+                "recovery": 0,
+                "reply": 0,
+                "reply_reload": 0,
+                "settings": 7171,
+                "take": 12,
+                "topology": 0,
+                "withdrawal": 3
+              },
+              "slowest": [
+                {
+                  "pid": 1421367,
+                  "tick": 174,
+                  "inspector": 46468,
+                  "inspector_admission": 23102,
+                  "inspector_paint": 23359,
+                  "inspector_presentation": 12399,
+                  "nonpresentation_paint_us": 10960
+                },
+                {
+                  "pid": 1421367,
+                  "tick": 215,
+                  "inspector": 45822,
+                  "inspector_admission": 22591,
+                  "inspector_paint": 23226,
+                  "inspector_presentation": 12628,
+                  "nonpresentation_paint_us": 10598
+                },
+                {
+                  "pid": 1421367,
+                  "tick": 126,
+                  "inspector": 45533,
+                  "inspector_admission": 22181,
+                  "inspector_paint": 23346,
+                  "inspector_presentation": 12670,
+                  "nonpresentation_paint_us": 10676
+                }
+              ]
+            },
+            {
+              "case": "MAX-CELLS",
+              "outcome": "fail",
+              "samples": 40,
+              "maxima": {
+                "attach": 5585,
+                "controls": 123,
+                "editor": 0,
+                "inspector": 101427,
+                "inspector_admission": 24333,
+                "inspector_paint": 77087,
+                "inspector_prepare": 8083,
+                "inspector_presentation": 24118,
+                "populate": 18175,
+                "recovery": 0,
+                "reply": 0,
+                "reply_reload": 0,
+                "settings": 6097,
+                "take": 33,
+                "topology": 0,
+                "withdrawal": 4
+              },
+              "slowest": [
+                {
+                  "pid": 1421475,
+                  "tick": 160,
+                  "inspector": 101427,
+                  "inspector_admission": 24333,
+                  "inspector_paint": 77087,
+                  "inspector_presentation": 23051,
+                  "nonpresentation_paint_us": 54036
+                },
+                {
+                  "pid": 1421475,
+                  "tick": 232,
+                  "inspector": 85663,
+                  "inspector_admission": 24333,
+                  "inspector_paint": 61324,
+                  "inspector_presentation": 24118,
+                  "nonpresentation_paint_us": 37206
+                },
+                {
+                  "pid": 1421475,
+                  "tick": 196,
+                  "inspector": 85408,
+                  "inspector_admission": 23935,
+                  "inspector_paint": 61466,
+                  "inspector_presentation": 21971,
+                  "nonpresentation_paint_us": 39495
+                }
+              ]
+            },
+            {
+              "case": "TRUNCATION",
+              "outcome": "pass",
+              "samples": 44,
+              "maxima": {
+                "attach": 5821,
+                "controls": 123,
+                "editor": 0,
+                "inspector": 87687,
+                "inspector_admission": 26242,
+                "inspector_paint": 64697,
+                "inspector_prepare": 8704,
+                "inspector_presentation": 22473,
+                "populate": 19079,
+                "recovery": 0,
+                "reply": 0,
+                "reply_reload": 0,
+                "settings": 6658,
+                "take": 41,
+                "topology": 0,
+                "withdrawal": 4
+              },
+              "slowest": [
+                {
+                  "pid": 1421600,
+                  "tick": 192,
+                  "inspector": 87687,
+                  "inspector_admission": 26204,
+                  "inspector_paint": 61476,
+                  "inspector_presentation": 22337,
+                  "nonpresentation_paint_us": 39139
+                },
+                {
+                  "pid": 1421600,
+                  "tick": 228,
+                  "inspector": 87665,
+                  "inspector_admission": 26242,
+                  "inspector_paint": 61418,
+                  "inspector_presentation": 22458,
+                  "nonpresentation_paint_us": 38960
+                },
+                {
+                  "pid": 1421600,
+                  "tick": 156,
+                  "inspector": 87401,
+                  "inspector_admission": 26014,
+                  "inspector_paint": 61380,
+                  "inspector_presentation": 22473,
+                  "nonpresentation_paint_us": 38907
+                }
+              ]
+            },
+            {
+              "case": "OVER-CELLS",
+              "outcome": "pass",
+              "samples": 3,
+              "maxima": {
+                "attach": 5675,
+                "controls": 111,
+                "editor": 0,
+                "inspector": 21107,
+                "inspector_admission": 20207,
+                "inspector_paint": 2517,
+                "inspector_prepare": 8425,
+                "inspector_presentation": 305,
+                "populate": 18244,
+                "recovery": 0,
+                "reply": 0,
+                "reply_reload": 0,
+                "settings": 6497,
+                "take": 19,
+                "topology": 0,
+                "withdrawal": 4
+              },
+              "slowest": [
+                {
+                  "pid": 1421731,
+                  "tick": 83,
+                  "inspector": 21107,
+                  "inspector_admission": 20207,
+                  "inspector_paint": 894,
+                  "inspector_presentation": 305,
+                  "nonpresentation_paint_us": 589
+                },
+                {
+                  "pid": 1421731,
+                  "tick": 71,
+                  "inspector": 2523,
+                  "inspector_admission": 2,
+                  "inspector_paint": 2517,
+                  "inspector_presentation": 32,
+                  "nonpresentation_paint_us": 2485
+                },
+                {
+                  "pid": 1421731,
+                  "tick": 77,
+                  "inspector": 2426,
+                  "inspector_admission": 1,
+                  "inspector_paint": 2420,
+                  "inspector_presentation": 32,
+                  "nonpresentation_paint_us": 2388
+                }
+              ]
+            },
+            {
+              "case": "NAVIGATION",
+              "outcome": "pass",
+              "samples": 48,
+              "maxima": {
+                "attach": 5747,
+                "controls": 130,
+                "editor": 0,
+                "inspector": 90213,
+                "inspector_admission": 30985,
+                "inspector_paint": 83858,
+                "inspector_prepare": 8748,
+                "inspector_presentation": 20910,
+                "populate": 18946,
+                "recovery": 0,
+                "reply": 0,
+                "reply_reload": 0,
+                "settings": 6246,
+                "take": 26,
+                "topology": 0,
+                "withdrawal": 4
+              },
+              "slowest": [
+                {
+                  "pid": 1421807,
+                  "tick": 304,
+                  "inspector": 90213,
+                  "inspector_admission": 30985,
+                  "inspector_paint": 59219,
+                  "inspector_presentation": 20910,
+                  "nonpresentation_paint_us": 38309
+                },
+                {
+                  "pid": 1421807,
+                  "tick": 344,
+                  "inspector": 86437,
+                  "inspector_admission": 28348,
+                  "inspector_paint": 58078,
+                  "inspector_presentation": 6477,
+                  "nonpresentation_paint_us": 51601
+                },
+                {
+                  "pid": 1421807,
+                  "tick": 368,
+                  "inspector": 83871,
+                  "inspector_admission": 7,
+                  "inspector_paint": 83858,
+                  "inspector_presentation": 18897,
+                  "nonpresentation_paint_us": 64961
+                }
+              ]
+            },
+            {
+              "case": "POLICY",
+              "outcome": "fail",
+              "samples": 44,
+              "maxima": {
+                "attach": 5982,
+                "controls": 366,
+                "editor": 0,
+                "inspector": 102292,
+                "inspector_admission": 39643,
+                "inspector_paint": 82897,
+                "inspector_prepare": 10691,
+                "inspector_presentation": 22361,
+                "populate": 21605,
+                "recovery": 0,
+                "reply": 0,
+                "reply_reload": 0,
+                "settings": 6360,
+                "take": 104,
+                "topology": 0,
+                "withdrawal": 79427
+              },
+              "slowest": [
+                {
+                  "pid": 1421966,
+                  "tick": 158,
+                  "inspector": 102292,
+                  "inspector_admission": 39643,
+                  "inspector_paint": 62642,
+                  "inspector_presentation": 21599,
+                  "nonpresentation_paint_us": 41043
+                },
+                {
+                  "pid": 1421966,
+                  "tick": 194,
+                  "inspector": 89918,
+                  "inspector_admission": 26570,
+                  "inspector_paint": 63340,
+                  "inspector_presentation": 21278,
+                  "nonpresentation_paint_us": 42062
+                },
+                {
+                  "pid": 1421966,
+                  "tick": 230,
+                  "inspector": 83568,
+                  "inspector_admission": 24675,
+                  "inspector_paint": 58885,
+                  "inspector_presentation": 20745,
+                  "nonpresentation_paint_us": 38140
+                }
+              ]
+            },
+            {
+              "case": "ORACLE",
+              "outcome": "pass",
+              "samples": 45,
+              "maxima": {
+                "attach": 6477,
+                "controls": 150,
+                "editor": 0,
+                "inspector": 90497,
+                "inspector_admission": 28003,
+                "inspector_paint": 64701,
+                "inspector_prepare": 10025,
+                "inspector_presentation": 22900,
+                "populate": 21654,
+                "recovery": 0,
+                "reply": 0,
+                "reply_reload": 0,
+                "settings": 6882,
+                "take": 23,
+                "topology": 0,
+                "withdrawal": 4
+              },
+              "slowest": [
+                {
+                  "pid": 1422098,
+                  "tick": 196,
+                  "inspector": 90497,
+                  "inspector_admission": 28003,
+                  "inspector_paint": 62488,
+                  "inspector_presentation": 21306,
+                  "nonpresentation_paint_us": 41182
+                },
+                {
+                  "pid": 1422098,
+                  "tick": 124,
+                  "inspector": 89506,
+                  "inspector_admission": 24799,
+                  "inspector_paint": 64701,
+                  "inspector_presentation": 22791,
+                  "nonpresentation_paint_us": 41910
+                },
+                {
+                  "pid": 1422098,
+                  "tick": 238,
+                  "inspector": 83182,
+                  "inspector_admission": 22922,
+                  "inspector_paint": 60253,
+                  "inspector_presentation": 22900,
+                  "nonpresentation_paint_us": 37353
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "phases-theme",
+      "index": {
+        "local_path": "out/evidence/inspector-attribution-native/phases-theme/index.json",
+        "sha256": "70e70764eb5d84a2379c6ece8730d85a0eab7d000379cf4f0905f3315a912fbf"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-attribution-native/phases-theme/native-evidence.zip",
+        "sha256": "f544213b8939cebc31d0d8e86202d13e696d91d7319da4238c4897504c87b336"
+      },
+      "preserved_bytes": 149070312,
+      "reports": [
+        {
+          "path": "inspector-table-phases-9a3257e7b2/result.json",
+          "sha256": "b6d00446821ec40e50188b319d07dbcd82b2c7c676d7a6e851b94374754b4057",
+          "family": "INSPECTOR-LIVE-TABLE-PHASES",
+          "outcome": "pass",
+          "cases": [
+            {
+              "case": "MAX-ROWS",
+              "outcome": "pass",
+              "record_sha256": "d6a366d361f035d83820a347cf72489806b6c52603b5a65c50aa92f4b2a9ac93",
+              "timing_max_us": {
+                "delay_us": 22917,
+                "work_us": 43529
+              },
+              "timing_violations": [],
+              "finished_at": "2026-10-10T06:38:13.151397+00:00"
+            },
+            {
+              "case": "MAX-CELLS",
+              "outcome": "pass",
+              "record_sha256": "de35bbe927f03092a2ae72683c8cf8ee70fa5c98458cae95ab670f89da186f6f",
+              "timing_max_us": {
+                "delay_us": 68170,
+                "work_us": 77783
+              },
+              "timing_violations": [],
+              "finished_at": "2026-10-10T06:38:21.831059+00:00"
+            },
+            {
+              "case": "TRUNCATION",
+              "outcome": "pass",
+              "record_sha256": "f7911056a08cb8a93dfdb8a75d11ec56b9c27f34c5f69f31d6b8d5523de07bb9",
+              "timing_max_us": {
+                "delay_us": 63769,
+                "work_us": 66660
+              },
+              "timing_violations": [],
+              "finished_at": "2026-10-10T06:38:33.300218+00:00"
+            },
+            {
+              "case": "OVER-CELLS",
+              "outcome": "pass",
+              "record_sha256": "cc8b8da229a2b9dcb9ffaf2957bf5b16a7706b3b8338d184a2e41edf1fd65f6d",
+              "timing_max_us": {
+                "delay_us": 1485,
+                "work_us": 22021
+              },
+              "timing_violations": [],
+              "finished_at": "2026-10-10T06:38:36.770677+00:00"
+            },
+            {
+              "case": "NAVIGATION",
+              "outcome": "pass",
+              "record_sha256": "dcf08d6b93cb8572a580f1e5cf437eca9eed8687e05488bebc130b81fce777d9",
+              "timing_max_us": {
+                "delay_us": 64950,
+                "work_us": 68541
+              },
+              "timing_violations": [],
+              "finished_at": "2026-10-10T06:38:46.541160+00:00"
+            },
+            {
+              "case": "POLICY",
+              "outcome": "pass",
+              "record_sha256": "a173d2d08e8af120ae31b794dd87beed68033cb3c0b33d60cca8d8915c860556",
+              "timing_max_us": {
+                "delay_us": 20370,
+                "work_us": 73709
+              },
+              "timing_violations": [],
+              "erasure_ms": 97.4738989607431,
+              "finished_at": "2026-10-10T06:38:56.278737+00:00"
+            },
+            {
+              "case": "ORACLE",
+              "outcome": "pass",
+              "record_sha256": "20366b27a478ddedeb9e514122e764482136cc5f48cd78276e26771c45316b0b",
+              "timing_max_us": {
+                "delay_us": 68260,
+                "work_us": 66387
+              },
+              "timing_violations": [],
+              "finished_at": "2026-10-10T06:39:07.489532+00:00"
+            }
+          ]
+        }
+      ],
+      "diagnostics": [
+        {
+          "path": "inspector-table-phases-9a3257e7b2/phases.json",
+          "sha256": "ec58d1a27523f7b07782d6524d8bacb571a1a766b66607732c7cf54e398195a8",
+          "original_outcome": "pass",
+          "cases": [
+            {
+              "case": "MAX-ROWS",
+              "outcome": "pass",
+              "samples": 27,
+              "maxima": {
+                "attach": 8101,
+                "controls": 143,
+                "editor": 0,
+                "inspector": 43282,
+                "inspector_admission": 22986,
+                "inspector_paint": 20289,
+                "inspector_prepare": 8564,
+                "inspector_presentation": 12753,
+                "populate": 18527,
+                "recovery": 0,
+                "reply": 0,
+                "reply_reload": 0,
+                "settings": 6359,
+                "take": 21,
+                "topology": 0,
+                "withdrawal": 4
+              },
+              "slowest": [
+                {
+                  "pid": 1424069,
+                  "tick": 176,
+                  "inspector": 43282,
+                  "inspector_admission": 22986,
+                  "inspector_paint": 20289,
+                  "inspector_presentation": 12690,
+                  "nonpresentation_paint_us": 7599
+                },
+                {
+                  "pid": 1424069,
+                  "tick": 128,
+                  "inspector": 42821,
+                  "inspector_admission": 22576,
+                  "inspector_paint": 20239,
+                  "inspector_presentation": 12434,
+                  "nonpresentation_paint_us": 7805
+                },
+                {
+                  "pid": 1424069,
+                  "tick": 222,
+                  "inspector": 42770,
+                  "inspector_admission": 22730,
+                  "inspector_paint": 20033,
+                  "inspector_presentation": 12753,
+                  "nonpresentation_paint_us": 7280
+                }
+              ]
+            },
+            {
+              "case": "MAX-CELLS",
+              "outcome": "pass",
+              "samples": 36,
+              "maxima": {
+                "attach": 5704,
+                "controls": 119,
+                "editor": 0,
+                "inspector": 77551,
+                "inspector_admission": 25417,
+                "inspector_paint": 53758,
+                "inspector_prepare": 8699,
+                "inspector_presentation": 22079,
+                "populate": 19444,
+                "recovery": 0,
+                "reply": 0,
+                "reply_reload": 0,
+                "settings": 6340,
+                "take": 15,
+                "topology": 0,
+                "withdrawal": 4
+              },
+              "slowest": [
+                {
+                  "pid": 1424176,
+                  "tick": 122,
+                  "inspector": 77551,
+                  "inspector_admission": 23787,
+                  "inspector_paint": 53758,
+                  "inspector_presentation": 20123,
+                  "nonpresentation_paint_us": 33635
+                },
+                {
+                  "pid": 1424176,
+                  "tick": 248,
+                  "inspector": 72002,
+                  "inspector_admission": 25417,
+                  "inspector_paint": 46579,
+                  "inspector_presentation": 22079,
+                  "nonpresentation_paint_us": 24500
+                },
+                {
+                  "pid": 1424176,
+                  "tick": 206,
+                  "inspector": 64773,
+                  "inspector_admission": 23292,
+                  "inspector_paint": 41475,
+                  "inspector_presentation": 20307,
+                  "nonpresentation_paint_us": 21168
+                }
+              ]
+            },
+            {
+              "case": "TRUNCATION",
+              "outcome": "pass",
+              "samples": 37,
+              "maxima": {
+                "attach": 6206,
+                "controls": 110,
+                "editor": 0,
+                "inspector": 66394,
+                "inspector_admission": 24683,
+                "inspector_paint": 47648,
+                "inspector_prepare": 8841,
+                "inspector_presentation": 21163,
+                "populate": 19450,
+                "recovery": 0,
+                "reply": 0,
+                "reply_reload": 0,
+                "settings": 6665,
+                "take": 18,
+                "topology": 0,
+                "withdrawal": 8
+              },
+              "slowest": [
+                {
+                  "pid": 1424295,
+                  "tick": 208,
+                  "inspector": 66394,
+                  "inspector_admission": 24683,
+                  "inspector_paint": 41704,
+                  "inspector_presentation": 20333,
+                  "nonpresentation_paint_us": 21371
+                },
+                {
+                  "pid": 1424295,
+                  "tick": 250,
+                  "inspector": 65747,
+                  "inspector_admission": 23942,
+                  "inspector_paint": 41800,
+                  "inspector_presentation": 20391,
+                  "nonpresentation_paint_us": 21409
+                },
+                {
+                  "pid": 1424295,
+                  "tick": 130,
+                  "inspector": 65674,
+                  "inspector_admission": 23832,
+                  "inspector_paint": 41837,
+                  "inspector_presentation": 20686,
+                  "nonpresentation_paint_us": 21151
+                }
+              ]
+            },
+            {
+              "case": "OVER-CELLS",
+              "outcome": "pass",
+              "samples": 2,
+              "maxima": {
+                "attach": 5542,
+                "controls": 114,
+                "editor": 0,
+                "inspector": 21688,
+                "inspector_admission": 20708,
+                "inspector_paint": 5029,
+                "inspector_prepare": 8495,
+                "inspector_presentation": 298,
+                "populate": 18602,
+                "recovery": 0,
+                "reply": 0,
+                "reply_reload": 0,
+                "settings": 6059,
+                "take": 11,
+                "topology": 0,
+                "withdrawal": 8
+              },
+              "slowest": [
+                {
+                  "pid": 1424415,
+                  "tick": 78,
+                  "inspector": 21688,
+                  "inspector_admission": 20708,
+                  "inspector_paint": 976,
+                  "inspector_presentation": 298,
+                  "nonpresentation_paint_us": 678
+                },
+                {
+                  "pid": 1424415,
+                  "tick": 72,
+                  "inspector": 5035,
+                  "inspector_admission": 2,
+                  "inspector_paint": 5029,
+                  "inspector_presentation": 36,
+                  "nonpresentation_paint_us": 4993
+                }
+              ]
+            },
+            {
+              "case": "NAVIGATION",
+              "outcome": "pass",
+              "samples": 42,
+              "maxima": {
+                "attach": 5605,
+                "controls": 145,
+                "editor": 0,
+                "inspector": 68287,
+                "inspector_admission": 26988,
+                "inspector_paint": 43814,
+                "inspector_prepare": 8259,
+                "inspector_presentation": 20339,
+                "populate": 18056,
+                "recovery": 0,
+                "reply": 0,
+                "reply_reload": 0,
+                "settings": 6304,
+                "take": 29,
+                "topology": 0,
+                "withdrawal": 4
+              },
+              "slowest": [
+                {
+                  "pid": 1424489,
+                  "tick": 162,
+                  "inspector": 68287,
+                  "inspector_admission": 26988,
+                  "inspector_paint": 41293,
+                  "inspector_presentation": 19610,
+                  "nonpresentation_paint_us": 21683
+                },
+                {
+                  "pid": 1424489,
+                  "tick": 288,
+                  "inspector": 66819,
+                  "inspector_admission": 23747,
+                  "inspector_paint": 43065,
+                  "inspector_presentation": 20339,
+                  "nonpresentation_paint_us": 22726
+                },
+                {
+                  "pid": 1424489,
+                  "tick": 204,
+                  "inspector": 65797,
+                  "inspector_admission": 23541,
+                  "inspector_paint": 42251,
+                  "inspector_presentation": 20082,
+                  "nonpresentation_paint_us": 22169
+                }
+              ]
+            },
+            {
+              "case": "POLICY",
+              "outcome": "pass",
+              "samples": 42,
+              "maxima": {
+                "attach": 6009,
+                "controls": 225,
+                "editor": 0,
+                "inspector": 70506,
+                "inspector_admission": 34556,
+                "inspector_paint": 68407,
+                "inspector_prepare": 10908,
+                "inspector_presentation": 37846,
+                "populate": 22176,
+                "recovery": 0,
+                "reply": 0,
+                "reply_reload": 0,
+                "settings": 6501,
+                "take": 24,
+                "topology": 0,
+                "withdrawal": 73132
+              },
+              "slowest": [
+                {
+                  "pid": 1424638,
+                  "tick": 286,
+                  "inspector": 70506,
+                  "inspector_admission": 26152,
+                  "inspector_paint": 44345,
+                  "inspector_presentation": 21560,
+                  "nonpresentation_paint_us": 22785
+                },
+                {
+                  "pid": 1424638,
+                  "tick": 89,
+                  "inspector": 68427,
+                  "inspector_admission": 11,
+                  "inspector_paint": 68407,
+                  "inspector_presentation": 37846,
+                  "nonpresentation_paint_us": 30561
+                },
+                {
+                  "pid": 1424638,
+                  "tick": 244,
+                  "inspector": 67361,
+                  "inspector_admission": 24821,
+                  "inspector_paint": 42534,
+                  "inspector_presentation": 21193,
+                  "nonpresentation_paint_us": 21341
+                }
+              ]
+            },
+            {
+              "case": "ORACLE",
+              "outcome": "pass",
+              "samples": 35,
+              "maxima": {
+                "attach": 5877,
+                "controls": 134,
+                "editor": 0,
+                "inspector": 66047,
+                "inspector_admission": 23968,
+                "inspector_paint": 42073,
+                "inspector_prepare": 8966,
+                "inspector_presentation": 21035,
+                "populate": 18964,
+                "recovery": 0,
+                "reply": 0,
+                "reply_reload": 0,
+                "settings": 6232,
+                "take": 65,
+                "topology": 0,
+                "withdrawal": 4
+              },
+              "slowest": [
+                {
+                  "pid": 1424766,
+                  "tick": 208,
+                  "inspector": 66047,
+                  "inspector_admission": 23968,
+                  "inspector_paint": 42073,
+                  "inspector_presentation": 21035,
+                  "nonpresentation_paint_us": 21038
+                },
+                {
+                  "pid": 1424766,
+                  "tick": 166,
+                  "inspector": 65439,
+                  "inspector_admission": 23607,
+                  "inspector_paint": 41826,
+                  "inspector_presentation": 20501,
+                  "nonpresentation_paint_us": 21325
+                },
+                {
+                  "pid": 1424766,
+                  "tick": 250,
+                  "inspector": 64733,
+                  "inspector_admission": 23684,
+                  "inspector_paint": 41042,
+                  "inspector_presentation": 19924,
+                  "nonpresentation_paint_us": 21118
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "scene-initial",
+      "index": {
+        "local_path": "out/evidence/inspector-attribution-native/scene-initial/index.json",
+        "sha256": "d678e034fd18e8b518ad55e69400edd4ba311f52d25bd19c163b543fba45be91"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-attribution-native/scene-initial/native-evidence.zip",
+        "sha256": "9c026e458615eb89218192a3470b3ebad87784b34e0a3615841ef7d9f7174309"
+      },
+      "preserved_bytes": 249137,
+      "reports": [
+        {
+          "path": "inspector-98ce6eccb401/result.json",
+          "sha256": "899cde801e78cd53d59b5a1b6c9434bdc1c8a70b4a4614e7d7fb5f8ef3f0d214",
+          "family": "SCENE-INSPECTOR",
+          "outcome": "pass",
+          "cases": [
+            {
+              "case": "scalar",
+              "outcome": "pass",
+              "fault_detected": false,
+              "record_sha256": "a1eb7711d16d09eedc67a512044f633f98a77a52c194d25dd4e82adea606e55f"
+            },
+            {
+              "case": "table",
+              "outcome": "pass",
+              "fault_detected": false,
+              "record_sha256": "9a547f42f4c969854dc325fbcb0587c72e4c0b9d63e3068455f546a8e3b98c8e"
+            },
+            {
+              "case": "chart",
+              "outcome": "pass",
+              "fault_detected": false,
+              "record_sha256": "9fdb17030dc110b0fa7ee40f8c5e3e02bb496882d2efb9e73a2f99ee4fc77e6d"
+            },
+            {
+              "case": "image",
+              "outcome": "pass",
+              "fault_detected": false,
+              "record_sha256": "adadb0c06e0eece058bbbd3343565d76c1d379cb9121a5d2c314ddf5a35f25d6"
+            },
+            {
+              "case": "translated",
+              "outcome": "pass",
+              "fault_detected": false,
+              "record_sha256": "d1d72af341974e14d0d8789b2315d74b24fd8065951098da8cacae1444ac85c8"
+            },
+            {
+              "case": "retain",
+              "outcome": "pass",
+              "fault_detected": true,
+              "record_sha256": "6603d3ff6e5829c94e272ec6a11e209cca803405664e4726c66d9f0b44c3fbde"
+            },
+            {
+              "case": "wrong-selection",
+              "outcome": "pass",
+              "fault_detected": true,
+              "record_sha256": "0d7c35ccc8c4c46a5ca86d5284cc80ec06fe1297f8d57249fb09ebe6ed3de612"
+            }
+          ]
+        }
+      ],
+      "diagnostics": []
+    },
+    {
+      "label": "scene-theme-regression",
+      "index": {
+        "local_path": "out/evidence/inspector-attribution-native/scene-theme-regression/index.json",
+        "sha256": "1523e588cf62438e21975acdc98ca782c84900d54d02dd141215507ea0fc91a7"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-attribution-native/scene-theme-regression/native-evidence.zip",
+        "sha256": "a8b59bb74557913027985c585f3647e78e99da0d48de07d915177f281147dd1e"
+      },
+      "preserved_bytes": 249073,
+      "reports": [
+        {
+          "path": "inspector-a9dfb461610d/result.json",
+          "sha256": "506fcf1b961c82e1cb9fecff99f39d1fabbbeb6a4831880be1e1877fd7bc5007",
+          "family": "SCENE-INSPECTOR",
+          "outcome": "pass",
+          "cases": [
+            {
+              "case": "scalar",
+              "outcome": "pass",
+              "fault_detected": false,
+              "record_sha256": "b5bf05eb25ad72722375c79fb9476a1681b40823388d94e4f836fa94e0b16250"
+            },
+            {
+              "case": "table",
+              "outcome": "pass",
+              "fault_detected": false,
+              "record_sha256": "e4154bd716e9fa5c47cd46ff48f141075e3540dbeeb34c1bad8b6a09b52dad6b"
+            },
+            {
+              "case": "chart",
+              "outcome": "pass",
+              "fault_detected": false,
+              "record_sha256": "10fd840868fe283a1b8236429790bac5a1539f43d1bae07b17787fcc243383ee"
+            },
+            {
+              "case": "image",
+              "outcome": "pass",
+              "fault_detected": false,
+              "record_sha256": "31a50efec4827f149168f3eb9e4904b35baa6d0be4e0c862c52f4c7b29374b24"
+            },
+            {
+              "case": "translated",
+              "outcome": "pass",
+              "fault_detected": false,
+              "record_sha256": "5201d080b09f83b0caddab01769f23657b9d36eeda24dceb8a89099706bac8cc"
+            },
+            {
+              "case": "retain",
+              "outcome": "pass",
+              "fault_detected": true,
+              "record_sha256": "7b338eb054193f93030d045eb7ee1f33280d6bdaec8e4d8f0f1a9a414ee344fd"
+            },
+            {
+              "case": "wrong-selection",
+              "outcome": "pass",
+              "fault_detected": true,
+              "record_sha256": "814a0929f7d41e67d3b88d9b7f4d1af48c18e2c2a746c91a8c22af1adfda63c1"
+            }
+          ]
+        }
+      ],
+      "diagnostics": []
+    },
+    {
+      "label": "tables-theme",
+      "index": {
+        "local_path": "out/evidence/inspector-attribution-native/tables-theme/index.json",
+        "sha256": "0df32d7b1ab42de22e61f5976f14b1a2e551d8da60c522bf53da010dba1fceb0"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-attribution-native/tables-theme/native-evidence.zip",
+        "sha256": "13e5bd56861cf4a4ac45e136f36195243b06c4b07f591b181261ccfc7127e7c8"
+      },
+      "preserved_bytes": 148436133,
+      "reports": [
+        {
+          "path": "inspector-live-table-298bc1b1c3/result.json",
+          "sha256": "e03d1a95e93d97c32a3bedec84ba312b77dc379ae8796c8036d4abda13f6fb8f",
+          "family": "INSPECTOR-LIVE-TABLES",
+          "outcome": "pass",
+          "cases": [
+            {
+              "case": "MAX-ROWS",
+              "outcome": "pass",
+              "record_sha256": "1d968cb5b67af8c4cf68afb81ccee91fce09531163cbc7b472d3a01362ee7496",
+              "timing_max_us": {
+                "delay_us": 30975,
+                "work_us": 46065
+              },
+              "timing_violations": [],
+              "finished_at": "2026-10-10T06:36:56.588316+00:00"
+            },
+            {
+              "case": "MAX-CELLS",
+              "outcome": "pass",
+              "record_sha256": "9bf15c387baebc01e097846b455555acf36ca12c252bfd8d5245b00d2069d175",
+              "timing_max_us": {
+                "delay_us": 55280,
+                "work_us": 73467
+              },
+              "timing_violations": [],
+              "finished_at": "2026-10-10T06:37:05.312416+00:00"
+            },
+            {
+              "case": "TRUNCATION",
+              "outcome": "pass",
+              "record_sha256": "a7e8d5abe6d5cc6ba7a34e0301b2c6b83985f219d85a8fb1739174950962f4a2",
+              "timing_max_us": {
+                "delay_us": 77193,
+                "work_us": 70059
+              },
+              "timing_violations": [],
+              "finished_at": "2026-10-10T06:37:17.134957+00:00"
+            },
+            {
+              "case": "OVER-CELLS",
+              "outcome": "pass",
+              "record_sha256": "d1288d96e7370d6e0d6a8b2b07016aa17e669e5900fc2366f78062fcb4b881d1",
+              "timing_max_us": {
+                "delay_us": 3028,
+                "work_us": 23019
+              },
+              "timing_violations": [],
+              "finished_at": "2026-10-10T06:37:21.157756+00:00"
+            },
+            {
+              "case": "NAVIGATION",
+              "outcome": "pass",
+              "record_sha256": "55e04e28a488a0e624789aff53509db6d97a5f2affd4fc279b083963e5aab567",
+              "timing_max_us": {
+                "delay_us": 71855,
+                "work_us": 65844
+              },
+              "timing_violations": [],
+              "finished_at": "2026-10-10T06:37:31.340336+00:00"
+            },
+            {
+              "case": "POLICY",
+              "outcome": "pass",
+              "record_sha256": "e0d70cd7b4697f32381c9e1d54600bc5bca8d4b730ea5fda2159cf4fe19d8b0f",
+              "timing_max_us": {
+                "delay_us": 7066,
+                "work_us": 70572
+              },
+              "timing_violations": [],
+              "erasure_ms": 84.04496998991817,
+              "finished_at": "2026-10-10T06:37:39.748355+00:00"
+            },
+            {
+              "case": "ORACLE",
+              "outcome": "pass",
+              "record_sha256": "18d7d2544928dba685eea210d79ec6f48e38a5408922a70677fed6a9efb2b53f",
+              "timing_max_us": {
+                "delay_us": 78323,
+                "work_us": 68213
+              },
+              "timing_violations": [],
+              "finished_at": "2026-10-10T06:37:51.899766+00:00"
+            }
+          ]
+        }
+      ],
+      "diagnostics": []
+    }
+  ],
+  "environments": [
+    {
+      "local_path": "out/evidence/inspector-attribution/environment-before.json",
+      "sha256": "aff4e18aa9eafae69a8db1b2976ce3a0485b4630d745df00c7ecfd6c1c9b0157"
+    },
+    {
+      "local_path": "out/evidence/inspector-attribution/environment-after.json",
+      "sha256": "91b01f3d1e68e36b742e2fddd7509ed4fbeeb8b7dc2de130e69090c42e82d055"
+    }
+  ],
+  "initial_attribution": {
+    "local_path": "out/evidence/inspector-attribution/initial-attribution.json",
+    "sha256": "25cfe15577805913d225ea8391b4a6863edeb4262227ff2c22b4af6a724d0f4d"
+  },
+  "qualification": {
+    "ordinary_cases": 7,
+    "phase_cases": 7,
+    "ordinary_max_work_us": 73467,
+    "phase_max_work_us": 77783,
+    "ordinary_erasure_ms": 84.04496998991817,
+    "phase_erasure_ms": 97.4738989607431,
+    "shared_checks_per_profile": 114,
+    "historical_import_checks": 2,
+    "frozen_text_requests_per_prepared_mode": 30,
+    "native_acquisition": "Synthetic rows for maximum tables; no hardware acquisition claim.",
+    "historical_execution": "No XP guest, Windows 9x or Mac qualification inferred."
+  },
+  "remaining": [
+    "Maximum chart histories and mixed live scenes",
+    "Human accessibility and long-text usability",
+    "Physical hotplug and other native adapters",
+    "Desktop/lifecycle, protected deployment and all five complete 0.1.0 editions"
+  ],
+  "specification_checks": {
+    "commands": [
+      {
+        "step": "budget",
+        "command": [
+          "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+          "-X",
+          "utf8",
+          "source/build/check_workspace_budget.py",
+          "--action",
+          "test"
+        ],
+        "environment": {
+          "TMP": "D:\\Projects\\SysPane\\syspane\\out\\test-tmp\\inspector-attribution",
+          "TEMP": "D:\\Projects\\SysPane\\syspane\\out\\test-tmp\\inspector-attribution",
+          "GIT_CEILING_DIRECTORIES": "D:/Projects/SysPane/syspane/out/test-tmp/inspector-attribution"
+        },
+        "started_at": "2026-10-10T06:49:45.090647+00:00",
+        "finished_at": "2026-10-10T06:49:47.197495+00:00",
+        "exit": 0,
+        "stdout_sha256": "d43a33fb923f636a685a57b9566754f258a56e3efb4563921541bf86a6481722",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "step": "generate",
+        "command": [
+          "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+          "-X",
+          "utf8",
+          "spec/tools/specctl.py",
+          "generate"
+        ],
+        "environment": {
+          "TMP": "D:\\Projects\\SysPane\\syspane\\out\\test-tmp\\inspector-attribution",
+          "TEMP": "D:\\Projects\\SysPane\\syspane\\out\\test-tmp\\inspector-attribution",
+          "GIT_CEILING_DIRECTORIES": "D:/Projects/SysPane/syspane/out/test-tmp/inspector-attribution"
+        },
+        "started_at": "2026-10-10T06:49:47.198255+00:00",
+        "finished_at": "2026-10-10T06:49:50.427446+00:00",
+        "exit": 0,
+        "stdout_sha256": "433bc9cf0ed9aecb0fd853cd594a7f65c16c5c44afa00c08968558a32d5656c9",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "step": "validate",
+        "command": [
+          "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+          "-X",
+          "utf8",
+          "spec/tools/specctl.py",
+          "validate",
+          "--schemas"
+        ],
+        "environment": {
+          "TMP": "D:\\Projects\\SysPane\\syspane\\out\\test-tmp\\inspector-attribution",
+          "TEMP": "D:\\Projects\\SysPane\\syspane\\out\\test-tmp\\inspector-attribution",
+          "GIT_CEILING_DIRECTORIES": "D:/Projects/SysPane/syspane/out/test-tmp/inspector-attribution"
+        },
+        "started_at": "2026-10-10T06:49:50.427681+00:00",
+        "finished_at": "2026-10-10T06:49:54.276948+00:00",
+        "exit": 0,
+        "stdout_sha256": "4d1c42e829814b79e638eabee1b8f80553a5caea26892f6e800d5ceb66a80113",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "step": "tools",
+        "command": [
+          "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+          "-X",
+          "utf8",
+          "spec/tools/tests/test_specctl.py",
+          "-v"
+        ],
+        "environment": {
+          "TMP": "D:\\Projects\\SysPane\\syspane\\out\\test-tmp\\inspector-attribution",
+          "TEMP": "D:\\Projects\\SysPane\\syspane\\out\\test-tmp\\inspector-attribution",
+          "GIT_CEILING_DIRECTORIES": "D:/Projects/SysPane/syspane/out/test-tmp/inspector-attribution"
+        },
+        "started_at": "2026-10-10T06:49:54.277265+00:00",
+        "finished_at": "2026-10-10T06:50:53.033238+00:00",
+        "exit": 0,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "70784b68db8dddbb03bc6f2eb937c1b3b1c8288c071610bd6661def6e61d46dd"
+      }
+    ],
+    "schemas": 51,
+    "fixtures": 183,
+    "tools": {
+      "total": 62,
+      "passed": 60,
+      "skipped": 2
+    },
+    "skip_reason": "Existing Windows symlink privilege restrictions",
+    "logs": [
+      {
+        "local_path": "out/evidence/inspector-attribution/spec-checks/budget.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "local_path": "out/evidence/inspector-attribution/spec-checks/budget.stdout",
+        "sha256": "d43a33fb923f636a685a57b9566754f258a56e3efb4563921541bf86a6481722"
+      },
+      {
+        "local_path": "out/evidence/inspector-attribution/spec-checks/generate.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "local_path": "out/evidence/inspector-attribution/spec-checks/generate.stdout",
+        "sha256": "433bc9cf0ed9aecb0fd853cd594a7f65c16c5c44afa00c08968558a32d5656c9"
+      },
+      {
+        "local_path": "out/evidence/inspector-attribution/spec-checks/result.json",
+        "sha256": "7cec96611587502560fc63fe878fb8fefe5a1cac63fa49da14c3d7e364d063e0"
+      },
+      {
+        "local_path": "out/evidence/inspector-attribution/spec-checks/tools.stderr",
+        "sha256": "70784b68db8dddbb03bc6f2eb937c1b3b1c8288c071610bd6661def6e61d46dd"
+      },
+      {
+        "local_path": "out/evidence/inspector-attribution/spec-checks/tools.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "local_path": "out/evidence/inspector-attribution/spec-checks/validate.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "local_path": "out/evidence/inspector-attribution/spec-checks/validate.stdout",
+        "sha256": "4d1c42e829814b79e638eabee1b8f80553a5caea26892f6e800d5ceb66a80113"
+      }
+    ]
+  }
+}

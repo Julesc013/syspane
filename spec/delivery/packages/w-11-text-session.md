@@ -67,3 +67,8 @@ visibility checks plus all corresponding native erasure cases. Run the original
 preview stages, and retain every failure. Preserve all three portable-profile
 regressions and historical PE checks. A missing target laboratory remains blocked
 qualification; all five complete desktop editions remain required.
+
+The later [validated-theme package](w-11-validated-theme.md) admits a borrowed exact
+validation proof owned outside TextSession. It preserves this session's ownership,
+thread confinement, independent native requests and destruction-before-publication
+rules; no theme/request data is stored in TextSession.

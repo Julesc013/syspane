@@ -1,7 +1,7 @@
 """Compare session rendering with frozen original standalone bytes and errors."""
 from datetime import datetime,timezone
 from pathlib import Path
-import hashlib,json,subprocess,sys,uuid
+import copy,hashlib,json,subprocess,sys,uuid
 import text_session_cases as inputs
 ROOT=inputs.ROOT
 sys.path.insert(0,str(ROOT/'source/build'))
@@ -47,6 +47,13 @@ def main():
             compare(order[0],result['seed'],Path(str(path)+'.seed'))
             for j,i in enumerate(order):compare(i,result['results'][j],Path(str(path)+'.'+str(j)))
             record['cases'].append(dict(case=name,outcome='pass',requests=len(order),wrong_thread_refused=True))
+        for mode in ('PREPARED','PREPARED-MISMATCH'):
+            for i,row in enumerate(rows):
+                request=copy.deepcopy(row['request']);proof=copy.deepcopy(request['theme'])
+                if mode=='PREPARED-MISMATCH':proof['name']+=' proof'
+                request['prepared_theme']=proof
+                result,path=invoke(mode+'-'+row['id'],encode(request));compare(i,result,path)
+            record['cases'].append(dict(case=mode,outcome='pass',requests=len(rows)))
         record['outcome']='pass'
     except BaseException as error:
         record['error']=repr(error);raise
