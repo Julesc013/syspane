@@ -69,13 +69,26 @@ def observe(exe,folder,runtime,mode,extension=None):
                 except FileNotFoundError:pass
             for pid in children:
                 if pid in helper_pidfds:continue
+                fd=None
                 try:
+                    fd=os.pidfd_open(pid)
+                    args=Path('/proc',str(pid),'cmdline').read_bytes().split(b'\0')[:-1]
                     path=Path('/proc',str(pid),'exe');target=os.readlink(path)
-                    if 'memfd:syspane-' not in target:continue
-                    fd=os.pidfd_open(pid);digest=sha(path.read_bytes())
-                except FileNotFoundError:continue
+                    if 'memfd:syspane-' not in target:os.close(fd);continue
+                    digest=sha(path.read_bytes())
+                except (FileNotFoundError,ProcessLookupError):
+                    if fd is not None:os.close(fd)
+                    continue
+                except PermissionError:
+                    # The real image sandbox disables dumpability before input.
+                    # Keep exact-child liveness without claiming an executable hash.
+                    if select.select([fd],[],[],0)[0]:target='exited-before-executable-observation'
+                    else:
+                        assert len(args)==3 and args[0]==b'syspane-image-worker' and args[1] in (b'image/png',b'image/jpeg',b'image/svg+xml') and args[2]==str(proc.pid).encode(),args
+                        target='sandboxed:syspane-image-worker'
+                    digest=None
                 helper_pidfds[pid]=fd
-                report.setdefault('native_children',[]).append(dict(pid=pid,image=target,sha256=digest))
+                report.setdefault('native_children',[]).append(dict(pid=pid,image=target,sha256=digest,argv=[v.decode() for v in args]))
         context=GLib.MainContext.default()
         for _ in range(100):
             if not context.pending():break
@@ -140,6 +153,7 @@ def observe(exe,folder,runtime,mode,extension=None):
         for pid in children:
             try:
                 args=Path('/proc',str(pid),'cmdline').read_bytes().split(b'\0')[:-1]
+                if args and args[0]==b'syspane-image-worker':continue
                 if 'memfd:syspane-configuration-host' in os.readlink('/proc/'+str(pid)+'/exe') and b'--network' not in args:candidates.append(pid)
             except FileNotFoundError:pass
         assert len(candidates)==1,candidates

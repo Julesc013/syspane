@@ -12,10 +12,19 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-10T03:16:44.963078+00:00", "scope": "Prepared authored preview repair and ordinary GUI qualification"}
+updated: {"by": "codex", "at": "2026-10-10T04:14:24.920468+00:00", "scope": "Installed image and logical-monitor qualification"}
 ---
 
 # Current state and next admitted boundary
+
+The [installed image/topology checkpoint](inspector-assets-handoff.md) passes all
+twelve native cases through the ordinary Linux entry fixture with unchanged product
+binaries. It verifies maximum encoded image input, explicit decoder refusals,
+summary/navigation/reopen, policy erasure, held-child exit and real logical monitor
+unavailability/restoration. Two failed observer attempts and the topology experiments
+remain preserved. Continue W-11 with maximum-input installed inspector responsiveness
+and human accessibility, then desktop/lifecycle composition. Physical hotplug and
+the other native environments retain separate qualification requirements.
 
 The [prepared surface checkpoint](prepared-surface-handoff.md) moves repeated
 preview structure validation onto existing initial editor, history and recovery
@@ -30,7 +39,7 @@ The [installed telemetry checkpoint](installed-telemetry-handoff.md) connects th
 ordinary inspector to the authenticated measured network service with independent
 supervision and bounded delivery. The prepared preview repair above supersedes its
 failed GUI qualification for this source, without erasing those records. Continue
-W-11 with installed image/topology, maximum-input inspector performance and human
+W-11 with maximum-input inspector performance and human
 accessibility qualification, then desktop/lifecycle composition. All five complete
 native release editions remain unfinished.
 
@@ -50,7 +59,8 @@ inspector-model/image-job binaries, and 83 scene/component checks on each of thr
 development profiles. Its seven GUI timing/erasure cases passed then; the prepared
 preview checkpoint above records the current ordinary GUI qualification.
 That checkpoint preserves absent-producer behavior; the live checkpoint above adds
-authenticated telemetry. Installed image/topology/performance qualification and
+authenticated telemetry. The new checkpoint above qualifies installed image and
+logical monitor cases; installed performance qualification and
 desktop/lifecycle composition remain required. All five complete editions remain open.
 
 Shared build tooling now lives in `source/build/`. Machine bindings and raw

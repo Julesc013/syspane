@@ -1,5 +1,26 @@
 # Developer setup and checks
 
+The [installed inspector asset package](../../spec/delivery/packages/w-11-inspector-assets.md)
+uses deterministic saved image generations and actual RandR monitor changes in an
+owned Xvfb display. After workspace preflight and ordinary configure/build, run:
+
+```sh
+ctest --preset linux-x64-gcc13 -R '^native[.]INSTALLED-INSPECTOR-ASSETS$' --output-on-failure
+```
+
+The family covers maximum encoded input, over-limit refusal, malformed content,
+summary, navigation/reopen, policy erasure, held image children and monitor
+unavailability/restoration. It uses the ordinary entry fixture and existing
+verified image worker. Large fixtures download their profile on each navigation;
+the observer allows the existing 60-second transfer deadline. Sandboxed children
+may deny executable inspection: preserve pidfd exit evidence and distinguish a
+verified parent-held image from a directly observed child executable hash.
+Run original installed editor/inspector/recovery and telemetry families, plus
+ordinary-entry recovery, observer-failure and GUI timing cases when changing their
+common observer. Archive completed families before the next
+workspace reservation. Human accessibility, physical hotplug, large inspector
+latency and full desktop qualification remain separate requirements.
+
 The [prepared preview package](../../spec/delivery/packages/w-11-prepared-surface.md)
 reuses opaque authored snapshots from existing editor preparation workers. After
 workspace preflight and ordinary configure/build, run:

@@ -574,7 +574,8 @@
         "SP-W11-REQUEST-FORM",
         "SP-W11-INSTALLED-INSPECTOR",
         "SP-W11-INSPECTOR-TELEMETRY",
-        "SP-W11-PREPARED-SURFACE"
+        "SP-W11-PREPARED-SURFACE",
+        "SP-W11-INSPECTOR-ASSETS"
       ],
       "acceptance_tests": [
         "T-SETTINGS",
@@ -668,14 +669,18 @@
         "tests/configuration/native_installed_telemetry.py",
         "tests/scene/inspector_delivery_tests.hpp",
         "tests/editor/authored_snapshot.hpp",
-        "tests/scene/prepared_surface_tests.cpp"
+        "tests/scene/prepared_surface_tests.cpp",
+        "tests/configuration/installed-inspector-assets-cases.json",
+        "tests/configuration/installed_image_fixture.py",
+        "tests/configuration/inspector_topology_fixture.py",
+        "tests/configuration/native_installed_inspector_assets.py"
       ],
       "status": "in_progress",
       "authority_class": "development",
       "execution_grant": "user:foundation-native-campaign-2026-10-05",
-      "notes": "Initial/history/recovery workers now supply immutable authored snapshots to native editor previews. All seven unchanged ordinary GUI timing/erasure cases pass after the measured repair; retain the prior failures and explicit new-test expectation correction. Installed image/topology, maximum-input inspector and human accessibility qualification, desktop/lifecycle composition and all five full release editions remain open.",
-      "package": "delivery/packages/w-11-prepared-surface.md",
-      "evidence": "delivery/prepared-surface-handoff.md"
+      "notes": "Installed image and logical-monitor qualification now passes all twelve native cases with unchanged product binaries. Preserve the two observer failures and their documented corrections. Continue maximum-input installed inspector responsiveness and human accessibility, physical hotplug and other native backends, then desktop/lifecycle composition. All five full release editions remain open.",
+      "package": "delivery/packages/w-11-inspector-assets.md",
+      "evidence": "delivery/inspector-assets-handoff.md"
     },
     {
       "id": "W-12",

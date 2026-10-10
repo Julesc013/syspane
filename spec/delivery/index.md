@@ -67,6 +67,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Bounded image pipeline checkpoint](image-pipeline-handoff.md) — Exact portable fit and isolated Linux PNG/JPEG/static-SVG decoding with nonblocking child ownership.
 - [Implementation readiness and gates](implementation-readiness.md) — Distinguish implemented specification checks from pending native and release work.
 - [Initial editor preview readiness handoff](initial-preview-handoff.md) — First composition now waits for drawing or guarded earlier input; fixed timing failures remain.
+- [Installed inspector image and logical-monitor qualification](inspector-assets-handoff.md) — Twelve native cases with unchanged product binaries and preserved observer failures.
 - [Inspector telemetry receiver and bounded delivery](inspector-telemetry-handoff.md) — Native consumer evidence and the remaining ordinary-inspector integration.
 - [Installed native scene editor](installed-editor-handoff.md) — Real frontend authoring, authenticated persistence and shared verified helper ownership.
 - [Installed saved-scene inspector](installed-inspector-handoff.md) — Connect native scene inspection to authenticated saved profiles and the verified image worker.

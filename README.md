@@ -21,14 +21,16 @@ remain open.
 [Prepared editor previews](spec/delivery/prepared-surface-handoff.md) now reuse
 validated authored snapshots from existing workers. All seven ordinary maximum-input
 GUI timing and erasure cases pass after this repair, with their original limits.
-Earlier failures remain preserved. Installed inspector and full desktop qualification
-still require further work.
+Earlier failures remain preserved. Maximum-input inspector responsiveness and full
+desktop qualification still require further work.
 
 The [installed scene inspector](spec/delivery/installed-inspector-handoff.md)
 adds native inspection of saved scenes alongside Settings and Edit scene in the
 Linux frontend. It preserves unsaved-edit navigation guards and uses the verified
-image worker. Installed image/topology/performance qualification, desktop integration and
-release qualification remain unfinished.
+image worker. Its [image and logical-monitor checks](spec/delivery/inspector-assets-handoff.md)
+now pass all twelve native cases, including maximum encoded input, policy erasure
+and held-worker shutdown. Inspector performance, human accessibility, physical
+hotplug, desktop integration and release qualification remain unfinished.
 
 The [ordinary recovery checkpoint](spec/delivery/ordinary-recovery-handoff.md)
 enables recovery and prepared history in the Linux application entry. Current

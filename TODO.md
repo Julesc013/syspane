@@ -22,7 +22,8 @@ telemetry is now integrated; preserve prior failures and all five full release e
 - [x] Implement and test the native network consumer and bounded delivery receiver; see the [checkpoint](spec/delivery/inspector-telemetry-handoff.md).
 - [x] Connect authenticated inspector telemetry, active-profile demand, independent supervision and batched native rendering; see the [handoff](spec/delivery/installed-telemetry-handoff.md).
 - [x] Reuse prepared authored snapshots for editor previews and pass all seven unchanged ordinary GUI timing/erasure cases after the measured repair; preserve earlier failures. See the [handoff](spec/delivery/prepared-surface-handoff.md).
-- [ ] Qualify installed image/topology cases, maximum-input inspector responsiveness and human accessibility, then desktop/lifecycle composition.
+- [x] Qualify installed image input/refusal, summary/navigation/reopen, policy erasure, held-child exit and real logical monitor changes. See the [handoff](spec/delivery/inspector-assets-handoff.md).
+- [ ] Qualify maximum-input installed inspector responsiveness and human accessibility, physical hotplug and other native backends, then desktop/lifecycle composition.
 
 ## Completed specification work
 
@@ -71,7 +72,7 @@ behaviour has been implemented. See [audit disposition](spec/delivery/audit-2026
 - [ ] Complete asynchronous authoring and native preview handoff; retain full validation and the original GUI timing gates.
 - [ ] Continue general preview/layout responsiveness and investigate preserved transient Apply/controller-restart observations; retain the now-passing seven GTK cases and original failures.
 - [x] Admit ordinary-entry recovery/history after the Apply repair; verify original installed, maximum-input, observer-isolation and ownership checks. See the [handoff](spec/delivery/ordinary-recovery-handoff.md).
-- [ ] Integrate the native inspector and authenticated telemetry into the installed frontend; qualify protected deployment with its authority.
+- [ ] Qualify protected deployment of the installed inspector and authenticated telemetry with its required authority.
 - [ ] Explain the preserved Windows GCC15 THEME-HISTORY-RESOURCE-LIMIT 20-second timeout and installed-editor AT-SPI grab_focus timeout; retain original failures and distinguish unchanged replays from causal evidence.
 
 - [x] W-11 shared private text lifetime: balanced realization/destruction, retained editing and independent verification that neither clipboard changes ownership. See the [handoff](spec/delivery/private-text-lifetime-handoff.md).
@@ -88,7 +89,7 @@ behaviour has been implemented. See [audit disposition](spec/delivery/audit-2026
 - [x] W-08 native profile worker: one storage thread and held profile locks across joined asynchronous command workers, with exact persistence and crash reconciliation. See the [handoff](spec/delivery/profile-worker-handoff.md).
 - [x] W-08 shipped initial scene/theme, resource bootstrap 0.5 and policy-bound Linux profile store, with exact startup/interruption/reconciliation evidence. See the [handoff](spec/delivery/profile-startup-handoff.md).
 - [x] W-08 Linux profile directory owner: XDG/portable roots, exact private markers, exclusive locks and interrupted initialization. See the [handoff](spec/delivery/profile-owner-handoff.md).
-- [ ] Extend the installed frontend with native inspector, telemetry, activation and import catalog; qualify protected-policy deployment and retain all release gates.
+- [ ] Complete installed activation and import catalog, qualify protected-policy deployment and retain all release gates.
 - [x] W-09 theme typography: versioned complete fonts/roles, exact resource admission and native raster evidence. See the [handoff](spec/delivery/typography-handoff.md).
 - [x] W-09 role-aware scene composition: bounded semantic blocks, exact native pixels, preserved diagnostics and erasure; explicit development admission. See the [handoff](spec/delivery/role-composition-handoff.md).
 - [x] W-10 shared theme-authoring input and immutable artifact construction: exact no-op/reset, policy admission, preserved license and deterministic content pins. See the [handoff](spec/delivery/theme-authoring-handoff.md).
