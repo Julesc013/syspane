@@ -12,37 +12,42 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-09T15:01:36.011136+00:00", "scope": "Native inspector consumer and bounded delivery; ordinary UI adoption next"}
+updated: {"by": "codex", "at": "2026-10-10T02:45:00+00:00", "scope": "Installed telemetry functional evidence and unresolved ordinary GUI timing gate"}
 ---
 
 # Current state and next admitted boundary
 
-The [inspector telemetry receiver](inspector-telemetry-handoff.md) now authenticates
-and consumes the measured native service, preserving original receipt/measurement
-identity in a bounded latest-full delivery object. Native peer/counter and portable
-lease/clock cases pass. Continue the existing W-11 package by connecting this
-receiver to the ordinary frontend's current-profile intent and independent owners,
-then batch inspector rendering and qualify its installed live UI. That integration
-and all five complete editions remain unfinished.
+The [installed telemetry checkpoint](installed-telemetry-handoff.md) connects the
+ordinary inspector to the authenticated measured network service. Exact active-profile
+intent owns independent supervision and a client worker; GTK batches validated
+delivery at its existing cadence. Source loss retains only previously displayed,
+still-permitted data with unknown age. Navigation stops collection, policy loss
+erases it, and exit waits for both services and their clients. The ordinary GUI
+limit run failed MAX-WIDGETS (110.421-ms delay) and MAX-RECORD (116.786-ms work)
+against 100 ms. Callback/phase diagnostics passed but did not reproduce or explain
+those failures. First attribute and repair recovery-restore/editor-population costs,
+then rerun the unchanged ordinary gate. Continue W-11 with installed image/topology,
+maximum-input inspector performance and accessibility qualification,
+then desktop/lifecycle composition. All five complete editions remain unfinished.
 
 The [native network service](network-service-handoff.md) now reuses verified helper
 installation, independent supervision, native acquisition and demand/session owners.
 Eighteen new native cases pass, including real counters/rates, held-read timeout,
 policy denial, sealed launch, crash/restart and exact child exit. The ordinary
-inspector still needs its telemetry consumer, bounded delivery and current-profile
-lease/erasure integration. Continue from that handoff; all five complete editions
-remain unfinished.
+inspector now consumes that service through the checkpoint above; all five complete
+editions remain unfinished.
 
 The [installed inspector checkpoint](installed-inspector-handoff.md) now connects
 saved scenes to native inspection in the common Linux frontend, alongside Settings
 and Edit scene. Exact rows, summary, guarded navigation, save/reopen, policy loss,
 controller replacement and image-factory ownership have executable evidence.
-The final checks pass 100 native cases across eight report families, plus native
+That checkpoint passed 100 native cases across eight report families, plus native
 inspector-model/image-job binaries, and 83 scene/component checks on each of three
-development profiles. All seven original GUI timing/erasure cases pass.
-The default network binding is explicitly unsupported: authenticated telemetry
-is the next required integration, followed by installed image/topology/performance
-qualification and desktop/lifecycle composition. All five complete editions remain open.
+development profiles. Its seven GUI timing/erasure cases passed then; the newer
+ordinary failure above supersedes that result for current qualification.
+That checkpoint preserves absent-producer behavior; the live checkpoint above adds
+authenticated telemetry. Installed image/topology/performance qualification and
+desktop/lifecycle composition remain required. All five complete editions remain open.
 
 Shared build tooling now lives in `source/build/`. Machine bindings and raw
 recordings are local ignored `out/` content; the retired root is absent from the
@@ -58,8 +63,8 @@ ordinary-entry recovery/settings, original
 installed consumers and the seven GUI timing/erasure cases. Three development
 builds each pass 56 selected portable checks; historical import checks also pass.
 
-Saved-scene inspector composition now has the checkpoint above. Continue with
-authenticated inspector telemetry, then desktop/lifecycle integration. Protected
+Saved-scene inspector composition and live telemetry now have checkpoints above.
+Continue installed qualification, then desktop/lifecycle integration. Protected
 deployment and all five full release editions remain open.
 The checkpoint preserves the original disabled-entry and GUI failures.
 

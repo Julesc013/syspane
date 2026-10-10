@@ -72,6 +72,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Installed saved-scene inspector](installed-inspector-handoff.md) — Connect native scene inspection to authenticated saved profiles and the verified image worker.
 - [Installed editor recovery consumption handoff](installed-recovery-handoff.md) — Verified experimental UI composition and the remaining production responsiveness gate.
 - [Installed native settings frontend](installed-settings-handoff.md) — The development application composes native settings, authenticated profile reads and independent configuration supervision.
+- [Installed inspector telemetry and native owner lifetime](installed-telemetry-handoff.md) — Ordinary frontend delivery, independent native observations and remaining release gates.
 - [Native keyboard-input checkpoint](keyboard-input-handoff.md) — Queued navigation completion explains the recorded layout-button focus failure.
 - [Complete-scene command checkpoint](large-commands-handoff.md) — Negotiated full-scene edits, bounded admission and coherent native request recovery.
 - [Native layout-authoring checkpoint](layout-authoring-handoff.md) — Existing layout grammar and active fixed variants through the shared draft.

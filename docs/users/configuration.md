@@ -8,7 +8,10 @@ hand-editing a file is optional.
 Inspect scene shows the saved arrangement in a native tree, with a requested
 Summary for the selected row. Apply saves your edits before you inspect them.
 Unapplied property fields, unsaved drafts and pending requests keep navigation
-disabled until resolved. Inspection currently has no connected live telemetry.
+disabled until resolved. With current collection and disclosure permission,
+inspection connects to live network counters and rates. Leaving inspection stops
+collection. Source loss marks previously displayed values retained with unknown
+age; policy withdrawal clears them. Inspecting data does not modify the saved scene.
 
 The current Linux development editor supports selection, drag/resize, keyboard
 movement, title/text/geometry fields, duplicate/delete, undo/redo and Apply/Cancel.

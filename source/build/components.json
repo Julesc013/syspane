@@ -2036,7 +2036,8 @@
       ],
       "allowed_dependencies": [
         "syspane_scene_surface",
-        "PkgConfig::GTK3"
+        "PkgConfig::GTK3",
+        "syspane_telemetry_delivery"
       ],
       "target_requirements": [
         "cxx17",
@@ -2056,7 +2057,9 @@
       "type": "EXECUTABLE",
       "source_owner": "tests/scene/",
       "public_interfaces": [],
-      "private_interfaces": [],
+      "private_interfaces": [
+        "tests/scene/inspector_delivery_tests.hpp"
+      ],
       "sources": [
         "tests/scene/inspector_tests.cpp"
       ],
@@ -3510,7 +3513,8 @@
         "Threads::Threads",
         "syspane_editor_form",
         "syspane_editor_helpers",
-        "syspane_scene_inspector"
+        "syspane_scene_inspector",
+        "syspane_network_consumer"
       ],
       "target_requirements": [
         "cxx17",

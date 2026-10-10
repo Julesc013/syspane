@@ -3,6 +3,7 @@
 #include "editor_form.hpp"
 #include "scene_inspector.hpp"
 #include "editor_recovery_session.hpp"
+#include "network_publication.hpp"
 #include <gtk/gtk.h>
 #include <algorithm>
 #include <cstdlib>
@@ -17,6 +18,7 @@ struct Window {
     LinuxFrontendBackend& backend;GtkWidget *window=nullptr,*box=nullptr,*forms=nullptr,*status=nullptr,*retry=nullptr,*quit=nullptr,*settings_button=nullptr,*editor_button=nullptr,*inspector_button=nullptr,*recovery_notice=nullptr;
     std::unique_ptr<interfaces::SettingsForm> form;std::unique_ptr<interfaces::EditorForm> editor;
     std::unique_ptr<interfaces::SceneInspector> inspector;Mode mode=Mode::settings;std::uint64_t next_inspector=0;
+    bool inspecting=false;
     std::vector<GdkMonitor*> monitors;GdkDisplay* display=nullptr;bool topology_dirty=true;
     std::uint64_t shown=0,withdrawal=0;bool erased=false,closing=false,transition=false,exit_requested=false,view_unavailable=false;int result=0;
     bool recovery_admitted=false,recovery_enabled=false;std::optional<std::uint64_t> retirement_serial;
@@ -100,8 +102,8 @@ struct Window {
         gtk_widget_set_sensitive(settings_button,FALSE);gtk_widget_set_sensitive(editor_button,FALSE);gtk_widget_set_sensitive(inspector_button,FALSE);gtk_widget_show_all(window);
     }
     bool can_leave()const{return editor?editor->can_leave():inspector||view_unavailable||(form&&form->can_leave());}
-    void close_forms(){if(form)form->close();if(editor)editor->close();if(inspector)inspector->close();}
-    bool forms_stopped(){return (!editor||editor->stopped())&&(!inspector||inspector->poll_image_jobs());}
+    void close_forms(){backend.inspect({});inspecting=false;if(form)form->close();if(editor)editor->close();if(inspector)inspector->close();}
+    bool forms_stopped(){return backend.inspection_stopped()&&(!editor||editor->stopped())&&(!inspector||inspector->poll_image_jobs());}
     void select(Mode next){
         if(closing||transition||next==mode||!can_leave())return;
         saved_notice.clear();retirement_serial.reset();backend.reload();close_forms();mode=next;transition=true;
@@ -123,7 +125,13 @@ struct Window {
             try{current=topology();}
             catch(const protocol::Error&){view_unavailable=true;topology_dirty=false;shown=snapshot.serial;erased=false;transition=false;gtk_widget_hide(recovery_notice);return;}
             if(mode==Mode::inspector){
-                inspector=std::make_unique<interfaces::SceneInspector>(authority,snapshot.view.policy,scene_config(snapshot,std::move(current)),std::vector<rendering::SurfaceProvider>{},"",interfaces::SceneInspector::Translator{},backend.images());
+                inspecting=backend.inspect(profile);std::vector<rendering::SurfaceProvider> providers;
+                if(inspecting){
+                    rendering::SurfaceProvider provider;provider.producer="producer:network";provider.types={"network.interface"};provider.metrics=runtime::network_metrics();
+                    for(const auto& metric:provider.metrics)provider.fields[metric.field]=3000000000ULL;
+                    providers.push_back(std::move(provider));
+                }
+                inspector=std::make_unique<interfaces::SceneInspector>(authority,snapshot.view.policy,scene_config(snapshot,std::move(current)),std::move(providers),"",interfaces::SceneInspector::Translator{},backend.images());
                 inspector->refresh(now());next_inspector=now()+100;
                 gtk_box_pack_start(GTK_BOX(forms),inspector->widget(),TRUE,TRUE,0);gtk_widget_show_all(inspector->widget());
             }else{
@@ -199,14 +207,17 @@ struct Window {
             if((editor||inspector)&&current&&topology_dirty){
                 scene::Topology next;
                 try{next=topology();view_unavailable=false;}
-                catch(const protocol::Error&){view_unavailable=true;topology_dirty=false;if(inspector)inspector->close();}
+                catch(const protocol::Error&){view_unavailable=true;topology_dirty=false;if(inspector){backend.inspect({});inspecting=false;inspector->close();}}
                 if(!view_unavailable)measure(FrontendPhase::topology,[&]{
                     if(editor){const auto selected=next.fallback;editor->topology(std::move(next),selected);}
-                    if(inspector){inspector->replace(scene_config(*state.profile,std::move(next)),now());next_inspector=now()+100;}
+                    if(inspector){inspector->replace(scene_config(*state.profile,std::move(next)),now());next_inspector=0;}
                 });
             }
             if(inspector&&current&&!view_unavailable){
-                const auto stamp=now();if(stamp>=next_inspector){inspector->refresh(stamp);next_inspector=now()+100;}
+                const auto stamp=now();if(stamp>=next_inspector){
+                    if(inspecting)inspector->deliver(state.telemetry,state.telemetry_scope,stamp);else inspector->refresh(stamp);
+                    next_inspector=now()+100;
+                }
                 const auto code=inspector->status().code;
                 if(code==rendering::SurfaceCode::restricted)gtk_label_set_text(GTK_LABEL(status),"Scene inspection unavailable under the current policy.");
                 else if(code==rendering::SurfaceCode::alternative||code==rendering::SurfaceCode::closed)gtk_label_set_text(GTK_LABEL(status),"Scene inspection unavailable for this scene or display configuration.");

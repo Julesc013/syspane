@@ -139,7 +139,8 @@ def observe(exe,folder,runtime,mode,extension=None):
         candidates=[]
         for pid in children:
             try:
-                if 'memfd:syspane-configuration-host' in os.readlink('/proc/'+str(pid)+'/exe'):candidates.append(pid)
+                args=Path('/proc',str(pid),'cmdline').read_bytes().split(b'\0')[:-1]
+                if 'memfd:syspane-configuration-host' in os.readlink('/proc/'+str(pid)+'/exe') and b'--network' not in args:candidates.append(pid)
             except FileNotFoundError:pass
         assert len(candidates)==1,candidates
         pid=candidates[0]

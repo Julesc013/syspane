@@ -2,6 +2,7 @@
 #include "profile_supervisor_linux.hpp"
 #include "runtime_directory_linux.hpp"
 #include "editor_helpers_linux.hpp"
+#include "network_consumer_linux.hpp"
 #include "local_ipc.hpp"
 #include "reconciliation.hpp"
 #include "digest.hpp"
@@ -42,8 +43,11 @@ struct LinuxFrontendBackend::Impl {
     struct Pending {ui::EditRequest request;std::string intent;std::uint64_t revision=0;bool dispatched=false,cancel=false,retrieve=false;std::optional<Capture> capture;};
     os::HelperBundleExpectation expectation;std::string runtime_base;os::ProfileLocation location;
     EditorHelperClient helpers;
-    std::mutex mutex;std::thread supervisor_worker,client_worker;
-    std::atomic<bool> closing{false},supervisor_done{false},client_done{false};
+    std::mutex mutex;std::thread supervisor_worker,client_worker,network_worker;
+    std::atomic<bool> closing{false},supervisor_done{false},client_done{false},network_done{false};
+    ProfileSupervisorView network_controller;std::uint64_t network_generation=0;
+    std::shared_ptr<const FrontendProfile> inspection;
+    bool network_active=false,inspection_closed=true;
     ProfileSupervisorView controller;std::uint64_t generation=0,requests=0,profiles=0,sessions=0,retries=0,last_retry=0;
     FrontendView view;std::optional<Pending> pending;bool reload_requested=false;
     std::unique_ptr<ui::PreparedEditor> prepared_editor;const bool recovery_admitted;
@@ -54,7 +58,16 @@ struct LinuxFrontendBackend::Impl {
     }
     bool valid_unlocked(std::uint64_t token)const{return !closing&&generation==token&&controller.state==ProfileSupervisorState::ready;}
     void valid(std::uint64_t token){std::lock_guard<std::mutex> lock(mutex);need(valid_unlocked(token),"frontend.withdrawn");}
+    void stop_inspection(){
+        if(inspection)increment(network_generation);
+        inspection.reset();view.telemetry={};view.telemetry_scope={};
+    }
+    bool network_valid(const std::shared_ptr<const FrontendProfile>& profile,std::uint64_t token)const{
+        return !closing&&!pending&&!view.loading&&profile&&inspection==profile&&view.profile==profile&&
+            network_generation==token&&network_controller.state==ProfileSupervisorState::ready;
+    }
     void withdraw(const char* status){
+        stop_inspection();
         prepared_editor.reset();
         recovery_authority.reset();
         view.profile.reset();view.reply.reset();view.loading=true;view.status=status;increment(view.withdrawal);
@@ -78,6 +91,9 @@ struct LinuxFrontendBackend::Impl {
             {
                 LinuxEditorHelperOwner helper(helpers,installation,[this]{return admit_recovery();});
                 LinuxProfileSupervisor owner(installation,runtime.path(),location,true,static_cast<std::uint64_t>(::getpid()));
+                std::unique_ptr<os::LinuxRuntimeDirectory> network_runtime;
+                std::unique_ptr<LinuxProfileSupervisor> network_owner;
+                std::shared_ptr<const FrontendProfile> active_inspection;
                 bool stopped=false;
                 while(!stopped){
                     if(closing){owner.close();helper.close();}
@@ -89,9 +105,43 @@ struct LinuxFrontendBackend::Impl {
                            (next.state==ProfileSupervisorState::ready)!=(controller.state==ProfileSupervisorState::ready)){
                             increment(generation);withdraw(closing?"Closing; waiting for configuration service to stop.":"Configuration connection unavailable.");
                         }
-                        controller=std::move(next);stopped=controller.state==ProfileSupervisorState::closed&&helpers_stopped;
+                        controller=std::move(next);
                         if(controller.state==ProfileSupervisorState::circuit_open||controller.state==ProfileSupervisorState::unavailable)
                             view.status="Configuration service unavailable. Close and restart after checking installation and policy.";
+                    }
+                    std::shared_ptr<const FrontendProfile> desired;
+                    {std::lock_guard<std::mutex> lock(mutex);desired=inspection;}
+                    if(network_owner){
+                        if(closing||desired!=active_inspection)network_owner->close();
+                        const auto status=network_owner->poll();const auto events=network_owner->take();
+                        {
+                            std::lock_guard<std::mutex> lock(mutex);
+                            if(status.epoch!=network_controller.epoch||status.process!=network_controller.process||
+                               (status.state==ProfileSupervisorState::ready)!=(network_controller.state==ProfileSupervisorState::ready)){
+                                increment(network_generation);view.telemetry={};
+                            }
+                            network_controller=status;
+                            for(const auto& event:events)if(event.kind=="reaped"&&event.view.last_exit&&
+                                !event.view.last_exit->signaled&&event.view.last_exit->code==126){
+                                increment(generation);withdraw("Network policy changed; reloading current settings.");reload_requested=true;
+                            }
+                            if(inspection)view.telemetry_scope={inspection->serial,network_generation};
+                        }
+                        if(status.state==ProfileSupervisorState::closed){
+                            network_owner.reset();network_runtime->cleanup();network_runtime.reset();active_inspection.reset();
+                        }
+                    }
+                    {std::lock_guard<std::mutex> lock(mutex);desired=inspection;}
+                    if(!network_owner&&desired&&!closing){
+                        network_runtime=std::make_unique<os::LinuxRuntimeDirectory>(runtime_base);
+                        network_owner=std::make_unique<LinuxProfileSupervisor>(installation,network_runtime->path(),location,false,
+                            static_cast<std::uint64_t>(::getpid()),LocalService::network);active_inspection=desired;
+                    }
+                    {
+                        std::lock_guard<std::mutex> lock(mutex);
+                        // An intent may arrive after the launch snapshot above.
+                        inspection_closed=!inspection&&!network_owner&&!network_active;
+                        stopped=controller.state==ProfileSupervisorState::closed&&helpers_stopped&&!network_owner;
                     }
                     if(!stopped)pause();
                 }
@@ -277,14 +327,55 @@ struct LinuxFrontendBackend::Impl {
         }catch(...){std::lock_guard<std::mutex> lock(mutex);withdraw("Settings connection unavailable.");view.failed=true;}
         client_done=true;
     }
+    void network(){
+        std::uint64_t previous=0,next=0;unsigned attempts=0;
+        try{
+            while(!closing){
+                ProfileSupervisorView controller_view;std::shared_ptr<const FrontendProfile> profile;std::uint64_t token=0;bool ready=false;
+                {
+                    std::lock_guard<std::mutex> lock(mutex);profile=inspection;token=network_generation;controller_view=network_controller;
+                    if(token!=previous){previous=token;attempts=0;next=0;}
+                    ready=network_valid(profile,token)&&attempts<3&&os::monotonic_ms()>=next;
+                    if(ready){network_active=true;inspection_closed=false;}
+                }
+                if(!ready){pause();continue;}
+                ++attempts;
+                const auto current=[this,profile,token]{std::lock_guard<std::mutex> lock(mutex);return network_valid(profile,token);};
+                try{
+                    LinuxNetworkConsumer consumer(controller_view.endpoint,controller_view.process,controller_view.epoch,
+                        {profile->serial,token},profile->view.policy,current);
+                    while(current()){
+                        auto delivery=consumer.poll();
+                        {std::lock_guard<std::mutex> lock(mutex);if(network_valid(profile,token))view.telemetry=std::move(delivery);}
+                        pause();
+                    }
+                }catch(...){std::lock_guard<std::mutex> lock(mutex);if(network_generation==token)view.telemetry={};}
+                {std::lock_guard<std::mutex> lock(mutex);network_active=false;}
+                next=os::monotonic_ms()+1000;
+            }
+        }catch(...){std::lock_guard<std::mutex> lock(mutex);stop_inspection();network_active=false;view.failed=true;}
+        network_done=true;
+    }
 };
 LinuxFrontendBackend::LinuxFrontendBackend(os::HelperBundleExpectation expectation,std::string base,os::ProfileLocation location,bool recovery)
     :impl_(std::make_unique<Impl>(std::move(expectation),std::move(base),std::move(location),recovery)){
     auto& s=*impl_;s.supervisor_worker=std::thread([&s]{s.supervise();});
-    try{s.client_worker=std::thread([&s]{s.client();});}catch(...){s.closing=true;s.supervisor_worker.join();throw;}
+    try{s.client_worker=std::thread([&s]{s.client();});s.network_worker=std::thread([&s]{s.network();});}
+    catch(...){s.closing=true;if(s.client_worker.joinable())s.client_worker.join();s.supervisor_worker.join();throw;}
 }
-LinuxFrontendBackend::~LinuxFrontendBackend(){close();if(impl_->client_worker.joinable())impl_->client_worker.join();if(impl_->supervisor_worker.joinable())impl_->supervisor_worker.join();}
-FrontendView LinuxFrontendBackend::take(){auto& s=*impl_;std::lock_guard<std::mutex> lock(s.mutex);auto out=s.view;s.view.reply.reset();out.pending=s.pending.has_value();out.closing=s.closing;out.stopped=s.supervisor_done&&s.client_done;return out;}
+LinuxFrontendBackend::~LinuxFrontendBackend(){close();if(impl_->client_worker.joinable())impl_->client_worker.join();if(impl_->network_worker.joinable())impl_->network_worker.join();if(impl_->supervisor_worker.joinable())impl_->supervisor_worker.join();}
+FrontendView LinuxFrontendBackend::take(){auto& s=*impl_;std::lock_guard<std::mutex> lock(s.mutex);auto out=s.view;s.view.reply.reset();out.pending=s.pending.has_value();out.closing=s.closing;out.stopped=s.supervisor_done&&s.client_done&&s.network_done;return out;}
+bool LinuxFrontendBackend::inspect(const std::shared_ptr<const FrontendProfile>& profile){
+    auto& s=*impl_;std::lock_guard<std::mutex> lock(s.mutex);
+    if(!profile){s.stop_inspection();return false;}
+    if(s.closing||s.pending||s.view.loading||s.view.profile!=profile||s.controller.state!=ProfileSupervisorState::ready)return false;
+    const auto& policy=profile->view.policy;const c::Authority authority{true,"console",{"console"}};
+    if(!policy.available||policy.denied_capabilities.count("collection.network")||policy.denied_capabilities.count("telemetry.subscribe")||
+       !c::permits(authority,policy,"inspector","operational")||!c::permits(authority,policy,"accessibility","operational"))return false;
+    if(s.inspection!=profile){s.stop_inspection();increment(s.network_generation);s.inspection=profile;s.view.telemetry_scope={profile->serial,s.network_generation};s.inspection_closed=false;}
+    return true;
+}
+bool LinuxFrontendBackend::inspection_stopped()const{auto& s=*impl_;std::lock_guard<std::mutex> lock(s.mutex);return s.inspection_closed||(s.supervisor_done&&s.network_done);}
 std::unique_ptr<ui::PreparedEditor> LinuxFrontendBackend::take_editor(const std::shared_ptr<const FrontendProfile>& profile){
     auto& s=*impl_;std::lock_guard<std::mutex> lock(s.mutex);
     if(!profile||s.closing||s.pending||s.view.loading||s.controller.state!=ProfileSupervisorState::ready||s.view.profile!=profile)return {};
@@ -302,7 +393,7 @@ void LinuxFrontendBackend::submit(const ui::EditRequest& request,std::optional<s
     need(request.ticket&&p::identifier(request.request),"frontend.request");std::optional<Impl::Capture> capture;
     if(digest){need(digest->size()==64&&digest->find_first_not_of("0123456789abcdef")==std::string::npos&&s.recovery_authority&&s.recovery_authority->retain&&s.view.profile->view.recovery,"frontend.recovery_capture");
         capture=Impl::Capture{*s.view.profile->view.recovery,std::move(*digest)};}
-    s.pending=Impl::Pending{request,"",0,false,false,false,std::move(capture)};s.prepared_editor.reset();s.view.reply.reset();s.retirement.reset();s.recovery_authority.reset();
+    s.stop_inspection();s.pending=Impl::Pending{request,"",0,false,false,false,std::move(capture)};s.prepared_editor.reset();s.view.reply.reset();s.retirement.reset();s.recovery_authority.reset();
 }
 void LinuxFrontendBackend::acknowledge_retirement(std::uint64_t serial){
     auto& s=*impl_;std::lock_guard<std::mutex> lock(s.mutex);
@@ -310,7 +401,7 @@ void LinuxFrontendBackend::acknowledge_retirement(std::uint64_t serial){
          s.view.profile->recovery_retirement==std::optional<std::string>{s.retirement->digest},"frontend.retirement_scope");s.retirement.reset();
 }
 void LinuxFrontendBackend::cancel(const ui::EditRequest& request){auto& s=*impl_;std::lock_guard<std::mutex> lock(s.mutex);if(!s.closing&&s.pending&&s.pending->request.request==request.request&&s.pending->request.epoch==request.epoch)s.pending->cancel=true;}
-void LinuxFrontendBackend::reload(){auto& s=*impl_;std::lock_guard<std::mutex> lock(s.mutex);need(!s.closing&&!s.pending&&s.view.profile,"frontend.pending");s.prepared_editor.reset();s.recovery_authority.reset();s.reload_requested=true;s.view.loading=true;s.view.status="Loading saved settings.";}
+void LinuxFrontendBackend::reload(){auto& s=*impl_;std::lock_guard<std::mutex> lock(s.mutex);need(!s.closing&&!s.pending&&s.view.profile,"frontend.pending");s.stop_inspection();s.prepared_editor.reset();s.recovery_authority.reset();s.reload_requested=true;s.view.loading=true;s.view.status="Loading saved settings.";}
 void LinuxFrontendBackend::retrieve(){const auto now=os::monotonic_ms();auto& s=*impl_;std::lock_guard<std::mutex> lock(s.mutex);if(s.closing)return;if(s.last_retry&&now-s.last_retry<1000)return;s.last_retry=now;increment(s.retries);if(s.pending)s.pending->retrieve=true;}
 void LinuxFrontendBackend::close(){auto& s=*impl_;s.helpers.close();std::lock_guard<std::mutex> lock(s.mutex);if(s.closing.exchange(true))return;s.withdraw("Closing; waiting for configuration service to stop.");}
 }

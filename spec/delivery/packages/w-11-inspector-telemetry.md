@@ -20,6 +20,10 @@ SceneInspector. Preserve the four measured fields, native peer checks, original
 timestamps, epoch/source identities and independent policy/health/demand owners.
 No authored document, telemetry wire version or installed helper is added.
 
+The network provider advertises `network.interface` and the existing four metrics
+for local-host selectors, with a 3,000,000,000-ns freshness TTL, matching the existing
+network surface composition. Acquisition retains the service's 1000-ms cadence.
+
 ## Ownership and delivery
 
 Inspection requests collection only for the exact currently loaded profile and
@@ -114,3 +118,12 @@ mandatory before enabling ordinary inspector consumption; a passing receiver
 does not complete W-11. Preserve existing service/supervisor, native collector,
 demand, helper identity and runtime-directory regression evidence after changing
 their shared boundary.
+
+The [installed checkpoint](../installed-telemetry-handoff.md) now connects that
+receiver through the ordinary frontend. After the same preflight/configure/build,
+run `ctest --preset linux-x64-gcc13 -R '^native[.]INSTALLED-TELEMETRY$'
+--output-on-failure` and `ctest --preset linux-x64-gcc13 -R
+'^native[.]SCENE-INSPECTOR' --output-on-failure`. Preserve the original installed
+and ordinary-entry consumers and GUI limit cases, archiving each completed native
+family before the next preflight. The checkpoint does not complete the remaining
+installed image/topology/performance, accessibility or full-edition release gates.

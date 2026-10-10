@@ -9,6 +9,7 @@
 #include "editor_history_task.hpp"
 #include "editor_request_task.hpp"
 #include "recovery_queue_linux.hpp"
+#include "telemetry_delivery.hpp"
 #include <memory>
 #include <functional>
 
@@ -29,6 +30,8 @@ struct FrontendReply {
 };
 struct FrontendView {
     std::shared_ptr<const FrontendProfile> profile;
+    recovery::TelemetryDelivery telemetry;
+    recovery::DeliveryScope telemetry_scope;
     std::optional<FrontendReply> reply;
     std::string status;
     std::uint64_t withdrawal=0;
@@ -46,6 +49,9 @@ public:
     // Consumes only the exact current profile's initial editor, once. Empty means
     // unavailable/stale/already consumed; it never falls back to GTK preparation.
     std::unique_ptr<interfaces::PreparedEditor> take_editor(const std::shared_ptr<const FrontendProfile>&);
+    // Empty intent stops collection. A grant belongs to this exact loaded profile.
+    bool inspect(const std::shared_ptr<const FrontendProfile>&);
+    bool inspection_stopped()const;
     std::string request_id();
     rendering::ImageFactory images()const;
     std::shared_ptr<const platform::RecoveryFactory> recovery()const;

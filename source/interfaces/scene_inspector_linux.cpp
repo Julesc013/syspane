@@ -12,6 +12,12 @@ struct SceneInspector::Impl {
     std::thread::id thread=std::this_thread::get_id();bool batch=false,closed=false;
     GtkWidget *root=nullptr,*tree=nullptr,*summary=nullptr,*button=nullptr;GtkTreeStore* store=nullptr;
     std::unique_ptr<r::SceneSurface> surface;std::string summary_key;
+    std::shared_ptr<const protocol::TelemetryBinding> delivery_binding;
+    std::shared_ptr<const d::DeliveredFrame> delivery_frame;
+    d::DeliveryScope delivery_scope;
+    std::optional<std::uint64_t> delivery_heartbeat;
+    std::uint64_t delivery_token=0,delivery_until=0;
+    void forget_delivery(){delivery_binding.reset();delivery_frame.reset();delivery_heartbeat.reset();delivery_token=delivery_until=0;}
     std::map<std::string,GtkTreeIter> rows;
     std::map<std::string,bool> expansion;
     GtkTreeModel* model()const{return GTK_TREE_MODEL(store);}
@@ -19,7 +25,7 @@ struct SceneInspector::Impl {
     void clear_summary(){summary_key.clear();if(summary)gtk_label_set_text(GTK_LABEL(summary),"");}
     void blank(GtkTreeIter* parent=nullptr){GtkTreeIter iter;if(!store||!gtk_tree_model_iter_children(model(),&iter,parent))return;
         do{blank(&iter);gtk_tree_store_set(store,&iter,key_column,"",item_column,"",information_column,"",-1);}while(gtk_tree_model_iter_next(model(),&iter));}
-    void clear(){clear_summary();rows.clear();expansion.clear();if(store){blank();gtk_tree_store_clear(store);}}
+    void clear(){forget_delivery();clear_summary();rows.clear();expansion.clear();if(store){blank();gtk_tree_store_clear(store);}}
     bool invalidated(){if(!batch)clear();return true;}
     void shut(){closed=true;clear();if(surface&&!batch)surface->close();}
     ~Impl(){shut();surface.reset();if(root)gtk_widget_destroy(root);for(auto* w:{button,summary,tree,root})if(w)g_object_unref(w);if(store)g_object_unref(store);}
@@ -96,6 +102,38 @@ d::DataCode SceneInspector::heartbeat(const std::string& producer,std::uint64_t 
 d::DataCode SceneInspector::gap(const std::string& producer,std::uint64_t token,std::uint64_t revision,std::uint64_t now,const std::map<std::string,model::Tick>& ticks){auto& i=*impl_;d::DataCode result=d::DataCode::closed;i.run(now,ticks,[&]{result=i.surface->gap(producer,token,revision,now);});return result;}
 d::DataCode SceneInspector::disconnect(const std::string& producer,std::uint64_t token,std::uint64_t revision,std::uint64_t now,const std::map<std::string,model::Tick>& ticks){auto& i=*impl_;d::DataCode result=d::DataCode::closed;i.run(now,ticks,[&]{result=i.surface->disconnect(producer,token,revision,now);});return result;}
 void SceneInspector::refresh(std::uint64_t now,const std::map<std::string,model::Tick>& ticks){impl_->run(now,ticks,[]{});}
+void SceneInspector::deliver(const d::TelemetryDelivery& value,d::DeliveryScope current,std::uint64_t now){
+    auto& i=*impl_;i.owner();if(i.closed)return;
+    if(!current.profile||(i.delivery_scope.profile&&i.delivery_scope.profile!=current.profile)){i.shut();return;}
+    std::map<std::string,model::Tick> ticks;
+    i.run(now,ticks,[&]{
+        const auto detach=[&]{
+            if(i.delivery_token&&i.delivery_binding)(void)i.surface->disconnect(i.delivery_binding->producer,i.delivery_token,i.delivery_binding->policy_revision,now);
+            i.forget_delivery();ticks.clear();
+        };
+        if(!value.deliverable(current,now)){detach();i.delivery_scope=current;return;}
+        const auto& binding=*value.binding;
+        if(i.delivery_scope.generation!=current.generation||i.delivery_binding!=value.binding||now>=i.delivery_until)detach();
+        i.delivery_scope=current;
+        if(!i.delivery_token){
+            const auto attached=i.surface->attach(binding.producer,binding,now);
+            if(attached.code!=d::DataCode::accepted)return;
+            i.delivery_token=attached.token;i.delivery_binding=value.binding;i.delivery_until=now+3000;
+        }
+        ticks[binding.producer]=*value.clock;
+        if(i.delivery_frame!=value.frame){
+            const auto accepted=i.surface->receive(binding.producer,i.delivery_token,binding.policy_revision,value.frame->bytes,now,*value.clock);
+            if(accepted.code!=d::DataCode::accepted&&accepted.code!=d::DataCode::duplicate){detach();return;}
+            i.delivery_frame=value.frame;
+        }
+        if(value.heartbeat&&value.heartbeat!=i.delivery_heartbeat){
+            const auto accepted=i.surface->heartbeat(binding.producer,i.delivery_token,binding.policy_revision,*value.heartbeat,now);
+            if(accepted!=d::DataCode::accepted&&accepted!=d::DataCode::duplicate){detach();return;}
+            if(accepted==d::DataCode::accepted)i.delivery_until=now+3000;
+            i.delivery_heartbeat=value.heartbeat;
+        }
+    });
+}
 void SceneInspector::policy(c::Policy policy,std::uint64_t now){auto& i=*impl_;i.owner();if(i.closed)return;i.clear();try{i.surface->policy(std::move(policy),now);i.run(now,{},[]{});}catch(...){i.shut();throw;}}
 void SceneInspector::replace(r::SurfaceConfig config,std::uint64_t now){auto& i=*impl_;i.owner();if(i.closed)return;i.clear();try{i.surface->replace(std::move(config),now);i.run(now,{},[]{});}catch(...){i.shut();throw;}}
 void SceneInspector::close(){impl_->owner();impl_->shut();}

@@ -11,24 +11,30 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
-The [native network service](spec/delivery/network-service-handoff.md) collects
-real measured counters in a verified, supervised Linux child. Its authenticated
-[consumer and bounded delivery](spec/delivery/inspector-telemetry-handoff.md) now
-preserve receipt times, current clocks and producer leases. Connecting that data
-to the ordinary installed inspector and qualifying complete editions remain open.
+The [installed live inspector](spec/delivery/installed-telemetry-handoff.md) now
+shows real network counters and rates from the independently supervised Linux
+service. It preserves measurement identity, reports retained data after source
+loss and clears revoked data. Collection follows the active inspector and stops
+on navigation or exit. Complete desktop integration and release qualification
+remain open.
+
+The current maximum-input GUI check failed its 100-ms limit in two cases. The
+original results and diagnostic traces are preserved; responsiveness qualification
+requires a repair and another ordinary run.
 
 The [installed scene inspector](spec/delivery/installed-inspector-handoff.md)
 adds native inspection of saved scenes alongside Settings and Edit scene in the
 Linux frontend. It preserves unsaved-edit navigation guards and uses the verified
-image worker. Authenticated live telemetry, complete desktop integration and
+image worker. Installed image/topology/performance qualification, desktop integration and
 release qualification remain unfinished.
 
 The [ordinary recovery checkpoint](spec/delivery/ordinary-recovery-handoff.md)
 enables recovery and prepared history in the Linux application entry. Current
 authenticated policy and verified helpers still control access; diagnostic controls
-remain confined to the test fixture. Original installed and maximum-input GUI
-checks pass, with earlier failures preserved. Live inspector telemetry and desktop
-composition, protected deployment and all five complete editions remain unfinished.
+remain confined to the test fixture. That checkpoint passed its installed and
+maximum-input GUI checks; the newer timing failure above remains unresolved.
+Desktop composition, protected
+deployment and all five complete editions remain unfinished.
 
 The [native Apply integration](spec/delivery/request-form-handoff.md) prepares
 commands on the existing worker and submits only after current authority and the
@@ -55,7 +61,7 @@ The [installed scene editor](spec/delivery/installed-editor-handoff.md) now uses
 worker in the actual frontend, with native Settings/Edit scene navigation and
 authenticated save/reopen. The development payload includes all three verified helpers.
 Draft recovery is admitted in the ordinary Linux entry. Whole-UI responsiveness,
-live inspector telemetry, desktop hosting and protected deployment remain open.
+installed inspector qualification, desktop hosting and protected deployment remain open.
 
 The [native recovery snapshot](spec/delivery/recovery-context-handoff.md) now pairs
 saved state with its verified generation, directory identity and current retention

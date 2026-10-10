@@ -14,13 +14,15 @@ The [ordinary recovery checkpoint](spec/delivery/ordinary-recovery-handoff.md)
 admits recovery and prepared history in the common Linux entry. All 200 native
 cases pass with unchanged oracles, including ordinary-entry isolation and the seven
 GUI timing/erasure cases. The installed saved-scene inspector now has a separate
-[checkpoint](spec/delivery/installed-inspector-handoff.md). Connect authenticated
-inspector telemetry next; preserve prior failures and all five full release editions.
+[checkpoint](spec/delivery/installed-inspector-handoff.md). Its authenticated live
+telemetry is now integrated; preserve prior failures and all five full release editions.
 
 - [x] Compose installed saved-scene inspection, guarded navigation, current-policy erasure and verified image-task ownership.
 - [x] Provide the authenticated, supervised native network service; preserve measured counters, demand, policy and exact child lifetime. See the [handoff](spec/delivery/network-service-handoff.md).
 - [x] Implement and test the native network consumer and bounded delivery receiver; see the [checkpoint](spec/delivery/inspector-telemetry-handoff.md).
-- [ ] Connect authenticated inspector telemetry; qualify installed image/topology cases, maximum-input inspector responsiveness and human accessibility.
+- [x] Connect authenticated inspector telemetry, active-profile demand, independent supervision and batched native rendering; see the [handoff](spec/delivery/installed-telemetry-handoff.md).
+- [ ] Resolve the new MAX-WIDGETS delay and MAX-RECORD work failures against the unchanged 100-ms GUI limit; passing diagnostic attempts do not qualify this gate.
+- [ ] Qualify installed image/topology cases, maximum-input inspector responsiveness and human accessibility, then desktop/lifecycle composition.
 
 ## Completed specification work
 

@@ -1,5 +1,6 @@
 #pragma once
 #include "scene_surface.hpp"
+#include "telemetry_delivery.hpp"
 typedef struct _GtkWidget GtkWidget;
 namespace syspane::interfaces {
 // One native UI thread owns this component, its GTK hierarchy and current authority.
@@ -18,6 +19,10 @@ public:
     recovery::DataCode gap(const std::string&,std::uint64_t token,std::uint64_t revision,std::uint64_t now,const std::map<std::string,model::Tick>& ticks={});
     recovery::DataCode disconnect(const std::string&,std::uint64_t token,std::uint64_t revision,std::uint64_t now,const std::map<std::string,model::Tick>& ticks={});
     void refresh(std::uint64_t now,const std::map<std::string,model::Tick>& ticks={});
+    // One paint after native-validated attachment/full/heartbeat adoption.
+    // The absolute native deadline and fresh clock gate every refresh, including
+    // updates with no new frame. A different profile requires a new inspector.
+    void deliver(const recovery::TelemetryDelivery&,recovery::DeliveryScope current,std::uint64_t now);
     void policy(configuration::Policy,std::uint64_t now);
     void replace(rendering::SurfaceConfig,std::uint64_t now);
     void close();bool poll_image_jobs();rendering::SurfaceStatus status()const;

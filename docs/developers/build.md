@@ -1,20 +1,26 @@
 # Developer setup and checks
 
 The [inspector telemetry package](../../spec/delivery/packages/w-11-inspector-telemetry.md)
-now has a native consumer and portable delivery receiver. After ordinary workspace
-preflight and configure/build, run:
+now connects the native consumer and portable receiver to the ordinary inspector.
+After ordinary workspace preflight and configure/build, run:
 
 ```sh
 ctest --preset linux-x64-gcc13 -R '^native[.]NETWORK-(CONSUMER|SERVICE|SUPERVISOR)$' --output-on-failure
-ctest --preset <profile> -R '^(delivery|data|measured|telemetry|composition)[.]' --output-on-failure
+ctest --preset linux-x64-gcc13 -R '^native[.]INSTALLED-TELEMETRY$' --output-on-failure
+ctest --preset linux-x64-gcc13 -R '^native[.]SCENE-INSPECTOR' --output-on-failure
+ctest --preset <profile> -R '^(scene|delivery|data|measured|telemetry|composition)[.]' --output-on-failure
 ```
 
 Run the portable selection on all three development profiles. Native cases use
 an owned relocated helper fixture and independent peers/kernel counters. Preserve
 raw records and failures before reclaiming duplicate output files. The
-[handoff](../../spec/delivery/inspector-telemetry-handoff.md) records the current
-receiver boundary; ordinary inspector integration and its installed GUI oracles
-remain mandatory next work. No production policy or release is installed.
+[handoff](../../spec/delivery/installed-telemetry-handoff.md) records installed native
+rows, independently bracketed kernel counters, policy erasure, navigation and exact
+child exit. Keep the original installed settings/editor/recovery/inspector,
+ordinary-entry and GUI timing/erasure checks. Run and archive native families
+separately before the next budget preflight. Installed image/topology/performance
+and complete desktop qualification remain required. No production policy or release
+is installed.
 
 The [network service package](../../spec/delivery/packages/w-25-network-service.md)
 defines the independently supervised producer for inspector integration. After
