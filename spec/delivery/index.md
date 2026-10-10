@@ -99,6 +99,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Independent temporal oracle implementation checkpoint](oracle-handoff.md) — Bind external marker/time evaluation and native X11 fault calibration to source and raw capture evidence.
 - [Ordinary frontend recovery and history admission](ordinary-recovery-handoff.md) — Enable the qualified common entry path while retaining native authority and fixture observer isolation.
 - [Prepared initial editor ownership handoff](prepared-editor-handoff.md) — Validated worker preparation, current-profile consumption and measured remaining GTK costs.
+- [Prepared authored snapshots for native editor previews](prepared-surface-handoff.md) — Measured preview admission repair with preserved native and portable evidence.
 - [Explicit private preservation checkpoint](preservation-handoff.md) — Bind opaque configuration copies, native controls and interrupted publication to measured development evidence.
 - [Private native text lifetime repair](private-text-lifetime-handoff.md) — Balanced GTK teardown preserves selection and prevents implicit clipboard export.
 - [Supervised native profile controller process](profile-controller-handoff.md) — Authenticated startup, current-policy result disclosure and interrupted command recovery.

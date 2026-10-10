@@ -12,23 +12,27 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-10T02:45:00+00:00", "scope": "Installed telemetry functional evidence and unresolved ordinary GUI timing gate"}
+updated: {"by": "codex", "at": "2026-10-10T03:16:44.963078+00:00", "scope": "Prepared authored preview repair and ordinary GUI qualification"}
 ---
 
 # Current state and next admitted boundary
 
+The [prepared surface checkpoint](prepared-surface-handoff.md) moves repeated
+preview structure validation onto existing initial editor, history and recovery
+workers. Exact current candidates can share an immutable authored snapshot while
+resource, topology and policy checks remain current. Prepared construction measured
+5.438/5.910 ms in the maximum-input diagnostic; that diagnostic does not qualify
+visibility or GUI responsiveness. The subsequent ordinary GUI run passes all seven
+unchanged timing/erasure cases, including the two prior failures. Preserve the
+original failures and the documented correction to the new native test expectation.
+
 The [installed telemetry checkpoint](installed-telemetry-handoff.md) connects the
-ordinary inspector to the authenticated measured network service. Exact active-profile
-intent owns independent supervision and a client worker; GTK batches validated
-delivery at its existing cadence. Source loss retains only previously displayed,
-still-permitted data with unknown age. Navigation stops collection, policy loss
-erases it, and exit waits for both services and their clients. The ordinary GUI
-limit run failed MAX-WIDGETS (110.421-ms delay) and MAX-RECORD (116.786-ms work)
-against 100 ms. Callback/phase diagnostics passed but did not reproduce or explain
-those failures. First attribute and repair recovery-restore/editor-population costs,
-then rerun the unchanged ordinary gate. Continue W-11 with installed image/topology,
-maximum-input inspector performance and accessibility qualification,
-then desktop/lifecycle composition. All five complete editions remain unfinished.
+ordinary inspector to the authenticated measured network service with independent
+supervision and bounded delivery. The prepared preview repair above supersedes its
+failed GUI qualification for this source, without erasing those records. Continue
+W-11 with installed image/topology, maximum-input inspector performance and human
+accessibility qualification, then desktop/lifecycle composition. All five complete
+native release editions remain unfinished.
 
 The [native network service](network-service-handoff.md) now reuses verified helper
 installation, independent supervision, native acquisition and demand/session owners.
@@ -43,8 +47,8 @@ and Edit scene. Exact rows, summary, guarded navigation, save/reopen, policy los
 controller replacement and image-factory ownership have executable evidence.
 That checkpoint passed 100 native cases across eight report families, plus native
 inspector-model/image-job binaries, and 83 scene/component checks on each of three
-development profiles. Its seven GUI timing/erasure cases passed then; the newer
-ordinary failure above supersedes that result for current qualification.
+development profiles. Its seven GUI timing/erasure cases passed then; the prepared
+preview checkpoint above records the current ordinary GUI qualification.
 That checkpoint preserves absent-producer behavior; the live checkpoint above adds
 authenticated telemetry. Installed image/topology/performance qualification and
 desktop/lifecycle composition remain required. All five complete editions remain open.

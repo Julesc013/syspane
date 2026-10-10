@@ -103,6 +103,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Installed native settings frontend](w-11-installed-settings.md) — Compose the real application entry point, independently supervised controller and authenticated settings client.
 - [Native settings drafts and transaction results](w-11-native-settings.md) — Connect every initial settings descriptor to native controls and the common authored transaction boundary.
 - [Prepared initial editor ownership](w-11-prepared-editor.md) — Move validated draft construction off GTK while preserving current profile ownership and native rendering checks.
+- [Prepared authored state for native editor previews](w-11-prepared-surface.md) — Move repeated preview structure validation to existing preparation workers.
 - [Private native text lifetime](w-11-private-text-lifetime.md) — Balance GTK selection registration across realization and destruction without exporting authored text.
 - [Ordinary frontend recovery admission](w-11-production-recovery.md) — Enable qualified recovery and prepared history in the ordinary entry path while retaining native authority and fixture isolation.
 - [Recovery admission investigation and closed production gate](w-11-recovery-admission-investigation.md) — Preserve the ordinary-entry experiment and repeated timing failures while separating fixture observers from candidate admission.

@@ -84,14 +84,20 @@ const s::Display& display_for(const Json& widget,const s::Topology& topology){
     throw Error("surface.display");
 }
 c::ValidatedAuthored validate(SurfaceConfig& cfg){
-    need(cfg.resources!=nullptr,"surface.resources");c::ValidatedAuthored validated(cfg.authored);c::validate_resource_binding(*cfg.resources,validated);
+    need(cfg.resources!=nullptr,"surface.resources");
+    auto validated=[&]{
+        if(!cfg.authored_snapshot)return c::ValidatedAuthored(cfg.authored);
+        need(cfg.authored.settings.is_null()&&cfg.authored.scene.is_null(),"surface.authored_source");
+        return *cfg.authored_snapshot;
+    }();
+    c::validate_resource_binding(*cfg.resources,validated);
     std::map<std::string,s::Metrics> metrics;
-    for(const auto& w:cfg.authored.scene["widgets"])if(w["kind"]!="group")metrics[w["id"]]={{64,64},{64,64}};
+    for(const auto& w:validated.documents().scene["widgets"])if(w["kind"]!="group")metrics[w["id"]]={{64,64},{64,64}};
     (void)s::resolve(validated,cfg.topology,metrics);
     TextRequest q;q.theme=cfg.resources->theme();q.language=cfg.language;q.contrast=cfg.contrast;(void)render_text(q);
     // Other composition helpers use SurfaceConfig. Detach its private copy from
     // any references into a caller's moved JSON and keep it equal to the proof.
-    cfg.authored=validated.documents();return validated;
+    cfg.authored=validated.documents();cfg.authored_snapshot.reset();return validated;
 }
 }
 struct SceneSurface::Impl {

@@ -83,6 +83,12 @@ int main(int argc,char** argv){
                     surface.paint(0,{},[](auto,const v::SurfaceFrame*){});mark("paint_us");
                     answer["surface_state"]=static_cast<int>(surface.status().code);surface.close();
                     mark("surface_close_us");
+                    c::ValidatedAuthored snapshot(authored);mark("snapshot_prepare_us");
+                    v::SurfaceConfig ready;ready.authored_snapshot=std::move(snapshot);ready.resources=resources;ready.capabilities=profile->resources.capabilities;
+                    ready.topology.displays={display};ready.topology.fallback=display.id;ready.topology.roles["primary"]={display.id};
+                    v::SceneSurface prepared_surface({true,"console",{"console"}},profile->view.policy,std::move(ready),{},[]{return true;},"",v::SurfaceAudience::inspector,backend.images());mark("prepared_surface_us");
+                    prepared_surface.paint(0,{},[](auto,const v::SurfaceFrame*){});mark("prepared_paint_us");
+                    answer["prepared_surface_state"]=static_cast<int>(prepared_surface.status().code);prepared_surface.close();mark("prepared_close_us");
                     ui::EditorDraft admitted({true,"console",{"console"}},profile->view.policy,authored,profile->epoch,profile->resources,true);mark("draft_us");
                     auto owned=admitted.resource_snapshot();answer["owns_current_resources"]=owned.get()==admitted.resources();mark("snapshot_us");
                     answer["clean_clipboard"]=admitted.clipboard_available();mark("clean_clipboard_us");

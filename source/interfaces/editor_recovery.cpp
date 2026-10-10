@@ -95,6 +95,7 @@ struct RecoveryWork::Impl {
 struct RecoveryPrepared::Impl {
     std::weak_ptr<const char> validity;RecoveryIdentity identity;bool capture=false;
     std::optional<std::string> bytes;std::pair<c::Authored,c::ResourceSnapshot> candidate;RecoveryDescription description;
+    std::optional<c::ValidatedAuthored> authored;
     std::optional<bool> preview,commit;
 };
 RecoveryWork::RecoveryWork(std::unique_ptr<Impl> value):impl_(std::move(value)){}
@@ -115,6 +116,7 @@ std::unique_ptr<RecoveryPrepared> RecoveryWork::run(){
         // eligibility still authorizes current policy; begin fully validates.
         (void)draft.may_submit("preview");(void)draft.may_submit("commit");
         result->preview=draft.submission_validation_.preview;result->commit=draft.submission_validation_.commit;
+        result->authored.emplace(*draft.draft_);
         result->candidate={std::move(*draft.draft_),std::move(draft.draft_resources_)};
     }
     return std::unique_ptr<RecoveryPrepared>(new RecoveryPrepared(std::move(result)));
@@ -147,7 +149,7 @@ bool EditorDraft::restore_recovery(std::unique_ptr<RecoveryPrepared> prepared,co
     catch(...){invalidate_recovery();throw;}
     invalidate_recovery();
     const bool changed=record_prepared(std::move(prepared->impl_->candidate),{});
-    if(changed){transaction_.submission_validation_.preview=prepared->impl_->preview;transaction_.submission_validation_.commit=prepared->impl_->commit;}
+    if(changed){transaction_.submission_validation_.preview=prepared->impl_->preview;transaction_.submission_validation_.commit=prepared->impl_->commit;preview_authored_=std::move(prepared->impl_->authored);}
     return changed;
 }
 }

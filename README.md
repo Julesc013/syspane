@@ -18,9 +18,11 @@ loss and clears revoked data. Collection follows the active inspector and stops
 on navigation or exit. Complete desktop integration and release qualification
 remain open.
 
-The current maximum-input GUI check failed its 100-ms limit in two cases. The
-original results and diagnostic traces are preserved; responsiveness qualification
-requires a repair and another ordinary run.
+[Prepared editor previews](spec/delivery/prepared-surface-handoff.md) now reuse
+validated authored snapshots from existing workers. All seven ordinary maximum-input
+GUI timing and erasure cases pass after this repair, with their original limits.
+Earlier failures remain preserved. Installed inspector and full desktop qualification
+still require further work.
 
 The [installed scene inspector](spec/delivery/installed-inspector-handoff.md)
 adds native inspection of saved scenes alongside Settings and Edit scene in the
@@ -32,7 +34,7 @@ The [ordinary recovery checkpoint](spec/delivery/ordinary-recovery-handoff.md)
 enables recovery and prepared history in the Linux application entry. Current
 authenticated policy and verified helpers still control access; diagnostic controls
 remain confined to the test fixture. That checkpoint passed its installed and
-maximum-input GUI checks; the newer timing failure above remains unresolved.
+maximum-input GUI checks; the prepared preview checkpoint above records the current run.
 Desktop composition, protected
 deployment and all five complete editions remain unfinished.
 

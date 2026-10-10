@@ -489,7 +489,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "058c18cdae92b7535f1384690816606b03046dbe8d2c71f34f69f6933b8fb952"
+      "sha256": "014e3ace5fc242a78f9c1782e340a175d3d8af68765413b2efcb543f3484f32a"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -2562,6 +2562,18 @@
       "sha256": "289b2d31528ec42a137f63da9d8eb21cfb5a0527962ac447281ff8a49232820e"
     },
     {
+      "id": "SP-W11-PREPARED-SURFACE",
+      "path": "delivery/packages/w-11-prepared-surface.md",
+      "title": "Prepared authored state for native editor previews",
+      "description": "Move repeated preview structure validation to existing preparation workers.",
+      "requires": [
+        "SP-W11-VALIDATED-AUTHORED",
+        "SP-W11-INSPECTOR-TELEMETRY",
+        "SP-W11-RECOVERY-GUI-LIMITS"
+      ],
+      "sha256": "0a368b96d27a07ddc8a64c4ef9c5c61955664a310246a67f7c6d9071746b7e11"
+    },
+    {
       "id": "SP-W11-PRIVATE-TEXT-LIFETIME",
       "path": "delivery/packages/w-11-private-text-lifetime.md",
       "title": "Private native text lifetime",
@@ -3133,6 +3145,17 @@
         "SP-FRONTEND-PHASES-HANDOFF"
       ],
       "sha256": "2c8e1e7c8d27046c4e60da19e8d8e9c120ac09cdad9bba4766112a35293847f9"
+    },
+    {
+      "id": "SP-PREPARED-SURFACE-HANDOFF",
+      "path": "delivery/prepared-surface-handoff.md",
+      "title": "Prepared authored snapshots for native editor previews",
+      "description": "Measured preview admission repair with preserved native and portable evidence.",
+      "requires": [
+        "SP-W11-PREPARED-SURFACE",
+        "SP-INSTALLED-TELEMETRY-HANDOFF"
+      ],
+      "sha256": "68af025aa8cc22719a54bf9f521b38b11d5f760454fab22bcfb78e68c0a67728"
     },
     {
       "id": "SP-PRESERVATION-HANDOFF",

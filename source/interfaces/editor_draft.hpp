@@ -108,6 +108,9 @@ public:
     // Lifetime only, not a binding/permission proof. Consumers still validate
     // authored bindings and must release their owner on disclosure loss/close.
     configuration::ResourceSnapshot resource_snapshot()const{return available()?transaction_.draft_resources_:nullptr;}
+    // Structural ownership only. Current policy/resources/topology still apply.
+    // Populated by existing detached preparation; ordinary edits may have none.
+    std::optional<configuration::ValidatedAuthored> authored_snapshot()const{return available()?preview_authored_:std::nullopt;}
     bool locks_available()const;
     bool visibility_available()const;
     bool undo();
@@ -136,7 +139,7 @@ public:
     const Json& last_result()const{return transaction_.last_result();}
     std::optional<std::uint64_t> revision()const{return transaction_.revision();}
 private:
-    friend class RecoveryWork;friend class HistoryWork;
+    friend class RecoveryWork;friend class HistoryWork;friend class PreparedEditor;
     struct RecoveryValidity {
         std::shared_ptr<const char> value=std::make_shared<const char>(char{});
         RecoveryValidity()=default;
@@ -146,11 +149,13 @@ private:
     RecoveryValidity history_validity_;
     EditorDraft(const SettingsDraft& value,int):transaction_(value,SettingsDraft::RecoveryCopy{}){}
     void invalidate_history(){history_validity_.value=std::make_shared<const char>(char{});}
-    void invalidate_recovery(){recovery_validity_.value=std::make_shared<const char>(char{});invalidate_history();}
+    void invalidate_recovery(){preview_authored_.reset();recovery_validity_.value=std::make_shared<const char>(char{});invalidate_history();}
+    void prepare_snapshot(){preview_authored_.reset();if(available())preview_authored_.emplace(*transaction_.draft_);}
     void check_recovery(const RecoveryPrepared&,const RecoveryIdentity&,bool capture)const;
     struct State {Json scene;std::vector<std::string> selection;configuration::ResourceSnapshot resources;std::size_t resource_metadata_bytes=0;};
     struct Change {State before,after;std::size_t bytes;};
     SettingsDraft transaction_;
+    std::optional<configuration::ValidatedAuthored> preview_authored_;
     std::vector<std::string> selected_;
     std::deque<Change> undo_,redo_;
     std::string clipboard_;

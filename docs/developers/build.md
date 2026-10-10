@@ -1,5 +1,23 @@
 # Developer setup and checks
 
+The [prepared preview package](../../spec/delivery/packages/w-11-prepared-surface.md)
+reuses opaque authored snapshots from existing editor preparation workers. After
+workspace preflight and ordinary configure/build, run:
+
+```sh
+ctest --preset linux-x64-gcc13 -R '^(native[.]PREPARED-SURFACE|editor[.]RECOVERY-PREPARATION-AUTHORED-SNAPSHOT)$' --output-on-failure
+ctest --preset <profile> -R '^(configuration|scene|editor|settings|composition|delivery|data|measured|telemetry)[.]' --output-on-failure
+ctest --preset linux-x64-gcc13 -R '^native[.]RECOVERY-GUI-LIMITS$' --output-on-failure
+```
+
+Run the portable selection on all three development profiles and retain legacy
+artifact checks. Run affected native surface/erasure, prepared editor, history,
+recovery and installed frontend/telemetry families separately, archiving each
+completed family before the next budget preflight. The
+[handoff](../../spec/delivery/prepared-surface-handoff.md) records the unchanged
+ordinary timing gate and the explicit correction to the new surface-state test.
+Diagnostic preview-cost spans are not responsiveness or visibility qualification.
+
 The [inspector telemetry package](../../spec/delivery/packages/w-11-inspector-telemetry.md)
 now connects the native consumer and portable receiver to the ordinary inspector.
 After ordinary workspace preflight and configure/build, run:

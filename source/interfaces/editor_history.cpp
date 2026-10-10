@@ -13,6 +13,7 @@ struct HistoryWork::Impl {
 };
 struct HistoryPrepared::Impl {
     std::pair<c::Authored,c::ResourceSnapshot> candidate;
+    std::optional<c::ValidatedAuthored> authored;
     std::vector<std::string> selection;std::weak_ptr<const char> validity;
     std::optional<bool> preview,commit;
     bool forward=false;
@@ -40,6 +41,7 @@ std::unique_ptr<HistoryPrepared> HistoryWork::run(){
     // at each eligible query, and in the full begin/commit validation path.
     (void)draft.may_submit("preview");(void)draft.may_submit("commit");
     result->preview=draft.submission_validation_.preview;result->commit=draft.submission_validation_.commit;
+    result->authored.emplace(*draft.draft_);
     result->candidate={std::move(*draft.draft_),std::move(draft.draft_resources_)};
     result->selection=std::move(input->selection);result->validity=std::move(input->validity);result->forward=input->forward;
     return std::unique_ptr<HistoryPrepared>(new HistoryPrepared(std::move(result)));
@@ -61,6 +63,7 @@ bool EditorDraft::adopt_history(std::unique_ptr<HistoryPrepared> prepared){
         invalidate_recovery();
         transaction_.adopt_scene(std::move(value.candidate.first),std::move(value.candidate.second));
         transaction_.submission_validation_.preview=value.preview;transaction_.submission_validation_.commit=value.commit;
+        preview_authored_=std::move(value.authored);
         selected_.swap(value.selection);to.swap(destination);from.pop_back();return true;
     }catch(...){invalidate_recovery();throw;}
 }

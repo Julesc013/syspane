@@ -16,6 +16,9 @@ struct SurfaceConfig {
     std::set<std::string> capabilities;
     bool experimental_typography=false; // Trusted development admission, not an authored capability.
     bool experimental_visibility=false; // Trusted development admission, not an authored capability.
+    // Alternative to raw authored documents (which must both be null). This
+    // opaque owner proves structure only; current admission is never cached.
+    std::optional<configuration::ValidatedAuthored> authored_snapshot;
 };
 struct SurfaceProvider {
     std::string producer;

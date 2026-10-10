@@ -21,7 +21,7 @@ telemetry is now integrated; preserve prior failures and all five full release e
 - [x] Provide the authenticated, supervised native network service; preserve measured counters, demand, policy and exact child lifetime. See the [handoff](spec/delivery/network-service-handoff.md).
 - [x] Implement and test the native network consumer and bounded delivery receiver; see the [checkpoint](spec/delivery/inspector-telemetry-handoff.md).
 - [x] Connect authenticated inspector telemetry, active-profile demand, independent supervision and batched native rendering; see the [handoff](spec/delivery/installed-telemetry-handoff.md).
-- [ ] Resolve the new MAX-WIDGETS delay and MAX-RECORD work failures against the unchanged 100-ms GUI limit; passing diagnostic attempts do not qualify this gate.
+- [x] Reuse prepared authored snapshots for editor previews and pass all seven unchanged ordinary GUI timing/erasure cases after the measured repair; preserve earlier failures. See the [handoff](spec/delivery/prepared-surface-handoff.md).
 - [ ] Qualify installed image/topology cases, maximum-input inspector responsiveness and human accessibility, then desktop/lifecycle composition.
 
 ## Completed specification work

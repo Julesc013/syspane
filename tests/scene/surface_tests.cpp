@@ -1,4 +1,5 @@
 #include "surface_fixture.hpp"
+int prepared_surface_tests(const std::string&);
 #include <iostream>
 #include <limits>
 using namespace fixture;
@@ -57,4 +58,4 @@ void cases(const std::string& root){
     std::cout<<"SURFACE-FAMILIES "<<count<<"\n";
 }
 }
-int main(int argc,char** argv){try{if(argc<2)return 2;if(argc==3&&std::string(argv[2])=="VISIBILITY")return native_visibility_tests(argv[1]);if(argc==3&&std::string(argv[1])=="image/png")return image_surface_mock(argv[2]);if(argc==3&&std::string(argv[2])=="IMAGE")return image_surface_tests(argv[1]);if(argc==4&&std::string(argv[2])=="WINDOW")return surface_window(argv[1],argv[3]);if(argc==3&&std::string(argv[2])=="CHART")return chart_surface_tests(argv[1]);if(argc==3&&std::string(argv[2])=="TABLE")return table_tests(argv[1]);cases(argv[1]);return 0;}catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}}
+int main(int argc,char** argv){try{if(argc<2)return 2;if(argc==3&&std::string(argv[2])=="PREPARED")return prepared_surface_tests(argv[1]);if(argc==3&&std::string(argv[2])=="VISIBILITY")return native_visibility_tests(argv[1]);if(argc==3&&std::string(argv[1])=="image/png")return image_surface_mock(argv[2]);if(argc==3&&std::string(argv[2])=="IMAGE")return image_surface_tests(argv[1]);if(argc==4&&std::string(argv[2])=="WINDOW")return surface_window(argv[1],argv[3]);if(argc==3&&std::string(argv[2])=="CHART")return chart_surface_tests(argv[1]);if(argc==3&&std::string(argv[2])=="TABLE")return table_tests(argv[1]);cases(argv[1]);return 0;}catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}}

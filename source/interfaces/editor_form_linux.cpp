@@ -80,7 +80,9 @@ struct EditorForm::Impl {
     void preview(bool resolve_now=true){
         if(!draft.available()||!draft.resources()){settings=nullptr;capabilities.clear();stop_preview();return;}
         settings["revision"]=(*draft.scene())["revision"];
-        v::SurfaceConfig cfg;cfg.authored={settings,*draft.scene()};cfg.resources=draft.resource_snapshot();
+        v::SurfaceConfig cfg;cfg.authored_snapshot=draft.authored_snapshot();
+        if(!cfg.authored_snapshot)cfg.authored={settings,*draft.scene()};
+        cfg.resources=draft.resource_snapshot();
         cfg.topology=topology;cfg.capabilities=capabilities;cfg.experimental_visibility=visibility_supported();cfg.experimental_typography=typography_supported();
         if(surface&&surface->status().code==v::SurfaceCode::closed){need(surface->poll_image_jobs(),"editor.renderer_stopping");surface.reset();}
         if(surface)surface->replace(std::move(cfg),now());

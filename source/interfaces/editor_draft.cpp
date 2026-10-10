@@ -249,7 +249,7 @@ EditorDraft::EditorDraft(c::Authority a,c::Policy p,c::Authored value,std::strin
     :transaction_(std::move(a),std::move(p),std::move(value),std::move(epoch),std::move(resources),large_commands){}
 PreparedEditor::PreparedEditor(c::Authority a,c::Policy p,c::Authored value,std::string epoch,SettingsResources resources,bool large_commands)
     :draft_(a,p,value,std::move(epoch),resources,large_commands),authority_(std::move(a)),policy_(std::move(p)),
-     settings_(std::move(value.settings)),capabilities_(std::move(resources.capabilities)),large_commands_(large_commands){}
+     settings_(std::move(value.settings)),capabilities_(std::move(resources.capabilities)),large_commands_(large_commands){draft_.prepare_snapshot();}
 const Json* EditorDraft::scene()const{return available()?&transaction_.draft_->scene:nullptr;}
 bool edit_locked(const Json& scene,const std::string& id){
     std::map<std::string,const Json*> rows;std::map<std::string,std::string> parents;

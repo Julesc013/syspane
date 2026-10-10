@@ -16,11 +16,14 @@ void stage(ui::EditorDraft& d,const Json& scene){
     CHECK(d.execute(edits)&&*d.scene()==scene);
 }
 #include "recovery_submission.hpp"
+#include "authored_snapshot.hpp"
 void run(const std::string& family,const std::string& root){
     settings_fixture::Fixture f(root);const auto cases=settings_fixture::read(root+"/tests/editor/recovery-draft-cases.json");
     const ui::RecoveryIdentity id{cases["identity"]["profile"],cases["identity"]["generation"]};const auto bytes=cases["wire"].get<std::string>();
     auto fresh=[&]{return ui::EditorDraft(authority(),grant(),f.authored,"E1",admitted(f),true);};auto d=fresh();
-    if(family=="SUBMISSION"){
+    if(family=="AUTHORED-SNAPSHOT"){
+        authored_snapshot(f,cases,id);
+    }else if(family=="SUBMISSION"){
         recovery_submission(f,cases,id);
     }else if(family=="CAPTURE"){
         auto clean=d.recovery_capture_work(id);CHECK(!d.recovery_capture(clean->run(),id));rejects([&]{clean->run();},"recovery.work_consumed");
