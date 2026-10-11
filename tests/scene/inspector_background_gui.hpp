@@ -12,6 +12,55 @@ inline GtkTreeModel* model(GtkWidget* widget){
     for(auto* item=children;item&&!result;item=item->next)result=model(GTK_WIDGET(item->data));
     g_list_free(children);return result;
 }
+inline void image_loading(const std::string& root){
+    namespace test=inspector_render_test;
+    auto gate=std::make_shared<test::Gate>();std::atomic<std::uint64_t> process{0};const auto path=image_worker_path();
+    auto factory=std::make_shared<const ui::InspectorRenderFactory>(ui::threaded_inspector_renderer([gate,path,&process]{
+        return [gate,path,&process](std::string media,std::string bytes){
+            auto job=std::make_unique<v::ImageJob>(path,std::move(media),std::move(bytes));process=job->process_id();gate->hold();return job;
+        };
+    }));
+    ui::SceneInspector view({true,"console",{"console"}},inspector_admission_owner_test::grant(),image_config(root),{provider()},"",{}, {},factory,11);
+    test::ReleaseGate release{gate};const auto deadline=test::now()+2500;
+    while(gate->arrived.wait_for(std::chrono::milliseconds(0))!=std::future_status::ready){
+        need(test::now()<deadline,"GUI image child entry deadline");view.refresh(test::now());g_usleep(1000);
+    }
+    gate->arrived.get();view.refresh(test::now());auto* tree=model(view.widget());GtkTreeIter row;
+    need(process!=0&&::kill(static_cast<pid_t>(process.load()),0)==0,"controlled loading has a real live image child");
+    need(gtk_tree_model_iter_n_children(tree,nullptr)==1&&gtk_tree_model_get_iter_first(tree,&row),"loading native row must precede observable image child");
+    gchar* item=nullptr;gchar* information=nullptr;gtk_tree_model_get(tree,&row,1,&item,2,&information,-1);
+    const std::string title=item?item:"",value=information?information:"";g_free(item);g_free(information);
+    need(title=="Image title"&&value=="Public image\nImage loading","literal native loading row before worker factory returns");
+    view.close();need(!view.poll_image_jobs()&&gtk_tree_model_iter_n_children(tree,nullptr)==0,"navigation erases loading before held owner acknowledges stop");
+    gate->open();const auto stopped=test::now()+2500;
+    while(!view.poll_image_jobs()){need(test::now()<stopped,"loading image GUI shutdown deadline");g_usleep(1000);}
+    need(::kill(static_cast<pid_t>(process.load()),0)==-1&&errno==ESRCH,"loading navigation acknowledges real image child disappearance");
+    std::cerr<<"background GTK literal loading precedes real image child; held navigation/drain pass\n";
+}
+inline void image_phase_refusal(const std::string& root){
+    namespace test=inspector_render_test;using Phase=ui::SceneInspector::Phase;
+    for(const auto phase:{Phase::presentation,Phase::adoption})for(bool throws:{false,true}){
+        std::atomic<unsigned> starts{0};const auto path=image_worker_path();
+        auto factory=std::make_shared<const ui::InspectorRenderFactory>(ui::threaded_inspector_renderer([path,&starts]{
+            return [path,&starts](std::string media,std::string bytes){++starts;return std::make_unique<v::ImageJob>(path,std::move(media),std::move(bytes));};
+        }));
+        ui::SceneInspector view({true,"console",{"console"}},inspector_admission_owner_test::grant(),image_config(root),{provider()},"",{}, {},factory,11);
+        auto* tree=model(view.widget());bool seen=false,before_launch=false,refused=false;const auto deadline=test::now()+2500;
+        while(!refused){need(test::now()<deadline,"image phase refusal deadline");
+            try{view.refresh(test::now(),{},[&](Phase current,std::uint64_t,bool completed){
+                if(current!=phase||!gtk_tree_model_iter_n_children(tree,nullptr))return true;
+                need(completed,"image phase completed before observation");seen=true;g_usleep(30000);before_launch=starts==0;
+                if(throws)throw std::runtime_error("image.phase_throw");
+                return false;
+            });}catch(const syspane::protocol::Error& e){refused=std::string(e.what())=="inspector.phase_observer";}
+            g_usleep(1000);
+        }
+        need(seen&&before_launch&&view.status().code==v::SurfaceCode::closed&&gtk_tree_model_iter_n_children(tree,nullptr)==0,"refused presentation/adoption never authorizes image launch and erases native rows");
+        const auto stopped=test::now()+2500;while(!view.poll_image_jobs()){need(test::now()<stopped,"image phase refusal shutdown deadline");g_usleep(1000);}
+        need(starts==0,"refused/throwing image phase creates no native child");
+    }
+    std::cerr<<"background GTK image presentation/adoption refusal and throw create no child pass\n";
+}
 inline void run(const std::string& root){
     namespace test=inspector_render_test;
     auto gate=std::make_shared<test::Gate>();auto held=std::make_shared<std::atomic<bool>>(false);
@@ -54,5 +103,6 @@ inline void run(const std::string& root){
     bool refused=false;std::thread foreign([&]{try{view.refresh(test::now());}catch(const std::logic_error& e){refused=std::string(e.what())=="inspector.owner";}});foreign.join();
     need(refused,"closed background refresh still rejects a foreign GUI owner before reading mutable state");
     std::cerr<<"background GTK held-work/policy/topology/fresh-grant/profile/shutdown pass\n";
+    image_loading(root);image_phase_refusal(root);
 }
 }

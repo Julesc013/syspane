@@ -12,10 +12,25 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-11T17:25:18.032059+00:00", "scope": "Bounded background inspector and native maximum-table qualification with preserved accessibility failures"}
+updated: {"by": "codex", "at": "2026-10-11T18:44:31.274695+00:00", "scope": "Image launch after current GUI/phase acceptance; reviewed source and failed held-child identity observation preserved"}
 ---
 
 # Current state and next admitted boundary
+
+The [image adoption follow-up](inspector-image-adoption-handoff.md) reproduces
+child creation before the first native loading row and gates launch on current
+GTK adoption. Controlled renderer/background checks, including four image phase
+refusal/throw cases, pass. The first candidate passed all twelve installed cases;
+the reviewed source passes eleven and fails HELD-CLOSE identity observation after
+the observer records a verified image executable with empty argv. Current installed
+qualification remains open. The reviewed source passes seven ordinary and seven
+complete-phase table cases, inspector, telemetry, authored, recovery GUI, phase
+refusal, table erasure and all 146 selected Linux shared checks. Preserve earlier
+AT-SPI and child-observer failures and close
+the current held-child observation before maximum GTK chart/mixed histories, actual installed
+accumulation, human accessibility and desktop/lifecycle composition. W-11 and all
+five complete editions remain open. Shared tooling stays in source/build; raw
+recordings stay in ignored out/.
 
 The [background inspector checkpoint](background-inspector-handoff.md) connects
 ordinary Linux inspection to a dedicated native rendering owner. Bounded latest

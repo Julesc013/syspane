@@ -98,7 +98,7 @@ struct SceneInspector::Impl {
     void update(InspectorRenderInput input,std::uint64_t stamp,const PhaseObserver& observer){
         owner();if(closed)return;
         if(!setup||input.scope.profile!=setup->profile){shut();return;}
-        bool observing=static_cast<bool>(observer);batch=true;
+        bool observing=static_cast<bool>(observer);batch=true;std::uint64_t acknowledgement=0;
         const auto emit=[&](Phase phase,gint64 begin,bool completed){
             if(!observing)return;
             bool accepted=false;
@@ -138,7 +138,9 @@ struct SceneInspector::Impl {
                 measure(Phase::presentation,[&]{present_rows(value->rows);});
                 last_ticket=value->ticket;rendered=value->status;
                 value->rows.clear();adopted=std::move(value);
+                acknowledgement=last_ticket;
             });
+            if(acknowledgement)renderer->acknowledge(acknowledgement);
             batch=false;
         }catch(...){batch=false;shut();throw;}
     }

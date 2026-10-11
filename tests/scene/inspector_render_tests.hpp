@@ -26,6 +26,7 @@ inline auto ready(ui::InspectorRenderTask& task,std::uint64_t ticket){
     throw std::runtime_error("native renderer completion deadline");
 }
 inline void stop(ui::InspectorRenderTask& task){task.close();const auto end=now()+2500;while(!task.status().stopped){need(now()<end,"renderer drain deadline");std::this_thread::sleep_for(std::chrono::milliseconds(1));}need(task.status().error.empty(),"renderer drain failure");}
+inline void loading_image(const std::vector<ui::InspectorRow>& rows){need(rows.size()==1&&rows[0].item=="Image title"&&rows[0].information=="Public image\nImage loading","literal renderer loading row");}
 struct Gate {
     std::promise<void> entered,release;std::shared_future<void> released=release.get_future().share();std::future<void> arrived=entered.get_future();
     bool opened=false;
@@ -122,9 +123,35 @@ inline void images(const std::string& root){
         gate->hold();auto job=std::make_unique<v::ImageJob>(path,std::move(media),std::move(bytes));process=job->process_id();return job;
     };})(setup(root,false,true));
     ReleaseGate release{gate};
-    ui::InspectorRenderInput value;value.scope={11,0};(void)task->submit(std::move(value));gate->wait();task->close();need(!task->status().stopped&&task->status().running,"native image creation remains claimed during cancellation");
+    ui::InspectorRenderInput value;value.scope={11,0};const auto ticket=task->submit(std::move(value));auto loading=ready(*task,ticket);
+    loading_image(loading->rows);need(process==0,"transferred loading alone cannot launch image child");
+    task->acknowledge(ticket);gate->wait();task->close();need(!task->status().stopped&&task->status().running,"native image creation remains running during cancellation");
     gate->open();stop(*task);need(process!=0&&::kill(static_cast<pid_t>(process.load()),0)==-1&&errno==ESRCH,"stop acknowledges real image child disappearance");
     std::cout<<"renderer native image child drain pass\n";
 }
-inline int run(const std::string& root){scalar(root);table(root);charts(root);coalescing(root);cancellation(root);images(root);return 0;}
+inline void image_adoption(const std::string& root){
+    std::atomic<unsigned> starts{0};const auto path=image_worker_path();
+    auto factory=ui::threaded_inspector_renderer([path,&starts]{return [path,&starts](std::string media,std::string bytes){++starts;return std::make_unique<v::ImageJob>(path,std::move(media),std::move(bytes));};});
+    auto task=factory(setup(root,false,true));ui::InspectorRenderInput input;input.scope={11,0};const auto first=task->submit(input);
+    // Completion without transfer, transfer without adoption and obsolete tickets
+    // must all keep the real native factory untouched.
+    const auto end=now()+2500;while(!task->status().ready){need(now()<end,"untransferred image completion deadline");g_usleep(1000);}
+    bool refused=false;try{task->acknowledge(first);}catch(const syspane::protocol::Error& e){refused=std::string(e.what())=="inspector.render_ticket";}need(refused&&starts==0,"untransferred result cannot acknowledge image launch");
+    auto initial=ready(*task,first);const auto next=task->submit(input);auto newer=ready(*task,next);
+    loading_image(initial->rows);loading_image(newer->rows);
+    refused=false;try{task->acknowledge(first);}catch(const syspane::protocol::Error& e){refused=std::string(e.what())=="inspector.render_ticket";}need(refused&&starts==0,"superseded transfer cannot start queued image");
+    bool foreign=false;std::thread wrong([&]{try{task->acknowledge(next);}catch(const syspane::protocol::Error& e){foreign=std::string(e.what())=="inspector.render_owner";}});wrong.join();need(foreign&&starts==0,"foreign owner cannot acknowledge image adoption");
+    stop(*task);need(starts==0,"cancellation before adopted loading creates no native child");
+    refused=false;try{task->acknowledge(next);}catch(const syspane::protocol::Error& e){refused=std::string(e.what())=="inspector.render_closed";}need(refused,"closed owner cannot revive queued image");
+    // Launch failures after acknowledgement retain the exact image refusal.
+    auto failed=ui::threaded_inspector_renderer([]{return [](std::string,std::string)->std::unique_ptr<v::ImageTask>{throw syspane::protocol::Error("image.installation");};})(setup(root,false,true));
+    const auto loading_ticket=failed->submit(input);auto loading=ready(*failed,loading_ticket);failed->acknowledge(loading_ticket);
+    const auto failure_end=now()+2500;bool found=false;
+    while(!found){need(now()<failure_end,"adopted image refusal deadline");auto result=ready(*failed,failed->submit(input));
+        for(const auto& row:result->rows)if(row.information=="Public image\nImage failed (image.installation)")found=true;
+        g_usleep(1000);
+    }
+    stop(*failed);std::cout<<"renderer transfer/adoption/cancellation/native refusal pass\n";
+}
+inline int run(const std::string& root){scalar(root);table(root);charts(root);coalescing(root);cancellation(root);image_adoption(root);images(root);return 0;}
 }

@@ -15,6 +15,10 @@ sp_sources: ["SRC-CONVERSATION"]
 
 # Bounded background inspector and current native presentation
 
+The [image adoption follow-up](inspector-image-adoption-handoff.md) reproduces and
+repairs child creation before the first loading row. It preserves this checkpoint's
+failures and records the subsequent unchanged installed/native regression results.
+
 The ordinary Linux frontend now admits and composes inspection on one dedicated
 native rendering owner. GTK presents owned semantic rows and keeps selection,
 expansion and requested summaries. The latest complete-phase maximum-table family
@@ -127,7 +131,7 @@ recording directories were archived with byte/type/inventory/process-use verific
 before duplicate removal, preserving 186865092 bytes. The 8-GiB active cap remains.
 This archival action grants no new historical native qualification.
 
-The latest installed-assets family passes ten of twelve cases. HELD-NAVIGATION
+At this checkpoint, the installed-assets family passes ten of twelve cases. HELD-NAVIGATION
 finds no loading row after observing and stopping the real image child; TOPOLOGY
 finds an empty child command line while the child exits between process reads.
 Preserve both exact records and the preceding twelve-case passing sources.

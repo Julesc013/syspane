@@ -1,5 +1,14 @@
 # Developer setup and checks
 
+The [image adoption follow-up](../../spec/delivery/inspector-image-adoption-handoff.md)
+gates background native image launch on GTK's current-result acknowledgement.
+Use the existing INSPECTOR-RENDERER, BACKGROUND-INSPECTOR and
+INSTALLED-INSPECTOR-ASSETS commands below after workspace preflight/configure/build.
+The controlled failure and repaired literal loading/child ordering remain recorded.
+The first candidate passed twelve installed cases; the reviewed source passes
+eleven and fails HELD-CLOSE child-identity observation. Preserve both sources,
+preceding observer/accessibility failures and the original regression families.
+
 The [background inspector package](../../spec/delivery/packages/w-11-background-inspector.md)
 moves ordinary Linux admission/composition onto a dedicated owner. GTK adopts owned
 rows only under current scope, policy, resources/topology and qualified clocks;
@@ -14,8 +23,8 @@ ctest --preset linux-x64-gcc13 -R '^native[.](SCENE-INSPECTOR|INSTALLED-TELEMETR
 Run the existing complete table-phase diagnostic as documented below, along with
 frozen raster, erasure, recovery and phase-refusal regressions. The diagnostic
 vocabulary appends GUI adoption (17); old journals and the original performance
-limits remain valid. The latest complete-phase run passes seven cases; the
-ordinary run fails an AT-SPI timeout in ORACLE and remains unqualified. Preserve
+limits remain valid. The background checkpoint's complete-phase run passed seven cases;
+its ordinary run failed an AT-SPI timeout in ORACLE and remained unqualified. Preserve
 that failure and diagnose native request handling without relaxing the oracle.
 Scalar/table age is the literal value at the last qualified projection;
 duplicate-frame clock samples maintain authority and freshness without replacing

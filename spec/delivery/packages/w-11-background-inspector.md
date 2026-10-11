@@ -151,6 +151,70 @@ attachment, never adoption from a retired job. Current profile replacement keeps
 the frontend's existing new-inspector rule. Refusal cannot silently fall back to
 the old synchronous renderer or reuse an old result.
 
+## Bounded image-loading order investigation
+
+The installed HELD-NAVIGATION failure requires a loading row while its independently
+observed native image child is stopped. Reproduce the ordering separately before
+selecting a repair: the controlled background GTK fixture creates a real ImageJob,
+holds its worker immediately after child creation and checks one literal row,
+`Image title` / `Public image\nImage loading`, while that child is still live.
+The barrier has a 2.5-second entry bound and releases on failure before owner
+destruction. Closing the view must erase the row immediately, retain honest
+stopping while the factory is held and acknowledge only actual child drainage.
+Run the existing native.BACKGROUND-INSPECTOR family with its unchanged Python
+oracle; preserve the failed baseline and its exact input source. This experiment
+proves loading/child ordering, not the installed failure's complete cause or native
+image/topology qualification.
+
+### Image launch after current presentation
+
+The controlled baseline fails the literal-row assertion after the real child has
+been created. Implement a bounded adoption notification on InspectorRenderTask:
+`acknowledge(ticket)` runs only on the GUI owner, accepts the most recent non-null
+`take()` ticket and is idempotent for that ticket. Zero, untransferred and
+superseded tickets fail with `inspector.render_ticket`; foreign owners fail with
+`inspector.render_owner` before mutable-state access. Closing/stopped tasks fail
+with `inspector.render_closed`. Taking a result transfers ownership but never
+authorizes native launch. GTK acknowledges only after all current-result guards
+and native presentation complete successfully. Rejected results, failed phase
+observation and retired setups cannot acknowledge adoption.
+
+For the background path, image preparation creates one queued native ImageTask
+without a child. Preserve the existing media and 8-MiB encoded-input validation.
+Bind each new task to its creation/composition ticket; a previous adoption cannot
+authorize a subsequently created task. The current surface continues to project
+the original literal loading state. On the rendering owner, launch the original
+trusted factory only after adoption reaches that ticket. Keep its installation
+checks, actual-launch decoder deadline, pixels and exact startup/refusal outcomes.
+No GUI callback or installation witness crosses owners. The synchronous surface
+path retains its existing ImageFactory behavior.
+
+The queued task owns at most one existing bounded encoded image and one trusted
+factory. The existing serialized SceneImages job remains its only queue slot.
+One atomic ticket high-water value and closing flag add no publication/result
+queue. Native polling, including factory creation between claimed compositions,
+must report `running` honestly. Cancellation before launch releases that input
+and factory without creating a child; its drained state means no child was ever
+started, not evidence of a reaped process. Cancellation during actual launch or
+decoding waits for the original real child drainage before stopped acknowledgement.
+
+The renderer probe additionally checks untransferred/superseded/foreign/closed
+acknowledgements, cancellation before launch, exact post-adoption installation
+refusal and real-child cancellation while factory creation is held. The background
+GTK barrier must now pass the same literal loading assertion before held
+navigation erasure/drain. Run both native.INSPECTOR-RENDERER and
+native.BACKGROUND-INSPECTOR, then the unchanged installed asset, telemetry,
+authored, ordinary/phase table and shared regressions. Passing controlled ordering
+does not close the earlier installed HELD-NAVIGATION or child-observer failure.
+
+GUI launch acknowledgement must follow successful presentation and the enclosing
+adoption phase observer's acceptance. An outer observer refusal/throw cannot
+authorize an image factory before erasure. The controlled GTK fixture holds each
+presentation/adoption observer for 30 ms, then refuses or throws; all four cases
+must erase, stop and leave the native factory invocation count at zero. Review
+identified acknowledgement inside the outer measured action; moving it after
+observer acceptance closes that ordering without changing phase semantics or limits.
+
 ## Cancellation, shutdown and observation
 
 Close drops unclaimed input and completed result immediately and marks the claimed

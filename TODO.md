@@ -23,8 +23,10 @@ telemetry is now integrated; preserve prior failures and all five full release e
 - [x] Reuse exact raster parts within one table, preserving 32 pre-change pixel/metadata/error outcomes and original logical pixel charges. See the [handoff](spec/delivery/table-raster-reuse-handoff.md).
 - [x] Extract one inspector admission owner and verify lease/clock/profile, literal chart gaps and native thread confinement. See the [handoff](spec/delivery/inspector-admission-owner-handoff.md).
 - [x] Implement bounded background inspector admission/painting, current adoption, cancellation and native shutdown. Preserve startup, summary/accessibility, fixture and diagnostic failures; see the [handoff](spec/delivery/background-inspector-handoff.md).
-- [ ] Close the latest ordinary ORACLE AT-SPI timeout and qualify all seven ordinary and complete-phase maximum-table cases with the unchanged 100-ms GUI/200-ms erasure bounds. Preserve the passing phase run and every preceding failure.
-- [ ] Close the latest installed HELD-NAVIGATION loading-view failure and TOPOLOGY child-observer exit race; preserve earlier successful sources and the unchanged image/lifetime oracles.
+- [x] Reproduce and repair background image launch before current loading-row adoption; pass controlled ordering, phase refusal/throw and installed held navigation. See the [handoff](spec/delivery/inspector-image-adoption-handoff.md).
+- [x] Pass all seven ordinary and complete-phase maximum-table cases on the image-adoption source with the unchanged 100-ms GUI/200-ms erasure bounds; preserve every preceding failure.
+- [ ] Close the reviewed HELD-CLOSE child-identity observation failure; preserve its empty-argv verified-executable record, the earlier twelve-case passing candidate and unchanged lifetime/identity deadlines.
+- [ ] Investigate the preceding ordinary ORACLE AT-SPI timeout and TOPOLOGY child-observer exit race; passing runs do not establish their causes or an observer repair.
 - [ ] Qualify maximum chart/mixed workloads through native GTK, independent AT-SPI and installed history accumulation with the fixed GUI/erasure limits.
 - [x] Compose installed saved-scene inspection, guarded navigation, current-policy erasure and verified image-task ownership.
 - [x] Provide the authenticated, supervised native network service; preserve measured counters, demand, policy and exact child lifetime. See the [handoff](spec/delivery/network-service-handoff.md).

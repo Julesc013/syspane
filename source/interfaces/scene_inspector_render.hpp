@@ -34,6 +34,9 @@ public:
     virtual ~InspectorRenderTask()=default;
     virtual std::uint64_t submit(InspectorRenderInput)=0;
     virtual std::unique_ptr<InspectorRenderResult> take()=0;
+    // Acknowledge only the latest transferred result, after current GUI adoption.
+    // Native image work may start only after this bounded owner notification.
+    virtual void acknowledge(std::uint64_t ticket)=0;
     virtual InspectorRenderStatus status()const=0;
     virtual void close()=0;
 };

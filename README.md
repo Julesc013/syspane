@@ -11,11 +11,16 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
+The [image adoption follow-up](spec/delivery/inspector-image-adoption-handoff.md)
+displays the current loading row before starting its native image child. Controlled
+ordering and held navigation pass. The reviewed installed run passes eleven cases
+and fails HELD-CLOSE child-identity observation; complete qualification remains open.
+
 The [background inspector checkpoint](spec/delivery/background-inspector-handoff.md)
 moves ordinary Linux rendering off GTK and keeps current authority, clocks, bounded
-queues and truthful shutdown. The latest complete-phase maximum-table run passes
-all seven cases, while the ordinary run fails an AT-SPI timeout in ORACLE. Native
-table qualification remains open; failures and original limits stay preserved.
+queues and truthful shutdown. Its complete-phase maximum-table run passed
+all seven cases, while its ordinary run failed an AT-SPI timeout in ORACLE. That
+source left table qualification open; failures and original limits stay preserved.
 Maximum chart/mixed histories and all five complete editions also remain open.
 
 The earlier [inspector admission checkpoint](spec/delivery/inspector-admission-owner-handoff.md)
@@ -63,7 +68,7 @@ The [installed scene inspector](spec/delivery/installed-inspector-handoff.md)
 adds native inspection of saved scenes alongside Settings and Edit scene in the
 Linux frontend. It preserves unsaved-edit navigation guards and uses the verified
 image worker. Its [image and logical-monitor checks](spec/delivery/inspector-assets-handoff.md)
-now pass all twelve native cases, including maximum encoded input, policy erasure
+passed all twelve cases on that earlier source, including maximum encoded input, policy erasure
 and held-worker shutdown. Inspector performance, human accessibility, physical
 hotplug, desktop integration and release qualification remain unfinished.
 

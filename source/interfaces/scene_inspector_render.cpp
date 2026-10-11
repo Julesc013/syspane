@@ -1,5 +1,8 @@
 #include "scene_inspector_render.hpp"
 #include "scene_inspector_admission.hpp"
+#include "image_job.hpp"
+#include "child.hpp"
+#include <atomic>
 #include <glib.h>
 #include <condition_variable>
 #include <limits>
@@ -13,18 +16,57 @@ void need(bool ok,const char* code){if(!ok)throw protocol::Error(code);}
 std::uint64_t now(){return static_cast<std::uint64_t>(g_get_monotonic_time()/1000);}
 bool domain(const model::Tick& a,const model::Tick& b){return a.epoch==b.epoch&&a.clock_id==b.clock_id&&a.clock_scope==b.clock_scope;}
 std::string reason(const std::exception& e){const std::string value=e.what();return !value.empty()&&value.size()<=64&&value.find_first_not_of("abcdefghijklmnopqrstuvwxyz0123456789._")==std::string::npos?value:"inspector.render_failed";}
+struct ImageAdoption {
+    std::atomic<std::uint64_t> adopted{0};std::atomic<bool> closing{false};
+    std::uint64_t creating=0; // Rendering owner only; fixed for each queued job.
+};
+class AdoptedImage final:public r::ImageTask {
+    std::shared_ptr<ImageAdoption> adoption_;const std::uint64_t ticket_;
+    r::ImageFactory factory_;std::string media_,bytes_;std::unique_ptr<r::ImageTask> job_;
+    r::ImageJobStatus state_;
+public:
+    AdoptedImage(std::shared_ptr<ImageAdoption> adoption,r::ImageFactory factory,std::string media,std::string bytes):
+        adoption_(std::move(adoption)),ticket_(adoption_->creating),factory_(std::move(factory)),media_(std::move(media)),bytes_(std::move(bytes)){
+        need(ticket_&&factory_,"image.startup");
+        need(media_=="image/png"||media_=="image/jpeg"||media_=="image/svg+xml","image.media");
+        need(!bytes_.empty()&&bytes_.size()<=8388608,"image.capacity");
+    }
+    r::ImageJobStatus poll()override{
+        if(state_.reaped)return state_;
+        if(adoption_->closing.load(std::memory_order_acquire))cancel();
+        if(state_.reaped)return state_;
+        if(!job_){
+            if(adoption_->adopted.load(std::memory_order_acquire)<ticket_)return state_;
+            try{job_=factory_(std::move(media_),std::move(bytes_));need(static_cast<bool>(job_),"image.startup");}
+            catch(const platform::ChildError&){state_={r::ImageJobState::failed,"image.startup",true};}
+            catch(const protocol::Error& e){state_={r::ImageJobState::failed,e.what(),true};}
+            factory_={};media_.clear();bytes_.clear();if(!job_)return state_;
+        }
+        state_=job_->poll();return state_;
+    }
+    void cancel()override{
+        if(job_)job_->cancel();
+        else{factory_={};media_.clear();bytes_.clear();state_={r::ImageJobState::cancelled,"",true};}
+    }
+    scene::Image take()override{need(static_cast<bool>(job_),"image.not_ready");return job_->take();}
+    std::uint64_t process_id()const override{return job_?job_->process_id():0;}
+};
 class RenderTask final:public InspectorRenderTask {
     struct Pending {std::uint64_t ticket;InspectorRenderInput input;};
     const std::thread::id gui_=std::this_thread::get_id();
     mutable std::mutex mutex_;std::condition_variable wake_;std::thread worker_;
     InspectorRenderStatus status_;std::optional<Pending> pending_;
     std::unique_ptr<InspectorRenderResult> result_;
+    std::shared_ptr<ImageAdoption> images_=std::make_shared<ImageAdoption>();std::uint64_t transferred_=0;
     void owner()const{need(std::this_thread::get_id()==gui_,"inspector.render_owner");}
     bool closing(){std::lock_guard<std::mutex> lock(mutex_);return status_.closing;}
     void work(std::shared_ptr<const InspectorRenderSetup> setup,InspectorImageInitializer initialize,InspectorRenderBarrier barrier)noexcept{
         std::unique_ptr<r::SceneSurface> surface;std::unique_ptr<InspectorAdmission> admission;std::string error;
         try{
             auto images=initialize?initialize():r::ImageFactory{};
+            if(images)images=[adoption=images_,factory=std::move(images)](std::string media,std::string bytes){
+                return std::make_unique<AdoptedImage>(adoption,factory,std::move(media),std::move(bytes));
+            };
             surface=std::make_unique<r::SceneSurface>(setup->authority,setup->policy,*setup->config,setup->providers,[]{return true;},"",r::SurfaceAudience::inspector,std::move(images));
             admission=std::make_unique<InspectorAdmission>(*surface);
             while(!closing()){
@@ -33,9 +75,10 @@ class RenderTask final:public InspectorRenderTask {
                     std::unique_lock<std::mutex> lock(mutex_);
                     wake_.wait_for(lock,std::chrono::milliseconds(10),[&]{return status_.closing||pending_.has_value();});
                     if(status_.closing)break;
-                    if(pending_){claimed=std::move(pending_);pending_.reset();status_.running=true;}
+                    status_.running=true;
+                    if(pending_){claimed=std::move(pending_);pending_.reset();}
                 }
-                (void)surface->poll_image_jobs();if(!claimed)continue;
+                (void)surface->poll_image_jobs();if(!claimed){std::lock_guard<std::mutex> lock(mutex_);status_.running=false;continue;}
                 auto value=std::make_unique<InspectorRenderResult>();value->ticket=claimed->ticket;value->input=std::move(claimed->input);claimed.reset();
                 if(barrier)barrier(value->ticket);
                 if(closing()){value.reset();break;}
@@ -48,6 +91,7 @@ class RenderTask final:public InspectorRenderTask {
                 }
                 value->admission_us=static_cast<std::uint64_t>(g_get_monotonic_time()-admission_begin);
                 const auto paint_begin=g_get_monotonic_time();
+                images_->creating=value->ticket;
                 surface->paint(value->started_ms,ticks,[&](auto,const auto* frame){if(frame){value->rows=inspector_rows(*frame);
                     for(const auto& widget:frame->widgets)if(widget.chart||(widget.image&&widget.image->state=="loading"))value->time_dependent=true;}});
                 value->timeline=surface->timeline(value->started_ms,ticks);value->status=surface->status();
@@ -61,6 +105,7 @@ class RenderTask final:public InspectorRenderTask {
             }
         }catch(const std::exception& e){error=reason(e);}catch(...){error="inspector.render_failed";}
         // Cancellation acknowledgement includes concrete native child drainage.
+        images_->closing.store(true,std::memory_order_release);
         admission.reset();
         if(surface){
             try{surface->close();while(!surface->poll_image_jobs())std::this_thread::sleep_for(std::chrono::milliseconds(10));}
@@ -86,9 +131,13 @@ public:
         const auto ticket=++status_.accepted;if(pending_)++status_.replaced;
         pending_=Pending{ticket,std::move(input)};wake_.notify_one();return ticket;
     }
-    std::unique_ptr<InspectorRenderResult> take()override{owner();std::lock_guard<std::mutex> lock(mutex_);status_.ready=false;return std::move(result_);}
+    std::unique_ptr<InspectorRenderResult> take()override{owner();std::lock_guard<std::mutex> lock(mutex_);status_.ready=false;if(result_)transferred_=result_->ticket;return std::move(result_);}
+    void acknowledge(std::uint64_t ticket)override{
+        owner();std::lock_guard<std::mutex> lock(mutex_);need(!status_.closing&&!status_.stopped,"inspector.render_closed");
+        need(ticket&&ticket==transferred_,"inspector.render_ticket");images_->adopted.store(ticket,std::memory_order_release);wake_.notify_one();
+    }
     InspectorRenderStatus status()const override{owner();std::lock_guard<std::mutex> lock(mutex_);return status_;}
-    void close()override{owner();std::lock_guard<std::mutex> lock(mutex_);status_.closing=true;pending_.reset();result_.reset();status_.ready=false;wake_.notify_one();}
+    void close()override{owner();std::lock_guard<std::mutex> lock(mutex_);status_.closing=true;images_->closing.store(true,std::memory_order_release);transferred_=0;pending_.reset();result_.reset();status_.ready=false;wake_.notify_one();}
 };
 }
 bool InspectorRenderResult::current(const InspectorRenderInput& current,std::uint64_t profile,std::uint64_t stamp,bool publication_match)const{

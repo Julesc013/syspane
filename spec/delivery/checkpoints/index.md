@@ -21,6 +21,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [inspector-assets.json](inspector-assets.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [inspector-authored-limits.json](inspector-authored-limits.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [inspector-delivery-gaps.json](inspector-delivery-gaps.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
+- [inspector-image-adoption.json](inspector-image-adoption.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [inspector-live-tables.json](inspector-live-tables.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [inspector-telemetry.json](inspector-telemetry.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [installed-editor.json](installed-editor.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
