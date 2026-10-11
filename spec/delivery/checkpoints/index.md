@@ -14,6 +14,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [frontend-phases.json](frontend-phases.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [frontend-recovery.json](frontend-recovery.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [gtk-accessible-erasure.json](gtk-accessible-erasure.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
+- [gtk-cell-lifetime.json](gtk-cell-lifetime.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [gtk-history-limits.json](gtk-history-limits.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [gtk-history-phases.json](gtk-history-phases.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [gtk-history-producer.json](gtk-history-producer.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.

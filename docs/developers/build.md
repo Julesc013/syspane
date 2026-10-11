@@ -1,5 +1,25 @@
 # Developer setup and checks
 
+The [GTK cell lifetime package](../../spec/delivery/packages/w-11-gtk-cell-lifetime.md)
+uses public toolkit hooks in both real inspector columns. After workspace
+preflight and ordinary configure/build, run:
+
+```sh
+ctest --preset linux-x64-gcc13 -R '^native[.](GTK-CELL-LIFETIME|INSPECTOR-CELL-LIFETIME)$' --output-on-failure
+ctest --preset linux-x64-gcc13 -R '^(composition[.]|native[.](SCENE-INSPECTOR.*|CHART-FRAME-LIMITS|INSPECTOR-RENDERER|BACKGROUND-INSPECTOR|TABLE-ERASURE|INSTALLED-INSPECTOR|INSTALLED-TELEMETRY|INSPECTOR-LIVE-TABLES)$)' --output-on-failure
+ctest --preset linux-x64-gcc13 -R '^native[.]GTK-HISTORY-LIMITS$' --output-on-failure
+```
+
+The complete lifetime cohorts have 120-second children/250-second family; the
+real-widget test has a 25-second bound. Lifetime passes are separate from GUI
+performance: keep every callback time, verified wire withdrawal and previous
+strict failure. The final table/installed/affected checks pass, while maximum
+history/GUI qualification remains open. The optional modern native word slot is
+explicitly unsupported before retirement; it is never an empty-success claim.
+See the [handoff](../../spec/delivery/gtk-cell-lifetime-handoff.md) for preserved
+fixture, compiler and 106.937-ms POLICY failures, actual source-bound evidence and
+next required work. Raw data remain under ignored out/.
+
 The [retained GTK cache experiment](../../spec/delivery/gtk-accessible-erasure-handoff.md)
 is an optional standalone Linux toolkit probe. After workspace preflight and the
 ordinary configure/build commands, run:

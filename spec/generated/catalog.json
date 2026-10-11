@@ -520,7 +520,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "f096cb1bba02dca7edc0866ecb4a632f7e562a632762bf7202bcb3cb168d2723"
+      "sha256": "bc5dee0e8f4980b3d3fd1337c399106d2fd40d0c9c89d6bc9b633927232ce587"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -968,6 +968,16 @@
         "SP-W11-GTK-HISTORY-LIMITS"
       ],
       "sha256": "c1c48af58969b6cb33ed4c77587cfd76b695ead93cbb5596ea67a23dc4fe58ad"
+    },
+    {
+      "id": "SP-GTK-CELL-LIFETIME-HANDOFF",
+      "path": "delivery/gtk-cell-lifetime-handoff.md",
+      "title": "GTK cell lifetime repair and preserved performance boundaries",
+      "description": "Clear actual retained cell caches before normal retirement, with exact withdrawal and source-bound regressions.",
+      "requires": [
+        "SP-W11-GTK-CELL-LIFETIME"
+      ],
+      "sha256": "16269ceffe36e1892f11e88cc68161ef4a96cab8c8e4a15e08ef17903727cbf9"
     },
     {
       "id": "SP-GTK-HISTORY-LIMITS-HANDOFF",
@@ -2609,6 +2619,17 @@
         "SP-W11-INSTALLED-EDITOR"
       ],
       "sha256": "8011d5134f29059f80501dc345d903a7ddc524f817b2fcd76aeea0280787ac33"
+    },
+    {
+      "id": "SP-W11-GTK-CELL-LIFETIME",
+      "path": "delivery/packages/w-11-gtk-cell-lifetime.md",
+      "title": "GTK text-cell cache lifetime ownership",
+      "description": "Clear cached disclosure before collapse/removal retires a cell; preserve standard lifecycle events.",
+      "requires": [
+        "SP-W11-GTK-HISTORY-LIMITS",
+        "SP-ACCESSIBILITY"
+      ],
+      "sha256": "1f3062251453b393bdf11ec1201ab0a65fbe29b2959adab4cc50c3c6d5e106e3"
     },
     {
       "id": "SP-W11-GTK-HISTORY-LIMITS",

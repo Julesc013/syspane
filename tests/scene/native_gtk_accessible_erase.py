@@ -84,13 +84,28 @@ def observe(exe,folder,strategy,cohort):
                 reference=[cell.app.bus_name,cell.path];assert reference[0] and reference[1].startswith('/org/a11y/atspi/accessible/');references.append(reference)
                 initial=[request(reference,method) for method in methods];assert initial[0]==(value,) and initial[1]==(value,) and initial[2]==(len(value),)
         assert len(held)==6344;report['initial_sha256']=sha(encoded(INITIAL))
-        command('retire');assert table().get_n_rows()==(1 if cohort=='collapsed' else 3139)
+        retired=command('retire');assert table().get_n_rows()==(1 if cohort=='collapsed' else 3139)
+        if strategy=='lifetime':
+            assert retired['retired_checked'] and retired['retired_leaks']==0 and retired['collapsed_leaks']==0
+            current=table();active=INITIAL[:3139] if cohort=='expanded' else INITIAL[:1]
+            assert [[text(current.get_accessible_at(row,col)) for col in range(2)] for row in range(len(active))]==active,'shared renderer changed live cells'
         erased=command('erase');assert table().get_n_rows()==0
         report['erased']=leaks('erased')
         command('recover');current=table();assert current.get_n_rows()==2
         actual=[[text(current.get_accessible_at(row,col)) for col in range(2)] for row in range(2)];assert actual==FRESH;report['fresh_sha256']=sha(encoded(actual))
+        if strategy=='lifetime':
+            fresh_refs={(current.get_accessible_at(row,col).app.bus_name,current.get_accessible_at(row,col).path) for row in range(2) for col in range(2)}
+            assert not fresh_refs.intersection(map(tuple,references)),'retired wire path rebound to fresh data'
         report['recovered_old_refs']=leaks('recovered')
         command('quit');assert proc.wait(timeout=3)==0;report['actual_exit']=True
+        if strategy=='lifetime':
+            assert all(stage[key]==0 for stage in report['stages'] if stage['local_checked'] for key in ('text_leaks','name_leaks','count_leaks','word_leaks'))
+            for phase,index,method,status,value in wire_rows:
+                if status:
+                    error=error_pool[value];assert error[0]=='org.freedesktop.DBus.Error.UnknownObject' and '{object_path} does not exist' in error[3],'unverified remote error'
+                else:assert value[0]==(0 if method==2 else ''),'retired remote value remains'
+            report.update(outcome='pass',lifetime_semantics=True,performance_qualified=False)
+            return
         assert all(report[phase]['failed_requests']==0 for phase in ('erased','recovered_old_refs')),'strict remote cache oracle: withdrawn/failed requests are preserved, not empty replies'
         if strategy=='scrub':
             assert erased['callback_us']<=100000 and report['stages'][-3]['reply_ms']<=200
@@ -117,10 +132,11 @@ def main():
     if sys.argv[1]=='--observe':observe(Path(sys.argv[2]),Path(sys.argv[3]),sys.argv[4],sys.argv[5]);return
     exe,evidence=map(lambda p:Path(p).resolve(),sys.argv[1:3]);assert os.geteuid()!=0 and evidence.parent==exe.parent and (exe.parent/'.syspane-owner.json').is_file()
     folder=evidence/('gtk-accessible-erase-'+uuid.uuid4().hex[:12]);folder.mkdir();server=None
-    report=dict(family='GTK-ACCESSIBLE-ERASURE',outcome='fail',diagnostic_only=True,scope='Standalone toolkit cache experiment with all native/external retained cells; no product/registry/edition qualification',started_at=datetime.now(timezone.utc).isoformat(),executable_sha256=sha(exe.read_bytes()),inputs={p.relative_to(ROOT).as_posix():sha(p.read_bytes()) for p in (Path(__file__),ROOT/'tests/scene/gtk_accessible_erase_probe.cpp',ROOT/'source/build/surface-runtime.json',ROOT/'source/build/text-runtime.json')},cases=[])
+    lifetime='--lifetime' in sys.argv[3:]
+    report=dict(family='GTK-CELL-LIFETIME' if lifetime else 'GTK-ACCESSIBLE-ERASURE',outcome='fail',diagnostic_only=True,scope='Standalone cell lifetime semantics with distinct verified withdrawal; no GUI/erasure performance or edition qualification' if lifetime else 'Standalone toolkit cache experiment with all native/external retained cells; no product/registry/edition qualification',started_at=datetime.now(timezone.utc).isoformat(),executable_sha256=sha(exe.read_bytes()),inputs={p.relative_to(ROOT).as_posix():sha(p.read_bytes()) for p in (Path(__file__),ROOT/'tests/scene/gtk_accessible_erase_probe.cpp',ROOT/'source/interfaces/scene_inspector_text_linux.cpp',ROOT/'source/interfaces/scene_inspector_text_linux.hpp',ROOT/'source/build/surface-runtime.json',ROOT/'source/build/text-runtime.json')},cases=[])
     try:
         server,env=launch_xvfb(folder,(1600,2048));env['NO_AT_BRIDGE']='0';env.pop('AT_SPI_BUS_ADDRESS',None)
-        for strategy in ('blank','detach','scrub'):
+        for strategy in (('lifetime',) if lifetime else ('blank','detach','scrub')):
             for cohort in ('expanded','collapsed'):
                 name=strategy+'-'+cohort;child=subprocess.Popen(['dbus-run-session','--',sys.executable,str(Path(__file__)), '--observe',str(exe),str(folder/name),strategy,cohort],env=env,stdout=subprocess.PIPE,stderr=subprocess.PIPE,start_new_session=True)
                 try:out,err=child.communicate(timeout=120)

@@ -63,6 +63,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Native GNOME wallpaper policy checkpoint](gnome-wallpaper-policy-handoff.md) — Native dconf locks, immutable policy identity and independent live composition have separate evidence.
 - [Native grouping checkpoint](group-handoff.md) — Exact hierarchy transformations, selection history and independently observed native persistence.
 - [Retained GTK caches and explicit remote withdrawal](gtk-accessible-erasure-handoff.md) — Preserve failed toolkit erasure candidates, retired/collapsed data and real wire errors.
+- [GTK cell lifetime repair and preserved performance boundaries](gtk-cell-lifetime-handoff.md) — Clear actual retained cell caches before normal retirement, with exact withdrawal and source-bound regressions.
 - [Maximum native GTK histories and preserved timing failures](gtk-history-limits-handoff.md) — Exact accessible chart/mixed content passes; native timing qualification remains open.
 - [Maximum history tick attribution and separate repair boundaries](gtk-history-phases-handoff.md) — Locate native capacity erasure and fixture publication work without changing acceptance.
 - [Native fixture producer and preserved GTK capacity boundary](gtk-history-producer-handoff.md) — Separate complete telemetry production from native GUI work without changing acceptance.

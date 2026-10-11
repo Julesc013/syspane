@@ -33,8 +33,9 @@ telemetry is now integrated; preserve prior failures and all five full release e
 - [ ] Investigate the new BACKGROUND-INSPECTOR claimed-barrier startup failure; one unchanged replay passes without establishing its cause. Preserve the original gate/deadline.
 - [ ] Investigate the new measured GTK accumulation presentation over 100 ms as well as capacity erasure; preserve every original sample and full row oracle.
 - [x] Execute the bounded retained-cache GTK experiment with all 6344 local/wire references, collapsed/retired cohorts and fresh recovery. Preserve eighteen failed collector cases, explicit UnknownObject replies and expanded scrub over 100 ms; see the [handoff](spec/delivery/gtk-accessible-erasure-handoff.md).
-- [ ] Attribute accessible-object retirement versus cache refresh without excluding callback work; close complete bounded scope/lifetime ownership before a product repair.
-- [ ] Resolve held-reference withdrawal semantics explicitly; preserve the original failed strict oracle and distinguish real remote errors from SDK default empty strings.
+- [x] Close native GTK cell lifetime ownership and integrate both inspector columns after the complete semantic gate; preserve exactly one normal defunct transition and actual cache erasure through destruction. See the [handoff](spec/delivery/gtk-cell-lifetime-handoff.md).
+- [ ] Attribute and qualify maximum native GTK retirement/presentation performance; preserve slow lifetime callbacks and the original 100/200-ms gates.
+- [x] Define and verify exact old-object withdrawal separately from successful empty wire data; preserve every original strict failure and reject timeouts/generic errors/SDK defaults.
 - [ ] Investigate native capacity erasure with held text/name/layout references and independent AT-SPI, including collapsed/retired cells; choose a repair from measured evidence.
 - [ ] Qualify maximum-history policy erasure with held accessibility references; reject model detachment that leaves old text readable. The current revocation check follows recovery to one point.
 - [ ] Resolve the earlier authored MAX-FRAME delay of 458.801 ms against the unchanged 100-ms GUI limit; the diagnostic pass does not replace its failed qualification.

@@ -1,0 +1,4879 @@
+{
+  "recorded_at": "2026-10-11T23:45:49.769275+00:00",
+  "source_base": "1e7f324fa95296552e8ea2477ae6ebc79b7df00d",
+  "scope": "Product GTK text-cell cache lifetime repair; native lifetime semantics and affected regressions, not maximum-history/GUI performance or edition qualification",
+  "package": "spec/delivery/packages/w-11-gtk-cell-lifetime.md",
+  "preceding_checkpoint": {
+    "local_path": "spec/delivery/checkpoints/gtk-accessible-erasure.json",
+    "sha256": "00d7bc1baada8161dd345de9bd39fb788477f2ab6b217ce5ee8fb373e9e54849"
+  },
+  "environment": {
+    "local_path": "out/evidence/gtk-cell-lifetime/environment.json",
+    "sha256": "575963a8dde14652446a97107b43d1989615cc5c4749ac904a0981ee2b7c8425"
+  },
+  "artifacts": {
+    "syspane_profile_controller_probe": "0175c231851df8a65acae2de234c093462c98a345a9edde6b29ab8417480e72b",
+    "syspane_editor_tests": "1f4a3f3b9268c79abf0fff6736c5609cf33b8678ddbfbd918398439e3955bb6d",
+    "syspane_demand_session_tests": "332a455290287371c06ce0a34072dfff59113bbd686b8af42c72ee945166f142",
+    "syspane_runtime_directory_probe": "ae9e56d640ef1e7bea036b8810a915dc8cecd88a985d302a3a8f78e4ff992cd2",
+    "syspane_measured_time_tests": "2a87ada26df6e49a6c56cdcaeffb121321fbe5b1e912f8038de7251dce50058e",
+    "syspane_network_netlink_tests": "6c59316d5e93bb029dc558465d41ac346bd2140ae5f0b2440dab84e2c94b1b9e",
+    "syspane-configuration-host": "48301636994e9803c75c8b46a94691d9601a4b3786fe7f20c52398654ddc4812",
+    "syspane_recovery_queue_probe": "f4e2bff3e5f84d7d77a101340e167517492e1d009d9c877f8c6c7be5a8517cb0",
+    "syspane_failure_store_tests": "3f343ec14910fd2d40d3ad82fa2c484ffb559e9740cb570180c5c13f54d5cf3d",
+    "syspane_frontend_helper_fixture": "8f31f92ec25fce27488cd545ed888e6cf5f4433eaf3612d39681795fd229a652",
+    "syspane_theme_history_tests": "0fde5893337079052ce0173b3a96287477a9572534af0799728c1a7b5dcbfe83",
+    "syspane_network_view_tests": "ab4b475ae16a92a3e66c625fb44c3dd5075fcfe0c920e62f02f27bde233e352d",
+    "syspane_image_job_tests": "65409bc4f4c69668dc03067d0eecf71a1099dc8b9ea9aa87137d0d9a52222efe",
+    "syspane_theme_override_tests": "c6024b5acb0cc9fbfa14fb58af02cc6190bf84b3f416eaea2d96a51fcff39602",
+    "syspane_editor_window": "5985b0d59d460a2b23846baf4408a54fff9f4380f215ae6cceec92c888e8fe22",
+    "syspane_recovery_store_probe": "429c05dd501622841f81e06fac7a20ae22dca51575da10b3d748d757f93ce437",
+    "syspane_scene_fragment_tests": "4d76d9a178bb7f4799ac171934af76b3249f9a5240e31fda6bb8bf683960c702",
+    "syspane_role_composition_probe": "78bc0ff673ebbd32a88e7434aeae2c8d04b6523556ad8cf3139062e3268cbda9",
+    "syspane_profile_supervisor_probe": "94fa4e811ccfefdd2b4e3b87983c2bf08451c9ab2158d00b74015cf53b51a89d",
+    "syspane": "1d0e3d3fa9d26b3d7019c8e7ac30620fc32d1c67b123284169304eed92ac4923",
+    "syspane_authored_tests": "a128b34cd2fd8cbff6bdd10fc34f4086e1915eebcdf94bbe3d50d5636fa6f810",
+    "syspane_recovery_draft_tests": "7f8a4e1dac86612540f32517025acd1041f27fdf9e0c66b1ed697752e4ce538e",
+    "syspane_theme_controls_tests": "05291f055b3cbabf0acfd23ac6b7ac94323122949629ea4c1de9087a6780100a",
+    "syspane_scene_inspector_tests": "2ba9c6590d3d29bf16364b80be049184149a67a46a8d0bfc8dabd8a32ed76ff8",
+    "syspane_recovery_context_probe": "775c50753afc2c0967661647e9d1a7577d6dca60004adb25bd81be921904fce9",
+    "syspane_recovery_tests": "04a0b834d2d23aa4cfd307db242641fb367554cf277554a8aced21adb99a9f4c",
+    "syspane_editor_recovery_probe": "9d8ee2cacbea252422fc0400ec07e3f0dde9ccb207edc731aa1a39e9e971d74f",
+    "syspane_recovery_preparation_tests": "27296ae324998c8822f9077b39172cd388933e76c557d38848e6846209057376",
+    "syspane_data_view_tests": "67441034e9ae5e8552a50ff0f82ae28243aa2efab9688be624b7daf85e2238b0",
+    "syspane_telemetry_tests": "a8690aeff0880ee90e3845d9a3c036b7aecd07e0658838141779869726d2d7c1",
+    "syspane_demand_tests": "74492c0a721ca6732ab5087a3f1fcfd7d4fc882c8605bb2f77ef6df4efebd324",
+    "syspane_scene_surface_tests": "77b1ffb96c5f1defa8a28577c257f7d9e984985a19cca379b6f31a37cbebd548",
+    "syspane_telemetry_delivery_tests": "dbb1e79c4b4b0c126194f2b905b2973daf8d053440d872f73ccc46251f7b4aef",
+    "syspane_recovery_worker_probe": "6ba397275776faed57662d95afa5fbfbf9a58defccf741dc974fe95c799617f4",
+    "syspane_profile_projection_probe": "68124dd06878de532be38e38d1113ce359ea568b2db129e2a6c9f267f40ac777",
+    "syspane_model_tests": "f3130151c1b59537119732f337595eabf4234946106aa4e46bdb0dd0b7da1275",
+    "syspane_profile_projection_tests": "05e41e06ec15aab76056b0c63a9415d99564b97417f20296b201c3b891f3ba4e",
+    "syspane_typography_tests": "3feca26ffea64d8e51b1a4d391526e53466f4d167598a84c3cf16edc0d351142",
+    "syspane_health_tests": "8219c2b073714217b5c7ac8198147f5337b2c763a7fd41f6713ddf0622924cee",
+    "syspane_preservation_tests": "cc2292690e5564023a1522943941b4fcac622db24d609879b245c604c812f95a",
+    "syspane_settings_tests": "f4b1aa4d56693e47bbe6a54d6dbb949f284a41173a1573f7554cc6f8fa014805",
+    "syspane_initial_profile_tests": "96bb8a72e176cba4dbf130780f02ef5df1ac35392c5b5e0bc0bd062fa0322f38",
+    "syspane_history_preparation_tests": "5ba1309a9a83de7caa9fe8406bec0e34c4ee5355aa7a3566688f0eb05f53138e",
+    "syspane_profile_worker_probe": "599cbd051ea17f97bc5e3294117ffdc3b63720032dc04eed7e33a8962404c9bb",
+    "syspane_frontend_entry_fixture": "54ecc16f6727a93778d9ac5e59a87933ab09ac48973195ee649d946027b2f672",
+    "syspane_frontend_fixture": "e99a6788e10a6ded056b6bfdc12405ecf2ab1aebdfcc06f8e217b50554b456ea",
+    "syspane_theme_history_probe": "50b99bb077e3b5e44928d7fa7b1ef9a80e7eedd01a5c348edc184a74c57efbb3",
+    "syspane_subscription_tests": "928c58280c20bef528da7f2f8498aa5cacc82e787d1e102781a797564612a169",
+    "syspane_large_command_tests": "a58ec010dbf730c545f326526796b0127cc03c14a56d181ef78a7da2cee56196",
+    "syspane_editor_helper_worker_probe": "d8f02adb698fbb14e61e4deb114016f0d6f704e6d9f2c0b0dca4fb036fdfe280",
+    "syspane_state_import_tests": "ffbc22f2bad9435b737eb1cec86d81373ba94702ecc7167264f9537dc53c6fd3",
+    "syspane_private_text_probe": "1cacd6b7f6adaf215d0e1312b5c0a7dde233a2f2acffba043ec685ddd11bb6e6",
+    "syspane_command_session_tests": "3a2cf25d6f762c1efd39c36fd00a327872ee3e2b9ea8cd7230e5185c78434e7e",
+    "syspane_profile_owner_probe": "fe5035b1d593653d19cb5fb776a5539e3b69eab6410804e7c4a0311a22eb8a09",
+    "syspane_gtk_accessible_erase_probe": "c10aaa2128e363bce6b5c7753b8b7781875837c82f3705da3e913114802a83b9",
+    "syspane_installation_probe": "4f06fb69207c29fc95fea8aa46a1ab481cf23071aea77bcf86fbe6c4252d1912",
+    "syspane_settings_window": "d4ff7e1e3293acd734b0104c85132c1f8b6dd474542e5192bafc0a2b4e5ae890",
+    "syspane_network_publication_tests": "2fcc8fd18fa0253784e19200364cb51f40d65c92fa81af47c955f07c75c9be1c",
+    "syspane_network_state_tests": "c3dcadd3ebe974ce0450af8da9e46f33b916fc6e813cac3e1bfe3b2678198d30",
+    "syspane_profile_startup_probe": "fc0f113e2c0d44919b43bda4c49b8866bec2905c3a53d492ae9f850a01dfbe32",
+    "syspane_editor_helper_probe": "3af48ba0ca2727d807a28973e807a8615ddfc27975f6cc9c5708ce066b890af7",
+    "syspane_scene_tests": "b4d808dcacc6ebd8fdcfdfd6a57385b801dff3f69ed10cdc2dd1db410ac72fb9",
+    "syspane_recovery_transfer_probe": "8bd7ba6d7f73356b04b86824b59affaf35c53943a50d67b9845fa69286219d19",
+    "syspane_theme_authoring_tests": "1d7d2c40c466f2b87882a2bccd7799351670c0f3ef02ecffc10d7d43f76fe9aa",
+    "syspane_diagnostic_tests": "124d0d1083102ed6264727f49c66c6ddddddd564f70a242478fb33f11b94d6e2",
+    "syspane_theme_command_tests": "9186a0665647ca6775f80b1c0828e4088947d248165b5c256b69da8e1b2e2298",
+    "syspane_network_supervisor_probe": "862fe3fe6abdf88db43b3377485a860d1abd6260da26fb868d112b52ad4814c9",
+    "syspane_frontend_recovery_probe": "efde85504f37380a81d57a4937ec5ef914151213c13afd91b14f7379aa042edc",
+    "syspane-diag": "bfd1a69a8a7c771511c6f0f627604c22bba0789929ff49f8db598707f77d61f8",
+    "syspane_network_consumer_probe": "d5925e8719fdeb46b1e14c9f606c28e2167be9fa69b02c596a10eb10e5f9003d",
+    "syspane_protocol_tests": "b27f243f93fba9c21e04e451bb381c2485aab05d8f6495c558e240fbd94ea087"
+  },
+  "changed_artifacts": {
+    "syspane": {
+      "before": "64e6aa04324d0f8dd11d597e1d60557d443d1336db79b76d482695acf5ad914b",
+      "after": "1d0e3d3fa9d26b3d7019c8e7ac30620fc32d1c67b123284169304eed92ac4923"
+    },
+    "syspane_scene_inspector_tests": {
+      "before": "6bac9b8cb0c6f5989f44413de1fef0935fe34af997cee35ade2c44e9fbfa50fd",
+      "after": "2ba9c6590d3d29bf16364b80be049184149a67a46a8d0bfc8dabd8a32ed76ff8"
+    },
+    "syspane_frontend_entry_fixture": {
+      "before": "dbfee5aab24ab1ff030860b8f417db6e75f6e8fd40a9850fa5a029dfa5e95193",
+      "after": "54ecc16f6727a93778d9ac5e59a87933ab09ac48973195ee649d946027b2f672"
+    },
+    "syspane_frontend_fixture": {
+      "before": "894a7c7ca74a9812698b8306791fe4ff8752b9b04559a0f80bbed852d6dc44cc",
+      "after": "e99a6788e10a6ded056b6bfdc12405ecf2ab1aebdfcc06f8e217b50554b456ea"
+    },
+    "syspane_gtk_accessible_erase_probe": {
+      "before": "a3b3de8bc277bbaabc21727221ea246d66f38a87c2af444ad1f56b927c5e88fd",
+      "after": "c10aaa2128e363bce6b5c7753b8b7781875837c82f3705da3e913114802a83b9"
+    }
+  },
+  "unchanged_artifact_count": 66,
+  "final_product_source": {
+    "source/interfaces/scene_inspector_linux.cpp": "77376fa3f648ad30a24f413d4109524e7d9260a68af9e73daf7dfec9089f803e",
+    "source/interfaces/scene_inspector_text_linux.cpp": "3674e876b80c1895bae8ca0ba0dbe68730b9efa2799c647a7803642b42d0d296",
+    "source/interfaces/scene_inspector_text_linux.hpp": "62aeb3b098c0311600e3de097ea4c89a446f19393f7c409b8c60a3252da5675d"
+  },
+  "executions": [
+    {
+      "stage": "build",
+      "source_base": "1e7f324fa95296552e8ea2477ae6ebc79b7df00d",
+      "source_archive_sha256": "2219f80acda0c8280d41b7eee304ca143f906a7802af2de919cb0c2e1565ee53",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "cmake",
+            "--preset",
+            "linux-x64-gcc13"
+          ],
+          "started_at": "2026-10-11T22:56:00.285645+00:00",
+          "finished_at": "2026-10-11T22:56:15.886885+00:00",
+          "exit": 0,
+          "log_sha256": "7cdc517472e7a48f8b38582505d3ba2de8697f1c4a527c5ebc26b212066d04ce",
+          "log": {
+            "local_path": "out/evidence/gtk-cell-lifetime-checks/build-2ee3fef6/0.log",
+            "sha256": "7cdc517472e7a48f8b38582505d3ba2de8697f1c4a527c5ebc26b212066d04ce"
+          },
+          "budget": {
+            "local_path": "out/evidence/gtk-cell-lifetime-checks/build-2ee3fef6/budget-0.txt",
+            "sha256": "027aa54348c654435381e35e1f84c9e5160c9ea974067850abc0d67987c2b520"
+          }
+        },
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "cmake",
+            "--build",
+            "--preset",
+            "linux-x64-gcc13"
+          ],
+          "started_at": "2026-10-11T22:56:18.582914+00:00",
+          "finished_at": "2026-10-11T22:56:27.050315+00:00",
+          "exit": 0,
+          "log_sha256": "904cfa46eea5395406a923d3cc8adbfda9829a69268dadeeb173ba266ef6928e",
+          "log": {
+            "local_path": "out/evidence/gtk-cell-lifetime-checks/build-2ee3fef6/1.log",
+            "sha256": "904cfa46eea5395406a923d3cc8adbfda9829a69268dadeeb173ba266ef6928e"
+          },
+          "budget": {
+            "local_path": "out/evidence/gtk-cell-lifetime-checks/build-2ee3fef6/budget-1.txt",
+            "sha256": "28e487aa7bbd0cab470ff640380c122acc5e224347a583723dc308f1aabca5e7"
+          }
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/build-2ee3fef6/result.json",
+        "sha256": "b46dda1944b309678d412e6ac2cdf21b07b460443eb721fa137f57d1d9ecf8a4"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/build-2ee3fef6/source-manifest.json",
+        "sha256": "5601d4ada034c7acdddb827801de7855ae40563a9c01acd2669fecc027db53aa"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/build-2ee3fef6/source.zip",
+        "sha256": "2219f80acda0c8280d41b7eee304ca143f906a7802af2de919cb0c2e1565ee53"
+      }
+    },
+    {
+      "stage": "composition",
+      "source_base": "1e7f324fa95296552e8ea2477ae6ebc79b7df00d",
+      "source_archive_sha256": "2219f80acda0c8280d41b7eee304ca143f906a7802af2de919cb0c2e1565ee53",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^composition[.]",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-11T22:57:34.092095+00:00",
+          "finished_at": "2026-10-11T22:57:35.201301+00:00",
+          "exit": 0,
+          "log_sha256": "c648a2f25bd04e7d86682d992b472441e46afa894160f76513e7aae1ea1a9e26",
+          "log": {
+            "local_path": "out/evidence/gtk-cell-lifetime-checks/composition-132de83a/0.log",
+            "sha256": "c648a2f25bd04e7d86682d992b472441e46afa894160f76513e7aae1ea1a9e26"
+          },
+          "budget": {
+            "local_path": "out/evidence/gtk-cell-lifetime-checks/composition-132de83a/budget-0.txt",
+            "sha256": "6a62d6e94d7d0db321edb79b6ba6c1d483bc8ad1690a89e2c2e53af4cf2a1587"
+          }
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/composition-132de83a/result.json",
+        "sha256": "55dbc6fb6506c0c58aa4a7339b8a0a50bdfd84b186be87c91e091f0d256fc14f"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/composition-132de83a/source-manifest.json",
+        "sha256": "5601d4ada034c7acdddb827801de7855ae40563a9c01acd2669fecc027db53aa"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/composition-132de83a/source.zip",
+        "sha256": "2219f80acda0c8280d41b7eee304ca143f906a7802af2de919cb0c2e1565ee53"
+      }
+    },
+    {
+      "stage": "native-GTK-CELL-LIFETIME",
+      "source_base": "1e7f324fa95296552e8ea2477ae6ebc79b7df00d",
+      "source_archive_sha256": "2219f80acda0c8280d41b7eee304ca143f906a7802af2de919cb0c2e1565ee53",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]GTK-CELL-LIFETIME$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-11T22:57:40.467644+00:00",
+          "finished_at": "2026-10-11T22:58:39.927644+00:00",
+          "exit": 0,
+          "log_sha256": "eacd39766f1ceb63e21a32c2ba8d53503a2468f576af45637a83c7c8280548f9",
+          "log": {
+            "local_path": "out/evidence/gtk-cell-lifetime-checks/native-GTK-CELL-LIFETIME-1ea7042a/0.log",
+            "sha256": "eacd39766f1ceb63e21a32c2ba8d53503a2468f576af45637a83c7c8280548f9"
+          },
+          "budget": {
+            "local_path": "out/evidence/gtk-cell-lifetime-checks/native-GTK-CELL-LIFETIME-1ea7042a/budget-0.txt",
+            "sha256": "6210966aec3af4a99ace1d8c053278dd385ffdb7ef6643f834fa4c197b734071"
+          }
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/native-GTK-CELL-LIFETIME-1ea7042a/result.json",
+        "sha256": "a359a23eaa7d482788d309669355097b8f9aa381f4d9ec5184eca454f46c08ec"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/native-GTK-CELL-LIFETIME-1ea7042a/source-manifest.json",
+        "sha256": "5601d4ada034c7acdddb827801de7855ae40563a9c01acd2669fecc027db53aa"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/native-GTK-CELL-LIFETIME-1ea7042a/source.zip",
+        "sha256": "2219f80acda0c8280d41b7eee304ca143f906a7802af2de919cb0c2e1565ee53"
+      }
+    },
+    {
+      "stage": "build",
+      "source_base": "1e7f324fa95296552e8ea2477ae6ebc79b7df00d",
+      "source_archive_sha256": "c6222681217c6d7dfb3aa9498655fb57a0f3d8adf0aa3b443613fd76092c1a49",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "cmake",
+            "--preset",
+            "linux-x64-gcc13"
+          ],
+          "started_at": "2026-10-11T23:02:55.914310+00:00",
+          "finished_at": "2026-10-11T23:03:05.668110+00:00",
+          "exit": 0,
+          "log_sha256": "fe1c08f38f478b586b570b1e605730ac7f9525222f2e28542f7daebd495bf638",
+          "log": {
+            "local_path": "out/evidence/gtk-cell-lifetime-checks/build-ff891854/0.log",
+            "sha256": "fe1c08f38f478b586b570b1e605730ac7f9525222f2e28542f7daebd495bf638"
+          },
+          "budget": {
+            "local_path": "out/evidence/gtk-cell-lifetime-checks/build-ff891854/budget-0.txt",
+            "sha256": "13b469e39e9fabd4f8ff5723b9b151de216666d745cb2842557a40776f434dd1"
+          }
+        },
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "cmake",
+            "--build",
+            "--preset",
+            "linux-x64-gcc13"
+          ],
+          "started_at": "2026-10-11T23:03:07.788740+00:00",
+          "finished_at": "2026-10-11T23:03:25.391982+00:00",
+          "exit": 0,
+          "log_sha256": "9bf8cad5b540dcdb043f5b37a569d346a8268846ecb91d8e0bc5ab702adf1d52",
+          "log": {
+            "local_path": "out/evidence/gtk-cell-lifetime-checks/build-ff891854/1.log",
+            "sha256": "9bf8cad5b540dcdb043f5b37a569d346a8268846ecb91d8e0bc5ab702adf1d52"
+          },
+          "budget": {
+            "local_path": "out/evidence/gtk-cell-lifetime-checks/build-ff891854/budget-1.txt",
+            "sha256": "29817c811d9a8397b9027e7abbc98198cafc3af5bbe472fb1775c96b2312a434"
+          }
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/build-ff891854/result.json",
+        "sha256": "d83dc9d484943b3e95b815f72884c8ff9a09fa791ed8df96b6f6a432186139c9"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/build-ff891854/source-manifest.json",
+        "sha256": "b03ff729c14b5db2218e57c9482d3caeb26d8e14950dd3794c7b368335034bb4"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/build-ff891854/source.zip",
+        "sha256": "c6222681217c6d7dfb3aa9498655fb57a0f3d8adf0aa3b443613fd76092c1a49"
+      }
+    },
+    {
+      "stage": "native-INSPECTOR-CELL-LIFETIME",
+      "source_base": "1e7f324fa95296552e8ea2477ae6ebc79b7df00d",
+      "source_archive_sha256": "c6222681217c6d7dfb3aa9498655fb57a0f3d8adf0aa3b443613fd76092c1a49",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]INSPECTOR-CELL-LIFETIME$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-11T23:04:10.654315+00:00",
+          "finished_at": "2026-10-11T23:04:11.336421+00:00",
+          "exit": 8,
+          "log_sha256": "818244d4b94e6ea3aa8553fca4965e370777d272e1811a418aff5abe84e64ac0",
+          "log": {
+            "local_path": "out/evidence/gtk-cell-lifetime-checks/native-INSPECTOR-CELL-LIFETIME-60092814/0.log",
+            "sha256": "818244d4b94e6ea3aa8553fca4965e370777d272e1811a418aff5abe84e64ac0"
+          },
+          "budget": {
+            "local_path": "out/evidence/gtk-cell-lifetime-checks/native-INSPECTOR-CELL-LIFETIME-60092814/budget-0.txt",
+            "sha256": "60797843a1f0ea45dcecbffa3abe5aee8b1e91bfdb1e0418d2a0cd316aade882"
+          }
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/native-INSPECTOR-CELL-LIFETIME-60092814/result.json",
+        "sha256": "543032a7d4d943b5c0f16173463b65322c6512d4f916781d1aa094c677687092"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/native-INSPECTOR-CELL-LIFETIME-60092814/source-manifest.json",
+        "sha256": "b03ff729c14b5db2218e57c9482d3caeb26d8e14950dd3794c7b368335034bb4"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/native-INSPECTOR-CELL-LIFETIME-60092814/source.zip",
+        "sha256": "c6222681217c6d7dfb3aa9498655fb57a0f3d8adf0aa3b443613fd76092c1a49"
+      }
+    },
+    {
+      "stage": "build",
+      "source_base": "1e7f324fa95296552e8ea2477ae6ebc79b7df00d",
+      "source_archive_sha256": "1c39d97fb917b93bcaeadfd66893aed97ab8df78b4824b204864a13e6e05ac60",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "cmake",
+            "--preset",
+            "linux-x64-gcc13"
+          ],
+          "started_at": "2026-10-11T23:06:18.237232+00:00",
+          "finished_at": "2026-10-11T23:06:27.132039+00:00",
+          "exit": 0,
+          "log_sha256": "16d1e3d7cdea3ec2d4bfd0fcb0cf3a1933864121e4d522413d0aa32450465dda",
+          "log": {
+            "local_path": "out/evidence/gtk-cell-lifetime-checks/build-f2e5295e/0.log",
+            "sha256": "16d1e3d7cdea3ec2d4bfd0fcb0cf3a1933864121e4d522413d0aa32450465dda"
+          },
+          "budget": {
+            "local_path": "out/evidence/gtk-cell-lifetime-checks/build-f2e5295e/budget-0.txt",
+            "sha256": "5a9de772271bcef66100e9cb2b0d7c01c8d689add05ecf5566eafac9ba7c5d34"
+          }
+        },
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "cmake",
+            "--build",
+            "--preset",
+            "linux-x64-gcc13"
+          ],
+          "started_at": "2026-10-11T23:06:29.148920+00:00",
+          "finished_at": "2026-10-11T23:06:51.772108+00:00",
+          "exit": 0,
+          "log_sha256": "6adf91c1a4a361a747ae71773186e173a4950f2cb6979978677f6a651e92a982",
+          "log": {
+            "local_path": "out/evidence/gtk-cell-lifetime-checks/build-f2e5295e/1.log",
+            "sha256": "6adf91c1a4a361a747ae71773186e173a4950f2cb6979978677f6a651e92a982"
+          },
+          "budget": {
+            "local_path": "out/evidence/gtk-cell-lifetime-checks/build-f2e5295e/budget-1.txt",
+            "sha256": "02289cd40152ca86960c2a05e9c73f0efddac5d4dfb310dfb5bd0e64cfb00b0b"
+          }
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/build-f2e5295e/result.json",
+        "sha256": "b4458fb8a2450fc817732709e79feb9d04f1aead085865b414107b5f3cf97b86"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/build-f2e5295e/source-manifest.json",
+        "sha256": "e0113ff4ed05f0cc0cda1f00e034382c1ba12be4802ce761544571eb7c791157"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/build-f2e5295e/source.zip",
+        "sha256": "1c39d97fb917b93bcaeadfd66893aed97ab8df78b4824b204864a13e6e05ac60"
+      }
+    },
+    {
+      "stage": "native-INSPECTOR-CELL-LIFETIME",
+      "source_base": "1e7f324fa95296552e8ea2477ae6ebc79b7df00d",
+      "source_archive_sha256": "1c39d97fb917b93bcaeadfd66893aed97ab8df78b4824b204864a13e6e05ac60",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]INSPECTOR-CELL-LIFETIME$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-11T23:07:13.550058+00:00",
+          "finished_at": "2026-10-11T23:07:14.067357+00:00",
+          "exit": 0,
+          "log_sha256": "3a3f76e03c95401cfaadafa8ee879578d3e0cbd1d657dd1d9980667d01bd2501",
+          "log": {
+            "local_path": "out/evidence/gtk-cell-lifetime-checks/native-INSPECTOR-CELL-LIFETIME-4c221e22/0.log",
+            "sha256": "3a3f76e03c95401cfaadafa8ee879578d3e0cbd1d657dd1d9980667d01bd2501"
+          },
+          "budget": {
+            "local_path": "out/evidence/gtk-cell-lifetime-checks/native-INSPECTOR-CELL-LIFETIME-4c221e22/budget-0.txt",
+            "sha256": "4cf30136d5ac4eb198bcc548a80f773998639ef849991aab66b7602d2002ecef"
+          }
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/native-INSPECTOR-CELL-LIFETIME-4c221e22/result.json",
+        "sha256": "cd86471618eff8a7ec1073beb66b0b463710a3a515d0b45b26fb95f8d7b00ac7"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/native-INSPECTOR-CELL-LIFETIME-4c221e22/source-manifest.json",
+        "sha256": "e0113ff4ed05f0cc0cda1f00e034382c1ba12be4802ce761544571eb7c791157"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/native-INSPECTOR-CELL-LIFETIME-4c221e22/source.zip",
+        "sha256": "1c39d97fb917b93bcaeadfd66893aed97ab8df78b4824b204864a13e6e05ac60"
+      }
+    },
+    {
+      "stage": "history-regressions",
+      "source_base": "1e7f324fa95296552e8ea2477ae6ebc79b7df00d",
+      "source_archive_sha256": "1c39d97fb917b93bcaeadfd66893aed97ab8df78b4824b204864a13e6e05ac60",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.](SCENE-INSPECTOR.*|CHART-FRAME-LIMITS|INSPECTOR-RENDERER|BACKGROUND-INSPECTOR)$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-11T23:08:34.116963+00:00",
+          "finished_at": "2026-10-11T23:09:16.626780+00:00",
+          "exit": 0,
+          "log_sha256": "b4c23fc3c3fe173f2c24d654ac1bd2a7967eb799dc322b2416ebc21a0f216914",
+          "log": {
+            "local_path": "out/evidence/gtk-cell-lifetime-checks/history-regressions-16bab7eb/0.log",
+            "sha256": "b4c23fc3c3fe173f2c24d654ac1bd2a7967eb799dc322b2416ebc21a0f216914"
+          },
+          "budget": {
+            "local_path": "out/evidence/gtk-cell-lifetime-checks/history-regressions-16bab7eb/budget-0.txt",
+            "sha256": "99c8360a1904ae6ab01526009a72fdd371761b57f13591e513ba710d9665741f"
+          }
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/history-regressions-16bab7eb/result.json",
+        "sha256": "4e95cfe7672bf1400453598491c48e0ba67bc9e3f148a537f904ac76a44a5b85"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/history-regressions-16bab7eb/source-manifest.json",
+        "sha256": "e0113ff4ed05f0cc0cda1f00e034382c1ba12be4802ce761544571eb7c791157"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/history-regressions-16bab7eb/source.zip",
+        "sha256": "1c39d97fb917b93bcaeadfd66893aed97ab8df78b4824b204864a13e6e05ac60"
+      }
+    },
+    {
+      "stage": "native-TABLE-ERASURE",
+      "source_base": "1e7f324fa95296552e8ea2477ae6ebc79b7df00d",
+      "source_archive_sha256": "1c39d97fb917b93bcaeadfd66893aed97ab8df78b4824b204864a13e6e05ac60",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]TABLE-ERASURE$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-11T23:09:19.722387+00:00",
+          "finished_at": "2026-10-11T23:09:27.811712+00:00",
+          "exit": 0,
+          "log_sha256": "f5be03f1b7f1474662d724421cf6d7391443d2ec3e7d9a025e92a997560c925e",
+          "log": {
+            "local_path": "out/evidence/gtk-cell-lifetime-checks/native-TABLE-ERASURE-8b4eecf8/0.log",
+            "sha256": "f5be03f1b7f1474662d724421cf6d7391443d2ec3e7d9a025e92a997560c925e"
+          },
+          "budget": {
+            "local_path": "out/evidence/gtk-cell-lifetime-checks/native-TABLE-ERASURE-8b4eecf8/budget-0.txt",
+            "sha256": "870731be3c4353b2d7f9c0a35c8b91e9f913bbb4116340dcaaa59d062c6af5aa"
+          }
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/native-TABLE-ERASURE-8b4eecf8/result.json",
+        "sha256": "c35efb685ebb6755ef14fa195a9f6a9168f1436fd2d4e897eb57d030a3b5f690"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/native-TABLE-ERASURE-8b4eecf8/source-manifest.json",
+        "sha256": "e0113ff4ed05f0cc0cda1f00e034382c1ba12be4802ce761544571eb7c791157"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/native-TABLE-ERASURE-8b4eecf8/source.zip",
+        "sha256": "1c39d97fb917b93bcaeadfd66893aed97ab8df78b4824b204864a13e6e05ac60"
+      }
+    },
+    {
+      "stage": "native-INSTALLED-INSPECTOR",
+      "source_base": "1e7f324fa95296552e8ea2477ae6ebc79b7df00d",
+      "source_archive_sha256": "1c39d97fb917b93bcaeadfd66893aed97ab8df78b4824b204864a13e6e05ac60",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]INSTALLED-INSPECTOR$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-11T23:10:24.379739+00:00",
+          "finished_at": "2026-10-11T23:11:34.434275+00:00",
+          "exit": 0,
+          "log_sha256": "f5872378c55afdaa90efa6c9a908031c45054c94bcc4320d58e9d174ae41af1e",
+          "log": {
+            "local_path": "out/evidence/gtk-cell-lifetime-checks/native-INSTALLED-INSPECTOR-649190de/0.log",
+            "sha256": "f5872378c55afdaa90efa6c9a908031c45054c94bcc4320d58e9d174ae41af1e"
+          },
+          "budget": {
+            "local_path": "out/evidence/gtk-cell-lifetime-checks/native-INSTALLED-INSPECTOR-649190de/budget-0.txt",
+            "sha256": "f8a899979f243e1c768322cee9bb205e75edb6310d55605e5d5eebb5665a616c"
+          }
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/native-INSTALLED-INSPECTOR-649190de/result.json",
+        "sha256": "b382efeb50186db814adf67abe51dc1c00eb009482625b2ad1e01c6d73fa8b04"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/native-INSTALLED-INSPECTOR-649190de/source-manifest.json",
+        "sha256": "e0113ff4ed05f0cc0cda1f00e034382c1ba12be4802ce761544571eb7c791157"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/native-INSTALLED-INSPECTOR-649190de/source.zip",
+        "sha256": "1c39d97fb917b93bcaeadfd66893aed97ab8df78b4824b204864a13e6e05ac60"
+      }
+    },
+    {
+      "stage": "native-INSTALLED-TELEMETRY",
+      "source_base": "1e7f324fa95296552e8ea2477ae6ebc79b7df00d",
+      "source_archive_sha256": "1c39d97fb917b93bcaeadfd66893aed97ab8df78b4824b204864a13e6e05ac60",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]INSTALLED-TELEMETRY$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-11T23:12:10.280748+00:00",
+          "finished_at": "2026-10-11T23:12:53.655825+00:00",
+          "exit": 0,
+          "log_sha256": "7e6c02a01d627523c3b382d7534c04afe740207a5933f9ee95726d55dd2ad9e2",
+          "log": {
+            "local_path": "out/evidence/gtk-cell-lifetime-checks/native-INSTALLED-TELEMETRY-b7ce1ed0/0.log",
+            "sha256": "7e6c02a01d627523c3b382d7534c04afe740207a5933f9ee95726d55dd2ad9e2"
+          },
+          "budget": {
+            "local_path": "out/evidence/gtk-cell-lifetime-checks/native-INSTALLED-TELEMETRY-b7ce1ed0/budget-0.txt",
+            "sha256": "34969371787524ce0b13ab7a042a53c37704a5870ac778823da2a1b42ef2cfc5"
+          }
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/native-INSTALLED-TELEMETRY-b7ce1ed0/result.json",
+        "sha256": "3b6274dd69dbd55c0bb86cd1773da148826f0ca3b7a743fe8823ef4b44c1b10a"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/native-INSTALLED-TELEMETRY-b7ce1ed0/source-manifest.json",
+        "sha256": "e0113ff4ed05f0cc0cda1f00e034382c1ba12be4802ce761544571eb7c791157"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/native-INSTALLED-TELEMETRY-b7ce1ed0/source.zip",
+        "sha256": "1c39d97fb917b93bcaeadfd66893aed97ab8df78b4824b204864a13e6e05ac60"
+      }
+    },
+    {
+      "stage": "native-INSPECTOR-LIVE-TABLES",
+      "source_base": "1e7f324fa95296552e8ea2477ae6ebc79b7df00d",
+      "source_archive_sha256": "1c39d97fb917b93bcaeadfd66893aed97ab8df78b4824b204864a13e6e05ac60",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]INSPECTOR-LIVE-TABLES$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-11T23:13:02.200421+00:00",
+          "finished_at": "2026-10-11T23:14:09.493216+00:00",
+          "exit": 8,
+          "log_sha256": "12ddc1eedd5f78de3947af7392e2266dc0c3d76cc5a6b784f38c584f43975c45",
+          "log": {
+            "local_path": "out/evidence/gtk-cell-lifetime-checks/native-INSPECTOR-LIVE-TABLES-660a9d9b/0.log",
+            "sha256": "12ddc1eedd5f78de3947af7392e2266dc0c3d76cc5a6b784f38c584f43975c45"
+          },
+          "budget": {
+            "local_path": "out/evidence/gtk-cell-lifetime-checks/native-INSPECTOR-LIVE-TABLES-660a9d9b/budget-0.txt",
+            "sha256": "1ecd777f10d8e920e26ecc314fb249aae05ae3a9a07ec03d83eb5b08e0e1b7ae"
+          }
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/native-INSPECTOR-LIVE-TABLES-660a9d9b/result.json",
+        "sha256": "71096465849be5f6bbbfb09dc9914e57b1aa65c12ed8c8aee7b4d108c19057d4"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/native-INSPECTOR-LIVE-TABLES-660a9d9b/source-manifest.json",
+        "sha256": "e0113ff4ed05f0cc0cda1f00e034382c1ba12be4802ce761544571eb7c791157"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/native-INSPECTOR-LIVE-TABLES-660a9d9b/source.zip",
+        "sha256": "1c39d97fb917b93bcaeadfd66893aed97ab8df78b4824b204864a13e6e05ac60"
+      }
+    },
+    {
+      "stage": "native-GTK-CELL-LIFETIME",
+      "source_base": "1e7f324fa95296552e8ea2477ae6ebc79b7df00d",
+      "source_archive_sha256": "1c39d97fb917b93bcaeadfd66893aed97ab8df78b4824b204864a13e6e05ac60",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]GTK-CELL-LIFETIME$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-11T23:14:59.321012+00:00",
+          "finished_at": "2026-10-11T23:16:22.101706+00:00",
+          "exit": 0,
+          "log_sha256": "93bef65e9ea00b2b1ed76ea0de492b39e3391c69f85a910d8fdcf002860f3502",
+          "log": {
+            "local_path": "out/evidence/gtk-cell-lifetime-checks/native-GTK-CELL-LIFETIME-44c1c80c/0.log",
+            "sha256": "93bef65e9ea00b2b1ed76ea0de492b39e3391c69f85a910d8fdcf002860f3502"
+          },
+          "budget": {
+            "local_path": "out/evidence/gtk-cell-lifetime-checks/native-GTK-CELL-LIFETIME-44c1c80c/budget-0.txt",
+            "sha256": "923c60cb9f7e5e138ab5339ee2bfb9bd31b4eed9eab24cf72c9d73a8d8321d06"
+          }
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/native-GTK-CELL-LIFETIME-44c1c80c/result.json",
+        "sha256": "217c0163a8abdb46fdf8d5f7114b1cf14435d210581b28c3d2bbe4d650825bfb"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/native-GTK-CELL-LIFETIME-44c1c80c/source-manifest.json",
+        "sha256": "e0113ff4ed05f0cc0cda1f00e034382c1ba12be4802ce761544571eb7c791157"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/native-GTK-CELL-LIFETIME-44c1c80c/source.zip",
+        "sha256": "1c39d97fb917b93bcaeadfd66893aed97ab8df78b4824b204864a13e6e05ac60"
+      }
+    },
+    {
+      "stage": "build",
+      "source_base": "1e7f324fa95296552e8ea2477ae6ebc79b7df00d",
+      "source_archive_sha256": "83064f00f56e3168db5cfe3c07ceb788dc4c846599d2afadda2dbbd23e3a113d",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "cmake",
+            "--preset",
+            "linux-x64-gcc13"
+          ],
+          "started_at": "2026-10-11T23:21:05.061832+00:00",
+          "finished_at": "2026-10-11T23:21:15.538453+00:00",
+          "exit": 0,
+          "log_sha256": "51e1650929747697aefdb44d2d1b9f295338916c5fe3e4f6c4724319915ab83f",
+          "log": {
+            "local_path": "out/evidence/gtk-cell-lifetime-checks/build-e6fd7336/0.log",
+            "sha256": "51e1650929747697aefdb44d2d1b9f295338916c5fe3e4f6c4724319915ab83f"
+          },
+          "budget": {
+            "local_path": "out/evidence/gtk-cell-lifetime-checks/build-e6fd7336/budget-0.txt",
+            "sha256": "456bc6694c7ecef334b25789e08a68103f3c73e2e969c83573878790534146ee"
+          }
+        },
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "cmake",
+            "--build",
+            "--preset",
+            "linux-x64-gcc13"
+          ],
+          "started_at": "2026-10-11T23:21:17.653991+00:00",
+          "finished_at": "2026-10-11T23:21:27.477314+00:00",
+          "exit": 1,
+          "log_sha256": "d020c64a62b241094e359cef913093d6a4171649a7a6aa0c4f7747305373c62e",
+          "log": {
+            "local_path": "out/evidence/gtk-cell-lifetime-checks/build-e6fd7336/1.log",
+            "sha256": "d020c64a62b241094e359cef913093d6a4171649a7a6aa0c4f7747305373c62e"
+          },
+          "budget": {
+            "local_path": "out/evidence/gtk-cell-lifetime-checks/build-e6fd7336/budget-1.txt",
+            "sha256": "6952e5353db204e99888c9c50c4f76df3e3d8835a451665edbc01350b820f43b"
+          }
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/build-e6fd7336/result.json",
+        "sha256": "215c375a5ddd5588541a571e93b817737b74071acc12f622e6312859b1d6098a"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/build-e6fd7336/source-manifest.json",
+        "sha256": "8885a7f2f7c4bfd23fd931161e7b704bb2964349f5a8b33bf3cd95ae0a934bb7"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/build-e6fd7336/source.zip",
+        "sha256": "83064f00f56e3168db5cfe3c07ceb788dc4c846599d2afadda2dbbd23e3a113d"
+      }
+    },
+    {
+      "stage": "build",
+      "source_base": "1e7f324fa95296552e8ea2477ae6ebc79b7df00d",
+      "source_archive_sha256": "0b672ad03ef6e477a02fcb4deb6c9b7b4f55d9ab98a046a19aa4b5462aab5ed0",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "cmake",
+            "--preset",
+            "linux-x64-gcc13"
+          ],
+          "started_at": "2026-10-11T23:22:19.270707+00:00",
+          "finished_at": "2026-10-11T23:22:29.074159+00:00",
+          "exit": 0,
+          "log_sha256": "5070c322bc5e0416ef2927348341c2ad462101e520ef021f7437471726a6529a",
+          "log": {
+            "local_path": "out/evidence/gtk-cell-lifetime-checks/build-987c6269/0.log",
+            "sha256": "5070c322bc5e0416ef2927348341c2ad462101e520ef021f7437471726a6529a"
+          },
+          "budget": {
+            "local_path": "out/evidence/gtk-cell-lifetime-checks/build-987c6269/budget-0.txt",
+            "sha256": "0b64299318961fc50270d0b1604b72ae3740352bfebef7e73b6c514ce4d42034"
+          }
+        },
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "cmake",
+            "--build",
+            "--preset",
+            "linux-x64-gcc13"
+          ],
+          "started_at": "2026-10-11T23:22:31.169378+00:00",
+          "finished_at": "2026-10-11T23:22:45.972562+00:00",
+          "exit": 0,
+          "log_sha256": "b6de34326528bc3a8f066a426ca5fecbf8600047bc372cc6cdda487ae3aa3790",
+          "log": {
+            "local_path": "out/evidence/gtk-cell-lifetime-checks/build-987c6269/1.log",
+            "sha256": "b6de34326528bc3a8f066a426ca5fecbf8600047bc372cc6cdda487ae3aa3790"
+          },
+          "budget": {
+            "local_path": "out/evidence/gtk-cell-lifetime-checks/build-987c6269/budget-1.txt",
+            "sha256": "946dd6d36c37122ee109433975141eec9c79755c1f6ee19841b10bc6945f5239"
+          }
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/build-987c6269/result.json",
+        "sha256": "08c32fc75466334635a1bff73d8a10d258def47fc1889665799d1f320029bec5"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/build-987c6269/source-manifest.json",
+        "sha256": "360d96ebd8efb107110811fa99c1f9b1a60bbc8595938184f6710a0570beb7b1"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/build-987c6269/source.zip",
+        "sha256": "0b672ad03ef6e477a02fcb4deb6c9b7b4f55d9ab98a046a19aa4b5462aab5ed0"
+      }
+    },
+    {
+      "stage": "native-INSPECTOR-CELL-LIFETIME",
+      "source_base": "1e7f324fa95296552e8ea2477ae6ebc79b7df00d",
+      "source_archive_sha256": "0b672ad03ef6e477a02fcb4deb6c9b7b4f55d9ab98a046a19aa4b5462aab5ed0",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]INSPECTOR-CELL-LIFETIME$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-11T23:23:15.235464+00:00",
+          "finished_at": "2026-10-11T23:23:15.789572+00:00",
+          "exit": 0,
+          "log_sha256": "a7602b23ac22a2cdc471ca3d04959c76bd60fdcd4a653a2bb5803e9f59d73096",
+          "log": {
+            "local_path": "out/evidence/gtk-cell-lifetime-checks/native-INSPECTOR-CELL-LIFETIME-92a5e4c9/0.log",
+            "sha256": "a7602b23ac22a2cdc471ca3d04959c76bd60fdcd4a653a2bb5803e9f59d73096"
+          },
+          "budget": {
+            "local_path": "out/evidence/gtk-cell-lifetime-checks/native-INSPECTOR-CELL-LIFETIME-92a5e4c9/budget-0.txt",
+            "sha256": "6d77cb42557d0485e9033ccdeda2a2fc5fab6826ab42bf0564b20be621a3b14d"
+          }
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/native-INSPECTOR-CELL-LIFETIME-92a5e4c9/result.json",
+        "sha256": "018e2157d270b1b96c2a62aca3d74ce066fb0f4d7f9df437f8cf1623617d2d51"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/native-INSPECTOR-CELL-LIFETIME-92a5e4c9/source-manifest.json",
+        "sha256": "360d96ebd8efb107110811fa99c1f9b1a60bbc8595938184f6710a0570beb7b1"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/native-INSPECTOR-CELL-LIFETIME-92a5e4c9/source.zip",
+        "sha256": "0b672ad03ef6e477a02fcb4deb6c9b7b4f55d9ab98a046a19aa4b5462aab5ed0"
+      }
+    },
+    {
+      "stage": "composition",
+      "source_base": "1e7f324fa95296552e8ea2477ae6ebc79b7df00d",
+      "source_archive_sha256": "0b672ad03ef6e477a02fcb4deb6c9b7b4f55d9ab98a046a19aa4b5462aab5ed0",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^composition[.]",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-11T23:23:26.302885+00:00",
+          "finished_at": "2026-10-11T23:23:32.545221+00:00",
+          "exit": 0,
+          "log_sha256": "691ff8604ffeba3d2982ae98f6e33e314790188a92ff9bc671de29dd84981e1a",
+          "log": {
+            "local_path": "out/evidence/gtk-cell-lifetime-checks/composition-dd7c24ff/0.log",
+            "sha256": "691ff8604ffeba3d2982ae98f6e33e314790188a92ff9bc671de29dd84981e1a"
+          },
+          "budget": {
+            "local_path": "out/evidence/gtk-cell-lifetime-checks/composition-dd7c24ff/budget-0.txt",
+            "sha256": "b5108e12113794ee1fcc001d878a2a79f5129dc8f001124ca652cd4ee464c437"
+          }
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/composition-dd7c24ff/result.json",
+        "sha256": "b45050a4fc3e0e992a8fe60d7eef9c7918626b82a9b4a3f6e8a30790654e4189"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/composition-dd7c24ff/source-manifest.json",
+        "sha256": "360d96ebd8efb107110811fa99c1f9b1a60bbc8595938184f6710a0570beb7b1"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/composition-dd7c24ff/source.zip",
+        "sha256": "0b672ad03ef6e477a02fcb4deb6c9b7b4f55d9ab98a046a19aa4b5462aab5ed0"
+      }
+    },
+    {
+      "stage": "native-GTK-CELL-LIFETIME",
+      "source_base": "1e7f324fa95296552e8ea2477ae6ebc79b7df00d",
+      "source_archive_sha256": "0b672ad03ef6e477a02fcb4deb6c9b7b4f55d9ab98a046a19aa4b5462aab5ed0",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]GTK-CELL-LIFETIME$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-11T23:23:35.873289+00:00",
+          "finished_at": "2026-10-11T23:24:46.681407+00:00",
+          "exit": 0,
+          "log_sha256": "0026068b3582a7b9d111c9a9b0d3277fa4df6a2027d66196d9ce101a9ceba395",
+          "log": {
+            "local_path": "out/evidence/gtk-cell-lifetime-checks/native-GTK-CELL-LIFETIME-1fe71fc8/0.log",
+            "sha256": "0026068b3582a7b9d111c9a9b0d3277fa4df6a2027d66196d9ce101a9ceba395"
+          },
+          "budget": {
+            "local_path": "out/evidence/gtk-cell-lifetime-checks/native-GTK-CELL-LIFETIME-1fe71fc8/budget-0.txt",
+            "sha256": "80a66c6a34295e9c9a01bc3e2f578ec20d529c939bf2776884fc9815fc4bcb95"
+          }
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/native-GTK-CELL-LIFETIME-1fe71fc8/result.json",
+        "sha256": "a45e7a349869a14692715e18d107ddcbeb6e9f24dfe67ccf02114393771070df"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/native-GTK-CELL-LIFETIME-1fe71fc8/source-manifest.json",
+        "sha256": "360d96ebd8efb107110811fa99c1f9b1a60bbc8595938184f6710a0570beb7b1"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/native-GTK-CELL-LIFETIME-1fe71fc8/source.zip",
+        "sha256": "0b672ad03ef6e477a02fcb4deb6c9b7b4f55d9ab98a046a19aa4b5462aab5ed0"
+      }
+    },
+    {
+      "stage": "native-INSPECTOR-LIVE-TABLES",
+      "source_base": "1e7f324fa95296552e8ea2477ae6ebc79b7df00d",
+      "source_archive_sha256": "0b672ad03ef6e477a02fcb4deb6c9b7b4f55d9ab98a046a19aa4b5462aab5ed0",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]INSPECTOR-LIVE-TABLES$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-11T23:25:03.862088+00:00",
+          "finished_at": "2026-10-11T23:26:21.218915+00:00",
+          "exit": 0,
+          "log_sha256": "558f263a373ca79e7d0a35d2a7376bb899e80a116e03dc66fd326246e30487f4",
+          "log": {
+            "local_path": "out/evidence/gtk-cell-lifetime-checks/native-INSPECTOR-LIVE-TABLES-1bb95098/0.log",
+            "sha256": "558f263a373ca79e7d0a35d2a7376bb899e80a116e03dc66fd326246e30487f4"
+          },
+          "budget": {
+            "local_path": "out/evidence/gtk-cell-lifetime-checks/native-INSPECTOR-LIVE-TABLES-1bb95098/budget-0.txt",
+            "sha256": "f364d10fb62d7823e972d31ac801faec59341284a89391a15550aa8ef0f531ab"
+          }
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/native-INSPECTOR-LIVE-TABLES-1bb95098/result.json",
+        "sha256": "50091ccc7565c7e18b7d2031f174873de221b80c14d1bc609503b7131be46bd9"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/native-INSPECTOR-LIVE-TABLES-1bb95098/source-manifest.json",
+        "sha256": "360d96ebd8efb107110811fa99c1f9b1a60bbc8595938184f6710a0570beb7b1"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/native-INSPECTOR-LIVE-TABLES-1bb95098/source.zip",
+        "sha256": "0b672ad03ef6e477a02fcb4deb6c9b7b4f55d9ab98a046a19aa4b5462aab5ed0"
+      }
+    },
+    {
+      "stage": "history-regressions",
+      "source_base": "1e7f324fa95296552e8ea2477ae6ebc79b7df00d",
+      "source_archive_sha256": "0b672ad03ef6e477a02fcb4deb6c9b7b4f55d9ab98a046a19aa4b5462aab5ed0",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.](SCENE-INSPECTOR.*|CHART-FRAME-LIMITS|INSPECTOR-RENDERER|BACKGROUND-INSPECTOR)$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-11T23:26:39.634327+00:00",
+          "finished_at": "2026-10-11T23:27:26.883036+00:00",
+          "exit": 0,
+          "log_sha256": "cee1b3628c5e3e95e007a97949028aded901eb4001631c442813fc181157b29d",
+          "log": {
+            "local_path": "out/evidence/gtk-cell-lifetime-checks/history-regressions-f2680b7b/0.log",
+            "sha256": "cee1b3628c5e3e95e007a97949028aded901eb4001631c442813fc181157b29d"
+          },
+          "budget": {
+            "local_path": "out/evidence/gtk-cell-lifetime-checks/history-regressions-f2680b7b/budget-0.txt",
+            "sha256": "054d8df10f18073377d5b66ecd059c4d539218fc13d4eb52c31a9a63c1e8646f"
+          }
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/history-regressions-f2680b7b/result.json",
+        "sha256": "30bebcf26053afd992a9c1a3f119c44173a91fc3ee757366a38cee06ff227e12"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/history-regressions-f2680b7b/source-manifest.json",
+        "sha256": "360d96ebd8efb107110811fa99c1f9b1a60bbc8595938184f6710a0570beb7b1"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/history-regressions-f2680b7b/source.zip",
+        "sha256": "0b672ad03ef6e477a02fcb4deb6c9b7b4f55d9ab98a046a19aa4b5462aab5ed0"
+      }
+    },
+    {
+      "stage": "native-TABLE-ERASURE",
+      "source_base": "1e7f324fa95296552e8ea2477ae6ebc79b7df00d",
+      "source_archive_sha256": "0b672ad03ef6e477a02fcb4deb6c9b7b4f55d9ab98a046a19aa4b5462aab5ed0",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]TABLE-ERASURE$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-11T23:27:30.512354+00:00",
+          "finished_at": "2026-10-11T23:27:38.876782+00:00",
+          "exit": 0,
+          "log_sha256": "bc87570082cc0414f1840a7de524b2087a6b94f865eeb41d979b525531cc31b1",
+          "log": {
+            "local_path": "out/evidence/gtk-cell-lifetime-checks/native-TABLE-ERASURE-5a142379/0.log",
+            "sha256": "bc87570082cc0414f1840a7de524b2087a6b94f865eeb41d979b525531cc31b1"
+          },
+          "budget": {
+            "local_path": "out/evidence/gtk-cell-lifetime-checks/native-TABLE-ERASURE-5a142379/budget-0.txt",
+            "sha256": "c39bd95f71d54b594ee821b4e7c488d059f1b5587a473ab208f2ed2d8ad8ed49"
+          }
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/native-TABLE-ERASURE-5a142379/result.json",
+        "sha256": "65c807a1e8c7c1bfa8be7a5dc0d156f8b25aa05382cf4aa5da999140de34ef48"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/native-TABLE-ERASURE-5a142379/source-manifest.json",
+        "sha256": "360d96ebd8efb107110811fa99c1f9b1a60bbc8595938184f6710a0570beb7b1"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/native-TABLE-ERASURE-5a142379/source.zip",
+        "sha256": "0b672ad03ef6e477a02fcb4deb6c9b7b4f55d9ab98a046a19aa4b5462aab5ed0"
+      }
+    },
+    {
+      "stage": "native-INSTALLED-INSPECTOR",
+      "source_base": "1e7f324fa95296552e8ea2477ae6ebc79b7df00d",
+      "source_archive_sha256": "0b672ad03ef6e477a02fcb4deb6c9b7b4f55d9ab98a046a19aa4b5462aab5ed0",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]INSTALLED-INSPECTOR$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-11T23:27:42.509831+00:00",
+          "finished_at": "2026-10-11T23:28:52.735992+00:00",
+          "exit": 0,
+          "log_sha256": "35d8c7b6879b6ab36003063dd9d3ab29dd04d0c49d41e3a6dbdeb6ccdf4f7e96",
+          "log": {
+            "local_path": "out/evidence/gtk-cell-lifetime-checks/native-INSTALLED-INSPECTOR-147e55cb/0.log",
+            "sha256": "35d8c7b6879b6ab36003063dd9d3ab29dd04d0c49d41e3a6dbdeb6ccdf4f7e96"
+          },
+          "budget": {
+            "local_path": "out/evidence/gtk-cell-lifetime-checks/native-INSTALLED-INSPECTOR-147e55cb/budget-0.txt",
+            "sha256": "5f199b4e7570949f78e04d826123d8ba94fce72c0a65cb17daaa100dda1c9c87"
+          }
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/native-INSTALLED-INSPECTOR-147e55cb/result.json",
+        "sha256": "b6932eb56f5639ed0ad64b622cf855f51cd99d99d4c353a649bce3590bc3ac69"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/native-INSTALLED-INSPECTOR-147e55cb/source-manifest.json",
+        "sha256": "360d96ebd8efb107110811fa99c1f9b1a60bbc8595938184f6710a0570beb7b1"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/native-INSTALLED-INSPECTOR-147e55cb/source.zip",
+        "sha256": "0b672ad03ef6e477a02fcb4deb6c9b7b4f55d9ab98a046a19aa4b5462aab5ed0"
+      }
+    },
+    {
+      "stage": "native-INSTALLED-TELEMETRY",
+      "source_base": "1e7f324fa95296552e8ea2477ae6ebc79b7df00d",
+      "source_archive_sha256": "0b672ad03ef6e477a02fcb4deb6c9b7b4f55d9ab98a046a19aa4b5462aab5ed0",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]INSTALLED-TELEMETRY$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-11T23:29:08.653907+00:00",
+          "finished_at": "2026-10-11T23:29:54.579742+00:00",
+          "exit": 0,
+          "log_sha256": "75a6da779a021fe30cc0d535d1cf1a6b5d1e8b438c1baeb64684cc924805fcc8",
+          "log": {
+            "local_path": "out/evidence/gtk-cell-lifetime-checks/native-INSTALLED-TELEMETRY-4c566474/0.log",
+            "sha256": "75a6da779a021fe30cc0d535d1cf1a6b5d1e8b438c1baeb64684cc924805fcc8"
+          },
+          "budget": {
+            "local_path": "out/evidence/gtk-cell-lifetime-checks/native-INSTALLED-TELEMETRY-4c566474/budget-0.txt",
+            "sha256": "e261bd1dc52fddac17d3c3da12ea7c07d3271e0877774c8c00f733d05bdec2d7"
+          }
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/native-INSTALLED-TELEMETRY-4c566474/result.json",
+        "sha256": "182e466fa75e41dfdd0df8655bc9a9965a3e3866d465c664dff6e5b14b4b41a8"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/native-INSTALLED-TELEMETRY-4c566474/source-manifest.json",
+        "sha256": "360d96ebd8efb107110811fa99c1f9b1a60bbc8595938184f6710a0570beb7b1"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/native-INSTALLED-TELEMETRY-4c566474/source.zip",
+        "sha256": "0b672ad03ef6e477a02fcb4deb6c9b7b4f55d9ab98a046a19aa4b5462aab5ed0"
+      }
+    },
+    {
+      "stage": "native-GTK-HISTORY-LIMITS",
+      "source_base": "1e7f324fa95296552e8ea2477ae6ebc79b7df00d",
+      "source_archive_sha256": "0b672ad03ef6e477a02fcb4deb6c9b7b4f55d9ab98a046a19aa4b5462aab5ed0",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]GTK-HISTORY-LIMITS$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-11T23:30:06.977457+00:00",
+          "finished_at": "2026-10-11T23:43:09.522072+00:00",
+          "exit": 8,
+          "log_sha256": "b1c56e6c5748bdd9c688ce6f8a7291631db4eae9b04167edccb4cec4e2dc7c30",
+          "log": {
+            "local_path": "out/evidence/gtk-cell-lifetime-checks/native-GTK-HISTORY-LIMITS-bfaaaf9a/0.log",
+            "sha256": "b1c56e6c5748bdd9c688ce6f8a7291631db4eae9b04167edccb4cec4e2dc7c30"
+          },
+          "budget": {
+            "local_path": "out/evidence/gtk-cell-lifetime-checks/native-GTK-HISTORY-LIMITS-bfaaaf9a/budget-0.txt",
+            "sha256": "4393b173bb0cd5416f482c0d18f6f1c89566bb5b5d09afc7747046cf2ffc41b8"
+          }
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/native-GTK-HISTORY-LIMITS-bfaaaf9a/result.json",
+        "sha256": "55df2c9d49cd70ae3d0d044993fe235ca61b99138f13301d17086a986658e9f9"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/native-GTK-HISTORY-LIMITS-bfaaaf9a/source-manifest.json",
+        "sha256": "360d96ebd8efb107110811fa99c1f9b1a60bbc8595938184f6710a0570beb7b1"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/gtk-cell-lifetime-checks/native-GTK-HISTORY-LIMITS-bfaaaf9a/source.zip",
+        "sha256": "0b672ad03ef6e477a02fcb4deb6c9b7b4f55d9ab98a046a19aa4b5462aab5ed0"
+      }
+    }
+  ],
+  "latest_final_source_executions": {
+    "build": {
+      "local_path": "out/evidence/gtk-cell-lifetime-checks/build-987c6269/result.json",
+      "sha256": "08c32fc75466334635a1bff73d8a10d258def47fc1889665799d1f320029bec5"
+    },
+    "native-INSPECTOR-CELL-LIFETIME": {
+      "local_path": "out/evidence/gtk-cell-lifetime-checks/native-INSPECTOR-CELL-LIFETIME-92a5e4c9/result.json",
+      "sha256": "018e2157d270b1b96c2a62aca3d74ce066fb0f4d7f9df437f8cf1623617d2d51"
+    },
+    "composition": {
+      "local_path": "out/evidence/gtk-cell-lifetime-checks/composition-dd7c24ff/result.json",
+      "sha256": "b45050a4fc3e0e992a8fe60d7eef9c7918626b82a9b4a3f6e8a30790654e4189"
+    },
+    "native-GTK-CELL-LIFETIME": {
+      "local_path": "out/evidence/gtk-cell-lifetime-checks/native-GTK-CELL-LIFETIME-1fe71fc8/result.json",
+      "sha256": "a45e7a349869a14692715e18d107ddcbeb6e9f24dfe67ccf02114393771070df"
+    },
+    "native-INSPECTOR-LIVE-TABLES": {
+      "local_path": "out/evidence/gtk-cell-lifetime-checks/native-INSPECTOR-LIVE-TABLES-1bb95098/result.json",
+      "sha256": "50091ccc7565c7e18b7d2031f174873de221b80c14d1bc609503b7131be46bd9"
+    },
+    "history-regressions": {
+      "local_path": "out/evidence/gtk-cell-lifetime-checks/history-regressions-f2680b7b/result.json",
+      "sha256": "30bebcf26053afd992a9c1a3f119c44173a91fc3ee757366a38cee06ff227e12"
+    },
+    "native-TABLE-ERASURE": {
+      "local_path": "out/evidence/gtk-cell-lifetime-checks/native-TABLE-ERASURE-5a142379/result.json",
+      "sha256": "65c807a1e8c7c1bfa8be7a5dc0d156f8b25aa05382cf4aa5da999140de34ef48"
+    },
+    "native-INSTALLED-INSPECTOR": {
+      "local_path": "out/evidence/gtk-cell-lifetime-checks/native-INSTALLED-INSPECTOR-147e55cb/result.json",
+      "sha256": "b6932eb56f5639ed0ad64b622cf855f51cd99d99d4c353a649bce3590bc3ac69"
+    },
+    "native-INSTALLED-TELEMETRY": {
+      "local_path": "out/evidence/gtk-cell-lifetime-checks/native-INSTALLED-TELEMETRY-4c566474/result.json",
+      "sha256": "182e466fa75e41dfdd0df8655bc9a9965a3e3866d465c664dff6e5b14b4b41a8"
+    },
+    "native-GTK-HISTORY-LIMITS": {
+      "local_path": "out/evidence/gtk-cell-lifetime-checks/native-GTK-HISTORY-LIMITS-bfaaaf9a/result.json",
+      "sha256": "55df2c9d49cd70ae3d0d044993fe235ca61b99138f13301d17086a986658e9f9"
+    }
+  },
+  "native_archives": [
+    {
+      "label": "history-regressions",
+      "index": {
+        "local_path": "out/evidence/gtk-cell-lifetime-native/history-regressions/index.json",
+        "sha256": "ff723d726d8849d6d62af48c4d2a9fdb3bcd2282f4fba8e423a9f7ee7f20c709"
+      },
+      "archive": {
+        "local_path": "out/evidence/gtk-cell-lifetime-native/history-regressions/native-evidence.zip",
+        "sha256": "de0621c781c92690ea029efcabd84f4d49f9a19bf007f67ae2f46e45f4575461"
+      },
+      "verified_nodes": 116,
+      "preserved_bytes": 3645736,
+      "reports": [
+        {
+          "path": "chart-frame-limits-3216df09dc08/result.json",
+          "sha256": "38f33c15cb9fa71e595194ef06919a576a7c9c1b2dab892e3c27af9d26c2be58",
+          "outcome": "pass",
+          "source_records": [
+            "out/evidence/gtk-cell-lifetime-checks/build-2ee3fef6/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/build-987c6269/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/build-e6fd7336/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/build-f2e5295e/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/build-ff891854/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/composition-132de83a/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/composition-dd7c24ff/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/history-regressions-16bab7eb/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/history-regressions-f2680b7b/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-GTK-CELL-LIFETIME-1ea7042a/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-GTK-CELL-LIFETIME-1fe71fc8/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-GTK-CELL-LIFETIME-44c1c80c/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-GTK-HISTORY-LIMITS-bfaaaf9a/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-INSPECTOR-CELL-LIFETIME-4c221e22/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-INSPECTOR-CELL-LIFETIME-60092814/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-INSPECTOR-CELL-LIFETIME-92a5e4c9/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-INSPECTOR-LIVE-TABLES-1bb95098/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-INSPECTOR-LIVE-TABLES-660a9d9b/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-INSTALLED-INSPECTOR-147e55cb/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-INSTALLED-INSPECTOR-649190de/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-INSTALLED-TELEMETRY-4c566474/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-INSTALLED-TELEMETRY-b7ce1ed0/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-TABLE-ERASURE-5a142379/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-TABLE-ERASURE-8b4eecf8/result.json"
+          ],
+          "family": "CHART-FRAME-LIMITS",
+          "executable_sha256": "18f56e3a760c55a366f2986a8db43eeafeb07353a99100a0bdeb3827ffd90997",
+          "cases": [
+            {
+              "case": null,
+              "outcome": "pass"
+            },
+            {
+              "case": null,
+              "outcome": "pass"
+            },
+            {
+              "case": null,
+              "outcome": "pass"
+            },
+            {
+              "case": null,
+              "outcome": "pass"
+            },
+            {
+              "case": null,
+              "outcome": "pass"
+            },
+            {
+              "case": null,
+              "outcome": "pass"
+            }
+          ]
+        },
+        {
+          "path": "inspector-0aca39522fc2/chart/result.json",
+          "sha256": "fb78362244e4caf3c6c6c3e331a04f5116e30cebb7a532962017ce793b8256dd",
+          "outcome": "pass",
+          "executable_sha256": "18f56e3a760c55a366f2986a8db43eeafeb07353a99100a0bdeb3827ffd90997"
+        },
+        {
+          "path": "inspector-0aca39522fc2/image/result.json",
+          "sha256": "0cfc1c9d1b7be22631e5688b64b6a092406eda0e532022f71a5e56cdbdcd62cc",
+          "outcome": "pass",
+          "executable_sha256": "18f56e3a760c55a366f2986a8db43eeafeb07353a99100a0bdeb3827ffd90997"
+        },
+        {
+          "path": "inspector-0aca39522fc2/result.json",
+          "sha256": "2c6bc9805a7d0543457ada46ecbbef12e3147141d720f62affaf143cf0b35a47",
+          "outcome": "pass",
+          "family": "SCENE-INSPECTOR",
+          "executable_sha256": "18f56e3a760c55a366f2986a8db43eeafeb07353a99100a0bdeb3827ffd90997",
+          "cases": [
+            {
+              "case": "scalar",
+              "outcome": "pass"
+            },
+            {
+              "case": "table",
+              "outcome": "pass"
+            },
+            {
+              "case": "chart",
+              "outcome": "pass"
+            },
+            {
+              "case": "image",
+              "outcome": "pass"
+            },
+            {
+              "case": "translated",
+              "outcome": "pass"
+            },
+            {
+              "case": "retain",
+              "outcome": "pass"
+            },
+            {
+              "case": "wrong-selection",
+              "outcome": "pass"
+            }
+          ]
+        },
+        {
+          "path": "inspector-0aca39522fc2/retain/result.json",
+          "sha256": "77e98e8ed5e7bb70140891deaa06b5220f72d522438bd075409e2d6b332a550a",
+          "outcome": "pass",
+          "executable_sha256": "18f56e3a760c55a366f2986a8db43eeafeb07353a99100a0bdeb3827ffd90997"
+        },
+        {
+          "path": "inspector-0aca39522fc2/scalar/result.json",
+          "sha256": "8720554d74c1bcf0a5f2f75e0fa539f05856e5a6f6c8b141f370e8d73cec8eec",
+          "outcome": "pass",
+          "executable_sha256": "18f56e3a760c55a366f2986a8db43eeafeb07353a99100a0bdeb3827ffd90997"
+        },
+        {
+          "path": "inspector-0aca39522fc2/table/result.json",
+          "sha256": "3257fcc5d1500126d6f9c9cae4f7caf9222df421439d101e2608148548ae7b6c",
+          "outcome": "pass",
+          "executable_sha256": "18f56e3a760c55a366f2986a8db43eeafeb07353a99100a0bdeb3827ffd90997"
+        },
+        {
+          "path": "inspector-0aca39522fc2/translated/result.json",
+          "sha256": "1eb24662ed11f1362a885b8de8050906d9c0d9b2be682b41954abaeafedb17d9",
+          "outcome": "pass",
+          "executable_sha256": "18f56e3a760c55a366f2986a8db43eeafeb07353a99100a0bdeb3827ffd90997"
+        },
+        {
+          "path": "inspector-0aca39522fc2/wrong-selection/result.json",
+          "sha256": "f720fcddf64c072b8566206429d0ea5d5d7ff21d077f82d60e6cb1b407ce5b07",
+          "outcome": "pass",
+          "executable_sha256": "18f56e3a760c55a366f2986a8db43eeafeb07353a99100a0bdeb3827ffd90997"
+        },
+        {
+          "path": "inspector-0fbddecb9dbc/chart/result.json",
+          "sha256": "0dbc9f6410d5a6b34aa86a2866b58b57d7f9b5878eea14d53d1cafb3191f8b91",
+          "outcome": "pass",
+          "executable_sha256": "18f56e3a760c55a366f2986a8db43eeafeb07353a99100a0bdeb3827ffd90997"
+        },
+        {
+          "path": "inspector-0fbddecb9dbc/image/result.json",
+          "sha256": "995adcacb1559377106b25921df15cda44b2cdddbaa121a60d6010e531f949de",
+          "outcome": "pass",
+          "executable_sha256": "18f56e3a760c55a366f2986a8db43eeafeb07353a99100a0bdeb3827ffd90997"
+        },
+        {
+          "path": "inspector-0fbddecb9dbc/result.json",
+          "sha256": "208ab733ccf66a75056120ee37a1082d7cd032e4bfb5356299e339ac25aa66cf",
+          "outcome": "pass",
+          "family": "SCENE-INSPECTOR",
+          "executable_sha256": "18f56e3a760c55a366f2986a8db43eeafeb07353a99100a0bdeb3827ffd90997",
+          "cases": [
+            {
+              "case": "scalar",
+              "outcome": "pass"
+            },
+            {
+              "case": "table",
+              "outcome": "pass"
+            },
+            {
+              "case": "chart",
+              "outcome": "pass"
+            },
+            {
+              "case": "image",
+              "outcome": "pass"
+            },
+            {
+              "case": "translated",
+              "outcome": "pass"
+            },
+            {
+              "case": "retain",
+              "outcome": "pass"
+            },
+            {
+              "case": "wrong-selection",
+              "outcome": "pass"
+            }
+          ]
+        },
+        {
+          "path": "inspector-0fbddecb9dbc/retain/result.json",
+          "sha256": "7270a919cbe893952ec09dd964378ed34005e4d63ebe32922f5a93e73d636683",
+          "outcome": "pass",
+          "executable_sha256": "18f56e3a760c55a366f2986a8db43eeafeb07353a99100a0bdeb3827ffd90997"
+        },
+        {
+          "path": "inspector-0fbddecb9dbc/scalar/result.json",
+          "sha256": "377ec48029a7ecb538431578cfb0af8b3d9c72eeffbb7578b80e893e94831d50",
+          "outcome": "pass",
+          "executable_sha256": "18f56e3a760c55a366f2986a8db43eeafeb07353a99100a0bdeb3827ffd90997"
+        },
+        {
+          "path": "inspector-0fbddecb9dbc/table/result.json",
+          "sha256": "6dc0fc1ca588fc28301c77f59711e00bd17a28a808307b16aecefda121571dae",
+          "outcome": "pass",
+          "executable_sha256": "18f56e3a760c55a366f2986a8db43eeafeb07353a99100a0bdeb3827ffd90997"
+        },
+        {
+          "path": "inspector-0fbddecb9dbc/translated/result.json",
+          "sha256": "7fe2649c947470e75ced4f046a2289301b9e029a67b5a76d6b0b74caa5a00527",
+          "outcome": "pass",
+          "executable_sha256": "18f56e3a760c55a366f2986a8db43eeafeb07353a99100a0bdeb3827ffd90997"
+        },
+        {
+          "path": "inspector-0fbddecb9dbc/wrong-selection/result.json",
+          "sha256": "dd278069761ff04703b67d5b726b04ccef06e3d168e3844df7a937989339f4a6",
+          "outcome": "pass",
+          "executable_sha256": "18f56e3a760c55a366f2986a8db43eeafeb07353a99100a0bdeb3827ffd90997"
+        }
+      ]
+    },
+    {
+      "label": "installed-inspector",
+      "index": {
+        "local_path": "out/evidence/gtk-cell-lifetime-native/installed-inspector/index.json",
+        "sha256": "de2d332f7ae9949e6ab4a076db5280f4726ed97a8089e5b84d2aae05af96ef04"
+      },
+      "archive": {
+        "local_path": "out/evidence/gtk-cell-lifetime-native/installed-inspector/native-evidence.zip",
+        "sha256": "bf363b868c25deafc08c9b4b32fb853c2a1988c346b87d233e1e90693d659c04"
+      },
+      "verified_nodes": 584,
+      "preserved_bytes": 149096754,
+      "reports": [
+        {
+          "path": "inspector-frontend-d091cd12e2/CLOSE/result.json",
+          "sha256": "95abf25fd14d8cc6dcfd8fc43d5fc163e88afbe20759babf1a72dee0d68c098d",
+          "outcome": "pass"
+        },
+        {
+          "path": "inspector-frontend-d091cd12e2/DRAFT-NAV/result.json",
+          "sha256": "45e7583390470a8df413177d347038cafc47244393279f23e715e5d58966b748",
+          "outcome": "pass"
+        },
+        {
+          "path": "inspector-frontend-d091cd12e2/NAVIGATION/result.json",
+          "sha256": "1a0a359db8e353cb9247af63e9588622abe8f963e314ee34e0b7ff6b80c32d0a",
+          "outcome": "pass"
+        },
+        {
+          "path": "inspector-frontend-d091cd12e2/OPEN/result.json",
+          "sha256": "ebc7489674ac9a7fccf4c630de4d0009ee381295bed3ff5729a78a12968b6bb6",
+          "outcome": "pass"
+        },
+        {
+          "path": "inspector-frontend-d091cd12e2/ORACLE/result.json",
+          "sha256": "b68fc950be965aae4a0c7c6774ce3da427b15a8968aab1d04efc01fe3ffd28ba",
+          "outcome": "pass"
+        },
+        {
+          "path": "inspector-frontend-d091cd12e2/POLICY/result.json",
+          "sha256": "b8f500a928422e2e2af2990963ef5efc9e4cdb59428879b7db2915cacbc119cb",
+          "outcome": "pass"
+        },
+        {
+          "path": "inspector-frontend-d091cd12e2/PRIVATE-NAV/result.json",
+          "sha256": "47af01c8a64a6ee171763b3cb2c90fa24358583d8c37fc454d81388c8973f6db",
+          "outcome": "pass"
+        },
+        {
+          "path": "inspector-frontend-d091cd12e2/RELOAD/result.json",
+          "sha256": "98ba4e5ad8a3e4459758d9f92c29e9d8c437c31cb1acf0f3358e0510eadb7037",
+          "outcome": "pass"
+        },
+        {
+          "path": "inspector-frontend-d091cd12e2/REPLACEMENT/result.json",
+          "sha256": "41c6e473cbf69ec469c121eedf7ca9ec493cd9221b9268ea1463f2b82f314e55",
+          "outcome": "pass"
+        },
+        {
+          "path": "inspector-frontend-d091cd12e2/REQUEST-NAV/result.json",
+          "sha256": "fc12b1adf5863292a1098f12fbc0ad852ead49ef3f3f61378dcf3f523a2d1a43",
+          "outcome": "pass"
+        },
+        {
+          "path": "inspector-frontend-d091cd12e2/SAVE-REOPEN/result.json",
+          "sha256": "bcdc8458a9e31b9e71a8f64067b12291a323e1e55ac94bc296c0a5fcd6728d69",
+          "outcome": "pass"
+        },
+        {
+          "path": "inspector-frontend-d091cd12e2/SUMMARY/result.json",
+          "sha256": "e16f9a7684465a000489ea26b09292509d31b0e0f701ed86a5a073e29ab46d3b",
+          "outcome": "pass"
+        },
+        {
+          "path": "inspector-frontend-d091cd12e2/result.json",
+          "sha256": "6cec4eb5bd215bf51b3316d0c68f044ae727c26bd66f7f59b54be1a24ed2742e",
+          "outcome": "pass",
+          "family": "INSTALLED-INSPECTOR",
+          "cases": [
+            {
+              "case": "OPEN",
+              "outcome": "pass"
+            },
+            {
+              "case": "SUMMARY",
+              "outcome": "pass"
+            },
+            {
+              "case": "NAVIGATION",
+              "outcome": "pass"
+            },
+            {
+              "case": "SAVE-REOPEN",
+              "outcome": "pass"
+            },
+            {
+              "case": "PRIVATE-NAV",
+              "outcome": "pass"
+            },
+            {
+              "case": "DRAFT-NAV",
+              "outcome": "pass"
+            },
+            {
+              "case": "REQUEST-NAV",
+              "outcome": "pass"
+            },
+            {
+              "case": "RELOAD",
+              "outcome": "pass"
+            },
+            {
+              "case": "POLICY",
+              "outcome": "pass"
+            },
+            {
+              "case": "REPLACEMENT",
+              "outcome": "pass"
+            },
+            {
+              "case": "CLOSE",
+              "outcome": "pass"
+            },
+            {
+              "case": "ORACLE",
+              "outcome": "pass"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "installed-telemetry",
+      "index": {
+        "local_path": "out/evidence/gtk-cell-lifetime-native/installed-telemetry/index.json",
+        "sha256": "389064e6b2499c9be0378a06de47760055b77efebdfb0827202894d9e1fcf835"
+      },
+      "archive": {
+        "local_path": "out/evidence/gtk-cell-lifetime-native/installed-telemetry/native-evidence.zip",
+        "sha256": "1d6f86537efc754b6bf4479be2d144ddf20536eee4f002735b2ed80cf884d9e9"
+      },
+      "verified_nodes": 340,
+      "preserved_bytes": 149082673,
+      "reports": [
+        {
+          "path": "telemetry-frontend-9eb4e7ee0f/CLOSE-HELD/result.json",
+          "sha256": "6d7b314a124edaa7b9cacfa4237446fefd63d8e7978e21ac311bc284ea7baa1c",
+          "outcome": "pass"
+        },
+        {
+          "path": "telemetry-frontend-9eb4e7ee0f/CONFIGURATION-LOSS/result.json",
+          "sha256": "1982f85bafb4d043358d56966c847f01ce36e4baa0b89008d1441f3e4e16792f",
+          "outcome": "pass"
+        },
+        {
+          "path": "telemetry-frontend-9eb4e7ee0f/LIVE/result.json",
+          "sha256": "57064bc2851bfff926e7242ea5e002c8b9877a97de5533c95774e7b842fd898e",
+          "outcome": "pass"
+        },
+        {
+          "path": "telemetry-frontend-9eb4e7ee0f/NAVIGATION/result.json",
+          "sha256": "87420839082cd0cd22298f42bf57f6733bcfab96c5fd1041e0d7d67496386f77",
+          "outcome": "pass"
+        },
+        {
+          "path": "telemetry-frontend-9eb4e7ee0f/ORACLE/result.json",
+          "sha256": "37b1045ca04c1fe4ed60a930b7648fe1aca1533d40fb4fec38405846c1d17a17",
+          "outcome": "pass"
+        },
+        {
+          "path": "telemetry-frontend-9eb4e7ee0f/POLICY/result.json",
+          "sha256": "d09d3dcd6fd30703d7dde2947ecdd167814987e179aa34727ad8a0489483345b",
+          "outcome": "pass"
+        },
+        {
+          "path": "telemetry-frontend-9eb4e7ee0f/REPLACEMENT/result.json",
+          "sha256": "b4db89e59d2b54b0ef4f25f8f7d0562592e22659bc04c28ccf9f06b919ca8846",
+          "outcome": "pass"
+        },
+        {
+          "path": "telemetry-frontend-9eb4e7ee0f/result.json",
+          "sha256": "354a51e4cefbffa0599075d5f7ac4b7c2b926064fe064388773667cbdba206bc",
+          "outcome": "pass",
+          "family": "INSTALLED-TELEMETRY",
+          "cases": [
+            {
+              "case": "LIVE",
+              "outcome": "pass"
+            },
+            {
+              "case": "NAVIGATION",
+              "outcome": "pass"
+            },
+            {
+              "case": "REPLACEMENT",
+              "outcome": "pass"
+            },
+            {
+              "case": "POLICY",
+              "outcome": "pass"
+            },
+            {
+              "case": "CONFIGURATION-LOSS",
+              "outcome": "pass"
+            },
+            {
+              "case": "CLOSE-HELD",
+              "outcome": "pass"
+            },
+            {
+              "case": "ORACLE",
+              "outcome": "pass"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "integrated-lifetime-before-optimization",
+      "index": {
+        "local_path": "out/evidence/gtk-cell-lifetime-native/integrated-lifetime-before-optimization/index.json",
+        "sha256": "ee28e460b2f986e1a3071b2352fb8518adbc6894ce21a801517bb39843dfd8c4"
+      },
+      "archive": {
+        "local_path": "out/evidence/gtk-cell-lifetime-native/integrated-lifetime-before-optimization/native-evidence.zip",
+        "sha256": "1e7e99de4321d19dbfd3fc6186177b767fc320c6e5afe688b533e0ad0aef6c7a"
+      },
+      "verified_nodes": 17,
+      "preserved_bytes": 5625079,
+      "reports": [
+        {
+          "path": "gtk-accessible-erase-0a1c8ddbd964/lifetime-collapsed/result.json",
+          "sha256": "ecc3f2198c50157ad66c6af168370d278c08d4d7ca049a3fa4a2da55a3dc6f56",
+          "outcome": "pass",
+          "cohort": "collapsed",
+          "stages": [
+            {
+              "ack": "retire",
+              "callback_us": 338560,
+              "collapsed_leaks": 0,
+              "count_leaks": 0,
+              "held_cells": 6344,
+              "local_checked": false,
+              "mutation_us": 0,
+              "name_leaks": 0,
+              "reply_ms": 338.82326196180657,
+              "retired_checked": true,
+              "retired_leaks": 0,
+              "text_leaks": 0,
+              "word_leaks": 0
+            },
+            {
+              "ack": "erase",
+              "callback_us": 12702,
+              "collapsed_leaks": 0,
+              "count_leaks": 0,
+              "held_cells": 6344,
+              "local_checked": true,
+              "mutation_us": 11316,
+              "name_leaks": 0,
+              "reply_ms": 12.871225946582854,
+              "retired_checked": false,
+              "retired_leaks": 0,
+              "text_leaks": 0,
+              "word_leaks": 0
+            },
+            {
+              "ack": "recover",
+              "callback_us": 2489,
+              "collapsed_leaks": 0,
+              "count_leaks": 0,
+              "held_cells": 6344,
+              "local_checked": true,
+              "mutation_us": 0,
+              "name_leaks": 0,
+              "reply_ms": 3.143868991173804,
+              "retired_checked": false,
+              "retired_leaks": 0,
+              "text_leaks": 0,
+              "word_leaks": 0
+            },
+            {
+              "ack": "quit",
+              "callback_us": 4,
+              "collapsed_leaks": 0,
+              "count_leaks": 0,
+              "held_cells": 6344,
+              "local_checked": false,
+              "mutation_us": 0,
+              "name_leaks": 0,
+              "reply_ms": 3.543128026649356,
+              "retired_checked": false,
+              "retired_leaks": 0,
+              "text_leaks": 0,
+              "word_leaks": 0
+            }
+          ],
+          "wire_journal": {
+            "path": "gtk-accessible-erase-0a1c8ddbd964/lifetime-collapsed/wire.json",
+            "sha256": "bd80c6bc571693df58dc7f3148f31b0fc912f4f40c9746d56fd6784df94e9c91",
+            "bytes": 2801961,
+            "requests": 88816,
+            "successful": 0,
+            "withdrawn": 88816
+          },
+          "actual_exit": true,
+          "lifetime_semantics": true,
+          "performance_qualified": false
+        },
+        {
+          "path": "gtk-accessible-erase-0a1c8ddbd964/lifetime-expanded/result.json",
+          "sha256": "93b20a7b0e84ad289b740b95ce338d24b60146ececc6053ccd25a1442b330f2e",
+          "outcome": "pass",
+          "cohort": "expanded",
+          "stages": [
+            {
+              "ack": "retire",
+              "callback_us": 4457,
+              "collapsed_leaks": 0,
+              "count_leaks": 0,
+              "held_cells": 6344,
+              "local_checked": false,
+              "mutation_us": 0,
+              "name_leaks": 0,
+              "reply_ms": 4.637946956790984,
+              "retired_checked": true,
+              "retired_leaks": 0,
+              "text_leaks": 0,
+              "word_leaks": 0
+            },
+            {
+              "ack": "erase",
+              "callback_us": 907390,
+              "collapsed_leaks": 0,
+              "count_leaks": 0,
+              "held_cells": 6344,
+              "local_checked": true,
+              "mutation_us": 905965,
+              "name_leaks": 0,
+              "reply_ms": 907.5351280043833,
+              "retired_checked": false,
+              "retired_leaks": 0,
+              "text_leaks": 0,
+              "word_leaks": 0
+            },
+            {
+              "ack": "recover",
+              "callback_us": 1884,
+              "collapsed_leaks": 0,
+              "count_leaks": 0,
+              "held_cells": 6344,
+              "local_checked": true,
+              "mutation_us": 0,
+              "name_leaks": 0,
+              "reply_ms": 2.01615400146693,
+              "retired_checked": false,
+              "retired_leaks": 0,
+              "text_leaks": 0,
+              "word_leaks": 0
+            },
+            {
+              "ack": "quit",
+              "callback_us": 3,
+              "collapsed_leaks": 0,
+              "count_leaks": 0,
+              "held_cells": 6344,
+              "local_checked": false,
+              "mutation_us": 0,
+              "name_leaks": 0,
+              "reply_ms": 0.6063440232537687,
+              "retired_checked": false,
+              "retired_leaks": 0,
+              "text_leaks": 0,
+              "word_leaks": 0
+            }
+          ],
+          "wire_journal": {
+            "path": "gtk-accessible-erase-0a1c8ddbd964/lifetime-expanded/wire.json",
+            "sha256": "bd80c6bc571693df58dc7f3148f31b0fc912f4f40c9746d56fd6784df94e9c91",
+            "bytes": 2801961,
+            "requests": 88816,
+            "successful": 0,
+            "withdrawn": 88816
+          },
+          "actual_exit": true,
+          "lifetime_semantics": true,
+          "performance_qualified": false
+        },
+        {
+          "path": "gtk-accessible-erase-0a1c8ddbd964/result.json",
+          "sha256": "8109cad95a69b149e2456888e1674ac59c9025b91734b7b50eb1fe95320b7b7b",
+          "outcome": "pass",
+          "source_records": [
+            "out/evidence/gtk-cell-lifetime-checks/build-2ee3fef6/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/build-f2e5295e/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/build-ff891854/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/composition-132de83a/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/history-regressions-16bab7eb/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-GTK-CELL-LIFETIME-1ea7042a/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-GTK-CELL-LIFETIME-44c1c80c/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-INSPECTOR-CELL-LIFETIME-4c221e22/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-INSPECTOR-CELL-LIFETIME-60092814/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-INSPECTOR-LIVE-TABLES-660a9d9b/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-INSTALLED-INSPECTOR-649190de/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-INSTALLED-TELEMETRY-b7ce1ed0/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-TABLE-ERASURE-8b4eecf8/result.json"
+          ],
+          "family": "GTK-CELL-LIFETIME",
+          "executable_sha256": "d7937277e7e0fcf321e4ed6b729b114476336e38a6575fa9a4841b9e169a26aa",
+          "cases": [
+            {
+              "case": "lifetime-expanded",
+              "outcome": "pass"
+            },
+            {
+              "case": "lifetime-collapsed",
+              "outcome": "pass"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "live-tables-failure",
+      "index": {
+        "local_path": "out/evidence/gtk-cell-lifetime-native/live-tables-failure/index.json",
+        "sha256": "0188c6777c1eecf52c6fa35252383ce33ca4180c8899f267404a214d4a2771e7"
+      },
+      "archive": {
+        "local_path": "out/evidence/gtk-cell-lifetime-native/live-tables-failure/native-evidence.zip",
+        "sha256": "7325622249d19539194c29e2067298e60f60043558fc637637d73cd6a5de410e"
+      },
+      "verified_nodes": 442,
+      "preserved_bytes": 152192333,
+      "reports": [
+        {
+          "path": "inspector-live-table-3be0d68ad7/MAX-CELLS/result.json",
+          "sha256": "b14251cd4dffc3665323de436b10b82fd5e58c7539eebd7cf26f7a72c53cf58e",
+          "outcome": "pass",
+          "case": "MAX-CELLS",
+          "timing_max_us": {
+            "delay_us": 73567,
+            "work_us": 24609
+          },
+          "timing_violations": [],
+          "erasure_ms": null,
+          "frontend_sha256": "1f466ed458c7088a6ef3edb0f2d804698b68fb79bddf4c65940309ecda2fb986",
+          "failure": null
+        },
+        {
+          "path": "inspector-live-table-3be0d68ad7/MAX-ROWS/result.json",
+          "sha256": "8653dcf7d50e660c936acf5c2a3ac1e1671148facf5b3bd5af2f2ff3b0a32e93",
+          "outcome": "pass",
+          "case": "MAX-ROWS",
+          "timing_max_us": {
+            "delay_us": 27141,
+            "work_us": 34557
+          },
+          "timing_violations": [],
+          "erasure_ms": null,
+          "frontend_sha256": "1f466ed458c7088a6ef3edb0f2d804698b68fb79bddf4c65940309ecda2fb986",
+          "failure": null
+        },
+        {
+          "path": "inspector-live-table-3be0d68ad7/NAVIGATION/result.json",
+          "sha256": "20d2f2d8f47925630fdf7a4441095f93b44bb2b8752fa260a79cbf377b756b46",
+          "outcome": "pass",
+          "case": "NAVIGATION",
+          "timing_max_us": {
+            "delay_us": 67720,
+            "work_us": 39361
+          },
+          "timing_violations": [],
+          "erasure_ms": null,
+          "frontend_sha256": "1f466ed458c7088a6ef3edb0f2d804698b68fb79bddf4c65940309ecda2fb986",
+          "failure": null
+        },
+        {
+          "path": "inspector-live-table-3be0d68ad7/ORACLE/result.json",
+          "sha256": "0310adaf35c2bea03ef2031857ae15ce8eb080b6a92c394d5fef8de2d0c5944d",
+          "outcome": "pass",
+          "case": "ORACLE",
+          "timing_max_us": {
+            "delay_us": 77075,
+            "work_us": 36638
+          },
+          "timing_violations": [],
+          "erasure_ms": null,
+          "frontend_sha256": "1f466ed458c7088a6ef3edb0f2d804698b68fb79bddf4c65940309ecda2fb986",
+          "failure": null
+        },
+        {
+          "path": "inspector-live-table-3be0d68ad7/OVER-CELLS/result.json",
+          "sha256": "289f7759a79a1507f8b96ef0029d50bb9afb7e74e00fa532eeb02a6509fbc33f",
+          "outcome": "pass",
+          "case": "OVER-CELLS",
+          "timing_max_us": {
+            "delay_us": 1899,
+            "work_us": 26923
+          },
+          "timing_violations": [],
+          "erasure_ms": null,
+          "frontend_sha256": "1f466ed458c7088a6ef3edb0f2d804698b68fb79bddf4c65940309ecda2fb986",
+          "failure": null
+        },
+        {
+          "path": "inspector-live-table-3be0d68ad7/POLICY/result.json",
+          "sha256": "c26158124928c936c4e8d6484cf4de72ff57e28ff2f891ab57eb64886b6c208f",
+          "outcome": "fail",
+          "case": "POLICY",
+          "timing_max_us": {
+            "delay_us": 8771,
+            "work_us": 106937
+          },
+          "timing_violations": [
+            {
+              "delay_us": 0,
+              "index": 425,
+              "pid": 1672009,
+              "work_us": 106937
+            }
+          ],
+          "erasure_ms": 169.4899220019579,
+          "frontend_sha256": "1f466ed458c7088a6ef3edb0f2d804698b68fb79bddf4c65940309ecda2fb986",
+          "failure": "Traceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_installed_editor.py\", line 240, in observe\n    extension(dict(locals(),process=lambda:proc));report['outcome']='pass';return\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_inspector_live_tables.py\", line 89, in exercise\n    assert not report['timing_violations'],('GUI timing limit exceeded',report['timing_violations'])\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: ('GUI timing limit exceeded', [{'index': 425, 'pid': 1672009, 'work_us': 106937, 'delay_us': 0}])\n"
+        },
+        {
+          "path": "inspector-live-table-3be0d68ad7/TRUNCATION/result.json",
+          "sha256": "0fb1ddc3755f1742f2ea3a3d39b3285d9d113febd0e45a0eda47c713e05b9a9f",
+          "outcome": "pass",
+          "case": "TRUNCATION",
+          "timing_max_us": {
+            "delay_us": 61887,
+            "work_us": 31885
+          },
+          "timing_violations": [],
+          "erasure_ms": null,
+          "frontend_sha256": "1f466ed458c7088a6ef3edb0f2d804698b68fb79bddf4c65940309ecda2fb986",
+          "failure": null
+        },
+        {
+          "path": "inspector-live-table-3be0d68ad7/result.json",
+          "sha256": "ea551599c0f627e4c60b86bd154ec5e8c34f9ae6877d2210ca0476714e0355d7",
+          "outcome": "fail",
+          "family": "INSPECTOR-LIVE-TABLES",
+          "cases": [
+            {
+              "case": "MAX-ROWS",
+              "outcome": "pass"
+            },
+            {
+              "case": "MAX-CELLS",
+              "outcome": "pass"
+            },
+            {
+              "case": "TRUNCATION",
+              "outcome": "pass"
+            },
+            {
+              "case": "OVER-CELLS",
+              "outcome": "pass"
+            },
+            {
+              "case": "NAVIGATION",
+              "outcome": "pass"
+            },
+            {
+              "case": "POLICY",
+              "outcome": "fail"
+            },
+            {
+              "case": "ORACLE",
+              "outcome": "pass"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "optimized-history-limits",
+      "index": {
+        "local_path": "out/evidence/gtk-cell-lifetime-native/optimized-history-limits/index.json",
+        "sha256": "53b5eba65b630a00ed18ac7c03dece19f9a774672ebdbe30057e1c578a05f517"
+      },
+      "archive": {
+        "local_path": "out/evidence/gtk-cell-lifetime-native/optimized-history-limits/native-evidence.zip",
+        "sha256": "89c2ffc36d59cbc8c167086ee76d0f4e9a51f6ee0edfd97ac80ea490383b5458"
+      },
+      "verified_nodes": 21,
+      "preserved_bytes": 1276532,
+      "reports": [
+        {
+          "path": "gtk-history-eddfc9b0a2ce/chart/result.json",
+          "sha256": "9847c9105fd9226375d78943cbfaa6081175c0cec3d8bb7a9a1e87ed381ece14",
+          "outcome": "fail",
+          "case": "chart",
+          "timing_max_us": {
+            "delay_us": 1734,
+            "work_us": 718584
+          },
+          "timing_records": 15973,
+          "timing_violations": [
+            {
+              "delay_us": 446,
+              "index": 15957,
+              "work_us": 718584
+            }
+          ],
+          "observations": [
+            {
+              "ack": "fill",
+              "command_work_us": 0,
+              "generation": 3138,
+              "reason": ""
+            },
+            {
+              "generation": 3138,
+              "rows": 3139,
+              "sha256": "9fad730fbbcb7af09fe93c7b8f683dd29831fc106db5f202ed708015e00d7367"
+            },
+            {
+              "ack": "over",
+              "command_work_us": 1,
+              "generation": 3139,
+              "reason": "surface.capacity"
+            },
+            {
+              "ack": "recover",
+              "command_work_us": 1,
+              "generation": 4098,
+              "reason": ""
+            },
+            {
+              "generation": 4098,
+              "rows": 2,
+              "sha256": "d451a899eb91ee8681165088ad6cf3aef7a3b28b3562c6d592fda2f2fc610266"
+            },
+            {
+              "ack": "revoke",
+              "command_work_us": 531,
+              "generation": 4098,
+              "reason": ""
+            },
+            {
+              "ack": "fresh",
+              "command_work_us": 49,
+              "generation": 4099,
+              "reason": ""
+            },
+            {
+              "generation": 4099,
+              "rows": 2,
+              "sha256": "8f41b7d11f89df8a005af0e947cddb18d217cadf86d7fc959cda5f5318d9cd76"
+            },
+            {
+              "ack": "close",
+              "command_work_us": 454,
+              "generation": 4099,
+              "producer": {
+                "accepted": 3141,
+                "clock_gap_max_ms": 34,
+                "failure": 0,
+                "publication_max_us": 3545,
+                "receiver_owner": true,
+                "renderer_stopped": true,
+                "stopped": true
+              },
+              "reason": "surface.closed"
+            },
+            {
+              "ack": "quit",
+              "command_work_us": 5,
+              "generation": 4099,
+              "reason": "surface.closed"
+            }
+          ],
+          "failure": null,
+          "timing_failure": null
+        },
+        {
+          "path": "gtk-history-eddfc9b0a2ce/mixed/result.json",
+          "sha256": "a363d26168ca5f6a37cb3d287e792e91d39a5fc388d94653b9a44ab2467f9762",
+          "outcome": "fail",
+          "case": "mixed",
+          "timing_max_us": {
+            "delay_us": 75321,
+            "work_us": 534685
+          },
+          "timing_records": 21073,
+          "timing_violations": [
+            {
+              "delay_us": 858,
+              "index": 21037,
+              "work_us": 534685
+            }
+          ],
+          "observations": [
+            {
+              "ack": "fill",
+              "command_work_us": 1,
+              "generation": 2087,
+              "reason": ""
+            },
+            {
+              "generation": 2087,
+              "rows": 2409,
+              "sha256": "fc69335c07d68f6f0735569f9f38ed45cc5ce2f7e4ca302878f85441229d43de"
+            },
+            {
+              "ack": "over",
+              "command_work_us": 1,
+              "generation": 2088,
+              "reason": "surface.capacity"
+            },
+            {
+              "ack": "recover",
+              "command_work_us": 2,
+              "generation": 4098,
+              "reason": ""
+            },
+            {
+              "generation": 4098,
+              "rows": 323,
+              "sha256": "4d1bf33bf19c90091a91eb7f1c986ede1e06b48c3921738cb918d5d698fcfd71"
+            },
+            {
+              "ack": "revoke",
+              "command_work_us": 77023,
+              "generation": 4098,
+              "reason": ""
+            },
+            {
+              "ack": "fresh",
+              "command_work_us": 65,
+              "generation": 4099,
+              "reason": ""
+            },
+            {
+              "generation": 4099,
+              "rows": 323,
+              "sha256": "2610843462fb8bde847d1feb53d31bf523109e170210f77de9b11716678a8c8a"
+            },
+            {
+              "ack": "close",
+              "command_work_us": 76727,
+              "generation": 4099,
+              "producer": {
+                "accepted": 2090,
+                "clock_gap_max_ms": 150,
+                "failure": 0,
+                "publication_max_us": 191929,
+                "receiver_owner": true,
+                "renderer_stopped": true,
+                "stopped": true
+              },
+              "reason": "surface.closed"
+            },
+            {
+              "ack": "quit",
+              "command_work_us": 4,
+              "generation": 4099,
+              "reason": "surface.closed"
+            }
+          ],
+          "failure": null,
+          "timing_failure": null
+        },
+        {
+          "path": "gtk-history-eddfc9b0a2ce/result.json",
+          "sha256": "2698f84501168be9bddf0a62a7e92bbfa9d023c472a825821d8faf3ee40b2b45",
+          "outcome": "fail",
+          "source_records": [
+            "out/evidence/gtk-cell-lifetime-checks/build-2ee3fef6/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/build-987c6269/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/build-e6fd7336/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/build-f2e5295e/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/build-ff891854/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/composition-132de83a/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/composition-dd7c24ff/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/history-regressions-16bab7eb/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/history-regressions-f2680b7b/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-GTK-CELL-LIFETIME-1ea7042a/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-GTK-CELL-LIFETIME-1fe71fc8/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-GTK-CELL-LIFETIME-44c1c80c/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-GTK-HISTORY-LIMITS-bfaaaf9a/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-INSPECTOR-CELL-LIFETIME-4c221e22/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-INSPECTOR-CELL-LIFETIME-60092814/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-INSPECTOR-CELL-LIFETIME-92a5e4c9/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-INSPECTOR-LIVE-TABLES-1bb95098/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-INSPECTOR-LIVE-TABLES-660a9d9b/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-INSTALLED-INSPECTOR-147e55cb/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-INSTALLED-INSPECTOR-649190de/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-INSTALLED-TELEMETRY-4c566474/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-INSTALLED-TELEMETRY-b7ce1ed0/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-TABLE-ERASURE-5a142379/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-TABLE-ERASURE-8b4eecf8/result.json"
+          ],
+          "family": "GTK-HISTORY-LIMITS",
+          "executable_sha256": "2ba9c6590d3d29bf16364b80be049184149a67a46a8d0bfc8dabd8a32ed76ff8",
+          "cases": [
+            {
+              "case": "chart",
+              "outcome": "fail"
+            },
+            {
+              "case": "mixed",
+              "outcome": "fail"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "optimized-history-regressions",
+      "index": {
+        "local_path": "out/evidence/gtk-cell-lifetime-native/optimized-history-regressions/index.json",
+        "sha256": "83d55d54371e1fabbf10217b3d4963aae9561fb6ce99ad2ee2f3ad21c54c7e98"
+      },
+      "archive": {
+        "local_path": "out/evidence/gtk-cell-lifetime-native/optimized-history-regressions/native-evidence.zip",
+        "sha256": "c4651d55909be3e14aad4156127e3107e52d3ed517863cc224c126d5cff83559"
+      },
+      "verified_nodes": 116,
+      "preserved_bytes": 3645796,
+      "reports": [
+        {
+          "path": "chart-frame-limits-655d43fa58f6/result.json",
+          "sha256": "9baf0c0d4fbb7107ba0895f80e219be1b3d83b6c8d8f112deb3f40a78bd57ec6",
+          "outcome": "pass",
+          "source_records": [
+            "out/evidence/gtk-cell-lifetime-checks/build-2ee3fef6/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/build-987c6269/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/build-e6fd7336/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/build-f2e5295e/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/build-ff891854/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/composition-132de83a/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/composition-dd7c24ff/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/history-regressions-16bab7eb/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/history-regressions-f2680b7b/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-GTK-CELL-LIFETIME-1ea7042a/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-GTK-CELL-LIFETIME-1fe71fc8/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-GTK-CELL-LIFETIME-44c1c80c/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-GTK-HISTORY-LIMITS-bfaaaf9a/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-INSPECTOR-CELL-LIFETIME-4c221e22/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-INSPECTOR-CELL-LIFETIME-60092814/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-INSPECTOR-CELL-LIFETIME-92a5e4c9/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-INSPECTOR-LIVE-TABLES-1bb95098/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-INSPECTOR-LIVE-TABLES-660a9d9b/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-INSTALLED-INSPECTOR-147e55cb/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-INSTALLED-INSPECTOR-649190de/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-INSTALLED-TELEMETRY-4c566474/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-INSTALLED-TELEMETRY-b7ce1ed0/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-TABLE-ERASURE-5a142379/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-TABLE-ERASURE-8b4eecf8/result.json"
+          ],
+          "family": "CHART-FRAME-LIMITS",
+          "executable_sha256": "2ba9c6590d3d29bf16364b80be049184149a67a46a8d0bfc8dabd8a32ed76ff8",
+          "cases": [
+            {
+              "case": null,
+              "outcome": "pass"
+            },
+            {
+              "case": null,
+              "outcome": "pass"
+            },
+            {
+              "case": null,
+              "outcome": "pass"
+            },
+            {
+              "case": null,
+              "outcome": "pass"
+            },
+            {
+              "case": null,
+              "outcome": "pass"
+            },
+            {
+              "case": null,
+              "outcome": "pass"
+            }
+          ]
+        },
+        {
+          "path": "inspector-922b839ee367/chart/result.json",
+          "sha256": "aa8b08a5f2d53d4142825f4bbd0ebef8823951e06244ebc2858c56c95fdc8101",
+          "outcome": "pass",
+          "executable_sha256": "2ba9c6590d3d29bf16364b80be049184149a67a46a8d0bfc8dabd8a32ed76ff8"
+        },
+        {
+          "path": "inspector-922b839ee367/image/result.json",
+          "sha256": "437123b20b06c90120b3d0abe834e6985eb559d6d53f75f0dbd611aa403bce9f",
+          "outcome": "pass",
+          "executable_sha256": "2ba9c6590d3d29bf16364b80be049184149a67a46a8d0bfc8dabd8a32ed76ff8"
+        },
+        {
+          "path": "inspector-922b839ee367/result.json",
+          "sha256": "718b7e2575275be713d2c1f56ec15a0f289304db0a6a18c158953ca7e303f210",
+          "outcome": "pass",
+          "family": "SCENE-INSPECTOR",
+          "executable_sha256": "2ba9c6590d3d29bf16364b80be049184149a67a46a8d0bfc8dabd8a32ed76ff8",
+          "cases": [
+            {
+              "case": "scalar",
+              "outcome": "pass"
+            },
+            {
+              "case": "table",
+              "outcome": "pass"
+            },
+            {
+              "case": "chart",
+              "outcome": "pass"
+            },
+            {
+              "case": "image",
+              "outcome": "pass"
+            },
+            {
+              "case": "translated",
+              "outcome": "pass"
+            },
+            {
+              "case": "retain",
+              "outcome": "pass"
+            },
+            {
+              "case": "wrong-selection",
+              "outcome": "pass"
+            }
+          ]
+        },
+        {
+          "path": "inspector-922b839ee367/retain/result.json",
+          "sha256": "b0ca8038ddb6d1f23c29be527db85b343bb2f6f5574b9d1258eca7a0aae1331f",
+          "outcome": "pass",
+          "executable_sha256": "2ba9c6590d3d29bf16364b80be049184149a67a46a8d0bfc8dabd8a32ed76ff8"
+        },
+        {
+          "path": "inspector-922b839ee367/scalar/result.json",
+          "sha256": "8a05bde34b16b5f32d74edaabcdf9b53fa982b0055ba728c021149711d2cd17e",
+          "outcome": "pass",
+          "executable_sha256": "2ba9c6590d3d29bf16364b80be049184149a67a46a8d0bfc8dabd8a32ed76ff8"
+        },
+        {
+          "path": "inspector-922b839ee367/table/result.json",
+          "sha256": "7aa4239b217c54641440ff8086d4b293f51e70ece75336ca9283def059c4dc34",
+          "outcome": "pass",
+          "executable_sha256": "2ba9c6590d3d29bf16364b80be049184149a67a46a8d0bfc8dabd8a32ed76ff8"
+        },
+        {
+          "path": "inspector-922b839ee367/translated/result.json",
+          "sha256": "8b47b3d36506d2a3065d874edabed3e72be2e383c95314d954d6b1d4cb2c3d5c",
+          "outcome": "pass",
+          "executable_sha256": "2ba9c6590d3d29bf16364b80be049184149a67a46a8d0bfc8dabd8a32ed76ff8"
+        },
+        {
+          "path": "inspector-922b839ee367/wrong-selection/result.json",
+          "sha256": "2423945283e194f6ff98a14a346b0f58c0b556c2e60329e6b06071285e7a9a94",
+          "outcome": "pass",
+          "executable_sha256": "2ba9c6590d3d29bf16364b80be049184149a67a46a8d0bfc8dabd8a32ed76ff8"
+        },
+        {
+          "path": "inspector-a745b1d4f5da/chart/result.json",
+          "sha256": "81bb2c67e0b97fc55fd0c698e8f75345f7c855f99e8852d08a67f45d89f43f61",
+          "outcome": "pass",
+          "executable_sha256": "2ba9c6590d3d29bf16364b80be049184149a67a46a8d0bfc8dabd8a32ed76ff8"
+        },
+        {
+          "path": "inspector-a745b1d4f5da/image/result.json",
+          "sha256": "812e292156a9d9e11595d0020856b2a43acfd10c9a3dd1a1f75edbdf21411fc0",
+          "outcome": "pass",
+          "executable_sha256": "2ba9c6590d3d29bf16364b80be049184149a67a46a8d0bfc8dabd8a32ed76ff8"
+        },
+        {
+          "path": "inspector-a745b1d4f5da/result.json",
+          "sha256": "57920be72cc7010dc07cd96912a8a8bff75747e3bacf6d461db1dcc7d0d48f44",
+          "outcome": "pass",
+          "family": "SCENE-INSPECTOR",
+          "executable_sha256": "2ba9c6590d3d29bf16364b80be049184149a67a46a8d0bfc8dabd8a32ed76ff8",
+          "cases": [
+            {
+              "case": "scalar",
+              "outcome": "pass"
+            },
+            {
+              "case": "table",
+              "outcome": "pass"
+            },
+            {
+              "case": "chart",
+              "outcome": "pass"
+            },
+            {
+              "case": "image",
+              "outcome": "pass"
+            },
+            {
+              "case": "translated",
+              "outcome": "pass"
+            },
+            {
+              "case": "retain",
+              "outcome": "pass"
+            },
+            {
+              "case": "wrong-selection",
+              "outcome": "pass"
+            }
+          ]
+        },
+        {
+          "path": "inspector-a745b1d4f5da/retain/result.json",
+          "sha256": "f8146d8dc9718fbd4fd23343380865c9a4834f22be13606c09f468f30e6229b5",
+          "outcome": "pass",
+          "executable_sha256": "2ba9c6590d3d29bf16364b80be049184149a67a46a8d0bfc8dabd8a32ed76ff8"
+        },
+        {
+          "path": "inspector-a745b1d4f5da/scalar/result.json",
+          "sha256": "1c7838d81b3cac50b82bda4ba5ed9f5c357420acffc389e2fe126ce52a5665fa",
+          "outcome": "pass",
+          "executable_sha256": "2ba9c6590d3d29bf16364b80be049184149a67a46a8d0bfc8dabd8a32ed76ff8"
+        },
+        {
+          "path": "inspector-a745b1d4f5da/table/result.json",
+          "sha256": "abfec5cb18857036162ba01efc00f87023e77e2282af501d0ec9f9a04ec9ebe0",
+          "outcome": "pass",
+          "executable_sha256": "2ba9c6590d3d29bf16364b80be049184149a67a46a8d0bfc8dabd8a32ed76ff8"
+        },
+        {
+          "path": "inspector-a745b1d4f5da/translated/result.json",
+          "sha256": "c9586e8caaa5ead1a3234e1226ae65d6bf3cc290269dfedc976f2c258ca4ad6a",
+          "outcome": "pass",
+          "executable_sha256": "2ba9c6590d3d29bf16364b80be049184149a67a46a8d0bfc8dabd8a32ed76ff8"
+        },
+        {
+          "path": "inspector-a745b1d4f5da/wrong-selection/result.json",
+          "sha256": "e995d72b4a8263bd793794f697c1a0fabb513aa4cdd305e3e21fe1ed1725788b",
+          "outcome": "pass",
+          "executable_sha256": "2ba9c6590d3d29bf16364b80be049184149a67a46a8d0bfc8dabd8a32ed76ff8"
+        }
+      ]
+    },
+    {
+      "label": "optimized-installed-inspector",
+      "index": {
+        "local_path": "out/evidence/gtk-cell-lifetime-native/optimized-installed-inspector/index.json",
+        "sha256": "875cf68c63e1b207fe9312c68a1ce83d30c61e71dc3d70cacb2224d823927027"
+      },
+      "archive": {
+        "local_path": "out/evidence/gtk-cell-lifetime-native/optimized-installed-inspector/native-evidence.zip",
+        "sha256": "99c1b51db9bb86c0ee2e300cd50dd3fe2f6511209ad664a5b9a71177693566bd"
+      },
+      "verified_nodes": 584,
+      "preserved_bytes": 149110480,
+      "reports": [
+        {
+          "path": "inspector-frontend-48876a28e7/CLOSE/result.json",
+          "sha256": "8d407432a34243e3c48196c948606331ffe1b0983472fcae6f1764a4b2c5d1bf",
+          "outcome": "pass"
+        },
+        {
+          "path": "inspector-frontend-48876a28e7/DRAFT-NAV/result.json",
+          "sha256": "f8f210e0549e6e08810eb598b511dcad1ad4f401d46ecfcfa06e130328d1bd30",
+          "outcome": "pass"
+        },
+        {
+          "path": "inspector-frontend-48876a28e7/NAVIGATION/result.json",
+          "sha256": "4ed1c9098ba53f4404fedcc39a290e6756d5cc37e1737fd2fb2f3c6838504a83",
+          "outcome": "pass"
+        },
+        {
+          "path": "inspector-frontend-48876a28e7/OPEN/result.json",
+          "sha256": "90ce555b1b50dada93424cf65ff7e28fb14f8a690708fd2d16d8c5535cefa159",
+          "outcome": "pass"
+        },
+        {
+          "path": "inspector-frontend-48876a28e7/ORACLE/result.json",
+          "sha256": "8465ffb0bb1457c553e9a75f3022d0e153a11893d2b34a288cc317af4c8a58b3",
+          "outcome": "pass"
+        },
+        {
+          "path": "inspector-frontend-48876a28e7/POLICY/result.json",
+          "sha256": "b54e633e657d7e2cef80471fefe975b87ace41510edfcc296cd50cb1983c5567",
+          "outcome": "pass"
+        },
+        {
+          "path": "inspector-frontend-48876a28e7/PRIVATE-NAV/result.json",
+          "sha256": "0821fdbf6735482c7248d326235c0253421daf8f2702339abe338967e2919b2f",
+          "outcome": "pass"
+        },
+        {
+          "path": "inspector-frontend-48876a28e7/RELOAD/result.json",
+          "sha256": "93b9e2a32e0648db74422b583aab38215e1b202fe261014dac7165661ae2346d",
+          "outcome": "pass"
+        },
+        {
+          "path": "inspector-frontend-48876a28e7/REPLACEMENT/result.json",
+          "sha256": "0946c0a12b6c1638d321aec872b431ef86f50f85e9d4ad3a3d0acd3b02eb2d4f",
+          "outcome": "pass"
+        },
+        {
+          "path": "inspector-frontend-48876a28e7/REQUEST-NAV/result.json",
+          "sha256": "18ad9ac0ac3369315d9b43f2aa5d60361851a826d6704f52326698a09795419f",
+          "outcome": "pass"
+        },
+        {
+          "path": "inspector-frontend-48876a28e7/SAVE-REOPEN/result.json",
+          "sha256": "46c58f734a4f5a049fdb1c5e4b2e91836cd9d65d9751b4f88be5d1643224b40b",
+          "outcome": "pass"
+        },
+        {
+          "path": "inspector-frontend-48876a28e7/SUMMARY/result.json",
+          "sha256": "444371ae403548273b4514372a07cee1c57977b9a9d716aacc12060fb2383224",
+          "outcome": "pass"
+        },
+        {
+          "path": "inspector-frontend-48876a28e7/result.json",
+          "sha256": "ee972f3132fb7e47fe8238eaca15695bb2fbc075f2baab696315b32613c1b9d1",
+          "outcome": "pass",
+          "family": "INSTALLED-INSPECTOR",
+          "cases": [
+            {
+              "case": "OPEN",
+              "outcome": "pass"
+            },
+            {
+              "case": "SUMMARY",
+              "outcome": "pass"
+            },
+            {
+              "case": "NAVIGATION",
+              "outcome": "pass"
+            },
+            {
+              "case": "SAVE-REOPEN",
+              "outcome": "pass"
+            },
+            {
+              "case": "PRIVATE-NAV",
+              "outcome": "pass"
+            },
+            {
+              "case": "DRAFT-NAV",
+              "outcome": "pass"
+            },
+            {
+              "case": "REQUEST-NAV",
+              "outcome": "pass"
+            },
+            {
+              "case": "RELOAD",
+              "outcome": "pass"
+            },
+            {
+              "case": "POLICY",
+              "outcome": "pass"
+            },
+            {
+              "case": "REPLACEMENT",
+              "outcome": "pass"
+            },
+            {
+              "case": "CLOSE",
+              "outcome": "pass"
+            },
+            {
+              "case": "ORACLE",
+              "outcome": "pass"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "optimized-installed-telemetry",
+      "index": {
+        "local_path": "out/evidence/gtk-cell-lifetime-native/optimized-installed-telemetry/index.json",
+        "sha256": "087bbd2117fe2b075ca670c9498dd9234ee82234f8ccccb9595e7616bf795fec"
+      },
+      "archive": {
+        "local_path": "out/evidence/gtk-cell-lifetime-native/optimized-installed-telemetry/native-evidence.zip",
+        "sha256": "0d283f07aa6eb5db59d98a7c5b9a2ffa5e76df0d51be3343b7da8c771eabe03b"
+      },
+      "verified_nodes": 340,
+      "preserved_bytes": 149094156,
+      "reports": [
+        {
+          "path": "telemetry-frontend-b0bb4b67a8/CLOSE-HELD/result.json",
+          "sha256": "a8ec33462c6122c0e41cb55e901d9b6ae73179e5130e93bb9fcf6b37aef18531",
+          "outcome": "pass"
+        },
+        {
+          "path": "telemetry-frontend-b0bb4b67a8/CONFIGURATION-LOSS/result.json",
+          "sha256": "db4d6f5beb6aff6891e6c0746df7b08c78ed2442c5227559eaea098c61b273a8",
+          "outcome": "pass"
+        },
+        {
+          "path": "telemetry-frontend-b0bb4b67a8/LIVE/result.json",
+          "sha256": "ad82608b6c905b0ae79853e0632b01e255c23ae787175e991b0127495de5455f",
+          "outcome": "pass"
+        },
+        {
+          "path": "telemetry-frontend-b0bb4b67a8/NAVIGATION/result.json",
+          "sha256": "c02384f998a167895959d4c9eec29f3e73b582f0ed10fdf1d43e2a2e541462c3",
+          "outcome": "pass"
+        },
+        {
+          "path": "telemetry-frontend-b0bb4b67a8/ORACLE/result.json",
+          "sha256": "7b07982e30b1a1b118b495d28cebf80bf5feb241455e97648b34812199b5924d",
+          "outcome": "pass"
+        },
+        {
+          "path": "telemetry-frontend-b0bb4b67a8/POLICY/result.json",
+          "sha256": "a07e4d4a260c5d211d2273fd8f65be4dd0f39d4f1d54636f5b8cd4753e7c2a9d",
+          "outcome": "pass"
+        },
+        {
+          "path": "telemetry-frontend-b0bb4b67a8/REPLACEMENT/result.json",
+          "sha256": "f88173ac9671de345f134fd2d0c6edae9b575fed66342f333ae0524ff38869a4",
+          "outcome": "pass"
+        },
+        {
+          "path": "telemetry-frontend-b0bb4b67a8/result.json",
+          "sha256": "9e12d1313f3fa73d881fbc032d79859b4ca4ce842b0a26357b54756f8a83346f",
+          "outcome": "pass",
+          "family": "INSTALLED-TELEMETRY",
+          "cases": [
+            {
+              "case": "LIVE",
+              "outcome": "pass"
+            },
+            {
+              "case": "NAVIGATION",
+              "outcome": "pass"
+            },
+            {
+              "case": "REPLACEMENT",
+              "outcome": "pass"
+            },
+            {
+              "case": "POLICY",
+              "outcome": "pass"
+            },
+            {
+              "case": "CONFIGURATION-LOSS",
+              "outcome": "pass"
+            },
+            {
+              "case": "CLOSE-HELD",
+              "outcome": "pass"
+            },
+            {
+              "case": "ORACLE",
+              "outcome": "pass"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "optimized-lifetime",
+      "index": {
+        "local_path": "out/evidence/gtk-cell-lifetime-native/optimized-lifetime/index.json",
+        "sha256": "fb244580757de89736a259280a0913c6ec5aef7be97618ee599ff54aff196df2"
+      },
+      "archive": {
+        "local_path": "out/evidence/gtk-cell-lifetime-native/optimized-lifetime/native-evidence.zip",
+        "sha256": "8a73948d30f212a1cc048f61413eb13bc9df69fb895ab3154ce0145c646d53f3"
+      },
+      "verified_nodes": 17,
+      "preserved_bytes": 5625080,
+      "reports": [
+        {
+          "path": "gtk-accessible-erase-1f6fbd51581d/lifetime-collapsed/result.json",
+          "sha256": "ad7b681b86b36b96594fb40db535b8929f28e0ad946248862b16c99fbdd0fd4f",
+          "outcome": "pass",
+          "cohort": "collapsed",
+          "stages": [
+            {
+              "ack": "retire",
+              "callback_us": 309696,
+              "collapsed_leaks": 0,
+              "count_leaks": 0,
+              "held_cells": 6344,
+              "local_checked": false,
+              "mutation_us": 0,
+              "name_leaks": 0,
+              "reply_ms": 309.91298402659595,
+              "retired_checked": true,
+              "retired_leaks": 0,
+              "text_leaks": 0,
+              "word_leaks": 0
+            },
+            {
+              "ack": "erase",
+              "callback_us": 10625,
+              "collapsed_leaks": 0,
+              "count_leaks": 0,
+              "held_cells": 6344,
+              "local_checked": true,
+              "mutation_us": 9514,
+              "name_leaks": 0,
+              "reply_ms": 10.759465978480875,
+              "retired_checked": false,
+              "retired_leaks": 0,
+              "text_leaks": 0,
+              "word_leaks": 0
+            },
+            {
+              "ack": "recover",
+              "callback_us": 1459,
+              "collapsed_leaks": 0,
+              "count_leaks": 0,
+              "held_cells": 6344,
+              "local_checked": true,
+              "mutation_us": 0,
+              "name_leaks": 0,
+              "reply_ms": 1.9216759828850627,
+              "retired_checked": false,
+              "retired_leaks": 0,
+              "text_leaks": 0,
+              "word_leaks": 0
+            },
+            {
+              "ack": "quit",
+              "callback_us": 3,
+              "collapsed_leaks": 0,
+              "count_leaks": 0,
+              "held_cells": 6344,
+              "local_checked": false,
+              "mutation_us": 0,
+              "name_leaks": 0,
+              "reply_ms": 0.9361929842270911,
+              "retired_checked": false,
+              "retired_leaks": 0,
+              "text_leaks": 0,
+              "word_leaks": 0
+            }
+          ],
+          "wire_journal": {
+            "path": "gtk-accessible-erase-1f6fbd51581d/lifetime-collapsed/wire.json",
+            "sha256": "bd80c6bc571693df58dc7f3148f31b0fc912f4f40c9746d56fd6784df94e9c91",
+            "bytes": 2801961,
+            "requests": 88816,
+            "successful": 0,
+            "withdrawn": 88816
+          },
+          "actual_exit": true,
+          "lifetime_semantics": true,
+          "performance_qualified": false
+        },
+        {
+          "path": "gtk-accessible-erase-1f6fbd51581d/lifetime-expanded/result.json",
+          "sha256": "57626fdbb98e84e0f087077fa7e8b556f6bb20368937e7b4a836773515557dd9",
+          "outcome": "pass",
+          "cohort": "expanded",
+          "stages": [
+            {
+              "ack": "retire",
+              "callback_us": 3673,
+              "collapsed_leaks": 0,
+              "count_leaks": 0,
+              "held_cells": 6344,
+              "local_checked": false,
+              "mutation_us": 0,
+              "name_leaks": 0,
+              "reply_ms": 3.7799000274389982,
+              "retired_checked": true,
+              "retired_leaks": 0,
+              "text_leaks": 0,
+              "word_leaks": 0
+            },
+            {
+              "ack": "erase",
+              "callback_us": 896274,
+              "collapsed_leaks": 0,
+              "count_leaks": 0,
+              "held_cells": 6344,
+              "local_checked": true,
+              "mutation_us": 894904,
+              "name_leaks": 0,
+              "reply_ms": 896.42643899424,
+              "retired_checked": false,
+              "retired_leaks": 0,
+              "text_leaks": 0,
+              "word_leaks": 0
+            },
+            {
+              "ack": "recover",
+              "callback_us": 2007,
+              "collapsed_leaks": 0,
+              "count_leaks": 0,
+              "held_cells": 6344,
+              "local_checked": true,
+              "mutation_us": 0,
+              "name_leaks": 0,
+              "reply_ms": 2.1247509866952896,
+              "retired_checked": false,
+              "retired_leaks": 0,
+              "text_leaks": 0,
+              "word_leaks": 0
+            },
+            {
+              "ack": "quit",
+              "callback_us": 4,
+              "collapsed_leaks": 0,
+              "count_leaks": 0,
+              "held_cells": 6344,
+              "local_checked": false,
+              "mutation_us": 0,
+              "name_leaks": 0,
+              "reply_ms": 1.0175470379181206,
+              "retired_checked": false,
+              "retired_leaks": 0,
+              "text_leaks": 0,
+              "word_leaks": 0
+            }
+          ],
+          "wire_journal": {
+            "path": "gtk-accessible-erase-1f6fbd51581d/lifetime-expanded/wire.json",
+            "sha256": "bd80c6bc571693df58dc7f3148f31b0fc912f4f40c9746d56fd6784df94e9c91",
+            "bytes": 2801961,
+            "requests": 88816,
+            "successful": 0,
+            "withdrawn": 88816
+          },
+          "actual_exit": true,
+          "lifetime_semantics": true,
+          "performance_qualified": false
+        },
+        {
+          "path": "gtk-accessible-erase-1f6fbd51581d/result.json",
+          "sha256": "d98a41a9392c1623cfb70e5799d51c36afb6d614e5d08046085001e4f4ec44ea",
+          "outcome": "pass",
+          "source_records": [
+            "out/evidence/gtk-cell-lifetime-checks/build-987c6269/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/composition-dd7c24ff/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/history-regressions-f2680b7b/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-GTK-CELL-LIFETIME-1fe71fc8/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-GTK-HISTORY-LIMITS-bfaaaf9a/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-INSPECTOR-CELL-LIFETIME-92a5e4c9/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-INSPECTOR-LIVE-TABLES-1bb95098/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-INSTALLED-INSPECTOR-147e55cb/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-INSTALLED-TELEMETRY-4c566474/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-TABLE-ERASURE-5a142379/result.json"
+          ],
+          "family": "GTK-CELL-LIFETIME",
+          "executable_sha256": "c10aaa2128e363bce6b5c7753b8b7781875837c82f3705da3e913114802a83b9",
+          "cases": [
+            {
+              "case": "lifetime-expanded",
+              "outcome": "pass"
+            },
+            {
+              "case": "lifetime-collapsed",
+              "outcome": "pass"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "optimized-live-tables",
+      "index": {
+        "local_path": "out/evidence/gtk-cell-lifetime-native/optimized-live-tables/index.json",
+        "sha256": "0dcdea87e54dd3c5fd03307b8bd9e87f6ddedb106dca63ad3a89a987c2184a35"
+      },
+      "archive": {
+        "local_path": "out/evidence/gtk-cell-lifetime-native/optimized-live-tables/native-evidence.zip",
+        "sha256": "ec1b49c8b44617068fba43b7a9ce4a0d753e90d0fc92dd2d4c05c4ae054aa182"
+      },
+      "verified_nodes": 442,
+      "preserved_bytes": 151860267,
+      "reports": [
+        {
+          "path": "inspector-live-table-40c34b0022/MAX-CELLS/result.json",
+          "sha256": "16e8f338059bd0a56bdc77372d102517f7e350ec190df2fc22dfac2570286409",
+          "outcome": "pass",
+          "case": "MAX-CELLS",
+          "timing_max_us": {
+            "delay_us": 68898,
+            "work_us": 35595
+          },
+          "timing_violations": [],
+          "erasure_ms": null,
+          "frontend_sha256": "e99a6788e10a6ded056b6bfdc12405ecf2ab1aebdfcc06f8e217b50554b456ea",
+          "failure": null
+        },
+        {
+          "path": "inspector-live-table-40c34b0022/MAX-ROWS/result.json",
+          "sha256": "699b8e1ce754b420b4f28ffb496c4858a5e8fc3036b24ab2bbbb756a99a1d4a1",
+          "outcome": "pass",
+          "case": "MAX-ROWS",
+          "timing_max_us": {
+            "delay_us": 19119,
+            "work_us": 31058
+          },
+          "timing_violations": [],
+          "erasure_ms": null,
+          "frontend_sha256": "e99a6788e10a6ded056b6bfdc12405ecf2ab1aebdfcc06f8e217b50554b456ea",
+          "failure": null
+        },
+        {
+          "path": "inspector-live-table-40c34b0022/NAVIGATION/result.json",
+          "sha256": "6ba6425d79ded0402019996ce3786d40e8d62bd0025e5c760e738e8e90d54f71",
+          "outcome": "pass",
+          "case": "NAVIGATION",
+          "timing_max_us": {
+            "delay_us": 72229,
+            "work_us": 23868
+          },
+          "timing_violations": [],
+          "erasure_ms": null,
+          "frontend_sha256": "e99a6788e10a6ded056b6bfdc12405ecf2ab1aebdfcc06f8e217b50554b456ea",
+          "failure": null
+        },
+        {
+          "path": "inspector-live-table-40c34b0022/ORACLE/result.json",
+          "sha256": "79440be62479381494d4dd5d31294f860d65697bc02a1471bbd2c068517607e8",
+          "outcome": "pass",
+          "case": "ORACLE",
+          "timing_max_us": {
+            "delay_us": 78864,
+            "work_us": 34639
+          },
+          "timing_violations": [],
+          "erasure_ms": null,
+          "frontend_sha256": "e99a6788e10a6ded056b6bfdc12405ecf2ab1aebdfcc06f8e217b50554b456ea",
+          "failure": null
+        },
+        {
+          "path": "inspector-live-table-40c34b0022/OVER-CELLS/result.json",
+          "sha256": "0a79603c5c25c4ea834268664498cf22f92f87b3c3d98d3896a544b0282cab75",
+          "outcome": "pass",
+          "case": "OVER-CELLS",
+          "timing_max_us": {
+            "delay_us": 3947,
+            "work_us": 19239
+          },
+          "timing_violations": [],
+          "erasure_ms": null,
+          "frontend_sha256": "e99a6788e10a6ded056b6bfdc12405ecf2ab1aebdfcc06f8e217b50554b456ea",
+          "failure": null
+        },
+        {
+          "path": "inspector-live-table-40c34b0022/POLICY/result.json",
+          "sha256": "9e1129885327c254c7de19e2ebef904afe63258f81b2fe7a5375e79ae165c12d",
+          "outcome": "pass",
+          "case": "POLICY",
+          "timing_max_us": {
+            "delay_us": 5352,
+            "work_us": 92613
+          },
+          "timing_violations": [],
+          "erasure_ms": 135.39814000250772,
+          "frontend_sha256": "e99a6788e10a6ded056b6bfdc12405ecf2ab1aebdfcc06f8e217b50554b456ea",
+          "failure": null
+        },
+        {
+          "path": "inspector-live-table-40c34b0022/TRUNCATION/result.json",
+          "sha256": "21d2fc407b864e1a101b24ca480dc51b53a9d365e360f56f60d1549c560ecf50",
+          "outcome": "pass",
+          "case": "TRUNCATION",
+          "timing_max_us": {
+            "delay_us": 79348,
+            "work_us": 69052
+          },
+          "timing_violations": [],
+          "erasure_ms": null,
+          "frontend_sha256": "e99a6788e10a6ded056b6bfdc12405ecf2ab1aebdfcc06f8e217b50554b456ea",
+          "failure": null
+        },
+        {
+          "path": "inspector-live-table-40c34b0022/result.json",
+          "sha256": "30180c973e006f76a4e6f4651093a3404a4e642d642f0988516dc2c5fb1aa19f",
+          "outcome": "pass",
+          "family": "INSPECTOR-LIVE-TABLES",
+          "cases": [
+            {
+              "case": "MAX-ROWS",
+              "outcome": "pass"
+            },
+            {
+              "case": "MAX-CELLS",
+              "outcome": "pass"
+            },
+            {
+              "case": "TRUNCATION",
+              "outcome": "pass"
+            },
+            {
+              "case": "OVER-CELLS",
+              "outcome": "pass"
+            },
+            {
+              "case": "NAVIGATION",
+              "outcome": "pass"
+            },
+            {
+              "case": "POLICY",
+              "outcome": "pass"
+            },
+            {
+              "case": "ORACLE",
+              "outcome": "pass"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "optimized-real-inspector",
+      "index": {
+        "local_path": "out/evidence/gtk-cell-lifetime-native/optimized-real-inspector/index.json",
+        "sha256": "2cc43365db65db276f04b8b243f31163ef68b10d3c518a2a3ebc65bd8aa78b97"
+      },
+      "archive": {
+        "local_path": "out/evidence/gtk-cell-lifetime-native/optimized-real-inspector/native-evidence.zip",
+        "sha256": "56f0150d190cf04f0281f1cfc973eba59a5b6491675d2e6ddbfb52c8ca335a55"
+      },
+      "verified_nodes": 5,
+      "preserved_bytes": 1694,
+      "reports": [
+        {
+          "path": "inspector-cell-lifetime-052992522fd1/result.json",
+          "sha256": "2d51c75d0b8f1ef084186cfb19cd3319dd60be56a70d96547a54a1245948bac3",
+          "outcome": "pass",
+          "source_records": [
+            "out/evidence/gtk-cell-lifetime-checks/build-987c6269/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/composition-dd7c24ff/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/history-regressions-f2680b7b/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-GTK-CELL-LIFETIME-1fe71fc8/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-GTK-HISTORY-LIMITS-bfaaaf9a/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-INSPECTOR-CELL-LIFETIME-92a5e4c9/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-INSPECTOR-LIVE-TABLES-1bb95098/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-INSTALLED-INSPECTOR-147e55cb/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-INSTALLED-TELEMETRY-4c566474/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-TABLE-ERASURE-5a142379/result.json"
+          ],
+          "executable_sha256": "2ba9c6590d3d29bf16364b80be049184149a67a46a8d0bfc8dabd8a32ed76ff8",
+          "observed": {
+            "after_destroy_empty": true,
+            "collapsed_children": 6,
+            "defunct_once": true,
+            "fresh_cells": 4,
+            "initial_cells": 8,
+            "native_modern_word_unsupported": true,
+            "original_points": [
+              "10 byte; generation 1; start",
+              "11 byte; generation 2; join",
+              "12 byte; generation 3; join"
+            ],
+            "outcome": "pass",
+            "renderer_columns": 2
+          }
+        }
+      ]
+    },
+    {
+      "label": "optimized-table-erasure",
+      "index": {
+        "local_path": "out/evidence/gtk-cell-lifetime-native/optimized-table-erasure/index.json",
+        "sha256": "8aa869943d7b19e204ba50a2a440809a45399d3b2ff926c4f5afa7a03f140324"
+      },
+      "archive": {
+        "local_path": "out/evidence/gtk-cell-lifetime-native/optimized-table-erasure/native-evidence.zip",
+        "sha256": "1452d4ab1e54e48390f3dfba8caad3ab7bda03c696461dee4ed29746f93c5902"
+      },
+      "verified_nodes": 99,
+      "preserved_bytes": 53086632,
+      "reports": [
+        {
+          "path": "surface-2d8430d7fb30/ignore-accessible/result.json",
+          "sha256": "1a071751336c6bc52e17fbfd7ab89590b29ab48c154e61f166a06ac61ef3c23b",
+          "outcome": "pass",
+          "executable_sha256": "77b1ffb96c5f1defa8a28577c257f7d9e984985a19cca379b6f31a37cbebd548"
+        },
+        {
+          "path": "surface-2d8430d7fb30/ignore-pixels/result.json",
+          "sha256": "878d1a3c23db96de45b7fd914335715b51012d932ec4c7d89b7a00f8e6e1a303",
+          "outcome": "pass",
+          "executable_sha256": "77b1ffb96c5f1defa8a28577c257f7d9e984985a19cca379b6f31a37cbebd548"
+        },
+        {
+          "path": "surface-2d8430d7fb30/normal/result.json",
+          "sha256": "c95968b65e4a47fdabbcc836f92ffaf5259622ee83b168276eee511bda24db4c",
+          "outcome": "pass",
+          "executable_sha256": "77b1ffb96c5f1defa8a28577c257f7d9e984985a19cca379b6f31a37cbebd548"
+        },
+        {
+          "path": "surface-2d8430d7fb30/result.json",
+          "sha256": "b958acf5fb1541d8f321e9974a9b60483a9c1449b447ac2a526977c1ebe33269",
+          "outcome": "pass",
+          "family": "TABLE-ERASURE",
+          "executable_sha256": "77b1ffb96c5f1defa8a28577c257f7d9e984985a19cca379b6f31a37cbebd548",
+          "cases": [
+            {
+              "case": "normal",
+              "outcome": "pass"
+            },
+            {
+              "case": "ignore-pixels",
+              "outcome": "pass"
+            },
+            {
+              "case": "ignore-accessible",
+              "outcome": "pass"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "pre-integration",
+      "index": {
+        "local_path": "out/evidence/gtk-cell-lifetime-native/pre-integration/index.json",
+        "sha256": "26273ea6003a174b594d60ec9882b097cdf1460b466d32dc84ffe7f1be279780"
+      },
+      "archive": {
+        "local_path": "out/evidence/gtk-cell-lifetime-native/pre-integration/native-evidence.zip",
+        "sha256": "6944c563f24f410eae65c6b1fe44f4669aeda7c4e318892403446e44181adfb6"
+      },
+      "verified_nodes": 17,
+      "preserved_bytes": 5625080,
+      "reports": [
+        {
+          "path": "gtk-accessible-erase-26d9fe8fa80d/lifetime-collapsed/result.json",
+          "sha256": "c01d1cf886cf129f034e3647cea56e0039d17d0c3faa7006a16869b5019431a5",
+          "outcome": "pass",
+          "cohort": "collapsed",
+          "stages": [
+            {
+              "ack": "retire",
+              "callback_us": 313762,
+              "collapsed_leaks": 0,
+              "count_leaks": 0,
+              "held_cells": 6344,
+              "local_checked": false,
+              "mutation_us": 0,
+              "name_leaks": 0,
+              "reply_ms": 313.9196030097082,
+              "retired_checked": true,
+              "retired_leaks": 0,
+              "text_leaks": 0,
+              "word_leaks": 0
+            },
+            {
+              "ack": "erase",
+              "callback_us": 10690,
+              "collapsed_leaks": 0,
+              "count_leaks": 0,
+              "held_cells": 6344,
+              "local_checked": true,
+              "mutation_us": 9553,
+              "name_leaks": 0,
+              "reply_ms": 10.802200995385647,
+              "retired_checked": false,
+              "retired_leaks": 0,
+              "text_leaks": 0,
+              "word_leaks": 0
+            },
+            {
+              "ack": "recover",
+              "callback_us": 1377,
+              "collapsed_leaks": 0,
+              "count_leaks": 0,
+              "held_cells": 6344,
+              "local_checked": true,
+              "mutation_us": 0,
+              "name_leaks": 0,
+              "reply_ms": 1.4826340484432876,
+              "retired_checked": false,
+              "retired_leaks": 0,
+              "text_leaks": 0,
+              "word_leaks": 0
+            },
+            {
+              "ack": "quit",
+              "callback_us": 3,
+              "collapsed_leaks": 0,
+              "count_leaks": 0,
+              "held_cells": 6344,
+              "local_checked": false,
+              "mutation_us": 0,
+              "name_leaks": 0,
+              "reply_ms": 0.6092619732953608,
+              "retired_checked": false,
+              "retired_leaks": 0,
+              "text_leaks": 0,
+              "word_leaks": 0
+            }
+          ],
+          "wire_journal": {
+            "path": "gtk-accessible-erase-26d9fe8fa80d/lifetime-collapsed/wire.json",
+            "sha256": "bd80c6bc571693df58dc7f3148f31b0fc912f4f40c9746d56fd6784df94e9c91",
+            "bytes": 2801961,
+            "requests": 88816,
+            "successful": 0,
+            "withdrawn": 88816
+          },
+          "actual_exit": true,
+          "lifetime_semantics": true,
+          "performance_qualified": false
+        },
+        {
+          "path": "gtk-accessible-erase-26d9fe8fa80d/lifetime-expanded/result.json",
+          "sha256": "c2fab37d8f2cce3c1a884404fffbbdd4ed74a3f066df3b40f537dbaf12b7ec3e",
+          "outcome": "pass",
+          "cohort": "expanded",
+          "stages": [
+            {
+              "ack": "retire",
+              "callback_us": 3678,
+              "collapsed_leaks": 0,
+              "count_leaks": 0,
+              "held_cells": 6344,
+              "local_checked": false,
+              "mutation_us": 0,
+              "name_leaks": 0,
+              "reply_ms": 3.7886759964749217,
+              "retired_checked": true,
+              "retired_leaks": 0,
+              "text_leaks": 0,
+              "word_leaks": 0
+            },
+            {
+              "ack": "erase",
+              "callback_us": 886400,
+              "collapsed_leaks": 0,
+              "count_leaks": 0,
+              "held_cells": 6344,
+              "local_checked": true,
+              "mutation_us": 885033,
+              "name_leaks": 0,
+              "reply_ms": 886.5516880177893,
+              "retired_checked": false,
+              "retired_leaks": 0,
+              "text_leaks": 0,
+              "word_leaks": 0
+            },
+            {
+              "ack": "recover",
+              "callback_us": 1628,
+              "collapsed_leaks": 0,
+              "count_leaks": 0,
+              "held_cells": 6344,
+              "local_checked": true,
+              "mutation_us": 0,
+              "name_leaks": 0,
+              "reply_ms": 1.7396049806848168,
+              "retired_checked": false,
+              "retired_leaks": 0,
+              "text_leaks": 0,
+              "word_leaks": 0
+            },
+            {
+              "ack": "quit",
+              "callback_us": 3,
+              "collapsed_leaks": 0,
+              "count_leaks": 0,
+              "held_cells": 6344,
+              "local_checked": false,
+              "mutation_us": 0,
+              "name_leaks": 0,
+              "reply_ms": 0.6748249870724976,
+              "retired_checked": false,
+              "retired_leaks": 0,
+              "text_leaks": 0,
+              "word_leaks": 0
+            }
+          ],
+          "wire_journal": {
+            "path": "gtk-accessible-erase-26d9fe8fa80d/lifetime-expanded/wire.json",
+            "sha256": "bd80c6bc571693df58dc7f3148f31b0fc912f4f40c9746d56fd6784df94e9c91",
+            "bytes": 2801961,
+            "requests": 88816,
+            "successful": 0,
+            "withdrawn": 88816
+          },
+          "actual_exit": true,
+          "lifetime_semantics": true,
+          "performance_qualified": false
+        },
+        {
+          "path": "gtk-accessible-erase-26d9fe8fa80d/result.json",
+          "sha256": "893eab4ddef18ed213e532bd005fc37d116fcfc03c779c34243171dab1f97501",
+          "outcome": "pass",
+          "source_records": [
+            "out/evidence/gtk-cell-lifetime-checks/build-2ee3fef6/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/build-f2e5295e/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/build-ff891854/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/composition-132de83a/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/history-regressions-16bab7eb/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-GTK-CELL-LIFETIME-1ea7042a/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-GTK-CELL-LIFETIME-44c1c80c/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-INSPECTOR-CELL-LIFETIME-4c221e22/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-INSPECTOR-CELL-LIFETIME-60092814/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-INSPECTOR-LIVE-TABLES-660a9d9b/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-INSTALLED-INSPECTOR-649190de/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-INSTALLED-TELEMETRY-b7ce1ed0/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-TABLE-ERASURE-8b4eecf8/result.json"
+          ],
+          "family": "GTK-CELL-LIFETIME",
+          "executable_sha256": "d7937277e7e0fcf321e4ed6b729b114476336e38a6575fa9a4841b9e169a26aa",
+          "cases": [
+            {
+              "case": "lifetime-expanded",
+              "outcome": "pass"
+            },
+            {
+              "case": "lifetime-collapsed",
+              "outcome": "pass"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "real-inspector-pass",
+      "index": {
+        "local_path": "out/evidence/gtk-cell-lifetime-native/real-inspector-pass/index.json",
+        "sha256": "10f55253431d3f9ed0f41dcfb72ced1c0b9f856a99af70507607aea2960e098b"
+      },
+      "archive": {
+        "local_path": "out/evidence/gtk-cell-lifetime-native/real-inspector-pass/native-evidence.zip",
+        "sha256": "92fd12e2efc15688f1ff70558f8e3d95736f77400154aa222e596253f6b5651f"
+      },
+      "verified_nodes": 5,
+      "preserved_bytes": 1694,
+      "reports": [
+        {
+          "path": "inspector-cell-lifetime-534207d65835/result.json",
+          "sha256": "838ba450be2c9952227e3556400efda3351e0a9ea27149d9ead4ee745850bdc0",
+          "outcome": "pass",
+          "source_records": [
+            "out/evidence/gtk-cell-lifetime-checks/build-f2e5295e/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/history-regressions-16bab7eb/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-GTK-CELL-LIFETIME-44c1c80c/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-INSPECTOR-CELL-LIFETIME-4c221e22/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-INSPECTOR-LIVE-TABLES-660a9d9b/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-INSTALLED-INSPECTOR-649190de/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-INSTALLED-TELEMETRY-b7ce1ed0/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-TABLE-ERASURE-8b4eecf8/result.json"
+          ],
+          "executable_sha256": "18f56e3a760c55a366f2986a8db43eeafeb07353a99100a0bdeb3827ffd90997",
+          "observed": {
+            "after_destroy_empty": true,
+            "collapsed_children": 6,
+            "defunct_once": true,
+            "fresh_cells": 4,
+            "initial_cells": 8,
+            "native_modern_word_unsupported": true,
+            "original_points": [
+              "10 byte; generation 1; start",
+              "11 byte; generation 2; join",
+              "12 byte; generation 3; join"
+            ],
+            "outcome": "pass",
+            "renderer_columns": 2
+          }
+        }
+      ]
+    },
+    {
+      "label": "real-inspector-word-failure",
+      "index": {
+        "local_path": "out/evidence/gtk-cell-lifetime-native/real-inspector-word-failure/index.json",
+        "sha256": "0dd806c417d121d3183f521f222db656219595d134c5d0e5638d77c5fb07d57e"
+      },
+      "archive": {
+        "local_path": "out/evidence/gtk-cell-lifetime-native/real-inspector-word-failure/native-evidence.zip",
+        "sha256": "60456156901b1d62aaa57274058703f96bd523876d41e3f35fb89a0147e6e799"
+      },
+      "verified_nodes": 5,
+      "preserved_bytes": 1045,
+      "reports": [
+        {
+          "path": "inspector-cell-lifetime-067bdb03078e/result.json",
+          "sha256": "35907f51eb8f77db39ff58c74090310a1177834c32b929dea173c5f3e1d15073",
+          "outcome": "fail",
+          "source_records": [
+            "out/evidence/gtk-cell-lifetime-checks/build-ff891854/result.json",
+            "out/evidence/gtk-cell-lifetime-checks/native-INSPECTOR-CELL-LIFETIME-60092814/result.json"
+          ],
+          "executable_sha256": "819585f7e7741abe3cd90758aee4cff85999705abd257e36624e6dfa2914f4bc"
+        }
+      ]
+    },
+    {
+      "label": "table-erasure",
+      "index": {
+        "local_path": "out/evidence/gtk-cell-lifetime-native/table-erasure/index.json",
+        "sha256": "77338525d1589fcd4966c5fbe6209ebaf5d9a26a85b9af331db6810344141d4a"
+      },
+      "archive": {
+        "local_path": "out/evidence/gtk-cell-lifetime-native/table-erasure/native-evidence.zip",
+        "sha256": "27e6ba5d17f29d1a9d79cc275acff92a0b641e7cad24101007818768bdac92d7"
+      },
+      "verified_nodes": 102,
+      "preserved_bytes": 57408624,
+      "reports": [
+        {
+          "path": "surface-00d0d3ef8005/ignore-accessible/result.json",
+          "sha256": "d50610ec49474c5c5a2deef8f8af89a7ed3f06e41ea7967662bc2ebb35be89c3",
+          "outcome": "pass",
+          "executable_sha256": "77b1ffb96c5f1defa8a28577c257f7d9e984985a19cca379b6f31a37cbebd548"
+        },
+        {
+          "path": "surface-00d0d3ef8005/ignore-pixels/result.json",
+          "sha256": "c997d14e59ed4a7b11f1d1e5ae918197f3667ddbaa274ffc3169cc16c090f65f",
+          "outcome": "pass",
+          "executable_sha256": "77b1ffb96c5f1defa8a28577c257f7d9e984985a19cca379b6f31a37cbebd548"
+        },
+        {
+          "path": "surface-00d0d3ef8005/normal/result.json",
+          "sha256": "471452503140061633e78f80b754ae770ecb1af31a523d9705f795b3faf15e6b",
+          "outcome": "pass",
+          "executable_sha256": "77b1ffb96c5f1defa8a28577c257f7d9e984985a19cca379b6f31a37cbebd548"
+        },
+        {
+          "path": "surface-00d0d3ef8005/result.json",
+          "sha256": "db726bad9027abadea790d9a2c16285452260916589d4a9e5596b19027e62e58",
+          "outcome": "pass",
+          "family": "TABLE-ERASURE",
+          "executable_sha256": "77b1ffb96c5f1defa8a28577c257f7d9e984985a19cca379b6f31a37cbebd548",
+          "cases": [
+            {
+              "case": "normal",
+              "outcome": "pass"
+            },
+            {
+              "case": "ignore-pixels",
+              "outcome": "pass"
+            },
+            {
+              "case": "ignore-accessible",
+              "outcome": "pass"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "lifetime_cohorts": [
+    {
+      "archive": "integrated-lifetime-before-optimization",
+      "path": "gtk-accessible-erase-0a1c8ddbd964/lifetime-collapsed/result.json",
+      "sha256": "ecc3f2198c50157ad66c6af168370d278c08d4d7ca049a3fa4a2da55a3dc6f56",
+      "outcome": "pass",
+      "cohort": "collapsed",
+      "stages": [
+        {
+          "ack": "retire",
+          "callback_us": 338560,
+          "collapsed_leaks": 0,
+          "count_leaks": 0,
+          "held_cells": 6344,
+          "local_checked": false,
+          "mutation_us": 0,
+          "name_leaks": 0,
+          "reply_ms": 338.82326196180657,
+          "retired_checked": true,
+          "retired_leaks": 0,
+          "text_leaks": 0,
+          "word_leaks": 0
+        },
+        {
+          "ack": "erase",
+          "callback_us": 12702,
+          "collapsed_leaks": 0,
+          "count_leaks": 0,
+          "held_cells": 6344,
+          "local_checked": true,
+          "mutation_us": 11316,
+          "name_leaks": 0,
+          "reply_ms": 12.871225946582854,
+          "retired_checked": false,
+          "retired_leaks": 0,
+          "text_leaks": 0,
+          "word_leaks": 0
+        },
+        {
+          "ack": "recover",
+          "callback_us": 2489,
+          "collapsed_leaks": 0,
+          "count_leaks": 0,
+          "held_cells": 6344,
+          "local_checked": true,
+          "mutation_us": 0,
+          "name_leaks": 0,
+          "reply_ms": 3.143868991173804,
+          "retired_checked": false,
+          "retired_leaks": 0,
+          "text_leaks": 0,
+          "word_leaks": 0
+        },
+        {
+          "ack": "quit",
+          "callback_us": 4,
+          "collapsed_leaks": 0,
+          "count_leaks": 0,
+          "held_cells": 6344,
+          "local_checked": false,
+          "mutation_us": 0,
+          "name_leaks": 0,
+          "reply_ms": 3.543128026649356,
+          "retired_checked": false,
+          "retired_leaks": 0,
+          "text_leaks": 0,
+          "word_leaks": 0
+        }
+      ],
+      "wire_journal": {
+        "path": "gtk-accessible-erase-0a1c8ddbd964/lifetime-collapsed/wire.json",
+        "sha256": "bd80c6bc571693df58dc7f3148f31b0fc912f4f40c9746d56fd6784df94e9c91",
+        "bytes": 2801961,
+        "requests": 88816,
+        "successful": 0,
+        "withdrawn": 88816
+      },
+      "actual_exit": true,
+      "lifetime_semantics": true,
+      "performance_qualified": false
+    },
+    {
+      "archive": "integrated-lifetime-before-optimization",
+      "path": "gtk-accessible-erase-0a1c8ddbd964/lifetime-expanded/result.json",
+      "sha256": "93b20a7b0e84ad289b740b95ce338d24b60146ececc6053ccd25a1442b330f2e",
+      "outcome": "pass",
+      "cohort": "expanded",
+      "stages": [
+        {
+          "ack": "retire",
+          "callback_us": 4457,
+          "collapsed_leaks": 0,
+          "count_leaks": 0,
+          "held_cells": 6344,
+          "local_checked": false,
+          "mutation_us": 0,
+          "name_leaks": 0,
+          "reply_ms": 4.637946956790984,
+          "retired_checked": true,
+          "retired_leaks": 0,
+          "text_leaks": 0,
+          "word_leaks": 0
+        },
+        {
+          "ack": "erase",
+          "callback_us": 907390,
+          "collapsed_leaks": 0,
+          "count_leaks": 0,
+          "held_cells": 6344,
+          "local_checked": true,
+          "mutation_us": 905965,
+          "name_leaks": 0,
+          "reply_ms": 907.5351280043833,
+          "retired_checked": false,
+          "retired_leaks": 0,
+          "text_leaks": 0,
+          "word_leaks": 0
+        },
+        {
+          "ack": "recover",
+          "callback_us": 1884,
+          "collapsed_leaks": 0,
+          "count_leaks": 0,
+          "held_cells": 6344,
+          "local_checked": true,
+          "mutation_us": 0,
+          "name_leaks": 0,
+          "reply_ms": 2.01615400146693,
+          "retired_checked": false,
+          "retired_leaks": 0,
+          "text_leaks": 0,
+          "word_leaks": 0
+        },
+        {
+          "ack": "quit",
+          "callback_us": 3,
+          "collapsed_leaks": 0,
+          "count_leaks": 0,
+          "held_cells": 6344,
+          "local_checked": false,
+          "mutation_us": 0,
+          "name_leaks": 0,
+          "reply_ms": 0.6063440232537687,
+          "retired_checked": false,
+          "retired_leaks": 0,
+          "text_leaks": 0,
+          "word_leaks": 0
+        }
+      ],
+      "wire_journal": {
+        "path": "gtk-accessible-erase-0a1c8ddbd964/lifetime-expanded/wire.json",
+        "sha256": "bd80c6bc571693df58dc7f3148f31b0fc912f4f40c9746d56fd6784df94e9c91",
+        "bytes": 2801961,
+        "requests": 88816,
+        "successful": 0,
+        "withdrawn": 88816
+      },
+      "actual_exit": true,
+      "lifetime_semantics": true,
+      "performance_qualified": false
+    },
+    {
+      "archive": "optimized-lifetime",
+      "path": "gtk-accessible-erase-1f6fbd51581d/lifetime-collapsed/result.json",
+      "sha256": "ad7b681b86b36b96594fb40db535b8929f28e0ad946248862b16c99fbdd0fd4f",
+      "outcome": "pass",
+      "cohort": "collapsed",
+      "stages": [
+        {
+          "ack": "retire",
+          "callback_us": 309696,
+          "collapsed_leaks": 0,
+          "count_leaks": 0,
+          "held_cells": 6344,
+          "local_checked": false,
+          "mutation_us": 0,
+          "name_leaks": 0,
+          "reply_ms": 309.91298402659595,
+          "retired_checked": true,
+          "retired_leaks": 0,
+          "text_leaks": 0,
+          "word_leaks": 0
+        },
+        {
+          "ack": "erase",
+          "callback_us": 10625,
+          "collapsed_leaks": 0,
+          "count_leaks": 0,
+          "held_cells": 6344,
+          "local_checked": true,
+          "mutation_us": 9514,
+          "name_leaks": 0,
+          "reply_ms": 10.759465978480875,
+          "retired_checked": false,
+          "retired_leaks": 0,
+          "text_leaks": 0,
+          "word_leaks": 0
+        },
+        {
+          "ack": "recover",
+          "callback_us": 1459,
+          "collapsed_leaks": 0,
+          "count_leaks": 0,
+          "held_cells": 6344,
+          "local_checked": true,
+          "mutation_us": 0,
+          "name_leaks": 0,
+          "reply_ms": 1.9216759828850627,
+          "retired_checked": false,
+          "retired_leaks": 0,
+          "text_leaks": 0,
+          "word_leaks": 0
+        },
+        {
+          "ack": "quit",
+          "callback_us": 3,
+          "collapsed_leaks": 0,
+          "count_leaks": 0,
+          "held_cells": 6344,
+          "local_checked": false,
+          "mutation_us": 0,
+          "name_leaks": 0,
+          "reply_ms": 0.9361929842270911,
+          "retired_checked": false,
+          "retired_leaks": 0,
+          "text_leaks": 0,
+          "word_leaks": 0
+        }
+      ],
+      "wire_journal": {
+        "path": "gtk-accessible-erase-1f6fbd51581d/lifetime-collapsed/wire.json",
+        "sha256": "bd80c6bc571693df58dc7f3148f31b0fc912f4f40c9746d56fd6784df94e9c91",
+        "bytes": 2801961,
+        "requests": 88816,
+        "successful": 0,
+        "withdrawn": 88816
+      },
+      "actual_exit": true,
+      "lifetime_semantics": true,
+      "performance_qualified": false
+    },
+    {
+      "archive": "optimized-lifetime",
+      "path": "gtk-accessible-erase-1f6fbd51581d/lifetime-expanded/result.json",
+      "sha256": "57626fdbb98e84e0f087077fa7e8b556f6bb20368937e7b4a836773515557dd9",
+      "outcome": "pass",
+      "cohort": "expanded",
+      "stages": [
+        {
+          "ack": "retire",
+          "callback_us": 3673,
+          "collapsed_leaks": 0,
+          "count_leaks": 0,
+          "held_cells": 6344,
+          "local_checked": false,
+          "mutation_us": 0,
+          "name_leaks": 0,
+          "reply_ms": 3.7799000274389982,
+          "retired_checked": true,
+          "retired_leaks": 0,
+          "text_leaks": 0,
+          "word_leaks": 0
+        },
+        {
+          "ack": "erase",
+          "callback_us": 896274,
+          "collapsed_leaks": 0,
+          "count_leaks": 0,
+          "held_cells": 6344,
+          "local_checked": true,
+          "mutation_us": 894904,
+          "name_leaks": 0,
+          "reply_ms": 896.42643899424,
+          "retired_checked": false,
+          "retired_leaks": 0,
+          "text_leaks": 0,
+          "word_leaks": 0
+        },
+        {
+          "ack": "recover",
+          "callback_us": 2007,
+          "collapsed_leaks": 0,
+          "count_leaks": 0,
+          "held_cells": 6344,
+          "local_checked": true,
+          "mutation_us": 0,
+          "name_leaks": 0,
+          "reply_ms": 2.1247509866952896,
+          "retired_checked": false,
+          "retired_leaks": 0,
+          "text_leaks": 0,
+          "word_leaks": 0
+        },
+        {
+          "ack": "quit",
+          "callback_us": 4,
+          "collapsed_leaks": 0,
+          "count_leaks": 0,
+          "held_cells": 6344,
+          "local_checked": false,
+          "mutation_us": 0,
+          "name_leaks": 0,
+          "reply_ms": 1.0175470379181206,
+          "retired_checked": false,
+          "retired_leaks": 0,
+          "text_leaks": 0,
+          "word_leaks": 0
+        }
+      ],
+      "wire_journal": {
+        "path": "gtk-accessible-erase-1f6fbd51581d/lifetime-expanded/wire.json",
+        "sha256": "bd80c6bc571693df58dc7f3148f31b0fc912f4f40c9746d56fd6784df94e9c91",
+        "bytes": 2801961,
+        "requests": 88816,
+        "successful": 0,
+        "withdrawn": 88816
+      },
+      "actual_exit": true,
+      "lifetime_semantics": true,
+      "performance_qualified": false
+    },
+    {
+      "archive": "pre-integration",
+      "path": "gtk-accessible-erase-26d9fe8fa80d/lifetime-collapsed/result.json",
+      "sha256": "c01d1cf886cf129f034e3647cea56e0039d17d0c3faa7006a16869b5019431a5",
+      "outcome": "pass",
+      "cohort": "collapsed",
+      "stages": [
+        {
+          "ack": "retire",
+          "callback_us": 313762,
+          "collapsed_leaks": 0,
+          "count_leaks": 0,
+          "held_cells": 6344,
+          "local_checked": false,
+          "mutation_us": 0,
+          "name_leaks": 0,
+          "reply_ms": 313.9196030097082,
+          "retired_checked": true,
+          "retired_leaks": 0,
+          "text_leaks": 0,
+          "word_leaks": 0
+        },
+        {
+          "ack": "erase",
+          "callback_us": 10690,
+          "collapsed_leaks": 0,
+          "count_leaks": 0,
+          "held_cells": 6344,
+          "local_checked": true,
+          "mutation_us": 9553,
+          "name_leaks": 0,
+          "reply_ms": 10.802200995385647,
+          "retired_checked": false,
+          "retired_leaks": 0,
+          "text_leaks": 0,
+          "word_leaks": 0
+        },
+        {
+          "ack": "recover",
+          "callback_us": 1377,
+          "collapsed_leaks": 0,
+          "count_leaks": 0,
+          "held_cells": 6344,
+          "local_checked": true,
+          "mutation_us": 0,
+          "name_leaks": 0,
+          "reply_ms": 1.4826340484432876,
+          "retired_checked": false,
+          "retired_leaks": 0,
+          "text_leaks": 0,
+          "word_leaks": 0
+        },
+        {
+          "ack": "quit",
+          "callback_us": 3,
+          "collapsed_leaks": 0,
+          "count_leaks": 0,
+          "held_cells": 6344,
+          "local_checked": false,
+          "mutation_us": 0,
+          "name_leaks": 0,
+          "reply_ms": 0.6092619732953608,
+          "retired_checked": false,
+          "retired_leaks": 0,
+          "text_leaks": 0,
+          "word_leaks": 0
+        }
+      ],
+      "wire_journal": {
+        "path": "gtk-accessible-erase-26d9fe8fa80d/lifetime-collapsed/wire.json",
+        "sha256": "bd80c6bc571693df58dc7f3148f31b0fc912f4f40c9746d56fd6784df94e9c91",
+        "bytes": 2801961,
+        "requests": 88816,
+        "successful": 0,
+        "withdrawn": 88816
+      },
+      "actual_exit": true,
+      "lifetime_semantics": true,
+      "performance_qualified": false
+    },
+    {
+      "archive": "pre-integration",
+      "path": "gtk-accessible-erase-26d9fe8fa80d/lifetime-expanded/result.json",
+      "sha256": "c2fab37d8f2cce3c1a884404fffbbdd4ed74a3f066df3b40f537dbaf12b7ec3e",
+      "outcome": "pass",
+      "cohort": "expanded",
+      "stages": [
+        {
+          "ack": "retire",
+          "callback_us": 3678,
+          "collapsed_leaks": 0,
+          "count_leaks": 0,
+          "held_cells": 6344,
+          "local_checked": false,
+          "mutation_us": 0,
+          "name_leaks": 0,
+          "reply_ms": 3.7886759964749217,
+          "retired_checked": true,
+          "retired_leaks": 0,
+          "text_leaks": 0,
+          "word_leaks": 0
+        },
+        {
+          "ack": "erase",
+          "callback_us": 886400,
+          "collapsed_leaks": 0,
+          "count_leaks": 0,
+          "held_cells": 6344,
+          "local_checked": true,
+          "mutation_us": 885033,
+          "name_leaks": 0,
+          "reply_ms": 886.5516880177893,
+          "retired_checked": false,
+          "retired_leaks": 0,
+          "text_leaks": 0,
+          "word_leaks": 0
+        },
+        {
+          "ack": "recover",
+          "callback_us": 1628,
+          "collapsed_leaks": 0,
+          "count_leaks": 0,
+          "held_cells": 6344,
+          "local_checked": true,
+          "mutation_us": 0,
+          "name_leaks": 0,
+          "reply_ms": 1.7396049806848168,
+          "retired_checked": false,
+          "retired_leaks": 0,
+          "text_leaks": 0,
+          "word_leaks": 0
+        },
+        {
+          "ack": "quit",
+          "callback_us": 3,
+          "collapsed_leaks": 0,
+          "count_leaks": 0,
+          "held_cells": 6344,
+          "local_checked": false,
+          "mutation_us": 0,
+          "name_leaks": 0,
+          "reply_ms": 0.6748249870724976,
+          "retired_checked": false,
+          "retired_leaks": 0,
+          "text_leaks": 0,
+          "word_leaks": 0
+        }
+      ],
+      "wire_journal": {
+        "path": "gtk-accessible-erase-26d9fe8fa80d/lifetime-expanded/wire.json",
+        "sha256": "bd80c6bc571693df58dc7f3148f31b0fc912f4f40c9746d56fd6784df94e9c91",
+        "bytes": 2801961,
+        "requests": 88816,
+        "successful": 0,
+        "withdrawn": 88816
+      },
+      "actual_exit": true,
+      "lifetime_semantics": true,
+      "performance_qualified": false
+    }
+  ],
+  "real_inspector_cases": [
+    {
+      "archive": "optimized-real-inspector",
+      "path": "inspector-cell-lifetime-052992522fd1/result.json",
+      "sha256": "2d51c75d0b8f1ef084186cfb19cd3319dd60be56a70d96547a54a1245948bac3",
+      "outcome": "pass",
+      "source_records": [
+        "out/evidence/gtk-cell-lifetime-checks/build-987c6269/result.json",
+        "out/evidence/gtk-cell-lifetime-checks/composition-dd7c24ff/result.json",
+        "out/evidence/gtk-cell-lifetime-checks/history-regressions-f2680b7b/result.json",
+        "out/evidence/gtk-cell-lifetime-checks/native-GTK-CELL-LIFETIME-1fe71fc8/result.json",
+        "out/evidence/gtk-cell-lifetime-checks/native-GTK-HISTORY-LIMITS-bfaaaf9a/result.json",
+        "out/evidence/gtk-cell-lifetime-checks/native-INSPECTOR-CELL-LIFETIME-92a5e4c9/result.json",
+        "out/evidence/gtk-cell-lifetime-checks/native-INSPECTOR-LIVE-TABLES-1bb95098/result.json",
+        "out/evidence/gtk-cell-lifetime-checks/native-INSTALLED-INSPECTOR-147e55cb/result.json",
+        "out/evidence/gtk-cell-lifetime-checks/native-INSTALLED-TELEMETRY-4c566474/result.json",
+        "out/evidence/gtk-cell-lifetime-checks/native-TABLE-ERASURE-5a142379/result.json"
+      ],
+      "executable_sha256": "2ba9c6590d3d29bf16364b80be049184149a67a46a8d0bfc8dabd8a32ed76ff8",
+      "observed": {
+        "after_destroy_empty": true,
+        "collapsed_children": 6,
+        "defunct_once": true,
+        "fresh_cells": 4,
+        "initial_cells": 8,
+        "native_modern_word_unsupported": true,
+        "original_points": [
+          "10 byte; generation 1; start",
+          "11 byte; generation 2; join",
+          "12 byte; generation 3; join"
+        ],
+        "outcome": "pass",
+        "renderer_columns": 2
+      }
+    },
+    {
+      "archive": "real-inspector-pass",
+      "path": "inspector-cell-lifetime-534207d65835/result.json",
+      "sha256": "838ba450be2c9952227e3556400efda3351e0a9ea27149d9ead4ee745850bdc0",
+      "outcome": "pass",
+      "source_records": [
+        "out/evidence/gtk-cell-lifetime-checks/build-f2e5295e/result.json",
+        "out/evidence/gtk-cell-lifetime-checks/history-regressions-16bab7eb/result.json",
+        "out/evidence/gtk-cell-lifetime-checks/native-GTK-CELL-LIFETIME-44c1c80c/result.json",
+        "out/evidence/gtk-cell-lifetime-checks/native-INSPECTOR-CELL-LIFETIME-4c221e22/result.json",
+        "out/evidence/gtk-cell-lifetime-checks/native-INSPECTOR-LIVE-TABLES-660a9d9b/result.json",
+        "out/evidence/gtk-cell-lifetime-checks/native-INSTALLED-INSPECTOR-649190de/result.json",
+        "out/evidence/gtk-cell-lifetime-checks/native-INSTALLED-TELEMETRY-b7ce1ed0/result.json",
+        "out/evidence/gtk-cell-lifetime-checks/native-TABLE-ERASURE-8b4eecf8/result.json"
+      ],
+      "executable_sha256": "18f56e3a760c55a366f2986a8db43eeafeb07353a99100a0bdeb3827ffd90997",
+      "observed": {
+        "after_destroy_empty": true,
+        "collapsed_children": 6,
+        "defunct_once": true,
+        "fresh_cells": 4,
+        "initial_cells": 8,
+        "native_modern_word_unsupported": true,
+        "original_points": [
+          "10 byte; generation 1; start",
+          "11 byte; generation 2; join",
+          "12 byte; generation 3; join"
+        ],
+        "outcome": "pass",
+        "renderer_columns": 2
+      }
+    }
+  ],
+  "table_cases": [
+    {
+      "archive": "live-tables-failure",
+      "path": "inspector-live-table-3be0d68ad7/MAX-CELLS/result.json",
+      "sha256": "b14251cd4dffc3665323de436b10b82fd5e58c7539eebd7cf26f7a72c53cf58e",
+      "outcome": "pass",
+      "case": "MAX-CELLS",
+      "timing_max_us": {
+        "delay_us": 73567,
+        "work_us": 24609
+      },
+      "timing_violations": [],
+      "erasure_ms": null,
+      "frontend_sha256": "1f466ed458c7088a6ef3edb0f2d804698b68fb79bddf4c65940309ecda2fb986",
+      "failure": null
+    },
+    {
+      "archive": "live-tables-failure",
+      "path": "inspector-live-table-3be0d68ad7/MAX-ROWS/result.json",
+      "sha256": "8653dcf7d50e660c936acf5c2a3ac1e1671148facf5b3bd5af2f2ff3b0a32e93",
+      "outcome": "pass",
+      "case": "MAX-ROWS",
+      "timing_max_us": {
+        "delay_us": 27141,
+        "work_us": 34557
+      },
+      "timing_violations": [],
+      "erasure_ms": null,
+      "frontend_sha256": "1f466ed458c7088a6ef3edb0f2d804698b68fb79bddf4c65940309ecda2fb986",
+      "failure": null
+    },
+    {
+      "archive": "live-tables-failure",
+      "path": "inspector-live-table-3be0d68ad7/NAVIGATION/result.json",
+      "sha256": "20d2f2d8f47925630fdf7a4441095f93b44bb2b8752fa260a79cbf377b756b46",
+      "outcome": "pass",
+      "case": "NAVIGATION",
+      "timing_max_us": {
+        "delay_us": 67720,
+        "work_us": 39361
+      },
+      "timing_violations": [],
+      "erasure_ms": null,
+      "frontend_sha256": "1f466ed458c7088a6ef3edb0f2d804698b68fb79bddf4c65940309ecda2fb986",
+      "failure": null
+    },
+    {
+      "archive": "live-tables-failure",
+      "path": "inspector-live-table-3be0d68ad7/ORACLE/result.json",
+      "sha256": "0310adaf35c2bea03ef2031857ae15ce8eb080b6a92c394d5fef8de2d0c5944d",
+      "outcome": "pass",
+      "case": "ORACLE",
+      "timing_max_us": {
+        "delay_us": 77075,
+        "work_us": 36638
+      },
+      "timing_violations": [],
+      "erasure_ms": null,
+      "frontend_sha256": "1f466ed458c7088a6ef3edb0f2d804698b68fb79bddf4c65940309ecda2fb986",
+      "failure": null
+    },
+    {
+      "archive": "live-tables-failure",
+      "path": "inspector-live-table-3be0d68ad7/OVER-CELLS/result.json",
+      "sha256": "289f7759a79a1507f8b96ef0029d50bb9afb7e74e00fa532eeb02a6509fbc33f",
+      "outcome": "pass",
+      "case": "OVER-CELLS",
+      "timing_max_us": {
+        "delay_us": 1899,
+        "work_us": 26923
+      },
+      "timing_violations": [],
+      "erasure_ms": null,
+      "frontend_sha256": "1f466ed458c7088a6ef3edb0f2d804698b68fb79bddf4c65940309ecda2fb986",
+      "failure": null
+    },
+    {
+      "archive": "live-tables-failure",
+      "path": "inspector-live-table-3be0d68ad7/POLICY/result.json",
+      "sha256": "c26158124928c936c4e8d6484cf4de72ff57e28ff2f891ab57eb64886b6c208f",
+      "outcome": "fail",
+      "case": "POLICY",
+      "timing_max_us": {
+        "delay_us": 8771,
+        "work_us": 106937
+      },
+      "timing_violations": [
+        {
+          "delay_us": 0,
+          "index": 425,
+          "pid": 1672009,
+          "work_us": 106937
+        }
+      ],
+      "erasure_ms": 169.4899220019579,
+      "frontend_sha256": "1f466ed458c7088a6ef3edb0f2d804698b68fb79bddf4c65940309ecda2fb986",
+      "failure": "Traceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_installed_editor.py\", line 240, in observe\n    extension(dict(locals(),process=lambda:proc));report['outcome']='pass';return\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_inspector_live_tables.py\", line 89, in exercise\n    assert not report['timing_violations'],('GUI timing limit exceeded',report['timing_violations'])\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: ('GUI timing limit exceeded', [{'index': 425, 'pid': 1672009, 'work_us': 106937, 'delay_us': 0}])\n"
+    },
+    {
+      "archive": "live-tables-failure",
+      "path": "inspector-live-table-3be0d68ad7/TRUNCATION/result.json",
+      "sha256": "0fb1ddc3755f1742f2ea3a3d39b3285d9d113febd0e45a0eda47c713e05b9a9f",
+      "outcome": "pass",
+      "case": "TRUNCATION",
+      "timing_max_us": {
+        "delay_us": 61887,
+        "work_us": 31885
+      },
+      "timing_violations": [],
+      "erasure_ms": null,
+      "frontend_sha256": "1f466ed458c7088a6ef3edb0f2d804698b68fb79bddf4c65940309ecda2fb986",
+      "failure": null
+    },
+    {
+      "archive": "optimized-live-tables",
+      "path": "inspector-live-table-40c34b0022/MAX-CELLS/result.json",
+      "sha256": "16e8f338059bd0a56bdc77372d102517f7e350ec190df2fc22dfac2570286409",
+      "outcome": "pass",
+      "case": "MAX-CELLS",
+      "timing_max_us": {
+        "delay_us": 68898,
+        "work_us": 35595
+      },
+      "timing_violations": [],
+      "erasure_ms": null,
+      "frontend_sha256": "e99a6788e10a6ded056b6bfdc12405ecf2ab1aebdfcc06f8e217b50554b456ea",
+      "failure": null
+    },
+    {
+      "archive": "optimized-live-tables",
+      "path": "inspector-live-table-40c34b0022/MAX-ROWS/result.json",
+      "sha256": "699b8e1ce754b420b4f28ffb496c4858a5e8fc3036b24ab2bbbb756a99a1d4a1",
+      "outcome": "pass",
+      "case": "MAX-ROWS",
+      "timing_max_us": {
+        "delay_us": 19119,
+        "work_us": 31058
+      },
+      "timing_violations": [],
+      "erasure_ms": null,
+      "frontend_sha256": "e99a6788e10a6ded056b6bfdc12405ecf2ab1aebdfcc06f8e217b50554b456ea",
+      "failure": null
+    },
+    {
+      "archive": "optimized-live-tables",
+      "path": "inspector-live-table-40c34b0022/NAVIGATION/result.json",
+      "sha256": "6ba6425d79ded0402019996ce3786d40e8d62bd0025e5c760e738e8e90d54f71",
+      "outcome": "pass",
+      "case": "NAVIGATION",
+      "timing_max_us": {
+        "delay_us": 72229,
+        "work_us": 23868
+      },
+      "timing_violations": [],
+      "erasure_ms": null,
+      "frontend_sha256": "e99a6788e10a6ded056b6bfdc12405ecf2ab1aebdfcc06f8e217b50554b456ea",
+      "failure": null
+    },
+    {
+      "archive": "optimized-live-tables",
+      "path": "inspector-live-table-40c34b0022/ORACLE/result.json",
+      "sha256": "79440be62479381494d4dd5d31294f860d65697bc02a1471bbd2c068517607e8",
+      "outcome": "pass",
+      "case": "ORACLE",
+      "timing_max_us": {
+        "delay_us": 78864,
+        "work_us": 34639
+      },
+      "timing_violations": [],
+      "erasure_ms": null,
+      "frontend_sha256": "e99a6788e10a6ded056b6bfdc12405ecf2ab1aebdfcc06f8e217b50554b456ea",
+      "failure": null
+    },
+    {
+      "archive": "optimized-live-tables",
+      "path": "inspector-live-table-40c34b0022/OVER-CELLS/result.json",
+      "sha256": "0a79603c5c25c4ea834268664498cf22f92f87b3c3d98d3896a544b0282cab75",
+      "outcome": "pass",
+      "case": "OVER-CELLS",
+      "timing_max_us": {
+        "delay_us": 3947,
+        "work_us": 19239
+      },
+      "timing_violations": [],
+      "erasure_ms": null,
+      "frontend_sha256": "e99a6788e10a6ded056b6bfdc12405ecf2ab1aebdfcc06f8e217b50554b456ea",
+      "failure": null
+    },
+    {
+      "archive": "optimized-live-tables",
+      "path": "inspector-live-table-40c34b0022/POLICY/result.json",
+      "sha256": "9e1129885327c254c7de19e2ebef904afe63258f81b2fe7a5375e79ae165c12d",
+      "outcome": "pass",
+      "case": "POLICY",
+      "timing_max_us": {
+        "delay_us": 5352,
+        "work_us": 92613
+      },
+      "timing_violations": [],
+      "erasure_ms": 135.39814000250772,
+      "frontend_sha256": "e99a6788e10a6ded056b6bfdc12405ecf2ab1aebdfcc06f8e217b50554b456ea",
+      "failure": null
+    },
+    {
+      "archive": "optimized-live-tables",
+      "path": "inspector-live-table-40c34b0022/TRUNCATION/result.json",
+      "sha256": "21d2fc407b864e1a101b24ca480dc51b53a9d365e360f56f60d1549c560ecf50",
+      "outcome": "pass",
+      "case": "TRUNCATION",
+      "timing_max_us": {
+        "delay_us": 79348,
+        "work_us": 69052
+      },
+      "timing_violations": [],
+      "erasure_ms": null,
+      "frontend_sha256": "e99a6788e10a6ded056b6bfdc12405ecf2ab1aebdfcc06f8e217b50554b456ea",
+      "failure": null
+    }
+  ],
+  "ordinary_maximum_history_cases": [
+    {
+      "archive": "optimized-history-limits",
+      "path": "gtk-history-eddfc9b0a2ce/chart/result.json",
+      "sha256": "9847c9105fd9226375d78943cbfaa6081175c0cec3d8bb7a9a1e87ed381ece14",
+      "outcome": "fail",
+      "case": "chart",
+      "timing_max_us": {
+        "delay_us": 1734,
+        "work_us": 718584
+      },
+      "timing_records": 15973,
+      "timing_violations": [
+        {
+          "delay_us": 446,
+          "index": 15957,
+          "work_us": 718584
+        }
+      ],
+      "observations": [
+        {
+          "ack": "fill",
+          "command_work_us": 0,
+          "generation": 3138,
+          "reason": ""
+        },
+        {
+          "generation": 3138,
+          "rows": 3139,
+          "sha256": "9fad730fbbcb7af09fe93c7b8f683dd29831fc106db5f202ed708015e00d7367"
+        },
+        {
+          "ack": "over",
+          "command_work_us": 1,
+          "generation": 3139,
+          "reason": "surface.capacity"
+        },
+        {
+          "ack": "recover",
+          "command_work_us": 1,
+          "generation": 4098,
+          "reason": ""
+        },
+        {
+          "generation": 4098,
+          "rows": 2,
+          "sha256": "d451a899eb91ee8681165088ad6cf3aef7a3b28b3562c6d592fda2f2fc610266"
+        },
+        {
+          "ack": "revoke",
+          "command_work_us": 531,
+          "generation": 4098,
+          "reason": ""
+        },
+        {
+          "ack": "fresh",
+          "command_work_us": 49,
+          "generation": 4099,
+          "reason": ""
+        },
+        {
+          "generation": 4099,
+          "rows": 2,
+          "sha256": "8f41b7d11f89df8a005af0e947cddb18d217cadf86d7fc959cda5f5318d9cd76"
+        },
+        {
+          "ack": "close",
+          "command_work_us": 454,
+          "generation": 4099,
+          "producer": {
+            "accepted": 3141,
+            "clock_gap_max_ms": 34,
+            "failure": 0,
+            "publication_max_us": 3545,
+            "receiver_owner": true,
+            "renderer_stopped": true,
+            "stopped": true
+          },
+          "reason": "surface.closed"
+        },
+        {
+          "ack": "quit",
+          "command_work_us": 5,
+          "generation": 4099,
+          "reason": "surface.closed"
+        }
+      ],
+      "failure": null,
+      "timing_failure": null
+    },
+    {
+      "archive": "optimized-history-limits",
+      "path": "gtk-history-eddfc9b0a2ce/mixed/result.json",
+      "sha256": "a363d26168ca5f6a37cb3d287e792e91d39a5fc388d94653b9a44ab2467f9762",
+      "outcome": "fail",
+      "case": "mixed",
+      "timing_max_us": {
+        "delay_us": 75321,
+        "work_us": 534685
+      },
+      "timing_records": 21073,
+      "timing_violations": [
+        {
+          "delay_us": 858,
+          "index": 21037,
+          "work_us": 534685
+        }
+      ],
+      "observations": [
+        {
+          "ack": "fill",
+          "command_work_us": 1,
+          "generation": 2087,
+          "reason": ""
+        },
+        {
+          "generation": 2087,
+          "rows": 2409,
+          "sha256": "fc69335c07d68f6f0735569f9f38ed45cc5ce2f7e4ca302878f85441229d43de"
+        },
+        {
+          "ack": "over",
+          "command_work_us": 1,
+          "generation": 2088,
+          "reason": "surface.capacity"
+        },
+        {
+          "ack": "recover",
+          "command_work_us": 2,
+          "generation": 4098,
+          "reason": ""
+        },
+        {
+          "generation": 4098,
+          "rows": 323,
+          "sha256": "4d1bf33bf19c90091a91eb7f1c986ede1e06b48c3921738cb918d5d698fcfd71"
+        },
+        {
+          "ack": "revoke",
+          "command_work_us": 77023,
+          "generation": 4098,
+          "reason": ""
+        },
+        {
+          "ack": "fresh",
+          "command_work_us": 65,
+          "generation": 4099,
+          "reason": ""
+        },
+        {
+          "generation": 4099,
+          "rows": 323,
+          "sha256": "2610843462fb8bde847d1feb53d31bf523109e170210f77de9b11716678a8c8a"
+        },
+        {
+          "ack": "close",
+          "command_work_us": 76727,
+          "generation": 4099,
+          "producer": {
+            "accepted": 2090,
+            "clock_gap_max_ms": 150,
+            "failure": 0,
+            "publication_max_us": 191929,
+            "receiver_owner": true,
+            "renderer_stopped": true,
+            "stopped": true
+          },
+          "reason": "surface.closed"
+        },
+        {
+          "ack": "quit",
+          "command_work_us": 4,
+          "generation": 4099,
+          "reason": "surface.closed"
+        }
+      ],
+      "failure": null,
+      "timing_failure": null
+    }
+  ],
+  "preserved_failures": {
+    "original_strict_experiment": "All six original strict wire-empty cases remain failed in preceding checkpoint; new lifecycle semantics never map errors to empty success",
+    "optional_modern_word": "Original native inspector fixture incorrectly required allocated empty from an unimplemented optional slot; preserved failure/source, corrected using pinned GTK/ATK definitions and pre-retirement absence",
+    "compile": "Missing initializer_list in first public empty-cache guard build; exact compiler output/source retained",
+    "policy": {
+      "archive": "live-tables-failure",
+      "path": "inspector-live-table-3be0d68ad7/POLICY/result.json",
+      "sha256": "c26158124928c936c4e8d6484cf4de72ff57e28ff2f891ab57eb64886b6c208f",
+      "outcome": "fail",
+      "case": "POLICY",
+      "timing_max_us": {
+        "delay_us": 8771,
+        "work_us": 106937
+      },
+      "timing_violations": [
+        {
+          "delay_us": 0,
+          "index": 425,
+          "pid": 1672009,
+          "work_us": 106937
+        }
+      ],
+      "erasure_ms": 169.4899220019579,
+      "frontend_sha256": "1f466ed458c7088a6ef3edb0f2d804698b68fb79bddf4c65940309ecda2fb986",
+      "failure": "Traceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_installed_editor.py\", line 240, in observe\n    extension(dict(locals(),process=lambda:proc));report['outcome']='pass';return\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_inspector_live_tables.py\", line 89, in exercise\n    assert not report['timing_violations'],('GUI timing limit exceeded',report['timing_violations'])\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: ('GUI timing limit exceeded', [{'index': 425, 'pid': 1672009, 'work_us': 106937, 'delay_us': 0}])\n"
+    }
+  },
+  "qualification": {
+    "cell_lifetime": "All original retained native caches clear on collapse/retirement/erase/regrant, with exact active/fresh data and verified remote withdrawal",
+    "standard_defunct": "Actual inspector original/fresh cells transition exactly once and remain empty after widget destruction",
+    "performance": "Maximum history and general GTK GUI/erasure performance remain unqualified; no sample or limit is discarded",
+    "editions": "Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X full release gates remain open"
+  },
+  "primary_definitions": [
+    "https://raw.githubusercontent.com/GNOME/gtk/3.24.41/gtk/a11y/gtktextcellaccessible.c",
+    "https://raw.githubusercontent.com/GNOME/at-spi2-core/AT_SPI2_CORE_2_52_0/atk/atktext.c"
+  ],
+  "next_steps": [
+    "Attribute maximum GTK history presentation and erasure, preserving complete content, retained-cell privacy and original 100/200-ms oracles",
+    "Qualify maximum-policy/history and installed accumulation, human accessibility, desktop/lifecycle composition",
+    "Complete the five full required editions and their release gates"
+  ],
+  "recorders": [
+    {
+      "local_path": "out/campaign/gtk_cell_lifetime_checks.py",
+      "sha256": "e6f89d98a9317c095eb7fa30c3b2be63c9f0957a093751cfaf9a15dd9df85fe3"
+    },
+    {
+      "local_path": "out/campaign/archive_gtk_cell_lifetime.py",
+      "sha256": "3e842f780384dd29575e28166d0eb5ecb8735380acd7d5980dffd73f9a0be980"
+    },
+    {
+      "local_path": "out/campaign/gtk_cell_lifetime_environment.py",
+      "sha256": "20f856dfc50d6a6b6bc7ec1b113763616b59edd262f63566c9d883ca3cea2ded"
+    },
+    {
+      "local_path": "out/campaign/record_gtk_cell_lifetime.py",
+      "sha256": "d6ba27c5ca1c4f1e1d88cbd0bc2b2b086493bdac17e1715e9564015b52b978dc"
+    }
+  ],
+  "specification_checks": {
+    "steps": [
+      {
+        "step": "budget",
+        "command": [
+          "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+          "-X",
+          "utf8",
+          "source/build/check_workspace_budget.py",
+          "--action",
+          "test"
+        ],
+        "environment": {
+          "TMP": "D:\\Projects\\SysPane\\syspane\\out\\test-tmp\\gtk-cell-lifetime",
+          "TEMP": "D:\\Projects\\SysPane\\syspane\\out\\test-tmp\\gtk-cell-lifetime",
+          "GIT_CEILING_DIRECTORIES": "D:/Projects/SysPane/syspane/out/test-tmp/gtk-cell-lifetime"
+        },
+        "started_at": "2026-10-11T23:46:25.646371+00:00",
+        "finished_at": "2026-10-11T23:46:31.261015+00:00",
+        "exit": 0,
+        "stdout_sha256": "805661010f45c2f417d7d99cf622b3213562858d97d8bfc6e7b32dbd4ff5860d",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "step": "generate",
+        "command": [
+          "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+          "-X",
+          "utf8",
+          "spec/tools/specctl.py",
+          "generate"
+        ],
+        "environment": {
+          "TMP": "D:\\Projects\\SysPane\\syspane\\out\\test-tmp\\gtk-cell-lifetime",
+          "TEMP": "D:\\Projects\\SysPane\\syspane\\out\\test-tmp\\gtk-cell-lifetime",
+          "GIT_CEILING_DIRECTORIES": "D:/Projects/SysPane/syspane/out/test-tmp/gtk-cell-lifetime"
+        },
+        "started_at": "2026-10-11T23:46:31.261694+00:00",
+        "finished_at": "2026-10-11T23:46:31.547828+00:00",
+        "exit": 0,
+        "stdout_sha256": "433bc9cf0ed9aecb0fd853cd594a7f65c16c5c44afa00c08968558a32d5656c9",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "step": "validate",
+        "command": [
+          "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+          "-X",
+          "utf8",
+          "spec/tools/specctl.py",
+          "validate",
+          "--schemas"
+        ],
+        "environment": {
+          "TMP": "D:\\Projects\\SysPane\\syspane\\out\\test-tmp\\gtk-cell-lifetime",
+          "TEMP": "D:\\Projects\\SysPane\\syspane\\out\\test-tmp\\gtk-cell-lifetime",
+          "GIT_CEILING_DIRECTORIES": "D:/Projects/SysPane/syspane/out/test-tmp/gtk-cell-lifetime"
+        },
+        "started_at": "2026-10-11T23:46:31.548162+00:00",
+        "finished_at": "2026-10-11T23:46:33.860102+00:00",
+        "exit": 0,
+        "stdout_sha256": "fe0181b2c88d618f4bf8f83d6c8baaec5c24a5ba4115925a5be7e086087f1b87",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "step": "tools",
+        "command": [
+          "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+          "-X",
+          "utf8",
+          "spec/tools/tests/test_specctl.py",
+          "-v"
+        ],
+        "environment": {
+          "TMP": "D:\\Projects\\SysPane\\syspane\\out\\test-tmp\\gtk-cell-lifetime",
+          "TEMP": "D:\\Projects\\SysPane\\syspane\\out\\test-tmp\\gtk-cell-lifetime",
+          "GIT_CEILING_DIRECTORIES": "D:/Projects/SysPane/syspane/out/test-tmp/gtk-cell-lifetime"
+        },
+        "started_at": "2026-10-11T23:46:33.860460+00:00",
+        "finished_at": "2026-10-11T23:47:37.965928+00:00",
+        "exit": 0,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "4a4d86d98dd5e400de4ee615c48e163f5b11ea5971e9aac9c76341a2f24f7aab"
+      }
+    ],
+    "schemas": 51,
+    "fixtures": 183,
+    "tools": {
+      "total": 62,
+      "passed": 60,
+      "skipped": 2
+    },
+    "skip_reason": "Existing Windows symlink privilege restrictions",
+    "logs": [
+      {
+        "local_path": "out/evidence/gtk-cell-lifetime/spec-checks/budget.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "local_path": "out/evidence/gtk-cell-lifetime/spec-checks/budget.stdout",
+        "sha256": "805661010f45c2f417d7d99cf622b3213562858d97d8bfc6e7b32dbd4ff5860d"
+      },
+      {
+        "local_path": "out/evidence/gtk-cell-lifetime/spec-checks/generate.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "local_path": "out/evidence/gtk-cell-lifetime/spec-checks/generate.stdout",
+        "sha256": "433bc9cf0ed9aecb0fd853cd594a7f65c16c5c44afa00c08968558a32d5656c9"
+      },
+      {
+        "local_path": "out/evidence/gtk-cell-lifetime/spec-checks/result.json",
+        "sha256": "5de875835b8088278674b9b65f315fd527c62a6dfad9598f4d7c22cdfe3748ae"
+      },
+      {
+        "local_path": "out/evidence/gtk-cell-lifetime/spec-checks/tools.stderr",
+        "sha256": "4a4d86d98dd5e400de4ee615c48e163f5b11ea5971e9aac9c76341a2f24f7aab"
+      },
+      {
+        "local_path": "out/evidence/gtk-cell-lifetime/spec-checks/tools.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "local_path": "out/evidence/gtk-cell-lifetime/spec-checks/validate.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "local_path": "out/evidence/gtk-cell-lifetime/spec-checks/validate.stdout",
+        "sha256": "fe0181b2c88d618f4bf8f83d6c8baaec5c24a5ba4115925a5be7e086087f1b87"
+      }
+    ]
+  }
+}

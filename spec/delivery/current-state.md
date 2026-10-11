@@ -12,10 +12,28 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-11T22:44:46.703477+00:00", "scope": "Retained/collapsed GTK cache experiment, exact remote withdrawal and preserved unqualified candidates"}
+updated: {"by": "codex", "at": "2026-10-11T23:46:25.312722+00:00", "scope": "Product native GTK cell-lifetime repair and preserved unqualified timing boundaries"}
 ---
 
 # Current state and next admitted boundary
+
+The [GTK cell lifetime repair](gtk-cell-lifetime-handoff.md) clears inherited
+native caches before normal cell retirement in both actual inspector columns.
+All 6344 held cells per complete cohort clear through collapse/removal/erase and
+fresh recovery; exact remote withdrawal stays distinct from empty replies. The
+real-widget fixture preserves one normal defunct transition per cell through
+destruction. Two graph checks, five affected native suites, erasure and installed
+inspector/telemetry pass. The final seven table cases pass; preserve the earlier
+106.937-ms POLICY failure and optional-modern-word fixture/compiler failures.
+Ordinary maximum history also fails GUI work at 718.584/534.685 ms, despite
+complete content/recovery and actual producer/renderer exit. Maximum native
+history/GUI/erasure remains unqualified, including slow complete lifetime
+callbacks. Next attribute presentation/retirement costs, then qualify
+maximum policy/history, installed cadence, human accessibility and desktop/lifecycle
+composition. W-11 and all five complete editions remain open. Tooling lives in
+source/build; raw archives stay in ignored out/ and build-support remains absent.
+
+Earlier checkpoints below describe their recorded source revisions.
 
 The [retained GTK cache experiment](gtk-accessible-erasure-handoff.md) exposes
 local values left by blank/detach after collapse/removal. Public cache refresh

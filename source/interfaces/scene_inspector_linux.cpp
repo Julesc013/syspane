@@ -1,6 +1,7 @@
 #include "scene_inspector.hpp"
 #include "scene_inspector_admission.hpp"
 #include "scene_inspector_model.hpp"
+#include "scene_inspector_text_linux.hpp"
 #include <gtk/gtk.h>
 #include <thread>
 #include <limits>
@@ -169,7 +170,7 @@ SceneInspector::SceneInspector(c::Authority authority,c::Policy policy,r::Surfac
     auto* scroll=gtk_scrolled_window_new(nullptr,nullptr);gtk_box_pack_start(GTK_BOX(i.root),scroll,TRUE,TRUE,0);
     i.tree=gtk_tree_view_new_with_model(i.model());g_object_ref_sink(i.tree);gtk_container_add(GTK_CONTAINER(scroll),i.tree);gtk_tree_view_set_enable_search(GTK_TREE_VIEW(i.tree),FALSE);
     for(const auto& pair:{std::make_pair(item_column,"inspector.item"),std::make_pair(information_column,"inspector.information")}){
-        auto* cell=gtk_cell_renderer_text_new();auto* column=gtk_tree_view_column_new_with_attributes(labels.at(pair.second).c_str(),cell,"text",pair.first,nullptr);
+        auto* cell=inspector_text_renderer();auto* column=gtk_tree_view_column_new_with_attributes(labels.at(pair.second).c_str(),cell,"text",pair.first,nullptr);
         gtk_tree_view_column_set_sizing(column,GTK_TREE_VIEW_COLUMN_GROW_ONLY);gtk_tree_view_column_set_resizable(column,TRUE);gtk_tree_view_append_column(GTK_TREE_VIEW(i.tree),column);}
     atk_object_set_name(gtk_widget_get_accessible(i.tree),labels.at("inspector.information").c_str());atk_object_set_description(gtk_widget_get_accessible(i.tree),"syspane.scene.inspector");
     g_signal_connect(i.tree,"row-expanded",G_CALLBACK(+[](GtkTreeView*,GtkTreeIter* iter,GtkTreePath*,gpointer p){auto& owner=*static_cast<Impl*>(p);try{if(!owner.batch&&!owner.closed)owner.expansion[text(owner.model(),iter,key_column)]=true;}catch(...){owner.shut();}}),&i);

@@ -96,6 +96,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Independent editor paint call trace](w-11-editor-paint-trace.md) — Resolve whether geometry-only editor work performs native rasterization before choosing a repair.
 - [Bounded frontend phase diagnosis](w-11-frontend-phases.md) — Attribute remaining GTK stalls without changing the fixed timing oracle or admitting a runtime override.
 - [Frontend recovery authority and accepted-request identity](w-11-frontend-recovery.md) — Connect the actual frontend backend to scoped recovery admission and preserve exact accepted-draft metadata.
+- [GTK text-cell cache lifetime ownership](w-11-gtk-cell-lifetime.md) — Clear cached disclosure before collapse/removal retires a cell; preserve standard lifecycle events.
 - [Native GTK maximum fitting chart and mixed histories](w-11-gtk-history-limits.md) — Admit every controlled publication before independent native accessibility qualification.
 - [Prepared history in the current native form](w-11-history-form.md) — Integrate bounded history tasks with current-form adoption, capture suspension and preview refresh.
 - [Prepared editor history transitions](w-11-history-preparation.md) — Validate undo/redo off the GUI without transferring stale draft or permission proofs.
