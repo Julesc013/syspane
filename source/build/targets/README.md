@@ -1,6 +1,10 @@
 # Foundation development profiles
 
-Current revisions are Windows x64 45, Linux x64 79 and historical x86 36. The
+Current revisions are Windows x64 45, Linux x64 80 and historical x86 36. The
+[table raster package](../../../spec/delivery/packages/w-11-table-raster-reuse.md)
+adds exact composition-local raster reuse and frozen pixel/error checks on Linux.
+Its ordinary and phase maximum-table timing runs still fail; preserve those
+attempts. The
 [continuous replay package](../../../spec/delivery/packages/w-07-continuous-replay.md)
 adds explicit measured-state replay admission while preserving the legacy mode.
 All profiles pass 146 selected shared checks; historical import audits remain

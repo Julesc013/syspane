@@ -125,6 +125,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Native request preparation ownership](w-11-request-worker.md) — Bound request preparation on the existing native worker without granting submission authority.
 - [Native scene inspector navigation and disclosure](w-11-scene-inspector.md) — Expose scene semantics through native controls with identity-stable navigation and current inspector authority.
 - [Resource-aware native settings](w-11-settings-resources.md) — Preserve exact resource selection through settings drafts, native commits and restart.
+- [Table composition reuse of exact native rasters](w-11-table-raster-reuse.md) — Remove duplicate native drawing within one table without changing pixels, logical construction charges or erasure.
 - [Composition-scoped native font setup](w-11-text-session.md) — Reuse Linux font setup within one synchronous composition while preserving exact rendering and erasure.
 - [Immutable authored validation for native composition](w-11-validated-authored.md) — Remove repeated structural validation while retaining current geometry, resource and policy checks.
 - [Exact validated theme reuse during composition](w-11-validated-theme.md) — Remove repeated theme schema walks without changing request validation, typography or pixel output.

@@ -11,6 +11,12 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
+The [table raster checkpoint](spec/delivery/table-raster-reuse-handoff.md) preserves
+exact native pixels while removing repeated drawing inside a table composition.
+All 32 frozen checks pass, but ordinary and phase maximum-table timing still fail.
+The next boundary is background admission/painting with current-policy adoption;
+native maximum histories and all complete editions remain open.
+
 The [continuous replay checkpoint](spec/delivery/continuous-replay-handoff.md)
 closes the 128-publication foundation limit through explicit negotiation and
 permanent sequence reservations. Forty-four exact chart/mixed frame cases pass;

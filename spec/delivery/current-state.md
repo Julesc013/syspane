@@ -12,10 +12,19 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-11T13:50:34.595552+00:00", "scope": "Continuous replay and exact chart/mixed frame boundaries"}
+updated: {"by": "codex", "at": "2026-10-11T14:34:14.540702+00:00", "scope": "Exact table raster equivalence and preserved native timing failures"}
 ---
 
 # Current state and next admitted boundary
+
+The [table raster checkpoint](table-raster-reuse-handoff.md) passes 32 frozen
+pre-change pixel/metadata/error checks and all 146 selected Linux shared checks.
+Its ordinary table run fails TRUNCATION at 110.318 ms; the complete phase run fails
+MAX-CELLS/POLICY and reaches 159.557 ms. Both remain unqualified. Preserve the
+earlier 102.502-ms failure. Close background admission/painting ownership and
+current-policy/profile/topology adoption before implementing that next repair.
+Then qualify unchanged tables, maximum GTK chart/mixed and real installed
+histories. Human usability, desktop/lifecycle and all five full editions remain open.
 
 The [continuous replay checkpoint](continuous-replay-handoff.md) closes the
 publication-129 dependency with an explicitly negotiated bounded replay policy.

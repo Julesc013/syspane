@@ -547,6 +547,9 @@ if(BUILD_TESTING)
         set_tests_properties(native.SCENE-CHART PROPERTIES TIMEOUT 90)
         add_test(NAME native.SCENE-TABLE COMMAND syspane_scene_surface_tests "${CMAKE_SOURCE_DIR}/spec/fixtures/valid" TABLE)
         set_tests_properties(native.SCENE-TABLE PROPERTIES TIMEOUT 60)
+        add_test(NAME native.TABLE-RASTER COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/scene/native_table_raster.py"
+            "$<TARGET_FILE:syspane_scene_surface_tests>" "${CMAKE_BINARY_DIR}/native-evidence")
+        set_tests_properties(native.TABLE-RASTER PROPERTIES TIMEOUT 90)
         add_test(NAME native.TABLE-ERASURE COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/scene/native_surface.py"
             "$<TARGET_FILE:syspane_scene_surface_tests>" "$<TARGET_FILE:syspane_text_probe>" "${CMAKE_BINARY_DIR}/native-evidence" TABLE)
         set_tests_properties(native.TABLE-ERASURE PROPERTIES TIMEOUT 120)

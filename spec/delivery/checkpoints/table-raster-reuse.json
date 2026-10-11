@@ -1,0 +1,2953 @@
+{
+  "recorded_at": "2026-10-11T14:32:06.570494+00:00",
+  "source_base": "cebd84aef17967617b5419d9038161eeede52276",
+  "scope": "Pixel-equivalent composition-local native table raster reuse. Ordinary and phase maximum-table timing fail; maximum GTK/history, human usability and all five full editions remain open.",
+  "current_product_inputs": {
+    "CMakeLists.txt": "c651f70c15308620738f7b58601bc5c51c36d2448259734c0740a4d79ed92950",
+    "source/build/targets/linux-x64-gcc13.json": "ffb4db3be1c92af332657aacd199dde4637ad69f644c75647d46b74ea0f027f6",
+    "source/rendering/scene_table.cpp": "3f8c4b5e338aa5d4909e44ee5e82df95dcfb591f802ef41975dc6292be0bf7a2",
+    "tests/scene/native_table_raster.py": "46ef54c50b6150e16c8a43aaa8ba000e535f923c386af0b0c9140619ed19e088",
+    "tests/scene/surface_tests.cpp": "3d753bbdca19cc0711841abbe75bc6591cd6724ecdcbf2dfb0f32e3edc6d910f",
+    "tests/scene/table-raster-cases.json": "9afbb338cae7cb5c974eabcd8361ba72f5626517ed00948d70dcf49aba79f5aa",
+    "tests/scene/table-raster-expectations.json": "b6d6cd7b022f4fd812b7989b2689f2278ff6aded4698287aea17fbbd5495bcd1",
+    "tests/scene/table_raster_probe.hpp": "2f19e41f7f8297f40be9a6bf9edfc7dd9ba6e11066261cad62163af63b4ba2d7"
+  },
+  "artifacts": {
+    "syspane": "3899685f0abda5db27cd253c54e8c42e26dc5d5fc4af1156b1f467ff8d4105a5",
+    "syspane_frontend_fixture": "07742ec8ce46ecdbc9db776fa82e3da192ee421dd3429d14406a80401c1679dc",
+    "syspane_scene_surface_tests": "f1697a9df0a6bd749789da7c8d5c36615ab96700290dfd0e4d3463bd19d1025b",
+    "syspane_scene_inspector_tests": "9c140338a3a86327c93002bc850e0b6d5e25f9a53dcdd9ecd1af87118605e791",
+    "syspane_role_composition_probe": "d5952a13d3076e7d8193146dd219ded1b5db6889a68f598489c27bcff6535b72"
+  },
+  "executions": [
+    {
+      "stage": "build",
+      "source_base": "cebd84aef17967617b5419d9038161eeede52276",
+      "source_archive_sha256": "a7dcc5e5cef6e8c931093bf5d0316cc7003b9f70f49839d6a957d6ea8aa6d5d9",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "cmake",
+            "--preset",
+            "linux-x64-gcc13"
+          ],
+          "started_at": "2026-10-11T14:16:14.792131+00:00",
+          "finished_at": "2026-10-11T14:16:24.067437+00:00",
+          "exit": 0,
+          "log_sha256": "8e517a32937bd142a9a4eddfcb4361bd840dfae4ebdfdd8b887501cacd6328b8",
+          "passed_ctest_count": null
+        },
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "cmake",
+            "--build",
+            "--preset",
+            "linux-x64-gcc13"
+          ],
+          "started_at": "2026-10-11T14:16:25.953641+00:00",
+          "finished_at": "2026-10-11T14:16:36.646294+00:00",
+          "exit": 0,
+          "log_sha256": "a8aaa5be1be1e34808872f3d63742d64f17900d5b65c4c2bc7dcb5b1740804bd",
+          "passed_ctest_count": null
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/table-raster-reuse-checks/build-1abdc858/result.json",
+        "sha256": "95e39e463fb9c70e993f1d3319c4e4af018d7c50c67605a63c636e2c23c9e671"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/table-raster-reuse-checks/build-1abdc858/source-manifest.json",
+        "sha256": "61297e3b89833cf0ed4c9c129e622c13358a9a523260a3e9e89eb05b03992f22"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/table-raster-reuse-checks/build-1abdc858/source.zip",
+        "sha256": "a7dcc5e5cef6e8c931093bf5d0316cc7003b9f70f49839d6a957d6ea8aa6d5d9"
+      },
+      "product_inputs_differing_from_current": [
+        "CMakeLists.txt",
+        "source/rendering/scene_table.cpp",
+        "tests/scene/table-raster-cases.json"
+      ]
+    },
+    {
+      "stage": "build",
+      "source_base": "cebd84aef17967617b5419d9038161eeede52276",
+      "source_archive_sha256": "c589865b4abc54927d063d13c70658e6f2c6c7981001e421cfecbdd482772d24",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "cmake",
+            "--preset",
+            "linux-x64-gcc13"
+          ],
+          "started_at": "2026-10-11T14:19:01.423314+00:00",
+          "finished_at": "2026-10-11T14:19:11.075022+00:00",
+          "exit": 0,
+          "log_sha256": "8d3e57c46fa37b7ce9405a12e7f0864ff9e99243de9ada26fb9e3d08612b9fa8",
+          "passed_ctest_count": null
+        },
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "cmake",
+            "--build",
+            "--preset",
+            "linux-x64-gcc13"
+          ],
+          "started_at": "2026-10-11T14:19:13.258803+00:00",
+          "finished_at": "2026-10-11T14:19:23.404216+00:00",
+          "exit": 0,
+          "log_sha256": "650da40b0efd18a0699aa17d82bfbb62a7143015d31cba2e43ce45eb729e4f92",
+          "passed_ctest_count": null
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/table-raster-reuse-checks/build-387c1bce/result.json",
+        "sha256": "68400e78d6f40c05a980347845af033bbd4b89146a41934a436802d10b225527"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/table-raster-reuse-checks/build-387c1bce/source-manifest.json",
+        "sha256": "0b1b4f4ba1365781edaa51e51b57d8f4d9f492b5fcd80de067582e23afb3e815"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/table-raster-reuse-checks/build-387c1bce/source.zip",
+        "sha256": "c589865b4abc54927d063d13c70658e6f2c6c7981001e421cfecbdd482772d24"
+      },
+      "product_inputs_differing_from_current": []
+    },
+    {
+      "stage": "live",
+      "source_base": "cebd84aef17967617b5419d9038161eeede52276",
+      "source_archive_sha256": "c589865b4abc54927d063d13c70658e6f2c6c7981001e421cfecbdd482772d24",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]INSTALLED-TELEMETRY$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-11T14:23:12.497188+00:00",
+          "finished_at": "2026-10-11T14:23:58.661592+00:00",
+          "exit": 0,
+          "log_sha256": "559b251ad15a6568b69ec00265b38eb2afc246928dbba685029a4a7c788786e2",
+          "passed_ctest_count": 1
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/table-raster-reuse-checks/live-69623243/result.json",
+        "sha256": "554db37779312e4bed08f1f6e0ed1d8e79aea87ad28c29982305100daa5b07e5"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/table-raster-reuse-checks/live-69623243/source-manifest.json",
+        "sha256": "0b1b4f4ba1365781edaa51e51b57d8f4d9f492b5fcd80de067582e23afb3e815"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/table-raster-reuse-checks/live-69623243/source.zip",
+        "sha256": "c589865b4abc54927d063d13c70658e6f2c6c7981001e421cfecbdd482772d24"
+      },
+      "product_inputs_differing_from_current": []
+    },
+    {
+      "stage": "native-CHART-ERASURE",
+      "source_base": "cebd84aef17967617b5419d9038161eeede52276",
+      "source_archive_sha256": "c589865b4abc54927d063d13c70658e6f2c6c7981001e421cfecbdd482772d24",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]CHART-ERASURE$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-11T14:21:16.950187+00:00",
+          "finished_at": "2026-10-11T14:21:21.198987+00:00",
+          "exit": 0,
+          "log_sha256": "3763722136fa0dd622f0214e18f788251242e01e23e1e7dff9f66b9e21fea5de",
+          "passed_ctest_count": 1
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/table-raster-reuse-checks/native-CHART-ERASURE-10681605/result.json",
+        "sha256": "c534c1a1679488131056b30efa799681745243ef9147fb3be2844addd5f1e969"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/table-raster-reuse-checks/native-CHART-ERASURE-10681605/source-manifest.json",
+        "sha256": "0b1b4f4ba1365781edaa51e51b57d8f4d9f492b5fcd80de067582e23afb3e815"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/table-raster-reuse-checks/native-CHART-ERASURE-10681605/source.zip",
+        "sha256": "c589865b4abc54927d063d13c70658e6f2c6c7981001e421cfecbdd482772d24"
+      },
+      "product_inputs_differing_from_current": []
+    },
+    {
+      "stage": "native-CHART-FRAME-LIMITS",
+      "source_base": "cebd84aef17967617b5419d9038161eeede52276",
+      "source_archive_sha256": "c589865b4abc54927d063d13c70658e6f2c6c7981001e421cfecbdd482772d24",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]CHART-FRAME-LIMITS$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-11T14:20:39.061766+00:00",
+          "finished_at": "2026-10-11T14:21:10.604987+00:00",
+          "exit": 0,
+          "log_sha256": "1a7dfc72bc2be2cb377af326f391cda7a059395fb242082e0b32a01c949afb81",
+          "passed_ctest_count": 1
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/table-raster-reuse-checks/native-CHART-FRAME-LIMITS-1c3086fe/result.json",
+        "sha256": "cfbd612681dc1222249ec5d6d0015c81320abb9aec3605c5e37fb0e26be4b6ff"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/table-raster-reuse-checks/native-CHART-FRAME-LIMITS-1c3086fe/source-manifest.json",
+        "sha256": "0b1b4f4ba1365781edaa51e51b57d8f4d9f492b5fcd80de067582e23afb3e815"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/table-raster-reuse-checks/native-CHART-FRAME-LIMITS-1c3086fe/source.zip",
+        "sha256": "c589865b4abc54927d063d13c70658e6f2c6c7981001e421cfecbdd482772d24"
+      },
+      "product_inputs_differing_from_current": []
+    },
+    {
+      "stage": "native-IMAGE-ERASURE",
+      "source_base": "cebd84aef17967617b5419d9038161eeede52276",
+      "source_archive_sha256": "c589865b4abc54927d063d13c70658e6f2c6c7981001e421cfecbdd482772d24",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]IMAGE-ERASURE$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-11T14:21:32.565920+00:00",
+          "finished_at": "2026-10-11T14:21:36.232550+00:00",
+          "exit": 0,
+          "log_sha256": "0e0d1f673a20c75dd175d90ef49b36e4144362f4f389db35783c607abf52a6c9",
+          "passed_ctest_count": 1
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/table-raster-reuse-checks/native-IMAGE-ERASURE-bd334a79/result.json",
+        "sha256": "3bada619e27478d997a6ef53cdb4b11ca6798f5113b56c5f6281fbb2137d6b23"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/table-raster-reuse-checks/native-IMAGE-ERASURE-bd334a79/source-manifest.json",
+        "sha256": "0b1b4f4ba1365781edaa51e51b57d8f4d9f492b5fcd80de067582e23afb3e815"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/table-raster-reuse-checks/native-IMAGE-ERASURE-bd334a79/source.zip",
+        "sha256": "c589865b4abc54927d063d13c70658e6f2c6c7981001e421cfecbdd482772d24"
+      },
+      "product_inputs_differing_from_current": []
+    },
+    {
+      "stage": "native-RECOVERY-GUI-LIMITS",
+      "source_base": "cebd84aef17967617b5419d9038161eeede52276",
+      "source_archive_sha256": "c589865b4abc54927d063d13c70658e6f2c6c7981001e421cfecbdd482772d24",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]RECOVERY-GUI-LIMITS$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-11T14:24:13.702176+00:00",
+          "finished_at": "2026-10-11T14:25:13.012589+00:00",
+          "exit": 0,
+          "log_sha256": "385ade4e5b11f1b2a9da2ac60117902c1112f61a5f99ba040ee416447dc1c2dd",
+          "passed_ctest_count": 1
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/table-raster-reuse-checks/native-RECOVERY-GUI-LIMITS-5bbbe18c/result.json",
+        "sha256": "7f95676664e39999d8379ca6e3a9f6ff985199d22e0a73594caacfee9d7b0397"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/table-raster-reuse-checks/native-RECOVERY-GUI-LIMITS-5bbbe18c/source-manifest.json",
+        "sha256": "0b1b4f4ba1365781edaa51e51b57d8f4d9f492b5fcd80de067582e23afb3e815"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/table-raster-reuse-checks/native-RECOVERY-GUI-LIMITS-5bbbe18c/source.zip",
+        "sha256": "c589865b4abc54927d063d13c70658e6f2c6c7981001e421cfecbdd482772d24"
+      },
+      "product_inputs_differing_from_current": []
+    },
+    {
+      "stage": "native-ROLE-COMPOSITION",
+      "source_base": "cebd84aef17967617b5419d9038161eeede52276",
+      "source_archive_sha256": "c589865b4abc54927d063d13c70658e6f2c6c7981001e421cfecbdd482772d24",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]ROLE-COMPOSITION$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-11T14:20:20.225594+00:00",
+          "finished_at": "2026-10-11T14:20:27.264633+00:00",
+          "exit": 0,
+          "log_sha256": "1574fa35051f901e874cb746ca7daf59eaeef2d6fe7d2abcbe611e7908a01e3e",
+          "passed_ctest_count": 1
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/table-raster-reuse-checks/native-ROLE-COMPOSITION-5ee5578a/result.json",
+        "sha256": "cd0641a3c5992b265848f6443ad38ac7e4f6f1b88be97349107600fc98b0be54"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/table-raster-reuse-checks/native-ROLE-COMPOSITION-5ee5578a/source-manifest.json",
+        "sha256": "0b1b4f4ba1365781edaa51e51b57d8f4d9f492b5fcd80de067582e23afb3e815"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/table-raster-reuse-checks/native-ROLE-COMPOSITION-5ee5578a/source.zip",
+        "sha256": "c589865b4abc54927d063d13c70658e6f2c6c7981001e421cfecbdd482772d24"
+      },
+      "product_inputs_differing_from_current": []
+    },
+    {
+      "stage": "native-SCENE-CHART",
+      "source_base": "cebd84aef17967617b5419d9038161eeede52276",
+      "source_archive_sha256": "c589865b4abc54927d063d13c70658e6f2c6c7981001e421cfecbdd482772d24",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]SCENE-CHART$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-11T14:21:13.498002+00:00",
+          "finished_at": "2026-10-11T14:21:13.983800+00:00",
+          "exit": 0,
+          "log_sha256": "6b2c349403bb7d2d64523f26d5089a319c72a8c94cc86536ffc13d71fc870b0f",
+          "passed_ctest_count": 1
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/table-raster-reuse-checks/native-SCENE-CHART-79092b9d/result.json",
+        "sha256": "57d7f6659a9dd12d5cfe651c3aa6723ae091cff1f8e1176b5b3d3abca8af7aed"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/table-raster-reuse-checks/native-SCENE-CHART-79092b9d/source-manifest.json",
+        "sha256": "0b1b4f4ba1365781edaa51e51b57d8f4d9f492b5fcd80de067582e23afb3e815"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/table-raster-reuse-checks/native-SCENE-CHART-79092b9d/source.zip",
+        "sha256": "c589865b4abc54927d063d13c70658e6f2c6c7981001e421cfecbdd482772d24"
+      },
+      "product_inputs_differing_from_current": []
+    },
+    {
+      "stage": "native-SCENE-ERASURE",
+      "source_base": "cebd84aef17967617b5419d9038161eeede52276",
+      "source_archive_sha256": "c589865b4abc54927d063d13c70658e6f2c6c7981001e421cfecbdd482772d24",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]SCENE-ERASURE$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-11T14:22:56.706632+00:00",
+          "finished_at": "2026-10-11T14:23:00.445865+00:00",
+          "exit": 0,
+          "log_sha256": "3088ba7d6005c799105699325395becfccd822f065aac1d7cc3fbe0c2a29bee3",
+          "passed_ctest_count": 1
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/table-raster-reuse-checks/native-SCENE-ERASURE-b3319323/result.json",
+        "sha256": "a6c0264aca15c814c390a340dac4acf0b2fa2a7f0bde90746bb18dff9ce082f4"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/table-raster-reuse-checks/native-SCENE-ERASURE-b3319323/source-manifest.json",
+        "sha256": "0b1b4f4ba1365781edaa51e51b57d8f4d9f492b5fcd80de067582e23afb3e815"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/table-raster-reuse-checks/native-SCENE-ERASURE-b3319323/source.zip",
+        "sha256": "c589865b4abc54927d063d13c70658e6f2c6c7981001e421cfecbdd482772d24"
+      },
+      "product_inputs_differing_from_current": []
+    },
+    {
+      "stage": "native-SCENE-IMAGE",
+      "source_base": "cebd84aef17967617b5419d9038161eeede52276",
+      "source_archive_sha256": "c589865b4abc54927d063d13c70658e6f2c6c7981001e421cfecbdd482772d24",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]SCENE-IMAGE$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-11T14:21:24.501596+00:00",
+          "finished_at": "2026-10-11T14:21:29.762029+00:00",
+          "exit": 0,
+          "log_sha256": "e3272c42148d810ec676a596d5be70afbf77e5b2730a33c38b94771fdb7072a5",
+          "passed_ctest_count": 1
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/table-raster-reuse-checks/native-SCENE-IMAGE-02b92b51/result.json",
+        "sha256": "d2c935a0df1dca41b38cbbaf541231de2d11bdc83e2f0d183c4286847ae05f5a"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/table-raster-reuse-checks/native-SCENE-IMAGE-02b92b51/source-manifest.json",
+        "sha256": "0b1b4f4ba1365781edaa51e51b57d8f4d9f492b5fcd80de067582e23afb3e815"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/table-raster-reuse-checks/native-SCENE-IMAGE-02b92b51/source.zip",
+        "sha256": "c589865b4abc54927d063d13c70658e6f2c6c7981001e421cfecbdd482772d24"
+      },
+      "product_inputs_differing_from_current": []
+    },
+    {
+      "stage": "native-SCENE-TABLE",
+      "source_base": "cebd84aef17967617b5419d9038161eeede52276",
+      "source_archive_sha256": "c589865b4abc54927d063d13c70658e6f2c6c7981001e421cfecbdd482772d24",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]SCENE-TABLE$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-11T14:20:04.952299+00:00",
+          "finished_at": "2026-10-11T14:20:05.545927+00:00",
+          "exit": 0,
+          "log_sha256": "f713c05069a4a3934b3381bcec9425d621d7278cfbd2931c0a489f94efee861f",
+          "passed_ctest_count": 1
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/table-raster-reuse-checks/native-SCENE-TABLE-1ff57495/result.json",
+        "sha256": "85c675594a02a5b530a3a34b9957d9d6112d449f366d56dc26e8ee7092ad2fe1"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/table-raster-reuse-checks/native-SCENE-TABLE-1ff57495/source-manifest.json",
+        "sha256": "0b1b4f4ba1365781edaa51e51b57d8f4d9f492b5fcd80de067582e23afb3e815"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/table-raster-reuse-checks/native-SCENE-TABLE-1ff57495/source.zip",
+        "sha256": "c589865b4abc54927d063d13c70658e6f2c6c7981001e421cfecbdd482772d24"
+      },
+      "product_inputs_differing_from_current": []
+    },
+    {
+      "stage": "native-SCENE-VISIBILITY",
+      "source_base": "cebd84aef17967617b5419d9038161eeede52276",
+      "source_archive_sha256": "c589865b4abc54927d063d13c70658e6f2c6c7981001e421cfecbdd482772d24",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]SCENE-VISIBILITY$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-11T14:21:39.651607+00:00",
+          "finished_at": "2026-10-11T14:21:40.234062+00:00",
+          "exit": 0,
+          "log_sha256": "27ee576fcb99f90a40b68f6d3c32d2300f821a0b3b46ebfeed924f320b329452",
+          "passed_ctest_count": 1
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/table-raster-reuse-checks/native-SCENE-VISIBILITY-56c95aa5/result.json",
+        "sha256": "9d20ab3b58413efe84f6e7ee9cc62d2a6d34c32b3d36d9182cf7a85a961a94c7"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/table-raster-reuse-checks/native-SCENE-VISIBILITY-56c95aa5/source-manifest.json",
+        "sha256": "0b1b4f4ba1365781edaa51e51b57d8f4d9f492b5fcd80de067582e23afb3e815"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/table-raster-reuse-checks/native-SCENE-VISIBILITY-56c95aa5/source.zip",
+        "sha256": "c589865b4abc54927d063d13c70658e6f2c6c7981001e421cfecbdd482772d24"
+      },
+      "product_inputs_differing_from_current": []
+    },
+    {
+      "stage": "native-TABLE-ERASURE",
+      "source_base": "cebd84aef17967617b5419d9038161eeede52276",
+      "source_archive_sha256": "c589865b4abc54927d063d13c70658e6f2c6c7981001e421cfecbdd482772d24",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]TABLE-ERASURE$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-11T14:20:08.429836+00:00",
+          "finished_at": "2026-10-11T14:20:16.832872+00:00",
+          "exit": 0,
+          "log_sha256": "04d57308102912913c3e112e24f6bd607fd16369ce112ed4192c85581b732d38",
+          "passed_ctest_count": 1
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/table-raster-reuse-checks/native-TABLE-ERASURE-3b35b929/result.json",
+        "sha256": "4070e9c2f3f09c969af0db46339b6c13d8235455794fefa5473cba6e3cb9baac"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/table-raster-reuse-checks/native-TABLE-ERASURE-3b35b929/source-manifest.json",
+        "sha256": "0b1b4f4ba1365781edaa51e51b57d8f4d9f492b5fcd80de067582e23afb3e815"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/table-raster-reuse-checks/native-TABLE-ERASURE-3b35b929/source.zip",
+        "sha256": "c589865b4abc54927d063d13c70658e6f2c6c7981001e421cfecbdd482772d24"
+      },
+      "product_inputs_differing_from_current": []
+    },
+    {
+      "stage": "native-TABLE-RASTER",
+      "source_base": "cebd84aef17967617b5419d9038161eeede52276",
+      "source_archive_sha256": "c589865b4abc54927d063d13c70658e6f2c6c7981001e421cfecbdd482772d24",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]TABLE-RASTER$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-11T14:19:50.949132+00:00",
+          "finished_at": "2026-10-11T14:19:53.905658+00:00",
+          "exit": 0,
+          "log_sha256": "f79c899ed05dbe7d489340e14205848689bb8ad1afb9626c8cd7e5d26980853a",
+          "passed_ctest_count": 1
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/table-raster-reuse-checks/native-TABLE-RASTER-e6ebfa0d/result.json",
+        "sha256": "77f57a3cf9a26e57b166361bef23bd6ea1f635c87bf8e96de96bb3898f193d85"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/table-raster-reuse-checks/native-TABLE-RASTER-e6ebfa0d/source-manifest.json",
+        "sha256": "0b1b4f4ba1365781edaa51e51b57d8f4d9f492b5fcd80de067582e23afb3e815"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/table-raster-reuse-checks/native-TABLE-RASTER-e6ebfa0d/source.zip",
+        "sha256": "c589865b4abc54927d063d13c70658e6f2c6c7981001e421cfecbdd482772d24"
+      },
+      "product_inputs_differing_from_current": []
+    },
+    {
+      "stage": "native-TEXT-SESSION",
+      "source_base": "cebd84aef17967617b5419d9038161eeede52276",
+      "source_archive_sha256": "c589865b4abc54927d063d13c70658e6f2c6c7981001e421cfecbdd482772d24",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]TEXT-SESSION$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-11T14:20:30.675517+00:00",
+          "finished_at": "2026-10-11T14:20:35.839490+00:00",
+          "exit": 0,
+          "log_sha256": "a806078ae9501bb0f0ec7017212eb6b4ca8fbd9849e32626de7dd0e904067ea0",
+          "passed_ctest_count": 1
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/table-raster-reuse-checks/native-TEXT-SESSION-d6f3c2a9/result.json",
+        "sha256": "9235b41e0a15e110d7739c330468daf69a7f88b65eda9c9bb48836b46ae5c4f7"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/table-raster-reuse-checks/native-TEXT-SESSION-d6f3c2a9/source-manifest.json",
+        "sha256": "0b1b4f4ba1365781edaa51e51b57d8f4d9f492b5fcd80de067582e23afb3e815"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/table-raster-reuse-checks/native-TEXT-SESSION-d6f3c2a9/source.zip",
+        "sha256": "c589865b4abc54927d063d13c70658e6f2c6c7981001e421cfecbdd482772d24"
+      },
+      "product_inputs_differing_from_current": []
+    },
+    {
+      "stage": "native-VISIBILITY-ERASURE",
+      "source_base": "cebd84aef17967617b5419d9038161eeede52276",
+      "source_archive_sha256": "c589865b4abc54927d063d13c70658e6f2c6c7981001e421cfecbdd482772d24",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]VISIBILITY-ERASURE$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-11T14:21:43.005824+00:00",
+          "finished_at": "2026-10-11T14:21:43.099857+00:00",
+          "exit": 8,
+          "log_sha256": "b7f89dc2000d7605a193ed46277172abfbb989d4bb010901c6360348a7bea6d7",
+          "passed_ctest_count": null
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/table-raster-reuse-checks/native-VISIBILITY-ERASURE-03b5349a/result.json",
+        "sha256": "b25daa6ede24cf7a62321165f66c21e4e6a4d1c481c0670a1e202de4d952b9ca"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/table-raster-reuse-checks/native-VISIBILITY-ERASURE-03b5349a/source-manifest.json",
+        "sha256": "0b1b4f4ba1365781edaa51e51b57d8f4d9f492b5fcd80de067582e23afb3e815"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/table-raster-reuse-checks/native-VISIBILITY-ERASURE-03b5349a/source.zip",
+        "sha256": "c589865b4abc54927d063d13c70658e6f2c6c7981001e421cfecbdd482772d24"
+      },
+      "product_inputs_differing_from_current": []
+    },
+    {
+      "stage": "native-VISIBILITY-PIXELS",
+      "source_base": "cebd84aef17967617b5419d9038161eeede52276",
+      "source_archive_sha256": "c589865b4abc54927d063d13c70658e6f2c6c7981001e421cfecbdd482772d24",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]VISIBILITY-PIXELS$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-11T14:22:44.410166+00:00",
+          "finished_at": "2026-10-11T14:22:53.190664+00:00",
+          "exit": 0,
+          "log_sha256": "25e07ba92e7aaefc0bd96dbbc5cf09e2e104fadbfb245dab4ba4bf8d9c907af0",
+          "passed_ctest_count": 1
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/table-raster-reuse-checks/native-VISIBILITY-PIXELS-073805b8/result.json",
+        "sha256": "0c8efb966b508eea96ce9232ba2e246906eea84b3e1fe5189dc7c0345d9cfd45"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/table-raster-reuse-checks/native-VISIBILITY-PIXELS-073805b8/source-manifest.json",
+        "sha256": "0b1b4f4ba1365781edaa51e51b57d8f4d9f492b5fcd80de067582e23afb3e815"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/table-raster-reuse-checks/native-VISIBILITY-PIXELS-073805b8/source.zip",
+        "sha256": "c589865b4abc54927d063d13c70658e6f2c6c7981001e421cfecbdd482772d24"
+      },
+      "product_inputs_differing_from_current": []
+    },
+    {
+      "stage": "phases",
+      "source_base": "cebd84aef17967617b5419d9038161eeede52276",
+      "source_archive_sha256": "b20bc33d6b536baf704b034a38a47371a9cdc38b8d8bf1340af70a8379f5d106",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "python3",
+            "tests/configuration/native_inspector_live_table_phases.py",
+            "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/syspane",
+            "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/syspane_frontend_fixture",
+            "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/syspane_frontend_helper_fixture",
+            "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/native-evidence"
+          ],
+          "started_at": "2026-10-11T14:28:01.466113+00:00",
+          "finished_at": "2026-10-11T14:29:21.243509+00:00",
+          "exit": 1,
+          "log_sha256": "7f86239b302bb8570c86d1839212bdd6e81b5c207785e98e3baf611a133454eb",
+          "passed_ctest_count": null
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/table-raster-reuse-checks/phases-0260bf0e/result.json",
+        "sha256": "ace22b7e123d6cb8bbb2f12ddfcc8f87c22d0936a41e68f15342624204e6218f"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/table-raster-reuse-checks/phases-0260bf0e/source-manifest.json",
+        "sha256": "e3120ab6d68443523b7ba85893cb3a1dc24cf968131226d5983e4caa89d9f171"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/table-raster-reuse-checks/phases-0260bf0e/source.zip",
+        "sha256": "b20bc33d6b536baf704b034a38a47371a9cdc38b8d8bf1340af70a8379f5d106"
+      },
+      "product_inputs_differing_from_current": []
+    },
+    {
+      "stage": "portable",
+      "source_base": "cebd84aef17967617b5419d9038161eeede52276",
+      "source_archive_sha256": "b20bc33d6b536baf704b034a38a47371a9cdc38b8d8bf1340af70a8379f5d106",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^((model|delivery|data|measured|telemetry|session|demand|scene|composition)[.]|configuration[.]TYPOGRAPHY-)",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-11T14:31:34.511129+00:00",
+          "finished_at": "2026-10-11T14:31:47.978305+00:00",
+          "exit": 0,
+          "log_sha256": "50b9d9b65841619a5aea4624aacc16aecf51bd4f2d0c81987e300ea86c32fb93",
+          "passed_ctest_count": 146
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/table-raster-reuse-checks/portable-bd4b26cc/result.json",
+        "sha256": "e1ea47961f4034e37b45393828358a3def28613527dce46a584e5937e0452603"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/table-raster-reuse-checks/portable-bd4b26cc/source-manifest.json",
+        "sha256": "e3120ab6d68443523b7ba85893cb3a1dc24cf968131226d5983e4caa89d9f171"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/table-raster-reuse-checks/portable-bd4b26cc/source.zip",
+        "sha256": "b20bc33d6b536baf704b034a38a47371a9cdc38b8d8bf1340af70a8379f5d106"
+      },
+      "product_inputs_differing_from_current": []
+    },
+    {
+      "stage": "scene",
+      "source_base": "cebd84aef17967617b5419d9038161eeede52276",
+      "source_archive_sha256": "c589865b4abc54927d063d13c70658e6f2c6c7981001e421cfecbdd482772d24",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]SCENE-INSPECTOR",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-11T14:23:04.492651+00:00",
+          "finished_at": "2026-10-11T14:23:09.485184+00:00",
+          "exit": 0,
+          "log_sha256": "0b771917206cfdac7c388f470cd9a09f55d9d44c6f2054e96e883078fbe3dec5",
+          "passed_ctest_count": 2
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/table-raster-reuse-checks/scene-c02e8d8a/result.json",
+        "sha256": "44eb0ede694a380039974f546e275eea9fd2e6ce43240ff180d057d5c6ddafd5"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/table-raster-reuse-checks/scene-c02e8d8a/source-manifest.json",
+        "sha256": "0b1b4f4ba1365781edaa51e51b57d8f4d9f492b5fcd80de067582e23afb3e815"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/table-raster-reuse-checks/scene-c02e8d8a/source.zip",
+        "sha256": "c589865b4abc54927d063d13c70658e6f2c6c7981001e421cfecbdd482772d24"
+      },
+      "product_inputs_differing_from_current": []
+    },
+    {
+      "stage": "tables",
+      "source_base": "cebd84aef17967617b5419d9038161eeede52276",
+      "source_archive_sha256": "c589865b4abc54927d063d13c70658e6f2c6c7981001e421cfecbdd482772d24",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]INSPECTOR-LIVE-TABLES$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-11T14:25:22.737996+00:00",
+          "finished_at": "2026-10-11T14:26:38.443432+00:00",
+          "exit": 8,
+          "log_sha256": "488db8c17025efda3a12f1588a7dcde312dd82b6c732720291aca2b222f3522b",
+          "passed_ctest_count": null
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/table-raster-reuse-checks/tables-c6611a7c/result.json",
+        "sha256": "c3e6a2197ca5850478470cbd57f7e651ab5c546070987f030e8e92068980bcc3"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/table-raster-reuse-checks/tables-c6611a7c/source-manifest.json",
+        "sha256": "0b1b4f4ba1365781edaa51e51b57d8f4d9f492b5fcd80de067582e23afb3e815"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/table-raster-reuse-checks/tables-c6611a7c/source.zip",
+        "sha256": "c589865b4abc54927d063d13c70658e6f2c6c7981001e421cfecbdd482772d24"
+      },
+      "product_inputs_differing_from_current": []
+    }
+  ],
+  "latest_executions": {
+    "build": "out/evidence/table-raster-reuse-checks/build-387c1bce/result.json",
+    "native-TABLE-RASTER": "out/evidence/table-raster-reuse-checks/native-TABLE-RASTER-e6ebfa0d/result.json",
+    "native-SCENE-TABLE": "out/evidence/table-raster-reuse-checks/native-SCENE-TABLE-1ff57495/result.json",
+    "native-TABLE-ERASURE": "out/evidence/table-raster-reuse-checks/native-TABLE-ERASURE-3b35b929/result.json",
+    "native-ROLE-COMPOSITION": "out/evidence/table-raster-reuse-checks/native-ROLE-COMPOSITION-5ee5578a/result.json",
+    "native-TEXT-SESSION": "out/evidence/table-raster-reuse-checks/native-TEXT-SESSION-d6f3c2a9/result.json",
+    "native-CHART-FRAME-LIMITS": "out/evidence/table-raster-reuse-checks/native-CHART-FRAME-LIMITS-1c3086fe/result.json",
+    "native-SCENE-CHART": "out/evidence/table-raster-reuse-checks/native-SCENE-CHART-79092b9d/result.json",
+    "native-CHART-ERASURE": "out/evidence/table-raster-reuse-checks/native-CHART-ERASURE-10681605/result.json",
+    "native-SCENE-IMAGE": "out/evidence/table-raster-reuse-checks/native-SCENE-IMAGE-02b92b51/result.json",
+    "native-IMAGE-ERASURE": "out/evidence/table-raster-reuse-checks/native-IMAGE-ERASURE-bd334a79/result.json",
+    "native-SCENE-VISIBILITY": "out/evidence/table-raster-reuse-checks/native-SCENE-VISIBILITY-56c95aa5/result.json",
+    "native-VISIBILITY-ERASURE": "out/evidence/table-raster-reuse-checks/native-VISIBILITY-ERASURE-03b5349a/result.json",
+    "native-VISIBILITY-PIXELS": "out/evidence/table-raster-reuse-checks/native-VISIBILITY-PIXELS-073805b8/result.json",
+    "native-SCENE-ERASURE": "out/evidence/table-raster-reuse-checks/native-SCENE-ERASURE-b3319323/result.json",
+    "scene": "out/evidence/table-raster-reuse-checks/scene-c02e8d8a/result.json",
+    "live": "out/evidence/table-raster-reuse-checks/live-69623243/result.json",
+    "native-RECOVERY-GUI-LIMITS": "out/evidence/table-raster-reuse-checks/native-RECOVERY-GUI-LIMITS-5bbbe18c/result.json",
+    "tables": "out/evidence/table-raster-reuse-checks/tables-c6611a7c/result.json",
+    "phases": "out/evidence/table-raster-reuse-checks/phases-0260bf0e/result.json",
+    "portable": "out/evidence/table-raster-reuse-checks/portable-bd4b26cc/result.json"
+  },
+  "native_archives": [
+    {
+      "label": "baseline",
+      "index": {
+        "local_path": "out/evidence/table-raster-reuse-native/baseline/index.json",
+        "sha256": "5d1e838ca57d8b6f65c371d019c843e21ba1ed8bb31198c3ae777ada87dc1583"
+      },
+      "archive": {
+        "local_path": "out/evidence/table-raster-reuse-native/baseline/native-evidence.zip",
+        "sha256": "6ae608bdff2110f1fde9fad3e7dc99fa4ff00ce5e06543ec931d5150f1af5ae7"
+      },
+      "preserved_bytes": 10886815,
+      "reports": [
+        {
+          "path": "table-raster-baseline/result.json",
+          "sha256": "e2525f2abd82052f00a6557a590b4244a27ae130e6802586f116be0b12a5f34b",
+          "family": "TABLE-RASTER-BASELINE",
+          "outcome": "pass",
+          "executable_sha256": "585e646b02ced555824c10ba8c10093f8caffb887859051d7846018ab73f2233",
+          "source_sha256": "aea7f6dc79e7f62761d6f7f974a4cd3bbdd1c8a6fdf363b43f7446f60454fbfb",
+          "cases_sha256": "a5da079e7c2839aae85f91d6f8b3102493bb37ce1e9769c309ebe851ffc7f11a",
+          "runtime_sha256": "9694c9c90650924fb0e91e0a863b9680e396a6b618518e78cd13e61f76fac218",
+          "cases": []
+        }
+      ],
+      "phase_attribution": []
+    },
+    {
+      "label": "baseline-budget",
+      "index": {
+        "local_path": "out/evidence/table-raster-reuse-native/baseline-budget/index.json",
+        "sha256": "39bc5be970b252642cda5f0ab6433dc83d51178dc406916f1e865f83320e949f"
+      },
+      "archive": {
+        "local_path": "out/evidence/table-raster-reuse-native/baseline-budget/native-evidence.zip",
+        "sha256": "82af6566534e6171e57f8b7d30faba4a681b7aa715f4bd01d9ab6fa4d8c988c0"
+      },
+      "preserved_bytes": 109586,
+      "reports": [
+        {
+          "path": "table-raster-budget-baseline/result.json",
+          "sha256": "71977a05fa5ba7eff98b51971e6e6e76469aa3769b5646e8f5b84107248a1a23",
+          "family": "TABLE-RASTER-BUDGET-BASELINE",
+          "outcome": "pass",
+          "executable_sha256": "585e646b02ced555824c10ba8c10093f8caffb887859051d7846018ab73f2233",
+          "source_sha256": "aea7f6dc79e7f62761d6f7f974a4cd3bbdd1c8a6fdf363b43f7446f60454fbfb",
+          "cases_sha256": "9afbb338cae7cb5c974eabcd8361ba72f5626517ed00948d70dcf49aba79f5aa",
+          "runtime_sha256": "9694c9c90650924fb0e91e0a863b9680e396a6b618518e78cd13e61f76fac218",
+          "cases": []
+        }
+      ],
+      "phase_attribution": []
+    },
+    {
+      "label": "candidate-raster",
+      "index": {
+        "local_path": "out/evidence/table-raster-reuse-native/candidate-raster/index.json",
+        "sha256": "0e37501de5d2dafa66a154bfb3020352c59bc901581d82a2a578553b314e52d1"
+      },
+      "archive": {
+        "local_path": "out/evidence/table-raster-reuse-native/candidate-raster/native-evidence.zip",
+        "sha256": "c7efb10d285432c07d9455a920c2b9c64458208f9193ea2a32838877289931ef"
+      },
+      "preserved_bytes": 10789042,
+      "reports": [
+        {
+          "path": "table-raster-5584eaaf052f/result.json",
+          "sha256": "3d38bcf84eba29cf3b6091d2940b6650a018933abac3417f694fcaddeb9193a3",
+          "family": "TABLE-RASTER",
+          "outcome": "pass",
+          "executable_sha256": "f1697a9df0a6bd749789da7c8d5c36615ab96700290dfd0e4d3463bd19d1025b",
+          "cases_sha256": "9afbb338cae7cb5c974eabcd8361ba72f5626517ed00948d70dcf49aba79f5aa",
+          "cases": [
+            {
+              "case": "DUPLICATES-isolated",
+              "outcome": "pass"
+            },
+            {
+              "case": "DUPLICATES-session",
+              "outcome": "pass"
+            },
+            {
+              "case": "UNIQUE-isolated",
+              "outcome": "pass"
+            },
+            {
+              "case": "UNIQUE-session",
+              "outcome": "pass"
+            },
+            {
+              "case": "MIXED-isolated",
+              "outcome": "pass"
+            },
+            {
+              "case": "MIXED-session",
+              "outcome": "pass"
+            },
+            {
+              "case": "SCALE-isolated",
+              "outcome": "pass"
+            },
+            {
+              "case": "SCALE-session",
+              "outcome": "pass"
+            },
+            {
+              "case": "LIGHT-isolated",
+              "outcome": "pass"
+            },
+            {
+              "case": "LIGHT-session",
+              "outcome": "pass"
+            },
+            {
+              "case": "DARK-isolated",
+              "outcome": "pass"
+            },
+            {
+              "case": "DARK-session",
+              "outcome": "pass"
+            },
+            {
+              "case": "TRANSPARENT-isolated",
+              "outcome": "pass"
+            },
+            {
+              "case": "TRANSPARENT-session",
+              "outcome": "pass"
+            },
+            {
+              "case": "ROLES-isolated",
+              "outcome": "pass"
+            },
+            {
+              "case": "ROLES-session",
+              "outcome": "pass"
+            },
+            {
+              "case": "BLOCKS-isolated",
+              "outcome": "pass"
+            },
+            {
+              "case": "BLOCKS-session",
+              "outcome": "pass"
+            },
+            {
+              "case": "BUDGET-1500-isolated",
+              "outcome": "pass"
+            },
+            {
+              "case": "BUDGET-1500-session",
+              "outcome": "pass"
+            },
+            {
+              "case": "BUDGET-1499-isolated",
+              "outcome": "pass"
+            },
+            {
+              "case": "BUDGET-1499-session",
+              "outcome": "pass"
+            },
+            {
+              "case": "BUDGET-7000-isolated",
+              "outcome": "pass"
+            },
+            {
+              "case": "BUDGET-7000-session",
+              "outcome": "pass"
+            },
+            {
+              "case": "BUDGET-18000-isolated",
+              "outcome": "pass"
+            },
+            {
+              "case": "BUDGET-18000-session",
+              "outcome": "pass"
+            },
+            {
+              "case": "BLOCK-BUDGET-isolated",
+              "outcome": "pass"
+            },
+            {
+              "case": "BLOCK-BUDGET-session",
+              "outcome": "pass"
+            },
+            {
+              "case": "INVALID-isolated",
+              "outcome": "pass"
+            },
+            {
+              "case": "INVALID-session",
+              "outcome": "pass"
+            },
+            {
+              "case": "CHANGED-isolated",
+              "outcome": "pass"
+            },
+            {
+              "case": "CHANGED-session",
+              "outcome": "pass"
+            }
+          ]
+        }
+      ],
+      "phase_attribution": []
+    },
+    {
+      "label": "first-phases-failure",
+      "index": {
+        "local_path": "out/evidence/table-raster-reuse-native/first-phases-failure/index.json",
+        "sha256": "b6a51eba5a306fb44b79ecd33d88259b4362f9f4abc1857752f01878436fc58d"
+      },
+      "archive": {
+        "local_path": "out/evidence/table-raster-reuse-native/first-phases-failure/native-evidence.zip",
+        "sha256": "e68cf085a8c552fc441604f98c0149bdd5f0222538feb21c3d5b7dd3e82f3067"
+      },
+      "preserved_bytes": 149427772,
+      "reports": [
+        {
+          "path": "inspector-table-phases-1ea9c3b27b/result.json",
+          "sha256": "ecfd5d8a7075627b5cfa0e95006da7620bd21f10a0fc83c5a8a00775e9d58d34",
+          "family": "INSPECTOR-LIVE-TABLE-PHASES",
+          "outcome": "fail",
+          "failure": "Traceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_installed_editor.py\", line 407, in main\n    assert all(v['outcome']=='pass' for v in report['cases']),('failed cases',[v['case'] for v in report['cases'] if v['outcome']!='pass'])\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: ('failed cases', ['MAX-CELLS', 'POLICY'])\n",
+          "artifacts": {
+            "SysPane.ImageWorker": "65b38c368c9472405163a244c7f1b0ddf2c8702bb5e7945e147cb4a5935e777c",
+            "SysPane.RecoveryWorker": "542b2fcb0aa20f674b98e5039af0e2ca512c43c5325c08cd286a03248a07416b",
+            "syspane": "3899685f0abda5db27cd253c54e8c42e26dc5d5fc4af1156b1f467ff8d4105a5",
+            "syspane_frontend_fixture": "07742ec8ce46ecdbc9db776fa82e3da192ee421dd3429d14406a80401c1679dc",
+            "syspane_frontend_helper_fixture": "8f31f92ec25fce27488cd545ed888e6cf5f4433eaf3612d39681795fd229a652"
+          },
+          "cases_sha256": "b05a666d3d3d3e9c76bb079ffb27b80215be87b498c6427df7c14cdd98eafead",
+          "cases": [
+            {
+              "case": "MAX-ROWS",
+              "outcome": "pass",
+              "record_sha256": "c4636d18c760cb7d3d8177a11b3787ee0dc4ec1755a04118f8858374c1430887",
+              "timing_max_us": {
+                "delay_us": 29548,
+                "work_us": 46110
+              },
+              "timing_violations": []
+            },
+            {
+              "case": "MAX-CELLS",
+              "outcome": "fail",
+              "record_sha256": "5bd351a0ef63d0c45e767874bb7dfa3fca587f25f03f526d516d926ebf9af896",
+              "timing_max_us": {
+                "delay_us": 63082,
+                "work_us": 128807
+              },
+              "timing_violations": [
+                {
+                  "delay_us": 0,
+                  "index": 215,
+                  "pid": 1446695,
+                  "work_us": 128807
+                }
+              ],
+              "failure": "Traceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_installed_editor.py\", line 243, in observe\n    extension(dict(locals(),process=lambda:proc));report['outcome']='pass';return\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_inspector_live_table_phases.py\", line 12, in exercise\n    limits.exercise(e)\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_inspector_live_tables.py\", line 89, in exercise\n    assert not report['timing_violations'],('GUI timing limit exceeded',report['timing_violations'])\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: ('GUI timing limit exceeded', [{'index': 215, 'pid': 1446695, 'work_us': 128807, 'delay_us': 0}])\n"
+            },
+            {
+              "case": "TRUNCATION",
+              "outcome": "pass",
+              "record_sha256": "7da6fa7786b1d3a93e58b788c9b8f498c7f4a4c36a58a9c8b47d2dc00be65f3f",
+              "timing_max_us": {
+                "delay_us": 70476,
+                "work_us": 82736
+              },
+              "timing_violations": []
+            },
+            {
+              "case": "OVER-CELLS",
+              "outcome": "pass",
+              "record_sha256": "6b1a9bda88d67054060a4eeccfed0e5987b01e71e0d2066406218ad8592de18e",
+              "timing_max_us": {
+                "delay_us": 1869,
+                "work_us": 22353
+              },
+              "timing_violations": []
+            },
+            {
+              "case": "NAVIGATION",
+              "outcome": "pass",
+              "record_sha256": "fba8dd0a1b35a8309084f3277db5fde2701c24d6a5d8c56285f034c41a1a4404",
+              "timing_max_us": {
+                "delay_us": 71464,
+                "work_us": 77604
+              },
+              "timing_violations": []
+            },
+            {
+              "case": "POLICY",
+              "outcome": "fail",
+              "record_sha256": "61f5d6a1d01c02e207dfcd6994b94bf8b6d7d3faf90c53ca4d27e995f5badc08",
+              "timing_max_us": {
+                "delay_us": 18122,
+                "work_us": 159557
+              },
+              "timing_violations": [
+                {
+                  "delay_us": 1109,
+                  "index": 287,
+                  "pid": 1447195,
+                  "work_us": 159557
+                }
+              ],
+              "erasure_ms": 99.11500802263618,
+              "failure": "Traceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_installed_editor.py\", line 243, in observe\n    extension(dict(locals(),process=lambda:proc));report['outcome']='pass';return\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_inspector_live_table_phases.py\", line 12, in exercise\n    limits.exercise(e)\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_inspector_live_tables.py\", line 89, in exercise\n    assert not report['timing_violations'],('GUI timing limit exceeded',report['timing_violations'])\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: ('GUI timing limit exceeded', [{'index': 287, 'pid': 1447195, 'work_us': 159557, 'delay_us': 1109}])\n"
+            },
+            {
+              "case": "ORACLE",
+              "outcome": "pass",
+              "record_sha256": "cb02e67d07e1e21c461df76c376d84790f0a101c5e04c594f8a4687c8bdad9ef",
+              "timing_max_us": {
+                "delay_us": 60484,
+                "work_us": 68578
+              },
+              "timing_violations": []
+            }
+          ]
+        }
+      ],
+      "phase_attribution": [
+        {
+          "path": "inspector-table-phases-1ea9c3b27b/phases.json",
+          "sha256": "ee561400687c19788a704679db77f05c890c5970a58346b342cff3e791ecc15b",
+          "original_outcome": "fail",
+          "cases": [
+            {
+              "case": "MAX-ROWS",
+              "outcome": "pass",
+              "maxima": {
+                "attach": 6255,
+                "controls": 156,
+                "editor": 0,
+                "inspector": 45812,
+                "inspector_admission": 24156,
+                "inspector_paint": 28229,
+                "inspector_prepare": 8112,
+                "inspector_presentation": 13217,
+                "populate": 17938,
+                "recovery": 0,
+                "reply": 0,
+                "reply_reload": 0,
+                "settings": 6368,
+                "take": 30,
+                "topology": 0,
+                "withdrawal": 4
+              },
+              "slow_inspector_ticks": []
+            },
+            {
+              "case": "MAX-CELLS",
+              "outcome": "fail",
+              "maxima": {
+                "attach": 6304,
+                "controls": 121,
+                "editor": 0,
+                "inspector": 128325,
+                "inspector_admission": 35387,
+                "inspector_paint": 128138,
+                "inspector_prepare": 8597,
+                "inspector_presentation": 63666,
+                "populate": 18612,
+                "recovery": 0,
+                "reply": 0,
+                "reply_reload": 0,
+                "settings": 7449,
+                "take": 29,
+                "topology": 0,
+                "withdrawal": 4
+              },
+              "slow_inspector_ticks": [
+                {
+                  "pid": 1446695,
+                  "tick": 129,
+                  "inspector": 128325,
+                  "inspector_admission": 177,
+                  "inspector_paint": 128138,
+                  "inspector_presentation": 63666,
+                  "nonpresentation_paint_us": 64472
+                }
+              ]
+            },
+            {
+              "case": "TRUNCATION",
+              "outcome": "pass",
+              "maxima": {
+                "attach": 7981,
+                "controls": 122,
+                "editor": 0,
+                "inspector": 82516,
+                "inspector_admission": 27646,
+                "inspector_paint": 54862,
+                "inspector_prepare": 10909,
+                "inspector_presentation": 25573,
+                "populate": 28794,
+                "recovery": 0,
+                "reply": 0,
+                "reply_reload": 0,
+                "settings": 20742,
+                "take": 85,
+                "topology": 0,
+                "withdrawal": 4
+              },
+              "slow_inspector_ticks": []
+            },
+            {
+              "case": "OVER-CELLS",
+              "outcome": "pass",
+              "maxima": {
+                "attach": 5844,
+                "controls": 139,
+                "editor": 0,
+                "inspector": 22037,
+                "inspector_admission": 21020,
+                "inspector_paint": 5086,
+                "inspector_prepare": 8681,
+                "inspector_presentation": 307,
+                "populate": 18695,
+                "recovery": 0,
+                "reply": 0,
+                "reply_reload": 0,
+                "settings": 6608,
+                "take": 17,
+                "topology": 0,
+                "withdrawal": 3
+              },
+              "slow_inspector_ticks": []
+            },
+            {
+              "case": "NAVIGATION",
+              "outcome": "pass",
+              "maxima": {
+                "attach": 10765,
+                "controls": 169,
+                "editor": 0,
+                "inspector": 77328,
+                "inspector_admission": 27945,
+                "inspector_paint": 51277,
+                "inspector_prepare": 8458,
+                "inspector_presentation": 24826,
+                "populate": 20735,
+                "recovery": 0,
+                "reply": 0,
+                "reply_reload": 0,
+                "settings": 8680,
+                "take": 1912,
+                "topology": 0,
+                "withdrawal": 4
+              },
+              "slow_inspector_ticks": []
+            },
+            {
+              "case": "POLICY",
+              "outcome": "fail",
+              "maxima": {
+                "attach": 6324,
+                "controls": 178,
+                "editor": 0,
+                "inspector": 159121,
+                "inspector_admission": 61497,
+                "inspector_paint": 97612,
+                "inspector_prepare": 9031,
+                "inspector_presentation": 37824,
+                "populate": 18795,
+                "recovery": 0,
+                "reply": 0,
+                "reply_reload": 0,
+                "settings": 6175,
+                "take": 39,
+                "topology": 0,
+                "withdrawal": 71831
+              },
+              "slow_inspector_ticks": [
+                {
+                  "pid": 1447195,
+                  "tick": 212,
+                  "inspector": 159121,
+                  "inspector_admission": 61497,
+                  "inspector_paint": 97612,
+                  "inspector_presentation": 37824,
+                  "nonpresentation_paint_us": 59788
+                }
+              ]
+            },
+            {
+              "case": "ORACLE",
+              "outcome": "pass",
+              "maxima": {
+                "attach": 5815,
+                "controls": 116,
+                "editor": 0,
+                "inspector": 68331,
+                "inspector_admission": 23355,
+                "inspector_paint": 55509,
+                "inspector_prepare": 8848,
+                "inspector_presentation": 20435,
+                "populate": 18586,
+                "recovery": 0,
+                "reply": 0,
+                "reply_reload": 0,
+                "settings": 6308,
+                "take": 20,
+                "topology": 0,
+                "withdrawal": 4
+              },
+              "slow_inspector_ticks": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "first-tables-failure",
+      "index": {
+        "local_path": "out/evidence/table-raster-reuse-native/first-tables-failure/index.json",
+        "sha256": "7d04bf0ba323b5003c53b948aaf5b3525f689e7e8cb442794808edf1bc94d7bd"
+      },
+      "archive": {
+        "local_path": "out/evidence/table-raster-reuse-native/first-tables-failure/native-evidence.zip",
+        "sha256": "b89473be352658c26a9fed8ffb8967aeef8aa6d979af7188591c8d83c52e529d"
+      },
+      "preserved_bytes": 148600589,
+      "reports": [
+        {
+          "path": "inspector-live-table-e5bf73dd8d/result.json",
+          "sha256": "22bb63b4130c0b7347470cf6898f549be10c7b48e7c8042b04b75b6d5cde1633",
+          "family": "INSPECTOR-LIVE-TABLES",
+          "outcome": "fail",
+          "failure": "Traceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_installed_editor.py\", line 407, in main\n    assert all(v['outcome']=='pass' for v in report['cases']),('failed cases',[v['case'] for v in report['cases'] if v['outcome']!='pass'])\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: ('failed cases', ['TRUNCATION'])\n",
+          "artifacts": {
+            "SysPane.ImageWorker": "65b38c368c9472405163a244c7f1b0ddf2c8702bb5e7945e147cb4a5935e777c",
+            "SysPane.RecoveryWorker": "542b2fcb0aa20f674b98e5039af0e2ca512c43c5325c08cd286a03248a07416b",
+            "syspane": "3899685f0abda5db27cd253c54e8c42e26dc5d5fc4af1156b1f467ff8d4105a5",
+            "syspane_frontend_fixture": "07742ec8ce46ecdbc9db776fa82e3da192ee421dd3429d14406a80401c1679dc",
+            "syspane_frontend_helper_fixture": "8f31f92ec25fce27488cd545ed888e6cf5f4433eaf3612d39681795fd229a652"
+          },
+          "cases_sha256": "b05a666d3d3d3e9c76bb079ffb27b80215be87b498c6427df7c14cdd98eafead",
+          "cases": [
+            {
+              "case": "MAX-ROWS",
+              "outcome": "pass",
+              "record_sha256": "ad8fff342f08f92feb02e20fe232c546c61920783868aac8e116dd246b92b464",
+              "timing_max_us": {
+                "delay_us": 33037,
+                "work_us": 49067
+              },
+              "timing_violations": []
+            },
+            {
+              "case": "MAX-CELLS",
+              "outcome": "pass",
+              "record_sha256": "905c7a229dfc2794b5c9622e44096f171ab68ba7680be3a8ba4d26c3fd600257",
+              "timing_max_us": {
+                "delay_us": 64153,
+                "work_us": 72742
+              },
+              "timing_violations": []
+            },
+            {
+              "case": "TRUNCATION",
+              "outcome": "fail",
+              "record_sha256": "b8f9a030722789a5bf7880b57ffc857490a3beb2408ea0c5489de2d95b47a97b",
+              "timing_max_us": {
+                "delay_us": 63873,
+                "work_us": 110318
+              },
+              "timing_violations": [
+                {
+                  "delay_us": 0,
+                  "index": 445,
+                  "pid": 1445932,
+                  "work_us": 110318
+                }
+              ],
+              "failure": "Traceback (most recent call last):\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_installed_editor.py\", line 243, in observe\n    extension(dict(locals(),process=lambda:proc));report['outcome']='pass';return\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/d/Projects/SysPane/syspane/tests/configuration/native_inspector_live_tables.py\", line 89, in exercise\n    assert not report['timing_violations'],('GUI timing limit exceeded',report['timing_violations'])\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: ('GUI timing limit exceeded', [{'index': 445, 'pid': 1445932, 'work_us': 110318, 'delay_us': 0}])\n"
+            },
+            {
+              "case": "OVER-CELLS",
+              "outcome": "pass",
+              "record_sha256": "47d6063b2b13cb645f5ce64a7db018d4a7a36db474d9bee1efbaf40c78b17c81",
+              "timing_max_us": {
+                "delay_us": 2570,
+                "work_us": 25639
+              },
+              "timing_violations": []
+            },
+            {
+              "case": "NAVIGATION",
+              "outcome": "pass",
+              "record_sha256": "f3f329ef070fe54d896934f38a4533230c39835cfe2a01c8face9806c7b0d576",
+              "timing_max_us": {
+                "delay_us": 70293,
+                "work_us": 67940
+              },
+              "timing_violations": []
+            },
+            {
+              "case": "POLICY",
+              "outcome": "pass",
+              "record_sha256": "c14357d70a3a626cbd6a29f788dda95478e93e9afb5f30380203b050cf1b7cac",
+              "timing_max_us": {
+                "delay_us": 6987,
+                "work_us": 73553
+              },
+              "timing_violations": [],
+              "erasure_ms": 112.3087500454858
+            },
+            {
+              "case": "ORACLE",
+              "outcome": "pass",
+              "record_sha256": "403b9f5336ad1f989076e2dafa094b72e5dcc46a6dad8aa30173962c33b6d588",
+              "timing_max_us": {
+                "delay_us": 65243,
+                "work_us": 69624
+              },
+              "timing_violations": []
+            }
+          ]
+        }
+      ],
+      "phase_attribution": []
+    },
+    {
+      "label": "regression-chart",
+      "index": {
+        "local_path": "out/evidence/table-raster-reuse-native/regression-chart/index.json",
+        "sha256": "1dd76211d9498c26480ba3c7f11d384fe39fc27d42f1829f28f5438f4fb0826f"
+      },
+      "archive": {
+        "local_path": "out/evidence/table-raster-reuse-native/regression-chart/native-evidence.zip",
+        "sha256": "015965ec51235d654a9a1e21f8d5b20ddb0daa9512dc5f0e64e8fd66d8c524cc"
+      },
+      "preserved_bytes": 0,
+      "reports": [],
+      "phase_attribution": []
+    },
+    {
+      "label": "regression-chart-erasure",
+      "index": {
+        "local_path": "out/evidence/table-raster-reuse-native/regression-chart-erasure/index.json",
+        "sha256": "b84f1fe15a8c64826dfd3dd01fb3e55046263749f017b9af011639c76b571d1c"
+      },
+      "archive": {
+        "local_path": "out/evidence/table-raster-reuse-native/regression-chart-erasure/native-evidence.zip",
+        "sha256": "a31965790effad1171efa2ca40248488882c3aefae3b4115a0a12463696b65de"
+      },
+      "preserved_bytes": 60190854,
+      "reports": [
+        {
+          "path": "surface-fd3edfe28718/result.json",
+          "sha256": "681b8eae6be07b60d5253d029b4d3809d6a5aed29d7df17d01c1bd8736d1cf33",
+          "family": "CHART-ERASURE",
+          "outcome": "pass",
+          "executable_sha256": "f1697a9df0a6bd749789da7c8d5c36615ab96700290dfd0e4d3463bd19d1025b",
+          "cases": [
+            {
+              "case": "normal",
+              "outcome": "pass",
+              "record_sha256": "8feff5e6b3667f0194bf02670d0e392ea8d41a93bad5f6ea9d9ca280e081a861"
+            },
+            {
+              "case": "ignore-pixels",
+              "outcome": "pass",
+              "record_sha256": "a96087ffc525847ffee6f8189e9628f2719972adcd1f9b740abc33cef584d299"
+            },
+            {
+              "case": "ignore-accessible",
+              "outcome": "pass",
+              "record_sha256": "a590b7a6d64c1789b4e990147f4a7336b4eae335707d8f16fd1d51b8353dc08a"
+            }
+          ]
+        }
+      ],
+      "phase_attribution": []
+    },
+    {
+      "label": "regression-frames",
+      "index": {
+        "local_path": "out/evidence/table-raster-reuse-native/regression-frames/index.json",
+        "sha256": "c491c6f0a65ec1bf07799ed90e7ccdac0a29bf6e49cb05f2072af866b773fb5b"
+      },
+      "archive": {
+        "local_path": "out/evidence/table-raster-reuse-native/regression-frames/native-evidence.zip",
+        "sha256": "989849ce895db5dcc2c769cb745b05dedba18a8ea73ed0d8c1563aa8b5cac08b"
+      },
+      "preserved_bytes": 3147329,
+      "reports": [
+        {
+          "path": "chart-frame-limits-ebe34cb0b0b4/result.json",
+          "sha256": "aab0996bbbe059d9969592d2dfb4a4702b4e7bbc18ddaa647b64ea1a90336862",
+          "family": "CHART-FRAME-LIMITS",
+          "outcome": "pass",
+          "executable_sha256": "9c140338a3a86327c93002bc850e0b6d5e25f9a53dcdd9ecd1af87118605e791",
+          "cases": [
+            {
+              "scene": "chart",
+              "group": "boundary",
+              "boundary": {
+                "points": 3138,
+                "fitting_bytes": 262083,
+                "rejected_bytes": 262167,
+                "table_bytes": 0
+              },
+              "outcome": "pass",
+              "checks": [
+                {
+                  "case": "FIT",
+                  "outcome": "pass",
+                  "code": "ready",
+                  "clears": 3143
+                },
+                {
+                  "case": "OVER",
+                  "outcome": "pass",
+                  "code": "alternative",
+                  "clears": 3145
+                },
+                {
+                  "case": "RETRY-BLOCKED",
+                  "outcome": "pass",
+                  "code": "alternative",
+                  "clears": 3148
+                },
+                {
+                  "case": "RECOVER",
+                  "outcome": "pass",
+                  "code": "ready",
+                  "clears": 3150
+                },
+                {
+                  "case": "REVOKE",
+                  "outcome": "pass",
+                  "code": "restricted",
+                  "clears": 3152
+                },
+                {
+                  "case": "REGRANT",
+                  "outcome": "pass",
+                  "code": "ready",
+                  "clears": 3154
+                },
+                {
+                  "case": "FRESH",
+                  "outcome": "pass",
+                  "code": "ready",
+                  "clears": 3157
+                },
+                {
+                  "case": "CLOSE",
+                  "outcome": "pass",
+                  "code": "closed",
+                  "clears": 3158
+                }
+              ]
+            },
+            {
+              "scene": "chart",
+              "group": "maximum",
+              "boundary": {
+                "points": 3138,
+                "fitting_bytes": 262083,
+                "rejected_bytes": 262167,
+                "table_bytes": 0
+              },
+              "outcome": "pass",
+              "checks": [
+                {
+                  "case": "MAX",
+                  "outcome": "pass",
+                  "code": "alternative",
+                  "clears": 4102
+                },
+                {
+                  "case": "RETRY-BLOCKED",
+                  "outcome": "pass",
+                  "code": "alternative",
+                  "clears": 4105
+                },
+                {
+                  "case": "RECOVER",
+                  "outcome": "pass",
+                  "code": "ready",
+                  "clears": 4107
+                },
+                {
+                  "case": "REVOKE",
+                  "outcome": "pass",
+                  "code": "restricted",
+                  "clears": 4109
+                },
+                {
+                  "case": "REGRANT",
+                  "outcome": "pass",
+                  "code": "ready",
+                  "clears": 4111
+                },
+                {
+                  "case": "FRESH",
+                  "outcome": "pass",
+                  "code": "ready",
+                  "clears": 4114
+                },
+                {
+                  "case": "CLOSE",
+                  "outcome": "pass",
+                  "code": "closed",
+                  "clears": 4115
+                }
+              ]
+            },
+            {
+              "scene": "chart",
+              "group": "eviction",
+              "boundary": {
+                "points": 3138,
+                "fitting_bytes": 262083,
+                "rejected_bytes": 262167,
+                "table_bytes": 0
+              },
+              "outcome": "pass",
+              "checks": [
+                {
+                  "case": "EVICT",
+                  "outcome": "pass",
+                  "code": "alternative",
+                  "clears": 4103
+                },
+                {
+                  "case": "RETRY-BLOCKED",
+                  "outcome": "pass",
+                  "code": "alternative",
+                  "clears": 4106
+                },
+                {
+                  "case": "RECOVER",
+                  "outcome": "pass",
+                  "code": "ready",
+                  "clears": 4108
+                },
+                {
+                  "case": "REVOKE",
+                  "outcome": "pass",
+                  "code": "restricted",
+                  "clears": 4110
+                },
+                {
+                  "case": "REGRANT",
+                  "outcome": "pass",
+                  "code": "ready",
+                  "clears": 4112
+                },
+                {
+                  "case": "FRESH",
+                  "outcome": "pass",
+                  "code": "ready",
+                  "clears": 4115
+                },
+                {
+                  "case": "CLOSE",
+                  "outcome": "pass",
+                  "code": "closed",
+                  "clears": 4116
+                }
+              ]
+            },
+            {
+              "scene": "mixed",
+              "group": "boundary",
+              "boundary": {
+                "points": 2087,
+                "fitting_bytes": 262117,
+                "rejected_bytes": 262201,
+                "table_bytes": 88318
+              },
+              "outcome": "pass",
+              "checks": [
+                {
+                  "case": "FIT",
+                  "outcome": "pass",
+                  "code": "ready",
+                  "clears": 2095
+                },
+                {
+                  "case": "OVER",
+                  "outcome": "pass",
+                  "code": "alternative",
+                  "clears": 2097
+                },
+                {
+                  "case": "RETRY-BLOCKED",
+                  "outcome": "pass",
+                  "code": "alternative",
+                  "clears": 2100
+                },
+                {
+                  "case": "RECOVER",
+                  "outcome": "pass",
+                  "code": "ready",
+                  "clears": 2102
+                },
+                {
+                  "case": "REVOKE",
+                  "outcome": "pass",
+                  "code": "restricted",
+                  "clears": 2104
+                },
+                {
+                  "case": "REGRANT",
+                  "outcome": "pass",
+                  "code": "ready",
+                  "clears": 2106
+                },
+                {
+                  "case": "FRESH",
+                  "outcome": "pass",
+                  "code": "ready",
+                  "clears": 2111
+                },
+                {
+                  "case": "CLOSE",
+                  "outcome": "pass",
+                  "code": "closed",
+                  "clears": 2112
+                }
+              ]
+            },
+            {
+              "scene": "mixed",
+              "group": "maximum",
+              "boundary": {
+                "points": 2087,
+                "fitting_bytes": 262117,
+                "rejected_bytes": 262201,
+                "table_bytes": 88318
+              },
+              "outcome": "pass",
+              "checks": [
+                {
+                  "case": "MAX",
+                  "outcome": "pass",
+                  "code": "alternative",
+                  "clears": 4108
+                },
+                {
+                  "case": "RETRY-BLOCKED",
+                  "outcome": "pass",
+                  "code": "alternative",
+                  "clears": 4111
+                },
+                {
+                  "case": "RECOVER",
+                  "outcome": "pass",
+                  "code": "ready",
+                  "clears": 4113
+                },
+                {
+                  "case": "REVOKE",
+                  "outcome": "pass",
+                  "code": "restricted",
+                  "clears": 4115
+                },
+                {
+                  "case": "REGRANT",
+                  "outcome": "pass",
+                  "code": "ready",
+                  "clears": 4117
+                },
+                {
+                  "case": "FRESH",
+                  "outcome": "pass",
+                  "code": "ready",
+                  "clears": 4122
+                },
+                {
+                  "case": "CLOSE",
+                  "outcome": "pass",
+                  "code": "closed",
+                  "clears": 4123
+                }
+              ]
+            },
+            {
+              "scene": "mixed",
+              "group": "eviction",
+              "boundary": {
+                "points": 2087,
+                "fitting_bytes": 262117,
+                "rejected_bytes": 262201,
+                "table_bytes": 88318
+              },
+              "outcome": "pass",
+              "checks": [
+                {
+                  "case": "EVICT",
+                  "outcome": "pass",
+                  "code": "alternative",
+                  "clears": 4109
+                },
+                {
+                  "case": "RETRY-BLOCKED",
+                  "outcome": "pass",
+                  "code": "alternative",
+                  "clears": 4112
+                },
+                {
+                  "case": "RECOVER",
+                  "outcome": "pass",
+                  "code": "ready",
+                  "clears": 4114
+                },
+                {
+                  "case": "REVOKE",
+                  "outcome": "pass",
+                  "code": "restricted",
+                  "clears": 4116
+                },
+                {
+                  "case": "REGRANT",
+                  "outcome": "pass",
+                  "code": "ready",
+                  "clears": 4118
+                },
+                {
+                  "case": "FRESH",
+                  "outcome": "pass",
+                  "code": "ready",
+                  "clears": 4123
+                },
+                {
+                  "case": "CLOSE",
+                  "outcome": "pass",
+                  "code": "closed",
+                  "clears": 4124
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "phase_attribution": []
+    },
+    {
+      "label": "regression-gui",
+      "index": {
+        "local_path": "out/evidence/table-raster-reuse-native/regression-gui/index.json",
+        "sha256": "ea74baed52ec24107447279ef27aa6d2a95af3f145d910dcf197ea1985c118d3"
+      },
+      "archive": {
+        "local_path": "out/evidence/table-raster-reuse-native/regression-gui/native-evidence.zip",
+        "sha256": "c830a70644139733eb082ff571977d01cfd4b779a80f118a75c64433917ebf94"
+      },
+      "preserved_bytes": 152096210,
+      "reports": [
+        {
+          "path": "rgl-2111993239/result.json",
+          "sha256": "c7deb3d4357337c421b0535a57c19795acbdfee8c5f66c8185c1ce90e793d8cd",
+          "family": "RECOVERY-GUI-LIMITS",
+          "outcome": "pass",
+          "artifacts": {
+            "SysPane.ImageWorker": "65b38c368c9472405163a244c7f1b0ddf2c8702bb5e7945e147cb4a5935e777c",
+            "SysPane.RecoveryWorker": "542b2fcb0aa20f674b98e5039af0e2ca512c43c5325c08cd286a03248a07416b",
+            "syspane": "3899685f0abda5db27cd253c54e8c42e26dc5d5fc4af1156b1f467ff8d4105a5",
+            "syspane_frontend_fixture": "07742ec8ce46ecdbc9db776fa82e3da192ee421dd3429d14406a80401c1679dc",
+            "syspane_frontend_helper_fixture": "8f31f92ec25fce27488cd545ed888e6cf5f4433eaf3612d39681795fd229a652"
+          },
+          "cases_sha256": "43263df79f8dd55fc2446f6edf4128416dc200eb348c9bc0a05c2d780e68c9b4",
+          "cases": [
+            {
+              "case": "MAX-WIDGETS",
+              "outcome": "pass",
+              "record_sha256": "618752da0342775c09f1587e44920621ee09f4524f541f2d7e02cbe07963ffcf",
+              "timing_max_us": {
+                "delay_us": 36273,
+                "work_us": 41286
+              },
+              "timing_violations": []
+            },
+            {
+              "case": "MAX-SCENE",
+              "outcome": "pass",
+              "record_sha256": "36a5963f4c9875ff1d051169d85d6e5d9b013cc7d99e27d4c3c762b68b0bbfca",
+              "timing_max_us": {
+                "delay_us": 38947,
+                "work_us": 40982
+              },
+              "timing_violations": []
+            },
+            {
+              "case": "MAX-RECORD",
+              "outcome": "pass",
+              "record_sha256": "f2043e2879f68e2a247a3d8e8a4a2a93abc55f132e7a1b6f8e9ea17a3160ab6e",
+              "timing_max_us": {
+                "delay_us": 38910,
+                "work_us": 41952
+              },
+              "timing_violations": []
+            },
+            {
+              "case": "MAX-COMMAND-REJECT",
+              "outcome": "pass",
+              "record_sha256": "d3d0f28a351d53ab6bbd4836b56822080de3b717e0992fb911084ef3aa74d37d",
+              "timing_max_us": {
+                "delay_us": 5749,
+                "work_us": 24886
+              },
+              "timing_violations": []
+            },
+            {
+              "case": "OVER-RECORD-REJECT",
+              "outcome": "pass",
+              "record_sha256": "334d44a70c7472342fc2e636a1923bb7acf398c912756692919dd88062bf7a5b",
+              "timing_max_us": {
+                "delay_us": 6644,
+                "work_us": 24499
+              },
+              "timing_violations": []
+            },
+            {
+              "case": "CLOSE-PREPARING",
+              "outcome": "pass",
+              "record_sha256": "ef0e548e9bdec350171eeff29732ae1d3793cf1de0b758ea7f16a46df1c1315a",
+              "timing_max_us": {
+                "delay_us": 4337,
+                "work_us": 24731
+              },
+              "timing_violations": []
+            },
+            {
+              "case": "POLICY",
+              "outcome": "pass",
+              "record_sha256": "c20fc38a5b7ce1bf9dafae87e2d5af1393e7133f603845bf34b3dc476e68134a",
+              "timing_max_us": {
+                "delay_us": 35792,
+                "work_us": 35763
+              },
+              "timing_violations": [],
+              "erasure_ms": 74.14028700441122
+            }
+          ]
+        }
+      ],
+      "phase_attribution": []
+    },
+    {
+      "label": "regression-image",
+      "index": {
+        "local_path": "out/evidence/table-raster-reuse-native/regression-image/index.json",
+        "sha256": "ba070cfc410e17ff96749f076723f3cc879f559ef88530aadeca9599d8f2d684"
+      },
+      "archive": {
+        "local_path": "out/evidence/table-raster-reuse-native/regression-image/native-evidence.zip",
+        "sha256": "624d60e64c0b94984e184e3c6633c6bca8a751afc9a76d5961280d3fb81ccdea"
+      },
+      "preserved_bytes": 0,
+      "reports": [],
+      "phase_attribution": []
+    },
+    {
+      "label": "regression-image-erasure",
+      "index": {
+        "local_path": "out/evidence/table-raster-reuse-native/regression-image-erasure/index.json",
+        "sha256": "5aafd82606a43baaae50e008cb7e8d4ee2adc9626bb4e767c1d7caffd247996b"
+      },
+      "archive": {
+        "local_path": "out/evidence/table-raster-reuse-native/regression-image-erasure/native-evidence.zip",
+        "sha256": "6218f7d85e97bc7b72c0c87180cd909cfc7de32b834468df9ff53ef23dbbcd80"
+      },
+      "preserved_bytes": 97955938,
+      "reports": [
+        {
+          "path": "surface-9d33563a3b78/result.json",
+          "sha256": "310cfc82757ce31755a38b6346ba5f33f79b1d113aa9358d87321ba5da61adf6",
+          "family": "IMAGE-ERASURE",
+          "outcome": "pass",
+          "executable_sha256": "f1697a9df0a6bd749789da7c8d5c36615ab96700290dfd0e4d3463bd19d1025b",
+          "cases": [
+            {
+              "case": "normal",
+              "outcome": "pass",
+              "record_sha256": "29ffe8689233dd4f0f80d5ef6db378075e7b125ea4f6fa7a5d071cbe4594adaf"
+            },
+            {
+              "case": "ignore-pixels",
+              "outcome": "pass",
+              "record_sha256": "de4491f1055181ee8af4a605bf84647d481554bb5bd9e374d6a08eb0f1d62a3a"
+            },
+            {
+              "case": "ignore-accessible",
+              "outcome": "pass",
+              "record_sha256": "61580ec7bf389d5c5adbc5061879fbd6e8f14f9da09ac66fe55a9c9e485c37ca"
+            }
+          ]
+        }
+      ],
+      "phase_attribution": []
+    },
+    {
+      "label": "regression-inspector",
+      "index": {
+        "local_path": "out/evidence/table-raster-reuse-native/regression-inspector/index.json",
+        "sha256": "5b56edf2839440406c69e5b8270eec5215326feb19ce9f00236ecadf82944ca3"
+      },
+      "archive": {
+        "local_path": "out/evidence/table-raster-reuse-native/regression-inspector/native-evidence.zip",
+        "sha256": "ad86acca73f6256ab21c88ae1aee8961fdc73fa61f0434311d888b035a78e13f"
+      },
+      "preserved_bytes": 249068,
+      "reports": [
+        {
+          "path": "inspector-7f36b09e010f/result.json",
+          "sha256": "77b5e169bc8c0a8ac1e3f6d5142f0b47ae0f8b0c77b13c00d7ab522793e2a99c",
+          "family": "SCENE-INSPECTOR",
+          "outcome": "pass",
+          "executable_sha256": "9c140338a3a86327c93002bc850e0b6d5e25f9a53dcdd9ecd1af87118605e791",
+          "cases": [
+            {
+              "case": "scalar",
+              "outcome": "pass",
+              "fault_detected": false,
+              "record_sha256": "1209fbaaa02ee45407fdb030198cf5a33f7e548078df2f78f7c05b417ac4428c"
+            },
+            {
+              "case": "table",
+              "outcome": "pass",
+              "fault_detected": false,
+              "record_sha256": "1c8ab490c7c225529fd5a58f243f80a28cfec0e365094c62e3a25df6ecb0587e"
+            },
+            {
+              "case": "chart",
+              "outcome": "pass",
+              "fault_detected": false,
+              "record_sha256": "34f45980f0558a8ae0866a6d4b0a081667d10e0da42f4ee64102dcf8ef2042ee"
+            },
+            {
+              "case": "image",
+              "outcome": "pass",
+              "fault_detected": false,
+              "record_sha256": "9d2fc523edad0ad8ab7bea03581c1987a352a574887b0c12849b9a407cfc12c9"
+            },
+            {
+              "case": "translated",
+              "outcome": "pass",
+              "fault_detected": false,
+              "record_sha256": "9aa934da9b9981a61d6109a84182ece7655d04116f5d84eabe2b9d2f2c2eadd0"
+            },
+            {
+              "case": "retain",
+              "outcome": "pass",
+              "fault_detected": true,
+              "record_sha256": "cd78a0655f9019d2d77c16524b05c05c4f575904ded36d99a239cbcef0efc388"
+            },
+            {
+              "case": "wrong-selection",
+              "outcome": "pass",
+              "fault_detected": true,
+              "record_sha256": "d056bfec71b1d81f6ad65f9b13e3ca42dac94618fa1b9f6e508890a41b74d415"
+            }
+          ]
+        }
+      ],
+      "phase_attribution": []
+    },
+    {
+      "label": "regression-installed-live",
+      "index": {
+        "local_path": "out/evidence/table-raster-reuse-native/regression-installed-live/index.json",
+        "sha256": "d42a2a520eb3ed6189ea20a275a4b77ae09f5e2eb234a6f12067cd3d76859be6"
+      },
+      "archive": {
+        "local_path": "out/evidence/table-raster-reuse-native/regression-installed-live/native-evidence.zip",
+        "sha256": "fbfd148d78be77b6c6908be403ab330af8c9d221812d2835230bb9c030a96799"
+      },
+      "preserved_bytes": 146546126,
+      "reports": [
+        {
+          "path": "telemetry-frontend-d8fbc7367b/result.json",
+          "sha256": "f5b588424ecf21efe4ae4e70192df9a61f7ca16c4161b0ac7ad82bbe5d27fa98",
+          "family": "INSTALLED-TELEMETRY",
+          "outcome": "pass",
+          "artifacts": {
+            "SysPane.ImageWorker": "65b38c368c9472405163a244c7f1b0ddf2c8702bb5e7945e147cb4a5935e777c",
+            "SysPane.RecoveryWorker": "542b2fcb0aa20f674b98e5039af0e2ca512c43c5325c08cd286a03248a07416b",
+            "syspane": "3899685f0abda5db27cd253c54e8c42e26dc5d5fc4af1156b1f467ff8d4105a5",
+            "syspane_frontend_entry_fixture": "7d7de29deb85932e276b40c9eb78e6743f3937e80bfaeeb0b6a0ae9579851cb0",
+            "syspane_frontend_helper_fixture": "8f31f92ec25fce27488cd545ed888e6cf5f4433eaf3612d39681795fd229a652"
+          },
+          "cases_sha256": "bd439d2c32cb5935648a0e06e129ec87502dc82aa92409ee8403eb6380b6b6b1",
+          "cases": [
+            {
+              "case": "LIVE",
+              "outcome": "pass",
+              "record_sha256": "cb05221bb57450bf725e312d596b50441b813df4b95776b739c88160772f34ac"
+            },
+            {
+              "case": "NAVIGATION",
+              "outcome": "pass",
+              "record_sha256": "e51206a8e1fb704a5554063cbf2388a29d5d28c7d78793447393784f4959b264"
+            },
+            {
+              "case": "REPLACEMENT",
+              "outcome": "pass",
+              "record_sha256": "1e4311b977a2ad6558819c383cf8106c55e83fb732660bad4175d98688e72718"
+            },
+            {
+              "case": "POLICY",
+              "outcome": "pass",
+              "record_sha256": "3da7fc7a1d9e4fb083be7edf617e83edab2a7961c9808d4e8b528e41eb7bf2e9",
+              "erasure_ms": 18.406341958325356
+            },
+            {
+              "case": "CONFIGURATION-LOSS",
+              "outcome": "pass",
+              "record_sha256": "5a8bf841b166385c78a87a72de1dea67776c404705945e2304a3550b600b80ae"
+            },
+            {
+              "case": "CLOSE-HELD",
+              "outcome": "pass",
+              "record_sha256": "36716c8a84920974081e73ccdeb67caf0de742a40532a1af8eecc3d7bd689a0f"
+            },
+            {
+              "case": "ORACLE",
+              "outcome": "pass",
+              "record_sha256": "93e73fbbab0ebdfcf7f5c23a9bb69618d8a76845b55d2d98d7885e92fd6f289b"
+            }
+          ]
+        }
+      ],
+      "phase_attribution": []
+    },
+    {
+      "label": "regression-portable",
+      "index": {
+        "local_path": "out/evidence/table-raster-reuse-native/regression-portable/index.json",
+        "sha256": "55d94eee51d8fe3367a13f820ea295a988bcc92cfc46745f5a067130941c286f"
+      },
+      "archive": {
+        "local_path": "out/evidence/table-raster-reuse-native/regression-portable/native-evidence.zip",
+        "sha256": "11610a8220c1c9676f8f9e2b2eab76549104f7bb7c82f57651f43e25da45aa4f"
+      },
+      "preserved_bytes": 0,
+      "reports": [],
+      "phase_attribution": []
+    },
+    {
+      "label": "regression-roles",
+      "index": {
+        "local_path": "out/evidence/table-raster-reuse-native/regression-roles/index.json",
+        "sha256": "e66e36a64c1fed70defaaa66583f342e114154152114a02fcdc24481b7fd11d9"
+      },
+      "archive": {
+        "local_path": "out/evidence/table-raster-reuse-native/regression-roles/native-evidence.zip",
+        "sha256": "881bb0bc1586432ed8fac0bd372654cc36e963513d61a09fae956e0f40a35f70"
+      },
+      "preserved_bytes": 42734488,
+      "reports": [
+        {
+          "path": "roles-0af0510fdeff/result.json",
+          "sha256": "70f5fc5d9752d348c29b61ef3b64ebce64f7cab38892e0fa91fe6763f4bfa669",
+          "family": "ROLE-COMPOSITION",
+          "outcome": "pass",
+          "executable_sha256": "d5952a13d3076e7d8193146dd219ded1b5db6889a68f598489c27bcff6535b72",
+          "cases": [
+            {
+              "case": "value",
+              "scale": [
+                1,
+                1
+              ],
+              "contrast": "authored",
+              "outcome": "pass"
+            },
+            {
+              "case": "status",
+              "scale": [
+                1,
+                1
+              ],
+              "contrast": "authored",
+              "outcome": "pass"
+            },
+            {
+              "case": "pending",
+              "scale": [
+                1,
+                1
+              ],
+              "contrast": "authored",
+              "outcome": "pass"
+            },
+            {
+              "case": "failed",
+              "scale": [
+                1,
+                1
+              ],
+              "contrast": "authored",
+              "outcome": "pass"
+            },
+            {
+              "case": "retained",
+              "scale": [
+                1,
+                1
+              ],
+              "contrast": "authored",
+              "outcome": "pass"
+            },
+            {
+              "case": "newline",
+              "scale": [
+                1,
+                1
+              ],
+              "contrast": "authored",
+              "outcome": "pass"
+            },
+            {
+              "case": "body",
+              "scale": [
+                1,
+                1
+              ],
+              "contrast": "authored",
+              "outcome": "pass"
+            },
+            {
+              "case": "chart",
+              "scale": [
+                1,
+                1
+              ],
+              "contrast": "authored",
+              "outcome": "pass"
+            },
+            {
+              "case": "chartgap",
+              "scale": [
+                1,
+                1
+              ],
+              "contrast": "authored",
+              "outcome": "pass"
+            },
+            {
+              "case": "hidden",
+              "scale": [
+                1,
+                1
+              ],
+              "contrast": "authored",
+              "outcome": "pass"
+            },
+            {
+              "case": "hiddenstale",
+              "scale": [
+                1,
+                1
+              ],
+              "contrast": "authored",
+              "outcome": "pass"
+            },
+            {
+              "case": "table",
+              "scale": [
+                1,
+                1
+              ],
+              "contrast": "authored",
+              "outcome": "pass"
+            },
+            {
+              "case": "value",
+              "scale": [
+                1,
+                1
+              ],
+              "contrast": "light",
+              "outcome": "pass"
+            },
+            {
+              "case": "table",
+              "scale": [
+                1,
+                1
+              ],
+              "contrast": "light",
+              "outcome": "pass"
+            },
+            {
+              "case": "value",
+              "scale": [
+                1,
+                1
+              ],
+              "contrast": "dark",
+              "outcome": "pass"
+            },
+            {
+              "case": "table",
+              "scale": [
+                1,
+                1
+              ],
+              "contrast": "dark",
+              "outcome": "pass"
+            },
+            {
+              "case": "value",
+              "scale": [
+                3,
+                2
+              ],
+              "contrast": "authored",
+              "outcome": "pass"
+            },
+            {
+              "case": "table",
+              "scale": [
+                3,
+                2
+              ],
+              "contrast": "authored",
+              "outcome": "pass"
+            },
+            {
+              "case": "admission-erasure-limits-replacement-group",
+              "outcome": "pass"
+            }
+          ]
+        }
+      ],
+      "phase_attribution": []
+    },
+    {
+      "label": "regression-scene-erasure",
+      "index": {
+        "local_path": "out/evidence/table-raster-reuse-native/regression-scene-erasure/index.json",
+        "sha256": "e4dc86d299e1298dde9e52d7cf9c0b21fada668969eddfcde991cf6d4ecfdb65"
+      },
+      "archive": {
+        "local_path": "out/evidence/table-raster-reuse-native/regression-scene-erasure/native-evidence.zip",
+        "sha256": "b004cea59df180ffeb4285ad3095e339217657e8684d854441d62ffccc3e05bf"
+      },
+      "preserved_bytes": 56743768,
+      "reports": [
+        {
+          "path": "surface-51c31c82fa95/result.json",
+          "sha256": "55a3c9554928504a217db1388b84aea5d24e1b4d4890fd4c118d6ef593c1d161",
+          "family": "SCENE-ERASURE",
+          "outcome": "pass",
+          "executable_sha256": "f1697a9df0a6bd749789da7c8d5c36615ab96700290dfd0e4d3463bd19d1025b",
+          "cases": [
+            {
+              "case": "normal",
+              "outcome": "pass",
+              "record_sha256": "6d70eec13480fb2647593b29cfce060ffbb47b499f94078e1224659ebc14a7a6"
+            },
+            {
+              "case": "ignore-pixels",
+              "outcome": "pass",
+              "record_sha256": "e58cdddca952cc86c083f1404ad42025cb88e56afcb53c7b353d87d39444c395"
+            },
+            {
+              "case": "ignore-accessible",
+              "outcome": "pass",
+              "record_sha256": "017638bb974db3640eaae81c79891bc9fd3dc65fa74ab7dec01a54281e98e869"
+            }
+          ]
+        }
+      ],
+      "phase_attribution": []
+    },
+    {
+      "label": "regression-table",
+      "index": {
+        "local_path": "out/evidence/table-raster-reuse-native/regression-table/index.json",
+        "sha256": "001006eddb97c565e3e7231bbcd5f4530963f0e7785ae85ec843c484446f0b19"
+      },
+      "archive": {
+        "local_path": "out/evidence/table-raster-reuse-native/regression-table/native-evidence.zip",
+        "sha256": "8f1e09da18c45bfa29463c9863740f5ed29e3b832c81309d8bdecca8d53134cd"
+      },
+      "preserved_bytes": 0,
+      "reports": [],
+      "phase_attribution": []
+    },
+    {
+      "label": "regression-table-erasure",
+      "index": {
+        "local_path": "out/evidence/table-raster-reuse-native/regression-table-erasure/index.json",
+        "sha256": "bb1aaf281f50cd21c52de19c33bb66d8a6af0f6339d987db03e7db15957ae588"
+      },
+      "archive": {
+        "local_path": "out/evidence/table-raster-reuse-native/regression-table-erasure/native-evidence.zip",
+        "sha256": "d5950504b26065fc5d289518a96669730fbf9a6d72a7eea2d1bfd79c405a63c8"
+      },
+      "preserved_bytes": 54527816,
+      "reports": [
+        {
+          "path": "surface-e72393edf89c/result.json",
+          "sha256": "4127dead7987e0fd6dea7b11749be557c45f7d71504c0171ab514b3038496522",
+          "family": "TABLE-ERASURE",
+          "outcome": "pass",
+          "executable_sha256": "f1697a9df0a6bd749789da7c8d5c36615ab96700290dfd0e4d3463bd19d1025b",
+          "cases": [
+            {
+              "case": "normal",
+              "outcome": "pass",
+              "record_sha256": "621cea9943030303c28335716ff3353e1d4e6b48b3c6d6ed030284a82c422608"
+            },
+            {
+              "case": "ignore-pixels",
+              "outcome": "pass",
+              "record_sha256": "fcc8b7210a519767bf5d76284b200321074f3b59acea00fc00cec393f15bffba"
+            },
+            {
+              "case": "ignore-accessible",
+              "outcome": "pass",
+              "record_sha256": "811fc69d4558bcfd6550d05c6e7b4490fb78dfa334dcd7bd049d4bfb4b7d24e6"
+            }
+          ]
+        }
+      ],
+      "phase_attribution": []
+    },
+    {
+      "label": "regression-text",
+      "index": {
+        "local_path": "out/evidence/table-raster-reuse-native/regression-text/index.json",
+        "sha256": "cf09858ba8b6c65630b6f87a3c2f1131e9a32095290b99305f8dd490b4187128"
+      },
+      "archive": {
+        "local_path": "out/evidence/table-raster-reuse-native/regression-text/native-evidence.zip",
+        "sha256": "5b3616becf07415f24cd15292849fc1f736dfa0725303b18c752477908902a79"
+      },
+      "preserved_bytes": 2701639,
+      "reports": [
+        {
+          "path": "text-session-88b566a04867/result.json",
+          "sha256": "8f8f3a50e0749ec0d4e8663bbe27b87038bd7290f87c41f7244e1d34b7e96987",
+          "family": "TEXT-SESSION",
+          "outcome": "pass",
+          "executable_sha256": "dee5bd182a794d5eef7a27add6ca34bfa71e31daa96602a08602aca9175f7cc0",
+          "cases": [
+            {
+              "case": "STANDALONE",
+              "outcome": "pass",
+              "requests": 30
+            },
+            {
+              "case": "FORWARD",
+              "outcome": "pass",
+              "requests": 30,
+              "wrong_thread_refused": true
+            },
+            {
+              "case": "REVERSE",
+              "outcome": "pass",
+              "requests": 30,
+              "wrong_thread_refused": true
+            },
+            {
+              "case": "ALTERNATING",
+              "outcome": "pass",
+              "requests": 30,
+              "wrong_thread_refused": true
+            },
+            {
+              "case": "PREPARED",
+              "outcome": "pass",
+              "requests": 30
+            },
+            {
+              "case": "PREPARED-MISMATCH",
+              "outcome": "pass",
+              "requests": 30
+            }
+          ]
+        }
+      ],
+      "phase_attribution": []
+    },
+    {
+      "label": "regression-visibility",
+      "index": {
+        "local_path": "out/evidence/table-raster-reuse-native/regression-visibility/index.json",
+        "sha256": "9453647b0bfa426a360acce115ef29b2f009e06f49f5e0bb06cab1dcce6f03c4"
+      },
+      "archive": {
+        "local_path": "out/evidence/table-raster-reuse-native/regression-visibility/native-evidence.zip",
+        "sha256": "b9eb14a18314c9f7c618fa5ef6bb35deec4df1756bd6d618e8bc1e9710553914"
+      },
+      "preserved_bytes": 0,
+      "reports": [],
+      "phase_attribution": []
+    },
+    {
+      "label": "regression-visibility-pixels",
+      "index": {
+        "local_path": "out/evidence/table-raster-reuse-native/regression-visibility-pixels/index.json",
+        "sha256": "537871890bc7bb04825f0b3ae77cd9107968cf4b5d142bc5251e64d52c359dfe"
+      },
+      "archive": {
+        "local_path": "out/evidence/table-raster-reuse-native/regression-visibility-pixels/native-evidence.zip",
+        "sha256": "ec6810450155d0f12704dbb0f6b4f1855a7a487af6c52ce93259f2e59d101f60"
+      },
+      "preserved_bytes": 694273,
+      "reports": [
+        {
+          "path": "visibility-9593771a33e7/result.json",
+          "sha256": "945e5c935d322d3245e2f8588959c06743bbcb4bbc8de0934f591e964ce35ded",
+          "family": "VISIBILITY-PIXELS",
+          "outcome": "pass",
+          "executable_sha256": "f1697a9df0a6bd749789da7c8d5c36615ab96700290dfd0e4d3463bd19d1025b",
+          "cases": [
+            {
+              "case": "normal",
+              "outcome": "pass",
+              "record_sha256": "43363945105d606d42e837b329f70fb814d97a233afc65656b076d4e90b8b816"
+            },
+            {
+              "case": "invert",
+              "outcome": "pass",
+              "record_sha256": "32052202391ba45d439f5c31b9ef5e1092689cd6a5cb18610385d8245b7c67b4"
+            },
+            {
+              "case": "retain-hidden",
+              "outcome": "pass",
+              "record_sha256": "9d4b49c381452ed635dd3d5ae4086fca28c3d24ff3b3e4d0a461847799a81e7b"
+            }
+          ]
+        }
+      ],
+      "phase_attribution": []
+    }
+  ],
+  "environment": {
+    "local_path": "out/evidence/table-raster-reuse/environment-after.json",
+    "sha256": "2f63ff5cea2484bdff4e187d2e2d3f1af7c32c279be16e9f577df64a85177518"
+  },
+  "original_failure": {
+    "checkpoint": {
+      "local_path": "spec/delivery/checkpoints/continuous-replay.json",
+      "sha256": "bfa646a024f5b2f0bf1fcebb8ad2e196cc2b0f7886fc48332565fe072e2d64a9"
+    },
+    "case": "TRUNCATION",
+    "work_us": 102502,
+    "limit_us": 100000,
+    "raw_archive": {
+      "local_path": "out/evidence/chart-frame-limits-native/regression-installed-tables-failure/native-evidence.zip",
+      "sha256": "d01d3fc8aa72464b8230d4a5ec17c4d5575eec4c4ad21009abd0acb62a2aea93"
+    }
+  },
+  "qualification": {
+    "frozen_cases": 16,
+    "frozen_case_mode_checks": 32,
+    "ordinary": {
+      "outcome": "fail",
+      "failed_cases": [
+        "TRUNCATION"
+      ],
+      "max_work_us": 110318,
+      "max_delay_us": 70293,
+      "erasure_ms": 112.3087500454858
+    },
+    "phase": {
+      "outcome": "fail",
+      "failed_cases": [
+        "MAX-CELLS",
+        "POLICY"
+      ],
+      "max_work_us": 159557,
+      "max_delay_us": 71464,
+      "erasure_ms": 99.11500802263618
+    },
+    "shared_linux_checks": 146,
+    "other_profiles": "Windows GCC15 and v141_xp retain preceding source-bound shared/import evidence. Changed raster source and probe belong only to Linux; no new Windows execution claim.",
+    "acquisition": "Maximum tables use frozen synthetic counters with actual native delivery/clocks. Native hardware and installed long histories remain separate."
+  },
+  "fixture_correction": "A stale VISIBILITY-ERASURE experiment name dispatched no tests and failed. Preserve its command/result; execute the existing registered VISIBILITY-PIXELS and SCENE-ERASURE families instead. No product/test oracle changed.",
+  "remaining": [
+    "Close background admission/painting ownership and current-policy/profile/topology adoption, chart continuity, cancellation, bounded memory and shutdown before implementing the next repair.",
+    "Maximum native GTK chart/mixed updates, semantic selection/eviction, AT-SPI erasure.",
+    "Actual installed history accumulation at native cadence.",
+    "Human accessibility and long-text usability.",
+    "Physical hotplug, other native adapters, desktop/lifecycle and all five complete 0.1.0 editions."
+  ],
+  "specification_checks": {
+    "commands": [
+      {
+        "step": "budget",
+        "command": [
+          "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+          "-X",
+          "utf8",
+          "source/build/check_workspace_budget.py",
+          "--action",
+          "test"
+        ],
+        "environment": {
+          "TMP": "D:\\Projects\\SysPane\\syspane\\out\\test-tmp\\table-raster-reuse",
+          "TEMP": "D:\\Projects\\SysPane\\syspane\\out\\test-tmp\\table-raster-reuse",
+          "GIT_CEILING_DIRECTORIES": "D:/Projects/SysPane/syspane/out/test-tmp/table-raster-reuse"
+        },
+        "started_at": "2026-10-11T14:34:14.632684+00:00",
+        "finished_at": "2026-10-11T14:34:21.491745+00:00",
+        "exit": 0,
+        "stdout_sha256": "8c8e56bbd9ba98e2d68e2b430ce1213429dbea9b2b846eeb063d26d3ec45d191",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "step": "generate",
+        "command": [
+          "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+          "-X",
+          "utf8",
+          "spec/tools/specctl.py",
+          "generate"
+        ],
+        "environment": {
+          "TMP": "D:\\Projects\\SysPane\\syspane\\out\\test-tmp\\table-raster-reuse",
+          "TEMP": "D:\\Projects\\SysPane\\syspane\\out\\test-tmp\\table-raster-reuse",
+          "GIT_CEILING_DIRECTORIES": "D:/Projects/SysPane/syspane/out/test-tmp/table-raster-reuse"
+        },
+        "started_at": "2026-10-11T14:34:21.496563+00:00",
+        "finished_at": "2026-10-11T14:34:21.779317+00:00",
+        "exit": 0,
+        "stdout_sha256": "433bc9cf0ed9aecb0fd853cd594a7f65c16c5c44afa00c08968558a32d5656c9",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "step": "validate",
+        "command": [
+          "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+          "-X",
+          "utf8",
+          "spec/tools/specctl.py",
+          "validate",
+          "--schemas"
+        ],
+        "environment": {
+          "TMP": "D:\\Projects\\SysPane\\syspane\\out\\test-tmp\\table-raster-reuse",
+          "TEMP": "D:\\Projects\\SysPane\\syspane\\out\\test-tmp\\table-raster-reuse",
+          "GIT_CEILING_DIRECTORIES": "D:/Projects/SysPane/syspane/out/test-tmp/table-raster-reuse"
+        },
+        "started_at": "2026-10-11T14:34:21.779738+00:00",
+        "finished_at": "2026-10-11T14:34:23.835551+00:00",
+        "exit": 0,
+        "stdout_sha256": "9d098367e88f55e2121900959649d1dc3af3ecf71ed517b0003d939d00120d19",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "step": "tools",
+        "command": [
+          "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+          "-X",
+          "utf8",
+          "spec/tools/tests/test_specctl.py",
+          "-v"
+        ],
+        "environment": {
+          "TMP": "D:\\Projects\\SysPane\\syspane\\out\\test-tmp\\table-raster-reuse",
+          "TEMP": "D:\\Projects\\SysPane\\syspane\\out\\test-tmp\\table-raster-reuse",
+          "GIT_CEILING_DIRECTORIES": "D:/Projects/SysPane/syspane/out/test-tmp/table-raster-reuse"
+        },
+        "started_at": "2026-10-11T14:34:23.835822+00:00",
+        "finished_at": "2026-10-11T14:36:53.843318+00:00",
+        "exit": 0,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "041a6894f09e9c0b35aff382e675e56baee065725a0e3d7b7fd3748bd2fe7e48"
+      }
+    ],
+    "schemas": 51,
+    "fixtures": 183,
+    "tools": {
+      "total": 62,
+      "passed": 60,
+      "skipped": 2
+    },
+    "skip_reason": "Existing Windows symlink privilege restrictions",
+    "logs": [
+      {
+        "local_path": "out/evidence/table-raster-reuse/spec-checks/budget.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "local_path": "out/evidence/table-raster-reuse/spec-checks/budget.stdout",
+        "sha256": "8c8e56bbd9ba98e2d68e2b430ce1213429dbea9b2b846eeb063d26d3ec45d191"
+      },
+      {
+        "local_path": "out/evidence/table-raster-reuse/spec-checks/generate.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "local_path": "out/evidence/table-raster-reuse/spec-checks/generate.stdout",
+        "sha256": "433bc9cf0ed9aecb0fd853cd594a7f65c16c5c44afa00c08968558a32d5656c9"
+      },
+      {
+        "local_path": "out/evidence/table-raster-reuse/spec-checks/result.json",
+        "sha256": "5985b7aa502fd9bd685a82d9ef199e5bce882c079d1ac432e7524e5ccf24bb6e"
+      },
+      {
+        "local_path": "out/evidence/table-raster-reuse/spec-checks/tools.stderr",
+        "sha256": "041a6894f09e9c0b35aff382e675e56baee065725a0e3d7b7fd3748bd2fe7e48"
+      },
+      {
+        "local_path": "out/evidence/table-raster-reuse/spec-checks/tools.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "local_path": "out/evidence/table-raster-reuse/spec-checks/validate.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "local_path": "out/evidence/table-raster-reuse/spec-checks/validate.stdout",
+        "sha256": "9d098367e88f55e2121900959649d1dc3af3ecf71ed517b0003d939d00120d19"
+      }
+    ]
+  }
+}

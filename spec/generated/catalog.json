@@ -500,7 +500,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "dbf297a8247073d96a5c24fa2236e6e21b834d0ebe97f55ecad45fcdceb21ee1"
+      "sha256": "b8dbc54bec3f681a34be13e4012e35ee4c34242fa3631e7f7d191c9f287aeeca"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -2873,6 +2873,17 @@
       "sha256": "69446ce4994a15aa8e2df10be9edf146e83f733de2d8ffbfb0eb646ae21ef611"
     },
     {
+      "id": "SP-W11-TABLE-RASTER-REUSE",
+      "path": "delivery/packages/w-11-table-raster-reuse.md",
+      "title": "Table composition reuse of exact native rasters",
+      "description": "Remove duplicate native drawing within one table without changing pixels, logical construction charges or erasure.",
+      "requires": [
+        "SP-W11-VALIDATED-THEME",
+        "SP-W11-CHART-FRAME-LIMITS"
+      ],
+      "sha256": "e251f8982d896946d7bef96428bd27bc3f568a2ba3a69cc4d0abcc86647dff04"
+    },
+    {
       "id": "SP-W11-TEXT-SESSION",
       "path": "delivery/packages/w-11-text-session.md",
       "title": "Composition-scoped native font setup",
@@ -3759,6 +3770,16 @@
         "SP-W25-PACKAGE"
       ],
       "sha256": "a47fc258de582c70d653f46e9c1cfd55a60f1d731a7bfcf4dbff39682fd064a4"
+    },
+    {
+      "id": "SP-TABLE-RASTER-REUSE-HANDOFF",
+      "path": "delivery/table-raster-reuse-handoff.md",
+      "title": "Table raster reuse and maximum live timing",
+      "description": "Preserve exact native output while removing repeated drawing within one table composition.",
+      "requires": [
+        "SP-W11-TABLE-RASTER-REUSE"
+      ],
+      "sha256": "ad3271782cb183e7b289d51ec5f533d615da12b5688fd772f93662be7bc6a829"
     },
     {
       "id": "SP-TABLE-SURFACE-HANDOFF",

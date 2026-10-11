@@ -1,5 +1,16 @@
 # Developer setup and checks
 
+The [table raster package](../../spec/delivery/packages/w-11-table-raster-reuse.md)
+reuses exact native parts only within one table composition. After workspace
+preflight/configure/build, run `ctest --preset linux-x64-gcc13 -R
+'^native[.]TABLE-RASTER$' --output-on-failure`. Its sixteen cases run in isolated
+and shared-session modes against pre-change metadata, rectangles, pixels and
+errors. Never regenerate expectations from the candidate. Continue SCENE-TABLE,
+TABLE-ERASURE, ROLE-COMPOSITION, TEXT-SESSION, inspector/rendering/visibility,
+installed telemetry, GUI and ordinary/phase table regressions; archive each owned
+native family before the next reservation. See the
+[handoff](../../spec/delivery/table-raster-reuse-handoff.md) for actual scope.
+
 The [continuous replay package](../../spec/delivery/packages/w-07-continuous-replay.md)
 admits an explicit measured-telemetry feature, preserving the default replay mode.
 After workspace preflight and ordinary configure/build, run:

@@ -20,7 +20,8 @@ telemetry is now integrated; preserve prior failures and all five full release e
 - [x] Admit bounded continuous replay without epoch cycling; preserve legacy capacity behavior and permanent identity/time reservations. See the [checkpoint](spec/delivery/continuous-replay-handoff.md).
 - [x] Pass 44 exact chart/mixed receiver/frame/projector cases with explicit overflow, retry suppression, recovery and policy erasure. Preserve failed attempts and fixture corrections.
 - [x] Observe 130 actual one-second native publications under one epoch with independent counter, rate, clock and child-exit checks.
-- [ ] Investigate the current maximum-table TRUNCATION timing failure (102.502 ms versus 100 ms); preserve the passing phase diagnostic separately.
+- [x] Reuse exact raster parts within one table, preserving 32 pre-change pixel/metadata/error outcomes and original logical pixel charges. See the [handoff](spec/delivery/table-raster-reuse-handoff.md).
+- [ ] Close background inspector admission/painting ownership, adoption, cancellation and shutdown; current ordinary/phase tables still fail the 100-ms limit. Preserve all failed and passing diagnostic attempts.
 - [ ] Qualify maximum chart/mixed workloads through native GTK, independent AT-SPI and installed history accumulation with the fixed GUI/erasure limits.
 - [x] Compose installed saved-scene inspection, guarded navigation, current-policy erasure and verified image-task ownership.
 - [x] Provide the authenticated, supervised native network service; preserve measured counters, demand, policy and exact child lifetime. See the [handoff](spec/delivery/network-service-handoff.md).

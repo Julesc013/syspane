@@ -55,6 +55,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [request-worker.json](request-worker.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [runtime-directory.json](runtime-directory.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [scene-fragments.json](scene-fragments.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
+- [table-raster-reuse.json](table-raster-reuse.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [text-session.json](text-session.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [validated-authored.json](validated-authored.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [validated-theme.json](validated-theme.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.

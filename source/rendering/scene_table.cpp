@@ -77,10 +77,22 @@ TextRaster raster_table(const TextRequest& request,SurfaceText& widget,std::size
     std::optional<configuration::ValidatedTheme> prepared;
     if(!q.prepared_theme||!q.prepared_theme->matches(q.theme)){prepared.emplace(q.theme);q.prepared_theme=&*prepared;}
     std::vector<TextRaster> parts;std::size_t retained=0;std::set<std::string> fonts;
+    struct Reusable {const std::string* text=nullptr;std::string role;std::size_t part=0;};
+    std::array<Reusable,16> reusable;std::size_t reusable_count=0;
     const bool typography=request.theme["schema_version"]=="0.2.0";
     const auto add=[&](const std::string& text,const std::string& role,const std::vector<TextBlock>& blocks){need(retained<capacity,"surface.capacity");q.text=text;q.pixel_budget=std::min(std::size_t{4194304},capacity-retained);
-        q.role=typography?role:"body";auto raster=typography&&!blocks.empty()?render_blocks(q,blocks,capacity-retained,session):render_text(q,session);need(!raster.missing_glyphs,"surface.glyphs");retained+=static_cast<std::size_t>(raster.width)*raster.height;
-        fonts.insert(raster.fonts.begin(),raster.fonts.end());parts.push_back(std::move(raster));return parts.size()-1;};
+        q.role=typography?role:"body";
+        // The request's other inputs are fixed for this call. Borrow only stable
+        // table strings, and charge every logical part even when pixels are shared.
+        if(blocks.empty())for(std::size_t i=0;i<reusable_count;++i){const auto& found=reusable[i];
+            if(found.role!=q.role||*found.text!=text)continue;
+            const auto& raster=parts[found.part];const auto pixels=static_cast<std::size_t>(raster.width)*raster.height;
+            need(pixels<=q.pixel_budget,"text.capacity");retained+=pixels;return found.part;
+        }
+        auto raster=typography&&!blocks.empty()?render_blocks(q,blocks,capacity-retained,session):render_text(q,session);need(!raster.missing_glyphs,"surface.glyphs");retained+=static_cast<std::size_t>(raster.width)*raster.height;
+        fonts.insert(raster.fonts.begin(),raster.fonts.end());parts.push_back(std::move(raster));const auto index=parts.size()-1;
+        if(blocks.empty()&&reusable_count<reusable.size())reusable[reusable_count++]={&text,q.role,index};
+        return index;};
     const auto title=add(widget.text,"label",{}),summary=add(table.summary,"diagnostic",{});std::vector<std::size_t> headers;std::vector<std::vector<std::size_t>> cells;
     for(const auto& name:table.labels)headers.push_back(add(name,"label",{}));
     for(const auto& row:table.rows){cells.emplace_back();for(const auto& c:row.cells)cells.back().push_back(add(c.text,"value",c.blocks));}
