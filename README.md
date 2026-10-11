@@ -11,22 +11,28 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
-The [inspector admission checkpoint](spec/delivery/inspector-admission-owner-handoff.md)
+The [background inspector checkpoint](spec/delivery/background-inspector-handoff.md)
+moves ordinary Linux rendering off GTK and keeps current authority, clocks, bounded
+queues and truthful shutdown. The latest complete-phase maximum-table run passes
+all seven cases, while the ordinary run fails an AT-SPI timeout in ORACLE. Native
+table qualification remains open; failures and original limits stay preserved.
+Maximum chart/mixed histories and all five complete editions also remain open.
+
+The earlier [inspector admission checkpoint](spec/delivery/inspector-admission-owner-handoff.md)
 separates delivery ownership from GTK and verifies the same scalar/chart decisions
-on a fresh worker owner. Background rendering and current-result adoption still
-need implementation; maximum GUI timing and complete editions remain unqualified.
+on a fresh worker owner, providing the prerequisite for that background repair.
 
-The [table raster checkpoint](spec/delivery/table-raster-reuse-handoff.md) preserves
+The earlier [table raster checkpoint](spec/delivery/table-raster-reuse-handoff.md) preserves
 exact native pixels while removing repeated drawing inside a table composition.
-All 32 frozen checks pass, but ordinary and phase maximum-table timing still fail.
-The next boundary is background admission/painting with current-policy adoption;
-native maximum histories and all complete editions remain open.
+Its 32 frozen checks pass, while its ordinary/phase timing failures remain preserved.
+The background checkpoint above records the repaired path and its remaining
+native accessibility qualification failure.
 
-The [continuous replay checkpoint](spec/delivery/continuous-replay-handoff.md)
+The earlier [continuous replay checkpoint](spec/delivery/continuous-replay-handoff.md)
 closes the 128-publication foundation limit through explicit negotiation and
 permanent sequence reservations. Forty-four exact chart/mixed frame cases pass;
 130 actual one-second native publications pass under one epoch. The current
-maximum-table regression fails its fixed GUI timing limit; maximum native
+maximum-table regression at that checkpoint failed its fixed GUI timing limit; maximum native
 inspector responsiveness and all complete editions remain open.
 
 The earlier [validated-theme checkpoint](spec/delivery/validated-theme-handoff.md) passed

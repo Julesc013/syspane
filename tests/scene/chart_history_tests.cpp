@@ -39,17 +39,23 @@ void limits(){
 }
 void window(){
     s::ChartHistory h(1000,3);observe(h,sample(100),tick(100));observe(h,sample(200,8,2),tick(200));
+    need(h.maximum_clock()==second+100,"prepared chart remains valid through inclusive first-point window edge");
     observe(h,sample(200,8,2),tick(second+100),[](const auto& v){points(v,{100,200},{false,true});need(v.code==s::ChartCode::duplicate&&!v.capacity_truncated);});
     observe(h,sample(200,8,2),tick(second+101),[](const auto& v){points(v,{200},{false});});
+    need(h.maximum_clock()==second+200,"next surviving point sets the next prepared transition");
     observe(h,sample(200,8,2),tick(second+201),[](const auto& v){points(v,{},{});need(v.code==s::ChartCode::duplicate);});
+    need(!h.maximum_clock(),"empty history exports no point transition");
     h.clear();const auto top=std::numeric_limits<std::uint64_t>::max();observe(h,sample(top-second),tick(top-second));
     observe(h,sample(top,8,2),tick(top),[&](const auto& v){points(v,{top-second,top},{false,true});need(*v.window_end_ns==top);});
+    need(h.maximum_clock()==top,"window bound saturates without inventing wrapped expiry");
 }
 void capacity(){
     s::ChartHistory h(1000,2);observe(h,sample(100),tick(100));observe(h,sample(200,8,2),tick(200));
     observe(h,sample(300,9,3),tick(300),[](const auto& v){points(v,{200,300},{false,true});need(v.capacity_truncated);});
+    need(h.maximum_clock()==second+100,"truncation summary expires before first retained point");
     observe(h,sample(300,9,3),tick(second+100),[](const auto& v){need(v.capacity_truncated);});
     observe(h,sample(300,9,3),tick(second+101),[](const auto& v){need(!v.capacity_truncated);points(v,{200,300},{false,true});});
+    need(h.maximum_clock()==second+200,"expired capacity marker no longer constrains adoption");
     s::ChartHistory large(1000,4096);for(std::uint64_t i=0;i<5000;++i)observe(large,sample(i,i,i),tick(i),[&](const auto& v){need(v.points.size()==static_cast<std::size_t>(std::min<std::uint64_t>(i+1,4096)));});
     observe(large,sample(4999,4999,4999),tick(5000),[](const auto& v){need(v.points.front().measured_ns==904&&v.capacity_truncated&&!v.points.front().joins_previous);});
 }

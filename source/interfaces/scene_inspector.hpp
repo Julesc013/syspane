@@ -1,21 +1,24 @@
 #pragma once
 #include "scene_surface.hpp"
 #include "telemetry_delivery.hpp"
+#include "scene_inspector_render.hpp"
 typedef struct _GtkWidget GtkWidget;
 namespace syspane::interfaces {
 // One native UI thread owns this component, its GTK hierarchy and current authority.
 class SceneInspector {
 public:
     using Translator=std::function<std::string(const std::string&)>;
-    enum class Phase {admission,paint,presentation};
+    enum class Phase {admission,paint,presentation,adoption};
     // Borrowed synchronous experiment observer; paint includes presentation.
     // Refusal or exception closes/erases the inspector. Never retained.
     using PhaseObserver=std::function<bool(Phase,std::uint64_t microseconds,bool completed)>;
     SceneInspector(configuration::Authority,configuration::Policy,rendering::SurfaceConfig,
-                   std::vector<rendering::SurfaceProvider>,std::string image_worker={},Translator translate={},rendering::ImageFactory images={});
+                   std::vector<rendering::SurfaceProvider>,std::string image_worker={},Translator translate={},rendering::ImageFactory images={},
+                   std::shared_ptr<const InspectorRenderFactory> renders={},std::uint64_t profile=0);
     ~SceneInspector();
     SceneInspector(const SceneInspector&)=delete;SceneInspector& operator=(const SceneInspector&)=delete;
     GtkWidget* widget()const;
+    bool background()const;
     recovery::DataAttachment attach(const std::string&,const protocol::TelemetryBinding&,std::uint64_t now,const std::map<std::string,model::Tick>& ticks={});
     recovery::DataResult receive(const std::string&,std::uint64_t token,std::uint64_t revision,std::string_view,
         std::uint64_t now,const model::Tick&,const std::map<std::string,model::Tick>& other_ticks={});

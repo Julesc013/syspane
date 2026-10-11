@@ -10,6 +10,7 @@
 #include "editor_request_task.hpp"
 #include "recovery_queue_linux.hpp"
 #include "telemetry_delivery.hpp"
+#include "scene_inspector_render.hpp"
 #include <memory>
 #include <functional>
 
@@ -56,6 +57,7 @@ public:
     bool inspection_stopped()const;
     std::string request_id();
     rendering::ImageFactory images()const;
+    std::shared_ptr<const interfaces::InspectorRenderFactory> inspector_renderers()const;
     std::shared_ptr<const platform::RecoveryFactory> recovery()const;
     std::shared_ptr<const interfaces::RecoveryPreparationFactory> preparations()const;
     std::shared_ptr<const interfaces::HistoryPreparationFactory> history_preparations()const;
@@ -72,7 +74,7 @@ private:
 // Optional experiment observer: tick work and excess interval delay, in microseconds.
 // Returning false fails the host and initiates ordinary supervised shutdown.
 using FrontendTimingObserver=std::function<bool(std::uint64_t,std::uint64_t)>;
-enum class FrontendPhase : unsigned {take=1,withdrawal,reply,reply_reload,populate,editor,settings,recovery,attach,topology,controls,inspector,inspector_prepare,inspector_admission,inspector_paint,inspector_presentation};
+enum class FrontendPhase : unsigned {take=1,withdrawal,reply,reply_reload,populate,editor,settings,recovery,attach,topology,controls,inspector,inspector_prepare,inspector_admission,inspector_paint,inspector_presentation,inspector_adoption};
 struct FrontendPhaseObservation {std::uint64_t tick;FrontendPhase phase;std::uint64_t microseconds;bool completed;};
 // Optional synchronous diagnosis only. Nested durations overlap. Refusal fails
 // the host and disables observation so ordinary shutdown can still finish.

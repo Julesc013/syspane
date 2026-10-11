@@ -2026,7 +2026,8 @@
       "type": "STATIC_LIBRARY",
       "source_owner": "source/interfaces/",
       "public_interfaces": [
-        "source/interfaces/scene_inspector.hpp"
+        "source/interfaces/scene_inspector.hpp",
+        "source/interfaces/scene_inspector_render.hpp"
       ],
       "private_interfaces": [
         "source/interfaces/scene_inspector_model.hpp",
@@ -2035,7 +2036,8 @@
       "sources": [
         "source/interfaces/scene_inspector_model.cpp",
         "source/interfaces/scene_inspector_linux.cpp",
-        "source/interfaces/scene_inspector_admission.cpp"
+        "source/interfaces/scene_inspector_admission.cpp",
+        "source/interfaces/scene_inspector_render.cpp"
       ],
       "allowed_dependencies": [
         "syspane_scene_surface",
@@ -2063,7 +2065,9 @@
       "public_interfaces": [],
       "private_interfaces": [
         "tests/scene/inspector_delivery_tests.hpp",
-        "tests/scene/inspector_admission_owner.hpp"
+        "tests/scene/inspector_admission_owner.hpp",
+        "tests/scene/inspector_render_tests.hpp",
+        "tests/scene/inspector_background_gui.hpp"
       ],
       "sources": [
         "tests/scene/inspector_tests.cpp"

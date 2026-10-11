@@ -388,6 +388,13 @@ std::unique_ptr<ui::PreparedSettings> LinuxFrontendBackend::take_settings(const 
     return std::move(s.prepared_settings);
 }
 rendering::ImageFactory LinuxFrontendBackend::images()const{return impl_->helpers.images();}
+std::shared_ptr<const ui::InspectorRenderFactory> LinuxFrontendBackend::inspector_renderers()const{
+    return std::make_shared<const ui::InspectorRenderFactory>(ui::threaded_inspector_renderer([expectation=impl_->expectation]{
+        auto installation=std::make_shared<os::LinuxInstallation>(expectation);
+        installation->verified_helper(os::HelperKind::image);
+        return [installation=std::move(installation)](std::string media,std::string bytes){return std::make_unique<rendering::ImageJob>(installation,std::move(media),std::move(bytes));};
+    }));
+}
 std::shared_ptr<const os::RecoveryFactory> LinuxFrontendBackend::recovery()const{return impl_->helpers.recovery();}
 std::shared_ptr<const ui::RecoveryPreparationFactory> LinuxFrontendBackend::preparations()const{return impl_->helpers.preparations();}
 std::shared_ptr<const ui::HistoryPreparationFactory> LinuxFrontendBackend::history_preparations()const{return impl_->helpers.history_preparations();}

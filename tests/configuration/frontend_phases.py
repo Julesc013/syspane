@@ -3,7 +3,7 @@ import re
 
 KINDS = ('take', 'withdrawal', 'reply', 'reply_reload', 'populate', 'editor',
          'settings', 'recovery', 'attach', 'topology', 'controls', 'inspector', 'inspector_prepare',
-         'inspector_admission', 'inspector_paint', 'inspector_presentation')
+         'inspector_admission', 'inspector_paint', 'inspector_presentation', 'inspector_adoption')
 NUMBER = rb'(0|[1-9][0-9]{0,19})'
 BEGIN = re.compile(rb'phase-begin ' + NUMBER + rb' ' + NUMBER)
 ROW = re.compile(rb'phase ' + rb' '.join([NUMBER] * 4))

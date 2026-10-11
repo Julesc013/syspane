@@ -1,9 +1,18 @@
 # Foundation development profiles
 
-Current revisions are Windows x64 45, Linux x64 81 and historical x86 36. The
+Current revisions are Windows x64 46, Linux x64 82 and historical x86 37. The
+[background inspector package](../../../spec/delivery/packages/w-11-background-inspector.md)
+adds dedicated native rendering, guarded GUI adoption, bounded cancellation and
+stable duplicate-frame presentation on Linux. The latest complete-phase maximum
+tables pass; the ordinary ORACLE AT-SPI timeout keeps table qualification open.
+All profiles pass 146 selected shared checks;
+the historical host also passes both PE audits. Maximum chart/mixed histories,
+other native laboratories and all five full release editions remain open.
+
+Earlier revisions were Windows x64 45, Linux x64 81 and historical x86 36. The
 [inspector admission package](../../../spec/delivery/packages/w-11-inspector-admission-owner.md)
 extracts one delivery owner for GTK and future worker use. The ordinary frontend
-still paints synchronously; prior GUI timing failures remain unqualified.
+painted synchronously at that checkpoint; prior GUI failures remain preserved.
 The [table raster package](../../../spec/delivery/packages/w-11-table-raster-reuse.md)
 adds exact composition-local raster reuse and frozen pixel/error checks on Linux.
 Its ordinary and phase maximum-table timing runs still fail; preserve those

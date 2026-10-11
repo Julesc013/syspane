@@ -34,6 +34,9 @@ public:
                  const std::function<void(const ChartView&)>& sink);
     void gap();
     void clear();
+    // Inclusive last clock value before point or capacity-marker eviction.
+    // Pure metadata; no identity/value borrow or authority is exported.
+    std::optional<std::uint64_t> maximum_clock()const;
 private:
     void owner()const;
     void erase();

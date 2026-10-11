@@ -1,7 +1,31 @@
 # Developer setup and checks
 
+The [background inspector package](../../spec/delivery/packages/w-11-background-inspector.md)
+moves ordinary Linux admission/composition onto a dedicated owner. GTK adopts owned
+rows only under current scope, policy, resources/topology and qualified clocks;
+shutdown waits for real input/surface/image destruction. After workspace
+preflight/configure/build, run:
+
+```sh
+ctest --preset linux-x64-gcc13 -R '^native[.](INSPECTOR-RENDERER|BACKGROUND-INSPECTOR)$' --output-on-failure
+ctest --preset linux-x64-gcc13 -R '^native[.](SCENE-INSPECTOR|INSTALLED-TELEMETRY|INSPECTOR-LIVE-TABLES|INSTALLED-INSPECTOR-ASSETS|INSPECTOR-AUTHORED-LIMITS)' --output-on-failure
+```
+
+Run the existing complete table-phase diagnostic as documented below, along with
+frozen raster, erasure, recovery and phase-refusal regressions. The diagnostic
+vocabulary appends GUI adoption (17); old journals and the original performance
+limits remain valid. The latest complete-phase run passes seven cases; the
+ordinary run fails an AT-SPI timeout in ORACLE and remains unqualified. Preserve
+that failure and diagnose native request handling without relaxing the oracle.
+Scalar/table age is the literal value at the last qualified projection;
+duplicate-frame clock samples maintain authority and freshness without replacing
+native accessible cells. New publications and temporal/status changes refresh it;
+charts and loading images retain timed updates. See the
+[handoff](../../spec/delivery/background-inspector-handoff.md) for preserved failures,
+source-bound results and the next native chart/mixed/history qualification.
+
 The [inspector admission package](../../spec/delivery/packages/w-11-inspector-admission-owner.md)
-extracts delivery state from GTK without enabling background presentation. After
+previously extracted delivery state from GTK before background presentation. After
 workspace preflight/configure/build, run:
 
 ```sh

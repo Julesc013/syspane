@@ -133,7 +133,7 @@ struct Window {
                     providers.push_back(std::move(provider));
                 }
                 measure(FrontendPhase::inspector_prepare,[&]{
-                    inspector=std::make_unique<interfaces::SceneInspector>(authority,snapshot.view.policy,scene_config(snapshot,std::move(current)),std::move(providers),"",interfaces::SceneInspector::Translator{},backend.images());
+                    inspector=std::make_unique<interfaces::SceneInspector>(authority,snapshot.view.policy,scene_config(snapshot,std::move(current)),std::move(providers),"",interfaces::SceneInspector::Translator{},rendering::ImageFactory{},backend.inspector_renderers(),snapshot.serial);
                     inspector->refresh(now());
                 });next_inspector=now()+100;
                 gtk_box_pack_start(GTK_BOX(forms),inspector->widget(),TRUE,TRUE,0);gtk_widget_show_all(inspector->widget());
@@ -218,13 +218,13 @@ struct Window {
                 });
             }
             if(inspector&&current&&!view_unavailable){
-                const auto stamp=now();if(stamp>=next_inspector){
+                const auto stamp=now();if(inspector->background()||stamp>=next_inspector){
                     interfaces::SceneInspector::PhaseObserver observer;
                     if(phases)observer=[&](auto phase,std::uint64_t elapsed,bool completed){
                         using Phase=interfaces::SceneInspector::Phase;
-                        observe_duration(phase==Phase::admission?FrontendPhase::inspector_admission:phase==Phase::paint?FrontendPhase::inspector_paint:FrontendPhase::inspector_presentation,elapsed,completed);return true;
+                        observe_duration(phase==Phase::admission?FrontendPhase::inspector_admission:phase==Phase::paint?FrontendPhase::inspector_paint:phase==Phase::adoption?FrontendPhase::inspector_adoption:FrontendPhase::inspector_presentation,elapsed,completed);return true;
                     };
-                    measure(FrontendPhase::inspector,[&]{if(inspecting)inspector->deliver(state.telemetry,state.telemetry_scope,stamp,observer);else inspector->refresh(stamp,{},observer);});
+                    measure(FrontendPhase::inspector,[&]{if(inspecting){if(state.telemetry_scope.profile)inspector->deliver(state.telemetry,state.telemetry_scope,stamp,observer);}else inspector->refresh(stamp,{},observer);});
                     next_inspector=now()+100;
                 }
                 const auto code=inspector->status().code;
@@ -232,7 +232,8 @@ struct Window {
                 else if(code==rendering::SurfaceCode::alternative||code==rendering::SurfaceCode::closed)gtk_label_set_text(GTK_LABEL(status),"Scene inspection unavailable for this scene or display configuration.");
             }
             measure(FrontendPhase::controls,[&]{
-                const bool navigate=current&&can_leave();gtk_widget_set_sensitive(settings_button,navigate&&mode!=Mode::settings);gtk_widget_set_sensitive(editor_button,navigate&&mode!=Mode::editor);gtk_widget_set_sensitive(inspector_button,navigate&&mode!=Mode::inspector);
+                const bool inspector_pending=inspector&&inspector->status().code==rendering::SurfaceCode::empty;
+                const bool navigate=current&&can_leave()&&!inspector_pending;gtk_widget_set_sensitive(settings_button,navigate&&mode!=Mode::settings);gtk_widget_set_sensitive(editor_button,navigate&&mode!=Mode::editor);gtk_widget_set_sensitive(inspector_button,navigate&&mode!=Mode::inspector);
                 if(form)gtk_widget_set_sensitive(form->widget(),state.profile&&!state.loading&&!transition);
                 if(editor)gtk_widget_set_sensitive(editor->widget(),state.profile&&!state.loading&&!transition&&!view_unavailable);
                 if(inspector)gtk_widget_set_sensitive(inspector->widget(),current&&!view_unavailable);

@@ -12,16 +12,30 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-11T14:58:43.175866+00:00", "scope": "Inspector admission ownership prerequisite and preserved GUI timing qualification"}
+updated: {"by": "codex", "at": "2026-10-11T17:25:18.032059+00:00", "scope": "Bounded background inspector and native maximum-table qualification with preserved accessibility failures"}
 ---
 
 # Current state and next admitted boundary
 
-The [inspector admission checkpoint](inspector-admission-owner-handoff.md) extracts
+The [background inspector checkpoint](background-inspector-handoff.md) connects
+ordinary Linux inspection to a dedicated native rendering owner. Bounded latest
+inputs, current scope/policy/resource/topology and clock guards, cancellation and
+native image drainage protect GUI adoption. The latest complete-phase maximum-table
+run passes all seven cases; the ordinary ORACLE case fails an AT-SPI timeout, so
+table qualification remains open. Installed assets pass ten cases and fail
+HELD-NAVIGATION (empty loading view) and TOPOLOGY (child-observer exit race).
+Preserve the unchanged 100-ms/200-ms limits,
+startup, summary/accessibility, fixture and diagnostic failures. First diagnose
+native accessibility request handling, then qualify maximum native
+GTK chart/mixed inputs and actual installed history accumulation, then human
+usability and independent desktop/lifecycle composition. All five full editions
+remain open. Shared build tooling stays in source/build; raw recordings stay local.
+
+The earlier [inspector admission checkpoint](inspector-admission-owner-handoff.md) extracts
 one delivery state owner for the existing GTK presenter and future worker use.
 The ownership/conformance probe uses actual rendering on a fresh native thread
 without GTK. It preserves scalar age/lease, literal chart points/gaps, rejected
-candidates and current-profile closure. The ordinary frontend remains synchronous;
+candidates and current-profile closure. At that point the frontend was synchronous;
 preceding table timing failures stay preserved and responsiveness is unqualified.
 Next close bounded background job/result adoption, current profile/policy/resource/
 topology and clocks, cancellation, image drainage and independent shutdown before
@@ -59,7 +73,8 @@ row/cell cases and preserves several measured GUI failures. Its final ordinary
 run passes six cases but navigation takes 109.450 ms; the complete phase run also
 fails truncation/navigation. That candidate left maximum-table performance **unqualified**.
 Pixel/text equivalence passes after bounded composition repairs. The new checkpoint above separates
-composition from GTK presentation and passes the fixed 100-ms/200-ms limits. Maximum
+composition from GTK presentation; its latest ordinary accessibility timeout keeps
+qualification open despite passing periodic timing limits. Maximum
 chart/mixed workloads, human accessibility and all five release editions remain open.
 
 The [inspector continuity checkpoint](inspector-delivery-gaps-handoff.md) fixes a

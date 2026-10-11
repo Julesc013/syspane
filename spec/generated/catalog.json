@@ -361,6 +361,16 @@
       "sha256": "4234d289dbd5e8c49c54a2898911c30013b14ec372d72f64bffe7f8372103e65"
     },
     {
+      "id": "SP-BACKGROUND-INSPECTOR-HANDOFF",
+      "path": "delivery/background-inspector-handoff.md",
+      "title": "Bounded background inspector and current native presentation",
+      "description": "Move native admission/composition off GTK, keep current authority and temporal guards, and preserve native failure evidence.",
+      "requires": [
+        "SP-W11-BACKGROUND-INSPECTOR"
+      ],
+      "sha256": "939fad6eca1d71d7122f2be777e06f9385a7f3d46e4994eae8950839b1f2101e"
+    },
+    {
       "id": "SP-BINDING-AUTHORING-HANDOFF",
       "path": "delivery/binding-authoring-handoff.md",
       "title": "Native binding-authoring checkpoint",
@@ -500,7 +510,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "26f8757cd2b56378c1634e7467719f72586dcd2843c926a04acf19b0536aa1fa"
+      "sha256": "04441d14f85e7ccddb9b835ff8ae49916f8f857e0be13cceff09e42e19c4718c"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -2433,6 +2443,19 @@
         "SP-W10-CONTENT-PROPERTIES"
       ],
       "sha256": "5ad9165c257386e0e6b1d909aa1395497f5c3ef3aa5189f4de5fa9d45208a342"
+    },
+    {
+      "id": "SP-W11-BACKGROUND-INSPECTOR",
+      "path": "delivery/packages/w-11-background-inspector.md",
+      "title": "Background inspector rendering and current-result adoption",
+      "description": "Move admission and native composition off GTK while keeping current authority, temporal validity and truthful shutdown.",
+      "requires": [
+        "SP-W11-INSPECTOR-ADMISSION-OWNER",
+        "SP-W11-INSPECTOR-TELEMETRY",
+        "SP-W11-FRONTEND-PHASES",
+        "SP-W11-TABLE-RASTER-REUSE"
+      ],
+      "sha256": "5141fd8ea46994a93bf48b5d1abd0d250c53e0b928676f967849c6f9f06f0a1e"
     },
     {
       "id": "SP-W11-CHART-FRAME-LIMITS",

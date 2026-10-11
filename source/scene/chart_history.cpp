@@ -3,6 +3,7 @@
 #include <cmath>
 #include <stdexcept>
 #include <tuple>
+#include <limits>
 
 namespace syspane::scene {
 namespace {
@@ -32,6 +33,17 @@ void ChartHistory::erase(){
 }
 void ChartHistory::clear(){owner();erase();}
 void ChartHistory::gap(){owner();pending_=true;}
+std::optional<std::uint64_t> ChartHistory::maximum_clock()const{
+    owner();std::optional<std::uint64_t> result;
+    const auto bound=[&](std::uint64_t measured){
+        const auto maximum=std::numeric_limits<std::uint64_t>::max();
+        const auto value=measured>maximum-window_ns_?maximum:measured+window_ns_;
+        if(!result||value<*result)result=value;
+    };
+    if(!points_.empty())bound(points_.front().measured_ns);
+    if(evicted_)bound(*evicted_);
+    return result;
+}
 ChartCode ChartHistory::update(const BindingFrame& frame,const std::optional<model::Tick>& now){
     const auto reject=[&](ChartCode code){const auto latched=fault_;erase();fault_=latched;return code;};
     const auto fault=[&](ChartCode code){erase();fault_=code;return code;};

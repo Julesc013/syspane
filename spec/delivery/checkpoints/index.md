@@ -2,6 +2,7 @@
 
 Generated navigation; edit the referenced source documents, then run `specctl.py generate`.
 
+- [background-inspector.json](background-inspector.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [build-layout.json](build-layout.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [continuous-replay.json](continuous-replay.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [draft-admission.json](draft-admission.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.

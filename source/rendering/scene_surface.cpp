@@ -283,6 +283,32 @@ void SceneSurface::replace(SurfaceConfig config,std::uint64_t now){auto& i=*impl
 void SceneSurface::close(){auto& i=*impl_;i.owner();if(!i.closed)i.shut("surface.closed");}
 bool SceneSurface::poll_image_jobs(){auto& i=*impl_;i.owner();try{return i.images->poll();}catch(const Error&){i.images->clear("surface.capacity");if(i.erase())i.status={SurfaceCode::alternative,0,0,"surface.capacity"};return true;}}
 SurfaceStatus SceneSurface::status()const{impl_->owner();return impl_->status;}
+SurfaceTimeline SceneSurface::timeline(std::uint64_t now,const std::map<std::string,m::Tick>& ticks){
+    auto& i=*impl_;i.owner();SurfaceTimeline result;
+    if(!i.advance(now)||!i.frame||!i.allowed())return result;
+    const auto maximum=std::numeric_limits<std::uint64_t>::max();
+    for(auto& entry:i.entries){
+        const auto found=ticks.find(entry.declaration.producer);if(found==ticks.end())continue;
+        entry.view->project_measured(now,found->second,[&](const m::Snapshot& snapshot,const r::LeaseView&,const m::Tick& sample){
+            SurfaceClockGuard guard{sample,maximum};
+            for(const auto& observation:snapshot.observations){
+                const auto field=entry.declaration.fields.find(observation.field);
+                if(field==entry.declaration.fields.end()||!field->second||!observation.measured_at||
+                   m::freshness_at(observation,sample,field->second)!=m::Freshness::current)continue;
+                const auto measured=observation.measured_at->nanoseconds,ttl=*field->second;
+                if(ttl&&measured<=maximum-ttl)guard.maximum_ns=std::min(guard.maximum_ns,measured+ttl-1);
+            }
+            for(const auto& widget:i.frame->widgets)if(widget.chart&&widget.chart->identity&&!widget.chart->points.empty()&&
+                widget.chart->identity->producer==entry.declaration.producer){
+                const auto history=i.histories.find(widget.id);
+                if(history!=i.histories.end()){const auto bound=history->second.samples->maximum_clock();
+                    if(bound)guard.maximum_ns=std::min(guard.maximum_ns,*bound);}
+            }
+            result.emplace(entry.declaration.producer,std::move(guard));
+        });
+    }
+    return result;
+}
 void SceneSurface::paint(std::uint64_t now,const std::map<std::string,m::Tick>& ticks,const std::function<void(SurfaceCode,const SurfaceFrame*)>& sink){
     auto& i=*impl_;i.owner();need(static_cast<bool>(sink),"surface.sink");
     if(i.start(now)){

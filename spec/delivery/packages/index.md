@@ -87,6 +87,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Versioned visibility authoring and durable admission](w-10-visibility-admission.md) — Preserve conditional scene meaning through typed edits, negotiation and coherent recovery.
 - [Native conditional editing and enablement](w-10-visibility-controls.md) — Private rule input, hidden-object selection and durable conditional editing through the existing native owner.
 - [Native creation of every scene primitive](w-10-widget-creation.md) — Create bounded authored widgets through existing resource, draft and transaction owners.
+- [Background inspector rendering and current-result adoption](w-11-background-inspector.md) — Move admission and native composition off GTK while keeping current authority, temporal validity and truthful shutdown.
 - [Chart history and mixed frame resource boundaries](w-11-chart-frame-limits.md) — Exact retained-point, accessible-text and typed-frame limits before native maximum-history qualification.
 - [Current draft admission and preview resource ownership](w-11-draft-admission.md) — Remove repeated reconstruction of owned draft state while retaining current authorization and full mutation validation.
 - [Independent editor callback timing trace](w-11-editor-callback-trace.md) — Attribute work outside the frontend timer without changing product behavior or acceptance limits.

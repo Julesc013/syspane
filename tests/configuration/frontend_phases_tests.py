@@ -23,7 +23,7 @@ class PhaseTests(unittest.TestCase):
 
     def test_invalid(self):
         bad = [b'', self.valid + self.valid, self.valid[:-1], self.valid[:-20], self.valid.replace(b'123 3 0', b'124 3 0'),
-               self.valid.replace(b'123 3\n', b'123 8193\n'), self.valid.replace(b'1 6 40', b'1 17 40'),
+               self.valid.replace(b'123 3\n', b'123 8193\n'), self.valid.replace(b'1 6 40', b'1 18 40'),
                self.valid.replace(b'1 6 40', b'0 6 40'), self.valid.replace(b'1 6 40', b'01 6 40'),
                self.valid.replace(b'1 6 40', b'1 1 40'), self.valid.replace(b'1 6 40 1', b'1 6 40 2'),
                self.valid.replace(b'1 6 40', b'2 6 40'), self.valid.replace(b'40 1', b'18446744073709551616 1'),
@@ -32,6 +32,10 @@ class PhaseTests(unittest.TestCase):
         for raw in bad:
             with self.subTest(raw=raw[:80]), self.assertRaises(ValueError):
                 decode(raw)
+
+    def test_background_adoption(self):
+        block=decode(b'phase-begin 123 3\nphase 1 14 3 1\nphase 1 16 5 1\nphase 1 17 12 1\nphase-end 123 3 0\n')[0]
+        self.assertEqual([r['phase'] for r in block['rows']], ['inspector_admission','inspector_presentation','inspector_adoption'])
 
 
 if __name__ == '__main__':

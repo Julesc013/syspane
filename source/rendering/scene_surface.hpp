@@ -67,6 +67,9 @@ struct SurfaceFrame {
     std::vector<SurfacePixels> displays;
 };
 struct SurfaceStatus { SurfaceCode code=SurfaceCode::empty;std::size_t widgets=0,pixels=0;std::string reason; };
+// Temporal validity only: no policy grant, borrowed model pointer or payload.
+struct SurfaceClockGuard {model::Tick sample;std::uint64_t maximum_ns=UINT64_MAX;};
+using SurfaceTimeline=std::map<std::string,SurfaceClockGuard>;
 class SceneSurface {
 public:
     SceneSurface(configuration::Authority,configuration::Policy,SurfaceConfig,
@@ -89,6 +92,7 @@ public:
     void paint(std::uint64_t now,const std::map<std::string,model::Tick>& ticks,
                const std::function<void(SurfaceCode,const SurfaceFrame*)>& sink);
     SurfaceStatus status()const;
+    SurfaceTimeline timeline(std::uint64_t now,const std::map<std::string,model::Tick>& ticks);
 private:
     struct Impl;std::unique_ptr<Impl> impl_;
 };
