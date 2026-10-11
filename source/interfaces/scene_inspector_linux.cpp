@@ -1,4 +1,5 @@
 #include "scene_inspector.hpp"
+#include "scene_inspector_admission.hpp"
 #include "scene_inspector_model.hpp"
 #include <gtk/gtk.h>
 #include <thread>
@@ -12,12 +13,7 @@ struct SceneInspector::Impl {
     std::thread::id thread=std::this_thread::get_id();bool batch=false,closed=false;
     GtkWidget *root=nullptr,*tree=nullptr,*summary=nullptr,*button=nullptr;GtkTreeStore* store=nullptr;
     std::unique_ptr<r::SceneSurface> surface;std::string summary_key;
-    std::shared_ptr<const protocol::TelemetryBinding> delivery_binding;
-    std::shared_ptr<const d::DeliveredFrame> delivery_frame;
-    d::DeliveryScope delivery_scope;
-    std::optional<std::uint64_t> delivery_heartbeat;
-    std::uint64_t delivery_token=0,delivery_until=0;
-    void forget_delivery(){delivery_binding.reset();delivery_frame.reset();delivery_heartbeat.reset();delivery_token=delivery_until=0;}
+    std::unique_ptr<InspectorAdmission> admission;
     std::map<std::string,GtkTreeIter> rows;
     std::map<std::string,bool> expansion;
     GtkTreeModel* model()const{return GTK_TREE_MODEL(store);}
@@ -25,10 +21,10 @@ struct SceneInspector::Impl {
     void clear_summary(){summary_key.clear();if(summary)gtk_label_set_text(GTK_LABEL(summary),"");}
     void blank(GtkTreeIter* parent=nullptr){GtkTreeIter iter;if(!store||!gtk_tree_model_iter_children(model(),&iter,parent))return;
         do{blank(&iter);gtk_tree_store_set(store,&iter,key_column,"",item_column,"",information_column,"",-1);}while(gtk_tree_model_iter_next(model(),&iter));}
-    void clear(){forget_delivery();clear_summary();rows.clear();expansion.clear();if(store){blank();gtk_tree_store_clear(store);}}
+    void clear(){if(admission)admission->reset();clear_summary();rows.clear();expansion.clear();if(store){blank();gtk_tree_store_clear(store);}}
     bool invalidated(){if(!batch)clear();return true;}
     void shut(){closed=true;clear();if(surface&&!batch)surface->close();}
-    ~Impl(){shut();surface.reset();if(root)gtk_widget_destroy(root);for(auto* w:{button,summary,tree,root})if(w)g_object_unref(w);if(store)g_object_unref(store);}
+    ~Impl(){shut();admission.reset();surface.reset();if(root)gtk_widget_destroy(root);for(auto* w:{button,summary,tree,root})if(w)g_object_unref(w);if(store)g_object_unref(store);}
     void reconcile(const std::vector<InspectorRow>& desired,GtkTreeIter* parent=nullptr){
         std::map<std::string,GtkTreeIter> current;GtkTreeIter iter;
         if(gtk_tree_model_iter_children(model(),&iter,parent))do{current.emplace(text(model(),&iter,key_column),iter);}while(gtk_tree_model_iter_next(model(),&iter));
@@ -92,6 +88,7 @@ SceneInspector::SceneInspector(c::Authority authority,c::Policy policy,r::Surfac
     auto& i=*impl_;std::map<std::string,std::string> labels={{"inspector.item","Item"},{"inspector.information","Information"},{"inspector.summary","_Summary"},{"inspector.requested_summary","Requested summary"}};
     for(auto& label:labels){if(translate)label.second=translate(label.first);if(label.second.empty()||label.second.size()>1024||label.second.find('\0')!=std::string::npos||!g_utf8_validate(label.second.data(),static_cast<gssize>(label.second.size()),nullptr))throw protocol::Error("inspector.translation");}
     i.surface=std::make_unique<r::SceneSurface>(std::move(authority),std::move(policy),std::move(config),std::move(providers),[&i]{return i.invalidated();},std::move(worker),r::SurfaceAudience::inspector,std::move(images));
+    i.admission=std::make_unique<InspectorAdmission>(*i.surface);
     i.store=gtk_tree_store_new(3,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING);i.root=gtk_box_new(GTK_ORIENTATION_VERTICAL,8);g_object_ref_sink(i.root);
     auto* scroll=gtk_scrolled_window_new(nullptr,nullptr);gtk_box_pack_start(GTK_BOX(i.root),scroll,TRUE,TRUE,0);
     i.tree=gtk_tree_view_new_with_model(i.model());g_object_ref_sink(i.tree);gtk_container_add(GTK_CONTAINER(scroll),i.tree);gtk_tree_view_set_enable_search(GTK_TREE_VIEW(i.tree),FALSE);
@@ -117,41 +114,10 @@ d::DataCode SceneInspector::disconnect(const std::string& producer,std::uint64_t
 void SceneInspector::refresh(std::uint64_t now,const std::map<std::string,model::Tick>& ticks,const PhaseObserver& observer){impl_->run(now,ticks,[]{},observer);}
 void SceneInspector::deliver(const d::TelemetryDelivery& value,d::DeliveryScope current,std::uint64_t now,const PhaseObserver& observer){
     auto& i=*impl_;i.owner();if(i.closed)return;
-    if(!current.profile||(i.delivery_scope.profile&&i.delivery_scope.profile!=current.profile)){i.shut();return;}
+    if(!i.admission->compatible(current)){i.shut();return;}
     std::map<std::string,model::Tick> ticks;
     i.run(now,ticks,[&]{
-        const auto detach=[&]{
-            if(i.delivery_token&&i.delivery_binding)(void)i.surface->disconnect(i.delivery_binding->producer,i.delivery_token,i.delivery_binding->policy_revision,now);
-            i.forget_delivery();ticks.clear();
-        };
-        if(!value.deliverable(current,now)){detach();i.delivery_scope=current;return;}
-        const auto& binding=*value.binding;
-        if(i.delivery_scope.generation!=current.generation||i.delivery_binding!=value.binding||now>=i.delivery_until)detach();
-        i.delivery_scope=current;
-        if(!i.delivery_token){
-            const auto attached=i.surface->attach(binding.producer,binding,now);
-            if(attached.code!=d::DataCode::accepted)return;
-            i.delivery_token=attached.token;i.delivery_binding=value.binding;i.delivery_until=now+3000;
-        }
-        ticks[binding.producer]=*value.clock;
-        if(i.delivery_frame!=value.frame){
-            if(i.delivery_frame){
-                const auto before=i.delivery_frame->ordinal,after=value.frame->ordinal;
-                if(after<=before){detach();return;}
-                // Complete-state replacement is allowed, but missing admission
-                // context cannot establish chart continuity across that loss.
-                if(after-before>1&&i.surface->gap(binding.producer,i.delivery_token,binding.policy_revision,now)!=d::DataCode::accepted){detach();return;}
-            }
-            const auto accepted=i.surface->receive(binding.producer,i.delivery_token,binding.policy_revision,value.frame->bytes,now,*value.clock);
-            if(accepted.code!=d::DataCode::accepted&&accepted.code!=d::DataCode::duplicate){detach();return;}
-            i.delivery_frame=value.frame;
-        }
-        if(value.heartbeat&&value.heartbeat!=i.delivery_heartbeat){
-            const auto accepted=i.surface->heartbeat(binding.producer,i.delivery_token,binding.policy_revision,*value.heartbeat,now);
-            if(accepted!=d::DataCode::accepted&&accepted!=d::DataCode::duplicate){detach();return;}
-            if(accepted==d::DataCode::accepted)i.delivery_until=now+3000;
-            i.delivery_heartbeat=value.heartbeat;
-        }
+        ticks=i.admission->admit(value,current,now);
     },observer);
 }
 void SceneInspector::policy(c::Policy policy,std::uint64_t now){auto& i=*impl_;i.owner();if(i.closed)return;i.clear();try{i.surface->policy(std::move(policy),now);i.run(now,{},[]{});}catch(...){i.shut();throw;}}

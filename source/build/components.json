@@ -2029,16 +2029,19 @@
         "source/interfaces/scene_inspector.hpp"
       ],
       "private_interfaces": [
-        "source/interfaces/scene_inspector_model.hpp"
+        "source/interfaces/scene_inspector_model.hpp",
+        "source/interfaces/scene_inspector_admission.hpp"
       ],
       "sources": [
         "source/interfaces/scene_inspector_model.cpp",
-        "source/interfaces/scene_inspector_linux.cpp"
+        "source/interfaces/scene_inspector_linux.cpp",
+        "source/interfaces/scene_inspector_admission.cpp"
       ],
       "allowed_dependencies": [
         "syspane_scene_surface",
         "PkgConfig::GTK3",
-        "syspane_telemetry_delivery"
+        "syspane_telemetry_delivery",
+        "Threads::Threads"
       ],
       "target_requirements": [
         "cxx17",
@@ -2059,7 +2062,8 @@
       "source_owner": "tests/scene/",
       "public_interfaces": [],
       "private_interfaces": [
-        "tests/scene/inspector_delivery_tests.hpp"
+        "tests/scene/inspector_delivery_tests.hpp",
+        "tests/scene/inspector_admission_owner.hpp"
       ],
       "sources": [
         "tests/scene/inspector_tests.cpp"
@@ -2067,7 +2071,8 @@
       "allowed_dependencies": [
         "syspane_scene_inspector",
         "syspane_network_publication",
-        "PkgConfig::GTK3"
+        "PkgConfig::GTK3",
+        "Threads::Threads"
       ],
       "target_requirements": [
         "cxx17",

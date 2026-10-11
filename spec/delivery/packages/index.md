@@ -98,6 +98,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Prepared editor history transitions](w-11-history-preparation.md) — Validate undo/redo off the GUI without transferring stale draft or permission proofs.
 - [Native history preparation ownership](w-11-history-worker.md) — Bound history work on the existing helper worker and preserve current-draft adoption.
 - [Initial editor preview readiness](w-11-initial-preview.md) — Defer the first composition while preserving geometry-dependent input before GTK draws.
+- [Inspector admission ownership before background rendering](w-11-inspector-admission-owner.md) — Separate the existing delivery state machine from GTK without changing its observable decisions.
 - [Installed inspector image and topology qualification](w-11-inspector-assets.md) — Exercise pinned saved images, exact native child ownership and actual monitor changes.
 - [Inspector admission, painting and presentation attribution](w-11-inspector-attribution.md) — Separate nested native inspector costs before selecting the remaining maximum-table repair.
 - [Installed inspector authored-input responsiveness](w-11-inspector-authored-limits.md) — Qualify complete visible maximum authored scenes and explicit frame refusal on the real GTK loop.

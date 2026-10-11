@@ -21,6 +21,7 @@ telemetry is now integrated; preserve prior failures and all five full release e
 - [x] Pass 44 exact chart/mixed receiver/frame/projector cases with explicit overflow, retry suppression, recovery and policy erasure. Preserve failed attempts and fixture corrections.
 - [x] Observe 130 actual one-second native publications under one epoch with independent counter, rate, clock and child-exit checks.
 - [x] Reuse exact raster parts within one table, preserving 32 pre-change pixel/metadata/error outcomes and original logical pixel charges. See the [handoff](spec/delivery/table-raster-reuse-handoff.md).
+- [x] Extract one inspector admission owner and verify lease/clock/profile, literal chart gaps and native thread confinement. See the [handoff](spec/delivery/inspector-admission-owner-handoff.md).
 - [ ] Close background inspector admission/painting ownership, adoption, cancellation and shutdown; current ordinary/phase tables still fail the 100-ms limit. Preserve all failed and passing diagnostic attempts.
 - [ ] Qualify maximum chart/mixed workloads through native GTK, independent AT-SPI and installed history accumulation with the fixed GUI/erasure limits.
 - [x] Compose installed saved-scene inspection, guarded navigation, current-policy erasure and verified image-task ownership.

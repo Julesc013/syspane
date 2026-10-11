@@ -11,6 +11,11 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
+The [inspector admission checkpoint](spec/delivery/inspector-admission-owner-handoff.md)
+separates delivery ownership from GTK and verifies the same scalar/chart decisions
+on a fresh worker owner. Background rendering and current-result adoption still
+need implementation; maximum GUI timing and complete editions remain unqualified.
+
 The [table raster checkpoint](spec/delivery/table-raster-reuse-handoff.md) preserves
 exact native pixels while removing repeated drawing inside a table composition.
 All 32 frozen checks pass, but ordinary and phase maximum-table timing still fail.

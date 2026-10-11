@@ -1,5 +1,23 @@
 # Developer setup and checks
 
+The [inspector admission package](../../spec/delivery/packages/w-11-inspector-admission-owner.md)
+extracts delivery state from GTK without enabling background presentation. After
+workspace preflight/configure/build, run:
+
+```sh
+ctest --preset linux-x64-gcc13 -R '^native[.]INSPECTOR-ADMISSION-OWNER$' --output-on-failure
+ctest --preset linux-x64-gcc13 -R '^native[.]SCENE-INSPECTOR' --output-on-failure
+```
+
+The new native probe constructs, renders and destroys its surface/admission owner
+on a fresh thread, transferring only owned semantic output. It checks literal
+scalar/chart outcomes and rejection before cross-thread or recursive surface use.
+Continue installed telemetry, shared composition/data/delivery and fixed native
+raster/erasure checks. This ownership prerequisite does not qualify asynchronous
+GUI adoption or the 100-ms/200-ms performance limits. The
+[handoff](../../spec/delivery/inspector-admission-owner-handoff.md) preserves prior
+timing failures and names the next background job/result and shutdown boundary.
+
 The [table raster package](../../spec/delivery/packages/w-11-table-raster-reuse.md)
 reuses exact native parts only within one table composition. After workspace
 preflight/configure/build, run `ctest --preset linux-x64-gcc13 -R

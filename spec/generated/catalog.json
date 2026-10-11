@@ -500,7 +500,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "b8dbc54bec3f681a34be13e4012e35ee4c34242fa3631e7f7d191c9f287aeeca"
+      "sha256": "26f8757cd2b56378c1634e7467719f72586dcd2843c926a04acf19b0536aa1fa"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -1024,6 +1024,16 @@
         "SP-EDITOR-PAINT-TRACE-HANDOFF"
       ],
       "sha256": "ffa3b099884b0df1afcd6c44975b9c654b66a3a7809b0118d8196cda1f9b478c"
+    },
+    {
+      "id": "SP-INSPECTOR-ADMISSION-OWNER-HANDOFF",
+      "path": "delivery/inspector-admission-owner-handoff.md",
+      "title": "Inspector admission ownership prerequisite",
+      "description": "Use one delivery state machine on its constructing thread before enabling background scene rendering.",
+      "requires": [
+        "SP-W11-INSPECTOR-ADMISSION-OWNER"
+      ],
+      "sha256": "691713d8decdc2e66f7d1bfbf7e3b7c91437f92082f8a58d46e94d06f1080487"
     },
     {
       "id": "SP-INSPECTOR-ASSETS-HANDOFF",
@@ -2552,6 +2562,18 @@
         "SP-W11-PREPARED-EDITOR"
       ],
       "sha256": "94ded9e9909abf8746b1545f7706ca1eeccfbc754204a86f9de193494f13c239"
+    },
+    {
+      "id": "SP-W11-INSPECTOR-ADMISSION-OWNER",
+      "path": "delivery/packages/w-11-inspector-admission-owner.md",
+      "title": "Inspector admission ownership before background rendering",
+      "description": "Separate the existing delivery state machine from GTK without changing its observable decisions.",
+      "requires": [
+        "SP-W11-INSPECTOR-TELEMETRY",
+        "SP-W11-INSPECTOR-DELIVERY-GAPS",
+        "SP-W11-TABLE-RASTER-REUSE"
+      ],
+      "sha256": "5e2056c411c079d3880dfca070732ca369b8d3831e34cbf75b074620824fd737"
     },
     {
       "id": "SP-W11-INSPECTOR-ASSETS",

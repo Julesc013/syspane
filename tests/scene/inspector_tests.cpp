@@ -3,6 +3,7 @@
 #include "inspector_delivery_tests.hpp"
 #include "inspector_delivery_chart_tests.hpp"
 #include "inspector_phase_tests.hpp"
+#include "inspector_admission_owner.hpp"
 #include "scene_inspector_model.hpp"
 #include "chart_frame_limits.hpp"
 #include <gtk/gtk.h>
@@ -103,4 +104,5 @@ int window(const std::string& root,const std::string& mode){g_set_prgname("syspa
 }
 }
 int main(int argc,char** argv){try{need(argc>=2,"inspector arguments");if(argc==6&&std::string(argv[2])=="HISTORY-LIMITS")return chart_frame_limits::run(argv[1],std::string(argv[3])=="mixed",static_cast<unsigned>(std::stoul(argv[4])),argv[5]);
+    if(argc==3&&std::string(argv[2])=="ADMISSION-OWNER")return inspector_admission_owner_test::run(argv[1]);
     return argc==2?component(argv[1]):window(argv[1],argv[2]);}catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}}

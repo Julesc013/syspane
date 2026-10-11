@@ -12,10 +12,20 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-11T14:34:14.540702+00:00", "scope": "Exact table raster equivalence and preserved native timing failures"}
+updated: {"by": "codex", "at": "2026-10-11T14:58:43.175866+00:00", "scope": "Inspector admission ownership prerequisite and preserved GUI timing qualification"}
 ---
 
 # Current state and next admitted boundary
+
+The [inspector admission checkpoint](inspector-admission-owner-handoff.md) extracts
+one delivery state owner for the existing GTK presenter and future worker use.
+The ownership/conformance probe uses actual rendering on a fresh native thread
+without GTK. It preserves scalar age/lease, literal chart points/gaps, rejected
+candidates and current-profile closure. The ordinary frontend remains synchronous;
+preceding table timing failures stay preserved and responsiveness is unqualified.
+Next close bounded background job/result adoption, current profile/policy/resource/
+topology and clocks, cancellation, image drainage and independent shutdown before
+enabling asynchronous presentation. All five complete editions remain open.
 
 The [table raster checkpoint](table-raster-reuse-handoff.md) passes 32 frozen
 pre-change pixel/metadata/error checks and all 146 selected Linux shared checks.

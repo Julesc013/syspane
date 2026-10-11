@@ -16,6 +16,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [history-preparation.json](history-preparation.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [history-worker.json](history-worker.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [initial-preview.json](initial-preview.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
+- [inspector-admission-owner.json](inspector-admission-owner.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [inspector-assets.json](inspector-assets.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [inspector-authored-limits.json](inspector-authored-limits.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [inspector-delivery-gaps.json](inspector-delivery-gaps.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.

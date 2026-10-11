@@ -1,7 +1,10 @@
 # Foundation development profiles
 
-Current revisions are Windows x64 45, Linux x64 80 and historical x86 36. The
-[table raster package](../../../spec/delivery/packages/w-11-table-raster-reuse.md)
+Current revisions are Windows x64 45, Linux x64 81 and historical x86 36. The
+[inspector admission package](../../../spec/delivery/packages/w-11-inspector-admission-owner.md)
+extracts one delivery owner for GTK and future worker use. The ordinary frontend
+still paints synchronously; prior GUI timing failures remain unqualified.
+The [table raster package](../../../spec/delivery/packages/w-11-table-raster-reuse.md)
 adds exact composition-local raster reuse and frozen pixel/error checks on Linux.
 Its ordinary and phase maximum-table timing runs still fail; preserve those
 attempts. The

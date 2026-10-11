@@ -1,0 +1,1647 @@
+{
+  "recorded_at": "2026-10-11T15:01:34.693244+00:00",
+  "source_base": "ab597abc89c670d62a73238368d60300ae0b177a",
+  "scope": "Inspector admission ownership/conformance prerequisite. Ordinary GUI remains synchronous; asynchronous result adoption and maximum responsiveness qualification remain open.",
+  "current_product_inputs": {
+    "CMakeLists.txt": "ac372015ab9711692dff0a898db3c99547bd96bd51870b5e526f45c57bcee718",
+    "source/build/components.json": "c3894cff1332ab04c70728066c255bd75d33dec0219669a0ad51115d7c4f6044",
+    "source/build/targets/linux-x64-gcc13.json": "f1a761a37affd3b4b4a9120008d1ea9ea2fc8561c23046f6a94f92fc4deabaf3",
+    "source/interfaces/scene_inspector_admission.cpp": "b2a6c46dfb04df9df58284f8b148df71dcdad96231deb8da8f984c528d37cf25",
+    "source/interfaces/scene_inspector_admission.hpp": "ab8e17d34ff8d56bf6c69a411833939cb979fb084080527694f2c82b4efe1c3d",
+    "source/interfaces/scene_inspector_linux.cpp": "be59242bf95ffa6d237535e3167da7b6c5a234cee7f7ee2a73ed69b271daea18",
+    "tests/scene/inspector_admission_owner.hpp": "e71888fa8a77c59be7bacdd68c6aba8d85094f19adb8b0e61e6fb264dab3cbb0",
+    "tests/scene/inspector_tests.cpp": "a89a8a8040a178ff12f371b63b09ed86f5b0c8e5b5723dff3b9a3475f1a7a7f6"
+  },
+  "environment": {
+    "local_path": "out/evidence/inspector-admission-owner/environment.json",
+    "sha256": "c0d815a806306db21f108396f5477f5286e3a3be17c44ce5fde44298c638cace"
+  },
+  "artifacts": {
+    "syspane": "99c77776d3326b2c6049e992cf73b63d43687a0470f18d75e1101b2cde0747ce",
+    "syspane_frontend_fixture": "067906c3985bcb354547a0f9fd2643c579b0f43fa890f0e7ebcd2da22093ae97",
+    "syspane_scene_surface_tests": "f1697a9df0a6bd749789da7c8d5c36615ab96700290dfd0e4d3463bd19d1025b",
+    "syspane_scene_inspector_tests": "b298acae2429e60d9792e6f1d9c7cae9d50a3af22c8a889b1a0086a09105f629"
+  },
+  "executions": [
+    {
+      "stage": "build",
+      "source_base": "ab597abc89c670d62a73238368d60300ae0b177a",
+      "source_archive_sha256": "93d89c9dc82f9b692780bebb99b02c449e3a9927fbe347fa7175cf6ea8778587",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "cmake",
+            "--preset",
+            "linux-x64-gcc13"
+          ],
+          "started_at": "2026-10-11T14:57:29.276751+00:00",
+          "finished_at": "2026-10-11T14:57:41.428246+00:00",
+          "exit": 0,
+          "log_sha256": "92d06a76d78a86a0d94fbb83f996a5e153dd35edf0d6b8a28d629ac806b488fc",
+          "passed_ctest_count": null
+        },
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "cmake",
+            "--build",
+            "--preset",
+            "linux-x64-gcc13"
+          ],
+          "started_at": "2026-10-11T14:57:43.821977+00:00",
+          "finished_at": "2026-10-11T14:58:03.218966+00:00",
+          "exit": 0,
+          "log_sha256": "d6fe3510110c90203b9816eea691833263f5f3739c52f6cfe17d96d59eee17de",
+          "passed_ctest_count": null
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/inspector-admission-owner-checks/build-0842eb38/result.json",
+        "sha256": "d9e43ab22fe107334bbbde7e24cabce9010a200db79eb8dc1c612cdae0dde5dd"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/inspector-admission-owner-checks/build-0842eb38/source-manifest.json",
+        "sha256": "d9bd07ee141c3d99208ed4f56656c56d50eb0ac5274ea4ff886fd808060d0021"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/inspector-admission-owner-checks/build-0842eb38/source.zip",
+        "sha256": "93d89c9dc82f9b692780bebb99b02c449e3a9927fbe347fa7175cf6ea8778587"
+      },
+      "product_inputs_differing_from_current": [],
+      "budget_logs": [
+        {
+          "local_path": "out/evidence/inspector-admission-owner-checks/build-0842eb38/budget-0.txt",
+          "sha256": "facc9cee7445e0547cc1d943b68cd06b3fb47197daf05fe9c861f03492077263"
+        },
+        {
+          "local_path": "out/evidence/inspector-admission-owner-checks/build-0842eb38/budget-1.txt",
+          "sha256": "a6f2ea91e8f367775aadb39d375a33f97e07d31a6d60f17a52ac9387aef9fd06"
+        }
+      ]
+    },
+    {
+      "stage": "build",
+      "source_base": "ab597abc89c670d62a73238368d60300ae0b177a",
+      "source_archive_sha256": "ddcc4212214dccee01cb81dcd026de8f4b27e96113b72cdb00757b334421bfe0",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "cmake",
+            "--preset",
+            "linux-x64-gcc13"
+          ],
+          "started_at": "2026-10-11T14:53:01.156356+00:00",
+          "finished_at": "2026-10-11T14:53:11.577728+00:00",
+          "exit": 0,
+          "log_sha256": "f9d7d78f8215eda5693e12024d2058a5e5fd5a17db96de3da7af1fc64e5c1ab1",
+          "passed_ctest_count": null
+        },
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "cmake",
+            "--build",
+            "--preset",
+            "linux-x64-gcc13"
+          ],
+          "started_at": "2026-10-11T14:53:13.576627+00:00",
+          "finished_at": "2026-10-11T14:53:29.416628+00:00",
+          "exit": 0,
+          "log_sha256": "75ca81a9a4b1885c66601f9250bf08ca5a47ea854f47fe9b13fc305b6ea80155",
+          "passed_ctest_count": null
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/inspector-admission-owner-checks/build-d290becb/result.json",
+        "sha256": "c3ac0d9af6f4c6bd216c0a989cd6a284153dd456f8c40f769d3ba0ed156bafd4"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/inspector-admission-owner-checks/build-d290becb/source-manifest.json",
+        "sha256": "66953a2d93b56090f3bd123ae2ed5507db3574a930e45ae80ee48853a40c97a4"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/inspector-admission-owner-checks/build-d290becb/source.zip",
+        "sha256": "ddcc4212214dccee01cb81dcd026de8f4b27e96113b72cdb00757b334421bfe0"
+      },
+      "product_inputs_differing_from_current": [
+        "source/interfaces/scene_inspector_admission.cpp",
+        "tests/scene/inspector_admission_owner.hpp"
+      ],
+      "budget_logs": [
+        {
+          "local_path": "out/evidence/inspector-admission-owner-checks/build-d290becb/budget-0.txt",
+          "sha256": "15e79745ac8c650263c48f38e439f329607ca113a12ab3b5353badafba4e0ee8"
+        },
+        {
+          "local_path": "out/evidence/inspector-admission-owner-checks/build-d290becb/budget-1.txt",
+          "sha256": "56280816afba8095ba64f1626212caecbe44da65bf09432e2f942fb1e3f5c942"
+        }
+      ]
+    },
+    {
+      "stage": "live",
+      "source_base": "ab597abc89c670d62a73238368d60300ae0b177a",
+      "source_archive_sha256": "ddcc4212214dccee01cb81dcd026de8f4b27e96113b72cdb00757b334421bfe0",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]INSTALLED-TELEMETRY$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-11T14:55:18.405268+00:00",
+          "finished_at": "2026-10-11T14:56:05.560536+00:00",
+          "exit": 0,
+          "log_sha256": "b1520531076f301cb297a0e6bea5d57a98fa95347821cf9a3705db1c404f623c",
+          "passed_ctest_count": 1
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/inspector-admission-owner-checks/live-5b1e65e8/result.json",
+        "sha256": "dbfbb8de1fefca4d411a5267cbe7f9df559468757f7c4d3c792a4494d91234fd"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/inspector-admission-owner-checks/live-5b1e65e8/source-manifest.json",
+        "sha256": "66953a2d93b56090f3bd123ae2ed5507db3574a930e45ae80ee48853a40c97a4"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/inspector-admission-owner-checks/live-5b1e65e8/source.zip",
+        "sha256": "ddcc4212214dccee01cb81dcd026de8f4b27e96113b72cdb00757b334421bfe0"
+      },
+      "product_inputs_differing_from_current": [
+        "source/interfaces/scene_inspector_admission.cpp",
+        "tests/scene/inspector_admission_owner.hpp"
+      ],
+      "budget_logs": [
+        {
+          "local_path": "out/evidence/inspector-admission-owner-checks/live-5b1e65e8/budget-0.txt",
+          "sha256": "4517ee699c7eb72342e3d6475215efb35b9511e3b22c483b50550b3e380d07f8"
+        }
+      ]
+    },
+    {
+      "stage": "live",
+      "source_base": "ab597abc89c670d62a73238368d60300ae0b177a",
+      "source_archive_sha256": "0cce8e90603c52fd1a71e3529ba1605309c9bdf6c37fad0cf24e2bc65964c618",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]INSTALLED-TELEMETRY$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-11T14:59:02.175294+00:00",
+          "finished_at": "2026-10-11T14:59:52.563124+00:00",
+          "exit": 0,
+          "log_sha256": "51d38bae7172946070c318b2e70aaf3806648089ee1eb420f1762e015179dcc2",
+          "passed_ctest_count": 1
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/inspector-admission-owner-checks/live-b24c2cd8/result.json",
+        "sha256": "382ea768c350c94bcd1dee99688016d19e57833122a88394b3b8136b5597e9ef"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/inspector-admission-owner-checks/live-b24c2cd8/source-manifest.json",
+        "sha256": "9ac78700bd88d1106772efdea315eed88117d59ed5db8933e9899c6a73e8e493"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/inspector-admission-owner-checks/live-b24c2cd8/source.zip",
+        "sha256": "0cce8e90603c52fd1a71e3529ba1605309c9bdf6c37fad0cf24e2bc65964c618"
+      },
+      "product_inputs_differing_from_current": [],
+      "budget_logs": [
+        {
+          "local_path": "out/evidence/inspector-admission-owner-checks/live-b24c2cd8/budget-0.txt",
+          "sha256": "83473ff02ee082ba3939fa918d4acae4df1a29c8ddad164ae81be87f86bb0902"
+        }
+      ]
+    },
+    {
+      "stage": "native-INSPECTOR-ADMISSION-OWNER",
+      "source_base": "ab597abc89c670d62a73238368d60300ae0b177a",
+      "source_archive_sha256": "ddcc4212214dccee01cb81dcd026de8f4b27e96113b72cdb00757b334421bfe0",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]INSPECTOR-ADMISSION-OWNER$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-11T14:54:12.812574+00:00",
+          "finished_at": "2026-10-11T14:54:14.406008+00:00",
+          "exit": 0,
+          "log_sha256": "6bdcb3afe5713afd1d5bb01080e2692e4aa90655bb43deb41466613cb4032a6f",
+          "passed_ctest_count": 1
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/inspector-admission-owner-checks/native-INSPECTOR-ADMISSION-OWNER-756be383/result.json",
+        "sha256": "ced85ac6b6656da868cd395815a6a6e4b5d665caef8d366c6596c14d99447d3d"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/inspector-admission-owner-checks/native-INSPECTOR-ADMISSION-OWNER-756be383/source-manifest.json",
+        "sha256": "66953a2d93b56090f3bd123ae2ed5507db3574a930e45ae80ee48853a40c97a4"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/inspector-admission-owner-checks/native-INSPECTOR-ADMISSION-OWNER-756be383/source.zip",
+        "sha256": "ddcc4212214dccee01cb81dcd026de8f4b27e96113b72cdb00757b334421bfe0"
+      },
+      "product_inputs_differing_from_current": [
+        "source/interfaces/scene_inspector_admission.cpp",
+        "tests/scene/inspector_admission_owner.hpp"
+      ],
+      "budget_logs": [
+        {
+          "local_path": "out/evidence/inspector-admission-owner-checks/native-INSPECTOR-ADMISSION-OWNER-756be383/budget-0.txt",
+          "sha256": "f289c08c76dbc26fcd3888db97be8dbef746a46a27b266a64acd8ec54fb0cf1d"
+        }
+      ]
+    },
+    {
+      "stage": "native-INSPECTOR-ADMISSION-OWNER",
+      "source_base": "ab597abc89c670d62a73238368d60300ae0b177a",
+      "source_archive_sha256": "93d89c9dc82f9b692780bebb99b02c449e3a9927fbe347fa7175cf6ea8778587",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]INSPECTOR-ADMISSION-OWNER$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-11T14:58:36.042682+00:00",
+          "finished_at": "2026-10-11T14:58:37.098815+00:00",
+          "exit": 0,
+          "log_sha256": "549b89d8d401fc9592a1524aaa1a94c31c00ea8b54216c0ae416829ddf18d735",
+          "passed_ctest_count": 1
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/inspector-admission-owner-checks/native-INSPECTOR-ADMISSION-OWNER-e5f4f095/result.json",
+        "sha256": "43c9245ce7c65cb780569a1bc1f81230b2cae6c4e1662ce6660333512ca9b81a"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/inspector-admission-owner-checks/native-INSPECTOR-ADMISSION-OWNER-e5f4f095/source-manifest.json",
+        "sha256": "d9bd07ee141c3d99208ed4f56656c56d50eb0ac5274ea4ff886fd808060d0021"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/inspector-admission-owner-checks/native-INSPECTOR-ADMISSION-OWNER-e5f4f095/source.zip",
+        "sha256": "93d89c9dc82f9b692780bebb99b02c449e3a9927fbe347fa7175cf6ea8778587"
+      },
+      "product_inputs_differing_from_current": [],
+      "budget_logs": [
+        {
+          "local_path": "out/evidence/inspector-admission-owner-checks/native-INSPECTOR-ADMISSION-OWNER-e5f4f095/budget-0.txt",
+          "sha256": "4b0ef6ab164655ddd9a62f672d60bebb76c2697150a4cd77b61a36b0c2054ce0"
+        }
+      ]
+    },
+    {
+      "stage": "native-TABLE-ERASURE",
+      "source_base": "ab597abc89c670d62a73238368d60300ae0b177a",
+      "source_archive_sha256": "ddcc4212214dccee01cb81dcd026de8f4b27e96113b72cdb00757b334421bfe0",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]TABLE-ERASURE$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-11T14:56:26.235823+00:00",
+          "finished_at": "2026-10-11T14:56:38.418278+00:00",
+          "exit": 0,
+          "log_sha256": "ac5a11fcc2ca98f1dadd1a92d4859d700d817a7416492ea71562e54883f9db72",
+          "passed_ctest_count": 1
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/inspector-admission-owner-checks/native-TABLE-ERASURE-5e3a241a/result.json",
+        "sha256": "73cb8cebbdc1d056402fc9e9abedf924f6745ea2ce2e04390a535043973c3be5"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/inspector-admission-owner-checks/native-TABLE-ERASURE-5e3a241a/source-manifest.json",
+        "sha256": "66953a2d93b56090f3bd123ae2ed5507db3574a930e45ae80ee48853a40c97a4"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/inspector-admission-owner-checks/native-TABLE-ERASURE-5e3a241a/source.zip",
+        "sha256": "ddcc4212214dccee01cb81dcd026de8f4b27e96113b72cdb00757b334421bfe0"
+      },
+      "product_inputs_differing_from_current": [
+        "source/interfaces/scene_inspector_admission.cpp",
+        "tests/scene/inspector_admission_owner.hpp"
+      ],
+      "budget_logs": [
+        {
+          "local_path": "out/evidence/inspector-admission-owner-checks/native-TABLE-ERASURE-5e3a241a/budget-0.txt",
+          "sha256": "a799ef0754645ff307d939771ac980a5fb38a4f60dcde6632d56ec7aa6e69183"
+        }
+      ]
+    },
+    {
+      "stage": "native-TABLE-ERASURE",
+      "source_base": "ab597abc89c670d62a73238368d60300ae0b177a",
+      "source_archive_sha256": "0cce8e90603c52fd1a71e3529ba1605309c9bdf6c37fad0cf24e2bc65964c618",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]TABLE-ERASURE$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-11T15:00:12.391145+00:00",
+          "finished_at": "2026-10-11T15:00:22.252460+00:00",
+          "exit": 0,
+          "log_sha256": "8457ed48474485acc17ea64c0b58c755fe81b174e1aaf762b7fed3a092acf886",
+          "passed_ctest_count": 1
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/inspector-admission-owner-checks/native-TABLE-ERASURE-dfa5e1a0/result.json",
+        "sha256": "8a8a3385d1c0e1fc70770455b1789bab9e2600f2a8bc543de51d6c3dcc4b80cb"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/inspector-admission-owner-checks/native-TABLE-ERASURE-dfa5e1a0/source-manifest.json",
+        "sha256": "9ac78700bd88d1106772efdea315eed88117d59ed5db8933e9899c6a73e8e493"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/inspector-admission-owner-checks/native-TABLE-ERASURE-dfa5e1a0/source.zip",
+        "sha256": "0cce8e90603c52fd1a71e3529ba1605309c9bdf6c37fad0cf24e2bc65964c618"
+      },
+      "product_inputs_differing_from_current": [],
+      "budget_logs": [
+        {
+          "local_path": "out/evidence/inspector-admission-owner-checks/native-TABLE-ERASURE-dfa5e1a0/budget-0.txt",
+          "sha256": "a02383cada305ed980cd5481a871d4031a3c8f4ce13d90c90c3a71931f5eaf64"
+        }
+      ]
+    },
+    {
+      "stage": "native-TABLE-RASTER",
+      "source_base": "ab597abc89c670d62a73238368d60300ae0b177a",
+      "source_archive_sha256": "ddcc4212214dccee01cb81dcd026de8f4b27e96113b72cdb00757b334421bfe0",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]TABLE-RASTER$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-11T14:56:16.165232+00:00",
+          "finished_at": "2026-10-11T14:56:19.693676+00:00",
+          "exit": 0,
+          "log_sha256": "69e97a70ed81a9ab41183d06f49039c01f2b8928d035db1c04c3302451860d9b",
+          "passed_ctest_count": 1
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/inspector-admission-owner-checks/native-TABLE-RASTER-2050eac7/result.json",
+        "sha256": "60d1deb3d1d6a9f401a1aa366ddebac16aaa17afd369d3f15dd3bda5958121ea"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/inspector-admission-owner-checks/native-TABLE-RASTER-2050eac7/source-manifest.json",
+        "sha256": "66953a2d93b56090f3bd123ae2ed5507db3574a930e45ae80ee48853a40c97a4"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/inspector-admission-owner-checks/native-TABLE-RASTER-2050eac7/source.zip",
+        "sha256": "ddcc4212214dccee01cb81dcd026de8f4b27e96113b72cdb00757b334421bfe0"
+      },
+      "product_inputs_differing_from_current": [
+        "source/interfaces/scene_inspector_admission.cpp",
+        "tests/scene/inspector_admission_owner.hpp"
+      ],
+      "budget_logs": [
+        {
+          "local_path": "out/evidence/inspector-admission-owner-checks/native-TABLE-RASTER-2050eac7/budget-0.txt",
+          "sha256": "c0d11ecc138c5443a2a0648231d028a27c745b75ebb81a481e4eca38181ea732"
+        }
+      ]
+    },
+    {
+      "stage": "native-TABLE-RASTER",
+      "source_base": "ab597abc89c670d62a73238368d60300ae0b177a",
+      "source_archive_sha256": "0cce8e90603c52fd1a71e3529ba1605309c9bdf6c37fad0cf24e2bc65964c618",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]TABLE-RASTER$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-11T15:00:03.449378+00:00",
+          "finished_at": "2026-10-11T15:00:08.123300+00:00",
+          "exit": 0,
+          "log_sha256": "7b0c92fd50ef393c268d97099af9c14aacc1c061dcf7aeb31c0f6c7001d7b165",
+          "passed_ctest_count": 1
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/inspector-admission-owner-checks/native-TABLE-RASTER-b35c6602/result.json",
+        "sha256": "61825b0496b7c3ecc78433cff0228808fe46d08f49adf44246e4160528b84c42"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/inspector-admission-owner-checks/native-TABLE-RASTER-b35c6602/source-manifest.json",
+        "sha256": "9ac78700bd88d1106772efdea315eed88117d59ed5db8933e9899c6a73e8e493"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/inspector-admission-owner-checks/native-TABLE-RASTER-b35c6602/source.zip",
+        "sha256": "0cce8e90603c52fd1a71e3529ba1605309c9bdf6c37fad0cf24e2bc65964c618"
+      },
+      "product_inputs_differing_from_current": [],
+      "budget_logs": [
+        {
+          "local_path": "out/evidence/inspector-admission-owner-checks/native-TABLE-RASTER-b35c6602/budget-0.txt",
+          "sha256": "4e6251c6b3d05dee85a36afe9a46944785eb51fcdd934f2ca89b09e02f123403"
+        }
+      ]
+    },
+    {
+      "stage": "portable",
+      "source_base": "ab597abc89c670d62a73238368d60300ae0b177a",
+      "source_archive_sha256": "ddcc4212214dccee01cb81dcd026de8f4b27e96113b72cdb00757b334421bfe0",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^((model|delivery|data|measured|telemetry|session|demand|scene|composition)[.]|configuration[.]TYPOGRAPHY-)",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-11T14:54:12.812490+00:00",
+          "finished_at": "2026-10-11T14:54:20.477165+00:00",
+          "exit": 0,
+          "log_sha256": "bf8974a3bc049d8835a5a3de44b7164f154e17d64d7b126d5ba670b0811dfdea",
+          "passed_ctest_count": 146
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/inspector-admission-owner-checks/portable-7a02ec14/result.json",
+        "sha256": "caa20cd59d1e34761a32a3a433b63179b3f1c1488544a58822cfa9e0697eaa7f"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/inspector-admission-owner-checks/portable-7a02ec14/source-manifest.json",
+        "sha256": "66953a2d93b56090f3bd123ae2ed5507db3574a930e45ae80ee48853a40c97a4"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/inspector-admission-owner-checks/portable-7a02ec14/source.zip",
+        "sha256": "ddcc4212214dccee01cb81dcd026de8f4b27e96113b72cdb00757b334421bfe0"
+      },
+      "product_inputs_differing_from_current": [
+        "source/interfaces/scene_inspector_admission.cpp",
+        "tests/scene/inspector_admission_owner.hpp"
+      ],
+      "budget_logs": [
+        {
+          "local_path": "out/evidence/inspector-admission-owner-checks/portable-7a02ec14/budget-0.txt",
+          "sha256": "f289c08c76dbc26fcd3888db97be8dbef746a46a27b266a64acd8ec54fb0cf1d"
+        }
+      ]
+    },
+    {
+      "stage": "portable",
+      "source_base": "ab597abc89c670d62a73238368d60300ae0b177a",
+      "source_archive_sha256": "93d89c9dc82f9b692780bebb99b02c449e3a9927fbe347fa7175cf6ea8778587",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^((model|delivery|data|measured|telemetry|session|demand|scene|composition)[.]|configuration[.]TYPOGRAPHY-)",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-11T14:58:40.811261+00:00",
+          "finished_at": "2026-10-11T14:58:48.826954+00:00",
+          "exit": 0,
+          "log_sha256": "d985b108073933228bd6f3f87d1c739685758757bc4b0d0c927690078ab32ff7",
+          "passed_ctest_count": 146
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/inspector-admission-owner-checks/portable-b97a181e/result.json",
+        "sha256": "a0da3ebb488b669acd6438636cd7eb102a64edf06d0fe68be62953aacd28781f"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/inspector-admission-owner-checks/portable-b97a181e/source-manifest.json",
+        "sha256": "d9bd07ee141c3d99208ed4f56656c56d50eb0ac5274ea4ff886fd808060d0021"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/inspector-admission-owner-checks/portable-b97a181e/source.zip",
+        "sha256": "93d89c9dc82f9b692780bebb99b02c449e3a9927fbe347fa7175cf6ea8778587"
+      },
+      "product_inputs_differing_from_current": [],
+      "budget_logs": [
+        {
+          "local_path": "out/evidence/inspector-admission-owner-checks/portable-b97a181e/budget-0.txt",
+          "sha256": "576ac22dd3815e7192fd867b51c32679fa139b2951184d4ea527cefa8c1fa69e"
+        }
+      ]
+    },
+    {
+      "stage": "scene",
+      "source_base": "ab597abc89c670d62a73238368d60300ae0b177a",
+      "source_archive_sha256": "ddcc4212214dccee01cb81dcd026de8f4b27e96113b72cdb00757b334421bfe0",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]SCENE-INSPECTOR",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-11T14:55:08.541277+00:00",
+          "finished_at": "2026-10-11T14:55:14.996047+00:00",
+          "exit": 0,
+          "log_sha256": "9cda838151d9a7eca381c05422e96d7a50a3c4584437729ded5b530abbb7e952",
+          "passed_ctest_count": 2
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/inspector-admission-owner-checks/scene-b4462742/result.json",
+        "sha256": "13040c805e44ac671ac365b5466366ddd50bc392fd02eaea11874a732edd70e6"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/inspector-admission-owner-checks/scene-b4462742/source-manifest.json",
+        "sha256": "66953a2d93b56090f3bd123ae2ed5507db3574a930e45ae80ee48853a40c97a4"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/inspector-admission-owner-checks/scene-b4462742/source.zip",
+        "sha256": "ddcc4212214dccee01cb81dcd026de8f4b27e96113b72cdb00757b334421bfe0"
+      },
+      "product_inputs_differing_from_current": [
+        "source/interfaces/scene_inspector_admission.cpp",
+        "tests/scene/inspector_admission_owner.hpp"
+      ],
+      "budget_logs": [
+        {
+          "local_path": "out/evidence/inspector-admission-owner-checks/scene-b4462742/budget-0.txt",
+          "sha256": "86c4107233d55df4a689383ae9d784d760199decf047dd594d62eff8a18c3ea9"
+        }
+      ]
+    },
+    {
+      "stage": "scene",
+      "source_base": "ab597abc89c670d62a73238368d60300ae0b177a",
+      "source_archive_sha256": "0cce8e90603c52fd1a71e3529ba1605309c9bdf6c37fad0cf24e2bc65964c618",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]SCENE-INSPECTOR",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-11T14:58:52.125670+00:00",
+          "finished_at": "2026-10-11T14:58:58.588530+00:00",
+          "exit": 0,
+          "log_sha256": "2290676b9cf81f589596daabeb38b40c45994b0f4bd3322e6ca78387aa21cafd",
+          "passed_ctest_count": 2
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/inspector-admission-owner-checks/scene-e35ead35/result.json",
+        "sha256": "51e09dd392a43e221ab1755dc7eaeaaf13e97243d0bc294c7de5678ac2c8b590"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/inspector-admission-owner-checks/scene-e35ead35/source-manifest.json",
+        "sha256": "9ac78700bd88d1106772efdea315eed88117d59ed5db8933e9899c6a73e8e493"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/inspector-admission-owner-checks/scene-e35ead35/source.zip",
+        "sha256": "0cce8e90603c52fd1a71e3529ba1605309c9bdf6c37fad0cf24e2bc65964c618"
+      },
+      "product_inputs_differing_from_current": [],
+      "budget_logs": [
+        {
+          "local_path": "out/evidence/inspector-admission-owner-checks/scene-e35ead35/budget-0.txt",
+          "sha256": "d10b0910ccdd5508e5a8b1375101f5a26940c1bdc8cf8bfe304505ebd2c1f696"
+        }
+      ]
+    }
+  ],
+  "latest_executions": {
+    "build": {
+      "local_path": "out/evidence/inspector-admission-owner-checks/build-0842eb38/result.json",
+      "sha256": "d9e43ab22fe107334bbbde7e24cabce9010a200db79eb8dc1c612cdae0dde5dd"
+    },
+    "native-INSPECTOR-ADMISSION-OWNER": {
+      "local_path": "out/evidence/inspector-admission-owner-checks/native-INSPECTOR-ADMISSION-OWNER-e5f4f095/result.json",
+      "sha256": "43c9245ce7c65cb780569a1bc1f81230b2cae6c4e1662ce6660333512ca9b81a"
+    },
+    "portable": {
+      "local_path": "out/evidence/inspector-admission-owner-checks/portable-b97a181e/result.json",
+      "sha256": "a0da3ebb488b669acd6438636cd7eb102a64edf06d0fe68be62953aacd28781f"
+    },
+    "scene": {
+      "local_path": "out/evidence/inspector-admission-owner-checks/scene-e35ead35/result.json",
+      "sha256": "51e09dd392a43e221ab1755dc7eaeaaf13e97243d0bc294c7de5678ac2c8b590"
+    },
+    "live": {
+      "local_path": "out/evidence/inspector-admission-owner-checks/live-b24c2cd8/result.json",
+      "sha256": "382ea768c350c94bcd1dee99688016d19e57833122a88394b3b8136b5597e9ef"
+    },
+    "native-TABLE-RASTER": {
+      "local_path": "out/evidence/inspector-admission-owner-checks/native-TABLE-RASTER-b35c6602/result.json",
+      "sha256": "61825b0496b7c3ecc78433cff0228808fe46d08f49adf44246e4160528b84c42"
+    },
+    "native-TABLE-ERASURE": {
+      "local_path": "out/evidence/inspector-admission-owner-checks/native-TABLE-ERASURE-dfa5e1a0/result.json",
+      "sha256": "8a8a3385d1c0e1fc70770455b1789bab9e2600f2a8bc543de51d6c3dcc4b80cb"
+    }
+  },
+  "native_archives": [
+    {
+      "label": "current-installed-telemetry",
+      "index": {
+        "local_path": "out/evidence/inspector-admission-owner-native/current-installed-telemetry/index.json",
+        "sha256": "aa5e17019417dc3c5ed0bd387bbbafb41415662a95949dd46e54477204235600"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-admission-owner-native/current-installed-telemetry/native-evidence.zip",
+        "sha256": "d663965630a5ffa181374e19c9123f34ef6a915b1eb0470ddf77a21b44b301b5"
+      },
+      "preserved_bytes": 146894409,
+      "reports": [
+        {
+          "path": "telemetry-frontend-15c8fcd013/result.json",
+          "sha256": "85cd5c19a9ede6d7d54fb157e502eb20250e20da5457bb7dab84ec8875d1e018",
+          "family": "INSTALLED-TELEMETRY",
+          "outcome": "pass",
+          "cases": [
+            {
+              "case": "LIVE",
+              "outcome": "pass",
+              "record_sha256": "e5caa1652a94b0392f274ed11ed4cc2773417ae0dced3be86623c97b5bce0ec3"
+            },
+            {
+              "case": "NAVIGATION",
+              "outcome": "pass",
+              "record_sha256": "212fb0cf05592bed44852acc87470b88f2def6858f22f343a7aa4bf5174ee2bc"
+            },
+            {
+              "case": "REPLACEMENT",
+              "outcome": "pass",
+              "record_sha256": "34afa8e3be23c2b9f22518e443144255f67b195abd79b31fcc07dec639a85061"
+            },
+            {
+              "case": "POLICY",
+              "outcome": "pass",
+              "record_sha256": "e7e2ad883675ba7b5b037722e70bbd294d40150634b64ab24964e73964f88787"
+            },
+            {
+              "case": "CONFIGURATION-LOSS",
+              "outcome": "pass",
+              "record_sha256": "12dd20d80dc0548d60c4adab223b7d6f6f0372e3074e81977e2bd19494de0ff2"
+            },
+            {
+              "case": "CLOSE-HELD",
+              "outcome": "pass",
+              "record_sha256": "66648c8295e8d4a6a97d858ebd245ab9be4ddef85aef3846a1a31d6969f274b3"
+            },
+            {
+              "case": "ORACLE",
+              "outcome": "pass",
+              "record_sha256": "97434e4937bac6cc8afc176aeef51a57bbe96e9ae8b7b749641a4e942e36757c"
+            }
+          ],
+          "artifacts": {
+            "SysPane.ImageWorker": "65b38c368c9472405163a244c7f1b0ddf2c8702bb5e7945e147cb4a5935e777c",
+            "SysPane.RecoveryWorker": "542b2fcb0aa20f674b98e5039af0e2ca512c43c5325c08cd286a03248a07416b",
+            "syspane": "99c77776d3326b2c6049e992cf73b63d43687a0470f18d75e1101b2cde0747ce",
+            "syspane_frontend_entry_fixture": "9feb9085ccd23cbbeb905e71ba07b7250836f3f23cc308cd7fad3811e26d060b",
+            "syspane_frontend_helper_fixture": "8f31f92ec25fce27488cd545ed888e6cf5f4433eaf3612d39681795fd229a652"
+          },
+          "cases_sha256": "bd439d2c32cb5935648a0e06e129ec87502dc82aa92409ee8403eb6380b6b6b1"
+        }
+      ]
+    },
+    {
+      "label": "current-scene",
+      "index": {
+        "local_path": "out/evidence/inspector-admission-owner-native/current-scene/index.json",
+        "sha256": "e750e8330e30532c8c430c9e6d6e1bcc1855440e3fec29584c663c268a96b48b"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-admission-owner-native/current-scene/native-evidence.zip",
+        "sha256": "f9f8911e93c21d9013acb914a4f895b312d00322053178f1fbb8bfdb43f9aee0"
+      },
+      "preserved_bytes": 249142,
+      "reports": [
+        {
+          "path": "inspector-0fd55230ba53/result.json",
+          "sha256": "16232f03c1eb8930f52c6c77d2feb7c7fa577e8c436412e24ec8922bfd942a19",
+          "family": "SCENE-INSPECTOR",
+          "outcome": "pass",
+          "cases": [
+            {
+              "case": "scalar",
+              "outcome": "pass",
+              "fault_detected": false,
+              "record_sha256": "98aa444984020ff65849b56b80618a9ec91de60dc16906fd5d1c4b629961afca"
+            },
+            {
+              "case": "table",
+              "outcome": "pass",
+              "fault_detected": false,
+              "record_sha256": "5774a97948f8e6950207a39d0f57f48882b8847aac3e906be566d09332855336"
+            },
+            {
+              "case": "chart",
+              "outcome": "pass",
+              "fault_detected": false,
+              "record_sha256": "78d36097eafa520d6aa429eba9272dd6cd026fd63ce9387ced6d2948bcde9e59"
+            },
+            {
+              "case": "image",
+              "outcome": "pass",
+              "fault_detected": false,
+              "record_sha256": "659955b182c12d7d3424de6e7982b4ca7154ec33b5bfbb91f1bb81e170385c88"
+            },
+            {
+              "case": "translated",
+              "outcome": "pass",
+              "fault_detected": false,
+              "record_sha256": "6b2d2ee9b75f6c5372565efa3b10d4c99ae5464bcb55bbfea8febe304c942759"
+            },
+            {
+              "case": "retain",
+              "outcome": "pass",
+              "fault_detected": true,
+              "record_sha256": "8840bb005aba35360d2154f25979e94e0db69ac1c4991b7a21cb3ee5e284001f"
+            },
+            {
+              "case": "wrong-selection",
+              "outcome": "pass",
+              "fault_detected": true,
+              "record_sha256": "fe8286695c48b6db4697a8a4bddb8412fc31147b52cd602b92c170e661ba441b"
+            }
+          ],
+          "executable_sha256": "b298acae2429e60d9792e6f1d9c7cae9d50a3af22c8a889b1a0086a09105f629"
+        }
+      ]
+    },
+    {
+      "label": "current-table-erasure",
+      "index": {
+        "local_path": "out/evidence/inspector-admission-owner-native/current-table-erasure/index.json",
+        "sha256": "1fd6919bc19d19045db1b43aedf450b51f252124c597bc435e212822719f8619"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-admission-owner-native/current-table-erasure/native-evidence.zip",
+        "sha256": "cb7303864b81d02b4e84e69ed2bba7f670eade1892ceedab77bcbbc2d5b4b910"
+      },
+      "preserved_bytes": 54527817,
+      "reports": [
+        {
+          "path": "surface-2ac14c366ef6/result.json",
+          "sha256": "b890089924d1330c9d4f83f6c775d1e1f7e7e339017ad78237437c7b6b606ffc",
+          "family": "TABLE-ERASURE",
+          "outcome": "pass",
+          "cases": [
+            {
+              "case": "normal",
+              "outcome": "pass",
+              "record_sha256": "5f6558af38a9c6b8aa79de0bc1ef0ad95b9480b6d57646584423fb89c92e1067"
+            },
+            {
+              "case": "ignore-pixels",
+              "outcome": "pass",
+              "record_sha256": "56786f5e3065388b77f4cebc19749539d9e8c125a2e9ca9efc0c08c35039f481"
+            },
+            {
+              "case": "ignore-accessible",
+              "outcome": "pass",
+              "record_sha256": "64e7a14333de47cc58514612b8eb2c6337b5d3795c7511361456d49e4e253c4c"
+            }
+          ],
+          "executable_sha256": "f1697a9df0a6bd749789da7c8d5c36615ab96700290dfd0e4d3463bd19d1025b"
+        }
+      ]
+    },
+    {
+      "label": "current-table-raster",
+      "index": {
+        "local_path": "out/evidence/inspector-admission-owner-native/current-table-raster/index.json",
+        "sha256": "6defc2025e02caa7b3da9ca8a890484bbc9dd0d31d7897c41d756c07d16761c5"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-admission-owner-native/current-table-raster/native-evidence.zip",
+        "sha256": "4b4bcf87249ec5f4f3f8a4cd55f94e0ebd94325b305a39b227ef39ce65acf480"
+      },
+      "preserved_bytes": 10789042,
+      "reports": [
+        {
+          "path": "table-raster-62b82533ef4d/result.json",
+          "sha256": "3d38bcf84eba29cf3b6091d2940b6650a018933abac3417f694fcaddeb9193a3",
+          "family": "TABLE-RASTER",
+          "outcome": "pass",
+          "cases": [
+            {
+              "case": "DUPLICATES-isolated",
+              "outcome": "pass"
+            },
+            {
+              "case": "DUPLICATES-session",
+              "outcome": "pass"
+            },
+            {
+              "case": "UNIQUE-isolated",
+              "outcome": "pass"
+            },
+            {
+              "case": "UNIQUE-session",
+              "outcome": "pass"
+            },
+            {
+              "case": "MIXED-isolated",
+              "outcome": "pass"
+            },
+            {
+              "case": "MIXED-session",
+              "outcome": "pass"
+            },
+            {
+              "case": "SCALE-isolated",
+              "outcome": "pass"
+            },
+            {
+              "case": "SCALE-session",
+              "outcome": "pass"
+            },
+            {
+              "case": "LIGHT-isolated",
+              "outcome": "pass"
+            },
+            {
+              "case": "LIGHT-session",
+              "outcome": "pass"
+            },
+            {
+              "case": "DARK-isolated",
+              "outcome": "pass"
+            },
+            {
+              "case": "DARK-session",
+              "outcome": "pass"
+            },
+            {
+              "case": "TRANSPARENT-isolated",
+              "outcome": "pass"
+            },
+            {
+              "case": "TRANSPARENT-session",
+              "outcome": "pass"
+            },
+            {
+              "case": "ROLES-isolated",
+              "outcome": "pass"
+            },
+            {
+              "case": "ROLES-session",
+              "outcome": "pass"
+            },
+            {
+              "case": "BLOCKS-isolated",
+              "outcome": "pass"
+            },
+            {
+              "case": "BLOCKS-session",
+              "outcome": "pass"
+            },
+            {
+              "case": "BUDGET-1500-isolated",
+              "outcome": "pass"
+            },
+            {
+              "case": "BUDGET-1500-session",
+              "outcome": "pass"
+            },
+            {
+              "case": "BUDGET-1499-isolated",
+              "outcome": "pass"
+            },
+            {
+              "case": "BUDGET-1499-session",
+              "outcome": "pass"
+            },
+            {
+              "case": "BUDGET-7000-isolated",
+              "outcome": "pass"
+            },
+            {
+              "case": "BUDGET-7000-session",
+              "outcome": "pass"
+            },
+            {
+              "case": "BUDGET-18000-isolated",
+              "outcome": "pass"
+            },
+            {
+              "case": "BUDGET-18000-session",
+              "outcome": "pass"
+            },
+            {
+              "case": "BLOCK-BUDGET-isolated",
+              "outcome": "pass"
+            },
+            {
+              "case": "BLOCK-BUDGET-session",
+              "outcome": "pass"
+            },
+            {
+              "case": "INVALID-isolated",
+              "outcome": "pass"
+            },
+            {
+              "case": "INVALID-session",
+              "outcome": "pass"
+            },
+            {
+              "case": "CHANGED-isolated",
+              "outcome": "pass"
+            },
+            {
+              "case": "CHANGED-session",
+              "outcome": "pass"
+            }
+          ],
+          "executable_sha256": "f1697a9df0a6bd749789da7c8d5c36615ab96700290dfd0e4d3463bd19d1025b",
+          "cases_sha256": "9afbb338cae7cb5c974eabcd8361ba72f5626517ed00948d70dcf49aba79f5aa"
+        }
+      ]
+    },
+    {
+      "label": "regression-installed-telemetry",
+      "index": {
+        "local_path": "out/evidence/inspector-admission-owner-native/regression-installed-telemetry/index.json",
+        "sha256": "167bd5ab8cc2b72af733a0d77509abe28d1c5fb5491c4c0e98c18990122d25ca"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-admission-owner-native/regression-installed-telemetry/native-evidence.zip",
+        "sha256": "db21b78e123c022a552e9df8e13c7f922a80eee514234c98d29b0679c4a01a88"
+      },
+      "preserved_bytes": 146892596,
+      "reports": [
+        {
+          "path": "telemetry-frontend-e144fef535/result.json",
+          "sha256": "f0f0f16da8ad83f5bc3f22af72095b83305f163d105956c71fa139808d50c604",
+          "family": "INSTALLED-TELEMETRY",
+          "outcome": "pass",
+          "cases": [
+            {
+              "case": "LIVE",
+              "outcome": "pass",
+              "record_sha256": "b2f6866640a2e6c127f7423563ed3cf080e68973eb7aa3e68994b6abe9475c31"
+            },
+            {
+              "case": "NAVIGATION",
+              "outcome": "pass",
+              "record_sha256": "f9320780f38c1b9415cc98cb5b5d0483dee7686e59d7ba21351e10f93366bbe7"
+            },
+            {
+              "case": "REPLACEMENT",
+              "outcome": "pass",
+              "record_sha256": "2725a8423070f6936b78347e20c771261fd26f4530a32c47040f599122c8b504"
+            },
+            {
+              "case": "POLICY",
+              "outcome": "pass",
+              "record_sha256": "c1bb35f782b6f62834512e215529f2d798535d64d73018bd5a76a96399f4a46d"
+            },
+            {
+              "case": "CONFIGURATION-LOSS",
+              "outcome": "pass",
+              "record_sha256": "fb23869cf6e635db98b4a61e6f644c7d0de6d8f71a311bb4f7ca9743ffd8f30e"
+            },
+            {
+              "case": "CLOSE-HELD",
+              "outcome": "pass",
+              "record_sha256": "06d7a2ce1362f4a6504955ac1f85a7f163917716d8a64eb54c7c83a01a22caac"
+            },
+            {
+              "case": "ORACLE",
+              "outcome": "pass",
+              "record_sha256": "753abb7d18893b005ac4cc7b61c87c821a2177aad19e2d20fef91f85ea697b95"
+            }
+          ],
+          "artifacts": {
+            "SysPane.ImageWorker": "65b38c368c9472405163a244c7f1b0ddf2c8702bb5e7945e147cb4a5935e777c",
+            "SysPane.RecoveryWorker": "542b2fcb0aa20f674b98e5039af0e2ca512c43c5325c08cd286a03248a07416b",
+            "syspane": "b6580b98db0e5f179323968b4eb7ce0dc995f658fed4488098bc4d01db1283bc",
+            "syspane_frontend_entry_fixture": "dfccaf3a97a9405bfe0def0448d32414e564d9cf2a000aca355fb4fa442a14de",
+            "syspane_frontend_helper_fixture": "8f31f92ec25fce27488cd545ed888e6cf5f4433eaf3612d39681795fd229a652"
+          },
+          "cases_sha256": "bd439d2c32cb5935648a0e06e129ec87502dc82aa92409ee8403eb6380b6b6b1"
+        }
+      ]
+    },
+    {
+      "label": "regression-scene",
+      "index": {
+        "local_path": "out/evidence/inspector-admission-owner-native/regression-scene/index.json",
+        "sha256": "2fd9e9fe482fc1bbfae6f640ea09bae905dbee09555aa2a6972b0e113faec3e6"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-admission-owner-native/regression-scene/native-evidence.zip",
+        "sha256": "cce1a4cfc26b6170b7f205c85d0b8a8e61254889f75e3c973c0dbac0569ea30d"
+      },
+      "preserved_bytes": 249065,
+      "reports": [
+        {
+          "path": "inspector-74a1a6f08975/result.json",
+          "sha256": "215a699539ae77b796de571171e8aca1b5e2978b942c4ae7b34048c6a6a399ab",
+          "family": "SCENE-INSPECTOR",
+          "outcome": "pass",
+          "cases": [
+            {
+              "case": "scalar",
+              "outcome": "pass",
+              "fault_detected": false,
+              "record_sha256": "874e0829a4c16ae6115188104ce61e2571bbd320a97e79fa2b3a74c3a9a6afc3"
+            },
+            {
+              "case": "table",
+              "outcome": "pass",
+              "fault_detected": false,
+              "record_sha256": "56ac54c154c47e488d33aeddb150a6edf48feaf93f0d42e3b33efb297ebcdc8f"
+            },
+            {
+              "case": "chart",
+              "outcome": "pass",
+              "fault_detected": false,
+              "record_sha256": "1bc1cefa06f71f9e1d5d0f4e84830608eb0ed2d6388082c658f14d2aa8b15540"
+            },
+            {
+              "case": "image",
+              "outcome": "pass",
+              "fault_detected": false,
+              "record_sha256": "de3343ac997faf8a02bfe7c6060e0b3971e7897870ff297d29f9cf8feb3ee90f"
+            },
+            {
+              "case": "translated",
+              "outcome": "pass",
+              "fault_detected": false,
+              "record_sha256": "b36e55da0e96b920787f4157a8a02159bb91214c5ddac5c386d6658e665747a2"
+            },
+            {
+              "case": "retain",
+              "outcome": "pass",
+              "fault_detected": true,
+              "record_sha256": "13bb1d914720b75c03b74cb620b9850ae458e4368f0ed6f0646bf94e1b2e7f9a"
+            },
+            {
+              "case": "wrong-selection",
+              "outcome": "pass",
+              "fault_detected": true,
+              "record_sha256": "a3e7f16967f839c069bdb69c97685d4b0dada55bb10a58bd028d38fd24b7842a"
+            }
+          ],
+          "executable_sha256": "6fb62b715d786fc1d5f848cff712808b8f9cc6ca37ef4c3bd48d30d3e0c60125"
+        }
+      ]
+    },
+    {
+      "label": "regression-table-erasure",
+      "index": {
+        "local_path": "out/evidence/inspector-admission-owner-native/regression-table-erasure/index.json",
+        "sha256": "2e8a5f3ae6846e5aa0c8972172b2c5463f39ac2ff9dea8e4e1fef92668ea80bc"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-admission-owner-native/regression-table-erasure/native-evidence.zip",
+        "sha256": "e93a7709fea7354b86deaf92d16c91e6ee2781992541fa608b1985757c075025"
+      },
+      "preserved_bytes": 54527047,
+      "reports": [
+        {
+          "path": "surface-c7d3c347fe5d/result.json",
+          "sha256": "5942a77715bc5cb1c85b6b5296476bdeb9abd8abea5f9c897c60f48bc92eb4b9",
+          "family": "TABLE-ERASURE",
+          "outcome": "pass",
+          "cases": [
+            {
+              "case": "normal",
+              "outcome": "pass",
+              "record_sha256": "b70682d869178f699a94e8130ae7b50aafdc046964caa890b83484abd4ad515a"
+            },
+            {
+              "case": "ignore-pixels",
+              "outcome": "pass",
+              "record_sha256": "2c463c745763019106c33db07b226fe4acc5fbc2fd973ca5cf11ac6bb2a36291"
+            },
+            {
+              "case": "ignore-accessible",
+              "outcome": "pass",
+              "record_sha256": "a4cdc02eb96f02d2feebcc5765c19cfe7ba63809997f721905aa7394cf7dd86a"
+            }
+          ],
+          "executable_sha256": "f1697a9df0a6bd749789da7c8d5c36615ab96700290dfd0e4d3463bd19d1025b"
+        }
+      ]
+    },
+    {
+      "label": "regression-table-raster",
+      "index": {
+        "local_path": "out/evidence/inspector-admission-owner-native/regression-table-raster/index.json",
+        "sha256": "78f29253193edb2b0d257f052ae9e2fbedd0ef28a5e824ea310f1e079d4139dc"
+      },
+      "archive": {
+        "local_path": "out/evidence/inspector-admission-owner-native/regression-table-raster/native-evidence.zip",
+        "sha256": "63ce9af1a71d5ef81a584edfd59a21f86705216d6773267e96e179637bafff02"
+      },
+      "preserved_bytes": 10789042,
+      "reports": [
+        {
+          "path": "table-raster-59f8ebb0b5ac/result.json",
+          "sha256": "3d38bcf84eba29cf3b6091d2940b6650a018933abac3417f694fcaddeb9193a3",
+          "family": "TABLE-RASTER",
+          "outcome": "pass",
+          "cases": [
+            {
+              "case": "DUPLICATES-isolated",
+              "outcome": "pass"
+            },
+            {
+              "case": "DUPLICATES-session",
+              "outcome": "pass"
+            },
+            {
+              "case": "UNIQUE-isolated",
+              "outcome": "pass"
+            },
+            {
+              "case": "UNIQUE-session",
+              "outcome": "pass"
+            },
+            {
+              "case": "MIXED-isolated",
+              "outcome": "pass"
+            },
+            {
+              "case": "MIXED-session",
+              "outcome": "pass"
+            },
+            {
+              "case": "SCALE-isolated",
+              "outcome": "pass"
+            },
+            {
+              "case": "SCALE-session",
+              "outcome": "pass"
+            },
+            {
+              "case": "LIGHT-isolated",
+              "outcome": "pass"
+            },
+            {
+              "case": "LIGHT-session",
+              "outcome": "pass"
+            },
+            {
+              "case": "DARK-isolated",
+              "outcome": "pass"
+            },
+            {
+              "case": "DARK-session",
+              "outcome": "pass"
+            },
+            {
+              "case": "TRANSPARENT-isolated",
+              "outcome": "pass"
+            },
+            {
+              "case": "TRANSPARENT-session",
+              "outcome": "pass"
+            },
+            {
+              "case": "ROLES-isolated",
+              "outcome": "pass"
+            },
+            {
+              "case": "ROLES-session",
+              "outcome": "pass"
+            },
+            {
+              "case": "BLOCKS-isolated",
+              "outcome": "pass"
+            },
+            {
+              "case": "BLOCKS-session",
+              "outcome": "pass"
+            },
+            {
+              "case": "BUDGET-1500-isolated",
+              "outcome": "pass"
+            },
+            {
+              "case": "BUDGET-1500-session",
+              "outcome": "pass"
+            },
+            {
+              "case": "BUDGET-1499-isolated",
+              "outcome": "pass"
+            },
+            {
+              "case": "BUDGET-1499-session",
+              "outcome": "pass"
+            },
+            {
+              "case": "BUDGET-7000-isolated",
+              "outcome": "pass"
+            },
+            {
+              "case": "BUDGET-7000-session",
+              "outcome": "pass"
+            },
+            {
+              "case": "BUDGET-18000-isolated",
+              "outcome": "pass"
+            },
+            {
+              "case": "BUDGET-18000-session",
+              "outcome": "pass"
+            },
+            {
+              "case": "BLOCK-BUDGET-isolated",
+              "outcome": "pass"
+            },
+            {
+              "case": "BLOCK-BUDGET-session",
+              "outcome": "pass"
+            },
+            {
+              "case": "INVALID-isolated",
+              "outcome": "pass"
+            },
+            {
+              "case": "INVALID-session",
+              "outcome": "pass"
+            },
+            {
+              "case": "CHANGED-isolated",
+              "outcome": "pass"
+            },
+            {
+              "case": "CHANGED-session",
+              "outcome": "pass"
+            }
+          ],
+          "executable_sha256": "f1697a9df0a6bd749789da7c8d5c36615ab96700290dfd0e4d3463bd19d1025b",
+          "cases_sha256": "9afbb338cae7cb5c974eabcd8361ba72f5626517ed00948d70dcf49aba79f5aa"
+        }
+      ]
+    }
+  ],
+  "unchanged_oracles": [
+    {
+      "local_path": "tests/scene/inspector-delivery-cases.json",
+      "sha256": "9ab6bff8d12ada77244af6ae421c83b20af329e81613ce0d3bb4b480d082dcda"
+    },
+    {
+      "local_path": "tests/scene/inspector_delivery_tests.hpp",
+      "sha256": "a69172beb8ace1b2ff8ba025d18b8478fac4415371d2b7ad99c74cef0f905408"
+    },
+    {
+      "local_path": "tests/scene/inspector_delivery_chart_tests.hpp",
+      "sha256": "e00b7e247af5221c34efff8f34f240fff1909dfefd340479225dc6158313bec9"
+    },
+    {
+      "local_path": "tests/scene/inspector_phase_tests.hpp",
+      "sha256": "719ef44f6d53a9394e3c0a40ce7b0deb1ef1c47d8d2c8b883542b82874eab5a4"
+    },
+    {
+      "local_path": "tests/scene/native_inspector.py",
+      "sha256": "f3ac3123505dbb6ab2fe1a6ca42749642d90938915722c8b3ee9ddb86f7f4dd3"
+    },
+    {
+      "local_path": "tests/configuration/native_installed_telemetry.py",
+      "sha256": "a4ac3b22b7c0f3e1b8579e5d4c5d4e73ae1faf5259c2883562c7f3d47cfb2af6"
+    },
+    {
+      "local_path": "tests/configuration/installed-telemetry-cases.json",
+      "sha256": "bd439d2c32cb5935648a0e06e129ec87502dc82aa92409ee8403eb6380b6b6b1"
+    },
+    {
+      "local_path": "tests/scene/table-raster-cases.json",
+      "sha256": "9afbb338cae7cb5c974eabcd8361ba72f5626517ed00948d70dcf49aba79f5aa"
+    },
+    {
+      "local_path": "tests/scene/table-raster-expectations.json",
+      "sha256": "b6d6cd7b022f4fd812b7989b2689f2278ff6aded4698287aea17fbbd5495bcd1"
+    }
+  ],
+  "qualification": {
+    "native_owner_probe": "pass on main and fresh worker owners; eleven invalid delivery scenarios and seven fixed chart scenarios per owner, scalar lease/age, profile/reset, cross-thread and reentrant refusal including profile-triggered closure",
+    "shared_linux_checks": 146,
+    "native_inspector_cases": 7,
+    "installed_telemetry_cases": 7,
+    "frozen_raster_case_modes": 32,
+    "table_erasure": "pass",
+    "gui_maximum_timing": "unqualified; asynchronous rendering not enabled",
+    "other_profiles": "Linux-only private inspector implementation changes. Earlier Windows and historical checks remain bound to their sources; no new execution claim."
+  },
+  "review_refinement": "Guard profile-triggered surface closure against recursive admission as well as ordinary admission. Add the closure assertion, rebuild, and repeat affected checks. Preserve the first passing candidate with its different source inputs; no oracle correction or measured product failure is asserted for this review finding.",
+  "preserved_timing_failures": {
+    "checkpoint": {
+      "local_path": "spec/delivery/checkpoints/table-raster-reuse.json",
+      "sha256": "eae242615f122bd7eb82c0c0b8444f337a08cd24fb2ddf36940189655f884f23"
+    },
+    "ordinary_work_us": 110318,
+    "phase_work_us": 159557,
+    "earlier_ordinary_work_us": 102502,
+    "source_scope": "Preceding recorded candidates, not maximum-GUI tests run on this ownership prerequisite."
+  },
+  "remaining": [
+    "Close bounded in-flight/pending/completed renderer job ownership and exact current profile/policy/resource/topology and native-clock adoption.",
+    "Implement background admission/painting with immediate GUI erasure, truthful cancellation, image drainage and independent shutdown/supervision.",
+    "Run unchanged ordinary/phase maximum tables, maximum GTK chart/mixed and real installed histories.",
+    "Human accessibility/long-text, physical hotplug, desktop/lifecycle and all five full 0.1.0 editions."
+  ],
+  "specification_checks": {
+    "commands": [
+      {
+        "step": "budget",
+        "command": [
+          "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+          "-X",
+          "utf8",
+          "source/build/check_workspace_budget.py",
+          "--action",
+          "test"
+        ],
+        "environment": {
+          "TMP": "D:\\Projects\\SysPane\\syspane\\out\\test-tmp\\inspector-admission-owner",
+          "TEMP": "D:\\Projects\\SysPane\\syspane\\out\\test-tmp\\inspector-admission-owner",
+          "GIT_CEILING_DIRECTORIES": "D:/Projects/SysPane/syspane/out/test-tmp/inspector-admission-owner"
+        },
+        "started_at": "2026-10-11T15:02:11.832836+00:00",
+        "finished_at": "2026-10-11T15:02:14.093260+00:00",
+        "exit": 0,
+        "stdout_sha256": "828bbb2bd46de19712c61b7388f18a71cdf8b226e6d43047316ae43ba4fd6c85",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "step": "generate",
+        "command": [
+          "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+          "-X",
+          "utf8",
+          "spec/tools/specctl.py",
+          "generate"
+        ],
+        "environment": {
+          "TMP": "D:\\Projects\\SysPane\\syspane\\out\\test-tmp\\inspector-admission-owner",
+          "TEMP": "D:\\Projects\\SysPane\\syspane\\out\\test-tmp\\inspector-admission-owner",
+          "GIT_CEILING_DIRECTORIES": "D:/Projects/SysPane/syspane/out/test-tmp/inspector-admission-owner"
+        },
+        "started_at": "2026-10-11T15:02:14.093951+00:00",
+        "finished_at": "2026-10-11T15:02:14.352293+00:00",
+        "exit": 0,
+        "stdout_sha256": "433bc9cf0ed9aecb0fd853cd594a7f65c16c5c44afa00c08968558a32d5656c9",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "step": "validate",
+        "command": [
+          "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+          "-X",
+          "utf8",
+          "spec/tools/specctl.py",
+          "validate",
+          "--schemas"
+        ],
+        "environment": {
+          "TMP": "D:\\Projects\\SysPane\\syspane\\out\\test-tmp\\inspector-admission-owner",
+          "TEMP": "D:\\Projects\\SysPane\\syspane\\out\\test-tmp\\inspector-admission-owner",
+          "GIT_CEILING_DIRECTORIES": "D:/Projects/SysPane/syspane/out/test-tmp/inspector-admission-owner"
+        },
+        "started_at": "2026-10-11T15:02:14.352550+00:00",
+        "finished_at": "2026-10-11T15:02:16.391768+00:00",
+        "exit": 0,
+        "stdout_sha256": "f289cd58be9de5186ddd5c214cbade89b7b852e1ab52b53ad6a30af708fd4cab",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "step": "tools",
+        "command": [
+          "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+          "-X",
+          "utf8",
+          "spec/tools/tests/test_specctl.py",
+          "-v"
+        ],
+        "environment": {
+          "TMP": "D:\\Projects\\SysPane\\syspane\\out\\test-tmp\\inspector-admission-owner",
+          "TEMP": "D:\\Projects\\SysPane\\syspane\\out\\test-tmp\\inspector-admission-owner",
+          "GIT_CEILING_DIRECTORIES": "D:/Projects/SysPane/syspane/out/test-tmp/inspector-admission-owner"
+        },
+        "started_at": "2026-10-11T15:02:16.392077+00:00",
+        "finished_at": "2026-10-11T15:03:35.567703+00:00",
+        "exit": 0,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "d533a4b09f0f5bb48a79c07ada5e032c6750028b2e969eae603eed5a62df67c3"
+      }
+    ],
+    "schemas": 51,
+    "fixtures": 183,
+    "tools": {
+      "total": 62,
+      "passed": 60,
+      "skipped": 2
+    },
+    "skip_reason": "Existing Windows symlink privilege restrictions",
+    "logs": [
+      {
+        "local_path": "out/evidence/inspector-admission-owner/spec-checks/budget.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "local_path": "out/evidence/inspector-admission-owner/spec-checks/budget.stdout",
+        "sha256": "828bbb2bd46de19712c61b7388f18a71cdf8b226e6d43047316ae43ba4fd6c85"
+      },
+      {
+        "local_path": "out/evidence/inspector-admission-owner/spec-checks/generate.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "local_path": "out/evidence/inspector-admission-owner/spec-checks/generate.stdout",
+        "sha256": "433bc9cf0ed9aecb0fd853cd594a7f65c16c5c44afa00c08968558a32d5656c9"
+      },
+      {
+        "local_path": "out/evidence/inspector-admission-owner/spec-checks/result.json",
+        "sha256": "6449fce2fb39d8fa7218e218ecac1b094d860033468c62ffcf1072dc23f62d48"
+      },
+      {
+        "local_path": "out/evidence/inspector-admission-owner/spec-checks/tools.stderr",
+        "sha256": "d533a4b09f0f5bb48a79c07ada5e032c6750028b2e969eae603eed5a62df67c3"
+      },
+      {
+        "local_path": "out/evidence/inspector-admission-owner/spec-checks/tools.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "local_path": "out/evidence/inspector-admission-owner/spec-checks/validate.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "local_path": "out/evidence/inspector-admission-owner/spec-checks/validate.stdout",
+        "sha256": "f289cd58be9de5186ddd5c214cbade89b7b852e1ab52b53ad6a30af708fd4cab"
+      }
+    ]
+  }
+}
