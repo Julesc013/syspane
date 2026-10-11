@@ -120,6 +120,13 @@ Record IDs and retired lifetime IDs remain reserved for the store's epoch. No
 silent eviction/reuse occurs when the bounded store fills. A fresh epoch requires
 explicit consumer resynchronization and cannot be an automatic capacity workaround.
 
+The separately negotiated [continuous replay package](packages/w-07-continuous-replay.md)
+adds canonical monotonic sample identities with permanent watermarks and bounded
+original-payload replay. Its selection is explicit; the original epoch-reserved
+mode above remains the default. Tombstones, time reservations and all original
+payload ceilings remain applicable. Qualification must preserve the publication-129
+failure that exposed this unfinished W-07 boundary.
+
 The initial limits are 8,192 entities, 16,384 relationships, 1,024 sources,
 65,536 observations, 8,192 retired identities and 128 replay records. A candidate's
 accounted storage is at most 8 MiB, and retained original replay candidates at most

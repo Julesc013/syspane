@@ -12,12 +12,23 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-10T06:41:07.406106+00:00", "scope": "Inspector attribution and exact validated theme reuse"}
+updated: {"by": "codex", "at": "2026-10-11T13:50:34.595552+00:00", "scope": "Continuous replay and exact chart/mixed frame boundaries"}
 ---
 
 # Current state and next admitted boundary
 
-The [validated-theme checkpoint](validated-theme-handoff.md) passes all seven
+The [continuous replay checkpoint](continuous-replay-handoff.md) closes the
+publication-129 dependency with an explicitly negotiated bounded replay policy.
+All three development profiles pass 146 shared checks; 44 exact chart/mixed
+receiver/frame/projector cases and 130 actual one-second native publications pass
+with original resource limits. The unchanged maximum-table regression fails
+TRUNCATION at 102.502 ms; a later phase diagnostic passes but does not replace that
+failure. Preserve legacy exhaustion, recovery/observer failures and both table
+attempts. Investigate table timing, then continue maximum native GTK and
+installed-history responsiveness, human accessibility and desktop/lifecycle
+composition. All five complete native release editions remain open.
+
+The earlier [validated-theme checkpoint](validated-theme-handoff.md) passed all seven
 unchanged maximum live-table cases in ordinary and complete phase runs after
 reusing exact immutable theme validation within one composition. GUI work peaks
 at 73.467/77.783 ms and policy erasure at 84.045/97.474 ms. The earlier failures

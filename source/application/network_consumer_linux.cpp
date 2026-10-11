@@ -11,7 +11,7 @@ void need(bool ok,const char* code){if(!ok)throw p::Error(code);}
 p::Handshake offer(){
     p::Handshake h;h.role="console";h.epoch="consumer:network";
     for(const char* document:{"telemetry","snapshot","observation"})h.documents.emplace(document,"0.2.0");
-    h.required={"telemetry.snapshot","telemetry.measured-time"};return h;
+    h.required={"telemetry.snapshot","telemetry.measured-time","telemetry.monotonic-replay"};return h;
 }
 p::Json hello(const p::Handshake& h){
     p::Json docs=p::Json::array();for(const auto& pair:h.documents)docs.push_back({{"document",pair.first},{"version",pair.second}});

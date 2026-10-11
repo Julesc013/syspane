@@ -38,12 +38,13 @@ int main(int argc,char** argv){
             while(!done){if(close_requested()||os::monotonic_ms()-started>12000)wanted=false;std::this_thread::sleep_for(std::chrono::milliseconds(1));}
             worker.join();return failed?1:0;
         }
-        if(argc!=3)return 2;
+        const bool continuous=argc==4&&std::string(argv[3])=="--continuous";
+        if(argc!=3&&!continuous)return 2;
         auto installation=std::make_shared<os::LinuxInstallation>(os::built_helper_bundle_expectation());
         a::LinuxProfileSupervisor supervisor(installation,argv[1],{},false,static_cast<std::uint64_t>(::getpid()),a::LocalService::network);
         const auto started=os::monotonic_ms();
         for(;;){
-            if(close_requested()||done||os::monotonic_ms()-started>15000){wanted=false;supervisor.close();}
+            if(close_requested()||done||os::monotonic_ms()-started>(continuous?160000U:15000U)){wanted=false;supervisor.close();}
             const auto state=supervisor.poll();
             for(const auto& e:supervisor.take()){
                 emit({{"event",e.kind},{"pid",e.view.process},{"epoch",e.view.epoch},{"exit",e.view.last_exit?p::Json(e.view.last_exit->code):p::Json()}});

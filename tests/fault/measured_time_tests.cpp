@@ -195,12 +195,48 @@ void session(const std::string& root) {
         CHECK(p::decode_telemetry(*payload,b).body["schema_version"]=="0.2.0");
     }
 }
+void continuous(const std::string& root) {
+    auto b=binding();b.negotiated.features.insert("telemetry.monotonic-replay");
+    r::DataView view(authority(),policy(),"desktop","operational",metrics());auto token=attach(view,0,b);
+    const auto message=[&](unsigned seq,unsigned generation){const auto id="sample:"+std::to_string(seq);auto v=full(root,id.c_str(),generation,generation);v["connection_id"]=b.connection;return v;};
+    for(unsigned i=1;i<=200;++i)CHECK(view.receive(token,7,message(i,i).dump(),i,tick(i)).code==D::accepted);
+    auto incompatible=b;incompatible.negotiated.features.erase("telemetry.monotonic-replay");
+    CHECK(view.attach_wire(incompatible,201).code==D::invalid);
+    CHECK(view.heartbeat(token,7,1,202)==D::accepted);
+    b.connection="connection:2";token=attach(view,203,b);
+    CHECK(view.receive(token,7,message(201,201).dump(),204,tick(201)).code==D::accepted);
+    const auto expired=view.receive(token,7,message(1,1).dump(),205,tick(201));
+    CHECK(expired.code==D::invalid&&expired.validation==m::Code::replay_expired);
+    CHECK(view.status(206).payload_available&&view.status(206).snapshot_required);
+    CHECK(view.receive(token,7,message(202,202).dump(),207,tick(202)).code==D::accepted);
+    for(const char* id:{"R1","sample:0","sample:01","sample:18446744073709551616"}){
+        auto invalid=message(203,203);invalid["body"]["record_id"]=id;bool rejected=false;
+        try{p::decode_telemetry(invalid.dump(),b);}catch(const p::Error&){rejected=true;}CHECK(rejected);
+    }
+    auto delta=message(203,203);delta["type"]="delta";delta["body"]["base_generation"]="202";bool rejected=false;
+    try{p::decode_telemetry(delta.dump(),b);}catch(const p::Error&){rejected=true;}CHECK(rejected);
+    auto old=b;old.document_version="0.1.0";old.clock_id.clear();old.clock_scope.clear();rejected=false;
+    try{p::validate_telemetry_binding(old);}catch(const p::Error&){rejected=true;}CHECK(rejected);
+    for(bool offered:{false,true}){
+        c::TelemetrySource source{"producer:1","desktop","operational"};source.document_version="0.2.0";source.clock_id=b.clock_id;source.clock_scope=b.clock_scope;source.monotonic_replay=offered;
+        c::Sessions sessions(b.epoch,0,policy(),source);sessions.open("connection:1","principal",authority(),0);
+        Json docs=Json::array();for(const auto& pair:b.negotiated.documents)docs.push_back({{"document",pair.first},{"version",pair.second}});
+        Json hello={{"type","hello"},{"body",{{"wire_major",0},{"wire_minor",1},{"role","desktop"},{"producer_epoch","client"},{"max_frame_bytes",p::frame_limit},
+            {"document_versions",docs},{"required_features",{"telemetry.snapshot","telemetry.measured-time","telemetry.monotonic-replay"}},{"optional_features",Json::array()}}}};
+        sessions.receive("connection:1",hello.dump(),1);
+        if(!offered){CHECK(sessions.closed("connection:1"));continue;}
+        CHECK(p::decode(*sessions.pop("connection:1",2)).body["optional_features"].size()==3);
+        sessions.receive("connection:1",fixture(root,"telemetry-subscribe-v0.2").dump(),3);const auto sub=sessions.subscription("connection:1");CHECK(sub&&sub->binding.negotiated.features.count("telemetry.monotonic-replay"));
+        CHECK(sessions.offer("connection:1",sub->ticket,"sample:1",full(root)["body"]["snapshot"],{},4));
+        auto selected=b;selected.connection="connection:1";CHECK(p::decode_telemetry(*sessions.pop("connection:1",5),selected).body["record_id"]=="sample:1");
+    }
+}
 int main(int argc,char** argv) {
     try {
         CHECK(argc==3); const std::string name=argv[1],root=argv[2];
         if (name=="MEASURED-CODEC") codec(root); else if (name=="MEASURED-AGE") age(root);
         else if (name=="MEASURED-REPLAY") replay(root); else if (name=="MEASURED-LIFETIME") lifetime(root);
-        else if (name=="MEASURED-SESSION") session(root); else CHECK(false);
+        else if (name=="MEASURED-SESSION") session(root); else if(name=="MEASURED-CONTINUOUS")continuous(root);else CHECK(false);
         std::cout<<name<<": pass\n"; return 0;
     } catch (const std::exception& error) { std::cerr<<error.what()<<'\n'; return 1; }
 }

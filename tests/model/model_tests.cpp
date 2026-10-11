@@ -193,6 +193,7 @@ void freshness01() {
     o.acquisition = Acquisition::failed;
     CHECK(freshness_at(o, {"E1", 1000000000}, {}) == Freshness::stale);
 }
+#include "replay_window_tests.hpp"
 } // namespace
 
 int main(int argc, char** argv) {
@@ -200,7 +201,9 @@ int main(int argc, char** argv) {
         {"STATE-01", state01}, {"STATE-02", state02}, {"STATE-03", state03}, {"STATE-04", state04}, {"STATE-05", state05},
         {"VALIDITY-01", validity01}, {"VALIDITY-02", validity02}, {"CLOCK-01", clock01}, {"CLOCK-02", clock02},
         {"BOUNDS-01", bounds01}, {"BOUNDS-02", bounds02}, {"BOUNDS-03", bounds03},
-        {"OBSERVATION-01", observation01}, {"EPOCH-01", epoch01}, {"FRESHNESS-01", freshness01}
+        {"OBSERVATION-01", observation01}, {"EPOCH-01", epoch01}, {"FRESHNESS-01", freshness01},
+        {"REPLAY-01",replay01},{"REPLAY-02",replay02},{"REPLAY-03",replay03},
+        {"REPLAY-04",replay04},{"REPLAY-05",replay05},{"REPLAY-06",replay06}
     };
     if (argc != 2) { std::cerr << "one case ID required\n"; return 2; }
     for (const auto& test : cases) if (test.first == std::string(argv[1])) {

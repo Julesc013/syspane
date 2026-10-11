@@ -27,7 +27,7 @@ def route_sockets(pid):
     return [row for row in (dict(zip(columns,line.split())) for line in rows[1:]) if row['Inode'] in sockets and row['Eth']=='0' and int(row['Groups'],16)&1]
 
 def verify_documents(process,before,after,lower,upper,mode):
-    imported=events(process,'imported');expected={'live':2,'failure':3,'replay':3,'hang':3,'crash':3,'unsubscribe':1,'revoke':1,'parent-loss':1}[mode]
+    imported=events(process,'imported');expected={'live':2,'continuous':130,'failure':3,'replay':3,'hang':3,'crash':3,'unsubscribe':1,'revoke':1,'parent-loss':1}[mode]
     assert len(imported)==expected,'publication count'
     assert set(before)==set(after) and before,'stable independent inventory'
     previous={};bodies=[];row_count=0

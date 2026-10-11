@@ -13,6 +13,7 @@ struct TelemetrySource {
     std::string producer, channel, classification;
     std::uint64_t ticket_limit = std::numeric_limits<std::uint64_t>::max();
     std::string document_version = "0.1.0", clock_id = {}, clock_scope = {};
+    bool monotonic_replay=false;
 };
 using InventorySource = TelemetrySource;
 struct Subscription {

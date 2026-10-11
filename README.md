@@ -11,7 +11,14 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
-The [validated-theme checkpoint](spec/delivery/validated-theme-handoff.md) passes
+The [continuous replay checkpoint](spec/delivery/continuous-replay-handoff.md)
+closes the 128-publication foundation limit through explicit negotiation and
+permanent sequence reservations. Forty-four exact chart/mixed frame cases pass;
+130 actual one-second native publications pass under one epoch. The current
+maximum-table regression fails its fixed GUI timing limit; maximum native
+inspector responsiveness and all complete editions remain open.
+
+The earlier [validated-theme checkpoint](spec/delivery/validated-theme-handoff.md) passed
 all seven maximum live-table cases after measured composition repairs, preserving
 the earlier timing failures. Chart/mixed workloads, human usability and complete
 native editions remain unfinished.

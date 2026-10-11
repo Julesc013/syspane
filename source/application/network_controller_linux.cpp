@@ -82,6 +82,7 @@ int run_network_controller(std::uint64_t parent,std::function<c::Policy()> polic
                     check_policy();const auto clock=client->measurement_clock();
                     c::TelemetrySource source{"producer:network","inspector","operational"};
                     source.document_version="0.2.0";source.clock_id=clock.clock_id;source.clock_scope=clock.local_scope;
+                    source.monotonic_replay=true;
                     n::DemandSource catalog{"network","collection.network",1000,2500,"",{}};n::DemandRequest request;request.channel="inspector";
                     for(const auto& metric:n::network_metrics()){catalog.fields.push_back({metric.field,"operational"});request.selections.push_back({metric.field,{}});}
                     sessions=std::make_unique<n::DemandSessions>(startup.epoch,0,baseline,source,std::vector<n::DemandSource>{catalog},n::DemandLimits{32,64,1});
@@ -100,7 +101,7 @@ int run_network_controller(std::uint64_t parent,std::function<c::Policy()> polic
                     need(message.type=="hello"||message.type=="heartbeat"||message.type=="subscribe"||message.type=="unsubscribe"||message.type=="shutdown","network.direction");
                     if(message.type=="hello"){
                         const auto offer=p::handshake(message.body);
-                        const std::set<std::string> features={"telemetry.snapshot","telemetry.measured-time"};
+                        const std::set<std::string> features={"telemetry.snapshot","telemetry.measured-time","telemetry.monotonic-replay"};
                         for(const auto& feature:offer.required)need(features.count(feature),"network.feature");
                         for(const auto& feature:offer.optional)need(features.count(feature),"network.feature");
                     }
@@ -128,7 +129,8 @@ int run_network_controller(std::uint64_t parent,std::function<c::Policy()> polic
                             need(publication<std::numeric_limits<std::uint64_t>::max(),"network.publication");
                             const auto doc=n::network_document(*state->sample(),publication+1,sampled_utc,completed.sampled_utc,state->current());
                             check_policy();
-                            need(sessions->offer("C",subscription->ticket,"network:"+std::to_string(publication+1),doc,{},os::monotonic_ms()),"network.offer");++publication;
+                            const auto prefix=subscription->binding.negotiated.features.count("telemetry.monotonic-replay")?"sample:":"network:";
+                            need(sessions->offer("C",subscription->ticket,prefix+std::to_string(publication+1),doc,{},os::monotonic_ms()),"network.offer");++publication;
                         }
                     }
                 }

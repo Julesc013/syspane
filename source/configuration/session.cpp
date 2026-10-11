@@ -22,6 +22,10 @@ protocol::Handshake server_hello(const std::string& epoch, const std::optional<I
         hello.documents.insert({{"telemetry",version},{"snapshot",version},{"observation",version}});
         hello.optional.insert("telemetry.snapshot");
         if (version=="0.2.0") hello.optional.insert("telemetry.measured-time");
+        if(source->monotonic_replay){
+            if(version!="0.2.0")throw protocol::Error("telemetry.feature");
+            hello.optional.insert("telemetry.monotonic-replay");
+        }
     }
     return hello;
 }
@@ -171,8 +175,12 @@ void Sessions::dispatch(Connection& c, const protocol::Message& message, std::ui
         if (!c.selection.documents.count({"telemetry",version}) || !c.selection.documents.count({"snapshot",version}) ||
             !c.selection.documents.count({"observation",version}) ||
             (version=="0.2.0" && !c.selection.features.count("telemetry.measured-time"))) {
-            if (client.required.count("telemetry.snapshot") || client.required.count("telemetry.measured-time")) throw Error("handshake.document_version");
-            c.selection.features.erase("telemetry.snapshot"); c.selection.features.erase("telemetry.measured-time");
+            if (client.required.count("telemetry.snapshot") || client.required.count("telemetry.measured-time")||client.required.count("telemetry.monotonic-replay")) throw Error("handshake.document_version");
+            c.selection.features.erase("telemetry.snapshot"); c.selection.features.erase("telemetry.measured-time");c.selection.features.erase("telemetry.monotonic-replay");
+        }
+        if(c.selection.features.count("telemetry.monotonic-replay")&&(version!="0.2.0"||!c.selection.features.count("telemetry.snapshot"))){
+            if(client.required.count("telemetry.monotonic-replay"))throw Error("handshake.document_version");
+            c.selection.features.erase("telemetry.monotonic-replay");
         }
         c.negotiated = true;
         queue(c, "welcome", welcome(epoch_, c.selection));

@@ -143,6 +143,11 @@ Message checked(std::string_view payload, const TelemetryBinding& b) {
     if (subscribe) need(body["channel"] == b.channel && body["classification"] == b.classification, "telemetry.binding");
     if (full || delta) {
         (void)id(body["record_id"]); snapshot(body["snapshot"], b);
+        if(b.negotiated.features.count("telemetry.monotonic-replay")){
+            need(full,"telemetry.monotonic_snapshot");const auto& record=body["record_id"].get_ref<const std::string&>();
+            need(record.compare(0,7,"sample:")==0,"telemetry.record");const auto suffix=record.substr(7);const auto sequence=decimal(suffix);
+            need(sequence&&*sequence&&std::to_string(*sequence)==suffix,"telemetry.record");
+        }
         if (delta) need(number(body["base_generation"]) < number(body["snapshot"]["generation"]), "telemetry.generation");
     }
     return message;
@@ -151,6 +156,7 @@ Message checked(std::string_view payload, const TelemetryBinding& b) {
 void validate_telemetry_binding(const TelemetryBinding& b) {
     need(b.negotiated.max_frame_bytes >= 1024 && b.negotiated.max_frame_bytes <= frame_limit, "telemetry.capacity");
     need(b.document_version == "0.1.0" || b.document_version == "0.2.0", "telemetry.feature");
+    if(b.negotiated.features.count("telemetry.monotonic-replay"))need(b.document_version=="0.2.0","telemetry.feature");
     need(b.negotiated.features.count("telemetry.snapshot") && b.negotiated.documents.count({"telemetry",b.document_version}) &&
          b.negotiated.documents.count({"snapshot",b.document_version}) && b.negotiated.documents.count({"observation",b.document_version}), "telemetry.feature");
     if (b.document_version == "0.2.0") need(b.negotiated.features.count("telemetry.measured-time") &&

@@ -1,10 +1,11 @@
 # Foundation development profiles
 
-Current revisions are Windows x64 44, Linux x64 76 and historical x86 35. The
-[installed inspector package](../../../spec/delivery/packages/w-11-installed-inspector.md)
-connects saved-scene inspection to the common Linux frontend and its verified image
-worker. All profiles pass 83 selected scene/component checks; authenticated live
-telemetry and complete release qualification remain required.
+Current revisions are Windows x64 45, Linux x64 79 and historical x86 36. The
+[continuous replay package](../../../spec/delivery/packages/w-07-continuous-replay.md)
+adds explicit measured-state replay admission while preserving the legacy mode.
+All profiles pass 146 selected shared checks; historical import audits remain
+required. Native chart/frame and service evidence is Linux-specific; all five
+complete release editions and maximum installed inspector responsiveness remain open.
 
 Earlier revisions were Windows x64 44, Linux x64 75 and historical x86 35. The
 [ordinary recovery package](../../../spec/delivery/packages/w-11-production-recovery.md)

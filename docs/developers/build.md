@@ -1,5 +1,26 @@
 # Developer setup and checks
 
+The [continuous replay package](../../spec/delivery/packages/w-07-continuous-replay.md)
+admits an explicit measured-telemetry feature, preserving the default replay mode.
+After workspace preflight and ordinary configure/build, run:
+
+```sh
+ctest --preset <profile> -R '^(model|measured|data|telemetry|session|demand|delivery)[.]' --output-on-failure
+ctest --preset linux-x64-gcc13 -R '^native[.]CHART-FRAME-LIMITS$' --output-on-failure
+ctest --preset linux-x64-gcc13 -R '^native[.]CONTINUOUS-NETWORK$' --output-on-failure
+```
+
+Run native families separately and archive each completed owned evidence directory
+before the next reservation. CONTINUOUS-NETWORK observes exactly 130 actual
+one-second publications in one epoch and retains its 180-second CTest bound.
+CHART-FRAME-LIMITS uses three independent owners per chart/mixed scene and controlled
+qualified clocks; it checks 44 exact frame/projector outcomes within the unchanged
+390-second family bound. It does not qualify maximum native GTK or installed GUI
+responsiveness. Keep the original native consumer/service, inspector, rendering,
+erasure, installed telemetry/table and GUI regression families. See the
+[handoff](../../spec/delivery/continuous-replay-handoff.md) for source-bound evidence
+and the preserved stimulus/observer corrections.
+
 The [validated-theme package](../../spec/delivery/packages/w-11-validated-theme.md)
 reuses exact theme validation within a single composition. After ordinary workspace
 preflight/configure/build, check shared typography on every development profile:

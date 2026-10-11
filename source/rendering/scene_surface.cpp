@@ -109,6 +109,7 @@ struct SceneSurface::Impl {
     std::function<bool()> clear;std::unique_ptr<SurfaceFrame> frame;SurfaceStatus status;
     std::optional<std::uint64_t> highest,last_time;bool busy=false,closed=false;
     std::map<std::string,History> histories;std::unique_ptr<SceneImages> images;
+    std::string retry_reason; // Public failure code only; no frame or history survives.
     void owner()const{if(busy)throw std::logic_error("surface.reentrant");}
     bool erase(){
         frame.reset();status.widgets=status.pixels=0;
@@ -126,6 +127,7 @@ struct SceneSurface::Impl {
         return true;}
     Entry& entry(const std::string& id){for(auto& e:entries)if(e.declaration.producer==id)return e;throw Error("surface.producer");}
     bool charted()const{for(const auto& w:config.authored.scene["widgets"])if(w["kind"]=="chart"&&w.contains("content"))return true;return false;}
+    bool has_images()const{for(const auto& w:config.authored.scene["widgets"])if(w["kind"]=="image")return true;return false;}
     bool allowed()const{return policy.available&&!policy.denied_capabilities.count("telemetry.subscribe")&&
         c::permits(authority,policy,channel,"operational")&&c::permits(authority,policy,"accessibility","operational")&&
         (!charted()||c::permits(authority,policy,"history","operational"));}
@@ -259,7 +261,8 @@ r::DataAttachment SceneSurface::attach(const std::string& producer,const protoco
 }
 r::DataResult SceneSurface::receive(const std::string& producer,std::uint64_t token,std::uint64_t revision,std::string_view bytes,std::uint64_t now,const m::Tick& tick,const std::map<std::string,m::Tick>& other_ticks){
     auto& i=*impl_;if(!i.start(now))return {r::DataCode::closed};const auto result=i.entry(producer).view->receive(token,revision,bytes,now,tick);
-    if(result.code==r::DataCode::accepted||result.code==r::DataCode::duplicate){auto ticks=other_ticks;ticks[producer]=tick;i.feed(producer,now,ticks);}
+    if(result.code==r::DataCode::accepted)i.retry_reason.clear();
+    if(result.code==r::DataCode::accepted||(result.code==r::DataCode::duplicate&&i.retry_reason.empty())){auto ticks=other_ticks;ticks[producer]=tick;i.feed(producer,now,ticks);}
     else if(result.code==r::DataCode::clock_fault)i.discontinuity(producer,true,s::ChartCode::clock_fault);
     else if(result.code!=r::DataCode::stale_attachment&&result.code!=r::DataCode::policy_changed)i.discontinuity(producer,false);
     return result;
@@ -270,13 +273,13 @@ r::DataCode SceneSurface::heartbeat(const std::string& producer,std::uint64_t to
 r::DataCode SceneSurface::gap(const std::string& producer,std::uint64_t token,std::uint64_t revision,std::uint64_t now){auto& i=*impl_;if(!i.start(now))return r::DataCode::closed;const auto code=i.entry(producer).view->gap(token,revision,now);if(code==r::DataCode::accepted)i.discontinuity(producer,false);return code;}
 r::DataCode SceneSurface::disconnect(const std::string& producer,std::uint64_t token,std::uint64_t revision,std::uint64_t now){auto& i=*impl_;if(!i.start(now))return r::DataCode::closed;const auto code=i.entry(producer).view->disconnect(token,revision,now);if(code==r::DataCode::accepted)i.discontinuity(producer,false);return code;}
 void SceneSurface::policy(c::Policy next,std::uint64_t now){
-    auto& i=*impl_;if(!i.start(now))return;i.images->clear();i.histories.clear();const bool valid=!next.available||!i.highest||next.revision>*i.highest;
+    auto& i=*impl_;if(!i.start(now))return;i.images->clear();i.histories.clear();i.retry_reason.clear();const bool valid=!next.available||!i.highest||next.revision>*i.highest;
     if(next.available&&valid)i.highest=next.revision;
     if(!valid)next.available=false;
     for(auto& e:i.entries)e.view->policy(next,now);
     i.policy=std::move(next);i.status.code=i.allowed()?SurfaceCode::empty:SurfaceCode::restricted;
 }
-void SceneSurface::replace(SurfaceConfig config,std::uint64_t now){auto& i=*impl_;if(!i.start(now))return;i.images->clear();i.histories.clear();auto validated=validate(config);i.config=std::move(config);i.validated=std::move(validated);}
+void SceneSurface::replace(SurfaceConfig config,std::uint64_t now){auto& i=*impl_;if(!i.start(now))return;i.images->clear();i.histories.clear();auto validated=validate(config);i.config=std::move(config);i.validated=std::move(validated);i.retry_reason.clear();}
 void SceneSurface::close(){auto& i=*impl_;i.owner();if(!i.closed)i.shut("surface.closed");}
 bool SceneSurface::poll_image_jobs(){auto& i=*impl_;i.owner();try{return i.images->poll();}catch(const Error&){i.images->clear("surface.capacity");if(i.erase())i.status={SurfaceCode::alternative,0,0,"surface.capacity"};return true;}}
 SurfaceStatus SceneSurface::status()const{impl_->owner();return impl_->status;}
@@ -289,13 +292,14 @@ void SceneSurface::paint(std::uint64_t now,const std::map<std::string,m::Tick>& 
             try{if(i.config.resources->theme().at("schema_version")=="0.2.0")c::authorize_resources(*i.config.resources,i.policy,i.config.capabilities);
                 i.images->clear();i.status={SurfaceCode::empty,0,0,{}};
             }catch(const Error& e){i.images->clear();i.histories.clear();i.status={std::string(e.what())=="policy.denied"?SurfaceCode::restricted:SurfaceCode::alternative,0,0,e.what()};}}
+        else if(!i.retry_reason.empty())i.status={i.retry_reason=="policy.denied"?SurfaceCode::restricted:SurfaceCode::alternative,0,0,i.retry_reason};
         else try{
             i.frame=i.compose(now,ticks);i.status.code=i.frame->layout.state==s::State::ready?SurfaceCode::ready:SurfaceCode::degraded;
             for(const auto& w:i.frame->widgets)if(w.image&&w.image->state!="ready"){i.status.code=SurfaceCode::degraded;i.status.reason=w.image->state=="loading"?"image.pending":"image.failed";}
             for(const auto& w:i.frame->widgets)if(w.diagnostic){i.status.code=SurfaceCode::degraded;i.status.reason="visibility.diagnostic";}
             i.status.widgets=i.frame->widgets.size();for(const auto& d:i.frame->displays)i.status.pixels+=static_cast<std::size_t>(d.width)*d.height;
-        }catch(const Error& e){i.images->clear(e.what());i.histories.clear();i.frame.reset();i.status={std::string(e.what())=="policy.denied"?SurfaceCode::restricted:SurfaceCode::alternative,0,0,e.what()};}
-        catch(const std::bad_alloc&){i.images->clear("surface.capacity");i.histories.clear();i.frame.reset();i.status={SurfaceCode::alternative,0,0,"surface.capacity"};}
+        }catch(const Error& e){if(!i.has_images())i.retry_reason=e.what();i.images->clear(i.has_images()?e.what():std::string{});i.histories.clear();i.frame.reset();i.status={std::string(e.what())=="policy.denied"?SurfaceCode::restricted:SurfaceCode::alternative,0,0,e.what()};}
+        catch(const std::bad_alloc&){if(!i.has_images())i.retry_reason="surface.capacity";i.images->clear(i.has_images()?"surface.capacity":std::string{});i.histories.clear();i.frame.reset();i.status={SurfaceCode::alternative,0,0,"surface.capacity"};}
     }
     Busy guard(i.busy);sink(i.status.code,i.frame.get());
 }

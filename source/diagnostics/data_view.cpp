@@ -71,6 +71,9 @@ DataAttachment DataView::attach_wire(const protocol::TelemetryBinding& binding, 
         protocol::validate_telemetry_binding(binding);
         if (binding.document_version=="0.2.0" && measurement_fault_) return {DataCode::clock_fault};
         const auto old = store_ ? store_->snapshot() : nullptr;
+        const auto replay=binding.negotiated.features.count("telemetry.monotonic-replay")?model::ReplayPolicy::monotonic_window:model::ReplayPolicy::epoch_reserved;
+        if(old&&old->producer==binding.producer&&old->epoch==binding.epoch&&store_->replay_policy()!=replay)
+            return {DataCode::invalid};
         if (old && !old->reported_document.empty() && old->producer==binding.producer && old->epoch==binding.epoch &&
             std::tie(old->reported_version,old->clock_id,old->clock_scope) !=
             std::tie(binding.document_version,binding.clock_id,binding.clock_scope)) return {DataCode::invalid};
@@ -155,7 +158,8 @@ DataResult DataView::publish(bool full, std::uint64_t token, std::uint64_t revis
         const auto old = store_ ? store_->snapshot() : nullptr;
         const bool same_scope = old && old->producer == producer_ && old->epoch == epoch_;
         auto prepared = same_scope ? std::make_unique<model::Store>(*store_) :
-            std::make_unique<model::Store>(producer_, epoch_, metrics_, limits_);
+            std::make_unique<model::Store>(producer_, epoch_, metrics_, limits_,
+                reported&&wire_binding_->negotiated.features.count("telemetry.monotonic-replay")?model::ReplayPolicy::monotonic_window:model::ReplayPolicy::epoch_reserved);
         const auto validated = reported ? prepared->import_state(candidate) : (full ? prepared->resynchronize(candidate) : prepared->publish(candidate));
         if (!validated.accepted()) {
             lease_.gap(token_, now);

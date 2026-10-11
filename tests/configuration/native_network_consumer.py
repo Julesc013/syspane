@@ -6,6 +6,7 @@ from native_network_service import Pipe,encoded,sha,linux_rows,verify_documents
 
 ROOT=Path(__file__).resolve().parents[2]
 def main():
+    continuous=len(sys.argv)==4 and sys.argv[3]=='--continuous'
     probe,evidence=map(lambda x:Path(x).resolve(),sys.argv[1:3]);build=probe.parent
     assert os.geteuid() and evidence.parent==build
     assert json.loads((build/'.syspane-owner.json').read_bytes())['profile']=='linux-x64-gcc13'
@@ -29,13 +30,16 @@ def main():
             self.root=runtime/str(len(drivers));self.root.mkdir(mode=0o700)
             self.cwd=folder/str(len(drivers));self.cwd.mkdir(mode=0o700);(self.cwd/'policy').write_text('allow')
             self.events=[];self.pending=b'';self.handles={};self.error=(self.cwd/'stderr').open('wb')
-            self.process=subprocess.Popen([str(bundle/'bin/syspane')]+(args or [str(self.root),'live']),cwd=self.cwd,
+            self.process=subprocess.Popen([str(bundle/'bin/syspane')]+(args or [str(self.root),'live']+(['--continuous'] if continuous else [])),cwd=self.cwd,
                 stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=self.error,close_fds=True)
             drivers.append(self);record['runs'].append(dict(pid=self.process.pid,events=self.events))
         def pump(self):
             if select.select([self.process.stdout],[],[],.003)[0]:self.pending+=os.read(self.process.stdout.fileno(),65536)
             while b'\n' in self.pending:
                 line,self.pending=self.pending.split(b'\n',1);v=json.loads(line);self.events.append(v)
+                if continuous:
+                    assert len(self.events)<=512 and sum(len(encoded(e)) for e in self.events)<=33554432,'continuous event capacity'
+                    assert (self.cwd/'stderr').stat().st_size<=1048576,'continuous stderr capacity'
                 if v['event']=='ready' and v['pid'] not in self.handles:self.handles[v['pid']]=os.pidfd_open(v['pid'])
         def until(self,predicate,seconds=8):
             end=time.monotonic()+seconds
@@ -54,14 +58,21 @@ def main():
             self.process.stdin.close();self.process.stdout.close();self.error.close()
     try:
         before=linux_rows();lower=time.clock_gettime_ns(time.CLOCK_BOOTTIME);d=Driver()
-        d.until(lambda:len(d.frames())>=2);after=linux_rows();upper=time.clock_gettime_ns(time.CLOCK_BOOTTIME)
+        d.until(lambda:len(d.frames())>=(130 if continuous else 2),seconds=150 if continuous else 8);after=linux_rows();upper=time.clock_gettime_ns(time.CLOCK_BOOTTIME)
         rows=[]
         for f in d.frames():
             raw=json.loads(f['raw']);assert raw['producer_epoch']==f['epoch']
             assert int(f['receipt_ns'])<=int(f['clock_ns'])<=upper
             assert f['receipt_ms']<=f['clock_ms']<f['deadline'] and f['profile']==11 and f['generation']==4
             rows.append(dict(event='imported',body=json.dumps(raw['body']),duplicate=False,now_ns=int(f['receipt_ns'])))
-        verify_documents(SimpleNamespace(lines=rows),before,after,lower,upper,'live');passed('LIVE');passed('RECEIPT')
+        verify_documents(SimpleNamespace(lines=rows),before,after,lower,upper,'continuous' if continuous else 'live');passed('LIVE');passed('RECEIPT')
+        if continuous:
+            frames=d.frames();assert len({f['epoch'] for f in frames})==1,'producer epoch cycled'
+            bodies=[json.loads(f['raw'])['body'] for f in frames]
+            assert [b['record_id'] for b in bodies]==['sample:'+str(i) for i in range(1,len(bodies)+1)],'record sequence discontinuity'
+            assert [int(b['snapshot']['generation']) for b in bodies]==list(range(1,len(bodies)+1)),'generation discontinuity'
+            passed('ONE-EPOCH-130',publications=len(frames),epoch=frames[0]['epoch'],elapsed_ms=(upper-lower)/1000000)
+            d.close();passed('CLOSE-REAP');record['outcome']='pass';return
         wrong=copy.deepcopy(rows);body=json.loads(wrong[0]['body']);body['snapshot']['observations'][0]['value']['data']=str(2**64-1);wrong[0]['body']=json.dumps(body)
         try:verify_documents(SimpleNamespace(lines=wrong),before,after,lower,upper,'live')
         except AssertionError:passed('ORACLE')
@@ -92,7 +103,7 @@ def main():
                 if variant=='unsolicited-heartbeat':pipe.send(dict(type='heartbeat',connection_id='C',producer_epoch=epoch,body=dict(sequence='18446744073709551615')))
                 else:
                     value=json.loads((ROOT/'spec/fixtures/valid/telemetry-snapshot-v0.2.json').read_bytes())
-                    value['connection_id']='C';value['producer_epoch']=epoch;value['body'].update(subscription_id='S',producer_id='producer:network',clock_id='linux.boottime')
+                    value['connection_id']='C';value['producer_epoch']=epoch;value['body'].update(subscription_id='S',producer_id='producer:network',clock_id='linux.boottime',record_id='sample:1')
                     snapshot=value['body']['snapshot'];snapshot['producer_epoch']=epoch;o=snapshot['observations'][0]
                     o.update(producer_epoch=epoch,field='network.receive_bytes',unit='byte',value=dict(kind='uint64',data='123'))
                     o['measured_at']=dict(clock_id='linux.boottime',nanoseconds=str(time.clock_gettime_ns(time.CLOCK_BOOTTIME)+(10**12 if variant=='future' else 0)))

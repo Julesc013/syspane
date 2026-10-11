@@ -127,7 +127,8 @@ struct Limits {
 enum class Code {
     accepted, duplicate, conflict, wrong_epoch, missing_base, generation_order,
     invalid_identity, duplicate_entity, duplicate_source, retired_identity,
-    dangling_relationship, invalid_observation, duplicate_observation, capacity, invalid_mode
+    dangling_relationship, invalid_observation, duplicate_observation, capacity, invalid_mode,
+    replay_expired, record_order
 };
 
 struct Result {
@@ -137,9 +138,11 @@ struct Result {
 };
 
 // Single writer; callers must serialize access. Reader snapshots own immutable data.
+enum class ReplayPolicy { epoch_reserved, monotonic_window };
 class Store {
 public:
-    Store(std::string producer, std::string epoch, std::vector<Metric> metrics, Limits limits = {});
+    Store(std::string producer, std::string epoch, std::vector<Metric> metrics, Limits limits = {}, ReplayPolicy replay = ReplayPolicy::epoch_reserved);
+    ReplayPolicy replay_policy() const { return replay_policy_; }
     std::shared_ptr<const Snapshot> snapshot() const { return current_; }
     Result publish(const Publication& candidate);
     // Consumer-only full resynchronization: a new record may confirm the identical
@@ -159,6 +162,8 @@ private:
     std::map<std::tuple<std::string, std::string, std::string>, std::uint64_t> measurement_highwater_;
     std::size_t retained_bytes_ = 0;
     std::optional<bool> reported_;
+    ReplayPolicy replay_policy_ = ReplayPolicy::epoch_reserved;
+    std::uint64_t sequence_highwater_ = 0, sequence_retired_ = 0;
 };
 
 std::optional<std::uint64_t> interval_ns(const Tick& before, const Tick& after);

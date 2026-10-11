@@ -18,6 +18,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Explicit container authoring checkpoint](containers-handoff.md) — Wrap and Unwrap preserve authored rules with explicit native reflow and atomic history.
 - [Native content-properties checkpoint](content-properties-handoff.md) — Bounded native table, chart, image and scene-theme buffers through existing atomic owners.
 - [Pinned content and preset preview checkpoint](content-resolution-handoff.md) — Verified content identities and immutable resource snapshots for common authored previews.
+- [Continuous replay and exact chart frame boundaries](continuous-replay-handoff.md) — Cross the original 128-record boundary without epoch cycling, preserve frame failures and keep native GUI qualification separate.
 - [Automatic recovery from independent render failure checkpoint](controller-render-recovery-handoff.md) — The persistent controller replaces failed rendering lifetimes and preserves original measured collection.
 - [Current state and next admitted boundary](current-state.md) — An honest resumption point for the initial greenfield specification.
 - [Synchronized data owner checkpoint](data-view-handoff.md) — Bind atomic model admission, independent lease state and revocable presentation to portable execution evidence.

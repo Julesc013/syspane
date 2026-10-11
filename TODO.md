@@ -17,6 +17,11 @@ GUI timing/erasure cases. The installed saved-scene inspector now has a separate
 [checkpoint](spec/delivery/installed-inspector-handoff.md). Its authenticated live
 telemetry is now integrated; preserve prior failures and all five full release editions.
 
+- [x] Admit bounded continuous replay without epoch cycling; preserve legacy capacity behavior and permanent identity/time reservations. See the [checkpoint](spec/delivery/continuous-replay-handoff.md).
+- [x] Pass 44 exact chart/mixed receiver/frame/projector cases with explicit overflow, retry suppression, recovery and policy erasure. Preserve failed attempts and fixture corrections.
+- [x] Observe 130 actual one-second native publications under one epoch with independent counter, rate, clock and child-exit checks.
+- [ ] Investigate the current maximum-table TRUNCATION timing failure (102.502 ms versus 100 ms); preserve the passing phase diagnostic separately.
+- [ ] Qualify maximum chart/mixed workloads through native GTK, independent AT-SPI and installed history accumulation with the fixed GUI/erasure limits.
 - [x] Compose installed saved-scene inspection, guarded navigation, current-policy erasure and verified image-task ownership.
 - [x] Provide the authenticated, supervised native network service; preserve measured counters, demand, policy and exact child lifetime. See the [handoff](spec/delivery/network-service-handoff.md).
 - [x] Implement and test the native network consumer and bounded delivery receiver; see the [checkpoint](spec/delivery/inspector-telemetry-handoff.md).

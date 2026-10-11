@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <cmath>
 #include <new>
+#include <limits>
 #include <set>
 #include <stdexcept>
 
@@ -16,6 +17,17 @@ bool identifier(const std::string& value) {
 bool safe_text(const std::string& value, std::size_t max) {
     // UI adapters still own escaping. Reject controls, including terminal escape.
     return value.size() <= max && std::none_of(value.begin(), value.end(), [](unsigned char c) { return c < 32 || c == 127; });
+}
+std::optional<std::uint64_t> sequence(const std::string& id) {
+    if (id.compare(0,7,"sample:") != 0 || id.size() <= 7 || id[7] < '1' || id[7] > '9') return {};
+    std::uint64_t value=0;
+    for (std::size_t i=7;i<id.size();++i) {
+        const auto c=id[i];if(c<'0'||c>'9')return {};
+        const auto digit=static_cast<unsigned>(c-'0');
+        if(value>(std::numeric_limits<std::uint64_t>::max()-digit)/10)return {};
+        value=value*10+digit;
+    }
+    return value;
 }
 bool valid_time(const UtcTime& time) {
     return time.nanoseconds < 1000000000 && time.subnanoseconds.size() <= 34 &&
@@ -58,9 +70,10 @@ bool Publication::operator==(const Publication& b) const {
     return std::tie(record_id, expected_base, next, replay_bytes) == std::tie(b.record_id, b.expected_base, b.next, b.replay_bytes);
 }
 
-Store::Store(std::string producer, std::string epoch, std::vector<Metric> metrics, Limits limits)
-    : producer_(std::move(producer)), epoch_(std::move(epoch)), metrics_(std::move(metrics)), limits_(limits) {
+Store::Store(std::string producer, std::string epoch, std::vector<Metric> metrics, Limits limits, ReplayPolicy replay)
+    : producer_(std::move(producer)), epoch_(std::move(epoch)), metrics_(std::move(metrics)), limits_(limits), replay_policy_(replay) {
     if (!identifier(producer_) || !identifier(epoch_)) throw std::invalid_argument("invalid store identity");
+    if(replay!=ReplayPolicy::epoch_reserved&&replay!=ReplayPolicy::monotonic_window)throw std::invalid_argument("invalid replay policy");
     std::set<std::string> fields;
     for (const auto& metric : metrics_) {
         if (!identifier(metric.field) || metric.unit.empty() || !safe_text(metric.unit, 64) ||
@@ -85,6 +98,8 @@ Result Store::import_state(const Publication& candidate) {
 }
 Result Store::publish_checked(const Publication& candidate, bool resynchronize, bool reported) {
     const auto& next = candidate.next;
+    const bool window=replay_policy_==ReplayPolicy::monotonic_window;
+    if(window&&(!reported||candidate.expected_base))return {Code::invalid_mode};
     if ((reported_ && *reported_ != reported) ||
         (reported && (next.reported_document.empty() || candidate.replay_bytes.empty() || !next.captured_at)) ||
         (!reported && (!next.reported_document.empty() || !candidate.replay_bytes.empty() ||
@@ -92,6 +107,8 @@ Result Store::publish_checked(const Publication& candidate, bool resynchronize, 
     if (next.reported_document.size() > 1048576 || candidate.replay_bytes.size() > 1048576) return {Code::capacity};
     if (next.captured_at && !valid_time(*next.captured_at)) return {Code::invalid_observation};
     if (!identifier(candidate.record_id)) return {Code::invalid_identity};
+    const auto ordinal=window?sequence(candidate.record_id):std::optional<std::uint64_t>{};
+    if(window&&!ordinal)return {Code::invalid_identity};
     if (next.producer != producer_ || next.epoch != epoch_) return {Code::wrong_epoch, true};
     if (next.reported_version.size() > 32 || (!next.clock_id.empty() && !identifier(next.clock_id)) ||
         (!next.clock_scope.empty() && !identifier(next.clock_scope))) return {Code::invalid_identity};
@@ -105,9 +122,11 @@ Result Store::publish_checked(const Publication& candidate, bool resynchronize, 
     if (!bytes) return {Code::capacity};
     const auto replay = records_.find(candidate.record_id);
     if (replay != records_.end()) return {(*replay->second == candidate) ? Code::duplicate : Code::conflict};
+    if(window&&*ordinal<=sequence_retired_)return {Code::replay_expired};
+    if(window&&*ordinal<=sequence_highwater_)return {Code::record_order};
     if (candidate.expected_base && (!current_ || *candidate.expected_base != current_->generation)) return {Code::missing_base, true};
     if (current_ && (next.generation < current_->generation || (next.generation == current_->generation && !resynchronize))) return {Code::generation_order};
-    if (records_.size() >= limits_.replay_records || *bytes > limits_.retained_bytes - retained_bytes_) return {Code::capacity};
+    if (!window&&(records_.size() >= limits_.replay_records || *bytes > limits_.retained_bytes - retained_bytes_)) return {Code::capacity};
 
     std::set<std::string> entities, sources;
     for (const auto& e : next.entities) {
@@ -158,7 +177,8 @@ Result Store::publish_checked(const Publication& candidate, bool resynchronize, 
                 if (previous != measurement_highwater.end() && o.measured_at->nanoseconds < previous->second) return {Code::invalid_observation};
                 if (previous == measurement_highwater.end()) {
                     const auto cost = sizeof(decltype(measurement_highwater)::value_type) + o.entity_id.size() + o.source_id.size() + o.field.size();
-                    if (measurement_highwater.size() >= limits_.observations || cost > limits_.retained_bytes-retained_bytes_-*bytes-clock_added)
+                    if (measurement_highwater.size() >= limits_.observations ||
+                        (window?cost>limits_.retained_bytes-clock_added:cost>limits_.retained_bytes-retained_bytes_-*bytes-clock_added))
                         return {Code::capacity};
                     clock_added += cost;
                 }
@@ -204,25 +224,40 @@ Result Store::publish_checked(const Publication& candidate, bool resynchronize, 
     if (!accounted_bytes(normalized_size, limits_.candidate_bytes)) return {Code::capacity};
 
     auto retired = retired_;
-    std::size_t retained_bytes = retained_bytes_ + *bytes + clock_added;
+    auto records = records_;
+    std::size_t retained_bytes = retained_bytes_;
+    auto retired_sequence=sequence_retired_;
+    const auto reclaim=[&] {
+        if(!window||records.empty())return false;
+        auto oldest=records.begin();auto first=*sequence(oldest->first);
+        for(auto it=records.begin();it!=records.end();++it)if(*sequence(it->first)<first){oldest=it;first=*sequence(it->first);}
+        const auto cost=accounted_bytes(*oldest->second,limits_.candidate_bytes);
+        if(!cost||*cost>retained_bytes)throw std::logic_error("replay accounting");
+        retained_bytes-=*cost;retired_sequence=std::max(retired_sequence,first);records.erase(oldest);return true;
+    };
+    const auto reserve=[&](std::size_t growth) {
+        if(growth>limits_.retained_bytes)return false;
+        while(growth>limits_.retained_bytes-retained_bytes)if(!reclaim())return false;
+        retained_bytes+=growth;return true;
+    };
+    if(!limits_.replay_records)return {Code::capacity};
+    while(records.size()>=limits_.replay_records)if(!reclaim())return {Code::capacity};
+    if(!reserve(*bytes)||!reserve(clock_added))return {Code::capacity};
     if (current_) for (const auto& e : current_->entities) {
         if (entities.count(e.id)) continue;
         if (retired.size() >= limits_.retired_entities) return {Code::capacity};
         std::vector<Observation> observations;
         std::size_t size = sizeof(e) + e.id.size();
+        if(!reserve(size))return {Code::capacity};
         for (auto o : current_->observations) if (o.entity_id == e.id) {
             o.presence = Presence::absent;
             if (o.value.index() != 0) o.freshness = Freshness::stale;
             const auto cost = observation_bytes(o);
-            if (cost > limits_.retained_bytes - retained_bytes || size > limits_.retained_bytes - retained_bytes - cost) return {Code::capacity};
-            size += cost;
+            if(!reserve(cost))return {Code::capacity};
             observations.push_back(std::move(o));
         }
-        if (size > limits_.retained_bytes - retained_bytes) return {Code::capacity};
-        retained_bytes += size;
         retired.emplace(e.id, std::move(observations));
     }
-    auto records = records_;
     records.emplace(candidate.record_id, std::make_shared<const Publication>(candidate));
     auto published = std::make_shared<const Snapshot>(std::move(normalized));
     // All throwing work completed. Publish snapshot, replay and tombstones together.
@@ -232,6 +267,7 @@ Result Store::publish_checked(const Publication& candidate, bool resynchronize, 
     measurement_highwater_.swap(measurement_highwater);
     retained_bytes_ = retained_bytes;
     reported_ = reported;
+    if(window){sequence_highwater_=*ordinal;sequence_retired_=retired_sequence;}
     return {Code::accepted};
 }
 
@@ -273,6 +309,8 @@ const char* code_name(Code code) {
     case Code::duplicate_observation: return "duplicate_observation";
     case Code::capacity: return "capacity";
     case Code::invalid_mode: return "invalid_mode";
+    case Code::replay_expired: return "replay_expired";
+    case Code::record_order: return "record_order";
     }
     return "unknown";
 }

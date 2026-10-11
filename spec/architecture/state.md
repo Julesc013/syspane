@@ -61,3 +61,11 @@ not publish a new model. The bounded per-field time high-water mark survives
 temporary absence, with its storage charged to the existing retained-byte limit.
 See the [checkpoint](../delivery/measured-time-handoff.md) for actual synthetic
 native evidence and the unexecuted source/suspend/namespace qualification.
+
+The [continuous replay package](../delivery/packages/w-07-continuous-replay.md)
+defines an explicitly negotiated measured-state replay policy. Canonical sample
+sequences permanently reserve old identities through watermarks while bounding
+recent original payloads. Exact retained replays remain idempotent; expired
+records fail explicitly. Ordinary epoch-reserved stores retain their original
+capacity behavior. Permanent entity and measured-time reservations are never
+reclaimed by this policy.

@@ -4,6 +4,7 @@
 #include "inspector_delivery_chart_tests.hpp"
 #include "inspector_phase_tests.hpp"
 #include "scene_inspector_model.hpp"
+#include "chart_frame_limits.hpp"
 #include <gtk/gtk.h>
 #include <glib-unix.h>
 #include <fcntl.h>
@@ -101,4 +102,5 @@ int window(const std::string& root,const std::string& mode){g_set_prgname("syspa
     w.view->close();const auto until=g_get_monotonic_time()+2000000;while(!w.view->poll_image_jobs()){need(g_get_monotonic_time()<until,"inspector child drain");g_usleep(1000);}w.view.reset();gtk_widget_destroy(w.window);return w.exit;
 }
 }
-int main(int argc,char** argv){try{need(argc>=2,"inspector arguments");return argc==2?component(argv[1]):window(argv[1],argv[2]);}catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}}
+int main(int argc,char** argv){try{need(argc>=2,"inspector arguments");if(argc==6&&std::string(argv[2])=="HISTORY-LIMITS")return chart_frame_limits::run(argv[1],std::string(argv[3])=="mixed",static_cast<unsigned>(std::stoul(argv[4])),argv[5]);
+    return argc==2?component(argv[1]):window(argv[1],argv[2]);}catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}}

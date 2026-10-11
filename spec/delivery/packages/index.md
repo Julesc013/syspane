@@ -21,6 +21,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [W-05 native GNOME image-wallpaper preservation](w-05-gnome-wallpaper.md) — Separate original file identity, native settings and externally observed image pixels.
 - [W-05 owned X11 window-manager recovery](w-05-shell-recovery.md) — Measure native manager replacement and candidate continuity without promoting failed placement.
 - [W-05 bounded X11 host investigation](w-05-x11-investigation.md) — Observe desktop-type placement and native reveal under a real window and icon manager in an owned lab.
+- [Continuous measured telemetry with reserved sequence identities](w-07-continuous-replay.md) — Close the foundation's long-running replay boundary without unbounded payload storage or epoch cycling.
 - [Shared controller demand and acquisition ownership](w-07-demand-owner.md) — Merge authorized consumer leases, schedule bounded source work and retain ownership until stopped work is confirmed.
 - [Authenticated session demand ownership](w-07-session-demand.md) — Bind controller-selected acquisition requests to authoritative session lifetimes without changing existing wire documents.
 - [Authored scene transactions and generation recovery](w-08-authored-transactions.md) — Implement coherent settings and scene replacement with explicit stored, durable and activation facts.
@@ -86,6 +87,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Versioned visibility authoring and durable admission](w-10-visibility-admission.md) — Preserve conditional scene meaning through typed edits, negotiation and coherent recovery.
 - [Native conditional editing and enablement](w-10-visibility-controls.md) — Private rule input, hidden-object selection and durable conditional editing through the existing native owner.
 - [Native creation of every scene primitive](w-10-widget-creation.md) — Create bounded authored widgets through existing resource, draft and transaction owners.
+- [Chart history and mixed frame resource boundaries](w-11-chart-frame-limits.md) — Exact retained-point, accessible-text and typed-frame limits before native maximum-history qualification.
 - [Current draft admission and preview resource ownership](w-11-draft-admission.md) — Remove repeated reconstruction of owned draft state while retaining current authorization and full mutation validation.
 - [Independent editor callback timing trace](w-11-editor-callback-trace.md) — Attribute work outside the frontend timer without changing product behavior or acceptance limits.
 - [Native editor helper worker bridge](w-11-editor-helper-worker.md) — Move verified image and recovery execution behind bounded GUI-owned task handles.
