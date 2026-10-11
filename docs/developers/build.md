@@ -1,5 +1,23 @@
 # Developer setup and checks
 
+The [history tick diagnostic](../../spec/delivery/gtk-history-phases-handoff.md)
+uses the existing public inspector observer with an optional test-only journal.
+After workspace preflight/configure/build, validate the collector, then run one
+diagnostic family with the unchanged inputs and timing limits:
+
+```sh
+ctest --preset linux-x64-gcc13 -R '^(configuration|native)[.]GTK-HISTORY-PHASES$' --output-on-failure
+SYSPANE_GTK_HISTORY_DIAGNOSTIC=1 ctest --preset linux-x64-gcc13 -R '^native[.]GTK-HISTORY-LIMITS$' --output-on-failure
+```
+
+Seven decoder methods pass on both developer interpreters, and the real native
+collector proves callback/capacity/output controls. Each phase journal is private,
+exclusive, at most 6 MiB and emitted after renderer drain; original timing stderr
+remains intact. Both diagnostic cases fail at capacity presentation, while mixed
+also has 24 fixture-publication-dominated slow accumulation ticks. Five affected
+regression suites pass. Preserve the failed baseline, nested accounting and every
+sample; next close producer ownership and investigate native accessible erasure.
+
 The [maximum GTK history package](../../spec/delivery/packages/w-11-gtk-history-limits.md)
 adds controlled complete wire publications through the public background inspector.
 After workspace preflight/configure/build, run these families separately:

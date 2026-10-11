@@ -85,3 +85,39 @@ new case closes no qualification and cannot alter the frozen expectations.
 
 Continue actual installed history accumulation, human accessibility, independent
 desktop/lifecycle composition and all five full native release editions.
+
+## Follow-up: bounded tick attribution
+
+Preserve the failed 85eb333d baseline and its complete journals. Add an optional
+test-only phase collector to the same window mode. It observes the existing
+public admission/adoption/presentation callback; product APIs and code remain
+unchanged. Each original tick records its stage, generation before/after, observed
+point count and wall work/delay, plus receiver heartbeat/sample, complete delivery,
+point lookup and fixture snapshot/encoding/receipt durations. Nested observer times
+remain nested: presentation is included in adoption, which is included in delivery.
+Do not sum nested work or call unmeasured time a scheduling failure.
+
+Store at most 32768 fixed numeric records in the native test owner, with no phase
+I/O inside GTK callbacks. After actual renderer drain, emit a separate journal
+of at most 6 MiB into an exclusively created, private, owned native-evidence file.
+The original 2-MiB stderr journal, all timing samples, values, mutation controls,
+limits, commands and deadlines remain. Disabled collection retains the ordinary
+test path. Refused/incomplete/duplicate observer phases or malformed/overflowing/
+incomplete journals fail diagnosis; they never authorize a qualification pass.
+
+An independent decoder validates literal positive and negative traces, disjoint
+versus nested accounting and exact equality to the original timing samples.
+Run one diagnostic maximum family on the ordinary source. Attribute each slow
+tick, retaining residual overhead and every original pass/failure. This experiment
+does not separately time native accessibility requests outside a tick, subtree
+blank versus removal or operating-system scheduling; use its observed boundary
+to select the next bounded experiment or close a repair before implementation.
+The native source is tests/scene/gtk_history_phases.hpp, integrated by the existing
+window header, with tests/scene/gtk_history_phases.py and its literal trace suite.
+Use configuration.GTK-HISTORY-PHASES for the collector decoder and
+native.GTK-HISTORY-PHASES for the real collector's manual callback, duplicate/
+incomplete/unknown phase, capacity and exclusive-output fixture. The latter uses
+tests/scene/native_gtk_history_phases.py and qualifies collection only.
+Run native.GTK-HISTORY-LIMITS with SYSPANE_GTK_HISTORY_DIAGNOSTIC=1 for the diagnostic
+family after workspace preflight/configure/build. Keep ordinary qualification
+separate and preserve both sources. No acceptance oracle is calibrated from this run.

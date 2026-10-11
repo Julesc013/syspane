@@ -5,6 +5,7 @@
 #include <glib-unix.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include "gtk_history_phases.hpp"
 
 namespace gtk_history_limits {
 using namespace fixture;namespace ui=syspane::interfaces;
@@ -33,7 +34,7 @@ struct Window {
     struct Timing {std::uint64_t work,delay;};
     bool mixed;unsigned fitting,sent=0;std::uint64_t revision=7,sequence=0,measured=0;
     GtkWidget* window=nullptr;std::unique_ptr<ui::SceneInspector> view;std::unique_ptr<r::TelemetryReceiver> receiver;
-    std::vector<Timing> journal;gint64 previous=0;std::string input,pending;std::uint64_t command_work=0;int result=0;
+    std::vector<Timing> journal;Phases phases;gint64 previous=0;std::string input,pending;std::uint64_t command_work=0;int result=0;
     std::uint64_t now()const{return static_cast<std::uint64_t>(g_get_monotonic_time()/1000);}
     c::Policy grant()const{auto p=inspector_admission_owner_test::grant();p.revision=revision;return p;}
     p::TelemetryBinding binding()const{auto b=inspector_admission_owner_test::binding();b.policy_revision=revision;b.negotiated.features.insert("telemetry.monotonic-replay");return b;}
@@ -72,18 +73,19 @@ struct Window {
     }
     void pulse(){
         const auto begin=g_get_monotonic_time();const auto delay=previous?std::max<gint64>(0,begin-previous-20000):0;
+        phases.begin(pending=="fill"?1:pending=="over"?2:pending=="recover"?3:pending=="fresh"?4:pending=="close"?5:0,sent);unsigned count=0;
         if(pending=="close"){if(view->poll_image_jobs()){reply(pending,command_work);pending.clear();}}
         else{
-            if(receiver->view(now()).connected){need(receiver->heartbeat(++sequence,now())==r::DataCode::accepted,"GTK history heartbeat");receiver->sample(tick(measured),now());}
-            view->deliver(receiver->view(now()),{11,revision==9?5U:4U},now());
-            const auto count=points();
+            phases.measure(Phases::receiver,[&]{if(receiver->view(now()).connected){need(receiver->heartbeat(++sequence,now())==r::DataCode::accepted,"GTK history heartbeat");receiver->sample(tick(measured),now());}});
+            phases.measure(Phases::delivery,[&]{view->deliver(receiver->view(now()),{11,revision==9?5U:4U},now(),phases.observer());});
+            phases.measure(Phases::lookup,[&]{count=points();});
             if(pending=="fill"){
                 if(count==fitting){reply(pending,command_work);pending.clear();}
-                else if(count==sent){publish(sent+1,static_cast<std::uint64_t>(sent)*1000000);if(sent%250==0)std::cout<<Json({{"progress",sent}}).dump()<<std::endl;}
+                else if(count==sent){phases.measure(Phases::publication,[&]{publish(sent+1,static_cast<std::uint64_t>(sent)*1000000);});if(sent%250==0)std::cout<<Json({{"progress",sent}}).dump()<<std::endl;}
             }else if(pending=="over"&&view->status().code==v::SurfaceCode::alternative&&count==0){reply(pending,command_work);pending.clear();}
             else if((pending=="recover"||pending=="fresh")&&count==1){reply(pending,command_work);pending.clear();}
         }
-        const auto end=g_get_monotonic_time();need(journal.size()<32768,"GTK history timing capacity");journal.push_back({static_cast<std::uint64_t>(end-begin),static_cast<std::uint64_t>(delay)});previous=g_get_monotonic_time();
+        const auto end=g_get_monotonic_time();need(journal.size()<32768,"GTK history timing capacity");journal.push_back({static_cast<std::uint64_t>(end-begin),static_cast<std::uint64_t>(delay)});phases.finish(sent,count,journal.back().work,journal.back().delay);previous=g_get_monotonic_time();
     }
 };
 inline int run(const std::string& root,bool mixed,unsigned fitting){
@@ -99,6 +101,7 @@ inline int run(const std::string& root,bool mixed,unsigned fitting){
     for(auto id:{source,timer,deadline})if(g_main_context_find_source_by_id(nullptr,id))g_source_remove(id);
     w.view->close();const auto until=g_get_monotonic_time()+2500000;while(!w.view->poll_image_jobs()){need(g_get_monotonic_time()<until,"GTK history actual owner drain");g_usleep(1000);}
     w.view.reset();gtk_widget_destroy(w.window);
+    w.phases.emit();
     std::cerr<<"history-timing-begin "<<w.journal.size()<<'\n';for(const auto& row:w.journal)std::cerr<<"history-timing "<<row.work<<' '<<row.delay<<'\n';std::cerr<<"history-timing-end "<<w.journal.size()<<'\n';
     return w.result;
 }

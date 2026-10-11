@@ -12,10 +12,23 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-11T20:12:20.855134+00:00", "scope": "Controlled maximum GTK histories; preserved timing failures, exact content/lifetime and affected regression evidence"}
+updated: {"by": "codex", "at": "2026-10-11T20:55:49.038086+00:00", "scope": "Native tick attribution: capacity GTK presentation and fixture publication; unchanged acceptance and source-bound regressions"}
 ---
 
 # Current state and next admitted boundary
+
+The [history tick diagnostic](gtk-history-phases-handoff.md) locates separate
+capacity GTK presentation (688.283/504.431 ms) and fixture publication costs.
+Mixed has 24 slow accumulation ticks dominated by publication; chart has none.
+Both complete diagnostic cases retain every original sample and fail the fixed
+100-ms GUI requirement. Seven portable collector methods pass on Windows/Linux,
+the native collector fixture passes, and five existing regressions pass.
+Product code is unchanged. Next close non-GUI fixture producer/receiver ownership
+with exact ordered full-publication handoff, then investigate whole-view erasure
+with retained/collapsed/retired accessible text and independent AT-SPI. Qualify
+ordinary maximum histories and maximum-policy erasure before installed cadence,
+human accessibility and desktop/lifecycle composition. W-11 and all five complete
+editions remain open. Shared tooling stays in source/build; raw archives stay in out/.
 
 The [maximum GTK history checkpoint](gtk-history-limits-handoff.md) adds two
 controlled native cases through the public background inspector and receiver.

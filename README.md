@@ -11,6 +11,11 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
+The [history tick diagnostic](spec/delivery/gtk-history-phases-handoff.md) separates
+GTK capacity erasure from fixture publication costs. Both maximum cases remain
+failed; portable/native collector checks and five existing regressions pass.
+The next work closes producer ownership and native accessible-text erasure.
+
 The [maximum GTK history checkpoint](spec/delivery/gtk-history-limits-handoff.md)
 compares every native accessible chart/mixed row and verifies recovery and shutdown.
 Both new cases fail the fixed GUI timing limit; qualification remains open.

@@ -8,6 +8,7 @@ from native_inspector import Keys
 from native_diagnostic import launch_xvfb
 from check_surface_runtime import verify
 import chart_frame_oracle as oracle
+import gtk_history_phases as history_phases
 CASES_PATH=ROOT/'tests/scene/gtk-history-limits-cases.json'
 CASES=json.loads(CASES_PATH.read_bytes())
 sha=lambda raw:hashlib.sha256(raw).hexdigest()
@@ -64,7 +65,12 @@ def observe(exe,folder,mode):
     report=dict(case=mode,outcome='fail',started_at=datetime.now(timezone.utc).isoformat(),observations=[],progress=[])
     started=time.monotonic();deadline=started+CASES['child_seconds'];buffer=b'';records=0
     err=(folder/'stderr').open('wb');transcript=(folder/'stdout.jsonl').open('wb');keys=None
-    proc=subprocess.Popen([str(exe),str(ROOT/'spec/fixtures/valid'),'GTK-HISTORY-LIMITS',mode,str(CASES[mode]['points'])],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=err)
+    env=dict(os.environ);diagnostic=env.get('SYSPANE_GTK_HISTORY_DIAGNOSTIC')=='1';phase_path=folder/'phases.journal'
+    env.pop('SYSPANE_GTK_HISTORY_PHASE_FILE',None)
+    if diagnostic:
+        assert folder.resolve()==folder and folder.stat().st_uid==os.getuid() and not phase_path.exists()
+        env['SYSPANE_GTK_HISTORY_PHASE_FILE']=str(phase_path)
+    proc=subprocess.Popen([str(exe),str(ROOT/'spec/fixtures/valid'),'GTK-HISTORY-LIMITS',mode,str(CASES[mode]['points'])],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=err,env=env)
     def save():
         raw=encoded(report);assert len(raw)<=CASES['observation_bytes'];(folder/'result.json').write_bytes(raw)
     def reply():
@@ -151,6 +157,10 @@ def observe(exe,folder,mode):
             report['timing_violations']=[dict(index=i,**v) for i,v in enumerate(samples) if max(v.values())>CASES['gui_limit_us']]
             if report['timing_violations']:report['outcome']='fail'
             report['timing_records']=len(samples)
+            if diagnostic:
+                phase_raw=phase_path.read_bytes();rows=history_phases.decode(phase_raw,samples)
+                details=dict(diagnostic_only=True,original_outcome=report['outcome'],journal_sha256=sha(phase_raw),decoder_sha256=sha(Path(history_phases.__file__).read_bytes()),**history_phases.summarize(rows,CASES['gui_limit_us']))
+                (folder/'phases.json').write_bytes(encoded(details));report['diagnostic_only']=True;report['phase_journal_sha256']=sha(phase_raw)
         except Exception:report['timing_failure']=traceback.format_exc();report['outcome']='fail'
         report['stderr_sha256']=sha(raw)
         report['finished_at']=datetime.now(timezone.utc).isoformat();report['elapsed_seconds']=time.monotonic()-started;save()
@@ -160,7 +170,7 @@ def main():
     if sys.argv[1]=='--observe':observe(Path(sys.argv[2]),Path(sys.argv[3]),sys.argv[4]);return
     exe,evidence=map(lambda p:Path(p).resolve(),sys.argv[1:3]);assert os.geteuid()!=0 and evidence.parent==exe.parent
     controls();folder=evidence/('gtk-history-'+uuid.uuid4().hex[:12]);folder.mkdir()
-    report=dict(family='GTK-HISTORY-LIMITS',outcome='fail',started_at=datetime.now(timezone.utc).isoformat(),executable_sha256=sha(exe.read_bytes()),inputs={p.relative_to(ROOT).as_posix():sha(p.read_bytes()) for p in [Path(__file__),CASES_PATH,Path(oracle.__file__),ROOT/'tests/scene/gtk_history_limits.hpp',ROOT/'source/build/surface-runtime.json']},oracle_mutations_rejected=3,cases=[])
+    report=dict(family='GTK-HISTORY-LIMITS',outcome='fail',diagnostic_only=os.environ.get('SYSPANE_GTK_HISTORY_DIAGNOSTIC')=='1',started_at=datetime.now(timezone.utc).isoformat(),executable_sha256=sha(exe.read_bytes()),inputs={p.relative_to(ROOT).as_posix():sha(p.read_bytes()) for p in [Path(__file__),CASES_PATH,Path(oracle.__file__),ROOT/'tests/scene/gtk_history_limits.hpp',ROOT/'tests/scene/gtk_history_phases.hpp',Path(history_phases.__file__),ROOT/'source/build/surface-runtime.json']},oracle_mutations_rejected=3,cases=[])
     server=None
     try:
         server,env=launch_xvfb(folder,tuple(CASES['screen']));env['NO_AT_BRIDGE']='0';env.pop('AT_SPI_BUS_ADDRESS',None)
