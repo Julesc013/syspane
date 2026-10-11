@@ -26,7 +26,11 @@ telemetry is now integrated; preserve prior failures and all five full release e
 - [x] Reproduce and repair background image launch before current loading-row adoption; pass controlled ordering, phase refusal/throw and installed held navigation. See the [handoff](spec/delivery/inspector-image-adoption-handoff.md).
 - [x] Pass all seven ordinary and complete-phase maximum-table cases on the image-adoption source with the unchanged 100-ms GUI/200-ms erasure bounds; preserve every preceding failure.
 - [x] Correct incomplete child-identity caching; pass the real sealed-worker probe, twelve installed image/topology cases and 147 shared checks on each development profile. Preserve the old failure and unchanged case/lifetime/deadline criteria; see the [handoff](spec/delivery/child-identity-handoff.md).
-- [ ] Investigate the latest authored MAX-FRAME delay of 458.801 ms against the unchanged 100-ms GUI limit; authored qualification remains open despite the other seven passing cases.
+- [x] Add exact native GTK maximum chart/mixed histories, full AT-SPI rows, capacity recovery and actual renderer exit; preserve both failed timing cases. See the [handoff](spec/delivery/gtk-history-limits-handoff.md).
+- [x] Run one validated authored MAX-FRAME callback/phase diagnostic; it does not reproduce the earlier delay, which remains unresolved.
+- [ ] Attribute the GTK history timing failures: chart has one slow tick (685.826 ms); mixed has 33 (maximum 508.919 ms). Separate fixture, delivery/presentation and erasure costs before a repair; preserve the fixed 100-ms limit.
+- [ ] Qualify maximum-history policy erasure with held accessibility references; reject model detachment that leaves old text readable. The current revocation check follows recovery to one point.
+- [ ] Resolve the earlier authored MAX-FRAME delay of 458.801 ms against the unchanged 100-ms GUI limit; the diagnostic pass does not replace its failed qualification.
 - [ ] Investigate the preceding ordinary ORACLE AT-SPI timeout and TOPOLOGY child-observer exit race; passing runs do not establish their causes or an observer repair.
 - [ ] Qualify maximum chart/mixed workloads through native GTK, independent AT-SPI and installed history accumulation with the fixed GUI/erasure limits.
 - [x] Compose installed saved-scene inspection, guarded navigation, current-policy erasure and verified image-task ownership.

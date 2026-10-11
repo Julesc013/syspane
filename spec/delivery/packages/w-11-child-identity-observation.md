@@ -71,3 +71,22 @@ the shared harness. Preserve source/artifact/oracle/environment identity and eve
 failure; byte/type/inventory/process-verify quiescent archives before cleanup.
 Then continue maximum GTK chart/mixed histories, human accessibility and all five
 complete native editions and their release evidence.
+
+## Follow-up: authored delay attribution
+
+Preserve the MAX-FRAME failure in the child-identity checkpoint: timing sample 517
+reports 458801 microseconds of excess delay and 452 microseconds of tick work.
+It does not locate the intervening work or establish scheduling as the cause.
+Run one bounded diagnostic attempt of the unchanged MAX-FRAME stimulus with the
+existing callback tracer and complete frontend phase journal. Validate the tracer
+through its existing signal/timer fixture and decoder checks before using it.
+Keep its fixed storage, actual callback wall/thread-CPU times, registration and
+lifetime checks; symbolize against the exact fixture binary. Preserve the
+original timing samples and pass/failure, and correlate every tick with callback
+coverage. Uncovered time is unattributed, not proof of a scheduler failure.
+
+This instrumented single-case attempt is diagnostic only and cannot replace the
+original family qualification or exclude any slow sample. If it reproduces a
+consequential boundary, close that repair before implementation and run its fixed
+acceptance/regressions. Otherwise retain the unresolved failure and continue the
+independent native GTK chart/mixed package; do not repeatedly rerun until green.

@@ -11,6 +11,12 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
+The [maximum GTK history checkpoint](spec/delivery/gtk-history-limits-handoff.md)
+compares every native accessible chart/mixed row and verifies recovery and shutdown.
+Both new cases fail the fixed GUI timing limit; qualification remains open.
+Five existing regression suites pass, and an accessibility-text-leaking erasure
+shortcut is rejected. Raw recordings remain local under ignored `out/`.
+
 The [child identity follow-up](spec/delivery/child-identity-handoff.md) passes all
 twelve installed image/topology cases after correcting incomplete observer caching.
 Selected shared and installed regressions pass apart from one authored MAX-FRAME GUI-delay

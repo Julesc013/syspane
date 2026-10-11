@@ -1,5 +1,24 @@
 # Developer setup and checks
 
+The [maximum GTK history package](../../spec/delivery/packages/w-11-gtk-history-limits.md)
+adds controlled complete wire publications through the public background inspector.
+After workspace preflight/configure/build, run these families separately:
+
+```sh
+ctest --preset linux-x64-gcc13 -R '^native[.]GTK-HISTORY-LIMITS$' --output-on-failure
+ctest --preset linux-x64-gcc13 -R '^native[.](SCENE-INSPECTOR.*|CHART-FRAME-LIMITS|INSPECTOR-RENDERER|BACKGROUND-INSPECTOR)$' --output-on-failure
+```
+
+The maximum family retains two 600-second children and a 1230-second CTest bound;
+each GUI tick/command still has the fixed 100-ms limit. Its complete chart/mixed
+content, recovery and native exit checks finish, but both cases fail timing.
+Five regression suites pass. Timing includes fixture publication work; attribute
+that alongside delivery and GTK erasure before choosing a repair. Policy revocation
+currently follows single-point recovery, not maximum history. Never detach the
+model while leaving retained accessibility text readable. Preserve all journals,
+frozen expectations and failed qualification; see the
+[handoff](../../spec/delivery/gtk-history-limits-handoff.md).
+
 The [child identity package](../../spec/delivery/packages/w-11-child-identity-observation.md)
 corrects incomplete observer caching without changing product binaries or native
 case expectations. After workspace preflight/configure/build, run:

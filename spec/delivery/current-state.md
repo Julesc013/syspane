@@ -12,10 +12,23 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-11T19:23:38.227441+00:00", "scope": "Consistent child identity; preserved MAX-FRAME GUI-delay failure and source-bound installed/shared regressions"}
+updated: {"by": "codex", "at": "2026-10-11T20:12:20.855134+00:00", "scope": "Controlled maximum GTK histories; preserved timing failures, exact content/lifetime and affected regression evidence"}
 ---
 
 # Current state and next admitted boundary
+
+The [maximum GTK history checkpoint](gtk-history-limits-handoff.md) adds two
+controlled native cases through the public background inspector and receiver.
+All expected accessible chart/mixed rows, overflow recovery and actual renderer
+exit checks complete; both cases fail the unchanged 100-ms GUI timing limit.
+Chart has one slow tick at 685.826 ms; mixed has 33, peaking at 508.919 ms.
+Five affected regression suites pass. A validated authored delay diagnostic does
+not reproduce the preceding failure; that failure remains open. Model detachment
+is rejected after real retained ATK cells keep old text readable. Next attribute
+fixture, delivery/presentation and erasure costs before a repair, then qualify
+maximum-history policy erasure, installed accumulation and human/desktop/lifecycle
+boundaries. W-11 and all five complete editions remain open. Shared tooling stays
+in source/build; generated archives remain in ignored out/; build-support is absent.
 
 The [child identity follow-up](child-identity-handoff.md) closes incomplete argv
 caching without changing product artifacts or fixed acceptance. All twelve installed

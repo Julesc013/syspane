@@ -519,6 +519,8 @@ if(BUILD_TESTING)
         set_tests_properties(native.INSPECTOR-RENDERER PROPERTIES TIMEOUT 120)
         add_test(NAME native.CHILD-IDENTITY COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/configuration/native_child_identity.py" "$<TARGET_FILE:syspane_image_worker>")
         set_tests_properties(native.CHILD-IDENTITY PROPERTIES TIMEOUT 20)
+        add_test(NAME native.GTK-HISTORY-LIMITS COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/scene/native_gtk_history_limits.py" "$<TARGET_FILE:syspane_scene_inspector_tests>" "${CMAKE_BINARY_DIR}/native-evidence")
+        set_tests_properties(native.GTK-HISTORY-LIMITS PROPERTIES TIMEOUT 1230)
         add_test(NAME native.CHART-FRAME-LIMITS COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/scene/native_chart_frame_limits.py"
             "$<TARGET_FILE:syspane_scene_inspector_tests>" "${CMAKE_BINARY_DIR}/native-evidence")
         set_tests_properties(native.CHART-FRAME-LIMITS PROPERTIES TIMEOUT 390)

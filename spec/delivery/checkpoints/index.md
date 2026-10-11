@@ -13,6 +13,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [editor-paint-trace.json](editor-paint-trace.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [frontend-phases.json](frontend-phases.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [frontend-recovery.json](frontend-recovery.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
+- [gtk-history-limits.json](gtk-history-limits.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [helper-identity.json](helper-identity.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [history-form.json](history-form.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [history-preparation.json](history-preparation.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
