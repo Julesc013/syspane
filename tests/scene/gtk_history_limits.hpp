@@ -6,6 +6,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include "gtk_history_phases.hpp"
+#include "gtk_history_producer.hpp"
 
 namespace gtk_history_limits {
 using namespace fixture;namespace ui=syspane::interfaces;
@@ -32,41 +33,33 @@ inline v::SurfaceConfig configuration(const std::string& root,bool mixed){
 }
 struct Window {
     struct Timing {std::uint64_t work,delay;};
-    bool mixed;unsigned fitting,sent=0;std::uint64_t revision=7,sequence=0,measured=0;
-    GtkWidget* window=nullptr;std::unique_ptr<ui::SceneInspector> view;std::unique_ptr<r::TelemetryReceiver> receiver;
+    bool mixed,closed=false;unsigned fitting,sent=0,inflight=0;std::uint64_t revision=7;
+    GtkWidget* window=nullptr;std::unique_ptr<ui::SceneInspector> view;Producer producer;Producer::Snapshot snapshot;std::optional<Producer::Job> request;
     std::vector<Timing> journal;Phases phases;gint64 previous=0;std::string input,pending;std::uint64_t command_work=0;int result=0;
     std::uint64_t now()const{return static_cast<std::uint64_t>(g_get_monotonic_time()/1000);}
     c::Policy grant()const{auto p=inspector_admission_owner_test::grant();p.revision=revision;return p;}
-    p::TelemetryBinding binding()const{auto b=inspector_admission_owner_test::binding();b.policy_revision=revision;b.negotiated.features.insert("telemetry.monotonic-replay");return b;}
-    explicit Window(const std::string& root,bool table,unsigned count):mixed(table),fitting(count){
+    explicit Window(const std::string& root,bool table,unsigned count):mixed(table),fitting(count),producer(table){
         static_assert(sizeof(s::ChartPoint)==40,"Pinned Linux chart ABI");need(count>1&&count<4096,"fitting argument");
         journal.reserve(32768);auto renders=std::make_shared<const ui::InspectorRenderFactory>(ui::threaded_inspector_renderer());
         view=std::make_unique<ui::SceneInspector>(c::Authority{true,"console",{"console"}},grant(),configuration(root,mixed),std::vector<v::SurfaceProvider>{provider()},"",ui::SceneInspector::Translator{},v::ImageFactory{},renders,11);
-        receiver=std::make_unique<r::TelemetryReceiver>(r::DeliveryScope{11,4},grant(),n::network_metrics(),binding(),now());
         window=gtk_window_new(GTK_WINDOW_TOPLEVEL);gtk_window_set_title(GTK_WINDOW(window),"SysPane Scene Inspector");gtk_window_set_default_size(GTK_WINDOW(window),740,540);
         gtk_container_add(GTK_CONTAINER(window),view->widget());gtk_widget_show_all(window);gtk_widget_grab_focus(tree_of(view->widget()));
     }
     unsigned points(){auto* model=gtk_tree_view_get_model(GTK_TREE_VIEW(tree_of(view->widget())));GtkTreeIter root;
         return gtk_tree_model_get_iter_first(model,&root)?static_cast<unsigned>(gtk_tree_model_iter_n_children(model,&root)):0;}
-    void publish(unsigned generation,std::uint64_t ns){
-        n::NetworkState state("E1","clock:1","scope:1");state.demand(1);syspane::platform::NetworkResult input{syspane::platform::NetworkCode::success,0,{}};
-        for(unsigned i=1;i<=(mixed?64U:1U);++i)input.rows.push_back({i,i,6,syspane::platform::NetworkCounters{10,7}});
-        need(state.commit(1,0,std::move(input),tick(ns),tick(ns))==n::NetworkStateCode::accepted,"GTK history acquisition");
-        auto doc=n::network_document(*state.sample(),generation,"2026-10-06T00:00:00Z","2026-10-06T00:00:01Z",true);
-        Json body={{"schema_version","0.2.0"},{"subscription_id","S"},{"producer_id","P1"},{"record_id","sample:"+std::to_string(generation)},{"policy_revision",std::to_string(revision)},{"clock_id","clock:1"},{"snapshot",doc}};
-        const auto bytes=p::encode_telemetry({"snapshot","D","E1",body.dump(),body},binding());
-        need(receiver->receive(bytes,now(),tick(ns)).code==r::DataCode::accepted,"GTK history complete receipt");sent=generation;measured=ns;
-    }
-    void reply(const std::string& name,std::uint64_t work=0){std::cout<<Json({{"ack",name},{"command_work_us",work},{"generation",sent},{"reason",view->status().reason}}).dump()<<std::endl;}
+    void publish(unsigned generation,std::uint64_t ns,bool reset=false){need(!request&&!inflight&&!closed,"GTK history one outstanding publication");request=Producer::Job{generation,ns,revision,reset};}
+    void reply(const std::string& name,std::uint64_t work=0){Json value={{"ack",name},{"command_work_us",work},{"generation",sent},{"reason",view->status().reason}};
+        if(name=="close"){const auto final=producer.terminal();value["producer"]={{"accepted",final.accepted},{"receiver_owner",final.receiver_owner},{"publication_max_us",final.publication_max_us},{"clock_gap_max_ms",final.clock_gap_max_ms},{"stopped",producer.stopped()},{"renderer_stopped",view->poll_image_jobs()},{"failure",producer.failure()}};}
+        std::cout<<value.dump()<<std::endl;}
     void command(const std::string& name){
         need(pending.empty(),"GTK history outstanding command");const auto begin=g_get_monotonic_time();
         if(name=="fill")pending=name;
         else if(name=="over"){publish(fitting+1,static_cast<std::uint64_t>(fitting)*1000000);pending=name;}
         else if(name=="recover"){publish(4098,20000000000ULL);pending=name;}
         else if(name=="revoke"){revision=8;auto denied=grant();denied.disclosure.erase({"console","history"});view->policy(std::move(denied),now());}
-        else if(name=="fresh"){revision=9;view->policy(grant(),now());sequence=0;receiver=std::make_unique<r::TelemetryReceiver>(r::DeliveryScope{11,5},grant(),n::network_metrics(),binding(),now());publish(4099,21000000000ULL);pending=name;}
-        else if(name=="close"){view->close();pending=name;}
-        else if(name=="quit"){need(view->poll_image_jobs(),"quit before real renderer destruction");gtk_main_quit();}
+        else if(name=="fresh"){revision=9;view->policy(grant(),now());snapshot={};publish(4099,21000000000ULL,true);pending=name;}
+        else if(name=="close"){closed=true;request.reset();snapshot={};producer.close();view->close();pending=name;}
+        else if(name=="quit"){need(producer.stopped()&&view->poll_image_jobs(),"quit before real owner destruction");gtk_main_quit();}
         else throw std::runtime_error("GTK history command");
         command_work=static_cast<std::uint64_t>(g_get_monotonic_time()-begin);need(command_work<=100000,"GTK history native command timing");
         if(pending.empty())reply(name,command_work);
@@ -74,16 +67,20 @@ struct Window {
     void pulse(){
         const auto begin=g_get_monotonic_time();const auto delay=previous?std::max<gint64>(0,begin-previous-20000):0;
         phases.begin(pending=="fill"?1:pending=="over"?2:pending=="recover"?3:pending=="fresh"?4:pending=="close"?5:0,sent);unsigned count=0;
-        if(pending=="close"){if(view->poll_image_jobs()){reply(pending,command_work);pending.clear();}}
-        else{
-            phases.measure(Phases::receiver,[&]{if(receiver->view(now()).connected){need(receiver->heartbeat(++sequence,now())==r::DataCode::accepted,"GTK history heartbeat");receiver->sample(tick(measured),now());}});
-            phases.measure(Phases::delivery,[&]{view->deliver(receiver->view(now()),{11,revision==9?5U:4U},now(),phases.observer());});
+        need(!producer.failure(),"GTK history producer failed");
+        if(pending=="close"){if(producer.stopped()&&view->poll_image_jobs()){reply(pending,command_work);pending.clear();}}
+        else if(!closed){
+            phases.measure(Phases::receiver,[&]{Producer::Snapshot next;if(producer.poll(next)){snapshot=std::move(next);sent=snapshot.generation;}});
+            phases.measure(Phases::delivery,[&]{view->deliver(snapshot.delivery,{11,revision==9?5U:4U},now(),phases.observer());});
             phases.measure(Phases::lookup,[&]{count=points();});
+            if(inflight&&sent==inflight&&((pending=="over"&&count==0&&view->status().code==v::SurfaceCode::alternative)||((pending=="recover"||pending=="fresh")&&count==1)||(pending=="fill"&&count==sent)))inflight=0;
             if(pending=="fill"){
-                if(count==fitting){reply(pending,command_work);pending.clear();}
-                else if(count==sent){phases.measure(Phases::publication,[&]{publish(sent+1,static_cast<std::uint64_t>(sent)*1000000);});if(sent%250==0)std::cout<<Json({{"progress",sent}}).dump()<<std::endl;}
-            }else if(pending=="over"&&view->status().code==v::SurfaceCode::alternative&&count==0){reply(pending,command_work);pending.clear();}
-            else if((pending=="recover"||pending=="fresh")&&count==1){reply(pending,command_work);pending.clear();}
+                need(count+1>=sent,"GTK history lost adopted points");
+                if(sent==fitting&&count==fitting&&!inflight&&!request){reply(pending,command_work);pending.clear();}
+                else if(count==sent&&!inflight&&!request){publish(sent+1,static_cast<std::uint64_t>(sent)*1000000);if(sent&&sent%250==0)std::cout<<Json({{"progress",sent}}).dump()<<std::endl;}
+            }else if(pending=="over"&&sent==fitting+1&&!inflight&&!request&&view->status().code==v::SurfaceCode::alternative&&count==0){reply(pending,command_work);pending.clear();}
+            else if(((pending=="recover"&&sent==4098)||(pending=="fresh"&&sent==4099))&&!inflight&&!request&&count==1){reply(pending,command_work);pending.clear();}
+            phases.measure(Phases::handoff,[&]{if(request&&producer.offer(*request)){inflight=request->generation;request.reset();}});
         }
         const auto end=g_get_monotonic_time();need(journal.size()<32768,"GTK history timing capacity");journal.push_back({static_cast<std::uint64_t>(end-begin),static_cast<std::uint64_t>(delay)});phases.finish(sent,count,journal.back().work,journal.back().delay);previous=g_get_monotonic_time();
     }
@@ -99,7 +96,7 @@ inline int run(const std::string& root,bool mixed,unsigned fitting){
     const auto deadline=g_timeout_add_seconds(600,+[](gpointer p)->gboolean{static_cast<Window*>(p)->result=1;gtk_main_quit();return G_SOURCE_REMOVE;},&w);
     std::cout<<"{\"ready\":true}"<<std::endl;gtk_main();
     for(auto id:{source,timer,deadline})if(g_main_context_find_source_by_id(nullptr,id))g_source_remove(id);
-    w.view->close();const auto until=g_get_monotonic_time()+2500000;while(!w.view->poll_image_jobs()){need(g_get_monotonic_time()<until,"GTK history actual owner drain");g_usleep(1000);}
+    w.producer.close();w.view->close();const auto until=g_get_monotonic_time()+2500000;while(!w.producer.stopped()||!w.view->poll_image_jobs()){need(g_get_monotonic_time()<until,"GTK history actual owner drain");g_usleep(1000);}w.producer.terminal();
     w.view.reset();gtk_widget_destroy(w.window);
     w.phases.emit();
     std::cerr<<"history-timing-begin "<<w.journal.size()<<'\n';for(const auto& row:w.journal)std::cerr<<"history-timing "<<row.work<<' '<<row.delay<<'\n';std::cerr<<"history-timing-end "<<w.journal.size()<<'\n';

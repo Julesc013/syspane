@@ -7,6 +7,14 @@ Shared build scripts, profiles and dependency locks live in
 [source/build](source/build/README.md). Build products, raw test recordings and
 machine-specific workspace settings stay in ignored `out/` directories.
 
+The [native history producer checkpoint](spec/delivery/gtk-history-producer-handoff.md)
+puts complete fixture telemetry on one receiver thread with ordered immutable
+handoff and verified shutdown. Native ownership/packet probes, eight decoder
+methods and four regressions pass. Background passes an unchanged replay after
+a startup-barrier failure whose cause remains open. The full diagnostic preserves all original
+content/timing limits; native GTK capacity qualification and all five complete
+editions remain open.
+
 The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete native
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.

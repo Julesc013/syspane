@@ -12,10 +12,24 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-11T20:55:49.038086+00:00", "scope": "Native tick attribution: capacity GTK presentation and fixture publication; unchanged acceptance and source-bound regressions"}
+updated: {"by": "codex", "at": "2026-10-11T21:57:30.252264+00:00", "scope": "Native test producer ownership, versioned tick collection and preserved GTK qualification boundary"}
 ---
 
 # Current state and next admitted boundary
+
+The [native history producer](gtk-history-producer-handoff.md) moves the fixture's
+complete construction/encoding/receipt to one receiver thread. GTK accepts one
+immutable view at a time; publications advance only after actual point adoption.
+Eight decoder methods pass on Windows/Linux and both native component probes pass.
+Four regressions pass; background fails a startup barrier and passes one unchanged
+replay, with its cause still open. The diagnostic chart/mixed outcomes are
+fail/fail; every original timing sample and content/erasure limit remains.
+Product code and 69 other artifacts are unchanged. Next investigate native
+history presentation and capacity erasure with held/collapsed/retired text/name/layout
+and independent AT-SPI, then qualify ordinary maximum histories and maximum-policy erasure.
+Preserve prior timing/observer failures; continue installed cadence, human
+accessibility, desktop/lifecycle and all five complete editions. Tooling stays in
+source/build; raw archives and machine bindings stay under ignored out/.
 
 The [history tick diagnostic](gtk-history-phases-handoff.md) locates separate
 capacity GTK presentation (688.283/504.431 ms) and fixture publication costs.

@@ -523,6 +523,8 @@ if(BUILD_TESTING)
         set_tests_properties(native.GTK-HISTORY-LIMITS PROPERTIES TIMEOUT 1230)
         add_test(NAME native.GTK-HISTORY-PHASES COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/scene/native_gtk_history_phases.py" "$<TARGET_FILE:syspane_scene_inspector_tests>" "${CMAKE_BINARY_DIR}/native-evidence")
         set_tests_properties(native.GTK-HISTORY-PHASES PROPERTIES TIMEOUT 25)
+        add_test(NAME native.GTK-HISTORY-PRODUCER COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/scene/native_gtk_history_producer.py" "$<TARGET_FILE:syspane_scene_inspector_tests>" "${CMAKE_BINARY_DIR}/native-evidence")
+        set_tests_properties(native.GTK-HISTORY-PRODUCER PROPERTIES TIMEOUT 25)
         add_test(NAME native.CHART-FRAME-LIMITS COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/scene/native_chart_frame_limits.py"
             "$<TARGET_FILE:syspane_scene_inspector_tests>" "${CMAKE_BINARY_DIR}/native-evidence")
         set_tests_properties(native.CHART-FRAME-LIMITS PROPERTIES TIMEOUT 390)

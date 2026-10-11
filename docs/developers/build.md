@@ -1,5 +1,25 @@
 # Developer setup and checks
 
+The [native history producer](../../spec/delivery/gtk-history-producer-handoff.md)
+keeps complete fixture construction/encoding/receipt on its own receiver thread.
+After workspace preflight/configure/build, run the component controls before one
+maximum diagnostic family, then the existing affected regressions:
+
+```sh
+ctest --preset linux-x64-gcc13 -R '^(configuration|native)[.]GTK-HISTORY-(PHASES|PRODUCER)$' --output-on-failure
+SYSPANE_GTK_HISTORY_DIAGNOSTIC=1 ctest --preset linux-x64-gcc13 -R '^native[.]GTK-HISTORY-LIMITS$' --output-on-failure
+ctest --preset linux-x64-gcc13 -R '^native[.](SCENE-INSPECTOR.*|CHART-FRAME-LIMITS|INSPECTOR-RENDERER|BACKGROUND-INSPECTOR)$' --output-on-failure
+```
+
+Version-2 collection times GUI view polling and primitive request handoff;
+worker publication maxima are separate. Version-1 journals retain their original
+meaning. All original work/delay samples, exact complete rows, timing/erasure
+limits and native deadlines remain. Close requires fitting+3 accepted packets
+and actual producer/renderer stop. Native ownership/packet probes, eight decoder
+methods and four regressions pass. Background fails a startup barrier, then passes
+one unchanged replay; its cause remains open. Preserve the failed baseline and new diagnostic
+results; investigate retained native accessibility erasure before qualification.
+
 The [history tick diagnostic](../../spec/delivery/gtk-history-phases-handoff.md)
 uses the existing public inspector observer with an optional test-only journal.
 After workspace preflight/configure/build, validate the collector, then run one

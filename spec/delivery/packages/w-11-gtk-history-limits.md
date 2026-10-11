@@ -11,6 +11,7 @@ sp_authority: "normative-proposal"
 sp_requires: ["SP-W11-CHART-FRAME-LIMITS", "SP-W11-BACKGROUND-INSPECTOR", "SP-W11-CHILD-IDENTITY-OBSERVATION"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION"]
+updated: {"by": "codex", "at": "2026-10-11T21:57:30.252264+00:00", "scope": "Close fixture receiver ownership, accepted-count handoff and qualified-clock gaps; preserve failures and native limits"}
 ---
 
 # Native GTK maximum fitting chart and mixed histories
@@ -121,3 +122,91 @@ tests/scene/native_gtk_history_phases.py and qualifies collection only.
 Run native.GTK-HISTORY-LIMITS with SYSPANE_GTK_HISTORY_DIAGNOSTIC=1 for the diagnostic
 family after workspace preflight/configure/build. Keep ordinary qualification
 separate and preserve both sources. No acceptance oracle is calibrated from this run.
+
+## Follow-up: fixture producer ownership
+
+Preserve 977a42c7 and its measured fixture/presentation failures. This collection
+ownership revision follows the ordinary frontend's serialized native receiver and
+immutable TelemetryDelivery handoff. It changes no product code, wire values,
+case thresholds, expected rows, GUI/erasure limits or native deadlines.
+
+The fixture owns one native producer thread and one TelemetryReceiver, constructed,
+called, withdrawn and destroyed on that thread. GTK owns SceneInspector, commands
+and point-count observation. Only immutable delivery views and scalar status cross
+the boundary. Snapshot construction, complete encoding and ORIGINAL receive all
+execute on the producer, with the same one/64 rows, P1/E1, generations, sample IDs,
+binding features and qualified measurement clocks. Original receipt timestamps and
+250-ms clock/3000-ms lease guards are never rebased to GUI delivery.
+
+Admit one outstanding publication across the GUI request, queued and executing
+states. Offer/poll use bounded try-lock handoff; busy leaves the exact GUI request
+pending without another producer allocation. The producer holds the mutex only
+for scalar/immutable-view transfer, never for construction, validation, heartbeats
+or waiting on an experiment barrier. Its idle loop samples/heartbeats every 20 ms;
+accepted frames retain the same measurement nanoseconds, so expected age stays
+zero. Clock-only complete views may replace the mailbox; publication N+1 remains
+prohibited until N is actually visible in GTK. No accepted point is coalesced away.
+
+Track issued and accepted generation separately. A command acknowledgement needs
+the exact accepted generation and required GTK state. Recovery 4098 stays in
+scope (11,4), policy 7 and 20 seconds. Denial at 8 clears GTK immediately and
+permits no qualified old delivery. Regrant 9 requests 4099 at 21 seconds only
+after destroying the old receiver; the new receiver uses scope (11,5), policy 9,
+sequence zero and a fresh ordinal ledger. GTK always supplies its CURRENT scope.
+No prior mailbox may satisfy the fresh/recovery acknowledgement.
+
+Close prevents further offers/polls or publication, clears pending GUI views,
+wakes the producer and suppresses any in-flight result. The producer withdraws
+and destroys its receiver, clears its one mailbox/queue and only then marks
+stopped. Close/quit wait for both actual producer and renderer destruction within
+the existing native guard; join follows proven stop. Exceptions clear output,
+expose one bounded failure code and stop; GTK fails the case and erases rather
+than retrying or treating old delivery as current. Wrong API owner is an error.
+
+Use tests/scene/gtk_history_producer.hpp in the existing window mode. A separate
+native.GTK-HISTORY-PRODUCER fixture proves receiver ownership, literal complete
+wire receipt, busy refusal, current/fresh scope, invalid-wire failure, held-job
+close and actual stop, with a 25-second bound. It owns no GTK or alternate renderer.
+At close the maximum runner independently checks total accepted publications
+equals fitting+3 and both native owners are stopped. Preserve every original
+content/timing/deadline oracle and negative control.
+
+Optional phase journal version 2 keeps every original tick and nested timing,
+replacing fixture-publication work with GUI handoff work in the same numeric slot.
+Version 1 remains readable with its original meaning. Validate literal version-2
+pending handoff traces and reject unsupported versions; worker publication maxima
+are separately reported and never counted as GUI time. Run collector/producer
+fixtures before one complete diagnostic maximum family, then affected regressions.
+The GTK capacity-erasure failure remains independent and cannot become qualified
+merely because fixture work moved to its proper owner. Continue the native erasure
+experiment, ordinary maximum/policy qualification and complete editions.
+
+The first producer diagnostic preserves a chart capacity timing failure and a
+mixed 600-second timeout. A bounded external AT-SPI read during the mixed stall
+observes only one start point at generation 1221; the cause of the lost accumulated
+history is not established. Preserve that observation and all source identities.
+Do not treat missing/incomplete journals or a killed child as successful shutdown.
+
+An outstanding job is released by a new accepted-publication count, never merely
+by matching its generation to an older mailbox. A held repeat-generation request
+must still refuse another job and close without importing or replacing a point.
+Add the negative fixture before the repair and preserve its actual failure.
+
+Keep the one receiver/producer owner. Renew its real heartbeat and qualified
+measurement-clock view before construction, before/after full encoding and after
+ORIGINAL receipt, as well as idle polling. These renewals retain the last accepted
+measurement nanoseconds until the new complete receipt; they do not rebase the
+frame's original timestamp or fabricate a newly accepted point. Publish only an
+immutable complete view. Record the maximum actual interval between sampled
+views; an interval over the existing 250-ms clock guard fails the fixture, clears
+output and destroys the receiver rather than relying on cached data. A held-job
+clock-expiry probe proves that failure and actual stop. Each indivisible native
+phase must finish within that guard on the qualified environment; an unavailable
+or stalled phase remains a failed experiment, not a relaxed clock limit.
+
+During fill, an observed point count more than one below the exact newly accepted
+generation is a lost-history failure. The one-point difference remains permitted
+while GTK is adopting the one outstanding publication. Fail promptly and preserve
+the complete available journal; do not wait on an impossible count until timeout.
+Repeat the fixed diagnostic family on the repaired collection source, then its
+affected regressions, preserving the initial diagnostic and component failures.

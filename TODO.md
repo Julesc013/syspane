@@ -29,7 +29,9 @@ telemetry is now integrated; preserve prior failures and all five full release e
 - [x] Add exact native GTK maximum chart/mixed histories, full AT-SPI rows, capacity recovery and actual renderer exit; preserve both failed timing cases. See the [handoff](spec/delivery/gtk-history-limits-handoff.md).
 - [x] Run one validated authored MAX-FRAME callback/phase diagnostic; it does not reproduce the earlier delay, which remains unresolved.
 - [x] Attribute the complete maximum GTK diagnostic: capacity presentation takes 688.283/504.431 ms; 24 mixed accumulation ticks are dominated by fixture publication. Preserve both failed cases and every original sample; see the [handoff](spec/delivery/gtk-history-phases-handoff.md).
-- [ ] Close bounded fixture producer/receiver ownership outside GTK, ordered full-publication handoff, policy/recovery/failure and actual shutdown before implementing that collection revision; preserve exact inputs and timing limits.
+- [x] Close and implement one non-GUI fixture receiver with ordered complete-publication handoff; prove literal packets, busy/scope/failure controls, original clocks and actual shutdown. Preserve all fixed cases and preceding failures; see the [handoff](spec/delivery/gtk-history-producer-handoff.md).
+- [ ] Investigate the new BACKGROUND-INSPECTOR claimed-barrier startup failure; one unchanged replay passes without establishing its cause. Preserve the original gate/deadline.
+- [ ] Investigate the new measured GTK accumulation presentation over 100 ms as well as capacity erasure; preserve every original sample and full row oracle.
 - [ ] Investigate native capacity erasure with held text/name/layout references and independent AT-SPI, including collapsed/retired cells; choose a repair from measured evidence.
 - [ ] Qualify maximum-history policy erasure with held accessibility references; reject model detachment that leaves old text readable. The current revocation check follows recovery to one point.
 - [ ] Resolve the earlier authored MAX-FRAME delay of 458.801 ms against the unchanged 100-ms GUI limit; the diagnostic pass does not replace its failed qualification.

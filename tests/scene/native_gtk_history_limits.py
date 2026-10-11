@@ -142,7 +142,9 @@ def observe(exe,folder,mode):
         issued,_=command('revoke');wait(lambda:matrix()==[] and text(summary)=='',CASES['erasure_ms']/1000)
         report['erasure_ms']=(time.monotonic()-issued)*1000;assert report['erasure_ms']<=CASES['erasure_ms']
         command('fresh');exact([(21000000000,4099,False)],4099);assert text(summary)==''
-        command('close');assert matrix()==[] and text(summary)==''
+        _,closed=command('close');assert matrix()==[] and text(summary)==''
+        producer=closed['producer'];assert producer['accepted']==count+3 and producer['receiver_owner'] and producer['stopped'] and producer['renderer_stopped'] and producer['failure']==0 and producer['clock_gap_max_ms']<=250,producer
+        report['producer']=producer
         command('quit');assert proc.wait(timeout=3)==0
         report['actual_exit']=True;report['outcome']='pass'
     except Exception:report['failure']=traceback.format_exc();raise
@@ -170,7 +172,7 @@ def main():
     if sys.argv[1]=='--observe':observe(Path(sys.argv[2]),Path(sys.argv[3]),sys.argv[4]);return
     exe,evidence=map(lambda p:Path(p).resolve(),sys.argv[1:3]);assert os.geteuid()!=0 and evidence.parent==exe.parent
     controls();folder=evidence/('gtk-history-'+uuid.uuid4().hex[:12]);folder.mkdir()
-    report=dict(family='GTK-HISTORY-LIMITS',outcome='fail',diagnostic_only=os.environ.get('SYSPANE_GTK_HISTORY_DIAGNOSTIC')=='1',started_at=datetime.now(timezone.utc).isoformat(),executable_sha256=sha(exe.read_bytes()),inputs={p.relative_to(ROOT).as_posix():sha(p.read_bytes()) for p in [Path(__file__),CASES_PATH,Path(oracle.__file__),ROOT/'tests/scene/gtk_history_limits.hpp',ROOT/'tests/scene/gtk_history_phases.hpp',Path(history_phases.__file__),ROOT/'source/build/surface-runtime.json']},oracle_mutations_rejected=3,cases=[])
+    report=dict(family='GTK-HISTORY-LIMITS',outcome='fail',collection_revision='native-producer/2',diagnostic_only=os.environ.get('SYSPANE_GTK_HISTORY_DIAGNOSTIC')=='1',started_at=datetime.now(timezone.utc).isoformat(),executable_sha256=sha(exe.read_bytes()),inputs={p.relative_to(ROOT).as_posix():sha(p.read_bytes()) for p in [Path(__file__),CASES_PATH,Path(oracle.__file__),ROOT/'tests/scene/gtk_history_limits.hpp',ROOT/'tests/scene/gtk_history_producer.hpp',ROOT/'tests/scene/gtk_history_phases.hpp',Path(history_phases.__file__),ROOT/'source/build/surface-runtime.json']},oracle_mutations_rejected=3,cases=[])
     server=None
     try:
         server,env=launch_xvfb(folder,tuple(CASES['screen']));env['NO_AT_BRIDGE']='0';env.pop('AT_SPI_BUS_ADDRESS',None)

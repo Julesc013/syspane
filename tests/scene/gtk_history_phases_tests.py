@@ -14,7 +14,7 @@ class Phases(unittest.TestCase):
         rows=decode(self.raw,self.timing);self.assertEqual((rows[0]['residual_us'],rows[0]['delivery_residual_us'],rows[0]['adoption_other_us']),(20,15,10))
         report=summarize(rows,99);self.assertEqual(len(report['slow']),1);self.assertEqual(report['maxima']['presentation_us'],30)
     def test_completion_version_and_counts(self):
-        for raw in (self.raw[:-1],self.raw.replace(b'begin 1',b'begin 2'),self.raw.replace(b'end 1',b'end 2'),self.raw.replace(b'begin 1 1',b'begin 1 0'),self.raw.replace(b'begin 1 1',b'begin 1 32769'),self.raw.replace(b'history-phase 0',b'junk 0')):self.bad(raw)
+        for raw in (self.raw[:-1],self.raw.replace(b'begin 1',b'begin 3'),self.raw.replace(b'end 1',b'end 2'),self.raw.replace(b'begin 1 1',b'begin 1 0'),self.raw.replace(b'begin 1 1',b'begin 1 32769'),self.raw.replace(b'history-phase 0',b'junk 0')):self.bad(raw)
         self.bad(self.raw,[]);self.bad(self.raw,self.timing*2)
     def test_identity_integer_and_capacity(self):
         for index,value in ((0,1),(1,6),(2,4100),(4,4097),(5,-1),(5,2**64),(14,1),(14,8)):self.bad(self.field(index,value))
@@ -24,6 +24,13 @@ class Phases(unittest.TestCase):
         for index,value in ((6,50),(11,30),(13,41),(14,3),(14,0)):self.bad(self.field(index,value))
     def test_fixture_publication_state(self):
         self.bad(self.field(1,0));self.bad(self.field(3,3))
+    def test_literal_async_handoff_versions(self):
+        raw=b'history-phases-begin 2 2\nhistory-phase 0 1 1 1 1 100 34 10 60 2 8 5 40 30 7\nhistory-phase 1 4 4098 4099 1 50 0 2 30 1 7 3 20 12 7\nhistory-phases-end 2\n'
+        rows=decode(raw,[dict(work_us=100,delay_us=34),dict(work_us=50,delay_us=0)])
+        self.assertEqual([row['handoff_us'] for row in rows],[8,7]);self.assertEqual([row['residual_us'] for row in rows],[20,10]);self.assertTrue(all(row['journal_version']==2 and 'publication_us' not in row for row in rows))
+        self.assertEqual(summarize(rows)['maxima']['handoff_us'],8)
+        self.bad(raw.replace(b'begin 2',b'begin 1'),[dict(work_us=100,delay_us=34),dict(work_us=50,delay_us=0)])
+        with self.assertRaises(ValueError):summarize([decode(self.raw,self.timing)[0],rows[0]])
     def test_full_storage_bound(self):self.bad(self.raw+b' '* (6*1024*1024))
 
 if __name__=='__main__':unittest.main()

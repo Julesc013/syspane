@@ -64,6 +64,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Native grouping checkpoint](group-handoff.md) — Exact hierarchy transformations, selection history and independently observed native persistence.
 - [Maximum native GTK histories and preserved timing failures](gtk-history-limits-handoff.md) — Exact accessible chart/mixed content passes; native timing qualification remains open.
 - [Maximum history tick attribution and separate repair boundaries](gtk-history-phases-handoff.md) — Locate native capacity erasure and fixture publication work without changing acceptance.
+- [Native fixture producer and preserved GTK capacity boundary](gtk-history-producer-handoff.md) — Separate complete telemetry production from native GUI work without changing acceptance.
 - [Verified installation-relative helper execution](helper-identity-handoff.md) — Compiled helper closure, immutable native execution and relocated development-package evidence.
 - [Historical Windows shared-subset build checkpoint](historical-build-handoff.md) — Record the pinned v141_xp build, unchanged shared behavior, resolved runtime inputs and pending guest qualification.
 - [Prepared history form handoff](history-form-handoff.md) — Experimental native history adoption and capture coexistence are implemented; GUI qualification remains open.
