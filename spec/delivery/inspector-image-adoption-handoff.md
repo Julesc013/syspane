@@ -99,6 +99,11 @@ references are checked after recording the final handoff.
 
 ## Next admitted work
 
+The later [child identity follow-up](child-identity-handoff.md) records the
+collection correction, twelve passing installed image/topology cases and a new
+authored MAX-FRAME timing failure. This checkpoint and its original failed
+HELD-CLOSE observation remain unchanged evidence of the preceding source/oracle.
+
 Close the reviewed HELD-CLOSE identity observation failure and investigate the
 preceding native AT-SPI timeout and child-observer exit race
 without claiming their causes from these passing runs. Preserve failures and exact

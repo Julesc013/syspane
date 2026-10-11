@@ -12,18 +12,29 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-11T18:44:31.274695+00:00", "scope": "Image launch after current GUI/phase acceptance; reviewed source and failed held-child identity observation preserved"}
+updated: {"by": "codex", "at": "2026-10-11T19:23:38.227441+00:00", "scope": "Consistent child identity; preserved MAX-FRAME GUI-delay failure and source-bound installed/shared regressions"}
 ---
 
 # Current state and next admitted boundary
 
-The [image adoption follow-up](inspector-image-adoption-handoff.md) reproduces
+The [child identity follow-up](child-identity-handoff.md) closes incomplete argv
+caching without changing product artifacts or fixed acceptance. All twelve installed
+image/topology cases pass, alongside inspector/editor/recovery/telemetry, ordinary
+and complete-phase tables, recovery GUI, phase refusal and erasure. A real sealed
+image-worker probe and 147 shared checks on each development profile pass.
+The authored family passes seven of eight and fails MAX-FRAME at 458.801 ms
+of GUI delay against the unchanged 100-ms limit. Preserve it and investigate
+the cause before qualification; then continue maximum GTK chart/mixed and
+installed histories, human accessibility and desktop/lifecycle composition.
+W-11 and all five complete editions remain open.
+
+The earlier [image adoption follow-up](inspector-image-adoption-handoff.md) reproduces
 child creation before the first native loading row and gates launch on current
 GTK adoption. Controlled renderer/background checks, including four image phase
 refusal/throw cases, pass. The first candidate passed all twelve installed cases;
 the reviewed source passes eleven and fails HELD-CLOSE identity observation after
-the observer records a verified image executable with empty argv. Current installed
-qualification remains open. The reviewed source passes seven ordinary and seven
+the observer records a verified image executable with empty argv. At that checkpoint installed
+qualification remained open. The reviewed source passes seven ordinary and seven
 complete-phase table cases, inspector, telemetry, authored, recovery GUI, phase
 refusal, table erasure and all 146 selected Linux shared checks. Preserve earlier
 AT-SPI and child-observer failures and close

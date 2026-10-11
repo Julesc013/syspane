@@ -25,7 +25,8 @@ telemetry is now integrated; preserve prior failures and all five full release e
 - [x] Implement bounded background inspector admission/painting, current adoption, cancellation and native shutdown. Preserve startup, summary/accessibility, fixture and diagnostic failures; see the [handoff](spec/delivery/background-inspector-handoff.md).
 - [x] Reproduce and repair background image launch before current loading-row adoption; pass controlled ordering, phase refusal/throw and installed held navigation. See the [handoff](spec/delivery/inspector-image-adoption-handoff.md).
 - [x] Pass all seven ordinary and complete-phase maximum-table cases on the image-adoption source with the unchanged 100-ms GUI/200-ms erasure bounds; preserve every preceding failure.
-- [ ] Close the reviewed HELD-CLOSE child-identity observation failure; preserve its empty-argv verified-executable record, the earlier twelve-case passing candidate and unchanged lifetime/identity deadlines.
+- [x] Correct incomplete child-identity caching; pass the real sealed-worker probe, twelve installed image/topology cases and 147 shared checks on each development profile. Preserve the old failure and unchanged case/lifetime/deadline criteria; see the [handoff](spec/delivery/child-identity-handoff.md).
+- [ ] Investigate the latest authored MAX-FRAME delay of 458.801 ms against the unchanged 100-ms GUI limit; authored qualification remains open despite the other seven passing cases.
 - [ ] Investigate the preceding ordinary ORACLE AT-SPI timeout and TOPOLOGY child-observer exit race; passing runs do not establish their causes or an observer repair.
 - [ ] Qualify maximum chart/mixed workloads through native GTK, independent AT-SPI and installed history accumulation with the fixed GUI/erasure limits.
 - [x] Compose installed saved-scene inspection, guarded navigation, current-policy erasure and verified image-task ownership.

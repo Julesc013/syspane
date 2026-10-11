@@ -427,6 +427,16 @@
       "sha256": "3283598a3566389f11189329ad5acf0e36c7fc7d74181019e85d803a846fb700"
     },
     {
+      "id": "SP-CHILD-IDENTITY-HANDOFF",
+      "path": "delivery/child-identity-handoff.md",
+      "title": "Consistent child identity and preserved installed qualification",
+      "description": "Correct incomplete identity caching while preserving actual native acceptance.",
+      "requires": [
+        "SP-W11-CHILD-IDENTITY-OBSERVATION"
+      ],
+      "sha256": "61b0a1a23d44ce07222be4f3c21fbbd4551451d8234b5cc913a2440cdafa9c34"
+    },
+    {
       "id": "SP-COMMAND-SESSIONS-HANDOFF",
       "path": "delivery/command-sessions-handoff.md",
       "title": "Asynchronous authenticated command checkpoint",
@@ -510,7 +520,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "9320f8da2f630a9efdc6d1d93deccd05147e4771090a7cdc310e6009edd2f7a2"
+      "sha256": "0ecb88f7d38722539a449672b15e2db0da9a426d21e28de1c1d1ace99c15af9a"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -1085,7 +1095,7 @@
       "requires": [
         "SP-W11-BACKGROUND-INSPECTOR"
       ],
-      "sha256": "bb4039e4439d446ff4582bf048ac34f90ab6ae1df89a049891b1328fb5e246e3"
+      "sha256": "ff395209b0f0ec19b4c3ff504f09802736a9dbd933d8433a87a292bac1c76dd1"
     },
     {
       "id": "SP-INSPECTOR-LIVE-TABLES-HANDOFF",
@@ -2479,6 +2489,18 @@
         "SP-W07-CONTINUOUS-REPLAY"
       ],
       "sha256": "e6e718f60ea2a7c4deebff9ed26c1aa109d7fc75b60b81a577f8b15b4e1b9701"
+    },
+    {
+      "id": "SP-W11-CHILD-IDENTITY-OBSERVATION",
+      "path": "delivery/packages/w-11-child-identity-observation.md",
+      "title": "Consistent native child identity observation",
+      "description": "Resample incomplete identity without weakening native acceptance.",
+      "requires": [
+        "SP-W11-BACKGROUND-INSPECTOR",
+        "SP-W11-INSPECTOR-ASSETS",
+        "SP-WORK-PACKAGES"
+      ],
+      "sha256": "fdda00dbffef33fc6c95f1d04b063e491bffd2b3e379c536f976505ff4961bcd"
     },
     {
       "id": "SP-W11-DRAFT-ADMISSION",

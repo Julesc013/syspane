@@ -89,6 +89,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Native creation of every scene primitive](w-10-widget-creation.md) — Create bounded authored widgets through existing resource, draft and transaction owners.
 - [Background inspector rendering and current-result adoption](w-11-background-inspector.md) — Move admission and native composition off GTK while keeping current authority, temporal validity and truthful shutdown.
 - [Chart history and mixed frame resource boundaries](w-11-chart-frame-limits.md) — Exact retained-point, accessible-text and typed-frame limits before native maximum-history qualification.
+- [Consistent native child identity observation](w-11-child-identity-observation.md) — Resample incomplete identity without weakening native acceptance.
 - [Current draft admission and preview resource ownership](w-11-draft-admission.md) — Remove repeated reconstruction of owned draft state while retaining current authorization and full mutation validation.
 - [Independent editor callback timing trace](w-11-editor-callback-trace.md) — Attribute work outside the frontend timer without changing product behavior or acceptance limits.
 - [Native editor helper worker bridge](w-11-editor-helper-worker.md) — Move verified image and recovery execution behind bounded GUI-owned task handles.

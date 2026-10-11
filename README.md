@@ -11,10 +11,15 @@ The [0.1.0 release objective](spec/delivery/release-0.1.0.md) requires complete 
 desktop editions for Windows 9x, Windows NT, Linux X11, Wayland and Mac OS X.
 These are development targets; supported versions and release qualification remain open.
 
-The [image adoption follow-up](spec/delivery/inspector-image-adoption-handoff.md)
+The [child identity follow-up](spec/delivery/child-identity-handoff.md) passes all
+twelve installed image/topology cases after correcting incomplete observer caching.
+Selected shared and installed regressions pass apart from one authored MAX-FRAME GUI-delay
+failure. Preserve that failure and its unchanged limit; full qualification remains open.
+
+The earlier [image adoption follow-up](spec/delivery/inspector-image-adoption-handoff.md)
 displays the current loading row before starting its native image child. Controlled
-ordering and held navigation pass. The reviewed installed run passes eleven cases
-and fails HELD-CLOSE child-identity observation; complete qualification remains open.
+ordering and held navigation passed. Its reviewed installed run passed eleven cases
+and failed HELD-CLOSE child-identity observation; that original failure stays preserved.
 
 The [background inspector checkpoint](spec/delivery/background-inspector-handoff.md)
 moves ordinary Linux rendering off GTK and keeps current authority, clocks, bounded

@@ -24,6 +24,7 @@ sys.path[:0]=[str(ROOT/'tests/configuration'),str(ROOT/'tests/fault'),str(ROOT/'
 from native_settings import Keys, stored
 from native_diagnostic import launch_xvfb
 from check_surface_runtime import verify
+from child_identity import observe_child_identity
 CASES=json.loads((ROOT/'tests/configuration/installed-editor-cases.json').read_bytes())
 INITIAL=json.loads((ROOT/CASES['initial_documents']).read_bytes())
 EXPECTED=json.loads((ROOT/CASES['expected_scene']).read_bytes())
@@ -72,23 +73,19 @@ def observe(exe,folder,runtime,mode,extension=None):
                 fd=None
                 try:
                     fd=os.pidfd_open(pid)
-                    args=Path('/proc',str(pid),'cmdline').read_bytes().split(b'\0')[:-1]
-                    path=Path('/proc',str(pid),'exe');target=os.readlink(path)
-                    if 'memfd:syspane-' not in target:os.close(fd);continue
-                    digest=sha(path.read_bytes())
+                    identity=observe_child_identity(pid,fd,proc.pid)
                 except (FileNotFoundError,ProcessLookupError):
                     if fd is not None:os.close(fd)
                     continue
-                except PermissionError:
-                    # The real image sandbox disables dumpability before input.
-                    # Keep exact-child liveness without claiming an executable hash.
-                    if select.select([fd],[],[],0)[0]:target='exited-before-executable-observation'
-                    else:
-                        assert len(args)==3 and args[0]==b'syspane-image-worker' and args[1] in (b'image/png',b'image/jpeg',b'image/svg+xml') and args[2]==str(proc.pid).encode(),args
-                        target='sandboxed:syspane-image-worker'
-                    digest=None
+                except Exception:
+                    if fd is not None:os.close(fd)
+                    raise
+                if identity.record is None:
+                    os.close(fd);counts=report.setdefault('child_identity_unqualified',{})
+                    counts[identity.reason]=counts.get(identity.reason,0)+1
+                    continue
                 helper_pidfds[pid]=fd
-                report.setdefault('native_children',[]).append(dict(pid=pid,image=target,sha256=digest,argv=[v.decode() for v in args]))
+                report.setdefault('native_children',[]).append(dict(pid=pid,**identity.record))
         context=GLib.MainContext.default()
         for _ in range(100):
             if not context.pending():break

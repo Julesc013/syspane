@@ -1,12 +1,28 @@
 # Developer setup and checks
 
-The [image adoption follow-up](../../spec/delivery/inspector-image-adoption-handoff.md)
+The [child identity package](../../spec/delivery/packages/w-11-child-identity-observation.md)
+corrects incomplete observer caching without changing product binaries or native
+case expectations. After workspace preflight/configure/build, run:
+
+```sh
+ctest --preset <profile> -R '^configuration[.]CHILD-IDENTITY$' --output-on-failure
+ctest --preset linux-x64-gcc13 -R '^native[.]CHILD-IDENTITY$' --output-on-failure
+ctest --preset linux-x64-gcc13 -R '^native[.]INSTALLED-INSPECTOR-ASSETS$' --output-on-failure
+```
+
+The portable cases replay literal collector states and the actual pump; the native
+probe verifies a sealed worker, exact arguments, literal pixels and pidfd exit.
+Installed image/topology passes twelve cases. Shared-harness regressions preserve
+one authored MAX-FRAME GUI-delay failure at 458.801 ms. Keep its fixed 100-ms
+limit and open qualification; see the [handoff](../../spec/delivery/child-identity-handoff.md).
+
+The earlier [image adoption follow-up](../../spec/delivery/inspector-image-adoption-handoff.md)
 gates background native image launch on GTK's current-result acknowledgement.
 Use the existing INSPECTOR-RENDERER, BACKGROUND-INSPECTOR and
 INSTALLED-INSPECTOR-ASSETS commands below after workspace preflight/configure/build.
 The controlled failure and repaired literal loading/child ordering remain recorded.
-The first candidate passed twelve installed cases; the reviewed source passes
-eleven and fails HELD-CLOSE child-identity observation. Preserve both sources,
+The first candidate passed twelve installed cases; its reviewed source passed
+eleven and failed HELD-CLOSE child-identity observation. Preserve both sources,
 preceding observer/accessibility failures and the original regression families.
 
 The [background inspector package](../../spec/delivery/packages/w-11-background-inspector.md)
