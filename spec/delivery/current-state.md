@@ -12,10 +12,23 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-11T21:57:30.252264+00:00", "scope": "Native test producer ownership, versioned tick collection and preserved GTK qualification boundary"}
+updated: {"by": "codex", "at": "2026-10-11T22:44:46.703477+00:00", "scope": "Retained/collapsed GTK cache experiment, exact remote withdrawal and preserved unqualified candidates"}
 ---
 
 # Current state and next admitted boundary
+
+The [retained GTK cache experiment](gtk-accessible-erasure-handoff.md) exposes
+local values left by blank/detach after collapse/removal. Public cache refresh
+clears all 6344 held local cells, but expanded erasure takes 276.833 ms against
+100 ms. All old-reference wire requests return explicit UnknownObject, with a
+fresh live tree and normal native exit; none are successful empty reads.
+All six strict cases remain failed. Preserve the original interface/name failures,
+every remote error and native time. The existing 70 artifacts are unchanged;
+two graph checks and SCENE-INSPECTOR-MODEL pass. Next measure object retirement
+versus cache refresh, close bounded complete scope/lifetime ownership and resolve
+held-reference withdrawal semantics explicitly before product eligibility.
+Continue actual GTK history/policy, installed/human/desktop qualification and all
+five complete editions; tooling stays in source/build and raw data stay in out/.
 
 The [native history producer](gtk-history-producer-handoff.md) moves the fixture's
 complete construction/encoding/receipt to one receiver thread. GTK accepts one

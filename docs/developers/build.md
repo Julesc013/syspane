@@ -1,5 +1,22 @@
 # Developer setup and checks
 
+The [retained GTK cache experiment](../../spec/delivery/gtk-accessible-erasure-handoff.md)
+is an optional standalone Linux toolkit probe. After workspace preflight and the
+ordinary configure/build commands, run:
+
+```sh
+ctest --preset linux-x64-gcc13 -R '^native[.]GTK-ACCESSIBLE-ERASURE$' --output-on-failure
+ctest --preset linux-x64-gcc13 -R '^(composition[.]|native[.]SCENE-INSPECTOR-MODEL$)' --output-on-failure
+```
+
+Six fresh children retain 6344 local/external cells, compare exact initial data,
+collapse/remove a retirement root, erase and regrant fresh rows. All strict cases
+fail: old wire requests are explicit UnknownObject, never successful empty data;
+expanded scrub also exceeds 100 ms despite clearing local caches. Complete lossless
+wire journals, prior collector failures, original limits and actual exits remain
+recorded. Two graph checks and the existing model suite pass. This does not qualify
+SceneInspector, a complete scope/registry solution, installed privacy or an edition.
+
 The [native history producer](../../spec/delivery/gtk-history-producer-handoff.md)
 keeps complete fixture construction/encoding/receipt on its own receiver thread.
 After workspace preflight/configure/build, run the component controls before one

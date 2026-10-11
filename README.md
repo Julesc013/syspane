@@ -7,6 +7,12 @@ Shared build scripts, profiles and dependency locks live in
 [source/build](source/build/README.md). Build products, raw test recordings and
 machine-specific workspace settings stay in ignored `out/` directories.
 
+The [retained GTK cache experiment](spec/delivery/gtk-accessible-erasure-handoff.md)
+preserves failed blank/detach/scrub candidates across collapsed and retired cells.
+Public scrub clears local caches but fails expanded timing. Old wire references
+are explicitly withdrawn, not successful empty reads; product qualification
+remains open. Existing product artifacts and acceptance limits are unchanged.
+
 The [native history producer checkpoint](spec/delivery/gtk-history-producer-handoff.md)
 puts complete fixture telemetry on one receiver thread with ordered immutable
 handoff and verified shutdown. Native ownership/packet probes, eight decoder

@@ -11,7 +11,7 @@ sp_authority: "normative-proposal"
 sp_requires: ["SP-W11-CHART-FRAME-LIMITS", "SP-W11-BACKGROUND-INSPECTOR", "SP-W11-CHILD-IDENTITY-OBSERVATION"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION"]
-updated: {"by": "codex", "at": "2026-10-11T21:57:30.252264+00:00", "scope": "Close fixture receiver ownership, accepted-count handoff and qualified-clock gaps; preserve failures and native limits"}
+updated: {"by": "codex", "at": "2026-10-11T22:44:46.703477+00:00", "scope": "Close retained GTK toolkit experiment and wire collection; preserve failed candidates, original limits and separate product eligibility"}
 ---
 
 # Native GTK maximum fitting chart and mixed histories
@@ -210,3 +210,71 @@ while GTK is adopting the one outstanding publication. Fail promptly and preserv
 the complete available journal; do not wait on an impossible count until timeout.
 Repeat the fixed diagnostic family on the repaired collection source, then its
 affected regressions, preserving the initial diagnostic and component failures.
+
+## Follow-up: retained GTK accessibility cache experiment
+
+Preserve bd8e3e10, all original timing/observer failures and the rejected plain
+model-detachment prototype. Before a product repair, compare current recursive
+blank/clear, plain detach/blank/clear, and detach plus public text-cache refresh.
+Use only public GtkCellAccessibleClass.update_cache, RendererCellAccessible's
+renderer property and ordinary GTK/ATK APIs on the pinned Linux toolkit. No private
+GTK fields, functions, patches or alternate product renderer are admitted.
+
+This bounded standalone GTK prototype tests cache behaviour, not the SceneInspector,
+wire admission, installed edition, complete privacy boundary or product performance.
+It owns one GTK thread, a TreeStore with two text columns, a 3138-child chart root
+and a separate 32-child retirement root: 3172 initial rows and 6344 held cells.
+Every cell has a unique literal item/information canary. Use nine-point Noto Sans,
+the existing 740-by-540 window, private 1600-by-2048 Xvfb and D-Bus sessions.
+The exact initial strings are ITEM_CHART_ROOT/ERASURE_CANARY_CHART_ROOT,
+ITEM_POINT_i/ERASURE_CANARY_POINT_i for i=0..3137, and
+ITEM_RETIRED_ROOT/ERASURE_CANARY_RETIRED_ROOT followed by
+ITEM_RETIRED_i/ERASURE_CANARY_RETIRED_i for i=0..31. Recovery contains only
+FRESH_ROOT/FRESH_VALUE and its FRESH_POINT/FRESH_POINT_VALUE child.
+
+Capture every original cell and compare its text/name with independent expected
+strings. Retain its original imported Text interface while the object is live;
+fresh interface lookup after withdrawal cannot substitute for querying that held
+interface. Preserve the first collection's missing-interface failures without
+interpreting them as empty data or a product pass. Collapse the retirement root, recursively blank/remove it using the
+current strategy, and retain its old cells. Run fresh expanded and collapsed
+chart cohorts for each candidate. Retained cells from collapsed/removed rows
+remain part of the erasure oracle even when the current model is empty.
+
+The scrub candidate detaches the model, blanks/clears its store, sets both shared
+renderers' text empty and invokes each held cell's public cache-update slot with
+emit_signal false, then reattaches the empty store. This prototype explicitly owns
+all held cells. A product registry/lifetime solution is not established by this
+ownership shortcut. No event, row, input or time is excluded from the measured
+mutation; the original 100-ms GUI and 200-ms external-erasure limits apply.
+
+Check all held cells locally and through independent AT-SPI: full text, name,
+character count and word/layout text. Repeat after introducing a fresh root and
+point, ensuring old references expose neither old nor new data. Remote errors,
+incomplete replies, warnings/critical failures, crashes, missing cells or deadlines
+fail the experiment; they are not mapped to empty text. The active tree must show
+the literal fresh rows. Original bulk/detach controls must expose a retained-value
+failure, proving the checker is not accepting an empty current model as erasure.
+
+Use tests/scene/gtk_accessible_erase_probe.cpp and native_gtk_accessible_erase.py,
+one optional Linux GTK test target and native.GTK-ACCESSIBLE-ERASURE. Six independent
+children (three strategies times two chart expansion states) have 120 seconds each;
+the family has 750 seconds. Each input is at most 4096 bytes, acknowledgements at
+most 32 records, native stdout/stderr at most 2 MiB and observer data at most 12 MiB.
+Keep originals and any candidate failure with exact source/artifact/runtime/input
+identities under owned ignored evidence. Run workspace preflight/configure/build
+and the ordinary CTest command. Only choose a later product approach after the
+cache oracle succeeds; it still needs bounded complete registry/scope ownership,
+normal updates/selection, all existing native regressions and full history/policy
+qualification. A local ATK-only result cannot establish external erasure.
+
+The first two collectors fail on interface lookup and then old-object name
+requests after withdrawal. Do not accept an SDK default empty string as evidence
+of a successful remote read. Add a bounded wire collector using the public AT-SPI
+object references and published D-Bus signatures. Check each method before
+mutation, retain its real reply/error after erasure and recovery, and complete
+the active fresh-tree checks even when old references are withdrawn. Use a
+lossless dictionary journal (reference index, method, reply or exact normalized
+error) within the same observer-data cap. Missing/failed remote requests still
+fail the strict original experiment; collection may continue to characterize
+them. Never turn remote errors into empty data or erase the preceding failure.
