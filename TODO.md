@@ -276,6 +276,8 @@ the independent units. Scope every execution and support claim to an exact profi
 
 ## Feature gates
 
+- [x] W-14: implement shared complete-processor interval state and eleven fixed cases on all three development profiles. Preserve strict compiler/import failures; see the [handoff](spec/delivery/processor-state-handoff.md).
+- [ ] W-14: implement native CPU/topology acquisition and descriptor/publication/demand integration, memory/commit/swap/paging and separately admitted GPU capabilities.
 - [ ] W-14–W-16: add resource, storage/device and bounded history/replay implementations with descriptor semantics.
 - [ ] W-31: qualify saver preview, full-screen and configuration roles, disclosure, power and desktop coexistence.
 - [ ] W-33: implement preset inheritance/updates, bounded package import, copy-on-migrate and downgrade reporting.

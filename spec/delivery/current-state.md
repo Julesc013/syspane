@@ -12,10 +12,26 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-12T03:54:16.263354+00:00", "scope": "Maximum actual GTK policy/held references, original accumulation failure and unchanged product evidence"}
+updated: {"by": "codex", "at": "2026-10-12T04:28:16.837378+00:00", "scope": "Shared processor state, three-profile cases and preserved compiler/import failures"}
 ---
 
 # Current state and next admitted boundary
+
+The [shared processor state](processor-state-handoff.md) begins W-14 with exact
+complete-processor counter intervals, explicit pending/gap/reset/hotplug reasons,
+weighted aggregate/domain denominators, checked overflow and immutable samples.
+Eleven fixed processor cases and 28 model/network/graph controls pass on each of
+the Linux, Windows GCC and historical-toolset development profiles. Preserve the
+initial compiler and used-symbol import failures. The new historical executable
+passes the strict pinned-input/import audit after two documented XP thread APIs
+are declared; this is not XP guest or native metric qualification. No native CPU
+acquisition, descriptor publication, memory/GPU or UI activation is inferred.
+Next implement native complete-processor/topology acquisition and OS-specific
+metric descriptors through the existing demand/policy/publication owners, then
+memory and other mandatory resource capabilities. Keep the mixed GTK accumulation
+loss and all existing installed/desktop/lifecycle failures open. W-14 and all five
+full release editions remain in progress. Shared tools stay in source/build;
+generated/raw/machine data stay ignored under out/ and the retired root is absent.
 
 The [maximum history policy checkpoint](gtk-history-policy-handoff.md) uses the
 actual background inspector at the original 3138-point chart and 2087-point/

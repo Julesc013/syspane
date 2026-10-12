@@ -1,5 +1,21 @@
 # Developer setup and checks
 
+The [shared processor package](../../spec/delivery/packages/w-14-processor-state.md)
+uses no native CPU API or desktop. After workspace preflight and ordinary
+configure/build on each development profile, run:
+
+```sh
+ctest --preset <profile> -R '^(processor[.]|model[.]|network[.]RECONCILE-|composition[.])' --output-on-failure
+ctest --preset windows-x86-v141-xp -R '^legacy[.]' --output-on-failure
+```
+
+Each profile runs eleven processor cases and 28 model/network/graph controls.
+The historical import audit includes the new executable and exact documented
+thread-symbol closure; runtime guest/native resource qualification remains open.
+Keep fixed ratios, complete 128-processor/group coverage, failure/clock/ticket
+boundaries and immutable samples. See the [handoff](../../spec/delivery/processor-state-handoff.md)
+for preserved compiler/import failures and next native acquisition work.
+
 The [maximum policy package](../../spec/delivery/packages/w-11-gtk-history-policy.md)
 uses the actual inspector at the original fitting chart/mixed limits. After
 workspace preflight and ordinary configure/build, run the bounded family:

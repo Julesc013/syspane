@@ -1,0 +1,1311 @@
+{
+  "recorded_at": "2026-10-12T04:25:57.722214+00:00",
+  "source_base": "703963a355ccc55b53f35bd7b371c511a1313907",
+  "scope": "Shared complete-processor interval state and eleven fixed cases on three development profiles; native acquisition/publication and full resource/release qualification remain open",
+  "package": "spec/delivery/packages/w-14-processor-state.md",
+  "source_hashes": {
+    "source/runtime/processor_state.cpp": "e3e17733690bfa3dee67626af5b046adebc8955e6ae06b36a7bdc13daf78ea24",
+    "source/runtime/processor_state.hpp": "ecbcb425b2aef826f92d91502cce60ad6a1113b56cc1a32e0897287661d8a216",
+    "tests/resources/processor_state_tests.cpp": "ebf47c896ac3efb2069179cdcf564603451afedbe82e5d755163f9d93192db3c"
+  },
+  "components": {
+    "local_path": "source/build/components.json",
+    "sha256": "06fec252a2e9db1066b2f5bfa9fdc065bc1975a3f0ec8757162ade6bf3628c94"
+  },
+  "executions": [
+    {
+      "stage": "build",
+      "source_base": "703963a355ccc55b53f35bd7b371c511a1313907",
+      "source_archive_sha256": "a3fd65922314036577b4e185cb74c717fbcf02802f1361466ec17a2de9c2f2bd",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "cmake",
+            "--preset",
+            "linux-x64-gcc13"
+          ],
+          "started_at": "2026-10-12T04:16:28.940626+00:00",
+          "finished_at": "2026-10-12T04:16:38.032091+00:00",
+          "exit": 0,
+          "log_sha256": "8e517a32937bd142a9a4eddfcb4361bd840dfae4ebdfdd8b887501cacd6328b8",
+          "log": {
+            "local_path": "out/evidence/processor-state-checks/build-43165ef6/0.log",
+            "sha256": "8e517a32937bd142a9a4eddfcb4361bd840dfae4ebdfdd8b887501cacd6328b8"
+          },
+          "budget": {
+            "local_path": "out/evidence/processor-state-checks/build-43165ef6/budget-0.txt",
+            "sha256": "085e3db2ba1a92220bc29de235cfae0f2a3e1f6a10f6d102798c11dadd5202a1"
+          },
+          "executed_tests": null
+        },
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "cmake",
+            "--build",
+            "--preset",
+            "linux-x64-gcc13"
+          ],
+          "started_at": "2026-10-12T04:16:40.054276+00:00",
+          "finished_at": "2026-10-12T04:16:41.338386+00:00",
+          "exit": 1,
+          "log_sha256": "db34aa512c88dd88cd46f3afe1d86a6a25e5754ea6cce3b04838408abe3f2b74",
+          "log": {
+            "local_path": "out/evidence/processor-state-checks/build-43165ef6/1.log",
+            "sha256": "db34aa512c88dd88cd46f3afe1d86a6a25e5754ea6cce3b04838408abe3f2b74"
+          },
+          "budget": {
+            "local_path": "out/evidence/processor-state-checks/build-43165ef6/budget-1.txt",
+            "sha256": "10bb6bf6b406f11af479a74cf9c07e4af32f927f3b9797ec0c80b4edfd3e3bb8"
+          },
+          "executed_tests": null
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/processor-state-checks/build-43165ef6/result.json",
+        "sha256": "e687ca4070a306a5d1ca170bb66ace05a9bfd6c5edead281128555c0ff971532"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/processor-state-checks/build-43165ef6/source-manifest.json",
+        "sha256": "12aa13019adb4f4769a2f09ba9cf6572de654978dbcbc8642a9768be4f1ea1cb"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/processor-state-checks/build-43165ef6/source.zip",
+        "sha256": "a3fd65922314036577b4e185cb74c717fbcf02802f1361466ec17a2de9c2f2bd"
+      }
+    },
+    {
+      "stage": "build",
+      "source_base": "703963a355ccc55b53f35bd7b371c511a1313907",
+      "source_archive_sha256": "c868a754378897e86e157da408877ed948ed5ff4c033b4699072bb429b764694",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "cmake",
+            "--preset",
+            "linux-x64-gcc13"
+          ],
+          "started_at": "2026-10-12T04:17:34.789171+00:00",
+          "finished_at": "2026-10-12T04:17:45.637442+00:00",
+          "exit": 0,
+          "log_sha256": "06b6f7fe50fd52301111f350a28e32c275962e26cdc55a2473fd34648f54cc69",
+          "log": {
+            "local_path": "out/evidence/processor-state-checks/build-9cbb80cb/0.log",
+            "sha256": "06b6f7fe50fd52301111f350a28e32c275962e26cdc55a2473fd34648f54cc69"
+          },
+          "budget": {
+            "local_path": "out/evidence/processor-state-checks/build-9cbb80cb/budget-0.txt",
+            "sha256": "805a1b767dc7f4567b700f05f322acc9daf69ca8e201922eae298605f1a87e00"
+          },
+          "executed_tests": null
+        },
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "cmake",
+            "--build",
+            "--preset",
+            "linux-x64-gcc13"
+          ],
+          "started_at": "2026-10-12T04:17:47.784941+00:00",
+          "finished_at": "2026-10-12T04:17:49.264136+00:00",
+          "exit": 0,
+          "log_sha256": "a6608504bf4cb3209db2d748ae9facb176fc4b7cfb44bf9a71b321ad7054cb0a",
+          "log": {
+            "local_path": "out/evidence/processor-state-checks/build-9cbb80cb/1.log",
+            "sha256": "a6608504bf4cb3209db2d748ae9facb176fc4b7cfb44bf9a71b321ad7054cb0a"
+          },
+          "budget": {
+            "local_path": "out/evidence/processor-state-checks/build-9cbb80cb/budget-1.txt",
+            "sha256": "13cb28be5c2be9d09fb329339ea119ff8b563cabcf5f76405bbb18a077daafc4"
+          },
+          "executed_tests": null
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/processor-state-checks/build-9cbb80cb/result.json",
+        "sha256": "fdfbd22e688f24f5175e972765e420cc4d198a3d52dcf4425b522c5f4217b4ac"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/processor-state-checks/build-9cbb80cb/source-manifest.json",
+        "sha256": "f08fc7b11e6a55349222ea83adce6681988fedd6bbb0987001c4e5f573e4cafc"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/processor-state-checks/build-9cbb80cb/source.zip",
+        "sha256": "c868a754378897e86e157da408877ed948ed5ff4c033b4699072bb429b764694"
+      }
+    },
+    {
+      "stage": "processor",
+      "source_base": "703963a355ccc55b53f35bd7b371c511a1313907",
+      "source_archive_sha256": "c868a754378897e86e157da408877ed948ed5ff4c033b4699072bb429b764694",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^(processor[.]|model[.]|network[.]RECONCILE-|composition[.])",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-12T04:17:52.136255+00:00",
+          "finished_at": "2026-10-12T04:17:53.906844+00:00",
+          "exit": 0,
+          "log_sha256": "71fc255f8fe10a23acfd045db6107c1a8becfa261c2cf5db3822b6f11e542f22",
+          "log": {
+            "local_path": "out/evidence/processor-state-checks/processor-9936ff83/0.log",
+            "sha256": "71fc255f8fe10a23acfd045db6107c1a8becfa261c2cf5db3822b6f11e542f22"
+          },
+          "budget": {
+            "local_path": "out/evidence/processor-state-checks/processor-9936ff83/budget-0.txt",
+            "sha256": "24b840204ff9bd14e0f11a116689b9cb1e63c98fd1c6b4bd46549e87b667f73e"
+          },
+          "executed_tests": 39
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/processor-state-checks/processor-9936ff83/result.json",
+        "sha256": "3ff012ee740cde321062bc3699b8b12088c2784b9d8014d8b2d1fde99333cee0"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/processor-state-checks/processor-9936ff83/source-manifest.json",
+        "sha256": "f08fc7b11e6a55349222ea83adce6681988fedd6bbb0987001c4e5f573e4cafc"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/processor-state-checks/processor-9936ff83/source.zip",
+        "sha256": "c868a754378897e86e157da408877ed948ed5ff4c033b4699072bb429b764694"
+      }
+    },
+    {
+      "stage": "windows",
+      "source_base": "703963a355ccc55b53f35bd7b371c511a1313907",
+      "source_archive_sha256": "c868a754378897e86e157da408877ed948ed5ff4c033b4699072bb429b764694",
+      "commands": [
+        {
+          "command": [
+            "cmake",
+            "--preset",
+            "windows-x64-gcc15"
+          ],
+          "started_at": "2026-10-12T04:19:40.205874+00:00",
+          "finished_at": "2026-10-12T04:19:41.960505+00:00",
+          "exit": 0,
+          "log_sha256": "e210df2e95615a9f8519a97e82881ae916358f170cff56e198c1499b86fb231d",
+          "log": {
+            "local_path": "out/evidence/processor-state-checks/windows-b609f606/0.log",
+            "sha256": "e210df2e95615a9f8519a97e82881ae916358f170cff56e198c1499b86fb231d"
+          },
+          "budget": {
+            "local_path": "out/evidence/processor-state-checks/windows-b609f606/budget-0.txt",
+            "sha256": "4d7c2bb77e436534cef28a9227c22855e18b8bf77dbd0b6a2321041be211a744"
+          },
+          "executed_tests": null
+        },
+        {
+          "command": [
+            "cmake",
+            "--build",
+            "--preset",
+            "windows-x64-gcc15"
+          ],
+          "started_at": "2026-10-12T04:19:44.006583+00:00",
+          "finished_at": "2026-10-12T04:19:47.525682+00:00",
+          "exit": 0,
+          "log_sha256": "ca1a5298985449cac659cc1521eb72d480f254411586453ab4aff7e009d30502",
+          "log": {
+            "local_path": "out/evidence/processor-state-checks/windows-b609f606/1.log",
+            "sha256": "ca1a5298985449cac659cc1521eb72d480f254411586453ab4aff7e009d30502"
+          },
+          "budget": {
+            "local_path": "out/evidence/processor-state-checks/windows-b609f606/budget-1.txt",
+            "sha256": "72d47f19809a5c6666287361119430e39495e946ccaf617bc673b8bf606e24e8"
+          },
+          "executed_tests": null
+        },
+        {
+          "command": [
+            "ctest",
+            "--preset",
+            "windows-x64-gcc15",
+            "-R",
+            "^(processor[.]|model[.]|network[.]RECONCILE-|composition[.])",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-12T04:19:49.569667+00:00",
+          "finished_at": "2026-10-12T04:19:52.410219+00:00",
+          "exit": 0,
+          "log_sha256": "f0dc9823e44d3ab6658d48a94349843e78a60839fa3cff1d0d13b4d7dc60d20e",
+          "log": {
+            "local_path": "out/evidence/processor-state-checks/windows-b609f606/2.log",
+            "sha256": "f0dc9823e44d3ab6658d48a94349843e78a60839fa3cff1d0d13b4d7dc60d20e"
+          },
+          "budget": {
+            "local_path": "out/evidence/processor-state-checks/windows-b609f606/budget-2.txt",
+            "sha256": "3743db1ffe6cdc2a9f6e30f294543baf05a904bb8e19a647eec125c6a0260459"
+          },
+          "executed_tests": 39
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/processor-state-checks/windows-b609f606/result.json",
+        "sha256": "ba6684163cb144616eef230448b1faf9aa98a32c0cad50e498c05ceaf87a4f28"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/processor-state-checks/windows-b609f606/source-manifest.json",
+        "sha256": "f08fc7b11e6a55349222ea83adce6681988fedd6bbb0987001c4e5f573e4cafc"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/processor-state-checks/windows-b609f606/source.zip",
+        "sha256": "c868a754378897e86e157da408877ed948ed5ff4c033b4699072bb429b764694"
+      }
+    },
+    {
+      "stage": "legacy",
+      "source_base": "703963a355ccc55b53f35bd7b371c511a1313907",
+      "source_archive_sha256": "c868a754378897e86e157da408877ed948ed5ff4c033b4699072bb429b764694",
+      "commands": [
+        {
+          "command": [
+            "cmake",
+            "--preset",
+            "windows-x86-v141-xp"
+          ],
+          "started_at": "2026-10-12T04:19:59.084955+00:00",
+          "finished_at": "2026-10-12T04:20:02.932454+00:00",
+          "exit": 0,
+          "log_sha256": "7495569f0d03ad9ad02bcd339f77cf9c0475d5037af5a1b0898df4b256a15111",
+          "log": {
+            "local_path": "out/evidence/processor-state-checks/legacy-594df3c3/0.log",
+            "sha256": "7495569f0d03ad9ad02bcd339f77cf9c0475d5037af5a1b0898df4b256a15111"
+          },
+          "budget": {
+            "local_path": "out/evidence/processor-state-checks/legacy-594df3c3/budget-0.txt",
+            "sha256": "5c244ad4932fcf2d021817ab2e248441c04ff8dc40aabdd6b67ecc0db78ac1ef"
+          },
+          "executed_tests": null
+        },
+        {
+          "command": [
+            "cmake",
+            "--build",
+            "--preset",
+            "windows-x86-v141-xp"
+          ],
+          "started_at": "2026-10-12T04:20:04.982554+00:00",
+          "finished_at": "2026-10-12T04:20:11.058883+00:00",
+          "exit": 0,
+          "log_sha256": "06c238b98e40f7f6afef667a4c66b20b4bea6a046f71d4b5abede1e23603a45f",
+          "log": {
+            "local_path": "out/evidence/processor-state-checks/legacy-594df3c3/1.log",
+            "sha256": "06c238b98e40f7f6afef667a4c66b20b4bea6a046f71d4b5abede1e23603a45f"
+          },
+          "budget": {
+            "local_path": "out/evidence/processor-state-checks/legacy-594df3c3/budget-1.txt",
+            "sha256": "f1b1e5b8c35a9ba1b88bd6bd423f9298792513143562294847aa44b1e1891447"
+          },
+          "executed_tests": null
+        },
+        {
+          "command": [
+            "ctest",
+            "--preset",
+            "windows-x86-v141-xp",
+            "-R",
+            "^(processor[.]|model[.]|network[.]RECONCILE-|composition[.])",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-12T04:20:13.101872+00:00",
+          "finished_at": "2026-10-12T04:20:15.663605+00:00",
+          "exit": 0,
+          "log_sha256": "293030068f15af97c8179b2a05f588627eb65d0ed0cd1629b377bf9764008c00",
+          "log": {
+            "local_path": "out/evidence/processor-state-checks/legacy-594df3c3/2.log",
+            "sha256": "293030068f15af97c8179b2a05f588627eb65d0ed0cd1629b377bf9764008c00"
+          },
+          "budget": {
+            "local_path": "out/evidence/processor-state-checks/legacy-594df3c3/budget-2.txt",
+            "sha256": "5fa27039f9bb3ef85e291de4973279536377212c0acf068b310c6959a531e21e"
+          },
+          "executed_tests": 39
+        },
+        {
+          "command": [
+            "ctest",
+            "--preset",
+            "windows-x86-v141-xp",
+            "-R",
+            "^legacy[.]",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-12T04:20:17.695913+00:00",
+          "finished_at": "2026-10-12T04:20:20.434247+00:00",
+          "exit": 8,
+          "log_sha256": "3eecd01cdce02c71829f996a08692753d36883afed7ea0318b314d852701ee1f",
+          "log": {
+            "local_path": "out/evidence/processor-state-checks/legacy-594df3c3/3.log",
+            "sha256": "3eecd01cdce02c71829f996a08692753d36883afed7ea0318b314d852701ee1f"
+          },
+          "budget": {
+            "local_path": "out/evidence/processor-state-checks/legacy-594df3c3/budget-3.txt",
+            "sha256": "48e22cbe708dfd6ee55b9cd11ed0e13576aede28d1616f828e4cb23f5181b47a"
+          },
+          "executed_tests": 2
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/processor-state-checks/legacy-594df3c3/result.json",
+        "sha256": "ca1bd5fbeb7e67da4ff6c604d70f0fb531772c03ec235549c2ee33b077ec08b3"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/processor-state-checks/legacy-594df3c3/source-manifest.json",
+        "sha256": "f08fc7b11e6a55349222ea83adce6681988fedd6bbb0987001c4e5f573e4cafc"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/processor-state-checks/legacy-594df3c3/source.zip",
+        "sha256": "c868a754378897e86e157da408877ed948ed5ff4c033b4699072bb429b764694"
+      }
+    },
+    {
+      "stage": "legacy",
+      "source_base": "703963a355ccc55b53f35bd7b371c511a1313907",
+      "source_archive_sha256": "854ecbbe7f3393d8d3afe6c4d0a969618dbe4c10ff0eb39089e8e60c18ae93a8",
+      "commands": [
+        {
+          "command": [
+            "cmake",
+            "--preset",
+            "windows-x86-v141-xp"
+          ],
+          "started_at": "2026-10-12T04:22:33.722244+00:00",
+          "finished_at": "2026-10-12T04:22:35.263367+00:00",
+          "exit": 0,
+          "log_sha256": "f0e34a7816c6a31b0e536d11b86c4828c6566ff34831e5f29e130fd4845f5396",
+          "log": {
+            "local_path": "out/evidence/processor-state-checks/legacy-b8ab919a/0.log",
+            "sha256": "f0e34a7816c6a31b0e536d11b86c4828c6566ff34831e5f29e130fd4845f5396"
+          },
+          "budget": {
+            "local_path": "out/evidence/processor-state-checks/legacy-b8ab919a/budget-0.txt",
+            "sha256": "4cb1eb7eb37ce24c453201ac28cc252a873b8776f291264963ba4c95dbb35e8d"
+          },
+          "executed_tests": null
+        },
+        {
+          "command": [
+            "cmake",
+            "--build",
+            "--preset",
+            "windows-x86-v141-xp"
+          ],
+          "started_at": "2026-10-12T04:22:37.330455+00:00",
+          "finished_at": "2026-10-12T04:22:38.377975+00:00",
+          "exit": 0,
+          "log_sha256": "9e6f303ef18574c2f0c6a8324de87c7f87380dd59031eb68f1c7e70f3756751c",
+          "log": {
+            "local_path": "out/evidence/processor-state-checks/legacy-b8ab919a/1.log",
+            "sha256": "9e6f303ef18574c2f0c6a8324de87c7f87380dd59031eb68f1c7e70f3756751c"
+          },
+          "budget": {
+            "local_path": "out/evidence/processor-state-checks/legacy-b8ab919a/budget-1.txt",
+            "sha256": "3d7e2769dec17ab29f66363ff6c892cb83bdb37caf0725e42cbbe4923b151c7c"
+          },
+          "executed_tests": null
+        },
+        {
+          "command": [
+            "ctest",
+            "--preset",
+            "windows-x86-v141-xp",
+            "-R",
+            "^(processor[.]|model[.]|network[.]RECONCILE-|composition[.])",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-12T04:22:40.596813+00:00",
+          "finished_at": "2026-10-12T04:22:41.626917+00:00",
+          "exit": 0,
+          "log_sha256": "1aa7bc0861800cb284446530ac580da9b07ebf1cb4c80db5b59ff3f1e53ecc6d",
+          "log": {
+            "local_path": "out/evidence/processor-state-checks/legacy-b8ab919a/2.log",
+            "sha256": "1aa7bc0861800cb284446530ac580da9b07ebf1cb4c80db5b59ff3f1e53ecc6d"
+          },
+          "budget": {
+            "local_path": "out/evidence/processor-state-checks/legacy-b8ab919a/budget-2.txt",
+            "sha256": "fb082429ad0ea17f94682d8a2d59c1e0686f731f4e486246a5c3e1cfb436ab71"
+          },
+          "executed_tests": 39
+        },
+        {
+          "command": [
+            "ctest",
+            "--preset",
+            "windows-x86-v141-xp",
+            "-R",
+            "^legacy[.]",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-12T04:22:43.825616+00:00",
+          "finished_at": "2026-10-12T04:22:44.430936+00:00",
+          "exit": 0,
+          "log_sha256": "aec125dba0456f08eaa15b394b328d3925dbc392958a9410e66e2c649d627495",
+          "log": {
+            "local_path": "out/evidence/processor-state-checks/legacy-b8ab919a/3.log",
+            "sha256": "aec125dba0456f08eaa15b394b328d3925dbc392958a9410e66e2c649d627495"
+          },
+          "budget": {
+            "local_path": "out/evidence/processor-state-checks/legacy-b8ab919a/budget-3.txt",
+            "sha256": "1b4ffd4c1e74b67cc66b342227470aceb90ef0e1be98c3212c12a7a1d9c5290a"
+          },
+          "executed_tests": 2
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/processor-state-checks/legacy-b8ab919a/result.json",
+        "sha256": "1789079508a9ee098242a662d8c898adc205f9024822e17d2d180d2777c1d863"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/processor-state-checks/legacy-b8ab919a/source-manifest.json",
+        "sha256": "a552340aef60d5bdddb39eb1c513d322aa65464e5b8711c016e58584278241d9"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/processor-state-checks/legacy-b8ab919a/source.zip",
+        "sha256": "854ecbbe7f3393d8d3afe6c4d0a969618dbe4c10ff0eb39089e8e60c18ae93a8"
+      }
+    }
+  ],
+  "profiles": [
+    {
+      "profile": "windows-x64-gcc15",
+      "profile_record": {
+        "local_path": "source/build/targets/windows-x64-gcc15.json",
+        "sha256": "5b8c54fbbae3408f4d0c0bad1f978a47d7f29ca3b98549568eb6bc225e733d53"
+      },
+      "toolchain_lock": {
+        "local_path": "source/build/targets/windows-x64-gcc15.lock.json",
+        "sha256": "29e3a729e248ac4b8204385d8f7ff4fa759a573437440e984236b150af7d80f0"
+      },
+      "binary": {
+        "local_path": "out/build/windows-x64-gcc15/syspane_processor_state_tests.exe",
+        "sha256": "0b94c0fcb3c78960bc98bbfea2b51bb9ed56aa6e825f2a11fd6ab7511eca4f2d"
+      },
+      "library": {
+        "local_path": "out/build/windows-x64-gcc15/libsyspane_processor_state.a",
+        "sha256": "ee5bd2f66ea79a8d08560d381fc02274f32467e109dd9924713d559233c660a2"
+      },
+      "component_graph": {
+        "local_path": "out/build/windows-x64-gcc15/component-graph.txt",
+        "sha256": "904fb1514f6dd7e7e1f589192ae52d1dd8fe988800cc76cf6f2ac5a23697ec2a"
+      },
+      "tested_host": "Current Windows host; no historical guest or native resource qualification"
+    },
+    {
+      "profile": "windows-x86-v141-xp",
+      "profile_record": {
+        "local_path": "source/build/targets/windows-x86-v141-xp.json",
+        "sha256": "6c09e9d389e8a5c7027f8340ca7fe3d321dbe10ead611edfb97a8644e6d276c7"
+      },
+      "toolchain_lock": {
+        "local_path": "source/build/targets/windows-x86-v141-xp.lock.json",
+        "sha256": "b085be5b794e9d49fd15ebc7e8a8b60737d0a8de49e4a3dbe88bdcd0107930a7"
+      },
+      "binary": {
+        "local_path": "out/build/windows-x86-v141-xp/Release/syspane_processor_state_tests.exe",
+        "sha256": "e2e54f4c83f7c66285a5b2d867220e9e9372acacad0e81463e736e933020a0f4"
+      },
+      "library": {
+        "local_path": "out/build/windows-x86-v141-xp/Release/syspane_processor_state.lib",
+        "sha256": "1c84dcb056a16e70afd33ac31aa68fc3802fadfb30cab6d2f4604c96606c33c5"
+      },
+      "component_graph": {
+        "local_path": "out/build/windows-x86-v141-xp/component-graph.txt",
+        "sha256": "743b7cbbb806f2f5e5431302b412a8c12fe0dd0a4bc1ee95320da2af6bd9607f"
+      },
+      "tested_host": "Current Windows host; no historical guest or native resource qualification",
+      "import_audit": {
+        "artifact": {
+          "machine": "x86",
+          "format": "PE32",
+          "os_version": [
+            5,
+            1
+          ],
+          "subsystem_version": [
+            5,
+            1
+          ],
+          "subsystem": "console",
+          "imports": {
+            "kernel32.dll": [
+              "ChangeTimerQueueTimer",
+              "CloseHandle",
+              "CompareStringW",
+              "CreateEventW",
+              "CreateFileW",
+              "CreateThread",
+              "CreateTimerQueue",
+              "CreateTimerQueueTimer",
+              "DecodePointer",
+              "DeleteCriticalSection",
+              "DeleteTimerQueueTimer",
+              "DuplicateHandle",
+              "EncodePointer",
+              "EnterCriticalSection",
+              "EnumSystemLocalesW",
+              "ExitProcess",
+              "ExitThread",
+              "FindClose",
+              "FindFirstFileExA",
+              "FindNextFileA",
+              "FlushFileBuffers",
+              "FreeEnvironmentStringsW",
+              "FreeLibrary",
+              "FreeLibraryAndExitThread",
+              "GetACP",
+              "GetCPInfo",
+              "GetCommandLineA",
+              "GetCommandLineW",
+              "GetConsoleCP",
+              "GetConsoleMode",
+              "GetCurrentProcess",
+              "GetCurrentProcessId",
+              "GetCurrentThread",
+              "GetCurrentThreadId",
+              "GetEnvironmentStringsW",
+              "GetExitCodeThread",
+              "GetFileType",
+              "GetLastError",
+              "GetLocaleInfoW",
+              "GetLogicalProcessorInformation",
+              "GetModuleFileNameA",
+              "GetModuleFileNameW",
+              "GetModuleHandleA",
+              "GetModuleHandleExW",
+              "GetModuleHandleW",
+              "GetNumaHighestNodeNumber",
+              "GetOEMCP",
+              "GetProcAddress",
+              "GetProcessAffinityMask",
+              "GetProcessHeap",
+              "GetStartupInfoW",
+              "GetStdHandle",
+              "GetStringTypeW",
+              "GetSystemTimeAsFileTime",
+              "GetThreadPriority",
+              "GetThreadTimes",
+              "GetTickCount",
+              "GetUserDefaultLCID",
+              "GetVersionExW",
+              "HeapAlloc",
+              "HeapFree",
+              "HeapReAlloc",
+              "HeapSize",
+              "InitializeCriticalSectionAndSpinCount",
+              "InitializeSListHead",
+              "InterlockedFlushSList",
+              "InterlockedPopEntrySList",
+              "InterlockedPushEntrySList",
+              "IsDebuggerPresent",
+              "IsProcessorFeaturePresent",
+              "IsValidCodePage",
+              "IsValidLocale",
+              "LCMapStringW",
+              "LeaveCriticalSection",
+              "LoadLibraryExW",
+              "LoadLibraryW",
+              "MultiByteToWideChar",
+              "QueryDepthSList",
+              "QueryPerformanceCounter",
+              "RaiseException",
+              "ReadConsoleW",
+              "ReadFile",
+              "RegisterWaitForSingleObject",
+              "ReleaseSemaphore",
+              "RtlUnwind",
+              "SetEnvironmentVariableA",
+              "SetEvent",
+              "SetFilePointerEx",
+              "SetLastError",
+              "SetStdHandle",
+              "SetThreadAffinityMask",
+              "SetThreadPriority",
+              "SetUnhandledExceptionFilter",
+              "SignalObjectAndWait",
+              "Sleep",
+              "SwitchToThread",
+              "TerminateProcess",
+              "TlsAlloc",
+              "TlsFree",
+              "TlsGetValue",
+              "TlsSetValue",
+              "TryEnterCriticalSection",
+              "UnhandledExceptionFilter",
+              "UnregisterWait",
+              "UnregisterWaitEx",
+              "VirtualAlloc",
+              "VirtualFree",
+              "VirtualProtect",
+              "WaitForSingleObjectEx",
+              "WideCharToMultiByte",
+              "WriteConsoleW",
+              "WriteFile"
+            ]
+          }
+        },
+        "pinned_link_inputs": {
+          "resolved_external_libraries": [
+            {
+              "path": "C:\\Program Files (x86)\\Microsoft SDKs\\Windows\\v7.1A\\Lib\\kernel32.lib",
+              "sha256": "5c76cde0da4a277962316070b966e0829d35df93d5b54d79d81f964e56cd4819"
+            },
+            {
+              "path": "C:\\Program Files (x86)\\Microsoft SDKs\\Windows\\v7.1A\\Lib\\user32.lib",
+              "sha256": "08b1420a41e95c41071e3f9b87790a27d3a12345162df24cf86d2373801da9a4"
+            },
+            {
+              "path": "C:\\Program Files (x86)\\Microsoft SDKs\\Windows\\v7.1A\\Lib\\gdi32.lib",
+              "sha256": "fbf4ec63ecfab27b1e629c0610a29d62cf771eb84e0941bfb1f684e5e2db675c"
+            },
+            {
+              "path": "C:\\Program Files (x86)\\Microsoft SDKs\\Windows\\v7.1A\\Lib\\winspool.lib",
+              "sha256": "9d1fb5311e4d333a658be669480a99a920460cefbfb88bf354c2fe67f127d6e4"
+            },
+            {
+              "path": "C:\\Program Files (x86)\\Microsoft SDKs\\Windows\\v7.1A\\Lib\\shell32.lib",
+              "sha256": "c605f8a6dc74263496fb37e5e3742c5d62779212f62736d535420eed0ec1c45f"
+            },
+            {
+              "path": "C:\\Program Files (x86)\\Microsoft SDKs\\Windows\\v7.1A\\Lib\\ole32.lib",
+              "sha256": "1738b4bc74087d4cc732add3fd2dc935f9ef03c1a34c7868733173ba555d76a3"
+            },
+            {
+              "path": "C:\\Program Files (x86)\\Microsoft SDKs\\Windows\\v7.1A\\Lib\\oleaut32.lib",
+              "sha256": "1cd15bbe382e0e400ab4157eb078aa3944fdd01427b52cb0a01c09b91de81f47"
+            },
+            {
+              "path": "C:\\Program Files (x86)\\Microsoft SDKs\\Windows\\v7.1A\\Lib\\uuid.lib",
+              "sha256": "0181d94e25bc2f4daf646b6b1210514a3ba7cc4a6fec94160910ab10d30339e1"
+            },
+            {
+              "path": "C:\\Program Files (x86)\\Microsoft SDKs\\Windows\\v7.1A\\Lib\\comdlg32.lib",
+              "sha256": "d5223536534483fc54a53365709c0aba30bcd596f41ffe287f970e372c0d7ec2"
+            },
+            {
+              "path": "C:\\Program Files (x86)\\Microsoft SDKs\\Windows\\v7.1A\\Lib\\advapi32.lib",
+              "sha256": "efe98e7dce691e319cee71f160954a84e98a489c952d77c66bdfbebace4d09fc"
+            },
+            {
+              "path": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Enterprise\\VC\\Tools\\MSVC\\14.16.27023\\lib\\x86\\libcpmt.lib",
+              "sha256": "5e6b9709cc66e6dd9d9f7e080c7d433f9c0780981c9bb43c655a886066191052"
+            },
+            {
+              "path": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Enterprise\\VC\\Tools\\MSVC\\14.16.27023\\lib\\x86\\libcmt.lib",
+              "sha256": "6f9f5e6f5dd6b3b5d27a5346832f0f3a0d8d3e84fb3f5b84ff800f2fcf74ff5b"
+            },
+            {
+              "path": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Enterprise\\VC\\Tools\\MSVC\\14.16.27023\\lib\\x86\\oldnames.lib",
+              "sha256": "4ff86c61d6203008003c0b87da2e2cb87e81ba3a366153c37ed74ed206307430"
+            },
+            {
+              "path": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Enterprise\\VC\\Tools\\MSVC\\14.16.27023\\lib\\x86\\libvcruntime.lib",
+              "sha256": "17d1da5af3c741cdaaf634125e317d37dd2ab60206be03c9bc4ee143fff670bd"
+            },
+            {
+              "path": "C:\\Program Files (x86)\\Windows Kits\\10\\Lib\\10.0.10240.0\\ucrt\\x86\\libucrt.lib",
+              "sha256": "20b6a9d5e1e2198c8a7868045fae496c6a1b6743f22d1486920335f7c90bc860"
+            },
+            {
+              "path": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Enterprise\\VC\\Tools\\MSVC\\14.16.27023\\lib\\x86\\libconcrt.lib",
+              "sha256": "ed97d5f5e788b2a17fd21e5350b00b972f1c3784759a11ee64d927467065dde5"
+            }
+          ],
+          "msbuild_input_logs": {
+            "syspane_model_smoke.dir/Release/syspane_.9D9FF0A2.tlog/link.read.1.tlog": {
+              "sha256": "579bb68a20c61fbe9b6550f98d17bfc1ed236514e834e16872c46b069fe87007",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_MODEL_SMOKE.DIR\\RELEASE\\MODEL_SMOKE.OBJ\nC:\\PROGRAM FILES\\WINDHAWK\\ENGINE\\1.7.3\\ENGINE.INI\nC:\\WINDOWS\\GLOBALIZATION\\SORTING\\SORTDEFAULT.NLS\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_MODEL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\KERNEL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\USER32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\GDI32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\WINSPOOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\SHELL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLE32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLEAUT32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\UUID.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\COMDLG32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\ADVAPI32.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_MODEL_SMOKE.DIR\\RELEASE\\MODEL_SMOKE.OBJ\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCPMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\OLDNAMES.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBVCRUNTIME.LIB\nC:\\PROGRAM FILES (X86)\\WINDOWS KITS\\10\\LIB\\10.0.10240.0\\UCRT\\X86\\LIBUCRT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\BIN\\X64\\RC.EXE\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\BIN\\HOSTX64\\X64\\CVTRES.EXE\nC:\\WINDOWS\\SYSTEM32\\TZRES.DLL\n"
+            },
+            "syspane_model_smoke.dir/Release/syspane_.9D9FF0A2.tlog/CL.command.1.tlog": {
+              "sha256": "9954af821d9912babd0d1e925df888f1ed7a9db1870494ec70306d02d01b3e2c",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\APPLICATION\\MODEL_SMOKE.CPP\n/c /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\MODEL /nologo /W4 /WX /diagnostics:classic /O2 /Ob2 /Oy- /D _USING_V110_SDK71_ /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D WINVER=0x0501 /D _WIN32_WINNT=0x0501 /D _USING_V110_SDK71_ /D \"CMAKE_INTDIR=\\\"Release\\\"\" /EHsc /MT /arch:SSE2 /permissive- /std:c++17 /Fo\"SYSPANE_MODEL_SMOKE.DIR\\RELEASE\\\\\" /Fd\"SYSPANE_MODEL_SMOKE.DIR\\RELEASE\\VC141.PDB\" /TP /analyze-  /Zc:__cplusplus /utf-8 D:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\APPLICATION\\MODEL_SMOKE.CPP\n"
+            },
+            "syspane_model_tests.dir/Release/syspane_.64B30F19.tlog/link.read.1.tlog": {
+              "sha256": "ed940b63a54bacd66d113b1b4f1e32d9f91266d0df904d2aae200209e99ab49b",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_MODEL_TESTS.DIR\\RELEASE\\MODEL_TESTS.OBJ\nC:\\PROGRAM FILES\\WINDHAWK\\ENGINE\\1.7.3\\ENGINE.INI\nC:\\WINDOWS\\GLOBALIZATION\\SORTING\\SORTDEFAULT.NLS\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_MODEL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\KERNEL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\USER32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\GDI32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\WINSPOOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\SHELL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLE32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLEAUT32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\UUID.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\COMDLG32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\ADVAPI32.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_MODEL_TESTS.DIR\\RELEASE\\MODEL_TESTS.OBJ\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCPMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\OLDNAMES.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBVCRUNTIME.LIB\nC:\\PROGRAM FILES (X86)\\WINDOWS KITS\\10\\LIB\\10.0.10240.0\\UCRT\\X86\\LIBUCRT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\BIN\\X64\\RC.EXE\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\BIN\\HOSTX64\\X64\\CVTRES.EXE\nC:\\WINDOWS\\SYSTEM32\\TZRES.DLL\n"
+            },
+            "syspane_model_tests.dir/Release/syspane_.64B30F19.tlog/CL.command.1.tlog": {
+              "sha256": "5e3e98cb54c4bb5023c8ed1152bc81cbd92d3c0a146c8f73334ef2b48b9690e3",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\MODEL\\MODEL_TESTS.CPP\n/c /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\MODEL /nologo /W4 /WX /diagnostics:classic /O2 /Ob2 /Oy- /D _USING_V110_SDK71_ /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D WINVER=0x0501 /D _WIN32_WINNT=0x0501 /D _USING_V110_SDK71_ /D \"CMAKE_INTDIR=\\\"Release\\\"\" /EHsc /MT /arch:SSE2 /permissive- /std:c++17 /Fo\"SYSPANE_MODEL_TESTS.DIR\\RELEASE\\\\\" /Fd\"SYSPANE_MODEL_TESTS.DIR\\RELEASE\\VC141.PDB\" /TP /analyze-  /Zc:__cplusplus /utf-8 D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\MODEL\\MODEL_TESTS.CPP\n"
+            },
+            "syspane_protocol_tests.dir/Release/syspane_.B08ED1F6.tlog/link.read.1.tlog": {
+              "sha256": "1847f252dbfa4b6782557298c0718baa0b65a9eca3360733bc83099b3b45a99e",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_PROTOCOL_TESTS.DIR\\RELEASE\\PROTOCOL_TESTS.OBJ\nC:\\PROGRAM FILES\\WINDHAWK\\ENGINE\\1.7.3\\ENGINE.INI\nC:\\WINDOWS\\GLOBALIZATION\\SORTING\\SORTDEFAULT.NLS\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_PROTOCOL.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_CONFIGURATION.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\KERNEL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\USER32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\GDI32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\WINSPOOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\SHELL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLE32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLEAUT32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\UUID.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\COMDLG32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\ADVAPI32.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_PROTOCOL_TESTS.DIR\\RELEASE\\PROTOCOL_TESTS.OBJ\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCPMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\OLDNAMES.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBVCRUNTIME.LIB\nC:\\PROGRAM FILES (X86)\\WINDOWS KITS\\10\\LIB\\10.0.10240.0\\UCRT\\X86\\LIBUCRT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\BIN\\X64\\RC.EXE\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\BIN\\HOSTX64\\X64\\CVTRES.EXE\nC:\\WINDOWS\\SYSTEM32\\TZRES.DLL\n"
+            },
+            "syspane_protocol_tests.dir/Release/syspane_.B08ED1F6.tlog/CL.command.1.tlog": {
+              "sha256": "3a6be506c02c1cae83334713af2a47aed90b944a18b5eca51cb96e3a71280b38",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\PROTOCOL\\PROTOCOL_TESTS.CPP\n/c /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PROTOCOL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\CONFIGURATION /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\THIRD_PARTY /nologo /W4 /WX /diagnostics:classic /O2 /Ob2 /Oy- /D _USING_V110_SDK71_ /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D WINVER=0x0501 /D _WIN32_WINNT=0x0501 /D _USING_V110_SDK71_ /D JSON_DIAGNOSTIC_POSITIONS=1 /D JSON_DIAGNOSTICS=0 /D \"CMAKE_INTDIR=\\\"Release\\\"\" /EHsc /MT /arch:SSE2 /permissive- /std:c++17 /Fo\"SYSPANE_PROTOCOL_TESTS.DIR\\RELEASE\\\\\" /Fd\"SYSPANE_PROTOCOL_TESTS.DIR\\RELEASE\\VC141.PDB\" /TP /analyze-  /Zc:__cplusplus /utf-8 D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\PROTOCOL\\PROTOCOL_TESTS.CPP\n"
+            },
+            "syspane_recovery_tests.dir/Release/syspane_.7E1C8F3C.tlog/link.read.1.tlog": {
+              "sha256": "5288ca8fa83d3c080c24a895f07f7e6cc4043f8f90f40f00f1ad9364d649c2b3",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_RECOVERY_TESTS.DIR\\RELEASE\\RECOVERY_TESTS.OBJ\nC:\\PROGRAM FILES\\WINDHAWK\\ENGINE\\1.7.3\\ENGINE.INI\nC:\\WINDOWS\\GLOBALIZATION\\SORTING\\SORTDEFAULT.NLS\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_RECOVERY.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_MODEL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\KERNEL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\USER32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\GDI32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\WINSPOOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\SHELL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLE32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLEAUT32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\UUID.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\COMDLG32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\ADVAPI32.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_RECOVERY_TESTS.DIR\\RELEASE\\RECOVERY_TESTS.OBJ\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCPMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\OLDNAMES.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBVCRUNTIME.LIB\nC:\\PROGRAM FILES (X86)\\WINDOWS KITS\\10\\LIB\\10.0.10240.0\\UCRT\\X86\\LIBUCRT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\BIN\\X64\\RC.EXE\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\BIN\\HOSTX64\\X64\\CVTRES.EXE\nC:\\WINDOWS\\SYSTEM32\\TZRES.DLL\n"
+            },
+            "syspane_recovery_tests.dir/Release/syspane_.7E1C8F3C.tlog/CL.command.1.tlog": {
+              "sha256": "ab4bfccf0126fab460c4eb5add571e3ea22fcddd95dfb57f5329dbff75d330cd",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\FAULT\\RECOVERY_TESTS.CPP\n/c /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\DIAGNOSTICS /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\MODEL /nologo /W4 /WX /diagnostics:classic /O2 /Ob2 /Oy- /D _USING_V110_SDK71_ /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D WINVER=0x0501 /D _WIN32_WINNT=0x0501 /D _USING_V110_SDK71_ /D \"CMAKE_INTDIR=\\\"Release\\\"\" /EHsc /MT /arch:SSE2 /permissive- /std:c++17 /Fo\"SYSPANE_RECOVERY_TESTS.DIR\\RELEASE\\\\\" /Fd\"SYSPANE_RECOVERY_TESTS.DIR\\RELEASE\\VC141.PDB\" /TP /analyze-  /Zc:__cplusplus /utf-8 D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\FAULT\\RECOVERY_TESTS.CPP\n"
+            },
+            "syspane_diagnostic_tests.dir/Release/syspane_.FFEF4C6B.tlog/link.read.1.tlog": {
+              "sha256": "94f4bf5a10621d2df7b90a8d4fab6e44262bd36dfa72cf0749d1d8a7cda78d7f",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_DIAGNOSTIC_TESTS.DIR\\RELEASE\\DIAGNOSTIC_TESTS.OBJ\nC:\\PROGRAM FILES\\WINDHAWK\\ENGINE\\1.7.3\\ENGINE.INI\nC:\\WINDOWS\\GLOBALIZATION\\SORTING\\SORTDEFAULT.NLS\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_DIAGNOSTIC.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_CONFIGURATION.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_PROTOCOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\KERNEL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\USER32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\GDI32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\WINSPOOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\SHELL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLE32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLEAUT32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\UUID.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\COMDLG32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\ADVAPI32.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_DIAGNOSTIC_TESTS.DIR\\RELEASE\\DIAGNOSTIC_TESTS.OBJ\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCPMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\OLDNAMES.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBVCRUNTIME.LIB\nC:\\PROGRAM FILES (X86)\\WINDOWS KITS\\10\\LIB\\10.0.10240.0\\UCRT\\X86\\LIBUCRT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\BIN\\X64\\RC.EXE\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\BIN\\HOSTX64\\X64\\CVTRES.EXE\nC:\\WINDOWS\\SYSTEM32\\TZRES.DLL\n"
+            },
+            "syspane_diagnostic_tests.dir/Release/syspane_.FFEF4C6B.tlog/CL.command.1.tlog": {
+              "sha256": "f5147d4515694c1d044863e127a3ce347e69786b0c081abe25343be2d2c17d64",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\FAULT\\DIAGNOSTIC_TESTS.CPP\n/c /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\DIAGNOSTICS /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\CONFIGURATION /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PROTOCOL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\THIRD_PARTY /nologo /W4 /WX /diagnostics:classic /O2 /Ob2 /Oy- /D _USING_V110_SDK71_ /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D WINVER=0x0501 /D _WIN32_WINNT=0x0501 /D _USING_V110_SDK71_ /D JSON_DIAGNOSTIC_POSITIONS=1 /D JSON_DIAGNOSTICS=0 /D \"CMAKE_INTDIR=\\\"Release\\\"\" /EHsc /MT /arch:SSE2 /permissive- /std:c++17 /Fo\"SYSPANE_DIAGNOSTIC_TESTS.DIR\\RELEASE\\\\\" /Fd\"SYSPANE_DIAGNOSTIC_TESTS.DIR\\RELEASE\\VC141.PDB\" /TP /analyze-  /Zc:__cplusplus /utf-8 D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\FAULT\\DIAGNOSTIC_TESTS.CPP\n"
+            },
+            "syspane_data_view_tests.dir/Release/syspane_.2F15C4DC.tlog/link.read.1.tlog": {
+              "sha256": "41655846cb25b6b18e1d2f5d03854342ff78f0ea4e397933849bb49a11649e73",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_DATA_VIEW_TESTS.DIR\\RELEASE\\DATA_VIEW_TESTS.OBJ\nC:\\PROGRAM FILES\\WINDHAWK\\ENGINE\\1.7.3\\ENGINE.INI\nC:\\WINDOWS\\GLOBALIZATION\\SORTING\\SORTDEFAULT.NLS\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_DATA_VIEW.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_MODEL.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_RECOVERY.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_CONFIGURATION.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_PROTOCOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\KERNEL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\USER32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\GDI32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\WINSPOOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\SHELL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLE32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLEAUT32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\UUID.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\COMDLG32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\ADVAPI32.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_DATA_VIEW_TESTS.DIR\\RELEASE\\DATA_VIEW_TESTS.OBJ\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCPMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\OLDNAMES.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBVCRUNTIME.LIB\nC:\\PROGRAM FILES (X86)\\WINDOWS KITS\\10\\LIB\\10.0.10240.0\\UCRT\\X86\\LIBUCRT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\BIN\\X64\\RC.EXE\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\BIN\\HOSTX64\\X64\\CVTRES.EXE\nC:\\WINDOWS\\SYSTEM32\\TZRES.DLL\n"
+            },
+            "syspane_data_view_tests.dir/Release/syspane_.2F15C4DC.tlog/CL.command.1.tlog": {
+              "sha256": "f140e9fd20b1dc55075bd47ade28f5289ff53646eb15e2a049a9e61f3fb501f8",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\FAULT\\DATA_VIEW_TESTS.CPP\n/c /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\DIAGNOSTICS /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\MODEL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\CONFIGURATION /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PROTOCOL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\THIRD_PARTY /nologo /W4 /WX /diagnostics:classic /O2 /Ob2 /Oy- /D _USING_V110_SDK71_ /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D WINVER=0x0501 /D _WIN32_WINNT=0x0501 /D _USING_V110_SDK71_ /D JSON_DIAGNOSTIC_POSITIONS=1 /D JSON_DIAGNOSTICS=0 /D \"CMAKE_INTDIR=\\\"Release\\\"\" /EHsc /MT /arch:SSE2 /permissive- /std:c++17 /Fo\"SYSPANE_DATA_VIEW_TESTS.DIR\\RELEASE\\\\\" /Fd\"SYSPANE_DATA_VIEW_TESTS.DIR\\RELEASE\\VC141.PDB\" /TP /analyze-  /Zc:__cplusplus /utf-8 D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\FAULT\\DATA_VIEW_TESTS.CPP\n"
+            },
+            "syspane_telemetry_tests.dir/Release/syspane_.2A1A362A.tlog/link.read.1.tlog": {
+              "sha256": "0799461a3e3dc65a401d1198e8437f851a9febfc1f7539f3d9a0f6f41373b65c",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_TELEMETRY_TESTS.DIR\\RELEASE\\TELEMETRY_TESTS.OBJ\nC:\\PROGRAM FILES\\WINDHAWK\\ENGINE\\1.7.3\\ENGINE.INI\nC:\\WINDOWS\\GLOBALIZATION\\SORTING\\SORTDEFAULT.NLS\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_PROTOCOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\KERNEL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\USER32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\GDI32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\WINSPOOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\SHELL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLE32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLEAUT32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\UUID.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\COMDLG32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\ADVAPI32.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_TELEMETRY_TESTS.DIR\\RELEASE\\TELEMETRY_TESTS.OBJ\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCPMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\OLDNAMES.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBVCRUNTIME.LIB\nC:\\PROGRAM FILES (X86)\\WINDOWS KITS\\10\\LIB\\10.0.10240.0\\UCRT\\X86\\LIBUCRT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\BIN\\X64\\RC.EXE\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\BIN\\HOSTX64\\X64\\CVTRES.EXE\nC:\\WINDOWS\\SYSTEM32\\TZRES.DLL\n"
+            },
+            "syspane_telemetry_tests.dir/Release/syspane_.2A1A362A.tlog/CL.command.1.tlog": {
+              "sha256": "9cd6725bb66b3ffde7c53e202f5c365ce283b2d5a9d92f211b738ec37f52176b",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\PROTOCOL\\TELEMETRY_TESTS.CPP\n/c /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PROTOCOL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\THIRD_PARTY /nologo /W4 /WX /diagnostics:classic /O2 /Ob2 /Oy- /D _USING_V110_SDK71_ /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D WINVER=0x0501 /D _WIN32_WINNT=0x0501 /D _USING_V110_SDK71_ /D JSON_DIAGNOSTIC_POSITIONS=1 /D JSON_DIAGNOSTICS=0 /D \"CMAKE_INTDIR=\\\"Release\\\"\" /EHsc /MT /arch:SSE2 /permissive- /std:c++17 /Fo\"SYSPANE_TELEMETRY_TESTS.DIR\\RELEASE\\\\\" /Fd\"SYSPANE_TELEMETRY_TESTS.DIR\\RELEASE\\VC141.PDB\" /TP /analyze-  /Zc:__cplusplus /utf-8 D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\PROTOCOL\\TELEMETRY_TESTS.CPP\n"
+            },
+            "syspane_state_import_tests.dir/Release/syspane_.714D9F49.tlog/link.read.1.tlog": {
+              "sha256": "6885d702377d4c605b43920b03a137cb814aa1925e7e622e145447bd9aff4f00",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_STATE_IMPORT_TESTS.DIR\\RELEASE\\STATE_IMPORT_TESTS.OBJ\nC:\\PROGRAM FILES\\WINDHAWK\\ENGINE\\1.7.3\\ENGINE.INI\nC:\\WINDOWS\\GLOBALIZATION\\SORTING\\SORTDEFAULT.NLS\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_DATA_VIEW.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_MODEL.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_RECOVERY.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_CONFIGURATION.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_PROTOCOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\KERNEL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\USER32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\GDI32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\WINSPOOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\SHELL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLE32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLEAUT32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\UUID.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\COMDLG32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\ADVAPI32.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_STATE_IMPORT_TESTS.DIR\\RELEASE\\STATE_IMPORT_TESTS.OBJ\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCPMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\OLDNAMES.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBVCRUNTIME.LIB\nC:\\PROGRAM FILES (X86)\\WINDOWS KITS\\10\\LIB\\10.0.10240.0\\UCRT\\X86\\LIBUCRT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\BIN\\X64\\RC.EXE\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\BIN\\HOSTX64\\X64\\CVTRES.EXE\nC:\\WINDOWS\\SYSTEM32\\TZRES.DLL\n"
+            },
+            "syspane_state_import_tests.dir/Release/syspane_.714D9F49.tlog/CL.command.1.tlog": {
+              "sha256": "9e309c1cab8704e7ae64e57ae51769585e6e1f6f05960fed979e0c285bc1a5ad",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\FAULT\\STATE_IMPORT_TESTS.CPP\n/c /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\DIAGNOSTICS /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\MODEL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\CONFIGURATION /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PROTOCOL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\THIRD_PARTY /nologo /W4 /WX /diagnostics:classic /O2 /Ob2 /Oy- /D _USING_V110_SDK71_ /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D WINVER=0x0501 /D _WIN32_WINNT=0x0501 /D _USING_V110_SDK71_ /D JSON_DIAGNOSTIC_POSITIONS=1 /D JSON_DIAGNOSTICS=0 /D \"CMAKE_INTDIR=\\\"Release\\\"\" /EHsc /MT /arch:SSE2 /permissive- /std:c++17 /Fo\"SYSPANE_STATE_IMPORT_TESTS.DIR\\RELEASE\\\\\" /Fd\"SYSPANE_STATE_IMPORT_TESTS.DIR\\RELEASE\\VC141.PDB\" /TP /analyze-  /Zc:__cplusplus /utf-8 D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\FAULT\\STATE_IMPORT_TESTS.CPP\n"
+            },
+            "syspane_subscription_tests.dir/Release/syspane_.57FD90B5.tlog/link.read.1.tlog": {
+              "sha256": "2d0d902565c6ead9f716b581b5a0a149c6d74b7d93e98b6fbd9a1e1f66537702",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_SUBSCRIPTION_TESTS.DIR\\RELEASE\\SUBSCRIPTION_TESTS.OBJ\nC:\\PROGRAM FILES\\WINDHAWK\\ENGINE\\1.7.3\\ENGINE.INI\nC:\\WINDOWS\\GLOBALIZATION\\SORTING\\SORTDEFAULT.NLS\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_CONFIGURATION.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_PROTOCOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\KERNEL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\USER32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\GDI32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\WINSPOOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\SHELL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLE32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLEAUT32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\UUID.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\COMDLG32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\ADVAPI32.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_SUBSCRIPTION_TESTS.DIR\\RELEASE\\SUBSCRIPTION_TESTS.OBJ\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCPMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\OLDNAMES.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBVCRUNTIME.LIB\nC:\\PROGRAM FILES (X86)\\WINDOWS KITS\\10\\LIB\\10.0.10240.0\\UCRT\\X86\\LIBUCRT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\BIN\\X64\\RC.EXE\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\BIN\\HOSTX64\\X64\\CVTRES.EXE\nC:\\WINDOWS\\SYSTEM32\\TZRES.DLL\n"
+            },
+            "syspane_subscription_tests.dir/Release/syspane_.57FD90B5.tlog/CL.command.1.tlog": {
+              "sha256": "2466a5b3c0bd1d30ae45f9dd1970ca7bdf99977b20c21978e44649afd63cb1bc",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\PROTOCOL\\SUBSCRIPTION_TESTS.CPP\n/c /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\CONFIGURATION /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PROTOCOL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\THIRD_PARTY /nologo /W4 /WX /diagnostics:classic /O2 /Ob2 /Oy- /D _USING_V110_SDK71_ /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D WINVER=0x0501 /D _WIN32_WINNT=0x0501 /D _USING_V110_SDK71_ /D JSON_DIAGNOSTIC_POSITIONS=1 /D JSON_DIAGNOSTICS=0 /D \"CMAKE_INTDIR=\\\"Release\\\"\" /EHsc /MT /arch:SSE2 /permissive- /std:c++17 /Fo\"SYSPANE_SUBSCRIPTION_TESTS.DIR\\RELEASE\\\\\" /Fd\"SYSPANE_SUBSCRIPTION_TESTS.DIR\\RELEASE\\VC141.PDB\" /TP /analyze-  /Zc:__cplusplus /utf-8 D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\PROTOCOL\\SUBSCRIPTION_TESTS.CPP\n"
+            },
+            "syspane_measured_time_tests.dir/Release/syspane_.59C8FDBD.tlog/link.read.1.tlog": {
+              "sha256": "f9aab56ff72e072667e557a640a97c5cda075fa3726688bc03aca0d103c97457",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_MEASURED_TIME_TESTS.DIR\\RELEASE\\MEASURED_TIME_TESTS.OBJ\nC:\\PROGRAM FILES\\WINDHAWK\\ENGINE\\1.7.3\\ENGINE.INI\nC:\\WINDOWS\\GLOBALIZATION\\SORTING\\SORTDEFAULT.NLS\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_DATA_VIEW.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_MODEL.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_RECOVERY.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_CONFIGURATION.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_PROTOCOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\KERNEL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\USER32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\GDI32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\WINSPOOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\SHELL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLE32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLEAUT32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\UUID.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\COMDLG32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\ADVAPI32.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_MEASURED_TIME_TESTS.DIR\\RELEASE\\MEASURED_TIME_TESTS.OBJ\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCPMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\OLDNAMES.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBVCRUNTIME.LIB\nC:\\PROGRAM FILES (X86)\\WINDOWS KITS\\10\\LIB\\10.0.10240.0\\UCRT\\X86\\LIBUCRT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\BIN\\X64\\RC.EXE\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\BIN\\HOSTX64\\X64\\CVTRES.EXE\nC:\\WINDOWS\\SYSTEM32\\TZRES.DLL\n"
+            },
+            "syspane_measured_time_tests.dir/Release/syspane_.59C8FDBD.tlog/CL.command.1.tlog": {
+              "sha256": "c8090c881eac60d42efd27a9b8d3fbaa1f2111c25aadc90e0372c6520c0dac7f",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\FAULT\\MEASURED_TIME_TESTS.CPP\n/c /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\DIAGNOSTICS /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\MODEL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\CONFIGURATION /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PROTOCOL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\THIRD_PARTY /nologo /W4 /WX /diagnostics:classic /O2 /Ob2 /Oy- /D _USING_V110_SDK71_ /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D WINVER=0x0501 /D _WIN32_WINNT=0x0501 /D _USING_V110_SDK71_ /D JSON_DIAGNOSTIC_POSITIONS=1 /D JSON_DIAGNOSTICS=0 /D \"CMAKE_INTDIR=\\\"Release\\\"\" /EHsc /MT /arch:SSE2 /permissive- /std:c++17 /Fo\"SYSPANE_MEASURED_TIME_TESTS.DIR\\RELEASE\\\\\" /Fd\"SYSPANE_MEASURED_TIME_TESTS.DIR\\RELEASE\\VC141.PDB\" /TP /analyze-  /Zc:__cplusplus /utf-8 D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\FAULT\\MEASURED_TIME_TESTS.CPP\n"
+            },
+            "syspane_network_state_tests.dir/Release/syspane_.AF5DDF9E.tlog/link.read.1.tlog": {
+              "sha256": "8a6cf7a10bc01fc44bbb3a866c18327dfe96e06c7b038910badd18efefc7e8ab",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_NETWORK_STATE_TESTS.DIR\\RELEASE\\NETWORK_STATE_TESTS.OBJ\nC:\\PROGRAM FILES\\WINDHAWK\\ENGINE\\1.7.3\\ENGINE.INI\nC:\\WINDOWS\\GLOBALIZATION\\SORTING\\SORTDEFAULT.NLS\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_NETWORK_STATE.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_MODEL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\KERNEL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\USER32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\GDI32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\WINSPOOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\SHELL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLE32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLEAUT32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\UUID.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\COMDLG32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\ADVAPI32.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_NETWORK_STATE_TESTS.DIR\\RELEASE\\NETWORK_STATE_TESTS.OBJ\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCPMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\OLDNAMES.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBVCRUNTIME.LIB\nC:\\PROGRAM FILES (X86)\\WINDOWS KITS\\10\\LIB\\10.0.10240.0\\UCRT\\X86\\LIBUCRT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\BIN\\X64\\RC.EXE\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\BIN\\HOSTX64\\X64\\CVTRES.EXE\nC:\\WINDOWS\\SYSTEM32\\TZRES.DLL\n"
+            },
+            "syspane_network_state_tests.dir/Release/syspane_.AF5DDF9E.tlog/CL.command.1.tlog": {
+              "sha256": "b48c6143224a90f0241d3d08ee79492ae48de25775b5b38345a52abafaaa770a",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\FAULT\\NETWORK_STATE_TESTS.CPP\n/c /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\RUNTIME /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\MODEL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PLATFORM /nologo /W4 /WX /diagnostics:classic /O2 /Ob2 /Oy- /D _USING_V110_SDK71_ /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D WINVER=0x0501 /D _WIN32_WINNT=0x0501 /D _USING_V110_SDK71_ /D \"CMAKE_INTDIR=\\\"Release\\\"\" /EHsc /MT /arch:SSE2 /permissive- /std:c++17 /Fo\"SYSPANE_NETWORK_STATE_TESTS.DIR\\RELEASE\\\\\" /Fd\"SYSPANE_NETWORK_STATE_TESTS.DIR\\RELEASE\\VC141.PDB\" /TP /analyze-  /Zc:__cplusplus /utf-8 D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\FAULT\\NETWORK_STATE_TESTS.CPP\n"
+            },
+            "syspane_network_publication_tests.dir/Release/syspane_.769EA2FC.tlog/link.read.1.tlog": {
+              "sha256": "43fc80021e713e31af0d9b7d494e35e8549e67fd47f03d57355f27538a4c7bb9",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_NETWORK_PUBLICATION_TESTS.DIR\\RELEASE\\NETWORK_PUBLICATION_TESTS.OBJ\nC:\\PROGRAM FILES\\WINDHAWK\\ENGINE\\1.7.3\\ENGINE.INI\nC:\\WINDOWS\\GLOBALIZATION\\SORTING\\SORTDEFAULT.NLS\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_NETWORK_PUBLICATION.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_DATA_VIEW.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_NETWORK_STATE.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_MODEL.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_RECOVERY.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_CONFIGURATION.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_PROTOCOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\KERNEL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\USER32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\GDI32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\WINSPOOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\SHELL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLE32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLEAUT32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\UUID.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\COMDLG32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\ADVAPI32.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_NETWORK_PUBLICATION_TESTS.DIR\\RELEASE\\NETWORK_PUBLICATION_TESTS.OBJ\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCPMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\OLDNAMES.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBVCRUNTIME.LIB\nC:\\PROGRAM FILES (X86)\\WINDOWS KITS\\10\\LIB\\10.0.10240.0\\UCRT\\X86\\LIBUCRT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\BIN\\X64\\RC.EXE\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\BIN\\HOSTX64\\X64\\CVTRES.EXE\nC:\\WINDOWS\\SYSTEM32\\TZRES.DLL\n"
+            },
+            "syspane_network_publication_tests.dir/Release/syspane_.769EA2FC.tlog/CL.command.1.tlog": {
+              "sha256": "287337dfc72c900cf68cb5b59fafa1fb1add68f6509d9d66c15d489de08a35df",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\FAULT\\NETWORK_PUBLICATION_TESTS.CPP\n/c /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\RUNTIME /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\MODEL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PLATFORM /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PROTOCOL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\DIAGNOSTICS /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\CONFIGURATION /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\THIRD_PARTY /nologo /W4 /WX /diagnostics:classic /O2 /Ob2 /Oy- /D _USING_V110_SDK71_ /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D WINVER=0x0501 /D _WIN32_WINNT=0x0501 /D _USING_V110_SDK71_ /D JSON_DIAGNOSTIC_POSITIONS=1 /D JSON_DIAGNOSTICS=0 /D \"CMAKE_INTDIR=\\\"Release\\\"\" /EHsc /MT /arch:SSE2 /permissive- /std:c++17 /Fo\"SYSPANE_NETWORK_PUBLICATION_TESTS.DIR\\RELEASE\\\\\" /Fd\"SYSPANE_NETWORK_PUBLICATION_TESTS.DIR\\RELEASE\\VC141.PDB\" /TP /analyze-  /Zc:__cplusplus /utf-8 D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\FAULT\\NETWORK_PUBLICATION_TESTS.CPP\n"
+            },
+            "syspane_network_view_tests.dir/Release/syspane_.B8C26721.tlog/link.read.1.tlog": {
+              "sha256": "e5e08bd4f6c301b8b5f278314ff6ff69250c2d2c458e8e867910af5dff27ac60",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_NETWORK_VIEW_TESTS.DIR\\RELEASE\\NETWORK_VIEW_TESTS.OBJ\nC:\\PROGRAM FILES\\WINDHAWK\\ENGINE\\1.7.3\\ENGINE.INI\nC:\\WINDOWS\\GLOBALIZATION\\SORTING\\SORTDEFAULT.NLS\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_NETWORK_VIEW.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_NETWORK_PUBLICATION.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_DATA_VIEW.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_RECOVERY.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_CONFIGURATION.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_NETWORK_STATE.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_MODEL.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_PROTOCOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\KERNEL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\USER32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\GDI32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\WINSPOOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\SHELL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLE32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLEAUT32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\UUID.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\COMDLG32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\ADVAPI32.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_NETWORK_VIEW_TESTS.DIR\\RELEASE\\NETWORK_VIEW_TESTS.OBJ\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCPMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\OLDNAMES.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBVCRUNTIME.LIB\nC:\\PROGRAM FILES (X86)\\WINDOWS KITS\\10\\LIB\\10.0.10240.0\\UCRT\\X86\\LIBUCRT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\BIN\\X64\\RC.EXE\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\BIN\\HOSTX64\\X64\\CVTRES.EXE\nC:\\WINDOWS\\SYSTEM32\\TZRES.DLL\n"
+            },
+            "syspane_network_view_tests.dir/Release/syspane_.B8C26721.tlog/CL.command.1.tlog": {
+              "sha256": "c7959b2bee7fc54a1e1d1acfd1e7815df8afb08f92a4f1c726721b121d246646",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\RENDERING\\NETWORK_VIEW_TESTS.CPP\n/c /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\RENDERING /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\DIAGNOSTICS /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\MODEL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\CONFIGURATION /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PROTOCOL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\RUNTIME /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PLATFORM /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\THIRD_PARTY /nologo /W4 /WX /diagnostics:classic /O2 /Ob2 /Oy- /D _USING_V110_SDK71_ /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D WINVER=0x0501 /D _WIN32_WINNT=0x0501 /D _USING_V110_SDK71_ /D JSON_DIAGNOSTIC_POSITIONS=1 /D JSON_DIAGNOSTICS=0 /D \"CMAKE_INTDIR=\\\"Release\\\"\" /EHsc /MT /arch:SSE2 /permissive- /std:c++17 /Fo\"SYSPANE_NETWORK_VIEW_TESTS.DIR\\RELEASE\\\\\" /Fd\"SYSPANE_NETWORK_VIEW_TESTS.DIR\\RELEASE\\VC141.PDB\" /TP /analyze-  /Zc:__cplusplus /utf-8 D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\RENDERING\\NETWORK_VIEW_TESTS.CPP\n"
+            },
+            "syspane_demand_tests.dir/Release/syspane_.361ADC61.tlog/link.read.1.tlog": {
+              "sha256": "01150d37b7506f6cf8443c81c14025a5f7cd5607a3520f3e76255fe51fed3d3e",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_DEMAND_TESTS.DIR\\RELEASE\\DEMAND_TESTS.OBJ\nC:\\PROGRAM FILES\\WINDHAWK\\ENGINE\\1.7.3\\ENGINE.INI\nC:\\WINDOWS\\GLOBALIZATION\\SORTING\\SORTDEFAULT.NLS\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_DEMAND.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_CONFIGURATION.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_PROTOCOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\KERNEL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\USER32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\GDI32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\WINSPOOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\SHELL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLE32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLEAUT32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\UUID.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\COMDLG32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\ADVAPI32.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_DEMAND_TESTS.DIR\\RELEASE\\DEMAND_TESTS.OBJ\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCPMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\OLDNAMES.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBVCRUNTIME.LIB\nC:\\PROGRAM FILES (X86)\\WINDOWS KITS\\10\\LIB\\10.0.10240.0\\UCRT\\X86\\LIBUCRT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\BIN\\X64\\RC.EXE\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\BIN\\HOSTX64\\X64\\CVTRES.EXE\nC:\\WINDOWS\\SYSTEM32\\TZRES.DLL\n"
+            },
+            "syspane_demand_tests.dir/Release/syspane_.361ADC61.tlog/CL.command.1.tlog": {
+              "sha256": "88bc9789f2f444e5a7562a40e6c437d1d45a4021ac0ac8de268e71963bd11075",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\FAULT\\DEMAND_TESTS.CPP\n/c /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\RUNTIME /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\CONFIGURATION /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PROTOCOL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\THIRD_PARTY /nologo /W4 /WX /diagnostics:classic /O2 /Ob2 /Oy- /D _USING_V110_SDK71_ /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D WINVER=0x0501 /D _WIN32_WINNT=0x0501 /D _USING_V110_SDK71_ /D JSON_DIAGNOSTIC_POSITIONS=1 /D JSON_DIAGNOSTICS=0 /D \"CMAKE_INTDIR=\\\"Release\\\"\" /EHsc /MT /arch:SSE2 /permissive- /std:c++17 /Fo\"SYSPANE_DEMAND_TESTS.DIR\\RELEASE\\\\\" /Fd\"SYSPANE_DEMAND_TESTS.DIR\\RELEASE\\VC141.PDB\" /TP /analyze-  /Zc:__cplusplus /utf-8 D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\FAULT\\DEMAND_TESTS.CPP\n"
+            },
+            "syspane_demand_session_tests.dir/Release/syspane_.9B9BDF40.tlog/link.read.1.tlog": {
+              "sha256": "3dda3f10204bdb3b0dc22bdefffccab4bf5907b19bcf0ab503850444883212f0",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_DEMAND_SESSION_TESTS.DIR\\RELEASE\\DEMAND_SESSION_TESTS.OBJ\nC:\\PROGRAM FILES\\WINDHAWK\\ENGINE\\1.7.3\\ENGINE.INI\nC:\\WINDOWS\\GLOBALIZATION\\SORTING\\SORTDEFAULT.NLS\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_DEMAND_SESSIONS.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_DEMAND.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_CONFIGURATION.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_PROTOCOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\KERNEL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\USER32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\GDI32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\WINSPOOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\SHELL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLE32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLEAUT32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\UUID.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\COMDLG32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\ADVAPI32.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_DEMAND_SESSION_TESTS.DIR\\RELEASE\\DEMAND_SESSION_TESTS.OBJ\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCPMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\OLDNAMES.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBVCRUNTIME.LIB\nC:\\PROGRAM FILES (X86)\\WINDOWS KITS\\10\\LIB\\10.0.10240.0\\UCRT\\X86\\LIBUCRT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\BIN\\X64\\RC.EXE\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\BIN\\HOSTX64\\X64\\CVTRES.EXE\nC:\\WINDOWS\\SYSTEM32\\TZRES.DLL\n"
+            },
+            "syspane_demand_session_tests.dir/Release/syspane_.9B9BDF40.tlog/CL.command.1.tlog": {
+              "sha256": "665ddfe05837ac40a58eea0a105fd1b5b634d22073ae3e1c967ec8c6ab33ebf0",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\FAULT\\DEMAND_SESSION_TESTS.CPP\n/c /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\RUNTIME /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\CONFIGURATION /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PROTOCOL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\THIRD_PARTY /nologo /W4 /WX /diagnostics:classic /O2 /Ob2 /Oy- /D _USING_V110_SDK71_ /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D WINVER=0x0501 /D _WIN32_WINNT=0x0501 /D _USING_V110_SDK71_ /D JSON_DIAGNOSTIC_POSITIONS=1 /D JSON_DIAGNOSTICS=0 /D \"CMAKE_INTDIR=\\\"Release\\\"\" /EHsc /MT /arch:SSE2 /permissive- /std:c++17 /Fo\"SYSPANE_DEMAND_SESSION_TESTS.DIR\\RELEASE\\\\\" /Fd\"SYSPANE_DEMAND_SESSION_TESTS.DIR\\RELEASE\\VC141.PDB\" /TP /analyze-  /Zc:__cplusplus /utf-8 D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\FAULT\\DEMAND_SESSION_TESTS.CPP\n"
+            },
+            "syspane_authored_tests.dir/Release/syspane_.C2D46B82.tlog/link.read.1.tlog": {
+              "sha256": "62ca4812f89d091a12139ba870267189d0f8a02ad186b223c6aae4b45f46542a",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_AUTHORED_TESTS.DIR\\RELEASE\\AUTHORED_TESTS.OBJ|D:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_AUTHORED_TESTS.DIR\\RELEASE\\CONTENT_TESTS.OBJ|D:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_AUTHORED_TESTS.DIR\\RELEASE\\SCENE_CONTENT_TESTS.OBJ\nC:\\PROGRAM FILES\\WINDHAWK\\ENGINE\\1.7.3\\ENGINE.INI\nC:\\WINDOWS\\GLOBALIZATION\\SORTING\\SORTDEFAULT.NLS\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_AUTHORED.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_ASYNC_COMMANDS.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_PROFILE_PROJECTION.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_CONFIGURATION.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_PROTOCOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\KERNEL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\USER32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\GDI32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\WINSPOOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\SHELL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLE32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLEAUT32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\UUID.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\COMDLG32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\ADVAPI32.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_AUTHORED_TESTS.DIR\\RELEASE\\AUTHORED_TESTS.OBJ\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_AUTHORED_TESTS.DIR\\RELEASE\\CONTENT_TESTS.OBJ\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_AUTHORED_TESTS.DIR\\RELEASE\\SCENE_CONTENT_TESTS.OBJ\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCPMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\OLDNAMES.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCONCRT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBVCRUNTIME.LIB\nC:\\PROGRAM FILES (X86)\\WINDOWS KITS\\10\\LIB\\10.0.10240.0\\UCRT\\X86\\LIBUCRT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\BIN\\X64\\RC.EXE\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\BIN\\HOSTX64\\X64\\CVTRES.EXE\nC:\\WINDOWS\\SYSTEM32\\TZRES.DLL\n"
+            },
+            "syspane_authored_tests.dir/Release/syspane_.C2D46B82.tlog/CL.command.1.tlog": {
+              "sha256": "149fdf9a4d1630d8306d6b1585ddbcaefb49027a4753780547a572cba9afd2e7",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\CONFIGURATION\\AUTHORED_TESTS.CPP\n/c /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\CONFIGURATION /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PROTOCOL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\THIRD_PARTY /nologo /W4 /WX /diagnostics:classic /O2 /Ob2 /Oy- /D _USING_V110_SDK71_ /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D WINVER=0x0501 /D _WIN32_WINNT=0x0501 /D _USING_V110_SDK71_ /D JSON_DIAGNOSTIC_POSITIONS=1 /D JSON_DIAGNOSTICS=0 /D \"CMAKE_INTDIR=\\\"Release\\\"\" /EHsc /MT /arch:SSE2 /permissive- /std:c++17 /Fo\"SYSPANE_AUTHORED_TESTS.DIR\\RELEASE\\\\\" /Fd\"SYSPANE_AUTHORED_TESTS.DIR\\RELEASE\\VC141.PDB\" /TP /analyze-  /Zc:__cplusplus /utf-8 D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\CONFIGURATION\\AUTHORED_TESTS.CPP\n^D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\CONFIGURATION\\CONTENT_TESTS.CPP\n/c /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\CONFIGURATION /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PROTOCOL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\THIRD_PARTY /nologo /W4 /WX /diagnostics:classic /O2 /Ob2 /Oy- /D _USING_V110_SDK71_ /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D WINVER=0x0501 /D _WIN32_WINNT=0x0501 /D _USING_V110_SDK71_ /D JSON_DIAGNOSTIC_POSITIONS=1 /D JSON_DIAGNOSTICS=0 /D \"CMAKE_INTDIR=\\\"Release\\\"\" /EHsc /MT /arch:SSE2 /permissive- /std:c++17 /Fo\"SYSPANE_AUTHORED_TESTS.DIR\\RELEASE\\\\\" /Fd\"SYSPANE_AUTHORED_TESTS.DIR\\RELEASE\\VC141.PDB\" /TP /analyze-  /Zc:__cplusplus /utf-8 D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\CONFIGURATION\\CONTENT_TESTS.CPP\n^D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\CONFIGURATION\\SCENE_CONTENT_TESTS.CPP\n/c /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\CONFIGURATION /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PROTOCOL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\THIRD_PARTY /nologo /W4 /WX /diagnostics:classic /O2 /Ob2 /Oy- /D _USING_V110_SDK71_ /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D WINVER=0x0501 /D _WIN32_WINNT=0x0501 /D _USING_V110_SDK71_ /D JSON_DIAGNOSTIC_POSITIONS=1 /D JSON_DIAGNOSTICS=0 /D \"CMAKE_INTDIR=\\\"Release\\\"\" /EHsc /MT /arch:SSE2 /permissive- /std:c++17 /Fo\"SYSPANE_AUTHORED_TESTS.DIR\\RELEASE\\\\\" /Fd\"SYSPANE_AUTHORED_TESTS.DIR\\RELEASE\\VC141.PDB\" /TP /analyze-  /Zc:__cplusplus /utf-8 D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\CONFIGURATION\\SCENE_CONTENT_TESTS.CPP\n"
+            },
+            "syspane_command_session_tests.dir/Release/syspane_.AD5875F8.tlog/link.read.1.tlog": {
+              "sha256": "9ebb8d094503b97f232eebb8cc975345989fb3134f406a0ef8cecd61a679635e",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_COMMAND_SESSION_TESTS.DIR\\RELEASE\\COMMAND_SESSION_TESTS.OBJ\nC:\\PROGRAM FILES\\WINDHAWK\\ENGINE\\1.7.3\\ENGINE.INI\nC:\\WINDOWS\\GLOBALIZATION\\SORTING\\SORTDEFAULT.NLS\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_ASYNC_COMMANDS.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_PROFILE_PROJECTION.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_AUTHORED.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_CONFIGURATION.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_PROTOCOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\KERNEL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\USER32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\GDI32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\WINSPOOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\SHELL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLE32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLEAUT32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\UUID.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\COMDLG32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\ADVAPI32.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_COMMAND_SESSION_TESTS.DIR\\RELEASE\\COMMAND_SESSION_TESTS.OBJ\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCPMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\OLDNAMES.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCONCRT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBVCRUNTIME.LIB\nC:\\PROGRAM FILES (X86)\\WINDOWS KITS\\10\\LIB\\10.0.10240.0\\UCRT\\X86\\LIBUCRT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\BIN\\X64\\RC.EXE\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\BIN\\HOSTX64\\X64\\CVTRES.EXE\nC:\\WINDOWS\\SYSTEM32\\TZRES.DLL\n"
+            },
+            "syspane_command_session_tests.dir/Release/syspane_.AD5875F8.tlog/CL.command.1.tlog": {
+              "sha256": "40a5607c82b69cb647c14da95dbea689e3bd00e82ff7f9f03dd7a4abde8fb210",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\CONFIGURATION\\COMMAND_SESSION_TESTS.CPP\n/c /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\CONFIGURATION /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PROTOCOL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\THIRD_PARTY /nologo /W4 /WX /diagnostics:classic /O2 /Ob2 /Oy- /D _USING_V110_SDK71_ /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D WINVER=0x0501 /D _WIN32_WINNT=0x0501 /D _USING_V110_SDK71_ /D JSON_DIAGNOSTIC_POSITIONS=1 /D JSON_DIAGNOSTICS=0 /D \"CMAKE_INTDIR=\\\"Release\\\"\" /EHsc /MT /arch:SSE2 /permissive- /std:c++17 /Fo\"SYSPANE_COMMAND_SESSION_TESTS.DIR\\RELEASE\\\\\" /Fd\"SYSPANE_COMMAND_SESSION_TESTS.DIR\\RELEASE\\VC141.PDB\" /TP /analyze-  /Zc:__cplusplus /utf-8 D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\CONFIGURATION\\COMMAND_SESSION_TESTS.CPP\n"
+            },
+            "syspane_scene_tests.dir/Release/syspane_.7548964A.tlog/link.read.1.tlog": {
+              "sha256": "d963821faf8692e4c4b03c8d4ad0660181da367cfd5a5079ada7350404c9a7f0",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_SCENE_TESTS.DIR\\RELEASE\\BINDING_TESTS.OBJ|D:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_SCENE_TESTS.DIR\\RELEASE\\CHART_HISTORY_TESTS.OBJ|D:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_SCENE_TESTS.DIR\\RELEASE\\CHART_PLOT_TESTS.OBJ|D:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_SCENE_TESTS.DIR\\RELEASE\\IMAGE_FIT_TESTS.OBJ|D:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_SCENE_TESTS.DIR\\RELEASE\\LAYOUT_TESTS.OBJ|D:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_SCENE_TESTS.DIR\\RELEASE\\VALIDATED_AUTHORED_TESTS.OBJ|D:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_SCENE_TESTS.DIR\\RELEASE\\VISIBILITY_TESTS.OBJ\nC:\\PROGRAM FILES\\WINDHAWK\\ENGINE\\1.7.3\\ENGINE.INI\nC:\\WINDOWS\\GLOBALIZATION\\SORTING\\SORTDEFAULT.NLS\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_SCENE.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_NETWORK_PUBLICATION.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_AUTHORED.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_DATA_VIEW.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_CONFIGURATION.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_RECOVERY.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_NETWORK_STATE.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_MODEL.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_PROTOCOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\KERNEL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\USER32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\GDI32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\WINSPOOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\SHELL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLE32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLEAUT32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\UUID.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\COMDLG32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\ADVAPI32.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_SCENE_TESTS.DIR\\RELEASE\\LAYOUT_TESTS.OBJ\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_SCENE_TESTS.DIR\\RELEASE\\BINDING_TESTS.OBJ\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_SCENE_TESTS.DIR\\RELEASE\\VISIBILITY_TESTS.OBJ\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_SCENE_TESTS.DIR\\RELEASE\\CHART_HISTORY_TESTS.OBJ\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_SCENE_TESTS.DIR\\RELEASE\\CHART_PLOT_TESTS.OBJ\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_SCENE_TESTS.DIR\\RELEASE\\IMAGE_FIT_TESTS.OBJ\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_SCENE_TESTS.DIR\\RELEASE\\VALIDATED_AUTHORED_TESTS.OBJ\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCPMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\OLDNAMES.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBVCRUNTIME.LIB\nC:\\PROGRAM FILES (X86)\\WINDOWS KITS\\10\\LIB\\10.0.10240.0\\UCRT\\X86\\LIBUCRT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\BIN\\X64\\RC.EXE\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\BIN\\HOSTX64\\X64\\CVTRES.EXE\nC:\\WINDOWS\\SYSTEM32\\TZRES.DLL\n"
+            },
+            "syspane_scene_tests.dir/Release/syspane_.7548964A.tlog/CL.command.1.tlog": {
+              "sha256": "69dd1d743070fd3d017913f3533a4f39a28802625e45ba3587b010c9eedd2f03",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\SCENE\\LAYOUT_TESTS.CPP\n/c /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\SCENE /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\CONFIGURATION /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PROTOCOL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\DIAGNOSTICS /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\MODEL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\RUNTIME /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PLATFORM /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\THIRD_PARTY /nologo /W4 /WX /diagnostics:classic /O2 /Ob2 /Oy- /D _USING_V110_SDK71_ /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D SYSPANE_VALIDATED_AUTHORED_TEST=1 /D WINVER=0x0501 /D _WIN32_WINNT=0x0501 /D _USING_V110_SDK71_ /D JSON_DIAGNOSTIC_POSITIONS=1 /D JSON_DIAGNOSTICS=0 /D \"CMAKE_INTDIR=\\\"Release\\\"\" /EHsc /MT /arch:SSE2 /permissive- /std:c++17 /Fo\"SYSPANE_SCENE_TESTS.DIR\\RELEASE\\\\\" /Fd\"SYSPANE_SCENE_TESTS.DIR\\RELEASE\\VC141.PDB\" /TP /analyze-  /Zc:__cplusplus /utf-8 D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\SCENE\\LAYOUT_TESTS.CPP\n^D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\SCENE\\IMAGE_FIT_TESTS.CPP\n/c /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\SCENE /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\CONFIGURATION /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PROTOCOL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\DIAGNOSTICS /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\MODEL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\RUNTIME /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PLATFORM /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\THIRD_PARTY /nologo /W4 /WX /diagnostics:classic /O2 /Ob2 /Oy- /D _USING_V110_SDK71_ /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D SYSPANE_VALIDATED_AUTHORED_TEST=1 /D WINVER=0x0501 /D _WIN32_WINNT=0x0501 /D _USING_V110_SDK71_ /D JSON_DIAGNOSTIC_POSITIONS=1 /D JSON_DIAGNOSTICS=0 /D \"CMAKE_INTDIR=\\\"Release\\\"\" /EHsc /MT /arch:SSE2 /permissive- /std:c++17 /Fo\"SYSPANE_SCENE_TESTS.DIR\\RELEASE\\\\\" /Fd\"SYSPANE_SCENE_TESTS.DIR\\RELEASE\\VC141.PDB\" /TP /analyze-  /Zc:__cplusplus /utf-8 D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\SCENE\\IMAGE_FIT_TESTS.CPP\n^D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\SCENE\\VALIDATED_AUTHORED_TESTS.CPP\n/c /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\SCENE /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\CONFIGURATION /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PROTOCOL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\DIAGNOSTICS /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\MODEL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\RUNTIME /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PLATFORM /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\THIRD_PARTY /nologo /W4 /WX /diagnostics:classic /O2 /Ob2 /Oy- /D _USING_V110_SDK71_ /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D SYSPANE_VALIDATED_AUTHORED_TEST=1 /D WINVER=0x0501 /D _WIN32_WINNT=0x0501 /D _USING_V110_SDK71_ /D JSON_DIAGNOSTIC_POSITIONS=1 /D JSON_DIAGNOSTICS=0 /D \"CMAKE_INTDIR=\\\"Release\\\"\" /EHsc /MT /arch:SSE2 /permissive- /std:c++17 /Fo\"SYSPANE_SCENE_TESTS.DIR\\RELEASE\\\\\" /Fd\"SYSPANE_SCENE_TESTS.DIR\\RELEASE\\VC141.PDB\" /TP /analyze-  /Zc:__cplusplus /utf-8 D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\SCENE\\VALIDATED_AUTHORED_TESTS.CPP\n^D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\SCENE\\BINDING_TESTS.CPP\n/c /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\SCENE /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\CONFIGURATION /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PROTOCOL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\DIAGNOSTICS /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\MODEL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\RUNTIME /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PLATFORM /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\THIRD_PARTY /nologo /W4 /WX /diagnostics:classic /O2 /Ob2 /Oy- /D _USING_V110_SDK71_ /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D SYSPANE_VALIDATED_AUTHORED_TEST=1 /D WINVER=0x0501 /D _WIN32_WINNT=0x0501 /D _USING_V110_SDK71_ /D JSON_DIAGNOSTIC_POSITIONS=1 /D JSON_DIAGNOSTICS=0 /D \"CMAKE_INTDIR=\\\"Release\\\"\" /EHsc /MT /arch:SSE2 /permissive- /std:c++17 /Fo\"SYSPANE_SCENE_TESTS.DIR\\RELEASE\\\\\" /Fd\"SYSPANE_SCENE_TESTS.DIR\\RELEASE\\VC141.PDB\" /TP /analyze-  /Zc:__cplusplus /utf-8 D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\SCENE\\BINDING_TESTS.CPP\n^D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\SCENE\\VISIBILITY_TESTS.CPP\n/c /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\SCENE /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\CONFIGURATION /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PROTOCOL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\DIAGNOSTICS /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\MODEL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\RUNTIME /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PLATFORM /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\THIRD_PARTY /nologo /W4 /WX /diagnostics:classic /O2 /Ob2 /Oy- /D _USING_V110_SDK71_ /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D SYSPANE_VALIDATED_AUTHORED_TEST=1 /D WINVER=0x0501 /D _WIN32_WINNT=0x0501 /D _USING_V110_SDK71_ /D JSON_DIAGNOSTIC_POSITIONS=1 /D JSON_DIAGNOSTICS=0 /D \"CMAKE_INTDIR=\\\"Release\\\"\" /EHsc /MT /arch:SSE2 /permissive- /std:c++17 /Fo\"SYSPANE_SCENE_TESTS.DIR\\RELEASE\\\\\" /Fd\"SYSPANE_SCENE_TESTS.DIR\\RELEASE\\VC141.PDB\" /TP /analyze-  /Zc:__cplusplus /utf-8 D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\SCENE\\VISIBILITY_TESTS.CPP\n^D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\SCENE\\CHART_HISTORY_TESTS.CPP\n/c /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\SCENE /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\CONFIGURATION /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PROTOCOL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\DIAGNOSTICS /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\MODEL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\RUNTIME /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PLATFORM /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\THIRD_PARTY /nologo /W4 /WX /diagnostics:classic /O2 /Ob2 /Oy- /D _USING_V110_SDK71_ /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D SYSPANE_VALIDATED_AUTHORED_TEST=1 /D WINVER=0x0501 /D _WIN32_WINNT=0x0501 /D _USING_V110_SDK71_ /D JSON_DIAGNOSTIC_POSITIONS=1 /D JSON_DIAGNOSTICS=0 /D \"CMAKE_INTDIR=\\\"Release\\\"\" /EHsc /MT /arch:SSE2 /permissive- /std:c++17 /Fo\"SYSPANE_SCENE_TESTS.DIR\\RELEASE\\\\\" /Fd\"SYSPANE_SCENE_TESTS.DIR\\RELEASE\\VC141.PDB\" /TP /analyze-  /Zc:__cplusplus /utf-8 D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\SCENE\\CHART_HISTORY_TESTS.CPP\n^D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\SCENE\\CHART_PLOT_TESTS.CPP\n/c /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\SCENE /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\CONFIGURATION /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PROTOCOL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\DIAGNOSTICS /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\MODEL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\RUNTIME /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PLATFORM /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\THIRD_PARTY /nologo /W4 /WX /diagnostics:classic /O2 /Ob2 /Oy- /D _USING_V110_SDK71_ /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D SYSPANE_VALIDATED_AUTHORED_TEST=1 /D WINVER=0x0501 /D _WIN32_WINNT=0x0501 /D _USING_V110_SDK71_ /D JSON_DIAGNOSTIC_POSITIONS=1 /D JSON_DIAGNOSTICS=0 /D \"CMAKE_INTDIR=\\\"Release\\\"\" /EHsc /MT /arch:SSE2 /permissive- /std:c++17 /Fo\"SYSPANE_SCENE_TESTS.DIR\\RELEASE\\\\\" /Fd\"SYSPANE_SCENE_TESTS.DIR\\RELEASE\\VC141.PDB\" /TP /analyze-  /Zc:__cplusplus /utf-8 D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\SCENE\\CHART_PLOT_TESTS.CPP\n"
+            },
+            "syspane_processor_state_tests.dir/Release/syspane_.7B314DC1.tlog/link.read.1.tlog": {
+              "sha256": "b7eb022467cc91530fd0ef1b208b41574a63ace5c4b2b6f7377006d6ad97c29f",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_PROCESSOR_STATE_TESTS.DIR\\RELEASE\\PROCESSOR_STATE_TESTS.OBJ\nC:\\PROGRAM FILES\\WINDHAWK\\ENGINE\\1.7.3\\ENGINE.INI\nC:\\WINDOWS\\GLOBALIZATION\\SORTING\\SORTDEFAULT.NLS\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_PROCESSOR_STATE.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_MODEL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\KERNEL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\USER32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\GDI32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\WINSPOOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\SHELL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLE32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLEAUT32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\UUID.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\COMDLG32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\ADVAPI32.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_PROCESSOR_STATE_TESTS.DIR\\RELEASE\\PROCESSOR_STATE_TESTS.OBJ\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCPMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\OLDNAMES.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCONCRT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBVCRUNTIME.LIB\nC:\\PROGRAM FILES (X86)\\WINDOWS KITS\\10\\LIB\\10.0.10240.0\\UCRT\\X86\\LIBUCRT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\BIN\\X64\\RC.EXE\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\BIN\\HOSTX64\\X64\\CVTRES.EXE\nC:\\WINDOWS\\SYSTEM32\\TZRES.DLL\n"
+            },
+            "syspane_processor_state_tests.dir/Release/syspane_.7B314DC1.tlog/CL.command.1.tlog": {
+              "sha256": "0323dd6b9665db8a2db31915971f581e3a0609eea5e7364db84e220da8e368a3",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\RESOURCES\\PROCESSOR_STATE_TESTS.CPP\n/c /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\RUNTIME /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\MODEL /nologo /W4 /WX /diagnostics:classic /O2 /Ob2 /Oy- /D _USING_V110_SDK71_ /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D WINVER=0x0501 /D _WIN32_WINNT=0x0501 /D _USING_V110_SDK71_ /D \"CMAKE_INTDIR=\\\"Release\\\"\" /EHsc /MT /arch:SSE2 /permissive- /std:c++17 /Fo\"SYSPANE_PROCESSOR_STATE_TESTS.DIR\\RELEASE\\\\\" /Fd\"SYSPANE_PROCESSOR_STATE_TESTS.DIR\\RELEASE\\VC141.PDB\" /TP /analyze-  /Zc:__cplusplus /utf-8 D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\RESOURCES\\PROCESSOR_STATE_TESTS.CPP\n"
+            }
+          }
+        },
+        "scope": "PE32/import/SDK closure only, not guest runtime qualification"
+      }
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "uid": 1000,
+      "artifacts": {
+        "syspane_processor_state_tests": {
+          "path": "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/syspane_processor_state_tests",
+          "bytes": 724344,
+          "sha256": "b07add6cd941bee486ce0f0f578cc6aa5827ccea327253c7138759f4b8bb6785"
+        },
+        "libsyspane_processor_state.a": {
+          "path": "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/libsyspane_processor_state.a",
+          "bytes": 770646,
+          "sha256": "ea39ce1afbd7bea7775463f5751968c8da20c98f8b7e183ad3da3217106aa491"
+        },
+        "component-graph.txt": {
+          "path": "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/component-graph.txt",
+          "bytes": 20526,
+          "sha256": "66466c8d89529588325aa2d144d646c2349bc3a46d0f3a02d8942cd2db4761f9"
+        }
+      }
+    }
+  ],
+  "preserved_failures": [
+    {
+      "stage": "build",
+      "source_base": "703963a355ccc55b53f35bd7b371c511a1313907",
+      "source_archive_sha256": "a3fd65922314036577b4e185cb74c717fbcf02802f1361466ec17a2de9c2f2bd",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "cmake",
+            "--preset",
+            "linux-x64-gcc13"
+          ],
+          "started_at": "2026-10-12T04:16:28.940626+00:00",
+          "finished_at": "2026-10-12T04:16:38.032091+00:00",
+          "exit": 0,
+          "log_sha256": "8e517a32937bd142a9a4eddfcb4361bd840dfae4ebdfdd8b887501cacd6328b8",
+          "log": {
+            "local_path": "out/evidence/processor-state-checks/build-43165ef6/0.log",
+            "sha256": "8e517a32937bd142a9a4eddfcb4361bd840dfae4ebdfdd8b887501cacd6328b8"
+          },
+          "budget": {
+            "local_path": "out/evidence/processor-state-checks/build-43165ef6/budget-0.txt",
+            "sha256": "085e3db2ba1a92220bc29de235cfae0f2a3e1f6a10f6d102798c11dadd5202a1"
+          },
+          "executed_tests": null
+        },
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "cmake",
+            "--build",
+            "--preset",
+            "linux-x64-gcc13"
+          ],
+          "started_at": "2026-10-12T04:16:40.054276+00:00",
+          "finished_at": "2026-10-12T04:16:41.338386+00:00",
+          "exit": 1,
+          "log_sha256": "db34aa512c88dd88cd46f3afe1d86a6a25e5754ea6cce3b04838408abe3f2b74",
+          "log": {
+            "local_path": "out/evidence/processor-state-checks/build-43165ef6/1.log",
+            "sha256": "db34aa512c88dd88cd46f3afe1d86a6a25e5754ea6cce3b04838408abe3f2b74"
+          },
+          "budget": {
+            "local_path": "out/evidence/processor-state-checks/build-43165ef6/budget-1.txt",
+            "sha256": "10bb6bf6b406f11af479a74cf9c07e4af32f927f3b9797ec0c80b4edfd3e3bb8"
+          },
+          "executed_tests": null
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/processor-state-checks/build-43165ef6/result.json",
+        "sha256": "e687ca4070a306a5d1ca170bb66ace05a9bfd6c5edead281128555c0ff971532"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/processor-state-checks/build-43165ef6/source-manifest.json",
+        "sha256": "12aa13019adb4f4769a2f09ba9cf6572de654978dbcbc8642a9768be4f1ea1cb"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/processor-state-checks/build-43165ef6/source.zip",
+        "sha256": "a3fd65922314036577b4e185cb74c717fbcf02802f1361466ec17a2de9c2f2bd"
+      }
+    },
+    {
+      "stage": "legacy",
+      "source_base": "703963a355ccc55b53f35bd7b371c511a1313907",
+      "source_archive_sha256": "c868a754378897e86e157da408877ed948ed5ff4c033b4699072bb429b764694",
+      "commands": [
+        {
+          "command": [
+            "cmake",
+            "--preset",
+            "windows-x86-v141-xp"
+          ],
+          "started_at": "2026-10-12T04:19:59.084955+00:00",
+          "finished_at": "2026-10-12T04:20:02.932454+00:00",
+          "exit": 0,
+          "log_sha256": "7495569f0d03ad9ad02bcd339f77cf9c0475d5037af5a1b0898df4b256a15111",
+          "log": {
+            "local_path": "out/evidence/processor-state-checks/legacy-594df3c3/0.log",
+            "sha256": "7495569f0d03ad9ad02bcd339f77cf9c0475d5037af5a1b0898df4b256a15111"
+          },
+          "budget": {
+            "local_path": "out/evidence/processor-state-checks/legacy-594df3c3/budget-0.txt",
+            "sha256": "5c244ad4932fcf2d021817ab2e248441c04ff8dc40aabdd6b67ecc0db78ac1ef"
+          },
+          "executed_tests": null
+        },
+        {
+          "command": [
+            "cmake",
+            "--build",
+            "--preset",
+            "windows-x86-v141-xp"
+          ],
+          "started_at": "2026-10-12T04:20:04.982554+00:00",
+          "finished_at": "2026-10-12T04:20:11.058883+00:00",
+          "exit": 0,
+          "log_sha256": "06c238b98e40f7f6afef667a4c66b20b4bea6a046f71d4b5abede1e23603a45f",
+          "log": {
+            "local_path": "out/evidence/processor-state-checks/legacy-594df3c3/1.log",
+            "sha256": "06c238b98e40f7f6afef667a4c66b20b4bea6a046f71d4b5abede1e23603a45f"
+          },
+          "budget": {
+            "local_path": "out/evidence/processor-state-checks/legacy-594df3c3/budget-1.txt",
+            "sha256": "f1b1e5b8c35a9ba1b88bd6bd423f9298792513143562294847aa44b1e1891447"
+          },
+          "executed_tests": null
+        },
+        {
+          "command": [
+            "ctest",
+            "--preset",
+            "windows-x86-v141-xp",
+            "-R",
+            "^(processor[.]|model[.]|network[.]RECONCILE-|composition[.])",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-12T04:20:13.101872+00:00",
+          "finished_at": "2026-10-12T04:20:15.663605+00:00",
+          "exit": 0,
+          "log_sha256": "293030068f15af97c8179b2a05f588627eb65d0ed0cd1629b377bf9764008c00",
+          "log": {
+            "local_path": "out/evidence/processor-state-checks/legacy-594df3c3/2.log",
+            "sha256": "293030068f15af97c8179b2a05f588627eb65d0ed0cd1629b377bf9764008c00"
+          },
+          "budget": {
+            "local_path": "out/evidence/processor-state-checks/legacy-594df3c3/budget-2.txt",
+            "sha256": "5fa27039f9bb3ef85e291de4973279536377212c0acf068b310c6959a531e21e"
+          },
+          "executed_tests": 39
+        },
+        {
+          "command": [
+            "ctest",
+            "--preset",
+            "windows-x86-v141-xp",
+            "-R",
+            "^legacy[.]",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-12T04:20:17.695913+00:00",
+          "finished_at": "2026-10-12T04:20:20.434247+00:00",
+          "exit": 8,
+          "log_sha256": "3eecd01cdce02c71829f996a08692753d36883afed7ea0318b314d852701ee1f",
+          "log": {
+            "local_path": "out/evidence/processor-state-checks/legacy-594df3c3/3.log",
+            "sha256": "3eecd01cdce02c71829f996a08692753d36883afed7ea0318b314d852701ee1f"
+          },
+          "budget": {
+            "local_path": "out/evidence/processor-state-checks/legacy-594df3c3/budget-3.txt",
+            "sha256": "48e22cbe708dfd6ee55b9cd11ed0e13576aede28d1616f828e4cb23f5181b47a"
+          },
+          "executed_tests": 2
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/processor-state-checks/legacy-594df3c3/result.json",
+        "sha256": "ca1bd5fbeb7e67da4ff6c604d70f0fb531772c03ec235549c2ee33b077ec08b3"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/processor-state-checks/legacy-594df3c3/source-manifest.json",
+        "sha256": "f08fc7b11e6a55349222ea83adce6681988fedd6bbb0987001c4e5f573e4cafc"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/processor-state-checks/legacy-594df3c3/source.zip",
+        "sha256": "c868a754378897e86e157da408877ed948ed5ff4c033b4699072bb429b764694"
+      }
+    }
+  ],
+  "fixed_cases": [
+    "WEIGHTED",
+    "BOUNDARIES",
+    "GROUPS",
+    "TOPOLOGY",
+    "RESETS",
+    "FAILURES",
+    "INVALID",
+    "OVERFLOW",
+    "DEMAND",
+    "CLOCKS",
+    "THREADING"
+  ],
+  "verification": {
+    "checks_per_profile": 39,
+    "processor_cases_per_profile": 11,
+    "legacy_audit_cases": 2,
+    "large_group_case": "128 complete processors across two 64-processor groups; synthetic, not large-server native qualification",
+    "ratio_case": {
+      "busy": 120,
+      "total": 160,
+      "interval_ns": 100,
+      "percent": 75
+    },
+    "pending": "First/demand/topology/reset/zero-time/no-progress/acquisition-gap stay explicit and cannot become zero utilization",
+    "native": "No native CPU/memory/GPU API, metric publication, demand integration or UI activation added",
+    "release": "Windows 9x, Windows NT, X11, Wayland and Mac OS X all remain required and incomplete"
+  },
+  "import_amendment": {
+    "symbols": [
+      "ExitThread",
+      "GetExitCodeThread"
+    ],
+    "reason": "New standard-thread test imports were absent from the prior used-symbol list; pinned toolset import audit remains strict and complete",
+    "minimum_documented_client": "Windows XP",
+    "sources": [
+      "https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-exitthread",
+      "https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-getexitcodethread"
+    ],
+    "guest_runtime": "not executed"
+  },
+  "next_steps": [
+    "Close native processor/topology acquisition and OS-specific descriptors, then publish under existing policy/demand/IPC owners",
+    "Implement memory/commit/swap/paging and separately admitted GPU capability semantics",
+    "Keep prior mixed GTK accumulation failure and other native/desktop/lifecycle qualification open"
+  ],
+  "recorders": [
+    {
+      "local_path": "out/campaign/processor_state_checks.py",
+      "sha256": "c1f2882a6d31a628aebd5793f28944057f59493a2aeb71ee7fc91559629399fb"
+    },
+    {
+      "local_path": "out/campaign/record_processor_state.py",
+      "sha256": "5cc39442fa39f75081c5d48f66754c6a583895013ec1822d2fcc2c9411c6f6c9"
+    }
+  ],
+  "specification_checks": {
+    "steps": [
+      {
+        "step": "budget",
+        "command": [
+          "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+          "-X",
+          "utf8",
+          "source/build/check_workspace_budget.py",
+          "--action",
+          "test"
+        ],
+        "environment": {
+          "TMP": "D:\\Projects\\SysPane\\syspane\\out\\test-tmp\\processor-state",
+          "TEMP": "D:\\Projects\\SysPane\\syspane\\out\\test-tmp\\processor-state",
+          "GIT_CEILING_DIRECTORIES": "D:/Projects/SysPane/syspane/out/test-tmp/processor-state"
+        },
+        "started_at": "2026-10-12T04:28:16.924075+00:00",
+        "finished_at": "2026-10-12T04:28:18.956825+00:00",
+        "exit": 0,
+        "stdout_sha256": "e5a87e2be0d408f496162c44b18f16dde080acbde8989c27756ab90622f3c902",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "step": "generate",
+        "command": [
+          "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+          "-X",
+          "utf8",
+          "spec/tools/specctl.py",
+          "generate"
+        ],
+        "environment": {
+          "TMP": "D:\\Projects\\SysPane\\syspane\\out\\test-tmp\\processor-state",
+          "TEMP": "D:\\Projects\\SysPane\\syspane\\out\\test-tmp\\processor-state",
+          "GIT_CEILING_DIRECTORIES": "D:/Projects/SysPane/syspane/out/test-tmp/processor-state"
+        },
+        "started_at": "2026-10-12T04:28:18.960360+00:00",
+        "finished_at": "2026-10-12T04:28:19.242537+00:00",
+        "exit": 0,
+        "stdout_sha256": "433bc9cf0ed9aecb0fd853cd594a7f65c16c5c44afa00c08968558a32d5656c9",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "step": "validate",
+        "command": [
+          "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+          "-X",
+          "utf8",
+          "spec/tools/specctl.py",
+          "validate",
+          "--schemas"
+        ],
+        "environment": {
+          "TMP": "D:\\Projects\\SysPane\\syspane\\out\\test-tmp\\processor-state",
+          "TEMP": "D:\\Projects\\SysPane\\syspane\\out\\test-tmp\\processor-state",
+          "GIT_CEILING_DIRECTORIES": "D:/Projects/SysPane/syspane/out/test-tmp/processor-state"
+        },
+        "started_at": "2026-10-12T04:28:19.242762+00:00",
+        "finished_at": "2026-10-12T04:28:21.168513+00:00",
+        "exit": 0,
+        "stdout_sha256": "1db06ecf40f29f60bb42c082d8c2f63f896193998a1383007463a4e4a65f35ce",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "step": "tools",
+        "command": [
+          "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+          "-X",
+          "utf8",
+          "spec/tools/tests/test_specctl.py",
+          "-v"
+        ],
+        "environment": {
+          "TMP": "D:\\Projects\\SysPane\\syspane\\out\\test-tmp\\processor-state",
+          "TEMP": "D:\\Projects\\SysPane\\syspane\\out\\test-tmp\\processor-state",
+          "GIT_CEILING_DIRECTORIES": "D:/Projects/SysPane/syspane/out/test-tmp/processor-state"
+        },
+        "started_at": "2026-10-12T04:28:21.168788+00:00",
+        "finished_at": "2026-10-12T04:29:21.808915+00:00",
+        "exit": 0,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "dec9742291b5eb24f87d27c90cbfee7e01bd5ae02b94253d18546e6c246d18ac"
+      }
+    ],
+    "schemas": 51,
+    "fixtures": 183,
+    "tools": {
+      "total": 62,
+      "passed": 60,
+      "skipped": 2
+    },
+    "skip_reason": "Existing Windows symlink privilege restrictions",
+    "logs": [
+      {
+        "local_path": "out/evidence/processor-state/spec-checks/budget.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "local_path": "out/evidence/processor-state/spec-checks/budget.stdout",
+        "sha256": "e5a87e2be0d408f496162c44b18f16dde080acbde8989c27756ab90622f3c902"
+      },
+      {
+        "local_path": "out/evidence/processor-state/spec-checks/generate.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "local_path": "out/evidence/processor-state/spec-checks/generate.stdout",
+        "sha256": "433bc9cf0ed9aecb0fd853cd594a7f65c16c5c44afa00c08968558a32d5656c9"
+      },
+      {
+        "local_path": "out/evidence/processor-state/spec-checks/result.json",
+        "sha256": "0bc43bbf52774a73dec97c1a17895512d8f63d026d66f73e2885d56607d36bfa"
+      },
+      {
+        "local_path": "out/evidence/processor-state/spec-checks/tools.stderr",
+        "sha256": "dec9742291b5eb24f87d27c90cbfee7e01bd5ae02b94253d18546e6c246d18ac"
+      },
+      {
+        "local_path": "out/evidence/processor-state/spec-checks/tools.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "local_path": "out/evidence/processor-state/spec-checks/validate.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "local_path": "out/evidence/processor-state/spec-checks/validate.stdout",
+        "sha256": "1db06ecf40f29f60bb42c082d8c2f63f896193998a1383007463a4e4a65f35ce"
+      }
+    ]
+  }
+}

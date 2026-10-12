@@ -136,6 +136,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Composition-scoped native font setup](w-11-text-session.md) — Reuse Linux font setup within one synchronous composition while preserving exact rendering and erasure.
 - [Immutable authored validation for native composition](w-11-validated-authored.md) — Remove repeated structural validation while retaining current geometry, resource and policy checks.
 - [Exact validated theme reuse during composition](w-11-validated-theme.md) — Remove repeated theme schema walks without changing request validation, typography or pixel output.
+- [Shared processor interval ownership and denominators](w-14-processor-state.md) — Deterministic complete-processor counter reconciliation before native resource acquisition and publication.
 - [W-24 authenticated transport and policy boundary](w-24-transport.md) — Close the initial local protocol, admission and preview boundary before native integration.
 - [W-25 collection continuity across consumer replacement](w-25-consumer-continuity.md) — Keep real collection independently owned while admitting bounded replacement consumers.
 - [W-25 automatic recovery from independent render failure](w-25-controller-render-recovery.md) — Connect the existing render and health guards to the persistent native desktop replacement owner.

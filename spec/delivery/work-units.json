@@ -824,19 +824,27 @@
         "W-07"
       ],
       "specs": [
-        "SP-RESOURCES"
+        "SP-RESOURCES",
+        "SP-W14-PROCESSOR-STATE"
       ],
       "acceptance_tests": [
         "T-RATES",
         "T-MEMORY"
       ],
       "planned_outputs": [
-        "source/collectors/"
+        "source/collectors/",
+        "source/runtime/processor_state.hpp",
+        "source/runtime/processor_state.cpp",
+        "tests/resources/processor_state_tests.cpp",
+        "spec/delivery/processor-state-handoff.md",
+        "spec/delivery/checkpoints/processor-state.json"
       ],
-      "status": "planned",
+      "status": "in_progress",
       "authority_class": "native_lab",
-      "execution_grant": null,
-      "notes": "Dependency-ready is not execution authority. Native work may produce a failed/inconclusive probe without a support claim; independent tracks can continue."
+      "execution_grant": "user:foundation-native-campaign-2026-10-05",
+      "notes": "Shared complete-processor interval source state now validates stable IDs/groups, exact busy/total weighted denominators, actual start intervals, first/reset/hotplug/gap/no-progress semantics, checked overflow, tickets/topology/clock ownership and immutable transfers. Eleven fixed processor plus 28 model/network/graph cases pass on Linux, Windows GCC and the historical-toolset host. Preserve initial strict compiler and import-list failures; the new historical executable passes pinned-input/PE/import audits after two documented XP thread APIs are explicitly declared. Native acquisitions/physical topology, OS-specific descriptors/publication/demand, memory/GPU and real resource/release qualification remain required. User expanded goal authorizes this shared implementation, not unadmitted native labs or privilege.",
+      "package": "delivery/packages/w-14-processor-state.md",
+      "evidence": "delivery/processor-state-handoff.md"
     },
     {
       "id": "W-15",

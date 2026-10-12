@@ -520,7 +520,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "693a7ecc2203fe8ddc820b438a0ff91b4b2b50874d5c84bce111741db2a95cec"
+      "sha256": "7faf52e297e4ef1135963ecaa4746b2c58691918ff32b66980b216a922711699"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -3130,6 +3130,18 @@
       "sha256": "203a0163b13e11b0494a63d4c80f8324c3d56758299e5cb5b8aff8b99d06d36a"
     },
     {
+      "id": "SP-W14-PROCESSOR-STATE",
+      "path": "delivery/packages/w-14-processor-state.md",
+      "title": "Shared processor interval ownership and denominators",
+      "description": "Deterministic complete-processor counter reconciliation before native resource acquisition and publication.",
+      "requires": [
+        "SP-RESOURCES",
+        "SP-STATE",
+        "SP-WORK-PACKAGES"
+      ],
+      "sha256": "6580808cd54df80cbcf2679322a76d88a3e53a219e76122d5f8756039628a5f5"
+    },
+    {
       "id": "SP-W24-PACKAGE",
       "path": "delivery/packages/w-24-transport.md",
       "title": "W-24 authenticated transport and policy boundary",
@@ -3547,6 +3559,16 @@
         "SP-W11-PRIVATE-TEXT-LIFETIME"
       ],
       "sha256": "2a7948470e165750b4ff4607e24685b9e38ddc01dfc74521a868f9350cbdf6f8"
+    },
+    {
+      "id": "SP-PROCESSOR-STATE-HANDOFF",
+      "path": "delivery/processor-state-handoff.md",
+      "title": "Shared processor interval state checkpoint",
+      "description": "Exact complete-processor denominators and failure semantics before native acquisition and resource publication.",
+      "requires": [
+        "SP-W14-PROCESSOR-STATE"
+      ],
+      "sha256": "fa6ea4d5e3e628ccf30ccd6744e01217a32576b867ef6f998f34e90d4f2f8c9f"
     },
     {
       "id": "SP-PROFILE-CONTROLLER-HANDOFF",

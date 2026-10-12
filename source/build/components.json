@@ -4048,6 +4048,61 @@
       "profiles": [
         "linux-x64-gcc13"
       ]
+    },
+    {
+      "id": "processor-state",
+      "target": "syspane_processor_state",
+      "type": "STATIC_LIBRARY",
+      "source_owner": "source/runtime/",
+      "public_interfaces": [
+        "source/runtime/processor_state.hpp"
+      ],
+      "private_interfaces": [],
+      "sources": [
+        "source/runtime/processor_state.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_model",
+        "Threads::Threads"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "windows-x64-gcc15",
+        "linux-x64-gcc13",
+        "windows-x86-v141-xp"
+      ]
+    },
+    {
+      "id": "processor-state-tests",
+      "target": "syspane_processor_state_tests",
+      "type": "EXECUTABLE",
+      "source_owner": "tests/resources/",
+      "public_interfaces": [],
+      "private_interfaces": [],
+      "sources": [
+        "tests/resources/processor_state_tests.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_processor_state"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "windows-x64-gcc15",
+        "linux-x64-gcc13",
+        "windows-x86-v141-xp"
+      ]
     }
   ]
 }

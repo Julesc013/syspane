@@ -7,6 +7,11 @@ Shared build scripts, profiles and dependency locks live in
 [source/build](source/build/README.md). Build products, raw test recordings and
 machine-specific workspace settings stay in ignored `out/` directories.
 
+The [shared processor state](spec/delivery/processor-state-handoff.md) adds exact
+CPU interval and group denominators, explicit pending/reset/gap semantics and
+three-profile fixed cases. Native acquisition, resource publication and full
+release qualification remain open.
+
 The [maximum policy checkpoint](spec/delivery/gtk-history-policy-handoff.md)
 retains actual native/raw-wire cells across maximum-history revoke/regrant and
 fresh recovery. Product source remains unchanged. Original failures and limits
