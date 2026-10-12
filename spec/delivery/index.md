@@ -185,6 +185,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Native widget-creation checkpoint](widget-creation-handoff.md) — All seven primitives through existing draft, resource, policy and transaction owners.
 - [Contemporary Windows host observation checkpoint](windows-host-inventory-handoff.md) — Read-only Explorer ownership and icon hierarchy, with native host execution still dependent on a designated laboratory.
 - [Native Windows processor acquisition checkpoint](windows-processor-handoff.md) — Complete native group topology, explicit accounted-time denominator and independently verified raw intervals.
+- [Windows processor publication and measured model checkpoint](windows-publication-handoff.md) — Explicit Windows accounting, complete group/CPU observations, lifetime ownership and independently verified measured model import.
 - [Implementation work-package closure](work-packages.md) — Make each admitted package implementable, verifiable and resumable from the repository.
 - [work-units.json](work-units.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [Initial X11 desktop-host investigation](x11-host-handoff.md) — Bind real Openbox reveal and PCManFM placement failures to independent pixels, with image-background startup failures preserved.

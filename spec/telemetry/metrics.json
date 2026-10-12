@@ -153,6 +153,63 @@
       "permissions": [],
       "sensitivity": "operational",
       "cost": "potentially_blocking"
+    },
+    {
+      "schema_version": "0.1.0",
+      "metric_id": "windows.cpu.accounted_busy_percent",
+      "value_kind": "float64",
+      "unit": "percent",
+      "scope": "OS-visible active logical CPUs, their native Windows processor groups and aggregate; not process affinity or quota entitlement.",
+      "temporality": "gauge",
+      "denominator": "Exact delta of cumulative user+non-idle privileged+idle OS accounting in the actual acquisition-start interval; not PDH wall time.",
+      "reset_rule": "First/demand/topology/reset/zero-time/no-progress/gap is pending; any contributing component decrease rebases all CPUs. Unavailable is not zero.",
+      "derivation": "windows:pdh-accounted-time-v1. Busy=delta user+privileged; total=delta user+privileged+idle. Preserve exact integers; percent=100*busy/total, weighted across all intended CPUs. Interrupt/DPC subsets are not added twice. 100-ns units do not claim 100-ns accuracy.",
+      "sample_interval_ms": 1000,
+      "freshness_ms": 3000,
+      "source_coverage": [
+        "provider:windows-processor"
+      ],
+      "permissions": [],
+      "sensitivity": "operational",
+      "cost": "potentially_blocking"
+    },
+    {
+      "schema_version": "0.1.0",
+      "metric_id": "windows.cpu.interval_busy_100ns",
+      "value_kind": "uint64",
+      "unit": "100 ns",
+      "scope": "OS-visible active logical CPUs, their native Windows processor groups and aggregate; not process affinity or quota entitlement.",
+      "temporality": "gauge",
+      "denominator": "Exact delta of cumulative user+non-idle privileged+idle OS accounting in the actual acquisition-start interval; not PDH wall time.",
+      "reset_rule": "First/demand/topology/reset/zero-time/no-progress/gap is pending; any contributing component decrease rebases all CPUs. Unavailable is not zero.",
+      "derivation": "windows:pdh-accounted-time-v1. Busy=delta user+privileged; total=delta user+privileged+idle. Preserve exact integers; percent=100*busy/total, weighted across all intended CPUs. Interrupt/DPC subsets are not added twice. 100-ns units do not claim 100-ns accuracy.",
+      "sample_interval_ms": 1000,
+      "freshness_ms": 3000,
+      "source_coverage": [
+        "provider:windows-processor"
+      ],
+      "permissions": [],
+      "sensitivity": "operational",
+      "cost": "potentially_blocking"
+    },
+    {
+      "schema_version": "0.1.0",
+      "metric_id": "windows.cpu.interval_total_100ns",
+      "value_kind": "uint64",
+      "unit": "100 ns",
+      "scope": "OS-visible active logical CPUs, their native Windows processor groups and aggregate; not process affinity or quota entitlement.",
+      "temporality": "gauge",
+      "denominator": "Exact delta of cumulative user+non-idle privileged+idle OS accounting in the actual acquisition-start interval; not PDH wall time.",
+      "reset_rule": "First/demand/topology/reset/zero-time/no-progress/gap is pending; any contributing component decrease rebases all CPUs. Unavailable is not zero.",
+      "derivation": "windows:pdh-accounted-time-v1. Busy=delta user+privileged; total=delta user+privileged+idle. Preserve exact integers; percent=100*busy/total, weighted across all intended CPUs. Interrupt/DPC subsets are not added twice. 100-ns units do not claim 100-ns accuracy.",
+      "sample_interval_ms": 1000,
+      "freshness_ms": 3000,
+      "source_coverage": [
+        "provider:windows-processor"
+      ],
+      "permissions": [],
+      "sensitivity": "operational",
+      "cost": "potentially_blocking"
     }
   ]
 }

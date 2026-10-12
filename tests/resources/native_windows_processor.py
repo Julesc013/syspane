@@ -137,6 +137,56 @@ def verify(before,probe,after,query):
             raw_idle=sum(int(row['accounting'][2]['first']) for row in sample['rows'])
             assert before['system_times']['total']<=raw_total<=after['system_times']['total']
             assert before['system_times']['idle']<=raw_idle<=after['system_times']['idle']
+    verify_publications(before['topology'],probe,expected,groups,interval)
+
+def verify_publications(topology,probe,expected,groups,interval):
+    assert probe['typed_import'] and probe['model_replay_rejected_as_duplicate'] and probe['model_policy_erased']
+    fields=['windows.cpu.accounted_busy_percent','windows.cpu.interval_busy_100ns','windows.cpu.interval_total_100ns']
+    first,second=probe['first_document'],probe['second_document']
+    for doc in (first,second):
+        assert doc['schema_version']=='0.2.0' and doc['producer_epoch']=='probe:windows' and doc['completeness']=='complete'
+        assert doc['sources']==[dict(id='provider:windows-processor',kind='native.windows.processor',scope='kernel:visible-active-processor-groups')]
+        assert len(doc['entities'])==1+len(groups)+len(expected) and len(doc['observations'])==3*len(doc['entities'])
+        for entity in doc['entities']:
+            assert entity['identity']['counter_definition']=='windows:pdh-accounted-time-v1' and entity['identity']['accounting_unit']=='100 ns'
+    assert first['entities']==[dict(e,generation='1') for e in second['entities']]
+    for row in first['observations']:
+        assert row['value'] is None and row['acquisition']=='pending' and row['error']['code']=='processor.first'
+        assert row['measured_at'] is None and row['observed_at'] is None and row['sample_interval_ns'] is None
+    group_entities={int(e['identity']['native_processor_group']):e for e in second['entities'] if e['kind']=='processor.domain'}
+    cpu_entities={(int(e['identity']['native_processor_group']),int(e['identity']['native_processor_number'])):e for e in second['entities'] if e['kind']=='processor.logical'}
+    assert set(group_entities)=={g['number'] for g in topology['groups']} and set(cpu_entities)==set(keys(topology))
+    for position,group in enumerate(topology['groups']):assert group_entities[group['number']]['id']==f'processor:domain:{position+1}'
+    for position,cpu in enumerate(keys(topology)):assert cpu_entities[cpu]['id']==f'processor:logical:{len(group_entities)+position+1}'
+    aggregate=[e for e in second['entities'] if e['kind']=='processor.aggregate'];assert len(aggregate)==1 and aggregate[0]['id']=='processor:aggregate'
+    assert aggregate[0]['identity']['native_cpu_count']==str(len(expected))
+    wanted={aggregate[0]['id']:(sum(v[0] for v in expected.values()),sum(v[1] for v in expected.values()))}
+    for group in topology['groups']:
+        e=group_entities[group['number']];identity=e['identity']
+        for field,value in [('native_active_processors',group['active']),('native_maximum_processors',group['maximum']),('native_active_mask',group['mask'])]:assert identity[field]==str(value)
+        values=groups[f"windows:group:{group['number']}"];wanted[e['id']]=(sum(v[0] for v in values),sum(v[1] for v in values))
+    relationships=[]
+    for cpu,e in cpu_entities.items():
+        identity=e['identity'];wanted[e['id']]=expected[f'windows:cpu:{cpu[0]}:{cpu[1]}']
+        for name,key in [('cores','core'),('packages','package')]:
+            matches=[(n,r) for n,r in enumerate(topology[name]) if any(m['group']==cpu[0] and int(m['mask'])&(1<<cpu[1]) for m in r['masks'])]
+            assert len(matches)==1;n,r=matches[0]
+            assert identity['native_reported_'+key]==str(n) and identity['native_'+key+'_flags']==str(r['flags'])
+            assert identity['native_'+key+'_masks']==','.join(f"{m['group']}:{m['mask']}" for m in r['masks'])
+            if key=='core':assert identity['native_efficiency_class']==str(r['efficiency'])
+        relationships.append(dict(source=e['id'],target=group_entities[cpu[0]]['id'],kind='member_of'))
+    assert second['relationships']==relationships
+    observations={(row['entity_id'],row['field']):row for row in second['observations']}
+    assert len(observations)==len(second['observations']) and set(observations)=={(identity,field) for identity in wanted for field in fields}
+    for identity,(busy,total) in wanted.items():
+        for index,field in enumerate(fields):
+            row=observations[(identity,field)];assert row['unit']==('percent' if index==0 else '100 ns') and row['value']['kind']==('number' if index==0 else 'uint64')
+            if index==0:assert math.isclose(row['value']['data'],float(Fraction(100*busy,total)),rel_tol=4e-14,abs_tol=1e-10)
+            else:assert row['value']['data']==str(busy if index==1 else total)
+            assert row['origin']=='derived' and row['source_id']=='provider:windows-processor' and row['support']=='supported' and row['presence']=='present'
+            assert row['acquisition']=='success' and row['freshness']=='current' and row['error'] is None
+            assert row['generation']=='2' and row['producer_epoch']=='probe:windows' and row['observed_at']==row['attempted_at']==second['captured_at']
+            assert row['measured_at']==dict(clock_id='clock:steady',nanoseconds=probe['second']['start']) and row['sample_interval_ns']==str(interval)
 
 def system_times():
     idle,kernel_time,user=w.FILETIME(),w.FILETIME(),w.FILETIME()
@@ -166,6 +216,15 @@ def main():
         try:verify(result['before'],wrong,result['after'],query)
         except AssertionError:result['missing_cpu_rejected']=True
         else:raise AssertionError('missing CPU accepted')
+        wrong=copy.deepcopy(result['probe']);wrong['second_document']['observations'][1]['value']['data']=str(int(wrong['second_document']['observations'][1]['value']['data'])+1)
+        try:verify(result['before'],wrong,result['after'],query)
+        except AssertionError:result['wrong_publication_arithmetic_rejected']=True
+        else:raise AssertionError('wrong publication arithmetic accepted')
+        for kind in ('processor.domain','processor.logical'):
+            wrong=copy.deepcopy(result['probe']);entities=wrong['second_document']['entities'];entities.pop(next(n for n,e in enumerate(entities) if e['kind']==kind))
+            try:verify(result['before'],wrong,result['after'],query)
+            except AssertionError:result['missing_published_'+('group' if kind=='processor.domain' else 'cpu')+'_rejected']=True
+            else:raise AssertionError('missing published entity accepted')
         result['outcome']='pass'
         print(f"Complete {len(keys(before_topology))}-CPU / {len(before_topology['groups'])}-group topology, raw PDH brackets and exact intervals: pass; {folder}")
     except BaseException as error:result['error']=repr(error);raise

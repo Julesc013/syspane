@@ -140,6 +140,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Linux processor telemetry in the existing native inspector](w-14-processor-publication.md) — Close descriptor, publication, demand continuity and policy boundaries before connecting native CPU acquisition.
 - [Shared processor interval ownership and denominators](w-14-processor-state.md) — Deterministic complete-processor counter reconciliation before native resource acquisition and publication.
 - [Native Windows processor groups, topology and PDH accounting](w-14-windows-processor.md) — Bounded native x64 Windows acquisition with complete active group masks, explicit PDH semantics and independent raw evidence.
+- [Windows processor observations through shared telemetry and model import](w-14-windows-publication.md) — Explicit accounted-time metrics, complete group publication and nonreused lifetimes before native controller/UI activation.
 - [W-24 authenticated transport and policy boundary](w-24-transport.md) — Close the initial local protocol, admission and preview boundary before native integration.
 - [W-25 collection continuity across consumer replacement](w-25-consumer-continuity.md) — Keep real collection independently owned while admitting bounded replacement consumers.
 - [W-25 automatic recovery from independent render failure](w-25-controller-render-recovery.md) — Connect the existing render and health guards to the persistent native desktop replacement owner.

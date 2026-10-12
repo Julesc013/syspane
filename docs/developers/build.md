@@ -1,5 +1,25 @@
 # Developer setup and checks
 
+The [Windows publication package](../../spec/delivery/packages/w-14-windows-publication.md)
+adds explicit descriptors/group lifetimes through the shared observation and model
+path. Run ordinary preflight/configure/build, then:
+
+```sh
+ctest --preset <profile> -R '^(windows-publication[.]|processor-windows[.]|processor[.]|processor-linux[.]|processor-publication[.]|model[.]|demand[.]|demand-session[.]|network[.](RECONCILE-|PUBLICATION-)|composition[.])' --output-on-failure
+ctest --preset windows-x86-v141-xp -R '^legacy[.]' --output-on-failure
+ctest --preset windows-x64-gcc15 -R '^native[.]WINDOWS-PROCESSOR$' --output-on-failure
+ctest --preset linux-x64-gcc13 -R '^native[.](PROCESSOR-PUBLICATION|INSTALLED-PROCESSOR|NETWORK-SERVICE|NETWORK-CONSUMER|NETWORK-SUPERVISOR)$' --output-on-failure
+```
+
+Each development profile executes 85 checks. The Windows native probe now emits
+complete group/CPU observations and checks actual measured model values, replay
+and policy erasure. The ctypes runner independently checks every published value,
+metadata and numeric identity order. Missing accessibility disclosure must deny
+model attachment; it is not inferred from inspector disclosure. Preserve original
+fixture/order failures and raw records. Windows native controller/UI and historical/
+physical/large-server qualification remain open. See the
+[handoff](../../spec/delivery/windows-publication-handoff.md).
+
 The [Windows processor package](../../spec/delivery/packages/w-14-windows-processor.md)
 adds native x64 group topology and PDH accounting plus a portable decoder. Run
 ordinary workspace preflight and configure/build, then:

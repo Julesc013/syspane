@@ -7,6 +7,11 @@ Shared build scripts, profiles and dependency locks live in
 [source/build](source/build/README.md). Build products, raw test recordings and
 machine-specific workspace settings stay in ignored `out/` directories.
 
+The [Windows CPU publication checkpoint](spec/delivery/windows-publication-handoff.md)
+adds explicit accounting metrics, complete processor-group observations and fresh
+wire identities after removal. Native raw values and measured model import are
+verified; Windows controller/UI integration and full release gates remain open.
+
 The [Windows processor checkpoint](spec/delivery/windows-processor-handoff.md)
 adds complete native group topology and explicit PDH accounted-time acquisition,
 with independent verification of all 12 CPUs on the Windows development host.

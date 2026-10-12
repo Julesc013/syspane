@@ -12,10 +12,24 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-12T07:06:43.260935+00:00", "scope": "Native Windows processor groups/accounting and independently verified intervals"}
+updated: {"by": "codex", "at": "2026-10-12T07:53:21.554215+00:00", "scope": "Windows CPU descriptors/publication/lifetimes and native measured model evidence"}
 ---
 
 # Current state and next admitted boundary
+
+The [Windows CPU publication checkpoint](windows-publication-handoff.md) adds
+explicit accounted-time descriptors, complete group/logical observations and
+nonreused wire lifetimes to the existing shared publication component. Independent
+native Windows evidence verifies all 12 CPUs, one group, the aggregate, 42 measured
+observations and actual DataView values/replay/policy erasure. Eight new cases plus
+77 controls pass on each development profile; both historical artifact audits and
+five affected Linux native families pass. Preserve the omitted accessibility-grant
+fixture failures and the literal/native numeric-order failures; gates and expected
+ordering are unchanged. Windows controller/demand/guardian/native UI integration,
+remaining providers and all five complete desktop/release editions remain open.
+Keep the original inverse timer and mixed GTK failures, absent target qualification
+and fixed limits. Shared tools stay in source/build; raw/machine/generated data stay
+ignored under out/ and the retired root remains absent.
 
 The [Windows processor checkpoint](windows-processor-handoff.md) implements
 complete active group/core/package topology and read-only native x64 PDH acquisition.

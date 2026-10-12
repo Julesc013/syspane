@@ -520,7 +520,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "21da2fdd9382474c13ae4eefd81ae7a9225440df182f3922070b0ba6fa6cfe49"
+      "sha256": "803dd4690d4ead630820b611ff10488126d2a7383548fa5520a9215f62d18600"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -3189,6 +3189,20 @@
       "sha256": "eaedc1dfe26a76570e1caa23c20ebeceb282cba72184c28ec0f9ecf09f39f506"
     },
     {
+      "id": "SP-W14-WINDOWS-PUBLICATION",
+      "path": "delivery/packages/w-14-windows-publication.md",
+      "title": "Windows processor observations through shared telemetry and model import",
+      "description": "Explicit accounted-time metrics, complete group publication and nonreused lifetimes before native controller/UI activation.",
+      "requires": [
+        "SP-W14-WINDOWS-PROCESSOR",
+        "SP-W14-PROCESSOR-PUBLICATION",
+        "SP-STATE",
+        "SP-RESOURCES",
+        "SP-WORK-PACKAGES"
+      ],
+      "sha256": "edc239bac850e9c66762b28d0159c08806249df4afc13219a9d330e305452c6a"
+    },
+    {
       "id": "SP-W24-PACKAGE",
       "path": "delivery/packages/w-24-transport.md",
       "title": "W-24 authenticated transport and policy boundary",
@@ -4303,6 +4317,16 @@
         "SP-W14-WINDOWS-PROCESSOR"
       ],
       "sha256": "4e447315642b4522534af462cd515c7149f5ae0c28f52c10ad72aad343ff348b"
+    },
+    {
+      "id": "SP-WINDOWS-PUBLICATION-HANDOFF",
+      "path": "delivery/windows-publication-handoff.md",
+      "title": "Windows processor publication and measured model checkpoint",
+      "description": "Explicit Windows accounting, complete group/CPU observations, lifetime ownership and independently verified measured model import.",
+      "requires": [
+        "SP-W14-WINDOWS-PUBLICATION"
+      ],
+      "sha256": "518714cc595605f0c7e099c198d435a269b1053d529080c3b4feb95d3f82ebb0"
     },
     {
       "id": "SP-WORK-PACKAGES",

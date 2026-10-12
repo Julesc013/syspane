@@ -4255,7 +4255,8 @@
         "syspane_processor_state",
         "syspane_linux_processor_decode",
         "syspane_network_publication",
-        "syspane_protocol"
+        "syspane_protocol",
+        "syspane_windows_processor_decode"
       ],
       "target_requirements": [
         "cxx17"
@@ -4393,7 +4394,9 @@
       "allowed_dependencies": [
         "syspane_windows_processor",
         "syspane_processor_state",
-        "syspane_protocol"
+        "syspane_protocol",
+        "syspane_processor_publication",
+        "syspane_data_view"
       ],
       "target_requirements": [
         "cxx17"
@@ -4419,6 +4422,35 @@
       "allowed_dependencies": [
         "syspane_windows_processor_decode",
         "syspane_processor_state"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "windows-x64-gcc15",
+        "linux-x64-gcc13",
+        "windows-x86-v141-xp"
+      ]
+    },
+    {
+      "id": "windows-publication-tests",
+      "target": "syspane_windows_publication_tests",
+      "type": "EXECUTABLE",
+      "source_owner": "tests/resources/",
+      "public_interfaces": [],
+      "private_interfaces": [],
+      "sources": [
+        "tests/resources/windows_publication_tests.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_processor_publication",
+        "syspane_data_view",
+        "syspane_demand",
+        "syspane_configuration"
       ],
       "target_requirements": [
         "cxx17"
