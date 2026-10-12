@@ -75,5 +75,6 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [text-session.json](text-session.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [validated-authored.json](validated-authored.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [validated-theme.json](validated-theme.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
+- [windows-poll.json](windows-poll.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [windows-processor.json](windows-processor.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [windows-publication.json](windows-publication.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.

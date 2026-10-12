@@ -520,7 +520,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "803dd4690d4ead630820b611ff10488126d2a7383548fa5520a9215f62d18600"
+      "sha256": "f4967139a4add11dbc8d08219c8cb2f6ece003d876909147434adf413b2630c5"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -3215,6 +3215,18 @@
       "sha256": "629f35485fe5b2fab745b25e6ee988ab14b1578cd2513b4d92d018eb7b99d960"
     },
     {
+      "id": "SP-W24-WINDOWS-POLL",
+      "path": "delivery/packages/w-24-windows-poll.md",
+      "title": "Windows polling listener admission and overlapped lifetime",
+      "description": "Keep controller health responsive while a private named pipe waits for a peer or first byte.",
+      "requires": [
+        "SP-W24-PACKAGE",
+        "SP-TRANSPORT",
+        "SP-WORK-PACKAGES"
+      ],
+      "sha256": "64a6938b02803563865c99d4094b244887a86c4e9297b6394930dba1e41049ee"
+    },
+    {
       "id": "SP-W25-CONSUMER-CONTINUITY",
       "path": "delivery/packages/w-25-consumer-continuity.md",
       "title": "W-25 collection continuity across consumer replacement",
@@ -4307,6 +4319,16 @@
         "SP-CAMPAIGN-ADMISSION"
       ],
       "sha256": "7b68f7af0612134b364bfca1662919310ce919a027e67ccf26b7a733dd775857"
+    },
+    {
+      "id": "SP-WINDOWS-POLL-HANDOFF",
+      "path": "delivery/windows-poll-handoff.md",
+      "title": "Windows polling listener and overlapped lifetime checkpoint",
+      "description": "Responsive same-adapter admission, complete native timings and proved cancellation before storage release.",
+      "requires": [
+        "SP-W24-WINDOWS-POLL"
+      ],
+      "sha256": "f4fe6e5c235829df2836db92a8b5ade40a19aabeee3a0140f045eead203ede0c"
     },
     {
       "id": "SP-WINDOWS-PROCESSOR-HANDOFF",

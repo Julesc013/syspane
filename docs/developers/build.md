@@ -1,5 +1,25 @@
 # Developer setup and checks
 
+The [Windows polling package](../../spec/delivery/packages/w-24-windows-poll.md)
+extends the existing local listener for responsive controller admission. Run
+ordinary workspace preflight/configure/build, then:
+
+```sh
+ctest --preset <profile> -R '^(protocol[.]|model[.]|composition[.])' --output-on-failure
+ctest --preset windows-x64-gcc15 -R '^native[.]WINDOWS-IPC-POLL$' --output-on-failure
+ctest --preset <native-profile> -R '^native[.](NATIVE-01|NATIVE-02|NATIVE-CLOCK|NATIVE-MEASURED|NATIVE-SUB)$' --output-on-failure
+ctest --preset windows-x86-v141-xp -R '^legacy[.]' --output-on-failure
+```
+
+The three development profiles execute 41 selected controls; modern Windows runs
+ten new polling/lifetime cases and Windows/Linux retain five native regression
+families. Complete raw call/tick samples remain in the owned native-evidence root.
+Keep fixed 100/250-ms normal poll/tick and 1250-ms drain/destruction gates, the
+five-second first-byte/blocking deadlines and the initial fixture failure. A client
+may wait on native pipe busy/rearm within its declared fixed deadline. These checks
+do not qualify historical systems or replace native controller/guardian/UI work.
+See the [handoff](../../spec/delivery/windows-poll-handoff.md).
+
 The [Windows publication package](../../spec/delivery/packages/w-14-windows-publication.md)
 adds explicit descriptors/group lifetimes through the shared observation and model
 path. Run ordinary preflight/configure/build, then:

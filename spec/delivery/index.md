@@ -184,6 +184,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Conditional visibility evaluator checkpoint](visibility-handoff.md) — Exact policy-bound comparison with explicit unresolved states and open native admission.
 - [Native widget-creation checkpoint](widget-creation-handoff.md) — All seven primitives through existing draft, resource, policy and transaction owners.
 - [Contemporary Windows host observation checkpoint](windows-host-inventory-handoff.md) — Read-only Explorer ownership and icon hierarchy, with native host execution still dependent on a designated laboratory.
+- [Windows polling listener and overlapped lifetime checkpoint](windows-poll-handoff.md) — Responsive same-adapter admission, complete native timings and proved cancellation before storage release.
 - [Native Windows processor acquisition checkpoint](windows-processor-handoff.md) — Complete native group topology, explicit accounted-time denominator and independently verified raw intervals.
 - [Windows processor publication and measured model checkpoint](windows-publication-handoff.md) — Explicit Windows accounting, complete group/CPU observations, lifetime ownership and independently verified measured model import.
 - [Implementation work-package closure](work-packages.md) — Make each admitted package implementable, verifiable and resumable from the repository.

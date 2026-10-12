@@ -63,9 +63,11 @@ public:
     Listener(const Listener&) = delete;
     Listener& operator=(const Listener&) = delete;
     Stream accept(std::uint64_t expected_process = 0);
-#if defined(__linux__)
+#if defined(__linux__) || defined(_WIN32)
     // One nonblocking admission attempt; authenticate exactly as accept().
     // Empty on no connection or interrupted attempt; caller owns its deadline.
+    // Windows owns a persistent overlapped connect/first-byte request and a
+    // five-second first-byte deadline; destruction proves its cancellation.
     std::optional<Stream> accept_ready(std::uint64_t expected_process);
 #endif
     bool access_controls_verified() const;

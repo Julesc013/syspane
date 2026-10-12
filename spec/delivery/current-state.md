@@ -12,10 +12,27 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-12T07:53:21.554215+00:00", "scope": "Windows CPU descriptors/publication/lifetimes and native measured model evidence"}
+updated: {"by": "codex", "at": "2026-10-12T08:48:38.241697+00:00", "scope": "Windows polling IPC, native complete timings and safe overlapped lifetime"}
 ---
 
 # Current state and next admitted boundary
+
+The [Windows polling listener checkpoint](windows-poll-handoff.md) supplies the
+existing adapter's accept_ready prerequisite for a responsive native controller.
+One stable overlapped operation/event/first-byte buffer survives polling, and exact
+cancellation plus terminal completion precedes reuse/free. Ten native cases pass,
+including delayed/preconnected admission, PID denial/retry, timeout, pending close,
+name reuse and retained-stream lifetime. Maximum recorded poll duration is 1 ms;
+maximum control-tick gap is 168 ms under fixed 100/250-ms gates. Forty-one controls
+pass on each profile, original transport/clock/measurement/subscription families
+pass on Windows/Linux, and both historical audits pass. Preserve the first fixture
+rearm-race failure and recorder syntax failure. The compiled adapter/probe remain
+identical between failed and passing native attempts. Next serialize shared native
+measurement access, then reuse the controller/demand/policy owners for Windows
+workers under an independent guardian and native UI/desktop integration. All five
+complete editions and prior mixed GTK/native qualification failures remain open.
+Tools stay in source/build; raw/machine/generated data stay ignored under out/,
+and the retired root remains absent.
 
 The [Windows CPU publication checkpoint](windows-publication-handoff.md) adds
 explicit accounted-time descriptors, complete group/logical observations and

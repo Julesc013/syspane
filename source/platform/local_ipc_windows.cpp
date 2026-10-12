@@ -98,6 +98,8 @@ DWORD remaining(std::uint64_t deadline) {
 void drain(HANDLE pipe, OVERLAPPED& operation) {
     ::CancelIoEx(pipe, &operation);
     if (::WaitForSingleObject(operation.hEvent, 1000) != WAIT_OBJECT_0) fatal_lifetime();
+    DWORD bytes = 0;
+    if (!::GetOverlappedResult(pipe, &operation, &bytes, FALSE) && ::GetLastError() == ERROR_IO_INCOMPLETE) fatal_lifetime();
 }
 struct Io {
     DWORD bytes = 0;
@@ -180,9 +182,27 @@ struct Stream::Impl {
     }
 };
 struct Listener::Impl {
+    struct Pending {
+        enum class Phase { connect, first_byte } phase = Phase::connect;
+        Handle event{::CreateEventW(nullptr, TRUE, FALSE, nullptr)};
+        OVERLAPPED operation{};
+        bool active = false;
+        char first = 0;
+        std::uint64_t connected = 0, deadline = 0;
+        Pending() { if (!event.valid()) throw IpcError("io.event"); operation.hEvent = event.value; }
+        void reuse() { operation = {}; operation.hEvent = event.value; if (!::ResetEvent(event.value)) throw IpcError("io.event"); }
+    };
     Identity own;
     std::shared_ptr<PipeSlot> slot;
+    std::unique_ptr<Pending> pending;
     explicit Impl(Identity identity) : own(std::move(identity)) {}
+    void reset() {
+        if (!pending) return;
+        if (pending->active) drain(slot->pipe.value, pending->operation);
+        ::DisconnectNamedPipe(slot->pipe.value);
+        pending.reset();
+    }
+    ~Impl() { reset(); }
 };
 Stream::Stream(std::unique_ptr<Impl> impl) : impl_(std::move(impl)) {}
 Stream::~Stream() = default;
@@ -263,31 +283,60 @@ Listener::~Listener() = default;
 Stream Listener::accept(std::uint64_t expected) {
     if (impl_->slot->busy) throw IpcError("endpoint.busy");
     const auto deadline = monotonic_ms() + 5000;
-    const auto pipe = impl_->slot->pipe.value;
-    Handle event(::CreateEventW(nullptr, TRUE, FALSE, nullptr));
-    if (!event.valid()) throw IpcError("io.event");
-    OVERLAPPED operation{}; operation.hEvent = event.value;
-    if (!::ConnectNamedPipe(pipe, &operation)) {
-        const auto error = ::GetLastError();
-        if (error == ERROR_IO_PENDING) {
-            if (::WaitForSingleObject(event.value, remaining(deadline)) != WAIT_OBJECT_0) {
-                drain(pipe, operation); ::DisconnectNamedPipe(pipe); throw IpcError("io.timeout");
-            }
-            DWORD bytes = 0;
-            if (!::GetOverlappedResult(pipe, &operation, &bytes, FALSE)) throw IpcError("io.accept");
-        } else if (error != ERROR_PIPE_CONNECTED) throw IpcError("io.accept");
+    for (;;) {
+        if (monotonic_ms() >= deadline) { impl_->reset(); throw IpcError("io.timeout"); }
+        auto ready = accept_ready(expected);
+        if (ready) return std::move(*ready);
+        ::Sleep(1);
     }
-    auto state = std::make_unique<Stream::Impl>();
-    state->server = impl_->slot; impl_->slot->busy = true;
-    state->connected = monotonic_ms();
-    char first = 0;
-    const auto received = transfer(pipe, &first, 1, false, deadline);
-    if (received.timeout) throw IpcError("io.timeout");
-    if (received.eof || received.bytes != 1) throw IpcError("peer.closed");
-    state->first_byte = first; state->first_observed = monotonic_ms();
-    identify_client_token(pipe, impl_->own);
-    state->peer = process_peer(pipe, true, impl_->own, state->peer_handle, expected);
-    return Stream(std::move(state));
+}
+std::optional<Stream> Listener::accept_ready(std::uint64_t expected) {
+    if (impl_->slot->busy) throw IpcError("endpoint.busy");
+    const auto pipe = impl_->slot->pipe.value;
+    try {
+        if (!impl_->pending) {
+            impl_->pending = std::make_unique<Impl::Pending>();
+            auto& pending = *impl_->pending;
+            if (!::ConnectNamedPipe(pipe, &pending.operation)) {
+                const auto error = ::GetLastError();
+                if (error == ERROR_IO_PENDING) pending.active = true;
+                else if (error != ERROR_PIPE_CONNECTED) throw IpcError("io.accept");
+            }
+        }
+        auto& pending = *impl_->pending;
+        DWORD bytes = 0;
+        if (pending.phase == Impl::Pending::Phase::first_byte && monotonic_ms() >= pending.deadline) throw IpcError("io.timeout");
+        if (pending.active) {
+            const auto wait = ::WaitForSingleObject(pending.event.value, 0);
+            if (wait == WAIT_TIMEOUT) return {};
+            if (wait != WAIT_OBJECT_0) throw IpcError("io.accept");
+            if (!::GetOverlappedResult(pipe, &pending.operation, &bytes, FALSE)) {
+                const auto error = ::GetLastError();
+                if (error == ERROR_IO_INCOMPLETE) return {};
+                pending.active = false;
+                throw IpcError(pending.phase == Impl::Pending::Phase::connect ? "io.accept" : "peer.closed");
+            }
+            pending.active = false;
+        }
+        if (pending.phase == Impl::Pending::Phase::connect) {
+            pending.connected = monotonic_ms(); pending.deadline = pending.connected + 5000;
+            pending.phase = Impl::Pending::Phase::first_byte; pending.reuse();
+            if (!::ReadFile(pipe, &pending.first, 1, &bytes, &pending.operation)) {
+                const auto error = ::GetLastError();
+                if (error == ERROR_IO_PENDING) { pending.active = true; return {}; }
+                throw IpcError("peer.closed");
+            }
+        }
+        if (bytes != 1) throw IpcError("peer.closed");
+        auto state = std::make_unique<Stream::Impl>();
+        state->server = impl_->slot; impl_->slot->busy = true;
+        state->connected = pending.connected;
+        state->first_byte = pending.first; state->first_observed = monotonic_ms();
+        impl_->pending.reset();
+        identify_client_token(pipe, impl_->own);
+        state->peer = process_peer(pipe, true, impl_->own, state->peer_handle, expected);
+        return Stream(std::move(state));
+    } catch (...) { impl_->reset(); throw; }
 }
 bool Listener::access_controls_verified() const {
     PSECURITY_DESCRIPTOR raw = nullptr; PACL acl = nullptr;

@@ -5,6 +5,7 @@
 #include <chrono>
 #include <deque>
 #include <iostream>
+#include <set>
 #include <thread>
 
 namespace native = syspane::platform;
@@ -13,6 +14,59 @@ namespace cfg = syspane::configuration;
 using wire::Json;
 namespace {
 void emit(Json value) { std::cout << value.dump() << std::endl; }
+#if defined(_WIN32)
+void polling_server(const std::string& endpoint,const std::string& scenario,std::uint64_t expected) {
+    if (!native::unprivileged_context() || !expected) throw wire::Error("probe.poll_context");
+    const std::set<std::string> modes={"idle","delayed","preconnected","retry","timeout","close-read","close-connect","keep-stream"};
+    if (!modes.count(scenario)) throw wire::Error("probe.poll_scenario");
+    auto listener=std::make_unique<native::Listener>(endpoint);
+    const auto started=native::monotonic_ms();auto last_tick=started;
+    Json samples=Json::array(),ticks=Json::array();unsigned errors=0,calls=0;std::optional<native::Stream> stream;
+    emit({{"event","ready"},{"access_controls_verified",listener->access_controls_verified()},{"unprivileged_context",true},{"started_ms",std::to_string(started)}});
+    if (scenario=="preconnected") std::this_thread::sleep_for(std::chrono::milliseconds(150));
+    for (;;) {
+        auto now=native::monotonic_ms();
+        if (now-started>=12000) throw wire::Error("probe.poll_deadline");
+        const auto before=now;std::string outcome="empty",error;
+        try { auto ready=listener->accept_ready(expected);if (ready) { stream=std::move(ready);outcome="accepted"; } }
+        catch (const native::IpcError& failure) { error=failure.what();outcome="error";++errors; }
+        const auto after=native::monotonic_ms();
+        if (samples.size()>=20000) throw wire::Error("probe.poll_sample_limit");
+        samples.push_back({{"ordinal",++calls},{"start_ms",std::to_string(before)},{"end_ms",std::to_string(after)},{"result",outcome},{"error",error}});
+        if (!error.empty()) emit({{"event","admission_error"},{"code",error},{"observed_ms",std::to_string(after)}});
+        if (after-last_tick>=100) { last_tick=after;ticks.push_back(std::to_string(after));emit({{"event","tick"},{"observed_ms",std::to_string(after)}}); }
+        if (stream) {
+            const auto connected=stream->connected_ms();char first=0,second=0;
+            const auto read=stream->read(&first,1,1),again=stream->read(&second,1,1);
+            const auto busy_begin=native::monotonic_ms();bool busy=false;try { (void)listener->accept_ready(expected); }catch(const native::IpcError& failure) { busy=std::string(failure.what())=="endpoint.busy"; }
+            samples.push_back({{"ordinal",++calls},{"start_ms",std::to_string(busy_begin)},{"end_ms",std::to_string(native::monotonic_ms())},{"result","error"},{"error",busy?"endpoint.busy":"probe.poll_busy"}});
+            if (!busy) throw wire::Error("probe.poll_busy");
+            const auto destroy_begin=native::monotonic_ms();
+            if (scenario=="keep-stream") listener.reset();
+            const auto destroy_end=native::monotonic_ms();
+            if (scenario=="keep-stream") {
+                stream->write("y",100);emit({{"event","retained_stream"}});char acknowledgement=0;const auto got=stream->read(&acknowledgement,1,1000);
+                if (got.bytes!=1 || acknowledgement!='z') throw wire::Error("probe.poll_retained_stream");
+            }
+            emit({{"event","authenticated"},{"peer_pid",stream->peer().process_id},{"connected_ms",std::to_string(connected)},
+                {"first_read_bytes",read.bytes},{"first_value",static_cast<unsigned char>(first)},{"first_observed_ms",std::to_string(read.observed_ms)},
+                {"second_read_bytes",again.bytes},{"second_timeout",again.timeout},{"busy_rejected",busy},
+                {"listener_destroy_ms",std::to_string(destroy_end-destroy_begin)},{"stream_survived_listener",scenario=="keep-stream"}});
+            stream.reset();
+            emit({{"event","complete"},{"samples",samples},{"call_count",calls},{"ticks",ticks},{"errors",errors},{"admitted",true},{"destroy_ms","0"}});
+            return;
+        }
+        const auto limit=scenario=="idle"?750:scenario=="close-connect"?350:scenario=="close-read"?900:0;
+        if (limit && after-started>=static_cast<unsigned>(limit)) {
+            const auto destroy_begin=native::monotonic_ms();listener.reset();const auto destroy_end=native::monotonic_ms();
+            emit({{"event","complete"},{"samples",samples},{"call_count",calls},{"ticks",ticks},{"errors",errors},{"admitted",false},{"destroy_ms",std::to_string(destroy_end-destroy_begin)}});
+            return;
+        }
+        if (errors>2) throw wire::Error("probe.poll_repeated_error");
+        std::this_thread::sleep_for(std::chrono::milliseconds(1));
+    }
+}
+#endif
 std::string envelope(const std::string& type, Json body, const std::string& connection, const std::string& epoch = "probe:epoch-1") {
     return Json{{"type", type}, {"body", std::move(body)}, {"connection_id", connection}, {"producer_epoch", epoch}}.dump();
 }
@@ -168,6 +222,9 @@ int main(int argc, char** argv) {
         if (!expected) throw wire::Error("probe.expected_pid");
         const std::string role = argv[1];
         if (role == "server") server(argv[2], argv[3], *expected);
+#if defined(_WIN32)
+        else if (role == "poll") polling_server(argv[2], argv[3], *expected);
+#endif
         else if (role == "client") client(argv[2], argv[3], *expected);
         else if (role == "collision") {
             try { native::Listener collision(argv[2]); throw wire::Error("probe.collision_not_rejected"); }

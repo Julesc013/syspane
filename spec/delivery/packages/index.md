@@ -142,6 +142,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Native Windows processor groups, topology and PDH accounting](w-14-windows-processor.md) — Bounded native x64 Windows acquisition with complete active group masks, explicit PDH semantics and independent raw evidence.
 - [Windows processor observations through shared telemetry and model import](w-14-windows-publication.md) — Explicit accounted-time metrics, complete group publication and nonreused lifetimes before native controller/UI activation.
 - [W-24 authenticated transport and policy boundary](w-24-transport.md) — Close the initial local protocol, admission and preview boundary before native integration.
+- [Windows polling listener admission and overlapped lifetime](w-24-windows-poll.md) — Keep controller health responsive while a private named pipe waits for a peer or first byte.
 - [W-25 collection continuity across consumer replacement](w-25-consumer-continuity.md) — Keep real collection independently owned while admitting bounded replacement consumers.
 - [W-25 automatic recovery from independent render failure](w-25-controller-render-recovery.md) — Connect the existing render and health guards to the persistent native desktop replacement owner.
 - [W-25 synchronized model view and policy lifetime](w-25-data-view.md) — Join model validation, producer leases and revocable presentation without enabling an unspecified wire subscription.

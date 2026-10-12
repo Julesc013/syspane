@@ -7,6 +7,11 @@ Shared build scripts, profiles and dependency locks live in
 [source/build](source/build/README.md). Build products, raw test recordings and
 machine-specific workspace settings stay in ignored `out/` directories.
 
+The [Windows polling listener checkpoint](spec/delivery/windows-poll-handoff.md)
+adds responsive native admission and safe pending-I/O cleanup for the controller
+port. Native lifecycle/timing and existing transport checks pass; full Windows
+controller/UI and complete release work remain open.
+
 The [Windows CPU publication checkpoint](spec/delivery/windows-publication-handoff.md)
 adds explicit accounting metrics, complete processor-group observations and fresh
 wire identities after removal. Native raw values and measured model import are

@@ -1004,6 +1004,11 @@ if(BUILD_TESTING)
     add_test(NAME native.NATIVE-CLOCK COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/protocol/native_clock.py"
         "$<TARGET_FILE:syspane_telemetry_probe>" "${CMAKE_BINARY_DIR}/native-evidence")
     set_tests_properties(native.NATIVE-CLOCK PROPERTIES TIMEOUT 40)
+    if(WIN32)
+        add_test(NAME native.WINDOWS-IPC-POLL COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/protocol/native_windows_poll.py"
+            "$<TARGET_FILE:syspane_ipc_probe>" "${CMAKE_BINARY_DIR}/native-evidence")
+        set_tests_properties(native.WINDOWS-IPC-POLL PROPERTIES TIMEOUT 45)
+    endif()
     add_test(NAME native.NATIVE-SUB COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tests/protocol/native_subscription.py"
         "$<TARGET_FILE:syspane_telemetry_probe>" "${CMAKE_BINARY_DIR}/native-evidence")
     set_tests_properties(native.NATIVE-SUB PROPERTIES TIMEOUT 100)

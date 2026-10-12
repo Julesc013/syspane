@@ -1118,7 +1118,8 @@
         "SP-POLICY",
         "SP-WORK-PACKAGES",
         "SP-ACCEPTANCE-TRACES",
-        "SP-W24-PACKAGE"
+        "SP-W24-PACKAGE",
+        "SP-W24-WINDOWS-POLL"
       ],
       "acceptance_tests": [
         "T-IPC",
@@ -1131,14 +1132,17 @@
         "source/configuration/",
         "tests/protocol/",
         "source/build/dependencies.json",
-        "source/application/ipc_probe.cpp"
+        "source/application/ipc_probe.cpp",
+        "tests/protocol/native_windows_poll.py",
+        "spec/delivery/windows-poll-handoff.md",
+        "spec/delivery/checkpoints/windows-poll.json"
       ],
       "status": "complete",
       "authority_class": "development",
       "execution_grant": "user:foundation-native-campaign-2026-10-05",
-      "notes": "Initial Windows/Linux native local IPC and preview/policy gate implemented: 37 CTest entries per profile, including 15 Windows and 16 Linux concrete native cases. Cross-user/logon qualification remains blocked; durable commands/telemetry subscriptions stay disabled. W-25 and W-02/native-host integration remain separate work.",
-      "package": "delivery/packages/w-24-transport.md",
-      "evidence": "delivery/native-transport-handoff.md"
+      "notes": "Initial authenticated IPC/preview gate remains implemented. Modern Windows now supplies accept_ready in the same adapter with persistent overlapped/event/byte ownership, exact cancellation and terminal-completion proof, fixed first-byte deadline and compatible blocking accept. Ten native admission/lifetime/timing cases pass under unchanged gates (maximum recorded poll 1 ms, tick gap 168 ms). Forty-one protocol/model/graph controls pass on three profiles; five original native transport/clock/measurement/subscription families pass on Windows/Linux and both strict historical audits pass. Preserve the initial client pipe-rearm race failure and private recorder syntax failure. Cross-user/logon and historical qualification remain blocked/unexecuted independently. Windows controller/demand/worker/guardian/UI integration and shared measurement serialization remain required; all five full editions remain open. Shared tools stay in source/build, raw/machine/generated data under ignored out/, retired root absent.",
+      "package": "delivery/packages/w-24-windows-poll.md",
+      "evidence": "delivery/windows-poll-handoff.md"
     },
     {
       "id": "W-25",
