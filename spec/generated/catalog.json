@@ -402,7 +402,7 @@
         "SP-WORK-PACKAGES",
         "SP-W01-PACKAGE"
       ],
-      "sha256": "80002d203bd7702b679066165ad3f9a90db16cc506247706999f05b95e186fa2"
+      "sha256": "d443faccf1f5bec2e8afcc0bb637cd8f270e28d148606369494f7eb7e7091d1d"
     },
     {
       "id": "SP-CAMPAIGN-COVERAGE",
@@ -520,7 +520,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "90c6ae94db1c171f505e28ba281131b38d8368c19110d0f2a1286e42f185ea7a"
+      "sha256": "21da2fdd9382474c13ae4eefd81ae7a9225440df182f3922070b0ba6fa6cfe49"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -3177,6 +3177,18 @@
       "sha256": "6580808cd54df80cbcf2679322a76d88a3e53a219e76122d5f8756039628a5f5"
     },
     {
+      "id": "SP-W14-WINDOWS-PROCESSOR",
+      "path": "delivery/packages/w-14-windows-processor.md",
+      "title": "Native Windows processor groups, topology and PDH accounting",
+      "description": "Bounded native x64 Windows acquisition with complete active group masks, explicit PDH semantics and independent raw evidence.",
+      "requires": [
+        "SP-RESOURCES",
+        "SP-W14-PROCESSOR-STATE",
+        "SP-WORK-PACKAGES"
+      ],
+      "sha256": "eaedc1dfe26a76570e1caa23c20ebeceb282cba72184c28ec0f9ecf09f39f506"
+    },
+    {
       "id": "SP-W24-PACKAGE",
       "path": "delivery/packages/w-24-transport.md",
       "title": "W-24 authenticated transport and policy boundary",
@@ -4281,6 +4293,16 @@
         "SP-CAMPAIGN-ADMISSION"
       ],
       "sha256": "7b68f7af0612134b364bfca1662919310ce919a027e67ccf26b7a733dd775857"
+    },
+    {
+      "id": "SP-WINDOWS-PROCESSOR-HANDOFF",
+      "path": "delivery/windows-processor-handoff.md",
+      "title": "Native Windows processor acquisition checkpoint",
+      "description": "Complete native group topology, explicit accounted-time denominator and independently verified raw intervals.",
+      "requires": [
+        "SP-W14-WINDOWS-PROCESSOR"
+      ],
+      "sha256": "4e447315642b4522534af462cd515c7149f5ae0c28f52c10ad72aad343ff348b"
     },
     {
       "id": "SP-WORK-PACKAGES",

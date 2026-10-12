@@ -7,6 +7,11 @@ Shared build scripts, profiles and dependency locks live in
 [source/build](source/build/README.md). Build products, raw test recordings and
 machine-specific workspace settings stay in ignored `out/` directories.
 
+The [Windows processor checkpoint](spec/delivery/windows-processor-handoff.md)
+adds complete native group topology and explicit PDH accounted-time acquisition,
+with independent verification of all 12 CPUs on the Windows development host.
+Windows telemetry/UI integration and full release qualification remain open.
+
 The [CPU inspector checkpoint](spec/delivery/processor-publication-handoff.md)
 connects Linux CPU scenes to the existing native telemetry, demand and policy
 owners. Exact denominators and live/failed/pending states are verified through

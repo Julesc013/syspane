@@ -4327,6 +4327,111 @@
         "linux-x64-gcc13",
         "windows-x86-v141-xp"
       ]
+    },
+    {
+      "id": "windows-processor-decode",
+      "target": "syspane_windows_processor_decode",
+      "type": "STATIC_LIBRARY",
+      "source_owner": "source/platform/",
+      "public_interfaces": [
+        "source/platform/processor_windows.hpp"
+      ],
+      "private_interfaces": [],
+      "sources": [
+        "source/platform/processor_windows_decode.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_processor_contract"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "windows-x64-gcc15",
+        "linux-x64-gcc13",
+        "windows-x86-v141-xp"
+      ]
+    },
+    {
+      "id": "windows-processor",
+      "target": "syspane_windows_processor",
+      "type": "STATIC_LIBRARY",
+      "source_owner": "source/platform/",
+      "public_interfaces": [],
+      "private_interfaces": [],
+      "sources": [
+        "source/platform/processor_windows.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_windows_processor_decode"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "windows-x64-gcc15"
+      ]
+    },
+    {
+      "id": "windows-processor-probe",
+      "target": "syspane_windows_processor_probe",
+      "type": "EXECUTABLE",
+      "source_owner": "source/application/",
+      "public_interfaces": [],
+      "private_interfaces": [],
+      "sources": [
+        "source/application/processor_probe_windows.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_windows_processor",
+        "syspane_processor_state",
+        "syspane_protocol"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "windows-x64-gcc15"
+      ]
+    },
+    {
+      "id": "windows-processor-tests",
+      "target": "syspane_windows_processor_tests",
+      "type": "EXECUTABLE",
+      "source_owner": "tests/resources/",
+      "public_interfaces": [],
+      "private_interfaces": [],
+      "sources": [
+        "tests/resources/windows_processor_tests.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_windows_processor_decode",
+        "syspane_processor_state"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "windows-x64-gcc15",
+        "linux-x64-gcc13",
+        "windows-x86-v141-xp"
+      ]
     }
   ]
 }

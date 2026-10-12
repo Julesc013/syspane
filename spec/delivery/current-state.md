@@ -12,10 +12,24 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-12T06:08:10.486301+00:00", "scope": "Linux CPU descriptors/publication/demand and installed native inspector evidence"}
+updated: {"by": "codex", "at": "2026-10-12T07:06:43.260935+00:00", "scope": "Native Windows processor groups/accounting and independently verified intervals"}
 ---
 
 # Current state and next admitted boundary
+
+The [Windows processor checkpoint](windows-processor-handoff.md) implements
+complete active group/core/package topology and read-only native x64 PDH acquisition.
+The explicit Windows definition uses busy user-plus-privileged time divided by total
+user-plus-privileged-plus-idle accounting. The independent native runner verifies
+all 12 CPUs on this one-group Windows 10 host, raw bounds, PDH component formulas,
+GetSystemTimes bounds and exact per-CPU/group/aggregate intervals. Six new portable
+cases plus 71 controls pass on each of three development profiles; both historical
+artifact audits pass. Preserve the rejected inverse timer interval, compiler failure
+and 8 GiB preflight stop. Native Windows publication/demand/UI and worker isolation,
+remaining providers and all five full desktop/release editions remain open. Two-group
+128-CPU synthetic coverage is not native large-server qualification. Keep the mixed
+GTK accumulation loss and prior failures open. Shared tooling stays in source/build;
+raw/machine/generated data stay ignored under out/ and the retired root is absent.
 
 The [processor publication checkpoint](processor-publication-handoff.md) connects
 Linux CPU scenes to the existing native controller, authenticated stream, demand/

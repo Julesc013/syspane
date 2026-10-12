@@ -1,5 +1,24 @@
 # Developer setup and checks
 
+The [Windows processor package](../../spec/delivery/packages/w-14-windows-processor.md)
+adds native x64 group topology and PDH accounting plus a portable decoder. Run
+ordinary workspace preflight and configure/build, then:
+
+```sh
+ctest --preset <profile> -R '^(processor-windows[.]|processor[.]|processor-linux[.]|processor-publication[.]|model[.]|demand[.]|demand-session[.]|network[.](RECONCILE-|PUBLICATION-)|composition[.])' --output-on-failure
+ctest --preset windows-x86-v141-xp -R '^legacy[.]' --output-on-failure
+ctest --preset windows-x64-gcc15 -R '^native[.]WINDOWS-PROCESSOR$' --output-on-failure
+```
+
+Each development profile executes 77 selected checks. Configure verifies the
+selected Windows SDK header fingerprints; native execution records the actual
+System32 PDH module and complete independent raw evidence. Missing counters are
+unqualified, never repaired by this test. The native probe covers all 12 CPUs on
+this one-group host; two-group 128-CPU coverage is synthetic. Preserve original
+inverse-timer, compiler and preflight failures. This helper does not enable Windows
+product telemetry, native UI or qualify historical/physical/large-server targets.
+See the [handoff](../../spec/delivery/windows-processor-handoff.md).
+
 The [CPU publication package](../../spec/delivery/packages/w-14-processor-publication.md)
 uses the existing controller/session/demand/guardian and installed inspector.
 After ordinary workspace preflight and configure/build, run:

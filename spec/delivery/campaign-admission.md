@@ -174,3 +174,14 @@ and native filesystems have more than 163 GB and 1002 GB free respectively. This
 is a bounded reversible development allocation; product limits, fixed acceptance
 criteria and build/test/package reservations remain unchanged. Exact measurement
 and the preserved stop are in ignored out/evidence/recovery-queue-workspace-allocation.json.
+
+The Windows processor package raises the active development allocation from 8 to
+9 GiB. The build preflight stops at 3,161,013,824 checkout-output bytes plus
+5,170,219,925 native-output bytes: the fixed 256 MiB build reservation exceeds
+8 GiB even after the prior verified native archives. Preserve that no-launch
+check. New topology/PDH components and three-profile artifacts need headroom.
+The checkout drive has 93,251,166,208 free bytes and the native Linux filesystem
+1,002,306,396,160. This is a bounded reversible development allocation; the
+standard growth reservations, product frame/table/resource limits and all
+qualification gates remain unchanged. Generated/raw outputs stay in owned ignored
+roots; shared tooling stays in source/build and the retired root remains absent.
