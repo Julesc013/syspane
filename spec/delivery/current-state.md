@@ -12,10 +12,26 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-12T04:28:16.837378+00:00", "scope": "Shared processor state, three-profile cases and preserved compiler/import failures"}
+updated: {"by": "codex", "at": "2026-10-12T04:54:24.074186+00:00", "scope": "Native complete Linux processor accounting/topology and independently verified intervals"}
 ---
 
 # Current state and next admitted boundary
+
+The [Linux processor checkpoint](linux-processor-handoff.md) adds bounded
+complete online-CPU proc/sysfs acquisition and reported topology. Seven portable
+decoder cases, eleven shared processor cases and 28 controls pass on each of the
+three development profiles. An independent live runner verifies all 12 visible
+CPUs, raw category bounds and exact weighted intervals in the existing WSL lab.
+Raw component decreases cannot hide inside increasing sums. Preserve the initial
+component-graph, Windows compiler and historical import failures. The new portable
+historical executable passes the pinned-input/PE/import audit after the documented
+performance-frequency API is declared; no guest qualification is inferred.
+Next connect Linux CPU descriptors, demand/policy acquisition and publication
+through the existing owners, then native Windows/macOS providers and memory/GPU.
+Physical/large-server/low-end/hotplug evidence, the mixed GTK loss and full native
+desktop/lifecycle/release gates remain open. W-14 and all five complete editions
+stay in progress. Shared tools remain in source/build; raw/machine/generated data
+stay ignored under out/ and the retired root stays absent.
 
 The [shared processor state](processor-state-handoff.md) begins W-14 with exact
 complete-processor counter intervals, explicit pending/gap/reset/hotplug reasons,

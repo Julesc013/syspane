@@ -1,5 +1,24 @@
 # Developer setup and checks
 
+The [Linux processor package](../../spec/delivery/packages/w-14-linux-processor.md)
+adds a read-only proc/sysfs reader and portable decoder. Use ordinary workspace
+preflight/configure/build, then these commands on the corresponding profiles:
+
+```sh
+ctest --preset <profile> -R '^(processor[.]|processor-linux[.]|model[.]|network[.]RECONCILE-|composition[.])' --output-on-failure
+ctest --preset linux-x64-gcc13 -R '^native[.]LINUX-PROCESSOR$' --output-on-failure
+ctest --preset windows-x86-v141-xp -R '^legacy[.]' --output-on-failure
+```
+
+Each development profile executes 46 selected cases. Linux native qualification
+here includes all visible online CPUs, reported topology, independent raw counter
+bounds, exact interval arithmetic and actual cancellation/timeout. Its complete
+observations are under the owned native-evidence root. Preserve pending/reset and
+all unsuccessful executions; no CPU/affinity/privilege is modified. This reader
+does not enable a product metric or qualify physical/large-server/legacy targets.
+See the [handoff](../../spec/delivery/linux-processor-handoff.md) for source-bound
+results and remaining descriptor/publication/demand and resource work.
+
 The [shared processor package](../../spec/delivery/packages/w-14-processor-state.md)
 uses no native CPU API or desktop. After workspace preflight and ordinary
 configure/build on each development profile, run:

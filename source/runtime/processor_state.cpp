@@ -44,8 +44,15 @@ ProcessorStateCode ProcessorState::commit(std::uint64_t ticket,std::uint64_t rev
 ProcessorStateCode ProcessorState::checked(const ProcessorResult& result,const model::Tick& start,const model::Tick& end){
     if(result.rows.empty())return reject(ProcessorStateCode::invalid);
     if(result.rows.size()>limit_||(sample_&&sample_->generation==std::numeric_limits<std::uint64_t>::max()))return reject(ProcessorStateCode::capacity);
+    for(const auto& row:result.rows)if(row.accounting.size()>16||row.accounting.size()!=result.rows.front().accounting.size())return reject(ProcessorStateCode::invalid);
     auto rows=result.rows;std::sort(rows.begin(),rows.end(),[](const auto& a,const auto& b){return a.id<b.id;});
     for(std::size_t i=0;i<rows.size();++i)if(!identifier(rows[i].id)||!identifier(rows[i].domain)||rows[i].idle>rows[i].total||(i&&rows[i].id==rows[i-1].id))return reject(ProcessorStateCode::invalid);
+    for(const auto& row:rows){
+        if(sample_){const auto before=std::lower_bound(sample_->processors.begin(),sample_->processors.end(),row.id,
+            [](const ProcessorValue& value,const std::string& id){return value.counters.id<id;});
+            if(before!=sample_->processors.end()&&before->counters.id==row.id&&before->counters.accounting.size()!=row.accounting.size())return reject(ProcessorStateCode::invalid);
+        }
+    }
     auto next=std::make_shared<ProcessorSample>();next->generation=sample_?sample_->generation+1:1;next->topology_revision=revision_;next->measured_at=start;next->completed_at=end;next->counter_definition=definition_;
     next->pending=gap_?gap_reason_:ProcessorPending::none;next->processors.reserve(rows.size());
     if(!sample_)next->pending=ProcessorPending::first;
@@ -58,7 +65,9 @@ ProcessorStateCode ProcessorState::checked(const ProcessorResult& result,const m
     if(next->pending==ProcessorPending::none){
         bool reset=false,no_progress=false;
         for(std::size_t i=0;i<rows.size();++i){const auto& before=sample_->processors[i].counters;const auto& after=rows[i];
-            if(after.total<before.total||after.idle<before.idle){reset=true;continue;}
+            bool part_reset=false;
+            for(std::size_t n=0;n<after.accounting.size();++n)if(after.accounting[n]<before.accounting[n])part_reset=true;
+            if(after.total<before.total||after.idle<before.idle||part_reset){reset=true;continue;}
             if(after.idle-before.idle>after.total-before.total)return reject(ProcessorStateCode::invalid);
             if(after.total==before.total)no_progress=true;
         }

@@ -520,7 +520,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "7faf52e297e4ef1135963ecaa4746b2c58691918ff32b66980b216a922711699"
+      "sha256": "fa22ee330bab8fa3013b7a20a1d32ce69bf9d30a53b2d1d29c378d3a70edf00b"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -1293,6 +1293,16 @@
         "SP-NATIVE-CONTENT-HANDOFF"
       ],
       "sha256": "0a804987a26e49598e914ddc7d49f56bbdfa7e669212f0821ac3c24f279e9d1f"
+    },
+    {
+      "id": "SP-LINUX-PROCESSOR-HANDOFF",
+      "path": "delivery/linux-processor-handoff.md",
+      "title": "Complete Linux processor acquisition checkpoint",
+      "description": "Bounded complete CPU accounting, reported topology and independent native interval evidence before publication.",
+      "requires": [
+        "SP-W14-LINUX-PROCESSOR"
+      ],
+      "sha256": "4eff2955a4054fc5de8301f3e43b500b96e169a2c2bb82f77a5c6006dea92b82"
     },
     {
       "id": "SP-LIVE-NETWORK-SESSION-HANDOFF",
@@ -3128,6 +3138,18 @@
         "SP-W11-TEXT-SESSION"
       ],
       "sha256": "203a0163b13e11b0494a63d4c80f8324c3d56758299e5cb5b8aff8b99d06d36a"
+    },
+    {
+      "id": "SP-W14-LINUX-PROCESSOR",
+      "path": "delivery/packages/w-14-linux-processor.md",
+      "title": "Complete Linux processor accounting and reported topology",
+      "description": "Bounded proc/sysfs acquisition, exact accounting semantics and independent live verification.",
+      "requires": [
+        "SP-RESOURCES",
+        "SP-W14-PROCESSOR-STATE",
+        "SP-WORK-PACKAGES"
+      ],
+      "sha256": "911da0015e178d248e7e30c7f25628e4d04149613c4ce0bde817d0f99b41fac9"
     },
     {
       "id": "SP-W14-PROCESSOR-STATE",

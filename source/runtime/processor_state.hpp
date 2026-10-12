@@ -1,13 +1,14 @@
 #pragma once
 #include "state.hpp"
+#include "processor.hpp"
 #include <thread>
 
 namespace syspane::runtime {
-enum class ProcessorReadCode {success,cancelled,timed_out,denied,unsupported,malformed,failed,capacity};
+using ProcessorReadCode=platform::ProcessorReadCode;
+using ProcessorCounters=platform::ProcessorCounters;
+using ProcessorResult=platform::ProcessorResult;
 enum class ProcessorStateCode {accepted,obsolete,dirty,source_failed,clock_fault,capacity,invalid,closed};
 enum class ProcessorPending {none,first,demand_changed,topology_changed,counter_reset,interval_zero,no_progress,acquisition_gap};
-struct ProcessorCounters {std::string id,domain;std::uint64_t total,idle;};
-struct ProcessorResult {ProcessorReadCode code;std::int64_t native_error=0;std::vector<ProcessorCounters> rows={};};
 struct ProcessorUsage {
     std::uint64_t busy,total,interval_ns;
     double percent()const;

@@ -4063,7 +4063,8 @@
       ],
       "allowed_dependencies": [
         "syspane_model",
-        "Threads::Threads"
+        "Threads::Threads",
+        "syspane_processor_contract"
       ],
       "target_requirements": [
         "cxx17"
@@ -4089,6 +4090,136 @@
         "tests/resources/processor_state_tests.cpp"
       ],
       "allowed_dependencies": [
+        "syspane_processor_state"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "windows-x64-gcc15",
+        "linux-x64-gcc13",
+        "windows-x86-v141-xp"
+      ]
+    },
+    {
+      "id": "processor-contract",
+      "target": "syspane_processor_contract",
+      "type": "INTERFACE_LIBRARY",
+      "source_owner": "source/platform/",
+      "public_interfaces": [
+        "source/platform/processor.hpp"
+      ],
+      "private_interfaces": [],
+      "sources": [
+        "source/platform/processor.hpp"
+      ],
+      "allowed_dependencies": [],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "windows-x64-gcc15",
+        "linux-x64-gcc13",
+        "windows-x86-v141-xp"
+      ]
+    },
+    {
+      "id": "linux-processor-decode",
+      "target": "syspane_linux_processor_decode",
+      "type": "STATIC_LIBRARY",
+      "source_owner": "source/platform/",
+      "public_interfaces": [
+        "source/platform/processor_linux.hpp"
+      ],
+      "private_interfaces": [],
+      "sources": [
+        "source/platform/processor_linux_decode.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_processor_contract"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "windows-x64-gcc15",
+        "linux-x64-gcc13",
+        "windows-x86-v141-xp"
+      ]
+    },
+    {
+      "id": "linux-processor",
+      "target": "syspane_linux_processor",
+      "type": "STATIC_LIBRARY",
+      "source_owner": "source/platform/",
+      "public_interfaces": [],
+      "private_interfaces": [],
+      "sources": [
+        "source/platform/processor_linux.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_linux_processor_decode"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
+    },
+    {
+      "id": "linux-processor-probe",
+      "target": "syspane_linux_processor_probe",
+      "type": "EXECUTABLE",
+      "source_owner": "source/application/",
+      "public_interfaces": [],
+      "private_interfaces": [],
+      "sources": [
+        "source/application/processor_probe_linux.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_linux_processor",
+        "syspane_processor_state"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
+    },
+    {
+      "id": "linux-processor-tests",
+      "target": "syspane_linux_processor_tests",
+      "type": "EXECUTABLE",
+      "source_owner": "tests/resources/",
+      "public_interfaces": [],
+      "private_interfaces": [],
+      "sources": [
+        "tests/resources/linux_processor_tests.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_linux_processor_decode",
         "syspane_processor_state"
       ],
       "target_requirements": [

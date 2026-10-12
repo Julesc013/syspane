@@ -94,6 +94,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Complete-scene command checkpoint](large-commands-handoff.md) — Negotiated full-scene edits, bounded admission and coherent native request recovery.
 - [Native layout-authoring checkpoint](layout-authoring-handoff.md) — Existing layout grammar and active fixed variants through the shared draft.
 - [Portable scene layout checkpoint](layout-handoff.md) — Exact authored geometry, safe display regions and explicit readable overflow across development toolchains.
+- [Complete Linux processor acquisition checkpoint](linux-processor-handoff.md) — Bounded complete CPU accounting, reported topology and independent native interval evidence before publication.
 - [Live measured collector and asynchronous GJS session checkpoint](live-network-session-handoff.md) — Original real telemetry, native clock provenance and independent lifecycle evidence before operational shell pixels.
 - [Measured telemetry and freshness checkpoint](measured-time-handoff.md) — Bind versioned measurement times to consumer clock scope, replay history and native delayed-delivery evidence.
 - [Native measurement-clock checkpoint](measurement-clock-handoff.md) — Record causal clock brackets and peer-exit rejection without claiming measured telemetry or suspend qualification.

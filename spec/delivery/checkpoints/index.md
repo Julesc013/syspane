@@ -38,6 +38,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [installed-recovery.json](installed-recovery.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [installed-settings.json](installed-settings.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [installed-telemetry.json](installed-telemetry.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
+- [linux-processor.json](linux-processor.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [native-clipboard.json](native-clipboard.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [native-retirement-owner.json](native-retirement-owner.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [network-service.json](network-service.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
