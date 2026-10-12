@@ -40,7 +40,8 @@ telemetry is now integrated; preserve prior failures and all five full release e
 - [x] Pass ordinary maximum chart/mixed GTK history GUI/erasure gates after bounded native retirement; preserve all original failures and samples. Maximum-history policy and installed/human/edition qualification remain open.
 - [x] Define and verify exact old-object withdrawal separately from successful empty wire data; preserve every original strict failure and reject timeouts/generic errors/SDK defaults.
 - [ ] Investigate native capacity erasure with held text/name/layout references and independent AT-SPI, including collapsed/retired cells; choose a repair from measured evidence.
-- [ ] Qualify maximum-history policy erasure with held accessibility references; reject model detachment that leaves old text readable. The current revocation check follows recovery to one point.
+- [x] Execute maximum-history policy erasure/rapid regrant with all held native/raw-wire references, exact-once defunct and actual shutdown. Preserve the first mixed accumulation failure and unresolved cause; see the [handoff](spec/delivery/gtk-history-policy-handoff.md).
+- [ ] Investigate the preserved maximum mixed accumulation loss; a later pass alone does not establish its cause.
 - [ ] Resolve the earlier authored MAX-FRAME delay of 458.801 ms against the unchanged 100-ms GUI limit; the diagnostic pass does not replace its failed qualification.
 - [ ] Investigate the preceding ordinary ORACLE AT-SPI timeout and TOPOLOGY child-observer exit race; passing runs do not establish their causes or an observer repair.
 - [ ] Qualify maximum chart/mixed workloads through native GTK, independent AT-SPI and installed history accumulation with the fixed GUI/erasure limits.

@@ -1,5 +1,22 @@
 # Developer setup and checks
 
+The [maximum policy package](../../spec/delivery/packages/w-11-gtk-history-policy.md)
+uses the actual inspector at the original fitting chart/mixed limits. After
+workspace preflight and ordinary configure/build, run the bounded family:
+
+```sh
+ctest --preset linux-x64-gcc13 -R '^native[.]GTK-HISTORY-POLICY$' --output-on-failure
+ctest --preset linux-x64-gcc13 -R '^(composition[.]|native[.](GTK-HISTORY-PHASES|GTK-HISTORY-PRODUCER|INSPECTOR-RETIREMENT-OWNER|INSPECTOR-CELL-LIFETIME|SCENE-INSPECTOR.*|CHART-FRAME-LIMITS|INSPECTOR-RENDERER|BACKGROUND-INSPECTOR)$)' --output-on-failure
+```
+
+Keep the original 600-second children/1230-second family, 100-ms GUI and 200-ms
+erasure gates, complete raw journals, and native reference/lifecycle checks.
+Capture/priming is bounded inside the measured pulse; revoke/regrant is timed as
+one complete input callback. The first mixed accumulation failure remains with
+its original source and samples; the diagnostics-only replay does not establish
+its cause. See the [handoff](../../spec/delivery/gtk-history-policy-handoff.md) for
+actual case outcomes and still-required installed/human/desktop release work.
+
 The [native retirement owner](../../spec/delivery/native-retirement-owner-handoff.md)
 keeps all native events and drains bounded slices through existing measured GTK
 calls. After workspace preflight and ordinary configure/build, run:

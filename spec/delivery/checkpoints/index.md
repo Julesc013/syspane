@@ -17,6 +17,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [gtk-cell-lifetime.json](gtk-cell-lifetime.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [gtk-history-limits.json](gtk-history-limits.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [gtk-history-phases.json](gtk-history-phases.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
+- [gtk-history-policy.json](gtk-history-policy.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [gtk-history-producer.json](gtk-history-producer.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [gtk-retirement.json](gtk-retirement.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [gtk-unset.json](gtk-unset.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.

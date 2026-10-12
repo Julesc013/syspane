@@ -7,6 +7,7 @@
 #include <unistd.h>
 #include "gtk_history_phases.hpp"
 #include "gtk_history_producer.hpp"
+#include "gtk_history_policy.hpp"
 
 namespace gtk_history_limits {
 using namespace fixture;namespace ui=syspane::interfaces;
@@ -36,9 +37,10 @@ struct Window {
     bool mixed,closed=false;unsigned fitting,sent=0,inflight=0;std::uint64_t revision=7;
     GtkWidget* window=nullptr;std::unique_ptr<ui::SceneInspector> view;Producer producer;Producer::Snapshot snapshot;std::optional<Producer::Job> request;
     std::vector<Timing> journal;Phases phases;gint64 previous=0;std::string input,pending;std::uint64_t command_work=0;int result=0;
+    bool policy_mode=false;std::unique_ptr<PolicyHeld> held;
     std::uint64_t now()const{return static_cast<std::uint64_t>(g_get_monotonic_time()/1000);}
     c::Policy grant()const{auto p=inspector_admission_owner_test::grant();p.revision=revision;return p;}
-    explicit Window(const std::string& root,bool table,unsigned count):mixed(table),fitting(count),producer(table){
+    explicit Window(const std::string& root,bool table,unsigned count,bool policy=false):mixed(table),fitting(count),producer(table),policy_mode(policy){
         static_assert(sizeof(s::ChartPoint)==40,"Pinned Linux chart ABI");need(count>1&&count<4096,"fitting argument");
         journal.reserve(32768);auto renders=std::make_shared<const ui::InspectorRenderFactory>(ui::threaded_inspector_renderer());
         view=std::make_unique<ui::SceneInspector>(c::Authority{true,"console",{"console"}},grant(),configuration(root,mixed),std::vector<v::SurfaceProvider>{provider()},"",ui::SceneInspector::Translator{},v::ImageFactory{},renders,11);
@@ -51,14 +53,18 @@ struct Window {
     void reply(const std::string& name,std::uint64_t work=0){Json value={{"ack",name},{"command_work_us",work},{"generation",sent},{"reason",view->status().reason}};
         if(name=="close"){const auto final=producer.terminal();value["producer"]={{"accepted",final.accepted},{"receiver_owner",final.receiver_owner},{"publication_max_us",final.publication_max_us},{"clock_gap_max_ms",final.clock_gap_max_ms},{"stopped",producer.stopped()},{"renderer_stopped",view->poll_image_jobs()},{"failure",producer.failure()}};}
         if(name=="close"){const auto s=view->native_retirement();value["retirement"]={{"pending",s.pending},{"accepted",s.accepted},{"delivered",s.delivered},{"polls",s.polls},{"total_us",s.total_us},{"max_us",s.max_us},{"failed",s.failed}};}
+        if(held&&name!="close"){value["held"]=held->report();value["native_pending"]=view->native_retirement().pending;value["points"]=points();}
         std::cout<<value.dump()<<std::endl;}
     void command(const std::string& name){
         need(pending.empty(),"GTK history outstanding command");const auto begin=g_get_monotonic_time();
         if(name=="fill")pending=name;
+        else if(name=="hold"){need(policy_mode&&!held&&sent==fitting&&points()==fitting,"maximum policy native capture order");held=std::make_unique<PolicyHeld>(2*(1+fitting+(mixed?321:0)));pending=name;}
         else if(name=="over"){publish(fitting+1,static_cast<std::uint64_t>(fitting)*1000000);pending=name;}
         else if(name=="recover"){publish(4098,20000000000ULL);pending=name;}
-        else if(name=="revoke"){revision=8;auto denied=grant();denied.disclosure.erase({"console","history"});view->policy(std::move(denied),now());}
-        else if(name=="fresh"){revision=9;view->policy(grant(),now());snapshot={};publish(4099,21000000000ULL,true);pending=name;}
+        else if(name=="revoke"){revision=8;auto denied=grant();denied.disclosure.erase({"console","history"});view->policy(std::move(denied),now());if(held){held->check(false);need(view->native_retirement().pending,"maximum policy retirement remains pending after immediate erase");}}
+        else if(name=="regrant"){need(policy_mode&&held&&revision==8&&view->native_retirement().pending,"maximum policy rapid grant before drainage");revision=9;view->policy(grant(),now());held->check(false);need(view->native_retirement().pending&&!snapshot.delivery.deliverable({11,5},now())&&points()==0,"maximum policy old scope cannot become fresh data");}
+        else if(name=="held-check"){need(static_cast<bool>(held),"maximum policy held check order");held->check(view->native_retirement().pending==0);}
+        else if(name=="fresh"){if(!policy_mode||revision!=9){revision=9;view->policy(grant(),now());}snapshot={};publish(4099,21000000000ULL,true);pending=name;}
         else if(name=="close"){closed=true;request.reset();snapshot={};producer.close();view->close();pending=name;}
         else if(name=="quit"){need(producer.stopped()&&view->poll_image_jobs(),"quit before real owner destruction");gtk_main_quit();}
         else throw std::runtime_error("GTK history command");
@@ -75,7 +81,10 @@ struct Window {
             phases.measure(Phases::delivery,[&]{view->deliver(snapshot.delivery,{11,revision==9?5U:4U},now(),phases.observer());});
             phases.measure(Phases::lookup,[&]{count=points();});
             if(inflight&&sent==inflight&&((pending=="over"&&count==0&&view->status().code==v::SurfaceCode::alternative)||((pending=="recover"||pending=="fresh")&&count==1)||(pending=="fill"&&count==sent)))inflight=0;
-            if(pending=="fill"){
+            if(pending=="hold"){if(held->advance(tree_of(view->widget()))){reply(pending,command_work);pending.clear();}}
+            else if(pending=="fill"){
+                if(policy_mode&&count+1<sent){const auto stamp=now();const auto state=view->native_retirement();const auto status=view->status();const auto& data=snapshot.delivery;
+                    std::cerr<<"history-loss "<<Json({{"sent",sent},{"points",count},{"inflight",inflight},{"stamp",stamp},{"clock_ms",data.clock_ms},{"clock_ns",data.clock?data.clock->nanoseconds:0},{"live_until",data.live_until_ms},{"frame_ms",data.frame?data.frame->received_ms:0},{"ordinal",data.frame?data.frame->ordinal:0},{"deliverable",data.deliverable({11,4},stamp)},{"scope_generation",data.scope.generation},{"status",static_cast<int>(status.code)},{"reason",status.reason},{"native_pending",state.pending},{"native_failed",state.failed},{"accepted",snapshot.accepted},{"clock_gap_max_ms",snapshot.clock_gap_max_ms}}).dump()<<'\n';}
                 need(count+1>=sent,"GTK history lost adopted points");
                 if(sent==fitting&&count==fitting&&!inflight&&!request){reply(pending,command_work);pending.clear();}
                 else if(count==sent&&!inflight&&!request){publish(sent+1,static_cast<std::uint64_t>(sent)*1000000);if(sent&&sent%250==0)std::cout<<Json({{"progress",sent}}).dump()<<std::endl;}
@@ -86,12 +95,13 @@ struct Window {
         const auto end=g_get_monotonic_time();need(journal.size()<32768,"GTK history timing capacity");journal.push_back({static_cast<std::uint64_t>(end-begin),static_cast<std::uint64_t>(delay)});phases.finish(sent,count,journal.back().work,journal.back().delay);previous=g_get_monotonic_time();
     }
 };
-inline int run(const std::string& root,bool mixed,unsigned fitting){
-    g_set_prgname("syspane-scene-inspector");g_set_application_name("SysPane Scene Inspector");need(gtk_init_check(nullptr,nullptr),"GTK history display");Window w(root,mixed,fitting);
+inline int run(const std::string& root,bool mixed,unsigned fitting,bool policy=false){
+    g_set_prgname("syspane-scene-inspector");g_set_application_name("SysPane Scene Inspector");need(gtk_init_check(nullptr,nullptr),"GTK history display");Window w(root,mixed,fitting,policy);
     need(fcntl(STDIN_FILENO,F_SETFL,fcntl(STDIN_FILENO,F_GETFL)|O_NONBLOCK)==0,"GTK history pipe");
     const auto source=g_unix_fd_add(STDIN_FILENO,static_cast<GIOCondition>(G_IO_IN|G_IO_HUP|G_IO_ERR),+[](gint fd,GIOCondition cond,gpointer p)->gboolean{auto& s=*static_cast<Window*>(p);
-        try{if(cond&(G_IO_HUP|G_IO_ERR))throw std::runtime_error("GTK history unexpected EOF");char raw[1024];const auto n=::read(fd,raw,sizeof(raw));if(n>0)s.input.append(raw,static_cast<std::size_t>(n));need(s.input.size()<=4096,"GTK history input limit");std::size_t at;
-            while((at=s.input.find('\n'))!=std::string::npos){const auto line=s.input.substr(0,at);s.input.erase(0,at+1);s.command(line);}}
+        try{const auto begin=g_get_monotonic_time();unsigned commands=0;if(cond&(G_IO_HUP|G_IO_ERR))throw std::runtime_error("GTK history unexpected EOF");char raw[1024];const auto n=::read(fd,raw,sizeof(raw));if(n>0)s.input.append(raw,static_cast<std::size_t>(n));need(s.input.size()<=4096,"GTK history input limit");std::size_t at;
+            while((at=s.input.find('\n'))!=std::string::npos){const auto line=s.input.substr(0,at);s.input.erase(0,at+1);s.command(line);++commands;}
+            if(s.policy_mode&&commands>1){const auto work=g_get_monotonic_time()-begin;need(work<=100000,"maximum policy complete paired input callback timing");std::cout<<Json({{"callback","paired"},{"commands",commands},{"work_us",work}}).dump()<<std::endl;}}
         catch(const std::exception& e){std::cerr<<e.what()<<'\n';s.result=1;gtk_main_quit();return G_SOURCE_REMOVE;}return G_SOURCE_CONTINUE;},&w);
     const auto timer=g_timeout_add(20,+[](gpointer p)->gboolean{auto& s=*static_cast<Window*>(p);try{s.pulse();}catch(const std::exception& e){std::cerr<<e.what()<<'\n';s.result=1;gtk_main_quit();return G_SOURCE_REMOVE;}return G_SOURCE_CONTINUE;},&w);
     const auto deadline=g_timeout_add_seconds(600,+[](gpointer p)->gboolean{static_cast<Window*>(p)->result=1;gtk_main_quit();return G_SOURCE_REMOVE;},&w);
@@ -99,6 +109,7 @@ inline int run(const std::string& root,bool mixed,unsigned fitting){
     for(auto id:{source,timer,deadline})if(g_main_context_find_source_by_id(nullptr,id))g_source_remove(id);
     w.producer.close();w.view->close();const auto until=g_get_monotonic_time()+2500000;while(!w.producer.stopped()||!w.view->poll_image_jobs()){need(g_get_monotonic_time()<until,"GTK history actual owner drain");g_usleep(1000);}w.producer.terminal();
     w.view.reset();gtk_widget_destroy(w.window);
+    if(w.held){w.held->check(true);std::cout<<Json({{"destroyed_held",w.held->cells.size()},{"empty",true},{"defunct_once",true},{"modern_unsupported",true}}).dump()<<std::endl;}
     w.phases.emit();
     std::cerr<<"history-timing-begin "<<w.journal.size()<<'\n';for(const auto& row:w.journal)std::cerr<<"history-timing "<<row.work<<' '<<row.delay<<'\n';std::cerr<<"history-timing-end "<<w.journal.size()<<'\n';
     return w.result;

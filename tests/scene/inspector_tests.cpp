@@ -130,6 +130,7 @@ int window(const std::string& root,const std::string& mode){g_set_prgname("syspa
 }
 int main(int argc,char** argv){try{need(argc>=2,"inspector arguments");if(argc==6&&std::string(argv[2])=="HISTORY-LIMITS")return chart_frame_limits::run(argv[1],std::string(argv[3])=="mixed",static_cast<unsigned>(std::stoul(argv[4])),argv[5]);
     if(argc==5&&std::string(argv[2])=="GTK-HISTORY-LIMITS")return gtk_history_limits::run(argv[1],std::string(argv[3])=="mixed",static_cast<unsigned>(std::stoul(argv[4])));
+    if(argc==5&&std::string(argv[2])=="GTK-HISTORY-POLICY")return gtk_history_limits::run(argv[1],std::string(argv[3])=="mixed",static_cast<unsigned>(std::stoul(argv[4])),true);
     if(argc==3&&std::string(argv[2])=="PHASE-COLLECTOR")return gtk_history_limits::phases_probe();
     if(argc==3&&std::string(argv[2])=="PRODUCER-COLLECTOR")return gtk_history_limits::producer_probe();
     if(argc==3&&std::string(argv[2])=="CELL-LIFETIME")return inspector_cell_lifetime::run(argv[1]);

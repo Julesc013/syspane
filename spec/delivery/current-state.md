@@ -12,10 +12,26 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-12T02:59:49.862289+00:00", "scope": "Product native retirement ownership, exact held-cell evidence and ordinary maximum outcomes"}
+updated: {"by": "codex", "at": "2026-10-12T03:54:16.263354+00:00", "scope": "Maximum actual GTK policy/held references, original accumulation failure and unchanged product evidence"}
 ---
 
 # Current state and next admitted boundary
+
+The [maximum history policy checkpoint](gtk-history-policy-handoff.md) uses the
+actual background inspector at the original 3138-point chart and 2087-point/
+64-interface mixed limits. It primes and retains all native cells, sends revoke
+and regrant in one measured input callback, rejects old-scope values and preserves
+every raw reference/method/phase through fresh adoption and actual destruction.
+Final policy outcomes: chart: pass / mixed: pass.
+The first chart passes; the first mixed fails during accumulation with lost
+adopted points. Preserve that original source, timing journal and incomplete wire
+record; one replay adds failure-state diagnostics without changing the invariant.
+A later pass does not establish its cause. Product source and 70 other executable
+artifacts remain unchanged. Original 100/200-ms limits and all previous failures
+remain. Next resolve any reproduced loss, then qualify installed accumulation/
+human access, physical topology and desktop/lifecycle across all five complete
+release editions. W-11 stays open; shared tools remain in source/build and raw
+data/machine bindings remain ignored under out/ with the retired root absent.
 
 The [native retirement owner](native-retirement-owner-handoff.md) clears readable
 GTK cell data immediately and retains every exact inherited notification until

@@ -66,6 +66,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [GTK cell lifetime repair and preserved performance boundaries](gtk-cell-lifetime-handoff.md) — Clear actual retained cell caches before normal retirement, with exact withdrawal and source-bound regressions.
 - [Maximum native GTK histories and preserved timing failures](gtk-history-limits-handoff.md) — Exact accessible chart/mixed content passes; native timing qualification remains open.
 - [Maximum history tick attribution and separate repair boundaries](gtk-history-phases-handoff.md) — Locate native capacity erasure and fixture publication work without changing acceptance.
+- [Maximum GTK history policy and held-reference checkpoint](gtk-history-policy-handoff.md) — Actual maximum revoke/regrant, native cache/lifecycle and precise remote data/withdrawal with preserved accumulation failure.
 - [Native fixture producer and preserved GTK capacity boundary](gtk-history-producer-handoff.md) — Separate complete telemetry production from native GUI work without changing acceptance.
 - [Measured GTK retirement and complete projection cleanup](gtk-retirement-handoff.md) — Preserve native cache/lifecycle evidence and retire complete projections through the same owned model.
 - [Native unset, property dispatch and retained deferred calls](gtk-unset-handoff.md) — Measure normal native retirement and prove held-cache/lifecycle controls without product notification changes.

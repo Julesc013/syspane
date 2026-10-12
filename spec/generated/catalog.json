@@ -520,7 +520,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "72725c8cad9614285601349d0fa6f857c6676370534ac4b1b0f01010f5382031"
+      "sha256": "693a7ecc2203fe8ddc820b438a0ff91b4b2b50874d5c84bce111741db2a95cec"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -998,6 +998,16 @@
         "SP-W11-GTK-HISTORY-LIMITS"
       ],
       "sha256": "07820bcafa1876f49159f9db2504e8223754c2dc1998ac5cfb4234ca4501ebcf"
+    },
+    {
+      "id": "SP-GTK-HISTORY-POLICY-HANDOFF",
+      "path": "delivery/gtk-history-policy-handoff.md",
+      "title": "Maximum GTK history policy and held-reference checkpoint",
+      "description": "Actual maximum revoke/regrant, native cache/lifecycle and precise remote data/withdrawal with preserved accumulation failure.",
+      "requires": [
+        "SP-W11-GTK-HISTORY-POLICY"
+      ],
+      "sha256": "46a37b0c600d29ef71196d0a79f9852dc40618800763139de989d724100852a9"
     },
     {
       "id": "SP-GTK-HISTORY-PRODUCER-HANDOFF",
@@ -2672,6 +2682,18 @@
         "SP-W11-CHILD-IDENTITY-OBSERVATION"
       ],
       "sha256": "d1bafec0f7ffcc5fa4a60f9984da10a1e40577e9f0c2965d581695a2cc071335"
+    },
+    {
+      "id": "SP-W11-GTK-HISTORY-POLICY",
+      "path": "delivery/packages/w-11-gtk-history-policy.md",
+      "title": "Maximum GTK history policy erasure and held references",
+      "description": "Revoke and rapidly regrant at the original maximum with actual native and raw-wire references.",
+      "requires": [
+        "SP-W11-NATIVE-RETIREMENT-OWNER",
+        "SP-W11-GTK-HISTORY-LIMITS",
+        "SP-ACCESSIBILITY"
+      ],
+      "sha256": "c8b7d647b56c7f14bfaff1b7d09347d32cb17ee8a06b03743c5dd7bd831f8f3e"
     },
     {
       "id": "SP-W11-HISTORY-FORM",

@@ -7,6 +7,11 @@ Shared build scripts, profiles and dependency locks live in
 [source/build](source/build/README.md). Build products, raw test recordings and
 machine-specific workspace settings stay in ignored `out/` directories.
 
+The [maximum policy checkpoint](spec/delivery/gtk-history-policy-handoff.md)
+retains actual native/raw-wire cells across maximum-history revoke/regrant and
+fresh recovery. Product source remains unchanged. Original failures and limits
+remain; installed/human access, desktop/lifecycle and complete release work stay open.
+
 The [native retirement owner](spec/delivery/native-retirement-owner-handoff.md)
 clears retired inspector data immediately and drains every original notification
 through measured bounded calls before reporting actual stop. Complete held-cell
