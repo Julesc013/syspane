@@ -46,6 +46,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [prepared-editor.json](prepared-editor.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [prepared-surface.json](prepared-surface.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [private-text-lifetime.json](private-text-lifetime.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
+- [processor-publication.json](processor-publication.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [processor-state.json](processor-state.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [profile-controller.json](profile-controller.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [profile-owner.json](profile-owner.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.

@@ -1,5 +1,6 @@
 #include "network_consumer_linux.hpp"
 #include "network_publication.hpp"
+#include "processor_publication.hpp"
 #include "local_ipc.hpp"
 #include <array>
 #include <limits>
@@ -8,10 +9,10 @@ namespace syspane::application {
 namespace p=protocol;namespace os=platform;namespace r=recovery;
 namespace {
 void need(bool ok,const char* code){if(!ok)throw p::Error(code);}
-p::Handshake offer(){
+p::Handshake offer(bool processor){
     p::Handshake h;h.role="console";h.epoch="consumer:network";
     for(const char* document:{"telemetry","snapshot","observation"})h.documents.emplace(document,"0.2.0");
-    h.required={"telemetry.snapshot","telemetry.measured-time","telemetry.monotonic-replay"};return h;
+    h.required={"telemetry.snapshot","telemetry.measured-time","telemetry.monotonic-replay"};if(processor)h.required.insert("telemetry.processor");return h;
 }
 p::Json hello(const p::Handshake& h){
     p::Json docs=p::Json::array();for(const auto& pair:h.documents)docs.push_back({{"document",pair.first},{"version",pair.second}});
@@ -24,8 +25,8 @@ struct LinuxNetworkConsumer::Impl {
     std::string epoch,id;std::unique_ptr<r::TelemetryReceiver> receiver;
     std::uint64_t last_sent=0,next_sequence=0;std::optional<std::uint64_t> sent;
     explicit Impl(std::string endpoint,std::uint64_t process,std::string e,r::DeliveryScope scope,configuration::Policy policy,
-        std::function<bool()> guard):current(std::move(guard)),stream(connect(endpoint,process,current)),epoch(std::move(e)){
-        const auto started=stream.connected_ms();const auto h=offer();send("hello",hello(h));
+        std::function<bool()> guard,bool processor):current(std::move(guard)),stream(connect(endpoint,process,current)),epoch(std::move(e)){
+        const auto started=stream.connected_ms();const auto h=offer(processor);send("hello",hello(h));
         while(!receiver){
             need(os::monotonic_ms()-started<5000,"network.consumer_handshake_timeout");
             input([&](std::string_view raw,std::uint64_t now,const model::Tick& tick){
@@ -37,7 +38,7 @@ struct LinuxNetworkConsumer::Impl {
                 p::TelemetryBinding binding{{welcome.minor,welcome.max_frame_bytes,welcome.documents,welcome.optional},id,epoch,
                     "producer:network","S","inspector","operational",policy.revision,p::TelemetryDirection::producer_to_consumer,
                     "0.2.0",tick.clock_id,tick.clock_scope};
-                receiver=std::make_unique<r::TelemetryReceiver>(scope,policy,runtime::network_metrics(),std::move(binding),now);
+                receiver=std::make_unique<r::TelemetryReceiver>(scope,policy,processor?runtime::host_metrics():runtime::network_metrics(),std::move(binding),now);
                 need(receiver->sample(tick,now)==r::DataCode::accepted,"network.consumer_clock");
             });
         }
@@ -90,7 +91,7 @@ struct LinuxNetworkConsumer::Impl {
     }
 };
 LinuxNetworkConsumer::LinuxNetworkConsumer(std::string endpoint,std::uint64_t process,std::string epoch,r::DeliveryScope scope,
-    configuration::Policy policy,std::function<bool()> current):impl_(std::make_unique<Impl>(std::move(endpoint),process,std::move(epoch),scope,std::move(policy),std::move(current))){}
+    configuration::Policy policy,std::function<bool()> current,bool processor):impl_(std::make_unique<Impl>(std::move(endpoint),process,std::move(epoch),scope,std::move(policy),std::move(current),processor)){}
 LinuxNetworkConsumer::~LinuxNetworkConsumer()=default;
 r::TelemetryDelivery LinuxNetworkConsumer::poll(){return impl_->poll();}
 }

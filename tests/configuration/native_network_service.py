@@ -39,9 +39,12 @@ class Pipe:
             self.messages.append(json.loads(raw))
 
 class Node:
-    def __init__(self, helper, folder, mode='normal', policy='allow'):
+    def __init__(self, helper, folder, mode='normal', policy='allow', initial_files=None):
         self.folder = folder; folder.mkdir(mode=0o700)
         (folder/'policy').write_text(policy); (folder/'network-mode').write_text(mode)
+        for name,text in (initial_files or {}).items():
+            assert name in ('processor-record','processor-mode','processor-policy','processor-network-policy')
+            (folder/name).write_text(text)
         self.epoch = 'network:test:'+uuid.uuid4().hex
         parent, child = socket.socketpair(); child.setblocking(False); self.health = Pipe(parent); self.data = None
         self.error = (folder/'stderr').open('wb')

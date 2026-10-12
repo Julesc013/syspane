@@ -826,7 +826,8 @@
       "specs": [
         "SP-RESOURCES",
         "SP-W14-PROCESSOR-STATE",
-        "SP-W14-LINUX-PROCESSOR"
+        "SP-W14-LINUX-PROCESSOR",
+        "SP-W14-PROCESSOR-PUBLICATION"
       ],
       "acceptance_tests": [
         "T-RATES",
@@ -847,14 +848,23 @@
         "tests/resources/linux_processor_tests.cpp",
         "tests/resources/native_linux_processor.py",
         "spec/delivery/linux-processor-handoff.md",
-        "spec/delivery/checkpoints/linux-processor.json"
+        "spec/delivery/checkpoints/linux-processor.json",
+        "source/runtime/processor_publication.hpp",
+        "source/runtime/processor_publication.cpp",
+        "source/collectors/processor_task_linux.hpp",
+        "source/collectors/processor_task_linux.cpp",
+        "tests/resources/processor_publication_tests.cpp",
+        "spec/delivery/checkpoints/processor-publication.json",
+        "spec/delivery/processor-publication-handoff.md",
+        "tests/resources/native_processor_publication.py",
+        "tests/resources/native_installed_processor.py"
       ],
       "status": "in_progress",
       "authority_class": "native_lab",
       "execution_grant": "user:foundation-native-campaign-2026-10-05",
-      "notes": "Complete Linux proc/sysfs CPU accounting and kernel-reported topology are implemented with bounded input/CPU limits, exact Linux execution semantics, all raw contributing categories, topology brackets and explicit errors/cancel/deadline. Seven decoder plus eleven shared processor and 28 controls pass on each development profile; independent live WSL evidence includes all 12 visible CPUs and exact interval/category/topology verification. Preserve initial component graph, Windows GCC and historical import failures; the new executable passes pinned-input/PE/import audit after the documented performance-frequency API is declared. Linux descriptor/publication/policy/demand integration, native Windows/macOS acquisition, memory/GPU and physical/low-end/large-server/hotplug/full release qualification remain required. W-14 and all five full editions stay in progress. Shared tools remain in source/build; generated/raw/machine data stay ignored under out/ and the retired root remains absent.",
-      "package": "delivery/packages/w-14-linux-processor.md",
-      "evidence": "delivery/linux-processor-handoff.md"
+      "notes": "The [processor publication checkpoint](processor-publication-handoff.md) connects Linux CPU scenes to the existing native controller, authenticated stream, demand/ policy/session/guardian owners and installed inspector. Exact interval denominators, Linux-specific descriptors, nonreused logical lifetimes and stable plan continuity are implemented. CPU scenes negotiate telemetry.processor; other scenes retain network-only acquisition. Each of three development profiles passes 71 selected checks, and the new historical executable passes the strict pinned-input/import audits. Native controller and installed CPU/network controls pass in the named lab. The CPU UI includes all 12 visible processors at 1600x1200; policy erasure is about 32 ms under the unchanged 200-ms gate. Preserve compiler, negotiation-fixture, invalid UI-scene and workspace-preflight failures, all raw evidence and unchanged frame/table limits. This is not low-end, physical/large-server or historical guest qualification. Native Windows/macOS CPU, memory/GPU, frame segmentation where needed and all five full desktop/release editions remain open. Continue native resource providers and real target/desktop/lifecycle qualification; retain the unresolved mixed GTK accumulation loss. Shared tools remain in source/build and raw/machine/generated data remain ignored under out/ with the retired root absent.",
+      "package": "delivery/packages/w-14-processor-publication.md",
+      "evidence": "delivery/processor-publication-handoff.md"
     },
     {
       "id": "W-15",

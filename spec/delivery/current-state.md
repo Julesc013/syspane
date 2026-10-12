@@ -12,10 +12,28 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-12T04:54:24.074186+00:00", "scope": "Native complete Linux processor accounting/topology and independently verified intervals"}
+updated: {"by": "codex", "at": "2026-10-12T06:08:10.486301+00:00", "scope": "Linux CPU descriptors/publication/demand and installed native inspector evidence"}
 ---
 
 # Current state and next admitted boundary
+
+The [processor publication checkpoint](processor-publication-handoff.md) connects
+Linux CPU scenes to the existing native controller, authenticated stream, demand/
+policy/session/guardian owners and installed inspector. Exact interval denominators,
+Linux-specific descriptors, nonreused logical lifetimes and stable plan continuity
+are implemented. CPU scenes negotiate telemetry.processor; other scenes retain
+network-only acquisition. Each of three development profiles passes 71 selected
+checks, and the new historical executable passes the strict pinned-input/import
+audits. Native controller and installed CPU/network controls pass in the named lab.
+The CPU UI includes all 12 visible processors at 1600x1200; policy erasure is about
+32 ms under the unchanged 200-ms gate. Preserve compiler, negotiation-fixture,
+invalid UI-scene and workspace-preflight failures, all raw evidence and unchanged
+frame/table limits. This is not low-end, physical/large-server or historical guest
+qualification. Native Windows/macOS CPU, memory/GPU, frame segmentation where
+needed and all five full desktop/release editions remain open. Continue native
+resource providers and real target/desktop/lifecycle qualification; retain the
+unresolved mixed GTK accumulation loss. Shared tools remain in source/build and
+raw/machine/generated data remain ignored under out/ with the retired root absent.
 
 The [Linux processor checkpoint](linux-processor-handoff.md) adds bounded
 complete online-CPU proc/sysfs acquisition and reported topology. Seven portable

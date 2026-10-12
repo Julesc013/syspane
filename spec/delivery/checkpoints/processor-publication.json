@@ -1,0 +1,2430 @@
+{
+  "recorded_at": "2026-10-12T06:08:09.481448+00:00",
+  "source_base": "2ccb456cc4b3d853c6bcfe691b8c69caf092a909",
+  "package": "spec/delivery/packages/w-14-processor-publication.md",
+  "source_hashes": {
+    "CMakeLists.txt": "6c17aaf6174d61f92d4d3b6416425c9b687694971554d05c73027996bf27cb4c",
+    "source/build/components.json": "279f555c2d64b757a1224bbcff8c41e34fb1893bbb5f045221947e9ae3cedf25",
+    "source/build/check_legacy_artifacts.py": "437344fe10641a7c82f9e39c4b45b5ad29c80b0d9c1599182f7110c87bcde3f8",
+    "source/configuration/session.hpp": "8f6e81707dac2568b6f148e9fca648b45bbc1b7287868e2873c29905a4b4a45e",
+    "source/configuration/session.cpp": "becfc74dba6088bbc926579be3ff35e13d0300760947ee5675661823e9080a0f",
+    "source/runtime/processor_publication.hpp": "073994899ccbbe1a2f98f7ee1a16aa11aab7b1242bf4e738a4cd255da7f1ed9c",
+    "source/runtime/processor_publication.cpp": "b64d036492d8add0a85472a93d039d8234130b3dc29a7a9199bdba09f5d77608",
+    "source/collectors/processor_task_linux.hpp": "7add2925237a64ff3143ee205da124f087644a3d8000093c1346df2c052c9cc2",
+    "source/collectors/processor_task_linux.cpp": "15377470117d6b0ed9f97ff0f6934b15538feef4915e23dec79ff9ae29be932d",
+    "source/application/network_controller_linux.hpp": "3431302b4e446b19e9a757bebd29e37fe4b10b5a7aa8bc1cf54a6faf3c29a14c",
+    "source/application/network_controller_linux.cpp": "52c0a9de2829cc8e4f18527b9e9f191a67eaade1b73e671c53a6dea0e0ec99b3",
+    "source/application/network_consumer_linux.hpp": "0fde16bd2093121b67b31555be03820a4c5668c22c26b568b64332b3d6debefa",
+    "source/application/network_consumer_linux.cpp": "88160e9705cf9112ae40a6a1afcb34494e43525220993f11c7944b09c065f8a8",
+    "source/application/frontend_backend_linux.cpp": "c7b4cfa64f2874115692f460ff5cc72df0d5e904a02e6ebb59a79d6b622efe43",
+    "source/application/frontend_linux.cpp": "843edbfe455f80b82c0a7096b2f258a6eaac55ade926f8cc92beaa55ff246881",
+    "tests/resources/processor_publication_tests.cpp": "03ef41c15d87f75607d4fa9bbe49ee544ded52414d599a370775c5f1bae5beec",
+    "tests/configuration/frontend_helper_fixture.cpp": "a5c26164d284c143d4bde95f7801447507c2df30f2a5c76fb23d74c9b1662c9d"
+  },
+  "executions": [
+    {
+      "stage": "build",
+      "source_base": "2ccb456cc4b3d853c6bcfe691b8c69caf092a909",
+      "source_archive_sha256": "e33f847d121288d1c91d1b792611d659bbc80610e02679ecb8665b4684952d42",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "cmake",
+            "--preset",
+            "linux-x64-gcc13"
+          ],
+          "started_at": "2026-10-12T05:33:59.245623+00:00",
+          "finished_at": "2026-10-12T05:34:08.352545+00:00",
+          "exit": 0,
+          "log_sha256": "5c1cf44a68672d73ef35f87b551600571f0fc2b4962c931001d3905c6594e3c9",
+          "log": {
+            "local_path": "out/evidence/processor-publication-checks/build-10ac723d/0.log",
+            "sha256": "5c1cf44a68672d73ef35f87b551600571f0fc2b4962c931001d3905c6594e3c9"
+          },
+          "budget": {
+            "local_path": "out/evidence/processor-publication-checks/build-10ac723d/budget-0.txt",
+            "sha256": "b8fe1705b97e1fdcbf589742cdc1c83e3760cefafdcb44e3f451dd0796eb7a86"
+          },
+          "executed_tests": null
+        },
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "cmake",
+            "--build",
+            "--preset",
+            "linux-x64-gcc13"
+          ],
+          "started_at": "2026-10-12T05:34:10.465126+00:00",
+          "finished_at": "2026-10-12T05:34:35.059425+00:00",
+          "exit": 0,
+          "log_sha256": "a3e778ff0d0fb8a722cf5deb4d3d58eab52a914336ab864ac138d12cbaaf3ff4",
+          "log": {
+            "local_path": "out/evidence/processor-publication-checks/build-10ac723d/1.log",
+            "sha256": "a3e778ff0d0fb8a722cf5deb4d3d58eab52a914336ab864ac138d12cbaaf3ff4"
+          },
+          "budget": {
+            "local_path": "out/evidence/processor-publication-checks/build-10ac723d/budget-1.txt",
+            "sha256": "e1a32a50015977f1be7d0338746148e1eab372cf82f295fc8149206e46d42954"
+          },
+          "executed_tests": null
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/processor-publication-checks/build-10ac723d/result.json",
+        "sha256": "ad3a5c397dfd07bc863a1fb8a80225cdd8a3bbff11c6cfb114f923aa7046ba94"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/processor-publication-checks/build-10ac723d/source-manifest.json",
+        "sha256": "46d61fb8a065c3f7a894a1d980580bc6a47c23073a1ff3ba9cf71ddb4bb7e2eb"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/processor-publication-checks/build-10ac723d/source.zip",
+        "sha256": "e33f847d121288d1c91d1b792611d659bbc80610e02679ecb8665b4684952d42"
+      }
+    },
+    {
+      "stage": "build",
+      "source_base": "2ccb456cc4b3d853c6bcfe691b8c69caf092a909",
+      "source_archive_sha256": "fbe5432f0df1ee6a043e802d3c2d41b4a99fd635b184de72909a5250a17abf2f",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "cmake",
+            "--preset",
+            "linux-x64-gcc13"
+          ],
+          "started_at": "2026-10-12T05:32:09.033051+00:00",
+          "finished_at": "2026-10-12T05:32:19.760961+00:00",
+          "exit": 0,
+          "log_sha256": "337b109dd8648fc4aabb0d8134c258c003cf80e05c5119af44ac1615925c61e3",
+          "log": {
+            "local_path": "out/evidence/processor-publication-checks/build-10d5c10c/0.log",
+            "sha256": "337b109dd8648fc4aabb0d8134c258c003cf80e05c5119af44ac1615925c61e3"
+          },
+          "budget": {
+            "local_path": "out/evidence/processor-publication-checks/build-10d5c10c/budget-0.txt",
+            "sha256": "a7f48ab8b3216272ef253007f265a3d4b2dbd79cbec0031f7d2e30b52151f7b4"
+          },
+          "executed_tests": null
+        },
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "cmake",
+            "--build",
+            "--preset",
+            "linux-x64-gcc13"
+          ],
+          "started_at": "2026-10-12T05:32:21.976219+00:00",
+          "finished_at": "2026-10-12T05:32:22.532454+00:00",
+          "exit": 0,
+          "log_sha256": "8c35b1682f73592d30612d7b0fabdb384fcfff35cb5a076cb48b85b1368aa794",
+          "log": {
+            "local_path": "out/evidence/processor-publication-checks/build-10d5c10c/1.log",
+            "sha256": "8c35b1682f73592d30612d7b0fabdb384fcfff35cb5a076cb48b85b1368aa794"
+          },
+          "budget": {
+            "local_path": "out/evidence/processor-publication-checks/build-10d5c10c/budget-1.txt",
+            "sha256": "aec74d2c6d65c38f9e042676d3195ae767d9c84b55cabd9749a51bd8c2e00474"
+          },
+          "executed_tests": null
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/processor-publication-checks/build-10d5c10c/result.json",
+        "sha256": "aefe05a02e5bd2e07bac5b0272d8a11cb38140ca1bb4e51c870e83a364776420"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/processor-publication-checks/build-10d5c10c/source-manifest.json",
+        "sha256": "e07d8bf74285a162b38213350e591051a39cc7d307d59b8d904a3d20849d0b56"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/processor-publication-checks/build-10d5c10c/source.zip",
+        "sha256": "fbe5432f0df1ee6a043e802d3c2d41b4a99fd635b184de72909a5250a17abf2f"
+      }
+    },
+    {
+      "stage": "build",
+      "source_base": "2ccb456cc4b3d853c6bcfe691b8c69caf092a909",
+      "source_archive_sha256": "682fabdfd763755eaad36ed195d0086eff66e768f47ddab8ec9264d9fd1baff2",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "cmake",
+            "--preset",
+            "linux-x64-gcc13"
+          ],
+          "started_at": "2026-10-12T05:22:14.200746+00:00",
+          "finished_at": "2026-10-12T05:22:22.597433+00:00",
+          "exit": 0,
+          "log_sha256": "887ff52ad18c3ebcbc7cc583db5940c0d034bacae415b18f234e97b46a590e94",
+          "log": {
+            "local_path": "out/evidence/processor-publication-checks/build-6d57e8a8/0.log",
+            "sha256": "887ff52ad18c3ebcbc7cc583db5940c0d034bacae415b18f234e97b46a590e94"
+          },
+          "budget": {
+            "local_path": "out/evidence/processor-publication-checks/build-6d57e8a8/budget-0.txt",
+            "sha256": "27455df3cd4b67f819852ca5c8c4490a6080a2600186112c3bea01c40411c309"
+          },
+          "executed_tests": null
+        },
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "cmake",
+            "--build",
+            "--preset",
+            "linux-x64-gcc13"
+          ],
+          "started_at": "2026-10-12T05:22:24.626211+00:00",
+          "finished_at": "2026-10-12T05:23:02.552705+00:00",
+          "exit": 1,
+          "log_sha256": "84c575b1cfe7301064dad7584dce1c3033a910923b86f53ead5c140a7a3f4045",
+          "log": {
+            "local_path": "out/evidence/processor-publication-checks/build-6d57e8a8/1.log",
+            "sha256": "84c575b1cfe7301064dad7584dce1c3033a910923b86f53ead5c140a7a3f4045"
+          },
+          "budget": {
+            "local_path": "out/evidence/processor-publication-checks/build-6d57e8a8/budget-1.txt",
+            "sha256": "d6c256bfd450c57369fbc7a6b85d9e4426704a6b74cd0c9aa1f1c4514e6c287a"
+          },
+          "executed_tests": null
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/processor-publication-checks/build-6d57e8a8/result.json",
+        "sha256": "44af74e8fbb58b21b6e24bc2bbddfff255858aad01edf7f7a9535e45e8f5f14a"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/processor-publication-checks/build-6d57e8a8/source-manifest.json",
+        "sha256": "d2676cc6ce7640350993b1e798dd1f4754493302ca9e6b5b45213d82ee3417be"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/processor-publication-checks/build-6d57e8a8/source.zip",
+        "sha256": "682fabdfd763755eaad36ed195d0086eff66e768f47ddab8ec9264d9fd1baff2"
+      }
+    },
+    {
+      "stage": "build",
+      "source_base": "2ccb456cc4b3d853c6bcfe691b8c69caf092a909",
+      "source_archive_sha256": "b15919f36f8a4c45be791e684f707618b7fd996b0d21ce0eaf83c4dcff200d32",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "cmake",
+            "--preset",
+            "linux-x64-gcc13"
+          ],
+          "started_at": "2026-10-12T05:24:09.066718+00:00",
+          "finished_at": "2026-10-12T05:24:17.623250+00:00",
+          "exit": 0,
+          "log_sha256": "ccccfb01ed8132d399c27b6df61a850b9c5fdbb01499a677825d8198f3c8df58",
+          "log": {
+            "local_path": "out/evidence/processor-publication-checks/build-77994ea3/0.log",
+            "sha256": "ccccfb01ed8132d399c27b6df61a850b9c5fdbb01499a677825d8198f3c8df58"
+          },
+          "budget": {
+            "local_path": "out/evidence/processor-publication-checks/build-77994ea3/budget-0.txt",
+            "sha256": "7931b40b6f349bba97d2e9ddab4070b1bf25e61ddefae7b0335fd09632d0a0c5"
+          },
+          "executed_tests": null
+        },
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "cmake",
+            "--build",
+            "--preset",
+            "linux-x64-gcc13"
+          ],
+          "started_at": "2026-10-12T05:24:19.640388+00:00",
+          "finished_at": "2026-10-12T05:24:35.038423+00:00",
+          "exit": 0,
+          "log_sha256": "0e23f90073c9ab5e264a0c085e36586dceded11e0027654742adc16aa1878065",
+          "log": {
+            "local_path": "out/evidence/processor-publication-checks/build-77994ea3/1.log",
+            "sha256": "0e23f90073c9ab5e264a0c085e36586dceded11e0027654742adc16aa1878065"
+          },
+          "budget": {
+            "local_path": "out/evidence/processor-publication-checks/build-77994ea3/budget-1.txt",
+            "sha256": "7b0355cdfa48f722b989d73bda4259094d72e8a5ea5f294c38cad8b4fbc5de88"
+          },
+          "executed_tests": null
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/processor-publication-checks/build-77994ea3/result.json",
+        "sha256": "1e5598e3063089fad224b475549ebe2035551aa7a82f60a0ffd8f86682d1ab92"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/processor-publication-checks/build-77994ea3/source-manifest.json",
+        "sha256": "006dcd2cf9210cfcaf01f5279c456f49df7457e825b2356617df325165ac348e"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/processor-publication-checks/build-77994ea3/source.zip",
+        "sha256": "b15919f36f8a4c45be791e684f707618b7fd996b0d21ce0eaf83c4dcff200d32"
+      }
+    },
+    {
+      "stage": "build",
+      "source_base": "2ccb456cc4b3d853c6bcfe691b8c69caf092a909",
+      "source_archive_sha256": "12dad944f80e8a3d5b66b2cedb3b518a3597e1c873f54c8c16e30c1ff12067c4",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "cmake",
+            "--preset",
+            "linux-x64-gcc13"
+          ],
+          "started_at": "2026-10-12T05:44:00.253945+00:00",
+          "finished_at": "2026-10-12T05:44:09.001500+00:00",
+          "exit": 0,
+          "log_sha256": "ccccfb01ed8132d399c27b6df61a850b9c5fdbb01499a677825d8198f3c8df58",
+          "log": {
+            "local_path": "out/evidence/processor-publication-checks/build-94c34120/0.log",
+            "sha256": "ccccfb01ed8132d399c27b6df61a850b9c5fdbb01499a677825d8198f3c8df58"
+          },
+          "budget": {
+            "local_path": "out/evidence/processor-publication-checks/build-94c34120/budget-0.txt",
+            "sha256": "ba3640fbbf8e0e69e710cb740c7dcf6fa833a67e4c6d8193222a872de002840d"
+          },
+          "executed_tests": null
+        },
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "cmake",
+            "--build",
+            "--preset",
+            "linux-x64-gcc13"
+          ],
+          "started_at": "2026-10-12T05:44:11.066433+00:00",
+          "finished_at": "2026-10-12T05:44:28.188614+00:00",
+          "exit": 0,
+          "log_sha256": "20968882a8dfa1d7f444e9b7495f1be83e251fc84aefe22786ab2265b3d613cf",
+          "log": {
+            "local_path": "out/evidence/processor-publication-checks/build-94c34120/1.log",
+            "sha256": "20968882a8dfa1d7f444e9b7495f1be83e251fc84aefe22786ab2265b3d613cf"
+          },
+          "budget": {
+            "local_path": "out/evidence/processor-publication-checks/build-94c34120/budget-1.txt",
+            "sha256": "804e58e692a8f94d98509d302e929cb06ce53ccf8815c54c9520e4bee387dad7"
+          },
+          "executed_tests": null
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/processor-publication-checks/build-94c34120/result.json",
+        "sha256": "a4123739313a51df4745275378ea0e54e829da02d09eeb620ee0a8e2184d327e"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/processor-publication-checks/build-94c34120/source-manifest.json",
+        "sha256": "88c564b0ece61f429048e266de35fe30f9736a241d3b28a0a0657eab97e43ea2"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/processor-publication-checks/build-94c34120/source.zip",
+        "sha256": "12dad944f80e8a3d5b66b2cedb3b518a3597e1c873f54c8c16e30c1ff12067c4"
+      }
+    },
+    {
+      "stage": "legacy",
+      "source_base": "2ccb456cc4b3d853c6bcfe691b8c69caf092a909",
+      "source_archive_sha256": "628f483302a7bc88f19520e5879e79d6665e7e5f8274a0a578f75f73341d402d",
+      "commands": [
+        {
+          "command": [
+            "cmake",
+            "--preset",
+            "windows-x86-v141-xp"
+          ],
+          "started_at": "2026-10-12T05:57:52.876194+00:00",
+          "finished_at": "2026-10-12T05:57:54.759130+00:00",
+          "exit": 0,
+          "log_sha256": "19ee43ff6b619c2feafb937637e14e9ef3c3a38f9ca6ab82f42e7ab8e5734247",
+          "log": {
+            "local_path": "out/evidence/processor-publication-checks/legacy-78d7b090/0.log",
+            "sha256": "19ee43ff6b619c2feafb937637e14e9ef3c3a38f9ca6ab82f42e7ab8e5734247"
+          },
+          "budget": {
+            "local_path": "out/evidence/processor-publication-checks/legacy-78d7b090/budget-0.txt",
+            "sha256": "96bd41ef69b2922196713f7c78a781542fcae467d32c6bd559748efdeceb3b39"
+          },
+          "executed_tests": null
+        },
+        {
+          "command": [
+            "cmake",
+            "--build",
+            "--preset",
+            "windows-x86-v141-xp"
+          ],
+          "started_at": "2026-10-12T05:57:56.849293+00:00",
+          "finished_at": "2026-10-12T05:58:30.074757+00:00",
+          "exit": 0,
+          "log_sha256": "ad35c825251a81311aa76c0b37c5fe484639d5f02f81d2506d68cef078a001a9",
+          "log": {
+            "local_path": "out/evidence/processor-publication-checks/legacy-78d7b090/1.log",
+            "sha256": "ad35c825251a81311aa76c0b37c5fe484639d5f02f81d2506d68cef078a001a9"
+          },
+          "budget": {
+            "local_path": "out/evidence/processor-publication-checks/legacy-78d7b090/budget-1.txt",
+            "sha256": "ca995b382eb8652f94b9d139720f80feb84fe31c530887e1c4d8dceb8702b909"
+          },
+          "executed_tests": null
+        },
+        {
+          "command": [
+            "ctest",
+            "--preset",
+            "windows-x86-v141-xp",
+            "-R",
+            "^(processor[.]|processor-linux[.]|processor-publication[.]|model[.]|demand[.]|demand-session[.]|network[.](RECONCILE-|PUBLICATION-)|composition[.])",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-12T05:58:32.110746+00:00",
+          "finished_at": "2026-10-12T05:58:34.303678+00:00",
+          "exit": 0,
+          "log_sha256": "c73df1d81cde0b1f3360b70d547223e54b205e07594ffff292dd6987831bf1f5",
+          "log": {
+            "local_path": "out/evidence/processor-publication-checks/legacy-78d7b090/2.log",
+            "sha256": "c73df1d81cde0b1f3360b70d547223e54b205e07594ffff292dd6987831bf1f5"
+          },
+          "budget": {
+            "local_path": "out/evidence/processor-publication-checks/legacy-78d7b090/budget-2.txt",
+            "sha256": "977be4ec236755bc138631c240d9de920398f80a0743fe8ccd5cce17cc24ade9"
+          },
+          "executed_tests": 71
+        },
+        {
+          "command": [
+            "ctest",
+            "--preset",
+            "windows-x86-v141-xp",
+            "-R",
+            "^legacy[.]",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-12T05:58:36.363542+00:00",
+          "finished_at": "2026-10-12T05:58:37.327948+00:00",
+          "exit": 0,
+          "log_sha256": "4b1e65fa1267f83a2a7e8a7cf9d103a44efc1165d64dac1cbe755e5b1acdad1c",
+          "log": {
+            "local_path": "out/evidence/processor-publication-checks/legacy-78d7b090/3.log",
+            "sha256": "4b1e65fa1267f83a2a7e8a7cf9d103a44efc1165d64dac1cbe755e5b1acdad1c"
+          },
+          "budget": {
+            "local_path": "out/evidence/processor-publication-checks/legacy-78d7b090/budget-3.txt",
+            "sha256": "6296a6da7d8ae5b4dfeb447d62c0f4c05ec5e62a412fc6f020334f13a5a2c388"
+          },
+          "executed_tests": 2
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/processor-publication-checks/legacy-78d7b090/result.json",
+        "sha256": "f299b030c3ba219efb5045426d78d6cdfd4fc0861413d40b89270e3a0bf5629d"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/processor-publication-checks/legacy-78d7b090/source-manifest.json",
+        "sha256": "b416748292ada0dd688cbc8733099ccbd65a697306d09823032201feb923c89c"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/processor-publication-checks/legacy-78d7b090/source.zip",
+        "sha256": "628f483302a7bc88f19520e5879e79d6665e7e5f8274a0a578f75f73341d402d"
+      }
+    },
+    {
+      "stage": "native-INSTALLED-PROCESSOR",
+      "source_base": "2ccb456cc4b3d853c6bcfe691b8c69caf092a909",
+      "source_archive_sha256": "e33f847d121288d1c91d1b792611d659bbc80610e02679ecb8665b4684952d42",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]INSTALLED-PROCESSOR$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-12T05:36:34.297361+00:00",
+          "finished_at": "2026-10-12T05:36:56.170707+00:00",
+          "exit": 8,
+          "log_sha256": "0ac1ba8caf8b919ddeebbca6f0efae0c05eaa7130660ce10913b89c1d2c08c7e",
+          "log": {
+            "local_path": "out/evidence/processor-publication-checks/native-INSTALLED-PROCESSOR-2e174cd7/0.log",
+            "sha256": "0ac1ba8caf8b919ddeebbca6f0efae0c05eaa7130660ce10913b89c1d2c08c7e"
+          },
+          "budget": {
+            "local_path": "out/evidence/processor-publication-checks/native-INSTALLED-PROCESSOR-2e174cd7/budget-0.txt",
+            "sha256": "af0d4e1a9dc893fcfbff16965cfb12714b89ecef2d55e40ea1dea801d34b6225"
+          },
+          "executed_tests": 1
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/processor-publication-checks/native-INSTALLED-PROCESSOR-2e174cd7/result.json",
+        "sha256": "bd57d2b78123897f593c68ccbcbd325c25d4dfdb16d446d5ffaa31c71cb70b51"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/processor-publication-checks/native-INSTALLED-PROCESSOR-2e174cd7/source-manifest.json",
+        "sha256": "46d61fb8a065c3f7a894a1d980580bc6a47c23073a1ff3ba9cf71ddb4bb7e2eb"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/processor-publication-checks/native-INSTALLED-PROCESSOR-2e174cd7/source.zip",
+        "sha256": "e33f847d121288d1c91d1b792611d659bbc80610e02679ecb8665b4684952d42"
+      }
+    },
+    {
+      "stage": "native-INSTALLED-PROCESSOR",
+      "source_base": "2ccb456cc4b3d853c6bcfe691b8c69caf092a909",
+      "source_archive_sha256": "628f483302a7bc88f19520e5879e79d6665e7e5f8274a0a578f75f73341d402d",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]INSTALLED-PROCESSOR$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-12T05:50:56.805678+00:00",
+          "finished_at": "2026-10-12T05:51:24.189636+00:00",
+          "exit": 0,
+          "log_sha256": "2fa5cff33572b90169d5bf2d9504c1bbbc8c0f2830764559985a63687249674d",
+          "log": {
+            "local_path": "out/evidence/processor-publication-checks/native-INSTALLED-PROCESSOR-30ae3051/0.log",
+            "sha256": "2fa5cff33572b90169d5bf2d9504c1bbbc8c0f2830764559985a63687249674d"
+          },
+          "budget": {
+            "local_path": "out/evidence/processor-publication-checks/native-INSTALLED-PROCESSOR-30ae3051/budget-0.txt",
+            "sha256": "f3cbf7dea552d1a428d0c09840a461dea1d5b203ff3c1ecae468ad2524e22cac"
+          },
+          "executed_tests": 1
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/processor-publication-checks/native-INSTALLED-PROCESSOR-30ae3051/result.json",
+        "sha256": "d78965c2dff8c164d56eb0afe16a3a6aa88e8ac73988c58413d1dcc840009975"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/processor-publication-checks/native-INSTALLED-PROCESSOR-30ae3051/source-manifest.json",
+        "sha256": "b416748292ada0dd688cbc8733099ccbd65a697306d09823032201feb923c89c"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/processor-publication-checks/native-INSTALLED-PROCESSOR-30ae3051/source.zip",
+        "sha256": "628f483302a7bc88f19520e5879e79d6665e7e5f8274a0a578f75f73341d402d"
+      }
+    },
+    {
+      "stage": "native-INSTALLED-PROCESSOR",
+      "source_base": "2ccb456cc4b3d853c6bcfe691b8c69caf092a909",
+      "source_archive_sha256": "cafc14660f72d4515153956a830de983f8e4e36aebb5d24c740d7085796a09f0",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]INSTALLED-PROCESSOR$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-12T05:47:12.414458+00:00",
+          "finished_at": "2026-10-12T05:47:33.349903+00:00",
+          "exit": 8,
+          "log_sha256": "350c4eedace224e2e59d2509a98d4d58cd6109a951e7d8986d58ab93d5331461",
+          "log": {
+            "local_path": "out/evidence/processor-publication-checks/native-INSTALLED-PROCESSOR-31f3460f/0.log",
+            "sha256": "350c4eedace224e2e59d2509a98d4d58cd6109a951e7d8986d58ab93d5331461"
+          },
+          "budget": {
+            "local_path": "out/evidence/processor-publication-checks/native-INSTALLED-PROCESSOR-31f3460f/budget-0.txt",
+            "sha256": "97059e7282eeec9bc70374f7ec529ae08f628ef413d30e6b6cc7507efdc09d60"
+          },
+          "executed_tests": 1
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/processor-publication-checks/native-INSTALLED-PROCESSOR-31f3460f/result.json",
+        "sha256": "820bf0ada55355d595e8b8971ad118dda4357cf7354a853e0ac038c946196154"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/processor-publication-checks/native-INSTALLED-PROCESSOR-31f3460f/source-manifest.json",
+        "sha256": "9d0dcd0e8ef7590ea5f7c9e329a2590ec0465c7d524ec8610bcbc6540f53c521"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/processor-publication-checks/native-INSTALLED-PROCESSOR-31f3460f/source.zip",
+        "sha256": "cafc14660f72d4515153956a830de983f8e4e36aebb5d24c740d7085796a09f0"
+      }
+    },
+    {
+      "stage": "native-INSTALLED-PROCESSOR",
+      "source_base": "2ccb456cc4b3d853c6bcfe691b8c69caf092a909",
+      "source_archive_sha256": "2458a5f6b8d837146faa50a925f159167f9a17b63ed6ca323ee42ceae54d2e24",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]INSTALLED-PROCESSOR$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-12T05:45:48.088547+00:00",
+          "finished_at": "2026-10-12T05:46:09.634727+00:00",
+          "exit": 8,
+          "log_sha256": "ba282924e763605755b5420c0dd89f7d70dc50560dfe7eac178004b7ac314998",
+          "log": {
+            "local_path": "out/evidence/processor-publication-checks/native-INSTALLED-PROCESSOR-434dfd6d/0.log",
+            "sha256": "ba282924e763605755b5420c0dd89f7d70dc50560dfe7eac178004b7ac314998"
+          },
+          "budget": {
+            "local_path": "out/evidence/processor-publication-checks/native-INSTALLED-PROCESSOR-434dfd6d/budget-0.txt",
+            "sha256": "2f0641f52a2b4451051d020f583e398669f38c66e5f68f0c7d565b699af0b765"
+          },
+          "executed_tests": 1
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/processor-publication-checks/native-INSTALLED-PROCESSOR-434dfd6d/result.json",
+        "sha256": "999d0eee7da325ec71b391c664a9ed4004999d0315156121cfb3baf38a08085b"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/processor-publication-checks/native-INSTALLED-PROCESSOR-434dfd6d/source-manifest.json",
+        "sha256": "db30c385f2767d06748e382dec30899f1b45324aef92d18d255d7d8653d78447"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/processor-publication-checks/native-INSTALLED-PROCESSOR-434dfd6d/source.zip",
+        "sha256": "2458a5f6b8d837146faa50a925f159167f9a17b63ed6ca323ee42ceae54d2e24"
+      }
+    },
+    {
+      "stage": "native-INSTALLED-PROCESSOR",
+      "source_base": "2ccb456cc4b3d853c6bcfe691b8c69caf092a909",
+      "source_archive_sha256": "12dad944f80e8a3d5b66b2cedb3b518a3597e1c873f54c8c16e30c1ff12067c4",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]INSTALLED-PROCESSOR$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-12T05:44:31.033372+00:00",
+          "finished_at": "2026-10-12T05:44:52.547447+00:00",
+          "exit": 8,
+          "log_sha256": "9334a2753b5195ab7406b0150e0f35dc4815c40deed318c1383d456c34a79e85",
+          "log": {
+            "local_path": "out/evidence/processor-publication-checks/native-INSTALLED-PROCESSOR-9d52fdaf/0.log",
+            "sha256": "9334a2753b5195ab7406b0150e0f35dc4815c40deed318c1383d456c34a79e85"
+          },
+          "budget": {
+            "local_path": "out/evidence/processor-publication-checks/native-INSTALLED-PROCESSOR-9d52fdaf/budget-0.txt",
+            "sha256": "46909304805cc2f7311eee5c6da271900c3bf919046037c46084e1e9432ffbf9"
+          },
+          "executed_tests": 1
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/processor-publication-checks/native-INSTALLED-PROCESSOR-9d52fdaf/result.json",
+        "sha256": "fd939a1c1347678c5a06ec07826d61f87d8358bfa91dde0dacadcf6fdfebd623"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/processor-publication-checks/native-INSTALLED-PROCESSOR-9d52fdaf/source-manifest.json",
+        "sha256": "88c564b0ece61f429048e266de35fe30f9736a241d3b28a0a0657eab97e43ea2"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/processor-publication-checks/native-INSTALLED-PROCESSOR-9d52fdaf/source.zip",
+        "sha256": "12dad944f80e8a3d5b66b2cedb3b518a3597e1c873f54c8c16e30c1ff12067c4"
+      }
+    },
+    {
+      "stage": "native-INSTALLED-TELEMETRY",
+      "source_base": "2ccb456cc4b3d853c6bcfe691b8c69caf092a909",
+      "source_archive_sha256": "628f483302a7bc88f19520e5879e79d6665e7e5f8274a0a578f75f73341d402d",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]INSTALLED-TELEMETRY$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-12T06:05:04.474681+00:00",
+          "finished_at": "2026-10-12T06:05:50.205391+00:00",
+          "exit": 0,
+          "log_sha256": "84f58afecac0fd9d72af07b48036df0ee7d87349e5f00a7656682db5a4443a0f",
+          "log": {
+            "local_path": "out/evidence/processor-publication-checks/native-INSTALLED-TELEMETRY-8e3ded78/0.log",
+            "sha256": "84f58afecac0fd9d72af07b48036df0ee7d87349e5f00a7656682db5a4443a0f"
+          },
+          "budget": {
+            "local_path": "out/evidence/processor-publication-checks/native-INSTALLED-TELEMETRY-8e3ded78/budget-0.txt",
+            "sha256": "41be5cdf094a1f8c93bdd533a1b09796298221a7da08dc7ec234aca2005952e4"
+          },
+          "executed_tests": 1
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/processor-publication-checks/native-INSTALLED-TELEMETRY-8e3ded78/result.json",
+        "sha256": "5e178af8875a2466b4f0717f5105a70ebda3918c8897b80876752d3daf29285e"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/processor-publication-checks/native-INSTALLED-TELEMETRY-8e3ded78/source-manifest.json",
+        "sha256": "b416748292ada0dd688cbc8733099ccbd65a697306d09823032201feb923c89c"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/processor-publication-checks/native-INSTALLED-TELEMETRY-8e3ded78/source.zip",
+        "sha256": "628f483302a7bc88f19520e5879e79d6665e7e5f8274a0a578f75f73341d402d"
+      }
+    },
+    {
+      "stage": "native-NETWORK-CONSUMER",
+      "source_base": "2ccb456cc4b3d853c6bcfe691b8c69caf092a909",
+      "source_archive_sha256": "628f483302a7bc88f19520e5879e79d6665e7e5f8274a0a578f75f73341d402d",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]NETWORK-CONSUMER$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-12T06:01:10.169639+00:00",
+          "finished_at": "2026-10-12T06:01:13.724746+00:00",
+          "exit": 0,
+          "log_sha256": "1b556a32dee0718f9287aa39ffb905629074fd1e5cccbd5d1cdc59d31f33e776",
+          "log": {
+            "local_path": "out/evidence/processor-publication-checks/native-NETWORK-CONSUMER-5bab15bc/0.log",
+            "sha256": "1b556a32dee0718f9287aa39ffb905629074fd1e5cccbd5d1cdc59d31f33e776"
+          },
+          "budget": {
+            "local_path": "out/evidence/processor-publication-checks/native-NETWORK-CONSUMER-5bab15bc/budget-0.txt",
+            "sha256": "90a24a56bb84fdf740d4264a938efec333a2cae56f4a61b78999f8944e67dd1c"
+          },
+          "executed_tests": 1
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/processor-publication-checks/native-NETWORK-CONSUMER-5bab15bc/result.json",
+        "sha256": "92966f57bbd8f4f8e541f8e97116aaf12d3cd78e3ad990f6887dde817195ca10"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/processor-publication-checks/native-NETWORK-CONSUMER-5bab15bc/source-manifest.json",
+        "sha256": "b416748292ada0dd688cbc8733099ccbd65a697306d09823032201feb923c89c"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/processor-publication-checks/native-NETWORK-CONSUMER-5bab15bc/source.zip",
+        "sha256": "628f483302a7bc88f19520e5879e79d6665e7e5f8274a0a578f75f73341d402d"
+      }
+    },
+    {
+      "stage": "native-NETWORK-SERVICE",
+      "source_base": "2ccb456cc4b3d853c6bcfe691b8c69caf092a909",
+      "source_archive_sha256": "628f483302a7bc88f19520e5879e79d6665e7e5f8274a0a578f75f73341d402d",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]NETWORK-SERVICE$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-12T06:00:57.449500+00:00",
+          "finished_at": "2026-10-12T06:01:07.374738+00:00",
+          "exit": 0,
+          "log_sha256": "c20d1330aa27987653df9f2dd7b1134e6682a6d491c6cd0ddeeeecc6c5835c83",
+          "log": {
+            "local_path": "out/evidence/processor-publication-checks/native-NETWORK-SERVICE-7b25b716/0.log",
+            "sha256": "c20d1330aa27987653df9f2dd7b1134e6682a6d491c6cd0ddeeeecc6c5835c83"
+          },
+          "budget": {
+            "local_path": "out/evidence/processor-publication-checks/native-NETWORK-SERVICE-7b25b716/budget-0.txt",
+            "sha256": "fac60ee01165c391b71462b6c2edd5d932521aa1847c65deea368f13dacb26af"
+          },
+          "executed_tests": 1
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/processor-publication-checks/native-NETWORK-SERVICE-7b25b716/result.json",
+        "sha256": "c6f6769dea741f495d358ced07c17786bba6ef6c5e6d00dd945380deb25a47a5"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/processor-publication-checks/native-NETWORK-SERVICE-7b25b716/source-manifest.json",
+        "sha256": "b416748292ada0dd688cbc8733099ccbd65a697306d09823032201feb923c89c"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/processor-publication-checks/native-NETWORK-SERVICE-7b25b716/source.zip",
+        "sha256": "628f483302a7bc88f19520e5879e79d6665e7e5f8274a0a578f75f73341d402d"
+      }
+    },
+    {
+      "stage": "native-NETWORK-SUPERVISOR",
+      "source_base": "2ccb456cc4b3d853c6bcfe691b8c69caf092a909",
+      "source_archive_sha256": "628f483302a7bc88f19520e5879e79d6665e7e5f8274a0a578f75f73341d402d",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]NETWORK-SUPERVISOR$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-12T06:04:49.184801+00:00",
+          "finished_at": "2026-10-12T06:04:55.964061+00:00",
+          "exit": 0,
+          "log_sha256": "41c91deee1569d9ddd81faa94abe6426ae4323313584c7e2a85823abc98fd189",
+          "log": {
+            "local_path": "out/evidence/processor-publication-checks/native-NETWORK-SUPERVISOR-485cf0ae/0.log",
+            "sha256": "41c91deee1569d9ddd81faa94abe6426ae4323313584c7e2a85823abc98fd189"
+          },
+          "budget": {
+            "local_path": "out/evidence/processor-publication-checks/native-NETWORK-SUPERVISOR-485cf0ae/budget-0.txt",
+            "sha256": "3306f6c7d2bfef31499b35f9dba4a09585a4d897184f23a45bf6011544c368c2"
+          },
+          "executed_tests": 1
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/processor-publication-checks/native-NETWORK-SUPERVISOR-485cf0ae/result.json",
+        "sha256": "96c4dae1aff215d00e9355150b131882db53cec735e1a6fa624cc3f3ff4546e3"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/processor-publication-checks/native-NETWORK-SUPERVISOR-485cf0ae/source-manifest.json",
+        "sha256": "b416748292ada0dd688cbc8733099ccbd65a697306d09823032201feb923c89c"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/processor-publication-checks/native-NETWORK-SUPERVISOR-485cf0ae/source.zip",
+        "sha256": "628f483302a7bc88f19520e5879e79d6665e7e5f8274a0a578f75f73341d402d"
+      }
+    },
+    {
+      "stage": "native-PROCESSOR-PUBLICATION",
+      "source_base": "2ccb456cc4b3d853c6bcfe691b8c69caf092a909",
+      "source_archive_sha256": "e33f847d121288d1c91d1b792611d659bbc80610e02679ecb8665b4684952d42",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]PROCESSOR-PUBLICATION$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-12T05:34:44.393590+00:00",
+          "finished_at": "2026-10-12T05:34:55.957891+00:00",
+          "exit": 0,
+          "log_sha256": "b5a0cc1a37c1671d39efd9321ecbe559d0b41c20b5b7da4c2ab4750c2333272d",
+          "log": {
+            "local_path": "out/evidence/processor-publication-checks/native-PROCESSOR-PUBLICATION-844d73c4/0.log",
+            "sha256": "b5a0cc1a37c1671d39efd9321ecbe559d0b41c20b5b7da4c2ab4750c2333272d"
+          },
+          "budget": {
+            "local_path": "out/evidence/processor-publication-checks/native-PROCESSOR-PUBLICATION-844d73c4/budget-0.txt",
+            "sha256": "b33ce7613343484e2388fb8c5c1c8d06238a64779c0ecfb9df5a8c7b6ebe2a30"
+          },
+          "executed_tests": 1
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/processor-publication-checks/native-PROCESSOR-PUBLICATION-844d73c4/result.json",
+        "sha256": "c90ba5ed306af15b93c0c0713b61e186ccce3d53404da1cf06562cacd74df492"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/processor-publication-checks/native-PROCESSOR-PUBLICATION-844d73c4/source-manifest.json",
+        "sha256": "46d61fb8a065c3f7a894a1d980580bc6a47c23073a1ff3ba9cf71ddb4bb7e2eb"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/processor-publication-checks/native-PROCESSOR-PUBLICATION-844d73c4/source.zip",
+        "sha256": "e33f847d121288d1c91d1b792611d659bbc80610e02679ecb8665b4684952d42"
+      }
+    },
+    {
+      "stage": "processor",
+      "source_base": "2ccb456cc4b3d853c6bcfe691b8c69caf092a909",
+      "source_archive_sha256": "b15919f36f8a4c45be791e684f707618b7fd996b0d21ce0eaf83c4dcff200d32",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^(processor[.]|processor-linux[.]|processor-publication[.]|model[.]|demand[.]|demand-session[.]|network[.](RECONCILE-|PUBLICATION-)|composition[.])",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-12T05:24:37.831339+00:00",
+          "finished_at": "2026-10-12T05:24:39.190982+00:00",
+          "exit": 8,
+          "log_sha256": "ace395ce782dbf20ae2fbee9f6cee289e929813fcef8ad2b97251ebc95dadb0b",
+          "log": {
+            "local_path": "out/evidence/processor-publication-checks/processor-030bafa0/0.log",
+            "sha256": "ace395ce782dbf20ae2fbee9f6cee289e929813fcef8ad2b97251ebc95dadb0b"
+          },
+          "budget": {
+            "local_path": "out/evidence/processor-publication-checks/processor-030bafa0/budget-0.txt",
+            "sha256": "c5d2485928b93f0ea233f94ca645a420f7fdf0f41558cf06c7176ea4b5d2c341"
+          },
+          "executed_tests": 71
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/processor-publication-checks/processor-030bafa0/result.json",
+        "sha256": "a4f6c8d30e92fe85b945bc5f8dd921220d380cdc721475eee60710eb49ad0557"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/processor-publication-checks/processor-030bafa0/source-manifest.json",
+        "sha256": "006dcd2cf9210cfcaf01f5279c456f49df7457e825b2356617df325165ac348e"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/processor-publication-checks/processor-030bafa0/source.zip",
+        "sha256": "b15919f36f8a4c45be791e684f707618b7fd996b0d21ce0eaf83c4dcff200d32"
+      }
+    },
+    {
+      "stage": "processor",
+      "source_base": "2ccb456cc4b3d853c6bcfe691b8c69caf092a909",
+      "source_archive_sha256": "e33f847d121288d1c91d1b792611d659bbc80610e02679ecb8665b4684952d42",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^(processor[.]|processor-linux[.]|processor-publication[.]|model[.]|demand[.]|demand-session[.]|network[.](RECONCILE-|PUBLICATION-)|composition[.])",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-12T05:34:38.045019+00:00",
+          "finished_at": "2026-10-12T05:34:39.509431+00:00",
+          "exit": 0,
+          "log_sha256": "baeae283e014bcd29b86f7ccd75a727d95569d88718d0561655873600cde3da8",
+          "log": {
+            "local_path": "out/evidence/processor-publication-checks/processor-3419f7a9/0.log",
+            "sha256": "baeae283e014bcd29b86f7ccd75a727d95569d88718d0561655873600cde3da8"
+          },
+          "budget": {
+            "local_path": "out/evidence/processor-publication-checks/processor-3419f7a9/budget-0.txt",
+            "sha256": "faea466dc6ae596979ba3e31ee7a7271cac5435e7b0e763c097b3138043ccb8b"
+          },
+          "executed_tests": 71
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/processor-publication-checks/processor-3419f7a9/result.json",
+        "sha256": "9616c59baf7a0f50972bc0bdb0710f289b06718ce8b1236b255ceab31671a48f"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/processor-publication-checks/processor-3419f7a9/source-manifest.json",
+        "sha256": "46d61fb8a065c3f7a894a1d980580bc6a47c23073a1ff3ba9cf71ddb4bb7e2eb"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/processor-publication-checks/processor-3419f7a9/source.zip",
+        "sha256": "e33f847d121288d1c91d1b792611d659bbc80610e02679ecb8665b4684952d42"
+      }
+    },
+    {
+      "stage": "processor",
+      "source_base": "2ccb456cc4b3d853c6bcfe691b8c69caf092a909",
+      "source_archive_sha256": "fbe5432f0df1ee6a043e802d3c2d41b4a99fd635b184de72909a5250a17abf2f",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^(processor[.]|processor-linux[.]|processor-publication[.]|model[.]|demand[.]|demand-session[.]|network[.](RECONCILE-|PUBLICATION-)|composition[.])",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-12T05:32:27.975559+00:00",
+          "finished_at": "2026-10-12T05:32:29.500207+00:00",
+          "exit": 8,
+          "log_sha256": "88769ce0bca6405a147d850b0c44182e34200f835d2dbee3508b0055338be1c6",
+          "log": {
+            "local_path": "out/evidence/processor-publication-checks/processor-f187dd65/0.log",
+            "sha256": "88769ce0bca6405a147d850b0c44182e34200f835d2dbee3508b0055338be1c6"
+          },
+          "budget": {
+            "local_path": "out/evidence/processor-publication-checks/processor-f187dd65/budget-0.txt",
+            "sha256": "666a365535c10b5ca3382c24a5a32dcc11776235321c6c5021bfb8e1cb196e43"
+          },
+          "executed_tests": 71
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/processor-publication-checks/processor-f187dd65/result.json",
+        "sha256": "4f6a4ad7d27dd75ce7a2e15d6c46609176b3f205f91320762e5a7178033768c6"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/processor-publication-checks/processor-f187dd65/source-manifest.json",
+        "sha256": "e07d8bf74285a162b38213350e591051a39cc7d307d59b8d904a3d20849d0b56"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/processor-publication-checks/processor-f187dd65/source.zip",
+        "sha256": "fbe5432f0df1ee6a043e802d3c2d41b4a99fd635b184de72909a5250a17abf2f"
+      }
+    },
+    {
+      "stage": "regressions",
+      "source_base": "2ccb456cc4b3d853c6bcfe691b8c69caf092a909",
+      "source_archive_sha256": "628f483302a7bc88f19520e5879e79d6665e7e5f8274a0a578f75f73341d402d",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^(processor[.]|processor-linux[.]|processor-publication[.]|protocol[.]|delivery[.]|measured[.]|import[.]|view[.]|subscription[.])",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-12T06:04:45.291232+00:00",
+          "finished_at": "2026-10-12T06:04:46.382043+00:00",
+          "exit": 0,
+          "log_sha256": "712f6a7938d02310bec1abfff4a6476e3da7f7c147b959d1d8127a7bc098f7f2",
+          "log": {
+            "local_path": "out/evidence/processor-publication-checks/regressions-539dab04/0.log",
+            "sha256": "712f6a7938d02310bec1abfff4a6476e3da7f7c147b959d1d8127a7bc098f7f2"
+          },
+          "budget": {
+            "local_path": "out/evidence/processor-publication-checks/regressions-539dab04/budget-0.txt",
+            "sha256": "504a091e2811d9218c8ce453ddfab22a84626db97fec06ac171db91e8faf92f7"
+          },
+          "executed_tests": 69
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/processor-publication-checks/regressions-539dab04/result.json",
+        "sha256": "649bcbfc560073dcaadcfe68d6ad4d79c4ef0351dde3f300a24547a5332bb5d3"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/processor-publication-checks/regressions-539dab04/source-manifest.json",
+        "sha256": "b416748292ada0dd688cbc8733099ccbd65a697306d09823032201feb923c89c"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/processor-publication-checks/regressions-539dab04/source.zip",
+        "sha256": "628f483302a7bc88f19520e5879e79d6665e7e5f8274a0a578f75f73341d402d"
+      }
+    },
+    {
+      "stage": "windows",
+      "source_base": "2ccb456cc4b3d853c6bcfe691b8c69caf092a909",
+      "outcome": "blocked_before_launch",
+      "executed_tests": 0,
+      "reason": "Workspace build reservation did not fit the existing 8 GiB bound",
+      "budget": {
+        "local_path": "out/evidence/processor-publication-checks/windows-2ae84d17/budget-0.txt",
+        "sha256": "8e796ec17e513deadecca7f11a50625a664b5b1d156c6976a305848a4388d5a2"
+      },
+      "record": {
+        "local_path": "out/evidence/processor-publication-checks/windows-2ae84d17/blocked-launch.json",
+        "sha256": "c8d5032d9226480bceaf3c39011237eab34af1238bf5aeb5dce08d3b864774ec"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/processor-publication-checks/windows-2ae84d17/source-manifest.json",
+        "sha256": "46d61fb8a065c3f7a894a1d980580bc6a47c23073a1ff3ba9cf71ddb4bb7e2eb"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/processor-publication-checks/windows-2ae84d17/source.zip",
+        "sha256": "e33f847d121288d1c91d1b792611d659bbc80610e02679ecb8665b4684952d42"
+      },
+      "commands": []
+    },
+    {
+      "stage": "windows",
+      "source_base": "2ccb456cc4b3d853c6bcfe691b8c69caf092a909",
+      "source_archive_sha256": "628f483302a7bc88f19520e5879e79d6665e7e5f8274a0a578f75f73341d402d",
+      "commands": [
+        {
+          "command": [
+            "cmake",
+            "--preset",
+            "windows-x64-gcc15"
+          ],
+          "started_at": "2026-10-12T05:55:00.091791+00:00",
+          "finished_at": "2026-10-12T05:55:01.266606+00:00",
+          "exit": 0,
+          "log_sha256": "e90d490f24016852f646c974693caca7707a7f674dfdfbfe60aaa6cbf8396c97",
+          "log": {
+            "local_path": "out/evidence/processor-publication-checks/windows-c4d47b86/0.log",
+            "sha256": "e90d490f24016852f646c974693caca7707a7f674dfdfbfe60aaa6cbf8396c97"
+          },
+          "budget": {
+            "local_path": "out/evidence/processor-publication-checks/windows-c4d47b86/budget-0.txt",
+            "sha256": "5b80f0a2829f1ab4f868b031e9502844c824f09681fedd00c31653513542242b"
+          },
+          "executed_tests": null
+        },
+        {
+          "command": [
+            "cmake",
+            "--build",
+            "--preset",
+            "windows-x64-gcc15"
+          ],
+          "started_at": "2026-10-12T05:55:07.395357+00:00",
+          "finished_at": "2026-10-12T05:56:48.669281+00:00",
+          "exit": 0,
+          "log_sha256": "58fa00cb0ba560471aa6ff03e40b0e11ab69d6047e022910833888b35e2a235b",
+          "log": {
+            "local_path": "out/evidence/processor-publication-checks/windows-c4d47b86/1.log",
+            "sha256": "58fa00cb0ba560471aa6ff03e40b0e11ab69d6047e022910833888b35e2a235b"
+          },
+          "budget": {
+            "local_path": "out/evidence/processor-publication-checks/windows-c4d47b86/budget-1.txt",
+            "sha256": "cb7a59d50af17f472888a535f1a21e2cda3e625e6e24cccaf55ab01f7099008b"
+          },
+          "executed_tests": null
+        },
+        {
+          "command": [
+            "ctest",
+            "--preset",
+            "windows-x64-gcc15",
+            "-R",
+            "^(processor[.]|processor-linux[.]|processor-publication[.]|model[.]|demand[.]|demand-session[.]|network[.](RECONCILE-|PUBLICATION-)|composition[.])",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-12T05:56:50.834858+00:00",
+          "finished_at": "2026-10-12T05:56:55.057927+00:00",
+          "exit": 0,
+          "log_sha256": "20fc9c5f8ab53552ad763a1c5ce1d813c11acb9056298261c3dd09374514e12a",
+          "log": {
+            "local_path": "out/evidence/processor-publication-checks/windows-c4d47b86/2.log",
+            "sha256": "20fc9c5f8ab53552ad763a1c5ce1d813c11acb9056298261c3dd09374514e12a"
+          },
+          "budget": {
+            "local_path": "out/evidence/processor-publication-checks/windows-c4d47b86/budget-2.txt",
+            "sha256": "897b9e3e4536f9d28bddee1c7aeb8375356a07a10406b0296f0a2cf6904a33b1"
+          },
+          "executed_tests": 71
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/processor-publication-checks/windows-c4d47b86/result.json",
+        "sha256": "55788e16b6ef53ff67328214a8742616e45c9ab03a4fbada7cc95bf2e74b1a49"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/processor-publication-checks/windows-c4d47b86/source-manifest.json",
+        "sha256": "b416748292ada0dd688cbc8733099ccbd65a697306d09823032201feb923c89c"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/processor-publication-checks/windows-c4d47b86/source.zip",
+        "sha256": "628f483302a7bc88f19520e5879e79d6665e7e5f8274a0a578f75f73341d402d"
+      }
+    }
+  ],
+  "preserved_failures": [
+    {
+      "stage": "build",
+      "source_base": "2ccb456cc4b3d853c6bcfe691b8c69caf092a909",
+      "source_archive_sha256": "682fabdfd763755eaad36ed195d0086eff66e768f47ddab8ec9264d9fd1baff2",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "cmake",
+            "--preset",
+            "linux-x64-gcc13"
+          ],
+          "started_at": "2026-10-12T05:22:14.200746+00:00",
+          "finished_at": "2026-10-12T05:22:22.597433+00:00",
+          "exit": 0,
+          "log_sha256": "887ff52ad18c3ebcbc7cc583db5940c0d034bacae415b18f234e97b46a590e94",
+          "log": {
+            "local_path": "out/evidence/processor-publication-checks/build-6d57e8a8/0.log",
+            "sha256": "887ff52ad18c3ebcbc7cc583db5940c0d034bacae415b18f234e97b46a590e94"
+          },
+          "budget": {
+            "local_path": "out/evidence/processor-publication-checks/build-6d57e8a8/budget-0.txt",
+            "sha256": "27455df3cd4b67f819852ca5c8c4490a6080a2600186112c3bea01c40411c309"
+          },
+          "executed_tests": null
+        },
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "cmake",
+            "--build",
+            "--preset",
+            "linux-x64-gcc13"
+          ],
+          "started_at": "2026-10-12T05:22:24.626211+00:00",
+          "finished_at": "2026-10-12T05:23:02.552705+00:00",
+          "exit": 1,
+          "log_sha256": "84c575b1cfe7301064dad7584dce1c3033a910923b86f53ead5c140a7a3f4045",
+          "log": {
+            "local_path": "out/evidence/processor-publication-checks/build-6d57e8a8/1.log",
+            "sha256": "84c575b1cfe7301064dad7584dce1c3033a910923b86f53ead5c140a7a3f4045"
+          },
+          "budget": {
+            "local_path": "out/evidence/processor-publication-checks/build-6d57e8a8/budget-1.txt",
+            "sha256": "d6c256bfd450c57369fbc7a6b85d9e4426704a6b74cd0c9aa1f1c4514e6c287a"
+          },
+          "executed_tests": null
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/processor-publication-checks/build-6d57e8a8/result.json",
+        "sha256": "44af74e8fbb58b21b6e24bc2bbddfff255858aad01edf7f7a9535e45e8f5f14a"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/processor-publication-checks/build-6d57e8a8/source-manifest.json",
+        "sha256": "d2676cc6ce7640350993b1e798dd1f4754493302ca9e6b5b45213d82ee3417be"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/processor-publication-checks/build-6d57e8a8/source.zip",
+        "sha256": "682fabdfd763755eaad36ed195d0086eff66e768f47ddab8ec9264d9fd1baff2"
+      }
+    },
+    {
+      "stage": "native-INSTALLED-PROCESSOR",
+      "source_base": "2ccb456cc4b3d853c6bcfe691b8c69caf092a909",
+      "source_archive_sha256": "e33f847d121288d1c91d1b792611d659bbc80610e02679ecb8665b4684952d42",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]INSTALLED-PROCESSOR$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-12T05:36:34.297361+00:00",
+          "finished_at": "2026-10-12T05:36:56.170707+00:00",
+          "exit": 8,
+          "log_sha256": "0ac1ba8caf8b919ddeebbca6f0efae0c05eaa7130660ce10913b89c1d2c08c7e",
+          "log": {
+            "local_path": "out/evidence/processor-publication-checks/native-INSTALLED-PROCESSOR-2e174cd7/0.log",
+            "sha256": "0ac1ba8caf8b919ddeebbca6f0efae0c05eaa7130660ce10913b89c1d2c08c7e"
+          },
+          "budget": {
+            "local_path": "out/evidence/processor-publication-checks/native-INSTALLED-PROCESSOR-2e174cd7/budget-0.txt",
+            "sha256": "af0d4e1a9dc893fcfbff16965cfb12714b89ecef2d55e40ea1dea801d34b6225"
+          },
+          "executed_tests": 1
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/processor-publication-checks/native-INSTALLED-PROCESSOR-2e174cd7/result.json",
+        "sha256": "bd57d2b78123897f593c68ccbcbd325c25d4dfdb16d446d5ffaa31c71cb70b51"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/processor-publication-checks/native-INSTALLED-PROCESSOR-2e174cd7/source-manifest.json",
+        "sha256": "46d61fb8a065c3f7a894a1d980580bc6a47c23073a1ff3ba9cf71ddb4bb7e2eb"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/processor-publication-checks/native-INSTALLED-PROCESSOR-2e174cd7/source.zip",
+        "sha256": "e33f847d121288d1c91d1b792611d659bbc80610e02679ecb8665b4684952d42"
+      }
+    },
+    {
+      "stage": "native-INSTALLED-PROCESSOR",
+      "source_base": "2ccb456cc4b3d853c6bcfe691b8c69caf092a909",
+      "source_archive_sha256": "cafc14660f72d4515153956a830de983f8e4e36aebb5d24c740d7085796a09f0",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]INSTALLED-PROCESSOR$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-12T05:47:12.414458+00:00",
+          "finished_at": "2026-10-12T05:47:33.349903+00:00",
+          "exit": 8,
+          "log_sha256": "350c4eedace224e2e59d2509a98d4d58cd6109a951e7d8986d58ab93d5331461",
+          "log": {
+            "local_path": "out/evidence/processor-publication-checks/native-INSTALLED-PROCESSOR-31f3460f/0.log",
+            "sha256": "350c4eedace224e2e59d2509a98d4d58cd6109a951e7d8986d58ab93d5331461"
+          },
+          "budget": {
+            "local_path": "out/evidence/processor-publication-checks/native-INSTALLED-PROCESSOR-31f3460f/budget-0.txt",
+            "sha256": "97059e7282eeec9bc70374f7ec529ae08f628ef413d30e6b6cc7507efdc09d60"
+          },
+          "executed_tests": 1
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/processor-publication-checks/native-INSTALLED-PROCESSOR-31f3460f/result.json",
+        "sha256": "820bf0ada55355d595e8b8971ad118dda4357cf7354a853e0ac038c946196154"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/processor-publication-checks/native-INSTALLED-PROCESSOR-31f3460f/source-manifest.json",
+        "sha256": "9d0dcd0e8ef7590ea5f7c9e329a2590ec0465c7d524ec8610bcbc6540f53c521"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/processor-publication-checks/native-INSTALLED-PROCESSOR-31f3460f/source.zip",
+        "sha256": "cafc14660f72d4515153956a830de983f8e4e36aebb5d24c740d7085796a09f0"
+      }
+    },
+    {
+      "stage": "native-INSTALLED-PROCESSOR",
+      "source_base": "2ccb456cc4b3d853c6bcfe691b8c69caf092a909",
+      "source_archive_sha256": "2458a5f6b8d837146faa50a925f159167f9a17b63ed6ca323ee42ceae54d2e24",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]INSTALLED-PROCESSOR$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-12T05:45:48.088547+00:00",
+          "finished_at": "2026-10-12T05:46:09.634727+00:00",
+          "exit": 8,
+          "log_sha256": "ba282924e763605755b5420c0dd89f7d70dc50560dfe7eac178004b7ac314998",
+          "log": {
+            "local_path": "out/evidence/processor-publication-checks/native-INSTALLED-PROCESSOR-434dfd6d/0.log",
+            "sha256": "ba282924e763605755b5420c0dd89f7d70dc50560dfe7eac178004b7ac314998"
+          },
+          "budget": {
+            "local_path": "out/evidence/processor-publication-checks/native-INSTALLED-PROCESSOR-434dfd6d/budget-0.txt",
+            "sha256": "2f0641f52a2b4451051d020f583e398669f38c66e5f68f0c7d565b699af0b765"
+          },
+          "executed_tests": 1
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/processor-publication-checks/native-INSTALLED-PROCESSOR-434dfd6d/result.json",
+        "sha256": "999d0eee7da325ec71b391c664a9ed4004999d0315156121cfb3baf38a08085b"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/processor-publication-checks/native-INSTALLED-PROCESSOR-434dfd6d/source-manifest.json",
+        "sha256": "db30c385f2767d06748e382dec30899f1b45324aef92d18d255d7d8653d78447"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/processor-publication-checks/native-INSTALLED-PROCESSOR-434dfd6d/source.zip",
+        "sha256": "2458a5f6b8d837146faa50a925f159167f9a17b63ed6ca323ee42ceae54d2e24"
+      }
+    },
+    {
+      "stage": "native-INSTALLED-PROCESSOR",
+      "source_base": "2ccb456cc4b3d853c6bcfe691b8c69caf092a909",
+      "source_archive_sha256": "12dad944f80e8a3d5b66b2cedb3b518a3597e1c873f54c8c16e30c1ff12067c4",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^native[.]INSTALLED-PROCESSOR$",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-12T05:44:31.033372+00:00",
+          "finished_at": "2026-10-12T05:44:52.547447+00:00",
+          "exit": 8,
+          "log_sha256": "9334a2753b5195ab7406b0150e0f35dc4815c40deed318c1383d456c34a79e85",
+          "log": {
+            "local_path": "out/evidence/processor-publication-checks/native-INSTALLED-PROCESSOR-9d52fdaf/0.log",
+            "sha256": "9334a2753b5195ab7406b0150e0f35dc4815c40deed318c1383d456c34a79e85"
+          },
+          "budget": {
+            "local_path": "out/evidence/processor-publication-checks/native-INSTALLED-PROCESSOR-9d52fdaf/budget-0.txt",
+            "sha256": "46909304805cc2f7311eee5c6da271900c3bf919046037c46084e1e9432ffbf9"
+          },
+          "executed_tests": 1
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/processor-publication-checks/native-INSTALLED-PROCESSOR-9d52fdaf/result.json",
+        "sha256": "fd939a1c1347678c5a06ec07826d61f87d8358bfa91dde0dacadcf6fdfebd623"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/processor-publication-checks/native-INSTALLED-PROCESSOR-9d52fdaf/source-manifest.json",
+        "sha256": "88c564b0ece61f429048e266de35fe30f9736a241d3b28a0a0657eab97e43ea2"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/processor-publication-checks/native-INSTALLED-PROCESSOR-9d52fdaf/source.zip",
+        "sha256": "12dad944f80e8a3d5b66b2cedb3b518a3597e1c873f54c8c16e30c1ff12067c4"
+      }
+    },
+    {
+      "stage": "processor",
+      "source_base": "2ccb456cc4b3d853c6bcfe691b8c69caf092a909",
+      "source_archive_sha256": "b15919f36f8a4c45be791e684f707618b7fd996b0d21ce0eaf83c4dcff200d32",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^(processor[.]|processor-linux[.]|processor-publication[.]|model[.]|demand[.]|demand-session[.]|network[.](RECONCILE-|PUBLICATION-)|composition[.])",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-12T05:24:37.831339+00:00",
+          "finished_at": "2026-10-12T05:24:39.190982+00:00",
+          "exit": 8,
+          "log_sha256": "ace395ce782dbf20ae2fbee9f6cee289e929813fcef8ad2b97251ebc95dadb0b",
+          "log": {
+            "local_path": "out/evidence/processor-publication-checks/processor-030bafa0/0.log",
+            "sha256": "ace395ce782dbf20ae2fbee9f6cee289e929813fcef8ad2b97251ebc95dadb0b"
+          },
+          "budget": {
+            "local_path": "out/evidence/processor-publication-checks/processor-030bafa0/budget-0.txt",
+            "sha256": "c5d2485928b93f0ea233f94ca645a420f7fdf0f41558cf06c7176ea4b5d2c341"
+          },
+          "executed_tests": 71
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/processor-publication-checks/processor-030bafa0/result.json",
+        "sha256": "a4f6c8d30e92fe85b945bc5f8dd921220d380cdc721475eee60710eb49ad0557"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/processor-publication-checks/processor-030bafa0/source-manifest.json",
+        "sha256": "006dcd2cf9210cfcaf01f5279c456f49df7457e825b2356617df325165ac348e"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/processor-publication-checks/processor-030bafa0/source.zip",
+        "sha256": "b15919f36f8a4c45be791e684f707618b7fd996b0d21ce0eaf83c4dcff200d32"
+      }
+    },
+    {
+      "stage": "processor",
+      "source_base": "2ccb456cc4b3d853c6bcfe691b8c69caf092a909",
+      "source_archive_sha256": "fbe5432f0df1ee6a043e802d3c2d41b4a99fd635b184de72909a5250a17abf2f",
+      "commands": [
+        {
+          "command": [
+            "wsl",
+            "-d",
+            "Ubuntu-24.04",
+            "-u",
+            "ir4runner",
+            "--exec",
+            "env",
+            "SYSPANE_LINUX_BUILD_ROOT=/home/ir4runner/.cache/syspane/campaign-229a498",
+            "ctest",
+            "--preset",
+            "linux-x64-gcc13",
+            "-R",
+            "^(processor[.]|processor-linux[.]|processor-publication[.]|model[.]|demand[.]|demand-session[.]|network[.](RECONCILE-|PUBLICATION-)|composition[.])",
+            "--output-on-failure"
+          ],
+          "started_at": "2026-10-12T05:32:27.975559+00:00",
+          "finished_at": "2026-10-12T05:32:29.500207+00:00",
+          "exit": 8,
+          "log_sha256": "88769ce0bca6405a147d850b0c44182e34200f835d2dbee3508b0055338be1c6",
+          "log": {
+            "local_path": "out/evidence/processor-publication-checks/processor-f187dd65/0.log",
+            "sha256": "88769ce0bca6405a147d850b0c44182e34200f835d2dbee3508b0055338be1c6"
+          },
+          "budget": {
+            "local_path": "out/evidence/processor-publication-checks/processor-f187dd65/budget-0.txt",
+            "sha256": "666a365535c10b5ca3382c24a5a32dcc11776235321c6c5021bfb8e1cb196e43"
+          },
+          "executed_tests": 71
+        }
+      ],
+      "record": {
+        "local_path": "out/evidence/processor-publication-checks/processor-f187dd65/result.json",
+        "sha256": "4f6a4ad7d27dd75ce7a2e15d6c46609176b3f205f91320762e5a7178033768c6"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/processor-publication-checks/processor-f187dd65/source-manifest.json",
+        "sha256": "e07d8bf74285a162b38213350e591051a39cc7d307d59b8d904a3d20849d0b56"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/processor-publication-checks/processor-f187dd65/source.zip",
+        "sha256": "fbe5432f0df1ee6a043e802d3c2d41b4a99fd635b184de72909a5250a17abf2f"
+      }
+    },
+    {
+      "stage": "windows",
+      "source_base": "2ccb456cc4b3d853c6bcfe691b8c69caf092a909",
+      "outcome": "blocked_before_launch",
+      "executed_tests": 0,
+      "reason": "Workspace build reservation did not fit the existing 8 GiB bound",
+      "budget": {
+        "local_path": "out/evidence/processor-publication-checks/windows-2ae84d17/budget-0.txt",
+        "sha256": "8e796ec17e513deadecca7f11a50625a664b5b1d156c6976a305848a4388d5a2"
+      },
+      "record": {
+        "local_path": "out/evidence/processor-publication-checks/windows-2ae84d17/blocked-launch.json",
+        "sha256": "c8d5032d9226480bceaf3c39011237eab34af1238bf5aeb5dce08d3b864774ec"
+      },
+      "source_manifest": {
+        "local_path": "out/evidence/processor-publication-checks/windows-2ae84d17/source-manifest.json",
+        "sha256": "46d61fb8a065c3f7a894a1d980580bc6a47c23073a1ff3ba9cf71ddb4bb7e2eb"
+      },
+      "source_archive": {
+        "local_path": "out/evidence/processor-publication-checks/windows-2ae84d17/source.zip",
+        "sha256": "e33f847d121288d1c91d1b792611d659bbc80610e02679ecb8665b4684952d42"
+      },
+      "commands": []
+    }
+  ],
+  "profiles": [
+    {
+      "profile": "windows-x64-gcc15",
+      "lock": {
+        "local_path": "source/build/targets/windows-x64-gcc15.lock.json",
+        "sha256": "29e3a729e248ac4b8204385d8f7ff4fa759a573437440e984236b150af7d80f0"
+      },
+      "artifacts": [
+        {
+          "local_path": "out/build/windows-x64-gcc15/syspane_processor_publication_tests.exe",
+          "sha256": "869f0a16ef49d136f4abd8d4431b6f45b51ce3b619fe566e994755a182541bdc"
+        },
+        {
+          "local_path": "out/build/windows-x64-gcc15/libsyspane_processor_publication.a",
+          "sha256": "b617a3864c9d91d90b66194b86afbb7733d6fa6a8fcf30a9c45517504ebc9bcb"
+        }
+      ],
+      "graph": {
+        "local_path": "out/build/windows-x64-gcc15/component-graph.txt",
+        "sha256": "b4dd00f5dda6fa08825be7d06b1259791d9893a24fb3d64c397aee61f14b0e89"
+      },
+      "scope": "Portable descriptor/publication/policy/demand cases; no native Windows CPU or historical guest claim"
+    },
+    {
+      "profile": "windows-x86-v141-xp",
+      "lock": {
+        "local_path": "source/build/targets/windows-x86-v141-xp.lock.json",
+        "sha256": "b085be5b794e9d49fd15ebc7e8a8b60737d0a8de49e4a3dbe88bdcd0107930a7"
+      },
+      "artifacts": [
+        {
+          "local_path": "out/build/windows-x86-v141-xp/Release/syspane_processor_publication_tests.exe",
+          "sha256": "7e121b769eba665d59cac38804529ae954807ba690a273a47d87ae89525f0ae9"
+        },
+        {
+          "local_path": "out/build/windows-x86-v141-xp/Release/syspane_processor_publication.lib",
+          "sha256": "48426f91bd0a62e72e8e83c2a40d2f4d854dfedcf538713a5d71f65140d3d484"
+        }
+      ],
+      "graph": {
+        "local_path": "out/build/windows-x86-v141-xp/component-graph.txt",
+        "sha256": "938f3465f4ff99d537a5783f1e6be4cf9be32e559dec148a759b5405d6532102"
+      },
+      "scope": "Portable descriptor/publication/policy/demand cases; no native Windows CPU or historical guest claim",
+      "historical_audit": {
+        "new_artifact": {
+          "machine": "x86",
+          "format": "PE32",
+          "os_version": [
+            5,
+            1
+          ],
+          "subsystem_version": [
+            5,
+            1
+          ],
+          "subsystem": "console",
+          "imports": {
+            "kernel32.dll": [
+              "CloseHandle",
+              "CompareStringW",
+              "CreateFileW",
+              "DecodePointer",
+              "DeleteCriticalSection",
+              "EncodePointer",
+              "EnterCriticalSection",
+              "EnumSystemLocalesW",
+              "ExitProcess",
+              "FindClose",
+              "FindFirstFileExA",
+              "FindNextFileA",
+              "FlushFileBuffers",
+              "FreeEnvironmentStringsW",
+              "FreeLibrary",
+              "GetACP",
+              "GetCPInfo",
+              "GetCommandLineA",
+              "GetCommandLineW",
+              "GetConsoleCP",
+              "GetConsoleMode",
+              "GetCurrentProcess",
+              "GetCurrentProcessId",
+              "GetCurrentThread",
+              "GetCurrentThreadId",
+              "GetEnvironmentStringsW",
+              "GetFileType",
+              "GetLastError",
+              "GetLocaleInfoW",
+              "GetModuleFileNameA",
+              "GetModuleHandleExW",
+              "GetModuleHandleW",
+              "GetOEMCP",
+              "GetProcAddress",
+              "GetProcessHeap",
+              "GetStartupInfoW",
+              "GetStdHandle",
+              "GetStringTypeW",
+              "GetSystemTimeAsFileTime",
+              "GetThreadTimes",
+              "GetUserDefaultLCID",
+              "HeapAlloc",
+              "HeapFree",
+              "HeapReAlloc",
+              "HeapSize",
+              "InitializeCriticalSectionAndSpinCount",
+              "InitializeSListHead",
+              "IsDebuggerPresent",
+              "IsProcessorFeaturePresent",
+              "IsValidCodePage",
+              "IsValidLocale",
+              "LCMapStringW",
+              "LeaveCriticalSection",
+              "LoadLibraryExW",
+              "MultiByteToWideChar",
+              "QueryPerformanceCounter",
+              "RaiseException",
+              "ReadConsoleW",
+              "ReadFile",
+              "RtlUnwind",
+              "SetEnvironmentVariableA",
+              "SetEvent",
+              "SetFilePointerEx",
+              "SetLastError",
+              "SetStdHandle",
+              "SetUnhandledExceptionFilter",
+              "SwitchToThread",
+              "TerminateProcess",
+              "TlsAlloc",
+              "TlsFree",
+              "TlsGetValue",
+              "TlsSetValue",
+              "UnhandledExceptionFilter",
+              "WideCharToMultiByte",
+              "WriteConsoleW",
+              "WriteFile"
+            ]
+          }
+        },
+        "actual_pinned_link_inputs": {
+          "resolved_external_libraries": [
+            {
+              "path": "C:\\Program Files (x86)\\Microsoft SDKs\\Windows\\v7.1A\\Lib\\kernel32.lib",
+              "sha256": "5c76cde0da4a277962316070b966e0829d35df93d5b54d79d81f964e56cd4819"
+            },
+            {
+              "path": "C:\\Program Files (x86)\\Microsoft SDKs\\Windows\\v7.1A\\Lib\\user32.lib",
+              "sha256": "08b1420a41e95c41071e3f9b87790a27d3a12345162df24cf86d2373801da9a4"
+            },
+            {
+              "path": "C:\\Program Files (x86)\\Microsoft SDKs\\Windows\\v7.1A\\Lib\\gdi32.lib",
+              "sha256": "fbf4ec63ecfab27b1e629c0610a29d62cf771eb84e0941bfb1f684e5e2db675c"
+            },
+            {
+              "path": "C:\\Program Files (x86)\\Microsoft SDKs\\Windows\\v7.1A\\Lib\\winspool.lib",
+              "sha256": "9d1fb5311e4d333a658be669480a99a920460cefbfb88bf354c2fe67f127d6e4"
+            },
+            {
+              "path": "C:\\Program Files (x86)\\Microsoft SDKs\\Windows\\v7.1A\\Lib\\shell32.lib",
+              "sha256": "c605f8a6dc74263496fb37e5e3742c5d62779212f62736d535420eed0ec1c45f"
+            },
+            {
+              "path": "C:\\Program Files (x86)\\Microsoft SDKs\\Windows\\v7.1A\\Lib\\ole32.lib",
+              "sha256": "1738b4bc74087d4cc732add3fd2dc935f9ef03c1a34c7868733173ba555d76a3"
+            },
+            {
+              "path": "C:\\Program Files (x86)\\Microsoft SDKs\\Windows\\v7.1A\\Lib\\oleaut32.lib",
+              "sha256": "1cd15bbe382e0e400ab4157eb078aa3944fdd01427b52cb0a01c09b91de81f47"
+            },
+            {
+              "path": "C:\\Program Files (x86)\\Microsoft SDKs\\Windows\\v7.1A\\Lib\\uuid.lib",
+              "sha256": "0181d94e25bc2f4daf646b6b1210514a3ba7cc4a6fec94160910ab10d30339e1"
+            },
+            {
+              "path": "C:\\Program Files (x86)\\Microsoft SDKs\\Windows\\v7.1A\\Lib\\comdlg32.lib",
+              "sha256": "d5223536534483fc54a53365709c0aba30bcd596f41ffe287f970e372c0d7ec2"
+            },
+            {
+              "path": "C:\\Program Files (x86)\\Microsoft SDKs\\Windows\\v7.1A\\Lib\\advapi32.lib",
+              "sha256": "efe98e7dce691e319cee71f160954a84e98a489c952d77c66bdfbebace4d09fc"
+            },
+            {
+              "path": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Enterprise\\VC\\Tools\\MSVC\\14.16.27023\\lib\\x86\\libcpmt.lib",
+              "sha256": "5e6b9709cc66e6dd9d9f7e080c7d433f9c0780981c9bb43c655a886066191052"
+            },
+            {
+              "path": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Enterprise\\VC\\Tools\\MSVC\\14.16.27023\\lib\\x86\\libcmt.lib",
+              "sha256": "6f9f5e6f5dd6b3b5d27a5346832f0f3a0d8d3e84fb3f5b84ff800f2fcf74ff5b"
+            },
+            {
+              "path": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Enterprise\\VC\\Tools\\MSVC\\14.16.27023\\lib\\x86\\oldnames.lib",
+              "sha256": "4ff86c61d6203008003c0b87da2e2cb87e81ba3a366153c37ed74ed206307430"
+            },
+            {
+              "path": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Enterprise\\VC\\Tools\\MSVC\\14.16.27023\\lib\\x86\\libvcruntime.lib",
+              "sha256": "17d1da5af3c741cdaaf634125e317d37dd2ab60206be03c9bc4ee143fff670bd"
+            },
+            {
+              "path": "C:\\Program Files (x86)\\Windows Kits\\10\\Lib\\10.0.10240.0\\ucrt\\x86\\libucrt.lib",
+              "sha256": "20b6a9d5e1e2198c8a7868045fae496c6a1b6743f22d1486920335f7c90bc860"
+            },
+            {
+              "path": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Enterprise\\VC\\Tools\\MSVC\\14.16.27023\\lib\\x86\\libconcrt.lib",
+              "sha256": "ed97d5f5e788b2a17fd21e5350b00b972f1c3784759a11ee64d927467065dde5"
+            }
+          ],
+          "msbuild_input_logs": {
+            "syspane_model_smoke.dir/Release/syspane_.9D9FF0A2.tlog/link.read.1.tlog": {
+              "sha256": "579bb68a20c61fbe9b6550f98d17bfc1ed236514e834e16872c46b069fe87007",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_MODEL_SMOKE.DIR\\RELEASE\\MODEL_SMOKE.OBJ\nC:\\PROGRAM FILES\\WINDHAWK\\ENGINE\\1.7.3\\ENGINE.INI\nC:\\WINDOWS\\GLOBALIZATION\\SORTING\\SORTDEFAULT.NLS\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_MODEL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\KERNEL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\USER32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\GDI32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\WINSPOOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\SHELL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLE32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLEAUT32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\UUID.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\COMDLG32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\ADVAPI32.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_MODEL_SMOKE.DIR\\RELEASE\\MODEL_SMOKE.OBJ\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCPMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\OLDNAMES.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBVCRUNTIME.LIB\nC:\\PROGRAM FILES (X86)\\WINDOWS KITS\\10\\LIB\\10.0.10240.0\\UCRT\\X86\\LIBUCRT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\BIN\\X64\\RC.EXE\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\BIN\\HOSTX64\\X64\\CVTRES.EXE\nC:\\WINDOWS\\SYSTEM32\\TZRES.DLL\n"
+            },
+            "syspane_model_smoke.dir/Release/syspane_.9D9FF0A2.tlog/CL.command.1.tlog": {
+              "sha256": "9954af821d9912babd0d1e925df888f1ed7a9db1870494ec70306d02d01b3e2c",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\APPLICATION\\MODEL_SMOKE.CPP\n/c /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\MODEL /nologo /W4 /WX /diagnostics:classic /O2 /Ob2 /Oy- /D _USING_V110_SDK71_ /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D WINVER=0x0501 /D _WIN32_WINNT=0x0501 /D _USING_V110_SDK71_ /D \"CMAKE_INTDIR=\\\"Release\\\"\" /EHsc /MT /arch:SSE2 /permissive- /std:c++17 /Fo\"SYSPANE_MODEL_SMOKE.DIR\\RELEASE\\\\\" /Fd\"SYSPANE_MODEL_SMOKE.DIR\\RELEASE\\VC141.PDB\" /TP /analyze-  /Zc:__cplusplus /utf-8 D:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\APPLICATION\\MODEL_SMOKE.CPP\n"
+            },
+            "syspane_model_tests.dir/Release/syspane_.64B30F19.tlog/link.read.1.tlog": {
+              "sha256": "ed940b63a54bacd66d113b1b4f1e32d9f91266d0df904d2aae200209e99ab49b",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_MODEL_TESTS.DIR\\RELEASE\\MODEL_TESTS.OBJ\nC:\\PROGRAM FILES\\WINDHAWK\\ENGINE\\1.7.3\\ENGINE.INI\nC:\\WINDOWS\\GLOBALIZATION\\SORTING\\SORTDEFAULT.NLS\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_MODEL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\KERNEL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\USER32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\GDI32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\WINSPOOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\SHELL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLE32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLEAUT32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\UUID.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\COMDLG32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\ADVAPI32.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_MODEL_TESTS.DIR\\RELEASE\\MODEL_TESTS.OBJ\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCPMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\OLDNAMES.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBVCRUNTIME.LIB\nC:\\PROGRAM FILES (X86)\\WINDOWS KITS\\10\\LIB\\10.0.10240.0\\UCRT\\X86\\LIBUCRT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\BIN\\X64\\RC.EXE\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\BIN\\HOSTX64\\X64\\CVTRES.EXE\nC:\\WINDOWS\\SYSTEM32\\TZRES.DLL\n"
+            },
+            "syspane_model_tests.dir/Release/syspane_.64B30F19.tlog/CL.command.1.tlog": {
+              "sha256": "5e3e98cb54c4bb5023c8ed1152bc81cbd92d3c0a146c8f73334ef2b48b9690e3",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\MODEL\\MODEL_TESTS.CPP\n/c /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\MODEL /nologo /W4 /WX /diagnostics:classic /O2 /Ob2 /Oy- /D _USING_V110_SDK71_ /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D WINVER=0x0501 /D _WIN32_WINNT=0x0501 /D _USING_V110_SDK71_ /D \"CMAKE_INTDIR=\\\"Release\\\"\" /EHsc /MT /arch:SSE2 /permissive- /std:c++17 /Fo\"SYSPANE_MODEL_TESTS.DIR\\RELEASE\\\\\" /Fd\"SYSPANE_MODEL_TESTS.DIR\\RELEASE\\VC141.PDB\" /TP /analyze-  /Zc:__cplusplus /utf-8 D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\MODEL\\MODEL_TESTS.CPP\n"
+            },
+            "syspane_protocol_tests.dir/Release/syspane_.B08ED1F6.tlog/link.read.1.tlog": {
+              "sha256": "1847f252dbfa4b6782557298c0718baa0b65a9eca3360733bc83099b3b45a99e",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_PROTOCOL_TESTS.DIR\\RELEASE\\PROTOCOL_TESTS.OBJ\nC:\\PROGRAM FILES\\WINDHAWK\\ENGINE\\1.7.3\\ENGINE.INI\nC:\\WINDOWS\\GLOBALIZATION\\SORTING\\SORTDEFAULT.NLS\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_PROTOCOL.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_CONFIGURATION.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\KERNEL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\USER32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\GDI32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\WINSPOOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\SHELL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLE32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLEAUT32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\UUID.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\COMDLG32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\ADVAPI32.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_PROTOCOL_TESTS.DIR\\RELEASE\\PROTOCOL_TESTS.OBJ\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCPMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\OLDNAMES.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBVCRUNTIME.LIB\nC:\\PROGRAM FILES (X86)\\WINDOWS KITS\\10\\LIB\\10.0.10240.0\\UCRT\\X86\\LIBUCRT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\BIN\\X64\\RC.EXE\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\BIN\\HOSTX64\\X64\\CVTRES.EXE\nC:\\WINDOWS\\SYSTEM32\\TZRES.DLL\n"
+            },
+            "syspane_protocol_tests.dir/Release/syspane_.B08ED1F6.tlog/CL.command.1.tlog": {
+              "sha256": "3a6be506c02c1cae83334713af2a47aed90b944a18b5eca51cb96e3a71280b38",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\PROTOCOL\\PROTOCOL_TESTS.CPP\n/c /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PROTOCOL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\CONFIGURATION /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\THIRD_PARTY /nologo /W4 /WX /diagnostics:classic /O2 /Ob2 /Oy- /D _USING_V110_SDK71_ /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D WINVER=0x0501 /D _WIN32_WINNT=0x0501 /D _USING_V110_SDK71_ /D JSON_DIAGNOSTIC_POSITIONS=1 /D JSON_DIAGNOSTICS=0 /D \"CMAKE_INTDIR=\\\"Release\\\"\" /EHsc /MT /arch:SSE2 /permissive- /std:c++17 /Fo\"SYSPANE_PROTOCOL_TESTS.DIR\\RELEASE\\\\\" /Fd\"SYSPANE_PROTOCOL_TESTS.DIR\\RELEASE\\VC141.PDB\" /TP /analyze-  /Zc:__cplusplus /utf-8 D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\PROTOCOL\\PROTOCOL_TESTS.CPP\n"
+            },
+            "syspane_recovery_tests.dir/Release/syspane_.7E1C8F3C.tlog/link.read.1.tlog": {
+              "sha256": "5288ca8fa83d3c080c24a895f07f7e6cc4043f8f90f40f00f1ad9364d649c2b3",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_RECOVERY_TESTS.DIR\\RELEASE\\RECOVERY_TESTS.OBJ\nC:\\PROGRAM FILES\\WINDHAWK\\ENGINE\\1.7.3\\ENGINE.INI\nC:\\WINDOWS\\GLOBALIZATION\\SORTING\\SORTDEFAULT.NLS\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_RECOVERY.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_MODEL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\KERNEL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\USER32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\GDI32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\WINSPOOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\SHELL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLE32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLEAUT32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\UUID.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\COMDLG32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\ADVAPI32.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_RECOVERY_TESTS.DIR\\RELEASE\\RECOVERY_TESTS.OBJ\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCPMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\OLDNAMES.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBVCRUNTIME.LIB\nC:\\PROGRAM FILES (X86)\\WINDOWS KITS\\10\\LIB\\10.0.10240.0\\UCRT\\X86\\LIBUCRT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\BIN\\X64\\RC.EXE\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\BIN\\HOSTX64\\X64\\CVTRES.EXE\nC:\\WINDOWS\\SYSTEM32\\TZRES.DLL\n"
+            },
+            "syspane_recovery_tests.dir/Release/syspane_.7E1C8F3C.tlog/CL.command.1.tlog": {
+              "sha256": "ab4bfccf0126fab460c4eb5add571e3ea22fcddd95dfb57f5329dbff75d330cd",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\FAULT\\RECOVERY_TESTS.CPP\n/c /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\DIAGNOSTICS /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\MODEL /nologo /W4 /WX /diagnostics:classic /O2 /Ob2 /Oy- /D _USING_V110_SDK71_ /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D WINVER=0x0501 /D _WIN32_WINNT=0x0501 /D _USING_V110_SDK71_ /D \"CMAKE_INTDIR=\\\"Release\\\"\" /EHsc /MT /arch:SSE2 /permissive- /std:c++17 /Fo\"SYSPANE_RECOVERY_TESTS.DIR\\RELEASE\\\\\" /Fd\"SYSPANE_RECOVERY_TESTS.DIR\\RELEASE\\VC141.PDB\" /TP /analyze-  /Zc:__cplusplus /utf-8 D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\FAULT\\RECOVERY_TESTS.CPP\n"
+            },
+            "syspane_diagnostic_tests.dir/Release/syspane_.FFEF4C6B.tlog/link.read.1.tlog": {
+              "sha256": "94f4bf5a10621d2df7b90a8d4fab6e44262bd36dfa72cf0749d1d8a7cda78d7f",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_DIAGNOSTIC_TESTS.DIR\\RELEASE\\DIAGNOSTIC_TESTS.OBJ\nC:\\PROGRAM FILES\\WINDHAWK\\ENGINE\\1.7.3\\ENGINE.INI\nC:\\WINDOWS\\GLOBALIZATION\\SORTING\\SORTDEFAULT.NLS\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_DIAGNOSTIC.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_CONFIGURATION.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_PROTOCOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\KERNEL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\USER32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\GDI32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\WINSPOOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\SHELL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLE32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLEAUT32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\UUID.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\COMDLG32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\ADVAPI32.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_DIAGNOSTIC_TESTS.DIR\\RELEASE\\DIAGNOSTIC_TESTS.OBJ\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCPMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\OLDNAMES.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBVCRUNTIME.LIB\nC:\\PROGRAM FILES (X86)\\WINDOWS KITS\\10\\LIB\\10.0.10240.0\\UCRT\\X86\\LIBUCRT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\BIN\\X64\\RC.EXE\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\BIN\\HOSTX64\\X64\\CVTRES.EXE\nC:\\WINDOWS\\SYSTEM32\\TZRES.DLL\n"
+            },
+            "syspane_diagnostic_tests.dir/Release/syspane_.FFEF4C6B.tlog/CL.command.1.tlog": {
+              "sha256": "f5147d4515694c1d044863e127a3ce347e69786b0c081abe25343be2d2c17d64",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\FAULT\\DIAGNOSTIC_TESTS.CPP\n/c /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\DIAGNOSTICS /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\CONFIGURATION /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PROTOCOL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\THIRD_PARTY /nologo /W4 /WX /diagnostics:classic /O2 /Ob2 /Oy- /D _USING_V110_SDK71_ /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D WINVER=0x0501 /D _WIN32_WINNT=0x0501 /D _USING_V110_SDK71_ /D JSON_DIAGNOSTIC_POSITIONS=1 /D JSON_DIAGNOSTICS=0 /D \"CMAKE_INTDIR=\\\"Release\\\"\" /EHsc /MT /arch:SSE2 /permissive- /std:c++17 /Fo\"SYSPANE_DIAGNOSTIC_TESTS.DIR\\RELEASE\\\\\" /Fd\"SYSPANE_DIAGNOSTIC_TESTS.DIR\\RELEASE\\VC141.PDB\" /TP /analyze-  /Zc:__cplusplus /utf-8 D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\FAULT\\DIAGNOSTIC_TESTS.CPP\n"
+            },
+            "syspane_data_view_tests.dir/Release/syspane_.2F15C4DC.tlog/link.read.1.tlog": {
+              "sha256": "41655846cb25b6b18e1d2f5d03854342ff78f0ea4e397933849bb49a11649e73",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_DATA_VIEW_TESTS.DIR\\RELEASE\\DATA_VIEW_TESTS.OBJ\nC:\\PROGRAM FILES\\WINDHAWK\\ENGINE\\1.7.3\\ENGINE.INI\nC:\\WINDOWS\\GLOBALIZATION\\SORTING\\SORTDEFAULT.NLS\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_DATA_VIEW.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_MODEL.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_RECOVERY.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_CONFIGURATION.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_PROTOCOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\KERNEL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\USER32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\GDI32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\WINSPOOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\SHELL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLE32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLEAUT32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\UUID.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\COMDLG32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\ADVAPI32.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_DATA_VIEW_TESTS.DIR\\RELEASE\\DATA_VIEW_TESTS.OBJ\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCPMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\OLDNAMES.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBVCRUNTIME.LIB\nC:\\PROGRAM FILES (X86)\\WINDOWS KITS\\10\\LIB\\10.0.10240.0\\UCRT\\X86\\LIBUCRT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\BIN\\X64\\RC.EXE\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\BIN\\HOSTX64\\X64\\CVTRES.EXE\nC:\\WINDOWS\\SYSTEM32\\TZRES.DLL\n"
+            },
+            "syspane_data_view_tests.dir/Release/syspane_.2F15C4DC.tlog/CL.command.1.tlog": {
+              "sha256": "f140e9fd20b1dc55075bd47ade28f5289ff53646eb15e2a049a9e61f3fb501f8",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\FAULT\\DATA_VIEW_TESTS.CPP\n/c /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\DIAGNOSTICS /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\MODEL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\CONFIGURATION /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PROTOCOL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\THIRD_PARTY /nologo /W4 /WX /diagnostics:classic /O2 /Ob2 /Oy- /D _USING_V110_SDK71_ /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D WINVER=0x0501 /D _WIN32_WINNT=0x0501 /D _USING_V110_SDK71_ /D JSON_DIAGNOSTIC_POSITIONS=1 /D JSON_DIAGNOSTICS=0 /D \"CMAKE_INTDIR=\\\"Release\\\"\" /EHsc /MT /arch:SSE2 /permissive- /std:c++17 /Fo\"SYSPANE_DATA_VIEW_TESTS.DIR\\RELEASE\\\\\" /Fd\"SYSPANE_DATA_VIEW_TESTS.DIR\\RELEASE\\VC141.PDB\" /TP /analyze-  /Zc:__cplusplus /utf-8 D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\FAULT\\DATA_VIEW_TESTS.CPP\n"
+            },
+            "syspane_telemetry_tests.dir/Release/syspane_.2A1A362A.tlog/link.read.1.tlog": {
+              "sha256": "0799461a3e3dc65a401d1198e8437f851a9febfc1f7539f3d9a0f6f41373b65c",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_TELEMETRY_TESTS.DIR\\RELEASE\\TELEMETRY_TESTS.OBJ\nC:\\PROGRAM FILES\\WINDHAWK\\ENGINE\\1.7.3\\ENGINE.INI\nC:\\WINDOWS\\GLOBALIZATION\\SORTING\\SORTDEFAULT.NLS\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_PROTOCOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\KERNEL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\USER32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\GDI32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\WINSPOOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\SHELL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLE32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLEAUT32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\UUID.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\COMDLG32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\ADVAPI32.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_TELEMETRY_TESTS.DIR\\RELEASE\\TELEMETRY_TESTS.OBJ\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCPMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\OLDNAMES.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBVCRUNTIME.LIB\nC:\\PROGRAM FILES (X86)\\WINDOWS KITS\\10\\LIB\\10.0.10240.0\\UCRT\\X86\\LIBUCRT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\BIN\\X64\\RC.EXE\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\BIN\\HOSTX64\\X64\\CVTRES.EXE\nC:\\WINDOWS\\SYSTEM32\\TZRES.DLL\n"
+            },
+            "syspane_telemetry_tests.dir/Release/syspane_.2A1A362A.tlog/CL.command.1.tlog": {
+              "sha256": "9cd6725bb66b3ffde7c53e202f5c365ce283b2d5a9d92f211b738ec37f52176b",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\PROTOCOL\\TELEMETRY_TESTS.CPP\n/c /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PROTOCOL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\THIRD_PARTY /nologo /W4 /WX /diagnostics:classic /O2 /Ob2 /Oy- /D _USING_V110_SDK71_ /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D WINVER=0x0501 /D _WIN32_WINNT=0x0501 /D _USING_V110_SDK71_ /D JSON_DIAGNOSTIC_POSITIONS=1 /D JSON_DIAGNOSTICS=0 /D \"CMAKE_INTDIR=\\\"Release\\\"\" /EHsc /MT /arch:SSE2 /permissive- /std:c++17 /Fo\"SYSPANE_TELEMETRY_TESTS.DIR\\RELEASE\\\\\" /Fd\"SYSPANE_TELEMETRY_TESTS.DIR\\RELEASE\\VC141.PDB\" /TP /analyze-  /Zc:__cplusplus /utf-8 D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\PROTOCOL\\TELEMETRY_TESTS.CPP\n"
+            },
+            "syspane_state_import_tests.dir/Release/syspane_.714D9F49.tlog/link.read.1.tlog": {
+              "sha256": "6885d702377d4c605b43920b03a137cb814aa1925e7e622e145447bd9aff4f00",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_STATE_IMPORT_TESTS.DIR\\RELEASE\\STATE_IMPORT_TESTS.OBJ\nC:\\PROGRAM FILES\\WINDHAWK\\ENGINE\\1.7.3\\ENGINE.INI\nC:\\WINDOWS\\GLOBALIZATION\\SORTING\\SORTDEFAULT.NLS\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_DATA_VIEW.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_MODEL.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_RECOVERY.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_CONFIGURATION.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_PROTOCOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\KERNEL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\USER32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\GDI32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\WINSPOOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\SHELL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLE32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLEAUT32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\UUID.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\COMDLG32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\ADVAPI32.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_STATE_IMPORT_TESTS.DIR\\RELEASE\\STATE_IMPORT_TESTS.OBJ\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCPMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\OLDNAMES.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBVCRUNTIME.LIB\nC:\\PROGRAM FILES (X86)\\WINDOWS KITS\\10\\LIB\\10.0.10240.0\\UCRT\\X86\\LIBUCRT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\BIN\\X64\\RC.EXE\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\BIN\\HOSTX64\\X64\\CVTRES.EXE\nC:\\WINDOWS\\SYSTEM32\\TZRES.DLL\n"
+            },
+            "syspane_state_import_tests.dir/Release/syspane_.714D9F49.tlog/CL.command.1.tlog": {
+              "sha256": "9e309c1cab8704e7ae64e57ae51769585e6e1f6f05960fed979e0c285bc1a5ad",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\FAULT\\STATE_IMPORT_TESTS.CPP\n/c /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\DIAGNOSTICS /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\MODEL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\CONFIGURATION /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PROTOCOL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\THIRD_PARTY /nologo /W4 /WX /diagnostics:classic /O2 /Ob2 /Oy- /D _USING_V110_SDK71_ /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D WINVER=0x0501 /D _WIN32_WINNT=0x0501 /D _USING_V110_SDK71_ /D JSON_DIAGNOSTIC_POSITIONS=1 /D JSON_DIAGNOSTICS=0 /D \"CMAKE_INTDIR=\\\"Release\\\"\" /EHsc /MT /arch:SSE2 /permissive- /std:c++17 /Fo\"SYSPANE_STATE_IMPORT_TESTS.DIR\\RELEASE\\\\\" /Fd\"SYSPANE_STATE_IMPORT_TESTS.DIR\\RELEASE\\VC141.PDB\" /TP /analyze-  /Zc:__cplusplus /utf-8 D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\FAULT\\STATE_IMPORT_TESTS.CPP\n"
+            },
+            "syspane_subscription_tests.dir/Release/syspane_.57FD90B5.tlog/link.read.1.tlog": {
+              "sha256": "2d0d902565c6ead9f716b581b5a0a149c6d74b7d93e98b6fbd9a1e1f66537702",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_SUBSCRIPTION_TESTS.DIR\\RELEASE\\SUBSCRIPTION_TESTS.OBJ\nC:\\PROGRAM FILES\\WINDHAWK\\ENGINE\\1.7.3\\ENGINE.INI\nC:\\WINDOWS\\GLOBALIZATION\\SORTING\\SORTDEFAULT.NLS\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_CONFIGURATION.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_PROTOCOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\KERNEL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\USER32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\GDI32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\WINSPOOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\SHELL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLE32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLEAUT32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\UUID.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\COMDLG32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\ADVAPI32.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_SUBSCRIPTION_TESTS.DIR\\RELEASE\\SUBSCRIPTION_TESTS.OBJ\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCPMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\OLDNAMES.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBVCRUNTIME.LIB\nC:\\PROGRAM FILES (X86)\\WINDOWS KITS\\10\\LIB\\10.0.10240.0\\UCRT\\X86\\LIBUCRT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\BIN\\X64\\RC.EXE\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\BIN\\HOSTX64\\X64\\CVTRES.EXE\nC:\\WINDOWS\\SYSTEM32\\TZRES.DLL\n"
+            },
+            "syspane_subscription_tests.dir/Release/syspane_.57FD90B5.tlog/CL.command.1.tlog": {
+              "sha256": "2466a5b3c0bd1d30ae45f9dd1970ca7bdf99977b20c21978e44649afd63cb1bc",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\PROTOCOL\\SUBSCRIPTION_TESTS.CPP\n/c /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\CONFIGURATION /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PROTOCOL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\THIRD_PARTY /nologo /W4 /WX /diagnostics:classic /O2 /Ob2 /Oy- /D _USING_V110_SDK71_ /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D WINVER=0x0501 /D _WIN32_WINNT=0x0501 /D _USING_V110_SDK71_ /D JSON_DIAGNOSTIC_POSITIONS=1 /D JSON_DIAGNOSTICS=0 /D \"CMAKE_INTDIR=\\\"Release\\\"\" /EHsc /MT /arch:SSE2 /permissive- /std:c++17 /Fo\"SYSPANE_SUBSCRIPTION_TESTS.DIR\\RELEASE\\\\\" /Fd\"SYSPANE_SUBSCRIPTION_TESTS.DIR\\RELEASE\\VC141.PDB\" /TP /analyze-  /Zc:__cplusplus /utf-8 D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\PROTOCOL\\SUBSCRIPTION_TESTS.CPP\n"
+            },
+            "syspane_measured_time_tests.dir/Release/syspane_.59C8FDBD.tlog/link.read.1.tlog": {
+              "sha256": "f9aab56ff72e072667e557a640a97c5cda075fa3726688bc03aca0d103c97457",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_MEASURED_TIME_TESTS.DIR\\RELEASE\\MEASURED_TIME_TESTS.OBJ\nC:\\PROGRAM FILES\\WINDHAWK\\ENGINE\\1.7.3\\ENGINE.INI\nC:\\WINDOWS\\GLOBALIZATION\\SORTING\\SORTDEFAULT.NLS\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_DATA_VIEW.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_MODEL.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_RECOVERY.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_CONFIGURATION.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_PROTOCOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\KERNEL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\USER32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\GDI32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\WINSPOOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\SHELL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLE32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLEAUT32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\UUID.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\COMDLG32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\ADVAPI32.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_MEASURED_TIME_TESTS.DIR\\RELEASE\\MEASURED_TIME_TESTS.OBJ\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCPMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\OLDNAMES.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBVCRUNTIME.LIB\nC:\\PROGRAM FILES (X86)\\WINDOWS KITS\\10\\LIB\\10.0.10240.0\\UCRT\\X86\\LIBUCRT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\BIN\\X64\\RC.EXE\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\BIN\\HOSTX64\\X64\\CVTRES.EXE\nC:\\WINDOWS\\SYSTEM32\\TZRES.DLL\n"
+            },
+            "syspane_measured_time_tests.dir/Release/syspane_.59C8FDBD.tlog/CL.command.1.tlog": {
+              "sha256": "c8090c881eac60d42efd27a9b8d3fbaa1f2111c25aadc90e0372c6520c0dac7f",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\FAULT\\MEASURED_TIME_TESTS.CPP\n/c /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\DIAGNOSTICS /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\MODEL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\CONFIGURATION /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PROTOCOL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\THIRD_PARTY /nologo /W4 /WX /diagnostics:classic /O2 /Ob2 /Oy- /D _USING_V110_SDK71_ /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D WINVER=0x0501 /D _WIN32_WINNT=0x0501 /D _USING_V110_SDK71_ /D JSON_DIAGNOSTIC_POSITIONS=1 /D JSON_DIAGNOSTICS=0 /D \"CMAKE_INTDIR=\\\"Release\\\"\" /EHsc /MT /arch:SSE2 /permissive- /std:c++17 /Fo\"SYSPANE_MEASURED_TIME_TESTS.DIR\\RELEASE\\\\\" /Fd\"SYSPANE_MEASURED_TIME_TESTS.DIR\\RELEASE\\VC141.PDB\" /TP /analyze-  /Zc:__cplusplus /utf-8 D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\FAULT\\MEASURED_TIME_TESTS.CPP\n"
+            },
+            "syspane_network_state_tests.dir/Release/syspane_.AF5DDF9E.tlog/link.read.1.tlog": {
+              "sha256": "8a6cf7a10bc01fc44bbb3a866c18327dfe96e06c7b038910badd18efefc7e8ab",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_NETWORK_STATE_TESTS.DIR\\RELEASE\\NETWORK_STATE_TESTS.OBJ\nC:\\PROGRAM FILES\\WINDHAWK\\ENGINE\\1.7.3\\ENGINE.INI\nC:\\WINDOWS\\GLOBALIZATION\\SORTING\\SORTDEFAULT.NLS\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_NETWORK_STATE.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_MODEL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\KERNEL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\USER32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\GDI32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\WINSPOOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\SHELL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLE32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLEAUT32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\UUID.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\COMDLG32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\ADVAPI32.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_NETWORK_STATE_TESTS.DIR\\RELEASE\\NETWORK_STATE_TESTS.OBJ\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCPMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\OLDNAMES.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBVCRUNTIME.LIB\nC:\\PROGRAM FILES (X86)\\WINDOWS KITS\\10\\LIB\\10.0.10240.0\\UCRT\\X86\\LIBUCRT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\BIN\\X64\\RC.EXE\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\BIN\\HOSTX64\\X64\\CVTRES.EXE\nC:\\WINDOWS\\SYSTEM32\\TZRES.DLL\n"
+            },
+            "syspane_network_state_tests.dir/Release/syspane_.AF5DDF9E.tlog/CL.command.1.tlog": {
+              "sha256": "b48c6143224a90f0241d3d08ee79492ae48de25775b5b38345a52abafaaa770a",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\FAULT\\NETWORK_STATE_TESTS.CPP\n/c /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\RUNTIME /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\MODEL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PLATFORM /nologo /W4 /WX /diagnostics:classic /O2 /Ob2 /Oy- /D _USING_V110_SDK71_ /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D WINVER=0x0501 /D _WIN32_WINNT=0x0501 /D _USING_V110_SDK71_ /D \"CMAKE_INTDIR=\\\"Release\\\"\" /EHsc /MT /arch:SSE2 /permissive- /std:c++17 /Fo\"SYSPANE_NETWORK_STATE_TESTS.DIR\\RELEASE\\\\\" /Fd\"SYSPANE_NETWORK_STATE_TESTS.DIR\\RELEASE\\VC141.PDB\" /TP /analyze-  /Zc:__cplusplus /utf-8 D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\FAULT\\NETWORK_STATE_TESTS.CPP\n"
+            },
+            "syspane_network_publication_tests.dir/Release/syspane_.769EA2FC.tlog/link.read.1.tlog": {
+              "sha256": "43fc80021e713e31af0d9b7d494e35e8549e67fd47f03d57355f27538a4c7bb9",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_NETWORK_PUBLICATION_TESTS.DIR\\RELEASE\\NETWORK_PUBLICATION_TESTS.OBJ\nC:\\PROGRAM FILES\\WINDHAWK\\ENGINE\\1.7.3\\ENGINE.INI\nC:\\WINDOWS\\GLOBALIZATION\\SORTING\\SORTDEFAULT.NLS\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_NETWORK_PUBLICATION.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_DATA_VIEW.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_NETWORK_STATE.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_MODEL.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_RECOVERY.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_CONFIGURATION.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_PROTOCOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\KERNEL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\USER32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\GDI32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\WINSPOOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\SHELL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLE32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLEAUT32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\UUID.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\COMDLG32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\ADVAPI32.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_NETWORK_PUBLICATION_TESTS.DIR\\RELEASE\\NETWORK_PUBLICATION_TESTS.OBJ\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCPMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\OLDNAMES.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBVCRUNTIME.LIB\nC:\\PROGRAM FILES (X86)\\WINDOWS KITS\\10\\LIB\\10.0.10240.0\\UCRT\\X86\\LIBUCRT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\BIN\\X64\\RC.EXE\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\BIN\\HOSTX64\\X64\\CVTRES.EXE\nC:\\WINDOWS\\SYSTEM32\\TZRES.DLL\n"
+            },
+            "syspane_network_publication_tests.dir/Release/syspane_.769EA2FC.tlog/CL.command.1.tlog": {
+              "sha256": "287337dfc72c900cf68cb5b59fafa1fb1add68f6509d9d66c15d489de08a35df",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\FAULT\\NETWORK_PUBLICATION_TESTS.CPP\n/c /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\RUNTIME /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\MODEL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PLATFORM /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PROTOCOL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\DIAGNOSTICS /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\CONFIGURATION /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\THIRD_PARTY /nologo /W4 /WX /diagnostics:classic /O2 /Ob2 /Oy- /D _USING_V110_SDK71_ /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D WINVER=0x0501 /D _WIN32_WINNT=0x0501 /D _USING_V110_SDK71_ /D JSON_DIAGNOSTIC_POSITIONS=1 /D JSON_DIAGNOSTICS=0 /D \"CMAKE_INTDIR=\\\"Release\\\"\" /EHsc /MT /arch:SSE2 /permissive- /std:c++17 /Fo\"SYSPANE_NETWORK_PUBLICATION_TESTS.DIR\\RELEASE\\\\\" /Fd\"SYSPANE_NETWORK_PUBLICATION_TESTS.DIR\\RELEASE\\VC141.PDB\" /TP /analyze-  /Zc:__cplusplus /utf-8 D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\FAULT\\NETWORK_PUBLICATION_TESTS.CPP\n"
+            },
+            "syspane_network_view_tests.dir/Release/syspane_.B8C26721.tlog/link.read.1.tlog": {
+              "sha256": "e5e08bd4f6c301b8b5f278314ff6ff69250c2d2c458e8e867910af5dff27ac60",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_NETWORK_VIEW_TESTS.DIR\\RELEASE\\NETWORK_VIEW_TESTS.OBJ\nC:\\PROGRAM FILES\\WINDHAWK\\ENGINE\\1.7.3\\ENGINE.INI\nC:\\WINDOWS\\GLOBALIZATION\\SORTING\\SORTDEFAULT.NLS\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_NETWORK_VIEW.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_NETWORK_PUBLICATION.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_DATA_VIEW.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_RECOVERY.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_CONFIGURATION.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_NETWORK_STATE.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_MODEL.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_PROTOCOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\KERNEL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\USER32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\GDI32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\WINSPOOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\SHELL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLE32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLEAUT32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\UUID.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\COMDLG32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\ADVAPI32.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_NETWORK_VIEW_TESTS.DIR\\RELEASE\\NETWORK_VIEW_TESTS.OBJ\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCPMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\OLDNAMES.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBVCRUNTIME.LIB\nC:\\PROGRAM FILES (X86)\\WINDOWS KITS\\10\\LIB\\10.0.10240.0\\UCRT\\X86\\LIBUCRT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\BIN\\X64\\RC.EXE\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\BIN\\HOSTX64\\X64\\CVTRES.EXE\nC:\\WINDOWS\\SYSTEM32\\TZRES.DLL\n"
+            },
+            "syspane_network_view_tests.dir/Release/syspane_.B8C26721.tlog/CL.command.1.tlog": {
+              "sha256": "c7959b2bee7fc54a1e1d1acfd1e7815df8afb08f92a4f1c726721b121d246646",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\RENDERING\\NETWORK_VIEW_TESTS.CPP\n/c /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\RENDERING /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\DIAGNOSTICS /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\MODEL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\CONFIGURATION /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PROTOCOL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\RUNTIME /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PLATFORM /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\THIRD_PARTY /nologo /W4 /WX /diagnostics:classic /O2 /Ob2 /Oy- /D _USING_V110_SDK71_ /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D WINVER=0x0501 /D _WIN32_WINNT=0x0501 /D _USING_V110_SDK71_ /D JSON_DIAGNOSTIC_POSITIONS=1 /D JSON_DIAGNOSTICS=0 /D \"CMAKE_INTDIR=\\\"Release\\\"\" /EHsc /MT /arch:SSE2 /permissive- /std:c++17 /Fo\"SYSPANE_NETWORK_VIEW_TESTS.DIR\\RELEASE\\\\\" /Fd\"SYSPANE_NETWORK_VIEW_TESTS.DIR\\RELEASE\\VC141.PDB\" /TP /analyze-  /Zc:__cplusplus /utf-8 D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\RENDERING\\NETWORK_VIEW_TESTS.CPP\n"
+            },
+            "syspane_demand_tests.dir/Release/syspane_.361ADC61.tlog/link.read.1.tlog": {
+              "sha256": "01150d37b7506f6cf8443c81c14025a5f7cd5607a3520f3e76255fe51fed3d3e",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_DEMAND_TESTS.DIR\\RELEASE\\DEMAND_TESTS.OBJ\nC:\\PROGRAM FILES\\WINDHAWK\\ENGINE\\1.7.3\\ENGINE.INI\nC:\\WINDOWS\\GLOBALIZATION\\SORTING\\SORTDEFAULT.NLS\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_DEMAND.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_CONFIGURATION.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_PROTOCOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\KERNEL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\USER32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\GDI32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\WINSPOOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\SHELL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLE32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLEAUT32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\UUID.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\COMDLG32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\ADVAPI32.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_DEMAND_TESTS.DIR\\RELEASE\\DEMAND_TESTS.OBJ\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCPMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\OLDNAMES.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBVCRUNTIME.LIB\nC:\\PROGRAM FILES (X86)\\WINDOWS KITS\\10\\LIB\\10.0.10240.0\\UCRT\\X86\\LIBUCRT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\BIN\\X64\\RC.EXE\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\BIN\\HOSTX64\\X64\\CVTRES.EXE\nC:\\WINDOWS\\SYSTEM32\\TZRES.DLL\n"
+            },
+            "syspane_demand_tests.dir/Release/syspane_.361ADC61.tlog/CL.command.1.tlog": {
+              "sha256": "88bc9789f2f444e5a7562a40e6c437d1d45a4021ac0ac8de268e71963bd11075",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\FAULT\\DEMAND_TESTS.CPP\n/c /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\RUNTIME /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\CONFIGURATION /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PROTOCOL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\THIRD_PARTY /nologo /W4 /WX /diagnostics:classic /O2 /Ob2 /Oy- /D _USING_V110_SDK71_ /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D WINVER=0x0501 /D _WIN32_WINNT=0x0501 /D _USING_V110_SDK71_ /D JSON_DIAGNOSTIC_POSITIONS=1 /D JSON_DIAGNOSTICS=0 /D \"CMAKE_INTDIR=\\\"Release\\\"\" /EHsc /MT /arch:SSE2 /permissive- /std:c++17 /Fo\"SYSPANE_DEMAND_TESTS.DIR\\RELEASE\\\\\" /Fd\"SYSPANE_DEMAND_TESTS.DIR\\RELEASE\\VC141.PDB\" /TP /analyze-  /Zc:__cplusplus /utf-8 D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\FAULT\\DEMAND_TESTS.CPP\n"
+            },
+            "syspane_demand_session_tests.dir/Release/syspane_.9B9BDF40.tlog/link.read.1.tlog": {
+              "sha256": "3dda3f10204bdb3b0dc22bdefffccab4bf5907b19bcf0ab503850444883212f0",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_DEMAND_SESSION_TESTS.DIR\\RELEASE\\DEMAND_SESSION_TESTS.OBJ\nC:\\PROGRAM FILES\\WINDHAWK\\ENGINE\\1.7.3\\ENGINE.INI\nC:\\WINDOWS\\GLOBALIZATION\\SORTING\\SORTDEFAULT.NLS\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_DEMAND_SESSIONS.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_DEMAND.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_CONFIGURATION.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_PROTOCOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\KERNEL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\USER32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\GDI32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\WINSPOOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\SHELL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLE32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLEAUT32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\UUID.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\COMDLG32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\ADVAPI32.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_DEMAND_SESSION_TESTS.DIR\\RELEASE\\DEMAND_SESSION_TESTS.OBJ\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCPMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\OLDNAMES.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBVCRUNTIME.LIB\nC:\\PROGRAM FILES (X86)\\WINDOWS KITS\\10\\LIB\\10.0.10240.0\\UCRT\\X86\\LIBUCRT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\BIN\\X64\\RC.EXE\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\BIN\\HOSTX64\\X64\\CVTRES.EXE\nC:\\WINDOWS\\SYSTEM32\\TZRES.DLL\n"
+            },
+            "syspane_demand_session_tests.dir/Release/syspane_.9B9BDF40.tlog/CL.command.1.tlog": {
+              "sha256": "665ddfe05837ac40a58eea0a105fd1b5b634d22073ae3e1c967ec8c6ab33ebf0",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\FAULT\\DEMAND_SESSION_TESTS.CPP\n/c /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\RUNTIME /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\CONFIGURATION /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PROTOCOL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\THIRD_PARTY /nologo /W4 /WX /diagnostics:classic /O2 /Ob2 /Oy- /D _USING_V110_SDK71_ /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D WINVER=0x0501 /D _WIN32_WINNT=0x0501 /D _USING_V110_SDK71_ /D JSON_DIAGNOSTIC_POSITIONS=1 /D JSON_DIAGNOSTICS=0 /D \"CMAKE_INTDIR=\\\"Release\\\"\" /EHsc /MT /arch:SSE2 /permissive- /std:c++17 /Fo\"SYSPANE_DEMAND_SESSION_TESTS.DIR\\RELEASE\\\\\" /Fd\"SYSPANE_DEMAND_SESSION_TESTS.DIR\\RELEASE\\VC141.PDB\" /TP /analyze-  /Zc:__cplusplus /utf-8 D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\FAULT\\DEMAND_SESSION_TESTS.CPP\n"
+            },
+            "syspane_authored_tests.dir/Release/syspane_.C2D46B82.tlog/link.read.1.tlog": {
+              "sha256": "62ca4812f89d091a12139ba870267189d0f8a02ad186b223c6aae4b45f46542a",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_AUTHORED_TESTS.DIR\\RELEASE\\AUTHORED_TESTS.OBJ|D:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_AUTHORED_TESTS.DIR\\RELEASE\\CONTENT_TESTS.OBJ|D:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_AUTHORED_TESTS.DIR\\RELEASE\\SCENE_CONTENT_TESTS.OBJ\nC:\\PROGRAM FILES\\WINDHAWK\\ENGINE\\1.7.3\\ENGINE.INI\nC:\\WINDOWS\\GLOBALIZATION\\SORTING\\SORTDEFAULT.NLS\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_AUTHORED.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_ASYNC_COMMANDS.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_PROFILE_PROJECTION.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_CONFIGURATION.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_PROTOCOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\KERNEL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\USER32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\GDI32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\WINSPOOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\SHELL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLE32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLEAUT32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\UUID.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\COMDLG32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\ADVAPI32.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_AUTHORED_TESTS.DIR\\RELEASE\\AUTHORED_TESTS.OBJ\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_AUTHORED_TESTS.DIR\\RELEASE\\CONTENT_TESTS.OBJ\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_AUTHORED_TESTS.DIR\\RELEASE\\SCENE_CONTENT_TESTS.OBJ\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCPMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\OLDNAMES.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCONCRT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBVCRUNTIME.LIB\nC:\\PROGRAM FILES (X86)\\WINDOWS KITS\\10\\LIB\\10.0.10240.0\\UCRT\\X86\\LIBUCRT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\BIN\\X64\\RC.EXE\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\BIN\\HOSTX64\\X64\\CVTRES.EXE\nC:\\WINDOWS\\SYSTEM32\\TZRES.DLL\n"
+            },
+            "syspane_authored_tests.dir/Release/syspane_.C2D46B82.tlog/CL.command.1.tlog": {
+              "sha256": "149fdf9a4d1630d8306d6b1585ddbcaefb49027a4753780547a572cba9afd2e7",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\CONFIGURATION\\AUTHORED_TESTS.CPP\n/c /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\CONFIGURATION /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PROTOCOL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\THIRD_PARTY /nologo /W4 /WX /diagnostics:classic /O2 /Ob2 /Oy- /D _USING_V110_SDK71_ /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D WINVER=0x0501 /D _WIN32_WINNT=0x0501 /D _USING_V110_SDK71_ /D JSON_DIAGNOSTIC_POSITIONS=1 /D JSON_DIAGNOSTICS=0 /D \"CMAKE_INTDIR=\\\"Release\\\"\" /EHsc /MT /arch:SSE2 /permissive- /std:c++17 /Fo\"SYSPANE_AUTHORED_TESTS.DIR\\RELEASE\\\\\" /Fd\"SYSPANE_AUTHORED_TESTS.DIR\\RELEASE\\VC141.PDB\" /TP /analyze-  /Zc:__cplusplus /utf-8 D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\CONFIGURATION\\AUTHORED_TESTS.CPP\n^D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\CONFIGURATION\\CONTENT_TESTS.CPP\n/c /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\CONFIGURATION /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PROTOCOL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\THIRD_PARTY /nologo /W4 /WX /diagnostics:classic /O2 /Ob2 /Oy- /D _USING_V110_SDK71_ /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D WINVER=0x0501 /D _WIN32_WINNT=0x0501 /D _USING_V110_SDK71_ /D JSON_DIAGNOSTIC_POSITIONS=1 /D JSON_DIAGNOSTICS=0 /D \"CMAKE_INTDIR=\\\"Release\\\"\" /EHsc /MT /arch:SSE2 /permissive- /std:c++17 /Fo\"SYSPANE_AUTHORED_TESTS.DIR\\RELEASE\\\\\" /Fd\"SYSPANE_AUTHORED_TESTS.DIR\\RELEASE\\VC141.PDB\" /TP /analyze-  /Zc:__cplusplus /utf-8 D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\CONFIGURATION\\CONTENT_TESTS.CPP\n^D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\CONFIGURATION\\SCENE_CONTENT_TESTS.CPP\n/c /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\CONFIGURATION /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PROTOCOL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\THIRD_PARTY /nologo /W4 /WX /diagnostics:classic /O2 /Ob2 /Oy- /D _USING_V110_SDK71_ /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D WINVER=0x0501 /D _WIN32_WINNT=0x0501 /D _USING_V110_SDK71_ /D JSON_DIAGNOSTIC_POSITIONS=1 /D JSON_DIAGNOSTICS=0 /D \"CMAKE_INTDIR=\\\"Release\\\"\" /EHsc /MT /arch:SSE2 /permissive- /std:c++17 /Fo\"SYSPANE_AUTHORED_TESTS.DIR\\RELEASE\\\\\" /Fd\"SYSPANE_AUTHORED_TESTS.DIR\\RELEASE\\VC141.PDB\" /TP /analyze-  /Zc:__cplusplus /utf-8 D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\CONFIGURATION\\SCENE_CONTENT_TESTS.CPP\n"
+            },
+            "syspane_command_session_tests.dir/Release/syspane_.AD5875F8.tlog/link.read.1.tlog": {
+              "sha256": "9ebb8d094503b97f232eebb8cc975345989fb3134f406a0ef8cecd61a679635e",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_COMMAND_SESSION_TESTS.DIR\\RELEASE\\COMMAND_SESSION_TESTS.OBJ\nC:\\PROGRAM FILES\\WINDHAWK\\ENGINE\\1.7.3\\ENGINE.INI\nC:\\WINDOWS\\GLOBALIZATION\\SORTING\\SORTDEFAULT.NLS\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_ASYNC_COMMANDS.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_PROFILE_PROJECTION.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_AUTHORED.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_CONFIGURATION.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_PROTOCOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\KERNEL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\USER32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\GDI32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\WINSPOOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\SHELL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLE32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLEAUT32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\UUID.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\COMDLG32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\ADVAPI32.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_COMMAND_SESSION_TESTS.DIR\\RELEASE\\COMMAND_SESSION_TESTS.OBJ\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCPMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\OLDNAMES.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCONCRT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBVCRUNTIME.LIB\nC:\\PROGRAM FILES (X86)\\WINDOWS KITS\\10\\LIB\\10.0.10240.0\\UCRT\\X86\\LIBUCRT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\BIN\\X64\\RC.EXE\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\BIN\\HOSTX64\\X64\\CVTRES.EXE\nC:\\WINDOWS\\SYSTEM32\\TZRES.DLL\n"
+            },
+            "syspane_command_session_tests.dir/Release/syspane_.AD5875F8.tlog/CL.command.1.tlog": {
+              "sha256": "40a5607c82b69cb647c14da95dbea689e3bd00e82ff7f9f03dd7a4abde8fb210",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\CONFIGURATION\\COMMAND_SESSION_TESTS.CPP\n/c /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\CONFIGURATION /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PROTOCOL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\THIRD_PARTY /nologo /W4 /WX /diagnostics:classic /O2 /Ob2 /Oy- /D _USING_V110_SDK71_ /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D WINVER=0x0501 /D _WIN32_WINNT=0x0501 /D _USING_V110_SDK71_ /D JSON_DIAGNOSTIC_POSITIONS=1 /D JSON_DIAGNOSTICS=0 /D \"CMAKE_INTDIR=\\\"Release\\\"\" /EHsc /MT /arch:SSE2 /permissive- /std:c++17 /Fo\"SYSPANE_COMMAND_SESSION_TESTS.DIR\\RELEASE\\\\\" /Fd\"SYSPANE_COMMAND_SESSION_TESTS.DIR\\RELEASE\\VC141.PDB\" /TP /analyze-  /Zc:__cplusplus /utf-8 D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\CONFIGURATION\\COMMAND_SESSION_TESTS.CPP\n"
+            },
+            "syspane_scene_tests.dir/Release/syspane_.7548964A.tlog/link.read.1.tlog": {
+              "sha256": "d963821faf8692e4c4b03c8d4ad0660181da367cfd5a5079ada7350404c9a7f0",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_SCENE_TESTS.DIR\\RELEASE\\BINDING_TESTS.OBJ|D:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_SCENE_TESTS.DIR\\RELEASE\\CHART_HISTORY_TESTS.OBJ|D:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_SCENE_TESTS.DIR\\RELEASE\\CHART_PLOT_TESTS.OBJ|D:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_SCENE_TESTS.DIR\\RELEASE\\IMAGE_FIT_TESTS.OBJ|D:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_SCENE_TESTS.DIR\\RELEASE\\LAYOUT_TESTS.OBJ|D:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_SCENE_TESTS.DIR\\RELEASE\\VALIDATED_AUTHORED_TESTS.OBJ|D:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_SCENE_TESTS.DIR\\RELEASE\\VISIBILITY_TESTS.OBJ\nC:\\PROGRAM FILES\\WINDHAWK\\ENGINE\\1.7.3\\ENGINE.INI\nC:\\WINDOWS\\GLOBALIZATION\\SORTING\\SORTDEFAULT.NLS\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_SCENE.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_NETWORK_PUBLICATION.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_AUTHORED.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_DATA_VIEW.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_CONFIGURATION.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_RECOVERY.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_NETWORK_STATE.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_MODEL.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_PROTOCOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\KERNEL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\USER32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\GDI32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\WINSPOOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\SHELL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLE32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLEAUT32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\UUID.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\COMDLG32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\ADVAPI32.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_SCENE_TESTS.DIR\\RELEASE\\LAYOUT_TESTS.OBJ\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_SCENE_TESTS.DIR\\RELEASE\\BINDING_TESTS.OBJ\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_SCENE_TESTS.DIR\\RELEASE\\VISIBILITY_TESTS.OBJ\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_SCENE_TESTS.DIR\\RELEASE\\CHART_HISTORY_TESTS.OBJ\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_SCENE_TESTS.DIR\\RELEASE\\CHART_PLOT_TESTS.OBJ\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_SCENE_TESTS.DIR\\RELEASE\\IMAGE_FIT_TESTS.OBJ\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_SCENE_TESTS.DIR\\RELEASE\\VALIDATED_AUTHORED_TESTS.OBJ\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCPMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\OLDNAMES.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBVCRUNTIME.LIB\nC:\\PROGRAM FILES (X86)\\WINDOWS KITS\\10\\LIB\\10.0.10240.0\\UCRT\\X86\\LIBUCRT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\BIN\\X64\\RC.EXE\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\BIN\\HOSTX64\\X64\\CVTRES.EXE\nC:\\WINDOWS\\SYSTEM32\\TZRES.DLL\n"
+            },
+            "syspane_scene_tests.dir/Release/syspane_.7548964A.tlog/CL.command.1.tlog": {
+              "sha256": "69dd1d743070fd3d017913f3533a4f39a28802625e45ba3587b010c9eedd2f03",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\SCENE\\LAYOUT_TESTS.CPP\n/c /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\SCENE /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\CONFIGURATION /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PROTOCOL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\DIAGNOSTICS /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\MODEL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\RUNTIME /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PLATFORM /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\THIRD_PARTY /nologo /W4 /WX /diagnostics:classic /O2 /Ob2 /Oy- /D _USING_V110_SDK71_ /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D SYSPANE_VALIDATED_AUTHORED_TEST=1 /D WINVER=0x0501 /D _WIN32_WINNT=0x0501 /D _USING_V110_SDK71_ /D JSON_DIAGNOSTIC_POSITIONS=1 /D JSON_DIAGNOSTICS=0 /D \"CMAKE_INTDIR=\\\"Release\\\"\" /EHsc /MT /arch:SSE2 /permissive- /std:c++17 /Fo\"SYSPANE_SCENE_TESTS.DIR\\RELEASE\\\\\" /Fd\"SYSPANE_SCENE_TESTS.DIR\\RELEASE\\VC141.PDB\" /TP /analyze-  /Zc:__cplusplus /utf-8 D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\SCENE\\LAYOUT_TESTS.CPP\n^D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\SCENE\\IMAGE_FIT_TESTS.CPP\n/c /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\SCENE /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\CONFIGURATION /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PROTOCOL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\DIAGNOSTICS /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\MODEL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\RUNTIME /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PLATFORM /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\THIRD_PARTY /nologo /W4 /WX /diagnostics:classic /O2 /Ob2 /Oy- /D _USING_V110_SDK71_ /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D SYSPANE_VALIDATED_AUTHORED_TEST=1 /D WINVER=0x0501 /D _WIN32_WINNT=0x0501 /D _USING_V110_SDK71_ /D JSON_DIAGNOSTIC_POSITIONS=1 /D JSON_DIAGNOSTICS=0 /D \"CMAKE_INTDIR=\\\"Release\\\"\" /EHsc /MT /arch:SSE2 /permissive- /std:c++17 /Fo\"SYSPANE_SCENE_TESTS.DIR\\RELEASE\\\\\" /Fd\"SYSPANE_SCENE_TESTS.DIR\\RELEASE\\VC141.PDB\" /TP /analyze-  /Zc:__cplusplus /utf-8 D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\SCENE\\IMAGE_FIT_TESTS.CPP\n^D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\SCENE\\VALIDATED_AUTHORED_TESTS.CPP\n/c /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\SCENE /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\CONFIGURATION /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PROTOCOL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\DIAGNOSTICS /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\MODEL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\RUNTIME /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PLATFORM /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\THIRD_PARTY /nologo /W4 /WX /diagnostics:classic /O2 /Ob2 /Oy- /D _USING_V110_SDK71_ /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D SYSPANE_VALIDATED_AUTHORED_TEST=1 /D WINVER=0x0501 /D _WIN32_WINNT=0x0501 /D _USING_V110_SDK71_ /D JSON_DIAGNOSTIC_POSITIONS=1 /D JSON_DIAGNOSTICS=0 /D \"CMAKE_INTDIR=\\\"Release\\\"\" /EHsc /MT /arch:SSE2 /permissive- /std:c++17 /Fo\"SYSPANE_SCENE_TESTS.DIR\\RELEASE\\\\\" /Fd\"SYSPANE_SCENE_TESTS.DIR\\RELEASE\\VC141.PDB\" /TP /analyze-  /Zc:__cplusplus /utf-8 D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\SCENE\\VALIDATED_AUTHORED_TESTS.CPP\n^D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\SCENE\\BINDING_TESTS.CPP\n/c /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\SCENE /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\CONFIGURATION /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PROTOCOL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\DIAGNOSTICS /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\MODEL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\RUNTIME /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PLATFORM /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\THIRD_PARTY /nologo /W4 /WX /diagnostics:classic /O2 /Ob2 /Oy- /D _USING_V110_SDK71_ /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D SYSPANE_VALIDATED_AUTHORED_TEST=1 /D WINVER=0x0501 /D _WIN32_WINNT=0x0501 /D _USING_V110_SDK71_ /D JSON_DIAGNOSTIC_POSITIONS=1 /D JSON_DIAGNOSTICS=0 /D \"CMAKE_INTDIR=\\\"Release\\\"\" /EHsc /MT /arch:SSE2 /permissive- /std:c++17 /Fo\"SYSPANE_SCENE_TESTS.DIR\\RELEASE\\\\\" /Fd\"SYSPANE_SCENE_TESTS.DIR\\RELEASE\\VC141.PDB\" /TP /analyze-  /Zc:__cplusplus /utf-8 D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\SCENE\\BINDING_TESTS.CPP\n^D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\SCENE\\VISIBILITY_TESTS.CPP\n/c /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\SCENE /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\CONFIGURATION /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PROTOCOL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\DIAGNOSTICS /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\MODEL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\RUNTIME /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PLATFORM /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\THIRD_PARTY /nologo /W4 /WX /diagnostics:classic /O2 /Ob2 /Oy- /D _USING_V110_SDK71_ /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D SYSPANE_VALIDATED_AUTHORED_TEST=1 /D WINVER=0x0501 /D _WIN32_WINNT=0x0501 /D _USING_V110_SDK71_ /D JSON_DIAGNOSTIC_POSITIONS=1 /D JSON_DIAGNOSTICS=0 /D \"CMAKE_INTDIR=\\\"Release\\\"\" /EHsc /MT /arch:SSE2 /permissive- /std:c++17 /Fo\"SYSPANE_SCENE_TESTS.DIR\\RELEASE\\\\\" /Fd\"SYSPANE_SCENE_TESTS.DIR\\RELEASE\\VC141.PDB\" /TP /analyze-  /Zc:__cplusplus /utf-8 D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\SCENE\\VISIBILITY_TESTS.CPP\n^D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\SCENE\\CHART_HISTORY_TESTS.CPP\n/c /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\SCENE /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\CONFIGURATION /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PROTOCOL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\DIAGNOSTICS /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\MODEL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\RUNTIME /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PLATFORM /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\THIRD_PARTY /nologo /W4 /WX /diagnostics:classic /O2 /Ob2 /Oy- /D _USING_V110_SDK71_ /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D SYSPANE_VALIDATED_AUTHORED_TEST=1 /D WINVER=0x0501 /D _WIN32_WINNT=0x0501 /D _USING_V110_SDK71_ /D JSON_DIAGNOSTIC_POSITIONS=1 /D JSON_DIAGNOSTICS=0 /D \"CMAKE_INTDIR=\\\"Release\\\"\" /EHsc /MT /arch:SSE2 /permissive- /std:c++17 /Fo\"SYSPANE_SCENE_TESTS.DIR\\RELEASE\\\\\" /Fd\"SYSPANE_SCENE_TESTS.DIR\\RELEASE\\VC141.PDB\" /TP /analyze-  /Zc:__cplusplus /utf-8 D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\SCENE\\CHART_HISTORY_TESTS.CPP\n^D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\SCENE\\CHART_PLOT_TESTS.CPP\n/c /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\SCENE /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\CONFIGURATION /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PROTOCOL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\DIAGNOSTICS /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\MODEL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\RUNTIME /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PLATFORM /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\THIRD_PARTY /nologo /W4 /WX /diagnostics:classic /O2 /Ob2 /Oy- /D _USING_V110_SDK71_ /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D SYSPANE_VALIDATED_AUTHORED_TEST=1 /D WINVER=0x0501 /D _WIN32_WINNT=0x0501 /D _USING_V110_SDK71_ /D JSON_DIAGNOSTIC_POSITIONS=1 /D JSON_DIAGNOSTICS=0 /D \"CMAKE_INTDIR=\\\"Release\\\"\" /EHsc /MT /arch:SSE2 /permissive- /std:c++17 /Fo\"SYSPANE_SCENE_TESTS.DIR\\RELEASE\\\\\" /Fd\"SYSPANE_SCENE_TESTS.DIR\\RELEASE\\VC141.PDB\" /TP /analyze-  /Zc:__cplusplus /utf-8 D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\SCENE\\CHART_PLOT_TESTS.CPP\n"
+            },
+            "syspane_processor_state_tests.dir/Release/syspane_.7B314DC1.tlog/link.read.1.tlog": {
+              "sha256": "b7eb022467cc91530fd0ef1b208b41574a63ace5c4b2b6f7377006d6ad97c29f",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_PROCESSOR_STATE_TESTS.DIR\\RELEASE\\PROCESSOR_STATE_TESTS.OBJ\nC:\\PROGRAM FILES\\WINDHAWK\\ENGINE\\1.7.3\\ENGINE.INI\nC:\\WINDOWS\\GLOBALIZATION\\SORTING\\SORTDEFAULT.NLS\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_PROCESSOR_STATE.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_MODEL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\KERNEL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\USER32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\GDI32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\WINSPOOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\SHELL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLE32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLEAUT32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\UUID.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\COMDLG32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\ADVAPI32.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_PROCESSOR_STATE_TESTS.DIR\\RELEASE\\PROCESSOR_STATE_TESTS.OBJ\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCPMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\OLDNAMES.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCONCRT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBVCRUNTIME.LIB\nC:\\PROGRAM FILES (X86)\\WINDOWS KITS\\10\\LIB\\10.0.10240.0\\UCRT\\X86\\LIBUCRT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\BIN\\X64\\RC.EXE\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\BIN\\HOSTX64\\X64\\CVTRES.EXE\nC:\\WINDOWS\\SYSTEM32\\TZRES.DLL\n"
+            },
+            "syspane_processor_state_tests.dir/Release/syspane_.7B314DC1.tlog/CL.command.1.tlog": {
+              "sha256": "fc4bce316528dedf2bf528fe3410a37ae057f068d8899239352fb7ec9cdb720d",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\RESOURCES\\PROCESSOR_STATE_TESTS.CPP\n/c /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\RUNTIME /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\MODEL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PLATFORM /nologo /W4 /WX /diagnostics:classic /O2 /Ob2 /Oy- /D _USING_V110_SDK71_ /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D WINVER=0x0501 /D _WIN32_WINNT=0x0501 /D _USING_V110_SDK71_ /D \"CMAKE_INTDIR=\\\"Release\\\"\" /EHsc /MT /arch:SSE2 /permissive- /std:c++17 /Fo\"SYSPANE_PROCESSOR_STATE_TESTS.DIR\\RELEASE\\\\\" /Fd\"SYSPANE_PROCESSOR_STATE_TESTS.DIR\\RELEASE\\VC141.PDB\" /TP /analyze-  /Zc:__cplusplus /utf-8 D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\RESOURCES\\PROCESSOR_STATE_TESTS.CPP\n"
+            },
+            "syspane_linux_processor_tests.dir/Release/syspane_.E9FF0AF7.tlog/link.read.1.tlog": {
+              "sha256": "b503f4e828e3faf70b00838e20c11b77227e840f625b86efebb78ff586181461",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_LINUX_PROCESSOR_TESTS.DIR\\RELEASE\\LINUX_PROCESSOR_TESTS.OBJ\nC:\\PROGRAM FILES\\WINDHAWK\\ENGINE\\1.7.3\\ENGINE.INI\nC:\\WINDOWS\\GLOBALIZATION\\SORTING\\SORTDEFAULT.NLS\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_LINUX_PROCESSOR_DECODE.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_PROCESSOR_STATE.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_MODEL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\KERNEL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\USER32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\GDI32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\WINSPOOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\SHELL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLE32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLEAUT32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\UUID.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\COMDLG32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\ADVAPI32.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_LINUX_PROCESSOR_TESTS.DIR\\RELEASE\\LINUX_PROCESSOR_TESTS.OBJ\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCPMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\OLDNAMES.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCONCRT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBVCRUNTIME.LIB\nC:\\PROGRAM FILES (X86)\\WINDOWS KITS\\10\\LIB\\10.0.10240.0\\UCRT\\X86\\LIBUCRT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\BIN\\X64\\RC.EXE\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\BIN\\HOSTX64\\X64\\CVTRES.EXE\nC:\\WINDOWS\\SYSTEM32\\TZRES.DLL\n"
+            },
+            "syspane_linux_processor_tests.dir/Release/syspane_.E9FF0AF7.tlog/CL.command.1.tlog": {
+              "sha256": "0880cb671d1e1d01897a2c94fa6be1c6b9092e709f97c6ce0f6909beb9a2c7a5",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\RESOURCES\\LINUX_PROCESSOR_TESTS.CPP\n/c /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PLATFORM /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\RUNTIME /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\MODEL /nologo /W4 /WX /diagnostics:classic /O2 /Ob2 /Oy- /D _USING_V110_SDK71_ /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D WINVER=0x0501 /D _WIN32_WINNT=0x0501 /D _USING_V110_SDK71_ /D \"CMAKE_INTDIR=\\\"Release\\\"\" /EHsc /MT /arch:SSE2 /permissive- /std:c++17 /Fo\"SYSPANE_LINUX_PROCESSOR_TESTS.DIR\\RELEASE\\\\\" /Fd\"SYSPANE_LINUX_PROCESSOR_TESTS.DIR\\RELEASE\\VC141.PDB\" /TP /analyze-  /Zc:__cplusplus /utf-8 D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\RESOURCES\\LINUX_PROCESSOR_TESTS.CPP\n"
+            },
+            "syspane_processor_publication_tests.dir/Release/syspane_.EB87A1CD.tlog/link.read.1.tlog": {
+              "sha256": "d3ab025b32aae20d9ea26d049f44dc4374db4d79322db99b60eec61aa123c3a0",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_PROCESSOR_PUBLICATION_TESTS.DIR\\RELEASE\\PROCESSOR_PUBLICATION_TESTS.OBJ\nC:\\PROGRAM FILES\\WINDHAWK\\ENGINE\\1.7.3\\ENGINE.INI\nC:\\WINDOWS\\GLOBALIZATION\\SORTING\\SORTDEFAULT.NLS\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_PROCESSOR_PUBLICATION.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_DEMAND.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_DATA_VIEW.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_CONFIGURATION.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_PROCESSOR_STATE.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_LINUX_PROCESSOR_DECODE.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_NETWORK_PUBLICATION.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_NETWORK_STATE.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_PROTOCOL.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_MODEL.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\RELEASE\\SYSPANE_RECOVERY.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\KERNEL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\USER32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\GDI32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\WINSPOOL.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\SHELL32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLE32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\OLEAUT32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\UUID.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\COMDLG32.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\LIB\\ADVAPI32.LIB\nD:\\PROJECTS\\SYSPANE\\SYSPANE\\OUT\\BUILD\\WINDOWS-X86-V141-XP\\SYSPANE_PROCESSOR_PUBLICATION_TESTS.DIR\\RELEASE\\PROCESSOR_PUBLICATION_TESTS.OBJ\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCPMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCMT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\OLDNAMES.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBCONCRT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\LIB\\X86\\LIBVCRUNTIME.LIB\nC:\\PROGRAM FILES (X86)\\WINDOWS KITS\\10\\LIB\\10.0.10240.0\\UCRT\\X86\\LIBUCRT.LIB\nC:\\PROGRAM FILES (X86)\\MICROSOFT SDKS\\WINDOWS\\V7.1A\\BIN\\X64\\RC.EXE\nC:\\PROGRAM FILES (X86)\\MICROSOFT VISUAL STUDIO\\2017\\ENTERPRISE\\VC\\TOOLS\\MSVC\\14.16.27023\\BIN\\HOSTX64\\X64\\CVTRES.EXE\nC:\\WINDOWS\\SYSTEM32\\TZRES.DLL\n"
+            },
+            "syspane_processor_publication_tests.dir/Release/syspane_.EB87A1CD.tlog/CL.command.1.tlog": {
+              "sha256": "9b59468864a4309ada9fc5e9e77c2e57c80fad676687b00fce30b3699ae9704c",
+              "text": "^D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\RESOURCES\\PROCESSOR_PUBLICATION_TESTS.CPP\n/c /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\RUNTIME /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\MODEL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PLATFORM /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\PROTOCOL /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\CONFIGURATION /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\DIAGNOSTICS /ID:\\PROJECTS\\SYSPANE\\SYSPANE\\SOURCE\\THIRD_PARTY /nologo /W4 /WX /diagnostics:classic /O2 /Ob2 /Oy- /D _USING_V110_SDK71_ /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D WINVER=0x0501 /D _WIN32_WINNT=0x0501 /D _USING_V110_SDK71_ /D JSON_DIAGNOSTIC_POSITIONS=1 /D JSON_DIAGNOSTICS=0 /D \"CMAKE_INTDIR=\\\"Release\\\"\" /EHsc /MT /arch:SSE2 /permissive- /std:c++17 /Fo\"SYSPANE_PROCESSOR_PUBLICATION_TESTS.DIR\\RELEASE\\\\\" /Fd\"SYSPANE_PROCESSOR_PUBLICATION_TESTS.DIR\\RELEASE\\VC141.PDB\" /TP /analyze-  /Zc:__cplusplus /utf-8 D:\\PROJECTS\\SYSPANE\\SYSPANE\\TESTS\\RESOURCES\\PROCESSOR_PUBLICATION_TESTS.CPP\n"
+            }
+          }
+        }
+      }
+    },
+    {
+      "profile": "linux-x64-gcc13",
+      "uid": 1000,
+      "artifacts": {
+        "syspane": {
+          "path": "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/syspane",
+          "bytes": 72069944,
+          "sha256": "236108d54e7a280a1d00f8dfe57cf7e99fea815dd31998dc29f584c1b83e5ede"
+        },
+        "syspane_frontend_helper_fixture": {
+          "path": "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/syspane_frontend_helper_fixture",
+          "bytes": 31220720,
+          "sha256": "ab25304deb2802cc70b4d93b7edda3046e9d9d3b1173befb054d5e55311fe122"
+        },
+        "syspane_frontend_fixture": {
+          "path": "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/syspane_frontend_fixture",
+          "bytes": 72143224,
+          "sha256": "118c87d36e08a198cd28a765b8f8b9e2982ce3713db1aac4068eb2b145c36ddf"
+        },
+        "syspane_processor_publication_tests": {
+          "path": "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/syspane_processor_publication_tests",
+          "bytes": 18459392,
+          "sha256": "0728ce14c0023c8b206241aab4b1d572478e6272f01b35ecc5a51b2feb8d0ac2"
+        },
+        "libsyspane_processor_publication.a": {
+          "path": "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/libsyspane_processor_publication.a",
+          "bytes": 6530918,
+          "sha256": "fc6ba26219ad7ad0d599cdb43432637fc094a113a618b3cc964388d7ec75998b"
+        },
+        "libsyspane_processor_task.a": {
+          "path": "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/libsyspane_processor_task.a",
+          "bytes": 797854,
+          "sha256": "ab6b85e0e4fa72e36e0c8ce6f9937b82c1d9949339842a3263012cf805d6272a"
+        },
+        "component-graph.txt": {
+          "path": "/home/ir4runner/.cache/syspane/campaign-229a498/linux-x64-gcc13/component-graph.txt",
+          "bytes": 21755,
+          "sha256": "00a5efd843d07669c99f47266a5fa55126016d8a32c9af3895248667a821ef65"
+        }
+      }
+    }
+  ],
+  "archives": [
+    {
+      "index": {
+        "local_path": "out/evidence/processor-publication-native/installed-network-controls/index.json",
+        "sha256": "a4bc45de26b99e13c6494c822808c42141af8930ae760549f8ae7272feccdff5"
+      },
+      "archive": {
+        "local_path": "out/evidence/processor-publication-native/installed-network-controls/native-evidence.zip",
+        "sha256": "594a5ed3509a2fc189359c7641549fb4af3ad84e4c0f4ede409c285a53f8825d"
+      },
+      "nodes": 340,
+      "preserved_bytes": 156000678
+    },
+    {
+      "index": {
+        "local_path": "out/evidence/processor-publication-native/installed-pass/index.json",
+        "sha256": "97cff9f85695123b05300dd08bc64e535d0a88ba9c54ac74046d4ce530d69a04"
+      },
+      "archive": {
+        "local_path": "out/evidence/processor-publication-native/installed-pass/native-evidence.zip",
+        "sha256": "6dc38c159ab1b4bfecbb5e882cd6f83d863646d0e53f8ab3046fac584cdc5c63"
+      },
+      "nodes": 253,
+      "preserved_bytes": 155807995
+    },
+    {
+      "index": {
+        "local_path": "out/evidence/processor-publication-native/network-controls/index.json",
+        "sha256": "34a888d79faec31fde644c62a76cb5ad41a98e5c217dd156389e6c41620ce467"
+      },
+      "archive": {
+        "local_path": "out/evidence/processor-publication-native/network-controls/native-evidence.zip",
+        "sha256": "485372fa5f1f4ab67fb51fb6f04482de6cbb823bbec8bc31a8db23d8dbb32c9e"
+      },
+      "nodes": 58,
+      "preserved_bytes": 136273315
+    },
+    {
+      "index": {
+        "local_path": "out/evidence/processor-publication-native/preflight-1/index.json",
+        "sha256": "d26d4240f4e4984ee424d0494a67000510b6c7dc88187885ba7f0eea8e16bfc3"
+      },
+      "archive": {
+        "local_path": "out/evidence/processor-publication-native/preflight-1/native-evidence.zip",
+        "sha256": "76622c7997da2b305eaf709962a60220d8e9455a58a95ea4aa19ef3eae43c8b8"
+      },
+      "nodes": 89,
+      "preserved_bytes": 156644390
+    },
+    {
+      "index": {
+        "local_path": "out/evidence/processor-publication-native/preflight-2/index.json",
+        "sha256": "9669dcb5ea7c119c1adad2ec8df85a0a49449c32ca5cac3d7df7a7e99b407d4e"
+      },
+      "archive": {
+        "local_path": "out/evidence/processor-publication-native/preflight-2/native-evidence.zip",
+        "sha256": "a6edc99336f05bf362cc80b204f51459e70adf618e8a0480987847d85d7cf1a6"
+      },
+      "nodes": 75,
+      "preserved_bytes": 155754174
+    },
+    {
+      "index": {
+        "local_path": "out/evidence/processor-publication-native/preflight-3/index.json",
+        "sha256": "4570b5b3eb6e269e8af53954589095fa8633c2355e7cec55df6738c4de8850c2"
+      },
+      "archive": {
+        "local_path": "out/evidence/processor-publication-native/preflight-3/native-evidence.zip",
+        "sha256": "408c6034caacdc90014b91066be9f003c39506df56c9ab5ae3c985c3fa7fe362"
+      },
+      "nodes": 75,
+      "preserved_bytes": 155753968
+    },
+    {
+      "index": {
+        "local_path": "out/evidence/processor-publication-native/preflight-4/index.json",
+        "sha256": "053a832957283e88a4219b31e8603f950fd28d359297fb38fc1f8ea19d5f4254"
+      },
+      "archive": {
+        "local_path": "out/evidence/processor-publication-native/preflight-4/native-evidence.zip",
+        "sha256": "860ca441235e1f102cd76f22e4daf228e01ae847bcae09903da42cf6d04235d3"
+      },
+      "nodes": 75,
+      "preserved_bytes": 155754166
+    }
+  ],
+  "native": {
+    "records": {
+      "local_path": "out/evidence/processor-publication/native-records.json",
+      "sha256": "829142b02d5712be930693c02ed4bae692e65517959aa3050914dce16cb3dce5"
+    },
+    "controller_cases": [
+      "NO-DEMAND",
+      "NETWORK-ONLY",
+      "LIVE",
+      "ORACLE-WRONG-DENOMINATOR",
+      "ORACLE-MISSING-CPU",
+      "FAILURE-NETWORK-CONTINUES",
+      "GAP-RECOVERY",
+      "UNSUBSCRIBE-STOP",
+      "CPU-DENIED-NO-READ",
+      "CPU-INDEPENDENT-OF-NETWORK-DENIAL",
+      "CURRENT-POLICY-REVOKE",
+      "UNCOOPERATIVE-STOP"
+    ],
+    "online_processors": 12,
+    "integer_denominators_and_independent_proc_sysfs": "pass",
+    "installed_cases": [
+      "LIVE",
+      "NAVIGATION",
+      "POLICY",
+      "CLOSE-HELD"
+    ],
+    "installed_display": [
+      1600,
+      1200
+    ],
+    "installed_table_limit": 64,
+    "observed_policy_erasure_ms": 31.711949035525322
+  },
+  "verification": {
+    "checks_per_profile": 71,
+    "new_publication_cases": 8,
+    "legacy_audits": 2,
+    "negotiated_feature": "telemetry.processor requires measured 0.2.0 documents",
+    "demand_continuity": "Stable plan revision, separate changing job tickets",
+    "model_identity": "Logical source lifetimes never revive a retired raw-index ID",
+    "publication": "One producer/generation merges actual per-source attempt/measurement timestamps and exact CPU denominators",
+    "capacity": "No processor truncation or increased frame/table bounds"
+  },
+  "limits": {
+    "large_server_low_end_physical": "not executed",
+    "large_inventory_segmentation": "still required when complete inventory cannot fit existing frame/count limits",
+    "native_windows_macos_cpu": "not implemented",
+    "memory_gpu": "not implemented",
+    "desktop_and_release": "All five full editions and remaining desktop/lifecycle/installed gates remain incomplete",
+    "legacy_floors": "Awaiting concrete release profiles; current host toolset checks are not old-system qualification"
+  },
+  "next_steps": [
+    "Implement native Windows/macOS processor acquisition with exact OS-specific descriptors",
+    "Implement memory/commit/swap/paging and GPU capabilities under existing policy/demand owners",
+    "Qualify low-end/physical/large-server CPU scenes and remaining full native desktop/lifecycle/package gates"
+  ],
+  "recorders": [
+    {
+      "local_path": "out/campaign/processor_publication_checks.py",
+      "sha256": "4800ba0ff79f70b8600babd38223eb933cd0519ea955b4ae2b1790fe2ff88bc2"
+    },
+    {
+      "local_path": "out/campaign/record_processor_publication.py",
+      "sha256": "feee5dda0828829abe940d4795b8e6c8dc4535518cda19ea2f3e43fbf672c688"
+    },
+    {
+      "local_path": "out/campaign/archive_processor_publication.py",
+      "sha256": "a7152a683cf51eeb6ca872aaa00f85fa2a51fc368c4df4659c4807a553f5fc81"
+    }
+  ],
+  "specification_checks": {
+    "steps": [
+      {
+        "step": "budget",
+        "command": [
+          "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+          "-X",
+          "utf8",
+          "source/build/check_workspace_budget.py",
+          "--action",
+          "test"
+        ],
+        "environment": {
+          "TMP": "D:\\Projects\\SysPane\\syspane\\out\\test-tmp\\processor-publication",
+          "TEMP": "D:\\Projects\\SysPane\\syspane\\out\\test-tmp\\processor-publication",
+          "GIT_CEILING_DIRECTORIES": "D:/Projects/SysPane/syspane/out/test-tmp/processor-publication"
+        },
+        "started_at": "2026-10-12T06:08:10.743273+00:00",
+        "finished_at": "2026-10-12T06:08:37.088597+00:00",
+        "exit": 0,
+        "stdout_sha256": "60f2f8003aa83fcc3c5c811324a6d4b74713a772e39c69eddfd2ccd48b19693c",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "step": "generate",
+        "command": [
+          "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+          "-X",
+          "utf8",
+          "spec/tools/specctl.py",
+          "generate"
+        ],
+        "environment": {
+          "TMP": "D:\\Projects\\SysPane\\syspane\\out\\test-tmp\\processor-publication",
+          "TEMP": "D:\\Projects\\SysPane\\syspane\\out\\test-tmp\\processor-publication",
+          "GIT_CEILING_DIRECTORIES": "D:/Projects/SysPane/syspane/out/test-tmp/processor-publication"
+        },
+        "started_at": "2026-10-12T06:08:37.089577+00:00",
+        "finished_at": "2026-10-12T06:08:37.477038+00:00",
+        "exit": 0,
+        "stdout_sha256": "433bc9cf0ed9aecb0fd853cd594a7f65c16c5c44afa00c08968558a32d5656c9",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "step": "validate",
+        "command": [
+          "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+          "-X",
+          "utf8",
+          "spec/tools/specctl.py",
+          "validate",
+          "--schemas"
+        ],
+        "environment": {
+          "TMP": "D:\\Projects\\SysPane\\syspane\\out\\test-tmp\\processor-publication",
+          "TEMP": "D:\\Projects\\SysPane\\syspane\\out\\test-tmp\\processor-publication",
+          "GIT_CEILING_DIRECTORIES": "D:/Projects/SysPane/syspane/out/test-tmp/processor-publication"
+        },
+        "started_at": "2026-10-12T06:08:37.477395+00:00",
+        "finished_at": "2026-10-12T06:08:39.600696+00:00",
+        "exit": 0,
+        "stdout_sha256": "20b0a0ab0f31971a0cb2c56fd318257fd03eeb8bdd488467df5df21c6bc27ce8",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "step": "tools",
+        "command": [
+          "D:\\Projects\\SysPane\\syspane\\.venv\\Scripts\\python.exe",
+          "-X",
+          "utf8",
+          "spec/tools/tests/test_specctl.py",
+          "-v"
+        ],
+        "environment": {
+          "TMP": "D:\\Projects\\SysPane\\syspane\\out\\test-tmp\\processor-publication",
+          "TEMP": "D:\\Projects\\SysPane\\syspane\\out\\test-tmp\\processor-publication",
+          "GIT_CEILING_DIRECTORIES": "D:/Projects/SysPane/syspane/out/test-tmp/processor-publication"
+        },
+        "started_at": "2026-10-12T06:08:39.600957+00:00",
+        "finished_at": "2026-10-12T06:10:25.156067+00:00",
+        "exit": 0,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "48ac0ed796f321d0f2f469300510ca21d6a960e61638875035abcd57604bcb73"
+      }
+    ],
+    "schemas": 51,
+    "fixtures": 183,
+    "tools": {
+      "total": 62,
+      "passed": 60,
+      "skipped": 2
+    },
+    "skip_reason": "Existing Windows symlink privilege restrictions",
+    "logs": [
+      {
+        "local_path": "out/evidence/processor-publication/spec-checks/budget.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "local_path": "out/evidence/processor-publication/spec-checks/budget.stdout",
+        "sha256": "60f2f8003aa83fcc3c5c811324a6d4b74713a772e39c69eddfd2ccd48b19693c"
+      },
+      {
+        "local_path": "out/evidence/processor-publication/spec-checks/generate.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "local_path": "out/evidence/processor-publication/spec-checks/generate.stdout",
+        "sha256": "433bc9cf0ed9aecb0fd853cd594a7f65c16c5c44afa00c08968558a32d5656c9"
+      },
+      {
+        "local_path": "out/evidence/processor-publication/spec-checks/result.json",
+        "sha256": "dfa71a9f8df765df25c487bff39870ac678f137f0327912ca49f55db677c3c73"
+      },
+      {
+        "local_path": "out/evidence/processor-publication/spec-checks/tools.stderr",
+        "sha256": "48ac0ed796f321d0f2f469300510ca21d6a960e61638875035abcd57604bcb73"
+      },
+      {
+        "local_path": "out/evidence/processor-publication/spec-checks/tools.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "local_path": "out/evidence/processor-publication/spec-checks/validate.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "local_path": "out/evidence/processor-publication/spec-checks/validate.stdout",
+        "sha256": "20b0a0ab0f31971a0cb2c56fd318257fd03eeb8bdd488467df5df21c6bc27ce8"
+      }
+    ]
+  }
+}

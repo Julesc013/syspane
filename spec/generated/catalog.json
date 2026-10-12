@@ -520,7 +520,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "fa22ee330bab8fa3013b7a20a1d32ce69bf9d30a53b2d1d29c378d3a70edf00b"
+      "sha256": "90c6ae94db1c171f505e28ba281131b38d8368c19110d0f2a1286e42f185ea7a"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -3152,6 +3152,19 @@
       "sha256": "911da0015e178d248e7e30c7f25628e4d04149613c4ce0bde817d0f99b41fac9"
     },
     {
+      "id": "SP-W14-PROCESSOR-PUBLICATION",
+      "path": "delivery/packages/w-14-processor-publication.md",
+      "title": "Linux processor telemetry in the existing native inspector",
+      "description": "Close descriptor, publication, demand continuity and policy boundaries before connecting native CPU acquisition.",
+      "requires": [
+        "SP-W14-LINUX-PROCESSOR",
+        "SP-STATE",
+        "SP-RESOURCES",
+        "SP-WORK-PACKAGES"
+      ],
+      "sha256": "604f401bf815a758cb50a4844f5374cca67355e288d7acb8a21a5248ddbe90aa"
+    },
+    {
       "id": "SP-W14-PROCESSOR-STATE",
       "path": "delivery/packages/w-14-processor-state.md",
       "title": "Shared processor interval ownership and denominators",
@@ -3581,6 +3594,16 @@
         "SP-W11-PRIVATE-TEXT-LIFETIME"
       ],
       "sha256": "2a7948470e165750b4ff4607e24685b9e38ddc01dfc74521a868f9350cbdf6f8"
+    },
+    {
+      "id": "SP-PROCESSOR-PUBLICATION-HANDOFF",
+      "path": "delivery/processor-publication-handoff.md",
+      "title": "Linux processor telemetry and installed inspector checkpoint",
+      "description": "Source-bound exact CPU publication, continuous demand, native policy/recovery and installed UI evidence.",
+      "requires": [
+        "SP-W14-PROCESSOR-PUBLICATION"
+      ],
+      "sha256": "b55cc1b60fe88430dd49f5b54b22c216069fba13ead6776ea8a6044188a05215"
     },
     {
       "id": "SP-PROCESSOR-STATE-HANDOFF",

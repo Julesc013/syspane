@@ -4,6 +4,7 @@
 #include "scene_inspector.hpp"
 #include "editor_recovery_session.hpp"
 #include "network_publication.hpp"
+#include "processor_publication.hpp"
 #include <gtk/gtk.h>
 #include <algorithm>
 #include <cstdlib>
@@ -15,6 +16,7 @@ void need(bool ok,const char* code){if(!ok)throw protocol::Error(code);}
 void accessible(GtkWidget* widget,const char* description){atk_object_set_description(gtk_widget_get_accessible(widget),description);}
 struct Window {
     enum class Mode {settings,editor,inspector};
+    std::string inspector_reason;
     LinuxFrontendBackend& backend;GtkWidget *window=nullptr,*box=nullptr,*forms=nullptr,*status=nullptr,*retry=nullptr,*quit=nullptr,*settings_button=nullptr,*editor_button=nullptr,*inspector_button=nullptr,*recovery_notice=nullptr;
     std::unique_ptr<interfaces::SettingsForm> form;std::unique_ptr<interfaces::EditorForm> editor;
     std::unique_ptr<interfaces::SceneInspector> inspector;Mode mode=Mode::settings;std::uint64_t next_inspector=0;
@@ -128,7 +130,7 @@ struct Window {
             if(mode==Mode::inspector){
                 inspecting=backend.inspect(profile);std::vector<rendering::SurfaceProvider> providers;
                 if(inspecting){
-                    rendering::SurfaceProvider provider;provider.producer="producer:network";provider.types={"network.interface"};provider.metrics=runtime::network_metrics();
+                    rendering::SurfaceProvider provider;provider.producer="producer:network";provider.types={"network.interface","processor.logical","processor.domain","processor.aggregate"};provider.metrics=runtime::host_metrics();
                     for(const auto& metric:provider.metrics)provider.fields[metric.field]=3000000000ULL;
                     providers.push_back(std::move(provider));
                 }
@@ -227,7 +229,11 @@ struct Window {
                     measure(FrontendPhase::inspector,[&]{if(inspecting){if(state.telemetry_scope.profile)inspector->deliver(state.telemetry,state.telemetry_scope,stamp,observer);}else inspector->refresh(stamp,{},observer);});
                     next_inspector=now()+100;
                 }
-                const auto code=inspector->status().code;
+                const auto inspector_status=inspector->status();const auto code=inspector_status.code;
+                if(inspector_status.reason!=inspector_reason){
+                    inspector_reason=inspector_status.reason;
+                    if(!inspector_reason.empty())std::cerr<<"Scene inspector: "<<inspector_reason<<'\n';
+                }
                 if(code==rendering::SurfaceCode::restricted)gtk_label_set_text(GTK_LABEL(status),"Scene inspection unavailable under the current policy.");
                 else if(code==rendering::SurfaceCode::alternative||code==rendering::SurfaceCode::closed)gtk_label_set_text(GTK_LABEL(status),"Scene inspection unavailable for this scene or display configuration.");
             }

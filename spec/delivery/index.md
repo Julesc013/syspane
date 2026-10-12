@@ -121,6 +121,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Prepared authored snapshots for native editor previews](prepared-surface-handoff.md) — Measured preview admission repair with preserved native and portable evidence.
 - [Explicit private preservation checkpoint](preservation-handoff.md) — Bind opaque configuration copies, native controls and interrupted publication to measured development evidence.
 - [Private native text lifetime repair](private-text-lifetime-handoff.md) — Balanced GTK teardown preserves selection and prevents implicit clipboard export.
+- [Linux processor telemetry and installed inspector checkpoint](processor-publication-handoff.md) — Source-bound exact CPU publication, continuous demand, native policy/recovery and installed UI evidence.
 - [Shared processor interval state checkpoint](processor-state-handoff.md) — Exact complete-processor denominators and failure semantics before native acquisition and resource publication.
 - [Supervised native profile controller process](profile-controller-handoff.md) — Authenticated startup, current-policy result disclosure and interrupted command recovery.
 - [Linux profile directory ownership checkpoint](profile-owner-handoff.md) — Private root selection, interrupted creation, lifetime locks and existing store composition.

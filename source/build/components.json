@@ -3527,7 +3527,8 @@
         "syspane_editor_form",
         "syspane_editor_helpers",
         "syspane_scene_inspector",
-        "syspane_network_consumer"
+        "syspane_network_consumer",
+        "syspane_processor_publication"
       ],
       "target_requirements": [
         "cxx17",
@@ -3901,7 +3902,9 @@
         "syspane_machine_policy",
         "syspane_child",
         "syspane_health",
-        "syspane_recovery"
+        "syspane_recovery",
+        "syspane_processor_task",
+        "syspane_processor_publication"
       ],
       "target_requirements": [
         "cxx17",
@@ -4009,7 +4012,8 @@
       "allowed_dependencies": [
         "syspane_telemetry_delivery",
         "syspane_network_publication",
-        "syspane_local_ipc"
+        "syspane_local_ipc",
+        "syspane_processor_publication"
       ],
       "target_requirements": [
         "cxx17",
@@ -4221,6 +4225,95 @@
       "allowed_dependencies": [
         "syspane_linux_processor_decode",
         "syspane_processor_state"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "windows-x64-gcc15",
+        "linux-x64-gcc13",
+        "windows-x86-v141-xp"
+      ]
+    },
+    {
+      "id": "processor-publication",
+      "target": "syspane_processor_publication",
+      "type": "STATIC_LIBRARY",
+      "source_owner": "source/runtime/",
+      "public_interfaces": [
+        "source/runtime/processor_publication.hpp"
+      ],
+      "private_interfaces": [],
+      "sources": [
+        "source/runtime/processor_publication.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_processor_state",
+        "syspane_linux_processor_decode",
+        "syspane_network_publication",
+        "syspane_protocol"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "windows-x64-gcc15",
+        "linux-x64-gcc13",
+        "windows-x86-v141-xp"
+      ]
+    },
+    {
+      "id": "processor-task",
+      "target": "syspane_processor_task",
+      "type": "STATIC_LIBRARY",
+      "source_owner": "source/collectors/",
+      "public_interfaces": [
+        "source/collectors/processor_task_linux.hpp"
+      ],
+      "private_interfaces": [],
+      "sources": [
+        "source/collectors/processor_task_linux.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_linux_processor",
+        "syspane_model",
+        "syspane_protocol",
+        "Threads::Threads"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "linux-x64-gcc13"
+      ]
+    },
+    {
+      "id": "processor-publication-tests",
+      "target": "syspane_processor_publication_tests",
+      "type": "EXECUTABLE",
+      "source_owner": "tests/resources/",
+      "public_interfaces": [],
+      "private_interfaces": [],
+      "sources": [
+        "tests/resources/processor_publication_tests.cpp"
+      ],
+      "allowed_dependencies": [
+        "syspane_processor_publication",
+        "syspane_demand",
+        "syspane_data_view",
+        "syspane_configuration"
       ],
       "target_requirements": [
         "cxx17"

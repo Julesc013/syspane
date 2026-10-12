@@ -3,6 +3,7 @@
 #include "runtime_directory_linux.hpp"
 #include "editor_helpers_linux.hpp"
 #include "network_consumer_linux.hpp"
+#include "processor_publication.hpp"
 #include "local_ipc.hpp"
 #include "reconciliation.hpp"
 #include "digest.hpp"
@@ -344,7 +345,7 @@ struct LinuxFrontendBackend::Impl {
                 const auto current=[this,profile,token]{std::lock_guard<std::mutex> lock(mutex);return network_valid(profile,token);};
                 try{
                     LinuxNetworkConsumer consumer(controller_view.endpoint,controller_view.process,controller_view.epoch,
-                        {profile->serial,token},profile->view.policy,current);
+                        {profile->serial,token},profile->view.policy,current,runtime::processor_requested(profile->view.documents.scene));
                     while(current()){
                         auto delivery=consumer.poll();
                         {std::lock_guard<std::mutex> lock(mutex);if(network_valid(profile,token))view.telemetry=std::move(delivery);}
@@ -371,7 +372,8 @@ bool LinuxFrontendBackend::inspect(const std::shared_ptr<const FrontendProfile>&
     if(!profile){s.stop_inspection();return false;}
     if(s.closing||s.pending||s.view.loading||s.view.profile!=profile||s.controller.state!=ProfileSupervisorState::ready)return false;
     const auto& policy=profile->view.policy;const c::Authority authority{true,"console",{"console"}};
-    if(!policy.available||policy.denied_capabilities.count("collection.network")||policy.denied_capabilities.count("telemetry.subscribe")||
+    const bool cpu=runtime::processor_requested(profile->view.documents.scene)&&!policy.denied_capabilities.count("collection.processor");
+    if(!policy.available||(policy.denied_capabilities.count("collection.network")&&!cpu)||policy.denied_capabilities.count("telemetry.subscribe")||
        !c::permits(authority,policy,"inspector","operational")||!c::permits(authority,policy,"accessibility","operational"))return false;
     if(s.inspection!=profile){s.stop_inspection();increment(s.network_generation);s.inspection=profile;s.view.telemetry_scope={profile->serial,s.network_generation};s.inspection_closed=false;}
     return true;

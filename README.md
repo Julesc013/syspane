@@ -7,6 +7,12 @@ Shared build scripts, profiles and dependency locks live in
 [source/build](source/build/README.md). Build products, raw test recordings and
 machine-specific workspace settings stay in ignored `out/` directories.
 
+The [CPU inspector checkpoint](spec/delivery/processor-publication-handoff.md)
+connects Linux CPU scenes to the existing native telemetry, demand and policy
+owners. Exact denominators and live/failed/pending states are verified through
+the installed inspector. Other native resource providers and full release gates
+remain open.
+
 The [Linux processor checkpoint](spec/delivery/linux-processor-handoff.md) adds
 complete proc/sysfs CPU accounting and reported topology, portable checks on
 three profiles and independent native evidence for all 12 CPUs visible in WSL.

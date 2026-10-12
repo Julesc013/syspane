@@ -137,6 +137,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Immutable authored validation for native composition](w-11-validated-authored.md) — Remove repeated structural validation while retaining current geometry, resource and policy checks.
 - [Exact validated theme reuse during composition](w-11-validated-theme.md) — Remove repeated theme schema walks without changing request validation, typography or pixel output.
 - [Complete Linux processor accounting and reported topology](w-14-linux-processor.md) — Bounded proc/sysfs acquisition, exact accounting semantics and independent live verification.
+- [Linux processor telemetry in the existing native inspector](w-14-processor-publication.md) — Close descriptor, publication, demand continuity and policy boundaries before connecting native CPU acquisition.
 - [Shared processor interval ownership and denominators](w-14-processor-state.md) — Deterministic complete-processor counter reconciliation before native resource acquisition and publication.
 - [W-24 authenticated transport and policy boundary](w-24-transport.md) — Close the initial local protocol, admission and preview boundary before native integration.
 - [W-25 collection continuity across consumer replacement](w-25-consumer-continuity.md) — Keep real collection independently owned while admitting bounded replacement consumers.

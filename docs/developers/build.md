@@ -1,5 +1,25 @@
 # Developer setup and checks
 
+The [CPU publication package](../../spec/delivery/packages/w-14-processor-publication.md)
+uses the existing controller/session/demand/guardian and installed inspector.
+After ordinary workspace preflight and configure/build, run:
+
+```sh
+ctest --preset <profile> -R '^(processor[.]|processor-linux[.]|processor-publication[.]|model[.]|demand[.]|demand-session[.]|network[.](RECONCILE-|PUBLICATION-)|composition[.])' --output-on-failure
+ctest --preset windows-x86-v141-xp -R '^legacy[.]' --output-on-failure
+ctest --preset linux-x64-gcc13 -R '^native[.](PROCESSOR-PUBLICATION|INSTALLED-PROCESSOR)$' --output-on-failure
+```
+
+Each development profile executes 71 selected checks. CPU scenes request the
+negotiated feature through their validated bindings. The native controller verifies
+all visible CPUs and independent exact math; the installed CPU test uses a declared
+1600x1200 private display and existing 64-row table limit. Do not infer low-end or
+large-server support. Preserve unavailable/pending/failed values and policy erasure.
+Inspector failure reasons are bounded stderr diagnostics. Generated copies remain
+inside owned ignored output roots, and verified inactive evidence is archived before
+duplicate cleanup. See the [handoff](../../spec/delivery/processor-publication-handoff.md)
+for initial fixture/preflight failures, unchanged budgets and remaining target work.
+
 The [Linux processor package](../../spec/delivery/packages/w-14-linux-processor.md)
 adds a read-only proc/sysfs reader and portable decoder. Use ordinary workspace
 preflight/configure/build, then these commands on the corresponding profiles:

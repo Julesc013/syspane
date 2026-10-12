@@ -9,7 +9,7 @@ namespace syspane::application {
 class LinuxNetworkConsumer {
 public:
     LinuxNetworkConsumer(std::string endpoint,std::uint64_t process,std::string epoch,
-                         recovery::DeliveryScope,configuration::Policy,std::function<bool()> current);
+                         recovery::DeliveryScope,configuration::Policy,std::function<bool()> current,bool processor=false);
     ~LinuxNetworkConsumer();
     LinuxNetworkConsumer(const LinuxNetworkConsumer&)=delete;
     LinuxNetworkConsumer& operator=(const LinuxNetworkConsumer&)=delete;
