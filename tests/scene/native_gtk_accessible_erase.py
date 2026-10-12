@@ -80,7 +80,16 @@ def observe(exe,folder,strategy,cohort):
         current=table();assert current.get_n_rows()==len(INITIAL)
         for row,wanted in enumerate(INITIAL):
             for column,value in enumerate(wanted):
-                cell=current.get_accessible_at(row,column);assert text(cell)==value and cell.get_name()==value;interface=cell.get_text_iface();assert interface;held.append((cell,interface))
+                cell=current.get_accessible_at(row,column)
+                try:assert text(cell)==value and cell.get_name()==value;interface=cell.get_text_iface();assert interface
+                except Exception:
+                    suspect=[cell.app.bus_name,cell.path];diagnostic=dict(row=row,column=column,reference=suspect,completed_cells=len(held),process_alive=proc.poll() is None,wire=[])
+                    for method in methods[:3]:
+                        try:diagnostic['wire'].append(dict(method=method[0],reply=request(suspect,method)))
+                        except GLib.Error as error:diagnostic['wire'].append(dict(method=method[0],error=Gio.DBusError.get_remote_error(error),domain=error.domain,code=error.code,message=error.message))
+                    report['initial_lookup_failure']=diagnostic
+                    raise
+                held.append((cell,interface))
                 reference=[cell.app.bus_name,cell.path];assert reference[0] and reference[1].startswith('/org/a11y/atspi/accessible/');references.append(reference)
                 initial=[request(reference,method) for method in methods];assert initial[0]==(value,) and initial[1]==(value,) and initial[2]==(len(value),)
         assert len(held)==6344;report['initial_sha256']=sha(encoded(INITIAL))
@@ -102,10 +111,13 @@ def observe(exe,folder,strategy,cohort):
             if strategy!='lifetime':
                 for stage in report['stages']:
                     assert stage['cache_profiled']
-                    for key in ('cache_calls','cache_us','cache_max_us','cache_max_depth','signal_calls','signal_us','quiet_calls','quiet_us','renderer_notifies','defunct_count'):
+                    for key in ('cache_calls','cache_us','cache_max_us','cache_max_depth','signal_calls','signal_us','quiet_calls','quiet_us','renderer_notifies','unset_calls','unset_us','unset_max_us','unset_max_depth','notify_calls','notify_us','notify_max_us','notify_max_depth','defunct_count'):
                         assert type(stage[key]) is int and stage[key]>=0,'invalid public cache counter'
                     assert stage['cache_calls']<=1000000 and stage['cache_us']<=120000000 and stage['cache_max_depth']<=32
                     assert stage['signal_calls']+stage['quiet_calls']==stage['cache_calls'] and stage['signal_us']+stage['quiet_us']==stage['cache_us']
+                    assert stage['unset_calls']<=1000000 and stage['unset_us']<=120000000 and stage['unset_max_depth']<=32
+                    assert stage['notify_calls']<=1000000 and stage['notify_us']<=120000000 and stage['notify_max_depth']<=32
+                    assert stage['unset_calls']==((6342 if cohort=='collapsed' else 66) if stage['ack']=='retire' else (2 if cohort=='collapsed' else 6278) if stage['ack']=='erase' else 0)
                     assert stage['defunct_count']==(6342 if cohort=='collapsed' else 66) if stage['ack']=='retire' else stage['defunct_count']==6344
             assert all(stage[key]==0 for stage in report['stages'] if stage['local_checked'] for key in ('text_leaks','name_leaks','count_leaks','word_leaks'))
             for phase,index,method,status,value in wire_rows:
@@ -140,11 +152,11 @@ def main():
     if sys.argv[1]=='--observe':observe(Path(sys.argv[2]),Path(sys.argv[3]),sys.argv[4],sys.argv[5]);return
     exe,evidence=map(lambda p:Path(p).resolve(),sys.argv[1:3]);assert os.geteuid()!=0 and evidence.parent==exe.parent and (exe.parent/'.syspane-owner.json').is_file()
     folder=evidence/('gtk-accessible-erase-'+uuid.uuid4().hex[:12]);folder.mkdir();server=None
-    bulk='--retirement-batch' in sys.argv[3:];profile='--retirement-profile' in sys.argv[3:];lifetime='--lifetime' in sys.argv[3:] or profile or bulk
-    report=dict(family='GTK-RETIREMENT-BATCH' if bulk else 'GTK-RETIREMENT-PROFILE' if profile else 'GTK-CELL-LIFETIME' if lifetime else 'GTK-ACCESSIBLE-ERASURE',outcome='fail',diagnostic_only=True,scope='Standalone cell lifetime semantics with distinct verified withdrawal; no GUI/erasure performance or edition qualification' if lifetime else 'Standalone toolkit cache experiment with all native/external retained cells; no product/registry/edition qualification',started_at=datetime.now(timezone.utc).isoformat(),executable_sha256=sha(exe.read_bytes()),inputs={p.relative_to(ROOT).as_posix():sha(p.read_bytes()) for p in (Path(__file__),ROOT/'tests/scene/gtk_accessible_erase_probe.cpp',ROOT/'source/interfaces/scene_inspector_text_linux.cpp',ROOT/'source/interfaces/scene_inspector_text_linux.hpp',ROOT/'source/build/surface-runtime.json',ROOT/'source/build/text-runtime.json')},cases=[])
+    deferred='--retirement-deferred' in sys.argv[3:];unset='--retirement-unset' in sys.argv[3:];bulk='--retirement-batch' in sys.argv[3:];profile='--retirement-profile' in sys.argv[3:];lifetime='--lifetime' in sys.argv[3:] or profile or bulk or unset or deferred
+    report=dict(family='GTK-RETIREMENT-DEFERRED' if deferred else 'GTK-RETIREMENT-UNSET' if unset else 'GTK-RETIREMENT-BATCH' if bulk else 'GTK-RETIREMENT-PROFILE' if profile else 'GTK-CELL-LIFETIME' if lifetime else 'GTK-ACCESSIBLE-ERASURE',outcome='fail',diagnostic_only=True,scope='Standalone cell lifetime semantics with distinct verified withdrawal; no GUI/erasure performance or edition qualification' if lifetime else 'Standalone toolkit cache experiment with all native/external retained cells; no product/registry/edition qualification',started_at=datetime.now(timezone.utc).isoformat(),executable_sha256=sha(exe.read_bytes()),inputs={p.relative_to(ROOT).as_posix():sha(p.read_bytes()) for p in (Path(__file__),ROOT/'tests/scene/gtk_accessible_erase_probe.cpp',ROOT/'source/interfaces/scene_inspector_text_linux.cpp',ROOT/'source/interfaces/scene_inspector_text_linux.hpp',ROOT/'source/build/surface-runtime.json',ROOT/'source/build/text-runtime.json')},cases=[])
     try:
         server,env=launch_xvfb(folder,(1600,2048));env['NO_AT_BRIDGE']='0';env.pop('AT_SPI_BUS_ADDRESS',None)
-        for strategy in (('lifetime-bulk',) if bulk else ('lifetime-profile','lifetime-remove','lifetime-detach') if profile else ('lifetime',) if lifetime else ('blank','detach','scrub')):
+        for strategy in (('lifetime-deferred',) if deferred else ('lifetime-unset',) if unset else ('lifetime-bulk',) if bulk else ('lifetime-profile','lifetime-remove','lifetime-detach') if profile else ('lifetime',) if lifetime else ('blank','detach','scrub')):
             for cohort in ('expanded','collapsed'):
                 name=strategy+'-'+cohort;child=subprocess.Popen(['dbus-run-session','--',sys.executable,str(Path(__file__)), '--observe',str(exe),str(folder/name),strategy,cohort],env=env,stdout=subprocess.PIPE,stderr=subprocess.PIPE,start_new_session=True)
                 try:out,err=child.communicate(timeout=120)

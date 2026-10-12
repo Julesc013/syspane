@@ -214,3 +214,85 @@ one normal defunct transition per cell, current/fresh values, selection semantic
 and producer/renderer closure. No renderer-property batching enters the product.
 Run the actual lifetime, model/frame/renderer/background, erasure, installed and
 table cases plus ordinary maximum history; keep all original failures and limits.
+
+## Inherited native retirement measurement
+
+Continue from 98ac09e5. Actual maximum chart/mixed work is 296850/315191 us after
+complete projection cleanup. Each case completes content/recovery/owner exit and
+has one over-limit tick. Preserve both failures and the original 100/200-ms gates.
+
+Add native.GTK-RETIREMENT-UNSET as two fresh lifetime-unset cohorts with the same
+detachment sequence and complete retained-cell/live/fresh/wire/lifecycle oracles.
+In the owned prototype only, wrap the public inherited GtkAccessibleClass
+widget-unset slot on the text-cell class before fixture cells exist. Forward it
+exactly once with the original object and preserve all defunct/model/visible-data
+events. Restore it after owned teardown. Record inclusive calls/time/max time/depth
+independently from the cache-update slot and full callback clock. These are nested
+component clocks, not disjoint durations to sum. The same one-million calls,
+depth 32, 120-million inclusive microseconds, GTK-owner and output caps apply.
+Use 120-second children/250-second family; never relax or exclude original times.
+No product source, private fields, signal suppression or foreign process changes
+are admitted by this instrumentation. The result must distinguish measured native
+unset work from the still-unmeasured remainder before selecting the next repair.
+
+The first expanded collection fails its initial SDK Text-interface lookup before
+any retirement command; the collapsed case passes and measures 128923 us in the
+inherited unset slot, 31864 us in cache slots and 313454 us in complete retirement.
+Preserve both exact sources/reports. Add bounded initial lookup context: attempted
+row/column, retained reference, completed initial-cell count, live-process state
+and actual raw text/name/count replies or explicit errors for that suspect object.
+The same initial interface/data assertions still decide the case. This is
+diagnostic collection, not timeout extension, retry-to-pass or changed acceptance.
+
+The diagnostic collector's next cases pass the unchanged oracle. Expanded erase
+records 312091 us total, 128673 us inherited unset and 31917 us public cache time;
+collapsed retirement is 313587/128799/31964 us respectively. Preserve the first
+initial lookup failure; the later pass does not prove its cause.
+
+Extend this test-owned instrumentation with the public GObjectClass property-
+notification dispatch slot on the same text-cell class. Forward every original
+property specification once. For dispatches including widget, record calls,
+inclusive time, maximum call time and nesting, with the existing count/time/depth/
+GTK-owner limits. Keep full callback clocks and all normal notifications. Restore
+the original slot after owned teardown. No property is blocked, deferred or
+changed. These clocks locate widget-notification dispatch outside inherited unset;
+they do not authorize a product notification change or prove the unmeasured cost.
+
+The dispatch cases pass complete lifecycle/wire checks. Expanded erase is 307603
+us, with 126475 us in inherited unset, 123578 us in widget-property dispatch and
+31211 us in cache updates. Keep the complete clocks and treat the remaining time
+as unmeasured. No native event may be suppressed to fit the budget.
+
+Add native.GTK-UNSET-NO-BRIDGE as a diagnostic native-only control. Use the same
+prototype, 3172 rows/6344 native holds/cohorts/commands, exact one-defunct checks
+and cache getters, with NO_AT_BRIDGE=1 and no external wire qualification. Prime
+full text/name/count/legacy and modern word getters before readiness so native
+word-layout work is not silently omitted relative to the external initial reads.
+Mark priming explicitly in readiness. Keep input/output limits and full callback
+clocks. Use fresh private Xvfb, two bounded 15-second children and 40-second family.
+Record actual source/artifact/runtime identity, native values and normal exit;
+do not call this accessibility, GUI or edition qualification. This control tests
+the relationship with bridge presence; it cannot authorize disabling the bridge
+in the product or rewriting either 100/200-ms gate.
+
+The primed native-only control passes: expanded erase is 35442 us with 2253 us
+inherited unset and 2551 us widget dispatch; collapsed retirement is 32070 us.
+This local comparison does not qualify the enabled bridge or prove every timing
+cause. Keep the bridge enabled in every product/qualification path.
+
+Add a synchronous deferred-notification prototype, native.GTK-RETIREMENT-DEFERRED,
+with the same two complete lifetime cohorts/120-second children/250-second family.
+During retirement only, copy the original inherited-unset/property-dispatch calls
+into an owned FIFO; retain the exact cell and parent/root plus every parameter
+specification. Physically clear cache data and perform the public model operation
+before invoking queued notifications. Check all original native caches before
+queue drainage as well as after it. Forward every original call exactly once in
+order, with no coalescing/suppression; release every temporary reference afterward.
+The window/root stays owned throughout this synchronous control. Queue at most
+16384 operations and property arrays at most 8 entries; overflow fails rather
+than truncating or dropping an event. Keep the original complete command clock,
+record preparation/queue size/drain time and bounded 64-operation drain slices.
+Do not label slices as GUI callbacks: this control remains synchronous and is
+not a performance pass. Test late original callbacks against real native events,
+held data, exact active/fresh rows and actual wire withdrawal before proposing
+any asynchronous production ownership, shutdown or observer-lifetime contract.

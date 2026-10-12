@@ -12,10 +12,27 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-12T00:42:57.936123+00:00", "scope": "Native retirement attribution and complete projection cleanup, with original qualification preserved"}
+updated: {"by": "codex", "at": "2026-10-12T01:34:12.108206+00:00", "scope": "Native unset/property notification timing and synchronous retained-call controls; product unchanged"}
 ---
 
 # Current state and next admitted boundary
+
+The [native unset/notification checkpoint](gtk-unset-handoff.md) measures
+inherited retirement and widget-property dispatch while preserving every native
+event. Expanded full work is 307.603 ms, including 126.475 ms unset, 123.578 ms
+widget dispatch and 31.211 ms cache update. The primed native-only control is
+about 35 ms; it disables the bridge only as a diagnostic, never qualification.
+A synchronous FIFO control clears old cache data before drainage, retains cell/
+parent/parameter references and forwards every original call once in order.
+Expanded preparation is 40.037 ms, 12556 operations drain in 262.717 ms and the
+full command remains 304.726 ms. Slices are not GUI callbacks or a timing pass.
+Complete held-native/wire/lifecycle and existing lifetime/model/graph controls
+pass. Preserve the initial SDK-interface failure and unknown cause. Product source
+and 70 existing artifacts are unchanged. Next close bounded asynchronous ownership,
+queued GUI accounting, observer/parent lifetimes and actual shutdown before any
+product deferral; preserve 100/200-ms gates and the prior actual maximum failures.
+All five complete editions remain required. Tooling is in source/build; raw data
+are ignored under out/ and the retired root remains absent.
 
 The [native retirement checkpoint](gtk-retirement-handoff.md) measures normal
 cache updates separately from complete callbacks. All eight retained-cell

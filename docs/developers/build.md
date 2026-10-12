@@ -1,5 +1,23 @@
 # Developer setup and checks
 
+The [native unset checkpoint](../../spec/delivery/gtk-unset-handoff.md) keeps
+cache, inherited-unset/property-dispatch and complete command clocks. After
+workspace preflight/configure/build, run these controls separately:
+
+```sh
+ctest --preset linux-x64-gcc13 -R '^native[.]GTK-RETIREMENT-UNSET$' --output-on-failure
+ctest --preset linux-x64-gcc13 -R '^native[.]GTK-UNSET-NO-BRIDGE$' --output-on-failure
+ctest --preset linux-x64-gcc13 -R '^native[.]GTK-RETIREMENT-DEFERRED$' --output-on-failure
+```
+
+External families have 120-second children/250-second bounds and complete original
+wire/cell/lifecycle oracles. Native-only has primed getters, two 15-second children
+and a 40-second family; disabling its bridge is diagnostic only. Deferred calls
+are synchronous with retained references and every normal event. Its drain slices
+are not GUI callbacks or performance qualification. Product source/artifacts are
+unchanged. Keep original gates, clocks, initial-interface failure and pending
+asynchronous ownership/shutdown/observer contracts before product implementation.
+
 The [native retirement checkpoint](../../spec/delivery/gtk-retirement-handoff.md)
 profiles the public GTK cache slot and keeps complete callback clocks. After
 workspace preflight/configure/build, run the bounded experiment families separately:

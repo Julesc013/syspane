@@ -738,14 +738,15 @@
         "source/interfaces/scene_inspector_text_linux.cpp",
         "source/interfaces/scene_inspector_text_linux.hpp",
         "tests/scene/inspector_cell_lifetime.hpp",
-        "tests/scene/native_inspector_cell_lifetime.py"
+        "tests/scene/native_inspector_cell_lifetime.py",
+        "tests/scene/native_gtk_unset_no_bridge.py"
       ],
       "status": "in_progress",
       "authority_class": "development",
       "execution_grant": "user:foundation-native-campaign-2026-10-05",
-      "notes": "The native retirement checkpoint measures normal cache updates separately from complete callbacks. All eight retained-cell candidates pass exact native/wire/lifecycle gates; none qualifies large callback timing. Removing blanking reduces expanded erasure to 526.127 ms; detachment to 308.786 ms. Quiet cache slots account for about 33\u201339 ms. Renderer notification batching still takes 486.891 ms and does not establish a fix. The product now detaches/clears/reattaches the same owned store for complete projection retirement, preserving real cache erasure, root identity and normal lifecycle events. Empty projection cleanup preserves adopted results/status/tickets; partial updates stay unchanged. Real lifetime, five affected suites, graph, erasure, installed inspector/ telemetry and all seven table cases pass. Ordinary maximum history: chart: 296.85 ms (fail) / mixed: 315.191 ms (fail). Preserve all original failures and timing samples; continue remaining retirement/ event attribution, maximum-policy/history and installed/human/desktop/lifecycle qualification. W-11 and all five complete editions remain open. Shared tooling is in source/build; raw data stay under ignored out/ and the retired root is absent.",
+      "notes": "The native unset/notification checkpoint measures inherited retirement and widget-property dispatch while preserving every native event. Expanded full work is 307.603 ms, including 126.475 ms unset, 123.578 ms widget dispatch and 31.211 ms cache update. The primed native-only control is about 35 ms; it disables the bridge only as a diagnostic, never qualification. A synchronous FIFO control clears old cache data before drainage, retains cell/ parent/parameter references and forwards every original call once in order. Expanded preparation is 40.037 ms, 12556 operations drain in 262.717 ms and the full command remains 304.726 ms. Slices are not GUI callbacks or a timing pass. Complete held-native/wire/lifecycle and existing lifetime/model/graph controls pass. Preserve the initial SDK-interface failure and unknown cause. Product source and 70 existing artifacts are unchanged. Next close bounded asynchronous ownership, queued GUI accounting, observer/parent lifetimes and actual shutdown before any product deferral; preserve 100/200-ms gates and the prior actual maximum failures. All five complete editions remain required. Tooling is in source/build; raw data are ignored under out/ and the retired root remains absent.",
       "package": "delivery/packages/w-11-gtk-cell-lifetime.md",
-      "evidence": "delivery/gtk-retirement-handoff.md"
+      "evidence": "delivery/gtk-unset-handoff.md"
     },
     {
       "id": "W-12",
