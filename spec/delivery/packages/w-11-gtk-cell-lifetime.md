@@ -128,3 +128,89 @@ the original table, erasure, history/renderer and installed suites. Preserve the
 baseline failure even if the new candidate passes. Do not infer a general timing
 qualification or proven causal attribution from a later passing run.
 Primary source: https://raw.githubusercontent.com/GNOME/gtk/3.24.41/gtk/a11y/gtktextcellaccessible.c
+
+## Bounded retirement-cost experiment
+
+Continue from 07b7b26e. Product privacy passes, but ordinary maximum chart/mixed
+work reaches 718584/534685 us; complete standalone expanded erase is 896274 us
+and collapsed retirement 309696 us. Preserve every source-bound failure.
+
+Use the same exact 3172 rows, 6344 held native/wire cells, cohorts, fresh rows,
+seven wire methods and lifecycle oracle. Add three test-only candidates:
+lifetime-profile keeps the original blank/clear sequence; lifetime-remove clears
+the store directly; lifetime-detach detaches the model, clears the store and
+reattaches the same empty store. All use the current product text renderer. Keep
+retirement/collapse identical so surviving active chart values remain an oracle.
+No product clear/reconcile behavior changes until a candidate passes privacy.
+
+In this owned prototype process only, install a public GtkCellAccessibleClass
+cache-update wrapper on the text-cell class before any fixture cell exists.
+Forward the original slot exactly once with the original cell/signal argument.
+During each synchronous command record call counts, inclusive microseconds,
+maximum call time, signal/quiet counts and maximum nesting depth. Keep the complete
+original callback and mutation clocks, including instrumentation. Do not sum nested
+durations as disjoint work. At most 1000000 calls/depth 32/120000000 inclusive us
+per command; record a failed experiment on overflow. Restore the original slot
+after owned widget/cell destruction. There is no production instrumentation,
+private toolkit access, per-row copied cache or external process modification.
+
+Hold bounded per-cell transition counters in the fixture. Retired cells have one
+normal defunct transition; live chart cells remain live until their own retirement.
+After erase/regrant every original cell remains empty and has exactly one defunct
+transition. Preserve normal model/visible-data events; block no signal. The two
+existing cohort shapes and independent raw wire journals still enforce exact live
+and fresh rows, old-path non-reuse, verified withdrawal and actual normal exit.
+
+Run native.GTK-RETIREMENT-PROFILE as six fresh children, 120 seconds each and a
+750-second family, with unchanged input/reply/stdout/stderr/observer caps. A
+semantic pass does not qualify the 100-ms GUI/200-ms erasure limits. Select a
+product change only from measured results and passing complete privacy; then
+rerun the actual inspector/renderer/erasure/installed and ordinary maximum suites.
+
+The first six cases pass lifetime with depth one. Expanded blank/remove/detach
+callbacks take 828374/526127/308786 us. Quiet public cache work is only 38852/34495
+us for remove/detach; collapsed retirement is about 307–315 ms with 33 ms of quiet
+cache work. Do not attribute the unmeasured remainder to Pango or notifications
+without another controlled observation.
+
+Add native.GTK-RETIREMENT-BATCH with two fresh lifetime-bulk cohorts, 120-second
+children/250-second family and unchanged caps. Before each retire/erase command,
+freeze property notifications on the two owned shared renderers; thaw both before
+reply and include the whole scope in the original callback clock. Erase directly
+clears the store. Count actual renderer notify::text emissions in every profiled
+variant. Public property writes/cache reads remain immediate. This is bounded
+notification coalescing on owned renderers, not signal blocking on native cells,
+the tree, model or root. Preserve every normal defunct/model/visible-data event,
+exact active/fresh values and held-cache/wire checks. This narrow experiment is
+an explicit exception to the earlier no-signal-blocking shorthand for renderer
+property batching; it permits no suppression of accessibility lifecycle events.
+Select product batching only after the full cohort gate, with exception-safe
+thaw and exact renderer ownership closed before implementation.
+
+## Complete projection retirement
+
+The batch experiment passes lifetime but still takes 486891 us for expanded
+removal and 322404 us for collapsed retirement. Do not claim notifications caused
+or solved the delay. Select the earlier lifetime-detach candidate as a measured
+increment: it passes every retained native/wire/lifecycle check and reduces
+expanded erasure to 308786 us without batching. This is not timing qualification.
+
+For complete native projection retirement only, clear the requested summary,
+selection/row/expansion bookkeeping, detach the existing tree model, clear the
+owned store while disconnected and reattach that same empty store. Keep the same
+tree/root, columns, renderers and model owner; never create a replacement widget
+or copy. Empty already-retired stores need no model reset. The existing text-cell
+unset hook must finish physical text/name/count/layout erasure before each normal
+defunct event; this proven erasure is required and detachment alone is forbidden.
+This explicitly permits complete projection detachment after the lifetime gate,
+superseding the earlier shorthand ban on detachment as a substitute for erasure.
+
+Separate native projection cleanup from admission/adopted-result cleanup. Explicit
+clear/shutdown still resets admission and adopted input. Presenting an empty
+qualified projection retires native rows/summary/selection/expansion but preserves
+the current result, status, ticket and renderer acknowledgement. Nonempty and
+partial reconciliation remains unchanged. Preserve GTK model/visible-data events,
+one normal defunct transition per cell, current/fresh values, selection semantics
+and producer/renderer closure. No renderer-property batching enters the product.
+Run the actual lifetime, model/frame/renderer/background, erasure, installed and
+table cases plus ordinary maximum history; keep all original failures and limits.

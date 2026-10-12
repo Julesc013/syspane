@@ -18,6 +18,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [gtk-history-limits.json](gtk-history-limits.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [gtk-history-phases.json](gtk-history-phases.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [gtk-history-producer.json](gtk-history-producer.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
+- [gtk-retirement.json](gtk-retirement.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [helper-identity.json](helper-identity.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [history-form.json](history-form.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.
 - [history-preparation.json](history-preparation.json) — Machine contract, tooling, fixture or supporting record; inspect its declared scope.

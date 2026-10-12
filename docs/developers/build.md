@@ -1,5 +1,22 @@
 # Developer setup and checks
 
+The [native retirement checkpoint](../../spec/delivery/gtk-retirement-handoff.md)
+profiles the public GTK cache slot and keeps complete callback clocks. After
+workspace preflight/configure/build, run the bounded experiment families separately:
+
+```sh
+ctest --preset linux-x64-gcc13 -R '^native[.]GTK-RETIREMENT-PROFILE$' --output-on-failure
+ctest --preset linux-x64-gcc13 -R '^native[.]GTK-RETIREMENT-BATCH$' --output-on-failure
+```
+
+Six profile children have 120 seconds each/750-second family; two batching children
+retain 120/250 seconds. All original 6344 cells, live/fresh values, normal defunct
+events and complete raw wire journals remain mandatory. Lifetime passes do not
+qualify slow callback timing. The product uses complete same-store retirement;
+renderer notification batching stays an experiment. Run the actual lifetime,
+affected/installed/table and ordinary maximum commands below for that product
+source. Keep all original limits, failed candidates and blocked qualifications.
+
 The [GTK cell lifetime package](../../spec/delivery/packages/w-11-gtk-cell-lifetime.md)
 uses public toolkit hooks in both real inspector columns. After workspace
 preflight and ordinary configure/build, run:

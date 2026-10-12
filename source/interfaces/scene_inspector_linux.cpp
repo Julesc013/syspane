@@ -30,10 +30,15 @@ struct SceneInspector::Impl {
     void clear_summary(){summary_key.clear();if(summary)gtk_label_set_text(GTK_LABEL(summary),"");}
     void blank(GtkTreeIter* parent=nullptr){GtkTreeIter iter;if(!store||!gtk_tree_model_iter_children(model(),&iter,parent))return;
         do{blank(&iter);gtk_tree_store_set(store,&iter,key_column,"",item_column,"",information_column,"",-1);}while(gtk_tree_model_iter_next(model(),&iter));}
-    void clear(){if(admission)admission->reset();adopted.reset();clear_summary();rows.clear();expansion.clear();if(store){blank();gtk_tree_store_clear(store);}
+    void clear_rows(){clear_summary();rows.clear();expansion.clear();if(store&&gtk_tree_model_iter_n_children(model(),nullptr)){
+            // Cell unset hooks erase held text before GTK retires each object.
+            if(tree)gtk_tree_view_set_model(GTK_TREE_VIEW(tree),nullptr);
+            gtk_tree_store_clear(store);
+            if(tree)gtk_tree_view_set_model(GTK_TREE_VIEW(tree),model());}
         if(tree){auto* columns=gtk_tree_view_get_columns(GTK_TREE_VIEW(tree));
             for(auto* item=columns;item;item=item->next)gtk_tree_view_column_queue_resize(GTK_TREE_VIEW_COLUMN(item->data));
             g_list_free(columns);}}
+    void clear(){if(admission)admission->reset();adopted.reset();clear_rows();}
     bool invalidated(){if(!batch)clear();return true;}
     void shut(){closed=true;replacement=false;setup.reset();clear();if(renderer)renderer->close();if(surface&&!batch)surface->close();rendered={r::SurfaceCode::closed,0,0,"surface.closed"};}
     ~Impl(){shut();admission.reset();surface.reset();if(root)gtk_widget_destroy(root);for(auto* w:{button,summary,tree,root})if(w)g_object_unref(w);if(store)g_object_unref(store);}
@@ -59,6 +64,7 @@ struct SceneInspector::Impl {
     }
     void present_rows(const std::vector<InspectorRow>& projected){
         if(closed){clear();return;}
+        if(projected.empty()){clear_rows();return;}
         std::vector<std::string> selection;GtkTreePath* path=nullptr;GtkTreeViewColumn* column=nullptr;gtk_tree_view_get_cursor(GTK_TREE_VIEW(tree),&path,&column);
         if(path)gtk_tree_path_free(path);
         GtkTreeIter selected;if(gtk_tree_selection_get_selected(gtk_tree_view_get_selection(GTK_TREE_VIEW(tree)),nullptr,&selected)){do{selection.push_back(text(model(),&selected,key_column));GtkTreeIter parent;if(!gtk_tree_model_iter_parent(model(),&parent,&selected))break;selected=parent;}while(true);}

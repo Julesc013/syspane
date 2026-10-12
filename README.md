@@ -7,11 +7,10 @@ Shared build scripts, profiles and dependency locks live in
 [source/build](source/build/README.md). Build products, raw test recordings and
 machine-specific workspace settings stay in ignored `out/` directories.
 
-The [GTK cell lifetime repair](spec/delivery/gtk-cell-lifetime-handoff.md)
-clears retained native inspector text through collapse, policy denial and widget
-destruction while preserving normal lifecycle events. Lifetime and affected
-regression checks pass; prior failures and maximum-history performance remain
-open. All five complete desktop editions are still required.
+The [native retirement checkpoint](spec/delivery/gtk-retirement-handoff.md)
+improves complete inspector cleanup while preserving held-cell erasure and normal
+lifecycle events. Native, installed and table regression checks pass. Original
+performance failures and the full five-edition release objective remain recorded.
 
 The [native history producer checkpoint](spec/delivery/gtk-history-producer-handoff.md)
 puts complete fixture telemetry on one receiver thread with ordered immutable

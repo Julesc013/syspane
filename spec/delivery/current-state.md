@@ -12,10 +12,26 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-11T23:46:25.312722+00:00", "scope": "Product native GTK cell-lifetime repair and preserved unqualified timing boundaries"}
+updated: {"by": "codex", "at": "2026-10-12T00:42:57.936123+00:00", "scope": "Native retirement attribution and complete projection cleanup, with original qualification preserved"}
 ---
 
 # Current state and next admitted boundary
+
+The [native retirement checkpoint](gtk-retirement-handoff.md) measures normal
+cache updates separately from complete callbacks. All eight retained-cell
+candidates pass exact native/wire/lifecycle gates; none qualifies large callback
+timing. Removing blanking reduces expanded erasure to 526.127 ms; detachment to
+308.786 ms. Quiet cache slots account for about 33–39 ms. Renderer notification
+batching still takes 486.891 ms and does not establish a fix. The product now
+detaches/clears/reattaches the same owned store for complete projection retirement,
+preserving real cache erasure, root identity and normal lifecycle events. Empty
+projection cleanup preserves adopted results/status/tickets; partial updates stay
+unchanged. Real lifetime, five affected suites, graph, erasure, installed inspector/
+telemetry and all seven table cases pass. Ordinary maximum history: chart: 296.85 ms (fail) / mixed: 315.191 ms (fail).
+Preserve all original failures and timing samples; continue remaining retirement/
+event attribution, maximum-policy/history and installed/human/desktop/lifecycle
+qualification. W-11 and all five complete editions remain open. Shared tooling is
+in source/build; raw data stay under ignored out/ and the retired root is absent.
 
 The [GTK cell lifetime repair](gtk-cell-lifetime-handoff.md) clears inherited
 native caches before normal cell retirement in both actual inspector columns.
