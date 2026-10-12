@@ -12,10 +12,26 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-12T08:48:38.241697+00:00", "scope": "Windows polling IPC, native complete timings and safe overlapped lifetime"}
+updated: {"by": "codex", "at": "2026-10-12T09:11:22.173323+00:00", "scope": "Shared collector measurement ownership and live native controller regression evidence"}
 ---
 
 # Current state and next admitted boundary
+
+The [shared measurement-owner checkpoint](measurement-owner-handoff.md) closes
+the controller's concurrent access to one serialized authenticated clock facility.
+One owner per connection returns exact native ticks/exceptions and is shared by
+both source workers and initial controller clock reads. Two contention/exception
+cases plus 85 controls pass on each development profile, and both strict historical
+audits cover 24 executables. Five affected Linux native families pass, including
+installed CPU values, policy/cancellation and uncooperative-worker/guardian exit.
+Preserve the initial strict compiler fixture failure and all earlier native failures.
+Next reuse these owners with Windows polling, native workers and independent
+guardian supervision, then actual native inspector/settings/editing/desktop work.
+All five complete editions, remaining providers and target/lifecycle/release gates
+stay open; retain the unresolved mixed GTK loss. Keep fixed workspace reservations:
+archive verified inactive evidence before a future build if the 9 GiB check stops.
+Shared tools stay in source/build; raw/machine/generated data stay ignored under
+out/ and the retired root remains absent.
 
 The [Windows polling listener checkpoint](windows-poll-handoff.md) supplies the
 existing adapter's accept_ready prerequisite for a responsive native controller.

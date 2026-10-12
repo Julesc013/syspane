@@ -98,6 +98,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Live measured collector and asynchronous GJS session checkpoint](live-network-session-handoff.md) — Original real telemetry, native clock provenance and independent lifecycle evidence before operational shell pixels.
 - [Measured telemetry and freshness checkpoint](measured-time-handoff.md) — Bind versioned measurement times to consumer clock scope, replay history and native delayed-delivery evidence.
 - [Native measurement-clock checkpoint](measurement-clock-handoff.md) — Record causal clock brackets and peer-exit rejection without claiming measured telemetry or suspend qualification.
+- [Shared native measurement ownership checkpoint](measurement-owner-handoff.md) — One serialized clock facility across acquisition workers, with contention controls and native controller regression evidence.
 - [Native chart checkpoint](native-chart-handoff.md) — Exact chart geometry, authorized history ownership and independently observed Linux pixels and accessibility.
 - [Bounded native clipboard checkpoint](native-clipboard-handoff.md) — Explicit Linux X11 object transfers with independent peers and exact draft/persistence results.
 - [Supervised native content checkpoint](native-content-handoff.md) — Retained resource editing through authenticated commands and exact controller replacement.

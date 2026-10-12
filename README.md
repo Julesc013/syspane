@@ -7,6 +7,11 @@ Shared build scripts, profiles and dependency locks live in
 [source/build](source/build/README.md). Build products, raw test recordings and
 machine-specific workspace settings stay in ignored `out/` directories.
 
+The [measurement-owner checkpoint](spec/delivery/measurement-owner-handoff.md)
+serializes the shared native clock across collector workers while preserving live
+telemetry and recovery. Windows controller/guardian/UI integration and complete
+release qualification remain open.
+
 The [Windows polling listener checkpoint](spec/delivery/windows-poll-handoff.md)
 adds responsive native admission and safe pending-I/O cleanup for the controller
 port. Native lifecycle/timing and existing transport checks pass; full Windows

@@ -1,5 +1,23 @@
 # Developer setup and checks
 
+The [measurement-owner package](../../spec/delivery/packages/w-14-measurement-owner.md)
+serializes the native facility shared by both collector workers. After ordinary
+workspace preflight/configure/build, run:
+
+```sh
+ctest --preset <profile> -R '^(measurement[.]|windows-publication[.]|processor-windows[.]|processor[.]|processor-linux[.]|processor-publication[.]|model[.]|demand[.]|demand-session[.]|network[.](RECONCILE-|PUBLICATION-)|composition[.])' --output-on-failure
+ctest --preset windows-x86-v141-xp -R '^legacy[.]' --output-on-failure
+ctest --preset linux-x64-gcc13 -R '^native[.](PROCESSOR-PUBLICATION|INSTALLED-PROCESSOR|NETWORK-SERVICE|NETWORK-CONSUMER|NETWORK-SUPERVISOR)$' --output-on-failure
+```
+
+Each development profile runs 87 controls; the direct unguarded callback must fail
+the overlap oracle while the actual shared owner excludes overlap. Exceptions
+remain provider outcomes and release ownership without retry/cache/fabricated time.
+Five Linux native families retain actual values, policy and independent termination
+checks. Preserve the original compiler failure and fixed gates; synchronization
+does not replace the guardian. Windows controller/native UI and complete release
+qualification remain open. See the [handoff](../../spec/delivery/measurement-owner-handoff.md).
+
 The [Windows polling package](../../spec/delivery/packages/w-24-windows-poll.md)
 extends the existing local listener for responsive controller admission. Run
 ordinary workspace preflight/configure/build, then:

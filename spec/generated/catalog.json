@@ -520,7 +520,7 @@
       "requires": [
         "SP-START"
       ],
-      "sha256": "f4967139a4add11dbc8d08219c8cb2f6ece003d876909147434adf413b2630c5"
+      "sha256": "a6ff836b8e7d726a7bfb1d36d2dba89c7064aa851ee05a411aa041163404f94f"
     },
     {
       "id": "SP-DATA-VIEW-HANDOFF",
@@ -1336,6 +1336,16 @@
         "SP-CAMPAIGN-ADMISSION"
       ],
       "sha256": "ed6d4db1b080dd017914de4d34bbe89d18c9093683cd75b0f109d2aa878396ba"
+    },
+    {
+      "id": "SP-MEASUREMENT-OWNER-HANDOFF",
+      "path": "delivery/measurement-owner-handoff.md",
+      "title": "Shared native measurement ownership checkpoint",
+      "description": "One serialized clock facility across acquisition workers, with contention controls and native controller regression evidence.",
+      "requires": [
+        "SP-W14-MEASUREMENT-OWNER"
+      ],
+      "sha256": "2a1060376a8b0fceeb878c75ec2730f0d80cc69560d54586ac425f8d8fa1016a"
     },
     {
       "id": "SP-NATIVE-CHART-HANDOFF",
@@ -3150,6 +3160,18 @@
         "SP-WORK-PACKAGES"
       ],
       "sha256": "911da0015e178d248e7e30c7f25628e4d04149613c4ce0bde817d0f99b41fac9"
+    },
+    {
+      "id": "SP-W14-MEASUREMENT-OWNER",
+      "path": "delivery/packages/w-14-measurement-owner.md",
+      "title": "One serialized measurement owner across collector workers",
+      "description": "Close the native clock facility ownership before sharing controller execution with Windows.",
+      "requires": [
+        "SP-W14-PROCESSOR-PUBLICATION",
+        "SP-W24-WINDOWS-POLL",
+        "SP-WORK-PACKAGES"
+      ],
+      "sha256": "d8a42de57d3713f99d4dcae6ea3174404d10fc38c33787722b807cf0abb94703"
     },
     {
       "id": "SP-W14-PROCESSOR-PUBLICATION",

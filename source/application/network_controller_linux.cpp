@@ -3,6 +3,7 @@
 #include "network_publication.hpp"
 #include "processor_publication.hpp"
 #include "processor_task_linux.hpp"
+#include "measurement_owner.hpp"
 #include "demand_sessions.hpp"
 #include "machine_policy.hpp"
 #include "child.hpp"
@@ -48,6 +49,7 @@ int run_network_controller(std::uint64_t parent,std::function<c::Policy()> polic
         r::ProducerLease lease;std::uint64_t token=0,sequence=0,last_sent=0,publication=0,stop_at=0,last_policy=os::monotonic_ms();
         std::uint64_t last_clock=last_policy;bool stopping=false,had_subscription=false;
         std::optional<os::Stream> client;std::unique_ptr<p::Framer> decoder;std::unique_ptr<n::DemandSessions> sessions;
+        std::shared_ptr<collectors::MeasurementOwner> measurement_owner;
         std::unique_ptr<os::NetworkWatch> watch;std::unique_ptr<n::NetworkState> state;
         std::unique_ptr<collectors::NetworkTask> task;std::string sampled_utc;
         std::unique_ptr<collectors::ProcessorTask> processor_task;
@@ -89,10 +91,12 @@ int run_network_controller(std::uint64_t parent,std::function<c::Policy()> polic
                 if(!client){
                     try{client=listener.accept_ready(startup.client);}catch(const os::IpcError&){continue;}
                     if(!client)continue;
-                    check_policy();const auto clock=client->measurement_clock();
-                    decoder=std::make_unique<p::Framer>();state=std::make_unique<n::NetworkState>(startup.epoch,clock.clock_id,clock.local_scope);
-                    processor_state=std::make_unique<n::ProcessorState>(startup.epoch,clock.clock_id,clock.local_scope,"linux:execution-ticks-v1");
-                    processor_publisher=std::make_unique<n::LinuxProcessorPublisher>(startup.epoch,clock.clock_id,clock.local_scope);
+                    check_policy();measurement_owner=std::make_shared<collectors::MeasurementOwner>([&]{
+                        const auto native=client->measurement_clock();return model::Tick{startup.epoch,native.nanoseconds,native.clock_id,native.local_scope};
+                    });const auto clock=(*measurement_owner)();
+                    decoder=std::make_unique<p::Framer>();state=std::make_unique<n::NetworkState>(startup.epoch,clock.clock_id,clock.clock_scope);
+                    processor_state=std::make_unique<n::ProcessorState>(startup.epoch,clock.clock_id,clock.clock_scope,"linux:execution-ticks-v1");
+                    processor_publisher=std::make_unique<n::LinuxProcessorPublisher>(startup.epoch,clock.clock_id,clock.clock_scope);
                 }
                 std::array<char,16384> bytes{};const auto got=client->read(bytes.data(),bytes.size(),1);
                 if(got.eof){decoder->eof();stop();continue;}
@@ -111,8 +115,8 @@ int run_network_controller(std::uint64_t parent,std::function<c::Policy()> polic
                         for(const auto& feature:offer.required)need(features.count(feature),"network.feature");
                         for(const auto& feature:offer.optional)need(features.count(feature),"network.feature");
                         processor_enabled=offer.required.count("telemetry.processor")||offer.optional.count("telemetry.processor");
-                        const auto clock=client->measurement_clock();c::TelemetrySource source{"producer:network","inspector","operational"};
-                        source.document_version="0.2.0";source.clock_id=clock.clock_id;source.clock_scope=clock.local_scope;source.monotonic_replay=true;source.processor=true;
+                        const auto clock=(*measurement_owner)();c::TelemetrySource source{"producer:network","inspector","operational"};
+                        source.document_version="0.2.0";source.clock_id=clock.clock_id;source.clock_scope=clock.clock_scope;source.monotonic_replay=true;source.processor=true;
                         n::DemandSource network{"network","collection.network",1000,2500,"",{}};
                         n::DemandSource cpu{"processor","collection.processor",1000,2500,"sampling.resources_ms",{}};
                         n::DemandRequest request;request.channel="inspector";
@@ -175,9 +179,7 @@ int run_network_controller(std::uint64_t parent,std::function<c::Policy()> polic
                 if(subscription){
                     had_subscription=true;
                     for(unsigned dispatch=0;dispatch<2;++dispatch)if(const auto job=sessions->take(os::monotonic_ms())){
-                        const auto clock=[&]{
-                            const auto clock=client->measurement_clock();return model::Tick{startup.epoch,clock.nanoseconds,clock.clock_id,clock.local_scope};
-                        };
+                        const auto clock=[measurement_owner]{return (*measurement_owner)();};
                         check_policy();
                         if(job->plan.source=="network"){
                             need(!task,"network.task_overlap");if(!watch){watch=std::make_unique<os::NetworkWatch>();need(watch->active(),"network.watch");}

@@ -829,7 +829,8 @@
         "SP-W14-LINUX-PROCESSOR",
         "SP-W14-PROCESSOR-PUBLICATION",
         "SP-W14-WINDOWS-PROCESSOR",
-        "SP-W14-WINDOWS-PUBLICATION"
+        "SP-W14-WINDOWS-PUBLICATION",
+        "SP-W14-MEASUREMENT-OWNER"
       ],
       "acceptance_tests": [
         "T-RATES",
@@ -871,14 +872,18 @@
         "spec/delivery/checkpoints/windows-processor.json",
         "tests/resources/windows_publication_tests.cpp",
         "spec/delivery/windows-publication-handoff.md",
-        "spec/delivery/checkpoints/windows-publication.json"
+        "spec/delivery/checkpoints/windows-publication.json",
+        "source/collectors/measurement_owner.hpp",
+        "tests/resources/measurement_owner_tests.cpp",
+        "spec/delivery/measurement-owner-handoff.md",
+        "spec/delivery/checkpoints/measurement-owner.json"
       ],
       "status": "in_progress",
       "authority_class": "native_lab",
       "execution_grant": "user:foundation-native-campaign-2026-10-05",
-      "notes": "Existing Linux CPU acquisition/publication/installed inspector and Windows acquisition retain their scoped evidence. Explicit Windows accounted-time descriptors and complete group/logical observations now use the shared observation encoder and measured DataView path. Independent native evidence covers all 12 CPUs, 14 entities and 42 observations on the one-group host, exact values/metadata/units/numeric allocation, model replay and policy erasure. Eight new portable cases plus 77 controls pass on each development profile; both strict historical audits cover 23 executables and five affected Linux native families pass against final source. Preserve the omitted accessibility-disclosure fixture failures and lexical numeric-order failures without changing gates or fixed expectations. Native Windows controller/demand/guardian/settings/inspector/desktop, macOS/historical providers, memory/GPU and physical/large-server/low-end/hotplug/full release qualification remain required. Keep the original inverse timer and mixed GTK loss open. W-14/all five complete editions stay in progress; tools stay in source/build, raw/machine/generated data ignored under out/, retired root absent.",
-      "package": "delivery/packages/w-14-windows-publication.md",
-      "evidence": "delivery/windows-publication-handoff.md"
+      "notes": "Linux/Windows CPU acquisition/publication and Windows polling retain their scoped evidence. The Linux controller now uses one shared serialized native measurement owner per client across both acquisition workers and initial clock reads, preserving exact Tick/exception, native provenance/fault, existing demand/policy/publication and guardian semantics. Two contention/exception cases plus 85 controls pass on each development profile; both strict historical audits cover 24 executables and five affected Linux native families pass. Preserve the initial strict compiler fixture failure and every prior native failure. Windows common controller/demand/worker/guardian/native UI, remaining providers and physical/low-end/historical/target/package/lifecycle/full release qualification remain required. Keep mixed GTK loss open. W-14 and all five full editions remain in progress; preserve fixed workspace reservations and archive verified inactive evidence before a future stopped build. Tools stay in source/build, raw/machine/generated data ignored under out/, retired root absent.",
+      "package": "delivery/packages/w-14-measurement-owner.md",
+      "evidence": "delivery/measurement-owner-handoff.md"
     },
     {
       "id": "W-15",

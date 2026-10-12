@@ -3904,7 +3904,8 @@
         "syspane_health",
         "syspane_recovery",
         "syspane_processor_task",
-        "syspane_processor_publication"
+        "syspane_processor_publication",
+        "syspane_measurement_owner"
       ],
       "target_requirements": [
         "cxx17",
@@ -4451,6 +4452,61 @@
         "syspane_data_view",
         "syspane_demand",
         "syspane_configuration"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "windows-x64-gcc15",
+        "linux-x64-gcc13",
+        "windows-x86-v141-xp"
+      ]
+    },
+    {
+      "id": "measurement-owner",
+      "target": "syspane_measurement_owner",
+      "type": "INTERFACE_LIBRARY",
+      "source_owner": "source/collectors/",
+      "sources": [
+        "source/collectors/measurement_owner.hpp"
+      ],
+      "public_interfaces": [
+        "source/collectors/measurement_owner.hpp"
+      ],
+      "private_interfaces": [],
+      "allowed_dependencies": [
+        "syspane_model",
+        "Threads::Threads"
+      ],
+      "target_requirements": [
+        "cxx17"
+      ],
+      "roles": [
+        "development_test"
+      ],
+      "installed_files": [],
+      "profiles": [
+        "windows-x64-gcc15",
+        "linux-x64-gcc13",
+        "windows-x86-v141-xp"
+      ]
+    },
+    {
+      "id": "measurement-owner-tests",
+      "target": "syspane_measurement_owner_tests",
+      "type": "EXECUTABLE",
+      "source_owner": "tests/resources/",
+      "sources": [
+        "tests/resources/measurement_owner_tests.cpp"
+      ],
+      "public_interfaces": [],
+      "private_interfaces": [],
+      "allowed_dependencies": [
+        "syspane_measurement_owner"
       ],
       "target_requirements": [
         "cxx17"
