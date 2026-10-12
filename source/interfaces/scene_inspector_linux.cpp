@@ -23,6 +23,7 @@ struct SceneInspector::Impl {
     r::SurfaceStatus rendered;
     std::uint64_t last_ticket=0,next_submit=0;std::optional<std::uint64_t> highest_policy;
     bool replacement=false;
+    std::shared_ptr<InspectorRetirement> native=std::make_shared<InspectorRetirement>();
     std::map<std::string,GtkTreeIter> rows;
     std::map<std::string,bool> expansion;
     GtkTreeModel* model()const{return GTK_TREE_MODEL(store);}
@@ -41,7 +42,7 @@ struct SceneInspector::Impl {
     void clear(){if(admission)admission->reset();adopted.reset();clear_rows();}
     bool invalidated(){if(!batch)clear();return true;}
     void shut(){closed=true;replacement=false;setup.reset();clear();if(renderer)renderer->close();if(surface&&!batch)surface->close();rendered={r::SurfaceCode::closed,0,0,"surface.closed"};}
-    ~Impl(){shut();admission.reset();surface.reset();if(root)gtk_widget_destroy(root);for(auto* w:{button,summary,tree,root})if(w)g_object_unref(w);if(store)g_object_unref(store);}
+    ~Impl(){shut();native->finish();admission.reset();surface.reset();if(root)gtk_widget_destroy(root);native->finish();for(auto* w:{button,summary,tree,root})if(w)g_object_unref(w);if(store)g_object_unref(store);}
     bool reconcile(const std::vector<InspectorRow>& desired,GtkTreeIter* parent=nullptr){
         bool changed=false;
         std::map<std::string,GtkTreeIter> current;GtkTreeIter iter;
@@ -65,6 +66,7 @@ struct SceneInspector::Impl {
     void present_rows(const std::vector<InspectorRow>& projected){
         if(closed){clear();return;}
         if(projected.empty()){clear_rows();return;}
+        if(native->state().pending)return;
         std::vector<std::string> selection;GtkTreePath* path=nullptr;GtkTreeViewColumn* column=nullptr;gtk_tree_view_get_cursor(GTK_TREE_VIEW(tree),&path,&column);
         if(path)gtk_tree_path_free(path);
         GtkTreeIter selected;if(gtk_tree_selection_get_selected(gtk_tree_view_get_selection(GTK_TREE_VIEW(tree)),nullptr,&selected)){do{selection.push_back(text(model(),&selected,key_column));GtkTreeIter parent;if(!gtk_tree_model_iter_parent(model(),&parent,&selected))break;selected=parent;}while(true);}
@@ -99,7 +101,7 @@ struct SceneInspector::Impl {
             try{operation();}catch(...){emit(phase,begin,false);throw;}
             emit(phase,begin,true);
         };
-        try{measure(Phase::admission,action);if(!closed)measure(Phase::paint,[&]{surface->paint(now,ticks,[&](auto,const auto* frame){measure(Phase::presentation,[&]{present(frame);});});});batch=false;if(closed)surface->close();}
+        try{measure(Phase::admission,[&]{native->poll();if(native->state().failed)throw protocol::Error("inspector.native_retirement");action();});if(!closed)measure(Phase::paint,[&]{surface->paint(now,ticks,[&](auto,const auto* frame){measure(Phase::presentation,[&]{present(frame);});});});batch=false;if(closed)surface->close();}
         catch(...){batch=false;shut();throw;}
     }
     void update(InspectorRenderInput input,std::uint64_t stamp,const PhaseObserver& observer){
@@ -118,6 +120,7 @@ struct SceneInspector::Impl {
         };
         try{
             measure(Phase::admission,[&]{
+                native->poll();if(native->state().failed)throw protocol::Error("inspector.native_retirement");
                 if(adopted&&adopted->active&&!adopted->current(input,setup->profile,stamp,false))clear();
                 if(replacement){
                     if(renderer&&!renderer->status().stopped)return;
@@ -132,7 +135,7 @@ struct SceneInspector::Impl {
                 }
             });
             measure(Phase::adoption,[&]{
-                if(replacement||!renderer||!setup->policy.available)return;
+                if(replacement||!renderer||!setup->policy.available||native->state().pending)return;
                 const auto state=renderer->status();
                 if(!state.error.empty()){shut();rendered={r::SurfaceCode::alternative,0,0,state.error};return;}
                 auto value=renderer->take();if(!value||value->ticket<=last_ticket||!value->current(input,setup->profile,stamp))return;
@@ -152,7 +155,7 @@ struct SceneInspector::Impl {
         }catch(...){batch=false;shut();throw;}
     }
     void retire(std::shared_ptr<const InspectorRenderSetup> next){
-        clear();if(renderer)renderer->close();setup=std::move(next);replacement=true;rendered={r::SurfaceCode::empty,0,0,{}};
+        clear();if(renderer)renderer->close();setup=std::move(next);replacement=true;rendered={r::SurfaceCode::empty,0,0,{}};native->poll();
     }
     void request(){if(closed||batch)return;GtkTreeIter selected;auto* selection=gtk_tree_view_get_selection(GTK_TREE_VIEW(tree));
         if(!gtk_tree_selection_get_selected(selection,nullptr,&selected)){clear_summary();return;}
@@ -176,11 +179,12 @@ SceneInspector::SceneInspector(c::Authority authority,c::Policy policy,r::Surfac
     auto* scroll=gtk_scrolled_window_new(nullptr,nullptr);gtk_box_pack_start(GTK_BOX(i.root),scroll,TRUE,TRUE,0);
     i.tree=gtk_tree_view_new_with_model(i.model());g_object_ref_sink(i.tree);gtk_container_add(GTK_CONTAINER(scroll),i.tree);gtk_tree_view_set_enable_search(GTK_TREE_VIEW(i.tree),FALSE);
     for(const auto& pair:{std::make_pair(item_column,"inspector.item"),std::make_pair(information_column,"inspector.information")}){
-        auto* cell=inspector_text_renderer();auto* column=gtk_tree_view_column_new_with_attributes(labels.at(pair.second).c_str(),cell,"text",pair.first,nullptr);
+        auto* cell=inspector_text_renderer(i.native);auto* column=gtk_tree_view_column_new_with_attributes(labels.at(pair.second).c_str(),cell,"text",pair.first,nullptr);
         gtk_tree_view_column_set_sizing(column,GTK_TREE_VIEW_COLUMN_GROW_ONLY);gtk_tree_view_column_set_resizable(column,TRUE);gtk_tree_view_append_column(GTK_TREE_VIEW(i.tree),column);}
     atk_object_set_name(gtk_widget_get_accessible(i.tree),labels.at("inspector.information").c_str());atk_object_set_description(gtk_widget_get_accessible(i.tree),"syspane.scene.inspector");
     g_signal_connect(i.tree,"row-expanded",G_CALLBACK(+[](GtkTreeView*,GtkTreeIter* iter,GtkTreePath*,gpointer p){auto& owner=*static_cast<Impl*>(p);try{if(!owner.batch&&!owner.closed)owner.expansion[text(owner.model(),iter,key_column)]=true;}catch(...){owner.shut();}}),&i);
-    g_signal_connect(i.tree,"row-collapsed",G_CALLBACK(+[](GtkTreeView*,GtkTreeIter* iter,GtkTreePath*,gpointer p){auto& owner=*static_cast<Impl*>(p);try{if(!owner.batch&&!owner.closed)owner.expansion[text(owner.model(),iter,key_column)]=false;}catch(...){owner.shut();}}),&i);
+    g_signal_connect(i.tree,"row-collapsed",G_CALLBACK(+[](GtkTreeView*,GtkTreeIter* iter,GtkTreePath*,gpointer p){auto& owner=*static_cast<Impl*>(p);try{if(!owner.batch&&!owner.closed){owner.expansion[text(owner.model(),iter,key_column)]=false;owner.native->poll();}}catch(...){owner.shut();}}),&i);
+    for(const auto* signal:{"test-expand-row","test-collapse-row"})g_signal_connect(i.tree,signal,G_CALLBACK(+[](GtkTreeView*,GtkTreeIter*,GtkTreePath*,gpointer p)->gboolean{auto& owner=*static_cast<Impl*>(p);return !owner.batch&&owner.native->state().pending!=0;}),&i);
     i.button=gtk_button_new_with_mnemonic(labels.at("inspector.summary").c_str());g_object_ref_sink(i.button);gtk_box_pack_start(GTK_BOX(i.root),i.button,FALSE,FALSE,0);
     i.summary=gtk_label_new("");g_object_ref_sink(i.summary);gtk_label_set_xalign(GTK_LABEL(i.summary),0);gtk_label_set_line_wrap(GTK_LABEL(i.summary),TRUE);gtk_box_pack_start(GTK_BOX(i.root),i.summary,FALSE,FALSE,0);
     atk_object_set_description(gtk_widget_get_accessible(i.summary),"syspane.scene.requested-summary");atk_object_set_name(gtk_widget_get_accessible(i.summary),labels.at("inspector.requested_summary").c_str());
@@ -218,7 +222,8 @@ void SceneInspector::policy(c::Policy policy,std::uint64_t now){auto& i=*impl_;i
 void SceneInspector::replace(r::SurfaceConfig config,std::uint64_t now){auto& i=*impl_;i.owner();if(i.closed)return;
     if(i.renders){auto next=std::make_shared<InspectorRenderSetup>(*i.setup);next->config=std::make_shared<const r::SurfaceConfig>(std::move(config));i.retire(std::move(next));return;}
     i.clear();try{i.surface->replace(std::move(config),now);i.run(now,{},[]{});}catch(...){i.shut();throw;}}
-void SceneInspector::close(){impl_->owner();impl_->shut();}
-bool SceneInspector::poll_image_jobs(){auto& i=*impl_;i.owner();if(i.renders)return !i.renderer||i.renderer->status().stopped;try{const auto done=i.surface->poll_image_jobs();if(i.surface->status().code==r::SurfaceCode::alternative)i.clear();return done;}catch(...){i.shut();throw;}}
+void SceneInspector::close(){impl_->owner();impl_->shut();impl_->native->poll();}
+bool SceneInspector::poll_image_jobs(){auto& i=*impl_;i.owner();i.native->poll();const auto native=i.native->state().pending==0;if(i.renders)return native&&(!i.renderer||i.renderer->status().stopped);try{const auto done=i.surface->poll_image_jobs();if(i.surface->status().code==r::SurfaceCode::alternative)i.clear();return done&&i.native->state().pending==0;}catch(...){i.shut();throw;}}
 r::SurfaceStatus SceneInspector::status()const{impl_->owner();return impl_->renders?impl_->rendered:impl_->surface->status();}
+SceneInspector::NativeRetirement SceneInspector::native_retirement()const{impl_->owner();const auto s=impl_->native->state();return {s.pending,s.accepted,s.delivered,s.polls,s.total_us,s.max_us,s.failed};}
 }

@@ -68,13 +68,16 @@ struct Probe {
     GtkTreeIter chart,retired;std::vector<GtkCellRenderer*> renderers;std::vector<AtkObject*> held;
     std::string strategy,input;bool collapsed=false,retirement_done=false,erased=false,recovered=false;int result=0;
     std::vector<unsigned> transitions;
+    std::shared_ptr<syspane::interfaces::InspectorRetirement> native;
     bool lifetime()const{return strategy.rfind("lifetime",0)==0;}
-    bool profiled()const{return lifetime()&&strategy!="lifetime";}
+    bool profiled()const{return lifetime()&&strategy!="lifetime"&&strategy!="lifetime-owner";}
+    bool tracked()const{return profiled()||static_cast<bool>(native);}
     void row(GtkTreeIter& at,GtkTreeIter* parent,const std::string& item,const std::string& info){gtk_tree_store_append(store,&at,parent);gtk_tree_store_set(store,&at,0,item.c_str(),1,info.c_str(),-1);}
     void blank(GtkTreeIter* parent=nullptr){GtkTreeIter at;auto* model=GTK_TREE_MODEL(store);if(!gtk_tree_model_iter_children(model,&at,parent))return;
         do{blank(&at);gtk_tree_store_set(store,&at,0,"",1,"",-1);}while(gtk_tree_model_iter_next(model,&at));}
     Probe(std::string mode,bool collapse):strategy(std::move(mode)),collapsed(collapse){
-        need(strategy=="blank"||strategy=="detach"||strategy=="scrub"||strategy=="lifetime"||strategy=="lifetime-profile"||strategy=="lifetime-remove"||strategy=="lifetime-detach"||strategy=="lifetime-bulk"||strategy=="lifetime-unset"||strategy=="lifetime-deferred","cache probe strategy");
+        need(strategy=="blank"||strategy=="detach"||strategy=="scrub"||strategy=="lifetime"||strategy=="lifetime-profile"||strategy=="lifetime-remove"||strategy=="lifetime-detach"||strategy=="lifetime-bulk"||strategy=="lifetime-unset"||strategy=="lifetime-deferred"||strategy=="lifetime-owner","cache probe strategy");
+        if(strategy=="lifetime-owner")native=std::make_shared<syspane::interfaces::InspectorRetirement>();
         store=gtk_tree_store_new(2,G_TYPE_STRING,G_TYPE_STRING);
         row(chart,nullptr,"ITEM_CHART_ROOT","ERASURE_CANARY_CHART_ROOT");
         for(unsigned i=0;i<3138;++i){GtkTreeIter at;row(at,&chart,"ITEM_POINT_"+std::to_string(i),"ERASURE_CANARY_POINT_"+std::to_string(i));}
@@ -82,16 +85,16 @@ struct Probe {
         for(unsigned i=0;i<32;++i){GtkTreeIter at;row(at,&retired,"ITEM_RETIRED_"+std::to_string(i),"ERASURE_CANARY_RETIRED_"+std::to_string(i));}
         window=gtk_window_new(GTK_WINDOW_TOPLEVEL);gtk_window_set_title(GTK_WINDOW(window),"SysPane accessibility cache probe");gtk_window_set_default_size(GTK_WINDOW(window),740,540);
         auto* scroll=gtk_scrolled_window_new(nullptr,nullptr);gtk_container_add(GTK_CONTAINER(window),scroll);tree=gtk_tree_view_new_with_model(GTK_TREE_MODEL(store));gtk_container_add(GTK_CONTAINER(scroll),tree);
-        for(int col=0;col<2;++col){auto* renderer=lifetime()?syspane::interfaces::inspector_text_renderer():gtk_cell_renderer_text_new();g_object_set(renderer,"font","Noto Sans 9",nullptr);renderers.push_back(renderer);
+        for(int col=0;col<2;++col){auto* renderer=lifetime()?syspane::interfaces::inspector_text_renderer(native):gtk_cell_renderer_text_new();g_object_set(renderer,"font","Noto Sans 9",nullptr);renderers.push_back(renderer);
             if(profiled())g_signal_connect(renderer,"notify::text",G_CALLBACK(+[](GObject*,GParamSpec*,gpointer){if(CacheTiming::stats.active)++CacheTiming::stats.renderer_notifies;}),nullptr);
             auto* column=gtk_tree_view_column_new_with_attributes(col?"Information":"Item",renderer,"text",col,nullptr);gtk_tree_view_column_set_sizing(column,GTK_TREE_VIEW_COLUMN_GROW_ONLY);gtk_tree_view_column_set_resizable(column,TRUE);gtk_tree_view_append_column(GTK_TREE_VIEW(tree),column);}
         atk_object_set_description(gtk_widget_get_accessible(tree),"syspane.cache.erasure.probe");gtk_widget_show_all(window);gtk_tree_view_expand_all(GTK_TREE_VIEW(tree));
         auto* table=ATK_TABLE(gtk_widget_get_accessible(tree));need(atk_table_get_n_rows(table)==3172&&atk_table_get_n_columns(table)==2,"cache probe initial shape");held.reserve(6344);
-        if(profiled())transitions.resize(6344);
+        if(tracked())transitions.resize(6344);
         for(int r=0;r<3172;++r)for(int col=0;col<2;++col){auto* cell=atk_table_ref_at(table,r,col);need(cell&&GTK_IS_CELL_ACCESSIBLE(cell)&&ATK_IS_TEXT(cell),"cache probe actual text object");auto* text=atk_text_get_text(ATK_TEXT(cell),0,-1);need(text&&*text,"cache probe initial text");g_free(text);held.push_back(cell);
-            if(profiled())g_signal_connect(cell,"state-change",G_CALLBACK(+[](AtkObject*,const gchar* state,gboolean active,gpointer data){if(active&&std::string(state)=="defunct")++*static_cast<unsigned*>(data);}),&transitions[held.size()-1]);}
+            if(tracked())g_signal_connect(cell,"state-change",G_CALLBACK(+[](AtkObject*,const gchar* state,gboolean active,gpointer data){if(active&&std::string(state)=="defunct")++*static_cast<unsigned*>(data);}),&transitions[held.size()-1]);}
     }
-    ~Probe(){for(std::size_t i=0;i<held.size();++i){if(profiled())g_signal_handlers_disconnect_by_data(held[i],&transitions[i]);g_object_unref(held[i]);}if(window)gtk_widget_destroy(window);if(store)g_object_unref(store);}
+    ~Probe(){if(native)native->finish();for(std::size_t i=0;i<held.size();++i){if(tracked())g_signal_handlers_disconnect_by_data(held[i],&transitions[i]);g_object_unref(held[i]);}if(window)gtk_widget_destroy(window);if(native)native->finish();if(store)g_object_unref(store);}
     struct Leaks {unsigned text=0,name=0,count=0,word=0;};
     Leaks inspect(std::size_t begin=0,std::size_t end=6344){Leaks leaks;need(begin<=end&&end<=held.size(),"cache probe inspection range");
         for(auto index=begin;index<end;++index){auto* cell=held[index];auto* text=atk_text_get_text(ATK_TEXT(cell),0,-1);leaks.text+=text&&*text;g_free(text);const auto* name=atk_object_get_name(cell);leaks.name+=name&&*name;leaks.count+=atk_text_get_character_count(ATK_TEXT(cell))!=0;
@@ -111,20 +114,22 @@ struct Probe {
             if(lifetime()){retired_leaks=inspect(6278,6344);if(collapsed)collapsed_leaks=inspect(2,6278);}
         }else if(name=="erase"){
             need(retirement_done&&!erased,"cache probe erase order");
-            if(strategy=="detach"||strategy=="scrub"||strategy=="lifetime-detach"||strategy=="lifetime-unset"||strategy=="lifetime-deferred")gtk_tree_view_set_model(GTK_TREE_VIEW(tree),nullptr);
-            if(strategy!="lifetime-remove"&&strategy!="lifetime-detach"&&strategy!="lifetime-bulk"&&strategy!="lifetime-unset"&&strategy!="lifetime-deferred"){blank();}
+            if(strategy=="detach"||strategy=="scrub"||strategy=="lifetime-detach"||strategy=="lifetime-unset"||strategy=="lifetime-deferred"||native)gtk_tree_view_set_model(GTK_TREE_VIEW(tree),nullptr);
+            if(strategy!="lifetime-remove"&&strategy!="lifetime-detach"&&strategy!="lifetime-bulk"&&strategy!="lifetime-unset"&&strategy!="lifetime-deferred"&&!native){blank();}
             gtk_tree_store_clear(store);
             if(strategy=="scrub"){
                 for(auto* renderer:renderers)g_object_set(renderer,"text","",nullptr);
                 for(auto* cell:held){auto* type=GTK_CELL_ACCESSIBLE_GET_CLASS(cell);need(type->update_cache,"cache probe public cache slot");type->update_cache(GTK_CELL_ACCESSIBLE(cell),FALSE);}
             }
-            if(strategy=="detach"||strategy=="scrub"||strategy=="lifetime-detach"||strategy=="lifetime-unset"||strategy=="lifetime-deferred"){gtk_tree_view_set_model(GTK_TREE_VIEW(tree),GTK_TREE_MODEL(store));}
+            if(strategy=="detach"||strategy=="scrub"||strategy=="lifetime-detach"||strategy=="lifetime-unset"||strategy=="lifetime-deferred"||native){gtk_tree_view_set_model(GTK_TREE_VIEW(tree),GTK_TREE_MODEL(store));}
             erased=true;mutation=static_cast<std::uint64_t>(g_get_monotonic_time()-begin);leaks=inspect();
         }else if(name=="recover"){
-            need(erased&&!recovered,"cache probe recovery order");GtkTreeIter parent,child;row(parent,nullptr,"FRESH_ROOT","FRESH_VALUE");row(child,&parent,"FRESH_POINT","FRESH_POINT_VALUE");gtk_tree_view_expand_all(GTK_TREE_VIEW(tree));recovered=true;leaks=inspect();
-        }else if(name=="quit"){need(recovered,"cache probe quit order");gtk_main_quit();}
+            need(erased&&!recovered&&(!native||!native->state().pending),"cache probe recovery order");GtkTreeIter parent,child;row(parent,nullptr,"FRESH_ROOT","FRESH_VALUE");row(child,&parent,"FRESH_POINT","FRESH_POINT_VALUE");gtk_tree_view_expand_all(GTK_TREE_VIEW(tree));recovered=true;leaks=inspect();
+        }else if(name=="poll"){need(static_cast<bool>(native),"native owner poll only");native->poll();}
+        else if(name=="quit"){need(recovered&&(!native||!native->state().pending),"cache probe quit order");gtk_main_quit();}
         else throw std::runtime_error("cache probe command");
         if(bulk)for(auto* renderer:renderers)g_object_thaw_notify(G_OBJECT(renderer));
+        if(native&&name!="poll")native->poll();
         const auto prepared=static_cast<std::uint64_t>(g_get_monotonic_time()-begin);const auto queued=CacheTiming::pending.size();CacheTiming::defer=false;
         std::uint64_t drain_us=0,slice_max=0,slices=0;const auto drain_begin=g_get_monotonic_time();
         while(!CacheTiming::pending.empty()){const auto at=g_get_monotonic_time();CacheTiming::drain_slice();slice_max=std::max(slice_max,static_cast<std::uint64_t>(g_get_monotonic_time()-at));++slices;}
@@ -135,15 +140,16 @@ struct Probe {
             need(!(after.text||after.name||after.count||after.word),"deferred values after drainage");
         }
         std::uint64_t defunct=0;
-        if(profiled())for(std::size_t i=0;i<transitions.size();++i){const unsigned expected=erased||i>=6278||(collapsed&&i>=2)?1:0;need(transitions[i]==expected,"profile exactly one normal cell retirement");defunct+=transitions[i];}
+        if(tracked())for(std::size_t i=0;i<transitions.size();++i){const unsigned expected=erased||i>=6278||(collapsed&&i>=2)?1:0;need(native&&native->state().pending?transitions[i]<=expected:transitions[i]==expected,"profile exactly one normal cell retirement");defunct+=transitions[i];}
         CacheTiming::end();const auto callback=static_cast<std::uint64_t>(g_get_monotonic_time()-begin);const auto& s=CacheTiming::stats;
+        const auto ns=native?native->state():syspane::interfaces::InspectorRetirement::State{};
         std::cout<<"{\"ack\":\""<<name<<"\",\"local_checked\":"<<((name=="erase"||name=="recover")?"true":"false")<<",\"callback_us\":"<<callback<<",\"mutation_us\":"<<mutation<<",\"held_cells\":"<<held.size()<<",\"text_leaks\":"<<leaks.text<<",\"name_leaks\":"<<leaks.name<<",\"count_leaks\":"<<leaks.count<<",\"word_leaks\":"<<leaks.word<<",\"retired_checked\":"<<((lifetime()&&name=="retire")?"true":"false")<<",\"retired_leaks\":"<<(retired_leaks.text+retired_leaks.name+retired_leaks.count+retired_leaks.word)<<",\"collapsed_leaks\":"<<(collapsed_leaks.text+collapsed_leaks.name+collapsed_leaks.count+collapsed_leaks.word)
-            <<",\"cache_profiled\":"<<(profiled()?"true":"false")<<",\"cache_calls\":"<<s.calls<<",\"cache_us\":"<<s.us<<",\"cache_max_us\":"<<s.max_us<<",\"cache_max_depth\":"<<s.max_depth<<",\"signal_calls\":"<<s.signal_calls<<",\"signal_us\":"<<s.signal_us<<",\"quiet_calls\":"<<s.quiet_calls<<",\"quiet_us\":"<<s.quiet_us<<",\"renderer_notifies\":"<<s.renderer_notifies<<",\"unset_calls\":"<<s.unset_calls<<",\"unset_us\":"<<s.unset_us<<",\"unset_max_us\":"<<s.unset_max_us<<",\"unset_max_depth\":"<<s.unset_max_depth<<",\"notify_calls\":"<<s.notify_calls<<",\"notify_us\":"<<s.notify_us<<",\"notify_max_us\":"<<s.notify_max_us<<",\"notify_max_depth\":"<<s.notify_max_depth<<",\"prepared_us\":"<<prepared<<",\"queued\":"<<queued<<",\"drain_us\":"<<drain_us<<",\"slice_max_us\":"<<slice_max<<",\"slices\":"<<slices<<",\"defunct_count\":"<<defunct<<"}"<<std::endl;
+            <<",\"cache_profiled\":"<<(profiled()?"true":"false")<<",\"cache_calls\":"<<s.calls<<",\"cache_us\":"<<s.us<<",\"cache_max_us\":"<<s.max_us<<",\"cache_max_depth\":"<<s.max_depth<<",\"signal_calls\":"<<s.signal_calls<<",\"signal_us\":"<<s.signal_us<<",\"quiet_calls\":"<<s.quiet_calls<<",\"quiet_us\":"<<s.quiet_us<<",\"renderer_notifies\":"<<s.renderer_notifies<<",\"unset_calls\":"<<s.unset_calls<<",\"unset_us\":"<<s.unset_us<<",\"unset_max_us\":"<<s.unset_max_us<<",\"unset_max_depth\":"<<s.unset_max_depth<<",\"notify_calls\":"<<s.notify_calls<<",\"notify_us\":"<<s.notify_us<<",\"notify_max_us\":"<<s.notify_max_us<<",\"notify_max_depth\":"<<s.notify_max_depth<<",\"prepared_us\":"<<prepared<<",\"queued\":"<<queued<<",\"drain_us\":"<<drain_us<<",\"slice_max_us\":"<<slice_max<<",\"slices\":"<<slices<<",\"defunct_count\":"<<defunct;if(native)std::cout<<",\"native_pending\":"<<ns.pending<<",\"native_accepted\":"<<ns.accepted<<",\"native_delivered\":"<<ns.delivered<<",\"native_polls\":"<<ns.polls<<",\"native_total_us\":"<<ns.total_us<<",\"native_max_us\":"<<ns.max_us<<",\"native_failed\":"<<(ns.failed?"true":"false");std::cout<<"}"<<std::endl;
     }
 };
 }
 int main(int argc,char** argv){try{
-    need(argc==3,"cache probe arguments");need(std::string(argv[2])=="collapsed"||std::string(argv[2])=="expanded","cache probe cohort");g_set_prgname("syspane-cache-erasure-probe");need(gtk_init_check(nullptr,nullptr),"cache probe display");CacheTiming timing(std::string(argv[1]).rfind("lifetime-",0)==0);Probe p(argv[1],std::string(argv[2])=="collapsed");
+    need(argc==3,"cache probe arguments");need(std::string(argv[2])=="collapsed"||std::string(argv[2])=="expanded","cache probe cohort");g_set_prgname("syspane-cache-erasure-probe");need(gtk_init_check(nullptr,nullptr),"cache probe display");CacheTiming timing(std::string(argv[1]).rfind("lifetime-",0)==0&&std::string(argv[1])!="lifetime-owner");Probe p(argv[1],std::string(argv[2])=="collapsed");
     const bool primed=g_getenv("SYSPANE_GTK_UNSET_PRIME")!=nullptr;if(primed)(void)p.inspect();
     need(fcntl(STDIN_FILENO,F_SETFL,fcntl(STDIN_FILENO,F_GETFL)|O_NONBLOCK)==0,"cache probe stdin");
     const auto input=g_unix_fd_add(STDIN_FILENO,static_cast<GIOCondition>(G_IO_IN|G_IO_HUP|G_IO_ERR),+[](gint fd,GIOCondition flags,gpointer data)->gboolean{auto& p=*static_cast<Probe*>(data);try{

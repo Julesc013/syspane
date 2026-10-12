@@ -102,6 +102,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Native scene editor checkpoint](native-editor-handoff.md) — Real GTK editing, resource-aware persistence, policy erasure and independent recovery.
 - [Native retained network cache checkpoint](native-network-cache-handoff.md) — Actual C++ projected counters and rates reach the owned native desktop with independently checked value pixels and policy erasure.
 - [Native observation checkpoint](native-observation-handoff.md) — Explicit native evidence distinguishes unavailable observations from absent content or state.
+- [Bounded native inspector retirement owner](native-retirement-owner-handoff.md) — Immediate physical erasure with retained original notifications, explicit measured drainage and actual shutdown.
 - [Native settings checkpoint](native-settings-handoff.md) — Portable drafts, native controls and independently observed transaction outcomes.
 - [Native Linux text checkpoint](native-text-handoff.md) — Bounded native shaping, readable metrics and semantic-color raster output with preserved independent checks.
 - [Native local IPC implementation handoff](native-transport-handoff.md) — Bind W-24's Windows and Linux adapter gate to real process and stream evidence.

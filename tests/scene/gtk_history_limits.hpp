@@ -50,6 +50,7 @@ struct Window {
     void publish(unsigned generation,std::uint64_t ns,bool reset=false){need(!request&&!inflight&&!closed,"GTK history one outstanding publication");request=Producer::Job{generation,ns,revision,reset};}
     void reply(const std::string& name,std::uint64_t work=0){Json value={{"ack",name},{"command_work_us",work},{"generation",sent},{"reason",view->status().reason}};
         if(name=="close"){const auto final=producer.terminal();value["producer"]={{"accepted",final.accepted},{"receiver_owner",final.receiver_owner},{"publication_max_us",final.publication_max_us},{"clock_gap_max_ms",final.clock_gap_max_ms},{"stopped",producer.stopped()},{"renderer_stopped",view->poll_image_jobs()},{"failure",producer.failure()}};}
+        if(name=="close"){const auto s=view->native_retirement();value["retirement"]={{"pending",s.pending},{"accepted",s.accepted},{"delivered",s.delivered},{"polls",s.polls},{"total_us",s.total_us},{"max_us",s.max_us},{"failed",s.failed}};}
         std::cout<<value.dump()<<std::endl;}
     void command(const std::string& name){
         need(pending.empty(),"GTK history outstanding command");const auto begin=g_get_monotonic_time();

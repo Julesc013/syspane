@@ -7,10 +7,12 @@ Shared build scripts, profiles and dependency locks live in
 [source/build](source/build/README.md). Build products, raw test recordings and
 machine-specific workspace settings stay in ignored `out/` directories.
 
-The [native unset checkpoint](spec/delivery/gtk-unset-handoff.md) measures remaining
-inspector retirement cost and preserves every normal lifecycle event. Its retained
-call controls pass; production deferral and maximum-history performance remain
-open. The full five-edition release objective and original failures remain.
+The [native retirement owner](spec/delivery/native-retirement-owner-handoff.md)
+clears retired inspector data immediately and drains every original notification
+through measured bounded calls before reporting actual stop. Complete held-cell
+and real two-owner lifecycle checks pass. Maximum-policy/installed accessibility
+qualification and the full five-edition release remain open; original failures
+and limits are preserved.
 
 The [native history producer checkpoint](spec/delivery/gtk-history-producer-handoff.md)
 puts complete fixture telemetry on one receiver thread with ordered immutable

@@ -11,10 +11,10 @@ struct Held {
             g_signal_connect(cell,"state-change",G_CALLBACK(+[](AtkObject*,const gchar* state,gboolean active,gpointer data){if(active&&std::string(state)=="defunct")++*static_cast<unsigned*>(data);}),&transitions[cells.size()-1]);}
     }
     ~Held(){for(std::size_t i=0;i<cells.size();++i){g_signal_handlers_disconnect_by_data(cells[i],&transitions[i]);g_object_unref(cells[i]);}}
-    void empty(std::size_t begin=0){for(auto i=begin;i<cells.size();++i){auto* cell=cells[i];auto* value=atk_text_get_text(ATK_TEXT(cell),0,-1);need(value&&!value[0],"held inspector text cleared");g_free(value);const auto* name=atk_object_get_name(cell);need(!name||!name[0],"held inspector name cleared");need(atk_text_get_character_count(ATK_TEXT(cell))==0,"held inspector count cleared");
+    void empty(std::size_t begin=0,bool complete=true){for(auto i=begin;i<cells.size();++i){auto* cell=cells[i];auto* value=atk_text_get_text(ATK_TEXT(cell),0,-1);need(value&&!value[0],"held inspector text cleared");g_free(value);const auto* name=atk_object_get_name(cell);need(!name||!name[0],"held inspector name cleared");need(atk_text_get_character_count(ATK_TEXT(cell))==0,"held inspector count cleared");
             auto* api=ATK_TEXT_GET_IFACE(cell);gint start=0,end=0;
             for(auto get:{api->get_text_before_offset,api->get_text_at_offset,api->get_text_after_offset}){value=get(ATK_TEXT(cell),0,ATK_TEXT_BOUNDARY_WORD_START,&start,&end);need(value&&!value[0],"held inspector layout cleared");g_free(value);}
-            value=atk_text_get_string_at_offset(ATK_TEXT(cell),0,ATK_TEXT_GRANULARITY_WORD,&start,&end);need(!ATK_TEXT_GET_IFACE(cell)->get_string_at_offset&&!value&&start==-1&&end==-1,"held inspector native modern word explicitly unsupported");need(transitions[i]==1,"exactly one inspector defunct transition");
+            value=atk_text_get_string_at_offset(ATK_TEXT(cell),0,ATK_TEXT_GRANULARITY_WORD,&start,&end);need(!ATK_TEXT_GET_IFACE(cell)->get_string_at_offset&&!value&&start==-1&&end==-1,"held inspector native modern word explicitly unsupported");need(complete?transitions[i]==1:transitions[i]<=1,"exactly one inspector defunct transition");
         }}
 };
 inline int run(const std::string& root){need(gtk_init_check(nullptr,nullptr),"inspector lifetime display");auto grant=inspector_admission_owner_test::grant();auto binding=inspector_admission_owner_test::binding();std::uint64_t now=1000;

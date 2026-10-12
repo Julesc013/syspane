@@ -12,10 +12,25 @@ sp_requires: ["SP-START"]
 sp_review: "unreviewed"
 sp_sources: ["SRC-CONVERSATION", "SRC-AUDIT-2026-10-04", "SRC-READINESS-2026-10-05"]
 sources: [{"id": "SRC-CONVERSATION", "resource": "Current conversation through the spec archive request on 2026-09-17", "title": "Current SysPane design conversation"}]
-updated: {"by": "codex", "at": "2026-10-12T01:34:12.108206+00:00", "scope": "Native unset/property notification timing and synchronous retained-call controls; product unchanged"}
+updated: {"by": "codex", "at": "2026-10-12T02:59:49.862289+00:00", "scope": "Product native retirement ownership, exact held-cell evidence and ordinary maximum outcomes"}
 ---
 
 # Current state and next admitted boundary
+
+The [native retirement owner](native-retirement-owner-handoff.md) clears readable
+GTK cell data immediately and retains every exact inherited notification until
+an explicitly polled GTK-thread owner delivers it. Each poll permits at most 256
+operations or 5000 us after the current call; all work remains inside an existing
+measured GUI operation. Fresh nonempty adoption waits for old retirement, and
+actual shutdown includes the queue. Complete native/raw-wire cohorts and a real
+two-owner bridge-enabled revoke/regrant/pending-close/parent-destroy case pass.
+Ordinary maximum history: chart: 46.608 ms (pass) / mixed: 33.826 ms (pass).
+Preserve every prior failure and unchanged 100/200-ms limits. Maximum-history
+policy erasure with held references, installed accumulation/human accessibility,
+physical topology and desktop/lifecycle composition remain required. W-11 and
+all five complete release editions stay open. Shared tooling remains in
+source/build; machine bindings and raw data remain ignored under out/, and the
+retired root remains absent.
 
 The [native unset/notification checkpoint](gtk-unset-handoff.md) measures
 inherited retirement and widget-property dispatch while preserving every native

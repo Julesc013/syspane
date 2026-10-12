@@ -12,6 +12,7 @@ public:
     // Borrowed synchronous experiment observer; paint includes presentation.
     // Refusal or exception closes/erases the inspector. Never retained.
     using PhaseObserver=std::function<bool(Phase,std::uint64_t microseconds,bool completed)>;
+    struct NativeRetirement {std::size_t pending=0;std::uint64_t accepted=0,delivered=0,polls=0,total_us=0,max_us=0;bool failed=false;};
     SceneInspector(configuration::Authority,configuration::Policy,rendering::SurfaceConfig,
                    std::vector<rendering::SurfaceProvider>,std::string image_worker={},Translator translate={},rendering::ImageFactory images={},
                    std::shared_ptr<const InspectorRenderFactory> renders={},std::uint64_t profile=0);
@@ -33,6 +34,7 @@ public:
     void policy(configuration::Policy,std::uint64_t now);
     void replace(rendering::SurfaceConfig,std::uint64_t now);
     void close();bool poll_image_jobs();rendering::SurfaceStatus status()const;
+    NativeRetirement native_retirement()const;
 private:
     struct Impl;std::unique_ptr<Impl> impl_;
 };

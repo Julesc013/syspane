@@ -592,7 +592,8 @@
         "SP-W11-BACKGROUND-INSPECTOR",
         "SP-W11-CHILD-IDENTITY-OBSERVATION",
         "SP-W11-GTK-HISTORY-LIMITS",
-        "SP-W11-GTK-CELL-LIFETIME"
+        "SP-W11-GTK-CELL-LIFETIME",
+        "SP-W11-NATIVE-RETIREMENT-OWNER"
       ],
       "acceptance_tests": [
         "T-SETTINGS",
@@ -739,14 +740,18 @@
         "source/interfaces/scene_inspector_text_linux.hpp",
         "tests/scene/inspector_cell_lifetime.hpp",
         "tests/scene/native_inspector_cell_lifetime.py",
-        "tests/scene/native_gtk_unset_no_bridge.py"
+        "tests/scene/native_gtk_unset_no_bridge.py",
+        "tests/scene/inspector_retirement_owner.hpp",
+        "tests/scene/native_inspector_retirement_owner.py",
+        "spec/delivery/checkpoints/native-retirement-owner.json",
+        "spec/delivery/native-retirement-owner-handoff.md"
       ],
       "status": "in_progress",
       "authority_class": "development",
       "execution_grant": "user:foundation-native-campaign-2026-10-05",
-      "notes": "The native unset/notification checkpoint measures inherited retirement and widget-property dispatch while preserving every native event. Expanded full work is 307.603 ms, including 126.475 ms unset, 123.578 ms widget dispatch and 31.211 ms cache update. The primed native-only control is about 35 ms; it disables the bridge only as a diagnostic, never qualification. A synchronous FIFO control clears old cache data before drainage, retains cell/ parent/parameter references and forwards every original call once in order. Expanded preparation is 40.037 ms, 12556 operations drain in 262.717 ms and the full command remains 304.726 ms. Slices are not GUI callbacks or a timing pass. Complete held-native/wire/lifecycle and existing lifetime/model/graph controls pass. Preserve the initial SDK-interface failure and unknown cause. Product source and 70 existing artifacts are unchanged. Next close bounded asynchronous ownership, queued GUI accounting, observer/parent lifetimes and actual shutdown before any product deferral; preserve 100/200-ms gates and the prior actual maximum failures. All five complete editions remain required. Tooling is in source/build; raw data are ignored under out/ and the retired root remains absent.",
-      "package": "delivery/packages/w-11-gtk-cell-lifetime.md",
-      "evidence": "delivery/gtk-unset-handoff.md"
+      "notes": "Product native retirement now erases readable cache data immediately and owns exact original inherited unset/property calls until bounded measured GTK polls deliver them. Complete held-native/raw-wire cases and actual two-owner rapid-regrant/pending-close/parent-destroy checks pass. New nonempty adoption waits for pre-existing retirement and actual stop includes queue drainage. Ordinary maximum history: chart: 46.608 ms (pass) / mixed: 33.826 ms (pass). Preserve all original failures and 100/200-ms gates; maximum-policy held references, installed accumulation/human accessibility, physical topology, desktop/lifecycle and all five complete release editions remain required. Shared tooling remains in source/build; machine bindings and raw evidence remain ignored under out/ and the retired root stays absent.",
+      "package": "delivery/packages/w-11-native-retirement-owner.md",
+      "evidence": "delivery/native-retirement-owner-handoff.md"
     },
     {
       "id": "W-12",

@@ -60,7 +60,7 @@ def controls():
 def observe(exe,folder,mode):
     import gi
     gi.require_version('Atspi','2.0')
-    from gi.repository import Atspi, GLib
+    from gi.repository import Atspi, GLib, Gio
     Atspi.set_timeout(200,500);verify();folder.mkdir()
     report=dict(case=mode,outcome='fail',started_at=datetime.now(timezone.utc).isoformat(),observations=[],progress=[])
     started=time.monotonic();deadline=started+CASES['child_seconds'];buffer=b'';records=0
@@ -121,7 +121,26 @@ def observe(exe,folder,mode):
     def matrix():
         tree.clear_cache();table=tree.get_table_iface();assert table and table.get_n_columns()==2
         count=table.get_n_rows();assert count<=1+4096+321
-        result=[[text(table.get_accessible_at(row,col)) for col in range(2)] for row in range(count)]
+        result=[]
+        for row in range(count):
+            values=[]
+            for col in range(2):
+                cell=table.get_accessible_at(row,col)
+                if cell is None:
+                    diagnostic=dict(row=row,column=col,expected_rows=count,completed_rows=len(result),completed_columns=len(values),process_alive=proc.poll() is None,wire=[])
+                    try:
+                        session=Gio.bus_get_sync(Gio.BusType.SESSION,None)
+                        address=session.call_sync('org.a11y.Bus','/org/a11y/bus','org.a11y.Bus','GetAddress',None,GLib.VariantType.new('(s)'),Gio.DBusCallFlags.NONE,200,None).unpack()[0]
+                        wire=Gio.DBusConnection.new_for_address_sync(address,Gio.DBusConnectionFlags.AUTHENTICATION_CLIENT|Gio.DBusConnectionFlags.MESSAGE_BUS_CONNECTION,None,None)
+                        diagnostic['tree_reference']=[tree.app.bus_name,tree.path]
+                        queries=[('GetAccessibleAt','org.a11y.atspi.Table','GetAccessibleAt',GLib.Variant('(ii)',(row,col)),'((so))')]+[(key,'org.freedesktop.DBus.Properties','Get',GLib.Variant('(ss)',('org.a11y.atspi.Table',key)),'(v)') for key in ('NRows','NColumns')]
+                        for label,interface,method,args,reply_type in queries:
+                            try:diagnostic['wire'].append(dict(method=label,reply=wire.call_sync(tree.app.bus_name,tree.path,interface,method,args,GLib.VariantType.new(reply_type),Gio.DBusCallFlags.NONE,200,None).unpack()))
+                            except GLib.Error as error:diagnostic['wire'].append(dict(method=label,error=Gio.DBusError.get_remote_error(error),domain=error.domain,code=error.code,message=error.message[:2000]))
+                    except Exception:diagnostic['collection_failure']=traceback.format_exc()[-4000:]
+                    report['missing_cell']=diagnostic;save();raise AssertionError('missing native accessible cell')
+                values.append(text(cell))
+            result.append(values)
         assert len(encoded(result))<=CASES['observation_bytes'];return result
     def exact(points,generation):
         wanted=expected(points,mode=='mixed',generation);actual=matrix();equal(actual,wanted)
@@ -145,6 +164,8 @@ def observe(exe,folder,mode):
         _,closed=command('close');assert matrix()==[] and text(summary)==''
         producer=closed['producer'];assert producer['accepted']==count+3 and producer['receiver_owner'] and producer['stopped'] and producer['renderer_stopped'] and producer['failure']==0 and producer['clock_gap_max_ms']<=250,producer
         report['producer']=producer
+        retirement=closed['retirement'];assert retirement['pending']==0 and retirement['accepted']==retirement['delivered'] and retirement['polls']>1 and retirement['max_us']<=CASES['gui_limit_us'] and not retirement['failed'],retirement
+        report['retirement']=retirement
         command('quit');assert proc.wait(timeout=3)==0
         report['actual_exit']=True;report['outcome']='pass'
     except Exception:report['failure']=traceback.format_exc();raise

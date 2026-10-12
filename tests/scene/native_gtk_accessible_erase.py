@@ -36,7 +36,7 @@ def observe(exe,folder,strategy,cohort):
             assert time.monotonic()<deadline,'cache child deadline'
             if select.select([proc.stdout],[],[],.1)[0]:
                 raw=os.read(proc.stdout.fileno(),4096);assert raw,'cache native exited before reply';buffer+=raw;assert len(buffer)<=4096
-        line,buffer=buffer.split(b'\n',1);records+=1;assert records<=32 and len(line)<=1024;transcript.write(line+b'\n');return json.loads(line)
+        line,buffer=buffer.split(b'\n',1);records+=1;assert records<=(256 if strategy=='lifetime-owner' else 32) and len(line)<=1024;transcript.write(line+b'\n');return json.loads(line)
     def command(name):
         issued=time.monotonic();proc.stdin.write((name+'\n').encode());proc.stdin.flush();value=reply();assert value['ack']==name and value['held_cells']==6344
         report['stages'].append(dict(**value,reply_ms=(time.monotonic()-issued)*1000));return value
@@ -100,6 +100,14 @@ def observe(exe,folder,strategy,cohort):
             assert [[text(current.get_accessible_at(row,col)) for col in range(2)] for row in range(len(active))]==active,'shared renderer changed live cells'
         erased=command('erase');assert table().get_n_rows()==0
         report['erased']=leaks('erased')
+        if strategy=='lifetime-owner':
+            last=erased;polls=0
+            while last['native_pending']:
+                polls+=1;assert polls<=128,'bounded native owner drainage'
+                before=last;last=command('poll')
+                assert 0<last['native_delivered']-before['native_delivered']<=256
+                assert last['native_accepted']==before['native_accepted'] and not last['native_failed']
+            assert last['native_accepted']==last['native_delivered']==12688 and last['defunct_count']==6344
         command('recover');current=table();assert current.get_n_rows()==2
         actual=[[text(current.get_accessible_at(row,col)) for col in range(2)] for row in range(2)];assert actual==FRESH;report['fresh_sha256']=sha(encoded(actual))
         if strategy.startswith('lifetime'):
@@ -108,7 +116,7 @@ def observe(exe,folder,strategy,cohort):
         report['recovered_old_refs']=leaks('recovered')
         command('quit');assert proc.wait(timeout=3)==0;report['actual_exit']=True
         if strategy.startswith('lifetime'):
-            if strategy!='lifetime':
+            if strategy not in ('lifetime','lifetime-owner'):
                 for stage in report['stages']:
                     assert stage['cache_profiled']
                     for key in ('cache_calls','cache_us','cache_max_us','cache_max_depth','signal_calls','signal_us','quiet_calls','quiet_us','renderer_notifies','unset_calls','unset_us','unset_max_us','unset_max_depth','notify_calls','notify_us','notify_max_us','notify_max_depth','defunct_count'):
@@ -124,6 +132,12 @@ def observe(exe,folder,strategy,cohort):
                 if status:
                     error=error_pool[value];assert error[0]=='org.freedesktop.DBus.Error.UnknownObject' and '{object_path} does not exist' in error[3],'unverified remote error'
                 else:assert value[0]==(0 if method==2 else ''),'retired remote value remains'
+            if strategy=='lifetime-owner':
+                assert any(s['native_pending'] for s in report['stages'])
+                assert all(not s['native_failed'] and s['callback_us']<=100000 and s['native_max_us']<=100000 for s in report['stages'])
+                assert erased['text_leaks']==erased['name_leaks']==erased['count_leaks']==erased['word_leaks']==0
+                assert next(s for s in report['stages'] if s['ack']=='erase')['reply_ms']<=200
+                report['native_owner_qualified']=True
             report.update(outcome='pass',lifetime_semantics=True,performance_qualified=False)
             return
         assert all(report[phase]['failed_requests']==0 for phase in ('erased','recovered_old_refs')),'strict remote cache oracle: withdrawn/failed requests are preserved, not empty replies'
@@ -152,11 +166,11 @@ def main():
     if sys.argv[1]=='--observe':observe(Path(sys.argv[2]),Path(sys.argv[3]),sys.argv[4],sys.argv[5]);return
     exe,evidence=map(lambda p:Path(p).resolve(),sys.argv[1:3]);assert os.geteuid()!=0 and evidence.parent==exe.parent and (exe.parent/'.syspane-owner.json').is_file()
     folder=evidence/('gtk-accessible-erase-'+uuid.uuid4().hex[:12]);folder.mkdir();server=None
-    deferred='--retirement-deferred' in sys.argv[3:];unset='--retirement-unset' in sys.argv[3:];bulk='--retirement-batch' in sys.argv[3:];profile='--retirement-profile' in sys.argv[3:];lifetime='--lifetime' in sys.argv[3:] or profile or bulk or unset or deferred
-    report=dict(family='GTK-RETIREMENT-DEFERRED' if deferred else 'GTK-RETIREMENT-UNSET' if unset else 'GTK-RETIREMENT-BATCH' if bulk else 'GTK-RETIREMENT-PROFILE' if profile else 'GTK-CELL-LIFETIME' if lifetime else 'GTK-ACCESSIBLE-ERASURE',outcome='fail',diagnostic_only=True,scope='Standalone cell lifetime semantics with distinct verified withdrawal; no GUI/erasure performance or edition qualification' if lifetime else 'Standalone toolkit cache experiment with all native/external retained cells; no product/registry/edition qualification',started_at=datetime.now(timezone.utc).isoformat(),executable_sha256=sha(exe.read_bytes()),inputs={p.relative_to(ROOT).as_posix():sha(p.read_bytes()) for p in (Path(__file__),ROOT/'tests/scene/gtk_accessible_erase_probe.cpp',ROOT/'source/interfaces/scene_inspector_text_linux.cpp',ROOT/'source/interfaces/scene_inspector_text_linux.hpp',ROOT/'source/build/surface-runtime.json',ROOT/'source/build/text-runtime.json')},cases=[])
+    owner='--retirement-owner' in sys.argv[3:];deferred='--retirement-deferred' in sys.argv[3:];unset='--retirement-unset' in sys.argv[3:];bulk='--retirement-batch' in sys.argv[3:];profile='--retirement-profile' in sys.argv[3:];lifetime='--lifetime' in sys.argv[3:] or profile or bulk or unset or deferred or owner
+    report=dict(family='GTK-RETIREMENT-OWNER' if owner else 'GTK-RETIREMENT-DEFERRED' if deferred else 'GTK-RETIREMENT-UNSET' if unset else 'GTK-RETIREMENT-BATCH' if bulk else 'GTK-RETIREMENT-PROFILE' if profile else 'GTK-CELL-LIFETIME' if lifetime else 'GTK-ACCESSIBLE-ERASURE',outcome='fail',diagnostic_only=True,scope='Standalone cell lifetime semantics with distinct verified withdrawal; no GUI/erasure performance or edition qualification' if lifetime else 'Standalone toolkit cache experiment with all native/external retained cells; no product/registry/edition qualification',started_at=datetime.now(timezone.utc).isoformat(),executable_sha256=sha(exe.read_bytes()),inputs={p.relative_to(ROOT).as_posix():sha(p.read_bytes()) for p in (Path(__file__),ROOT/'tests/scene/gtk_accessible_erase_probe.cpp',ROOT/'source/interfaces/scene_inspector_text_linux.cpp',ROOT/'source/interfaces/scene_inspector_text_linux.hpp',ROOT/'source/build/surface-runtime.json',ROOT/'source/build/text-runtime.json')},cases=[])
     try:
         server,env=launch_xvfb(folder,(1600,2048));env['NO_AT_BRIDGE']='0';env.pop('AT_SPI_BUS_ADDRESS',None)
-        for strategy in (('lifetime-deferred',) if deferred else ('lifetime-unset',) if unset else ('lifetime-bulk',) if bulk else ('lifetime-profile','lifetime-remove','lifetime-detach') if profile else ('lifetime',) if lifetime else ('blank','detach','scrub')):
+        for strategy in (('lifetime-owner',) if owner else ('lifetime-deferred',) if deferred else ('lifetime-unset',) if unset else ('lifetime-bulk',) if bulk else ('lifetime-profile','lifetime-remove','lifetime-detach') if profile else ('lifetime',) if lifetime else ('blank','detach','scrub')):
             for cohort in ('expanded','collapsed'):
                 name=strategy+'-'+cohort;child=subprocess.Popen(['dbus-run-session','--',sys.executable,str(Path(__file__)), '--observe',str(exe),str(folder/name),strategy,cohort],env=env,stdout=subprocess.PIPE,stderr=subprocess.PIPE,start_new_session=True)
                 try:out,err=child.communicate(timeout=120)

@@ -113,6 +113,7 @@ Generated navigation; edit the referenced source documents, then run `specctl.py
 - [Installed scene inspector ownership](w-11-installed-inspector.md) — Compose saved scenes, native navigation and verified image tasks in the ordinary frontend.
 - [Installed editor recovery consumption](w-11-installed-recovery.md) — Connect native recovery decisions, captured request identity and fresh accepted-draft retirement to the installed editor.
 - [Installed native settings frontend](w-11-installed-settings.md) — Compose the real application entry point, independently supervised controller and authenticated settings client.
+- [Bounded native inspector retirement owner](w-11-native-retirement-owner.md) — Clear data immediately and preserve every original native notification through explicitly polled ownership.
 - [Native settings drafts and transaction results](w-11-native-settings.md) — Connect every initial settings descriptor to native controls and the common authored transaction boundary.
 - [Prepared initial editor ownership](w-11-prepared-editor.md) — Move validated draft construction off GTK while preserving current profile ownership and native rendering checks.
 - [Prepared authored state for native editor previews](w-11-prepared-surface.md) — Move repeated preview structure validation to existing preparation workers.

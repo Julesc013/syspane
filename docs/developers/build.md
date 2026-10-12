@@ -1,5 +1,25 @@
 # Developer setup and checks
 
+The [native retirement owner](../../spec/delivery/native-retirement-owner-handoff.md)
+keeps all native events and drains bounded slices through existing measured GTK
+calls. After workspace preflight and ordinary configure/build, run:
+
+```sh
+ctest --preset linux-x64-gcc13 -R '^native[.](INSPECTOR-RETIREMENT-OWNER|GTK-RETIREMENT-OWNER|INSPECTOR-CELL-LIFETIME)$' --output-on-failure
+ctest --preset linux-x64-gcc13 -R '^(composition[.]|native[.](SCENE-INSPECTOR.*|CHART-FRAME-LIMITS|INSPECTOR-RENDERER|BACKGROUND-INSPECTOR|TABLE-ERASURE|INSTALLED-INSPECTOR|INSTALLED-TELEMETRY|INSPECTOR-LIVE-TABLES)$)' --output-on-failure
+ctest --preset linux-x64-gcc13 -R '^native[.]GTK-HISTORY-LIMITS$' --output-on-failure
+```
+
+The real two-owner bridge-enabled case has a 15-second child/25-second family.
+Complete owner cohorts retain 120-second children/250-second family and all 6344
+native/raw-wire holds. Actual caller clocks, original 100/200-ms gates, immediate
+cache emptiness, exact-once defunct events, current adoption and actual queue stop
+are mandatory. Keep the prior original tests and all failed evidence. The maximum
+family's close reply now also reports native queue metrics without changing its
+512-byte reply or other fixed bounds. Qualification still requires maximum-policy
+held references, installed/human access and all complete native release editions.
+Earlier sections below retain their checkpoint's source-specific results.
+
 The [native unset checkpoint](../../spec/delivery/gtk-unset-handoff.md) keeps
 cache, inherited-unset/property-dispatch and complete command clocks. After
 workspace preflight/configure/build, run these controls separately:

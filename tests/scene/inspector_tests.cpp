@@ -10,6 +10,7 @@
 #include "chart_frame_limits.hpp"
 #include "gtk_history_limits.hpp"
 #include "inspector_cell_lifetime.hpp"
+#include "inspector_retirement_owner.hpp"
 #include <gtk/gtk.h>
 #include <glib-unix.h>
 #include <fcntl.h>
@@ -132,6 +133,7 @@ int main(int argc,char** argv){try{need(argc>=2,"inspector arguments");if(argc==
     if(argc==3&&std::string(argv[2])=="PHASE-COLLECTOR")return gtk_history_limits::phases_probe();
     if(argc==3&&std::string(argv[2])=="PRODUCER-COLLECTOR")return gtk_history_limits::producer_probe();
     if(argc==3&&std::string(argv[2])=="CELL-LIFETIME")return inspector_cell_lifetime::run(argv[1]);
+    if(argc==3&&std::string(argv[2])=="RETIREMENT-OWNER")return inspector_retirement_owner::run(argv[1]);
     if(argc==3&&std::string(argv[2])=="ADMISSION-OWNER")return inspector_admission_owner_test::run(argv[1]);
     if(argc==3&&std::string(argv[2])=="RENDERER")return inspector_render_test::run(argv[1]);
     return argc==2?component(argv[1]):window(argv[1],argv[2]);}catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}}
